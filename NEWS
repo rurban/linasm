@@ -1,0 +1,31 @@
+################################################################################
+# Encoding: UTF-8                                                  Tab size: 4 #
+#                                                                              #
+#                                 LINASM NEWS                                  #
+#                                                                              #
+# License: LGPLv3+                               Copyleft (Ɔ) 2012, Jack Black #
+################################################################################
+
+#******************************************************************************#
+#       First release 0.95 (alpha) [2012-08-15]                                #
+#******************************************************************************#
+
+At last I have finished all preparation for first release of LinAsm project.
+I made code checks and wrote good documentation (as I think) for libraries
+functions. But you should remember that is first public release of the project.
+And it is early alpha version. So it may have some bugs and mistakes in
+source code. If you find some, please send them to the bug tracker.
+
+This release includes following libraries:
+	* Angle - Angles conversion from different units
+	* Array - Common routines that are useful for arrays
+	* Math - Math routines
+	* Numbers - Numbers conversion functions
+	* Sequence - Subsequence searching algorithms
+	* Statistics - Widely used statistical functions
+	* String - Safe string functions
+	* Time - Time functions
+
+################################################################################
+#                                 END OF FILE                                  #
+################################################################################
