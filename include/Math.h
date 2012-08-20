@@ -2,17 +2,13 @@
 ################################################################################
 # Encoding: UTF-8                                                  Tab size: 4 #
 #                                                                              #
-#                                MATH ROUTINES                                 #
+#                             FAST MATH FUNCTIONS                              #
 #                                                                              #
 # License: LGPLv3+                               Copyleft (Ɔ) 2012, Jack Black #
 ################################################################################
 */
 # pragma	once
 # include	<Types.h>
-
-class Math
-{
-public:
 
 //****************************************************************************//
 //      Mathematical constants                                                //
@@ -39,6 +35,10 @@ public:
 // Special constants
 # define	M_INF		(1.0 / 0.0)								// Infinity
 # define	M_NAN		(0.0 / 0.0)								// Not a Number
+
+class Math
+{
+public:
 
 //****************************************************************************//
 //      Byte swap                                                             //

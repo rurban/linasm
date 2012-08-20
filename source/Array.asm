@@ -697,7 +697,7 @@ size	equ		rsi							; array size (count of elements)
 ptr		equ 	rax							; pointer to last element of array
 bytes	= 1 shl scale						; size of array element (bytes)
 ;------------------------------------------
-		lea		ptr, [array + size * bytes]	; ptr = target + size
+		lea		ptr, [array + size * bytes]	; ptr = array + size
 		shr		size, 1						; size >>= 1
 		jz		.exit						; if (size == 0), then go to exit
 ;---[Swap loop]----------------------------
@@ -708,7 +708,7 @@ bytes	= 1 shl scale						; size of array element (bytes)
 		mov		[ptr], temp1				; ptr[0] = temp1
 		add		array, bytes				; array++
 		dec		size						; size--
-		jnz		@b							; do while (size !=0)
+		jnz		@b							; do while (size != 0)
 ;------------------------------------------
 .exit:	ret
 }

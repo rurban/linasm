@@ -9,8 +9,8 @@
 INTRODUCTION
 ============
 
-	Linux assembler libraries project called "LinAsm" is the collection of
-	very fast and optimized assembler wrote libraries for x86-64 Linux.
+	Linux assembly libraries project called "LinAsm" is the collection of
+	very fast and optimized assembly written libraries for x86-64 Linux.
 
 	It implements many common and widely used algorithms, mostly developed
 	for acceleration of data analysis and time series processing. Later they
@@ -41,7 +41,7 @@ PACKAGE STRUCTURE
 	Installation procedure will do it for you automatically, according to
 	the settings you provide.
 
-	The "source" directory includes assembler source code, which is written on
+	The "source" directory includes assembly source code, which is written on
 	Flat Assembler programming language, developed by Tomasz Grysztar.
 	Its official web site is http://flatassembler.net
 

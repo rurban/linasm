@@ -17,7 +17,7 @@ COMPILATION
 ===========
 
 	To compile the libraries from source code, just type "make". This command
-	will process all assembler files (*.asm), from "source" directory,
+	will process all assembly files (*.asm), from "source" directory,
 	with included into the package "fasm" compiler. The assembler compiler
 	can be found into "build" directory of extracted source archive.
 
