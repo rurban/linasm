@@ -1937,8 +1937,8 @@ r_ptr	equ		r9							; right pointer to split data array
 l_size	equ		rcx							; size of left part of array
 r_size	equ		rdx							; size of right part of array
 stack	equ		rsp							; stack pointer
-s_ptr1	equ		rsp + 0 * 8					; stack position of ptr1
-s_ptr2	equ		rsp + 1 * 8					; stack position of ptr2
+s_ptr1	equ		stack +  0 * 8				; stack position of ptr1
+s_ptr2	equ		stack +  1 * 8				; stack position of ptr2
 N		= 32								; Max array size aceptable for Insert sort
 space	= 3 * 8								; stack size required by the procedure
 bytes	= 1 shl scale						; size of array element (bytes)
@@ -2070,8 +2070,8 @@ array	equ		rdi							; pointer to array
 size	equ		rsi							; array size (count of elements)
 ;---[Internal variables]-------------------
 stack	equ		rsp							; stack pointer
-s_array	equ		rsp + 0 * 8					; stack position of array variable
-s_size	equ		rsp + 1 * 8					; stack position of size variable
+s_array	equ		stack +  0 * 8				; stack position of array variable
+s_size	equ		stack +  1 * 8				; stack position of size variable
 space	= 3 * 8								; stack size required by the procedure
 bytes	= 1 shl scale						; size of array element (bytes)
 ;------------------------------------------
@@ -2399,9 +2399,9 @@ stack	equ		rsp							; stack pointer
 bytes	= 1 shl scale						; size of array element (bytes)
 stat_sz	= bytes * 256 * 8					; size of statistics array (bytes)
 space	= stat_sz + 3 * 8					; stack size required by the procedure
-s_array	equ		rsp + stat_sz + 0 * 8		; stack position of array variable
-s_temp	equ		rsp + stat_sz + 1 * 8		; stack position of temp variable
-s_size	equ		rsp + stat_sz + 2 * 8		; stack position of size variable
+s_array	equ		stack +  stat_sz + 0 * 8	; stack position of array variable
+s_temp	equ		stack +  stat_sz + 1 * 8	; stack position of temp variable
+s_size	equ		stack +  stat_sz + 2 * 8	; stack position of size variable
 ;------------------------------------------
 		sub		stack, space				; reserving stack size for local vars
 		mov		[s_array], array			; save "array" variable into the stack
@@ -2478,9 +2478,9 @@ param1	equ		rdi							; register to pass 1 parameter to function
 param2	equ		rsi							; register to pass 2 parameter to function
 param3	equ		rdx							; register to pass 3 parameter to function
 stack	equ		rsp							; stack pointer
-s_array	equ		rsp + 0 * 8					; stack position of array variable
-s_temp	equ		rsp + 1 * 8					; stack position of array variable
-s_size	equ		rsp + 2 * 8					; stack position of size variable
+s_array	equ		stack +  0 * 8				; stack position of array variable
+s_temp	equ		stack +  1 * 8				; stack position of array variable
+s_size	equ		stack +  2 * 8				; stack position of size variable
 space	= 3 * 8								; stack size required by the procedure
 ;------------------------------------------
 		cmp		size, 1						; if (size <= 1)

@@ -276,7 +276,7 @@ size	equ		rsi							; array size (count of elements)
 ;---[Internal variables]-------------------
 ptr		equ		rdx							; pointer to target element
 stack	equ		rsp							; stack pointer
-s_array	equ		rsp + 0 * 8					; stack position of array variable
+s_array	equ		stack + 0 * 8				; stack position of array variable
 space	= 1 * 8								; stack size required by the procedure
 bytes	= 1 shl scale						; size of type (bytes)
 ;------------------------------------------
@@ -327,10 +327,10 @@ right	equ		size						; pointer to end of the data array
 ptr		equ		rdx							; pointer to target element
 res		equ		xmm0						; result register
 stack	equ		rsp							; stack pointer
-s_array	equ		rsp + 0 * 8					; stack position of array variable
-s_size	equ		rsp + 1 * 8					; stack position of size variable
-s_left	equ		rsp + 2 * 8					; stack position of left variable
-s_ptr	equ		rsp + 3 * 8					; stack position of ptr variable
+s_array	equ		stack +  0 * 8				; stack position of array variable
+s_size	equ		stack +  1 * 8				; stack position of size variable
+s_left	equ		stack +  2 * 8				; stack position of left variable
+s_ptr	equ		stack +  3 * 8				; stack position of ptr variable
 space	= 5 * 8								; stack size required by the procedure
 if x eq s
 Map		= Map_flt32							; Mapping function
@@ -438,9 +438,9 @@ size	equ		rsi							; array size (count of elements)
 ;---[Internal variables]-------------------
 res		equ		xmm0						; result register
 stack	equ		rsp							; stack pointer
-s_array	equ		rsp + 0 * 8					; stack position of array variable
-s_size	equ		rsp + 1 * 8					; stack position of size variable
-s_res	equ		rsp + 2 * 8					; stack position of result variable
+s_array	equ		stack +  0 * 8				; stack position of array variable
+s_size	equ		stack +  1 * 8				; stack position of size variable
+s_res	equ		stack +  2 * 8				; stack position of result variable
 space	= 3 * 8								; stack size required by the procedure
 if x eq s
 Min		= Min_flt32							; Minimum function (flt32_t type)
@@ -654,12 +654,12 @@ res		equ		xmm0						; result register
 temp	equ		xmm1						; temporary variable
 value	equ		xmm2						; another temporary variable (=0.5)
 stack	equ		rsp							; stack pointer
-s_array	equ		rsp + 0 * 8					; stack position of array variable
-s_size	equ		rsp + 1 * 8					; stack position of size variable
-s_left	equ		rsp + 2 * 8					; stack position of left variable
-s_right	equ		rsp + 3 * 8					; stack position of right variable
-s_ind1	equ		rsp + 4 * 8					; stack position of index1 variable
-s_ind2	equ		rsp + 5 * 8					; stack position of index2 variable
+s_array	equ		stack +  0 * 8				; stack position of array variable
+s_size	equ		stack +  1 * 8				; stack position of size variable
+s_left	equ		stack +  2 * 8				; stack position of left variable
+s_right	equ		stack +  3 * 8				; stack position of right variable
+s_ind1	equ		stack +  4 * 8				; stack position of index1 variable
+s_ind2	equ		stack +  5 * 8				; stack position of index2 variable
 space	= 7 * 8								; stack size required by the procedure
 if x eq s
 Map		= Map_flt32							; Mapping function
@@ -752,8 +752,8 @@ size	equ		rsi							; array size (count of elements)
 ;---[Internal variables]-------------------
 res		equ		xmm0						; result register
 stack	equ		rsp							; stack pointer
-s_array	equ		rsp + 0 * 8					; stack position of array variable
-s_size	equ		rsp + 1 * 8					; stack position of size variable
+s_array	equ		stack +  0 * 8				; stack position of array variable
+s_size	equ		stack +  1 * 8				; stack position of size variable
 s_res	equ		s_array						; stack position of result variable
 space	= 3 * 8								; stack size required by the procedure
 if x eq s

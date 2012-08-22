@@ -105,10 +105,10 @@ tzfile	equ		rsi							; time zone file name
 ;---[Internal variables]-------------------
 result	equ		rax							; result register
 stack	equ		rsp							; stack pointer
-s_buff	equ		rsp + 0 * 8					; stack position of file buffer
-s_free	equ		rsp + 1 * 8					; stack position of free variable
-s_fd	equ		rsp + 2 * 8					; stack position of file descriptor
-s_error	equ		rsp + 3 * 8					; stack position of error variable
+s_buff	equ		stack + 0 * 8				; stack position of file buffer
+s_free	equ		stack + 1 * 8				; stack position of free variable
+s_fd	equ		stack + 2 * 8				; stack position of file descriptor
+s_error	equ		stack + 3 * 8				; stack position of error variable
 space	= 5 * 8								; stack size required by the procedure
 ;------------------------------------------
 		sub		stack, space				; reserving stack size for local vars
@@ -332,7 +332,7 @@ prm2	equ		rsi							; 2-rd function parameter
 prm3	equ		rdx							; 3-rd function parameter
 buffer	equ		rsp							; buffer which holds content of tzfile
 stack	equ		rsp							; stack pointer
-s_this	equ		rsp + BUF_SIZE				; stack position of pointer to time object
+s_this	equ		stack + BUF_SIZE			; stack position of pointer to time object
 space	= BUF_SIZE + 8						; stack size required by the procedure
 ;------------------------------------------
 		sub		stack, space				; reserving stack size for local vars

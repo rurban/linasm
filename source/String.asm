@@ -407,9 +407,9 @@ param3	equ		rdx							; register to pass 3 procedure parameter
 param4	equ		cl							; register to pass 4 procedure parameter
 result	equ		psize						; result register
 stack	equ		rsp							; stack pointer
-s_str	equ		rsp + 0 * 8					; stack position of string variable
-s_size	equ		rsp + 1 * 8					; stack position of string size variable
-s_bmh	equ		rsp + 2 * 8					; stack position of BMH object
+s_str	equ		stack + 0 * 8				; stack position of string variable
+s_size	equ		stack + 1 * 8				; stack position of string size variable
+s_bmh	equ		stack + 2 * 8				; stack position of BMH object
 space	= 261 * 8							; stack size required by the procedure
 ;------------------------------------------
 		strlen	psize, pattern, scale		; getting pattern string len
