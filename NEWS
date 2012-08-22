@@ -7,6 +7,20 @@
 ################################################################################
 
 #******************************************************************************#
+#       Release 0.96 (beta) [2012-08-23]                                       #
+#******************************************************************************#
+
+As I promised before in my future plans for the project, I added Digital Signals
+Processing (DSP) functions to the library package. They implement FIR filters
+and window functions for future Spectral analysis module. Now LinAsm release
+has the two additional libraries:
+	* Filter - Finite impulse response digital filters
+	* Window - Window functions for digital signal processing
+
+And from now the project has a beta version label. So it is almost done, and
+can be used in your software development projects.
+
+#******************************************************************************#
 #       First release 0.95 (alpha) [2012-08-15]                                #
 #******************************************************************************#
 

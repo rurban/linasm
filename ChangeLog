@@ -1,0 +1,17 @@
+2012-08-23	Release 0.96 (beta)
+-------------------------------
+New features:
+	* Added Filter library
+	* Added Window library
+
+2012-08-15	Release 0.95 (alpha)
+--------------------------------
+New features:
+	* Added Angle library
+	* Added Array library
+	* Added Math library
+	* Added Numbers library
+	* Added Sequence library
+	* Added Statistics library
+	* Added String library
+	* Added Time library
