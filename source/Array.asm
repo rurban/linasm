@@ -707,7 +707,7 @@ bytes	= 1 shl scale						; size of array element (bytes)
 		mov		[array], temp2				; array[0] = temp2
 		mov		[ptr], temp1				; ptr[0] = temp1
 		add		array, bytes				; array++
-		dec		size						; size--
+		sub		size, 1						; size--
 		jnz		@b							; do while (size != 0)
 ;------------------------------------------
 .exit:	ret
@@ -746,7 +746,7 @@ step	= 16 / bytes						; step size (in bytes)
 ;---[Scalar loop]--------------------------
 @@:		mov		[array], value				; array[0] = value
 		add		array, bytes				; array++
-		dec		size						; size--
+		sub		size, 1						; size--
 		jnz		@b							; do while (size != 0)
 ;------------------------------------------
 .exit:	ret
@@ -780,7 +780,7 @@ step	= 16 / bytes						; step size (in bytes)
 ;---[Scalar loop]--------------------------
 @@:		movs#x	[array], value				; array[0] = value
 		add		array, bytes				; array++
-		dec		size						; size--
+		sub		size, 1						; size--
 		jnz		@b							; do while (size != 0)
 ;------------------------------------------
 .exit:	ret
@@ -827,7 +827,7 @@ step	= 16 / bytes						; step size (in bytes)
 		mov		[target], temp				; target[0] = temp
 		add		source, bytes				; source++
 		add		target, bytes				; target++
-		dec		size						; size--
+		sub		size, 1						; size--
 		jnz		@b							; do while (size != 0)
 ;------------------------------------------
 .exit:	ret
@@ -874,7 +874,7 @@ step2	= bytes2 * step						; step size for target array
 		mov3	[target], temp				; target[0] = temp
 		add		source, bytes1				; source++
 		add		target, bytes2				; target++
-		dec		size						; size--
+		sub		size, 1						; size--
 		jnz		@b							; do while (size != 0)
 ;------------------------------------------
 .exit:	ret
@@ -939,7 +939,7 @@ else if scale = 3
 		not		qword [array]				; array[0] = ~array[0]
 end if
 		add		array, bytes				; array++
-		dec		size						; size--
+		sub		size, 1						; size--
 		jnz		@b							; do while (size != 0)
 ;------------------------------------------
 .exit:	ret
@@ -983,7 +983,7 @@ step	= 16 / bytes						; step size (in bytes)
 		cmd2	[target], temp				; target = target cmd temp
 		add		source, bytes				; source++
 		add		target, bytes				; target++
-		dec		size						; size--
+		sub		size, 1						; size--
 		jnz		@b							; do while (size != 0)
 ;------------------------------------------
 .exit:	ret
@@ -1049,7 +1049,7 @@ step	= 16 / bytes						; step size (in bytes)
 		op#x	temp, bmask					; do bit operation to temp value
 		movs#x	[array], temp				; array[0] = temp
 		add		array, bytes				; array++
-		dec		size						; size--
+		sub		size, 1						; size--
 		jnz		@b							; do while (size != 0)
 ;------------------------------------------
 .exit:	ret
@@ -1086,7 +1086,7 @@ step	= 16 / bytes						; step size (in bytes)
 		op2#x	temp, temp					; do operation to temp value
 		movs#x	[array], temp				; array[0] = temp
 		add		array, bytes				; array++
-		dec		size						; size--
+		sub		size, 1						; size--
 		jnz		@b							; do while (size != 0)
 ;------------------------------------------
 .exit:	ret
@@ -1144,7 +1144,7 @@ step	= 16 / bytes						; step size (in bytes)
 		op#s#x	temp, value					; do operation to temp value
 		movs#x	[array], temp				; array[0] = temp
 		add		array, bytes				; array++
-		dec		size						; size--
+		sub		size, 1						; size--
 		jnz		@b							; do while (size != 0)
 ;------------------------------------------
 .exit:	ret
@@ -1186,7 +1186,7 @@ step	= 16 / bytes						; step size (in bytes)
 		movs#x	[target], temp				; target[0] = temp
 		add		source, bytes				; source++
 		add		target, bytes				; target++
-		dec		size						; size--
+		sub		size, 1						; size--
 		jnz		@b							; do while (size != 0)
 ;------------------------------------------
 .exit:	ret
@@ -1278,7 +1278,7 @@ step	= 16 / bytes						; step size (in bytes)
 ;---[Scalar loop]--------------------------
 @@:		adds#x	sum, [array]				; sum += array[0]
 		add		array, bytes				; array++
-		dec		size						; size--
+		sub		size, 1						; size--
 		jnz		@b							; do while (size != 0)
 ;------------------------------------------
 .exit:	ret
@@ -1323,7 +1323,7 @@ step	= 16 / bytes						; step size (in bytes)
 		muls#x	temp, temp					; temp *= temp
 		adds#x	sum, temp					; sum += temp
 		add		array, bytes				; array++
-		dec		size						; size--
+		sub		size, 1						; size--
 		jnz		@b							; do while (size != 0)
 ;------------------------------------------
 .exit:	ret
@@ -1373,7 +1373,7 @@ step	= 16 / bytes						; step size (in bytes)
 		adds#x	sum, temp1					; sum += temp1
 		add		array1, bytes				; array1++
 		add		array2, bytes				; array2++
-		dec		size						; size--
+		sub		size, 1						; size--
 		jnz		@b							; do while (size != 0)
 ;------------------------------------------
 .exit:	ret
@@ -1445,7 +1445,7 @@ if abs
 end if
 		op#s#x	result, temp				; find min or max value
 		add		array, bytes				; array++
-		dec		size						; size--
+		sub		size, 1						; size--
 		jnz		@b							; do while (size != 0)
 ;---[Normal exit branch]-------------------
 .exit:	ret
@@ -1512,7 +1512,7 @@ step	= 16 / bytes						; step size (in bytes)
 		comis#x	temp, temp					; check value for NAN
 		jp		.nan						; if NAN is detected, then break the loop
 		add		array, bytes				; array++
-		dec		size						; size--
+		sub		size, 1						; size--
 		jnz		@b							; do while (size != 0)
 ;---[Normal exit branch]-------------------
 .exit:	xor		res, res					; return false (do normal exit)
@@ -1617,7 +1617,7 @@ bytes	= 1 shl scale						; size of array element (bytes)
 .loop:	cmp		element, [ptr]				; if (element == ptr[0])
 		je		.exit						; then element is found
 		add		ptr, bytes					; ptr++
-		dec		size						; size--;
+		sub		size, 1						; size--
 @@:		jnz		.loop						; do while (size != 0)
 ;------------------------------------------
 		mov		ptr, NOT_FOUND				; return NOT_FOUND
@@ -1694,7 +1694,7 @@ bytes	= 1 shl scale						; size of array element (bytes)
 .loop:	sub		ptr, bytes					; ptr--
 		cmp		element, [ptr]				; if (element == ptr[0])
 		je		.exit						; then element is found
-		dec		size						; size--;
+		sub		size, 1						; size--
 @@:		jnz		.loop						; do while (size != 0)
 ;---[end of loop]--------------------------
 		mov		ptr, NOT_FOUND				; return NOT_FOUND
@@ -1740,7 +1740,7 @@ bytes	= 1 shl scale						; size of array element (bytes)
 		jz		.exit						; then go to exit
 ;---[If size != 0]-------------------------
 		mov		left, array					; left = array
-		dec		size						; if (--size == 0)
+		sub		size, 1						; if (--size == 0)
 		jz		.skip						; then skip searching
 ;---[If --size != 0]-----------------------
 		lea		right, [array + size*bytes]	; right = array + size
@@ -1827,7 +1827,7 @@ bytes	= 1 shl scale						; size of array element (bytes)
 		cmove	temp, value					;     temp = value
 		mov		[array], val				; array[0] = temp
 		add		array, bytes				; array++
-		dec		size						; size--
+		sub		size, 1						; size--
 		jnz		@b							; do while (size != 0)
 ;------------------------------------------
 .exit:	ret
@@ -1889,7 +1889,7 @@ step	= 16 / bytes						; step size (in bytes)
 		shr		val, 1						; val >>= 1
 		xor		[array], val				; array[0] ^= val
 		add		array, bytes				; array++
-		dec		size						; size--
+		sub		size, 1						; size--
 		jnz		@b							; do while (size != 0)
 ;------------------------------------------
 .exit:	ret
@@ -1913,7 +1913,7 @@ bytes	= 1 shl scale						; size of array element (bytes)
 		shr		temp, 1						; temp >>= 1
 		xor		[array], temp				; array[0] ^= temp
 		add		array, 16					; array++
-		dec		size						; size--
+		sub		size, 1						; size--
 		jnz		@b							; do while (size != 0)
 ;------------------------------------------
 .exit:	ret
@@ -2234,7 +2234,7 @@ temp	equ		rdx							; temporary register
 		mov		[stat], target				; stat[0] = target
 		add		target, temp				; target += temp
 		add		stat, 8						; stat++
-		dec		size						; size--
+		sub		size, 1						; size--
 		jnz		@b							; do while (size != 0)
 ;------------------------------------------
 		ret
@@ -2254,7 +2254,7 @@ temp	equ		rdx							; temporary register
 		mov		temp, [stat]				; temp = stat[0]
 		mov		[stat], target				; stat[0] = target
 		add		target, temp				; target += temp
-		dec		size						; size--
+		sub		size, 1						; size--
 		jnz		@b							; do while (size != 0)
 ;------------------------------------------
 		ret
@@ -2274,7 +2274,7 @@ temp	equ		rdx							; temporary register
 		mov		[stat], target				; stat[0] = target
 		add		target, temp				; target += temp
 		add		stat, 8						; stat++
-		dec		size						; size--
+		sub		size, 1						; size--
 		jnz		@b							; do while (size != 0)
 ;------------------------------------------
 		sub		stat, 256 * 8				; stat -= 256
@@ -2284,7 +2284,7 @@ temp	equ		rdx							; temporary register
 		mov		[stat], target				; stat[0] = target
 		add		target, temp				; target += temp
 		add		stat, 8						; stat++
-		dec		size						; size--
+		sub		size, 1						; size--
 		jnz		@b							; do while (size != 0)
 ;------------------------------------------
 		ret
@@ -2304,7 +2304,7 @@ temp	equ		rdx							; temporary register
 		mov		temp, [stat]				; temp = stat[0]
 		mov		[stat], target				; stat[0] = target
 		add		target, temp				; target += temp
-		dec		size						; size--
+		sub		size, 1						; size--
 		jnz		@b							; do while (size != 0)
 ;------------------------------------------
 		add		stat, 256 * 8				; stat += 256
@@ -2314,7 +2314,7 @@ temp	equ		rdx							; temporary register
 		mov		temp, [stat]				; temp = stat[0]
 		mov		[stat], target				; stat[0] = target
 		add		target, temp				; target += temp
-		dec		size						; size--
+		sub		size, 1						; size--
 		jnz		@b							; do while (size != 0)
 ;------------------------------------------
 		ret
@@ -2339,7 +2339,7 @@ bytes	= 1 shl scale						; size of array element (bytes)
 ;---[Stat initialization loop]-------------
 @@:		movdqu	[ptr], zero					; ptr[0] = 0
 		add		ptr, 16						; ptr++
-		dec		count						; count--
+		sub		count, 1					; count--
 		jnz		@b							; do while (count != 0)
 ;------------------------------------------
 		xor		key, key					; clearing key register
@@ -2352,7 +2352,7 @@ while i < bytes
 	i = i + 1
 end while
 		add		array, step					; move to next partial key
-		dec		size						; size--
+		sub		size, 1						; size--
 		jnz		@b							; do while (count != 0)
 ;------------------------------------------
 		ret
@@ -2378,7 +2378,7 @@ keyl	equ		al							; low part of key register
 		cmd		[addr], temp				; addr[0] = temp
 		add		array, step					; array++
 		add		qword [stat + key * 8], step; stat[key]++
-		dec		size						; size--
+		sub		size, 1						; size--
 		jnz		@b							; do while (size != 0)
 ;------------------------------------------
 		ret
@@ -2679,14 +2679,14 @@ bytes	= 1 shl scale						; size of array element (bytes)
 		cmp		[target], element			;         if (target[0] != element)
 		setne	stepl						;             target++
 		lea		target, [target + step * bytes]
-		inc		source						;         source++
+		add		source, bytes				;         source++
 		mov		[target], element			;         target[0] = element
-		dec		size						;         size--
+		sub		size, 1						;         size--
 		jnz		@b							;     } while (size)
 ;---[Adjusting size of unique array]-------
 		sub		target, array				;     target -= array
 		shr		target, scale				;     return target + 1
-		inc		target						; }
+		add		target, 1					; }
 		ret
 ;---[Skip branch]--------------------------
 .skip:	lea		target, [size + 1]			; else

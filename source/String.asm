@@ -177,12 +177,12 @@ source	equ		rdx							; source string
 ptr		equ		rax							; temporary pointer to source string
 bytes	= 1 shl scale						; size of element (bytes)
 ;------------------------------------------
-		inc		max_len						; max_len++
+		add		max_len, 1					; max_len++
 		lea		ptr, [source - bytes]		; ptr = source - 1
 		sub		target, bytes				; target--
 		jmp		@f
 ;---[Loop]---------------------------------
-.loop:	dec		max_len						; max_len--
+.loop:	sub		max_len, 1					; max_len--
 		jz		.nospc						; if (max_len == 0), then no space
 @@:		add		ptr, bytes					; ptr++
 		add		target, bytes				; target++
@@ -219,19 +219,19 @@ ptr		equ		rax							; temporary pointer to source string
 bytes	= 1 shl scale						; size of element (bytes)
 ;------------------------------------------
 		mov		ptr, source					; ptr = source
-		inc		max_len						; max_len++
+		add		max_len, 1					; max_len++
 		test	size, size					; if (size == 0)
 		jz		.exit						; then go to exit
 ;---[Loop]---------------------------------
 .loop:	mov		temp, [ptr]					; temp = ptr[0]
 		test	temp, temp					; if (ptr[0] == 0)
 		jz		.exit						;     then break
-		dec		max_len						; max_len--
+		sub		max_len, 1					; max_len--
 		jz		.nospc						; if (max_len == 0), then no space
 		mov		[target], temp				; target[0] = temp
 		add		ptr, bytes					; ptr++
 		add		target, bytes				; target++
-		dec		size						; size--
+		sub		size, 1						; size--
 		jnz		.loop						; do while (size > 0)
 ;---[End of loop]--------------------------
 .exit:	sub		ptr, source					; target[0] = 0
@@ -303,7 +303,7 @@ bytes	= 1 shl scale						; size of element (bytes)
 		jne		.exit						; then go to exit
 		add		string1, bytes				; string1++
 		add		string2, bytes				; string2++
-		dec		size						; size--
+		sub		size, 1						; size--
 		jnz		.loop						; do while (size != 0)
 ;---[end of loop]--------------------------
 @@:	checkeol	string1, scale

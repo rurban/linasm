@@ -177,7 +177,7 @@ bytes	= 8									; array element size (bytes)
 end if
 ;------------------------------------------
 		sub		stack, space				; reserving stack size for local vars
-		inc		size						; size++
+		add		size, 1						; size++
 		movs#x	step, [angle]
 	cvtsi2ss	value, size
 		divs#x	step, value					; step = angle / size
@@ -197,7 +197,7 @@ end if
 		movs#x	[array], value				; array[0] *= value
 		add		array, bytes				; array++
 		mov		[s_array], array			; save "array" variable into the stack
-		dec		qword [s_size]				; size--
+		sub		qword [s_size], 1			; size--
 		jnz		.loop						; do while (size != 0)
 ;---[End of loop]--------------------------
 		add		stack, space				; restoring back the stack pointer
@@ -293,7 +293,7 @@ end if
 		sub		stack, space				; reserving stack size for local vars
 		mov		[s_array], array			; save "array" variable into the stack
 		mov		[s_size], size				; save "size" variable into the stack
-		inc		size						; size++
+		add		size, 1						; size++
 		movs#x	step, [angle]
 	cvtsi2ss	value, size
 		divs#x	step, value					; step = angle / size
@@ -313,7 +313,7 @@ end if
 		movs#x	[array], value				; array[0] = value
 		add		array, bytes				; ptr++
 		mov		[s_ptr], array				; save "ptr" variable into the stack
-		dec		qword [s_i]					; i--
+		sub		qword [s_i], 1				; i--
 		jnz		.loop						; do while (size != 0)
 ;---[End of loop]--------------------------
 		mov		array, [s_array]			; get "array" variable from the stack

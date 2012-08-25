@@ -86,7 +86,7 @@ end if
 		mov		temp, hash_sz / 2			; temp = hash_sz / 2 (init 2 hash records per cycle)
 @@:		movdqa	[hptr], vector				; hptr[0] = vector
 		add		hptr, 16					; hptr++
-		dec		temp						; temp--
+		sub		temp, 1						; temp--
 		jnz		@b							; do while (h_size != 0)
 ;------------------------------------------
 		xor		temp, temp					; clear temp register
@@ -96,17 +96,17 @@ end if
 		jmp		@f
 .loop1:	mov		element, [pattern]			; element = pattern[0]
 		mov		[hash + temp * 8], size		; hash[element] = size
-		inc		pattern						; pattern++
-@@:		dec		size						; size--
+		add		pattern, 1					; pattern++
+@@:		sub		size, 1						; size--
 		jnz		.loop1						; do while (size != 0)
 		ret
 ;---[Backward hash branch]-----------------
 .bkwrd:	lea		pattern, [pattern + size]
 		jmp		@f
-.loop2:	dec		pattern 					; pattern--
+.loop2:	sub		pattern, 1 					; pattern--
 		mov		element, [pattern]			; element = pattern[0]
 		mov		[hash + temp * 8], size		; hash[element] = size
-@@:		dec		size						; size--
+@@:		sub		size, 1						; size--
 		jnz		.loop2						; do while (size != 0)
 		ret
 ;---[Empty pattern branch]-----------------

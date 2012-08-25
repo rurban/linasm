@@ -9,26 +9,27 @@
 INTRODUCTION
 ============
 
-	LinAsm doesn't use autotools for configurations process at all,
-	because its Makefile is too simple and almost has no options.
-	This makes installation process very simple.
+	LinAsm doesn't use autotools for configurations process at all, because
+	its Makefile is too simple and almost has no options. This makes
+	installation process very simple.
 
 COMPILATION
 ===========
 
 	To compile the libraries from source code, just type "make". This command
-	will process all assembly files (*.asm), from "source" directory,
-	with included into the package "fasm" compiler. The assembler compiler
-	can be found into "build" directory of extracted source archive.
+	will process all assembly files (*.asm) from "source" directory with "fasm"
+	compiler, included into the package. The assembler compiler can be found
+	into "build" directory of extracted source archive.
 
-	To allow this file to be launched, please check that a file system,
-	where the source code was extracted, has the mount option "exec", and
-	the file “fasm” has appropriate execution permission. In other case
-	compiling process will fail.
+	To allow this file to be launched, please check that a file system, where
+	the source code was extracted, has the mount option "exec", and the file
+	"fasm" has appropriate execution permissions. In other case the compiling
+	process will fail.
 
-	When compilation complete, you will find statical library archive
-	file "liblinasm.a" inside the root directory of the package. This means that
-	compilation stage was successful and you may start installation process.
+	When compilation complete, you will find statical library archive file
+	"liblinasm.a" inside the root directory of the package. This means that
+	compilation stage was successfully completed and you may start
+	installation process.
 
 INSTALLATION
 ============
@@ -41,9 +42,9 @@ INSTALLATION
 	target directory), instead of standard installation command.
 
 	To make dummy installation (not real installation), type
-	"make install DESTDIR=/tmp". This command won’t modify any system
-	and previously installed files, but will place all compiled files into
-	"/tmp" directory, repeating directory structure of regular installation.
+	"make install DESTDIR=/tmp". This command will not modify any system and
+	previously installed files, but will place all compiled files into "/tmp"
+	directory, repeating directory structure of regular installation.
 	This ability is used to check that installation and compilation processes
 	successfully pass through all steps.
 
@@ -59,21 +60,21 @@ UNINSTALLATION
 
 	By default it assumes that the package was previously installed into
 	the directory "/usr/local" (which is default prefix value). Uninstall script
-	tries to check and clear local "include" and "lib" directories
-	from projects files without touching any other system files. If you
-	installed the package into another directory (for example you specified
-	"prefix=/usr"), then you should call uninstall command with the same prefix
-	value which was set for installation.
+	tries to check and clear local "include" and "lib" directories from projects
+	files without touching any other system files. If you installed the package
+	into another directory (for example you specified "prefix=/usr"), then
+	you should call uninstall command with the same prefix value which was set
+	for installation.
 
 	Example: "make uninstall prefix=/usr". This command will do uninstallation
-	procedure in the save way, like the default command, but checking
-	"/usr" directory instead of "/usr/local" which is default.
+	procedure in the save way, like the default command, but checking "/usr"
+	directory instead of "/usr/local" which is default.
 
 PACKAGE CLEANING
 ================
 
 	Package cleaning procedure just cleans the directory, where release archive
-	was unpacked, from the files were created by compilation process.
+	was unpacked, from the files were created by the compilation process.
 
 	To make cleaning, simply type "make clean".
 
@@ -82,8 +83,8 @@ TROUBLESHOOTING
 
 	In case of any trouble actions or bugs, you find during the install and
 	uninstall process, you may mail me to:
-		- ezamlinsky@gmail.com
-		- ezamlinsky@users.sf.net
+		* ezamlinsky@gmail.com
+		* ezamlinsky@users.sf.net
 	and get installation support.
 
 ################################################################################

@@ -10,7 +10,7 @@ INTRODUCTION
 ============
 
 	Linux assembly libraries project called "LinAsm" is the collection of
-	very fast and optimized assembly written libraries for x86-64 Linux.
+	libraries,‭ ‬which‭ ‬are written in pure assembly language for x86-64‭ ‬Linux OS.
 
 	It implements many common and widely used algorithms, mostly developed
 	for acceleration of data analysis and time series processing. Later they
@@ -18,7 +18,7 @@ INTRODUCTION
 	inside C++ programs and make them very fast on that platform.
 
 	To get more information about this software, please visit the official
-	website: http://linasm.sourceforge.net
+	web site: http://linasm.sourceforge.net
 
 LICENSING
 =========
@@ -32,22 +32,22 @@ LICENSING
 PACKAGE STRUCTURE
 =================
 
-	The source code of the libraries is placed into separate directories called
-	"include" and "source".
+	The source codes of the libraries are placed into separate directories
+	called "include" and "source".
 
 	The "include" directory holds C++ header files that define functions
-	prototypes, structures and data types. They should be copied as is into
-	your local include directory such as /usr/include or /usr/local/include.
-	Installation procedure will do it for you automatically, according to
-	the settings you provide.
+	prototypes, structures and data types. They should be copied as is into your
+	local include directory such as /usr/include or /usr/local/include.
+	Installation procedure will do it for you automatically, according to the
+	settings you provide.
 
 	The "source" directory includes assembly source code, which is written on
-	Flat Assembler programming language, developed by Tomasz Grysztar.
-	Its official web site is http://flatassembler.net
+	Flat Assembler programming language, developed by Tomasz Grysztar. Its
+	official web site is http://flatassembler.net
 
-	The source code should be compiled by "fasm" executable file,
-	which is placed into "build" directory of release. To allow this file
-	to be launched, please check that a file system has mount option "exec"
+	The source code should be compiled by "fasm" executable file, which
+	is placed into "build" directory of LinAsm release. To allow this file
+	to be launched, please check that a file system has the mount option "exec"
 	and the file "build/fasm" has appropriate execution permission.
 
 INSTALLATION

@@ -156,7 +156,7 @@ if sign										; # if sign variant, then
 end if										; # end
 		movs#x	[ptr], temp					; ptr[0] = temp
 		add		array, bytes				; array++
-		dec		size						; size--
+		sub		size, 1						; size--
 		jnz		.loop						; do while (size != 0)
 ;---[End of loop]--------------------------
 .exit:	ret
@@ -217,7 +217,7 @@ s_value	equ		stack + 3 * 8				; stack position of "value" variable
 		sub		filter, bytes				; filter--
 		divs#x	value, [s_value]			; value = sin (value * freq) / value
 		movs#x	[filter], value				; filter[0] = value
-		dec		qword [s_size]				; size--
+		sub		qword [s_size], 1			; size--
 		mov		[s_filt], filter			; save "filter" variable into the stack
 		jnz		.loop						; do while (size != 0)
 ;---[End of loop]--------------------------
@@ -284,7 +284,7 @@ s_temp	equ		stack + 5 * 8				; stack position of "temp" variable
 		sub		filter, bytes				; filter--
 		divs#x	value, [s_value]			; value = (cos (value * lfreq) - cos (value * hfreq)) / value
 		movs#x	[filter], value				; filter[0] = value
-		dec		qword [s_size]				; size--
+		sub		qword [s_size], 1			; size--
 		mov		[s_filt], filter			; save "filter" variable into the stack
 		jnz		.loop						; do while (size != 0)
 ;---[End of loop]--------------------------
@@ -374,7 +374,7 @@ s_temp	equ		stack + 11 * 8				; stack position of "temp" variable
 		sub		filter, bytes				; filter--
 		divp#x	value, temp					; value /= temp
 		movs#x	[filter], value				; filter[0] = value
-		dec		qword [s_size]				; size--
+		sub		qword [s_size], 1			; size--
 		mov		[s_filt], filter			; save "filter" variable into the stack
 		jnz		.loop						; do while (size != 0)
 ;---[End of loop]--------------------------
@@ -430,7 +430,7 @@ end if
 		mov		window, [s_win]				; get "window" variable from the stack
 		test	window, window				; if (window != WIN_NONE)
 		jz		@f							; {
-		dec		window						;     window--
+		sub		window, 1					;     window--
 		mov		filter, [s_filt]
 		mov		size, [s_size]				;     call Win[window] (filter, size)
 		call	qword [win + window * 8]	; }
@@ -446,7 +446,7 @@ end if
 ;---[Normalize impulse response]-----------
 		comiss	temp, [zero]				; if (temp != 0)
 		je		@f							; {
-		inc		size						;     size++
+		add		size, 1						;     size++
 		movs#x	value, [one]				;     value = 1.0 / temp
 		divs#x	value, temp					;     call Mul (filter, size, value)
 		call	ArrMul						; }
@@ -542,7 +542,7 @@ if stop
 end if
 		subs#x	value, [filter + size*bytes]; filter[size] = temp - filter[2 * size]
 		movs#x	[filter + size * bytes / 2], value
-		inc		size
+		add		size, 1
 		call	PosRefl						; call PosRefl (filter, 2 * size + 1)
 ;------------------------------------------
 		add		stack, space				; restoring back the stack pointer
@@ -610,7 +610,7 @@ end if
 		mov		window, [s_win]				; get "window" variable from the stack
 		test	window, window				; if (window != WIN_NONE)
 		jz		@f							; {
-		dec		window						;     window--
+		sub		window, 1					;     window--
 		mov		filter, [s_filt]
 		mov		size, [s_size]				;     call Win[window] (filter, size)
 		call	qword [win + window * 8]	; }
@@ -671,7 +671,7 @@ end if
 		sub		dsize, fsize				; dsize -= fsize
 		jb		.error						; if (dsize < fsize), go to error branch
 		sub		stack, space				; reserving stack size for local vars
-		inc		dsize						; dsize++
+		add		dsize, 1					; dsize++
 		mov		[s_resp], resp				; save "resp" variable into the stack
 		mov		[s_data], data				; save "data" variable into the stack
 		mov		[s_dsize], dsize			; save "dsize" variable into the stack
@@ -686,7 +686,7 @@ end if
 		movs#x	[resp], value				; resp[0] = Conv (data, filt, fsize)
 		add		qword [s_data], bytes		; data++
 		add		qword [s_resp], bytes		; resp++
-		dec		qword [s_dsize]				; dsize--
+		sub		qword [s_dsize], 1			; dsize--
 		jnz		.loop						; do while (dsize != 0)
 ;---[End of loop]--------------------------
 		add		stack, space				; restoring back the stack pointer

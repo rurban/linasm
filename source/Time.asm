@@ -277,10 +277,10 @@ zsize_of	= csize_of + 4					; offset of Time::zone_size
 		jae		.error						;     return ERRNO_NODATA
 		mov		[iptr], index				; iptr[0] = index
 		add		ptr, 8						; ptr += 8
-		inc		buffer						; buffer++
+		add		buffer, 1					; buffer++
 		add		cptr, 8						; cptr++
-		inc		iptr						; iptr++
-		dec		csize						; csize--
+		add		iptr, 1						; iptr++
+		sub		csize, 1					; csize--
 		jnz		.loop1						; do while (csizet != 0)
 ;---[Loading UTC offsets for time zones]---
 @@:		test	zsize, zsize				; if (zsize == 0)
@@ -295,7 +295,7 @@ zsize_of	= csize_of + 4					; offset of Time::zone_size
 		mov		[zptr], value				; zptr[0] = value
 		add		buffer, 6					; buffer += 6
 		add		zptr, 4						; zptr++
-		dec		zsize						; zsize--
+		sub		zsize, 1					; zsize--
 		jnz		.loop2						; do while (zsize != 0)
 ;---[Normal exit]--------------------------
 		xor		result, result				; result = 0 (no errors)
@@ -440,10 +440,10 @@ s_year	equ		rsp - 1 * 8					; stack position of year variable
 		cmovnz	temp, leap					; if (temp != 0), then temp = leap
 		test	year, 0x3					; if (year & 0x3)
 		cmovnz	leap, temp					;     leap = temp
-		dec		month_p						; month--
+		sub		month_p, 1					; month--
 		sub		days, leap					; days -= leap
 		shr		year, 2						; year /= 4
-		dec		day_p						; day--
+		sub		day_p, 1					; day--
 		add		days, year					; days += year
 		cmp		month_p, 12					; if (month >= 12)
 		jae		.error						;     then go to error branch
@@ -666,13 +666,13 @@ s_sec	equ		rsp - 9						; stack position of sec variable
 		mov		month, 13					; month = 13
 ;---[Loop]---------------------------------
 @@:		sub		ptr, 8						; ptr--
-		dec		month						; month--
+		sub		month, 1					; month--
 		cmp		time, [ptr]
 		jb		@b							; do while (time < ptr[0])
 ;---[end of loop]--------------------------
 		sub		time, [ptr]					; time -= ptr[0]
 		mov		[s_mon], month				; store month to date structure
-		inc		timel						; time++
+		add		timel, 1					; time++
 		mov		[s_day], timel				; store day to date structure
 		mov		struct1, [s_year]
 		mov		struct2, [s_min]			; return date structure

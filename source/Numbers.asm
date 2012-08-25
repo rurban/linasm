@@ -118,7 +118,7 @@ macro	SKIP_WHITE
 local	.loop
 		lea		ptr, [string - 1]			; ptr = string -1
 ;---[Skipping loop]------------------------
-.loop:	inc		ptr							; ptr++
+.loop:	add		ptr, 1						; ptr++
 		mov		char, [ptr]					; char = ptr[0]
 		cmp		char, ' '
 		je		.loop
@@ -152,7 +152,7 @@ macro	SKIP_SIGN
 {
 		cmp		char, 0x22
 		jne		@f							; if (ptr[0] == '+')
-		inc		ptr							;     ptr++
+		add		ptr, 1						;     ptr++
 @@:
 }
 
@@ -167,8 +167,8 @@ local	.nosgn
 		je		@f							; {
 		cmp		char, const + 2				;     if (ptr[0] == '-')
 		jne		.nosgn						;         sign = -1
-		dec		sign						; }
-@@:		inc		ptr							; ptr+++
+		sub		sign, 1						; }
+@@:		add		ptr, 1						; ptr+++
 .nosgn:
 }
 
@@ -180,7 +180,7 @@ macro	SKIP_POINT	value
 		add		exp, ptr					; exp = ptr - exp (count of read digits)
 		cmp		char, value					; if (char != '.')
 		jne		.cnvrt						; then go to convert section
-		inc		ptr							; ptr++
+		add		ptr, 1						; ptr++
 }
 
 ;==============================================================================;
@@ -194,10 +194,10 @@ local	.loop, .start
 .loop:	cmp		value, max					; if (value < max)
 		jae		@f							; {
 		lea		value, [value * 4 + value]	;     value *= 5
-		inc		digits						;     digits++
+		add		digits, 1					;     digits++
 		shl		value, 1					;     value *= 2
 		add		value, temp					;     value += temp }
-@@:		inc		ptr							; ptr++
+@@:		add		ptr, 1						; ptr++
 .start:	mov		char, [ptr]
 		sub		char, '0'					; temp = ptr[0] - '0'
 		cmp		char, 9
@@ -217,9 +217,9 @@ local	.loop, .start, .shift
 .loop:	cmp		value, max					; if (value < max)
 		jae		@f							; {
 		shl		value, 4					;     value *= 16
-		inc		digits						;     digits++
+		add		digits, 1					;     digits++
 		add		value, temp					;     value += temp }
-@@:		inc		ptr							; ptr++
+@@:		add		ptr, 1						; ptr++
 .start:	mov		char, [ptr]					; char = ptr[0]
 		or		char, 0x20					; convert char to lower case
 		sub		char, '0'					; temp -= '0'
@@ -266,7 +266,7 @@ local	.loop, .exit
 		jne		.exit						; then go to exit from the macro
 		mov		[s_ptr], ptr				; copy ptr to stack
 ;---[Reading number sign]------------------
-		inc		ptr							; ptr++
+		add		ptr, 1						; ptr++
 		mov		char, [ptr]					; char = ptr[0] (exponent sign)
 	READ_SIGN	'+'
 ;---[Getting number digits]----------------
@@ -275,9 +275,9 @@ local	.loop, .exit
 		jmp		@f
 ;---[Digits parsing loop]------------------
 .loop:	lea		value, [value * 4 + value]	; value *= 5
-		inc		ptr							; ptr++
+		add		ptr, 1						; ptr++
 		shl		value, 1					; value *= 2 (value is scaled to 10 now)
-		inc		digits						; digits++
+		add		digits, 1					; digits++
 		add		value, temp					; value += temp
 		cmp		value, 1 shl 16				; if (value >= (1 << 16)), then exp overflow
 		jae		.ovrfl						;     go to overflow branch
@@ -383,9 +383,9 @@ digits	equ		r8							; count of digits that number has
 ;---[Digits parsing loop]------------------
 .loop:	cmp		value, max					; if (value >= max)
 		jae		.ovrfl						; then go to overflow branch
-		inc		ptr							; ptr++
+		add		ptr, 1						; ptr++
 		shl		value, 1					; value *= 2
-		inc		digits						; digits++
+		add		digits, 1					; digits++
 		add		value, temp					; value += temp
 @@:		mov		char, [ptr]
 		sub		char, '0'					; temp = ptr[0] - '0'
@@ -434,9 +434,9 @@ digits	equ		r8							; count of digits that number has
 ;---[Digits parsing loop]------------------
 .loop:	cmp		value, max					; if (value >= max)
 		jae		.ovrfl						; then go to overflow branch
-		inc		ptr							; ptr++
+		add		ptr, 1						; ptr++
 		shl		value, 3					; value *= 8
-		inc		digits						; digits++
+		add		digits, 1					; digits++
 		add		value, temp					; value += temp
 @@:		mov		char, [ptr]
 		sub		char, '0'					; temp = ptr[0] - '0'
@@ -488,9 +488,9 @@ digits	equ		r8							; count of digits that number has
 .shift:	add		char, 10					; char += 10
 .loop:	cmp		value, max					; if (value >= max)
 		jae		.ovrfl						; then go to overflow branch
-		inc		ptr							; ptr++
+		add		ptr, 1						; ptr++
 		shl		value, 4					; value *= 16
-		inc		digits						; digits++
+		add		digits, 1					; digits++
 		add		value, temp					; value += temp
 @@:		mov		char, [ptr]					; char = ptr[0]
 		or		char, 0x20					; convert char to lower case
@@ -603,9 +603,9 @@ digits	equ		r8							; count of digits that number has
 .loop:	cmp		value, max					; if (value >= max)
 		jae		.ovrfl						; then go to overflow branch
 		lea		val, [val * 4 + val]		; value *= 5
-		inc		ptr							; ptr++
+		add		ptr, 1						; ptr++
 		shl		value, 1					; value *= 2
-		inc		digits						; digits++
+		add		digits, 1					; digits++
 		add		value, temp					; value += temp
 		jc		.ovrfl						; if overfrol, then go to overflow branch
 @@:		mov		char, [ptr]
@@ -661,9 +661,9 @@ end if
 .loop:	cmp		value, max					; if (value >= max)
 		jae		.ovrfl						; then go to overflow branch
 		lea		val, [val * 4 + val]		; value *= 5
-		inc		ptr							; ptr++
+		add		ptr, 1						; ptr++
 		shl		value, 1					; value *= 2
-		inc		digits						; digits++
+		add		digits, 1					; digits++
 		add		value, temp					; value += temp
 		cmp		value, [lim + sign + bytes]	; if (value >= lim[sign + 1])
 		ja		.ovrfl						; then go to overflow branch

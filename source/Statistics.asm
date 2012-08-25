@@ -196,7 +196,7 @@ step	= 16 / bytes						; step size (in bytes)
 ;---[Scalar loop]--------------------------
 @@:		adds#x	sum, [array]				; sum += array[0]
 		add		array, bytes				; array++
-		dec		size						; size--
+		sub		size, 1						; size--
 		jnz		@b							; do while (size != 0)
 ;------------------------------------------
 .exit:	divs#x	sum, n						; sum = sum / size
@@ -534,7 +534,7 @@ end if
 		muls#x	temp, temp
 		adds#x	sum, temp					; sum += (array[0] - mean)^2
 		add		array, bytes				; array++
-		dec		size						; size--
+		sub		size, 1						; size--
 		jnz		@b							; do while (size != 0)
 ;---[end of scalar loop]-------------------
 .exit:	divs#x	sum, n						; sum = sum / (size - 1)
@@ -625,7 +625,7 @@ end if
 		andp#x	temp, bmask
 		adds#x	sum, temp					; sum += abs (array[0] - value)
 		add		array, bytes				; array++
-		dec		size						; size--
+		sub		size, 1						; size--
 		jnz		@b							; do while (size != 0)
 ;---[end of scalar loop]-------------------
 .exit:	divs#x	sum, n						; sum = sum / (size - 1)
@@ -862,7 +862,7 @@ end if
 		muls#x	temp2, temp1
 		adds#x	sum2, temp2					; sum2 += (array[0] - mean)^3
 		add		array, bytes				; array++
-		dec		size						; size--
+		sub		size, 1						; size--
 		jnz		@b							; do while (size != 0)
 ;---[end of scalar loop]-------------------
 .exit:	sqrts#x	temp1, sum1					; temp1 = sqrt (sum1)
@@ -962,7 +962,7 @@ end if
 		muls#x	temp2, temp2
 		adds#x	sum2, temp2					; sum2 += (array[0] - mean)^4
 		add		array, bytes				; array++
-		dec		size						; size--
+		sub		size, 1						; size--
 		jnz		@b							; do while (size != 0)
 ;---[end of scalar loop]-------------------
 .exit:	divs#x	sum2, sum1
@@ -1043,7 +1043,7 @@ end if
 		adds#x	sum, temp1					; sum += temp1 * temp2
 		add		array1, bytes				; array1++
 		add		array2, bytes				; array2++
-		dec		size						; size--
+		sub		size, 1						; size--
 		jnz		@b							; do while (size != 0)
 ;---[end of scalar loop]-------------------
 .exit:	divs#x	sum, n						; sum = sum / (size - 1)
@@ -1126,7 +1126,7 @@ end if
 		adds#x	sum2, temp2					; sum2 += (array2[0] - mean2)^2
 		add		array1, bytes				; array1++
 		add		array2, bytes				; array1++
-		dec		size						; size--
+		sub		size, 1						; size--
 		jnz		@b							; do while (size != 0)
 ;---[end of scalar loop]-------------------
 .exit:	sqrts#x	sum1, sum1
