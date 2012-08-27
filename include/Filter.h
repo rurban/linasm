@@ -33,6 +33,12 @@ enum window_t
 	WIN_BLACKMAN_NUTTALL				// Blackman–Nuttall window
 };
 
+# ifdef	__cplusplus
+/*
+################################################################################
+#       C++ prototypes                                                         #
+################################################################################
+*/
 class Filter
 {
 public:
@@ -67,6 +73,43 @@ static bool Diff (flt64_t filter[], size_t size, flt64_t lowfreq, flt64_t highfr
 static bool Response (flt32_t response[], const flt32_t data[], size_t dsize, const flt32_t filter[], size_t fsize);
 static bool Response (flt64_t response[], const flt64_t data[], size_t dsize, const flt64_t filter[], size_t fsize);
 };
+# else
+/*
+################################################################################
+#       C prototypes                                                           #
+################################################################################
+*/
+//****************************************************************************//
+//      Band-pass filter                                                      //
+//****************************************************************************//
+bool Filter_BandPass_flt32 (flt32_t filter[], size_t size, flt32_t lowfreq, flt32_t highfreq, enum window_t window);
+bool Filter_BandPass_flt64 (flt64_t filter[], size_t size, flt64_t lowfreq, flt64_t highfreq, enum window_t window);
+
+//****************************************************************************//
+//      Band-stop filter                                                      //
+//****************************************************************************//
+bool Filter_BandStop_flt32 (flt32_t filter[], size_t size, flt32_t lowfreq, flt32_t highfreq, enum window_t window);
+bool Filter_BandStop_flt64 (flt64_t filter[], size_t size, flt64_t lowfreq, flt64_t highfreq, enum window_t window);
+
+//****************************************************************************//
+//      Hilbert filter                                                        //
+//****************************************************************************//
+bool Filter_Hilbert_flt32 (flt32_t filter[], size_t size, flt32_t lowfreq, flt32_t highfreq, enum window_t window);
+bool Filter_Hilbert_flt64 (flt64_t filter[], size_t size, flt64_t lowfreq, flt64_t highfreq, enum window_t window);
+
+//****************************************************************************//
+//      Differential filter                                                   //
+//****************************************************************************//
+bool Filter_Diff_flt32 (flt32_t filter[], size_t size, flt32_t lowfreq, flt32_t highfreq, enum window_t window);
+bool Filter_Diff_flt64 (flt64_t filter[], size_t size, flt64_t lowfreq, flt64_t highfreq, enum window_t window);
+
+//****************************************************************************//
+//      Filter response                                                       //
+//****************************************************************************//
+bool Filter_Response_flt32 (flt32_t response[], const flt32_t data[], size_t dsize, const flt32_t filter[], size_t fsize);
+bool Filter_Response_flt64 (flt64_t response[], const flt64_t data[], size_t dsize, const flt64_t filter[], size_t fsize);
+
+# endif
 /*
 ################################################################################
 #                                 END OF FILE                                  #

@@ -29,6 +29,9 @@ extrn	'_ZN8Sequence4FindEPKjmPK3BMH'	as	BMH_Find32
 ;******************************************************************************;
 ;       String length                                                          ;
 ;******************************************************************************;
+public	Len_char8			as	'String_Len_char8'
+public	Len_char16			as	'String_Len_char16'
+public	Len_char32			as	'String_Len_char32'
 public	Len_char8			as	'_ZN6String3LenEPKc'
 public	Len_char16			as	'_ZN6String3LenEPKs'
 public	Len_char32			as	'_ZN6String3LenEPKi'
@@ -38,11 +41,17 @@ public	Len_char32			as	'_ZN6String3LenEPKi'
 ;******************************************************************************;
 
 ; Copying of string to string
+public	Copy1_char8			as	'String_Copy_char8'
+public	Copy1_char16		as	'String_Copy_char16'
+public	Copy1_char32		as	'String_Copy_char32'
 public	Copy1_char8			as	'_ZN6String4CopyEPcmPKc'
 public	Copy1_char16		as	'_ZN6String4CopyEPsmPKs'
 public	Copy1_char32		as	'_ZN6String4CopyEPimPKi'
 
 ; Copying of characters sequence to string
+public	Copy2_char8			as	'String_CopyN_char8'
+public	Copy2_char16		as	'String_CopyN_char16'
+public	Copy2_char32		as	'String_CopyN_char32'
 public	Copy2_char8			as	'_ZN6String4CopyEPcmPKcm'
 public	Copy2_char16		as	'_ZN6String4CopyEPsmPKsm'
 public	Copy2_char32		as	'_ZN6String4CopyEPimPKim'
@@ -52,11 +61,17 @@ public	Copy2_char32		as	'_ZN6String4CopyEPimPKim'
 ;******************************************************************************;
 
 ; Checking if strings are equal
+public	Equal1_char8		as	'String_IsEqual_char8'
+public	Equal1_char16		as	'String_IsEqual_char16'
+public	Equal1_char32		as	'String_IsEqual_char32'
 public	Equal1_char8		as	'_ZN6String7IsEqualEPKcS1_'
 public	Equal1_char16		as	'_ZN6String7IsEqualEPKsS1_'
 public	Equal1_char32		as	'_ZN6String7IsEqualEPKiS1_'
 
 ; Checking if string is equal to characters sequence
+public	Equal2_char8		as	'String_IsEqualN_char8'
+public	Equal2_char16		as	'String_IsEqualN_char16'
+public	Equal2_char32		as	'String_IsEqualN_char32'
 public	Equal2_char8		as	'_ZN6String7IsEqualEPKcS1_m'
 public	Equal2_char16		as	'_ZN6String7IsEqualEPKsS1_m'
 public	Equal2_char32		as	'_ZN6String7IsEqualEPKiS1_m'
@@ -66,16 +81,25 @@ public	Equal2_char32		as	'_ZN6String7IsEqualEPKiS1_m'
 ;******************************************************************************;
 
 ; Searching for single symbol
+public	Find1_char8			as	'String_FindSymbol_char8'
+public	Find1_char16		as	'String_FindSymbol_char16'
+public	Find1_char32		as	'String_FindSymbol_char32'
 public	Find1_char8			as	'_ZN6String10FindSymbolEPKcc'
 public	Find1_char16		as	'_ZN6String10FindSymbolEPKss'
 public	Find1_char32		as	'_ZN6String10FindSymbolEPKii'
 
 ; Searching for symbols set
-public	Find2_char8			as	'_ZN6String10FindSymbolEPKcS1_'
-public	Find2_char16		as	'_ZN6String10FindSymbolEPKsS1_'
-public	Find2_char32		as	'_ZN6String10FindSymbolEPKiS1_'
+public	Find2_char8			as	'String_FindSymbols_char8'
+public	Find2_char16		as	'String_FindSymbols_char16'
+public	Find2_char32		as	'String_FindSymbols_char32'
+public	Find2_char8			as	'_ZN6String11FindSymbolsEPKcS1_'
+public	Find2_char16		as	'_ZN6String11FindSymbolsEPKsS1_'
+public	Find2_char32		as	'_ZN6String11FindSymbolsEPKiS1_'
 
 ; Searching for string pattern
+public	FindStr_char8		as	'String_FindString_char8'
+public	FindStr_char16		as	'String_FindString_char16'
+public	FindStr_char32		as	'String_FindString_char32'
 public	FindStr_char8		as	'_ZN6String10FindStringEPKcS1_'
 public	FindStr_char16		as	'_ZN6String10FindStringEPKsS1_'
 public	FindStr_char32		as	'_ZN6String10FindStringEPKiS1_'

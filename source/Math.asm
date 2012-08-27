@@ -17,11 +17,17 @@ format	ELF64
 ;******************************************************************************;
 
 ; Unsigned integer types
+public	ByteSwap16		as	'Math_Swap_uint16'
+public	ByteSwap32		as	'Math_Swap_uint32'
+public	ByteSwap64		as	'Math_Swap_uint64'
 public	ByteSwap16		as	'_ZN4Math8ByteSwapEt'
 public	ByteSwap32		as	'_ZN4Math8ByteSwapEj'
 public	ByteSwap64		as	'_ZN4Math8ByteSwapEy'
 
 ; Signed integer types
+public	ByteSwap16		as	'Math_Swap_sint16'
+public	ByteSwap32		as	'Math_Swap_sint32'
+public	ByteSwap64		as	'Math_Swap_sint64'
 public	ByteSwap16		as	'_ZN4Math8ByteSwapEs'
 public	ByteSwap32		as	'_ZN4Math8ByteSwapEi'
 public	ByteSwap64		as	'_ZN4Math8ByteSwapEx'
@@ -31,12 +37,18 @@ public	ByteSwap64		as	'_ZN4Math8ByteSwapEx'
 ;******************************************************************************;
 
 ; Signed integer types
+public	Abs_sint8		as	'Math_Abs_sint8'
+public	Abs_sint16		as	'Math_Abs_sint16'
+public	Abs_sint32		as	'Math_Abs_sint32'
+public	Abs_sint64		as	'Math_Abs_sint64'
 public	Abs_sint8		as	'_ZN4Math3AbsEa'
 public	Abs_sint16		as	'_ZN4Math3AbsEs'
 public	Abs_sint32		as	'_ZN4Math3AbsEi'
 public	Abs_sint64		as	'_ZN4Math3AbsEx'
 
 ; Floating-point types
+public	Abs_flt32		as	'Math_Abs_flt32'
+public	Abs_flt64		as	'Math_Abs_flt64'
 public	Abs_flt32		as	'_ZN4Math3AbsEf'
 public	Abs_flt64		as	'_ZN4Math3AbsEd'
 
@@ -45,12 +57,18 @@ public	Abs_flt64		as	'_ZN4Math3AbsEd'
 ;******************************************************************************;
 
 ; Signed integer types
+public	NegAbs_sint8	as	'Math_NegAbs_sint8'
+public	NegAbs_sint16	as	'Math_NegAbs_sint16'
+public	NegAbs_sint32	as	'Math_NegAbs_sint32'
+public	NegAbs_sint64	as	'Math_NegAbs_sint64'
 public	NegAbs_sint8	as	'_ZN4Math6NegAbsEa'
 public	NegAbs_sint16	as	'_ZN4Math6NegAbsEs'
 public	NegAbs_sint32	as	'_ZN4Math6NegAbsEi'
 public	NegAbs_sint64	as	'_ZN4Math6NegAbsEx'
 
 ; Floating-point types
+public	NegAbs_flt32	as	'Math_NegAbs_flt32'
+public	NegAbs_flt64	as	'Math_NegAbs_flt64'
 public	NegAbs_flt32	as	'_ZN4Math6NegAbsEf'
 public	NegAbs_flt64	as	'_ZN4Math6NegAbsEd'
 
@@ -59,12 +77,18 @@ public	NegAbs_flt64	as	'_ZN4Math6NegAbsEd'
 ;******************************************************************************;
 
 ; Signed integer types
+public	Sign_sint8		as	'Math_Sign_sint8'
+public	Sign_sint16		as	'Math_Sign_sint16'
+public	Sign_sint32		as	'Math_Sign_sint32'
+public	Sign_sint64		as	'Math_Sign_sint64'
 public	Sign_sint8		as	'_ZN4Math4SignEa'
 public	Sign_sint16		as	'_ZN4Math4SignEs'
 public	Sign_sint32		as	'_ZN4Math4SignEi'
 public	Sign_sint64		as	'_ZN4Math4SignEx'
 
 ; Floating-point types
+public	Sign_flt32		as	'Math_Sign_flt32'
+public	Sign_flt64		as	'Math_Sign_flt64'
 public	Sign_flt32		as	'_ZN4Math4SignEf'
 public	Sign_flt64		as	'_ZN4Math4SignEd'
 
@@ -73,18 +97,26 @@ public	Sign_flt64		as	'_ZN4Math4SignEd'
 ;******************************************************************************;
 
 ; Unsigned integer types
+public	Sqrt_uint8		as	'Math_Sqrt_uint8'
+public	Sqrt_uint16		as	'Math_Sqrt_uint16'
+public	Sqrt_uint32		as	'Math_Sqrt_uint32'
+public	Sqrt_uint64		as	'Math_Sqrt_uint64'
 public	Sqrt_uint8		as	'_ZN4Math4SqrtEh'
 public	Sqrt_uint16		as	'_ZN4Math4SqrtEt'
 public	Sqrt_uint32		as	'_ZN4Math4SqrtEj'
 public	Sqrt_uint64		as	'_ZN4Math4SqrtEy'
 
 ; Floating-point types
+public	Sqrt_flt32		as	'Math_Sqrt_flt32'
+public	Sqrt_flt64		as	'Math_Sqrt_flt64'
 public	Sqrt_flt32		as	'_ZN4Math4SqrtEf'
 public	Sqrt_flt64		as	'_ZN4Math4SqrtEd'
 
 ;******************************************************************************;
 ;       Hypotenuse                                                             ;
 ;******************************************************************************;
+public	Hypot_flt32		as	'Math_Hypot_flt32'
+public	Hypot_flt32		as	'Math_Hypot_flt64'
 public	Hypot_flt32		as	'_ZN4Math5HypotEff'
 public	Hypot_flt64		as	'_ZN4Math5HypotEdd'
 
@@ -93,22 +125,33 @@ public	Hypot_flt64		as	'_ZN4Math5HypotEdd'
 ;******************************************************************************;
 
 ; Unsigned integer types
+public	Min_uint8		as	'Math_Min_uint8'
+public	Min_uint16		as	'Math_Min_uint16'
+public	Min_uint32		as	'Math_Min_uint32'
+public	Min_uint64		as	'Math_Min_uint64'
 public	Min_uint8		as	'_ZN4Math3MinEhh'
 public	Min_uint16		as	'_ZN4Math3MinEtt'
 public	Min_uint32		as	'_ZN4Math3MinEjj'
 public	Min_uint64		as	'_ZN4Math3MinEyy'
 
 ; Signed integer types
+public	Min_sint8		as	'Math_Min_sint8'
+public	Min_sint16		as	'Math_Min_sint16'
+public	Min_sint32		as	'Math_Min_sint32'
+public	Min_sint64		as	'Math_Min_sint64'
 public	Min_sint8		as	'_ZN4Math3MinEaa'
 public	Min_sint16		as	'_ZN4Math3MinEss'
 public	Min_sint32		as	'_ZN4Math3MinEii'
 public	Min_sint64		as	'_ZN4Math3MinExx'
 
 ; Floating-point types
+public	Min_flt32		as	'Math_Min_flt32'
+public	Min_flt64		as	'Math_Min_flt64'
 public	Min_flt32		as	'_ZN4Math3MinEff'
 public	Min_flt64		as	'_ZN4Math3MinEdd'
 
 ; Other types
+public	Min_uint64		as	'Math_Min_size'
 public	Min_uint64		as	'_ZN4Math3MinEmm'
 
 ;******************************************************************************;
@@ -116,22 +159,33 @@ public	Min_uint64		as	'_ZN4Math3MinEmm'
 ;******************************************************************************;
 
 ; Unsigned integer types
+public	Max_uint8		as	'Math_Max_uint8'
+public	Max_uint16		as	'Math_Max_uint16'
+public	Max_uint32		as	'Math_Max_uint32'
+public	Max_uint64		as	'Math_Max_uint64'
 public	Max_uint8		as	'_ZN4Math3MaxEhh'
 public	Max_uint16		as	'_ZN4Math3MaxEtt'
 public	Max_uint32		as	'_ZN4Math3MaxEjj'
 public	Max_uint64		as	'_ZN4Math3MaxEyy'
 
 ; Signed integer types
+public	Max_sint8		as	'Math_Max_sint8'
+public	Max_sint16		as	'Math_Max_sint16'
+public	Max_sint32		as	'Math_Max_sint32'
+public	Max_sint64		as	'Math_Max_sint64'
 public	Max_sint8		as	'_ZN4Math3MaxEaa'
 public	Max_sint16		as	'_ZN4Math3MaxEss'
 public	Max_sint32		as	'_ZN4Math3MaxEii'
 public	Max_sint64		as	'_ZN4Math3MaxExx'
 
 ; Floating-point types
+public	Max_flt32		as	'Math_Max_flt32'
+public	Max_flt64		as	'Math_Max_flt64'
 public	Max_flt32		as	'_ZN4Math3MaxEff'
 public	Max_flt64		as	'_ZN4Math3MaxEdd'
 
 ; Other types
+public	Max_uint64		as	'Math_Max_size'
 public	Max_uint64		as	'_ZN4Math3MaxEmm'
 
 ;******************************************************************************;
@@ -139,16 +193,24 @@ public	Max_uint64		as	'_ZN4Math3MaxEmm'
 ;******************************************************************************;
 
 ; Power of 2
+public	Exp2_int		as	'Math_Exp2_uint64'
+public	Exp2_flt32		as	'Math_Exp2i_flt32'
+public	Exp2_flt64		as	'Math_Exp2i_flt64'
 public	Exp2_int		as	'_ZN4Math4Exp2Eh'
 public	Exp2_flt32		as	'_ZN4Math4Exp2Ea'
 public	Exp2_flt64		as	'_ZN4Math4Exp2Es'
 
 ; Power of 10
+public	Exp10_int		as	'Math_Exp10_uint64'
+public	Exp10_flt32		as	'Math_Exp10i_flt32'
+public	Exp10_flt64		as	'Math_Exp10i_flt64'
 public	Exp10_int		as	'_ZN4Math5Exp10Eh'
 public	Exp10_flt32		as	'_ZN4Math5Exp10Ea'
 public	Exp10_flt64		as	'_ZN4Math5Exp10Es'
 
 ; Power of E
+public	ExpE_flt32		as	'Math_Expi_flt32'
+public	ExpE_flt32		as	'Math_Expi_flt64'
 public	ExpE_flt32		as	'_ZN4Math3ExpEa'
 public	ExpE_flt64		as	'_ZN4Math3ExpEs'
 
@@ -157,14 +219,20 @@ public	ExpE_flt64		as	'_ZN4Math3ExpEs'
 ;******************************************************************************;
 
 ; Scale by power of 2
+public	Scale2_flt32	as	'Math_Scale2_flt32'
+public	Scale2_flt32	as	'Math_Scale2_flt64'
 public	Scale2_flt32	as	'_ZN4Math6Scale2Efs'
 public	Scale2_flt64	as	'_ZN4Math6Scale2Eds'
 
 ; Scale by power of 10
+public	Scale10_flt32	as	'Math_Scale10_flt32'
+public	Scale10_flt32	as	'Math_Scale10_flt64'
 public	Scale10_flt32	as	'_ZN4Math7Scale10Efs'
 public	Scale10_flt64	as	'_ZN4Math7Scale10Eds'
 
 ; Scale by power of E
+public	ScaleE_flt32	as	'Math_Scale_flt32'
+public	ScaleE_flt32	as	'Math_Scale_flt64'
 public	ScaleE_flt32	as	'_ZN4Math5ScaleEfs'
 public	ScaleE_flt64	as	'_ZN4Math5ScaleEds'
 
@@ -173,18 +241,28 @@ public	ScaleE_flt64	as	'_ZN4Math5ScaleEds'
 ;******************************************************************************;
 
 ; Unsigned integer types
+public	Power_uint8		as	'Math_Power_uint8'
+public	Power_uint16	as	'Math_Power_uint16'
+public	Power_uint32	as	'Math_Power_uint32'
+public	Power_uint64	as	'Math_Power_uint64'
 public	Power_uint8		as	'_ZN4Math5PowerEhh'
 public	Power_uint16	as	'_ZN4Math5PowerEth'
 public	Power_uint32	as	'_ZN4Math5PowerEjh'
 public	Power_uint64	as	'_ZN4Math5PowerEyh'
 
 ; Signed integer types
+public	Power_sint8		as	'Math_Power_sint8'
+public	Power_sint16	as	'Math_Power_sint16'
+public	Power_sint32	as	'Math_Power_sint32'
+public	Power_sint64	as	'Math_Power_sint64'
 public	Power_sint8		as	'_ZN4Math5PowerEah'
 public	Power_sint16	as	'_ZN4Math5PowerEsh'
 public	Power_sint32	as	'_ZN4Math5PowerEih'
 public	Power_sint64	as	'_ZN4Math5PowerExh'
 
 ; Floating-point types
+public	Power_flt32		as	'Math_Poweri_flt32'
+public	Power_flt64		as	'Math_Poweri_flt64'
 public	Power_flt32		as	'_ZN4Math5PowerEfa'
 public	Power_flt64		as	'_ZN4Math5PowerEds'
 
@@ -193,22 +271,32 @@ public	Power_flt64		as	'_ZN4Math5PowerEds'
 ;******************************************************************************;
 
 ; Check for normal value
+public	IsNorm_flt32	as	'Math_IsNormal_flt32'
+public	IsNorm_flt64	as	'Math_IsNormal_flt64'
 public	IsNorm_flt32	as	'_ZN4Math8IsNormalEf'
 public	IsNorm_flt64	as	'_ZN4Math8IsNormalEd'
 
 ; Check for subnormal value
+public	IsSub_flt32		as	'Math_IsSubnormal_flt32'
+public	IsSub_flt64		as	'Math_IsSubnormal_flt64'
 public	IsSub_flt32		as	'_ZN4Math11IsSubnormalEf'
 public	IsSub_flt64		as	'_ZN4Math11IsSubnormalEd'
 
 ; Check for finite value
+public	IsFin_flt32		as	'Math_IsFinite_flt32'
+public	IsFin_flt64		as	'Math_IsFinite_flt64'
 public	IsFin_flt32		as	'_ZN4Math8IsFiniteEf'
 public	IsFin_flt64		as	'_ZN4Math8IsFiniteEd'
 
 ; Check for infinite value
+public	IsFin_flt32		as	'Math_IsInfinite_flt32'
+public	IsFin_flt64		as	'Math_IsInfinite_flt64'
 public	IsInf_flt32		as	'_ZN4Math10IsInfiniteEf'
 public	IsInf_flt64		as	'_ZN4Math10IsInfiniteEd'
 
 ; Check for NaN value
+public	IsNaN_flt32		as	'Math_IsNaN_flt32'
+public	IsNaN_flt64		as	'Math_IsNaN_flt64'
 public	IsNaN_flt32		as	'_ZN4Math5IsNaNEf'
 public	IsNaN_flt64		as	'_ZN4Math5IsNaNEd'
 

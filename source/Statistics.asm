@@ -35,6 +35,8 @@ extrn	'_ZN5Array3MaxEPKdm'	as	Max_flt64
 ;==============================================================================;
 ;       Mean                                                                   ;
 ;==============================================================================;
+public	Mean_flt32					as	'Statistics_Mean_flt32'
+public	Mean_flt64					as	'Statistics_Mean_flt64'
 public	Mean_flt32					as	'_ZN10Statistics4MeanEPKfm'
 public	Mean_flt64					as	'_ZN10Statistics4MeanEPKdm'
 
@@ -43,39 +45,56 @@ public	Mean_flt64					as	'_ZN10Statistics4MeanEPKdm'
 ;==============================================================================;
 
 ; Unsigned integer types
+public	Median_uint8				as	'Statistics_Median_uint8'
+public	Median_uint16				as	'Statistics_Median_uint16'
+public	Median_uint32				as	'Statistics_Median_uint32'
+public	Median_uint64				as	'Statistics_Median_uint64'
 public	Median_uint8				as	'_ZN10Statistics6MedianEPhm'
 public	Median_uint16				as	'_ZN10Statistics6MedianEPtm'
 public	Median_uint32				as	'_ZN10Statistics6MedianEPjm'
 public	Median_uint64				as	'_ZN10Statistics6MedianEPym'
 
 ; Signed integer types
+public	Median_sint8				as	'Statistics_Median_sint8'
+public	Median_sint16				as	'Statistics_Median_sint16'
+public	Median_sint32				as	'Statistics_Median_sint32'
+public	Median_sint64				as	'Statistics_Median_sint64'
 public	Median_sint8				as	'_ZN10Statistics6MedianEPam'
 public	Median_sint16				as	'_ZN10Statistics6MedianEPsm'
 public	Median_sint32				as	'_ZN10Statistics6MedianEPim'
 public	Median_sint64				as	'_ZN10Statistics6MedianEPxm'
 
 ; Floating-point types
+public	Median_flt32				as	'Statistics_Median_flt32'
+public	Median_flt64				as	'Statistics_Median_flt64'
 public	Median_flt32				as	'_ZN10Statistics6MedianEPfm'
 public	Median_flt64				as	'_ZN10Statistics6MedianEPdm'
 
 ; Other types
+public	Median_uint64				as	'Statistics_Median_size'
 public	Median_uint64				as	'_ZN10Statistics6MedianEPmm'
 
 ;==============================================================================;
 ;       Lower quartile                                                         ;
 ;==============================================================================;
+public	LowerQuartile_flt32			as	'Statistics_LowerQuartile_flt32'
+public	LowerQuartile_flt64			as	'Statistics_LowerQuartile_flt64'
 public	LowerQuartile_flt32			as	'_ZN10Statistics13LowerQuartileEPfm'
 public	LowerQuartile_flt64			as	'_ZN10Statistics13LowerQuartileEPdm'
 
 ;==============================================================================;
 ;       Upper quartile                                                         ;
 ;==============================================================================;
+public	UpperQuartile_flt32			as	'Statistics_UpperQuartile_flt32'
+public	UpperQuartile_flt64			as	'Statistics_UpperQuartile_flt64'
 public	UpperQuartile_flt32			as	'_ZN10Statistics13UpperQuartileEPfm'
 public	UpperQuartile_flt64			as	'_ZN10Statistics13UpperQuartileEPdm'
 
 ;==============================================================================;
 ;       Mid-range                                                              ;
 ;==============================================================================;
+public	Midrange_flt32				as	'Statistics_Midrange_flt32'
+public	Midrange_flt64				as	'Statistics_Midrange_flt64'
 public	Midrange_flt32				as	'_ZN10Statistics8MidrangeEPKfm'
 public	Midrange_flt64				as	'_ZN10Statistics8MidrangeEPKdm'
 
@@ -84,22 +103,32 @@ public	Midrange_flt64				as	'_ZN10Statistics8MidrangeEPKdm'
 ;******************************************************************************;
 
 ; Variance
+public	Variance_flt32				as	'Statistics_Variance_flt32'
+public	Variance_flt64				as	'Statistics_Variance_flt64'
 public	Variance_flt32				as	'_ZN10Statistics8VarianceEPKfmf'
 public	Variance_flt64				as	'_ZN10Statistics8VarianceEPKdmd'
 
 ; Standard deviation
+public	StandardDeviation_flt32		as	'Statistics_StandardDeviation_flt32'
+public	StandardDeviation_flt64		as	'Statistics_StandardDeviation_flt64'
 public	StandardDeviation_flt32		as	'_ZN10Statistics17StandardDeviationEPKfmf'
 public	StandardDeviation_flt64		as	'_ZN10Statistics17StandardDeviationEPKdmd'
 
 ; Absolute deviation
+public	AbsoluteDeviation_flt32		as	'Statistics_AbsoluteDeviation_flt32'
+public	AbsoluteDeviation_flt64		as	'Statistics_AbsoluteDeviation_flt64'
 public	AbsoluteDeviation_flt32		as	'_ZN10Statistics17AbsoluteDeviationEPKfmf'
 public	AbsoluteDeviation_flt64		as	'_ZN10Statistics17AbsoluteDeviationEPKdmd'
 
 ; Interquartile range
+public	InterquartileRange_flt32	as	'Statistics_InterquartileRange_flt32'
+public	InterquartileRange_flt64	as	'Statistics_InterquartileRange_flt64'
 public	InterquartileRange_flt32	as	'_ZN10Statistics18InterquartileRangeEPfm'
 public	InterquartileRange_flt64	as	'_ZN10Statistics18InterquartileRangeEPdm'
 
 ; Range
+public	Range_flt32					as	'Statistics_Range_flt32'
+public	Range_flt64					as	'Statistics_Range_flt64'
 public	Range_flt32					as	'_ZN10Statistics5RangeEPKfm'
 public	Range_flt64					as	'_ZN10Statistics5RangeEPKdm'
 
@@ -108,10 +137,14 @@ public	Range_flt64					as	'_ZN10Statistics5RangeEPKdm'
 ;******************************************************************************;
 
 ; Skewness
+public	Skewness_flt32				as	'Statistics_Skewness_flt32'
+public	Skewness_flt64				as	'Statistics_Skewness_flt64'
 public	Skewness_flt32				as	'_ZN10Statistics8SkewnessEPKfmf'
 public	Skewness_flt64				as	'_ZN10Statistics8SkewnessEPKdmd'
 
 ; Kurtosis
+public	Kurtosis_flt32				as	'Statistics_Kurtosis_flt32'
+public	Kurtosis_flt64				as	'Statistics_Kurtosis_flt64'
 public	Kurtosis_flt32				as	'_ZN10Statistics8KurtosisEPKfmf'
 public	Kurtosis_flt64				as	'_ZN10Statistics8KurtosisEPKdmd'
 
@@ -120,10 +153,14 @@ public	Kurtosis_flt64				as	'_ZN10Statistics8KurtosisEPKdmd'
 ;******************************************************************************;
 
 ; Covariance
+public	Covariance_flt32			as	'Statistics_Covariance_flt32'
+public	Covariance_flt64			as	'Statistics_Covariance_flt64'
 public	Covariance_flt32			as	'_ZN10Statistics10CovarianceEPKfS1_mff'
 public	Covariance_flt64			as	'_ZN10Statistics10CovarianceEPKdS1_mdd'
 
 ; Correlation
+public	Correlation_flt32			as	'Statistics_Correlation_flt32'
+public	Correlation_flt64			as	'Statistics_Correlation_flt64'
 public	Correlation_flt32			as	'_ZN10Statistics11CorrelationEPKfS1_mff'
 public	Correlation_flt64			as	'_ZN10Statistics11CorrelationEPKdS1_mdd'
 

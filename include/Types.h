@@ -47,6 +47,11 @@
 # define	error_t			uint32_t
 # define	enum_t			uint32_t
 
+// Boolean type
+# ifndef	__cplusplus
+# define	bool			_Bool
+# endif
+
 //****************************************************************************//
 //      Vector types                                                          //
 //****************************************************************************//

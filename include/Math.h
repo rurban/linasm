@@ -36,6 +36,12 @@
 # define	M_INF		(1.0 / 0.0)								// Infinity
 # define	M_NAN		(0.0 / 0.0)								// Not a Number
 
+# ifdef	__cplusplus
+/*
+################################################################################
+#       C++ prototypes                                                         #
+################################################################################
+*/
 class Math
 {
 public:
@@ -240,6 +246,213 @@ static bool IsInfinite (flt64_t value);
 static bool IsNaN (flt32_t value);
 static bool IsNaN (flt64_t value);
 };
+# else
+/*
+################################################################################
+#       C prototypes                                                           #
+################################################################################
+*/
+//****************************************************************************//
+//      Byte swap                                                             //
+//****************************************************************************//
+
+// Unsigned integer types
+uint16_t Math_ByteSwap_uint16 (uint16_t value);
+uint32_t Math_ByteSwap_uint32 (uint32_t value);
+uint64_t Math_ByteSwap_uint64 (uint64_t value);
+
+// Signed integer types
+sint16_t Math_ByteSwap_sint16 (sint16_t value);
+sint32_t Math_ByteSwap_sint32 (sint32_t value);
+sint64_t Math_ByteSwap_sint64 (sint64_t value);
+
+//****************************************************************************//
+//      Absolute value                                                        //
+//****************************************************************************//
+
+// Signed integer types
+uint8_t Math_Abs_sint8 (sint8_t value);
+uint16_t Math_Abs_sint16 (sint16_t value);
+uint32_t Math_Abs_sint32 (sint32_t value);
+uint64_t Math_Abs_sint64 (sint64_t value);
+
+// Floating-point types
+flt32_t Math_Abs_flt32 (flt32_t value);
+flt64_t Math_Abs_flt64 (flt64_t value);
+
+//****************************************************************************//
+//      Negative absolute value                                               //
+//****************************************************************************//
+
+// Signed integer types
+uint8_t Math_NegAbs_sint8 (sint8_t value);
+uint16_t Math_NegAbs_sint16 (sint16_t value);
+uint32_t Math_NegAbs_sint32 (sint32_t value);
+uint64_t Math_NegAbs_sint64 (sint64_t value);
+
+// Floating-point types
+flt32_t Math_NegAbs_flt32 (flt32_t value);
+flt64_t Math_NegAbs_flt64 (flt64_t value);
+
+//****************************************************************************//
+//      Number sign                                                           //
+//****************************************************************************//
+
+// Signed integer types
+sint8_t Math_Sign_sint8 (sint8_t value);
+sint8_t Math_Sign_sint16 (sint16_t value);
+sint8_t Math_Sign_sint32 (sint32_t value);
+sint8_t Math_Sign_sint64 (sint64_t value);
+
+// Floating-point types
+flt32_t Math_Sign_flt32 (flt32_t value);
+flt64_t Math_Sign_flt64 (flt64_t value);
+
+//****************************************************************************//
+//      Square root                                                           //
+//****************************************************************************//
+
+// Unsigned integer types
+uint8_t Math_Sqrt_uint8 (uint8_t value);
+uint16_t Math_Sqrt_uint16 (uint16_t value);
+uint32_t Math_Sqrt_uint32 (uint32_t value);
+uint64_t Math_Sqrt_uint64 (uint64_t value);
+
+// Floating-point types
+flt32_t Math_Sqrt_flt32 (flt32_t value);
+flt64_t Math_Sqrt_flt64 (flt64_t value);
+
+//****************************************************************************//
+//      Hypotenuse                                                            //
+//****************************************************************************//
+flt32_t Math_Hypot_flt32 (flt32_t x, flt32_t y);
+flt64_t Math_Hypot_flt64 (flt64_t x, flt64_t y);
+
+//****************************************************************************//
+//      Minimum value                                                         //
+//****************************************************************************//
+
+// Unsigned integer types
+uint8_t Math_Min_uint8 (uint8_t x, uint8_t y);
+uint16_t Math_Min_uint16 (uint16_t x, uint16_t y);
+uint32_t Math_Min_uint32 (uint32_t x, uint32_t y);
+uint64_t Math_Min_uint64 (uint64_t x, uint64_t y);
+
+// Signed integer types
+sint8_t Math_Min_sint8 (sint8_t x, sint8_t y);
+sint16_t Math_Min_sint16 (sint16_t x, sint16_t y);
+sint32_t Math_Min_sint32 (sint32_t x, sint32_t y);
+sint64_t Math_Min_sint64 (sint64_t x, sint64_t y);
+
+// Floating-point types
+flt32_t Math_Min_flt32 (flt32_t x, flt32_t y);
+flt64_t Math_Min_flt64 (flt64_t x, flt64_t y);
+
+// Other types
+size_t Math_Min_size (size_t x, size_t y);
+
+//****************************************************************************//
+//      Maximum value                                                         //
+//****************************************************************************//
+
+// Unsigned integer types
+uint8_t Math_Max_uint8 (uint8_t x, uint8_t y);
+uint16_t Math_Max_uint16 (uint16_t x, uint16_t y);
+uint32_t Math_Max_uint32 (uint32_t x, uint32_t y);
+uint64_t Math_Max_uint64 (uint64_t x, uint64_t y);
+
+// Signed integer types
+sint8_t Math_Max_sint8 (sint8_t x, sint8_t y);
+sint16_t Math_Max_sint16 (sint16_t x, sint16_t y);
+sint32_t Math_Max_sint32 (sint32_t x, sint32_t y);
+sint64_t Math_Max_sint64 (sint64_t x, sint64_t y);
+
+// Floating-point types
+flt32_t Math_Max_flt32 (flt32_t x, flt32_t y);
+flt64_t Math_Max_flt64 (flt64_t x, flt64_t y);
+
+// Other types
+size_t Math_Max_size (size_t x, size_t y);
+
+//****************************************************************************//
+//      Exponentiation functions                                              //
+//****************************************************************************//
+
+// Power of 2
+uint64_t Math_Exp2_uint64 (uint8_t exp);
+flt32_t Math_Exp2i_flt32 (sint8_t exp);
+flt64_t Math_Exp2i_flt64 (sint16_t exp);
+
+// Power of 10
+uint64_t Math_Exp10_uint64 (uint8_t exp);
+flt32_t Math_Exp10i_flt32 (sint8_t exp);
+flt64_t Math_Exp10i_flt64 (sint16_t exp);
+
+// Power of E
+flt32_t Math_Expi_flt32 (sint8_t exp);
+flt64_t Math_Expi_flt64 (sint16_t exp);
+
+//****************************************************************************//
+//      Scale functions                                                       //
+//****************************************************************************//
+
+// Scale by power of 2
+flt32_t Math_Scale2_flt32 (flt32_t value, sint8_t exp);
+flt64_t Math_Scale2_flt64 (flt64_t value, sint16_t exp);
+
+// Scale by power of 10
+flt32_t Math_Scale10_flt32 (flt32_t value, sint8_t exp);
+flt64_t Math_Scale10_flt64 (flt64_t value, sint16_t exp);
+
+// Scale by power of E
+flt32_t Math_Scale_flt32 (flt32_t value, sint8_t exp);
+flt64_t Math_Scale_flt64 (flt64_t value, sint16_t exp);
+
+//****************************************************************************//
+//      Power                                                                 //
+//****************************************************************************//
+
+// Unsigned integer types
+uint8_t Math_Power_uint8 (uint8_t base, uint8_t exp);
+uint16_t Math_Power_uint16 (uint16_t base, uint8_t exp);
+uint32_t Math_Power_uint32 (uint32_t base, uint8_t exp);
+uint64_t Math_Power_uint64 (uint64_t base, uint8_t exp);
+
+// Signed integer types
+sint8_t Math_Power_sint8 (sint8_t base, uint8_t exp);
+sint16_t Math_Power_sint16 (sint16_t base, uint8_t exp);
+sint32_t Math_Power_sint32 (sint32_t base, uint8_t exp);
+sint64_t Math_Power_sint64 (sint64_t base, uint8_t exp);
+
+// Floating-point types
+flt32_t Math_Poweri_flt32 (flt32_t base, sint8_t exp);
+flt64_t Math_Poweri_flt64 (flt64_t base, sint16_t exp);
+
+//****************************************************************************//
+//      Checks                                                                //
+//****************************************************************************//
+
+// Check for normal value
+bool Math_IsNormal_flt32 (flt32_t value);
+bool Math_IsNormal_flt64 (flt64_t value);
+
+// Check for subnormal value
+bool Math_IsSubnormal_flt32 (flt32_t value);
+bool Math_IsSubnormal_flt64 (flt64_t value);
+
+// Check for finite value
+bool Math_IsFinite_flt32 (flt32_t value);
+bool Math_IsFinite_flt64 (flt64_t value);
+
+// Check for infinite value
+bool Math_IsInfinite_flt32 (flt32_t value);
+bool Math_IsInfinite_flt64 (flt64_t value);
+
+// Check for NaN value
+bool Math_IsNaN_flt32 (flt32_t value);
+bool Math_IsNaN_flt64 (flt64_t value);
+
+# endif
 /*
 ################################################################################
 #                                 END OF FILE                                  #

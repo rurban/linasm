@@ -1,7 +1,7 @@
 ################################################################################
 # Encoding: UTF-8                                                  Tab size: 4 #
 #                                                                              #
-#                          LINASM RELEASE 0.96 (BETA)                          #
+#                          LINASM RELEASE 0.97 (BETA)                          #
 #                                                                              #
 # License: LGPLv3+                               Copyleft (Ɔ) 2012, Jack Black #
 ################################################################################
@@ -15,7 +15,7 @@ INTRODUCTION
 	It implements many common and widely used algorithms, mostly developed
 	for acceleration of data analysis and time series processing. Later they
 	were extended with more mathematical and general algorithms that are used
-	inside C++ programs and make them very fast on that platform.
+	inside C and C++ programs and make them very fast on that platform.
 
 	To get more information about this software, please visit the official
 	web site: http://linasm.sourceforge.net
@@ -35,7 +35,7 @@ PACKAGE STRUCTURE
 	The source codes of the libraries are placed into separate directories
 	called "include" and "source".
 
-	The "include" directory holds C++ header files that define functions
+	The "include" directory holds C and C++ header files that define functions
 	prototypes, structures and data types. They should be copied as is into your
 	local include directory such as /usr/include or /usr/local/include.
 	Installation procedure will do it for you automatically, according to the

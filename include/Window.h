@@ -10,6 +10,12 @@
 # pragma	once
 # include	<Types.h>
 
+# ifdef	__cplusplus
+/*
+################################################################################
+#       C++ prototypes                                                         #
+################################################################################
+*/
 class Window
 {
 public:
@@ -38,6 +44,37 @@ static void Blackman (flt64_t window[], size_t size);
 static void BlackmanNuttall (flt32_t window[], size_t size);
 static void BlackmanNuttall (flt64_t window[], size_t size);
 };
+# else
+/*
+################################################################################
+#       C prototypes                                                           #
+################################################################################
+*/
+//****************************************************************************//
+//      High-resolution windows (low-dynamic-range)                           //
+//****************************************************************************//
+
+// Sine window
+void Window_Sine_flt32 (flt32_t window[], size_t size);
+void Window_Sine_flt64 (flt64_t window[], size_t size);
+
+// Hamming window
+void Window_Hamming_flt32 (flt32_t window[], size_t size);
+void Window_Hamming_flt64 (flt64_t window[], size_t size);
+
+// Blackman window
+void Window_Blackman_flt32 (flt32_t window[], size_t size);
+void Window_Blackman_flt64 (flt64_t window[], size_t size);
+
+//****************************************************************************//
+//      Low-resolution windows (high-dynamic-range)                           //
+//****************************************************************************//
+
+// Blackman–Nuttall window
+void Window_BlackmanNuttall_flt32 (flt32_t window[], size_t size);
+void Window_BlackmanNuttall_flt64 (flt64_t window[], size_t size);
+
+# endif
 /*
 ################################################################################
 #                                 END OF FILE                                  #

@@ -13,14 +13,41 @@ include	'Errno.inc'
 ;###############################################################################
 ;#      Export section                                                         #
 ;###############################################################################
+
+; Cleaning time zone data (default constructor)
+public	Time			as	'Time_CleanTimeZone'
 public	Time			as	'_ZN4TimeC1Ev'
+
+; Loading time zone data from tzfile
+public	LoadTimeZone	as	'Time_LoadTimeZone'
 public	LoadTimeZone	as	'_ZN4Time12LoadTimeZoneEPKc'
+
+; Time conversion
+public	ConvertTime		as	'Time_ConvertTime'
 public	ConvertTime		as	'_ZN4Time11ConvertTimeEhhh'
+
+; Date conversion
+public	ConvertDate		as	'Time_ConvertDate'
 public	ConvertDate		as	'_ZN4Time11ConvertDateEhhihhh'
+
+; Time extraction
+public	ExtractTime		as	'Time_ExtractTime'
 public	ExtractTime		as	'_ZN4Time11ExtractTimeEx'
+
+; Date extraction
+public	ExtractDate		as	'Time_ExtractDate'
 public	ExtractDate		as	'_ZN4Time11ExtractDateEx'
+
+; Week day extraction
+public	WeekDay			as	'Time_WeekDay'
 public	WeekDay			as	'_ZN4Time7WeekDayEx'
+
+; Current system time
+public	SystemTime		as	'Time_SystemTime'
 public	SystemTime		as	'_ZN4Time10SystemTimeEv'
+
+; Local time
+public	LocalTime		as	'Time_LocalTime'
 public	LocalTime		as	'_ZN4Time9LocalTimeEx'
 
 ;###############################################################################
@@ -309,7 +336,7 @@ zsize_of	= csize_of + 4					; offset of Time::zone_size
 ;******************************************************************************;
 Time:
 ;---[Parameters]---------------------------
-this	equ		rdi							; pointer to time object
+this	equ		rdi							; pointer to time zone object
 ;---[Internal variables]-------------------
 csize_of 	= CHNG_SIZE * 9 + ZONE_SIZE * 4	; offset of change_size variable inside time_zone
 zsize_of	= csize_of + 4					; offset of zone_size variable inside time_zone
@@ -323,7 +350,7 @@ zsize_of	= csize_of + 4					; offset of zone_size variable inside time_zone
 ;******************************************************************************;
 LoadTimeZone:
 ;---[Parameters]---------------------------
-this	equ		rdi							; pointer to time object
+this	equ		rdi							; pointer to time zone object
 tzfile	equ		rsi							; time zone file name
 ;---[Internal variables]-------------------
 result	equ		rax							; result register
@@ -743,7 +770,7 @@ result	equ		rax							; result register
 ;******************************************************************************;
 LocalTime:
 ;---[Parameters]---------------------------
-this	equ		rdi							; pointer to time object
+this	equ		rdi							; pointer to time zone object
 time	equ		rsi							; UTC time
 ;---[Internal variables]-------------------
 result	equ		rax							; result register

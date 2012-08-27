@@ -1,3 +1,15 @@
+2012-08-27	Release 0.97 (beta)
+-------------------------------
+Bug fixes:
+	* Array.asm: "Unique" function: Fixed source pointer increment error
+
+New features:
+	* Added C API for all library functions
+
+Changes in behavior:
+	* String.h: Changed function name "FindSymbols"
+	* Numbers.h: All functions: Changed passing method for "number" parameter from reference to a pointer
+
 2012-08-23	Release 0.96 (beta)
 -------------------------------
 New features:

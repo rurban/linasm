@@ -77,22 +77,32 @@ public	PosReflect_flt32	as	'_Reflect_flt32'
 public	PosReflect_flt64	as	'_Reflect_flt64'
 
 ; Band-pass filter
+public	BandPass_flt32		as	'Filter_BandPass_flt32'
+public	BandPass_flt64		as	'Filter_BandPass_flt64'
 public	BandPass_flt32		as	'_ZN6Filter8BandPassEPfmff8window_t'
 public	BandPass_flt64		as	'_ZN6Filter8BandPassEPdmdd8window_t'
 
 ; Band-stop filter
+public	BandStop_flt32		as	'Filter_BandStop_flt32'
+public	BandStop_flt64		as	'Filter_BandStop_flt64'
 public	BandStop_flt32		as	'_ZN6Filter8BandStopEPfmff8window_t'
 public	BandStop_flt64		as	'_ZN6Filter8BandStopEPdmdd8window_t'
 
 ; Hilbert filter
+public	Hilbert_flt32		as	'Filter_Hilbert_flt32'
+public	Hilbert_flt64		as	'Filter_Hilbert_flt64'
 public	Hilbert_flt32		as	'_ZN6Filter7HilbertEPfmff8window_t'
 public	Hilbert_flt64		as	'_ZN6Filter7HilbertEPdmdd8window_t'
 
 ; Differential filter
+public	Diff_flt32			as	'Filter_Diff_flt32'
+public	Diff_flt64			as	'Filter_Diff_flt64'
 public	Diff_flt32			as	'_ZN6Filter4DiffEPfmff8window_t'
 public	Diff_flt64			as	'_ZN6Filter4DiffEPdmdd8window_t'
 
 ; Filter response
+public	Response_flt32		as	'Filter_Response_flt32'
+public	Response_flt64		as	'Filter_Response_flt64'
 public	Response_flt32		as	'_ZN6Filter8ResponseEPfPKfmS2_m'
 public	Response_flt64		as	'_ZN6Filter8ResponseEPdPKdmS2_m'
 

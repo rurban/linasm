@@ -10,6 +10,12 @@
 # pragma	once
 # include	<Types.h>
 
+# ifdef	__cplusplus
+/*
+################################################################################
+#       C++ prototypes                                                         #
+################################################################################
+*/
 class Statistics
 {
 public:
@@ -113,6 +119,112 @@ static flt64_t Covariance (const flt64_t arr1[], const flt64_t arr2[], size_t si
 static flt32_t Correlation (const flt32_t arr1[], const flt32_t arr2[], size_t size, flt32_t mean1, flt32_t mean2);
 static flt64_t Correlation (const flt64_t arr1[], const flt64_t arr2[], size_t size, flt64_t mean1, flt64_t mean2);
 };
+# else
+/*
+################################################################################
+#       C prototypes                                                           #
+################################################################################
+*/
+//****************************************************************************//
+//      Measures of location                                                  //
+//****************************************************************************//
+
+//============================================================================//
+//      Mean                                                                  //
+//============================================================================//
+flt32_t Statistics_Mean_flt32 (const flt32_t array[], size_t size);
+flt64_t Statistics_Mean_flt64 (const flt64_t array[], size_t size);
+
+//============================================================================//
+//      Median                                                                //
+//============================================================================//
+
+// Unsigned integer types
+uint8_t Statistics_Median_uint8 (uint8_t array[], size_t size);
+uint16_t Statistics_Median_uint16 (uint16_t array[], size_t size);
+uint32_t Statistics_Median_uint32 (uint32_t array[], size_t size);
+uint64_t Statistics_Median_uint64 (uint64_t array[], size_t size);
+
+// Signed integer types
+sint8_t Statistics_Median_sint8 (sint8_t array[], size_t size);
+sint16_t Statistics_Median_sint16 (sint16_t array[], size_t size);
+sint32_t Statistics_Median_sint32 (sint32_t array[], size_t size);
+sint64_t Statistics_Median_sint64 (sint64_t array[], size_t size);
+
+// Floating-point types
+flt32_t Statistics_Median_flt32 (flt32_t array[], size_t size);
+flt64_t Statistics_Median_flt64 (flt64_t array[], size_t size);
+
+// Other types
+size_t Statistics_Median_size (size_t array[], size_t size);
+
+//============================================================================//
+//      Lower quartile                                                        //
+//============================================================================//
+flt32_t Statistics_LowerQuartile_flt32 (flt32_t array[], size_t size);
+flt64_t Statistics_LowerQuartile_flt64 (flt64_t array[], size_t size);
+
+//============================================================================//
+//      Upper quartile                                                        //
+//============================================================================//
+flt32_t Statistics_UpperQuartile_flt32 (flt32_t array[], size_t size);
+flt64_t Statistics_UpperQuartile_flt64 (flt64_t array[], size_t size);
+
+//============================================================================//
+//      Mid-range                                                             //
+//============================================================================//
+flt32_t Statistics_Midrange_flt32 (const flt32_t array[], size_t size);
+flt64_t Statistics_Midrange_flt64 (const flt64_t array[], size_t size);
+
+//****************************************************************************//
+//      Measures of variability                                               //
+//****************************************************************************//
+
+// Variance
+flt32_t Statistics_Variance_flt32 (const flt32_t array[], size_t size, flt32_t mean);
+flt64_t Statistics_Variance_flt64 (const flt64_t array[], size_t size, flt64_t mean);
+
+// Standard deviation
+flt32_t Statistics_StandardDeviation_flt32 (const flt32_t array[], size_t size, flt32_t mean);
+flt64_t Statistics_StandardDeviation_flt64 (const flt64_t array[], size_t size, flt64_t mean);
+
+// Absolute deviation
+flt32_t Statistics_AbsoluteDeviation_flt32 (const flt32_t array[], size_t size, flt32_t value);
+flt64_t Statistics_AbsoluteDeviation_flt64 (const flt64_t array[], size_t size, flt64_t value);
+
+// Interquartile range
+flt32_t Statistics_InterquartileRange_flt32 (flt32_t array[], size_t size);
+flt64_t Statistics_InterquartileRange_flt64 (flt64_t array[], size_t size);
+
+// Range
+flt32_t Statistics_Range_flt32 (const flt32_t array[], size_t size);
+flt64_t Statistics_Range_flt64 (const flt64_t array[], size_t size);
+
+//****************************************************************************//
+//      Measures of shape                                                     //
+//****************************************************************************//
+
+// Skewness
+flt32_t Statistics_Skewness_flt32 (const flt32_t array[], size_t size, flt32_t mean);
+flt64_t Statistics_Skewness_flt64 (const flt64_t array[], size_t size, flt64_t mean);
+
+// Kurtosis
+flt32_t Statistics_Kurtosis_flt32 (const flt32_t array[], size_t size, flt32_t mean);
+flt64_t Statistics_Kurtosis_flt64 (const flt64_t array[], size_t size, flt64_t mean);
+
+//****************************************************************************//
+//      Other functions                                                       //
+//****************************************************************************//
+
+// Covariance
+flt32_t Statistics_Covariance_flt32 (const flt32_t arr1[], const flt32_t arr2[], size_t size, flt32_t mean1, flt32_t mean2);
+flt64_t Statistics_Covariance_flt64 (const flt64_t arr1[], const flt64_t arr2[], size_t size, flt64_t mean1, flt64_t mean2);
+
+// Correlation
+flt32_t Statistics_Correlation_flt32 (const flt32_t arr1[], const flt32_t arr2[], size_t size, flt32_t mean1, flt32_t mean2);
+flt64_t Statistics_Correlation_flt64 (const flt64_t arr1[], const flt64_t arr2[], size_t size, flt64_t mean1, flt64_t mean2);
+
+# endif
 /*
 ################################################################################
 #                                 END OF FILE                                  #

@@ -53,18 +53,26 @@ public	Blackman_Nuttall_flt64		as	'_Blackman_Nuttall_flt64'
 ;******************************************************************************;
 
 ; Sine window
+public	SineWin_flt32				as	'Window_Sine_flt32'
+public	SineWin_flt64				as	'Window_Sine_flt64'
 public	SineWin_flt32				as	'_ZN6Window4SineEPfm'
 public	SineWin_flt64				as	'_ZN6Window4SineEPdm'
 
 ; Hamming window
+public	HammingWin_flt32			as	'Window_Hamming_flt32'
+public	HammingWin_flt64			as	'Window_Hamming_flt64'
 public	HammingWin_flt32			as	'_ZN6Window7HammingEPfm'
 public	HammingWin_flt64			as	'_ZN6Window7HammingEPdm'
 
 ; Blackman window
+public	BlackmanWin_flt32			as	'Window_Blackman_flt32'
+public	BlackmanWin_flt64			as	'Window_Blackman_flt64'
 public	BlackmanWin_flt32			as	'_ZN6Window8BlackmanEPfm'
 public	BlackmanWin_flt64			as	'_ZN6Window8BlackmanEPdm'
 
 ; Blackman–Nuttall window
+public	Blackman_NuttallWin_flt32	as	'Window_BlackmanNuttall_flt32'
+public	Blackman_NuttallWin_flt64	as	'Window_BlackmanNuttall_flt64'
 public	Blackman_NuttallWin_flt32	as	'_ZN6Window15BlackmanNuttallEPfm'
 public	Blackman_NuttallWin_flt64	as	'_ZN6Window15BlackmanNuttallEPdm'
 

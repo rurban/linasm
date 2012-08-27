@@ -17,84 +17,124 @@ format	ELF64
 ;******************************************************************************;
 
 ; Unsigned integer types
-public	BinToNum8		as	'_ZN7Numbers8BinToNumERhPKc'
-public	BinToNum16		as	'_ZN7Numbers8BinToNumERtPKc'
-public	BinToNum32		as	'_ZN7Numbers8BinToNumERjPKc'
-public	BinToNum64		as	'_ZN7Numbers8BinToNumERyPKc'
+public	BinToNum_int8		as	'Numbers_BinToNum_uint8'
+public	BinToNum_int16		as	'Numbers_BinToNum_uint16'
+public	BinToNum_int32		as	'Numbers_BinToNum_uint32'
+public	BinToNum_int64		as	'Numbers_BinToNum_uint64'
+public	BinToNum_int8		as	'_ZN7Numbers8BinToNumEPhPKc'
+public	BinToNum_int16		as	'_ZN7Numbers8BinToNumEPtPKc'
+public	BinToNum_int32		as	'_ZN7Numbers8BinToNumEPjPKc'
+public	BinToNum_int64		as	'_ZN7Numbers8BinToNumEPyPKc'
 
 ; Signed integer types
-public	BinToNum8		as	'_ZN7Numbers8BinToNumERaPKc'
-public	BinToNum16		as	'_ZN7Numbers8BinToNumERsPKc'
-public	BinToNum32		as	'_ZN7Numbers8BinToNumERiPKc'
-public	BinToNum64		as	'_ZN7Numbers8BinToNumERxPKc'
+public	BinToNum_int8		as	'Numbers_BinToNum_sint8'
+public	BinToNum_int16		as	'Numbers_BinToNum_sint16'
+public	BinToNum_int32		as	'Numbers_BinToNum_sint32'
+public	BinToNum_int64		as	'Numbers_BinToNum_sint64'
+public	BinToNum_int8		as	'_ZN7Numbers8BinToNumEPaPKc'
+public	BinToNum_int16		as	'_ZN7Numbers8BinToNumEPsPKc'
+public	BinToNum_int32		as	'_ZN7Numbers8BinToNumEPiPKc'
+public	BinToNum_int64		as	'_ZN7Numbers8BinToNumEPxPKc'
 
 ; Other types
-public	BinToNum64		as	'_ZN7Numbers8BinToNumERmPKc'
+public	BinToNum_int64		as	'Numbers_BinToNum_size'
+public	BinToNum_int64		as	'_ZN7Numbers8BinToNumEPmPKc'
 
 ;******************************************************************************;
 ;       Octal numbers conversion                                               ;
 ;******************************************************************************;
 
 ; Unsigned integer types
-public	OctToNum8		as	'_ZN7Numbers8OctToNumERhPKc'
-public	OctToNum16		as	'_ZN7Numbers8OctToNumERtPKc'
-public	OctToNum32		as	'_ZN7Numbers8OctToNumERjPKc'
-public	OctToNum64		as	'_ZN7Numbers8OctToNumERyPKc'
+public	OctToNum_int8		as	'Numbers_OctToNum_uint8'
+public	OctToNum_int16		as	'Numbers_OctToNum_uint16'
+public	OctToNum_int32		as	'Numbers_OctToNum_uint32'
+public	OctToNum_int64		as	'Numbers_OctToNum_uint64'
+public	OctToNum_int8		as	'_ZN7Numbers8OctToNumEPhPKc'
+public	OctToNum_int16		as	'_ZN7Numbers8OctToNumEPtPKc'
+public	OctToNum_int32		as	'_ZN7Numbers8OctToNumEPjPKc'
+public	OctToNum_int64		as	'_ZN7Numbers8OctToNumEPyPKc'
 
 ; Signed integer types
-public	OctToNum8		as	'_ZN7Numbers8OctToNumERaPKc'
-public	OctToNum16		as	'_ZN7Numbers8OctToNumERsPKc'
-public	OctToNum32		as	'_ZN7Numbers8OctToNumERiPKc'
-public	OctToNum64		as	'_ZN7Numbers8OctToNumERxPKc'
+public	OctToNum_int8		as	'Numbers_OctToNum_sint8'
+public	OctToNum_int16		as	'Numbers_OctToNum_sint16'
+public	OctToNum_int32		as	'Numbers_OctToNum_sint32'
+public	OctToNum_int64		as	'Numbers_OctToNum_sint64'
+public	OctToNum_int8		as	'_ZN7Numbers8OctToNumEPaPKc'
+public	OctToNum_int16		as	'_ZN7Numbers8OctToNumEPsPKc'
+public	OctToNum_int32		as	'_ZN7Numbers8OctToNumEPiPKc'
+public	OctToNum_int64		as	'_ZN7Numbers8OctToNumEPxPKc'
 
 ; Other types
-public	OctToNum64		as	'_ZN7Numbers8OctToNumERmPKc'
+public	OctToNum_int64		as	'Numbers_OctToNum_size'
+public	OctToNum_int64		as	'_ZN7Numbers8OctToNumEPmPKc'
 
 ;******************************************************************************;
 ;       Hexadecimal numbers conversion                                         ;
 ;******************************************************************************;
 
 ; Unsigned integer types
-public	HexToNum8		as	'_ZN7Numbers8HexToNumERhPKc'
-public	HexToNum16		as	'_ZN7Numbers8HexToNumERtPKc'
-public	HexToNum32		as	'_ZN7Numbers8HexToNumERjPKc'
-public	HexToNum64		as	'_ZN7Numbers8HexToNumERyPKc'
+public	HexToNum_int8		as	'Numbers_HexToNum_uint8'
+public	HexToNum_int16		as	'Numbers_HexToNum_uint16'
+public	HexToNum_int32		as	'Numbers_HexToNum_uint32'
+public	HexToNum_int64		as	'Numbers_HexToNum_uint64'
+public	HexToNum_int8		as	'_ZN7Numbers8HexToNumEPhPKc'
+public	HexToNum_int16		as	'_ZN7Numbers8HexToNumEPtPKc'
+public	HexToNum_int32		as	'_ZN7Numbers8HexToNumEPjPKc'
+public	HexToNum_int64		as	'_ZN7Numbers8HexToNumEPyPKc'
 
 ; Signed integer types
-public	HexToNum8		as	'_ZN7Numbers8HexToNumERaPKc'
-public	HexToNum16		as	'_ZN7Numbers8HexToNumERsPKc'
-public	HexToNum32		as	'_ZN7Numbers8HexToNumERiPKc'
-public	HexToNum64		as	'_ZN7Numbers8HexToNumERxPKc'
+public	HexToNum_int8		as	'Numbers_HexToNum_sint8'
+public	HexToNum_int16		as	'Numbers_HexToNum_sint16'
+public	HexToNum_int32		as	'Numbers_HexToNum_sint32'
+public	HexToNum_int64		as	'Numbers_HexToNum_sint64'
+public	HexToNum_int8		as	'_ZN7Numbers8HexToNumEPaPKc'
+public	HexToNum_int16		as	'_ZN7Numbers8HexToNumEPsPKc'
+public	HexToNum_int32		as	'_ZN7Numbers8HexToNumEPiPKc'
+public	HexToNum_int64		as	'_ZN7Numbers8HexToNumEPxPKc'
 
 ; Floating-point types
-public	HexToNum_flt32	as	'_ZN7Numbers8HexToNumERfPKc'
-public	HexToNum_flt64	as	'_ZN7Numbers8HexToNumERdPKc'
+public	HexToNum_flt32		as	'Numbers_HexToNum_flt32'
+public	HexToNum_flt64		as	'Numbers_HexToNum_flt64'
+public	HexToNum_flt32		as	'_ZN7Numbers8HexToNumEPfPKc'
+public	HexToNum_flt64		as	'_ZN7Numbers8HexToNumEPdPKc'
 
 ; Other types
-public	HexToNum64		as	'_ZN7Numbers8HexToNumERmPKc'
+public	HexToNum_int64		as	'Numbers_HexToNum_size'
+public	HexToNum_int64		as	'_ZN7Numbers8HexToNumEPmPKc'
 
 ;******************************************************************************;
 ;       Decimal numbers conversion                                             ;
 ;******************************************************************************;
 
 ; Unsigned integer types
-public	DecToNum_uint8	as	'_ZN7Numbers8DecToNumERhPKc'
-public	DecToNum_uint16	as	'_ZN7Numbers8DecToNumERtPKc'
-public	DecToNum_uint32	as	'_ZN7Numbers8DecToNumERjPKc'
-public	DecToNum_uint64	as	'_ZN7Numbers8DecToNumERyPKc'
+public	DecToNum_uint8		as	'Numbers_DecToNum_uint8'
+public	DecToNum_uint16		as	'Numbers_DecToNum_uint16'
+public	DecToNum_uint32		as	'Numbers_DecToNum_uint32'
+public	DecToNum_uint64		as	'Numbers_DecToNum_uint64'
+public	DecToNum_uint8		as	'_ZN7Numbers8DecToNumEPhPKc'
+public	DecToNum_uint16		as	'_ZN7Numbers8DecToNumEPtPKc'
+public	DecToNum_uint32		as	'_ZN7Numbers8DecToNumEPjPKc'
+public	DecToNum_uint64		as	'_ZN7Numbers8DecToNumEPyPKc'
 
 ; Signed integer types
-public	DecToNum_sint8	as	'_ZN7Numbers8DecToNumERaPKc'
-public	DecToNum_sint16	as	'_ZN7Numbers8DecToNumERsPKc'
-public	DecToNum_sint32	as	'_ZN7Numbers8DecToNumERiPKc'
-public	DecToNum_sint64	as	'_ZN7Numbers8DecToNumERxPKc'
+public	DecToNum_sint8		as	'Numbers_DecToNum_sint8'
+public	DecToNum_sint16		as	'Numbers_DecToNum_sint16'
+public	DecToNum_sint32		as	'Numbers_DecToNum_sint32'
+public	DecToNum_sint64		as	'Numbers_DecToNum_sint64'
+public	DecToNum_sint8		as	'_ZN7Numbers8DecToNumEPaPKc'
+public	DecToNum_sint16		as	'_ZN7Numbers8DecToNumEPsPKc'
+public	DecToNum_sint32		as	'_ZN7Numbers8DecToNumEPiPKc'
+public	DecToNum_sint64		as	'_ZN7Numbers8DecToNumEPxPKc'
 
 ; Floating-point types
-public	DecToNum_flt32	as	'_ZN7Numbers8DecToNumERfPKc'
-public	DecToNum_flt64	as	'_ZN7Numbers8DecToNumERdPKc'
+public	DecToNum_flt32		as	'Numbers_DecToNum_flt32'
+public	DecToNum_flt64		as	'Numbers_DecToNum_flt64'
+public	DecToNum_flt32		as	'_ZN7Numbers8DecToNumEPfPKc'
+public	DecToNum_flt64		as	'_ZN7Numbers8DecToNumEPdPKc'
 
 ; Other types
-public	DecToNum_uint64	as	'_ZN7Numbers8DecToNumERmPKc'
+public	DecToNum_uint64		as	'Numbers_DecToNum_size'
+public	DecToNum_uint64		as	'_ZN7Numbers8DecToNumEPmPKc'
 
 ;###############################################################################
 ;#      Code section                                                           #
@@ -406,10 +446,10 @@ digits	equ		r8							; count of digits that number has
 }
 
 ; Integer types
-BinToNum8:	BIN_TO_NUM	dl, cl, r10b, 0x80
-BinToNum16:	BIN_TO_NUM	dx, cx, r10w, 0x8000
-BinToNum32:	BIN_TO_NUM	edx, ecx, r10d, 0x80000000
-BinToNum64:	BIN_TO_NUM	rdx, rcx, r10, 0x8000000000000000
+BinToNum_int8:	BIN_TO_NUM	dl, cl, r10b, 0x80
+BinToNum_int16:	BIN_TO_NUM	dx, cx, r10w, 0x8000
+BinToNum_int32:	BIN_TO_NUM	edx, ecx, r10d, 0x80000000
+BinToNum_int64:	BIN_TO_NUM	rdx, rcx, r10, 0x8000000000000000
 
 ;******************************************************************************;
 ;       Octal numbers conversion                                               ;
@@ -457,10 +497,10 @@ digits	equ		r8							; count of digits that number has
 }
 
 ; Integer types
-OctToNum8:	OCT_TO_NUM	dl, cl, r10b, 0x20
-OctToNum16:	OCT_TO_NUM	dx, cx, r10w, 0x2000
-OctToNum32:	OCT_TO_NUM	edx, ecx, r10d, 0x20000000
-OctToNum64:	OCT_TO_NUM	rdx, rcx, r10, 0x2000000000000000
+OctToNum_int8:	OCT_TO_NUM	dl, cl, r10b, 0x20
+OctToNum_int16:	OCT_TO_NUM	dx, cx, r10w, 0x2000
+OctToNum_int32:	OCT_TO_NUM	edx, ecx, r10d, 0x20000000
+OctToNum_int64:	OCT_TO_NUM	rdx, rcx, r10, 0x2000000000000000
 
 ;******************************************************************************;
 ;       Hexadecimal numbers conversion                                         ;
@@ -567,10 +607,10 @@ end if
 }
 
 ; Integer types
-HexToNum8:	HEX_TO_NUM	dl, cl, r10b, 16
-HexToNum16:	HEX_TO_NUM	dx, cx, r10w, 0x1000
-HexToNum32:	HEX_TO_NUM	edx, ecx, r10d, 0x10000000
-HexToNum64:	HEX_TO_NUM	rdx, rcx, r10, 0x1000000000000000
+HexToNum_int8:	HEX_TO_NUM	dl, cl, r10b, 16
+HexToNum_int16:	HEX_TO_NUM	dx, cx, r10w, 0x1000
+HexToNum_int32:	HEX_TO_NUM	edx, ecx, r10d, 0x10000000
+HexToNum_int64:	HEX_TO_NUM	rdx, rcx, r10, 0x1000000000000000
 
 ; Floating-point types
 HexToNum_flt32:	FLOAT_TO_NUM	edx, s, 0
@@ -700,8 +740,8 @@ DecToNum_sint32:	DEC_TO_NUM_SINT	edx, ecx, r9d, r10d, 214748365, 2
 DecToNum_sint64:	DEC_TO_NUM_SINT	rdx, rcx, r9, r10, 922337203685477581, 3
 
 ; Floating-point types
-DecToNum_flt32:	FLOAT_TO_NUM	edx, s, 1
-DecToNum_flt64:	FLOAT_TO_NUM	rdx, d, 1
+DecToNum_flt32:		FLOAT_TO_NUM	edx, s, 1
+DecToNum_flt64:		FLOAT_TO_NUM	rdx, d, 1
 
 ;###############################################################################
 ;#      Read-only data section                                                 #

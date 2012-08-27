@@ -7,6 +7,25 @@
 ################################################################################
 
 #******************************************************************************#
+#       Release 0.97 (beta) [2012-08-27]                                       #
+#******************************************************************************#
+
+This release extends libraries usage for non C++ projects and provide C
+prototypes for all functions and data structures. The C functions have the
+same behavior and parameters, like original C++ functions, and work in the
+same ways like their originals. The assembly language code stays the same for
+both variants, and it is shared between them, just providing aliases for already
+implemented functions.
+
+Also in release 0.97 were:
+	* fixed non critical bug in Array library
+	* changed function names in String library
+	* modified parameters passing method for Numbers library
+
+For more details about release changes see the ChangeLog file inside the LinAsm
+package v0.97.
+
+#******************************************************************************#
 #       Release 0.96 (beta) [2012-08-23]                                       #
 #******************************************************************************#
 

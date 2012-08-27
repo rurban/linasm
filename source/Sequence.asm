@@ -17,12 +17,20 @@ format	ELF64
 ;******************************************************************************;
 
 ; Unsigned integer types
+public	BMH8		as	'BMH_uint8'
+public	BMH16		as	'BMH_uint16'
+public	BMH32		as	'BMH_uint32'
+public	BMH64		as	'BMH_uint64'
 public	BMH8		as	'_ZN3BMHC1EPKhmb'
 public	BMH16		as	'_ZN3BMHC1EPKtmb'
 public	BMH32		as	'_ZN3BMHC1EPKjmb'
 public	BMH64		as	'_ZN3BMHC1EPKymb'
 
 ; Signed integer types
+public	BMH8		as	'BMH_sint8'
+public	BMH16		as	'BMH_sint16'
+public	BMH32		as	'BMH_sint32'
+public	BMH64		as	'BMH_sint64'
 public	BMH8		as	'_ZN3BMHC1EPKamb'
 public	BMH16		as	'_ZN3BMHC1EPKsmb'
 public	BMH32		as	'_ZN3BMHC1EPKimb'
@@ -33,12 +41,20 @@ public	BMH64		as	'_ZN3BMHC1EPKxmb'
 ;******************************************************************************;
 
 ; Unsigned integer types
+public	BMH_Find8	as	'Sequence_Find_uint8'
+public	BMH_Find16	as	'Sequence_Find_uint16'
+public	BMH_Find32	as	'Sequence_Find_uint32'
+public	BMH_Find64	as	'Sequence_Find_uint64'
 public	BMH_Find8	as	'_ZN8Sequence4FindEPKhmPK3BMH'
 public	BMH_Find16	as	'_ZN8Sequence4FindEPKtmPK3BMH'
 public	BMH_Find32	as	'_ZN8Sequence4FindEPKjmPK3BMH'
 public	BMH_Find64	as	'_ZN8Sequence4FindEPKymPK3BMH'
 
 ; Signed integer types
+public	BMH_Find8	as	'Sequence_Find_sint8'
+public	BMH_Find16	as	'Sequence_Find_sint16'
+public	BMH_Find32	as	'Sequence_Find_sint32'
+public	BMH_Find64	as	'Sequence_Find_sint64'
 public	BMH_Find8	as	'_ZN8Sequence4FindEPKamPK3BMH'
 public	BMH_Find16	as	'_ZN8Sequence4FindEPKsmPK3BMH'
 public	BMH_Find32	as	'_ZN8Sequence4FindEPKimPK3BMH'

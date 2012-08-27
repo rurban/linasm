@@ -51,6 +51,12 @@ struct date_struct
 	uint8_t		sec;	// Seconds [0-59]
 };
 
+# ifdef	__cplusplus
+/*
+################################################################################
+#       C++ prototypes                                                         #
+################################################################################
+*/
 //****************************************************************************//
 //      Time class                                                            //
 //****************************************************************************//
@@ -92,6 +98,49 @@ static time_t SystemTime (void);
 // Local time
 time_t LocalTime (time_t UTC);
 };
+# else
+/*
+################################################################################
+#       C prototypes                                                           #
+################################################################################
+*/
+struct tzone
+{
+	time_t		change [TIME_CHANGE_SIZE];	// Array of time changes
+	uint8_t		index [TIME_CHANGE_SIZE];	// Array of time zone indexes
+	sint32_t	zone [TIME_ZONE_SIZE];		// Array of time zones
+	uint32_t	change_size;				// Count of time change records
+	uint32_t	zone_size;					// Count of time zone records
+};
+
+// Cleaning time zone data
+void Time_CleanTimeZone (struct tzone *tz);
+
+// Loading time zone data from tzfile
+error_t Time_LoadTimeZone (struct tzone *tz, const char8_t tzfile[]);
+
+// Time conversion
+time_t Time_ConvertTime (uint8_t hour, uint8_t min, uint8_t sec);
+
+// Date conversion
+time_t Time_ConvertDate (uint8_t day, uint8_t mon, sint32_t year, uint8_t hour, uint8_t min, uint8_t sec);
+
+// Time extraction
+struct time_struct Time_ExtractTime (time_t time);
+
+// Date extraction
+struct date_struct Time_ExtractDate (time_t time);
+
+// Week day extraction
+uint8_t Time_WeekDay (time_t time);
+
+// Current system time
+time_t Time_SystemTime (void);
+
+// Local time
+time_t Time_LocalTime (const struct tzone *tz, time_t UTC);
+
+# endif
 /*
 ################################################################################
 #                                 END OF FILE                                  #
