@@ -189,6 +189,54 @@ public	Max_uint64		as	'Math_Max_size'
 public	Max_uint64		as	'_ZN4Math3MaxEmm'
 
 ;******************************************************************************;
+;       Great common divisor                                                   ;
+;******************************************************************************;
+
+; Unsigned integer types
+public	GCD_uint8		as	'Math_GCD_uint8'
+public	GCD_uint16		as	'Math_GCD_uint16'
+public	GCD_uint32		as	'Math_GCD_uint32'
+public	GCD_uint64		as	'Math_GCD_uint64'
+public	GCD_uint8		as	'_ZN4Math3GCDEhh'
+public	GCD_uint16		as	'_ZN4Math3GCDEtt'
+public	GCD_uint32		as	'_ZN4Math3GCDEjj'
+public	GCD_uint64		as	'_ZN4Math3GCDEyy'
+
+; Signed integer types
+public	GCD_sint8		as	'Math_GCD_sint8'
+public	GCD_sint16		as	'Math_GCD_sint16'
+public	GCD_sint32		as	'Math_GCD_sint32'
+public	GCD_sint64		as	'Math_GCD_sint64'
+public	GCD_uint8		as	'_ZN4Math3GCDEaa'
+public	GCD_uint16		as	'_ZN4Math3GCDEss'
+public	GCD_uint32		as	'_ZN4Math3GCDEii'
+public	GCD_uint64		as	'_ZN4Math3GCDExx'
+
+;******************************************************************************;
+;       Less common multiplier                                                 ;
+;******************************************************************************;
+
+; Unsigned integer types
+public	LCM_uint8		as	'Math_LCM_uint8'
+public	LCM_uint16		as	'Math_LCM_uint16'
+public	LCM_uint32		as	'Math_LCM_uint32'
+public	LCM_uint64		as	'Math_LCM_uint64'
+public	LCM_uint8		as	'_ZN4Math3LCMEhh'
+public	LCM_uint16		as	'_ZN4Math3LCMEtt'
+public	LCM_uint32		as	'_ZN4Math3LCMEjj'
+public	LCM_uint64		as	'_ZN4Math3LCMEyy'
+
+; Signed integer types
+public	LCM_sint8		as	'Math_LCM_sint8'
+public	LCM_sint16		as	'Math_LCM_sint16'
+public	LCM_sint32		as	'Math_LCM_sint32'
+public	LCM_sint64		as	'Math_LCM_sint64'
+public	LCM_uint8		as	'_ZN4Math3LCMEaa'
+public	LCM_uint16		as	'_ZN4Math3LCMEss'
+public	LCM_uint32		as	'_ZN4Math3LCMEii'
+public	LCM_uint64		as	'_ZN4Math3LCMExx'
+
+;******************************************************************************;
 ;       Exponentiation functions                                               ;
 ;******************************************************************************;
 
@@ -304,6 +352,22 @@ public	IsNaN_flt64		as	'_ZN4Math5IsNaNEd'
 ;#      Code section                                                           #
 ;###############################################################################
 section	'.text'		executable align 16
+
+;******************************************************************************;
+;       Expansion of sign bit                                                  ;
+;******************************************************************************;
+macro	esign	scale
+{
+if scale = 0
+		cbw
+else if scale = 1
+		cwd
+else if scale = 2
+		cdq
+else if scale = 3
+		cqo
+end if
+}
 
 ;******************************************************************************;
 ;       Byte swap                                                              ;
@@ -553,6 +617,83 @@ Min_sint64:		MINMAX_INT	rdi, rsi, l
 ; Floating-point types
 Min_flt32:		MINMAX_FLT	mins, s
 Min_flt64:		MINMAX_FLT	mins, d
+
+;******************************************************************************;
+;       Great common divisor                                                   ;
+;******************************************************************************;
+macro	GCD		value1, value2, temp, quot, remain, sign, scale
+{
+;------------------------------------------
+		mov		temp, value2				; temp = value2
+		mov		quot, value1				; quot = value1
+		test	temp, temp					; if (temp != 0)
+		jz		.exit						; {
+;---[Dividing loop]------------------------
+@@:											;      do {
+if sign
+		esign	scale
+		idiv	temp						;          remain = quot / temp
+else
+		xor		remain, remain
+		div		temp						;          remain = quot / temp
+end if
+		test	remain, remain				;          quot = temp
+		mov		quot, temp					;          temp = remain
+		mov		temp, remain				;      } while (temp != 0)
+		jnz		@b							; }
+;---[End of loop]--------------------------
+.exit:	ret									; return quot
+}
+
+; Unsigned integer types
+GCD_uint8:	GCD	dil, sil, cl, al, ah, 0, 0
+GCD_uint16:	GCD	di, si, cx, ax, dx, 0, 1
+GCD_uint32:	GCD	edi, esi, ecx, eax, edx, 0, 2
+GCD_uint64:	GCD	rdi, rsi, rcx, rax, rdx, 0, 3
+
+; Signed integer types
+GCD_sint8:	GCD	dil, sil, cl, al, ah, 1, 0
+GCD_sint16:	GCD	di, si, cx, ax, dx, 1, 1
+GCD_sint32:	GCD	edi, esi, ecx, eax, edx, 1, 2
+GCD_sint64:	GCD	rdi, rsi, rcx, rax, rdx, 1, 3
+
+;******************************************************************************;
+;       Less common multiplier                                                 ;
+;******************************************************************************;
+macro	LCM		func, value1, value2, temp, quot, remain, sign, scale
+{
+;------------------------------------------
+		call	func						; quot = GCD (value1, value2)
+		test	quot, quot					; if (quot == 0)
+		jz		.ovfl						;     then go to overflow branch
+		mov		temp, quot					; temp = quot
+		mov		quot, value2				; quot = value2
+if sign
+		esign	scale
+		idiv	temp						; value2 /= temp
+else
+		xor		remain, remain
+		div		temp						; value2 /= temp
+end if
+		mul		value1						; value1 *= value2 / GCD (value1, value2)
+		jc		.ovfl						; if (overflow), then go to overflow branch
+		ret
+;---[Overflow branch]----------------------
+.ovfl:	xor		quot, quot					; return 0 (means result overflow)
+		ret
+}
+
+; Unsigned integer types
+LCM_uint8:	LCM	GCD_uint8, dil, sil, cl, al, ah, 0, 0
+LCM_uint16:	LCM	GCD_uint16, di, si, cx, ax, dx, 0, 1
+LCM_uint32:	LCM	GCD_uint32, edi, esi, ecx, eax, edx, 0, 2
+LCM_uint64:	LCM	GCD_uint64, rdi, rsi, rcx, rax, rdx, 0, 3
+
+; Signed integer types
+LCM_sint8:	LCM	GCD_sint8, dil, sil, cl, al, ah, 1, 0
+LCM_sint16:	LCM	GCD_sint16, di, si, cx, ax, dx, 1, 1
+LCM_sint32:	LCM	GCD_sint32, edi, esi, ecx, eax, edx, 1, 2
+LCM_sint64:	LCM	GCD_sint64, rdi, rsi, rcx, rax, rdx, 1, 3
 
 ;******************************************************************************;
 ;       Maximum value                                                          ;

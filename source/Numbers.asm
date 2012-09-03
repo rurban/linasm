@@ -692,7 +692,7 @@ end if
 ;---[Reading number sign]------------------
 		READ_SIGN	0x22
 ;---[Getting number digits]----------------
-		mov		max, max_value			; max = max_value
+		mov		max, max_value				; max = max_value
 		xor		temp, temp					; temp = 0
 		xor		val, val					; value = 0
 		xor		digits, digits				; digits = 0

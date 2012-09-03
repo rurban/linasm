@@ -2748,7 +2748,7 @@ param2	equ		rsi							; register to pass 2 parameter to function
 param3	equ		rdx							; register to pass 3 parameter to function
 stack	equ		rsp							; stack pointer
 s_array	equ		stack +  0 * 8				; stack position of array variable
-s_temp	equ		stack +  1 * 8				; stack position of array variable
+s_temp	equ		stack +  1 * 8				; stack position of temp array variable
 s_size	equ		stack +  2 * 8				; stack position of size variable
 space	= 3 * 8								; stack size required by the procedure
 ;------------------------------------------

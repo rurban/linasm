@@ -169,6 +169,38 @@ static flt64_t Max (flt64_t x, flt64_t y);
 static size_t Max (size_t x, size_t y);
 
 //****************************************************************************//
+//      Great common divisor                                                  //
+//****************************************************************************//
+
+// Unsigned integer types
+static uint8_t GCD (uint8_t x, uint8_t y);
+static uint16_t GCD (uint16_t x, uint16_t y);
+static uint32_t GCD (uint32_t x, uint32_t y);
+static uint64_t GCD (uint64_t x, uint64_t y);
+
+// Signed integer types
+static sint8_t GCD (sint8_t x, sint8_t y);
+static sint16_t GCD (sint16_t x, sint16_t y);
+static sint32_t GCD (sint32_t x, sint32_t y);
+static sint64_t GCD (sint64_t x, sint64_t y);
+
+//****************************************************************************//
+//      Less common multiplier                                                //
+//****************************************************************************//
+
+// Unsigned integer types
+static uint8_t LCM (uint8_t x, uint8_t y);
+static uint16_t LCM (uint16_t x, uint16_t y);
+static uint32_t LCM (uint32_t x, uint32_t y);
+static uint64_t LCM (uint64_t x, uint64_t y);
+
+// Signed integer types
+static sint8_t LCM (sint8_t x, sint8_t y);
+static sint16_t LCM (sint16_t x, sint16_t y);
+static sint32_t LCM (sint32_t x, sint32_t y);
+static sint64_t LCM (sint64_t x, sint64_t y);
+
+//****************************************************************************//
 //      Exponentiation functions                                              //
 //****************************************************************************//
 
@@ -373,6 +405,38 @@ flt64_t Math_Max_flt64 (flt64_t x, flt64_t y);
 
 // Other types
 size_t Math_Max_size (size_t x, size_t y);
+
+//****************************************************************************//
+//      Great common divisor                                                  //
+//****************************************************************************//
+
+// Unsigned integer types
+uint8_t Math_GCD_uint8 (uint8_t x, uint8_t y);
+uint16_t Math_GCD_uint16 (uint16_t x, uint16_t y);
+uint32_t Math_GCD_uint32 (uint32_t x, uint32_t y);
+uint64_t Math_GCD_uint64 (uint64_t x, uint64_t y);
+
+// Signed integer types
+sint8_t Math_GCD_sint8 (sint8_t x, sint8_t y);
+sint16_t Math_GCD_sint16 (sint16_t x, sint16_t y);
+sint32_t Math_GCD_sint32 (sint32_t x, sint32_t y);
+sint64_t Math_GCD_sint64 (sint64_t x, sint64_t y);
+
+//****************************************************************************//
+//      Less common multiplier                                                //
+//****************************************************************************//
+
+// Unsigned integer types
+uint8_t Math_LCM_uint8 (uint8_t x, uint8_t y);
+uint16_t Math_LCM_uint16 (uint16_t x, uint16_t y);
+uint32_t Math_LCM_uint32 (uint32_t x, uint32_t y);
+uint64_t Math_LCM_uint64 (uint64_t x, uint64_t y);
+
+// Signed integer types
+sint8_t Math_LCM_sint8 (sint8_t x, sint8_t y);
+sint16_t Math_LCM_sint16 (sint16_t x, sint16_t y);
+sint32_t Math_LCM_sint32 (sint32_t x, sint32_t y);
+sint64_t Math_LCM_sint64 (sint64_t x, sint64_t y);
 
 //****************************************************************************//
 //      Exponentiation functions                                              //
