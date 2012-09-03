@@ -17,17 +17,17 @@ format	ELF64
 ;******************************************************************************;
 
 ; Unsigned integer types
-public	ByteSwap16		as	'Math_Swap_uint16'
-public	ByteSwap32		as	'Math_Swap_uint32'
-public	ByteSwap64		as	'Math_Swap_uint64'
+public	ByteSwap16		as	'Math_ByteSwap_uint16'
+public	ByteSwap32		as	'Math_ByteSwap_uint32'
+public	ByteSwap64		as	'Math_ByteSwap_uint64'
 public	ByteSwap16		as	'_ZN4Math8ByteSwapEt'
 public	ByteSwap32		as	'_ZN4Math8ByteSwapEj'
 public	ByteSwap64		as	'_ZN4Math8ByteSwapEy'
 
 ; Signed integer types
-public	ByteSwap16		as	'Math_Swap_sint16'
-public	ByteSwap32		as	'Math_Swap_sint32'
-public	ByteSwap64		as	'Math_Swap_sint64'
+public	ByteSwap16		as	'Math_ByteSwap_sint16'
+public	ByteSwap32		as	'Math_ByteSwap_sint32'
+public	ByteSwap64		as	'Math_ByteSwap_sint64'
 public	ByteSwap16		as	'_ZN4Math8ByteSwapEs'
 public	ByteSwap32		as	'_ZN4Math8ByteSwapEi'
 public	ByteSwap64		as	'_ZN4Math8ByteSwapEx'
@@ -378,7 +378,7 @@ macro	BYTE_SWAP	result, value, scale
 if scale > 1
 		bswap	result
 else
-		xchg	al, ah
+		rol		ax, 8
 end if
 		ret
 }
@@ -438,14 +438,13 @@ NegAbs_flt64:	ABS_FLT		orpd, sign_mask_flt64
 ;******************************************************************************;
 ;       Number sign                                                            ;
 ;******************************************************************************;
-macro	SIGN_INT	value, temp
+macro	SIGN_INT	value
 {
 ;---[Internal variables]-------------------
 flag1	equ		al							; flag1 (set if value > 0)
 flag2	equ		dil							; flag2 (set if value < 0)
 ;------------------------------------------
-		xor		temp, temp					; temp = 0
-		cmp		value, temp					; compare value with 0
+		cmp		value, 0					; compare value with 0
 		setg	flag1						; set flag1 if value > 0
 		setl	flag2						; set flag2 if value < 0
 		sub		flag1, flag2				; return (flag1 - flag2)
@@ -476,10 +475,10 @@ end if
 }
 
 ; Signed integer types
-Sign_sint8:		SIGN_INT	dil, al
-Sign_sint16:	SIGN_INT	di, ax
-Sign_sint32:	SIGN_INT	edi, eax
-Sign_sint64:	SIGN_INT	rdi, rax
+Sign_sint8:		SIGN_INT	dil
+Sign_sint16:	SIGN_INT	di
+Sign_sint32:	SIGN_INT	edi
+Sign_sint64:	SIGN_INT	rdi
 
 ; Floating-point types
 Sign_flt32:		SIGN_FLT	s
