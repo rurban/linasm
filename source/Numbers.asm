@@ -374,18 +374,18 @@ end if
 macro	CHECK_SPECIAL	spec
 {
 .spcl:	xor		str, str					; Next lines read input text string
-		mov		char, [ptr + 0]				; char by char in char8_t array "str"
+		mov		char, [ptr + 0]				; char by char in "str" array
 		test	char, char					; and check "str" value for special
-		jz		.ntfnd						; text values for NaN and INF
+		jz		.ntfnd						; text values: NaN and INF
 		shl		str, 8						; If special values are detected,
-		mov		char, [ptr + 1]				; they set floating-point result
+		mov		char, [ptr + 1]				; then set floating-point result
 		test	char, char					; according to them
 		jz		.ntfnd
 		shl		str, 8
 		mov		char, [ptr + 2]
 		test	char, char
 		jz		.ntfnd
-		or		str, 0x00202020
+		or		str, 0x00202020				; convert string to lower case
 		cmp		str, 'nan'					; nan (Little endian string value)
 		mov		spec, [nan + sign * bytes + bytes]
 		je		@f
@@ -401,15 +401,18 @@ macro	CHECK_SPECIAL	spec
 ;******************************************************************************;
 ;       Binary numbers conversion                                              ;
 ;******************************************************************************;
-macro	BIN_TO_NUM	value, temp, max, max_value
+macro	BIN_TO_NUM	part, max_value
 {
 ;---[Parameters]---------------------------
 p_num	equ		rdi							; pointer to number
 string	equ		rsi							; source string
 ;---[Internal variables]-------------------
 ptr		equ		rax							; temporary pointer to string
+value	equ		rdx							; number value
+temp	equ		rcx							; temporary register
 char	equ		cl							; character
 digits	equ		r8							; count of digits that number has
+max		equ		r10							; max value
 ;---[Skipping white-symbols]---------------
 		SKIP_WHITE
 ;---[Skip bin prefix if found]-------------
@@ -424,9 +427,8 @@ digits	equ		r8							; count of digits that number has
 .loop:	cmp		value, max					; if (value >= max)
 		jae		.ovrfl						; then go to overflow branch
 		add		ptr, 1						; ptr++
-		shl		value, 1					; value *= 2
+		lea		value, [value * 2 + temp]	; value = value * 2 + temp
 		add		digits, 1					; digits++
-		add		value, temp					; value += temp
 @@:		mov		char, [ptr]
 		sub		char, '0'					; temp = ptr[0] - '0'
 		cmp		char, 1
@@ -434,7 +436,7 @@ digits	equ		r8							; count of digits that number has
 ;---[Normal exit branch]-------------------
 		test	digits, digits				; if no digits are found
 		jz		.ntfnd						; then go to not found branch
-		mov		[p_num], value				; p_num[0] = value
+		mov		[p_num], part				; p_num[0] = value
 		sub		ptr, string					; return ptr - string
 		ret
 ;---[Overflow exit branch]-----------------
@@ -446,23 +448,26 @@ digits	equ		r8							; count of digits that number has
 }
 
 ; Integer types
-BinToNum_int8:	BIN_TO_NUM	dl, cl, r10b, 0x80
-BinToNum_int16:	BIN_TO_NUM	dx, cx, r10w, 0x8000
-BinToNum_int32:	BIN_TO_NUM	edx, ecx, r10d, 0x80000000
-BinToNum_int64:	BIN_TO_NUM	rdx, rcx, r10, 0x8000000000000000
+BinToNum_int8:	BIN_TO_NUM	dl, 0x80
+BinToNum_int16:	BIN_TO_NUM	dx, 0x8000
+BinToNum_int32:	BIN_TO_NUM	edx, 0x80000000
+BinToNum_int64:	BIN_TO_NUM	rdx, 0x8000000000000000
 
 ;******************************************************************************;
 ;       Octal numbers conversion                                               ;
 ;******************************************************************************;
-macro	OCT_TO_NUM	value, temp, max, max_value
+macro	OCT_TO_NUM	part, max_value
 {
 ;---[Parameters]---------------------------
 p_num	equ		rdi							; pointer to number
 string	equ		rsi							; source string
 ;---[Internal variables]-------------------
 ptr		equ		rax							; temporary pointer to string
+value	equ		rdx							; number value
+temp	equ		rcx							; temporary register
 char	equ		cl							; character
 digits	equ		r8							; count of digits that number has
+max		equ		r10							; max value
 ;---[Skipping white-symbols]---------------
 		SKIP_WHITE
 ;---[Getting number digits]----------------
@@ -475,9 +480,8 @@ digits	equ		r8							; count of digits that number has
 .loop:	cmp		value, max					; if (value >= max)
 		jae		.ovrfl						; then go to overflow branch
 		add		ptr, 1						; ptr++
-		shl		value, 3					; value *= 8
+		lea		value, [value * 8 + temp]	; value = value * 8 + temp
 		add		digits, 1					; digits++
-		add		value, temp					; value += temp
 @@:		mov		char, [ptr]
 		sub		char, '0'					; temp = ptr[0] - '0'
 		cmp		char, 7
@@ -485,7 +489,7 @@ digits	equ		r8							; count of digits that number has
 ;---[Normal exit branch]-------------------
 		test	digits, digits				; if no digits are found
 		jz		.ntfnd						; then go to error
-		mov		[p_num], value				; p_num[0] = value
+		mov		[p_num], part				; p_num[0] = value
 		sub		ptr, string					; return ptr - string
 		ret
 ;---[Overflow exit branch]-----------------
@@ -497,10 +501,10 @@ digits	equ		r8							; count of digits that number has
 }
 
 ; Integer types
-OctToNum_int8:	OCT_TO_NUM	dl, cl, r10b, 0x20
-OctToNum_int16:	OCT_TO_NUM	dx, cx, r10w, 0x2000
-OctToNum_int32:	OCT_TO_NUM	edx, ecx, r10d, 0x20000000
-OctToNum_int64:	OCT_TO_NUM	rdx, rcx, r10, 0x2000000000000000
+OctToNum_int8:	OCT_TO_NUM	dl, 0x20
+OctToNum_int16:	OCT_TO_NUM	dx, 0x2000
+OctToNum_int32:	OCT_TO_NUM	edx, 0x20000000
+OctToNum_int64:	OCT_TO_NUM	rdx, 0x2000000000000000
 
 ;******************************************************************************;
 ;       Hexadecimal numbers conversion                                         ;
