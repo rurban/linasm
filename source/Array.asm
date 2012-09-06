@@ -117,6 +117,78 @@ public	Copy64					as	'_ZN5Array4CopyEPmPKmm'
 public	Copy8					as	'_ZN5Array4CopyEPvPKvm'
 
 ;******************************************************************************;
+;       Moving                                                                 ;
+;******************************************************************************;
+
+; Unsigned integer types
+public	Move8					as	'Array_Move_uint8'
+public	Move16					as	'Array_Move_uint16'
+public	Move32					as	'Array_Move_uint32'
+public	Move64					as	'Array_Move_uint64'
+public	Move8					as	'_ZN5Array4MoveEPhPKhm'
+public	Move16					as	'_ZN5Array4MoveEPtPKtm'
+public	Move32					as	'_ZN5Array4MoveEPjPKjm'
+public	Move64					as	'_ZN5Array4MoveEPyPKym'
+
+; Signed integer types
+public	Move8					as	'Array_Move_sint8'
+public	Move16					as	'Array_Move_sint16'
+public	Move32					as	'Array_Move_sint32'
+public	Move64					as	'Array_Move_sint64'
+public	Move8					as	'_ZN5Array4MoveEPaPKam'
+public	Move16					as	'_ZN5Array4MoveEPsPKsm'
+public	Move32					as	'_ZN5Array4MoveEPiPKim'
+public	Move64					as	'_ZN5Array4MoveEPxPKxm'
+
+; Floating-point types
+public	Move32					as	'Array_Move_flt32'
+public	Move64					as	'Array_Move_flt64'
+public	Move32					as	'_ZN5Array4MoveEPfPKfm'
+public	Move64					as	'_ZN5Array4MoveEPdPKdm'
+
+; Other types
+public	Move64					as	'Array_Move_size'
+public	Move8					as	'Array_Move'
+public	Move64					as	'_ZN5Array4MoveEPmPKmm'
+public	Move8					as	'_ZN5Array4MoveEPvPKvm'
+
+;******************************************************************************;
+;       Pattern cloning                                                        ;
+;******************************************************************************;
+
+; Unsigned integer types
+public	Clone8					as	'Array_Clone_uint8'
+public	Clone16					as	'Array_Clone_uint16'
+public	Clone32					as	'Array_Clone_uint32'
+public	Clone64					as	'Array_Clone_uint64'
+public	Clone8					as	'_ZN5Array5CloneEPhmm'
+public	Clone16					as	'_ZN5Array5CloneEPtmm'
+public	Clone32					as	'_ZN5Array5CloneEPjmm'
+public	Clone64					as	'_ZN5Array5CloneEPymm'
+
+; Signed integer types
+public	Clone8					as	'Array_Clone_sint8'
+public	Clone16					as	'Array_Clone_sint16'
+public	Clone32					as	'Array_Clone_sint32'
+public	Clone64					as	'Array_Clone_sint64'
+public	Clone8					as	'_ZN5Array5CloneEPamm'
+public	Clone16					as	'_ZN5Array5CloneEPsmm'
+public	Clone32					as	'_ZN5Array5CloneEPimm'
+public	Clone64					as	'_ZN5Array5CloneEPxmm'
+
+; Floating-point types
+public	Clone32					as	'Array_Clone_flt32'
+public	Clone64					as	'Array_Clone_flt64'
+public	Clone32					as	'_ZN5Array5CloneEPfmm'
+public	Clone64					as	'_ZN5Array5CloneEPdmm'
+
+; Other types
+public	Clone64					as	'Array_Clone_size'
+public	Clone8					as	'Array_Clone'
+public	Clone64					as	'_ZN5Array5CloneEPmmm'
+public	Clone8					as	'_ZN5Array5CloneEPvmm'
+
+;******************************************************************************;
 ;       Data conversion                                                        ;
 ;******************************************************************************;
 
@@ -533,8 +605,12 @@ public	FindBwdRo64				as	'_ZN5Array7FindBwdEPKxmx'
 ;==============================================================================;
 
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
-;       Ascending order sorted array                                           ;
+;       Array searching                                                        ;
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+
+;------------------------------------------------------------------------------;
+;       Ascending order sorted array                                           ;
+;------------------------------------------------------------------------------;
 
 ; Unsigned integer types
 public	FindAsc_uint8			as	'Array_FindAsc_uint8'
@@ -556,9 +632,9 @@ public	FindAsc_sint16			as	'_ZN5Array7FindAscEPKsms'
 public	FindAsc_sint32			as	'_ZN5Array7FindAscEPKimi'
 public	FindAsc_sint64			as	'_ZN5Array7FindAscEPKxmx'
 
-;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+;------------------------------------------------------------------------------;
 ;       Descending order sorted array                                          ;
-;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+;------------------------------------------------------------------------------;
 
 ; Unsigned integer types
 public	FindDsc_uint8			as	'Array_FindDsc_uint8'
@@ -579,6 +655,58 @@ public	FindDsc_sint8			as	'_ZN5Array7FindDscEPKama'
 public	FindDsc_sint16			as	'_ZN5Array7FindDscEPKsms'
 public	FindDsc_sint32			as	'_ZN5Array7FindDscEPKimi'
 public	FindDsc_sint64			as	'_ZN5Array7FindDscEPKxmx'
+
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+;       Key searching                                                          ;
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+
+;------------------------------------------------------------------------------;
+;       Ascending order sorted array                                           ;
+;------------------------------------------------------------------------------;
+
+; Unsigned integer types
+public	FindAscKey_uint8			as	'Array_FindAsc_uint8key'
+public	FindAscKey_uint16			as	'Array_FindAsc_uint16key'
+public	FindAscKey_uint32			as	'Array_FindAsc_uint32key'
+public	FindAscKey_uint64			as	'Array_FindAsc_uint64key'
+public	FindAscKey_uint8			as	'_ZN5Array7FindAscEPK9uint8_keymh'
+public	FindAscKey_uint16			as	'_ZN5Array7FindAscEPK10uint16_keymt'
+public	FindAscKey_uint32			as	'_ZN5Array7FindAscEPK10uint32_keymj'
+public	FindAscKey_uint64			as	'_ZN5Array7FindAscEPK10uint64_keymy'
+
+; Signed integer types
+public	FindAscKey_sint8			as	'Array_FindAsc_sint8key'
+public	FindAscKey_sint16			as	'Array_FindAsc_sint16key'
+public	FindAscKey_sint32			as	'Array_FindAsc_sint32key'
+public	FindAscKey_sint64			as	'Array_FindAsc_sint64key'
+public	FindAscKey_uint8			as	'_ZN5Array7FindAscEPK9uint8_keyma'
+public	FindAscKey_uint16			as	'_ZN5Array7FindAscEPK10uint16_keyms'
+public	FindAscKey_uint32			as	'_ZN5Array7FindAscEPK10uint32_keymi'
+public	FindAscKey_uint64			as	'_ZN5Array7FindAscEPK10uint64_keymx'
+
+;------------------------------------------------------------------------------;
+;       Descending order sorted array                                          ;
+;------------------------------------------------------------------------------;
+
+; Unsigned integer types
+public	FindDscKey_uint8			as	'Array_FindDsc_uint8key'
+public	FindDscKey_uint16			as	'Array_FindDsc_uint16key'
+public	FindDscKey_uint32			as	'Array_FindDsc_uint32key'
+public	FindDscKey_uint64			as	'Array_FindDsc_uint64key'
+public	FindDscKey_uint8			as	'_ZN5Array7FindDscEPK9uint8_keymh'
+public	FindDscKey_uint16			as	'_ZN5Array7FindDscEPK10uint16_keymt'
+public	FindDscKey_uint32			as	'_ZN5Array7FindDscEPK10uint32_keymj'
+public	FindDscKey_uint64			as	'_ZN5Array7FindDscEPK10uint64_keymy'
+
+; Signed integer types
+public	FindDscKey_sint8			as	'Array_FindDsc_sint8key'
+public	FindDscKey_sint16			as	'Array_FindDsc_sint16key'
+public	FindDscKey_sint32			as	'Array_FindDsc_sint32key'
+public	FindDscKey_sint64			as	'Array_FindDsc_sint64key'
+public	FindDscKey_uint8			as	'_ZN5Array7FindDscEPK9uint8_keyma'
+public	FindDscKey_uint16			as	'_ZN5Array7FindDscEPK10uint16_keyms'
+public	FindDscKey_uint32			as	'_ZN5Array7FindDscEPK10uint32_keymi'
+public	FindDscKey_uint64			as	'_ZN5Array7FindDscEPK10uint64_keymx'
 
 ;******************************************************************************;
 ;       Value replacement                                                      ;
@@ -1005,18 +1133,18 @@ step	= 16 / bytes						; step size (in bytes)
 		movq	temp, reg					; temp = value
 	clone_int	temp, scale					; duplicating value through the entire register
 ;---[Vector loop]--------------------------
-@@:		movdqu	[array], temp				; array[0] = temp
+.vloop:	movdqu	[array], temp				; array[0] = temp
 		add		array, 16					; array++
 		sub		size, step					; size -= step
-		jae		@b							; do while (size >= step)
+		jae		.vloop						; do while (size >= step)
 ;------------------------------------------
 .sclr:	add		size, step					; size += step
 		jz		.exit						; go to exit from the procedure
 ;---[Scalar loop]--------------------------
-@@:		mov		[array], value				; array[0] = value
+.sloop:	mov		[array], value				; array[0] = value
 		add		array, bytes				; array++
 		sub		size, 1						; size--
-		jnz		@b							; do while (size != 0)
+		jnz		.sloop						; do while (size != 0)
 ;------------------------------------------
 .exit:	ret
 }
@@ -1039,18 +1167,18 @@ step	= 16 / bytes						; step size (in bytes)
 		jb		.sclr						; if (size < step) then skip vector code
 	clone_flt	value, x					; duplicating value through the entire register
 ;---[Vector loop]--------------------------
-@@:		movup#x	[array], value				; array[0] = value
+.vloop:	movup#x	[array], value				; array[0] = value
 		add		array, 16					; array++
 		sub		size, step					; size -= step
-		jae		@b							; do while (size >= step)
+		jae		.vloop							; do while (size >= step)
 ;------------------------------------------
 .sclr:	add		size, step					; size += step
 		jz		.exit						; go to exit from the procedure
 ;---[Scalar loop]--------------------------
-@@:		movs#x	[array], value				; array[0] = value
+.sloop:	movs#x	[array], value				; array[0] = value
 		add		array, bytes				; array++
 		sub		size, 1						; size--
-		jnz		@b							; do while (size != 0)
+		jnz		.sloop						; do while (size != 0)
 ;------------------------------------------
 .exit:	ret
 }
@@ -1075,29 +1203,29 @@ target	equ		rdi							; pointer to target array
 source	equ 	rsi							; pointer to source array
 size	equ		rdx							; array size (count of elements)
 ;---[Internal variables]-------------------
-value	equ		xmm0						; value to process with
+value	equ		xmm0						; temporary register
 bytes	= 1 shl scale						; size of array element (bytes)
 step	= 16 / bytes						; step size (in bytes)
 ;------------------------------------------
 		sub		size, step					; size -= step
 		jb		.sclr						; if (size < step) then skip vector code
 ;---[Vector loop]--------------------------
-@@:		lddqu	value, [source]				; value = source[0]
+.vloop:	lddqu	value, [source]				; value = source[0]
 		movdqu	[target], value				; target[0] = value
 		add		source, 16					; source++
 		add		target, 16					; target++
 		sub		size, step					; size -= step
-		jae		@b							; do while (size >= step)
+		jae		.vloop						; do while (size >= step)
 ;------------------------------------------
 .sclr:	add		size, step					; size += step
 		jz		.exit						; If no scalar code is required, then exit
 ;---[Scalar loop]--------------------------
-@@:		mov		temp, [source]				; temp = source[0]
+.sloop:	mov		temp, [source]				; temp = source[0]
 		mov		[target], temp				; target[0] = temp
 		add		source, bytes				; source++
 		add		target, bytes				; target++
 		sub		size, 1						; size--
-		jnz		@b							; do while (size != 0)
+		jnz		.sloop						; do while (size != 0)
 ;------------------------------------------
 .exit:	ret
 }
@@ -1105,6 +1233,110 @@ Copy8:	COPY	al, 0
 Copy16:	COPY	ax, 1
 Copy32:	COPY	eax, 2
 Copy64:	COPY	rax, 3
+
+;******************************************************************************;
+;       Moving                                                                 ;
+;******************************************************************************;
+macro	MOVE	temp, scale
+{
+;---[Parameters]---------------------------
+target	equ		rdi							; pointer to target array
+source	equ 	rsi							; pointer to source array
+size	equ		rdx							; array size (count of elements)
+;---[Internal variables]-------------------
+value	equ		xmm0						; temporary register
+bytes	= 1 shl scale						; size of array element (bytes)
+step	= 16 / bytes						; step size (in bytes)
+;------------------------------------------
+		cmp		target, source
+		je		.exit						; if (target == source), then exit
+		ja		.bkwrd						; if (target > source), then go to backward branch
+;---[Copy array in forward direction]------
+		sub		size, step					; size -= step
+		jb		.sclr						; if (size < step) then skip vector code
+;---[Vector loop]--------------------------
+.vloop:	lddqu	value, [source]				; value = source[0]
+		movdqu	[target], value				; target[0] = value
+		add		source, 16					; source++
+		add		target, 16					; target++
+		sub		size, step					; size -= step
+		jae		.vloop						; do while (size >= step)
+;------------------------------------------
+.sclr:	add		size, step					; size += step
+		jz		.exit						; If no scalar code is required, then exit
+;---[Scalar loop]--------------------------
+.sloop:	mov		temp, [source]				; temp = source[0]
+		mov		[target], temp				; target[0] = temp
+		add		source, bytes				; source++
+		add		target, bytes				; target++
+		sub		size, 1						; size--
+		jnz		.sloop						; do while (size != 0)
+;------------------------------------------
+		ret
+;---[Copy array in backward direction]-----
+.bkwrd	lea		source, [source+size*bytes]	; source += size
+		lea		target, [source+size*bytes]	; target += size
+		sub		size, step					; size -= step
+		jb		.sclr						; if (size < step) then skip vector code
+;---[Vector loop]--------------------------
+.vloop:	sub		source, 16					; source--
+		sub		target, 16					; target--
+		lddqu	value, [source]				; value = source[0]
+		movdqu	[target], value				; target[0] = value
+		sub		size, step					; size -= step
+		jae		.vloop						; do while (size >= step)
+;------------------------------------------
+.sclr:	add		size, step					; size += step
+		jz		.exit						; If no scalar code is required, then exit
+;---[Scalar loop]--------------------------
+.sloop:	sub		source, bytes				; source--
+		sub		target, bytes				; target--
+		mov		temp, [source]				; temp = source[0]
+		mov		[target], temp				; target[0] = temp
+		sub		size, 1						; size--
+		jnz		.sloop						; do while (size != 0)
+;------------------------------------------
+.exit:	ret
+}
+Move8:	COPY	al, 0
+Move16:	COPY	ax, 1
+Move32:	COPY	eax, 2
+Move64:	COPY	rax, 3
+
+;******************************************************************************;
+;       Pattern cloning                                                        ;
+;******************************************************************************;
+macro	CLONE	temp, scale
+{
+;---[Parameters]---------------------------
+array	equ		rdi							; pointer to array
+size	equ		rsi							; array size (count of elements)
+psize	equ		rdx							; pattern size (count of elements)
+;---[Internal variables]-------------------
+value	equ		xmm0						; temporary register
+ptr		equ 	psize						; pointer to first element after pattern
+bytes	= 1 shl scale						; size of array element (bytes)
+step	= 16 / bytes						; step size (in bytes)
+;------------------------------------------
+		test	psize, psize				; if (psize == 0)
+		jz		.exit						;     then go to exit
+		sub		size, psize					; size -= psize
+		jbe		.exit						; if (size <= psize), then go to exit
+		lea		ptr, [array+psize*bytes]	; ptr = array + psize
+;---[Cloning loop]-------------------------
+.loop:	mov		temp, [array]				; temp = array[0]
+		mov		[ptr], temp					; ptr[0] = temp
+		add		array, bytes				; array++
+		add		ptr, bytes					; ptr++
+		sub		size, 1						; size--
+		jnz		.loop						; do while (size != 0)
+;------------------------------------------
+.exit:	ret
+}
+Clone8:		CLONE	al, 0
+Clone16:	CLONE	ax, 1
+Clone32:	CLONE	eax, 2
+Clone64:	CLONE	rax, 3
 
 ;******************************************************************************;
 ;       Data conversion                                                        ;
@@ -1128,23 +1360,23 @@ step2	= bytes2 * step						; step size for target array
 		sub		size, step					; size -= step
 		jb		.sclr						; if (size < step) then skip vector code
 ;---[Vector loop]--------------------------
-@@:		mov1	value, [source]				; value = source[0]
+.vloop:	mov1	value, [source]				; value = source[0]
 		cmd1	value, value				; value = convert (value)
 		mov2	[target], value				; target[0] = value
 		add		source, step1				; source++
 		add		target, step2				; target++
 		sub		size, step					; size -= step
-		jae		@b							; do while (size >= step)
+		jae		.vloop						; do while (size >= step)
 ;------------------------------------------
 .sclr:	add		size, step					; size += step
 		jz		.exit						; If no scalar code is required, then exit
 ;---[Scalar loop]--------------------------
-@@:		cmd2	temp, [source]				; temp = convert (source[0])
+.sloop:	cmd2	temp, [source]				; temp = convert (source[0])
 		mov3	[target], temp				; target[0] = temp
 		add		source, bytes1				; source++
 		add		target, bytes2				; target++
 		sub		size, 1						; size--
-		jnz		@b							; do while (size != 0)
+		jnz		.sloop						; do while (size != 0)
 ;------------------------------------------
 .exit:	ret
 }
@@ -1187,17 +1419,17 @@ step	= 16 / bytes						; step size (in bytes)
 		jb		.sclr						; if (size < step) then skip vector code
 		movdqa	bitmask, dqword [all_bits]	; mask = 111...111
 ;---[Vector loop]--------------------------
-@@:		movdqu	temp, [array]				; temp = array[0]
+.vloop:	movdqu	temp, [array]				; temp = array[0]
 		pandn	temp, bitmask				; temp = ~temp
 		movdqu	[array], temp				; array[0] = temp
 		add		array, 16					; array++
 		sub		size, step					; size -= step
-		jae		@b							; do while (size >= step)
+		jae		.vloop						; do while (size >= step)
 ;------------------------------------------
 .sclr:	add		size, step					; size += step
 		jz		.exit						; If no scalar code is required, then exit
 ;---[Scalar loop]--------------------------
-@@:
+.sloop:
 if scale = 0
 		not		byte [array]				; array[0] = ~array[0]
 else if scale = 1
@@ -1209,7 +1441,7 @@ else if scale = 3
 end if
 		add		array, bytes				; array++
 		sub		size, 1						; size--
-		jnz		@b							; do while (size != 0)
+		jnz		.sloop						; do while (size != 0)
 ;------------------------------------------
 .exit:	ret
 }
@@ -1236,24 +1468,24 @@ step	= 16 / bytes						; step size (in bytes)
 		sub		size, step					; size -= step
 		jb		.sclr						; if (size < step) then skip vector code
 ;---[Vector loop]--------------------------
-@@:		movdqu	temp1, [source]				; temp1 = source[0]
+.vloop:	movdqu	temp1, [source]				; temp1 = source[0]
 		movdqu	temp2, [target]				; temp2 = target[0]
 		cmd1	temp2, temp1				; temp2 = temp2 cmd temp1
 		movdqu	[target], temp2				; target[0] = temp2
 		add		source, 16					; source++
 		add		target, 16					; target++
 		sub		size, step					; size -= step
-		jae		@b							; do while (size >= step)
+		jae		.vloop						; do while (size >= step)
 ;------------------------------------------
 .sclr:	add		size, step					; size += step
 		jz		.exit						; If no scalar code is required, then exit
 ;---[Scalar loop]--------------------------
-@@:		mov		temp, [source]				; temp = source[0]
+.sloop:	mov		temp, [source]				; temp = source[0]
 		cmd2	[target], temp				; target = target cmd temp
 		add		source, bytes				; source++
 		add		target, bytes				; target++
 		sub		size, 1						; size--
-		jnz		@b							; do while (size != 0)
+		jnz		.sloop						; do while (size != 0)
 ;------------------------------------------
 .exit:	ret
 }
@@ -1304,22 +1536,22 @@ step	= 16 / bytes						; step size (in bytes)
 		sub		size, step					; size -= step
 		jb		.sclr						; if (size < step) then skip vector code
 ;---[Vector loop]--------------------------
-@@:		movup#x	temp, [array]				; temp = array[0]
+.vloop:	movup#x	temp, [array]				; temp = array[0]
 		op#x	temp, bmask					; do bit operation to temp
 		movup#x	[array], temp				; array[0] = temp
 		add		array, 16					; array++
 		sub		size, step					; size -= step
-		jae		@b							; do while (size >= step)
+		jae		.vloop						; do while (size >= step)
 ;------------------------------------------
 .sclr:	add		size, step					; size += step
 		jz		.exit						; If no scalar code is required, then exit
 ;---[Scalar loop]--------------------------
-@@:		movs#x	temp, [array]				; temp = array[0]
+.sloop:	movs#x	temp, [array]				; temp = array[0]
 		op#x	temp, bmask					; do bit operation to temp value
 		movs#x	[array], temp				; array[0] = temp
 		add		array, bytes				; array++
 		sub		size, 1						; size--
-		jnz		@b							; do while (size != 0)
+		jnz		.sloop						; do while (size != 0)
 ;------------------------------------------
 .exit:	ret
 }
@@ -1341,22 +1573,22 @@ step	= 16 / bytes						; step size (in bytes)
 		sub		size, step					; size -= step
 		jb		.sclr						; if (size < step) then skip vector code
 ;---[Vector loop]--------------------------
-@@:		movup#x	temp, [array]				; temp = array[0]
+.vloop:	movup#x	temp, [array]				; temp = array[0]
 		op1#x	temp, temp					; do operation to temp value
 		movup#x	[array], temp				; array[0] = temp
 		add		array, 16					; array++
 		sub		size, step					; size -= step
-		jae		@b							; do while (size >= step)
+		jae		.vloop						; do while (size >= step)
 ;------------------------------------------
 .sclr:	add		size, step					; size += step
 		jz		.exit						; If no scalar code is required, then exit
 ;---[Scalar loop]--------------------------
-@@:		movs#x	temp, [array]				; temp = array[0]
+.sloop:	movs#x	temp, [array]				; temp = array[0]
 		op2#x	temp, temp					; do operation to temp value
 		movs#x	[array], temp				; array[0] = temp
 		add		array, bytes				; array++
 		sub		size, 1						; size--
-		jnz		@b							; do while (size != 0)
+		jnz		.sloop						; do while (size != 0)
 ;------------------------------------------
 .exit:	ret
 }
@@ -1399,22 +1631,22 @@ step	= 16 / bytes						; step size (in bytes)
 		jb		.sclr						; if (size < step) then skip vector code
 	clone_flt	value, x					; Duplicating value through the entire register
 ;---[Vector loop]--------------------------
-@@:		movup#x	temp, [array]				; temp = array[0]
+.vloop:	movup#x	temp, [array]				; temp = array[0]
 		op#p#x	temp, value					; do operation to temp value
 		movup#x	[array], temp				; array[0] = temp
 		add		array, 16					; array++
 		sub		size, step					; size -= step
-		jae		@b							; do while (size >= step)
+		jae		.vloop						; do while (size >= step)
 ;------------------------------------------
 .sclr:	add		size, step					; size += step
 		jz		.exit						; If no scalar code is required, then exit
 ;---[Scalar loop]--------------------------
-@@:		movs#x	temp, [array]				; temp = array[0]
+.sloop:	movs#x	temp, [array]				; temp = array[0]
 		op#s#x	temp, value					; do operation to temp value
 		movs#x	[array], temp				; array[0] = temp
 		add		array, bytes				; array++
 		sub		size, 1						; size--
-		jnz		@b							; do while (size != 0)
+		jnz		.sloop						; do while (size != 0)
 ;------------------------------------------
 .exit:	ret
 }
@@ -1438,25 +1670,25 @@ step	= 16 / bytes						; step size (in bytes)
 		sub		size, step					; size -= step
 		jb		.sclr						; if (size < step) then skip vector code
 ;---[Vector loop]--------------------------
-@@:		movup#x	value, [source]				; value = source[0]
+.vloop:	movup#x	value, [source]				; value = source[0]
 		movup#x	temp, [target]				; temp = target[0]
 		op#p#x	temp, value					; do operation to temp value
 		movup#x	[target], temp				; target[0] = temp
 		add		source, 16					; source++
 		add		target, 16					; target++
 		sub		size, step					; size -= step
-		jae		@b							; do while (size >= step)
+		jae		.vloop						; do while (size >= step)
 ;------------------------------------------
 .sclr:	add		size, step					; size += step
 		jz		.exit						; If no scalar code is required, then exit
 ;---[Scalar loop]--------------------------
-@@:		movs#x	temp, [target]				; temp = target[0]
+.sloop:	movs#x	temp, [target]				; temp = target[0]
 		op#s#x	temp, [source]				; do operation to temp value
 		movs#x	[target], temp				; target[0] = temp
 		add		source, bytes				; source++
 		add		target, bytes				; target++
 		sub		size, 1						; size--
-		jnz		@b							; do while (size != 0)
+		jnz		.sloop						; do while (size != 0)
 ;------------------------------------------
 .exit:	ret
 }
@@ -1535,20 +1767,20 @@ step	= 16 / bytes						; step size (in bytes)
 		sub		size, step					; size -= step
 		jb		.sclr						; if (size < step) then skip vector code
 ;---[Vector loop]--------------------------
-@@:		movup#x	temp, [array]				; temp = array[0]
+.vloop:	movup#x	temp, [array]				; temp = array[0]
 		addp#x	sum, temp					; sum += temp
 		add		array, 16					; array++
 		sub		size, step					; size -= step
-		jae		@b							; do while (size >= step)
+		jae		.vloop						; do while (size >= step)
 ;------------------------------------------
 		summa	sum, x						; get all parallel sums
 .sclr:	add		size, step					; size += step
 		jz		.exit						; If no scalar code is required, then exit
 ;---[Scalar loop]--------------------------
-@@:		adds#x	sum, [array]				; sum += array[0]
+.sloop:	adds#x	sum, [array]				; sum += array[0]
 		add		array, bytes				; array++
 		sub		size, 1						; size--
-		jnz		@b							; do while (size != 0)
+		jnz		.sloop						; do while (size != 0)
 ;------------------------------------------
 .exit:	ret
 }
@@ -1577,23 +1809,23 @@ step	= 16 / bytes						; step size (in bytes)
 		sub		size, step					; size -= step
 		jb		.sclr						; if (size < step) then skip vector code
 ;---[Vector loop]--------------------------
-@@:		movup#x	temp, [array]				; temp = array[0]
+.vloop:	movup#x	temp, [array]				; temp = array[0]
 		mulp#x	temp, temp					; temp *= temp
 		addp#x	sum, temp					; sum += temp
 		add		array, 16					; array++
 		sub		size, step					; size -= step
-		jae		@b							; do while (size >= step)
+		jae		.vloop						; do while (size >= step)
 ;------------------------------------------
 		summa	sum, x						; get all parallel sums
 .sclr:	add		size, step					; size += step
 		jz		.exit						; If no scalar code is required, then exit
 ;---[Scalar loop]--------------------------
-@@:		movs#x	temp, [array]				; temp = array[0]
+.sloop:	movs#x	temp, [array]				; temp = array[0]
 		muls#x	temp, temp					; temp *= temp
 		adds#x	sum, temp					; sum += temp
 		add		array, bytes				; array++
 		sub		size, 1						; size--
-		jnz		@b							; do while (size != 0)
+		jnz		.sloop						; do while (size != 0)
 ;------------------------------------------
 .exit:	ret
 }
@@ -1624,26 +1856,26 @@ step	= 16 / bytes						; step size (in bytes)
 		sub		size, step					; size -= step
 		jb		.sclr						; if (size < step) then skip vector code
 ;---[Vector loop]--------------------------
-@@:		movup#x	temp1, [array1]				; temp1 = array1[0]
+.vloop:	movup#x	temp1, [array1]				; temp1 = array1[0]
 		movup#x	temp2, [array2]				; temp2 = array2[0]
 		mulp#x	temp1, temp2				; temp1 *= temp2
 		addp#x	sum, temp1					; sum += temp1
 		add		array1, 16					; array1++
 		add		array2, 16					; array2++
 		sub		size, step					; size -= step
-		jae		@b							; do while (size >= step)
+		jae		.vloop						; do while (size >= step)
 ;------------------------------------------
 		summa	sum, x						; get all parallel sums
 .sclr:	add		size, step					; size += step
 		jz		.exit						; If no scalar code is required, then exit
 ;---[Scalar loop]--------------------------
-@@:		movs#x	temp1, [array1]				; temp1 = array1[0]
+.sloop:	movs#x	temp1, [array1]				; temp1 = array1[0]
 		muls#x	temp1, [array2]				; temp1 *= array2[0]
 		adds#x	sum, temp1					; sum += temp1
 		add		array1, bytes				; array1++
 		add		array2, bytes				; array2++
 		sub		size, 1						; size--
-		jnz		@b							; do while (size != 0)
+		jnz		.sloop						; do while (size != 0)
 ;------------------------------------------
 .exit:	ret
 }
@@ -1683,7 +1915,7 @@ end if
 		jb		.sclr						; if (size < step) then skip vector code
 		xorp#x	accum, accum				; accum = 0
 ;---[Vector loop]--------------------------
-@@:		movup#x	temp, [array]				; temp = array[0]
+.vloop:	movup#x	temp, [array]				; temp = array[0]
 		cmpp#x	accum, temp, 3				; check values for NANs
 	movmskp#x	cmask, accum				; save compare result to cmask
 		test	cmask, cmask				; if NAN is detected,
@@ -1694,7 +1926,7 @@ end if
 		op#p#x	result, temp				; find min or max values
 		add		array, 16					; array++
 		sub		size, step					; size -= step
-		jae		@b							; do while (size >= step)
+		jae		.vloop						; do while (size >= step)
 ;------------------------------------------
 if x eq s
 		movhlps	temp, result				; temp = upper half of result
@@ -1706,7 +1938,7 @@ end if
 .sclr:	add		size, step					; size += step
 		jz		.exit						; If no scalar code is required, then exit
 ;---[Scalar loop]--------------------------
-@@:		movs#x	temp, [array]				; temp = array[0]
+.sloop:	movs#x	temp, [array]				; temp = array[0]
 		comis#x	temp, temp					; check value for NAN
 		jp		.nan						; if NAN is detected, then break the loop
 if abs
@@ -1715,7 +1947,7 @@ end if
 		op#s#x	result, temp				; find min or max value
 		add		array, bytes				; array++
 		sub		size, 1						; size--
-		jnz		@b							; do while (size != 0)
+		jnz		.sloop						; do while (size != 0)
 ;---[Normal exit branch]-------------------
 .exit:	ret
 ;---[NaN detected branch]------------------
@@ -1765,24 +1997,24 @@ step	= 16 / bytes						; step size (in bytes)
 		sub		size, step					; size -= step
 		jb		.sclr						; if (size < step) then skip vector code
 ;---[Vector loop]--------------------------
-@@:		movup#x	temp, [array]				; temp = array[0]
+.vloop:	movup#x	temp, [array]				; temp = array[0]
 		cmpp#x	temp, temp, 3				; check values for NANs
 	movmskp#x	cmask, temp					; save compare result to mask
 		test	cmask, cmask				; if NAN is detected,
 		jnz		.nan						;     then go to NaN detected branch
 		add		array, 16					; array++
 		sub		size, step					; size -= step
-		jae		@b							; do while (size >= step)
+		jae		.vloop						; do while (size >= step)
 ;------------------------------------------
 .sclr:	add		size, step					; size += step
 		jz		.exit						; If no scalar code is required, then exit
 ;---[Scalar loop]--------------------------
-@@:		movs#x	temp, [array]				; temp = array[0]
+.sloop:	movs#x	temp, [array]				; temp = array[0]
 		comis#x	temp, temp					; check value for NAN
 		jp		.nan						; if NAN is detected, then break the loop
 		add		array, bytes				; array++
 		sub		size, 1						; size--
-		jnz		@b							; do while (size != 0)
+		jnz		.sloop						; do while (size != 0)
 ;---[Normal exit branch]-------------------
 .exit:	xor		res, res					; return false (do normal exit)
 		ret
@@ -2006,13 +2238,14 @@ templ	equ		r8b							; lower part of temporary variable
 bytes	= 1 shl scale						; size of array element (bytes)
 ;------------------------------------------
 		test	size, size					; if (size == 0)
-		jz		.exit						; then go to exit
+		jz		.ntfnd						; then go to not found branch
 ;---[If size != 0]-------------------------
 		mov		left, array					; left = array
 		sub		size, 1						; if (--size == 0)
 		jz		.skip						; then skip searching
 ;---[If --size != 0]-----------------------
-		lea		right, [array + size*bytes]	; right = array + size
+		shl		size, scale
+		add		right, array				; right = array + size
 		xor		temp, temp					; temp = 0
 		mov		median, right
 		sub		median, left
@@ -2026,26 +2259,35 @@ end if
 		set#op	templ						;     left = median + 1
 		cmov#op	left, median				; else
 	cmovn#op	right, median				;     right = median
+if scale < 4
 		lea		left, [left + temp * bytes]
+else
+		shl		temp, scale
+		add		left, temp
+end if
 		mov		median, right
 		sub		median, left
 		ja		@b							; } do while (right > left)
 ;---[end of loop]--------------------------
 .skip:	cmp		element, [left]				; if (element == left[0])
-		jne		.exit						; {
+		jne		.ntfnd						; {
 		sub		left, array					;     return left - array
 if scale > 0
 		shr		left, scale					; }
 end if
 		ret
 ;---[Not found]----------------------------
-.exit:	mov		left, NOT_FOUND				; return NOT_FOUND
+.ntfnd:	mov		left, NOT_FOUND				; return NOT_FOUND
 		ret
 }
 
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
-;       Ascending order sorted array                                           ;
+;       Array searching                                                        ;
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+
+;------------------------------------------------------------------------------;
+;       Ascending order sorted array                                           ;
+;------------------------------------------------------------------------------;
 
 ; Unsigned integer types
 FindAsc_uint8:	FIND_BIN	dl, a, 0
@@ -2059,9 +2301,9 @@ FindAsc_sint16:	FIND_BIN	dx, g, 1
 FindAsc_sint32:	FIND_BIN	edx, g, 2
 FindAsc_sint64:	FIND_BIN	rdx, g, 3
 
-;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+;------------------------------------------------------------------------------;
 ;       Descending order sorted array                                          ;
-;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+;------------------------------------------------------------------------------;
 
 ; Unsigned integer types
 FindDsc_uint8:	FIND_BIN	dl, b, 0
@@ -2075,6 +2317,42 @@ FindDsc_sint16:	FIND_BIN	dx, l, 1
 FindDsc_sint32:	FIND_BIN	edx, l, 2
 FindDsc_sint64:	FIND_BIN	rdx, l, 3
 
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+;       Key searching                                                          ;
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+
+;------------------------------------------------------------------------------;
+;       Ascending order sorted array                                           ;
+;------------------------------------------------------------------------------;
+
+; Unsigned integer types
+FindAscKey_uint8:	FIND_BIN	dl, a, 4
+FindAscKey_uint16:	FIND_BIN	dx, a, 4
+FindAscKey_uint32:	FIND_BIN	edx, a, 4
+FindAscKey_uint64:	FIND_BIN	rdx, a, 4
+
+; Signed integer types
+FindAscKey_sint8:	FIND_BIN	dl, g, 4
+FindAscKey_sint16:	FIND_BIN	dx, g, 4
+FindAscKey_sint32:	FIND_BIN	edx, g, 4
+FindAscKey_sint64:	FIND_BIN	rdx, g, 4
+
+;------------------------------------------------------------------------------;
+;       Descending order sorted array                                          ;
+;------------------------------------------------------------------------------;
+
+; Unsigned integer types
+FindDscKey_uint8:	FIND_BIN	dl, b, 4
+FindDscKey_uint16:	FIND_BIN	dx, b, 4
+FindDscKey_uint32:	FIND_BIN	edx, b, 4
+FindDscKey_uint64:	FIND_BIN	rdx, b, 4
+
+; Signed integer types
+FindDscKey_sint8:	FIND_BIN	dl, l, 4
+FindDscKey_sint16:	FIND_BIN	dx, l, 4
+FindDscKey_sint32:	FIND_BIN	edx, l, 4
+FindDscKey_sint64:	FIND_BIN	rdx, l, 4
+
 ;******************************************************************************;
 ;       Value replacement                                                      ;
 ;******************************************************************************;
@@ -2083,18 +2361,18 @@ macro	REPLACE	pattern, val, scale
 ;---[Parameters]---------------------------
 array	equ		rdi							; pointer to array
 size	equ		rsi							; array size (count of elements)
-;---[Internal variables]-------------------
 value	equ		rcx							; value that replace pattern
+;---[Internal variables]-------------------
 temp	equ		rax							; temporary register to hold element value
 bytes	= 1 shl scale						; size of array element (bytes)
 ;------------------------------------------
 		test	size, size					; if (size == 0)
 		jz		.exit						; then go to exit
 ;---[Loop]---------------------------------
-@@:		mov		val, [array]				; temp = array[0]
-		cmp		val, pattern				; if (temp == pattern)
-		cmove	temp, value					;     temp = value
-		mov		[array], val				; array[0] = temp
+@@:		mov		val, [array]				; val = array[0]
+		cmp		val, pattern				; if (val == pattern)
+		cmove	temp, value					;     val = value
+		mov		[array], val				; array[0] = val
 		add		array, bytes				; array++
 		sub		size, 1						; size--
 		jnz		@b							; do while (size != 0)
@@ -2139,7 +2417,7 @@ step	= 16 / bytes						; step size (in bytes)
 		movdqa	temp1, [one]				; temp1 = 1
 		movdqa	temp2, [mask]				; temp = mask
 ;---[Vector loop]--------------------------
-@@:		movdqu	value, [array]				; value = array[0]
+.vloop:	movdqu	value, [array]				; value = array[0]
 		movdqa	temp, value					; temp = value
 		psrl#x	temp, bytes * 8 - 1			; temp >>= sizeof (type) - 1
 		psub#x	temp, temp1					; temp -= 1
@@ -2148,18 +2426,18 @@ step	= 16 / bytes						; step size (in bytes)
 		movdqu	[array], value				; array[0] = value
 		add		array, 16					; array++
 		sub		size, step					; size -= step
-		jae		@b							; do while (size >= step)
+		jae		.vloop						; do while (size >= step)
 ;------------------------------------------
 .sclr:	add		size, step					; size += step
 		jz		.exit						; go to exit from the procedure
 ;---[Scalar loop]--------------------------
-@@:		mov		val, [array]				; val = array[0]
+.sloop:	mov		val, [array]				; val = array[0]
 		sar		val, bytes * 8 - 2			; val >>= sizeof (type) - 2
 		shr		val, 1						; val >>= 1
 		xor		[array], val				; array[0] ^= val
 		add		array, bytes				; array++
 		sub		size, 1						; size--
-		jnz		@b							; do while (size != 0)
+		jnz		.sloop						; do while (size != 0)
 ;------------------------------------------
 .exit:	ret
 }
@@ -2176,7 +2454,7 @@ bytes	= 1 shl scale						; size of array element (bytes)
 ;------------------------------------------
 		test	size, size					; If size = 0
 		jz		.exit						; then go to exit
-;---[Scalar loop]--------------------------
+;---[Loop]---------------------------------
 @@:		mov		temp, [array]				; temp = array[0]
 		sar		temp, bytes * 8 - 2			; temp >>= sizeof (type) - 2
 		shr		temp, 1						; temp >>= 1

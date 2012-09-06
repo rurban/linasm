@@ -221,20 +221,20 @@ step	= 16 / bytes						; step size (in bytes)
 		sub		size, step					; size -= step
 		jb		.sclr						; if (size < step) then skip vector code
 ;---[Vector loop]--------------------------
-@@:		movup#x	temp, [array]				; temp = array[0]
+.vloop:	movup#x	temp, [array]				; temp = array[0]
 		addp#x	sum, temp					; sum += temp
 		add		array, 16					; array++
 		sub		size, step					; size -= step
-		jae		@b							; do while (size >= step)
+		jae		.vloop						; do while (size >= step)
 ;------------------------------------------
 		summa	sum, x						; get all parallel sums
 .sclr:	add		size, step					; size += step
 		jz		.exit						; If no scalar code is required, then exit
 ;---[Scalar loop]--------------------------
-@@:		adds#x	sum, [array]				; sum += array[0]
+.sloop:	adds#x	sum, [array]				; sum += array[0]
 		add		array, bytes				; array++
 		sub		size, 1						; size--
-		jnz		@b							; do while (size != 0)
+		jnz		.sloop						; do while (size != 0)
 ;------------------------------------------
 .exit:	divs#x	sum, n						; sum = sum / size
 		ret
@@ -553,26 +553,26 @@ end if
 		jb		.sclr						; skip vector code and do scalar only
 		clone	mean, x						; Duplicate value through the entire register
 ;---[Vector loop]--------------------------
-@@:		movup#x	temp, [array]
+.vloop:	movup#x	temp, [array]
 		subp#x	temp, mean
 		mulp#x	temp, temp
 		addp#x	sum, temp					; sum += (array[0] - mean)^2
 		add		array, 16					; array++
 		sub		size, 16 / bytes			; size -= 16 / bytes
-		jae		@b							; do while (size >= 16 / bytes)
+		jae		.vloop						; do while (size >= 16 / bytes)
 ;---[end of vector loop]-------------------
 		summa	sum, x						; get all sums into one scalar value
 ;---[Scalar section]-----------------------
 .sclr:	add		size, 16 / bytes			; if (size = 0), then
 		jz		.exit						; go to exit from the procedure
 ;---[Scalar loop]--------------------------
-@@:		movs#x	temp, [array]
+.sloop:	movs#x	temp, [array]
 		subs#x	temp, mean
 		muls#x	temp, temp
 		adds#x	sum, temp					; sum += (array[0] - mean)^2
 		add		array, bytes				; array++
 		sub		size, 1						; size--
-		jnz		@b							; do while (size != 0)
+		jnz		.sloop						; do while (size != 0)
 ;---[end of scalar loop]-------------------
 .exit:	divs#x	sum, n						; sum = sum / (size - 1)
 		movs#x	res, sum					; result = sum
@@ -644,26 +644,26 @@ end if
 		jb		.sclr						; skip vector code and do scalar only
 		clone	value, x						; Duplicate value through the entire register
 ;---[Vector loop]--------------------------
-@@:		movup#x	temp, [array]
+.vloop:	movup#x	temp, [array]
 		subp#x	temp, value
 		andp#x	temp, bmask
 		addp#x	sum, temp					; sum += abs (array[0] - value)
 		add		array, 16					; array++
 		sub		size, 16 / bytes			; size -= 16 / bytes
-		jae		@b							; do while (size >= 16 / bytes)
+		jae		.vloop						; do while (size >= 16 / bytes)
 ;---[end of vector loop]-------------------
 		summa	sum, x						; get all sums into one scalar value
 ;---[Scalar section]-----------------------
 .sclr:	add		size, 16 / bytes			; if (size = 0), then
 		jz		.exit						; go to exit from the procedure
 ;---[Scalar loop]--------------------------
-@@:		movs#x	temp, [array]
+.sloop:	movs#x	temp, [array]
 		subs#x	temp, value
 		andp#x	temp, bmask
 		adds#x	sum, temp					; sum += abs (array[0] - value)
 		add		array, bytes				; array++
 		sub		size, 1						; size--
-		jnz		@b							; do while (size != 0)
+		jnz		.sloop						; do while (size != 0)
 ;---[end of scalar loop]-------------------
 .exit:	divs#x	sum, n						; sum = sum / (size - 1)
 		movs#x	res, sum					; result = sum
@@ -874,7 +874,7 @@ end if
 		jb		.sclr						; skip vector code and do scalar only
 		clone	mean, x						; Duplicate value through the entire register
 ;---[Vector loop]--------------------------
-@@:		movup#x	temp1, [array]
+.vloop:	movup#x	temp1, [array]
 		subp#x	temp1, mean
 		movap#x	temp2, temp1
 		mulp#x	temp1, temp1
@@ -883,7 +883,7 @@ end if
 		addp#x	sum2, temp2					; sum2 += (array[0] - mean)^3
 		add		array, 16					; array++
 		sub		size, 16 / bytes			; size -= 16 / bytes
-		jae		@b							; do while (size >= 16 / bytes)
+		jae		.vloop						; do while (size >= 16 / bytes)
 ;---[end of vector loop]-------------------
 		summa	sum1, x						; get all sums into one scalar value
 		summa	sum2, x						; get all sums into one scalar value
@@ -891,7 +891,7 @@ end if
 .sclr:	add		size, 16 / bytes			; if (size = 0), then
 		jz		.exit						; go to exit from the procedure
 ;---[Scalar loop]--------------------------
-@@:		movs#x	temp1, [array]
+.sloop:	movs#x	temp1, [array]
 		subs#x	temp1, mean
 		movs#x	temp2, temp1
 		muls#x	temp1, temp1
@@ -900,7 +900,7 @@ end if
 		adds#x	sum2, temp2					; sum2 += (array[0] - mean)^3
 		add		array, bytes				; array++
 		sub		size, 1						; size--
-		jnz		@b							; do while (size != 0)
+		jnz		.sloop						; do while (size != 0)
 ;---[end of scalar loop]-------------------
 .exit:	sqrts#x	temp1, sum1					; temp1 = sqrt (sum1)
 		divs#x	sum2, sum1					; sum2 = sum2 / sum1
@@ -976,7 +976,7 @@ end if
 		jb		.sclr						; skip vector code and do scalar only
 		clone	mean, x						; Duplicate value through the entire register
 ;---[Vector loop]--------------------------
-@@:		movup#x	temp2, [array]
+.vloop:	movup#x	temp2, [array]
 		subp#x	temp2, mean
 		mulp#x	temp2, temp2
 		addp#x	sum1, temp2					; sum1 += (array[0] - mean)^2
@@ -984,7 +984,7 @@ end if
 		addp#x	sum2, temp2					; sum2 += (array[0] - mean)^4
 		add		array, 16					; array++
 		sub		size, 16 / bytes			; size -= 16 / bytes
-		jae		@b							; do while (size >= 16 / bytes)
+		jae		.vloop						; do while (size >= 16 / bytes)
 ;---[end of vector loop]-------------------
 		summa	sum1, x						; get all sums into one scalar value
 		summa	sum2, x						; get all sums into one scalar value
@@ -992,7 +992,7 @@ end if
 .sclr:	add		size, 16 / bytes			; if (size = 0), then
 		jz		.exit						; go to exit from the procedure
 ;---[Scalar loop]--------------------------
-@@:		movs#x	temp2, [array]
+.sloop:	movs#x	temp2, [array]
 		subs#x	temp2, mean
 		muls#x	temp2, temp2
 		adds#x	sum1, temp2					; sum1 += (array[0] - mean)^2
@@ -1000,7 +1000,7 @@ end if
 		adds#x	sum2, temp2					; sum2 += (array[0] - mean)^4
 		add		array, bytes				; array++
 		sub		size, 1						; size--
-		jnz		@b							; do while (size != 0)
+		jnz		.sloop						; do while (size != 0)
 ;---[end of scalar loop]-------------------
 .exit:	divs#x	sum2, sum1
 		divs#x	sum2, sum1					; sum2 = sum2 / sum1^2
@@ -1056,7 +1056,7 @@ end if
 		clone	mean1, x					; Duplicate value through the entire register
 		clone	mean2, x					; Duplicate value through the entire register
 ;---[Vector loop]--------------------------
-@@:		movup#x	temp1, [array1]
+.vloop:	movup#x	temp1, [array1]
 		movup#x	temp2, [array2]
 		subp#x	temp1, mean1				; temp1 = array1[0] - mean1
 		subp#x	temp2, mean2				; temp2 = array2[0] - mean2
@@ -1065,14 +1065,14 @@ end if
 		add		array1, 16					; array1++
 		add		array2, 16					; array2++
 		sub		size, 16 / bytes			; size -= 16 / bytes
-		jae		@b							; do while (size >= 16 / bytes)
+		jae		.vloop						; do while (size >= 16 / bytes)
 ;---[end of vector loop]-------------------
 		summa	sum, x						; get all sums into one scalar value
 ;---[Scalar section]-----------------------
 .sclr:	add		size, 16 / bytes			; if (size = 0), then
 		jz		.exit						; go to exit from the procedure
 ;---[Scalar loop]--------------------------
-@@:		movs#x	temp1, [array1]
+.sloop:	movs#x	temp1, [array1]
 		movs#x	temp2, [array2]
 		subs#x	temp1, mean1				; temp1 = array1[0] - mean1
 		subs#x	temp2, mean2				; temp2 = array2[0] - mean2
@@ -1081,7 +1081,7 @@ end if
 		add		array1, bytes				; array1++
 		add		array2, bytes				; array2++
 		sub		size, 1						; size--
-		jnz		@b							; do while (size != 0)
+		jnz		.sloop						; do while (size != 0)
 ;---[end of scalar loop]-------------------
 .exit:	divs#x	sum, n						; sum = sum / (size - 1)
 		movs#x	res, sum					; result = sum
@@ -1127,7 +1127,7 @@ end if
 		clone	mean1, x					; Duplicate value through the entire register
 		clone	mean2, x					; Duplicate value through the entire register
 ;---[Vector loop]--------------------------
-@@:		movup#x	temp1, [array1]
+.vloop:	movup#x	temp1, [array1]
 		movup#x	temp2, [array2]
 		subp#x	temp1, mean1				; temp1 = (array1[0] - mean1)
 		subp#x	temp2, mean2				; temp2 = (array2[0] - mean2)
@@ -1141,7 +1141,7 @@ end if
 		add		array1, 16					; array1++
 		add		array2, 16					; array2++
 		sub		size, 16 / bytes			; size -= 16 / bytes
-		jae		@b							; do while (size >= 16 / bytes)
+		jae		.vloop						; do while (size >= 16 / bytes)
 ;---[end of vector loop]-------------------
 		summa	sum, x						; get all sums into one scalar value
 		summa	sum1, x						; get all sums into one scalar value
@@ -1150,7 +1150,7 @@ end if
 .sclr:	add		size, 16 / bytes			; if (size = 0), then
 		jz		.exit						; go to exit from the procedure
 ;---[Scalar loop]--------------------------
-@@:		movs#x	temp1, [array1]
+.sloop:	movs#x	temp1, [array1]
 		movs#x	temp2, [array2]
 		subs#x	temp1, mean1				; temp1 = (array1[0] - mean1)
 		subs#x	temp2, mean2				; temp2 = (array2[0] - mean2)
@@ -1164,7 +1164,7 @@ end if
 		add		array1, bytes				; array1++
 		add		array2, bytes				; array1++
 		sub		size, 1						; size--
-		jnz		@b							; do while (size != 0)
+		jnz		.sloop						; do while (size != 0)
 ;---[end of scalar loop]-------------------
 .exit:	sqrts#x	sum1, sum1
 		sqrts#x	sum2, sum2

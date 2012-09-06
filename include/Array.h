@@ -151,6 +151,54 @@ static void Copy (size_t target[], const size_t source[], size_t size);
 static void Copy (void *target, const void *source, size_t size);
 
 //****************************************************************************//
+//      Moving                                                                //
+//****************************************************************************//
+
+// Unsigned integer types
+static void Move (uint8_t target[], const uint8_t source[], size_t size);
+static void Move (uint16_t target[], const uint16_t source[], size_t size);
+static void Move (uint32_t target[], const uint32_t source[], size_t size);
+static void Move (uint64_t target[], const uint64_t source[], size_t size);
+
+// Signed integer types
+static void Move (sint8_t target[], const sint8_t source[], size_t size);
+static void Move (sint16_t target[], const sint16_t source[], size_t size);
+static void Move (sint32_t target[], const sint32_t source[], size_t size);
+static void Move (sint64_t target[], const sint64_t source[], size_t size);
+
+// Floating-point types
+static void Move (flt32_t target[], const flt32_t source[], size_t size);
+static void Move (flt64_t target[], const flt64_t source[], size_t size);
+
+// Other types
+static void Move (size_t target[], const size_t source[], size_t size);
+static void Move (void *target, const void *source, size_t size);
+
+//****************************************************************************//
+//      Pattern cloning                                                       //
+//****************************************************************************//
+
+// Unsigned integer types
+static void Clone (uint8_t array[], size_t size, size_t psize);
+static void Clone (uint16_t array[], size_t size, size_t psize);
+static void Clone (uint32_t array[], size_t size, size_t psize);
+static void Clone (uint64_t array[], size_t size, size_t psize);
+
+// Signed integer types
+static void Clone (sint8_t array[], size_t size, size_t psize);
+static void Clone (sint16_t array[], size_t size, size_t psize);
+static void Clone (sint32_t array[], size_t size, size_t psize);
+static void Clone (sint64_t array[], size_t size, size_t psize);
+
+// Floating-point types
+static void Clone (flt32_t array[], size_t size, size_t psize);
+static void Clone (flt64_t array[], size_t size, size_t psize);
+
+// Other types
+static void Clone (size_t array[], size_t size, size_t psize);
+static void Clone (void *array, size_t size, size_t psize);
+
+//****************************************************************************//
 //      Data conversion                                                       //
 //****************************************************************************//
 
@@ -444,8 +492,12 @@ static size_t FindBwd (const sint64_t array[], size_t size, sint64_t value);
 //============================================================================//
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
-//      Ascending order sorted array                                          //
+//      Array searching                                                       //
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+
+//----------------------------------------------------------------------------//
+//      Ascending order sorted array                                          //
+//----------------------------------------------------------------------------//
 
 // Unsigned integer types
 static size_t FindAsc (const uint8_t array[], size_t size, uint8_t value);
@@ -459,9 +511,9 @@ static size_t FindAsc (const sint16_t array[], size_t size, sint16_t value);
 static size_t FindAsc (const sint32_t array[], size_t size, sint32_t value);
 static size_t FindAsc (const sint64_t array[], size_t size, sint64_t value);
 
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//----------------------------------------------------------------------------//
 //      Descending order sorted array                                         //
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//----------------------------------------------------------------------------//
 
 // Unsigned integer types
 static size_t FindDsc (const uint8_t array[], size_t size, uint8_t value);
@@ -474,6 +526,42 @@ static size_t FindDsc (const sint8_t array[], size_t size, sint8_t value);
 static size_t FindDsc (const sint16_t array[], size_t size, sint16_t value);
 static size_t FindDsc (const sint32_t array[], size_t size, sint32_t value);
 static size_t FindDsc (const sint64_t array[], size_t size, sint64_t value);
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//      Key searching                                                         //
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+
+//----------------------------------------------------------------------------//
+//      Ascending order sorted array                                          //
+//----------------------------------------------------------------------------//
+
+// Unsigned integer types
+static size_t FindAsc (const uint8_key array[], size_t size, uint8_t value);
+static size_t FindAsc (const uint16_key array[], size_t size, uint16_t value);
+static size_t FindAsc (const uint32_key array[], size_t size, uint32_t value);
+static size_t FindAsc (const uint64_key array[], size_t size, uint64_t value);
+
+// Signed integer types
+static size_t FindAsc (const sint8_key array[], size_t size, sint8_t value);
+static size_t FindAsc (const sint16_key array[], size_t size, sint16_t value);
+static size_t FindAsc (const sint32_key array[], size_t size, sint32_t value);
+static size_t FindAsc (const sint64_key array[], size_t size, sint64_t value);
+
+//----------------------------------------------------------------------------//
+//      Descending order sorted array                                         //
+//----------------------------------------------------------------------------//
+
+// Unsigned integer types
+static size_t FindDsc (const uint8_key array[], size_t size, uint8_t value);
+static size_t FindDsc (const uint16_key array[], size_t size, uint16_t value);
+static size_t FindDsc (const uint32_key array[], size_t size, uint32_t value);
+static size_t FindDsc (const uint64_key array[], size_t size, uint64_t value);
+
+// Signed integer types
+static size_t FindDsc (const sint8_key array[], size_t size, sint8_t value);
+static size_t FindDsc (const sint16_key array[], size_t size, sint16_t value);
+static size_t FindDsc (const sint32_key array[], size_t size, sint32_t value);
+static size_t FindDsc (const sint64_key array[], size_t size, sint64_t value);
 
 //****************************************************************************//
 //      Value replacement                                                     //
@@ -772,6 +860,54 @@ void Array_Copy_size (size_t target[], const size_t source[], size_t size);
 void Array_Copy (void *target, const void *source, size_t size);
 
 //****************************************************************************//
+//      Moving                                                                //
+//****************************************************************************//
+
+// Unsigned integer types
+void Array_Move_uint8 (uint8_t target[], const uint8_t source[], size_t size);
+void Array_Move_uint16 (uint16_t target[], const uint16_t source[], size_t size);
+void Array_Move_uint32 (uint32_t target[], const uint32_t source[], size_t size);
+void Array_Move_uint64 (uint64_t target[], const uint64_t source[], size_t size);
+
+// Signed integer types
+void Array_Move_sint8 (sint8_t target[], const sint8_t source[], size_t size);
+void Array_Move_sint16 (sint16_t target[], const sint16_t source[], size_t size);
+void Array_Move_sint32 (sint32_t target[], const sint32_t source[], size_t size);
+void Array_Move_sint64 (sint64_t target[], const sint64_t source[], size_t size);
+
+// Floating-point types
+void Array_Move_flt32 (flt32_t target[], const flt32_t source[], size_t size);
+void Array_Move_flt64 (flt64_t target[], const flt64_t source[], size_t size);
+
+// Other types
+void Array_Move_size (size_t target[], const size_t source[], size_t size);
+void Array_Move (void *target, const void *source, size_t size);
+
+//****************************************************************************//
+//      Pattern cloning                                                       //
+//****************************************************************************//
+
+// Unsigned integer types
+void Array_Clone_uint8 (uint8_t array[], size_t size, size_t psize);
+void Array_Clone_uint16 (uint16_t array[], size_t size, size_t psize);
+void Array_Clone_uint32 (uint32_t array[], size_t size, size_t psize);
+void Array_Clone_uint64 (uint64_t array[], size_t size, size_t psize);
+
+// Signed integer types
+void Array_Clone_sint8 (sint8_t array[], size_t size, size_t psize);
+void Array_Clone_sint16 (sint16_t array[], size_t size, size_t psize);
+void Array_Clone_sint32 (sint32_t array[], size_t size, size_t psize);
+void Array_Clone_sint64 (sint64_t array[], size_t size, size_t psize);
+
+// Floating-point types
+void Array_Clone_flt32 (flt32_t array[], size_t size, size_t psize);
+void Array_Clone_flt64 (flt64_t array[], size_t size, size_t psize);
+
+// Other types
+void Array_Clone_size (size_t array[], size_t size, size_t psize);
+void Array_Clone (void *array, size_t size, size_t psize);
+
+//****************************************************************************//
 //      Data conversion                                                       //
 //****************************************************************************//
 
@@ -1065,8 +1201,12 @@ size_t Array_FindBwdc_sint64 (const sint64_t array[], size_t size, sint64_t valu
 //============================================================================//
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
-//      Ascending order sorted array                                          //
+//      Array searching                                                       //
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+
+//----------------------------------------------------------------------------//
+//      Ascending order sorted array                                          //
+//----------------------------------------------------------------------------//
 
 // Unsigned integer types
 size_t Array_FindAsc_uint8 (const uint8_t array[], size_t size, uint8_t value);
@@ -1080,9 +1220,9 @@ size_t Array_FindAsc_sint16 (const sint16_t array[], size_t size, sint16_t value
 size_t Array_FindAsc_sint32 (const sint32_t array[], size_t size, sint32_t value);
 size_t Array_FindAsc_sint64 (const sint64_t array[], size_t size, sint64_t value);
 
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//----------------------------------------------------------------------------//
 //      Descending order sorted array                                         //
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//----------------------------------------------------------------------------//
 
 // Unsigned integer types
 size_t Array_FindDsc_uint8 (const uint8_t array[], size_t size, uint8_t value);
@@ -1095,6 +1235,42 @@ size_t Array_FindDsc_sint8 (const sint8_t array[], size_t size, sint8_t value);
 size_t Array_FindDsc_sint16 (const sint16_t array[], size_t size, sint16_t value);
 size_t Array_FindDsc_sint32 (const sint32_t array[], size_t size, sint32_t value);
 size_t Array_FindDsc_sint64 (const sint64_t array[], size_t size, sint64_t value);
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//      Key searching                                                         //
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+
+//----------------------------------------------------------------------------//
+//      Ascending order sorted array                                          //
+//----------------------------------------------------------------------------//
+
+// Unsigned integer types
+size_t Array_FindAsc_uint8key (const struct uint8_key array[], size_t size, uint8_t value);
+size_t Array_FindAsc_uint16key (const struct uint16_key array[], size_t size, uint16_t value);
+size_t Array_FindAsc_uint32key (const struct uint32_key array[], size_t size, uint32_t value);
+size_t Array_FindAsc_uint64key (const struct uint64_key array[], size_t size, uint64_t value);
+
+// Signed integer types
+size_t Array_FindAsc_sint8key (const struct sint8_key array[], size_t size, sint8_t value);
+size_t Array_FindAsc_sint16key (const struct sint16_key array[], size_t size, sint16_t value);
+size_t Array_FindAsc_sint32key (const struct sint32_key array[], size_t size, sint32_t value);
+size_t Array_FindAsc_sint64key (const struct sint64_key array[], size_t size, sint64_t value);
+
+//----------------------------------------------------------------------------//
+//      Descending order sorted array                                         //
+//----------------------------------------------------------------------------//
+
+// Unsigned integer types
+size_t Array_FindDsc_uint8key (const struct uint8_key array[], size_t size, uint8_t value);
+size_t Array_FindDsc_uint16key (const struct uint16_key array[], size_t size, uint16_t value);
+size_t Array_FindDsc_uint32key (const struct uint32_key array[], size_t size, uint32_t value);
+size_t Array_FindDsc_uint64key (const struct uint64_key array[], size_t size, uint64_t value);
+
+// Signed integer types
+size_t Array_FindDsc_sint8key (const struct sint8_key array[], size_t size, sint8_t value);
+size_t Array_FindDsc_sint16key (const struct sint16_key array[], size_t size, sint16_t value);
+size_t Array_FindDsc_sint32key (const struct sint32_key array[], size_t size, sint32_t value);
+size_t Array_FindDsc_sint64key (const struct sint64_key array[], size_t size, sint64_t value);
 
 //****************************************************************************//
 //      Value replacement                                                     //
