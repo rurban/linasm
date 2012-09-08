@@ -167,7 +167,7 @@ local	.loop
 		jbe		.loop						; do while (ptr[0] == ' ' || '\t' <= ptr[0] <= '\r')
 ;---[End of loop]--------------------------
 		cmp		char, -9					; if (ptr[0] == 0)
-		je		.ntfnd						; then go to not found branch
+		je		.nonum						; then go to not found branch
 }
 
 ;==============================================================================;
@@ -233,10 +233,9 @@ local	.loop, .start
 ;---[Parsing loop]-------------------------
 .loop:	cmp		value, max					; if (value < max)
 		jae		@f							; {
-		lea		value, [value * 4 + value]	;     value *= 5
+		lea		value, [value + value * 4]	;     value = temp + value * 10
 		add		digits, 1					;     digits++
-		shl		value, 1					;     value *= 2
-		add		value, temp					;     value += temp }
+		lea		value, [temp + value * 2]	; }
 @@:		add		ptr, 1						; ptr++
 .start:	mov		char, [ptr]
 		sub		char, '0'					; temp = ptr[0] - '0'
@@ -256,15 +255,15 @@ local	.loop, .start, .shift
 .shift:	add		char, 10					; char += 10
 .loop:	cmp		value, max					; if (value < max)
 		jae		@f							; {
-		shl		value, 4					;     value *= 16
+		shl		value, 4					;     value = temp + value * 16
 		add		digits, 1					;     digits++
-		add		value, temp					;     value += temp }
+		add		value, temp					; }
 @@:		add		ptr, 1						; ptr++
 .start:	mov		char, [ptr]					; char = ptr[0]
 		or		char, 0x20					; convert char to lower case
 		sub		char, '0'					; temp -= '0'
 		cmp		char, 9
-		jbe		.loop						; if (temp <=9), then digits is found
+		jbe		.loop						; if (temp <= 9), then digits is found
 		sub		char, 49					; temp -= 'a'
 		cmp		char, 5
 		jbe		.shift						; if (temp <= 'f'). then alfa is found
@@ -286,7 +285,7 @@ macro	GET_MANTISSA	digit, point
 	SKIP_POINT	point						; Skip decimal point symbol
 		digit								; Parse fraction part of mantissa
 .cnvrt:	test	digits, digits				; if no digits are found
-		jz		.spcl						; then check for special values
+		jz		.spcl						;     then check for special values
 		add		value, sign
 		sub		exp, digits					; exp -= digits (scale factor for mantissa)
 		xor		value, sign					; apply sign to the number value (hacker's trick)
@@ -303,7 +302,7 @@ local	.loop, .exit
 		mov		char, [ptr]					; char = ptr[0]
 		or		char, 0x20					; convert char to lower case
 		cmp		char, symbol				; if exponent symbo is not found
-		jne		.exit						; then go to exit from the macro
+		jne		.exit						;     then go to exit from the macro
 		mov		[s_ptr], ptr				; copy ptr to stack
 ;---[Reading number sign]------------------
 		add		ptr, 1						; ptr++
@@ -311,24 +310,23 @@ local	.loop, .exit
 	READ_SIGN	'+'
 ;---[Getting number digits]----------------
 		xor		value, value				; value = 0
-		xor		digits, digits				; digits = 0
-		jmp		@f
+		mov		char, [ptr]
+		sub		char, '0'					; char = ptr[0] - '0'
+		cmp		char, 9						; if (char != [0..9])
+		cmova	ptr, [s_ptr]				;     then restore ptr from stack
+		ja		.exit						;     and exit from the macro
 ;---[Digits parsing loop]------------------
-.loop:	lea		value, [value * 4 + value]	; value *= 5
+.loop:	shl		value, 1					; value *= 2
 		add		ptr, 1						; ptr++
-		shl		value, 1					; value *= 2 (value is scaled to 10 now)
-		add		digits, 1					; digits++
+		lea		value, [value * 4 + value]	; value *= 5
 		add		value, temp					; value += temp
 		cmp		value, 1 shl 16				; if (value >= (1 << 16)), then exp overflow
 		jae		.ovrfl						;     go to overflow branch
-@@:		mov		char, [ptr]
-		sub		char, '0'					; temp = ptr[0] - '0'
+		mov		char, [ptr]
+		sub		char, '0'					; char = ptr[0] - '0'
 		cmp		char, 9
-		jbe		.loop						; do while (temp <= 9)
+		jbe		.loop						; do while (char <= 9)
 ;---[Normal exit branch]-------------------
-		test	digits, digits				; if (digits == 0)
-		cmovz	ptr, [s_ptr]				; then restore ptr from stack
-		jz		.exit						; and exit from the macro
 		add		value, sign					; apply sign to the number value
 		xor		value, sign					; (hacker's trick)
 		add		exp, value					; exp += value
@@ -376,22 +374,22 @@ macro	CHECK_SPECIAL	spec
 .spcl:	xor		str, str					; Next lines read input text string
 		mov		char, [ptr + 0]				; char by char in "str" array
 		test	char, char					; and check "str" value for special
-		jz		.ntfnd						; text values: NaN and INF
+		jz		.nonum						; text values: NaN and INF
 		shl		str, 8						; If special values are detected,
 		mov		char, [ptr + 1]				; then set floating-point result
 		test	char, char					; according to them
-		jz		.ntfnd
+		jz		.nonum
 		shl		str, 8
 		mov		char, [ptr + 2]
 		test	char, char
-		jz		.ntfnd
+		jz		.nonum
 		or		str, 0x00202020				; convert string to lower case
 		cmp		str, 'nan'					; nan (Little endian string value)
 		mov		spec, [nan + sign * bytes + bytes]
 		je		@f
 		cmp		str, 'fni'					; inf (Little endian string value)
 		mov		spec, [inf + sign * bytes + bytes]
-		jne		.ntfnd
+		jne		.nonum
 @@:		add		ptr, 3
 		mov		[p_num], spec				; p_num[0] = spec
 		sub		ptr, string					; return ptr - string
@@ -411,7 +409,6 @@ ptr		equ		rax							; temporary pointer to string
 value	equ		rdx							; number value
 temp	equ		rcx							; temporary register
 char	equ		cl							; character
-digits	equ		r8							; count of digits that number has
 max		equ		r10							; max value
 ;---[Skipping white-symbols]---------------
 		SKIP_WHITE
@@ -421,21 +418,20 @@ max		equ		r10							; max value
 		mov		max, max_value				; max = max_value
 		xor		temp, temp					; temp = 0
 		xor		value, value				; value = 0
-		xor		digits, digits				; digits = 0
-		jmp		@f
+		mov		char, [ptr]
+		sub		char, '0'					; char = ptr[0] - '0'
+		cmp		char, 1						; if (char != [0..1])
+		ja		.nonum						;     then go to no number branch
 ;---[Digits parsing loop]------------------
 .loop:	cmp		value, max					; if (value >= max)
-		jae		.ovrfl						; then go to overflow branch
+		jae		.ovrfl						;     then go to overflow branch
 		add		ptr, 1						; ptr++
-		lea		value, [value * 2 + temp]	; value = value * 2 + temp
-		add		digits, 1					; digits++
-@@:		mov		char, [ptr]
-		sub		char, '0'					; temp = ptr[0] - '0'
+		lea		value, [temp + value * 2]	; value = temp + value * 2
+		mov		char, [ptr]
+		sub		char, '0'					; char = ptr[0] - '0'
 		cmp		char, 1
-		jbe		.loop						; do while (temp <= 1)
+		jbe		.loop						; do while (char <= 1)
 ;---[Normal exit branch]-------------------
-		test	digits, digits				; if no digits are found
-		jz		.ntfnd						; then go to not found branch
 		mov		[p_num], part				; p_num[0] = value
 		sub		ptr, string					; return ptr - string
 		ret
@@ -443,7 +439,7 @@ max		equ		r10							; max value
 .ovrfl:	xor		ptr, ptr					; return 0
 		ret
 ;---[No number exit branch]----------------
-.ntfnd:	mov		ptr, NOT_FOUND				; return NOT_FOUND
+.nonum:	mov		ptr, NOT_FOUND				; return NOT_FOUND
 		ret
 }
 
@@ -466,7 +462,6 @@ ptr		equ		rax							; temporary pointer to string
 value	equ		rdx							; number value
 temp	equ		rcx							; temporary register
 char	equ		cl							; character
-digits	equ		r8							; count of digits that number has
 max		equ		r10							; max value
 ;---[Skipping white-symbols]---------------
 		SKIP_WHITE
@@ -474,21 +469,20 @@ max		equ		r10							; max value
 		mov		max, max_value				; max = max_value
 		xor		temp, temp					; temp = 0
 		xor		value, value				; value = 0
-		xor		digits, digits				; digits = 0
-		jmp		@f
+		mov		char, [ptr]
+		sub		char, '0'					; char = ptr[0] - '0'
+		cmp		char, 7						; if (char != [0..7])
+		ja		.nonum						;     then go to no number branch
 ;---[Digits parsing loop]------------------
 .loop:	cmp		value, max					; if (value >= max)
-		jae		.ovrfl						; then go to overflow branch
+		jae		.ovrfl						;     then go to overflow branch
 		add		ptr, 1						; ptr++
-		lea		value, [value * 8 + temp]	; value = value * 8 + temp
-		add		digits, 1					; digits++
-@@:		mov		char, [ptr]
-		sub		char, '0'					; temp = ptr[0] - '0'
+		lea		value, [temp + value * 8]	; value = temp + value * 8
+		mov		char, [ptr]
+		sub		char, '0'					; char = ptr[0] - '0'
 		cmp		char, 7
-		jbe		.loop						; do while (temp <= 7)
+		jbe		.loop						; do while (char <= 7)
 ;---[Normal exit branch]-------------------
-		test	digits, digits				; if no digits are found
-		jz		.ntfnd						; then go to error
 		mov		[p_num], part				; p_num[0] = value
 		sub		ptr, string					; return ptr - string
 		ret
@@ -496,7 +490,7 @@ max		equ		r10							; max value
 .ovrfl:	xor		ptr, ptr					; return 0
 		ret
 ;---[No number exit branch]----------------
-.ntfnd:	mov		ptr, NOT_FOUND				; return NOT_FOUND
+.nonum:	mov		ptr, NOT_FOUND				; return NOT_FOUND
 		ret
 }
 
@@ -517,7 +511,6 @@ string	equ		rsi							; source string
 ;---[Internal variables]-------------------
 ptr		equ		rax							; temporary pointer to string
 char	equ		cl							; character
-digits	equ		r8							; count of digits that number has
 ;---[Skipping white-symbols]---------------
 		SKIP_WHITE
 ;---[Skip hex prefix if found]-------------
@@ -526,27 +519,30 @@ digits	equ		r8							; count of digits that number has
 		mov		max, max_value				; max = max_value
 		xor		temp, temp					; temp = 0
 		xor		value, value				; value = 0
-		xor		digits, digits				; digits = 0
-		jmp		@f
+		mov		char, [ptr]					; char = ptr[0]
+		or		char, 0x20					; convert char to lower case
+		sub		char, '0'					; char -= '0'
+		cmp		char, 9						; if (char == [0..9])
+		jbe		.loop						;     then digit is found
+		sub		char, 49					; char -= 'a'
+		cmp		char, 5						; if (char != [a..f])
+		ja		.nonum						;     then go to no number branch
 ;---[Digits parsing loop]------------------
 .shift:	add		char, 10					; char += 10
 .loop:	cmp		value, max					; if (value >= max)
-		jae		.ovrfl						; then go to overflow branch
-		add		ptr, 1						; ptr++
+		jae		.ovrfl						;     then go to overflow branch
 		shl		value, 4					; value *= 16
-		add		digits, 1					; digits++
+		add		ptr, 1						; ptr++
 		add		value, temp					; value += temp
-@@:		mov		char, [ptr]					; char = ptr[0]
+		mov		char, [ptr]					; char = ptr[0]
 		or		char, 0x20					; convert char to lower case
-		sub		char, '0'					; temp -= '0'
-		cmp		char, 9
-		jbe		.loop						; if (temp <=9), then digits is found
-		sub		char, 49					; temp -= 'a'
-		cmp		char, 5
-		jbe		.shift						; if (temp <= 'f'). then alfa is found
+		sub		char, '0'					; char -= '0'
+		cmp		char, 9						; if (char == [0..9])
+		jbe		.loop						;     then digit is found
+		sub		char, 49					; char -= 'a'
+		cmp		char, 5						; if (char == [a..f])
+		jbe		.shift						;     then alfa is found
 ;---[Normal exit branch]-------------------
-		test	digits, digits				; if no digits are found
-		jz		.ntfnd						; then go to error
 		mov		[p_num], value				; p_num[0] = value
 		sub		ptr, string					; return ptr - string
 		ret
@@ -554,7 +550,7 @@ digits	equ		r8							; count of digits that number has
 .ovrfl:	xor		ptr, ptr					; return 0
 		ret
 ;---[No number exit branch]----------------
-.ntfnd:	mov		ptr, NOT_FOUND				; return NOT_FOUND
+.nonum:	mov		ptr, NOT_FOUND				; return NOT_FOUND
 		ret
 }
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -606,7 +602,7 @@ end if
 .ovrfl:	xor		ptr, ptr					; return 0
 		ret
 ;---[No number exit branch]----------------
-.ntfnd:	mov		ptr, NOT_FOUND				; return NOT_FOUND
+.nonum:	mov		ptr, NOT_FOUND				; return NOT_FOUND
 		ret
 }
 
@@ -632,7 +628,6 @@ string	equ		rsi							; source string
 ptr		equ		rax							; temporary pointer to string
 val		equ		rdx							; register that holds number value
 char	equ		cl							; character
-digits	equ		r8							; count of digits that number has
 ;---[Skipping white-symbols]---------------
 		SKIP_WHITE
 ;---[Reading number sign]------------------
@@ -641,24 +636,23 @@ digits	equ		r8							; count of digits that number has
 		mov		max, max_value				; max = max_value
 		xor		temp, temp					; temp = 0
 		xor		val, val					; value = 0
-		xor		digits, digits				; digits = 0
-		jmp		@f
+		mov		char, [ptr]
+		sub		char, '0'					; char = ptr[0] - '0'
+		cmp		char, 9						; if (char != [0..9])
+		ja		.nonum						;     then go to no number branch
 ;---[Digits parsing loop]------------------
 .loop:	cmp		value, max					; if (value >= max)
-		jae		.ovrfl						; then go to overflow branch
-		lea		val, [val * 4 + val]		; value *= 5
-		add		ptr, 1						; ptr++
+		jae		.ovrfl						;     then go to overflow branch
 		shl		value, 1					; value *= 2
-		add		digits, 1					; digits++
+		add		ptr, 1						; ptr++
+		lea		val, [val * 4 + val]		; value *= 5
 		add		value, temp					; value += temp
 		jc		.ovrfl						; if overfrol, then go to overflow branch
-@@:		mov		char, [ptr]
-		sub		char, '0'					; temp = ptr[0] - '0'
+		mov		char, [ptr]
+		sub		char, '0'					; char = ptr[0] - '0'
 		cmp		char, 9
-		jbe		.loop						; do while (temp <= 9)
+		jbe		.loop						; do while (char <= 9)
 ;---[Normal exit branch]-------------------
-		test	digits, digits				; if no digits are found
-		jz		.ntfnd						; then go to error
 		mov		[p_num], value				; p_num[0] = value
 		sub		ptr, string					; return ptr - string
 		ret
@@ -666,68 +660,61 @@ digits	equ		r8							; count of digits that number has
 .ovrfl:	xor		ptr, ptr					; return 0
 		ret
 ;---[No number exit branch]----------------
-.ntfnd:	mov		ptr, NOT_FOUND				; return NOT_FOUND
+.nonum:	mov		ptr, NOT_FOUND				; return NOT_FOUND
 		ret
 }
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	DEC_TO_NUM_SINT	value, temp, smask, max, max_value, scale
+macro	DEC_TO_NUM_SINT	part, max_value, scale
 {
 ;---[Parameters]---------------------------
 p_num	equ		rdi							; pointer to number
 string	equ		rsi							; source string
 ;---[Internal variables]-------------------
 ptr		equ		rax							; temporary pointer to string
-val		equ		rdx							; register that holds number value
+value	equ		rdx							; register that holds number value
+temp	equ		rcx							; temporary register
 char	equ		cl							; character
-digits	equ		r8							; count of digits that number has
+limit	equ		r8							; max number value
 sign	equ		r9							; number sign
+max		equ		r10							; max value
 bytes	= 1 shl scale						; size of signed integer type
-if scale = 0
-lim	= lim_sint8								; limits of signed integer type
-else if scale = 1
-lim	= lim_sint16							; limits of signed integer type
-else if scale = 2
-lim	= lim_sint32							; limits of signed integer type
-else if scale = 3
-lim	= lim_sint64							; limits of signed integer type
-end if
 ;---[Skipping white-symbols]---------------
 		SKIP_WHITE
 ;---[Reading number sign]------------------
 		READ_SIGN	0x22
 ;---[Getting number digits]----------------
+		mov		limit, (1 shl (bytes * 8 - 1)) - 1
 		mov		max, max_value				; max = max_value
 		xor		temp, temp					; temp = 0
-		xor		val, val					; value = 0
-		xor		digits, digits				; digits = 0
-		jmp		@f
+		xor		value, value				; value = 0
+		sub		limit, sign					; correct limit according to sign
+		mov		char, [ptr]
+		sub		char, '0'					; char = ptr[0] - '0'
+		cmp		char, 9						; if (char != [0..9])
+		ja		.nonum						;     then go to no number branch
 ;---[Digits parsing loop]------------------
 .loop:	cmp		value, max					; if (value >= max)
-		jae		.ovrfl						; then go to overflow branch
-		lea		val, [val * 4 + val]		; value *= 5
+		jae		.ovrfl						;     then go to overflow branch
+		lea		value, [value + value * 4]
 		add		ptr, 1						; ptr++
-		shl		value, 1					; value *= 2
-		add		digits, 1					; digits++
-		add		value, temp					; value += temp
-		cmp		value, [lim + sign + bytes]	; if (value >= lim[sign + 1])
-		ja		.ovrfl						; then go to overflow branch
-@@:		mov		char, [ptr]
-		sub		char, '0'					; temp = ptr[0] - '0'
+		lea		value, [temp + value * 2]	; value = temp + value * 10
+		cmp		value, limit				; if (value > limit)
+		ja		.ovrfl						;     then go to overflow branch
+		mov		char, [ptr]
+		sub		char, '0'					; char = ptr[0] - '0'
 		cmp		char, 9
-		jbe		.loop						; do while (temp <= 9)
+		jbe		.loop						; do while (char <= 9)
 ;---[Normal exit branch]-------------------
-		test	digits, digits				; if no digits are found
-		jz		.ntfnd						; then go to error
-		add		value, smask				; apply sign to the number value
-		xor		value, smask				; (hacker's trick)
-		mov		[p_num], value				; p_num[0] = value
+		add		value, sign					; apply sign to the number value
+		xor		value, sign					; (hacker's trick)
+		mov		[p_num], part				; p_num[0] = value
 		sub		ptr, string					; return ptr - string
 		ret
 ;---[Overflow exit branch]-----------------
 .ovrfl:	xor		ptr, ptr					; return 0
 		ret
 ;---[No number exit branch]----------------
-.ntfnd:	mov		ptr, NOT_FOUND				; return NOT_FOUND
+.nonum:	mov		ptr, NOT_FOUND				; return NOT_FOUND
 		ret
 }
 
@@ -738,10 +725,10 @@ DecToNum_uint32:	DEC_TO_NUM_UINT	edx, ecx, r10d, 429496730
 DecToNum_uint64:	DEC_TO_NUM_UINT	rdx, rcx, r10, 1844674407370955162
 
 ; Signed integer types
-DecToNum_sint8:		DEC_TO_NUM_SINT	dl, cl, r9b, r10b, 13, 0
-DecToNum_sint16:	DEC_TO_NUM_SINT	dx, cx, r9w, r10w, 3277, 1
-DecToNum_sint32:	DEC_TO_NUM_SINT	edx, ecx, r9d, r10d, 214748365, 2
-DecToNum_sint64:	DEC_TO_NUM_SINT	rdx, rcx, r9, r10, 922337203685477581, 3
+DecToNum_sint8:		DEC_TO_NUM_SINT	dl, 13, 0
+DecToNum_sint16:	DEC_TO_NUM_SINT	dx, 3277, 1
+DecToNum_sint32:	DEC_TO_NUM_SINT	edx, 214748365, 2
+DecToNum_sint64:	DEC_TO_NUM_SINT	rdx, 922337203685477581, 3
 
 ; Floating-point types
 DecToNum_flt32:		FLOAT_TO_NUM	edx, s, 1
@@ -761,12 +748,6 @@ inf_flt64	dq	0xFFF0000000000000, 0x7FF0000000000000		; -inf, +inf
 nan_flt64	dq	0xFFF8000000000000, 0x7FF8000000000000		; -nan, +nan
 ten			dq	0x3FB999999999999A, 0x4024000000000000		; 0.1, 10.0
 two			dq	0x3FE0000000000000, 0x4000000000000000		; 0.5, 2.0
-
-; Max values of signed integer types
-lim_sint64	dq	9223372036854775808, 9223372036854775807	; abs(min), abs(max)
-lim_sint32	dd	2147483648, 2147483647						; abs(min), abs(max)
-lim_sint16	dw	32768, 32767								; abs(min), abs(max)
-lim_sint8	db	128, 127									; abs(min), abs(max)
 
 ;###############################################################################
 ;#                                 END OF FILE                                 #
