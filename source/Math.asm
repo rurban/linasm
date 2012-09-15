@@ -258,7 +258,7 @@ public	Exp10_flt64		as	'_ZN4Math5Exp10Es'
 
 ; Power of E
 public	ExpE_flt32		as	'Math_Expi_flt32'
-public	ExpE_flt32		as	'Math_Expi_flt64'
+public	ExpE_flt64		as	'Math_Expi_flt64'
 public	ExpE_flt32		as	'_ZN4Math3ExpEa'
 public	ExpE_flt64		as	'_ZN4Math3ExpEs'
 
@@ -405,9 +405,12 @@ end if
 		ret
 }
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	ABS_FLT	cmd, value
+macro	ABS_FLT	cmd, mask
 {
-		cmd		xmm0, dqword [value]
+;---[Parameters]---------------------------
+value	equ		xmm0						; value
+;------------------------------------------
+		cmd		value, dqword [mask]		; value = Abs (value)
 		ret
 }
 
@@ -418,8 +421,8 @@ Abs_sint32:		ABS_INT		eax, edi, 2, 0
 Abs_sint64:		ABS_INT		rax, rdi, 3, 0
 
 ; Floating-point types
-Abs_flt32:		ABS_FLT		andps, data_mask_flt32
-Abs_flt64:		ABS_FLT		andpd, data_mask_flt64
+Abs_flt32:		ABS_FLT		andps, dmask_flt32
+Abs_flt64:		ABS_FLT		andpd, dmask_flt64
 
 ;******************************************************************************;
 ;       Negative absolute value                                                ;
@@ -432,8 +435,8 @@ NegAbs_sint32:	ABS_INT		eax, edi, 2, 1
 NegAbs_sint64:	ABS_INT		rax, rdi, 3, 1
 
 ; Floating-point types
-NegAbs_flt32:	ABS_FLT		orps, sign_mask_flt32
-NegAbs_flt64:	ABS_FLT		orpd, sign_mask_flt64
+NegAbs_flt32:	ABS_FLT		orps, smask_flt32
+NegAbs_flt64:	ABS_FLT		orpd, smask_flt64
 
 ;******************************************************************************;
 ;       Number sign                                                            ;
@@ -459,11 +462,11 @@ value	equ		xmm0						; value
 if x eq s
 zero	= zero_flt32						; 0.0
 one		= one_flt32							; 1.0
-sign	= sign_mask_flt32					; sign mask
+sign	= smask_flt32						; sign mask
 else
 zero	= zero_flt64						; 0.0
 one		= one_flt64							; 1.0
-sign	= sign_mask_flt64					; sign mask
+sign	= smask_flt64						; sign mask
 end if
 ;------------------------------------------
 		comis#x	value, [zero]				; compare value with 0
@@ -536,11 +539,11 @@ val2	equ		xmm1						; second value (usually y)
 if x eq s
 one		= one_flt32							; 1.0
 sqrt2	= sqrt2_flt32						; sqrt (2)
-dmask	= data_mask_flt32					; data mask
+dmask	= dmask_flt32						; data mask
 else
 one		= one_flt64							; 1.0
 sqrt2	= sqrt2_flt64						; sqrt (2)
-dmask	= data_mask_flt64					; data mask
+dmask	= dmask_flt64						; data mask
 end if
 ;------------------------------------------
 		andp#x	val1, dqword [dmask]		; val1 = Abs (val1)
@@ -616,6 +619,26 @@ Min_sint64:		MINMAX_INT	rdi, rsi, l
 ; Floating-point types
 Min_flt32:		MINMAX_FLT	mins, s
 Min_flt64:		MINMAX_FLT	mins, d
+
+;******************************************************************************;
+;       Maximum value                                                          ;
+;******************************************************************************;
+
+; Unsigned integer types
+Max_uint8:		MINMAX_INT	dil, sil, a
+Max_uint16:		MINMAX_INT	di, si, a
+Max_uint32:		MINMAX_INT	edi, esi, a
+Max_uint64:		MINMAX_INT	rdi, rsi, a
+
+; Signed integer types
+Max_sint8:		MINMAX_INT	dil, sil, g
+Max_sint16:		MINMAX_INT	di, si, g
+Max_sint32:		MINMAX_INT	edi, esi, g
+Max_sint64:		MINMAX_INT	rdi, rsi, g
+
+; Floating-point types
+Max_flt32:		MINMAX_FLT	maxs, s
+Max_flt64:		MINMAX_FLT	maxs, d
 
 ;******************************************************************************;
 ;       Great common divisor                                                   ;
@@ -695,29 +718,9 @@ LCM_sint32:	LCM	GCD_sint32, edi, esi, ecx, eax, edx, 1, 2
 LCM_sint64:	LCM	GCD_sint64, rdi, rsi, rcx, rax, rdx, 1, 3
 
 ;******************************************************************************;
-;       Maximum value                                                          ;
-;******************************************************************************;
-
-; Unsigned integer types
-Max_uint8:		MINMAX_INT	dil, sil, a
-Max_uint16:		MINMAX_INT	di, si, a
-Max_uint32:		MINMAX_INT	edi, esi, a
-Max_uint64:		MINMAX_INT	rdi, rsi, a
-
-; Signed integer types
-Max_sint8:		MINMAX_INT	dil, sil, g
-Max_sint16:		MINMAX_INT	di, si, g
-Max_sint32:		MINMAX_INT	edi, esi, g
-Max_sint64:		MINMAX_INT	rdi, rsi, g
-
-; Floating-point types
-Max_flt32:		MINMAX_FLT	maxs, s
-Max_flt64:		MINMAX_FLT	maxs, d
-
-;******************************************************************************;
 ;       Exponentiation functions                                               ;
 ;******************************************************************************;
-macro	EXP_FLT	exp, sign, temp, base, x
+macro	EXPI	exp, sign, temp, base, x
 {
 ;---[Internal variables]-------------------
 res		equ		xmm0						; result register
@@ -765,76 +768,54 @@ end if
 Exp2_int:
 ;---[Parameters]---------------------------
 exp		equ		dil							; exponent value
-shift	equ		cl							; binary shift value
 ;---[Internal variables]-------------------
+shift	equ		cl							; binary shift value
 res		equ		rax							; result register
+temp	equ		rdx							; temporary register
 max		= 64								; max exponent value
 ;------------------------------------------
-		cmp		exp, max					; if (exp >= max)
-		jae		.ovfl						;     then go to overflow branch
-		mov		res, 1						; res = 1
 		mov		shift, exp					; shift = exp
-		shl		res, shift					; return 1 << shift
-		ret
-;---[Overflow branch]----------------------
-.ovfl:	xor		res, res					; return 0 (means result overflow)
-		ret
-;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-Exp2_flt32:
-;---[Parameters]---------------------------
-exp		equ		dil							; exponent value
-;---[Internal variables]-------------------
-res		equ		xmm0						; result register
-mant	equ		eax							; mantisa of floating-point value
-shift	equ		cl							; binary shift value
-bias	= 127								; exponent bias of floating-point value
-digits	= 23								; binary digits in mantissa
-;------------------------------------------
-		add		exp, bias					; exp += bias
-		jle		.den						; if (exp <= 0), then go to subnormal branch
-		movzx	mant, exp					; create binary representation of normal
-		shl		mant, digits				; floating-point value of 2^exp
-		movd	res, mant					; return 2^exp (normal value)
-		ret
-;---[Subnormal number branch]--------------
-.den:	neg		exp							; exp = -exp
-		mov		mant, 1 shl (digits - 1)	; create binary representation of subnormal
-		mov		shift, exp					; floating-point value of 2^exp
-		shr		mant, shift
-		movd	res, mant					; return 2^exp (subnormal value)
+		xor		temp, temp					; temp = 0
+		mov		res, 1						; res = 1
+		cmp		shift, max					; if (shift >= max)
+		cmovae	res, temp					;     res = 0
+		shl		res, shift					; return (res <<= shift)
 		ret
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-Exp2_flt64:
-;---[Parameters]---------------------------
-exp		equ		di							; exponent value
+macro	EXP2I	exp, temp, underfl, shift, min_exp, max_exp, max_shift, bias, digits, scale
+{
 ;---[Internal variables]-------------------
 res		equ		xmm0						; result register
-mant	equ		rax							; mantisa of floating-point value
-temp	equ		ax							; temporary register
-shift	equ		cx							; binary shift value
 shiftl	equ		cl							; low part of shift register
-bias	= 1023								; exponent bias of floating-point value
-digits	= 52								; binary digits in mantissa
 ;------------------------------------------
-		mov		temp, bias + 1				; temp = bias + 1
-		cmp		exp, bias + 1				; if (exp > bias + 1)
-		cmovg	exp, temp					;     exp = bias + 1
-		add		exp, bias					; exp += bias
-		jle		.den						; if (exp <= 0), then go to subnormal branch
-		movzx	mant, exp					; create binary representation of normal
-		shl		mant, digits				; floating-point value of 2^exp
-		movq	res, mant					; return 2^exp (normal value)
-		ret
-;---[Subnormal number branch]--------------
-.den:	neg		exp							; exp = -exp
-		mov		temp, digits				; temp = digits
-		cmp		exp, digits					; if (exp > digits)
-		cmovg	exp, temp					;     exp = digits
-		mov		mant, 1 shl (digits - 1)	; create binary representation of subnormal
-		mov		shift, exp					; floating-point value of 2^exp
-		shr		mant, shiftl
-		movq	res, mant					; return 2^exp (subnormal value)
-		ret
+		movsx	temp, exp
+		mov		underfl, 1
+		mov		max_exp, 2 * bias + 1		; max_exp = 2 * bias + 1
+		add		temp, bias					; temp = exp + bias
+		xor		shift, shift				; shift = 0
+		mov		max_shift, digits + 1		; max_shift = digits + 1
+		sub		underfl, temp				; underfl = 1 - temp
+		mov		min_exp, 1					; min_exp = 1
+		cmp		temp, max_exp				; if (temp > max_exp)
+		cmovg	temp, max_exp				;     temp = max_exp
+		cmp		underfl, max_shift			; if (underfl > max_shift)
+		cmovg	underfl, max_shift			;     underfl = max_shift
+		cmp		temp, min_exp				; if (temp < min_exp)
+		cmovl	temp, min_exp				;     temp = min_exp
+		cmovl	shift, underfl				;     shift = underfl
+		shl		temp, digits				; temp << digits
+		shr		temp, shiftl				; temp >> shift
+if scale = 2
+		movd	res, temp					; reinterpret temp as flt32_t
+else if scale = 3
+		movq	res, temp					; reinterpret temp as flt64_t
+end if
+		ret									; return temp
+}
+
+; Floating-point types
+Exp2_flt32:	EXP2I	dil, eax, edx, ecx, esi, edi, r8d, 127, 23, 2
+Exp2_flt64:	EXP2I	di, rax, rdx, rcx, rsi, rdi, r8, 1023, 52, 3
 
 ;==============================================================================;
 ;       Power of 10                                                            ;
@@ -842,8 +823,8 @@ digits	= 52								; binary digits in mantissa
 Exp10_int:
 ;---[Parameters]---------------------------
 exp		equ		dil							; exponent value
-index	equ		rdi							; index of ten power array
 ;---[Internal variables]-------------------
+index	equ		rdi							; index of ten power array
 res		equ		rax							; result register
 max		= 20								; max exponent value
 ;------------------------------------------
@@ -855,14 +836,16 @@ max		= 20								; max exponent value
 ;---[Overflow branch]----------------------
 .ovfl:	xor		res, res					; return 0 (means result overflow)
 		ret
-Exp10_flt32:	EXP_FLT	dil, sil, eax, ten_flt32, s
-Exp10_flt64:	EXP_FLT	di, si, rax, ten_flt64, d
+
+; Floating-point types
+Exp10_flt32:	EXPI	dil, sil, eax, ten_flt32, s
+Exp10_flt64:	EXPI	di, si, rax, ten_flt64, d
 
 ;==============================================================================;
 ;       Power of E                                                             ;
 ;==============================================================================;
-ExpE_flt32:	EXP_FLT	dil, sil, eax, exp_flt32, s
-ExpE_flt64:	EXP_FLT	di, si, rax, exp_flt64, d
+ExpE_flt32:		EXPI	dil, sil, eax, exp_flt32, s
+ExpE_flt64:		EXPI	di, si, rax, exp_flt64, d
 
 ;******************************************************************************;
 ;       Scale functions                                                        ;
@@ -1008,11 +991,11 @@ temp	equ		xmm1						; temporary variable
 if x eq s
 zero	= zero_flt32						; 0.0
 one		= one_flt32							; 1.0
-nan		= data_mask_flt32					; NaN
+nan		= dmask_flt32						; NaN
 else
 zero	= zero_flt64						; 0.0
 one		= one_flt64							; 1.0
-nan		= data_mask_flt64					; NaN
+nan		= dmask_flt64						; NaN
 end if
 ;------------------------------------------
 		comis#x	base, [zero]				; if (base == 0)
@@ -1070,11 +1053,11 @@ value	equ		xmm0						; floating-point value to check
 ;---[Internal variables]-------------------
 res		equ		al							; result register
 if x eq d
-dmask	= data_mask_flt32					; data mask
+dmask	= dmask_flt32						; data mask
 norm	= norm_flt32						; min normal value
 inf		= inf_flt32							; inf
 else
-dmask	= data_mask_flt64					; data mask
+dmask	= dmask_flt64						; data mask
 norm	= norm_flt64						; min normal value
 inf		= inf_flt64							; inf
 end if
@@ -1094,10 +1077,10 @@ value	equ		xmm0						; floating-point value to check
 ;---[Internal variables]-------------------
 res		equ		al							; result register
 if x eq d
-dmask	= data_mask_flt32					; data mask
+dmask	= dmask_flt32						; data mask
 norm	= norm_flt32						; min normal value
 else
-dmask	= data_mask_flt64					; data mask
+dmask	= dmask_flt64						; data mask
 norm	= norm_flt64						; min normal value
 end if
 ;------------------------------------------
@@ -1115,10 +1098,10 @@ value	equ		xmm0						; floating-point value to check
 ;---[Internal variables]-------------------
 res		equ		al							; result register
 if x eq d
-dmask	= data_mask_flt32					; data mask
+dmask	= dmask_flt32						; data mask
 inf		= inf_flt32							; inf
 else
-dmask	= data_mask_flt64					; data mask
+dmask	= dmask_flt64						; data mask
 inf		= inf_flt64							; inf
 end if
 ;------------------------------------------
@@ -1136,10 +1119,10 @@ value	equ		xmm0						; floating-point value to check
 ;---[Internal variables]-------------------
 res		equ		al							; result register
 if x eq d
-dmask	= data_mask_flt32					; data mask
+dmask	= dmask_flt32						; data mask
 inf		= inf_flt32							; inf
 else
-dmask	= data_mask_flt64					; data mask
+dmask	= dmask_flt64						; data mask
 inf		= inf_flt64							; inf
 end if
 ;------------------------------------------
@@ -1157,10 +1140,10 @@ value	equ		xmm0						; floating-point value to check
 ;---[Internal variables]-------------------
 res		equ		al							; result register
 if x eq d
-dmask	= data_mask_flt32					; data mask
+dmask	= dmask_flt32						; data mask
 inf		= inf_flt32							; inf
 else
-dmask	= data_mask_flt64					; data mask
+dmask	= dmask_flt64						; data mask
 inf		= inf_flt64							; inf
 end if
 ;------------------------------------------
@@ -1197,52 +1180,52 @@ IsNaN_flt64:	ISNAN	rax, q
 section	'.rodata'	align 16
 
 ; integer
-zero_int			dq	0							; 0
-one_int				dq	1							; 1
-ten_pow				dq	1							; 10^0
-					dq	10							; 10^1
-					dq	100							; 10^2
-					dq	1000						; 10^3
-					dq	10000						; 10^4
-					dq	100000						; 10^5
-					dq	1000000						; 10^6
-					dq	10000000					; 10^7
-					dq	100000000					; 10^8
-					dq	1000000000					; 10^9
-					dq	10000000000					; 10^10
-					dq	100000000000				; 10^11
-					dq	1000000000000				; 10^12
-					dq	10000000000000				; 10^13
-					dq	100000000000000				; 10^14
-					dq	1000000000000000			; 10^15
-					dq	10000000000000000			; 10^16
-					dq	100000000000000000			; 10^17
-					dq	1000000000000000000			; 10^18
-					dq	10000000000000000000		; 10^19
+zero_int		dq	0							; 0
+one_int			dq	1							; 1
+ten_pow			dq	1							; 10^0
+				dq	10							; 10^1
+				dq	100							; 10^2
+				dq	1000						; 10^3
+				dq	10000						; 10^4
+				dq	100000						; 10^5
+				dq	1000000						; 10^6
+				dq	10000000					; 10^7
+				dq	100000000					; 10^8
+				dq	1000000000					; 10^9
+				dq	10000000000					; 10^10
+				dq	100000000000				; 10^11
+				dq	1000000000000				; 10^12
+				dq	10000000000000				; 10^13
+				dq	100000000000000				; 10^14
+				dq	1000000000000000			; 10^15
+				dq	10000000000000000			; 10^16
+				dq	100000000000000000			; 10^17
+				dq	1000000000000000000			; 10^18
+				dq	10000000000000000000		; 10^19
 
 ; flt64_t
-sign_mask_flt64		dq	2 dup (0x8000000000000000)	; sign mask
-data_mask_flt64		dq	2 dup (0x7FFFFFFFFFFFFFFF)	; data mask
-zero_flt64			dq	2 dup (0x0000000000000000)	; 0.0
-norm_flt64			dq	2 dup (0x0010000000000000)	; 2^−1022 (min normal value)
-one_flt64			dq	2 dup (0x3FF0000000000000)	; 1.0
-sqrt2_flt64			dq	2 dup (0x3FF6A09E667F3BCD)	; sqrt (2)
-inf_flt64			dq	2 dup (0x7FF0000000000000)	; infinity
-two_flt64			dq	0x3FE0000000000000, 0x4000000000000000	; 0.5, 2
-ten_flt64			dq	0x3FB999999999999A, 0x4024000000000000	; 0.1, 10
-exp_flt64			dq	0x3FD78B56362CEF38, 0x4005BF0A8B145769	; 1/e, e
+smask_flt64		dq	2 dup (0x8000000000000000)	; sign mask
+dmask_flt64		dq	2 dup (0x7FFFFFFFFFFFFFFF)	; data mask
+zero_flt64		dq	2 dup (0x0000000000000000)	; 0.0
+norm_flt64		dq	2 dup (0x0010000000000000)	; 2^−1022 (min normal value)
+one_flt64		dq	2 dup (0x3FF0000000000000)	; 1.0
+sqrt2_flt64		dq	2 dup (0x3FF6A09E667F3BCD)	; sqrt (2)
+inf_flt64		dq	2 dup (0x7FF0000000000000)	; infinity
+two_flt64		dq	0x3FE0000000000000, 0x4000000000000000	; 0.5, 2
+ten_flt64		dq	0x3FB999999999999A, 0x4024000000000000	; 0.1, 10
+exp_flt64		dq	0x3FD78B56362CEF38, 0x4005BF0A8B145769	; 1/e, e
 
 ; flt32_t
-sign_mask_flt32		dd	4 dup (0x80000000)			; sign mask
-data_mask_flt32		dd	4 dup (0x7FFFFFFF)			; data mask
-zero_flt32			dd	4 dup (0x00000000)			; 0.0
-norm_flt32			dd	4 dup (0x00800000)			; 2^−126 (min normal value)
-one_flt32			dd	4 dup (0x3F800000)			; 1.0
-sqrt2_flt32			dd	4 dup (0x3FB504F3)			; sqrt (2)
-inf_flt32			dd	4 dup (0x7F800000)			; infinity
-two_flt32			dd	0x3F000000, 0x40000000		; 0.5, 2
-ten_flt32			dd	0x3DCCCCCD, 0x41200000		; 0.1, 10
-exp_flt32			dd	0x3EBC5AB2, 0x402DF854		; 1/e, e
+smask_flt32		dd	4 dup (0x80000000)			; sign mask
+dmask_flt32		dd	4 dup (0x7FFFFFFF)			; data mask
+zero_flt32		dd	4 dup (0x00000000)			; 0.0
+norm_flt32		dd	4 dup (0x00800000)			; 2^−126 (min normal value)
+one_flt32		dd	4 dup (0x3F800000)			; 1.0
+sqrt2_flt32		dd	4 dup (0x3FB504F3)			; sqrt (2)
+inf_flt32		dd	4 dup (0x7F800000)			; infinity
+two_flt32		dd	0x3F000000, 0x40000000		; 0.5, 2
+ten_flt32		dd	0x3DCCCCCD, 0x41200000		; 0.1, 10
+exp_flt32		dd	0x3EBC5AB2, 0x402DF854		; 1/e, e
 
 ;###############################################################################
 ;#                                 END OF FILE                                 #
