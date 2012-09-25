@@ -210,31 +210,49 @@ static sint64_t LCM (sint64_t x, sint64_t y);
 //      Exponentiation functions                                              //
 //****************************************************************************//
 
-// Power of 2
+//============================================================================//
+//      Power of 2                                                            //
+//============================================================================//
+
+// Integer power of 2
 static uint64_t Exp2 (uint8_t exp);
 static flt32_t Exp2 (sint8_t exp);
 static flt64_t Exp2 (sint16_t exp);
-//static flt32_t Exp2 (flt32_t exp);
-//static flt64_t Exp2 (flt64_t exp);
-//static flt32_t Exp2m1 (flt32_t exp);
-//static flt64_t Exp2m1 (flt64_t exp);
 
-// Power of 10
+// Real power of 2
+static flt32_t Exp2 (flt32_t exp);
+static flt64_t Exp2 (flt64_t exp);
+static flt32_t Exp2m1 (flt32_t exp);
+static flt64_t Exp2m1 (flt64_t exp);
+
+//============================================================================//
+//      Power of 10                                                           //
+//============================================================================//
+
+// Integer power of 10
 static uint64_t Exp10 (uint8_t exp);
 static flt32_t Exp10 (sint8_t exp);
 static flt64_t Exp10 (sint16_t exp);
-//static flt32_t Exp10 (flt32_t exp);
-//static flt64_t Exp10 (flt64_t exp);
-//static flt32_t Exp10m1 (flt32_t exp);
-//static flt64_t Exp10m1 (flt64_t exp);
 
-// Power of E
+// Real power of 10
+static flt32_t Exp10 (flt32_t exp);
+static flt64_t Exp10 (flt64_t exp);
+static flt32_t Exp10m1 (flt32_t exp);
+static flt64_t Exp10m1 (flt64_t exp);
+
+//============================================================================//
+//      Power of E                                                            //
+//============================================================================//
+
+// Integer power of E
 static flt32_t Exp (sint8_t exp);
 static flt64_t Exp (sint16_t exp);
-//static flt32_t Exp (flt32_t exp);
-//static flt64_t Exp (flt64_t exp);
-//static flt32_t Expm1 (flt32_t exp);
-//static flt64_t Expm1 (flt64_t exp);
+
+// Real power of E
+static flt32_t Exp (flt32_t exp);
+static flt64_t Exp (flt64_t exp);
+static flt32_t Expm1 (flt32_t exp);
+static flt64_t Expm1 (flt64_t exp);
 
 //****************************************************************************//
 //      Scale functions                                                       //
@@ -466,31 +484,49 @@ sint64_t Math_LCM_sint64 (sint64_t x, sint64_t y);
 //      Exponentiation functions                                              //
 //****************************************************************************//
 
-// Power of 2
+//============================================================================//
+//      Power of 2                                                            //
+//============================================================================//
+
+// Integer power of 2
 uint64_t Math_Exp2_uint64 (uint8_t exp);
 flt32_t Math_Exp2i_flt32 (sint8_t exp);
 flt64_t Math_Exp2i_flt64 (sint16_t exp);
-//flt32_t Math_Exp2_flt32 (flt32_t exp);
-//flt64_t Math_Exp2_flt64 (flt64_t exp);
-//flt32_t Math_Exp2m1_flt32 (flt32_t exp);
-//flt64_t Math_Exp2m1_flt64 (flt64_t exp);
 
-// Power of 10
+// Real power of 2
+flt32_t Math_Exp2_flt32 (flt32_t exp);
+flt64_t Math_Exp2_flt64 (flt64_t exp);
+flt32_t Math_Exp2m1_flt32 (flt32_t exp);
+flt64_t Math_Exp2m1_flt64 (flt64_t exp);
+
+//============================================================================//
+//      Power of 10                                                           //
+//============================================================================//
+
+// Integer power of 10
 uint64_t Math_Exp10_uint64 (uint8_t exp);
 flt32_t Math_Exp10i_flt32 (sint8_t exp);
 flt64_t Math_Exp10i_flt64 (sint16_t exp);
-//flt32_t Math_Exp10_flt32 (flt32_t exp);
-//flt64_t Math_Exp10_flt64 (flt64_t exp);
-//flt32_t Math_Exp10m1_flt32 (flt32_t exp);
-//flt64_t Math_Exp10m1_flt64 (flt64_t exp);
 
-// Power of E
+// Real power of 10
+flt32_t Math_Exp10_flt32 (flt32_t exp);
+flt64_t Math_Exp10_flt64 (flt64_t exp);
+flt32_t Math_Exp10m1_flt32 (flt32_t exp);
+flt64_t Math_Exp10m1_flt64 (flt64_t exp);
+
+//============================================================================//
+//      Power of E                                                            //
+//============================================================================//
+
+// Integer power of E
 flt32_t Math_Expi_flt32 (sint8_t exp);
 flt64_t Math_Expi_flt64 (sint16_t exp);
-//flt32_t Math_Exp_flt32 (flt32_t exp);
-//flt64_t Math_Exp_flt64 (flt64_t exp);
-//flt32_t Math_Expm1_flt32 (flt32_t exp);
-//flt64_t Math_Expm1_flt64 (flt64_t exp);
+
+// Real power of E
+flt32_t Math_Exp_flt32 (flt32_t exp);
+flt64_t Math_Exp_flt64 (flt64_t exp);
+flt32_t Math_Expm1_flt32 (flt32_t exp);
+flt64_t Math_Expm1_flt64 (flt64_t exp);
 
 //****************************************************************************//
 //      Scale functions                                                       //

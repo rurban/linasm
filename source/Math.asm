@@ -248,7 +248,11 @@ public	LCM_uint64		as	'_ZN4Math3LCMExx'
 ;       Exponentiation functions                                               ;
 ;******************************************************************************;
 
-; Power of 2
+;==============================================================================;
+;       Power of 2                                                             ;
+;==============================================================================;
+
+; Integer power of 2
 public	Exp2_int		as	'Math_Exp2_uint64'
 public	Exp2i_flt32		as	'Math_Exp2i_flt32'
 public	Exp2i_flt64		as	'Math_Exp2i_flt64'
@@ -256,7 +260,21 @@ public	Exp2_int		as	'_ZN4Math4Exp2Eh'
 public	Exp2i_flt32		as	'_ZN4Math4Exp2Ea'
 public	Exp2i_flt64		as	'_ZN4Math4Exp2Es'
 
-; Power of 10
+; Real power of 2
+public	Exp2_flt32		as	'Math_Exp2_flt32'
+public	Exp2_flt64		as	'Math_Exp2_flt64'
+public	Exp2m1_flt32	as	'Math_Exp2m1_flt32'
+public	Exp2m1_flt64	as	'Math_Exp2m1_flt64'
+public	Exp2_flt32		as	'_ZN4Math4Exp2Ef'
+public	Exp2_flt64		as	'_ZN4Math4Exp2Ed'
+public	Exp2m1_flt32	as	'_ZN4Math6Exp2m1Ef'
+public	Exp2m1_flt64	as	'_ZN4Math6Exp2m1Ed'
+
+;==============================================================================;
+;       Power of 10                                                            ;
+;==============================================================================;
+
+; Integer power of 10
 public	Exp10_int		as	'Math_Exp10_uint64'
 public	Exp10i_flt32	as	'Math_Exp10i_flt32'
 public	Exp10i_flt64	as	'Math_Exp10i_flt64'
@@ -264,11 +282,35 @@ public	Exp10_int		as	'_ZN4Math5Exp10Eh'
 public	Exp10i_flt32	as	'_ZN4Math5Exp10Ea'
 public	Exp10i_flt64	as	'_ZN4Math5Exp10Es'
 
-; Power of E
+; Real power of 10
+public	Exp10_flt32		as	'Math_Exp10_flt32'
+public	Exp10_flt64		as	'Math_Exp10_flt64'
+public	Exp10m1_flt32	as	'Math_Exp10m1_flt32'
+public	Exp10m1_flt64	as	'Math_Exp10m1_flt64'
+public	Exp10_flt32		as	'_ZN4Math5Exp10Ef'
+public	Exp10_flt64		as	'_ZN4Math5Exp10Ed'
+public	Exp10m1_flt32	as	'_ZN4Math7Exp10m1Ef'
+public	Exp10m1_flt64	as	'_ZN4Math7Exp10m1Ed'
+
+;==============================================================================;
+;       Power of E                                                             ;
+;==============================================================================;
+
+; Integer power of E
 public	ExpEi_flt32		as	'Math_Expi_flt32'
 public	ExpEi_flt64		as	'Math_Expi_flt64'
 public	ExpEi_flt32		as	'_ZN4Math3ExpEa'
 public	ExpEi_flt64		as	'_ZN4Math3ExpEs'
+
+; Real power of E
+public	ExpE_flt32		as	'Math_Exp_flt32'
+public	ExpE_flt64		as	'Math_Exp_flt64'
+public	ExpEm1_flt32	as	'Math_Expm1_flt32'
+public	ExpEm1_flt64	as	'Math_Expm1_flt64'
+public	ExpE_flt32		as	'_ZN4Math3ExpEf'
+public	ExpE_flt64		as	'_ZN4Math3ExpEd'
+public	ExpEm1_flt32	as	'_ZN4Math5Expm1Ef'
+public	ExpEm1_flt64	as	'_ZN4Math5Expm1Ed'
 
 ;******************************************************************************;
 ;       Scale functions                                                        ;
@@ -369,16 +411,24 @@ NOT_FOUND	= -1							; Pattern is not found
 ; flt32_t
 DMASK_FLT32	= 0x7FFFFFFF					; data mask and NaN value
 SMASK_FLT32	= 0x80000000					; sign mask
+HALF_FLT32	= 0x3F000000					; 0.5
 ONE_FLT32	= 0x3F800000					; 1.0
+TWO_FLT32	= 0x40000000					; 2.0
+MONE_FLT32	= 0xBF800000					; -1.0
 INF_FLT32	= 0x7F800000					; +inf
 NORM_FLT32	= 0x00800000					; min normal value
+MAGIC_FLT32	= 0x4B400000					; magic number for flt32_t to int conversion
 
 ; flt64_t
 DMASK_FLT64	= 0x7FFFFFFFFFFFFFFF			; data mask and NaN value
 SMASK_FLT64	= 0x8000000000000000			; sign mask
+HALF_FLT64	= 0x3FE0000000000000			; 0.5
 ONE_FLT64	= 0x3FF0000000000000			; 1.0
+TWO_FLT64	= 0x4000000000000000			; 2.0
+MONE_FLT64	= 0xBFF0000000000000			; -1.0
 INF_FLT64	= 0x7FF0000000000000			; +inf
 NORM_FLT64	= 0x0010000000000000			; min normal value
+MAGIC_FLT64	= 0x4338000000000000			; magic number for flt64_t to int conversion
 
 ;******************************************************************************;
 ;       Expansion of sign bit                                                  ;
@@ -846,25 +896,169 @@ end if
 .zero:	xorp#x	result, result				; return 0.0
 		ret
 }
+;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+macro	EXP32	iexp
+{
+;---[Internal variables]-------------------
+bytes	= 4									; size of array element (bytes)
+array	= exp_flt32							; pointer to array of coefficients
+;------------------------------------------
+		movss	origin, value
+;---[Stage 1]------------------------------
+		movss	temp1, [array + 0 * bytes]	; temp1 = array[0]
+		movss	temp2, [array + 2 * bytes]	; temp2 = array[2]
+		movss	temp3, [array + 4 * bytes]	; temp3 = array[4]
+		movss	temp4, [array + 6 * bytes]	; temp4 = array[6]
+		movss	temp5, [array + 8 * bytes]	; temp5 = array[8]
+		iexp								; find exponent value for ipart
+		mulss	temp1, value
+		addss	temp1, [array + 1 * bytes]	; temp1 = array[1] + array[0] * value
+		mulss	temp2, value
+		addss	temp2, [array + 3 * bytes]	; temp2 = array[3] + array[2] * value
+		mulss	temp3, value
+		addss	temp3, [array + 5 * bytes]	; temp3 = array[5] + array[4] * value
+		mulss	temp4, value
+		addss	temp4, [array + 7 * bytes]	; temp4 = array[7] + array[6] * value
+		mulss	value, value				; value *= value
+;---[Stage 2]------------------------------
+		mulss	temp2, value
+		addss	temp1, temp2				; temp1 = temp1 + temp2 * value
+		mulss	temp4, value
+		addss	temp3, temp4				; temp3 = temp3 + temp4 * value
+		mulss	value, value				; value *= value
+;---[Stage 3]------------------------------
+		mulss	temp3, value
+		addss	temp1, temp3				; temp1 = temp1 + temp3 * value
+		mulss	value, value				; value *= value
+;---[Stage 4]------------------------------
+		mulss	value, temp5
+		addss	value, temp1				; value = temp1 + temp5 * value
+;------------------------------------------
+		mulss	value, origin				; value *= origin
+}
+;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+macro	EXP64	iexp
+{
+;---[Internal variables]-------------------
+bytes	= 8									; size of array element (bytes)
+array	= exp_flt64							; pointer to array of coefficients
+;------------------------------------------
+		movsd	origin, value
+;---[Stage 1]------------------------------
+		movsd	temp1, [array + 0 * bytes]	; temp1 = array[0]
+		movsd	temp2, [array + 2 * bytes]	; temp2 = array[2]
+		movsd	temp3, [array + 4 * bytes]	; temp3 = array[4]
+		movsd	temp4, [array + 6 * bytes]	; temp4 = array[6]
+		movsd	temp5, [array + 8 * bytes]	; temp5 = array[8]
+		movsd	temp6, [array + 10 * bytes]	; temp6 = array[10]
+		movsd	temp7, [array + 12 * bytes]	; temp7 = array[12]
+		movsd	temp8, [array + 14 * bytes]	; temp8 = array[14]
+		iexp								; find exponent value for ipart
+		mulsd	temp1, value
+		addsd	temp1, [array + 1 * bytes]	; temp1 = array[1] + array[0] * value
+		mulsd	temp2, value
+		addsd	temp2, [array + 3 * bytes]	; temp2 = array[3] + array[2] * value
+		mulsd	temp3, value
+		addsd	temp3, [array + 5 * bytes]	; temp3 = array[5] + array[4] * value
+		mulsd	temp4, value
+		addsd	temp4, [array + 7 * bytes]	; temp4 = array[7] + array[6] * value
+		mulsd	temp5, value
+		addsd	temp5, [array + 9 * bytes]	; temp5 = array[9] + array[8] * value
+		mulsd	temp6, value
+		addsd	temp6, [array + 11 * bytes]	; temp6 = array[11] + array[10] * value
+		mulsd	temp7, value
+		addsd	temp7, [array + 13 * bytes]	; temp7 = array[13] + array[12] * value
+		mulsd	value, value				; value *= value
+;---[Stage 2]------------------------------
+		mulsd	temp2, value
+		addsd	temp1, temp2				; temp1 = temp1 + temp2 * value
+		mulsd	temp4, value
+		addsd	temp3, temp4				; temp3 = temp3 + temp4 * value
+		mulsd	temp6, value
+		addsd	temp5, temp6				; temp5 = temp5 + temp6 * value
+		mulsd	temp8, value
+		addsd	temp7, temp8				; temp7 = temp7 + temp8 * value
+		mulsd	value, value				; value *= value
+;---[Stage 3]------------------------------
+		mulsd	temp3, value
+		addsd	temp1, temp3				; temp1 = temp1 + temp3 * value
+		mulsd	temp7, value
+		addsd	temp5, temp7				; temp5 = temp5 + temp7 * value
+		mulsd	value, value				; value *= value
+;---[Stage 4]------------------------------
+		mulsd	value, temp5
+		addsd	value, temp1				; value = temp1 + temp5 * value
+;------------------------------------------
+		mulsd	value, origin				; value *= origin
+}
 
 ;==============================================================================;
 ;       Power of 2                                                             ;
 ;==============================================================================;
+macro	EXP2I_FLT32
+{
+;---[Internal variables]-------------------
+temp	equ		eax							; temporary register to store ipart
+min		equ		edi							; min exponent value
+underfl	equ		esi							; count of underflow digits
+shift	equ		ecx							; shift value to form subnormal number
+shiftl	equ		cl							; low part of shift register
+bias	= 127								; exponent bias
+digits	= 23								; precission of mantissa
+;------------------------------------------
+		add		temp, bias					; temp += bias
+		mov		underfl, 1
+		mov		min, 1						; min = 1
+		sub		underfl, temp				; underfl = 1 - temp
+		xor		shift, shift				; shift = 0
+		cmp		temp, 1						; if (temp < min)
+		cmovl	temp, min					;     temp = min
+		cmovl	shift, underfl				;     shift = underfl
+		shl		temp, digits				; temp << digits
+		shr		temp, shiftl				; temp >> shift
+		movd	sfactor, temp				; reinterpret temp as flt32_t
+}
+;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+macro	EXP2I_FLT64
+{
+;---[Internal variables]-------------------
+temp	equ		rax							; temporary register to store ipart
+min		equ		rdi							; min exponent value
+underfl	equ		rsi							; count of underflow digits
+shift	equ		rcx							; shift value to form subnormal number
+shiftl	equ		cl							; low part of shift register
+bias	= 1023								; exponent bias
+digits	= 52								; precission of mantissa
+;------------------------------------------
+		add		temp, bias					; temp += bias
+		mov		underfl, 1
+		mov		min, 1						; min = 1
+		sub		underfl, temp				; underfl = 1 - temp
+		xor		shift, shift				; shift = 0
+		cmp		temp, 1						; if (temp < min)
+		cmovl	temp, min					;     temp = min
+		cmovl	shift, underfl				;     shift = underfl
+		shl		temp, digits				; temp << digits
+		shr		temp, shiftl				; temp >> shift
+		movq	sfactor, temp				; reinterpret temp as flt64_t
+}
+;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 Exp2_int:
 ;---[Parameters]---------------------------
 exp		equ		dil							; exponent value
 ;---[Internal variables]-------------------
 shift	equ		cl							; binary shift value
 result	equ		rax							; result register
-temp	equ		rdx							; temporary register
 max		= 64								; max exponent value
 ;------------------------------------------
 		mov		shift, exp					; shift = exp
-		xor		temp, temp					; temp = 0
+		cmp		exp, max					; if (shift >= max)
+		jae		.ovfl						;     then go to overflow branch
 		mov		result, 1					; result = 1
-		cmp		shift, max					; if (shift >= max)
-		cmovae	result, temp				;     result = 0
-		shl		result, shift				; return (result <<= shift)
+		shl		result, shift				; return (1 <<= shift)
+		ret
+;---[Overflow branch]----------------------
+.ovfl:	xor		result, result				; return 0 (means result overflow)
 		ret
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 macro	EXP2I	exp, temp, shift, x
@@ -917,14 +1111,185 @@ end if
 .zero:	xorp#x	result, result				; return 0.0
 		ret
 }
+;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+macro	EXP2	temp, treg, x
+{
+;---[Parameters]---------------------------
+value	equ		xmm0						; value to compute exponent function
+;---[Internal variables]-------------------
+temp1	equ		xmm1						; temporary register #1
+temp2	equ		xmm2						; temporary register #2
+temp3	equ		xmm3						; temporary register #3
+temp4	equ		xmm4						; temporary register #4
+temp5	equ		xmm5						; temporary register #5
+temp6	equ		xmm6						; temporary register #6
+temp7	equ		xmm7						; temporary register #7
+temp8	equ		xmm8						; temporary register #8
+origin	equ		xmm9						; original value
+sfactor	equ		xmm10						; scale factor
+magic	equ		origin						; magic number to get integer part
+ipart	equ		temp1						; integer part of value
+log		equ		temp1						; log value
+max		equ		temp2						; max exponent value
+min		equ		temp3						; max exponent value
+if x eq s
+mvalue	= MAGIC_FLT32						; magic number to get integer part from value
+inf		= INF_FLT32							; infinity
+oneval	= ONE_FLT32							; 1.0
+exp_min	= 0xC3150000						; min exponent value
+exp_max	= 0x42FE0000						; max exponent value
+logval	= 0x3F317218						; ln(2)
+else
+mvalue	= MAGIC_FLT64						; magic number to get integer part from value
+inf		= INF_FLT64							; infinity
+oneval	= ONE_FLT64							; 1.0
+exp_min	= 0xC090C80000000000				; min exponent value
+exp_max	= 0x408FF80000000000				; max exponent value
+logval	= 0x3FE62E42FEFA39EF				; ln(2)
+end if
+;------------------------------------------
+		initreg	max, treg, exp_max, x		; load max exponent value
+		initreg	min, treg, exp_min, x		; load max exponent value
+		initreg	magic, treg, mvalue, x		; load magic number
+		movs#x	ipart, value				; ipart = value
+		comis#x	value, max					; if (value > max)
+		ja		.inf						;     return inf
+		comis#x	value, min					; if (value < min)
+		jb		.zero						;     return 0.0
+		adds#x	ipart, magic
+if x eq s
+		movd	temp, ipart					; temp = round (value)
+else
+		movq	temp, ipart					; temp = round (value)
+end if
+		subs#x	ipart, magic				; ipart = round (value)
+if x eq s
+		cwde
+else
+		cdqe
+end if
+		subs#x	value, ipart				; value = fractional_part (value)
+		initreg	log, treg, logval, x		; log = ln(2)
+		muls#x	value, log					; value *= ln(2)
+if x eq s
+		EXP32	EXP2I_FLT32					; compute exp(value) and sfactor
+else
+		EXP64	EXP2I_FLT64					; compute exp(value) and sfactor
+end if
+		initreg	temp1, treg, oneval, x		; temp1 = 1.0
+		adds#x	value, temp1
+		muls#x	value, sfactor				; return (value + 1) * sfactor
+		ret
+;----[Return inf]--------------------------
+.inf:	initreg	value, treg, inf, x			; return +inf
+		ret
+;----[Return zero]-------------------------
+.zero:	xorp#x	value, value				; return 0.0
+		ret
+}
+;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+macro	EXP2M1	temp, treg, x
+{
+;---[Parameters]---------------------------
+value	equ		xmm0						; value to compute exponent function
+;---[Internal variables]-------------------
+temp1	equ		xmm1						; temporary register #1
+temp2	equ		xmm2						; temporary register #2
+temp3	equ		xmm3						; temporary register #3
+temp4	equ		xmm4						; temporary register #4
+temp5	equ		xmm5						; temporary register #5
+temp6	equ		xmm6						; temporary register #6
+temp7	equ		xmm7						; temporary register #7
+temp8	equ		xmm8						; temporary register #8
+origin	equ		xmm9						; original value
+sfactor	equ		xmm10						; scale factor
+magic	equ		origin						; magic number to get integer part
+ipart	equ		temp1						; integer part of value
+log		equ		temp1						; log value
+max		equ		temp2						; max exponent value
+min		equ		temp3						; max exponent value
+if x eq s
+mvalue	= MAGIC_FLT32						; magic number to get integer part from value
+inf		= INF_FLT32							; infinity
+oneval	= ONE_FLT32							; 1.0
+moneval	= MONE_FLT32						; -1.0
+exp_min	= 0xC3150000						; min exponent value
+exp_max	= 0x42FE0000						; max exponent value
+logval	= 0x3F317218						; ln(2)
+else
+mvalue	= MAGIC_FLT64						; magic number to get integer part from value
+inf		= INF_FLT64							; infinity
+oneval	= ONE_FLT64							; 1.0
+moneval	= MONE_FLT64						; -1.0
+exp_min	= 0xC090C80000000000				; min exponent value
+exp_max	= 0x408FF80000000000				; max exponent value
+logval	= 0x3FE62E42FEFA39EF				; ln(2)
+end if
+;------------------------------------------
+		initreg	max, treg, exp_max, x		; load max exponent value
+		initreg	min, treg, exp_min, x		; load max exponent value
+		initreg	magic, treg, mvalue, x		; load magic number
+		movs#x	ipart, value				; ipart = value
+		comis#x	value, max					; if (value > max)
+		ja		.inf						;     return inf
+		comis#x	value, min					; if (value < min)
+		jb		.mone						;     return -1.0
+		adds#x	ipart, magic
+if x eq s
+		movd	temp, ipart					; temp = round (value)
+else
+		movq	temp, ipart					; temp = round (value)
+end if
+		subs#x	ipart, magic				; ipart = round (value)
+if x eq s
+		cwde
+else
+		cdqe
+end if
+		subs#x	value, ipart				; value = fractional_part (value)
+		initreg	log, treg, logval, x		; log = ln(2)
+		muls#x	value, log					; value *= ln(2)
+if x eq s
+		EXP32	EXP2I_FLT32					; compute exp(value) and sfactor
+else
+		EXP64	EXP2I_FLT64					; compute exp(value) and sfactor
+end if
+		initreg	temp1, treg, oneval, x		; temp1 = 1.0
+		muls#x	value, sfactor
+		subs#x	sfactor, temp1
+		adds#x	value, sfactor				; return value * sfactor + (sfactor - 1);
+		ret
+;----[Return inf]--------------------------
+.inf:	initreg	value, treg, inf, x			; return +inf
+		ret
+;----[Return minus one]--------------------
+.mone:	initreg	value, treg, moneval, x		; return -1.0
+		ret
+}
 
-; Floating-point types
+; Integer power of 2
 Exp2i_flt32:	EXP2I	dil, eax, ecx, s
 Exp2i_flt64:	EXP2I	di, rax, rcx, d
+
+; Real power of 2
+Exp2_flt32:		EXP2	eax, edx, s
+Exp2_flt64:		EXP2	rax, rdx, d
+Exp2m1_flt32:	EXP2M1	eax, edx, s
+Exp2m1_flt64:	EXP2M1	rax, rdx, d
 
 ;==============================================================================;
 ;       Power of 10                                                            ;
 ;==============================================================================;
+macro	EXP10I_FLT32
+{
+		movss	sfactor, [ten_table_flt32 + temp * 4 + 46 * 4]	; sfactor = exp(temp)
+}
+;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+macro	EXP10I_FLT64
+{
+		movsd	sfactor, [ten_table_flt64 + temp * 8 + 324 * 8]	; sfactor = exp(temp)
+}
+;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 Exp10_int:
 ;---[Parameters]---------------------------
 exp		equ		dil							; exponent value
@@ -940,16 +1305,393 @@ exp_max	= 20								; max exponent value
 		cmova	index, max					;     index = exp_max
 		mov		result, [ten_table_int+index*8]; return ten_table [index]
 		ret
+;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+macro	EXP10	temp, treg, x
+{
+;---[Parameters]---------------------------
+value	equ		xmm0						; value to compute exponent function
+;---[Internal variables]-------------------
+temp1	equ		xmm1						; temporary register #1
+temp2	equ		xmm2						; temporary register #2
+temp3	equ		xmm3						; temporary register #3
+temp4	equ		xmm4						; temporary register #4
+temp5	equ		xmm5						; temporary register #5
+temp6	equ		xmm6						; temporary register #6
+temp7	equ		xmm7						; temporary register #7
+temp8	equ		xmm8						; temporary register #8
+origin	equ		xmm9						; original value
+sfactor	equ		xmm10						; scale factor
+magic	equ		origin						; magic number to get integer part
+ipart	equ		temp1						; integer part of value
+log		equ		temp1						; log value
+max		equ		temp2						; max exponent value
+min		equ		temp3						; max exponent value
+if x eq s
+mvalue	= MAGIC_FLT32						; magic number to get integer part from value
+inf		= INF_FLT32							; infinity
+oneval	= ONE_FLT32							; 1.0
+exp_min	= 0xC2380000						; min exponent value
+exp_max	= 0x421C0000						; max exponent value
+logval	= 0x3F135D8E						; ln(10) / 4
+fourval	= 0x40800000						; 4.0
+sixval	= 0x40C00000						; 6.0
+else
+mvalue	= MAGIC_FLT64						; magic number to get integer part from value
+inf		= INF_FLT64							; infinity
+oneval	= ONE_FLT64							; 1.0
+exp_min	= 0xC074400000000000				; min exponent value
+exp_max	= 0x4073500000000000				; max exponent value
+logval	= 0x3FE26BB1BBB55516				; ln(10) / 4
+fourval	= 0x4010000000000000				; 4.0
+sixval	= 0x4018000000000000				; 6.0
+end if
+;------------------------------------------
+		initreg	max, treg, exp_max, x		; load max exponent value
+		initreg	min, treg, exp_min, x		; load max exponent value
+		initreg	magic, treg, mvalue, x		; load magic number
+		movs#x	ipart, value				; ipart = value
+		comis#x	value, max					; if (value > max)
+		ja		.inf						;     return inf
+		comis#x	value, min					; if (value < min)
+		jbe		.zero						;     return 0.0
+		adds#x	ipart, magic
+if x eq s
+		movd	temp, ipart					; temp = round (value)
+else
+		movq	temp, ipart					; temp = round (value)
+end if
+		subs#x	ipart, magic				; ipart = round (value)
+if x eq s
+		cwde
+else
+		cdqe
+end if
+		subs#x	value, ipart				; value = fractional_part (value)
+		initreg	log, treg, logval, x		; log = ln(10) / 4
+		muls#x	value, log					; value *= ln(10) / 4
+if x eq s
+		EXP32	EXP10I_FLT32				; compute exp(value) and sfactor
+else
+		EXP64	EXP10I_FLT64				; compute exp(value) and sfactor
+end if
+		initreg	temp3, treg, oneval, x		; temp3 = 1.0
+		initreg	temp4, treg, fourval, x		; temp4 = 4.0
+		movs#x	origin, value
+		initreg	temp1, treg, sixval, x		; temp1 = 6.0
+		movs#x	temp2, temp3				; temp2 = 1.0
+		muls#x	temp1, value
+		adds#x	temp1, temp4				; temp1 = 4 + 6 * value
+		muls#x	temp2, value
+		adds#x	temp2, temp4				; temp2 = 4 + 1 * value
+		muls#x	value, value				; value *= value
+		muls#x	value, temp2
+		adds#x	value, temp1				; value = temp1 + temp2 * value
+		muls#x	value, origin				; value *= origin
+		adds#x	value, temp3
+		muls#x	value, sfactor				; return (value^4 * 4*value^3 + 6*value^2 + 4*value + 1) * sfactor
+		ret
+;----[Return inf]--------------------------
+.inf:	initreg	value, treg, inf, x			; return +inf
+		ret
+;----[Return zero]-------------------------
+.zero:	xorp#x	value, value				; return 0.0
+		ret
+}
+;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+macro	EXP10M1	temp, treg, x
+{
+;---[Parameters]---------------------------
+value	equ		xmm0						; value to compute exponent function
+;---[Internal variables]-------------------
+temp1	equ		xmm1						; temporary register #1
+temp2	equ		xmm2						; temporary register #2
+temp3	equ		xmm3						; temporary register #3
+temp4	equ		xmm4						; temporary register #4
+temp5	equ		xmm5						; temporary register #5
+temp6	equ		xmm6						; temporary register #6
+temp7	equ		xmm7						; temporary register #7
+temp8	equ		xmm8						; temporary register #8
+origin	equ		xmm9						; original value
+sfactor	equ		xmm10						; scale factor
+magic	equ		origin						; magic number to get integer part
+ipart	equ		temp1						; integer part of value
+log		equ		temp1						; log value
+max		equ		temp2						; max exponent value
+min		equ		temp3						; max exponent value
+if x eq s
+mvalue	= MAGIC_FLT32						; magic number to get integer part from value
+inf		= INF_FLT32							; infinity
+oneval	= ONE_FLT32							; 1.0
+moneval	= MONE_FLT32						; -1.0
+exp_min	= 0xC2380000						; min exponent value
+exp_max	= 0x421C0000						; max exponent value
+logval	= 0x3F135D8E						; ln(10) / 4
+fourval	= 0x40800000						; 4.0
+sixval	= 0x40C00000						; 6.0
+else
+mvalue	= MAGIC_FLT64						; magic number to get integer part from value
+inf		= INF_FLT64							; infinity
+oneval	= ONE_FLT64							; 1.0
+moneval	= MONE_FLT64						; -1.0
+exp_min	= 0xC074400000000000				; min exponent value
+exp_max	= 0x4073500000000000				; max exponent value
+logval	= 0x3FE26BB1BBB55516				; ln(10) / 4
+fourval	= 0x4010000000000000				; 4.0
+sixval	= 0x4018000000000000				; 6.0
+end if
+;------------------------------------------
+		initreg	max, treg, exp_max, x		; load max exponent value
+		initreg	min, treg, exp_min, x		; load max exponent value
+		initreg	magic, treg, mvalue, x		; load magic number
+		movs#x	ipart, value				; ipart = value
+		comis#x	value, max					; if (value > max)
+		ja		.inf						;     return inf
+		comis#x	value, min					; if (value < min)
+		jbe		.mone						;     return -1.0
+		adds#x	ipart, magic
+if x eq s
+		movd	temp, ipart					; temp = round (value)
+else
+		movq	temp, ipart					; temp = round (value)
+end if
+		subs#x	ipart, magic				; ipart = round (value)
+if x eq s
+		cwde
+else
+		cdqe
+end if
+		subs#x	value, ipart				; value = fractional_part (value)
+		initreg	log, treg, logval, x		; log = ln(10) / 4
+		muls#x	value, log					; value *= ln(10) / 4
+if x eq s
+		EXP32	EXP10I_FLT32				; compute exp(value) and sfactor
+else
+		EXP64	EXP10I_FLT64				; compute exp(value) and sfactor
+end if
+		initreg	temp3, treg, oneval, x		; temp3 = 1.0
+		initreg	temp4, treg, fourval, x		; temp4 = 4.0
+		movs#x	origin, value
+		initreg	temp1, treg, sixval, x		; temp1 = 6.0
+		movs#x	temp2, temp3				; temp2 = 1
+		muls#x	temp1, value
+		adds#x	temp1, temp4				; temp1 = 4 + 6 * value
+		muls#x	temp2, value
+		adds#x	temp2, temp4				; temp2 = 4 + 1 * value
+		muls#x	value, value				; value *= value
+		muls#x	value, temp2
+		adds#x	value, temp1				; value = temp1 + temp2 * value
+		muls#x	value, origin				; value *= origin
+		muls#x	value, sfactor
+		subs#x	sfactor, temp3
+		adds#x	value, sfactor				; return (value^4 * 4*value^3 + 6*value^2 + 4*value) * sfactor + (sfactor - 1)
+		ret
+;----[Return inf]--------------------------
+.inf:	initreg	value, treg, inf, x			; return +inf
+		ret
+;----[Return minus one]--------------------
+.mone:	initreg	value, treg, moneval, x		; return -1.0
+		ret
+}
 
-; Floating-point types
+; Integer power of 10
 Exp10i_flt32:	EXPI	dil, eax, -46, +39, ten_table_flt32, s
 Exp10i_flt64:	EXPI	di, rax, -324, +309, ten_table_flt64, d
+
+; Real power of 10
+Exp10_flt32:	EXP10	eax, edx, s
+Exp10_flt64:	EXP10	rax, rdx, d
+Exp10m1_flt32:	EXP10M1	eax, edx, s
+Exp10m1_flt64:	EXP10M1	rax, rdx, d
 
 ;==============================================================================;
 ;       Power of E                                                             ;
 ;==============================================================================;
+macro	EXPEI_FLT32
+{
+		movss	sfactor, [exp_table_flt32 + temp * 4 + 104 * 4]	; sfactor = exp(temp)
+}
+;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+macro	EXPEI_FLT64
+{
+		movsd	sfactor, [exp_table_flt64 + temp * 8 + 746 * 8]	; sfactor = exp(temp)
+}
+;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+macro	EXPE	temp, treg, x
+{
+;---[Parameters]---------------------------
+value	equ		xmm0						; value to compute exponent function
+;---[Internal variables]-------------------
+temp1	equ		xmm1						; temporary register #1
+temp2	equ		xmm2						; temporary register #2
+temp3	equ		xmm3						; temporary register #3
+temp4	equ		xmm4						; temporary register #4
+temp5	equ		xmm5						; temporary register #5
+temp6	equ		xmm6						; temporary register #6
+temp7	equ		xmm7						; temporary register #7
+temp8	equ		xmm8						; temporary register #8
+origin	equ		xmm9						; original value
+sfactor	equ		xmm10						; scale factor
+magic	equ		origin						; magic number to get integer part
+ipart	equ		temp1						; integer part of value
+half	equ		temp1						; 0.5
+max		equ		temp2						; max exponent value
+min		equ		temp3						; max exponent value
+if x eq s
+mvalue	= MAGIC_FLT32						; magic number to get integer part from value
+inf		= INF_FLT32							; infinity
+oneval	= ONE_FLT32							; 1.0
+twoval	= TWO_FLT32							; 2.0
+halfval	= HALF_FLT32						; 0.5
+exp_min	= 0xC2D00000						; min exponent value
+exp_max	= 0x42B20000						; max exponent value
+else
+mvalue	= MAGIC_FLT64						; magic number to get integer part from value
+inf		= INF_FLT64							; infinity
+oneval	= ONE_FLT64							; 1.0
+twoval	= TWO_FLT64							; 2.0
+halfval	= HALF_FLT64						; 0.5
+exp_min	= 0xC087500000000000				; min exponent value
+exp_max	= 0x4086300000000000				; max exponent value
+end if
+;------------------------------------------
+		initreg	max, treg, exp_max, x		; load max exponent value
+		initreg	min, treg, exp_min, x		; load max exponent value
+		initreg	magic, treg, mvalue, x		; load magic number
+		movs#x	ipart, value				; ipart = value
+		comis#x	value, max					; if (value > max)
+		ja		.inf						;     return inf
+		comis#x	value, min					; if (value < min)
+		jbe		.zero						;     return 0.0
+		adds#x	ipart, magic
+if x eq s
+		movd	temp, ipart					; temp = round (value)
+else
+		movq	temp, ipart					; temp = round (value)
+end if
+		subs#x	ipart, magic				; ipart = round (value)
+if x eq s
+		cwde
+else
+		cdqe
+end if
+		subs#x	value, ipart				; value = fractional_part (value)
+		initreg	half, treg, halfval, x		; half = 0.5
+		muls#x	value, half					; value *= 0.5
+if x eq s
+		EXP32	EXPEI_FLT32					; compute exp(value) and sfactor
+else
+		EXP64	EXPEI_FLT64					; compute exp(value) and sfactor
+end if
+		initreg	temp2, treg, twoval, x		; temp2 = 2.0
+		initreg	temp1, treg, oneval, x		; temp1 = 1.0
+		muls#x	temp2, value
+		muls#x	value, value
+		adds#x	value, temp2
+		adds#x	value, temp1
+		muls#x	value, sfactor				; return (value^2 + 2*value + 1) * sfactor
+		ret
+;----[Return inf]--------------------------
+.inf:	initreg	value, treg, inf, x			; return +inf
+		ret
+;----[Return zero]-------------------------
+.zero:	xorp#x	value, value				; return 0.0
+		ret
+}
+;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+macro	EXPEM1	temp, treg, x
+{
+;---[Parameters]---------------------------
+value	equ		xmm0						; value to compute exponent function
+;---[Internal variables]-------------------
+temp1	equ		xmm1						; temporary register #1
+temp2	equ		xmm2						; temporary register #2
+temp3	equ		xmm3						; temporary register #3
+temp4	equ		xmm4						; temporary register #4
+temp5	equ		xmm5						; temporary register #5
+temp6	equ		xmm6						; temporary register #6
+temp7	equ		xmm7						; temporary register #7
+temp8	equ		xmm8						; temporary register #8
+origin	equ		xmm9						; original value
+sfactor	equ		xmm10						; scale factor
+magic	equ		origin						; magic number to get integer part
+ipart	equ		temp1						; integer part of value
+half	equ		temp1						; 0.5
+max		equ		temp2						; max exponent value
+min		equ		temp3						; max exponent value
+if x eq s
+mvalue	= MAGIC_FLT32						; magic number to get integer part from value
+inf		= INF_FLT32							; infinity
+oneval	= ONE_FLT32							; 1.0
+twoval	= TWO_FLT32							; 2.0
+moneval	= MONE_FLT32						; -1.0
+halfval	= HALF_FLT32						; 0.5
+exp_min	= 0xC2D00000						; min exponent value
+exp_max	= 0x42B20000						; max exponent value
+else
+mvalue	= MAGIC_FLT64						; magic number to get integer part from value
+inf		= INF_FLT64							; infinity
+oneval	= ONE_FLT64							; 1.0
+twoval	= TWO_FLT64							; 2.0
+moneval	= MONE_FLT64						; -1.0
+halfval	= HALF_FLT64						; 0.5
+exp_min	= 0xC087500000000000				; min exponent value
+exp_max	= 0x4086300000000000				; max exponent value
+end if
+;------------------------------------------
+		initreg	max, treg, exp_max, x		; load max exponent value
+		initreg	min, treg, exp_min, x		; load max exponent value
+		initreg	magic, treg, mvalue, x		; load magic number
+		movs#x	ipart, value				; ipart = value
+		comis#x	value, max					; if (value > max)
+		ja		.inf						;     return inf
+		comis#x	value, min					; if (value < min)
+		jb		.mone						;     return -1.0
+		adds#x	ipart, magic
+if x eq s
+		movd	temp, ipart					; temp = round (value)
+else
+		movq	temp, ipart					; temp = round (value)
+end if
+		subs#x	ipart, magic				; ipart = round (value)
+if x eq s
+		cwde
+else
+		cdqe
+end if
+		subs#x	value, ipart				; value = fractional_part (value)
+		initreg	half, treg, halfval, x		; half = 0.5
+		muls#x	value, half					; value *= 0.5
+if x eq s
+		EXP32	EXPEI_FLT32					; compute exp(value) and sfactor
+else
+		EXP64	EXPEI_FLT64					; compute exp(value) and sfactor
+end if
+		initreg	temp2, treg, twoval, x		; temp2 = 2.0
+		initreg	temp1, treg, oneval, x		; temp1 = 1.0
+		muls#x	temp2, value
+		muls#x	value, value
+		adds#x	value, temp2
+		muls#x	value, sfactor
+		subs#x	sfactor, temp1
+		adds#x	value, sfactor				; return (value^2 + 2*value) * sfactor + (sfactor - 1)
+		ret
+;----[Return inf]--------------------------
+.inf:	initreg	value, treg, inf, x			; return +inf
+		ret
+;----[Return minus one]--------------------
+.mone:	initreg	value, treg, moneval, x		; return -1.0
+		ret
+}
+
+; Integer power of E
 ExpEi_flt32:	EXPI	dil, eax, -104, +89, exp_table_flt32, s
 ExpEi_flt64:	EXPI	di, rax, -746, +710, exp_table_flt64, d
+
+; Real power of E
+ExpE_flt32:		EXPE	eax, edx, s
+ExpE_flt64:		EXPE	rax, rdx, d
+ExpEm1_flt32:	EXPEM1	eax, edx, s
+ExpEm1_flt64:	EXPEM1	rax, rdx, d
 
 ;******************************************************************************;
 ;       Scale functions                                                        ;
