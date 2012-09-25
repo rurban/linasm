@@ -94,9 +94,9 @@ static flt64_t NegAbs (flt64_t value);
 
 // Signed integer types
 static sint8_t Sign (sint8_t value);
-static sint8_t Sign (sint16_t value);
-static sint8_t Sign (sint32_t value);
-static sint8_t Sign (sint64_t value);
+static sint16_t Sign (sint16_t value);
+static sint32_t Sign (sint32_t value);
+static sint64_t Sign (sint64_t value);
 
 // Floating-point types
 static flt32_t Sign (flt32_t value);
@@ -119,8 +119,14 @@ static flt64_t Sqrt (flt64_t value);
 //****************************************************************************//
 //      Hypotenuse                                                            //
 //****************************************************************************//
-static flt32_t Hypot (flt32_t x, flt32_t y);
-static flt64_t Hypot (flt64_t x, flt64_t y);
+static flt32_t Hypot (flt32_t cath1, flt32_t cath2);
+static flt64_t Hypot (flt64_t cath1, flt64_t cath2);
+
+//****************************************************************************//
+//      Cathetus                                                              //
+//****************************************************************************//
+static flt32_t Cath (flt32_t hypot, flt32_t cath);
+static flt64_t Cath (flt64_t hypot, flt64_t cath);
 
 //****************************************************************************//
 //      Minimum value                                                         //
@@ -208,30 +214,42 @@ static sint64_t LCM (sint64_t x, sint64_t y);
 static uint64_t Exp2 (uint8_t exp);
 static flt32_t Exp2 (sint8_t exp);
 static flt64_t Exp2 (sint16_t exp);
+//static flt32_t Exp2 (flt32_t exp);
+//static flt64_t Exp2 (flt64_t exp);
+//static flt32_t Exp2m1 (flt32_t exp);
+//static flt64_t Exp2m1 (flt64_t exp);
 
 // Power of 10
 static uint64_t Exp10 (uint8_t exp);
 static flt32_t Exp10 (sint8_t exp);
 static flt64_t Exp10 (sint16_t exp);
+//static flt32_t Exp10 (flt32_t exp);
+//static flt64_t Exp10 (flt64_t exp);
+//static flt32_t Exp10m1 (flt32_t exp);
+//static flt64_t Exp10m1 (flt64_t exp);
 
 // Power of E
 static flt32_t Exp (sint8_t exp);
 static flt64_t Exp (sint16_t exp);
+//static flt32_t Exp (flt32_t exp);
+//static flt64_t Exp (flt64_t exp);
+//static flt32_t Expm1 (flt32_t exp);
+//static flt64_t Expm1 (flt64_t exp);
 
 //****************************************************************************//
 //      Scale functions                                                       //
 //****************************************************************************//
 
 // Scale by power of 2
-static flt32_t Scale2 (flt32_t value, sint8_t exp);
+static flt32_t Scale2 (flt32_t value, sint16_t exp);
 static flt64_t Scale2 (flt64_t value, sint16_t exp);
 
 // Scale by power of 10
-static flt32_t Scale10 (flt32_t value, sint8_t exp);
+static flt32_t Scale10 (flt32_t value, sint16_t exp);
 static flt64_t Scale10 (flt64_t value, sint16_t exp);
 
 // Scale by power of E
-static flt32_t Scale (flt32_t value, sint8_t exp);
+static flt32_t Scale (flt32_t value, sint16_t exp);
 static flt64_t Scale (flt64_t value, sint16_t exp);
 
 //****************************************************************************//
@@ -332,9 +350,9 @@ flt64_t Math_NegAbs_flt64 (flt64_t value);
 
 // Signed integer types
 sint8_t Math_Sign_sint8 (sint8_t value);
-sint8_t Math_Sign_sint16 (sint16_t value);
-sint8_t Math_Sign_sint32 (sint32_t value);
-sint8_t Math_Sign_sint64 (sint64_t value);
+sint16_t Math_Sign_sint16 (sint16_t value);
+sint32_t Math_Sign_sint32 (sint32_t value);
+sint64_t Math_Sign_sint64 (sint64_t value);
 
 // Floating-point types
 flt32_t Math_Sign_flt32 (flt32_t value);
@@ -357,8 +375,14 @@ flt64_t Math_Sqrt_flt64 (flt64_t value);
 //****************************************************************************//
 //      Hypotenuse                                                            //
 //****************************************************************************//
-flt32_t Math_Hypot_flt32 (flt32_t x, flt32_t y);
-flt64_t Math_Hypot_flt64 (flt64_t x, flt64_t y);
+flt32_t Math_Hypot_flt32 (flt32_t cath1, flt32_t cath2);
+flt64_t Math_Hypot_flt64 (flt64_t cath1, flt64_t cath2);
+
+//****************************************************************************//
+//      Cathetus                                                              //
+//****************************************************************************//
+flt32_t Math_Cath_flt32 (flt32_t hypot, flt32_t cath);
+flt64_t Math_Cath_flt64 (flt64_t hypot, flt64_t cath);
 
 //****************************************************************************//
 //      Minimum value                                                         //
@@ -446,30 +470,42 @@ sint64_t Math_LCM_sint64 (sint64_t x, sint64_t y);
 uint64_t Math_Exp2_uint64 (uint8_t exp);
 flt32_t Math_Exp2i_flt32 (sint8_t exp);
 flt64_t Math_Exp2i_flt64 (sint16_t exp);
+//flt32_t Math_Exp2_flt32 (flt32_t exp);
+//flt64_t Math_Exp2_flt64 (flt64_t exp);
+//flt32_t Math_Exp2m1_flt32 (flt32_t exp);
+//flt64_t Math_Exp2m1_flt64 (flt64_t exp);
 
 // Power of 10
 uint64_t Math_Exp10_uint64 (uint8_t exp);
 flt32_t Math_Exp10i_flt32 (sint8_t exp);
 flt64_t Math_Exp10i_flt64 (sint16_t exp);
+//flt32_t Math_Exp10_flt32 (flt32_t exp);
+//flt64_t Math_Exp10_flt64 (flt64_t exp);
+//flt32_t Math_Exp10m1_flt32 (flt32_t exp);
+//flt64_t Math_Exp10m1_flt64 (flt64_t exp);
 
 // Power of E
 flt32_t Math_Expi_flt32 (sint8_t exp);
 flt64_t Math_Expi_flt64 (sint16_t exp);
+//flt32_t Math_Exp_flt32 (flt32_t exp);
+//flt64_t Math_Exp_flt64 (flt64_t exp);
+//flt32_t Math_Expm1_flt32 (flt32_t exp);
+//flt64_t Math_Expm1_flt64 (flt64_t exp);
 
 //****************************************************************************//
 //      Scale functions                                                       //
 //****************************************************************************//
 
 // Scale by power of 2
-flt32_t Math_Scale2_flt32 (flt32_t value, sint8_t exp);
+flt32_t Math_Scale2_flt32 (flt32_t value, sint16_t exp);
 flt64_t Math_Scale2_flt64 (flt64_t value, sint16_t exp);
 
 // Scale by power of 10
-flt32_t Math_Scale10_flt32 (flt32_t value, sint8_t exp);
+flt32_t Math_Scale10_flt32 (flt32_t value, sint16_t exp);
 flt64_t Math_Scale10_flt64 (flt64_t value, sint16_t exp);
 
 // Scale by power of E
-flt32_t Math_Scale_flt32 (flt32_t value, sint8_t exp);
+flt32_t Math_Scale_flt32 (flt32_t value, sint16_t exp);
 flt64_t Math_Scale_flt64 (flt64_t value, sint16_t exp);
 
 //****************************************************************************//

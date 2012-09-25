@@ -42,6 +42,20 @@ static size_t Copy (char16_t target[], size_t max_len, const char16_t source[], 
 static size_t Copy (char32_t target[], size_t max_len, const char32_t source[], size_t size);
 
 //****************************************************************************//
+//      Concatenating                                                         //
+//****************************************************************************//
+
+// Concatenating of string to string
+static size_t Cat (char8_t target[], size_t max_len, const char8_t source[]);
+static size_t Cat (char16_t target[], size_t max_len, const char16_t source[]);
+static size_t Cat (char32_t target[], size_t max_len, const char32_t source[]);
+
+// Concatenating of characters sequence to string
+static size_t Cat (char8_t target[], size_t max_len, const char8_t source[], size_t size);
+static size_t Cat (char16_t target[], size_t max_len, const char16_t source[], size_t size);
+static size_t Cat (char32_t target[], size_t max_len, const char32_t source[], size_t size);
+
+//****************************************************************************//
 //      String comparison                                                     //
 //****************************************************************************//
 
@@ -73,6 +87,15 @@ static size_t FindSymbols (const char32_t string[], const char32_t symbols[]);
 static size_t FindString (const char8_t string[], const char8_t pattern[]);
 static size_t FindString (const char16_t string[], const char16_t pattern[]);
 static size_t FindString (const char32_t string[], const char32_t pattern[]);
+
+//****************************************************************************//
+//      Value replacement                                                     //
+//****************************************************************************//
+
+// Replacing of single symbol
+static size_t ReplaceSymbol (const char8_t string[], char8_t symbol, char8_t value);
+static size_t ReplaceSymbol (const char16_t string[], char16_t symbol, char16_t value);
+static size_t ReplaceSymbol (const char32_t string[], char32_t symbol, char32_t value);
 };
 # else
 /*
@@ -100,6 +123,20 @@ size_t String_Copy_char32 (char32_t target[], size_t max_len, const char32_t sou
 size_t String_CopyN_char8 (char8_t target[], size_t max_len, const char8_t source[], size_t size);
 size_t String_CopyN_char16 (char16_t target[], size_t max_len, const char16_t source[], size_t size);
 size_t String_CopyN_char32 (char32_t target[], size_t max_len, const char32_t source[], size_t size);
+
+//****************************************************************************//
+//      Concatenating                                                         //
+//****************************************************************************//
+
+// Concatenating of string to string
+size_t String_Cat_char8 (char8_t target[], size_t max_len, const char8_t source[]);
+size_t String_Cat_char16 (char16_t target[], size_t max_len, const char16_t source[]);
+size_t String_Cat_char32 (char32_t target[], size_t max_len, const char32_t source[]);
+
+// Concatenating of characters sequence to string
+size_t String_CatN_char8 (char8_t target[], size_t max_len, const char8_t source[], size_t size);
+size_t String_CatN_char16 (char16_t target[], size_t max_len, const char16_t source[], size_t size);
+size_t String_CatN_char32 (char32_t target[], size_t max_len, const char32_t source[], size_t size);
 
 //****************************************************************************//
 //      String comparison                                                     //
@@ -133,6 +170,15 @@ size_t String_FindSymbols_char32 (const char32_t string[], const char32_t symbol
 size_t String_FindString_char8 (const char8_t string[], const char8_t pattern[]);
 size_t String_FindString_char16 (const char16_t string[], const char16_t pattern[]);
 size_t String_FindString_char32 (const char32_t string[], const char32_t pattern[]);
+
+//****************************************************************************//
+//      Value replacement                                                     //
+//****************************************************************************//
+
+// Replacing of single symbol
+size_t String_ReplaceSymbol_char8 (const char8_t string[], char8_t symbol, char8_t value);
+size_t String_ReplaceSymbol_char16 (const char16_t string[], char16_t symbol, char16_t value);
+size_t String_ReplaceSymbol_char32 (const char32_t string[], char32_t symbol, char32_t value);
 
 # endif
 /*

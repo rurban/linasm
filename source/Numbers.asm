@@ -9,6 +9,12 @@
 format	ELF64
 
 ;###############################################################################
+;#      Import section                                                         #
+;###############################################################################
+extrn	'Math_Scale2_flt64'		as	Scale2
+extrn	'Math_Scale10_flt64'	as	Scale10
+
+;###############################################################################
 ;#      Export section                                                         #
 ;###############################################################################
 
@@ -142,17 +148,13 @@ public	DecToNum_uint64		as	'_ZN7Numbers8DecToNumEPmPKc'
 section	'.text'		executable align 16
 
 ;******************************************************************************;
-;       Macros                                                                 ;
-;******************************************************************************;
-
-;==============================================================================;
 ;       Consts                                                                 ;
-;==============================================================================;
+;******************************************************************************;
 NOT_FOUND	= -1							; Number is not found
 
-;==============================================================================;
+;******************************************************************************;
 ;       Skip white symbols macro                                               ;
-;==============================================================================;
+;******************************************************************************;
 macro	SKIP_WHITE
 {
 local	.loop
@@ -170,9 +172,9 @@ local	.loop
 		je		.nonum						; then go to not found branch
 }
 
-;==============================================================================;
+;******************************************************************************;
 ;       Skip prefix macro                                                      ;
-;==============================================================================;
+;******************************************************************************;
 macro	SKIP_PREFIX	value
 {
 		cmp		[ptr], byte '0'				; if (ptr[0] == '0')
@@ -185,9 +187,9 @@ macro	SKIP_PREFIX	value
 @@:
 }
 
-;==============================================================================;
+;******************************************************************************;
 ;       Skip number sign macro                                                 ;
-;==============================================================================;
+;******************************************************************************;
 macro	SKIP_SIGN
 {
 		cmp		char, 0x22
@@ -196,9 +198,9 @@ macro	SKIP_SIGN
 @@:
 }
 
-;==============================================================================;
+;******************************************************************************;
 ;       Read number sign macro                                                 ;
-;==============================================================================;
+;******************************************************************************;
 macro	READ_SIGN	const
 {
 local	.nosgn
@@ -212,9 +214,9 @@ local	.nosgn
 .nosgn:
 }
 
-;==============================================================================;
+;******************************************************************************;
 ;       Skip decimal point macro                                               ;
-;==============================================================================;
+;******************************************************************************;
 macro	SKIP_POINT	value
 {
 		add		exp, ptr					; exp = ptr - exp (count of read digits)
@@ -223,9 +225,9 @@ macro	SKIP_POINT	value
 		add		ptr, 1						; ptr++
 }
 
-;==============================================================================;
+;******************************************************************************;
 ;       Read decimal digits macro                                              ;
-;==============================================================================;
+;******************************************************************************;
 macro	READ_DEC_DIGITS
 {
 local	.loop, .start
@@ -244,9 +246,9 @@ local	.loop, .start
 ;---[End of loop]--------------------------
 }
 
-;==============================================================================;
+;******************************************************************************;
 ;       Read hexadecimal digits macro                                          ;
-;==============================================================================;
+;******************************************************************************;
 macro	READ_HEX_DIGITS
 {
 local	.loop, .start, .shift
@@ -270,9 +272,9 @@ local	.loop, .start, .shift
 ;---[End of loop]--------------------------
 }
 
-;==============================================================================;
+;******************************************************************************;
 ;       Read mantissa value macro                                              ;
-;==============================================================================;
+;******************************************************************************;
 macro	GET_MANTISSA	digit, point
 {
 		xor		temp, temp					; temp = 0
@@ -289,12 +291,12 @@ macro	GET_MANTISSA	digit, point
 		add		value, sign
 		sub		exp, digits					; exp -= digits (scale factor for mantissa)
 		xor		value, sign					; apply sign to the number value (hacker's trick)
-	cvtsi2sd	mantis, value				; mantissa = value
+	cvtsi2sd	mant, value					; mantissa = value
 }
 
-;==============================================================================;
+;******************************************************************************;
 ;       Read exponent value macro                                              ;
-;==============================================================================;
+;******************************************************************************;
 macro	GET_EXP	symbol
 {
 local	.loop, .exit
@@ -333,42 +335,40 @@ local	.loop, .exit
 .exit:
 }
 
-;==============================================================================;
+;******************************************************************************;
 ;       Scaling mantissa value macro                                           ;
-;==============================================================================;
-macro	SCALE	value, x
+;******************************************************************************;
+macro	SCALE	func, x
 {
-local	.loop, .skip
-;---[Get abs value of exp]-----------------
-		mov		temp, exp					; next 4 lines are hacker trick
-		sar		temp, 63					; to get absolute value of exp
-		add		exp, temp
-		xor		exp, temp					; exp = Abs (exp)
-;---[Initialization of internal variables]-
-		movsd	base, [value + temp * 8 + 8]; load correct base using sign of exp
-		shr		exp, 1
-		jnc		@f							; if (exp & 0x1 == 1)
-		mulsd	mantis, base				;     mantis *= base
-@@:		jz		.skip						; if ((exp >>= 1) == 0), then skip loop
-;---[Exponentiation loop]------------------
-.loop:	mulsd	base, base					; base *= base
-		shr		exp, 1						; exp >>= 1
-		ja		.loop						; if (exp & 0x1 == 0 && exp != 0), then continue
-		mulsd	mantis, base				; mantis *= base
-		jnz		.loop						; do while (exp != 0)
-;---[End of loop]--------------------------
-.skip:
+;---[Internal variables]-------------------
+power	equ		rdi							; scale power
+stack	equ		rsp							; stack pointer
+s_num	equ		stack +  0 * 8				; stack position of array variable
+s_ptr	equ		stack +  1 * 8				; stack position of size variable
+s_str	equ		stack +  2 * 8				; stack position of left variable
+space	= 3 * 8								; stack size required by the procedure
+;------------------------------------------
+		sub		stack, space				; reserving stack size for local vars
+		mov		[s_num], p_num				; save "p_num" variable into the stack
+		mov		[s_ptr], ptr				; save "ptr" variable into the stack
+		mov		[s_str], string				; save "string" variable into the stack
+		mov		power, exp
+		call	func						; call Scale (mantis)
+		mov		p_num, [s_num]				; get "p_num" variable from the stack
+		mov		ptr, [s_ptr]				; get "p_num" variable from the stack
+		mov		string, [s_str]				; get "p_num" variable from the stack
+		add		stack, space				; restoring back the stack pointer
 if x eq s
-	cvtsd2ss	mantis, mantis				; convert double to float if required
+	cvtsd2ss	mant, mant					; convert double to float if required
 end if
-		movs#x	[p_num], mantis				; p_num[0] = mantissa
+		movs#x	[p_num], mant				; p_num[0] = mantissa
 		sub		ptr, string					; return ptr - string
 		ret
 }
 
-;==============================================================================;
+;******************************************************************************;
 ;       Parsing special values macro                                           ;
-;==============================================================================;
+;******************************************************************************;
 macro	CHECK_SPECIAL	spec
 {
 .spcl:	xor		str, str					; Next lines read input text string
@@ -569,7 +569,7 @@ digits	equ		r8							; count of digits that number has
 sign	equ		r9							; number sign
 max		equ		r10							; max value that mantissa can hold
 exp		equ		r11							; number exponent
-mantis	equ		xmm0						; mantissa value
+mant	equ		xmm0						; mantissa value
 base	equ		xmm1						; base of numeral system
 s_ptr	equ		rsp - 1 * 8					; stack position of ptr
 if x eq s
@@ -589,12 +589,12 @@ end if
 if dec_variant
 		GET_MANTISSA	READ_DEC_DIGITS, -2
 		GET_EXP			'e'
-		SCALE			ten, x
+		SCALE			Scale10, x
 else
 		SKIP_PREFIX		'x'
 		GET_MANTISSA	READ_HEX_DIGITS, -51
 		GET_EXP			'p'
-		SCALE			two, x
+		SCALE			Scale2, x
 end if
 ;---[Special values branch]----------------
 		CHECK_SPECIAL	spec
@@ -746,8 +746,6 @@ nan_flt32	dd	0xFFC00000, 0x7FC00000						; -nan, +nan
 ; flt64_t
 inf_flt64	dq	0xFFF0000000000000, 0x7FF0000000000000		; -inf, +inf
 nan_flt64	dq	0xFFF8000000000000, 0x7FF8000000000000		; -nan, +nan
-ten			dq	0x3FB999999999999A, 0x4024000000000000		; 0.1, 10.0
-two			dq	0x3FE0000000000000, 0x4000000000000000		; 0.5, 2.0
 
 ;###############################################################################
 ;#                                 END OF FILE                                 #

@@ -57,6 +57,26 @@ public	Copy2_char16		as	'_ZN6String4CopyEPsmPKsm'
 public	Copy2_char32		as	'_ZN6String4CopyEPimPKim'
 
 ;******************************************************************************;
+;       Concatenating                                                          ;
+;******************************************************************************;
+
+; Concatenating of string to string
+public	Cat1_char8			as	'String_Cat_char8'
+public	Cat1_char16			as	'String_Cat_char16'
+public	Cat1_char32			as	'String_Cat_char32'
+public	Cat1_char8			as	'_ZN6String3CatEPcmPKc'
+public	Cat1_char16			as	'_ZN6String3CatEPsmPKs'
+public	Cat1_char32			as	'_ZN6String3CatEPimPKi'
+
+; Concatenating of characters sequence to string
+public	Cat2_char8			as	'String_CatN_char8'
+public	Cat2_char16			as	'String_CatN_char16'
+public	Cat2_char32			as	'String_CatN_char32'
+public	Cat2_char8			as	'_ZN6String3CatEPcmPKcm'
+public	Cat2_char16			as	'_ZN6String3CatEPsmPKsm'
+public	Cat2_char32			as	'_ZN6String3CatEPimPKim'
+
+;******************************************************************************;
 ;       String comparison                                                      ;
 ;******************************************************************************;
 
@@ -104,24 +124,32 @@ public	FindStr_char8		as	'_ZN6String10FindStringEPKcS1_'
 public	FindStr_char16		as	'_ZN6String10FindStringEPKsS1_'
 public	FindStr_char32		as	'_ZN6String10FindStringEPKiS1_'
 
+;******************************************************************************;
+;       Value replacement                                                      ;
+;******************************************************************************;
+
+; Replacing of single symbol
+public	Replace1_char8		as	'String_ReplaceSymbol_char8'
+public	Replace1_char16		as	'String_ReplaceSymbol_char16'
+public	Replace1_char32		as	'String_ReplaceSymbol_char32'
+public	Replace1_char8		as	'_ZN6String13ReplaceSymbolEPKccc'
+public	Replace1_char16		as	'_ZN6String13ReplaceSymbolEPKsss'
+public	Replace1_char32		as	'_ZN6String13ReplaceSymbolEPKiii'
+
 ;###############################################################################
 ;#      Code section                                                           #
 ;###############################################################################
 section	'.text'		executable align 16
 
 ;******************************************************************************;
-;       Macros                                                                 ;
-;******************************************************************************;
-
-;==============================================================================;
 ;       Consts                                                                 ;
-;==============================================================================;
+;******************************************************************************;
 NO_SPACE	= -1							; No space in target string
 NOT_FOUND	= -1							; Pattern is not found
 
-;==============================================================================;
+;******************************************************************************;
 ;       Check End Of Line (EOL) macro                                          ;
-;==============================================================================;
+;******************************************************************************;
 macro	checkeol	ptr, scale
 {
 if scale = 0
@@ -133,9 +161,9 @@ else if scale = 2
 end if
 }
 
-;==============================================================================;
+;******************************************************************************;
 ;       Set End Of Line (EOL) macro                                            ;
-;==============================================================================;
+;******************************************************************************;
 macro	seteol	ptr, scale
 {
 if scale = 0
@@ -147,9 +175,9 @@ else if scale = 2
 end if
 }
 
-;==============================================================================;
+;******************************************************************************;
 ;       String len macro                                                       ;
-;==============================================================================;
+;******************************************************************************;
 macro	strlen	size, string, scale
 {
 ;---[Internal variables]-------------------
@@ -191,47 +219,48 @@ Len_char32:	LEN	2
 ;==============================================================================;
 ;       Copying of string to string                                            ;
 ;==============================================================================;
-macro	COPY1	temp, scale
+macro	COPY1	char, scale
 {
 ;---[Parameters]---------------------------
 target	equ		rdi							; target string
 max_len	equ		rsi							; maximum length of target string
 source	equ		rdx							; source string
 ;---[Internal variables]-------------------
-ptr		equ		rax							; temporary pointer to source string
+tptr	equ		r8							; temporary pointer to target string
+sptr	equ		rax							; temporary pointer to source string
 bytes	= 1 shl scale						; size of element (bytes)
 ;------------------------------------------
+		mov		sptr, source				; sptr = source
+		mov		tptr, target				; tptr = target
 		add		max_len, 1					; max_len++
-		lea		ptr, [source - bytes]		; ptr = source - 1
-		sub		target, bytes				; target--
-		jmp		@f
 ;---[Loop]---------------------------------
-.loop:	sub		max_len, 1					; max_len--
-		jz		.nospc						; if (max_len == 0), then no space
-@@:		add		ptr, bytes					; ptr++
-		add		target, bytes				; target++
-		mov		temp, [ptr]
-		mov		[target], temp				; target[0] = ptr[0]
-		test	temp, temp
-		jnz		.loop						; do while (ptr[0] != 0)
-;---[End of loop]--------------------------
-		sub		ptr, source					; return ptr - source
+.loop:	mov		char, [sptr]
+		mov		[tptr], char				; tptr[0] = sptr[0]
+		test	char, char					; if (sptr[0] == 0), then we found end of string
+		jz		.exit						;     and should do normal exit
+		add		sptr, bytes					; sptr++
+		add		tptr, bytes					; tptr++
+		sub		max_len, 1					; max_len--
+		jnz		.loop						; do while (max_len > 0)
+;---[No space exit branch]-----------------
+		mov		sptr, NO_SPACE				; return NO_SPACE
+		seteol	target, scale				; clear target string
+		ret
+;---[Normal exit branch]-------------------
+.exit:	sub		sptr, source				; return sptr - source
 if scale > 0
-		shr		ptr, scale
+		shr		sptr, scale
 end if
 		ret
-;---[No space exit branch]-----------------
-.nospc:	mov		ptr, NO_SPACE				; return NO_SPACE
-		ret
 }
-Copy1_char8:	COPY1	r8b, 0
-Copy1_char16:	COPY1	r8w, 1
-Copy1_char32:	COPY1	r8d, 2
+Copy1_char8:	COPY1	r9b, 0
+Copy1_char16:	COPY1	r9w, 1
+Copy1_char32:	COPY1	r9d, 2
 
 ;==============================================================================;
 ;       Copying of characters sequence to string                               ;
 ;==============================================================================;
-macro	COPY2	temp, scale
+macro	COPY2	char, scale
 {
 ;---[Parameters]---------------------------
 target	equ		rdi							; target string
@@ -239,38 +268,96 @@ max_len	equ		rsi							; maximum length of target string
 source	equ		rdx							; source string
 size	equ		rcx							; characters to copy
 ;---[Internal variables]-------------------
-ptr		equ		rax							; temporary pointer to source string
+tptr	equ		r8							; temporary pointer to target string
+sptr	equ		rax							; temporary pointer to source string
 bytes	= 1 shl scale						; size of element (bytes)
 ;------------------------------------------
-		mov		ptr, source					; ptr = source
-		add		max_len, 1					; max_len++
+		mov		sptr, source				; sptr = source
+		mov		tptr, target				; tptr = target
 		test	size, size					; if (size == 0)
 		jz		.exit						; then go to exit
+		add		max_len, 1					; max_len++
 ;---[Loop]---------------------------------
-.loop:	mov		temp, [ptr]					; temp = ptr[0]
-		test	temp, temp					; if (ptr[0] == 0)
-		jz		.exit						;     then break
+.loop:	mov		char, [sptr]
+		mov		[tptr], char				; tptr[0] = sptr[0]
+		test	char, char					; if (sptr[0] == 0), then we found end of string
+		jz		.exit						;     and should do normal exit
+		add		sptr, bytes					; sptr++
+		add		tptr, bytes					; tptr++
+		sub		size, 1						; if (--size == 0)
+		jz		.eol						;     then set end of line
 		sub		max_len, 1					; max_len--
-		jz		.nospc						; if (max_len == 0), then no space
-		mov		[target], temp				; target[0] = temp
-		add		ptr, bytes					; ptr++
-		add		target, bytes				; target++
-		sub		size, 1						; size--
-		jnz		.loop						; do while (size > 0)
-;---[End of loop]--------------------------
-.exit:	sub		ptr, source					; target[0] = 0
-		seteol	target, scale
+		jnz		.loop						; do while (max_len > 0)
+;---[No space exit branch]-----------------
+		mov		sptr, NO_SPACE				; return NO_SPACE
+		seteol	target, scale				; clear target string
+		ret
+;---[Normal exit branch]-------------------
+.eol:	seteol	tptr, scale					; set end of string
+.exit:	sub		sptr, source				; return sptr - source
 if scale > 0
-		shr		ptr, scale
+		shr		sptr, scale
 end if
 		ret
+}
+Copy2_char8:	COPY2	r9b, 0
+Copy2_char16:	COPY2	r9w, 1
+Copy2_char32:	COPY2	r9d, 2
+
+;******************************************************************************;
+;       Concatenating                                                          ;
+;******************************************************************************;
+
+;==============================================================================;
+;       Concatenating of string to string                                      ;
+;==============================================================================;
+macro	CAT1	func, scale
+{
+;---[Parameters]---------------------------
+target	equ		rdi							; target string
+max_len	equ		rsi							; maximum length of target string
+source	equ		rdx							; source string
+;---[Internal variables]-------------------
+len		equ		rax							; current size of target string
+;------------------------------------------
+		strlen	len, target, scale			; len = Len(target)
+		sub		max_len, len				; if (max_len >= len)
+		jb		.nospc						; {
+		add		target, len					;     return Copy (target + len, max_len - len, source)
+		jmp		func						; }
 ;---[No space exit branch]-----------------
-.nospc:	mov		ptr, NO_SPACE				; return NO_SPACE
+.nospc:	mov		sptr, NO_SPACE				;     else return NO_SPACE
 		ret
 }
-Copy2_char8:	COPY2	r8b, 0
-Copy2_char16:	COPY2	r8w, 1
-Copy2_char32:	COPY2	r8d, 2
+Cat1_char8:		CAT1	Copy1_char8, 0
+Cat1_char16:	CAT1	Copy1_char16, 1
+Cat1_char32:	CAT1	Copy1_char32, 2
+
+;==============================================================================;
+;       Concatenating of characters sequence to string                         ;
+;==============================================================================;
+macro	CAT2	func, scale
+{
+;---[Parameters]---------------------------
+target	equ		rdi							; target string
+max_len	equ		rsi							; maximum length of target string
+source	equ		rdx							; source string
+size	equ		rcx							; characters to copy
+;---[Internal variables]-------------------
+len		equ		rax							; current size of target string
+;------------------------------------------
+		strlen	len, target, scale			; len = Len(target)
+		sub		max_len, len				; if (max_len >= len)
+		jb		.nospc						; {
+		add		target, len					;     return Copy (target + len, max_len - len, source, size)
+		jmp		func						; }
+;---[No space exit branch]-----------------
+.nospc:	mov		sptr, NO_SPACE				;     else return NO_SPACE
+		ret
+}
+Cat2_char8:		CAT2	Copy2_char8, 0
+Cat2_char16:	CAT2	Copy2_char16, 1
+Cat2_char32:	CAT2	Copy2_char32, 2
 
 ;******************************************************************************;
 ;       String comparison                                                      ;
@@ -279,27 +366,24 @@ Copy2_char32:	COPY2	r8d, 2
 ;==============================================================================;
 ;       Checking if strings are equal                                          ;
 ;==============================================================================;
-macro	EQUAL1	temp, scale
+macro	EQUAL1	char, scale
 {
 ;---[Parameters]---------------------------
 string1	equ		rdi							; string #1
 string2	equ		rsi							; string #2
 ;---[Internal variables]-------------------
-res		equ		al							; result
+result	equ		al							; result
 bytes	= 1 shl scale						; size of element (bytes)
-;------------------------------------------
-		sub		string1, bytes				; string1--
-		sub		string2, bytes				; string2--
 ;---[Loop]---------------------------------
-.loop:	add		string1, bytes				; string1++
-		add		string2, bytes				; string2++
-		mov		temp, [string1]
-		cmp		temp, [string2]				; if (string1[0] != string2[0]
+.loop:	mov		char, [string1]
+		cmp		char, [string2]				; if (string1[0] != string2[0]
 		jne		.exit						; then go to exit
-		test	temp, temp
+		add		string1, bytes				; string1++
+		add		string2, bytes				; string2++
+		test	char, char
 		jnz		.loop						; do while (string1[0] != 0)
 ;---[end of loop]--------------------------
-.exit:	sete	res
+.exit:	sete	result
 		ret
 }
 Equal1_char8:	EQUAL1	al, 0
@@ -309,21 +393,21 @@ Equal1_char32:	EQUAL1	eax, 2
 ;==============================================================================;
 ;       Checking if string is equal to characters sequence                     ;
 ;==============================================================================;
-macro	EQUAL2	temp, scale
+macro	EQUAL2	char, scale
 {
 ;---[Parameters]---------------------------
 string1	equ		rdi							; string #1
 string2	equ		rsi							; string #2
 size	equ		rdx							; size of string #2
 ;---[Internal variables]-------------------
-res		equ		al							; result
+result	equ		al							; result
 bytes	= 1 shl scale						; size of element (bytes)
 ;------------------------------------------
 		test	size, size					; if (size == 0)
 		jz		@f							; then skip search loop
 ;---[Loop]---------------------------------
-.loop:	mov		temp, [string1]
-		cmp		temp, [string2]				; if (string1[0] != string2[0]
+.loop:	mov		char, [string1]
+		cmp		char, [string2]				; if (string1[0] != string2[0]
 		jne		.exit						; then go to exit
 		add		string1, bytes				; string1++
 		add		string2, bytes				; string2++
@@ -331,7 +415,7 @@ bytes	= 1 shl scale						; size of element (bytes)
 		jnz		.loop						; do while (size != 0)
 ;---[end of loop]--------------------------
 @@:	checkeol	string1, scale
-.exit:	sete	res
+.exit:	sete	result
 		ret
 }
 Equal2_char8:	EQUAL2	al, 0
@@ -345,7 +429,7 @@ Equal2_char32:	EQUAL2	eax, 2
 ;==============================================================================;
 ;       Searching for single symbol                                            ;
 ;==============================================================================;
-macro	FIND_SYMBOL	symbol, temp, scale
+macro	FIND_SYMBOL	symbol, char, scale
 {
 ;---[Parameters]---------------------------
 string	equ		rdi							; source string
@@ -353,13 +437,13 @@ string	equ		rdi							; source string
 ptr		equ		rax							; temporary pointer to string
 bytes	= 1 shl scale						; size of element (bytes)
 ;------------------------------------------
-		lea		ptr, [string - bytes]		; ptr = string - 1
+		mov		ptr, string					; ptr = string
 ;---[Loop]---------------------------------
-.loop:	add		ptr, bytes					; ptr++
-		mov		temp, [ptr]					; temp = ptr[0]
-		cmp		temp, symbol				; if (temp == symbol), then found
+.loop:	mov		char, [ptr]					; char = ptr[0]
+		cmp		char, symbol				; if (char == symbol), then found
 		je		@f							; go to found branch
-		test	temp, temp
+		add		ptr, bytes					; ptr++
+		test	char, char
 		jnz		.loop						; do while (ptr[0] != 0)
 ;---[end of loop]--------------------------
 		mov		ptr, NOT_FOUND				; return NOT_FOUND
@@ -378,7 +462,7 @@ Find1_char32:	FIND_SYMBOL	esi, edx, 2
 ;==============================================================================;
 ;       Searching for symbols set                                              ;
 ;==============================================================================;
-macro	FIND_SYMBOLS	temp1, temp2, scale
+macro	FIND_SYMBOLS	char1, char2, scale
 {
 ;---[Parameters]---------------------------
 string	equ		rdi							; source string
@@ -388,20 +472,19 @@ ptr1	equ		rax							; temporary pointer to string
 ptr2	equ		r8							; temporary pointer to symbols
 bytes	= 1 shl scale						; size of element (bytes)
 ;------------------------------------------
-		lea		ptr1, [string - bytes]		; ptr = string - 1
-		sub		symbols, bytes				; symbols--
+		mov		ptr1, string				; ptr1 = string
 ;---[Loop]---------------------------------
-.loop1:	add		ptr1, bytes					; ptr1++
-		mov		ptr2, symbols				; ptr2 = symbols
-		mov		temp1, [ptr1]				; temp1 = ptr1[0]
+.loop1:	mov		ptr2, symbols				; ptr2 = symbols
+		mov		char1, [ptr1]				; char1 = ptr1[0]
 ;---[Internal loop]------------------------
-.loop2:	add		ptr2, bytes					; ptr2++
-		mov		temp2, [ptr2]				; temp2 = ptr2[0]
-		cmp		temp2, temp1				; if (temp2 == temp1), then found
+.loop2:	mov		char2, [ptr2]				; char2 = ptr2[0]
+		cmp		char2, char1				; if (char2 == char1), then found
 		je		@f							; go to found branch
-		test	temp2, temp2
+		add		ptr2, bytes					; ptr2++
+		test	char2, char2
 		jnz		.loop2						; do while (ptr2[0] != 0)
 ;---[end of internal loop]-----------------
+		add		ptr1, bytes					; ptr1++
 		jmp		.loop1						; do while (true)
 ;---[end of loop]--------------------------
 @@:		sub		ptr1, string				; return ptr1 - string
@@ -464,6 +547,43 @@ space	= 261 * 8							; stack size required by the procedure
 FindStr_char8:	FIND_STRING	BMH8, BMH_Find8, 0
 FindStr_char16:	FIND_STRING	BMH16, BMH_Find16, 1
 FindStr_char32:	FIND_STRING	BMH32, BMH_Find32, 2
+
+;******************************************************************************;
+;       Value replacement                                                      ;
+;******************************************************************************;
+macro	REPLACE_SYMBOL	symbol, char, scale
+{
+;---[Parameters]---------------------------
+string	equ		rdi							; source string
+value	equ		rdx							; value that replace pattern
+;---[Internal variables]-------------------
+temp	equ		rcx							; temporary register to hold value
+count	equ		rax							; replacement counter
+cinc	equ		r8							; counter increment register
+cincl	equ		r8b							; low part of counter increment register
+bytes	= 1 shl scale						; size of element (bytes)
+;------------------------------------------
+		xor		count, count				; count = 0
+		mov		char, [string]				; char = string[0]
+		xor		cinc, cinc					; cinc = 0
+		test	char, char					; if (char == 0)
+		jz		.exit						;     then go to exit
+;---[Loop]---------------------------------
+.loop:	cmp		char, symbol				; if (char == symbol)
+		cmove	temp, value					;     char = value
+		sete	cincl						;     count++
+		mov		[string], char				; string[0] = char
+		add		count, cinc
+		add		string, bytes				; string++
+		mov		char, [string]				; char = string[0]
+		test	char, char
+		jnz		.loop						; do while (char != 0)
+;---[end of loop]--------------------------
+.exit:	ret
+}
+Replace1_char8:		REPLACE_SYMBOL	sil, cl, 0
+Replace1_char16:	REPLACE_SYMBOL	si, cx, 1
+Replace1_char32:	REPLACE_SYMBOL	esi, ecx, 2
 
 ;###############################################################################
 ;#                                 END OF FILE                                 #

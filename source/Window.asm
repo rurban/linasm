@@ -82,6 +82,33 @@ public	Blackman_NuttallWin_flt64	as	'_ZN6Window15BlackmanNuttallEPdm'
 section	'.text'		executable align 16
 
 ;******************************************************************************;
+;       Consts                                                                 ;
+;******************************************************************************;
+
+; flt32_t
+PI_FLT32		= 0x40490FDB				; Pi
+PI_TWO_FLT32	= 0x40C90FDB				; 2 * Pi
+PI_HALF_FLT32	= 0x3FC90FDB				; Pi / 2
+
+; flt64_t
+PI_FLT64		= 0x400921FB54442D18		; Pi
+PI_TWO_FLT64	= 0x401921FB54442D18		; 2 * Pi
+PI_HALF_FLT64	= 0x3FF921FB54442D18		; Pi / 2
+
+;******************************************************************************;
+;       Init XMM register with const                                           ;
+;******************************************************************************;
+macro	initreg	reg, treg, value, x
+{
+		mov		treg, value
+if x eq s
+		movd	reg, treg
+else
+		movq	reg, treg
+end if
+}
+
+;******************************************************************************;
 ;       Window Functions                                                       ;
 ;******************************************************************************;
 
@@ -131,7 +158,7 @@ macro	BLACKMAN_NUTTALL	x
 ;******************************************************************************;
 ;       Applying window Functions to filters                                   ;
 ;******************************************************************************;
-macro	APPLY_WINDOW	window, x
+macro	APPLY_WINDOW	treg, window, x
 {
 ;---[Parameters]---------------------------
 array	equ		rdi							; pointer to array
@@ -149,36 +176,36 @@ space	= 5 * 8								; stack size required by the procedure
 if x eq s
 if window eq SINE
 Func	= Sin_flt32							; Sine Function
-angle	= pi_half_flt32						; Pi / 2
+angle	= PI_HALF_FLT32						; Pi / 2
 else if window eq HAMMING
 Func	= Cos_flt32							; Cosine Function
-angle	= pi_flt32							; Pi
+angle	= PI_FLT32							; Pi
 win		= hamm_win_flt32					; Hamming window coefficients
 else if window eq BLACKMAN
 Func	= Cos_flt32							; Cosine Function
-angle	= pi_flt32							; Pi
+angle	= PI_FLT32							; Pi
 win		= black_win_flt32					; Blackman window coefficients
 else if window eq BLACKMAN_NUTTALL
 Func	= Cos_flt32							; Cosine Function
-angle	= pi_flt32							; Pi
+angle	= PI_FLT32							; Pi
 win		= black_nutt_win_flt32				; Blackman–Nuttall window coefficients
 end if
 bytes	= 4									; array element size (bytes)
 else
 if window eq SINE
 Func	= Sin_flt64							; Sine Function
-angle	= pi_half_flt64						; Pi / 2
+angle	= PI_HALF_FLT64						; Pi / 2
 else if window eq HAMMING
 Func	= Cos_flt64							; Cosine Function
-angle	= pi_flt64							; Pi
+angle	= PI_FLT64							; Pi
 win		= hamm_win_flt64					; Hamming window coefficients
 else if window eq BLACKMAN
 Func	= Cos_flt64							; Cosine Function
-angle	= pi_flt64							; Pi
+angle	= PI_FLT64							; Pi
 win		= black_win_flt64					; Blackman window coefficients
 else if window eq BLACKMAN_NUTTALL
 Func	= Cos_flt64							; Cosine Function
-angle	= pi_flt64							; Pi
+angle	= PI_FLT64							; Pi
 win		= black_nutt_win_flt64				; Blackman–Nuttall window coefficients
 end if
 bytes	= 8									; array element size (bytes)
@@ -186,7 +213,7 @@ end if
 ;------------------------------------------
 		sub		stack, space				; reserving stack size for local vars
 		add		size, 1						; size++
-		movs#x	step, [angle]
+		initreg	step, treg, angle, x		; step = angle
 	cvtsi2ss	value, size
 		divs#x	step, value					; step = angle / size
 		xorp#x	value, value				; value = 0
@@ -217,29 +244,29 @@ end if
 ;==============================================================================;
 
 ; Sine window
-Sine_flt32:				APPLY_WINDOW	SINE, s
-Sine_flt64:				APPLY_WINDOW	SINE, d
+Sine_flt32:				APPLY_WINDOW	eax, SINE, s
+Sine_flt64:				APPLY_WINDOW	rax, SINE, d
 
 ; Hamming window
-Hamming_flt32:			APPLY_WINDOW	HAMMING, s
-Hamming_flt64:			APPLY_WINDOW	HAMMING, d
+Hamming_flt32:			APPLY_WINDOW	eax, HAMMING, s
+Hamming_flt64:			APPLY_WINDOW	rax, HAMMING, d
 
 ; Blackman window
-Blackman_flt32:			APPLY_WINDOW	BLACKMAN, s
-Blackman_flt64:			APPLY_WINDOW	BLACKMAN, d
+Blackman_flt32:			APPLY_WINDOW	eax, BLACKMAN, s
+Blackman_flt64:			APPLY_WINDOW	rax, BLACKMAN, d
 
 ;==============================================================================;
 ;       Low-resolution windows (high-dynamic-range)                            ;
 ;==============================================================================;
 
 ; Blackman–Nuttall window
-Blackman_Nuttall_flt32:	APPLY_WINDOW	BLACKMAN_NUTTALL, s
-Blackman_Nuttall_flt64:	APPLY_WINDOW	BLACKMAN_NUTTALL, d
+Blackman_Nuttall_flt32:	APPLY_WINDOW	eax, BLACKMAN_NUTTALL, s
+Blackman_Nuttall_flt64:	APPLY_WINDOW	rax, BLACKMAN_NUTTALL, d
 
 ;******************************************************************************;
 ;       Computing windows Functions                                            ;
 ;******************************************************************************;
-macro	COMPUTE_WINDOW	window, x
+macro	COMPUTE_WINDOW	treg, window, x
 {
 ;---[Parameters]---------------------------
 array	equ		rdi							; pointer to array
@@ -259,18 +286,18 @@ space	= 7 * 8								; stack size required by the procedure
 if x eq s
 if window eq SINE
 Func	= Sin_flt32							; Sine Function
-angle	= pi_flt32							; Pi
+angle	= PI_FLT32							; Pi
 else if window eq HAMMING
 Func	= Cos_flt32							; Cosine Function
-angle	= pi_two_flt32						; 2 * Pi
+angle	= PI_TWO_FLT32						; 2 * Pi
 win		= hamm_win_flt32					; Hamming window coefficients
 else if window eq BLACKMAN
 Func	= Cos_flt32							; Cosine Function
-angle	= pi_two_flt32						; 2 * Pi
+angle	= PI_TWO_FLT32						; 2 * Pi
 win		= black_win_flt32					; Blackman window coefficients
 else if window eq BLACKMAN_NUTTALL
 Func	= Cos_flt32							; Cosine Function
-angle	= pi_two_flt32						; 2 * Pi
+angle	= PI_TWO_FLT32						; 2 * Pi
 win		= black_nutt_win_flt32				; Blackman–Nuttall window coefficients
 end if
 reflect	= Reflect_flt32						; Array reflection Function
@@ -278,18 +305,18 @@ bytes	= 4									; array element size (bytes)
 else
 if window eq SINE
 Func	= Sin_flt64							; Sine Function
-angle	= pi_flt64							; Pi
+angle	= PI_FLT64							; Pi
 else if window eq HAMMING
 Func	= Cos_flt64							; Cosine Function
-angle	= pi_two_flt64						; 2 * Pi
+angle	= PI_TWO_FLT64						; 2 * Pi
 win		= hamm_win_flt64					; Hamming window coefficients
 else if window eq BLACKMAN
 Func	= Cos_flt64							; Cosine Function
-angle	= pi_two_flt64						; 2 * Pi
+angle	= PI_TWO_FLT64						; 2 * Pi
 win		= black_win_flt64					; Blackman window coefficients
 else if window eq BLACKMAN_NUTTALL
 Func	= Cos_flt64							; Cosine Function
-angle	= pi_two_flt64						; 2 * Pi
+angle	= PI_TWO_FLT64						; 2 * Pi
 win		= black_nutt_win_flt64				; Blackman–Nuttall window coefficients
 end if
 reflect	= Reflect_flt64						; Array reflection Function
@@ -302,7 +329,7 @@ end if
 		mov		[s_array], array			; save "array" variable into the stack
 		mov		[s_size], size				; save "size" variable into the stack
 		add		size, 1						; size++
-		movs#x	step, [angle]
+		initreg	step, treg, angle, x		; step = angle
 	cvtsi2ss	value, size
 		divs#x	step, value					; step = angle / size
 		shr		size, 1						; size /= 2
@@ -336,24 +363,24 @@ end if
 ;==============================================================================;
 
 ; Sine window
-SineWin_flt32:				COMPUTE_WINDOW	SINE, s
-SineWin_flt64:				COMPUTE_WINDOW	SINE, d
+SineWin_flt32:				COMPUTE_WINDOW	eax, SINE, s
+SineWin_flt64:				COMPUTE_WINDOW	rax, SINE, d
 
 ; Hamming window
-HammingWin_flt32:			COMPUTE_WINDOW	HAMMING, s
-HammingWin_flt64:			COMPUTE_WINDOW	HAMMING, d
+HammingWin_flt32:			COMPUTE_WINDOW	eax, HAMMING, s
+HammingWin_flt64:			COMPUTE_WINDOW	rax, HAMMING, d
 
 ; Blackman window
-BlackmanWin_flt32:			COMPUTE_WINDOW	BLACKMAN, s
-BlackmanWin_flt64:			COMPUTE_WINDOW	BLACKMAN, d
+BlackmanWin_flt32:			COMPUTE_WINDOW	eax, BLACKMAN, s
+BlackmanWin_flt64:			COMPUTE_WINDOW	rax, BLACKMAN, d
 
 ;==============================================================================;
 ;       Low-resolution windows (high-dynamic-range)                            ;
 ;==============================================================================;
 
 ; Blackman–Nuttall window
-Blackman_NuttallWin_flt32:	COMPUTE_WINDOW	BLACKMAN_NUTTALL, s
-Blackman_NuttallWin_flt64:	COMPUTE_WINDOW	BLACKMAN_NUTTALL, d
+Blackman_NuttallWin_flt32:	COMPUTE_WINDOW	eax, BLACKMAN_NUTTALL, s
+Blackman_NuttallWin_flt64:	COMPUTE_WINDOW	rax, BLACKMAN_NUTTALL, d
 
 ;###############################################################################
 ;#      Read-only data section                                                 #
@@ -361,60 +388,52 @@ Blackman_NuttallWin_flt64:	COMPUTE_WINDOW	BLACKMAN_NUTTALL, d
 section	'.rodata'	align 16
 
 ;******************************************************************************;
-;       Pi coefficients                                                        ;
-;******************************************************************************;
-
-; flt32_t
-pi_flt32				dd	0x40490FDB				; Pi
-pi_two_flt32			dd	0x40C90FDB				; 2 * Pi
-pi_half_flt32			dd	0x3FC90FDB				; Pi / 2
-
-; flt64_t
-pi_flt64				dq	0x400921FB54442D18		; Pi
-pi_two_flt64			dq	0x401921FB54442D18		; 2 * Pi
-pi_half_flt64			dq	0x3FF921FB54442D18		; Pi / 2
-
-;******************************************************************************;
 ;       Hamming window coefficients                                            ;
 ;******************************************************************************;
 
 ; flt32_t
-hamm_win_flt32			dd	0x3F0A3D71				; 0.54
-						dd	0xBEEB851F				; -0.46
+align 16
+hamm_win_flt32			dd	0x3F0A3D71			; 0.54
+						dd	0xBEEB851F			; -0.46
 
 ; flt64_t
-hamm_win_flt64			dq	0x3FE147AE147AE148		; 0.54
-						dq	0xBFDD70A3D70A3D71		; -0.46
+align 16
+hamm_win_flt64			dq	0x3FE147AE147AE148	; 0.54
+						dq	0xBFDD70A3D70A3D71	; -0.46
 
 ;******************************************************************************;
 ;       Blackman window coefficients                                           ;
 ;******************************************************************************;
 
 ; flt32_t
-black_win_flt32			dd	0x3EAE147B				; 0.34
-						dd	0xBF000000				; -0.5
-						dd	0x3E23D70A				; 0.16
+align 16
+black_win_flt32			dd	0x3EAE147B			; 0.34
+						dd	0xBF000000			; -0.5
+						dd	0x3E23D70A			; 0.16
 
 ; flt64_t
-black_win_flt64			dq	0x3FD5C28F5C28F5C3		; 0.34
-						dq	0xBFE0000000000000		; -0.5
-						dq	0x3FC47AE147AE147B		; 0.16
+align 16
+black_win_flt64			dq	0x3FD5C28F5C28F5C3	; 0.34
+						dq	0xBFE0000000000000	; -0.5
+						dq	0x3FC47AE147AE147B	; 0.16
 
 ;******************************************************************************;
 ;       Blackman–Nuttall window coefficients                                   ;
 ;******************************************************************************;
 
 ; flt32_t
-black_nutt_win_flt32	dd	0x3E686E13				; 0.2269824
-						dd	0xBEEA1D39				; -0.4572542
-						dd	0x3E8BE0BD				; 0.2731990
-						dd	0xBD2E5802				; -0.0425644
+align 16
+black_nutt_win_flt32	dd	0x3E686E13			; 0.2269824
+						dd	0xBEEA1D39			; -0.4572542
+						dd	0x3E8BE0BD			; 0.2731990
+						dd	0xBD2E5802			; -0.0425644
 
 ; flt64_t
-black_nutt_win_flt64	dq	0x3FCD0DC260624067		; 0.2269824
-						dq	0xBFDD43A71EBD5A69		; -0.4572542
-						dq	0x3FD17C17A89331A1		; 0.2731990
-						dq	0xBFA5CB0043F29E18		; -0.0425644
+align 16
+black_nutt_win_flt64	dq	0x3FCD0DC260624067	; 0.2269824
+						dq	0xBFDD43A71EBD5A69	; -0.4572542
+						dq	0x3FD17C17A89331A1	; 0.2731990
+						dq	0xBFA5CB0043F29E18	; -0.0425644
 
 ;###############################################################################
 ;#                                 END OF FILE                                 #

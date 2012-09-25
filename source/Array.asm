@@ -665,48 +665,48 @@ public	FindDsc_sint64			as	'_ZN5Array7FindDscEPKxmx'
 ;------------------------------------------------------------------------------;
 
 ; Unsigned integer types
-public	FindAscKey_uint8			as	'Array_FindAsc_uint8key'
-public	FindAscKey_uint16			as	'Array_FindAsc_uint16key'
-public	FindAscKey_uint32			as	'Array_FindAsc_uint32key'
-public	FindAscKey_uint64			as	'Array_FindAsc_uint64key'
-public	FindAscKey_uint8			as	'_ZN5Array7FindAscEPK9uint8_keymh'
-public	FindAscKey_uint16			as	'_ZN5Array7FindAscEPK10uint16_keymt'
-public	FindAscKey_uint32			as	'_ZN5Array7FindAscEPK10uint32_keymj'
-public	FindAscKey_uint64			as	'_ZN5Array7FindAscEPK10uint64_keymy'
+public	FindAscKey_uint8		as	'Array_FindAsc_uint8key'
+public	FindAscKey_uint16		as	'Array_FindAsc_uint16key'
+public	FindAscKey_uint32		as	'Array_FindAsc_uint32key'
+public	FindAscKey_uint64		as	'Array_FindAsc_uint64key'
+public	FindAscKey_uint8		as	'_ZN5Array7FindAscEPK9uint8_keymh'
+public	FindAscKey_uint16		as	'_ZN5Array7FindAscEPK10uint16_keymt'
+public	FindAscKey_uint32		as	'_ZN5Array7FindAscEPK10uint32_keymj'
+public	FindAscKey_uint64		as	'_ZN5Array7FindAscEPK10uint64_keymy'
 
 ; Signed integer types
-public	FindAscKey_sint8			as	'Array_FindAsc_sint8key'
-public	FindAscKey_sint16			as	'Array_FindAsc_sint16key'
-public	FindAscKey_sint32			as	'Array_FindAsc_sint32key'
-public	FindAscKey_sint64			as	'Array_FindAsc_sint64key'
-public	FindAscKey_uint8			as	'_ZN5Array7FindAscEPK9uint8_keyma'
-public	FindAscKey_uint16			as	'_ZN5Array7FindAscEPK10uint16_keyms'
-public	FindAscKey_uint32			as	'_ZN5Array7FindAscEPK10uint32_keymi'
-public	FindAscKey_uint64			as	'_ZN5Array7FindAscEPK10uint64_keymx'
+public	FindAscKey_sint8		as	'Array_FindAsc_sint8key'
+public	FindAscKey_sint16		as	'Array_FindAsc_sint16key'
+public	FindAscKey_sint32		as	'Array_FindAsc_sint32key'
+public	FindAscKey_sint64		as	'Array_FindAsc_sint64key'
+public	FindAscKey_uint8		as	'_ZN5Array7FindAscEPK9uint8_keyma'
+public	FindAscKey_uint16		as	'_ZN5Array7FindAscEPK10uint16_keyms'
+public	FindAscKey_uint32		as	'_ZN5Array7FindAscEPK10uint32_keymi'
+public	FindAscKey_uint64		as	'_ZN5Array7FindAscEPK10uint64_keymx'
 
 ;------------------------------------------------------------------------------;
 ;       Descending order sorted array                                          ;
 ;------------------------------------------------------------------------------;
 
 ; Unsigned integer types
-public	FindDscKey_uint8			as	'Array_FindDsc_uint8key'
-public	FindDscKey_uint16			as	'Array_FindDsc_uint16key'
-public	FindDscKey_uint32			as	'Array_FindDsc_uint32key'
-public	FindDscKey_uint64			as	'Array_FindDsc_uint64key'
-public	FindDscKey_uint8			as	'_ZN5Array7FindDscEPK9uint8_keymh'
-public	FindDscKey_uint16			as	'_ZN5Array7FindDscEPK10uint16_keymt'
-public	FindDscKey_uint32			as	'_ZN5Array7FindDscEPK10uint32_keymj'
-public	FindDscKey_uint64			as	'_ZN5Array7FindDscEPK10uint64_keymy'
+public	FindDscKey_uint8		as	'Array_FindDsc_uint8key'
+public	FindDscKey_uint16		as	'Array_FindDsc_uint16key'
+public	FindDscKey_uint32		as	'Array_FindDsc_uint32key'
+public	FindDscKey_uint64		as	'Array_FindDsc_uint64key'
+public	FindDscKey_uint8		as	'_ZN5Array7FindDscEPK9uint8_keymh'
+public	FindDscKey_uint16		as	'_ZN5Array7FindDscEPK10uint16_keymt'
+public	FindDscKey_uint32		as	'_ZN5Array7FindDscEPK10uint32_keymj'
+public	FindDscKey_uint64		as	'_ZN5Array7FindDscEPK10uint64_keymy'
 
 ; Signed integer types
-public	FindDscKey_sint8			as	'Array_FindDsc_sint8key'
-public	FindDscKey_sint16			as	'Array_FindDsc_sint16key'
-public	FindDscKey_sint32			as	'Array_FindDsc_sint32key'
-public	FindDscKey_sint64			as	'Array_FindDsc_sint64key'
-public	FindDscKey_uint8			as	'_ZN5Array7FindDscEPK9uint8_keyma'
-public	FindDscKey_uint16			as	'_ZN5Array7FindDscEPK10uint16_keyms'
-public	FindDscKey_uint32			as	'_ZN5Array7FindDscEPK10uint32_keymi'
-public	FindDscKey_uint64			as	'_ZN5Array7FindDscEPK10uint64_keymx'
+public	FindDscKey_sint8		as	'Array_FindDsc_sint8key'
+public	FindDscKey_sint16		as	'Array_FindDsc_sint16key'
+public	FindDscKey_sint32		as	'Array_FindDsc_sint32key'
+public	FindDscKey_sint64		as	'Array_FindDsc_sint64key'
+public	FindDscKey_uint8		as	'_ZN5Array7FindDscEPK9uint8_keyma'
+public	FindDscKey_uint16		as	'_ZN5Array7FindDscEPK10uint16_keyms'
+public	FindDscKey_uint32		as	'_ZN5Array7FindDscEPK10uint32_keymi'
+public	FindDscKey_uint64		as	'_ZN5Array7FindDscEPK10uint64_keymx'
 
 ;******************************************************************************;
 ;       Value replacement                                                      ;
@@ -1036,18 +1036,26 @@ public	Unique64				as	'_ZN5Array6UniqueEPxm'
 section	'.text'		executable align 16
 
 ;******************************************************************************;
-;       Macros                                                                 ;
-;******************************************************************************;
-
-;==============================================================================;
 ;       Consts                                                                 ;
-;==============================================================================;
+;******************************************************************************;
 NOT_FOUND	= -1							; Pattern is not found
 
-;==============================================================================;
+; flt32_t
+DMASK_FLT32	= 0x7FFFFFFF					; data mask and NaN value
+SMASK_FLT32	= 0x80000000					; sign mask
+PINF_FLT32	= 0x7F800000					; +inf
+MINF_FLT32	= 0xFF800000					; -inf
+
+; flt64_t
+DMASK_FLT64	= 0x7FFFFFFFFFFFFFFF			; data mask and NaN value
+SMASK_FLT64	= 0x8000000000000000			; sign mask
+PINF_FLT64	= 0x7FF0000000000000			; +inf
+MINF_FLT64	= 0xFFF0000000000000			; -inf
+
+;******************************************************************************;
 ;       Clone value through the entire register                                ;
-;==============================================================================;
-macro	clone_int	reg, scale
+;******************************************************************************;
+macro	clone	reg, scale
 {
 if scale < 1
 	punpcklbw	reg, reg
@@ -1060,26 +1068,29 @@ if scale < 3
 end if
 	punpcklqdq	reg, reg
 }
-;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	clone_flt	reg, x
-{
-if x eq s
-	movsldup	reg, reg
-	movlhps		reg, reg
-else
-	movddup		reg, reg
-end if
-}
 
-;==============================================================================;
+;******************************************************************************;
 ;       Scalar sum of values inside the entire register                        ;
-;==============================================================================;
+;******************************************************************************;
 macro	summa	reg, x
 {
 if x eq s
 		haddp#x	reg, reg
 end if
 		haddp#x	reg, reg
+}
+
+;******************************************************************************;
+;       Init XMM register with const                                           ;
+;******************************************************************************;
+macro	initreg	reg, treg, value, bytes
+{
+		mov		treg, value
+if bytes = 4
+		movd	reg, treg
+else
+		movq	reg, treg
+end if
 }
 
 ;******************************************************************************;
@@ -1131,7 +1142,7 @@ step	= 16 / bytes						; step size (in bytes)
 		sub		size, step					; size -= step
 		jb		.sclr						; if (size < step) then skip vector code
 		movq	temp, reg					; temp = value
-	clone_int	temp, scale					; duplicating value through the entire register
+		clone	temp, scale					; duplicate value through the entire register
 ;---[Vector loop]--------------------------
 .vloop:	movdqu	[array], temp				; array[0] = temp
 		add		array, 16					; array++
@@ -1165,7 +1176,7 @@ step	= 16 / bytes						; step size (in bytes)
 ;------------------------------------------
 		sub		size, step					; size -= step
 		jb		.sclr						; if (size < step) then skip vector code
-	clone_flt	value, x					; duplicating value through the entire register
+		shufp#x	value, value, 0x0			; duplicate value through the entire register
 ;---[Vector loop]--------------------------
 .vloop:	movup#x	[array], value				; array[0] = value
 		add		array, 16					; array++
@@ -1410,17 +1421,19 @@ macro	NOT	scale
 array	equ		rdi							; pointer to array
 size	equ		rsi							; array size (count of elements)
 ;---[Internal variables]-------------------
+treg	equ		eax							; temporary register to init xmm reg
 temp	equ		xmm0						; temporary register
-bitmask	equ		xmm1						; bit mask
+mask	equ		xmm1						; bit mask
 bytes	= 1 shl scale						; size of array element (bytes)
 step	= 16 / bytes						; step size (in bytes)
 ;------------------------------------------
 		sub		size, step					; size -= step
 		jb		.sclr						; if (size < step) then skip vector code
-		movdqa	bitmask, dqword [all_bits]	; mask = 111...111
+		initreg	mask, treg, 0xFFFFFFFF, 4	; mask = 111...111
+		pshufd	mask, mask, 0x0				; duplicate mask through the entire register
 ;---[Vector loop]--------------------------
 .vloop:	movdqu	temp, [array]				; temp = array[0]
-		pandn	temp, bitmask				; temp = ~temp
+		pandn	temp, mask					; temp = ~temp
 		movdqu	[array], temp				; array[0] = temp
 		add		array, 16					; array++
 		sub		size, step					; size -= step
@@ -1517,27 +1530,40 @@ Xor64:	BIT	pxor, xor, rax, 3
 ;==============================================================================;
 ;       Unitary operations                                                     ;
 ;==============================================================================;
-macro	SIGN	op, value, x
+macro	SIGN	treg, negative, x
 {
 ;---[Parameters]---------------------------
 array	equ		rdi							; pointer to array
 size	equ		rsi							; array size (count of elements)
 ;---[Internal variables]-------------------
 temp	equ		xmm0						; temp value
-bmask	equ		xmm1						; bit mask to apply to all elements
+mask	equ		xmm1						; bit mask to apply to all elements
 if x eq s
+dmask	= DMASK_FLT32						; data mask
+smask	= SMASK_FLT32						; sign mask
 bytes	= 4									; array element size (bytes)
 else
+dmask	= DMASK_FLT64						; data mask
+smask	= SMASK_FLT64						; sign mask
 bytes	= 8									; array element size (bytes)
 end if
 step	= 16 / bytes						; step size (in bytes)
 ;------------------------------------------
-		movap#x	bmask, dqword [value]		; bmask = value
+if negative
+		initreg	mask, treg, smask, bytes	; mask = smask
+else
+		initreg	mask, treg, dmask, bytes	; mask = dmask
+end if
+		shufp#x	mask, mask, 0x0				; duplicate mask through the entire register
 		sub		size, step					; size -= step
 		jb		.sclr						; if (size < step) then skip vector code
 ;---[Vector loop]--------------------------
 .vloop:	movup#x	temp, [array]				; temp = array[0]
-		op#x	temp, bmask					; do bit operation to temp
+if negative
+		xorp#x	temp, mask					; temp ^= mask
+else
+		andp#x	temp, mask					; temp &= mask
+end if
 		movup#x	[array], temp				; array[0] = temp
 		add		array, 16					; array++
 		sub		size, step					; size -= step
@@ -1547,7 +1573,11 @@ step	= 16 / bytes						; step size (in bytes)
 		jz		.exit						; If no scalar code is required, then exit
 ;---[Scalar loop]--------------------------
 .sloop:	movs#x	temp, [array]				; temp = array[0]
-		op#x	temp, bmask					; do bit operation to temp value
+if negative
+		xorp#x	temp, mask					; temp ^= mask
+else
+		andp#x	temp, mask					; temp &= mask
+end if
 		movs#x	[array], temp				; array[0] = temp
 		add		array, bytes				; array++
 		sub		size, 1						; size--
@@ -1594,12 +1624,12 @@ step	= 16 / bytes						; step size (in bytes)
 }
 
 ; Negative value
-Neg_flt32:		SIGN	xorp, sign_mask_flt32, s
-Neg_flt64:		SIGN	xorp, sign_mask_flt64, d
+Neg_flt32:		SIGN	eax, 1, s
+Neg_flt64:		SIGN	rax, 1, d
 
 ; Absolute value
-Abs_flt32:		SIGN	andp, data_mask_flt32, s
-Abs_flt64:		SIGN	andp, data_mask_flt64, d
+Abs_flt32:		SIGN	eax, 0, s
+Abs_flt64:		SIGN	rax, 0, d
 
 ; Square
 Sqr_flt32:		SQR		mulp, muls, s
@@ -1629,7 +1659,7 @@ step	= 16 / bytes						; step size (in bytes)
 ;------------------------------------------
 		sub		size, step					; size -= step
 		jb		.sclr						; if (size < step) then skip vector code
-	clone_flt	value, x					; Duplicating value through the entire register
+		shufp#x	value, value, 0x0			; duplicate value through the entire register
 ;---[Vector loop]--------------------------
 .vloop:	movup#x	temp, [array]				; temp = array[0]
 		op#p#x	temp, value					; do operation to temp value
@@ -1885,7 +1915,7 @@ SumMul_flt64:	SUM_MUL	d
 ;******************************************************************************;
 ;       Minimum and maximum values                                             ;
 ;******************************************************************************;
-macro	MINMAX	op, value, abs, x
+macro	MINMAX	op, treg, value, abs, x
 {
 ;---[Parameters]---------------------------
 array	equ		rdi							; pointer to array
@@ -1894,23 +1924,21 @@ size	equ		rsi							; array size (count of elements)
 result	equ		xmm0						; result value
 temp	equ		xmm1						; temporary value
 accum	equ		xmm2						; checks accumulator
-bmask	equ		xmm3						; bit mask
+mask	equ		xmm3						; bit mask
 cmask	equ		eax							; masks of comparison results
 if x eq s
-mask	= data_mask_flt32					; data mask
-nan		= data_mask_flt32					; Not a Number value
+dmask	= DMASK_FLT32						; data mask
 bytes	= 4									; array element size (bytes)
 else
-mask	= data_mask_flt64					; data mask
-nan		= data_mask_flt64					; Not a Number value
+dmask	= DMASK_FLT64						; data mask
 bytes	= 8									; array element size (bytes)
 end if
 step	= 16 / bytes						; step size (in bytes)
 ;------------------------------------------
-		movap#x	result, dqword [value]		; result = value
-if abs
-		movap#x bmask, dqword [mask]		; set appropriate bit mask
-end if
+		initreg	result, treg, value, bytes	; result = value
+		initreg	mask, treg, dmask, bytes	; mask = dmask
+		shufp#x	result, result, 0x0			; duplicate value through the entire register
+		shufp#x	mask, mask, 0x0				; duplicate mask through the entire register
 		sub		size, step					; size -= step
 		jb		.sclr						; if (size < step) then skip vector code
 		xorp#x	accum, accum				; accum = 0
@@ -1921,7 +1949,7 @@ end if
 		test	cmask, cmask				; if NAN is detected,
 		jnz		.nan						;     then go to NaN detected branch
 if abs
-		andp#x	temp, bmask					; temp = Abs (temp)
+		andp#x	temp, mask					; temp = Abs (temp)
 end if
 		op#p#x	result, temp				; find min or max values
 		add		array, 16					; array++
@@ -1942,7 +1970,7 @@ end if
 		comis#x	temp, temp					; check value for NAN
 		jp		.nan						; if NAN is detected, then break the loop
 if abs
-		andp#x	temp, bmask					; temp = Abs (temp)
+		andp#x	temp, mask					; temp = Abs (temp)
 end if
 		op#s#x	result, temp				; find min or max value
 		add		array, bytes				; array++
@@ -1951,25 +1979,25 @@ end if
 ;---[Normal exit branch]-------------------
 .exit:	ret
 ;---[NaN detected branch]------------------
-.nan:	movs#x	result, [nan]					; return true (NaN is detected)
+.nan:	initreg	result, treg, dmask, bytes	; return true (NaN is detected)
 		ret
 }
 
 ; Minimum value
-Min_flt32:		MINMAX	min, inf_plus_flt32, 0, s
-Min_flt64:		MINMAX	min, inf_plus_flt64, 0, d
+Min_flt32:		MINMAX	min, edx, PINF_FLT32, 0, s
+Min_flt64:		MINMAX	min, rdx, PINF_FLT64, 0, d
 
 ; Minimum absolute value
-MinAbs_flt32:	MINMAX	min, inf_plus_flt32, 1, s
-MinAbs_flt64:	MINMAX	min, inf_plus_flt64, 1, d
+MinAbs_flt32:	MINMAX	min, edx, PINF_FLT32, 1, s
+MinAbs_flt64:	MINMAX	min, rdx, PINF_FLT64, 1, d
 
 ; Maximum value
-Max_flt32:		MINMAX	max, inf_minus_flt32, 0, s
-Max_flt64:		MINMAX	max, inf_minus_flt64, 0, d
+Max_flt32:		MINMAX	max, edx, MINF_FLT32, 0, s
+Max_flt64:		MINMAX	max, rdx, MINF_FLT64, 0, d
 
 ; Maximum absolute value
-MaxAbs_flt32:	MINMAX	max, inf_minus_flt32, 1, s
-MaxAbs_flt64:	MINMAX	max, inf_minus_flt64, 1, d
+MaxAbs_flt32:	MINMAX	max, edx, MINF_FLT32, 1, s
+MaxAbs_flt64:	MINMAX	max, rdx, MINF_FLT64, 1, d
 
 ;******************************************************************************;
 ;       Checks                                                                 ;
@@ -1984,7 +2012,7 @@ macro	HAS_NAN	x
 array	equ		rdi							; pointer to array
 size	equ		rsi							; array size (count of elements)
 ;---[Internal variables]-------------------
-res		equ		al							; result register
+result	equ		al							; result register
 cmask	equ		eax							; masks of comparison results
 temp	equ		xmm0						; temporary value
 if x eq s
@@ -2016,10 +2044,10 @@ step	= 16 / bytes						; step size (in bytes)
 		sub		size, 1						; size--
 		jnz		.sloop						; do while (size != 0)
 ;---[Normal exit branch]-------------------
-.exit:	xor		res, res					; return false (do normal exit)
+.exit:	xor		result, result				; return false (do normal exit)
 		ret
 ;---[NaN detected branch]------------------
-.nan:	mov		res, 1						; return true (NaN is detected)
+.nan:	mov		result, 1					; return true (NaN is detected)
 		ret
 }
 HasNAN_flt32:	HAS_NAN	s
@@ -2391,7 +2419,7 @@ Replace64:	REPLACE		rdx, rax, 3
 ;==============================================================================;
 ;       Mapping floating-point values to signed integer values                 ;
 ;==============================================================================;
-macro	MAP	val, x
+macro	MAP	val, treg, x
 {
 ;---[Parameters]---------------------------
 array	equ		rdi							; pointer to array
@@ -2401,26 +2429,31 @@ value	equ		xmm0						; value of array element
 temp	equ		xmm1						; temporary register
 temp1	equ		xmm2						; temporary register to hold 1
 temp2	equ		xmm3						; temporary register to hold mask
-if x eq d
-one		= one_uint32						; 1 (integer value)
-mask	= data_mask_flt32					; data mask
+if x eq s
+dmask	= DMASK_FLT32						; data mask
 bytes	= 4									; array element size (bytes)
 else
-one		= one_uint64						; 1 (integer value)
-mask	= data_mask_flt32					; data mask
+dmask	= DMASK_FLT64						; data mask
 bytes	= 8									; array element size (bytes)
 end if
 step	= 16 / bytes						; step size (in bytes)
 ;------------------------------------------
 		sub		size, step					; size -= step
 		jb		.sclr						; if (size < step) then skip vector code
-		movdqa	temp1, [one]				; temp1 = 1
-		movdqa	temp2, [mask]				; temp = mask
+		initreg	temp1, treg, 1, bytes		; temp1 = 1
+		initreg	temp2, treg, dmask, bytes	; temp2 = dmask
+		shufp#x	temp1, temp1, 0x0			; duplicate 1 through the entire register
+		shufp#x	temp2, temp2, 0x0			; duplicate mask through the entire register
 ;---[Vector loop]--------------------------
 .vloop:	movdqu	value, [array]				; value = array[0]
 		movdqa	temp, value					; temp = value
-		psrl#x	temp, bytes * 8 - 1			; temp >>= sizeof (type) - 1
-		psub#x	temp, temp1					; temp -= 1
+if x eq s
+		psrld	temp, bytes * 8 - 1			; temp >>= sizeof (type) - 1
+		psubd	temp, temp1					; temp -= 1
+else
+		psrlq	temp, bytes * 8 - 1			; temp >>= sizeof (type) - 1
+		psubq	temp, temp1					; temp -= 1
+end if
 		pandn	temp, temp2					; temp = !temp & mask
 		pxor	value, temp					; value ^= temp
 		movdqu	[array], value				; array[0] = value
@@ -2441,8 +2474,8 @@ step	= 16 / bytes						; step size (in bytes)
 ;------------------------------------------
 .exit:	ret
 }
-Map_flt32:	MAP	eax, d
-Map_flt64:	MAP	rax, q
+Map_flt32:	MAP	eax, edx, s
+Map_flt64:	MAP	rax, rdx, d
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 macro	MAP_KEY	temp, scale
 {
@@ -3243,28 +3276,6 @@ Unique8:	UNIQUE	dl, 0
 Unique16:	UNIQUE	dx, 1
 Unique32:	UNIQUE	edx, 2
 Unique64:	UNIQUE	rdx, 3
-
-;###############################################################################
-;#      Read-only data section                                                 #
-;###############################################################################
-section	'.rodata'	align 16
-
-; integer values
-one_uint32			dd	4 dup (1)						; +1
-one_uint64			dq	2 dup (1)						; +1
-all_bits			dq	2 dup (0xFFFFFFFFFFFFFFFF)		; all bits are set to
-
-; flt32_t
-sign_mask_flt32		dd	4 dup (0x80000000)				; sign mask
-data_mask_flt32		dd	4 dup (0x7FFFFFFF)				; data mask
-inf_plus_flt32		dd	4 dup (0x7F800000)				; +inf
-inf_minus_flt32		dd	4 dup (0xFF800000)				; -inf
-
-; flt64_t
-sign_mask_flt64		dq	2 dup (0x8000000000000000)		; sign mask
-data_mask_flt64		dq	2 dup (0x7FFFFFFFFFFFFFFF)		; data mask
-inf_plus_flt64		dq	2 dup (0x7FF0000000000000)		; +inf
-inf_minus_flt64		dq	2 dup (0xFFF0000000000000)		; -inf
 
 ;###############################################################################
 ;#                                 END OF FILE                                 #
