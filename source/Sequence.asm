@@ -68,7 +68,7 @@ section	'.text'		executable align 16
 ;******************************************************************************;
 ;       Boyer-Moore-Horspool pattern hash                                      ;
 ;******************************************************************************;
-macro	BMH_HASH		scale
+macro	BMH_HASH	scale
 {
 ;---[Parameters]---------------------------
 this	equ		rdi							; pointer to BMH_char8 object
@@ -76,10 +76,11 @@ pattern	equ		rsi							; pointer to pattern
 size	equ		rdx							; pattern size
 bwd		equ		cl							; backward direction search flag
 ;---[Internal variables]-------------------
-temp	equ		rax							; temp register
-element	equ		al							; register to load/store sequence element
+elemnt	equ		rax							; register to load/store sequence element
+elemntl	equ		eax							; low part of element
 hptr	equ		r8							; pointer to hash array
 vector	equ		xmm0						; vector register to hold size of pattern
+temp	equ		elemntl						; temp register
 hash	equ		this						; pointer to hash array
 hash_sz	= 256								; size of hash array
 size_of	= hash_sz * 8						; offset of size variable inside BMH_charX
@@ -99,19 +100,27 @@ end if
 		movq	vector, size				; vector = size
 		mov		hptr, hash					; hptr = hash
 	punpcklqdq	vector, vector				; duplicating size through the entire register
-		mov		temp, hash_sz / 2			; temp = hash_sz / 2 (init 2 hash records per cycle)
+		mov		temp, hash_sz				; temp = hash_sz
 @@:		movdqa	[hptr], vector				; hptr[0] = vector
 		add		hptr, 16					; hptr++
-		sub		temp, 1						; temp--
+		sub		temp, 2						; temp -= 2
 		jnz		@b							; do while (h_size != 0)
 ;------------------------------------------
-		xor		temp, temp					; clear temp register
 		test	bwd, bwd					; if (backward)
 		jnz		.bkwrd						; then go to backward hash branch
 ;---[Forward hash branch]------------------
 		jmp		@f
-.loop1:	mov		element, [pattern]			; element = pattern[0]
-		mov		[hash + temp * 8], size		; hash[element] = size
+.loop1:
+if scale = 0
+		movzx	elemnt, byte [pattern]		; elemnt = pattern[0]
+else if scale = 1
+		movzx	elemnt, word [pattern]		; elemnt = pattern[0]
+else if scale = 2
+		mov		elemntl, dword [pattern]	; elemnt = pattern[0]
+else if scale = 3
+		mov		elemnt, qword [pattern]		; elemnt = pattern[0]
+end if
+		mov		[hash + elemnt * 8], size	; hash[elemnt] = size
 		add		pattern, 1					; pattern++
 @@:		sub		size, 1						; size--
 		jnz		.loop1						; do while (size != 0)
@@ -120,8 +129,16 @@ end if
 .bkwrd:	lea		pattern, [pattern + size]
 		jmp		@f
 .loop2:	sub		pattern, 1 					; pattern--
-		mov		element, [pattern]			; element = pattern[0]
-		mov		[hash + temp * 8], size		; hash[element] = size
+if scale = 0
+		movzx	elemnt, byte [pattern]		; elemnt = pattern[0]
+else if scale = 1
+		movzx	elemnt, word [pattern]		; elemnt = pattern[0]
+else if scale = 2
+		mov		elemntl, dword [pattern]	; elemnt = pattern[0]
+else if scale = 3
+		mov		elemnt, qword [pattern]		; elemnt = pattern[0]
+end if
+		mov		[hash + elemnt * 8], size	; hash[elemnt] = size
 @@:		sub		size, 1						; size--
 		jnz		.loop2						; do while (size != 0)
 		ret
@@ -148,8 +165,8 @@ pattern	equ		rdx							; pointer to BMHpattern
 ;---[Internal variables]-------------------
 psize	equ		rcx							; pattern size
 result	equ		rax							; result register
-index	equ		rdi							; hash table index
-key		equ		dil							; hash key
+key		equ		rdi							; hash key
+keyl	equ		edi							; low part of key
 patt	equ		r8							; pointer to pattern sequence
 p_start	equ		r9							; start position for pattern comparison
 s_start	equ		r10							; start position for source comparison
@@ -157,7 +174,7 @@ s_end	equ		r11							; pointer to the end of source sequence
 hash	equ		pattern						; pointer to hash array
 p_pat	equ		psize						; pointer to current element of pattern
 p_src	equ		ssize						; pointer to current element of source
-s_src	equ		rsp - 1 * 8					; stack position of source variable
+s_src	equ		rsp - 1 * 8					; stack position of "source" variable
 hash_of	= 256								; size of hash array
 size_of	= hash_of * 8						; offset of size variable inside BMH_charX
 patt_of	= size_of + 8						; offset of pattern variable inside BMH_charX
@@ -184,7 +201,6 @@ end if
 		lea		p_start, [patt + psize]		; pstart = patt + psize
 		sub		source, bytes				; source--
 		mov		[s_src], source				; save source variable into the stack
-		xor		index, index				; clear index register
 ;---[External loop]------------------------
 .loop1:	mov		p_pat, p_start				; p_pat = p_start
 		mov		p_src, s_start				; p_src = s_start
@@ -197,8 +213,17 @@ end if
 		cmp		element, [p_pat]
 		je		@b							; do while (p_pat[0] == p_src[0])
 ;---[End of internal loop]-----------------
-@@:		mov		key, [s_start - 1]			; key = s_start[-1]
-		add		s_start, [hash + index * 8]	; s_start += hash[key];
+@@:
+if scale = 0
+		movzx	key, byte [s_start - 1]		; key = s_start[-1]
+else if scale = 1
+		movzx	key, word [s_start - 1]		; key = s_start[-1]
+else if scale = 2
+		mov		keyl, dword [s_start - 1]	; key = s_start[-1]
+else if scale = 3
+		mov		key, qword [s_start - 1]	; key = s_start[-1]
+end if
+		add		s_start, [hash + key * 8]	; s_start += hash[key];
 		cmp		s_start, s_end
 		jbe		.loop1						; do while (s_start <= s_end)
 ;---[End of external loop]-----------------
@@ -210,7 +235,7 @@ if scale > 0
 		jnz		@b							; then not found, reapeat search
 		shr		p_src, scale				; else adjust result
 end if
-		mov		result, p_src				; return p_src - source (index of first hit)
+		mov		result, p_src				; return p_src - source (index of first match)
 		ret
 ;---[Backward search branch]---------------
 .bkwrd:	sub		ssize, psize				; ssize -= psize
@@ -221,7 +246,6 @@ end if
 		lea		patt, [p_start + psize]		; patt = p_start + psize
 		lea		source, [source + psize]	; source += psize
 		mov		[s_src], source				; save source variable into the stack
-		xor		index, index				; clear index register
 ;---[External loop]------------------------
 .loop2:	mov		p_pat, p_start				; p_pat = p_start
 		mov		p_src, s_start				; p_src = s_start
@@ -234,8 +258,17 @@ end if
 		cmp		element, [p_pat]
 		je		@b							; do while (p_pat[0] == p_src[0])
 ;---[End of internal loop]-----------------
-@@:		mov		key, [s_start + bytes]		; key = s_start[+1]
-		sub		s_start, [hash + index * 8]	; s_start -= hash[key];
+@@:
+if scale = 0
+		movzx	key, byte [s_start - 1]		; key = s_start[-1]
+else if scale = 1
+		movzx	key, word [s_start - 1]		; key = s_start[-1]
+else if scale = 2
+		mov		keyl, dword [s_start - 1]	; key = s_start[-1]
+else if scale = 3
+		mov		key, qword [s_start - 1]	; key = s_start[-1]
+end if
+		sub		s_start, [hash + key * 8]	; s_start -= hash[key];
 		cmp		s_start, s_end
 		jae		.loop2						; do while (s_start >= s_end)
 ;---[End of external loop]-----------------
@@ -247,7 +280,7 @@ if scale > 0
 		jnz		@b							; then not found, reapeat search
 		shr		p_src, scale				; else adjust result
 end if
-		mov		result, p_src				; return p_src - source (index of first hit)
+		mov		result, p_src				; return p_src - source (index of first match)
 		ret
 ;---[Error branch]-------------------------
 .error:	mov		result, -1					; return -1 (pattern not found)

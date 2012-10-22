@@ -134,7 +134,7 @@ macro	HAMMING	x
 ;==============================================================================;
 macro	BLACKMAN	x
 {
-		movs#x	temp, value					; temp = value
+		movap#x	temp, value					; temp = value
 		muls#x	value, [win + 2 * bytes]	; value *= k2
 		adds#x	value, [win + 1 * bytes]	; value += k1
 		muls#x	value, temp					; value *= temp
@@ -146,7 +146,7 @@ macro	BLACKMAN	x
 ;==============================================================================;
 macro	BLACKMAN_NUTTALL	x
 {
-		movs#x	temp, value					; temp = value
+		movap#x	temp, value					; temp = value
 		muls#x	value, [win + 3 * bytes]	; value *= k3
 		adds#x	value, [win + 2 * bytes]	; value += k2
 		muls#x	value, temp					; value *= temp

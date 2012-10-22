@@ -327,7 +327,7 @@ size	equ		rsi							; array size (count of elements)
 ;---[Internal variables]-------------------
 ptr		equ		rdx							; pointer to target element
 stack	equ		rsp							; stack pointer
-s_array	equ		stack + 0 * 8				; stack position of array variable
+s_array	equ		stack + 0 * 8				; stack position of "array" variable
 space	= 1 * 8								; stack size required by the procedure
 bytes	= 1 shl scale						; size of type (bytes)
 ;------------------------------------------
@@ -379,10 +379,10 @@ ptr		equ		rdx							; pointer to target element
 result	equ		xmm0						; result register
 half	equ		xmm1						; 0.5
 stack	equ		rsp							; stack pointer
-s_array	equ		stack +  0 * 8				; stack position of array variable
-s_size	equ		stack +  1 * 8				; stack position of size variable
-s_left	equ		stack +  2 * 8				; stack position of left variable
-s_ptr	equ		stack +  3 * 8				; stack position of ptr variable
+s_array	equ		stack +  0 * 8				; stack position of "array" variable
+s_size	equ		stack +  1 * 8				; stack position of "size" variable
+s_left	equ		stack +  2 * 8				; stack position of "left" variable
+s_ptr	equ		stack +  3 * 8				; stack position of "ptr" variable
 space	= 5 * 8								; stack size required by the procedure
 if x eq s
 Map		= Map_flt32							; Mapping function
@@ -488,9 +488,9 @@ size	equ		rsi							; array size (count of elements)
 result	equ		xmm0						; result register
 half	equ		xmm1						; 0.5
 stack	equ		rsp							; stack pointer
-s_array	equ		stack +  0 * 8				; stack position of array variable
-s_size	equ		stack +  1 * 8				; stack position of size variable
-s_res	equ		stack +  2 * 8				; stack position of result variable
+s_array	equ		stack +  0 * 8				; stack position of "array" variable
+s_size	equ		stack +  1 * 8				; stack position of "size" variable
+s_res	equ		stack +  2 * 8				; stack position of "result" variable
 space	= 3 * 8								; stack size required by the procedure
 if x eq s
 Min		= Min_flt32							; Minimum function (flt32_t type)
@@ -589,7 +589,7 @@ end if
 		jnz		.sloop						; do while (size != 0)
 ;---[end of scalar loop]-------------------
 .exit:	divs#x	sum, n						; sum = sum / (size - 1)
-		movs#x	result, sum					; result = sum
+		movap#x	result, sum					; result = sum
 		ret
 ;---[Error branch]-------------------------
 .error:	initreg	result, treg, nan, x		; return NaN
@@ -680,7 +680,7 @@ end if
 		jnz		.sloop						; do while (size != 0)
 ;---[end of scalar loop]-------------------
 .exit:	divs#x	sum, n						; sum = sum / (size - 1)
-		movs#x	result, sum					; result = sum
+		movap#x	result, sum					; result = sum
 		ret
 ;---[Error branch]-------------------------
 .error:	initreg	result, treg, nan, x		; return NaN
@@ -705,12 +705,12 @@ result	equ		xmm0						; result register
 temp	equ		xmm1						; temporary variable
 half	equ		xmm2						; 0.5
 stack	equ		rsp							; stack pointer
-s_array	equ		stack +  0 * 8				; stack position of array variable
-s_size	equ		stack +  1 * 8				; stack position of size variable
-s_left	equ		stack +  2 * 8				; stack position of left variable
-s_right	equ		stack +  3 * 8				; stack position of right variable
-s_ind1	equ		stack +  4 * 8				; stack position of index1 variable
-s_ind2	equ		stack +  5 * 8				; stack position of index2 variable
+s_array	equ		stack +  0 * 8				; stack position of "array" variable
+s_size	equ		stack +  1 * 8				; stack position of "size" variable
+s_left	equ		stack +  2 * 8				; stack position of "left" variable
+s_right	equ		stack +  3 * 8				; stack position of "right" variable
+s_ind1	equ		stack +  4 * 8				; stack position of "index1" variable
+s_ind2	equ		stack +  5 * 8				; stack position of "index2" variable
 space	= 7 * 8								; stack size required by the procedure
 if x eq s
 Map		= Map_flt32							; Mapping function
@@ -803,9 +803,9 @@ size	equ		rsi							; array size (count of elements)
 ;---[Internal variables]-------------------
 result	equ		xmm0						; result register
 stack	equ		rsp							; stack pointer
-s_array	equ		stack +  0 * 8				; stack position of array variable
-s_size	equ		stack +  1 * 8				; stack position of size variable
-s_res	equ		s_array						; stack position of result variable
+s_array	equ		stack +  0 * 8				; stack position of "array" variable
+s_size	equ		stack +  1 * 8				; stack position of "size" variable
+s_res	equ		s_array						; stack position of "result" variable
 space	= 3 * 8								; stack size required by the procedure
 if x eq s
 Min		= Min_flt32							; Minimum function (flt32_t type)
@@ -920,7 +920,7 @@ end if
 		divs#x	sum2, sum1					; sum2 = sum2 / sum1
 		divs#x	sum2, temp1					; sum2 = sum2 / (sum1 * sqrt (sum1))
 		muls#x	sum2, n						; sum2 = n * sum2 / (sum1 * sqrt (sum1))
-		movs#x	result, sum2				; result = sum2
+		movap#x	result, sum2				; result = sum2
 		ret
 ;---[Error branch]-------------------------
 .error:	initreg	result, treg, nan, x		; return NaN
@@ -1021,7 +1021,7 @@ end if
 		muls#x	sum2, n						; sum2 = n * sum2
 		subs#x	sum2, bias					; sum2 = n * sum2 - bias
 		muls#x	sum2, temp1					; sum2 = (n * sum2 - bias) * temp1
-		movs#x	result, sum2				; result = sum2
+		movap#x	result, sum2				; result = sum2
 		ret
 ;---[Error branch]-------------------------
 .error:	initreg	result, treg, nan, x		; return NaN
@@ -1098,7 +1098,7 @@ end if
 		jnz		.sloop						; do while (size != 0)
 ;---[end of scalar loop]-------------------
 .exit:	divs#x	sum, n						; sum = sum / (size - 1)
-		movs#x	result, sum					; result = sum
+		movap#x	result, sum					; result = sum
 		ret
 ;---[Error branch]-------------------------
 .error:	initreg	result, treg, nan, x		; return NaN
@@ -1184,7 +1184,7 @@ end if
 		sqrts#x	sum2, sum2
 		muls#x	sum1, sum2
 		divs#x	sum, sum1
-		movs#x	result, sum					; return sum / (sqrt(sum1) * sqrt(sum2))
+		movap#x	result, sum					; return sum / (sqrt(sum1) * sqrt(sum2))
 		ret
 }
 Correlation_flt32:	CORRELATION	s

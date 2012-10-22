@@ -113,20 +113,50 @@ public	Sqrt_flt32		as	'_ZN4Math4SqrtEf'
 public	Sqrt_flt64		as	'_ZN4Math4SqrtEd'
 
 ;******************************************************************************;
-;       Hypotenuse                                                             ;
+;       Trigonometric functions                                                ;
 ;******************************************************************************;
+
+; Hypotenuse
 public	Hypot_flt32		as	'Math_Hypot_flt32'
 public	Hypot_flt64		as	'Math_Hypot_flt64'
 public	Hypot_flt32		as	'_ZN4Math5HypotEff'
 public	Hypot_flt64		as	'_ZN4Math5HypotEdd'
 
-;******************************************************************************;
-;       Cathetus                                                               ;
-;******************************************************************************;
+; Cathetus
 public	Cath_flt32		as	'Math_Cath_flt32'
 public	Cath_flt64		as	'Math_Cath_flt64'
 public	Cath_flt32		as	'_ZN4Math4CathEff'
 public	Cath_flt64		as	'_ZN4Math4CathEdd'
+
+; Sine
+public	Sin_flt32		as	'Math_SinQ_flt32'
+public	Sin_flt64		as	'Math_SinQ_flt64'
+public	Sin_flt32		as	'_ZN4Math4SinQEfx'
+public	Sin_flt64		as	'_ZN4Math4SinQEdx'
+
+; Cosine
+public	Cos_flt32		as	'Math_CosQ_flt32'
+public	Cos_flt64		as	'Math_CosQ_flt64'
+public	Cos_flt32		as	'_ZN4Math4CosQEfx'
+public	Cos_flt64		as	'_ZN4Math4CosQEdx'
+
+; Tangent
+public	Tan_flt32		as	'Math_TanQ_flt32'
+public	Tan_flt64		as	'Math_TanQ_flt64'
+public	Tan_flt32		as	'_ZN4Math4TanQEfx'
+public	Tan_flt64		as	'_ZN4Math4TanQEdx'
+
+; Cotangent
+public	Cot_flt32		as	'Math_CotQ_flt32'
+public	Cot_flt64		as	'Math_CotQ_flt64'
+public	Cot_flt32		as	'_ZN4Math4CotQEfx'
+public	Cot_flt64		as	'_ZN4Math4CotQEdx'
+
+; Sine and cosine
+public	SinCos_flt32	as	'Math_SinCosQ_flt32'
+public	SinCos_flt64	as	'Math_SinCosQ_flt64'
+public	SinCos_flt32	as	'_ZN4Math7SinCosQEPfS0_fx'
+public	SinCos_flt64	as	'_ZN4Math7SinCosQEPdS0_dx'
 
 ;******************************************************************************;
 ;       Minimum value                                                          ;
@@ -197,7 +227,7 @@ public	Max_uint64		as	'Math_Max_size'
 public	Max_uint64		as	'_ZN4Math3MaxEmm'
 
 ;******************************************************************************;
-;       Great common divisor                                                   ;
+;       Greatest common divisor                                                ;
 ;******************************************************************************;
 
 ; Unsigned integer types
@@ -221,7 +251,7 @@ public	GCD_uint32		as	'_ZN4Math3GCDEii'
 public	GCD_uint64		as	'_ZN4Math3GCDExx'
 
 ;******************************************************************************;
-;       Less common multiplier                                                 ;
+;       Least common multiple                                                  ;
 ;******************************************************************************;
 
 ; Unsigned integer types
@@ -365,6 +395,22 @@ public	Power_flt32		as	'_ZN4Math5PowerEfa'
 public	Power_flt64		as	'_ZN4Math5PowerEds'
 
 ;******************************************************************************;
+;       Rounding                                                               ;
+;******************************************************************************;
+
+; Round to nearest integer
+public	RoundInt_flt32	as	'Math_RoundInt_flt32'
+public	RoundInt_flt64	as	'Math_RoundInt_flt64'
+public	RoundInt_flt32	as	'_ZN4Math8RoundIntEf'
+public	RoundInt_flt64	as	'_ZN4Math8RoundIntEd'
+
+; Round to nearest integer, toward zero (truncation)
+public	Truncate_flt32	as	'Math_Truncate_flt32'
+public	Truncate_flt64	as	'Math_Truncate_flt64'
+public	Truncate_flt32	as	'_ZN4Math8TruncateEf'
+public	Truncate_flt64	as	'_ZN4Math8TruncateEd'
+
+;******************************************************************************;
 ;       Checks                                                                 ;
 ;******************************************************************************;
 
@@ -415,8 +461,10 @@ HALF_FLT32	= 0x3F000000					; 0.5
 ONE_FLT32	= 0x3F800000					; 1.0
 TWO_FLT32	= 0x40000000					; 2.0
 MONE_FLT32	= 0xBF800000					; -1.0
+MHALF_FLT32	= 0xBF000000					; -0.5
 INF_FLT32	= 0x7F800000					; +inf
 NORM_FLT32	= 0x00800000					; min normal value
+PI4_FLT32	= 0x3F490FDB					; PI / 4
 MAGIC_FLT32	= 0x4B400000					; magic number for flt32_t to int conversion
 
 ; flt64_t
@@ -426,8 +474,10 @@ HALF_FLT64	= 0x3FE0000000000000			; 0.5
 ONE_FLT64	= 0x3FF0000000000000			; 1.0
 TWO_FLT64	= 0x4000000000000000			; 2.0
 MONE_FLT64	= 0xBFF0000000000000			; -1.0
+MHALF_FLT64	= 0xBFE0000000000000			; -0.5
 INF_FLT64	= 0x7FF0000000000000			; +inf
 NORM_FLT64	= 0x0010000000000000			; min normal value
+PI4_FLT64	= 0x3FE921FB54442D18			; PI / 4
 MAGIC_FLT64	= 0x4338000000000000			; magic number for flt64_t to int conversion
 
 ;******************************************************************************;
@@ -641,7 +691,7 @@ Sqrt_flt32:		SQRT_FLT	s
 Sqrt_flt64:		SQRT_FLT	d
 
 ;******************************************************************************;
-;       Hypotenuse                                                             ;
+;       Trigonometric functions                                                ;
 ;******************************************************************************;
 macro	TRIANGLE	treg, hypot, x
 {
@@ -673,7 +723,7 @@ end if
 		initreg	barier2, treg, const3, x	; barier2 = const3
 		andp#x	val1, mask					; val1 = Abs(val1)
 		andp#x	val2, mask					; val2 = Abs(val2)
-		movs#x	maxval, val1
+		movap#x	maxval, val1
 		maxs#x	maxval, val2				; maxval = Max (val1, val2)
 		comis#x	maxval, barier1				; if (maxval >= barier1)
 		jae		.over						;     then go to overflow prevention branch
@@ -716,14 +766,792 @@ end if
 		muls#x	val1, scale2				; return scale2 * sqrt (val1)
 		ret
 }
+;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+macro	SIN32
+{
+;---[Internal variables]-------------------
+array	= sin_flt32							; pointer to array of coefficients
+bytes	= 4									; size of array element (bytes)
+;------------------------------------------
+		movaps	scale, angle				; scale = angle
+		mulss	angle, angle				; angle *= angle
+		movaps	origin, angle				; origin = angle ^ 2
+;---[Stage 1]------------------------------
+		movss	temp1, [array + 0 * bytes]	; temp1 = array[0]
+		movss	temp2, [array + 2 * bytes]	; temp2 = array[2]
+		mulss	temp1, angle
+		addss	temp1, [array + 1 * bytes]	; temp1 = array[1] + array[0] * angle
+		mulss	temp2, angle
+		addss	temp2, [array + 3 * bytes]	; temp2 = array[3] + array[2] * angle
+		mulss	angle, angle				; angle *= angle
+;---[Stage 2]------------------------------
+		mulss	angle, temp2
+		addss	angle, temp1				; angle = temp1 + temp2 * angle
+;---[Stage 3]------------------------------
+		mulss	angle, origin
+		mulss	angle, scale
+		addss	angle, scale				; angle = scale + angle * origin * scale
+}
+;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+macro	COS32	treg
+{
+;---[Internal variables]-------------------
+array	= cos_flt32							; pointer to array of coefficients
+bytes	= 4									; size of array element (bytes)
+;------------------------------------------
+		mulss	angle, angle				; angle *= angle
+		movaps	scale, angle				; scale = angle ^ 2
+		movaps	origin, angle				; origin = angle ^ 2
+;---[Stage 1]------------------------------
+		movss	temp1, [array + 0 * bytes]	; temp1 = array[0]
+		movss	temp2, [array + 2 * bytes]	; temp2 = array[2]
+		mulss	temp1, angle
+		addss	temp1, [array + 1 * bytes]	; temp1 = array[1] + array[0] * angle
+		mulss	temp2, angle
+		addss	temp2, [array + 3 * bytes]	; temp2 = array[3] + array[2] * angle
+		mulss	angle, angle				; angle *= angle
+;---[Stage 2]------------------------------
+		mulss	angle, temp2
+		addss	angle, temp1				; angle = temp1 + temp2 * angle
+;---[Stage 3]------------------------------
+		initreg	temp2, treg, MHALF_FLT32, s	; temp2 = -0.5
+		mulss	temp2, scale
+		initreg	temp1, treg, ONE_FLT32, s	; temp1 = 1.0
+		mulss	angle, origin
+		mulss	angle, scale
+		addss	angle, temp2
+		addss	angle, temp1				; angle = 1 - 0.5 * scale + angle * origin * scale
+}
+;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+macro	SINCOS32	treg
+{
+;---[Internal variables]-------------------
+array1	= cos_flt32							; pointer to array of cos coefficients
+array2	= sin_flt32							; pointer to array of sin coefficients
+bytes	= 4									; size of array element (bytes)
+;------------------------------------------
+		movaps	hsin, angle					; hsin = angle
+		mulss	angle, angle				; angle *= angle
+		movaps	scale, angle				; scale = angle ^ 2
+		movaps	origin, angle				; origin = angle ^ 2
+;---[Stage 1]------------------------------
+		movss	temp2, [array1 + 0 * bytes]	; temp2 = array1[0]
+		movss	temp4, [array1 + 2 * bytes]	; temp4 = array1[2]
+		movss	temp3, [array2 + 0 * bytes]	; temp3 = array2[0]
+		movss	temp5, [array2 + 2 * bytes]	; temp5 = array2[2]
+		mulss	temp2, angle
+		addss	temp2, [array1 + 1 * bytes]	; temp2 = array1[1] + array1[0] * angle
+		mulss	temp4, angle
+		addss	temp4, [array1 + 3 * bytes]	; temp4 = array1[3] + array1[2] * angle
+		mulss	temp3, angle
+		addss	temp3, [array2 + 1 * bytes]	; temp3 = array2[1] + array2[0] * angle
+		mulss	temp5, angle
+		addss	temp5, [array2 + 3 * bytes]	; temp5 = array2[3] + array2[2] * angle
+		mulss	angle, angle				; angle *= angle
+;---[Stage 2]------------------------------
+		mulss	temp4, angle
+		addss	temp2, temp4				; temp2 = temp2 + temp4 * angle
+		mulss	temp5, angle
+		addss	temp3, temp5				; temp3 = temp5 + temp5 * angle
+;---[Stage 3]------------------------------
+		initreg	hcos, treg, MHALF_FLT32, s
+		mulss	hcos, scale					; hcos = -0.5 * scale
+		mulss	lcos, origin
+		mulss	lsin, origin
+		mulss	lcos, scale					; lcos = temp2 * origin * scale
+		mulss	lsin, hsin					; temp3 = temp3 * origin * hsin
+}
+;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+macro	SIN64
+{
+;---[Internal variables]-------------------
+array	= sin_flt64							; pointer to array of coefficients
+bytes	= 8									; size of array element (bytes)
+;------------------------------------------
+		movapd	scale, angle				; scale = angle
+		mulsd	angle, angle				; angle *= angle
+		movapd	origin, angle				; origin = angle ^ 2
+;---[Stage 1]------------------------------
+		movsd	temp1, [array + 0 * bytes]	; temp1 = array[0]
+		movsd	temp2, [array + 2 * bytes]	; temp2 = array[2]
+		movsd	temp3, [array + 4 * bytes]	; temp3 = array[4]
+		movsd	temp4, [array + 6 * bytes]	; temp4 = array[6]
+		mulsd	temp1, angle
+		addsd	temp1, [array + 1 * bytes]	; temp1 = array[1] + array[0] * angle
+		mulsd	temp2, angle
+		addsd	temp2, [array + 3 * bytes]	; temp2 = array[3] + array[2] * angle
+		mulsd	temp3, angle
+		addsd	temp3, [array + 5 * bytes]	; temp3 = array[5] + array[4] * angle
+		mulsd	angle, angle				; angle *= angle
+;---[Stage 2]------------------------------
+		mulsd	temp2, angle
+		addsd	temp1, temp2				; temp1 = temp1 + temp2 * angle
+		mulsd	temp4, angle
+		addsd	temp3, temp4				; temp3 = temp3 + temp4 * angle
+		mulsd	angle, angle				; angle *= angle
+;---[Stage 3]------------------------------
+		mulsd	angle, temp3
+		addsd	angle, temp1				; angle = temp1 + temp3 * angle
+;---[Stage 4]------------------------------
+		mulsd	angle, origin
+		mulsd	angle, scale
+		addsd	angle, scale				; angle = scale + angle * origin * scale
+}
+;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+macro	COS64	treg
+{
+;---[Internal variables]-------------------
+array	= cos_flt64							; pointer to array of coefficients
+bytes	= 8									; size of array element (bytes)
+;------------------------------------------
+		mulsd	angle, angle				; angle *= angle
+		movapd	scale, angle				; scale = angle ^ 2
+		movapd	origin, angle				; origin = angle ^ 2
+;---[Stage 1]------------------------------
+		movsd	temp1, [array + 0 * bytes]	; temp1 = array[0]
+		movsd	temp2, [array + 2 * bytes]	; temp2 = array[2]
+		movsd	temp3, [array + 4 * bytes]	; temp3 = array[4]
+		movsd	temp4, [array + 6 * bytes]	; temp4 = array[6]
+		mulsd	temp1, angle
+		addsd	temp1, [array + 1 * bytes]	; temp1 = array[1] + array[0] * angle
+		mulsd	temp2, angle
+		addsd	temp2, [array + 3 * bytes]	; temp2 = array[3] + array[2] * angle
+		mulsd	temp3, angle
+		addsd	temp3, [array + 5 * bytes]	; temp3 = array[5] + array[4] * angle
+		mulsd	angle, angle				; angle *= angle
+;---[Stage 2]------------------------------
+		mulsd	temp2, angle
+		addsd	temp1, temp2				; temp1 = temp1 + temp2 * angle
+		mulsd	temp4, angle
+		addsd	temp3, temp4				; temp3 = temp3 + temp4 * angle
+		mulsd	angle, angle				; angle *= angle
+;---[Stage 3]------------------------------
+		mulsd	angle, temp3
+		addsd	angle, temp1				; angle = temp1 + temp3 * angle
+;---[Stage 4]------------------------------
+		initreg	temp2, treg, MHALF_FLT64, d	; temp2 = -0.5
+		mulsd	temp2, scale
+		initreg	temp1, treg, ONE_FLT64, d	; temp1 = 1.0
+		mulsd	angle, origin
+		mulsd	angle, scale
+		addsd	angle, temp2
+		addsd	angle, temp1				; angle = 1 - 0.5 * scale + angle * origin * scale
+}
+;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+macro	SINCOS64	treg
+{
+;---[Internal variables]-------------------
+array1	= cos_flt64							; pointer to array of cos coefficients
+array2	= sin_flt64							; pointer to array of sin coefficients
+bytes	= 8									; size of array element (bytes)
+;------------------------------------------
+		movapd	hsin, angle					; hsin = angle
+		mulsd	angle, angle				; angle *= angle
+		movapd	scale, angle				; scale = angle ^ 2
+		movapd	origin, angle				; origin = angle ^ 2
+;---[Stage 1]------------------------------
+		movsd	temp2, [array1 + 0 * bytes]	; temp2 = array1[0]
+		movsd	temp4, [array1 + 2 * bytes]	; temp4 = array1[2]
+		movsd	temp6, [array1 + 4 * bytes]	; temp6 = array1[4]
+		movsd	temp8, [array1 + 6 * bytes]	; temp8 = array1[6]
+		movsd	temp3, [array2 + 0 * bytes]	; temp3 = array2[0]
+		movsd	temp5, [array2 + 2 * bytes]	; temp5 = array2[2]
+		movsd	temp7, [array2 + 4 * bytes]	; temp7 = array2[4]
+		movsd	temp9, [array2 + 6 * bytes]	; temp9 = array2[6]
+		mulsd	temp2, angle
+		addsd	temp2, [array1 + 1 * bytes]	; temp2 = array1[1] + array1[0] * angle
+		mulsd	temp4, angle
+		addsd	temp4, [array1 + 3 * bytes]	; temp4 = array1[3] + array1[2] * angle
+		mulsd	temp6, angle
+		addsd	temp6, [array1 + 5 * bytes]	; temp6 = array1[5] + array1[4] * angle
+		mulsd	temp3, angle
+		addsd	temp3, [array2 + 1 * bytes]	; temp3 = array2[1] + array2[0] * angle
+		mulsd	temp5, angle
+		addsd	temp5, [array2 + 3 * bytes]	; temp5 = array2[3] + array2[2] * angle
+		mulsd	temp7, angle
+		addsd	temp7, [array2 + 5 * bytes]	; temp7 = array2[5] + array2[4] * angle
+		mulsd	angle, angle				; angle *= angle
+;---[Stage 2]------------------------------
+		mulsd	temp4, angle
+		addsd	temp2, temp4				; temp2 = temp2 + temp4 * angle
+		mulsd	temp8, angle
+		addsd	temp6, temp8				; temp6 = temp6 + temp8 * angle
+		mulsd	temp5, angle
+		addsd	temp3, temp5				; temp3 = temp5 + temp5 * angle
+		mulsd	temp9, angle
+		addsd	temp7, temp9				; temp7 = temp7 + temp9 * angle
+		mulsd	angle, angle				; angle *= angle
+;---[Stage 3]------------------------------
+		mulsd	temp6, angle
+		addsd	temp2, temp6				; temp2 = temp2 + temp6 * angle
+		mulsd	temp7, angle
+		addsd	temp3, temp7				; temp3 = temp3 + temp7 * angle
+;---[Stage 4]------------------------------
+		initreg	hcos, treg, MHALF_FLT64, d
+		mulsd	hcos, scale					; hcos = -0.5 * scale
+		mulsd	lcos, origin
+		mulsd	lsin, origin
+		mulsd	lcos, scale					; lcos = temp2 * origin * scale
+		mulsd	lsin, hsin					; temp3 = temp3 * origin * hsin
+}
+
+;==============================================================================;
+;       Hypotenuse                                                             ;
+;==============================================================================;
 Hypot_flt32:	TRIANGLE	eax, 1, s
 Hypot_flt64:	TRIANGLE	rax, 1, d
 
-;******************************************************************************;
+;==============================================================================;
 ;       Cathetus                                                               ;
-;******************************************************************************;
+;==============================================================================;
 Cath_flt32:		TRIANGLE	eax, 0, s
 Cath_flt64:		TRIANGLE	rax, 0, d
+
+;==============================================================================;
+;       Sine                                                                   ;
+;==============================================================================;
+macro	SIN	sval, sreg, treg, x
+{
+;---[Parameters]---------------------------
+angle	equ		xmm0						; angle value
+quadr	equ		rdi							; quadrant
+;---[Internal variables]-------------------
+temp1	equ		xmm1						; temporary register #1
+temp2	equ		xmm2						; temporary register #2
+temp3	equ		xmm3						; temporary register #3
+temp4	equ		xmm4						; temporary register #4
+origin	equ		xmm5						; original value
+scale	equ		xmm6						; scale value
+sign	equ		xmm7						; sign bit
+mask	equ		temp1						; data mask
+barier	equ		temp2						; PI / 4
+if x eq s
+dmask	= DMASK_FLT32						; data mask
+smask	= SMASK_FLT32						; sign mask
+pi		= PI4_FLT32							; PI / 4
+else
+dmask	= DMASK_FLT64						; data mask
+smask	= SMASK_FLT64						; sign mask
+pi		= PI4_FLT64							; PI / 4
+end if
+;------------------------------------------
+		initreg	mask, treg, dmask, x		; mask = dmask
+		mov		sval, smask					; set sign mask
+		initreg	barier, treg, pi, x			; barier = PI / 4
+if x eq s
+		movd	sreg, angle					; sreg = angle
+else
+		movq	sreg, angle					; sreg = angle
+end if
+		andp#x	angle, mask					; angle = Abs (angle)
+		and		sreg, sval					; extract sign bit from angle value
+		comis#x	angle, barier				; if (angle > PI / 4)
+		ja		.ovrfl						;     then go to overflow branch
+		test	quadr, 0x1					; if (quadr & 0x1)
+		jnz		.cos						;     then compute cos value
+;---[Computing sin value]------------------
+		xor		treg, treg
+		test	quadr, 0x2					; if (quadr & 0x2)
+		cmovnz	treg, sval					;     sign = -sign
+		xor		sreg, treg					;
+if x eq s
+		movd	sign, sreg					; sign = sign bit
+		SIN32								; computing sin value
+else
+		movq	sign, sreg					; sign = sign bit
+		SIN64								; computing sin value
+end if
+		orp#x	angle, sign					; set correct sign to the result
+		ret									; return sign * Sin (Abs(angle))
+;---[Computing cos value]------------------
+.cos:	xor		sreg, sreg					; sign = +1.0
+		test	quadr, 0x2					; if (quadr & 0x2)
+		cmovnz	sreg, sval					;     sign = -1.0
+if x eq s
+		movd	sign, sreg					; sign = sign bit
+		COS32	treg						; computing cos value
+else
+		movq	sign, sreg					; sign = sign bit
+		COS64	treg						; computing cos value
+end if
+		orp#x	angle, sign					; set correct sign to the result
+		ret									; return sign * Cos (Abs(angle))
+;---[Overflow branch]----------------------
+.ovrfl:	initreg	angle, treg, dmask, x		; return NaN
+		ret
+}
+Sin_flt32:	SIN	ecx, edx, eax, s
+Sin_flt64:	SIN	rcx, rdx, rax, d
+
+;==============================================================================;
+;       Cosine                                                                 ;
+;==============================================================================;
+macro	COS	sval, sreg, treg, x
+{
+;---[Parameters]---------------------------
+angle	equ		xmm0						; angle value
+quadr	equ		rdi							; quadrant
+;---[Internal variables]-------------------
+temp1	equ		xmm1						; temporary register #1
+temp2	equ		xmm2						; temporary register #2
+temp3	equ		xmm3						; temporary register #3
+temp4	equ		xmm4						; temporary register #4
+origin	equ		xmm5						; original value
+scale	equ		xmm6						; scale value
+sign	equ		xmm7						; sign bit
+mask	equ		temp1						; data mask
+barier	equ		temp2						; PI / 4
+if x eq s
+dmask	= DMASK_FLT32						; data mask
+smask	= SMASK_FLT32						; sign mask
+pi		= PI4_FLT32							; PI / 4
+else
+dmask	= DMASK_FLT64						; data mask
+smask	= SMASK_FLT64						; sign mask
+pi		= PI4_FLT64							; PI / 4
+end if
+;------------------------------------------
+		initreg	mask, treg, dmask, x		; mask = dmask
+		mov		sval, smask					; set sign mask
+		initreg	barier, treg, pi, x			; barier = PI / 4
+if x eq s
+		movd	sreg, angle					; sreg = angle
+else
+		movq	sreg, angle					; sreg = angle
+end if
+		andp#x	angle, mask					; angle = Abs (angle)
+		and		sreg, sval					; extract sign bit from angle value
+		comis#x	angle, barier				; if (angle > PI / 4)
+		ja		.ovrfl						;     then go to overflow branch
+		test	quadr, 0x1					; if (quadr & 0x1)
+		jnz		.sin						;     then compute sin value
+;---[Computing cos value]------------------
+		xor		sreg, sreg					; sign = +1.0
+		test	quadr, 0x2					; if (quadr & 0x2)
+		cmovnz	sreg, sval					;     sign = -1.0
+if x eq s
+		movd	sign, sreg					; sign = sign bit
+		COS32	treg						; computing cos value
+else
+		movq	sign, sreg					; sign = sign bit
+		COS64	treg						; computing cos value
+end if
+		orp#x	angle, sign					; set correct sign to the result
+		ret									; return sign * Cos (Abs(angle))
+;---[Computing sin value]------------------
+.sin:	xor		treg, treg
+		test	quadr, 0x2					; if (quadr & 0x2 == 0)
+		cmovz	treg, sval					;     sign = -sign
+		xor		sreg, treg					;
+if x eq s
+		movd	sign, sreg					; sign = sign bit
+		SIN32								; computing sin value
+else
+		movq	sign, sreg					; sign = sign bit
+		SIN64								; computing sin value
+end if
+		orp#x	angle, sign					; set correct sign to the result
+		ret									; return sign * Sin (Abs(angle))
+;---[Overflow branch]----------------------
+.ovrfl:	initreg	angle, treg, dmask, x		; return NaN
+		ret
+}
+Cos_flt32:	COS	ecx, edx, eax, s
+Cos_flt64:	COS	rcx, rdx, rax, d
+
+;==============================================================================;
+;       Tangent                                                                ;
+;==============================================================================;
+macro	TAN	sval, sreg, treg, x
+{
+;---[Parameters]---------------------------
+angle	equ		xmm0						; angle value
+quadr	equ		rdi							; quadrant
+;---[Internal variables]-------------------
+temp1	equ		xmm1						; temporary register #1
+temp2	equ		xmm2						; temporary register #2
+temp3	equ		xmm3						; temporary register #3
+temp4	equ		xmm4						; temporary register #4
+temp5	equ		xmm5						; temporary register #5
+temp6	equ		xmm6						; temporary register #6
+temp7	equ		xmm7						; temporary register #7
+temp8	equ		xmm8						; temporary register #8
+temp9	equ		xmm9						; temporary register #9
+origin	equ		xmm10						; original value
+scale	equ		xmm11						; scale value
+sign	equ		xmm12						; sign bit
+mask	equ		temp1						; data mask
+barier	equ		temp2						; PI / 4
+hcos	equ		angle						; high significant bits of cos value
+hsin	equ		temp1						; high significant bits of sin value
+lcos	equ		temp2						; low significant bits of cos value
+lsin	equ		temp3						; low significant bits of sin value
+one		equ		temp4						; 1.0
+reg		equ		rax							; temporary register to init xmm register
+stack	equ		rsp							; stack pointer
+s_res	equ		stack - 5 * 8				; stack position of "result" variable
+s_hcos	equ		stack - 4 * 8				; stack position of "hcos" variable
+s_lcos	equ		stack - 3 * 8				; stack position of "lcos" variable
+s_hsin	equ		stack - 2 * 8				; stack position of "hsin" variable
+s_lsin	equ		stack - 1 * 8				; stack position of "lsin" variable
+if x eq s
+dmask	= DMASK_FLT32						; data mask
+smask	= SMASK_FLT32						; sign mask
+oneval	= ONE_FLT64							; 1.0 (flt64_t)
+pi		= PI4_FLT32							; PI / 4
+else
+dmask	= DMASK_FLT64						; data mask
+smask	= SMASK_FLT64						; sign mask
+pi		= PI4_FLT64							; PI / 4
+end if
+;------------------------------------------
+		initreg	mask, treg, dmask, x		; mask = dmask
+		mov		sval, smask					; set sign mask
+		initreg	barier, treg, pi, x			; barier = PI / 4
+if x eq s
+		movd	sreg, angle					; sreg = angle
+else
+		movq	sreg, angle					; sreg = angle
+end if
+		andp#x	angle, mask					; angle = Abs (angle)
+		and		sreg, sval					; extract sign bit from angle value
+		comis#x	angle, barier				; if (angle > PI / 4)
+		ja		.ovrfl						;     then go to overflow branch
+		test	quadr, 0x1					; if (quadr & 0x1)
+		jnz		.cot						;     then compute cot value
+;---[Computing tan value]------------------
+if x eq s
+		movd	sign, sreg					; sign = sign bit of tan
+	SINCOS32	treg						; computing sine and cosine value
+	cvtss2sd	hcos, hcos					; convert hcos to flt64_t type
+	cvtss2sd	hsin, hsin					; convert hsin to flt64_t type
+	cvtss2sd	lcos, lcos					; convert lcos to flt64_t type
+	cvtss2sd	lsin, lsin					; convert lsin to flt64_t type
+		initreg	one, reg, oneval, d			; one = 1.0
+		addsd	hcos, lcos					; hcos += lcos
+		addsd	hsin, lsin					; hsin += lsin
+		addsd	hcos, one					; hcos += 1.0
+		divsd	hsin, hcos
+		movapd	angle, hsin					; angle = sin / cos
+	cvtsd2ss	angle, angle				; convert angle to flt32_t type
+		orps	angle, sign					; set correct sign to the tan value
+		ret
+else
+		movq	sign, sreg					; sign = sign bit of tan
+	SINCOS64	treg						; computing sine and cosine value
+		movsd	[s_hcos], hcos				; save "hcos" variable into the stack
+		movsd	[s_hsin], hsin				; save "hsin" variable into the stack
+		movsd	[s_lcos], lcos				; save "lcos" variable into the stack
+		movsd	[s_lsin], lsin				; save "lsin" variable into the stack
+		fld		qword [s_hsin]
+		fadd	qword [s_lsin]				; sin = hsin + lsin
+		fld		qword [s_hcos]
+		fadd	qword [s_lcos]
+		fld1
+		faddp								; cos = hcos + lcos + 1
+		fdivp
+		fstp	qword [s_res]
+		movsd	angle, [s_res]				; return (sin / cos)
+		orpd	angle, sign					; set correct sign to the tan value
+		ret
+end if
+;---[Computing cot value]------------------
+.cot:	xor		sreg, sval					; sign = -sign
+if x eq s
+		movd	sign, sreg					; sign = sign bit of tan
+	SINCOS32	treg						; computing sine and cosine value
+	cvtss2sd	hcos, hcos					; convert hcos to flt64_t type
+	cvtss2sd	hsin, hsin					; convert hsin to flt64_t type
+	cvtss2sd	lcos, lcos					; convert lcos to flt64_t type
+	cvtss2sd	lsin, lsin					; convert lsin to flt64_t type
+		initreg	one, reg, oneval, d			; one = 1.0
+		addsd	hcos, lcos					; hcos += lcos
+		addsd	hsin, lsin					; hsin += lsin
+		addsd	hcos, one					; hcos += 1.0
+		divsd	hcos, hsin					; angle = cos / sin
+	cvtsd2ss	angle, angle				; convert angle to flt32_t type
+		orps	angle, sign					; set correct sign to the tan value
+		ret
+else
+		movq	sign, sreg					; sign = sign bit of tan
+	SINCOS64	treg						; computing sine and cosine value
+		movsd	[s_hcos], hcos				; save "hcos" variable into the stack
+		movsd	[s_hsin], hsin				; save "hsin" variable into the stack
+		movsd	[s_lcos], lcos				; save "lcos" variable into the stack
+		movsd	[s_lsin], lsin				; save "lsin" variable into the stack
+		fld		qword [s_hsin]
+		fadd	qword [s_lsin]				; sin = hsin + lsin
+		fld		qword [s_hcos]
+		fadd	qword [s_lcos]
+		fld1
+		faddp								; cos = hcos + lcos + 1
+		fdivrp
+		fstp	qword [s_res]
+		movsd	angle, [s_res]				; return (cos / sin)
+		orpd	angle, sign					; set correct sign to the tan value
+		ret
+end if
+;---[Overflow branch]----------------------
+.ovrfl:	initreg	angle, treg, dmask, x		; return NaN
+		ret
+}
+Tan_flt32:	TAN	ecx, edx, eax, s
+Tan_flt64:	TAN	rcx, rdx, rax, d
+
+;==============================================================================;
+;       Cotangent                                                              ;
+;==============================================================================;
+macro	COT	sval, sreg, treg, x
+{
+;---[Parameters]---------------------------
+angle	equ		xmm0						; angle value
+quadr	equ		rdi							; quadrant
+;---[Internal variables]-------------------
+temp1	equ		xmm1						; temporary register #1
+temp2	equ		xmm2						; temporary register #2
+temp3	equ		xmm3						; temporary register #3
+temp4	equ		xmm4						; temporary register #4
+temp5	equ		xmm5						; temporary register #5
+temp6	equ		xmm6						; temporary register #6
+temp7	equ		xmm7						; temporary register #7
+temp8	equ		xmm8						; temporary register #8
+temp9	equ		xmm9						; temporary register #9
+origin	equ		xmm10						; original value
+scale	equ		xmm11						; scale value
+sign	equ		xmm12						; sign bit
+mask	equ		temp1						; data mask
+barier	equ		temp2						; PI / 4
+hcos	equ		angle						; high significant bits of cos value
+hsin	equ		temp1						; high significant bits of sin value
+lcos	equ		temp2						; low significant bits of cos value
+lsin	equ		temp3						; low significant bits of sin value
+one		equ		temp4						; 1.0
+reg		equ		rax							; temporary register to init xmm register
+stack	equ		rsp							; stack pointer
+s_res	equ		stack - 5 * 8				; stack position of "result" variable
+s_hcos	equ		stack - 4 * 8				; stack position of "hcos" variable
+s_lcos	equ		stack - 3 * 8				; stack position of "lcos" variable
+s_hsin	equ		stack - 2 * 8				; stack position of "hsin" variable
+s_lsin	equ		stack - 1 * 8				; stack position of "lsin" variable
+if x eq s
+dmask	= DMASK_FLT32						; data mask
+smask	= SMASK_FLT32						; sign mask
+oneval	= ONE_FLT64							; 1.0 (flt64_t)
+pi		= PI4_FLT32							; PI / 4
+else
+dmask	= DMASK_FLT64						; data mask
+smask	= SMASK_FLT64						; sign mask
+pi		= PI4_FLT64							; PI / 4
+end if
+;------------------------------------------
+		initreg	mask, treg, dmask, x		; mask = dmask
+		mov		sval, smask					; set sign mask
+		initreg	barier, treg, pi, x			; barier = PI / 4
+if x eq s
+		movd	sreg, angle					; sreg = angle
+else
+		movq	sreg, angle					; sreg = angle
+end if
+		andp#x	angle, mask					; angle = Abs (angle)
+		and		sreg, sval					; extract sign bit from angle value
+		comis#x	angle, barier				; if (angle > PI / 4)
+		ja		.ovrfl						;     then go to overflow branch
+		test	quadr, 0x1					; if (quadr & 0x1)
+		jnz		.tan						;     then compute tan value
+;---[Computing cot value]------------------
+if x eq s
+		movd	sign, sreg					; sign = sign bit of tan
+	SINCOS32	treg						; computing sine and cosine value
+	cvtss2sd	hcos, hcos					; convert hcos to flt64_t type
+	cvtss2sd	hsin, hsin					; convert hsin to flt64_t type
+	cvtss2sd	lcos, lcos					; convert lcos to flt64_t type
+	cvtss2sd	lsin, lsin					; convert lsin to flt64_t type
+		initreg	one, reg, oneval, d			; one = 1.0
+		addsd	hcos, lcos					; hcos += lcos
+		addsd	hsin, lsin					; hsin += lsin
+		addsd	hcos, one					; hcos += 1.0
+		divsd	hcos, hsin					; angle = cos / sin
+	cvtsd2ss	angle, angle				; convert angle to flt32_t type
+		orps	angle, sign					; set correct sign to the tan value
+		ret
+else
+		movq	sign, sreg					; sign = sign bit of tan
+	SINCOS64	treg						; computing sine and cosine value
+		movsd	[s_hcos], hcos				; save "hcos" variable into the stack
+		movsd	[s_hsin], hsin				; save "hsin" variable into the stack
+		movsd	[s_lcos], lcos				; save "lcos" variable into the stack
+		movsd	[s_lsin], lsin				; save "lsin" variable into the stack
+		fld		qword [s_hsin]
+		fadd	qword [s_lsin]				; sin = hsin + lsin
+		fld		qword [s_hcos]
+		fadd	qword [s_lcos]
+		fld1
+		faddp								; cos = hcos + lcos + 1
+		fdivrp
+		fstp	qword [s_res]
+		movsd	angle, [s_res]				; return (cos / sin)
+		orpd	angle, sign					; set correct sign to the tan value
+		ret
+end if
+;---[Computing tan value]------------------
+.tan:	xor		sreg, sval					; sign = -sign
+if x eq s
+		movd	sign, sreg					; sign = sign bit of tan
+	SINCOS32	treg						; computing sine and cosine value
+	cvtss2sd	hcos, hcos					; convert hcos to flt64_t type
+	cvtss2sd	hsin, hsin					; convert hsin to flt64_t type
+	cvtss2sd	lcos, lcos					; convert lcos to flt64_t type
+	cvtss2sd	lsin, lsin					; convert lsin to flt64_t type
+		initreg	one, reg, oneval, d			; one = 1.0
+		addsd	hcos, lcos					; hcos += lcos
+		addsd	hsin, lsin					; hsin += lsin
+		addsd	hcos, one					; hcos += 1.0
+		divsd	hsin, hcos
+		movapd	angle, hsin					; angle = sin / cos
+	cvtsd2ss	angle, angle				; convert angle to flt32_t type
+		orps	angle, sign					; set correct sign to the tan value
+		ret
+else
+		movq	sign, sreg					; sign = sign bit of tan
+	SINCOS64	treg						; computing sine and cosine value
+		movsd	[s_hcos], hcos				; save "hcos" variable into the stack
+		movsd	[s_hsin], hsin				; save "hsin" variable into the stack
+		movsd	[s_lcos], lcos				; save "lcos" variable into the stack
+		movsd	[s_lsin], lsin				; save "lsin" variable into the stack
+		fld		qword [s_hsin]
+		fadd	qword [s_lsin]				; sin = hsin + lsin
+		fld		qword [s_hcos]
+		fadd	qword [s_lcos]
+		fld1
+		faddp								; cos = hcos + lcos + 1
+		fdivp
+		fstp	qword [s_res]
+		movsd	angle, [s_res]				; return (sin / cos)
+		orpd	angle, sign					; set correct sign to the tan value
+		ret
+end if
+;---[Overflow branch]----------------------
+.ovrfl:	initreg	angle, treg, dmask, x		; return NaN
+		ret
+}
+Cot_flt32:	COT	ecx, edx, eax, s
+Cot_flt64:	COT	rcx, rdx, rax, d
+
+;==============================================================================;
+;       Sine and cosine                                                        ;
+;==============================================================================;
+macro	SINCOS	sval, sreg1, sreg2, treg, x
+{
+;---[Parameters]---------------------------
+sin		equ		rdi							; pointer to place where to store sin value
+cos		equ		rsi							; pointer to place where to store cos value
+angle	equ		xmm0						; angle value
+quadr	equ		rdx							; quadrant
+;---[Internal variables]-------------------
+temp1	equ		xmm1						; temporary register #1
+temp2	equ		xmm2						; temporary register #2
+temp3	equ		xmm3						; temporary register #3
+temp4	equ		xmm4						; temporary register #4
+temp5	equ		xmm5						; temporary register #5
+temp6	equ		xmm6						; temporary register #6
+temp7	equ		xmm7						; temporary register #7
+temp8	equ		xmm8						; temporary register #8
+temp9	equ		xmm9						; temporary register #9
+origin	equ		xmm10						; original value
+scale	equ		xmm11						; scale value
+sign1	equ		xmm12						; sign bit of sine
+sign2	equ		xmm12						; sign bit of cosine
+mask	equ		temp1						; data mask
+barier	equ		temp2						; PI / 4
+hcos	equ		angle						; high significant bits of cos value
+hsin	equ		temp1						; high significant bits of sin value
+lcos	equ		temp2						; low significant bits of cos value
+lsin	equ		temp3						; low significant bits of sin value
+one		equ		temp4						; 1.0
+if x eq s
+dmask	= DMASK_FLT32						; data mask
+smask	= SMASK_FLT32						; sign mask
+oneval	= ONE_FLT32							; 1.0
+pi		= PI4_FLT32							; PI / 4
+else
+dmask	= DMASK_FLT64						; data mask
+smask	= SMASK_FLT64						; sign mask
+oneval	= ONE_FLT64							; 1.0
+pi		= PI4_FLT64							; PI / 4
+end if
+;------------------------------------------
+		initreg	mask, treg, dmask, x		; mask = dmask
+		mov		sval, smask					; set sign mask
+		initreg	barier, treg, pi, x			; barier = PI / 4
+if x eq s
+		movd	sreg1, angle				; sreg1 = angle
+else
+		movq	sreg1, angle				; sreg1 = angle
+end if
+		andp#x	angle, mask					; angle = Abs (angle)
+		and		sreg1, sval					; extract sign bit from angle value
+		comis#x	angle, barier				; if (angle > PI / 4)
+		ja		.ovrfl						;     then go to overflow branch
+		test	quadr, 0x1					; if (quadr & 0x1)
+		jnz		.xchng						;     then exchange sin and cos values
+;---[Computing sin and cos value]----------
+		xor		treg, treg
+		xor		sreg2, sreg2				; sign2 = +1.0
+		test	quadr, 0x2					; if (quadr & 0x2)
+		cmovnz	treg, sval					; {
+		cmovnz	sreg2, sval					;     sign2 = -1.0
+		xor		sreg1, treg					;     sign1 = -sign1
+if x eq s									; }
+		movd	sign1, sreg1				; sign1 = sign bit of sine
+		movd	sign2, sreg2				; sign2 = sign bit of cosine
+	SINCOS32	treg						; computing sine and cosine value
+else
+		movq	sign1, sreg1				; sign1 = sign bit of sine
+		movq	sign2, sreg2				; sign2 = sign bit of cosine
+	SINCOS64	treg						; computing sine and cosine value
+end if
+		initreg	one, treg, oneval, x		; one = 1.0
+		adds#x	hcos, lcos					; hcos += lcos
+		adds#x	hsin, lsin					; hsin += lsin
+		adds#x	hcos, one					; hcos += 1.0
+		orp#x	hsin, sign1					; set correct sign to the sine value
+		orp#x	hcos, sign2					; set correct sign to the cosine value
+		movs#x	[sin], hsin					; sin[0] = sign1 * Sin (Abs(angle))
+		movs#x	[cos], hcos					; cos[0] = sign2 * Cos (Abs(angle))
+		ret
+;---[Computing cos and sin value]----------
+.xchng:	xor		treg, treg
+		xor		sreg2, sreg2				; sign2 = +1.0
+		test	quadr, 0x2					;
+		cmovz	treg, sval					; if (quadr & 0x2 == 0), then sign1 = -sign1
+		cmovnz	sreg2, sval					; if (quadr & 0x2), then sign2 = -1.0
+		xor		sreg1, treg
+if x eq s									; }
+		movd	sign1, sreg1				; sign1 = sign bit of sine
+		movd	sign2, sreg2				; sign2 = sign bit of cosine
+	SINCOS32	treg						; computing sine and cosine value
+else
+		movq	sign1, sreg1				; sign1 = sign bit of sine
+		movq	sign2, sreg2				; sign2 = sign bit of cosine
+	SINCOS64	treg						; computing sine and cosine value
+end if
+		initreg	one, treg, oneval, x		; one = 1.0
+		adds#x	hcos, lcos					; hcos += lcos
+		adds#x	hsin, lsin					; hsin += lsin
+		adds#x	hcos, one					; hcos += 1.0
+		orp#x	hsin, sign1					; set correct sign to the sine value
+		orp#x	hcos, sign2					; set correct sign to the cosine value
+		movs#x	[sin], hcos					; sin[0] = sign2 * Cos (Abs(angle))
+		movs#x	[cos], hsin					; cos[0] = sign1 * Sin (Abs(angle))
+		ret
+;---[Overflow branch]----------------------
+.ovrfl:	mov		treg, dmask
+		mov		[sin], treg					; sin[0] = NaN
+		mov		[cos], treg					; cos[0] = NaN
+		ret
+}
+SinCos_flt32:	SINCOS	ecx, r8d, r9d, eax, s
+SinCos_flt64:	SINCOS	rcx, r8, r9, rax, d
 
 ;******************************************************************************;
 ;       Minimum value                                                          ;
@@ -790,7 +1618,7 @@ Max_flt32:		MINMAX_FLT	maxs, s
 Max_flt64:		MINMAX_FLT	maxs, d
 
 ;******************************************************************************;
-;       Great common divisor                                                   ;
+;       Greatest common divisor                                                ;
 ;******************************************************************************;
 macro	GCD		value1, value2, temp, quot, remain, sign, scale
 {
@@ -829,7 +1657,7 @@ GCD_sint32:	GCD	edi, esi, ecx, eax, edx, 1, 2
 GCD_sint64:	GCD	rdi, rsi, rcx, rax, rdx, 1, 3
 
 ;******************************************************************************;
-;       Less common multiplier                                                 ;
+;       Least common multiple                                                  ;
 ;******************************************************************************;
 macro	LCM		func, value1, value2, temp, quot, remain, sign, scale
 {
@@ -896,54 +1724,69 @@ end if
 .zero:	xorp#x	result, result				; return 0.0
 		ret
 }
-;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	EXP32	iexp
+
+;==============================================================================;
+;       Power of 2                                                             ;
+;==============================================================================;
+macro	EXP2_FLT32	iexp
 {
 ;---[Internal variables]-------------------
+min		equ		edi							; min exponent value
+underfl	equ		esi							; count of underflow digits
+shift	equ		ecx							; shift value to form subnormal number
+shiftl	equ		cl							; low part of shift register
+array	= exp2_flt32						; pointer to array of coefficients
+bias	= 127								; exponent bias
+digits	= 23								; precission of mantissa
 bytes	= 4									; size of array element (bytes)
-array	= exp_flt32							; pointer to array of coefficients
 ;------------------------------------------
-		movss	origin, value
+		movaps	origin, value
 ;---[Stage 1]------------------------------
 		movss	temp1, [array + 0 * bytes]	; temp1 = array[0]
 		movss	temp2, [array + 2 * bytes]	; temp2 = array[2]
 		movss	temp3, [array + 4 * bytes]	; temp3 = array[4]
-		movss	temp4, [array + 6 * bytes]	; temp4 = array[6]
-		movss	temp5, [array + 8 * bytes]	; temp5 = array[8]
-		iexp								; find exponent value for ipart
+		movss	temp4, [array + 5 * bytes]	; temp4 = array[5]
+		add		iexp, bias					; iexp += bias
+		mov		underfl, 1
+		mov		min, 1						; min = 1
+		sub		underfl, iexp				; underfl = 1 - iexp
+		xor		shift, shift				; shift = 0
+		cmp		iexp, 1						; if (iexp < min)
+		cmovl	iexp, min					;     iexp = min
+		cmovl	shift, underfl				;     shift = underfl
+		shl		iexp, digits				; iexp << digits
+		shr		iexp, shiftl				; iexp >> shift
+		movd	sfactor, iexp				; reinterpret iexp as flt32_t
 		mulss	temp1, value
 		addss	temp1, [array + 1 * bytes]	; temp1 = array[1] + array[0] * value
 		mulss	temp2, value
 		addss	temp2, [array + 3 * bytes]	; temp2 = array[3] + array[2] * value
-		mulss	temp3, value
-		addss	temp3, [array + 5 * bytes]	; temp3 = array[5] + array[4] * value
-		mulss	temp4, value
-		addss	temp4, [array + 7 * bytes]	; temp4 = array[7] + array[6] * value
 		mulss	value, value				; value *= value
 ;---[Stage 2]------------------------------
 		mulss	temp2, value
 		addss	temp1, temp2				; temp1 = temp1 + temp2 * value
-		mulss	temp4, value
-		addss	temp3, temp4				; temp3 = temp3 + temp4 * value
 		mulss	value, value				; value *= value
 ;---[Stage 3]------------------------------
-		mulss	temp3, value
-		addss	temp1, temp3				; temp1 = temp1 + temp3 * value
-		mulss	value, value				; value *= value
-;---[Stage 4]------------------------------
-		mulss	value, temp5
-		addss	value, temp1				; value = temp1 + temp5 * value
+		mulss	value, temp3
+		addss	value, temp1				; value = temp1 + temp3 * value
 ;------------------------------------------
 		mulss	value, origin				; value *= origin
+		addss	value, temp4				; value += temp4
 }
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	EXP64	iexp
+macro	EXP2_FLT64	iexp
 {
 ;---[Internal variables]-------------------
+min		equ		rdi							; min exponent value
+underfl	equ		rsi							; count of underflow digits
+shift	equ		rcx							; shift value to form subnormal number
+shiftl	equ		cl							; low part of shift register
+array	= exp2_flt64						; pointer to array of coefficients
+bias	= 1023								; exponent bias
+digits	= 52								; precission of mantissa
 bytes	= 8									; size of array element (bytes)
-array	= exp_flt64							; pointer to array of coefficients
 ;------------------------------------------
-		movsd	origin, value
+		movapd	origin, value
 ;---[Stage 1]------------------------------
 		movsd	temp1, [array + 0 * bytes]	; temp1 = array[0]
 		movsd	temp2, [array + 2 * bytes]	; temp2 = array[2]
@@ -951,9 +1794,18 @@ array	= exp_flt64							; pointer to array of coefficients
 		movsd	temp4, [array + 6 * bytes]	; temp4 = array[6]
 		movsd	temp5, [array + 8 * bytes]	; temp5 = array[8]
 		movsd	temp6, [array + 10 * bytes]	; temp6 = array[10]
-		movsd	temp7, [array + 12 * bytes]	; temp7 = array[12]
-		movsd	temp8, [array + 14 * bytes]	; temp8 = array[14]
-		iexp								; find exponent value for ipart
+		movsd	temp7, [array + 11 * bytes]	; temp7 = array[11]
+		add		iexp, bias					; iexp += bias
+		mov		underfl, 1
+		mov		min, 1						; min = 1
+		sub		underfl, iexp				; underfl = 1 - iexp
+		xor		shift, shift				; shift = 0
+		cmp		iexp, 1						; if (iexp < min)
+		cmovl	iexp, min					;     iexp = min
+		cmovl	shift, underfl				;     shift = underfl
+		shl		iexp, digits				; iexp << digits
+		shr		iexp, shiftl				; iexp >> shift
+		movq	sfactor, iexp				; reinterpret iexp as flt64_t
 		mulsd	temp1, value
 		addsd	temp1, [array + 1 * bytes]	; temp1 = array[1] + array[0] * value
 		mulsd	temp2, value
@@ -964,10 +1816,6 @@ array	= exp_flt64							; pointer to array of coefficients
 		addsd	temp4, [array + 7 * bytes]	; temp4 = array[7] + array[6] * value
 		mulsd	temp5, value
 		addsd	temp5, [array + 9 * bytes]	; temp5 = array[9] + array[8] * value
-		mulsd	temp6, value
-		addsd	temp6, [array + 11 * bytes]	; temp6 = array[11] + array[10] * value
-		mulsd	temp7, value
-		addsd	temp7, [array + 13 * bytes]	; temp7 = array[13] + array[12] * value
 		mulsd	value, value				; value *= value
 ;---[Stage 2]------------------------------
 		mulsd	temp2, value
@@ -976,90 +1824,18 @@ array	= exp_flt64							; pointer to array of coefficients
 		addsd	temp3, temp4				; temp3 = temp3 + temp4 * value
 		mulsd	temp6, value
 		addsd	temp5, temp6				; temp5 = temp5 + temp6 * value
-		mulsd	temp8, value
-		addsd	temp7, temp8				; temp7 = temp7 + temp8 * value
 		mulsd	value, value				; value *= value
 ;---[Stage 3]------------------------------
 		mulsd	temp3, value
 		addsd	temp1, temp3				; temp1 = temp1 + temp3 * value
-		mulsd	temp7, value
-		addsd	temp5, temp7				; temp5 = temp5 + temp7 * value
 		mulsd	value, value				; value *= value
 ;---[Stage 4]------------------------------
 		mulsd	value, temp5
 		addsd	value, temp1				; value = temp1 + temp5 * value
 ;------------------------------------------
 		mulsd	value, origin				; value *= origin
+		addsd	value, temp7				; value += temp7
 }
-
-;==============================================================================;
-;       Power of 2                                                             ;
-;==============================================================================;
-macro	EXP2I_FLT32
-{
-;---[Internal variables]-------------------
-temp	equ		eax							; temporary register to store ipart
-min		equ		edi							; min exponent value
-underfl	equ		esi							; count of underflow digits
-shift	equ		ecx							; shift value to form subnormal number
-shiftl	equ		cl							; low part of shift register
-bias	= 127								; exponent bias
-digits	= 23								; precission of mantissa
-;------------------------------------------
-		add		temp, bias					; temp += bias
-		mov		underfl, 1
-		mov		min, 1						; min = 1
-		sub		underfl, temp				; underfl = 1 - temp
-		xor		shift, shift				; shift = 0
-		cmp		temp, 1						; if (temp < min)
-		cmovl	temp, min					;     temp = min
-		cmovl	shift, underfl				;     shift = underfl
-		shl		temp, digits				; temp << digits
-		shr		temp, shiftl				; temp >> shift
-		movd	sfactor, temp				; reinterpret temp as flt32_t
-}
-;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	EXP2I_FLT64
-{
-;---[Internal variables]-------------------
-temp	equ		rax							; temporary register to store ipart
-min		equ		rdi							; min exponent value
-underfl	equ		rsi							; count of underflow digits
-shift	equ		rcx							; shift value to form subnormal number
-shiftl	equ		cl							; low part of shift register
-bias	= 1023								; exponent bias
-digits	= 52								; precission of mantissa
-;------------------------------------------
-		add		temp, bias					; temp += bias
-		mov		underfl, 1
-		mov		min, 1						; min = 1
-		sub		underfl, temp				; underfl = 1 - temp
-		xor		shift, shift				; shift = 0
-		cmp		temp, 1						; if (temp < min)
-		cmovl	temp, min					;     temp = min
-		cmovl	shift, underfl				;     shift = underfl
-		shl		temp, digits				; temp << digits
-		shr		temp, shiftl				; temp >> shift
-		movq	sfactor, temp				; reinterpret temp as flt64_t
-}
-;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-Exp2_int:
-;---[Parameters]---------------------------
-exp		equ		dil							; exponent value
-;---[Internal variables]-------------------
-shift	equ		cl							; binary shift value
-result	equ		rax							; result register
-max		= 64								; max exponent value
-;------------------------------------------
-		mov		shift, exp					; shift = exp
-		cmp		exp, max					; if (shift >= max)
-		jae		.ovfl						;     then go to overflow branch
-		mov		result, 1					; result = 1
-		shl		result, shift				; return (1 <<= shift)
-		ret
-;---[Overflow branch]----------------------
-.ovfl:	xor		result, result				; return 0 (means result overflow)
-		ret
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 macro	EXP2I	exp, temp, shift, x
 {
@@ -1112,7 +1888,7 @@ end if
 		ret
 }
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	EXP2	temp, treg, x
+macro	EXP2	iexp, treg, x
 {
 ;---[Parameters]---------------------------
 value	equ		xmm0						; value to compute exponent function
@@ -1124,62 +1900,88 @@ temp4	equ		xmm4						; temporary register #4
 temp5	equ		xmm5						; temporary register #5
 temp6	equ		xmm6						; temporary register #6
 temp7	equ		xmm7						; temporary register #7
-temp8	equ		xmm8						; temporary register #8
-origin	equ		xmm9						; original value
-sfactor	equ		xmm10						; scale factor
-magic	equ		origin						; magic number to get integer part
-ipart	equ		temp1						; integer part of value
-log		equ		temp1						; log value
-max		equ		temp2						; max exponent value
-min		equ		temp3						; max exponent value
+origin	equ		xmm8						; original value
+sfactor	equ		xmm9						; scale factor
+val1	equ		xmm10						; temporary register #1 that hold value
+val2	equ		xmm11						; temporary register #2 that hold value
+magic	equ		temp1						; magic number to get integer part
+ipart	equ		temp2						; integer part of value
+max		equ		temp3						; max exponent value
+min		equ		temp4						; max exponent value
+log		equ		temp5						; ln(2)
+reg		equ		rdx							; temporary register to init xmm register
+stack	equ		rsp							; stack pointer
+s_value	equ		stack - 2 * 8				; stack position of "value" variable
+s_scale	equ		stack - 1 * 8				; stack position of "scale" variable
 if x eq s
 mvalue	= MAGIC_FLT32						; magic number to get integer part from value
 inf		= INF_FLT32							; infinity
-oneval	= ONE_FLT32							; 1.0
+moneval	= MONE_FLT32						; -1.0
 exp_min	= 0xC3150000						; min exponent value
 exp_max	= 0x42FE0000						; max exponent value
-logval	= 0x3F317218						; ln(2)
 else
 mvalue	= MAGIC_FLT64						; magic number to get integer part from value
 inf		= INF_FLT64							; infinity
-oneval	= ONE_FLT64							; 1.0
+moneval	= MONE_FLT64						; -1.0
 exp_min	= 0xC090C80000000000				; min exponent value
 exp_max	= 0x408FF80000000000				; max exponent value
-logval	= 0x3FE62E42FEFA39EF				; ln(2)
 end if
+ln2		= 0x3FE62E42FEFA39EF				; ln(2)
 ;------------------------------------------
 		initreg	max, treg, exp_max, x		; load max exponent value
 		initreg	min, treg, exp_min, x		; load max exponent value
 		initreg	magic, treg, mvalue, x		; load magic number
-		movs#x	ipart, value				; ipart = value
+		movap#x	ipart, value				; ipart = value
 		comis#x	value, max					; if (value > max)
 		ja		.inf						;     return inf
 		comis#x	value, min					; if (value < min)
 		jb		.zero						;     return 0.0
 		adds#x	ipart, magic
 if x eq s
-		movd	temp, ipart					; temp = round (value)
-else
-		movq	temp, ipart					; temp = round (value)
-end if
-		subs#x	ipart, magic				; ipart = round (value)
-if x eq s
+		movd	iexp, ipart					; iexp = rint (value)
 		cwde
 else
+		movq	iexp, ipart					; iexp = rint (value)
 		cdqe
 end if
+		subs#x	ipart, magic				; ipart = rint (value)
 		subs#x	value, ipart				; value = fractional_part (value)
-		initreg	log, treg, logval, x		; log = ln(2)
-		muls#x	value, log					; value *= ln(2)
 if x eq s
-		EXP32	EXP2I_FLT32					; compute exp(value) and sfactor
-else
-		EXP64	EXP2I_FLT64					; compute exp(value) and sfactor
-end if
-		initreg	temp1, treg, oneval, x		; temp1 = 1.0
-		adds#x	value, temp1
-		muls#x	value, sfactor				; return (value + 1) * sfactor
+;---[Single precision code]----------------
+		initreg	log, reg, ln2, d			; log = ln(2)
+	cvtss2sd	val1, value
+		mulsd	val1, log					; val1 = value * ln(2)
+		movapd	val2, val1
+		mulsd	val2, val2					; val2 = val1 ^ 2
+	EXP2_FLT32	iexp						; compute exp(value) and sfactor
+	cvtss2sd	value, value
+	cvtss2sd	sfactor, sfactor
+		mulsd	val2, value
+		addsd	val1, val2					; val1 = value + value ^ 2 * R
+		mulsd	val1, sfactor				; val1 *= scale
+		addsd	val1, sfactor				; val1 = val1 * sfactor + sfactor
+	cvtsd2ss	value, val1					; return val1
 		ret
+else
+;---[Double precision code]----------------
+		fldln2								; log = ln(2)
+		movsd	[s_value], value
+		fmul	qword [s_value]				; val1 = value * ln(2)
+		fld		st0
+		fmul	st0, st0					; val2 = val1 ^ 2
+	EXP2_FLT64	iexp						; compute exp(value) and sfactor
+		movsd	[s_value], value
+		movsd	[s_scale], sfactor
+		fld		qword [s_value]
+		fmulp	st1, st0
+		faddp	st1, st0					; val1 = value + value ^ 2 * R
+		fld		qword [s_scale]
+		fmul	st1, st0					; val1 *= scale
+		faddp	st1, st0					; val1 = val1 * sfactor + sfactor
+		fstp	qword [s_value]
+		movsd	value, [s_value]			; return val1
+		ret
+end if
 ;----[Return inf]--------------------------
 .inf:	initreg	value, treg, inf, x			; return +inf
 		ret
@@ -1188,7 +1990,7 @@ end if
 		ret
 }
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	EXP2M1	temp, treg, x
+macro	EXP2M1	iexp, treg, x
 {
 ;---[Parameters]---------------------------
 value	equ		xmm0						; value to compute exponent function
@@ -1200,65 +2002,94 @@ temp4	equ		xmm4						; temporary register #4
 temp5	equ		xmm5						; temporary register #5
 temp6	equ		xmm6						; temporary register #6
 temp7	equ		xmm7						; temporary register #7
-temp8	equ		xmm8						; temporary register #8
-origin	equ		xmm9						; original value
-sfactor	equ		xmm10						; scale factor
-magic	equ		origin						; magic number to get integer part
-ipart	equ		temp1						; integer part of value
-log		equ		temp1						; log value
-max		equ		temp2						; max exponent value
-min		equ		temp3						; max exponent value
+origin	equ		xmm8						; original value
+sfactor	equ		xmm9						; scale factor
+val1	equ		xmm10						; temporary register #1 that hold value
+val2	equ		xmm11						; temporary register #2 that hold value
+magic	equ		temp1						; magic number to get integer part
+ipart	equ		temp2						; integer part of value
+max		equ		temp3						; max exponent value
+min		equ		temp4						; max exponent value
+log		equ		temp5						; ln(2)
+one		equ		temp6						; 1.0
+reg		equ		rdx							; temporary register to init xmm register
+stack	equ		rsp							; stack pointer
+s_value	equ		stack - 2 * 8				; stack position of "value" variable
+s_scale	equ		stack - 1 * 8				; stack position of "scale" variable
 if x eq s
 mvalue	= MAGIC_FLT32						; magic number to get integer part from value
 inf		= INF_FLT32							; infinity
-oneval	= ONE_FLT32							; 1.0
 moneval	= MONE_FLT32						; -1.0
 exp_min	= 0xC3150000						; min exponent value
 exp_max	= 0x42FE0000						; max exponent value
-logval	= 0x3F317218						; ln(2)
 else
 mvalue	= MAGIC_FLT64						; magic number to get integer part from value
 inf		= INF_FLT64							; infinity
-oneval	= ONE_FLT64							; 1.0
 moneval	= MONE_FLT64						; -1.0
 exp_min	= 0xC090C80000000000				; min exponent value
 exp_max	= 0x408FF80000000000				; max exponent value
-logval	= 0x3FE62E42FEFA39EF				; ln(2)
 end if
+oneval	= ONE_FLT64							; 1.0
+ln2		= 0x3FE62E42FEFA39EF				; ln(2)
 ;------------------------------------------
 		initreg	max, treg, exp_max, x		; load max exponent value
 		initreg	min, treg, exp_min, x		; load max exponent value
 		initreg	magic, treg, mvalue, x		; load magic number
-		movs#x	ipart, value				; ipart = value
+		movap#x	ipart, value				; ipart = value
 		comis#x	value, max					; if (value > max)
 		ja		.inf						;     return inf
 		comis#x	value, min					; if (value < min)
 		jb		.mone						;     return -1.0
 		adds#x	ipart, magic
 if x eq s
-		movd	temp, ipart					; temp = round (value)
-else
-		movq	temp, ipart					; temp = round (value)
-end if
-		subs#x	ipart, magic				; ipart = round (value)
-if x eq s
+		movd	iexp, ipart					; iexp = rint (value)
 		cwde
 else
+		movq	iexp, ipart					; iexp = rint (value)
 		cdqe
 end if
+		subs#x	ipart, magic				; ipart = rint (value)
 		subs#x	value, ipart				; value = fractional_part (value)
-		initreg	log, treg, logval, x		; log = ln(2)
-		muls#x	value, log					; value *= ln(2)
 if x eq s
-		EXP32	EXP2I_FLT32					; compute exp(value) and sfactor
-else
-		EXP64	EXP2I_FLT64					; compute exp(value) and sfactor
-end if
-		initreg	temp1, treg, oneval, x		; temp1 = 1.0
-		muls#x	value, sfactor
-		subs#x	sfactor, temp1
-		adds#x	value, sfactor				; return value * sfactor + (sfactor - 1);
+;---[Single precision code]----------------
+		initreg	log, reg, ln2, d			; log = ln(2)
+	cvtss2sd	val1, value
+		mulsd	val1, log					; val1 = value * ln(2)
+		movapd	val2, val1
+		mulsd	val2, val2					; val2 = val1 ^ 2
+	EXP2_FLT32	iexp						; compute exp(value) and sfactor
+	cvtss2sd	value, value
+	cvtss2sd	sfactor, sfactor
+		mulsd	val2, value
+		addsd	val1, val2					; val1 = value + value ^ 2 * R
+		initreg	one, reg, oneval, d			; one = 1.0
+		mulsd	val1, sfactor				; val1 *= scale
+		subsd	sfactor, one				; sfactor -= 1.0
+		addsd	val1, sfactor				; val1 = val1 * sfactor + (sfactor - 1)
+	cvtsd2ss	value, val1					; return val1
 		ret
+else
+;---[Double precision code]----------------
+		fldln2								; log = ln(2)
+		movsd	[s_value], value
+		fmul	qword [s_value]				; val1 = value * ln(2)
+		fld		st0
+		fmul	st0, st0					; val2 = val1 ^ 2
+	EXP2_FLT64	iexp						; compute exp(value) and sfactor
+		movsd	[s_value], value
+		movsd	[s_scale], sfactor
+		fld		qword [s_value]
+		fmulp	st1, st0
+		faddp	st1, st0					; val1 = value + value ^ 2 * R
+		fld1
+		fld		qword [s_scale]
+		fmul	st2, st0					; val1 *= scale
+		fsubrp	st1, st0					; sfactor -= 1.0
+		faddp	st1, st0					; val1 = val1 * sfactor + (sfactor - 1)
+		fstp	qword [s_value]
+		movsd	value, [s_value]			; return val1
+		ret
+end if
 ;----[Return inf]--------------------------
 .inf:	initreg	value, treg, inf, x			; return +inf
 		ret
@@ -1266,6 +2097,24 @@ end if
 .mone:	initreg	value, treg, moneval, x		; return -1.0
 		ret
 }
+;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+Exp2_int:
+;---[Parameters]---------------------------
+exp		equ		dil							; exponent value
+;---[Internal variables]-------------------
+shift	equ		cl							; binary shift value
+result	equ		rax							; result register
+max		= 64								; max exponent value
+;------------------------------------------
+		mov		shift, exp					; shift = exp
+		cmp		exp, max					; if (shift >= max)
+		jae		.ovfl						;     then go to overflow branch
+		mov		result, 1					; result = 1
+		shl		result, shift				; return (1 <<= shift)
+		ret
+;---[Overflow branch]----------------------
+.ovfl:	xor		result, result				; return 0 (means result overflow)
+		ret
 
 ; Integer power of 2
 Exp2i_flt32:	EXP2I	dil, eax, ecx, s
@@ -1280,14 +2129,320 @@ Exp2m1_flt64:	EXP2M1	rax, rdx, d
 ;==============================================================================;
 ;       Power of 10                                                            ;
 ;==============================================================================;
-macro	EXP10I_FLT32
+macro	EXP10_FLT32	iexp
 {
-		movss	sfactor, [ten_table_flt32 + temp * 4 + 46 * 4]	; sfactor = exp(temp)
+;---[Internal variables]-------------------
+array	= exp10_flt32						; pointer to array of coefficients
+offst	= 46								; offset of 10^0 from the beginning of table
+bytes	= 4									; size of array element (bytes)
+;------------------------------------------
+		movaps	origin, value
+;---[Stage 1]------------------------------
+		movss	temp1, [array + 0 * bytes]	; temp1 = array[0]
+		movss	temp2, [array + 2 * bytes]	; temp2 = array[2]
+		movss	temp3, [array + 4 * bytes]	; temp3 = array[4]
+		movss	temp4, [array + 6 * bytes]	; temp4 = array[6]
+		movss	sfactor, [ten_table_flt32 + iexp * bytes + offst * bytes]
+		mulss	temp1, value
+		addss	temp1, [array + 1 * bytes]	; temp1 = array[1] + array[0] * value
+		mulss	temp2, value
+		addss	temp2, [array + 3 * bytes]	; temp2 = array[3] + array[2] * value
+		mulss	temp3, value
+		addss	temp3, [array + 5 * bytes]	; temp3 = array[5] + array[4] * value
+		mulss	value, value				; value *= value
+;---[Stage 2]------------------------------
+		mulss	temp2, value
+		addss	temp1, temp2				; temp1 = temp1 + temp2 * value
+		mulss	value, value				; value *= value
+;---[Stage 3]------------------------------
+		mulss	value, temp3
+		addss	value, temp1				; value = temp1 + temp3 * value
+;------------------------------------------
+		mulss	value, origin				; value *= origin
+		addss	value, temp4				; value += temp4
 }
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	EXP10I_FLT64
+macro	EXP10_FLT64	iexp
 {
-		movsd	sfactor, [ten_table_flt64 + temp * 8 + 324 * 8]	; sfactor = exp(temp)
+;---[Internal variables]-------------------
+array	= exp10_flt64						; pointer to array of coefficients
+offst	= 324								; offset of 10^0 from the beginning of table
+bytes	= 8									; size of array element (bytes)
+;------------------------------------------
+		movapd	origin, value
+;---[Stage 1]------------------------------
+		movsd	temp1, [array + 0 * bytes]	; temp1 = array[0]
+		movsd	temp2, [array + 2 * bytes]	; temp2 = array[2]
+		movsd	temp3, [array + 4 * bytes]	; temp3 = array[4]
+		movsd	temp4, [array + 6 * bytes]	; temp4 = array[6]
+		movsd	temp5, [array + 8 * bytes]	; temp5 = array[8]
+		movsd	temp6, [array + 10 * bytes]	; temp6 = array[10]
+		movsd	temp7, [array + 12 * bytes]	; temp7 = array[12]
+		movsd	temp8, [array + 13 * bytes]	; temp8 = array[13]
+		movsd	sfactor, [ten_table_flt64 + iexp * bytes + offst * bytes]
+		mulsd	temp1, value
+		addsd	temp1, [array + 1 * bytes]	; temp1 = array[1] + array[0] * value
+		mulsd	temp2, value
+		addsd	temp2, [array + 3 * bytes]	; temp2 = array[3] + array[2] * value
+		mulsd	temp3, value
+		addsd	temp3, [array + 5 * bytes]	; temp3 = array[5] + array[4] * value
+		mulsd	temp4, value
+		addsd	temp4, [array + 7 * bytes]	; temp4 = array[7] + array[6] * value
+		mulsd	temp5, value
+		addsd	temp5, [array + 9 * bytes]	; temp5 = array[9] + array[8] * value
+		mulsd	temp6, value
+		addsd	temp6, [array + 11 * bytes]	; temp6 = array[11] + array[10] * value
+		mulsd	value, value				; value *= value
+;---[Stage 2]------------------------------
+		mulsd	temp2, value
+		addsd	temp1, temp2				; temp1 = temp1 + temp2 * value
+		mulsd	temp4, value
+		addsd	temp3, temp4				; temp3 = temp3 + temp4 * value
+		mulsd	temp6, value
+		addsd	temp5, temp6				; temp5 = temp5 + temp6 * value
+		mulsd	value, value				; value *= value
+;---[Stage 3]------------------------------
+		mulsd	temp3, value
+		addsd	temp1, temp3				; temp1 = temp1 + temp3 * value
+		mulsd	temp7, value
+		addsd	temp5, temp7				; temp5 = temp5 + temp7 * value
+		mulsd	value, value				; value *= value
+;---[Stage 4]------------------------------
+		mulsd	value, temp5
+		addsd	value, temp1				; value = temp1 + temp5 * value
+;------------------------------------------
+		mulsd	value, origin				; value *= origin
+		addsd	value, temp8				; value += temp8
+}
+;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+macro	EXP10	iexp, treg, x
+{
+;---[Parameters]---------------------------
+value	equ		xmm0						; value to compute exponent function
+;---[Internal variables]-------------------
+temp1	equ		xmm1						; temporary register #1
+temp2	equ		xmm2						; temporary register #2
+temp3	equ		xmm3						; temporary register #3
+temp4	equ		xmm4						; temporary register #4
+temp5	equ		xmm5						; temporary register #5
+temp6	equ		xmm6						; temporary register #6
+temp7	equ		xmm7						; temporary register #7
+temp8	equ		xmm8						; temporary register #8
+origin	equ		xmm9						; original value
+sfactor	equ		xmm10						; scale factor
+val1	equ		xmm11						; temporary register #1 that hold value
+val2	equ		xmm12						; temporary register #2 that hold value
+magic	equ		temp1						; magic number to get integer part
+ipart	equ		temp2						; integer part of value
+max		equ		temp3						; max exponent value
+min		equ		temp4						; max exponent value
+log		equ		temp5						; ln(10) / 2
+reg		equ		rdx							; temporary register to init xmm register
+stack	equ		rsp							; stack pointer
+s_value	equ		stack - 2 * 8				; stack position of "value" variable
+s_scale	equ		stack - 1 * 8				; stack position of "scale" variable
+if x eq s
+mvalue	= MAGIC_FLT32						; magic number to get integer part from value
+inf		= INF_FLT32							; infinity
+moneval	= MONE_FLT32						; -1.0
+exp_min	= 0xC2380000						; min exponent value
+exp_max	= 0x421C0000						; max exponent value
+else
+mvalue	= MAGIC_FLT64						; magic number to get integer part from value
+inf		= INF_FLT64							; infinity
+moneval	= MONE_FLT64						; -1.0
+exp_min	= 0xC074400000000000				; min exponent value
+exp_max	= 0x4073500000000000				; max exponent value
+end if
+ln10	= 0x3FF26BB1BBB55516				; ln(10) / 2
+;------------------------------------------
+		initreg	max, treg, exp_max, x		; load max exponent value
+		initreg	min, treg, exp_min, x		; load max exponent value
+		initreg	magic, treg, mvalue, x		; load magic number
+		movap#x	ipart, value				; ipart = value
+		comis#x	value, max					; if (value > max)
+		ja		.inf						;     return inf
+		comis#x	value, min					; if (value < min)
+		jb		.zero						;     return 0.0
+		adds#x	ipart, magic
+if x eq s
+		movd	iexp, ipart					; iexp = rint (value)
+		cwde
+else
+		movq	iexp, ipart					; iexp = rint (value)
+		cdqe
+end if
+		subs#x	ipart, magic				; ipart = rint (value)
+		subs#x	value, ipart				; value = fractional_part (value)
+if x eq s
+;---[Single precision code]----------------
+		initreg	log, reg, ln10, d			; log = ln(10) / 2
+	cvtss2sd	val1, value
+		mulsd	val1, log					; val1 = value * ln(10) / 2
+		movapd	val2, val1
+		mulsd	val2, val2					; val2 = val1 ^ 2
+	EXP10_FLT32	iexp						; compute exp(value) and sfactor
+	cvtss2sd	value, value
+	cvtss2sd	sfactor, sfactor
+		mulsd	val2, value
+		addsd	val1, val2					; val1 = value + value ^ 2 * R
+		movapd	val2, val1
+		mulsd	val1, val1
+		addsd	val2, val2
+		addsd	val1, val2					; val1 = val1 ^ 2 + val1 * 2
+		mulsd	val1, sfactor				; val1 *= scale
+		addsd	val1, sfactor				; val1 = val1 * sfactor + sfactor
+	cvtsd2ss	value, val1					; return val1
+		ret
+else
+;---[Double precision code]----------------
+		fld		tbyte [.logt]				; log = ln(10) / 2
+		movsd	[s_value], value
+		fmul	qword [s_value]				; val1 = value * ln(10) / 2
+		fld		st0
+		fmul	st0, st0					; val2 = val1 ^ 2
+	EXP10_FLT64	iexp						; compute exp(value) and sfactor
+		movsd	[s_value], value
+		movsd	[s_scale], sfactor
+		fld		qword [s_value]
+		fmulp	st1, st0
+		faddp	st1, st0					; val1 = value + value ^ 2 * R
+		fld		st0
+		fmul	st1, st0
+		fadd	st0, st0
+		faddp	st1, st0					; val1 = val1 ^ 2 + val1 * 2
+		fld		qword [s_scale]
+		fmul	st1, st0					; val1 *= scale
+		faddp	st1, st0					; val1 = val1 * sfactor + sfactor
+		fstp	qword [s_value]
+		movsd	value, [s_value]			; return val1
+		ret
+end if
+;----[Return inf]--------------------------
+.inf:	initreg	value, treg, inf, x			; return +inf
+		ret
+;----[Return zero]-------------------------
+.zero:	xorp#x	value, value				; return 0.0
+		ret
+.logt:	dt		1.1512925464970228420089957	; ln(10) / 2
+}
+;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+macro	EXP10M1	iexp, treg, x
+{
+;---[Parameters]---------------------------
+value	equ		xmm0						; value to compute exponent function
+;---[Internal variables]-------------------
+temp1	equ		xmm1						; temporary register #1
+temp2	equ		xmm2						; temporary register #2
+temp3	equ		xmm3						; temporary register #3
+temp4	equ		xmm4						; temporary register #4
+temp5	equ		xmm5						; temporary register #5
+temp6	equ		xmm6						; temporary register #6
+temp7	equ		xmm7						; temporary register #7
+temp8	equ		xmm8						; temporary register #8
+origin	equ		xmm9						; original value
+sfactor	equ		xmm10						; scale factor
+val1	equ		xmm11						; temporary register #1 that hold value
+val2	equ		xmm12						; temporary register #2 that hold value
+magic	equ		temp1						; magic number to get integer part
+ipart	equ		temp2						; integer part of value
+max		equ		temp3						; max exponent value
+min		equ		temp4						; max exponent value
+log		equ		temp5						; ln(10) / 2
+one		equ		temp6						; 1.0
+reg		equ		rdx							; temporary register to init xmm register
+stack	equ		rsp							; stack pointer
+s_value	equ		stack - 2 * 8				; stack position of "value" variable
+s_scale	equ		stack - 1 * 8				; stack position of "scale" variable
+if x eq s
+mvalue	= MAGIC_FLT32						; magic number to get integer part from value
+inf		= INF_FLT32							; infinity
+moneval	= MONE_FLT32						; -1.0
+exp_min	= 0xC2380000						; min exponent value
+exp_max	= 0x421C0000						; max exponent value
+else
+mvalue	= MAGIC_FLT64						; magic number to get integer part from value
+inf		= INF_FLT64							; infinity
+moneval	= MONE_FLT64						; -1.0
+exp_min	= 0xC074400000000000				; min exponent value
+exp_max	= 0x4073500000000000				; max exponent value
+end if
+oneval	= ONE_FLT64							; 1.0
+ln10	= 0x3FF26BB1BBB55516				; ln(10) / 2
+;------------------------------------------
+		initreg	max, treg, exp_max, x		; load max exponent value
+		initreg	min, treg, exp_min, x		; load max exponent value
+		initreg	magic, treg, mvalue, x		; load magic number
+		movap#x	ipart, value				; ipart = value
+		comis#x	value, max					; if (value > max)
+		ja		.inf						;     return inf
+		comis#x	value, min					; if (value < min)
+		jb		.mone						;     return -1.0
+		adds#x	ipart, magic
+if x eq s
+		movd	iexp, ipart					; iexp = rint (value)
+		cwde
+else
+		movq	iexp, ipart					; iexp = rint (value)
+		cdqe
+end if
+		subs#x	ipart, magic				; ipart = rint (value)
+		subs#x	value, ipart				; value = fractional_part (value)
+if x eq s
+;---[Single precision code]----------------
+		initreg	log, reg, ln10, d			; log = ln(10) / 2
+	cvtss2sd	val1, value
+		mulsd	val1, log					; val1 = value * ln(10) / 2
+		movapd	val2, val1
+		mulsd	val2, val2					; val2 = val1 ^ 2
+	EXP10_FLT32	iexp						; compute exp(value) and sfactor
+	cvtss2sd	value, value
+	cvtss2sd	sfactor, sfactor
+		mulsd	val2, value
+		addsd	val1, val2					; val1 = value + value ^ 2 * R
+		movapd	val2, val1
+		mulsd	val1, val1
+		addsd	val2, val2
+		addsd	val1, val2					; val1 = val1 ^ 2 + val1 * 2
+		initreg	one, reg, oneval, d			; one = 1.0
+		mulsd	val1, sfactor				; val1 *= scale
+		subsd	sfactor, one				; sfactor -= 1.0
+		addsd	val1, sfactor				; val1 = val1 * sfactor + (sfactor - 1)
+	cvtsd2ss	value, val1					; return val1
+		ret
+else
+;---[Double precision code]----------------
+		fld		tbyte [.logt]				; log = ln(10) / 2
+		movsd	[s_value], value
+		fmul	qword [s_value]				; val1 = value * ln(10) / 2
+		fld		st0
+		fmul	st0, st0					; val2 = val1 ^ 2
+	EXP10_FLT64	iexp						; compute exp(value) and sfactor
+		movsd	[s_value], value
+		movsd	[s_scale], sfactor
+		fld		qword [s_value]
+		fmulp	st1, st0
+		faddp	st1, st0					; val1 = value + value ^ 2 * R
+		fld		st0
+		fmul	st1, st0
+		fadd	st0, st0
+		faddp	st1, st0					; val1 = val1 ^ 2 + val1 * 2
+		fld1
+		fld		qword [s_scale]
+		fmul	st2, st0					; val1 *= scale
+		fsubrp	st1, st0					; sfactor -= 1.0
+		faddp	st1, st0					; val1 = val1 * sfactor + (sfactor - 1)
+		fstp	qword [s_value]
+		movsd	value, [s_value]			; return val1
+		ret
+end if
+;----[Return inf]--------------------------
+.inf:	initreg	value, treg, inf, x			; return +inf
+		ret
+;----[Return minus one]--------------------
+.mone:	initreg	value, treg, moneval, x		; return -1.0
+		ret
+.logt:	dt		1.1512925464970228420089957	; ln(10) / 2
 }
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 Exp10_int:
@@ -1305,193 +2460,6 @@ exp_max	= 20								; max exponent value
 		cmova	index, max					;     index = exp_max
 		mov		result, [ten_table_int+index*8]; return ten_table [index]
 		ret
-;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	EXP10	temp, treg, x
-{
-;---[Parameters]---------------------------
-value	equ		xmm0						; value to compute exponent function
-;---[Internal variables]-------------------
-temp1	equ		xmm1						; temporary register #1
-temp2	equ		xmm2						; temporary register #2
-temp3	equ		xmm3						; temporary register #3
-temp4	equ		xmm4						; temporary register #4
-temp5	equ		xmm5						; temporary register #5
-temp6	equ		xmm6						; temporary register #6
-temp7	equ		xmm7						; temporary register #7
-temp8	equ		xmm8						; temporary register #8
-origin	equ		xmm9						; original value
-sfactor	equ		xmm10						; scale factor
-magic	equ		origin						; magic number to get integer part
-ipart	equ		temp1						; integer part of value
-log		equ		temp1						; log value
-max		equ		temp2						; max exponent value
-min		equ		temp3						; max exponent value
-if x eq s
-mvalue	= MAGIC_FLT32						; magic number to get integer part from value
-inf		= INF_FLT32							; infinity
-oneval	= ONE_FLT32							; 1.0
-exp_min	= 0xC2380000						; min exponent value
-exp_max	= 0x421C0000						; max exponent value
-logval	= 0x3F135D8E						; ln(10) / 4
-fourval	= 0x40800000						; 4.0
-sixval	= 0x40C00000						; 6.0
-else
-mvalue	= MAGIC_FLT64						; magic number to get integer part from value
-inf		= INF_FLT64							; infinity
-oneval	= ONE_FLT64							; 1.0
-exp_min	= 0xC074400000000000				; min exponent value
-exp_max	= 0x4073500000000000				; max exponent value
-logval	= 0x3FE26BB1BBB55516				; ln(10) / 4
-fourval	= 0x4010000000000000				; 4.0
-sixval	= 0x4018000000000000				; 6.0
-end if
-;------------------------------------------
-		initreg	max, treg, exp_max, x		; load max exponent value
-		initreg	min, treg, exp_min, x		; load max exponent value
-		initreg	magic, treg, mvalue, x		; load magic number
-		movs#x	ipart, value				; ipart = value
-		comis#x	value, max					; if (value > max)
-		ja		.inf						;     return inf
-		comis#x	value, min					; if (value < min)
-		jbe		.zero						;     return 0.0
-		adds#x	ipart, magic
-if x eq s
-		movd	temp, ipart					; temp = round (value)
-else
-		movq	temp, ipart					; temp = round (value)
-end if
-		subs#x	ipart, magic				; ipart = round (value)
-if x eq s
-		cwde
-else
-		cdqe
-end if
-		subs#x	value, ipart				; value = fractional_part (value)
-		initreg	log, treg, logval, x		; log = ln(10) / 4
-		muls#x	value, log					; value *= ln(10) / 4
-if x eq s
-		EXP32	EXP10I_FLT32				; compute exp(value) and sfactor
-else
-		EXP64	EXP10I_FLT64				; compute exp(value) and sfactor
-end if
-		initreg	temp3, treg, oneval, x		; temp3 = 1.0
-		initreg	temp4, treg, fourval, x		; temp4 = 4.0
-		movs#x	origin, value
-		initreg	temp1, treg, sixval, x		; temp1 = 6.0
-		movs#x	temp2, temp3				; temp2 = 1.0
-		muls#x	temp1, value
-		adds#x	temp1, temp4				; temp1 = 4 + 6 * value
-		muls#x	temp2, value
-		adds#x	temp2, temp4				; temp2 = 4 + 1 * value
-		muls#x	value, value				; value *= value
-		muls#x	value, temp2
-		adds#x	value, temp1				; value = temp1 + temp2 * value
-		muls#x	value, origin				; value *= origin
-		adds#x	value, temp3
-		muls#x	value, sfactor				; return (value^4 * 4*value^3 + 6*value^2 + 4*value + 1) * sfactor
-		ret
-;----[Return inf]--------------------------
-.inf:	initreg	value, treg, inf, x			; return +inf
-		ret
-;----[Return zero]-------------------------
-.zero:	xorp#x	value, value				; return 0.0
-		ret
-}
-;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	EXP10M1	temp, treg, x
-{
-;---[Parameters]---------------------------
-value	equ		xmm0						; value to compute exponent function
-;---[Internal variables]-------------------
-temp1	equ		xmm1						; temporary register #1
-temp2	equ		xmm2						; temporary register #2
-temp3	equ		xmm3						; temporary register #3
-temp4	equ		xmm4						; temporary register #4
-temp5	equ		xmm5						; temporary register #5
-temp6	equ		xmm6						; temporary register #6
-temp7	equ		xmm7						; temporary register #7
-temp8	equ		xmm8						; temporary register #8
-origin	equ		xmm9						; original value
-sfactor	equ		xmm10						; scale factor
-magic	equ		origin						; magic number to get integer part
-ipart	equ		temp1						; integer part of value
-log		equ		temp1						; log value
-max		equ		temp2						; max exponent value
-min		equ		temp3						; max exponent value
-if x eq s
-mvalue	= MAGIC_FLT32						; magic number to get integer part from value
-inf		= INF_FLT32							; infinity
-oneval	= ONE_FLT32							; 1.0
-moneval	= MONE_FLT32						; -1.0
-exp_min	= 0xC2380000						; min exponent value
-exp_max	= 0x421C0000						; max exponent value
-logval	= 0x3F135D8E						; ln(10) / 4
-fourval	= 0x40800000						; 4.0
-sixval	= 0x40C00000						; 6.0
-else
-mvalue	= MAGIC_FLT64						; magic number to get integer part from value
-inf		= INF_FLT64							; infinity
-oneval	= ONE_FLT64							; 1.0
-moneval	= MONE_FLT64						; -1.0
-exp_min	= 0xC074400000000000				; min exponent value
-exp_max	= 0x4073500000000000				; max exponent value
-logval	= 0x3FE26BB1BBB55516				; ln(10) / 4
-fourval	= 0x4010000000000000				; 4.0
-sixval	= 0x4018000000000000				; 6.0
-end if
-;------------------------------------------
-		initreg	max, treg, exp_max, x		; load max exponent value
-		initreg	min, treg, exp_min, x		; load max exponent value
-		initreg	magic, treg, mvalue, x		; load magic number
-		movs#x	ipart, value				; ipart = value
-		comis#x	value, max					; if (value > max)
-		ja		.inf						;     return inf
-		comis#x	value, min					; if (value < min)
-		jbe		.mone						;     return -1.0
-		adds#x	ipart, magic
-if x eq s
-		movd	temp, ipart					; temp = round (value)
-else
-		movq	temp, ipart					; temp = round (value)
-end if
-		subs#x	ipart, magic				; ipart = round (value)
-if x eq s
-		cwde
-else
-		cdqe
-end if
-		subs#x	value, ipart				; value = fractional_part (value)
-		initreg	log, treg, logval, x		; log = ln(10) / 4
-		muls#x	value, log					; value *= ln(10) / 4
-if x eq s
-		EXP32	EXP10I_FLT32				; compute exp(value) and sfactor
-else
-		EXP64	EXP10I_FLT64				; compute exp(value) and sfactor
-end if
-		initreg	temp3, treg, oneval, x		; temp3 = 1.0
-		initreg	temp4, treg, fourval, x		; temp4 = 4.0
-		movs#x	origin, value
-		initreg	temp1, treg, sixval, x		; temp1 = 6.0
-		movs#x	temp2, temp3				; temp2 = 1
-		muls#x	temp1, value
-		adds#x	temp1, temp4				; temp1 = 4 + 6 * value
-		muls#x	temp2, value
-		adds#x	temp2, temp4				; temp2 = 4 + 1 * value
-		muls#x	value, value				; value *= value
-		muls#x	value, temp2
-		adds#x	value, temp1				; value = temp1 + temp2 * value
-		muls#x	value, origin				; value *= origin
-		muls#x	value, sfactor
-		subs#x	sfactor, temp3
-		adds#x	value, sfactor				; return (value^4 * 4*value^3 + 6*value^2 + 4*value) * sfactor + (sfactor - 1)
-		ret
-;----[Return inf]--------------------------
-.inf:	initreg	value, treg, inf, x			; return +inf
-		ret
-;----[Return minus one]--------------------
-.mone:	initreg	value, treg, moneval, x		; return -1.0
-		ret
-}
 
 ; Integer power of 10
 Exp10i_flt32:	EXPI	dil, eax, -46, +39, ten_table_flt32, s
@@ -1506,17 +2474,93 @@ Exp10m1_flt64:	EXP10M1	rax, rdx, d
 ;==============================================================================;
 ;       Power of E                                                             ;
 ;==============================================================================;
-macro	EXPEI_FLT32
+macro	EXPE_FLT32	iexp
 {
-		movss	sfactor, [exp_table_flt32 + temp * 4 + 104 * 4]	; sfactor = exp(temp)
+;---[Internal variables]-------------------
+array	= exp_flt32							; pointer to array of coefficients
+offst	= 104								; offset of e^0 from the beginning of table
+bytes	= 4									; size of array element (bytes)
+;------------------------------------------
+		movaps	origin, value
+;---[Stage 1]------------------------------
+		movss	temp1, [array + 0 * bytes]	; temp1 = array[0]
+		movss	temp2, [array + 2 * bytes]	; temp2 = array[2]
+		movss	temp3, [array + 4 * bytes]	; temp3 = array[4]
+		movss	temp4, [array + 6 * bytes]	; temp4 = array[6]
+		movss	sfactor, [exp_table_flt32 + iexp * bytes + offst * bytes]
+		mulss	temp1, value
+		addss	temp1, [array + 1 * bytes]	; temp1 = array[1] + array[0] * value
+		mulss	temp2, value
+		addss	temp2, [array + 3 * bytes]	; temp2 = array[3] + array[2] * value
+		mulss	temp3, value
+		addss	temp3, [array + 5 * bytes]	; temp3 = array[5] + array[4] * value
+		mulss	value, value				; value *= value
+;---[Stage 2]------------------------------
+		mulss	temp2, value
+		addss	temp1, temp2				; temp1 = temp1 + temp2 * value
+		mulss	value, value				; value *= value
+;---[Stage 3]------------------------------
+		mulss	value, temp3
+		addss	value, temp1				; value = temp1 + temp3 * value
+;------------------------------------------
+		mulss	value, origin				; value *= origin
+		addss	value, temp4				; value += temp4
 }
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	EXPEI_FLT64
+macro	EXPE_FLT64	iexp
 {
-		movsd	sfactor, [exp_table_flt64 + temp * 8 + 746 * 8]	; sfactor = exp(temp)
+;---[Internal variables]-------------------
+array	= exp_flt64							; pointer to array of coefficients
+offst	= 746								; offset of e^0 from the beginning of table
+bytes	= 8									; size of array element (bytes)
+;------------------------------------------
+		movapd	origin, value
+;---[Stage 1]------------------------------
+		movsd	temp1, [array + 0 * bytes]	; temp1 = array[0]
+		movsd	temp2, [array + 2 * bytes]	; temp2 = array[2]
+		movsd	temp3, [array + 4 * bytes]	; temp3 = array[4]
+		movsd	temp4, [array + 6 * bytes]	; temp4 = array[6]
+		movsd	temp5, [array + 8 * bytes]	; temp5 = array[8]
+		movsd	temp6, [array + 10 * bytes]	; temp6 = array[10]
+		movsd	temp7, [array + 12 * bytes]	; temp7 = array[12]
+		movsd	temp8, [array + 13 * bytes]	; temp8 = array[13]
+		movsd	sfactor, [exp_table_flt64 + iexp * bytes + offst * bytes]
+		mulsd	temp1, value
+		addsd	temp1, [array + 1 * bytes]	; temp1 = array[1] + array[0] * value
+		mulsd	temp2, value
+		addsd	temp2, [array + 3 * bytes]	; temp2 = array[3] + array[2] * value
+		mulsd	temp3, value
+		addsd	temp3, [array + 5 * bytes]	; temp3 = array[5] + array[4] * value
+		mulsd	temp4, value
+		addsd	temp4, [array + 7 * bytes]	; temp4 = array[7] + array[6] * value
+		mulsd	temp5, value
+		addsd	temp5, [array + 9 * bytes]	; temp5 = array[9] + array[8] * value
+		mulsd	temp6, value
+		addsd	temp6, [array + 11 * bytes]	; temp6 = array[11] + array[10] * value
+		mulsd	value, value				; value *= value
+;---[Stage 2]------------------------------
+		mulsd	temp2, value
+		addsd	temp1, temp2				; temp1 = temp1 + temp2 * value
+		mulsd	temp4, value
+		addsd	temp3, temp4				; temp3 = temp3 + temp4 * value
+		mulsd	temp6, value
+		addsd	temp5, temp6				; temp5 = temp5 + temp6 * value
+		mulsd	value, value				; value *= value
+;---[Stage 3]------------------------------
+		mulsd	temp3, value
+		addsd	temp1, temp3				; temp1 = temp1 + temp3 * value
+		mulsd	temp7, value
+		addsd	temp5, temp7				; temp5 = temp5 + temp7 * value
+		mulsd	value, value				; value *= value
+;---[Stage 4]------------------------------
+		mulsd	value, temp5
+		addsd	value, temp1				; value = temp1 + temp5 * value
+;------------------------------------------
+		mulsd	value, origin				; value *= origin
+		addsd	value, temp8				; value += temp8
 }
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	EXPE	temp, treg, x
+macro	EXPE	iexp, treg, x
 {
 ;---[Parameters]---------------------------
 value	equ		xmm0						; value to compute exponent function
@@ -1531,25 +2575,26 @@ temp7	equ		xmm7						; temporary register #7
 temp8	equ		xmm8						; temporary register #8
 origin	equ		xmm9						; original value
 sfactor	equ		xmm10						; scale factor
-magic	equ		origin						; magic number to get integer part
-ipart	equ		temp1						; integer part of value
-half	equ		temp1						; 0.5
-max		equ		temp2						; max exponent value
-min		equ		temp3						; max exponent value
+val1	equ		xmm11						; temporary register #1 that hold value
+val2	equ		xmm12						; temporary register #2 that hold value
+magic	equ		temp1						; magic number to get integer part
+ipart	equ		temp2						; integer part of value
+max		equ		temp3						; max exponent value
+min		equ		temp4						; max exponent value
+reg		equ		rdx							; temporary register to init xmm register
+stack	equ		rsp							; stack pointer
+s_value	equ		stack - 2 * 8				; stack position of "value" variable
+s_scale	equ		stack - 1 * 8				; stack position of "scale" variable
 if x eq s
 mvalue	= MAGIC_FLT32						; magic number to get integer part from value
 inf		= INF_FLT32							; infinity
-oneval	= ONE_FLT32							; 1.0
-twoval	= TWO_FLT32							; 2.0
-halfval	= HALF_FLT32						; 0.5
+moneval	= MONE_FLT32						; -1.0
 exp_min	= 0xC2D00000						; min exponent value
 exp_max	= 0x42B20000						; max exponent value
 else
 mvalue	= MAGIC_FLT64						; magic number to get integer part from value
 inf		= INF_FLT64							; infinity
-oneval	= ONE_FLT64							; 1.0
-twoval	= TWO_FLT64							; 2.0
-halfval	= HALF_FLT64						; 0.5
+moneval	= MONE_FLT64						; -1.0
 exp_min	= 0xC087500000000000				; min exponent value
 exp_max	= 0x4086300000000000				; max exponent value
 end if
@@ -1557,39 +2602,54 @@ end if
 		initreg	max, treg, exp_max, x		; load max exponent value
 		initreg	min, treg, exp_min, x		; load max exponent value
 		initreg	magic, treg, mvalue, x		; load magic number
-		movs#x	ipart, value				; ipart = value
+		movap#x	ipart, value				; ipart = value
 		comis#x	value, max					; if (value > max)
 		ja		.inf						;     return inf
 		comis#x	value, min					; if (value < min)
-		jbe		.zero						;     return 0.0
+		jb		.zero						;     return 0.0
 		adds#x	ipart, magic
 if x eq s
-		movd	temp, ipart					; temp = round (value)
-else
-		movq	temp, ipart					; temp = round (value)
-end if
-		subs#x	ipart, magic				; ipart = round (value)
-if x eq s
+		movd	iexp, ipart					; iexp = rint (value)
 		cwde
 else
+		movq	iexp, ipart					; iexp = rint (value)
 		cdqe
 end if
+		subs#x	ipart, magic				; ipart = rint (value)
 		subs#x	value, ipart				; value = fractional_part (value)
-		initreg	half, treg, halfval, x		; half = 0.5
-		muls#x	value, half					; value *= 0.5
 if x eq s
-		EXP32	EXPEI_FLT32					; compute exp(value) and sfactor
-else
-		EXP64	EXPEI_FLT64					; compute exp(value) and sfactor
-end if
-		initreg	temp2, treg, twoval, x		; temp2 = 2.0
-		initreg	temp1, treg, oneval, x		; temp1 = 1.0
-		muls#x	temp2, value
-		muls#x	value, value
-		adds#x	value, temp2
-		adds#x	value, temp1
-		muls#x	value, sfactor				; return (value^2 + 2*value + 1) * sfactor
+;---[Single precision code]----------------
+	cvtss2sd	val1, value					; val1 = value
+		movapd	val2, val1
+		mulsd	val2, val2					; val2 = val1 ^ 2
+	EXPE_FLT32	iexp						; compute exp(value) and sfactor
+	cvtss2sd	value, value
+	cvtss2sd	sfactor, sfactor
+		mulsd	val2, value
+		addsd	val1, val2					; val1 = value + value ^ 2 * R
+		mulsd	val1, sfactor				; val1 *= scale
+		addsd	val1, sfactor				; val1 = val1 * sfactor + sfactor
+	cvtsd2ss	value, val1					; return val1
 		ret
+else
+;---[Double precision code]----------------
+		movsd	[s_value], value
+		fld		qword [s_value]				; val1 = value
+		fld		st0
+		fmul	st0, st0					; val2 = val1 ^ 2
+	EXPE_FLT64	iexp						; compute exp(value) and sfactor
+		movsd	[s_value], value
+		movsd	[s_scale], sfactor
+		fld		qword [s_value]
+		fmulp	st1, st0
+		faddp	st1, st0					; val1 = value + value ^ 2 * R
+		fld		qword [s_scale]
+		fmul	st1, st0					; val1 *= scale
+		faddp	st1, st0					; val1 = val1 * sfactor + sfactor
+		fstp	qword [s_value]
+		movsd	value, [s_value]			; return val1
+		ret
+end if
 ;----[Return inf]--------------------------
 .inf:	initreg	value, treg, inf, x			; return +inf
 		ret
@@ -1598,7 +2658,7 @@ end if
 		ret
 }
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	EXPEM1	temp, treg, x
+macro	EXPEM1	iexp, treg, x
 {
 ;---[Parameters]---------------------------
 value	equ		xmm0						; value to compute exponent function
@@ -1613,68 +2673,87 @@ temp7	equ		xmm7						; temporary register #7
 temp8	equ		xmm8						; temporary register #8
 origin	equ		xmm9						; original value
 sfactor	equ		xmm10						; scale factor
-magic	equ		origin						; magic number to get integer part
-ipart	equ		temp1						; integer part of value
-half	equ		temp1						; 0.5
-max		equ		temp2						; max exponent value
-min		equ		temp3						; max exponent value
+val1	equ		xmm11						; temporary register #1 that hold value
+val2	equ		xmm12						; temporary register #2 that hold value
+magic	equ		temp1						; magic number to get integer part
+ipart	equ		temp2						; integer part of value
+max		equ		temp3						; max exponent value
+min		equ		temp4						; max exponent value
+one		equ		temp5						; 1.0
+reg		equ		rdx							; temporary register to init xmm register
+stack	equ		rsp							; stack pointer
+s_value	equ		stack - 2 * 8				; stack position of "value" variable
+s_scale	equ		stack - 1 * 8				; stack position of "scale" variable
 if x eq s
 mvalue	= MAGIC_FLT32						; magic number to get integer part from value
 inf		= INF_FLT32							; infinity
-oneval	= ONE_FLT32							; 1.0
-twoval	= TWO_FLT32							; 2.0
 moneval	= MONE_FLT32						; -1.0
-halfval	= HALF_FLT32						; 0.5
 exp_min	= 0xC2D00000						; min exponent value
 exp_max	= 0x42B20000						; max exponent value
 else
 mvalue	= MAGIC_FLT64						; magic number to get integer part from value
 inf		= INF_FLT64							; infinity
-oneval	= ONE_FLT64							; 1.0
-twoval	= TWO_FLT64							; 2.0
 moneval	= MONE_FLT64						; -1.0
-halfval	= HALF_FLT64						; 0.5
 exp_min	= 0xC087500000000000				; min exponent value
 exp_max	= 0x4086300000000000				; max exponent value
 end if
+oneval	= ONE_FLT64							; 1.0
 ;------------------------------------------
 		initreg	max, treg, exp_max, x		; load max exponent value
 		initreg	min, treg, exp_min, x		; load max exponent value
 		initreg	magic, treg, mvalue, x		; load magic number
-		movs#x	ipart, value				; ipart = value
+		movap#x	ipart, value				; ipart = value
 		comis#x	value, max					; if (value > max)
 		ja		.inf						;     return inf
 		comis#x	value, min					; if (value < min)
 		jb		.mone						;     return -1.0
 		adds#x	ipart, magic
 if x eq s
-		movd	temp, ipart					; temp = round (value)
-else
-		movq	temp, ipart					; temp = round (value)
-end if
-		subs#x	ipart, magic				; ipart = round (value)
-if x eq s
+		movd	iexp, ipart					; iexp = rint (value)
 		cwde
 else
+		movq	iexp, ipart					; iexp = rint (value)
 		cdqe
 end if
+		subs#x	ipart, magic				; ipart = rint (value)
 		subs#x	value, ipart				; value = fractional_part (value)
-		initreg	half, treg, halfval, x		; half = 0.5
-		muls#x	value, half					; value *= 0.5
 if x eq s
-		EXP32	EXPEI_FLT32					; compute exp(value) and sfactor
-else
-		EXP64	EXPEI_FLT64					; compute exp(value) and sfactor
-end if
-		initreg	temp2, treg, twoval, x		; temp2 = 2.0
-		initreg	temp1, treg, oneval, x		; temp1 = 1.0
-		muls#x	temp2, value
-		muls#x	value, value
-		adds#x	value, temp2
-		muls#x	value, sfactor
-		subs#x	sfactor, temp1
-		adds#x	value, sfactor				; return (value^2 + 2*value) * sfactor + (sfactor - 1)
+;---[Single precision code]----------------
+	cvtss2sd	val1, value					; val1 = value
+		movapd	val2, val1
+		mulsd	val2, val2					; val2 = val1 ^ 2
+	EXPE_FLT32	iexp						; compute exp(value) and sfactor
+	cvtss2sd	value, value
+	cvtss2sd	sfactor, sfactor
+		mulsd	val2, value
+		addsd	val1, val2					; val1 = value + value ^ 2 * R
+		initreg	one, reg, oneval, d			; one = 1.0
+		mulsd	val1, sfactor				; val1 *= scale
+		subsd	sfactor, one				; sfactor -= 1.0
+		addsd	val1, sfactor				; val1 = val1 * sfactor + (sfactor - 1)
+	cvtsd2ss	value, val1					; return val1
 		ret
+else
+;---[Double precision code]----------------
+		movsd	[s_value], value
+		fld		qword [s_value]				; val1 = value
+		fld		st0
+		fmul	st0, st0					; val2 = val1 ^ 2
+	EXPE_FLT64	iexp						; compute exp(value) and sfactor
+		movsd	[s_value], value
+		movsd	[s_scale], sfactor
+		fld		qword [s_value]
+		fmulp	st1, st0
+		faddp	st1, st0					; val1 = value + value ^ 2 * R
+		fld1
+		fld		qword [s_scale]
+		fmul	st2, st0					; val1 *= scale
+		fsubrp	st1, st0					; sfactor -= 1.0
+		faddp	st1, st0					; val1 = val1 * sfactor + (sfactor - 1)
+		fstp	qword [s_value]
+		movsd	value, [s_value]			; return val1
+		ret
+end if
 ;----[Return inf]--------------------------
 .inf:	initreg	value, treg, inf, x			; return +inf
 		ret
@@ -1702,6 +2781,7 @@ macro	SCALE	treg, shift, exp_min, exp_max, svalue1, svalue2, table, x
 value	equ		xmm0						; value to scale
 exp		equ		di							; exponent value
 ;---[Internal variables]-------------------
+index	equ		rdi							; index register
 scale	equ		xmm1						; scale value
 if x eq s
 bytes	= 4									; array element size (bytes)
@@ -1709,42 +2789,42 @@ else
 bytes	= 8									; array element size (bytes)
 end if
 ;------------------------------------------
-		movsx	temp, exp					; temp = exp
-		test	temp, temp					; if (temp < 0)
+		movsx	index, exp					; index = exp
+		test	index, index				; if (index < 0)
 		js		.neg						;     then go to negative exponent branch
 ;---[Positive exponent branch]-------------
-		cmp		temp, exp_max				; if (temp > exp_max)
+		cmp		index, exp_max				; if (index > exp_max)
 		jg		.pcorr						;     then correct the exponent
-@@:		movs#x	scale, [table + temp*bytes + shift*bytes]	; scale = exp[index]
+@@:		movs#x	scale, [table + index*bytes + shift*bytes]	; scale = exp[index]
 		muls#x	value, scale				; return (value * scale)
 		ret
 ;---[Correcting positive power]------------
 .pcorr:	initreg	scale, treg, svalue1, x		; scale = svalue1
-		sub		temp, exp_max				; temp -= exp_max
+		sub		index, exp_max				; index -= exp_max
 		muls#x	value, scale				; value *= scale
-		cmp		temp, exp_max				; if (temp <= exp_max)
+		cmp		index, exp_max				; if (index <= exp_max)
 		jle		@b							;     then exp is correct now
-		sub		temp, exp_max				; temp -= exp_max
+		sub		index, exp_max				; index -= exp_max
 		muls#x	value, scale				; value *= scale
-		cmp		temp, exp_max				; if (temp <= exp_max)
+		cmp		index, exp_max				; if (index <= exp_max)
 		jle		@b							;     then exp is correct now
 		muls#x	value, scale				; return (value * scale)
 		ret
 ;---[Negative exponent branch]-------------
-.neg:	cmp		temp, exp_min				; if (temp < exp_min)
+.neg:	cmp		index, exp_min				; if (index < exp_min)
 		jl		.ncorr						;     then correct the exponent
-@@:		movs#x	scale, [table + temp*bytes + shift*bytes]	; scale = exp[index]
+@@:		movs#x	scale, [table + index*bytes + shift*bytes]	; scale = exp[index]
 		muls#x	value, scale				; return (value * scale)
 		ret
 ;---[Correcting negative power]------------
 .ncorr:	initreg	scale, treg, svalue2, x		; scale = svalue2
-		sub		temp, exp_min				; temp -= exp_min
+		sub		index, exp_min				; index -= exp_min
 		muls#x	value, scale				; value *= scale
-		cmp		temp, exp_min				; if (temp >= exp_min)
+		cmp		index, exp_min				; if (index >= exp_min)
 		jge		@b							;     then exp is correct now
-		sub		temp, exp_min				; temp -= exp_min
+		sub		index, exp_min				; index -= exp_min
 		muls#x	value, scale				; value *= scale
-		cmp		temp, exp_min				; if (temp >= exp_min)
+		cmp		index, exp_min				; if (index >= exp_min)
 		jge		@b							;     then exp is correct now
 		muls#x	value, scale				; return (value * scale)
 		ret
@@ -1849,15 +2929,15 @@ macro	POWER_UINT	base, pow, temp, temph
 ;---[Parameters]---------------------------
 exp		equ		sil							; exponent value
 ;---[Internal variables]-------------------
-powq	equ		rcx							; quad word register that holds result
-one		equ		r10							; 1
+powd	equ		ecx							; double word register that holds result
+one		equ		r10d						; 1
 ;------------------------------------------
 		test	base, base					; if (base == 0)
 		jz		.ovfl						;     then return 0
 		mov		one, 1						; one = 1
 		mov		pow, base					; pow = base
 		shr		exp, 1						; if (exp & 0x1 == 0), then
-		cmovnc	powq, one					;     pow = 1
+		cmovnc	powd, one					;     pow = 1
 		jz		.skip						; if ((exp >>= 1) == 0), then skip loop
 ;---[Exponentiation loop]------------------
 .loop:	mov		temp, base					; temp = base
@@ -1886,9 +2966,9 @@ macro	POWER_SINT	base, sign, pow, max, temp, temph, scale
 ;---[Parameters]---------------------------
 exp		equ		sil							; exponent value
 ;---[Internal variables]-------------------
-powq	equ		rcx							; quad word register that holds result
+powd	equ		ecx							; double word register that holds result
 signq	equ		r8							; quad word register that base sign
-one		equ		r10							; 1
+one		equ		r10d						; 1
 zero	equ		r11							; 0
 shft	= (1 shl scale) * 8 - 1				; shift value
 ;------------------------------------------
@@ -1903,7 +2983,7 @@ shft	= (1 shl scale) * 8 - 1				; shift value
 		xor		zero, zero					; zero = 0
 		mov		pow, base					; pow = base
 		shr		exp, 1						; if (exp & 0x1 == 0), then
-		cmovnc	powq, one					;     pow = 1
+		cmovnc	powd, one					;     pow = 1
 		cmovnc	signq, zero					;     sign = 0
 		jz		.skip						; if ((exp >>= 1) == 0), then skip loop
 ;---[Exponentiation loop]------------------
@@ -1952,16 +3032,16 @@ end if
 		initreg	one, treg, oneval, x		; one = 1.0
 		comis#x	base, zero					; if (base == 0)
 		je		.zero						;     then go to zero base branch
-		movs#x	temp, base					; temp = base
+		movap#x	temp, base					; temp = base
 		cmp		exp, 0						; if (exp < 0)
 		jge		@f							; {
-		movs#x	temp, one					;     temp = 1 / base
+		movap#x	temp, one					;     temp = 1 / base
 		neg		exp							;     exp = -exp
 		divs#x	temp, base					; }
 @@:		shr		exp, 1						; exp >>= 1
-		movs#x	base, temp					; base = temp
+		movap#x	base, temp					; base = temp
 		jc		@f							; if (exp & 0x1 == 0)
-		movs#x	base, one					;     base = 1
+		movap#x	base, one					;     base = 1
 @@:		jz		.skip						; if (exp == 0), then skip loop
 ;---[Exponentiation loop]------------------
 .loop:	muls#x	temp, temp					; temp *= temp
@@ -1996,6 +3076,84 @@ Power_flt32:	POWER_FLT	dil, eax, s
 Power_flt64:	POWER_FLT	di, rax, d
 
 ;******************************************************************************;
+;       Rounding                                                               ;
+;******************************************************************************;
+macro	ROUNDINT	treg, x
+{
+;---[Parameters]---------------------------
+value	equ		xmm0						; value to compute exponent function
+;---[Internal variables]-------------------
+magic	equ		xmm1						; magic number to get integer part
+if x eq s
+mvalue	= MAGIC_FLT32						; magic number to get integer part from value
+else
+mvalue	= MAGIC_FLT64						; magic number to get integer part from value
+end if
+;------------------------------------------
+		initreg	magic, treg, mvalue, x		; load magic number
+		adds#x	value, magic				; value += magic
+		subs#x	value, magic				; value -= magic
+		ret									; value = rint (value)
+}
+;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+macro	TRUNCATE	exp, mask, temp, x
+{
+;---[Parameters]---------------------------
+value	equ		xmm0						; value to process
+;---[Internal variables]-------------------
+sign	equ		xmm1						; sign mask
+shift	equ		cl							; mask shift
+if x eq s
+smask	= SMASK_FLT32						; truncation mask
+bias	= 127								; exponent bias
+digits	= 23								; precission of mantissa
+mbias	= 8									; mantisa offset in bit field
+else
+smask	= SMASK_FLT64						; truncation mask
+bias	= 1023								; exponent bias
+digits	= 52								; precission of mantissa
+mbias	= 11								; mantisa offset in bit field
+end if
+;------------------------------------------
+if x eq s
+		movd	exp, value					; exp = raw value
+		movd	temp, value					; temp = raw value
+else
+		movq	exp, value					; exp = raw value
+		movq	temp, value					; temp = raw value
+end if
+		add		exp, exp					; remove sign bit
+		shr		exp, digits + 1				; extract exponent field from value
+		sub		exp, bias					; subtract exponent bias
+		test	exp, exp					; if (exp < 0)
+		js		.zero						;     then return 0
+		cmp		exp, digits					; if (exp >= digits)
+		ja		.exit						;     then there is no fraction part
+		mov		mask, smask					; set truncation mask
+		add		exp, mbias					; exp += mantiassa ofset
+		sar		mask, shift					; mask >>= exp
+		and		temp, mask					; temp &= mask
+if x eq s
+		movd	value, temp					; value = temp
+else
+		movq	value, temp					; value = temp
+end if
+.exit:	ret
+;---[Set zero value branch]----------------
+.zero:	initreg	sign, temp, smask, x
+		andp#x	value, sign					; return zero with correct sign
+		ret
+}
+
+; Round to nearest integer
+RoundInt_flt32:		ROUNDINT	eax, s
+RoundInt_flt64:		ROUNDINT	rax, d
+
+; Round to nearest integer, toward zero (truncation)
+Truncate_flt32:		TRUNCATE	ecx, eax, edx, s
+Truncate_flt64:		TRUNCATE	rcx, rax, rdx, d
+
+;******************************************************************************;
 ;       Checks                                                                 ;
 ;******************************************************************************;
 macro	ISNORM	temp, mask, norm, inf, x
@@ -2024,7 +3182,7 @@ end if
 		setb	result						;     then return true
 		ret									;     else return false
 }
-;;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 macro	ISSUB	temp, mask, norm, x
 {
 ;---[Parameters]---------------------------
@@ -2047,7 +3205,7 @@ end if
 		setb	result						;     then return true
 		ret									;     else return false
 }
-;;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 macro	ISFIN	temp, mask, inf, x
 {
 ;---[Parameters]---------------------------
@@ -2070,7 +3228,7 @@ end if
 		setb	result						;     then return true
 		ret									;     else return false
 }
-;;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 macro	ISINF	temp, mask, inf, x
 {
 ;---[Parameters]---------------------------
@@ -2093,7 +3251,7 @@ end if
 		sete	result						;     then return true
 		ret									;     else return false
 }
-;;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 macro	ISNAN	temp, mask, inf, x
 {
 ;---[Parameters]---------------------------
@@ -2116,7 +3274,7 @@ end if
 		seta	result						;     then return true
 		ret									;     else return false
 }
-;;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 ; Check for normal value
 IsNorm_flt32:	ISNORM	eax, ecx, edx, edi, d
@@ -2143,36 +3301,6 @@ IsNaN_flt64:	ISNAN	rax, rcx, rdx, q
 ;###############################################################################
 section	'.rodata'	align 16
 
-; Coefficients to compute e^x for flt64_t type
-align 16
-exp_flt64		dq	0x3FE0000000000000			; 1 / 2!
-				dq	0x3FF0000000000000			; 1 / 1!
-				dq	0x3FA5555555555555			; 1 / 4!
-				dq	0x3FC5555555555555			; 1 / 3!
-				dq	0x3F56C16C16C16C17			; 1 / 6!
-				dq	0x3F81111111111111			; 1 / 5!
-				dq	0x3EFA01A01A01A01A			; 1 / 8!
-				dq	0x3F2A01A01A01A01A			; 1 / 7!
-				dq	0x3E927E4FB7789F5C			; 1 / 10!
-				dq	0x3EC71DE3A556C734			; 1 / 9!
-				dq	0x3E21EED8EFF8D898			; 1 / 12!
-				dq	0x3E5AE64567F544E4			; 1 / 11!
-				dq	0x3DA93974A8C07C9D			; 1 / 14!
-				dq	0x3DE6124613A86D09			; 1 / 13!
-				dq	0x3D6AE7F3E733B81F			; 1 / 15!
-
-; Coefficients to compute e^x for flt32_t type
-align 16
-exp_flt32		dd	0x3F000000					; 1 / 2!
-				dd	0x3F800000					; 1 / 1!
-				dd	0x3D2AAAAB					; 1 / 4!
-				dd	0x3E2AAAAB					; 1 / 3!
-				dd	0x3AB60B61					; 1 / 6!
-				dd	0x3C088889					; 1 / 5!
-				dd	0x37D00D01					; 1 / 8!
-				dd	0x39500D01					; 1 / 7!
-				dd	0x3638EF1D					; 1 / 9!
-
 align 16
 ten_table_int	dq	1							; 10^0
 				dq	10							; 10^1
@@ -2195,6 +3323,75 @@ ten_table_int	dq	1							; 10^0
 				dq	1000000000000000000			; 10^18
 				dq	10000000000000000000		; 10^19
 				dq	0							; 0 (overflow)
+
+; Coefficients to compute cos(x) for flt64_t type
+align 16
+cos_flt64		dq	0xBF56C16C16C16C17			; -1 / 6!
+				dq	0x3FA5555555555555			; +1 / 4!
+				dq	0xBE927E4FB7789F5C			; -1 / 10!
+				dq	0x3EFA01A01A01A01A			; +1 / 8!
+				dq	0xBDA93974A8C07C9D			; -1 / 14!
+				dq	0x3E21EED8EFF8D898			; +1 / 12!
+				dq	0x3D2AE7F3E733B81F			; +1 / 16!
+
+; Coefficients to compute sin(x) for flt64_t type
+align 16
+sin_flt64		dq	0x3F81111111111111			; +1 / 5!
+				dq	0xBFC5555555555555			; -1 / 3!
+				dq	0x3EC71DE3A556C734			; +1 / 9!
+				dq	0xBF2A01A01A01A01A			; -1 / 7!
+				dq	0x3DE6124613A86D09			; +1 / 13!
+				dq	0xBE5AE64567F544E4			; -1 / 11!
+				dq	0xBD6AE7F3E733B81F			; -1 / 15!
+
+; Coefficients to compute exp2(x) for flt64_t type
+align 16
+exp2_flt64		dq	0x3F947FD3FFAC83B4			; ln(2)^2 / 4!
+				dq	0x3FBD9303FEA2F7EA			; ln(2)^1 / 3!
+				dq	0x3F3502D8FFB5A908			; ln(2)^4 / 6!
+				dq	0x3F66BC07126A1A33			; ln(2)^3 / 5!
+				dq	0x3EC712EF11BE9AE4			; ln(2)^6 / 8!
+				dq	0x3F00A4F3BC9A363E			; ln(2)^5 / 7!
+				dq	0x3E4F888B9368EF22			; ln(2)^8 / 10!
+				dq	0x3E8C6EE35A409D22			; ln(2)^7 / 9!
+				dq	0x3DCD61E5E658C886			; ln(2)^10 / 12!
+				dq	0x3E0FCADA8FCF0462			; ln(2)^9 / 11!
+				dq	0x3D8910F686016B9B			; ln(2)^11 / 13!
+				dq	0x3FE0000000000000			; ln(2)^0 / 2!
+
+; Coefficients to compute exp10(x) for flt64_t type
+align 16
+exp10_flt64		dq	0x3FAC46DBB451388B			; (ln(10) / 2)^2 / 4!
+				dq	0x3FC88F97A4F1C6C7			; (ln(10) / 2)^1 / 3!
+				dq	0x3F63FD4AB552C516			; (ln(10) / 2)^4 / 6!
+				dq	0x3F8A0B3C1C96ADD4			; (ln(10) / 2)^3 / 5!
+				dq	0x3F0E47D12E08E562			; (ln(10) / 2)^6 / 8!
+				dq	0x3F3A4D248DE3823A			; (ln(10) / 2)^5 / 7!
+				dq	0x3EAC8A8CD552035C			; (ln(10) / 2)^8 / 10!
+				dq	0x3EDEFCFC6B05BD61			; (ln(10) / 2)^7 / 9!
+				dq	0x3E42579602BBA583			; (ln(10) / 2)^10 / 12!
+				dq	0x3E77E5CD1E140F6D			; (ln(10) / 2)^9 / 11!
+				dq	0x3DD1193BE810E96B			; (ln(10) / 2)^12 / 14!
+				dq	0x3E09FD87AF3B94D5			; (ln(10) / 2)^11 / 13!
+				dq	0x3D94FF7127F17B2A			; (ln(10) / 2)^13 / 15!
+				dq	0x3FE0000000000000			; (ln(10) / 2)^0 / 2!
+
+; Coefficients to compute exp(x) for flt64_t type
+align 16
+exp_flt64		dq	0x3FA5555555555555			; 1 / 4!
+				dq	0x3FC5555555555555			; 1 / 3!
+				dq	0x3F56C16C16C16C17			; 1 / 6!
+				dq	0x3F81111111111111			; 1 / 5!
+				dq	0x3EFA01A01A01A01A			; 1 / 8!
+				dq	0x3F2A01A01A01A01A			; 1 / 7!
+				dq	0x3E927E4FB7789F5C			; 1 / 10!
+				dq	0x3EC71DE3A556C734			; 1 / 9!
+				dq	0x3E21EED8EFF8D898			; 1 / 12!
+				dq	0x3E5AE64567F544E4			; 1 / 11!
+				dq	0x3DA93974A8C07C9D			; 1 / 14!
+				dq	0x3DE6124613A86D09			; 1 / 13!
+				dq	0x3D6AE7F3E733B81F			; 1 / 15!
+				dq	0x3FE0000000000000			; 1 / 2!
 
 ; Table of integer powers of 10^x for flt64_t type
 align 16
@@ -4292,6 +5489,49 @@ exp_table_flt64	dq	0x0000000000000000			; e^-746
 				dq	0x7FC586F6BF260CF1			; e^+708
 				dq	0x7FDD422D2BE5DC9B			; e^+709
 				dq	0x7FF0000000000000			; e^+710
+
+; Coefficients to compute cos(x) for flt32_t type
+align 16
+cos_flt32		dd	0xBAB60B61					; -1 / 6!
+				dd	0x3D2AAAAB					; +1 / 4!
+				dd	0xB493F27E					; -1 / 10!
+				dd	0x37D00D01					; +1 / 8!
+
+; Coefficients to compute sin(x) for flt32_t type
+align 16
+sin_flt32		dd	0x3C088889					; +1 / 5!
+				dd	0xBE2AAAAB					; -1 / 3!
+				dd	0x3638EF1D					; +1 / 9!
+				dd	0xB9500D01					; -1 / 7!
+
+; Coefficients to compute exp2(x) for flt32_t type
+align 16
+exp2_flt32		dd	0x3CA3FEA0					; ln(2)^2 / 4!
+				dd	0x3DEC9820					; ln(2)^1 / 3!
+				dd	0x39A816C8					; ln(2)^4 / 6!
+				dd	0x3B35E039					; ln(2)^3 / 5!
+				dd	0x3805279E					; ln(2)^5 / 7!
+				dd	0x3F000000					; ln(2)^0 / 2!
+
+; Coefficients to compute exp10(x) for flt32_t type
+align 16
+exp10_flt32		dd	0x3D6236DE					; (ln(10) / 2)^2 / 4!
+				dd	0x3E447CBD					; (ln(10) / 2)^1 / 3!
+				dd	0x3B1FEA56					; (ln(10) / 2)^4 / 6!
+				dd	0x3C5059E1					; (ln(10) / 2)^3 / 5!
+				dd	0x38723E89					; (ln(10) / 2)^6 / 8!
+				dd	0x39D26924					; (ln(10) / 2)^5 / 7!
+				dd	0x3F000000					; (ln(10) / 2)^0 / 2!
+
+; Coefficients to compute exp(x) for flt32_t type
+align 16
+exp_flt32		dd	0x3D2AAAAB					; 1 / 4!
+				dd	0x3E2AAAAB					; 1 / 3!
+				dd	0x3AB60B61					; 1 / 6!
+				dd	0x3C088889					; 1 / 5!
+				dd	0x37D00D01					; 1 / 8!
+				dd	0x39500D01					; 1 / 7!
+				dd	0x3F000000					; 1 / 2!
 
 ; Table of integer powers of 10^x for flt32_t type
 align 16

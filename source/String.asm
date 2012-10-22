@@ -190,9 +190,7 @@ bytes	= 1 shl scale						; size of element (bytes)
 		jne		@b							; do while (symbol != 0)
 ;---[end of loop]--------------------------
 		sub		size, string				; size -= string
-if scale > 0
 		shr		size, scale					; correct size value
-end if
 }
 
 ;******************************************************************************;
@@ -248,9 +246,7 @@ bytes	= 1 shl scale						; size of element (bytes)
 		ret
 ;---[Normal exit branch]-------------------
 .exit:	sub		sptr, source				; return sptr - source
-if scale > 0
 		shr		sptr, scale
-end if
 		ret
 }
 Copy1_char8:	COPY1	r9b, 0
@@ -295,9 +291,7 @@ bytes	= 1 shl scale						; size of element (bytes)
 ;---[Normal exit branch]-------------------
 .eol:	seteol	tptr, scale					; set end of string
 .exit:	sub		sptr, source				; return sptr - source
-if scale > 0
 		shr		sptr, scale
-end if
 		ret
 }
 Copy2_char8:	COPY2	r9b, 0
@@ -450,9 +444,7 @@ bytes	= 1 shl scale						; size of element (bytes)
 		ret
 ;---[if symbol is found]-------------------
 @@:		sub		ptr, string					; return ptr - string
-if scale > 0
 		shr		ptr, scale
-end if
 		ret
 }
 Find1_char8:	FIND_SYMBOL	sil, dl, 0
@@ -488,9 +480,7 @@ bytes	= 1 shl scale						; size of element (bytes)
 		jmp		.loop1						; do while (true)
 ;---[end of loop]--------------------------
 @@:		sub		ptr1, string				; return ptr1 - string
-if scale > 0
 		shr		ptr1, scale
-end if
 		ret
 }
 Find2_char8:	FIND_SYMBOLS	dl, cl, 0
@@ -514,7 +504,7 @@ param3	equ		rdx							; register to pass 3 procedure parameter
 param4	equ		cl							; register to pass 4 procedure parameter
 result	equ		psize						; result register
 stack	equ		rsp							; stack pointer
-s_str	equ		stack + 0 * 8				; stack position of string variable
+s_str	equ		stack + 0 * 8				; stack position of "string" variable
 s_size	equ		stack + 1 * 8				; stack position of string size variable
 s_bmh	equ		stack + 2 * 8				; stack position of BMH object
 space	= 261 * 8							; stack size required by the procedure
@@ -551,39 +541,33 @@ FindStr_char32:	FIND_STRING	BMH32, BMH_Find32, 2
 ;******************************************************************************;
 ;       Value replacement                                                      ;
 ;******************************************************************************;
-macro	REPLACE_SYMBOL	symbol, char, scale
+macro	REPLACE_SYMBOL	symbol, value, char, scale
 {
 ;---[Parameters]---------------------------
 string	equ		rdi							; source string
-value	equ		rdx							; value that replace pattern
 ;---[Internal variables]-------------------
-temp	equ		rcx							; temporary register to hold value
 count	equ		rax							; replacement counter
-cinc	equ		r8							; counter increment register
-cincl	equ		r8b							; low part of counter increment register
 bytes	= 1 shl scale						; size of element (bytes)
 ;------------------------------------------
-		xor		count, count				; count = 0
 		mov		char, [string]				; char = string[0]
-		xor		cinc, cinc					; cinc = 0
+		xor		count, count				; count = 0
 		test	char, char					; if (char == 0)
 		jz		.exit						;     then go to exit
 ;---[Loop]---------------------------------
-.loop:	cmp		char, symbol				; if (char == symbol)
-		cmove	temp, value					;     char = value
-		sete	cincl						;     count++
-		mov		[string], char				; string[0] = char
-		add		count, cinc
-		add		string, bytes				; string++
+.loop:	cmp		char, symbol				; if (char == symbol) {
+		jne		@f							;     string[0] = value
+		mov		[string], value				;     count++
+		add		count, 1					; }
+@@:		add		string, bytes				; string++
 		mov		char, [string]				; char = string[0]
 		test	char, char
 		jnz		.loop						; do while (char != 0)
 ;---[end of loop]--------------------------
 .exit:	ret
 }
-Replace1_char8:		REPLACE_SYMBOL	sil, cl, 0
-Replace1_char16:	REPLACE_SYMBOL	si, cx, 1
-Replace1_char32:	REPLACE_SYMBOL	esi, ecx, 2
+Replace1_char8:		REPLACE_SYMBOL	sil, dl, cl, 0
+Replace1_char16:	REPLACE_SYMBOL	si, dx, cx, 1
+Replace1_char32:	REPLACE_SYMBOL	esi, edi, ecx, 2
 
 ;###############################################################################
 ;#                                 END OF FILE                                 #

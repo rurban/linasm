@@ -117,16 +117,36 @@ static flt32_t Sqrt (flt32_t value);
 static flt64_t Sqrt (flt64_t value);
 
 //****************************************************************************//
-//      Hypotenuse                                                            //
+//      Trigonometric functions                                               //
 //****************************************************************************//
+
+// Hypotenuse
 static flt32_t Hypot (flt32_t cath1, flt32_t cath2);
 static flt64_t Hypot (flt64_t cath1, flt64_t cath2);
 
-//****************************************************************************//
-//      Cathetus                                                              //
-//****************************************************************************//
+// Cathetus
 static flt32_t Cath (flt32_t hypot, flt32_t cath);
 static flt64_t Cath (flt64_t hypot, flt64_t cath);
+
+// Sine
+static flt32_t SinQ (flt32_t angle, sint64_t quadrant);
+static flt64_t SinQ (flt64_t angle, sint64_t quadrant);
+
+// Cosine
+static flt32_t CosQ (flt32_t angle, sint64_t quadrant);
+static flt64_t CosQ (flt64_t angle, sint64_t quadrant);
+
+// Tangent
+static flt32_t TanQ (flt32_t angle, sint64_t quadrant);
+static flt64_t TanQ (flt64_t angle, sint64_t quadrant);
+
+// Cotangent
+static flt32_t CotQ (flt32_t angle, sint64_t quadrant);
+static flt64_t CotQ (flt64_t angle, sint64_t quadrant);
+
+// Sine and cosine
+static flt32_t SinCosQ (flt32_t *sin, flt32_t *cos, flt32_t angle, sint64_t quadrant);
+static flt64_t SinCosQ (flt64_t *sin, flt64_t *cos, flt64_t angle, sint64_t quadrant);
 
 //****************************************************************************//
 //      Minimum value                                                         //
@@ -175,7 +195,7 @@ static flt64_t Max (flt64_t x, flt64_t y);
 static size_t Max (size_t x, size_t y);
 
 //****************************************************************************//
-//      Great common divisor                                                  //
+//      Greatest common divisor                                               //
 //****************************************************************************//
 
 // Unsigned integer types
@@ -191,7 +211,7 @@ static sint32_t GCD (sint32_t x, sint32_t y);
 static sint64_t GCD (sint64_t x, sint64_t y);
 
 //****************************************************************************//
-//      Less common multiplier                                                //
+//      Least common multiple                                                 //
 //****************************************************************************//
 
 // Unsigned integer types
@@ -289,6 +309,18 @@ static sint64_t Power (sint64_t base, uint8_t exp);
 // Floating-point types
 static flt32_t Power (flt32_t base, sint8_t exp);
 static flt64_t Power (flt64_t base, sint16_t exp);
+
+//****************************************************************************//
+//      Rounding                                                              //
+//****************************************************************************//
+
+// Round to nearest integer
+static flt32_t RoundInt (flt32_t value);
+static flt64_t RoundInt (flt64_t value);
+
+// Round to nearest integer, toward zero (truncation)
+static flt32_t Truncate (flt32_t value);
+static flt64_t Truncate (flt64_t value);
 
 //****************************************************************************//
 //      Checks                                                                //
@@ -391,16 +423,36 @@ flt32_t Math_Sqrt_flt32 (flt32_t value);
 flt64_t Math_Sqrt_flt64 (flt64_t value);
 
 //****************************************************************************//
-//      Hypotenuse                                                            //
+//      Trigonometric functions                                               //
 //****************************************************************************//
+
+// Hypotenuse
 flt32_t Math_Hypot_flt32 (flt32_t cath1, flt32_t cath2);
 flt64_t Math_Hypot_flt64 (flt64_t cath1, flt64_t cath2);
 
-//****************************************************************************//
-//      Cathetus                                                              //
-//****************************************************************************//
+// Cathetus
 flt32_t Math_Cath_flt32 (flt32_t hypot, flt32_t cath);
 flt64_t Math_Cath_flt64 (flt64_t hypot, flt64_t cath);
+
+// Sine
+flt32_t Math_SinQ_flt32 (flt32_t angle, sint64_t quadrant);
+flt64_t Math_SinQ_flt64 (flt64_t angle, sint64_t quadrant);
+
+// Cosine
+flt32_t Math_CosQ_flt32 (flt32_t angle, sint64_t quadrant);
+flt64_t Math_CosQ_flt64 (flt64_t angle, sint64_t quadrant);
+
+// Tangent
+flt32_t Math_TanQ_flt32 (flt32_t angle, sint64_t quadrant);
+flt64_t Math_TanQ_flt64 (flt64_t angle, sint64_t quadrant);
+
+// Cotangent
+flt32_t Math_CotQ_flt32 (flt32_t angle, sint64_t quadrant);
+flt64_t Math_CotQ_flt64 (flt64_t angle, sint64_t quadrant);
+
+// Sine and cosine
+flt32_t Math_SinCosQ_flt32 (flt32_t *sin, flt32_t *cos, flt32_t angle, sint64_t quadrant);
+flt64_t Math_SinCosQ_flt64 (flt64_t *sin, flt64_t *cos, flt64_t angle, sint64_t quadrant);
 
 //****************************************************************************//
 //      Minimum value                                                         //
@@ -449,7 +501,7 @@ flt64_t Math_Max_flt64 (flt64_t x, flt64_t y);
 size_t Math_Max_size (size_t x, size_t y);
 
 //****************************************************************************//
-//      Great common divisor                                                  //
+//      Greatest common divisor                                               //
 //****************************************************************************//
 
 // Unsigned integer types
@@ -465,7 +517,7 @@ sint32_t Math_GCD_sint32 (sint32_t x, sint32_t y);
 sint64_t Math_GCD_sint64 (sint64_t x, sint64_t y);
 
 //****************************************************************************//
-//      Less common multiplier                                                //
+//      Least common multiple                                                 //
 //****************************************************************************//
 
 // Unsigned integer types
@@ -563,6 +615,18 @@ sint64_t Math_Power_sint64 (sint64_t base, uint8_t exp);
 // Floating-point types
 flt32_t Math_Poweri_flt32 (flt32_t base, sint8_t exp);
 flt64_t Math_Poweri_flt64 (flt64_t base, sint16_t exp);
+
+//****************************************************************************//
+//      Rounding                                                              //
+//****************************************************************************//
+
+// Round to nearest integer
+flt32_t Math_RoundInt_flt32 (flt32_t value);
+flt64_t Math_RoundInt_flt64 (flt64_t value);
+
+// Round to nearest integer, toward zero (truncation)
+flt32_t Math_Truncate_flt32 (flt32_t value);
+flt64_t Math_Truncate_flt64 (flt64_t value);
 
 //****************************************************************************//
 //      Checks                                                                //

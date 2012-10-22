@@ -203,20 +203,26 @@ static void Clone (void *array, size_t size, size_t psize);
 //****************************************************************************//
 
 // Conversion between floating-point types
-static void Convert (flt32_t target[], const flt64_t source[], size_t size);
 static void Convert (flt64_t target[], const flt32_t source[], size_t size);
+static void Convert (flt32_t target[], const flt64_t source[], size_t size);
 
-// Conversion from signed integer to floating-point
+// Conversion from signed integer types to floating-point types
 static void Convert (flt32_t target[], const sint32_t source[], size_t size);
 static void Convert (flt64_t target[], const sint32_t source[], size_t size);
+static void Convert (flt32_t target[], const sint64_t source[], size_t size);
+static void Convert (flt64_t target[], const sint64_t source[], size_t size);
 
-// Conversion from floating-point to signed integer
+// Conversion from floating-point types to signed integer types
 static void Convert (sint32_t target[], const flt32_t source[], size_t size);
+static void Convert (sint64_t target[], const flt32_t source[], size_t size);
 static void Convert (sint32_t target[], const flt64_t source[], size_t size);
+static void Convert (sint64_t target[], const flt64_t source[], size_t size);
 
-// Truncating from floating-point to signed integer
+// Truncating from floating-point types to signed integer types
 static void Truncate (sint32_t target[], const flt32_t source[], size_t size);
+static void Truncate (sint64_t target[], const flt32_t source[], size_t size);
 static void Truncate (sint32_t target[], const flt64_t source[], size_t size);
+static void Truncate (sint64_t target[], const flt64_t source[], size_t size);
 
 //****************************************************************************//
 //      Bitwise operations                                                    //
@@ -242,6 +248,26 @@ static void Not (sint64_t array[], size_t size);
 //      Bitwise AND                                                           //
 //============================================================================//
 
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//      Scalar bitwise AND                                                    //
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+
+// Unsigned integer types
+static void And (uint8_t target[], size_t size, uint8_t value);
+static void And (uint16_t target[], size_t size, uint16_t value);
+static void And (uint32_t target[], size_t size, uint32_t value);
+static void And (uint64_t target[], size_t size, uint64_t value);
+
+// Signed integer types
+static void And (sint8_t target[], size_t size, sint8_t value);
+static void And (sint16_t target[], size_t size, sint16_t value);
+static void And (sint32_t target[], size_t size, sint32_t value);
+static void And (sint64_t target[], size_t size, sint64_t value);
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//      Vector bitwise AND                                                    //
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+
 // Unsigned integer types
 static void And (uint8_t target[], const uint8_t source[], size_t size);
 static void And (uint16_t target[], const uint16_t source[], size_t size);
@@ -258,6 +284,26 @@ static void And (sint64_t target[], const sint64_t source[], size_t size);
 //      Bitwise OR                                                            //
 //============================================================================//
 
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//      Scalar bitwise OR                                                     //
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+
+// Unsigned integer types
+static void Or (uint8_t target[], size_t size, uint8_t value);
+static void Or (uint16_t target[], size_t size, uint16_t value);
+static void Or (uint32_t target[], size_t size, uint32_t value);
+static void Or (uint64_t target[], size_t size, uint64_t value);
+
+// Signed integer types
+static void Or (sint8_t target[], size_t size, sint8_t value);
+static void Or (sint16_t target[], size_t size, sint16_t value);
+static void Or (sint32_t target[], size_t size, sint32_t value);
+static void Or (sint64_t target[], size_t size, sint64_t value);
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//      Vector bitwise OR                                                     //
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+
 // Unsigned integer types
 static void Or (uint8_t target[], const uint8_t source[], size_t size);
 static void Or (uint16_t target[], const uint16_t source[], size_t size);
@@ -273,6 +319,26 @@ static void Or (sint64_t target[], const sint64_t source[], size_t size);
 //============================================================================//
 //      Bitwise XOR                                                           //
 //============================================================================//
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//      Scalar bitwise XOR                                                    //
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+
+// Unsigned integer types
+static void Xor (uint8_t target[], size_t size, uint8_t value);
+static void Xor (uint16_t target[], size_t size, uint16_t value);
+static void Xor (uint32_t target[], size_t size, uint32_t value);
+static void Xor (uint64_t target[], size_t size, uint64_t value);
+
+// Signed integer types
+static void Xor (sint8_t target[], size_t size, sint8_t value);
+static void Xor (sint16_t target[], size_t size, sint16_t value);
+static void Xor (sint32_t target[], size_t size, sint32_t value);
+static void Xor (sint64_t target[], size_t size, sint64_t value);
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//      Vector bitwise XOR                                                    //
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
 // Unsigned integer types
 static void Xor (uint8_t target[], const uint8_t source[], size_t size);
@@ -399,14 +465,44 @@ static flt32_t MaxAbs (const flt32_t array[], size_t size);
 static flt64_t MaxAbs (const flt64_t array[], size_t size);
 
 //****************************************************************************//
+//      Rounding                                                              //
+//****************************************************************************//
+
+// Round down (floor)
+static void RoundDown (flt32_t array[], size_t size);
+static void RoundDown (flt64_t array[], size_t size);
+
+// Round up (ceil)
+static void RoundUp (flt32_t array[], size_t size);
+static void RoundUp (flt64_t array[], size_t size);
+
+// Round to nearest integer
+static void RoundInt (flt32_t array[], size_t size);
+static void RoundInt (flt64_t array[], size_t size);
+
+// Round to nearest integer, toward zero (truncation)
+static void Truncate (flt32_t array[], size_t size);
+static void Truncate (flt64_t array[], size_t size);
+
+// Fractional part
+static void Frac (flt32_t array[], size_t size);
+static void Frac (flt64_t array[], size_t size);
+
+//****************************************************************************//
 //      Checks                                                                //
 //****************************************************************************//
 
 //============================================================================//
-//      Check for NAN values                                                  //
+//      Check for infinite values                                             //
 //============================================================================//
-static bool HasNAN (const flt32_t array[], size_t size);
-static bool HasNAN (const flt64_t array[], size_t size);
+static bool HasInf (const flt32_t array[], size_t size);
+static bool HasInf (const flt64_t array[], size_t size);
+
+//============================================================================//
+//      Check for NaN values                                                  //
+//============================================================================//
+static bool HasNaN (const flt32_t array[], size_t size);
+static bool HasNaN (const flt64_t array[], size_t size);
 
 //============================================================================//
 //      Check for overlap                                                     //
@@ -444,20 +540,12 @@ static bool Overlap (const size_t array1[], size_t size1, const size_t array2[],
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
 // Unsigned integer types
-static size_t FindFwd (uint8_t array[], size_t size, uint8_t value);
-static size_t FindFwd (uint16_t array[], size_t size, uint16_t value);
-static size_t FindFwd (uint32_t array[], size_t size, uint32_t value);
-static size_t FindFwd (uint64_t array[], size_t size, uint64_t value);
 static size_t FindFwd (const uint8_t array[], size_t size, uint8_t value);
 static size_t FindFwd (const uint16_t array[], size_t size, uint16_t value);
 static size_t FindFwd (const uint32_t array[], size_t size, uint32_t value);
 static size_t FindFwd (const uint64_t array[], size_t size, uint64_t value);
 
 // Signed integer types
-static size_t FindFwd (sint8_t array[], size_t size, sint8_t value);
-static size_t FindFwd (sint16_t array[], size_t size, sint16_t value);
-static size_t FindFwd (sint32_t array[], size_t size, sint32_t value);
-static size_t FindFwd (sint64_t array[], size_t size, sint64_t value);
 static size_t FindFwd (const sint8_t array[], size_t size, sint8_t value);
 static size_t FindFwd (const sint16_t array[], size_t size, sint16_t value);
 static size_t FindFwd (const sint32_t array[], size_t size, sint32_t value);
@@ -468,20 +556,12 @@ static size_t FindFwd (const sint64_t array[], size_t size, sint64_t value);
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
 // Unsigned integer types
-static size_t FindBwd (uint8_t array[], size_t size, uint8_t value);
-static size_t FindBwd (uint16_t array[], size_t size, uint16_t value);
-static size_t FindBwd (uint32_t array[], size_t size, uint32_t value);
-static size_t FindBwd (uint64_t array[], size_t size, uint64_t value);
 static size_t FindBwd (const uint8_t array[], size_t size, uint8_t value);
 static size_t FindBwd (const uint16_t array[], size_t size, uint16_t value);
 static size_t FindBwd (const uint32_t array[], size_t size, uint32_t value);
 static size_t FindBwd (const uint64_t array[], size_t size, uint64_t value);
 
 // Signed integer types
-static size_t FindBwd (sint8_t array[], size_t size, sint8_t value);
-static size_t FindBwd (sint16_t array[], size_t size, sint16_t value);
-static size_t FindBwd (sint32_t array[], size_t size, sint32_t value);
-static size_t FindBwd (sint64_t array[], size_t size, sint64_t value);
 static size_t FindBwd (const sint8_t array[], size_t size, sint8_t value);
 static size_t FindBwd (const sint16_t array[], size_t size, sint16_t value);
 static size_t FindBwd (const sint32_t array[], size_t size, sint32_t value);
@@ -912,20 +992,26 @@ void Array_Clone (void *array, size_t size, size_t psize);
 //****************************************************************************//
 
 // Conversion between floating-point types
-void Array_Convert_flt32_flt64 (flt32_t target[], const flt64_t source[], size_t size);
-void Array_Convert_flt64_flt32 (flt64_t target[], const flt32_t source[], size_t size);
+void Array_ConvertFlt32ToFlt64 (flt64_t target[], const flt32_t source[], size_t size);
+void Array_ConvertFlt64ToFlt32 (flt32_t target[], const flt64_t source[], size_t size);
 
-// Conversion from signed integer to floating-point
-void Array_Convert_flt32_sint32 (flt32_t target[], const sint32_t source[], size_t size);
-void Array_Convert_flt64_sint32 (flt64_t target[], const sint32_t source[], size_t size);
+// Conversion from signed integer types to floating-point types
+void Array_ConvertSint32ToFlt32 (flt32_t target[], const sint32_t source[], size_t size);
+void Array_ConvertSint32ToFlt64 (flt64_t target[], const sint32_t source[], size_t size);
+void Array_ConvertSint64ToFlt32 (flt32_t target[], const sint64_t source[], size_t size);
+void Array_ConvertSint64ToFlt64 (flt64_t target[], const sint64_t source[], size_t size);
 
-// Conversion from floating-point to signed integer
-void Array_Convert_sint32_flt32 (sint32_t target[], const flt32_t source[], size_t size);
-void Array_Convert_sint32_flt64 (sint32_t target[], const flt64_t source[], size_t size);
+// Conversion from floating-point types to signed integer types
+void Array_ConvertFlt32ToSint32 (sint32_t target[], const flt32_t source[], size_t size);
+void Array_ConvertFlt32ToSint64 (sint64_t target[], const flt32_t source[], size_t size);
+void Array_ConvertFlt64ToSint32 (sint32_t target[], const flt64_t source[], size_t size);
+void Array_ConvertFlt64ToSint64 (sint64_t target[], const flt64_t source[], size_t size);
 
-// Truncating from floating-point to signed integer
-void Array_Truncate_sint32_flt32 (sint32_t target[], const flt32_t source[], size_t size);
-void Array_Truncate_sint32_flt64 (sint32_t target[], const flt64_t source[], size_t size);
+// Truncating from floating-point types to signed integer types
+void Array_TruncateFlt32ToSint32 (sint32_t target[], const flt32_t source[], size_t size);
+void Array_TruncateFlt32ToSint64 (sint64_t target[], const flt32_t source[], size_t size);
+void Array_TruncateFlt64ToSint32 (sint32_t target[], const flt64_t source[], size_t size);
+void Array_TruncateFlt64ToSint64 (sint64_t target[], const flt64_t source[], size_t size);
 
 //****************************************************************************//
 //      Bitwise operations                                                    //
@@ -951,49 +1037,109 @@ void Array_Not_sint64 (sint64_t array[], size_t size);
 //      Bitwise AND                                                           //
 //============================================================================//
 
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//      Scalar bitwise AND                                                    //
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+
 // Unsigned integer types
-void Array_And_uint8 (uint8_t target[], const uint8_t source[], size_t size);
-void Array_And_uint16 (uint16_t target[], const uint16_t source[], size_t size);
-void Array_And_uint32 (uint32_t target[], const uint32_t source[], size_t size);
-void Array_And_uint64 (uint64_t target[], const uint64_t source[], size_t size);
+void Array_AndScalar_uint8 (uint8_t target[], size_t size, uint8_t value);
+void Array_AndScalar_uint16 (uint16_t target[], size_t size, uint16_t value);
+void Array_AndScalar_uint32 (uint32_t target[], size_t size, uint32_t value);
+void Array_AndScalar_uint64 (uint64_t target[], size_t size, uint64_t value);
 
 // Signed integer types
-void Array_And_sint8 (sint8_t target[], const sint8_t source[], size_t size);
-void Array_And_sint16 (sint16_t target[], const sint16_t source[], size_t size);
-void Array_And_sint32 (sint32_t target[], const sint32_t source[], size_t size);
-void Array_And_sint64 (sint64_t target[], const sint64_t source[], size_t size);
+void Array_AndScalar_sint8 (sint8_t target[], size_t size, sint8_t value);
+void Array_AndScalar_sint16 (sint16_t target[], size_t size, sint16_t value);
+void Array_AndScalar_sint32 (sint32_t target[], size_t size, sint32_t value);
+void Array_AndScalar_sint64 (sint64_t target[], size_t size, sint64_t value);
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//      Vector bitwise AND                                                    //
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+
+// Unsigned integer types
+void Array_AndVector_uint8 (uint8_t target[], const uint8_t source[], size_t size);
+void Array_AndVector_uint16 (uint16_t target[], const uint16_t source[], size_t size);
+void Array_AndVector_uint32 (uint32_t target[], const uint32_t source[], size_t size);
+void Array_AndVector_uint64 (uint64_t target[], const uint64_t source[], size_t size);
+
+// Signed integer types
+void Array_AndVector_sint8 (sint8_t target[], const sint8_t source[], size_t size);
+void Array_AndVector_sint16 (sint16_t target[], const sint16_t source[], size_t size);
+void Array_AndVector_sint32 (sint32_t target[], const sint32_t source[], size_t size);
+void Array_AndVector_sint64 (sint64_t target[], const sint64_t source[], size_t size);
 
 //============================================================================//
 //      Bitwise OR                                                            //
 //============================================================================//
 
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//      Scalar bitwise OR                                                     //
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+
 // Unsigned integer types
-void Array_Or_uint8 (uint8_t target[], const uint8_t source[], size_t size);
-void Array_Or_uint16 (uint16_t target[], const uint16_t source[], size_t size);
-void Array_Or_uint32 (uint32_t target[], const uint32_t source[], size_t size);
-void Array_Or_uint64 (uint64_t target[], const uint64_t source[], size_t size);
+void Array_OrScalar_uint8 (uint8_t target[], size_t size, uint8_t value);
+void Array_OrScalar_uint16 (uint16_t target[], size_t size, uint16_t value);
+void Array_OrScalar_uint32 (uint32_t target[], size_t size, uint32_t value);
+void Array_OrScalar_uint64 (uint64_t target[], size_t size, uint64_t value);
 
 // Signed integer types
-void Array_Or_sint8 (sint8_t target[], const sint8_t source[], size_t size);
-void Array_Or_sint16 (sint16_t target[], const sint16_t source[], size_t size);
-void Array_Or_sint32 (sint32_t target[], const sint32_t source[], size_t size);
-void Array_Or_sint64 (sint64_t target[], const sint64_t source[], size_t size);
+void Array_OrScalar_sint8 (sint8_t target[], size_t size, sint8_t value);
+void Array_OrScalar_sint16 (sint16_t target[], size_t size, sint16_t value);
+void Array_OrScalar_sint32 (sint32_t target[], size_t size, sint32_t value);
+void Array_OrScalar_sint64 (sint64_t target[], size_t size, sint64_t value);
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//      Vector bitwise OR                                                     //
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+
+// Unsigned integer types
+void Array_OrVector_uint8 (uint8_t target[], const uint8_t source[], size_t size);
+void Array_OrVector_uint16 (uint16_t target[], const uint16_t source[], size_t size);
+void Array_OrVector_uint32 (uint32_t target[], const uint32_t source[], size_t size);
+void Array_OrVector_uint64 (uint64_t target[], const uint64_t source[], size_t size);
+
+// Signed integer types
+void Array_OrVector_sint8 (sint8_t target[], const sint8_t source[], size_t size);
+void Array_OrVector_sint16 (sint16_t target[], const sint16_t source[], size_t size);
+void Array_OrVector_sint32 (sint32_t target[], const sint32_t source[], size_t size);
+void Array_OrVector_sint64 (sint64_t target[], const sint64_t source[], size_t size);
 
 //============================================================================//
 //      Bitwise XOR                                                           //
 //============================================================================//
 
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//      Scalar bitwise XOR                                                    //
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+
 // Unsigned integer types
-void Array_Xor_uint8 (uint8_t target[], const uint8_t source[], size_t size);
-void Array_Xor_uint16 (uint16_t target[], const uint16_t source[], size_t size);
-void Array_Xor_uint32 (uint32_t target[], const uint32_t source[], size_t size);
-void Array_Xor_uint64 (uint64_t target[], const uint64_t source[], size_t size);
+void Array_XorScalar_uint8 (uint8_t target[], size_t size, uint8_t value);
+void Array_XorScalar_uint16 (uint16_t target[], size_t size, uint16_t value);
+void Array_XorScalar_uint32 (uint32_t target[], size_t size, uint32_t value);
+void Array_XorScalar_uint64 (uint64_t target[], size_t size, uint64_t value);
 
 // Signed integer types
-void Array_Xor_sint8 (sint8_t target[], const sint8_t source[], size_t size);
-void Array_Xor_sint16 (sint16_t target[], const sint16_t source[], size_t size);
-void Array_Xor_sint32 (sint32_t target[], const sint32_t source[], size_t size);
-void Array_Xor_sint64 (sint64_t target[], const sint64_t source[], size_t size);
+void Array_XorScalar_sint8 (sint8_t target[], size_t size, sint8_t value);
+void Array_XorScalar_sint16 (sint16_t target[], size_t size, sint16_t value);
+void Array_XorScalar_sint32 (sint32_t target[], size_t size, sint32_t value);
+void Array_XorScalar_sint64 (sint64_t target[], size_t size, sint64_t value);
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//      Vector bitwise XOR                                                    //
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+
+// Unsigned integer types
+void Array_XorVector_uint8 (uint8_t target[], const uint8_t source[], size_t size);
+void Array_XorVector_uint16 (uint16_t target[], const uint16_t source[], size_t size);
+void Array_XorVector_uint32 (uint32_t target[], const uint32_t source[], size_t size);
+void Array_XorVector_uint64 (uint64_t target[], const uint64_t source[], size_t size);
+
+// Signed integer types
+void Array_XorVector_sint8 (sint8_t target[], const sint8_t source[], size_t size);
+void Array_XorVector_sint16 (sint16_t target[], const sint16_t source[], size_t size);
+void Array_XorVector_sint32 (sint32_t target[], const sint32_t source[], size_t size);
+void Array_XorVector_sint64 (sint64_t target[], const sint64_t source[], size_t size);
 
 //****************************************************************************//
 //      Arithmetic operations                                                 //
@@ -1108,14 +1254,44 @@ flt32_t Array_MaxAbs_flt32 (const flt32_t array[], size_t size);
 flt64_t Array_MaxAbs_flt64 (const flt64_t array[], size_t size);
 
 //****************************************************************************//
+//      Rounding                                                              //
+//****************************************************************************//
+
+// Round down (floor)
+void Array_RoundDown_flt32 (flt32_t array[], size_t size);
+void Array_RoundDown_flt64 (flt64_t array[], size_t size);
+
+// Round up (ceil)
+void Array_RoundUp_flt32 (flt32_t array[], size_t size);
+void Array_RoundUp_flt64 (flt64_t array[], size_t size);
+
+// Round to nearest integer
+void Array_RoundInt_flt32 (flt32_t array[], size_t size);
+void Array_RoundInt_flt64 (flt64_t array[], size_t size);
+
+// Round to nearest integer, toward zero (truncation)
+void Array_Truncate_flt32 (flt32_t array[], size_t size);
+void Array_Truncate_flt64 (flt64_t array[], size_t size);
+
+// Fractional part
+void Array_Frac_flt32 (flt32_t array[], size_t size);
+void Array_Frac_flt64 (flt64_t array[], size_t size);
+
+//****************************************************************************//
 //      Checks                                                                //
 //****************************************************************************//
 
 //============================================================================//
-//      Check for NAN values                                                  //
+//      Check for infinite values                                             //
 //============================================================================//
-bool Array_HasNAN_flt32 (const flt32_t array[], size_t size);
-bool Array_HasNAN_flt64 (const flt64_t array[], size_t size);
+bool Array_HasInf_flt32 (const flt32_t array[], size_t size);
+bool Array_HasInf_flt64 (const flt64_t array[], size_t size);
+
+//============================================================================//
+//      Check for NaN values                                                  //
+//============================================================================//
+bool Array_HasNaN_flt32 (const flt32_t array[], size_t size);
+bool Array_HasNaN_flt64 (const flt64_t array[], size_t size);
 
 //============================================================================//
 //      Check for overlap                                                     //
@@ -1153,48 +1329,32 @@ bool Array_Overlap_size (const size_t array1[], size_t size1, const size_t array
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
 // Unsigned integer types
-size_t Array_FindFwd_uint8 (uint8_t array[], size_t size, uint8_t value);
-size_t Array_FindFwd_uint16 (uint16_t array[], size_t size, uint16_t value);
-size_t Array_FindFwd_uint32 (uint32_t array[], size_t size, uint32_t value);
-size_t Array_FindFwd_uint64 (uint64_t array[], size_t size, uint64_t value);
-size_t Array_FindFwdc_uint8 (const uint8_t array[], size_t size, uint8_t value);
-size_t Array_FindFwdc_uint16 (const uint16_t array[], size_t size, uint16_t value);
-size_t Array_FindFwdc_uint32 (const uint32_t array[], size_t size, uint32_t value);
-size_t Array_FindFwdc_uint64 (const uint64_t array[], size_t size, uint64_t value);
+size_t Array_FindFwd_uint8 (const uint8_t array[], size_t size, uint8_t value);
+size_t Array_FindFwd_uint16 (const uint16_t array[], size_t size, uint16_t value);
+size_t Array_FindFwd_uint32 (const uint32_t array[], size_t size, uint32_t value);
+size_t Array_FindFwd_uint64 (const uint64_t array[], size_t size, uint64_t value);
 
 // Signed integer types
-size_t Array_FindFwd_sint8 (sint8_t array[], size_t size, sint8_t value);
-size_t Array_FindFwd_sint16 (sint16_t array[], size_t size, sint16_t value);
-size_t Array_FindFwd_sint32 (sint32_t array[], size_t size, sint32_t value);
-size_t Array_FindFwd_sint64 (sint64_t array[], size_t size, sint64_t value);
-size_t Array_FindFwdc_sint8 (const sint8_t array[], size_t size, sint8_t value);
-size_t Array_FindFwdc_sint16 (const sint16_t array[], size_t size, sint16_t value);
-size_t Array_FindFwdc_sint32 (const sint32_t array[], size_t size, sint32_t value);
-size_t Array_FindFwdc_sint64 (const sint64_t array[], size_t size, sint64_t value);
+size_t Array_FindFwd_sint8 (const sint8_t array[], size_t size, sint8_t value);
+size_t Array_FindFwd_sint16 (const sint16_t array[], size_t size, sint16_t value);
+size_t Array_FindFwd_sint32 (const sint32_t array[], size_t size, sint32_t value);
+size_t Array_FindFwd_sint64 (const sint64_t array[], size_t size, sint64_t value);
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 //      Backward direction search                                             //
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
 // Unsigned integer types
-size_t Array_FindBwd_uint8 (uint8_t array[], size_t size, uint8_t value);
-size_t Array_FindBwd_uint16 (uint16_t array[], size_t size, uint16_t value);
-size_t Array_FindBwd_uint32 (uint32_t array[], size_t size, uint32_t value);
-size_t Array_FindBwd_uint64 (uint64_t array[], size_t size, uint64_t value);
-size_t Array_FindBwdc_uint8 (const uint8_t array[], size_t size, uint8_t value);
-size_t Array_FindBwdc_uint16 (const uint16_t array[], size_t size, uint16_t value);
-size_t Array_FindBwdc_uint32 (const uint32_t array[], size_t size, uint32_t value);
-size_t Array_FindBwdc_uint64 (const uint64_t array[], size_t size, uint64_t value);
+size_t Array_FindBwd_uint8 (const uint8_t array[], size_t size, uint8_t value);
+size_t Array_FindBwd_uint16 (const uint16_t array[], size_t size, uint16_t value);
+size_t Array_FindBwd_uint32 (const uint32_t array[], size_t size, uint32_t value);
+size_t Array_FindBwd_uint64 (const uint64_t array[], size_t size, uint64_t value);
 
 // Signed integer types
-size_t Array_FindBwd_sint8 (sint8_t array[], size_t size, sint8_t value);
-size_t Array_FindBwd_sint16 (sint16_t array[], size_t size, sint16_t value);
-size_t Array_FindBwd_sint32 (sint32_t array[], size_t size, sint32_t value);
-size_t Array_FindBwd_sint64 (sint64_t array[], size_t size, sint64_t value);
-size_t Array_FindBwdc_sint8 (const sint8_t array[], size_t size, sint8_t value);
-size_t Array_FindBwdc_sint16 (const sint16_t array[], size_t size, sint16_t value);
-size_t Array_FindBwdc_sint32 (const sint32_t array[], size_t size, sint32_t value);
-size_t Array_FindBwdc_sint64 (const sint64_t array[], size_t size, sint64_t value);
+size_t Array_FindBwd_sint8 (const sint8_t array[], size_t size, sint8_t value);
+size_t Array_FindBwd_sint16 (const sint16_t array[], size_t size, sint16_t value);
+size_t Array_FindBwd_sint32 (const sint32_t array[], size_t size, sint32_t value);
+size_t Array_FindBwd_sint64 (const sint64_t array[], size_t size, sint64_t value);
 
 //============================================================================//
 //      Binary search                                                         //

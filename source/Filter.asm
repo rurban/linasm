@@ -499,7 +499,7 @@ end if
 		je		@f							; {
 		initreg	one, treg, oneval, x		;     one = 1.0
 		add		size, 1						;     size++
-		movs#x	value, one					;     value = one / temp
+		movap#x	value, one					;     value = one / temp
 		divs#x	value, temp					;     call Mul (filter, size, value)
 		call	ArrMul						; }
 ;------------------------------------------
