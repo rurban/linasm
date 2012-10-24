@@ -1,3 +1,26 @@
+2012-10-25	Release 0.98 (beta)
+-------------------------------
+Bug fixes:
+	* Math.asm: All Check functions: Fixed error in the check algorithm
+
+New features:
+	* Array.asm: Added functions "Move" and "Clone"
+	* Array.asm: Added binary search function "FindAsc" and "FindDsc" for keys searching
+	* Array.asm: Added rounding functions: "RoundDown", "RoundUp", "RoundInt", "Round" and "Truncate"
+	* Array.asm: Added scalar bitwise functions AND, OR, XOR
+	* Math.asm: Added functions "Exp2", "Exp2m1", "Exp10", "Exp10m1", "Exp", "Expm1" for real argument
+	* Math.asm: Improved functions "Exp2", "Exp10", "Exp" for integral argument
+	* Math.asm: Added trigonometric functions "SinQ", "CosQ", "TanQ", "CotQ" and "SinCosQ"
+	* Math.asm: Added function "Cath" and improved "Hypot" function
+	* Math.asm: Added "GCD" and "LCM" functions
+	* Math.asm: Added fast "RoundInt" and "Truncate" functions
+	* Math.asm: Improved "Scale2", "Scale10" and "ScaleE" functions
+	* String.asm: Added string concatenation functions and "ReplaceSymbol" function
+
+Changes in behavior:
+	* String.asm: "Copy" function returns empty string if target buffer is too small
+	* Array.asm: Changed C function names for bitwise AND, OR, and XOR
+
 2012-08-27	Release 0.97 (beta)
 -------------------------------
 Bug fixes:

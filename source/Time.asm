@@ -129,13 +129,15 @@ tzfile	equ		rsi							; time zone file name
 result	equ		rax							; result register
 stack	equ		rsp							; stack pointer
 s_buff	equ		stack + 0 * 8				; stack position of file buffer
-s_free	equ		stack + 1 * 8				; stack position of "free" variable
-s_fd	equ		stack + 2 * 8				; stack position of file descriptor
-s_error	equ		stack + 3 * 8				; stack position of "error" variable
+s_fd	equ		stack + 1 * 8				; stack position of file descriptor
+s_ptr	equ		stack + 2 * 8				; stack position of "ptr" variable
+s_size	equ		stack + 3 * 8				; stack position of "size" variable
+s_errno	equ		stack + 4 * 8				; stack position of "errno" variable
 space	= 5 * 8								; stack size required by the procedure
 ;------------------------------------------
 		sub		stack, space				; reserving stack size for local vars
 		mov		[s_buff], buffer			; save buffer pointer into the stack
+		mov		[s_ptr], buffer				; save ptr variable into the stack
 ;---[Opening tzfile for reading]-----------
 		mov		sc_prm1, tzfile
 		mov		sc_prm2, O_RDONLY
@@ -143,43 +145,42 @@ space	= 5 * 8								; stack size required by the procedure
 		mov		sc_num, SYSCALL_OPEN
 		syscall								; syscall open (tzfile, O_RDONLY, 0)
 		test	result, result				; if (result < 0)
-		js		.error						;     then go to error branch
+		js		.exit						;     then go to exit
 		mov		[s_fd], result				; save opened file descriptor into the stack
-		mov		qword [s_free], BUF_SIZE	; free = BUF_SIZE (max buffer size)
+		mov		qword [s_size], BUF_SIZE	; size = BUF_SIZE (max buffer size)
 ;---[Reading file content to the buffer]---
 .loop:	mov		sc_prm1, [s_fd]
-		mov		sc_prm2, [s_buff]
-		mov		sc_prm3, [s_free]
+		mov		sc_prm2, [s_ptr]
+		mov		sc_prm3, [s_size]
 		mov		sc_num, SYSCALL_READ
-		syscall								; syscall read (fd, buffer, free)
+		syscall								; syscall read (fd, ptr, size)
+		cmp		result, -ERRNO_INTR			; if interrupted system call
+		je		.loop						;     then repeat system call
 		test	result, result				; is (result < 0)
-		js		.close						;     then go to emergency closing branch
-		jz		@f							; if (result == 0), then break the loop
-		add		[s_buff], result			; buffer += result (bytes read)
-		sub		[s_free], result			; free -= result (bytes read)
-		jmp		.loop						; do while (result > 0)
-;---[Closing of the opened file]-----------
-@@:		mov		sc_prm1, [s_fd]
-		mov		sc_num, SYSCALL_CLOSE
-		syscall								; syscall close (fd)
-		test	result, result				; is (result < 0)
-		js		.error						;     then go to error branch
-;---[Check for buffer overflow]------------
-		mov		result, -ERRNO_NOBUFS
-		cmp		qword [s_free], 0			; if (free == 0)
-		je		.error						;     then return ERRNO_NOBUFS
-		mov		result, BUF_SIZE			; else
-		sub		result, [s_free]			;     return BUF_SIZE - free
-		add		stack, space				; restoring back the stack pointer
-		ret
+		js		.error						;     then go to emergency closing branch
+		jz		.close						; if (result = EOF), then break the loop
+		add		[s_ptr], result				; ptr += result (bytes read)
+		sub		[s_size], result			; size -= result (bytes read)
+		jnz		.loop						; do while (size != 0)
 ;---[Emergency closing of the opened file]-
-.close:	mov		[s_error], result			; save errno into the stack
+		mov		result, -ERRNO_NOBUFS		; if (size == 0), then errno = ERRNO_NOBUFS
+.error:	mov		[s_errno], result			; save errno into the stack
 		mov		sc_prm1, [s_fd]
 		mov		sc_num, SYSCALL_CLOSE
 		syscall								; syscall close (fd)
-		mov		result, [s_error]			; restore errno from the stack
-;---[Error exit branch]--------------------
-.error:	add		stack, space				; restoring back the stack pointer
+		mov		result, [s_errno]			; restore errno from the stack
+		add		stack, space				; restoring back the stack pointer
+		ret
+;---[Closing of the opened file]-----------
+.close:	mov		sc_prm1, [s_fd]
+		mov		sc_num, SYSCALL_CLOSE
+		syscall								; syscall close (fd)
+		test	result, result				; is (result < 0)
+		js		.exit						;     then go to exit
+		mov		result, [s_ptr]
+		sub		result, [s_buff]			; return ptr - buffer
+;---[Exit branch]--------------------------
+.exit:	add		stack, space				; restoring back the stack pointer
 		ret
 
 ;******************************************************************************;
@@ -322,9 +323,7 @@ zsize_of	= csize_of + 4					; offset of Time::zone_size
 		xor		value, value				; return 0 (no errors)
 		ret
 ;---[Error branch]-------------------------
-.error:	mov		dword [this + csize_of], 0	; this -> change_size = 0
-		mov		dword [this + zsize_of], 0	; this -> zone_size = 0
-		mov		value, ERRNO_NODATA			; return ERRNO_NODATA
+.error:	mov		value, -ERRNO_NODATA		; return -ERRNO_NODATA
 		ret
 
 ;******************************************************************************;
@@ -370,11 +369,16 @@ space	= BUF_SIZE + 8						; stack size required by the procedure
 		mov		prm2, buffer
 		mov		prm3, result
 		call	AnalyseFile					; call AnalyseFile (this, buffer, size)
+		test	result, result				; is (result < 0)
+		js		.error						;     then go to error branch
 ;---[Normal exit]--------------------------
 		add		stack, space				; restoring back the stack pointer
 		ret
 ;---[Error branch]-------------------------
-.error:	neg		result						; set correct sign of error code
+.error:	mov		this, [s_this]				; restore "this" pointer from the stack
+		neg		result						; correct sign of errno
+		mov		dword [this + csize_of], 0	; this -> change_size = 0
+		mov		dword [this + zsize_of], 0	; this -> zone_size = 0
 		add		stack, space				; restoring back the stack pointer
 		ret
 

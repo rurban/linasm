@@ -480,6 +480,10 @@ static void RoundUp (flt64_t array[], size_t size);
 static void RoundInt (flt32_t array[], size_t size);
 static void RoundInt (flt64_t array[], size_t size);
 
+// Round to nearest integer, away from zero
+static void Round (flt32_t array[], size_t size);
+static void Round (flt64_t array[], size_t size);
+
 // Round to nearest integer, toward zero (truncation)
 static void Truncate (flt32_t array[], size_t size);
 static void Truncate (flt64_t array[], size_t size);
@@ -1268,6 +1272,10 @@ void Array_RoundUp_flt64 (flt64_t array[], size_t size);
 // Round to nearest integer
 void Array_RoundInt_flt32 (flt32_t array[], size_t size);
 void Array_RoundInt_flt64 (flt64_t array[], size_t size);
+
+// Round to nearest integer, away from zero
+void Array_Round_flt32 (flt32_t array[], size_t size);
+void Array_Round_flt64 (flt64_t array[], size_t size);
 
 // Round to nearest integer, toward zero (truncation)
 void Array_Truncate_flt32 (flt32_t array[], size_t size);

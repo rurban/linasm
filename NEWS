@@ -7,6 +7,33 @@
 ################################################################################
 
 #******************************************************************************#
+#       Release 0.98 (beta) [2012-10-25]                                       #
+#******************************************************************************#
+
+After two months of hard working on a new release, I finally have finished
+a lot of functions (but not all of them) which have to be in final library.
+In this release I improved many functions from Math library, which were working
+too slow in previous version, and added much faster mathematical routines
+for engineering calculations.
+
+Almost all of them use vector instructions and work 2 times faster then
+their analogs from GNU C library. A performance test will be added later in
+release 0.99, when Math library is complete.
+
+Also in new release were:
+	* added functions "Move", "Clone" and rounding routines in Array library
+	* added functions "Exp2", "Exp2m1", "Exp10", "Exp10m1", "Exp", "Expm1" for
+	  real argument and improved "Exp2", "Exp10", "Exp" for integral argument
+	* improved "Scale2", "Scale10" and "ScaleE" functions
+	* added trigonometric functions "SinQ", "CosQ", "TanQ", "CotQ", "SinCosQ",
+	  "Cath" and improved "Hypot" function
+	* added "GCD" and "LCM" functions
+	* added fast "RoundInt" and "Truncate" functions
+	* fixed error in Math library (see ChangeLog for details)
+	* added string concatenation functions and "ReplaceSymbol" function in
+	  String library
+
+#******************************************************************************#
 #       Release 0.97 (beta) [2012-08-27]                                       #
 #******************************************************************************#
 

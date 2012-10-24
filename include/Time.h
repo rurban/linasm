@@ -117,7 +117,7 @@ struct tzone
 void Time_CleanTimeZone (struct tzone *tz);
 
 // Loading time zone data from tzfile
-//error_t Time_LoadTimeZone (struct tzone *tz, const char8_t tzfile[]);
+error_t Time_LoadTimeZone (struct tzone *tz, const char8_t tzfile[]);
 
 // Time conversion
 time_t Time_ConvertTime (uint8_t hour, uint8_t min, uint8_t sec);
