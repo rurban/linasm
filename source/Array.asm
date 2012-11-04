@@ -1142,6 +1142,30 @@ public	Unique16				as	'_ZN5Array6UniqueEPsm'
 public	Unique32				as	'_ZN5Array6UniqueEPim'
 public	Unique64				as	'_ZN5Array6UniqueEPxm'
 
+;******************************************************************************;
+;       Duplicate values                                                       ;
+;******************************************************************************;
+
+; Unsigned integer types
+public	Duplicates8				as	'Array_Duplicates_uint8'
+public	Duplicates16			as	'Array_Duplicates_uint16'
+public	Duplicates32			as	'Array_Duplicates_uint32'
+public	Duplicates64			as	'Array_Duplicates_uint64'
+public	Duplicates8				as	'_ZN5Array10DuplicatesEPmPhm'
+public	Duplicates16			as	'_ZN5Array10DuplicatesEPmPtm'
+public	Duplicates32			as	'_ZN5Array10DuplicatesEPmPjm'
+public	Duplicates64			as	'_ZN5Array10DuplicatesEPmPym'
+
+; Signed integer types
+public	Duplicates8				as	'Array_Duplicates_sint8'
+public	Duplicates16			as	'Array_Duplicates_sint16'
+public	Duplicates32			as	'Array_Duplicates_sint32'
+public	Duplicates64			as	'Array_Duplicates_sint64'
+public	Duplicates8				as	'_ZN5Array10DuplicatesEPmPam'
+public	Duplicates16			as	'_ZN5Array10DuplicatesEPmPsm'
+public	Duplicates32			as	'_ZN5Array10DuplicatesEPmPim'
+public	Duplicates64			as	'_ZN5Array10DuplicatesEPmPxm'
+
 ;###############################################################################
 ;#      Code section                                                           #
 ;###############################################################################
@@ -4648,7 +4672,6 @@ while i < bytes
 		add		qword [stat + i * 256 * 8 + key * 8], step
 	i = i + 1
 end while
-	prefetchnta	[array + PSTEP]				; prefetch next portion of data
 		add		array, step					; move to next element
 		sub		size, 1						; size--
 		jnz		.stat						; do while (count != 0)
@@ -4669,7 +4692,6 @@ addr	equ		r8							; address where element should be copied
 ;---[Sorting loop]-------------------------
 .loop:	cmd		temp, [array]				; temp = array[0]
 		movzx	key, byte [array + index]	; get partial key
-	prefetchnta	[array + PSTEP]				; prefetch next portion of data
 		mov		addr, [stat + key * 8]		; addr = stat[key]
 		cmd		[addr], temp				; addr[0] = temp
 		add		array, step					; array++
@@ -4954,39 +4976,94 @@ RadixSortDscKey_flt64:		RADIX_SORT_FLT	RadixSortCoreDscKey_sint64, MapKey_flt64
 ;******************************************************************************;
 ;       Unique values                                                          ;
 ;******************************************************************************;
-macro	UNIQUE	element, scale
+macro	UNIQUE	temp, last, scale
 {
 ;---[Parameters]---------------------------
 array	equ		rdi							; pointer to array
 size	equ		rsi							; array size (count of elements)
 ;---[Internal variables]-------------------
 target	equ		rax							; pointer to unique sequnce
-source	equ 	rcx							; pointer to source sequnce
+source	equ 	rdx							; pointer to source sequnce
 bytes	= 1 shl scale						; size of array element (bytes)
 ;------------------------------------------
 		lea		source, [array + bytes]		; source = array + 1
 		lea		target, [array + bytes]		; target = array + 1
-		sub		size, 1						; if (--size <= 0)
-		jbe		.skip						;     then skip the loop
+		sub		size, 1						; if (--size < 0)
+		jb		.exit						;     then go to exit
+		je		.skip						; if (size == 0), then skip the loop
+		mov		last, [array]				; last = array[0]
 ;---[Unique separation loop]---------------
-.loop:	mov		element, [source]			; do { element = source[0]
-		cmp		[target - bytes], element	;     if (target[-1] != element)
-		je		@f							;     {
-		mov		[target], element			;         target[0] = element
-		add		target, bytes				;         target++ }
-@@:		add		source, bytes				;     source++
-		sub		size, 1						;     size--
-		jnz		.loop						; } while (size)
-;---[Adjusting size of unique array]-------
-.skip:	sub		target, array				; target -= array
-		shr		target, scale
-		add		target, size				; target += size
-		ret									; return target
+.loop:	mov		temp, [source]				; temp = source[0]
+		cmp		last, temp					; if (last != temp)
+		je		@f							; {
+		mov		[target], temp				;     target[0] = temp
+		mov		last, temp					;     last = temp
+		add		target, bytes				;     target++ }
+@@:		add		source, bytes				; source++
+		sub		size, 1						; size--
+		jnz		.loop						; do while (size != 0)
+;---[Computing size of unique array]-------
+.skip:	sub		target, array
+		shr		target, scale				; return target - array
+		ret
+;------------------------------------------
+.exit:	xor		target, target				; return 0
+		ret
 }
-Unique8:	UNIQUE	dl, 0
-Unique16:	UNIQUE	dx, 1
-Unique32:	UNIQUE	edx, 2
-Unique64:	UNIQUE	rdx, 3
+Unique8:	UNIQUE	r8b, r9b, 0
+Unique16:	UNIQUE	r8w, r9w, 1
+Unique32:	UNIQUE	r8d, r9d, 2
+Unique64:	UNIQUE	r8, r9, 3
+
+;******************************************************************************;
+;       Duplicate values                                                       ;
+;******************************************************************************;
+macro	DUPLICATES	temp, last, scale
+{
+;---[Parameters]---------------------------
+count	equ		rdi							; pointer to array of counters
+array	equ		rsi							; pointer to array
+size	equ		rdx							; array size (count of elements)
+;---[Internal variables]-------------------
+target	equ		rax							; pointer to unique sequnce
+source	equ 	rcx							; pointer to source sequnce
+counter	equ		r10							; duplicate counter
+bytes	= 1 shl scale						; size of array element (bytes)
+;------------------------------------------
+		lea		source, [array + bytes]		; source = array + 1
+		mov		counter, 1					; counter = 1
+		lea		target, [array + bytes]		; target = array + 1
+		sub		size, 1						; if (--size < 0)
+		jb		.exit						;     then go to exit
+		je		.skip						; if (size == 0), then skip the loop
+		mov		last, [array]				; last = array[0]
+;---[Unique separation loop]---------------
+.loop:	mov		temp, [source]				; temp = source[0]
+		cmp		last, temp					; if (last != temp)
+		je		@f							; {
+		mov		[count], counter			;     count[0] = counter
+		mov		[target], temp				;     target[0] = temp
+		add		count, 8					;     count++
+		add		target, bytes				;     target++
+		xor		counter, counter			;     counter = 0
+		mov		last, temp					;     last = temp }
+@@:		add		source, bytes				; source++
+		add		counter, 1					; counter++
+		sub		size, 1						; size--
+		jnz		.loop						; do while (size != 0)
+;---[Computing size of unique array]-------
+.skip:	sub		target, array
+		mov		[count], counter			; count[0] = counter
+		shr		target, scale				; return target - array
+		ret
+;------------------------------------------
+.exit:	xor		target, target				; return 0
+		ret
+}
+Duplicates8:	DUPLICATES	r8b, r9b, 0
+Duplicates16:	DUPLICATES	r8w, r9w, 1
+Duplicates32:	DUPLICATES	r8d, r9d, 2
+Duplicates64:	DUPLICATES	r8, r9, 3
 
 ;###############################################################################
 ;#                                 END OF FILE                                 #

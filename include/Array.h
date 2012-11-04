@@ -14,60 +14,66 @@
 //      Key structures for searching/sorting algorithms                       //
 //****************************************************************************//
 
-// Unsigned integer keys
+//============================================================================//
+//      Unsigned integer keys                                                 //
+//============================================================================//
 struct uint8_key
 {
 	uint8_t		key;		// Key value
-	ptr_t		ptr;		// Pointer to element which has this key
+	void*		ptr;		// Pointer to element which has this key
 };
 struct uint16_key
 {
 	uint16_t	key;		// Key value
-	ptr_t		ptr;		// Pointer to element which has this key
+	void*		ptr;		// Pointer to element which has this key
 };
 struct uint32_key
 {
 	uint32_t	key;		// Key value
-	ptr_t		ptr;		// Pointer to element which has this key
+	void*		ptr;		// Pointer to element which has this key
 };
 struct uint64_key
 {
 	uint64_t	key;		// Key value
-	ptr_t		ptr;		// Pointer to element which has this key
+	void*		ptr;		// Pointer to element which has this key
 };
 
-// Signed integer keys
+//============================================================================//
+//      Signed integer keys                                                   //
+//============================================================================//
 struct sint8_key
 {
 	sint8_t		key;		// Key value
-	ptr_t		ptr;		// Pointer to element which has this key
+	void*		ptr;		// Pointer to element which has this key
 };
 struct sint16_key
 {
 	sint16_t	key;		// Key value
-	ptr_t		ptr;		// Pointer to element which has this key
+	void*		ptr;		// Pointer to element which has this key
 };
 struct sint32_key
 {
 	sint32_t	key;		// Key value
-	ptr_t		ptr;		// Pointer to element which has this key
+	void*		ptr;		// Pointer to element which has this key
 };
 struct sint64_key
 {
 	sint64_t	key;		// Key value
-	ptr_t		ptr;		// Pointer to element which has this key
+	void*		ptr;		// Pointer to element which has this key
 };
 
-// Floating-point keys
+//============================================================================//
+//      Floating-point keys                                                   //
+//============================================================================//
 struct flt32_key
 {
 	flt32_t		key;		// Key value
-	ptr_t		ptr;		// Pointer to element which has this key
+	void*		ptr;		// Pointer to element which has this key
 };
 struct flt64_key
 {
 	flt64_t		key;		// Key value
-	ptr_t		ptr;		// Pointer to element which has this key
+	void*		ptr;		// Pointer to element which has this key
 };
 
 # ifdef	__cplusplus
@@ -866,6 +872,22 @@ static size_t Unique (sint8_t array[], size_t size);
 static size_t Unique (sint16_t array[], size_t size);
 static size_t Unique (sint32_t array[], size_t size);
 static size_t Unique (sint64_t array[], size_t size);
+
+//****************************************************************************//
+//      Duplicate values                                                      //
+//****************************************************************************//
+
+// Unsigned integer types
+static size_t Duplicates (size_t count[], uint8_t array[], size_t size);
+static size_t Duplicates (size_t count[], uint16_t array[], size_t size);
+static size_t Duplicates (size_t count[], uint32_t array[], size_t size);
+static size_t Duplicates (size_t count[], uint64_t array[], size_t size);
+
+// Signed integer types
+static size_t Duplicates (size_t count[], sint8_t array[], size_t size);
+static size_t Duplicates (size_t count[], sint16_t array[], size_t size);
+static size_t Duplicates (size_t count[], sint32_t array[], size_t size);
+static size_t Duplicates (size_t count[], sint64_t array[], size_t size);
 };
 # else
 /*
@@ -1659,6 +1681,22 @@ size_t Array_Unique_sint8 (sint8_t array[], size_t size);
 size_t Array_Unique_sint16 (sint16_t array[], size_t size);
 size_t Array_Unique_sint32 (sint32_t array[], size_t size);
 size_t Array_Unique_sint64 (sint64_t array[], size_t size);
+
+//****************************************************************************//
+//      Duplicate values                                                      //
+//****************************************************************************//
+
+// Unsigned integer types
+size_t Array_Duplicates_uint8 (size_t count[], uint8_t array[], size_t size);
+size_t Array_Duplicates_uint16 (size_t count[], uint16_t array[], size_t size);
+size_t Array_Duplicates_uint32 (size_t count[], uint32_t array[], size_t size);
+size_t Array_Duplicates_uint64 (size_t count[], uint64_t array[], size_t size);
+
+// Signed integer types
+size_t Array_Duplicates_sint8 (size_t count[], sint8_t array[], size_t size);
+size_t Array_Duplicates_sint16 (size_t count[], sint16_t array[], size_t size);
+size_t Array_Duplicates_sint32 (size_t count[], sint32_t array[], size_t size);
+size_t Array_Duplicates_sint64 (size_t count[], sint64_t array[], size_t size);
 
 # endif
 /*
