@@ -150,6 +150,22 @@ NOT_FOUND	= -1							; Pattern is not found
 ;******************************************************************************;
 ;       Check End Of Line (EOL) macro                                          ;
 ;******************************************************************************;
+macro	iseol	ptr, x
+{
+if x eq b
+		cmp		byte [ptr], 0
+else if x eq w
+		cmp		word [ptr], 0
+else if x eq d
+		cmp		dword [ptr], 0
+end if
+}
+
+
+
+
+
+
 macro	checkeol	ptr, scale
 {
 if scale = 0
@@ -196,19 +212,75 @@ bytes	= 1 shl scale						; size of element (bytes)
 ;******************************************************************************;
 ;       String length                                                          ;
 ;******************************************************************************;
-macro	LEN		scale
+macro	LEN	x
 {
 ;---[Parameters]---------------------------
 string	equ		rdi							; string
 ;---[Internal variables]-------------------
-size	equ		rax							; string size
+ptr		equ		rax							; pointer to current element
+count	equ		rcx							; count of elements to align array
+fmask	equ		count						; mask of comparison results
+temp	equ		xmm0						; temporary register
+zero	equ		xmm1						; 0
+amask	= 16 - 1							; aligning mask
+if x eq b
+dmask	= 0xFFFF							; data mask
+scale	= 0									; scale value
+else if x eq w
+dmask	= 0x5555							; data mask
+scale	= 1									; scale value
+else if x eq d
+dmask	= 0x1111							; data mask
+scale	= 2									; scale value
+end if
+bscale	= 4									; block scale factor
+bytes	= 1 shl scale						; size of array element (bytes)
+block	= 1 shl bscale						; block size (bytes)
 ;------------------------------------------
-		strlen	size, string, scale
+		lea		ptr, [string - bytes]		; ptr = string - 1
+		test	string, bytes - 1			; if (string & (bytes - 1))
+		jnz		.sloop						;     then skip vector code
+		mov		count, string
+		neg		count
+		and		count, amask
+		shr		count, scale				; count = (-string & amask) >> scale
+		jz		.vctr						; if (count == 0), then skip aligning loop
+;---[Aligning loop]------------------------
+.aloop:	add		ptr, bytes					; ptr++
+		iseol	ptr, x						; if (ptr[0] == 0)
+		je		.fnd						;     then go to found branch
+		sub		count, 1					; count--
+		jnz		.aloop						; do while (count != 0)
+;------------------------------------------
+.vctr:	sub		ptr, block - bytes			; ptr -= block - bytes
+		pxor	zero, zero					; zero = 0
+;---[Vector loop]--------------------------
+.vloop:	add		ptr, block					; ptr += block
+		movdqa	temp, [ptr]					; temp = ptr[0]
+	pcmpeq#x	temp, zero					; check for temp == 0
+	pmovmskb	fmask, temp					; save check results to fmask
+		test	fmask, fmask				; if condition is met,
+		jz		.vloop						; do while (ptr[0] != 0)
+;------------------------------------------
+		and		fmask, dmask				; fmask &= dmask
+		bsf		fmask, fmask				; find first occurence of value
+		add		ptr, fmask
+;---[Found branch ]------------------------
+.fnd:	sub		ptr, string					; return ptr - string
+		shr		ptr, scale
+		ret
+;---[Scalar loop]--------------------------
+.sloop:	add		ptr, bytes					; ptr++
+		iseol	ptr, x						; check of EOL symbol
+		jne		.sloop						; do while (ptr[0] != 0)
+;------------------------------------------
+		sub		ptr, string					; return ptr - string
+		shr		ptr, scale
 		ret
 }
-Len_char8:	LEN	0
-Len_char16:	LEN	1
-Len_char32:	LEN	2
+Len_char8:	LEN	b
+Len_char16:	LEN	w
+Len_char32:	LEN	d
 
 ;******************************************************************************;
 ;       Copying                                                                ;
@@ -470,17 +542,22 @@ bytes	= 1 shl scale						; size of element (bytes)
 		mov		char1, [ptr1]				; char1 = ptr1[0]
 ;---[Internal loop]------------------------
 .loop2:	mov		char2, [ptr2]				; char2 = ptr2[0]
-		cmp		char2, char1				; if (char2 == char1), then found
-		je		@f							; go to found branch
+		cmp		char2, char1				; if (char2 == char1)
+		je		.match						;     then go to match branch
 		add		ptr2, bytes					; ptr2++
 		test	char2, char2
-		jnz		.loop2						; do while (ptr2[0] != 0)
+		jnz		.loop2						; do while (char2 != 0)
 ;---[end of internal loop]-----------------
 		add		ptr1, bytes					; ptr1++
 		jmp		.loop1						; do while (true)
 ;---[end of loop]--------------------------
-@@:		sub		ptr1, string				; return ptr1 - string
+.match:	test	char1, char1				; if (char1 == 0)
+		jz		.ntfnd						;     then no matching symbol is found
+		sub		ptr1, string				; return ptr1 - string
 		shr		ptr1, scale
+		ret
+;---[Not found branch]---------------------
+.ntfnd:	mov		ptr1, NOT_FOUND				; return NOT_FOUND
 		ret
 }
 Find2_char8:	FIND_SYMBOLS	dl, cl, 0
