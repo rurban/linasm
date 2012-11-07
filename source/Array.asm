@@ -1119,6 +1119,114 @@ public	RadixSortDscKey_flt32	as	'_ZN5Array12RadixSortDscEP9flt32_keyS1_m'
 public	RadixSortDscKey_flt64	as	'_ZN5Array12RadixSortDscEP9flt64_keyS1_m'
 
 ;******************************************************************************;
+;       Merging of sorted arrays                                               ;
+;******************************************************************************;
+
+;==============================================================================;
+;       Array merging                                                          ;
+;==============================================================================;
+
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+;       Ascending sort order                                                   ;
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+
+; Unsigned integer types
+public	MergeAsc_uint8			as	'Array_MergeAsc_uint8'
+public	MergeAsc_uint16			as	'Array_MergeAsc_uint16'
+public	MergeAsc_uint32			as	'Array_MergeAsc_uint32'
+public	MergeAsc_uint64			as	'Array_MergeAsc_uint64'
+public	MergeAsc_uint8			as	'_ZN5Array8MergeAscEPhPKhmS2_m'
+public	MergeAsc_uint16			as	'_ZN5Array8MergeAscEPtPKtmS2_m'
+public	MergeAsc_uint32			as	'_ZN5Array8MergeAscEPjPKjmS2_m'
+public	MergeAsc_uint64			as	'_ZN5Array8MergeAscEPyPKymS2_m'
+
+; Signed integer types
+public	MergeAsc_sint8			as	'Array_MergeAsc_sint8'
+public	MergeAsc_sint16			as	'Array_MergeAsc_sint16'
+public	MergeAsc_sint32			as	'Array_MergeAsc_sint32'
+public	MergeAsc_sint64			as	'Array_MergeAsc_sint64'
+public	MergeAsc_sint8			as	'_ZN5Array8MergeAscEPaPKamS2_m'
+public	MergeAsc_sint16			as	'_ZN5Array8MergeAscEPsPKsmS2_m'
+public	MergeAsc_sint32			as	'_ZN5Array8MergeAscEPiPKimS2_m'
+public	MergeAsc_sint64			as	'_ZN5Array8MergeAscEPxPKxmS2_m'
+
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+;       Descending sort order                                                  ;
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+
+; Unsigned integer types
+public	MergeDsc_uint8			as	'Array_MergeDsc_uint8'
+public	MergeDsc_uint16			as	'Array_MergeDsc_uint16'
+public	MergeDsc_uint32			as	'Array_MergeDsc_uint32'
+public	MergeDsc_uint64			as	'Array_MergeDsc_uint64'
+public	MergeDsc_uint8			as	'_ZN5Array8MergeDscEPhPKhmS2_m'
+public	MergeDsc_uint16			as	'_ZN5Array8MergeDscEPtPKtmS2_m'
+public	MergeDsc_uint32			as	'_ZN5Array8MergeDscEPjPKjmS2_m'
+public	MergeDsc_uint64			as	'_ZN5Array8MergeDscEPyPKymS2_m'
+
+; Signed integer types
+public	MergeDsc_sint8			as	'Array_MergeDsc_sint8'
+public	MergeDsc_sint16			as	'Array_MergeDsc_sint16'
+public	MergeDsc_sint32			as	'Array_MergeDsc_sint32'
+public	MergeDsc_sint64			as	'Array_MergeDsc_sint64'
+public	MergeDsc_sint8			as	'_ZN5Array8MergeDscEPaPKamS2_m'
+public	MergeDsc_sint16			as	'_ZN5Array8MergeDscEPsPKsmS2_m'
+public	MergeDsc_sint32			as	'_ZN5Array8MergeDscEPiPKimS2_m'
+public	MergeDsc_sint64			as	'_ZN5Array8MergeDscEPxPKxmS2_m'
+
+;==============================================================================;
+;       Key merging                                                            ;
+;==============================================================================;
+
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+;       Ascending sort order                                                   ;
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+
+; Unsigned integer types
+public	MergeAscKey_uint8			as	'Array_MergeAsc_uint8key'
+public	MergeAscKey_uint16			as	'Array_MergeAsc_uint16key'
+public	MergeAscKey_uint32			as	'Array_MergeAsc_uint32key'
+public	MergeAscKey_uint64			as	'Array_MergeAsc_uint64key'
+public	MergeAscKey_uint8			as	'_ZN5Array8MergeAscEP9uint8_keyPKS0_mS3_m'
+public	MergeAscKey_uint16			as	'_ZN5Array8MergeAscEP10uint16_keyPKS0_mS3_m'
+public	MergeAscKey_uint32			as	'_ZN5Array8MergeAscEP10uint32_keyPKS0_mS3_m'
+public	MergeAscKey_uint64			as	'_ZN5Array8MergeAscEP10uint64_keyPKS0_mS3_m'
+
+; Signed integer types
+public	MergeAscKey_sint8			as	'Array_MergeAsc_sint8key'
+public	MergeAscKey_sint16			as	'Array_MergeAsc_sint16key'
+public	MergeAscKey_sint32			as	'Array_MergeAsc_sint32key'
+public	MergeAscKey_sint64			as	'Array_MergeAsc_sint64key'
+public	MergeAscKey_sint8			as	'_ZN5Array8MergeAscEP9sint8_keyPKS0_mS3_m'
+public	MergeAscKey_sint16			as	'_ZN5Array8MergeAscEP10sint16_keyPKS0_mS3_m'
+public	MergeAscKey_sint32			as	'_ZN5Array8MergeAscEP10sint32_keyPKS0_mS3_m'
+public	MergeAscKey_sint64			as	'_ZN5Array8MergeAscEP10sint64_keyPKS0_mS3_m'
+
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+;       Descending sort order                                                  ;
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+
+; Unsigned integer types
+public	MergeDscKey_uint8			as	'Array_MergeDsc_uint8key'
+public	MergeDscKey_uint16			as	'Array_MergeDsc_uint16key'
+public	MergeDscKey_uint32			as	'Array_MergeDsc_uint32key'
+public	MergeDscKey_uint64			as	'Array_MergeDsc_uint64key'
+public	MergeDscKey_uint8			as	'_ZN5Array8MergeDscEP9uint8_keyPKS0_mS3_m'
+public	MergeDscKey_uint16			as	'_ZN5Array8MergeDscEP10uint16_keyPKS0_mS3_m'
+public	MergeDscKey_uint32			as	'_ZN5Array8MergeDscEP10uint32_keyPKS0_mS3_m'
+public	MergeDscKey_uint64			as	'_ZN5Array8MergeDscEP10uint64_keyPKS0_mS3_m'
+
+; Signed integer types
+public	MergeDscKey_sint8			as	'Array_MergeDsc_sint8key'
+public	MergeDscKey_sint16			as	'Array_MergeDsc_sint16key'
+public	MergeDscKey_sint32			as	'Array_MergeDsc_sint32key'
+public	MergeDscKey_sint64			as	'Array_MergeDsc_sint64key'
+public	MergeDscKey_sint8			as	'_ZN5Array8MergeDscEP9sint8_keyPKS0_mS3_m'
+public	MergeDscKey_sint16			as	'_ZN5Array8MergeDscEP10sint16_keyPKS0_mS3_m'
+public	MergeDscKey_sint32			as	'_ZN5Array8MergeDscEP10sint32_keyPKS0_mS3_m'
+public	MergeDscKey_sint64			as	'_ZN5Array8MergeDscEP10sint64_keyPKS0_mS3_m'
+
+;******************************************************************************;
 ;       Unique values                                                          ;
 ;******************************************************************************;
 
@@ -4272,7 +4380,7 @@ bytes	= 1 shl scale						; size of array element (bytes)
 		mov		median, [left + size]		; median = left [size]
 		jmp		@f							; skip swap section
 ;---[Swap loop]----------------------------
-if bytes = 16
+if scale = 4
 .swap:	movdqu	swap1, [l_ptr]				; swap1 = l_ptr[0]
 		movdqu	swap2, [r_ptr]				; swap2 = r_ptr[0]
 		movdqu	[l_ptr], swap2				; l_ptr[0] = swap2
@@ -4334,14 +4442,14 @@ end if
 		lea		l_ptr, [left + bytes]
 ;---[Insert sort loop]---------------------
 .iloop:	mov		median, [l_ptr]
-if bytes = 16
+if scale = 4
 		movdqu	swap1, [l_ptr]
 end if
 		mov		r_ptr, l_ptr
 ;---[Internal loop]------------------------
 @@:		cmp		median, [r_ptr - bytes]
 		jn#op1	@f
-if bytes = 16
+if scale = 4
 		movdqu	swap2, [r_ptr - bytes]
 		movdqu	[r_ptr], swap2
 else
@@ -4353,7 +4461,7 @@ end if
 		ja		@b
 ;---[Internal loop end]--------------------
 @@:		add		l_ptr, bytes
-if bytes = 16
+if scale = 4
 		movdqu	[r_ptr], swap1
 else
 		mov		[r_ptr], median
@@ -4974,6 +5082,134 @@ RadixSortDscKey_flt32:		RADIX_SORT_FLT	RadixSortCoreDscKey_sint32, MapKey_flt32
 RadixSortDscKey_flt64:		RADIX_SORT_FLT	RadixSortCoreDscKey_sint64, MapKey_flt64
 
 ;******************************************************************************;
+;       Merging of sorted arrays                                               ;
+;******************************************************************************;
+macro	MERGE	key1, key2, x, scale
+{
+;---[Parameters]---------------------------
+target	equ		rdi							; pointer to target array
+source1	equ		rsi							; pointer to first source array
+size1	equ		rdx							; size of first array
+source2	equ		rcx							; pointer to second source array
+size2	equ		r8							; size of second array
+;---[Internal variables]-------------------
+temp	equ		xmm0						; temporary register
+param2	equ		rsi							; register to pass 2 parameter to function
+param3	equ		rdx							; register to pass 3 parameter to function
+bytes	= 1 shl scale						; size of array element (bytes)
+;------------------------------------------
+		test	size1, size1				; if (size1 == 0)
+		jz		.copy1						;     then call Copy (target, source2, size2)
+		test	size2, size2				; if (size2 == 0)
+		jz		.copy2						;     then call Copy (target, source1, size1)
+;---[Merging loop]-------------------------
+.loop:	mov		key1, [source1]				; key1 = source1[0]
+		mov		key2, [source2]				; key2 = source2[0]
+		cmp		key1, key2					; if (key1 condition key2)
+		j#x		@f							;     then go to associated branch
+if scale = 4
+		movdqu	temp, [source1]
+		movdqu	[target], temp				; target[0] = source1[0]
+else
+		mov		[target], key1				; target[0] = key1
+end if
+		add		source1, bytes				; source1++
+		add		target, bytes				; target++
+		sub		size1, 1					; size1--
+		jz		.copy1						; if (size1 == 0), then call Copy (target, source2, size2)
+		jmp		.loop						; do while (size1 != 0 && size2 != 0)
+@@:
+if scale = 4
+		movdqu	temp, [source2]
+		movdqu	[target], temp				; target[0] = source2[0]
+else
+		mov		[target], key2				; target[0] = key2
+end if
+		add		source2, bytes				; source2++
+		add		target, bytes				; targe++
+		sub		size2, 1					; size2--
+		jz		.copy2						; if (size2 == 0), then call Copy (target, source1, size1)
+		jmp		.loop						; do while (size1 != 0 && size2 != 0)
+;------------------------------------------
+.copy1:	mov		param2, source2
+		mov		param3, size2
+.copy2:	shl		param3, scale
+		jmp		CopyFwd8					; call Copy (target, source, size)
+}
+
+;==============================================================================;
+;       Array merging                                                          ;
+;==============================================================================;
+
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+;       Ascending sort order                                                   ;
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+
+; Unsigned integer types
+MergeAsc_uint8:		MERGE	r9b, r10b, a, 0
+MergeAsc_uint16:	MERGE	r9w, r10w, a, 1
+MergeAsc_uint32:	MERGE	r9d, r10d, a, 2
+MergeAsc_uint64:	MERGE	r9, r10, a, 3
+
+; Signed integer types
+MergeAsc_sint8:		MERGE	r9b, r10b, g, 0
+MergeAsc_sint16:	MERGE	r9w, r10w, g, 1
+MergeAsc_sint32:	MERGE	r9d, r10d, g, 2
+MergeAsc_sint64:	MERGE	r9, r10, g, 3
+
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+;       Descending sort order                                                  ;
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+
+; Unsigned integer types
+MergeDsc_uint8:		MERGE	r9b, r10b, b, 0
+MergeDsc_uint16:	MERGE	r9w, r10w, b, 1
+MergeDsc_uint32:	MERGE	r9d, r10d, b, 2
+MergeDsc_uint64:	MERGE	r9, r10, b, 3
+
+; Signed integer types
+MergeDsc_sint8:		MERGE	r9b, r10b, l, 0
+MergeDsc_sint16:	MERGE	r9w, r10w, l, 1
+MergeDsc_sint32:	MERGE	r9d, r10d, l, 2
+MergeDsc_sint64:	MERGE	r9, r10, l, 3
+
+;==============================================================================;
+;       Key merging                                                            ;
+;==============================================================================;
+
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+;       Ascending sort order                                                   ;
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+
+; Unsigned integer types
+MergeAscKey_uint8:	MERGE	r9b, r10b, a, 4
+MergeAscKey_uint16:	MERGE	r9w, r10w, a, 4
+MergeAscKey_uint32:	MERGE	r9d, r10d, a, 4
+MergeAscKey_uint64:	MERGE	r9, r10, a, 4
+
+; Signed integer types
+MergeAscKey_sint8:	MERGE	r9b, r10b, g, 4
+MergeAscKey_sint16:	MERGE	r9w, r10w, g, 4
+MergeAscKey_sint32:	MERGE	r9d, r10d, g, 4
+MergeAscKey_sint64:	MERGE	r9, r10, g, 4
+
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+;       Descending sort order                                                  ;
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+
+; Unsigned integer types
+MergeDscKey_uint8:	MERGE	r9b, r10b, b, 4
+MergeDscKey_uint16:	MERGE	r9w, r10w, b, 4
+MergeDscKey_uint32:	MERGE	r9d, r10d, b, 4
+MergeDscKey_uint64:	MERGE	r9, r10, b, 4
+
+; Signed integer types
+MergeDscKey_sint8:	MERGE	r9b, r10b, l, 4
+MergeDscKey_sint16:	MERGE	r9w, r10w, l, 4
+MergeDscKey_sint32:	MERGE	r9d, r10d, l, 4
+MergeDscKey_sint64:	MERGE	r9, r10, l, 4
+
+;******************************************************************************;
 ;       Unique values                                                          ;
 ;******************************************************************************;
 macro	UNIQUE	temp, last, scale
@@ -4986,6 +5222,7 @@ target	equ		rax							; pointer to unique sequnce
 source	equ 	rdx							; pointer to source sequnce
 bytes	= 1 shl scale						; size of array element (bytes)
 ;------------------------------------------
+	prefetchnta	[array]						; prefetch data
 		lea		source, [array + bytes]		; source = array + 1
 		lea		target, [array + bytes]		; target = array + 1
 		sub		size, 1						; if (--size < 0)
@@ -4994,6 +5231,7 @@ bytes	= 1 shl scale						; size of array element (bytes)
 		mov		last, [array]				; last = array[0]
 ;---[Unique separation loop]---------------
 .loop:	mov		temp, [source]				; temp = source[0]
+	prefetchnta	[source + PSTEP]			; prefetch next portion of data
 		cmp		last, temp					; if (last != temp)
 		je		@f							; {
 		mov		[target], temp				;     target[0] = temp
@@ -5030,6 +5268,7 @@ source	equ 	rcx							; pointer to source sequnce
 counter	equ		r10							; duplicate counter
 bytes	= 1 shl scale						; size of array element (bytes)
 ;------------------------------------------
+	prefetchnta	[array]						; prefetch data
 		lea		source, [array + bytes]		; source = array + 1
 		mov		counter, 1					; counter = 1
 		lea		target, [array + bytes]		; target = array + 1
@@ -5039,6 +5278,7 @@ bytes	= 1 shl scale						; size of array element (bytes)
 		mov		last, [array]				; last = array[0]
 ;---[Unique separation loop]---------------
 .loop:	mov		temp, [source]				; temp = source[0]
+	prefetchnta	[source + PSTEP]			; prefetch next portion of data
 		cmp		last, temp					; if (last != temp)
 		je		@f							; {
 		mov		[count], counter			;     count[0] = counter

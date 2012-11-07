@@ -858,6 +858,82 @@ static void RadixSortDsc (flt32_key array[], flt32_key temp[], size_t size);
 static void RadixSortDsc (flt64_key array[], flt64_key temp[], size_t size);
 
 //****************************************************************************//
+//      Merging of sorted arrays                                              //
+//****************************************************************************//
+
+//============================================================================//
+//      Array merging                                                         //
+//============================================================================//
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//      Ascending sort order                                                  //
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+
+// Unsigned integer types
+static void MergeAsc (uint8_t target[], const uint8_t source1[], size_t size1, const uint8_t source2[], size_t size2);
+static void MergeAsc (uint16_t target[], const uint16_t source1[], size_t size1, const uint16_t source2[], size_t size2);
+static void MergeAsc (uint32_t target[], const uint32_t source1[], size_t size1, const uint32_t source2[], size_t size2);
+static void MergeAsc (uint64_t target[], const uint64_t source1[], size_t size1, const uint64_t source2[], size_t size2);
+
+// Signed integer types
+static void MergeAsc (sint8_t target[], const sint8_t source1[], size_t size1, const sint8_t source2[], size_t size2);
+static void MergeAsc (sint16_t target[], const sint16_t source1[], size_t size1, const sint16_t source2[], size_t size2);
+static void MergeAsc (sint32_t target[], const sint32_t source1[], size_t size1, const sint32_t source2[], size_t size2);
+static void MergeAsc (sint64_t target[], const sint64_t source1[], size_t size1, const sint64_t source2[], size_t size2);
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//      Descending sort order                                                 //
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+
+// Unsigned integer types
+static void MergeDsc (uint8_t target[], const uint8_t source1[], size_t size1, const uint8_t source2[], size_t size2);
+static void MergeDsc (uint16_t target[], const uint16_t source1[], size_t size1, const uint16_t source2[], size_t size2);
+static void MergeDsc (uint32_t target[], const uint32_t source1[], size_t size1, const uint32_t source2[], size_t size2);
+static void MergeDsc (uint64_t target[], const uint64_t source1[], size_t size1, const uint64_t source2[], size_t size2);
+
+// Signed integer types
+static void MergeDsc (sint8_t target[], const sint8_t source1[], size_t size1, const sint8_t source2[], size_t size2);
+static void MergeDsc (sint16_t target[], const sint16_t source1[], size_t size1, const sint16_t source2[], size_t size2);
+static void MergeDsc (sint32_t target[], const sint32_t source1[], size_t size1, const sint32_t source2[], size_t size2);
+static void MergeDsc (sint64_t target[], const sint64_t source1[], size_t size1, const sint64_t source2[], size_t size2);
+
+//============================================================================//
+//      Key merging                                                           //
+//============================================================================//
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//      Ascending sort order                                                  //
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+
+// Unsigned integer types
+static void MergeAsc (uint8_key target[], const uint8_key source1[], size_t size1, const uint8_key source2[], size_t size2);
+static void MergeAsc (uint16_key target[], const uint16_key source1[], size_t size1, const uint16_key source2[], size_t size2);
+static void MergeAsc (uint32_key target[], const uint32_key source1[], size_t size1, const uint32_key source2[], size_t size2);
+static void MergeAsc (uint64_key target[], const uint64_key source1[], size_t size1, const uint64_key source2[], size_t size2);
+
+// Signed integer types
+static void MergeAsc (sint8_key target[], const sint8_key source1[], size_t size1, const sint8_key source2[], size_t size2);
+static void MergeAsc (sint16_key target[], const sint16_key source1[], size_t size1, const sint16_key source2[], size_t size2);
+static void MergeAsc (sint32_key target[], const sint32_key source1[], size_t size1, const sint32_key source2[], size_t size2);
+static void MergeAsc (sint64_key target[], const sint64_key source1[], size_t size1, const sint64_key source2[], size_t size2);
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//      Descending sort order                                                 //
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+
+// Unsigned integer types
+static void MergeDsc (uint8_key target[], const uint8_key source1[], size_t size1, const uint8_key source2[], size_t size2);
+static void MergeDsc (uint16_key target[], const uint16_key source1[], size_t size1, const uint16_key source2[], size_t size2);
+static void MergeDsc (uint32_key target[], const uint32_key source1[], size_t size1, const uint32_key source2[], size_t size2);
+static void MergeDsc (uint64_key target[], const uint64_key source1[], size_t size1, const uint64_key source2[], size_t size2);
+
+// Signed integer types
+static void MergeDsc (sint8_key target[], const sint8_key source1[], size_t size1, const sint8_key source2[], size_t size2);
+static void MergeDsc (sint16_key target[], const sint16_key source1[], size_t size1, const sint16_key source2[], size_t size2);
+static void MergeDsc (sint32_key target[], const sint32_key source1[], size_t size1, const sint32_key source2[], size_t size2);
+static void MergeDsc (sint64_key target[], const sint64_key source1[], size_t size1, const sint64_key source2[], size_t size2);
+
+//****************************************************************************//
 //      Unique values                                                         //
 //****************************************************************************//
 
@@ -1665,6 +1741,82 @@ void Array_RadixSortDsc_sint64key (struct sint64_key array[], struct sint64_key 
 // Floating-point types
 void Array_RadixSortDsc_flt32key (struct flt32_key array[], struct flt32_key temp[], size_t size);
 void Array_RadixSortDsc_flt64key (struct flt64_key array[], struct flt64_key temp[], size_t size);
+
+//****************************************************************************//
+//      Merging of sorted arrays                                              //
+//****************************************************************************//
+
+//============================================================================//
+//      Array merging                                                         //
+//============================================================================//
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//      Ascending sort order                                                  //
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+
+// Unsigned integer types
+void Array_MergeAsc_uint8 (uint8_t target[], const uint8_t source1[], size_t size1, const uint8_t source2[], size_t size2);
+void Array_MergeAsc_uint16 (uint16_t target[], const uint16_t source1[], size_t size1, const uint16_t source2[], size_t size2);
+void Array_MergeAsc_uint32 (uint32_t target[], const uint32_t source1[], size_t size1, const uint32_t source2[], size_t size2);
+void Array_MergeAsc_uint64 (uint64_t target[], const uint64_t source1[], size_t size1, const uint64_t source2[], size_t size2);
+
+// Signed integer types
+void Array_MergeAsc_sint8 (sint8_t target[], const sint8_t source1[], size_t size1, const sint8_t source2[], size_t size2);
+void Array_MergeAsc_sint16 (sint16_t target[], const sint16_t source1[], size_t size1, const sint16_t source2[], size_t size2);
+void Array_MergeAsc_sint32 (sint32_t target[], const sint32_t source1[], size_t size1, const sint32_t source2[], size_t size2);
+void Array_MergeAsc_sint64 (sint64_t target[], const sint64_t source1[], size_t size1, const sint64_t source2[], size_t size2);
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//      Descending sort order                                                 //
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+
+// Unsigned integer types
+void Array_MergeDsc_uint8 (uint8_t target[], const uint8_t source1[], size_t size1, const uint8_t source2[], size_t size2);
+void Array_MergeDsc_uint16 (uint16_t target[], const uint16_t source1[], size_t size1, const uint16_t source2[], size_t size2);
+void Array_MergeDsc_uint32 (uint32_t target[], const uint32_t source1[], size_t size1, const uint32_t source2[], size_t size2);
+void Array_MergeDsc_uint64 (uint64_t target[], const uint64_t source1[], size_t size1, const uint64_t source2[], size_t size2);
+
+// Signed integer types
+void Array_MergeDsc_sint8 (sint8_t target[], const sint8_t source1[], size_t size1, const sint8_t source2[], size_t size2);
+void Array_MergeDsc_sint16 (sint16_t target[], const sint16_t source1[], size_t size1, const sint16_t source2[], size_t size2);
+void Array_MergeDsc_sint32 (sint32_t target[], const sint32_t source1[], size_t size1, const sint32_t source2[], size_t size2);
+void Array_MergeDsc_sint64 (sint64_t target[], const sint64_t source1[], size_t size1, const sint64_t source2[], size_t size2);
+
+//============================================================================//
+//      Key merging                                                           //
+//============================================================================//
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//      Ascending sort order                                                  //
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+
+// Unsigned integer types
+void Array_MergeAsc_uint8key (struct uint8_key target[], const struct uint8_key source1[], size_t size1, const struct uint8_key source2[], size_t size2);
+void Array_MergeAsc_uint16key (struct uint16_key target[], const struct uint16_key source1[], size_t size1, const struct uint16_key source2[], size_t size2);
+void Array_MergeAsc_uint32key (struct uint32_key target[], const struct uint32_key source1[], size_t size1, const struct uint32_key source2[], size_t size2);
+void Array_MergeAsc_uint64key (struct uint64_key target[], const struct uint64_key source1[], size_t size1, const struct uint64_key source2[], size_t size2);
+
+// Signed integer types
+void Array_MergeAsc_sint8key (struct sint8_key target[], const struct sint8_key source1[], size_t size1, const struct sint8_key source2[], size_t size2);
+void Array_MergeAsc_sint16key (struct sint16_key target[], const struct sint16_key source1[], size_t size1, const struct sint16_key source2[], size_t size2);
+void Array_MergeAsc_sint32key (struct sint32_key target[], const struct sint32_key source1[], size_t size1, const struct sint32_key source2[], size_t size2);
+void Array_MergeAsc_sint64key (struct sint64_key target[], const struct sint64_key source1[], size_t size1, const struct sint64_key source2[], size_t size2);
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//      Descending sort order                                                 //
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+
+// Unsigned integer types
+void Array_MergeDsc_uint8key (struct uint8_key target[], const struct uint8_key source1[], size_t size1, const struct uint8_key source2[], size_t size2);
+void Array_MergeDsc_uint16key (struct uint16_key target[], const struct uint16_key source1[], size_t size1, const struct uint16_key source2[], size_t size2);
+void Array_MergeDsc_uint32key (struct uint32_key target[], const struct uint32_key source1[], size_t size1, const struct uint32_key source2[], size_t size2);
+void Array_MergeDsc_uint64key (struct uint64_key target[], const struct uint64_key source1[], size_t size1, const struct uint64_key source2[], size_t size2);
+
+// Signed integer types
+void Array_MergeDsc_sint8key (struct sint8_key target[], const struct sint8_key source1[], size_t size1, const struct sint8_key source2[], size_t size2);
+void Array_MergeDsc_sint16key (struct sint16_key target[], const struct sint16_key source1[], size_t size1, const struct sint16_key source2[], size_t size2);
+void Array_MergeDsc_sint32key (struct sint32_key target[], const struct sint32_key source1[], size_t size1, const struct sint32_key source2[], size_t size2);
+void Array_MergeDsc_sint64key (struct sint64_key target[], const struct sint64_key source1[], size_t size1, const struct sint64_key source2[], size_t size2);
 
 //****************************************************************************//
 //      Unique values                                                         //
