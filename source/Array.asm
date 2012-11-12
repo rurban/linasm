@@ -1181,20 +1181,24 @@ public	Unique8					as	'Array_Unique_uint8'
 public	Unique16				as	'Array_Unique_uint16'
 public	Unique32				as	'Array_Unique_uint32'
 public	Unique64				as	'Array_Unique_uint64'
-public	Unique8					as	'_ZN5Array6UniqueEPhm'
-public	Unique16				as	'_ZN5Array6UniqueEPtm'
-public	Unique32				as	'_ZN5Array6UniqueEPjm'
-public	Unique64				as	'_ZN5Array6UniqueEPym'
+public	Unique8					as	'_ZN5Array6UniqueEPhPKhm'
+public	Unique16				as	'_ZN5Array6UniqueEPtPKtm'
+public	Unique32				as	'_ZN5Array6UniqueEPjPKjm'
+public	Unique64				as	'_ZN5Array6UniqueEPyPKym'
 
 ; Signed integer types
 public	Unique8					as	'Array_Unique_sint8'
 public	Unique16				as	'Array_Unique_sint16'
 public	Unique32				as	'Array_Unique_sint32'
 public	Unique64				as	'Array_Unique_sint64'
-public	Unique8					as	'_ZN5Array6UniqueEPam'
-public	Unique16				as	'_ZN5Array6UniqueEPsm'
-public	Unique32				as	'_ZN5Array6UniqueEPim'
-public	Unique64				as	'_ZN5Array6UniqueEPxm'
+public	Unique8					as	'_ZN5Array6UniqueEPaPKam'
+public	Unique16				as	'_ZN5Array6UniqueEPsPKsm'
+public	Unique32				as	'_ZN5Array6UniqueEPiPKim'
+public	Unique64				as	'_ZN5Array6UniqueEPxPKxm'
+
+; Other types
+public	Unique64				as	'Array_Unique_size'
+public	Unique64				as	'_ZN5Array6UniqueEPmPKmm'
 
 ;******************************************************************************;
 ;       Duplicate values                                                       ;
@@ -1205,20 +1209,24 @@ public	Duplicates8				as	'Array_Duplicates_uint8'
 public	Duplicates16			as	'Array_Duplicates_uint16'
 public	Duplicates32			as	'Array_Duplicates_uint32'
 public	Duplicates64			as	'Array_Duplicates_uint64'
-public	Duplicates8				as	'_ZN5Array10DuplicatesEPmPhm'
-public	Duplicates16			as	'_ZN5Array10DuplicatesEPmPtm'
-public	Duplicates32			as	'_ZN5Array10DuplicatesEPmPjm'
-public	Duplicates64			as	'_ZN5Array10DuplicatesEPmPym'
+public	Duplicates8				as	'_ZN5Array10DuplicatesEPhPmPKhm'
+public	Duplicates16			as	'_ZN5Array10DuplicatesEPtPmPKtm'
+public	Duplicates32			as	'_ZN5Array10DuplicatesEPjPmPKjm'
+public	Duplicates64			as	'_ZN5Array10DuplicatesEPyPmPKym'
 
 ; Signed integer types
 public	Duplicates8				as	'Array_Duplicates_sint8'
 public	Duplicates16			as	'Array_Duplicates_sint16'
 public	Duplicates32			as	'Array_Duplicates_sint32'
 public	Duplicates64			as	'Array_Duplicates_sint64'
-public	Duplicates8				as	'_ZN5Array10DuplicatesEPmPam'
-public	Duplicates16			as	'_ZN5Array10DuplicatesEPmPsm'
-public	Duplicates32			as	'_ZN5Array10DuplicatesEPmPim'
-public	Duplicates64			as	'_ZN5Array10DuplicatesEPmPxm'
+public	Duplicates8				as	'_ZN5Array10DuplicatesEPaPmPKam'
+public	Duplicates16			as	'_ZN5Array10DuplicatesEPsPmPKsm'
+public	Duplicates32			as	'_ZN5Array10DuplicatesEPiPmPKim'
+public	Duplicates64			as	'_ZN5Array10DuplicatesEPxPmPKxm'
+
+; Other types
+public	Duplicates64			as	'Array_Duplicates_size'
+public	Duplicates64			as	'_ZN5Array10DuplicatesEPmPmPKmm'
 
 ;******************************************************************************;
 ;       Checks                                                                 ;
@@ -5363,37 +5371,37 @@ MergeKeyDsc_sint64:	MERGE_KEY	r10, r11, l, 3
 macro	UNIQUE	temp, last, scale
 {
 ;---[Parameters]---------------------------
-array	equ		rdi							; pointer to array
-size	equ		rsi							; array size (count of elements)
+unique	equ		rdi							; pointer to array of unique values
+array	equ		rsi							; pointer to array
+size	equ		rdx							; array size (count of elements)
 ;---[Internal variables]-------------------
-target	equ		rax							; pointer to unique sequnce
-source	equ 	rdx							; pointer to source sequnce
+ptr		equ		rax							; pointer to unique sequnce
 bytes	= 1 shl scale						; size of array element (bytes)
 ;------------------------------------------
-	prefetchnta	[array]						; prefetch data
-		lea		source, [array + bytes]		; source = array + 1
-		lea		target, [array + bytes]		; target = array + 1
-		sub		size, 1						; if (--size < 0)
-		jb		.exit						;     then go to exit
-		je		.skip						; if (size == 0), then skip the loop
+		test	size, size					; if (size == 0)
+		jz		.exit						;     then go to exit
 		mov		last, [array]				; last = array[0]
+		lea		ptr, [unique + bytes]		; ptr = unique + 1
+		mov		[unique], last				; unique[0] = last
+		add		array, bytes				; array++
+		sub		size, 1						; if (--size == 0)
+		jz		.skip						;     then skip the loop
 ;---[Unique separation loop]---------------
-.loop:	mov		temp, [source]				; temp = source[0]
-	prefetchnta	[source + PSTEP]			; prefetch next portion of data
-		cmp		last, temp					; if (last != temp)
+.loop:	mov		temp, [array]				; temp = array[0]
+		cmp		temp, last					; if (temp != last)
 		je		@f							; {
-		mov		[target], temp				;     target[0] = temp
-		mov		last, temp					;     last = temp
-		add		target, bytes				;     target++ }
-@@:		add		source, bytes				; source++
+		mov		[ptr], temp					;     ptr[0] = temp
+		add		ptr, bytes					;     ptr++
+		mov		last, temp					;     last = temp }
+@@:		add		array, bytes				; array++
 		sub		size, 1						; size--
 		jnz		.loop						; do while (size != 0)
 ;---[Computing size of unique array]-------
-.skip:	sub		target, array
-		shr		target, scale				; return target - array
+.skip:	sub		ptr, unique
+		shr		ptr, scale					; return ptr - unique
 		ret
 ;------------------------------------------
-.exit:	xor		target, target				; return 0
+.exit:	xor		ptr, ptr					; return 0
 		ret
 }
 Unique8:	UNIQUE	r8b, r9b, 0
@@ -5407,45 +5415,45 @@ Unique64:	UNIQUE	r8, r9, 3
 macro	DUPLICATES	temp, last, scale
 {
 ;---[Parameters]---------------------------
-count	equ		rdi							; pointer to array of counters
-array	equ		rsi							; pointer to array
-size	equ		rdx							; array size (count of elements)
+unique	equ		rdi							; pointer to array of unique values
+count	equ		rsi							; pointer to array of counters
+array	equ		rdx							; pointer to array
+size	equ		rcx							; array size (count of elements)
 ;---[Internal variables]-------------------
-target	equ		rax							; pointer to unique sequnce
-source	equ 	rcx							; pointer to source sequnce
+ptr		equ		rax							; pointer to unique sequnce
 counter	equ		r10							; duplicate counter
 bytes	= 1 shl scale						; size of array element (bytes)
 ;------------------------------------------
-	prefetchnta	[array]						; prefetch data
-		lea		source, [array + bytes]		; source = array + 1
-		mov		counter, 1					; counter = 1
-		lea		target, [array + bytes]		; target = array + 1
-		sub		size, 1						; if (--size < 0)
-		jb		.exit						;     then go to exit
-		je		.skip						; if (size == 0), then skip the loop
+		test	size, size					; if (size == 0)
+		jz		.exit						;     then go to exit
 		mov		last, [array]				; last = array[0]
+		lea		ptr, [unique + bytes]		; ptr = unique + 1
+		mov		[unique], last				; unique[0] = last
+		add		array, bytes				; array++
+		mov		counter, 1					; counter = 1
+		sub		size, 1						; if (--size == 0)
+		jz		.skip						;     then skip the loop
 ;---[Unique separation loop]---------------
-.loop:	mov		temp, [source]				; temp = source[0]
-	prefetchnta	[source + PSTEP]			; prefetch next portion of data
-		cmp		last, temp					; if (last != temp)
+.loop:	mov		temp, [array]				; temp = array[0]
+		cmp		temp, last					; if (temp != last)
 		je		@f							; {
 		mov		[count], counter			;     count[0] = counter
-		mov		[target], temp				;     target[0] = temp
+		mov		[ptr], temp					;     ptr[0] = temp
 		add		count, 8					;     count++
-		add		target, bytes				;     target++
+		add		ptr, bytes					;     ptr++
 		xor		counter, counter			;     counter = 0
 		mov		last, temp					;     last = temp }
-@@:		add		source, bytes				; source++
-		add		counter, 1					; counter++
+@@:		add		counter, 1					; counter++
+		add		array, bytes				; array++
 		sub		size, 1						; size--
 		jnz		.loop						; do while (size != 0)
 ;---[Computing size of unique array]-------
-.skip:	sub		target, array
+.skip:	sub		ptr, unique
 		mov		[count], counter			; count[0] = counter
-		shr		target, scale				; return target - array
+		shr		ptr, scale					; return ptr - unique
 		ret
 ;------------------------------------------
-.exit:	xor		target, target				; return 0
+.exit:	xor		ptr, ptr					; return 0
 		ret
 }
 Duplicates8:	DUPLICATES	r8b, r9b, 0

@@ -835,32 +835,38 @@ static void MergeDsc (size_t tkey[], void* tptr[], const size_t skey1[], const v
 //****************************************************************************//
 
 // Unsigned integer types
-static size_t Unique (uint8_t array[], size_t size);
-static size_t Unique (uint16_t array[], size_t size);
-static size_t Unique (uint32_t array[], size_t size);
-static size_t Unique (uint64_t array[], size_t size);
+static size_t Unique (uint8_t unique[], const uint8_t array[], size_t size);
+static size_t Unique (uint16_t unique[], const uint16_t array[], size_t size);
+static size_t Unique (uint32_t unique[], const uint32_t array[], size_t size);
+static size_t Unique (uint64_t unique[], const uint64_t array[], size_t size);
 
 // Signed integer types
-static size_t Unique (sint8_t array[], size_t size);
-static size_t Unique (sint16_t array[], size_t size);
-static size_t Unique (sint32_t array[], size_t size);
-static size_t Unique (sint64_t array[], size_t size);
+static size_t Unique (sint8_t unique[], const sint8_t array[], size_t size);
+static size_t Unique (sint16_t unique[], const sint16_t array[], size_t size);
+static size_t Unique (sint32_t unique[], const sint32_t array[], size_t size);
+static size_t Unique (sint64_t unique[], const sint64_t array[], size_t size);
+
+// Other types
+static size_t Unique (size_t unique[], const size_t array[], size_t size);
 
 //****************************************************************************//
 //      Duplicate values                                                      //
 //****************************************************************************//
 
 // Unsigned integer types
-static size_t Duplicates (size_t count[], uint8_t array[], size_t size);
-static size_t Duplicates (size_t count[], uint16_t array[], size_t size);
-static size_t Duplicates (size_t count[], uint32_t array[], size_t size);
-static size_t Duplicates (size_t count[], uint64_t array[], size_t size);
+static size_t Duplicates (uint8_t unique[], size_t count[], const uint8_t array[], size_t size);
+static size_t Duplicates (uint16_t unique[], size_t count[], const uint16_t array[], size_t size);
+static size_t Duplicates (uint32_t unique[], size_t count[], const uint32_t array[], size_t size);
+static size_t Duplicates (uint64_t unique[], size_t count[], const uint64_t array[], size_t size);
 
 // Signed integer types
-static size_t Duplicates (size_t count[], sint8_t array[], size_t size);
-static size_t Duplicates (size_t count[], sint16_t array[], size_t size);
-static size_t Duplicates (size_t count[], sint32_t array[], size_t size);
-static size_t Duplicates (size_t count[], sint64_t array[], size_t size);
+static size_t Duplicates (sint8_t unique[], size_t count[], const sint8_t array[], size_t size);
+static size_t Duplicates (sint16_t unique[], size_t count[], const sint16_t array[], size_t size);
+static size_t Duplicates (sint32_t unique[], size_t count[], const sint32_t array[], size_t size);
+static size_t Duplicates (sint64_t unique[], size_t count[], const sint64_t array[], size_t size);
+
+// Other types
+static size_t Duplicates (size_t unique[], size_t count[], const size_t array[], size_t size);
 
 //****************************************************************************//
 //      Checks                                                                //
@@ -1754,32 +1760,38 @@ void Array_MergeKeyDsc_size (size_t tkey[], void* tptr[], const size_t skey1[], 
 //****************************************************************************//
 
 // Unsigned integer types
-size_t Array_Unique_uint8 (uint8_t array[], size_t size);
-size_t Array_Unique_uint16 (uint16_t array[], size_t size);
-size_t Array_Unique_uint32 (uint32_t array[], size_t size);
-size_t Array_Unique_uint64 (uint64_t array[], size_t size);
+size_t Array_Unique_uint8 (uint8_t unique[], const uint8_t array[], size_t size);
+size_t Array_Unique_uint16 (uint16_t unique[], const uint16_t array[], size_t size);
+size_t Array_Unique_uint32 (uint32_t unique[], const uint32_t array[], size_t size);
+size_t Array_Unique_uint64 (uint64_t unique[], const uint64_t array[], size_t size);
 
 // Signed integer types
-size_t Array_Unique_sint8 (sint8_t array[], size_t size);
-size_t Array_Unique_sint16 (sint16_t array[], size_t size);
-size_t Array_Unique_sint32 (sint32_t array[], size_t size);
-size_t Array_Unique_sint64 (sint64_t array[], size_t size);
+size_t Array_Unique_sint8 (sint8_t unique[], const sint8_t array[], size_t size);
+size_t Array_Unique_sint16 (sint16_t unique[], const sint16_t array[], size_t size);
+size_t Array_Unique_sint32 (sint32_t unique[], const sint32_t array[], size_t size);
+size_t Array_Unique_sint64 (sint64_t unique[], const sint64_t array[], size_t size);
+
+// Other types
+size_t Array_Unique_size (size_t unique[], const size_t array[], size_t size);
 
 //****************************************************************************//
 //      Duplicate values                                                      //
 //****************************************************************************//
 
 // Unsigned integer types
-size_t Array_Duplicates_uint8 (size_t count[], uint8_t array[], size_t size);
-size_t Array_Duplicates_uint16 (size_t count[], uint16_t array[], size_t size);
-size_t Array_Duplicates_uint32 (size_t count[], uint32_t array[], size_t size);
-size_t Array_Duplicates_uint64 (size_t count[], uint64_t array[], size_t size);
+size_t Array_Duplicates_uint8 (uint8_t unique[], size_t count[], const uint8_t array[], size_t size);
+size_t Array_Duplicates_uint16 (uint16_t unique[], size_t count[], const uint16_t array[], size_t size);
+size_t Array_Duplicates_uint32 (uint32_t unique[], size_t count[], const uint32_t array[], size_t size);
+size_t Array_Duplicates_uint64 (uint64_t unique[], size_t count[], const uint64_t array[], size_t size);
 
 // Signed integer types
-size_t Array_Duplicates_sint8 (size_t count[], sint8_t array[], size_t size);
-size_t Array_Duplicates_sint16 (size_t count[], sint16_t array[], size_t size);
-size_t Array_Duplicates_sint32 (size_t count[], sint32_t array[], size_t size);
-size_t Array_Duplicates_sint64 (size_t count[], sint64_t array[], size_t size);
+size_t Array_Duplicates_sint8 (sint8_t unique[], size_t count[], const sint8_t array[], size_t size);
+size_t Array_Duplicates_sint16 (sint16_t unique[], size_t count[], const sint16_t array[], size_t size);
+size_t Array_Duplicates_sint32 (sint32_t unique[], size_t count[], const sint32_t array[], size_t size);
+size_t Array_Duplicates_sint64 (sint64_t unique[], size_t count[], const sint64_t array[], size_t size);
+
+// Other types
+size_t Array_Duplicates_size (size_t unique[], size_t count[], const size_t array[], size_t size);
 
 //****************************************************************************//
 //      Checks                                                                //
