@@ -10,72 +10,6 @@
 # pragma	once
 # include	<Types.h>
 
-//****************************************************************************//
-//      Key structures for searching/sorting algorithms                       //
-//****************************************************************************//
-
-//============================================================================//
-//      Unsigned integer keys                                                 //
-//============================================================================//
-struct uint8_key
-{
-	uint8_t		key;		// Key value
-	void*		ptr;		// Pointer to element which has this key
-};
-struct uint16_key
-{
-	uint16_t	key;		// Key value
-	void*		ptr;		// Pointer to element which has this key
-};
-struct uint32_key
-{
-	uint32_t	key;		// Key value
-	void*		ptr;		// Pointer to element which has this key
-};
-struct uint64_key
-{
-	uint64_t	key;		// Key value
-	void*		ptr;		// Pointer to element which has this key
-};
-
-//============================================================================//
-//      Signed integer keys                                                   //
-//============================================================================//
-struct sint8_key
-{
-	sint8_t		key;		// Key value
-	void*		ptr;		// Pointer to element which has this key
-};
-struct sint16_key
-{
-	sint16_t	key;		// Key value
-	void*		ptr;		// Pointer to element which has this key
-};
-struct sint32_key
-{
-	sint32_t	key;		// Key value
-	void*		ptr;		// Pointer to element which has this key
-};
-struct sint64_key
-{
-	sint64_t	key;		// Key value
-	void*		ptr;		// Pointer to element which has this key
-};
-
-//============================================================================//
-//      Floating-point keys                                                   //
-//============================================================================//
-struct flt32_key
-{
-	flt32_t		key;		// Key value
-	void*		ptr;		// Pointer to element which has this key
-};
-struct flt64_key
-{
-	flt64_t		key;		// Key value
-	void*		ptr;		// Pointer to element which has this key
-};
-
 # ifdef	__cplusplus
 /*
 ################################################################################
@@ -499,43 +433,20 @@ static void Frac (flt32_t array[], size_t size);
 static void Frac (flt64_t array[], size_t size);
 
 //****************************************************************************//
-//      Checks                                                                //
+//      Value replacement                                                     //
 //****************************************************************************//
 
-//============================================================================//
-//      Check for infinite values                                             //
-//============================================================================//
-static bool HasInf (const flt32_t array[], size_t size);
-static bool HasInf (const flt64_t array[], size_t size);
-
-//============================================================================//
-//      Check for NaN values                                                  //
-//============================================================================//
-static bool HasNaN (const flt32_t array[], size_t size);
-static bool HasNaN (const flt64_t array[], size_t size);
-
-//============================================================================//
-//      Check for overlap                                                     //
-//============================================================================//
-
 // Unsigned integer types
-static bool Overlap (const uint8_t array1[], size_t size1, const uint8_t array2[], size_t size2);
-static bool Overlap (const uint16_t array1[], size_t size1, const uint16_t array2[], size_t size2);
-static bool Overlap (const uint32_t array1[], size_t size1, const uint32_t array2[], size_t size2);
-static bool Overlap (const uint64_t array1[], size_t size1, const uint64_t array2[], size_t size2);
+static void Replace (uint8_t array[], size_t size, uint8_t pattern, uint8_t value);
+static void Replace (uint16_t array[], size_t size, uint16_t pattern, uint16_t value);
+static void Replace (uint32_t array[], size_t size, uint32_t pattern, uint32_t value);
+static void Replace (uint64_t array[], size_t size, uint64_t pattern, uint64_t value);
 
 // Signed integer types
-static bool Overlap (const sint8_t array1[], size_t size1, const sint8_t array2[], size_t size2);
-static bool Overlap (const sint16_t array1[], size_t size1, const sint16_t array2[], size_t size2);
-static bool Overlap (const sint32_t array1[], size_t size1, const sint32_t array2[], size_t size2);
-static bool Overlap (const sint64_t array1[], size_t size1, const sint64_t array2[], size_t size2);
-
-// Floating-point types
-static bool Overlap (const flt32_t array1[], size_t size1, const flt32_t array2[], size_t size2);
-static bool Overlap (const flt64_t array1[], size_t size1, const flt64_t array2[], size_t size2);
-
-// Other types
-static bool Overlap (const size_t array1[], size_t size1, const size_t array2[], size_t size2);
+static void Replace (sint8_t array[], size_t size, sint8_t pattern, sint8_t value);
+static void Replace (sint16_t array[], size_t size, sint16_t pattern, sint16_t value);
+static void Replace (sint32_t array[], size_t size, sint32_t pattern, sint32_t value);
+static void Replace (sint64_t array[], size_t size, sint64_t pattern, sint64_t value);
 
 //****************************************************************************//
 //      Search algorithms                                                     //
@@ -582,12 +493,8 @@ static size_t FindBwd (const sint64_t array[], size_t size, sint64_t value);
 //============================================================================//
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
-//      Array searching                                                       //
+//      Ascending sort order                                                  //
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
-
-//----------------------------------------------------------------------------//
-//      Ascending order sorted array                                          //
-//----------------------------------------------------------------------------//
 
 // Unsigned integer types
 static size_t FindAsc (const uint8_t array[], size_t size, uint8_t value);
@@ -601,9 +508,12 @@ static size_t FindAsc (const sint16_t array[], size_t size, sint16_t value);
 static size_t FindAsc (const sint32_t array[], size_t size, sint32_t value);
 static size_t FindAsc (const sint64_t array[], size_t size, sint64_t value);
 
-//----------------------------------------------------------------------------//
-//      Descending order sorted array                                         //
-//----------------------------------------------------------------------------//
+// Other types
+static size_t FindAsc (const size_t array[], size_t size, size_t value);
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//      Descending sort order                                                 //
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
 // Unsigned integer types
 static size_t FindDsc (const uint8_t array[], size_t size, uint8_t value);
@@ -617,57 +527,8 @@ static size_t FindDsc (const sint16_t array[], size_t size, sint16_t value);
 static size_t FindDsc (const sint32_t array[], size_t size, sint32_t value);
 static size_t FindDsc (const sint64_t array[], size_t size, sint64_t value);
 
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
-//      Key searching                                                         //
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
-
-//----------------------------------------------------------------------------//
-//      Ascending order sorted array                                          //
-//----------------------------------------------------------------------------//
-
-// Unsigned integer types
-static size_t FindAsc (const uint8_key array[], size_t size, uint8_t value);
-static size_t FindAsc (const uint16_key array[], size_t size, uint16_t value);
-static size_t FindAsc (const uint32_key array[], size_t size, uint32_t value);
-static size_t FindAsc (const uint64_key array[], size_t size, uint64_t value);
-
-// Signed integer types
-static size_t FindAsc (const sint8_key array[], size_t size, sint8_t value);
-static size_t FindAsc (const sint16_key array[], size_t size, sint16_t value);
-static size_t FindAsc (const sint32_key array[], size_t size, sint32_t value);
-static size_t FindAsc (const sint64_key array[], size_t size, sint64_t value);
-
-//----------------------------------------------------------------------------//
-//      Descending order sorted array                                         //
-//----------------------------------------------------------------------------//
-
-// Unsigned integer types
-static size_t FindDsc (const uint8_key array[], size_t size, uint8_t value);
-static size_t FindDsc (const uint16_key array[], size_t size, uint16_t value);
-static size_t FindDsc (const uint32_key array[], size_t size, uint32_t value);
-static size_t FindDsc (const uint64_key array[], size_t size, uint64_t value);
-
-// Signed integer types
-static size_t FindDsc (const sint8_key array[], size_t size, sint8_t value);
-static size_t FindDsc (const sint16_key array[], size_t size, sint16_t value);
-static size_t FindDsc (const sint32_key array[], size_t size, sint32_t value);
-static size_t FindDsc (const sint64_key array[], size_t size, sint64_t value);
-
-//****************************************************************************//
-//      Value replacement                                                     //
-//****************************************************************************//
-
-// Unsigned integer types
-static void Replace (uint8_t array[], size_t size, uint8_t pattern, uint8_t value);
-static void Replace (uint16_t array[], size_t size, uint16_t pattern, uint16_t value);
-static void Replace (uint32_t array[], size_t size, uint32_t pattern, uint32_t value);
-static void Replace (uint64_t array[], size_t size, uint64_t pattern, uint64_t value);
-
-// Signed integer types
-static void Replace (sint8_t array[], size_t size, sint8_t pattern, sint8_t value);
-static void Replace (sint16_t array[], size_t size, sint16_t pattern, sint16_t value);
-static void Replace (sint32_t array[], size_t size, sint32_t pattern, sint32_t value);
-static void Replace (sint64_t array[], size_t size, sint64_t pattern, sint64_t value);
+// Other types
+static size_t FindDsc (const size_t array[], size_t size, size_t value);
 
 //****************************************************************************//
 //      Sorting algorithms                                                    //
@@ -701,6 +562,9 @@ static void QuickSortAsc (sint64_t array[], size_t size);
 static void QuickSortAsc (flt32_t array[], size_t size);
 static void QuickSortAsc (flt64_t array[], size_t size);
 
+// Other types
+static void QuickSortAsc (size_t array[], size_t size);
+
 //----------------------------------------------------------------------------//
 //      Descending sort order                                                 //
 //----------------------------------------------------------------------------//
@@ -721,6 +585,9 @@ static void QuickSortDsc (sint64_t array[], size_t size);
 static void QuickSortDsc (flt32_t array[], size_t size);
 static void QuickSortDsc (flt64_t array[], size_t size);
 
+// Other types
+static void QuickSortDsc (size_t array[], size_t size);
+
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 //      Key sorting                                                           //
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
@@ -730,40 +597,46 @@ static void QuickSortDsc (flt64_t array[], size_t size);
 //----------------------------------------------------------------------------//
 
 // Unsigned integer types
-static void QuickSortAsc (uint8_key array[], size_t size);
-static void QuickSortAsc (uint16_key array[], size_t size);
-static void QuickSortAsc (uint32_key array[], size_t size);
-static void QuickSortAsc (uint64_key array[], size_t size);
+static void QuickSortAsc (uint8_t key[], void* ptr[], size_t size);
+static void QuickSortAsc (uint16_t key[], void* ptr[], size_t size);
+static void QuickSortAsc (uint32_t key[], void* ptr[], size_t size);
+static void QuickSortAsc (uint64_t key[], void* ptr[], size_t size);
 
 // Signed integer types
-static void QuickSortAsc (sint8_key array[], size_t size);
-static void QuickSortAsc (sint16_key array[], size_t size);
-static void QuickSortAsc (sint32_key array[], size_t size);
-static void QuickSortAsc (sint64_key array[], size_t size);
+static void QuickSortAsc (sint8_t key[], void* ptr[], size_t size);
+static void QuickSortAsc (sint16_t key[], void* ptr[], size_t size);
+static void QuickSortAsc (sint32_t key[], void* ptr[], size_t size);
+static void QuickSortAsc (sint64_t key[], void* ptr[], size_t size);
 
 // Floating-point types
-static void QuickSortAsc (flt32_key array[], size_t size);
-static void QuickSortAsc (flt64_key array[], size_t size);
+static void QuickSortAsc (flt32_t key[], void* ptr[], size_t size);
+static void QuickSortAsc (flt64_t key[], void* ptr[], size_t size);
+
+// Other types
+static void QuickSortAsc (size_t key[], void* ptr[], size_t size);
 
 //----------------------------------------------------------------------------//
 //      Descending sort order                                                 //
 //----------------------------------------------------------------------------//
 
 // Unsigned integer types
-static void QuickSortDsc (uint8_key array[], size_t size);
-static void QuickSortDsc (uint16_key array[], size_t size);
-static void QuickSortDsc (uint32_key array[], size_t size);
-static void QuickSortDsc (uint64_key array[], size_t size);
+static void QuickSortDsc (uint8_t key[], void* ptr[], size_t size);
+static void QuickSortDsc (uint16_t key[], void* ptr[], size_t size);
+static void QuickSortDsc (uint32_t key[], void* ptr[], size_t size);
+static void QuickSortDsc (uint64_t key[], void* ptr[], size_t size);
 
 // Signed integer types
-static void QuickSortDsc (sint8_key array[], size_t size);
-static void QuickSortDsc (sint16_key array[], size_t size);
-static void QuickSortDsc (sint32_key array[], size_t size);
-static void QuickSortDsc (sint64_key array[], size_t size);
+static void QuickSortDsc (sint8_t key[], void* ptr[], size_t size);
+static void QuickSortDsc (sint16_t key[], void* ptr[], size_t size);
+static void QuickSortDsc (sint32_t key[], void* ptr[], size_t size);
+static void QuickSortDsc (sint64_t key[], void* ptr[], size_t size);
 
 // Floating-point types
-static void QuickSortDsc (flt32_key array[], size_t size);
-static void QuickSortDsc (flt64_key array[], size_t size);
+static void QuickSortDsc (flt32_t key[], void* ptr[], size_t size);
+static void QuickSortDsc (flt64_t key[], void* ptr[], size_t size);
+
+// Other types
+static void QuickSortDsc (size_t key[], void* ptr[], size_t size);
 
 //============================================================================//
 //      Radix sort                                                            //
@@ -793,6 +666,9 @@ static void RadixSortAsc (sint64_t array[], sint64_t temp[], size_t size);
 static void RadixSortAsc (flt32_t array[], flt32_t temp[], size_t size);
 static void RadixSortAsc (flt64_t array[], flt64_t temp[], size_t size);
 
+// Other types
+static void RadixSortAsc (size_t array[], size_t temp[], size_t size);
+
 //----------------------------------------------------------------------------//
 //      Descending sort order                                                 //
 //----------------------------------------------------------------------------//
@@ -813,6 +689,9 @@ static void RadixSortDsc (sint64_t array[], sint64_t temp[], size_t size);
 static void RadixSortDsc (flt32_t array[], flt32_t temp[], size_t size);
 static void RadixSortDsc (flt64_t array[], flt64_t temp[], size_t size);
 
+// Other types
+static void RadixSortDsc (size_t array[], size_t temp[], size_t size);
+
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 //      Key sorting                                                           //
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
@@ -822,40 +701,46 @@ static void RadixSortDsc (flt64_t array[], flt64_t temp[], size_t size);
 //----------------------------------------------------------------------------//
 
 // Unsigned integer types
-static void RadixSortAsc (uint8_key array[], uint8_key temp[], size_t size);
-static void RadixSortAsc (uint16_key array[], uint16_key temp[], size_t size);
-static void RadixSortAsc (uint32_key array[], uint32_key temp[], size_t size);
-static void RadixSortAsc (uint64_key array[], uint64_key temp[], size_t size);
+static void RadixSortAsc (uint8_t key[], uint8_t tkey[], void* ptr[], void* tptr[], size_t size);
+static void RadixSortAsc (uint16_t key[], uint16_t tkey[], void* ptr[], void* tptr[], size_t size);
+static void RadixSortAsc (uint32_t key[], uint32_t tkey[], void* ptr[], void* tptr[], size_t size);
+static void RadixSortAsc (uint64_t key[], uint64_t tkey[], void* ptr[], void* tptr[], size_t size);
 
 // Signed integer types
-static void RadixSortAsc (sint8_key array[], sint8_key temp[], size_t size);
-static void RadixSortAsc (sint16_key array[], sint16_key temp[], size_t size);
-static void RadixSortAsc (sint32_key array[], sint32_key temp[], size_t size);
-static void RadixSortAsc (sint64_key array[], sint64_key temp[], size_t size);
+static void RadixSortAsc (sint8_t key[], sint8_t tkey[], void* ptr[], void* tptr[], size_t size);
+static void RadixSortAsc (sint16_t key[], sint16_t tkey[], void* ptr[], void* tptr[], size_t size);
+static void RadixSortAsc (sint32_t key[], sint32_t tkey[], void* ptr[], void* tptr[], size_t size);
+static void RadixSortAsc (sint64_t key[], sint64_t tkey[], void* ptr[], void* tptr[], size_t size);
 
 // Floating-point types
-static void RadixSortAsc (flt32_key array[], flt32_key temp[], size_t size);
-static void RadixSortAsc (flt64_key array[], flt64_key temp[], size_t size);
+static void RadixSortAsc (flt32_t key[], flt32_t tkey[], void* ptr[], void* tptr[], size_t size);
+static void RadixSortAsc (flt64_t key[], flt64_t tkey[], void* ptr[], void* tptr[], size_t size);
+
+// Other types
+static void RadixSortAsc (size_t key[], size_t tkey[], void* ptr[], void* tptr[], size_t size);
 
 //----------------------------------------------------------------------------//
 //      Descending sort order                                                 //
 //----------------------------------------------------------------------------//
 
 // Unsigned integer types
-static void RadixSortDsc (uint8_key array[], uint8_key temp[], size_t size);
-static void RadixSortDsc (uint16_key array[], uint16_key temp[], size_t size);
-static void RadixSortDsc (uint32_key array[], uint32_key temp[], size_t size);
-static void RadixSortDsc (uint64_key array[], uint64_key temp[], size_t size);
+static void RadixSortDsc (uint8_t key[], uint8_t tkey[], void* ptr[], void* tptr[], size_t size);
+static void RadixSortDsc (uint16_t key[], uint16_t tkey[], void* ptr[], void* tptr[], size_t size);
+static void RadixSortDsc (uint32_t key[], uint32_t tkey[], void* ptr[], void* tptr[], size_t size);
+static void RadixSortDsc (uint64_t key[], uint64_t tkey[], void* ptr[], void* tptr[], size_t size);
 
 // Signed integer types
-static void RadixSortDsc (sint8_key array[], sint8_key temp[], size_t size);
-static void RadixSortDsc (sint16_key array[], sint16_key temp[], size_t size);
-static void RadixSortDsc (sint32_key array[], sint32_key temp[], size_t size);
-static void RadixSortDsc (sint64_key array[], sint64_key temp[], size_t size);
+static void RadixSortDsc (sint8_t key[], sint8_t tkey[], void* ptr[], void* tptr[], size_t size);
+static void RadixSortDsc (sint16_t key[], sint16_t tkey[], void* ptr[], void* tptr[], size_t size);
+static void RadixSortDsc (sint32_t key[], sint32_t tkey[], void* ptr[], void* tptr[], size_t size);
+static void RadixSortDsc (sint64_t key[], sint64_t tkey[], void* ptr[], void* tptr[], size_t size);
 
 // Floating-point types
-static void RadixSortDsc (flt32_key array[], flt32_key temp[], size_t size);
-static void RadixSortDsc (flt64_key array[], flt64_key temp[], size_t size);
+static void RadixSortDsc (flt32_t key[], flt32_t tkey[], void* ptr[], void* tptr[], size_t size);
+static void RadixSortDsc (flt64_t key[], flt64_t tkey[], void* ptr[], void* tptr[], size_t size);
+
+// Other types
+static void RadixSortDsc (size_t key[], size_t tkey[], void* ptr[], void* tptr[], size_t size);
 
 //****************************************************************************//
 //      Merging of sorted arrays                                              //
@@ -881,6 +766,9 @@ static void MergeAsc (sint16_t target[], const sint16_t source1[], size_t size1,
 static void MergeAsc (sint32_t target[], const sint32_t source1[], size_t size1, const sint32_t source2[], size_t size2);
 static void MergeAsc (sint64_t target[], const sint64_t source1[], size_t size1, const sint64_t source2[], size_t size2);
 
+// Other types
+static void MergeAsc (size_t target[], const size_t source1[], size_t size1, const size_t source2[], size_t size2);
+
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 //      Descending sort order                                                 //
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
@@ -897,6 +785,9 @@ static void MergeDsc (sint16_t target[], const sint16_t source1[], size_t size1,
 static void MergeDsc (sint32_t target[], const sint32_t source1[], size_t size1, const sint32_t source2[], size_t size2);
 static void MergeDsc (sint64_t target[], const sint64_t source1[], size_t size1, const sint64_t source2[], size_t size2);
 
+// Other types
+static void MergeDsc (size_t target[], const size_t source1[], size_t size1, const size_t source2[], size_t size2);
+
 //============================================================================//
 //      Key merging                                                           //
 //============================================================================//
@@ -906,32 +797,38 @@ static void MergeDsc (sint64_t target[], const sint64_t source1[], size_t size1,
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
 // Unsigned integer types
-static void MergeAsc (uint8_key target[], const uint8_key source1[], size_t size1, const uint8_key source2[], size_t size2);
-static void MergeAsc (uint16_key target[], const uint16_key source1[], size_t size1, const uint16_key source2[], size_t size2);
-static void MergeAsc (uint32_key target[], const uint32_key source1[], size_t size1, const uint32_key source2[], size_t size2);
-static void MergeAsc (uint64_key target[], const uint64_key source1[], size_t size1, const uint64_key source2[], size_t size2);
+static void MergeAsc (uint8_t tkey[], void* tptr[], const uint8_t skey1[], const void* sptr1[], size_t size1, const uint8_t skey2[], const void* sptr2[], size_t size2);
+static void MergeAsc (uint16_t tkey[], void* tptr[], const uint16_t skey1[], const void* sptr1[], size_t size1, const uint16_t skey2[], const void* sptr2[], size_t size2);
+static void MergeAsc (uint32_t tkey[], void* tptr[], const uint32_t skey1[], const void* sptr1[], size_t size1, const uint32_t skey2[], const void* sptr2[], size_t size2);
+static void MergeAsc (uint64_t tkey[], void* tptr[], const uint64_t skey1[], const void* sptr1[], size_t size1, const uint64_t skey2[], const void* sptr2[], size_t size2);
 
 // Signed integer types
-static void MergeAsc (sint8_key target[], const sint8_key source1[], size_t size1, const sint8_key source2[], size_t size2);
-static void MergeAsc (sint16_key target[], const sint16_key source1[], size_t size1, const sint16_key source2[], size_t size2);
-static void MergeAsc (sint32_key target[], const sint32_key source1[], size_t size1, const sint32_key source2[], size_t size2);
-static void MergeAsc (sint64_key target[], const sint64_key source1[], size_t size1, const sint64_key source2[], size_t size2);
+static void MergeAsc (sint8_t tkey[], void* tptr[], const sint8_t skey1[], const void* sptr1[], size_t size1, const sint8_t skey2[], const void* sptr2[], size_t size2);
+static void MergeAsc (sint16_t tkey[], void* tptr[], const sint16_t skey1[], const void* sptr1[], size_t size1, const sint16_t skey2[], const void* sptr2[], size_t size2);
+static void MergeAsc (sint32_t tkey[], void* tptr[], const sint32_t skey1[], const void* sptr1[], size_t size1, const sint32_t skey2[], const void* sptr2[], size_t size2);
+static void MergeAsc (sint64_t tkey[], void* tptr[], const sint64_t skey1[], const void* sptr1[], size_t size1, const sint64_t skey2[], const void* sptr2[], size_t size2);
+
+// Other types
+static void MergeAsc (size_t tkey[], void* tptr[], const size_t skey1[], const void* sptr1[], size_t size1, const size_t skey2[], const void* sptr2[], size_t size2);
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 //      Descending sort order                                                 //
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
 // Unsigned integer types
-static void MergeDsc (uint8_key target[], const uint8_key source1[], size_t size1, const uint8_key source2[], size_t size2);
-static void MergeDsc (uint16_key target[], const uint16_key source1[], size_t size1, const uint16_key source2[], size_t size2);
-static void MergeDsc (uint32_key target[], const uint32_key source1[], size_t size1, const uint32_key source2[], size_t size2);
-static void MergeDsc (uint64_key target[], const uint64_key source1[], size_t size1, const uint64_key source2[], size_t size2);
+static void MergeDsc (uint8_t tkey[], void* tptr[], const uint8_t skey1[], const void* sptr1[], size_t size1, const uint8_t skey2[], const void* sptr2[], size_t size2);
+static void MergeDsc (uint16_t tkey[], void* tptr[], const uint16_t skey1[], const void* sptr1[], size_t size1, const uint16_t skey2[], const void* sptr2[], size_t size2);
+static void MergeDsc (uint32_t tkey[], void* tptr[], const uint32_t skey1[], const void* sptr1[], size_t size1, const uint32_t skey2[], const void* sptr2[], size_t size2);
+static void MergeDsc (uint64_t tkey[], void* tptr[], const uint64_t skey1[], const void* sptr1[], size_t size1, const uint64_t skey2[], const void* sptr2[], size_t size2);
 
 // Signed integer types
-static void MergeDsc (sint8_key target[], const sint8_key source1[], size_t size1, const sint8_key source2[], size_t size2);
-static void MergeDsc (sint16_key target[], const sint16_key source1[], size_t size1, const sint16_key source2[], size_t size2);
-static void MergeDsc (sint32_key target[], const sint32_key source1[], size_t size1, const sint32_key source2[], size_t size2);
-static void MergeDsc (sint64_key target[], const sint64_key source1[], size_t size1, const sint64_key source2[], size_t size2);
+static void MergeDsc (sint8_t tkey[], void* tptr[], const sint8_t skey1[], const void* sptr1[], size_t size1, const sint8_t skey2[], const void* sptr2[], size_t size2);
+static void MergeDsc (sint16_t tkey[], void* tptr[], const sint16_t skey1[], const void* sptr1[], size_t size1, const sint16_t skey2[], const void* sptr2[], size_t size2);
+static void MergeDsc (sint32_t tkey[], void* tptr[], const sint32_t skey1[], const void* sptr1[], size_t size1, const sint32_t skey2[], const void* sptr2[], size_t size2);
+static void MergeDsc (sint64_t tkey[], void* tptr[], const sint64_t skey1[], const void* sptr1[], size_t size1, const sint64_t skey2[], const void* sptr2[], size_t size2);
+
+// Other types
+static void MergeDsc (size_t tkey[], void* tptr[], const size_t skey1[], const void* sptr1[], size_t size1, const size_t skey2[], const void* sptr2[], size_t size2);
 
 //****************************************************************************//
 //      Unique values                                                         //
@@ -964,6 +861,77 @@ static size_t Duplicates (size_t count[], sint8_t array[], size_t size);
 static size_t Duplicates (size_t count[], sint16_t array[], size_t size);
 static size_t Duplicates (size_t count[], sint32_t array[], size_t size);
 static size_t Duplicates (size_t count[], sint64_t array[], size_t size);
+
+//****************************************************************************//
+//      Checks                                                                //
+//****************************************************************************//
+
+//============================================================================//
+//      Check for duplicate values                                            //
+//============================================================================//
+
+// Unsigned integer types
+static bool HasDuplicates (const uint8_t array[], size_t size);
+static bool HasDuplicates (const uint16_t array[], size_t size);
+static bool HasDuplicates (const uint32_t array[], size_t size);
+static bool HasDuplicates (const uint64_t array[], size_t size);
+
+// Signed integer types
+static bool HasDuplicates (const sint8_t array[], size_t size);
+static bool HasDuplicates (const sint16_t array[], size_t size);
+static bool HasDuplicates (const sint32_t array[], size_t size);
+static bool HasDuplicates (const sint64_t array[], size_t size);
+
+//============================================================================//
+//      Check for infinite values                                             //
+//============================================================================//
+static bool HasInf (const flt32_t array[], size_t size);
+static bool HasInf (const flt64_t array[], size_t size);
+
+//============================================================================//
+//      Check for NaN values                                                  //
+//============================================================================//
+static bool HasNaN (const flt32_t array[], size_t size);
+static bool HasNaN (const flt64_t array[], size_t size);
+
+//============================================================================//
+//      Check for equality                                                    //
+//============================================================================//
+
+// Unsigned integer types
+static bool IsEqual (const uint8_t array1[], const uint8_t array2[], size_t size);
+static bool IsEqual (const uint16_t array1[], const uint16_t array2[], size_t size);
+static bool IsEqual (const uint32_t array1[], const uint32_t array2[], size_t size);
+static bool IsEqual (const uint64_t array1[], const uint64_t array2[], size_t size);
+
+// Signed integer types
+static bool IsEqual (const sint8_t array1[], const sint8_t array2[], size_t size);
+static bool IsEqual (const sint16_t array1[], const sint16_t array2[], size_t size);
+static bool IsEqual (const sint32_t array1[], const sint32_t array2[], size_t size);
+static bool IsEqual (const sint64_t array1[], const sint64_t array2[], size_t size);
+
+//============================================================================//
+//      Check for overlap                                                     //
+//============================================================================//
+
+// Unsigned integer types
+static bool Overlap (const uint8_t array1[], size_t size1, const uint8_t array2[], size_t size2);
+static bool Overlap (const uint16_t array1[], size_t size1, const uint16_t array2[], size_t size2);
+static bool Overlap (const uint32_t array1[], size_t size1, const uint32_t array2[], size_t size2);
+static bool Overlap (const uint64_t array1[], size_t size1, const uint64_t array2[], size_t size2);
+
+// Signed integer types
+static bool Overlap (const sint8_t array1[], size_t size1, const sint8_t array2[], size_t size2);
+static bool Overlap (const sint16_t array1[], size_t size1, const sint16_t array2[], size_t size2);
+static bool Overlap (const sint32_t array1[], size_t size1, const sint32_t array2[], size_t size2);
+static bool Overlap (const sint64_t array1[], size_t size1, const sint64_t array2[], size_t size2);
+
+// Floating-point types
+static bool Overlap (const flt32_t array1[], size_t size1, const flt32_t array2[], size_t size2);
+static bool Overlap (const flt64_t array1[], size_t size1, const flt64_t array2[], size_t size2);
+
+// Other types
+static bool Overlap (const size_t array1[], size_t size1, const size_t array2[], size_t size2);
 };
 # else
 /*
@@ -1384,43 +1352,20 @@ void Array_Frac_flt32 (flt32_t array[], size_t size);
 void Array_Frac_flt64 (flt64_t array[], size_t size);
 
 //****************************************************************************//
-//      Checks                                                                //
+//      Value replacement                                                     //
 //****************************************************************************//
 
-//============================================================================//
-//      Check for infinite values                                             //
-//============================================================================//
-bool Array_HasInf_flt32 (const flt32_t array[], size_t size);
-bool Array_HasInf_flt64 (const flt64_t array[], size_t size);
-
-//============================================================================//
-//      Check for NaN values                                                  //
-//============================================================================//
-bool Array_HasNaN_flt32 (const flt32_t array[], size_t size);
-bool Array_HasNaN_flt64 (const flt64_t array[], size_t size);
-
-//============================================================================//
-//      Check for overlap                                                     //
-//============================================================================//
-
 // Unsigned integer types
-bool Array_Overlap_uint8 (const uint8_t array1[], size_t size1, const uint8_t array2[], size_t size2);
-bool Array_Overlap_uint16 (const uint16_t array1[], size_t size1, const uint16_t array2[], size_t size2);
-bool Array_Overlap_uint32 (const uint32_t array1[], size_t size1, const uint32_t array2[], size_t size2);
-bool Array_Overlap_uint64 (const uint64_t array1[], size_t size1, const uint64_t array2[], size_t size2);
+void Array_Replace_uint8 (uint8_t array[], size_t size, uint8_t pattern, uint8_t value);
+void Array_Replace_uint16 (uint16_t array[], size_t size, uint16_t pattern, uint16_t value);
+void Array_Replace_uint32 (uint32_t array[], size_t size, uint32_t pattern, uint32_t value);
+void Array_Replace_uint64 (uint64_t array[], size_t size, uint64_t pattern, uint64_t value);
 
 // Signed integer types
-bool Array_Overlap_sint8 (const sint8_t array1[], size_t size1, const sint8_t array2[], size_t size2);
-bool Array_Overlap_sint16 (const sint16_t array1[], size_t size1, const sint16_t array2[], size_t size2);
-bool Array_Overlap_sint32 (const sint32_t array1[], size_t size1, const sint32_t array2[], size_t size2);
-bool Array_Overlap_sint64 (const sint64_t array1[], size_t size1, const sint64_t array2[], size_t size2);
-
-// Floating-point types
-bool Array_Overlap_flt32 (const flt32_t array1[], size_t size1, const flt32_t array2[], size_t size2);
-bool Array_Overlap_flt64 (const flt64_t array1[], size_t size1, const flt64_t array2[], size_t size2);
-
-// Other types
-bool Array_Overlap_size (const size_t array1[], size_t size1, const size_t array2[], size_t size2);
+void Array_Replace_sint8 (sint8_t array[], size_t size, sint8_t pattern, sint8_t value);
+void Array_Replace_sint16 (sint16_t array[], size_t size, sint16_t pattern, sint16_t value);
+void Array_Replace_sint32 (sint32_t array[], size_t size, sint32_t pattern, sint32_t value);
+void Array_Replace_sint64 (sint64_t array[], size_t size, sint64_t pattern, sint64_t value);
 
 //****************************************************************************//
 //      Search algorithms                                                     //
@@ -1467,12 +1412,8 @@ size_t Array_FindBwd_sint64 (const sint64_t array[], size_t size, sint64_t value
 //============================================================================//
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
-//      Array searching                                                       //
+//      Ascending sort order                                                  //
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
-
-//----------------------------------------------------------------------------//
-//      Ascending order sorted array                                          //
-//----------------------------------------------------------------------------//
 
 // Unsigned integer types
 size_t Array_FindAsc_uint8 (const uint8_t array[], size_t size, uint8_t value);
@@ -1486,9 +1427,12 @@ size_t Array_FindAsc_sint16 (const sint16_t array[], size_t size, sint16_t value
 size_t Array_FindAsc_sint32 (const sint32_t array[], size_t size, sint32_t value);
 size_t Array_FindAsc_sint64 (const sint64_t array[], size_t size, sint64_t value);
 
-//----------------------------------------------------------------------------//
-//      Descending order sorted array                                         //
-//----------------------------------------------------------------------------//
+// Other types
+size_t Array_FindAsc_size (const size_t array[], size_t size, size_t value);
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//      Descending sort order                                                 //
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
 // Unsigned integer types
 size_t Array_FindDsc_uint8 (const uint8_t array[], size_t size, uint8_t value);
@@ -1502,57 +1446,8 @@ size_t Array_FindDsc_sint16 (const sint16_t array[], size_t size, sint16_t value
 size_t Array_FindDsc_sint32 (const sint32_t array[], size_t size, sint32_t value);
 size_t Array_FindDsc_sint64 (const sint64_t array[], size_t size, sint64_t value);
 
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
-//      Key searching                                                         //
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
-
-//----------------------------------------------------------------------------//
-//      Ascending order sorted array                                          //
-//----------------------------------------------------------------------------//
-
-// Unsigned integer types
-size_t Array_FindAsc_uint8key (const struct uint8_key array[], size_t size, uint8_t value);
-size_t Array_FindAsc_uint16key (const struct uint16_key array[], size_t size, uint16_t value);
-size_t Array_FindAsc_uint32key (const struct uint32_key array[], size_t size, uint32_t value);
-size_t Array_FindAsc_uint64key (const struct uint64_key array[], size_t size, uint64_t value);
-
-// Signed integer types
-size_t Array_FindAsc_sint8key (const struct sint8_key array[], size_t size, sint8_t value);
-size_t Array_FindAsc_sint16key (const struct sint16_key array[], size_t size, sint16_t value);
-size_t Array_FindAsc_sint32key (const struct sint32_key array[], size_t size, sint32_t value);
-size_t Array_FindAsc_sint64key (const struct sint64_key array[], size_t size, sint64_t value);
-
-//----------------------------------------------------------------------------//
-//      Descending order sorted array                                         //
-//----------------------------------------------------------------------------//
-
-// Unsigned integer types
-size_t Array_FindDsc_uint8key (const struct uint8_key array[], size_t size, uint8_t value);
-size_t Array_FindDsc_uint16key (const struct uint16_key array[], size_t size, uint16_t value);
-size_t Array_FindDsc_uint32key (const struct uint32_key array[], size_t size, uint32_t value);
-size_t Array_FindDsc_uint64key (const struct uint64_key array[], size_t size, uint64_t value);
-
-// Signed integer types
-size_t Array_FindDsc_sint8key (const struct sint8_key array[], size_t size, sint8_t value);
-size_t Array_FindDsc_sint16key (const struct sint16_key array[], size_t size, sint16_t value);
-size_t Array_FindDsc_sint32key (const struct sint32_key array[], size_t size, sint32_t value);
-size_t Array_FindDsc_sint64key (const struct sint64_key array[], size_t size, sint64_t value);
-
-//****************************************************************************//
-//      Value replacement                                                     //
-//****************************************************************************//
-
-// Unsigned integer types
-void Array_Replace_uint8 (uint8_t array[], size_t size, uint8_t pattern, uint8_t value);
-void Array_Replace_uint16 (uint16_t array[], size_t size, uint16_t pattern, uint16_t value);
-void Array_Replace_uint32 (uint32_t array[], size_t size, uint32_t pattern, uint32_t value);
-void Array_Replace_uint64 (uint64_t array[], size_t size, uint64_t pattern, uint64_t value);
-
-// Signed integer types
-void Array_Replace_sint8 (sint8_t array[], size_t size, sint8_t pattern, sint8_t value);
-void Array_Replace_sint16 (sint16_t array[], size_t size, sint16_t pattern, sint16_t value);
-void Array_Replace_sint32 (sint32_t array[], size_t size, sint32_t pattern, sint32_t value);
-void Array_Replace_sint64 (sint64_t array[], size_t size, sint64_t pattern, sint64_t value);
+// Other types
+size_t Array_FindDsc_size (const size_t array[], size_t size, size_t value);
 
 //****************************************************************************//
 //      Sorting algorithms                                                    //
@@ -1586,6 +1481,9 @@ void Array_QuickSortAsc_sint64 (sint64_t array[], size_t size);
 void Array_QuickSortAsc_flt32 (flt32_t array[], size_t size);
 void Array_QuickSortAsc_flt64 (flt64_t array[], size_t size);
 
+// Other types
+void Array_QuickSortAsc_size (size_t array[], size_t size);
+
 //----------------------------------------------------------------------------//
 //      Descending sort order                                                 //
 //----------------------------------------------------------------------------//
@@ -1606,6 +1504,9 @@ void Array_QuickSortDsc_sint64 (sint64_t array[], size_t size);
 void Array_QuickSortDsc_flt32 (flt32_t array[], size_t size);
 void Array_QuickSortDsc_flt64 (flt64_t array[], size_t size);
 
+// Other types
+void Array_QuickSortDsc_size (size_t array[], size_t size);
+
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 //      Key sorting                                                           //
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
@@ -1615,40 +1516,46 @@ void Array_QuickSortDsc_flt64 (flt64_t array[], size_t size);
 //----------------------------------------------------------------------------//
 
 // Unsigned integer types
-void Array_QuickSortAsc_uint8key (struct uint8_key array[], size_t size);
-void Array_QuickSortAsc_uint16key (struct uint16_key array[], size_t size);
-void Array_QuickSortAsc_uint32key (struct uint32_key array[], size_t size);
-void Array_QuickSortAsc_uint64key (struct uint64_key array[], size_t size);
+void Array_QuickSortKeyAsc_uint8 (uint8_t key[], void* ptr[], size_t size);
+void Array_QuickSortKeyAsc_uint16 (uint16_t key[], void* ptr[], size_t size);
+void Array_QuickSortKeyAsc_uint32 (uint32_t key[], void* ptr[], size_t size);
+void Array_QuickSortKeyAsc_uint64 (uint64_t key[], void* ptr[], size_t size);
 
 // Signed integer types
-void Array_QuickSortAsc_sint8key (struct sint8_key array[], size_t size);
-void Array_QuickSortAsc_sint16key (struct sint16_key array[], size_t size);
-void Array_QuickSortAsc_sint32key (struct sint32_key array[], size_t size);
-void Array_QuickSortAsc_sint64key (struct sint64_key array[], size_t size);
+void Array_QuickSortKeyAsc_sint8 (sint8_t key[], void* ptr[], size_t size);
+void Array_QuickSortKeyAsc_sint16 (sint16_t key[], void* ptr[], size_t size);
+void Array_QuickSortKeyAsc_sint32 (sint32_t key[], void* ptr[], size_t size);
+void Array_QuickSortKeyAsc_sint64 (sint64_t key[], void* ptr[], size_t size);
 
 // Floating-point types
-void Array_QuickSortAsc_flt32key (struct flt32_key array[], size_t size);
-void Array_QuickSortAsc_flt64key (struct flt64_key array[], size_t size);
+void Array_QuickSortKeyAsc_flt32 (flt32_t key[], void* ptr[], size_t size);
+void Array_QuickSortKeyAsc_flt64 (flt64_t key[], void* ptr[], size_t size);
+
+// Other types
+void Array_QuickSortKeyAsc_size (size_t key[], void* ptr[], size_t size);
 
 //----------------------------------------------------------------------------//
 //      Descending sort order                                                 //
 //----------------------------------------------------------------------------//
 
 // Unsigned integer types
-void Array_QuickSortDsc_uint8key (struct uint8_key array[], size_t size);
-void Array_QuickSortDsc_uint16key (struct uint16_key array[], size_t size);
-void Array_QuickSortDsc_uint32key (struct uint32_key array[], size_t size);
-void Array_QuickSortDsc_uint64key (struct uint64_key array[], size_t size);
+void Array_QuickSortKeyDsc_uint8 (uint8_t key[], void* ptr[], size_t size);
+void Array_QuickSortKeyDsc_uint16 (uint16_t key[], void* ptr[], size_t size);
+void Array_QuickSortKeyDsc_uint32 (uint32_t key[], void* ptr[], size_t size);
+void Array_QuickSortKeyDsc_uint64 (uint64_t key[], void* ptr[], size_t size);
 
 // Signed integer types
-void Array_QuickSortDsc_sint8key (struct sint8_key array[], size_t size);
-void Array_QuickSortDsc_sint16key (struct sint16_key array[], size_t size);
-void Array_QuickSortDsc_sint32key (struct sint32_key array[], size_t size);
-void Array_QuickSortDsc_sint64key (struct sint64_key array[], size_t size);
+void Array_QuickSortKeyDsc_sint8 (sint8_t key[], void* ptr[], size_t size);
+void Array_QuickSortKeyDsc_sint16 (sint16_t key[], void* ptr[], size_t size);
+void Array_QuickSortKeyDsc_sint32 (sint32_t key[], void* ptr[], size_t size);
+void Array_QuickSortKeyDsc_sint64 (sint64_t key[], void* ptr[], size_t size);
 
 // Floating-point types
-void Array_QuickSortDsc_flt32key (struct flt32_key array[], size_t size);
-void Array_QuickSortDsc_flt64key (struct flt64_key array[], size_t size);
+void Array_QuickSortKeyDsc_flt32 (flt32_t key[], void* ptr[], size_t size);
+void Array_QuickSortKeyDsc_flt64 (flt64_t key[], void* ptr[], size_t size);
+
+// Other types
+void Array_QuickSortKeyDsc_size (size_t key[], void* ptr[], size_t size);
 
 //============================================================================//
 //      Radix sort                                                            //
@@ -1678,6 +1585,9 @@ void Array_RadixSortAsc_sint64 (sint64_t array[], sint64_t temp[], size_t size);
 void Array_RadixSortAsc_flt32 (flt32_t array[], flt32_t temp[], size_t size);
 void Array_RadixSortAsc_flt64 (flt64_t array[], flt64_t temp[], size_t size);
 
+// Other types
+void Array_RadixSortAsc_size (size_t array[], size_t temp[], size_t size);
+
 //----------------------------------------------------------------------------//
 //      Descending sort order                                                 //
 //----------------------------------------------------------------------------//
@@ -1698,6 +1608,9 @@ void Array_RadixSortDsc_sint64 (sint64_t array[], sint64_t temp[], size_t size);
 void Array_RadixSortDsc_flt32 (flt32_t array[], flt32_t temp[], size_t size);
 void Array_RadixSortDsc_flt64 (flt64_t array[], flt64_t temp[], size_t size);
 
+// Other types
+void Array_RadixSortDsc_size (size_t array[], size_t temp[], size_t size);
+
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 //      Key sorting                                                           //
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
@@ -1707,40 +1620,46 @@ void Array_RadixSortDsc_flt64 (flt64_t array[], flt64_t temp[], size_t size);
 //----------------------------------------------------------------------------//
 
 // Unsigned integer types
-void Array_RadixSortAsc_uint8key (struct uint8_key array[], struct uint8_key temp[], size_t size);
-void Array_RadixSortAsc_uint16key (struct uint16_key array[], struct uint16_key temp[], size_t size);
-void Array_RadixSortAsc_uint32key (struct uint32_key array[], struct uint32_key temp[], size_t size);
-void Array_RadixSortAsc_uint64key (struct uint64_key array[], struct uint64_key temp[], size_t size);
+void Array_RadixSortKeyAsc_uint8 (uint8_t key[], uint8_t tkey[], void* ptr[], void* tptr[], size_t size);
+void Array_RadixSortKeyAsc_uint16 (uint16_t key[], uint16_t tkey[], void* ptr[], void* tptr[], size_t size);
+void Array_RadixSortKeyAsc_uint32 (uint32_t key[], uint32_t tkey[], void* ptr[], void* tptr[], size_t size);
+void Array_RadixSortKeyAsc_uint64 (uint64_t key[], uint64_t tkey[], void* ptr[], void* tptr[], size_t size);
 
 // Signed integer types
-void Array_RadixSortAsc_sint8key (struct sint8_key array[], struct sint8_key temp[], size_t size);
-void Array_RadixSortAsc_sint16key (struct sint16_key array[], struct sint16_key temp[], size_t size);
-void Array_RadixSortAsc_sint32key (struct sint32_key array[], struct sint32_key temp[], size_t size);
-void Array_RadixSortAsc_sint64key (struct sint64_key array[], struct sint64_key temp[], size_t size);
+void Array_RadixSortKeyAsc_sint8 (sint8_t key[], sint8_t tkey[], void* ptr[], void* tptr[], size_t size);
+void Array_RadixSortKeyAsc_sint16 (sint16_t key[], sint16_t tkey[], void* ptr[], void* tptr[], size_t size);
+void Array_RadixSortKeyAsc_sint32 (sint32_t key[], sint32_t tkey[], void* ptr[], void* tptr[], size_t size);
+void Array_RadixSortKeyAsc_sint64 (sint64_t key[], sint64_t tkey[], void* ptr[], void* tptr[], size_t size);
 
 // Floating-point types
-void Array_RadixSortAsc_flt32key (struct flt32_key array[], struct flt32_key temp[], size_t size);
-void Array_RadixSortAsc_flt64key (struct flt64_key array[], struct flt64_key temp[], size_t size);
+void Array_RadixSortKeyAsc_flt32 (flt32_t key[], flt32_t tkey[], void* ptr[], void* tptr[], size_t size);
+void Array_RadixSortKeyAsc_flt64 (flt64_t key[], flt64_t tkey[], void* ptr[], void* tptr[], size_t size);
+
+// Other types
+void Array_RadixSortKeyAsc_size (size_t key[], size_t tkey[], void* ptr[], void* tptr[], size_t size);
 
 //----------------------------------------------------------------------------//
 //      Descending sort order                                                 //
 //----------------------------------------------------------------------------//
 
 // Unsigned integer types
-void Array_RadixSortDsc_uint8key (struct uint8_key array[], struct uint8_key temp[], size_t size);
-void Array_RadixSortDsc_uint16key (struct uint16_key array[], struct uint16_key temp[], size_t size);
-void Array_RadixSortDsc_uint32key (struct uint32_key array[], struct uint32_key temp[], size_t size);
-void Array_RadixSortDsc_uint64key (struct uint64_key array[], struct uint64_key temp[], size_t size);
+void Array_RadixSortKeyDsc_uint8 (uint8_t key[], uint8_t tkey[], void* ptr[], void* tptr[], size_t size);
+void Array_RadixSortKeyDsc_uint16 (uint16_t key[], uint16_t tkey[], void* ptr[], void* tptr[], size_t size);
+void Array_RadixSortKeyDsc_uint32 (uint32_t key[], uint32_t tkey[], void* ptr[], void* tptr[], size_t size);
+void Array_RadixSortKeyDsc_uint64 (uint64_t key[], uint64_t tkey[], void* ptr[], void* tptr[], size_t size);
 
 // Signed integer types
-void Array_RadixSortDsc_sint8key (struct sint8_key array[], struct sint8_key temp[], size_t size);
-void Array_RadixSortDsc_sint16key (struct sint16_key array[], struct sint16_key temp[], size_t size);
-void Array_RadixSortDsc_sint32key (struct sint32_key array[], struct sint32_key temp[], size_t size);
-void Array_RadixSortDsc_sint64key (struct sint64_key array[], struct sint64_key temp[], size_t size);
+void Array_RadixSortKeyDsc_sint8 (sint8_t key[], sint8_t tkey[], void* ptr[], void* tptr[], size_t size);
+void Array_RadixSortKeyDsc_sint16 (sint16_t key[], sint16_t tkey[], void* ptr[], void* tptr[], size_t size);
+void Array_RadixSortKeyDsc_sint32 (sint32_t key[], sint32_t tkey[], void* ptr[], void* tptr[], size_t size);
+void Array_RadixSortKeyDsc_sint64 (sint64_t key[], sint64_t tkey[], void* ptr[], void* tptr[], size_t size);
 
 // Floating-point types
-void Array_RadixSortDsc_flt32key (struct flt32_key array[], struct flt32_key temp[], size_t size);
-void Array_RadixSortDsc_flt64key (struct flt64_key array[], struct flt64_key temp[], size_t size);
+void Array_RadixSortKeyDsc_flt32 (flt32_t key[], flt32_t tkey[], void* ptr[], void* tptr[], size_t size);
+void Array_RadixSortKeyDsc_flt64 (flt64_t key[], flt64_t tkey[], void* ptr[], void* tptr[], size_t size);
+
+// Other types
+void Array_RadixSortKeyDsc_size (size_t key[], size_t tkey[], void* ptr[], void* tptr[], size_t size);
 
 //****************************************************************************//
 //      Merging of sorted arrays                                              //
@@ -1766,6 +1685,9 @@ void Array_MergeAsc_sint16 (sint16_t target[], const sint16_t source1[], size_t 
 void Array_MergeAsc_sint32 (sint32_t target[], const sint32_t source1[], size_t size1, const sint32_t source2[], size_t size2);
 void Array_MergeAsc_sint64 (sint64_t target[], const sint64_t source1[], size_t size1, const sint64_t source2[], size_t size2);
 
+// Other types
+void Array_MergeAsc_size (size_t target[], const size_t source1[], size_t size1, const size_t source2[], size_t size2);
+
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 //      Descending sort order                                                 //
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
@@ -1782,6 +1704,9 @@ void Array_MergeDsc_sint16 (sint16_t target[], const sint16_t source1[], size_t 
 void Array_MergeDsc_sint32 (sint32_t target[], const sint32_t source1[], size_t size1, const sint32_t source2[], size_t size2);
 void Array_MergeDsc_sint64 (sint64_t target[], const sint64_t source1[], size_t size1, const sint64_t source2[], size_t size2);
 
+// Other types
+void Array_MergeDsc_size (size_t target[], const size_t source1[], size_t size1, const size_t source2[], size_t size2);
+
 //============================================================================//
 //      Key merging                                                           //
 //============================================================================//
@@ -1791,32 +1716,38 @@ void Array_MergeDsc_sint64 (sint64_t target[], const sint64_t source1[], size_t 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
 // Unsigned integer types
-void Array_MergeAsc_uint8key (struct uint8_key target[], const struct uint8_key source1[], size_t size1, const struct uint8_key source2[], size_t size2);
-void Array_MergeAsc_uint16key (struct uint16_key target[], const struct uint16_key source1[], size_t size1, const struct uint16_key source2[], size_t size2);
-void Array_MergeAsc_uint32key (struct uint32_key target[], const struct uint32_key source1[], size_t size1, const struct uint32_key source2[], size_t size2);
-void Array_MergeAsc_uint64key (struct uint64_key target[], const struct uint64_key source1[], size_t size1, const struct uint64_key source2[], size_t size2);
+void Array_MergeKeyAsc_uint8 (uint8_t tkey[], void* tptr[], const uint8_t skey1[], const void* sptr1[], size_t size1, const uint8_t skey2[], const void* sptr2[], size_t size2);
+void Array_MergeKeyAsc_uint16 (uint16_t tkey[], void* tptr[], const uint16_t skey1[], const void* sptr1[], size_t size1, const uint16_t skey2[], const void* sptr2[], size_t size2);
+void Array_MergeKeyAsc_uint32 (uint32_t tkey[], void* tptr[], const uint32_t skey1[], const void* sptr1[], size_t size1, const uint32_t skey2[], const void* sptr2[], size_t size2);
+void Array_MergeKeyAsc_uint64 (uint64_t tkey[], void* tptr[], const uint64_t skey1[], const void* sptr1[], size_t size1, const uint64_t skey2[], const void* sptr2[], size_t size2);
 
 // Signed integer types
-void Array_MergeAsc_sint8key (struct sint8_key target[], const struct sint8_key source1[], size_t size1, const struct sint8_key source2[], size_t size2);
-void Array_MergeAsc_sint16key (struct sint16_key target[], const struct sint16_key source1[], size_t size1, const struct sint16_key source2[], size_t size2);
-void Array_MergeAsc_sint32key (struct sint32_key target[], const struct sint32_key source1[], size_t size1, const struct sint32_key source2[], size_t size2);
-void Array_MergeAsc_sint64key (struct sint64_key target[], const struct sint64_key source1[], size_t size1, const struct sint64_key source2[], size_t size2);
+void Array_MergeKeyAsc_sint8 (sint8_t tkey[], void* tptr[], const sint8_t skey1[], const void* sptr1[], size_t size1, const sint8_t skey2[], const void* sptr2[], size_t size2);
+void Array_MergeKeyAsc_sint16 (sint16_t tkey[], void* tptr[], const sint16_t skey1[], const void* sptr1[], size_t size1, const sint16_t skey2[], const void* sptr2[], size_t size2);
+void Array_MergeKeyAsc_sint32 (sint32_t tkey[], void* tptr[], const sint32_t skey1[], const void* sptr1[], size_t size1, const sint32_t skey2[], const void* sptr2[], size_t size2);
+void Array_MergeKeyAsc_sint64 (sint64_t tkey[], void* tptr[], const sint64_t skey1[], const void* sptr1[], size_t size1, const sint64_t skey2[], const void* sptr2[], size_t size2);
+
+// Other types
+void Array_MergeKeyAsc_size (size_t tkey[], void* tptr[], const size_t skey1[], const void* sptr1[], size_t size1, const size_t skey2[], const void* sptr2[], size_t size2);
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 //      Descending sort order                                                 //
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
 // Unsigned integer types
-void Array_MergeDsc_uint8key (struct uint8_key target[], const struct uint8_key source1[], size_t size1, const struct uint8_key source2[], size_t size2);
-void Array_MergeDsc_uint16key (struct uint16_key target[], const struct uint16_key source1[], size_t size1, const struct uint16_key source2[], size_t size2);
-void Array_MergeDsc_uint32key (struct uint32_key target[], const struct uint32_key source1[], size_t size1, const struct uint32_key source2[], size_t size2);
-void Array_MergeDsc_uint64key (struct uint64_key target[], const struct uint64_key source1[], size_t size1, const struct uint64_key source2[], size_t size2);
+void Array_MergeKeyDsc_uint8 (uint8_t tkey[], void* tptr[], const uint8_t skey1[], const void* sptr1[], size_t size1, const uint8_t skey2[], const void* sptr2[], size_t size2);
+void Array_MergeKeyDsc_uint16 (uint16_t tkey[], void* tptr[], const uint16_t skey1[], const void* sptr1[], size_t size1, const uint16_t skey2[], const void* sptr2[], size_t size2);
+void Array_MergeKeyDsc_uint32 (uint32_t tkey[], void* tptr[], const uint32_t skey1[], const void* sptr1[], size_t size1, const uint32_t skey2[], const void* sptr2[], size_t size2);
+void Array_MergeKeyDsc_uint64 (uint64_t tkey[], void* tptr[], const uint64_t skey1[], const void* sptr1[], size_t size1, const uint64_t skey2[], const void* sptr2[], size_t size2);
 
 // Signed integer types
-void Array_MergeDsc_sint8key (struct sint8_key target[], const struct sint8_key source1[], size_t size1, const struct sint8_key source2[], size_t size2);
-void Array_MergeDsc_sint16key (struct sint16_key target[], const struct sint16_key source1[], size_t size1, const struct sint16_key source2[], size_t size2);
-void Array_MergeDsc_sint32key (struct sint32_key target[], const struct sint32_key source1[], size_t size1, const struct sint32_key source2[], size_t size2);
-void Array_MergeDsc_sint64key (struct sint64_key target[], const struct sint64_key source1[], size_t size1, const struct sint64_key source2[], size_t size2);
+void Array_MergeKeyDsc_sint8 (sint8_t tkey[], void* tptr[], const sint8_t skey1[], const void* sptr1[], size_t size1, const sint8_t skey2[], const void* sptr2[], size_t size2);
+void Array_MergeKeyDsc_sint16 (sint16_t tkey[], void* tptr[], const sint16_t skey1[], const void* sptr1[], size_t size1, const sint16_t skey2[], const void* sptr2[], size_t size2);
+void Array_MergeKeyDsc_sint32 (sint32_t tkey[], void* tptr[], const sint32_t skey1[], const void* sptr1[], size_t size1, const sint32_t skey2[], const void* sptr2[], size_t size2);
+void Array_MergeKeyDsc_sint64 (sint64_t tkey[], void* tptr[], const sint64_t skey1[], const void* sptr1[], size_t size1, const sint64_t skey2[], const void* sptr2[], size_t size2);
+
+// Other types
+void Array_MergeKeyDsc_size (size_t tkey[], void* tptr[], const size_t skey1[], const void* sptr1[], size_t size1, const size_t skey2[], const void* sptr2[], size_t size2);
 
 //****************************************************************************//
 //      Unique values                                                         //
@@ -1849,6 +1780,77 @@ size_t Array_Duplicates_sint8 (size_t count[], sint8_t array[], size_t size);
 size_t Array_Duplicates_sint16 (size_t count[], sint16_t array[], size_t size);
 size_t Array_Duplicates_sint32 (size_t count[], sint32_t array[], size_t size);
 size_t Array_Duplicates_sint64 (size_t count[], sint64_t array[], size_t size);
+
+//****************************************************************************//
+//      Checks                                                                //
+//****************************************************************************//
+
+//============================================================================//
+//      Check for duplicate values                                            //
+//============================================================================//
+
+// Unsigned integer types
+bool Array_HasDuplicates_uint8 (const uint8_t array[], size_t size);
+bool Array_HasDuplicates_uint16 (const uint16_t array[], size_t size);
+bool Array_HasDuplicates_uint32 (const uint32_t array[], size_t size);
+bool Array_HasDuplicates_uint64 (const uint64_t array[], size_t size);
+
+// Signed integer types
+bool Array_HasDuplicates_sint8 (const sint8_t array[], size_t size);
+bool Array_HasDuplicates_sint16 (const sint16_t array[], size_t size);
+bool Array_HasDuplicates_sint32 (const sint32_t array[], size_t size);
+bool Array_HasDuplicates_sint64 (const sint64_t array[], size_t size);
+
+//============================================================================//
+//      Check for infinite values                                             //
+//============================================================================//
+bool Array_HasInf_flt32 (const flt32_t array[], size_t size);
+bool Array_HasInf_flt64 (const flt64_t array[], size_t size);
+
+//============================================================================//
+//      Check for NaN values                                                  //
+//============================================================================//
+bool Array_HasNaN_flt32 (const flt32_t array[], size_t size);
+bool Array_HasNaN_flt64 (const flt64_t array[], size_t size);
+
+//============================================================================//
+//      Check for equality                                                    //
+//============================================================================//
+
+// Unsigned integer types
+bool Array_IsEqual_uint8 (const uint8_t array1[], const uint8_t array2[], size_t size);
+bool Array_IsEqual_uint16 (const uint16_t array1[], const uint16_t array2[], size_t size);
+bool Array_IsEqual_uint32 (const uint32_t array1[], const uint32_t array2[], size_t size);
+bool Array_IsEqual_uint64 (const uint64_t array1[], const uint64_t array2[], size_t size);
+
+// Signed integer types
+bool Array_IsEqual_sint8 (const sint8_t array1[], const sint8_t array2[], size_t size);
+bool Array_IsEqual_sint16 (const sint16_t array1[], const sint16_t array2[], size_t size);
+bool Array_IsEqual_sint32 (const sint32_t array1[], const sint32_t array2[], size_t size);
+bool Array_IsEqual_sint64 (const sint64_t array1[], const sint64_t array2[], size_t size);
+
+//============================================================================//
+//      Check for overlap                                                     //
+//============================================================================//
+
+// Unsigned integer types
+bool Array_Overlap_uint8 (const uint8_t array1[], size_t size1, const uint8_t array2[], size_t size2);
+bool Array_Overlap_uint16 (const uint16_t array1[], size_t size1, const uint16_t array2[], size_t size2);
+bool Array_Overlap_uint32 (const uint32_t array1[], size_t size1, const uint32_t array2[], size_t size2);
+bool Array_Overlap_uint64 (const uint64_t array1[], size_t size1, const uint64_t array2[], size_t size2);
+
+// Signed integer types
+bool Array_Overlap_sint8 (const sint8_t array1[], size_t size1, const sint8_t array2[], size_t size2);
+bool Array_Overlap_sint16 (const sint16_t array1[], size_t size1, const sint16_t array2[], size_t size2);
+bool Array_Overlap_sint32 (const sint32_t array1[], size_t size1, const sint32_t array2[], size_t size2);
+bool Array_Overlap_sint64 (const sint64_t array1[], size_t size1, const sint64_t array2[], size_t size2);
+
+// Floating-point types
+bool Array_Overlap_flt32 (const flt32_t array1[], size_t size1, const flt32_t array2[], size_t size2);
+bool Array_Overlap_flt64 (const flt64_t array1[], size_t size1, const flt64_t array2[], size_t size2);
+
+// Other types
+bool Array_Overlap_size (const size_t array1[], size_t size1, const size_t array2[], size_t size2);
 
 # endif
 /*

@@ -603,58 +603,28 @@ public	RoundFrac_flt32			as	'_ZN5Array4FracEPfm'
 public	RoundFrac_flt64			as	'_ZN5Array4FracEPdm'
 
 ;******************************************************************************;
-;       Checks                                                                 ;
+;       Value replacement                                                      ;
 ;******************************************************************************;
 
-;==============================================================================;
-;       Check for infinite values                                              ;
-;==============================================================================;
-public	HasINF_flt32			as	'Array_HasInf_flt32'
-public	HasINF_flt64			as	'Array_HasInf_flt64'
-public	HasINF_flt32			as	'_ZN5Array6HasInfEPKfm'
-public	HasINF_flt64			as	'_ZN5Array6HasInfEPKdm'
-
-;==============================================================================;
-;       Check for NaN values                                                   ;
-;==============================================================================;
-public	HasNAN_flt32			as	'Array_HasNaN_flt32'
-public	HasNAN_flt64			as	'Array_HasNaN_flt64'
-public	HasNAN_flt32			as	'_ZN5Array6HasNaNEPKfm'
-public	HasNAN_flt64			as	'_ZN5Array6HasNaNEPKdm'
-
-;==============================================================================;
-;       Check for overlap                                                      ;
-;==============================================================================;
-
 ; Unsigned integer types
-public	Overlap8				as	'Array_Overlap_uint8'
-public	Overlap16				as	'Array_Overlap_uint16'
-public	Overlap32				as	'Array_Overlap_uint32'
-public	Overlap64				as	'Array_Overlap_uint64'
-public	Overlap8				as	'_ZN5Array7OverlapEPKhmS1_m'
-public	Overlap16				as	'_ZN5Array7OverlapEPKtmS1_m'
-public	Overlap32				as	'_ZN5Array7OverlapEPKjmS1_m'
-public	Overlap64				as	'_ZN5Array7OverlapEPKymS1_m'
+public	Replace8				as	'Array_Replace_uint8'
+public	Replace16				as	'Array_Replace_uint16'
+public	Replace32				as	'Array_Replace_uint32'
+public	Replace64				as	'Array_Replace_uint64'
+public	Replace8				as	'_ZN5Array7ReplaceEPhmhh'
+public	Replace16				as	'_ZN5Array7ReplaceEPtmtt'
+public	Replace32				as	'_ZN5Array7ReplaceEPjmjj'
+public	Replace64				as	'_ZN5Array7ReplaceEPymyy'
 
 ; Signed integer types
-public	Overlap8				as	'Array_Overlap_sint8'
-public	Overlap16				as	'Array_Overlap_sint16'
-public	Overlap32				as	'Array_Overlap_sint32'
-public	Overlap64				as	'Array_Overlap_sint64'
-public	Overlap8				as	'_ZN5Array7OverlapEPKamS1_m'
-public	Overlap16				as	'_ZN5Array7OverlapEPKsmS1_m'
-public	Overlap32				as	'_ZN5Array7OverlapEPKimS1_m'
-public	Overlap64				as	'_ZN5Array7OverlapEPKxmS1_m'
-
-; Floating-point types
-public	Overlap32				as	'Array_Overlap_flt32'
-public	Overlap64				as	'Array_Overlap_flt64'
-public	Overlap32				as	'_ZN5Array7OverlapEPKfmS1_m'
-public	Overlap64				as	'_ZN5Array7OverlapEPKdmS1_m'
-
-; Other types
-public	Overlap64				as	'Array_Overlap_size'
-public	Overlap64				as	'_ZN5Array7OverlapEPKmmS1_m'
+public	Replace8				as	'Array_Replace_sint8'
+public	Replace16				as	'Array_Replace_sint16'
+public	Replace32				as	'Array_Replace_sint32'
+public	Replace64				as	'Array_Replace_sint64'
+public	Replace8				as	'_ZN5Array7ReplaceEPamaa'
+public	Replace16				as	'_ZN5Array7ReplaceEPsmss'
+public	Replace32				as	'_ZN5Array7ReplaceEPimii'
+public	Replace64				as	'_ZN5Array7ReplaceEPxmxx'
 
 ;******************************************************************************;
 ;       Search algorithms                                                      ;
@@ -717,12 +687,8 @@ public	FindBwd64				as	'_ZN5Array7FindBwdEPKxmx'
 ;==============================================================================;
 
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
-;       Array searching                                                        ;
+;       Ascending sort order                                                   ;
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
-
-;------------------------------------------------------------------------------;
-;       Ascending order sorted array                                           ;
-;------------------------------------------------------------------------------;
 
 ; Unsigned integer types
 public	FindAsc_uint8			as	'Array_FindAsc_uint8'
@@ -744,9 +710,13 @@ public	FindAsc_sint16			as	'_ZN5Array7FindAscEPKsms'
 public	FindAsc_sint32			as	'_ZN5Array7FindAscEPKimi'
 public	FindAsc_sint64			as	'_ZN5Array7FindAscEPKxmx'
 
-;------------------------------------------------------------------------------;
-;       Descending order sorted array                                          ;
-;------------------------------------------------------------------------------;
+; Other types
+public	FindAsc_uint64			as	'Array_FindAsc_size'
+public	FindAsc_uint64			as	'_ZN5Array7FindAscEPKmmm'
+
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+;       Descending sort order                                                  ;
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 
 ; Unsigned integer types
 public	FindDsc_uint8			as	'Array_FindDsc_uint8'
@@ -768,81 +738,9 @@ public	FindDsc_sint16			as	'_ZN5Array7FindDscEPKsms'
 public	FindDsc_sint32			as	'_ZN5Array7FindDscEPKimi'
 public	FindDsc_sint64			as	'_ZN5Array7FindDscEPKxmx'
 
-;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
-;       Key searching                                                          ;
-;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
-
-;------------------------------------------------------------------------------;
-;       Ascending order sorted array                                           ;
-;------------------------------------------------------------------------------;
-
-; Unsigned integer types
-public	FindAscKey_uint8		as	'Array_FindAsc_uint8key'
-public	FindAscKey_uint16		as	'Array_FindAsc_uint16key'
-public	FindAscKey_uint32		as	'Array_FindAsc_uint32key'
-public	FindAscKey_uint64		as	'Array_FindAsc_uint64key'
-public	FindAscKey_uint8		as	'_ZN5Array7FindAscEPK9uint8_keymh'
-public	FindAscKey_uint16		as	'_ZN5Array7FindAscEPK10uint16_keymt'
-public	FindAscKey_uint32		as	'_ZN5Array7FindAscEPK10uint32_keymj'
-public	FindAscKey_uint64		as	'_ZN5Array7FindAscEPK10uint64_keymy'
-
-; Signed integer types
-public	FindAscKey_sint8		as	'Array_FindAsc_sint8key'
-public	FindAscKey_sint16		as	'Array_FindAsc_sint16key'
-public	FindAscKey_sint32		as	'Array_FindAsc_sint32key'
-public	FindAscKey_sint64		as	'Array_FindAsc_sint64key'
-public	FindAscKey_uint8		as	'_ZN5Array7FindAscEPK9uint8_keyma'
-public	FindAscKey_uint16		as	'_ZN5Array7FindAscEPK10uint16_keyms'
-public	FindAscKey_uint32		as	'_ZN5Array7FindAscEPK10uint32_keymi'
-public	FindAscKey_uint64		as	'_ZN5Array7FindAscEPK10uint64_keymx'
-
-;------------------------------------------------------------------------------;
-;       Descending order sorted array                                          ;
-;------------------------------------------------------------------------------;
-
-; Unsigned integer types
-public	FindDscKey_uint8		as	'Array_FindDsc_uint8key'
-public	FindDscKey_uint16		as	'Array_FindDsc_uint16key'
-public	FindDscKey_uint32		as	'Array_FindDsc_uint32key'
-public	FindDscKey_uint64		as	'Array_FindDsc_uint64key'
-public	FindDscKey_uint8		as	'_ZN5Array7FindDscEPK9uint8_keymh'
-public	FindDscKey_uint16		as	'_ZN5Array7FindDscEPK10uint16_keymt'
-public	FindDscKey_uint32		as	'_ZN5Array7FindDscEPK10uint32_keymj'
-public	FindDscKey_uint64		as	'_ZN5Array7FindDscEPK10uint64_keymy'
-
-; Signed integer types
-public	FindDscKey_sint8		as	'Array_FindDsc_sint8key'
-public	FindDscKey_sint16		as	'Array_FindDsc_sint16key'
-public	FindDscKey_sint32		as	'Array_FindDsc_sint32key'
-public	FindDscKey_sint64		as	'Array_FindDsc_sint64key'
-public	FindDscKey_uint8		as	'_ZN5Array7FindDscEPK9uint8_keyma'
-public	FindDscKey_uint16		as	'_ZN5Array7FindDscEPK10uint16_keyms'
-public	FindDscKey_uint32		as	'_ZN5Array7FindDscEPK10uint32_keymi'
-public	FindDscKey_uint64		as	'_ZN5Array7FindDscEPK10uint64_keymx'
-
-;******************************************************************************;
-;       Value replacement                                                      ;
-;******************************************************************************;
-
-; Unsigned integer types
-public	Replace8				as	'Array_Replace_uint8'
-public	Replace16				as	'Array_Replace_uint16'
-public	Replace32				as	'Array_Replace_uint32'
-public	Replace64				as	'Array_Replace_uint64'
-public	Replace8				as	'_ZN5Array7ReplaceEPhmhh'
-public	Replace16				as	'_ZN5Array7ReplaceEPtmtt'
-public	Replace32				as	'_ZN5Array7ReplaceEPjmjj'
-public	Replace64				as	'_ZN5Array7ReplaceEPymyy'
-
-; Signed integer types
-public	Replace8				as	'Array_Replace_sint8'
-public	Replace16				as	'Array_Replace_sint16'
-public	Replace32				as	'Array_Replace_sint32'
-public	Replace64				as	'Array_Replace_sint64'
-public	Replace8				as	'_ZN5Array7ReplaceEPamaa'
-public	Replace16				as	'_ZN5Array7ReplaceEPsmss'
-public	Replace32				as	'_ZN5Array7ReplaceEPimii'
-public	Replace64				as	'_ZN5Array7ReplaceEPxmxx'
+; Other types
+public	FindDsc_uint64			as	'Array_FindDsc_size'
+public	FindDsc_uint64			as	'_ZN5Array7FindDscEPKmmm'
 
 ;******************************************************************************;
 ;       Sorting algorithms                                                     ;
@@ -892,6 +790,10 @@ public	QuickSortAsc_flt64		as	'Array_QuickSortAsc_flt64'
 public	QuickSortAsc_flt32		as	'_ZN5Array12QuickSortAscEPfm'
 public	QuickSortAsc_flt64		as	'_ZN5Array12QuickSortAscEPdm'
 
+; Other types
+public	QuickSortAsc_uint64		as	'Array_QuickSortAsc_size'
+public	QuickSortAsc_uint64		as	'_ZN5Array12QuickSortAscEPmm'
+
 ;------------------------------------------------------------------------------;
 ;       Descending sort order                                                  ;
 ;------------------------------------------------------------------------------;
@@ -922,6 +824,10 @@ public	QuickSortDsc_flt64		as	'Array_QuickSortDsc_flt64'
 public	QuickSortDsc_flt32		as	'_ZN5Array12QuickSortDscEPfm'
 public	QuickSortDsc_flt64		as	'_ZN5Array12QuickSortDscEPdm'
 
+; Other types
+public	QuickSortDsc_uint64		as	'Array_QuickSortDsc_size'
+public	QuickSortDsc_uint64		as	'_ZN5Array12QuickSortDscEPmm'
+
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 ;       Key sorting                                                            ;
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
@@ -931,60 +837,68 @@ public	QuickSortDsc_flt64		as	'_ZN5Array12QuickSortDscEPdm'
 ;------------------------------------------------------------------------------;
 
 ; Unsigned integer types
-public	QuickSortAscKey_uint8	as	'Array_QuickSortAsc_uint8key'
-public	QuickSortAscKey_uint16	as	'Array_QuickSortAsc_uint16key'
-public	QuickSortAscKey_uint32	as	'Array_QuickSortAsc_uint32key'
-public	QuickSortAscKey_uint64	as	'Array_QuickSortAsc_uint64key'
-public	QuickSortAscKey_uint8	as	'_ZN5Array12QuickSortAscEP9uint8_keym'
-public	QuickSortAscKey_uint16	as	'_ZN5Array12QuickSortAscEP10uint16_keym'
-public	QuickSortAscKey_uint32	as	'_ZN5Array12QuickSortAscEP10uint32_keym'
-public	QuickSortAscKey_uint64	as	'_ZN5Array12QuickSortAscEP10uint64_keym'
+public	QuickSortKeyAsc_uint8	as	'Array_QuickSortKeyAsc_uint8'
+public	QuickSortKeyAsc_uint16	as	'Array_QuickSortKeyAsc_uint16'
+public	QuickSortKeyAsc_uint32	as	'Array_QuickSortKeyAsc_uint32'
+public	QuickSortKeyAsc_uint64	as	'Array_QuickSortKeyAsc_uint64'
+public	QuickSortKeyAsc_uint8	as	'_ZN5Array12QuickSortAscEPhPPvm'
+public	QuickSortKeyAsc_uint16	as	'_ZN5Array12QuickSortAscEPtPPvm'
+public	QuickSortKeyAsc_uint32	as	'_ZN5Array12QuickSortAscEPjPPvm'
+public	QuickSortKeyAsc_uint64	as	'_ZN5Array12QuickSortAscEPyPPvm'
 
 ; Signed integer types
-public	QuickSortAscKey_sint8	as	'Array_QuickSortAsc_sint8key'
-public	QuickSortAscKey_sint16	as	'Array_QuickSortAsc_sint16key'
-public	QuickSortAscKey_sint32	as	'Array_QuickSortAsc_sint32key'
-public	QuickSortAscKey_sint64	as	'Array_QuickSortAsc_sint64key'
-public	QuickSortAscKey_sint8	as	'_ZN5Array12QuickSortAscEP9sint8_keym'
-public	QuickSortAscKey_sint16	as	'_ZN5Array12QuickSortAscEP10sint16_keym'
-public	QuickSortAscKey_sint32	as	'_ZN5Array12QuickSortAscEP10sint32_keym'
-public	QuickSortAscKey_sint64	as	'_ZN5Array12QuickSortAscEP10sint64_keym'
+public	QuickSortKeyAsc_sint8	as	'Array_QuickSortKeyAsc_sint8'
+public	QuickSortKeyAsc_sint16	as	'Array_QuickSortKeyAsc_sint16'
+public	QuickSortKeyAsc_sint32	as	'Array_QuickSortKeyAsc_sint32'
+public	QuickSortKeyAsc_sint64	as	'Array_QuickSortKeyAsc_sint64'
+public	QuickSortKeyAsc_sint8	as	'_ZN5Array12QuickSortAscEPaPPvm'
+public	QuickSortKeyAsc_sint16	as	'_ZN5Array12QuickSortAscEPsPPvm'
+public	QuickSortKeyAsc_sint32	as	'_ZN5Array12QuickSortAscEPiPPvm'
+public	QuickSortKeyAsc_sint64	as	'_ZN5Array12QuickSortAscEPxPPvm'
 
 ; Floating-point types
-public	QuickSortAscKey_flt32	as	'Array_QuickSortAsc_flt32key'
-public	QuickSortAscKey_flt64	as	'Array_QuickSortAsc_flt64key'
-public	QuickSortAscKey_flt32	as	'_ZN5Array12QuickSortAscEP9flt32_keym'
-public	QuickSortAscKey_flt64	as	'_ZN5Array12QuickSortAscEP9flt64_keym'
+public	QuickSortKeyAsc_flt32	as	'Array_QuickSortKeyAsc_flt32'
+public	QuickSortKeyAsc_flt64	as	'Array_QuickSortKeyAsc_flt64'
+public	QuickSortKeyAsc_flt32	as	'_ZN5Array12QuickSortAscEPfPPvm'
+public	QuickSortKeyAsc_flt64	as	'_ZN5Array12QuickSortAscEPdPPvm'
+
+; Other types
+public	QuickSortKeyAsc_uint64	as	'Array_QuickSortKeyAsc_size'
+public	QuickSortKeyAsc_uint64	as	'_ZN5Array12QuickSortAscEPmPPvm'
 
 ;------------------------------------------------------------------------------;
 ;       Descending sort order                                                  ;
 ;------------------------------------------------------------------------------;
 
 ; Unsigned integer types
-public	QuickSortDscKey_uint8	as	'Array_QuickSortDsc_uint8key'
-public	QuickSortDscKey_uint16	as	'Array_QuickSortDsc_uint16key'
-public	QuickSortDscKey_uint32	as	'Array_QuickSortDsc_uint32key'
-public	QuickSortDscKey_uint64	as	'Array_QuickSortDsc_uint64key'
-public	QuickSortDscKey_uint8	as	'_ZN5Array12QuickSortDscEP9uint8_keym'
-public	QuickSortDscKey_uint16	as	'_ZN5Array12QuickSortDscEP10uint16_keym'
-public	QuickSortDscKey_uint32	as	'_ZN5Array12QuickSortDscEP10uint32_keym'
-public	QuickSortDscKey_uint64	as	'_ZN5Array12QuickSortDscEP10uint64_keym'
+public	QuickSortKeyDsc_uint8	as	'Array_QuickSortKeyDsc_uint8'
+public	QuickSortKeyDsc_uint16	as	'Array_QuickSortKeyDsc_uint16'
+public	QuickSortKeyDsc_uint32	as	'Array_QuickSortKeyDsc_uint32'
+public	QuickSortKeyDsc_uint64	as	'Array_QuickSortKeyDsc_uint64'
+public	QuickSortKeyDsc_uint8	as	'_ZN5Array12QuickSortDscEPhPPvm'
+public	QuickSortKeyDsc_uint16	as	'_ZN5Array12QuickSortDscEPtPPvm'
+public	QuickSortKeyDsc_uint32	as	'_ZN5Array12QuickSortDscEPjPPvm'
+public	QuickSortKeyDsc_uint64	as	'_ZN5Array12QuickSortDscEPyPPvm'
 
 ; Signed integer types
-public	QuickSortDscKey_sint8	as	'Array_QuickSortDsc_sint8key'
-public	QuickSortDscKey_sint16	as	'Array_QuickSortDsc_sint16key'
-public	QuickSortDscKey_sint32	as	'Array_QuickSortDsc_sint32key'
-public	QuickSortDscKey_sint64	as	'Array_QuickSortDsc_sint64key'
-public	QuickSortDscKey_sint8	as	'_ZN5Array12QuickSortDscEP9sint8_keym'
-public	QuickSortDscKey_sint16	as	'_ZN5Array12QuickSortDscEP10sint16_keym'
-public	QuickSortDscKey_sint32	as	'_ZN5Array12QuickSortDscEP10sint32_keym'
-public	QuickSortDscKey_sint64	as	'_ZN5Array12QuickSortDscEP10sint64_keym'
+public	QuickSortKeyDsc_sint8	as	'Array_QuickSortKeyDsc_sint8'
+public	QuickSortKeyDsc_sint16	as	'Array_QuickSortKeyDsc_sint16'
+public	QuickSortKeyDsc_sint32	as	'Array_QuickSortKeyDsc_sint32'
+public	QuickSortKeyDsc_sint64	as	'Array_QuickSortKeyDsc_sint64'
+public	QuickSortKeyDsc_sint8	as	'_ZN5Array12QuickSortDscEPaPPvm'
+public	QuickSortKeyDsc_sint16	as	'_ZN5Array12QuickSortDscEPsPPvm'
+public	QuickSortKeyDsc_sint32	as	'_ZN5Array12QuickSortDscEPiPPvm'
+public	QuickSortKeyDsc_sint64	as	'_ZN5Array12QuickSortDscEPxPPvm'
 
 ; Floating-point types
-public	QuickSortDscKey_flt32	as	'Array_QuickSortDsc_flt32key'
-public	QuickSortDscKey_flt64	as	'Array_QuickSortDsc_flt64key'
-public	QuickSortDscKey_flt32	as	'_ZN5Array12QuickSortDscEP9flt32_keym'
-public	QuickSortDscKey_flt64	as	'_ZN5Array12QuickSortDscEP9flt64_keym'
+public	QuickSortKeyDsc_flt32	as	'Array_QuickSortKeyDsc_flt32'
+public	QuickSortKeyDsc_flt64	as	'Array_QuickSortKeyDsc_flt64'
+public	QuickSortKeyDsc_flt32	as	'_ZN5Array12QuickSortDscEPfPPvm'
+public	QuickSortKeyDsc_flt64	as	'_ZN5Array12QuickSortDscEPdPPvm'
+
+; Other types
+public	QuickSortKeyDsc_uint64	as	'Array_QuickSortKeyDsc_size'
+public	QuickSortKeyDsc_uint64	as	'_ZN5Array12QuickSortDscEPmPPvm'
 
 ;==============================================================================;
 ;       Radix sort                                                             ;
@@ -1024,6 +938,10 @@ public	RadixSortAsc_flt64		as	'Array_RadixSortAsc_flt64'
 public	RadixSortAsc_flt32		as	'_ZN5Array12RadixSortAscEPfS0_m'
 public	RadixSortAsc_flt64		as	'_ZN5Array12RadixSortAscEPdS0_m'
 
+; Other types
+public	RadixSortAsc_uint64		as	'Array_RadixSortAsc_size'
+public	RadixSortAsc_uint64		as	'_ZN5Array12RadixSortAscEPmS0_m'
+
 ;------------------------------------------------------------------------------;
 ;       Descending sort order                                                  ;
 ;------------------------------------------------------------------------------;
@@ -1054,6 +972,10 @@ public	RadixSortDsc_flt64		as	'Array_RadixSortDsc_flt64'
 public	RadixSortDsc_flt32		as	'_ZN5Array12RadixSortDscEPfS0_m'
 public	RadixSortDsc_flt64		as	'_ZN5Array12RadixSortDscEPdS0_m'
 
+; Other types
+public	RadixSortDsc_uint64		as	'Array_RadixSortDsc_size'
+public	RadixSortDsc_uint64		as	'_ZN5Array12RadixSortDscEPmS0_m'
+
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 ;       Key sorting                                                            ;
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
@@ -1063,60 +985,68 @@ public	RadixSortDsc_flt64		as	'_ZN5Array12RadixSortDscEPdS0_m'
 ;------------------------------------------------------------------------------;
 
 ; Unsigned integer types
-public	RadixSortAscKey_uint8	as	'Array_RadixSortAsc_uint8key'
-public	RadixSortAscKey_uint16	as	'Array_RadixSortAsc_uint16key'
-public	RadixSortAscKey_uint32	as	'Array_RadixSortAsc_uint32key'
-public	RadixSortAscKey_uint64	as	'Array_RadixSortAsc_uint64key'
-public	RadixSortAscKey_uint8	as	'_ZN5Array12RadixSortAscEP9uint8_keyS1_m'
-public	RadixSortAscKey_uint16	as	'_ZN5Array12RadixSortAscEP10uint16_keyS1_m'
-public	RadixSortAscKey_uint32	as	'_ZN5Array12RadixSortAscEP10uint32_keyS1_m'
-public	RadixSortAscKey_uint64	as	'_ZN5Array12RadixSortAscEP10uint64_keyS1_m'
+public	RadixSortKeyAsc_uint8	as	'Array_RadixSortKeyAsc_uint8'
+public	RadixSortKeyAsc_uint16	as	'Array_RadixSortKeyAsc_uint16'
+public	RadixSortKeyAsc_uint32	as	'Array_RadixSortKeyAsc_uint32'
+public	RadixSortKeyAsc_uint64	as	'Array_RadixSortKeyAsc_uint64'
+public	RadixSortKeyAsc_uint8	as	'_ZN5Array12RadixSortAscEPhS0_PPvS2_m'
+public	RadixSortKeyAsc_uint16	as	'_ZN5Array12RadixSortAscEPtS0_PPvS2_m'
+public	RadixSortKeyAsc_uint32	as	'_ZN5Array12RadixSortAscEPjS0_PPvS2_m'
+public	RadixSortKeyAsc_uint64	as	'_ZN5Array12RadixSortAscEPyS0_PPvS2_m'
 
 ; Signed integer types
-public	RadixSortAscKey_sint8	as	'Array_RadixSortAsc_sint8key'
-public	RadixSortAscKey_sint16	as	'Array_RadixSortAsc_sint16key'
-public	RadixSortAscKey_sint32	as	'Array_RadixSortAsc_sint32key'
-public	RadixSortAscKey_sint64	as	'Array_RadixSortAsc_sint64key'
-public	RadixSortAscKey_sint8	as	'_ZN5Array12RadixSortAscEP9sint8_keyS1_m'
-public	RadixSortAscKey_sint16	as	'_ZN5Array12RadixSortAscEP10sint16_keyS1_m'
-public	RadixSortAscKey_sint32	as	'_ZN5Array12RadixSortAscEP10sint32_keyS1_m'
-public	RadixSortAscKey_sint64	as	'_ZN5Array12RadixSortAscEP10sint64_keyS1_m'
+public	RadixSortKeyAsc_sint8	as	'Array_RadixSortKeyAsc_sint8'
+public	RadixSortKeyAsc_sint16	as	'Array_RadixSortKeyAsc_sint16'
+public	RadixSortKeyAsc_sint32	as	'Array_RadixSortKeyAsc_sint32'
+public	RadixSortKeyAsc_sint64	as	'Array_RadixSortKeyAsc_sint64'
+public	RadixSortKeyAsc_sint8	as	'_ZN5Array12RadixSortAscEPaS0_PPvS2_m'
+public	RadixSortKeyAsc_sint16	as	'_ZN5Array12RadixSortAscEPsS0_PPvS2_m'
+public	RadixSortKeyAsc_sint32	as	'_ZN5Array12RadixSortAscEPiS0_PPvS2_m'
+public	RadixSortKeyAsc_sint64	as	'_ZN5Array12RadixSortAscEPxS0_PPvS2_m'
 
 ; Floating-point types
-public	RadixSortAscKey_flt32	as	'Array_RadixSortAsc_flt32key'
-public	RadixSortAscKey_flt64	as	'Array_RadixSortAsc_flt64key'
-public	RadixSortAscKey_flt32	as	'_ZN5Array12RadixSortAscEP9flt32_keyS1_m'
-public	RadixSortAscKey_flt64	as	'_ZN5Array12RadixSortAscEP9flt64_keyS1_m'
+public	RadixSortKeyAsc_flt32	as	'Array_RadixSortKeyAsc_flt32'
+public	RadixSortKeyAsc_flt64	as	'Array_RadixSortKeyAsc_flt64'
+public	RadixSortKeyAsc_flt32	as	'_ZN5Array12RadixSortAscEPfS0_PPvS2_m'
+public	RadixSortKeyAsc_flt64	as	'_ZN5Array12RadixSortAscEPdS0_PPvS2_m'
+
+; Other types
+public	RadixSortKeyAsc_uint64	as	'Array_RadixSortKeyAsc_size'
+public	RadixSortKeyAsc_uint64	as	'_ZN5Array12RadixSortAscEPmS0_PPvS2_m'
 
 ;------------------------------------------------------------------------------;
 ;       Descending sort order                                                  ;
 ;------------------------------------------------------------------------------;
 
 ; Unsigned integer types
-public	RadixSortDscKey_uint8	as	'Array_RadixSortDsc_uint8key'
-public	RadixSortDscKey_uint16	as	'Array_RadixSortDsc_uint16key'
-public	RadixSortDscKey_uint32	as	'Array_RadixSortDsc_uint32key'
-public	RadixSortDscKey_uint64	as	'Array_RadixSortDsc_uint64key'
-public	RadixSortDscKey_uint8	as	'_ZN5Array12RadixSortDscEP9uint8_keyS1_m'
-public	RadixSortDscKey_uint16	as	'_ZN5Array12RadixSortDscEP10uint16_keyS1_m'
-public	RadixSortDscKey_uint32	as	'_ZN5Array12RadixSortDscEP10uint32_keyS1_m'
-public	RadixSortDscKey_uint64	as	'_ZN5Array12RadixSortDscEP10uint64_keyS1_m'
+public	RadixSortKeyDsc_uint8	as	'Array_RadixSortKeyDsc_uint8'
+public	RadixSortKeyDsc_uint16	as	'Array_RadixSortKeyDsc_uint16'
+public	RadixSortKeyDsc_uint32	as	'Array_RadixSortKeyDsc_uint32'
+public	RadixSortKeyDsc_uint64	as	'Array_RadixSortKeyDsc_uint64'
+public	RadixSortKeyDsc_uint8	as	'_ZN5Array12RadixSortDscEPhS0_PPvS2_m'
+public	RadixSortKeyDsc_uint16	as	'_ZN5Array12RadixSortDscEPtS0_PPvS2_m'
+public	RadixSortKeyDsc_uint32	as	'_ZN5Array12RadixSortDscEPjS0_PPvS2_m'
+public	RadixSortKeyDsc_uint64	as	'_ZN5Array12RadixSortDscEPyS0_PPvS2_m'
 
 ; Signed integer types
-public	RadixSortDscKey_sint8	as	'Array_RadixSortDsc_sint8key'
-public	RadixSortDscKey_sint16	as	'Array_RadixSortDsc_sint16key'
-public	RadixSortDscKey_sint32	as	'Array_RadixSortDsc_sint32key'
-public	RadixSortDscKey_sint64	as	'Array_RadixSortDsc_sint64key'
-public	RadixSortDscKey_sint8	as	'_ZN5Array12RadixSortDscEP9sint8_keyS1_m'
-public	RadixSortDscKey_sint16	as	'_ZN5Array12RadixSortDscEP10sint16_keyS1_m'
-public	RadixSortDscKey_sint32	as	'_ZN5Array12RadixSortDscEP10sint32_keyS1_m'
-public	RadixSortDscKey_sint64	as	'_ZN5Array12RadixSortDscEP10sint64_keyS1_m'
+public	RadixSortKeyDsc_sint8	as	'Array_RadixSortKeyDsc_sint8'
+public	RadixSortKeyDsc_sint16	as	'Array_RadixSortKeyDsc_sint16'
+public	RadixSortKeyDsc_sint32	as	'Array_RadixSortKeyDsc_sint32'
+public	RadixSortKeyDsc_sint64	as	'Array_RadixSortKeyDsc_sint64'
+public	RadixSortKeyDsc_sint8	as	'_ZN5Array12RadixSortDscEPaS0_PPvS2_m'
+public	RadixSortKeyDsc_sint16	as	'_ZN5Array12RadixSortDscEPsS0_PPvS2_m'
+public	RadixSortKeyDsc_sint32	as	'_ZN5Array12RadixSortDscEPiS0_PPvS2_m'
+public	RadixSortKeyDsc_sint64	as	'_ZN5Array12RadixSortDscEPxS0_PPvS2_m'
 
 ; Floating-point types
-public	RadixSortDscKey_flt32	as	'Array_RadixSortDsc_flt32key'
-public	RadixSortDscKey_flt64	as	'Array_RadixSortDsc_flt64key'
-public	RadixSortDscKey_flt32	as	'_ZN5Array12RadixSortDscEP9flt32_keyS1_m'
-public	RadixSortDscKey_flt64	as	'_ZN5Array12RadixSortDscEP9flt64_keyS1_m'
+public	RadixSortKeyDsc_flt32	as	'Array_RadixSortKeyDsc_flt32'
+public	RadixSortKeyDsc_flt64	as	'Array_RadixSortKeyDsc_flt64'
+public	RadixSortKeyDsc_flt32	as	'_ZN5Array12RadixSortDscEPfS0_PPvS2_m'
+public	RadixSortKeyDsc_flt64	as	'_ZN5Array12RadixSortDscEPdS0_PPvS2_m'
+
+; Other types
+public	RadixSortKeyDsc_uint64	as	'Array_RadixSortKeyDsc_size'
+public	RadixSortKeyDsc_uint64	as	'_ZN5Array12RadixSortDscEPmS0_PPvS2_m'
 
 ;******************************************************************************;
 ;       Merging of sorted arrays                                               ;
@@ -1150,6 +1080,10 @@ public	MergeAsc_sint16			as	'_ZN5Array8MergeAscEPsPKsmS2_m'
 public	MergeAsc_sint32			as	'_ZN5Array8MergeAscEPiPKimS2_m'
 public	MergeAsc_sint64			as	'_ZN5Array8MergeAscEPxPKxmS2_m'
 
+; Other types
+public	MergeAsc_uint64			as	'Array_MergeAsc_size'
+public	MergeAsc_uint64			as	'_ZN5Array8MergeAscEPmPKmmS2_m'
+
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 ;       Descending sort order                                                  ;
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
@@ -1174,6 +1108,10 @@ public	MergeDsc_sint16			as	'_ZN5Array8MergeDscEPsPKsmS2_m'
 public	MergeDsc_sint32			as	'_ZN5Array8MergeDscEPiPKimS2_m'
 public	MergeDsc_sint64			as	'_ZN5Array8MergeDscEPxPKxmS2_m'
 
+; Other types
+public	MergeDsc_uint64			as	'Array_MergeDsc_size'
+public	MergeDsc_uint64			as	'_ZN5Array8MergeDscEPmPKmmS2_m'
+
 ;==============================================================================;
 ;       Key merging                                                            ;
 ;==============================================================================;
@@ -1183,48 +1121,56 @@ public	MergeDsc_sint64			as	'_ZN5Array8MergeDscEPxPKxmS2_m'
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 
 ; Unsigned integer types
-public	MergeAscKey_uint8			as	'Array_MergeAsc_uint8key'
-public	MergeAscKey_uint16			as	'Array_MergeAsc_uint16key'
-public	MergeAscKey_uint32			as	'Array_MergeAsc_uint32key'
-public	MergeAscKey_uint64			as	'Array_MergeAsc_uint64key'
-public	MergeAscKey_uint8			as	'_ZN5Array8MergeAscEP9uint8_keyPKS0_mS3_m'
-public	MergeAscKey_uint16			as	'_ZN5Array8MergeAscEP10uint16_keyPKS0_mS3_m'
-public	MergeAscKey_uint32			as	'_ZN5Array8MergeAscEP10uint32_keyPKS0_mS3_m'
-public	MergeAscKey_uint64			as	'_ZN5Array8MergeAscEP10uint64_keyPKS0_mS3_m'
+public	MergeKeyAsc_uint8			as	'Array_MergeKeyAsc_uint8'
+public	MergeKeyAsc_uint16			as	'Array_MergeKeyAsc_uint16'
+public	MergeKeyAsc_uint32			as	'Array_MergeKeyAsc_uint32'
+public	MergeKeyAsc_uint64			as	'Array_MergeKeyAsc_uint64'
+public	MergeKeyAsc_uint8			as	'_ZN5Array8MergeAscEPhPPvPKhPPKvmS4_S7_m'
+public	MergeKeyAsc_uint16			as	'_ZN5Array8MergeAscEPtPPvPKtPPKvmS4_S7_m'
+public	MergeKeyAsc_uint32			as	'_ZN5Array8MergeAscEPjPPvPKjPPKvmS4_S7_m'
+public	MergeKeyAsc_uint64			as	'_ZN5Array8MergeAscEPyPPvPKyPPKvmS4_S7_m'
 
 ; Signed integer types
-public	MergeAscKey_sint8			as	'Array_MergeAsc_sint8key'
-public	MergeAscKey_sint16			as	'Array_MergeAsc_sint16key'
-public	MergeAscKey_sint32			as	'Array_MergeAsc_sint32key'
-public	MergeAscKey_sint64			as	'Array_MergeAsc_sint64key'
-public	MergeAscKey_sint8			as	'_ZN5Array8MergeAscEP9sint8_keyPKS0_mS3_m'
-public	MergeAscKey_sint16			as	'_ZN5Array8MergeAscEP10sint16_keyPKS0_mS3_m'
-public	MergeAscKey_sint32			as	'_ZN5Array8MergeAscEP10sint32_keyPKS0_mS3_m'
-public	MergeAscKey_sint64			as	'_ZN5Array8MergeAscEP10sint64_keyPKS0_mS3_m'
+public	MergeKeyAsc_sint8			as	'Array_MergeKeyAsc_sint8'
+public	MergeKeyAsc_sint16			as	'Array_MergeKeyAsc_sint16'
+public	MergeKeyAsc_sint32			as	'Array_MergeKeyAsc_sint32'
+public	MergeKeyAsc_sint64			as	'Array_MergeKeyAsc_sint64'
+public	MergeKeyAsc_sint8			as	'_ZN5Array8MergeAscEPaPPvPKaPPKvmS4_S7_m'
+public	MergeKeyAsc_sint16			as	'_ZN5Array8MergeAscEPsPPvPKsPPKvmS4_S7_m'
+public	MergeKeyAsc_sint32			as	'_ZN5Array8MergeAscEPiPPvPKiPPKvmS4_S7_m'
+public	MergeKeyAsc_sint64			as	'_ZN5Array8MergeAscEPxPPvPKxPPKvmS4_S7_m'
+
+; Other types
+public	MergeKeyAsc_uint64			as	'Array_MergeKeyAsc_size'
+public	MergeKeyAsc_uint64			as	'_ZN5Array8MergeAscEPmPPvPKmPPKvmS4_S7_m'
 
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 ;       Descending sort order                                                  ;
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 
 ; Unsigned integer types
-public	MergeDscKey_uint8			as	'Array_MergeDsc_uint8key'
-public	MergeDscKey_uint16			as	'Array_MergeDsc_uint16key'
-public	MergeDscKey_uint32			as	'Array_MergeDsc_uint32key'
-public	MergeDscKey_uint64			as	'Array_MergeDsc_uint64key'
-public	MergeDscKey_uint8			as	'_ZN5Array8MergeDscEP9uint8_keyPKS0_mS3_m'
-public	MergeDscKey_uint16			as	'_ZN5Array8MergeDscEP10uint16_keyPKS0_mS3_m'
-public	MergeDscKey_uint32			as	'_ZN5Array8MergeDscEP10uint32_keyPKS0_mS3_m'
-public	MergeDscKey_uint64			as	'_ZN5Array8MergeDscEP10uint64_keyPKS0_mS3_m'
+public	MergeKeyDsc_uint8			as	'Array_MergeKeyDsc_uint8'
+public	MergeKeyDsc_uint16			as	'Array_MergeKeyDsc_uint16'
+public	MergeKeyDsc_uint32			as	'Array_MergeKeyDsc_uint32'
+public	MergeKeyDsc_uint64			as	'Array_MergeKeyDsc_uint64'
+public	MergeKeyDsc_uint8			as	'_ZN5Array8MergeDscEPhPPvPKhPPKvmS4_S7_m'
+public	MergeKeyDsc_uint16			as	'_ZN5Array8MergeDscEPtPPvPKtPPKvmS4_S7_m'
+public	MergeKeyDsc_uint32			as	'_ZN5Array8MergeDscEPjPPvPKjPPKvmS4_S7_m'
+public	MergeKeyDsc_uint64			as	'_ZN5Array8MergeDscEPyPPvPKyPPKvmS4_S7_m'
 
 ; Signed integer types
-public	MergeDscKey_sint8			as	'Array_MergeDsc_sint8key'
-public	MergeDscKey_sint16			as	'Array_MergeDsc_sint16key'
-public	MergeDscKey_sint32			as	'Array_MergeDsc_sint32key'
-public	MergeDscKey_sint64			as	'Array_MergeDsc_sint64key'
-public	MergeDscKey_sint8			as	'_ZN5Array8MergeDscEP9sint8_keyPKS0_mS3_m'
-public	MergeDscKey_sint16			as	'_ZN5Array8MergeDscEP10sint16_keyPKS0_mS3_m'
-public	MergeDscKey_sint32			as	'_ZN5Array8MergeDscEP10sint32_keyPKS0_mS3_m'
-public	MergeDscKey_sint64			as	'_ZN5Array8MergeDscEP10sint64_keyPKS0_mS3_m'
+public	MergeKeyDsc_sint8			as	'Array_MergeKeyDsc_sint8'
+public	MergeKeyDsc_sint16			as	'Array_MergeKeyDsc_sint16'
+public	MergeKeyDsc_sint32			as	'Array_MergeKeyDsc_sint32'
+public	MergeKeyDsc_sint64			as	'Array_MergeKeyDsc_sint64'
+public	MergeKeyDsc_sint8			as	'_ZN5Array8MergeDscEPaPPvPKaPPKvmS4_S7_m'
+public	MergeKeyDsc_sint16			as	'_ZN5Array8MergeDscEPsPPvPKsPPKvmS4_S7_m'
+public	MergeKeyDsc_sint32			as	'_ZN5Array8MergeDscEPiPPvPKiPPKvmS4_S7_m'
+public	MergeKeyDsc_sint64			as	'_ZN5Array8MergeDscEPxPPvPKxPPKvmS4_S7_m'
+
+; Other types
+public	MergeKeyDsc_uint64			as	'Array_MergeKeyDsc_size'
+public	MergeKeyDsc_uint64			as	'_ZN5Array8MergeDscEPmPPvPKmPPKvmS4_S7_m'
 
 ;******************************************************************************;
 ;       Unique values                                                          ;
@@ -1273,6 +1219,108 @@ public	Duplicates8				as	'_ZN5Array10DuplicatesEPmPam'
 public	Duplicates16			as	'_ZN5Array10DuplicatesEPmPsm'
 public	Duplicates32			as	'_ZN5Array10DuplicatesEPmPim'
 public	Duplicates64			as	'_ZN5Array10DuplicatesEPmPxm'
+
+;******************************************************************************;
+;       Checks                                                                 ;
+;******************************************************************************;
+
+;==============================================================================;
+;       Check for duplicate values                                             ;
+;==============================================================================;
+
+; Unsigned integer types
+public	HasDuplicates8			as	'Array_HasDuplicates_uint8'
+public	HasDuplicates16			as	'Array_HasDuplicates_uint16'
+public	HasDuplicates32			as	'Array_HasDuplicates_uint32'
+public	HasDuplicates64			as	'Array_HasDuplicates_uint64'
+public	HasDuplicates8			as	'_ZN5Array13HasDuplicatesEPKhm'
+public	HasDuplicates16			as	'_ZN5Array13HasDuplicatesEPKtm'
+public	HasDuplicates32			as	'_ZN5Array13HasDuplicatesEPKjm'
+public	HasDuplicates64			as	'_ZN5Array13HasDuplicatesEPKym'
+
+; Signed integer types
+public	HasDuplicates8			as	'Array_HasDuplicates_sint8'
+public	HasDuplicates16			as	'Array_HasDuplicates_sint16'
+public	HasDuplicates32			as	'Array_HasDuplicates_sint32'
+public	HasDuplicates64			as	'Array_HasDuplicates_sint64'
+public	HasDuplicates8			as	'_ZN5Array13HasDuplicatesEPKam'
+public	HasDuplicates16			as	'_ZN5Array13HasDuplicatesEPKsm'
+public	HasDuplicates32			as	'_ZN5Array13HasDuplicatesEPKim'
+public	HasDuplicates64			as	'_ZN5Array13HasDuplicatesEPKxm'
+
+;==============================================================================;
+;       Check for infinite values                                              ;
+;==============================================================================;
+public	HasINF_flt32			as	'Array_HasInf_flt32'
+public	HasINF_flt64			as	'Array_HasInf_flt64'
+public	HasINF_flt32			as	'_ZN5Array6HasInfEPKfm'
+public	HasINF_flt64			as	'_ZN5Array6HasInfEPKdm'
+
+;==============================================================================;
+;       Check for NaN values                                                   ;
+;==============================================================================;
+public	HasNAN_flt32			as	'Array_HasNaN_flt32'
+public	HasNAN_flt64			as	'Array_HasNaN_flt64'
+public	HasNAN_flt32			as	'_ZN5Array6HasNaNEPKfm'
+public	HasNAN_flt64			as	'_ZN5Array6HasNaNEPKdm'
+
+;==============================================================================;
+;       Check for equality                                                     ;
+;==============================================================================;
+
+; Unsigned integer types
+public	IsEqual8				as	'Array_IsEqual_uint8'
+public	IsEqual16				as	'Array_IsEqual_uint16'
+public	IsEqual32				as	'Array_IsEqual_uint32'
+public	IsEqual64				as	'Array_IsEqual_uint64'
+public	IsEqual8				as	'_ZN5Array7IsEqualEPKhS1_m'
+public	IsEqual16				as	'_ZN5Array7IsEqualEPKtS1_m'
+public	IsEqual32				as	'_ZN5Array7IsEqualEPKjS1_m'
+public	IsEqual64				as	'_ZN5Array7IsEqualEPKyS1_m'
+
+; Signed integer types
+public	IsEqual8				as	'Array_IsEqual_sint8'
+public	IsEqual16				as	'Array_IsEqual_sint16'
+public	IsEqual32				as	'Array_IsEqual_sint32'
+public	IsEqual64				as	'Array_IsEqual_sint64'
+public	IsEqual8				as	'_ZN5Array7IsEqualEPKaS1_m'
+public	IsEqual16				as	'_ZN5Array7IsEqualEPKsS1_m'
+public	IsEqual32				as	'_ZN5Array7IsEqualEPKiS1_m'
+public	IsEqual64				as	'_ZN5Array7IsEqualEPKxS1_m'
+
+;==============================================================================;
+;       Check for overlap                                                      ;
+;==============================================================================;
+
+; Unsigned integer types
+public	Overlap8				as	'Array_Overlap_uint8'
+public	Overlap16				as	'Array_Overlap_uint16'
+public	Overlap32				as	'Array_Overlap_uint32'
+public	Overlap64				as	'Array_Overlap_uint64'
+public	Overlap8				as	'_ZN5Array7OverlapEPKhmS1_m'
+public	Overlap16				as	'_ZN5Array7OverlapEPKtmS1_m'
+public	Overlap32				as	'_ZN5Array7OverlapEPKjmS1_m'
+public	Overlap64				as	'_ZN5Array7OverlapEPKymS1_m'
+
+; Signed integer types
+public	Overlap8				as	'Array_Overlap_sint8'
+public	Overlap16				as	'Array_Overlap_sint16'
+public	Overlap32				as	'Array_Overlap_sint32'
+public	Overlap64				as	'Array_Overlap_sint64'
+public	Overlap8				as	'_ZN5Array7OverlapEPKamS1_m'
+public	Overlap16				as	'_ZN5Array7OverlapEPKsmS1_m'
+public	Overlap32				as	'_ZN5Array7OverlapEPKimS1_m'
+public	Overlap64				as	'_ZN5Array7OverlapEPKxmS1_m'
+
+; Floating-point types
+public	Overlap32				as	'Array_Overlap_flt32'
+public	Overlap64				as	'Array_Overlap_flt64'
+public	Overlap32				as	'_ZN5Array7OverlapEPKfmS1_m'
+public	Overlap64				as	'_ZN5Array7OverlapEPKdmS1_m'
+
+; Other types
+public	Overlap64				as	'Array_Overlap_size'
+public	Overlap64				as	'_ZN5Array7OverlapEPKmmS1_m'
 
 ;###############################################################################
 ;#      Code section                                                           #
@@ -3636,274 +3684,32 @@ RoundFrac_flt32:	FRAC	eax, s
 RoundFrac_flt64:	FRAC	rax, d
 
 ;******************************************************************************;
-;       Checks                                                                 ;
+;       Value replacement                                                      ;
 ;******************************************************************************;
-
-;==============================================================================;
-;       Check for subnormal values                                             ;
-;==============================================================================;
-
-;==============================================================================;
-;       Check for infinite values                                              ;
-;==============================================================================;
-macro	HAS_INF	treg, mask, value, x
+macro	REPLACE	pattern, value, scale
 {
 ;---[Parameters]---------------------------
 array	equ		rdi							; pointer to array
 size	equ		rsi							; array size (count of elements)
 ;---[Internal variables]-------------------
-result	equ		al							; result register
-count	equ		rcx							; count of elements to align array
-temp	equ		r8							; temporary register
-fmask	equ		eax							; mask of comparison results
-temp0	equ		xmm0						; temporary register #1
-temp1	equ		xmm1						; temporary register #2
-temp2	equ		xmm2						; temporary register #3
-temp3	equ		xmm3						; temporary register #4
-flags	equ		xmm4						; checks accumulator
-vector	equ		xmm5						; vector value to process with
-vmask	equ		xmm6						; bit mask
-amask	= 16 - 1							; aligning mask
-if x eq d
-dmask	= DMASK_FLT32						; data mask
-inf		= 0x7F800000						; inf
-scale	= 2									; scale value
-else
-dmask	= DMASK_FLT64						; data mask
-inf		= 0x7FF0000000000000				; inf
-scale	= 3									; scale value
-end if
-bscale	= 6									; block scale factor
 bytes	= 1 shl scale						; size of array element (bytes)
-block	= 1 shl bscale						; block size (bytes)
-step	= 1 shl (bscale - scale)			; step size (bytes)
 ;------------------------------------------
-	prefetchnta	[array]						; prefetch data
-		test	array, bytes - 1			; if (array & (bytes - 1))
-		jnz		.sclr						;     then skip vector code
-		mov		count, array
-		neg		count
-		and		count, amask
-		shr		count, scale				; count = (-array & amask) >> scale
-		lea		temp, [count + step]
-		cmp		size, temp					; if (size < count + step)
-		jb		.sclr						;     then skip vector code
-		initreg	vmask, treg, dmask, bytes	; vmask = dmask
-		clone	vmask, scale				; duplicate value through the entire register
-		initreg	vector, treg, inf, bytes	; vector = Inf
-		clone	vector, scale				; duplicate value through the entire register
-		sub		size, count					; size -= count
-		mov		temp, size					; temp = size
-		shr		size, bscale - scale		; size = size / step
-		and		temp, step - 1				; temp = size % step
-		test	count, count				; if (count == 0)
-		jz		.vctr						;     then skip aligning loop
-		mov		mask, dmask					; mask = dmask
-		mov		value, inf					; value = Inf
-;---[Aligning loop]------------------------
-.aloop:	mov		treg, [array]				; treg = source[0]
-		and		treg, mask					; treg = Abs(treg)
-		cmp		treg, value					; if (treg == value)
-		je		.found						;     then go to found branch
-		add		array, bytes				; array++
-		sub		count, 1					; count--
-		jnz		.aloop						; do while (count != 0)
-;------------------------------------------
-.vctr:	pxor	flags, flags				; flags = 0
-;---[Vector loop]--------------------------
-.vloop:	movdqa	temp0, [array + 0x00]		; temp0 = array[0]
-		pand	temp0, vmask				; temp0 = Abs (temp0)
-	pcmpeq#x	temp0, vector				; check for temp0 == value
-		por		flags, temp0				; accumulate check results
-		movdqa	temp1, [array + 0x10]		; temp1 = array[16]
-		pand	temp1, vmask				; temp1 = Abs (temp1)
-	pcmpeq#x	temp1, vector				; check for temp1 == value
-		por		flags, temp1				; accumulate check results
-		movdqa	temp2, [array + 0x20]		; temp2 = array[32]
-		pand	temp2, vmask				; temp2 = Abs (temp2)
-	pcmpeq#x	temp2, vector				; check for temp2 == value
-		por		flags, temp2				; accumulate check results
-		movdqa	temp3, [array + 0x30]		; temp3 = array[48]
-		pand	temp3, vmask				; temp3 = Abs (temp3)
-	pcmpeq#x	temp3, vector				; check for temp3 == value
-		por		flags, temp3				; accumulate check results
-	prefetchnta	[array + PSTEP]				; prefetch next portion of data
-	pmovmskb	fmask, flags				; save check results to fmask
-		test	fmask, fmask				; if condition is met,
-		jnz		.found						;     then go to found branch
-		add		array, block				; array += block
-		sub		size, 1						; size--
-		jnz		.vloop						; do while (size != 0)
-;------------------------------------------
-		mov		size, temp					; size = temp
-.sclr:	test	size, size					; if (size == 0)
+		test	size, size					; if (size == 0)
 		jz		.exit						;     then go to exit
-		mov		mask, dmask					; mask = dmask
-		mov		value, inf					; value = Inf
-;---[Scalar loop]--------------------------
-.sloop:	mov		treg, [array]				; treg = array[0]
-		and		treg, mask					; treg = Abs(treg)
-		cmp		treg, value					; if (treg == value)
-		je		.found						;     then go to found branch
-		add		array, bytes				; array++
+;---[Loop]---------------------------------
+.loop:	cmp		[array], pattern			; if (array[0] == pattern) {
+		jne		@f							;     array[0] = value
+		mov		[array], value				; }
+@@:		add		array, bytes				; array++
 		sub		size, 1						; size--
-		jnz		.sloop						; do while (size != 0)
-;---[Normal exit branch]-------------------
-.exit:	xor		result, result				; return false
-		ret
-;---[Element has been found]---------------
-.found:	mov		result, 1					; return true (array has required value)
-		ret
+		jnz		.loop						; do while (size != 0)
+;------------------------------------------
+.exit:	ret
 }
-HasINF_flt32:	HAS_INF	eax, edx, r9d, d
-HasINF_flt64:	HAS_INF	rax, rdx, r9, q
-
-;==============================================================================;
-;       Check for NaN values                                                   ;
-;==============================================================================;
-macro	HAS_NAN	treg, mask, value, x
-{
-;---[Parameters]---------------------------
-array	equ		rdi							; pointer to array
-size	equ		rsi							; array size (count of elements)
-;---[Internal variables]-------------------
-result	equ		al							; result register
-count	equ		rcx							; count of elements to align array
-temp	equ		r8							; temporary register
-fmask	equ		eax							; mask of comparison results
-temp0	equ		xmm0						; temporary register #1
-temp1	equ		xmm1						; temporary register #2
-temp2	equ		xmm2						; temporary register #3
-temp3	equ		xmm3						; temporary register #4
-flags	equ		xmm4						; checks accumulator
-vector	equ		xmm5						; vector value to process with
-vmask	equ		xmm6						; bit mask
-amask	= 16 - 1							; aligning mask
-if x eq d
-dmask	= DMASK_FLT32						; data mask
-inf		= 0x7F800000						; inf
-scale	= 2									; scale value
-else
-dmask	= DMASK_FLT64						; data mask
-inf		= 0x7FF0000000000000				; inf
-scale	= 3									; scale value
-end if
-bscale	= 6									; block scale factor
-bytes	= 1 shl scale						; size of array element (bytes)
-block	= 1 shl bscale						; block size (bytes)
-step	= 1 shl (bscale - scale)			; step size (bytes)
-;------------------------------------------
-	prefetchnta	[array]						; prefetch data
-		test	array, bytes - 1			; if (array & (bytes - 1))
-		jnz		.sclr						;     then skip vector code
-		mov		count, array
-		neg		count
-		and		count, amask
-		shr		count, scale				; count = (-array & amask) >> scale
-		lea		temp, [count + step]
-		cmp		size, temp					; if (size < count + step)
-		jb		.sclr						;     then skip vector code
-		initreg	vmask, treg, dmask, bytes	; vmask = dmask
-		clone	vmask, scale				; duplicate value through the entire register
-		initreg	vector, treg, inf, bytes	; vector = Inf
-		clone	vector, scale				; duplicate value through the entire register
-		sub		size, count					; size -= count
-		mov		temp, size					; temp = size
-		shr		size, bscale - scale		; size = size / step
-		and		temp, step - 1				; temp = size % step
-		test	count, count				; if (count == 0)
-		jz		.vctr						;     then skip aligning loop
-		mov		mask, dmask					; mask = dmask
-		mov		value, inf					; value = Inf
-;---[Aligning loop]------------------------
-.aloop:	mov		treg, [array]				; treg = source[0]
-		and		treg, mask					; treg = Abs(treg)
-		cmp		treg, value					; if (treg > value)
-		jg		.found						;     then go to found branch
-		add		array, bytes				; array++
-		sub		count, 1					; count--
-		jnz		.aloop						; do while (count != 0)
-;------------------------------------------
-.vctr:	pxor	flags, flags				; flags = 0
-;---[Vector loop]--------------------------
-.vloop:	movdqa	temp0, [array + 0x00]		; temp0 = array[0]
-		pand	temp0, vmask				; temp0 = Abs (temp0)
-	pcmpgt#x	temp0, vector				; check for temp0 > value
-		por		flags, temp0				; accumulate check results
-		movdqa	temp1, [array + 0x10]		; temp1 = array[16]
-		pand	temp1, vmask				; temp1 = Abs (temp1)
-	pcmpgt#x	temp1, vector				; check for temp1 > value
-		por		flags, temp1				; accumulate check results
-		movdqa	temp2, [array + 0x20]		; temp2 = array[32]
-		pand	temp2, vmask				; temp2 = Abs (temp2)
-	pcmpgt#x	temp2, vector				; check for temp2 > value
-		por		flags, temp2				; accumulate check results
-		movdqa	temp3, [array + 0x30]		; temp3 = array[48]
-		pand	temp3, vmask				; temp3 = Abs (temp3)
-	pcmpgt#x	temp3, vector				; check for temp3 > value
-		por		flags, temp3				; accumulate check results
-	prefetchnta	[array + PSTEP]				; prefetch next portion of data
-	pmovmskb	fmask, flags				; save check results to fmask
-		test	fmask, fmask				; if condition is met,
-		jnz		.found						;     then go to found branch
-		add		array, block				; array += block
-		sub		size, 1						; size--
-		jnz		.vloop						; do while (size != 0)
-;------------------------------------------
-		mov		size, temp					; size = temp
-.sclr:	test	size, size					; if (size == 0)
-		jz		.exit						;     then go to exit
-		mov		mask, dmask					; mask = dmask
-		mov		value, inf					; value = Inf
-;---[Scalar loop]--------------------------
-.sloop:	mov		treg, [array]				; treg = array[0]
-		and		treg, mask					; treg = Abs(treg)
-		cmp		treg, value					; if (treg > value)
-		jg		.found						;     then go to found branch
-		add		array, bytes				; array++
-		sub		size, 1						; size--
-		jnz		.sloop						; do while (size != 0)
-;---[Normal exit branch]-------------------
-.exit:	xor		result, result				; return false
-		ret
-;---[Element has been found]---------------
-.found:	mov		result, 1					; return true (array has required value)
-		ret
-}
-HasNAN_flt32:	HAS_NAN	eax, edx, r9d, d
-HasNAN_flt64:	HAS_NAN	rax, rdx, r9, q
-
-;==============================================================================;
-;       Check for overlap                                                      ;
-;==============================================================================;
-macro	OVERLAP	scale
-{
-;---[Parameters]---------------------------
-target	equ 	rdi							; pointer to target array
-t_size	equ		rsi							; target array size
-source	equ 	rdx							; pointer to source array
-s_size	equ 	rcx							; source array size
-;---[Internal variables]-------------------
-result	equ		al							; result register
-bytes	= 1 shl scale						; size of array element (bytes)
-;------------------------------------------
-		cmp		target, source				; if (target >= source)
-		jb		@f
-;------------------------------------------
-		lea		source, [source+s_size*bytes]; then source += s_size
-		cmp		target, source				; return target >= source
-		setb	result
-		ret
-;------------------------------------------
-@@:		lea		target, [target+t_size*bytes]; else target += t_size
-		cmp		source, target				; return (source >= target)
-		setb	result
-		ret
-}
-Overlap8:	OVERLAP	0
-Overlap16:	OVERLAP	1
-Overlap32:	OVERLAP	2
-Overlap64:	OVERLAP	3
+Replace8:	REPLACE		dl, cl, 0
+Replace16:	REPLACE		dx, cx, 1
+Replace32:	REPLACE		edx, ecx, 2
+Replace64:	REPLACE		rdx, rcx, 3
 
 ;******************************************************************************;
 ;       Search algorithms                                                      ;
@@ -4216,12 +4022,8 @@ right	equ		size						; pointer to end of the data array
 }
 
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
-;       Array searching                                                        ;
+;       Ascending sort order                                                   ;
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
-
-;------------------------------------------------------------------------------;
-;       Ascending order sorted array                                           ;
-;------------------------------------------------------------------------------;
 
 ; Unsigned integer types
 FindAsc_uint8:	FIND_BIN	dl, a, 0
@@ -4235,9 +4037,9 @@ FindAsc_sint16:	FIND_BIN	dx, g, 1
 FindAsc_sint32:	FIND_BIN	edx, g, 2
 FindAsc_sint64:	FIND_BIN	rdx, g, 3
 
-;------------------------------------------------------------------------------;
-;       Descending order sorted array                                          ;
-;------------------------------------------------------------------------------;
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+;       Descending sort order                                                  ;
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 
 ; Unsigned integer types
 FindDsc_uint8:	FIND_BIN	dl, b, 0
@@ -4250,70 +4052,6 @@ FindDsc_sint8:	FIND_BIN	dl, l, 0
 FindDsc_sint16:	FIND_BIN	dx, l, 1
 FindDsc_sint32:	FIND_BIN	edx, l, 2
 FindDsc_sint64:	FIND_BIN	rdx, l, 3
-
-;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
-;       Key searching                                                          ;
-;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
-
-;------------------------------------------------------------------------------;
-;       Ascending order sorted array                                           ;
-;------------------------------------------------------------------------------;
-
-; Unsigned integer types
-FindAscKey_uint8:	FIND_BIN	dl, a, 4
-FindAscKey_uint16:	FIND_BIN	dx, a, 4
-FindAscKey_uint32:	FIND_BIN	edx, a, 4
-FindAscKey_uint64:	FIND_BIN	rdx, a, 4
-
-; Signed integer types
-FindAscKey_sint8:	FIND_BIN	dl, g, 4
-FindAscKey_sint16:	FIND_BIN	dx, g, 4
-FindAscKey_sint32:	FIND_BIN	edx, g, 4
-FindAscKey_sint64:	FIND_BIN	rdx, g, 4
-
-;------------------------------------------------------------------------------;
-;       Descending order sorted array                                          ;
-;------------------------------------------------------------------------------;
-
-; Unsigned integer types
-FindDscKey_uint8:	FIND_BIN	dl, b, 4
-FindDscKey_uint16:	FIND_BIN	dx, b, 4
-FindDscKey_uint32:	FIND_BIN	edx, b, 4
-FindDscKey_uint64:	FIND_BIN	rdx, b, 4
-
-; Signed integer types
-FindDscKey_sint8:	FIND_BIN	dl, l, 4
-FindDscKey_sint16:	FIND_BIN	dx, l, 4
-FindDscKey_sint32:	FIND_BIN	edx, l, 4
-FindDscKey_sint64:	FIND_BIN	rdx, l, 4
-
-;******************************************************************************;
-;       Value replacement                                                      ;
-;******************************************************************************;
-macro	REPLACE	pattern, value, scale
-{
-;---[Parameters]---------------------------
-array	equ		rdi							; pointer to array
-size	equ		rsi							; array size (count of elements)
-;---[Internal variables]-------------------
-bytes	= 1 shl scale						; size of array element (bytes)
-;------------------------------------------
-		test	size, size					; if (size == 0)
-		jz		.exit						;     then go to exit
-;---[Loop]---------------------------------
-.loop:	cmp		[array], pattern			; if (array[0] == pattern) {
-		jne		@f							;     array[0] = value
-		mov		[array], value				; }
-@@:		add		array, bytes				; array++
-		sub		size, 1						; size--
-		jnz		.loop						; do while (size != 0)
-;------------------------------------------
-.exit:	ret
-}
-Replace8:	REPLACE		dl, cl, 0
-Replace16:	REPLACE		dx, cx, 1
-Replace32:	REPLACE		edx, ecx, 2
-Replace64:	REPLACE		rdx, rcx, 3
 
 ;******************************************************************************;
 ;       Sorting algorithms                                                     ;
@@ -4342,155 +4080,128 @@ size	equ		rsi							; array size (count of elements)
 ;------------------------------------------
 .exit:	ret
 }
-
-; Mapping arrays
 Map_flt32:		MAP	eax, edx, 0x7FFFFFFF, 4
 Map_flt64:		MAP	rax, rdx, 0x7FFFFFFFFFFFFFFF, 8
-
-; Mapping keys
-MapKey_flt32:	MAP	eax, edx, 0x7FFFFFFF, 16
-MapKey_flt64:	MAP	rax, rdx, 0x7FFFFFFFFFFFFFFF, 16
 
 ;==============================================================================;
 ;       Quick sort                                                             ;
 ;==============================================================================;
-macro	QUICK_SORT_CORE	median, swap1, swap2, op1, op2, scale
-{
-;---[Parameters]---------------------------
-left	equ		rdi							; pointer to start of the data array
-right	equ		rsi							; pointer to end of the data array
-;---[Internal variables]-------------------
-size	equ		rax							; data array size
-l_ptr	equ		r8							; left pointer to split data array
-r_ptr	equ		r9							; right pointer to split data array
-l_size	equ		rcx							; size of left part of array
-r_size	equ		rdx							; size of right part of array
-stack	equ		rsp							; stack pointer
-s_ptr1	equ		stack + 0 * 8				; stack position of "ptr1"
-s_ptr2	equ		stack + 1 * 8				; stack position of "ptr2"
-N		= 32								; Max array size aceptable for Insert sort
-space	= 3 * 8								; stack size required by the procedure
-bytes	= 1 shl scale						; size of array element (bytes)
-;---[QUICK SORT]---------------------------
-		jmp		.start
-.qloop:	shr		size, 1						; size /= 2
-		and		size, -bytes
-		mov		l_ptr, left					; l_ptr = left
-		mov		r_ptr, right				; r_ptr = right
-		mov		median, [left + size]		; median = left [size]
-		jmp		@f							; skip swap section
-;---[Swap loop]----------------------------
-if scale = 4
-.swap:	movdqu	swap1, [l_ptr]				; swap1 = l_ptr[0]
-		movdqu	swap2, [r_ptr]				; swap2 = r_ptr[0]
-		movdqu	[l_ptr], swap2				; l_ptr[0] = swap2
-		movdqu	[r_ptr], swap1				; r_ptr[0] = swap1
-else
-.swap:	mov		swap1, [l_ptr]				; swap1 = l_ptr[0]
-		mov		swap2, [r_ptr]				; swap2 = r_ptr[0]
-		mov		[l_ptr], swap2				; l_ptr[0] = swap2
-		mov		[r_ptr], swap1				; r_ptr[0] = swap1
-end if
-;---[Internal loop 1]----------------------
-@@:		add		l_ptr, bytes				; l_ptr++
-		cmp		[l_ptr], median
-		j#op1	@b							; do while (l_ptr[0] condition median)
-;---[Internal loop 2]----------------------
-@@:		sub		r_ptr, bytes				; r_ptr--
-		cmp		[r_ptr], median
-		j#op2	@b							; do while (r_ptr[0] condition median)
-;------------------------------------------
-		cmp		l_ptr, r_ptr
-		jb		.swap						; do while (l_ptr < r_ptr)
-;---[Swap loop end]------------------------
-		mov		l_size, l_ptr
-		mov		r_size, right
-		sub		l_size, left				; l_size = l_ptr - left
-		sub		r_size, r_ptr				; r_size = right - r_ptr
-		cmp		l_size, r_size				; if (l_size <= r_size), then do the
-		ja		.else						; first section, else the second one
-;---[if]-----------------------------------
-		sub		stack, space				; Preserving stack space for variables
-		mov		[s_ptr2], right				; save "right" variable into the stack
-		mov		[s_ptr1], r_ptr				; save "r_ptr" variable into the stack
-		cmp		l_size, 2 * bytes			; if (l_size > 2)
-		jbe		@f							; then do recursive call
-		mov		right, l_ptr
-		call	.start
-@@:		mov		left, [s_ptr1]				; left = r_ptr
-		mov		right, [s_ptr2]				; restore "right" variable from the stack
-		add		stack, space				; Restoring stack space back
-		jmp		.start
-;---[else]---------------------------------
-.else:	sub		stack, space				; Preserving stack space for variables
-		mov		[s_ptr2], left				; save "left" variable into the stack
-		mov		[s_ptr1], l_ptr				; save "l_ptr" variable into the stack
-		cmp		r_size, 2 * bytes			; if (r_size > 2)
-		jbe		@f							; then do recursive call
-		mov		left, r_ptr
-		call	.start
-@@:		mov		right, [s_ptr1]				; right = l_ptr
-		mov		left, [s_ptr2]				; restore "left" variable from the stack
-		add		stack, space				; Restoring stack space back
-;---[end if]-------------------------------
-.start:	mov		size, right
-		sub		size, left					; size = right - left
-		cmp		size, N * bytes
-		ja		.qloop						; do while (size > N)
-;---[INSERT SORT]--------------------------
-.ins:	add		left, bytes
-		lea		l_ptr, [left + bytes]
-;---[Insert sort loop]---------------------
-.iloop:	mov		median, [l_ptr]
-if scale = 4
-		movdqu	swap1, [l_ptr]
-end if
-		mov		r_ptr, l_ptr
-;---[Internal loop]------------------------
-@@:		cmp		median, [r_ptr - bytes]
-		jn#op1	@f
-if scale = 4
-		movdqu	swap2, [r_ptr - bytes]
-		movdqu	[r_ptr], swap2
-else
-		mov		swap2, [r_ptr - bytes]
-		mov		[r_ptr], swap2
-end if
-		sub		r_ptr, bytes
-		cmp		r_ptr, left
-		ja		@b
-;---[Internal loop end]--------------------
-@@:		add		l_ptr, bytes
-if scale = 4
-		movdqu	[r_ptr], swap1
-else
-		mov		[r_ptr], median
-end if
-		cmp		l_ptr, right
-		jb		.iloop
-;---[Insert sort loop end]-----------------
-		ret
-}
-;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	QUICK_SORT_INT	sort_func, scale
+
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+;       Array sorting                                                          ;
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+macro	QUICKSORT_CORE	median, key1, key2, op1, op2, scale
 {
 ;---[Parameters]---------------------------
 array	equ		rdi							; pointer to array
 size	equ		rsi							; array size (count of elements)
 ;---[Internal variables]-------------------
+half	equ		rax							; half of array size
+left	equ		r8							; left index
+right	equ		r9							; right index
+lsize	equ		right						; size of left part of array
+rsize	equ		size						; size of right part of array
+larray	equ		array						; pointer to left part of array
+rarray	equ		left						; pointer to right part of array
+stack	equ		rsp							; stack pointer
+s_array	equ		stack + 0 * 8				; stack position of "array" variable
+s_size	equ		stack + 1 * 8				; stack position of "size" variable
+space	= 3 * 8								; stack size required by the procedure
+minsize	= 32								; min array size is aceptable for Quick sort
 bytes	= 1 shl scale						; size of array element (bytes)
 ;------------------------------------------
+		jmp		.start
+;---[QUICK SORT]---------------------------
+.qsort:	mov		half, size
+		mov		left, -1					; left = -1
+		shr		half, 1						; half = size / 2
+		mov		right, size					; right = size
+		mov		median, [array+half*bytes]	; median = array[half]
+		jmp		.loop1
+;---[Swap loop]----------------------------
+.swap:	xchg	key1, key2
+		mov		[array+left*bytes], key1	; array[left] = key2
+		mov		[array+right*bytes], key2	; array[right] = key1
+;---[Internal loop 1]----------------------
+.loop1:	add		left, 1						; left++
+		mov		key1, [array+left*bytes]	; key1 = array[left]
+		cmp		key1, median
+		j#op1	.loop1						; do while (key1 condition1 median)
+;---[Internal loop 2]----------------------
+.loop2:	sub		right, 1					; right--
+		mov		key2, [array+right*bytes]	; key2 = array[right]
+		cmp		key2, median
+		j#op2	.loop2						; do while (key2 condition2 median)
+;------------------------------------------
+		cmp		left, right
+		jb		.swap						; do while (left < right)
+;---[end of swap loop]---------------------
+		add		left, 1
+		sub		rsize, left					; rsize = size - (left + 1)
+		lea		rarray, [array+left*bytes]	; rarray = array + (left + 1)
+		cmp		lsize, rsize				; if (lsize <= rsize)
+		ja		.else						; {
+;---[if lsize <= rsize]--------------------
+		sub		stack, space				; reserving stack size for local vars
+		mov		[s_array], rarray			; save "rarray" variable into the stack
+		mov		[s_size], rsize				; save "rsize" variable into the stack
+		cmp		lsize, 1					; if (lsize > 1)
+		jbe		@f							; {
+		mov		size, lsize					;     call QuickSortCore (larray, lsize)
+		call	.start						; }
+@@:		mov		array, [s_array]			; get "rarray" variable from the stack
+		mov		size, [s_size]				; get "rsize" variable from the stack
+		add		stack, space				; restoring back the stack pointer
+		jmp		.start
+;---[else]---------------------------------
+.else:	sub		stack, space				; reserving stack size for local vars
+		mov		[s_array], larray			; save "larray" variable into the stack
+		mov		[s_size], lsize				; save "lsize" variable into the stack
+		cmp		rsize, 1					; if (rsize > 1)
+		jbe		@f							; {
+		mov		array, rarray				;     call QuickSortCore (rarray, rsize)
+		call	.start						; }
+@@:		mov		array, [s_array]			; get "larray" variable from the stack
+		mov		size, [s_size]				; get "lsize" variable from the stack
+		add		stack, space				; restoring back the stack pointer
+;---[end if]-------------------------------
+.start:	cmp		size, minsize
+		ja		.qsort						; do while (size > minsize)
+;---[END OF QUICK SORT]--------------------
+		mov		left, 1						; left = 1
+;---[INSERT SORT]--------------------------
+.isort:	mov		right, left					; right = left
+		mov		key1, [array + right*bytes]	; key1 = array[right]
+;---[Internal loop]------------------------
+.iloop:	mov		key2, [array + right*bytes-bytes]
+		cmp		key1, key2					; if (key1 condition1 array[right-1])
+		jn#op1	@f							; {
+		mov		[array + right*bytes], key2	;     array[right] = array[right-1]
+		sub		right, 1					;     right-- }
+		jnz		.iloop						; do while (right != 0)
+;---[end of internal loop]-----------------
+@@:		mov		[array + right*bytes], key1	; array[right] = key1
+		add		left, 1						; left++
+		cmp		left, size
+		jb		.isort						; do while (left < size)
+;---[END OF INSERT SORT]-------------------
+		ret
+}
+;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+macro	QUICKSORT_INT	sort_func
+{
+;---[Parameters]---------------------------
+array	equ		rdi							; pointer to array
+size	equ		rsi							; array size (count of elements)
+;------------------------------------------
 		cmp		size, 1						; if (size <= 1)
-		jbe		.exit						; then go to exit from the procedure
+		jbe		.exit						;     then go to exit from the procedure
 ;---[Call sort function]-------------------
-		shl		size, scale
-		add		size, array					; size = array + size
-		sub		array, bytes				; array--
 		jmp		sort_func					; call sorting function
 .exit:	ret
 }
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	QUICK_SORT_FLT	sort_func, convert_func, scale
+macro	QUICKSORT_FLT	sort_func, convert_func
 {
 ;---[Parameters]---------------------------
 array	equ		rdi							; pointer to array
@@ -4500,21 +4211,17 @@ stack	equ		rsp							; stack pointer
 s_array	equ		stack + 0 * 8				; stack position of "array" variable
 s_size	equ		stack + 1 * 8				; stack position of "size" variable
 space	= 3 * 8								; stack size required by the procedure
-bytes	= 1 shl scale						; size of array element (bytes)
 ;------------------------------------------
 		cmp		size, 1						; if (size <= 1)
-		jbe		.exit						; then go to exit from the procedure
+		jbe		.exit						;     then go to exit from the procedure
 		sub		stack, space				; reserving stack size for local vars
-;---[Convert array]------------------------
 		mov		[s_array], array			; save "array" variable into the stack
 		mov		[s_size], size				; save "size" variable into the stack
+;---[Convert array]------------------------
 		call	convert_func				; call converting function
 ;---[Sort array]---------------------------
-		mov		size, [s_size]				; get "size" variable from the stack
 		mov		array, [s_array]			; get "array" variable from the stack
-		shl		size, scale
-		add		size, array					; size = array + size
-		sub		array, bytes				; array--
+		mov		size, [s_size]				; get "size" variable from the stack
 		call	sort_func					; call sorting function
 ;---[Convert array]------------------------
 		mov		array, [s_array]			; get "array" variable from the stack
@@ -4524,142 +4231,308 @@ bytes	= 1 shl scale						; size of array element (bytes)
 .exit:	ret
 }
 
-;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
-;       Array sorting                                                          ;
-;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
-
 ;------------------------------------------------------------------------------;
 ;       Ascending sort order                                                   ;
 ;------------------------------------------------------------------------------;
 
 ; Unsigned integer types
-QuickSortCoreAsc_uint8:		QUICK_SORT_CORE	al, cl, dl, b, a, 0
-QuickSortCoreAsc_uint16:	QUICK_SORT_CORE	ax, cx, dx, b, a, 1
-QuickSortCoreAsc_uint32:	QUICK_SORT_CORE	eax, ecx, edx, b, a, 2
-QuickSortCoreAsc_uint64:	QUICK_SORT_CORE	rax, rcx, rdx, b, a, 3
-QuickSortAsc_uint8:			QUICK_SORT_INT	QuickSortCoreAsc_uint8, 0
-QuickSortAsc_uint16:		QUICK_SORT_INT	QuickSortCoreAsc_uint16, 1
-QuickSortAsc_uint32:		QUICK_SORT_INT	QuickSortCoreAsc_uint32, 2
-QuickSortAsc_uint64:		QUICK_SORT_INT	QuickSortCoreAsc_uint64, 3
+QuickSortCoreAsc_uint8:		QUICKSORT_CORE	al, dl, cl, b, a, 0
+QuickSortCoreAsc_uint16:	QUICKSORT_CORE	ax, dx, cx, b, a, 1
+QuickSortCoreAsc_uint32:	QUICKSORT_CORE	eax, edx, ecx, b, a, 2
+QuickSortCoreAsc_uint64:	QUICKSORT_CORE	rax, rdx, rcx, b, a, 3
+QuickSortAsc_uint8:			QUICKSORT_INT	QuickSortCoreAsc_uint8
+QuickSortAsc_uint16:		QUICKSORT_INT	QuickSortCoreAsc_uint16
+QuickSortAsc_uint32:		QUICKSORT_INT	QuickSortCoreAsc_uint32
+QuickSortAsc_uint64:		QUICKSORT_INT	QuickSortCoreAsc_uint64
 
 ; Signed integer types
-QuickSortCoreAsc_sint8:		QUICK_SORT_CORE	al, cl, dl, l, g, 0
-QuickSortCoreAsc_sint16:	QUICK_SORT_CORE	ax, cx, dx, l, g, 1
-QuickSortCoreAsc_sint32:	QUICK_SORT_CORE	eax, ecx, edx, l, g,2
-QuickSortCoreAsc_sint64:	QUICK_SORT_CORE	rax, rcx, rdx, l, g, 3
-QuickSortAsc_sint8:			QUICK_SORT_INT	QuickSortCoreAsc_sint8, 0
-QuickSortAsc_sint16:		QUICK_SORT_INT	QuickSortCoreAsc_sint16, 1
-QuickSortAsc_sint32:		QUICK_SORT_INT	QuickSortCoreAsc_sint32, 2
-QuickSortAsc_sint64:		QUICK_SORT_INT	QuickSortCoreAsc_sint64, 3
+QuickSortCoreAsc_sint8:		QUICKSORT_CORE	al, dl, cl, l, g, 0
+QuickSortCoreAsc_sint16:	QUICKSORT_CORE	ax, dx, cx, l, g, 1
+QuickSortCoreAsc_sint32:	QUICKSORT_CORE	eax, edx, ecx, l, g, 2
+QuickSortCoreAsc_sint64:	QUICKSORT_CORE	rax, rdx, rcx, l, g, 3
+QuickSortAsc_sint8:			QUICKSORT_INT	QuickSortCoreAsc_sint8
+QuickSortAsc_sint16:		QUICKSORT_INT	QuickSortCoreAsc_sint16
+QuickSortAsc_sint32:		QUICKSORT_INT	QuickSortCoreAsc_sint32
+QuickSortAsc_sint64:		QUICKSORT_INT	QuickSortCoreAsc_sint64
 
 ; Floating-point types
-QuickSortAsc_flt32:			QUICK_SORT_FLT	QuickSortCoreAsc_sint32, Map_flt32, 2
-QuickSortAsc_flt64:			QUICK_SORT_FLT	QuickSortCoreAsc_sint64, Map_flt64, 3
+QuickSortAsc_flt32:			QUICKSORT_FLT	QuickSortCoreAsc_sint32, Map_flt32
+QuickSortAsc_flt64:			QUICKSORT_FLT	QuickSortCoreAsc_sint64, Map_flt64
 
 ;------------------------------------------------------------------------------;
 ;       Descending sort order                                                  ;
 ;------------------------------------------------------------------------------;
 
 ; Unsigned integer types
-QuickSortCoreDsc_uint8:		QUICK_SORT_CORE	al, cl, dl, a, b, 0
-QuickSortCoreDsc_uint16:	QUICK_SORT_CORE	ax, cx, dx, a, b, 1
-QuickSortCoreDsc_uint32:	QUICK_SORT_CORE	eax, ecx, edx, a, b, 2
-QuickSortCoreDsc_uint64:	QUICK_SORT_CORE	rax, rcx, rdx, a, b, 3
-QuickSortDsc_uint8:			QUICK_SORT_INT	QuickSortCoreDsc_uint8, 0
-QuickSortDsc_uint16:		QUICK_SORT_INT	QuickSortCoreDsc_uint16, 1
-QuickSortDsc_uint32:		QUICK_SORT_INT	QuickSortCoreDsc_uint32, 2
-QuickSortDsc_uint64:		QUICK_SORT_INT	QuickSortCoreDsc_uint64, 3
+QuickSortCoreDsc_uint8:		QUICKSORT_CORE	al, dl, cl, a, b, 0
+QuickSortCoreDsc_uint16:	QUICKSORT_CORE	ax, dx, cx, a, b, 1
+QuickSortCoreDsc_uint32:	QUICKSORT_CORE	eax, edx, ecx, a, b, 2
+QuickSortCoreDsc_uint64:	QUICKSORT_CORE	rax, rdx, rcx, a, b, 3
+QuickSortDsc_uint8:			QUICKSORT_INT	QuickSortCoreDsc_uint8
+QuickSortDsc_uint16:		QUICKSORT_INT	QuickSortCoreDsc_uint16
+QuickSortDsc_uint32:		QUICKSORT_INT	QuickSortCoreDsc_uint32
+QuickSortDsc_uint64:		QUICKSORT_INT	QuickSortCoreDsc_uint64
 
 ; Signed integer types
-QuickSortCoreDsc_sint8:		QUICK_SORT_CORE	al, cl, dl, g, l, 0
-QuickSortCoreDsc_sint16:	QUICK_SORT_CORE	ax, cx, dx, g, l, 1
-QuickSortCoreDsc_sint32:	QUICK_SORT_CORE	eax, ecx, edx, g, l, 2
-QuickSortCoreDsc_sint64:	QUICK_SORT_CORE	rax, rcx, rdx, g, l, 3
-QuickSortDsc_sint8:			QUICK_SORT_INT	QuickSortCoreDsc_sint8, 0
-QuickSortDsc_sint16:		QUICK_SORT_INT	QuickSortCoreDsc_sint16, 1
-QuickSortDsc_sint32:		QUICK_SORT_INT	QuickSortCoreDsc_sint32, 2
-QuickSortDsc_sint64:		QUICK_SORT_INT	QuickSortCoreDsc_sint64, 3
+QuickSortCoreDsc_sint8:		QUICKSORT_CORE	al, dl, cl, g, l, 0
+QuickSortCoreDsc_sint16:	QUICKSORT_CORE	ax, dx, cx, g, l, 1
+QuickSortCoreDsc_sint32:	QUICKSORT_CORE	eax, edx, ecx, g, l, 2
+QuickSortCoreDsc_sint64:	QUICKSORT_CORE	rax, rdx, rcx, g, l, 3
+QuickSortDsc_sint8:			QUICKSORT_INT	QuickSortCoreDsc_sint8
+QuickSortDsc_sint16:		QUICKSORT_INT	QuickSortCoreDsc_sint16
+QuickSortDsc_sint32:		QUICKSORT_INT	QuickSortCoreDsc_sint32
+QuickSortDsc_sint64:		QUICKSORT_INT	QuickSortCoreDsc_sint64
 
 ; Floating-point types
-QuickSortDsc_flt32:			QUICK_SORT_FLT	QuickSortCoreDsc_sint32, Map_flt32, 2
-QuickSortDsc_flt64:			QUICK_SORT_FLT	QuickSortCoreDsc_sint64, Map_flt64, 3
+QuickSortDsc_flt32:			QUICKSORT_FLT	QuickSortCoreDsc_sint32, Map_flt32
+QuickSortDsc_flt64:			QUICKSORT_FLT	QuickSortCoreDsc_sint64, Map_flt64
 
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 ;       Key sorting                                                            ;
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+macro	QUICKSORT_KEY_CORE	median, key1, key2, op1, op2, scale
+{
+;---[Parameters]---------------------------
+array	equ		rdi							; pointer to array
+ptr		equ		rsi							; pointer to array of pointers to data
+size	equ		rdx							; array size (count of elements)
+;---[Internal variables]-------------------
+half	equ		rax							; half of array size
+left	equ		r8							; left index
+right	equ		r9							; right index
+ptr1	equ		r10							; temporary ptr #1
+ptr2	equ		r11							; temporary ptr #2
+lsize	equ		right						; size of left part of array
+rsize	equ		size						; size of right part of array
+larray	equ		array						; pointer to left part of array
+rarray	equ		left						; pointer to right part of array
+lptr	equ		ptr							; pointer to left part of ptr array
+rptr	equ		half						; pointer to right part of ptr array
+temp	equ		half						; temporary register
+stack	equ		rsp							; stack pointer
+s_array	equ		stack + 0 * 8				; stack position of "array" variable
+s_ptr	equ		stack + 1 * 8				; stack position of "ptr" variable
+s_size	equ		stack + 2 * 8				; stack position of "size" variable
+space	= 3 * 8								; stack size required by the procedure
+minsize	= 32								; min array size is aceptable for Quick sort
+bytes	= 1 shl scale						; size of array element (bytes)
+;------------------------------------------
+		jmp		.start
+;---[QUICK SORT]---------------------------
+.qsort:	mov		half, size
+		mov		left, -1					; left = -1
+		shr		half, 1						; half = size / 2
+		mov		right, size					; right = size
+		mov		median, [array + half*bytes]; median = array[half]
+		jmp		.loop1
+;---[Swap loop]----------------------------
+.swap:	xchg	key1, key2
+		mov		[array + left*bytes], key1	; array[left] = key2
+		mov		[array + right*bytes], key2	; array[right] = key1
+		mov		ptr1, [ptr + left * 8]		; ptr1 = ptr[left]
+		mov		ptr2, [ptr + right * 8]		; ptr2 = ptr[right]
+		xchg	ptr1, ptr2
+		mov		[ptr + left * 8], ptr1		; ptr[left] = ptr2
+		mov		[ptr + right * 8], ptr2		; ptr[right] = ptr1
+;---[Internal loop 1]----------------------
+.loop1:	add		left, 1						; left++
+		mov		key1, [array + left*bytes]	; key1 = array[left]
+		cmp		key1, median
+		j#op1	.loop1						; do while (key1 condition1 median)
+;---[Internal loop 2]----------------------
+.loop2:	sub		right, 1					; right--
+		mov		key2, [array + right*bytes]	; key2 = array[right]
+		cmp		key2, median
+		j#op2	.loop2						; do while (key2 condition2 median)
+;------------------------------------------
+		cmp		left, right
+		jb		.swap						; do while (left < right)
+;---[end of swap loop]---------------------
+		add		left, 1
+		sub		rsize, left					; rsize = size - (left + 1)
+		lea		rarray, [array + left*bytes]; rarray = array + (left + 1)
+		lea		rptr, [ptr + left * 8]		; rptr = ptr + (left + 1)
+		cmp		lsize, rsize				; if (lsize <= rsize)
+		ja		.else						; {
+;---[if lsize <= rsize]--------------------
+		sub		stack, space				; reserving stack size for local vars
+		mov		[s_array], rarray			; save "rarray" variable into the stack
+		mov		[s_ptr], rptr				; save "rptr" variable into the stack
+		mov		[s_size], rsize				; save "rsize" variable into the stack
+		cmp		lsize, 1					; if (lsize > 1)
+		jbe		@f							; {
+		mov		size, lsize					;     call QuickSortKeyCore (larray, lptr, lsize)
+		call	.start						; }
+@@:		mov		array, [s_array]			; get "rarray" variable from the stack
+		mov		ptr, [s_ptr]				; get "rptr" variable from the stack
+		mov		size, [s_size]				; get "rsize" variable from the stack
+		add		stack, space				; restoring back the stack pointer
+		jmp		.start
+;---[else]---------------------------------
+.else:	sub		stack, space				; reserving stack size for local vars
+		mov		[s_array], larray			; save "larray" variable into the stack
+		mov		[s_ptr], lptr				; save "lptr" variable into the stack
+		mov		[s_size], lsize				; save "lsize" variable into the stack
+		cmp		rsize, 1					; if (rsize > 1)
+		jbe		@f							; {
+		mov		array, rarray
+		mov		ptr, rptr					;     call QuickSortKeyCore (rarray, rptr, rsize)
+		call	.start						; }
+@@:		mov		array, [s_array]			; get "larray" variable from the stack
+		mov		ptr, [s_ptr]				; get "lptr" variable from the stack
+		mov		size, [s_size]				; get "lsize" variable from the stack
+		add		stack, space				; restoring back the stack pointer
+;---[end if]-------------------------------
+.start:	cmp		size, minsize
+		ja		.qsort						; do while (size > minsize)
+;---[END OF QUICK SORT]--------------------
+		mov		left, 1						; left = 1
+;---[INSERT SORT]--------------------------
+.isort:	mov		right, left					; right = left
+		mov		key1, [array + right*bytes]	; key1 = array[right]
+		mov		temp, [ptr + right * 8]		; temp = ptr[right]
+;---[Internal loop]------------------------
+.iloop:	mov		key2, [array+right*bytes-bytes]
+		cmp		key1, key2					; if (key1 condition1 array[right-1])
+		jn#op1	@f							; {
+		mov		[array+right*bytes], key2	;     array[right] = array[right-1]
+		mov		ptr2, [ptr + right * 8 - 8]	;     ptr2 = ptr[right-1]
+		mov		[ptr + right * 8], ptr2		;     ptr[right] = ptr2
+		sub		right, 1					;     right-- }
+		jnz		.iloop						; do while (right != 0)
+;---[end of internal loop]-----------------
+@@:		mov		[array + right*bytes], key1	; array[right] = key1
+		mov		[ptr + right * 8], temp		; ptr[right] = temp
+		add		left, 1						; left++
+		cmp		left, size
+		jb		.isort						; do while (left < size)
+;---[END OF INSERT SORT]-------------------
+		ret
+}
+;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+macro	QUICKSORT_KEY_INT	sort_func
+{
+;---[Parameters]---------------------------
+array	equ		rdi							; pointer to array
+ptr		equ		rsi							; pointer to array of pointers to data
+size	equ		rdx							; array size (count of elements)
+;------------------------------------------
+		cmp		size, 1						; if (size <= 1)
+		jbe		.exit						;     then go to exit from the procedure
+;---[Call sort function]-------------------
+		jmp		sort_func					; call sorting function
+.exit:	ret
+}
+;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+macro	QUICKSORT_KEY_FLT	sort_func, convert_func
+{
+;---[Parameters]---------------------------
+array	equ		rdi							; pointer to array
+ptr		equ		rsi							; pointer to array of pointers to data
+size	equ		rdx							; array size (count of elements)
+;---[Internal variables]-------------------
+csize	equ		rsi							; array size (count of elements)
+stack	equ		rsp							; stack pointer
+s_array	equ		stack + 0 * 8				; stack position of "array" variable
+s_ptr	equ		stack + 1 * 8				; stack position of "ptr" variable
+s_size	equ		stack + 2 * 8				; stack position of "size" variable
+space	= 3 * 8								; stack size required by the procedure
+;------------------------------------------
+		cmp		size, 1						; if (size <= 1)
+		jbe		.exit						;     then go to exit from the procedure
+		sub		stack, space				; reserving stack size for local vars
+		mov		[s_array], array			; save "array" variable into the stack
+		mov		[s_ptr], ptr				; save "ptr" variable into the stack
+		mov		[s_size], size				; save "size" variable into the stack
+;---[Convert array]------------------------
+		mov		csize, size
+		call	convert_func				; call converting function
+;---[Sort array]---------------------------
+		mov		array, [s_array]			; get "array" variable from the stack
+		mov		ptr, [s_ptr]				; get "ptr" variable from the stack
+		mov		size, [s_size]				; get "size" variable from the stack
+		call	sort_func					; call sorting function
+;---[Convert array]------------------------
+		mov		array, [s_array]			; get "array" variable from the stack
+		mov		csize, [s_size]				; get "size" variable from the stack
+		call	convert_func				; call converting function
+		add		stack, space				; restoring back the stack pointer
+.exit:	ret
+}
 
 ;------------------------------------------------------------------------------;
 ;       Ascending sort order                                                   ;
 ;------------------------------------------------------------------------------;
 
 ; Unsigned integer types
-QuickSortCoreAscKey_uint8:	QUICK_SORT_CORE	al, xmm0, xmm1, b, a, 4
-QuickSortCoreAscKey_uint16:	QUICK_SORT_CORE	ax, xmm0, xmm1, b, a, 4
-QuickSortCoreAscKey_uint32:	QUICK_SORT_CORE	eax, xmm0, xmm1, b, a, 4
-QuickSortCoreAscKey_uint64:	QUICK_SORT_CORE	rax, xmm0, xmm1, b, a, 4
-QuickSortAscKey_uint8:		QUICK_SORT_INT	QuickSortCoreAscKey_uint8, 4
-QuickSortAscKey_uint16:		QUICK_SORT_INT	QuickSortCoreAscKey_uint16, 4
-QuickSortAscKey_uint32:		QUICK_SORT_INT	QuickSortCoreAscKey_uint32, 4
-QuickSortAscKey_uint64:		QUICK_SORT_INT	QuickSortCoreAscKey_uint64, 4
+QuickSortCoreKeyAsc_uint8:	QUICKSORT_KEY_CORE	al, r10b, r11b, b, a, 0
+QuickSortCoreKeyAsc_uint16:	QUICKSORT_KEY_CORE	ax, r10w, r11w, b, a, 1
+QuickSortCoreKeyAsc_uint32:	QUICKSORT_KEY_CORE	eax, r10d, r11d, b, a, 2
+QuickSortCoreKeyAsc_uint64:	QUICKSORT_KEY_CORE	rax, r10, r11, b, a, 3
+QuickSortKeyAsc_uint8:		QUICKSORT_KEY_INT	QuickSortCoreKeyAsc_uint8
+QuickSortKeyAsc_uint16:		QUICKSORT_KEY_INT	QuickSortCoreKeyAsc_uint16
+QuickSortKeyAsc_uint32:		QUICKSORT_KEY_INT	QuickSortCoreKeyAsc_uint32
+QuickSortKeyAsc_uint64:		QUICKSORT_KEY_INT	QuickSortCoreKeyAsc_uint64
 
 ; Signed integer types
-QuickSortCoreAscKey_sint8:	QUICK_SORT_CORE	al, xmm0, xmm1, l, g, 4
-QuickSortCoreAscKey_sint16:	QUICK_SORT_CORE	ax, xmm0, xmm1, l, g, 4
-QuickSortCoreAscKey_sint32:	QUICK_SORT_CORE	eax, xmm0, xmm1, l, g, 4
-QuickSortCoreAscKey_sint64:	QUICK_SORT_CORE	rax, xmm0, xmm1, l, g, 4
-QuickSortAscKey_sint8:		QUICK_SORT_INT	QuickSortCoreAscKey_sint8, 4
-QuickSortAscKey_sint16:		QUICK_SORT_INT	QuickSortCoreAscKey_sint16, 4
-QuickSortAscKey_sint32:		QUICK_SORT_INT	QuickSortCoreAscKey_sint32, 4
-QuickSortAscKey_sint64:		QUICK_SORT_INT	QuickSortCoreAscKey_sint64, 4
+QuickSortCoreKeyAsc_sint8:	QUICKSORT_KEY_CORE	al, r10b, r11b, l, g, 0
+QuickSortCoreKeyAsc_sint16:	QUICKSORT_KEY_CORE	ax, r10w, r11w, l, g, 1
+QuickSortCoreKeyAsc_sint32:	QUICKSORT_KEY_CORE	eax, r10d, r11d, l, g, 2
+QuickSortCoreKeyAsc_sint64:	QUICKSORT_KEY_CORE	rax, r10, r11, l, g, 3
+QuickSortKeyAsc_sint8:		QUICKSORT_KEY_INT	QuickSortCoreKeyAsc_sint8
+QuickSortKeyAsc_sint16:		QUICKSORT_KEY_INT	QuickSortCoreKeyAsc_sint16
+QuickSortKeyAsc_sint32:		QUICKSORT_KEY_INT	QuickSortCoreKeyAsc_sint32
+QuickSortKeyAsc_sint64:		QUICKSORT_KEY_INT	QuickSortCoreKeyAsc_sint64
 
 ; Floating-point types
-QuickSortAscKey_flt32:		QUICK_SORT_FLT	QuickSortCoreAscKey_sint32, MapKey_flt32, 4
-QuickSortAscKey_flt64:		QUICK_SORT_FLT	QuickSortCoreAscKey_sint64, MapKey_flt64, 4
+QuickSortKeyAsc_flt32:		QUICKSORT_KEY_FLT	QuickSortCoreKeyAsc_sint32, Map_flt32
+QuickSortKeyAsc_flt64:		QUICKSORT_KEY_FLT	QuickSortCoreKeyAsc_sint64, Map_flt64
 
 ;------------------------------------------------------------------------------;
 ;       Descending sort order                                                  ;
 ;------------------------------------------------------------------------------;
 
 ; Unsigned integer types
-QuickSortCoreDscKey_uint8:	QUICK_SORT_CORE	al, xmm0, xmm1, a, b, 4
-QuickSortCoreDscKey_uint16:	QUICK_SORT_CORE	ax, xmm0, xmm1, a, b, 4
-QuickSortCoreDscKey_uint32:	QUICK_SORT_CORE	eax, xmm0, xmm1, a, b, 4
-QuickSortCoreDscKey_uint64:	QUICK_SORT_CORE	rax, xmm0, xmm1, a, b, 4
-QuickSortDscKey_uint8:		QUICK_SORT_INT	QuickSortCoreDscKey_uint8, 4
-QuickSortDscKey_uint16:		QUICK_SORT_INT	QuickSortCoreDscKey_uint16, 4
-QuickSortDscKey_uint32:		QUICK_SORT_INT	QuickSortCoreDscKey_uint32, 4
-QuickSortDscKey_uint64:		QUICK_SORT_INT	QuickSortCoreDscKey_uint64, 4
+QuickSortCoreKeyDsc_uint8:	QUICKSORT_KEY_CORE	al, r10b, r11b, a, b, 0
+QuickSortCoreKeyDsc_uint16:	QUICKSORT_KEY_CORE	ax, r10w, r11w, a, b, 1
+QuickSortCoreKeyDsc_uint32:	QUICKSORT_KEY_CORE	eax, r10d, r11d, a, b, 2
+QuickSortCoreKeyDsc_uint64:	QUICKSORT_KEY_CORE	rax, r10, r11, a, b, 3
+QuickSortKeyDsc_uint8:		QUICKSORT_KEY_INT	QuickSortCoreKeyDsc_uint8
+QuickSortKeyDsc_uint16:		QUICKSORT_KEY_INT	QuickSortCoreKeyDsc_uint16
+QuickSortKeyDsc_uint32:		QUICKSORT_KEY_INT	QuickSortCoreKeyDsc_uint32
+QuickSortKeyDsc_uint64:		QUICKSORT_KEY_INT	QuickSortCoreKeyDsc_uint64
 
 ; Signed integer types
-QuickSortCoreDscKey_sint8:	QUICK_SORT_CORE	al, xmm0, xmm1, g, l, 4
-QuickSortCoreDscKey_sint16:	QUICK_SORT_CORE	ax, xmm0, xmm1, g, l, 4
-QuickSortCoreDscKey_sint32:	QUICK_SORT_CORE	eax, xmm0, xmm1, g, l, 4
-QuickSortCoreDscKey_sint64:	QUICK_SORT_CORE	rax, xmm0, xmm1, g, l, 4
-QuickSortDscKey_sint8:		QUICK_SORT_INT	QuickSortCoreDscKey_sint8, 4
-QuickSortDscKey_sint16:		QUICK_SORT_INT	QuickSortCoreDscKey_sint16, 4
-QuickSortDscKey_sint32:		QUICK_SORT_INT	QuickSortCoreDscKey_sint32, 4
-QuickSortDscKey_sint64:		QUICK_SORT_INT	QuickSortCoreDscKey_sint64, 4
+QuickSortCoreKeyDsc_sint8:	QUICKSORT_KEY_CORE	al, r10b, r11b, g, l, 0
+QuickSortCoreKeyDsc_sint16:	QUICKSORT_KEY_CORE	ax, r10w, r11w, g, l, 1
+QuickSortCoreKeyDsc_sint32:	QUICKSORT_KEY_CORE	eax, r10d, r11d, g, l, 2
+QuickSortCoreKeyDsc_sint64:	QUICKSORT_KEY_CORE	rax, r10, r11, g, l, 3
+QuickSortKeyDsc_sint8:		QUICKSORT_KEY_INT	QuickSortCoreKeyDsc_sint8
+QuickSortKeyDsc_sint16:		QUICKSORT_KEY_INT	QuickSortCoreKeyDsc_sint16
+QuickSortKeyDsc_sint32:		QUICKSORT_KEY_INT	QuickSortCoreKeyDsc_sint32
+QuickSortKeyDsc_sint64:		QUICKSORT_KEY_INT	QuickSortCoreKeyDsc_sint64
 
 ; Floating-point types
-QuickSortDscKey_flt32:		QUICK_SORT_FLT	QuickSortCoreDscKey_sint32, MapKey_flt32, 4
-QuickSortDscKey_flt64:		QUICK_SORT_FLT	QuickSortCoreDscKey_sint64, MapKey_flt64, 4
+QuickSortKeyDsc_flt32:		QUICKSORT_KEY_FLT	QuickSortCoreKeyDsc_sint32, Map_flt32
+QuickSortKeyDsc_flt64:		QUICKSORT_KEY_FLT	QuickSortCoreKeyDsc_sint64, Map_flt64
 
 ;==============================================================================;
 ;       Radix sort                                                             ;
 ;==============================================================================;
 AscOrder_ui:
 ;---[Parameters]---------------------------
-target	equ		rdi							; pointer to target array
-stat	equ		rsi							; pointer to statistics array
+stat	equ		rdi							; pointer to statistics array
 ;---[Internal variables]-------------------
 size	equ		rcx							; size of statistics array
-temp	equ		rax							; temporary register
+sum		equ		rax							; sum value
+temp	equ		rdx							; temporary register
 ;------------------------------------------
+		xor		sum, sum					; sum = 0
 		mov		size, 256					; size = 256 (partial key range)
 ;---[Address calculating loop]-------------
 @@:		mov		temp, [stat]				; temp = stat[0]
-		mov		[stat], target				; stat[0] = target
-		add		target, temp				; target += temp
+		mov		[stat], sum					; stat[0] = sum
+		add		sum, temp					; sum += temp
 		add		stat, 8						; stat++
 		sub		size, 1						; size--
 		jnz		@b							; do while (size != 0)
@@ -4668,19 +4541,20 @@ temp	equ		rax							; temporary register
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 DscOrder_ui:
 ;---[Parameters]---------------------------
-target	equ		rdi							; pointer to target array
-stat	equ		rsi							; pointer to statistics array
+stat	equ		rdi							; pointer to statistics array
 ;---[Internal variables]-------------------
 size	equ		rcx							; size of statistics array
-temp	equ		rax							; temporary register
+sum		equ		rax							; sum value
+temp	equ		rdx							; temporary register
 ;------------------------------------------
+		xor		sum, sum					; sum = 0
 		add		stat, 256 * 8				; stat += 256
 		mov		size, 256					; size = 256 (partial key range)
 ;---[Address calculating loop]-------------
 @@:		sub		stat, 8						; stat--
 		mov		temp, [stat]				; temp = stat[0]
-		mov		[stat], target				; stat[0] = target
-		add		target, temp				; target += temp
+		mov		[stat], sum					; stat[0] = sum
+		add		sum, temp					; sum += temp
 		sub		size, 1						; size--
 		jnz		@b							; do while (size != 0)
 ;------------------------------------------
@@ -4688,18 +4562,19 @@ temp	equ		rax							; temporary register
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 AscOrder_si:
 ;---[Parameters]---------------------------
-target	equ		rdi							; pointer to target array
-stat	equ		rsi							; pointer to statistics array
+stat	equ		rdi							; pointer to statistics array
 ;---[Internal variables]-------------------
 size	equ		rcx							; size of statistics array
-temp	equ		rax							; temporary register
+sum		equ		rax							; sum value
+temp	equ		rdx							; temporary register
 ;------------------------------------------
+		xor		sum, sum					; sum = 0
 		add		stat, 128 * 8				; stat += 128
 		mov		size, 128					; size = 128 (partial key half range)
 ;---[Address calculating loop]-------------
 @@:		mov		temp, [stat]				; temp = stat[0]
-		mov		[stat], target				; stat[0] = target
-		add		target, temp				; target += temp
+		mov		[stat], sum					; stat[0] = sum
+		add		sum, temp					; sum += temp
 		add		stat, 8						; stat++
 		sub		size, 1						; size--
 		jnz		@b							; do while (size != 0)
@@ -4708,8 +4583,8 @@ temp	equ		rax							; temporary register
 		mov		size, 128					; size = 128 (partial key half range)
 ;---[Address calculating loop]-------------
 @@:		mov		temp, [stat]				; temp = stat[0]
-		mov		[stat], target				; stat[0] = target
-		add		target, temp				; target += temp
+		mov		[stat], sum					; stat[0] = sum
+		add		sum, temp					; sum += temp
 		add		stat, 8						; stat++
 		sub		size, 1						; size--
 		jnz		@b							; do while (size != 0)
@@ -4718,19 +4593,20 @@ temp	equ		rax							; temporary register
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 DscOrder_si:
 ;---[Parameters]---------------------------
-target	equ		rdi							; pointer to target array
-stat	equ		rsi							; pointer to statistics array
+stat	equ		rdi							; pointer to statistics array
 ;---[Internal variables]-------------------
 size	equ		rcx							; size of statistics array
-temp	equ		rax							; temporary register
+sum		equ		rax							; sum value
+temp	equ		rdx							; temporary register
 ;------------------------------------------
+		xor		sum, sum					; sum = 0
 		add		stat, 128 * 8				; stat += 128
 		mov		size, 128					; size = 128 (partial key half range)
 ;---[Address calculating loop]-------------
 @@:		sub		stat, 8						; stat--
 		mov		temp, [stat]				; temp = stat[0]
-		mov		[stat], target				; stat[0] = target
-		add		target, temp				; target += temp
+		mov		[stat], sum					; stat[0] = sum
+		add		sum, temp					; sum += temp
 		sub		size, 1						; size--
 		jnz		@b							; do while (size != 0)
 ;------------------------------------------
@@ -4739,31 +4615,32 @@ temp	equ		rax							; temporary register
 ;---[Address calculating loop]-------------
 @@:		sub		stat, 8						; stat--
 		mov		temp, [stat]				; temp = stat[0]
-		mov		[stat], target				; stat[0] = target
-		add		target, temp				; target += temp
+		mov		[stat], sum					; stat[0] = sum
+		add		sum, temp					; sum += temp
 		sub		size, 1						; size--
 		jnz		@b							; do while (size != 0)
 ;------------------------------------------
 		ret
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	STAT	scale, step
+macro	STAT	scale
 {
 ;---[Parameters]---------------------------
 array	equ		rdi							; pointer to array
 size	equ		rsi							; array size (count of elements)
 stat	equ		rdx							; pointer to statistics array
 ;---[Internal variables]-------------------
-zero	equ		xmm0						; zero value (vector register)
 count	equ		rcx							; count of vector elements in stat array
 ptr		equ		rax							; temporarry pointer to stat array
 key		equ		ptr							; key register (is used to compute adress)
+zero	equ		xmm0						; zero value (vector register)
 bscale	= 6									; block scale factor
 bytes	= 1 shl scale						; size of array element (bytes)
 block	= 1 shl bscale						; block size (bytes)
+len		= 256 * 8							; len of stat array row
 ;------------------------------------------
 		pxor	zero, zero					; zero = 0
 		mov		ptr, stat					; ptr = stat
-		mov		count, (256 * 8) shr (bscale - scale)
+		mov		count, len shr (bscale - scale)
 ;---[Stat initialization loop]-------------
 .init:	movdqa	[ptr + 0x00], zero			; ptr[0] = 0
 		movdqa	[ptr + 0x10], zero			; ptr[16] = 0
@@ -4777,41 +4654,60 @@ block	= 1 shl bscale						; block size (bytes)
 i = 0
 while i < bytes
 		movzx	key, byte [array + i]		; get partial key
-		add		qword [stat + i * 256 * 8 + key * 8], step
+		add		qword [stat + i * len + key * 8], 1
 	i = i + 1
 end while
-		add		array, step					; move to next element
+		add		array, bytes				; move to next element
 		sub		size, 1						; size--
 		jnz		.stat						; do while (count != 0)
 ;------------------------------------------
 		ret
 }
-;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	SORTSTAGE	cmd, temp, step
+Stat8:	STAT	0
+Stat16:	STAT	1
+Stat32:	STAT	2
+Stat64:	STAT	3
+
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+;       Array sorting                                                          ;
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+
+;------------------------------------------------------------------------------;
+;       Sorting stage                                                          ;
+;------------------------------------------------------------------------------;
+macro	SORTSTAGE	temp, scale
 {
 ;---[Parameters]---------------------------
-array	equ		rdi							; pointer to source array
-size	equ		rsi							; array size (count of elements)
-stat	equ		rdx							; pointer to statistics array
-index	equ		rcx							; index of partial key
+tkey	equ		rdi							; pointer to target keys array
+skey	equ		rsi							; pointer to source keys array
+size	equ		rdx							; array size (count of elements)
+stat	equ		rcx							; pointer to statistics array
+index	equ		r8							; index of partial key
 ;---[Internal variables]-------------------
+pos		equ		r11							; address where element should be copied
 key		equ		rax							; key register (is used to compute adress)
-addr	equ		r8							; address where element should be copied
+bytes	= 1 shl scale						; size of array element (bytes)
 ;---[Sorting loop]-------------------------
-.loop:	cmd		temp, [array]				; temp = array[0]
-		movzx	key, byte [array + index]	; get partial key
-		mov		addr, [stat + key * 8]		; addr = stat[key]
-		cmd		[addr], temp				; addr[0] = temp
-		add		array, step					; array++
-		add		addr, step					; addr++
-		mov		[stat + key * 8], addr		; stat[key] = addr
+.loop:	movzx	key, byte [skey + index]	; get partial key
+		mov		pos, [stat + key * 8]		; pos = stat[key]
+		add		qword [stat + key * 8], 1	; stat[key]++
+		mov		temp, [skey]				; temp = skey[0]
+		mov		[tkey + pos * bytes], temp	; tkey[pos] = temp
+		add		skey, bytes					; skey++
 		sub		size, 1						; size--
 		jnz		.loop						; do while (size != 0)
 ;------------------------------------------
 		ret
 }
-;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	RADIX_SORT_CORE	order1, order2, stat, stage, scale
+Stage8:		SORTSTAGE	al, 0
+Stage16:	SORTSTAGE	ax, 1
+Stage32:	SORTSTAGE	eax, 2
+Stage64:	SORTSTAGE	rax, 3
+
+;------------------------------------------------------------------------------;
+;       Radix sort core                                                        ;
+;------------------------------------------------------------------------------;
+macro	RADIXSORT_CORE	order1, order2, stat, stage, scale
 {
 ;---[Parameters]---------------------------
 array	equ		rdi							; pointer to source array
@@ -4822,13 +4718,14 @@ param1	equ		rdi							; register to pass 1 parameter to function
 param2	equ		rsi							; register to pass 2 parameter to function
 param3	equ		rdx							; register to pass 3 parameter to function
 param4	equ		rcx							; register to pass 4 parameter to function
+param5	equ		r8							; register to pass 5 parameter to function
 stack	equ		rsp							; stack pointer
 bytes	= 1 shl scale						; size of array element (bytes)
 stat_sz	= bytes * 256 * 8					; size of statistics array (bytes)
 space	= stat_sz + 3 * 8					; stack size required by the procedure
-s_array	equ		stack +  stat_sz + 0 * 8	; stack position of "array" variable
-s_temp	equ		stack +  stat_sz + 1 * 8	; stack position of "temp" variable
-s_size	equ		stack +  stat_sz + 2 * 8	; stack position of "size" variable
+s_array	equ		stack + stat_sz + 0 * 8		; stack position of "array" variable
+s_temp	equ		stack + stat_sz + 1 * 8		; stack position of "temp" variable
+s_size	equ		stack + stat_sz + 2 * 8		; stack position of "size" variable
 ;------------------------------------------
 		sub		stack, space				; reserving stack size for local vars
 		mov		[s_array], array			; save "array" variable into the stack
@@ -4848,39 +4745,39 @@ end if
 i = 0
 while i < bytes - 1
 	if i mod 2 = 0
+		lea		param1, [stack + i * 256 * 8]
+		call	order1						; call order1 (stack[i])
 		mov		param1, [s_temp]
-		lea		param2, [stack + i * 256 * 8]
-		call	order1						; call order1 (temp, stack[i])
-		mov		param1, [s_array]
-		mov		param2, [s_size]
-		lea		param3, [stack + i * 256 * 8]
-		mov		param4, i
-		call	stage						; call stage (array, size, stack[i], i)
+		mov		param2, [s_array]
+		mov		param3, [s_size]
+		lea		param4, [stack + i * 256 * 8]
+		mov		param5, i
+		call	stage						; call stage (temp, array, size, stack[i], i)
 	else
+		lea		param1, [stack + i * 256 * 8]
+		call	order1						; call order1 (stack[i])
 		mov		param1, [s_array]
-		lea		param2, [stack + i * 256 * 8]
-		call	order1						; call order1 (array, stack[i])
-		mov		param1, [s_temp]
-		mov		param2, [s_size]
-		lea		param3, [stack + i * 256 * 8]
-		mov		param4, i
-		call	stage						; call stage (temp, size, stack[i], i)
+		mov		param2, [s_temp]
+		mov		param3, [s_size]
+		lea		param4, [stack + i * 256 * 8]
+		mov		param5, i
+		call	stage						; call stage (array, temp, size, stack[i], i)
 	end if
 	i = i + 1
 end while
+		lea		param1, [stack + i * 256 * 8]
+		call	order2						; call order2 (stack[i])
 		mov		param1, [s_array]
-		lea		param2, [stack + i * 256 * 8]
-		call	order2						; call order2 (array, stack)
-		mov		param1, [s_temp]
-		mov		param2, [s_size]
-		lea		param3, [stack + i * 256 * 8]
-		mov		param4, i
-		call	stage						; call stage (temp, size, stack[i], i)
+		mov		param2, [s_temp]
+		mov		param3, [s_size]
+		lea		param4, [stack + i * 256 * 8]
+		mov		param5, i
+		call	stage						; call stage (array, temp, size, stack[i], i)
 		add		stack, space				; restoring back the stack pointer
 		ret
 }
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	RADIX_SORT_INT	sort_func
+macro	RADIXSORT_INT	sort_func
 {
 ;---[Parameters]---------------------------
 array	equ		rdi							; pointer to source array
@@ -4888,26 +4785,24 @@ temp	equ		rsi							; pointer to temporary array
 size	equ		rdx							; size of array
 ;------------------------------------------
 		cmp		size, 1						; if (size <= 1)
-		jbe		.exit						; then go to exit from the procedure
+		jbe		.exit						;     then go to exit from the procedure
 ;---[Call sort function]-------------------
 		jmp		sort_func					; call sorting function
 .exit:	ret
 }
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	RADIX_SORT_FLT	sort_func, convert_func
+macro	RADIXSORT_FLT	sort_func, convert_func
 {
 ;---[Parameters]---------------------------
 array	equ		rdi							; pointer to source array
 temp	equ		rsi							; pointer to temporary array
-size	equ		rdx							; size of array
+size	equ		rdx							; array size (count of elements)
 ;---[Internal variables]-------------------
-param1	equ		rdi							; register to pass 1 parameter to function
-param2	equ		rsi							; register to pass 2 parameter to function
-param3	equ		rdx							; register to pass 3 parameter to function
+csize	equ		rsi							; array size (count of elements)
 stack	equ		rsp							; stack pointer
-s_array	equ		stack +  0 * 8				; stack position of "array" variable
-s_temp	equ		stack +  1 * 8				; stack position of "temp" array variable
-s_size	equ		stack +  2 * 8				; stack position of "size" variable
+s_array	equ		stack + 0 * 8				; stack position of "array" variable
+s_temp	equ		stack + 1 * 8				; stack position of "temp" variable
+s_size	equ		stack + 2 * 8				; stack position of "size" variable
 space	= 3 * 8								; stack size required by the procedure
 ;------------------------------------------
 		cmp		size, 1						; if (size <= 1)
@@ -4917,173 +4812,333 @@ space	= 3 * 8								; stack size required by the procedure
 		mov		[s_temp], temp				; save "temp" variable into the stack
 		mov		[s_size], size				; save "size" variable into the stack
 ;---[Convert array]------------------------
-		mov		param2, size				; save "size" variable into the stack
+		mov		csize, size
 		call	convert_func				; call converting function
 ;---[Sort array]---------------------------
-		mov		param1, [s_array]			; get "array" variable from the stack
-		mov		param2, [s_temp]			; get "temp" variable from the stack
-		mov		param3, [s_size]			; get "size" variable from the stack
+		mov		array, [s_array]			; get "array" variable from the stack
+		mov		temp, [s_temp]				; get "temp" variable from the stack
+		mov		size, [s_size]				; get "size" variable from the stack
 		call	sort_func					; call sorting function
 ;---[Convert array]------------------------
-		mov		param1, [s_array]			; get "array" variable from the stack
-		mov		param2, [s_size]			; get "size" variable from the stack
+		mov		array, [s_array]			; get "array" variable from the stack
+		mov		csize, [s_size]				; get "size" variable from the stack
 		call	convert_func				; call converting function
 		add		stack, space				; restoring back the stack pointer
 .exit:	ret
 }
-
-;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
-;       Array sorting                                                          ;
-;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
-
-;------------------------------------------------------------------------------;
-;       Statistic functions                                                    ;
-;------------------------------------------------------------------------------;
-Stat8:		STAT	0, 1
-Stat16:		STAT	1, 2
-Stat32:		STAT	2, 4
-Stat64:		STAT	3, 8
-
-;------------------------------------------------------------------------------;
-;       Sorting stage functions                                                ;
-;------------------------------------------------------------------------------;
-Stage8:		SORTSTAGE	mov, r9b, 1
-Stage16:	SORTSTAGE	mov, r9w, 2
-Stage32:	SORTSTAGE	mov, r9d, 4
-Stage64:	SORTSTAGE	mov, r9, 8
 
 ;------------------------------------------------------------------------------;
 ;       Ascending sort order                                                   ;
 ;------------------------------------------------------------------------------;
 
 ; Unsigned integer types
-RadixSortCoreAsc_uint8:		RADIX_SORT_CORE	AscOrder_ui, AscOrder_ui, Stat8, Stage8, 0
-RadixSortCoreAsc_uint16:	RADIX_SORT_CORE	AscOrder_ui, AscOrder_ui, Stat16, Stage16, 1
-RadixSortCoreAsc_uint32:	RADIX_SORT_CORE	AscOrder_ui, AscOrder_ui, Stat32, Stage32, 2
-RadixSortCoreAsc_uint64:	RADIX_SORT_CORE	AscOrder_ui, AscOrder_ui, Stat64, Stage64, 3
-RadixSortAsc_uint8:			RADIX_SORT_INT	RadixSortCoreAsc_uint8
-RadixSortAsc_uint16:		RADIX_SORT_INT	RadixSortCoreAsc_uint16
-RadixSortAsc_uint32:		RADIX_SORT_INT	RadixSortCoreAsc_uint32
-RadixSortAsc_uint64:		RADIX_SORT_INT	RadixSortCoreAsc_uint64
+RadixSortCoreAsc_uint8:		RADIXSORT_CORE	AscOrder_ui, AscOrder_ui, Stat8, Stage8, 0
+RadixSortCoreAsc_uint16:	RADIXSORT_CORE	AscOrder_ui, AscOrder_ui, Stat16, Stage16, 1
+RadixSortCoreAsc_uint32:	RADIXSORT_CORE	AscOrder_ui, AscOrder_ui, Stat32, Stage32, 2
+RadixSortCoreAsc_uint64:	RADIXSORT_CORE	AscOrder_ui, AscOrder_ui, Stat64, Stage64, 3
+RadixSortAsc_uint8:			RADIXSORT_INT	RadixSortCoreAsc_uint8
+RadixSortAsc_uint16:		RADIXSORT_INT	RadixSortCoreAsc_uint16
+RadixSortAsc_uint32:		RADIXSORT_INT	RadixSortCoreAsc_uint32
+RadixSortAsc_uint64:		RADIXSORT_INT	RadixSortCoreAsc_uint64
 
 ; Signed integer types
-RadixSortCoreAsc_sint8:		RADIX_SORT_CORE	AscOrder_ui, AscOrder_si, Stat8, Stage8, 0
-RadixSortCoreAsc_sint16:	RADIX_SORT_CORE	AscOrder_ui, AscOrder_si, Stat16, Stage16, 1
-RadixSortCoreAsc_sint32:	RADIX_SORT_CORE	AscOrder_ui, AscOrder_si, Stat32, Stage32, 2
-RadixSortCoreAsc_sint64:	RADIX_SORT_CORE	AscOrder_ui, AscOrder_si, Stat64, Stage64, 3
-RadixSortAsc_sint8:			RADIX_SORT_INT	RadixSortCoreAsc_sint8
-RadixSortAsc_sint16:		RADIX_SORT_INT	RadixSortCoreAsc_sint16
-RadixSortAsc_sint32:		RADIX_SORT_INT	RadixSortCoreAsc_sint32
-RadixSortAsc_sint64:		RADIX_SORT_INT	RadixSortCoreAsc_sint64
+RadixSortCoreAsc_sint8:		RADIXSORT_CORE	AscOrder_ui, AscOrder_si, Stat8, Stage8, 0
+RadixSortCoreAsc_sint16:	RADIXSORT_CORE	AscOrder_ui, AscOrder_si, Stat16, Stage16, 1
+RadixSortCoreAsc_sint32:	RADIXSORT_CORE	AscOrder_ui, AscOrder_si, Stat32, Stage32, 2
+RadixSortCoreAsc_sint64:	RADIXSORT_CORE	AscOrder_ui, AscOrder_si, Stat64, Stage64, 3
+RadixSortAsc_sint8:			RADIXSORT_INT	RadixSortCoreAsc_sint8
+RadixSortAsc_sint16:		RADIXSORT_INT	RadixSortCoreAsc_sint16
+RadixSortAsc_sint32:		RADIXSORT_INT	RadixSortCoreAsc_sint32
+RadixSortAsc_sint64:		RADIXSORT_INT	RadixSortCoreAsc_sint64
 
 ; Floating-point types
-RadixSortAsc_flt32:			RADIX_SORT_FLT	RadixSortCoreAsc_sint32, Map_flt32
-RadixSortAsc_flt64:			RADIX_SORT_FLT	RadixSortCoreAsc_sint64, Map_flt64
+RadixSortAsc_flt32:			RADIXSORT_FLT	RadixSortCoreAsc_sint32, Map_flt32
+RadixSortAsc_flt64:			RADIXSORT_FLT	RadixSortCoreAsc_sint64, Map_flt64
 
 ;------------------------------------------------------------------------------;
 ;       Descending sort order                                                  ;
 ;------------------------------------------------------------------------------;
 
 ; Unsigned integer types
-RadixSortCoreDsc_uint8:		RADIX_SORT_CORE	DscOrder_ui, DscOrder_ui, Stat8, Stage8, 0
-RadixSortCoreDsc_uint16:	RADIX_SORT_CORE	DscOrder_ui, DscOrder_ui, Stat16, Stage16, 1
-RadixSortCoreDsc_uint32:	RADIX_SORT_CORE	DscOrder_ui, DscOrder_ui, Stat32, Stage32, 2
-RadixSortCoreDsc_uint64:	RADIX_SORT_CORE	DscOrder_ui, DscOrder_ui, Stat64, Stage64, 3
-RadixSortDsc_uint8:			RADIX_SORT_INT	RadixSortCoreDsc_uint8
-RadixSortDsc_uint16:		RADIX_SORT_INT	RadixSortCoreDsc_uint16
-RadixSortDsc_uint32:		RADIX_SORT_INT	RadixSortCoreDsc_uint32
-RadixSortDsc_uint64:		RADIX_SORT_INT	RadixSortCoreDsc_uint64
+RadixSortCoreDsc_uint8:		RADIXSORT_CORE	DscOrder_ui, DscOrder_ui, Stat8, Stage8, 0
+RadixSortCoreDsc_uint16:	RADIXSORT_CORE	DscOrder_ui, DscOrder_ui, Stat16, Stage16, 1
+RadixSortCoreDsc_uint32:	RADIXSORT_CORE	DscOrder_ui, DscOrder_ui, Stat32, Stage32, 2
+RadixSortCoreDsc_uint64:	RADIXSORT_CORE	DscOrder_ui, DscOrder_ui, Stat64, Stage64, 3
+RadixSortDsc_uint8:			RADIXSORT_INT	RadixSortCoreDsc_uint8
+RadixSortDsc_uint16:		RADIXSORT_INT	RadixSortCoreDsc_uint16
+RadixSortDsc_uint32:		RADIXSORT_INT	RadixSortCoreDsc_uint32
+RadixSortDsc_uint64:		RADIXSORT_INT	RadixSortCoreDsc_uint64
 
 ; Signed integer types
-RadixSortCoreDsc_sint8:		RADIX_SORT_CORE	DscOrder_ui, DscOrder_si, Stat8, Stage8, 0
-RadixSortCoreDsc_sint16:	RADIX_SORT_CORE	DscOrder_ui, DscOrder_si, Stat16, Stage16, 1
-RadixSortCoreDsc_sint32:	RADIX_SORT_CORE	DscOrder_ui, DscOrder_si, Stat32, Stage32, 2
-RadixSortCoreDsc_sint64:	RADIX_SORT_CORE	DscOrder_ui, DscOrder_si, Stat64, Stage64, 3
-RadixSortDsc_sint8:			RADIX_SORT_INT	RadixSortCoreDsc_sint8
-RadixSortDsc_sint16:		RADIX_SORT_INT	RadixSortCoreDsc_sint16
-RadixSortDsc_sint32:		RADIX_SORT_INT	RadixSortCoreDsc_sint32
-RadixSortDsc_sint64:		RADIX_SORT_INT	RadixSortCoreDsc_sint64
+RadixSortCoreDsc_sint8:		RADIXSORT_CORE	DscOrder_ui, DscOrder_si, Stat8, Stage8, 0
+RadixSortCoreDsc_sint16:	RADIXSORT_CORE	DscOrder_ui, DscOrder_si, Stat16, Stage16, 1
+RadixSortCoreDsc_sint32:	RADIXSORT_CORE	DscOrder_ui, DscOrder_si, Stat32, Stage32, 2
+RadixSortCoreDsc_sint64:	RADIXSORT_CORE	DscOrder_ui, DscOrder_si, Stat64, Stage64, 3
+RadixSortDsc_sint8:			RADIXSORT_INT	RadixSortCoreDsc_sint8
+RadixSortDsc_sint16:		RADIXSORT_INT	RadixSortCoreDsc_sint16
+RadixSortDsc_sint32:		RADIXSORT_INT	RadixSortCoreDsc_sint32
+RadixSortDsc_sint64:		RADIXSORT_INT	RadixSortCoreDsc_sint64
 
 ; Floating-point types
-RadixSortDsc_flt32:			RADIX_SORT_FLT	RadixSortCoreDsc_sint32, Map_flt32
-RadixSortDsc_flt64:			RADIX_SORT_FLT	RadixSortCoreDsc_sint64, Map_flt64
+RadixSortDsc_flt32:			RADIXSORT_FLT	RadixSortCoreDsc_sint32, Map_flt32
+RadixSortDsc_flt64:			RADIXSORT_FLT	RadixSortCoreDsc_sint64, Map_flt64
 
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 ;       Key sorting                                                            ;
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 
 ;------------------------------------------------------------------------------;
-;       Statistic functions                                                    ;
+;       Sorting stage                                                          ;
 ;------------------------------------------------------------------------------;
-StatKey8:	STAT	0, 16
-StatKey16:	STAT	1, 16
-StatKey32:	STAT	2, 16
-StatKey64:	STAT	3, 16
+macro	SORTSTAGE_KEY	temp, scale
+{
+;---[Parameters]---------------------------
+tkey	equ		rdi							; pointer to target keys array
+skey	equ		rsi							; pointer to source keys array
+tptr	equ		rdx							; pointer to target array of pointers to data
+sptr	equ		rcx							; pointer to source array of pointers to data
+size	equ		r8							; array size (count of elements)
+stat	equ		r9							; pointer to statistics array
+index	equ		r10							; index of partial key
+;---[Internal variables]-------------------
+pos		equ		r11							; address where element should be copied
+key		equ		rax							; key register (is used to compute adress)
+ptr		equ		key							; temporary ptr
+bytes	= 1 shl scale						; size of array element (bytes)
+;---[Sorting loop]-------------------------
+.loop:	movzx	key, byte [skey + index]	; get partial key
+		mov		pos, [stat + key * 8]		; pos = stat[key]
+		add		qword [stat + key * 8], 1	; stat[key]++
+		mov		temp, [skey]				; temp = skey[0]
+		mov		[tkey + pos * bytes], temp	; tkey[pos] = temp
+		mov		ptr, [sptr]					; ptr = sptr[0]
+		mov		[tptr + pos * 8], ptr		; tptr[pos] = ptr
+		add		skey, bytes					; skey++
+		add		sptr, 8						; sptr++
+		sub		size, 1						; size--
+		jnz		.loop						; do while (size != 0)
+;------------------------------------------
+		ret
+}
+StageKey8:	SORTSTAGE_KEY	al, 0
+StageKey16:	SORTSTAGE_KEY	ax, 1
+StageKey32:	SORTSTAGE_KEY	eax, 2
+StageKey64:	SORTSTAGE_KEY	rax, 3
 
 ;------------------------------------------------------------------------------;
-;       Sorting stage functions                                                ;
+;       Radix sort core                                                        ;
 ;------------------------------------------------------------------------------;
-StageKey:	SORTSTAGE	movdqu, xmm0, 16
+macro	RADIXSORT_KEY_CORE	order1, order2, stat, stage, scale
+{
+;---[Parameters]---------------------------
+key		equ		rdi							; pointer to key array
+tkey	equ		rsi							; pointer to temporary key array
+ptr		equ		rdx							; pointer to array of pointers to data
+tptr	equ		rcx							; pointer to temporarys array of pointers to data
+size	equ		r8							; size of array
+;---[Internal variables]-------------------
+param1	equ		rdi							; register to pass 1 parameter to function
+param2	equ		rsi							; register to pass 2 parameter to function
+param3	equ		rdx							; register to pass 3 parameter to function
+param4	equ		rcx							; register to pass 4 parameter to function
+param5	equ		r8							; register to pass 5 parameter to function
+param6	equ		r9							; register to pass 6 parameter to function
+param7	equ		r10							; register to pass 7 parameter to function
+stack	equ		rsp							; stack pointer
+bytes	= 1 shl scale						; size of array element (bytes)
+stat_sz	= bytes * 256 * 8					; size of statistics array (bytes)
+space	= stat_sz + 5 * 8					; stack size required by the procedure
+s_key	equ		stack + stat_sz + 0 * 8		; stack position of "key" variable
+s_tkey	equ		stack + stat_sz + 1 * 8		; stack position of "tkey" variable
+s_ptr	equ		stack + stat_sz + 2 * 8		; stack position of "ptr" variable
+s_tptr	equ		stack + stat_sz + 3 * 8		; stack position of "tptr" variable
+s_size	equ		stack + stat_sz + 4 * 8		; stack position of "size" variable
+;------------------------------------------
+		sub		stack, space				; reserving stack size for local vars
+		mov		[s_key], key				; save "key" variable into the stack
+		mov		[s_tkey], tkey				; save "tkey" variable into the stack
+		mov		[s_ptr], ptr				; save "ptr" variable into the stack
+		mov		[s_tptr], tptr				; save "tptr" variable into the stack
+		mov		[s_size], size				; save "size" variable into the stack
+;---[Collect statistics]-------------------
+		mov		param2, size
+		mov		param3, stack
+		call	stat						; call Statistics (key, size, stack);
+;---[Sort partial keys]--------------------
+if bytes = 1
+		mov		param1, [s_tkey]
+		mov		param2, [s_key]
+		mov		param3, [s_size]
+		call	CopyFwd8					; call Copy (tkey, key, size)
+		mov		param1, [s_tptr]
+		mov		param2, [s_ptr]
+		mov		param3, [s_size]
+		call	CopyFwd64					; call Copy (tptr, ptr, size)
+end if
+i = 0
+while i < bytes - 1
+	if i mod 2 = 0
+		lea		param1, [stack + i * 256 * 8]
+		call	order1						; call order1 (stack[i])
+		mov		param1, [s_tkey]
+		mov		param2, [s_key]
+		mov		param3, [s_tptr]
+		mov		param4, [s_ptr]
+		mov		param5, [s_size]
+		lea		param6, [stack + i * 256 * 8]
+		mov		param7, i
+		call	stage						; call stage (tkey, key, tptr, ptr, size, stack[i], i)
+	else
+		lea		param1, [stack + i * 256 * 8]
+		call	order1						; call order1 (stack[i])
+		mov		param1, [s_key]
+		mov		param2, [s_tkey]
+		mov		param3, [s_ptr]
+		mov		param4, [s_tptr]
+		mov		param5, [s_size]
+		lea		param6, [stack + i * 256 * 8]
+		mov		param7, i
+		call	stage						; call stage (key, tkey, ptr, tptr, size, stack[i], i)
+	end if
+	i = i + 1
+end while
+		lea		param1, [stack + i * 256 * 8]
+		call	order2						; call order2 (stack[i])
+		mov		param1, [s_key]
+		mov		param2, [s_tkey]
+		mov		param3, [s_ptr]
+		mov		param4, [s_tptr]
+		mov		param5, [s_size]
+		lea		param6, [stack + i * 256 * 8]
+		mov		param7, i
+		call	stage						; call stage (key, tkey, ptr, tptr, size, stack[i], i)
+		add		stack, space				; restoring back the stack pointer
+		ret
+}
+;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+macro	RADIXSORT_KEY_INT	sort_func
+{
+;---[Parameters]---------------------------
+key		equ		rdi							; pointer to key array
+tkey	equ		rsi							; pointer to temporary key array
+ptr		equ		rdx							; pointer to array of pointers to data
+tptr	equ		rcx							; pointer to temporarys array of pointers to data
+size	equ		r8							; size of array
+;------------------------------------------
+		cmp		size, 1						; if (size <= 1)
+		jbe		.exit						; then go to exit from the procedure
+;---[Call sort function]-------------------
+		jmp		sort_func					; call sorting function
+.exit:	ret
+}
+;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+macro	RADIXSORT_KEY_FLT	sort_func, convert_func
+{
+;---[Parameters]---------------------------
+key		equ		rdi							; pointer to key array
+tkey	equ		rsi							; pointer to temporary key array
+ptr		equ		rdx							; pointer to array of pointers to data
+tptr	equ		rcx							; pointer to temporarys array of pointers to data
+size	equ		r8							; array size (count of elements)
+;---[Internal variables]-------------------
+csize	equ		rsi							; array size (count of elements)
+stack	equ		rsp							; stack pointer
+s_key	equ		stack + 0 * 8				; stack position of "key" variable
+s_tkey	equ		stack + 1 * 8				; stack position of "tkey" variable
+s_ptr	equ		stack + 2 * 8				; stack position of "ptr" variable
+s_tptr	equ		stack + 3 * 8				; stack position of "tptr" variable
+s_size	equ		stack + 4 * 8				; stack position of "size" variable
+space	= 5 * 8								; stack size required by the procedure
+;------------------------------------------
+		cmp		size, 1						; if (size <= 1)
+		jbe		.exit						; then go to exit from the procedure
+		sub		stack, space				; reserving stack size for local vars
+		mov		[s_key], key				; save "key" variable into the stack
+		mov		[s_tkey], tkey				; save "tkey" variable into the stack
+		mov		[s_ptr], ptr				; save "ptr" variable into the stack
+		mov		[s_tptr], tptr				; save "tptr" variable into the stack
+		mov		[s_size], size				; save "size" variable into the stack
+;---[Convert array]------------------------
+		mov		csize, size
+		call	convert_func				; call converting function
+;---[Sort array]---------------------------
+		mov		key, [s_key]				; get "key" variable from the stack
+		mov		tkey, [s_tkey]				; get "tkey" variable from the stack
+		mov		ptr, [s_ptr]				; get "ptr" variable from the stack
+		mov		tptr, [s_tptr]				; get "tptr" variable from the stack
+		mov		size, [s_size]				; get "size" variable from the stack
+		call	sort_func					; call sorting function
+;---[Convert array]------------------------
+		mov		key, [s_key]				; get "key" variable from the stack
+		mov		csize, [s_size]				; get "size" variable from the stack
+		call	convert_func				; call converting function
+		add		stack, space				; restoring back the stack pointer
+.exit:	ret
+}
 
 ;------------------------------------------------------------------------------;
 ;       Ascending sort order                                                   ;
 ;------------------------------------------------------------------------------;
 
 ; Unsigned integer types
-RadixSortCoreAscKey_uint8:	RADIX_SORT_CORE	AscOrder_ui, AscOrder_ui, StatKey8, StageKey, 0
-RadixSortCoreAscKey_uint16:	RADIX_SORT_CORE	AscOrder_ui, AscOrder_ui, StatKey16, StageKey, 1
-RadixSortCoreAscKey_uint32:	RADIX_SORT_CORE	AscOrder_ui, AscOrder_ui, StatKey32, StageKey, 2
-RadixSortCoreAscKey_uint64:	RADIX_SORT_CORE	AscOrder_ui, AscOrder_ui, StatKey64, StageKey, 3
-RadixSortAscKey_uint8:		RADIX_SORT_INT	RadixSortCoreAscKey_uint8
-RadixSortAscKey_uint16:		RADIX_SORT_INT	RadixSortCoreAscKey_uint16
-RadixSortAscKey_uint32:		RADIX_SORT_INT	RadixSortCoreAscKey_uint32
-RadixSortAscKey_uint64:		RADIX_SORT_INT	RadixSortCoreAscKey_uint64
+RadixSortCoreKeyAsc_uint8:	RADIXSORT_KEY_CORE	AscOrder_ui, AscOrder_ui, Stat8, StageKey8, 0
+RadixSortCoreKeyAsc_uint16:	RADIXSORT_KEY_CORE	AscOrder_ui, AscOrder_ui, Stat16, StageKey16, 1
+RadixSortCoreKeyAsc_uint32:	RADIXSORT_KEY_CORE	AscOrder_ui, AscOrder_ui, Stat32, StageKey32, 2
+RadixSortCoreKeyAsc_uint64:	RADIXSORT_KEY_CORE	AscOrder_ui, AscOrder_ui, Stat64, StageKey64, 3
+RadixSortKeyAsc_uint8:		RADIXSORT_KEY_INT	RadixSortCoreKeyAsc_uint8
+RadixSortKeyAsc_uint16:		RADIXSORT_KEY_INT	RadixSortCoreKeyAsc_uint16
+RadixSortKeyAsc_uint32:		RADIXSORT_KEY_INT	RadixSortCoreKeyAsc_uint32
+RadixSortKeyAsc_uint64:		RADIXSORT_KEY_INT	RadixSortCoreKeyAsc_uint64
 
 ; Signed integer types
-RadixSortCoreAscKey_sint8:	RADIX_SORT_CORE	AscOrder_ui, AscOrder_si, StatKey8, StageKey, 0
-RadixSortCoreAscKey_sint16:	RADIX_SORT_CORE	AscOrder_ui, AscOrder_si, StatKey16, StageKey, 1
-RadixSortCoreAscKey_sint32:	RADIX_SORT_CORE	AscOrder_ui, AscOrder_si, StatKey32, StageKey, 2
-RadixSortCoreAscKey_sint64:	RADIX_SORT_CORE	AscOrder_ui, AscOrder_si, StatKey64, StageKey, 3
-RadixSortAscKey_sint8:		RADIX_SORT_INT	RadixSortCoreAscKey_sint8
-RadixSortAscKey_sint16:		RADIX_SORT_INT	RadixSortCoreAscKey_sint16
-RadixSortAscKey_sint32:		RADIX_SORT_INT	RadixSortCoreAscKey_sint32
-RadixSortAscKey_sint64:		RADIX_SORT_INT	RadixSortCoreAscKey_sint64
+RadixSortCoreKeyAsc_sint8:	RADIXSORT_KEY_CORE	AscOrder_ui, AscOrder_si, Stat8, StageKey8, 0
+RadixSortCoreKeyAsc_sint16:	RADIXSORT_KEY_CORE	AscOrder_ui, AscOrder_si, Stat16, StageKey16, 1
+RadixSortCoreKeyAsc_sint32:	RADIXSORT_KEY_CORE	AscOrder_ui, AscOrder_si, Stat32, StageKey32, 2
+RadixSortCoreKeyAsc_sint64:	RADIXSORT_KEY_CORE	AscOrder_ui, AscOrder_si, Stat64, StageKey64, 3
+RadixSortKeyAsc_sint8:		RADIXSORT_KEY_INT	RadixSortCoreKeyAsc_sint8
+RadixSortKeyAsc_sint16:		RADIXSORT_KEY_INT	RadixSortCoreKeyAsc_sint16
+RadixSortKeyAsc_sint32:		RADIXSORT_KEY_INT	RadixSortCoreKeyAsc_sint32
+RadixSortKeyAsc_sint64:		RADIXSORT_KEY_INT	RadixSortCoreKeyAsc_sint64
 
 ; Floating-point types
-RadixSortAscKey_flt32:		RADIX_SORT_FLT	RadixSortCoreAscKey_sint32, MapKey_flt32
-RadixSortAscKey_flt64:		RADIX_SORT_FLT	RadixSortCoreAscKey_sint64, MapKey_flt64
+RadixSortKeyAsc_flt32:		RADIXSORT_KEY_FLT	RadixSortCoreKeyAsc_sint32, Map_flt32
+RadixSortKeyAsc_flt64:		RADIXSORT_KEY_FLT	RadixSortCoreKeyAsc_sint64, Map_flt64
 
 ;------------------------------------------------------------------------------;
 ;       Descending sort order                                                  ;
 ;------------------------------------------------------------------------------;
 
 ; Unsigned integer types
-RadixSortCoreDscKey_uint8:	RADIX_SORT_CORE	DscOrder_ui, DscOrder_ui, StatKey8, StageKey, 0
-RadixSortCoreDscKey_uint16:	RADIX_SORT_CORE	DscOrder_ui, DscOrder_ui, StatKey16, StageKey, 1
-RadixSortCoreDscKey_uint32:	RADIX_SORT_CORE	DscOrder_ui, DscOrder_ui, StatKey32, StageKey, 2
-RadixSortCoreDscKey_uint64:	RADIX_SORT_CORE	DscOrder_ui, DscOrder_ui, StatKey64, StageKey, 3
-RadixSortDscKey_uint8:		RADIX_SORT_INT	RadixSortCoreDscKey_uint8
-RadixSortDscKey_uint16:		RADIX_SORT_INT	RadixSortCoreDscKey_uint16
-RadixSortDscKey_uint32:		RADIX_SORT_INT	RadixSortCoreDscKey_uint32
-RadixSortDscKey_uint64:		RADIX_SORT_INT	RadixSortCoreDscKey_uint64
+RadixSortCoreKeyDsc_uint8:	RADIXSORT_KEY_CORE	DscOrder_ui, DscOrder_ui, Stat8, StageKey8, 0
+RadixSortCoreKeyDsc_uint16:	RADIXSORT_KEY_CORE	DscOrder_ui, DscOrder_ui, Stat16, StageKey16, 1
+RadixSortCoreKeyDsc_uint32:	RADIXSORT_KEY_CORE	DscOrder_ui, DscOrder_ui, Stat32, StageKey32, 2
+RadixSortCoreKeyDsc_uint64:	RADIXSORT_KEY_CORE	DscOrder_ui, DscOrder_ui, Stat64, StageKey64, 3
+RadixSortKeyDsc_uint8:		RADIXSORT_KEY_INT	RadixSortCoreKeyDsc_uint8
+RadixSortKeyDsc_uint16:		RADIXSORT_KEY_INT	RadixSortCoreKeyDsc_uint16
+RadixSortKeyDsc_uint32:		RADIXSORT_KEY_INT	RadixSortCoreKeyDsc_uint32
+RadixSortKeyDsc_uint64:		RADIXSORT_KEY_INT	RadixSortCoreKeyDsc_uint64
 
 ; Signed integer types
-RadixSortCoreDscKey_sint8:	RADIX_SORT_CORE	DscOrder_ui, DscOrder_si, StatKey8, StageKey, 0
-RadixSortCoreDscKey_sint16:	RADIX_SORT_CORE	DscOrder_ui, DscOrder_si, StatKey16, StageKey, 1
-RadixSortCoreDscKey_sint32:	RADIX_SORT_CORE	DscOrder_ui, DscOrder_si, StatKey32, StageKey, 2
-RadixSortCoreDscKey_sint64:	RADIX_SORT_CORE	DscOrder_ui, DscOrder_si, StatKey64, StageKey, 3
-RadixSortDscKey_sint8:		RADIX_SORT_INT	RadixSortCoreDscKey_sint8
-RadixSortDscKey_sint16:		RADIX_SORT_INT	RadixSortCoreDscKey_sint16
-RadixSortDscKey_sint32:		RADIX_SORT_INT	RadixSortCoreDscKey_sint32
-RadixSortDscKey_sint64:		RADIX_SORT_INT	RadixSortCoreDscKey_sint64
+RadixSortCoreKeyDsc_sint8:	RADIXSORT_KEY_CORE	DscOrder_ui, DscOrder_si, Stat8, StageKey8, 0
+RadixSortCoreKeyDsc_sint16:	RADIXSORT_KEY_CORE	DscOrder_ui, DscOrder_si, Stat16, StageKey16, 1
+RadixSortCoreKeyDsc_sint32:	RADIXSORT_KEY_CORE	DscOrder_ui, DscOrder_si, Stat32, StageKey32, 2
+RadixSortCoreKeyDsc_sint64:	RADIXSORT_KEY_CORE	DscOrder_ui, DscOrder_si, Stat64, StageKey64, 3
+RadixSortKeyDsc_sint8:		RADIXSORT_KEY_INT	RadixSortCoreKeyDsc_sint8
+RadixSortKeyDsc_sint16:		RADIXSORT_KEY_INT	RadixSortCoreKeyDsc_sint16
+RadixSortKeyDsc_sint32:		RADIXSORT_KEY_INT	RadixSortCoreKeyDsc_sint32
+RadixSortKeyDsc_sint64:		RADIXSORT_KEY_INT	RadixSortCoreKeyDsc_sint64
 
 ; Floating-point types
-RadixSortDscKey_flt32:		RADIX_SORT_FLT	RadixSortCoreDscKey_sint32, MapKey_flt32
-RadixSortDscKey_flt64:		RADIX_SORT_FLT	RadixSortCoreDscKey_sint64, MapKey_flt64
+RadixSortKeyDsc_flt32:		RADIXSORT_KEY_FLT	RadixSortCoreKeyDsc_sint32, Map_flt32
+RadixSortKeyDsc_flt64:		RADIXSORT_KEY_FLT	RadixSortCoreKeyDsc_sint64, Map_flt64
 
 ;******************************************************************************;
 ;       Merging of sorted arrays                                               ;
 ;******************************************************************************;
+
+;==============================================================================;
+;       Array merging                                                          ;
+;==============================================================================;
 macro	MERGE	key1, key2, x, scale
 {
 ;---[Parameters]---------------------------
@@ -5093,9 +5148,17 @@ size1	equ		rdx							; size of first array
 source2	equ		rcx							; pointer to second source array
 size2	equ		r8							; size of second array
 ;---[Internal variables]-------------------
-temp	equ		xmm0						; temporary register
 param2	equ		rsi							; register to pass 2 parameter to function
 param3	equ		rdx							; register to pass 3 parameter to function
+if scale = 0
+copy	= CopyFwd8							; Copy function
+else if scale = 1
+copy	= CopyFwd16							; Copy function
+else if scale = 2
+copy	= CopyFwd32							; Copy function
+else if scale = 3
+copy	= CopyFwd64							; Copy function
+end if
 bytes	= 1 shl scale						; size of array element (bytes)
 ;------------------------------------------
 		test	size1, size1				; if (size1 == 0)
@@ -5106,108 +5169,193 @@ bytes	= 1 shl scale						; size of array element (bytes)
 .loop:	mov		key1, [source1]				; key1 = source1[0]
 		mov		key2, [source2]				; key2 = source2[0]
 		cmp		key1, key2					; if (key1 condition key2)
-		j#x		@f							;     then go to associated branch
-if scale = 4
-		movdqu	temp, [source1]
-		movdqu	[target], temp				; target[0] = source1[0]
-else
+		j#x		.brnc2						;     then go to associated branch
+;---[Branch #1]----------------------------
 		mov		[target], key1				; target[0] = key1
-end if
 		add		source1, bytes				; source1++
 		add		target, bytes				; target++
 		sub		size1, 1					; size1--
-		jz		.copy1						; if (size1 == 0), then call Copy (target, source2, size2)
-		jmp		.loop						; do while (size1 != 0 && size2 != 0)
-@@:
-if scale = 4
-		movdqu	temp, [source2]
-		movdqu	[target], temp				; target[0] = source2[0]
-else
-		mov		[target], key2				; target[0] = key2
-end if
-		add		source2, bytes				; source2++
-		add		target, bytes				; targe++
-		sub		size2, 1					; size2--
-		jz		.copy2						; if (size2 == 0), then call Copy (target, source1, size1)
-		jmp		.loop						; do while (size1 != 0 && size2 != 0)
-;------------------------------------------
+		jnz		.loop						; do while (size1 != 0 && size2 != 0)
+;---[Copy tail of 2-nd source array]-------
 .copy1:	mov		param2, source2
 		mov		param3, size2
-.copy2:	shl		param3, scale
-		jmp		CopyFwd8					; call Copy (target, source, size)
+		jmp		copy						; call Copy (target, source2, size2)
+;---[Branch #2]----------------------------
+.brnc2:	mov		[target], key2				; target[0] = key2
+		add		source2, bytes				; source2++
+		add		target, bytes				; target++
+		sub		size2, 1					; size2--
+		jnz		.loop						; do while (size1 != 0 && size2 != 0)
+;---[Copy tail of 1-st source array]-------
+.copy2:	jmp		copy						; call Copy (target, source1, size1)
 }
-
-;==============================================================================;
-;       Array merging                                                          ;
-;==============================================================================;
 
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 ;       Ascending sort order                                                   ;
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 
 ; Unsigned integer types
-MergeAsc_uint8:		MERGE	r9b, r10b, a, 0
-MergeAsc_uint16:	MERGE	r9w, r10w, a, 1
-MergeAsc_uint32:	MERGE	r9d, r10d, a, 2
-MergeAsc_uint64:	MERGE	r9, r10, a, 3
+MergeAsc_uint8:		MERGE	r10b, r11b, a, 0
+MergeAsc_uint16:	MERGE	r10w, r11w, a, 1
+MergeAsc_uint32:	MERGE	r10d, r11d, a, 2
+MergeAsc_uint64:	MERGE	r10, r11, a, 3
 
 ; Signed integer types
-MergeAsc_sint8:		MERGE	r9b, r10b, g, 0
-MergeAsc_sint16:	MERGE	r9w, r10w, g, 1
-MergeAsc_sint32:	MERGE	r9d, r10d, g, 2
-MergeAsc_sint64:	MERGE	r9, r10, g, 3
+MergeAsc_sint8:		MERGE	r10b, r11b, g, 0
+MergeAsc_sint16:	MERGE	r10w, r11w, g, 1
+MergeAsc_sint32:	MERGE	r10d, r11d, g, 2
+MergeAsc_sint64:	MERGE	r10, r11, g, 3
 
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 ;       Descending sort order                                                  ;
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 
 ; Unsigned integer types
-MergeDsc_uint8:		MERGE	r9b, r10b, b, 0
-MergeDsc_uint16:	MERGE	r9w, r10w, b, 1
-MergeDsc_uint32:	MERGE	r9d, r10d, b, 2
-MergeDsc_uint64:	MERGE	r9, r10, b, 3
+MergeDsc_uint8:		MERGE	r10b, r11b, b, 0
+MergeDsc_uint16:	MERGE	r10w, r11w, b, 1
+MergeDsc_uint32:	MERGE	r10d, r11d, b, 2
+MergeDsc_uint64:	MERGE	r10, r11, b, 3
 
 ; Signed integer types
-MergeDsc_sint8:		MERGE	r9b, r10b, l, 0
-MergeDsc_sint16:	MERGE	r9w, r10w, l, 1
-MergeDsc_sint32:	MERGE	r9d, r10d, l, 2
-MergeDsc_sint64:	MERGE	r9, r10, l, 3
+MergeDsc_sint8:		MERGE	r10b, r11b, l, 0
+MergeDsc_sint16:	MERGE	r10w, r11w, l, 1
+MergeDsc_sint32:	MERGE	r10d, r11d, l, 2
+MergeDsc_sint64:	MERGE	r10, r11, l, 3
 
 ;==============================================================================;
 ;       Key merging                                                            ;
 ;==============================================================================;
+macro	MERGE_KEY	key1, key2, x, scale
+{
+;---[Parameters]---------------------------
+tkey	equ		rdi							; pointer to target key array
+tptr	equ		rsi							; pointer to target array of pointers to data
+skey1	equ		rdx							; pointer to first source key array
+sptr1	equ		rcx							; pointer to first source array of pointers to data
+size1	equ		r8							; size of first array
+skey2	equ		r9							; pointer to second source key array
+sptr2	equ		r12							; pointer to second source array of pointers to data
+size2	equ		r13							; size of second array
+;---[Internal variables]-------------------
+temp	equ		rax							; temporary register
+param1	equ		rdi							; register to pass 2 parameter to function
+param2	equ		rsi							; register to pass 2 parameter to function
+param3	equ		rdx							; register to pass 3 parameter to function
+stack	equ		rsp							; stack pointer
+s_tptr	equ		stack + 0 * 8				; stack position of "tptr" variable
+s_sptr	equ		stack + 1 * 8				; stack position of "sptr" variable
+s_size	equ		stack + 2 * 8				; stack position of "size" variable
+s_reg1	equ		stack + 3 * 8				; stack position of register #1
+s_reg2	equ		stack + 4 * 8				; stack position of register #2
+p_sptr2	equ		stack + 6 * 8				; stack position of parameter "sptr2"
+p_size2	equ		stack + 7 * 8				; stack position of parameter "size2"
+if scale = 0
+copy	= CopyFwd8							; Copy function
+else if scale = 1
+copy	= CopyFwd16							; Copy function
+else if scale = 2
+copy	= CopyFwd32							; Copy function
+else if scale = 3
+copy	= CopyFwd64							; Copy function
+end if
+space	= 5 * 8								; stack size required by the procedure
+bytes	= 1 shl scale						; size of array element (bytes)
+;------------------------------------------
+		sub		stack, space				; reserving stack size for local vars
+		mov		[s_reg1], r12				; save callee-saved register into the stack
+		mov		[s_reg2], r13				; save callee-saved register into the stack
+		mov		sptr2, [p_sptr2]			; get parameter "sptr2" from the stack
+		mov		size2, [p_size2]			; get parameter "size2" from the stack
+		test	size1, size1				; if (size1 == 0)
+		jz		.copy1						;     then copy source array #2
+		test	size2, size2				; if (size2 == 0)
+		jz		.copy2						;     then copy source array #1
+;---[Merging loop]-------------------------
+.loop:	mov		key1, [skey1]				; key1 = skey1[0]
+		mov		key2, [skey2]				; key2 = skey2[0]
+		cmp		key1, key2					; if (key1 condition key2)
+		j#x		.brnc2						;     then go to associated branch
+;---[Branch #1]----------------------------
+		mov		temp, [sptr1]
+		mov		[tkey], key1				; tkey[0] = key1
+		mov		[tptr], temp				; tptr[0] = sptr1[0]
+		add		skey1, bytes				; skey1++
+		add		sptr1, 8					; sptr1++
+		add		tkey, bytes					; tkey++
+		add		tptr, 8						; tptr++
+		sub		size1, 1					; size1--
+		jnz		.loop						; do while (size1 != 0 && size2 != 0)
+;---[Copy tail of 2-nd source array]-------
+.copy1:	mov		[s_tptr], tptr				; save "tptr" variable into the stack
+		mov		[s_sptr], sptr2				; save "sptr2" variable into the stack
+		mov		[s_size], size2				; save "size2" variable into the stack
+		mov		param2, skey2
+		mov		param3, size2
+		call	copy						; call Copy (tkey, skey2, size2)
+		mov		param1, [s_tptr]			; get "tptr" variable from the stack
+		mov		param2, [s_sptr]			; get "sptr2" variable from the stack
+		mov		param3, [s_size]			; get "size2" variable from the stack
+		mov		r12, [s_reg1]				; restore callee-saved register from the stack
+		mov		r13, [s_reg2]				; restore callee-saved register from the stack
+		add		stack, space				; restoring back the stack pointer
+		jmp		CopyFwd64					; call Copy (tptr, sptr2, size2)
+;---[Branch #2]----------------------------
+.brnc2:	mov		temp, [sptr2]
+		mov		[tkey], key2				; tkey[0] = key2
+		mov		[tptr], temp				; tptr[0] = sptr2[0]
+		add		skey2, bytes				; skey2++
+		add		sptr2, 8					; sptr2++
+		add		tkey, bytes					; tkey++
+		add		tptr, 8						; tptr++
+		sub		size2, 1					; size2--
+		jnz		.loop						; do while (size1 != 0 && size2 != 0)
+;---[Copy tail of 1-st source array]-------
+.copy2:	mov		[s_tptr], tptr				; save "tptr" variable into the stack
+		mov		[s_sptr], sptr1				; save "sptr1" variable into the stack
+		mov		[s_size], size1				; save "size1" variable into the stack
+		mov		param2, skey1
+		mov		param3, size1
+		call	copy						; call Copy (tkey, skey1, size1)
+		mov		param1, [s_tptr]			; get "tptr" variable from the stack
+		mov		param2, [s_sptr]			; get "sptr1" variable from the stack
+		mov		param3, [s_size]			; get "size1" variable from the stack
+		mov		r12, [s_reg1]				; restore callee-saved register from the stack
+		mov		r13, [s_reg2]				; restore callee-saved register from the stack
+		add		stack, space				; restoring back the stack pointer
+		jmp		CopyFwd64					; call Copy (tptr, sptr1, size1)
+}
 
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 ;       Ascending sort order                                                   ;
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 
 ; Unsigned integer types
-MergeAscKey_uint8:	MERGE	r9b, r10b, a, 4
-MergeAscKey_uint16:	MERGE	r9w, r10w, a, 4
-MergeAscKey_uint32:	MERGE	r9d, r10d, a, 4
-MergeAscKey_uint64:	MERGE	r9, r10, a, 4
+MergeKeyAsc_uint8:	MERGE_KEY	r10b, r11b, a, 0
+MergeKeyAsc_uint16:	MERGE_KEY	r10w, r11w, a, 1
+MergeKeyAsc_uint32:	MERGE_KEY	r10d, r11d, a, 2
+MergeKeyAsc_uint64:	MERGE_KEY	r10, r11, a, 3
 
 ; Signed integer types
-MergeAscKey_sint8:	MERGE	r9b, r10b, g, 4
-MergeAscKey_sint16:	MERGE	r9w, r10w, g, 4
-MergeAscKey_sint32:	MERGE	r9d, r10d, g, 4
-MergeAscKey_sint64:	MERGE	r9, r10, g, 4
+MergeKeyAsc_sint8:	MERGE_KEY	r10b, r11b, g, 0
+MergeKeyAsc_sint16:	MERGE_KEY	r10w, r11w, g, 1
+MergeKeyAsc_sint32:	MERGE_KEY	r10d, r11d, g, 2
+MergeKeyAsc_sint64:	MERGE_KEY	r10, r11, g, 3
 
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 ;       Descending sort order                                                  ;
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 
 ; Unsigned integer types
-MergeDscKey_uint8:	MERGE	r9b, r10b, b, 4
-MergeDscKey_uint16:	MERGE	r9w, r10w, b, 4
-MergeDscKey_uint32:	MERGE	r9d, r10d, b, 4
-MergeDscKey_uint64:	MERGE	r9, r10, b, 4
+MergeKeyDsc_uint8:	MERGE_KEY	r10b, r11b, b, 0
+MergeKeyDsc_uint16:	MERGE_KEY	r10w, r11w, b, 1
+MergeKeyDsc_uint32:	MERGE_KEY	r10d, r11d, b, 2
+MergeKeyDsc_uint64:	MERGE_KEY	r10, r11, b, 3
 
 ; Signed integer types
-MergeDscKey_sint8:	MERGE	r9b, r10b, l, 4
-MergeDscKey_sint16:	MERGE	r9w, r10w, l, 4
-MergeDscKey_sint32:	MERGE	r9d, r10d, l, 4
-MergeDscKey_sint64:	MERGE	r9, r10, l, 4
+MergeKeyDsc_sint8:	MERGE_KEY	r10b, r11b, l, 0
+MergeKeyDsc_sint16:	MERGE_KEY	r10w, r11w, l, 1
+MergeKeyDsc_sint32:	MERGE_KEY	r10d, r11d, l, 2
+MergeKeyDsc_sint64:	MERGE_KEY	r10, r11, l, 3
 
 ;******************************************************************************;
 ;       Unique values                                                          ;
@@ -5304,6 +5452,506 @@ Duplicates8:	DUPLICATES	r8b, r9b, 0
 Duplicates16:	DUPLICATES	r8w, r9w, 1
 Duplicates32:	DUPLICATES	r8d, r9d, 2
 Duplicates64:	DUPLICATES	r8, r9, 3
+
+;******************************************************************************;
+;       Checks                                                                 ;
+;******************************************************************************;
+
+;==============================================================================;
+;       Check for duplicate values                                             ;
+;==============================================================================;
+macro	HAS_DUPLICATES	treg, x
+{
+;---[Parameters]---------------------------
+array	equ		rdi							; pointer to array
+size	equ		rsi							; array size (count of elements)
+;---[Internal variables]-------------------
+result	equ		al							; result register
+ptr		equ		rdx							; temporary pointer to array
+count	equ		rcx							; count of elements to align target
+temp	equ		r8							; temporary register
+fmask	equ		count						; mask of comparison results
+temp0	equ		xmm0						; temporary register #1
+temp1	equ		xmm1						; temporary register #2
+temp2	equ		xmm2						; temporary register #3
+temp3	equ		xmm3						; temporary register #4
+temp4	equ		xmm4						; temporary register #5
+temp5	equ		xmm5						; temporary register #6
+temp6	equ		xmm6						; temporary register #7
+temp7	equ		xmm7						; temporary register #8
+flags	equ		xmm8						; checks accumulator
+amask	= 16 - 1							; aligning mask
+if x eq b
+scale	= 0									; scale value
+else if x eq w
+scale	= 1									; scale value
+else if x eq d
+scale	= 2									; scale value
+else if x eq q
+scale	= 3									; scale value
+end if
+bscale	= 6									; block scale factor
+bytes	= 1 shl scale						; size of array element (bytes)
+block	= 1 shl bscale						; block size (bytes)
+step	= 1 shl (bscale - scale)			; step size (bytes)
+;------------------------------------------
+		sub		size, 1						; if (--size <= 0)
+		jbe		.exit						;     then go to exit
+		lea		ptr, [array + bytes]		; ptr = array + 1
+	prefetchnta	[ptr]						; prefetch data
+	prefetchnta	[array]						; prefetch data
+		test	array, bytes - 1			; if (array & (bytes - 1))
+		jnz		.sclr						;     then skip vector code
+		mov		count, array
+		neg		count
+		and		count, amask
+		shr		count, scale				; count = (-array & amask) >> scale
+		lea		temp, [count + step]
+		cmp		size, temp					; if (size < count + step)
+		jb		.sclr						;     then skip vector code
+		sub		size, count					; size -= count
+		mov		temp, size					; temp = size
+		shr		size, bscale - scale		; size = size / step
+		and		temp, step - 1				; temp = size % step
+		test	count, count				; if (count == 0)
+		jz		.vctr						;     then skip aligning loop
+;---[Aligning loop]------------------------
+.aloop:	mov		treg, [ptr]					; treg = ptr[0]
+		cmp		[array], treg				; if (array[0] == ptr[0])
+		je		.dup						;     then go to found duplicates branch
+		add		ptr, bytes					; ptr++
+		add		array, bytes				; array++
+		sub		count, 1					; count--
+		jnz		.aloop						; do while (count != 0)
+;------------------------------------------
+.vctr:	pxor	flags, flags				; flags = 0
+;---[Vector loop]--------------------------
+.vloop:	movdqu	temp4, [ptr + 0x00]			; temp4 = ptr[0]
+		movdqu	temp5, [ptr + 0x10]			; temp5 = ptr[16]
+		movdqu	temp6, [ptr + 0x20]			; temp6 = ptr[32]
+		movdqu	temp7, [ptr + 0x30]			; temp7 = ptr[48]
+	prefetchnta	[ptr + PSTEP]				; prefetch next portion of data
+		movdqa	temp0, [array + 0x00]		; temp0 = array[0]
+	pcmpeq#x	temp0, temp4				; check for array[0] == ptr[0]
+		por		flags, temp0				; accumulate check results
+		movdqa	temp1, [array + 0x10]		; temp1 = array[16]
+	pcmpeq#x	temp1, temp5				; check for array[16] == ptr[16]
+		por		flags, temp1				; accumulate check results
+		movdqa	temp2, [array + 0x20]		; temp2 = array[32]
+	pcmpeq#x	temp2, temp6				; check for array[32] == ptr[32]
+		por		flags, temp2				; accumulate check results
+		movdqa	temp3, [array + 0x30]		; temp3 = array[48]
+	pcmpeq#x	temp3, temp7				; check for array[48] == ptr[48]
+		por		flags, temp3				; accumulate check results
+	prefetchnta	[array + PSTEP]				; prefetch next portion of data
+	pmovmskb	fmask, flags				; save check results to fmask
+		test	fmask, fmask				; if condition is met,
+		jnz		.dup						;     then go to found duplicates branch
+		add		ptr, block					; ptr += block
+		add		array, block				; array += block
+		sub		size, 1						; size--
+		jnz		.vloop						; do while (size != 0)
+;------------------------------------------
+		mov		size, temp					; size = temp
+.sclr:	test	size, size					; if (size == 0)
+		jz		.exit						;     then go to exit
+;---[Scalar loop]--------------------------
+.sloop:	mov		treg, [ptr]					; treg = ptr[0]
+		cmp		[array], treg				; if (array[0] == ptr[0])
+		je		.dup						;     then go to found duplicates branch
+		add		ptr, bytes					; ptr++
+		add		array, bytes				; array++
+		sub		size, 1						; size--
+		jnz		.sloop						; do while (size != 0)
+;---[Equal branch]-------------------------
+.exit:	xor		result, result				; return false
+		ret
+;---[Found duplicates branch]--------------
+.dup:	mov		result, 1					; return true
+		ret
+}
+HasDuplicates8:		HAS_DUPLICATES	al, b
+HasDuplicates16:	HAS_DUPLICATES	ax, w
+HasDuplicates32:	HAS_DUPLICATES	eax, d
+HasDuplicates64:	HAS_DUPLICATES	rax, q
+
+;==============================================================================;
+;       Check for infinite values                                              ;
+;==============================================================================;
+macro	HAS_INF	treg, mask, value, x
+{
+;---[Parameters]---------------------------
+array	equ		rdi							; pointer to array
+size	equ		rsi							; array size (count of elements)
+;---[Internal variables]-------------------
+result	equ		al							; result register
+count	equ		rcx							; count of elements to align array
+temp	equ		r8							; temporary register
+fmask	equ		eax							; mask of comparison results
+temp0	equ		xmm0						; temporary register #1
+temp1	equ		xmm1						; temporary register #2
+temp2	equ		xmm2						; temporary register #3
+temp3	equ		xmm3						; temporary register #4
+flags	equ		xmm4						; checks accumulator
+vector	equ		xmm5						; vector value to process with
+vmask	equ		xmm6						; bit mask
+amask	= 16 - 1							; aligning mask
+if x eq d
+dmask	= DMASK_FLT32						; data mask
+inf		= 0x7F800000						; inf
+scale	= 2									; scale value
+else
+dmask	= DMASK_FLT64						; data mask
+inf		= 0x7FF0000000000000				; inf
+scale	= 3									; scale value
+end if
+bscale	= 6									; block scale factor
+bytes	= 1 shl scale						; size of array element (bytes)
+block	= 1 shl bscale						; block size (bytes)
+step	= 1 shl (bscale - scale)			; step size (bytes)
+;------------------------------------------
+	prefetchnta	[array]						; prefetch data
+		test	array, bytes - 1			; if (array & (bytes - 1))
+		jnz		.sclr						;     then skip vector code
+		mov		count, array
+		neg		count
+		and		count, amask
+		shr		count, scale				; count = (-array & amask) >> scale
+		lea		temp, [count + step]
+		cmp		size, temp					; if (size < count + step)
+		jb		.sclr						;     then skip vector code
+		initreg	vmask, treg, dmask, bytes	; vmask = dmask
+		clone	vmask, scale				; duplicate value through the entire register
+		initreg	vector, treg, inf, bytes	; vector = Inf
+		clone	vector, scale				; duplicate value through the entire register
+		sub		size, count					; size -= count
+		mov		temp, size					; temp = size
+		shr		size, bscale - scale		; size = size / step
+		and		temp, step - 1				; temp = size % step
+		test	count, count				; if (count == 0)
+		jz		.vctr						;     then skip aligning loop
+		mov		mask, dmask					; mask = dmask
+		mov		value, inf					; value = Inf
+;---[Aligning loop]------------------------
+.aloop:	mov		treg, [array]				; treg = source[0]
+		and		treg, mask					; treg = Abs(treg)
+		cmp		treg, value					; if (treg == value)
+		je		.found						;     then go to found branch
+		add		array, bytes				; array++
+		sub		count, 1					; count--
+		jnz		.aloop						; do while (count != 0)
+;------------------------------------------
+.vctr:	pxor	flags, flags				; flags = 0
+;---[Vector loop]--------------------------
+.vloop:	movdqa	temp0, [array + 0x00]		; temp0 = array[0]
+		pand	temp0, vmask				; temp0 = Abs (temp0)
+	pcmpeq#x	temp0, vector				; check for temp0 == value
+		por		flags, temp0				; accumulate check results
+		movdqa	temp1, [array + 0x10]		; temp1 = array[16]
+		pand	temp1, vmask				; temp1 = Abs (temp1)
+	pcmpeq#x	temp1, vector				; check for temp1 == value
+		por		flags, temp1				; accumulate check results
+		movdqa	temp2, [array + 0x20]		; temp2 = array[32]
+		pand	temp2, vmask				; temp2 = Abs (temp2)
+	pcmpeq#x	temp2, vector				; check for temp2 == value
+		por		flags, temp2				; accumulate check results
+		movdqa	temp3, [array + 0x30]		; temp3 = array[48]
+		pand	temp3, vmask				; temp3 = Abs (temp3)
+	pcmpeq#x	temp3, vector				; check for temp3 == value
+		por		flags, temp3				; accumulate check results
+	prefetchnta	[array + PSTEP]				; prefetch next portion of data
+	pmovmskb	fmask, flags				; save check results to fmask
+		test	fmask, fmask				; if condition is met,
+		jnz		.found						;     then go to found branch
+		add		array, block				; array += block
+		sub		size, 1						; size--
+		jnz		.vloop						; do while (size != 0)
+;------------------------------------------
+		mov		size, temp					; size = temp
+.sclr:	test	size, size					; if (size == 0)
+		jz		.exit						;     then go to exit
+		mov		mask, dmask					; mask = dmask
+		mov		value, inf					; value = Inf
+;---[Scalar loop]--------------------------
+.sloop:	mov		treg, [array]				; treg = array[0]
+		and		treg, mask					; treg = Abs(treg)
+		cmp		treg, value					; if (treg == value)
+		je		.found						;     then go to found branch
+		add		array, bytes				; array++
+		sub		size, 1						; size--
+		jnz		.sloop						; do while (size != 0)
+;---[Normal exit branch]-------------------
+.exit:	xor		result, result				; return false
+		ret
+;---[Element has been found]---------------
+.found:	mov		result, 1					; return true (array has required value)
+		ret
+}
+HasINF_flt32:	HAS_INF	eax, edx, r9d, d
+HasINF_flt64:	HAS_INF	rax, rdx, r9, q
+
+;==============================================================================;
+;       Check for NaN values                                                   ;
+;==============================================================================;
+macro	HAS_NAN	treg, mask, value, x
+{
+;---[Parameters]---------------------------
+array	equ		rdi							; pointer to array
+size	equ		rsi							; array size (count of elements)
+;---[Internal variables]-------------------
+result	equ		al							; result register
+count	equ		rcx							; count of elements to align array
+temp	equ		r8							; temporary register
+fmask	equ		eax							; mask of comparison results
+temp0	equ		xmm0						; temporary register #1
+temp1	equ		xmm1						; temporary register #2
+temp2	equ		xmm2						; temporary register #3
+temp3	equ		xmm3						; temporary register #4
+flags	equ		xmm4						; checks accumulator
+vector	equ		xmm5						; vector value to process with
+vmask	equ		xmm6						; bit mask
+amask	= 16 - 1							; aligning mask
+if x eq d
+dmask	= DMASK_FLT32						; data mask
+inf		= 0x7F800000						; inf
+scale	= 2									; scale value
+else
+dmask	= DMASK_FLT64						; data mask
+inf		= 0x7FF0000000000000				; inf
+scale	= 3									; scale value
+end if
+bscale	= 6									; block scale factor
+bytes	= 1 shl scale						; size of array element (bytes)
+block	= 1 shl bscale						; block size (bytes)
+step	= 1 shl (bscale - scale)			; step size (bytes)
+;------------------------------------------
+	prefetchnta	[array]						; prefetch data
+		test	array, bytes - 1			; if (array & (bytes - 1))
+		jnz		.sclr						;     then skip vector code
+		mov		count, array
+		neg		count
+		and		count, amask
+		shr		count, scale				; count = (-array & amask) >> scale
+		lea		temp, [count + step]
+		cmp		size, temp					; if (size < count + step)
+		jb		.sclr						;     then skip vector code
+		initreg	vmask, treg, dmask, bytes	; vmask = dmask
+		clone	vmask, scale				; duplicate value through the entire register
+		initreg	vector, treg, inf, bytes	; vector = Inf
+		clone	vector, scale				; duplicate value through the entire register
+		sub		size, count					; size -= count
+		mov		temp, size					; temp = size
+		shr		size, bscale - scale		; size = size / step
+		and		temp, step - 1				; temp = size % step
+		test	count, count				; if (count == 0)
+		jz		.vctr						;     then skip aligning loop
+		mov		mask, dmask					; mask = dmask
+		mov		value, inf					; value = Inf
+;---[Aligning loop]------------------------
+.aloop:	mov		treg, [array]				; treg = source[0]
+		and		treg, mask					; treg = Abs(treg)
+		cmp		treg, value					; if (treg > value)
+		jg		.found						;     then go to found branch
+		add		array, bytes				; array++
+		sub		count, 1					; count--
+		jnz		.aloop						; do while (count != 0)
+;------------------------------------------
+.vctr:	pxor	flags, flags				; flags = 0
+;---[Vector loop]--------------------------
+.vloop:	movdqa	temp0, [array + 0x00]		; temp0 = array[0]
+		pand	temp0, vmask				; temp0 = Abs (temp0)
+	pcmpgt#x	temp0, vector				; check for temp0 > value
+		por		flags, temp0				; accumulate check results
+		movdqa	temp1, [array + 0x10]		; temp1 = array[16]
+		pand	temp1, vmask				; temp1 = Abs (temp1)
+	pcmpgt#x	temp1, vector				; check for temp1 > value
+		por		flags, temp1				; accumulate check results
+		movdqa	temp2, [array + 0x20]		; temp2 = array[32]
+		pand	temp2, vmask				; temp2 = Abs (temp2)
+	pcmpgt#x	temp2, vector				; check for temp2 > value
+		por		flags, temp2				; accumulate check results
+		movdqa	temp3, [array + 0x30]		; temp3 = array[48]
+		pand	temp3, vmask				; temp3 = Abs (temp3)
+	pcmpgt#x	temp3, vector				; check for temp3 > value
+		por		flags, temp3				; accumulate check results
+	prefetchnta	[array + PSTEP]				; prefetch next portion of data
+	pmovmskb	fmask, flags				; save check results to fmask
+		test	fmask, fmask				; if condition is met,
+		jnz		.found						;     then go to found branch
+		add		array, block				; array += block
+		sub		size, 1						; size--
+		jnz		.vloop						; do while (size != 0)
+;------------------------------------------
+		mov		size, temp					; size = temp
+.sclr:	test	size, size					; if (size == 0)
+		jz		.exit						;     then go to exit
+		mov		mask, dmask					; mask = dmask
+		mov		value, inf					; value = Inf
+;---[Scalar loop]--------------------------
+.sloop:	mov		treg, [array]				; treg = array[0]
+		and		treg, mask					; treg = Abs(treg)
+		cmp		treg, value					; if (treg > value)
+		jg		.found						;     then go to found branch
+		add		array, bytes				; array++
+		sub		size, 1						; size--
+		jnz		.sloop						; do while (size != 0)
+;---[Normal exit branch]-------------------
+.exit:	xor		result, result				; return false
+		ret
+;---[Element has been found]---------------
+.found:	mov		result, 1					; return true (array has required value)
+		ret
+}
+HasNAN_flt32:	HAS_NAN	eax, edx, r9d, d
+HasNAN_flt64:	HAS_NAN	rax, rdx, r9, q
+
+;==============================================================================;
+;       Check for equality                                                     ;
+;==============================================================================;
+macro	IS_EQUAL	treg, x
+{
+;---[Parameters]---------------------------
+array1	equ		rdi							; pointer to first array
+array2	equ		rsi							; pointer to second array
+size	equ		rdx							; array size (count of elements)
+;---[Internal variables]-------------------
+result	equ		al							; result register
+count	equ		rcx							; count of elements to align target
+temp	equ		r8							; temporary register
+fmask	equ		count						; mask of comparison results
+temp0	equ		xmm0						; temporary register #1
+temp1	equ		xmm1						; temporary register #2
+temp2	equ		xmm2						; temporary register #3
+temp3	equ		xmm3						; temporary register #4
+temp4	equ		xmm4						; temporary register #5
+temp5	equ		xmm5						; temporary register #6
+temp6	equ		xmm6						; temporary register #7
+temp7	equ		xmm7						; temporary register #8
+flags	equ		xmm8						; checks accumulator
+amask	= 16 - 1							; aligning mask
+if x eq b
+scale	= 0									; scale value
+else if x eq w
+scale	= 1									; scale value
+else if x eq d
+scale	= 2									; scale value
+else if x eq q
+scale	= 3									; scale value
+end if
+bscale	= 6									; block scale factor
+mscale	= 1 shl (4 - scale)					; mask scale factor
+bytes	= 1 shl scale						; size of array element (bytes)
+block	= 1 shl bscale						; block size (bytes)
+step	= 1 shl (bscale - scale)			; step size (bytes)
+;------------------------------------------
+	prefetchnta	[array2]					; prefetch data
+	prefetchnta	[array1]					; prefetch data
+		test	array1, bytes - 1			; if (array1 & (bytes - 1))
+		jnz		.sclr						;     then skip vector code
+		mov		count, array1
+		neg		count
+		and		count, amask
+		shr		count, scale				; count = (-array1 & amask) >> scale
+		lea		temp, [count + step]
+		cmp		size, temp					; if (size < count + step)
+		jb		.sclr						;     then skip vector code
+		sub		size, count					; size -= count
+		mov		temp, size					; temp = size
+		shr		size, bscale - scale		; size = size / step
+		and		temp, step - 1				; temp = size % step
+		test	count, count				; if (count == 0)
+		jz		.vctr						;     then skip aligning loop
+;---[Aligning loop]------------------------
+.aloop:	mov		treg, [array2]				; treg = array2[0]
+		cmp		[array1], treg				; if (array1[0] != array2[0])
+		jne		.nteql						;     then go to not equal branch
+		add		array2, bytes				; array2++
+		add		array1, bytes				; array1++
+		sub		count, 1					; count--
+		jnz		.aloop						; do while (count != 0)
+;------------------------------------------
+.vctr:	pxor	flags, flags				; flags = 0
+;---[Vector loop]--------------------------
+.vloop:	movdqu	temp4, [array2 + 0x00]		; temp4 = array2[0]
+		movdqu	temp5, [array2 + 0x10]		; temp5 = array2[16]
+		movdqu	temp6, [array2 + 0x20]		; temp6 = array2[32]
+		movdqu	temp7, [array2 + 0x30]		; temp7 = array2[48]
+	prefetchnta	[array2 + PSTEP]			; prefetch next portion of data
+		movdqa	temp0, [array1 + 0x00]		; temp0 = array1[0]
+	pcmpeq#x	temp0, temp4				; check for array1[0] == array2[0]
+		pand	flags, temp0				; accumulate check results
+		movdqa	temp1, [array1 + 0x10]		; temp1 = array1[16]
+	pcmpeq#x	temp1, temp5				; check for array1[16] == array2[16]
+		pand	flags, temp1				; accumulate check results
+		movdqa	temp2, [array1 + 0x20]		; temp2 = array1[32]
+	pcmpeq#x	temp2, temp6				; check for array1[32] == array2[32]
+		pand	flags, temp2				; accumulate check results
+		movdqa	temp3, [array1 + 0x30]		; temp3 = array1[48]
+	pcmpeq#x	temp3, temp7				; check for array1[48] == array2[48]
+		pand	flags, temp3				; accumulate check results
+	prefetchnta	[array1 + PSTEP]			; prefetch next portion of data
+	pmovmskb	fmask, flags				; save check results to fmask
+		cmp		fmask, 1 shl mscale - 1		; if (fmask != 2 ^ mscale - 1)
+		jne		.nteql						;     then go to not equal branch
+		add		array2, block				; array2 += block
+		add		array1, block				; array1 += block
+		sub		size, 1						; size--
+		jnz		.vloop						; do while (size != 0)
+;------------------------------------------
+		mov		size, temp					; size = temp
+.sclr:	test	size, size					; if (size == 0)
+		jz		.exit						;     then go to exit
+;---[Scalar loop]--------------------------
+.sloop:	mov		treg, [array2]				; treg = array2[0]
+		cmp		[array1], treg				; if (array1[0] != array2[0])
+		jne		.nteql						;     then go to not equal branch
+		add		array2, bytes				; array2++
+		add		array1, bytes				; array1++
+		sub		size, 1						; size--
+		jnz		.sloop						; do while (size != 0)
+;---[Equal branch]-------------------------
+.exit:	mov		result, 1					; return true
+		ret
+;---[Not equal branch]---------------------
+.nteql:	xor		result, result				; return false
+		ret
+}
+IsEqual8:	IS_EQUAL	al, b
+IsEqual16:	IS_EQUAL	ax, w
+IsEqual32:	IS_EQUAL	eax, d
+IsEqual64:	IS_EQUAL	rax, q
+
+;==============================================================================;
+;       Check for overlap                                                      ;
+;==============================================================================;
+macro	OVERLAP	scale
+{
+;---[Parameters]---------------------------
+target	equ 	rdi							; pointer to target array
+t_size	equ		rsi							; target array size
+source	equ 	rdx							; pointer to source array
+s_size	equ 	rcx							; source array size
+;---[Internal variables]-------------------
+result	equ		al							; result register
+bytes	= 1 shl scale						; size of array element (bytes)
+;------------------------------------------
+		cmp		target, source				; if (target >= source)
+		jb		@f
+;------------------------------------------
+		lea		source, [source+s_size*bytes]; then source += s_size
+		cmp		target, source				; return target >= source
+		setb	result
+		ret
+;------------------------------------------
+@@:		lea		target, [target+t_size*bytes]; else target += t_size
+		cmp		source, target				; return (source >= target)
+		setb	result
+		ret
+}
+Overlap8:	OVERLAP	0
+Overlap16:	OVERLAP	1
+Overlap32:	OVERLAP	2
+Overlap64:	OVERLAP	3
 
 ;###############################################################################
 ;#                                 END OF FILE                                 #
