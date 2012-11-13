@@ -797,38 +797,38 @@ static void MergeDsc (size_t target[], const size_t source1[], size_t size1, con
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
 // Unsigned integer types
-static void MergeAsc (uint8_t tkey[], void* tptr[], const uint8_t skey1[], const void* sptr1[], size_t size1, const uint8_t skey2[], const void* sptr2[], size_t size2);
-static void MergeAsc (uint16_t tkey[], void* tptr[], const uint16_t skey1[], const void* sptr1[], size_t size1, const uint16_t skey2[], const void* sptr2[], size_t size2);
-static void MergeAsc (uint32_t tkey[], void* tptr[], const uint32_t skey1[], const void* sptr1[], size_t size1, const uint32_t skey2[], const void* sptr2[], size_t size2);
-static void MergeAsc (uint64_t tkey[], void* tptr[], const uint64_t skey1[], const void* sptr1[], size_t size1, const uint64_t skey2[], const void* sptr2[], size_t size2);
+static void MergeAsc (uint8_t tkey[], void* tptr[], const uint8_t skey1[], void* sptr1[], size_t size1, const uint8_t skey2[], void* sptr2[], size_t size2);
+static void MergeAsc (uint16_t tkey[], void* tptr[], const uint16_t skey1[], void* sptr1[], size_t size1, const uint16_t skey2[], void* sptr2[], size_t size2);
+static void MergeAsc (uint32_t tkey[], void* tptr[], const uint32_t skey1[], void* sptr1[], size_t size1, const uint32_t skey2[], void* sptr2[], size_t size2);
+static void MergeAsc (uint64_t tkey[], void* tptr[], const uint64_t skey1[], void* sptr1[], size_t size1, const uint64_t skey2[], void* sptr2[], size_t size2);
 
 // Signed integer types
-static void MergeAsc (sint8_t tkey[], void* tptr[], const sint8_t skey1[], const void* sptr1[], size_t size1, const sint8_t skey2[], const void* sptr2[], size_t size2);
-static void MergeAsc (sint16_t tkey[], void* tptr[], const sint16_t skey1[], const void* sptr1[], size_t size1, const sint16_t skey2[], const void* sptr2[], size_t size2);
-static void MergeAsc (sint32_t tkey[], void* tptr[], const sint32_t skey1[], const void* sptr1[], size_t size1, const sint32_t skey2[], const void* sptr2[], size_t size2);
-static void MergeAsc (sint64_t tkey[], void* tptr[], const sint64_t skey1[], const void* sptr1[], size_t size1, const sint64_t skey2[], const void* sptr2[], size_t size2);
+static void MergeAsc (sint8_t tkey[], void* tptr[], const sint8_t skey1[], void* sptr1[], size_t size1, const sint8_t skey2[], void* sptr2[], size_t size2);
+static void MergeAsc (sint16_t tkey[], void* tptr[], const sint16_t skey1[], void* sptr1[], size_t size1, const sint16_t skey2[], void* sptr2[], size_t size2);
+static void MergeAsc (sint32_t tkey[], void* tptr[], const sint32_t skey1[], void* sptr1[], size_t size1, const sint32_t skey2[], void* sptr2[], size_t size2);
+static void MergeAsc (sint64_t tkey[], void* tptr[], const sint64_t skey1[], void* sptr1[], size_t size1, const sint64_t skey2[], void* sptr2[], size_t size2);
 
 // Other types
-static void MergeAsc (size_t tkey[], void* tptr[], const size_t skey1[], const void* sptr1[], size_t size1, const size_t skey2[], const void* sptr2[], size_t size2);
+static void MergeAsc (size_t tkey[], void* tptr[], const size_t skey1[], void* sptr1[], size_t size1, const size_t skey2[], void* sptr2[], size_t size2);
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 //      Descending sort order                                                 //
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
 // Unsigned integer types
-static void MergeDsc (uint8_t tkey[], void* tptr[], const uint8_t skey1[], const void* sptr1[], size_t size1, const uint8_t skey2[], const void* sptr2[], size_t size2);
-static void MergeDsc (uint16_t tkey[], void* tptr[], const uint16_t skey1[], const void* sptr1[], size_t size1, const uint16_t skey2[], const void* sptr2[], size_t size2);
-static void MergeDsc (uint32_t tkey[], void* tptr[], const uint32_t skey1[], const void* sptr1[], size_t size1, const uint32_t skey2[], const void* sptr2[], size_t size2);
-static void MergeDsc (uint64_t tkey[], void* tptr[], const uint64_t skey1[], const void* sptr1[], size_t size1, const uint64_t skey2[], const void* sptr2[], size_t size2);
+static void MergeDsc (uint8_t tkey[], void* tptr[], const uint8_t skey1[], void* sptr1[], size_t size1, const uint8_t skey2[], void* sptr2[], size_t size2);
+static void MergeDsc (uint16_t tkey[], void* tptr[], const uint16_t skey1[], void* sptr1[], size_t size1, const uint16_t skey2[], void* sptr2[], size_t size2);
+static void MergeDsc (uint32_t tkey[], void* tptr[], const uint32_t skey1[], void* sptr1[], size_t size1, const uint32_t skey2[], void* sptr2[], size_t size2);
+static void MergeDsc (uint64_t tkey[], void* tptr[], const uint64_t skey1[], void* sptr1[], size_t size1, const uint64_t skey2[], void* sptr2[], size_t size2);
 
 // Signed integer types
-static void MergeDsc (sint8_t tkey[], void* tptr[], const sint8_t skey1[], const void* sptr1[], size_t size1, const sint8_t skey2[], const void* sptr2[], size_t size2);
-static void MergeDsc (sint16_t tkey[], void* tptr[], const sint16_t skey1[], const void* sptr1[], size_t size1, const sint16_t skey2[], const void* sptr2[], size_t size2);
-static void MergeDsc (sint32_t tkey[], void* tptr[], const sint32_t skey1[], const void* sptr1[], size_t size1, const sint32_t skey2[], const void* sptr2[], size_t size2);
-static void MergeDsc (sint64_t tkey[], void* tptr[], const sint64_t skey1[], const void* sptr1[], size_t size1, const sint64_t skey2[], const void* sptr2[], size_t size2);
+static void MergeDsc (sint8_t tkey[], void* tptr[], const sint8_t skey1[], void* sptr1[], size_t size1, const sint8_t skey2[], void* sptr2[], size_t size2);
+static void MergeDsc (sint16_t tkey[], void* tptr[], const sint16_t skey1[], void* sptr1[], size_t size1, const sint16_t skey2[], void* sptr2[], size_t size2);
+static void MergeDsc (sint32_t tkey[], void* tptr[], const sint32_t skey1[], void* sptr1[], size_t size1, const sint32_t skey2[], void* sptr2[], size_t size2);
+static void MergeDsc (sint64_t tkey[], void* tptr[], const sint64_t skey1[], void* sptr1[], size_t size1, const sint64_t skey2[], void* sptr2[], size_t size2);
 
 // Other types
-static void MergeDsc (size_t tkey[], void* tptr[], const size_t skey1[], const void* sptr1[], size_t size1, const size_t skey2[], const void* sptr2[], size_t size2);
+static void MergeDsc (size_t tkey[], void* tptr[], const size_t skey1[], void* sptr1[], size_t size1, const size_t skey2[], void* sptr2[], size_t size2);
 
 //****************************************************************************//
 //      Unique values                                                         //
@@ -1722,38 +1722,38 @@ void Array_MergeDsc_size (size_t target[], const size_t source1[], size_t size1,
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
 // Unsigned integer types
-void Array_MergeKeyAsc_uint8 (uint8_t tkey[], void* tptr[], const uint8_t skey1[], const void* sptr1[], size_t size1, const uint8_t skey2[], const void* sptr2[], size_t size2);
-void Array_MergeKeyAsc_uint16 (uint16_t tkey[], void* tptr[], const uint16_t skey1[], const void* sptr1[], size_t size1, const uint16_t skey2[], const void* sptr2[], size_t size2);
-void Array_MergeKeyAsc_uint32 (uint32_t tkey[], void* tptr[], const uint32_t skey1[], const void* sptr1[], size_t size1, const uint32_t skey2[], const void* sptr2[], size_t size2);
-void Array_MergeKeyAsc_uint64 (uint64_t tkey[], void* tptr[], const uint64_t skey1[], const void* sptr1[], size_t size1, const uint64_t skey2[], const void* sptr2[], size_t size2);
+void Array_MergeKeyAsc_uint8 (uint8_t tkey[], void* tptr[], const uint8_t skey1[], void* sptr1[], size_t size1, const uint8_t skey2[], void* sptr2[], size_t size2);
+void Array_MergeKeyAsc_uint16 (uint16_t tkey[], void* tptr[], const uint16_t skey1[], void* sptr1[], size_t size1, const uint16_t skey2[], void* sptr2[], size_t size2);
+void Array_MergeKeyAsc_uint32 (uint32_t tkey[], void* tptr[], const uint32_t skey1[], void* sptr1[], size_t size1, const uint32_t skey2[], void* sptr2[], size_t size2);
+void Array_MergeKeyAsc_uint64 (uint64_t tkey[], void* tptr[], const uint64_t skey1[], void* sptr1[], size_t size1, const uint64_t skey2[], void* sptr2[], size_t size2);
 
 // Signed integer types
-void Array_MergeKeyAsc_sint8 (sint8_t tkey[], void* tptr[], const sint8_t skey1[], const void* sptr1[], size_t size1, const sint8_t skey2[], const void* sptr2[], size_t size2);
-void Array_MergeKeyAsc_sint16 (sint16_t tkey[], void* tptr[], const sint16_t skey1[], const void* sptr1[], size_t size1, const sint16_t skey2[], const void* sptr2[], size_t size2);
-void Array_MergeKeyAsc_sint32 (sint32_t tkey[], void* tptr[], const sint32_t skey1[], const void* sptr1[], size_t size1, const sint32_t skey2[], const void* sptr2[], size_t size2);
-void Array_MergeKeyAsc_sint64 (sint64_t tkey[], void* tptr[], const sint64_t skey1[], const void* sptr1[], size_t size1, const sint64_t skey2[], const void* sptr2[], size_t size2);
+void Array_MergeKeyAsc_sint8 (sint8_t tkey[], void* tptr[], const sint8_t skey1[], void* sptr1[], size_t size1, const sint8_t skey2[], void* sptr2[], size_t size2);
+void Array_MergeKeyAsc_sint16 (sint16_t tkey[], void* tptr[], const sint16_t skey1[], void* sptr1[], size_t size1, const sint16_t skey2[], void* sptr2[], size_t size2);
+void Array_MergeKeyAsc_sint32 (sint32_t tkey[], void* tptr[], const sint32_t skey1[], void* sptr1[], size_t size1, const sint32_t skey2[], void* sptr2[], size_t size2);
+void Array_MergeKeyAsc_sint64 (sint64_t tkey[], void* tptr[], const sint64_t skey1[], void* sptr1[], size_t size1, const sint64_t skey2[], void* sptr2[], size_t size2);
 
 // Other types
-void Array_MergeKeyAsc_size (size_t tkey[], void* tptr[], const size_t skey1[], const void* sptr1[], size_t size1, const size_t skey2[], const void* sptr2[], size_t size2);
+void Array_MergeKeyAsc_size (size_t tkey[], void* tptr[], const size_t skey1[], void* sptr1[], size_t size1, const size_t skey2[], void* sptr2[], size_t size2);
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 //      Descending sort order                                                 //
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
 // Unsigned integer types
-void Array_MergeKeyDsc_uint8 (uint8_t tkey[], void* tptr[], const uint8_t skey1[], const void* sptr1[], size_t size1, const uint8_t skey2[], const void* sptr2[], size_t size2);
-void Array_MergeKeyDsc_uint16 (uint16_t tkey[], void* tptr[], const uint16_t skey1[], const void* sptr1[], size_t size1, const uint16_t skey2[], const void* sptr2[], size_t size2);
-void Array_MergeKeyDsc_uint32 (uint32_t tkey[], void* tptr[], const uint32_t skey1[], const void* sptr1[], size_t size1, const uint32_t skey2[], const void* sptr2[], size_t size2);
-void Array_MergeKeyDsc_uint64 (uint64_t tkey[], void* tptr[], const uint64_t skey1[], const void* sptr1[], size_t size1, const uint64_t skey2[], const void* sptr2[], size_t size2);
+void Array_MergeKeyDsc_uint8 (uint8_t tkey[], void* tptr[], const uint8_t skey1[], void* sptr1[], size_t size1, const uint8_t skey2[], void* sptr2[], size_t size2);
+void Array_MergeKeyDsc_uint16 (uint16_t tkey[], void* tptr[], const uint16_t skey1[], void* sptr1[], size_t size1, const uint16_t skey2[], void* sptr2[], size_t size2);
+void Array_MergeKeyDsc_uint32 (uint32_t tkey[], void* tptr[], const uint32_t skey1[], void* sptr1[], size_t size1, const uint32_t skey2[], void* sptr2[], size_t size2);
+void Array_MergeKeyDsc_uint64 (uint64_t tkey[], void* tptr[], const uint64_t skey1[], void* sptr1[], size_t size1, const uint64_t skey2[], void* sptr2[], size_t size2);
 
 // Signed integer types
-void Array_MergeKeyDsc_sint8 (sint8_t tkey[], void* tptr[], const sint8_t skey1[], const void* sptr1[], size_t size1, const sint8_t skey2[], const void* sptr2[], size_t size2);
-void Array_MergeKeyDsc_sint16 (sint16_t tkey[], void* tptr[], const sint16_t skey1[], const void* sptr1[], size_t size1, const sint16_t skey2[], const void* sptr2[], size_t size2);
-void Array_MergeKeyDsc_sint32 (sint32_t tkey[], void* tptr[], const sint32_t skey1[], const void* sptr1[], size_t size1, const sint32_t skey2[], const void* sptr2[], size_t size2);
-void Array_MergeKeyDsc_sint64 (sint64_t tkey[], void* tptr[], const sint64_t skey1[], const void* sptr1[], size_t size1, const sint64_t skey2[], const void* sptr2[], size_t size2);
+void Array_MergeKeyDsc_sint8 (sint8_t tkey[], void* tptr[], const sint8_t skey1[], void* sptr1[], size_t size1, const sint8_t skey2[], void* sptr2[], size_t size2);
+void Array_MergeKeyDsc_sint16 (sint16_t tkey[], void* tptr[], const sint16_t skey1[], void* sptr1[], size_t size1, const sint16_t skey2[], void* sptr2[], size_t size2);
+void Array_MergeKeyDsc_sint32 (sint32_t tkey[], void* tptr[], const sint32_t skey1[], void* sptr1[], size_t size1, const sint32_t skey2[], void* sptr2[], size_t size2);
+void Array_MergeKeyDsc_sint64 (sint64_t tkey[], void* tptr[], const sint64_t skey1[], void* sptr1[], size_t size1, const sint64_t skey2[], void* sptr2[], size_t size2);
 
 // Other types
-void Array_MergeKeyDsc_size (size_t tkey[], void* tptr[], const size_t skey1[], const void* sptr1[], size_t size1, const size_t skey2[], const void* sptr2[], size_t size2);
+void Array_MergeKeyDsc_size (size_t tkey[], void* tptr[], const size_t skey1[], void* sptr1[], size_t size1, const size_t skey2[], void* sptr2[], size_t size2);
 
 //****************************************************************************//
 //      Unique values                                                         //

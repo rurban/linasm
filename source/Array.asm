@@ -1125,24 +1125,24 @@ public	MergeKeyAsc_uint8			as	'Array_MergeKeyAsc_uint8'
 public	MergeKeyAsc_uint16			as	'Array_MergeKeyAsc_uint16'
 public	MergeKeyAsc_uint32			as	'Array_MergeKeyAsc_uint32'
 public	MergeKeyAsc_uint64			as	'Array_MergeKeyAsc_uint64'
-public	MergeKeyAsc_uint8			as	'_ZN5Array8MergeAscEPhPPvPKhPPKvmS4_S7_m'
-public	MergeKeyAsc_uint16			as	'_ZN5Array8MergeAscEPtPPvPKtPPKvmS4_S7_m'
-public	MergeKeyAsc_uint32			as	'_ZN5Array8MergeAscEPjPPvPKjPPKvmS4_S7_m'
-public	MergeKeyAsc_uint64			as	'_ZN5Array8MergeAscEPyPPvPKyPPKvmS4_S7_m'
+public	MergeKeyAsc_uint8			as	'_ZN5Array8MergeAscEPhPPvPKhS2_mS4_S2_m'
+public	MergeKeyAsc_uint16			as	'_ZN5Array8MergeAscEPtPPvPKtS2_mS4_S2_m'
+public	MergeKeyAsc_uint32			as	'_ZN5Array8MergeAscEPjPPvPKjS2_mS4_S2_m'
+public	MergeKeyAsc_uint64			as	'_ZN5Array8MergeAscEPyPPvPKyS2_mS4_S2_m'
 
 ; Signed integer types
 public	MergeKeyAsc_sint8			as	'Array_MergeKeyAsc_sint8'
 public	MergeKeyAsc_sint16			as	'Array_MergeKeyAsc_sint16'
 public	MergeKeyAsc_sint32			as	'Array_MergeKeyAsc_sint32'
 public	MergeKeyAsc_sint64			as	'Array_MergeKeyAsc_sint64'
-public	MergeKeyAsc_sint8			as	'_ZN5Array8MergeAscEPaPPvPKaPPKvmS4_S7_m'
-public	MergeKeyAsc_sint16			as	'_ZN5Array8MergeAscEPsPPvPKsPPKvmS4_S7_m'
-public	MergeKeyAsc_sint32			as	'_ZN5Array8MergeAscEPiPPvPKiPPKvmS4_S7_m'
-public	MergeKeyAsc_sint64			as	'_ZN5Array8MergeAscEPxPPvPKxPPKvmS4_S7_m'
+public	MergeKeyAsc_sint8			as	'_ZN5Array8MergeAscEPaPPvPKaS2_mS4_S2_m'
+public	MergeKeyAsc_sint16			as	'_ZN5Array8MergeAscEPsPPvPKsS2_mS4_S2_m'
+public	MergeKeyAsc_sint32			as	'_ZN5Array8MergeAscEPiPPvPKiS2_mS4_S2_m'
+public	MergeKeyAsc_sint64			as	'_ZN5Array8MergeAscEPxPPvPKxS2_mS4_S2_m'
 
 ; Other types
 public	MergeKeyAsc_uint64			as	'Array_MergeKeyAsc_size'
-public	MergeKeyAsc_uint64			as	'_ZN5Array8MergeAscEPmPPvPKmPPKvmS4_S7_m'
+public	MergeKeyAsc_uint64			as	'_ZN5Array8MergeAscEPmPPvPKmS2_mS4_S2_m'
 
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 ;       Descending sort order                                                  ;
@@ -1153,24 +1153,24 @@ public	MergeKeyDsc_uint8			as	'Array_MergeKeyDsc_uint8'
 public	MergeKeyDsc_uint16			as	'Array_MergeKeyDsc_uint16'
 public	MergeKeyDsc_uint32			as	'Array_MergeKeyDsc_uint32'
 public	MergeKeyDsc_uint64			as	'Array_MergeKeyDsc_uint64'
-public	MergeKeyDsc_uint8			as	'_ZN5Array8MergeDscEPhPPvPKhPPKvmS4_S7_m'
-public	MergeKeyDsc_uint16			as	'_ZN5Array8MergeDscEPtPPvPKtPPKvmS4_S7_m'
-public	MergeKeyDsc_uint32			as	'_ZN5Array8MergeDscEPjPPvPKjPPKvmS4_S7_m'
-public	MergeKeyDsc_uint64			as	'_ZN5Array8MergeDscEPyPPvPKyPPKvmS4_S7_m'
+public	MergeKeyDsc_uint8			as	'_ZN5Array8MergeDscEPhPPvPKhS2_mS4_S2_m'
+public	MergeKeyDsc_uint16			as	'_ZN5Array8MergeDscEPtPPvPKtS2_mS4_S2_m'
+public	MergeKeyDsc_uint32			as	'_ZN5Array8MergeDscEPjPPvPKjS2_mS4_S2_m'
+public	MergeKeyDsc_uint64			as	'_ZN5Array8MergeDscEPyPPvPKyS2_mS4_S2_m'
 
 ; Signed integer types
 public	MergeKeyDsc_sint8			as	'Array_MergeKeyDsc_sint8'
 public	MergeKeyDsc_sint16			as	'Array_MergeKeyDsc_sint16'
 public	MergeKeyDsc_sint32			as	'Array_MergeKeyDsc_sint32'
 public	MergeKeyDsc_sint64			as	'Array_MergeKeyDsc_sint64'
-public	MergeKeyDsc_sint8			as	'_ZN5Array8MergeDscEPaPPvPKaPPKvmS4_S7_m'
-public	MergeKeyDsc_sint16			as	'_ZN5Array8MergeDscEPsPPvPKsPPKvmS4_S7_m'
-public	MergeKeyDsc_sint32			as	'_ZN5Array8MergeDscEPiPPvPKiPPKvmS4_S7_m'
-public	MergeKeyDsc_sint64			as	'_ZN5Array8MergeDscEPxPPvPKxPPKvmS4_S7_m'
+public	MergeKeyDsc_sint8			as	'_ZN5Array8MergeDscEPaPPvPKaS2_mS4_S2_m'
+public	MergeKeyDsc_sint16			as	'_ZN5Array8MergeDscEPsPPvPKsS2_mS4_S2_m'
+public	MergeKeyDsc_sint32			as	'_ZN5Array8MergeDscEPiPPvPKiS2_mS4_S2_m'
+public	MergeKeyDsc_sint64			as	'_ZN5Array8MergeDscEPxPPvPKxS2_mS4_S2_m'
 
 ; Other types
 public	MergeKeyDsc_uint64			as	'Array_MergeKeyDsc_size'
-public	MergeKeyDsc_uint64			as	'_ZN5Array8MergeDscEPmPPvPKmPPKvmS4_S7_m'
+public	MergeKeyDsc_uint64			as	'_ZN5Array8MergeDscEPmPPvPKmS2_mS4_S2_m'
 
 ;******************************************************************************;
 ;       Unique values                                                          ;
@@ -4183,12 +4183,12 @@ bytes	= 1 shl scale						; size of array element (bytes)
 ;---[Internal loop]------------------------
 .iloop:	mov		key2, [array + right*bytes-bytes]
 		cmp		key1, key2					; if (key1 condition1 array[right-1])
-		jn#op1	@f							; {
+		jn#op1	.break						; {
 		mov		[array + right*bytes], key2	;     array[right] = array[right-1]
 		sub		right, 1					;     right-- }
 		jnz		.iloop						; do while (right != 0)
 ;---[end of internal loop]-----------------
-@@:		mov		[array + right*bytes], key1	; array[right] = key1
+.break:	mov		[array + right*bytes], key1	; array[right] = key1
 		add		left, 1						; left++
 		cmp		left, size
 		jb		.isort						; do while (left < size)
@@ -4358,8 +4358,8 @@ bytes	= 1 shl scale						; size of array element (bytes)
 ;---[end of swap loop]---------------------
 		add		left, 1
 		sub		rsize, left					; rsize = size - (left + 1)
-		lea		rarray, [array + left*bytes]; rarray = array + (left + 1)
 		lea		rptr, [ptr + left * 8]		; rptr = ptr + (left + 1)
+		lea		rarray, [array + left*bytes]; rarray = array + (left + 1)
 		cmp		lsize, rsize				; if (lsize <= rsize)
 		ja		.else						; {
 ;---[if lsize <= rsize]--------------------
@@ -4402,14 +4402,14 @@ bytes	= 1 shl scale						; size of array element (bytes)
 ;---[Internal loop]------------------------
 .iloop:	mov		key2, [array+right*bytes-bytes]
 		cmp		key1, key2					; if (key1 condition1 array[right-1])
-		jn#op1	@f							; {
+		jn#op1	.break						; {
 		mov		[array+right*bytes], key2	;     array[right] = array[right-1]
 		mov		ptr2, [ptr + right * 8 - 8]	;     ptr2 = ptr[right-1]
 		mov		[ptr + right * 8], ptr2		;     ptr[right] = ptr2
 		sub		right, 1					;     right-- }
 		jnz		.iloop						; do while (right != 0)
 ;---[end of internal loop]-----------------
-@@:		mov		[array + right*bytes], key1	; array[right] = key1
+.break:	mov		[array + right*bytes], key1	; array[right] = key1
 		mov		[ptr + right * 8], temp		; ptr[right] = temp
 		add		left, 1						; left++
 		cmp		left, size
