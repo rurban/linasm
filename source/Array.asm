@@ -4107,10 +4107,10 @@ size	equ		rsi							; array size (count of elements)
 half	equ		rax							; half of array size
 left	equ		r8							; left index
 right	equ		r9							; right index
-lsize	equ		right						; size of left part of array
+lsize	equ		left						; size of left part of array
 rsize	equ		size						; size of right part of array
 larray	equ		array						; pointer to left part of array
-rarray	equ		left						; pointer to right part of array
+rarray	equ		right						; pointer to right part of array
 stack	equ		rsp							; stack pointer
 s_array	equ		stack + 0 * 8				; stack position of "array" variable
 s_size	equ		stack + 1 * 8				; stack position of "size" variable
@@ -4144,9 +4144,9 @@ bytes	= 1 shl scale						; size of array element (bytes)
 		cmp		left, right
 		jb		.swap						; do while (left < right)
 ;---[end of swap loop]---------------------
-		add		left, 1
-		sub		rsize, left					; rsize = size - (left + 1)
-		lea		rarray, [array+left*bytes]	; rarray = array + (left + 1)
+		add		right, 1
+		sub		rsize, right				; rsize = size - (right + 1)
+		lea		rarray, [array+right*bytes]	; rarray = array + (right + 1)
 		cmp		lsize, rsize				; if (lsize <= rsize)
 		ja		.else						; {
 ;---[if lsize <= rsize]--------------------
@@ -4310,10 +4310,10 @@ left	equ		r8							; left index
 right	equ		r9							; right index
 ptr1	equ		r10							; temporary ptr #1
 ptr2	equ		r11							; temporary ptr #2
-lsize	equ		right						; size of left part of array
+lsize	equ		left						; size of left part of array
 rsize	equ		size						; size of right part of array
 larray	equ		array						; pointer to left part of array
-rarray	equ		left						; pointer to right part of array
+rarray	equ		right						; pointer to right part of array
 lptr	equ		ptr							; pointer to left part of ptr array
 rptr	equ		half						; pointer to right part of ptr array
 temp	equ		half						; temporary register
@@ -4356,10 +4356,10 @@ bytes	= 1 shl scale						; size of array element (bytes)
 		cmp		left, right
 		jb		.swap						; do while (left < right)
 ;---[end of swap loop]---------------------
-		add		left, 1
-		sub		rsize, left					; rsize = size - (left + 1)
-		lea		rptr, [ptr + left * 8]		; rptr = ptr + (left + 1)
-		lea		rarray, [array + left*bytes]; rarray = array + (left + 1)
+		add		right, 1
+		sub		rsize, right				; rsize = size - (right + 1)
+		lea		rptr, [ptr + right * 8]		; rptr = ptr + (right + 1)
+		lea		rarray, [array+right*bytes]	; rarray = array + (right + 1)
 		cmp		lsize, rsize				; if (lsize <= rsize)
 		ja		.else						; {
 ;---[if lsize <= rsize]--------------------
