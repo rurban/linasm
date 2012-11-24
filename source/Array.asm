@@ -841,30 +841,30 @@ public	QuickSortKeyAsc_uint8	as	'Array_QuickSortKeyAsc_uint8'
 public	QuickSortKeyAsc_uint16	as	'Array_QuickSortKeyAsc_uint16'
 public	QuickSortKeyAsc_uint32	as	'Array_QuickSortKeyAsc_uint32'
 public	QuickSortKeyAsc_uint64	as	'Array_QuickSortKeyAsc_uint64'
-public	QuickSortKeyAsc_uint8	as	'_ZN5Array12QuickSortAscEPhPPvm'
-public	QuickSortKeyAsc_uint16	as	'_ZN5Array12QuickSortAscEPtPPvm'
-public	QuickSortKeyAsc_uint32	as	'_ZN5Array12QuickSortAscEPjPPvm'
-public	QuickSortKeyAsc_uint64	as	'_ZN5Array12QuickSortAscEPyPPvm'
+public	QuickSortKeyAsc_uint8	as	'_ZN5Array12QuickSortAscEPhPPKvm'
+public	QuickSortKeyAsc_uint16	as	'_ZN5Array12QuickSortAscEPtPPKvm'
+public	QuickSortKeyAsc_uint32	as	'_ZN5Array12QuickSortAscEPjPPKvm'
+public	QuickSortKeyAsc_uint64	as	'_ZN5Array12QuickSortAscEPyPPKvm'
 
 ; Signed integer types
 public	QuickSortKeyAsc_sint8	as	'Array_QuickSortKeyAsc_sint8'
 public	QuickSortKeyAsc_sint16	as	'Array_QuickSortKeyAsc_sint16'
 public	QuickSortKeyAsc_sint32	as	'Array_QuickSortKeyAsc_sint32'
 public	QuickSortKeyAsc_sint64	as	'Array_QuickSortKeyAsc_sint64'
-public	QuickSortKeyAsc_sint8	as	'_ZN5Array12QuickSortAscEPaPPvm'
-public	QuickSortKeyAsc_sint16	as	'_ZN5Array12QuickSortAscEPsPPvm'
-public	QuickSortKeyAsc_sint32	as	'_ZN5Array12QuickSortAscEPiPPvm'
-public	QuickSortKeyAsc_sint64	as	'_ZN5Array12QuickSortAscEPxPPvm'
+public	QuickSortKeyAsc_sint8	as	'_ZN5Array12QuickSortAscEPaPPKvm'
+public	QuickSortKeyAsc_sint16	as	'_ZN5Array12QuickSortAscEPsPPKvm'
+public	QuickSortKeyAsc_sint32	as	'_ZN5Array12QuickSortAscEPiPPKvm'
+public	QuickSortKeyAsc_sint64	as	'_ZN5Array12QuickSortAscEPxPPKvvm'
 
 ; Floating-point types
 public	QuickSortKeyAsc_flt32	as	'Array_QuickSortKeyAsc_flt32'
 public	QuickSortKeyAsc_flt64	as	'Array_QuickSortKeyAsc_flt64'
-public	QuickSortKeyAsc_flt32	as	'_ZN5Array12QuickSortAscEPfPPvm'
-public	QuickSortKeyAsc_flt64	as	'_ZN5Array12QuickSortAscEPdPPvm'
+public	QuickSortKeyAsc_flt32	as	'_ZN5Array12QuickSortAscEPfPPKvm'
+public	QuickSortKeyAsc_flt64	as	'_ZN5Array12QuickSortAscEPdPPKvm'
 
 ; Other types
 public	QuickSortKeyAsc_uint64	as	'Array_QuickSortKeyAsc_size'
-public	QuickSortKeyAsc_uint64	as	'_ZN5Array12QuickSortAscEPmPPvm'
+public	QuickSortKeyAsc_uint64	as	'_ZN5Array12QuickSortAscEPmPPKvm'
 
 ;------------------------------------------------------------------------------;
 ;       Descending sort order                                                  ;
@@ -875,30 +875,30 @@ public	QuickSortKeyDsc_uint8	as	'Array_QuickSortKeyDsc_uint8'
 public	QuickSortKeyDsc_uint16	as	'Array_QuickSortKeyDsc_uint16'
 public	QuickSortKeyDsc_uint32	as	'Array_QuickSortKeyDsc_uint32'
 public	QuickSortKeyDsc_uint64	as	'Array_QuickSortKeyDsc_uint64'
-public	QuickSortKeyDsc_uint8	as	'_ZN5Array12QuickSortDscEPhPPvm'
-public	QuickSortKeyDsc_uint16	as	'_ZN5Array12QuickSortDscEPtPPvm'
-public	QuickSortKeyDsc_uint32	as	'_ZN5Array12QuickSortDscEPjPPvm'
-public	QuickSortKeyDsc_uint64	as	'_ZN5Array12QuickSortDscEPyPPvm'
+public	QuickSortKeyDsc_uint8	as	'_ZN5Array12QuickSortDscEPhPPKvm'
+public	QuickSortKeyDsc_uint16	as	'_ZN5Array12QuickSortDscEPtPPKvm'
+public	QuickSortKeyDsc_uint32	as	'_ZN5Array12QuickSortDscEPjPPKvm'
+public	QuickSortKeyDsc_uint64	as	'_ZN5Array12QuickSortDscEPyPPKvm'
 
 ; Signed integer types
 public	QuickSortKeyDsc_sint8	as	'Array_QuickSortKeyDsc_sint8'
 public	QuickSortKeyDsc_sint16	as	'Array_QuickSortKeyDsc_sint16'
 public	QuickSortKeyDsc_sint32	as	'Array_QuickSortKeyDsc_sint32'
 public	QuickSortKeyDsc_sint64	as	'Array_QuickSortKeyDsc_sint64'
-public	QuickSortKeyDsc_sint8	as	'_ZN5Array12QuickSortDscEPaPPvm'
-public	QuickSortKeyDsc_sint16	as	'_ZN5Array12QuickSortDscEPsPPvm'
-public	QuickSortKeyDsc_sint32	as	'_ZN5Array12QuickSortDscEPiPPvm'
-public	QuickSortKeyDsc_sint64	as	'_ZN5Array12QuickSortDscEPxPPvm'
+public	QuickSortKeyDsc_sint8	as	'_ZN5Array12QuickSortDscEPaPPKvm'
+public	QuickSortKeyDsc_sint16	as	'_ZN5Array12QuickSortDscEPsPPKvm'
+public	QuickSortKeyDsc_sint32	as	'_ZN5Array12QuickSortDscEPiPPKvm'
+public	QuickSortKeyDsc_sint64	as	'_ZN5Array12QuickSortDscEPxPPKvm'
 
 ; Floating-point types
 public	QuickSortKeyDsc_flt32	as	'Array_QuickSortKeyDsc_flt32'
 public	QuickSortKeyDsc_flt64	as	'Array_QuickSortKeyDsc_flt64'
-public	QuickSortKeyDsc_flt32	as	'_ZN5Array12QuickSortDscEPfPPvm'
-public	QuickSortKeyDsc_flt64	as	'_ZN5Array12QuickSortDscEPdPPvm'
+public	QuickSortKeyDsc_flt32	as	'_ZN5Array12QuickSortDscEPfPPKvm'
+public	QuickSortKeyDsc_flt64	as	'_ZN5Array12QuickSortDscEPdPPKvm'
 
 ; Other types
 public	QuickSortKeyDsc_uint64	as	'Array_QuickSortKeyDsc_size'
-public	QuickSortKeyDsc_uint64	as	'_ZN5Array12QuickSortDscEPmPPvm'
+public	QuickSortKeyDsc_uint64	as	'_ZN5Array12QuickSortDscEPmPPKvm'
 
 ;==============================================================================;
 ;       Radix sort                                                             ;
@@ -989,30 +989,30 @@ public	RadixSortKeyAsc_uint8	as	'Array_RadixSortKeyAsc_uint8'
 public	RadixSortKeyAsc_uint16	as	'Array_RadixSortKeyAsc_uint16'
 public	RadixSortKeyAsc_uint32	as	'Array_RadixSortKeyAsc_uint32'
 public	RadixSortKeyAsc_uint64	as	'Array_RadixSortKeyAsc_uint64'
-public	RadixSortKeyAsc_uint8	as	'_ZN5Array12RadixSortAscEPhS0_PPvS2_m'
-public	RadixSortKeyAsc_uint16	as	'_ZN5Array12RadixSortAscEPtS0_PPvS2_m'
-public	RadixSortKeyAsc_uint32	as	'_ZN5Array12RadixSortAscEPjS0_PPvS2_m'
-public	RadixSortKeyAsc_uint64	as	'_ZN5Array12RadixSortAscEPyS0_PPvS2_m'
+public	RadixSortKeyAsc_uint8	as	'_ZN5Array12RadixSortAscEPhS0_PPKvS3_m'
+public	RadixSortKeyAsc_uint16	as	'_ZN5Array12RadixSortAscEPtS0_PPKvS3_m'
+public	RadixSortKeyAsc_uint32	as	'_ZN5Array12RadixSortAscEPjS0_PPKvS3_m'
+public	RadixSortKeyAsc_uint64	as	'_ZN5Array12RadixSortAscEPyS0_PPKvS3_m'
 
 ; Signed integer types
 public	RadixSortKeyAsc_sint8	as	'Array_RadixSortKeyAsc_sint8'
 public	RadixSortKeyAsc_sint16	as	'Array_RadixSortKeyAsc_sint16'
 public	RadixSortKeyAsc_sint32	as	'Array_RadixSortKeyAsc_sint32'
 public	RadixSortKeyAsc_sint64	as	'Array_RadixSortKeyAsc_sint64'
-public	RadixSortKeyAsc_sint8	as	'_ZN5Array12RadixSortAscEPaS0_PPvS2_m'
-public	RadixSortKeyAsc_sint16	as	'_ZN5Array12RadixSortAscEPsS0_PPvS2_m'
-public	RadixSortKeyAsc_sint32	as	'_ZN5Array12RadixSortAscEPiS0_PPvS2_m'
-public	RadixSortKeyAsc_sint64	as	'_ZN5Array12RadixSortAscEPxS0_PPvS2_m'
+public	RadixSortKeyAsc_sint8	as	'_ZN5Array12RadixSortAscEPaS0_PPKvS3_m'
+public	RadixSortKeyAsc_sint16	as	'_ZN5Array12RadixSortAscEPsS0_PPKvS3_m'
+public	RadixSortKeyAsc_sint32	as	'_ZN5Array12RadixSortAscEPiS0_PPKvS3_m'
+public	RadixSortKeyAsc_sint64	as	'_ZN5Array12RadixSortAscEPxS0_PPKvS3_m'
 
 ; Floating-point types
 public	RadixSortKeyAsc_flt32	as	'Array_RadixSortKeyAsc_flt32'
 public	RadixSortKeyAsc_flt64	as	'Array_RadixSortKeyAsc_flt64'
-public	RadixSortKeyAsc_flt32	as	'_ZN5Array12RadixSortAscEPfS0_PPvS2_m'
-public	RadixSortKeyAsc_flt64	as	'_ZN5Array12RadixSortAscEPdS0_PPvS2_m'
+public	RadixSortKeyAsc_flt32	as	'_ZN5Array12RadixSortAscEPfS0_PPKvS3_m'
+public	RadixSortKeyAsc_flt64	as	'_ZN5Array12RadixSortAscEPdS0_PPKvS3_m'
 
 ; Other types
 public	RadixSortKeyAsc_uint64	as	'Array_RadixSortKeyAsc_size'
-public	RadixSortKeyAsc_uint64	as	'_ZN5Array12RadixSortAscEPmS0_PPvS2_m'
+public	RadixSortKeyAsc_uint64	as	'_ZN5Array12RadixSortAscEPmS0_PPKvS3_m'
 
 ;------------------------------------------------------------------------------;
 ;       Descending sort order                                                  ;
@@ -1023,30 +1023,30 @@ public	RadixSortKeyDsc_uint8	as	'Array_RadixSortKeyDsc_uint8'
 public	RadixSortKeyDsc_uint16	as	'Array_RadixSortKeyDsc_uint16'
 public	RadixSortKeyDsc_uint32	as	'Array_RadixSortKeyDsc_uint32'
 public	RadixSortKeyDsc_uint64	as	'Array_RadixSortKeyDsc_uint64'
-public	RadixSortKeyDsc_uint8	as	'_ZN5Array12RadixSortDscEPhS0_PPvS2_m'
-public	RadixSortKeyDsc_uint16	as	'_ZN5Array12RadixSortDscEPtS0_PPvS2_m'
-public	RadixSortKeyDsc_uint32	as	'_ZN5Array12RadixSortDscEPjS0_PPvS2_m'
-public	RadixSortKeyDsc_uint64	as	'_ZN5Array12RadixSortDscEPyS0_PPvS2_m'
+public	RadixSortKeyDsc_uint8	as	'_ZN5Array12RadixSortDscEPhS0_PPKvS3_m'
+public	RadixSortKeyDsc_uint16	as	'_ZN5Array12RadixSortDscEPtS0_PPKvS3_m'
+public	RadixSortKeyDsc_uint32	as	'_ZN5Array12RadixSortDscEPjS0_PPKvS3_m'
+public	RadixSortKeyDsc_uint64	as	'_ZN5Array12RadixSortDscEPyS0_PPKvS3_m'
 
 ; Signed integer types
 public	RadixSortKeyDsc_sint8	as	'Array_RadixSortKeyDsc_sint8'
 public	RadixSortKeyDsc_sint16	as	'Array_RadixSortKeyDsc_sint16'
 public	RadixSortKeyDsc_sint32	as	'Array_RadixSortKeyDsc_sint32'
 public	RadixSortKeyDsc_sint64	as	'Array_RadixSortKeyDsc_sint64'
-public	RadixSortKeyDsc_sint8	as	'_ZN5Array12RadixSortDscEPaS0_PPvS2_m'
-public	RadixSortKeyDsc_sint16	as	'_ZN5Array12RadixSortDscEPsS0_PPvS2_m'
-public	RadixSortKeyDsc_sint32	as	'_ZN5Array12RadixSortDscEPiS0_PPvS2_m'
-public	RadixSortKeyDsc_sint64	as	'_ZN5Array12RadixSortDscEPxS0_PPvS2_m'
+public	RadixSortKeyDsc_sint8	as	'_ZN5Array12RadixSortDscEPaS0_PPKvS3_m'
+public	RadixSortKeyDsc_sint16	as	'_ZN5Array12RadixSortDscEPsS0_PPKvS3_m'
+public	RadixSortKeyDsc_sint32	as	'_ZN5Array12RadixSortDscEPiS0_PPKvS3_m'
+public	RadixSortKeyDsc_sint64	as	'_ZN5Array12RadixSortDscEPxS0_PPKvS3_m'
 
 ; Floating-point types
 public	RadixSortKeyDsc_flt32	as	'Array_RadixSortKeyDsc_flt32'
 public	RadixSortKeyDsc_flt64	as	'Array_RadixSortKeyDsc_flt64'
-public	RadixSortKeyDsc_flt32	as	'_ZN5Array12RadixSortDscEPfS0_PPvS2_m'
-public	RadixSortKeyDsc_flt64	as	'_ZN5Array12RadixSortDscEPdS0_PPvS2_m'
+public	RadixSortKeyDsc_flt32	as	'_ZN5Array12RadixSortDscEPfS0_PPKvS3_m'
+public	RadixSortKeyDsc_flt64	as	'_ZN5Array12RadixSortDscEPdS0_PPKvS3_m'
 
 ; Other types
 public	RadixSortKeyDsc_uint64	as	'Array_RadixSortKeyDsc_size'
-public	RadixSortKeyDsc_uint64	as	'_ZN5Array12RadixSortDscEPmS0_PPvS2_m'
+public	RadixSortKeyDsc_uint64	as	'_ZN5Array12RadixSortDscEPmS0_PPKvS3_m'
 
 ;******************************************************************************;
 ;       Merging of sorted arrays                                               ;
@@ -1125,24 +1125,24 @@ public	MergeKeyAsc_uint8			as	'Array_MergeKeyAsc_uint8'
 public	MergeKeyAsc_uint16			as	'Array_MergeKeyAsc_uint16'
 public	MergeKeyAsc_uint32			as	'Array_MergeKeyAsc_uint32'
 public	MergeKeyAsc_uint64			as	'Array_MergeKeyAsc_uint64'
-public	MergeKeyAsc_uint8			as	'_ZN5Array8MergeAscEPhPPvPKhS2_mS4_S2_m'
-public	MergeKeyAsc_uint16			as	'_ZN5Array8MergeAscEPtPPvPKtS2_mS4_S2_m'
-public	MergeKeyAsc_uint32			as	'_ZN5Array8MergeAscEPjPPvPKjS2_mS4_S2_m'
-public	MergeKeyAsc_uint64			as	'_ZN5Array8MergeAscEPyPPvPKyS2_mS4_S2_m'
+public	MergeKeyAsc_uint8			as	'_ZN5Array8MergeAscEPhPPvPKhPPKvmS4_S7_m'
+public	MergeKeyAsc_uint16			as	'_ZN5Array8MergeAscEPtPPvPKtPPKvmS4_S7_m'
+public	MergeKeyAsc_uint32			as	'_ZN5Array8MergeAscEPjPPvPKjPPKvmS4_S7_m'
+public	MergeKeyAsc_uint64			as	'_ZN5Array8MergeAscEPyPPvPKyPPKvmS4_S7_m'
 
 ; Signed integer types
 public	MergeKeyAsc_sint8			as	'Array_MergeKeyAsc_sint8'
 public	MergeKeyAsc_sint16			as	'Array_MergeKeyAsc_sint16'
 public	MergeKeyAsc_sint32			as	'Array_MergeKeyAsc_sint32'
 public	MergeKeyAsc_sint64			as	'Array_MergeKeyAsc_sint64'
-public	MergeKeyAsc_sint8			as	'_ZN5Array8MergeAscEPaPPvPKaS2_mS4_S2_m'
-public	MergeKeyAsc_sint16			as	'_ZN5Array8MergeAscEPsPPvPKsS2_mS4_S2_m'
-public	MergeKeyAsc_sint32			as	'_ZN5Array8MergeAscEPiPPvPKiS2_mS4_S2_m'
-public	MergeKeyAsc_sint64			as	'_ZN5Array8MergeAscEPxPPvPKxS2_mS4_S2_m'
+public	MergeKeyAsc_sint8			as	'_ZN5Array8MergeAscEPaPPvPKaPPKvmS4_S7_m'
+public	MergeKeyAsc_sint16			as	'_ZN5Array8MergeAscEPsPPvPKsPPKvmS4_S7_m'
+public	MergeKeyAsc_sint32			as	'_ZN5Array8MergeAscEPiPPvPKiPPKvmS4_S7_m'
+public	MergeKeyAsc_sint64			as	'_ZN5Array8MergeAscEPxPPvPKxPPKvmS4_S7_m'
 
 ; Other types
 public	MergeKeyAsc_uint64			as	'Array_MergeKeyAsc_size'
-public	MergeKeyAsc_uint64			as	'_ZN5Array8MergeAscEPmPPvPKmS2_mS4_S2_m'
+public	MergeKeyAsc_uint64			as	'_ZN5Array8MergeAscEPmPPvPKmPPKvmS4_S7_m'
 
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 ;       Descending sort order                                                  ;
@@ -1153,24 +1153,24 @@ public	MergeKeyDsc_uint8			as	'Array_MergeKeyDsc_uint8'
 public	MergeKeyDsc_uint16			as	'Array_MergeKeyDsc_uint16'
 public	MergeKeyDsc_uint32			as	'Array_MergeKeyDsc_uint32'
 public	MergeKeyDsc_uint64			as	'Array_MergeKeyDsc_uint64'
-public	MergeKeyDsc_uint8			as	'_ZN5Array8MergeDscEPhPPvPKhS2_mS4_S2_m'
-public	MergeKeyDsc_uint16			as	'_ZN5Array8MergeDscEPtPPvPKtS2_mS4_S2_m'
-public	MergeKeyDsc_uint32			as	'_ZN5Array8MergeDscEPjPPvPKjS2_mS4_S2_m'
-public	MergeKeyDsc_uint64			as	'_ZN5Array8MergeDscEPyPPvPKyS2_mS4_S2_m'
+public	MergeKeyDsc_uint8			as	'_ZN5Array8MergeDscEPhPPvPKhPPKvmS4_S7_m'
+public	MergeKeyDsc_uint16			as	'_ZN5Array8MergeDscEPtPPvPKtPPKvmS4_S7_m'
+public	MergeKeyDsc_uint32			as	'_ZN5Array8MergeDscEPjPPvPKjPPKvmS4_S7_m'
+public	MergeKeyDsc_uint64			as	'_ZN5Array8MergeDscEPyPPvPKyPPKvmS4_S7_m'
 
 ; Signed integer types
 public	MergeKeyDsc_sint8			as	'Array_MergeKeyDsc_sint8'
 public	MergeKeyDsc_sint16			as	'Array_MergeKeyDsc_sint16'
 public	MergeKeyDsc_sint32			as	'Array_MergeKeyDsc_sint32'
 public	MergeKeyDsc_sint64			as	'Array_MergeKeyDsc_sint64'
-public	MergeKeyDsc_sint8			as	'_ZN5Array8MergeDscEPaPPvPKaS2_mS4_S2_m'
-public	MergeKeyDsc_sint16			as	'_ZN5Array8MergeDscEPsPPvPKsS2_mS4_S2_m'
-public	MergeKeyDsc_sint32			as	'_ZN5Array8MergeDscEPiPPvPKiS2_mS4_S2_m'
-public	MergeKeyDsc_sint64			as	'_ZN5Array8MergeDscEPxPPvPKxS2_mS4_S2_m'
+public	MergeKeyDsc_sint8			as	'_ZN5Array8MergeDscEPaPPvPKaPPKvmS4_S7_m'
+public	MergeKeyDsc_sint16			as	'_ZN5Array8MergeDscEPsPPvPKsPPKvmS4_S7_m'
+public	MergeKeyDsc_sint32			as	'_ZN5Array8MergeDscEPiPPvPKiPPKvmS4_S7_m'
+public	MergeKeyDsc_sint64			as	'_ZN5Array8MergeDscEPxPPvPKxPPKvmS4_S7_m'
 
 ; Other types
 public	MergeKeyDsc_uint64			as	'Array_MergeKeyDsc_size'
-public	MergeKeyDsc_uint64			as	'_ZN5Array8MergeDscEPmPPvPKmS2_mS4_S2_m'
+public	MergeKeyDsc_uint64			as	'_ZN5Array8MergeDscEPmPPvPKmPPKvmS4_S7_m'
 
 ;******************************************************************************;
 ;       Unique values                                                          ;
@@ -4016,8 +4016,8 @@ right	equ		size						; pointer to end of the data array
 		cmp		pattern, [array + offst]	; if (pattern condition array[median])
 		cmov#x	left, median1				;     then left = median + 1
 		cmovn#x	right, median				;     else right = median
-		cmp		right, left
-		ja		.loop						; do while (right > left)
+		cmp		left, right
+		jb		.loop						; do while (left < right)
 ;------------------------------------------
 .skip:	mov		right, left
 		shl		right, scale				; if (pattern == array[left])

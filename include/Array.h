@@ -597,46 +597,46 @@ static void QuickSortDsc (size_t array[], size_t size);
 //----------------------------------------------------------------------------//
 
 // Unsigned integer types
-static void QuickSortAsc (uint8_t key[], void* ptr[], size_t size);
-static void QuickSortAsc (uint16_t key[], void* ptr[], size_t size);
-static void QuickSortAsc (uint32_t key[], void* ptr[], size_t size);
-static void QuickSortAsc (uint64_t key[], void* ptr[], size_t size);
+static void QuickSortAsc (uint8_t key[], const void* ptr[], size_t size);
+static void QuickSortAsc (uint16_t key[], const void* ptr[], size_t size);
+static void QuickSortAsc (uint32_t key[], const void* ptr[], size_t size);
+static void QuickSortAsc (uint64_t key[], const void* ptr[], size_t size);
 
 // Signed integer types
-static void QuickSortAsc (sint8_t key[], void* ptr[], size_t size);
-static void QuickSortAsc (sint16_t key[], void* ptr[], size_t size);
-static void QuickSortAsc (sint32_t key[], void* ptr[], size_t size);
-static void QuickSortAsc (sint64_t key[], void* ptr[], size_t size);
+static void QuickSortAsc (sint8_t key[], const void* ptr[], size_t size);
+static void QuickSortAsc (sint16_t key[], const void* ptr[], size_t size);
+static void QuickSortAsc (sint32_t key[], const void* ptr[], size_t size);
+static void QuickSortAsc (sint64_t key[], const void* ptr[], size_t size);
 
 // Floating-point types
-static void QuickSortAsc (flt32_t key[], void* ptr[], size_t size);
-static void QuickSortAsc (flt64_t key[], void* ptr[], size_t size);
+static void QuickSortAsc (flt32_t key[], const void* ptr[], size_t size);
+static void QuickSortAsc (flt64_t key[], const void* ptr[], size_t size);
 
 // Other types
-static void QuickSortAsc (size_t key[], void* ptr[], size_t size);
+static void QuickSortAsc (size_t key[], const void* ptr[], size_t size);
 
 //----------------------------------------------------------------------------//
 //      Descending sort order                                                 //
 //----------------------------------------------------------------------------//
 
 // Unsigned integer types
-static void QuickSortDsc (uint8_t key[], void* ptr[], size_t size);
-static void QuickSortDsc (uint16_t key[], void* ptr[], size_t size);
-static void QuickSortDsc (uint32_t key[], void* ptr[], size_t size);
-static void QuickSortDsc (uint64_t key[], void* ptr[], size_t size);
+static void QuickSortDsc (uint8_t key[], const void* ptr[], size_t size);
+static void QuickSortDsc (uint16_t key[], const void* ptr[], size_t size);
+static void QuickSortDsc (uint32_t key[], const void* ptr[], size_t size);
+static void QuickSortDsc (uint64_t key[], const void* ptr[], size_t size);
 
 // Signed integer types
-static void QuickSortDsc (sint8_t key[], void* ptr[], size_t size);
-static void QuickSortDsc (sint16_t key[], void* ptr[], size_t size);
-static void QuickSortDsc (sint32_t key[], void* ptr[], size_t size);
-static void QuickSortDsc (sint64_t key[], void* ptr[], size_t size);
+static void QuickSortDsc (sint8_t key[], const void* ptr[], size_t size);
+static void QuickSortDsc (sint16_t key[], const void* ptr[], size_t size);
+static void QuickSortDsc (sint32_t key[], const void* ptr[], size_t size);
+static void QuickSortDsc (sint64_t key[], const void* ptr[], size_t size);
 
 // Floating-point types
-static void QuickSortDsc (flt32_t key[], void* ptr[], size_t size);
-static void QuickSortDsc (flt64_t key[], void* ptr[], size_t size);
+static void QuickSortDsc (flt32_t key[], const void* ptr[], size_t size);
+static void QuickSortDsc (flt64_t key[], const void* ptr[], size_t size);
 
 // Other types
-static void QuickSortDsc (size_t key[], void* ptr[], size_t size);
+static void QuickSortDsc (size_t key[], const void* ptr[], size_t size);
 
 //============================================================================//
 //      Radix sort                                                            //
@@ -701,46 +701,46 @@ static void RadixSortDsc (size_t array[], size_t temp[], size_t size);
 //----------------------------------------------------------------------------//
 
 // Unsigned integer types
-static void RadixSortAsc (uint8_t key[], uint8_t tkey[], void* ptr[], void* tptr[], size_t size);
-static void RadixSortAsc (uint16_t key[], uint16_t tkey[], void* ptr[], void* tptr[], size_t size);
-static void RadixSortAsc (uint32_t key[], uint32_t tkey[], void* ptr[], void* tptr[], size_t size);
-static void RadixSortAsc (uint64_t key[], uint64_t tkey[], void* ptr[], void* tptr[], size_t size);
+static void RadixSortAsc (uint8_t key[], uint8_t tkey[], const void* ptr[], const void* tptr[], size_t size);
+static void RadixSortAsc (uint16_t key[], uint16_t tkey[], const void* ptr[], const void* tptr[], size_t size);
+static void RadixSortAsc (uint32_t key[], uint32_t tkey[], const void* ptr[], const void* tptr[], size_t size);
+static void RadixSortAsc (uint64_t key[], uint64_t tkey[], const void* ptr[], const void* tptr[], size_t size);
 
 // Signed integer types
-static void RadixSortAsc (sint8_t key[], sint8_t tkey[], void* ptr[], void* tptr[], size_t size);
-static void RadixSortAsc (sint16_t key[], sint16_t tkey[], void* ptr[], void* tptr[], size_t size);
-static void RadixSortAsc (sint32_t key[], sint32_t tkey[], void* ptr[], void* tptr[], size_t size);
-static void RadixSortAsc (sint64_t key[], sint64_t tkey[], void* ptr[], void* tptr[], size_t size);
+static void RadixSortAsc (sint8_t key[], sint8_t tkey[], const void* ptr[], const void* tptr[], size_t size);
+static void RadixSortAsc (sint16_t key[], sint16_t tkey[], const void* ptr[], const void* tptr[], size_t size);
+static void RadixSortAsc (sint32_t key[], sint32_t tkey[], const void* ptr[], const void* tptr[], size_t size);
+static void RadixSortAsc (sint64_t key[], sint64_t tkey[], const void* ptr[], const void* tptr[], size_t size);
 
 // Floating-point types
-static void RadixSortAsc (flt32_t key[], flt32_t tkey[], void* ptr[], void* tptr[], size_t size);
-static void RadixSortAsc (flt64_t key[], flt64_t tkey[], void* ptr[], void* tptr[], size_t size);
+static void RadixSortAsc (flt32_t key[], flt32_t tkey[], const void* ptr[], const void* tptr[], size_t size);
+static void RadixSortAsc (flt64_t key[], flt64_t tkey[], const void* ptr[], const void* tptr[], size_t size);
 
 // Other types
-static void RadixSortAsc (size_t key[], size_t tkey[], void* ptr[], void* tptr[], size_t size);
+static void RadixSortAsc (size_t key[], size_t tkey[], const void* ptr[], const void* tptr[], size_t size);
 
 //----------------------------------------------------------------------------//
 //      Descending sort order                                                 //
 //----------------------------------------------------------------------------//
 
 // Unsigned integer types
-static void RadixSortDsc (uint8_t key[], uint8_t tkey[], void* ptr[], void* tptr[], size_t size);
-static void RadixSortDsc (uint16_t key[], uint16_t tkey[], void* ptr[], void* tptr[], size_t size);
-static void RadixSortDsc (uint32_t key[], uint32_t tkey[], void* ptr[], void* tptr[], size_t size);
-static void RadixSortDsc (uint64_t key[], uint64_t tkey[], void* ptr[], void* tptr[], size_t size);
+static void RadixSortDsc (uint8_t key[], uint8_t tkey[], const void* ptr[], const void* tptr[], size_t size);
+static void RadixSortDsc (uint16_t key[], uint16_t tkey[], const void* ptr[], const void* tptr[], size_t size);
+static void RadixSortDsc (uint32_t key[], uint32_t tkey[], const void* ptr[], const void* tptr[], size_t size);
+static void RadixSortDsc (uint64_t key[], uint64_t tkey[], const void* ptr[], const void* tptr[], size_t size);
 
 // Signed integer types
-static void RadixSortDsc (sint8_t key[], sint8_t tkey[], void* ptr[], void* tptr[], size_t size);
-static void RadixSortDsc (sint16_t key[], sint16_t tkey[], void* ptr[], void* tptr[], size_t size);
-static void RadixSortDsc (sint32_t key[], sint32_t tkey[], void* ptr[], void* tptr[], size_t size);
-static void RadixSortDsc (sint64_t key[], sint64_t tkey[], void* ptr[], void* tptr[], size_t size);
+static void RadixSortDsc (sint8_t key[], sint8_t tkey[], const void* ptr[], const void* tptr[], size_t size);
+static void RadixSortDsc (sint16_t key[], sint16_t tkey[], const void* ptr[], const void* tptr[], size_t size);
+static void RadixSortDsc (sint32_t key[], sint32_t tkey[], const void* ptr[], const void* tptr[], size_t size);
+static void RadixSortDsc (sint64_t key[], sint64_t tkey[], const void* ptr[], const void* tptr[], size_t size);
 
 // Floating-point types
-static void RadixSortDsc (flt32_t key[], flt32_t tkey[], void* ptr[], void* tptr[], size_t size);
-static void RadixSortDsc (flt64_t key[], flt64_t tkey[], void* ptr[], void* tptr[], size_t size);
+static void RadixSortDsc (flt32_t key[], flt32_t tkey[], const void* ptr[], const void* tptr[], size_t size);
+static void RadixSortDsc (flt64_t key[], flt64_t tkey[], const void* ptr[], const void* tptr[], size_t size);
 
 // Other types
-static void RadixSortDsc (size_t key[], size_t tkey[], void* ptr[], void* tptr[], size_t size);
+static void RadixSortDsc (size_t key[], size_t tkey[], const void* ptr[], const void* tptr[], size_t size);
 
 //****************************************************************************//
 //      Merging of sorted arrays                                              //
@@ -797,38 +797,38 @@ static void MergeDsc (size_t target[], const size_t source1[], size_t size1, con
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
 // Unsigned integer types
-static void MergeAsc (uint8_t tkey[], void* tptr[], const uint8_t skey1[], void* sptr1[], size_t size1, const uint8_t skey2[], void* sptr2[], size_t size2);
-static void MergeAsc (uint16_t tkey[], void* tptr[], const uint16_t skey1[], void* sptr1[], size_t size1, const uint16_t skey2[], void* sptr2[], size_t size2);
-static void MergeAsc (uint32_t tkey[], void* tptr[], const uint32_t skey1[], void* sptr1[], size_t size1, const uint32_t skey2[], void* sptr2[], size_t size2);
-static void MergeAsc (uint64_t tkey[], void* tptr[], const uint64_t skey1[], void* sptr1[], size_t size1, const uint64_t skey2[], void* sptr2[], size_t size2);
+static void MergeAsc (uint8_t tkey[], void* tptr[], const uint8_t skey1[], const void* sptr1[], size_t size1, const uint8_t skey2[], const void* sptr2[], size_t size2);
+static void MergeAsc (uint16_t tkey[], void* tptr[], const uint16_t skey1[], const void* sptr1[], size_t size1, const uint16_t skey2[], const void* sptr2[], size_t size2);
+static void MergeAsc (uint32_t tkey[], void* tptr[], const uint32_t skey1[], const void* sptr1[], size_t size1, const uint32_t skey2[], const void* sptr2[], size_t size2);
+static void MergeAsc (uint64_t tkey[], void* tptr[], const uint64_t skey1[], const void* sptr1[], size_t size1, const uint64_t skey2[], const void* sptr2[], size_t size2);
 
 // Signed integer types
-static void MergeAsc (sint8_t tkey[], void* tptr[], const sint8_t skey1[], void* sptr1[], size_t size1, const sint8_t skey2[], void* sptr2[], size_t size2);
-static void MergeAsc (sint16_t tkey[], void* tptr[], const sint16_t skey1[], void* sptr1[], size_t size1, const sint16_t skey2[], void* sptr2[], size_t size2);
-static void MergeAsc (sint32_t tkey[], void* tptr[], const sint32_t skey1[], void* sptr1[], size_t size1, const sint32_t skey2[], void* sptr2[], size_t size2);
-static void MergeAsc (sint64_t tkey[], void* tptr[], const sint64_t skey1[], void* sptr1[], size_t size1, const sint64_t skey2[], void* sptr2[], size_t size2);
+static void MergeAsc (sint8_t tkey[], void* tptr[], const sint8_t skey1[], const void* sptr1[], size_t size1, const sint8_t skey2[], const void* sptr2[], size_t size2);
+static void MergeAsc (sint16_t tkey[], void* tptr[], const sint16_t skey1[], const void* sptr1[], size_t size1, const sint16_t skey2[], const void* sptr2[], size_t size2);
+static void MergeAsc (sint32_t tkey[], void* tptr[], const sint32_t skey1[], const void* sptr1[], size_t size1, const sint32_t skey2[], const void* sptr2[], size_t size2);
+static void MergeAsc (sint64_t tkey[], void* tptr[], const sint64_t skey1[], const void* sptr1[], size_t size1, const sint64_t skey2[], const void* sptr2[], size_t size2);
 
 // Other types
-static void MergeAsc (size_t tkey[], void* tptr[], const size_t skey1[], void* sptr1[], size_t size1, const size_t skey2[], void* sptr2[], size_t size2);
+static void MergeAsc (size_t tkey[], void* tptr[], const size_t skey1[], const void* sptr1[], size_t size1, const size_t skey2[], const void* sptr2[], size_t size2);
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 //      Descending sort order                                                 //
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
 // Unsigned integer types
-static void MergeDsc (uint8_t tkey[], void* tptr[], const uint8_t skey1[], void* sptr1[], size_t size1, const uint8_t skey2[], void* sptr2[], size_t size2);
-static void MergeDsc (uint16_t tkey[], void* tptr[], const uint16_t skey1[], void* sptr1[], size_t size1, const uint16_t skey2[], void* sptr2[], size_t size2);
-static void MergeDsc (uint32_t tkey[], void* tptr[], const uint32_t skey1[], void* sptr1[], size_t size1, const uint32_t skey2[], void* sptr2[], size_t size2);
-static void MergeDsc (uint64_t tkey[], void* tptr[], const uint64_t skey1[], void* sptr1[], size_t size1, const uint64_t skey2[], void* sptr2[], size_t size2);
+static void MergeDsc (uint8_t tkey[], void* tptr[], const uint8_t skey1[], const void* sptr1[], size_t size1, const uint8_t skey2[], const void* sptr2[], size_t size2);
+static void MergeDsc (uint16_t tkey[], void* tptr[], const uint16_t skey1[], const void* sptr1[], size_t size1, const uint16_t skey2[], const void* sptr2[], size_t size2);
+static void MergeDsc (uint32_t tkey[], void* tptr[], const uint32_t skey1[], const void* sptr1[], size_t size1, const uint32_t skey2[], const void* sptr2[], size_t size2);
+static void MergeDsc (uint64_t tkey[], void* tptr[], const uint64_t skey1[], const void* sptr1[], size_t size1, const uint64_t skey2[], const void* sptr2[], size_t size2);
 
 // Signed integer types
-static void MergeDsc (sint8_t tkey[], void* tptr[], const sint8_t skey1[], void* sptr1[], size_t size1, const sint8_t skey2[], void* sptr2[], size_t size2);
-static void MergeDsc (sint16_t tkey[], void* tptr[], const sint16_t skey1[], void* sptr1[], size_t size1, const sint16_t skey2[], void* sptr2[], size_t size2);
-static void MergeDsc (sint32_t tkey[], void* tptr[], const sint32_t skey1[], void* sptr1[], size_t size1, const sint32_t skey2[], void* sptr2[], size_t size2);
-static void MergeDsc (sint64_t tkey[], void* tptr[], const sint64_t skey1[], void* sptr1[], size_t size1, const sint64_t skey2[], void* sptr2[], size_t size2);
+static void MergeDsc (sint8_t tkey[], void* tptr[], const sint8_t skey1[], const void* sptr1[], size_t size1, const sint8_t skey2[], const void* sptr2[], size_t size2);
+static void MergeDsc (sint16_t tkey[], void* tptr[], const sint16_t skey1[], const void* sptr1[], size_t size1, const sint16_t skey2[], const void* sptr2[], size_t size2);
+static void MergeDsc (sint32_t tkey[], void* tptr[], const sint32_t skey1[], const void* sptr1[], size_t size1, const sint32_t skey2[], const void* sptr2[], size_t size2);
+static void MergeDsc (sint64_t tkey[], void* tptr[], const sint64_t skey1[], const void* sptr1[], size_t size1, const sint64_t skey2[], const void* sptr2[], size_t size2);
 
 // Other types
-static void MergeDsc (size_t tkey[], void* tptr[], const size_t skey1[], void* sptr1[], size_t size1, const size_t skey2[], void* sptr2[], size_t size2);
+static void MergeDsc (size_t tkey[], void* tptr[], const size_t skey1[], const void* sptr1[], size_t size1, const size_t skey2[], const void* sptr2[], size_t size2);
 
 //****************************************************************************//
 //      Unique values                                                         //
@@ -1522,46 +1522,46 @@ void Array_QuickSortDsc_size (size_t array[], size_t size);
 //----------------------------------------------------------------------------//
 
 // Unsigned integer types
-void Array_QuickSortKeyAsc_uint8 (uint8_t key[], void* ptr[], size_t size);
-void Array_QuickSortKeyAsc_uint16 (uint16_t key[], void* ptr[], size_t size);
-void Array_QuickSortKeyAsc_uint32 (uint32_t key[], void* ptr[], size_t size);
-void Array_QuickSortKeyAsc_uint64 (uint64_t key[], void* ptr[], size_t size);
+void Array_QuickSortKeyAsc_uint8 (uint8_t key[], const void* ptr[], size_t size);
+void Array_QuickSortKeyAsc_uint16 (uint16_t key[], const void* ptr[], size_t size);
+void Array_QuickSortKeyAsc_uint32 (uint32_t key[], const void* ptr[], size_t size);
+void Array_QuickSortKeyAsc_uint64 (uint64_t key[], const void* ptr[], size_t size);
 
 // Signed integer types
-void Array_QuickSortKeyAsc_sint8 (sint8_t key[], void* ptr[], size_t size);
-void Array_QuickSortKeyAsc_sint16 (sint16_t key[], void* ptr[], size_t size);
-void Array_QuickSortKeyAsc_sint32 (sint32_t key[], void* ptr[], size_t size);
-void Array_QuickSortKeyAsc_sint64 (sint64_t key[], void* ptr[], size_t size);
+void Array_QuickSortKeyAsc_sint8 (sint8_t key[], const void* ptr[], size_t size);
+void Array_QuickSortKeyAsc_sint16 (sint16_t key[], const void* ptr[], size_t size);
+void Array_QuickSortKeyAsc_sint32 (sint32_t key[], const void* ptr[], size_t size);
+void Array_QuickSortKeyAsc_sint64 (sint64_t key[], const void* ptr[], size_t size);
 
 // Floating-point types
-void Array_QuickSortKeyAsc_flt32 (flt32_t key[], void* ptr[], size_t size);
-void Array_QuickSortKeyAsc_flt64 (flt64_t key[], void* ptr[], size_t size);
+void Array_QuickSortKeyAsc_flt32 (flt32_t key[], const void* ptr[], size_t size);
+void Array_QuickSortKeyAsc_flt64 (flt64_t key[], const void* ptr[], size_t size);
 
 // Other types
-void Array_QuickSortKeyAsc_size (size_t key[], void* ptr[], size_t size);
+void Array_QuickSortKeyAsc_size (size_t key[], const void* ptr[], size_t size);
 
 //----------------------------------------------------------------------------//
 //      Descending sort order                                                 //
 //----------------------------------------------------------------------------//
 
 // Unsigned integer types
-void Array_QuickSortKeyDsc_uint8 (uint8_t key[], void* ptr[], size_t size);
-void Array_QuickSortKeyDsc_uint16 (uint16_t key[], void* ptr[], size_t size);
-void Array_QuickSortKeyDsc_uint32 (uint32_t key[], void* ptr[], size_t size);
-void Array_QuickSortKeyDsc_uint64 (uint64_t key[], void* ptr[], size_t size);
+void Array_QuickSortKeyDsc_uint8 (uint8_t key[], const void* ptr[], size_t size);
+void Array_QuickSortKeyDsc_uint16 (uint16_t key[], const void* ptr[], size_t size);
+void Array_QuickSortKeyDsc_uint32 (uint32_t key[], const void* ptr[], size_t size);
+void Array_QuickSortKeyDsc_uint64 (uint64_t key[], const void* ptr[], size_t size);
 
 // Signed integer types
-void Array_QuickSortKeyDsc_sint8 (sint8_t key[], void* ptr[], size_t size);
-void Array_QuickSortKeyDsc_sint16 (sint16_t key[], void* ptr[], size_t size);
-void Array_QuickSortKeyDsc_sint32 (sint32_t key[], void* ptr[], size_t size);
-void Array_QuickSortKeyDsc_sint64 (sint64_t key[], void* ptr[], size_t size);
+void Array_QuickSortKeyDsc_sint8 (sint8_t key[], const void* ptr[], size_t size);
+void Array_QuickSortKeyDsc_sint16 (sint16_t key[], const void* ptr[], size_t size);
+void Array_QuickSortKeyDsc_sint32 (sint32_t key[], const void* ptr[], size_t size);
+void Array_QuickSortKeyDsc_sint64 (sint64_t key[], const void* ptr[], size_t size);
 
 // Floating-point types
-void Array_QuickSortKeyDsc_flt32 (flt32_t key[], void* ptr[], size_t size);
-void Array_QuickSortKeyDsc_flt64 (flt64_t key[], void* ptr[], size_t size);
+void Array_QuickSortKeyDsc_flt32 (flt32_t key[], const void* ptr[], size_t size);
+void Array_QuickSortKeyDsc_flt64 (flt64_t key[], const void* ptr[], size_t size);
 
 // Other types
-void Array_QuickSortKeyDsc_size (size_t key[], void* ptr[], size_t size);
+void Array_QuickSortKeyDsc_size (size_t key[], const void* ptr[], size_t size);
 
 //============================================================================//
 //      Radix sort                                                            //
@@ -1626,46 +1626,46 @@ void Array_RadixSortDsc_size (size_t array[], size_t temp[], size_t size);
 //----------------------------------------------------------------------------//
 
 // Unsigned integer types
-void Array_RadixSortKeyAsc_uint8 (uint8_t key[], uint8_t tkey[], void* ptr[], void* tptr[], size_t size);
-void Array_RadixSortKeyAsc_uint16 (uint16_t key[], uint16_t tkey[], void* ptr[], void* tptr[], size_t size);
-void Array_RadixSortKeyAsc_uint32 (uint32_t key[], uint32_t tkey[], void* ptr[], void* tptr[], size_t size);
-void Array_RadixSortKeyAsc_uint64 (uint64_t key[], uint64_t tkey[], void* ptr[], void* tptr[], size_t size);
+void Array_RadixSortKeyAsc_uint8 (uint8_t key[], uint8_t tkey[], const void* ptr[], const void* tptr[], size_t size);
+void Array_RadixSortKeyAsc_uint16 (uint16_t key[], uint16_t tkey[], const void* ptr[], const void* tptr[], size_t size);
+void Array_RadixSortKeyAsc_uint32 (uint32_t key[], uint32_t tkey[], const void* ptr[], const void* tptr[], size_t size);
+void Array_RadixSortKeyAsc_uint64 (uint64_t key[], uint64_t tkey[], const void* ptr[], const void* tptr[], size_t size);
 
 // Signed integer types
-void Array_RadixSortKeyAsc_sint8 (sint8_t key[], sint8_t tkey[], void* ptr[], void* tptr[], size_t size);
-void Array_RadixSortKeyAsc_sint16 (sint16_t key[], sint16_t tkey[], void* ptr[], void* tptr[], size_t size);
-void Array_RadixSortKeyAsc_sint32 (sint32_t key[], sint32_t tkey[], void* ptr[], void* tptr[], size_t size);
-void Array_RadixSortKeyAsc_sint64 (sint64_t key[], sint64_t tkey[], void* ptr[], void* tptr[], size_t size);
+void Array_RadixSortKeyAsc_sint8 (sint8_t key[], sint8_t tkey[], const void* ptr[], const void* tptr[], size_t size);
+void Array_RadixSortKeyAsc_sint16 (sint16_t key[], sint16_t tkey[], const void* ptr[], const void* tptr[], size_t size);
+void Array_RadixSortKeyAsc_sint32 (sint32_t key[], sint32_t tkey[], const void* ptr[], const void* tptr[], size_t size);
+void Array_RadixSortKeyAsc_sint64 (sint64_t key[], sint64_t tkey[], const void* ptr[], const void* tptr[], size_t size);
 
 // Floating-point types
-void Array_RadixSortKeyAsc_flt32 (flt32_t key[], flt32_t tkey[], void* ptr[], void* tptr[], size_t size);
-void Array_RadixSortKeyAsc_flt64 (flt64_t key[], flt64_t tkey[], void* ptr[], void* tptr[], size_t size);
+void Array_RadixSortKeyAsc_flt32 (flt32_t key[], flt32_t tkey[], const void* ptr[], const void* tptr[], size_t size);
+void Array_RadixSortKeyAsc_flt64 (flt64_t key[], flt64_t tkey[], const void* ptr[], const void* tptr[], size_t size);
 
 // Other types
-void Array_RadixSortKeyAsc_size (size_t key[], size_t tkey[], void* ptr[], void* tptr[], size_t size);
+void Array_RadixSortKeyAsc_size (size_t key[], size_t tkey[], const void* ptr[], const void* tptr[], size_t size);
 
 //----------------------------------------------------------------------------//
 //      Descending sort order                                                 //
 //----------------------------------------------------------------------------//
 
 // Unsigned integer types
-void Array_RadixSortKeyDsc_uint8 (uint8_t key[], uint8_t tkey[], void* ptr[], void* tptr[], size_t size);
-void Array_RadixSortKeyDsc_uint16 (uint16_t key[], uint16_t tkey[], void* ptr[], void* tptr[], size_t size);
-void Array_RadixSortKeyDsc_uint32 (uint32_t key[], uint32_t tkey[], void* ptr[], void* tptr[], size_t size);
-void Array_RadixSortKeyDsc_uint64 (uint64_t key[], uint64_t tkey[], void* ptr[], void* tptr[], size_t size);
+void Array_RadixSortKeyDsc_uint8 (uint8_t key[], uint8_t tkey[], const void* ptr[], const void* tptr[], size_t size);
+void Array_RadixSortKeyDsc_uint16 (uint16_t key[], uint16_t tkey[], const void* ptr[], const void* tptr[], size_t size);
+void Array_RadixSortKeyDsc_uint32 (uint32_t key[], uint32_t tkey[], const void* ptr[], const void* tptr[], size_t size);
+void Array_RadixSortKeyDsc_uint64 (uint64_t key[], uint64_t tkey[], const void* ptr[], const void* tptr[], size_t size);
 
 // Signed integer types
-void Array_RadixSortKeyDsc_sint8 (sint8_t key[], sint8_t tkey[], void* ptr[], void* tptr[], size_t size);
-void Array_RadixSortKeyDsc_sint16 (sint16_t key[], sint16_t tkey[], void* ptr[], void* tptr[], size_t size);
-void Array_RadixSortKeyDsc_sint32 (sint32_t key[], sint32_t tkey[], void* ptr[], void* tptr[], size_t size);
-void Array_RadixSortKeyDsc_sint64 (sint64_t key[], sint64_t tkey[], void* ptr[], void* tptr[], size_t size);
+void Array_RadixSortKeyDsc_sint8 (sint8_t key[], sint8_t tkey[], const void* ptr[], const void* tptr[], size_t size);
+void Array_RadixSortKeyDsc_sint16 (sint16_t key[], sint16_t tkey[], const void* ptr[], const void* tptr[], size_t size);
+void Array_RadixSortKeyDsc_sint32 (sint32_t key[], sint32_t tkey[], const void* ptr[], const void* tptr[], size_t size);
+void Array_RadixSortKeyDsc_sint64 (sint64_t key[], sint64_t tkey[], const void* ptr[], const void* tptr[], size_t size);
 
 // Floating-point types
-void Array_RadixSortKeyDsc_flt32 (flt32_t key[], flt32_t tkey[], void* ptr[], void* tptr[], size_t size);
-void Array_RadixSortKeyDsc_flt64 (flt64_t key[], flt64_t tkey[], void* ptr[], void* tptr[], size_t size);
+void Array_RadixSortKeyDsc_flt32 (flt32_t key[], flt32_t tkey[], const void* ptr[], const void* tptr[], size_t size);
+void Array_RadixSortKeyDsc_flt64 (flt64_t key[], flt64_t tkey[], const void* ptr[], const void* tptr[], size_t size);
 
 // Other types
-void Array_RadixSortKeyDsc_size (size_t key[], size_t tkey[], void* ptr[], void* tptr[], size_t size);
+void Array_RadixSortKeyDsc_size (size_t key[], size_t tkey[], const void* ptr[], const void* tptr[], size_t size);
 
 //****************************************************************************//
 //      Merging of sorted arrays                                              //
@@ -1722,38 +1722,38 @@ void Array_MergeDsc_size (size_t target[], const size_t source1[], size_t size1,
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
 // Unsigned integer types
-void Array_MergeKeyAsc_uint8 (uint8_t tkey[], void* tptr[], const uint8_t skey1[], void* sptr1[], size_t size1, const uint8_t skey2[], void* sptr2[], size_t size2);
-void Array_MergeKeyAsc_uint16 (uint16_t tkey[], void* tptr[], const uint16_t skey1[], void* sptr1[], size_t size1, const uint16_t skey2[], void* sptr2[], size_t size2);
-void Array_MergeKeyAsc_uint32 (uint32_t tkey[], void* tptr[], const uint32_t skey1[], void* sptr1[], size_t size1, const uint32_t skey2[], void* sptr2[], size_t size2);
-void Array_MergeKeyAsc_uint64 (uint64_t tkey[], void* tptr[], const uint64_t skey1[], void* sptr1[], size_t size1, const uint64_t skey2[], void* sptr2[], size_t size2);
+void Array_MergeKeyAsc_uint8 (uint8_t tkey[], void* tptr[], const uint8_t skey1[], const void* sptr1[], size_t size1, const uint8_t skey2[], const void* sptr2[], size_t size2);
+void Array_MergeKeyAsc_uint16 (uint16_t tkey[], void* tptr[], const uint16_t skey1[], const void* sptr1[], size_t size1, const uint16_t skey2[], const void* sptr2[], size_t size2);
+void Array_MergeKeyAsc_uint32 (uint32_t tkey[], void* tptr[], const uint32_t skey1[], const void* sptr1[], size_t size1, const uint32_t skey2[], const void* sptr2[], size_t size2);
+void Array_MergeKeyAsc_uint64 (uint64_t tkey[], void* tptr[], const uint64_t skey1[], const void* sptr1[], size_t size1, const uint64_t skey2[], const void* sptr2[], size_t size2);
 
 // Signed integer types
-void Array_MergeKeyAsc_sint8 (sint8_t tkey[], void* tptr[], const sint8_t skey1[], void* sptr1[], size_t size1, const sint8_t skey2[], void* sptr2[], size_t size2);
-void Array_MergeKeyAsc_sint16 (sint16_t tkey[], void* tptr[], const sint16_t skey1[], void* sptr1[], size_t size1, const sint16_t skey2[], void* sptr2[], size_t size2);
-void Array_MergeKeyAsc_sint32 (sint32_t tkey[], void* tptr[], const sint32_t skey1[], void* sptr1[], size_t size1, const sint32_t skey2[], void* sptr2[], size_t size2);
-void Array_MergeKeyAsc_sint64 (sint64_t tkey[], void* tptr[], const sint64_t skey1[], void* sptr1[], size_t size1, const sint64_t skey2[], void* sptr2[], size_t size2);
+void Array_MergeKeyAsc_sint8 (sint8_t tkey[], void* tptr[], const sint8_t skey1[], const void* sptr1[], size_t size1, const sint8_t skey2[], const void* sptr2[], size_t size2);
+void Array_MergeKeyAsc_sint16 (sint16_t tkey[], void* tptr[], const sint16_t skey1[], const void* sptr1[], size_t size1, const sint16_t skey2[], const void* sptr2[], size_t size2);
+void Array_MergeKeyAsc_sint32 (sint32_t tkey[], void* tptr[], const sint32_t skey1[], const void* sptr1[], size_t size1, const sint32_t skey2[], const void* sptr2[], size_t size2);
+void Array_MergeKeyAsc_sint64 (sint64_t tkey[], void* tptr[], const sint64_t skey1[], const void* sptr1[], size_t size1, const sint64_t skey2[], const void* sptr2[], size_t size2);
 
 // Other types
-void Array_MergeKeyAsc_size (size_t tkey[], void* tptr[], const size_t skey1[], void* sptr1[], size_t size1, const size_t skey2[], void* sptr2[], size_t size2);
+void Array_MergeKeyAsc_size (size_t tkey[], void* tptr[], const size_t skey1[], const void* sptr1[], size_t size1, const size_t skey2[], const void* sptr2[], size_t size2);
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 //      Descending sort order                                                 //
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
 // Unsigned integer types
-void Array_MergeKeyDsc_uint8 (uint8_t tkey[], void* tptr[], const uint8_t skey1[], void* sptr1[], size_t size1, const uint8_t skey2[], void* sptr2[], size_t size2);
-void Array_MergeKeyDsc_uint16 (uint16_t tkey[], void* tptr[], const uint16_t skey1[], void* sptr1[], size_t size1, const uint16_t skey2[], void* sptr2[], size_t size2);
-void Array_MergeKeyDsc_uint32 (uint32_t tkey[], void* tptr[], const uint32_t skey1[], void* sptr1[], size_t size1, const uint32_t skey2[], void* sptr2[], size_t size2);
-void Array_MergeKeyDsc_uint64 (uint64_t tkey[], void* tptr[], const uint64_t skey1[], void* sptr1[], size_t size1, const uint64_t skey2[], void* sptr2[], size_t size2);
+void Array_MergeKeyDsc_uint8 (uint8_t tkey[], void* tptr[], const uint8_t skey1[], const void* sptr1[], size_t size1, const uint8_t skey2[], const void* sptr2[], size_t size2);
+void Array_MergeKeyDsc_uint16 (uint16_t tkey[], void* tptr[], const uint16_t skey1[], const void* sptr1[], size_t size1, const uint16_t skey2[], const void* sptr2[], size_t size2);
+void Array_MergeKeyDsc_uint32 (uint32_t tkey[], void* tptr[], const uint32_t skey1[], const void* sptr1[], size_t size1, const uint32_t skey2[], const void* sptr2[], size_t size2);
+void Array_MergeKeyDsc_uint64 (uint64_t tkey[], void* tptr[], const uint64_t skey1[], const void* sptr1[], size_t size1, const uint64_t skey2[], const void* sptr2[], size_t size2);
 
 // Signed integer types
-void Array_MergeKeyDsc_sint8 (sint8_t tkey[], void* tptr[], const sint8_t skey1[], void* sptr1[], size_t size1, const sint8_t skey2[], void* sptr2[], size_t size2);
-void Array_MergeKeyDsc_sint16 (sint16_t tkey[], void* tptr[], const sint16_t skey1[], void* sptr1[], size_t size1, const sint16_t skey2[], void* sptr2[], size_t size2);
-void Array_MergeKeyDsc_sint32 (sint32_t tkey[], void* tptr[], const sint32_t skey1[], void* sptr1[], size_t size1, const sint32_t skey2[], void* sptr2[], size_t size2);
-void Array_MergeKeyDsc_sint64 (sint64_t tkey[], void* tptr[], const sint64_t skey1[], void* sptr1[], size_t size1, const sint64_t skey2[], void* sptr2[], size_t size2);
+void Array_MergeKeyDsc_sint8 (sint8_t tkey[], void* tptr[], const sint8_t skey1[], const void* sptr1[], size_t size1, const sint8_t skey2[], const void* sptr2[], size_t size2);
+void Array_MergeKeyDsc_sint16 (sint16_t tkey[], void* tptr[], const sint16_t skey1[], const void* sptr1[], size_t size1, const sint16_t skey2[], const void* sptr2[], size_t size2);
+void Array_MergeKeyDsc_sint32 (sint32_t tkey[], void* tptr[], const sint32_t skey1[], const void* sptr1[], size_t size1, const sint32_t skey2[], const void* sptr2[], size_t size2);
+void Array_MergeKeyDsc_sint64 (sint64_t tkey[], void* tptr[], const sint64_t skey1[], const void* sptr1[], size_t size1, const sint64_t skey2[], const void* sptr2[], size_t size2);
 
 // Other types
-void Array_MergeKeyDsc_size (size_t tkey[], void* tptr[], const size_t skey1[], void* sptr1[], size_t size1, const size_t skey2[], void* sptr2[], size_t size2);
+void Array_MergeKeyDsc_size (size_t tkey[], void* tptr[], const size_t skey1[], const void* sptr1[], size_t size1, const size_t skey2[], const void* sptr2[], size_t size2);
 
 //****************************************************************************//
 //      Unique values                                                         //

@@ -116,25 +116,31 @@ public	Find2_char8			as	'_ZN6String11FindSymbolsEPKcS1_'
 public	Find2_char16		as	'_ZN6String11FindSymbolsEPKsS1_'
 public	Find2_char32		as	'_ZN6String11FindSymbolsEPKiS1_'
 
-; Searching for string pattern
-public	FindStr_char8		as	'String_FindString_char8'
-public	FindStr_char16		as	'String_FindString_char16'
-public	FindStr_char32		as	'String_FindString_char32'
-public	FindStr_char8		as	'_ZN6String10FindStringEPKcS1_'
-public	FindStr_char16		as	'_ZN6String10FindStringEPKsS1_'
-public	FindStr_char32		as	'_ZN6String10FindStringEPKiS1_'
+; Searching for substring
+public	FindStr1_char8		as	'String_FindString_char8'
+public	FindStr1_char16		as	'String_FindString_char16'
+public	FindStr1_char32		as	'String_FindString_char32'
+public	FindStr2_char8		as	'String_FindStringN_char8'
+public	FindStr2_char16		as	'String_FindStringN_char16'
+public	FindStr2_char32		as	'String_FindStringN_char32'
+public	FindStr1_char8		as	'_ZN6String10FindStringEPKcS1_'
+public	FindStr1_char16		as	'_ZN6String10FindStringEPKsS1_'
+public	FindStr1_char32		as	'_ZN6String10FindStringEPKiS1_'
+public	FindStr2_char8		as	'_ZN6String10FindStringEPKcmS1_'
+public	FindStr2_char16		as	'_ZN6String10FindStringEPKsmS1_'
+public	FindStr2_char32		as	'_ZN6String10FindStringEPKimS1_'
 
 ;******************************************************************************;
 ;       Value replacement                                                      ;
 ;******************************************************************************;
 
 ; Replacing of single symbol
-public	Replace1_char8		as	'String_ReplaceSymbol_char8'
-public	Replace1_char16		as	'String_ReplaceSymbol_char16'
-public	Replace1_char32		as	'String_ReplaceSymbol_char32'
-public	Replace1_char8		as	'_ZN6String13ReplaceSymbolEPKccc'
-public	Replace1_char16		as	'_ZN6String13ReplaceSymbolEPKsss'
-public	Replace1_char32		as	'_ZN6String13ReplaceSymbolEPKiii'
+public	Replace_char8		as	'String_ReplaceSymbol_char8'
+public	Replace_char16		as	'String_ReplaceSymbol_char16'
+public	Replace_char32		as	'String_ReplaceSymbol_char32'
+public	Replace_char8		as	'_ZN6String13ReplaceSymbolEPKccc'
+public	Replace_char16		as	'_ZN6String13ReplaceSymbolEPKsss'
+public	Replace_char32		as	'_ZN6String13ReplaceSymbolEPKiii'
 
 ;###############################################################################
 ;#      Code section                                                           #
@@ -166,7 +172,7 @@ end if
 
 
 
-macro	checkeol	ptr, scale
+macro	chckeol	ptr, scale
 {
 if scale = 0
 		cmp		byte [ptr], 0
@@ -202,7 +208,7 @@ bytes	= 1 shl scale						; size of element (bytes)
 		lea		size, [string - bytes]		; size = string - 1
 ;---[Loop]---------------------------------
 @@:		add		size, bytes					; size++
-	checkeol	size, scale					; check of EOL symbol
+		chckeol	size, scale					; check of EOL symbol
 		jne		@b							; do while (symbol != 0)
 ;---[end of loop]--------------------------
 		sub		size, string				; size -= string
@@ -343,7 +349,7 @@ bytes	= 1 shl scale						; size of element (bytes)
 		mov		sptr, source				; sptr = source
 		mov		tptr, target				; tptr = target
 		test	size, size					; if (size == 0)
-		jz		.exit						; then go to exit
+		jz		.exit						;     then go to exit
 		add		max_len, 1					; max_len++
 ;---[Loop]---------------------------------
 .loop:	mov		char, [sptr]
@@ -443,7 +449,7 @@ bytes	= 1 shl scale						; size of element (bytes)
 ;---[Loop]---------------------------------
 .loop:	mov		char, [string1]
 		cmp		char, [string2]				; if (string1[0] != string2[0]
-		jne		.exit						; then go to exit
+		jne		.exit						;     then go to exit
 		add		string1, bytes				; string1++
 		add		string2, bytes				; string2++
 		test	char, char
@@ -470,18 +476,20 @@ result	equ		al							; result
 bytes	= 1 shl scale						; size of element (bytes)
 ;------------------------------------------
 		test	size, size					; if (size == 0)
-		jz		@f							; then skip search loop
+		jz		.skip						;     then skip search loop
 ;---[Loop]---------------------------------
 .loop:	mov		char, [string1]
 		cmp		char, [string2]				; if (string1[0] != string2[0]
-		jne		.exit						; then go to exit
+		jne		.exit						;     then go to exit
 		add		string1, bytes				; string1++
 		add		string2, bytes				; string2++
 		sub		size, 1						; size--
 		jnz		.loop						; do while (size != 0)
 ;---[end of loop]--------------------------
-@@:	checkeol	string1, scale
 .exit:	sete	result
+		ret
+.skip:	chckeol	string1, scale
+		sete	result
 		ret
 }
 Equal2_char8:	EQUAL2	al, 0
@@ -565,9 +573,9 @@ Find2_char16:	FIND_SYMBOLS	dx, cx, 1
 Find2_char32:	FIND_SYMBOLS	edx, ecx, 2
 
 ;==============================================================================;
-;       Searching for string pattern                                           ;
+;       Searching for substring                                                ;
 ;==============================================================================;
-macro	FIND_STRING	hash_func, find_func, scale
+macro	FIND_STRING1	hash_func, find_func, scale
 {
 ;---[Parameters]---------------------------
 string	equ		rdi							; source string
@@ -590,7 +598,7 @@ space	= 261 * 8							; stack size required by the procedure
 		jz		.error						; if (psize == 0), then go to error branch
 		strlen	ssize, string, scale		; getting source string len
 		cmp		ssize, psize				; if (ssize < psize)
-		jb		.error						; then go to error branch
+		jb		.error						;     then go to error branch
 		sub		stack, space				; reserving stack size for local vars
 		mov		[s_str], string				; save "string" variable into the stack
 		mov		[s_size], ssize				; save "ssize" variable into the stack
@@ -611,9 +619,58 @@ space	= 261 * 8							; stack size required by the procedure
 .error:	mov		result, NOT_FOUND			; return NOT_FOUND
 		ret
 }
-FindStr_char8:	FIND_STRING	BMH8, BMH_Find8, 0
-FindStr_char16:	FIND_STRING	BMH16, BMH_Find16, 1
-FindStr_char32:	FIND_STRING	BMH32, BMH_Find32, 2
+;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+macro	FIND_STRING2	hash_func, find_func, scale
+{
+;---[Parameters]---------------------------
+string	equ		rdi							; source string
+ssize	equ		rsi							; source size
+pattern	equ		rdx							; pattern to find
+;---[Internal variables]-------------------
+psize	equ		rax							; pattern size
+param1	equ		rdi							; register to pass 1 procedure parameter
+param2	equ		rsi							; register to pass 2 procedure parameter
+param3	equ		rdx							; register to pass 3 procedure parameter
+param4	equ		cl							; register to pass 4 procedure parameter
+result	equ		psize						; result register
+stack	equ		rsp							; stack pointer
+s_str	equ		stack + 0 * 8				; stack position of "string" variable
+s_size	equ		stack + 1 * 8				; stack position of string size variable
+s_bmh	equ		stack + 2 * 8				; stack position of BMH object
+space	= 261 * 8							; stack size required by the procedure
+;------------------------------------------
+		strlen	psize, pattern, scale		; getting pattern string len
+		jz		.error						; if (psize == 0), then go to error branch
+		cmp		ssize, psize				; if (ssize < psize)
+		jb		.error						;     then go to error branch
+		sub		stack, space				; reserving stack size for local vars
+		mov		[s_str], string				; save "string" variable into the stack
+		mov		[s_size], ssize				; save "ssize" variable into the stack
+;---[Calling BMH constructor]--------------
+		lea		param1, [s_bmh]				; pass BMH object to BMH constructor
+		mov		param2, pattern				; pass pattern string to BMH constructor
+		mov		param3, psize				; pass pattern size to BMH constructor
+		xor		param4, param4				; pass direction flag to BMH constructor
+		call	hash_func					; call BMH constructor
+;---[Calling BMH search algorithm]---------
+		mov		param1, [s_str]				; pass source string to BMH search algorithm
+		mov		param2, [s_size]			; pass source string size to BMH search algorithm
+		lea		param3, [s_bmh]				; pass BMH pattern to BMH search algorithm
+		call	find_func					; call BMH search algorithm
+		add		stack, space				; restoring back the stack pointer
+		ret
+;---[Error branch]-------------------------
+.error:	mov		result, NOT_FOUND			; return NOT_FOUND
+		ret
+}
+
+FindStr1_char8:		FIND_STRING1	BMH8, BMH_Find8, 0
+FindStr1_char16:	FIND_STRING1	BMH16, BMH_Find16, 1
+FindStr1_char32:	FIND_STRING1	BMH32, BMH_Find32, 2
+
+FindStr2_char8:		FIND_STRING2	BMH8, BMH_Find8, 0
+FindStr2_char16:	FIND_STRING2	BMH16, BMH_Find16, 1
+FindStr2_char32:	FIND_STRING2	BMH32, BMH_Find32, 2
 
 ;******************************************************************************;
 ;       Value replacement                                                      ;
@@ -642,9 +699,9 @@ bytes	= 1 shl scale						; size of element (bytes)
 ;---[end of loop]--------------------------
 .exit:	ret
 }
-Replace1_char8:		REPLACE_SYMBOL	sil, dl, cl, 0
-Replace1_char16:	REPLACE_SYMBOL	si, dx, cx, 1
-Replace1_char32:	REPLACE_SYMBOL	esi, edi, ecx, 2
+Replace_char8:		REPLACE_SYMBOL	sil, dl, cl, 0
+Replace_char16:	REPLACE_SYMBOL	si, dx, cx, 1
+Replace_char32:	REPLACE_SYMBOL	esi, edi, ecx, 2
 
 ;###############################################################################
 ;#                                 END OF FILE                                 #

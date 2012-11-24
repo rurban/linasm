@@ -80,9 +80,10 @@ elemnt	equ		rax							; register to load/store sequence element
 elemntl	equ		eax							; low part of element
 hptr	equ		r8							; pointer to hash array
 vector	equ		xmm0						; vector register to hold size of pattern
-temp	equ		elemntl						; temp register
+count	equ		elemntl						; counter
 hash	equ		this						; pointer to hash array
 hash_sz	= 256								; size of hash array
+block	= 64								; block size (bytes)
 size_of	= hash_sz * 8						; offset of size variable inside BMH_charX
 patt_of	= size_of + 8						; offset of pattern variable inside BMH_charX
 bwd_of	= patt_of + 8						; offset of backward variable inside BMH_charX
@@ -100,11 +101,15 @@ end if
 		movq	vector, size				; vector = size
 		mov		hptr, hash					; hptr = hash
 	punpcklqdq	vector, vector				; duplicating size through the entire register
-		mov		temp, hash_sz				; temp = hash_sz
-@@:		movdqa	[hptr], vector				; hptr[0] = vector
-		add		hptr, 16					; hptr++
-		sub		temp, 2						; temp -= 2
-		jnz		@b							; do while (h_size != 0)
+		mov		count, hash_sz				; count = hash_sz
+;---[Initialization loop]------------------
+.iloop:	movdqa	[hptr + 0x00], vector		; hptr[0] = vector
+		movdqa	[hptr + 0x10], vector		; hptr[16] = vector
+		movdqa	[hptr + 0x20], vector		; hptr[32] = vector
+		movdqa	[hptr + 0x30], vector		; hptr[48] = vector
+		add		hptr, block					; hptr += block
+		sub		count, block / 8			; count -= block / 8
+		jnz		.iloop						; do while (count != 0)
 ;------------------------------------------
 		test	bwd, bwd					; if (backward)
 		jnz		.bkwrd						; then go to backward hash branch

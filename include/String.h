@@ -83,10 +83,13 @@ static size_t FindSymbols (const char8_t string[], const char8_t symbols[]);
 static size_t FindSymbols (const char16_t string[], const char16_t symbols[]);
 static size_t FindSymbols (const char32_t string[], const char32_t symbols[]);
 
-// Searching for string pattern
+// Searching for substring
 static size_t FindString (const char8_t string[], const char8_t pattern[]);
 static size_t FindString (const char16_t string[], const char16_t pattern[]);
 static size_t FindString (const char32_t string[], const char32_t pattern[]);
+static size_t FindString (const char8_t string[], size_t size, const char8_t pattern[]);
+static size_t FindString (const char16_t string[], size_t size, const char16_t pattern[]);
+static size_t FindString (const char32_t string[], size_t size, const char32_t pattern[]);
 
 //****************************************************************************//
 //      Value replacement                                                     //
@@ -166,10 +169,13 @@ size_t String_FindSymbols_char8 (const char8_t string[], const char8_t symbols[]
 size_t String_FindSymbols_char16 (const char16_t string[], const char16_t symbols[]);
 size_t String_FindSymbols_char32 (const char32_t string[], const char32_t symbols[]);
 
-// Searching for string pattern
+// Searching for substring
 size_t String_FindString_char8 (const char8_t string[], const char8_t pattern[]);
 size_t String_FindString_char16 (const char16_t string[], const char16_t pattern[]);
 size_t String_FindString_char32 (const char32_t string[], const char32_t pattern[]);
+size_t String_FindStringN_char8  (const char8_t string[], size_t size, const char8_t pattern[]);
+size_t String_FindStringN_char16  (const char16_t string[], size_t size, const char16_t pattern[]);
+size_t String_FindStringN_char32  (const char32_t string[], size_t size, const char32_t pattern[]);
 
 //****************************************************************************//
 //      Value replacement                                                     //
