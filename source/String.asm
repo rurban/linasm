@@ -1391,10 +1391,13 @@ string	equ		rdi							; pointer to string
 preg	equ		rsi							; register which holds symbol
 vreg	equ		rdx							; register which holds value
 ;---[Internal variables]-------------------
+index	equ		rax							; index of first occurence of pattern
 sindex	equ		rcx							; string offset from vector boundary
+sindexl	equ		cl							; low part of "sindex"
 addr	equ		r8							; return address
 emask	equ		r9							; result of eol search
 pmask	equ		r10							; result of pattern search
+ptr		equ		r11							; temporary pointer to string
 pcheck	equ		xmm0						; pattern check mask
 echeck	equ		xmm1						; eol check mask #1
 eol		equ		xmm2						; end of line
@@ -1413,6 +1416,7 @@ bmask	= bytes - 1							; elements aligning mask
 ;------------------------------------------
 		test	patt, patt					; if (patt == eol)
 		jz		.exit						;     then go to exit
+		xor		index, index				; index = 0
 if scale <> 0
 		test	string, bmask				; if elements have wrong alignment
 		jnz		.sloop						;     then skip vector code
@@ -1421,6 +1425,7 @@ end if
 		mov		sindex, string
 		and		string, not VMASK			; align pointer to vector boundary
 		and		sindex, VMASK				; get string offset from vector boundary
+		mov		ptr, string					; ptr = string
 		pxor	eol, eol					; eol = 0
 		movq	pattern, preg				; pattern = symbol
 		clone	pattern, scale				; duplicate value through the entire register
@@ -1429,7 +1434,6 @@ end if
 ;---[Unaligned search for pattern]---------
 		shl		sindex, 4					; compute shift in mask array
 		movdqa	cmask, dqword [maskA + sindex]
-		xor		index, index				; index = 0
 		movdqa	echeck, [string]			; echeck = string[0]
 		movdqa	pcheck, echeck				; pcheck = string[0]
 	pcmpeq#x	echeck, eol					; check string[0] for end of line
@@ -1443,46 +1447,46 @@ end if
 		jnz		.brk						;     and break the loop
 ;---[Vector loop]--------------------------
 .vloop:	add		index, VSIZE				; index += VSIZE
-		movdqa	echeck, [string + 1*VSIZE]	; echeck = string[1]
-		movdqa	pcheck, echeck				; pcheck = string[1]
-	pcmpeq#x	echeck, eol					; check string[1] for end of line
-	pcmpeq#x	pcheck, pattern				; check string[1] for symbol
+		movdqa	echeck, [ptr + 1*VSIZE]		; echeck = ptr[1]
+		movdqa	pcheck, echeck				; pcheck = ptr[1]
+	pcmpeq#x	echeck, eol					; check ptr[1] for end of line
+	pcmpeq#x	pcheck, pattern				; check ptr[1] for symbol
 	pmovmskb	emask, echeck				; save check results to emask
 	pmovmskb	pmask, pcheck				; save check results to pmask
 		or		emask, pmask				; if eol or pattern is found
 		mov		addr, .back1				;     save return address
 		jnz		.brk						;     and break the loop
 .back1:	add		index, VSIZE				; index += VSIZE
-		movdqa	echeck, [string + 2*VSIZE]	; echeck = string[2]
-		movdqa	pcheck, echeck				; pcheck = string[2]
-	pcmpeq#x	echeck, eol					; check string[2] for end of line
-	pcmpeq#x	pcheck, pattern				; check string[2] for symbol
+		movdqa	echeck, [ptr + 2*VSIZE]		; echeck = ptr[2]
+		movdqa	pcheck, echeck				; pcheck = ptr[2]
+	pcmpeq#x	echeck, eol					; check ptr[2] for end of line
+	pcmpeq#x	pcheck, pattern				; check ptr[2] for symbol
 	pmovmskb	emask, echeck				; save check results to emask
 	pmovmskb	pmask, pcheck				; save check results to pmask
 		or		emask, pmask				; if eol or pattern is found
 		mov		addr, .back2				;     save return address
 		jnz		.brk						;     and break the loop
 .back2:	add		index, VSIZE				; index += VSIZE
-		movdqa	echeck, [string + 3*VSIZE]	; echeck = string[3]
-		movdqa	pcheck, echeck				; pcheck = string[3]
-	pcmpeq#x	echeck, eol					; check string[3] for end of line
-	pcmpeq#x	pcheck, pattern				; check string[3] for symbol
+		movdqa	echeck, [ptr + 3*VSIZE]		; echeck = ptr[3]
+		movdqa	pcheck, echeck				; pcheck = ptr[3]
+	pcmpeq#x	echeck, eol					; check ptr[3] for end of line
+	pcmpeq#x	pcheck, pattern				; check ptr[3] for symbol
 	pmovmskb	emask, echeck				; save check results to emask
 	pmovmskb	pmask, pcheck				; save check results to pmask
 		or		emask, pmask				; if eol or pattern is found
 		mov		addr, .back3				;     save return address
 		jnz		.brk						;     and break the loop
 .back3:	add		index, VSIZE				; index += VSIZE
-		movdqa	echeck, [string + 4*VSIZE]	; echeck = string[4]
-		movdqa	pcheck, echeck				; pcheck = string[4]
-	pcmpeq#x	echeck, eol					; check string[4] for end of line
-	pcmpeq#x	pcheck, pattern				; check string[4] for symbol
+		movdqa	echeck, [ptr + 4*VSIZE]		; echeck = ptr[4]
+		movdqa	pcheck, echeck				; pcheck = ptr[4]
+	pcmpeq#x	echeck, eol					; check ptr[4] for end of line
+	pcmpeq#x	pcheck, pattern				; check ptr[4] for symbol
 	pmovmskb	emask, echeck				; save check results to emask
 	pmovmskb	pmask, pcheck				; save check results to pmask
 		or		emask, pmask				; if eol or pattern is found
 		mov		addr, .back4				;     save return address
 		jnz		.brk						;     and break the loop
-.back4:	add		string, 4 * VSIZE			; string += 4 * vector
+.back4:	add		ptr, 4 * VSIZE				; ptr += 4 * VSIZE
 		jmp		.vloop						; do while (true)
 ;---[End of vector loop]-------------------
 .brk:	xor		emask, pmask				; if eol is found
@@ -2435,14 +2439,17 @@ maskA		dq	0xFFFFFFFFFFFFFFFF, 0xFFFFFFFFFFFFFFFF
 			dq	0xFFFFFFFFFFFFFF00, 0xFFFFFFFFFFFFFFFF
 			dq	0xFFFFFFFFFFFF0000, 0xFFFFFFFFFFFFFFFF
 			dq	0xFFFFFFFFFF000000, 0xFFFFFFFFFFFFFFFF
+
 			dq	0xFFFFFFFF00000000, 0xFFFFFFFFFFFFFFFF
 			dq	0xFFFFFF0000000000, 0xFFFFFFFFFFFFFFFF
 			dq	0xFFFF000000000000, 0xFFFFFFFFFFFFFFFF
 			dq	0xFF00000000000000, 0xFFFFFFFFFFFFFFFF
+
 			dq	0x0000000000000000, 0xFFFFFFFFFFFFFFFF
 			dq	0x0000000000000000, 0xFFFFFFFFFFFFFF00
 			dq	0x0000000000000000, 0xFFFFFFFFFFFF0000
 			dq	0x0000000000000000, 0xFFFFFFFFFF000000
+
 			dq	0x0000000000000000, 0xFFFFFFFF00000000
 			dq	0x0000000000000000, 0xFFFFFF0000000000
 			dq	0x0000000000000000, 0xFFFF000000000000
@@ -2453,19 +2460,21 @@ maskB		dq	0x0000000000000000, 0x0000000000000000
 			dq	0x00000000000000FF, 0x0000000000000000
 			dq	0x000000000000FFFF, 0x0000000000000000
 			dq	0x0000000000FFFFFF, 0x0000000000000000
+
 			dq	0x00000000FFFFFFFF, 0x0000000000000000
 			dq	0x000000FFFFFFFFFF, 0x0000000000000000
 			dq	0x0000FFFFFFFFFFFF, 0x0000000000000000
 			dq	0x00FFFFFFFFFFFFFF, 0x0000000000000000
+
 			dq	0xFFFFFFFFFFFFFFFF, 0x0000000000000000
 			dq	0xFFFFFFFFFFFFFFFF, 0x00000000000000FF
 			dq	0xFFFFFFFFFFFFFFFF, 0x000000000000FFFF
 			dq	0xFFFFFFFFFFFFFFFF, 0x0000000000FFFFFF
+
 			dq	0xFFFFFFFFFFFFFFFF, 0x00000000FFFFFFFF
 			dq	0xFFFFFFFFFFFFFFFF, 0x000000FFFFFFFFFF
 			dq	0xFFFFFFFFFFFFFFFF, 0x0000FFFFFFFFFFFF
 			dq	0xFFFFFFFFFFFFFFFF, 0x00FFFFFFFFFFFFFF
-			dq	0xFFFFFFFFFFFFFFFF, 0xFFFFFFFFFFFFFFFF
 
 ;###############################################################################
 ;#                                 END OF FILE                                 #
