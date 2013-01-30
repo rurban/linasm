@@ -7,6 +7,7 @@
 ;# License: LGPLv3+                              Copyleft (Ɔ) 2012, Jack Black #
 ;###############################################################################
 format	ELF64
+include	'Macro.inc'
 
 ;###############################################################################
 ;#      Export section                                                         #
@@ -17,262 +18,262 @@ format	ELF64
 ;******************************************************************************;
 
 ; Unsigned integer types
-public	ByteSwap16		as	'Math_ByteSwap_uint16'
-public	ByteSwap32		as	'Math_ByteSwap_uint32'
-public	ByteSwap64		as	'Math_ByteSwap_uint64'
-public	ByteSwap16		as	'_ZN4Math8ByteSwapEt'
-public	ByteSwap32		as	'_ZN4Math8ByteSwapEj'
-public	ByteSwap64		as	'_ZN4Math8ByteSwapEy'
+public	ByteSwap16			as	'Math_ByteSwap_uint16'
+public	ByteSwap32			as	'Math_ByteSwap_uint32'
+public	ByteSwap64			as	'Math_ByteSwap_uint64'
+public	ByteSwap16			as	'_ZN4Math8ByteSwapEt'
+public	ByteSwap32			as	'_ZN4Math8ByteSwapEj'
+public	ByteSwap64			as	'_ZN4Math8ByteSwapEy'
 
 ; Signed integer types
-public	ByteSwap16		as	'Math_ByteSwap_sint16'
-public	ByteSwap32		as	'Math_ByteSwap_sint32'
-public	ByteSwap64		as	'Math_ByteSwap_sint64'
-public	ByteSwap16		as	'_ZN4Math8ByteSwapEs'
-public	ByteSwap32		as	'_ZN4Math8ByteSwapEi'
-public	ByteSwap64		as	'_ZN4Math8ByteSwapEx'
+public	ByteSwap16			as	'Math_ByteSwap_sint16'
+public	ByteSwap32			as	'Math_ByteSwap_sint32'
+public	ByteSwap64			as	'Math_ByteSwap_sint64'
+public	ByteSwap16			as	'_ZN4Math8ByteSwapEs'
+public	ByteSwap32			as	'_ZN4Math8ByteSwapEi'
+public	ByteSwap64			as	'_ZN4Math8ByteSwapEx'
 
 ;******************************************************************************;
 ;       Absolute value                                                         ;
 ;******************************************************************************;
 
 ; Signed integer types
-public	Abs_sint8		as	'Math_Abs_sint8'
-public	Abs_sint16		as	'Math_Abs_sint16'
-public	Abs_sint32		as	'Math_Abs_sint32'
-public	Abs_sint64		as	'Math_Abs_sint64'
-public	Abs_sint8		as	'_ZN4Math3AbsEa'
-public	Abs_sint16		as	'_ZN4Math3AbsEs'
-public	Abs_sint32		as	'_ZN4Math3AbsEi'
-public	Abs_sint64		as	'_ZN4Math3AbsEx'
+public	Abs_sint8			as	'Math_Abs_sint8'
+public	Abs_sint16			as	'Math_Abs_sint16'
+public	Abs_sint32			as	'Math_Abs_sint32'
+public	Abs_sint64			as	'Math_Abs_sint64'
+public	Abs_sint8			as	'_ZN4Math3AbsEa'
+public	Abs_sint16			as	'_ZN4Math3AbsEs'
+public	Abs_sint32			as	'_ZN4Math3AbsEi'
+public	Abs_sint64			as	'_ZN4Math3AbsEx'
 
 ; Floating-point types
-public	Abs_flt32		as	'Math_Abs_flt32'
-public	Abs_flt64		as	'Math_Abs_flt64'
-public	Abs_flt32		as	'_ZN4Math3AbsEf'
-public	Abs_flt64		as	'_ZN4Math3AbsEd'
+public	Abs_flt32			as	'Math_Abs_flt32'
+public	Abs_flt64			as	'Math_Abs_flt64'
+public	Abs_flt32			as	'_ZN4Math3AbsEf'
+public	Abs_flt64			as	'_ZN4Math3AbsEd'
 
 ;******************************************************************************;
 ;       Negative absolute value                                                ;
 ;******************************************************************************;
 
 ; Signed integer types
-public	NegAbs_sint8	as	'Math_NegAbs_sint8'
-public	NegAbs_sint16	as	'Math_NegAbs_sint16'
-public	NegAbs_sint32	as	'Math_NegAbs_sint32'
-public	NegAbs_sint64	as	'Math_NegAbs_sint64'
-public	NegAbs_sint8	as	'_ZN4Math6NegAbsEa'
-public	NegAbs_sint16	as	'_ZN4Math6NegAbsEs'
-public	NegAbs_sint32	as	'_ZN4Math6NegAbsEi'
-public	NegAbs_sint64	as	'_ZN4Math6NegAbsEx'
+public	NegAbs_sint8		as	'Math_NegAbs_sint8'
+public	NegAbs_sint16		as	'Math_NegAbs_sint16'
+public	NegAbs_sint32		as	'Math_NegAbs_sint32'
+public	NegAbs_sint64		as	'Math_NegAbs_sint64'
+public	NegAbs_sint8		as	'_ZN4Math6NegAbsEa'
+public	NegAbs_sint16		as	'_ZN4Math6NegAbsEs'
+public	NegAbs_sint32		as	'_ZN4Math6NegAbsEi'
+public	NegAbs_sint64		as	'_ZN4Math6NegAbsEx'
 
 ; Floating-point types
-public	NegAbs_flt32	as	'Math_NegAbs_flt32'
-public	NegAbs_flt64	as	'Math_NegAbs_flt64'
-public	NegAbs_flt32	as	'_ZN4Math6NegAbsEf'
-public	NegAbs_flt64	as	'_ZN4Math6NegAbsEd'
+public	NegAbs_flt32		as	'Math_NegAbs_flt32'
+public	NegAbs_flt64		as	'Math_NegAbs_flt64'
+public	NegAbs_flt32		as	'_ZN4Math6NegAbsEf'
+public	NegAbs_flt64		as	'_ZN4Math6NegAbsEd'
 
 ;******************************************************************************;
 ;       Number sign                                                            ;
 ;******************************************************************************;
 
 ; Signed integer types
-public	Sign_sint8		as	'Math_Sign_sint8'
-public	Sign_sint16		as	'Math_Sign_sint16'
-public	Sign_sint32		as	'Math_Sign_sint32'
-public	Sign_sint64		as	'Math_Sign_sint64'
-public	Sign_sint8		as	'_ZN4Math4SignEa'
-public	Sign_sint16		as	'_ZN4Math4SignEs'
-public	Sign_sint32		as	'_ZN4Math4SignEi'
-public	Sign_sint64		as	'_ZN4Math4SignEx'
+public	Sign_sint8			as	'Math_Sign_sint8'
+public	Sign_sint16			as	'Math_Sign_sint16'
+public	Sign_sint32			as	'Math_Sign_sint32'
+public	Sign_sint64			as	'Math_Sign_sint64'
+public	Sign_sint8			as	'_ZN4Math4SignEa'
+public	Sign_sint16			as	'_ZN4Math4SignEs'
+public	Sign_sint32			as	'_ZN4Math4SignEi'
+public	Sign_sint64			as	'_ZN4Math4SignEx'
 
 ; Floating-point types
-public	Sign_flt32		as	'Math_Sign_flt32'
-public	Sign_flt64		as	'Math_Sign_flt64'
-public	Sign_flt32		as	'_ZN4Math4SignEf'
-public	Sign_flt64		as	'_ZN4Math4SignEd'
+public	Sign_flt32			as	'Math_Sign_flt32'
+public	Sign_flt64			as	'Math_Sign_flt64'
+public	Sign_flt32			as	'_ZN4Math4SignEf'
+public	Sign_flt64			as	'_ZN4Math4SignEd'
 
 ;******************************************************************************;
 ;       Square root                                                            ;
 ;******************************************************************************;
 
 ; Unsigned integer types
-public	Sqrt_uint8		as	'Math_Sqrt_uint8'
-public	Sqrt_uint16		as	'Math_Sqrt_uint16'
-public	Sqrt_uint32		as	'Math_Sqrt_uint32'
-public	Sqrt_uint64		as	'Math_Sqrt_uint64'
-public	Sqrt_uint8		as	'_ZN4Math4SqrtEh'
-public	Sqrt_uint16		as	'_ZN4Math4SqrtEt'
-public	Sqrt_uint32		as	'_ZN4Math4SqrtEj'
-public	Sqrt_uint64		as	'_ZN4Math4SqrtEy'
+public	Sqrt_uint8			as	'Math_Sqrt_uint8'
+public	Sqrt_uint16			as	'Math_Sqrt_uint16'
+public	Sqrt_uint32			as	'Math_Sqrt_uint32'
+public	Sqrt_uint64			as	'Math_Sqrt_uint64'
+public	Sqrt_uint8			as	'_ZN4Math4SqrtEh'
+public	Sqrt_uint16			as	'_ZN4Math4SqrtEt'
+public	Sqrt_uint32			as	'_ZN4Math4SqrtEj'
+public	Sqrt_uint64			as	'_ZN4Math4SqrtEy'
 
 ; Floating-point types
-public	Sqrt_flt32		as	'Math_Sqrt_flt32'
-public	Sqrt_flt64		as	'Math_Sqrt_flt64'
-public	Sqrt_flt32		as	'_ZN4Math4SqrtEf'
-public	Sqrt_flt64		as	'_ZN4Math4SqrtEd'
+public	Sqrt_flt32			as	'Math_Sqrt_flt32'
+public	Sqrt_flt64			as	'Math_Sqrt_flt64'
+public	Sqrt_flt32			as	'_ZN4Math4SqrtEf'
+public	Sqrt_flt64			as	'_ZN4Math4SqrtEd'
 
 ;******************************************************************************;
 ;       Trigonometric functions                                                ;
 ;******************************************************************************;
 
 ; Hypotenuse
-public	Hypot_flt32		as	'Math_Hypot_flt32'
-public	Hypot_flt64		as	'Math_Hypot_flt64'
-public	Hypot_flt32		as	'_ZN4Math5HypotEff'
-public	Hypot_flt64		as	'_ZN4Math5HypotEdd'
+public	Hypot_flt32			as	'Math_Hypot_flt32'
+public	Hypot_flt64			as	'Math_Hypot_flt64'
+public	Hypot_flt32			as	'_ZN4Math5HypotEff'
+public	Hypot_flt64			as	'_ZN4Math5HypotEdd'
 
 ; Cathetus
-public	Cath_flt32		as	'Math_Cath_flt32'
-public	Cath_flt64		as	'Math_Cath_flt64'
-public	Cath_flt32		as	'_ZN4Math4CathEff'
-public	Cath_flt64		as	'_ZN4Math4CathEdd'
+public	Cath_flt32			as	'Math_Cath_flt32'
+public	Cath_flt64			as	'Math_Cath_flt64'
+public	Cath_flt32			as	'_ZN4Math4CathEff'
+public	Cath_flt64			as	'_ZN4Math4CathEdd'
 
 ; Sine
-public	Sin_flt32		as	'Math_SinQ_flt32'
-public	Sin_flt64		as	'Math_SinQ_flt64'
-public	Sin_flt32		as	'_ZN4Math4SinQEfx'
-public	Sin_flt64		as	'_ZN4Math4SinQEdx'
+public	Sin_flt32			as	'Math_SinQ_flt32'
+public	Sin_flt64			as	'Math_SinQ_flt64'
+public	Sin_flt32			as	'_ZN4Math4SinQEfx'
+public	Sin_flt64			as	'_ZN4Math4SinQEdx'
 
 ; Cosine
-public	Cos_flt32		as	'Math_CosQ_flt32'
-public	Cos_flt64		as	'Math_CosQ_flt64'
-public	Cos_flt32		as	'_ZN4Math4CosQEfx'
-public	Cos_flt64		as	'_ZN4Math4CosQEdx'
+public	Cos_flt32			as	'Math_CosQ_flt32'
+public	Cos_flt64			as	'Math_CosQ_flt64'
+public	Cos_flt32			as	'_ZN4Math4CosQEfx'
+public	Cos_flt64			as	'_ZN4Math4CosQEdx'
 
 ; Tangent
-public	Tan_flt32		as	'Math_TanQ_flt32'
-public	Tan_flt64		as	'Math_TanQ_flt64'
-public	Tan_flt32		as	'_ZN4Math4TanQEfx'
-public	Tan_flt64		as	'_ZN4Math4TanQEdx'
+public	Tan_flt32			as	'Math_TanQ_flt32'
+public	Tan_flt64			as	'Math_TanQ_flt64'
+public	Tan_flt32			as	'_ZN4Math4TanQEfx'
+public	Tan_flt64			as	'_ZN4Math4TanQEdx'
 
 ; Cotangent
-public	Cot_flt32		as	'Math_CotQ_flt32'
-public	Cot_flt64		as	'Math_CotQ_flt64'
-public	Cot_flt32		as	'_ZN4Math4CotQEfx'
-public	Cot_flt64		as	'_ZN4Math4CotQEdx'
+public	Cot_flt32			as	'Math_CotQ_flt32'
+public	Cot_flt64			as	'Math_CotQ_flt64'
+public	Cot_flt32			as	'_ZN4Math4CotQEfx'
+public	Cot_flt64			as	'_ZN4Math4CotQEdx'
 
 ; Sine and cosine
-public	SinCos_flt32	as	'Math_SinCosQ_flt32'
-public	SinCos_flt64	as	'Math_SinCosQ_flt64'
-public	SinCos_flt32	as	'_ZN4Math7SinCosQEPfS0_fx'
-public	SinCos_flt64	as	'_ZN4Math7SinCosQEPdS0_dx'
+public	SinCos_flt32		as	'Math_SinCosQ_flt32'
+public	SinCos_flt64		as	'Math_SinCosQ_flt64'
+public	SinCos_flt32		as	'_ZN4Math7SinCosQEPfS0_fx'
+public	SinCos_flt64		as	'_ZN4Math7SinCosQEPdS0_dx'
 
 ;******************************************************************************;
 ;       Minimum value                                                          ;
 ;******************************************************************************;
 
 ; Unsigned integer types
-public	Min_uint8		as	'Math_Min_uint8'
-public	Min_uint16		as	'Math_Min_uint16'
-public	Min_uint32		as	'Math_Min_uint32'
-public	Min_uint64		as	'Math_Min_uint64'
-public	Min_uint8		as	'_ZN4Math3MinEhh'
-public	Min_uint16		as	'_ZN4Math3MinEtt'
-public	Min_uint32		as	'_ZN4Math3MinEjj'
-public	Min_uint64		as	'_ZN4Math3MinEyy'
+public	Min_uint8			as	'Math_Min_uint8'
+public	Min_uint16			as	'Math_Min_uint16'
+public	Min_uint32			as	'Math_Min_uint32'
+public	Min_uint64			as	'Math_Min_uint64'
+public	Min_uint8			as	'_ZN4Math3MinEhh'
+public	Min_uint16			as	'_ZN4Math3MinEtt'
+public	Min_uint32			as	'_ZN4Math3MinEjj'
+public	Min_uint64			as	'_ZN4Math3MinEyy'
 
 ; Signed integer types
-public	Min_sint8		as	'Math_Min_sint8'
-public	Min_sint16		as	'Math_Min_sint16'
-public	Min_sint32		as	'Math_Min_sint32'
-public	Min_sint64		as	'Math_Min_sint64'
-public	Min_sint8		as	'_ZN4Math3MinEaa'
-public	Min_sint16		as	'_ZN4Math3MinEss'
-public	Min_sint32		as	'_ZN4Math3MinEii'
-public	Min_sint64		as	'_ZN4Math3MinExx'
+public	Min_sint8			as	'Math_Min_sint8'
+public	Min_sint16			as	'Math_Min_sint16'
+public	Min_sint32			as	'Math_Min_sint32'
+public	Min_sint64			as	'Math_Min_sint64'
+public	Min_sint8			as	'_ZN4Math3MinEaa'
+public	Min_sint16			as	'_ZN4Math3MinEss'
+public	Min_sint32			as	'_ZN4Math3MinEii'
+public	Min_sint64			as	'_ZN4Math3MinExx'
 
 ; Floating-point types
-public	Min_flt32		as	'Math_Min_flt32'
-public	Min_flt64		as	'Math_Min_flt64'
-public	Min_flt32		as	'_ZN4Math3MinEff'
-public	Min_flt64		as	'_ZN4Math3MinEdd'
+public	Min_flt32			as	'Math_Min_flt32'
+public	Min_flt64			as	'Math_Min_flt64'
+public	Min_flt32			as	'_ZN4Math3MinEff'
+public	Min_flt64			as	'_ZN4Math3MinEdd'
 
 ; Other types
-public	Min_uint64		as	'Math_Min_size'
-public	Min_uint64		as	'_ZN4Math3MinEmm'
+public	Min_uint64			as	'Math_Min_size'
+public	Min_uint64			as	'_ZN4Math3MinEmm'
 
 ;******************************************************************************;
 ;       Maximum value                                                          ;
 ;******************************************************************************;
 
 ; Unsigned integer types
-public	Max_uint8		as	'Math_Max_uint8'
-public	Max_uint16		as	'Math_Max_uint16'
-public	Max_uint32		as	'Math_Max_uint32'
-public	Max_uint64		as	'Math_Max_uint64'
-public	Max_uint8		as	'_ZN4Math3MaxEhh'
-public	Max_uint16		as	'_ZN4Math3MaxEtt'
-public	Max_uint32		as	'_ZN4Math3MaxEjj'
-public	Max_uint64		as	'_ZN4Math3MaxEyy'
+public	Max_uint8			as	'Math_Max_uint8'
+public	Max_uint16			as	'Math_Max_uint16'
+public	Max_uint32			as	'Math_Max_uint32'
+public	Max_uint64			as	'Math_Max_uint64'
+public	Max_uint8			as	'_ZN4Math3MaxEhh'
+public	Max_uint16			as	'_ZN4Math3MaxEtt'
+public	Max_uint32			as	'_ZN4Math3MaxEjj'
+public	Max_uint64			as	'_ZN4Math3MaxEyy'
 
 ; Signed integer types
-public	Max_sint8		as	'Math_Max_sint8'
-public	Max_sint16		as	'Math_Max_sint16'
-public	Max_sint32		as	'Math_Max_sint32'
-public	Max_sint64		as	'Math_Max_sint64'
-public	Max_sint8		as	'_ZN4Math3MaxEaa'
-public	Max_sint16		as	'_ZN4Math3MaxEss'
-public	Max_sint32		as	'_ZN4Math3MaxEii'
-public	Max_sint64		as	'_ZN4Math3MaxExx'
+public	Max_sint8			as	'Math_Max_sint8'
+public	Max_sint16			as	'Math_Max_sint16'
+public	Max_sint32			as	'Math_Max_sint32'
+public	Max_sint64			as	'Math_Max_sint64'
+public	Max_sint8			as	'_ZN4Math3MaxEaa'
+public	Max_sint16			as	'_ZN4Math3MaxEss'
+public	Max_sint32			as	'_ZN4Math3MaxEii'
+public	Max_sint64			as	'_ZN4Math3MaxExx'
 
 ; Floating-point types
-public	Max_flt32		as	'Math_Max_flt32'
-public	Max_flt64		as	'Math_Max_flt64'
-public	Max_flt32		as	'_ZN4Math3MaxEff'
-public	Max_flt64		as	'_ZN4Math3MaxEdd'
+public	Max_flt32			as	'Math_Max_flt32'
+public	Max_flt64			as	'Math_Max_flt64'
+public	Max_flt32			as	'_ZN4Math3MaxEff'
+public	Max_flt64			as	'_ZN4Math3MaxEdd'
 
 ; Other types
-public	Max_uint64		as	'Math_Max_size'
-public	Max_uint64		as	'_ZN4Math3MaxEmm'
+public	Max_uint64			as	'Math_Max_size'
+public	Max_uint64			as	'_ZN4Math3MaxEmm'
 
 ;******************************************************************************;
 ;       Greatest common divisor                                                ;
 ;******************************************************************************;
 
 ; Unsigned integer types
-public	GCD_uint8		as	'Math_GCD_uint8'
-public	GCD_uint16		as	'Math_GCD_uint16'
-public	GCD_uint32		as	'Math_GCD_uint32'
-public	GCD_uint64		as	'Math_GCD_uint64'
-public	GCD_uint8		as	'_ZN4Math3GCDEhh'
-public	GCD_uint16		as	'_ZN4Math3GCDEtt'
-public	GCD_uint32		as	'_ZN4Math3GCDEjj'
-public	GCD_uint64		as	'_ZN4Math3GCDEyy'
+public	GCD_uint8			as	'Math_GCD_uint8'
+public	GCD_uint16			as	'Math_GCD_uint16'
+public	GCD_uint32			as	'Math_GCD_uint32'
+public	GCD_uint64			as	'Math_GCD_uint64'
+public	GCD_uint8			as	'_ZN4Math3GCDEhh'
+public	GCD_uint16			as	'_ZN4Math3GCDEtt'
+public	GCD_uint32			as	'_ZN4Math3GCDEjj'
+public	GCD_uint64			as	'_ZN4Math3GCDEyy'
 
 ; Signed integer types
-public	GCD_sint8		as	'Math_GCD_sint8'
-public	GCD_sint16		as	'Math_GCD_sint16'
-public	GCD_sint32		as	'Math_GCD_sint32'
-public	GCD_sint64		as	'Math_GCD_sint64'
-public	GCD_uint8		as	'_ZN4Math3GCDEaa'
-public	GCD_uint16		as	'_ZN4Math3GCDEss'
-public	GCD_uint32		as	'_ZN4Math3GCDEii'
-public	GCD_uint64		as	'_ZN4Math3GCDExx'
+public	GCD_sint8			as	'Math_GCD_sint8'
+public	GCD_sint16			as	'Math_GCD_sint16'
+public	GCD_sint32			as	'Math_GCD_sint32'
+public	GCD_sint64			as	'Math_GCD_sint64'
+public	GCD_uint8			as	'_ZN4Math3GCDEaa'
+public	GCD_uint16			as	'_ZN4Math3GCDEss'
+public	GCD_uint32			as	'_ZN4Math3GCDEii'
+public	GCD_uint64			as	'_ZN4Math3GCDExx'
 
 ;******************************************************************************;
 ;       Least common multiple                                                  ;
 ;******************************************************************************;
 
 ; Unsigned integer types
-public	LCM_uint8		as	'Math_LCM_uint8'
-public	LCM_uint16		as	'Math_LCM_uint16'
-public	LCM_uint32		as	'Math_LCM_uint32'
-public	LCM_uint64		as	'Math_LCM_uint64'
-public	LCM_uint8		as	'_ZN4Math3LCMEhh'
-public	LCM_uint16		as	'_ZN4Math3LCMEtt'
-public	LCM_uint32		as	'_ZN4Math3LCMEjj'
-public	LCM_uint64		as	'_ZN4Math3LCMEyy'
+public	LCM_uint8			as	'Math_LCM_uint8'
+public	LCM_uint16			as	'Math_LCM_uint16'
+public	LCM_uint32			as	'Math_LCM_uint32'
+public	LCM_uint64			as	'Math_LCM_uint64'
+public	LCM_uint8			as	'_ZN4Math3LCMEhh'
+public	LCM_uint16			as	'_ZN4Math3LCMEtt'
+public	LCM_uint32			as	'_ZN4Math3LCMEjj'
+public	LCM_uint64			as	'_ZN4Math3LCMEyy'
 
 ; Signed integer types
-public	LCM_sint8		as	'Math_LCM_sint8'
-public	LCM_sint16		as	'Math_LCM_sint16'
-public	LCM_sint32		as	'Math_LCM_sint32'
-public	LCM_sint64		as	'Math_LCM_sint64'
-public	LCM_uint8		as	'_ZN4Math3LCMEaa'
-public	LCM_uint16		as	'_ZN4Math3LCMEss'
-public	LCM_uint32		as	'_ZN4Math3LCMEii'
-public	LCM_uint64		as	'_ZN4Math3LCMExx'
+public	LCM_sint8			as	'Math_LCM_sint8'
+public	LCM_sint16			as	'Math_LCM_sint16'
+public	LCM_sint32			as	'Math_LCM_sint32'
+public	LCM_sint64			as	'Math_LCM_sint64'
+public	LCM_uint8			as	'_ZN4Math3LCMEaa'
+public	LCM_uint16			as	'_ZN4Math3LCMEss'
+public	LCM_uint32			as	'_ZN4Math3LCMEii'
+public	LCM_uint64			as	'_ZN4Math3LCMExx'
 
 ;******************************************************************************;
 ;       Exponentiation functions                                               ;
@@ -283,166 +284,190 @@ public	LCM_uint64		as	'_ZN4Math3LCMExx'
 ;==============================================================================;
 
 ; Integer power of 2
-public	Exp2_int		as	'Math_Exp2_uint64'
-public	Exp2i_flt32		as	'Math_Exp2i_flt32'
-public	Exp2i_flt64		as	'Math_Exp2i_flt64'
-public	Exp2_int		as	'_ZN4Math4Exp2Eh'
-public	Exp2i_flt32		as	'_ZN4Math4Exp2Ea'
-public	Exp2i_flt64		as	'_ZN4Math4Exp2Es'
+public	Exp2_int			as	'Math_Exp2_uint64'
+public	Exp2i_flt32			as	'Math_Exp2i_flt32'
+public	Exp2i_flt64			as	'Math_Exp2i_flt64'
+public	Exp2_int			as	'_ZN4Math4Exp2Eh'
+public	Exp2i_flt32			as	'_ZN4Math4Exp2Ea'
+public	Exp2i_flt64			as	'_ZN4Math4Exp2Es'
 
 ; Real power of 2
-public	Exp2_flt32		as	'Math_Exp2_flt32'
-public	Exp2_flt64		as	'Math_Exp2_flt64'
-public	Exp2m1_flt32	as	'Math_Exp2m1_flt32'
-public	Exp2m1_flt64	as	'Math_Exp2m1_flt64'
-public	Exp2_flt32		as	'_ZN4Math4Exp2Ef'
-public	Exp2_flt64		as	'_ZN4Math4Exp2Ed'
-public	Exp2m1_flt32	as	'_ZN4Math6Exp2m1Ef'
-public	Exp2m1_flt64	as	'_ZN4Math6Exp2m1Ed'
+public	Exp2_flt32			as	'Math_Exp2_flt32'
+public	Exp2_flt64			as	'Math_Exp2_flt64'
+public	Exp2m1_flt32		as	'Math_Exp2m1_flt32'
+public	Exp2m1_flt64		as	'Math_Exp2m1_flt64'
+public	Exp2_flt32			as	'_ZN4Math4Exp2Ef'
+public	Exp2_flt64			as	'_ZN4Math4Exp2Ed'
+public	Exp2m1_flt32		as	'_ZN4Math6Exp2m1Ef'
+public	Exp2m1_flt64		as	'_ZN4Math6Exp2m1Ed'
 
 ;==============================================================================;
 ;       Power of 10                                                            ;
 ;==============================================================================;
 
 ; Integer power of 10
-public	Exp10_int		as	'Math_Exp10_uint64'
-public	Exp10i_flt32	as	'Math_Exp10i_flt32'
-public	Exp10i_flt64	as	'Math_Exp10i_flt64'
-public	Exp10_int		as	'_ZN4Math5Exp10Eh'
-public	Exp10i_flt32	as	'_ZN4Math5Exp10Ea'
-public	Exp10i_flt64	as	'_ZN4Math5Exp10Es'
+public	Exp10_int			as	'Math_Exp10_uint64'
+public	Exp10i_flt32		as	'Math_Exp10i_flt32'
+public	Exp10i_flt64		as	'Math_Exp10i_flt64'
+public	Exp10_int			as	'_ZN4Math5Exp10Eh'
+public	Exp10i_flt32		as	'_ZN4Math5Exp10Ea'
+public	Exp10i_flt64		as	'_ZN4Math5Exp10Es'
 
 ; Real power of 10
-public	Exp10_flt32		as	'Math_Exp10_flt32'
-public	Exp10_flt64		as	'Math_Exp10_flt64'
-public	Exp10m1_flt32	as	'Math_Exp10m1_flt32'
-public	Exp10m1_flt64	as	'Math_Exp10m1_flt64'
-public	Exp10_flt32		as	'_ZN4Math5Exp10Ef'
-public	Exp10_flt64		as	'_ZN4Math5Exp10Ed'
-public	Exp10m1_flt32	as	'_ZN4Math7Exp10m1Ef'
-public	Exp10m1_flt64	as	'_ZN4Math7Exp10m1Ed'
+public	Exp10_flt32			as	'Math_Exp10_flt32'
+public	Exp10_flt64			as	'Math_Exp10_flt64'
+public	Exp10m1_flt32		as	'Math_Exp10m1_flt32'
+public	Exp10m1_flt64		as	'Math_Exp10m1_flt64'
+public	Exp10_flt32			as	'_ZN4Math5Exp10Ef'
+public	Exp10_flt64			as	'_ZN4Math5Exp10Ed'
+public	Exp10m1_flt32		as	'_ZN4Math7Exp10m1Ef'
+public	Exp10m1_flt64		as	'_ZN4Math7Exp10m1Ed'
 
 ;==============================================================================;
 ;       Power of E                                                             ;
 ;==============================================================================;
 
 ; Integer power of E
-public	ExpEi_flt32		as	'Math_Expi_flt32'
-public	ExpEi_flt64		as	'Math_Expi_flt64'
-public	ExpEi_flt32		as	'_ZN4Math3ExpEa'
-public	ExpEi_flt64		as	'_ZN4Math3ExpEs'
+public	ExpEi_flt32			as	'Math_Expi_flt32'
+public	ExpEi_flt64			as	'Math_Expi_flt64'
+public	ExpEi_flt32			as	'_ZN4Math3ExpEa'
+public	ExpEi_flt64			as	'_ZN4Math3ExpEs'
 
 ; Real power of E
-public	ExpE_flt32		as	'Math_Exp_flt32'
-public	ExpE_flt64		as	'Math_Exp_flt64'
-public	ExpEm1_flt32	as	'Math_Expm1_flt32'
-public	ExpEm1_flt64	as	'Math_Expm1_flt64'
-public	ExpE_flt32		as	'_ZN4Math3ExpEf'
-public	ExpE_flt64		as	'_ZN4Math3ExpEd'
-public	ExpEm1_flt32	as	'_ZN4Math5Expm1Ef'
-public	ExpEm1_flt64	as	'_ZN4Math5Expm1Ed'
+public	ExpE_flt32			as	'Math_Exp_flt32'
+public	ExpE_flt64			as	'Math_Exp_flt64'
+public	ExpEm1_flt32		as	'Math_Expm1_flt32'
+public	ExpEm1_flt64		as	'Math_Expm1_flt64'
+public	ExpE_flt32			as	'_ZN4Math3ExpEf'
+public	ExpE_flt64			as	'_ZN4Math3ExpEd'
+public	ExpEm1_flt32		as	'_ZN4Math5Expm1Ef'
+public	ExpEm1_flt64		as	'_ZN4Math5Expm1Ed'
 
 ;******************************************************************************;
 ;       Scale functions                                                        ;
 ;******************************************************************************;
 
 ; Scale by power of 2
-public	Scale2_flt32	as	'Math_Scale2_flt32'
-public	Scale2_flt64	as	'Math_Scale2_flt64'
-public	Scale2_flt32	as	'_ZN4Math6Scale2Efs'
-public	Scale2_flt64	as	'_ZN4Math6Scale2Eds'
+public	Scale2_flt32		as	'Math_Scale2_flt32'
+public	Scale2_flt64		as	'Math_Scale2_flt64'
+public	Scale2_flt32		as	'_ZN4Math6Scale2Efs'
+public	Scale2_flt64		as	'_ZN4Math6Scale2Eds'
 
 ; Scale by power of 10
-public	Scale10_flt32	as	'Math_Scale10_flt32'
-public	Scale10_flt64	as	'Math_Scale10_flt64'
-public	Scale10_flt32	as	'_ZN4Math7Scale10Efs'
-public	Scale10_flt64	as	'_ZN4Math7Scale10Eds'
+public	Scale10_flt32		as	'Math_Scale10_flt32'
+public	Scale10_flt64		as	'Math_Scale10_flt64'
+public	Scale10_flt32		as	'_ZN4Math7Scale10Efs'
+public	Scale10_flt64		as	'_ZN4Math7Scale10Eds'
 
 ; Scale by power of E
-public	ScaleE_flt32	as	'Math_Scale_flt32'
-public	ScaleE_flt64	as	'Math_Scale_flt64'
-public	ScaleE_flt32	as	'_ZN4Math5ScaleEfs'
-public	ScaleE_flt64	as	'_ZN4Math5ScaleEds'
+public	ScaleE_flt32		as	'Math_Scale_flt32'
+public	ScaleE_flt64		as	'Math_Scale_flt64'
+public	ScaleE_flt32		as	'_ZN4Math5ScaleEfs'
+public	ScaleE_flt64		as	'_ZN4Math5ScaleEds'
 
 ;******************************************************************************;
 ;       Power                                                                  ;
 ;******************************************************************************;
 
 ; Unsigned integer types
-public	Power_uint8		as	'Math_Power_uint8'
-public	Power_uint16	as	'Math_Power_uint16'
-public	Power_uint32	as	'Math_Power_uint32'
-public	Power_uint64	as	'Math_Power_uint64'
-public	Power_uint8		as	'_ZN4Math5PowerEhh'
-public	Power_uint16	as	'_ZN4Math5PowerEth'
-public	Power_uint32	as	'_ZN4Math5PowerEjh'
-public	Power_uint64	as	'_ZN4Math5PowerEyh'
+public	Power_uint8			as	'Math_Power_uint8'
+public	Power_uint16		as	'Math_Power_uint16'
+public	Power_uint32		as	'Math_Power_uint32'
+public	Power_uint64		as	'Math_Power_uint64'
+public	Power_uint8			as	'_ZN4Math5PowerEhh'
+public	Power_uint16		as	'_ZN4Math5PowerEth'
+public	Power_uint32		as	'_ZN4Math5PowerEjh'
+public	Power_uint64		as	'_ZN4Math5PowerEyh'
 
 ; Signed integer types
-public	Power_sint8		as	'Math_Power_sint8'
-public	Power_sint16	as	'Math_Power_sint16'
-public	Power_sint32	as	'Math_Power_sint32'
-public	Power_sint64	as	'Math_Power_sint64'
-public	Power_sint8		as	'_ZN4Math5PowerEah'
-public	Power_sint16	as	'_ZN4Math5PowerEsh'
-public	Power_sint32	as	'_ZN4Math5PowerEih'
-public	Power_sint64	as	'_ZN4Math5PowerExh'
+public	Power_sint8			as	'Math_Power_sint8'
+public	Power_sint16		as	'Math_Power_sint16'
+public	Power_sint32		as	'Math_Power_sint32'
+public	Power_sint64		as	'Math_Power_sint64'
+public	Power_sint8			as	'_ZN4Math5PowerEah'
+public	Power_sint16		as	'_ZN4Math5PowerEsh'
+public	Power_sint32		as	'_ZN4Math5PowerEih'
+public	Power_sint64		as	'_ZN4Math5PowerExh'
 
 ; Floating-point types
-public	Power_flt32		as	'Math_Poweri_flt32'
-public	Power_flt64		as	'Math_Poweri_flt64'
-public	Power_flt32		as	'_ZN4Math5PowerEfa'
-public	Power_flt64		as	'_ZN4Math5PowerEds'
+public	Power_flt32			as	'Math_Poweri_flt32'
+public	Power_flt64			as	'Math_Poweri_flt64'
+public	Power_flt32			as	'_ZN4Math5PowerEfa'
+public	Power_flt64			as	'_ZN4Math5PowerEds'
 
 ;******************************************************************************;
 ;       Rounding                                                               ;
 ;******************************************************************************;
 
-; Round to nearest integer
-public	RoundInt_flt32	as	'Math_RoundInt_flt32'
-public	RoundInt_flt64	as	'Math_RoundInt_flt64'
-public	RoundInt_flt32	as	'_ZN4Math8RoundIntEf'
-public	RoundInt_flt64	as	'_ZN4Math8RoundIntEd'
+; Round down (floor)
+public	RoundDown_flt32		as	'Math_RoundDown_flt32'
+public	RoundDown_flt64		as	'Math_RoundDown_flt64'
+public	RoundDown_flt32		as	'_ZN4Math9RoundDownEf'
+public	RoundDown_flt64		as	'_ZN4Math9RoundDownEd'
+
+; Round up (ceil)
+public	RoundUp_flt32		as	'Math_RoundUp_flt32'
+public	RoundUp_flt64		as	'Math_RoundUp_flt64'
+public	RoundUp_flt32		as	'_ZN4Math7RoundUpEf'
+public	RoundUp_flt64		as	'_ZN4Math7RoundUpEd'
+
+; Round to nearest even integer
+public	RoundInt_flt32		as	'Math_RoundInt_flt32'
+public	RoundInt_flt64		as	'Math_RoundInt_flt64'
+public	RoundInt_flt32		as	'_ZN4Math8RoundIntEf'
+public	RoundInt_flt64		as	'_ZN4Math8RoundIntEd'
+
+; Round to nearest integer, away from zero
+public	RoundRound_flt32	as	'Math_Round_flt32'
+public	RoundRound_flt64	as	'Math_Round_flt64'
+public	RoundRound_flt32	as	'_ZN4Math5RoundEf'
+public	RoundRound_flt64	as	'_ZN4Math5RoundEd'
 
 ; Round to nearest integer, toward zero (truncation)
-public	Truncate_flt32	as	'Math_Truncate_flt32'
-public	Truncate_flt64	as	'Math_Truncate_flt64'
-public	Truncate_flt32	as	'_ZN4Math8TruncateEf'
-public	Truncate_flt64	as	'_ZN4Math8TruncateEd'
+public	RoundTrunc_flt32	as	'Math_Truncate_flt32'
+public	RoundTrunc_flt64	as	'Math_Truncate_flt64'
+public	RoundTrunc_flt32	as	'_ZN4Math8TruncateEf'
+public	RoundTrunc_flt64	as	'_ZN4Math8TruncateEd'
+
+; Fractional part
+public	RoundFrac_flt32		as	'Math_Frac_flt32'
+public	RoundFrac_flt64		as	'Math_Frac_flt64'
+public	RoundFrac_flt32		as	'_ZN4Math4FracEf'
+public	RoundFrac_flt64		as	'_ZN4Math4FracEd'
 
 ;******************************************************************************;
 ;       Checks                                                                 ;
 ;******************************************************************************;
 
 ; Check for normal value
-public	IsNorm_flt32	as	'Math_IsNormal_flt32'
-public	IsNorm_flt64	as	'Math_IsNormal_flt64'
-public	IsNorm_flt32	as	'_ZN4Math8IsNormalEf'
-public	IsNorm_flt64	as	'_ZN4Math8IsNormalEd'
+public	IsNorm_flt32		as	'Math_IsNormal_flt32'
+public	IsNorm_flt64		as	'Math_IsNormal_flt64'
+public	IsNorm_flt32		as	'_ZN4Math8IsNormalEf'
+public	IsNorm_flt64		as	'_ZN4Math8IsNormalEd'
 
 ; Check for subnormal value
-public	IsSub_flt32		as	'Math_IsSubnormal_flt32'
-public	IsSub_flt64		as	'Math_IsSubnormal_flt64'
-public	IsSub_flt32		as	'_ZN4Math11IsSubnormalEf'
-public	IsSub_flt64		as	'_ZN4Math11IsSubnormalEd'
+public	IsSub_flt32			as	'Math_IsSubnormal_flt32'
+public	IsSub_flt64			as	'Math_IsSubnormal_flt64'
+public	IsSub_flt32			as	'_ZN4Math11IsSubnormalEf'
+public	IsSub_flt64			as	'_ZN4Math11IsSubnormalEd'
 
 ; Check for finite value
-public	IsFin_flt32		as	'Math_IsFinite_flt32'
-public	IsFin_flt64		as	'Math_IsFinite_flt64'
-public	IsFin_flt32		as	'_ZN4Math8IsFiniteEf'
-public	IsFin_flt64		as	'_ZN4Math8IsFiniteEd'
+public	IsFin_flt32			as	'Math_IsFinite_flt32'
+public	IsFin_flt64			as	'Math_IsFinite_flt64'
+public	IsFin_flt32			as	'_ZN4Math8IsFiniteEf'
+public	IsFin_flt64			as	'_ZN4Math8IsFiniteEd'
 
 ; Check for infinite value
-public	IsInf_flt32		as	'Math_IsInfinite_flt32'
-public	IsInf_flt64		as	'Math_IsInfinite_flt64'
-public	IsInf_flt32		as	'_ZN4Math10IsInfiniteEf'
-public	IsInf_flt64		as	'_ZN4Math10IsInfiniteEd'
+public	IsInf_flt32			as	'Math_IsInfinite_flt32'
+public	IsInf_flt64			as	'Math_IsInfinite_flt64'
+public	IsInf_flt32			as	'_ZN4Math10IsInfiniteEf'
+public	IsInf_flt64			as	'_ZN4Math10IsInfiniteEd'
 
 ; Check for NaN value
-public	IsNaN_flt32		as	'Math_IsNaN_flt32'
-public	IsNaN_flt64		as	'Math_IsNaN_flt64'
-public	IsNaN_flt32		as	'_ZN4Math5IsNaNEf'
-public	IsNaN_flt64		as	'_ZN4Math5IsNaNEd'
+public	IsNaN_flt32			as	'Math_IsNaN_flt32'
+public	IsNaN_flt64			as	'Math_IsNaN_flt64'
+public	IsNaN_flt32			as	'_ZN4Math5IsNaNEf'
+public	IsNaN_flt64			as	'_ZN4Math5IsNaNEd'
 
 ;###############################################################################
 ;#      Code section                                                           #
@@ -452,12 +477,10 @@ section	'.text'		executable align 16
 ;******************************************************************************;
 ;       Consts                                                                 ;
 ;******************************************************************************;
+CLINE		= 64							; Size of cache line
 NOT_FOUND	= -1							; Pattern is not found
 
 ; flt32_t
-DMASK_FLT32	= 0x7FFFFFFF					; data mask and NaN value
-SMASK_FLT32	= 0x80000000					; sign mask
-HALF_FLT32	= 0x3F000000					; 0.5
 ONE_FLT32	= 0x3F800000					; 1.0
 TWO_FLT32	= 0x40000000					; 2.0
 MONE_FLT32	= 0xBF800000					; -1.0
@@ -468,9 +491,6 @@ PI4_FLT32	= 0x3F490FDB					; PI / 4
 MAGIC_FLT32	= 0x4B400000					; magic number for flt32_t to int conversion
 
 ; flt64_t
-DMASK_FLT64	= 0x7FFFFFFFFFFFFFFF			; data mask and NaN value
-SMASK_FLT64	= 0x8000000000000000			; sign mask
-HALF_FLT64	= 0x3FE0000000000000			; 0.5
 ONE_FLT64	= 0x3FF0000000000000			; 1.0
 TWO_FLT64	= 0x4000000000000000			; 2.0
 MONE_FLT64	= 0xBFF0000000000000			; -1.0
@@ -504,7 +524,7 @@ macro	initreg	reg, treg, value, x
 		mov		treg, value
 if x eq s
 		movd	reg, treg					; reg = value
-else
+else if x eq d
 		movq	reg, treg					; reg = value
 end if
 }
@@ -554,7 +574,7 @@ mask	equ		xmm1						; data mask to get absolute value
 if x eq s
 dmask	= DMASK_FLT32						; data mask
 smask	= SMASK_FLT32						; sign mask
-else
+else if x eq d
 dmask	= DMASK_FLT64						; data mask
 smask	= SMASK_FLT64						; sign mask
 end if
@@ -624,7 +644,7 @@ zero	equ		xmm3						; 0.0
 if x eq s
 smask	= SMASK_FLT32						; sign mask
 oneval	= 0x3F800000						; 1.0
-else
+else if x eq d
 smask	= SMASK_FLT64						; sign mask
 oneval	= 0x3FF0000000000000				; 1.0
 end if
@@ -710,7 +730,7 @@ dmask	= DMASK_FLT32						; data mask
 const1	= 0x5F800000						; 2^64
 const2	= 0x1F800000						; 2^-64
 const3	= 0x20000000						; 2^-63
-else
+else if x eq d
 dmask	= DMASK_FLT64						; data mask
 const1	= 0x5FF0000000000000				; 2^512
 const2	= 0x1FF0000000000000				; 2^-512
@@ -773,16 +793,17 @@ macro	SIN32
 array	= sin_flt32							; pointer to array of coefficients
 bytes	= 4									; size of array element (bytes)
 ;------------------------------------------
+	prefetchnta	[array]						; prefetch data
 		movaps	scale, angle				; scale = angle
 		mulss	angle, angle				; angle *= angle
 		movaps	origin, angle				; origin = angle ^ 2
 ;---[Stage 1]------------------------------
 		movss	temp1, [array + 0 * bytes]	; temp1 = array[0]
-		movss	temp2, [array + 2 * bytes]	; temp2 = array[2]
+		movss	temp2, [array + 1 * bytes]	; temp2 = array[1]
 		mulss	temp1, angle
-		addss	temp1, [array + 1 * bytes]	; temp1 = array[1] + array[0] * angle
+		addss	temp1, [array + 2 * bytes]	; temp1 = array[2] + array[0] * angle
 		mulss	temp2, angle
-		addss	temp2, [array + 3 * bytes]	; temp2 = array[3] + array[2] * angle
+		addss	temp2, [array + 3 * bytes]	; temp2 = array[3] + array[1] * angle
 		mulss	angle, angle				; angle *= angle
 ;---[Stage 2]------------------------------
 		mulss	angle, temp2
@@ -799,16 +820,17 @@ macro	COS32	treg
 array	= cos_flt32							; pointer to array of coefficients
 bytes	= 4									; size of array element (bytes)
 ;------------------------------------------
+	prefetchnta	[array]						; prefetch data
 		mulss	angle, angle				; angle *= angle
 		movaps	scale, angle				; scale = angle ^ 2
 		movaps	origin, angle				; origin = angle ^ 2
 ;---[Stage 1]------------------------------
 		movss	temp1, [array + 0 * bytes]	; temp1 = array[0]
-		movss	temp2, [array + 2 * bytes]	; temp2 = array[2]
+		movss	temp2, [array + 1 * bytes]	; temp2 = array[1]
 		mulss	temp1, angle
-		addss	temp1, [array + 1 * bytes]	; temp1 = array[1] + array[0] * angle
+		addss	temp1, [array + 2 * bytes]	; temp1 = array[2] + array[0] * angle
 		mulss	temp2, angle
-		addss	temp2, [array + 3 * bytes]	; temp2 = array[3] + array[2] * angle
+		addss	temp2, [array + 3 * bytes]	; temp2 = array[3] + array[1] * angle
 		mulss	angle, angle				; angle *= angle
 ;---[Stage 2]------------------------------
 		mulss	angle, temp2
@@ -830,23 +852,25 @@ array1	= cos_flt32							; pointer to array of cos coefficients
 array2	= sin_flt32							; pointer to array of sin coefficients
 bytes	= 4									; size of array element (bytes)
 ;------------------------------------------
+	prefetchnta	[array1]					; prefetch data
+	prefetchnta	[array2]					; prefetch data
 		movaps	hsin, angle					; hsin = angle
 		mulss	angle, angle				; angle *= angle
 		movaps	scale, angle				; scale = angle ^ 2
 		movaps	origin, angle				; origin = angle ^ 2
 ;---[Stage 1]------------------------------
 		movss	temp2, [array1 + 0 * bytes]	; temp2 = array1[0]
-		movss	temp4, [array1 + 2 * bytes]	; temp4 = array1[2]
+		movss	temp4, [array1 + 1 * bytes]	; temp4 = array1[1]
 		movss	temp3, [array2 + 0 * bytes]	; temp3 = array2[0]
-		movss	temp5, [array2 + 2 * bytes]	; temp5 = array2[2]
+		movss	temp5, [array2 + 1 * bytes]	; temp5 = array2[1]
 		mulss	temp2, angle
-		addss	temp2, [array1 + 1 * bytes]	; temp2 = array1[1] + array1[0] * angle
+		addss	temp2, [array1 + 2 * bytes]	; temp2 = array1[2] + array1[0] * angle
 		mulss	temp4, angle
-		addss	temp4, [array1 + 3 * bytes]	; temp4 = array1[3] + array1[2] * angle
+		addss	temp4, [array1 + 3 * bytes]	; temp4 = array1[3] + array1[1] * angle
 		mulss	temp3, angle
-		addss	temp3, [array2 + 1 * bytes]	; temp3 = array2[1] + array2[0] * angle
+		addss	temp3, [array2 + 2 * bytes]	; temp3 = array2[2] + array2[0] * angle
 		mulss	temp5, angle
-		addss	temp5, [array2 + 3 * bytes]	; temp5 = array2[3] + array2[2] * angle
+		addss	temp5, [array2 + 3 * bytes]	; temp5 = array2[3] + array2[1] * angle
 		mulss	angle, angle				; angle *= angle
 ;---[Stage 2]------------------------------
 		mulss	temp4, angle
@@ -868,20 +892,21 @@ macro	SIN64
 array	= sin_flt64							; pointer to array of coefficients
 bytes	= 8									; size of array element (bytes)
 ;------------------------------------------
+	prefetchnta	[array]						; prefetch data
 		movapd	scale, angle				; scale = angle
 		mulsd	angle, angle				; angle *= angle
 		movapd	origin, angle				; origin = angle ^ 2
 ;---[Stage 1]------------------------------
 		movsd	temp1, [array + 0 * bytes]	; temp1 = array[0]
-		movsd	temp2, [array + 2 * bytes]	; temp2 = array[2]
-		movsd	temp3, [array + 4 * bytes]	; temp3 = array[4]
-		movsd	temp4, [array + 6 * bytes]	; temp4 = array[6]
+		movsd	temp2, [array + 1 * bytes]	; temp2 = array[1]
+		movsd	temp3, [array + 2 * bytes]	; temp3 = array[2]
+		movsd	temp4, [array + 3 * bytes]	; temp4 = array[3]
 		mulsd	temp1, angle
-		addsd	temp1, [array + 1 * bytes]	; temp1 = array[1] + array[0] * angle
+		addsd	temp1, [array + 4 * bytes]	; temp1 = array[4] + array[0] * angle
 		mulsd	temp2, angle
-		addsd	temp2, [array + 3 * bytes]	; temp2 = array[3] + array[2] * angle
+		addsd	temp2, [array + 5 * bytes]	; temp2 = array[5] + array[1] * angle
 		mulsd	temp3, angle
-		addsd	temp3, [array + 5 * bytes]	; temp3 = array[5] + array[4] * angle
+		addsd	temp3, [array + 6 * bytes]	; temp3 = array[6] + array[2] * angle
 		mulsd	angle, angle				; angle *= angle
 ;---[Stage 2]------------------------------
 		mulsd	temp2, angle
@@ -904,20 +929,21 @@ macro	COS64	treg
 array	= cos_flt64							; pointer to array of coefficients
 bytes	= 8									; size of array element (bytes)
 ;------------------------------------------
+	prefetchnta	[array]						; prefetch data
 		mulsd	angle, angle				; angle *= angle
 		movapd	scale, angle				; scale = angle ^ 2
 		movapd	origin, angle				; origin = angle ^ 2
 ;---[Stage 1]------------------------------
 		movsd	temp1, [array + 0 * bytes]	; temp1 = array[0]
-		movsd	temp2, [array + 2 * bytes]	; temp2 = array[2]
-		movsd	temp3, [array + 4 * bytes]	; temp3 = array[4]
-		movsd	temp4, [array + 6 * bytes]	; temp4 = array[6]
+		movsd	temp2, [array + 1 * bytes]	; temp2 = array[1]
+		movsd	temp3, [array + 2 * bytes]	; temp3 = array[2]
+		movsd	temp4, [array + 3 * bytes]	; temp4 = array[3]
 		mulsd	temp1, angle
-		addsd	temp1, [array + 1 * bytes]	; temp1 = array[1] + array[0] * angle
+		addsd	temp1, [array + 4 * bytes]	; temp1 = array[4] + array[0] * angle
 		mulsd	temp2, angle
-		addsd	temp2, [array + 3 * bytes]	; temp2 = array[3] + array[2] * angle
+		addsd	temp2, [array + 5 * bytes]	; temp2 = array[5] + array[1] * angle
 		mulsd	temp3, angle
-		addsd	temp3, [array + 5 * bytes]	; temp3 = array[5] + array[4] * angle
+		addsd	temp3, [array + 6 * bytes]	; temp3 = array[6] + array[2] * angle
 		mulsd	angle, angle				; angle *= angle
 ;---[Stage 2]------------------------------
 		mulsd	temp2, angle
@@ -945,31 +971,33 @@ array1	= cos_flt64							; pointer to array of cos coefficients
 array2	= sin_flt64							; pointer to array of sin coefficients
 bytes	= 8									; size of array element (bytes)
 ;------------------------------------------
+	prefetchnta	[array1]					; prefetch data
+	prefetchnta	[array2]					; prefetch data
 		movapd	hsin, angle					; hsin = angle
 		mulsd	angle, angle				; angle *= angle
 		movapd	scale, angle				; scale = angle ^ 2
 		movapd	origin, angle				; origin = angle ^ 2
 ;---[Stage 1]------------------------------
 		movsd	temp2, [array1 + 0 * bytes]	; temp2 = array1[0]
-		movsd	temp4, [array1 + 2 * bytes]	; temp4 = array1[2]
-		movsd	temp6, [array1 + 4 * bytes]	; temp6 = array1[4]
-		movsd	temp8, [array1 + 6 * bytes]	; temp8 = array1[6]
+		movsd	temp4, [array1 + 1 * bytes]	; temp4 = array1[1]
+		movsd	temp6, [array1 + 2 * bytes]	; temp6 = array1[2]
+		movsd	temp8, [array1 + 3 * bytes]	; temp8 = array1[3]
 		movsd	temp3, [array2 + 0 * bytes]	; temp3 = array2[0]
-		movsd	temp5, [array2 + 2 * bytes]	; temp5 = array2[2]
-		movsd	temp7, [array2 + 4 * bytes]	; temp7 = array2[4]
-		movsd	temp9, [array2 + 6 * bytes]	; temp9 = array2[6]
+		movsd	temp5, [array2 + 1 * bytes]	; temp5 = array2[1]
+		movsd	temp7, [array2 + 2 * bytes]	; temp7 = array2[2]
+		movsd	temp9, [array2 + 3 * bytes]	; temp9 = array2[3]
 		mulsd	temp2, angle
-		addsd	temp2, [array1 + 1 * bytes]	; temp2 = array1[1] + array1[0] * angle
+		addsd	temp2, [array1 + 4 * bytes]	; temp2 = array1[4] + array1[0] * angle
 		mulsd	temp4, angle
-		addsd	temp4, [array1 + 3 * bytes]	; temp4 = array1[3] + array1[2] * angle
+		addsd	temp4, [array1 + 5 * bytes]	; temp4 = array1[5] + array1[1] * angle
 		mulsd	temp6, angle
-		addsd	temp6, [array1 + 5 * bytes]	; temp6 = array1[5] + array1[4] * angle
+		addsd	temp6, [array1 + 6 * bytes]	; temp6 = array1[6] + array1[2] * angle
 		mulsd	temp3, angle
-		addsd	temp3, [array2 + 1 * bytes]	; temp3 = array2[1] + array2[0] * angle
+		addsd	temp3, [array2 + 4 * bytes]	; temp3 = array2[4] + array2[0] * angle
 		mulsd	temp5, angle
-		addsd	temp5, [array2 + 3 * bytes]	; temp5 = array2[3] + array2[2] * angle
+		addsd	temp5, [array2 + 5 * bytes]	; temp5 = array2[5] + array2[1] * angle
 		mulsd	temp7, angle
-		addsd	temp7, [array2 + 5 * bytes]	; temp7 = array2[5] + array2[4] * angle
+		addsd	temp7, [array2 + 6 * bytes]	; temp7 = array2[6] + array2[2] * angle
 		mulsd	angle, angle				; angle *= angle
 ;---[Stage 2]------------------------------
 		mulsd	temp4, angle
@@ -1029,7 +1057,7 @@ if x eq s
 dmask	= DMASK_FLT32						; data mask
 smask	= SMASK_FLT32						; sign mask
 pi		= PI4_FLT32							; PI / 4
-else
+else if x eq d
 dmask	= DMASK_FLT64						; data mask
 smask	= SMASK_FLT64						; sign mask
 pi		= PI4_FLT64							; PI / 4
@@ -1040,7 +1068,7 @@ end if
 		initreg	barier, treg, pi, x			; barier = PI / 4
 if x eq s
 		movd	sreg, angle					; sreg = angle
-else
+else if x eq d
 		movq	sreg, angle					; sreg = angle
 end if
 		andp#x	angle, mask					; angle = Abs (angle)
@@ -1057,7 +1085,7 @@ end if
 if x eq s
 		movd	sign, sreg					; sign = sign bit
 		SIN32								; computing sin value
-else
+else if x eq d
 		movq	sign, sreg					; sign = sign bit
 		SIN64								; computing sin value
 end if
@@ -1070,7 +1098,7 @@ end if
 if x eq s
 		movd	sign, sreg					; sign = sign bit
 		COS32	treg						; computing cos value
-else
+else if x eq d
 		movq	sign, sreg					; sign = sign bit
 		COS64	treg						; computing cos value
 end if
@@ -1105,7 +1133,7 @@ if x eq s
 dmask	= DMASK_FLT32						; data mask
 smask	= SMASK_FLT32						; sign mask
 pi		= PI4_FLT32							; PI / 4
-else
+else if x eq d
 dmask	= DMASK_FLT64						; data mask
 smask	= SMASK_FLT64						; sign mask
 pi		= PI4_FLT64							; PI / 4
@@ -1116,7 +1144,7 @@ end if
 		initreg	barier, treg, pi, x			; barier = PI / 4
 if x eq s
 		movd	sreg, angle					; sreg = angle
-else
+else if x eq d
 		movq	sreg, angle					; sreg = angle
 end if
 		andp#x	angle, mask					; angle = Abs (angle)
@@ -1132,7 +1160,7 @@ end if
 if x eq s
 		movd	sign, sreg					; sign = sign bit
 		COS32	treg						; computing cos value
-else
+else if x eq d
 		movq	sign, sreg					; sign = sign bit
 		COS64	treg						; computing cos value
 end if
@@ -1146,7 +1174,7 @@ end if
 if x eq s
 		movd	sign, sreg					; sign = sign bit
 		SIN32								; computing sin value
-else
+else if x eq d
 		movq	sign, sreg					; sign = sign bit
 		SIN64								; computing sin value
 end if
@@ -1199,7 +1227,7 @@ dmask	= DMASK_FLT32						; data mask
 smask	= SMASK_FLT32						; sign mask
 oneval	= ONE_FLT64							; 1.0 (flt64_t)
 pi		= PI4_FLT32							; PI / 4
-else
+else if x eq d
 dmask	= DMASK_FLT64						; data mask
 smask	= SMASK_FLT64						; sign mask
 pi		= PI4_FLT64							; PI / 4
@@ -1210,7 +1238,7 @@ end if
 		initreg	barier, treg, pi, x			; barier = PI / 4
 if x eq s
 		movd	sreg, angle					; sreg = angle
-else
+else if x eq d
 		movq	sreg, angle					; sreg = angle
 end if
 		andp#x	angle, mask					; angle = Abs (angle)
@@ -1236,7 +1264,7 @@ if x eq s
 	cvtsd2ss	angle, angle				; convert angle to flt32_t type
 		orps	angle, sign					; set correct sign to the tan value
 		ret
-else
+else if x eq d
 		movq	sign, sreg					; sign = sign bit of tan
 	SINCOS64	treg						; computing sine and cosine value
 		movsd	[s_hcos], hcos				; save "hcos" variable into the stack
@@ -1272,7 +1300,7 @@ if x eq s
 	cvtsd2ss	angle, angle				; convert angle to flt32_t type
 		orps	angle, sign					; set correct sign to the tan value
 		ret
-else
+else if x eq d
 		movq	sign, sreg					; sign = sign bit of tan
 	SINCOS64	treg						; computing sine and cosine value
 		movsd	[s_hcos], hcos				; save "hcos" variable into the stack
@@ -1338,7 +1366,7 @@ dmask	= DMASK_FLT32						; data mask
 smask	= SMASK_FLT32						; sign mask
 oneval	= ONE_FLT64							; 1.0 (flt64_t)
 pi		= PI4_FLT32							; PI / 4
-else
+else if x eq d
 dmask	= DMASK_FLT64						; data mask
 smask	= SMASK_FLT64						; sign mask
 pi		= PI4_FLT64							; PI / 4
@@ -1349,7 +1377,7 @@ end if
 		initreg	barier, treg, pi, x			; barier = PI / 4
 if x eq s
 		movd	sreg, angle					; sreg = angle
-else
+else if x eq d
 		movq	sreg, angle					; sreg = angle
 end if
 		andp#x	angle, mask					; angle = Abs (angle)
@@ -1374,7 +1402,7 @@ if x eq s
 	cvtsd2ss	angle, angle				; convert angle to flt32_t type
 		orps	angle, sign					; set correct sign to the tan value
 		ret
-else
+else if x eq d
 		movq	sign, sreg					; sign = sign bit of tan
 	SINCOS64	treg						; computing sine and cosine value
 		movsd	[s_hcos], hcos				; save "hcos" variable into the stack
@@ -1411,7 +1439,7 @@ if x eq s
 	cvtsd2ss	angle, angle				; convert angle to flt32_t type
 		orps	angle, sign					; set correct sign to the tan value
 		ret
-else
+else if x eq d
 		movq	sign, sreg					; sign = sign bit of tan
 	SINCOS64	treg						; computing sine and cosine value
 		movsd	[s_hcos], hcos				; save "hcos" variable into the stack
@@ -1473,7 +1501,7 @@ dmask	= DMASK_FLT32						; data mask
 smask	= SMASK_FLT32						; sign mask
 oneval	= ONE_FLT32							; 1.0
 pi		= PI4_FLT32							; PI / 4
-else
+else if x eq d
 dmask	= DMASK_FLT64						; data mask
 smask	= SMASK_FLT64						; sign mask
 oneval	= ONE_FLT64							; 1.0
@@ -1485,7 +1513,7 @@ end if
 		initreg	barier, treg, pi, x			; barier = PI / 4
 if x eq s
 		movd	sreg1, angle				; sreg1 = angle
-else
+else if x eq d
 		movq	sreg1, angle				; sreg1 = angle
 end if
 		andp#x	angle, mask					; angle = Abs (angle)
@@ -1505,7 +1533,7 @@ if x eq s									; }
 		movd	sign1, sreg1				; sign1 = sign bit of sine
 		movd	sign2, sreg2				; sign2 = sign bit of cosine
 	SINCOS32	treg						; computing sine and cosine value
-else
+else if x eq d
 		movq	sign1, sreg1				; sign1 = sign bit of sine
 		movq	sign2, sreg2				; sign2 = sign bit of cosine
 	SINCOS64	treg						; computing sine and cosine value
@@ -1530,7 +1558,7 @@ if x eq s									; }
 		movd	sign1, sreg1				; sign1 = sign bit of sine
 		movd	sign2, sreg2				; sign2 = sign bit of cosine
 	SINCOS32	treg						; computing sine and cosine value
-else
+else if x eq d
 		movq	sign1, sreg1				; sign1 = sign bit of sine
 		movq	sign2, sreg2				; sign2 = sign bit of cosine
 	SINCOS64	treg						; computing sine and cosine value
@@ -1559,8 +1587,8 @@ SinCos_flt64:	SINCOS	rcx, r8, r9, rax, d
 macro	MINMAX_INT	value1, value2, c
 {
 ;---[Internal variables]-------------------
-v1		equ		rdi							; register that holds value1
-v2		equ		rsi							; register that holds value2
+v1		equ		rdi							; register which holds value1
+v2		equ		rsi							; register which holds value2
 result	equ		rax							; regiser that holds min/max value
 ;------------------------------------------
 		cmp		value1, value2				; if (value1 cond value2)
@@ -1705,7 +1733,7 @@ index	equ		rdi							; index register
 if x eq s
 inf		= INF_FLT32							; +inf
 bytes	= 4									; array element size (bytes)
-else
+else if x eq d
 inf		= INF_FLT64							; +inf
 bytes	= 8									; array element size (bytes)
 end if
@@ -1740,12 +1768,13 @@ bias	= 127								; exponent bias
 digits	= 23								; precission of mantissa
 bytes	= 4									; size of array element (bytes)
 ;------------------------------------------
+	prefetchnta	[array]						; prefetch data
 		movaps	origin, value
 ;---[Stage 1]------------------------------
 		movss	temp1, [array + 0 * bytes]	; temp1 = array[0]
-		movss	temp2, [array + 2 * bytes]	; temp2 = array[2]
-		movss	temp3, [array + 4 * bytes]	; temp3 = array[4]
-		movss	temp4, [array + 5 * bytes]	; temp4 = array[5]
+		movss	temp2, [array + 1 * bytes]	; temp2 = array[1]
+		movss	temp3, [array + 2 * bytes]	; temp3 = array[2]
+		movss	temp4, [array + 3 * bytes]	; temp4 = array[3]
 		add		iexp, bias					; iexp += bias
 		mov		underfl, 1
 		mov		min, 1						; min = 1
@@ -1758,9 +1787,9 @@ bytes	= 4									; size of array element (bytes)
 		shr		iexp, shiftl				; iexp >> shift
 		movd	sfactor, iexp				; reinterpret iexp as flt32_t
 		mulss	temp1, value
-		addss	temp1, [array + 1 * bytes]	; temp1 = array[1] + array[0] * value
+		addss	temp1, [array + 4 * bytes]	; temp1 = array[4] + array[0] * value
 		mulss	temp2, value
-		addss	temp2, [array + 3 * bytes]	; temp2 = array[3] + array[2] * value
+		addss	temp2, [array + 5 * bytes]	; temp2 = array[5] + array[1] * value
 		mulss	value, value				; value *= value
 ;---[Stage 2]------------------------------
 		mulss	temp2, value
@@ -1786,15 +1815,17 @@ bias	= 1023								; exponent bias
 digits	= 52								; precission of mantissa
 bytes	= 8									; size of array element (bytes)
 ;------------------------------------------
+	prefetchnta	[array]						; prefetch data
+	prefetchnta	[array + CLINE]				; prefetch data
 		movapd	origin, value
 ;---[Stage 1]------------------------------
 		movsd	temp1, [array + 0 * bytes]	; temp1 = array[0]
-		movsd	temp2, [array + 2 * bytes]	; temp2 = array[2]
-		movsd	temp3, [array + 4 * bytes]	; temp3 = array[4]
-		movsd	temp4, [array + 6 * bytes]	; temp4 = array[6]
-		movsd	temp5, [array + 8 * bytes]	; temp5 = array[8]
-		movsd	temp6, [array + 10 * bytes]	; temp6 = array[10]
-		movsd	temp7, [array + 11 * bytes]	; temp7 = array[11]
+		movsd	temp2, [array + 1 * bytes]	; temp2 = array[1]
+		movsd	temp3, [array + 2 * bytes]	; temp3 = array[2]
+		movsd	temp4, [array + 3 * bytes]	; temp4 = array[3]
+		movsd	temp5, [array + 4 * bytes]	; temp5 = array[4]
+		movsd	temp6, [array + 5 * bytes]	; temp6 = array[5]
+		movsd	temp7, [array + 6 * bytes]	; temp7 = array[6]
 		add		iexp, bias					; iexp += bias
 		mov		underfl, 1
 		mov		min, 1						; min = 1
@@ -1807,15 +1838,15 @@ bytes	= 8									; size of array element (bytes)
 		shr		iexp, shiftl				; iexp >> shift
 		movq	sfactor, iexp				; reinterpret iexp as flt64_t
 		mulsd	temp1, value
-		addsd	temp1, [array + 1 * bytes]	; temp1 = array[1] + array[0] * value
+		addsd	temp1, [array + 7 * bytes]	; temp1 = array[7] + array[0] * value
 		mulsd	temp2, value
-		addsd	temp2, [array + 3 * bytes]	; temp2 = array[3] + array[2] * value
+		addsd	temp2, [array + 8 * bytes]	; temp2 = array[8] + array[1] * value
 		mulsd	temp3, value
-		addsd	temp3, [array + 5 * bytes]	; temp3 = array[5] + array[4] * value
+		addsd	temp3, [array + 9 * bytes]	; temp3 = array[9] + array[2] * value
 		mulsd	temp4, value
-		addsd	temp4, [array + 7 * bytes]	; temp4 = array[7] + array[6] * value
+		addsd	temp4, [array + 10 * bytes]	; temp4 = array[10] + array[3] * value
 		mulsd	temp5, value
-		addsd	temp5, [array + 9 * bytes]	; temp5 = array[9] + array[8] * value
+		addsd	temp5, [array + 11 * bytes]	; temp5 = array[11] + array[4] * value
 		mulsd	value, value				; value *= value
 ;---[Stage 2]------------------------------
 		mulsd	temp2, value
@@ -1846,7 +1877,7 @@ if x eq s
 inf		= INF_FLT32							; +inf
 bias	= 127								; exponent bias
 digits	= 23								; count of bits into mantissa
-else
+else if x eq d
 inf		= INF_FLT64							; +inf
 bias	= 1023								; exponent bias
 digits	= 52								; count of bits into mantissa
@@ -1864,7 +1895,7 @@ exp_zer	= exp_min - digits					; min exponent of subnormal value
 		shl		temp, digits				; temp <<= digits
 if x eq s
 		movd	result, temp				; reinterpret temp as flt32_t
-else
+else if x eq d
 		movq	result, temp				; reinterpret temp as flt64_t
 end if
 		ret									; return temp
@@ -1879,7 +1910,7 @@ end if
 		shl		temp, shiftl				; produce subnormal value
 if x eq s
 		movd	result, temp				; reinterpret temp as flt32_t
-else
+else if x eq d
 		movq	result, temp				; reinterpret temp as flt64_t
 end if
 		ret									; return temp
@@ -1919,7 +1950,7 @@ inf		= INF_FLT32							; infinity
 moneval	= MONE_FLT32						; -1.0
 exp_min	= 0xC3150000						; min exponent value
 exp_max	= 0x42FE0000						; max exponent value
-else
+else if x eq d
 mvalue	= MAGIC_FLT64						; magic number to get integer part from value
 inf		= INF_FLT64							; infinity
 moneval	= MONE_FLT64						; -1.0
@@ -1940,7 +1971,7 @@ ln2		= 0x3FE62E42FEFA39EF				; ln(2)
 if x eq s
 		movd	iexp, ipart					; iexp = rint (value)
 		cwde
-else
+else if x eq d
 		movq	iexp, ipart					; iexp = rint (value)
 		cdqe
 end if
@@ -1962,7 +1993,7 @@ if x eq s
 		addsd	val1, sfactor				; val1 = val1 * sfactor + sfactor
 	cvtsd2ss	value, val1					; return val1
 		ret
-else
+else if x eq d
 ;---[Double precision code]----------------
 		fldln2								; log = ln(2)
 		movsd	[s_value], value
@@ -2022,7 +2053,7 @@ inf		= INF_FLT32							; infinity
 moneval	= MONE_FLT32						; -1.0
 exp_min	= 0xC3150000						; min exponent value
 exp_max	= 0x42FE0000						; max exponent value
-else
+else if x eq d
 mvalue	= MAGIC_FLT64						; magic number to get integer part from value
 inf		= INF_FLT64							; infinity
 moneval	= MONE_FLT64						; -1.0
@@ -2044,7 +2075,7 @@ ln2		= 0x3FE62E42FEFA39EF				; ln(2)
 if x eq s
 		movd	iexp, ipart					; iexp = rint (value)
 		cwde
-else
+else if x eq d
 		movq	iexp, ipart					; iexp = rint (value)
 		cdqe
 end if
@@ -2068,7 +2099,7 @@ if x eq s
 		addsd	val1, sfactor				; val1 = val1 * sfactor + (sfactor - 1)
 	cvtsd2ss	value, val1					; return val1
 		ret
-else
+else if x eq d
 ;---[Double precision code]----------------
 		fldln2								; log = ln(2)
 		movsd	[s_value], value
@@ -2136,19 +2167,20 @@ array	= exp10_flt32						; pointer to array of coefficients
 offst	= 46								; offset of 10^0 from the beginning of table
 bytes	= 4									; size of array element (bytes)
 ;------------------------------------------
+	prefetchnta	[array]						; prefetch data
 		movaps	origin, value
 ;---[Stage 1]------------------------------
 		movss	temp1, [array + 0 * bytes]	; temp1 = array[0]
-		movss	temp2, [array + 2 * bytes]	; temp2 = array[2]
-		movss	temp3, [array + 4 * bytes]	; temp3 = array[4]
-		movss	temp4, [array + 6 * bytes]	; temp4 = array[6]
+		movss	temp2, [array + 1 * bytes]	; temp2 = array[1]
+		movss	temp3, [array + 2 * bytes]	; temp3 = array[2]
+		movss	temp4, [array + 3 * bytes]	; temp4 = array[3]
 		movss	sfactor, [ten_table_flt32 + iexp * bytes + offst * bytes]
 		mulss	temp1, value
-		addss	temp1, [array + 1 * bytes]	; temp1 = array[1] + array[0] * value
+		addss	temp1, [array + 4 * bytes]	; temp1 = array[4] + array[0] * value
 		mulss	temp2, value
-		addss	temp2, [array + 3 * bytes]	; temp2 = array[3] + array[2] * value
+		addss	temp2, [array + 5 * bytes]	; temp2 = array[5] + array[1] * value
 		mulss	temp3, value
-		addss	temp3, [array + 5 * bytes]	; temp3 = array[5] + array[4] * value
+		addss	temp3, [array + 6 * bytes]	; temp3 = array[6] + array[2] * value
 		mulss	value, value				; value *= value
 ;---[Stage 2]------------------------------
 		mulss	temp2, value
@@ -2169,29 +2201,31 @@ array	= exp10_flt64						; pointer to array of coefficients
 offst	= 324								; offset of 10^0 from the beginning of table
 bytes	= 8									; size of array element (bytes)
 ;------------------------------------------
+	prefetchnta	[array]						; prefetch data
+	prefetchnta	[array + CLINE]				; prefetch data
 		movapd	origin, value
 ;---[Stage 1]------------------------------
 		movsd	temp1, [array + 0 * bytes]	; temp1 = array[0]
-		movsd	temp2, [array + 2 * bytes]	; temp2 = array[2]
-		movsd	temp3, [array + 4 * bytes]	; temp3 = array[4]
-		movsd	temp4, [array + 6 * bytes]	; temp4 = array[6]
-		movsd	temp5, [array + 8 * bytes]	; temp5 = array[8]
-		movsd	temp6, [array + 10 * bytes]	; temp6 = array[10]
-		movsd	temp7, [array + 12 * bytes]	; temp7 = array[12]
-		movsd	temp8, [array + 13 * bytes]	; temp8 = array[13]
+		movsd	temp2, [array + 1 * bytes]	; temp2 = array[1]
+		movsd	temp3, [array + 2 * bytes]	; temp3 = array[2]
+		movsd	temp4, [array + 3 * bytes]	; temp4 = array[3]
+		movsd	temp5, [array + 4 * bytes]	; temp5 = array[4]
+		movsd	temp6, [array + 5 * bytes]	; temp6 = array[5]
+		movsd	temp7, [array + 6 * bytes]	; temp7 = array[6]
+		movsd	temp8, [array + 7 * bytes]	; temp8 = array[7]
 		movsd	sfactor, [ten_table_flt64 + iexp * bytes + offst * bytes]
 		mulsd	temp1, value
-		addsd	temp1, [array + 1 * bytes]	; temp1 = array[1] + array[0] * value
+		addsd	temp1, [array + 8 * bytes]	; temp1 = array[8] + array[0] * value
 		mulsd	temp2, value
-		addsd	temp2, [array + 3 * bytes]	; temp2 = array[3] + array[2] * value
+		addsd	temp2, [array + 9 * bytes]	; temp2 = array[9] + array[1] * value
 		mulsd	temp3, value
-		addsd	temp3, [array + 5 * bytes]	; temp3 = array[5] + array[4] * value
+		addsd	temp3, [array + 10 * bytes]	; temp3 = array[10] + array[2] * value
 		mulsd	temp4, value
-		addsd	temp4, [array + 7 * bytes]	; temp4 = array[7] + array[6] * value
+		addsd	temp4, [array + 11 * bytes]	; temp4 = array[11] + array[3] * value
 		mulsd	temp5, value
-		addsd	temp5, [array + 9 * bytes]	; temp5 = array[9] + array[8] * value
+		addsd	temp5, [array + 12 * bytes]	; temp5 = array[12] + array[4] * value
 		mulsd	temp6, value
-		addsd	temp6, [array + 11 * bytes]	; temp6 = array[11] + array[10] * value
+		addsd	temp6, [array + 13 * bytes]	; temp6 = array[13] + array[5] * value
 		mulsd	value, value				; value *= value
 ;---[Stage 2]------------------------------
 		mulsd	temp2, value
@@ -2247,7 +2281,7 @@ inf		= INF_FLT32							; infinity
 moneval	= MONE_FLT32						; -1.0
 exp_min	= 0xC2380000						; min exponent value
 exp_max	= 0x421C0000						; max exponent value
-else
+else if x eq d
 mvalue	= MAGIC_FLT64						; magic number to get integer part from value
 inf		= INF_FLT64							; infinity
 moneval	= MONE_FLT64						; -1.0
@@ -2268,7 +2302,7 @@ ln10	= 0x3FF26BB1BBB55516				; ln(10) / 2
 if x eq s
 		movd	iexp, ipart					; iexp = rint (value)
 		cwde
-else
+else if x eq d
 		movq	iexp, ipart					; iexp = rint (value)
 		cdqe
 end if
@@ -2294,7 +2328,7 @@ if x eq s
 		addsd	val1, sfactor				; val1 = val1 * sfactor + sfactor
 	cvtsd2ss	value, val1					; return val1
 		ret
-else
+else if x eq d
 ;---[Double precision code]----------------
 		fld		tbyte [.logt]				; log = ln(10) / 2
 		movsd	[s_value], value
@@ -2360,7 +2394,7 @@ inf		= INF_FLT32							; infinity
 moneval	= MONE_FLT32						; -1.0
 exp_min	= 0xC2380000						; min exponent value
 exp_max	= 0x421C0000						; max exponent value
-else
+else if x eq d
 mvalue	= MAGIC_FLT64						; magic number to get integer part from value
 inf		= INF_FLT64							; infinity
 moneval	= MONE_FLT64						; -1.0
@@ -2382,7 +2416,7 @@ ln10	= 0x3FF26BB1BBB55516				; ln(10) / 2
 if x eq s
 		movd	iexp, ipart					; iexp = rint (value)
 		cwde
-else
+else if x eq d
 		movq	iexp, ipart					; iexp = rint (value)
 		cdqe
 end if
@@ -2410,7 +2444,7 @@ if x eq s
 		addsd	val1, sfactor				; val1 = val1 * sfactor + (sfactor - 1)
 	cvtsd2ss	value, val1					; return val1
 		ret
-else
+else if x eq d
 ;---[Double precision code]----------------
 		fld		tbyte [.logt]				; log = ln(10) / 2
 		movsd	[s_value], value
@@ -2454,6 +2488,7 @@ index	equ		rdi							; index register
 max		equ		rsi							; register which holds max exponent value
 exp_max	= 20								; max exponent value
 ;------------------------------------------
+	prefetchnta	[ten_table_int]				; prefetch data
 		movsx	index, exp					; index = exp
 		mov		max, exp_max				; max = max exponent value
 		cmp		index, exp_max				; if (index > exp_max)
@@ -2481,19 +2516,20 @@ array	= exp_flt32							; pointer to array of coefficients
 offst	= 104								; offset of e^0 from the beginning of table
 bytes	= 4									; size of array element (bytes)
 ;------------------------------------------
+	prefetchnta	[array]						; prefetch data
 		movaps	origin, value
 ;---[Stage 1]------------------------------
 		movss	temp1, [array + 0 * bytes]	; temp1 = array[0]
-		movss	temp2, [array + 2 * bytes]	; temp2 = array[2]
-		movss	temp3, [array + 4 * bytes]	; temp3 = array[4]
-		movss	temp4, [array + 6 * bytes]	; temp4 = array[6]
+		movss	temp2, [array + 1 * bytes]	; temp2 = array[1]
+		movss	temp3, [array + 2 * bytes]	; temp3 = array[2]
+		movss	temp4, [array + 3 * bytes]	; temp4 = array[3]
 		movss	sfactor, [exp_table_flt32 + iexp * bytes + offst * bytes]
 		mulss	temp1, value
-		addss	temp1, [array + 1 * bytes]	; temp1 = array[1] + array[0] * value
+		addss	temp1, [array + 4 * bytes]	; temp1 = array[4] + array[0] * value
 		mulss	temp2, value
-		addss	temp2, [array + 3 * bytes]	; temp2 = array[3] + array[2] * value
+		addss	temp2, [array + 5 * bytes]	; temp2 = array[5] + array[1] * value
 		mulss	temp3, value
-		addss	temp3, [array + 5 * bytes]	; temp3 = array[5] + array[4] * value
+		addss	temp3, [array + 6 * bytes]	; temp3 = array[6] + array[2] * value
 		mulss	value, value				; value *= value
 ;---[Stage 2]------------------------------
 		mulss	temp2, value
@@ -2514,29 +2550,31 @@ array	= exp_flt64							; pointer to array of coefficients
 offst	= 746								; offset of e^0 from the beginning of table
 bytes	= 8									; size of array element (bytes)
 ;------------------------------------------
+	prefetchnta	[array]						; prefetch data
+	prefetchnta	[array + CLINE]				; prefetch data
 		movapd	origin, value
 ;---[Stage 1]------------------------------
 		movsd	temp1, [array + 0 * bytes]	; temp1 = array[0]
-		movsd	temp2, [array + 2 * bytes]	; temp2 = array[2]
-		movsd	temp3, [array + 4 * bytes]	; temp3 = array[4]
-		movsd	temp4, [array + 6 * bytes]	; temp4 = array[6]
-		movsd	temp5, [array + 8 * bytes]	; temp5 = array[8]
-		movsd	temp6, [array + 10 * bytes]	; temp6 = array[10]
-		movsd	temp7, [array + 12 * bytes]	; temp7 = array[12]
-		movsd	temp8, [array + 13 * bytes]	; temp8 = array[13]
+		movsd	temp2, [array + 1 * bytes]	; temp2 = array[1]
+		movsd	temp3, [array + 2 * bytes]	; temp3 = array[2]
+		movsd	temp4, [array + 3 * bytes]	; temp4 = array[3]
+		movsd	temp5, [array + 4 * bytes]	; temp5 = array[4]
+		movsd	temp6, [array + 5 * bytes]	; temp6 = array[5]
+		movsd	temp7, [array + 6 * bytes]	; temp7 = array[6]
+		movsd	temp8, [array + 7 * bytes]	; temp8 = array[7]
 		movsd	sfactor, [exp_table_flt64 + iexp * bytes + offst * bytes]
 		mulsd	temp1, value
-		addsd	temp1, [array + 1 * bytes]	; temp1 = array[1] + array[0] * value
+		addsd	temp1, [array + 8 * bytes]	; temp1 = array[8] + array[0] * value
 		mulsd	temp2, value
-		addsd	temp2, [array + 3 * bytes]	; temp2 = array[3] + array[2] * value
+		addsd	temp2, [array + 9 * bytes]	; temp2 = array[9] + array[1] * value
 		mulsd	temp3, value
-		addsd	temp3, [array + 5 * bytes]	; temp3 = array[5] + array[4] * value
+		addsd	temp3, [array + 10 * bytes]	; temp3 = array[10] + array[2] * value
 		mulsd	temp4, value
-		addsd	temp4, [array + 7 * bytes]	; temp4 = array[7] + array[6] * value
+		addsd	temp4, [array + 11 * bytes]	; temp4 = array[11] + array[3] * value
 		mulsd	temp5, value
-		addsd	temp5, [array + 9 * bytes]	; temp5 = array[9] + array[8] * value
+		addsd	temp5, [array + 12 * bytes]	; temp5 = array[12] + array[4] * value
 		mulsd	temp6, value
-		addsd	temp6, [array + 11 * bytes]	; temp6 = array[11] + array[10] * value
+		addsd	temp6, [array + 13 * bytes]	; temp6 = array[13] + array[5] * value
 		mulsd	value, value				; value *= value
 ;---[Stage 2]------------------------------
 		mulsd	temp2, value
@@ -2591,7 +2629,7 @@ inf		= INF_FLT32							; infinity
 moneval	= MONE_FLT32						; -1.0
 exp_min	= 0xC2D00000						; min exponent value
 exp_max	= 0x42B20000						; max exponent value
-else
+else if x eq d
 mvalue	= MAGIC_FLT64						; magic number to get integer part from value
 inf		= INF_FLT64							; infinity
 moneval	= MONE_FLT64						; -1.0
@@ -2611,7 +2649,7 @@ end if
 if x eq s
 		movd	iexp, ipart					; iexp = rint (value)
 		cwde
-else
+else if x eq d
 		movq	iexp, ipart					; iexp = rint (value)
 		cdqe
 end if
@@ -2631,7 +2669,7 @@ if x eq s
 		addsd	val1, sfactor				; val1 = val1 * sfactor + sfactor
 	cvtsd2ss	value, val1					; return val1
 		ret
-else
+else if x eq d
 ;---[Double precision code]----------------
 		movsd	[s_value], value
 		fld		qword [s_value]				; val1 = value
@@ -2690,7 +2728,7 @@ inf		= INF_FLT32							; infinity
 moneval	= MONE_FLT32						; -1.0
 exp_min	= 0xC2D00000						; min exponent value
 exp_max	= 0x42B20000						; max exponent value
-else
+else if x eq d
 mvalue	= MAGIC_FLT64						; magic number to get integer part from value
 inf		= INF_FLT64							; infinity
 moneval	= MONE_FLT64						; -1.0
@@ -2711,7 +2749,7 @@ oneval	= ONE_FLT64							; 1.0
 if x eq s
 		movd	iexp, ipart					; iexp = rint (value)
 		cwde
-else
+else if x eq d
 		movq	iexp, ipart					; iexp = rint (value)
 		cdqe
 end if
@@ -2733,7 +2771,7 @@ if x eq s
 		addsd	val1, sfactor				; val1 = val1 * sfactor + (sfactor - 1)
 	cvtsd2ss	value, val1					; return val1
 		ret
-else
+else if x eq d
 ;---[Double precision code]----------------
 		movsd	[s_value], value
 		fld		qword [s_value]				; val1 = value
@@ -2785,7 +2823,7 @@ index	equ		rdi							; index register
 scale	equ		xmm1						; scale value
 if x eq s
 bytes	= 4									; array element size (bytes)
-else
+else if x eq d
 bytes	= 8									; array element size (bytes)
 end if
 ;------------------------------------------
@@ -2845,7 +2883,7 @@ bias	= 127								; exponent bias
 digits	= 23								; count of bits into mantissa
 svalue1	= 0x7F000000						; 2^+127
 svalue2	= 0x00800000						; 2^-126
-else
+else if x eq d
 bias	= 1023								; exponent bias
 digits	= 52								; count of bits into mantissa
 svalue1	= 0x7FE0000000000000				; 2^+1023
@@ -2864,7 +2902,7 @@ exp_min	= 1 - bias							; min exponent
 		shl		temp, digits				; temp <<= digits
 if x eq s
 		movd	scale, temp					; scale = 2^exp
-else
+else if x eq d
 		movq	scale, temp					; scale = 2^exp
 end if
 		muls#x	value, scale				; return (value * scale)
@@ -2888,7 +2926,7 @@ end if
 		shl		temp, digits				; temp <<= digits
 if x eq s
 		movd	scale, temp					; scale = 2^exp
-else
+else if x eq d
 		movq	scale, temp					; scale = 2^exp
 end if
 		muls#x	value, scale				; return (value * scale)
@@ -2929,7 +2967,7 @@ macro	POWER_UINT	base, pow, temp, temph
 ;---[Parameters]---------------------------
 exp		equ		sil							; exponent value
 ;---[Internal variables]-------------------
-powd	equ		ecx							; double word register that holds result
+powd	equ		ecx							; double word register which holds result
 one		equ		r10d						; 1
 ;------------------------------------------
 		test	base, base					; if (base == 0)
@@ -2966,8 +3004,8 @@ macro	POWER_SINT	base, sign, pow, max, temp, temph, scale
 ;---[Parameters]---------------------------
 exp		equ		sil							; exponent value
 ;---[Internal variables]-------------------
-powd	equ		ecx							; double word register that holds result
-signq	equ		r8							; quad word register that base sign
+powd	equ		ecx							; double word register which holds result
+signq	equ		r8							; quad word register which base sign
 one		equ		r10d						; 1
 zero	equ		r11							; 0
 shft	= (1 shl scale) * 8 - 1				; shift value
@@ -3023,7 +3061,7 @@ one		equ		xmm3						; 1.0
 if x eq s
 oneval	= ONE_FLT32							; 1.0
 nan		= DMASK_FLT32						; NaN
-else
+else if x eq d
 oneval	= ONE_FLT64							; 1.0
 nan		= DMASK_FLT64						; NaN
 end if
@@ -3078,80 +3116,53 @@ Power_flt64:	POWER_FLT	di, rax, d
 ;******************************************************************************;
 ;       Rounding                                                               ;
 ;******************************************************************************;
-macro	ROUNDINT	treg, x
+macro	ROUND	type, mode, x
 {
 ;---[Parameters]---------------------------
 value	equ		xmm0						; value to compute exponent function
 ;---[Internal variables]-------------------
-magic	equ		xmm1						; magic number to get integer part
-if x eq s
-mvalue	= MAGIC_FLT32						; magic number to get integer part from value
-else
-mvalue	= MAGIC_FLT64						; magic number to get integer part from value
-end if
+temp	equ		xmm1						; temporary register
+mask	equ		xmm2						; data mask
+half	equ		xmm3						; 0.5
 ;------------------------------------------
-		initreg	magic, treg, mvalue, x		; load magic number
-		adds#x	value, magic				; value += magic
-		subs#x	value, magic				; value -= magic
-		ret									; value = rint (value)
-}
-;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	TRUNCATE	exp, mask, temp, x
-{
-;---[Parameters]---------------------------
-value	equ		xmm0						; value to process
-;---[Internal variables]-------------------
-sign	equ		xmm1						; sign mask
-shift	equ		cl							; mask shift
-if x eq s
-smask	= SMASK_FLT32						; truncation mask
-bias	= 127								; exponent bias
-digits	= 23								; precission of mantissa
-mbias	= 8									; mantisa offset in bit field
+if type = 1
+		movs#x	temp, value
+		andp#x	temp, mask
+		orp#x	temp, half					; temp = 0.5 * Sign (value)
+		adds#x	value, temp					; value += temp
+	rounds#x	value, value, mode			; value = Round (value)
+else if type = 2
+	rounds#x	temp, value, mode			; temp = Round (value)
+		subs#x	value, temp					; value -= temp
 else
-smask	= SMASK_FLT64						; truncation mask
-bias	= 1023								; exponent bias
-digits	= 52								; precission of mantissa
-mbias	= 11								; mantisa offset in bit field
+	rounds#x	value, value, mode			; value = Round (value)
 end if
-;------------------------------------------
-if x eq s
-		movd	exp, value					; exp = raw value
-		movd	temp, value					; temp = raw value
-else
-		movq	exp, value					; exp = raw value
-		movq	temp, value					; temp = raw value
-end if
-		add		exp, exp					; remove sign bit
-		shr		exp, digits + 1				; extract exponent field from value
-		sub		exp, bias					; subtract exponent bias
-		test	exp, exp					; if (exp < 0)
-		js		.zero						;     then return 0
-		cmp		exp, digits					; if (exp >= digits)
-		ja		.exit						;     then there is no fraction part
-		mov		mask, smask					; set truncation mask
-		add		exp, mbias					; exp += mantiassa ofset
-		sar		mask, shift					; mask >>= exp
-		and		temp, mask					; temp &= mask
-if x eq s
-		movd	value, temp					; value = temp
-else
-		movq	value, temp					; value = temp
-end if
-.exit:	ret
-;---[Set zero value branch]----------------
-.zero:	initreg	sign, temp, smask, x
-		andp#x	value, sign					; return zero with correct sign
 		ret
 }
 
-; Round to nearest integer
-RoundInt_flt32:		ROUNDINT	eax, s
-RoundInt_flt64:		ROUNDINT	rax, d
+; Round down (floor)
+RoundDown_flt32:	ROUND	0, 0x1, s
+RoundDown_flt64:	ROUND	0, 0x1, d
+
+; Round up (ceil)
+RoundUp_flt32:		ROUND	0, 0x2, s
+RoundUp_flt64:		ROUND	0, 0x2, d
+
+; Round to nearest even integer
+RoundInt_flt32:		ROUND	0, 0x0, s
+RoundInt_flt64:		ROUND	0, 0x0, d
+
+; Round to nearest integer, away from zero
+RoundRound_flt32:	ROUND	1, 0x3, s
+RoundRound_flt64:	ROUND	1, 0x3, d
 
 ; Round to nearest integer, toward zero (truncation)
-Truncate_flt32:		TRUNCATE	ecx, eax, edx, s
-Truncate_flt64:		TRUNCATE	rcx, rax, rdx, d
+RoundTrunc_flt32:	ROUND	0, 0x3, s
+RoundTrunc_flt64:	ROUND	0, 0x3, d
+
+; Fractional part
+RoundFrac_flt32:	ROUND	2, 0x3, s
+RoundFrac_flt64:	ROUND	2, 0x3, d
 
 ;******************************************************************************;
 ;       Checks                                                                 ;
@@ -3166,7 +3177,7 @@ if x eq d
 dmask	= DMASK_FLT32						; data mask
 nvalue	= NORM_FLT32						; min normal value
 ivalue	= INF_FLT32							; inf
-else
+else if x eq d
 dmask	= DMASK_FLT64						; data mask
 nvalue	= NORM_FLT64						; min normal value
 ivalue	= INF_FLT64							; inf
@@ -3192,7 +3203,7 @@ result	equ		al							; result register
 if x eq d
 dmask	= DMASK_FLT32						; data mask
 nvalue	= NORM_FLT32						; min normal value
-else
+else if x eq d
 dmask	= DMASK_FLT64						; data mask
 nvalue	= NORM_FLT64						; min normal value
 end if
@@ -3215,7 +3226,7 @@ result	equ		al							; result register
 if x eq d
 dmask	= DMASK_FLT32						; data mask
 ivalue	= INF_FLT32							; inf
-else
+else if x eq d
 dmask	= DMASK_FLT64						; data mask
 ivalue	= INF_FLT64							; inf
 end if
@@ -3238,7 +3249,7 @@ result	equ		al							; result register
 if x eq d
 dmask	= DMASK_FLT32						; data mask
 ivalue	= INF_FLT32							; inf
-else
+else if x eq d
 dmask	= DMASK_FLT64						; data mask
 ivalue	= INF_FLT64							; inf
 end if
@@ -3261,7 +3272,7 @@ result	equ		al							; result register
 if x eq d
 dmask	= DMASK_FLT32						; data mask
 ivalue	= INF_FLT32							; inf
-else
+else if x eq d
 dmask	= DMASK_FLT64						; data mask
 ivalue	= INF_FLT64							; inf
 end if
@@ -3327,71 +3338,71 @@ ten_table_int	dq	1							; 10^0
 ; Coefficients to compute cos(x) for flt64_t type
 align 16
 cos_flt64		dq	0xBF56C16C16C16C17			; -1 / 6!
-				dq	0x3FA5555555555555			; +1 / 4!
 				dq	0xBE927E4FB7789F5C			; -1 / 10!
-				dq	0x3EFA01A01A01A01A			; +1 / 8!
 				dq	0xBDA93974A8C07C9D			; -1 / 14!
-				dq	0x3E21EED8EFF8D898			; +1 / 12!
 				dq	0x3D2AE7F3E733B81F			; +1 / 16!
+				dq	0x3FA5555555555555			; +1 / 4!
+				dq	0x3EFA01A01A01A01A			; +1 / 8!
+				dq	0x3E21EED8EFF8D898			; +1 / 12!
 
 ; Coefficients to compute sin(x) for flt64_t type
 align 16
 sin_flt64		dq	0x3F81111111111111			; +1 / 5!
-				dq	0xBFC5555555555555			; -1 / 3!
 				dq	0x3EC71DE3A556C734			; +1 / 9!
-				dq	0xBF2A01A01A01A01A			; -1 / 7!
 				dq	0x3DE6124613A86D09			; +1 / 13!
-				dq	0xBE5AE64567F544E4			; -1 / 11!
 				dq	0xBD6AE7F3E733B81F			; -1 / 15!
+				dq	0xBFC5555555555555			; -1 / 3!
+				dq	0xBF2A01A01A01A01A			; -1 / 7!
+				dq	0xBE5AE64567F544E4			; -1 / 11!
 
 ; Coefficients to compute exp2(x) for flt64_t type
 align 16
 exp2_flt64		dq	0x3F947FD3FFAC83B4			; ln(2)^2 / 4!
-				dq	0x3FBD9303FEA2F7EA			; ln(2)^1 / 3!
 				dq	0x3F3502D8FFB5A908			; ln(2)^4 / 6!
-				dq	0x3F66BC07126A1A33			; ln(2)^3 / 5!
 				dq	0x3EC712EF11BE9AE4			; ln(2)^6 / 8!
-				dq	0x3F00A4F3BC9A363E			; ln(2)^5 / 7!
 				dq	0x3E4F888B9368EF22			; ln(2)^8 / 10!
-				dq	0x3E8C6EE35A409D22			; ln(2)^7 / 9!
 				dq	0x3DCD61E5E658C886			; ln(2)^10 / 12!
-				dq	0x3E0FCADA8FCF0462			; ln(2)^9 / 11!
 				dq	0x3D8910F686016B9B			; ln(2)^11 / 13!
 				dq	0x3FE0000000000000			; ln(2)^0 / 2!
+				dq	0x3FBD9303FEA2F7EA			; ln(2)^1 / 3!
+				dq	0x3F66BC07126A1A33			; ln(2)^3 / 5!
+				dq	0x3F00A4F3BC9A363E			; ln(2)^5 / 7!
+				dq	0x3E8C6EE35A409D22			; ln(2)^7 / 9!
+				dq	0x3E0FCADA8FCF0462			; ln(2)^9 / 11!
 
 ; Coefficients to compute exp10(x) for flt64_t type
 align 16
 exp10_flt64		dq	0x3FAC46DBB451388B			; (ln(10) / 2)^2 / 4!
-				dq	0x3FC88F97A4F1C6C7			; (ln(10) / 2)^1 / 3!
 				dq	0x3F63FD4AB552C516			; (ln(10) / 2)^4 / 6!
-				dq	0x3F8A0B3C1C96ADD4			; (ln(10) / 2)^3 / 5!
 				dq	0x3F0E47D12E08E562			; (ln(10) / 2)^6 / 8!
-				dq	0x3F3A4D248DE3823A			; (ln(10) / 2)^5 / 7!
 				dq	0x3EAC8A8CD552035C			; (ln(10) / 2)^8 / 10!
-				dq	0x3EDEFCFC6B05BD61			; (ln(10) / 2)^7 / 9!
 				dq	0x3E42579602BBA583			; (ln(10) / 2)^10 / 12!
-				dq	0x3E77E5CD1E140F6D			; (ln(10) / 2)^9 / 11!
 				dq	0x3DD1193BE810E96B			; (ln(10) / 2)^12 / 14!
-				dq	0x3E09FD87AF3B94D5			; (ln(10) / 2)^11 / 13!
 				dq	0x3D94FF7127F17B2A			; (ln(10) / 2)^13 / 15!
 				dq	0x3FE0000000000000			; (ln(10) / 2)^0 / 2!
+				dq	0x3FC88F97A4F1C6C7			; (ln(10) / 2)^1 / 3!
+				dq	0x3F8A0B3C1C96ADD4			; (ln(10) / 2)^3 / 5!
+				dq	0x3F3A4D248DE3823A			; (ln(10) / 2)^5 / 7!
+				dq	0x3EDEFCFC6B05BD61			; (ln(10) / 2)^7 / 9!
+				dq	0x3E77E5CD1E140F6D			; (ln(10) / 2)^9 / 11!
+				dq	0x3E09FD87AF3B94D5			; (ln(10) / 2)^11 / 13!
 
 ; Coefficients to compute exp(x) for flt64_t type
 align 16
 exp_flt64		dq	0x3FA5555555555555			; 1 / 4!
-				dq	0x3FC5555555555555			; 1 / 3!
 				dq	0x3F56C16C16C16C17			; 1 / 6!
-				dq	0x3F81111111111111			; 1 / 5!
 				dq	0x3EFA01A01A01A01A			; 1 / 8!
-				dq	0x3F2A01A01A01A01A			; 1 / 7!
 				dq	0x3E927E4FB7789F5C			; 1 / 10!
-				dq	0x3EC71DE3A556C734			; 1 / 9!
 				dq	0x3E21EED8EFF8D898			; 1 / 12!
-				dq	0x3E5AE64567F544E4			; 1 / 11!
 				dq	0x3DA93974A8C07C9D			; 1 / 14!
-				dq	0x3DE6124613A86D09			; 1 / 13!
 				dq	0x3D6AE7F3E733B81F			; 1 / 15!
 				dq	0x3FE0000000000000			; 1 / 2!
+				dq	0x3FC5555555555555			; 1 / 3!
+				dq	0x3F81111111111111			; 1 / 5!
+				dq	0x3F2A01A01A01A01A			; 1 / 7!
+				dq	0x3EC71DE3A556C734			; 1 / 9!
+				dq	0x3E5AE64567F544E4			; 1 / 11!
+				dq	0x3DE6124613A86D09			; 1 / 13!
 
 ; Table of integer powers of 10^x for flt64_t type
 align 16
@@ -5493,45 +5504,45 @@ exp_table_flt64	dq	0x0000000000000000			; e^-746
 ; Coefficients to compute cos(x) for flt32_t type
 align 16
 cos_flt32		dd	0xBAB60B61					; -1 / 6!
-				dd	0x3D2AAAAB					; +1 / 4!
 				dd	0xB493F27E					; -1 / 10!
+				dd	0x3D2AAAAB					; +1 / 4!
 				dd	0x37D00D01					; +1 / 8!
 
 ; Coefficients to compute sin(x) for flt32_t type
 align 16
 sin_flt32		dd	0x3C088889					; +1 / 5!
-				dd	0xBE2AAAAB					; -1 / 3!
 				dd	0x3638EF1D					; +1 / 9!
+				dd	0xBE2AAAAB					; -1 / 3!
 				dd	0xB9500D01					; -1 / 7!
 
 ; Coefficients to compute exp2(x) for flt32_t type
 align 16
 exp2_flt32		dd	0x3CA3FEA0					; ln(2)^2 / 4!
-				dd	0x3DEC9820					; ln(2)^1 / 3!
 				dd	0x39A816C8					; ln(2)^4 / 6!
-				dd	0x3B35E039					; ln(2)^3 / 5!
 				dd	0x3805279E					; ln(2)^5 / 7!
 				dd	0x3F000000					; ln(2)^0 / 2!
+				dd	0x3DEC9820					; ln(2)^1 / 3!
+				dd	0x3B35E039					; ln(2)^3 / 5!
 
 ; Coefficients to compute exp10(x) for flt32_t type
 align 16
 exp10_flt32		dd	0x3D6236DE					; (ln(10) / 2)^2 / 4!
-				dd	0x3E447CBD					; (ln(10) / 2)^1 / 3!
 				dd	0x3B1FEA56					; (ln(10) / 2)^4 / 6!
-				dd	0x3C5059E1					; (ln(10) / 2)^3 / 5!
 				dd	0x38723E89					; (ln(10) / 2)^6 / 8!
-				dd	0x39D26924					; (ln(10) / 2)^5 / 7!
 				dd	0x3F000000					; (ln(10) / 2)^0 / 2!
+				dd	0x3E447CBD					; (ln(10) / 2)^1 / 3!
+				dd	0x3C5059E1					; (ln(10) / 2)^3 / 5!
+				dd	0x39D26924					; (ln(10) / 2)^5 / 7!
 
 ; Coefficients to compute exp(x) for flt32_t type
 align 16
 exp_flt32		dd	0x3D2AAAAB					; 1 / 4!
-				dd	0x3E2AAAAB					; 1 / 3!
 				dd	0x3AB60B61					; 1 / 6!
-				dd	0x3C088889					; 1 / 5!
 				dd	0x37D00D01					; 1 / 8!
-				dd	0x39500D01					; 1 / 7!
 				dd	0x3F000000					; 1 / 2!
+				dd	0x3E2AAAAB					; 1 / 3!
+				dd	0x3C088889					; 1 / 5!
+				dd	0x39500D01					; 1 / 7!
 
 ; Table of integer powers of 10^x for flt32_t type
 align 16

@@ -314,13 +314,29 @@ static flt64_t Power (flt64_t base, sint16_t exp);
 //      Rounding                                                              //
 //****************************************************************************//
 
-// Round to nearest integer
+// Round down (floor)
+static flt32_t RoundDown (flt32_t value);
+static flt64_t RoundDown (flt64_t value);
+
+// Round up (ceil)
+static flt32_t RoundUp (flt32_t value);
+static flt64_t RoundUp (flt64_t value);
+
+// Round to nearest even integer
 static flt32_t RoundInt (flt32_t value);
 static flt64_t RoundInt (flt64_t value);
+
+// Round to nearest integer, away from zero
+static flt32_t Round (flt32_t value);
+static flt64_t Round (flt64_t value);
 
 // Round to nearest integer, toward zero (truncation)
 static flt32_t Truncate (flt32_t value);
 static flt64_t Truncate (flt64_t value);
+
+// Fractional part
+static flt32_t Frac (flt32_t value);
+static flt64_t Frac (flt64_t value);
 
 //****************************************************************************//
 //      Checks                                                                //
@@ -620,13 +636,29 @@ flt64_t Math_Poweri_flt64 (flt64_t base, sint16_t exp);
 //      Rounding                                                              //
 //****************************************************************************//
 
-// Round to nearest integer
+// Round down (floor)
+flt32_t Math_RoundDown_flt32 (flt32_t value);
+flt64_t Math_RoundDown_flt64 (flt64_t value);
+
+// Round up (ceil)
+flt32_t Math_RoundUp_flt32 (flt32_t value);
+flt64_t Math_RoundUp_flt64 (flt64_t value);
+
+// Round to nearest even integer
 flt32_t Math_RoundInt_flt32 (flt32_t value);
 flt64_t Math_RoundInt_flt64 (flt64_t value);
+
+// Round to nearest integer, away from zero
+flt32_t Math_Round_flt32 (flt32_t value);
+flt64_t Math_Round_flt64 (flt64_t value);
 
 // Round to nearest integer, toward zero (truncation)
 flt32_t Math_Truncate_flt32 (flt32_t value);
 flt64_t Math_Truncate_flt64 (flt64_t value);
+
+// Fractional part
+flt32_t Math_Frac_flt32 (flt32_t value);
+flt64_t Math_Frac_flt64 (flt64_t value);
 
 //****************************************************************************//
 //      Checks                                                                //
