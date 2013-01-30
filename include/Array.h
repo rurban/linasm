@@ -308,6 +308,10 @@ static void Neg (flt64_t array[], size_t size);
 static void Abs (flt32_t array[], size_t size);
 static void Abs (flt64_t array[], size_t size);
 
+// Negative absolute value
+static void NegAbs (flt32_t array[], size_t size);
+static void NegAbs (flt64_t array[], size_t size);
+
 // Square
 static void Sqr (flt32_t array[], size_t size);
 static void Sqr (flt64_t array[], size_t size);
@@ -380,7 +384,11 @@ static flt64_t Sum (const flt64_t array[], size_t size);
 static flt32_t SumSqr (const flt32_t array[], size_t size);
 static flt64_t SumSqr (const flt64_t array[], size_t size);
 
-// Sum of multiplied elements
+// Sum of absolute values
+static flt32_t SumAbs (const flt32_t array[], size_t size);
+static flt64_t SumAbs (const flt64_t array[], size_t size);
+
+// Sum of multiplied values
 static flt32_t SumMul (const flt32_t array1[], const flt32_t array2[], size_t size);
 static flt64_t SumMul (const flt64_t array1[], const flt64_t array2[], size_t size);
 
@@ -416,7 +424,7 @@ static void RoundDown (flt64_t array[], size_t size);
 static void RoundUp (flt32_t array[], size_t size);
 static void RoundUp (flt64_t array[], size_t size);
 
-// Round to nearest integer
+// Round to nearest even integer
 static void RoundInt (flt32_t array[], size_t size);
 static void RoundInt (flt64_t array[], size_t size);
 
@@ -797,38 +805,38 @@ static void MergeDsc (size_t target[], const size_t source1[], size_t size1, con
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
 // Unsigned integer types
-static void MergeAsc (uint8_t tkey[], void* tptr[], const uint8_t skey1[], const void* sptr1[], size_t size1, const uint8_t skey2[], const void* sptr2[], size_t size2);
-static void MergeAsc (uint16_t tkey[], void* tptr[], const uint16_t skey1[], const void* sptr1[], size_t size1, const uint16_t skey2[], const void* sptr2[], size_t size2);
-static void MergeAsc (uint32_t tkey[], void* tptr[], const uint32_t skey1[], const void* sptr1[], size_t size1, const uint32_t skey2[], const void* sptr2[], size_t size2);
-static void MergeAsc (uint64_t tkey[], void* tptr[], const uint64_t skey1[], const void* sptr1[], size_t size1, const uint64_t skey2[], const void* sptr2[], size_t size2);
+static void MergeAsc (uint8_t tkey[], const void* tptr[], const uint8_t skey1[], const void* sptr1[], size_t size1, const uint8_t skey2[], const void* sptr2[], size_t size2);
+static void MergeAsc (uint16_t tkey[], const void* tptr[], const uint16_t skey1[], const void* sptr1[], size_t size1, const uint16_t skey2[], const void* sptr2[], size_t size2);
+static void MergeAsc (uint32_t tkey[], const void* tptr[], const uint32_t skey1[], const void* sptr1[], size_t size1, const uint32_t skey2[], const void* sptr2[], size_t size2);
+static void MergeAsc (uint64_t tkey[], const void* tptr[], const uint64_t skey1[], const void* sptr1[], size_t size1, const uint64_t skey2[], const void* sptr2[], size_t size2);
 
 // Signed integer types
-static void MergeAsc (sint8_t tkey[], void* tptr[], const sint8_t skey1[], const void* sptr1[], size_t size1, const sint8_t skey2[], const void* sptr2[], size_t size2);
-static void MergeAsc (sint16_t tkey[], void* tptr[], const sint16_t skey1[], const void* sptr1[], size_t size1, const sint16_t skey2[], const void* sptr2[], size_t size2);
-static void MergeAsc (sint32_t tkey[], void* tptr[], const sint32_t skey1[], const void* sptr1[], size_t size1, const sint32_t skey2[], const void* sptr2[], size_t size2);
-static void MergeAsc (sint64_t tkey[], void* tptr[], const sint64_t skey1[], const void* sptr1[], size_t size1, const sint64_t skey2[], const void* sptr2[], size_t size2);
+static void MergeAsc (sint8_t tkey[], const void* tptr[], const sint8_t skey1[], const void* sptr1[], size_t size1, const sint8_t skey2[], const void* sptr2[], size_t size2);
+static void MergeAsc (sint16_t tkey[], const void* tptr[], const sint16_t skey1[], const void* sptr1[], size_t size1, const sint16_t skey2[], const void* sptr2[], size_t size2);
+static void MergeAsc (sint32_t tkey[], const void* tptr[], const sint32_t skey1[], const void* sptr1[], size_t size1, const sint32_t skey2[], const void* sptr2[], size_t size2);
+static void MergeAsc (sint64_t tkey[], const void* tptr[], const sint64_t skey1[], const void* sptr1[], size_t size1, const sint64_t skey2[], const void* sptr2[], size_t size2);
 
 // Other types
-static void MergeAsc (size_t tkey[], void* tptr[], const size_t skey1[], const void* sptr1[], size_t size1, const size_t skey2[], const void* sptr2[], size_t size2);
+static void MergeAsc (size_t tkey[], const void* tptr[], const size_t skey1[], const void* sptr1[], size_t size1, const size_t skey2[], const void* sptr2[], size_t size2);
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 //      Descending sort order                                                 //
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
 // Unsigned integer types
-static void MergeDsc (uint8_t tkey[], void* tptr[], const uint8_t skey1[], const void* sptr1[], size_t size1, const uint8_t skey2[], const void* sptr2[], size_t size2);
-static void MergeDsc (uint16_t tkey[], void* tptr[], const uint16_t skey1[], const void* sptr1[], size_t size1, const uint16_t skey2[], const void* sptr2[], size_t size2);
-static void MergeDsc (uint32_t tkey[], void* tptr[], const uint32_t skey1[], const void* sptr1[], size_t size1, const uint32_t skey2[], const void* sptr2[], size_t size2);
-static void MergeDsc (uint64_t tkey[], void* tptr[], const uint64_t skey1[], const void* sptr1[], size_t size1, const uint64_t skey2[], const void* sptr2[], size_t size2);
+static void MergeDsc (uint8_t tkey[], const void* tptr[], const uint8_t skey1[], const void* sptr1[], size_t size1, const uint8_t skey2[], const void* sptr2[], size_t size2);
+static void MergeDsc (uint16_t tkey[], const void* tptr[], const uint16_t skey1[], const void* sptr1[], size_t size1, const uint16_t skey2[], const void* sptr2[], size_t size2);
+static void MergeDsc (uint32_t tkey[], const void* tptr[], const uint32_t skey1[], const void* sptr1[], size_t size1, const uint32_t skey2[], const void* sptr2[], size_t size2);
+static void MergeDsc (uint64_t tkey[], const void* tptr[], const uint64_t skey1[], const void* sptr1[], size_t size1, const uint64_t skey2[], const void* sptr2[], size_t size2);
 
 // Signed integer types
-static void MergeDsc (sint8_t tkey[], void* tptr[], const sint8_t skey1[], const void* sptr1[], size_t size1, const sint8_t skey2[], const void* sptr2[], size_t size2);
-static void MergeDsc (sint16_t tkey[], void* tptr[], const sint16_t skey1[], const void* sptr1[], size_t size1, const sint16_t skey2[], const void* sptr2[], size_t size2);
-static void MergeDsc (sint32_t tkey[], void* tptr[], const sint32_t skey1[], const void* sptr1[], size_t size1, const sint32_t skey2[], const void* sptr2[], size_t size2);
-static void MergeDsc (sint64_t tkey[], void* tptr[], const sint64_t skey1[], const void* sptr1[], size_t size1, const sint64_t skey2[], const void* sptr2[], size_t size2);
+static void MergeDsc (sint8_t tkey[], const void* tptr[], const sint8_t skey1[], const void* sptr1[], size_t size1, const sint8_t skey2[], const void* sptr2[], size_t size2);
+static void MergeDsc (sint16_t tkey[], const void* tptr[], const sint16_t skey1[], const void* sptr1[], size_t size1, const sint16_t skey2[], const void* sptr2[], size_t size2);
+static void MergeDsc (sint32_t tkey[], const void* tptr[], const sint32_t skey1[], const void* sptr1[], size_t size1, const sint32_t skey2[], const void* sptr2[], size_t size2);
+static void MergeDsc (sint64_t tkey[], const void* tptr[], const sint64_t skey1[], const void* sptr1[], size_t size1, const sint64_t skey2[], const void* sptr2[], size_t size2);
 
 // Other types
-static void MergeDsc (size_t tkey[], void* tptr[], const size_t skey1[], const void* sptr1[], size_t size1, const size_t skey2[], const void* sptr2[], size_t size2);
+static void MergeDsc (size_t tkey[], const void* tptr[], const size_t skey1[], const void* sptr1[], size_t size1, const size_t skey2[], const void* sptr2[], size_t size2);
 
 //****************************************************************************//
 //      Unique values                                                         //
@@ -877,44 +885,44 @@ static size_t Duplicates (size_t unique[], size_t count[], const size_t array[],
 //============================================================================//
 
 // Unsigned integer types
-static bool HasDuplicates (const uint8_t array[], size_t size);
-static bool HasDuplicates (const uint16_t array[], size_t size);
-static bool HasDuplicates (const uint32_t array[], size_t size);
-static bool HasDuplicates (const uint64_t array[], size_t size);
+static size_t CheckDup (const uint8_t array[], size_t size);
+static size_t CheckDup (const uint16_t array[], size_t size);
+static size_t CheckDup (const uint32_t array[], size_t size);
+static size_t CheckDup (const uint64_t array[], size_t size);
 
 // Signed integer types
-static bool HasDuplicates (const sint8_t array[], size_t size);
-static bool HasDuplicates (const sint16_t array[], size_t size);
-static bool HasDuplicates (const sint32_t array[], size_t size);
-static bool HasDuplicates (const sint64_t array[], size_t size);
+static size_t CheckDup (const sint8_t array[], size_t size);
+static size_t CheckDup (const sint16_t array[], size_t size);
+static size_t CheckDup (const sint32_t array[], size_t size);
+static size_t CheckDup (const sint64_t array[], size_t size);
 
 //============================================================================//
 //      Check for infinite values                                             //
 //============================================================================//
-static bool HasInf (const flt32_t array[], size_t size);
-static bool HasInf (const flt64_t array[], size_t size);
+static size_t CheckInf (const flt32_t array[], size_t size);
+static size_t CheckInf (const flt64_t array[], size_t size);
 
 //============================================================================//
 //      Check for NaN values                                                  //
 //============================================================================//
-static bool HasNaN (const flt32_t array[], size_t size);
-static bool HasNaN (const flt64_t array[], size_t size);
+static size_t CheckNaN (const flt32_t array[], size_t size);
+static size_t CheckNaN (const flt64_t array[], size_t size);
 
 //============================================================================//
 //      Check for equality                                                    //
 //============================================================================//
 
 // Unsigned integer types
-static bool IsEqual (const uint8_t array1[], const uint8_t array2[], size_t size);
-static bool IsEqual (const uint16_t array1[], const uint16_t array2[], size_t size);
-static bool IsEqual (const uint32_t array1[], const uint32_t array2[], size_t size);
-static bool IsEqual (const uint64_t array1[], const uint64_t array2[], size_t size);
+static size_t CheckEqual (const uint8_t array1[], const uint8_t array2[], size_t size);
+static size_t CheckEqual (const uint16_t array1[], const uint16_t array2[], size_t size);
+static size_t CheckEqual (const uint32_t array1[], const uint32_t array2[], size_t size);
+static size_t CheckEqual (const uint64_t array1[], const uint64_t array2[], size_t size);
 
 // Signed integer types
-static bool IsEqual (const sint8_t array1[], const sint8_t array2[], size_t size);
-static bool IsEqual (const sint16_t array1[], const sint16_t array2[], size_t size);
-static bool IsEqual (const sint32_t array1[], const sint32_t array2[], size_t size);
-static bool IsEqual (const sint64_t array1[], const sint64_t array2[], size_t size);
+static size_t CheckEqual (const sint8_t array1[], const sint8_t array2[], size_t size);
+static size_t CheckEqual (const sint16_t array1[], const sint16_t array2[], size_t size);
+static size_t CheckEqual (const sint32_t array1[], const sint32_t array2[], size_t size);
+static size_t CheckEqual (const sint64_t array1[], const sint64_t array2[], size_t size);
 
 //============================================================================//
 //      Check for overlap                                                     //
@@ -1233,6 +1241,10 @@ void Array_Neg_flt64 (flt64_t array[], size_t size);
 void Array_Abs_flt32 (flt32_t array[], size_t size);
 void Array_Abs_flt64 (flt64_t array[], size_t size);
 
+// Negative absolute value
+void Array_NegAbs_flt32 (flt32_t array[], size_t size);
+void Array_NegAbs_flt64 (flt64_t array[], size_t size);
+
 // Square
 void Array_Sqr_flt32 (flt32_t array[], size_t size);
 void Array_Sqr_flt64 (flt64_t array[], size_t size);
@@ -1305,7 +1317,11 @@ flt64_t Array_Sum_flt64 (const flt64_t array[], size_t size);
 flt32_t Array_SumSqr_flt32 (const flt32_t array[], size_t size);
 flt64_t Array_SumSqr_flt64 (const flt64_t array[], size_t size);
 
-// Sum of multiplied elements
+// Sum of absolute values
+flt32_t Array_SumAbs_flt32 (const flt32_t array[], size_t size);
+flt64_t Array_SumAbs_flt32 (const flt64_t array[], size_t size);
+
+// Sum of multiplied values
 flt32_t Array_SumMul_flt32 (const flt32_t array1[], const flt32_t array2[], size_t size);
 flt64_t Array_SumMul_flt64 (const flt64_t array1[], const flt64_t array2[], size_t size);
 
@@ -1341,7 +1357,7 @@ void Array_RoundDown_flt64 (flt64_t array[], size_t size);
 void Array_RoundUp_flt32 (flt32_t array[], size_t size);
 void Array_RoundUp_flt64 (flt64_t array[], size_t size);
 
-// Round to nearest integer
+// Round to nearest even integer
 void Array_RoundInt_flt32 (flt32_t array[], size_t size);
 void Array_RoundInt_flt64 (flt64_t array[], size_t size);
 
@@ -1722,38 +1738,38 @@ void Array_MergeDsc_size (size_t target[], const size_t source1[], size_t size1,
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
 // Unsigned integer types
-void Array_MergeKeyAsc_uint8 (uint8_t tkey[], void* tptr[], const uint8_t skey1[], const void* sptr1[], size_t size1, const uint8_t skey2[], const void* sptr2[], size_t size2);
-void Array_MergeKeyAsc_uint16 (uint16_t tkey[], void* tptr[], const uint16_t skey1[], const void* sptr1[], size_t size1, const uint16_t skey2[], const void* sptr2[], size_t size2);
-void Array_MergeKeyAsc_uint32 (uint32_t tkey[], void* tptr[], const uint32_t skey1[], const void* sptr1[], size_t size1, const uint32_t skey2[], const void* sptr2[], size_t size2);
-void Array_MergeKeyAsc_uint64 (uint64_t tkey[], void* tptr[], const uint64_t skey1[], const void* sptr1[], size_t size1, const uint64_t skey2[], const void* sptr2[], size_t size2);
+void Array_MergeKeyAsc_uint8 (uint8_t tkey[], const void* tptr[], const uint8_t skey1[], const void* sptr1[], size_t size1, const uint8_t skey2[], const void* sptr2[], size_t size2);
+void Array_MergeKeyAsc_uint16 (uint16_t tkey[], const void* tptr[], const uint16_t skey1[], const void* sptr1[], size_t size1, const uint16_t skey2[], const void* sptr2[], size_t size2);
+void Array_MergeKeyAsc_uint32 (uint32_t tkey[], const void* tptr[], const uint32_t skey1[], const void* sptr1[], size_t size1, const uint32_t skey2[], const void* sptr2[], size_t size2);
+void Array_MergeKeyAsc_uint64 (uint64_t tkey[], const void* tptr[], const uint64_t skey1[], const void* sptr1[], size_t size1, const uint64_t skey2[], const void* sptr2[], size_t size2);
 
 // Signed integer types
-void Array_MergeKeyAsc_sint8 (sint8_t tkey[], void* tptr[], const sint8_t skey1[], const void* sptr1[], size_t size1, const sint8_t skey2[], const void* sptr2[], size_t size2);
-void Array_MergeKeyAsc_sint16 (sint16_t tkey[], void* tptr[], const sint16_t skey1[], const void* sptr1[], size_t size1, const sint16_t skey2[], const void* sptr2[], size_t size2);
-void Array_MergeKeyAsc_sint32 (sint32_t tkey[], void* tptr[], const sint32_t skey1[], const void* sptr1[], size_t size1, const sint32_t skey2[], const void* sptr2[], size_t size2);
-void Array_MergeKeyAsc_sint64 (sint64_t tkey[], void* tptr[], const sint64_t skey1[], const void* sptr1[], size_t size1, const sint64_t skey2[], const void* sptr2[], size_t size2);
+void Array_MergeKeyAsc_sint8 (sint8_t tkey[], const void* tptr[], const sint8_t skey1[], const void* sptr1[], size_t size1, const sint8_t skey2[], const void* sptr2[], size_t size2);
+void Array_MergeKeyAsc_sint16 (sint16_t tkey[], const void* tptr[], const sint16_t skey1[], const void* sptr1[], size_t size1, const sint16_t skey2[], const void* sptr2[], size_t size2);
+void Array_MergeKeyAsc_sint32 (sint32_t tkey[], const void* tptr[], const sint32_t skey1[], const void* sptr1[], size_t size1, const sint32_t skey2[], const void* sptr2[], size_t size2);
+void Array_MergeKeyAsc_sint64 (sint64_t tkey[], const void* tptr[], const sint64_t skey1[], const void* sptr1[], size_t size1, const sint64_t skey2[], const void* sptr2[], size_t size2);
 
 // Other types
-void Array_MergeKeyAsc_size (size_t tkey[], void* tptr[], const size_t skey1[], const void* sptr1[], size_t size1, const size_t skey2[], const void* sptr2[], size_t size2);
+void Array_MergeKeyAsc_size (size_t tkey[], const void* tptr[], const size_t skey1[], const void* sptr1[], size_t size1, const size_t skey2[], const void* sptr2[], size_t size2);
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 //      Descending sort order                                                 //
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
 // Unsigned integer types
-void Array_MergeKeyDsc_uint8 (uint8_t tkey[], void* tptr[], const uint8_t skey1[], const void* sptr1[], size_t size1, const uint8_t skey2[], const void* sptr2[], size_t size2);
-void Array_MergeKeyDsc_uint16 (uint16_t tkey[], void* tptr[], const uint16_t skey1[], const void* sptr1[], size_t size1, const uint16_t skey2[], const void* sptr2[], size_t size2);
-void Array_MergeKeyDsc_uint32 (uint32_t tkey[], void* tptr[], const uint32_t skey1[], const void* sptr1[], size_t size1, const uint32_t skey2[], const void* sptr2[], size_t size2);
-void Array_MergeKeyDsc_uint64 (uint64_t tkey[], void* tptr[], const uint64_t skey1[], const void* sptr1[], size_t size1, const uint64_t skey2[], const void* sptr2[], size_t size2);
+void Array_MergeKeyDsc_uint8 (uint8_t tkey[], const void* tptr[], const uint8_t skey1[], const void* sptr1[], size_t size1, const uint8_t skey2[], const void* sptr2[], size_t size2);
+void Array_MergeKeyDsc_uint16 (uint16_t tkey[], const void* tptr[], const uint16_t skey1[], const void* sptr1[], size_t size1, const uint16_t skey2[], const void* sptr2[], size_t size2);
+void Array_MergeKeyDsc_uint32 (uint32_t tkey[], const void* tptr[], const uint32_t skey1[], const void* sptr1[], size_t size1, const uint32_t skey2[], const void* sptr2[], size_t size2);
+void Array_MergeKeyDsc_uint64 (uint64_t tkey[], const void* tptr[], const uint64_t skey1[], const void* sptr1[], size_t size1, const uint64_t skey2[], const void* sptr2[], size_t size2);
 
 // Signed integer types
-void Array_MergeKeyDsc_sint8 (sint8_t tkey[], void* tptr[], const sint8_t skey1[], const void* sptr1[], size_t size1, const sint8_t skey2[], const void* sptr2[], size_t size2);
-void Array_MergeKeyDsc_sint16 (sint16_t tkey[], void* tptr[], const sint16_t skey1[], const void* sptr1[], size_t size1, const sint16_t skey2[], const void* sptr2[], size_t size2);
-void Array_MergeKeyDsc_sint32 (sint32_t tkey[], void* tptr[], const sint32_t skey1[], const void* sptr1[], size_t size1, const sint32_t skey2[], const void* sptr2[], size_t size2);
-void Array_MergeKeyDsc_sint64 (sint64_t tkey[], void* tptr[], const sint64_t skey1[], const void* sptr1[], size_t size1, const sint64_t skey2[], const void* sptr2[], size_t size2);
+void Array_MergeKeyDsc_sint8 (sint8_t tkey[], const void* tptr[], const sint8_t skey1[], const void* sptr1[], size_t size1, const sint8_t skey2[], const void* sptr2[], size_t size2);
+void Array_MergeKeyDsc_sint16 (sint16_t tkey[], const void* tptr[], const sint16_t skey1[], const void* sptr1[], size_t size1, const sint16_t skey2[], const void* sptr2[], size_t size2);
+void Array_MergeKeyDsc_sint32 (sint32_t tkey[], const void* tptr[], const sint32_t skey1[], const void* sptr1[], size_t size1, const sint32_t skey2[], const void* sptr2[], size_t size2);
+void Array_MergeKeyDsc_sint64 (sint64_t tkey[], const void* tptr[], const sint64_t skey1[], const void* sptr1[], size_t size1, const sint64_t skey2[], const void* sptr2[], size_t size2);
 
 // Other types
-void Array_MergeKeyDsc_size (size_t tkey[], void* tptr[], const size_t skey1[], const void* sptr1[], size_t size1, const size_t skey2[], const void* sptr2[], size_t size2);
+void Array_MergeKeyDsc_size (size_t tkey[], const void* tptr[], const size_t skey1[], const void* sptr1[], size_t size1, const size_t skey2[], const void* sptr2[], size_t size2);
 
 //****************************************************************************//
 //      Unique values                                                         //
@@ -1802,44 +1818,44 @@ size_t Array_Duplicates_size (size_t unique[], size_t count[], const size_t arra
 //============================================================================//
 
 // Unsigned integer types
-bool Array_HasDuplicates_uint8 (const uint8_t array[], size_t size);
-bool Array_HasDuplicates_uint16 (const uint16_t array[], size_t size);
-bool Array_HasDuplicates_uint32 (const uint32_t array[], size_t size);
-bool Array_HasDuplicates_uint64 (const uint64_t array[], size_t size);
+size_t Array_CheckDup_uint8 (const uint8_t array[], size_t size);
+size_t Array_CheckDup_uint16 (const uint16_t array[], size_t size);
+size_t Array_CheckDup_uint32 (const uint32_t array[], size_t size);
+size_t Array_CheckDup_uint64 (const uint64_t array[], size_t size);
 
 // Signed integer types
-bool Array_HasDuplicates_sint8 (const sint8_t array[], size_t size);
-bool Array_HasDuplicates_sint16 (const sint16_t array[], size_t size);
-bool Array_HasDuplicates_sint32 (const sint32_t array[], size_t size);
-bool Array_HasDuplicates_sint64 (const sint64_t array[], size_t size);
+size_t Array_CheckDup_sint8 (const sint8_t array[], size_t size);
+size_t Array_CheckDup_sint16 (const sint16_t array[], size_t size);
+size_t Array_CheckDup_sint32 (const sint32_t array[], size_t size);
+size_t Array_CheckDup_sint64 (const sint64_t array[], size_t size);
 
 //============================================================================//
 //      Check for infinite values                                             //
 //============================================================================//
-bool Array_HasInf_flt32 (const flt32_t array[], size_t size);
-bool Array_HasInf_flt64 (const flt64_t array[], size_t size);
+size_t Array_CheckInf_flt32 (const flt32_t array[], size_t size);
+size_t Array_CheckInf_flt64 (const flt64_t array[], size_t size);
 
 //============================================================================//
 //      Check for NaN values                                                  //
 //============================================================================//
-bool Array_HasNaN_flt32 (const flt32_t array[], size_t size);
-bool Array_HasNaN_flt64 (const flt64_t array[], size_t size);
+size_t Array_CheckNaN_flt32 (const flt32_t array[], size_t size);
+size_t Array_CheckNaN_flt64 (const flt64_t array[], size_t size);
 
 //============================================================================//
 //      Check for equality                                                    //
 //============================================================================//
 
 // Unsigned integer types
-bool Array_IsEqual_uint8 (const uint8_t array1[], const uint8_t array2[], size_t size);
-bool Array_IsEqual_uint16 (const uint16_t array1[], const uint16_t array2[], size_t size);
-bool Array_IsEqual_uint32 (const uint32_t array1[], const uint32_t array2[], size_t size);
-bool Array_IsEqual_uint64 (const uint64_t array1[], const uint64_t array2[], size_t size);
+size_t Array_CheckEqual_uint8 (const uint8_t array1[], const uint8_t array2[], size_t size);
+size_t Array_CheckEqual_uint16 (const uint16_t array1[], const uint16_t array2[], size_t size);
+size_t Array_CheckEqual_uint32 (const uint32_t array1[], const uint32_t array2[], size_t size);
+size_t Array_CheckEqual_uint64 (const uint64_t array1[], const uint64_t array2[], size_t size);
 
 // Signed integer types
-bool Array_IsEqual_sint8 (const sint8_t array1[], const sint8_t array2[], size_t size);
-bool Array_IsEqual_sint16 (const sint16_t array1[], const sint16_t array2[], size_t size);
-bool Array_IsEqual_sint32 (const sint32_t array1[], const sint32_t array2[], size_t size);
-bool Array_IsEqual_sint64 (const sint64_t array1[], const sint64_t array2[], size_t size);
+size_t Array_CheckEqual_sint8 (const sint8_t array1[], const sint8_t array2[], size_t size);
+size_t Array_CheckEqual_sint16 (const sint16_t array1[], const sint16_t array2[], size_t size);
+size_t Array_CheckEqual_sint32 (const sint32_t array1[], const sint32_t array2[], size_t size);
+size_t Array_CheckEqual_sint64 (const sint64_t array1[], const sint64_t array2[], size_t size);
 
 //============================================================================//
 //      Check for overlap                                                     //

@@ -7,6 +7,7 @@
 ;# License: LGPLv3+                              Copyleft (Ɔ) 2012, Jack Black #
 ;###############################################################################
 format	ELF64
+include	'Macro.inc'
 
 ;###############################################################################
 ;#      Export section                                                         #
@@ -432,6 +433,12 @@ public	Abs_flt64				as	'Array_Abs_flt64'
 public	Abs_flt32				as	'_ZN5Array3AbsEPfm'
 public	Abs_flt64				as	'_ZN5Array3AbsEPdm'
 
+; Negative absolute value
+public	NegAbs_flt32			as	'Array_NegAbs_flt32'
+public	NegAbs_flt64			as	'Array_NegAbs_flt64'
+public	NegAbs_flt32			as	'_ZN5Array6NegAbsEPfm'
+public	NegAbs_flt64			as	'_ZN5Array6NegAbsEPdm'
+
 ; Square
 public	Sqr_flt32				as	'Array_Sqr_flt32'
 public	Sqr_flt64				as	'Array_Sqr_flt64'
@@ -528,6 +535,12 @@ public	SumSqr_flt64			as	'Array_SumSqr_flt64'
 public	SumSqr_flt32			as	'_ZN5Array6SumSqrEPKfm'
 public	SumSqr_flt64			as	'_ZN5Array6SumSqrEPKdm'
 
+; Sum of absolute values
+public	SumAbs_flt32			as	'Array_SumAbs_flt32'
+public	SumAbs_flt64			as	'Array_SumAbs_flt64'
+public	SumAbs_flt32			as	'_ZN5Array6SumAbsEPKfm'
+public	SumAbs_flt64			as	'_ZN5Array6SumAbsEPKdm'
+
 ; Sum of multiplied elements
 public	SumMul_flt32			as	'Array_SumMul_flt32'
 public	SumMul_flt64			as	'Array_SumMul_flt64'
@@ -578,7 +591,7 @@ public	RoundUp_flt64			as	'Array_RoundUp_flt64'
 public	RoundUp_flt32			as	'_ZN5Array7RoundUpEPfm'
 public	RoundUp_flt64			as	'_ZN5Array7RoundUpEPdm'
 
-; Round to nearest integer
+; Round to nearest even integer
 public	RoundInt_flt32			as	'Array_RoundInt_flt32'
 public	RoundInt_flt64			as	'Array_RoundInt_flt64'
 public	RoundInt_flt32			as	'_ZN5Array8RoundIntEPfm'
@@ -1125,24 +1138,24 @@ public	MergeKeyAsc_uint8			as	'Array_MergeKeyAsc_uint8'
 public	MergeKeyAsc_uint16			as	'Array_MergeKeyAsc_uint16'
 public	MergeKeyAsc_uint32			as	'Array_MergeKeyAsc_uint32'
 public	MergeKeyAsc_uint64			as	'Array_MergeKeyAsc_uint64'
-public	MergeKeyAsc_uint8			as	'_ZN5Array8MergeAscEPhPPvPKhPPKvmS4_S7_m'
-public	MergeKeyAsc_uint16			as	'_ZN5Array8MergeAscEPtPPvPKtPPKvmS4_S7_m'
-public	MergeKeyAsc_uint32			as	'_ZN5Array8MergeAscEPjPPvPKjPPKvmS4_S7_m'
-public	MergeKeyAsc_uint64			as	'_ZN5Array8MergeAscEPyPPvPKyPPKvmS4_S7_m'
+public	MergeKeyAsc_uint8			as	'_ZN5Array8MergeAscEPhPPKvPKhS3_mS5_S3_m'
+public	MergeKeyAsc_uint16			as	'_ZN5Array8MergeAscEPtPPKvPKtS3_mS5_S3_m'
+public	MergeKeyAsc_uint32			as	'_ZN5Array8MergeAscEPjPPKvPKjS3_mS5_S3_m'
+public	MergeKeyAsc_uint64			as	'_ZN5Array8MergeAscEPyPPKvPKyS3_mS5_S3_m'
 
 ; Signed integer types
 public	MergeKeyAsc_sint8			as	'Array_MergeKeyAsc_sint8'
 public	MergeKeyAsc_sint16			as	'Array_MergeKeyAsc_sint16'
 public	MergeKeyAsc_sint32			as	'Array_MergeKeyAsc_sint32'
 public	MergeKeyAsc_sint64			as	'Array_MergeKeyAsc_sint64'
-public	MergeKeyAsc_sint8			as	'_ZN5Array8MergeAscEPaPPvPKaPPKvmS4_S7_m'
-public	MergeKeyAsc_sint16			as	'_ZN5Array8MergeAscEPsPPvPKsPPKvmS4_S7_m'
-public	MergeKeyAsc_sint32			as	'_ZN5Array8MergeAscEPiPPvPKiPPKvmS4_S7_m'
-public	MergeKeyAsc_sint64			as	'_ZN5Array8MergeAscEPxPPvPKxPPKvmS4_S7_m'
+public	MergeKeyAsc_sint8			as	'_ZN5Array8MergeAscEPaPPKvPKaS3_mS5_S3_m'
+public	MergeKeyAsc_sint16			as	'_ZN5Array8MergeAscEPsPPKvPKsS3_mS5_S3_m'
+public	MergeKeyAsc_sint32			as	'_ZN5Array8MergeAscEPiPPKvPKiS3_mS5_S3_m'
+public	MergeKeyAsc_sint64			as	'_ZN5Array8MergeAscEPxPPKvPKxS3_mS5_S3_m'
 
 ; Other types
 public	MergeKeyAsc_uint64			as	'Array_MergeKeyAsc_size'
-public	MergeKeyAsc_uint64			as	'_ZN5Array8MergeAscEPmPPvPKmPPKvmS4_S7_m'
+public	MergeKeyAsc_uint64			as	'_ZN5Array8MergeAscEPmPPKvPKmS3_mS5_S3_m'
 
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 ;       Descending sort order                                                  ;
@@ -1153,24 +1166,25 @@ public	MergeKeyDsc_uint8			as	'Array_MergeKeyDsc_uint8'
 public	MergeKeyDsc_uint16			as	'Array_MergeKeyDsc_uint16'
 public	MergeKeyDsc_uint32			as	'Array_MergeKeyDsc_uint32'
 public	MergeKeyDsc_uint64			as	'Array_MergeKeyDsc_uint64'
-public	MergeKeyDsc_uint8			as	'_ZN5Array8MergeDscEPhPPvPKhPPKvmS4_S7_m'
-public	MergeKeyDsc_uint16			as	'_ZN5Array8MergeDscEPtPPvPKtPPKvmS4_S7_m'
-public	MergeKeyDsc_uint32			as	'_ZN5Array8MergeDscEPjPPvPKjPPKvmS4_S7_m'
-public	MergeKeyDsc_uint64			as	'_ZN5Array8MergeDscEPyPPvPKyPPKvmS4_S7_m'
+public	MergeKeyDsc_uint8			as	'_ZN5Array8MergeDscEPhPPKvPKhS3_mS5_S3_m'
+public	MergeKeyDsc_uint16			as	'_ZN5Array8MergeDscEPtPPKvPKtS3_mS5_S3_m'
+public	MergeKeyDsc_uint32			as	'_ZN5Array8MergeDscEPjPPKvPKjS3_mS5_S3_m'
+public	MergeKeyDsc_uint64			as	'_ZN5Array8MergeDscEPyPPKvPKyS3_mS5_S3_m'
 
 ; Signed integer types
 public	MergeKeyDsc_sint8			as	'Array_MergeKeyDsc_sint8'
 public	MergeKeyDsc_sint16			as	'Array_MergeKeyDsc_sint16'
 public	MergeKeyDsc_sint32			as	'Array_MergeKeyDsc_sint32'
 public	MergeKeyDsc_sint64			as	'Array_MergeKeyDsc_sint64'
-public	MergeKeyDsc_sint8			as	'_ZN5Array8MergeDscEPaPPvPKaPPKvmS4_S7_m'
-public	MergeKeyDsc_sint16			as	'_ZN5Array8MergeDscEPsPPvPKsPPKvmS4_S7_m'
-public	MergeKeyDsc_sint32			as	'_ZN5Array8MergeDscEPiPPvPKiPPKvmS4_S7_m'
-public	MergeKeyDsc_sint64			as	'_ZN5Array8MergeDscEPxPPvPKxPPKvmS4_S7_m'
+public	MergeKeyDsc_sint8			as	'_ZN5Array8MergeDscEPaPPKvPKaS3_mS5_S3_m'
+public	MergeKeyDsc_sint16			as	'_ZN5Array8MergeDscEPsPPKvPKsS3_mS5_S3_m'
+public	MergeKeyDsc_sint32			as	'_ZN5Array8MergeDscEPiPPKvPKiS3_mS5_S3_m'
+public	MergeKeyDsc_sint64			as	'_ZN5Array8MergeDscEPxPPKvPKxS3_mS5_S3_m'
 
 ; Other types
 public	MergeKeyDsc_uint64			as	'Array_MergeKeyDsc_size'
-public	MergeKeyDsc_uint64			as	'_ZN5Array8MergeDscEPmPPvPKmPPKvmS4_S7_m'
+public	MergeKeyDsc_uint64			as	'_ZN5Array8MergeDscEPmPPKvPKmS3_mS5_S3_m'
+
 
 ;******************************************************************************;
 ;       Unique values                                                          ;
@@ -1237,64 +1251,64 @@ public	Duplicates64			as	'_ZN5Array10DuplicatesEPmPmPKmm'
 ;==============================================================================;
 
 ; Unsigned integer types
-public	HasDuplicates8			as	'Array_HasDuplicates_uint8'
-public	HasDuplicates16			as	'Array_HasDuplicates_uint16'
-public	HasDuplicates32			as	'Array_HasDuplicates_uint32'
-public	HasDuplicates64			as	'Array_HasDuplicates_uint64'
-public	HasDuplicates8			as	'_ZN5Array13HasDuplicatesEPKhm'
-public	HasDuplicates16			as	'_ZN5Array13HasDuplicatesEPKtm'
-public	HasDuplicates32			as	'_ZN5Array13HasDuplicatesEPKjm'
-public	HasDuplicates64			as	'_ZN5Array13HasDuplicatesEPKym'
+public	CheckDup8				as	'Array_CheckDup_uint8'
+public	CheckDup16				as	'Array_CheckDup_uint16'
+public	CheckDup32				as	'Array_CheckDup_uint32'
+public	CheckDup64				as	'Array_CheckDup_uint64'
+public	CheckDup8				as	'_ZN5Array8CheckDupEPKhm'
+public	CheckDup16				as	'_ZN5Array8CheckDupEPKtm'
+public	CheckDup32				as	'_ZN5Array8CheckDupEPKjm'
+public	CheckDup64				as	'_ZN5Array8CheckDupEPKym'
 
 ; Signed integer types
-public	HasDuplicates8			as	'Array_HasDuplicates_sint8'
-public	HasDuplicates16			as	'Array_HasDuplicates_sint16'
-public	HasDuplicates32			as	'Array_HasDuplicates_sint32'
-public	HasDuplicates64			as	'Array_HasDuplicates_sint64'
-public	HasDuplicates8			as	'_ZN5Array13HasDuplicatesEPKam'
-public	HasDuplicates16			as	'_ZN5Array13HasDuplicatesEPKsm'
-public	HasDuplicates32			as	'_ZN5Array13HasDuplicatesEPKim'
-public	HasDuplicates64			as	'_ZN5Array13HasDuplicatesEPKxm'
+public	CheckDup8				as	'Array_CheckDup_sint8'
+public	CheckDup16				as	'Array_CheckDup_sint16'
+public	CheckDup32				as	'Array_CheckDup_sint32'
+public	CheckDup64				as	'Array_CheckDup_sint64'
+public	CheckDup8				as	'_ZN5Array8CheckDupEPKam'
+public	CheckDup16				as	'_ZN5Array8CheckDupEPKsm'
+public	CheckDup32				as	'_ZN5Array8CheckDupEPKim'
+public	CheckDup64				as	'_ZN5Array8CheckDupEPKxm'
 
 ;==============================================================================;
 ;       Check for infinite values                                              ;
 ;==============================================================================;
-public	HasINF_flt32			as	'Array_HasInf_flt32'
-public	HasINF_flt64			as	'Array_HasInf_flt64'
-public	HasINF_flt32			as	'_ZN5Array6HasInfEPKfm'
-public	HasINF_flt64			as	'_ZN5Array6HasInfEPKdm'
+public	CheckInf_flt32			as	'Array_CheckInf_flt32'
+public	CheckInf_flt64			as	'Array_CheckInf_flt64'
+public	CheckInf_flt32			as	'_ZN5Array8CheckInfEPKfm'
+public	CheckInf_flt64			as	'_ZN5Array8CheckInfEPKdm'
 
 ;==============================================================================;
 ;       Check for NaN values                                                   ;
 ;==============================================================================;
-public	HasNAN_flt32			as	'Array_HasNaN_flt32'
-public	HasNAN_flt64			as	'Array_HasNaN_flt64'
-public	HasNAN_flt32			as	'_ZN5Array6HasNaNEPKfm'
-public	HasNAN_flt64			as	'_ZN5Array6HasNaNEPKdm'
+public	CheckNaN_flt32			as	'Array_CheckNaN_flt32'
+public	CheckNaN_flt64			as	'Array_CheckNaN_flt64'
+public	CheckNaN_flt32			as	'_ZN5Array8CheckNaNEPKfm'
+public	CheckNaN_flt64			as	'_ZN5Array8CheckNaNEPKdm'
 
 ;==============================================================================;
 ;       Check for equality                                                     ;
 ;==============================================================================;
 
 ; Unsigned integer types
-public	IsEqual8				as	'Array_IsEqual_uint8'
-public	IsEqual16				as	'Array_IsEqual_uint16'
-public	IsEqual32				as	'Array_IsEqual_uint32'
-public	IsEqual64				as	'Array_IsEqual_uint64'
-public	IsEqual8				as	'_ZN5Array7IsEqualEPKhS1_m'
-public	IsEqual16				as	'_ZN5Array7IsEqualEPKtS1_m'
-public	IsEqual32				as	'_ZN5Array7IsEqualEPKjS1_m'
-public	IsEqual64				as	'_ZN5Array7IsEqualEPKyS1_m'
+public	CheckEqual8				as	'Array_CheckEqual_uint8'
+public	CheckEqual16			as	'Array_CheckEqual_uint16'
+public	CheckEqual32			as	'Array_CheckEqual_uint32'
+public	CheckEqual64			as	'Array_CheckEqual_uint64'
+public	CheckEqual8				as	'_ZN5Array10CheckEqualEPKhS1_m'
+public	CheckEqual16			as	'_ZN5Array10CheckEqualEPKtS1_m'
+public	CheckEqual32			as	'_ZN5Array10CheckEqualEPKjS1_m'
+public	CheckEqual64			as	'_ZN5Array10CheckEqualEPKyS1_m'
 
 ; Signed integer types
-public	IsEqual8				as	'Array_IsEqual_sint8'
-public	IsEqual16				as	'Array_IsEqual_sint16'
-public	IsEqual32				as	'Array_IsEqual_sint32'
-public	IsEqual64				as	'Array_IsEqual_sint64'
-public	IsEqual8				as	'_ZN5Array7IsEqualEPKaS1_m'
-public	IsEqual16				as	'_ZN5Array7IsEqualEPKsS1_m'
-public	IsEqual32				as	'_ZN5Array7IsEqualEPKiS1_m'
-public	IsEqual64				as	'_ZN5Array7IsEqualEPKxS1_m'
+public	CheckEqual8				as	'Array_CheckEqual_sint8'
+public	CheckEqual16			as	'Array_CheckEqual_sint16'
+public	CheckEqual32			as	'Array_CheckEqual_sint32'
+public	CheckEqual64			as	'Array_CheckEqual_sint64'
+public	CheckEqual8				as	'_ZN5Array10CheckEqualEPKaS1_m'
+public	CheckEqual16			as	'_ZN5Array10CheckEqualEPKsS1_m'
+public	CheckEqual32			as	'_ZN5Array10CheckEqualEPKiS1_m'
+public	CheckEqual64			as	'_ZN5Array10CheckEqualEPKxS1_m'
 
 ;==============================================================================;
 ;       Check for overlap                                                      ;
@@ -1338,71 +1352,14 @@ section	'.text'		executable align 16
 ;******************************************************************************;
 ;       Consts                                                                 ;
 ;******************************************************************************;
-CACHE_SIZE	= 2097152						; Cache size
-PSTEP		= 512							; Prefetch step
-NOT_FOUND	= -1							; Pattern is not found
 
 ; flt32_t
-DMASK_FLT32	= 0x7FFFFFFF					; data mask and NaN value
-SMASK_FLT32	= 0x80000000					; sign mask
 PINF_FLT32	= 0x7F800000					; +inf
 MINF_FLT32	= 0xFF800000					; -inf
-MAGIC_FLT32	= 0x4B400000					; magic number for flt32_t to int conversion
 
 ; flt64_t
-DMASK_FLT64	= 0x7FFFFFFFFFFFFFFF			; data mask and NaN value
-SMASK_FLT64	= 0x8000000000000000			; sign mask
 PINF_FLT64	= 0x7FF0000000000000			; +inf
 MINF_FLT64	= 0xFFF0000000000000			; -inf
-MAGIC_FLT64	= 0x4338000000000000			; magic number for flt64_t to int conversion
-
-;******************************************************************************;
-;       Clone value through the entire register                                ;
-;******************************************************************************;
-macro	clone	reg, scale
-{
-if scale = 0
-	punpcklbw	reg, reg
-	punpcklbw	reg, reg
-	punpcklbw	reg, reg
-	punpcklbw	reg, reg
-else if scale = 1
-	punpcklwd	reg, reg
-	punpcklwd	reg, reg
-	punpcklwd	reg, reg
-else if scale = 2
-	punpckldq	reg, reg
-	punpckldq	reg, reg
-else if scale = 3
-	punpcklqdq	reg, reg
-end if
-}
-
-;******************************************************************************;
-;       Scalar sum of values inside the entire register                        ;
-;******************************************************************************;
-macro	summa	reg, x
-{
-if x eq s
-		haddp#x	reg, reg
-		haddp#x	reg, reg
-else
-		haddp#x	reg, reg
-end if
-}
-
-;******************************************************************************;
-;       Init XMM register with const                                           ;
-;******************************************************************************;
-macro	initreg	reg, treg, value, bytes
-{
-		mov		treg, value
-if bytes = 4
-		movd	reg, treg
-else
-		movq	reg, treg
-end if
-}
 
 ;******************************************************************************;
 ;       Order reversing                                                        ;
@@ -1440,62 +1397,87 @@ Reverse64:	REVERSE		rcx, rdx, 3
 ;******************************************************************************;
 ;       Initialization                                                         ;
 ;******************************************************************************;
-macro	INIT_INT	value, scale
+macro	INIT	reg, x
 {
 ;---[Parameters]---------------------------
 array	equ		rdi							; pointer to array
 size	equ		rsi							; array size (count of elements)
-reg		equ		rdx							; register that holds value
+value	equ		rdx							; register which holds value
 ;---[Internal variables]-------------------
-count	equ		rcx							; count of elements to align array
-temp	equ		r8							; temporary register
-vector	equ		xmm0						; vector value to process with
-amask	= 16 - 1							; aligning mask
-bscale	= 6									; block scale factor
+index	equ		rax							; offset from beginning of array
+aindex	equ		rcx							; array offset from vector boundary
+ptr		equ		r10							; temporary pointer to array
+blend	equ		xmm0						; blending mask
+vector	equ		xmm2						; value to process with
+data	equ		xmm3						; register which holds original data
+if x eq b
+scale	= 0									; scale value
+else if x eq w
+scale	= 1									; scale value
+else if x eq d
+scale	= 2									; scale value
+else if x eq q
+scale	= 3									; scale value
+end if
 bytes	= 1 shl scale						; size of array element (bytes)
-block	= 1 shl bscale						; block size (bytes)
-step	= 1 shl (bscale - scale)			; step size (bytes)
+bmask	= bytes - 1							; elements aligning mask
 ;------------------------------------------
-		test	array, bytes - 1			; if (array & (bytes - 1))
-		jnz		.sclr						;     then skip vector code
-		mov		count, array
-		neg		count
-		and		count, amask
-		shr		count, scale				; count = (-array & amask) >> scale
-		lea		temp, [count + step]
-		cmp		size, temp					; if (size < count + step)
-		jb		.sclr						;     then skip vector code
-		movq	vector, reg					; vector = value
+	prefetchnta	[array]						; prefetch data
+		shl		size, scale					; convert size to bytes
+		jz		.exit						; if (size == 0), then go to exit
+		test	array, bmask				; if elements have wrong alignment
+		jnz		.sloop						;     then skip vector code
+;---[Normal execution branch]--------------
+		movq	vector, value				; vector = value
+		mov		aindex, array
+		and		aindex, VMASK				; get array offset from vector boundary
+		sub		array, aindex				; align pointer to vector boundary
+		mov		ptr, array					; ptr = array
 		clone	vector, scale				; duplicate value through the entire register
-		sub		size, count					; size -= count
-		mov		temp, size					; temp = size
-		shr		size, bscale - scale		; size = size / step
-		and		temp, step - 1				; temp = size % step
-		test	count, count				; if (count == 0)
-		jz		.vloop						;     then skip aligning loop
-;---[Aligning loop]------------------------
-.aloop:	mov		[array], value				; array[0] = value
-		add		array, bytes				; array++
-		sub		count, 1					; count--
-		jnz		.aloop						; do while (count != 0)
+;---[Unaligned sums]-----------------------
+		add		size, aindex				; size += aindex
+		shl		aindex, 4					; compute shift in mask array
+		movdqa	blend, dqword [maskS1 + aindex]
+		xor		index, index				; index = 0
+		sub		size, VSIZE					; if (size <= VSIZE)
+		jbe		.tail						;     then process array tail
+		movdqa	data, vector				; data = vector
+	pblendvb	data, [array]				; blend value with original data
+		movdqa	[array], data				; array[0] = vector
+		pxor	blend, blend				; blend = 0
 ;---[Vector loop]--------------------------
-.vloop:	movdqa	[array + 0x00], vector		; array[0] = vector
-		movdqa	[array + 0x10], vector		; array[16] = vector
-		movdqa	[array + 0x20], vector		; array[32] = vector
-		movdqa	[array + 0x30], vector		; array[48] = vector
-		add		array, block				; array += block
-		sub		size, 1						; size--
-		jnz		.vloop						; do while (size != 0)
-;------------------------------------------
-		mov		size, temp					; size = temp
-.sclr:	test	size, size					; if (size == 0)
-		jz		.exit						;     then go to exit
+.vloop:	add		index, VSIZE				; index += VSIZE
+		sub		size, VSIZE					; if (size <= VSIZE)
+		jbe		.tail						;     then process array tail
+		movdqa	[ptr + 1*VSIZE], vector		; ptr[1] = vector
+		add		index, VSIZE				; index += VSIZE
+		sub		size, VSIZE					; if (size <= VSIZE)
+		jbe		.tail						;     then process array tail
+		movdqa	[ptr + 2*VSIZE], vector		; ptr[2] = vector
+		add		index, VSIZE				; index += VSIZE
+		sub		size, VSIZE					; if (size <= VSIZE)
+		jbe		.tail						;     then process array tail
+		movdqa	[ptr + 3*VSIZE], vector		; ptr[3] = vector
+		add		index, VSIZE				; index += VSIZE
+		sub		size, VSIZE					; if (size <= VSIZE)
+		jbe		.tail						;     then process array tail
+		movdqa	[ptr + 4*VSIZE], vector		; ptr[4] = vector
+	prefetchnta	[ptr + PSTEP]				; prefetch next portion of data
+		add		ptr, 4 * VSIZE				; ptr += 4 * VSIZE
+		jmp		.vloop						; do while (true)
+;---[End of vector loop]-------------------
+.tail:	shl		size, 4						; compute shift in mask array
+		pandn	blend, dqword [maskS2 + size]
+		movdqa	data, [array + index]		; data = array[index]
+	pblendvb	data, vector				; blend value with original data
+		movdqa	[array + index], data		; array[index] = vector
+		ret
 ;---[Scalar loop]--------------------------
-.sloop:	mov		[array], value				; array[0] = value
+.sloop:	mov		[array], reg				; array[0] = reg
 		add		array, bytes				; array++
-		sub		size, 1						; size--
+		sub		size, bytes					; size--
 		jnz		.sloop						; do while (size != 0)
-;------------------------------------------
+;---[Normal exit]--------------------------
 .exit:	ret
 }
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -1504,68 +1486,24 @@ macro	INIT_FLT	x
 ;---[Parameters]---------------------------
 array	equ		rdi							; pointer to array
 size	equ		rsi							; array size (count of elements)
-value	equ		xmm0						; value to process with
+value	equ		xmm0						; register which holds value
 ;---[Internal variables]-------------------
-count	equ		rcx							; count of elements to align array
-temp	equ		r8							; temporary register
-amask	= 16 - 1							; aligning mask
+reg		equ		rdx							; register which holds value
 if x eq s
-scale	= 2									; scale value
-else
-scale	= 3									; scale value
+func	= Init_int32						; function to call
+else if x eq d
+func	= Init_int64						; function to call
 end if
-bscale	= 6									; block scale factor
-bytes	= 1 shl scale						; size of array element (bytes)
-block	= 1 shl bscale						; block size (bytes)
-step	= 1 shl (bscale - scale)			; step size (bytes)
 ;------------------------------------------
-		test	array, bytes - 1			; if (array & (bytes - 1))
-		jnz		.sclr						;     then skip vector code
-		mov		count, array
-		neg		count
-		and		count, amask
-		shr		count, scale				; count = (-array & amask) >> scale
-		lea		temp, [count + step]
-		cmp		size, temp					; if (size < count + step)
-		jb		.sclr						;     then skip vector code
-		shufp#x	value, value, 0x0			; duplicate value through the entire register
-		sub		size, count					; size -= count
-		mov		temp, size					; temp = size
-		shr		size, bscale - scale		; size = size / step
-		and		temp, step - 1				; temp = size % step
-		test	count, count				; if (count == 0)
-		jz		.vloop						;     then skip aligning loop
-;---[Aligning loop]------------------------
-.aloop:	movs#x	[array], value				; array[0] = value
-		add		array, bytes				; array++
-		sub		count, 1					; count--
-		jnz		.aloop						; do while (count != 0)
-;---[Vector loop]--------------------------
-.vloop:	movap#x	[array + 0x00], value		; array[0] = value
-		movap#x	[array + 0x10], value		; array[16] = value
-		movap#x	[array + 0x20], value		; array[32] = value
-		movap#x	[array + 0x30], value		; array[48] = value
-		add		array, block				; array += block
-		sub		size, 1						; size--
-		jnz		.vloop						; do while (size != 0)
-;------------------------------------------
-		mov		size, temp					; size = temp
-.sclr:	test	size, size					; if (size == 0)
-		jz		.exit						;     then go to exit
-;---[Scalar loop]--------------------------
-.sloop:	movs#x	[array], value				; array[0] = value
-		add		array, bytes				; array++
-		sub		size, 1						; size--
-		jnz		.sloop						; do while (size != 0)
-;------------------------------------------
-.exit:	ret
+		movq	reg, value					; load mask
+		jmp		func						; call appropriate function
 }
 
 ; Integer types
-Init_int8:	INIT_INT	dl, 0
-Init_int16:	INIT_INT	dx, 1
-Init_int32:	INIT_INT	edx, 2
-Init_int64:	INIT_INT	rdx, 3
+Init_int8:	INIT	dl, b
+Init_int16:	INIT	dx, w
+Init_int32:	INIT	edx, d
+Init_int64:	INIT	rdx, q
 
 ; Floating-point types
 Init_flt32:	INIT_FLT	s
@@ -1574,220 +1512,226 @@ Init_flt64:	INIT_FLT	d
 ;******************************************************************************;
 ;       Copying                                                                ;
 ;******************************************************************************;
-macro	COPY_FWD	scale
+macro	COPY_FWD	reg, x
 {
 ;---[Parameters]---------------------------
 target	equ		rdi							; pointer to target array
-source	equ 	rsi							; pointer to source array
+source	equ		rsi							; pointer to source array
 size	equ		rdx							; array size (count of elements)
 ;---[Internal variables]-------------------
-count	equ		rcx							; count of elements to align target
-temp	equ		r8							; temporary register
-element	equ		al							; register to hold byte element
-temp0	equ		xmm0						; temporary register #1
-temp1	equ		xmm1						; temporary register #2
-temp2	equ		xmm2						; temporary register #3
-temp3	equ		xmm3						; temporary register #4
-amask	= 16 - 1							; aligning mask
-bscale	= 6									; block scale factor
-block	= 1 shl bscale						; block size (bytes)
+index	equ		rax							; offset from beginning of target array
+ptr1	equ		r10							; temporary pointer to target array
+ptr2	equ		r11							; temporary pointer to source array
+temp	equ		xmm0						; temporary register #1
+if x eq b
+scale	= 0									; scale value
+else if x eq w
+scale	= 1									; scale value
+else if x eq d
+scale	= 2									; scale value
+else if x eq q
+scale	= 3									; scale value
+end if
+bytes	= 1 shl scale						; size of array element (bytes)
+bmask	= bytes - 1							; elements aligning mask
 ;------------------------------------------
-		cmp		target, source				; if (target == source)
-		je		.exit						;     then go to exit
 	prefetchnta	[source]					; prefetch data
-		shl		size, scale					; size <<= scale
-		mov		count, target
-		neg		count
-		and		count, amask				; count = -target & amask
-		lea		temp, [count + block]
-		cmp		size, temp					; if (size < count + step)
-		jb		.sclr						;     then skip vector code
-		sub		size, count					; size -= count
-		mov		temp, size					; temp = size
-		shr		size, bscale				; size = size / block
-		and		temp, block - 1				; temp = size % block
-		test	count, count				; if (count == 0)
-		jz		.vctr						;     then skip aligning loop
-;---[Aligning loop]------------------------
-.aloop:	mov		element, [source]			; element = source[0]
-		mov		[target], element			; target[0] = element
-		add		source, 1					; source++
-		add		target, 1					; target++
-		sub		count, 1					; count--
-		jnz		.aloop						; do while (count != 0)
-;------------------------------------------
-.vctr:	cmp		size, CACHE_SIZE / 2		; if (size > CACHE_SIZE / 2)
-		ja		.fast						;     then invoke fast copy cycle
+		shl		size, scale					; convert size to bytes
+		jz		.exit						; if (size == 0), then go to exit
+		test	source, bmask				; if elements have wrong alignment
+		jnz		.sloop						;     then skip vector code
+		test	target, bmask				; if elements have wrong alignment
+		jnz		.sloop						;     then skip vector code
+		cmp		size, VSIZE					; if (size < VSIZE)
+		jb		.sloop						;     then skip vector code
+;---[Normal execution branch]--------------
+		mov		index, target
+		and		index, VMASK
+		neg 	index						; get array offset from vector boundary
+		lea		ptr2, [source + index]		; ptr2 = source + index
+		lea		ptr1, [target + index]		; ptr1 = target + index
+;---[Unaligned operation]------------------
+		sub		size, index					; size -= index
+		sub		size, VSIZE					; if (size <= VSIZE)
+		jbe		.tail						;     then process array tails
+		movdqu	temp, [source]				; temp = source[0]
+		movdqu	[target], temp				; target[0] = temp
 ;---[Vector loop]--------------------------
-.vloop:	movdqu	temp0, [source + 0x00]		; temp0 = source[0]
-		movdqu	temp1, [source + 0x10]		; temp1 = source[16]
-		movdqu	temp2, [source + 0x20]		; temp2 = source[32]
-		movdqu	temp3, [source + 0x30]		; temp3 = source[48]
-	prefetchnta	[source + PSTEP]			; prefetch next portion of data
-		movdqa	[target + 0x00], temp0		; target[0] = temp0
-		movdqa	[target + 0x10], temp1		; target[16] = temp1
-		movdqa	[target + 0x20], temp2		; target[32] = temp2
-		movdqa	[target + 0x30], temp3		; target[48] = temp3
-		add		source, block				; source += block
-		add		target, block				; target += block
-		sub		size, 1						; size--
-		jnz		.vloop						; do while (size != 0)
-;------------------------------------------
-		mov		size, temp					; size = temp
-.sclr:	test	size, size					; if (size == 0)
-		jz		.exit						;     then go to exit
+.vloop:	add		index, VSIZE				; index += VSIZE
+		sub		size, VSIZE					; if (size <= VSIZE)
+		jbe		.tail						;     then process array tails
+		movdqu	temp, [ptr2 + 1*VSIZE]		; temp = ptr2[1]
+		movdqa	[ptr1 + 1*VSIZE], temp		; ptr1[1] = temp
+		add		index, VSIZE				; index += VSIZE
+		sub		size, VSIZE					; if (size <= VSIZE)
+		jbe		.tail						;     then process array tails
+		movdqu	temp, [ptr2 + 2*VSIZE]		; temp = ptr2[2]
+		movdqa	[ptr1 + 2*VSIZE], temp		; ptr1[2] = temp
+		add		index, VSIZE				; index += VSIZE
+		sub		size, VSIZE					; if (size <= VSIZE)
+		jbe		.tail						;     then process array tails
+		movdqu	temp, [ptr2 + 3*VSIZE]		; temp = ptr2[3]
+		movdqa	[ptr1 + 3*VSIZE], temp		; ptr1[3] = temp
+		add		index, VSIZE				; index += VSIZE
+		sub		size, VSIZE					; if (size <= VSIZE)
+		jbe		.tail						;     then process array tails
+		movdqu	temp, [ptr2 + 4*VSIZE]		; temp = ptr2[4]
+		movdqa	[ptr1 + 4*VSIZE], temp		; ptr1[4] = temp
+	prefetchnta	[ptr2 + PSTEP]				; prefetch next portion of temp
+		add		ptr2, 4 * VSIZE				; ptr2 += 4 * VSIZE
+		add		ptr1, 4 * VSIZE				; ptr1 += 4 * VSIZE
+		jmp		.vloop						; do while (true)
+;---[End of vector loop]-------------------
+.tail:	add		index, size					; index += size
+		movdqu	temp, [source + index]		; temp = source[index]
+		movdqu	[target + index], temp		; target[index] = temp
+		ret
 ;---[Scalar loop]--------------------------
-.sloop:	mov		element, [source]			; element = source[0]
-		mov		[target], element			; target[0] = element
-		add		source, 1					; source++
-		add		target, 1					; target++
-		sub		size, 1						; size--
+.sloop:	mov		reg, [source]				; reg = source[0]
+		mov		[target], reg				; target[0] = reg
+		add		source, bytes				; source++
+		add		target, bytes				; target++
+		sub		size, bytes					; size--
 		jnz		.sloop						; do while (size != 0)
-;------------------------------------------
+;---[Normal exit]--------------------------
 .exit:	ret
-;---[Fast copy loop]-----------------------
-.fast:	lddqu	temp0, [source + 0x00]		; temp0 = source[0]
-		lddqu	temp1, [source + 0x10]		; temp1 = source[16]
-		lddqu	temp2, [source + 0x20]		; temp2 = source[32]
-		lddqu	temp3, [source + 0x30]		; temp3 = source[48]
-	prefetchnta	[source + PSTEP]			; prefetch next portion of data
-		movntdq	[target + 0x00], temp0		; target[0] = temp0
-		movntdq	[target + 0x10], temp1		; target[16] = temp1
-		movntdq	[target + 0x20], temp2		; target[32] = temp2
-		movntdq	[target + 0x30], temp3		; target[48] = temp3
-		add		source, block				; source += block
-		add		target, block				; target += block
-		sub		size, 1						; size--
-		jnz		.fast						; do while (size != 0)
-;------------------------------------------
-		sfence								; serialize memory stores
-		mov		size, temp					; size = temp
-		jmp		.sclr						; invoke scalar code
 }
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	COPY_BWD	scale
+macro	COPY_BWD	reg, x
 {
 ;---[Parameters]---------------------------
 target	equ		rdi							; pointer to target array
-source	equ 	rsi							; pointer to source array
+source	equ		rsi							; pointer to source array
 size	equ		rdx							; array size (count of elements)
 ;---[Internal variables]-------------------
-count	equ		rcx							; count of elements to align target
-temp	equ		r8							; temporary register
-element	equ		al							; register to hold byte element
-temp0	equ		xmm0						; temporary register #1
-temp1	equ		xmm1						; temporary register #2
-temp2	equ		xmm2						; temporary register #3
-temp3	equ		xmm3						; temporary register #4
-amask	= 16 - 1							; aligning mask
-bscale	= 6									; block scale factor
+index	equ		rax							; offset from beginning of target array
+ptr1	equ		r10							; temporary pointer to target array
+ptr2	equ		r11							; temporary pointer to source array
+temp	equ		xmm0						; temporary register #1
+if x eq b
+scale	= 0									; scale value
+else if x eq w
+scale	= 1									; scale value
+else if x eq d
+scale	= 2									; scale value
+else if x eq q
+scale	= 3									; scale value
+end if
 bytes	= 1 shl scale						; size of array element (bytes)
-block	= 1 shl bscale						; block size (bytes)
+bmask	= bytes - 1							; elements aligning mask
 ;------------------------------------------
-		cmp		target, source				; if (target == source)
-		je		.exit						;     then go to exit
 		lea		source, [source + size * bytes]
 		lea		target, [target + size * bytes]
-	prefetchnta	[source - bytes]			; prefetch data
-		shl		size, scale					; size <<= scale
-		mov		count, target
-		and		count, amask				; count = target & amask
-		lea		temp, [count + block]
-		cmp		size, temp					; if (size < count + step)
-		jb		.sclr						;     then skip vector code
-		sub		size, count					; size -= count
-		mov		temp, size					; temp = size
-		shr		size, bscale				; size = size / block
-		and		temp, block - 1				; temp = size % block
-		test	count, count				; if (count == 0)
-		jz		.vctr						;     then skip aligning loop
-;---[Aligning loop]------------------------
-.aloop:	sub		source, 1					; source--
-		sub		target, 1					; target--
-		mov		element, [source]			; element = source[0]
-		mov		[target], element			; target[0] = element
-		sub		count, 1					; count--
-		jnz		.aloop						; do while (count != 0)
-;------------------------------------------
-.vctr:	cmp		size, CACHE_SIZE / 2		; if (size > CACHE_SIZE / 2)
-		ja		.fast						;     then invoke fast copy cycle
+	prefetchnta	[source]					; prefetch data
+		shl		size, scale					; convert size to bytes
+		jz		.exit						; if (size == 0), then go to exit
+		test	source, bmask				; if elements have wrong alignment
+		jnz		.sloop						;     then skip vector code
+		test	target, bmask				; if elements have wrong alignment
+		jnz		.sloop						;     then skip vector code
+		cmp		size, VSIZE					; if (size < VSIZE)
+		jb		.sloop						;     then skip vector code
+;---[Normal execution branch]--------------
+		sub		source, VSIZE				; source -= VSIZE
+		sub		target, VSIZE				; target -= VSIZE
+		mov		index, target
+		neg		index
+		and 	index, VMASK				; get array offset from vector boundary
+		lea		ptr2, [source + index]		; ptr2 = source + index
+		lea		ptr1, [target + index]		; ptr1 = target + index
+;---[Unaligned operation]------------------
+		add		size, index					; size += index
+		sub		size, VSIZE					; if (size <= VSIZE)
+		jbe		.tail						;     then process array tails
+		movdqu	temp, [source]				; temp = source[0]
+		movdqu	[target], temp				; target[0] = temp
 ;---[Vector loop]--------------------------
-.vloop:	sub		source, block				; source -= block
-		sub		target, block				; target -= block
-		movdqu	temp0, [source + 0x00]		; temp0 = source[0]
-		movdqu	temp1, [source + 0x10]		; temp1 = source[16]
-		movdqu	temp2, [source + 0x20]		; temp2 = source[32]
-		movdqu	temp3, [source + 0x30]		; temp3 = source[48]
-	prefetchnta	[source - PSTEP]			; prefetch next portion of data
-		movdqa	[target + 0x00], temp0		; target[0] = temp0
-		movdqa	[target + 0x10], temp1		; target[16] = temp1
-		movdqa	[target + 0x20], temp2		; target[32] = temp2
-		movdqa	[target + 0x30], temp3		; target[48] = temp3
-		sub		size, 1						; size--
-		jnz		.vloop						; do while (size != 0)
-;------------------------------------------
-		mov		size, temp					; size = temp
-.sclr:	test	size, size					; if (size == 0)
-		jz		.exit						;     then go to exit
+.vloop:	sub		index, VSIZE				; index -= VSIZE
+		sub		size, VSIZE					; if (size <= VSIZE)
+		jbe		.tail						;     then process array tails
+		movdqu	temp, [ptr2 - 1*VSIZE]		; temp = ptr2[-1]
+		movdqa	[ptr1 - 1*VSIZE], temp		; ptr1[-1] = temp
+		sub		index, VSIZE				; index -= VSIZE
+		sub		size, VSIZE					; if (size <= VSIZE)
+		jbe		.tail						;     then process array tails
+		movdqu	temp, [ptr2 - 2*VSIZE]		; temp = ptr2[-2]
+		movdqa	[ptr1 - 2*VSIZE], temp		; ptr1[-2] = temp
+		sub		index, VSIZE				; index -= VSIZE
+		sub		size, VSIZE					; if (size <= VSIZE)
+		jbe		.tail						;     then process array tails
+		movdqu	temp, [ptr2 - 3*VSIZE]		; temp = ptr2[-3]
+		movdqa	[ptr1 - 3*VSIZE], temp		; ptr1[-3] = temp
+		sub		index, VSIZE				; index -= VSIZE
+		sub		size, VSIZE					; if (size <= VSIZE)
+		jbe		.tail						;     then process array tails
+		movdqu	temp, [ptr2 - 4*VSIZE]		; temp = ptr2[-4]
+		movdqa	[ptr1 - 4*VSIZE], temp		; ptr1[-4] = temp
+	prefetchnta	[ptr2 - PSTEP]				; prefetch next portion of temp
+		sub		ptr2, 4 * VSIZE				; ptr2 -= 4 * VSIZE
+		sub		ptr1, 4 * VSIZE				; ptr1 -= 4 * VSIZE
+		jmp		.vloop						; do while (true)
+;---[End of vector loop]-------------------
+.tail:	sub		index, size					; index -= size
+		movdqu	temp, [source + index]		; temp = source[index]
+		movdqu	[target + index], temp		; target[index] = temp
+		ret
 ;---[Scalar loop]--------------------------
-.sloop:	sub		source, 1					; source--
-		sub		target, 1					; target--
-		mov		element, [source]			; element = source[0]
-		mov		[target], element			; target[0] = element
-		sub		size, 1						; size--
+.sloop:	sub		source, bytes				; source--
+		sub		target, bytes				; target--
+		mov		reg, [source]				; reg = source[0]
+		mov		[target], reg				; target[0] = reg
+		sub		size, bytes					; size--
 		jnz		.sloop						; do while (size != 0)
-;------------------------------------------
+;---[Normal exit]--------------------------
 .exit:	ret
-;---[Fast copy loop]-----------------------
-.fast:	sub		source, block				; source -= block
-		sub		target, block				; target -= block
-		lddqu	temp0, [source + 0x00]		; temp0 = source[0]
-		lddqu	temp1, [source + 0x10]		; temp1 = source[16]
-		lddqu	temp2, [source + 0x20]		; temp2 = source[32]
-		lddqu	temp3, [source + 0x30]		; temp3 = source[48]
-	prefetchnta	[source + PSTEP]			; prefetch next portion of data
-		movntdq	[target + 0x00], temp0		; target[0] = temp0
-		movntdq	[target + 0x10], temp1		; target[16] = temp1
-		movntdq	[target + 0x20], temp2		; target[32] = temp2
-		movntdq	[target + 0x30], temp3		; target[48] = temp3
-		sub		size, 1						; size--
-		jnz		.fast						; do while (size != 0)
-;------------------------------------------
-		sfence								; serialize memory stores
-		mov		size, temp					; size = temp
-		jmp		.sclr						; invoke scalar code
 }
 
 ; Copying arrays in forward direction
-CopyFwd8:	COPY_FWD	0
-CopyFwd16:	COPY_FWD	1
-CopyFwd32:	COPY_FWD	2
-CopyFwd64:	COPY_FWD	3
+CopyFwd8:	COPY_FWD	al, b
+CopyFwd16:	COPY_FWD	ax, w
+CopyFwd32:	COPY_FWD	eax, d
+CopyFwd64:	COPY_FWD	rax, q
 
 ; Copying arrays in backward direction
-CopyBwd8:	COPY_BWD	0
-CopyBwd16:	COPY_BWD	1
-CopyBwd32:	COPY_BWD	2
-CopyBwd64:	COPY_BWD	3
+CopyBwd8:	COPY_BWD	al, b
+CopyBwd16:	COPY_BWD	ax, w
+CopyBwd32:	COPY_BWD	eax, d
+CopyBwd64:	COPY_BWD	rax, q
 
 ;******************************************************************************;
 ;       Moving                                                                 ;
 ;******************************************************************************;
-macro	MOVE	func1, func2
+macro	MOVE	x
 {
 ;---[Parameters]---------------------------
 target	equ		rdi							; pointer to target array
 source	equ 	rsi							; pointer to source array
 size	equ		rdx							; array size (count of elements)
+;---[Internal variables]-------------------
+if x eq b
+CopyFwd	= CopyFwd8							; Copy in forward direction function
+CopyBwd	= CopyBwd8							; Copy in backward direction function
+else if x eq w
+CopyFwd	= CopyFwd16							; Copy in forward direction function
+CopyBwd	= CopyBwd16							; Copy in backward direction function
+else if x eq d
+CopyFwd	= CopyFwd32							; Copy in forward direction function
+CopyBwd	= CopyBwd32							; Copy in backward direction function
+else if x eq q
+CopyFwd	= CopyFwd64							; Copy in forward direction function
+CopyBwd	= CopyBwd64							; Copy in backward direction function
+end if
 ;------------------------------------------
-		cmp		target, source				; if (target == source)
-		jbe		func1						; if (target <= source), then copy in forward direction
-		ja		func2						; if (target > source), then copy in backward direction
+		cmp		target, source
+		je		.exit						; if (target == source), then go to exit
+		jb		CopyFwd						; if (target <= source), then copy in forward direction
+		ja		CopyBwd						; if (target > source), then copy in backward direction
+.exit:	ret
 }
-Move8:	MOVE	CopyFwd8, CopyBwd8
-Move16:	MOVE	CopyFwd16, CopyBwd16
-Move32:	MOVE	CopyFwd32, CopyBwd32
-Move64:	MOVE	CopyFwd64, CopyBwd64
+Move8:	MOVE	b
+Move16:	MOVE	w
+Move32:	MOVE	d
+Move64:	MOVE	q
 
 ;******************************************************************************;
 ;       Pattern cloning                                                        ;
@@ -2157,15 +2101,15 @@ reg		equ		eax							; temporary register for data conversion
 ;------------------------------------------
 }
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	CONVERT1	vector, scalar, scale1, scale2, bscale1, bscale2
+macro	CONVERT1	vcode, scalar, scale1, scale2, bscale1, bscale2
 {
 ;---[Parameters]---------------------------
 target	equ		rdi							; pointer to target array
 source	equ		rsi							; pointer to source array
 size	equ		rdx							; array size (count of elements)
 ;---[Internal variables]-------------------
-count	equ		rcx							; count of elements to align target
-temp	equ		r8							; temporary register
+count	equ		r8							; count of elements to align target
+temp	equ		r9							; temporary register
 temp0	equ		xmm0						; temporary register #1
 temp1	equ		xmm1						; temporary register #2
 temp2	equ		xmm2						; temporary register #3
@@ -2174,7 +2118,7 @@ temp4	equ		xmm4						; temporary register #5
 temp5	equ		xmm5						; temporary register #6
 temp6	equ		xmm6						; temporary register #7
 temp7	equ		xmm7						; temporary register #8
-amask	= 16 - 1							; aligning mask
+amask	= VSIZE - 1							; align mask
 bytes1	= 1 shl scale1						; size of target array element (bytes)
 bytes2	= 1 shl scale2						; size of source array element (bytes)
 block1	= 1 shl bscale1						; block size of target array (bytes)
@@ -2200,7 +2144,7 @@ step	= 1 shl (bscale1 - scale1)			; step size (bytes)
 ;---[Aligning loop]------------------------
 		scalar	count						; invoke aligning code
 ;---[Vector loop]--------------------------
-.vloop:	vector								; invoke vector code
+.vloop:	vcode								; invoke vector code
 ;------------------------------------------
 		mov		size, temp					; size = temp
 .sclr:	test	size, size					; if (size == 0)
@@ -2282,309 +2226,294 @@ TruncateFlt64ToSint64:	CONVERT3	cvttsd2si, 3
 ;******************************************************************************;
 ;       Bitwise operations                                                     ;
 ;******************************************************************************;
-macro	BIT_SCALAR	op, value, scale
+macro	BIT_SCALAR	op, reg, x
 {
 ;---[Parameters]---------------------------
 array	equ		rdi							; pointer to array
 size	equ		rsi							; array size (count of elements)
-reg		equ		rdx							; register that holds value
+value	equ		rdx							; register which holds value
 ;---[Internal variables]-------------------
-count	equ		rcx							; count of elements to align array
-temp	equ		r8							; temporary register
-vector	equ		xmm0						; vector value to process with
-temp0	equ		xmm1						; temporary register #1
-temp1	equ		xmm2						; temporary register #2
-temp2	equ		xmm3						; temporary register #3
-temp3	equ		xmm4						; temporary register #4
-amask	= 16 - 1							; aligning mask
-bscale	= 6									; block scale factor
+index	equ		rax							; offset from beginning of array
+aindex	equ		rcx							; array offset from vector boundary
+ptr		equ		r10							; temporary pointer to array
+blend	equ		xmm0						; blending mask
+temp	equ		xmm1						; temporary register
+vector	equ		xmm2						; value to process with
+data	equ		xmm3						; register which holds original data
+if x eq b
+scale	= 0									; scale value
+else if x eq w
+scale	= 1									; scale value
+else if x eq d
+scale	= 2									; scale value
+else if x eq q
+scale	= 3									; scale value
+end if
 bytes	= 1 shl scale						; size of array element (bytes)
-block	= 1 shl bscale						; block size (bytes)
-step	= 1 shl (bscale - scale)			; step size (bytes)
+bmask	= bytes - 1							; elements aligning mask
 ;------------------------------------------
 	prefetchnta	[array]						; prefetch data
-		test	array, bytes - 1			; if (array & (bytes - 1))
-		jnz		.sclr						;     then skip vector code
-		mov		count, array
-		neg		count
-		and		count, amask
-		shr		count, scale				; count = (-array & amask) >> scale
-		lea		temp, [count + step]
-		cmp		size, temp					; if (size < count + step)
-		jb		.sclr						;     then skip vector code
-		movq	vector, reg					; vector = value
+		shl		size, scale					; convert size to bytes
+		jz		.exit						; if (size == 0), then go to exit
+		test	array, bmask				; if elements have wrong alignment
+		jnz		.sloop						;     then skip vector code
+;---[Normal execution branch]--------------
+		movq	vector, value				; vector = value
+		mov		aindex, array
+		and		aindex, VMASK				; get array offset from vector boundary
+		sub		array, aindex				; align pointer to vector boundary
+		mov		ptr, array					; ptr = array
 		clone	vector, scale				; duplicate value through the entire register
-		sub		size, count					; size -= count
-		mov		temp, size					; temp = size
-		shr		size, bscale - scale		; size = size / step
-		and		temp, step - 1				; temp = size % step
-		test	count, count				; if (count == 0)
-		jz		.vloop						;     then skip aligning loop
-;---[Aligning loop]------------------------
-.aloop:	op		[array], value				; do operation between array[0] and value
-		add		array, bytes				; array++
-		sub		count, 1					; count--
-		jnz		.aloop						; do while (count != 0)
+;---[Unaligned operation]------------------
+		add		size, aindex				; size += aindex
+		shl		aindex, 4					; compute shift in mask array
+		movdqa	blend, dqword [maskS1 + aindex]
+		xor		index, index				; index = 0
+		sub		size, VSIZE					; if (size <= VSIZE)
+		jbe		.tail						;     then process array tail
+		movdqa	temp, [array]				; temp = array[0]
+		movdqa	data, temp					; data = temp
+		p#op	temp, vector				; do operation to temp value
+	pblendvb	temp, data					; blend temp with original data
+		movdqa	[array], temp				; array[0] = temp
+		pxor	blend, blend				; blend = 0
 ;---[Vector loop]--------------------------
-.vloop:	movdqa	temp0, [array + 0x00]		; temp0 = array[0]
-		p#op	temp0, vector				; do operation to temp0 value
-		movdqa	temp1, [array + 0x10]		; temp1 = array[16]
-		p#op	temp1, vector				; do operation to temp1 value
-		movdqa	temp2, [array + 0x20]		; temp2 = array[32]
-		p#op	temp2, vector				; do operation to temp2 value
-		movdqa	temp3, [array + 0x30]		; temp3 = array[48]
-		p#op	temp3, vector				; do operation to temp3 value
-	prefetchnta	[array + PSTEP]				; prefetch next portion of data
-		movdqa	[array + 0x00], temp0		; array[0] = temp0
-		movdqa	[array + 0x10], temp1		; array[16] = temp1
-		movdqa	[array + 0x20], temp2		; array[32] = temp2
-		movdqa	[array + 0x30], temp3		; array[48] = temp3
-		add		array, block				; array += block
-		sub		size, 1						; size--
-		jnz		.vloop						; do while (size != 0)
-;------------------------------------------
-		mov		size, temp					; size = temp
-.sclr:	test	size, size					; if (size == 0)
-		jz		.exit						;     then go to exit
+.vloop:	add		index, VSIZE				; index += VSIZE
+		sub		size, VSIZE					; if (size <= VSIZE)
+		jbe		.tail						;     then process array tail
+		movdqa	temp, [ptr + 1*VSIZE]		; temp = ptr[1]
+		p#op	temp, vector				; do operation to temp value
+		movdqa	[ptr + 1*VSIZE], temp		; ptr[1] = temp
+		add		index, VSIZE				; index += VSIZE
+		sub		size, VSIZE					; if (size <= VSIZE)
+		jbe		.tail						;     then process array tail
+		movdqa	temp, [ptr + 2*VSIZE]		; temp = ptr[2]
+		p#op	temp, vector				; do operation to temp value
+		movdqa	[ptr + 2*VSIZE], temp		; ptr[2] = temp
+		add		index, VSIZE				; index += VSIZE
+		sub		size, VSIZE					; if (size <= VSIZE)
+		jbe		.tail						;     then process array tail
+		movdqa	temp, [ptr + 3*VSIZE]		; temp = ptr[3]
+		p#op	temp, vector				; do operation to temp value
+		movdqa	[ptr + 3*VSIZE], temp		; ptr[3] = temp
+		add		index, VSIZE				; index += VSIZE
+		sub		size, VSIZE					; if (size <= VSIZE)
+		jbe		.tail						;     then process array tail
+		movdqa	temp, [ptr + 4*VSIZE]		; temp = ptr[4]
+		p#op	temp, vector				; do operation to temp value
+		movdqa	[ptr + 4*VSIZE], temp		; ptr[4] = temp
+	prefetchnta	[ptr + PSTEP]				; prefetch next portion of data
+		add		ptr, 4 * VSIZE				; ptr += 4 * VSIZE
+		jmp		.vloop						; do while (true)
+;---[End of vector loop]-------------------
+.tail:	shl		size, 4						; compute shift in mask array
+		pandn	blend, dqword [maskS2 + size]
+		movdqa	temp, [array + index]		; temp = array[index]
+		movdqa	data, temp					; data = temp
+		p#op	temp, vector				; do operation to temp value
+	pblendvb	data, temp					; blend temp with original data
+		movdqa	[array + index], data		; array[index] = temp
+		ret
 ;---[Scalar loop]--------------------------
-.sloop:	op		[array], value				; do operation between array[0] and value
+.sloop:	op		[array], reg				; do operation to array[0] value
 		add		array, bytes				; array++
-		sub		size, 1						; size--
+		sub		size, bytes					; size--
 		jnz		.sloop						; do while (size != 0)
-;------------------------------------------
+;---[Normal exit]--------------------------
 .exit:	ret
 }
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	BIT_VECTOR	op, treg, scale
+macro	BIT_VECTOR	op, reg, x
 {
 ;---[Parameters]---------------------------
 target	equ		rdi							; pointer to target array
 source	equ		rsi							; pointer to source array
 size	equ		rdx							; array size (count of elements)
 ;---[Internal variables]-------------------
-count	equ		rcx							; count of elements to align target
-temp	equ		r8							; temporary register
-temp0	equ		xmm0						; temporary register #1
-temp1	equ		xmm1						; temporary register #2
-temp2	equ		xmm2						; temporary register #3
-temp3	equ		xmm3						; temporary register #4
-temp4	equ		xmm4						; temporary register #5
-temp5	equ		xmm5						; temporary register #6
-temp6	equ		xmm6						; temporary register #7
-temp7	equ		xmm7						; temporary register #8
-amask	= 16 - 1							; aligning mask
-bscale	= 6									; block scale factor
+index	equ		rax							; offset from beginning of target array
+aindex	equ		rcx							; array offset from vector boundary
+ptr1	equ		r10							; temporary pointer to target array
+ptr2	equ		r11							; temporary pointer to source array
+blend	equ		xmm0						; blending mask
+a1temp	equ		xmm1						; temporary register #1
+a2temp	equ		xmm2						; temporary register #2
+data	equ		xmm3						; register which holds original data
+if x eq b
+scale	= 0									; scale value
+else if x eq w
+scale	= 1									; scale value
+else if x eq d
+scale	= 2									; scale value
+else if x eq q
+scale	= 3									; scale value
+end if
 bytes	= 1 shl scale						; size of array element (bytes)
-block	= 1 shl bscale						; block size (bytes)
-step	= 1 shl (bscale - scale)			; step size (bytes)
+bmask	= bytes - 1							; elements aligning mask
 ;------------------------------------------
 	prefetchnta	[source]					; prefetch data
 	prefetchnta	[target]					; prefetch data
-		test	target, bytes - 1			; if (target & (bytes - 1))
-		jnz		.sclr						;     then skip vector code
-		mov		count, target
-		neg		count
-		and		count, amask
-		shr		count, scale				; count = (-target & amask) >> scale
-		lea		temp, [count + step]
-		cmp		size, temp					; if (size < count + step)
-		jb		.sclr						;     then skip vector code
-		sub		size, count					; size -= count
-		mov		temp, size					; temp = size
-		shr		size, bscale - scale		; size = size / step
-		and		temp, step - 1				; temp = size % step
-		test	count, count				; if (count == 0)
-		jz		.vloop						;     then skip aligning loop
-;---[Aligning loop]------------------------
-.aloop:	mov		treg, [source]				; treg = source[0]
-		op		[target], treg				; do operation between target[0] and source[0]
-		add		source, bytes				; source++
-		add		target, bytes				; target++
-		sub		count, 1					; count--
-		jnz		.aloop						; do while (count != 0)
+		shl		size, scale					; convert size to bytes
+		jz		.exit						; if (size == 0), then go to exit
+		test	source, bmask				; if elements have wrong alignment
+		jnz		.sloop						;     then skip vector code
+		test	target, bmask				; if elements have wrong alignment
+		jnz		.sloop						;     then skip vector code
+		cmp		size, VSIZE					; if (size < VSIZE)
+		jb		.sloop						;     then skip vector code
+;---[Normal execution branch]--------------
+		mov		ptr2, source				; ptr2 = source
+		mov		ptr1, target				; ptr1 = target
+		mov		aindex, target
+		and		aindex, VMASK				; get array offset from vector boundary
+		sub		ptr2, aindex				; ptr2 = source - aindex
+		sub		ptr1, aindex				; ptr1 = target - aindex
+;---[Unaligned operation]------------------
+		add		size, aindex				; size += aindex
+		sub		index, aindex				; index -= aindex
+		sub		size, VSIZE					; if (size <= VSIZE)
+		jbe		.tail						;     then process array tails
+		shl		aindex, 4					; compute shift in mask array
+		movdqa	blend, dqword [maskV1 + aindex]
+		movdqu	a2temp, [source]			; a2temp = source[0]
+		movdqu	a1temp, [target]			; a1temp = target[0]
+		movdqa	data, a1temp				; data = a1temp
+		p#op	a1temp, a2temp				; do operation to temp value
+	pblendvb	a1temp, data				; blend a1temp with original data
+		movdqu	[target], a1temp			; target[0] = a1temp
 ;---[Vector loop]--------------------------
-.vloop:	movdqu	temp4, [source + 0x00]		; temp4 = source[0]
-		movdqu	temp5, [source + 0x10]		; temp5 = source[16]
-		movdqu	temp6, [source + 0x20]		; temp6 = source[32]
-		movdqu	temp7, [source + 0x30]		; temp7 = source[48]
-	prefetchnta	[source + PSTEP]			; prefetch next portion of data
-		movdqa	temp0, [target + 0x00]		; temp0 = target[0]
-		p#op	temp0, temp4				; do operation to temp0 value
-		movdqa	temp1, [target + 0x10]		; temp1 = target[16]
-		p#op	temp1, temp5				; do operation to temp1 value
-		movdqa	temp2, [target + 0x20]		; temp2 = target[32]
-		p#op	temp2, temp6				; do operation to temp2 value
-		movdqa	temp3, [target + 0x30]		; temp3 = target[48]
-		p#op	temp3, temp7				; do operation to temp3 value
-	prefetchnta	[target + PSTEP]			; prefetch next portion of data
-		movdqa	[target + 0x00], temp0		; target[0] = temp0
-		movdqa	[target + 0x10], temp1		; target[16] = temp1
-		movdqa	[target + 0x20], temp2		; target[32] = temp2
-		movdqa	[target + 0x30], temp3		; target[48] = temp3
-		add		source, block				; source += block
-		add		target, block				; target += block
-		sub		size, 1						; size--
-		jnz		.vloop						; do while (size != 0)
-;------------------------------------------
-		mov		size, temp					; size = temp
-.sclr:	test	size, size					; if (size == 0)
-		jz		.exit						;     then go to exit
+.vloop:	add		index, VSIZE				; index += VSIZE
+		sub		size, VSIZE					; if (size <= VSIZE)
+		jbe		.tail						;     then process array tails
+		movdqu	a2temp, [ptr2 + 1*VSIZE]	; a2temp = ptr2[1]
+		movdqa	a1temp, [ptr1 + 1*VSIZE]	; a1temp = ptr1[1]
+		p#op	a1temp, a2temp				; do operation to temp value
+		movdqa	[ptr1 + 1*VSIZE], a1temp	; ptr1[1] = a1temp
+		add		index, VSIZE				; index += VSIZE
+		sub		size, VSIZE					; if (size <= VSIZE)
+		jbe		.tail						;     then process array tails
+		movdqu	a2temp, [ptr2 + 2*VSIZE]	; a2temp = ptr2[2]
+		movdqa	a1temp, [ptr1 + 2*VSIZE]	; a1temp = ptr1[2]
+		p#op	a1temp, a2temp				; do operation to temp value
+		movdqa	[ptr1 + 2*VSIZE], a1temp	; ptr1[2] = a1temp
+		add		index, VSIZE				; index += VSIZE
+		sub		size, VSIZE					; if (size <= VSIZE)
+		jbe		.tail						;     then process array tails
+		movdqu	a2temp, [ptr2 + 3*VSIZE]	; a2temp = ptr2[3]
+		movdqa	a1temp, [ptr1 + 3*VSIZE]	; a1temp = ptr1[3]
+		p#op	a1temp, a2temp				; do operation to temp value
+		movdqa	[ptr1 + 3*VSIZE], a1temp	; ptr1[3] = a1temp
+		add		index, VSIZE				; index += VSIZE
+		sub		size, VSIZE					; if (size <= VSIZE)
+		jbe		.tail						;     then process array tails
+		movdqu	a2temp, [ptr2 + 4*VSIZE]	; a2temp = ptr2[4]
+		movdqa	a1temp, [ptr1 + 4*VSIZE]	; a1temp = ptr1[4]
+		p#op	a1temp, a2temp				; do operation to temp value
+		movdqa	[ptr1 + 4*VSIZE], a1temp	; ptr1[4] = a1temp
+	prefetchnta	[ptr2 + PSTEP]				; prefetch next portion of temp
+	prefetchnta	[ptr1 + PSTEP]				; prefetch next portion of temp
+		add		ptr2, 4 * VSIZE				; ptr2 += 4 * VSIZE
+		add		ptr1, 4 * VSIZE				; ptr1 += 4 * VSIZE
+		jmp		.vloop						; do while (true)
+;---[End of vector loop]-------------------
+.tail:	add		index, size					; index += size
+		shl		size, 4						; compute shift in mask array
+		movdqa	blend, dqword [maskV2 + size]
+		movdqu	a2temp, [source + index]	; a2temp = source[index]
+		movdqu	a1temp, [target + index]	; a1temp = target[index]
+		movdqa	data, a1temp				; data = a1temp
+		p#op	a1temp, a2temp				; do operation to temp value
+	pblendvb	data, a1temp				; blend a1temp with original data
+		movdqu	[target + index], data		; target[index] = a1temp
+		ret
 ;---[Scalar loop]--------------------------
-.sloop:	mov		treg, [source]				; treg = source[0]
-		op		[target], treg				; do operation between target[0] and source[0]
+.sloop:	mov		reg, [source]				; reg = source[0]
+		op		[target], reg				; do operation to target[0] value
 		add		source, bytes				; source++
 		add		target, bytes				; target++
-		sub		size, 1						; size--
+		sub		size, bytes					; size--
 		jnz		.sloop						; do while (size != 0)
-;------------------------------------------
+;---[Normal exit]--------------------------
 .exit:	ret
 }
 
 ;==============================================================================;
 ;       Bitwise NOT                                                            ;
 ;==============================================================================;
-macro	NOT	scale
+macro	NOT		reg, x
 {
 ;---[Parameters]---------------------------
 array	equ		rdi							; pointer to array
 size	equ		rsi							; array size (count of elements)
 ;---[Internal variables]-------------------
-count	equ		rcx							; count of elements to align array
-temp	equ		r8							; temporary register
-treg	equ		rax							; temporary register to init xmm register
-temp0	equ		xmm0						; temporary register #1
-temp1	equ		xmm1						; temporary register #2
-temp2	equ		xmm2						; temporary register #3
-temp3	equ		xmm3						; temporary register #4
-mask	equ		xmm4						; bit mask to invert bits
-amask	= 16 - 1							; aligning mask
-bscale	= 6									; block scale factor
-bytes	= 1 shl scale						; size of array element (bytes)
-block	= 1 shl bscale						; block size (bytes)
-step	= 1 shl (bscale - scale)			; step size (bytes)
-;------------------------------------------
-	prefetchnta	[array]						; prefetch data
-		test	array, bytes - 1			; if (array & (bytes - 1))
-		jnz		.sclr						;     then skip vector code
-		mov		count, array
-		neg		count
-		and		count, amask
-		shr		count, scale				; count = (-array & amask) >> scale
-		lea		temp, [count + step]
-		cmp		size, temp					; if (size < count + step)
-		jb		.sclr						;     then skip vector code
-		pxor	mask, mask
-		pcmpeqb	mask, mask					; mask = 111...111
-		sub		size, count					; size -= count
-		mov		temp, size					; temp = size
-		shr		size, bscale - scale		; size = size / step
-		and		temp, step - 1				; temp = size % step
-		test	count, count				; if (count == 0)
-		jz		.vloop						;     then skip aligning loop
-;---[Aligning loop]------------------------
-.aloop:
-if scale = 0
-		not		byte [array]				; array[0] = ~array[0]
-else if scale = 1
-		not		word [array]				; array[0] = ~array[0]
-else if scale = 2
-		not		dword [array]				; array[0] = ~array[0]
-else if scale = 3
-		not		qword [array]				; array[0] = ~array[0]
+if x eq b
+func	= XorS8								; function to call
+mask	= 0xFF								; mask to apply to all elements
+else if x eq w
+func	= XorS16							; function to call
+mask	= 0xFFFF							; mask to apply to all elements
+else if x eq d
+func	= XorS32							; function to call
+mask	= 0xFFFFFFFF						; mask to apply to all elements
+else if x eq q
+func	= XorS64							; function to call
+mask	= 0xFFFFFFFFFFFFFFFF				; mask to apply to all elements
 end if
-		add		array, bytes				; array++
-		sub		count, 1					; count--
-		jnz		.aloop						; do while (count != 0)
-;---[Vector loop]--------------------------
-.vloop:	movdqa	temp0, [array + 0x00]		; temp0 = array[0]
-		pxor	temp0, mask					; temp0 = ~temp0
-		movdqa	temp1, [array + 0x10]		; temp1 = array[16]
-		pxor	temp1, mask					; temp1 = ~temp1
-		movdqa	temp2, [array + 0x20]		; temp2 = array[32]
-		pxor	temp2, mask					; temp2 = ~temp2
-		movdqa	temp3, [array + 0x30]		; temp3 = array[48]
-		pxor	temp3, mask					; temp3 = ~temp3
-	prefetchnta	[array + PSTEP]				; prefetch next portion of data
-		movdqa	[array + 0x00], temp0		; array[0] = temp0
-		movdqa	[array + 0x10], temp1		; array[16] = temp1
-		movdqa	[array + 0x20], temp2		; array[32] = temp2
-		movdqa	[array + 0x30], temp3		; array[48] = temp3
-		add		array, block				; array += block
-		sub		size, 1						; size--
-		jnz		.vloop						; do while (size != 0)
 ;------------------------------------------
-		mov		size, temp					; size = temp
-.sclr:	test	size, size					; if (size == 0)
-		jz		.exit						;     then go to exit
-;---[Scalar loop]--------------------------
-.sloop:
-if scale = 0
-		not		byte [array]				; array[0] = ~array[0]
-else if scale = 1
-		not		word [array]				; array[0] = ~array[0]
-else if scale = 2
-		not		dword [array]				; array[0] = ~array[0]
-else if scale = 3
-		not		qword [array]				; array[0] = ~array[0]
-end if
-		add		array, bytes				; array++
-		sub		size, 1						; size--
-		jnz		.sloop						; do while (size != 0)
-;------------------------------------------
-.exit:	ret
+		mov		reg, mask					; load mask
+		jmp		func						; call appropriate function
 }
-Not8:	NOT	0
-Not16:	NOT	1
-Not32:	NOT	2
-Not64:	NOT	3
+Not8:	NOT		dl, b
+Not16:	NOT		dx, w
+Not32:	NOT		edx, d
+Not64:	NOT		rdx, q
 
 ;==============================================================================;
 ;       Bitwise AND                                                            ;
 ;==============================================================================;
 
 ; Scalar bitwise AND
-AndS8:	BIT_SCALAR	and, dl, 0
-AndS16:	BIT_SCALAR	and, dx, 1
-AndS32:	BIT_SCALAR	and, edx, 2
-AndS64:	BIT_SCALAR	and, rdx, 3
+AndS8:	BIT_SCALAR	and, dl, b
+AndS16:	BIT_SCALAR	and, dx, w
+AndS32:	BIT_SCALAR	and, edx, d
+AndS64:	BIT_SCALAR	and, rdx, q
 
 ; Vector bitwise AND
-AndV8:	BIT_VECTOR	and, al, 0
-AndV16:	BIT_VECTOR	and, ax, 1
-AndV32:	BIT_VECTOR	and, eax, 2
-AndV64:	BIT_VECTOR	and, rax, 3
+AndV8:	BIT_VECTOR	and, al, b
+AndV16:	BIT_VECTOR	and, ax, w
+AndV32:	BIT_VECTOR	and, eax, d
+AndV64:	BIT_VECTOR	and, rax, q
 
 ;==============================================================================;
 ;       Bitwise OR                                                             ;
 ;==============================================================================;
 
 ; Scalar bitwise OR
-OrS8:	BIT_SCALAR	or, dl, 0
-OrS16:	BIT_SCALAR	or, dx, 1
-OrS32:	BIT_SCALAR	or, edx, 2
-OrS64:	BIT_SCALAR	or, rdx, 3
+OrS8:	BIT_SCALAR	or, dl, b
+OrS16:	BIT_SCALAR	or, dx, w
+OrS32:	BIT_SCALAR	or, edx, d
+OrS64:	BIT_SCALAR	or, rdx, q
 
 ; Vector bitwise OR
-OrV8:	BIT_VECTOR	or, al, 0
-OrV16:	BIT_VECTOR	or, ax, 1
-OrV32:	BIT_VECTOR	or, eax, 2
-OrV64:	BIT_VECTOR	or, rax, 3
+OrV8:	BIT_VECTOR	or, al, b
+OrV16:	BIT_VECTOR	or, ax, w
+OrV32:	BIT_VECTOR	or, eax, d
+OrV64:	BIT_VECTOR	or, rax, q
 
 ;==============================================================================;
 ;       Bitwise XOR                                                            ;
 ;==============================================================================;
 
 ; Scalar bitwise XOR
-XorS8:	BIT_SCALAR	xor, dl, 0
-XorS16:	BIT_SCALAR	xor, dx, 1
-XorS32:	BIT_SCALAR	xor, edx, 2
-XorS64:	BIT_SCALAR	xor, rdx, 3
+XorS8:	BIT_SCALAR	xor, dl, b
+XorS16:	BIT_SCALAR	xor, dx, w
+XorS32:	BIT_SCALAR	xor, edx, d
+XorS64:	BIT_SCALAR	xor, rdx, q
 
 ; Vector bitwise XOR
-XorV8:	BIT_VECTOR	xor, al, 0
-XorV16:	BIT_VECTOR	xor, ax, 1
-XorV32:	BIT_VECTOR	xor, eax, 2
-XorV64:	BIT_VECTOR	xor, rax, 3
+XorV8:	BIT_VECTOR	xor, al, b
+XorV16:	BIT_VECTOR	xor, ax, w
+XorV32:	BIT_VECTOR	xor, eax, d
+XorV64:	BIT_VECTOR	xor, rax, q
 
 ;******************************************************************************;
 ;       Arithmetic operations                                                  ;
@@ -2593,14 +2522,14 @@ XorV64:	BIT_VECTOR	xor, rax, 3
 ;==============================================================================;
 ;       Unitary operations                                                     ;
 ;==============================================================================;
-macro	SIGN	func, mask, value
+macro	SIGN	func, reg, mask
 {
 ;---[Parameters]---------------------------
 array	equ		rdi							; pointer to array
 size	equ		rsi							; array size (count of elements)
 ;------------------------------------------
-		mov		mask, value
-		jmp		func
+		mov		reg, mask					; load mask
+		jmp		func						; call appropriate function
 }
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 macro	SQR		op, x
@@ -2609,75 +2538,88 @@ macro	SQR		op, x
 array	equ		rdi							; pointer to array
 size	equ		rsi							; array size (count of elements)
 ;---[Internal variables]-------------------
-count	equ		rcx							; count of elements to align array
-temp	equ		r8							; temporary register
-temp0	equ		xmm0						; temporary register #1
-temp1	equ		xmm1						; temporary register #2
-temp2	equ		xmm2						; temporary register #3
-temp3	equ		xmm3						; temporary register #4
-amask	= 16 - 1							; aligning mask
+index	equ		rax							; offset from beginning of array
+aindex	equ		rcx							; array offset from vector boundary
+ptr		equ		r10							; temporary pointer to array
+blend	equ		xmm0						; blending mask
+temp	equ		xmm1						; temporary register
+data	equ		xmm2						; register which holds original data
 if x eq s
 scale	= 2									; scale value
-else
+else if x eq d
 scale	= 3									; scale value
 end if
-bscale	= 6									; block scale factor
 bytes	= 1 shl scale						; size of array element (bytes)
-block	= 1 shl bscale						; block size (bytes)
-step	= 1 shl (bscale - scale)			; step size (bytes)
+bmask	= bytes - 1							; elements aligning mask
 ;------------------------------------------
 	prefetchnta	[array]						; prefetch data
-		test	array, bytes - 1			; if (array & (bytes - 1))
-		jnz		.sclr						;     then skip vector code
-		mov		count, array
-		neg		count
-		and		count, amask
-		shr		count, scale				; count = (-array & amask) >> scale
-		lea		temp, [count + step]
-		cmp		size, temp					; if (size < count + step)
-		jb		.sclr						;     then skip vector code
-		sub		size, count					; size -= count
-		mov		temp, size					; temp = size
-		shr		size, bscale - scale		; size = size / step
-		and		temp, step - 1				; temp = size % step
-		test	count, count				; if (count == 0)
-		jz		.vloop						;     then skip aligning loop
-;---[Aligning loop]------------------------
-.aloop:	movs#x	temp0, [array]				; temp0 = array[0]
-		op#p#x	temp0, temp0				; do operation to temp0 value
-		movs#x	[array], temp0				; array[0] = temp0
-		add		array, bytes				; array++
-		sub		count, 1					; count--
-		jnz		.aloop						; do while (count != 0)
+		shl		size, scale					; convert size to bytes
+		jz		.exit						; if (size == 0), then go to exit
+		test	array, bmask				; if elements have wrong alignment
+		jnz		.sloop						;     then skip vector code
+;---[Normal execution branch]--------------
+		mov		aindex, array
+		and		aindex, VMASK				; get array offset from vector boundary
+		sub		array, aindex				; align pointer to vector boundary
+		mov		ptr, array					; ptr = array
+;---[Unaligned sums]-----------------------
+		add		size, aindex				; size += aindex
+		shl		aindex, 4					; compute shift in mask array
+		movap#x	blend, dqword [maskS1 + aindex]
+		xor		index, index				; index = 0
+		sub		size, VSIZE					; if (size <= VSIZE)
+		jbe		.tail						;     then process array tail
+		movap#x	temp, [array]				; temp = array[0]
+		movap#x	data, temp					; data = temp
+		op#p#x	temp, temp					; do operation to temp value
+	pblendvb	temp, data					; blend temp with original data
+		movap#x	[array], temp				; array[0] = temp
+		xorp#x	blend, blend				; blend = 0
 ;---[Vector loop]--------------------------
-.vloop:	movap#x	temp0, [array + 0x00]		; temp0 = array[0]
-		op#p#x	temp0, temp0				; do operation to temp0 value
-		movap#x	temp1, [array + 0x10]		; temp1 = array[16]
-		op#p#x	temp1, temp1				; do operation to temp1 value
-		movap#x	temp2, [array + 0x20]		; temp2 = array[32]
-		op#p#x	temp2, temp2				; do operation to temp2 value
-		movap#x	temp3, [array + 0x30]		; temp3 = array[48]
-		op#p#x	temp3, temp3				; do operation to temp3 value
-	prefetchnta	[array + PSTEP]				; prefetch next portion of data
-		movap#x	[array + 0x00], temp0		; array[0] = temp0
-		movap#x	[array + 0x10], temp1		; array[16] = temp1
-		movap#x	[array + 0x20], temp2		; array[32] = temp2
-		movap#x	[array + 0x30], temp3		; array[48] = temp3
-		add		array, block				; array += block
-		sub		size, 1						; size--
-		jnz		.vloop						; do while (size != 0)
-;------------------------------------------
-		mov		size, temp					; size = temp
-.sclr:	test	size, size					; if (size == 0)
-		jz		.exit						;     then go to exit
+.vloop:	add		index, VSIZE				; index += VSIZE
+		sub		size, VSIZE					; if (size <= VSIZE)
+		jbe		.tail						;     then process array tail
+		movap#x	temp, [ptr + 1*VSIZE]		; temp = ptr[1]
+		op#p#x	temp, temp					; do operation to temp value
+		movap#x	[ptr + 1*VSIZE], temp		; ptr[1] = temp
+		add		index, VSIZE				; index += VSIZE
+		sub		size, VSIZE					; if (size <= VSIZE)
+		jbe		.tail						;     then process array tail
+		movap#x	temp, [ptr + 2*VSIZE]		; temp = ptr[2]
+		op#p#x	temp, temp					; do operation to temp value
+		movap#x	[ptr + 2*VSIZE], temp		; ptr[2] = temp
+		add		index, VSIZE				; index += VSIZE
+		sub		size, VSIZE					; if (size <= VSIZE)
+		jbe		.tail						;     then process array tail
+		movap#x	temp, [ptr + 3*VSIZE]		; temp = ptr[3]
+		op#p#x	temp, temp					; do operation to temp value
+		movap#x	[ptr + 3*VSIZE], temp		; ptr[3] = temp
+		add		index, VSIZE				; index += VSIZE
+		sub		size, VSIZE					; if (size <= VSIZE)
+		jbe		.tail						;     then process array tail
+		movap#x	temp, [ptr + 4*VSIZE]		; temp = ptr[4]
+		op#p#x	temp, temp					; do operation to temp value
+		movap#x	[ptr + 4*VSIZE], temp		; ptr[4] = temp
+	prefetchnta	[ptr + PSTEP]				; prefetch next portion of data
+		add		ptr, 4 * VSIZE				; ptr += 4 * VSIZE
+		jmp		.vloop						; do while (true)
+;---[End of vector loop]-------------------
+.tail:	shl		size, 4						; compute shift in mask array
+		andnp#x	blend, dqword [maskS2 + size]
+		movap#x	temp, [array + index]		; temp = array[index]
+		movap#x	data, temp					; data = temp
+		op#p#x	temp, temp					; do operation to temp value
+	pblendvb	data, temp					; blend temp with original data
+		movap#x	[array + index], data		; array[index] = temp
+		ret
 ;---[Scalar loop]--------------------------
-.sloop:	movs#x	temp0, [array]				; temp0 = array[0]
-		op#s#x	temp0, temp0				; do operation to temp0 value
-		movs#x	[array], temp0				; array[0] = temp0
+.sloop:	movs#x	temp, [array]				; temp = array[0]
+		op#s#x	temp, temp					; do operation to temp value
+		movs#x	[array], temp				; array[0] = temp
 		add		array, bytes				; array++
-		sub		size, 1						; size--
+		sub		size, bytes					; size--
 		jnz		.sloop						; do while (size != 0)
-;------------------------------------------
+;---[Normal exit]--------------------------
 .exit:	ret
 }
 
@@ -2688,6 +2630,10 @@ Neg_flt64:		SIGN	XorS64, rdx, SMASK_FLT64
 ; Absolute value
 Abs_flt32:		SIGN	AndS32, edx, DMASK_FLT32
 Abs_flt64:		SIGN	AndS64, rdx, DMASK_FLT64
+
+; Negative absolute value
+NegAbs_flt32:	SIGN	OrS32, edx, SMASK_FLT32
+NegAbs_flt64:	SIGN	OrS64, rdx, SMASK_FLT64
 
 ; Square
 Sqr_flt32:		SQR		mul, s
@@ -2707,76 +2653,91 @@ array	equ		rdi							; pointer to array
 size	equ		rsi							; array size (count of elements)
 value	equ		xmm0						; value to process with
 ;---[Internal variables]-------------------
-count	equ		rcx							; count of elements to align array
-temp	equ		r8							; temporary register
-temp0	equ		xmm1						; temporary register #1
-temp1	equ		xmm2						; temporary register #2
-temp2	equ		xmm3						; temporary register #3
-temp3	equ		xmm4						; temporary register #4
-amask	= 16 - 1							; aligning mask
+index	equ		rax							; offset from beginning of array
+aindex	equ		rcx							; array offset from vector boundary
+ptr		equ		r10							; temporary pointer to array
+blend	equ		xmm0						; blending mask
+temp	equ		xmm1						; temporary register
+vector	equ		xmm2						; value to process with
+data	equ		xmm3						; register which holds original data
 if x eq s
 scale	= 2									; scale value
-else
+else if x eq d
 scale	= 3									; scale value
 end if
-bscale	= 6									; block scale factor
 bytes	= 1 shl scale						; size of array element (bytes)
-block	= 1 shl bscale						; block size (bytes)
-step	= 1 shl (bscale - scale)			; step size (bytes)
+bmask	= bytes - 1							; elements aligning mask
 ;------------------------------------------
 	prefetchnta	[array]						; prefetch data
-		test	array, bytes - 1			; if (array & (bytes - 1))
-		jnz		.sclr						;     then skip vector code
-		mov		count, array
-		neg		count
-		and		count, amask
-		shr		count, scale				; count = (-array & amask) >> scale
-		lea		temp, [count + step]
-		cmp		size, temp					; if (size < count + step)
-		jb		.sclr						;     then skip vector code
-		shufp#x	value, value, 0x0			; duplicate value through the entire register
-		sub		size, count					; size -= count
-		mov		temp, size					; temp = size
-		shr		size, bscale - scale		; size = size / step
-		and		temp, step - 1				; temp = size % step
-		test	count, count				; if (count == 0)
-		jz		.vloop						;     then skip aligning loop
-;---[Aligning loop]------------------------
-.aloop:	movs#x	temp0, [array]				; temp0 = array[0]
-		op#s#x	temp0, value				; do operation to temp0 value
-		movs#x	[array], temp0				; array[0] = temp0
-		add		array, bytes				; array++
-		sub		count, 1					; count--
-		jnz		.aloop						; do while (count != 0)
+		shl		size, scale					; convert size to bytes
+		jz		.exit						; if (size == 0), then go to exit
+		test	array, bmask				; if elements have wrong alignment
+		jnz		.sloop						;     then skip vector code
+;---[Normal execution branch]--------------
+		mov		aindex, array
+		and		aindex, VMASK				; get array offset from vector boundary
+		sub		array, aindex				; align pointer to vector boundary
+		mov		ptr, array					; ptr = array
+		movap#x	vector, value				; vector = value
+		shufp#x	vector, vector, 0x0			; duplicate value through the entire register
+;---[Unaligned operation]------------------
+		add		size, aindex				; size += aindex
+		shl		aindex, 4					; compute shift in mask array
+		movap#x	blend, dqword [maskS1 + aindex]
+		xor		index, index				; index = 0
+		sub		size, VSIZE					; if (size <= VSIZE)
+		jbe		.tail						;     then process array tail
+		movap#x	temp, [array]				; temp = array[0]
+		movap#x	data, temp					; data = temp
+		op#p#x	temp, vector				; do operation to temp value
+	pblendvb	temp, data					; blend temp with original data
+		movap#x	[array], temp				; array[0] = temp
+		xorp#x	blend, blend				; blend = 0
 ;---[Vector loop]--------------------------
-.vloop:	movap#x	temp0, [array + 0x00]		; temp0 = array[0]
-		op#p#x	temp0, value				; do operation to temp0 value
-		movap#x	temp1, [array + 0x10]		; temp1 = array[16]
-		op#p#x	temp1, value				; do operation to temp1 value
-		movap#x	temp2, [array + 0x20]		; temp2 = array[32]
-		op#p#x	temp2, value				; do operation to temp2 value
-		movap#x	temp3, [array + 0x30]		; temp3 = array[48]
-		op#p#x	temp3, value				; do operation to temp3 value
-	prefetchnta	[array + PSTEP]				; prefetch next portion of data
-		movap#x	[array + 0x00], temp0		; array[0] = temp0
-		movap#x	[array + 0x10], temp1		; array[16] = temp1
-		movap#x	[array + 0x20], temp2		; array[32] = temp2
-		movap#x	[array + 0x30], temp3		; array[48] = temp3
-		add		array, block				; array += block
-		sub		size, 1						; size--
-		jnz		.vloop						; do while (size != 0)
-;------------------------------------------
-		mov		size, temp					; size = temp
-.sclr:	test	size, size					; if (size == 0)
-		jz		.exit						;     then go to exit
+.vloop:	add		index, VSIZE				; index += VSIZE
+		sub		size, VSIZE					; if (size <= VSIZE)
+		jbe		.tail						;     then process array tail
+		movap#x	temp, [ptr + 1*VSIZE]		; temp = ptr[1]
+		op#p#x	temp, vector				; do operation to temp value
+		movap#x	[ptr + 1*VSIZE], temp		; ptr[1] = temp
+		add		index, VSIZE				; index += VSIZE
+		sub		size, VSIZE					; if (size <= VSIZE)
+		jbe		.tail						;     then process array tail
+		movap#x	temp, [ptr + 2*VSIZE]		; temp = ptr[2]
+		op#p#x	temp, vector				; do operation to temp value
+		movap#x	[ptr + 2*VSIZE], temp		; ptr[2] = temp
+		add		index, VSIZE				; index += VSIZE
+		sub		size, VSIZE					; if (size <= VSIZE)
+		jbe		.tail						;     then process array tail
+		movap#x	temp, [ptr + 3*VSIZE]		; temp = ptr[3]
+		op#p#x	temp, vector				; do operation to temp value
+		movap#x	[ptr + 3*VSIZE], temp		; ptr[3] = temp
+		add		index, VSIZE				; index += VSIZE
+		sub		size, VSIZE					; if (size <= VSIZE)
+		jbe		.tail						;     then process array tail
+		movap#x	temp, [ptr + 4*VSIZE]		; temp = ptr[4]
+		op#p#x	temp, vector				; do operation to temp value
+		movap#x	[ptr + 4*VSIZE], temp		; ptr[4] = temp
+	prefetchnta	[ptr + PSTEP]				; prefetch next portion of data
+		add		ptr, 4 * VSIZE				; ptr += 4 * VSIZE
+		jmp		.vloop						; do while (true)
+;---[End of vector loop]-------------------
+.tail:	shl		size, 4						; compute shift in mask array
+		andnp#x	blend, dqword [maskS2 + size]
+		movap#x	temp, [array + index]		; temp = array[index]
+		movap#x	data, temp					; data = temp
+		op#p#x	temp, vector				; do operation to temp value
+	pblendvb	data, temp					; blend temp with original data
+		movap#x	[array + index], data		; array[index] = temp
+		ret
 ;---[Scalar loop]--------------------------
-.sloop:	movs#x	temp0, [array]				; temp0 = array[0]
-		op#s#x	temp0, value				; do operation to temp0 value
-		movs#x	[array], temp0				; array[0] = temp0
+.sloop:	movs#x	temp, [array]				; temp = array[0]
+		op#s#x	temp, value					; do operation to temp value
+		movs#x	[array], temp				; array[0] = temp
 		add		array, bytes				; array++
-		sub		size, 1						; size--
+		sub		size, bytes					; size--
 		jnz		.sloop						; do while (size != 0)
-;------------------------------------------
+;---[Normal exit]--------------------------
 .exit:	ret
 }
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -2787,90 +2748,107 @@ target	equ		rdi							; pointer to target array
 source	equ		rsi							; pointer to source array
 size	equ		rdx							; array size (count of elements)
 ;---[Internal variables]-------------------
-count	equ		rcx							; count of elements to align target
-temp	equ		r8							; temporary register
-temp0	equ		xmm0						; temporary register #1
-temp1	equ		xmm1						; temporary register #2
-temp2	equ		xmm2						; temporary register #3
-temp3	equ		xmm3						; temporary register #4
-temp4	equ		xmm4						; temporary register #5
-temp5	equ		xmm5						; temporary register #6
-temp6	equ		xmm6						; temporary register #7
-temp7	equ		xmm7						; temporary register #8
-amask	= 16 - 1							; aligning mask
+index	equ		rax							; offset from beginning of target array
+aindex	equ		rcx							; array offset from vector boundary
+ptr1	equ		r10							; temporary pointer to target array
+ptr2	equ		r11							; temporary pointer to source array
+blend	equ		xmm0						; blending mask
+a1temp	equ		xmm1						; temporary register #1
+a2temp	equ		xmm2						; temporary register #2
+data	equ		xmm3						; register which holds original data
 if x eq s
 scale	= 2									; scale value
-else
+else if x eq d
 scale	= 3									; scale value
 end if
-bscale	= 6									; block scale factor
 bytes	= 1 shl scale						; size of array element (bytes)
-block	= 1 shl bscale						; block size (bytes)
-step	= 1 shl (bscale - scale)			; step size (bytes)
+bmask	= bytes - 1							; elements aligning mask
 ;------------------------------------------
 	prefetchnta	[source]					; prefetch data
 	prefetchnta	[target]					; prefetch data
-		test	target, bytes - 1			; if (target & (bytes - 1))
-		jnz		.sclr						;     then skip vector code
-		mov		count, target
-		neg		count
-		and		count, amask
-		shr		count, scale				; count = (-target & amask) >> scale
-		lea		temp, [count + step]
-		cmp		size, temp					; if (size < count + step)
-		jb		.sclr						;     then skip vector code
-		sub		size, count					; size -= count
-		mov		temp, size					; temp = size
-		shr		size, bscale - scale		; size = size / step
-		and		temp, step - 1				; temp = size % step
-		test	count, count				; if (count == 0)
-		jz		.vloop						;     then skip aligning loop
-;---[Aligning loop]------------------------
-.aloop:	movs#x	temp1, [source]				; temp1 = source[0]
-		movs#x	temp0, [target]				; temp0 = target[0]
-		op#s#x	temp0, temp1				; do operation to temp0 value
-		movs#x	[target], temp0				; target[0] = temp0
-		add		source, bytes				; source++
-		add		target, bytes				; target++
-		sub		count, 1					; count--
-		jnz		.aloop						; do while (count != 0)
+		shl		size, scale					; convert size to bytes
+		jz		.exit						; if (size == 0), then go to exit
+		test	source, bmask				; if elements have wrong alignment
+		jnz		.sloop						;     then skip vector code
+		test	target, bmask				; if elements have wrong alignment
+		jnz		.sloop						;     then skip vector code
+		cmp		size, VSIZE					; if (size < VSIZE)
+		jb		.sloop						;     then skip vector code
+;---[Normal execution branch]--------------
+		mov		ptr2, source				; ptr2 = source
+		mov		ptr1, target				; ptr1 = target
+		mov		aindex, target
+		and		aindex, VMASK				; get array offset from vector boundary
+		sub		ptr2, aindex				; ptr2 = source - aindex
+		sub		ptr1, aindex				; ptr1 = target - aindex
+;---[Unaligned operation]------------------
+		add		size, aindex				; size += aindex
+		sub		index, aindex				; index -= aindex
+		sub		size, VSIZE					; if (size <= VSIZE)
+		jbe		.tail						;     then process array tails
+		shl		aindex, 4					; compute shift in mask array
+		movap#x	blend, dqword [maskV1 + aindex]
+		movup#x	a2temp, [source]			; a2temp = source[0]
+		movup#x	a1temp, [target]			; a1temp = target[0]
+		movap#x	data, a1temp				; data = a1temp
+		op#p#x	a1temp, a2temp				; do operation to temp value
+	pblendvb	a1temp, data				; blend a1temp with original data
+		movup#x	[target], a1temp			; target[0] = a1temp
 ;---[Vector loop]--------------------------
-.vloop:	movup#x	temp4, [source + 0x00]		; temp4 = source[0]
-		movup#x	temp5, [source + 0x10]		; temp5 = source[16]
-		movup#x	temp6, [source + 0x20]		; temp6 = source[32]
-		movup#x	temp7, [source + 0x30]		; temp7 = source[48]
-	prefetchnta	[source + PSTEP]			; prefetch next portion of data
-		movap#x	temp0, [target + 0x00]		; temp0 = target[0]
-		op#p#x	temp0, temp4				; do operation to temp0 value
-		movap#x	temp1, [target + 0x10]		; temp1 = target[16]
-		op#p#x	temp1, temp5				; do operation to temp1 value
-		movap#x	temp2, [target + 0x20]		; temp2 = target[32]
-		op#p#x	temp2, temp6				; do operation to temp2 value
-		movap#x	temp3, [target + 0x30]		; temp3 = target[48]
-		op#p#x	temp3, temp7				; do operation to temp3 value
-	prefetchnta	[target + PSTEP]			; prefetch next portion of data
-		movap#x	[target + 0x00], temp0		; target[0] = temp0
-		movap#x	[target + 0x10], temp1		; target[16] = temp1
-		movap#x	[target + 0x20], temp2		; target[32] = temp2
-		movap#x	[target + 0x30], temp3		; target[48] = temp3
-		add		source, block				; source += block
-		add		target, block				; target += block
-		sub		size, 1						; size--
-		jnz		.vloop						; do while (size != 0)
-;------------------------------------------
-		mov		size, temp					; size = temp
-.sclr:	test	size, size					; if (size == 0)
-		jz		.exit						;     then go to exit
+.vloop:	add		index, VSIZE				; index += VSIZE
+		sub		size, VSIZE					; if (size <= VSIZE)
+		jbe		.tail						;     then process array tails
+		movup#x	a2temp, [ptr2 + 1*VSIZE]	; a2temp = ptr2[1]
+		movap#x	a1temp, [ptr1 + 1*VSIZE]	; a1temp = ptr1[1]
+		op#p#x	a1temp, a2temp				; do operation to temp value
+		movap#x	[ptr1 + 1*VSIZE], a1temp	; ptr1[1] = a1temp
+		add		index, VSIZE				; index += VSIZE
+		sub		size, VSIZE					; if (size <= VSIZE)
+		jbe		.tail						;     then process array tails
+		movup#x	a2temp, [ptr2 + 2*VSIZE]	; a2temp = ptr2[2]
+		movap#x	a1temp, [ptr1 + 2*VSIZE]	; a1temp = ptr1[2]
+		op#p#x	a1temp, a2temp				; do operation to temp value
+		movap#x	[ptr1 + 2*VSIZE], a1temp	; ptr1[2] = a1temp
+		add		index, VSIZE				; index += VSIZE
+		sub		size, VSIZE					; if (size <= VSIZE)
+		jbe		.tail						;     then process array tails
+		movup#x	a2temp, [ptr2 + 3*VSIZE]	; a2temp = ptr2[3]
+		movap#x	a1temp, [ptr1 + 3*VSIZE]	; a1temp = ptr1[3]
+		op#p#x	a1temp, a2temp				; do operation to temp value
+		movap#x	[ptr1 + 3*VSIZE], a1temp	; ptr1[3] = a1temp
+		add		index, VSIZE				; index += VSIZE
+		sub		size, VSIZE					; if (size <= VSIZE)
+		jbe		.tail						;     then process array tails
+		movup#x	a2temp, [ptr2 + 4*VSIZE]	; a2temp = ptr2[4]
+		movap#x	a1temp, [ptr1 + 4*VSIZE]	; a1temp = ptr1[4]
+		op#p#x	a1temp, a2temp				; do operation to temp value
+		movap#x	[ptr1 + 4*VSIZE], a1temp	; ptr1[4] = a1temp
+	prefetchnta	[ptr2 + PSTEP]				; prefetch next portion of temp
+	prefetchnta	[ptr1 + PSTEP]				; prefetch next portion of temp
+		add		ptr2, 4 * VSIZE				; ptr2 += 4 * VSIZE
+		add		ptr1, 4 * VSIZE				; ptr1 += 4 * VSIZE
+		jmp		.vloop						; do while (true)
+;---[End of vector loop]-------------------
+.tail:	add		index, size					; index += size
+		shl		size, 4						; compute shift in mask array
+		movap#x	blend, dqword [maskV2 + size]
+		movup#x	a2temp, [source + index]	; a2temp = source[index]
+		movup#x	a1temp, [target + index]	; a1temp = target[index]
+		movap#x	data, a1temp				; data = a1temp
+		op#p#x	a1temp, a2temp				; do operation to temp value
+	pblendvb	data, a1temp				; blend a1temp with original data
+		movup#x	[target + index], data		; target[index] = a1temp
+		ret
 ;---[Scalar loop]--------------------------
-.sloop:	movs#x	temp1, [source]				; temp1 = source[0]
-		movs#x	temp0, [target]				; temp0 = target[0]
-		op#s#x	temp0, temp1				; do operation to temp0 value
-		movs#x	[target], temp0				; target[0] = temp0
+.sloop:	movs#x	a2temp, [source]			; a2temp = source[0]
+		movs#x	a1temp, [target]			; a1temp = target[0]
+		op#s#x	a1temp, a2temp				; do operation to temp value
+		movs#x	[target], a1temp			; target[0] = a1temp
 		add		source, bytes				; source++
 		add		target, bytes				; target++
-		sub		size, 1						; size--
+		sub		size, bytes					; size--
 		jnz		.sloop						; do while (size != 0)
-;------------------------------------------
+;---[Normal exit]--------------------------
 .exit:	ret
 }
 
@@ -2925,105 +2903,148 @@ DivV_flt64:		VECTOR	div, d
 ;******************************************************************************;
 ;       Numerical integration                                                  ;
 ;******************************************************************************;
-macro	SUM		square, x
+macro	SUM		type, x
 {
 ;---[Parameters]---------------------------
 array	equ		rdi							; pointer to array
 size	equ		rsi							; array size (count of elements)
 ;---[Internal variables]-------------------
-count	equ		rcx							; count of elements to align array
-temp	equ		r8							; temporary register
-sum0	equ		xmm0						; intermediate sum #1
-sum1	equ		xmm1						; intermediate sum #2
-sum2	equ		xmm2						; intermediate sum #3
-sum3	equ		xmm3						; intermediate sum #4
-temp0	equ		xmm4						; temporary register #1
-temp1	equ		xmm5						; temporary register #2
-temp2	equ		xmm6						; temporary register #3
-temp3	equ		xmm7						; temporary register #4
-amask	= 16 - 1							; aligning mask
+index	equ		rax							; offset from beginning of array
+aindex	equ		rcx							; array offset from vector boundary
+ptr		equ		r10							; temporary pointer to array
+blend	equ		xmm0						; blending mask
+result	equ		blend						; result register
+temp	equ		xmm1						; temporary register
+mask	equ		xmm2						; data mask
+sum0	equ		xmm3						; intermediate sum #1
+sum1	equ		xmm4						; intermediate sum #2
+sum2	equ		xmm5						; intermediate sum #3
+sum3	equ		xmm6						; intermediate sum #4
+sum4	equ		xmm7						; intermediate sum #5
+zero	equ		xmm8						; 0
 if x eq s
+dmask	= DMASK_FLT32						; data mask
 scale	= 2									; scale value
-else
+else if x eq d
+dmask	= DMASK_FLT64						; data mask
 scale	= 3									; scale value
 end if
-bscale	= 6									; block scale factor
 bytes	= 1 shl scale						; size of array element (bytes)
-block	= 1 shl bscale						; block size (bytes)
-step	= 1 shl (bscale - scale)			; step size (bytes)
+bmask	= bytes - 1							; elements aligning mask
 ;------------------------------------------
 	prefetchnta	[array]						; prefetch data
+		xorp#x	result, result				; index = 0
+		shl		size, scale					; convert size to bytes
+		jz		.exit						; if (size == 0), then go to exit
+if type = 2
+		initreg	mask, index, dmask			; mask = dmask
+end if
+		test	array, bmask				; if elements have wrong alignment
+		jnz		.sloop						;     then skip vector code
+;---[Normal execution branch]--------------
+		mov		aindex, array
+		and		aindex, VMASK				; get array offset from vector boundary
+		sub		array, aindex				; align pointer to vector boundary
+		mov		ptr, array					; ptr = array
+if type = 2
+		shufp#x	mask, mask, 0x0				; duplicate value through the entire register
+end if
 		xorp#x	sum0, sum0					; sum0 = 0
 		xorp#x	sum1, sum1					; sum1 = 0
 		xorp#x	sum2, sum2					; sum2 = 0
 		xorp#x	sum3, sum3					; sum3 = 0
-		test	array, bytes - 1			; if (array & (bytes - 1))
-		jnz		.sclr						;     then skip vector code
-		mov		count, array
-		neg		count
-		and		count, amask
-		shr		count, scale				; count = (-array & amask) >> scale
-		lea		temp, [count + step]
-		cmp		size, temp					; if (size < count + step)
-		jb		.sclr						;     then skip vector code
-		sub		size, count					; size -= count
-		mov		temp, size					; temp = size
-		shr		size, bscale - scale		; size = size / step
-		and		temp, step - 1				; temp = size % step
-		test	count, count				; if (count == 0)
-		jz		.vloop						;     then skip aligning loop
-;---[Aligning loop]------------------------
-.aloop:	movs#x	temp0, [array]				; temp0 = array[0]
-if square
-		muls#x	temp0, temp0				; temp0 = temp0 ^ 2
+		xorp#x	sum4, sum4					; sum4 = 0
+		xorp#x	zero, zero					; zero = 0
+;---[Unaligned sums]-----------------------
+		add		size, aindex				; size += aindex
+		shl		aindex, 4					; compute shift in mask array
+		movap#x	blend, dqword [maskS1 + aindex]
+		xor		index, index				; index = 0
+		sub		size, VSIZE					; if (size <= VSIZE)
+		jbe		.tail						;     then process array tail
+		movap#x	temp, [array]				; temp = array[0]
+if type = 1
+		mulp#x	temp, temp					; temp = temp ^ 2
+else if type = 2
+		andp#x	temp, mask					; temp = Abs (temp)
 end if
-		adds#x	sum0, temp0					; sum0 += temp0
-		add		array, bytes				; array++
-		sub		count, 1					; count--
-		jnz		.aloop						; do while (count != 0)
+	pblendvb	temp, zero					; blend temp with zero values
+		addp#x	sum0, temp					; sum0 += temp
+		xorp#x	blend, blend				; blend = 0
 ;---[Vector loop]--------------------------
-.vloop:	movap#x	temp0, [array + 0x00]		; temp0 = array[0]
-if square
-		mulp#x	temp0, temp0				; temp0 = temp0 ^ 2
+.vloop:	add		index, VSIZE				; index += VSIZE
+		sub		size, VSIZE					; if (size <= VSIZE)
+		jbe		.tail						;     then process array tail
+		movap#x	temp, [ptr + 1*VSIZE]		; temp = ptr[1]
+if type = 1
+		mulp#x	temp, temp					; temp = temp ^ 2
+else if type = 2
+		andp#x	temp, mask					; temp = Abs (temp)
 end if
-		addp#x	sum0, temp0					; sum0 += temp0
-		movap#x	temp1, [array + 0x10]		; temp1 = array[16]
-if square
-		mulp#x	temp1, temp1				; temp1 = temp1 ^ 2
+		addp#x	sum1, temp					; sum1 += temp
+		add		index, VSIZE				; index += VSIZE
+		sub		size, VSIZE					; if (size <= VSIZE)
+		jbe		.tail						;     then process array tail
+		movap#x	temp, [ptr + 2*VSIZE]		; temp = ptr[2]
+if type = 1
+		mulp#x	temp, temp					; temp = temp ^ 2
+else if type = 2
+		andp#x	temp, mask					; temp = Abs (temp)
 end if
-		addp#x	sum1, temp1					; sum1 += temp1
-		movap#x	temp2, [array + 0x20]		; temp2 = array[32]
-if square
-		mulp#x	temp2, temp2				; temp2 = temp2 ^ 2
+		addp#x	sum2, temp					; sum2 += temp
+		add		index, VSIZE				; index += VSIZE
+		sub		size, VSIZE					; if (size <= VSIZE)
+		jbe		.tail						;     then process array tail
+		movap#x	temp, [ptr + 3*VSIZE]		; temp = ptr[3]
+if type = 1
+		mulp#x	temp, temp					; temp = temp ^ 2
+else if type = 2
+		andp#x	temp, mask					; temp = Abs (temp)
 end if
-		addp#x	sum2, temp2					; sum2 += temp2
-		movap#x	temp3, [array + 0x30]		; temp3 = array[48]
-if square
-		mulp#x	temp3, temp3				; temp3 = temp3 ^ 2
+		addp#x	sum3, temp					; sum3 += temp
+		add		index, VSIZE				; index += VSIZE
+		sub		size, VSIZE					; if (size <= VSIZE)
+		jbe		.tail						;     then process array tail
+		movap#x	temp, [ptr + 4*VSIZE]		; temp = ptr[4]
+if type = 1
+		mulp#x	temp, temp					; temp = temp ^ 2
+else if type = 2
+		andp#x	temp, mask					; temp = Abs (temp)
 end if
-		addp#x	sum3, temp3					; sum3 += temp3
-	prefetchnta	[array + PSTEP]				; prefetch next portion of data
-		add		array, block				; array += block
-		sub		size, 1						; size--
-		jnz		.vloop						; do while (size != 0)
-;------------------------------------------
-		addp#x	sum0, sum1					; sum0 += sum1
-		addp#x	sum0, sum2					; sum0 += sum2
-		addp#x	sum0, sum3					; sum0 += sum3
+		addp#x	sum4, temp					; sum4 += temp
+	prefetchnta	[ptr + PSTEP]				; prefetch next portion of data
+		add		ptr, 4 * VSIZE				; ptr += 4 * VSIZE
+		jmp		.vloop						; do while (true)
+;---[End of vector loop]-------------------
+.tail:	shl		size, 4						; compute shift in mask array
+		andnp#x	blend, dqword [maskS2 + size]
+		movap#x	temp, [array + index]		; temp = array[index]
+if type = 1
+		mulp#x	temp, temp					; temp = temp ^ 2
+else if type = 2
+		andp#x	temp, mask					; temp = Abs (temp)
+end if
+	pblendvb	zero, temp					; blend temp with zero values
+		addp#x	sum0, zero					; sum0 += temp
+		addp#x	sum1, sum2
+		addp#x	sum3, sum4
+		addp#x	sum1, sum3
+		addp#x	sum0, sum1					; sum0 = sum0 + sum1 + sum2 + sum3 + sum4
 		summa	sum0, x						; get all parallel sums
-		mov		size, temp					; size = temp
-.sclr:	test	size, size					; if (size == 0)
-		jz		.exit						;     then go to exit
+		movs#x	result, sum0				; return sum0
+		ret
 ;---[Scalar loop]--------------------------
-.sloop:	movs#x	temp0, [array]				; temp0 = array[0]
-if square
-		muls#x	temp0, temp0				; temp0 = temp0 ^ 2
+.sloop:	movs#x	temp, [array]				; temp = array[0]
+if type = 1
+		muls#x	temp, temp					; temp = temp ^ 2
+else if type = 2
+		andp#x	temp, mask					; temp = Abs (temp)
 end if
-		adds#x	sum0, temp0					; sum0 += temp0
+		adds#x	result, temp				; result += temp
 		add		array, bytes				; array++
-		sub		size, 1						; size--
+		sub		size, bytes					; size--
 		jnz		.sloop						; do while (size != 0)
-;------------------------------------------
+;---[Normal exit]--------------------------
 .exit:	ret
 }
 
@@ -3040,101 +3061,140 @@ SumSqr_flt32:	SUM		1, s
 SumSqr_flt64:	SUM		1, d
 
 ;==============================================================================;
+;       Sum of absolute values                                                 ;
+;==============================================================================;
+SumAbs_flt32:	SUM		2, s
+SumAbs_flt64:	SUM		2, d
+
+;==============================================================================;
 ;       Sum of multiplied elements                                             ;
 ;==============================================================================;
-macro	SUM_MUL	x
+macro	SUM_MUL		x
 {
 ;---[Parameters]---------------------------
 array1	equ		rdi							; pointer to first array
 array2	equ		rsi							; pointer to second array
 size	equ		rdx							; array size (count of elements)
 ;---[Internal variables]-------------------
-count	equ		rcx							; count of elements to align array1
-temp	equ		r8							; temporary register
-sum0	equ		xmm0						; intermediate sum #1
-sum1	equ		xmm1						; intermediate sum #2
-sum2	equ		xmm2						; intermediate sum #3
-sum3	equ		xmm3						; intermediate sum #4
-temp0	equ		xmm4						; temporary register #1
-temp1	equ		xmm5						; temporary register #2
-temp2	equ		xmm6						; temporary register #3
-temp3	equ		xmm7						; temporary register #4
-amask	= 16 - 1							; aligning mask
+index	equ		rax							; offset from beginning of target array
+aindex	equ		rcx							; array offset from vector boundary
+ptr1	equ		r10							; temporary pointer to first array
+ptr2	equ		r11							; temporary pointer to second array
+blend	equ		xmm0						; blending mask
+result	equ		blend						; result register
+a1temp	equ		xmm1						; temporary register #1
+a2temp	equ		xmm2						; temporary register #2
+sum0	equ		xmm3						; intermediate sum #1
+sum1	equ		xmm4						; intermediate sum #2
+sum2	equ		xmm5						; intermediate sum #3
+sum3	equ		xmm6						; intermediate sum #4
+sum4	equ		xmm7						; intermediate sum #5
+zero	equ		xmm8						; 0
 if x eq s
 scale	= 2									; scale value
-else
+else if x eq d
 scale	= 3									; scale value
 end if
-bscale	= 6									; block scale factor
 bytes	= 1 shl scale						; size of array element (bytes)
-block	= 1 shl bscale						; block size (bytes)
-step	= 1 shl (bscale - scale)			; step size (bytes)
+bmask	= bytes - 1							; elements aligning mask
 ;------------------------------------------
 	prefetchnta	[array2]					; prefetch data
 	prefetchnta	[array1]					; prefetch data
+		xorp#x	result, result				; result = 0
+		shl		size, scale					; convert size to bytes
+		jz		.exit						; if (size == 0), then go to exit
+		test	array2, bmask				; if elements have wrong alignment
+		jnz		.sloop						;     then skip vector code
+		test	array1, bmask				; if elements have wrong alignment
+		jnz		.sloop						;     then skip vector code
+		cmp		size, VSIZE					; if (size < VSIZE)
+		jb		.sloop						;     then skip vector code
+;---[Normal execution branch]--------------
+		mov		ptr2, array2				; ptr2 = array2
+		mov		ptr1, array1				; ptr1 = array1
+		mov		aindex, array1
+		and		aindex, VMASK				; get array offset from vector boundary
+		sub		ptr2, aindex				; ptr2 = array2 - aindex
+		sub		ptr1, aindex				; ptr1 = array1 - aindex
+		xor		index, index				; index = 0
 		xorp#x	sum0, sum0					; sum0 = 0
 		xorp#x	sum1, sum1					; sum1 = 0
 		xorp#x	sum2, sum2					; sum2 = 0
 		xorp#x	sum3, sum3					; sum3 = 0
-		test	array1, bytes - 1			; if (array1 & (bytes - 1))
-		jnz		.sclr						;     then skip vector code
-		mov		count, array1
-		neg		count
-		and		count, amask
-		shr		count, scale				; count = (-array1 & amask) >> scale
-		lea		temp, [count + step]
-		cmp		size, temp					; if (size < count + step)
-		jb		.sclr						;     then skip vector code
-		sub		size, count					; size -= count
-		mov		temp, size					; temp = size
-		shr		size, bscale - scale		; size = size / step
-		and		temp, step - 1				; temp = size % step
-		test	count, count				; if (count == 0)
-		jz		.vloop						;     then skip aligning loop
-;---[Aligning loop]------------------------
-.aloop:	movs#x	temp0, [array2]				; temp0 = array2[0]
-		muls#x	temp0, [array1]				; temp0 *= array1[0]
-		adds#x	sum0, temp0					; sum0 += temp0
-		add		array2, bytes				; array2++
-		add		array1, bytes				; array1++
-		sub		count, 1					; count--
-		jnz		.aloop						; do while (count != 0)
+		xorp#x	sum4, sum4					; sum4 = 0
+		xorp#x	zero, zero					; zero = 0
+;---[Unaligned sum]------------------------
+		add		size, aindex				; size += aindex
+		sub		index, aindex				; index -= aindex
+		sub		size, VSIZE					; if (size <= VSIZE)
+		jbe		.tail						;     then process array tails
+		shl		aindex, 4					; compute shift in mask array
+		movap#x	blend, dqword [maskV1 + aindex]
+		movup#x	a2temp, [array2]			; a2temp = array2[0]
+		movup#x	a1temp, [array1]			; a1temp = array1[0]
+		mulp#x	a1temp, a2temp				; a1temp *= a2temp
+	pblendvb	a1temp, zero				; blend a1temp with zero values
+		addp#x	sum0, a1temp				; sum0 += a1temp
 ;---[Vector loop]--------------------------
-.vloop:	movup#x	temp0, [array2 + 0x00]		; temp0 = array2[0]
-		movup#x	temp1, [array2 + 0x10]		; temp1 = array2[16]
-		movup#x	temp2, [array2 + 0x20]		; temp2 = array2[32]
-		movup#x	temp3, [array2 + 0x30]		; temp3 = array2[48]
-	prefetchnta	[array2 + PSTEP]			; prefetch next portion of data
-		mulp#x	temp0, [array1 + 0x00]		; temp0 *= array1[0]
-		addp#x	sum0, temp0					; sum0 += temp0
-		mulp#x	temp1, [array1 + 0x10]		; temp1 *= array1[16]
-		addp#x	sum1, temp1					; sum1 += temp1
-		mulp#x	temp2, [array1 + 0x20]		; temp2 *= array1[32]
-		addp#x	sum2, temp2					; sum2 += temp2
-		mulp#x	temp3, [array1 + 0x30]		; temp3 *= array1[48]
-		addp#x	sum3, temp3					; sum3 += temp3
-	prefetchnta	[array1 + PSTEP]			; prefetch next portion of data
-		add		array2, block				; array2 += block
-		add		array1, block				; array1 += block
-		sub		size, 1						; size--
-		jnz		.vloop						; do while (size != 0)
-;------------------------------------------
-		addp#x	sum0, sum1					; sum0 += sum1
-		addp#x	sum0, sum2					; sum0 += sum2
-		addp#x	sum0, sum3					; sum0 += sum3
+.vloop:	add		index, VSIZE				; index += VSIZE
+		sub		size, VSIZE					; if (size <= VSIZE)
+		jbe		.tail						;     then process array tails
+		movup#x	a2temp, [ptr2 + 1*VSIZE]	; a2temp = ptr2[1]
+		movap#x	a1temp, [ptr1 + 1*VSIZE]	; a1temp = ptr1[1]
+		mulp#x	a1temp, a2temp				; a1temp *= a2temp
+		addp#x	sum1, a1temp				; sum1 += a1temp
+		add		index, VSIZE				; index += VSIZE
+		sub		size, VSIZE					; if (size <= VSIZE)
+		jbe		.tail						;     then process array tails
+		movup#x	a2temp, [ptr2 + 2*VSIZE]	; a2temp = ptr2[2]
+		movap#x	a1temp, [ptr1 + 2*VSIZE]	; a1temp = ptr1[2]
+		mulp#x	a1temp, a2temp				; a1temp *= a2temp
+		addp#x	sum2, a1temp				; sum2 += a1temp
+		add		index, VSIZE				; index += VSIZE
+		sub		size, VSIZE					; if (size <= VSIZE)
+		jbe		.tail						;     then process array tails
+		movup#x	a2temp, [ptr2 + 3*VSIZE]	; a2temp = ptr2[3]
+		movap#x	a1temp, [ptr1 + 3*VSIZE]	; a1temp = ptr1[3]
+		mulp#x	a1temp, a2temp				; a1temp *= a2temp
+		addp#x	sum3, a1temp				; sum3 += a1temp
+		add		index, VSIZE				; index += VSIZE
+		sub		size, VSIZE					; if (size <= VSIZE)
+		jbe		.tail						;     then process array tails
+		movup#x	a2temp, [ptr2 + 4*VSIZE]	; a2temp = ptr2[4]
+		movap#x	a1temp, [ptr1 + 4*VSIZE]	; a1temp = ptr1[4]
+		mulp#x	a1temp, a2temp				; a1temp *= a2temp
+		addp#x	sum4, a1temp				; sum4 += a1temp
+	prefetchnta	[ptr2 + PSTEP]				; prefetch next portion of temp
+	prefetchnta	[ptr1 + PSTEP]				; prefetch next portion of temp
+		add		ptr2, 4 * VSIZE				; ptr2 += 4 * VSIZE
+		add		ptr1, 4 * VSIZE				; ptr1 += 4 * VSIZE
+		jmp		.vloop						; do while (true)
+;---[End of vector loop]-------------------
+.tail:	add		index, size					; index += size
+		shl		size, 4						; compute shift in mask array
+		movap#x	blend, dqword [maskV2 + size]
+		movup#x	a2temp, [array2 + index]	; a2temp = array2[index]
+		movup#x	a1temp, [array1 + index]	; a1temp = array1[index]
+		mulp#x	a1temp, a2temp				; a1temp *= a2temp
+	pblendvb	zero, a1temp				; blend a1temp with zero values
+		addp#x	sum0, zero					; sum0 += a1temp
+		addp#x	sum1, sum2
+		addp#x	sum3, sum4
+		addp#x	sum1, sum3
+		addp#x	sum0, sum1					; sum0 = sum0 + sum1 + sum2 + sum3 + sum4
 		summa	sum0, x						; get all parallel sums
-		mov		size, temp					; size = temp
-.sclr:	test	size, size					; if (size == 0)
-		jz		.exit						;     then go to exit
+		movs#x	result, sum0				; return sum0
+		ret
 ;---[Scalar loop]--------------------------
-.sloop:	movs#x	temp0, [array2]				; temp0 = array2[0]
-		muls#x	temp0, [array1]				; temp0 *= array1[0]
-		adds#x	sum0, temp0					; sum0 += temp0
+.sloop:	movs#x	a2temp, [array2]			; a2temp = array2[0]
+		movs#x	a1temp, [array1]			; a1temp = array1[0]
+		muls#x	a1temp, a2temp				; a1temp *= a2temp
+		adds#x	result, a1temp				; result += a1temp
 		add		array2, bytes				; array2++
 		add		array1, bytes				; array1++
-		sub		size, 1						; size--
+		sub		size, bytes					; size--
 		jnz		.sloop						; do while (size != 0)
-;------------------------------------------
+;---[Normal exit]--------------------------
 .exit:	ret
 }
 SumMul_flt32:	SUM_MUL	s
@@ -3143,581 +3203,538 @@ SumMul_flt64:	SUM_MUL	d
 ;******************************************************************************;
 ;       Minimum and maximum values                                             ;
 ;******************************************************************************;
-macro	MINMAX	op, treg, value, abs, x
+macro	MINMAX		op, value, abs, x
 {
 ;---[Parameters]---------------------------
 array	equ		rdi							; pointer to array
 size	equ		rsi							; array size (count of elements)
 ;---[Internal variables]-------------------
-count	equ		rcx							; count of elements to align array
-temp	equ		r8							; temporary register
-fmask	equ		eax							; mask of comparison results
-result0	equ		xmm0						; intermediate result #1
-result1	equ		xmm1						; intermediate result #2
-result2	equ		xmm2						; intermediate result #3
-result3	equ		xmm3						; intermediate result #4
-temp0	equ		xmm4						; temporary register #1
-temp1	equ		xmm5						; temporary register #2
-temp2	equ		xmm6						; temporary register #3
-temp3	equ		xmm7						; temporary register #4
-flags0	equ		xmm8						; checks accumulator #1
-flags1	equ		xmm9						; checks accumulator #2
-flags2	equ		xmm10						; checks accumulator #3
-flags3	equ		xmm11						; checks accumulator #4
-mask	equ		xmm12						; bit mask
-amask	= 16 - 1							; aligning mask
+index	equ		rax							; offset from beginning of array
+aindex	equ		rcx							; array offset from vector boundary
+fmask	equ		r9							; result of pattern search
+ptr		equ		r10							; temporary pointer to array
+blend	equ		xmm0						; blending mask
+result	equ		blend						; result register
+temp	equ		xmm1						; temporary register
+mask	equ		xmm2						; data mask
+res0	equ		xmm3						; intermediate result #1
+res1	equ		xmm4						; intermediate result #2
+res2	equ		xmm5						; intermediate result #3
+res3	equ		xmm6						; intermediate result #4
+res4	equ		xmm7						; intermediate result #5
+inf		equ		xmm8						; infinity value
+flags0	equ		xmm9						; NaN matching flags #1
+flags1	equ		xmm10						; NaN matching flags #2
+flags2	equ		xmm11						; NaN matching flags #3
+flags3	equ		xmm12						; NaN matching flags #4
+flags4	equ		xmm13						; NaN matching flags #5
 if x eq s
 dmask	= DMASK_FLT32						; data mask
+nan		= DMASK_FLT32						; NaN
 scale	= 2									; scale value
-else
+else if x eq d
 dmask	= DMASK_FLT64						; data mask
+nan		= DMASK_FLT64						; NaN
 scale	= 3									; scale value
 end if
-bscale	= 6									; block scale factor
 bytes	= 1 shl scale						; size of array element (bytes)
-block	= 1 shl bscale						; block size (bytes)
-step	= 1 shl (bscale - scale)			; step size (bytes)
+bmask	= bytes - 1							; elements aligning mask
 ;------------------------------------------
 	prefetchnta	[array]						; prefetch data
+		initreg	result, index, value		; result = value
+		shl		size, scale					; convert size to bytes
+		jz		.exit						; if (size == 0), then go to exit
 if abs
-		initreg	mask, treg, dmask, bytes	; mask = dmask
-		shufp#x	mask, mask, 0x0				; duplicate mask through the entire register
+		initreg	mask, index, dmask			; mask = dmask
 end if
-		initreg	result0, treg, value, bytes	; result0 = value
-		shufp#x	result0, result0, 0x0		; duplicate value through the entire register
-		movap#x	result1, result0			; result1 = value
-		movap#x	result2, result0			; result2 = value
-		movap#x	result3, result0			; result3 = value
-		test	array, bytes - 1			; if (array & (bytes - 1))
-		jnz		.sclr						;     then skip vector code
-		mov		count, array
-		neg		count
-		and		count, amask
-		shr		count, scale				; count = (-array & amask) >> scale
-		lea		temp, [count + step]
-		cmp		size, temp					; if (size < count + step)
-		jb		.sclr						;     then skip vector code
-		sub		size, count					; size -= count
-		mov		temp, size					; temp = size
-		shr		size, bscale - scale		; size = size / step
-		and		temp, step - 1				; temp = size % step
-		test	count, count				; if (count == 0)
-		jz		.vctr						;     then skip aligning loop
-;---[Aligning loop]------------------------
-.aloop:	movs#x	temp0, [array]				; temp0 = array[0]
+		test	array, bmask				; if elements have wrong alignment
+		jnz		.sloop						;     then skip vector code
+;---[Normal execution branch]--------------
+		mov		aindex, array
+		and		aindex, VMASK				; get array offset from vector boundary
+		sub		array, aindex				; align pointer to vector boundary
+		mov		ptr, array					; ptr = array
+		shufp#x	result, result, 0x0			; duplicate value through the entire register
 if abs
-		andp#x	temp0, mask					; temp0 = Abs (temp0)
+		shufp#x	mask, mask, 0x0				; duplicate value through the entire register
 end if
-		op#s#x	result0, temp0				; find min or max values
-		comis#x	temp0, temp0				; if NAN is detected,
-		jp		.nan						;     then go to NaN detected branch
-		add		array, bytes				; array++
-		sub		count, 1					; count--
-		jnz		.aloop						; do while (count != 0)
-;------------------------------------------
-.vctr:	xorp#x	flags0, flags0				; flags0 = 0
+		movap#x	res0, result				; res0 = infinity
+		movap#x	res1, result				; res1 = infinity
+		movap#x	res2, result				; res2 = infinity
+		movap#x	res3, result				; res3 = infinity
+		movap#x	res4, result				; res4 = infinity
+		movap#x	inf, result					; inf = infinity
+		xorp#x	flags0, flags0				; flags0 = 0
 		xorp#x	flags1, flags1				; flags1 = 0
 		xorp#x	flags2, flags2				; flags2 = 0
 		xorp#x	flags3, flags3				; flags3 = 0
+		xorp#x	flags4, flags4				; flags4 = 0
+;---[Unaligned operation]------------------
+		add		size, aindex				; size += aindex
+		shl		aindex, 4					; compute shift in mask array
+		movap#x	blend, dqword [maskS1 + aindex]
+		xor		index, index				; index = 0
+		sub		size, VSIZE					; if (size <= VSIZE)
+		jbe		.tail						;     then process array tail
+		movap#x	temp, [array]				; temp = array[0]
+if abs
+		andp#x	temp, mask					; temp = Abs (temp)
+end if
+	pblendvb	temp, inf					; blend temp with infinity values
+		op#p#x	res0, temp					; find min or max values
+		cmpp#x	temp, temp, 3				; check values for NANs
+		orp#x	flags0, temp				; accumulate NaN check results
+		xorp#x	blend, blend				; blend = 0
 ;---[Vector loop]--------------------------
-.vloop:	movap#x	temp0, [array + 0x00]		; temp0 = array[0]
+.vloop:	add		index, VSIZE				; index += VSIZE
+		sub		size, VSIZE					; if (size <= VSIZE)
+		jbe		.tail						;     then process array tail
+		movap#x	temp, [ptr + 1*VSIZE]		; temp = ptr[1]
 if abs
-		andp#x	temp0, mask					; temp0 = Abs (temp0)
+		andp#x	temp, mask					; temp = Abs (temp)
 end if
-		op#p#x	result0, temp0				; find min or max values
-		cmpp#x	temp0, temp0, 3				; check values for NANs
-		orp#x	flags0, temp0				; accumulate check results
-		movap#x	temp1, [array + 0x10]		; temp1 = array[16]
+		op#p#x	res1, temp					; find min or max values
+		cmpp#x	temp, temp, 3				; check values for NANs
+		orp#x	flags1, temp				; accumulate NaN check results
+		add		index, VSIZE				; index += VSIZE
+		sub		size, VSIZE					; if (size <= VSIZE)
+		jbe		.tail						;     then process array tail
+		movap#x	temp, [ptr + 2*VSIZE]		; temp = ptr[2]
 if abs
-		andp#x	temp1, mask					; temp1 = Abs (temp1)
+		andp#x	temp, mask					; temp = Abs (temp)
 end if
-		op#p#x	result1, temp1				; find min or max values
-		cmpp#x	temp1, temp1, 3				; check values for NANs
-		orp#x	flags1, temp1				; accumulate check results
-		movap#x	temp2, [array + 0x20]		; temp2 = array[32]
+		op#p#x	res2, temp					; find min or max values
+		cmpp#x	temp, temp, 3				; check values for NANs
+		orp#x	flags2, temp				; accumulate NaN check results
+		add		index, VSIZE				; index += VSIZE
+		sub		size, VSIZE					; if (size <= VSIZE)
+		jbe		.tail						;     then process array tail
+		movap#x	temp, [ptr + 3*VSIZE]		; temp = ptr[3]
 if abs
-		andp#x	temp2, mask					; temp2 = Abs (temp2)
+		andp#x	temp, mask					; temp = Abs (temp)
 end if
-		op#p#x	result2, temp2				; find min or max values
-		cmpp#x	temp2, temp2, 3				; check values for NANs
-		orp#x	flags2, temp2				; accumulate check results
-		movap#x	temp3, [array + 0x30]		; temp3 = array[48]
+		op#p#x	res3, temp					; find min or max values
+		cmpp#x	temp, temp, 3				; check values for NANs
+		orp#x	flags3, temp				; accumulate NaN check results
+		add		index, VSIZE				; index += VSIZE
+		sub		size, VSIZE					; if (size <= VSIZE)
+		jbe		.tail						;     then process array tail
+		movap#x	temp, [ptr + 4*VSIZE]		; temp = ptr[4]
 if abs
-		andp#x	temp3, mask					; temp3 = Abs (temp3)
+		andp#x	temp, mask					; temp = Abs (temp)
 end if
-		op#p#x	result3, temp3				; find min or max values
-		cmpp#x	temp3, temp3, 3				; check values for NANs
-		orp#x	flags3, temp3				; accumulate check results
-	prefetchnta	[array + PSTEP]				; prefetch next portion of data
-		add		array, block				; array += block
-		sub		size, 1						; size--
-		jnz		.vloop						; do while (size != 0)
-;------------------------------------------
-		orp#x	flags0, flags1				; accumulate check results
-		orp#x	flags0, flags2				; accumulate check results
-		orp#x	flags0, flags3				; accumulate check results
-	movmskp#x	fmask, flags0				; save check results to fmask
-		test	fmask, fmask				; if NAN is detected,
-		jnz		.nan						;     then go to NaN detected branch
-		op#p#x	result0, result1			; find min or max values
-		op#p#x	result0, result2			; find min or max values
-		op#p#x	result0, result3			; find min or max values
+		op#p#x	res4, temp					; find min or max values
+		cmpp#x	temp, temp, 3				; check values for NANs
+		orp#x	flags4, temp				; accumulate NaN check results
+	prefetchnta	[ptr + PSTEP]				; prefetch next portion of data
+		add		ptr, 4 * VSIZE				; ptr += 4 * VSIZE
+		jmp		.vloop						; do while (true)
+;---[End of vector loop]-------------------
+.tail:	shl		size, 4						; compute shift in mask array
+		andnp#x	blend, dqword [maskS2 + size]
+		movap#x	temp, [array + index]		; temp = array[index]
+if abs
+		andp#x	temp, mask					; temp = Abs (temp)
+end if
+	pblendvb	inf, temp					; blend temp with infinity values
+		op#p#x	res0, inf					; find min or max values
+		cmpp#x	inf, inf, 3					; check values for NANs
+		orp#x	flags0, inf					; accumulate NaN check results
+		orp#x	flags1, flags2
+		orp#x	flags3, flags4
+		orp#x	flags1, flags3
+		orp#x	flags0, flags1
+	pmovmskb	fmask, flags0				; save check results to fmask
+		and		fmask, fmask				; if NAN is found,
+		jnz		.error						;     then go to error branch
+		op#p#x	res1, res2
+		op#p#x	res3, res4
+		op#p#x	res1, res3
+		op#p#x	res0, res1					; find min or max values from all accumulators
 if x eq s
-		movhlps	temp0, result0				; temp0 = upper half of result0
-		op#p#x	result0, temp0				; find min or max values
+		movhlps	temp, res0					; temp = upper half of res0
+		op#p#x	res0, temp					; find min or max values
 end if
-		movap#x	temp0, result0				; temp0 = result0
-		shufp#x	temp0, temp0, 0x1			; shuffle values in temp0 register
-		op#s#x	result0, temp0				; find min or max value
-		mov		size, temp					; size = temp
-.sclr:	test	size, size					; if (size == 0)
-		jz		.exit						;     then go to exit
+		movap#x	temp, res0					; temp = res0
+		shufp#x	temp, temp, 0x1				; shuffle values in temp register
+		op#s#x	res0, temp					; find min or max value
+		movs#x	result, res0				; return res0
+		ret
 ;---[Scalar loop]--------------------------
-.sloop:	movs#x	temp0, [array]				; temp0 = array[0]
+.sloop:	movs#x	temp, [array]				; temp = array[0]
 if abs
-		andp#x	temp0, mask					; temp0 = Abs (temp0)
+		andp#x	temp, mask					; temp = Abs (temp)
 end if
-		op#s#x	result0, temp0				; find min or max values
-		comis#x	temp0, temp0				; if NAN is detected,
-		jp		.nan						;     then go to NaN detected branch
+		op#s#x	result, temp				; find min or max values
+		comis#x	temp, temp					; if NAN is found,
+		jp		.error						;     then go to error branch
 		add		array, bytes				; array++
-		sub		size, 1						; size--
+		sub		size, bytes					; size--
 		jnz		.sloop						; do while (size != 0)
-;---[Normal exit branch]-------------------
+;---[Normal exit]--------------------------
 .exit:	ret
-;---[NaN detected branch]------------------
-.nan:	initreg	result0, treg, dmask, bytes	; return true (NaN is detected)
+;---[Error branch]-------------------------
+.error:	initreg	result, index, nan			; return NaN
 		ret
 }
 
 ; Minimum value
-Min_flt32:		MINMAX	min, edx, PINF_FLT32, 0, s
-Min_flt64:		MINMAX	min, rdx, PINF_FLT64, 0, d
+Min_flt32:		MINMAX	min, PINF_FLT32, 0, s
+Min_flt64:		MINMAX	min, PINF_FLT64, 0, d
 
 ; Minimum absolute value
-MinAbs_flt32:	MINMAX	min, edx, PINF_FLT32, 1, s
-MinAbs_flt64:	MINMAX	min, rdx, PINF_FLT64, 1, d
+MinAbs_flt32:	MINMAX	min, PINF_FLT32, 1, s
+MinAbs_flt64:	MINMAX	min, PINF_FLT64, 1, d
 
 ; Maximum value
-Max_flt32:		MINMAX	max, edx, MINF_FLT32, 0, s
-Max_flt64:		MINMAX	max, rdx, MINF_FLT64, 0, d
+Max_flt32:		MINMAX	max, MINF_FLT32, 0, s
+Max_flt64:		MINMAX	max, MINF_FLT64, 0, d
 
 ; Maximum absolute value
-MaxAbs_flt32:	MINMAX	max, edx, MINF_FLT32, 1, s
-MaxAbs_flt64:	MINMAX	max, rdx, MINF_FLT64, 1, d
+MaxAbs_flt32:	MINMAX	max, MINF_FLT32, 1, s
+MaxAbs_flt64:	MINMAX	max, MINF_FLT64, 1, d
 
 ;******************************************************************************;
 ;       Rounding                                                               ;
 ;******************************************************************************;
-macro	ROUND1	treg, mode, x
+macro	ROUND	type, mode, x
 {
 ;---[Parameters]---------------------------
 array	equ		rdi							; pointer to array
 size	equ		rsi							; array size (count of elements)
 ;---[Internal variables]-------------------
-count	equ		rcx							; count of elements to align array
-temp	equ		r8							; temporary register
-temp0	equ		xmm0						; temporary register #1
-temp1	equ		xmm1						; temporary register #2
-temp2	equ		xmm2						; temporary register #3
-temp3	equ		xmm3						; temporary register #4
-magic	equ		xmm4						; magic number to get integer part
-stack	equ		rsp							; stack pointer
-s_mxcsr	equ		stack - 2 * 8				; stack position of mxcsr mask
-s_back	equ		stack - 1 * 8				; stack position of original mxcsr value
-amask	= 16 - 1							; aligning mask
-if x eq s
-mvalue	= MAGIC_FLT32						; magic number to get integer part from value
-scale	= 2									; scale value
-else
-mvalue	= MAGIC_FLT64						; magic number to get integer part from value
-scale	= 3									; scale value
-end if
-bscale	= 6									; block scale factor
-bytes	= 1 shl scale						; size of array element (bytes)
-block	= 1 shl bscale						; block size (bytes)
-step	= 1 shl (bscale - scale)			; step size (bytes)
-;------------------------------------------
-	prefetchnta	[array]						; prefetch data
-		mov		dword [s_mxcsr], mode		; copy rounding mode mask to the stack
-		stmxcsr	[s_back]					; save original mxcsr value
-		ldmxcsr	[s_mxcsr]					; set new rounding mode
-		initreg	magic, treg, mvalue, bytes	; load magic number
-		test	array, bytes - 1			; if (array & (bytes - 1))
-		jnz		.sclr						;     then skip vector code
-		mov		count, array
-		neg		count
-		and		count, amask
-		shr		count, scale				; count = (-array & amask) >> scale
-		lea		temp, [count + step]
-		cmp		size, temp					; if (size < count + step)
-		jb		.sclr						;     then skip vector code
-		shufp#x	magic, magic, 0x0			; duplicate value through the entire register
-		sub		size, count					; size -= count
-		mov		temp, size					; temp = size
-		shr		size, bscale - scale		; size = size / step
-		and		temp, step - 1				; temp = size % step
-		test	count, count				; if (count == 0)
-		jz		.vloop						;     then skip aligning loop
-;---[Aligning loop]------------------------
-.aloop:	movs#x	temp0, [array]				; temp0 = array[0]
-		adds#x	temp0, magic				; temp0 += magic
-		subs#x	temp0, magic				; temp0 -= magic
-		movs#x	[array], temp0				; array[0] = temp0
-		add		array, bytes				; array++
-		sub		count, 1					; count--
-		jnz		.aloop						; do while (count != 0)
-;---[Vector loop]--------------------------
-.vloop:	movap#x	temp0, [array + 0x00]		; temp0 = array[0]
-		addp#x	temp0, magic				; temp0 += magic
-		subp#x	temp0, magic				; temp0 -= magic
-		movap#x	temp1, [array + 0x10]		; temp1 = array[16]
-		addp#x	temp1, magic				; temp1 += magic
-		subp#x	temp1, magic				; temp1 -= magic
-		movap#x	temp2, [array + 0x20]		; temp2 = array[32]
-		addp#x	temp2, magic				; temp2 += magic
-		subp#x	temp2, magic				; temp2 -= magic
-		movap#x	temp3, [array + 0x30]		; temp3 = array[48]
-		addp#x	temp3, magic				; temp3 += magic
-		subp#x	temp3, magic				; temp3 -= magic
-	prefetchnta	[array + PSTEP]				; prefetch next portion of data
-		movap#x	[array + 0x00], temp0		; array[0] = temp0
-		movap#x	[array + 0x10], temp1		; array[16] = temp1
-		movap#x	[array + 0x20], temp2		; array[32] = temp2
-		movap#x	[array + 0x30], temp3		; array[48] = temp3
-		add		array, block				; array += block
-		sub		size, 1						; size--
-		jnz		.vloop						; do while (size != 0)
-;------------------------------------------
-		mov		size, temp					; size = temp
-.sclr:	test	size, size					; if (size == 0)
-		jz		.exit						;     then go to exit
-;---[Scalar loop]--------------------------
-.sloop:	movs#x	temp0, [array]				; temp0 = array[0]
-		adds#x	temp0, magic				; temp0 += magic
-		subs#x	temp0, magic				; temp0 -= magic
-		movs#x	[array], temp0				; array[0] = temp0
-		add		array, bytes				; array++
-		sub		size, 1						; size--
-		jnz		.sloop						; do while (size != 0)
-;------------------------------------------
-.exit:	ldmxcsr	[s_back]					; restore original mxcsr value
-		ret
-}
-;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	ROUND2	treg, mode, x
-{
-;---[Parameters]---------------------------
-array	equ		rdi							; pointer to array
-size	equ		rsi							; array size (count of elements)
-;---[Internal variables]-------------------
-count	equ		rcx							; count of elements to align array
-temp	equ		r8							; temporary register
-temp0	equ		xmm0						; temporary register #1
-temp1	equ		xmm1						; temporary register #2
-temp2	equ		xmm2						; temporary register #3
-temp3	equ		xmm3						; temporary register #4
-sign0	equ		xmm4						; sign register #1
-sign1	equ		xmm5						; sign register #2
-sign2	equ		xmm6						; sign register #3
-sign3	equ		xmm7						; sign register #4
-magic	equ		xmm8						; magic number to get integer part
-mask	equ		xmm9						; sign mask
-stack	equ		rsp							; stack pointer
-s_mxcsr	equ		stack - 2 * 8				; stack position of mxcsr mask
-s_back	equ		stack - 1 * 8				; stack position of original mxcsr value
-amask	= 16 - 1							; aligning mask
+index	equ		rax							; offset from beginning of array
+aindex	equ		rcx							; array offset from vector boundary
+ptr		equ		r10							; temporary pointer to array
+blend	equ		xmm0						; blending mask
+temp	equ		xmm1						; temporary register
+mask	equ		xmm2						; data mask
+half	equ		xmm3						; 0.5
+value	equ		xmm4						; adjustment value
+data	equ		xmm5						; register which holds original data
 if x eq s
 smask	= SMASK_FLT32						; sign mask
-mvalue	= MAGIC_FLT32						; magic number to get integer part from value
+halfval	= HALF_FLT32						; 0.5
 scale	= 2									; scale value
-else
+else if x eq d
 smask	= SMASK_FLT64						; sign mask
-mvalue	= MAGIC_FLT64						; magic number to get integer part from value
+halfval	= HALF_FLT64						; 0.5
 scale	= 3									; scale value
 end if
-bscale	= 6									; block scale factor
 bytes	= 1 shl scale						; size of array element (bytes)
-block	= 1 shl bscale						; block size (bytes)
-step	= 1 shl (bscale - scale)			; step size (bytes)
+bmask	= bytes - 1							; elements aligning mask
 ;------------------------------------------
 	prefetchnta	[array]						; prefetch data
-		mov		dword [s_mxcsr], mode		; copy rounding mode mask to the stack
-		stmxcsr	[s_back]					; save original mxcsr value
-		ldmxcsr	[s_mxcsr]					; set new rounding mode
-		initreg	mask, treg, smask, bytes	; mask2 = smask
-		initreg	magic, treg, mvalue, bytes	; load magic number
-		test	array, bytes - 1			; if (array & (bytes - 1))
-		jnz		.sclr						;     then skip vector code
-		mov		count, array
-		neg		count
-		and		count, amask
-		shr		count, scale				; count = (-array & amask) >> scale
-		lea		temp, [count + step]
-		cmp		size, temp					; if (size < count + step)
-		jb		.sclr						;     then skip vector code
-		shufp#x	mask, mask, 0x0				; duplicate value through the entire register
-		shufp#x	magic, magic, 0x0			; duplicate value through the entire register
-		sub		size, count					; size -= count
-		mov		temp, size					; temp = size
-		shr		size, bscale - scale		; size = size / step
-		and		temp, step - 1				; temp = size % step
-		test	count, count				; if (count == 0)
-		jz		.vloop						;     then skip aligning loop
-;---[Aligning loop]------------------------
-.aloop:	movs#x	temp0, [array]				; temp0 = array[0]
-		movap#x	sign0, temp0				; sign0 = temp0
-		andp#x	sign0, mask					; sign0 = Sign (temp0)
-		orp#x	sign0, magic				; apply sign to magic number
-		adds#x	temp0, sign0				; temp0 += magic
-		subs#x	temp0, sign0				; temp0 -= magic
-		movs#x	[array], temp0				; array[0] = temp0
-		add		array, bytes				; array++
-		sub		count, 1					; count--
-		jnz		.aloop						; do while (count != 0)
-;---[Vector loop]--------------------------
-.vloop:	movap#x	temp0, [array + 0x00]		; temp0 = array[0]
-		movap#x	sign0, temp0				; sign0 = temp0
-		andp#x	sign0, mask					; sign0 = Sign (temp0)
-		orp#x	sign0, magic				; apply sign to magic number
-		addp#x	temp0, sign0				; temp0 += magic
-		subp#x	temp0, sign0				; temp0 -= magic
-		movap#x	temp1, [array + 0x10]		; temp1 = array[16]
-		movap#x	sign1, temp1				; sign1 = temp1
-		andp#x	sign1, mask					; sign1 = Sign (temp1)
-		orp#x	sign1, magic				; apply sign to magic number
-		addp#x	temp1, sign1				; temp1 += magic
-		subp#x	temp1, sign1				; temp1 -= magic
-		movap#x	temp2, [array + 0x20]		; temp2 = array[32]
-		movap#x	sign2, temp2				; sign2 = temp2
-		andp#x	sign2, mask					; sign2 = Sign (temp2)
-		orp#x	sign2, magic				; apply sign to magic number
-		addp#x	temp2, sign2				; temp2 += magic
-		subp#x	temp2, sign2				; temp2 -= magic
-		movap#x	temp3, [array + 0x30]		; temp3 = array[48]
-		movap#x	sign3, temp3				; sign3 = temp3
-		andp#x	sign3, mask					; sign3 = Sign (temp3)
-		orp#x	sign3, magic				; apply sign to magic number
-		addp#x	temp3, sign3				; temp3 += magic
-		subp#x	temp3, sign3				; temp3 -= magic
-	prefetchnta	[array + PSTEP]				; prefetch next portion of data
-		movap#x	[array + 0x00], temp0		; array[0] = temp0
-		movap#x	[array + 0x10], temp1		; array[16] = temp1
-		movap#x	[array + 0x20], temp2		; array[32] = temp2
-		movap#x	[array + 0x30], temp3		; array[48] = temp3
-		add		array, block				; array += block
-		sub		size, 1						; size--
-		jnz		.vloop						; do while (size != 0)
-;------------------------------------------
-		mov		size, temp					; size = temp
-.sclr:	test	size, size					; if (size == 0)
-		jz		.exit						;     then go to exit
-;---[Scalar loop]--------------------------
-.sloop:	movs#x	temp0, [array]				; temp0 = array[0]
-		movap#x	sign0, temp0				; sign0 = temp0
-		andp#x	sign0, mask					; sign0 = Sign (temp0)
-		orp#x	sign0, magic				; apply sign to magic number
-		adds#x	temp0, sign0				; temp0 += magic
-		subs#x	temp0, sign0				; temp0 -= magic
-		movs#x	[array], temp0				; array[0] = temp0
-		add		array, bytes				; array++
-		sub		size, 1						; size--
-		jnz		.sloop						; do while (size != 0)
-;------------------------------------------
-.exit:	ldmxcsr	[s_back]					; restore original mxcsr value
-		ret
-}
-;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	FRAC	treg, x
-{
-;---[Parameters]---------------------------
-array	equ		rdi							; pointer to array
-size	equ		rsi							; array size (count of elements)
-;---[Internal variables]-------------------
-count	equ		rcx							; count of elements to align array
-temp	equ		r8							; temporary register
-temp0	equ		xmm0						; temporary register #1
-temp1	equ		xmm1						; temporary register #2
-temp2	equ		xmm2						; temporary register #3
-temp3	equ		xmm3						; temporary register #4
-int0	equ		xmm4						; integer part of number #1
-int1	equ		xmm5						; integer part of number #2
-int2	equ		xmm6						; integer part of number #3
-int3	equ		xmm7						; integer part of number #4
-sign0	equ		xmm8						; sign register #1
-sign1	equ		xmm9						; sign register #2
-sign2	equ		xmm10						; sign register #3
-sign3	equ		xmm11						; sign register #4
-magic	equ		xmm12						; magic number to get integer part
-mask	equ		xmm13						; sign mask
-stack	equ		rsp							; stack pointer
-s_mxcsr	equ		stack - 2 * 8				; stack position of mxcsr mask
-s_back	equ		stack - 1 * 8				; stack position of original mxcsr value
-amask	= 16 - 1							; aligning mask
-if x eq s
-smask	= SMASK_FLT32						; sign mask
-mvalue	= MAGIC_FLT32						; magic number to get integer part from value
-scale	= 2									; scale value
-else
-smask	= SMASK_FLT64						; sign mask
-mvalue	= MAGIC_FLT64						; magic number to get integer part from value
-scale	= 3									; scale value
+		shl		size, scale					; convert size to bytes
+		jz		.exit						; if (size == 0), then go to exit
+if type = 1
+		initreg	mask, index, smask			; mask = smask
+		initreg	half, index, halfval		; half = 0.5
 end if
-bscale	= 6									; block scale factor
-bytes	= 1 shl scale						; size of array element (bytes)
-block	= 1 shl bscale						; block size (bytes)
-step	= 1 shl (bscale - scale)			; step size (bytes)
-;------------------------------------------
-	prefetchnta	[array]						; prefetch data
-		mov		dword [s_mxcsr], 0x7F80		; copy rounding mode mask to the stack
-		stmxcsr	[s_back]					; save original mxcsr value
-		ldmxcsr	[s_mxcsr]					; set new rounding mode
-		initreg	mask, treg, smask, bytes	; mask2 = smask
-		initreg	magic, treg, mvalue, bytes	; load magic number
-		test	array, bytes - 1			; if (array & (bytes - 1))
-		jnz		.sclr						;     then skip vector code
-		mov		count, array
-		neg		count
-		and		count, amask
-		shr		count, scale				; count = (-array & amask) >> scale
-		lea		temp, [count + step]
-		cmp		size, temp					; if (size < count + step)
-		jb		.sclr						;     then skip vector code
+		test	array, bmask				; if elements have wrong alignment
+		jnz		.sloop						;     then skip vector code
+;---[Normal execution branch]--------------
+		mov		aindex, array
+		and		aindex, VMASK				; get array offset from vector boundary
+		sub		array, aindex				; align pointer to vector boundary
+		mov		ptr, array					; ptr = array
+if type = 1
 		shufp#x	mask, mask, 0x0				; duplicate value through the entire register
-		shufp#x	magic, magic, 0x0			; duplicate value through the entire register
-		sub		size, count					; size -= count
-		mov		temp, size					; temp = size
-		shr		size, bscale - scale		; size = size / step
-		and		temp, step - 1				; temp = size % step
-		test	count, count				; if (count == 0)
-		jz		.vloop						;     then skip aligning loop
-;---[Aligning loop]------------------------
-.aloop:	movs#x	temp0, [array]				; temp0 = array[0]
-		movap#x	int0, temp0					; int0 = temp0
-		movap#x	sign0, temp0				; sign0 = temp0
-		andp#x	sign0, mask					; sign0 = Sign (temp0)
-		orp#x	sign0, magic				; apply sign to magic number
-		adds#x	int0, sign0					; int0 += magic
-		subs#x	int0, sign0					; int0 -= magic
-		subs#x	temp0, int0					; temp0 = Frac (temp0)
-		movs#x	[array], temp0				; array[0] = temp0
-		add		array, bytes				; array++
-		sub		count, 1					; count--
-		jnz		.aloop						; do while (count != 0)
+		shufp#x	half, half, 0x0				; duplicate value through the entire register
+end if
+;---[Unaligned sums]-----------------------
+		add		size, aindex				; size += aindex
+		shl		aindex, 4					; compute shift in mask array
+		movap#x	blend, dqword [maskS1 + aindex]
+		xor		index, index				; index = 0
+		sub		size, VSIZE					; if (size <= VSIZE)
+		jbe		.tail						;     then process array tail
+		movap#x	temp, [array]				; temp = array[0]
+		movap#x	data, temp					; data = temp
+if type = 1
+		movap#x	value, temp
+		andp#x	value, mask
+		orp#x	value, half					; value = 0.5 * Sign (temp)
+		addp#x	temp, value					; temp += value
+	roundp#x	temp, temp, mode			; temp = Round (temp)
+else if type = 2
+	roundp#x	value, temp, mode			; value = Round (temp)
+		subp#x	temp, value					; temp -= value
+else
+	roundp#x	temp, temp, mode			; temp = Round (temp)
+end if
+	pblendvb	temp, data					; blend temp with original data
+		movap#x	[array], temp				; array[0] = temp
+		xorp#x	blend, blend				; blend = 0
 ;---[Vector loop]--------------------------
-.vloop:	movap#x	temp0, [array + 0x00]		; temp0 = array[0]
-		movap#x	int0, temp0					; int0 = temp0
-		movap#x	sign0, temp0				; sign0 = temp0
-		andp#x	sign0, mask					; sign0 = Sign (temp0)
-		orp#x	sign0, magic				; apply sign to magic number
-		addp#x	int0, sign0					; int0 += magic
-		subp#x	int0, sign0					; int0 -= magic
-		subp#x	temp0, int0					; temp0 = Frac (temp0)
-		movap#x	temp1, [array + 0x10]		; temp1 = array[16]
-		movap#x	int1, temp1					; int1 = temp1
-		movap#x	sign1, temp1				; sign1 = temp1
-		andp#x	sign1, mask					; sign1 = Sign (temp1)
-		orp#x	sign1, magic				; apply sign to magic number
-		addp#x	int1, sign1					; int1 += magic
-		subp#x	int1, sign1					; int1 -= magic
-		subp#x	temp1, int1					; temp1 = Frac (temp1)
-		movap#x	temp2, [array + 0x20]		; temp2 = array[32]
-		movap#x	int2, temp2					; int2 = temp2
-		movap#x	sign2, temp2				; sign2 = temp2
-		andp#x	sign2, mask					; sign2 = Sign (temp2)
-		orp#x	sign2, magic				; apply sign to magic number
-		addp#x	int2, sign2					; int2 += magic
-		subp#x	int2, sign2					; int2 -= magic
-		subp#x	temp2, int2					; temp2 = Frac (temp2)
-		movap#x	temp3, [array + 0x30]		; temp3 = array[48]
-		movap#x	int3, temp3					; int3 = temp3
-		movap#x	sign3, temp3				; sign3 = temp3
-		andp#x	sign3, mask					; sign3 = Sign (temp3)
-		orp#x	sign3, magic				; apply sign to magic number
-		addp#x	int3, sign3					; int3 += magic
-		subp#x	int3, sign3					; int3 -= magic
-		subp#x	temp3, int3					; temp3 = Frac (temp3)
-	prefetchnta	[array + PSTEP]				; prefetch next portion of data
-		movap#x	[array + 0x00], temp0		; array[0] = temp0
-		movap#x	[array + 0x10], temp1		; array[16] = temp1
-		movap#x	[array + 0x20], temp2		; array[32] = temp2
-		movap#x	[array + 0x30], temp3		; array[48] = temp3
-		add		array, block				; array += block
-		sub		size, 1						; size--
-		jnz		.vloop						; do while (size != 0)
-;------------------------------------------
-		mov		size, temp					; size = temp
-.sclr:	test	size, size					; if (size == 0)
-		jz		.exit						;     then go to exit
-;---[Scalar loop]--------------------------
-.sloop:	movs#x	temp0, [array]				; temp0 = array[0]
-		movap#x	int0, temp0					; int0 = temp0
-		movap#x	sign0, temp0				; sign0 = temp0
-		andp#x	sign0, mask					; sign0 = Sign (temp0)
-		orp#x	sign0, magic				; apply sign to magic number
-		adds#x	int0, sign0					; int0 += magic
-		subs#x	int0, sign0					; int0 -= magic
-		subs#x	temp0, int0					; temp0 = Frac (temp0)
-		movs#x	[array], temp0				; array[0] = temp0
-		add		array, bytes				; array++
-		sub		size, 1						; size--
-		jnz		.sloop						; do while (size != 0)
-;------------------------------------------
-.exit:	ldmxcsr	[s_back]					; restore original mxcsr value
+.vloop:	add		index, VSIZE				; index += VSIZE
+		sub		size, VSIZE					; if (size <= VSIZE)
+		jbe		.tail						;     then process array tail
+		movap#x	temp, [ptr + 1*VSIZE]		; temp = ptr[1]
+if type = 1
+		movap#x	value, temp
+		andp#x	value, mask
+		orp#x	value, half					; value = 0.5 * Sign (temp)
+		addp#x	temp, value					; temp += value
+	roundp#x	temp, temp, mode			; temp = Round (temp)
+else if type = 2
+	roundp#x	value, temp, mode			; value = Round (temp)
+		subp#x	temp, value					; temp -= value
+else
+	roundp#x	temp, temp, mode			; temp = Round (temp)
+end if
+		movap#x	[ptr + 1*VSIZE], temp		; ptr[1] = temp
+		add		index, VSIZE				; index += VSIZE
+		sub		size, VSIZE					; if (size <= VSIZE)
+		jbe		.tail						;     then process array tail
+		movap#x	temp, [ptr + 2*VSIZE]		; temp = ptr[2]
+if type = 1
+		movap#x	value, temp
+		andp#x	value, mask
+		orp#x	value, half					; value = 0.5 * Sign (temp)
+		addp#x	temp, value					; temp += value
+	roundp#x	temp, temp, mode			; temp = Round (temp)
+else if type = 2
+	roundp#x	value, temp, mode			; value = Round (temp)
+		subp#x	temp, value					; temp -= value
+else
+	roundp#x	temp, temp, mode			; temp = Round (temp)
+end if
+		movap#x	[ptr + 2*VSIZE], temp		; ptr[2] = temp
+		add		index, VSIZE				; index += VSIZE
+		sub		size, VSIZE					; if (size <= VSIZE)
+		jbe		.tail						;     then process array tail
+		movap#x	temp, [ptr + 3*VSIZE]		; temp = ptr[3]
+if type = 1
+		movap#x	value, temp
+		andp#x	value, mask
+		orp#x	value, half					; value = 0.5 * Sign (temp)
+		addp#x	temp, value					; temp += value
+	roundp#x	temp, temp, mode			; temp = Round (temp)
+else if type = 2
+	roundp#x	value, temp, mode			; value = Round (temp)
+		subp#x	temp, value					; temp -= value
+else
+	roundp#x	temp, temp, mode			; temp = Round (temp)
+end if
+		movap#x	[ptr + 3*VSIZE], temp		; ptr[3] = temp
+		add		index, VSIZE				; index += VSIZE
+		sub		size, VSIZE					; if (size <= VSIZE)
+		jbe		.tail						;     then process array tail
+		movap#x	temp, [ptr + 4*VSIZE]		; temp = ptr[4]
+if type = 1
+		movap#x	value, temp
+		andp#x	value, mask
+		orp#x	value, half					; value = 0.5 * Sign (temp)
+		addp#x	temp, value					; temp += value
+	roundp#x	temp, temp, mode			; temp = Round (temp)
+else if type = 2
+	roundp#x	value, temp, mode			; value = Round (temp)
+		subp#x	temp, value					; temp -= value
+else
+	roundp#x	temp, temp, mode			; temp = Round (temp)
+end if
+		movap#x	[ptr + 4*VSIZE], temp		; ptr[4] = temp
+	prefetchnta	[ptr + PSTEP]				; prefetch next portion of data
+		add		ptr, 4 * VSIZE				; ptr += 4 * VSIZE
+		jmp		.vloop						; do while (true)
+;---[End of vector loop]-------------------
+.tail:	shl		size, 4						; compute shift in mask array
+		andnp#x	blend, dqword [maskS2 + size]
+		movap#x	temp, [array + index]		; temp = array[index]
+		movap#x	data, temp					; data = temp
+if type = 1
+		movap#x	value, temp
+		andp#x	value, mask
+		orp#x	value, half					; value = 0.5 * Sign (temp)
+		addp#x	temp, value					; temp += value
+	roundp#x	temp, temp, mode			; temp = Round (temp)
+else if type = 2
+	roundp#x	value, temp, mode			; value = Round (temp)
+		subp#x	temp, value					; temp -= value
+else
+	roundp#x	temp, temp, mode			; temp = Round (temp)
+end if
+	pblendvb	data, temp					; blend temp with original data
+		movap#x	[array + index], data		; array[index] = temp
 		ret
+;---[Scalar loop]--------------------------
+.sloop:	movs#x	temp, [array]				; temp = array[0]
+if type = 1
+		movs#x	value, temp
+		andp#x	value, mask
+		orp#x	value, half					; value = 0.5 * Sign (temp)
+		adds#x	temp, value					; temp += value
+	rounds#x	temp, temp, mode			; temp = Round (temp)
+else if type = 2
+	rounds#x	value, temp, mode			; value = Round (temp)
+		subs#x	temp, value					; temp -= value
+else
+	rounds#x	temp, temp, mode			; temp = Round (temp)
+end if
+		movs#x	[array], temp				; array[0] = temp
+		add		array, bytes				; array++
+		sub		size, bytes					; size--
+		jnz		.sloop						; do while (size != 0)
+;---[Normal exit]--------------------------
+.exit:	ret
 }
 
 ; Round down (floor)
-RoundDown_flt32:	ROUND1	eax, 0x3F80, s
-RoundDown_flt64:	ROUND1	rax, 0x3F80, d
+RoundDown_flt32:	ROUND	0, 0x1, s
+RoundDown_flt64:	ROUND	0, 0x1, d
 
 ; Round up (ceil)
-RoundUp_flt32:		ROUND1	eax, 0x5F80, s
-RoundUp_flt64:		ROUND1	rax, 0x5F80, d
+RoundUp_flt32:		ROUND	0, 0x2, s
+RoundUp_flt64:		ROUND	0, 0x2, d
 
-; Round to nearest integer
-RoundInt_flt32:		ROUND1	eax, 0x1F80, s
-RoundInt_flt64:		ROUND1	rax, 0x1F80, d
+; Round to nearest even integer
+RoundInt_flt32:		ROUND	0, 0x0, s
+RoundInt_flt64:		ROUND	0, 0x0, d
 
 ; Round to nearest integer, away from zero
-RoundRound_flt32:	ROUND2	eax, 0x5F80, s
-RoundRound_flt64:	ROUND2	rax, 0x5F80, d
+RoundRound_flt32:	ROUND	1, 0x3, s
+RoundRound_flt64:	ROUND	1, 0x3, d
 
 ; Round to nearest integer, toward zero (truncation)
-RoundTrunc_flt32:	ROUND2	eax, 0x7F80, s
-RoundTrunc_flt64:	ROUND2	rax, 0x7F80, d
+RoundTrunc_flt32:	ROUND	0, 0x3, s
+RoundTrunc_flt64:	ROUND	0, 0x3, d
 
 ; Fractional part
-RoundFrac_flt32:	FRAC	eax, s
-RoundFrac_flt64:	FRAC	rax, d
+RoundFrac_flt32:	ROUND	2, 0x3, s
+RoundFrac_flt64:	ROUND	2, 0x3, d
 
 ;******************************************************************************;
 ;       Value replacement                                                      ;
 ;******************************************************************************;
-macro	REPLACE	pattern, value, scale
+macro	REPLACE	reg, val, x
 {
 ;---[Parameters]---------------------------
 array	equ		rdi							; pointer to array
 size	equ		rsi							; array size (count of elements)
+patt	equ		rdx							; register which holds pattern
+value	equ		rcx							; register which holds replacement value
 ;---[Internal variables]-------------------
+index	equ		rax							; index of first occurence of pattern
+aindex	equ		rcx							; array offset from vector boundary
+aindexl	equ		cl							; low part of "aindex"
+addr	equ		r8							; return address
+fmask	equ		r9							; result of pattern search
+ptr		equ		r11							; temporary pointer to array
+flags	equ		xmm0						; pattern check flags
+data	equ		xmm1						; register which holds original data
+pattern	equ		xmm2						; pattern to find
+replace	equ		xmm3						; replacement value
+cmask	equ		xmm4						; mask to clear unrequired results
+if x eq b
+scale	= 0									; scale value
+else if x eq w
+scale	= 1									; scale value
+else if x eq d
+scale	= 2									; scale value
+else if x eq q
+scale	= 3									; scale value
+end if
 bytes	= 1 shl scale						; size of array element (bytes)
+bmask	= bytes - 1							; elements aligning mask
 ;------------------------------------------
-		test	size, size					; if (size == 0)
-		jz		.exit						;     then go to exit
-;---[Loop]---------------------------------
-.loop:	cmp		[array], pattern			; if (array[0] == pattern) {
+	prefetchnta	[array]						; prefetch data
+		shl		size, scale					; convert size to bytes
+		jz		.exit						; if (size == 0), then go to exit
+		test	array, bmask				; if elements have wrong alignment
+		jnz		.sloop						;     then skip vector code
+;---[Normal execution branch]--------------
+		movq	pattern, patt				; pattern = patt
+		movq	replace, value				; replace = value
+		mov		aindex, array
+		and		aindex, VMASK				; get array offset from vector boundary
+		sub		array, aindex				; align pointer to vector boundary
+		mov		ptr, array					; ptr = array
+		clone	pattern, scale				; duplicate value through the entire register
+		clone	replace, scale				; duplicate value through the entire register
+;---[Unaligned search for pattern]---------
+		add		size, aindex				; size += aindex
+		xor		index, index				; index = 0
+		shl		aindex, 4					; compute shift in mask array
+		movdqa	cmask, dqword [maskS1 + aindex]
+		movdqa	flags, [array]
+	pcmpeq#x	flags, pattern				; check array[0] for pattaren
+		pandn	cmask, flags				; apply mask to pattern search results
+		movdqa	flags, cmask
+	pmovmskb	fmask, cmask				; save check results to fmask
+		mov		addr, .back0				;     save return address
+		and		fmask, fmask				; if pattern is found
+		jnz		.brk						;     then break the loop
+.back0:	add		index, VSIZE				; index += VSIZE
+		sub		size, VSIZE					; if (size <= VSIZE)
+		jbe		.exit						;     then go to exit
+;---[Vector loop]--------------------------
+.vloop:	movdqa	flags, [ptr + 1*VSIZE]
+	pcmpeq#x	flags, pattern				; check ptr[1] for pattaren
+	pmovmskb	fmask, flags				; save check results to fmask
+		mov		addr, .back1				;     save return address
+		and		fmask, fmask				; if pattern is found
+		jnz		.brk						;     then break the loop
+.back1:	add		index, VSIZE				; index += VSIZE
+		sub		size, VSIZE					; if (size <= VSIZE)
+		jbe		.exit						;     then go to exit
+		movdqa	flags, [ptr + 2*VSIZE]
+	pcmpeq#x	flags, pattern				; check ptr[2] for pattaren
+	pmovmskb	fmask, flags				; save check results to fmask
+		mov		addr, .back2				;     save return address
+		and		fmask, fmask				; if pattern is found
+		jnz		.brk						;     then break the loop
+.back2:	add		index, VSIZE				; index += VSIZE
+		sub		size, VSIZE					; if (size <= VSIZE)
+		jbe		.exit						;     then go to exit
+		movdqa	flags, [ptr + 3*VSIZE]
+	pcmpeq#x	flags, pattern				; check ptr[3] for pattaren
+	pmovmskb	fmask, flags				; save check results to fmask
+		mov		addr, .back3				;     save return address
+		and		fmask, fmask				; if pattern is found
+		jnz		.brk						;     then break the loop
+.back3:	add		index, VSIZE				; index += VSIZE
+		sub		size, VSIZE					; if (size <= VSIZE)
+		jbe		.exit						;     then go to exit
+		movdqa	flags, [ptr + 4*VSIZE]
+	pcmpeq#x	flags, pattern				; check ptr[4] for pattaren
+	pmovmskb	fmask, flags				; save check results to fmask
+		mov		addr, .back4				;     save return address
+		and		fmask, fmask				; if pattern is found
+		jnz		.brk						;     then break the loop
+.back4:	add		index, VSIZE				; index += VSIZE
+		sub		size, VSIZE					; if (size <= VSIZE)
+		jbe		.exit						;     then go to exit
+	prefetchnta	[ptr + PSTEP]				; prefetch next portion of data
+		add		ptr, 4 * VSIZE				; ptr += 4 * VSIZE
+		jmp		.vloop						; do while (true)
+;---[End of vector loop]-------------------
+.brk:	cmp		size, VSIZE					; if (size <= VSIZE)
+		jbe		@f							;     then parse array tail
+		movdqa	data, [array + index]		; data = array[index]
+	pblendvb	data, replace
+		movdqa	[array + index], data		; array[index] = replace (data, pattern, value)
+		jmp		addr						; go back into the searching loop
+@@:		shl		size, 4						; compute shift in mask array
+		pand	flags, dqword [maskS1 + size]
+		movdqa	data, [array + index]		; data = array[index]
+	pblendvb	data, replace
+		movdqa	[array + index], data		; array[index] = replace (data, pattern, value)
+		ret
+;---[Scalar loop]--------------------------
+.sloop:	cmp		[array], reg				; if (array[0] == pattern) {
 		jne		@f							;     array[0] = value
-		mov		[array], value				; }
+		mov		[array], val				; }
 @@:		add		array, bytes				; array++
-		sub		size, 1						; size--
-		jnz		.loop						; do while (size != 0)
-;------------------------------------------
+		sub		size, bytes					; size--
+		jnz		.sloop						; do while (size != 0)
+;---[Not found branch]---------------------
 .exit:	ret
 }
-Replace8:	REPLACE		dl, cl, 0
-Replace16:	REPLACE		dx, cx, 1
-Replace32:	REPLACE		edx, ecx, 2
-Replace64:	REPLACE		rdx, rcx, 3
+Replace8:	REPLACE	dl, cl, b
+Replace16:	REPLACE	dx, cx, w
+Replace32:	REPLACE	edx, ecx, d
+Replace64:	REPLACE	rdx, rcx, q
 
 ;******************************************************************************;
 ;       Search algorithms                                                      ;
@@ -3730,127 +3747,110 @@ Replace64:	REPLACE		rdx, rcx, 3
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 ;       Forward direction search                                               ;
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
-macro	FIND_FWD	value, x
+macro	FIND_FWD	reg, x
 {
 ;---[Parameters]---------------------------
 array	equ		rdi							; pointer to array
 size	equ		rsi							; array size (count of elements)
-reg		equ		rdx							; register that holds value
+patt	equ		rdx							; register which holds pattern
 ;---[Internal variables]-------------------
-ptr		equ		rax							; pointer to current element
-count	equ		rcx							; count of elements to align array
-temp	equ		r8							; temporary register
-fmask	equ		count						; mask of comparison results
-temp0	equ		xmm0						; temporary register #1
-temp1	equ		xmm1						; temporary register #2
-temp2	equ		xmm2						; temporary register #3
-temp3	equ		xmm3						; temporary register #4
-flags	equ		xmm4						; checks accumulator
-vector	equ		xmm5						; vector value to process with
-amask	= 16 - 1							; aligning mask
+index	equ		rax							; index of first occurence of pattern
+aindex	equ		rcx							; array offset from vector boundary
+aindexl	equ		cl							; low part of "aindex"
+cmask	equ		r8							; mask to clear unrequired results
+fmask	equ		r9							; result of pattern search
+flags	equ		xmm0						; pattern check flags
+pattern	equ		xmm1						; pattern to find
 if x eq b
-dmask	= 0xFFFF							; data mask
 scale	= 0									; scale value
 else if x eq w
-dmask	= 0x5555							; data mask
 scale	= 1									; scale value
 else if x eq d
-dmask	= 0x1111							; data mask
 scale	= 2									; scale value
 else if x eq q
-dmask	= 0x0101							; data mask
 scale	= 3									; scale value
 end if
-bscale	= 6									; block scale factor
 bytes	= 1 shl scale						; size of array element (bytes)
-block	= 1 shl bscale						; block size (bytes)
-step	= 1 shl (bscale - scale)			; step size (bytes)
+bmask	= bytes - 1							; elements aligning mask
 ;------------------------------------------
-		mov		ptr, array					; ptr = array
-	prefetchnta	[ptr]						; prefetch data
-		test	ptr, bytes - 1				; if (ptr & (bytes - 1))
-		jnz		.sclr						;     then skip vector code
-		mov		count, ptr
-		neg		count
-		and		count, amask
-		shr		count, scale				; count = (-ptr & amask) >> scale
-		lea		temp, [count + step]
-		cmp		size, temp					; if (size < count + step)
-		jb		.sclr						;     then skip vector code
-		movq	vector, reg					; vector = value
-		clone	vector, scale				; duplicate value through the entire register
-		sub		size, count					; size -= count
-		mov		temp, size					; temp = size
-		shr		size, bscale - scale		; size = size / step
-		and		temp, step - 1				; temp = size % step
-		test	count, count				; if (count == 0)
-		jz		.vctr						;     then skip aligning loop
-;---[Aligning loop]------------------------
-.aloop:	cmp		[ptr], value				; if (ptr[0] == value)
-		je		.fnd2						;     then go to found branch
-		add		ptr, bytes					; ptr++
-		sub		count, 1					; count--
-		jnz		.aloop						; do while (count != 0)
-;------------------------------------------
-.vctr:	pxor	flags, flags				; flags = 0
-;---[Vector loop]--------------------------
-.vloop:	movdqa	temp0, [ptr + 0x00]			; temp0 = ptr[0]
-	pcmpeq#x	temp0, vector				; check for temp0 == value
-		por		flags, temp0				; accumulate check results
-		movdqa	temp1, [ptr + 0x10]			; temp1 = ptr[16]
-	pcmpeq#x	temp1, vector				; check for temp1 == value
-		por		flags, temp1				; accumulate check results
-		movdqa	temp2, [ptr + 0x20]			; temp2 = ptr[32]
-	pcmpeq#x	temp2, vector				; check for temp2 == value
-		por		flags, temp2				; accumulate check results
-		movdqa	temp3, [ptr + 0x30]			; temp3 = ptr[48]
-	pcmpeq#x	temp3, vector				; check for temp3 == value
-		por		flags, temp3				; accumulate check results
-	prefetchnta	[ptr + PSTEP]				; prefetch next portion of data
+	prefetchnta	[array]						; prefetch data
+		xor		index, index				; index = 0
+		shl		size, scale					; convert size to bytes
+		jz		.ntfnd						; if (size == 0), then go to not found branch
+		test	array, bmask				; if elements have wrong alignment
+		jnz		.sloop						;     then skip vector code
+;---[Normal execution branch]--------------
+		movq	pattern, patt				; pattern = patt
+		mov		aindex, array
+		and		aindex, VMASK				; get array offset from vector boundary
+		sub		array, aindex				; align pointer to vector boundary
+		clone	pattern, scale				; duplicate value through the entire register
+;---[Unaligned search for pattern]---------
+		add		size, aindex				; size += aindex
+		sub		index, aindex				; index -= aindex
+		mov		cmask, 0xFFFF
+		shl		cmask, aindexl				; adjust cmask for unaligned search
+		movdqa	flags, [array]
+	pcmpeq#x	flags, pattern				; check array[0] for pattaren
 	pmovmskb	fmask, flags				; save check results to fmask
-		test	fmask, fmask				; if condition is met,
-		jnz		.fnd1						;     then go to found branch
-		add		ptr, block					; ptr += block
-		sub		size, 1						; size--
-		jnz		.vloop						; do while (size != 0)
-;------------------------------------------
-		mov		size, temp					; size = temp
-.sclr:	test	size, size					; if (size == 0)
-		jz		.exit						;     then go to exit
+		and		fmask, cmask				; if pattern is found
+		jnz		.brk						;     then break the loop
+		add		index, VSIZE				; index += VSIZE
+		sub		size, VSIZE					; if (size <= VSIZE)
+		jbe		.ntfnd						;     then go to not found branch
+;---[Vector loop]--------------------------
+.vloop:	movdqa	flags, [array + 1*VSIZE]
+	pcmpeq#x	flags, pattern				; check array[1] for pattaren
+	pmovmskb	fmask, flags				; save check results to fmask
+		and		fmask, fmask				; if pattern is found
+		jnz		.brk						;     then break the loop
+		add		index, VSIZE				; index += VSIZE
+		sub		size, VSIZE					; if (size <= VSIZE)
+		jbe		.ntfnd						;     then go to not found branch
+		movdqa	flags, [array + 2*VSIZE]
+	pcmpeq#x	flags, pattern				; check array[2] for pattaren
+	pmovmskb	fmask, flags				; save check results to fmask
+		and		fmask, fmask				; if pattern is found
+		jnz		.brk						;     then break the loop
+		add		index, VSIZE				; index += VSIZE
+		sub		size, VSIZE					; if (size <= VSIZE)
+		jbe		.ntfnd						;     then go to not found branch
+		movdqa	flags, [array + 3*VSIZE]
+	pcmpeq#x	flags, pattern				; check array[3] for pattaren
+	pmovmskb	fmask, flags				; save check results to fmask
+		and		fmask, fmask				; if pattern is found
+		jnz		.brk						;     then break the loop
+		add		index, VSIZE				; index += VSIZE
+		sub		size, VSIZE					; if (size <= VSIZE)
+		jbe		.ntfnd						;     then go to not found branch
+		movdqa	flags, [array + 4*VSIZE]
+	pcmpeq#x	flags, pattern				; check array[4] for pattaren
+	pmovmskb	fmask, flags				; save check results to fmask
+		and		fmask, fmask				; if pattern is found
+		jnz		.brk						;     then break the loop
+		add		index, VSIZE				; index += VSIZE
+		sub		size, VSIZE					; if (size <= VSIZE)
+		jbe		.ntfnd						;     then go to not found branch
+	prefetchnta	[array + PSTEP]				; prefetch next portion of data
+		add		array, 4 * VSIZE			; array += 4 * VSIZE
+		jmp		.vloop						; do while (true)
+;---[End of vector loop]-------------------
+.brk:	bsf		fmask, fmask				; find index of first occurence of pattern
+		cmp		size, fmask					; if (size <= fmask)
+		jbe		.ntfnd						;     then go to not found branch
+		add		index, fmask				; index += fmask
+		shftr	index, scale				; return index
+		ret
 ;---[Scalar loop]--------------------------
-.sloop:	cmp		[ptr], value				; if (ptr[0] == value)
-		je		.fnd2						;     then go to found branch
-		add		ptr, bytes					; ptr++
-		sub		size, 1						; size--
+.sloop:	cmp		[array], reg				; if (array[0] == pattern)
+		je		.exit						;     then go to exit
+		add		array, bytes				; array++
+		add		index, 1					; index++
+		sub		size, bytes					; size--
 		jnz		.sloop						; do while (size != 0)
-;---[Normal exit branch]-------------------
-.exit:	mov		ptr, NOT_FOUND				; return NOT_FOUND
-		ret
-;---[Found branch #1]----------------------
-.fnd1:
-	pmovmskb	fmask, temp0				; save check results to fmask
-		and		fmask, dmask				; fmask &= dmask
-		bsf		fmask, fmask				; find first occurence of value
-		jnz		@f							; if value is met, then skip following code
-		add		ptr, block / 4				; ptr += block / 4
-	pmovmskb	fmask, temp1				; save check results to fmask
-		and		fmask, dmask				; fmask &= dmask
-		bsf		fmask, fmask				; find first occurence of value
-		jnz		@f							; if value is met, then skip following code
-		add		ptr, block / 4				; ptr += block / 4
-	pmovmskb	fmask, temp2				; save check results to fmask
-		and		fmask, dmask				; fmask &= dmask
-		bsf		fmask, fmask				; find first occurence of value
-		jnz		@f							; if value is met, then skip following code
-		add		ptr, block / 4				; ptr += block / 4
-	pmovmskb	fmask, temp3				; save check results to fmask
-		and		fmask, dmask				; fmask &= dmask
-		bsf		fmask, fmask				; find first occurence of value
-@@:		add		ptr, fmask
-;---[Found branch #2]----------------------
-.fnd2:	sub		ptr, array					; return ptr - array
-		shr		ptr, scale
-		ret
+;---[Not found branch]---------------------
+.ntfnd:	mov		index, NOT_FOUND			; return NOT_FOUND
+.exit:	ret
 }
 FindFwd8:	FIND_FWD	dl, b
 FindFwd16:	FIND_FWD	dx, w
@@ -3860,126 +3860,111 @@ FindFwd64:	FIND_FWD	rdx, q
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 ;       Backward direction search                                              ;
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
-macro	FIND_BWD	value, x
+macro	FIND_BWD	reg, x
 {
 ;---[Parameters]---------------------------
 array	equ		rdi							; pointer to array
 size	equ		rsi							; array size (count of elements)
-reg		equ		rdx							; register that holds value
+patt	equ		rdx							; register which holds pattern
 ;---[Internal variables]-------------------
-ptr		equ		rax							; pointer to current element
-count	equ		rcx							; count of elements to align array
-temp	equ		r8							; temporary register
-fmask	equ		count						; mask of comparison results
-temp0	equ		xmm0						; temporary register #1
-temp1	equ		xmm1						; temporary register #2
-temp2	equ		xmm2						; temporary register #3
-temp3	equ		xmm3						; temporary register #4
-flags	equ		xmm4						; checks accumulator
-vector	equ		xmm5						; vector value to process with
-amask	= 16 - 1							; aligning mask
+index	equ		rax							; index of first occurence of pattern
+aindex	equ		rcx							; array offset from vector boundary
+aindexl	equ		cl							; low part of "aindex"
+cmask	equ		r8							; mask to clear unrequired results
+fmask	equ		r9							; result of pattern search
+flags	equ		xmm0						; pattern check flags
+pattern	equ		xmm1						; pattern to find
 if x eq b
-dmask	= 0xFFFF							; data mask
 scale	= 0									; scale value
 else if x eq w
-dmask	= 0x5555							; data mask
 scale	= 1									; scale value
 else if x eq d
-dmask	= 0x1111							; data mask
 scale	= 2									; scale value
 else if x eq q
-dmask	= 0x0101							; data mask
 scale	= 3									; scale value
 end if
-bscale	= 6									; block scale factor
 bytes	= 1 shl scale						; size of array element (bytes)
-block	= 1 shl bscale						; block size (bytes)
-step	= 1 shl (bscale - scale)			; step size (bytes)
+bmask	= bytes - 1							; elements aligning mask
 ;------------------------------------------
-		lea		ptr, [array + size * bytes]	; ptr = array + size
-	prefetchnta	[ptr - bytes]				; prefetch data
-		test	ptr, bytes - 1				; if (ptr & (bytes - 1))
-		jnz		.sclr						;     then skip vector code
-		mov		count, ptr
-		and		count, amask
-		shr		count, scale				; count = (ptr & amask) >> scale
-		lea		temp, [count + step]
-		cmp		size, temp					; if (size < count + step)
-		jb		.sclr						;     then skip vector code
-		movq	vector, reg					; vector = value
-		clone	vector, scale				; duplicate value through the entire register
-		sub		size, count					; size -= count
-		mov		temp, size					; temp = size
-		shr		size, bscale - scale		; size = size / step
-		and		temp, step - 1				; temp = size % step
-		test	count, count				; if (count == 0)
-		jz		.vctr						;     then skip aligning loop
-;---[Aligning loop]------------------------
-.aloop:	sub		ptr, bytes					; ptr--
-		cmp		[ptr], value				; if (ptr[0] == value)
-		je		.fnd2						;     then go to found branch
-		sub		count, 1					; count--
-		jnz		.aloop						; do while (count != 0)
-;------------------------------------------
-.vctr:	pxor	flags, flags				; flags = 0
-;---[Vector loop]--------------------------
-.vloop:	sub		ptr, block					; ptr -= block
-		movdqa	temp0, [ptr + 0x00]			; temp0 = ptr[0]
-	pcmpeq#x	temp0, vector				; check for temp0 == value
-		por		flags, temp0				; accumulate check results
-		movdqa	temp1, [ptr + 0x10]			; temp1 = ptr[16]
-	pcmpeq#x	temp1, vector				; check for temp1 == value
-		por		flags, temp1				; accumulate check results
-		movdqa	temp2, [ptr + 0x20]			; temp2 = ptr[32]
-	pcmpeq#x	temp2, vector				; check for temp2 == value
-		por		flags, temp2				; accumulate check results
-		movdqa	temp3, [ptr + 0x30]			; temp3 = ptr[48]
-	pcmpeq#x	temp3, vector				; check for temp3 == value
-		por		flags, temp3				; accumulate check results
-	prefetchnta	[ptr - PSTEP]				; prefetch next portion of data
+		lea		array, [array + size * bytes]
+	prefetchnta	[array]						; prefetch data
+		mov		index, size					; index = size
+		shl		size, scale					; convert size to bytes
+		jz		.ntfnd						; if (size == 0), then go to not found branch
+		test	array, bmask				; if elements have wrong alignment
+		jnz		.sloop						;     then skip vector code
+;---[Normal execution branch]--------------
+		movq	pattern, patt				; pattern = patt
+		mov		aindex, array
+		neg		aindex
+		and 	aindex, VMASK				; get array offset from vector boundary
+		lea		array, [array+aindex-VSIZE]	; align pointer to vector boundary
+		clone	pattern, scale				; duplicate value through the entire register
+;---[Unaligned search for pattern]---------
+		add		size, aindex				; size += aindex
+		lea		index, [size - VSIZE]		; index = size - VSIZE
+		mov		cmask, 0xFFFF
+		shr		cmask, aindexl				; adjust cmask for unaligned search
+		movdqa	flags, [array]
+	pcmpeq#x	flags, pattern				; check array[0] for pattaren
 	pmovmskb	fmask, flags				; save check results to fmask
-		test	fmask, fmask				; if condition is met,
-		jnz		.fnd1						;     then go to found branch
-		sub		size, 1						; size--
-		jnz		.vloop						; do while (size != 0)
-;------------------------------------------
-		mov		size, temp					; size = temp
-.sclr:	test	size, size					; if (size == 0)
-		jz		.exit						;     then go to exit
+		and		fmask, cmask				; if pattern is found
+		jnz		.brk						;     then break the loop
+		sub		index, VSIZE				; index -= VSIZE
+		sub		size, VSIZE					; if (size <= VSIZE)
+		jbe		.ntfnd						;     then go to not found branch
+;---[Vector loop]--------------------------
+.vloop:	movdqa	flags, [array - 1*VSIZE]
+	pcmpeq#x	flags, pattern				; check array[-1] for pattaren
+	pmovmskb	fmask, flags				; save check results to fmask
+		and		fmask, fmask				; if pattern is found
+		jnz		.brk						;     then break the loop
+		sub		index, VSIZE				; index -= VSIZE
+		sub		size, VSIZE					; if (size <= VSIZE)
+		jbe		.ntfnd						;     then go to not found branch
+		movdqa	flags, [array - 2*VSIZE]
+	pcmpeq#x	flags, pattern				; check array[-2] for pattaren
+	pmovmskb	fmask, flags				; save check results to fmask
+		and		fmask, fmask				; if pattern is found
+		jnz		.brk						;     then break the loop
+		sub		index, VSIZE				; index -= VSIZE
+		sub		size, VSIZE					; if (size <= VSIZE)
+		jbe		.ntfnd						;     then go to not found branch
+		movdqa	flags, [array - 3*VSIZE]
+	pcmpeq#x	flags, pattern				; check array[-3] for pattaren
+	pmovmskb	fmask, flags				; save check results to fmask
+		and		fmask, fmask				; if pattern is found
+		jnz		.brk						;     then break the loop
+		sub		index, VSIZE				; index -= VSIZE
+		sub		size, VSIZE					; if (size <= VSIZE)
+		jbe		.ntfnd						;     then go to not found branch
+		movdqa	flags, [array - 4*VSIZE]
+	pcmpeq#x	flags, pattern				; check array[-4] for pattaren
+	pmovmskb	fmask, flags				; save check results to fmask
+		and		fmask, fmask				; if pattern is found
+		jnz		.brk						;     then break the loop
+		sub		index, VSIZE				; index -= VSIZE
+		sub		size, VSIZE					; if (size <= VSIZE)
+		jbe		.ntfnd						;     then go to not found branch
+	prefetchnta	[array - PSTEP]				; prefetch next portion of data
+		sub		array, 4 * VSIZE			; array -= 4 * VSIZE
+		jmp		.vloop						; do while (true)
+;---[End of vector loop]-------------------
+.brk:	bsr		fmask, fmask				; find index of first occurence of pattern
+		add		index, fmask				; if (index += fmask < 0), then go to not found branch
+		js		.ntfnd						;     then go to not found branch
+		shftr	index, scale				; return index
+		ret
 ;---[Scalar loop]--------------------------
-.sloop:	sub		ptr, bytes					; ptr--
-		cmp		[ptr], value				; if (ptr[0] == value)
-		je		.fnd2						;     then go to found branch
-		sub		size, 1						; size--
+.sloop:	sub		array, bytes				; array--
+		sub		index, 1					; index--
+		cmp		[array], reg				; if (array[0] == pattern)
+		je		.exit						;     then go to exit
+		sub		size, bytes					; size--
 		jnz		.sloop						; do while (size != 0)
-;---[Normal exit branch]-------------------
-.exit:	mov		ptr, NOT_FOUND				; return NOT_FOUND
-		ret
-;---[Found branch #1]----------------------
-.fnd1:	add		ptr, 3 * block / 4			; ptr + 3 * block / 4
-	pmovmskb	fmask, temp3				; save check results to fmask
-		and		fmask, dmask				; fmask &= dmask
-		bsf		fmask, fmask				; find first occurence of value
-		jnz		@f							; if value is met, then skip following code
-		sub		ptr, block / 4				; ptr -= block / 4
-	pmovmskb	fmask, temp2				; save check results to fmask
-		and		fmask, dmask				; fmask &= dmask
-		bsf		fmask, fmask				; find first occurence of value
-		jnz		@f							; if value is met, then skip following code
-		sub		ptr, block / 4				; ptr -= block / 4
-	pmovmskb	fmask, temp1				; save check results to fmask
-		and		fmask, dmask				; fmask &= dmask
-		bsf		fmask, fmask				; find first occurence of value
-		jnz		@f							; if value is met, then skip following code
-		sub		ptr, block / 4				; ptr -= block / 4
-	pmovmskb	fmask, temp0				; save check results to fmask
-		and		fmask, dmask				; fmask &= dmask
-		bsf		fmask, fmask				; find first occurence of value
-@@:		add		ptr, fmask
-;---[Found branch #2]----------------------
-.fnd2:	sub		ptr, array					; return ptr - array
-		shr		ptr, scale
-		ret
+;---[Not found branch]---------------------
+.ntfnd:	mov		index, NOT_FOUND			; return NOT_FOUND
+.exit:	ret
 }
 FindBwd8:	FIND_BWD	dl, b
 FindBwd16:	FIND_BWD	dx, w
@@ -3989,17 +3974,17 @@ FindBwd64:	FIND_BWD	rdx, q
 ;==============================================================================;
 ;       Binary search                                                          ;
 ;==============================================================================;
-macro	FIND_BIN	pattern, x, scale
+macro	FIND_BIN	value, x, scale
 {
 ;---[Parameters]---------------------------
 array	equ		rdi							; pointer to array
 size	equ		rsi							; array size (count of elements)
 ;---[Internal variables]-------------------
 median	equ		r8							; median value
-median1	equ		r9							; median + 1
-offst	equ		rcx							; offset from the beginning of array
+median1	equ		r9							; median value + 1
 left	equ		rax							; pointer to start of the data array
 right	equ		size						; pointer to end of the data array
+bytes	= 1 shl scale						; size of array element (bytes)
 ;------------------------------------------
 		test	size, size					; if (size == 0)
 		jz		.ntfnd						;     then go to not found branch
@@ -4009,22 +3994,17 @@ right	equ		size						; pointer to end of the data array
 ;---[Binary search loop]-------------------
 .loop:	lea		median, [left + right]
 		shr		median, 1					; median = (left + right) / 2
-		mov		offst, median
-		mov		median1, 1
-		shl		offst, scale				; offst = median * bytes
-		add		median1, median				; median1 = medan + 1
-		cmp		pattern, [array + offst]	; if (pattern condition array[median])
+		lea		median1, [median + 1]		; median1 = median + 1
+		cmp		value, [array+median*bytes]	; if (value condition array[median])
 		cmov#x	left, median1				;     then left = median + 1
 		cmovn#x	right, median				;     else right = median
 		cmp		left, right
 		jb		.loop						; do while (left < right)
 ;------------------------------------------
-.skip:	mov		right, left
-		shl		right, scale				; if (pattern == array[left])
-		cmp		pattern, [array + right]	;     then return left
-		jne		.ntfnd						;     else return NOT_FOUND
-		ret
-;---[Not found]----------------------------
+.skip:	cmp		value, [array + left*bytes]	; if (value != array[left])
+		jne		.ntfnd						;     then return NOT_FOUND
+		ret									;     else return left
+;---[Not found branch]---------------------
 .ntfnd:	mov		left, NOT_FOUND				; return NOT_FOUND
 		ret
 }
@@ -4068,28 +4048,124 @@ FindDsc_sint64:	FIND_BIN	rdx, l, 3
 ;==============================================================================;
 ;       Mapping floating-point values to signed integer values                 ;
 ;==============================================================================;
-macro	MAP	temp0, temp1, value, step
+macro	MAP		reg1, reg2, x
 {
 ;---[Parameters]---------------------------
 array	equ		rdi							; pointer to array
 size	equ		rsi							; array size (count of elements)
+;---[Internal variables]-------------------
+index	equ		rax							; offset from beginning of array
+aindex	equ		rcx							; array offset from vector boundary
+ptr		equ		r10							; temporary pointer to array
+blend	equ		xmm0						; blending mask
+temp	equ		xmm1						; temporary register
+mask	equ		xmm2						; data mask
+zero	equ		xmm3						; 0
+data	equ		xmm4						; register which holds original data
+if x eq d
+dmask	= DMASK_FLT32						; data mask
+scale	= 2									; scale value
+else if x eq q
+dmask	= DMASK_FLT64						; data mask
+scale	= 3									; scale value
+end if
+bytes	= 1 shl scale						; size of array element (bytes)
+bmask	= bytes - 1							; elements aligning mask
 ;------------------------------------------
-		test	size, size					; if (size == 0)
-		jz		.exit						;     then go to exit
-;---[Loop]---------------------------------
-.loop:	mov		temp0, [array]				; temp0 = array[0]
-		mov		temp1, value				; temp1 = temp0 ^ value
-		xor		temp1, temp0				; if (temp0 < 0)
-		cmovs	temp0, temp1				;     temp0 = temp1
-		mov		[array], temp0				; array[0] = temp0
-		add		array, step					; array += step
-		sub		size, 1						; size--
-		jnz		.loop						; do while (size != 0)
-;------------------------------------------
+	prefetchnta	[array]						; prefetch data
+		shl		size, scale					; convert size to bytes
+		jz		.exit						; if (size == 0), then go to exit
+		test	array, bmask				; if elements have wrong alignment
+		jnz		.sloop						;     then skip vector code
+;---[Normal execution branch]--------------
+		initreg	mask, index, dmask			; mask = dmask
+		mov		aindex, array
+		and		aindex, VMASK				; get array offset from vector boundary
+		sub		array, aindex				; align pointer to vector boundary
+		mov		ptr, array					; ptr = array
+		clone	mask, scale					; duplicate value through the entire register
+;---[Unaligned operation]------------------
+		add		size, aindex				; size += aindex
+		shl		aindex, 4					; compute shift in mask array
+		movdqa	blend, dqword [maskS1 + aindex]
+		xor		index, index				; index = 0
+		sub		size, VSIZE					; if (size <= VSIZE)
+		jbe		.tail						;     then process array tail
+		movdqa	temp, [array]				; temp = array[0]
+		movdqa	data, temp					; data = temp
+		pxor	zero, zero					; zero = 0
+	pcmpgt#x	zero, temp					; if (temp < 0)
+		pand	zero, mask					;     then zero = dmask
+		pxor	temp, zero					; temp ^= zero
+	pblendvb	temp, data					; blend temp with original data
+		movdqa	[array], temp				; array[0] = temp
+		pxor	blend, blend				; blend = 0
+;---[Vector loop]--------------------------
+.vloop:	add		index, VSIZE				; index += VSIZE
+		sub		size, VSIZE					; if (size <= VSIZE)
+		jbe		.tail						;     then process array tail
+		movdqa	temp, [ptr + 1*VSIZE]		; temp = ptr[1]
+		pxor	zero, zero					; zero = 0
+	pcmpgt#x	zero, temp					; if (temp < 0)
+		pand	zero, mask					;     then zero = dmask
+		pxor	temp, zero					; temp ^= zero
+		movdqa	[ptr + 1*VSIZE], temp		; ptr[1] = temp
+		add		index, VSIZE				; index += VSIZE
+		sub		size, VSIZE					; if (size <= VSIZE)
+		jbe		.tail						;     then process array tail
+		movdqa	temp, [ptr + 2*VSIZE]		; temp = ptr[2]
+		pxor	zero, zero					; zero = 0
+	pcmpgt#x	zero, temp					; if (temp < 0)
+		pand	zero, mask					;     then zero = dmask
+		pxor	temp, zero					; temp ^= zero
+		movdqa	[ptr + 2*VSIZE], temp		; ptr[2] = temp
+		add		index, VSIZE				; index += VSIZE
+		sub		size, VSIZE					; if (size <= VSIZE)
+		jbe		.tail						;     then process array tail
+		movdqa	temp, [ptr + 3*VSIZE]		; temp = ptr[3]
+		pxor	zero, zero					; zero = 0
+	pcmpgt#x	zero, temp					; if (temp < 0)
+		pand	zero, mask					;     then zero = dmask
+		pxor	temp, zero					; temp ^= zero
+		movdqa	[ptr + 3*VSIZE], temp		; ptr[3] = temp
+		add		index, VSIZE				; index += VSIZE
+		sub		size, VSIZE					; if (size <= VSIZE)
+		jbe		.tail						;     then process array tail
+		movdqa	temp, [ptr + 4*VSIZE]		; temp = ptr[4]
+		pxor	zero, zero					; zero = 0
+	pcmpgt#x	zero, temp					; if (temp < 0)
+		pand	zero, mask					;     then zero = dmask
+		pxor	temp, zero					; temp ^= zero
+		movdqa	[ptr + 4*VSIZE], temp		; ptr[4] = temp
+	prefetchnta	[ptr + PSTEP]				; prefetch next portion of data
+		add		ptr, 4 * VSIZE				; ptr += 4 * VSIZE
+		jmp		.vloop						; do while (true)
+;---[End of vector loop]-------------------
+.tail:	shl		size, 4						; compute shift in mask array
+		pandn	blend, dqword [maskS2 + size]
+		movdqa	temp, [array + index]		; temp = array[index]
+		movdqa	data, temp					; data = temp
+		pxor	zero, zero					; zero = 0
+	pcmpgt#x	zero, temp					; if (temp < 0)
+		pand	zero, mask					;     then zero = dmask
+		pxor	temp, zero					; temp ^= zero
+	pblendvb	data, temp					; blend temp with original data
+		movdqa	[array + index], data		; array[index] = temp
+		ret
+;---[Scalar loop]--------------------------
+.sloop:	mov		reg1, [array]				; reg1 = array[0]
+		mov		reg2, dmask					; reg2 = reg1 ^ dmask
+		xor		reg2, reg1					; if (reg1 < 0)
+		cmovs	reg1, reg2					;     reg1 = reg2
+		mov		[array], reg1				; array[0] = reg1
+		add		array, bytes				; array++
+		sub		size, bytes					; size--
+		jnz		.sloop						; do while (size != 0)
+;---[Normal exit]--------------------------
 .exit:	ret
 }
-Map_flt32:		MAP	eax, edx, 0x7FFFFFFF, 4
-Map_flt64:		MAP	rax, rdx, 0x7FFFFFFFFFFFFFFF, 8
+Map_flt32:		MAP	eax, edx, d
+Map_flt64:		MAP	rax, rdx, q
 
 ;==============================================================================;
 ;       Quick sort                                                             ;
@@ -4098,7 +4174,7 @@ Map_flt64:		MAP	rax, rdx, 0x7FFFFFFFFFFFFFFF, 8
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 ;       Array sorting                                                          ;
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
-macro	QUICKSORT_CORE	median, key1, key2, op1, op2, scale
+macro	QUICKSORT_INT	median, key1, key2, op1, op2, scale
 {
 ;---[Parameters]---------------------------
 array	equ		rdi							; pointer to array
@@ -4118,6 +4194,8 @@ space	= 3 * 8								; stack size required by the procedure
 minsize	= 32								; min array size is aceptable for Quick sort
 bytes	= 1 shl scale						; size of array element (bytes)
 ;------------------------------------------
+		cmp		size, 1						; if (size <= 1)
+		jbe		.exit						;     then go to exit
 		jmp		.start
 ;---[QUICK SORT]---------------------------
 .qsort:	mov		half, size
@@ -4150,28 +4228,30 @@ bytes	= 1 shl scale						; size of array element (bytes)
 		cmp		lsize, rsize				; if (lsize <= rsize)
 		ja		.else						; {
 ;---[if lsize <= rsize]--------------------
+		cmp		lsize, 1					; if (lsize > 1)
+		jbe		@f							; {
 		sub		stack, space				; reserving stack size for local vars
 		mov		[s_array], rarray			; save "rarray" variable into the stack
 		mov		[s_size], rsize				; save "rsize" variable into the stack
-		cmp		lsize, 1					; if (lsize > 1)
-		jbe		@f							; {
-		mov		size, lsize					;     call QuickSortCore (larray, lsize)
-		call	.start						; }
-@@:		mov		array, [s_array]			; get "rarray" variable from the stack
-		mov		size, [s_size]				; get "rsize" variable from the stack
+		mov		size, lsize
+		call	.start						; call QuickSort (larray, lsize)
+		mov		rarray, [s_array]			; get "rarray" variable from the stack
+		mov		rsize, [s_size]				; get "rsize" variable from the stack
 		add		stack, space				; restoring back the stack pointer
+@@:		mov		array, rarray				; }
 		jmp		.start
 ;---[else]---------------------------------
-.else:	sub		stack, space				; reserving stack size for local vars
+.else:	cmp		rsize, 1					; if (rsize > 1)
+		jbe		@f							; {
+		sub		stack, space				; reserving stack size for local vars
 		mov		[s_array], larray			; save "larray" variable into the stack
 		mov		[s_size], lsize				; save "lsize" variable into the stack
-		cmp		rsize, 1					; if (rsize > 1)
-		jbe		@f							; {
-		mov		array, rarray				;     call QuickSortCore (rarray, rsize)
-		call	.start						; }
-@@:		mov		array, [s_array]			; get "larray" variable from the stack
-		mov		size, [s_size]				; get "lsize" variable from the stack
+		mov		array, rarray
+		call	.start						; call QuickSort (rarray, rsize)
+		mov		larray, [s_array]			; get "larray" variable from the stack
+		mov		lsize, [s_size]				; get "lsize" variable from the stack
 		add		stack, space				; restoring back the stack pointer
+@@:		mov		size, lsize					; }
 ;---[end if]-------------------------------
 .start:	cmp		size, minsize
 		ja		.qsort						; do while (size > minsize)
@@ -4193,19 +4273,6 @@ bytes	= 1 shl scale						; size of array element (bytes)
 		cmp		left, size
 		jb		.isort						; do while (left < size)
 ;---[END OF INSERT SORT]-------------------
-		ret
-}
-;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	QUICKSORT_INT	sort_func
-{
-;---[Parameters]---------------------------
-array	equ		rdi							; pointer to array
-size	equ		rsi							; array size (count of elements)
-;------------------------------------------
-		cmp		size, 1						; if (size <= 1)
-		jbe		.exit						;     then go to exit from the procedure
-;---[Call sort function]-------------------
-		jmp		sort_func					; call sorting function
 .exit:	ret
 }
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -4220,8 +4287,6 @@ s_array	equ		stack + 0 * 8				; stack position of "array" variable
 s_size	equ		stack + 1 * 8				; stack position of "size" variable
 space	= 3 * 8								; stack size required by the procedure
 ;------------------------------------------
-		cmp		size, 1						; if (size <= 1)
-		jbe		.exit						;     then go to exit from the procedure
 		sub		stack, space				; reserving stack size for local vars
 		mov		[s_array], array			; save "array" variable into the stack
 		mov		[s_size], size				; save "size" variable into the stack
@@ -4236,7 +4301,7 @@ space	= 3 * 8								; stack size required by the procedure
 		mov		size, [s_size]				; get "size" variable from the stack
 		call	convert_func				; call converting function
 		add		stack, space				; restoring back the stack pointer
-.exit:	ret
+		ret
 }
 
 ;------------------------------------------------------------------------------;
@@ -4244,61 +4309,45 @@ space	= 3 * 8								; stack size required by the procedure
 ;------------------------------------------------------------------------------;
 
 ; Unsigned integer types
-QuickSortCoreAsc_uint8:		QUICKSORT_CORE	al, dl, cl, b, a, 0
-QuickSortCoreAsc_uint16:	QUICKSORT_CORE	ax, dx, cx, b, a, 1
-QuickSortCoreAsc_uint32:	QUICKSORT_CORE	eax, edx, ecx, b, a, 2
-QuickSortCoreAsc_uint64:	QUICKSORT_CORE	rax, rdx, rcx, b, a, 3
-QuickSortAsc_uint8:			QUICKSORT_INT	QuickSortCoreAsc_uint8
-QuickSortAsc_uint16:		QUICKSORT_INT	QuickSortCoreAsc_uint16
-QuickSortAsc_uint32:		QUICKSORT_INT	QuickSortCoreAsc_uint32
-QuickSortAsc_uint64:		QUICKSORT_INT	QuickSortCoreAsc_uint64
+QuickSortAsc_uint8:		QUICKSORT_INT	al, dl, cl, b, a, 0
+QuickSortAsc_uint16:	QUICKSORT_INT	ax, dx, cx, b, a, 1
+QuickSortAsc_uint32:	QUICKSORT_INT	eax, edx, ecx, b, a, 2
+QuickSortAsc_uint64:	QUICKSORT_INT	rax, rdx, rcx, b, a, 3
 
 ; Signed integer types
-QuickSortCoreAsc_sint8:		QUICKSORT_CORE	al, dl, cl, l, g, 0
-QuickSortCoreAsc_sint16:	QUICKSORT_CORE	ax, dx, cx, l, g, 1
-QuickSortCoreAsc_sint32:	QUICKSORT_CORE	eax, edx, ecx, l, g, 2
-QuickSortCoreAsc_sint64:	QUICKSORT_CORE	rax, rdx, rcx, l, g, 3
-QuickSortAsc_sint8:			QUICKSORT_INT	QuickSortCoreAsc_sint8
-QuickSortAsc_sint16:		QUICKSORT_INT	QuickSortCoreAsc_sint16
-QuickSortAsc_sint32:		QUICKSORT_INT	QuickSortCoreAsc_sint32
-QuickSortAsc_sint64:		QUICKSORT_INT	QuickSortCoreAsc_sint64
+QuickSortAsc_sint8:		QUICKSORT_INT	al, dl, cl, l, g, 0
+QuickSortAsc_sint16:	QUICKSORT_INT	ax, dx, cx, l, g, 1
+QuickSortAsc_sint32:	QUICKSORT_INT	eax, edx, ecx, l, g, 2
+QuickSortAsc_sint64:	QUICKSORT_INT	rax, rdx, rcx, l, g, 3
 
 ; Floating-point types
-QuickSortAsc_flt32:			QUICKSORT_FLT	QuickSortCoreAsc_sint32, Map_flt32
-QuickSortAsc_flt64:			QUICKSORT_FLT	QuickSortCoreAsc_sint64, Map_flt64
+QuickSortAsc_flt32:		QUICKSORT_FLT	QuickSortAsc_sint32, Map_flt32
+QuickSortAsc_flt64:		QUICKSORT_FLT	QuickSortAsc_sint64, Map_flt64
 
 ;------------------------------------------------------------------------------;
 ;       Descending sort order                                                  ;
 ;------------------------------------------------------------------------------;
 
 ; Unsigned integer types
-QuickSortCoreDsc_uint8:		QUICKSORT_CORE	al, dl, cl, a, b, 0
-QuickSortCoreDsc_uint16:	QUICKSORT_CORE	ax, dx, cx, a, b, 1
-QuickSortCoreDsc_uint32:	QUICKSORT_CORE	eax, edx, ecx, a, b, 2
-QuickSortCoreDsc_uint64:	QUICKSORT_CORE	rax, rdx, rcx, a, b, 3
-QuickSortDsc_uint8:			QUICKSORT_INT	QuickSortCoreDsc_uint8
-QuickSortDsc_uint16:		QUICKSORT_INT	QuickSortCoreDsc_uint16
-QuickSortDsc_uint32:		QUICKSORT_INT	QuickSortCoreDsc_uint32
-QuickSortDsc_uint64:		QUICKSORT_INT	QuickSortCoreDsc_uint64
+QuickSortDsc_uint8:		QUICKSORT_INT	al, dl, cl, a, b, 0
+QuickSortDsc_uint16:	QUICKSORT_INT	ax, dx, cx, a, b, 1
+QuickSortDsc_uint32:	QUICKSORT_INT	eax, edx, ecx, a, b, 2
+QuickSortDsc_uint64:	QUICKSORT_INT	rax, rdx, rcx, a, b, 3
 
 ; Signed integer types
-QuickSortCoreDsc_sint8:		QUICKSORT_CORE	al, dl, cl, g, l, 0
-QuickSortCoreDsc_sint16:	QUICKSORT_CORE	ax, dx, cx, g, l, 1
-QuickSortCoreDsc_sint32:	QUICKSORT_CORE	eax, edx, ecx, g, l, 2
-QuickSortCoreDsc_sint64:	QUICKSORT_CORE	rax, rdx, rcx, g, l, 3
-QuickSortDsc_sint8:			QUICKSORT_INT	QuickSortCoreDsc_sint8
-QuickSortDsc_sint16:		QUICKSORT_INT	QuickSortCoreDsc_sint16
-QuickSortDsc_sint32:		QUICKSORT_INT	QuickSortCoreDsc_sint32
-QuickSortDsc_sint64:		QUICKSORT_INT	QuickSortCoreDsc_sint64
+QuickSortDsc_sint8:		QUICKSORT_INT	al, dl, cl, g, l, 0
+QuickSortDsc_sint16:	QUICKSORT_INT	ax, dx, cx, g, l, 1
+QuickSortDsc_sint32:	QUICKSORT_INT	eax, edx, ecx, g, l, 2
+QuickSortDsc_sint64:	QUICKSORT_INT	rax, rdx, rcx, g, l, 3
 
 ; Floating-point types
-QuickSortDsc_flt32:			QUICKSORT_FLT	QuickSortCoreDsc_sint32, Map_flt32
-QuickSortDsc_flt64:			QUICKSORT_FLT	QuickSortCoreDsc_sint64, Map_flt64
+QuickSortDsc_flt32:		QUICKSORT_FLT	QuickSortDsc_sint32, Map_flt32
+QuickSortDsc_flt64:		QUICKSORT_FLT	QuickSortDsc_sint64, Map_flt64
 
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 ;       Key sorting                                                            ;
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
-macro	QUICKSORT_KEY_CORE	median, key1, key2, op1, op2, scale
+macro	QUICKSORT_KEY_INT	median, key1, key2, op1, op2, scale
 {
 ;---[Parameters]---------------------------
 array	equ		rdi							; pointer to array
@@ -4325,6 +4374,8 @@ space	= 3 * 8								; stack size required by the procedure
 minsize	= 32								; min array size is aceptable for Quick sort
 bytes	= 1 shl scale						; size of array element (bytes)
 ;------------------------------------------
+		cmp		size, 1						; if (size <= 1)
+		jbe		.exit						;     then go to exit
 		jmp		.start
 ;---[QUICK SORT]---------------------------
 .qsort:	mov		half, size
@@ -4363,33 +4414,36 @@ bytes	= 1 shl scale						; size of array element (bytes)
 		cmp		lsize, rsize				; if (lsize <= rsize)
 		ja		.else						; {
 ;---[if lsize <= rsize]--------------------
+		cmp		lsize, 1					; if (lsize > 1)
+		jbe		@f							; {
 		sub		stack, space				; reserving stack size for local vars
 		mov		[s_array], rarray			; save "rarray" variable into the stack
 		mov		[s_ptr], rptr				; save "rptr" variable into the stack
 		mov		[s_size], rsize				; save "rsize" variable into the stack
-		cmp		lsize, 1					; if (lsize > 1)
-		jbe		@f							; {
-		mov		size, lsize					;     call QuickSortKeyCore (larray, lptr, lsize)
-		call	.start						; }
-@@:		mov		array, [s_array]			; get "rarray" variable from the stack
-		mov		ptr, [s_ptr]				; get "rptr" variable from the stack
-		mov		size, [s_size]				; get "rsize" variable from the stack
+		mov		size, lsize
+		call	.start						; call QuickSortKey (larray, lptr, lsize)
+		mov		rarray, [s_array]			; get "rarray" variable from the stack
+		mov		rptr, [s_ptr]				; get "rptr" variable from the stack
+		mov		rsize, [s_size]				; get "rsize" variable from the stack
 		add		stack, space				; restoring back the stack pointer
+@@:		mov		array, rarray
+		mov		ptr, rptr					; }
 		jmp		.start
 ;---[else]---------------------------------
-.else:	sub		stack, space				; reserving stack size for local vars
+.else:	cmp		rsize, 1					; if (rsize > 1)
+		jbe		@f							; {
+		sub		stack, space				; reserving stack size for local vars
 		mov		[s_array], larray			; save "larray" variable into the stack
 		mov		[s_ptr], lptr				; save "lptr" variable into the stack
 		mov		[s_size], lsize				; save "lsize" variable into the stack
-		cmp		rsize, 1					; if (rsize > 1)
-		jbe		@f							; {
 		mov		array, rarray
-		mov		ptr, rptr					;     call QuickSortKeyCore (rarray, rptr, rsize)
-		call	.start						; }
-@@:		mov		array, [s_array]			; get "larray" variable from the stack
-		mov		ptr, [s_ptr]				; get "lptr" variable from the stack
-		mov		size, [s_size]				; get "lsize" variable from the stack
+		mov		ptr, rptr
+		call	.start						; call QuickSortKey (rarray, rptr, rsize)
+		mov		larray, [s_array]			; get "larray" variable from the stack
+		mov		lptr, [s_ptr]				; get "lptr" variable from the stack
+		mov		lsize, [s_size]				; get "lsize" variable from the stack
 		add		stack, space				; restoring back the stack pointer
+@@:		mov		size, lsize					; }
 ;---[end if]-------------------------------
 .start:	cmp		size, minsize
 		ja		.qsort						; do while (size > minsize)
@@ -4415,20 +4469,6 @@ bytes	= 1 shl scale						; size of array element (bytes)
 		cmp		left, size
 		jb		.isort						; do while (left < size)
 ;---[END OF INSERT SORT]-------------------
-		ret
-}
-;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	QUICKSORT_KEY_INT	sort_func
-{
-;---[Parameters]---------------------------
-array	equ		rdi							; pointer to array
-ptr		equ		rsi							; pointer to array of pointers to data
-size	equ		rdx							; array size (count of elements)
-;------------------------------------------
-		cmp		size, 1						; if (size <= 1)
-		jbe		.exit						;     then go to exit from the procedure
-;---[Call sort function]-------------------
-		jmp		sort_func					; call sorting function
 .exit:	ret
 }
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -4446,8 +4486,6 @@ s_ptr	equ		stack + 1 * 8				; stack position of "ptr" variable
 s_size	equ		stack + 2 * 8				; stack position of "size" variable
 space	= 3 * 8								; stack size required by the procedure
 ;------------------------------------------
-		cmp		size, 1						; if (size <= 1)
-		jbe		.exit						;     then go to exit from the procedure
 		sub		stack, space				; reserving stack size for local vars
 		mov		[s_array], array			; save "array" variable into the stack
 		mov		[s_ptr], ptr				; save "ptr" variable into the stack
@@ -4465,7 +4503,7 @@ space	= 3 * 8								; stack size required by the procedure
 		mov		csize, [s_size]				; get "size" variable from the stack
 		call	convert_func				; call converting function
 		add		stack, space				; restoring back the stack pointer
-.exit:	ret
+		ret
 }
 
 ;------------------------------------------------------------------------------;
@@ -4473,56 +4511,40 @@ space	= 3 * 8								; stack size required by the procedure
 ;------------------------------------------------------------------------------;
 
 ; Unsigned integer types
-QuickSortCoreKeyAsc_uint8:	QUICKSORT_KEY_CORE	al, r10b, r11b, b, a, 0
-QuickSortCoreKeyAsc_uint16:	QUICKSORT_KEY_CORE	ax, r10w, r11w, b, a, 1
-QuickSortCoreKeyAsc_uint32:	QUICKSORT_KEY_CORE	eax, r10d, r11d, b, a, 2
-QuickSortCoreKeyAsc_uint64:	QUICKSORT_KEY_CORE	rax, r10, r11, b, a, 3
-QuickSortKeyAsc_uint8:		QUICKSORT_KEY_INT	QuickSortCoreKeyAsc_uint8
-QuickSortKeyAsc_uint16:		QUICKSORT_KEY_INT	QuickSortCoreKeyAsc_uint16
-QuickSortKeyAsc_uint32:		QUICKSORT_KEY_INT	QuickSortCoreKeyAsc_uint32
-QuickSortKeyAsc_uint64:		QUICKSORT_KEY_INT	QuickSortCoreKeyAsc_uint64
+QuickSortKeyAsc_uint8:	QUICKSORT_KEY_INT	al, r10b, r11b, b, a, 0
+QuickSortKeyAsc_uint16:	QUICKSORT_KEY_INT	ax, r10w, r11w, b, a, 1
+QuickSortKeyAsc_uint32:	QUICKSORT_KEY_INT	eax, r10d, r11d, b, a, 2
+QuickSortKeyAsc_uint64:	QUICKSORT_KEY_INT	rax, r10, r11, b, a, 3
 
 ; Signed integer types
-QuickSortCoreKeyAsc_sint8:	QUICKSORT_KEY_CORE	al, r10b, r11b, l, g, 0
-QuickSortCoreKeyAsc_sint16:	QUICKSORT_KEY_CORE	ax, r10w, r11w, l, g, 1
-QuickSortCoreKeyAsc_sint32:	QUICKSORT_KEY_CORE	eax, r10d, r11d, l, g, 2
-QuickSortCoreKeyAsc_sint64:	QUICKSORT_KEY_CORE	rax, r10, r11, l, g, 3
-QuickSortKeyAsc_sint8:		QUICKSORT_KEY_INT	QuickSortCoreKeyAsc_sint8
-QuickSortKeyAsc_sint16:		QUICKSORT_KEY_INT	QuickSortCoreKeyAsc_sint16
-QuickSortKeyAsc_sint32:		QUICKSORT_KEY_INT	QuickSortCoreKeyAsc_sint32
-QuickSortKeyAsc_sint64:		QUICKSORT_KEY_INT	QuickSortCoreKeyAsc_sint64
+QuickSortKeyAsc_sint8:	QUICKSORT_KEY_INT	al, r10b, r11b, l, g, 0
+QuickSortKeyAsc_sint16:	QUICKSORT_KEY_INT	ax, r10w, r11w, l, g, 1
+QuickSortKeyAsc_sint32:	QUICKSORT_KEY_INT	eax, r10d, r11d, l, g, 2
+QuickSortKeyAsc_sint64:	QUICKSORT_KEY_INT	rax, r10, r11, l, g, 3
 
 ; Floating-point types
-QuickSortKeyAsc_flt32:		QUICKSORT_KEY_FLT	QuickSortCoreKeyAsc_sint32, Map_flt32
-QuickSortKeyAsc_flt64:		QUICKSORT_KEY_FLT	QuickSortCoreKeyAsc_sint64, Map_flt64
+QuickSortKeyAsc_flt32:	QUICKSORT_KEY_FLT	QuickSortKeyAsc_sint32, Map_flt32
+QuickSortKeyAsc_flt64:	QUICKSORT_KEY_FLT	QuickSortKeyAsc_sint64, Map_flt64
 
 ;------------------------------------------------------------------------------;
 ;       Descending sort order                                                  ;
 ;------------------------------------------------------------------------------;
 
 ; Unsigned integer types
-QuickSortCoreKeyDsc_uint8:	QUICKSORT_KEY_CORE	al, r10b, r11b, a, b, 0
-QuickSortCoreKeyDsc_uint16:	QUICKSORT_KEY_CORE	ax, r10w, r11w, a, b, 1
-QuickSortCoreKeyDsc_uint32:	QUICKSORT_KEY_CORE	eax, r10d, r11d, a, b, 2
-QuickSortCoreKeyDsc_uint64:	QUICKSORT_KEY_CORE	rax, r10, r11, a, b, 3
-QuickSortKeyDsc_uint8:		QUICKSORT_KEY_INT	QuickSortCoreKeyDsc_uint8
-QuickSortKeyDsc_uint16:		QUICKSORT_KEY_INT	QuickSortCoreKeyDsc_uint16
-QuickSortKeyDsc_uint32:		QUICKSORT_KEY_INT	QuickSortCoreKeyDsc_uint32
-QuickSortKeyDsc_uint64:		QUICKSORT_KEY_INT	QuickSortCoreKeyDsc_uint64
+QuickSortKeyDsc_uint8:	QUICKSORT_KEY_INT	al, r10b, r11b, a, b, 0
+QuickSortKeyDsc_uint16:	QUICKSORT_KEY_INT	ax, r10w, r11w, a, b, 1
+QuickSortKeyDsc_uint32:	QUICKSORT_KEY_INT	eax, r10d, r11d, a, b, 2
+QuickSortKeyDsc_uint64:	QUICKSORT_KEY_INT	rax, r10, r11, a, b, 3
 
 ; Signed integer types
-QuickSortCoreKeyDsc_sint8:	QUICKSORT_KEY_CORE	al, r10b, r11b, g, l, 0
-QuickSortCoreKeyDsc_sint16:	QUICKSORT_KEY_CORE	ax, r10w, r11w, g, l, 1
-QuickSortCoreKeyDsc_sint32:	QUICKSORT_KEY_CORE	eax, r10d, r11d, g, l, 2
-QuickSortCoreKeyDsc_sint64:	QUICKSORT_KEY_CORE	rax, r10, r11, g, l, 3
-QuickSortKeyDsc_sint8:		QUICKSORT_KEY_INT	QuickSortCoreKeyDsc_sint8
-QuickSortKeyDsc_sint16:		QUICKSORT_KEY_INT	QuickSortCoreKeyDsc_sint16
-QuickSortKeyDsc_sint32:		QUICKSORT_KEY_INT	QuickSortCoreKeyDsc_sint32
-QuickSortKeyDsc_sint64:		QUICKSORT_KEY_INT	QuickSortCoreKeyDsc_sint64
+QuickSortKeyDsc_sint8:	QUICKSORT_KEY_INT	al, r10b, r11b, g, l, 0
+QuickSortKeyDsc_sint16:	QUICKSORT_KEY_INT	ax, r10w, r11w, g, l, 1
+QuickSortKeyDsc_sint32:	QUICKSORT_KEY_INT	eax, r10d, r11d, g, l, 2
+QuickSortKeyDsc_sint64:	QUICKSORT_KEY_INT	rax, r10, r11, g, l, 3
 
 ; Floating-point types
-QuickSortKeyDsc_flt32:		QUICKSORT_KEY_FLT	QuickSortCoreKeyDsc_sint32, Map_flt32
-QuickSortKeyDsc_flt64:		QUICKSORT_KEY_FLT	QuickSortCoreKeyDsc_sint64, Map_flt64
+QuickSortKeyDsc_flt32:	QUICKSORT_KEY_FLT	QuickSortKeyDsc_sint32, Map_flt32
+QuickSortKeyDsc_flt64:	QUICKSORT_KEY_FLT	QuickSortKeyDsc_sint64, Map_flt64
 
 ;==============================================================================;
 ;       Radix sort                                                             ;
@@ -5468,27 +5490,19 @@ Duplicates64:	DUPLICATES	r8, r9, 3
 ;==============================================================================;
 ;       Check for duplicate values                                             ;
 ;==============================================================================;
-macro	HAS_DUPLICATES	treg, x
+macro	CHECK_DUP	element, x
 {
 ;---[Parameters]---------------------------
 array	equ		rdi							; pointer to array
 size	equ		rsi							; array size (count of elements)
 ;---[Internal variables]-------------------
-result	equ		al							; result register
-ptr		equ		rdx							; temporary pointer to array
-count	equ		rcx							; count of elements to align target
-temp	equ		r8							; temporary register
-fmask	equ		count						; mask of comparison results
+index	equ		rax							; index of first occurence of pattern
+aindex	equ		rcx							; array offset from vector boundary
+aindexl	equ		cl							; low part of "aindex"
+cmask	equ		r8							; mask to clear unrequired results
+fmask	equ		r9							; result of duplicates search
 temp0	equ		xmm0						; temporary register #1
 temp1	equ		xmm1						; temporary register #2
-temp2	equ		xmm2						; temporary register #3
-temp3	equ		xmm3						; temporary register #4
-temp4	equ		xmm4						; temporary register #5
-temp5	equ		xmm5						; temporary register #6
-temp6	equ		xmm6						; temporary register #7
-temp7	equ		xmm7						; temporary register #8
-flags	equ		xmm8						; checks accumulator
-amask	= 16 - 1							; aligning mask
 if x eq b
 scale	= 0									; scale value
 else if x eq w
@@ -5498,345 +5512,275 @@ scale	= 2									; scale value
 else if x eq q
 scale	= 3									; scale value
 end if
-bscale	= 6									; block scale factor
 bytes	= 1 shl scale						; size of array element (bytes)
-block	= 1 shl bscale						; block size (bytes)
-step	= 1 shl (bscale - scale)			; step size (bytes)
+bmask	= bytes - 1							; elements aligning mask
 ;------------------------------------------
-		sub		size, 1						; if (--size <= 0)
-		jbe		.exit						;     then go to exit
-		lea		ptr, [array + bytes]		; ptr = array + 1
-	prefetchnta	[ptr]						; prefetch data
 	prefetchnta	[array]						; prefetch data
-		test	array, bytes - 1			; if (array & (bytes - 1))
-		jnz		.sclr						;     then skip vector code
-		mov		count, array
-		neg		count
-		and		count, amask
-		shr		count, scale				; count = (-array & amask) >> scale
-		lea		temp, [count + step]
-		cmp		size, temp					; if (size < count + step)
-		jb		.sclr						;     then skip vector code
-		sub		size, count					; size -= count
-		mov		temp, size					; temp = size
-		shr		size, bscale - scale		; size = size / step
-		and		temp, step - 1				; temp = size % step
-		test	count, count				; if (count == 0)
-		jz		.vctr						;     then skip aligning loop
-;---[Aligning loop]------------------------
-.aloop:	mov		treg, [ptr]					; treg = ptr[0]
-		cmp		[array], treg				; if (array[0] == ptr[0])
-		je		.dup						;     then go to found duplicates branch
-		add		ptr, bytes					; ptr++
-		add		array, bytes				; array++
-		sub		count, 1					; count--
-		jnz		.aloop						; do while (count != 0)
-;------------------------------------------
-.vctr:	pxor	flags, flags				; flags = 0
+		shftl	size, scale					; convert size to bytes
+		sub		size, bytes					; if (--size <= 0)
+		jbe		.ntfnd						;     then go to not found branch
+		xor		index, index				; index = 0
+if scale <> 0
+		test	array, bmask				; if elements have wrong alignment
+		jnz		.sloop						;     then skip vector code
+end if
+;---[Normal execution branch]--------------
+		mov		aindex, array
+		and		aindex, VMASK				; get array offset from vector boundary
+		sub		array, aindex				; align pointer to vector boundary
+;---[Unaligned search for pattern]---------
+		add		size, aindex				; size += aindex
+		mov		cmask, 0xFFFF
+		shl		cmask, aindexl				; adjust cmask for unaligned search
+		sub		size, VSIZE					; if (size < VSIZE)
+		jb		.tail0						;     then check array tail
+		movdqa	temp0, [array]
+		movdqu	temp1, [array + bytes]
+	pcmpeq#x	temp0, temp1				; check elements for duplicates
+	pmovmskb	fmask, temp0				; save check results to fmask
+		and		fmask, cmask				; if duplicates are found
+		jnz		.brk						;     then break the loop
 ;---[Vector loop]--------------------------
-.vloop:	movdqu	temp4, [ptr + 0x00]			; temp4 = ptr[0]
-		movdqu	temp5, [ptr + 0x10]			; temp5 = ptr[16]
-		movdqu	temp6, [ptr + 0x20]			; temp6 = ptr[32]
-		movdqu	temp7, [ptr + 0x30]			; temp7 = ptr[48]
-	prefetchnta	[ptr + PSTEP]				; prefetch next portion of data
-		movdqa	temp0, [array + 0x00]		; temp0 = array[0]
-	pcmpeq#x	temp0, temp4				; check for array[0] == ptr[0]
-		por		flags, temp0				; accumulate check results
-		movdqa	temp1, [array + 0x10]		; temp1 = array[16]
-	pcmpeq#x	temp1, temp5				; check for array[16] == ptr[16]
-		por		flags, temp1				; accumulate check results
-		movdqa	temp2, [array + 0x20]		; temp2 = array[32]
-	pcmpeq#x	temp2, temp6				; check for array[32] == ptr[32]
-		por		flags, temp2				; accumulate check results
-		movdqa	temp3, [array + 0x30]		; temp3 = array[48]
-	pcmpeq#x	temp3, temp7				; check for array[48] == ptr[48]
-		por		flags, temp3				; accumulate check results
+.vloop:	add		index, VSIZE				; index += VSIZE
+		sub		size, VSIZE					; if (size < VSIZE)
+		jb		.tail1						;     then check array tail
+		movdqa	temp0, [array + 1*VSIZE]
+		movdqu	temp1, [array + 1*VSIZE + bytes]
+	pcmpeq#x	temp0, temp1				; check elements for duplicates
+	pmovmskb	fmask, temp0				; save check results to fmask
+		and		fmask, fmask				; if duplicates are found
+		jnz		.brk						;     then break the loop
+		add		index, VSIZE				; index += VSIZE
+		sub		size, VSIZE					; if (size < VSIZE)
+		jb		.tail1						;     then check array tail
+		movdqa	temp0, [array + 2*VSIZE]
+		movdqu	temp1, [array + 2*VSIZE + bytes]
+	pcmpeq#x	temp0, temp1				; check elements for duplicates
+	pmovmskb	fmask, temp0				; save check results to fmask
+		and		fmask, fmask				; if duplicates are found
+		jnz		.brk						;     then break the loop
+		add		index, VSIZE				; index += VSIZE
+		sub		size, VSIZE					; if (size < VSIZE)
+		jb		.tail1						;     then check array tail
+		movdqa	temp0, [array + 3*VSIZE]
+		movdqu	temp1, [array + 3*VSIZE + bytes]
+	pcmpeq#x	temp0, temp1				; check elements for duplicates
+	pmovmskb	fmask, temp0				; save check results to fmask
+		and		fmask, fmask				; if duplicates are found
+		jnz		.brk						;     then break the loop
+		add		index, VSIZE				; index += VSIZE
+		sub		size, VSIZE					; if (size < VSIZE)
+		jb		.tail1						;     then check array tail
+		movdqa	temp0, [array + 4*VSIZE]
+		movdqu	temp1, [array + 4*VSIZE + bytes]
+	pcmpeq#x	temp0, temp1				; check elements for duplicates
+	pmovmskb	fmask, temp0				; save check results to fmask
+		and		fmask, fmask				; if duplicates are found
+		jnz		.brk						;     then break the loop
 	prefetchnta	[array + PSTEP]				; prefetch next portion of data
-	pmovmskb	fmask, flags				; save check results to fmask
-		test	fmask, fmask				; if condition is met,
-		jnz		.dup						;     then go to found duplicates branch
-		add		ptr, block					; ptr += block
-		add		array, block				; array += block
-		sub		size, 1						; size--
-		jnz		.vloop						; do while (size != 0)
-;------------------------------------------
-		mov		size, temp					; size = temp
-.sclr:	test	size, size					; if (size == 0)
-		jz		.exit						;     then go to exit
+		add		array, 4 * VSIZE			; array += 4 * VSIZE
+		jmp		.vloop						; do while (true)
+;---[End of vector loop]-------------------
+.brk:	bsf		fmask, fmask				; find index of first occurence of duplicate
+		sub		index, aindex				; index -= aindex
+		add		index, fmask				; index += fmask
+		shftr	index, scale				; return index
+		ret
+;---[Tail 0 branch]------------------------
+.tail0:	movdqa	temp0, [array]
+		movdqa	temp1, temp0
+		psrldq	temp1, bytes				; shift vector right to one position
+	pcmpeq#x	temp0, temp1				; check elements for duplicates
+	pmovmskb	fmask, temp0				; save check results to fmask
+		and		fmask, cmask				; if duplicates are not found
+		jz		.ntfnd						;     then go to not found branch
+		bsf		fmask, fmask				; find index of first occurence of duplicate
+		add		size, VSIZE					; size += VSIZE
+		cmp		size, fmask					; if (size <= fmask)
+		jbe		.ntfnd						;     then go to not found branch
+		sub		index, aindex				; index -= aindex
+		add		index, fmask				; index += fmask
+		shftr	index, scale				; return index
+		ret
+;---[Tail 1 branch]------------------------
+.tail1:	movdqa	temp0, [array + index]
+		movdqa	temp1, temp0
+		psrldq	temp1, bytes				; shift vector right to one position
+	pcmpeq#x	temp0, temp1				; check elements for duplicates
+	pmovmskb	fmask, temp0				; save check results to fmask
+		and		fmask, fmask				; if duplicates are not found
+		jz		.ntfnd						;     then go to not found branch
+		bsf		fmask, fmask				; find index of first occurence of duplicate
+		add		size, VSIZE					; size += VSIZE
+		cmp		size, fmask					; if (size <= fmask)
+		jbe		.ntfnd						;     then go to not found branch
+		sub		index, aindex				; index -= aindex
+		add		index, fmask				; index += fmask
+		shftr	index, scale				; return index
+		ret
 ;---[Scalar loop]--------------------------
-.sloop:	mov		treg, [ptr]					; treg = ptr[0]
-		cmp		[array], treg				; if (array[0] == ptr[0])
-		je		.dup						;     then go to found duplicates branch
-		add		ptr, bytes					; ptr++
+if scale <> 0
+.sloop:	mov		element, [array]
+		cmp		[array + bytes], element	; if (array[0] == array[1])
+		je		.exit						;     then go to exit
 		add		array, bytes				; array++
-		sub		size, 1						; size--
+		add		index, 1					; index++
+		sub		size, bytes					; size--
 		jnz		.sloop						; do while (size != 0)
-;---[Equal branch]-------------------------
-.exit:	xor		result, result				; return false
-		ret
-;---[Found duplicates branch]--------------
-.dup:	mov		result, 1					; return true
-		ret
+end if
+;---[Not found branch]---------------------
+.ntfnd:	mov		index, NOT_FOUND			; return NOT_FOUND
+.exit:	ret
 }
-HasDuplicates8:		HAS_DUPLICATES	al, b
-HasDuplicates16:	HAS_DUPLICATES	ax, w
-HasDuplicates32:	HAS_DUPLICATES	eax, d
-HasDuplicates64:	HAS_DUPLICATES	rax, q
+CheckDup8:	CHECK_DUP	cl, b
+CheckDup16:	CHECK_DUP	cx, w
+CheckDup32:	CHECK_DUP	ecx, d
+CheckDup64:	CHECK_DUP	rcx, q
 
 ;==============================================================================;
 ;       Check for infinite values                                              ;
 ;==============================================================================;
-macro	HAS_INF	treg, mask, value, x
+macro	CHECK	patt, element, amask, cond1, cond2, x
 {
 ;---[Parameters]---------------------------
 array	equ		rdi							; pointer to array
 size	equ		rsi							; array size (count of elements)
 ;---[Internal variables]-------------------
-result	equ		al							; result register
-count	equ		rcx							; count of elements to align array
-temp	equ		r8							; temporary register
-fmask	equ		eax							; mask of comparison results
-temp0	equ		xmm0						; temporary register #1
-temp1	equ		xmm1						; temporary register #2
-temp2	equ		xmm2						; temporary register #3
-temp3	equ		xmm3						; temporary register #4
-flags	equ		xmm4						; checks accumulator
-vector	equ		xmm5						; vector value to process with
-vmask	equ		xmm6						; bit mask
-amask	= 16 - 1							; aligning mask
+index	equ		rax							; index of first occurence of pattern
+aindex	equ		rcx							; array offset from vector boundary
+aindexl	equ		cl							; low part of "aindex"
+cmask	equ		r8							; mask to clear unrequired results
+fmask	equ		r9							; result of pattern search
+flags	equ		xmm0						; pattern check flags
+mask	equ		xmm1						; mask to get absolute value
+pattern	equ		xmm2						; pattern to find
 if x eq d
 dmask	= DMASK_FLT32						; data mask
-inf		= 0x7F800000						; inf
+infval	= PINF_FLT32						; +inf
 scale	= 2									; scale value
-else
+else if x eq q
 dmask	= DMASK_FLT64						; data mask
-inf		= 0x7FF0000000000000				; inf
+infval	= PINF_FLT64						; +inf
 scale	= 3									; scale value
 end if
-bscale	= 6									; block scale factor
 bytes	= 1 shl scale						; size of array element (bytes)
-block	= 1 shl bscale						; block size (bytes)
-step	= 1 shl (bscale - scale)			; step size (bytes)
+bmask	= bytes - 1							; elements aligning mask
 ;------------------------------------------
 	prefetchnta	[array]						; prefetch data
-		test	array, bytes - 1			; if (array & (bytes - 1))
-		jnz		.sclr						;     then skip vector code
-		mov		count, array
-		neg		count
-		and		count, amask
-		shr		count, scale				; count = (-array & amask) >> scale
-		lea		temp, [count + step]
-		cmp		size, temp					; if (size < count + step)
-		jb		.sclr						;     then skip vector code
-		initreg	vmask, treg, dmask, bytes	; vmask = dmask
-		clone	vmask, scale				; duplicate value through the entire register
-		initreg	vector, treg, inf, bytes	; vector = Inf
-		clone	vector, scale				; duplicate value through the entire register
-		sub		size, count					; size -= count
-		mov		temp, size					; temp = size
-		shr		size, bscale - scale		; size = size / step
-		and		temp, step - 1				; temp = size % step
-		test	count, count				; if (count == 0)
-		jz		.vctr						;     then skip aligning loop
-		mov		mask, dmask					; mask = dmask
-		mov		value, inf					; value = Inf
-;---[Aligning loop]------------------------
-.aloop:	mov		treg, [array]				; treg = source[0]
-		and		treg, mask					; treg = Abs(treg)
-		cmp		treg, value					; if (treg == value)
-		je		.found						;     then go to found branch
-		add		array, bytes				; array++
-		sub		count, 1					; count--
-		jnz		.aloop						; do while (count != 0)
-;------------------------------------------
-.vctr:	pxor	flags, flags				; flags = 0
-;---[Vector loop]--------------------------
-.vloop:	movdqa	temp0, [array + 0x00]		; temp0 = array[0]
-		pand	temp0, vmask				; temp0 = Abs (temp0)
-	pcmpeq#x	temp0, vector				; check for temp0 == value
-		por		flags, temp0				; accumulate check results
-		movdqa	temp1, [array + 0x10]		; temp1 = array[16]
-		pand	temp1, vmask				; temp1 = Abs (temp1)
-	pcmpeq#x	temp1, vector				; check for temp1 == value
-		por		flags, temp1				; accumulate check results
-		movdqa	temp2, [array + 0x20]		; temp2 = array[32]
-		pand	temp2, vmask				; temp2 = Abs (temp2)
-	pcmpeq#x	temp2, vector				; check for temp2 == value
-		por		flags, temp2				; accumulate check results
-		movdqa	temp3, [array + 0x30]		; temp3 = array[48]
-		pand	temp3, vmask				; temp3 = Abs (temp3)
-	pcmpeq#x	temp3, vector				; check for temp3 == value
-		por		flags, temp3				; accumulate check results
-	prefetchnta	[array + PSTEP]				; prefetch next portion of data
+		shl		size, scale					; convert size to bytes
+		jz		.ntfnd						; if (size == 0), then go to not found branch
+		mov		amask, dmask				; load amask
+		mov		patt, infval				; load pattern
+		xor		index, index				; index = 0
+		test	array, bmask				; if elements have wrong alignment
+		jnz		.sloop						;     then skip vector code
+;---[Normal execution branch]--------------
+		mov#x	mask, amask					; mask = amask
+		mov#x	pattern, patt				; pattern = patt
+		mov		aindex, array
+		and		aindex, VMASK				; get array offset from vector boundary
+		sub		array, aindex				; align pointer to vector boundary
+		clone	mask, scale					; duplicate value through the entire register
+		clone	pattern, scale				; duplicate value through the entire register
+;---[Unaligned search for pattern]---------
+		add		size, aindex				; size += aindex
+		sub		index, aindex				; index -= aindex
+		mov		cmask, 0xFFFF
+		shl		cmask, aindexl				; adjust cmask for unaligned search
+		movdqa	flags, [array]
+		pand	flags, mask					; flags = Abs (array[0])
+		cond1#x	flags, pattern				; check array[0] for infinity
 	pmovmskb	fmask, flags				; save check results to fmask
-		test	fmask, fmask				; if condition is met,
-		jnz		.found						;     then go to found branch
-		add		array, block				; array += block
-		sub		size, 1						; size--
-		jnz		.vloop						; do while (size != 0)
-;------------------------------------------
-		mov		size, temp					; size = temp
-.sclr:	test	size, size					; if (size == 0)
-		jz		.exit						;     then go to exit
-		mov		mask, dmask					; mask = dmask
-		mov		value, inf					; value = Inf
+		and		fmask, cmask				; if pattern is found
+		jnz		.brk						;     then break the loop
+		add		index, VSIZE				; index += VSIZE
+		sub		size, VSIZE					; if (size <= VSIZE)
+		jbe		.ntfnd						;     then go to not found branch
+;---[Vector loop]--------------------------
+.vloop:	movdqa	flags, [array + 1*VSIZE]
+		pand	flags, mask					; flags = Abs (array[1])
+		cond1#x	flags, pattern				; check array[1] for infinity
+	pmovmskb	fmask, flags				; save check results to fmask
+		and		fmask, fmask				; if pattern is found
+		jnz		.brk						;     then break the loop
+		add		index, VSIZE				; index += VSIZE
+		sub		size, VSIZE					; if (size <= VSIZE)
+		jbe		.ntfnd						;     then go to not found branch
+		movdqa	flags, [array + 2*VSIZE]
+		pand	flags, mask					; flags = Abs (array[2])
+		cond1#x	flags, pattern				; check array[2] for infinity
+	pmovmskb	fmask, flags				; save check results to fmask
+		and		fmask, fmask				; if pattern is found
+		jnz		.brk						;     then break the loop
+		add		index, VSIZE				; index += VSIZE
+		sub		size, VSIZE					; if (size <= VSIZE)
+		jbe		.ntfnd						;     then go to not found branch
+		movdqa	flags, [array + 3*VSIZE]
+		pand	flags, mask					; flags = Abs (array[3])
+		cond1#x	flags, pattern				; check array[3] for infinity
+	pmovmskb	fmask, flags				; save check results to fmask
+		and		fmask, fmask				; if pattern is found
+		jnz		.brk						;     then break the loop
+		add		index, VSIZE				; index += VSIZE
+		sub		size, VSIZE					; if (size <= VSIZE)
+		jbe		.ntfnd						;     then go to not found branch
+		movdqa	flags, [array + 4*VSIZE]
+		pand	flags, mask					; flags = Abs (array[4])
+		cond1#x	flags, pattern				; check array[4] for infinity
+	pmovmskb	fmask, flags				; save check results to fmask
+		and		fmask, fmask				; if pattern is found
+		jnz		.brk						;     then break the loop
+		add		index, VSIZE				; index += VSIZE
+		sub		size, VSIZE					; if (size <= VSIZE)
+		jbe		.ntfnd						;     then go to not found branch
+	prefetchnta	[array + PSTEP]				; prefetch next portion of data
+		add		array, 4 * VSIZE			; array += 4 * VSIZE
+		jmp		.vloop						; do while (true)
+;---[End of vector loop]-------------------
+.brk:	bsf		fmask, fmask				; find index of first occurence of pattern
+		cmp		size, fmask					; if (size <= fmask)
+		jbe		.ntfnd						;     then go to not found branch
+		add		index, fmask				; index += fmask
+		shftr	index, scale				; return index
+		ret
 ;---[Scalar loop]--------------------------
-.sloop:	mov		treg, [array]				; treg = array[0]
-		and		treg, mask					; treg = Abs(treg)
-		cmp		treg, value					; if (treg == value)
-		je		.found						;     then go to found branch
+.sloop:	mov		element, [array]
+		and		element, amask				; element = abs (array[0])
+		cmp		element, patt				; if (element condition pattern)
+		cond2	.exit						;     then go to exit
 		add		array, bytes				; array++
-		sub		size, 1						; size--
+		add		index, 1					; index++
+		sub		size, bytes					; size--
 		jnz		.sloop						; do while (size != 0)
-;---[Normal exit branch]-------------------
-.exit:	xor		result, result				; return false
-		ret
-;---[Element has been found]---------------
-.found:	mov		result, 1					; return true (array has required value)
-		ret
+;---[Not found branch]---------------------
+.ntfnd:	mov		index, NOT_FOUND			; return NOT_FOUND
+.exit:	ret
 }
-HasINF_flt32:	HAS_INF	eax, edx, r9d, d
-HasINF_flt64:	HAS_INF	rax, rdx, r9, q
+CheckInf_flt32:	CHECK	edx, r8d, r9d, pcmpeq, je, d
+CheckInf_flt64:	CHECK	rdx, r8, r9, pcmpeq, je, q
 
 ;==============================================================================;
 ;       Check for NaN values                                                   ;
 ;==============================================================================;
-macro	HAS_NAN	treg, mask, value, x
-{
-;---[Parameters]---------------------------
-array	equ		rdi							; pointer to array
-size	equ		rsi							; array size (count of elements)
-;---[Internal variables]-------------------
-result	equ		al							; result register
-count	equ		rcx							; count of elements to align array
-temp	equ		r8							; temporary register
-fmask	equ		eax							; mask of comparison results
-temp0	equ		xmm0						; temporary register #1
-temp1	equ		xmm1						; temporary register #2
-temp2	equ		xmm2						; temporary register #3
-temp3	equ		xmm3						; temporary register #4
-flags	equ		xmm4						; checks accumulator
-vector	equ		xmm5						; vector value to process with
-vmask	equ		xmm6						; bit mask
-amask	= 16 - 1							; aligning mask
-if x eq d
-dmask	= DMASK_FLT32						; data mask
-inf		= 0x7F800000						; inf
-scale	= 2									; scale value
-else
-dmask	= DMASK_FLT64						; data mask
-inf		= 0x7FF0000000000000				; inf
-scale	= 3									; scale value
-end if
-bscale	= 6									; block scale factor
-bytes	= 1 shl scale						; size of array element (bytes)
-block	= 1 shl bscale						; block size (bytes)
-step	= 1 shl (bscale - scale)			; step size (bytes)
-;------------------------------------------
-	prefetchnta	[array]						; prefetch data
-		test	array, bytes - 1			; if (array & (bytes - 1))
-		jnz		.sclr						;     then skip vector code
-		mov		count, array
-		neg		count
-		and		count, amask
-		shr		count, scale				; count = (-array & amask) >> scale
-		lea		temp, [count + step]
-		cmp		size, temp					; if (size < count + step)
-		jb		.sclr						;     then skip vector code
-		initreg	vmask, treg, dmask, bytes	; vmask = dmask
-		clone	vmask, scale				; duplicate value through the entire register
-		initreg	vector, treg, inf, bytes	; vector = Inf
-		clone	vector, scale				; duplicate value through the entire register
-		sub		size, count					; size -= count
-		mov		temp, size					; temp = size
-		shr		size, bscale - scale		; size = size / step
-		and		temp, step - 1				; temp = size % step
-		test	count, count				; if (count == 0)
-		jz		.vctr						;     then skip aligning loop
-		mov		mask, dmask					; mask = dmask
-		mov		value, inf					; value = Inf
-;---[Aligning loop]------------------------
-.aloop:	mov		treg, [array]				; treg = source[0]
-		and		treg, mask					; treg = Abs(treg)
-		cmp		treg, value					; if (treg > value)
-		jg		.found						;     then go to found branch
-		add		array, bytes				; array++
-		sub		count, 1					; count--
-		jnz		.aloop						; do while (count != 0)
-;------------------------------------------
-.vctr:	pxor	flags, flags				; flags = 0
-;---[Vector loop]--------------------------
-.vloop:	movdqa	temp0, [array + 0x00]		; temp0 = array[0]
-		pand	temp0, vmask				; temp0 = Abs (temp0)
-	pcmpgt#x	temp0, vector				; check for temp0 > value
-		por		flags, temp0				; accumulate check results
-		movdqa	temp1, [array + 0x10]		; temp1 = array[16]
-		pand	temp1, vmask				; temp1 = Abs (temp1)
-	pcmpgt#x	temp1, vector				; check for temp1 > value
-		por		flags, temp1				; accumulate check results
-		movdqa	temp2, [array + 0x20]		; temp2 = array[32]
-		pand	temp2, vmask				; temp2 = Abs (temp2)
-	pcmpgt#x	temp2, vector				; check for temp2 > value
-		por		flags, temp2				; accumulate check results
-		movdqa	temp3, [array + 0x30]		; temp3 = array[48]
-		pand	temp3, vmask				; temp3 = Abs (temp3)
-	pcmpgt#x	temp3, vector				; check for temp3 > value
-		por		flags, temp3				; accumulate check results
-	prefetchnta	[array + PSTEP]				; prefetch next portion of data
-	pmovmskb	fmask, flags				; save check results to fmask
-		test	fmask, fmask				; if condition is met,
-		jnz		.found						;     then go to found branch
-		add		array, block				; array += block
-		sub		size, 1						; size--
-		jnz		.vloop						; do while (size != 0)
-;------------------------------------------
-		mov		size, temp					; size = temp
-.sclr:	test	size, size					; if (size == 0)
-		jz		.exit						;     then go to exit
-		mov		mask, dmask					; mask = dmask
-		mov		value, inf					; value = Inf
-;---[Scalar loop]--------------------------
-.sloop:	mov		treg, [array]				; treg = array[0]
-		and		treg, mask					; treg = Abs(treg)
-		cmp		treg, value					; if (treg > value)
-		jg		.found						;     then go to found branch
-		add		array, bytes				; array++
-		sub		size, 1						; size--
-		jnz		.sloop						; do while (size != 0)
-;---[Normal exit branch]-------------------
-.exit:	xor		result, result				; return false
-		ret
-;---[Element has been found]---------------
-.found:	mov		result, 1					; return true (array has required value)
-		ret
-}
-HasNAN_flt32:	HAS_NAN	eax, edx, r9d, d
-HasNAN_flt64:	HAS_NAN	rax, rdx, r9, q
+CheckNaN_flt32:	CHECK	edx, r8d, r9d, pcmpgt, jg, d
+CheckNaN_flt64:	CHECK	rdx, r8, r9, pcmpgt, jg, q
 
 ;==============================================================================;
 ;       Check for equality                                                     ;
 ;==============================================================================;
-macro	IS_EQUAL	treg, x
+macro	CHECK_EQUAL	element, x
 {
 ;---[Parameters]---------------------------
 array1	equ		rdi							; pointer to first array
 array2	equ		rsi							; pointer to second array
 size	equ		rdx							; array size (count of elements)
 ;---[Internal variables]-------------------
-result	equ		al							; result register
-count	equ		rcx							; count of elements to align target
-temp	equ		r8							; temporary register
-fmask	equ		count						; mask of comparison results
-temp0	equ		xmm0						; temporary register #1
-temp1	equ		xmm1						; temporary register #2
-temp2	equ		xmm2						; temporary register #3
-temp3	equ		xmm3						; temporary register #4
-temp4	equ		xmm4						; temporary register #5
-temp5	equ		xmm5						; temporary register #6
-temp6	equ		xmm6						; temporary register #7
-temp7	equ		xmm7						; temporary register #8
-flags	equ		xmm8						; checks accumulator
-amask	= 16 - 1							; aligning mask
+index	equ		rax							; index of first occurence of pattern
+fmask	equ		r9							; compare result
+ptr1	equ		r10							; temporary pointer to array1
+ptr2	equ		r11							; temporary pointer to array2
+a1temp	equ		xmm0						; array1 data register #1
+a2temp	equ		xmm1						; array1 data register #2
 if x eq b
 scale	= 0									; scale value
 else if x eq w
@@ -5846,88 +5790,115 @@ scale	= 2									; scale value
 else if x eq q
 scale	= 3									; scale value
 end if
-bscale	= 6									; block scale factor
-mscale	= 1 shl (4 - scale)					; mask scale factor
 bytes	= 1 shl scale						; size of array element (bytes)
-block	= 1 shl bscale						; block size (bytes)
-step	= 1 shl (bscale - scale)			; step size (bytes)
+bmask	= bytes - 1							; elements aligning mask
 ;------------------------------------------
 	prefetchnta	[array2]					; prefetch data
 	prefetchnta	[array1]					; prefetch data
-		test	array1, bytes - 1			; if (array1 & (bytes - 1))
-		jnz		.sclr						;     then skip vector code
-		mov		count, array1
-		neg		count
-		and		count, amask
-		shr		count, scale				; count = (-array1 & amask) >> scale
-		lea		temp, [count + step]
-		cmp		size, temp					; if (size < count + step)
-		jb		.sclr						;     then skip vector code
-		sub		size, count					; size -= count
-		mov		temp, size					; temp = size
-		shr		size, bscale - scale		; size = size / step
-		and		temp, step - 1				; temp = size % step
-		test	count, count				; if (count == 0)
-		jz		.vctr						;     then skip aligning loop
-;---[Aligning loop]------------------------
-.aloop:	mov		treg, [array2]				; treg = array2[0]
-		cmp		[array1], treg				; if (array1[0] != array2[0])
-		jne		.nteql						;     then go to not equal branch
-		add		array2, bytes				; array2++
-		add		array1, bytes				; array1++
-		sub		count, 1					; count--
-		jnz		.aloop						; do while (count != 0)
-;------------------------------------------
-.vctr:	pxor	flags, flags				; flags = 0
+		shl		size, scale					; convert size to bytes
+		jz		.eql						; if (size == 0), then go to equal branch
+		xor		index, index				; index = 0
+if scale <> 0
+		test	array2, bmask				; if elements have wrong alignment
+		jnz		.sloop						;     then skip vector code
+		test	array1, bmask				; if elements have wrong alignment
+		jnz		.sloop						;     then skip vector code
+end if
+		cmp		size, VSIZE					; if (size < VSIZE)
+		jb		.sloop						;     then skip vector code
+;---[Normal execution branch]--------------
+		mov		ptr2, array2				; ptr2 = array2
+		mov		ptr1, array1				; ptr1 = array1
+		mov		index, array1
+		and		index, VMASK				; get array offset from vector boundary
+		sub		ptr2, index					; ptr2 = array2 - index
+		sub		ptr1, index					; ptr1 = array1 - index
+;---[Unaligned check]----------------------
+		add		size, index					; size += index
+		neg		index						; index = -index
+		sub		size, VSIZE					; if (size <= VSIZE)
+		jbe		.tail						;     then check array tails
+		movdqu	a2temp, [array2]			; a2temp = array2[0]
+		movdqu	a1temp, [array1]			; a1temp = array1[0]
+	pcmpeq#x	a1temp, a2temp				; check if array1[0] == array2[0]
+	pmovmskb	fmask, a1temp				; save check results to fmask
+		xor		fmask, 0xFFFF				; if (array1[0] != array2[0])
+		jnz		.brk0						;     then break the loop
 ;---[Vector loop]--------------------------
-.vloop:	movdqu	temp4, [array2 + 0x00]		; temp4 = array2[0]
-		movdqu	temp5, [array2 + 0x10]		; temp5 = array2[16]
-		movdqu	temp6, [array2 + 0x20]		; temp6 = array2[32]
-		movdqu	temp7, [array2 + 0x30]		; temp7 = array2[48]
-	prefetchnta	[array2 + PSTEP]			; prefetch next portion of data
-		movdqa	temp0, [array1 + 0x00]		; temp0 = array1[0]
-	pcmpeq#x	temp0, temp4				; check for array1[0] == array2[0]
-		pand	flags, temp0				; accumulate check results
-		movdqa	temp1, [array1 + 0x10]		; temp1 = array1[16]
-	pcmpeq#x	temp1, temp5				; check for array1[16] == array2[16]
-		pand	flags, temp1				; accumulate check results
-		movdqa	temp2, [array1 + 0x20]		; temp2 = array1[32]
-	pcmpeq#x	temp2, temp6				; check for array1[32] == array2[32]
-		pand	flags, temp2				; accumulate check results
-		movdqa	temp3, [array1 + 0x30]		; temp3 = array1[48]
-	pcmpeq#x	temp3, temp7				; check for array1[48] == array2[48]
-		pand	flags, temp3				; accumulate check results
-	prefetchnta	[array1 + PSTEP]			; prefetch next portion of data
-	pmovmskb	fmask, flags				; save check results to fmask
-		cmp		fmask, 1 shl mscale - 1		; if (fmask != 2 ^ mscale - 1)
-		jne		.nteql						;     then go to not equal branch
-		add		array2, block				; array2 += block
-		add		array1, block				; array1 += block
-		sub		size, 1						; size--
-		jnz		.vloop						; do while (size != 0)
-;------------------------------------------
-		mov		size, temp					; size = temp
-.sclr:	test	size, size					; if (size == 0)
-		jz		.exit						;     then go to exit
+.vloop:	add		index, VSIZE				; index += VSIZE
+		sub		size, VSIZE					; if (size <= VSIZE)
+		jbe		.tail						;     then check array tails
+		movdqu	a2temp, [ptr2 + 1*VSIZE]	; a2temp = ptr2[1]
+		movdqa	a1temp, [ptr1 + 1*VSIZE]	; a1temp = ptr1[1]
+	pcmpeq#x	a1temp, a2temp				; check if ptr1[1] == ptr2[1]
+	pmovmskb	fmask, a1temp				; save check results to fmask
+		xor		fmask, 0xFFFF				; if (ptr1[1] != ptr2[1])
+		jnz		.brk1						;     then break the loop
+		add		index, VSIZE				; index += VSIZE
+		sub		size, VSIZE					; if (size <= VSIZE)
+		jbe		.tail						;     then check array tails
+		movdqu	a2temp, [ptr2 + 2*VSIZE]	; a2temp = ptr2[2]
+		movdqa	a1temp, [ptr1 + 2*VSIZE]	; a1temp = ptr1[2]
+	pcmpeq#x	a1temp, a2temp				; check if ptr1[2] == ptr2[2]
+	pmovmskb	fmask, a1temp				; save check results to fmask
+		xor		fmask, 0xFFFF				; if (ptr1[2] != ptr2[2])
+		jnz		.brk1						;     then break the loop
+		add		index, VSIZE				; index += VSIZE
+		sub		size, VSIZE					; if (size <= VSIZE)
+		jbe		.tail						;     then check array tails
+		movdqu	a2temp, [ptr2 + 3*VSIZE]	; a2temp = ptr2[3]
+		movdqa	a1temp, [ptr1 + 3*VSIZE]	; a1temp = ptr1[3]
+	pcmpeq#x	a1temp, a2temp				; check if ptr1[3] == ptr2[3]
+	pmovmskb	fmask, a1temp				; save check results to fmask
+		xor		fmask, 0xFFFF				; if (ptr1[3] != ptr2[3])
+		jnz		.brk1						;     then break the loop
+		add		index, VSIZE				; index += VSIZE
+		sub		size, VSIZE					; if (size <= VSIZE)
+		jbe		.tail						;     then check array tails
+		movdqu	a2temp, [ptr2 + 4*VSIZE]	; a2temp = ptr2[4]
+		movdqa	a1temp, [ptr1 + 4*VSIZE]	; a1temp = ptr1[4]
+	pcmpeq#x	a1temp, a2temp				; check if ptr1[4] == ptr2[4]
+	pmovmskb	fmask, a1temp				; save check results to fmask
+		xor		fmask, 0xFFFF				; if (ptr1[4] != ptr2[4])
+		jnz		.brk1						;     then break the loop
+	prefetchnta	[ptr2 + PSTEP]				; prefetch next portion of temp
+	prefetchnta	[ptr1 + PSTEP]				; prefetch next portion of temp
+		add		ptr2, 4 * VSIZE				; ptr2 += 4 * VSIZE
+		add		ptr1, 4 * VSIZE				; ptr1 += 4 * VSIZE
+		jmp		.vloop						; do while (true)
+;---[End of vector loop]-------------------
+.brk0:	bsf		index, fmask				; find index of first different element
+		shftr	index, scale				; return index
+		ret
+;---[Compare tails branch]-----------------
+.tail:	add		index, size
+		movdqu	a2temp, [array2 + index]	; a2temp = array2[index]
+		movdqu	a1temp, [array1 + index]	; a1temp = array1[index]
+	pcmpeq#x	a1temp, a2temp				; check if array1[index] == array2[index]
+	pmovmskb	fmask, a1temp				; save check results to fmask
+		xor		fmask, 0xFFFF				; if (array1[index] == array2[index])
+		jz		.eql						;     then go to equal branch
+.brk1:	bsf		fmask, fmask				; find index of first different element
+		add		index, fmask				; index += fmask
+		shftr	index, scale				; return index
+		ret
 ;---[Scalar loop]--------------------------
-.sloop:	mov		treg, [array2]				; treg = array2[0]
-		cmp		[array1], treg				; if (array1[0] != array2[0])
-		jne		.nteql						;     then go to not equal branch
+.sloop:	mov		element, [array2]
+		cmp		[array1], element			; if (array1[0] != array2[0])
+		jne		.exit						;     then go to exit
 		add		array2, bytes				; array2++
 		add		array1, bytes				; array1++
-		sub		size, 1						; size--
+		add		index, 1					; index++
+		sub		size, bytes					; size--
 		jnz		.sloop						; do while (size != 0)
 ;---[Equal branch]-------------------------
-.exit:	mov		result, 1					; return true
-		ret
-;---[Not equal branch]---------------------
-.nteql:	xor		result, result				; return false
-		ret
+.eql:	mov		index, NOT_FOUND			; return NOT_FOUND
+.exit:	ret
 }
-IsEqual8:	IS_EQUAL	al, b
-IsEqual16:	IS_EQUAL	ax, w
-IsEqual32:	IS_EQUAL	eax, d
-IsEqual64:	IS_EQUAL	rax, q
+CheckEqual8:	CHECK_EQUAL	cl, b
+CheckEqual16:	CHECK_EQUAL	cx, w
+CheckEqual32:	CHECK_EQUAL	ecx, d
+CheckEqual64:	CHECK_EQUAL	rcx, q
 
 ;==============================================================================;
 ;       Check for overlap                                                      ;
@@ -5936,9 +5907,9 @@ macro	OVERLAP	scale
 {
 ;---[Parameters]---------------------------
 target	equ 	rdi							; pointer to target array
-t_size	equ		rsi							; target array size
+tsize	equ		rsi							; target array size
 source	equ 	rdx							; pointer to source array
-s_size	equ 	rcx							; source array size
+ssize	equ 	rcx							; source array size
 ;---[Internal variables]-------------------
 result	equ		al							; result register
 bytes	= 1 shl scale						; size of array element (bytes)
@@ -5946,12 +5917,12 @@ bytes	= 1 shl scale						; size of array element (bytes)
 		cmp		target, source				; if (target >= source)
 		jb		@f
 ;------------------------------------------
-		lea		source, [source+s_size*bytes]; then source += s_size
+		lea		source, [source+ssize*bytes]; then source += ssize
 		cmp		target, source				; return target >= source
 		setb	result
 		ret
 ;------------------------------------------
-@@:		lea		target, [target+t_size*bytes]; else target += t_size
+@@:		lea		target, [target+tsize*bytes]; else target += tsize
 		cmp		source, target				; return (source >= target)
 		setb	result
 		ret
@@ -5960,6 +5931,53 @@ Overlap8:	OVERLAP	0
 Overlap16:	OVERLAP	1
 Overlap32:	OVERLAP	2
 Overlap64:	OVERLAP	3
+
+;###############################################################################
+;#      Read-only data section                                                 #
+;###############################################################################
+section	'.rodata'	align 16
+
+align 16
+maskS1		dq	0x0000000000000000, 0x0000000000000000
+			dq	0x00000000000000FF, 0x0000000000000000
+			dq	0x000000000000FFFF, 0x0000000000000000
+			dq	0x0000000000FFFFFF, 0x0000000000000000
+
+			dq	0x00000000FFFFFFFF, 0x0000000000000000
+			dq	0x000000FFFFFFFFFF, 0x0000000000000000
+			dq	0x0000FFFFFFFFFFFF, 0x0000000000000000
+			dq	0x00FFFFFFFFFFFFFF, 0x0000000000000000
+
+			dq	0xFFFFFFFFFFFFFFFF, 0x0000000000000000
+			dq	0xFFFFFFFFFFFFFFFF, 0x00000000000000FF
+			dq	0xFFFFFFFFFFFFFFFF, 0x000000000000FFFF
+			dq	0xFFFFFFFFFFFFFFFF, 0x0000000000FFFFFF
+
+			dq	0xFFFFFFFFFFFFFFFF, 0x00000000FFFFFFFF
+			dq	0xFFFFFFFFFFFFFFFF, 0x000000FFFFFFFFFF
+			dq	0xFFFFFFFFFFFFFFFF, 0x0000FFFFFFFFFFFF
+			dq	0xFFFFFFFFFFFFFFFF, 0x00FFFFFFFFFFFFFF
+
+maskS2		dq	0xFFFFFFFFFFFFFFFF, 0xFFFFFFFFFFFFFFFF
+
+align 16
+maskV1		dq	0x0000000000000000, 0x0000000000000000
+			dq	0x0000000000000000, 0xFF00000000000000
+			dq	0x0000000000000000, 0xFFFF000000000000
+			dq	0x0000000000000000, 0xFFFFFF0000000000
+			dq	0x0000000000000000, 0xFFFFFFFF00000000
+			dq	0x0000000000000000, 0xFFFFFFFFFF000000
+			dq	0x0000000000000000, 0xFFFFFFFFFFFF0000
+			dq	0x0000000000000000, 0xFFFFFFFFFFFFFF00
+			dq	0x0000000000000000, 0xFFFFFFFFFFFFFFFF
+			dq	0xFF00000000000000, 0xFFFFFFFFFFFFFFFF
+			dq	0xFFFF000000000000, 0xFFFFFFFFFFFFFFFF
+			dq	0xFFFFFF0000000000, 0xFFFFFFFFFFFFFFFF
+			dq	0xFFFFFFFF00000000, 0xFFFFFFFFFFFFFFFF
+			dq	0xFFFFFFFFFF000000, 0xFFFFFFFFFFFFFFFF
+			dq	0xFFFFFFFFFFFF0000, 0xFFFFFFFFFFFFFFFF
+			dq	0xFFFFFFFFFFFFFF00, 0xFFFFFFFFFFFFFFFF
+maskV2		dq	0xFFFFFFFFFFFFFFFF, 0xFFFFFFFFFFFFFFFF
 
 ;###############################################################################
 ;#                                 END OF FILE                                 #
