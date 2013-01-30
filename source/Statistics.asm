@@ -188,34 +188,34 @@ public	AbsDeviation_flt64		as	'_ZN10Statistics17AbsoluteDeviationEPKdmd'
 ;==============================================================================;
 
 ; Unsigned integer types
-public	QuartRange_uint8			as	'Statistics_InterquartileRange_uint8'
-public	QuartRange_uint16			as	'Statistics_InterquartileRange_uint16'
-public	QuartRange_uint32			as	'Statistics_InterquartileRange_uint32'
-public	QuartRange_uint64			as	'Statistics_InterquartileRange_uint64'
-public	QuartRange_uint8			as	'_ZN10Statistics18InterquartileRangeEPhm'
-public	QuartRange_uint16			as	'_ZN10Statistics18InterquartileRangeEPtm'
-public	QuartRange_uint32			as	'_ZN10Statistics18InterquartileRangeEPjm'
-public	QuartRange_uint64			as	'_ZN10Statistics18InterquartileRangeEPym'
+public	QuartRange_uint8		as	'Statistics_InterquartileRange_uint8'
+public	QuartRange_uint16		as	'Statistics_InterquartileRange_uint16'
+public	QuartRange_uint32		as	'Statistics_InterquartileRange_uint32'
+public	QuartRange_uint64		as	'Statistics_InterquartileRange_uint64'
+public	QuartRange_uint8		as	'_ZN10Statistics18InterquartileRangeEPhm'
+public	QuartRange_uint16		as	'_ZN10Statistics18InterquartileRangeEPtm'
+public	QuartRange_uint32		as	'_ZN10Statistics18InterquartileRangeEPjm'
+public	QuartRange_uint64		as	'_ZN10Statistics18InterquartileRangeEPym'
 
 ; Signed integer types
-public	QuartRange_sint8			as	'Statistics_InterquartileRange_sint8'
-public	QuartRange_sint16			as	'Statistics_InterquartileRange_sint16'
-public	QuartRange_sint32			as	'Statistics_InterquartileRange_sint32'
-public	QuartRange_sint64			as	'Statistics_InterquartileRange_sint64'
-public	QuartRange_sint8			as	'_ZN10Statistics18InterquartileRangeEPam'
-public	QuartRange_sint16			as	'_ZN10Statistics18InterquartileRangeEPsm'
-public	QuartRange_sint32			as	'_ZN10Statistics18InterquartileRangeEPim'
-public	QuartRange_sint64			as	'_ZN10Statistics18InterquartileRangeEPxm'
+public	QuartRange_sint8		as	'Statistics_InterquartileRange_sint8'
+public	QuartRange_sint16		as	'Statistics_InterquartileRange_sint16'
+public	QuartRange_sint32		as	'Statistics_InterquartileRange_sint32'
+public	QuartRange_sint64		as	'Statistics_InterquartileRange_sint64'
+public	QuartRange_sint8		as	'_ZN10Statistics18InterquartileRangeEPam'
+public	QuartRange_sint16		as	'_ZN10Statistics18InterquartileRangeEPsm'
+public	QuartRange_sint32		as	'_ZN10Statistics18InterquartileRangeEPim'
+public	QuartRange_sint64		as	'_ZN10Statistics18InterquartileRangeEPxm'
 
 ; Floating-point types
-public	QuartRange_flt32			as	'Statistics_InterquartileRange_flt32'
-public	QuartRange_flt64			as	'Statistics_InterquartileRange_flt64'
-public	QuartRange_flt32			as	'_ZN10Statistics18InterquartileRangeEPfm'
-public	QuartRange_flt64			as	'_ZN10Statistics18InterquartileRangeEPdm'
+public	QuartRange_flt32		as	'Statistics_InterquartileRange_flt32'
+public	QuartRange_flt64		as	'Statistics_InterquartileRange_flt64'
+public	QuartRange_flt32		as	'_ZN10Statistics18InterquartileRangeEPfm'
+public	QuartRange_flt64		as	'_ZN10Statistics18InterquartileRangeEPdm'
 
 ; Other types
-public	QuartRange_uint64			as	'Statistics_InterquartileRange_size'
-public	QuartRange_uint64			as	'_ZN10Statistics18InterquartileRangeEPmm'
+public	QuartRange_uint64		as	'Statistics_InterquartileRange_size'
+public	QuartRange_uint64		as	'_ZN10Statistics18InterquartileRangeEPmm'
 
 ;==============================================================================;
 ;       Range                                                                  ;
@@ -245,11 +245,11 @@ public	Kurtosis_flt64			as	'_ZN10Statistics8KurtosisEPKdmd'
 ;       Other functions                                                        ;
 ;******************************************************************************;
 
-; Covariation
-public	Covariation_flt32		as	'Statistics_Covariation_flt32'
-public	Covariation_flt64		as	'Statistics_Covariation_flt64'
-public	Covariation_flt32		as	'_ZN10Statistics11CovariationEPKffS1_fm'
-public	Covariation_flt64		as	'_ZN10Statistics11CovariationEPKddS1_dm'
+; Covariance
+public	Covariance_flt32		as	'Statistics_Covariance_flt32'
+public	Covariance_flt64		as	'Statistics_Covariance_flt64'
+public	Covariance_flt32		as	'_ZN10Statistics10CovarianceEPKffS1_fm'
+public	Covariance_flt64		as	'_ZN10Statistics10CovarianceEPKddS1_dm'
 
 ; Correlation
 public	Correlation_flt32		as	'Statistics_Correlation_flt32'
@@ -261,18 +261,6 @@ public	Correlation_flt64		as	'_ZN10Statistics11CorrelationEPKddS1_dm'
 ;#      Code section                                                           #
 ;###############################################################################
 section	'.text'		executable align 16
-
-;******************************************************************************;
-;       Consts                                                                 ;
-;******************************************************************************;
-
-; flt32_t
-HALF_FLT32	= 0x3F000000					; 0.5
-BIAS_FLT32	= 0x40400000					; 3.0
-
-; flt64_t
-HALF_FLT64	= 0x3FE0000000000000			; 0.5
-BIAS_FLT64	= 0x4008000000000000			; 3.0
 
 ;******************************************************************************;
 ;       Measures of location                                                   ;
@@ -738,8 +726,8 @@ end if
 		jnz		.sloop						;     then skip vector code
 ;---[Normal execution branch]--------------
 		mov		aindex, array
-		and		array, not VMASK			; align pointer to vector boundary
 		and		aindex, VMASK				; get array offset from vector boundary
+		sub		array, aindex				; align pointer to vector boundary
 		mov		ptr, array					; ptr = array
 		shufp#x	vector, vector, 0x0			; duplicate value through the entire register
 if type = 2
@@ -1135,8 +1123,8 @@ bmask	= bytes - 1							; elements aligning mask
 		jnz		.sloop						;     then skip vector code
 ;---[Normal execution branch]--------------
 		mov		aindex, array
-		and		array, not VMASK			; align pointer to vector boundary
 		and		aindex, VMASK				; get array offset from vector boundary
+		sub		array, aindex				; align pointer to vector boundary
 		mov		ptr, array					; ptr = array
 		shufp#x	vector, vector, 0x0			; duplicate value through the entire register
 		xorp#x	sum2, sum2					; sum2 = 0
@@ -1238,7 +1226,7 @@ bmask	= bytes - 1							; elements aligning mask
 ;---[Scalar loop]--------------------------
 .sloop:	movs#x	temp0, [array]				; temp0 = array[0]
 		subs#x	temp0, vector				; temp0 -= vector
-		movap#x	temp1, temp0				; temp1 = temp0
+		movs#x	temp1, temp0				; temp1 = temp0
 		muls#x	temp0, temp0
 		adds#x	sum0, temp0					; sum0 += (array[0] - mean)^2
 		muls#x	temp0, temp1
@@ -1251,7 +1239,7 @@ bmask	= bytes - 1							; elements aligning mask
 		muls#x	sum0, temp0
 		divs#x	sum1, sum0
 		muls#x	sum1, asize
-		movap#x	result, sum1				; return asize * sum1 / (sum0 * sqrt (sum0))
+		movs#x	result, sum1				; return asize * sum1 / (sum0 * sqrt (sum0))
 		ret
 ;---[Error branch]-------------------------
 .error:	initreg	result, index, nan			; return NaN
@@ -1292,11 +1280,11 @@ zero	equ		xmm13						; 0
 asize 	equ		xmm14						; normalized array size
 bias	equ		xmm15						; normal distribution bias
 if x eq s
-biasval	= BIAS_FLT32						; bias const (3.0 for normal distribution)
+biasval	= 0x40400000						; bias const (3.0 for normal distribution)
 nan		= DMASK_FLT32						; NaN
 scale	= 2									; scale value
 else if x eq d
-biasval	= BIAS_FLT64						; bias const (3.0 for normal distribution)
+biasval	= 0x4008000000000000				; bias const (3.0 for normal distribution)
 nan		= DMASK_FLT64						; NaN
 scale	= 3									; scale value
 end if
@@ -1331,8 +1319,8 @@ bmask	= bytes - 1							; elements aligning mask
 		jnz		.sloop						;     then skip vector code
 ;---[Normal execution branch]--------------
 		mov		aindex, array
-		and		array, not VMASK			; align pointer to vector boundary
 		and		aindex, VMASK				; get array offset from vector boundary
+		sub		array, aindex				; align pointer to vector boundary
 		mov		ptr, array					; ptr = array
 		shufp#x	vector, vector, 0x0			; duplicate value through the entire register
 		xorp#x	sum2, sum2					; sum2 = 0
@@ -1440,7 +1428,7 @@ bmask	= bytes - 1							; elements aligning mask
 		divs#x	sum1, sum0
 		muls#x	sum1, asize
 		subs#x	sum1, bias
-		movap#x	result, sum1				; return asize * sum1 / (sum0 * sum0) - bias
+		movs#x	result, sum1				; return asize * sum1 / (sum0 * sum0) - bias
 		ret
 ;---[Error branch]-------------------------
 .error:	initreg	result, index, nan			; return NaN
@@ -1454,9 +1442,9 @@ Kurtosis_flt64:	KURTOSIS	d
 ;******************************************************************************;
 
 ;==============================================================================;
-;       Covariation                                                            ;
+;       Covariance                                                             ;
 ;==============================================================================;
-macro	COVARIATION		x
+macro	COVARIANCE		x
 {
 ;---[Parameters]---------------------------
 array1	equ		rdi							; pointer to first array
@@ -1512,8 +1500,8 @@ bmask	= bytes - 1							; elements aligning mask
 ;---[Normal execution branch]--------------
 		mov		ptr2, array2				; ptr2 = array2
 		mov		ptr1, array1				; ptr1 = array1
-		mov		aindex, VMASK
-		and		aindex, array1				; get array offset from vector boundary
+		mov		aindex, array1
+		and		aindex, VMASK				; get array offset from vector boundary
 		sub		ptr2, aindex				; ptr2 = array2 - aindex
 		sub		ptr1, aindex				; ptr1 = array1 - aindex
 		xor		index, index				; index = 0
@@ -1618,8 +1606,8 @@ bmask	= bytes - 1							; elements aligning mask
 .error:	initreg	result, index, nan			; return NaN
 		ret
 }
-Covariation_flt32:	COVARIATION	s
-Covariation_flt64:	COVARIATION	d
+Covariance_flt32:	COVARIANCE	s
+Covariance_flt64:	COVARIANCE	d
 
 ;==============================================================================;
 ;       Correlation                                                            ;
@@ -1677,8 +1665,8 @@ bmask	= bytes - 1							; elements aligning mask
 ;---[Normal execution branch]--------------
 		mov		ptr2, array2				; ptr2 = array2
 		mov		ptr1, array1				; ptr1 = array1
-		mov		aindex, VMASK
-		and		aindex, array1				; get array offset from vector boundary
+		mov		aindex, array1
+		and		aindex, VMASK				; get array offset from vector boundary
 		sub		ptr2, aindex				; ptr2 = array2 - aindex
 		sub		ptr1, aindex				; ptr1 = array1 - aindex
 		xor		index, index				; index = 0
@@ -1798,7 +1786,7 @@ bmask	= bytes - 1							; elements aligning mask
 		subs#x	a2temp, vector2				; a2temp -= vector2
 		movs#x	a1temp, [array1]			; a1temp = array1[0]
 		subs#x	a1temp, vector1				; a1temp -= vector1
-		movap#x	temp, a2temp
+		movs#x	temp, a2temp
 		muls#x	temp, a1temp				; temp = a1temp * a2temp
 		adds#x	sum0, temp					; sum0 += temp
 		muls#x	a2temp, a2temp				; a2temp *= a2temp
@@ -1813,7 +1801,7 @@ bmask	= bytes - 1							; elements aligning mask
 		muls#x	sum1, sum2
 		sqrts#x	sum1, sum1
 		divs#x	sum0, sum1
-		movap#x	result, sum0				; return sum0 / sqrt (sum1 * sum2)
+		movs#x	result, sum0				; return sum0 / sqrt (sum1 * sum2)
 		ret
 ;---[Error branch]-------------------------
 .error:	initreg	result, index, nan			; return NaN

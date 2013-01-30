@@ -172,9 +172,9 @@ static flt64_t Kurtosis (const flt64_t array[], size_t size, flt64_t mean);
 //      Other functions                                                       //
 //****************************************************************************//
 
-// Covariation
-static flt32_t Covariation (const flt32_t arr1[], flt32_t mean1, const flt32_t arr2[], flt32_t mean2, size_t size);
-static flt64_t Covariation (const flt64_t arr1[], flt64_t mean1, const flt64_t arr2[], flt64_t mean2, size_t size);
+// Covariance
+static flt32_t Covariance (const flt32_t arr1[], flt32_t mean1, const flt32_t arr2[], flt32_t mean2, size_t size);
+static flt64_t Covariance (const flt64_t arr1[], flt64_t mean1, const flt64_t arr2[], flt64_t mean2, size_t size);
 
 // Correlation
 static flt32_t Correlation (const flt32_t arr1[], flt32_t mean1, const flt32_t arr2[], flt32_t mean2, size_t size);
@@ -338,9 +338,9 @@ flt64_t Statistics_Kurtosis_flt64 (const flt64_t array[], size_t size, flt64_t m
 //      Other functions                                                       //
 //****************************************************************************//
 
-// Covariation
-flt32_t Statistics_Covariation_flt32 (const flt32_t arr1[], flt32_t mean1, const flt32_t arr2[], flt32_t mean2, size_t size);
-flt64_t Statistics_Covariation_flt64 (const flt64_t arr1[], flt64_t mean1, const flt64_t arr2[], flt64_t mean2, size_t size);
+// Covariance
+flt32_t Statistics_Covariance_flt32 (const flt32_t arr1[], flt32_t mean1, const flt32_t arr2[], flt32_t mean2, size_t size);
+flt64_t Statistics_Covariance_flt64 (const flt64_t arr1[], flt64_t mean1, const flt64_t arr2[], flt64_t mean2, size_t size);
 
 // Correlation
 flt32_t Statistics_Correlation_flt32 (const flt32_t arr1[], flt32_t mean1, const flt32_t arr2[], flt32_t mean2, size_t size);
