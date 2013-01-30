@@ -133,7 +133,7 @@ macro	ldzero	addr, x
 {
 if x eq s
 		mov		dword [addr], 0				; addr[0] = 0
-else
+else if x eq d
 		mov		qword [addr], 0				; addr[0] = 0
 end if
 }
@@ -146,7 +146,7 @@ macro	ldvalue	addr, treg, value, x
 		mov		treg, value
 if x eq s
 		mov		dword [addr], treg			; addr[0] = value
-else
+else if x eq d
 		mov		qword [addr], treg			; addr[0] = value
 end if
 }
@@ -159,7 +159,7 @@ macro	initreg	reg, treg, value, x
 		mov		treg, value
 if x eq s
 		movd	reg, treg					; reg = value
-else
+else if x eq d
 		movq	reg, treg					; reg = value
 end if
 }
@@ -179,7 +179,7 @@ mask	equ		xmm1						; sign mask for inverting sign
 if x eq s
 smask	= 0x80000000						; sign mask value
 bytes	= 4									; array element size (bytes)
-else
+else if x eq d
 smask	= 0x8000000000000000				; sign mask value
 bytes	= 8									; array element size (bytes)
 end if
@@ -228,7 +228,7 @@ if x eq s
 Sin		= Sin_flt32							; Sine function
 pi		= PI_FLT32							; Pi
 bytes	= 4									; array element size (bytes)
-else
+else if x eq d
 Sin		= Sin_flt64							; Sine function
 pi		= PI_FLT64							; Pi
 bytes	= 8									; array element size (bytes)
@@ -288,7 +288,7 @@ if x eq s
 Cos		= Cos_flt32							; Cosine function
 pi		= PI_FLT32							; Pi
 bytes	= 4									; array element size (bytes)
-else
+else if x eq d
 Cos		= Cos_flt32							; Cosine function
 pi		= PI_FLT64							; Pi
 bytes	= 8									; array element size (bytes)
@@ -361,7 +361,7 @@ SinCos	= SinCos_flt32						; Cosine function
 pi		= PI_FLT32							; Pi
 one		= ONE_FLT32							; 1.0
 bytes	= 4									; array element size (bytes)
-else
+else if x eq d
 SinCos	= SinCos_flt32						; Cosine function
 pi		= PI_FLT64							; Pi
 one		= ONE_FLT64							; 1.0
@@ -461,7 +461,7 @@ ArrMul	= Mul_flt32							; Scalar multiplication of array
 win		= win_flt32							; array of window functions
 oneval	= ONE_FLT32							; 1.0
 bytes	= 4									; array element size (bytes)
-else
+else if x eq d
 Sinc	= SincCore_flt64					; Sinc filter core
 ArrSum	= Sum_flt64							; Sum of elements
 ArrMul	= Mul_flt64							; Scalar multiplication of array
@@ -542,7 +542,7 @@ PosRefl	= PosReflect_flt32					; Positive reflection
 halfval	= HALF_FLT32						; 0.5
 oneval	= ONE_FLT32							; 1.0
 bytes	= 4									; array element size (bytes)
-else
+else if x eq d
 LowPass	= LowPassCore_flt64					; Low-pass filter core
 ArrSub	= Sub_flt64							; Vector subtraction of arrays
 PosRefl	= PosReflect_flt64					; Positive reflection
@@ -641,7 +641,7 @@ NegRefl	= NegReflect_flt32					; Negative reflection
 win		= win_flt32							; array of window functions
 halfval	= HALF_FLT32						; 0.5
 bytes	= 4									; array element size (bytes)
-else
+else if x eq d
 NegRefl	= NegReflect_flt64					; Negative reflection
 win		= win_flt64							; array of window functions
 halfval	= HALF_FLT64						; 0.5
@@ -721,7 +721,7 @@ space	= 5 * 8								; stack size required by the procedure
 if x eq s
 Conv	= SumMul_flt32						; Convolution function
 bytes	= 4									; array element size (bytes)
-else
+else if x eq d
 Conv	= SumMul_flt64						; Convolution function
 bytes	= 8									; array element size (bytes)
 end if

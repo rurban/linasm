@@ -567,7 +567,7 @@ if x eq s
 inf		= inf_flt32
 nan		= nan_flt32
 bytes	= 4
-else
+else if x eq d
 inf		= inf_flt64
 nan		= nan_flt64
 bytes	= 8
@@ -617,7 +617,7 @@ p_num	equ		rdi							; pointer to number
 string	equ		rsi							; source string
 ;---[Internal variables]-------------------
 ptr		equ		rax							; temporary pointer to string
-value	equ		rdx							; register that holds number value
+value	equ		rdx							; register which holds number value
 temp	equ		rcx							; temporary register
 limit	equ		r8							; max number value
 max		equ		r10							; max value
@@ -669,7 +669,7 @@ p_num	equ		rdi							; pointer to number
 string	equ		rsi							; source string
 ;---[Internal variables]-------------------
 ptr		equ		rax							; temporary pointer to string
-value	equ		rdx							; register that holds number value
+value	equ		rdx							; register which holds number value
 temp	equ		rcx							; temporary register
 limit	equ		r8							; max number value
 sign	equ		r9							; number sign

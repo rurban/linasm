@@ -103,7 +103,7 @@ macro	initreg	reg, treg, value, x
 		mov		treg, value
 if x eq s
 		movd	reg, treg
-else
+else if x eq d
 		movq	reg, treg
 end if
 }
@@ -191,7 +191,7 @@ angle	= PI_FLT32							; Pi
 win		= black_nutt_win_flt32				; Blackman–Nuttall window coefficients
 end if
 bytes	= 4									; array element size (bytes)
-else
+else if x eq d
 if window eq SINE
 Func	= Sin_flt64							; Sine Function
 angle	= PI_HALF_FLT64						; Pi / 2
@@ -302,7 +302,7 @@ win		= black_nutt_win_flt32				; Blackman–Nuttall window coefficients
 end if
 reflect	= Reflect_flt32						; Array reflection Function
 bytes	= 4									; array element size (bytes)
-else
+else if x eq d
 if window eq SINE
 Func	= Sin_flt64							; Sine Function
 angle	= PI_FLT64							; Pi
