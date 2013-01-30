@@ -18,7 +18,7 @@
 # define	STR_GREATER	(+1) 		// First string is greater than second string
 
 //****************************************************************************//
-//      Compare function types                                                //
+//      Compare function prototypes                                           //
 //****************************************************************************//
 typedef	sint32_t (*Cmp_char8) (const char8_t string1[], const char8_t string2[]);
 typedef	sint32_t (*Cmp_char16) (const char16_t string1[], const char16_t string2[]);
