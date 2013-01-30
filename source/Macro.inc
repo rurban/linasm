@@ -22,10 +22,12 @@ NOT_FOUND	= -1							; Pattern is not found
 ; flt32_t
 DMASK_FLT32	= 0x7FFFFFFF					; data mask and NaN value
 SMASK_FLT32	= 0x80000000					; sign mask
+HALF_FLT32	= 0x3F000000					; 0.5
 
 ; flt64_t
 DMASK_FLT64	= 0x7FFFFFFFFFFFFFFF			; data mask and NaN value
 SMASK_FLT64	= 0x8000000000000000			; sign mask
+HALF_FLT64	= 0x3FE0000000000000			; 0.5
 
 ;******************************************************************************;
 ;       Clone value through the entire register                                ;
