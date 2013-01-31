@@ -1864,6 +1864,7 @@ macro	FIND_FWD	result, x
 array	equ		rdi							; pointer to array of strings
 size	equ		rsi							; array size (count of elements)
 string	equ		rdx							; string to find
+func	equ		rcx							; pointer to string compare function
 ;---[Internal variables]-------------------
 ptr		equ		rax							; pointer to current element
 str1	equ		rdi							; pointer to first string
@@ -1873,13 +1874,6 @@ s_array	equ		stack + 0 * 8				; stack position of "array" variable
 s_size	equ		stack + 1 * 8				; stack position of "size" variable
 s_str	equ		stack + 2 * 8				; stack position of "string" variable
 s_ptr	equ		stack + 3 * 8				; stack position of "ptr" variable
-if x eq b
-compare	= Compare1_char8					; compare function
-else if x eq w
-compare	= Compare1_char16					; compare function
-else if x eq d
-compare	= Compare1_char32					; compare function
-end if
 space	= 5 * 8								; stack size required by the procedure
 ;------------------------------------------
 		test	size, size					; if (size == 0)
@@ -1894,7 +1888,7 @@ space	= 5 * 8								; stack size required by the procedure
 .loop:	mov		ptr, [s_ptr]
 		mov		str1, [ptr]
 		mov		str2, [s_str]
-		call	compare						; result = Compare (ptr[0], string)
+		call	func						; result = Compare (ptr[0], string)
 		test	result, result				; if (result == 0)
 		jz		.found						;     then go to found branch
 		add		qword [s_ptr], 8			; ptr++
@@ -1925,6 +1919,7 @@ macro	FIND_BWD	result, x
 array	equ		rdi							; pointer to array of strings
 size	equ		rsi							; array size (count of elements)
 string	equ		rdx							; string to find
+func	equ		rcx							; pointer to string compare function
 ;---[Internal variables]-------------------
 ptr		equ		rax							; pointer to current element
 str1	equ		rdi							; pointer to first string
@@ -1934,13 +1929,6 @@ s_array	equ		stack + 0 * 8				; stack position of "array" variable
 s_size	equ		stack + 1 * 8				; stack position of "size" variable
 s_str	equ		stack + 2 * 8				; stack position of "string" variable
 s_ptr	equ		stack + 3 * 8				; stack position of "ptr" variable
-if x eq b
-compare	= Compare1_char8					; compare function
-else if x eq w
-compare	= Compare1_char16					; compare function
-else if x eq d
-compare	= Compare1_char32					; compare function
-end if
 space	= 5 * 8								; stack size required by the procedure
 ;------------------------------------------
 		test	size, size					; if (size == 0)
@@ -1956,7 +1944,7 @@ space	= 5 * 8								; stack size required by the procedure
 		mov		ptr, [s_ptr]
 		mov		str1, [ptr]
 		mov		str2, [s_str]
-		call	compare						; result = Compare (ptr[0], string)
+		call	func						; result = Compare (ptr[0], string)
 		test	result, result				; if (result == 0)
 		jz		.found						;     then go to found branch
 		sub		qword [s_size], 1			; size--

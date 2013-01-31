@@ -133,14 +133,14 @@ static size_t FindString (const char32_t string[], size_t size, const char32_t p
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
 // Forward direction search
-static size_t FindFwd (const char8_t* array[], size_t size, const char8_t string[]);
-static size_t FindFwd (const char16_t* array[], size_t size, const char16_t string[]);
-static size_t FindFwd (const char32_t* array[], size_t size, const char32_t string[]);
+static size_t FindFwd (const char8_t* array[], size_t size, const char8_t string[], Cmp_char8 func);
+static size_t FindFwd (const char16_t* array[], size_t size, const char16_t string[], Cmp_char16 func);
+static size_t FindFwd (const char32_t* array[], size_t size, const char32_t string[], Cmp_char32 func);
 
 // Backward direction search
-static size_t FindBwd (const char8_t* array[], size_t size, const char8_t string[]);
-static size_t FindBwd (const char16_t* array[], size_t size, const char16_t string[]);
-static size_t FindBwd (const char32_t* array[], size_t size, const char32_t string[]);
+static size_t FindBwd (const char8_t* array[], size_t size, const char8_t string[], Cmp_char8 func);
+static size_t FindBwd (const char16_t* array[], size_t size, const char16_t string[], Cmp_char16 func);
+static size_t FindBwd (const char32_t* array[], size_t size, const char32_t string[], Cmp_char32 func);
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 //      Binary search                                                         //
@@ -302,14 +302,14 @@ size_t String_FindStringN_char32 (const char32_t string[], size_t size, const ch
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
 // Forward direction search
-size_t String_FindFwd_char8 (const char8_t* array[], size_t size, const char8_t string[]);
-size_t String_FindFwd_char16 (const char16_t* array[], size_t size, const char16_t string[]);
-size_t String_FindFwd_char32 (const char32_t* array[], size_t size, const char32_t string[]);
+size_t String_FindFwd_char8 (const char8_t* array[], size_t size, const char8_t string[], Cmp_char8 func);
+size_t String_FindFwd_char16 (const char16_t* array[], size_t size, const char16_t string[], Cmp_char16 func);
+size_t String_FindFwd_char32 (const char32_t* array[], size_t size, const char32_t string[], Cmp_char32 func);
 
 // Backward direction search
-size_t String_FindBwd_char8 (const char8_t* array[], size_t size, const char8_t string[]);
-size_t String_FindBwd_char16 (const char16_t* array[], size_t size, const char16_t string[]);
-size_t String_FindBwd_char32 (const char32_t* array[], size_t size, const char32_t string[]);
+size_t String_FindBwd_char8 (const char8_t* array[], size_t size, const char8_t string[], Cmp_char8 func);
+size_t String_FindBwd_char16 (const char16_t* array[], size_t size, const char16_t string[], Cmp_char16 func);
+size_t String_FindBwd_char32 (const char32_t* array[], size_t size, const char32_t string[], Cmp_char32 func);
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 //      Binary search                                                         //
