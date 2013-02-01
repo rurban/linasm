@@ -328,35 +328,115 @@ static void Sqrt (flt64_t array[], size_t size);
 //      Addition                                                              //
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
-// Scalar addition
+//----------------------------------------------------------------------------//
+//      Scalar addition                                                       //
+//----------------------------------------------------------------------------//
+
+// Unsigned integer types
+static void Add (uint8_t array[], size_t size, uint8_t value);
+static void Add (uint16_t array[], size_t size, uint16_t value);
+static void Add (uint32_t array[], size_t size, uint32_t value);
+static void Add (uint64_t array[], size_t size, uint64_t value);
+
+// Signed integer types
+static void Add (sint8_t array[], size_t size, sint8_t value);
+static void Add (sint16_t array[], size_t size, sint16_t value);
+static void Add (sint32_t array[], size_t size, sint32_t value);
+static void Add (sint64_t array[], size_t size, sint64_t value);
+
+// Floating-point types
 static void Add (flt32_t array[], size_t size, flt32_t value);
 static void Add (flt64_t array[], size_t size, flt64_t value);
 
-// Vector addition
+// Other types
+static void Add (size_t array[], size_t size, size_t value);
+
+//----------------------------------------------------------------------------//
+//      Vector addition                                                       //
+//----------------------------------------------------------------------------//
+
+// Unsigned integer types
+static void Add (uint8_t target[], const uint8_t source[], size_t size);
+static void Add (uint16_t target[], const uint16_t source[], size_t size);
+static void Add (uint32_t target[], const uint32_t source[], size_t size);
+static void Add (uint64_t target[], const uint64_t source[], size_t size);
+
+// Signed integer types
+static void Add (sint8_t target[], const sint8_t source[], size_t size);
+static void Add (sint16_t target[], const sint16_t source[], size_t size);
+static void Add (sint32_t target[], const sint32_t source[], size_t size);
+static void Add (sint64_t target[], const sint64_t source[], size_t size);
+
+// Floating-point types
 static void Add (flt32_t target[], const flt32_t source[], size_t size);
 static void Add (flt64_t target[], const flt64_t source[], size_t size);
+
+// Other types
+static void Add (size_t target[], const size_t source[], size_t size);
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 //      Subtraction                                                           //
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
-// Scalar subtraction
+//----------------------------------------------------------------------------//
+//      Scalar subtraction                                                    //
+//----------------------------------------------------------------------------//
+
+// Unsigned integer types
+static void Sub (uint8_t array[], size_t size, uint8_t value);
+static void Sub (uint16_t array[], size_t size, uint16_t value);
+static void Sub (uint32_t array[], size_t size, uint32_t value);
+static void Sub (uint64_t array[], size_t size, uint64_t value);
+
+// Signed integer types
+static void Sub (sint8_t array[], size_t size, sint8_t value);
+static void Sub (sint16_t array[], size_t size, sint16_t value);
+static void Sub (sint32_t array[], size_t size, sint32_t value);
+static void Sub (sint64_t array[], size_t size, sint64_t value);
+
+// Floating-point types
 static void Sub (flt32_t array[], size_t size, flt32_t value);
 static void Sub (flt64_t array[], size_t size, flt64_t value);
 
-// Vector subtraction
+// Other types
+static void Sub (size_t array[], size_t size, size_t value);
+
+//----------------------------------------------------------------------------//
+//      Vector subtraction                                                    //
+//----------------------------------------------------------------------------//
+
+// Unsigned integer types
+static void Sub (uint8_t target[], const uint8_t source[], size_t size);
+static void Sub (uint16_t target[], const uint16_t source[], size_t size);
+static void Sub (uint32_t target[], const uint32_t source[], size_t size);
+static void Sub (uint64_t target[], const uint64_t source[], size_t size);
+
+// Signed integer types
+static void Sub (sint8_t target[], const sint8_t source[], size_t size);
+static void Sub (sint16_t target[], const sint16_t source[], size_t size);
+static void Sub (sint32_t target[], const sint32_t source[], size_t size);
+static void Sub (sint64_t target[], const sint64_t source[], size_t size);
+
+// Floating-point types
 static void Sub (flt32_t target[], const flt32_t source[], size_t size);
 static void Sub (flt64_t target[], const flt64_t source[], size_t size);
+
+// Other types
+static void Sub (size_t target[], const size_t source[], size_t size);
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 //      Multiplication                                                        //
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
-// Scalar multiplication
+//----------------------------------------------------------------------------//
+//      Scalar multiplication                                                 //
+//----------------------------------------------------------------------------//
 static void Mul (flt32_t array[], size_t size, flt32_t value);
 static void Mul (flt64_t array[], size_t size, flt64_t value);
 
-// Vector multiplication
+//----------------------------------------------------------------------------//
+//      Vector multiplication                                                 //
+//----------------------------------------------------------------------------//
 static void Mul (flt32_t target[], const flt32_t source[], size_t size);
 static void Mul (flt64_t target[], const flt64_t source[], size_t size);
 
@@ -364,11 +444,15 @@ static void Mul (flt64_t target[], const flt64_t source[], size_t size);
 //      Division                                                              //
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
-// Scalar division
+//----------------------------------------------------------------------------//
+//      Scalar division                                                       //
+//----------------------------------------------------------------------------//
 static void Div (flt32_t array[], size_t size, flt32_t value);
 static void Div (flt64_t array[], size_t size, flt64_t value);
 
-// Vector division
+//----------------------------------------------------------------------------//
+//      Vector division                                                       //
+//----------------------------------------------------------------------------//
 static void Div (flt32_t target[], const flt32_t source[], size_t size);
 static void Div (flt64_t target[], const flt64_t source[], size_t size);
 
@@ -1261,35 +1345,115 @@ void Array_Sqrt_flt64 (flt64_t array[], size_t size);
 //      Addition                                                              //
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
-// Scalar addition
+//----------------------------------------------------------------------------//
+//      Scalar addition                                                       //
+//----------------------------------------------------------------------------//
+
+// Unsigned integer types
+void Array_AddScalar_uint8 (uint8_t array[], size_t size, uint8_t value);
+void Array_AddScalar_uint16 (uint16_t array[], size_t size, uint16_t value);
+void Array_AddScalar_uint32 (uint32_t array[], size_t size, uint32_t value);
+void Array_AddScalar_uint64 (uint64_t array[], size_t size, uint64_t value);
+
+// Signed integer types
+void Array_AddScalar_sint8 (sint8_t array[], size_t size, sint8_t value);
+void Array_AddScalar_sint16 (sint16_t array[], size_t size, sint16_t value);
+void Array_AddScalar_sint32 (sint32_t array[], size_t size, sint32_t value);
+void Array_AddScalar_sint64 (sint64_t array[], size_t size, sint64_t value);
+
+// Floating-point types
 void Array_AddScalar_flt32 (flt32_t array[], size_t size, flt32_t value);
 void Array_AddScalar_flt64 (flt64_t array[], size_t size, flt64_t value);
 
-// Vector addition
+// Other types
+void Array_AddScalar_size (size_t array[], size_t size, size_t value);
+
+//----------------------------------------------------------------------------//
+//      Vector addition                                                       //
+//----------------------------------------------------------------------------//
+
+// Unsigned integer types
+void Array_AddVector_uint8 (uint8_t target[], const uint8_t source[], size_t size);
+void Array_AddVector_uint16 (uint16_t target[], const uint16_t source[], size_t size);
+void Array_AddVector_uint32 (uint32_t target[], const uint32_t source[], size_t size);
+void Array_AddVector_uint64 (uint64_t target[], const uint64_t source[], size_t size);
+
+// Signed integer types
+void Array_AddVector_sint8 (sint8_t target[], const sint8_t source[], size_t size);
+void Array_AddVector_sint16 (sint16_t target[], const sint16_t source[], size_t size);
+void Array_AddVector_sint32 (sint32_t target[], const sint32_t source[], size_t size);
+void Array_AddVector_sint64 (sint64_t target[], const sint64_t source[], size_t size);
+
+// Floating-point types
 void Array_AddVector_flt32 (flt32_t target[], const flt32_t source[], size_t size);
 void Array_AddVector_flt64 (flt64_t target[], const flt64_t source[], size_t size);
+
+// Other types
+void Array_AddVector_size (size_t target[], const size_t source[], size_t size);
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 //      Subtraction                                                           //
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
-// Scalar subtraction
+//----------------------------------------------------------------------------//
+//      Scalar subtraction                                                    //
+//----------------------------------------------------------------------------//
+
+// Unsigned integer types
+void Array_SubScalar_uint8 (uint8_t array[], size_t size, uint8_t value);
+void Array_SubScalar_uint16 (uint16_t array[], size_t size, uint16_t value);
+void Array_SubScalar_uint32 (uint32_t array[], size_t size, uint32_t value);
+void Array_SubScalar_uint64 (uint64_t array[], size_t size, uint64_t value);
+
+// Signed integer types
+void Array_SubScalar_sint8 (sint8_t array[], size_t size, sint8_t value);
+void Array_SubScalar_sint16 (sint16_t array[], size_t size, sint16_t value);
+void Array_SubScalar_sint32 (sint32_t array[], size_t size, sint32_t value);
+void Array_SubScalar_sint64 (sint64_t array[], size_t size, sint64_t value);
+
+// Floating-point types
 void Array_SubScalar_flt32 (flt32_t array[], size_t size, flt32_t value);
 void Array_SubScalar_flt64 (flt64_t array[], size_t size, flt64_t value);
 
-// Vector subtraction
+// Other types
+void Array_SubScalar_size (size_t array[], size_t size, size_t value);
+
+//----------------------------------------------------------------------------//
+//      Vector subtraction                                                    //
+//----------------------------------------------------------------------------//
+
+// Unsigned integer types
+void Array_SubVector_uint8 (uint8_t target[], const uint8_t source[], size_t size);
+void Array_SubVector_uint16 (uint16_t target[], const uint16_t source[], size_t size);
+void Array_SubVector_uint32 (uint32_t target[], const uint32_t source[], size_t size);
+void Array_SubVector_uint64 (uint64_t target[], const uint64_t source[], size_t size);
+
+// Signed integer types
+void Array_SubVector_sint8 (sint8_t target[], const sint8_t source[], size_t size);
+void Array_SubVector_sint16 (sint16_t target[], const sint16_t source[], size_t size);
+void Array_SubVector_sint32 (sint32_t target[], const sint32_t source[], size_t size);
+void Array_SubVector_sint64 (sint64_t target[], const sint64_t source[], size_t size);
+
+// Floating-point types
 void Array_SubVector_flt32 (flt32_t target[], const flt32_t source[], size_t size);
 void Array_SubVector_flt64 (flt64_t target[], const flt64_t source[], size_t size);
+
+// Other types
+void Array_SubVector_size (size_t target[], const size_t source[], size_t size);
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 //      Multiplication                                                        //
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
-// Scalar multiplication
+//----------------------------------------------------------------------------//
+//      Scalar multiplication                                                 //
+//----------------------------------------------------------------------------//
 void Array_MulScalar_flt32 (flt32_t array[], size_t size, flt32_t value);
 void Array_MulScalar_flt64 (flt64_t array[], size_t size, flt64_t value);
 
-// Vector multiplication
+//----------------------------------------------------------------------------//
+//      Vector multiplication                                                 //
+//----------------------------------------------------------------------------//
 void Array_MulVector_flt32 (flt32_t target[], const flt32_t source[], size_t size);
 void Array_MulVector_flt64 (flt64_t target[], const flt64_t source[], size_t size);
 
@@ -1297,11 +1461,15 @@ void Array_MulVector_flt64 (flt64_t target[], const flt64_t source[], size_t siz
 //      Division                                                              //
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
-// Scalar division
+//----------------------------------------------------------------------------//
+//      Scalar division                                                       //
+//----------------------------------------------------------------------------//
 void Array_DivScalar_flt32 (flt32_t array[], size_t size, flt32_t value);
 void Array_DivScalar_flt64 (flt64_t array[], size_t size, flt64_t value);
 
-// Vector division
+//----------------------------------------------------------------------------//
+//      Vector division                                                       //
+//----------------------------------------------------------------------------//
 void Array_DivVector_flt32 (flt32_t target[], const flt32_t source[], size_t size);
 void Array_DivVector_flt64 (flt64_t target[], const flt64_t source[], size_t size);
 

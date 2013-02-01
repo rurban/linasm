@@ -459,45 +459,161 @@ public	Sqrt_flt64				as	'_ZN5Array4SqrtEPdm'
 ;       Addition                                                               ;
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 
-; Scalar addition
+;------------------------------------------------------------------------------;
+;       Scalar addition                                                        ;
+;------------------------------------------------------------------------------;
+
+; Unsigned integer types
+public	AddS8					as	'Array_AddScalar_uint8'
+public	AddS16					as	'Array_AddScalar_uint16'
+public	AddS32					as	'Array_AddScalar_uint32'
+public	AddS64					as	'Array_AddScalar_uint64'
+public	AddS8					as	'_ZN5Array3AddEPhmh'
+public	AddS16					as	'_ZN5Array3AddEPtmt'
+public	AddS32					as	'_ZN5Array3AddEPjmj'
+public	AddS64					as	'_ZN5Array3AddEPymy'
+
+; Signed integer types
+public	AddS8					as	'Array_AddScalar_sint8'
+public	AddS16					as	'Array_AddScalar_sint16'
+public	AddS32					as	'Array_AddScalar_sint32'
+public	AddS64					as	'Array_AddScalar_sint64'
+public	AddS8					as	'_ZN5Array3AddEPama'
+public	AddS16					as	'_ZN5Array3AddEPsms'
+public	AddS32					as	'_ZN5Array3AddEPimi'
+public	AddS64					as	'_ZN5Array3AddEPxmx'
+
+; Floating-point types
 public	AddS_flt32				as	'Array_AddScalar_flt32'
 public	AddS_flt64				as	'Array_AddScalar_flt64'
 public	AddS_flt32				as	'_ZN5Array3AddEPfmf'
 public	AddS_flt64				as	'_ZN5Array3AddEPdmd'
 
-; Vector addition
+; Other types
+public	AddS64					as	'Array_AddScalar_size'
+public	AddS64					as	'_ZN5Array3AddEPmmm'
+
+;------------------------------------------------------------------------------;
+;       Vector addition                                                        ;
+;------------------------------------------------------------------------------;
+
+; Unsigned integer types
+public	AddV8					as	'Array_AddVector_uint8'
+public	AddV16					as	'Array_AddVector_uint16'
+public	AddV32					as	'Array_AddVector_uint32'
+public	AddV64					as	'Array_AddVector_uint64'
+public	AddV8					as	'_ZN5Array3AddEPhPKhm'
+public	AddV16					as	'_ZN5Array3AddEPtPKtm'
+public	AddV32					as	'_ZN5Array3AddEPjPKjm'
+public	AddV64					as	'_ZN5Array3AddEPyPKym'
+
+; Signed integer types
+public	AddV8					as	'Array_AddVector_sint8'
+public	AddV16					as	'Array_AddVector_sint16'
+public	AddV32					as	'Array_AddVector_sint32'
+public	AddV64					as	'Array_AddVector_sint64'
+public	AddV8					as	'_ZN5Array3AddEPaPKam'
+public	AddV16					as	'_ZN5Array3AddEPsPKsm'
+public	AddV32					as	'_ZN5Array3AddEPiPKim'
+public	AddV64					as	'_ZN5Array3AddEPxPKxm'
+
+; Floating-point types
 public	AddV_flt32				as	'Array_AddVector_flt32'
 public	AddV_flt64				as	'Array_AddVector_flt64'
 public	AddV_flt32				as	'_ZN5Array3AddEPfPKfm'
 public	AddV_flt64				as	'_ZN5Array3AddEPdPKdm'
 
+; Other types
+public	AddV64					as	'Array_AddVector_size'
+public	AddV64					as	'_ZN5Array3AddEPmPKmm'
+
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 ;       Subtraction                                                            ;
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 
-; Scalar subtraction
+;------------------------------------------------------------------------------;
+;       Scalar subtraction                                                     ;
+;------------------------------------------------------------------------------;
+
+; Unsigned integer types
+public	SubS8					as	'Array_SubScalar_uint8'
+public	SubS16					as	'Array_SubScalar_uint16'
+public	SubS32					as	'Array_SubScalar_uint32'
+public	SubS64					as	'Array_SubScalar_uint64'
+public	SubS8					as	'_ZN5Array3SubEPhmh'
+public	SubS16					as	'_ZN5Array3SubEPtmt'
+public	SubS32					as	'_ZN5Array3SubEPjmj'
+public	SubS64					as	'_ZN5Array3SubEPymy'
+
+; Signed integer types
+public	SubS8					as	'Array_SubScalar_sint8'
+public	SubS16					as	'Array_SubScalar_sint16'
+public	SubS32					as	'Array_SubScalar_sint32'
+public	SubS64					as	'Array_SubScalar_sint64'
+public	SubS8					as	'_ZN5Array3SubEPama'
+public	SubS16					as	'_ZN5Array3SubEPsms'
+public	SubS32					as	'_ZN5Array3SubEPimi'
+public	SubS64					as	'_ZN5Array3SubEPxmx'
+
+; Floating-point types
 public	SubS_flt32				as	'Array_SubScalar_flt32'
 public	SubS_flt64				as	'Array_SubScalar_flt64'
 public	SubS_flt32				as	'_ZN5Array3SubEPfmf'
 public	SubS_flt64				as	'_ZN5Array3SubEPdmd'
 
-; Vector subtraction
+; Other types
+public	SubS64					as	'Array_SubScalar_size'
+public	SubS64					as	'_ZN5Array3SubEPmmm'
+
+;------------------------------------------------------------------------------;
+;       Vector subtraction                                                     ;
+;------------------------------------------------------------------------------;
+
+; Unsigned integer types
+public	SubV8					as	'Array_SubVector_uint8'
+public	SubV16					as	'Array_SubVector_uint16'
+public	SubV32					as	'Array_SubVector_uint32'
+public	SubV64					as	'Array_SubVector_uint64'
+public	SubV8					as	'_ZN5Array3SubEPhPKhm'
+public	SubV16					as	'_ZN5Array3SubEPtPKtm'
+public	SubV32					as	'_ZN5Array3SubEPjPKjm'
+public	SubV64					as	'_ZN5Array3SubEPyPKym'
+
+; Signed integer types
+public	SubV8					as	'Array_SubVector_sint8'
+public	SubV16					as	'Array_SubVector_sint16'
+public	SubV32					as	'Array_SubVector_sint32'
+public	SubV64					as	'Array_SubVector_sint64'
+public	SubV8					as	'_ZN5Array3SubEPaPKam'
+public	SubV16					as	'_ZN5Array3SubEPsPKsm'
+public	SubV32					as	'_ZN5Array3SubEPiPKim'
+public	SubV64					as	'_ZN5Array3SubEPxPKxm'
+
+; Floating-point types
 public	SubV_flt32				as	'Array_SubVector_flt32'
 public	SubV_flt64				as	'Array_SubVector_flt64'
 public	SubV_flt32				as	'_ZN5Array3SubEPfPKfm'
 public	SubV_flt64				as	'_ZN5Array3SubEPdPKdm'
 
+; Other types
+public	SubV64					as	'Array_SubVector_size'
+public	SubV64					as	'_ZN5Array3SubEPmPKmm'
+
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 ;       Multiplication                                                         ;
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 
-; Scalar multiplication
+;------------------------------------------------------------------------------;
+;       Scalar multiplication                                                  ;
+;------------------------------------------------------------------------------;
 public	MulS_flt32				as	'Array_MulScalar_flt32'
 public	MulS_flt64				as	'Array_MulScalar_flt64'
 public	MulS_flt32				as	'_ZN5Array3MulEPfmf'
 public	MulS_flt64				as	'_ZN5Array3MulEPdmd'
 
-; Vector multiplication
+;------------------------------------------------------------------------------;
+;       Vector multiplication                                                  ;
+;------------------------------------------------------------------------------;
 public	MulV_flt32				as	'Array_MulVector_flt32'
 public	MulV_flt64				as	'Array_MulVector_flt64'
 public	MulV_flt32				as	'_ZN5Array3MulEPfPKfm'
@@ -507,13 +623,17 @@ public	MulV_flt64				as	'_ZN5Array3MulEPdPKdm'
 ;       Division                                                               ;
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 
-; Scalar division
+;------------------------------------------------------------------------------;
+;       Scalar division                                                        ;
+;------------------------------------------------------------------------------;
 public	DivS_flt32				as	'Array_DivScalar_flt32'
 public	DivS_flt64				as	'Array_DivScalar_flt64'
 public	DivS_flt32				as	'_ZN5Array3DivEPfmf'
 public	DivS_flt64				as	'_ZN5Array3DivEPdmd'
 
-; Vector division
+;------------------------------------------------------------------------------;
+;       Vector division                                                        ;
+;------------------------------------------------------------------------------;
 public	DivV_flt32				as	'Array_DivVector_flt32'
 public	DivV_flt64				as	'Array_DivVector_flt64'
 public	DivV_flt32				as	'_ZN5Array3DivEPfPKfm'
@@ -2226,7 +2346,7 @@ TruncateFlt64ToSint64:	CONVERT3	cvttsd2si, 3
 ;******************************************************************************;
 ;       Bitwise operations                                                     ;
 ;******************************************************************************;
-macro	BIT_SCALAR	op, reg, x
+macro	INT_SCALAR	op, reg, type, x
 {
 ;---[Parameters]---------------------------
 array	equ		rdi							; pointer to array
@@ -2273,7 +2393,11 @@ bmask	= bytes - 1							; elements aligning mask
 		jbe		.tail						;     then process array tail
 		movdqa	temp, [array]				; temp = array[0]
 		movdqa	data, temp					; data = temp
+if type = 1
+		p#op#x	temp, vector				; do operation to temp value
+else
 		p#op	temp, vector				; do operation to temp value
+end if
 	pblendvb	temp, data					; blend temp with original data
 		movdqa	[array], temp				; array[0] = temp
 		pxor	blend, blend				; blend = 0
@@ -2282,25 +2406,41 @@ bmask	= bytes - 1							; elements aligning mask
 		sub		size, VSIZE					; if (size <= VSIZE)
 		jbe		.tail						;     then process array tail
 		movdqa	temp, [ptr + 1*VSIZE]		; temp = ptr[1]
+if type = 1
+		p#op#x	temp, vector				; do operation to temp value
+else
 		p#op	temp, vector				; do operation to temp value
+end if
 		movdqa	[ptr + 1*VSIZE], temp		; ptr[1] = temp
 		add		index, VSIZE				; index += VSIZE
 		sub		size, VSIZE					; if (size <= VSIZE)
 		jbe		.tail						;     then process array tail
 		movdqa	temp, [ptr + 2*VSIZE]		; temp = ptr[2]
+if type = 1
+		p#op#x	temp, vector				; do operation to temp value
+else
 		p#op	temp, vector				; do operation to temp value
+end if
 		movdqa	[ptr + 2*VSIZE], temp		; ptr[2] = temp
 		add		index, VSIZE				; index += VSIZE
 		sub		size, VSIZE					; if (size <= VSIZE)
 		jbe		.tail						;     then process array tail
 		movdqa	temp, [ptr + 3*VSIZE]		; temp = ptr[3]
+if type = 1
+		p#op#x	temp, vector				; do operation to temp value
+else
 		p#op	temp, vector				; do operation to temp value
+end if
 		movdqa	[ptr + 3*VSIZE], temp		; ptr[3] = temp
 		add		index, VSIZE				; index += VSIZE
 		sub		size, VSIZE					; if (size <= VSIZE)
 		jbe		.tail						;     then process array tail
 		movdqa	temp, [ptr + 4*VSIZE]		; temp = ptr[4]
+if type = 1
+		p#op#x	temp, vector				; do operation to temp value
+else
 		p#op	temp, vector				; do operation to temp value
+end if
 		movdqa	[ptr + 4*VSIZE], temp		; ptr[4] = temp
 	prefetchnta	[ptr + PSTEP]				; prefetch next portion of data
 		add		ptr, 4 * VSIZE				; ptr += 4 * VSIZE
@@ -2310,7 +2450,11 @@ bmask	= bytes - 1							; elements aligning mask
 		pandn	blend, dqword [maskS2 + size]
 		movdqa	temp, [array + index]		; temp = array[index]
 		movdqa	data, temp					; data = temp
+if type = 1
+		p#op#x	temp, vector				; do operation to temp value
+else
 		p#op	temp, vector				; do operation to temp value
+end if
 	pblendvb	data, temp					; blend temp with original data
 		movdqa	[array + index], data		; array[index] = temp
 		ret
@@ -2323,7 +2467,7 @@ bmask	= bytes - 1							; elements aligning mask
 .exit:	ret
 }
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	BIT_VECTOR	op, reg, x
+macro	INT_VECTOR	op, reg, type, x
 {
 ;---[Parameters]---------------------------
 target	equ		rdi							; pointer to target array
@@ -2377,7 +2521,11 @@ bmask	= bytes - 1							; elements aligning mask
 		movdqu	a2temp, [source]			; a2temp = source[0]
 		movdqu	a1temp, [target]			; a1temp = target[0]
 		movdqa	data, a1temp				; data = a1temp
+if type = 1
+		p#op#x	a1temp, a2temp				; do operation to temp value
+else
 		p#op	a1temp, a2temp				; do operation to temp value
+end if
 	pblendvb	a1temp, data				; blend a1temp with original data
 		movdqu	[target], a1temp			; target[0] = a1temp
 ;---[Vector loop]--------------------------
@@ -2386,28 +2534,44 @@ bmask	= bytes - 1							; elements aligning mask
 		jbe		.tail						;     then process array tails
 		movdqu	a2temp, [ptr2 + 1*VSIZE]	; a2temp = ptr2[1]
 		movdqa	a1temp, [ptr1 + 1*VSIZE]	; a1temp = ptr1[1]
+if type = 1
+		p#op#x	a1temp, a2temp				; do operation to temp value
+else
 		p#op	a1temp, a2temp				; do operation to temp value
+end if
 		movdqa	[ptr1 + 1*VSIZE], a1temp	; ptr1[1] = a1temp
 		add		index, VSIZE				; index += VSIZE
 		sub		size, VSIZE					; if (size <= VSIZE)
 		jbe		.tail						;     then process array tails
 		movdqu	a2temp, [ptr2 + 2*VSIZE]	; a2temp = ptr2[2]
 		movdqa	a1temp, [ptr1 + 2*VSIZE]	; a1temp = ptr1[2]
+if type = 1
+		p#op#x	a1temp, a2temp				; do operation to temp value
+else
 		p#op	a1temp, a2temp				; do operation to temp value
+end if
 		movdqa	[ptr1 + 2*VSIZE], a1temp	; ptr1[2] = a1temp
 		add		index, VSIZE				; index += VSIZE
 		sub		size, VSIZE					; if (size <= VSIZE)
 		jbe		.tail						;     then process array tails
 		movdqu	a2temp, [ptr2 + 3*VSIZE]	; a2temp = ptr2[3]
 		movdqa	a1temp, [ptr1 + 3*VSIZE]	; a1temp = ptr1[3]
+if type = 1
+		p#op#x	a1temp, a2temp				; do operation to temp value
+else
 		p#op	a1temp, a2temp				; do operation to temp value
+end if
 		movdqa	[ptr1 + 3*VSIZE], a1temp	; ptr1[3] = a1temp
 		add		index, VSIZE				; index += VSIZE
 		sub		size, VSIZE					; if (size <= VSIZE)
 		jbe		.tail						;     then process array tails
 		movdqu	a2temp, [ptr2 + 4*VSIZE]	; a2temp = ptr2[4]
 		movdqa	a1temp, [ptr1 + 4*VSIZE]	; a1temp = ptr1[4]
+if type = 1
+		p#op#x	a1temp, a2temp				; do operation to temp value
+else
 		p#op	a1temp, a2temp				; do operation to temp value
+end if
 		movdqa	[ptr1 + 4*VSIZE], a1temp	; ptr1[4] = a1temp
 	prefetchnta	[ptr2 + PSTEP]				; prefetch next portion of temp
 	prefetchnta	[ptr1 + PSTEP]				; prefetch next portion of temp
@@ -2421,7 +2585,11 @@ bmask	= bytes - 1							; elements aligning mask
 		movdqu	a2temp, [source + index]	; a2temp = source[index]
 		movdqu	a1temp, [target + index]	; a1temp = target[index]
 		movdqa	data, a1temp				; data = a1temp
+if type = 1
+		p#op#x	a1temp, a2temp				; do operation to temp value
+else
 		p#op	a1temp, a2temp				; do operation to temp value
+end if
 	pblendvb	data, a1temp				; blend a1temp with original data
 		movdqu	[target + index], data		; target[index] = a1temp
 		ret
@@ -2472,48 +2640,48 @@ Not64:	NOT		rdx, q
 ;==============================================================================;
 
 ; Scalar bitwise AND
-AndS8:	BIT_SCALAR	and, dl, b
-AndS16:	BIT_SCALAR	and, dx, w
-AndS32:	BIT_SCALAR	and, edx, d
-AndS64:	BIT_SCALAR	and, rdx, q
+AndS8:	INT_SCALAR	and, dl, 0, b
+AndS16:	INT_SCALAR	and, dx, 0, w
+AndS32:	INT_SCALAR	and, edx, 0, d
+AndS64:	INT_SCALAR	and, rdx, 0, q
 
 ; Vector bitwise AND
-AndV8:	BIT_VECTOR	and, al, b
-AndV16:	BIT_VECTOR	and, ax, w
-AndV32:	BIT_VECTOR	and, eax, d
-AndV64:	BIT_VECTOR	and, rax, q
+AndV8:	INT_VECTOR	and, al, 0, b
+AndV16:	INT_VECTOR	and, ax, 0, w
+AndV32:	INT_VECTOR	and, eax, 0, d
+AndV64:	INT_VECTOR	and, rax, 0, q
 
 ;==============================================================================;
 ;       Bitwise OR                                                             ;
 ;==============================================================================;
 
 ; Scalar bitwise OR
-OrS8:	BIT_SCALAR	or, dl, b
-OrS16:	BIT_SCALAR	or, dx, w
-OrS32:	BIT_SCALAR	or, edx, d
-OrS64:	BIT_SCALAR	or, rdx, q
+OrS8:	INT_SCALAR	or, dl, 0, b
+OrS16:	INT_SCALAR	or, dx, 0, w
+OrS32:	INT_SCALAR	or, edx, 0, d
+OrS64:	INT_SCALAR	or, rdx, 0, q
 
 ; Vector bitwise OR
-OrV8:	BIT_VECTOR	or, al, b
-OrV16:	BIT_VECTOR	or, ax, w
-OrV32:	BIT_VECTOR	or, eax, d
-OrV64:	BIT_VECTOR	or, rax, q
+OrV8:	INT_VECTOR	or, al, 0, b
+OrV16:	INT_VECTOR	or, ax, 0, w
+OrV32:	INT_VECTOR	or, eax, 0, d
+OrV64:	INT_VECTOR	or, rax, 0, q
 
 ;==============================================================================;
 ;       Bitwise XOR                                                            ;
 ;==============================================================================;
 
 ; Scalar bitwise XOR
-XorS8:	BIT_SCALAR	xor, dl, b
-XorS16:	BIT_SCALAR	xor, dx, w
-XorS32:	BIT_SCALAR	xor, edx, d
-XorS64:	BIT_SCALAR	xor, rdx, q
+XorS8:	INT_SCALAR	xor, dl, 0, b
+XorS16:	INT_SCALAR	xor, dx, 0, w
+XorS32:	INT_SCALAR	xor, edx, 0, d
+XorS64:	INT_SCALAR	xor, rdx, 0, q
 
 ; Vector bitwise XOR
-XorV8:	BIT_VECTOR	xor, al, b
-XorV16:	BIT_VECTOR	xor, ax, w
-XorV32:	BIT_VECTOR	xor, eax, d
-XorV64:	BIT_VECTOR	xor, rax, q
+XorV8:	INT_VECTOR	xor, al, 0, b
+XorV16:	INT_VECTOR	xor, ax, 0, w
+XorV32:	INT_VECTOR	xor, eax, 0, d
+XorV64:	INT_VECTOR	xor, rax, 0, q
 
 ;******************************************************************************;
 ;       Arithmetic operations                                                  ;
@@ -2646,7 +2814,7 @@ Sqrt_flt64:		SQR		sqrt, d
 ;==============================================================================;
 ;       Binary operations                                                      ;
 ;==============================================================================;
-macro	SCALAR	op, x
+macro	FLT_SCALAR	op, x
 {
 ;---[Parameters]---------------------------
 array	equ		rdi							; pointer to array
@@ -2741,7 +2909,7 @@ bmask	= bytes - 1							; elements aligning mask
 .exit:	ret
 }
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	VECTOR	op, x
+macro	FLT_VECTOR	op, x
 {
 ;---[Parameters]---------------------------
 target	equ		rdi							; pointer to target array
@@ -2856,49 +3024,97 @@ bmask	= bytes - 1							; elements aligning mask
 ;       Addition                                                               ;
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 
-; Scalar addition
-AddS_flt32:		SCALAR	add, s
-AddS_flt64:		SCALAR	add, d
+;------------------------------------------------------------------------------;
+;       Scalar addition                                                        ;
+;------------------------------------------------------------------------------;
 
-; Vector addition
-AddV_flt32:		VECTOR	add, s
-AddV_flt64:		VECTOR	add, d
+; Integer types
+AddS8:		INT_SCALAR	add, dl, 1, b
+AddS16:		INT_SCALAR	add, dx, 1, w
+AddS32:		INT_SCALAR	add, edx, 1, d
+AddS64:		INT_SCALAR	add, rdx, 1, q
+
+; Floating-point types
+AddS_flt32:	FLT_SCALAR	add, s
+AddS_flt64:	FLT_SCALAR	add, d
+
+;------------------------------------------------------------------------------;
+;       Vector addition                                                        ;
+;------------------------------------------------------------------------------;
+
+; Integer types
+AddV8:		INT_VECTOR	add, al, 1, b
+AddV16:		INT_VECTOR	add, ax, 1, w
+AddV32:		INT_VECTOR	add, eax, 1, d
+AddV64:		INT_VECTOR	add, rax, 1, q
+
+; Floating-point types
+AddV_flt32:	FLT_VECTOR	add, s
+AddV_flt64:	FLT_VECTOR	add, d
 
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 ;       Subtraction                                                            ;
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 
-; Scalar subtraction
-SubS_flt32:		SCALAR	sub, s
-SubS_flt64:		SCALAR	sub, d
+;------------------------------------------------------------------------------;
+;       Scalar subtraction                                                     ;
+;------------------------------------------------------------------------------;
 
-; Vector subtraction
-SubV_flt32:		VECTOR	sub, s
-SubV_flt64:		VECTOR	sub, d
+; Integer types
+SubS8:		INT_SCALAR	sub, dl, 1, b
+SubS16:		INT_SCALAR	sub, dx, 1, w
+SubS32:		INT_SCALAR	sub, edx, 1, d
+SubS64:		INT_SCALAR	sub, rdx, 1, q
+
+; Floating-point types
+SubS_flt32:	FLT_SCALAR	sub, s
+SubS_flt64:	FLT_SCALAR	sub, d
+
+;------------------------------------------------------------------------------;
+;       Vector subtraction                                                     ;
+;------------------------------------------------------------------------------;
+
+; Integer types
+SubV8:		INT_VECTOR	sub, al, 1, b
+SubV16:		INT_VECTOR	sub, ax, 1, w
+SubV32:		INT_VECTOR	sub, eax, 1, d
+SubV64:		INT_VECTOR	sub, rax, 1, q
+
+; Floating-point types
+SubV_flt32:	FLT_VECTOR	sub, s
+SubV_flt64:	FLT_VECTOR	sub, d
 
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 ;       Multiplication                                                         ;
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 
-; Scalar multiplication
-MulS_flt32:		SCALAR	mul, s
-MulS_flt64:		SCALAR	mul, d
+;------------------------------------------------------------------------------;
+;       Scalar multiplication                                                  ;
+;------------------------------------------------------------------------------;
+MulS_flt32:	FLT_SCALAR	mul, s
+MulS_flt64:	FLT_SCALAR	mul, d
 
-; Vector multiplication
-MulV_flt32:		VECTOR	mul, s
-MulV_flt64:		VECTOR	mul, d
+;------------------------------------------------------------------------------;
+;       Vector multiplication                                                  ;
+;------------------------------------------------------------------------------;
+MulV_flt32:	FLT_VECTOR	mul, s
+MulV_flt64:	FLT_VECTOR	mul, d
 
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 ;       Division                                                               ;
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 
-; Scalar division
-DivS_flt32:		SCALAR	div, s
-DivS_flt64:		SCALAR	div, d
+;------------------------------------------------------------------------------;
+;       Scalar division                                                        ;
+;------------------------------------------------------------------------------;
+DivS_flt32:	FLT_SCALAR	div, s
+DivS_flt64:	FLT_SCALAR	div, d
 
-; Vector division
-DivV_flt32:		VECTOR	div, s
-DivV_flt64:		VECTOR	div, d
+;------------------------------------------------------------------------------;
+;       Vector division                                                        ;
+;------------------------------------------------------------------------------;
+DivV_flt32:	FLT_VECTOR	div, s
+DivV_flt64:	FLT_VECTOR	div, d
 
 ;******************************************************************************;
 ;       Numerical integration                                                  ;

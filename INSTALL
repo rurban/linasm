@@ -3,89 +3,89 @@
 #                                                                              #
 #                        LINASM INSTALLATION PROCEDURE                         #
 #                                                                              #
-# License: LGPLv3+                               Copyleft (Ɔ) 2012, Jack Black #
+# License: LGPLv3+                               Copyleft (Ɔ) 2013, Jack Black #
 ################################################################################
 
 INTRODUCTION
 ============
 
-	LinAsm doesn't use autotools for configurations process at all, because
-	its Makefile is too simple and almost has no options. This makes
-	installation process very simple.
+    LinAsm doesn't use autotools for configurations process at all, because
+    its Makefile is too simple and almost has no options. This makes
+    installation process very simple.
 
 COMPILATION
 ===========
 
-	To compile the libraries from source code, just type "make". This command
-	will process all assembly files (*.asm) from "source" directory with "fasm"
-	compiler, included into the package. The assembler compiler can be found
-	into "build" directory of extracted source archive.
+    To compile the libraries from source code, just type "make". This command
+    will process all assembly files (*.asm) from "source" directory with "fasm"
+    compiler, included into the package. The assembler compiler can be found
+    into "build" directory of extracted source archive.
 
-	To allow this file to be launched, please check that a file system, where
-	the source code was extracted, has the mount option "exec", and the file
-	"fasm" has appropriate execution permissions. In other case the compiling
-	process will fail.
+    To allow this file to be launched, please check that a file system, where
+    the source code was extracted, has the mount option "exec", and the file
+    "fasm" has appropriate execution permissions. In other case the compiling
+    process will fail.
 
-	When compilation complete, you will find statical library archive file
-	"liblinasm.a" inside the root directory of the package. This means that
-	compilation stage was successfully completed and you may start
-	installation process.
+    When compilation complete, you will find statical library archive file
+    "liblinasm.a" inside the root directory of the package. This means that
+    compilation stage was successfully completed and you may start
+    installation process.
 
 INSTALLATION
 ============
 
-	To install compiled libraries and their header files, type "make install".
+    To install compiled libraries and their header files, type "make install".
 
-	By default, installator uses "/usr/local" directory as the root directory,
-	where all the project files and subfolders will be placed. But you
-	may change this behavior if type "make install prefix=/usr" (or another
-	target directory), instead of standard installation command.
+    By default, installator uses "/usr/local" directory as the root directory,
+    where all the project files and subfolders will be placed. But you
+    may change this behavior if type "make install prefix=/usr" (or another
+    target directory), instead of standard installation command.
 
-	To make dummy installation (not real installation), type
-	"make install DESTDIR=/tmp". This command will not modify any system and
-	previously installed files, but will place all compiled files into "/tmp"
-	directory, repeating directory structure of regular installation.
-	This ability is used to check that installation and compilation processes
-	successfully pass through all steps.
+    To make dummy installation (not real installation), type
+    "make install DESTDIR=/tmp". This command will not modify any system and
+    previously installed files, but will place all compiled files into "/tmp"
+    directory, repeating directory structure of regular installation.
+    This ability is used to check that installation and compilation processes
+    successfully pass through all steps.
 
 UNINSTALLATION
 ==============
 
-	To invoke package uninstalling action, type "make uninstall".
+    To invoke package uninstalling action, type "make uninstall".
 
-	Uninstallation process removes all the files, which were previously
-	installed by package installation procedure. It clears system "include"
-	directory from project's header files and removes statical library archive
-	file "liblinasm.a" from system "lib" directory.
+    Uninstallation process removes all the files, which were previously
+    installed by package installation procedure. It clears system "include"
+    directory from project's header files and removes statical library archive
+    file "liblinasm.a" from system "lib" directory.
 
-	By default it assumes that the package was previously installed into
-	the directory "/usr/local" (which is default prefix value). Uninstall script
-	tries to check and clear local "include" and "lib" directories from projects
-	files without touching any other system files. If you installed the package
-	into another directory (for example you specified "prefix=/usr"), then
-	you should call uninstall command with the same prefix value which was set
-	for installation.
+    By default it assumes that the package was previously installed into
+    the directory "/usr/local" (which is default prefix value). Uninstall script
+    tries to check and clear local "include" and "lib" directories from projects
+    files without touching any other system files. If you installed the package
+    into another directory (for example you specified "prefix=/usr"), then
+    you should call uninstall command with the same prefix value which was set
+    for installation.
 
-	Example: "make uninstall prefix=/usr". This command will do uninstallation
-	procedure in the save way, like the default command, but checking "/usr"
-	directory instead of "/usr/local" which is default.
+    Example: "make uninstall prefix=/usr". This command will do uninstallation
+    procedure in the save way, like the default command, but checking "/usr"
+    directory instead of "/usr/local" which is default.
 
 PACKAGE CLEANING
 ================
 
-	Package cleaning procedure just cleans the directory, where release archive
-	was unpacked, from the files were created by the compilation process.
+    Package cleaning procedure just cleans the directory, where release archive
+    was unpacked, from the files were created by the compilation process.
 
-	To make cleaning, simply type "make clean".
+    To make cleaning, simply type "make clean".
 
 TROUBLESHOOTING
 ===============
 
-	In case of any trouble actions or bugs, you find during the install and
-	uninstall process, you may mail me to:
-		* ezamlinsky@gmail.com
-		* ezamlinsky@users.sf.net
-	and get installation support.
+    In case of any trouble actions or bugs, you find during the install and
+    uninstall process, you may mail me to:
+        * ezamlinsky@gmail.com
+        * ezamlinsky@users.sf.net
+    and get installation support.
 
 ################################################################################
 #                                 END OF FILE                                  #
