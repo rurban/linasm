@@ -257,6 +257,10 @@ public	Not16					as	'_ZN5Array3NotEPsm'
 public	Not32					as	'_ZN5Array3NotEPim'
 public	Not64					as	'_ZN5Array3NotEPxm'
 
+; Other types
+public	Not64					as	'Array_Not_size'
+public	Not64					as	'_ZN5Array3NotEPmm'
+
 ;==============================================================================;
 ;       Bitwise AND                                                            ;
 ;==============================================================================;
@@ -285,6 +289,10 @@ public	AndS16					as	'_ZN5Array3AndEPsms'
 public	AndS32					as	'_ZN5Array3AndEPimi'
 public	AndS64					as	'_ZN5Array3AndEPxmx'
 
+; Other types
+public	AndS64					as	'Array_AndScalar_size'
+public	AndS64					as	'_ZN5Array3AndEPmmm'
+
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 ;       Vector bitwise AND                                                     ;
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
@@ -308,6 +316,10 @@ public	AndV8					as	'_ZN5Array3AndEPaPKam'
 public	AndV16					as	'_ZN5Array3AndEPsPKsm'
 public	AndV32					as	'_ZN5Array3AndEPiPKim'
 public	AndV64					as	'_ZN5Array3AndEPxPKxm'
+
+; Other types
+public	AndV64					as	'Array_AndVector_size'
+public	AndV64					as	'_ZN5Array3AndEPmPKmm'
 
 ;==============================================================================;
 ;       Bitwise OR                                                             ;
@@ -337,6 +349,10 @@ public	OrS16					as	'_ZN5Array2OrEPsms'
 public	OrS32					as	'_ZN5Array2OrEPimi'
 public	OrS64					as	'_ZN5Array2OrEPxmx'
 
+; Other types
+public	OrS64					as	'Array_OrScalar_size'
+public	OrS64					as	'_ZN5Array2OrEPmmm'
+
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 ;       Vector bitwise OR                                                      ;
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
@@ -360,6 +376,10 @@ public	OrV8					as	'_ZN5Array2OrEPaPKam'
 public	OrV16					as	'_ZN5Array2OrEPsPKsm'
 public	OrV32					as	'_ZN5Array2OrEPiPKim'
 public	OrV64					as	'_ZN5Array2OrEPxPKxm'
+
+; Other types
+public	OrV64					as	'Array_OrVector_size'
+public	OrV64					as	'_ZN5Array2OrEPmPKmm'
 
 ;==============================================================================;
 ;       Bitwise XOR                                                            ;
@@ -389,6 +409,10 @@ public	XorS16					as	'_ZN5Array3XorEPsms'
 public	XorS32					as	'_ZN5Array3XorEPimi'
 public	XorS64					as	'_ZN5Array3XorEPxmx'
 
+; Other types
+public	XorS64					as	'Array_XorScalar_size'
+public	XorS64					as	'_ZN5Array3XorEPmmm'
+
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 ;       Vector bitwise XOR                                                     ;
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
@@ -412,6 +436,10 @@ public	XorV8					as	'_ZN5Array3XorEPaPKam'
 public	XorV16					as	'_ZN5Array3XorEPsPKsm'
 public	XorV32					as	'_ZN5Array3XorEPiPKim'
 public	XorV64					as	'_ZN5Array3XorEPxPKxm'
+
+; Other types
+public	XorV64					as	'Array_XorVector_size'
+public	XorV64					as	'_ZN5Array3XorEPmPKmm'
 
 ;******************************************************************************;
 ;       Arithmetic operations                                                  ;

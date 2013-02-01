@@ -184,6 +184,9 @@ static void Not (sint16_t array[], size_t size);
 static void Not (sint32_t array[], size_t size);
 static void Not (sint64_t array[], size_t size);
 
+// Other types
+static void Not (size_t array[], size_t size);
+
 //============================================================================//
 //      Bitwise AND                                                           //
 //============================================================================//
@@ -204,6 +207,9 @@ static void And (sint16_t target[], size_t size, sint16_t value);
 static void And (sint32_t target[], size_t size, sint32_t value);
 static void And (sint64_t target[], size_t size, sint64_t value);
 
+// Other types
+static void And (size_t target[], size_t size, size_t value);
+
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 //      Vector bitwise AND                                                    //
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
@@ -219,6 +225,9 @@ static void And (sint8_t target[], const sint8_t source[], size_t size);
 static void And (sint16_t target[], const sint16_t source[], size_t size);
 static void And (sint32_t target[], const sint32_t source[], size_t size);
 static void And (sint64_t target[], const sint64_t source[], size_t size);
+
+// Other types
+static void And (size_t target[], const size_t source[], size_t size);
 
 //============================================================================//
 //      Bitwise OR                                                            //
@@ -240,6 +249,9 @@ static void Or (sint16_t target[], size_t size, sint16_t value);
 static void Or (sint32_t target[], size_t size, sint32_t value);
 static void Or (sint64_t target[], size_t size, sint64_t value);
 
+// Other types
+static void Or (size_t target[], size_t size, size_t value);
+
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 //      Vector bitwise OR                                                     //
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
@@ -255,6 +267,9 @@ static void Or (sint8_t target[], const sint8_t source[], size_t size);
 static void Or (sint16_t target[], const sint16_t source[], size_t size);
 static void Or (sint32_t target[], const sint32_t source[], size_t size);
 static void Or (sint64_t target[], const sint64_t source[], size_t size);
+
+// Other types
+static void Or (size_t target[], const size_t source[], size_t size);
 
 //============================================================================//
 //      Bitwise XOR                                                           //
@@ -276,6 +291,9 @@ static void Xor (sint16_t target[], size_t size, sint16_t value);
 static void Xor (sint32_t target[], size_t size, sint32_t value);
 static void Xor (sint64_t target[], size_t size, sint64_t value);
 
+// Other types
+static void Xor (size_t target[], size_t size, size_t value);
+
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 //      Vector bitwise XOR                                                    //
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
@@ -291,6 +309,9 @@ static void Xor (sint8_t target[], const sint8_t source[], size_t size);
 static void Xor (sint16_t target[], const sint16_t source[], size_t size);
 static void Xor (sint32_t target[], const sint32_t source[], size_t size);
 static void Xor (sint64_t target[], const sint64_t source[], size_t size);
+
+// Other types
+static void Xor (size_t target[], const size_t source[], size_t size);
 
 //****************************************************************************//
 //      Arithmetic operations                                                 //
@@ -1201,6 +1222,9 @@ void Array_Not_sint16 (sint16_t array[], size_t size);
 void Array_Not_sint32 (sint32_t array[], size_t size);
 void Array_Not_sint64 (sint64_t array[], size_t size);
 
+// Other types
+void Array_Not_size (size_t array[], size_t size);
+
 //============================================================================//
 //      Bitwise AND                                                           //
 //============================================================================//
@@ -1221,6 +1245,9 @@ void Array_AndScalar_sint16 (sint16_t target[], size_t size, sint16_t value);
 void Array_AndScalar_sint32 (sint32_t target[], size_t size, sint32_t value);
 void Array_AndScalar_sint64 (sint64_t target[], size_t size, sint64_t value);
 
+// Other types
+void Array_AndScalar_size (size_t target[], size_t size, size_t value);
+
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 //      Vector bitwise AND                                                    //
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
@@ -1236,6 +1263,9 @@ void Array_AndVector_sint8 (sint8_t target[], const sint8_t source[], size_t siz
 void Array_AndVector_sint16 (sint16_t target[], const sint16_t source[], size_t size);
 void Array_AndVector_sint32 (sint32_t target[], const sint32_t source[], size_t size);
 void Array_AndVector_sint64 (sint64_t target[], const sint64_t source[], size_t size);
+
+// Other types
+void Array_AndVector_size (size_t target[], const size_t source[], size_t size);
 
 //============================================================================//
 //      Bitwise OR                                                            //
@@ -1257,6 +1287,9 @@ void Array_OrScalar_sint16 (sint16_t target[], size_t size, sint16_t value);
 void Array_OrScalar_sint32 (sint32_t target[], size_t size, sint32_t value);
 void Array_OrScalar_sint64 (sint64_t target[], size_t size, sint64_t value);
 
+// Other types
+void Array_OrScalar_size (size_t target[], size_t size, size_t value);
+
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 //      Vector bitwise OR                                                     //
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
@@ -1272,6 +1305,9 @@ void Array_OrVector_sint8 (sint8_t target[], const sint8_t source[], size_t size
 void Array_OrVector_sint16 (sint16_t target[], const sint16_t source[], size_t size);
 void Array_OrVector_sint32 (sint32_t target[], const sint32_t source[], size_t size);
 void Array_OrVector_sint64 (sint64_t target[], const sint64_t source[], size_t size);
+
+// Other types
+void Array_OrVector_size (size_t target[], const size_t source[], size_t size);
 
 //============================================================================//
 //      Bitwise XOR                                                           //
@@ -1293,6 +1329,9 @@ void Array_XorScalar_sint16 (sint16_t target[], size_t size, sint16_t value);
 void Array_XorScalar_sint32 (sint32_t target[], size_t size, sint32_t value);
 void Array_XorScalar_sint64 (sint64_t target[], size_t size, sint64_t value);
 
+// Other types
+void Array_XorScalar_size (size_t target[], size_t size, size_t value);
+
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 //      Vector bitwise XOR                                                    //
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
@@ -1308,6 +1347,9 @@ void Array_XorVector_sint8 (sint8_t target[], const sint8_t source[], size_t siz
 void Array_XorVector_sint16 (sint16_t target[], const sint16_t source[], size_t size);
 void Array_XorVector_sint32 (sint32_t target[], const sint32_t source[], size_t size);
 void Array_XorVector_sint64 (sint64_t target[], const sint64_t source[], size_t size);
+
+// Other types
+void Array_XorVector_size (size_t target[], const size_t source[], size_t size);
 
 //****************************************************************************//
 //      Arithmetic operations                                                 //
