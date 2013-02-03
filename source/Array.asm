@@ -699,25 +699,69 @@ public	SumMul_flt64			as	'_ZN5Array6SumMulEPKdS1_m'
 ;       Minimum and maximum values                                             ;
 ;******************************************************************************;
 
-; Minimum value
+;==============================================================================;
+;       Minimum value                                                          ;
+;==============================================================================;
+
+; Unsigned integer types
+public	Min_uint8				as	'Array_Min_uint8'
+public	Min_uint16				as	'Array_Min_uint16'
+public	Min_uint32				as	'Array_Min_uint32'
+public	Min_uint8				as	'_ZN5Array3MinEPKhm'
+public	Min_uint16				as	'_ZN5Array3MinEPKtm'
+public	Min_uint32				as	'_ZN5Array3MinEPKjm'
+
+; Signed integer types
+public	Min_sint8				as	'Array_Min_sint8'
+public	Min_sint16				as	'Array_Min_sint16'
+public	Min_sint32				as	'Array_Min_sint32'
+public	Min_sint8				as	'_ZN5Array3MinEPKam'
+public	Min_sint16				as	'_ZN5Array3MinEPKsm'
+public	Min_sint32				as	'_ZN5Array3MinEPKim'
+
+; Floating-point types
 public	Min_flt32				as	'Array_Min_flt32'
 public	Min_flt64				as	'Array_Min_flt64'
 public	Min_flt32				as	'_ZN5Array3MinEPKfm'
 public	Min_flt64				as	'_ZN5Array3MinEPKdm'
 
-; Minimum absolute value
+;==============================================================================;
+;       Minimum absolute value                                                 ;
+;==============================================================================;
 public	MinAbs_flt32			as	'Array_MinAbs_flt32'
 public	MinAbs_flt64			as	'Array_MinAbs_flt64'
 public	MinAbs_flt32			as	'_ZN5Array6MinAbsEPKfm'
 public	MinAbs_flt64			as	'_ZN5Array6MinAbsEPKdm'
 
-; Maximum value
+;==============================================================================;
+;       Maximum value                                                          ;
+;==============================================================================;
+
+; Unsigned integer types
+public	Max_uint8				as	'Array_Max_uint8'
+public	Max_uint16				as	'Array_Max_uint16'
+public	Max_uint32				as	'Array_Max_uint32'
+public	Max_uint8				as	'_ZN5Array3MaxEPKhm'
+public	Max_uint16				as	'_ZN5Array3MaxEPKtm'
+public	Max_uint32				as	'_ZN5Array3MaxEPKjm'
+
+; Signed integer types
+public	Max_sint8				as	'Array_Max_sint8'
+public	Max_sint16				as	'Array_Max_sint16'
+public	Max_sint32				as	'Array_Max_sint32'
+public	Max_sint8				as	'_ZN5Array3MaxEPKam'
+public	Max_sint16				as	'_ZN5Array3MaxEPKsm'
+public	Max_sint32				as	'_ZN5Array3MaxEPKim'
+
+; Floating-point types
 public	Max_flt32				as	'Array_Max_flt32'
 public	Max_flt64				as	'Array_Max_flt64'
 public	Max_flt32				as	'_ZN5Array3MaxEPKfm'
 public	Max_flt64				as	'_ZN5Array3MaxEPKdm'
 
-; Maximum absolute value
+;==============================================================================;
+;       Maximum absolute value                                                 ;
+;==============================================================================;
 public	MaxAbs_flt32			as	'Array_MaxAbs_flt32'
 public	MaxAbs_flt64			as	'Array_MaxAbs_flt64'
 public	MaxAbs_flt32			as	'_ZN5Array6MaxAbsEPKfm'
@@ -752,10 +796,10 @@ public	RoundRound_flt32		as	'_ZN5Array5RoundEPfm'
 public	RoundRound_flt64		as	'_ZN5Array5RoundEPdm'
 
 ; Round to nearest integer, toward zero (truncation)
-public	RoundTrunc_flt32		as	'Array_Truncate_flt32'
-public	RoundTrunc_flt64		as	'Array_Truncate_flt64'
-public	RoundTrunc_flt32		as	'_ZN5Array8TruncateEPfm'
-public	RoundTrunc_flt64		as	'_ZN5Array8TruncateEPdm'
+public	RoundTrunc_flt32		as	'Array_Trunc_flt32'
+public	RoundTrunc_flt64		as	'Array_Trunc_flt64'
+public	RoundTrunc_flt32		as	'_ZN5Array5TruncEPfm'
+public	RoundTrunc_flt64		as	'_ZN5Array5TruncEPdm'
 
 ; Fractional part
 public	RoundFrac_flt32			as	'Array_Frac_flt32'
@@ -1573,8 +1617,10 @@ bmask	= bytes - 1							; elements aligning mask
 	prefetchnta	[array]						; prefetch data
 		shl		size, scale					; convert size to bytes
 		jz		.exit						; if (size == 0), then go to exit
+if scale <> 0
 		test	array, bmask				; if elements have wrong alignment
 		jnz		.sloop						;     then skip vector code
+end if
 ;---[Normal execution branch]--------------
 		movq	vector, value				; vector = value
 		mov		aindex, array
@@ -1620,11 +1666,13 @@ bmask	= bytes - 1							; elements aligning mask
 	pblendvb	data, vector				; blend value with original data
 		movdqa	[array + index], data		; array[index] = vector
 		ret
+if scale <> 0
 ;---[Scalar loop]--------------------------
 .sloop:	mov		[array], reg				; array[0] = reg
 		add		array, bytes				; array++
 		sub		size, bytes					; size--
 		jnz		.sloop						; do while (size != 0)
+end if
 ;---[Normal exit]--------------------------
 .exit:	ret
 }
@@ -1686,10 +1734,12 @@ bmask	= bytes - 1							; elements aligning mask
 	prefetchnta	[source]					; prefetch data
 		shl		size, scale					; convert size to bytes
 		jz		.exit						; if (size == 0), then go to exit
+if scale <> 0
 		test	source, bmask				; if elements have wrong alignment
 		jnz		.sloop						;     then skip vector code
 		test	target, bmask				; if elements have wrong alignment
 		jnz		.sloop						;     then skip vector code
+end if
 		cmp		size, VSIZE					; if (size < VSIZE)
 		jb		.sloop						;     then skip vector code
 ;---[Normal execution branch]--------------
@@ -1773,10 +1823,12 @@ bmask	= bytes - 1							; elements aligning mask
 	prefetchnta	[source]					; prefetch data
 		shl		size, scale					; convert size to bytes
 		jz		.exit						; if (size == 0), then go to exit
+if scale <> 0
 		test	source, bmask				; if elements have wrong alignment
 		jnz		.sloop						;     then skip vector code
 		test	target, bmask				; if elements have wrong alignment
 		jnz		.sloop						;     then skip vector code
+end if
 		cmp		size, VSIZE					; if (size < VSIZE)
 		jb		.sloop						;     then skip vector code
 ;---[Normal execution branch]--------------
@@ -2403,8 +2455,10 @@ bmask	= bytes - 1							; elements aligning mask
 	prefetchnta	[array]						; prefetch data
 		shl		size, scale					; convert size to bytes
 		jz		.exit						; if (size == 0), then go to exit
+if scale <> 0
 		test	array, bmask				; if elements have wrong alignment
 		jnz		.sloop						;     then skip vector code
+end if
 ;---[Normal execution branch]--------------
 		movq	vector, value				; vector = value
 		mov		aindex, array
@@ -2486,11 +2540,13 @@ end if
 	pblendvb	data, temp					; blend temp with original data
 		movdqa	[array + index], data		; array[index] = temp
 		ret
+if scale <> 0
 ;---[Scalar loop]--------------------------
 .sloop:	op		[array], reg				; do operation to array[0] value
 		add		array, bytes				; array++
 		sub		size, bytes					; size--
 		jnz		.sloop						; do while (size != 0)
+end if
 ;---[Normal exit]--------------------------
 .exit:	ret
 }
@@ -2526,10 +2582,12 @@ bmask	= bytes - 1							; elements aligning mask
 	prefetchnta	[target]					; prefetch data
 		shl		size, scale					; convert size to bytes
 		jz		.exit						; if (size == 0), then go to exit
+if scale <> 0
 		test	source, bmask				; if elements have wrong alignment
 		jnz		.sloop						;     then skip vector code
 		test	target, bmask				; if elements have wrong alignment
 		jnz		.sloop						;     then skip vector code
+end if
 		cmp		size, VSIZE					; if (size < VSIZE)
 		jb		.sloop						;     then skip vector code
 ;---[Normal execution branch]--------------
@@ -2768,7 +2826,7 @@ bmask	= bytes - 1							; elements aligning mask
 		movap#x	temp, [array]				; temp = array[0]
 		movap#x	data, temp					; data = temp
 		op#p#x	temp, temp					; do operation to temp value
-	pblendvb	temp, data					; blend temp with original data
+	blendvp#x	temp, data					; blend temp with original data
 		movap#x	[array], temp				; array[0] = temp
 		xorp#x	blend, blend				; blend = 0
 ;---[Vector loop]--------------------------
@@ -2805,7 +2863,7 @@ bmask	= bytes - 1							; elements aligning mask
 		movap#x	temp, [array + index]		; temp = array[index]
 		movap#x	data, temp					; data = temp
 		op#p#x	temp, temp					; do operation to temp value
-	pblendvb	data, temp					; blend temp with original data
+	blendvp#x	data, temp					; blend temp with original data
 		movap#x	[array + index], data		; array[index] = temp
 		ret
 ;---[Scalar loop]--------------------------
@@ -2886,7 +2944,7 @@ bmask	= bytes - 1							; elements aligning mask
 		movap#x	temp, [array]				; temp = array[0]
 		movap#x	data, temp					; data = temp
 		op#p#x	temp, vector				; do operation to temp value
-	pblendvb	temp, data					; blend temp with original data
+	blendvp#x	temp, data					; blend temp with original data
 		movap#x	[array], temp				; array[0] = temp
 		xorp#x	blend, blend				; blend = 0
 ;---[Vector loop]--------------------------
@@ -2923,7 +2981,7 @@ bmask	= bytes - 1							; elements aligning mask
 		movap#x	temp, [array + index]		; temp = array[index]
 		movap#x	data, temp					; data = temp
 		op#p#x	temp, vector				; do operation to temp value
-	pblendvb	data, temp					; blend temp with original data
+	blendvp#x	data, temp					; blend temp with original data
 		movap#x	[array + index], data		; array[index] = temp
 		ret
 ;---[Scalar loop]--------------------------
@@ -2988,7 +3046,7 @@ bmask	= bytes - 1							; elements aligning mask
 		movup#x	a1temp, [target]			; a1temp = target[0]
 		movap#x	data, a1temp				; data = a1temp
 		op#p#x	a1temp, a2temp				; do operation to temp value
-	pblendvb	a1temp, data				; blend a1temp with original data
+	blendvp#x	a1temp, data				; blend a1temp with original data
 		movup#x	[target], a1temp			; target[0] = a1temp
 ;---[Vector loop]--------------------------
 .vloop:	add		index, VSIZE				; index += VSIZE
@@ -3032,7 +3090,7 @@ bmask	= bytes - 1							; elements aligning mask
 		movup#x	a1temp, [target + index]	; a1temp = target[index]
 		movap#x	data, a1temp				; data = a1temp
 		op#p#x	a1temp, a2temp				; do operation to temp value
-	pblendvb	data, a1temp				; blend a1temp with original data
+	blendvp#x	data, a1temp				; blend a1temp with original data
 		movup#x	[target + index], data		; target[index] = a1temp
 		ret
 ;---[Scalar loop]--------------------------
@@ -3212,7 +3270,7 @@ if type = 1
 else if type = 2
 		andp#x	temp, mask					; temp = Abs (temp)
 end if
-	pblendvb	temp, zero					; blend temp with zero values
+	blendvp#x	temp, zero					; blend temp with zero values
 		addp#x	sum0, temp					; sum0 += temp
 		xorp#x	blend, blend				; blend = 0
 ;---[Vector loop]--------------------------
@@ -3268,7 +3326,7 @@ if type = 1
 else if type = 2
 		andp#x	temp, mask					; temp = Abs (temp)
 end if
-	pblendvb	zero, temp					; blend temp with zero values
+	blendvp#x	zero, temp					; blend temp with zero values
 		addp#x	sum0, zero					; sum0 += temp
 		addp#x	sum1, sum2
 		addp#x	sum3, sum4
@@ -3377,7 +3435,7 @@ bmask	= bytes - 1							; elements aligning mask
 		movup#x	a2temp, [array2]			; a2temp = array2[0]
 		movup#x	a1temp, [array1]			; a1temp = array1[0]
 		mulp#x	a1temp, a2temp				; a1temp *= a2temp
-	pblendvb	a1temp, zero				; blend a1temp with zero values
+	blendvp#x	a1temp, zero				; blend a1temp with zero values
 		addp#x	sum0, a1temp				; sum0 += a1temp
 ;---[Vector loop]--------------------------
 .vloop:	add		index, VSIZE				; index += VSIZE
@@ -3420,7 +3478,7 @@ bmask	= bytes - 1							; elements aligning mask
 		movup#x	a2temp, [array2 + index]	; a2temp = array2[index]
 		movup#x	a1temp, [array1 + index]	; a1temp = array1[index]
 		mulp#x	a1temp, a2temp				; a1temp *= a2temp
-	pblendvb	zero, a1temp				; blend a1temp with zero values
+	blendvp#x	zero, a1temp				; blend a1temp with zero values
 		addp#x	sum0, zero					; sum0 += a1temp
 		addp#x	sum1, sum2
 		addp#x	sum3, sum4
@@ -3447,7 +3505,135 @@ SumMul_flt64:	SUM_MUL	d
 ;******************************************************************************;
 ;       Minimum and maximum values                                             ;
 ;******************************************************************************;
-macro	MINMAX		op, value, abs, x
+macro	MINMAX_INT	op, res, reg, val, c, type, x
+{
+;---[Parameters]---------------------------
+array	equ		rdi							; pointer to array
+size	equ		rsi							; array size (count of elements)
+;---[Internal variables]-------------------
+index	equ		rax							; offset from beginning of array
+aindex	equ		rcx							; array offset from vector boundary
+result	equ		index						; result register
+value	equ		index						; register which holds limit value
+ptr		equ		r10							; temporary pointer to array
+blend	equ		xmm0						; blending mask
+temp	equ		xmm1						; temporary register
+res0	equ		xmm2						; intermediate result #1
+res1	equ		xmm3						; intermediate result #2
+res2	equ		xmm4						; intermediate result #3
+res3	equ		xmm5						; intermediate result #4
+res4	equ		xmm6						; intermediate result #5
+limit	equ		xmm7						; limit value
+if x eq b
+scale	= 0									; scale value
+else if x eq w
+scale	= 1									; scale value
+else if x eq d
+scale	= 2									; scale value
+else if x eq q
+scale	= 3									; scale value
+end if
+bytes	= 1 shl scale						; size of array element (bytes)
+bmask	= bytes - 1							; elements aligning mask
+;------------------------------------------
+	prefetchnta	[array]						; prefetch data
+		shl		size, scale					; convert size to bytes
+		jz		.error						; if (size == 0), then go to error branch
+		mov		res, val					; result = value
+if scale <> 0
+		test	array, bmask				; if elements have wrong alignment
+		jnz		.sloop						;     then skip vector code
+end if
+;---[Normal execution branch]--------------
+		movq	limit, value				; limit = value
+		mov		aindex, array
+		and		aindex, VMASK				; get array offset from vector boundary
+		sub		array, aindex				; align pointer to vector boundary
+		mov		ptr, array					; ptr = array
+		clone	limit, scale				; duplicate value through the entire register
+		movdqa	res0, limit					; res0 = limit
+		movdqa	res1, limit					; res1 = limit
+		movdqa	res2, limit					; res2 = limit
+		movdqa	res3, limit					; res3 = limit
+		movdqa	res4, limit					; res4 = limit
+;---[Unaligned operation]------------------
+		add		size, aindex				; size += aindex
+		shl		aindex, 4					; compute shift in mask array
+		movdqa	blend, dqword [maskS1 + aindex]
+		xor		index, index				; index = 0
+		sub		size, VSIZE					; if (size <= VSIZE)
+		jbe		.tail						;     then process array tail
+		movdqa	temp, [array]				; temp = array[0]
+	pblendvb	temp, limit					; blend temp with limit values
+	p#op#type#x	res0, temp					; find min or max value
+		pxor	blend, blend				; blend = 0
+;---[Vector loop]--------------------------
+.vloop:	add		index, VSIZE				; index += VSIZE
+		sub		size, VSIZE					; if (size <= VSIZE)
+		jbe		.tail						;     then process array tail
+		movdqa	temp, [ptr + 1*VSIZE]		; temp = ptr[1]
+	p#op#type#x	res1, temp					; find min or max value
+		add		index, VSIZE				; index += VSIZE
+		sub		size, VSIZE					; if (size <= VSIZE)
+		jbe		.tail						;     then process array tail
+		movdqa	temp, [ptr + 2*VSIZE]		; temp = ptr[2]
+	p#op#type#x	res2, temp					; find min or max value
+		add		index, VSIZE				; index += VSIZE
+		sub		size, VSIZE					; if (size <= VSIZE)
+		jbe		.tail						;     then process array tail
+		movdqa	temp, [ptr + 3*VSIZE]		; temp = ptr[3]
+	p#op#type#x	res3, temp					; find min or max value
+		add		index, VSIZE				; index += VSIZE
+		sub		size, VSIZE					; if (size <= VSIZE)
+		jbe		.tail						;     then process array tail
+		movdqa	temp, [ptr + 4*VSIZE]		; temp = ptr[4]
+	p#op#type#x	res4, temp					; find min or max value
+	prefetchnta	[ptr + PSTEP]				; prefetch next portion of data
+		add		ptr, 4 * VSIZE				; ptr += 4 * VSIZE
+		jmp		.vloop						; do while (true)
+;---[End of vector loop]-------------------
+.tail:	shl		size, 4						; compute shift in mask array
+		pandn	blend, dqword [maskS2 + size]
+		movdqa	temp, [array + index]		; temp = array[index]
+	pblendvb	limit, temp					; blend temp with limit values
+	p#op#type#x	res0, limit					; find min or max value
+	p#op#type#x	res1, res2
+	p#op#type#x	res3, res4
+	p#op#type#x	res1, res3
+	p#op#type#x	res0, res1					; find min or max values from all accumulators
+		palignr	temp, res0, 8
+	p#op#type#x	res0, temp
+if scale < 3
+		palignr	temp, res0, 4
+	p#op#type#x	res0, temp
+end if
+if scale < 2
+		palignr	temp, res0, 2
+	p#op#type#x	res0, temp
+end if
+if scale < 1
+		palignr	temp, res0, 1
+	p#op#type#x	res0, temp
+end if
+		movq	result, res0				; return min or max value
+		ret
+if scale <> 0
+;---[Scalar loop]--------------------------
+.sloop:	mov		reg, [array]				; reg = array[0]
+		cmp		reg, res					; if (reg condition result)
+		cmov#c	res, reg					;     result = reg
+		add		array, bytes				; array++
+		sub		size, bytes					; size--
+		jnz		.sloop						; do while (size != 0)
+;---[End of scalar loop]-------------------
+		ret
+end if
+;---[Error branch]-------------------------
+.error:	xor		result, result				; return 0
+		ret
+}
+;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+macro	MINMAX_FLT	op, value, abs, x
 {
 ;---[Parameters]---------------------------
 array	equ		rdi							; pointer to array
@@ -3485,9 +3671,9 @@ bytes	= 1 shl scale						; size of array element (bytes)
 bmask	= bytes - 1							; elements aligning mask
 ;------------------------------------------
 	prefetchnta	[array]						; prefetch data
-		initreg	result, index, value		; result = value
 		shl		size, scale					; convert size to bytes
-		jz		.exit						; if (size == 0), then go to exit
+		jz		.error						; if (size == 0), then go to error branch
+		initreg	result, index, value		; result = value
 if abs
 		initreg	mask, index, dmask			; mask = dmask
 end if
@@ -3502,12 +3688,12 @@ end if
 if abs
 		shufp#x	mask, mask, 0x0				; duplicate value through the entire register
 end if
-		movap#x	res0, result				; res0 = infinity
-		movap#x	res1, result				; res1 = infinity
-		movap#x	res2, result				; res2 = infinity
-		movap#x	res3, result				; res3 = infinity
-		movap#x	res4, result				; res4 = infinity
-		movap#x	inf, result					; inf = infinity
+		movap#x	res0, result				; res0 = value
+		movap#x	res1, result				; res1 = value
+		movap#x	res2, result				; res2 = value
+		movap#x	res3, result				; res3 = value
+		movap#x	res4, result				; res4 = value
+		movap#x	inf, result					; inf = value
 		xorp#x	flags0, flags0				; flags0 = 0
 		xorp#x	flags1, flags1				; flags1 = 0
 		xorp#x	flags2, flags2				; flags2 = 0
@@ -3524,8 +3710,8 @@ end if
 if abs
 		andp#x	temp, mask					; temp = Abs (temp)
 end if
-	pblendvb	temp, inf					; blend temp with infinity values
-		op#p#x	res0, temp					; find min or max values
+	blendvp#x	temp, inf					; blend temp with infinity values
+		op#p#x	res0, temp					; find min or max value
 		cmpp#x	temp, temp, 3				; check values for NANs
 		orp#x	flags0, temp				; accumulate NaN check results
 		xorp#x	blend, blend				; blend = 0
@@ -3537,7 +3723,7 @@ end if
 if abs
 		andp#x	temp, mask					; temp = Abs (temp)
 end if
-		op#p#x	res1, temp					; find min or max values
+		op#p#x	res1, temp					; find min or max value
 		cmpp#x	temp, temp, 3				; check values for NANs
 		orp#x	flags1, temp				; accumulate NaN check results
 		add		index, VSIZE				; index += VSIZE
@@ -3547,7 +3733,7 @@ end if
 if abs
 		andp#x	temp, mask					; temp = Abs (temp)
 end if
-		op#p#x	res2, temp					; find min or max values
+		op#p#x	res2, temp					; find min or max value
 		cmpp#x	temp, temp, 3				; check values for NANs
 		orp#x	flags2, temp				; accumulate NaN check results
 		add		index, VSIZE				; index += VSIZE
@@ -3557,7 +3743,7 @@ end if
 if abs
 		andp#x	temp, mask					; temp = Abs (temp)
 end if
-		op#p#x	res3, temp					; find min or max values
+		op#p#x	res3, temp					; find min or max value
 		cmpp#x	temp, temp, 3				; check values for NANs
 		orp#x	flags3, temp				; accumulate NaN check results
 		add		index, VSIZE				; index += VSIZE
@@ -3567,7 +3753,7 @@ end if
 if abs
 		andp#x	temp, mask					; temp = Abs (temp)
 end if
-		op#p#x	res4, temp					; find min or max values
+		op#p#x	res4, temp					; find min or max value
 		cmpp#x	temp, temp, 3				; check values for NANs
 		orp#x	flags4, temp				; accumulate NaN check results
 	prefetchnta	[ptr + PSTEP]				; prefetch next portion of data
@@ -3580,8 +3766,8 @@ end if
 if abs
 		andp#x	temp, mask					; temp = Abs (temp)
 end if
-	pblendvb	inf, temp					; blend temp with infinity values
-		op#p#x	res0, inf					; find min or max values
+	blendvp#x	inf, temp					; blend temp with infinity values
+		op#p#x	res0, inf					; find min or max value
 		cmpp#x	inf, inf, 3					; check values for NANs
 		orp#x	flags0, inf					; accumulate NaN check results
 		orp#x	flags1, flags2
@@ -3594,10 +3780,10 @@ end if
 		op#p#x	res1, res2
 		op#p#x	res3, res4
 		op#p#x	res1, res3
-		op#p#x	res0, res1					; find min or max values from all accumulators
+		op#p#x	res0, res1					; find min or max value from all accumulators
 if x eq s
 		movhlps	temp, res0					; temp = upper half of res0
-		op#p#x	res0, temp					; find min or max values
+		op#p#x	res0, temp					; find min or max value
 end if
 		movap#x	temp, res0					; temp = res0
 		shufp#x	temp, temp, 0x1				; shuffle values in temp register
@@ -3609,34 +3795,66 @@ end if
 if abs
 		andp#x	temp, mask					; temp = Abs (temp)
 end if
-		op#s#x	result, temp				; find min or max values
+		op#s#x	result, temp				; find min or max value
 		comis#x	temp, temp					; if NAN is found,
 		jp		.error						;     then go to error branch
 		add		array, bytes				; array++
 		sub		size, bytes					; size--
 		jnz		.sloop						; do while (size != 0)
-;---[Normal exit]--------------------------
-.exit:	ret
+;---[End of scalar loop]-------------------
+		ret
 ;---[Error branch]-------------------------
 .error:	initreg	result, index, nan			; return NaN
 		ret
 }
 
-; Minimum value
-Min_flt32:		MINMAX	min, PINF_FLT32, 0, s
-Min_flt64:		MINMAX	min, PINF_FLT64, 0, d
+;==============================================================================;
+;       Minimum value                                                          ;
+;==============================================================================;
 
-; Minimum absolute value
-MinAbs_flt32:	MINMAX	min, PINF_FLT32, 1, s
-MinAbs_flt64:	MINMAX	min, PINF_FLT64, 1, d
+; Unsigned integer types
+Min_uint8:		MINMAX_INT	min, al, dl, 0xFF, b, u, b
+Min_uint16:		MINMAX_INT	min, ax, dx, 0xFFFF, b, u, w
+Min_uint32:		MINMAX_INT	min, eax, edx, 0xFFFFFFFF, b, u, d
 
-; Maximum value
-Max_flt32:		MINMAX	max, MINF_FLT32, 0, s
-Max_flt64:		MINMAX	max, MINF_FLT64, 0, d
+; Signed integer types
+Min_sint8:		MINMAX_INT	min, al, dl, 0x7F, l, s, b
+Min_sint16:		MINMAX_INT	min, ax, dx, 0x7FFF, l, s, w
+Min_sint32:		MINMAX_INT	min, eax, edx, 0x7FFFFFFF, l, s, d
 
-; Maximum absolute value
-MaxAbs_flt32:	MINMAX	max, MINF_FLT32, 1, s
-MaxAbs_flt64:	MINMAX	max, MINF_FLT64, 1, d
+; Floating-point types
+Min_flt32:		MINMAX_FLT	min, PINF_FLT32, 0, s
+Min_flt64:		MINMAX_FLT	min, PINF_FLT64, 0, d
+
+;==============================================================================;
+;       Minimum absolute value                                                 ;
+;==============================================================================;
+MinAbs_flt32:	MINMAX_FLT	min, PINF_FLT32, 1, s
+MinAbs_flt64:	MINMAX_FLT	min, PINF_FLT64, 1, d
+
+;==============================================================================;
+;       Maximum value                                                          ;
+;==============================================================================;
+
+; Unsigned integer types
+Max_uint8:		MINMAX_INT	max, al, dl, 0x00, a, u, b
+Max_uint16:		MINMAX_INT	max, ax, dx, 0x0000, a, u, w
+Max_uint32:		MINMAX_INT	max, eax, edx, 0x00000000, a, u, d
+
+; Signed integer types
+Max_sint8:		MINMAX_INT	max, al, dl, 0x80, g, s, b
+Max_sint16:		MINMAX_INT	max, ax, dx, 0x8000, g, s, w
+Max_sint32:		MINMAX_INT	max, eax, edx, 0x80000000, g, s, d
+
+; Floating-point types
+Max_flt32:		MINMAX_FLT	max, MINF_FLT32, 0, s
+Max_flt64:		MINMAX_FLT	max, MINF_FLT64, 0, d
+
+;==============================================================================;
+;       Maximum absolute value                                                 ;
+;==============================================================================;
+MaxAbs_flt32:	MINMAX_FLT	max, MINF_FLT32, 1, s
+MaxAbs_flt64:	MINMAX_FLT	max, MINF_FLT64, 1, d
 
 ;******************************************************************************;
 ;       Rounding                                                               ;
@@ -3707,7 +3925,7 @@ else if type = 2
 else
 	roundp#x	temp, temp, mode			; temp = Round (temp)
 end if
-	pblendvb	temp, data					; blend temp with original data
+	blendvp#x	temp, data					; blend temp with original data
 		movap#x	[array], temp				; array[0] = temp
 		xorp#x	blend, blend				; blend = 0
 ;---[Vector loop]--------------------------
@@ -3799,7 +4017,7 @@ else if type = 2
 else
 	roundp#x	temp, temp, mode			; temp = Round (temp)
 end if
-	pblendvb	data, temp					; blend temp with original data
+	blendvp#x	data, temp					; blend temp with original data
 		movap#x	[array + index], data		; array[index] = temp
 		ret
 ;---[Scalar loop]--------------------------
@@ -3885,8 +4103,10 @@ bmask	= bytes - 1							; elements aligning mask
 	prefetchnta	[array]						; prefetch data
 		shl		size, scale					; convert size to bytes
 		jz		.exit						; if (size == 0), then go to exit
+if scale <> 0
 		test	array, bmask				; if elements have wrong alignment
 		jnz		.sloop						;     then skip vector code
+end if
 ;---[Normal execution branch]--------------
 		movq	pattern, patt				; pattern = patt
 		movq	replace, value				; replace = value
@@ -3965,6 +4185,7 @@ bmask	= bytes - 1							; elements aligning mask
 	pblendvb	data, replace
 		movdqa	[array + index], data		; array[index] = replace (data, pattern, value)
 		ret
+if scale <> 0
 ;---[Scalar loop]--------------------------
 .sloop:	cmp		[array], reg				; if (array[0] == pattern) {
 		jne		@f							;     array[0] = value
@@ -3972,6 +4193,7 @@ bmask	= bytes - 1							; elements aligning mask
 @@:		add		array, bytes				; array++
 		sub		size, bytes					; size--
 		jnz		.sloop						; do while (size != 0)
+end if
 ;---[Not found branch]---------------------
 .exit:	ret
 }
@@ -4021,8 +4243,10 @@ bmask	= bytes - 1							; elements aligning mask
 		xor		index, index				; index = 0
 		shl		size, scale					; convert size to bytes
 		jz		.ntfnd						; if (size == 0), then go to not found branch
+if scale <> 0
 		test	array, bmask				; if elements have wrong alignment
 		jnz		.sloop						;     then skip vector code
+end if
 ;---[Normal execution branch]--------------
 		movq	pattern, patt				; pattern = patt
 		mov		aindex, array
@@ -4085,6 +4309,7 @@ bmask	= bytes - 1							; elements aligning mask
 		add		index, fmask				; index += fmask
 		shftr	index, scale				; return index
 		ret
+if scale <> 0
 ;---[Scalar loop]--------------------------
 .sloop:	cmp		[array], reg				; if (array[0] == pattern)
 		je		.exit						;     then go to exit
@@ -4092,6 +4317,7 @@ bmask	= bytes - 1							; elements aligning mask
 		add		index, 1					; index++
 		sub		size, bytes					; size--
 		jnz		.sloop						; do while (size != 0)
+end if
 ;---[Not found branch]---------------------
 .ntfnd:	mov		index, NOT_FOUND			; return NOT_FOUND
 .exit:	ret
@@ -4135,8 +4361,10 @@ bmask	= bytes - 1							; elements aligning mask
 		mov		index, size					; index = size
 		shl		size, scale					; convert size to bytes
 		jz		.ntfnd						; if (size == 0), then go to not found branch
+if scale <> 0
 		test	array, bmask				; if elements have wrong alignment
 		jnz		.sloop						;     then skip vector code
+end if
 ;---[Normal execution branch]--------------
 		movq	pattern, patt				; pattern = patt
 		mov		aindex, array
@@ -4199,6 +4427,7 @@ bmask	= bytes - 1							; elements aligning mask
 		js		.ntfnd						;     then go to not found branch
 		shftr	index, scale				; return index
 		ret
+if scale <> 0
 ;---[Scalar loop]--------------------------
 .sloop:	sub		array, bytes				; array--
 		sub		index, 1					; index--
@@ -4206,6 +4435,7 @@ bmask	= bytes - 1							; elements aligning mask
 		je		.exit						;     then go to exit
 		sub		size, bytes					; size--
 		jnz		.sloop						; do while (size != 0)
+end if
 ;---[Not found branch]---------------------
 .ntfnd:	mov		index, NOT_FOUND			; return NOT_FOUND
 .exit:	ret
@@ -5862,8 +6092,8 @@ end if
 		add		index, fmask				; index += fmask
 		shftr	index, scale				; return index
 		ret
-;---[Scalar loop]--------------------------
 if scale <> 0
+;---[Scalar loop]--------------------------
 .sloop:	mov		element, [array]
 		cmp		[array + bytes], element	; if (array[0] == array[1])
 		je		.exit						;     then go to exit

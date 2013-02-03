@@ -351,15 +351,17 @@ end if
 .brk:	bsf		emask, emask				; find index of first occurence of eol
 		add		index, emask				; index += emask
 		shftr	index, scale				; return index
-.exit:	ret
-;---[Scalar loop]--------------------------
+		ret
 if scale <> 0
+;---[Scalar loop]--------------------------
 .sloop:	mov		char, [string]				; char = string[0]
 		test	char, char					; if (char == eol)
 		jz		.exit						;     then go to exit
 		add		string, bytes				; string++
 		add		index, 1					; index++
 		jmp		.sloop						; do while (true)
+;---[End of scalar loop]-------------------
+.exit:	ret
 end if
 }
 Len_char8:	LEN	cl, b
@@ -737,8 +739,8 @@ end if
 		movdqu	[target + index - VSIZE + 1], sdata0
 		shftr	index, scale				; return index
 		ret
-;---[Scalar loop]--------------------------
 if scale <> 0
+;---[Scalar loop]--------------------------
 .sloop:	mov		char, [ptr2]
 		mov		[ptr1], char				; ptr1[0] = ptr2[0]
 		test	char, char					; if (ptr2[0] == 0)
@@ -894,8 +896,8 @@ end if
 		movdqu	[target + index - VSIZE], sdata0
 		shftr	index, scale				; return index
 		ret
-;---[Scalar loop]--------------------------
 if scale <> 0
+;---[Scalar loop]--------------------------
 .sloop:	mov		char, [ptr2]
 		mov		[ptr1], char				; ptr1[0] = ptr2[0]
 		test	char, char					; if (ptr2[0] == 0)
@@ -1201,8 +1203,8 @@ end if
 		jnz		.tloop						; do while (size != 0)
 ;---[End of tail loop]---------------------
 		jmp		.start						; compare another memory block
-;---[Scalar loop]--------------------------
 if scale <> 0
+;---[Scalar loop]--------------------------
 .sloop:	mov		char, [string1]
 		cmp		char, [string2]				; if (string1[0] != string2[0])
 		jne		.exit						;     then go to exit
@@ -1510,8 +1512,8 @@ end if
 	pblendvb	echeck, replace
 		movdqa	[string + index], echeck	; string[index] = replace (echeck, pattern, value)
 @@:		ret
-;---[Scalar loop]--------------------------
 if scale <> 0
+;---[Scalar loop]--------------------------
 .sloop:	mov		char, [string]				; char = string[0]
 		cmp		char, patt					; if (char == patt) {
 		jne		@f							;     string[0] = value
@@ -1644,8 +1646,8 @@ end if
 		add		index, pmask				; index += pmask
 		shftr	index, scale				; return index
 		ret
-;---[Scalar loop]--------------------------
 if scale <> 0
+;---[Scalar loop]--------------------------
 .sloop:	mov		char, [string]				; char = string[0]
 		cmp		char, patt					; if (char == patt)
 		je		.exit						;     then go to exit

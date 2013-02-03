@@ -748,7 +748,7 @@ end if
 		jbe		.tail						;     then process array tail
 		movap#x	temp, [array]				; temp = array[0]
 		subp#x	temp, vector				; temp -= vector
-	pblendvb	temp, zero					; blend temp with zero values
+	blendvp#x	temp, zero					; blend temp with zero values
 if type = 1
 		mulp#x	temp, temp					; temp = temp ^ 2
 else if type = 2
@@ -809,7 +809,7 @@ end if
 		andnp#x	blend, dqword [maskS2 + size]
 		movap#x	temp, [array + index]		; temp = array[index]
 		subp#x	temp, vector				; temp -= vector
-	pblendvb	zero, temp					; blend temp with zero values
+	blendvp#x	zero, temp					; blend temp with zero values
 if type = 1
 		mulp#x	temp, temp					; temp = temp ^ 2
 else if type = 2
@@ -1145,7 +1145,7 @@ bmask	= bytes - 1							; elements aligning mask
 		jbe		.tail						;     then process array tail
 		movap#x	temp0, [array]				; temp0 = array[0]
 		subp#x	temp0, vector				; temp0 -= vector
-	pblendvb	temp0, zero					; blend temp with zero values
+	blendvp#x	temp0, zero					; blend temp with zero values
 		movap#x	temp1, temp0				; temp1 = temp0
 		mulp#x	temp0, temp0
 		addp#x	sum0, temp0					; sum0 += (array[0] - mean)^2
@@ -1201,7 +1201,7 @@ bmask	= bytes - 1							; elements aligning mask
 		andnp#x	blend, dqword [maskS2 + size]
 		movap#x	temp0, [array + index]		; temp = array[index]
 		subp#x	temp0, vector				; temp -= vector
-	pblendvb	zero, temp0					; blend temp with zero values
+	blendvp#x	zero, temp0					; blend temp with zero values
 		movap#x	temp1, zero					; temp1 = temp0
 		mulp#x	zero, zero
 		addp#x	sum0, zero					; sum0 += (array[index] - mean)^2
@@ -1341,7 +1341,7 @@ bmask	= bytes - 1							; elements aligning mask
 		jbe		.tail						;     then process array tail
 		movap#x	temp, [array]				; temp = array[0]
 		subp#x	temp, vector				; temp -= vector
-	pblendvb	temp, zero					; blend temp with zero values
+	blendvp#x	temp, zero					; blend temp with zero values
 		mulp#x	temp, temp
 		addp#x	sum0, temp					; sum0 += (array[0] - mean)^2
 		mulp#x	temp, temp
@@ -1392,7 +1392,7 @@ bmask	= bytes - 1							; elements aligning mask
 		andnp#x	blend, dqword [maskS2 + size]
 		movap#x	temp, [array + index]		; temp = array[index]
 		subp#x	temp, vector				; temp -= vector
-	pblendvb	zero, temp					; blend temp with zero values
+	blendvp#x	zero, temp					; blend temp with zero values
 		mulp#x	zero, zero
 		addp#x	sum0, zero					; sum0 += (array[index] - mean)^2
 		mulp#x	zero, zero
@@ -1525,7 +1525,7 @@ bmask	= bytes - 1							; elements aligning mask
 		movup#x	a1temp, [array1]			; a1temp = array1[0]
 		subp#x	a1temp, vector1				; a1temp -= vector1
 		mulp#x	a1temp, a2temp				; a1temp *= a2temp
-	pblendvb	a1temp, zero				; blend a1temp with zero values
+	blendvp#x	a1temp, zero				; blend a1temp with zero values
 		addp#x	sum0, a1temp				; sum0 += a1temp
 ;---[Vector loop]--------------------------
 .vloop:	add		index, VSIZE				; index += VSIZE
@@ -1578,7 +1578,7 @@ bmask	= bytes - 1							; elements aligning mask
 		movup#x	a1temp, [array1 + index]	; a1temp = array1[index]
 		subp#x	a1temp, vector1				; a1temp -= vector1
 		mulp#x	a1temp, a2temp				; a1temp *= a2temp
-	pblendvb	zero, a1temp				; blend a1temp with zero values
+	blendvp#x	zero, a1temp				; blend a1temp with zero values
 		addp#x	sum0, zero					; sum0 += a1temp
 		addp#x	sum1, sum2
 		addp#x	sum3, sum4
@@ -1685,8 +1685,8 @@ bmask	= bytes - 1							; elements aligning mask
 		subp#x	a2temp, vector2				; a2temp -= vector2
 		movup#x	a1temp, [array1]			; a1temp = array1[0]
 		subp#x	a1temp, vector1				; a1temp -= vector1
-	pblendvb	a2temp, zero2				; blend a2temp with zero values
-	pblendvb	a1temp, zero1				; blend a1temp with zero values
+	blendvp#x	a2temp, zero2				; blend a2temp with zero values
+	blendvp#x	a1temp, zero1				; blend a1temp with zero values
 		movap#x	temp, a2temp
 		mulp#x	temp, a1temp				; temp = a1temp * a2temp
 		addp#x	sum0, temp					; sum0 += temp
@@ -1764,8 +1764,8 @@ bmask	= bytes - 1							; elements aligning mask
 		subp#x	a2temp, vector2				; a2temp -= vector2
 		movup#x	a1temp, [array1 + index]	; a1temp = array1[index]
 		subp#x	a1temp, vector1				; a1temp -= vector1
-	pblendvb	zero2, a2temp				; blend a2temp with zero values
-	pblendvb	zero1, a1temp				; blend a1temp with zero values
+	blendvp#x	zero2, a2temp				; blend a2temp with zero values
+	blendvp#x	zero1, a1temp				; blend a1temp with zero values
 		movap#x	temp, zero2
 		mulp#x	temp, zero1					; temp = a1temp * a2temp
 		addp#x	sum0, temp					; sum0 += temp

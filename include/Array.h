@@ -501,19 +501,51 @@ static flt64_t SumMul (const flt64_t array1[], const flt64_t array2[], size_t si
 //      Minimum and maximum values                                            //
 //****************************************************************************//
 
-// Minimum value
+//============================================================================//
+//      Minimum value                                                         //
+//============================================================================//
+
+// Unsigned integer types
+static uint8_t Min (const uint8_t array[], size_t size);
+static uint16_t Min (const uint16_t array[], size_t size);
+static uint32_t Min (const uint32_t array[], size_t size);
+
+// Signed integer types
+static sint8_t Min (const sint8_t array[], size_t size);
+static sint16_t Min (const sint16_t array[], size_t size);
+static sint32_t Min (const sint32_t array[], size_t size);
+
+// Floating-point types
 static flt32_t Min (const flt32_t array[], size_t size);
 static flt64_t Min (const flt64_t array[], size_t size);
 
-// Minimum absolute value
+//============================================================================//
+//      Minimum absolute value                                                //
+//============================================================================//
 static flt32_t MinAbs (const flt32_t array[], size_t size);
 static flt64_t MinAbs (const flt64_t array[], size_t size);
 
-// Maximum value
+//============================================================================//
+//      Maximum value                                                         //
+//============================================================================//
+
+// Unsigned integer types
+static uint8_t Max (const uint8_t array[], size_t size);
+static uint16_t Max (const uint16_t array[], size_t size);
+static uint32_t Max (const uint32_t array[], size_t size);
+
+// Signed integer types
+static sint8_t Max (const sint8_t array[], size_t size);
+static sint16_t Max (const sint16_t array[], size_t size);
+static sint32_t Max (const sint32_t array[], size_t size);
+
+// Floating-point types
 static flt32_t Max (const flt32_t array[], size_t size);
 static flt64_t Max (const flt64_t array[], size_t size);
 
-// Maximum absolute value
+//============================================================================//
+//      Maximum absolute value                                                //
+//============================================================================//
 static flt32_t MaxAbs (const flt32_t array[], size_t size);
 static flt64_t MaxAbs (const flt64_t array[], size_t size);
 
@@ -538,8 +570,8 @@ static void Round (flt32_t array[], size_t size);
 static void Round (flt64_t array[], size_t size);
 
 // Round to nearest integer, toward zero (truncation)
-static void Truncate (flt32_t array[], size_t size);
-static void Truncate (flt64_t array[], size_t size);
+static void Trunc (flt32_t array[], size_t size);
+static void Trunc (flt64_t array[], size_t size);
 
 // Fractional part
 static void Frac (flt32_t array[], size_t size);
@@ -1539,19 +1571,51 @@ flt64_t Array_SumMul_flt64 (const flt64_t array1[], const flt64_t array2[], size
 //      Minimum and maximum values                                            //
 //****************************************************************************//
 
-// Minimum value
+//============================================================================//
+//      Minimum value                                                         //
+//============================================================================//
+
+// Unsigned integer types
+uint8_t Array_Min_uint8 (const uint8_t array[], size_t size);
+uint16_t Array_Min_uint16 (const uint16_t array[], size_t size);
+uint32_t Array_Min_uint32 (const uint32_t array[], size_t size);
+
+// Signed integer types
+sint8_t Array_Min_sint8 (const sint8_t array[], size_t size);
+sint16_t Array_Min_sint16 (const sint16_t array[], size_t size);
+sint32_t Array_Min_sint32 (const sint32_t array[], size_t size);
+
+// Floating-point types
 flt32_t Array_Min_flt32 (const flt32_t array[], size_t size);
 flt64_t Array_Min_flt64 (const flt64_t array[], size_t size);
 
-// Minimum absolute value
+//============================================================================//
+//      Minimum absolute value                                                //
+//============================================================================//
 flt32_t Array_MinAbs_flt32 (const flt32_t array[], size_t size);
 flt64_t Array_MinAbs_flt64 (const flt64_t array[], size_t size);
 
-// Maximum value
+//============================================================================//
+//      Maximum value                                                         //
+//============================================================================//
+
+// Unsigned integer types
+uint8_t Array_Max_uint8 (const uint8_t array[], size_t size);
+uint16_t Array_Max_uint16 (const uint16_t array[], size_t size);
+uint32_t Array_Max_uint32 (const uint32_t array[], size_t size);
+
+// Signed integer types
+sint8_t Array_Max_sint8 (const sint8_t array[], size_t size);
+sint16_t Array_Max_sint16 (const sint16_t array[], size_t size);
+sint32_t Array_Max_sint32 (const sint32_t array[], size_t size);
+
+// Floating-point types
 flt32_t Array_Max_flt32 (const flt32_t array[], size_t size);
 flt64_t Array_Max_flt64 (const flt64_t array[], size_t size);
 
-// Maximum absolute value
+//============================================================================//
+//      Maximum absolute value                                                //
+//============================================================================//
 flt32_t Array_MaxAbs_flt32 (const flt32_t array[], size_t size);
 flt64_t Array_MaxAbs_flt64 (const flt64_t array[], size_t size);
 
@@ -1576,8 +1640,8 @@ void Array_Round_flt32 (flt32_t array[], size_t size);
 void Array_Round_flt64 (flt64_t array[], size_t size);
 
 // Round to nearest integer, toward zero (truncation)
-void Array_Truncate_flt32 (flt32_t array[], size_t size);
-void Array_Truncate_flt64 (flt64_t array[], size_t size);
+void Array_Trunc_flt32 (flt32_t array[], size_t size);
+void Array_Trunc_flt64 (flt64_t array[], size_t size);
 
 // Fractional part
 void Array_Frac_flt32 (flt32_t array[], size_t size);
