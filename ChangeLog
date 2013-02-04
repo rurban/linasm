@@ -1,52 +1,93 @@
-2012-10-25	Release 0.98 (beta)
--------------------------------
++==============================================================================+
+|   2013-02-04  Release 0.99 (beta)                                            |
++==============================================================================+
+
 Bug fixes:
-	* Math.asm: All Check functions: Fixed error in the check algorithm
+    * Statistics.asm: Fixed incorrect loop count in functions "Variance", "StandardDeviation", and "AbsoluteDeviation"
+    * String.asm: Fixed incorrect return value in function FindSymbols
 
 New features:
-	* Array.asm: Added functions "Move" and "Clone"
-	* Array.asm: Added binary search function "FindAsc" and "FindDsc" for keys searching
-	* Array.asm: Added rounding functions: "RoundDown", "RoundUp", "RoundInt", "Round" and "Truncate"
-	* Array.asm: Added scalar bitwise functions AND, OR, XOR
-	* Math.asm: Added functions "Exp2", "Exp2m1", "Exp10", "Exp10m1", "Exp", "Expm1" for real argument
-	* Math.asm: Improved functions "Exp2", "Exp10", "Exp" for integral argument
-	* Math.asm: Added trigonometric functions "SinQ", "CosQ", "TanQ", "CotQ" and "SinCosQ"
-	* Math.asm: Added function "Cath" and improved "Hypot" function
-	* Math.asm: Added "GCD" and "LCM" functions
-	* Math.asm: Added fast "RoundInt" and "Truncate" functions
-	* Math.asm: Improved "Scale2", "Scale10" and "ScaleE" functions
-	* String.asm: Added string concatenation functions and "ReplaceSymbol" function
+    * Array.asm: Added functions "MergeAsc", "MergeAscKey", "MergeDsc", "MergeDscKey"
+    * Array.asm: Added functions "Duplicates", "CheckDup"
+    * Array.asm: Added function "CheckEqual"
+    * Array.asm: Added function "NegAbs"
+    * Array.asm: Added function "SumAbs"
+    * Array.asm: Added functions "Not", "And", "Or", "Xor" for size_t type
+    * Array.asm Added integer "Add", "Sub", "Min" and "Max" functions
+    * Math.asm: Added functions "RoundDown", "RoundUp", "Round" and "Frac"
+    * Statistics.asm: Added functions "LowerQuartile", "UpperQuartile" and "InterquartileRange" for integral types
+    * Statistics.asm: Improved "Mean" function
+    * String.asm: Added addition "FindString" function
+    * String.asm: Added functions "FindFwd", "FindBwd", "FindAsc", "FindDsc", "SortAsc", "SortDsc", "CheckDup"
 
 Changes in behavior:
-	* String.asm: "Copy" function returns empty string if target buffer is too small
-	* Array.asm: Changed C function names for bitwise AND, OR, and XOR
+    * Array.asm: Changed prototype of function "Unique"
+    * Array.asm: Removed binary serching functions for complex keys
+    * Array.asm: Changed prototypes of QuickSort and RadixSort for keys
+    * Array.asm: Functions "HasInf" and "HasNaN" have been renamed to "CheckInf", "CheckNaN". Return value is also changed
+    * Array.asm: Changed return value in fuctions "Min", "MinAbs", "Max", "MaxAbs". If array size is 0, then NaN is returned
+    * Array.asm: Changed name of rounding function from "Truncate" to "Trunc"
+    * Statistics.asm: Changed prototypes of "Covariance" and "Correlation" functions
+    * String.asm: Changed protype of "ReplaceSymbol" function (removed return value)
+    * String.asm: Removed functions "IsEqual" and added functions "Compare" instead
 
-2012-08-27	Release 0.97 (beta)
--------------------------------
++==============================================================================+
+|   2012-10-25  Release 0.98 (beta)                                            |
++==============================================================================+
+
 Bug fixes:
-	* Array.asm: "Unique" function: Fixed source pointer increment error
+    * Math.asm: All Check functions: Fixed error in the check algorithm
 
 New features:
-	* Added C API for all library functions
+    * Array.asm: Added functions "Move" and "Clone"
+    * Array.asm: Added binary search function "FindAsc" and "FindDsc" for keys searching
+    * Array.asm: Added rounding functions: "RoundDown", "RoundUp", "RoundInt", "Round" and "Truncate"
+    * Array.asm: Added scalar bitwise functions AND, OR, XOR
+    * Math.asm: Added functions "Exp2", "Exp2m1", "Exp10", "Exp10m1", "Exp", "Expm1" for real argument
+    * Math.asm: Improved functions "Exp2", "Exp10", "Exp" for integral argument
+    * Math.asm: Added trigonometric functions "SinQ", "CosQ", "TanQ", "CotQ" and "SinCosQ"
+    * Math.asm: Added function "Cath" and improved "Hypot" function
+    * Math.asm: Added "GCD" and "LCM" functions
+    * Math.asm: Added fast "RoundInt" and "Truncate" functions
+    * Math.asm: Improved "Scale2", "Scale10" and "ScaleE" functions
+    * String.asm: Added string concatenation functions and "ReplaceSymbol" function
 
 Changes in behavior:
-	* String.h: Changed function name "FindSymbols"
-	* Numbers.h: All functions: Changed passing method for "number" parameter from reference to a pointer
+    * String.asm: "Copy" function returns empty string if target buffer is too small
+    * Array.asm: Changed C function names for bitwise AND, OR, and XOR
 
-2012-08-23	Release 0.96 (beta)
--------------------------------
-New features:
-	* Added Filter library
-	* Added Window library
++==============================================================================+
+|   2012-08-27  Release 0.97 (beta)                                            |
++==============================================================================+
 
-2012-08-15	Release 0.95 (alpha)
---------------------------------
+Bug fixes:
+    * Array.asm: "Unique" function: Fixed source pointer increment error
+
 New features:
-	* Added Angle library
-	* Added Array library
-	* Added Math library
-	* Added Numbers library
-	* Added Sequence library
-	* Added Statistics library
-	* Added String library
-	* Added Time library
+    * Added C API for all library functions
+
+Changes in behavior:
+    * String.h: Changed function name "FindSymbols"
+    * Numbers.h: All functions: Changed passing method for "number" parameter from reference to a pointer
+
++==============================================================================+
+|   2012-08-23  Release 0.96 (beta)                                            |
++==============================================================================+
+
+New features:
+    * Added Filter library
+    * Added Window library
+
++==============================================================================+
+|   2012-08-15  Release 0.95 (alpha)                                           |
++==============================================================================+
+
+New features:
+    * Added Angle library
+    * Added Array library
+    * Added Math library
+    * Added Numbers library
+    * Added Sequence library
+    * Added Statistics library
+    * Added String library
+    * Added Time library

@@ -3,8 +3,37 @@
 #                                                                              #
 #                                 LINASM NEWS                                  #
 #                                                                              #
-# License: LGPLv3+                               Copyleft (Ɔ) 2012, Jack Black #
+# License: LGPLv3+                               Copyleft (Ɔ) 2013, Jack Black #
 ################################################################################
+
+#******************************************************************************#
+#       Release 0.99 (beta) [2013-02-04]                                       #
+#******************************************************************************#
+
+It is time to global optimization. For this release I completely rewrote modules
+"Array", "Statistics" and "String". Plus I made some brief improvement in
+Math library. In previous version of LinAsm release the modules "Statistics"
+and "String" were working too slow. String library even was not optimized.
+Now all this is fixed and work much faster (here is the test of statistics
+library). Many of new functions were added to Array and String modules.
+Some functions have changed prototypes + few bugs were fixed. Details can be
+found in "ChangeLog" file inside the package archive.
+
+Major changes in this version:
+    * String library is completely rewrote with vector instructions. Now it is
+      very fast.
+    * Were added integer arithmetic functions to Array library.
+    * Added robust statistics functions "LowerQuartile", "UpperQuartile"
+      and "InterquartileRange" for integer types.
+    * Improved rounding functions in Math library.
+    * Array library has new functions to merge sorted arrays, collect
+      unique values and compute count of duplicates.
+    * String module now can manage array of strings. Were implemented searching
+      and sorting operations. Added check for duplicate strings.
+    * Changed prototypes for key sorting functions in Array library. Removed
+      binary searching functions for complex keys.
+    * Were fixed incorrect loop counter in Statistics library for functions
+      "Variance", "StandardDeviation", and "AbsoluteDeviation".
 
 #******************************************************************************#
 #       Release 0.98 (beta) [2012-10-25]                                       #
@@ -21,17 +50,17 @@ their analogs from GNU C library. A performance test will be added later in
 release 0.99, when Math library is complete.
 
 Also in new release were:
-	* added functions "Move", "Clone" and rounding routines in Array library
-	* added functions "Exp2", "Exp2m1", "Exp10", "Exp10m1", "Exp", "Expm1" for
-	  real argument and improved "Exp2", "Exp10", "Exp" for integral argument
-	* improved "Scale2", "Scale10" and "ScaleE" functions
-	* added trigonometric functions "SinQ", "CosQ", "TanQ", "CotQ", "SinCosQ",
-	  "Cath" and improved "Hypot" function
-	* added "GCD" and "LCM" functions
-	* added fast "RoundInt" and "Truncate" functions
-	* fixed error in Math library (see ChangeLog for details)
-	* added string concatenation functions and "ReplaceSymbol" function in
-	  String library
+    * added functions "Move", "Clone" and rounding routines in Array library
+    * added functions "Exp2", "Exp2m1", "Exp10", "Exp10m1", "Exp", "Expm1" for
+      real argument and improved "Exp2", "Exp10", "Exp" for integral argument
+    * improved "Scale2", "Scale10" and "ScaleE" functions
+    * added trigonometric functions "SinQ", "CosQ", "TanQ", "CotQ", "SinCosQ",
+      "Cath" and improved "Hypot" function
+    * added "GCD" and "LCM" functions
+    * added fast "RoundInt" and "Truncate" functions
+    * fixed error in Math library (see ChangeLog for details)
+    * added string concatenation functions and "ReplaceSymbol" function in
+      String library
 
 #******************************************************************************#
 #       Release 0.97 (beta) [2012-08-27]                                       #
@@ -45,9 +74,9 @@ both variants, and it is shared between them, just providing aliases for already
 implemented functions.
 
 Also in release 0.97 were:
-	* fixed non critical bug in Array library
-	* changed function names in String library
-	* modified parameters passing method for Numbers library
+    * fixed non critical bug in Array library
+    * changed function names in String library
+    * modified parameters passing method for Numbers library
 
 For more details about release changes see the ChangeLog file inside the LinAsm
 package v0.97.
@@ -60,8 +89,8 @@ As I promised before in my future plans for the project, I added Digital Signals
 Processing (DSP) functions to the library package. They implement FIR filters
 and window functions for future Spectral analysis module. Now LinAsm release
 has the two additional libraries:
-	* Filter - Finite impulse response digital filters
-	* Window - Window functions for digital signal processing
+    * Filter - Finite impulse response digital filters
+    * Window - Window functions for digital signal processing
 
 And from now the project has a beta version label. So it is almost done, and
 can be used in your software development projects.
@@ -78,14 +107,14 @@ and mistakes in the source code. If you find some, please send them
 to the bug tracker.
 
 This release includes following libraries:
-	* Angle - Angles conversion from different units
-	* Array - Common routines that are useful for arrays
-	* Math - Math routines
-	* Numbers - Numbers conversion functions
-	* Sequence - Subsequence searching algorithms
-	* Statistics - Widely used statistical functions
-	* String - Safe string functions
-	* Time - Time functions
+    * Angle - Angles conversion from different units
+    * Array - Common routines that are useful for arrays
+    * Math - Math routines
+    * Numbers - Numbers conversion functions
+    * Sequence - Subsequence searching algorithms
+    * Statistics - Widely used statistical functions
+    * String - Safe string functions
+    * Time - Time functions
 
 ################################################################################
 #                                 END OF FILE                                  #
