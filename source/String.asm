@@ -165,17 +165,18 @@ public	FindStr2_char32		as	'_ZN6String10FindStringEPKimS1_'
 public	FindFwd_char8		as	"String_FindFwd_char8"
 public	FindFwd_char16		as	"String_FindFwd_char16"
 public	FindFwd_char32		as	"String_FindFwd_char32"
-public	FindFwd_char8		as	"_ZN6String7FindFwdEPPKcmS1_"
-public	FindFwd_char16		as	"_ZN6String7FindFwdEPPKsmS1_"
-public	FindFwd_char32		as	"_ZN6String7FindFwdEPPKimS1_"
+public	FindFwd_char8		as	"_ZN6String7FindFwdEPPKcmS1_PFiS1_S1_E"
+public	FindFwd_char16		as	"_ZN6String7FindFwdEPPKsmS1_PFiS1_S1_E"
+public	FindFwd_char32		as	"_ZN6String7FindFwdEPPKimS1_PFiS1_S1_E"
+
 
 ; Backward direction search
 public	FindBwd_char8		as	"String_FindBwd_char8"
 public	FindBwd_char16		as	"String_FindBwd_char16"
 public	FindBwd_char32		as	"String_FindBwd_char32"
-public	FindBwd_char8		as	"_ZN6String7FindBwdEPPKcmS1_"
-public	FindBwd_char16		as	"_ZN6String7FindBwdEPPKsmS1_"
-public	FindBwd_char32		as	"_ZN6String7FindBwdEPPKimS1_"
+public	FindBwd_char8		as	"_ZN6String7FindBwdEPPKcmS1_PFiS1_S1_E"
+public	FindBwd_char16		as	"_ZN6String7FindBwdEPPKsmS1_PFiS1_S1_E"
+public	FindBwd_char32		as	"_ZN6String7FindBwdEPPKimS1_PFiS1_S1_E"
 
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 ;       Binary search                                                          ;
