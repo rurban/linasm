@@ -1877,7 +1877,8 @@ stack	equ		rsp							; stack pointer
 s_array	equ		stack + 0 * 8				; stack position of "array" variable
 s_size	equ		stack + 1 * 8				; stack position of "size" variable
 s_str	equ		stack + 2 * 8				; stack position of "string" variable
-s_ptr	equ		stack + 3 * 8				; stack position of "ptr" variable
+s_func	equ		stack + 3 * 8				; stack position of "func" variable
+s_ptr	equ		stack + 4 * 8				; stack position of "ptr" variable
 space	= 5 * 8								; stack size required by the procedure
 ;------------------------------------------
 		test	size, size					; if (size == 0)
@@ -1887,12 +1888,13 @@ space	= 5 * 8								; stack size required by the procedure
 		mov		[s_array], array			; save "array" variable into the stack
 		mov		[s_size], size				; save "size" variable into the stack
 		mov		[s_str], string				; save "string" variable into the stack
+		mov		[s_func], func				; save "func" variable into the stack
 		mov		[s_ptr], ptr				; save "ptr" variable into the stack
 ;---[Search loop]--------------------------
 .loop:	mov		ptr, [s_ptr]
 		mov		str1, [ptr]
 		mov		str2, [s_str]
-		call	func						; result = Compare (ptr[0], string)
+		call	qword [s_func]				; result = Compare (ptr[0], string)
 		test	result, result				; if (result == 0)
 		jz		.found						;     then go to found branch
 		add		qword [s_ptr], 8			; ptr++
@@ -1932,7 +1934,8 @@ stack	equ		rsp							; stack pointer
 s_array	equ		stack + 0 * 8				; stack position of "array" variable
 s_size	equ		stack + 1 * 8				; stack position of "size" variable
 s_str	equ		stack + 2 * 8				; stack position of "string" variable
-s_ptr	equ		stack + 3 * 8				; stack position of "ptr" variable
+s_func	equ		stack + 3 * 8				; stack position of "func" variable
+s_ptr	equ		stack + 4 * 8				; stack position of "ptr" variable
 space	= 5 * 8								; stack size required by the procedure
 ;------------------------------------------
 		test	size, size					; if (size == 0)
@@ -1942,13 +1945,14 @@ space	= 5 * 8								; stack size required by the procedure
 		mov		[s_array], array			; save "array" variable into the stack
 		mov		[s_size], size				; save "size" variable into the stack
 		mov		[s_str], string				; save "string" variable into the stack
+		mov		[s_func], func				; save "func" variable into the stack
 		mov		[s_ptr], ptr				; save "ptr" variable into the stack
 ;---[Search loop]--------------------------
 .loop:	sub		qword [s_ptr], 8			; ptr--
 		mov		ptr, [s_ptr]
 		mov		str1, [ptr]
 		mov		str2, [s_str]
-		call	func						; result = Compare (ptr[0], string)
+		call	qword [s_func]				; result = Compare (ptr[0], string)
 		test	result, result				; if (result == 0)
 		jz		.found						;     then go to found branch
 		sub		qword [s_size], 1			; size--
