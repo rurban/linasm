@@ -4,7 +4,7 @@
 ;#                                                                             #
 ;#                               TIME FUNCTIONS                                #
 ;#                                                                             #
-;# License: LGPLv3+                              Copyleft (Ɔ) 2012, Jack Black #
+;# License: LGPLv3+                              Copyleft (Ɔ) 2013, Jack Black #
 ;###############################################################################
 format	ELF64
 include	'Syscall.inc'
@@ -48,7 +48,7 @@ public	SystemTime		as	'_ZN4Time10SystemTimeEv'
 
 ; Local time
 public	LocalTime		as	'Time_LocalTime'
-public	LocalTime		as	'_ZN4Time9LocalTimeEx'
+public	LocalTime		as	'_ZNK4Time9LocalTimeEx'
 
 ;###############################################################################
 ;#      Code section                                                           #

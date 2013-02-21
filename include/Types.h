@@ -4,7 +4,7 @@
 #                                                                              #
 #                                  DATA TYPES                                  #
 #                                                                              #
-# License: LGPLv3+                               Copyleft (Ɔ) 2012, Jack Black #
+# License: LGPLv3+                               Copyleft (Ɔ) 2013, Jack Black #
 ################################################################################
 */
 # pragma	once

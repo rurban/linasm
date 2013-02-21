@@ -4,7 +4,7 @@
 ;#                                                                             #
 ;#                      SUBSEQUENCE SEARCHING ALGORITHMS                       #
 ;#                                                                             #
-;# License: LGPLv3+                              Copyleft (Ɔ) 2012, Jack Black #
+;# License: LGPLv3+                              Copyleft (Ɔ) 2013, Jack Black #
 ;###############################################################################
 format	ELF64
 
@@ -88,11 +88,9 @@ size_of	= hash_sz * 8						; offset of size variable inside BMH_charX
 patt_of	= size_of + 8						; offset of pattern variable inside BMH_charX
 bwd_of	= patt_of + 8						; offset of backward variable inside BMH_charX
 ;------------------------------------------
-if scale > 0
-		shl		size, scale					; scale size variable
-end if
 		test	size, size					; if (size == 0)
 		jz		.empty						;     then go to empty pattern branch
+		shl		size, scale					; scale size variable
 ;---[Normal execution branch]--------------
 		mov		[this + size_of], size		; this -> size = size
 		mov		[this + patt_of], pattern	; this -> pattern = pattern
@@ -186,9 +184,7 @@ patt_of	= size_of + 8						; offset of pattern variable inside BMH_charX
 bwd_of	= patt_of + 8						; offset of backward variable inside BMH_charX
 bytes	= 1 shl scale						; size of element (bytes)
 ;------------------------------------------
-if scale > 0
 		shl		ssize, scale				; scale ssize variable
-end if
 		mov		psize, [pattern + size_of]	; psize = pattern -> size
 		test	psize, psize				; if (psize == 0)
 		jz		.error						;     then go to error branch

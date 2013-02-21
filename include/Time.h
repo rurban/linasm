@@ -4,7 +4,7 @@
 #                                                                              #
 #                                TIME FUNCTIONS                                #
 #                                                                              #
-# License: LGPLv3+                               Copyleft (Ɔ) 2012, Jack Black #
+# License: LGPLv3+                               Copyleft (Ɔ) 2013, Jack Black #
 ################################################################################
 */
 # pragma	once
@@ -15,17 +15,19 @@
 //****************************************************************************//
 
 // Time zone limits
-# define	TIME_CHANGE_SIZE	512			// Size of time changes array
-# define	TIME_ZONE_SIZE		256			// Size of time zone array
+# define	TIME_CHANGE_SIZE	512				// Size of time changes array
+# define	TIME_ZONE_SIZE		256				// Size of time zone array
 
 // Standard periods of time
-# define	TIME_MINUTE			60			// Seconds per minute
-# define	TIME_HOUR			3600		// Seconds per hour
-# define	TIME_DAY			86400		// Seconds per day
-# define	TIME_WEEK			604800		// Seconds per week
+# define	TIME_MINUTE			60						// Seconds per minute
+# define	TIME_HOUR			3600					// Seconds per hour
+# define	TIME_DAY			86400					// Seconds per day
+# define	TIME_WEEK			604800					// Seconds per week
 
 // Other constants
-# define	TIME_ERROR			(0x8000000000000000LL)
+# define	TIME_MIN			0x8000000000000001LL	// Min time value
+# define	TIME_MAX			0x7FFFFFFFFFFFFFFFLL	// Max time value
+# define	TIME_ERROR			0x8000000000000000LL	// Wrong time value
 
 //****************************************************************************//
 //      Time structure                                                        //
@@ -96,7 +98,7 @@ static uint8_t WeekDay (time_t time);
 static time_t SystemTime (void);
 
 // Local time
-time_t LocalTime (time_t UTC);
+time_t LocalTime (time_t UTC) const;
 };
 # else
 /*

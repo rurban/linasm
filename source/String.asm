@@ -4,7 +4,7 @@
 ;#                                                                             #
 ;#                            SAFE STRING FUNCTIONS                            #
 ;#                                                                             #
-;# License: LGPLv3+                              Copyleft (Ɔ) 2012, Jack Black #
+;# License: LGPLv3+                              Copyleft (Ɔ) 2013, Jack Black #
 ;###############################################################################
 format	ELF64
 include	'Macro.inc'
@@ -1257,9 +1257,10 @@ end if
 bytes	= 1 shl scale						; size of array element (bytes)
 bmask	= bytes - 1							; elements aligning mask
 ;------------------------------------------
-		shl		size, scale					; convert size to bytes
-		jz		.exit						; if (size == 0), then go to exit
+		test	size, size					; if (size == 0)
+		jz		.exit						;     then go to exit
 if scale <> 0
+		shl		size, scale					; convert size to bytes
 		test	string1, bmask				; if elements have wrong alignment
 		jnz		.sloop						;     then skip vector code
 		test	string2, bmask				; if elements have wrong alignment

@@ -4,7 +4,7 @@
 ;#                                                                             #
 ;#               WINDOW FUNCTIONS FOR DIGITAL SIGNAL PROCESSING                #
 ;#                                                                             #
-;# License: LGPLv3                               Copyleft (Ɔ) 2012, Jack Black #
+;# License: LGPLv3+                              Copyleft (Ɔ) 2013, Jack Black #
 ;###############################################################################
 format	ELF64
 

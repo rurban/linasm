@@ -4,7 +4,7 @@
 ;#                                                                             #
 ;#                 COMMON ROUTINES THAT ARE USEFUL FOR ARRAYS                  #
 ;#                                                                             #
-;# License: LGPLv3+                              Copyleft (Ɔ) 2012, Jack Black #
+;# License: LGPLv3+                              Copyleft (Ɔ) 2013, Jack Black #
 ;###############################################################################
 format	ELF64
 include	'Macro.inc'
@@ -1615,9 +1615,10 @@ bytes	= 1 shl scale						; size of array element (bytes)
 bmask	= bytes - 1							; elements aligning mask
 ;------------------------------------------
 	prefetchnta	[array]						; prefetch data
-		shl		size, scale					; convert size to bytes
-		jz		.exit						; if (size == 0), then go to exit
+		test	size, size					; if (size == 0)
+		jz		.exit						;     then go to exit
 if scale <> 0
+		shl		size, scale					; convert size to bytes
 		test	array, bmask				; if elements have wrong alignment
 		jnz		.sloop						;     then skip vector code
 end if
@@ -1732,9 +1733,10 @@ bytes	= 1 shl scale						; size of array element (bytes)
 bmask	= bytes - 1							; elements aligning mask
 ;------------------------------------------
 	prefetchnta	[source]					; prefetch data
-		shl		size, scale					; convert size to bytes
-		jz		.exit						; if (size == 0), then go to exit
+		test	size, size					; if (size == 0)
+		jz		.exit						;     then go to exit
 if scale <> 0
+		shl		size, scale					; convert size to bytes
 		test	source, bmask				; if elements have wrong alignment
 		jnz		.sloop						;     then skip vector code
 		test	target, bmask				; if elements have wrong alignment
@@ -1821,9 +1823,10 @@ bmask	= bytes - 1							; elements aligning mask
 		lea		source, [source + size * bytes]
 		lea		target, [target + size * bytes]
 	prefetchnta	[source]					; prefetch data
-		shl		size, scale					; convert size to bytes
-		jz		.exit						; if (size == 0), then go to exit
+		test	size, size					; if (size == 0)
+		jz		.exit						;     then go to exit
 if scale <> 0
+		shl		size, scale					; convert size to bytes
 		test	source, bmask				; if elements have wrong alignment
 		jnz		.sloop						;     then skip vector code
 		test	target, bmask				; if elements have wrong alignment
@@ -2453,9 +2456,10 @@ bytes	= 1 shl scale						; size of array element (bytes)
 bmask	= bytes - 1							; elements aligning mask
 ;------------------------------------------
 	prefetchnta	[array]						; prefetch data
-		shl		size, scale					; convert size to bytes
-		jz		.exit						; if (size == 0), then go to exit
+		test	size, size					; if (size == 0)
+		jz		.exit						;     then go to exit
 if scale <> 0
+		shl		size, scale					; convert size to bytes
 		test	array, bmask				; if elements have wrong alignment
 		jnz		.sloop						;     then skip vector code
 end if
@@ -2580,9 +2584,10 @@ bmask	= bytes - 1							; elements aligning mask
 ;------------------------------------------
 	prefetchnta	[source]					; prefetch data
 	prefetchnta	[target]					; prefetch data
-		shl		size, scale					; convert size to bytes
-		jz		.exit						; if (size == 0), then go to exit
+		test	size, size					; if (size == 0)
+		jz		.exit						;     then go to exit
 if scale <> 0
+		shl		size, scale					; convert size to bytes
 		test	source, bmask				; if elements have wrong alignment
 		jnz		.sloop						;     then skip vector code
 		test	target, bmask				; if elements have wrong alignment
@@ -3537,10 +3542,11 @@ bytes	= 1 shl scale						; size of array element (bytes)
 bmask	= bytes - 1							; elements aligning mask
 ;------------------------------------------
 	prefetchnta	[array]						; prefetch data
-		shl		size, scale					; convert size to bytes
-		jz		.error						; if (size == 0), then go to error branch
+		test	size, size					; if (size == 0)
+		jz		.error						;     then go to error branch
 		mov		res, val					; result = value
 if scale <> 0
+		shl		size, scale					; convert size to bytes
 		test	array, bmask				; if elements have wrong alignment
 		jnz		.sloop						;     then skip vector code
 end if
@@ -4101,9 +4107,10 @@ bytes	= 1 shl scale						; size of array element (bytes)
 bmask	= bytes - 1							; elements aligning mask
 ;------------------------------------------
 	prefetchnta	[array]						; prefetch data
-		shl		size, scale					; convert size to bytes
-		jz		.exit						; if (size == 0), then go to exit
+		test	size, size					; if (size == 0)
+		jz		.exit						;     then go to exit
 if scale <> 0
+		shl		size, scale					; convert size to bytes
 		test	array, bmask				; if elements have wrong alignment
 		jnz		.sloop						;     then skip vector code
 end if
@@ -4241,9 +4248,10 @@ bmask	= bytes - 1							; elements aligning mask
 ;------------------------------------------
 	prefetchnta	[array]						; prefetch data
 		xor		index, index				; index = 0
-		shl		size, scale					; convert size to bytes
-		jz		.ntfnd						; if (size == 0), then go to not found branch
+		test	size, size					; if (size == 0)
+		jz		.ntfnd						;     then go to not found branch
 if scale <> 0
+		shl		size, scale					; convert size to bytes
 		test	array, bmask				; if elements have wrong alignment
 		jnz		.sloop						;     then skip vector code
 end if
@@ -4359,9 +4367,10 @@ bmask	= bytes - 1							; elements aligning mask
 		lea		array, [array + size * bytes]
 	prefetchnta	[array]						; prefetch data
 		mov		index, size					; index = size
-		shl		size, scale					; convert size to bytes
-		jz		.ntfnd						; if (size == 0), then go to not found branch
+		test	size, size					; if (size == 0)
+		jz		.ntfnd						;     then go to not found branch
 if scale <> 0
+		shl		size, scale					; convert size to bytes
 		test	array, bmask				; if elements have wrong alignment
 		jnz		.sloop						;     then skip vector code
 end if
@@ -6269,10 +6278,11 @@ bmask	= bytes - 1							; elements aligning mask
 ;------------------------------------------
 	prefetchnta	[array2]					; prefetch data
 	prefetchnta	[array1]					; prefetch data
-		shl		size, scale					; convert size to bytes
-		jz		.eql						; if (size == 0), then go to equal branch
+		test	size, size					; if (size == 0)
+		jz		.eql						;     then go to equal branch
 		xor		index, index				; index = 0
 if scale <> 0
+		shl		size, scale					; convert size to bytes
 		test	array2, bmask				; if elements have wrong alignment
 		jnz		.sloop						;     then skip vector code
 		test	array1, bmask				; if elements have wrong alignment
