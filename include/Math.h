@@ -51,14 +51,32 @@ public:
 //****************************************************************************//
 
 // Unsigned integer types
+static uint8_t ByteSwap (uint8_t value);
 static uint16_t ByteSwap (uint16_t value);
 static uint32_t ByteSwap (uint32_t value);
 static uint64_t ByteSwap (uint64_t value);
 
 // Signed integer types
+static sint8_t ByteSwap (sint8_t value);
 static sint16_t ByteSwap (sint16_t value);
 static sint32_t ByteSwap (sint32_t value);
 static sint64_t ByteSwap (sint64_t value);
+
+//****************************************************************************//
+//      Bit-reversal permutation                                              //
+//****************************************************************************//
+
+// Unsigned integer types
+static uint8_t BitReverse (uint8_t value);
+static uint16_t BitReverse (uint16_t value);
+static uint32_t BitReverse (uint32_t value);
+static uint64_t BitReverse (uint64_t value);
+
+// Signed integer types
+static sint8_t BitReverse (sint8_t value);
+static sint16_t BitReverse (sint16_t value);
+static sint32_t BitReverse (sint32_t value);
+static sint64_t BitReverse (sint64_t value);
 
 //****************************************************************************//
 //      Absolute value                                                        //
@@ -373,14 +391,32 @@ static bool IsNaN (flt64_t value);
 //****************************************************************************//
 
 // Unsigned integer types
+uint8_t Math_ByteSwap_uint8 (uint8_t value);
 uint16_t Math_ByteSwap_uint16 (uint16_t value);
 uint32_t Math_ByteSwap_uint32 (uint32_t value);
 uint64_t Math_ByteSwap_uint64 (uint64_t value);
 
 // Signed integer types
+sint8_t Math_ByteSwap_sint8 (sint8_t value);
 sint16_t Math_ByteSwap_sint16 (sint16_t value);
 sint32_t Math_ByteSwap_sint32 (sint32_t value);
 sint64_t Math_ByteSwap_sint64 (sint64_t value);
+
+//****************************************************************************//
+//      Bit-reversal permutation                                              //
+//****************************************************************************//
+
+// Unsigned integer types
+static uint8_t Math_BitReverse_uint8 (uint8_t value);
+static uint16_t Math_BitReverse_uint16 (uint16_t value);
+static uint32_t Math_BitReverse_uint32 (uint32_t value);
+static uint64_t Math_BitReverse_uint64 (uint64_t value);
+
+// Signed integer types
+static sint8_t Math_BitReverse_sint8 (sint8_t value);
+static sint16_t Math_BitReverse_sint16 (sint16_t value);
+static sint32_t Math_BitReverse_sint32 (sint32_t value);
+static sint64_t Math_BitReverse_sint64 (sint64_t value);
 
 //****************************************************************************//
 //      Absolute value                                                        //

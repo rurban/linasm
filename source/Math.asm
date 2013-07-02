@@ -18,20 +18,48 @@ include	'Macro.inc'
 ;******************************************************************************;
 
 ; Unsigned integer types
+public	ByteSwap8			as	'Math_ByteSwap_uint8'
 public	ByteSwap16			as	'Math_ByteSwap_uint16'
 public	ByteSwap32			as	'Math_ByteSwap_uint32'
 public	ByteSwap64			as	'Math_ByteSwap_uint64'
+public	ByteSwap8			as	'_ZN4Math8ByteSwapEh'
 public	ByteSwap16			as	'_ZN4Math8ByteSwapEt'
 public	ByteSwap32			as	'_ZN4Math8ByteSwapEj'
 public	ByteSwap64			as	'_ZN4Math8ByteSwapEy'
 
 ; Signed integer types
+public	ByteSwap8			as	'Math_ByteSwap_sint8'
 public	ByteSwap16			as	'Math_ByteSwap_sint16'
 public	ByteSwap32			as	'Math_ByteSwap_sint32'
 public	ByteSwap64			as	'Math_ByteSwap_sint64'
+public	ByteSwap8			as	'_ZN4Math8ByteSwapEa'
 public	ByteSwap16			as	'_ZN4Math8ByteSwapEs'
 public	ByteSwap32			as	'_ZN4Math8ByteSwapEi'
 public	ByteSwap64			as	'_ZN4Math8ByteSwapEx'
+
+;******************************************************************************;
+;       Bit-reversal permutation                                               ;
+;******************************************************************************;
+
+; Unsigned integer types
+public	BitReverse8			as	'Math_BitReverse_uint8'
+public	BitReverse16		as	'Math_BitReverse_uint16'
+public	BitReverse32		as	'Math_BitReverse_uint32'
+public	BitReverse64		as	'Math_BitReverse_uint64'
+public	BitReverse8			as	'_ZN4Math10BitReverseEh'
+public	BitReverse16		as	'_ZN4Math10BitReverseEt'
+public	BitReverse32		as	'_ZN4Math10BitReverseEj'
+public	BitReverse64		as	'_ZN4Math10BitReverseEy'
+
+; Signed integer types
+public	BitReverse8			as	'Math_BitReverse_sint8'
+public	BitReverse16		as	'Math_BitReverse_sint16'
+public	BitReverse32		as	'Math_BitReverse_sint32'
+public	BitReverse64		as	'Math_BitReverse_sint64'
+public	BitReverse8			as	'_ZN4Math10BitReverseEa'
+public	BitReverse16		as	'_ZN4Math10BitReverseEs'
+public	BitReverse32		as	'_ZN4Math10BitReverseEi'
+public	BitReverse64		as	'_ZN4Math10BitReverseEx'
 
 ;******************************************************************************;
 ;       Absolute value                                                         ;
@@ -535,16 +563,87 @@ end if
 macro	BYTE_SWAP	result, value, scale
 {
 		mov		result, value
-if scale > 1
-		bswap	result
-else
+if scale = 1
 		rol		ax, 8
+else if scale > 1
+		bswap	result
 end if
 		ret
 }
+ByteSwap8:	BYTE_SWAP	al, dil, 0
 ByteSwap16:	BYTE_SWAP	ax, di, 1
 ByteSwap32:	BYTE_SWAP	eax, edi, 2
 ByteSwap64:	BYTE_SWAP	rax, rdi, 3
+
+;******************************************************************************;
+;       Bit-reversal permutation                                               ;
+;******************************************************************************;
+macro	BIT_REVERSE		result, value, temp1, temp2, scale
+{
+;---[Internal variables]-------------------
+if scale = 0
+const11	= 0x55								; Const #1 for first stage
+const12	= 0xAA								; Const #2 for first stage
+const21	= 0x33								; Const #1 for second stage
+const22	= 0xCC								; Const #2 for second stage
+const31	= 0x0F								; Const #1 for third stage
+const32	= 0xF0								; Const #2 for third stage
+else if scale = 1
+const11	= 0x5555							; Const #1 for first stage
+const12	= 0xAAAA							; Const #2 for first stage
+const21	= 0x3333							; Const #1 for second stage
+const22	= 0xCCCC							; Const #2 for second stage
+const31	= 0x0F0F							; Const #1 for third stage
+const32	= 0xF0F0							; Const #2 for third stage
+else if scale = 2
+const11	= 0x55555555
+const12	= 0xAAAAAAAA
+const21	= 0x33333333
+const22	= 0xCCCCCCCC
+const31	= 0x0F0F0F0F
+const32	= 0xF0F0F0F0
+else if scale = 3
+const11	= 0x5555555555555555
+const12	= 0xAAAAAAAAAAAAAAAA
+const21	= 0x3333333333333333
+const22	= 0xCCCCCCCCCCCCCCCC
+const31	= 0x0F0F0F0F0F0F0F0F
+const32	= 0xF0F0F0F0F0F0F0F0
+end if
+;---[First stage]--------------------------
+		mov		temp1, const11				; temp1 = const11
+		mov		temp2, const12				; temp2 = const12
+		and		temp1, value
+		and		temp2, value
+		shl		temp1, 1					; temp1 = (value & temp1) << 1
+		shr		temp2, 1					; temp2 = (value & temp2) >> 1
+		mov		value, temp1
+		or		value, temp2				; value = temp1 | temp2
+;---[Second stage]-------------------------
+		mov		temp1, const21				; temp1 = const21
+		mov		temp2, const22				; temp2 = const22
+		and		temp1, value
+		and		temp2, value
+		shl		temp1, 2					; temp1 = (value & temp1) << 2
+		shr		temp2, 2					; temp2 = (value & temp2) >> 2
+		mov		value, temp1
+		or		value, temp2				; value = temp1 | temp2
+;---[Third stage]--------------------------
+		mov		temp1, const31				; temp1 = const31
+		mov		temp2, const32				; temp2 = const32
+		and		temp1, value
+		and		temp2, value
+		shl		temp1, 4					; temp1 = (value & temp1) << 4
+		shr		temp2, 4					; temp2 = (value & temp2) >> 4
+		mov		value, temp1
+		or		value, temp2				; value = temp1 | temp2
+;---[Swap bytes if required]---------------
+	BYTE_SWAP	result, value, scale		; return ByteSwap (value)
+}
+BitReverse8:	BIT_REVERSE		al, dil, dl, cl, 0
+BitReverse16:	BIT_REVERSE		ax, di, dx, cx, 1
+BitReverse32:	BIT_REVERSE		eax, edi, edx, ecx, 2
+BitReverse64:	BIT_REVERSE		rax, rdi, rdx, rcx, 3
 
 ;******************************************************************************;
 ;       Absolute value                                                         ;
