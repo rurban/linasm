@@ -14,8 +14,12 @@ include	'Macro.inc'
 ;###############################################################################
 
 ;******************************************************************************;
-;       Byte swap                                                              ;
+;       Bitwise operations                                                     ;
 ;******************************************************************************;
+
+;==============================================================================;
+;       Byte swap                                                              ;
+;==============================================================================;
 
 ; Unsigned integer types
 public	ByteSwap8			as	'Math_ByteSwap_uint8'
@@ -37,9 +41,9 @@ public	ByteSwap16			as	'_ZN4Math8ByteSwapEs'
 public	ByteSwap32			as	'_ZN4Math8ByteSwapEi'
 public	ByteSwap64			as	'_ZN4Math8ByteSwapEx'
 
-;******************************************************************************;
-;       Bit-reversal permutation                                               ;
-;******************************************************************************;
+;==============================================================================;
+;       Bit reversal permutation                                               ;
+;==============================================================================;
 
 ; Unsigned integer types
 public	BitReverse8			as	'Math_BitReverse_uint8'
@@ -61,9 +65,141 @@ public	BitReverse16		as	'_ZN4Math10BitReverseEs'
 public	BitReverse32		as	'_ZN4Math10BitReverseEi'
 public	BitReverse64		as	'_ZN4Math10BitReverseEx'
 
+;==============================================================================;
+;       Bit scan                                                               ;
+;==============================================================================;
+
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+;       Bit scan forward                                                       ;
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+
+; Unsigned integer types
+public	ScanFwd8			as	'Math_ScanForward_uint8'
+public	ScanFwd16			as	'Math_ScanForward_uint16'
+public	ScanFwd32			as	'Math_ScanForward_uint32'
+public	ScanFwd64			as	'Math_ScanForward_uint64'
+public	ScanFwd8			as	'_ZN4Math11ScanForwardEh'
+public	ScanFwd16			as	'_ZN4Math11ScanForwardEt'
+public	ScanFwd32			as	'_ZN4Math11ScanForwardEj'
+public	ScanFwd64			as	'_ZN4Math11ScanForwardEy'
+
+; Signed integer types
+public	ScanFwd8			as	'Math_ScanForward_sint8'
+public	ScanFwd16			as	'Math_ScanForward_sint16'
+public	ScanFwd32			as	'Math_ScanForward_sint32'
+public	ScanFwd64			as	'Math_ScanForward_sint64'
+public	ScanFwd8			as	'_ZN4Math11ScanForwardEa'
+public	ScanFwd16			as	'_ZN4Math11ScanForwardEs'
+public	ScanFwd32			as	'_ZN4Math11ScanForwardEi'
+public	ScanFwd64			as	'_ZN4Math11ScanForwardEx'
+
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+;       Bit scan backward                                                      ;
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+
+; Unsigned integer types
+public	ScanBwd8			as	'Math_ScanBackward_uint8'
+public	ScanBwd16			as	'Math_ScanBackward_uint16'
+public	ScanBwd32			as	'Math_ScanBackward_uint32'
+public	ScanBwd64			as	'Math_ScanBackward_uint64'
+public	ScanBwd8			as	'_ZN4Math12ScanBackwardEh'
+public	ScanBwd16			as	'_ZN4Math12ScanBackwardEt'
+public	ScanBwd32			as	'_ZN4Math12ScanBackwardEj'
+public	ScanBwd64			as	'_ZN4Math12ScanBackwardEy'
+
+; Signed integer types
+public	ScanBwd8			as	'Math_ScanBackward_sint8'
+public	ScanBwd16			as	'Math_ScanBackward_sint16'
+public	ScanBwd32			as	'Math_ScanBackward_sint32'
+public	ScanBwd64			as	'Math_ScanBackward_sint64'
+public	ScanBwd8			as	'_ZN4Math12ScanBackwardEa'
+public	ScanBwd16			as	'_ZN4Math12ScanBackwardEs'
+public	ScanBwd32			as	'_ZN4Math12ScanBackwardEi'
+public	ScanBwd64			as	'_ZN4Math12ScanBackwardEx'
+
+;==============================================================================;
+;       Circular rotation                                                      ;
+;==============================================================================;
+
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+;       Circular rotation to the left                                          ;
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+
+; Unsigned integer types
+public	RotateLeft8			as	'Math_RotateLeft_uint8'
+public	RotateLeft16		as	'Math_RotateLeft_uint16'
+public	RotateLeft32		as	'Math_RotateLeft_uint32'
+public	RotateLeft64		as	'Math_RotateLeft_uint64'
+public	RotateLeft8			as	'_ZN4Math10RotateLeftEhh'
+public	RotateLeft16		as	'_ZN4Math10RotateLeftEth'
+public	RotateLeft32		as	'_ZN4Math10RotateLeftEjh'
+public	RotateLeft64		as	'_ZN4Math10RotateLeftEyh'
+
+; Signed integer types
+public	RotateLeft8			as	'Math_RotateLeft_sint8'
+public	RotateLeft16		as	'Math_RotateLeft_sint16'
+public	RotateLeft32		as	'Math_RotateLeft_sint32'
+public	RotateLeft64		as	'Math_RotateLeft_sint64'
+public	RotateLeft8			as	'_ZN4Math10RotateLeftEah'
+public	RotateLeft16		as	'_ZN4Math10RotateLeftEsh'
+public	RotateLeft32		as	'_ZN4Math10RotateLeftEih'
+public	RotateLeft64		as	'_ZN4Math10RotateLeftExh'
+
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+;       Circular rotation to the right                                         ;
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+
+; Unsigned integer types
+public	RotateRight8		as	'Math_RotateRight_uint8'
+public	RotateRight16		as	'Math_RotateRight_uint16'
+public	RotateRight32		as	'Math_RotateRight_uint32'
+public	RotateRight64		as	'Math_RotateRight_uint64'
+public	RotateRight8		as	'_ZN4Math11RotateRightEhh'
+public	RotateRight16		as	'_ZN4Math11RotateRightEth'
+public	RotateRight32		as	'_ZN4Math11RotateRightEjh'
+public	RotateRight64		as	'_ZN4Math11RotateRightEyh'
+
+; Signed integer types
+public	RotateRight8		as	'Math_RotateRight_sint8'
+public	RotateRight16		as	'Math_RotateRight_sint16'
+public	RotateRight32		as	'Math_RotateRight_sint32'
+public	RotateRight64		as	'Math_RotateRight_sint64'
+public	RotateRight8		as	'_ZN4Math11RotateRightEah'
+public	RotateRight16		as	'_ZN4Math11RotateRightEsh'
+public	RotateRight32		as	'_ZN4Math11RotateRightEih'
+public	RotateRight64		as	'_ZN4Math11RotateRightExh'
+
+;==============================================================================;
+;       Population count                                                       ;
+;==============================================================================;
+
+; Unsigned integer types
+public	PopCount8			as	'Math_PopCount_uint8'
+public	PopCount16			as	'Math_PopCount_uint16'
+public	PopCount32			as	'Math_PopCount_uint32'
+public	PopCount64			as	'Math_PopCount_uint64'
+public	PopCount8			as	'_ZN4Math8PopCountEh'
+public	PopCount16			as	'_ZN4Math8PopCountEt'
+public	PopCount32			as	'_ZN4Math8PopCountEj'
+public	PopCount64			as	'_ZN4Math8PopCountEy'
+
+; Signed integer types
+public	PopCount8			as	'Math_PopCount_sint8'
+public	PopCount16			as	'Math_PopCount_sint16'
+public	PopCount32			as	'Math_PopCount_sint32'
+public	PopCount64			as	'Math_PopCount_sint64'
+public	PopCount8			as	'_ZN4Math8PopCountEa'
+public	PopCount16			as	'_ZN4Math8PopCountEs'
+public	PopCount32			as	'_ZN4Math8PopCountEi'
+public	PopCount64			as	'_ZN4Math8PopCountEx'
+
 ;******************************************************************************;
+;       Arithmetic operations                                                  ;
+;******************************************************************************;
+
+;==============================================================================;
 ;       Absolute value                                                         ;
-;******************************************************************************;
+;==============================================================================;
 
 ; Signed integer types
 public	Abs_sint8			as	'Math_Abs_sint8'
@@ -81,9 +217,9 @@ public	Abs_flt64			as	'Math_Abs_flt64'
 public	Abs_flt32			as	'_ZN4Math3AbsEf'
 public	Abs_flt64			as	'_ZN4Math3AbsEd'
 
-;******************************************************************************;
+;==============================================================================;
 ;       Negative absolute value                                                ;
-;******************************************************************************;
+;==============================================================================;
 
 ; Signed integer types
 public	NegAbs_sint8		as	'Math_NegAbs_sint8'
@@ -101,9 +237,9 @@ public	NegAbs_flt64		as	'Math_NegAbs_flt64'
 public	NegAbs_flt32		as	'_ZN4Math6NegAbsEf'
 public	NegAbs_flt64		as	'_ZN4Math6NegAbsEd'
 
-;******************************************************************************;
+;==============================================================================;
 ;       Number sign                                                            ;
-;******************************************************************************;
+;==============================================================================;
 
 ; Signed integer types
 public	Sign_sint8			as	'Math_Sign_sint8'
@@ -121,9 +257,9 @@ public	Sign_flt64			as	'Math_Sign_flt64'
 public	Sign_flt32			as	'_ZN4Math4SignEf'
 public	Sign_flt64			as	'_ZN4Math4SignEd'
 
-;******************************************************************************;
+;==============================================================================;
 ;       Square root                                                            ;
-;******************************************************************************;
+;==============================================================================;
 
 ; Unsigned integer types
 public	Sqrt_uint8			as	'Math_Sqrt_uint8'
@@ -140,6 +276,126 @@ public	Sqrt_flt32			as	'Math_Sqrt_flt32'
 public	Sqrt_flt64			as	'Math_Sqrt_flt64'
 public	Sqrt_flt32			as	'_ZN4Math4SqrtEf'
 public	Sqrt_flt64			as	'_ZN4Math4SqrtEd'
+
+;==============================================================================;
+;       Minimum and maximum value                                              ;
+;==============================================================================;
+
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+;       Minimum value                                                          ;
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+
+; Unsigned integer types
+public	Min_uint8			as	'Math_Min_uint8'
+public	Min_uint16			as	'Math_Min_uint16'
+public	Min_uint32			as	'Math_Min_uint32'
+public	Min_uint64			as	'Math_Min_uint64'
+public	Min_uint8			as	'_ZN4Math3MinEhh'
+public	Min_uint16			as	'_ZN4Math3MinEtt'
+public	Min_uint32			as	'_ZN4Math3MinEjj'
+public	Min_uint64			as	'_ZN4Math3MinEyy'
+
+; Signed integer types
+public	Min_sint8			as	'Math_Min_sint8'
+public	Min_sint16			as	'Math_Min_sint16'
+public	Min_sint32			as	'Math_Min_sint32'
+public	Min_sint64			as	'Math_Min_sint64'
+public	Min_sint8			as	'_ZN4Math3MinEaa'
+public	Min_sint16			as	'_ZN4Math3MinEss'
+public	Min_sint32			as	'_ZN4Math3MinEii'
+public	Min_sint64			as	'_ZN4Math3MinExx'
+
+; Floating-point types
+public	Min_flt32			as	'Math_Min_flt32'
+public	Min_flt64			as	'Math_Min_flt64'
+public	Min_flt32			as	'_ZN4Math3MinEff'
+public	Min_flt64			as	'_ZN4Math3MinEdd'
+
+; Other types
+public	Min_uint64			as	'Math_Min_size'
+public	Min_uint64			as	'_ZN4Math3MinEmm'
+
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+;       Maximum value                                                          ;
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+
+; Unsigned integer types
+public	Max_uint8			as	'Math_Max_uint8'
+public	Max_uint16			as	'Math_Max_uint16'
+public	Max_uint32			as	'Math_Max_uint32'
+public	Max_uint64			as	'Math_Max_uint64'
+public	Max_uint8			as	'_ZN4Math3MaxEhh'
+public	Max_uint16			as	'_ZN4Math3MaxEtt'
+public	Max_uint32			as	'_ZN4Math3MaxEjj'
+public	Max_uint64			as	'_ZN4Math3MaxEyy'
+
+; Signed integer types
+public	Max_sint8			as	'Math_Max_sint8'
+public	Max_sint16			as	'Math_Max_sint16'
+public	Max_sint32			as	'Math_Max_sint32'
+public	Max_sint64			as	'Math_Max_sint64'
+public	Max_sint8			as	'_ZN4Math3MaxEaa'
+public	Max_sint16			as	'_ZN4Math3MaxEss'
+public	Max_sint32			as	'_ZN4Math3MaxEii'
+public	Max_sint64			as	'_ZN4Math3MaxExx'
+
+; Floating-point types
+public	Max_flt32			as	'Math_Max_flt32'
+public	Max_flt64			as	'Math_Max_flt64'
+public	Max_flt32			as	'_ZN4Math3MaxEff'
+public	Max_flt64			as	'_ZN4Math3MaxEdd'
+
+; Other types
+public	Max_uint64			as	'Math_Max_size'
+public	Max_uint64			as	'_ZN4Math3MaxEmm'
+
+;==============================================================================;
+;       Greatest common divisor                                                ;
+;==============================================================================;
+
+; Unsigned integer types
+public	GCD_uint8			as	'Math_GCD_uint8'
+public	GCD_uint16			as	'Math_GCD_uint16'
+public	GCD_uint32			as	'Math_GCD_uint32'
+public	GCD_uint64			as	'Math_GCD_uint64'
+public	GCD_uint8			as	'_ZN4Math3GCDEhh'
+public	GCD_uint16			as	'_ZN4Math3GCDEtt'
+public	GCD_uint32			as	'_ZN4Math3GCDEjj'
+public	GCD_uint64			as	'_ZN4Math3GCDEyy'
+
+; Signed integer types
+public	GCD_sint8			as	'Math_GCD_sint8'
+public	GCD_sint16			as	'Math_GCD_sint16'
+public	GCD_sint32			as	'Math_GCD_sint32'
+public	GCD_sint64			as	'Math_GCD_sint64'
+public	GCD_uint8			as	'_ZN4Math3GCDEaa'
+public	GCD_uint16			as	'_ZN4Math3GCDEss'
+public	GCD_uint32			as	'_ZN4Math3GCDEii'
+public	GCD_uint64			as	'_ZN4Math3GCDExx'
+
+;==============================================================================;
+;       Least common multiple                                                  ;
+;==============================================================================;
+
+; Unsigned integer types
+public	LCM_uint8			as	'Math_LCM_uint8'
+public	LCM_uint16			as	'Math_LCM_uint16'
+public	LCM_uint32			as	'Math_LCM_uint32'
+public	LCM_uint64			as	'Math_LCM_uint64'
+public	LCM_uint8			as	'_ZN4Math3LCMEhh'
+public	LCM_uint16			as	'_ZN4Math3LCMEtt'
+public	LCM_uint32			as	'_ZN4Math3LCMEjj'
+public	LCM_uint64			as	'_ZN4Math3LCMEyy'
+
+; Signed integer types
+public	LCM_sint8			as	'Math_LCM_sint8'
+public	LCM_sint16			as	'Math_LCM_sint16'
+public	LCM_sint32			as	'Math_LCM_sint32'
+public	LCM_sint64			as	'Math_LCM_sint64'
+public	LCM_uint8			as	'_ZN4Math3LCMEaa'
+public	LCM_uint16			as	'_ZN4Math3LCMEss'
+public	LCM_uint32			as	'_ZN4Math3LCMEii'
+public	LCM_uint64			as	'_ZN4Math3LCMExx'
 
 ;******************************************************************************;
 ;       Trigonometric functions                                                ;
@@ -186,122 +442,6 @@ public	SinCos_flt32		as	'Math_SinCosQ_flt32'
 public	SinCos_flt64		as	'Math_SinCosQ_flt64'
 public	SinCos_flt32		as	'_ZN4Math7SinCosQEPfS0_fx'
 public	SinCos_flt64		as	'_ZN4Math7SinCosQEPdS0_dx'
-
-;******************************************************************************;
-;       Minimum value                                                          ;
-;******************************************************************************;
-
-; Unsigned integer types
-public	Min_uint8			as	'Math_Min_uint8'
-public	Min_uint16			as	'Math_Min_uint16'
-public	Min_uint32			as	'Math_Min_uint32'
-public	Min_uint64			as	'Math_Min_uint64'
-public	Min_uint8			as	'_ZN4Math3MinEhh'
-public	Min_uint16			as	'_ZN4Math3MinEtt'
-public	Min_uint32			as	'_ZN4Math3MinEjj'
-public	Min_uint64			as	'_ZN4Math3MinEyy'
-
-; Signed integer types
-public	Min_sint8			as	'Math_Min_sint8'
-public	Min_sint16			as	'Math_Min_sint16'
-public	Min_sint32			as	'Math_Min_sint32'
-public	Min_sint64			as	'Math_Min_sint64'
-public	Min_sint8			as	'_ZN4Math3MinEaa'
-public	Min_sint16			as	'_ZN4Math3MinEss'
-public	Min_sint32			as	'_ZN4Math3MinEii'
-public	Min_sint64			as	'_ZN4Math3MinExx'
-
-; Floating-point types
-public	Min_flt32			as	'Math_Min_flt32'
-public	Min_flt64			as	'Math_Min_flt64'
-public	Min_flt32			as	'_ZN4Math3MinEff'
-public	Min_flt64			as	'_ZN4Math3MinEdd'
-
-; Other types
-public	Min_uint64			as	'Math_Min_size'
-public	Min_uint64			as	'_ZN4Math3MinEmm'
-
-;******************************************************************************;
-;       Maximum value                                                          ;
-;******************************************************************************;
-
-; Unsigned integer types
-public	Max_uint8			as	'Math_Max_uint8'
-public	Max_uint16			as	'Math_Max_uint16'
-public	Max_uint32			as	'Math_Max_uint32'
-public	Max_uint64			as	'Math_Max_uint64'
-public	Max_uint8			as	'_ZN4Math3MaxEhh'
-public	Max_uint16			as	'_ZN4Math3MaxEtt'
-public	Max_uint32			as	'_ZN4Math3MaxEjj'
-public	Max_uint64			as	'_ZN4Math3MaxEyy'
-
-; Signed integer types
-public	Max_sint8			as	'Math_Max_sint8'
-public	Max_sint16			as	'Math_Max_sint16'
-public	Max_sint32			as	'Math_Max_sint32'
-public	Max_sint64			as	'Math_Max_sint64'
-public	Max_sint8			as	'_ZN4Math3MaxEaa'
-public	Max_sint16			as	'_ZN4Math3MaxEss'
-public	Max_sint32			as	'_ZN4Math3MaxEii'
-public	Max_sint64			as	'_ZN4Math3MaxExx'
-
-; Floating-point types
-public	Max_flt32			as	'Math_Max_flt32'
-public	Max_flt64			as	'Math_Max_flt64'
-public	Max_flt32			as	'_ZN4Math3MaxEff'
-public	Max_flt64			as	'_ZN4Math3MaxEdd'
-
-; Other types
-public	Max_uint64			as	'Math_Max_size'
-public	Max_uint64			as	'_ZN4Math3MaxEmm'
-
-;******************************************************************************;
-;       Greatest common divisor                                                ;
-;******************************************************************************;
-
-; Unsigned integer types
-public	GCD_uint8			as	'Math_GCD_uint8'
-public	GCD_uint16			as	'Math_GCD_uint16'
-public	GCD_uint32			as	'Math_GCD_uint32'
-public	GCD_uint64			as	'Math_GCD_uint64'
-public	GCD_uint8			as	'_ZN4Math3GCDEhh'
-public	GCD_uint16			as	'_ZN4Math3GCDEtt'
-public	GCD_uint32			as	'_ZN4Math3GCDEjj'
-public	GCD_uint64			as	'_ZN4Math3GCDEyy'
-
-; Signed integer types
-public	GCD_sint8			as	'Math_GCD_sint8'
-public	GCD_sint16			as	'Math_GCD_sint16'
-public	GCD_sint32			as	'Math_GCD_sint32'
-public	GCD_sint64			as	'Math_GCD_sint64'
-public	GCD_uint8			as	'_ZN4Math3GCDEaa'
-public	GCD_uint16			as	'_ZN4Math3GCDEss'
-public	GCD_uint32			as	'_ZN4Math3GCDEii'
-public	GCD_uint64			as	'_ZN4Math3GCDExx'
-
-;******************************************************************************;
-;       Least common multiple                                                  ;
-;******************************************************************************;
-
-; Unsigned integer types
-public	LCM_uint8			as	'Math_LCM_uint8'
-public	LCM_uint16			as	'Math_LCM_uint16'
-public	LCM_uint32			as	'Math_LCM_uint32'
-public	LCM_uint64			as	'Math_LCM_uint64'
-public	LCM_uint8			as	'_ZN4Math3LCMEhh'
-public	LCM_uint16			as	'_ZN4Math3LCMEtt'
-public	LCM_uint32			as	'_ZN4Math3LCMEjj'
-public	LCM_uint64			as	'_ZN4Math3LCMEyy'
-
-; Signed integer types
-public	LCM_sint8			as	'Math_LCM_sint8'
-public	LCM_sint16			as	'Math_LCM_sint16'
-public	LCM_sint32			as	'Math_LCM_sint32'
-public	LCM_sint64			as	'Math_LCM_sint64'
-public	LCM_uint8			as	'_ZN4Math3LCMEaa'
-public	LCM_uint16			as	'_ZN4Math3LCMEss'
-public	LCM_uint32			as	'_ZN4Math3LCMEii'
-public	LCM_uint64			as	'_ZN4Math3LCMExx'
 
 ;******************************************************************************;
 ;       Exponentiation functions                                               ;
@@ -371,31 +511,9 @@ public	ExpE_flt64			as	'_ZN4Math3ExpEd'
 public	ExpEm1_flt32		as	'_ZN4Math5Expm1Ef'
 public	ExpEm1_flt64		as	'_ZN4Math5Expm1Ed'
 
-;******************************************************************************;
-;       Scale functions                                                        ;
-;******************************************************************************;
-
-; Scale by power of 2
-public	Scale2_flt32		as	'Math_Scale2_flt32'
-public	Scale2_flt64		as	'Math_Scale2_flt64'
-public	Scale2_flt32		as	'_ZN4Math6Scale2Efs'
-public	Scale2_flt64		as	'_ZN4Math6Scale2Eds'
-
-; Scale by power of 10
-public	Scale10_flt32		as	'Math_Scale10_flt32'
-public	Scale10_flt64		as	'Math_Scale10_flt64'
-public	Scale10_flt32		as	'_ZN4Math7Scale10Efs'
-public	Scale10_flt64		as	'_ZN4Math7Scale10Eds'
-
-; Scale by power of E
-public	ScaleE_flt32		as	'Math_Scale_flt32'
-public	ScaleE_flt64		as	'Math_Scale_flt64'
-public	ScaleE_flt32		as	'_ZN4Math5ScaleEfs'
-public	ScaleE_flt64		as	'_ZN4Math5ScaleEds'
-
-;******************************************************************************;
+;==============================================================================;
 ;       Power                                                                  ;
-;******************************************************************************;
+;==============================================================================;
 
 ; Unsigned integer types
 public	Power_uint8			as	'Math_Power_uint8'
@@ -422,6 +540,28 @@ public	Power_flt32			as	'Math_Poweri_flt32'
 public	Power_flt64			as	'Math_Poweri_flt64'
 public	Power_flt32			as	'_ZN4Math5PowerEfa'
 public	Power_flt64			as	'_ZN4Math5PowerEds'
+
+;******************************************************************************;
+;       Scale functions                                                        ;
+;******************************************************************************;
+
+; Scale by power of 2
+public	Scale2_flt32		as	'Math_Scale2_flt32'
+public	Scale2_flt64		as	'Math_Scale2_flt64'
+public	Scale2_flt32		as	'_ZN4Math6Scale2Efs'
+public	Scale2_flt64		as	'_ZN4Math6Scale2Eds'
+
+; Scale by power of 10
+public	Scale10_flt32		as	'Math_Scale10_flt32'
+public	Scale10_flt64		as	'Math_Scale10_flt64'
+public	Scale10_flt32		as	'_ZN4Math7Scale10Efs'
+public	Scale10_flt64		as	'_ZN4Math7Scale10Eds'
+
+; Scale by power of E
+public	ScaleE_flt32		as	'Math_Scale_flt32'
+public	ScaleE_flt64		as	'Math_Scale_flt64'
+public	ScaleE_flt32		as	'_ZN4Math5ScaleEfs'
+public	ScaleE_flt64		as	'_ZN4Math5ScaleEds'
 
 ;******************************************************************************;
 ;       Rounding                                                               ;
@@ -558,8 +698,12 @@ end if
 }
 
 ;******************************************************************************;
-;       Byte swap                                                              ;
+;       Bitwise operations                                                     ;
 ;******************************************************************************;
+
+;==============================================================================;
+;       Byte swap                                                              ;
+;==============================================================================;
 macro	BYTE_SWAP	result, value, scale
 {
 		mov		result, value
@@ -575,44 +719,44 @@ ByteSwap16:	BYTE_SWAP	ax, di, 1
 ByteSwap32:	BYTE_SWAP	eax, edi, 2
 ByteSwap64:	BYTE_SWAP	rax, rdi, 3
 
-;******************************************************************************;
-;       Bit-reversal permutation                                               ;
-;******************************************************************************;
+;==============================================================================;
+;       Bit reversal permutation                                               ;
+;==============================================================================;
 macro	BIT_REVERSE		result, value, temp1, temp2, scale
 {
 ;---[Internal variables]-------------------
 if scale = 0
-const11	= 0x55								; Const #1 for first stage
-const12	= 0xAA								; Const #2 for first stage
-const21	= 0x33								; Const #1 for second stage
-const22	= 0xCC								; Const #2 for second stage
-const31	= 0x0F								; Const #1 for third stage
-const32	= 0xF0								; Const #2 for third stage
+const11	= 0x55								; const #1 for first stage
+const12	= 0x33								; const #1 for second stage
+const13	= 0x0F								; const #1 for third stage
+const21	= 0xAA								; const #2 for first stage
+const22	= 0xCC								; const #2 for second stage
+const23	= 0xF0								; const #2 for third stage
 else if scale = 1
-const11	= 0x5555							; Const #1 for first stage
-const12	= 0xAAAA							; Const #2 for first stage
-const21	= 0x3333							; Const #1 for second stage
-const22	= 0xCCCC							; Const #2 for second stage
-const31	= 0x0F0F							; Const #1 for third stage
-const32	= 0xF0F0							; Const #2 for third stage
+const11	= 0x5555							; const #1 for first stage
+const12	= 0x3333							; const #1 for second stage
+const13	= 0x0F0F							; const #1 for third stage
+const21	= 0xAAAA							; const #2 for first stage
+const22	= 0xCCCC							; const #2 for second stage
+const23	= 0xF0F0							; const #2 for third stage
 else if scale = 2
-const11	= 0x55555555
-const12	= 0xAAAAAAAA
-const21	= 0x33333333
-const22	= 0xCCCCCCCC
-const31	= 0x0F0F0F0F
-const32	= 0xF0F0F0F0
+const11	= 0x55555555						; const #1 for first stage
+const12	= 0x33333333						; const #1 for second stage
+const13	= 0x0F0F0F0F						; const #1 for third stage
+const21	= 0xAAAAAAAA						; const #2 for first stage
+const22	= 0xCCCCCCCC						; const #2 for second stage
+const23	= 0xF0F0F0F0						; const #2 for third stage
 else if scale = 3
-const11	= 0x5555555555555555
-const12	= 0xAAAAAAAAAAAAAAAA
-const21	= 0x3333333333333333
-const22	= 0xCCCCCCCCCCCCCCCC
-const31	= 0x0F0F0F0F0F0F0F0F
-const32	= 0xF0F0F0F0F0F0F0F0
+const11	= 0x5555555555555555				; const #1 for first stage
+const12	= 0x3333333333333333				; const #1 for second stage
+const13	= 0x0F0F0F0F0F0F0F0F				; const #1 for third stage
+const21	= 0xAAAAAAAAAAAAAAAA				; const #2 for first stage
+const22	= 0xCCCCCCCCCCCCCCCC				; const #2 for second stage
+const23	= 0xF0F0F0F0F0F0F0F0				; const #2 for third stage
 end if
 ;---[First stage]--------------------------
 		mov		temp1, const11				; temp1 = const11
-		mov		temp2, const12				; temp2 = const12
+		mov		temp2, const21				; temp2 = const21
 		and		temp1, value
 		and		temp2, value
 		shl		temp1, 1					; temp1 = (value & temp1) << 1
@@ -620,7 +764,7 @@ end if
 		mov		value, temp1
 		or		value, temp2				; value = temp1 | temp2
 ;---[Second stage]-------------------------
-		mov		temp1, const21				; temp1 = const21
+		mov		temp1, const12				; temp1 = const12
 		mov		temp2, const22				; temp2 = const22
 		and		temp1, value
 		and		temp2, value
@@ -629,8 +773,8 @@ end if
 		mov		value, temp1
 		or		value, temp2				; value = temp1 | temp2
 ;---[Third stage]--------------------------
-		mov		temp1, const31				; temp1 = const31
-		mov		temp2, const32				; temp2 = const32
+		mov		temp1, const13				; temp1 = const13
+		mov		temp2, const23				; temp2 = const23
 		and		temp1, value
 		and		temp2, value
 		shl		temp1, 4					; temp1 = (value & temp1) << 4
@@ -645,9 +789,136 @@ BitReverse16:	BIT_REVERSE		ax, di, dx, cx, 1
 BitReverse32:	BIT_REVERSE		eax, edi, edx, ecx, 2
 BitReverse64:	BIT_REVERSE		rax, rdi, rdx, rcx, 3
 
+;==============================================================================;
+;       Bit scan                                                               ;
+;==============================================================================;
+
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+;       Bit scan forward                                                       ;
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+macro	SCAN_FWD	result, value, error, scale
+{
+;---[Internal variables]-------------------
+if scale = 0
+mask	= 0xFF								; mask to clear unrequired bits
+else if scale = 1
+mask	= 0xFFFF							; mask to clear unrequired bits
+else if scale = 2
+mask	= 0xFFFFFFFF						; mask to clear unrequired bits
+else if scale = 3
+mask	= 0xFFFFFFFFFFFFFFFF				; mask to clear unrequired bits
+end if
+;------------------------------------------
+		and		value, mask					; clear unrequired bits
+		mov		error, mask					; error = -1
+		bsf		result, value				; result = least significant set bit
+		cmovz	result, error				; if value = 0, then result = error
+		ret									; return result
+}
+ScanFwd8:	SCAN_FWD	ax, di, si, 0
+ScanFwd16:	SCAN_FWD	ax, di, si, 1
+ScanFwd32:	SCAN_FWD	eax, edi, esi, 2
+ScanFwd64:	SCAN_FWD	rax, rdi, rsi, 3
+
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+;       Bit scan backward                                                      ;
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+macro	SCAN_BWD	result, value, error, scale
+{
+;---[Internal variables]-------------------
+if scale = 0
+mask	= 0xFF								; mask to clear unrequired bits
+else if scale = 1
+mask	= 0xFFFF							; mask to clear unrequired bits
+else if scale = 2
+mask	= 0xFFFFFFFF						; mask to clear unrequired bits
+else if scale = 3
+mask	= 0xFFFFFFFFFFFFFFFF				; mask to clear unrequired bits
+end if
+;------------------------------------------
+		and		value, mask					; clear unrequired bits
+		mov		error, mask					; error = -1
+		bsr		result, value				; result = most significant set bit
+		cmovz	result, error				; if value = 0, then result = error
+		ret									; return result
+}
+ScanBwd8:	SCAN_BWD	ax, di, si, 0
+ScanBwd16:	SCAN_BWD	ax, di, si, 1
+ScanBwd32:	SCAN_BWD	eax, edi, esi, 2
+ScanBwd64:	SCAN_BWD	rax, rdi, rsi, 3
+
+;==============================================================================;
+;       Circular rotation                                                      ;
+;==============================================================================;
+
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+;       Circular rotation to the left                                          ;
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+macro	ROTATE_LEFT		result, value, shift
+{
+;---[Internal variables]-------------------
+rot		equ		cl							; rotation value
+;------------------------------------------
+		mov		rot, shift					; rot = shift
+		rol		value, rot					; rotate value left to rot bits
+		mov		result, value				; return RotateLeft (value, shift)
+		ret
+}
+RotateLeft8:	ROTATE_LEFT		al, dil, sil
+RotateLeft16:	ROTATE_LEFT		ax, di, sil
+RotateLeft32:	ROTATE_LEFT		eax, edi, sil
+RotateLeft64:	ROTATE_LEFT		rax, rdi, sil
+
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+;       Circular rotation to the right                                         ;
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+macro	ROTATE_RIGHT		result, value, shift
+{
+;---[Internal variables]-------------------
+rot		equ		cl							; rotation value
+;------------------------------------------
+		mov		rot, shift					; rot = shift
+		ror		value, rot					; rotate value right to rot bits
+		mov		result, value				; return RotateRight (value, shift)
+		ret
+}
+RotateRight8:	ROTATE_RIGHT	al, dil, sil
+RotateRight16:	ROTATE_RIGHT	ax, di, sil
+RotateRight32:	ROTATE_RIGHT	eax, edi, sil
+RotateRight64:	ROTATE_RIGHT	rax, rdi, sil
+
+;==============================================================================;
+;       Population count                                                       ;
+;==============================================================================;
+macro	POP_COUNT	result, value, scale
+{
+;---[Internal variables]-------------------
+if scale = 0
+mask	= 0xFF								; mask to clear unrequired bits
+else if scale = 1
+mask	= 0xFFFF							; mask to clear unrequired bits
+else if scale = 2
+mask	= 0xFFFFFFFF						; mask to clear unrequired bits
+else if scale = 3
+mask	= 0xFFFFFFFFFFFFFFFF				; mask to clear unrequired bits
+end if
+;------------------------------------------
+		and		value, mask					; clear unrequired bits
+		popcnt	result, value				; result = least significant set bit
+		ret									; return result
+}
+PopCount8:	POP_COUNT	ax, di, 0
+PopCount16:	POP_COUNT	ax, di, 1
+PopCount32:	POP_COUNT	eax, edi, 2
+PopCount64:	POP_COUNT	rax, rdi, 3
+
 ;******************************************************************************;
+;       Arithmetic operations                                                  ;
+;******************************************************************************;
+
+;==============================================================================;
 ;       Absolute value                                                         ;
-;******************************************************************************;
+;==============================================================================;
 macro	ABS_INT	value, temp, scale, negative
 {
 ;---[Internal variables]-------------------
@@ -698,9 +969,9 @@ Abs_sint64:		ABS_INT		rdi, rax, 3, 0
 Abs_flt32:		ABS_FLT		eax, 0, s
 Abs_flt64:		ABS_FLT		rax, 0, d
 
-;******************************************************************************;
+;==============================================================================;
 ;       Negative absolute value                                                ;
-;******************************************************************************;
+;==============================================================================;
 
 ; Signed integer types
 NegAbs_sint8:	ABS_INT		dil, al, 0, 1
@@ -712,9 +983,9 @@ NegAbs_sint64:	ABS_INT		rdi, rax, 3, 1
 NegAbs_flt32:	ABS_FLT		eax, 1, s
 NegAbs_flt64:	ABS_FLT		rax, 1, d
 
-;******************************************************************************;
+;==============================================================================;
 ;       Number sign                                                            ;
-;******************************************************************************;
+;==============================================================================;
 macro	SIGN_INT	value
 {
 ;---[Internal variables]-------------------
@@ -769,9 +1040,9 @@ Sign_sint64:	SIGN_INT	rdi
 Sign_flt32:		SIGN_FLT	eax, s
 Sign_flt64:		SIGN_FLT	rax, d
 
-;******************************************************************************;
+;==============================================================================;
 ;       Square root                                                            ;
-;******************************************************************************;
+;==============================================================================;
 macro	SQRT_INT	root, value, mask, temp, size
 {
 		xor		root, root					; root = 0
@@ -808,6 +1079,151 @@ Sqrt_uint64:	SQRT_INT	rax, rdi, rcx, rdx, 8
 ; Floating-point types
 Sqrt_flt32:		SQRT_FLT	s
 Sqrt_flt64:		SQRT_FLT	d
+
+;==============================================================================;
+;       Minimum and maximum value                                              ;
+;==============================================================================;
+macro	MINMAX_INT	value1, value2, c
+{
+;---[Internal variables]-------------------
+v1		equ		rdi							; register which holds value1
+v2		equ		rsi							; register which holds value2
+result	equ		rax							; regiser that holds min/max value
+;------------------------------------------
+		cmp		value1, value2				; if (value1 cond value2)
+		cmov#c	result, v1					;     then result = value1
+		cmovn#c	result, v2					;     else result = value2
+		ret									; return result
+}
+;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+macro	MINMAX_FLT	cmd, x
+{
+;---[Parameters]---------------------------
+value1	equ		xmm0						; first value
+value2	equ		xmm1						; second value
+;------------------------------------------
+		comis#x	value1, value1
+		jp		@f
+		cmd#x	value1, value2
+@@:		ret
+}
+
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+;       Minimum value                                                          ;
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+
+; Unsigned integer types
+Min_uint8:		MINMAX_INT	dil, sil, b
+Min_uint16:		MINMAX_INT	di, si, b
+Min_uint32:		MINMAX_INT	edi, esi, b
+Min_uint64:		MINMAX_INT	rdi, rsi, b
+
+; Signed integer types
+Min_sint8:		MINMAX_INT	dil, sil, l
+Min_sint16:		MINMAX_INT	di, si, l
+Min_sint32:		MINMAX_INT	edi, esi, l
+Min_sint64:		MINMAX_INT	rdi, rsi, l
+
+; Floating-point types
+Min_flt32:		MINMAX_FLT	mins, s
+Min_flt64:		MINMAX_FLT	mins, d
+
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+;       Maximum value                                                          ;
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+
+; Unsigned integer types
+Max_uint8:		MINMAX_INT	dil, sil, a
+Max_uint16:		MINMAX_INT	di, si, a
+Max_uint32:		MINMAX_INT	edi, esi, a
+Max_uint64:		MINMAX_INT	rdi, rsi, a
+
+; Signed integer types
+Max_sint8:		MINMAX_INT	dil, sil, g
+Max_sint16:		MINMAX_INT	di, si, g
+Max_sint32:		MINMAX_INT	edi, esi, g
+Max_sint64:		MINMAX_INT	rdi, rsi, g
+
+; Floating-point types
+Max_flt32:		MINMAX_FLT	maxs, s
+Max_flt64:		MINMAX_FLT	maxs, d
+
+;==============================================================================;
+;       Greatest common divisor                                                ;
+;==============================================================================;
+macro	GCD		value1, value2, temp, quot, remain, sign, scale
+{
+;------------------------------------------
+		mov		temp, value2				; temp = value2
+		mov		quot, value1				; quot = value1
+		test	temp, temp					; if (temp != 0)
+		jz		.exit						; {
+;---[Dividing loop]------------------------
+@@:											;      do {
+if sign
+		esign	scale
+		idiv	temp						;          remain = quot / temp
+else
+		xor		remain, remain
+		div		temp						;          remain = quot / temp
+end if
+		test	remain, remain				;          quot = temp
+		mov		quot, temp					;          temp = remain
+		mov		temp, remain				;      } while (temp != 0)
+		jnz		@b							; }
+;---[End of loop]--------------------------
+.exit:	ret									; return quot
+}
+
+; Unsigned integer types
+GCD_uint8:	GCD	dil, sil, cl, al, ah, 0, 0
+GCD_uint16:	GCD	di, si, cx, ax, dx, 0, 1
+GCD_uint32:	GCD	edi, esi, ecx, eax, edx, 0, 2
+GCD_uint64:	GCD	rdi, rsi, rcx, rax, rdx, 0, 3
+
+; Signed integer types
+GCD_sint8:	GCD	dil, sil, cl, al, ah, 1, 0
+GCD_sint16:	GCD	di, si, cx, ax, dx, 1, 1
+GCD_sint32:	GCD	edi, esi, ecx, eax, edx, 1, 2
+GCD_sint64:	GCD	rdi, rsi, rcx, rax, rdx, 1, 3
+
+;==============================================================================;
+;       Least common multiple                                                  ;
+;==============================================================================;
+macro	LCM		func, value1, value2, temp, quot, remain, sign, scale
+{
+;------------------------------------------
+		call	func						; quot = GCD (value1, value2)
+		test	quot, quot					; if (quot == 0)
+		jz		.ovfl						;     then go to overflow branch
+		mov		temp, quot					; temp = quot
+		mov		quot, value2				; quot = value2
+if sign
+		esign	scale
+		idiv	temp						; value2 /= temp
+else
+		xor		remain, remain
+		div		temp						; value2 /= temp
+end if
+		mul		value1						; value1 *= value2 / GCD (value1, value2)
+		jc		.ovfl						; if (overflow), then go to overflow branch
+		ret
+;---[Overflow branch]----------------------
+.ovfl:	xor		quot, quot					; return 0 (means result overflow)
+		ret
+}
+
+; Unsigned integer types
+LCM_uint8:	LCM	GCD_uint8, dil, sil, cl, al, ah, 0, 0
+LCM_uint16:	LCM	GCD_uint16, di, si, cx, ax, dx, 0, 1
+LCM_uint32:	LCM	GCD_uint32, edi, esi, ecx, eax, edx, 0, 2
+LCM_uint64:	LCM	GCD_uint64, rdi, rsi, rcx, rax, rdx, 0, 3
+
+; Signed integer types
+LCM_sint8:	LCM	GCD_sint8, dil, sil, cl, al, ah, 1, 0
+LCM_sint16:	LCM	GCD_sint16, di, si, cx, ax, dx, 1, 1
+LCM_sint32:	LCM	GCD_sint32, edi, esi, ecx, eax, edx, 1, 2
+LCM_sint64:	LCM	GCD_sint64, rdi, rsi, rcx, rax, rdx, 1, 3
 
 ;******************************************************************************;
 ;       Trigonometric functions                                                ;
@@ -1679,147 +2095,6 @@ end if
 }
 SinCos_flt32:	SINCOS	ecx, r8d, r9d, eax, s
 SinCos_flt64:	SINCOS	rcx, r8, r9, rax, d
-
-;******************************************************************************;
-;       Minimum value                                                          ;
-;******************************************************************************;
-macro	MINMAX_INT	value1, value2, c
-{
-;---[Internal variables]-------------------
-v1		equ		rdi							; register which holds value1
-v2		equ		rsi							; register which holds value2
-result	equ		rax							; regiser that holds min/max value
-;------------------------------------------
-		cmp		value1, value2				; if (value1 cond value2)
-		cmov#c	result, v1					;     then result = value1
-		cmovn#c	result, v2					;     else result = value2
-		ret									; return result
-}
-;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	MINMAX_FLT	cmd, x
-{
-;---[Parameters]---------------------------
-value1	equ		xmm0						; first value
-value2	equ		xmm1						; second value
-;------------------------------------------
-		comis#x	value1, value1
-		jp		@f
-		cmd#x	value1, value2
-@@:		ret
-}
-
-; Unsigned integer types
-Min_uint8:		MINMAX_INT	dil, sil, b
-Min_uint16:		MINMAX_INT	di, si, b
-Min_uint32:		MINMAX_INT	edi, esi, b
-Min_uint64:		MINMAX_INT	rdi, rsi, b
-
-; Signed integer types
-Min_sint8:		MINMAX_INT	dil, sil, l
-Min_sint16:		MINMAX_INT	di, si, l
-Min_sint32:		MINMAX_INT	edi, esi, l
-Min_sint64:		MINMAX_INT	rdi, rsi, l
-
-; Floating-point types
-Min_flt32:		MINMAX_FLT	mins, s
-Min_flt64:		MINMAX_FLT	mins, d
-
-;******************************************************************************;
-;       Maximum value                                                          ;
-;******************************************************************************;
-
-; Unsigned integer types
-Max_uint8:		MINMAX_INT	dil, sil, a
-Max_uint16:		MINMAX_INT	di, si, a
-Max_uint32:		MINMAX_INT	edi, esi, a
-Max_uint64:		MINMAX_INT	rdi, rsi, a
-
-; Signed integer types
-Max_sint8:		MINMAX_INT	dil, sil, g
-Max_sint16:		MINMAX_INT	di, si, g
-Max_sint32:		MINMAX_INT	edi, esi, g
-Max_sint64:		MINMAX_INT	rdi, rsi, g
-
-; Floating-point types
-Max_flt32:		MINMAX_FLT	maxs, s
-Max_flt64:		MINMAX_FLT	maxs, d
-
-;******************************************************************************;
-;       Greatest common divisor                                                ;
-;******************************************************************************;
-macro	GCD		value1, value2, temp, quot, remain, sign, scale
-{
-;------------------------------------------
-		mov		temp, value2				; temp = value2
-		mov		quot, value1				; quot = value1
-		test	temp, temp					; if (temp != 0)
-		jz		.exit						; {
-;---[Dividing loop]------------------------
-@@:											;      do {
-if sign
-		esign	scale
-		idiv	temp						;          remain = quot / temp
-else
-		xor		remain, remain
-		div		temp						;          remain = quot / temp
-end if
-		test	remain, remain				;          quot = temp
-		mov		quot, temp					;          temp = remain
-		mov		temp, remain				;      } while (temp != 0)
-		jnz		@b							; }
-;---[End of loop]--------------------------
-.exit:	ret									; return quot
-}
-
-; Unsigned integer types
-GCD_uint8:	GCD	dil, sil, cl, al, ah, 0, 0
-GCD_uint16:	GCD	di, si, cx, ax, dx, 0, 1
-GCD_uint32:	GCD	edi, esi, ecx, eax, edx, 0, 2
-GCD_uint64:	GCD	rdi, rsi, rcx, rax, rdx, 0, 3
-
-; Signed integer types
-GCD_sint8:	GCD	dil, sil, cl, al, ah, 1, 0
-GCD_sint16:	GCD	di, si, cx, ax, dx, 1, 1
-GCD_sint32:	GCD	edi, esi, ecx, eax, edx, 1, 2
-GCD_sint64:	GCD	rdi, rsi, rcx, rax, rdx, 1, 3
-
-;******************************************************************************;
-;       Least common multiple                                                  ;
-;******************************************************************************;
-macro	LCM		func, value1, value2, temp, quot, remain, sign, scale
-{
-;------------------------------------------
-		call	func						; quot = GCD (value1, value2)
-		test	quot, quot					; if (quot == 0)
-		jz		.ovfl						;     then go to overflow branch
-		mov		temp, quot					; temp = quot
-		mov		quot, value2				; quot = value2
-if sign
-		esign	scale
-		idiv	temp						; value2 /= temp
-else
-		xor		remain, remain
-		div		temp						; value2 /= temp
-end if
-		mul		value1						; value1 *= value2 / GCD (value1, value2)
-		jc		.ovfl						; if (overflow), then go to overflow branch
-		ret
-;---[Overflow branch]----------------------
-.ovfl:	xor		quot, quot					; return 0 (means result overflow)
-		ret
-}
-
-; Unsigned integer types
-LCM_uint8:	LCM	GCD_uint8, dil, sil, cl, al, ah, 0, 0
-LCM_uint16:	LCM	GCD_uint16, di, si, cx, ax, dx, 0, 1
-LCM_uint32:	LCM	GCD_uint32, edi, esi, ecx, eax, edx, 0, 2
-LCM_uint64:	LCM	GCD_uint64, rdi, rsi, rcx, rax, rdx, 0, 3
-
-; Signed integer types
-LCM_sint8:	LCM	GCD_sint8, dil, sil, cl, al, ah, 1, 0
-LCM_sint16:	LCM	GCD_sint16, di, si, cx, ax, dx, 1, 1
-LCM_sint32:	LCM	GCD_sint32, edi, esi, ecx, eax, edx, 1, 2
-LCM_sint64:	LCM	GCD_sint64, rdi, rsi, rcx, rax, rdx, 1, 3
 
 ;******************************************************************************;
 ;       Exponentiation functions                                               ;
@@ -2909,158 +3184,9 @@ ExpE_flt64:		EXPE	rax, rdx, d
 ExpEm1_flt32:	EXPEM1	eax, edx, s
 ExpEm1_flt64:	EXPEM1	rax, rdx, d
 
-;******************************************************************************;
-;       Scale functions                                                        ;
-;******************************************************************************;
-macro	SCALE	treg, shift, exp_min, exp_max, svalue1, svalue2, table, x
-{
-;---[Parameters]---------------------------
-value	equ		xmm0						; value to scale
-exp		equ		di							; exponent value
-;---[Internal variables]-------------------
-index	equ		rdi							; index register
-scale	equ		xmm1						; scale value
-if x eq s
-bytes	= 4									; array element size (bytes)
-else if x eq d
-bytes	= 8									; array element size (bytes)
-end if
-;------------------------------------------
-		movsx	index, exp					; index = exp
-		test	index, index				; if (index < 0)
-		js		.neg						;     then go to negative exponent branch
-;---[Positive exponent branch]-------------
-		cmp		index, exp_max				; if (index > exp_max)
-		jg		.pcorr						;     then correct the exponent
-@@:		movs#x	scale, [table + index*bytes + shift*bytes]	; scale = exp[index]
-		muls#x	value, scale				; return (value * scale)
-		ret
-;---[Correcting positive power]------------
-.pcorr:	initreg	scale, treg, svalue1, x		; scale = svalue1
-		sub		index, exp_max				; index -= exp_max
-		muls#x	value, scale				; value *= scale
-		cmp		index, exp_max				; if (index <= exp_max)
-		jle		@b							;     then exp is correct now
-		sub		index, exp_max				; index -= exp_max
-		muls#x	value, scale				; value *= scale
-		cmp		index, exp_max				; if (index <= exp_max)
-		jle		@b							;     then exp is correct now
-		muls#x	value, scale				; return (value * scale)
-		ret
-;---[Negative exponent branch]-------------
-.neg:	cmp		index, exp_min				; if (index < exp_min)
-		jl		.ncorr						;     then correct the exponent
-@@:		movs#x	scale, [table + index*bytes + shift*bytes]	; scale = exp[index]
-		muls#x	value, scale				; return (value * scale)
-		ret
-;---[Correcting negative power]------------
-.ncorr:	initreg	scale, treg, svalue2, x		; scale = svalue2
-		sub		index, exp_min				; index -= exp_min
-		muls#x	value, scale				; value *= scale
-		cmp		index, exp_min				; if (index >= exp_min)
-		jge		@b							;     then exp is correct now
-		sub		index, exp_min				; index -= exp_min
-		muls#x	value, scale				; value *= scale
-		cmp		index, exp_min				; if (index >= exp_min)
-		jge		@b							;     then exp is correct now
-		muls#x	value, scale				; return (value * scale)
-		ret
-}
-
 ;==============================================================================;
-;       Scale by power of 2                                                    ;
-;==============================================================================;
-macro	SCALE2	temp, treg, x
-{
-;---[Parameters]---------------------------
-value	equ		xmm0						; value to scale
-exp		equ		di							; exponent value
-;---[Internal variables]-------------------
-scale	equ		xmm1						; scale value
-if x eq s
-bias	= 127								; exponent bias
-digits	= 23								; count of bits into mantissa
-svalue1	= 0x7F000000						; 2^+127
-svalue2	= 0x00800000						; 2^-126
-else if x eq d
-bias	= 1023								; exponent bias
-digits	= 52								; count of bits into mantissa
-svalue1	= 0x7FE0000000000000				; 2^+1023
-svalue2	= 0x0008000000000000				; 2^-1022
-end if
-exp_max	= bias								; max exponent
-exp_min	= 1 - bias							; min exponent
-;------------------------------------------
-		movsx	temp, exp					; temp = exp
-		test	temp, temp					; if (temp < 0)
-		js		.neg						;     then go to negative exponent branch
-;---[Positive exponent branch]-------------
-		cmp		temp, exp_max				; if (temp > exp_max)
-		jg		.pcorr						;     then correct the exponent
-@@:		add		temp, bias					; temp = exp + bias
-		shl		temp, digits				; temp <<= digits
-if x eq s
-		movd	scale, temp					; scale = 2^exp
-else if x eq d
-		movq	scale, temp					; scale = 2^exp
-end if
-		muls#x	value, scale				; return (value * scale)
-		ret
-;---[Correcting positive power]------------
-.pcorr:	initreg	scale, treg, svalue1, x		; scale = svalue1
-		sub		temp, exp_max				; temp -= exp_max
-		muls#x	value, scale				; value *= scale
-		cmp		temp, exp_max				; if (temp <= exp_max)
-		jle		@b							;     then exp is correct now
-		sub		temp, exp_max				; temp -= exp_max
-		muls#x	value, scale				; value *= scale
-		cmp		temp, exp_max				; if (temp <= exp_max)
-		jle		@b							;     then exp is correct now
-		muls#x	value, scale				; return (value * scale)
-		ret
-;---[Negative exponent branch]-------------
-.neg:	cmp		temp, exp_min				; if (temp < exp_min)
-		jl		.ncorr						;     then correct the exponent
-@@:		add		temp, bias					; temp = exp + bias
-		shl		temp, digits				; temp <<= digits
-if x eq s
-		movd	scale, temp					; scale = 2^exp
-else if x eq d
-		movq	scale, temp					; scale = 2^exp
-end if
-		muls#x	value, scale				; return (value * scale)
-		ret
-;---[Correcting negative power]------------
-.ncorr:	initreg	scale, treg, svalue2, x		; scale = svalue2
-		sub		temp, exp_min				; temp -= exp_min
-		muls#x	value, scale				; value *= scale
-		cmp		temp, exp_min				; if (temp >= exp_min)
-		jge		@b							;     then exp is correct now
-		sub		temp, exp_min				; temp -= exp_min
-		muls#x	value, scale				; value *= scale
-		cmp		temp, exp_min				; if (temp >= exp_min)
-		jge		@b							;     then exp is correct now
-		muls#x	value, scale				; return (value * scale)
-		ret
-}
-Scale2_flt32:	SCALE2	eax, edx, s
-Scale2_flt64:	SCALE2	rax, rdx, d
-
-;==============================================================================;
-;       Scale by power of 10                                                   ;
-;==============================================================================;
-Scale10_flt32:	SCALE	eax, 46, -37, 38, 0x7E967699, 0x02081CEA, ten_table_flt32, s
-Scale10_flt64:	SCALE	rax, 324, -307, 308, 0x7FE1CCF385EBC8A0, 0x0031FA182C40C60D, ten_table_flt64, d
-
-;==============================================================================;
-;       Scale by power of E                                                    ;
-;==============================================================================;
-ScaleE_flt32:	SCALE	eax, 104, -87, 88, 0x7EF882B7 ,0x00B33687, exp_table_flt32, s
-ScaleE_flt64:	SCALE	rax, 746, -708, 709, 0x7FDD422D2BE5DC9B, 0x0017C8AB2288C9AB, exp_table_flt64, d
-
-;******************************************************************************;
 ;       Power                                                                  ;
-;******************************************************************************;
+;==============================================================================;
 macro	POWER_UINT	base, pow, temp, temph
 {
 ;---[Parameters]---------------------------
@@ -3211,6 +3337,155 @@ Power_sint64:	POWER_SINT	rdi, r8, rcx, r9, rax, rdx, 3
 ; Floating-point types
 Power_flt32:	POWER_FLT	dil, eax, s
 Power_flt64:	POWER_FLT	di, rax, d
+
+;******************************************************************************;
+;       Scale functions                                                        ;
+;******************************************************************************;
+macro	SCALE	treg, shift, exp_min, exp_max, svalue1, svalue2, table, x
+{
+;---[Parameters]---------------------------
+value	equ		xmm0						; value to scale
+exp		equ		di							; exponent value
+;---[Internal variables]-------------------
+index	equ		rdi							; index register
+scale	equ		xmm1						; scale value
+if x eq s
+bytes	= 4									; array element size (bytes)
+else if x eq d
+bytes	= 8									; array element size (bytes)
+end if
+;------------------------------------------
+		movsx	index, exp					; index = exp
+		test	index, index				; if (index < 0)
+		js		.neg						;     then go to negative exponent branch
+;---[Positive exponent branch]-------------
+		cmp		index, exp_max				; if (index > exp_max)
+		jg		.pcorr						;     then correct the exponent
+@@:		movs#x	scale, [table + index*bytes + shift*bytes]	; scale = exp[index]
+		muls#x	value, scale				; return (value * scale)
+		ret
+;---[Correcting positive power]------------
+.pcorr:	initreg	scale, treg, svalue1, x		; scale = svalue1
+		sub		index, exp_max				; index -= exp_max
+		muls#x	value, scale				; value *= scale
+		cmp		index, exp_max				; if (index <= exp_max)
+		jle		@b							;     then exp is correct now
+		sub		index, exp_max				; index -= exp_max
+		muls#x	value, scale				; value *= scale
+		cmp		index, exp_max				; if (index <= exp_max)
+		jle		@b							;     then exp is correct now
+		muls#x	value, scale				; return (value * scale)
+		ret
+;---[Negative exponent branch]-------------
+.neg:	cmp		index, exp_min				; if (index < exp_min)
+		jl		.ncorr						;     then correct the exponent
+@@:		movs#x	scale, [table + index*bytes + shift*bytes]	; scale = exp[index]
+		muls#x	value, scale				; return (value * scale)
+		ret
+;---[Correcting negative power]------------
+.ncorr:	initreg	scale, treg, svalue2, x		; scale = svalue2
+		sub		index, exp_min				; index -= exp_min
+		muls#x	value, scale				; value *= scale
+		cmp		index, exp_min				; if (index >= exp_min)
+		jge		@b							;     then exp is correct now
+		sub		index, exp_min				; index -= exp_min
+		muls#x	value, scale				; value *= scale
+		cmp		index, exp_min				; if (index >= exp_min)
+		jge		@b							;     then exp is correct now
+		muls#x	value, scale				; return (value * scale)
+		ret
+}
+
+;==============================================================================;
+;       Scale by power of 2                                                    ;
+;==============================================================================;
+macro	SCALE2	temp, treg, x
+{
+;---[Parameters]---------------------------
+value	equ		xmm0						; value to scale
+exp		equ		di							; exponent value
+;---[Internal variables]-------------------
+scale	equ		xmm1						; scale value
+if x eq s
+bias	= 127								; exponent bias
+digits	= 23								; count of bits into mantissa
+svalue1	= 0x7F000000						; 2^+127
+svalue2	= 0x00800000						; 2^-126
+else if x eq d
+bias	= 1023								; exponent bias
+digits	= 52								; count of bits into mantissa
+svalue1	= 0x7FE0000000000000				; 2^+1023
+svalue2	= 0x0008000000000000				; 2^-1022
+end if
+exp_max	= bias								; max exponent
+exp_min	= 1 - bias							; min exponent
+;------------------------------------------
+		movsx	temp, exp					; temp = exp
+		test	temp, temp					; if (temp < 0)
+		js		.neg						;     then go to negative exponent branch
+;---[Positive exponent branch]-------------
+		cmp		temp, exp_max				; if (temp > exp_max)
+		jg		.pcorr						;     then correct the exponent
+@@:		add		temp, bias					; temp = exp + bias
+		shl		temp, digits				; temp <<= digits
+if x eq s
+		movd	scale, temp					; scale = 2^exp
+else if x eq d
+		movq	scale, temp					; scale = 2^exp
+end if
+		muls#x	value, scale				; return (value * scale)
+		ret
+;---[Correcting positive power]------------
+.pcorr:	initreg	scale, treg, svalue1, x		; scale = svalue1
+		sub		temp, exp_max				; temp -= exp_max
+		muls#x	value, scale				; value *= scale
+		cmp		temp, exp_max				; if (temp <= exp_max)
+		jle		@b							;     then exp is correct now
+		sub		temp, exp_max				; temp -= exp_max
+		muls#x	value, scale				; value *= scale
+		cmp		temp, exp_max				; if (temp <= exp_max)
+		jle		@b							;     then exp is correct now
+		muls#x	value, scale				; return (value * scale)
+		ret
+;---[Negative exponent branch]-------------
+.neg:	cmp		temp, exp_min				; if (temp < exp_min)
+		jl		.ncorr						;     then correct the exponent
+@@:		add		temp, bias					; temp = exp + bias
+		shl		temp, digits				; temp <<= digits
+if x eq s
+		movd	scale, temp					; scale = 2^exp
+else if x eq d
+		movq	scale, temp					; scale = 2^exp
+end if
+		muls#x	value, scale				; return (value * scale)
+		ret
+;---[Correcting negative power]------------
+.ncorr:	initreg	scale, treg, svalue2, x		; scale = svalue2
+		sub		temp, exp_min				; temp -= exp_min
+		muls#x	value, scale				; value *= scale
+		cmp		temp, exp_min				; if (temp >= exp_min)
+		jge		@b							;     then exp is correct now
+		sub		temp, exp_min				; temp -= exp_min
+		muls#x	value, scale				; value *= scale
+		cmp		temp, exp_min				; if (temp >= exp_min)
+		jge		@b							;     then exp is correct now
+		muls#x	value, scale				; return (value * scale)
+		ret
+}
+Scale2_flt32:	SCALE2	eax, edx, s
+Scale2_flt64:	SCALE2	rax, rdx, d
+
+;==============================================================================;
+;       Scale by power of 10                                                   ;
+;==============================================================================;
+Scale10_flt32:	SCALE	eax, 46, -37, 38, 0x7E967699, 0x02081CEA, ten_table_flt32, s
+Scale10_flt64:	SCALE	rax, 324, -307, 308, 0x7FE1CCF385EBC8A0, 0x0031FA182C40C60D, ten_table_flt64, d
+
+;==============================================================================;
+;       Scale by power of E                                                    ;
+;==============================================================================;
+ScaleE_flt32:	SCALE	eax, 104, -87, 88, 0x7EF882B7 ,0x00B33687, exp_table_flt32, s
+ScaleE_flt64:	SCALE	rax, 746, -708, 709, 0x7FDD422D2BE5DC9B, 0x0017C8AB2288C9AB, exp_table_flt64, d
 
 ;******************************************************************************;
 ;       Rounding                                                               ;

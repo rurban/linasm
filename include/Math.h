@@ -47,8 +47,12 @@ class Math
 public:
 
 //****************************************************************************//
-//      Byte swap                                                             //
+//      Bitwise operations                                                    //
 //****************************************************************************//
+
+//============================================================================//
+//      Byte swap                                                             //
+//============================================================================//
 
 // Unsigned integer types
 static uint8_t ByteSwap (uint8_t value);
@@ -62,9 +66,9 @@ static sint16_t ByteSwap (sint16_t value);
 static sint32_t ByteSwap (sint32_t value);
 static sint64_t ByteSwap (sint64_t value);
 
-//****************************************************************************//
-//      Bit-reversal permutation                                              //
-//****************************************************************************//
+//============================================================================//
+//      Bit reversal permutation                                              //
+//============================================================================//
 
 // Unsigned integer types
 static uint8_t BitReverse (uint8_t value);
@@ -78,9 +82,101 @@ static sint16_t BitReverse (sint16_t value);
 static sint32_t BitReverse (sint32_t value);
 static sint64_t BitReverse (sint64_t value);
 
+//============================================================================//
+//      Bit scan                                                              //
+//============================================================================//
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//      Bit scan forward                                                      //
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+
+// Unsigned integer types
+static uint8_t ScanForward (uint8_t value);
+static uint16_t ScanForward (uint16_t value);
+static uint32_t ScanForward (uint32_t value);
+static uint64_t ScanForward (uint64_t value);
+
+// Unsigned integer types
+static sint8_t ScanForward (sint8_t value);
+static sint16_t ScanForward (sint16_t value);
+static sint32_t ScanForward (sint32_t value);
+static sint64_t ScanForward (sint64_t value);
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//      Bit scan backward                                                     //
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+
+// Unsigned integer types
+static uint8_t ScanBackward (uint8_t value);
+static uint16_t ScanBackward (uint16_t value);
+static uint32_t ScanBackward (uint32_t value);
+static uint64_t ScanBackward (uint64_t value);
+
+// Unsigned integer types
+static sint8_t ScanBackward (sint8_t value);
+static sint16_t ScanBackward (sint16_t value);
+static sint32_t ScanBackward (sint32_t value);
+static sint64_t ScanBackward (sint64_t value);
+
+//============================================================================//
+//      Circular rotation                                                     //
+//============================================================================//
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//      Circular rotation to the left                                         //
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+
+// Unsigned integer types
+static uint8_t RotateLeft (uint8_t value, uint8_t shift);
+static uint16_t RotateLeft (uint16_t value, uint8_t shift);
+static uint32_t RotateLeft (uint32_t value, uint8_t shift);
+static uint64_t RotateLeft (uint64_t value, uint8_t shift);
+
+// Signed integer types
+static sint8_t RotateLeft (sint8_t value, uint8_t shift);
+static sint16_t RotateLeft (sint16_t value, uint8_t shift);
+static sint32_t RotateLeft (sint32_t value, uint8_t shift);
+static sint64_t RotateLeft (sint64_t value, uint8_t shift);
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//      Circular rotation to the right                                        //
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+
+// Unsigned integer types
+static uint8_t RotateRight (uint8_t value, uint8_t shift);
+static uint16_t RotateRight (uint16_t value, uint8_t shift);
+static uint32_t RotateRight (uint32_t value, uint8_t shift);
+static uint64_t RotateRight (uint64_t value, uint8_t shift);
+
+// Signed integer types
+static sint8_t RotateRight (sint8_t value, uint8_t shift);
+static sint16_t RotateRight (sint16_t value, uint8_t shift);
+static sint32_t RotateRight (sint32_t value, uint8_t shift);
+static sint64_t RotateRight (sint64_t value, uint8_t shift);
+
+//============================================================================//
+//      Population count                                                      //
+//============================================================================//
+
+// Unsigned integer types
+static uint8_t PopCount (uint8_t value);
+static uint16_t PopCount (uint16_t value);
+static uint32_t PopCount (uint32_t value);
+static uint64_t PopCount (uint64_t value);
+
+// Signed integer types
+static sint8_t PopCount (sint8_t value);
+static sint16_t PopCount (sint16_t value);
+static sint32_t PopCount (sint32_t value);
+static sint64_t PopCount (sint64_t value);
+
 //****************************************************************************//
+//      Arithmetic operations                                                 //
+//****************************************************************************//
+
+//============================================================================//
 //      Absolute value                                                        //
-//****************************************************************************//
+//============================================================================//
 
 // Signed integer types
 static uint8_t Abs (sint8_t value);
@@ -92,9 +188,9 @@ static uint64_t Abs (sint64_t value);
 static flt32_t Abs (flt32_t value);
 static flt64_t Abs (flt64_t value);
 
-//****************************************************************************//
+//============================================================================//
 //      Negative absolute value                                               //
-//****************************************************************************//
+//============================================================================//
 
 // Signed integer types
 static uint8_t NegAbs (sint8_t value);
@@ -106,9 +202,9 @@ static uint64_t NegAbs (sint64_t value);
 static flt32_t NegAbs (flt32_t value);
 static flt64_t NegAbs (flt64_t value);
 
-//****************************************************************************//
+//============================================================================//
 //      Number sign                                                           //
-//****************************************************************************//
+//============================================================================//
 
 // Signed integer types
 static sint8_t Sign (sint8_t value);
@@ -120,9 +216,9 @@ static sint64_t Sign (sint64_t value);
 static flt32_t Sign (flt32_t value);
 static flt64_t Sign (flt64_t value);
 
-//****************************************************************************//
+//============================================================================//
 //      Square root                                                           //
-//****************************************************************************//
+//============================================================================//
 
 // Unsigned integer types
 static uint8_t Sqrt (uint8_t value);
@@ -133,6 +229,88 @@ static uint64_t Sqrt (uint64_t value);
 // Floating-point types
 static flt32_t Sqrt (flt32_t value);
 static flt64_t Sqrt (flt64_t value);
+
+//============================================================================//
+//      Minimum and maximum value                                             //
+//============================================================================//
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//      Minimum value                                                         //
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+
+// Unsigned integer types
+static uint8_t Min (uint8_t x, uint8_t y);
+static uint16_t Min (uint16_t x, uint16_t y);
+static uint32_t Min (uint32_t x, uint32_t y);
+static uint64_t Min (uint64_t x, uint64_t y);
+
+// Signed integer types
+static sint8_t Min (sint8_t x, sint8_t y);
+static sint16_t Min (sint16_t x, sint16_t y);
+static sint32_t Min (sint32_t x, sint32_t y);
+static sint64_t Min (sint64_t x, sint64_t y);
+
+// Floating-point types
+static flt32_t Min (flt32_t x, flt32_t y);
+static flt64_t Min (flt64_t x, flt64_t y);
+
+// Other types
+static size_t Min (size_t x, size_t y);
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//      Maximum value                                                         //
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+
+// Unsigned integer types
+static uint8_t Max (uint8_t x, uint8_t y);
+static uint16_t Max (uint16_t x, uint16_t y);
+static uint32_t Max (uint32_t x, uint32_t y);
+static uint64_t Max (uint64_t x, uint64_t y);
+
+// Signed integer types
+static sint8_t Max (sint8_t x, sint8_t y);
+static sint16_t Max (sint16_t x, sint16_t y);
+static sint32_t Max (sint32_t x, sint32_t y);
+static sint64_t Max (sint64_t x, sint64_t y);
+
+// Floating-point types
+static flt32_t Max (flt32_t x, flt32_t y);
+static flt64_t Max (flt64_t x, flt64_t y);
+
+// Other types
+static size_t Max (size_t x, size_t y);
+
+//============================================================================//
+//      Greatest common divisor                                               //
+//============================================================================//
+
+// Unsigned integer types
+static uint8_t GCD (uint8_t x, uint8_t y);
+static uint16_t GCD (uint16_t x, uint16_t y);
+static uint32_t GCD (uint32_t x, uint32_t y);
+static uint64_t GCD (uint64_t x, uint64_t y);
+
+// Signed integer types
+static sint8_t GCD (sint8_t x, sint8_t y);
+static sint16_t GCD (sint16_t x, sint16_t y);
+static sint32_t GCD (sint32_t x, sint32_t y);
+static sint64_t GCD (sint64_t x, sint64_t y);
+
+//============================================================================//
+//      Least common multiple                                                 //
+//============================================================================//
+
+// Unsigned integer types
+static uint8_t LCM (uint8_t x, uint8_t y);
+static uint16_t LCM (uint16_t x, uint16_t y);
+static uint32_t LCM (uint32_t x, uint32_t y);
+static uint64_t LCM (uint64_t x, uint64_t y);
+
+// Signed integer types
+static sint8_t LCM (sint8_t x, sint8_t y);
+static sint16_t LCM (sint16_t x, sint16_t y);
+static sint32_t LCM (sint32_t x, sint32_t y);
+static sint64_t LCM (sint64_t x, sint64_t y);
 
 //****************************************************************************//
 //      Trigonometric functions                                               //
@@ -165,84 +343,6 @@ static flt64_t CotQ (flt64_t angle, sint64_t quadrant);
 // Sine and cosine
 static flt32_t SinCosQ (flt32_t *sin, flt32_t *cos, flt32_t angle, sint64_t quadrant);
 static flt64_t SinCosQ (flt64_t *sin, flt64_t *cos, flt64_t angle, sint64_t quadrant);
-
-//****************************************************************************//
-//      Minimum value                                                         //
-//****************************************************************************//
-
-// Unsigned integer types
-static uint8_t Min (uint8_t x, uint8_t y);
-static uint16_t Min (uint16_t x, uint16_t y);
-static uint32_t Min (uint32_t x, uint32_t y);
-static uint64_t Min (uint64_t x, uint64_t y);
-
-// Signed integer types
-static sint8_t Min (sint8_t x, sint8_t y);
-static sint16_t Min (sint16_t x, sint16_t y);
-static sint32_t Min (sint32_t x, sint32_t y);
-static sint64_t Min (sint64_t x, sint64_t y);
-
-// Floating-point types
-static flt32_t Min (flt32_t x, flt32_t y);
-static flt64_t Min (flt64_t x, flt64_t y);
-
-// Other types
-static size_t Min (size_t x, size_t y);
-
-//****************************************************************************//
-//      Maximum value                                                         //
-//****************************************************************************//
-
-// Unsigned integer types
-static uint8_t Max (uint8_t x, uint8_t y);
-static uint16_t Max (uint16_t x, uint16_t y);
-static uint32_t Max (uint32_t x, uint32_t y);
-static uint64_t Max (uint64_t x, uint64_t y);
-
-// Signed integer types
-static sint8_t Max (sint8_t x, sint8_t y);
-static sint16_t Max (sint16_t x, sint16_t y);
-static sint32_t Max (sint32_t x, sint32_t y);
-static sint64_t Max (sint64_t x, sint64_t y);
-
-// Floating-point types
-static flt32_t Max (flt32_t x, flt32_t y);
-static flt64_t Max (flt64_t x, flt64_t y);
-
-// Other types
-static size_t Max (size_t x, size_t y);
-
-//****************************************************************************//
-//      Greatest common divisor                                               //
-//****************************************************************************//
-
-// Unsigned integer types
-static uint8_t GCD (uint8_t x, uint8_t y);
-static uint16_t GCD (uint16_t x, uint16_t y);
-static uint32_t GCD (uint32_t x, uint32_t y);
-static uint64_t GCD (uint64_t x, uint64_t y);
-
-// Signed integer types
-static sint8_t GCD (sint8_t x, sint8_t y);
-static sint16_t GCD (sint16_t x, sint16_t y);
-static sint32_t GCD (sint32_t x, sint32_t y);
-static sint64_t GCD (sint64_t x, sint64_t y);
-
-//****************************************************************************//
-//      Least common multiple                                                 //
-//****************************************************************************//
-
-// Unsigned integer types
-static uint8_t LCM (uint8_t x, uint8_t y);
-static uint16_t LCM (uint16_t x, uint16_t y);
-static uint32_t LCM (uint32_t x, uint32_t y);
-static uint64_t LCM (uint64_t x, uint64_t y);
-
-// Signed integer types
-static sint8_t LCM (sint8_t x, sint8_t y);
-static sint16_t LCM (sint16_t x, sint16_t y);
-static sint32_t LCM (sint32_t x, sint32_t y);
-static sint64_t LCM (sint64_t x, sint64_t y);
 
 //****************************************************************************//
 //      Exponentiation functions                                              //
@@ -292,25 +392,9 @@ static flt64_t Exp (flt64_t exp);
 static flt32_t Expm1 (flt32_t exp);
 static flt64_t Expm1 (flt64_t exp);
 
-//****************************************************************************//
-//      Scale functions                                                       //
-//****************************************************************************//
-
-// Scale by power of 2
-static flt32_t Scale2 (flt32_t value, sint16_t exp);
-static flt64_t Scale2 (flt64_t value, sint16_t exp);
-
-// Scale by power of 10
-static flt32_t Scale10 (flt32_t value, sint16_t exp);
-static flt64_t Scale10 (flt64_t value, sint16_t exp);
-
-// Scale by power of E
-static flt32_t Scale (flt32_t value, sint16_t exp);
-static flt64_t Scale (flt64_t value, sint16_t exp);
-
-//****************************************************************************//
+//============================================================================//
 //      Power                                                                 //
-//****************************************************************************//
+//============================================================================//
 
 // Unsigned integer types
 static uint8_t Power (uint8_t base, uint8_t exp);
@@ -327,6 +411,22 @@ static sint64_t Power (sint64_t base, uint8_t exp);
 // Floating-point types
 static flt32_t Power (flt32_t base, sint8_t exp);
 static flt64_t Power (flt64_t base, sint16_t exp);
+
+//****************************************************************************//
+//      Scale functions                                                       //
+//****************************************************************************//
+
+// Scale by power of 2
+static flt32_t Scale2 (flt32_t value, sint16_t exp);
+static flt64_t Scale2 (flt64_t value, sint16_t exp);
+
+// Scale by power of 10
+static flt32_t Scale10 (flt32_t value, sint16_t exp);
+static flt64_t Scale10 (flt64_t value, sint16_t exp);
+
+// Scale by power of E
+static flt32_t Scale (flt32_t value, sint16_t exp);
+static flt64_t Scale (flt64_t value, sint16_t exp);
 
 //****************************************************************************//
 //      Rounding                                                              //
@@ -387,8 +487,12 @@ static bool IsNaN (flt64_t value);
 ################################################################################
 */
 //****************************************************************************//
-//      Byte swap                                                             //
+//      Bitwise operations                                                    //
 //****************************************************************************//
+
+//============================================================================//
+//      Byte swap                                                             //
+//============================================================================//
 
 // Unsigned integer types
 uint8_t Math_ByteSwap_uint8 (uint8_t value);
@@ -402,25 +506,117 @@ sint16_t Math_ByteSwap_sint16 (sint16_t value);
 sint32_t Math_ByteSwap_sint32 (sint32_t value);
 sint64_t Math_ByteSwap_sint64 (sint64_t value);
 
-//****************************************************************************//
-//      Bit-reversal permutation                                              //
-//****************************************************************************//
+//============================================================================//
+//      Bit reversal permutation                                              //
+//============================================================================//
 
 // Unsigned integer types
-static uint8_t Math_BitReverse_uint8 (uint8_t value);
-static uint16_t Math_BitReverse_uint16 (uint16_t value);
-static uint32_t Math_BitReverse_uint32 (uint32_t value);
-static uint64_t Math_BitReverse_uint64 (uint64_t value);
+uint8_t Math_BitReverse_uint8 (uint8_t value);
+uint16_t Math_BitReverse_uint16 (uint16_t value);
+uint32_t Math_BitReverse_uint32 (uint32_t value);
+uint64_t Math_BitReverse_uint64 (uint64_t value);
 
 // Signed integer types
-static sint8_t Math_BitReverse_sint8 (sint8_t value);
-static sint16_t Math_BitReverse_sint16 (sint16_t value);
-static sint32_t Math_BitReverse_sint32 (sint32_t value);
-static sint64_t Math_BitReverse_sint64 (sint64_t value);
+sint8_t Math_BitReverse_sint8 (sint8_t value);
+sint16_t Math_BitReverse_sint16 (sint16_t value);
+sint32_t Math_BitReverse_sint32 (sint32_t value);
+sint64_t Math_BitReverse_sint64 (sint64_t value);
+
+//============================================================================//
+//      Bit scan                                                              //
+//============================================================================//
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//      Bit scan forward                                                      //
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+
+// Unsigned integer types
+uint8_t Math_ScanForward_uint8 (uint8_t value);
+uint16_t Math_ScanForward_uint16 (uint16_t value);
+uint32_t Math_ScanForward_uint32 (uint32_t value);
+uint64_t Math_ScanForward_uint64 (uint64_t value);
+
+// Signed integer types
+sint8_t Math_ScanForward_sint8 (sint8_t value);
+sint16_t Math_ScanForward_sint16 (sint16_t value);
+sint32_t Math_ScanForward_sint32 (sint32_t value);
+sint64_t Math_ScanForward_sint64 (sint64_t value);
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//      Bit scan backward                                                     //
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+
+// Unsigned integer types
+uint8_t Math_ScanBackward_uint8 (uint8_t value);
+uint16_t Math_ScanBackward_uint16 (uint16_t value);
+uint32_t Math_ScanBackward_uint32 (uint32_t value);
+uint64_t Math_ScanBackward_uint64 (uint64_t value);
+
+// Signed integer types
+sint8_t Math_ScanBackward_sint8 (sint8_t value);
+sint16_t Math_ScanBackward_sint16 (sint16_t value);
+sint32_t Math_ScanBackward_sint32 (sint32_t value);
+sint64_t Math_ScanBackward_sint64 (sint64_t value);
+
+//============================================================================//
+//      Circular rotation                                                     //
+//============================================================================//
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//      Circular rotation to the left                                         //
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+
+// Unsigned integer types
+uint8_t Math_RotateLeft_uint8 (uint8_t value, uint8_t shift);
+uint16_t Math_RotateLeft_uint16 (uint16_t value, uint8_t shift);
+uint32_t Math_RotateLeft_uint32 (uint32_t value, uint8_t shift);
+uint64_t Math_RotateLeft_uint64 (uint64_t value, uint8_t shift);
+
+// Signed integer types
+sint8_t Math_RotateLeft_sint8 (sint8_t value, uint8_t shift);
+sint16_t Math_RotateLeft_sint16 (sint16_t value, uint8_t shift);
+sint32_t Math_RotateLeft_sint32 (sint32_t value, uint8_t shift);
+sint64_t Math_RotateLeft_sint64 (sint64_t value, uint8_t shift);
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//      Circular rotation to the right                                        //
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+
+// Unsigned integer types
+uint8_t Math_RotateRight_uint8 (uint8_t value, uint8_t shift);
+uint16_t Math_RotateRight_uint16 (uint16_t value, uint8_t shift);
+uint32_t Math_RotateRight_uint32 (uint32_t value, uint8_t shift);
+uint64_t Math_RotateRight_uint64 (uint64_t value, uint8_t shift);
+
+// Signed integer types
+sint8_t Math_RotateRight_sint8 (sint8_t value, uint8_t shift);
+sint16_t Math_RotateRight_sint16 (sint16_t value, uint8_t shift);
+sint32_t Math_RotateRight_sint32 (sint32_t value, uint8_t shift);
+sint64_t Math_RotateRight_sint64 (sint64_t value, uint8_t shift);
+
+//============================================================================//
+//      Population count                                                      //
+//============================================================================//
+
+// Unsigned integer types
+uint8_t Math_PopCount_uint8 (uint8_t value);
+uint16_t Math_PopCount_uint16 (uint16_t value);
+uint32_t Math_PopCount_uint32 (uint32_t value);
+uint64_t Math_PopCount_uint64 (uint64_t value);
+
+// Signed integer types
+sint8_t Math_PopCount_sint8 (sint8_t value);
+sint16_t Math_PopCount_sint16 (sint16_t value);
+sint32_t Math_PopCount_sint32 (sint32_t value);
+sint64_t Math_PopCount_sint64 (sint64_t value);
 
 //****************************************************************************//
-//      Absolute value                                                        //
+//      Arithmetic operations                                                 //
 //****************************************************************************//
+
+//============================================================================//
+//      Absolute value                                                        //
+//============================================================================//
 
 // Signed integer types
 uint8_t Math_Abs_sint8 (sint8_t value);
@@ -432,9 +628,9 @@ uint64_t Math_Abs_sint64 (sint64_t value);
 flt32_t Math_Abs_flt32 (flt32_t value);
 flt64_t Math_Abs_flt64 (flt64_t value);
 
-//****************************************************************************//
+//============================================================================//
 //      Negative absolute value                                               //
-//****************************************************************************//
+//============================================================================//
 
 // Signed integer types
 uint8_t Math_NegAbs_sint8 (sint8_t value);
@@ -446,9 +642,9 @@ uint64_t Math_NegAbs_sint64 (sint64_t value);
 flt32_t Math_NegAbs_flt32 (flt32_t value);
 flt64_t Math_NegAbs_flt64 (flt64_t value);
 
-//****************************************************************************//
+//============================================================================//
 //      Number sign                                                           //
-//****************************************************************************//
+//============================================================================//
 
 // Signed integer types
 sint8_t Math_Sign_sint8 (sint8_t value);
@@ -460,9 +656,9 @@ sint64_t Math_Sign_sint64 (sint64_t value);
 flt32_t Math_Sign_flt32 (flt32_t value);
 flt64_t Math_Sign_flt64 (flt64_t value);
 
-//****************************************************************************//
+//============================================================================//
 //      Square root                                                           //
-//****************************************************************************//
+//============================================================================//
 
 // Unsigned integer types
 uint8_t Math_Sqrt_uint8 (uint8_t value);
@@ -473,6 +669,88 @@ uint64_t Math_Sqrt_uint64 (uint64_t value);
 // Floating-point types
 flt32_t Math_Sqrt_flt32 (flt32_t value);
 flt64_t Math_Sqrt_flt64 (flt64_t value);
+
+//============================================================================//
+//      Minimum and maximum value                                             //
+//============================================================================//
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//      Minimum value                                                         //
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+
+// Unsigned integer types
+uint8_t Math_Min_uint8 (uint8_t x, uint8_t y);
+uint16_t Math_Min_uint16 (uint16_t x, uint16_t y);
+uint32_t Math_Min_uint32 (uint32_t x, uint32_t y);
+uint64_t Math_Min_uint64 (uint64_t x, uint64_t y);
+
+// Signed integer types
+sint8_t Math_Min_sint8 (sint8_t x, sint8_t y);
+sint16_t Math_Min_sint16 (sint16_t x, sint16_t y);
+sint32_t Math_Min_sint32 (sint32_t x, sint32_t y);
+sint64_t Math_Min_sint64 (sint64_t x, sint64_t y);
+
+// Floating-point types
+flt32_t Math_Min_flt32 (flt32_t x, flt32_t y);
+flt64_t Math_Min_flt64 (flt64_t x, flt64_t y);
+
+// Other types
+size_t Math_Min_size (size_t x, size_t y);
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//      Maximum value                                                         //
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+
+// Unsigned integer types
+uint8_t Math_Max_uint8 (uint8_t x, uint8_t y);
+uint16_t Math_Max_uint16 (uint16_t x, uint16_t y);
+uint32_t Math_Max_uint32 (uint32_t x, uint32_t y);
+uint64_t Math_Max_uint64 (uint64_t x, uint64_t y);
+
+// Signed integer types
+sint8_t Math_Max_sint8 (sint8_t x, sint8_t y);
+sint16_t Math_Max_sint16 (sint16_t x, sint16_t y);
+sint32_t Math_Max_sint32 (sint32_t x, sint32_t y);
+sint64_t Math_Max_sint64 (sint64_t x, sint64_t y);
+
+// Floating-point types
+flt32_t Math_Max_flt32 (flt32_t x, flt32_t y);
+flt64_t Math_Max_flt64 (flt64_t x, flt64_t y);
+
+// Other types
+size_t Math_Max_size (size_t x, size_t y);
+
+//============================================================================//
+//      Greatest common divisor                                               //
+//============================================================================//
+
+// Unsigned integer types
+uint8_t Math_GCD_uint8 (uint8_t x, uint8_t y);
+uint16_t Math_GCD_uint16 (uint16_t x, uint16_t y);
+uint32_t Math_GCD_uint32 (uint32_t x, uint32_t y);
+uint64_t Math_GCD_uint64 (uint64_t x, uint64_t y);
+
+// Signed integer types
+sint8_t Math_GCD_sint8 (sint8_t x, sint8_t y);
+sint16_t Math_GCD_sint16 (sint16_t x, sint16_t y);
+sint32_t Math_GCD_sint32 (sint32_t x, sint32_t y);
+sint64_t Math_GCD_sint64 (sint64_t x, sint64_t y);
+
+//============================================================================//
+//      Least common multiple                                                 //
+//============================================================================//
+
+// Unsigned integer types
+uint8_t Math_LCM_uint8 (uint8_t x, uint8_t y);
+uint16_t Math_LCM_uint16 (uint16_t x, uint16_t y);
+uint32_t Math_LCM_uint32 (uint32_t x, uint32_t y);
+uint64_t Math_LCM_uint64 (uint64_t x, uint64_t y);
+
+// Signed integer types
+sint8_t Math_LCM_sint8 (sint8_t x, sint8_t y);
+sint16_t Math_LCM_sint16 (sint16_t x, sint16_t y);
+sint32_t Math_LCM_sint32 (sint32_t x, sint32_t y);
+sint64_t Math_LCM_sint64 (sint64_t x, sint64_t y);
 
 //****************************************************************************//
 //      Trigonometric functions                                               //
@@ -505,84 +783,6 @@ flt64_t Math_CotQ_flt64 (flt64_t angle, sint64_t quadrant);
 // Sine and cosine
 flt32_t Math_SinCosQ_flt32 (flt32_t *sin, flt32_t *cos, flt32_t angle, sint64_t quadrant);
 flt64_t Math_SinCosQ_flt64 (flt64_t *sin, flt64_t *cos, flt64_t angle, sint64_t quadrant);
-
-//****************************************************************************//
-//      Minimum value                                                         //
-//****************************************************************************//
-
-// Unsigned integer types
-uint8_t Math_Min_uint8 (uint8_t x, uint8_t y);
-uint16_t Math_Min_uint16 (uint16_t x, uint16_t y);
-uint32_t Math_Min_uint32 (uint32_t x, uint32_t y);
-uint64_t Math_Min_uint64 (uint64_t x, uint64_t y);
-
-// Signed integer types
-sint8_t Math_Min_sint8 (sint8_t x, sint8_t y);
-sint16_t Math_Min_sint16 (sint16_t x, sint16_t y);
-sint32_t Math_Min_sint32 (sint32_t x, sint32_t y);
-sint64_t Math_Min_sint64 (sint64_t x, sint64_t y);
-
-// Floating-point types
-flt32_t Math_Min_flt32 (flt32_t x, flt32_t y);
-flt64_t Math_Min_flt64 (flt64_t x, flt64_t y);
-
-// Other types
-size_t Math_Min_size (size_t x, size_t y);
-
-//****************************************************************************//
-//      Maximum value                                                         //
-//****************************************************************************//
-
-// Unsigned integer types
-uint8_t Math_Max_uint8 (uint8_t x, uint8_t y);
-uint16_t Math_Max_uint16 (uint16_t x, uint16_t y);
-uint32_t Math_Max_uint32 (uint32_t x, uint32_t y);
-uint64_t Math_Max_uint64 (uint64_t x, uint64_t y);
-
-// Signed integer types
-sint8_t Math_Max_sint8 (sint8_t x, sint8_t y);
-sint16_t Math_Max_sint16 (sint16_t x, sint16_t y);
-sint32_t Math_Max_sint32 (sint32_t x, sint32_t y);
-sint64_t Math_Max_sint64 (sint64_t x, sint64_t y);
-
-// Floating-point types
-flt32_t Math_Max_flt32 (flt32_t x, flt32_t y);
-flt64_t Math_Max_flt64 (flt64_t x, flt64_t y);
-
-// Other types
-size_t Math_Max_size (size_t x, size_t y);
-
-//****************************************************************************//
-//      Greatest common divisor                                               //
-//****************************************************************************//
-
-// Unsigned integer types
-uint8_t Math_GCD_uint8 (uint8_t x, uint8_t y);
-uint16_t Math_GCD_uint16 (uint16_t x, uint16_t y);
-uint32_t Math_GCD_uint32 (uint32_t x, uint32_t y);
-uint64_t Math_GCD_uint64 (uint64_t x, uint64_t y);
-
-// Signed integer types
-sint8_t Math_GCD_sint8 (sint8_t x, sint8_t y);
-sint16_t Math_GCD_sint16 (sint16_t x, sint16_t y);
-sint32_t Math_GCD_sint32 (sint32_t x, sint32_t y);
-sint64_t Math_GCD_sint64 (sint64_t x, sint64_t y);
-
-//****************************************************************************//
-//      Least common multiple                                                 //
-//****************************************************************************//
-
-// Unsigned integer types
-uint8_t Math_LCM_uint8 (uint8_t x, uint8_t y);
-uint16_t Math_LCM_uint16 (uint16_t x, uint16_t y);
-uint32_t Math_LCM_uint32 (uint32_t x, uint32_t y);
-uint64_t Math_LCM_uint64 (uint64_t x, uint64_t y);
-
-// Signed integer types
-sint8_t Math_LCM_sint8 (sint8_t x, sint8_t y);
-sint16_t Math_LCM_sint16 (sint16_t x, sint16_t y);
-sint32_t Math_LCM_sint32 (sint32_t x, sint32_t y);
-sint64_t Math_LCM_sint64 (sint64_t x, sint64_t y);
 
 //****************************************************************************//
 //      Exponentiation functions                                              //
@@ -632,25 +832,9 @@ flt64_t Math_Exp_flt64 (flt64_t exp);
 flt32_t Math_Expm1_flt32 (flt32_t exp);
 flt64_t Math_Expm1_flt64 (flt64_t exp);
 
-//****************************************************************************//
-//      Scale functions                                                       //
-//****************************************************************************//
-
-// Scale by power of 2
-flt32_t Math_Scale2_flt32 (flt32_t value, sint16_t exp);
-flt64_t Math_Scale2_flt64 (flt64_t value, sint16_t exp);
-
-// Scale by power of 10
-flt32_t Math_Scale10_flt32 (flt32_t value, sint16_t exp);
-flt64_t Math_Scale10_flt64 (flt64_t value, sint16_t exp);
-
-// Scale by power of E
-flt32_t Math_Scale_flt32 (flt32_t value, sint16_t exp);
-flt64_t Math_Scale_flt64 (flt64_t value, sint16_t exp);
-
-//****************************************************************************//
+//============================================================================//
 //      Power                                                                 //
-//****************************************************************************//
+//============================================================================//
 
 // Unsigned integer types
 uint8_t Math_Power_uint8 (uint8_t base, uint8_t exp);
@@ -667,6 +851,22 @@ sint64_t Math_Power_sint64 (sint64_t base, uint8_t exp);
 // Floating-point types
 flt32_t Math_Poweri_flt32 (flt32_t base, sint8_t exp);
 flt64_t Math_Poweri_flt64 (flt64_t base, sint16_t exp);
+
+//****************************************************************************//
+//      Scale functions                                                       //
+//****************************************************************************//
+
+// Scale by power of 2
+flt32_t Math_Scale2_flt32 (flt32_t value, sint16_t exp);
+flt64_t Math_Scale2_flt64 (flt64_t value, sint16_t exp);
+
+// Scale by power of 10
+flt32_t Math_Scale10_flt32 (flt32_t value, sint16_t exp);
+flt64_t Math_Scale10_flt64 (flt64_t value, sint16_t exp);
+
+// Scale by power of E
+flt32_t Math_Scale_flt32 (flt32_t value, sint16_t exp);
+flt64_t Math_Scale_flt64 (flt64_t value, sint16_t exp);
 
 //****************************************************************************//
 //      Rounding                                                              //
