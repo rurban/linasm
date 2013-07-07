@@ -278,6 +278,36 @@ public	Sqrt_flt32			as	'_ZN4Math4SqrtEf'
 public	Sqrt_flt64			as	'_ZN4Math4SqrtEd'
 
 ;==============================================================================;
+;       Three-state comparison                                                 ;
+;==============================================================================;
+
+; Unsigned integer types
+public	Cmp_uint8			as	'Math_Cmp_uint8'
+public	Cmp_uint16			as	'Math_Cmp_uint16'
+public	Cmp_uint32			as	'Math_Cmp_uint32'
+public	Cmp_uint64			as	'Math_Cmp_uint64'
+public	Cmp_uint8			as	'_ZN4Math3CmpEhh'
+public	Cmp_uint16			as	'_ZN4Math3CmpEtt'
+public	Cmp_uint32			as	'_ZN4Math3CmpEjj'
+public	Cmp_uint64			as	'_ZN4Math3CmpEyy'
+
+; Signed integer types
+public	Cmp_sint8			as	'Math_Cmp_sint8'
+public	Cmp_sint16			as	'Math_Cmp_sint16'
+public	Cmp_sint32			as	'Math_Cmp_sint32'
+public	Cmp_sint64			as	'Math_Cmp_sint64'
+public	Cmp_sint8			as	'_ZN4Math3CmpEaa'
+public	Cmp_sint16			as	'_ZN4Math3CmpEss'
+public	Cmp_sint32			as	'_ZN4Math3CmpEii'
+public	Cmp_sint64			as	'_ZN4Math3CmpExx'
+
+; Floating-point types
+public	Cmp_flt32			as	'Math_Cmp_flt32'
+public	Cmp_flt64			as	'Math_Cmp_flt64'
+public	Cmp_flt32			as	'_ZN4Math3CmpEff'
+public	Cmp_flt64			as	'_ZN4Math3CmpEdd'
+
+;==============================================================================;
 ;       Minimum and maximum value                                              ;
 ;==============================================================================;
 
@@ -311,9 +341,25 @@ public	Min_flt64			as	'Math_Min_flt64'
 public	Min_flt32			as	'_ZN4Math3MinEff'
 public	Min_flt64			as	'_ZN4Math3MinEdd'
 
-; Other types
-public	Min_uint64			as	'Math_Min_size'
-public	Min_uint64			as	'_ZN4Math3MinEmm'
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+;       Minimum absolute value                                                 ;
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+
+; Signed integer types
+public	MinAbs_sint8		as	'Math_MinAbs_sint8'
+public	MinAbs_sint16		as	'Math_MinAbs_sint16'
+public	MinAbs_sint32		as	'Math_MinAbs_sint32'
+public	MinAbs_sint64		as	'Math_MinAbs_sint64'
+public	MinAbs_sint8		as	'_ZN4Math6MinAbsEaa'
+public	MinAbs_sint16		as	'_ZN4Math6MinAbsEss'
+public	MinAbs_sint32		as	'_ZN4Math6MinAbsEii'
+public	MinAbs_sint64		as	'_ZN4Math6MinAbsExx'
+
+; Floating-point types
+public	MinAbs_flt32		as	'Math_MinAbs_flt32'
+public	MinAbs_flt64		as	'Math_MinAbs_flt64'
+public	MinAbs_flt32		as	'_ZN4Math6MinAbsEff'
+public	MinAbs_flt64		as	'_ZN4Math6MinAbsEdd'
 
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 ;       Maximum value                                                          ;
@@ -345,9 +391,25 @@ public	Max_flt64			as	'Math_Max_flt64'
 public	Max_flt32			as	'_ZN4Math3MaxEff'
 public	Max_flt64			as	'_ZN4Math3MaxEdd'
 
-; Other types
-public	Max_uint64			as	'Math_Max_size'
-public	Max_uint64			as	'_ZN4Math3MaxEmm'
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+;       Maximum absolute value                                                 ;
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+
+; Signed integer types
+public	MaxAbs_sint8		as	'Math_MaxAbs_sint8'
+public	MaxAbs_sint16		as	'Math_MaxAbs_sint16'
+public	MaxAbs_sint32		as	'Math_MaxAbs_sint32'
+public	MaxAbs_sint64		as	'Math_MaxAbs_sint64'
+public	MaxAbs_sint8		as	'_ZN4Math6MaxAbsEaa'
+public	MaxAbs_sint16		as	'_ZN4Math6MaxAbsEss'
+public	MaxAbs_sint32		as	'_ZN4Math6MaxAbsEii'
+public	MaxAbs_sint64		as	'_ZN4Math6MaxAbsExx'
+
+; Floating-point types
+public	MaxAbs_flt32		as	'Math_MaxAbs_flt32'
+public	MaxAbs_flt64		as	'Math_MaxAbs_flt64'
+public	MaxAbs_flt32		as	'_ZN4Math6MaxAbsEff'
+public	MaxAbs_flt64		as	'_ZN4Math6MaxAbsEdd'
 
 ;==============================================================================;
 ;       Greatest common divisor                                                ;
@@ -645,25 +707,13 @@ section	'.text'		executable align 16
 ;******************************************************************************;
 ;       Consts                                                                 ;
 ;******************************************************************************;
-CLINE		= 64							; Size of cache line
-NOT_FOUND	= -1							; Pattern is not found
 
 ; flt32_t
-ONE_FLT32	= 0x3F800000					; 1.0
-TWO_FLT32	= 0x40000000					; 2.0
-MONE_FLT32	= 0xBF800000					; -1.0
-MHALF_FLT32	= 0xBF000000					; -0.5
-INF_FLT32	= 0x7F800000					; +inf
 NORM_FLT32	= 0x00800000					; min normal value
 PI4_FLT32	= 0x3F490FDB					; PI / 4
 MAGIC_FLT32	= 0x4B400000					; magic number for flt32_t to int conversion
 
 ; flt64_t
-ONE_FLT64	= 0x3FF0000000000000			; 1.0
-TWO_FLT64	= 0x4000000000000000			; 2.0
-MONE_FLT64	= 0xBFF0000000000000			; -1.0
-MHALF_FLT64	= 0xBFE0000000000000			; -0.5
-INF_FLT64	= 0x7FF0000000000000			; +inf
 NORM_FLT64	= 0x0010000000000000			; min normal value
 PI4_FLT64	= 0x3FE921FB54442D18			; PI / 4
 MAGIC_FLT64	= 0x4338000000000000			; magic number for flt64_t to int conversion
@@ -919,19 +969,19 @@ PopCount64:	POP_COUNT	rax, rdi, 3
 ;==============================================================================;
 ;       Absolute value                                                         ;
 ;==============================================================================;
-macro	ABS_INT	value, temp, scale, negative
+macro	ABS_INT	result, value, scale, negative
 {
 ;---[Internal variables]-------------------
 bytes	= 1 shl scale						; size of element (bytes)
 ;------------------------------------------
-		mov		temp, value					; temp = value
+		mov		result, value				; result = value
 		sar		value, bytes * 8 - 1		; value >>= 8 * sizeof(x) - 1
 if negative
-		xor		value, temp					; value ^= temp
+		xor		value, result				; value ^= result
 else
-		xor		temp, value					; temp ^= value
+		xor		result, value				; result ^= value
 end if
-		sub		temp, value					; return (temp -= value)
+		sub		result, value				; return (result -= value)
 		ret
 }
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -960,10 +1010,10 @@ end if
 }
 
 ; Signed integer types
-Abs_sint8:		ABS_INT		dil, al, 0, 0
-Abs_sint16:		ABS_INT		di, ax, 1, 0
-Abs_sint32:		ABS_INT		edi, eax, 2, 0
-Abs_sint64:		ABS_INT		rdi, rax, 3, 0
+Abs_sint8:		ABS_INT		al, dil, 0, 0
+Abs_sint16:		ABS_INT		ax, di, 1, 0
+Abs_sint32:		ABS_INT		eax, edi, 2, 0
+Abs_sint64:		ABS_INT		rax, rdi, 3, 0
 
 ; Floating-point types
 Abs_flt32:		ABS_FLT		eax, 0, s
@@ -974,10 +1024,10 @@ Abs_flt64:		ABS_FLT		rax, 0, d
 ;==============================================================================;
 
 ; Signed integer types
-NegAbs_sint8:	ABS_INT		dil, al, 0, 1
-NegAbs_sint16:	ABS_INT		di, ax, 1, 1
-NegAbs_sint32:	ABS_INT		edi, eax, 2, 1
-NegAbs_sint64:	ABS_INT		rdi, rax, 3, 1
+NegAbs_sint8:	ABS_INT		al, dil, 0, 1
+NegAbs_sint16:	ABS_INT		ax, di, 1, 1
+NegAbs_sint32:	ABS_INT		eax, edi, 2, 1
+NegAbs_sint64:	ABS_INT		rax, rdi, 3, 1
 
 ; Floating-point types
 NegAbs_flt32:	ABS_FLT		eax, 1, s
@@ -989,45 +1039,50 @@ NegAbs_flt64:	ABS_FLT		rax, 1, d
 macro	SIGN_INT	value
 {
 ;---[Internal variables]-------------------
-temp	equ		rcx							; temporary register
-cond1	equ		rax							; first conditional register
-cond2	equ		rdx							; second conditional register
+result	equ		rax							; result register
+pone	equ		rdx							; +1
+mone	equ		rcx							; -1
 ;------------------------------------------
-		mov		temp, 1						; temp = 1
-		xor		cond1, cond1				; cond1 = 0
-		xor		cond2, cond2				; cond2 = 0
-		cmp		value, 0
-		cmovg	cond1, temp					; if (value > 0), cond1 = 1
-		cmovl	cond2, temp					; if (value < 0), cond2 = 1
-		sub		cond1, cond2				; return cond1 - cond2
+		xor		result, result				; result = 0
+		mov		pone, +1					; pone = +1
+		mov		mone, -1					; mone = -1
+		cmp		value, 0					; check value sign
+		cmovg	result, pone				; if (value > 0), return +1
+		cmovl	result, mone				; if (value < 0), return -1
 		ret
 }
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	SIGN_FLT	treg, x
+macro	SIGN_FLT	temp, pone, mone, nan, x
 {
 ;---[Parameters]---------------------------
 value	equ		xmm0						; value
 ;---[Internal variables]-------------------
-mask	equ		xmm1						; sign mask to get sign bit
-one		equ		xmm2						; 1.0
-zero	equ		xmm3						; 0.0
+zero	equ		xmm1						; 0.0
 if x eq s
-smask	= SMASK_FLT32						; sign mask
-oneval	= 0x3F800000						; 1.0
+poneval	= PONE_FLT32						; +1.0
+moneval	= MONE_FLT32						; -1.0
+nanval	= DMASK_FLT32						; NaN
 else if x eq d
-smask	= SMASK_FLT64						; sign mask
-oneval	= 0x3FF0000000000000				; 1.0
+poneval	= PONE_FLT64						; +1.0
+moneval	= MONE_FLT64						; -1.0
+nanval	= DMASK_FLT64						; NaN
 end if
 ;------------------------------------------
 		xorp#x	zero, zero					; zero = 0
-		initreg	mask, treg, smask, x		; mask = smask
-		initreg	one, treg, oneval, x		; one = 1.0
-		comis#x	value, zero					; compare value with 0.0
-		jp		@f							; if (value == NAN || value == 0)
-		jz		@f							;     then return value
-		andp#x	value, mask					; else
-		orp#x	value, one					;     return sign (value)
-@@:		ret
+		xor		temp, temp					; temp = 0
+		mov		pone, poneval				; pone = +1
+		mov		mone, moneval				; mone = -1
+		mov		nan, nanval					; nan = NaN
+		comis#x	value, zero					; check value sign
+		cmova	temp, pone					; if (value > 0), return +1
+		cmovb	temp, mone					; if (value < 0), return -1
+		cmovp	temp, nan					; if (value == NaN), return NaN
+if x eq s
+		movd	value, temp
+else if x eq d
+		movq	value, temp
+end if
+		ret
 }
 
 ; Signed integer types
@@ -1037,8 +1092,8 @@ Sign_sint32:	SIGN_INT	edi
 Sign_sint64:	SIGN_INT	rdi
 
 ; Floating-point types
-Sign_flt32:		SIGN_FLT	eax, s
-Sign_flt64:		SIGN_FLT	rax, d
+Sign_flt32:		SIGN_FLT	eax, edx, ecx, edi, s
+Sign_flt64:		SIGN_FLT	rax, rdx, rcx, rdi, d
 
 ;==============================================================================;
 ;       Square root                                                            ;
@@ -1081,30 +1136,98 @@ Sqrt_flt32:		SQRT_FLT	s
 Sqrt_flt64:		SQRT_FLT	d
 
 ;==============================================================================;
-;       Minimum and maximum value                                              ;
+;       Three-state comparison                                                 ;
 ;==============================================================================;
-macro	MINMAX_INT	value1, value2, c
+macro	CMP_INT	value1, value2, c1, c2
 {
 ;---[Internal variables]-------------------
-v1		equ		rdi							; register which holds value1
-v2		equ		rsi							; register which holds value2
-result	equ		rax							; regiser that holds min/max value
+result	equ		rax							; result register
+pone	equ		rdx							; +1
+mone	equ		rcx							; -1
 ;------------------------------------------
-		cmp		value1, value2				; if (value1 cond value2)
-		cmov#c	result, v1					;     then result = value1
-		cmovn#c	result, v2					;     else result = value2
-		ret									; return result
+		xor		result, result				; result = 0
+		mov		pone, +1					; pone = +1
+		mov		mone, -1					; mone = -1
+		cmp		value1, value2				; compare values
+		cmov#c1	result, pone				; if (value1 > value2), return +1
+		cmov#c2	result, mone				; if (value1 < value2), return -1
+		ret
 }
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	MINMAX_FLT	cmd, x
+macro	CMP_FLT	temp, pone, mone, nan, x
 {
 ;---[Parameters]---------------------------
 value1	equ		xmm0						; first value
 value2	equ		xmm1						; second value
 ;------------------------------------------
+		subs#x	value1, value2
+	SIGN_FLT	temp, pone, mone, nan, x
+}
+
+; Unsigned integer types
+Cmp_uint8:		CMP_INT		dil, sil, a, b
+Cmp_uint16:		CMP_INT		di, si, a, b
+Cmp_uint32:		CMP_INT		edi, esi, a, b
+Cmp_uint64:		CMP_INT		rdi, rsi, a, b
+
+; Signed integer types
+Cmp_sint8:		CMP_INT		dil, sil, g, l
+Cmp_sint16:		CMP_INT		di, si, g, l
+Cmp_sint32:		CMP_INT		edi, esi, g, l
+Cmp_sint64:		CMP_INT		rdi, rsi, g, l
+
+; Floating-point types
+Cmp_flt32:		CMP_FLT		eax, edx, ecx, edi, s
+Cmp_flt64:		CMP_FLT		rax, rdx, rcx, rdi, d
+
+;==============================================================================;
+;       Minimum and maximum value                                              ;
+;==============================================================================;
+macro	MINMAX_INT	value1, value2, temp1, temp2, x, scale, abs
+{
+;---[Internal variables]-------------------
+v1		equ		rdi							; register which holds value1
+v2		equ		rsi							; register which holds value2
+result	equ		rax							; regiser that holds min/max value
+bytes	= 1 shl scale						; size of element (bytes)
+;------------------------------------------
+if abs
+		mov		temp1, value1
+		mov		temp2, value2
+		sar		value1, bytes * 8 - 1
+		sar		value2, bytes * 8 - 1
+		add		temp1, value1
+		add		temp2, value2
+		xor		value1, temp1				; value1 = Abs (value1)
+		xor		value2, temp2				; value2 = Abs (value2)
+end if
+		cmp		value1, value2				; if (value1 cond value2)
+		cmov#x	result, v1					;     then result = value1
+		cmovn#x	result, v2					;     else result = value2
+		ret									; return result
+}
+;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+macro	MINMAX_FLT	cmd, treg, x, abs
+{
+;---[Parameters]---------------------------
+value1	equ		xmm0						; first value
+value2	equ		xmm1						; second value
+;---[Internal variables]-------------------
+mask	equ		xmm1						; data mask to get absolute value
+if x eq s
+dmask	= DMASK_FLT32						; data mask
+else if x eq d
+dmask	= DMASK_FLT64						; data mask
+end if
+;------------------------------------------
+if abs
+		initreg	mask, treg, dmask, x		; load data mask
+		andp#x	value1, mask				; value1 = Abs (value1)
+		andp#x	value2, mask				; value2 = Abs (value2)
+end if
 		comis#x	value1, value1
 		jp		@f
-		cmd#x	value1, value2
+		cmd#x	value1, value2				; return minmax (value1, value2)
 @@:		ret
 }
 
@@ -1113,40 +1236,68 @@ value2	equ		xmm1						; second value
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 
 ; Unsigned integer types
-Min_uint8:		MINMAX_INT	dil, sil, b
-Min_uint16:		MINMAX_INT	di, si, b
-Min_uint32:		MINMAX_INT	edi, esi, b
-Min_uint64:		MINMAX_INT	rdi, rsi, b
+Min_uint8:		MINMAX_INT	dil, sil, al, dl, b, 0, 0
+Min_uint16:		MINMAX_INT	di, si, ax, dx, b, 1, 0
+Min_uint32:		MINMAX_INT	edi, esi, eax, edx, b, 2, 0
+Min_uint64:		MINMAX_INT	rdi, rsi, rax, rdx, b, 3, 0
 
 ; Signed integer types
-Min_sint8:		MINMAX_INT	dil, sil, l
-Min_sint16:		MINMAX_INT	di, si, l
-Min_sint32:		MINMAX_INT	edi, esi, l
-Min_sint64:		MINMAX_INT	rdi, rsi, l
+Min_sint8:		MINMAX_INT	dil, sil, al, dl, l, 0, 0
+Min_sint16:		MINMAX_INT	di, si, ax, dx, l, 1, 0
+Min_sint32:		MINMAX_INT	edi, esi, eax, edx, l, 2, 0
+Min_sint64:		MINMAX_INT	rdi, rsi, rax, rdx, l, 3, 0
 
 ; Floating-point types
-Min_flt32:		MINMAX_FLT	mins, s
-Min_flt64:		MINMAX_FLT	mins, d
+Min_flt32:		MINMAX_FLT	mins, eax, s, 0
+Min_flt64:		MINMAX_FLT	mins, rax, d, 0
+
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+;       Minimum absolute value                                                 ;
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+
+; Signed integer types
+MinAbs_sint8:	MINMAX_INT	dil, sil, al, dl, l, 0, 1
+MinAbs_sint16:	MINMAX_INT	di, si, ax, dx, l, 1, 1
+MinAbs_sint32:	MINMAX_INT	edi, esi, eax, edx, l, 2, 1
+MinAbs_sint64:	MINMAX_INT	rdi, rsi, rax, rdx, l, 3, 1
+
+; Floating-point types
+MinAbs_flt32:	MINMAX_FLT	mins, eax, s, 1
+MinAbs_flt64:	MINMAX_FLT	mins, rax, d, 1
 
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 ;       Maximum value                                                          ;
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 
 ; Unsigned integer types
-Max_uint8:		MINMAX_INT	dil, sil, a
-Max_uint16:		MINMAX_INT	di, si, a
-Max_uint32:		MINMAX_INT	edi, esi, a
-Max_uint64:		MINMAX_INT	rdi, rsi, a
+Max_uint8:		MINMAX_INT	dil, sil, al, dl, a, 0, 0
+Max_uint16:		MINMAX_INT	di, si, ax, dx, a, 1, 0
+Max_uint32:		MINMAX_INT	edi, esi, eax, edx, a, 2, 0
+Max_uint64:		MINMAX_INT	rdi, rsi, rax, rdx, a, 3, 0
 
 ; Signed integer types
-Max_sint8:		MINMAX_INT	dil, sil, g
-Max_sint16:		MINMAX_INT	di, si, g
-Max_sint32:		MINMAX_INT	edi, esi, g
-Max_sint64:		MINMAX_INT	rdi, rsi, g
+Max_sint8:		MINMAX_INT	dil, sil, al, dl, g, 0, 0
+Max_sint16:		MINMAX_INT	di, si, ax, dx, g, 1, 0
+Max_sint32:		MINMAX_INT	edi, esi, eax, edx, g, 2, 0
+Max_sint64:		MINMAX_INT	rdi, rsi, rax, rdx, g, 3, 0
 
 ; Floating-point types
-Max_flt32:		MINMAX_FLT	maxs, s
-Max_flt64:		MINMAX_FLT	maxs, d
+Max_flt32:		MINMAX_FLT	maxs, eax, s, 0
+Max_flt64:		MINMAX_FLT	maxs, rax, d, 0
+
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+;       Maximum absolute value                                                 ;
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+
+; Signed integer types
+MaxAbs_sint8:	MINMAX_INT	dil, sil, al, dl, g, 0, 1
+MaxAbs_sint16:	MINMAX_INT	di, si, ax, dx, g, 1, 1
+MaxAbs_sint32:	MINMAX_INT	edi, esi, eax, edx, g, 2, 1
+MaxAbs_sint64:	MINMAX_INT	rdi, rsi, rax, rdx, g, 3, 1
+
+; Floating-point types
+MaxAbs_flt32:	MINMAX_FLT	maxs, eax, s, 1
+MaxAbs_flt64:	MINMAX_FLT	maxs, rax, d, 1
 
 ;==============================================================================;
 ;       Greatest common divisor                                                ;
@@ -1353,7 +1504,7 @@ bytes	= 4									; size of array element (bytes)
 ;---[Stage 3]------------------------------
 		initreg	temp2, treg, MHALF_FLT32, s	; temp2 = -0.5
 		mulss	temp2, scale
-		initreg	temp1, treg, ONE_FLT32, s	; temp1 = 1.0
+		initreg	temp1, treg, PONE_FLT32, s	; temp1 = +1.0
 		mulss	angle, origin
 		mulss	angle, scale
 		addss	angle, temp2
@@ -1472,7 +1623,7 @@ bytes	= 8									; size of array element (bytes)
 ;---[Stage 4]------------------------------
 		initreg	temp2, treg, MHALF_FLT64, d	; temp2 = -0.5
 		mulsd	temp2, scale
-		initreg	temp1, treg, ONE_FLT64, d	; temp1 = 1.0
+		initreg	temp1, treg, PONE_FLT64, d	; temp1 = +1.0
 		mulsd	angle, origin
 		mulsd	angle, scale
 		addsd	angle, temp2
@@ -1740,7 +1891,7 @@ s_lsin	equ		stack - 1 * 8				; stack position of "lsin" variable
 if x eq s
 dmask	= DMASK_FLT32						; data mask
 smask	= SMASK_FLT32						; sign mask
-oneval	= ONE_FLT64							; 1.0 (flt64_t)
+oneval	= PONE_FLT64						; +1.0 (flt64_t)
 pi		= PI4_FLT32							; PI / 4
 else if x eq d
 dmask	= DMASK_FLT64						; data mask
@@ -1879,7 +2030,7 @@ s_lsin	equ		stack - 1 * 8				; stack position of "lsin" variable
 if x eq s
 dmask	= DMASK_FLT32						; data mask
 smask	= SMASK_FLT32						; sign mask
-oneval	= ONE_FLT64							; 1.0 (flt64_t)
+oneval	= PONE_FLT64						; +1.0 (flt64_t)
 pi		= PI4_FLT32							; PI / 4
 else if x eq d
 dmask	= DMASK_FLT64						; data mask
@@ -2014,12 +2165,12 @@ one		equ		temp4						; 1.0
 if x eq s
 dmask	= DMASK_FLT32						; data mask
 smask	= SMASK_FLT32						; sign mask
-oneval	= ONE_FLT32							; 1.0
+oneval	= PONE_FLT32						; +1.0
 pi		= PI4_FLT32							; PI / 4
 else if x eq d
 dmask	= DMASK_FLT64						; data mask
 smask	= SMASK_FLT64						; sign mask
-oneval	= ONE_FLT64							; 1.0
+oneval	= PONE_FLT64						; +1.0
 pi		= PI4_FLT64							; PI / 4
 end if
 ;------------------------------------------
@@ -2105,10 +2256,10 @@ macro	EXPI	exp, treg, exp_min, exp_max, table, x
 result	equ		xmm0						; result register
 index	equ		rdi							; index register
 if x eq s
-inf		= INF_FLT32							; +inf
+inf		= PINF_FLT32						; +inf
 bytes	= 4									; array element size (bytes)
 else if x eq d
-inf		= INF_FLT64							; +inf
+inf		= PINF_FLT64						; +inf
 bytes	= 8									; array element size (bytes)
 end if
 ;------------------------------------------
@@ -2248,11 +2399,11 @@ macro	EXP2I	exp, temp, shift, x
 result	equ		xmm0						; result register
 shiftl	equ		cl							; low part of shift register
 if x eq s
-inf		= INF_FLT32							; +inf
+inf		= PINF_FLT32						; +inf
 bias	= 127								; exponent bias
 digits	= 23								; count of bits into mantissa
 else if x eq d
-inf		= INF_FLT64							; +inf
+inf		= PINF_FLT64						; +inf
 bias	= 1023								; exponent bias
 digits	= 52								; count of bits into mantissa
 end if
@@ -2320,13 +2471,13 @@ s_value	equ		stack - 2 * 8				; stack position of "value" variable
 s_scale	equ		stack - 1 * 8				; stack position of "scale" variable
 if x eq s
 mvalue	= MAGIC_FLT32						; magic number to get integer part from value
-inf		= INF_FLT32							; infinity
+inf		= PINF_FLT32						; +inf
 moneval	= MONE_FLT32						; -1.0
 exp_min	= 0xC3150000						; min exponent value
 exp_max	= 0x42FE0000						; max exponent value
 else if x eq d
 mvalue	= MAGIC_FLT64						; magic number to get integer part from value
-inf		= INF_FLT64							; infinity
+inf		= PINF_FLT64						; +inf
 moneval	= MONE_FLT64						; -1.0
 exp_min	= 0xC090C80000000000				; min exponent value
 exp_max	= 0x408FF80000000000				; max exponent value
@@ -2423,18 +2574,18 @@ s_value	equ		stack - 2 * 8				; stack position of "value" variable
 s_scale	equ		stack - 1 * 8				; stack position of "scale" variable
 if x eq s
 mvalue	= MAGIC_FLT32						; magic number to get integer part from value
-inf		= INF_FLT32							; infinity
+inf		= PINF_FLT32						; +inf
 moneval	= MONE_FLT32						; -1.0
 exp_min	= 0xC3150000						; min exponent value
 exp_max	= 0x42FE0000						; max exponent value
 else if x eq d
 mvalue	= MAGIC_FLT64						; magic number to get integer part from value
-inf		= INF_FLT64							; infinity
+inf		= PINF_FLT64						; +inf
 moneval	= MONE_FLT64						; -1.0
 exp_min	= 0xC090C80000000000				; min exponent value
 exp_max	= 0x408FF80000000000				; max exponent value
 end if
-oneval	= ONE_FLT64							; 1.0
+oneval	= PONE_FLT64						; +1.0
 ln2		= 0x3FE62E42FEFA39EF				; ln(2)
 ;------------------------------------------
 		initreg	max, treg, exp_max, x		; load max exponent value
@@ -2651,13 +2802,13 @@ s_value	equ		stack - 2 * 8				; stack position of "value" variable
 s_scale	equ		stack - 1 * 8				; stack position of "scale" variable
 if x eq s
 mvalue	= MAGIC_FLT32						; magic number to get integer part from value
-inf		= INF_FLT32							; infinity
+inf		= PINF_FLT32						; +inf
 moneval	= MONE_FLT32						; -1.0
 exp_min	= 0xC2380000						; min exponent value
 exp_max	= 0x421C0000						; max exponent value
 else if x eq d
 mvalue	= MAGIC_FLT64						; magic number to get integer part from value
-inf		= INF_FLT64							; infinity
+inf		= PINF_FLT64						; +inf
 moneval	= MONE_FLT64						; -1.0
 exp_min	= 0xC074400000000000				; min exponent value
 exp_max	= 0x4073500000000000				; max exponent value
@@ -2764,18 +2915,18 @@ s_value	equ		stack - 2 * 8				; stack position of "value" variable
 s_scale	equ		stack - 1 * 8				; stack position of "scale" variable
 if x eq s
 mvalue	= MAGIC_FLT32						; magic number to get integer part from value
-inf		= INF_FLT32							; infinity
+inf		= PINF_FLT32						; +inf
 moneval	= MONE_FLT32						; -1.0
 exp_min	= 0xC2380000						; min exponent value
 exp_max	= 0x421C0000						; max exponent value
 else if x eq d
 mvalue	= MAGIC_FLT64						; magic number to get integer part from value
-inf		= INF_FLT64							; infinity
+inf		= PINF_FLT64						; +inf
 moneval	= MONE_FLT64						; -1.0
 exp_min	= 0xC074400000000000				; min exponent value
 exp_max	= 0x4073500000000000				; max exponent value
 end if
-oneval	= ONE_FLT64							; 1.0
+oneval	= PONE_FLT64						; +1.0
 ln10	= 0x3FF26BB1BBB55516				; ln(10) / 2
 ;------------------------------------------
 		initreg	max, treg, exp_max, x		; load max exponent value
@@ -2999,13 +3150,13 @@ s_value	equ		stack - 2 * 8				; stack position of "value" variable
 s_scale	equ		stack - 1 * 8				; stack position of "scale" variable
 if x eq s
 mvalue	= MAGIC_FLT32						; magic number to get integer part from value
-inf		= INF_FLT32							; infinity
+inf		= PINF_FLT32						; +inf
 moneval	= MONE_FLT32						; -1.0
 exp_min	= 0xC2D00000						; min exponent value
 exp_max	= 0x42B20000						; max exponent value
 else if x eq d
 mvalue	= MAGIC_FLT64						; magic number to get integer part from value
-inf		= INF_FLT64							; infinity
+inf		= PINF_FLT64						; +inf
 moneval	= MONE_FLT64						; -1.0
 exp_min	= 0xC087500000000000				; min exponent value
 exp_max	= 0x4086300000000000				; max exponent value
@@ -3098,18 +3249,18 @@ s_value	equ		stack - 2 * 8				; stack position of "value" variable
 s_scale	equ		stack - 1 * 8				; stack position of "scale" variable
 if x eq s
 mvalue	= MAGIC_FLT32						; magic number to get integer part from value
-inf		= INF_FLT32							; infinity
+inf		= PINF_FLT32						; +inf
 moneval	= MONE_FLT32						; -1.0
 exp_min	= 0xC2D00000						; min exponent value
 exp_max	= 0x42B20000						; max exponent value
 else if x eq d
 mvalue	= MAGIC_FLT64						; magic number to get integer part from value
-inf		= INF_FLT64							; infinity
+inf		= PINF_FLT64						; +inf
 moneval	= MONE_FLT64						; -1.0
 exp_min	= 0xC087500000000000				; min exponent value
 exp_max	= 0x4086300000000000				; max exponent value
 end if
-oneval	= ONE_FLT64							; 1.0
+oneval	= PONE_FLT64						; +1.0
 ;------------------------------------------
 		initreg	max, treg, exp_max, x		; load max exponent value
 		initreg	min, treg, exp_min, x		; load max exponent value
@@ -3284,10 +3435,10 @@ temp	equ		xmm1						; temporary variable
 zero	equ		xmm2						; 0.0
 one		equ		xmm3						; 1.0
 if x eq s
-oneval	= ONE_FLT32							; 1.0
+oneval	= PONE_FLT32						; +1.0
 nan		= DMASK_FLT32						; NaN
 else if x eq d
-oneval	= ONE_FLT64							; 1.0
+oneval	= PONE_FLT64						; +1.0
 nan		= DMASK_FLT64						; NaN
 end if
 ;------------------------------------------
@@ -3550,11 +3701,11 @@ result	equ		al							; result register
 if x eq d
 dmask	= DMASK_FLT32						; data mask
 nvalue	= NORM_FLT32						; min normal value
-ivalue	= INF_FLT32							; inf
+ivalue	= PINF_FLT32						; +inf
 else if x eq d
 dmask	= DMASK_FLT64						; data mask
 nvalue	= NORM_FLT64						; min normal value
-ivalue	= INF_FLT64							; inf
+ivalue	= PINF_FLT64						; +inf
 end if
 ;------------------------------------------
 		mov#x	temp, value					; temp = bit snapshot of value
@@ -3599,10 +3750,10 @@ value	equ		xmm0						; floating-point value to check
 result	equ		al							; result register
 if x eq d
 dmask	= DMASK_FLT32						; data mask
-ivalue	= INF_FLT32							; inf
+ivalue	= PINF_FLT32						; +inf
 else if x eq d
 dmask	= DMASK_FLT64						; data mask
-ivalue	= INF_FLT64							; inf
+ivalue	= PINF_FLT64						; +inf
 end if
 ;------------------------------------------
 		mov#x	temp, value					; temp = bit snapshot of value
@@ -3622,10 +3773,10 @@ value	equ		xmm0						; floating-point value to check
 result	equ		al							; result register
 if x eq d
 dmask	= DMASK_FLT32						; data mask
-ivalue	= INF_FLT32							; inf
+ivalue	= PINF_FLT32						; +inf
 else if x eq d
 dmask	= DMASK_FLT64						; data mask
-ivalue	= INF_FLT64							; inf
+ivalue	= PINF_FLT64						; +inf
 end if
 ;------------------------------------------
 		mov#x	temp, value					; temp = bit snapshot of value
@@ -3645,10 +3796,10 @@ value	equ		xmm0						; floating-point value to check
 result	equ		al							; result register
 if x eq d
 dmask	= DMASK_FLT32						; data mask
-ivalue	= INF_FLT32							; inf
+ivalue	= PINF_FLT32						; +inf
 else if x eq d
 dmask	= DMASK_FLT64						; data mask
-ivalue	= INF_FLT64							; inf
+ivalue	= PINF_FLT64						; +inf
 end if
 ;------------------------------------------
 		mov#x	temp, value					; temp = bit snapshot of value

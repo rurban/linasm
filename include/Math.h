@@ -231,6 +231,26 @@ static flt32_t Sqrt (flt32_t value);
 static flt64_t Sqrt (flt64_t value);
 
 //============================================================================//
+//      Three-state comparison                                                //
+//============================================================================//
+
+// Unsigned integer types
+static sint8_t Cmp (uint8_t x, uint8_t y);
+static sint16_t Cmp (uint16_t x, uint16_t y);
+static sint32_t Cmp (uint32_t x, uint32_t y);
+static sint64_t Cmp (uint64_t x, uint64_t y);
+
+// Signed integer types
+static sint8_t Cmp (sint8_t x, sint8_t y);
+static sint16_t Cmp (sint16_t x, sint16_t y);
+static sint32_t Cmp (sint32_t x, sint32_t y);
+static sint64_t Cmp (sint64_t x, sint64_t y);
+
+// Floating-point types
+static flt32_t Cmp (flt32_t x, flt32_t y);
+static flt64_t Cmp (flt64_t x, flt64_t y);
+
+//============================================================================//
 //      Minimum and maximum value                                             //
 //============================================================================//
 
@@ -254,8 +274,19 @@ static sint64_t Min (sint64_t x, sint64_t y);
 static flt32_t Min (flt32_t x, flt32_t y);
 static flt64_t Min (flt64_t x, flt64_t y);
 
-// Other types
-static size_t Min (size_t x, size_t y);
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//      Minimum absolute value                                                //
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+
+// Signed integer types
+static uint8_t MinAbs (sint8_t x, sint8_t y);
+static uint16_t MinAbs (sint16_t x, sint16_t y);
+static uint32_t MinAbs (sint32_t x, sint32_t y);
+static uint64_t MinAbs (sint64_t x, sint64_t y);
+
+// Floating-point types
+static flt32_t MinAbs (flt32_t x, flt32_t y);
+static flt64_t MinAbs (flt64_t x, flt64_t y);
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 //      Maximum value                                                         //
@@ -277,8 +308,19 @@ static sint64_t Max (sint64_t x, sint64_t y);
 static flt32_t Max (flt32_t x, flt32_t y);
 static flt64_t Max (flt64_t x, flt64_t y);
 
-// Other types
-static size_t Max (size_t x, size_t y);
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//      Maximum absolute value                                                //
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+
+// Signed integer types
+static uint8_t MaxAbs (sint8_t x, sint8_t y);
+static uint16_t MaxAbs (sint16_t x, sint16_t y);
+static uint32_t MaxAbs (sint32_t x, sint32_t y);
+static uint64_t MaxAbs (sint64_t x, sint64_t y);
+
+// Floating-point types
+static flt32_t MaxAbs (flt32_t x, flt32_t y);
+static flt64_t MaxAbs (flt64_t x, flt64_t y);
 
 //============================================================================//
 //      Greatest common divisor                                               //
@@ -671,6 +713,26 @@ flt32_t Math_Sqrt_flt32 (flt32_t value);
 flt64_t Math_Sqrt_flt64 (flt64_t value);
 
 //============================================================================//
+//      Three-state comparison                                                //
+//============================================================================//
+
+// Unsigned integer types
+sint8_t Math_Cmp_uint8 (uint8_t x, uint8_t y);
+sint16_t Math_Cmp_uint16 (uint16_t x, uint16_t y);
+sint32_t Math_Cmp_uint32 (uint32_t x, uint32_t y);
+sint64_t Math_Cmp_uint64 (uint64_t x, uint64_t y);
+
+// Signed integer types
+sint8_t Math_Cmp_sint8 (sint8_t x, sint8_t y);
+sint16_t Math_Cmp_sint16 (sint16_t x, sint16_t y);
+sint32_t Math_Cmp_sint32 (sint32_t x, sint32_t y);
+sint64_t Math_Cmp_sint64 (sint64_t x, sint64_t y);
+
+// Floating-point types
+sint32_t Math_Cmp_flt32 (flt32_t x, flt32_t y);
+sint64_t Math_Cmp_flt64 (flt64_t x, flt64_t y);
+
+//============================================================================//
 //      Minimum and maximum value                                             //
 //============================================================================//
 
@@ -694,8 +756,19 @@ sint64_t Math_Min_sint64 (sint64_t x, sint64_t y);
 flt32_t Math_Min_flt32 (flt32_t x, flt32_t y);
 flt64_t Math_Min_flt64 (flt64_t x, flt64_t y);
 
-// Other types
-size_t Math_Min_size (size_t x, size_t y);
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//      Minimum absolute value                                                //
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+
+// Signed integer types
+uint8_t Math_MinAbs_sint8 (sint8_t x, sint8_t y);
+uint16_t Math_MinAbs_sint16 (sint16_t x, sint16_t y);
+uint32_t Math_MinAbs_sint32 (sint32_t x, sint32_t y);
+uint64_t Math_MinAbs_sint64 (sint64_t x, sint64_t y);
+
+// Floating-point types
+flt32_t Math_MinAbs_flt32 (flt32_t x, flt32_t y);
+flt64_t Math_MinAbs_flt64 (flt64_t x, flt64_t y);
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 //      Maximum value                                                         //
@@ -717,8 +790,19 @@ sint64_t Math_Max_sint64 (sint64_t x, sint64_t y);
 flt32_t Math_Max_flt32 (flt32_t x, flt32_t y);
 flt64_t Math_Max_flt64 (flt64_t x, flt64_t y);
 
-// Other types
-size_t Math_Max_size (size_t x, size_t y);
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//      Maximum absolute value                                                //
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+
+// Signed integer types
+uint8_t Math_MaxAbs_sint8 (sint8_t x, sint8_t y);
+uint16_t Math_MaxAbs_sint16 (sint16_t x, sint16_t y);
+uint32_t Math_MaxAbs_sint32 (sint32_t x, sint32_t y);
+uint64_t Math_MaxAbs_sint64 (sint64_t x, sint64_t y);
+
+// Floating-point types
+flt32_t Math_MaxAbs_flt32 (flt32_t x, flt32_t y);
+flt64_t Math_MaxAbs_flt64 (flt64_t x, flt64_t y);
 
 //============================================================================//
 //      Greatest common divisor                                               //
