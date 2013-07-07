@@ -465,11 +465,11 @@ s_ptr1	equ		stack + 2 * 8				; stack position of "ptr1" variable
 s_ptr2	equ		stack + 3 * 8				; stack position of "ptr2" variable
 if x eq s
 Map		= Map_flt32							; Mapping function
-halfval	= HALF_FLT32						; 0.5
+halfval	= PHALF_FLT32						; +0.5
 nan		= DMASK_FLT32						; NaN
 else if x eq d
 Map		= Map_flt64							; Mapping function
-halfval	= HALF_FLT64						; 0.5
+halfval	= PHALF_FLT64						; +0.5
 nan		= DMASK_FLT64						; NaN
 end if
 space	= 5 * 8								; stack size required by the procedure
@@ -632,12 +632,12 @@ s_res	equ		stack +  2 * 8				; stack position of "result" variable
 if x eq s
 Min		= Min_flt32							; Minimum function (flt32_t type)
 Max		= Max_flt32							; Maximum function (flt32_t type)
-halfval	= HALF_FLT32						; 0.5
+halfval	= PHALF_FLT32						; +0.5
 nan		= DMASK_FLT32						; NaN
 else if x eq d
 Min		= Min_flt64							; Minimum function (flt64_t type)
 Max		= Max_flt64							; Maximum function (flt64_t type)
-halfval	= HALF_FLT64						; 0.5
+halfval	= PHALF_FLT64						; +0.5
 nan		= DMASK_FLT64						; NaN
 end if
 space	= 3 * 8								; stack size required by the procedure
@@ -942,11 +942,11 @@ s_ptr3	equ		stack + 4 * 8				; stack position of "ptr3" variable
 s_ptr4	equ		stack + 5 * 8				; stack position of "ptr4" variable
 if x eq s
 Map		= Map_flt32							; Mapping function
-halfval	= HALF_FLT32						; 0.5
+halfval	= PHALF_FLT32						; +0.5
 nan		= DMASK_FLT32						; NaN
 else if x eq d
 Map		= Map_flt64							; Mapping function
-halfval	= HALF_FLT64						; 0.5
+halfval	= PHALF_FLT64						; +0.5
 nan		= DMASK_FLT64						; NaN
 end if
 space	= 7 * 8								; stack size required by the procedure

@@ -10,6 +10,7 @@
 ;******************************************************************************;
 ;       Consts                                                                 ;
 ;******************************************************************************;
+CLINE		= 64							; Size of cache line
 PSTEP		= 512							; Prefetch step
 VSCALE		= 4								; Vector scale factor
 PSCALE		= 12							; Memory page scale factor
@@ -19,15 +20,45 @@ VMASK		= VSIZE - 1						; Vector boundary aligning mask
 PMASK		= PSIZE - 1						; Memory page boundary aligning mask
 NOT_FOUND	= -1							; Pattern is not found
 
-; flt32_t
+;==============================================================================;
+;       flt32_t consts                                                         ;
+;==============================================================================;
+
+; Data and sign mask
 DMASK_FLT32	= 0x7FFFFFFF					; data mask and NaN value
 SMASK_FLT32	= 0x80000000					; sign mask
-HALF_FLT32	= 0x3F000000					; 0.5
 
-; flt64_t
+; Infinity
+PINF_FLT32	= 0x7F800000					; +inf
+MINF_FLT32	= 0xFF800000					; -inf
+
+; One
+PONE_FLT32	= 0x3F800000					; +1.0
+MONE_FLT32	= 0xBF800000					; -1.0
+
+; Half
+PHALF_FLT32	= 0x3F000000					; +0.5
+MHALF_FLT32	= 0xBF000000					; -0.5
+
+;==============================================================================;
+;       flt64_t consts                                                         ;
+;==============================================================================;
+
+; Data and sign mask
 DMASK_FLT64	= 0x7FFFFFFFFFFFFFFF			; data mask and NaN value
 SMASK_FLT64	= 0x8000000000000000			; sign mask
-HALF_FLT64	= 0x3FE0000000000000			; 0.5
+
+; Infinity
+PINF_FLT64	= 0x7FF0000000000000			; +inf
+MINF_FLT64	= 0xFFF0000000000000			; -inf
+
+; One
+PONE_FLT64	= 0x3FF0000000000000			; +1.0
+MONE_FLT64	= 0xBFF0000000000000			; -1.0
+
+; Half
+PHALF_FLT64	= 0x3FE0000000000000			; +0.5
+MHALF_FLT64	= 0xBFE0000000000000			; -0.5
 
 ;******************************************************************************;
 ;       Clone value through the entire register                                ;
