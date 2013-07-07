@@ -29,6 +29,12 @@ extrn	'Array_Min_flt64'		as	Min_flt64
 extrn	'Array_Max_flt32'		as	Max_flt32
 extrn	'Array_Max_flt64'		as	Max_flt64
 
+; Blend masks
+extrn	'maskS1'				as	maskS1
+extrn	'maskS2'				as	maskS2
+extrn	'maskV1'				as	maskV1
+extrn	'maskV2'				as	maskV2
+
 ;###############################################################################
 ;#      Export section                                                         #
 ;###############################################################################
@@ -741,7 +747,7 @@ end if
 		xorp#x	zero, zero					; zero = 0
 ;---[Unaligned sums]-----------------------
 		add		size, aindex				; size += aindex
-		shl		aindex, 4					; compute shift in mask array
+		shl		aindex, VSCALE				; compute shift in mask array
 		movap#x	blend, dqword [maskS1 + aindex]
 		xor		index, index				; index = 0
 		sub		size, VSIZE					; if (size <= VSIZE)
@@ -805,7 +811,7 @@ end if
 		add		ptr, 4 * VSIZE				; ptr += 4 * VSIZE
 		jmp		.vloop						; do while (true)
 ;---[End of vector loop]-------------------
-.tail:	shl		size, 4						; compute shift in mask array
+.tail:	shl		size, VSCALE				; compute shift in mask array
 		andnp#x	blend, dqword [maskS2 + size]
 		movap#x	temp, [array + index]		; temp = array[index]
 		subp#x	temp, vector				; temp -= vector
@@ -1138,7 +1144,7 @@ bmask	= bytes - 1							; elements aligning mask
 		xorp#x	zero, zero					; zero = 0
 ;---[Unaligned sums]-----------------------
 		add		size, aindex				; size += aindex
-		shl		aindex, 4					; compute shift in mask array
+		shl		aindex, VSCALE				; compute shift in mask array
 		movap#x	blend, dqword [maskS1 + aindex]
 		xor		index, index				; index = 0
 		sub		size, VSIZE					; if (size <= VSIZE)
@@ -1197,7 +1203,7 @@ bmask	= bytes - 1							; elements aligning mask
 		add		ptr, 4 * VSIZE				; ptr += 4 * VSIZE
 		jmp		.vloop						; do while (true)
 ;---[End of vector loop]-------------------
-.tail:	shl		size, 4						; compute shift in mask array
+.tail:	shl		size, VSCALE				; compute shift in mask array
 		andnp#x	blend, dqword [maskS2 + size]
 		movap#x	temp0, [array + index]		; temp = array[index]
 		subp#x	temp0, vector				; temp -= vector
@@ -1334,7 +1340,7 @@ bmask	= bytes - 1							; elements aligning mask
 		xorp#x	zero, zero					; zero = 0
 ;---[Unaligned sums]-----------------------
 		add		size, aindex				; size += aindex
-		shl		aindex, 4					; compute shift in mask array
+		shl		aindex, VSCALE				; compute shift in mask array
 		movap#x	blend, dqword [maskS1 + aindex]
 		xor		index, index				; index = 0
 		sub		size, VSIZE					; if (size <= VSIZE)
@@ -1388,7 +1394,7 @@ bmask	= bytes - 1							; elements aligning mask
 		add		ptr, 4 * VSIZE				; ptr += 4 * VSIZE
 		jmp		.vloop						; do while (true)
 ;---[End of vector loop]-------------------
-.tail:	shl		size, 4						; compute shift in mask array
+.tail:	shl		size, VSCALE				; compute shift in mask array
 		andnp#x	blend, dqword [maskS2 + size]
 		movap#x	temp, [array + index]		; temp = array[index]
 		subp#x	temp, vector				; temp -= vector
@@ -1518,7 +1524,7 @@ bmask	= bytes - 1							; elements aligning mask
 		sub		index, aindex				; index -= aindex
 		sub		size, VSIZE					; if (size <= VSIZE)
 		jbe		.tail						;     then process array tails
-		shl		aindex, 4					; compute shift in mask array
+		shl		aindex, VSCALE				; compute shift in mask array
 		movap#x	blend, dqword [maskV1 + aindex]
 		movup#x	a2temp, [array2]			; a2temp = array2[0]
 		subp#x	a2temp, vector2				; a2temp -= vector2
@@ -1571,7 +1577,7 @@ bmask	= bytes - 1							; elements aligning mask
 		jmp		.vloop						; do while (true)
 ;---[End of vector loop]-------------------
 .tail:	add		index, size					; index += size
-		shl		size, 4						; compute shift in mask array
+		shl		size, VSCALE				; compute shift in mask array
 		movap#x	blend, dqword [maskV2 + size]
 		movup#x	a2temp, [array2 + index]	; a2temp = array2[index]
 		subp#x	a2temp, vector2				; a2temp -= vector2
@@ -1679,7 +1685,7 @@ bmask	= bytes - 1							; elements aligning mask
 		sub		index, aindex				; index -= aindex
 		sub		size, VSIZE					; if (size <= VSIZE)
 		jbe		.tail						;     then process array tails
-		shl		aindex, 4					; compute shift in mask array
+		shl		aindex, VSCALE				; compute shift in mask array
 		movap#x	blend, dqword [maskV1 + aindex]
 		movup#x	a2temp, [array2]			; a2temp = array2[0]
 		subp#x	a2temp, vector2				; a2temp -= vector2
@@ -1758,7 +1764,7 @@ bmask	= bytes - 1							; elements aligning mask
 		jmp		.vloop						; do while (true)
 ;---[End of vector loop]-------------------
 .tail:	add		index, size					; index += size
-		shl		size, 4						; compute shift in mask array
+		shl		size, VSCALE				; compute shift in mask array
 		movap#x	blend, dqword [maskV2 + size]
 		movup#x	a2temp, [array2 + index]	; a2temp = array2[index]
 		subp#x	a2temp, vector2				; a2temp -= vector2
@@ -1809,49 +1815,6 @@ bmask	= bytes - 1							; elements aligning mask
 }
 Correlation_flt32:	CORRELATION	s
 Correlation_flt64:	CORRELATION	d
-
-;###############################################################################
-;#      Read-only data section                                                 #
-;###############################################################################
-section	'.rodata'	align 16
-
-align 16
-maskS1		dq	0x0000000000000000, 0x0000000000000000
-			dq	0x00000000000000FF, 0x0000000000000000
-			dq	0x000000000000FFFF, 0x0000000000000000
-			dq	0x0000000000FFFFFF, 0x0000000000000000
-			dq	0x00000000FFFFFFFF, 0x0000000000000000
-			dq	0x000000FFFFFFFFFF, 0x0000000000000000
-			dq	0x0000FFFFFFFFFFFF, 0x0000000000000000
-			dq	0x00FFFFFFFFFFFFFF, 0x0000000000000000
-			dq	0xFFFFFFFFFFFFFFFF, 0x0000000000000000
-			dq	0xFFFFFFFFFFFFFFFF, 0x00000000000000FF
-			dq	0xFFFFFFFFFFFFFFFF, 0x000000000000FFFF
-			dq	0xFFFFFFFFFFFFFFFF, 0x0000000000FFFFFF
-			dq	0xFFFFFFFFFFFFFFFF, 0x00000000FFFFFFFF
-			dq	0xFFFFFFFFFFFFFFFF, 0x000000FFFFFFFFFF
-			dq	0xFFFFFFFFFFFFFFFF, 0x0000FFFFFFFFFFFF
-			dq	0xFFFFFFFFFFFFFFFF, 0x00FFFFFFFFFFFFFF
-maskS2		dq	0xFFFFFFFFFFFFFFFF, 0xFFFFFFFFFFFFFFFF
-
-align 16
-maskV1		dq	0x0000000000000000, 0x0000000000000000
-			dq	0x0000000000000000, 0xFF00000000000000
-			dq	0x0000000000000000, 0xFFFF000000000000
-			dq	0x0000000000000000, 0xFFFFFF0000000000
-			dq	0x0000000000000000, 0xFFFFFFFF00000000
-			dq	0x0000000000000000, 0xFFFFFFFFFF000000
-			dq	0x0000000000000000, 0xFFFFFFFFFFFF0000
-			dq	0x0000000000000000, 0xFFFFFFFFFFFFFF00
-			dq	0x0000000000000000, 0xFFFFFFFFFFFFFFFF
-			dq	0xFF00000000000000, 0xFFFFFFFFFFFFFFFF
-			dq	0xFFFF000000000000, 0xFFFFFFFFFFFFFFFF
-			dq	0xFFFFFF0000000000, 0xFFFFFFFFFFFFFFFF
-			dq	0xFFFFFFFF00000000, 0xFFFFFFFFFFFFFFFF
-			dq	0xFFFFFFFFFF000000, 0xFFFFFFFFFFFFFFFF
-			dq	0xFFFFFFFFFFFF0000, 0xFFFFFFFFFFFFFFFF
-			dq	0xFFFFFFFFFFFFFF00, 0xFFFFFFFFFFFFFFFF
-maskV2		dq	0xFFFFFFFFFFFFFFFF, 0xFFFFFFFFFFFFFFFF
 
 ;###############################################################################
 ;#                                 END OF FILE                                 #

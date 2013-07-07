@@ -18,6 +18,7 @@ VSIZE		= 1 shl VSCALE					; Size of vector register (bytes)
 PSIZE		= 1 shl PSCALE					; Size of memory page (bytes)
 VMASK		= VSIZE - 1						; Vector boundary aligning mask
 PMASK		= PSIZE - 1						; Memory page boundary aligning mask
+VBITS		= 0xFFFF						; Vector bit mask
 NOT_FOUND	= -1							; Pattern is not found
 
 ;==============================================================================;

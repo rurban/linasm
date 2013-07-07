@@ -313,7 +313,7 @@ end if
 		sub		string, sindex				; align pointer to vector boundary
 ;---[Unaligned search for eol]-------------
 		sub		index, sindex				; index -= sindex
-		mov		cmask, 0xFFFF
+		mov		cmask, VBITS
 		shl		cmask, sindexl				; adjust cmask for unaligned search
 		pxor	echeck, echeck				; echeck = 0
 	pcmpeq#x	echeck, [string]			; check string[0] for end of line
@@ -658,7 +658,7 @@ end if
 ;---[Unaligned copy]-----------------------
 		add		maxlen, sindex				; maxlen += sindex
 		sub		index, sindex				; index -= sindex
-		mov		cmask, 0xFFFF
+		mov		cmask, VBITS
 		shl		cmask, sindexl				; adjust cmask for unaligned search
 		pxor	echeck0, echeck0			; echeck0 = 0
 	pcmpeq#x	echeck0, [ptr2]				; check ptr2[0] for end of line
@@ -813,7 +813,7 @@ end if
 ;---[Unaligned copy]-----------------------
 		add		maxlen, sindex				; maxlen += sindex
 		sub		index, sindex				; index -= sindex
-		mov		cmask, 0xFFFF
+		mov		cmask, VBITS
 		shl		cmask, sindexl				; adjust cmask for unaligned search
 		pxor	echeck0, echeck0			; echeck0 = 0
 	pcmpeq#x	echeck0, [ptr2]				; check ptr2[0] for end of line
@@ -1110,7 +1110,7 @@ end if
 	pcmpeq#x	s2temp, eol					; check string2[0] for end of line
 	pandn		s2temp, s1temp
 	pmovmskb	fmask, s2temp				; save check results to fmask
-		xor		fmask, 0xFFFF				; if string1[0] != string2[0] or eol is found
+		xor		fmask, VBITS				; if string1[0] != string2[0] or eol is found
 		jnz		.brk0						;     then break the loop
 ;---[Vector loop]--------------------------
 .vloop:	add		index, VSIZE				; index += VSIZE
@@ -1122,7 +1122,7 @@ end if
 	pcmpeq#x	s2temp, eol					; check ptr2[1] for end of line
 	pandn		s2temp, s1temp
 	pmovmskb	fmask, s2temp				; save check results to fmask
-		xor		fmask, 0xFFFF				; if ptr1[1] != ptr2[1] or eol is found
+		xor		fmask, VBITS				; if ptr1[1] != ptr2[1] or eol is found
 		jnz		.brk1						;     then break the loop
 		add		index, VSIZE				; index += VSIZE
 		sub		size, VSIZE					; if (size <= VSIZE)
@@ -1133,7 +1133,7 @@ end if
 	pcmpeq#x	s2temp, eol					; check ptr2[2] for end of line
 	pandn		s2temp, s1temp
 	pmovmskb	fmask, s2temp				; save check results to fmask
-		xor		fmask, 0xFFFF				; if ptr1[2] != ptr2[2] or eol is found
+		xor		fmask, VBITS				; if ptr1[2] != ptr2[2] or eol is found
 		jnz		.brk1						;     then break the loop
 		add		index, VSIZE				; index += VSIZE
 		sub		size, VSIZE					; if (size <= VSIZE)
@@ -1144,7 +1144,7 @@ end if
 	pcmpeq#x	s2temp, eol					; check ptr2[3] for end of line
 	pandn		s2temp, s1temp
 	pmovmskb	fmask, s2temp				; save check results to fmask
-		xor		fmask, 0xFFFF				; if ptr1[3] != ptr2[3] or eol is found
+		xor		fmask, VBITS				; if ptr1[3] != ptr2[3] or eol is found
 		jnz		.brk1						;     then break the loop
 		add		index, VSIZE				; index += VSIZE
 		sub		size, VSIZE					; if (size <= VSIZE)
@@ -1155,7 +1155,7 @@ end if
 	pcmpeq#x	s2temp, eol					; check ptr2[4] for end of line
 	pandn		s2temp, s1temp
 	pmovmskb	fmask, s2temp				; save check results to fmask
-		xor		fmask, 0xFFFF				; if ptr1[4] != ptr2[4] or eol is found
+		xor		fmask, VBITS				; if ptr1[4] != ptr2[4] or eol is found
 		jnz		.brk1						;     then break the loop
 		add		ptr1, 4 * VSIZE				; ptr1 += 4 * VSIZE
 		add		ptr2, 4 * VSIZE				; ptr2 += 4 * VSIZE
@@ -1179,7 +1179,7 @@ end if
 	pcmpeq#x	s2temp, eol					; check string2[index] for end of line
 	pandn		s2temp, s1temp
 	pmovmskb	fmask, s2temp				; save check results to fmask
-		xor		fmask, 0xFFFF				; if string1[index] == string2[index] and eol is not found
+		xor		fmask, VBITS				; if string1[index] == string2[index] and eol is not found
 		cmovz	string1, ptr1				;     string1 = ptr1
 		cmovz	string2, ptr2				;     string2 = ptr2
 		jz		.start						;     then compare another memory block
@@ -1259,8 +1259,8 @@ bmask	= bytes - 1							; elements aligning mask
 ;------------------------------------------
 		test	size, size					; if (size == 0)
 		jz		.exit						;     then go to exit
+		shftl	size, scale					; convert size to bytes
 if scale <> 0
-		shl		size, scale					; convert size to bytes
 		test	string1, bmask				; if elements have wrong alignment
 		jnz		.sloop						;     then skip vector code
 		test	string2, bmask				; if elements have wrong alignment
@@ -1287,7 +1287,7 @@ end if
 	pcmpeq#x	s2temp, eol					; check string2[0] for end of line
 	pandn		s2temp, s1temp
 	pmovmskb	fmask, s2temp				; save check results to fmask
-		xor		fmask, 0xFFFF				; if string1[0] != string2[0] or eol is found
+		xor		fmask, VBITS				; if string1[0] != string2[0] or eol is found
 		jnz		.brk0						;     then break the loop
 ;---[Vector loop]--------------------------
 .vloop:	add		index, VSIZE				; index += VSIZE
@@ -1299,7 +1299,7 @@ end if
 	pcmpeq#x	s2temp, eol					; check ptr2[1] for end of line
 	pandn		s2temp, s1temp
 	pmovmskb	fmask, s2temp				; save check results to fmask
-		xor		fmask, 0xFFFF				; if ptr1[1] != ptr2[1] or eol is found
+		xor		fmask, VBITS				; if ptr1[1] != ptr2[1] or eol is found
 		jnz		.brk1						;     then break the loop
 		add		index, VSIZE				; index += VSIZE
 		sub		size, VSIZE					; if (size <= VSIZE)
@@ -1310,7 +1310,7 @@ end if
 	pcmpeq#x	s2temp, eol					; check ptr2[2] for end of line
 	pandn		s2temp, s1temp
 	pmovmskb	fmask, s2temp				; save check results to fmask
-		xor		fmask, 0xFFFF				; if ptr1[2] != ptr2[2] or eol is found
+		xor		fmask, VBITS				; if ptr1[2] != ptr2[2] or eol is found
 		jnz		.brk1						;     then break the loop
 		add		index, VSIZE				; index += VSIZE
 		sub		size, VSIZE					; if (size <= VSIZE)
@@ -1321,7 +1321,7 @@ end if
 	pcmpeq#x	s2temp, eol					; check ptr2[3] for end of line
 	pandn		s2temp, s1temp
 	pmovmskb	fmask, s2temp				; save check results to fmask
-		xor		fmask, 0xFFFF				; if ptr1[3] != ptr2[3] or eol is found
+		xor		fmask, VBITS				; if ptr1[3] != ptr2[3] or eol is found
 		jnz		.brk1						;     then break the loop
 		add		index, VSIZE				; index += VSIZE
 		sub		size, VSIZE					; if (size <= VSIZE)
@@ -1332,7 +1332,7 @@ end if
 	pcmpeq#x	s2temp, eol					; check ptr2[4] for end of line
 	pandn		s2temp, s1temp
 	pmovmskb	fmask, s2temp				; save check results to fmask
-		xor		fmask, 0xFFFF				; if ptr1[4] != ptr2[4] or eol is found
+		xor		fmask, VBITS				; if ptr1[4] != ptr2[4] or eol is found
 		jnz		.brk1						;     then break the loop
 		add		ptr1, 4 * VSIZE				; ptr1 += 4 * VSIZE
 		add		ptr2, 4 * VSIZE				; ptr2 += 4 * VSIZE
@@ -1354,7 +1354,7 @@ end if
 	pcmpeq#x	s2temp, eol					; check string2[index] for end of line
 	pandn		s2temp, s1temp
 	pmovmskb	fmask, s2temp				; save check results to fmask
-		xor		fmask, 0xFFFF				; if string1[index] == string2[index] and eol is not found
+		xor		fmask, VBITS				; if string1[index] == string2[index] and eol is not found
 		jz		@f							;     then exit
 .brk1:	bsf		fmask, fmask				; find index of first different symbol
 		add		index, fmask				; index += fmask
