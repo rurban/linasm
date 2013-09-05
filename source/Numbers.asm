@@ -235,8 +235,8 @@ local	.loop, .start
 ;---[Parsing loop]-------------------------
 .loop:	cmp		value, max					; if (value < max)
 		jae		@f							; {
-		lea		value, [value + value * 4]	;     value = temp + value * 10
 		add		digits, 1					;     digits++
+		lea		value, [value + value * 4]	;     value = temp + value * 10
 		lea		value, [temp + value * 2]	; }
 @@:		add		ptr, 1						; ptr++
 .start:	movzx	temp, byte [ptr]
@@ -251,25 +251,43 @@ local	.loop, .start
 ;******************************************************************************;
 macro	READ_HEX_DIGITS
 {
+;---[Internal variables]-------------------
+symbol	equ		r12							; first symbol
+range	equ		r13							; range of digits
+shift	equ		r14							; shift value
+s_symb	equ		stack + -3 * 8				; stack position of "symbol" variable
+s_range	equ		stack + -2 * 8				; stack position of "range" variable
+s_shift	equ		stack + -1 * 8				; stack position of "shift" variable
 local	.loop, .start, .shift
+;------------------------------------------
+		mov		[s_symb], symbol			; save old value of "symbol" into the stack
+		mov		[s_range], range			; save old value of "range" into the stack
+		mov		[s_shift], shift			; save old value of "shift" into the stack
 		jmp		.start
 ;---[Parsing loop]-------------------------
-.shift:	add		temp, 10					; temp += 10
-.loop:	cmp		value, max					; if (value < max)
+.loop:	add		temp, shift					; temp += shift
+		cmp		value, max					; if (value < max)
 		jae		@f							; {
-		shl		value, 4					;     value = temp + value * 16
 		add		digits, 1					;     digits++
+		shl		value, 4					;     value = temp + value * 16
 		add		value, temp					; }
 @@:		add		ptr, 1						; ptr++
 .start:	movzx	temp, byte [ptr]			; temp = ptr[0]
 		or		temp, 0x20					; convert temp to lower case
-		sub		temp, '0'					; temp -= '0'
-		cmp		temp, 9
-		jbe		.loop						; if (temp <= 9), then digits is found
-		sub		temp, 49					; temp -= 'a'
-		cmp		temp, 5
-		jbe		.shift						; if (temp <= 'f'). then alfa is found
+		mov		symbol, '0'					; symbol = '0'
+		mov		range, 9					; range = 9
+		xor		shift, shift				; shift = 0
+		cmp		temp, 'a'					; if (temp >= 'a')
+		cmovae	symbol, [hex_symbol]		;     symbol = hex_symbol
+		cmovae	range, [hex_range]			;     range = hex_range
+		cmovae	shift, [hex_shift]			;     shift = hex_shift
+		sub		temp, symbol				; temp -= symbol
+		cmp		temp, range
+		jbe		.loop						; do while (temp <= range)
 ;---[End of loop]--------------------------
+		mov		symbol, [s_symb]			; get old value of "symbol" from the stack
+		mov		range, [s_range]			; get old value of "range" from the stack
+		mov		shift, [s_shift]			; get old value of "shift" from the stack
 }
 
 ;******************************************************************************;
@@ -302,7 +320,7 @@ local	.loop, .exit
 ;---[Skipping exponent prefix]-------------
 		movzx	temp, byte [ptr]			; temp = ptr[0]
 		or		temp, 0x20					; convert char to lower case
-		cmp		temp, symbol				; if exponent symbo is not found
+		cmp		temp, symbol				; if exponent symbol is not found
 		jne		.exit						;     then go to exit from the macro
 		mov		[s_ptr], ptr				; copy ptr to stack
 ;---[Reading number sign]------------------
@@ -317,10 +335,9 @@ local	.loop, .exit
 		cmova	ptr, [s_ptr]				;     then restore ptr from stack
 		ja		.exit						;     and exit from the macro
 ;---[Digits parsing loop]------------------
-.loop:	shl		value, 1					; value *= 2
-		add		ptr, 1						; ptr++
-		lea		value, [value * 4 + value]	; value *= 5
-		add		value, temp					; value += temp
+.loop:	add		ptr, 1						; ptr++
+		lea		value, [value + value * 4]	; value *= 5
+		lea		value, [temp + value * 2]	; value = temp + value * 10
 		cmp		value, 1 shl 16				; if (value >= (1 << 16)), then exp overflow
 		jae		.ovrfl						;     go to overflow branch
 		movzx	temp, byte [ptr]
@@ -403,7 +420,7 @@ string	equ		rsi							; source string
 ptr		equ		rax							; temporary pointer to string
 value	equ		rdx							; number value
 temp	equ		rcx							; temporary register
-max		equ		r10							; max value
+max		equ		r11							; max value
 ;---[Skipping white-symbols]---------------
 		SKIP_WHITE
 ;---[Skip bin prefix if found]-------------
@@ -454,7 +471,7 @@ string	equ		rsi							; source string
 ptr		equ		rax							; temporary pointer to string
 value	equ		rdx							; number value
 temp	equ		rcx							; temporary register
-max		equ		r10							; max value
+max		equ		r11							; max value
 ;---[Skipping white-symbols]---------------
 		SKIP_WHITE
 ;---[Getting number digits]----------------
@@ -503,7 +520,10 @@ string	equ		rsi							; source string
 ptr		equ		rax							; temporary pointer to string
 value	equ		rdx							; number value
 temp	equ		rcx							; temporary register
-max		equ		r10							; max value
+symbol	equ		r8							; first symbol
+range	equ		r9							; range of digits
+shift	equ		r10							; shift value
+max		equ		r11							; max value
 ;---[Skipping white-symbols]---------------
 		SKIP_WHITE
 ;---[Skip hex prefix if found]-------------
@@ -513,27 +533,35 @@ max		equ		r10							; max value
 		xor		value, value				; value = 0
 		movzx	temp, byte [ptr]			; temp = ptr[0]
 		or		temp, 0x20					; convert char to lower case
-		sub		temp, '0'					; temp -= '0'
-		cmp		temp, 9						; if (temp == [0..9])
-		jbe		.loop						;     then digit is found
-		sub		temp, 49					; temp -= 'a'
-		cmp		temp, 5						; if (temp != [a..f])
+		mov		symbol, '0'					; symbol = '0'
+		mov		range, 9					; range = 9
+		xor		shift, shift				; shift = 0
+		cmp		temp, 'a'					; if (temp >= 'a')
+		cmovae	symbol, [hex_symbol]		;     symbol = hex_symbol
+		cmovae	range, [hex_range]			;     range = hex_range
+		cmovae	shift, [hex_shift]			;     shift = hex_shift
+		sub		temp, symbol				; temp -= symbol
+		cmp		temp, range					; if (temp > range)
 		ja		.nonum						;     then go to no number branch
 ;---[Digits parsing loop]------------------
-.shift:	add		temp, 10					; temp += 10
-.loop:	cmp		value, max					; if (value >= max)
+.loop:	add		temp, shift					; temp += shift
+		cmp		value, max					; if (value >= max)
 		jae		.ovrfl						;     then go to overflow branch
-		shl		value, 4					; value *= 16
 		add		ptr, 1						; ptr++
-		add		value, temp					; value += temp
+		shl		value, 4
+		add		value, temp					; value = temp + value * 16
 		movzx	temp, byte [ptr]			; temp = ptr[0]
 		or		temp, 0x20					; convert temp to lower case
-		sub		temp, '0'					; temp -= '0'
-		cmp		temp, 9						; if (temp == [0..9])
-		jbe		.loop						;     then digit is found
-		sub		temp, 49					; temp -= 'a'
-		cmp		temp, 5						; if (temp == [a..f])
-		jbe		.shift						;     then alfa is found
+		mov		symbol, '0'					; symbol = '0'
+		mov		range, 9					; range = 9
+		xor		shift, shift				; shift = 0
+		cmp		temp, 'a'					; if (temp >= 'a')
+		cmovae	symbol, [hex_symbol]		;     symbol = hex_symbol
+		cmovae	range, [hex_range]			;     range = hex_range
+		cmovae	shift, [hex_shift]			;     shift = hex_shift
+		sub		temp, symbol				; temp -= symbol
+		cmp		temp, range
+		jbe		.loop						; do while (temp <= range)
 ;---[Normal exit branch]-------------------
 		mov		[p_num], part				; p_num[0] = value
 		sub		ptr, string					; return ptr - string
@@ -558,8 +586,8 @@ temp	equ		rcx							; temporary value
 value	equ		rdx							; value of the number
 digits	equ		r8							; count of digits that number has
 sign	equ		r9							; number sign
-max		equ		r10							; max value that mantissa can hold
-exp		equ		r11							; number exponent
+exp		equ		r10							; number exponent
+max		equ		r11							; max value that mantissa can hold
 mant	equ		xmm0						; mantissa value
 base	equ		xmm1						; base of numeral system
 s_ptr	equ		rsp - 1 * 8					; stack position of "ptr" variable
@@ -620,7 +648,7 @@ ptr		equ		rax							; temporary pointer to string
 value	equ		rdx							; register which holds number value
 temp	equ		rcx							; temporary register
 limit	equ		r8							; max number value
-max		equ		r10							; max value
+max		equ		r11							; max value
 bytes	= 1 shl scale						; size of signed integer type
 ;---[Skipping white-symbols]---------------
 		SKIP_WHITE
@@ -636,11 +664,11 @@ bytes	= 1 shl scale						; size of signed integer type
 ;---[Digits parsing loop]------------------
 .loop:	cmp		value, max					; if (value >= max)
 		jae		.ovrfl						;     then go to overflow branch
-		lea		value, [value * 4 + value]	; value *= 5
 		add		ptr, 1						; ptr++
+		lea		value, [value + value * 4]	; value *= 5
 		shl		value, 1					; value *= 2
 		add		value, temp					; value += temp
-		jc		.ovrfl						; if overfrol, then go to overflow branch
+		jc		.ovrfl						; if overflow, then go to overflow branch
 		movzx	temp, byte [ptr]
 		sub		temp, '0'					; temp = ptr[0] - '0'
 		cmp		temp, 9
@@ -673,7 +701,7 @@ value	equ		rdx							; register which holds number value
 temp	equ		rcx							; temporary register
 limit	equ		r8							; max number value
 sign	equ		r9							; number sign
-max		equ		r10							; max value
+max		equ		r11							; max value
 bytes	= 1 shl scale						; size of signed integer type
 ;---[Skipping white-symbols]---------------
 		SKIP_WHITE
@@ -691,8 +719,8 @@ bytes	= 1 shl scale						; size of signed integer type
 ;---[Digits parsing loop]------------------
 .loop:	cmp		value, max					; if (value >= max)
 		jae		.ovrfl						;     then go to overflow branch
-		lea		value, [value + value * 4]
 		add		ptr, 1						; ptr++
+		lea		value, [value + value * 4]
 		lea		value, [temp + value * 2]	; value = temp + value * 10
 		cmp		value, limit				; if (value > limit)
 		ja		.ovrfl						;     then go to overflow branch
@@ -734,6 +762,11 @@ DecToNum_flt64:		FLOAT_TO_NUM	rdx, d, 1
 ;#      Read-only data section                                                 #
 ;###############################################################################
 section	'.rodata'	align 16
+
+; Consts to convert hexadecimal numbers
+hex_symbol	dq	'a'											; first symbol
+hex_range	dq	5											; range of digits
+hex_shift	dq	10											; shift value
 
 ; flt32_t
 inf_flt32	dd	0xFF800000, 0x7F800000						; -inf, +inf
