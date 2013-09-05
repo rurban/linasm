@@ -20,14 +20,15 @@ VMASK		= VSIZE - 1						; Vector boundary aligning mask
 PMASK		= PSIZE - 1						; Memory page boundary aligning mask
 VBITS		= 0xFFFF						; Vector bit mask
 NOT_FOUND	= -1							; Pattern is not found
+ERROR		= -1							; Error value
 
 ;==============================================================================;
 ;       flt32_t consts                                                         ;
 ;==============================================================================;
 
 ; Data and sign mask
-DMASK_FLT32	= 0x7FFFFFFF					; data mask and NaN value
-SMASK_FLT32	= 0x80000000					; sign mask
+DMASK_FLT32	= 0x7FFFFFFF					; Data mask and NaN value
+SMASK_FLT32	= 0x80000000					; Sign mask
 
 ; Infinity
 PINF_FLT32	= 0x7F800000					; +inf
@@ -46,8 +47,8 @@ MHALF_FLT32	= 0xBF000000					; -0.5
 ;==============================================================================;
 
 ; Data and sign mask
-DMASK_FLT64	= 0x7FFFFFFFFFFFFFFF			; data mask and NaN value
-SMASK_FLT64	= 0x8000000000000000			; sign mask
+DMASK_FLT64	= 0x7FFFFFFFFFFFFFFF			; Data mask and NaN value
+SMASK_FLT64	= 0x8000000000000000			; Sign mask
 
 ; Infinity
 PINF_FLT64	= 0x7FF0000000000000			; +inf

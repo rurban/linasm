@@ -1721,10 +1721,10 @@ string	equ		rdi							; source string
 pattern	equ		rsi							; pattern to find
 ;---[Internal variables]-------------------
 result	equ		rax							; result register
-param1	equ		rdi							; register to pass 1 procedure parameter
-param2	equ		rsi							; register to pass 2 procedure parameter
-param3	equ		rdx							; register to pass 3 procedure parameter
-param4	equ		cl							; register to pass 4 procedure parameter
+param1	equ		rdi							; register to pass 1 parameter
+param2	equ		rsi							; register to pass 2 parameter
+param3	equ		rdx							; register to pass 3 parameter
+param4	equ		cl							; register to pass 4 parameter
 stack	equ		rsp							; stack pointer
 s_str	equ		stack + 0 * 8				; stack position of "string" variable
 s_patt	equ		stack + 1 * 8				; stack position of "pattern" variable
@@ -1792,10 +1792,10 @@ size	equ		rsi							; size of source characters sequence
 pattern	equ		rdx							; pattern to find
 ;---[Internal variables]-------------------
 result	equ		rax							; result register
-param1	equ		rdi							; register to pass 1 procedure parameter
-param2	equ		rsi							; register to pass 2 procedure parameter
-param3	equ		rdx							; register to pass 3 procedure parameter
-param4	equ		cl							; register to pass 4 procedure parameter
+param1	equ		rdi							; register to pass 1 parameter
+param2	equ		rsi							; register to pass 2 parameter
+param3	equ		rdx							; register to pass 3 parameter
+param4	equ		cl							; register to pass 4 parameter
 stack	equ		rsp							; stack pointer
 s_str	equ		stack + 0 * 8				; stack position of "string" variable
 s_patt	equ		stack + 1 * 8				; stack position of "pattern" variable

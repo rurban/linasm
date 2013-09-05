@@ -140,7 +140,7 @@ space	= 5 * 8								; stack size required by the procedure
 		mov		[s_ptr], buffer				; save ptr variable into the stack
 ;---[Opening tzfile for reading]-----------
 		mov		sc_prm1, tzfile
-		mov		sc_prm2, O_RDONLY
+		mov		sc_prm2, 0
 		mov		sc_prm3, 0
 		mov		sc_num, SYSCALL_OPEN
 		syscall								; syscall open (tzfile, O_RDONLY, 0)

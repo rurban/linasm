@@ -10,10 +10,6 @@
 ;******************************************************************************;
 ;       System call numbers                                                    ;
 ;******************************************************************************;
-
-;------------------------------	-----------------------------------------------
-; Error							Code
-;------------------------------	-----------------------------------------------
 SYSCALL_READ					= 0
 SYSCALL_WRITE					= 1
 SYSCALL_OPEN					= 2
@@ -330,84 +326,15 @@ SYSCALL_KCMP					= 312
 SYSCALL_FINIT_MODULE			= 313
 
 ;******************************************************************************;
-;       File open attributes                                                   ;
+;       System call parameters                                                 ;
 ;******************************************************************************;
-O_RDONLY	= 00o
-O_WRONLY	= 01o
-O_RDWR		= 02o
-
-O_APPEND	= 00002000o
-O_ASYNC		= 00020000o
-O_CLOEXEC	= 02000000o
-O_CREAT		= 00000100o
-O_DIRECT	= 00040000o
-O_DIRECTORY	= 00200000o
-O_DSYNC		= 00010000o
-O_EXCL		= 00000200o
-O_LARGEFILE	= 00000000o
-O_NDELAY	= 00004000o
-O_NOATIME	= 01000000o
-O_NOCTTY	= 00000400o
-O_NOFOLLOW	= 00400000o
-O_NONBLOCK	= O_NDELAY
-O_RSYNC		= O_DSYNC
-O_SYNC		= 04010000o
-O_TRUNC		= 00001000o
-
-;******************************************************************************;
-;       File stat attributes                                                   ;
-;******************************************************************************;
-STAT_SIZE	= 144		; size of stat structure
-ST_DEV		= 0			; ofsset of st_dev member of stat structure
-ST_INO		= 8			; ofsset of st_ino member of stat structure
-ST_NLINK	= 16		; ofsset of st_nlink member of stat structure
-ST_MODE		= 24		; ofsset of st_mode member of stat structure
-ST_UID		= 28		; ofsset of st_uid member of stat structure
-ST_GID		= 32		; ofsset of st_gid member of stat structure
-ST_RDEV		= 40		; ofsset of st_rdev member of stat structure
-ST_SIZE		= 48		; ofsset of st_size member of stat structure
-ST_BLKSIZE	= 56		; ofsset of st_blksize member of stat structure
-ST_BLOCKS	= 64		; ofsset of st_blocks member of stat structure
-ST_ATIME	= 72		; ofsset of st_atime member of stat structure
-ST_MTIME	= 88		; ofsset of st_mtime member of stat structure
-ST_CTIME	= 104		; ofsset of st_ctime member of stat structure
-
-; ST_MODE field values
-S_IFMT		= 0170000o	; bit mask for the file type bit fields
-S_IFSOCK	= 0140000o	; socket
-S_IFLNK		= 0120000o	; symbolic link
-S_IFREG		= 0100000o	; regular file
-S_IFBLK		= 0060000o	; block device
-S_IFDIR		= 0040000o	; directory
-S_IFCHR		= 0020000o	; character device
-S_IFIFO		= 0010000o	; FIFO
-
-S_ISUID		= 0004000o	; set UID bit
-S_ISGID		= 0002000o	; set-group-ID bit (see below)
-S_ISVTX		= 0001000o	; sticky bit (see below)
-S_IRWXU		= 0000700o	; mask for file owner permissions
-S_IRUSR		= 0000400o	; owner has read permission
-S_IWUSR		= 0000200o	; owner has write permission
-S_IXUSR		= 0000100o	; owner has execute permission
-S_IRWXG		= 0000070o	; mask for group permissions
-S_IRGRP		= 0000040o	; group has read permission
-S_IWGRP		= 0000020o	; group has write permission
-S_IXGRP		= 0000010o	; group has execute permission
-S_IRWXO		= 0000007o	; mask for permissions for others (not in group)
-S_IROTH		= 0000004o	; others have read permission
-S_IWOTH		= 0000002o	; others have write permission
-S_IXOTH		= 0000001o	; others have execute permission
-
-;******************************************************************************;
-;       System call attributes                                                 ;
-;******************************************************************************;
-sc_num	equ		rax		; register to pass system call number
-sc_prm1	equ		rdi		; register to pass 1 parameter to system call
-sc_prm2	equ		rsi		; register to pass 2 parameter to system call
-sc_prm3	equ		rdx		; register to pass 3 parameter to system call
-sc_prm4	equ		r10		; register to pass 4 parameter to system call
-sc_prm5	equ		r8		; register to pass 5 parameter to system call
-sc_prm6	equ		r9		; register to pass 6 parameter to system call
+sc_num	equ		rax				; register to pass system call number
+sc_prm1	equ		rdi				; register to pass 1 parameter to system call
+sc_prm2	equ		rsi				; register to pass 2 parameter to system call
+sc_prm3	equ		rdx				; register to pass 3 parameter to system call
+sc_prm4	equ		r10				; register to pass 4 parameter to system call
+sc_prm5	equ		r8				; register to pass 5 parameter to system call
+sc_prm6	equ		r9				; register to pass 6 parameter to system call
 
 ;###############################################################################
 ;#                                 END OF FILE                                 #
