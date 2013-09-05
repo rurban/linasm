@@ -18,216 +18,216 @@ include	'Macro.inc'
 ;******************************************************************************;
 
 ; Unsigned integer types
-public	Reverse8				as	'Array_Reverse_uint8'
-public	Reverse16				as	'Array_Reverse_uint16'
-public	Reverse32				as	'Array_Reverse_uint32'
-public	Reverse64				as	'Array_Reverse_uint64'
-public	Reverse8				as	'_ZN5Array7ReverseEPhm'
-public	Reverse16				as	'_ZN5Array7ReverseEPtm'
-public	Reverse32				as	'_ZN5Array7ReverseEPjm'
-public	Reverse64				as	'_ZN5Array7ReverseEPym'
+public	Reverse8					as	'Array_Reverse_uint8'
+public	Reverse16					as	'Array_Reverse_uint16'
+public	Reverse32					as	'Array_Reverse_uint32'
+public	Reverse64					as	'Array_Reverse_uint64'
+public	Reverse8					as	'_ZN5Array7ReverseEPhm'
+public	Reverse16					as	'_ZN5Array7ReverseEPtm'
+public	Reverse32					as	'_ZN5Array7ReverseEPjm'
+public	Reverse64					as	'_ZN5Array7ReverseEPym'
 
 ; Signed integer types
-public	Reverse8				as	'Array_Reverse_sint8'
-public	Reverse16				as	'Array_Reverse_sint16'
-public	Reverse32				as	'Array_Reverse_sint32'
-public	Reverse64				as	'Array_Reverse_sint64'
-public	Reverse8				as	'_ZN5Array7ReverseEPam'
-public	Reverse16				as	'_ZN5Array7ReverseEPsm'
-public	Reverse32				as	'_ZN5Array7ReverseEPim'
-public	Reverse64				as	'_ZN5Array7ReverseEPxm'
+public	Reverse8					as	'Array_Reverse_sint8'
+public	Reverse16					as	'Array_Reverse_sint16'
+public	Reverse32					as	'Array_Reverse_sint32'
+public	Reverse64					as	'Array_Reverse_sint64'
+public	Reverse8					as	'_ZN5Array7ReverseEPam'
+public	Reverse16					as	'_ZN5Array7ReverseEPsm'
+public	Reverse32					as	'_ZN5Array7ReverseEPim'
+public	Reverse64					as	'_ZN5Array7ReverseEPxm'
 
 ; Floating-point types
-public	Reverse32				as	'Array_Reverse_flt32'
-public	Reverse64				as	'Array_Reverse_flt64'
-public	Reverse32				as	'_ZN5Array7ReverseEPfm'
-public	Reverse64				as	'_ZN5Array7ReverseEPdm'
+public	Reverse32					as	'Array_Reverse_flt32'
+public	Reverse64					as	'Array_Reverse_flt64'
+public	Reverse32					as	'_ZN5Array7ReverseEPfm'
+public	Reverse64					as	'_ZN5Array7ReverseEPdm'
 
 ; Other types
-public	Reverse64				as	'Array_Reverse_size'
-public	Reverse64				as	'_ZN5Array7ReverseEPmm'
+public	Reverse64					as	'Array_Reverse_size'
+public	Reverse64					as	'_ZN5Array7ReverseEPmm'
 
 ;******************************************************************************;
 ;       Initialization                                                         ;
 ;******************************************************************************;
 
 ; Unsigned integer types
-public	Init_int8				as	'Array_Init_uint8'
-public	Init_int16				as	'Array_Init_uint16'
-public	Init_int32				as	'Array_Init_uint32'
-public	Init_int64				as	'Array_Init_uint64'
-public	Init_int8				as	'_ZN5Array4InitEPhmh'
-public	Init_int16				as	'_ZN5Array4InitEPtmt'
-public	Init_int32				as	'_ZN5Array4InitEPjmj'
-public	Init_int64				as	'_ZN5Array4InitEPymy'
+public	Init_int8					as	'Array_Init_uint8'
+public	Init_int16					as	'Array_Init_uint16'
+public	Init_int32					as	'Array_Init_uint32'
+public	Init_int64					as	'Array_Init_uint64'
+public	Init_int8					as	'_ZN5Array4InitEPhmh'
+public	Init_int16					as	'_ZN5Array4InitEPtmt'
+public	Init_int32					as	'_ZN5Array4InitEPjmj'
+public	Init_int64					as	'_ZN5Array4InitEPymy'
 
 ; Signed integer types
-public	Init_int8				as	'Array_Init_sint8'
-public	Init_int16				as	'Array_Init_sint16'
-public	Init_int32				as	'Array_Init_sint32'
-public	Init_int64				as	'Array_Init_sint64'
-public	Init_int8				as	'_ZN5Array4InitEPama'
-public	Init_int16				as	'_ZN5Array4InitEPsms'
-public	Init_int32				as	'_ZN5Array4InitEPimi'
-public	Init_int64				as	'_ZN5Array4InitEPxmx'
+public	Init_int8					as	'Array_Init_sint8'
+public	Init_int16					as	'Array_Init_sint16'
+public	Init_int32					as	'Array_Init_sint32'
+public	Init_int64					as	'Array_Init_sint64'
+public	Init_int8					as	'_ZN5Array4InitEPama'
+public	Init_int16					as	'_ZN5Array4InitEPsms'
+public	Init_int32					as	'_ZN5Array4InitEPimi'
+public	Init_int64					as	'_ZN5Array4InitEPxmx'
 
 ; Floating-point types
-public	Init_int32				as	'Array_Init_flt32'
-public	Init_int64				as	'Array_Init_flt64'
-public	Init_flt32				as	'_ZN5Array4InitEPfmf'
-public	Init_flt64				as	'_ZN5Array4InitEPdmd'
+public	Init_int32					as	'Array_Init_flt32'
+public	Init_int64					as	'Array_Init_flt64'
+public	Init_flt32					as	'_ZN5Array4InitEPfmf'
+public	Init_flt64					as	'_ZN5Array4InitEPdmd'
 
 ; Other types
-public	Init_int64				as	'Array_Init_size'
-public	Init_int64				as	'_ZN5Array4InitEPmmm'
+public	Init_int64					as	'Array_Init_size'
+public	Init_int64					as	'_ZN5Array4InitEPmmm'
 
 ;******************************************************************************;
 ;       Copying                                                                ;
 ;******************************************************************************;
 
 ; Unsigned integer types
-public	CopyFwd8				as	'Array_Copy_uint8'
-public	CopyFwd16				as	'Array_Copy_uint16'
-public	CopyFwd32				as	'Array_Copy_uint32'
-public	CopyFwd64				as	'Array_Copy_uint64'
-public	CopyFwd8				as	'_ZN5Array4CopyEPhPKhm'
-public	CopyFwd16				as	'_ZN5Array4CopyEPtPKtm'
-public	CopyFwd32				as	'_ZN5Array4CopyEPjPKjm'
-public	CopyFwd64				as	'_ZN5Array4CopyEPyPKym'
+public	CopyFwd8					as	'Array_Copy_uint8'
+public	CopyFwd16					as	'Array_Copy_uint16'
+public	CopyFwd32					as	'Array_Copy_uint32'
+public	CopyFwd64					as	'Array_Copy_uint64'
+public	CopyFwd8					as	'_ZN5Array4CopyEPhPKhm'
+public	CopyFwd16					as	'_ZN5Array4CopyEPtPKtm'
+public	CopyFwd32					as	'_ZN5Array4CopyEPjPKjm'
+public	CopyFwd64					as	'_ZN5Array4CopyEPyPKym'
 
 ; Signed integer types
-public	CopyFwd8				as	'Array_Copy_sint8'
-public	CopyFwd16				as	'Array_Copy_sint16'
-public	CopyFwd32				as	'Array_Copy_sint32'
-public	CopyFwd64				as	'Array_Copy_sint64'
-public	CopyFwd8				as	'_ZN5Array4CopyEPaPKam'
-public	CopyFwd16				as	'_ZN5Array4CopyEPsPKsm'
-public	CopyFwd32				as	'_ZN5Array4CopyEPiPKim'
-public	CopyFwd64				as	'_ZN5Array4CopyEPxPKxm'
+public	CopyFwd8					as	'Array_Copy_sint8'
+public	CopyFwd16					as	'Array_Copy_sint16'
+public	CopyFwd32					as	'Array_Copy_sint32'
+public	CopyFwd64					as	'Array_Copy_sint64'
+public	CopyFwd8					as	'_ZN5Array4CopyEPaPKam'
+public	CopyFwd16					as	'_ZN5Array4CopyEPsPKsm'
+public	CopyFwd32					as	'_ZN5Array4CopyEPiPKim'
+public	CopyFwd64					as	'_ZN5Array4CopyEPxPKxm'
 
 ; Floating-point types
-public	CopyFwd32				as	'Array_Copy_flt32'
-public	CopyFwd64				as	'Array_Copy_flt64'
-public	CopyFwd32				as	'_ZN5Array4CopyEPfPKfm'
-public	CopyFwd64				as	'_ZN5Array4CopyEPdPKdm'
+public	CopyFwd32					as	'Array_Copy_flt32'
+public	CopyFwd64					as	'Array_Copy_flt64'
+public	CopyFwd32					as	'_ZN5Array4CopyEPfPKfm'
+public	CopyFwd64					as	'_ZN5Array4CopyEPdPKdm'
 
 ; Other types
-public	CopyFwd64				as	'Array_Copy_size'
-public	CopyFwd8				as	'Array_Copy'
-public	CopyFwd64				as	'_ZN5Array4CopyEPmPKmm'
-public	CopyFwd8				as	'_ZN5Array4CopyEPvPKvm'
+public	CopyFwd64					as	'Array_Copy_size'
+public	CopyFwd8					as	'Array_Copy'
+public	CopyFwd64					as	'_ZN5Array4CopyEPmPKmm'
+public	CopyFwd8					as	'_ZN5Array4CopyEPvPKvm'
 
 ;******************************************************************************;
 ;       Moving                                                                 ;
 ;******************************************************************************;
 
 ; Unsigned integer types
-public	Move8					as	'Array_Move_uint8'
-public	Move16					as	'Array_Move_uint16'
-public	Move32					as	'Array_Move_uint32'
-public	Move64					as	'Array_Move_uint64'
-public	Move8					as	'_ZN5Array4MoveEPhPKhm'
-public	Move16					as	'_ZN5Array4MoveEPtPKtm'
-public	Move32					as	'_ZN5Array4MoveEPjPKjm'
-public	Move64					as	'_ZN5Array4MoveEPyPKym'
+public	Move8						as	'Array_Move_uint8'
+public	Move16						as	'Array_Move_uint16'
+public	Move32						as	'Array_Move_uint32'
+public	Move64						as	'Array_Move_uint64'
+public	Move8						as	'_ZN5Array4MoveEPhPKhm'
+public	Move16						as	'_ZN5Array4MoveEPtPKtm'
+public	Move32						as	'_ZN5Array4MoveEPjPKjm'
+public	Move64						as	'_ZN5Array4MoveEPyPKym'
 
 ; Signed integer types
-public	Move8					as	'Array_Move_sint8'
-public	Move16					as	'Array_Move_sint16'
-public	Move32					as	'Array_Move_sint32'
-public	Move64					as	'Array_Move_sint64'
-public	Move8					as	'_ZN5Array4MoveEPaPKam'
-public	Move16					as	'_ZN5Array4MoveEPsPKsm'
-public	Move32					as	'_ZN5Array4MoveEPiPKim'
-public	Move64					as	'_ZN5Array4MoveEPxPKxm'
+public	Move8						as	'Array_Move_sint8'
+public	Move16						as	'Array_Move_sint16'
+public	Move32						as	'Array_Move_sint32'
+public	Move64						as	'Array_Move_sint64'
+public	Move8						as	'_ZN5Array4MoveEPaPKam'
+public	Move16						as	'_ZN5Array4MoveEPsPKsm'
+public	Move32						as	'_ZN5Array4MoveEPiPKim'
+public	Move64						as	'_ZN5Array4MoveEPxPKxm'
 
 ; Floating-point types
-public	Move32					as	'Array_Move_flt32'
-public	Move64					as	'Array_Move_flt64'
-public	Move32					as	'_ZN5Array4MoveEPfPKfm'
-public	Move64					as	'_ZN5Array4MoveEPdPKdm'
+public	Move32						as	'Array_Move_flt32'
+public	Move64						as	'Array_Move_flt64'
+public	Move32						as	'_ZN5Array4MoveEPfPKfm'
+public	Move64						as	'_ZN5Array4MoveEPdPKdm'
 
 ; Other types
-public	Move64					as	'Array_Move_size'
-public	Move8					as	'Array_Move'
-public	Move64					as	'_ZN5Array4MoveEPmPKmm'
-public	Move8					as	'_ZN5Array4MoveEPvPKvm'
+public	Move64						as	'Array_Move_size'
+public	Move8						as	'Array_Move'
+public	Move64						as	'_ZN5Array4MoveEPmPKmm'
+public	Move8						as	'_ZN5Array4MoveEPvPKvm'
 
 ;******************************************************************************;
 ;       Pattern cloning                                                        ;
 ;******************************************************************************;
 
 ; Unsigned integer types
-public	Clone8					as	'Array_Clone_uint8'
-public	Clone16					as	'Array_Clone_uint16'
-public	Clone32					as	'Array_Clone_uint32'
-public	Clone64					as	'Array_Clone_uint64'
-public	Clone8					as	'_ZN5Array5CloneEPhmm'
-public	Clone16					as	'_ZN5Array5CloneEPtmm'
-public	Clone32					as	'_ZN5Array5CloneEPjmm'
-public	Clone64					as	'_ZN5Array5CloneEPymm'
+public	Clone8						as	'Array_Clone_uint8'
+public	Clone16						as	'Array_Clone_uint16'
+public	Clone32						as	'Array_Clone_uint32'
+public	Clone64						as	'Array_Clone_uint64'
+public	Clone8						as	'_ZN5Array5CloneEPhmm'
+public	Clone16						as	'_ZN5Array5CloneEPtmm'
+public	Clone32						as	'_ZN5Array5CloneEPjmm'
+public	Clone64						as	'_ZN5Array5CloneEPymm'
 
 ; Signed integer types
-public	Clone8					as	'Array_Clone_sint8'
-public	Clone16					as	'Array_Clone_sint16'
-public	Clone32					as	'Array_Clone_sint32'
-public	Clone64					as	'Array_Clone_sint64'
-public	Clone8					as	'_ZN5Array5CloneEPamm'
-public	Clone16					as	'_ZN5Array5CloneEPsmm'
-public	Clone32					as	'_ZN5Array5CloneEPimm'
-public	Clone64					as	'_ZN5Array5CloneEPxmm'
+public	Clone8						as	'Array_Clone_sint8'
+public	Clone16						as	'Array_Clone_sint16'
+public	Clone32						as	'Array_Clone_sint32'
+public	Clone64						as	'Array_Clone_sint64'
+public	Clone8						as	'_ZN5Array5CloneEPamm'
+public	Clone16						as	'_ZN5Array5CloneEPsmm'
+public	Clone32						as	'_ZN5Array5CloneEPimm'
+public	Clone64						as	'_ZN5Array5CloneEPxmm'
 
 ; Floating-point types
-public	Clone32					as	'Array_Clone_flt32'
-public	Clone64					as	'Array_Clone_flt64'
-public	Clone32					as	'_ZN5Array5CloneEPfmm'
-public	Clone64					as	'_ZN5Array5CloneEPdmm'
+public	Clone32						as	'Array_Clone_flt32'
+public	Clone64						as	'Array_Clone_flt64'
+public	Clone32						as	'_ZN5Array5CloneEPfmm'
+public	Clone64						as	'_ZN5Array5CloneEPdmm'
 
 ; Other types
-public	Clone64					as	'Array_Clone_size'
-public	Clone8					as	'Array_Clone'
-public	Clone64					as	'_ZN5Array5CloneEPmmm'
-public	Clone8					as	'_ZN5Array5CloneEPvmm'
+public	Clone64						as	'Array_Clone_size'
+public	Clone8						as	'Array_Clone'
+public	Clone64						as	'_ZN5Array5CloneEPmmm'
+public	Clone8						as	'_ZN5Array5CloneEPvmm'
 
 ;******************************************************************************;
 ;       Data conversion                                                        ;
 ;******************************************************************************;
 
 ; Conversion between floating-point types
-public	ConvertFlt32ToFlt64		as	'Array_ConvertFlt32ToFlt64'
-public	ConvertFlt64ToFlt32		as	'Array_ConvertFlt64ToFlt32'
-public	ConvertFlt32ToFlt64		as	'_ZN5Array7ConvertEPdPKfm'
-public	ConvertFlt64ToFlt32		as	'_ZN5Array7ConvertEPfPKdm'
+public	ConvertFlt32ToFlt64			as	'Array_ConvertFlt32ToFlt64'
+public	ConvertFlt64ToFlt32			as	'Array_ConvertFlt64ToFlt32'
+public	ConvertFlt32ToFlt64			as	'_ZN5Array7ConvertEPdPKfm'
+public	ConvertFlt64ToFlt32			as	'_ZN5Array7ConvertEPfPKdm'
 
 ; Conversion from signed integer types to floating-point types
-public	ConvertSint32ToFlt32	as	'Array_ConvertSint32ToFlt32'
-public	ConvertSint32ToFlt64	as	'Array_ConvertSint32ToFlt64'
-public	ConvertSint64ToFlt32	as	'Array_ConvertSint64ToFlt32'
-public	ConvertSint64ToFlt64	as	'Array_ConvertSint64ToFlt64'
-public	ConvertSint32ToFlt32	as	'_ZN5Array7ConvertEPfPKim'
-public	ConvertSint32ToFlt64	as	'_ZN5Array7ConvertEPdPKim'
-public	ConvertSint64ToFlt32	as	'_ZN5Array7ConvertEPfPKxm'
-public	ConvertSint64ToFlt64	as	'_ZN5Array7ConvertEPdPKxm'
+public	ConvertSint32ToFlt32		as	'Array_ConvertSint32ToFlt32'
+public	ConvertSint32ToFlt64		as	'Array_ConvertSint32ToFlt64'
+public	ConvertSint64ToFlt32		as	'Array_ConvertSint64ToFlt32'
+public	ConvertSint64ToFlt64		as	'Array_ConvertSint64ToFlt64'
+public	ConvertSint32ToFlt32		as	'_ZN5Array7ConvertEPfPKim'
+public	ConvertSint32ToFlt64		as	'_ZN5Array7ConvertEPdPKim'
+public	ConvertSint64ToFlt32		as	'_ZN5Array7ConvertEPfPKxm'
+public	ConvertSint64ToFlt64		as	'_ZN5Array7ConvertEPdPKxm'
 
 ; Conversion from floating-point types to signed integer types
-public	ConvertFlt32ToSint32	as	'Array_ConvertFlt32ToSint32'
-public	ConvertFlt32ToSint64	as	'Array_ConvertFlt32ToSint64'
-public	ConvertFlt64ToSint32	as	'Array_ConvertFlt64ToSint32'
-public	ConvertFlt64ToSint64	as	'Array_ConvertFlt64ToSint64'
-public	ConvertFlt32ToSint32	as	'_ZN5Array7ConvertEPiPKfm'
-public	ConvertFlt32ToSint64	as	'_ZN5Array7ConvertEPxPKfm'
-public	ConvertFlt64ToSint32	as	'_ZN5Array7ConvertEPiPKdm'
-public	ConvertFlt64ToSint64	as	'_ZN5Array7ConvertEPxPKdm'
+public	ConvertFlt32ToSint32		as	'Array_ConvertFlt32ToSint32'
+public	ConvertFlt32ToSint64		as	'Array_ConvertFlt32ToSint64'
+public	ConvertFlt64ToSint32		as	'Array_ConvertFlt64ToSint32'
+public	ConvertFlt64ToSint64		as	'Array_ConvertFlt64ToSint64'
+public	ConvertFlt32ToSint32		as	'_ZN5Array7ConvertEPiPKfm'
+public	ConvertFlt32ToSint64		as	'_ZN5Array7ConvertEPxPKfm'
+public	ConvertFlt64ToSint32		as	'_ZN5Array7ConvertEPiPKdm'
+public	ConvertFlt64ToSint64		as	'_ZN5Array7ConvertEPxPKdm'
 
 ; Truncating from floating-point types to signed integer types
-public	TruncateFlt32ToSint32	as	'Array_TruncateFlt32ToSint32'
-public	TruncateFlt32ToSint64	as	'Array_TruncateFlt32ToSint64'
-public	TruncateFlt64ToSint32	as	'Array_TruncateFlt64ToSint32'
-public	TruncateFlt64ToSint64	as	'Array_TruncateFlt64ToSint64'
-public	TruncateFlt32ToSint32	as	'_ZN5Array8TruncateEPiPKfm'
-public	TruncateFlt32ToSint64	as	'_ZN5Array8TruncateEPxPKfm'
-public	TruncateFlt64ToSint32	as	'_ZN5Array8TruncateEPiPKdm'
-public	TruncateFlt64ToSint64	as	'_ZN5Array8TruncateEPxPKdm'
+public	TruncateFlt32ToSint32		as	'Array_TruncateFlt32ToSint32'
+public	TruncateFlt32ToSint64		as	'Array_TruncateFlt32ToSint64'
+public	TruncateFlt64ToSint32		as	'Array_TruncateFlt64ToSint32'
+public	TruncateFlt64ToSint64		as	'Array_TruncateFlt64ToSint64'
+public	TruncateFlt32ToSint32		as	'_ZN5Array8TruncateEPiPKfm'
+public	TruncateFlt32ToSint64		as	'_ZN5Array8TruncateEPxPKfm'
+public	TruncateFlt64ToSint32		as	'_ZN5Array8TruncateEPiPKdm'
+public	TruncateFlt64ToSint64		as	'_ZN5Array8TruncateEPxPKdm'
 
 ;******************************************************************************;
 ;       Bitwise operations                                                     ;
@@ -238,28 +238,28 @@ public	TruncateFlt64ToSint64	as	'_ZN5Array8TruncateEPxPKdm'
 ;==============================================================================;
 
 ; Unsigned integer types
-public	Not8					as	'Array_Not_uint8'
-public	Not16					as	'Array_Not_uint16'
-public	Not32					as	'Array_Not_uint32'
-public	Not64					as	'Array_Not_uint64'
-public	Not8					as	'_ZN5Array3NotEPhm'
-public	Not16					as	'_ZN5Array3NotEPtm'
-public	Not32					as	'_ZN5Array3NotEPjm'
-public	Not64					as	'_ZN5Array3NotEPym'
+public	Not8						as	'Array_Not_uint8'
+public	Not16						as	'Array_Not_uint16'
+public	Not32						as	'Array_Not_uint32'
+public	Not64						as	'Array_Not_uint64'
+public	Not8						as	'_ZN5Array3NotEPhm'
+public	Not16						as	'_ZN5Array3NotEPtm'
+public	Not32						as	'_ZN5Array3NotEPjm'
+public	Not64						as	'_ZN5Array3NotEPym'
 
 ; Signed integer types
-public	Not8					as	'Array_Not_sint8'
-public	Not16					as	'Array_Not_sint16'
-public	Not32					as	'Array_Not_sint32'
-public	Not64					as	'Array_Not_sint64'
-public	Not8					as	'_ZN5Array3NotEPam'
-public	Not16					as	'_ZN5Array3NotEPsm'
-public	Not32					as	'_ZN5Array3NotEPim'
-public	Not64					as	'_ZN5Array3NotEPxm'
+public	Not8						as	'Array_Not_sint8'
+public	Not16						as	'Array_Not_sint16'
+public	Not32						as	'Array_Not_sint32'
+public	Not64						as	'Array_Not_sint64'
+public	Not8						as	'_ZN5Array3NotEPam'
+public	Not16						as	'_ZN5Array3NotEPsm'
+public	Not32						as	'_ZN5Array3NotEPim'
+public	Not64						as	'_ZN5Array3NotEPxm'
 
 ; Other types
-public	Not64					as	'Array_Not_size'
-public	Not64					as	'_ZN5Array3NotEPmm'
+public	Not64						as	'Array_Not_size'
+public	Not64						as	'_ZN5Array3NotEPmm'
 
 ;==============================================================================;
 ;       Bitwise AND                                                            ;
@@ -270,56 +270,56 @@ public	Not64					as	'_ZN5Array3NotEPmm'
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 
 ; Unsigned integer types
-public	AndS8					as	'Array_AndScalar_uint8'
-public	AndS16					as	'Array_AndScalar_uint16'
-public	AndS32					as	'Array_AndScalar_uint32'
-public	AndS64					as	'Array_AndScalar_uint64'
-public	AndS8					as	'_ZN5Array3AndEPhmh'
-public	AndS16					as	'_ZN5Array3AndEPtmt'
-public	AndS32					as	'_ZN5Array3AndEPjmj'
-public	AndS64					as	'_ZN5Array3AndEPymy'
+public	AndS8						as	'Array_AndScalar_uint8'
+public	AndS16						as	'Array_AndScalar_uint16'
+public	AndS32						as	'Array_AndScalar_uint32'
+public	AndS64						as	'Array_AndScalar_uint64'
+public	AndS8						as	'_ZN5Array3AndEPhmh'
+public	AndS16						as	'_ZN5Array3AndEPtmt'
+public	AndS32						as	'_ZN5Array3AndEPjmj'
+public	AndS64						as	'_ZN5Array3AndEPymy'
 
 ; Signed integer types
-public	AndS8					as	'Array_AndScalar_sint8'
-public	AndS16					as	'Array_AndScalar_sint16'
-public	AndS32					as	'Array_AndScalar_sint32'
-public	AndS64					as	'Array_AndScalar_sint64'
-public	AndS8					as	'_ZN5Array3AndEPama'
-public	AndS16					as	'_ZN5Array3AndEPsms'
-public	AndS32					as	'_ZN5Array3AndEPimi'
-public	AndS64					as	'_ZN5Array3AndEPxmx'
+public	AndS8						as	'Array_AndScalar_sint8'
+public	AndS16						as	'Array_AndScalar_sint16'
+public	AndS32						as	'Array_AndScalar_sint32'
+public	AndS64						as	'Array_AndScalar_sint64'
+public	AndS8						as	'_ZN5Array3AndEPama'
+public	AndS16						as	'_ZN5Array3AndEPsms'
+public	AndS32						as	'_ZN5Array3AndEPimi'
+public	AndS64						as	'_ZN5Array3AndEPxmx'
 
 ; Other types
-public	AndS64					as	'Array_AndScalar_size'
-public	AndS64					as	'_ZN5Array3AndEPmmm'
+public	AndS64						as	'Array_AndScalar_size'
+public	AndS64						as	'_ZN5Array3AndEPmmm'
 
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 ;       Vector bitwise AND                                                     ;
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 
 ; Unsigned integer types
-public	AndV8					as	'Array_AndVector_uint8'
-public	AndV16					as	'Array_AndVector_uint16'
-public	AndV32					as	'Array_AndVector_uint32'
-public	AndV64					as	'Array_AndVector_uint64'
-public	AndV8					as	'_ZN5Array3AndEPhPKhm'
-public	AndV16					as	'_ZN5Array3AndEPtPKtm'
-public	AndV32					as	'_ZN5Array3AndEPjPKjm'
-public	AndV64					as	'_ZN5Array3AndEPyPKym'
+public	AndV8						as	'Array_AndVector_uint8'
+public	AndV16						as	'Array_AndVector_uint16'
+public	AndV32						as	'Array_AndVector_uint32'
+public	AndV64						as	'Array_AndVector_uint64'
+public	AndV8						as	'_ZN5Array3AndEPhPKhm'
+public	AndV16						as	'_ZN5Array3AndEPtPKtm'
+public	AndV32						as	'_ZN5Array3AndEPjPKjm'
+public	AndV64						as	'_ZN5Array3AndEPyPKym'
 
 ; Signed integer types
-public	AndV8					as	'Array_AndVector_sint8'
-public	AndV16					as	'Array_AndVector_sint16'
-public	AndV32					as	'Array_AndVector_sint32'
-public	AndV64					as	'Array_AndVector_sint64'
-public	AndV8					as	'_ZN5Array3AndEPaPKam'
-public	AndV16					as	'_ZN5Array3AndEPsPKsm'
-public	AndV32					as	'_ZN5Array3AndEPiPKim'
-public	AndV64					as	'_ZN5Array3AndEPxPKxm'
+public	AndV8						as	'Array_AndVector_sint8'
+public	AndV16						as	'Array_AndVector_sint16'
+public	AndV32						as	'Array_AndVector_sint32'
+public	AndV64						as	'Array_AndVector_sint64'
+public	AndV8						as	'_ZN5Array3AndEPaPKam'
+public	AndV16						as	'_ZN5Array3AndEPsPKsm'
+public	AndV32						as	'_ZN5Array3AndEPiPKim'
+public	AndV64						as	'_ZN5Array3AndEPxPKxm'
 
 ; Other types
-public	AndV64					as	'Array_AndVector_size'
-public	AndV64					as	'_ZN5Array3AndEPmPKmm'
+public	AndV64						as	'Array_AndVector_size'
+public	AndV64						as	'_ZN5Array3AndEPmPKmm'
 
 ;==============================================================================;
 ;       Bitwise OR                                                             ;
@@ -330,56 +330,56 @@ public	AndV64					as	'_ZN5Array3AndEPmPKmm'
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 
 ; Unsigned integer types
-public	OrS8					as	'Array_OrScalar_uint8'
-public	OrS16					as	'Array_OrScalar_uint16'
-public	OrS32					as	'Array_OrScalar_uint32'
-public	OrS64					as	'Array_OrScalar_uint64'
-public	OrS8					as	'_ZN5Array2OrEPhmh'
-public	OrS16					as	'_ZN5Array2OrEPtmt'
-public	OrS32					as	'_ZN5Array2OrEPjmj'
-public	OrS64					as	'_ZN5Array2OrEPymy'
+public	OrS8						as	'Array_OrScalar_uint8'
+public	OrS16						as	'Array_OrScalar_uint16'
+public	OrS32						as	'Array_OrScalar_uint32'
+public	OrS64						as	'Array_OrScalar_uint64'
+public	OrS8						as	'_ZN5Array2OrEPhmh'
+public	OrS16						as	'_ZN5Array2OrEPtmt'
+public	OrS32						as	'_ZN5Array2OrEPjmj'
+public	OrS64						as	'_ZN5Array2OrEPymy'
 
 ; Signed integer types
-public	OrS8					as	'Array_OrScalar_sint8'
-public	OrS16					as	'Array_OrScalar_sint16'
-public	OrS32					as	'Array_OrScalar_sint32'
-public	OrS64					as	'Array_OrScalar_sint64'
-public	OrS8					as	'_ZN5Array2OrEPama'
-public	OrS16					as	'_ZN5Array2OrEPsms'
-public	OrS32					as	'_ZN5Array2OrEPimi'
-public	OrS64					as	'_ZN5Array2OrEPxmx'
+public	OrS8						as	'Array_OrScalar_sint8'
+public	OrS16						as	'Array_OrScalar_sint16'
+public	OrS32						as	'Array_OrScalar_sint32'
+public	OrS64						as	'Array_OrScalar_sint64'
+public	OrS8						as	'_ZN5Array2OrEPama'
+public	OrS16						as	'_ZN5Array2OrEPsms'
+public	OrS32						as	'_ZN5Array2OrEPimi'
+public	OrS64						as	'_ZN5Array2OrEPxmx'
 
 ; Other types
-public	OrS64					as	'Array_OrScalar_size'
-public	OrS64					as	'_ZN5Array2OrEPmmm'
+public	OrS64						as	'Array_OrScalar_size'
+public	OrS64						as	'_ZN5Array2OrEPmmm'
 
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 ;       Vector bitwise OR                                                      ;
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 
 ; Unsigned integer types
-public	OrV8					as	'Array_OrVector_uint8'
-public	OrV16					as	'Array_OrVector_uint16'
-public	OrV32					as	'Array_OrVector_uint32'
-public	OrV64					as	'Array_OrVector_uint64'
-public	OrV8					as	'_ZN5Array2OrEPhPKhm'
-public	OrV16					as	'_ZN5Array2OrEPtPKtm'
-public	OrV32					as	'_ZN5Array2OrEPjPKjm'
-public	OrV64					as	'_ZN5Array2OrEPyPKym'
+public	OrV8						as	'Array_OrVector_uint8'
+public	OrV16						as	'Array_OrVector_uint16'
+public	OrV32						as	'Array_OrVector_uint32'
+public	OrV64						as	'Array_OrVector_uint64'
+public	OrV8						as	'_ZN5Array2OrEPhPKhm'
+public	OrV16						as	'_ZN5Array2OrEPtPKtm'
+public	OrV32						as	'_ZN5Array2OrEPjPKjm'
+public	OrV64						as	'_ZN5Array2OrEPyPKym'
 
 ; Signed integer types
-public	OrV8					as	'Array_OrVector_sint8'
-public	OrV16					as	'Array_OrVector_sint16'
-public	OrV32					as	'Array_OrVector_sint32'
-public	OrV64					as	'Array_OrVector_sint64'
-public	OrV8					as	'_ZN5Array2OrEPaPKam'
-public	OrV16					as	'_ZN5Array2OrEPsPKsm'
-public	OrV32					as	'_ZN5Array2OrEPiPKim'
-public	OrV64					as	'_ZN5Array2OrEPxPKxm'
+public	OrV8						as	'Array_OrVector_sint8'
+public	OrV16						as	'Array_OrVector_sint16'
+public	OrV32						as	'Array_OrVector_sint32'
+public	OrV64						as	'Array_OrVector_sint64'
+public	OrV8						as	'_ZN5Array2OrEPaPKam'
+public	OrV16						as	'_ZN5Array2OrEPsPKsm'
+public	OrV32						as	'_ZN5Array2OrEPiPKim'
+public	OrV64						as	'_ZN5Array2OrEPxPKxm'
 
 ; Other types
-public	OrV64					as	'Array_OrVector_size'
-public	OrV64					as	'_ZN5Array2OrEPmPKmm'
+public	OrV64						as	'Array_OrVector_size'
+public	OrV64						as	'_ZN5Array2OrEPmPKmm'
 
 ;==============================================================================;
 ;       Bitwise XOR                                                            ;
@@ -390,56 +390,56 @@ public	OrV64					as	'_ZN5Array2OrEPmPKmm'
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 
 ; Unsigned integer types
-public	XorS8					as	'Array_XorScalar_uint8'
-public	XorS16					as	'Array_XorScalar_uint16'
-public	XorS32					as	'Array_XorScalar_uint32'
-public	XorS64					as	'Array_XorScalar_uint64'
-public	XorS8					as	'_ZN5Array3XorEPhmh'
-public	XorS16					as	'_ZN5Array3XorEPtmt'
-public	XorS32					as	'_ZN5Array3XorEPjmj'
-public	XorS64					as	'_ZN5Array3XorEPymy'
+public	XorS8						as	'Array_XorScalar_uint8'
+public	XorS16						as	'Array_XorScalar_uint16'
+public	XorS32						as	'Array_XorScalar_uint32'
+public	XorS64						as	'Array_XorScalar_uint64'
+public	XorS8						as	'_ZN5Array3XorEPhmh'
+public	XorS16						as	'_ZN5Array3XorEPtmt'
+public	XorS32						as	'_ZN5Array3XorEPjmj'
+public	XorS64						as	'_ZN5Array3XorEPymy'
 
 ; Signed integer types
-public	XorS8					as	'Array_XorScalar_sint8'
-public	XorS16					as	'Array_XorScalar_sint16'
-public	XorS32					as	'Array_XorScalar_sint32'
-public	XorS64					as	'Array_XorScalar_sint64'
-public	XorS8					as	'_ZN5Array3XorEPama'
-public	XorS16					as	'_ZN5Array3XorEPsms'
-public	XorS32					as	'_ZN5Array3XorEPimi'
-public	XorS64					as	'_ZN5Array3XorEPxmx'
+public	XorS8						as	'Array_XorScalar_sint8'
+public	XorS16						as	'Array_XorScalar_sint16'
+public	XorS32						as	'Array_XorScalar_sint32'
+public	XorS64						as	'Array_XorScalar_sint64'
+public	XorS8						as	'_ZN5Array3XorEPama'
+public	XorS16						as	'_ZN5Array3XorEPsms'
+public	XorS32						as	'_ZN5Array3XorEPimi'
+public	XorS64						as	'_ZN5Array3XorEPxmx'
 
 ; Other types
-public	XorS64					as	'Array_XorScalar_size'
-public	XorS64					as	'_ZN5Array3XorEPmmm'
+public	XorS64						as	'Array_XorScalar_size'
+public	XorS64						as	'_ZN5Array3XorEPmmm'
 
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 ;       Vector bitwise XOR                                                     ;
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 
 ; Unsigned integer types
-public	XorV8					as	'Array_XorVector_uint8'
-public	XorV16					as	'Array_XorVector_uint16'
-public	XorV32					as	'Array_XorVector_uint32'
-public	XorV64					as	'Array_XorVector_uint64'
-public	XorV8					as	'_ZN5Array3XorEPhPKhm'
-public	XorV16					as	'_ZN5Array3XorEPtPKtm'
-public	XorV32					as	'_ZN5Array3XorEPjPKjm'
-public	XorV64					as	'_ZN5Array3XorEPyPKym'
+public	XorV8						as	'Array_XorVector_uint8'
+public	XorV16						as	'Array_XorVector_uint16'
+public	XorV32						as	'Array_XorVector_uint32'
+public	XorV64						as	'Array_XorVector_uint64'
+public	XorV8						as	'_ZN5Array3XorEPhPKhm'
+public	XorV16						as	'_ZN5Array3XorEPtPKtm'
+public	XorV32						as	'_ZN5Array3XorEPjPKjm'
+public	XorV64						as	'_ZN5Array3XorEPyPKym'
 
 ; Signed integer types
-public	XorV8					as	'Array_XorVector_sint8'
-public	XorV16					as	'Array_XorVector_sint16'
-public	XorV32					as	'Array_XorVector_sint32'
-public	XorV64					as	'Array_XorVector_sint64'
-public	XorV8					as	'_ZN5Array3XorEPaPKam'
-public	XorV16					as	'_ZN5Array3XorEPsPKsm'
-public	XorV32					as	'_ZN5Array3XorEPiPKim'
-public	XorV64					as	'_ZN5Array3XorEPxPKxm'
+public	XorV8						as	'Array_XorVector_sint8'
+public	XorV16						as	'Array_XorVector_sint16'
+public	XorV32						as	'Array_XorVector_sint32'
+public	XorV64						as	'Array_XorVector_sint64'
+public	XorV8						as	'_ZN5Array3XorEPaPKam'
+public	XorV16						as	'_ZN5Array3XorEPsPKsm'
+public	XorV32						as	'_ZN5Array3XorEPiPKim'
+public	XorV64						as	'_ZN5Array3XorEPxPKxm'
 
 ; Other types
-public	XorV64					as	'Array_XorVector_size'
-public	XorV64					as	'_ZN5Array3XorEPmPKmm'
+public	XorV64						as	'Array_XorVector_size'
+public	XorV64						as	'_ZN5Array3XorEPmPKmm'
 
 ;******************************************************************************;
 ;       Arithmetic operations                                                  ;
@@ -450,34 +450,34 @@ public	XorV64					as	'_ZN5Array3XorEPmPKmm'
 ;==============================================================================;
 
 ; Negative value
-public	Neg_flt32				as	'Array_Neg_flt32'
-public	Neg_flt64				as	'Array_Neg_flt64'
-public	Neg_flt32				as	'_ZN5Array3NegEPfm'
-public	Neg_flt64				as	'_ZN5Array3NegEPdm'
+public	Neg_flt32					as	'Array_Neg_flt32'
+public	Neg_flt64					as	'Array_Neg_flt64'
+public	Neg_flt32					as	'_ZN5Array3NegEPfm'
+public	Neg_flt64					as	'_ZN5Array3NegEPdm'
 
 ; Absolute value
-public	Abs_flt32				as	'Array_Abs_flt32'
-public	Abs_flt64				as	'Array_Abs_flt64'
-public	Abs_flt32				as	'_ZN5Array3AbsEPfm'
-public	Abs_flt64				as	'_ZN5Array3AbsEPdm'
+public	Abs_flt32					as	'Array_Abs_flt32'
+public	Abs_flt64					as	'Array_Abs_flt64'
+public	Abs_flt32					as	'_ZN5Array3AbsEPfm'
+public	Abs_flt64					as	'_ZN5Array3AbsEPdm'
 
 ; Negative absolute value
-public	NegAbs_flt32			as	'Array_NegAbs_flt32'
-public	NegAbs_flt64			as	'Array_NegAbs_flt64'
-public	NegAbs_flt32			as	'_ZN5Array6NegAbsEPfm'
-public	NegAbs_flt64			as	'_ZN5Array6NegAbsEPdm'
+public	NegAbs_flt32				as	'Array_NegAbs_flt32'
+public	NegAbs_flt64				as	'Array_NegAbs_flt64'
+public	NegAbs_flt32				as	'_ZN5Array6NegAbsEPfm'
+public	NegAbs_flt64				as	'_ZN5Array6NegAbsEPdm'
 
 ; Square
-public	Sqr_flt32				as	'Array_Sqr_flt32'
-public	Sqr_flt64				as	'Array_Sqr_flt64'
-public	Sqr_flt32				as	'_ZN5Array3SqrEPfm'
-public	Sqr_flt64				as	'_ZN5Array3SqrEPdm'
+public	Sqr_flt32					as	'Array_Sqr_flt32'
+public	Sqr_flt64					as	'Array_Sqr_flt64'
+public	Sqr_flt32					as	'_ZN5Array3SqrEPfm'
+public	Sqr_flt64					as	'_ZN5Array3SqrEPdm'
 
 ; Square root
-public	Sqrt_flt32				as	'Array_Sqrt_flt32'
-public	Sqrt_flt64				as	'Array_Sqrt_flt64'
-public	Sqrt_flt32				as	'_ZN5Array4SqrtEPfm'
-public	Sqrt_flt64				as	'_ZN5Array4SqrtEPdm'
+public	Sqrt_flt32					as	'Array_Sqrt_flt32'
+public	Sqrt_flt64					as	'Array_Sqrt_flt64'
+public	Sqrt_flt32					as	'_ZN5Array4SqrtEPfm'
+public	Sqrt_flt64					as	'_ZN5Array4SqrtEPdm'
 
 ;==============================================================================;
 ;       Binary operations                                                      ;
@@ -492,68 +492,68 @@ public	Sqrt_flt64				as	'_ZN5Array4SqrtEPdm'
 ;------------------------------------------------------------------------------;
 
 ; Unsigned integer types
-public	AddS8					as	'Array_AddScalar_uint8'
-public	AddS16					as	'Array_AddScalar_uint16'
-public	AddS32					as	'Array_AddScalar_uint32'
-public	AddS64					as	'Array_AddScalar_uint64'
-public	AddS8					as	'_ZN5Array3AddEPhmh'
-public	AddS16					as	'_ZN5Array3AddEPtmt'
-public	AddS32					as	'_ZN5Array3AddEPjmj'
-public	AddS64					as	'_ZN5Array3AddEPymy'
+public	AddS8						as	'Array_AddScalar_uint8'
+public	AddS16						as	'Array_AddScalar_uint16'
+public	AddS32						as	'Array_AddScalar_uint32'
+public	AddS64						as	'Array_AddScalar_uint64'
+public	AddS8						as	'_ZN5Array3AddEPhmh'
+public	AddS16						as	'_ZN5Array3AddEPtmt'
+public	AddS32						as	'_ZN5Array3AddEPjmj'
+public	AddS64						as	'_ZN5Array3AddEPymy'
 
 ; Signed integer types
-public	AddS8					as	'Array_AddScalar_sint8'
-public	AddS16					as	'Array_AddScalar_sint16'
-public	AddS32					as	'Array_AddScalar_sint32'
-public	AddS64					as	'Array_AddScalar_sint64'
-public	AddS8					as	'_ZN5Array3AddEPama'
-public	AddS16					as	'_ZN5Array3AddEPsms'
-public	AddS32					as	'_ZN5Array3AddEPimi'
-public	AddS64					as	'_ZN5Array3AddEPxmx'
+public	AddS8						as	'Array_AddScalar_sint8'
+public	AddS16						as	'Array_AddScalar_sint16'
+public	AddS32						as	'Array_AddScalar_sint32'
+public	AddS64						as	'Array_AddScalar_sint64'
+public	AddS8						as	'_ZN5Array3AddEPama'
+public	AddS16						as	'_ZN5Array3AddEPsms'
+public	AddS32						as	'_ZN5Array3AddEPimi'
+public	AddS64						as	'_ZN5Array3AddEPxmx'
 
 ; Floating-point types
-public	AddS_flt32				as	'Array_AddScalar_flt32'
-public	AddS_flt64				as	'Array_AddScalar_flt64'
-public	AddS_flt32				as	'_ZN5Array3AddEPfmf'
-public	AddS_flt64				as	'_ZN5Array3AddEPdmd'
+public	AddS_flt32					as	'Array_AddScalar_flt32'
+public	AddS_flt64					as	'Array_AddScalar_flt64'
+public	AddS_flt32					as	'_ZN5Array3AddEPfmf'
+public	AddS_flt64					as	'_ZN5Array3AddEPdmd'
 
 ; Other types
-public	AddS64					as	'Array_AddScalar_size'
-public	AddS64					as	'_ZN5Array3AddEPmmm'
+public	AddS64						as	'Array_AddScalar_size'
+public	AddS64						as	'_ZN5Array3AddEPmmm'
 
 ;------------------------------------------------------------------------------;
 ;       Vector addition                                                        ;
 ;------------------------------------------------------------------------------;
 
 ; Unsigned integer types
-public	AddV8					as	'Array_AddVector_uint8'
-public	AddV16					as	'Array_AddVector_uint16'
-public	AddV32					as	'Array_AddVector_uint32'
-public	AddV64					as	'Array_AddVector_uint64'
-public	AddV8					as	'_ZN5Array3AddEPhPKhm'
-public	AddV16					as	'_ZN5Array3AddEPtPKtm'
-public	AddV32					as	'_ZN5Array3AddEPjPKjm'
-public	AddV64					as	'_ZN5Array3AddEPyPKym'
+public	AddV8						as	'Array_AddVector_uint8'
+public	AddV16						as	'Array_AddVector_uint16'
+public	AddV32						as	'Array_AddVector_uint32'
+public	AddV64						as	'Array_AddVector_uint64'
+public	AddV8						as	'_ZN5Array3AddEPhPKhm'
+public	AddV16						as	'_ZN5Array3AddEPtPKtm'
+public	AddV32						as	'_ZN5Array3AddEPjPKjm'
+public	AddV64						as	'_ZN5Array3AddEPyPKym'
 
 ; Signed integer types
-public	AddV8					as	'Array_AddVector_sint8'
-public	AddV16					as	'Array_AddVector_sint16'
-public	AddV32					as	'Array_AddVector_sint32'
-public	AddV64					as	'Array_AddVector_sint64'
-public	AddV8					as	'_ZN5Array3AddEPaPKam'
-public	AddV16					as	'_ZN5Array3AddEPsPKsm'
-public	AddV32					as	'_ZN5Array3AddEPiPKim'
-public	AddV64					as	'_ZN5Array3AddEPxPKxm'
+public	AddV8						as	'Array_AddVector_sint8'
+public	AddV16						as	'Array_AddVector_sint16'
+public	AddV32						as	'Array_AddVector_sint32'
+public	AddV64						as	'Array_AddVector_sint64'
+public	AddV8						as	'_ZN5Array3AddEPaPKam'
+public	AddV16						as	'_ZN5Array3AddEPsPKsm'
+public	AddV32						as	'_ZN5Array3AddEPiPKim'
+public	AddV64						as	'_ZN5Array3AddEPxPKxm'
 
 ; Floating-point types
-public	AddV_flt32				as	'Array_AddVector_flt32'
-public	AddV_flt64				as	'Array_AddVector_flt64'
-public	AddV_flt32				as	'_ZN5Array3AddEPfPKfm'
-public	AddV_flt64				as	'_ZN5Array3AddEPdPKdm'
+public	AddV_flt32					as	'Array_AddVector_flt32'
+public	AddV_flt64					as	'Array_AddVector_flt64'
+public	AddV_flt32					as	'_ZN5Array3AddEPfPKfm'
+public	AddV_flt64					as	'_ZN5Array3AddEPdPKdm'
 
 ; Other types
-public	AddV64					as	'Array_AddVector_size'
-public	AddV64					as	'_ZN5Array3AddEPmPKmm'
+public	AddV64						as	'Array_AddVector_size'
+public	AddV64						as	'_ZN5Array3AddEPmPKmm'
 
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 ;       Subtraction                                                            ;
@@ -564,68 +564,68 @@ public	AddV64					as	'_ZN5Array3AddEPmPKmm'
 ;------------------------------------------------------------------------------;
 
 ; Unsigned integer types
-public	SubS8					as	'Array_SubScalar_uint8'
-public	SubS16					as	'Array_SubScalar_uint16'
-public	SubS32					as	'Array_SubScalar_uint32'
-public	SubS64					as	'Array_SubScalar_uint64'
-public	SubS8					as	'_ZN5Array3SubEPhmh'
-public	SubS16					as	'_ZN5Array3SubEPtmt'
-public	SubS32					as	'_ZN5Array3SubEPjmj'
-public	SubS64					as	'_ZN5Array3SubEPymy'
+public	SubS8						as	'Array_SubScalar_uint8'
+public	SubS16						as	'Array_SubScalar_uint16'
+public	SubS32						as	'Array_SubScalar_uint32'
+public	SubS64						as	'Array_SubScalar_uint64'
+public	SubS8						as	'_ZN5Array3SubEPhmh'
+public	SubS16						as	'_ZN5Array3SubEPtmt'
+public	SubS32						as	'_ZN5Array3SubEPjmj'
+public	SubS64						as	'_ZN5Array3SubEPymy'
 
 ; Signed integer types
-public	SubS8					as	'Array_SubScalar_sint8'
-public	SubS16					as	'Array_SubScalar_sint16'
-public	SubS32					as	'Array_SubScalar_sint32'
-public	SubS64					as	'Array_SubScalar_sint64'
-public	SubS8					as	'_ZN5Array3SubEPama'
-public	SubS16					as	'_ZN5Array3SubEPsms'
-public	SubS32					as	'_ZN5Array3SubEPimi'
-public	SubS64					as	'_ZN5Array3SubEPxmx'
+public	SubS8						as	'Array_SubScalar_sint8'
+public	SubS16						as	'Array_SubScalar_sint16'
+public	SubS32						as	'Array_SubScalar_sint32'
+public	SubS64						as	'Array_SubScalar_sint64'
+public	SubS8						as	'_ZN5Array3SubEPama'
+public	SubS16						as	'_ZN5Array3SubEPsms'
+public	SubS32						as	'_ZN5Array3SubEPimi'
+public	SubS64						as	'_ZN5Array3SubEPxmx'
 
 ; Floating-point types
-public	SubS_flt32				as	'Array_SubScalar_flt32'
-public	SubS_flt64				as	'Array_SubScalar_flt64'
-public	SubS_flt32				as	'_ZN5Array3SubEPfmf'
-public	SubS_flt64				as	'_ZN5Array3SubEPdmd'
+public	SubS_flt32					as	'Array_SubScalar_flt32'
+public	SubS_flt64					as	'Array_SubScalar_flt64'
+public	SubS_flt32					as	'_ZN5Array3SubEPfmf'
+public	SubS_flt64					as	'_ZN5Array3SubEPdmd'
 
 ; Other types
-public	SubS64					as	'Array_SubScalar_size'
-public	SubS64					as	'_ZN5Array3SubEPmmm'
+public	SubS64						as	'Array_SubScalar_size'
+public	SubS64						as	'_ZN5Array3SubEPmmm'
 
 ;------------------------------------------------------------------------------;
 ;       Vector subtraction                                                     ;
 ;------------------------------------------------------------------------------;
 
 ; Unsigned integer types
-public	SubV8					as	'Array_SubVector_uint8'
-public	SubV16					as	'Array_SubVector_uint16'
-public	SubV32					as	'Array_SubVector_uint32'
-public	SubV64					as	'Array_SubVector_uint64'
-public	SubV8					as	'_ZN5Array3SubEPhPKhm'
-public	SubV16					as	'_ZN5Array3SubEPtPKtm'
-public	SubV32					as	'_ZN5Array3SubEPjPKjm'
-public	SubV64					as	'_ZN5Array3SubEPyPKym'
+public	SubV8						as	'Array_SubVector_uint8'
+public	SubV16						as	'Array_SubVector_uint16'
+public	SubV32						as	'Array_SubVector_uint32'
+public	SubV64						as	'Array_SubVector_uint64'
+public	SubV8						as	'_ZN5Array3SubEPhPKhm'
+public	SubV16						as	'_ZN5Array3SubEPtPKtm'
+public	SubV32						as	'_ZN5Array3SubEPjPKjm'
+public	SubV64						as	'_ZN5Array3SubEPyPKym'
 
 ; Signed integer types
-public	SubV8					as	'Array_SubVector_sint8'
-public	SubV16					as	'Array_SubVector_sint16'
-public	SubV32					as	'Array_SubVector_sint32'
-public	SubV64					as	'Array_SubVector_sint64'
-public	SubV8					as	'_ZN5Array3SubEPaPKam'
-public	SubV16					as	'_ZN5Array3SubEPsPKsm'
-public	SubV32					as	'_ZN5Array3SubEPiPKim'
-public	SubV64					as	'_ZN5Array3SubEPxPKxm'
+public	SubV8						as	'Array_SubVector_sint8'
+public	SubV16						as	'Array_SubVector_sint16'
+public	SubV32						as	'Array_SubVector_sint32'
+public	SubV64						as	'Array_SubVector_sint64'
+public	SubV8						as	'_ZN5Array3SubEPaPKam'
+public	SubV16						as	'_ZN5Array3SubEPsPKsm'
+public	SubV32						as	'_ZN5Array3SubEPiPKim'
+public	SubV64						as	'_ZN5Array3SubEPxPKxm'
 
 ; Floating-point types
-public	SubV_flt32				as	'Array_SubVector_flt32'
-public	SubV_flt64				as	'Array_SubVector_flt64'
-public	SubV_flt32				as	'_ZN5Array3SubEPfPKfm'
-public	SubV_flt64				as	'_ZN5Array3SubEPdPKdm'
+public	SubV_flt32					as	'Array_SubVector_flt32'
+public	SubV_flt64					as	'Array_SubVector_flt64'
+public	SubV_flt32					as	'_ZN5Array3SubEPfPKfm'
+public	SubV_flt64					as	'_ZN5Array3SubEPdPKdm'
 
 ; Other types
-public	SubV64					as	'Array_SubVector_size'
-public	SubV64					as	'_ZN5Array3SubEPmPKmm'
+public	SubV64						as	'Array_SubVector_size'
+public	SubV64						as	'_ZN5Array3SubEPmPKmm'
 
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 ;       Multiplication                                                         ;
@@ -634,18 +634,18 @@ public	SubV64					as	'_ZN5Array3SubEPmPKmm'
 ;------------------------------------------------------------------------------;
 ;       Scalar multiplication                                                  ;
 ;------------------------------------------------------------------------------;
-public	MulS_flt32				as	'Array_MulScalar_flt32'
-public	MulS_flt64				as	'Array_MulScalar_flt64'
-public	MulS_flt32				as	'_ZN5Array3MulEPfmf'
-public	MulS_flt64				as	'_ZN5Array3MulEPdmd'
+public	MulS_flt32					as	'Array_MulScalar_flt32'
+public	MulS_flt64					as	'Array_MulScalar_flt64'
+public	MulS_flt32					as	'_ZN5Array3MulEPfmf'
+public	MulS_flt64					as	'_ZN5Array3MulEPdmd'
 
 ;------------------------------------------------------------------------------;
 ;       Vector multiplication                                                  ;
 ;------------------------------------------------------------------------------;
-public	MulV_flt32				as	'Array_MulVector_flt32'
-public	MulV_flt64				as	'Array_MulVector_flt64'
-public	MulV_flt32				as	'_ZN5Array3MulEPfPKfm'
-public	MulV_flt64				as	'_ZN5Array3MulEPdPKdm'
+public	MulV_flt32					as	'Array_MulVector_flt32'
+public	MulV_flt64					as	'Array_MulVector_flt64'
+public	MulV_flt32					as	'_ZN5Array3MulEPfPKfm'
+public	MulV_flt64					as	'_ZN5Array3MulEPdPKdm'
 
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 ;       Division                                                               ;
@@ -654,49 +654,49 @@ public	MulV_flt64				as	'_ZN5Array3MulEPdPKdm'
 ;------------------------------------------------------------------------------;
 ;       Scalar division                                                        ;
 ;------------------------------------------------------------------------------;
-public	DivS_flt32				as	'Array_DivScalar_flt32'
-public	DivS_flt64				as	'Array_DivScalar_flt64'
-public	DivS_flt32				as	'_ZN5Array3DivEPfmf'
-public	DivS_flt64				as	'_ZN5Array3DivEPdmd'
+public	DivS_flt32					as	'Array_DivScalar_flt32'
+public	DivS_flt64					as	'Array_DivScalar_flt64'
+public	DivS_flt32					as	'_ZN5Array3DivEPfmf'
+public	DivS_flt64					as	'_ZN5Array3DivEPdmd'
 
 ;------------------------------------------------------------------------------;
 ;       Vector division                                                        ;
 ;------------------------------------------------------------------------------;
-public	DivV_flt32				as	'Array_DivVector_flt32'
-public	DivV_flt64				as	'Array_DivVector_flt64'
-public	DivV_flt32				as	'_ZN5Array3DivEPfPKfm'
-public	DivV_flt64				as	'_ZN5Array3DivEPdPKdm'
+public	DivV_flt32					as	'Array_DivVector_flt32'
+public	DivV_flt64					as	'Array_DivVector_flt64'
+public	DivV_flt32					as	'_ZN5Array3DivEPfPKfm'
+public	DivV_flt64					as	'_ZN5Array3DivEPdPKdm'
 
 ;******************************************************************************;
 ;       Numerical integration                                                  ;
 ;******************************************************************************;
 
 ; Sum of elements
-public	Sum_flt32				as	'Array_Sum_flt32'
-public	Sum_flt64				as	'Array_Sum_flt64'
-public	Sum_flt32				as	'_ZN5Array3SumEPKfm'
-public	Sum_flt64				as	'_ZN5Array3SumEPKdm'
+public	Sum_flt32					as	'Array_Sum_flt32'
+public	Sum_flt64					as	'Array_Sum_flt64'
+public	Sum_flt32					as	'_ZN5Array3SumEPKfm'
+public	Sum_flt64					as	'_ZN5Array3SumEPKdm'
 
 ; Sum of squares
-public	SumSqr_flt32			as	'Array_SumSqr_flt32'
-public	SumSqr_flt64			as	'Array_SumSqr_flt64'
-public	SumSqr_flt32			as	'_ZN5Array6SumSqrEPKfm'
-public	SumSqr_flt64			as	'_ZN5Array6SumSqrEPKdm'
+public	SumSqr_flt32				as	'Array_SumSqr_flt32'
+public	SumSqr_flt64				as	'Array_SumSqr_flt64'
+public	SumSqr_flt32				as	'_ZN5Array6SumSqrEPKfm'
+public	SumSqr_flt64				as	'_ZN5Array6SumSqrEPKdm'
 
 ; Sum of absolute values
-public	SumAbs_flt32			as	'Array_SumAbs_flt32'
-public	SumAbs_flt64			as	'Array_SumAbs_flt64'
-public	SumAbs_flt32			as	'_ZN5Array6SumAbsEPKfm'
-public	SumAbs_flt64			as	'_ZN5Array6SumAbsEPKdm'
+public	SumAbs_flt32				as	'Array_SumAbs_flt32'
+public	SumAbs_flt64				as	'Array_SumAbs_flt64'
+public	SumAbs_flt32				as	'_ZN5Array6SumAbsEPKfm'
+public	SumAbs_flt64				as	'_ZN5Array6SumAbsEPKdm'
 
 ; Sum of multiplied elements
-public	SumMul_flt32			as	'Array_SumMul_flt32'
-public	SumMul_flt64			as	'Array_SumMul_flt64'
-public	SumMul_flt32			as	'_ZN5Array6SumMulEPKfS1_m'
-public	SumMul_flt64			as	'_ZN5Array6SumMulEPKdS1_m'
+public	SumMul_flt32				as	'Array_SumMul_flt32'
+public	SumMul_flt64				as	'Array_SumMul_flt64'
+public	SumMul_flt32				as	'_ZN5Array6SumMulEPKfS1_m'
+public	SumMul_flt64				as	'_ZN5Array6SumMulEPKdS1_m'
 
 ;******************************************************************************;
-;       Minimum and maximum values                                             ;
+;       Minimum and maximum value                                              ;
 ;******************************************************************************;
 
 ;==============================================================================;
@@ -704,132 +704,164 @@ public	SumMul_flt64			as	'_ZN5Array6SumMulEPKdS1_m'
 ;==============================================================================;
 
 ; Unsigned integer types
-public	Min_uint8				as	'Array_Min_uint8'
-public	Min_uint16				as	'Array_Min_uint16'
-public	Min_uint32				as	'Array_Min_uint32'
-public	Min_uint8				as	'_ZN5Array3MinEPKhm'
-public	Min_uint16				as	'_ZN5Array3MinEPKtm'
-public	Min_uint32				as	'_ZN5Array3MinEPKjm'
+public	Min_uint8					as	'Array_Min_uint8'
+public	Min_uint16					as	'Array_Min_uint16'
+public	Min_uint32					as	'Array_Min_uint32'
+public	Min_uint8					as	'_ZN5Array3MinEPKhm'
+public	Min_uint16					as	'_ZN5Array3MinEPKtm'
+public	Min_uint32					as	'_ZN5Array3MinEPKjm'
 
 ; Signed integer types
-public	Min_sint8				as	'Array_Min_sint8'
-public	Min_sint16				as	'Array_Min_sint16'
-public	Min_sint32				as	'Array_Min_sint32'
-public	Min_sint8				as	'_ZN5Array3MinEPKam'
-public	Min_sint16				as	'_ZN5Array3MinEPKsm'
-public	Min_sint32				as	'_ZN5Array3MinEPKim'
+public	Min_sint8					as	'Array_Min_sint8'
+public	Min_sint16					as	'Array_Min_sint16'
+public	Min_sint32					as	'Array_Min_sint32'
+public	Min_sint8					as	'_ZN5Array3MinEPKam'
+public	Min_sint16					as	'_ZN5Array3MinEPKsm'
+public	Min_sint32					as	'_ZN5Array3MinEPKim'
 
 ; Floating-point types
-public	Min_flt32				as	'Array_Min_flt32'
-public	Min_flt64				as	'Array_Min_flt64'
-public	Min_flt32				as	'_ZN5Array3MinEPKfm'
-public	Min_flt64				as	'_ZN5Array3MinEPKdm'
+public	Min_flt32					as	'Array_Min_flt32'
+public	Min_flt64					as	'Array_Min_flt64'
+public	Min_flt32					as	'_ZN5Array3MinEPKfm'
+public	Min_flt64					as	'_ZN5Array3MinEPKdm'
 
 ;==============================================================================;
 ;       Minimum absolute value                                                 ;
 ;==============================================================================;
-public	MinAbs_flt32			as	'Array_MinAbs_flt32'
-public	MinAbs_flt64			as	'Array_MinAbs_flt64'
-public	MinAbs_flt32			as	'_ZN5Array6MinAbsEPKfm'
-public	MinAbs_flt64			as	'_ZN5Array6MinAbsEPKdm'
+public	MinAbs_flt32				as	'Array_MinAbs_flt32'
+public	MinAbs_flt64				as	'Array_MinAbs_flt64'
+public	MinAbs_flt32				as	'_ZN5Array6MinAbsEPKfm'
+public	MinAbs_flt64				as	'_ZN5Array6MinAbsEPKdm'
 
 ;==============================================================================;
 ;       Maximum value                                                          ;
 ;==============================================================================;
 
 ; Unsigned integer types
-public	Max_uint8				as	'Array_Max_uint8'
-public	Max_uint16				as	'Array_Max_uint16'
-public	Max_uint32				as	'Array_Max_uint32'
-public	Max_uint8				as	'_ZN5Array3MaxEPKhm'
-public	Max_uint16				as	'_ZN5Array3MaxEPKtm'
-public	Max_uint32				as	'_ZN5Array3MaxEPKjm'
+public	Max_uint8					as	'Array_Max_uint8'
+public	Max_uint16					as	'Array_Max_uint16'
+public	Max_uint32					as	'Array_Max_uint32'
+public	Max_uint8					as	'_ZN5Array3MaxEPKhm'
+public	Max_uint16					as	'_ZN5Array3MaxEPKtm'
+public	Max_uint32					as	'_ZN5Array3MaxEPKjm'
 
 ; Signed integer types
-public	Max_sint8				as	'Array_Max_sint8'
-public	Max_sint16				as	'Array_Max_sint16'
-public	Max_sint32				as	'Array_Max_sint32'
-public	Max_sint8				as	'_ZN5Array3MaxEPKam'
-public	Max_sint16				as	'_ZN5Array3MaxEPKsm'
-public	Max_sint32				as	'_ZN5Array3MaxEPKim'
+public	Max_sint8					as	'Array_Max_sint8'
+public	Max_sint16					as	'Array_Max_sint16'
+public	Max_sint32					as	'Array_Max_sint32'
+public	Max_sint8					as	'_ZN5Array3MaxEPKam'
+public	Max_sint16					as	'_ZN5Array3MaxEPKsm'
+public	Max_sint32					as	'_ZN5Array3MaxEPKim'
 
 ; Floating-point types
-public	Max_flt32				as	'Array_Max_flt32'
-public	Max_flt64				as	'Array_Max_flt64'
-public	Max_flt32				as	'_ZN5Array3MaxEPKfm'
-public	Max_flt64				as	'_ZN5Array3MaxEPKdm'
+public	Max_flt32					as	'Array_Max_flt32'
+public	Max_flt64					as	'Array_Max_flt64'
+public	Max_flt32					as	'_ZN5Array3MaxEPKfm'
+public	Max_flt64					as	'_ZN5Array3MaxEPKdm'
 
 ;==============================================================================;
 ;       Maximum absolute value                                                 ;
 ;==============================================================================;
-public	MaxAbs_flt32			as	'Array_MaxAbs_flt32'
-public	MaxAbs_flt64			as	'Array_MaxAbs_flt64'
-public	MaxAbs_flt32			as	'_ZN5Array6MaxAbsEPKfm'
-public	MaxAbs_flt64			as	'_ZN5Array6MaxAbsEPKdm'
+public	MaxAbs_flt32				as	'Array_MaxAbs_flt32'
+public	MaxAbs_flt64				as	'Array_MaxAbs_flt64'
+public	MaxAbs_flt32				as	'_ZN5Array6MaxAbsEPKfm'
+public	MaxAbs_flt64				as	'_ZN5Array6MaxAbsEPKdm'
 
 ;******************************************************************************;
 ;       Rounding                                                               ;
 ;******************************************************************************;
 
 ; Round down (floor)
-public	RoundDown_flt32			as	'Array_RoundDown_flt32'
-public	RoundDown_flt64			as	'Array_RoundDown_flt64'
-public	RoundDown_flt32			as	'_ZN5Array9RoundDownEPfm'
-public	RoundDown_flt64			as	'_ZN5Array9RoundDownEPdm'
+public	RoundDown_flt32				as	'Array_RoundDown_flt32'
+public	RoundDown_flt64				as	'Array_RoundDown_flt64'
+public	RoundDown_flt32				as	'_ZN5Array9RoundDownEPfm'
+public	RoundDown_flt64				as	'_ZN5Array9RoundDownEPdm'
 
 ; Round up (ceil)
-public	RoundUp_flt32			as	'Array_RoundUp_flt32'
-public	RoundUp_flt64			as	'Array_RoundUp_flt64'
-public	RoundUp_flt32			as	'_ZN5Array7RoundUpEPfm'
-public	RoundUp_flt64			as	'_ZN5Array7RoundUpEPdm'
+public	RoundUp_flt32				as	'Array_RoundUp_flt32'
+public	RoundUp_flt64				as	'Array_RoundUp_flt64'
+public	RoundUp_flt32				as	'_ZN5Array7RoundUpEPfm'
+public	RoundUp_flt64				as	'_ZN5Array7RoundUpEPdm'
 
 ; Round to nearest even integer
-public	RoundInt_flt32			as	'Array_RoundInt_flt32'
-public	RoundInt_flt64			as	'Array_RoundInt_flt64'
-public	RoundInt_flt32			as	'_ZN5Array8RoundIntEPfm'
-public	RoundInt_flt64			as	'_ZN5Array8RoundIntEPdm'
+public	RoundInt_flt32				as	'Array_RoundInt_flt32'
+public	RoundInt_flt64				as	'Array_RoundInt_flt64'
+public	RoundInt_flt32				as	'_ZN5Array8RoundIntEPfm'
+public	RoundInt_flt64				as	'_ZN5Array8RoundIntEPdm'
 
 ; Round to nearest integer, away from zero
-public	RoundRound_flt32		as	'Array_Round_flt32'
-public	RoundRound_flt64		as	'Array_Round_flt64'
-public	RoundRound_flt32		as	'_ZN5Array5RoundEPfm'
-public	RoundRound_flt64		as	'_ZN5Array5RoundEPdm'
+public	RoundRound_flt32			as	'Array_Round_flt32'
+public	RoundRound_flt64			as	'Array_Round_flt64'
+public	RoundRound_flt32			as	'_ZN5Array5RoundEPfm'
+public	RoundRound_flt64			as	'_ZN5Array5RoundEPdm'
 
 ; Round to nearest integer, toward zero (truncation)
-public	RoundTrunc_flt32		as	'Array_Trunc_flt32'
-public	RoundTrunc_flt64		as	'Array_Trunc_flt64'
-public	RoundTrunc_flt32		as	'_ZN5Array5TruncEPfm'
-public	RoundTrunc_flt64		as	'_ZN5Array5TruncEPdm'
+public	RoundTrunc_flt32			as	'Array_Trunc_flt32'
+public	RoundTrunc_flt64			as	'Array_Trunc_flt64'
+public	RoundTrunc_flt32			as	'_ZN5Array5TruncEPfm'
+public	RoundTrunc_flt64			as	'_ZN5Array5TruncEPdm'
 
 ; Fractional part
-public	RoundFrac_flt32			as	'Array_Frac_flt32'
-public	RoundFrac_flt64			as	'Array_Frac_flt64'
-public	RoundFrac_flt32			as	'_ZN5Array4FracEPfm'
-public	RoundFrac_flt64			as	'_ZN5Array4FracEPdm'
+public	RoundFrac_flt32				as	'Array_Frac_flt32'
+public	RoundFrac_flt64				as	'Array_Frac_flt64'
+public	RoundFrac_flt32				as	'_ZN5Array4FracEPfm'
+public	RoundFrac_flt64				as	'_ZN5Array4FracEPdm'
+
+;******************************************************************************;
+;       Value counting                                                         ;
+;******************************************************************************;
+
+; Unsigned integer types
+public	Count8						as	'Array_Count_uint8'
+public	Count16						as	'Array_Count_uint16'
+public	Count32						as	'Array_Count_uint32'
+public	Count64						as	'Array_Count_uint64'
+public	Count8						as	'_ZN5Array5CountEPKhmh'
+public	Count16						as	'_ZN5Array5CountEPKtmt'
+public	Count32						as	'_ZN5Array5CountEPKjmj'
+public	Count64						as	'_ZN5Array5CountEPKymy'
+
+; Signed integer types
+public	Count8						as	'Array_Count_sint8'
+public	Count16						as	'Array_Count_sint16'
+public	Count32						as	'Array_Count_sint32'
+public	Count64						as	'Array_Count_sint64'
+public	Count8						as	'_ZN5Array5CountEPKama'
+public	Count16						as	'_ZN5Array5CountEPKsms'
+public	Count32						as	'_ZN5Array5CountEPKimi'
+public	Count64						as	'_ZN5Array5CountEPKxmx'
+
+; Other types
+public	Count64						as	'Array_Count_size'
+public	Count64						as	'_ZN5Array5CountEPKmmm'
 
 ;******************************************************************************;
 ;       Value replacement                                                      ;
 ;******************************************************************************;
 
 ; Unsigned integer types
-public	Replace8				as	'Array_Replace_uint8'
-public	Replace16				as	'Array_Replace_uint16'
-public	Replace32				as	'Array_Replace_uint32'
-public	Replace64				as	'Array_Replace_uint64'
-public	Replace8				as	'_ZN5Array7ReplaceEPhmhh'
-public	Replace16				as	'_ZN5Array7ReplaceEPtmtt'
-public	Replace32				as	'_ZN5Array7ReplaceEPjmjj'
-public	Replace64				as	'_ZN5Array7ReplaceEPymyy'
+public	Replace8					as	'Array_Replace_uint8'
+public	Replace16					as	'Array_Replace_uint16'
+public	Replace32					as	'Array_Replace_uint32'
+public	Replace64					as	'Array_Replace_uint64'
+public	Replace8					as	'_ZN5Array7ReplaceEPhmhh'
+public	Replace16					as	'_ZN5Array7ReplaceEPtmtt'
+public	Replace32					as	'_ZN5Array7ReplaceEPjmjj'
+public	Replace64					as	'_ZN5Array7ReplaceEPymyy'
 
 ; Signed integer types
-public	Replace8				as	'Array_Replace_sint8'
-public	Replace16				as	'Array_Replace_sint16'
-public	Replace32				as	'Array_Replace_sint32'
-public	Replace64				as	'Array_Replace_sint64'
-public	Replace8				as	'_ZN5Array7ReplaceEPamaa'
-public	Replace16				as	'_ZN5Array7ReplaceEPsmss'
-public	Replace32				as	'_ZN5Array7ReplaceEPimii'
-public	Replace64				as	'_ZN5Array7ReplaceEPxmxx'
+public	Replace8					as	'Array_Replace_sint8'
+public	Replace16					as	'Array_Replace_sint16'
+public	Replace32					as	'Array_Replace_sint32'
+public	Replace64					as	'Array_Replace_sint64'
+public	Replace8					as	'_ZN5Array7ReplaceEPamaa'
+public	Replace16					as	'_ZN5Array7ReplaceEPsmss'
+public	Replace32					as	'_ZN5Array7ReplaceEPimii'
+public	Replace64					as	'_ZN5Array7ReplaceEPxmxx'
+
+; Other types
+public	Replace64					as	'Array_Replace_size'
+public	Replace64					as	'_ZN5Array7ReplaceEPmmmm'
 
 ;******************************************************************************;
 ;       Search algorithms                                                      ;
@@ -844,48 +876,56 @@ public	Replace64				as	'_ZN5Array7ReplaceEPxmxx'
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 
 ; Unsigned integer types
-public	FindFwd8				as	'Array_FindFwd_uint8'
-public	FindFwd16				as	'Array_FindFwd_uint16'
-public	FindFwd32				as	'Array_FindFwd_uint32'
-public	FindFwd64				as	'Array_FindFwd_uint64'
-public	FindFwd8				as	'_ZN5Array7FindFwdEPKhmh'
-public	FindFwd16				as	'_ZN5Array7FindFwdEPKtmt'
-public	FindFwd32				as	'_ZN5Array7FindFwdEPKjmj'
-public	FindFwd64				as	'_ZN5Array7FindFwdEPKymy'
+public	FindFwd8					as	'Array_FindFwd_uint8'
+public	FindFwd16					as	'Array_FindFwd_uint16'
+public	FindFwd32					as	'Array_FindFwd_uint32'
+public	FindFwd64					as	'Array_FindFwd_uint64'
+public	FindFwd8					as	'_ZN5Array7FindFwdEPKhmh'
+public	FindFwd16					as	'_ZN5Array7FindFwdEPKtmt'
+public	FindFwd32					as	'_ZN5Array7FindFwdEPKjmj'
+public	FindFwd64					as	'_ZN5Array7FindFwdEPKymy'
 
 ; Signed integer types
-public	FindFwd8				as	'Array_FindFwd_sint8'
-public	FindFwd16				as	'Array_FindFwd_sint16'
-public	FindFwd32				as	'Array_FindFwd_sint32'
-public	FindFwd64				as	'Array_FindFwd_sint64'
-public	FindFwd8				as	'_ZN5Array7FindFwdEPKama'
-public	FindFwd16				as	'_ZN5Array7FindFwdEPKsms'
-public	FindFwd32				as	'_ZN5Array7FindFwdEPKimi'
-public	FindFwd64				as	'_ZN5Array7FindFwdEPKxmx'
+public	FindFwd8					as	'Array_FindFwd_sint8'
+public	FindFwd16					as	'Array_FindFwd_sint16'
+public	FindFwd32					as	'Array_FindFwd_sint32'
+public	FindFwd64					as	'Array_FindFwd_sint64'
+public	FindFwd8					as	'_ZN5Array7FindFwdEPKama'
+public	FindFwd16					as	'_ZN5Array7FindFwdEPKsms'
+public	FindFwd32					as	'_ZN5Array7FindFwdEPKimi'
+public	FindFwd64					as	'_ZN5Array7FindFwdEPKxmx'
+
+; Other types
+public	FindFwd64					as	'Array_FindFwd_size'
+public	FindFwd64					as	'_ZN5Array7FindFwdEPKmmm'
 
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 ;       Backward direction search                                              ;
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 
 ; Unsigned integer types
-public	FindBwd8				as	'Array_FindBwd_uint8'
-public	FindBwd16				as	'Array_FindBwd_uint16'
-public	FindBwd32				as	'Array_FindBwd_uint32'
-public	FindBwd64				as	'Array_FindBwd_uint64'
-public	FindBwd8				as	'_ZN5Array7FindBwdEPKhmh'
-public	FindBwd16				as	'_ZN5Array7FindBwdEPKtmt'
-public	FindBwd32				as	'_ZN5Array7FindBwdEPKjmj'
-public	FindBwd64				as	'_ZN5Array7FindBwdEPKymy'
+public	FindBwd8					as	'Array_FindBwd_uint8'
+public	FindBwd16					as	'Array_FindBwd_uint16'
+public	FindBwd32					as	'Array_FindBwd_uint32'
+public	FindBwd64					as	'Array_FindBwd_uint64'
+public	FindBwd8					as	'_ZN5Array7FindBwdEPKhmh'
+public	FindBwd16					as	'_ZN5Array7FindBwdEPKtmt'
+public	FindBwd32					as	'_ZN5Array7FindBwdEPKjmj'
+public	FindBwd64					as	'_ZN5Array7FindBwdEPKymy'
 
 ; Signed integer types
-public	FindBwd8				as	'Array_FindBwd_sint8'
-public	FindBwd16				as	'Array_FindBwd_sint16'
-public	FindBwd32				as	'Array_FindBwd_sint32'
-public	FindBwd64				as	'Array_FindBwd_sint64'
-public	FindBwd8				as	'_ZN5Array7FindBwdEPKama'
-public	FindBwd16				as	'_ZN5Array7FindBwdEPKsms'
-public	FindBwd32				as	'_ZN5Array7FindBwdEPKimi'
-public	FindBwd64				as	'_ZN5Array7FindBwdEPKxmx'
+public	FindBwd8					as	'Array_FindBwd_sint8'
+public	FindBwd16					as	'Array_FindBwd_sint16'
+public	FindBwd32					as	'Array_FindBwd_sint32'
+public	FindBwd64					as	'Array_FindBwd_sint64'
+public	FindBwd8					as	'_ZN5Array7FindBwdEPKama'
+public	FindBwd16					as	'_ZN5Array7FindBwdEPKsms'
+public	FindBwd32					as	'_ZN5Array7FindBwdEPKimi'
+public	FindBwd64					as	'_ZN5Array7FindBwdEPKxmx'
+
+; Other types
+public	FindBwd64					as	'Array_FindBwd_size'
+public	FindBwd64					as	'_ZN5Array7FindBwdEPKmmm'
 
 ;==============================================================================;
 ;       Binary search                                                          ;
@@ -895,57 +935,289 @@ public	FindBwd64				as	'_ZN5Array7FindBwdEPKxmx'
 ;       Ascending sort order                                                   ;
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 
+;------------------------------------------------------------------------------;
+;       Searching for equal element                                            ;
+;------------------------------------------------------------------------------;
+
 ; Unsigned integer types
-public	FindAsc_uint8			as	'Array_FindAsc_uint8'
-public	FindAsc_uint16			as	'Array_FindAsc_uint16'
-public	FindAsc_uint32			as	'Array_FindAsc_uint32'
-public	FindAsc_uint64			as	'Array_FindAsc_uint64'
-public	FindAsc_uint8			as	'_ZN5Array7FindAscEPKhmh'
-public	FindAsc_uint16			as	'_ZN5Array7FindAscEPKtmt'
-public	FindAsc_uint32			as	'_ZN5Array7FindAscEPKjmj'
-public	FindAsc_uint64			as	'_ZN5Array7FindAscEPKymy'
+public	FindEqualAsc_uint8			as	'Array_FindEqualAsc_uint8'
+public	FindEqualAsc_uint16			as	'Array_FindEqualAsc_uint16'
+public	FindEqualAsc_uint32			as	'Array_FindEqualAsc_uint32'
+public	FindEqualAsc_uint64			as	'Array_FindEqualAsc_uint64'
+public	FindEqualAsc_uint8			as	'_ZN5Array12FindEqualAscEPKhmh'
+public	FindEqualAsc_uint16			as	'_ZN5Array12FindEqualAscEPKtmt'
+public	FindEqualAsc_uint32			as	'_ZN5Array12FindEqualAscEPKjmj'
+public	FindEqualAsc_uint64			as	'_ZN5Array12FindEqualAscEPKymy'
 
 ; Signed integer types
-public	FindAsc_sint8			as	'Array_FindAsc_sint8'
-public	FindAsc_sint16			as	'Array_FindAsc_sint16'
-public	FindAsc_sint32			as	'Array_FindAsc_sint32'
-public	FindAsc_sint64			as	'Array_FindAsc_sint64'
-public	FindAsc_sint8			as	'_ZN5Array7FindAscEPKama'
-public	FindAsc_sint16			as	'_ZN5Array7FindAscEPKsms'
-public	FindAsc_sint32			as	'_ZN5Array7FindAscEPKimi'
-public	FindAsc_sint64			as	'_ZN5Array7FindAscEPKxmx'
+public	FindEqualAsc_sint8			as	'Array_FindEqualAsc_sint8'
+public	FindEqualAsc_sint16			as	'Array_FindEqualAsc_sint16'
+public	FindEqualAsc_sint32			as	'Array_FindEqualAsc_sint32'
+public	FindEqualAsc_sint64			as	'Array_FindEqualAsc_sint64'
+public	FindEqualAsc_sint8			as	'_ZN5Array12FindEqualAscEPKama'
+public	FindEqualAsc_sint16			as	'_ZN5Array12FindEqualAscEPKsms'
+public	FindEqualAsc_sint32			as	'_ZN5Array12FindEqualAscEPKimi'
+public	FindEqualAsc_sint64			as	'_ZN5Array12FindEqualAscEPKxmx'
 
 ; Other types
-public	FindAsc_uint64			as	'Array_FindAsc_size'
-public	FindAsc_uint64			as	'_ZN5Array7FindAscEPKmmm'
+public	FindEqualAsc_uint64			as	'Array_FindEqualAsc_size'
+public	FindEqualAsc_uint64			as	'_ZN5Array12FindEqualAscEPKmmm'
+
+;------------------------------------------------------------------------------;
+;       Searching for greater element                                          ;
+;------------------------------------------------------------------------------;
+
+; Unsigned integer types
+public	FindGreatAsc_uint8			as	'Array_FindGreatAsc_uint8'
+public	FindGreatAsc_uint16			as	'Array_FindGreatAsc_uint16'
+public	FindGreatAsc_uint32			as	'Array_FindGreatAsc_uint32'
+public	FindGreatAsc_uint64			as	'Array_FindGreatAsc_uint64'
+public	FindGreatAsc_uint8			as	'_ZN5Array12FindGreatAscEPKhmh'
+public	FindGreatAsc_uint16			as	'_ZN5Array12FindGreatAscEPKtmt'
+public	FindGreatAsc_uint32			as	'_ZN5Array12FindGreatAscEPKjmj'
+public	FindGreatAsc_uint64			as	'_ZN5Array12FindGreatAscEPKymy'
+
+; Signed integer types
+public	FindGreatAsc_sint8			as	'Array_FindGreatAsc_sint8'
+public	FindGreatAsc_sint16			as	'Array_FindGreatAsc_sint16'
+public	FindGreatAsc_sint32			as	'Array_FindGreatAsc_sint32'
+public	FindGreatAsc_sint64			as	'Array_FindGreatAsc_sint64'
+public	FindGreatAsc_sint8			as	'_ZN5Array12FindGreatAscEPKama'
+public	FindGreatAsc_sint16			as	'_ZN5Array12FindGreatAscEPKsms'
+public	FindGreatAsc_sint32			as	'_ZN5Array12FindGreatAscEPKimi'
+public	FindGreatAsc_sint64			as	'_ZN5Array12FindGreatAscEPKxmx'
+
+; Other types
+public	FindGreatAsc_uint64			as	'Array_FindGreatAsc_size'
+public	FindGreatAsc_uint64			as	'_ZN5Array12FindGreatAscEPKmmm'
+
+;------------------------------------------------------------------------------;
+;       Searching for greater or equal element                                 ;
+;------------------------------------------------------------------------------;
+
+; Unsigned integer types
+public	FindGreatEqualAsc_uint8		as	'Array_FindGreatOrEqualAsc_uint8'
+public	FindGreatEqualAsc_uint16	as	'Array_FindGreatOrEqualAsc_uint16'
+public	FindGreatEqualAsc_uint32	as	'Array_FindGreatOrEqualAsc_uint32'
+public	FindGreatEqualAsc_uint64	as	'Array_FindGreatOrEqualAsc_uint64'
+public	FindGreatEqualAsc_uint8		as	'_ZN5Array19FindGreatOrEqualAscEPKhmh'
+public	FindGreatEqualAsc_uint16	as	'_ZN5Array19FindGreatOrEqualAscEPKtmt'
+public	FindGreatEqualAsc_uint32	as	'_ZN5Array19FindGreatOrEqualAscEPKjmj'
+public	FindGreatEqualAsc_uint64	as	'_ZN5Array19FindGreatOrEqualAscEPKymy'
+
+; Signed integer types
+public	FindGreatEqualAsc_sint8		as	'Array_FindGreatOrEqualAsc_sint8'
+public	FindGreatEqualAsc_sint16	as	'Array_FindGreatOrEqualAsc_sint16'
+public	FindGreatEqualAsc_sint32	as	'Array_FindGreatOrEqualAsc_sint32'
+public	FindGreatEqualAsc_sint64	as	'Array_FindGreatOrEqualAsc_sint64'
+public	FindGreatEqualAsc_sint8		as	'_ZN5Array19FindGreatOrEqualAscEPKama'
+public	FindGreatEqualAsc_sint16	as	'_ZN5Array19FindGreatOrEqualAscEPKsms'
+public	FindGreatEqualAsc_sint32	as	'_ZN5Array19FindGreatOrEqualAscEPKimi'
+public	FindGreatEqualAsc_sint64	as	'_ZN5Array19FindGreatOrEqualAscEPKxmx'
+
+; Other types
+public	FindGreatEqualAsc_uint64	as	'Array_FindGreatOrEqualAsc_size'
+public	FindGreatEqualAsc_uint64	as	'_ZN5Array19FindGreatOrEqualAscEPKmmm'
+
+;------------------------------------------------------------------------------;
+;       Searching for less element                                             ;
+;------------------------------------------------------------------------------;
+
+; Unsigned integer types
+public	FindLessAsc_uint8			as	'Array_FindLessAsc_uint8'
+public	FindLessAsc_uint16			as	'Array_FindLessAsc_uint16'
+public	FindLessAsc_uint32			as	'Array_FindLessAsc_uint32'
+public	FindLessAsc_uint64			as	'Array_FindLessAsc_uint64'
+public	FindLessAsc_uint8			as	'_ZN5Array11FindLessAscEPKhmh'
+public	FindLessAsc_uint16			as	'_ZN5Array11FindLessAscEPKtmt'
+public	FindLessAsc_uint32			as	'_ZN5Array11FindLessAscEPKjmj'
+public	FindLessAsc_uint64			as	'_ZN5Array11FindLessAscEPKymy'
+
+; Signed integer types
+public	FindLessAsc_sint8			as	'Array_FindLessAsc_sint8'
+public	FindLessAsc_sint16			as	'Array_FindLessAsc_sint16'
+public	FindLessAsc_sint32			as	'Array_FindLessAsc_sint32'
+public	FindLessAsc_sint64			as	'Array_FindLessAsc_sint64'
+public	FindLessAsc_sint8			as	'_ZN5Array11FindLessAscEPKama'
+public	FindLessAsc_sint16			as	'_ZN5Array11FindLessAscEPKsms'
+public	FindLessAsc_sint32			as	'_ZN5Array11FindLessAscEPKimi'
+public	FindLessAsc_sint64			as	'_ZN5Array11FindLessAscEPKxmx'
+
+; Other types
+public	FindLessAsc_uint64			as	'Array_FindLessAsc_size'
+public	FindLessAsc_uint64			as	'_ZN5Array11FindLessAscEPKmmm'
+
+;------------------------------------------------------------------------------;
+;       Searching for less or equal element                                    ;
+;------------------------------------------------------------------------------;
+
+; Unsigned integer types
+public	FindLessEqualAsc_uint8		as	'Array_FindLessOrEqualAsc_uint8'
+public	FindLessEqualAsc_uint16		as	'Array_FindLessOrEqualAsc_uint16'
+public	FindLessEqualAsc_uint32		as	'Array_FindLessOrEqualAsc_uint32'
+public	FindLessEqualAsc_uint64		as	'Array_FindLessOrEqualAsc_uint64'
+public	FindLessEqualAsc_uint8		as	'_ZN5Array18FindLessOrEqualAscEPKhmh'
+public	FindLessEqualAsc_uint16		as	'_ZN5Array18FindLessOrEqualAscEPKtmt'
+public	FindLessEqualAsc_uint32		as	'_ZN5Array18FindLessOrEqualAscEPKjmj'
+public	FindLessEqualAsc_uint64		as	'_ZN5Array18FindLessOrEqualAscEPKymy'
+
+; Signed integer types
+public	FindLessEqualAsc_sint8		as	'Array_FindLessOrEqualAsc_sint8'
+public	FindLessEqualAsc_sint16		as	'Array_FindLessOrEqualAsc_sint16'
+public	FindLessEqualAsc_sint32		as	'Array_FindLessOrEqualAsc_sint32'
+public	FindLessEqualAsc_sint64		as	'Array_FindLessOrEqualAsc_sint64'
+public	FindLessEqualAsc_sint8		as	'_ZN5Array18FindLessOrEqualAscEPKama'
+public	FindLessEqualAsc_sint16		as	'_ZN5Array18FindLessOrEqualAscEPKsms'
+public	FindLessEqualAsc_sint32		as	'_ZN5Array18FindLessOrEqualAscEPKimi'
+public	FindLessEqualAsc_sint64		as	'_ZN5Array18FindLessOrEqualAscEPKxmx'
+
+; Other types
+public	FindLessEqualAsc_uint64		as	'Array_FindLessOrEqualAsc_size'
+public	FindLessEqualAsc_uint64		as	'_ZN5Array18FindLessOrEqualAscEPKmmm'
 
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 ;       Descending sort order                                                  ;
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 
+;------------------------------------------------------------------------------;
+;       Searching for equal element                                            ;
+;------------------------------------------------------------------------------;
+
 ; Unsigned integer types
-public	FindDsc_uint8			as	'Array_FindDsc_uint8'
-public	FindDsc_uint16			as	'Array_FindDsc_uint16'
-public	FindDsc_uint32			as	'Array_FindDsc_uint32'
-public	FindDsc_uint64			as	'Array_FindDsc_uint64'
-public	FindDsc_uint8			as	'_ZN5Array7FindDscEPKhmh'
-public	FindDsc_uint16			as	'_ZN5Array7FindDscEPKtmt'
-public	FindDsc_uint32			as	'_ZN5Array7FindDscEPKjmj'
-public	FindDsc_uint64			as	'_ZN5Array7FindDscEPKymy'
+public	FindEqualDsc_uint8			as	'Array_FindEqualDsc_uint8'
+public	FindEqualDsc_uint16			as	'Array_FindEqualDsc_uint16'
+public	FindEqualDsc_uint32			as	'Array_FindEqualDsc_uint32'
+public	FindEqualDsc_uint64			as	'Array_FindEqualDsc_uint64'
+public	FindEqualDsc_uint8			as	'_ZN5Array12FindEqualDscEPKhmh'
+public	FindEqualDsc_uint16			as	'_ZN5Array12FindEqualDscEPKtmt'
+public	FindEqualDsc_uint32			as	'_ZN5Array12FindEqualDscEPKjmj'
+public	FindEqualDsc_uint64			as	'_ZN5Array12FindEqualDscEPKymy'
 
 ; Signed integer types
-public	FindDsc_sint8			as	'Array_FindDsc_sint8'
-public	FindDsc_sint16			as	'Array_FindDsc_sint16'
-public	FindDsc_sint32			as	'Array_FindDsc_sint32'
-public	FindDsc_sint64			as	'Array_FindDsc_sint64'
-public	FindDsc_sint8			as	'_ZN5Array7FindDscEPKama'
-public	FindDsc_sint16			as	'_ZN5Array7FindDscEPKsms'
-public	FindDsc_sint32			as	'_ZN5Array7FindDscEPKimi'
-public	FindDsc_sint64			as	'_ZN5Array7FindDscEPKxmx'
+public	FindEqualDsc_sint8			as	'Array_FindEqualDsc_sint8'
+public	FindEqualDsc_sint16			as	'Array_FindEqualDsc_sint16'
+public	FindEqualDsc_sint32			as	'Array_FindEqualDsc_sint32'
+public	FindEqualDsc_sint64			as	'Array_FindEqualDsc_sint64'
+public	FindEqualDsc_sint8			as	'_ZN5Array12FindEqualDscEPKama'
+public	FindEqualDsc_sint16			as	'_ZN5Array12FindEqualDscEPKsms'
+public	FindEqualDsc_sint32			as	'_ZN5Array12FindEqualDscEPKimi'
+public	FindEqualDsc_sint64			as	'_ZN5Array12FindEqualDscEPKxmx'
 
 ; Other types
-public	FindDsc_uint64			as	'Array_FindDsc_size'
-public	FindDsc_uint64			as	'_ZN5Array7FindDscEPKmmm'
+public	FindEqualDsc_uint64			as	'Array_FindEqualDsc_size'
+public	FindEqualDsc_uint64			as	'_ZN5Array12FindEqualDscEPKmmm'
+
+;------------------------------------------------------------------------------;
+;       Searching for less element                                             ;
+;------------------------------------------------------------------------------;
+
+; Unsigned integer types
+public	FindLessDsc_uint8			as	'Array_FindLessDsc_uint8'
+public	FindLessDsc_uint16			as	'Array_FindLessDsc_uint16'
+public	FindLessDsc_uint32			as	'Array_FindLessDsc_uint32'
+public	FindLessDsc_uint64			as	'Array_FindLessDsc_uint64'
+public	FindLessDsc_uint8			as	'_ZN5Array11FindLessDscEPKhmh'
+public	FindLessDsc_uint16			as	'_ZN5Array11FindLessDscEPKtmt'
+public	FindLessDsc_uint32			as	'_ZN5Array11FindLessDscEPKjmj'
+public	FindLessDsc_uint64			as	'_ZN5Array11FindLessDscEPKymy'
+
+; Signed integer types
+public	FindLessDsc_sint8			as	'Array_FindLessDsc_sint8'
+public	FindLessDsc_sint16			as	'Array_FindLessDsc_sint16'
+public	FindLessDsc_sint32			as	'Array_FindLessDsc_sint32'
+public	FindLessDsc_sint64			as	'Array_FindLessDsc_sint64'
+public	FindLessDsc_sint8			as	'_ZN5Array11FindLessDscEPKama'
+public	FindLessDsc_sint16			as	'_ZN5Array11FindLessDscEPKsms'
+public	FindLessDsc_sint32			as	'_ZN5Array11FindLessDscEPKimi'
+public	FindLessDsc_sint64			as	'_ZN5Array11FindLessDscEPKxmx'
+
+; Other types
+public	FindLessDsc_uint64			as	'Array_FindLessDsc_size'
+public	FindLessDsc_uint64			as	'_ZN5Array11FindLessDscEPKmmm'
+
+;------------------------------------------------------------------------------;
+;       Searching for less or equal element                                    ;
+;------------------------------------------------------------------------------;
+
+; Unsigned integer types
+public	FindLessEqualDsc_uint8		as	'Array_FindLessOrEqualDsc_uint8'
+public	FindLessEqualDsc_uint16		as	'Array_FindLessOrEqualDsc_uint16'
+public	FindLessEqualDsc_uint32		as	'Array_FindLessOrEqualDsc_uint32'
+public	FindLessEqualDsc_uint64		as	'Array_FindLessOrEqualDsc_uint64'
+public	FindLessEqualDsc_uint8		as	'_ZN5Array18FindLessOrEqualDscEPKhmh'
+public	FindLessEqualDsc_uint16		as	'_ZN5Array18FindLessOrEqualDscEPKtmt'
+public	FindLessEqualDsc_uint32		as	'_ZN5Array18FindLessOrEqualDscEPKjmj'
+public	FindLessEqualDsc_uint64		as	'_ZN5Array18FindLessOrEqualDscEPKymy'
+
+; Signed integer types
+public	FindLessEqualDsc_sint8		as	'Array_FindLessOrEqualDsc_sint8'
+public	FindLessEqualDsc_sint16		as	'Array_FindLessOrEqualDsc_sint16'
+public	FindLessEqualDsc_sint32		as	'Array_FindLessOrEqualDsc_sint32'
+public	FindLessEqualDsc_sint64		as	'Array_FindLessOrEqualDsc_sint64'
+public	FindLessEqualDsc_sint8		as	'_ZN5Array18FindLessOrEqualDscEPKama'
+public	FindLessEqualDsc_sint16		as	'_ZN5Array18FindLessOrEqualDscEPKsms'
+public	FindLessEqualDsc_sint32		as	'_ZN5Array18FindLessOrEqualDscEPKimi'
+public	FindLessEqualDsc_sint64		as	'_ZN5Array18FindLessOrEqualDscEPKxmx'
+
+; Other types
+public	FindLessEqualDsc_uint64		as	'Array_FindLessOrEqualDsc_size'
+public	FindLessEqualDsc_uint64		as	'_ZN5Array18FindLessOrEqualDscEPKmmm'
+
+;------------------------------------------------------------------------------;
+;       Searching for greater element                                          ;
+;------------------------------------------------------------------------------;
+
+; Unsigned integer types
+public	FindGreatDsc_uint8			as	'Array_FindGreatDsc_uint8'
+public	FindGreatDsc_uint16			as	'Array_FindGreatDsc_uint16'
+public	FindGreatDsc_uint32			as	'Array_FindGreatDsc_uint32'
+public	FindGreatDsc_uint64			as	'Array_FindGreatDsc_uint64'
+public	FindGreatDsc_uint8			as	'_ZN5Array12FindGreatDscEPKhmh'
+public	FindGreatDsc_uint16			as	'_ZN5Array12FindGreatDscEPKtmt'
+public	FindGreatDsc_uint32			as	'_ZN5Array12FindGreatDscEPKjmj'
+public	FindGreatDsc_uint64			as	'_ZN5Array12FindGreatDscEPKymy'
+
+; Signed integer types
+public	FindGreatDsc_sint8			as	'Array_FindGreatDsc_sint8'
+public	FindGreatDsc_sint16			as	'Array_FindGreatDsc_sint16'
+public	FindGreatDsc_sint32			as	'Array_FindGreatDsc_sint32'
+public	FindGreatDsc_sint64			as	'Array_FindGreatDsc_sint64'
+public	FindGreatDsc_sint8			as	'_ZN5Array12FindGreatDscEPKama'
+public	FindGreatDsc_sint16			as	'_ZN5Array12FindGreatDscEPKsms'
+public	FindGreatDsc_sint32			as	'_ZN5Array12FindGreatDscEPKimi'
+public	FindGreatDsc_sint64			as	'_ZN5Array12FindGreatDscEPKxmx'
+
+; Other types
+public	FindGreatDsc_uint64			as	'Array_FindGreatDsc_size'
+public	FindGreatDsc_uint64			as	'_ZN5Array12FindGreatDscEPKmmm'
+
+;------------------------------------------------------------------------------;
+;       Searching for greater or equal element                                 ;
+;------------------------------------------------------------------------------;
+
+; Unsigned integer types
+public	FindGreatEqualDsc_uint8		as	'Array_FindGreatOrEqualDsc_uint8'
+public	FindGreatEqualDsc_uint16	as	'Array_FindGreatOrEqualDsc_uint16'
+public	FindGreatEqualDsc_uint32	as	'Array_FindGreatOrEqualDsc_uint32'
+public	FindGreatEqualDsc_uint64	as	'Array_FindGreatOrEqualDsc_uint64'
+public	FindGreatEqualDsc_uint8		as	'_ZN5Array19FindGreatOrEqualDscEPKhmh'
+public	FindGreatEqualDsc_uint16	as	'_ZN5Array19FindGreatOrEqualDscEPKtmt'
+public	FindGreatEqualDsc_uint32	as	'_ZN5Array19FindGreatOrEqualDscEPKjmj'
+public	FindGreatEqualDsc_uint64	as	'_ZN5Array19FindGreatOrEqualDscEPKymy'
+
+; Signed integer types
+public	FindGreatEqualDsc_sint8		as	'Array_FindGreatOrEqualDsc_sint8'
+public	FindGreatEqualDsc_sint16	as	'Array_FindGreatOrEqualDsc_sint16'
+public	FindGreatEqualDsc_sint32	as	'Array_FindGreatOrEqualDsc_sint32'
+public	FindGreatEqualDsc_sint64	as	'Array_FindGreatOrEqualDsc_sint64'
+public	FindGreatEqualDsc_sint8		as	'_ZN5Array19FindGreatOrEqualDscEPKama'
+public	FindGreatEqualDsc_sint16	as	'_ZN5Array19FindGreatOrEqualDscEPKsms'
+public	FindGreatEqualDsc_sint32	as	'_ZN5Array19FindGreatOrEqualDscEPKimi'
+public	FindGreatEqualDsc_sint64	as	'_ZN5Array19FindGreatOrEqualDscEPKxmx'
+
+; Other types
+public	FindGreatEqualDsc_uint64	as	'Array_FindGreatOrEqualDsc_size'
+public	FindGreatEqualDsc_uint64	as	'_ZN5Array19FindGreatOrEqualDscEPKmmm'
 
 ;******************************************************************************;
 ;       Sorting algorithms                                                     ;
@@ -954,8 +1226,8 @@ public	FindDsc_uint64			as	'_ZN5Array7FindDscEPKmmm'
 ;==============================================================================;
 ;       Mapping functions                                                      ;
 ;==============================================================================;
-public	Map_flt32				as	'_Map_flt32'
-public	Map_flt64				as	'_Map_flt64'
+public	Map_flt32					as	'_Map_flt32'
+public	Map_flt64					as	'_Map_flt64'
 
 ;==============================================================================;
 ;       Quick sort                                                             ;
@@ -970,68 +1242,68 @@ public	Map_flt64				as	'_Map_flt64'
 ;------------------------------------------------------------------------------;
 
 ; Unsigned integer types
-public	QuickSortAsc_uint8		as	'Array_QuickSortAsc_uint8'
-public	QuickSortAsc_uint16		as	'Array_QuickSortAsc_uint16'
-public	QuickSortAsc_uint32		as	'Array_QuickSortAsc_uint32'
-public	QuickSortAsc_uint64		as	'Array_QuickSortAsc_uint64'
-public	QuickSortAsc_uint8		as	'_ZN5Array12QuickSortAscEPhm'
-public	QuickSortAsc_uint16		as	'_ZN5Array12QuickSortAscEPtm'
-public	QuickSortAsc_uint32		as	'_ZN5Array12QuickSortAscEPjm'
-public	QuickSortAsc_uint64		as	'_ZN5Array12QuickSortAscEPym'
+public	QuickSortAsc_uint8			as	'Array_QuickSortAsc_uint8'
+public	QuickSortAsc_uint16			as	'Array_QuickSortAsc_uint16'
+public	QuickSortAsc_uint32			as	'Array_QuickSortAsc_uint32'
+public	QuickSortAsc_uint64			as	'Array_QuickSortAsc_uint64'
+public	QuickSortAsc_uint8			as	'_ZN5Array12QuickSortAscEPhm'
+public	QuickSortAsc_uint16			as	'_ZN5Array12QuickSortAscEPtm'
+public	QuickSortAsc_uint32			as	'_ZN5Array12QuickSortAscEPjm'
+public	QuickSortAsc_uint64			as	'_ZN5Array12QuickSortAscEPym'
 
 ; Signed integer types
-public	QuickSortAsc_sint8		as	'Array_QuickSortAsc_sint8'
-public	QuickSortAsc_sint16		as	'Array_QuickSortAsc_sint16'
-public	QuickSortAsc_sint32		as	'Array_QuickSortAsc_sint32'
-public	QuickSortAsc_sint64		as	'Array_QuickSortAsc_sint64'
-public	QuickSortAsc_sint8		as	'_ZN5Array12QuickSortAscEPam'
-public	QuickSortAsc_sint16		as	'_ZN5Array12QuickSortAscEPsm'
-public	QuickSortAsc_sint32		as	'_ZN5Array12QuickSortAscEPim'
-public	QuickSortAsc_sint64		as	'_ZN5Array12QuickSortAscEPxm'
+public	QuickSortAsc_sint8			as	'Array_QuickSortAsc_sint8'
+public	QuickSortAsc_sint16			as	'Array_QuickSortAsc_sint16'
+public	QuickSortAsc_sint32			as	'Array_QuickSortAsc_sint32'
+public	QuickSortAsc_sint64			as	'Array_QuickSortAsc_sint64'
+public	QuickSortAsc_sint8			as	'_ZN5Array12QuickSortAscEPam'
+public	QuickSortAsc_sint16			as	'_ZN5Array12QuickSortAscEPsm'
+public	QuickSortAsc_sint32			as	'_ZN5Array12QuickSortAscEPim'
+public	QuickSortAsc_sint64			as	'_ZN5Array12QuickSortAscEPxm'
 
 ; Floating-point types
-public	QuickSortAsc_flt32		as	'Array_QuickSortAsc_flt32'
-public	QuickSortAsc_flt64		as	'Array_QuickSortAsc_flt64'
-public	QuickSortAsc_flt32		as	'_ZN5Array12QuickSortAscEPfm'
-public	QuickSortAsc_flt64		as	'_ZN5Array12QuickSortAscEPdm'
+public	QuickSortAsc_flt32			as	'Array_QuickSortAsc_flt32'
+public	QuickSortAsc_flt64			as	'Array_QuickSortAsc_flt64'
+public	QuickSortAsc_flt32			as	'_ZN5Array12QuickSortAscEPfm'
+public	QuickSortAsc_flt64			as	'_ZN5Array12QuickSortAscEPdm'
 
 ; Other types
-public	QuickSortAsc_uint64		as	'Array_QuickSortAsc_size'
-public	QuickSortAsc_uint64		as	'_ZN5Array12QuickSortAscEPmm'
+public	QuickSortAsc_uint64			as	'Array_QuickSortAsc_size'
+public	QuickSortAsc_uint64			as	'_ZN5Array12QuickSortAscEPmm'
 
 ;------------------------------------------------------------------------------;
 ;       Descending sort order                                                  ;
 ;------------------------------------------------------------------------------;
 
 ; Unsigned integer types
-public	QuickSortDsc_uint8		as	'Array_QuickSortDsc_uint8'
-public	QuickSortDsc_uint16		as	'Array_QuickSortDsc_uint16'
-public	QuickSortDsc_uint32		as	'Array_QuickSortDsc_uint32'
-public	QuickSortDsc_uint64		as	'Array_QuickSortDsc_uint64'
-public	QuickSortDsc_uint8		as	'_ZN5Array12QuickSortDscEPhm'
-public	QuickSortDsc_uint16		as	'_ZN5Array12QuickSortDscEPtm'
-public	QuickSortDsc_uint32		as	'_ZN5Array12QuickSortDscEPjm'
-public	QuickSortDsc_uint64		as	'_ZN5Array12QuickSortDscEPym'
+public	QuickSortDsc_uint8			as	'Array_QuickSortDsc_uint8'
+public	QuickSortDsc_uint16			as	'Array_QuickSortDsc_uint16'
+public	QuickSortDsc_uint32			as	'Array_QuickSortDsc_uint32'
+public	QuickSortDsc_uint64			as	'Array_QuickSortDsc_uint64'
+public	QuickSortDsc_uint8			as	'_ZN5Array12QuickSortDscEPhm'
+public	QuickSortDsc_uint16			as	'_ZN5Array12QuickSortDscEPtm'
+public	QuickSortDsc_uint32			as	'_ZN5Array12QuickSortDscEPjm'
+public	QuickSortDsc_uint64			as	'_ZN5Array12QuickSortDscEPym'
 
 ; Signed integer types
-public	QuickSortDsc_sint8		as	'Array_QuickSortDsc_sint8'
-public	QuickSortDsc_sint16		as	'Array_QuickSortDsc_sint16'
-public	QuickSortDsc_sint32		as	'Array_QuickSortDsc_sint32'
-public	QuickSortDsc_sint64		as	'Array_QuickSortDsc_sint64'
-public	QuickSortDsc_sint8		as	'_ZN5Array12QuickSortDscEPam'
-public	QuickSortDsc_sint16		as	'_ZN5Array12QuickSortDscEPsm'
-public	QuickSortDsc_sint32		as	'_ZN5Array12QuickSortDscEPim'
-public	QuickSortDsc_sint64		as	'_ZN5Array12QuickSortDscEPxm'
+public	QuickSortDsc_sint8			as	'Array_QuickSortDsc_sint8'
+public	QuickSortDsc_sint16			as	'Array_QuickSortDsc_sint16'
+public	QuickSortDsc_sint32			as	'Array_QuickSortDsc_sint32'
+public	QuickSortDsc_sint64			as	'Array_QuickSortDsc_sint64'
+public	QuickSortDsc_sint8			as	'_ZN5Array12QuickSortDscEPam'
+public	QuickSortDsc_sint16			as	'_ZN5Array12QuickSortDscEPsm'
+public	QuickSortDsc_sint32			as	'_ZN5Array12QuickSortDscEPim'
+public	QuickSortDsc_sint64			as	'_ZN5Array12QuickSortDscEPxm'
 
 ; Floating-point types
-public	QuickSortDsc_flt32		as	'Array_QuickSortDsc_flt32'
-public	QuickSortDsc_flt64		as	'Array_QuickSortDsc_flt64'
-public	QuickSortDsc_flt32		as	'_ZN5Array12QuickSortDscEPfm'
-public	QuickSortDsc_flt64		as	'_ZN5Array12QuickSortDscEPdm'
+public	QuickSortDsc_flt32			as	'Array_QuickSortDsc_flt32'
+public	QuickSortDsc_flt64			as	'Array_QuickSortDsc_flt64'
+public	QuickSortDsc_flt32			as	'_ZN5Array12QuickSortDscEPfm'
+public	QuickSortDsc_flt64			as	'_ZN5Array12QuickSortDscEPdm'
 
 ; Other types
-public	QuickSortDsc_uint64		as	'Array_QuickSortDsc_size'
-public	QuickSortDsc_uint64		as	'_ZN5Array12QuickSortDscEPmm'
+public	QuickSortDsc_uint64			as	'Array_QuickSortDsc_size'
+public	QuickSortDsc_uint64			as	'_ZN5Array12QuickSortDscEPmm'
 
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 ;       Key sorting                                                            ;
@@ -1042,68 +1314,68 @@ public	QuickSortDsc_uint64		as	'_ZN5Array12QuickSortDscEPmm'
 ;------------------------------------------------------------------------------;
 
 ; Unsigned integer types
-public	QuickSortKeyAsc_uint8	as	'Array_QuickSortKeyAsc_uint8'
-public	QuickSortKeyAsc_uint16	as	'Array_QuickSortKeyAsc_uint16'
-public	QuickSortKeyAsc_uint32	as	'Array_QuickSortKeyAsc_uint32'
-public	QuickSortKeyAsc_uint64	as	'Array_QuickSortKeyAsc_uint64'
-public	QuickSortKeyAsc_uint8	as	'_ZN5Array12QuickSortAscEPhPPKvm'
-public	QuickSortKeyAsc_uint16	as	'_ZN5Array12QuickSortAscEPtPPKvm'
-public	QuickSortKeyAsc_uint32	as	'_ZN5Array12QuickSortAscEPjPPKvm'
-public	QuickSortKeyAsc_uint64	as	'_ZN5Array12QuickSortAscEPyPPKvm'
+public	QuickSortKeyAsc_uint8		as	'Array_QuickSortKeyAsc_uint8'
+public	QuickSortKeyAsc_uint16		as	'Array_QuickSortKeyAsc_uint16'
+public	QuickSortKeyAsc_uint32		as	'Array_QuickSortKeyAsc_uint32'
+public	QuickSortKeyAsc_uint64		as	'Array_QuickSortKeyAsc_uint64'
+public	QuickSortKeyAsc_uint8		as	'_ZN5Array12QuickSortAscEPhPPKvm'
+public	QuickSortKeyAsc_uint16		as	'_ZN5Array12QuickSortAscEPtPPKvm'
+public	QuickSortKeyAsc_uint32		as	'_ZN5Array12QuickSortAscEPjPPKvm'
+public	QuickSortKeyAsc_uint64		as	'_ZN5Array12QuickSortAscEPyPPKvm'
 
 ; Signed integer types
-public	QuickSortKeyAsc_sint8	as	'Array_QuickSortKeyAsc_sint8'
-public	QuickSortKeyAsc_sint16	as	'Array_QuickSortKeyAsc_sint16'
-public	QuickSortKeyAsc_sint32	as	'Array_QuickSortKeyAsc_sint32'
-public	QuickSortKeyAsc_sint64	as	'Array_QuickSortKeyAsc_sint64'
-public	QuickSortKeyAsc_sint8	as	'_ZN5Array12QuickSortAscEPaPPKvm'
-public	QuickSortKeyAsc_sint16	as	'_ZN5Array12QuickSortAscEPsPPKvm'
-public	QuickSortKeyAsc_sint32	as	'_ZN5Array12QuickSortAscEPiPPKvm'
-public	QuickSortKeyAsc_sint64	as	'_ZN5Array12QuickSortAscEPxPPKvvm'
+public	QuickSortKeyAsc_sint8		as	'Array_QuickSortKeyAsc_sint8'
+public	QuickSortKeyAsc_sint16		as	'Array_QuickSortKeyAsc_sint16'
+public	QuickSortKeyAsc_sint32		as	'Array_QuickSortKeyAsc_sint32'
+public	QuickSortKeyAsc_sint64		as	'Array_QuickSortKeyAsc_sint64'
+public	QuickSortKeyAsc_sint8		as	'_ZN5Array12QuickSortAscEPaPPKvm'
+public	QuickSortKeyAsc_sint16		as	'_ZN5Array12QuickSortAscEPsPPKvm'
+public	QuickSortKeyAsc_sint32		as	'_ZN5Array12QuickSortAscEPiPPKvm'
+public	QuickSortKeyAsc_sint64		as	'_ZN5Array12QuickSortAscEPxPPKvvm'
 
 ; Floating-point types
-public	QuickSortKeyAsc_flt32	as	'Array_QuickSortKeyAsc_flt32'
-public	QuickSortKeyAsc_flt64	as	'Array_QuickSortKeyAsc_flt64'
-public	QuickSortKeyAsc_flt32	as	'_ZN5Array12QuickSortAscEPfPPKvm'
-public	QuickSortKeyAsc_flt64	as	'_ZN5Array12QuickSortAscEPdPPKvm'
+public	QuickSortKeyAsc_flt32		as	'Array_QuickSortKeyAsc_flt32'
+public	QuickSortKeyAsc_flt64		as	'Array_QuickSortKeyAsc_flt64'
+public	QuickSortKeyAsc_flt32		as	'_ZN5Array12QuickSortAscEPfPPKvm'
+public	QuickSortKeyAsc_flt64		as	'_ZN5Array12QuickSortAscEPdPPKvm'
 
 ; Other types
-public	QuickSortKeyAsc_uint64	as	'Array_QuickSortKeyAsc_size'
-public	QuickSortKeyAsc_uint64	as	'_ZN5Array12QuickSortAscEPmPPKvm'
+public	QuickSortKeyAsc_uint64		as	'Array_QuickSortKeyAsc_size'
+public	QuickSortKeyAsc_uint64		as	'_ZN5Array12QuickSortAscEPmPPKvm'
 
 ;------------------------------------------------------------------------------;
 ;       Descending sort order                                                  ;
 ;------------------------------------------------------------------------------;
 
 ; Unsigned integer types
-public	QuickSortKeyDsc_uint8	as	'Array_QuickSortKeyDsc_uint8'
-public	QuickSortKeyDsc_uint16	as	'Array_QuickSortKeyDsc_uint16'
-public	QuickSortKeyDsc_uint32	as	'Array_QuickSortKeyDsc_uint32'
-public	QuickSortKeyDsc_uint64	as	'Array_QuickSortKeyDsc_uint64'
-public	QuickSortKeyDsc_uint8	as	'_ZN5Array12QuickSortDscEPhPPKvm'
-public	QuickSortKeyDsc_uint16	as	'_ZN5Array12QuickSortDscEPtPPKvm'
-public	QuickSortKeyDsc_uint32	as	'_ZN5Array12QuickSortDscEPjPPKvm'
-public	QuickSortKeyDsc_uint64	as	'_ZN5Array12QuickSortDscEPyPPKvm'
+public	QuickSortKeyDsc_uint8		as	'Array_QuickSortKeyDsc_uint8'
+public	QuickSortKeyDsc_uint16		as	'Array_QuickSortKeyDsc_uint16'
+public	QuickSortKeyDsc_uint32		as	'Array_QuickSortKeyDsc_uint32'
+public	QuickSortKeyDsc_uint64		as	'Array_QuickSortKeyDsc_uint64'
+public	QuickSortKeyDsc_uint8		as	'_ZN5Array12QuickSortDscEPhPPKvm'
+public	QuickSortKeyDsc_uint16		as	'_ZN5Array12QuickSortDscEPtPPKvm'
+public	QuickSortKeyDsc_uint32		as	'_ZN5Array12QuickSortDscEPjPPKvm'
+public	QuickSortKeyDsc_uint64		as	'_ZN5Array12QuickSortDscEPyPPKvm'
 
 ; Signed integer types
-public	QuickSortKeyDsc_sint8	as	'Array_QuickSortKeyDsc_sint8'
-public	QuickSortKeyDsc_sint16	as	'Array_QuickSortKeyDsc_sint16'
-public	QuickSortKeyDsc_sint32	as	'Array_QuickSortKeyDsc_sint32'
-public	QuickSortKeyDsc_sint64	as	'Array_QuickSortKeyDsc_sint64'
-public	QuickSortKeyDsc_sint8	as	'_ZN5Array12QuickSortDscEPaPPKvm'
-public	QuickSortKeyDsc_sint16	as	'_ZN5Array12QuickSortDscEPsPPKvm'
-public	QuickSortKeyDsc_sint32	as	'_ZN5Array12QuickSortDscEPiPPKvm'
-public	QuickSortKeyDsc_sint64	as	'_ZN5Array12QuickSortDscEPxPPKvm'
+public	QuickSortKeyDsc_sint8		as	'Array_QuickSortKeyDsc_sint8'
+public	QuickSortKeyDsc_sint16		as	'Array_QuickSortKeyDsc_sint16'
+public	QuickSortKeyDsc_sint32		as	'Array_QuickSortKeyDsc_sint32'
+public	QuickSortKeyDsc_sint64		as	'Array_QuickSortKeyDsc_sint64'
+public	QuickSortKeyDsc_sint8		as	'_ZN5Array12QuickSortDscEPaPPKvm'
+public	QuickSortKeyDsc_sint16		as	'_ZN5Array12QuickSortDscEPsPPKvm'
+public	QuickSortKeyDsc_sint32		as	'_ZN5Array12QuickSortDscEPiPPKvm'
+public	QuickSortKeyDsc_sint64		as	'_ZN5Array12QuickSortDscEPxPPKvm'
 
 ; Floating-point types
-public	QuickSortKeyDsc_flt32	as	'Array_QuickSortKeyDsc_flt32'
-public	QuickSortKeyDsc_flt64	as	'Array_QuickSortKeyDsc_flt64'
-public	QuickSortKeyDsc_flt32	as	'_ZN5Array12QuickSortDscEPfPPKvm'
-public	QuickSortKeyDsc_flt64	as	'_ZN5Array12QuickSortDscEPdPPKvm'
+public	QuickSortKeyDsc_flt32		as	'Array_QuickSortKeyDsc_flt32'
+public	QuickSortKeyDsc_flt64		as	'Array_QuickSortKeyDsc_flt64'
+public	QuickSortKeyDsc_flt32		as	'_ZN5Array12QuickSortDscEPfPPKvm'
+public	QuickSortKeyDsc_flt64		as	'_ZN5Array12QuickSortDscEPdPPKvm'
 
 ; Other types
-public	QuickSortKeyDsc_uint64	as	'Array_QuickSortKeyDsc_size'
-public	QuickSortKeyDsc_uint64	as	'_ZN5Array12QuickSortDscEPmPPKvm'
+public	QuickSortKeyDsc_uint64		as	'Array_QuickSortKeyDsc_size'
+public	QuickSortKeyDsc_uint64		as	'_ZN5Array12QuickSortDscEPmPPKvm'
 
 ;==============================================================================;
 ;       Radix sort                                                             ;
@@ -1118,68 +1390,68 @@ public	QuickSortKeyDsc_uint64	as	'_ZN5Array12QuickSortDscEPmPPKvm'
 ;------------------------------------------------------------------------------;
 
 ; Unsigned integer types
-public	RadixSortAsc_uint8		as	'Array_RadixSortAsc_uint8'
-public	RadixSortAsc_uint16		as	'Array_RadixSortAsc_uint16'
-public	RadixSortAsc_uint32		as	'Array_RadixSortAsc_uint32'
-public	RadixSortAsc_uint64		as	'Array_RadixSortAsc_uint64'
-public	RadixSortAsc_uint8		as	'_ZN5Array12RadixSortAscEPhS0_m'
-public	RadixSortAsc_uint16		as	'_ZN5Array12RadixSortAscEPtS0_m'
-public	RadixSortAsc_uint32		as	'_ZN5Array12RadixSortAscEPjS0_m'
-public	RadixSortAsc_uint64		as	'_ZN5Array12RadixSortAscEPyS0_m'
+public	RadixSortAsc_uint8			as	'Array_RadixSortAsc_uint8'
+public	RadixSortAsc_uint16			as	'Array_RadixSortAsc_uint16'
+public	RadixSortAsc_uint32			as	'Array_RadixSortAsc_uint32'
+public	RadixSortAsc_uint64			as	'Array_RadixSortAsc_uint64'
+public	RadixSortAsc_uint8			as	'_ZN5Array12RadixSortAscEPhS0_m'
+public	RadixSortAsc_uint16			as	'_ZN5Array12RadixSortAscEPtS0_m'
+public	RadixSortAsc_uint32			as	'_ZN5Array12RadixSortAscEPjS0_m'
+public	RadixSortAsc_uint64			as	'_ZN5Array12RadixSortAscEPyS0_m'
 
 ; Signed integer types
-public	RadixSortAsc_sint8		as	'Array_RadixSortAsc_sint8'
-public	RadixSortAsc_sint16		as	'Array_RadixSortAsc_sint16'
-public	RadixSortAsc_sint32		as	'Array_RadixSortAsc_sint32'
-public	RadixSortAsc_sint64		as	'Array_RadixSortAsc_sint64'
-public	RadixSortAsc_sint8		as	'_ZN5Array12RadixSortAscEPaS0_m'
-public	RadixSortAsc_sint16		as	'_ZN5Array12RadixSortAscEPsS0_m'
-public	RadixSortAsc_sint32		as	'_ZN5Array12RadixSortAscEPiS0_m'
-public	RadixSortAsc_sint64		as	'_ZN5Array12RadixSortAscEPxS0_m'
+public	RadixSortAsc_sint8			as	'Array_RadixSortAsc_sint8'
+public	RadixSortAsc_sint16			as	'Array_RadixSortAsc_sint16'
+public	RadixSortAsc_sint32			as	'Array_RadixSortAsc_sint32'
+public	RadixSortAsc_sint64			as	'Array_RadixSortAsc_sint64'
+public	RadixSortAsc_sint8			as	'_ZN5Array12RadixSortAscEPaS0_m'
+public	RadixSortAsc_sint16			as	'_ZN5Array12RadixSortAscEPsS0_m'
+public	RadixSortAsc_sint32			as	'_ZN5Array12RadixSortAscEPiS0_m'
+public	RadixSortAsc_sint64			as	'_ZN5Array12RadixSortAscEPxS0_m'
 
 ; Floating-point types
-public	RadixSortAsc_flt32		as	'Array_RadixSortAsc_flt32'
-public	RadixSortAsc_flt64		as	'Array_RadixSortAsc_flt64'
-public	RadixSortAsc_flt32		as	'_ZN5Array12RadixSortAscEPfS0_m'
-public	RadixSortAsc_flt64		as	'_ZN5Array12RadixSortAscEPdS0_m'
+public	RadixSortAsc_flt32			as	'Array_RadixSortAsc_flt32'
+public	RadixSortAsc_flt64			as	'Array_RadixSortAsc_flt64'
+public	RadixSortAsc_flt32			as	'_ZN5Array12RadixSortAscEPfS0_m'
+public	RadixSortAsc_flt64			as	'_ZN5Array12RadixSortAscEPdS0_m'
 
 ; Other types
-public	RadixSortAsc_uint64		as	'Array_RadixSortAsc_size'
-public	RadixSortAsc_uint64		as	'_ZN5Array12RadixSortAscEPmS0_m'
+public	RadixSortAsc_uint64			as	'Array_RadixSortAsc_size'
+public	RadixSortAsc_uint64			as	'_ZN5Array12RadixSortAscEPmS0_m'
 
 ;------------------------------------------------------------------------------;
 ;       Descending sort order                                                  ;
 ;------------------------------------------------------------------------------;
 
 ; Unsigned integer types
-public	RadixSortDsc_uint8		as	'Array_RadixSortDsc_uint8'
-public	RadixSortDsc_uint16		as	'Array_RadixSortDsc_uint16'
-public	RadixSortDsc_uint32		as	'Array_RadixSortDsc_uint32'
-public	RadixSortDsc_uint64		as	'Array_RadixSortDsc_uint64'
-public	RadixSortDsc_uint8		as	'_ZN5Array12RadixSortDscEPhS0_m'
-public	RadixSortDsc_uint16		as	'_ZN5Array12RadixSortDscEPtS0_m'
-public	RadixSortDsc_uint32		as	'_ZN5Array12RadixSortDscEPjS0_m'
-public	RadixSortDsc_uint64		as	'_ZN5Array12RadixSortDscEPyS0_m'
+public	RadixSortDsc_uint8			as	'Array_RadixSortDsc_uint8'
+public	RadixSortDsc_uint16			as	'Array_RadixSortDsc_uint16'
+public	RadixSortDsc_uint32			as	'Array_RadixSortDsc_uint32'
+public	RadixSortDsc_uint64			as	'Array_RadixSortDsc_uint64'
+public	RadixSortDsc_uint8			as	'_ZN5Array12RadixSortDscEPhS0_m'
+public	RadixSortDsc_uint16			as	'_ZN5Array12RadixSortDscEPtS0_m'
+public	RadixSortDsc_uint32			as	'_ZN5Array12RadixSortDscEPjS0_m'
+public	RadixSortDsc_uint64			as	'_ZN5Array12RadixSortDscEPyS0_m'
 
 ; Signed integer types
-public	RadixSortDsc_sint8		as	'Array_RadixSortDsc_sint8'
-public	RadixSortDsc_sint16		as	'Array_RadixSortDsc_sint16'
-public	RadixSortDsc_sint32		as	'Array_RadixSortDsc_sint32'
-public	RadixSortDsc_sint64		as	'Array_RadixSortDsc_sint64'
-public	RadixSortDsc_sint8		as	'_ZN5Array12RadixSortDscEPaS0_m'
-public	RadixSortDsc_sint16		as	'_ZN5Array12RadixSortDscEPsS0_m'
-public	RadixSortDsc_sint32		as	'_ZN5Array12RadixSortDscEPiS0_m'
-public	RadixSortDsc_sint64		as	'_ZN5Array12RadixSortDscEPxS0_m'
+public	RadixSortDsc_sint8			as	'Array_RadixSortDsc_sint8'
+public	RadixSortDsc_sint16			as	'Array_RadixSortDsc_sint16'
+public	RadixSortDsc_sint32			as	'Array_RadixSortDsc_sint32'
+public	RadixSortDsc_sint64			as	'Array_RadixSortDsc_sint64'
+public	RadixSortDsc_sint8			as	'_ZN5Array12RadixSortDscEPaS0_m'
+public	RadixSortDsc_sint16			as	'_ZN5Array12RadixSortDscEPsS0_m'
+public	RadixSortDsc_sint32			as	'_ZN5Array12RadixSortDscEPiS0_m'
+public	RadixSortDsc_sint64			as	'_ZN5Array12RadixSortDscEPxS0_m'
 
 ; Floating-point types
-public	RadixSortDsc_flt32		as	'Array_RadixSortDsc_flt32'
-public	RadixSortDsc_flt64		as	'Array_RadixSortDsc_flt64'
-public	RadixSortDsc_flt32		as	'_ZN5Array12RadixSortDscEPfS0_m'
-public	RadixSortDsc_flt64		as	'_ZN5Array12RadixSortDscEPdS0_m'
+public	RadixSortDsc_flt32			as	'Array_RadixSortDsc_flt32'
+public	RadixSortDsc_flt64			as	'Array_RadixSortDsc_flt64'
+public	RadixSortDsc_flt32			as	'_ZN5Array12RadixSortDscEPfS0_m'
+public	RadixSortDsc_flt64			as	'_ZN5Array12RadixSortDscEPdS0_m'
 
 ; Other types
-public	RadixSortDsc_uint64		as	'Array_RadixSortDsc_size'
-public	RadixSortDsc_uint64		as	'_ZN5Array12RadixSortDscEPmS0_m'
+public	RadixSortDsc_uint64			as	'Array_RadixSortDsc_size'
+public	RadixSortDsc_uint64			as	'_ZN5Array12RadixSortDscEPmS0_m'
 
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 ;       Key sorting                                                            ;
@@ -1190,68 +1462,68 @@ public	RadixSortDsc_uint64		as	'_ZN5Array12RadixSortDscEPmS0_m'
 ;------------------------------------------------------------------------------;
 
 ; Unsigned integer types
-public	RadixSortKeyAsc_uint8	as	'Array_RadixSortKeyAsc_uint8'
-public	RadixSortKeyAsc_uint16	as	'Array_RadixSortKeyAsc_uint16'
-public	RadixSortKeyAsc_uint32	as	'Array_RadixSortKeyAsc_uint32'
-public	RadixSortKeyAsc_uint64	as	'Array_RadixSortKeyAsc_uint64'
-public	RadixSortKeyAsc_uint8	as	'_ZN5Array12RadixSortAscEPhS0_PPKvS3_m'
-public	RadixSortKeyAsc_uint16	as	'_ZN5Array12RadixSortAscEPtS0_PPKvS3_m'
-public	RadixSortKeyAsc_uint32	as	'_ZN5Array12RadixSortAscEPjS0_PPKvS3_m'
-public	RadixSortKeyAsc_uint64	as	'_ZN5Array12RadixSortAscEPyS0_PPKvS3_m'
+public	RadixSortKeyAsc_uint8		as	'Array_RadixSortKeyAsc_uint8'
+public	RadixSortKeyAsc_uint16		as	'Array_RadixSortKeyAsc_uint16'
+public	RadixSortKeyAsc_uint32		as	'Array_RadixSortKeyAsc_uint32'
+public	RadixSortKeyAsc_uint64		as	'Array_RadixSortKeyAsc_uint64'
+public	RadixSortKeyAsc_uint8		as	'_ZN5Array12RadixSortAscEPhS0_PPKvS3_m'
+public	RadixSortKeyAsc_uint16		as	'_ZN5Array12RadixSortAscEPtS0_PPKvS3_m'
+public	RadixSortKeyAsc_uint32		as	'_ZN5Array12RadixSortAscEPjS0_PPKvS3_m'
+public	RadixSortKeyAsc_uint64		as	'_ZN5Array12RadixSortAscEPyS0_PPKvS3_m'
 
 ; Signed integer types
-public	RadixSortKeyAsc_sint8	as	'Array_RadixSortKeyAsc_sint8'
-public	RadixSortKeyAsc_sint16	as	'Array_RadixSortKeyAsc_sint16'
-public	RadixSortKeyAsc_sint32	as	'Array_RadixSortKeyAsc_sint32'
-public	RadixSortKeyAsc_sint64	as	'Array_RadixSortKeyAsc_sint64'
-public	RadixSortKeyAsc_sint8	as	'_ZN5Array12RadixSortAscEPaS0_PPKvS3_m'
-public	RadixSortKeyAsc_sint16	as	'_ZN5Array12RadixSortAscEPsS0_PPKvS3_m'
-public	RadixSortKeyAsc_sint32	as	'_ZN5Array12RadixSortAscEPiS0_PPKvS3_m'
-public	RadixSortKeyAsc_sint64	as	'_ZN5Array12RadixSortAscEPxS0_PPKvS3_m'
+public	RadixSortKeyAsc_sint8		as	'Array_RadixSortKeyAsc_sint8'
+public	RadixSortKeyAsc_sint16		as	'Array_RadixSortKeyAsc_sint16'
+public	RadixSortKeyAsc_sint32		as	'Array_RadixSortKeyAsc_sint32'
+public	RadixSortKeyAsc_sint64		as	'Array_RadixSortKeyAsc_sint64'
+public	RadixSortKeyAsc_sint8		as	'_ZN5Array12RadixSortAscEPaS0_PPKvS3_m'
+public	RadixSortKeyAsc_sint16		as	'_ZN5Array12RadixSortAscEPsS0_PPKvS3_m'
+public	RadixSortKeyAsc_sint32		as	'_ZN5Array12RadixSortAscEPiS0_PPKvS3_m'
+public	RadixSortKeyAsc_sint64		as	'_ZN5Array12RadixSortAscEPxS0_PPKvS3_m'
 
 ; Floating-point types
-public	RadixSortKeyAsc_flt32	as	'Array_RadixSortKeyAsc_flt32'
-public	RadixSortKeyAsc_flt64	as	'Array_RadixSortKeyAsc_flt64'
-public	RadixSortKeyAsc_flt32	as	'_ZN5Array12RadixSortAscEPfS0_PPKvS3_m'
-public	RadixSortKeyAsc_flt64	as	'_ZN5Array12RadixSortAscEPdS0_PPKvS3_m'
+public	RadixSortKeyAsc_flt32		as	'Array_RadixSortKeyAsc_flt32'
+public	RadixSortKeyAsc_flt64		as	'Array_RadixSortKeyAsc_flt64'
+public	RadixSortKeyAsc_flt32		as	'_ZN5Array12RadixSortAscEPfS0_PPKvS3_m'
+public	RadixSortKeyAsc_flt64		as	'_ZN5Array12RadixSortAscEPdS0_PPKvS3_m'
 
 ; Other types
-public	RadixSortKeyAsc_uint64	as	'Array_RadixSortKeyAsc_size'
-public	RadixSortKeyAsc_uint64	as	'_ZN5Array12RadixSortAscEPmS0_PPKvS3_m'
+public	RadixSortKeyAsc_uint64		as	'Array_RadixSortKeyAsc_size'
+public	RadixSortKeyAsc_uint64		as	'_ZN5Array12RadixSortAscEPmS0_PPKvS3_m'
 
 ;------------------------------------------------------------------------------;
 ;       Descending sort order                                                  ;
 ;------------------------------------------------------------------------------;
 
 ; Unsigned integer types
-public	RadixSortKeyDsc_uint8	as	'Array_RadixSortKeyDsc_uint8'
-public	RadixSortKeyDsc_uint16	as	'Array_RadixSortKeyDsc_uint16'
-public	RadixSortKeyDsc_uint32	as	'Array_RadixSortKeyDsc_uint32'
-public	RadixSortKeyDsc_uint64	as	'Array_RadixSortKeyDsc_uint64'
-public	RadixSortKeyDsc_uint8	as	'_ZN5Array12RadixSortDscEPhS0_PPKvS3_m'
-public	RadixSortKeyDsc_uint16	as	'_ZN5Array12RadixSortDscEPtS0_PPKvS3_m'
-public	RadixSortKeyDsc_uint32	as	'_ZN5Array12RadixSortDscEPjS0_PPKvS3_m'
-public	RadixSortKeyDsc_uint64	as	'_ZN5Array12RadixSortDscEPyS0_PPKvS3_m'
+public	RadixSortKeyDsc_uint8		as	'Array_RadixSortKeyDsc_uint8'
+public	RadixSortKeyDsc_uint16		as	'Array_RadixSortKeyDsc_uint16'
+public	RadixSortKeyDsc_uint32		as	'Array_RadixSortKeyDsc_uint32'
+public	RadixSortKeyDsc_uint64		as	'Array_RadixSortKeyDsc_uint64'
+public	RadixSortKeyDsc_uint8		as	'_ZN5Array12RadixSortDscEPhS0_PPKvS3_m'
+public	RadixSortKeyDsc_uint16		as	'_ZN5Array12RadixSortDscEPtS0_PPKvS3_m'
+public	RadixSortKeyDsc_uint32		as	'_ZN5Array12RadixSortDscEPjS0_PPKvS3_m'
+public	RadixSortKeyDsc_uint64		as	'_ZN5Array12RadixSortDscEPyS0_PPKvS3_m'
 
 ; Signed integer types
-public	RadixSortKeyDsc_sint8	as	'Array_RadixSortKeyDsc_sint8'
-public	RadixSortKeyDsc_sint16	as	'Array_RadixSortKeyDsc_sint16'
-public	RadixSortKeyDsc_sint32	as	'Array_RadixSortKeyDsc_sint32'
-public	RadixSortKeyDsc_sint64	as	'Array_RadixSortKeyDsc_sint64'
-public	RadixSortKeyDsc_sint8	as	'_ZN5Array12RadixSortDscEPaS0_PPKvS3_m'
-public	RadixSortKeyDsc_sint16	as	'_ZN5Array12RadixSortDscEPsS0_PPKvS3_m'
-public	RadixSortKeyDsc_sint32	as	'_ZN5Array12RadixSortDscEPiS0_PPKvS3_m'
-public	RadixSortKeyDsc_sint64	as	'_ZN5Array12RadixSortDscEPxS0_PPKvS3_m'
+public	RadixSortKeyDsc_sint8		as	'Array_RadixSortKeyDsc_sint8'
+public	RadixSortKeyDsc_sint16		as	'Array_RadixSortKeyDsc_sint16'
+public	RadixSortKeyDsc_sint32		as	'Array_RadixSortKeyDsc_sint32'
+public	RadixSortKeyDsc_sint64		as	'Array_RadixSortKeyDsc_sint64'
+public	RadixSortKeyDsc_sint8		as	'_ZN5Array12RadixSortDscEPaS0_PPKvS3_m'
+public	RadixSortKeyDsc_sint16		as	'_ZN5Array12RadixSortDscEPsS0_PPKvS3_m'
+public	RadixSortKeyDsc_sint32		as	'_ZN5Array12RadixSortDscEPiS0_PPKvS3_m'
+public	RadixSortKeyDsc_sint64		as	'_ZN5Array12RadixSortDscEPxS0_PPKvS3_m'
 
 ; Floating-point types
-public	RadixSortKeyDsc_flt32	as	'Array_RadixSortKeyDsc_flt32'
-public	RadixSortKeyDsc_flt64	as	'Array_RadixSortKeyDsc_flt64'
-public	RadixSortKeyDsc_flt32	as	'_ZN5Array12RadixSortDscEPfS0_PPKvS3_m'
-public	RadixSortKeyDsc_flt64	as	'_ZN5Array12RadixSortDscEPdS0_PPKvS3_m'
+public	RadixSortKeyDsc_flt32		as	'Array_RadixSortKeyDsc_flt32'
+public	RadixSortKeyDsc_flt64		as	'Array_RadixSortKeyDsc_flt64'
+public	RadixSortKeyDsc_flt32		as	'_ZN5Array12RadixSortDscEPfS0_PPKvS3_m'
+public	RadixSortKeyDsc_flt64		as	'_ZN5Array12RadixSortDscEPdS0_PPKvS3_m'
 
 ; Other types
-public	RadixSortKeyDsc_uint64	as	'Array_RadixSortKeyDsc_size'
-public	RadixSortKeyDsc_uint64	as	'_ZN5Array12RadixSortDscEPmS0_PPKvS3_m'
+public	RadixSortKeyDsc_uint64		as	'Array_RadixSortKeyDsc_size'
+public	RadixSortKeyDsc_uint64		as	'_ZN5Array12RadixSortDscEPmS0_PPKvS3_m'
 
 ;******************************************************************************;
 ;       Merging of sorted arrays                                               ;
@@ -1266,56 +1538,56 @@ public	RadixSortKeyDsc_uint64	as	'_ZN5Array12RadixSortDscEPmS0_PPKvS3_m'
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 
 ; Unsigned integer types
-public	MergeAsc_uint8			as	'Array_MergeAsc_uint8'
-public	MergeAsc_uint16			as	'Array_MergeAsc_uint16'
-public	MergeAsc_uint32			as	'Array_MergeAsc_uint32'
-public	MergeAsc_uint64			as	'Array_MergeAsc_uint64'
-public	MergeAsc_uint8			as	'_ZN5Array8MergeAscEPhPKhmS2_m'
-public	MergeAsc_uint16			as	'_ZN5Array8MergeAscEPtPKtmS2_m'
-public	MergeAsc_uint32			as	'_ZN5Array8MergeAscEPjPKjmS2_m'
-public	MergeAsc_uint64			as	'_ZN5Array8MergeAscEPyPKymS2_m'
+public	MergeAsc_uint8				as	'Array_MergeAsc_uint8'
+public	MergeAsc_uint16				as	'Array_MergeAsc_uint16'
+public	MergeAsc_uint32				as	'Array_MergeAsc_uint32'
+public	MergeAsc_uint64				as	'Array_MergeAsc_uint64'
+public	MergeAsc_uint8				as	'_ZN5Array8MergeAscEPhPKhmS2_m'
+public	MergeAsc_uint16				as	'_ZN5Array8MergeAscEPtPKtmS2_m'
+public	MergeAsc_uint32				as	'_ZN5Array8MergeAscEPjPKjmS2_m'
+public	MergeAsc_uint64				as	'_ZN5Array8MergeAscEPyPKymS2_m'
 
 ; Signed integer types
-public	MergeAsc_sint8			as	'Array_MergeAsc_sint8'
-public	MergeAsc_sint16			as	'Array_MergeAsc_sint16'
-public	MergeAsc_sint32			as	'Array_MergeAsc_sint32'
-public	MergeAsc_sint64			as	'Array_MergeAsc_sint64'
-public	MergeAsc_sint8			as	'_ZN5Array8MergeAscEPaPKamS2_m'
-public	MergeAsc_sint16			as	'_ZN5Array8MergeAscEPsPKsmS2_m'
-public	MergeAsc_sint32			as	'_ZN5Array8MergeAscEPiPKimS2_m'
-public	MergeAsc_sint64			as	'_ZN5Array8MergeAscEPxPKxmS2_m'
+public	MergeAsc_sint8				as	'Array_MergeAsc_sint8'
+public	MergeAsc_sint16				as	'Array_MergeAsc_sint16'
+public	MergeAsc_sint32				as	'Array_MergeAsc_sint32'
+public	MergeAsc_sint64				as	'Array_MergeAsc_sint64'
+public	MergeAsc_sint8				as	'_ZN5Array8MergeAscEPaPKamS2_m'
+public	MergeAsc_sint16				as	'_ZN5Array8MergeAscEPsPKsmS2_m'
+public	MergeAsc_sint32				as	'_ZN5Array8MergeAscEPiPKimS2_m'
+public	MergeAsc_sint64				as	'_ZN5Array8MergeAscEPxPKxmS2_m'
 
 ; Other types
-public	MergeAsc_uint64			as	'Array_MergeAsc_size'
-public	MergeAsc_uint64			as	'_ZN5Array8MergeAscEPmPKmmS2_m'
+public	MergeAsc_uint64				as	'Array_MergeAsc_size'
+public	MergeAsc_uint64				as	'_ZN5Array8MergeAscEPmPKmmS2_m'
 
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 ;       Descending sort order                                                  ;
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 
 ; Unsigned integer types
-public	MergeDsc_uint8			as	'Array_MergeDsc_uint8'
-public	MergeDsc_uint16			as	'Array_MergeDsc_uint16'
-public	MergeDsc_uint32			as	'Array_MergeDsc_uint32'
-public	MergeDsc_uint64			as	'Array_MergeDsc_uint64'
-public	MergeDsc_uint8			as	'_ZN5Array8MergeDscEPhPKhmS2_m'
-public	MergeDsc_uint16			as	'_ZN5Array8MergeDscEPtPKtmS2_m'
-public	MergeDsc_uint32			as	'_ZN5Array8MergeDscEPjPKjmS2_m'
-public	MergeDsc_uint64			as	'_ZN5Array8MergeDscEPyPKymS2_m'
+public	MergeDsc_uint8				as	'Array_MergeDsc_uint8'
+public	MergeDsc_uint16				as	'Array_MergeDsc_uint16'
+public	MergeDsc_uint32				as	'Array_MergeDsc_uint32'
+public	MergeDsc_uint64				as	'Array_MergeDsc_uint64'
+public	MergeDsc_uint8				as	'_ZN5Array8MergeDscEPhPKhmS2_m'
+public	MergeDsc_uint16				as	'_ZN5Array8MergeDscEPtPKtmS2_m'
+public	MergeDsc_uint32				as	'_ZN5Array8MergeDscEPjPKjmS2_m'
+public	MergeDsc_uint64				as	'_ZN5Array8MergeDscEPyPKymS2_m'
 
 ; Signed integer types
-public	MergeDsc_sint8			as	'Array_MergeDsc_sint8'
-public	MergeDsc_sint16			as	'Array_MergeDsc_sint16'
-public	MergeDsc_sint32			as	'Array_MergeDsc_sint32'
-public	MergeDsc_sint64			as	'Array_MergeDsc_sint64'
-public	MergeDsc_sint8			as	'_ZN5Array8MergeDscEPaPKamS2_m'
-public	MergeDsc_sint16			as	'_ZN5Array8MergeDscEPsPKsmS2_m'
-public	MergeDsc_sint32			as	'_ZN5Array8MergeDscEPiPKimS2_m'
-public	MergeDsc_sint64			as	'_ZN5Array8MergeDscEPxPKxmS2_m'
+public	MergeDsc_sint8				as	'Array_MergeDsc_sint8'
+public	MergeDsc_sint16				as	'Array_MergeDsc_sint16'
+public	MergeDsc_sint32				as	'Array_MergeDsc_sint32'
+public	MergeDsc_sint64				as	'Array_MergeDsc_sint64'
+public	MergeDsc_sint8				as	'_ZN5Array8MergeDscEPaPKamS2_m'
+public	MergeDsc_sint16				as	'_ZN5Array8MergeDscEPsPKsmS2_m'
+public	MergeDsc_sint32				as	'_ZN5Array8MergeDscEPiPKimS2_m'
+public	MergeDsc_sint64				as	'_ZN5Array8MergeDscEPxPKxmS2_m'
 
 ; Other types
-public	MergeDsc_uint64			as	'Array_MergeDsc_size'
-public	MergeDsc_uint64			as	'_ZN5Array8MergeDscEPmPKmmS2_m'
+public	MergeDsc_uint64				as	'Array_MergeDsc_size'
+public	MergeDsc_uint64				as	'_ZN5Array8MergeDscEPmPKmmS2_m'
 
 ;==============================================================================;
 ;       Key merging                                                            ;
@@ -1383,175 +1655,255 @@ public	MergeKeyDsc_uint64			as	'_ZN5Array8MergeDscEPmPPKvPKmS3_mS5_S3_m'
 ;******************************************************************************;
 
 ; Unsigned integer types
-public	Unique8					as	'Array_Unique_uint8'
-public	Unique16				as	'Array_Unique_uint16'
-public	Unique32				as	'Array_Unique_uint32'
-public	Unique64				as	'Array_Unique_uint64'
-public	Unique8					as	'_ZN5Array6UniqueEPhPKhm'
-public	Unique16				as	'_ZN5Array6UniqueEPtPKtm'
-public	Unique32				as	'_ZN5Array6UniqueEPjPKjm'
-public	Unique64				as	'_ZN5Array6UniqueEPyPKym'
+public	Unique8						as	'Array_Unique_uint8'
+public	Unique16					as	'Array_Unique_uint16'
+public	Unique32					as	'Array_Unique_uint32'
+public	Unique64					as	'Array_Unique_uint64'
+public	Unique8						as	'_ZN5Array6UniqueEPhPKhm'
+public	Unique16					as	'_ZN5Array6UniqueEPtPKtm'
+public	Unique32					as	'_ZN5Array6UniqueEPjPKjm'
+public	Unique64					as	'_ZN5Array6UniqueEPyPKym'
 
 ; Signed integer types
-public	Unique8					as	'Array_Unique_sint8'
-public	Unique16				as	'Array_Unique_sint16'
-public	Unique32				as	'Array_Unique_sint32'
-public	Unique64				as	'Array_Unique_sint64'
-public	Unique8					as	'_ZN5Array6UniqueEPaPKam'
-public	Unique16				as	'_ZN5Array6UniqueEPsPKsm'
-public	Unique32				as	'_ZN5Array6UniqueEPiPKim'
-public	Unique64				as	'_ZN5Array6UniqueEPxPKxm'
+public	Unique8						as	'Array_Unique_sint8'
+public	Unique16					as	'Array_Unique_sint16'
+public	Unique32					as	'Array_Unique_sint32'
+public	Unique64					as	'Array_Unique_sint64'
+public	Unique8						as	'_ZN5Array6UniqueEPaPKam'
+public	Unique16					as	'_ZN5Array6UniqueEPsPKsm'
+public	Unique32					as	'_ZN5Array6UniqueEPiPKim'
+public	Unique64					as	'_ZN5Array6UniqueEPxPKxm'
 
 ; Other types
-public	Unique64				as	'Array_Unique_size'
-public	Unique64				as	'_ZN5Array6UniqueEPmPKmm'
+public	Unique64					as	'Array_Unique_size'
+public	Unique64					as	'_ZN5Array6UniqueEPmPKmm'
 
 ;******************************************************************************;
 ;       Duplicate values                                                       ;
 ;******************************************************************************;
 
 ; Unsigned integer types
-public	Duplicates8				as	'Array_Duplicates_uint8'
-public	Duplicates16			as	'Array_Duplicates_uint16'
-public	Duplicates32			as	'Array_Duplicates_uint32'
-public	Duplicates64			as	'Array_Duplicates_uint64'
-public	Duplicates8				as	'_ZN5Array10DuplicatesEPhPmPKhm'
-public	Duplicates16			as	'_ZN5Array10DuplicatesEPtPmPKtm'
-public	Duplicates32			as	'_ZN5Array10DuplicatesEPjPmPKjm'
-public	Duplicates64			as	'_ZN5Array10DuplicatesEPyPmPKym'
+public	Duplicates8					as	'Array_Duplicates_uint8'
+public	Duplicates16				as	'Array_Duplicates_uint16'
+public	Duplicates32				as	'Array_Duplicates_uint32'
+public	Duplicates64				as	'Array_Duplicates_uint64'
+public	Duplicates8					as	'_ZN5Array10DuplicatesEPhPmPKhm'
+public	Duplicates16				as	'_ZN5Array10DuplicatesEPtPmPKtm'
+public	Duplicates32				as	'_ZN5Array10DuplicatesEPjPmPKjm'
+public	Duplicates64				as	'_ZN5Array10DuplicatesEPyPmPKym'
 
 ; Signed integer types
-public	Duplicates8				as	'Array_Duplicates_sint8'
-public	Duplicates16			as	'Array_Duplicates_sint16'
-public	Duplicates32			as	'Array_Duplicates_sint32'
-public	Duplicates64			as	'Array_Duplicates_sint64'
-public	Duplicates8				as	'_ZN5Array10DuplicatesEPaPmPKam'
-public	Duplicates16			as	'_ZN5Array10DuplicatesEPsPmPKsm'
-public	Duplicates32			as	'_ZN5Array10DuplicatesEPiPmPKim'
-public	Duplicates64			as	'_ZN5Array10DuplicatesEPxPmPKxm'
+public	Duplicates8					as	'Array_Duplicates_sint8'
+public	Duplicates16				as	'Array_Duplicates_sint16'
+public	Duplicates32				as	'Array_Duplicates_sint32'
+public	Duplicates64				as	'Array_Duplicates_sint64'
+public	Duplicates8					as	'_ZN5Array10DuplicatesEPaPmPKam'
+public	Duplicates16				as	'_ZN5Array10DuplicatesEPsPmPKsm'
+public	Duplicates32				as	'_ZN5Array10DuplicatesEPiPmPKim'
+public	Duplicates64				as	'_ZN5Array10DuplicatesEPxPmPKxm'
 
 ; Other types
-public	Duplicates64			as	'Array_Duplicates_size'
-public	Duplicates64			as	'_ZN5Array10DuplicatesEPmPmPKmm'
+public	Duplicates64				as	'Array_Duplicates_size'
+public	Duplicates64				as	'_ZN5Array10DuplicatesEPmPmPKmm'
 
 ;******************************************************************************;
 ;       Checks                                                                 ;
 ;******************************************************************************;
 
 ;==============================================================================;
+;       Check for sort order                                                   ;
+;==============================================================================;
+
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+;       Check for ascending sort order                                         ;
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+
+; Unsigned integer types
+public	CheckSortAsc_uint8			as	'Array_CheckSortAsc_uint8'
+public	CheckSortAsc_uint16			as	'Array_CheckSortAsc_uint16'
+public	CheckSortAsc_uint32			as	'Array_CheckSortAsc_uint32'
+public	CheckSortAsc_uint64			as	'Array_CheckSortAsc_uint64'
+public	CheckSortAsc_uint8			as	'_ZN5Array12CheckSortAscEPKhm'
+public	CheckSortAsc_uint16			as	'_ZN5Array12CheckSortAscEPKtm'
+public	CheckSortAsc_uint32			as	'_ZN5Array12CheckSortAscEPKjm'
+public	CheckSortAsc_uint64			as	'_ZN5Array12CheckSortAscEPKym'
+
+; Signed integer types
+public	CheckSortAsc_sint8			as	'Array_CheckSortAsc_sint8'
+public	CheckSortAsc_sint16			as	'Array_CheckSortAsc_sint16'
+public	CheckSortAsc_sint32			as	'Array_CheckSortAsc_sint32'
+public	CheckSortAsc_sint64			as	'Array_CheckSortAsc_sint64'
+public	CheckSortAsc_sint8			as	'_ZN5Array12CheckSortAscEPKam'
+public	CheckSortAsc_sint16			as	'_ZN5Array12CheckSortAscEPKsm'
+public	CheckSortAsc_sint32			as	'_ZN5Array12CheckSortAscEPKim'
+public	CheckSortAsc_sint64			as	'_ZN5Array12CheckSortAscEPKxm'
+
+; Floating-point types
+public	CheckSortAsc_flt32			as	'Array_CheckSortAsc_flt32'
+public	CheckSortAsc_flt64			as	'Array_CheckSortAsc_flt64'
+public	CheckSortAsc_flt32			as	'_ZN5Array12CheckSortAscEPKfm'
+public	CheckSortAsc_flt64			as	'_ZN5Array12CheckSortAscEPKdm'
+
+; Other types
+public	CheckSortAsc_sint64			as	'Array_CheckSortAsc_size'
+public	CheckSortAsc_sint64			as	'_ZN5Array12CheckSortAscEPKmm'
+
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+;       Check for descending sort order                                        ;
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+
+; Unsigned integer types
+public	CheckSortDsc_uint8			as	'Array_CheckSortDsc_uint8'
+public	CheckSortDsc_uint16			as	'Array_CheckSortDsc_uint16'
+public	CheckSortDsc_uint32			as	'Array_CheckSortDsc_uint32'
+public	CheckSortDsc_uint64			as	'Array_CheckSortDsc_uint64'
+public	CheckSortDsc_uint8			as	'_ZN5Array12CheckSortDscEPKhm'
+public	CheckSortDsc_uint16			as	'_ZN5Array12CheckSortDscEPKtm'
+public	CheckSortDsc_uint32			as	'_ZN5Array12CheckSortDscEPKjm'
+public	CheckSortDsc_uint64			as	'_ZN5Array12CheckSortDscEPKym'
+
+; Signed integer types
+public	CheckSortDsc_sint8			as	'Array_CheckSortDsc_sint8'
+public	CheckSortDsc_sint16			as	'Array_CheckSortDsc_sint16'
+public	CheckSortDsc_sint32			as	'Array_CheckSortDsc_sint32'
+public	CheckSortDsc_sint64			as	'Array_CheckSortDsc_sint64'
+public	CheckSortDsc_sint8			as	'_ZN5Array12CheckSortDscEPKam'
+public	CheckSortDsc_sint16			as	'_ZN5Array12CheckSortDscEPKsm'
+public	CheckSortDsc_sint32			as	'_ZN5Array12CheckSortDscEPKim'
+public	CheckSortDsc_sint64			as	'_ZN5Array12CheckSortDscEPKxm'
+
+; Floating-point types
+public	CheckSortDsc_flt32			as	'Array_CheckSortDsc_flt32'
+public	CheckSortDsc_flt64			as	'Array_CheckSortDsc_flt64'
+public	CheckSortDsc_flt32			as	'_ZN5Array12CheckSortDscEPKfm'
+public	CheckSortDsc_flt64			as	'_ZN5Array12CheckSortDscEPKdm'
+
+; Other types
+public	CheckSortDsc_sint64			as	'Array_CheckSortDsc_size'
+public	CheckSortDsc_sint64			as	'_ZN5Array12CheckSortDscEPKmm'
+
+;==============================================================================;
 ;       Check for duplicate values                                             ;
 ;==============================================================================;
 
 ; Unsigned integer types
-public	CheckDup8				as	'Array_CheckDup_uint8'
-public	CheckDup16				as	'Array_CheckDup_uint16'
-public	CheckDup32				as	'Array_CheckDup_uint32'
-public	CheckDup64				as	'Array_CheckDup_uint64'
-public	CheckDup8				as	'_ZN5Array8CheckDupEPKhm'
-public	CheckDup16				as	'_ZN5Array8CheckDupEPKtm'
-public	CheckDup32				as	'_ZN5Array8CheckDupEPKjm'
-public	CheckDup64				as	'_ZN5Array8CheckDupEPKym'
+public	CheckDup8					as	'Array_CheckDup_uint8'
+public	CheckDup16					as	'Array_CheckDup_uint16'
+public	CheckDup32					as	'Array_CheckDup_uint32'
+public	CheckDup64					as	'Array_CheckDup_uint64'
+public	CheckDup8					as	'_ZN5Array8CheckDupEPKhm'
+public	CheckDup16					as	'_ZN5Array8CheckDupEPKtm'
+public	CheckDup32					as	'_ZN5Array8CheckDupEPKjm'
+public	CheckDup64					as	'_ZN5Array8CheckDupEPKym'
 
 ; Signed integer types
-public	CheckDup8				as	'Array_CheckDup_sint8'
-public	CheckDup16				as	'Array_CheckDup_sint16'
-public	CheckDup32				as	'Array_CheckDup_sint32'
-public	CheckDup64				as	'Array_CheckDup_sint64'
-public	CheckDup8				as	'_ZN5Array8CheckDupEPKam'
-public	CheckDup16				as	'_ZN5Array8CheckDupEPKsm'
-public	CheckDup32				as	'_ZN5Array8CheckDupEPKim'
-public	CheckDup64				as	'_ZN5Array8CheckDupEPKxm'
+public	CheckDup8					as	'Array_CheckDup_sint8'
+public	CheckDup16					as	'Array_CheckDup_sint16'
+public	CheckDup32					as	'Array_CheckDup_sint32'
+public	CheckDup64					as	'Array_CheckDup_sint64'
+public	CheckDup8					as	'_ZN5Array8CheckDupEPKam'
+public	CheckDup16					as	'_ZN5Array8CheckDupEPKsm'
+public	CheckDup32					as	'_ZN5Array8CheckDupEPKim'
+public	CheckDup64					as	'_ZN5Array8CheckDupEPKxm'
+
+; Other types
+public	CheckDup64					as	'Array_CheckDup_size'
+public	CheckDup64					as	'_ZN5Array8CheckDupEPKmm'
 
 ;==============================================================================;
 ;       Check for infinite values                                              ;
 ;==============================================================================;
-public	CheckInf_flt32			as	'Array_CheckInf_flt32'
-public	CheckInf_flt64			as	'Array_CheckInf_flt64'
-public	CheckInf_flt32			as	'_ZN5Array8CheckInfEPKfm'
-public	CheckInf_flt64			as	'_ZN5Array8CheckInfEPKdm'
+public	CheckInf_flt32				as	'Array_CheckInf_flt32'
+public	CheckInf_flt64				as	'Array_CheckInf_flt64'
+public	CheckInf_flt32				as	'_ZN5Array8CheckInfEPKfm'
+public	CheckInf_flt64				as	'_ZN5Array8CheckInfEPKdm'
 
 ;==============================================================================;
 ;       Check for NaN values                                                   ;
 ;==============================================================================;
-public	CheckNaN_flt32			as	'Array_CheckNaN_flt32'
-public	CheckNaN_flt64			as	'Array_CheckNaN_flt64'
-public	CheckNaN_flt32			as	'_ZN5Array8CheckNaNEPKfm'
-public	CheckNaN_flt64			as	'_ZN5Array8CheckNaNEPKdm'
+public	CheckNaN_flt32				as	'Array_CheckNaN_flt32'
+public	CheckNaN_flt64				as	'Array_CheckNaN_flt64'
+public	CheckNaN_flt32				as	'_ZN5Array8CheckNaNEPKfm'
+public	CheckNaN_flt64				as	'_ZN5Array8CheckNaNEPKdm'
 
 ;==============================================================================;
 ;       Check for equality                                                     ;
 ;==============================================================================;
 
 ; Unsigned integer types
-public	CheckEqual8				as	'Array_CheckEqual_uint8'
-public	CheckEqual16			as	'Array_CheckEqual_uint16'
-public	CheckEqual32			as	'Array_CheckEqual_uint32'
-public	CheckEqual64			as	'Array_CheckEqual_uint64'
-public	CheckEqual8				as	'_ZN5Array10CheckEqualEPKhS1_m'
-public	CheckEqual16			as	'_ZN5Array10CheckEqualEPKtS1_m'
-public	CheckEqual32			as	'_ZN5Array10CheckEqualEPKjS1_m'
-public	CheckEqual64			as	'_ZN5Array10CheckEqualEPKyS1_m'
+public	CheckEqual8					as	'Array_CheckEqual_uint8'
+public	CheckEqual16				as	'Array_CheckEqual_uint16'
+public	CheckEqual32				as	'Array_CheckEqual_uint32'
+public	CheckEqual64				as	'Array_CheckEqual_uint64'
+public	CheckEqual8					as	'_ZN5Array10CheckEqualEPKhS1_m'
+public	CheckEqual16				as	'_ZN5Array10CheckEqualEPKtS1_m'
+public	CheckEqual32				as	'_ZN5Array10CheckEqualEPKjS1_m'
+public	CheckEqual64				as	'_ZN5Array10CheckEqualEPKyS1_m'
 
 ; Signed integer types
-public	CheckEqual8				as	'Array_CheckEqual_sint8'
-public	CheckEqual16			as	'Array_CheckEqual_sint16'
-public	CheckEqual32			as	'Array_CheckEqual_sint32'
-public	CheckEqual64			as	'Array_CheckEqual_sint64'
-public	CheckEqual8				as	'_ZN5Array10CheckEqualEPKaS1_m'
-public	CheckEqual16			as	'_ZN5Array10CheckEqualEPKsS1_m'
-public	CheckEqual32			as	'_ZN5Array10CheckEqualEPKiS1_m'
-public	CheckEqual64			as	'_ZN5Array10CheckEqualEPKxS1_m'
+public	CheckEqual8					as	'Array_CheckEqual_sint8'
+public	CheckEqual16				as	'Array_CheckEqual_sint16'
+public	CheckEqual32				as	'Array_CheckEqual_sint32'
+public	CheckEqual64				as	'Array_CheckEqual_sint64'
+public	CheckEqual8					as	'_ZN5Array10CheckEqualEPKaS1_m'
+public	CheckEqual16				as	'_ZN5Array10CheckEqualEPKsS1_m'
+public	CheckEqual32				as	'_ZN5Array10CheckEqualEPKiS1_m'
+public	CheckEqual64				as	'_ZN5Array10CheckEqualEPKxS1_m'
+
+; Other types
+public	CheckEqual64				as	'Array_CheckEqual_size'
+public	CheckEqual8					as	'Array_CheckEqual_void'
+public	CheckEqual64				as	'_ZN5Array10CheckEqualEPKmmS1_m'
+public	CheckEqual8					as	'_ZN5Array10CheckEqualEPKvmS1_m'
 
 ;==============================================================================;
 ;       Check for overlap                                                      ;
 ;==============================================================================;
 
 ; Unsigned integer types
-public	Overlap8				as	'Array_Overlap_uint8'
-public	Overlap16				as	'Array_Overlap_uint16'
-public	Overlap32				as	'Array_Overlap_uint32'
-public	Overlap64				as	'Array_Overlap_uint64'
-public	Overlap8				as	'_ZN5Array7OverlapEPKhmS1_m'
-public	Overlap16				as	'_ZN5Array7OverlapEPKtmS1_m'
-public	Overlap32				as	'_ZN5Array7OverlapEPKjmS1_m'
-public	Overlap64				as	'_ZN5Array7OverlapEPKymS1_m'
+public	Overlap8					as	'Array_Overlap_uint8'
+public	Overlap16					as	'Array_Overlap_uint16'
+public	Overlap32					as	'Array_Overlap_uint32'
+public	Overlap64					as	'Array_Overlap_uint64'
+public	Overlap8					as	'_ZN5Array7OverlapEPKhmS1_m'
+public	Overlap16					as	'_ZN5Array7OverlapEPKtmS1_m'
+public	Overlap32					as	'_ZN5Array7OverlapEPKjmS1_m'
+public	Overlap64					as	'_ZN5Array7OverlapEPKymS1_m'
 
 ; Signed integer types
-public	Overlap8				as	'Array_Overlap_sint8'
-public	Overlap16				as	'Array_Overlap_sint16'
-public	Overlap32				as	'Array_Overlap_sint32'
-public	Overlap64				as	'Array_Overlap_sint64'
-public	Overlap8				as	'_ZN5Array7OverlapEPKamS1_m'
-public	Overlap16				as	'_ZN5Array7OverlapEPKsmS1_m'
-public	Overlap32				as	'_ZN5Array7OverlapEPKimS1_m'
-public	Overlap64				as	'_ZN5Array7OverlapEPKxmS1_m'
+public	Overlap8					as	'Array_Overlap_sint8'
+public	Overlap16					as	'Array_Overlap_sint16'
+public	Overlap32					as	'Array_Overlap_sint32'
+public	Overlap64					as	'Array_Overlap_sint64'
+public	Overlap8					as	'_ZN5Array7OverlapEPKamS1_m'
+public	Overlap16					as	'_ZN5Array7OverlapEPKsmS1_m'
+public	Overlap32					as	'_ZN5Array7OverlapEPKimS1_m'
+public	Overlap64					as	'_ZN5Array7OverlapEPKxmS1_m'
 
 ; Floating-point types
-public	Overlap32				as	'Array_Overlap_flt32'
-public	Overlap64				as	'Array_Overlap_flt64'
-public	Overlap32				as	'_ZN5Array7OverlapEPKfmS1_m'
-public	Overlap64				as	'_ZN5Array7OverlapEPKdmS1_m'
+public	Overlap32					as	'Array_Overlap_flt32'
+public	Overlap64					as	'Array_Overlap_flt64'
+public	Overlap32					as	'_ZN5Array7OverlapEPKfmS1_m'
+public	Overlap64					as	'_ZN5Array7OverlapEPKdmS1_m'
 
 ; Other types
-public	Overlap64				as	'Array_Overlap_size'
-public	Overlap64				as	'_ZN5Array7OverlapEPKmmS1_m'
+public	Overlap64					as	'Array_Overlap_size'
+public	Overlap8					as	'Array_Overlap_void'
+public	Overlap64					as	'_ZN5Array7OverlapEPKmmS1_m'
+public	Overlap8					as	'_ZN5Array7OverlapEPKvmS1_m'
+
+;******************************************************************************;
+;       Blend masks                                                            ;
+;******************************************************************************;
+public	maskS1						as	'maskS1'
+public	maskS2						as	'maskS2'
+public	maskV1						as	'maskV1'
+public	maskV2						as	'maskV2'
 
 ;###############################################################################
 ;#      Code section                                                           #
 ;###############################################################################
 section	'.text'		executable align 16
-
-;******************************************************************************;
-;       Consts                                                                 ;
-;******************************************************************************;
-
-; flt32_t
-PINF_FLT32	= 0x7F800000					; +inf
-MINF_FLT32	= 0xFF800000					; -inf
-
-; flt64_t
-PINF_FLT64	= 0x7FF0000000000000			; +inf
-MINF_FLT64	= 0xFFF0000000000000			; -inf
 
 ;******************************************************************************;
 ;       Order reversing                                                        ;
@@ -1617,8 +1969,8 @@ bmask	= bytes - 1							; elements aligning mask
 	prefetchnta	[array]						; prefetch data
 		test	size, size					; if (size == 0)
 		jz		.exit						;     then go to exit
+		shftl	size, scale					; convert size to bytes
 if scale <> 0
-		shl		size, scale					; convert size to bytes
 		test	array, bmask				; if elements have wrong alignment
 		jnz		.sloop						;     then skip vector code
 end if
@@ -1631,7 +1983,7 @@ end if
 		clone	vector, scale				; duplicate value through the entire register
 ;---[Unaligned sums]-----------------------
 		add		size, aindex				; size += aindex
-		shl		aindex, 4					; compute shift in mask array
+		shl		aindex, VSCALE				; compute shift in mask array
 		movdqa	blend, dqword [maskS1 + aindex]
 		xor		index, index				; index = 0
 		sub		size, VSIZE					; if (size <= VSIZE)
@@ -1661,7 +2013,7 @@ end if
 		add		ptr, 4 * VSIZE				; ptr += 4 * VSIZE
 		jmp		.vloop						; do while (true)
 ;---[End of vector loop]-------------------
-.tail:	shl		size, 4						; compute shift in mask array
+.tail:	shl		size, VSCALE				; compute shift in mask array
 		pandn	blend, dqword [maskS2 + size]
 		movdqa	data, [array + index]		; data = array[index]
 	pblendvb	data, vector				; blend value with original data
@@ -1735,8 +2087,8 @@ bmask	= bytes - 1							; elements aligning mask
 	prefetchnta	[source]					; prefetch data
 		test	size, size					; if (size == 0)
 		jz		.exit						;     then go to exit
+		shftl	size, scale					; convert size to bytes
 if scale <> 0
-		shl		size, scale					; convert size to bytes
 		test	source, bmask				; if elements have wrong alignment
 		jnz		.sloop						;     then skip vector code
 		test	target, bmask				; if elements have wrong alignment
@@ -1825,8 +2177,8 @@ bmask	= bytes - 1							; elements aligning mask
 	prefetchnta	[source]					; prefetch data
 		test	size, size					; if (size == 0)
 		jz		.exit						;     then go to exit
+		shftl	size, scale					; convert size to bytes
 if scale <> 0
-		shl		size, scale					; convert size to bytes
 		test	source, bmask				; if elements have wrong alignment
 		jnz		.sloop						;     then skip vector code
 		test	target, bmask				; if elements have wrong alignment
@@ -2458,8 +2810,8 @@ bmask	= bytes - 1							; elements aligning mask
 	prefetchnta	[array]						; prefetch data
 		test	size, size					; if (size == 0)
 		jz		.exit						;     then go to exit
+		shftl	size, scale					; convert size to bytes
 if scale <> 0
-		shl		size, scale					; convert size to bytes
 		test	array, bmask				; if elements have wrong alignment
 		jnz		.sloop						;     then skip vector code
 end if
@@ -2472,7 +2824,7 @@ end if
 		clone	vector, scale				; duplicate value through the entire register
 ;---[Unaligned operation]------------------
 		add		size, aindex				; size += aindex
-		shl		aindex, 4					; compute shift in mask array
+		shl		aindex, VSCALE				; compute shift in mask array
 		movdqa	blend, dqword [maskS1 + aindex]
 		xor		index, index				; index = 0
 		sub		size, VSIZE					; if (size <= VSIZE)
@@ -2532,7 +2884,7 @@ end if
 		add		ptr, 4 * VSIZE				; ptr += 4 * VSIZE
 		jmp		.vloop						; do while (true)
 ;---[End of vector loop]-------------------
-.tail:	shl		size, 4						; compute shift in mask array
+.tail:	shl		size, VSCALE				; compute shift in mask array
 		pandn	blend, dqword [maskS2 + size]
 		movdqa	temp, [array + index]		; temp = array[index]
 		movdqa	data, temp					; data = temp
@@ -2586,8 +2938,8 @@ bmask	= bytes - 1							; elements aligning mask
 	prefetchnta	[target]					; prefetch data
 		test	size, size					; if (size == 0)
 		jz		.exit						;     then go to exit
+		shftl	size, scale					; convert size to bytes
 if scale <> 0
-		shl		size, scale					; convert size to bytes
 		test	source, bmask				; if elements have wrong alignment
 		jnz		.sloop						;     then skip vector code
 		test	target, bmask				; if elements have wrong alignment
@@ -2607,7 +2959,7 @@ end if
 		sub		index, aindex				; index -= aindex
 		sub		size, VSIZE					; if (size <= VSIZE)
 		jbe		.tail						;     then process array tails
-		shl		aindex, 4					; compute shift in mask array
+		shl		aindex, VSCALE				; compute shift in mask array
 		movdqa	blend, dqword [maskV1 + aindex]
 		movdqu	a2temp, [source]			; a2temp = source[0]
 		movdqu	a1temp, [target]			; a1temp = target[0]
@@ -2671,7 +3023,7 @@ end if
 		jmp		.vloop						; do while (true)
 ;---[End of vector loop]-------------------
 .tail:	add		index, size					; index += size
-		shl		size, 4						; compute shift in mask array
+		shl		size, VSCALE				; compute shift in mask array
 		movdqa	blend, dqword [maskV2 + size]
 		movdqu	a2temp, [source + index]	; a2temp = source[index]
 		movdqu	a1temp, [target + index]	; a1temp = target[index]
@@ -2823,7 +3175,7 @@ bmask	= bytes - 1							; elements aligning mask
 		mov		ptr, array					; ptr = array
 ;---[Unaligned sums]-----------------------
 		add		size, aindex				; size += aindex
-		shl		aindex, 4					; compute shift in mask array
+		shl		aindex, VSCALE				; compute shift in mask array
 		movap#x	blend, dqword [maskS1 + aindex]
 		xor		index, index				; index = 0
 		sub		size, VSIZE					; if (size <= VSIZE)
@@ -2863,7 +3215,7 @@ bmask	= bytes - 1							; elements aligning mask
 		add		ptr, 4 * VSIZE				; ptr += 4 * VSIZE
 		jmp		.vloop						; do while (true)
 ;---[End of vector loop]-------------------
-.tail:	shl		size, 4						; compute shift in mask array
+.tail:	shl		size, VSCALE				; compute shift in mask array
 		andnp#x	blend, dqword [maskS2 + size]
 		movap#x	temp, [array + index]		; temp = array[index]
 		movap#x	data, temp					; data = temp
@@ -2941,7 +3293,7 @@ bmask	= bytes - 1							; elements aligning mask
 		shufp#x	vector, vector, 0x0			; duplicate value through the entire register
 ;---[Unaligned operation]------------------
 		add		size, aindex				; size += aindex
-		shl		aindex, 4					; compute shift in mask array
+		shl		aindex, VSCALE				; compute shift in mask array
 		movap#x	blend, dqword [maskS1 + aindex]
 		xor		index, index				; index = 0
 		sub		size, VSIZE					; if (size <= VSIZE)
@@ -2981,7 +3333,7 @@ bmask	= bytes - 1							; elements aligning mask
 		add		ptr, 4 * VSIZE				; ptr += 4 * VSIZE
 		jmp		.vloop						; do while (true)
 ;---[End of vector loop]-------------------
-.tail:	shl		size, 4						; compute shift in mask array
+.tail:	shl		size, VSCALE				; compute shift in mask array
 		andnp#x	blend, dqword [maskS2 + size]
 		movap#x	temp, [array + index]		; temp = array[index]
 		movap#x	data, temp					; data = temp
@@ -3045,7 +3397,7 @@ bmask	= bytes - 1							; elements aligning mask
 		sub		index, aindex				; index -= aindex
 		sub		size, VSIZE					; if (size <= VSIZE)
 		jbe		.tail						;     then process array tails
-		shl		aindex, 4					; compute shift in mask array
+		shl		aindex, VSCALE				; compute shift in mask array
 		movap#x	blend, dqword [maskV1 + aindex]
 		movup#x	a2temp, [source]			; a2temp = source[0]
 		movup#x	a1temp, [target]			; a1temp = target[0]
@@ -3089,7 +3441,7 @@ bmask	= bytes - 1							; elements aligning mask
 		jmp		.vloop						; do while (true)
 ;---[End of vector loop]-------------------
 .tail:	add		index, size					; index += size
-		shl		size, 4						; compute shift in mask array
+		shl		size, VSCALE				; compute shift in mask array
 		movap#x	blend, dqword [maskV2 + size]
 		movup#x	a2temp, [source + index]	; a2temp = source[index]
 		movup#x	a1temp, [target + index]	; a1temp = target[index]
@@ -3264,7 +3616,7 @@ end if
 		xorp#x	zero, zero					; zero = 0
 ;---[Unaligned sums]-----------------------
 		add		size, aindex				; size += aindex
-		shl		aindex, 4					; compute shift in mask array
+		shl		aindex, VSCALE				; compute shift in mask array
 		movap#x	blend, dqword [maskS1 + aindex]
 		xor		index, index				; index = 0
 		sub		size, VSIZE					; if (size <= VSIZE)
@@ -3323,7 +3675,7 @@ end if
 		add		ptr, 4 * VSIZE				; ptr += 4 * VSIZE
 		jmp		.vloop						; do while (true)
 ;---[End of vector loop]-------------------
-.tail:	shl		size, 4						; compute shift in mask array
+.tail:	shl		size, VSCALE				; compute shift in mask array
 		andnp#x	blend, dqword [maskS2 + size]
 		movap#x	temp, [array + index]		; temp = array[index]
 if type = 1
@@ -3435,7 +3787,7 @@ bmask	= bytes - 1							; elements aligning mask
 		sub		index, aindex				; index -= aindex
 		sub		size, VSIZE					; if (size <= VSIZE)
 		jbe		.tail						;     then process array tails
-		shl		aindex, 4					; compute shift in mask array
+		shl		aindex, VSCALE				; compute shift in mask array
 		movap#x	blend, dqword [maskV1 + aindex]
 		movup#x	a2temp, [array2]			; a2temp = array2[0]
 		movup#x	a1temp, [array1]			; a1temp = array1[0]
@@ -3478,7 +3830,7 @@ bmask	= bytes - 1							; elements aligning mask
 		jmp		.vloop						; do while (true)
 ;---[End of vector loop]-------------------
 .tail:	add		index, size					; index += size
-		shl		size, 4						; compute shift in mask array
+		shl		size, VSCALE				; compute shift in mask array
 		movap#x	blend, dqword [maskV2 + size]
 		movup#x	a2temp, [array2 + index]	; a2temp = array2[index]
 		movup#x	a1temp, [array1 + index]	; a1temp = array1[index]
@@ -3508,7 +3860,7 @@ SumMul_flt32:	SUM_MUL	s
 SumMul_flt64:	SUM_MUL	d
 
 ;******************************************************************************;
-;       Minimum and maximum values                                             ;
+;       Minimum and maximum value                                              ;
 ;******************************************************************************;
 macro	MINMAX_INT	op, res, reg, val, c, type, x
 {
@@ -3545,8 +3897,8 @@ bmask	= bytes - 1							; elements aligning mask
 		test	size, size					; if (size == 0)
 		jz		.error						;     then go to error branch
 		mov		res, val					; result = value
+		shftl	size, scale					; convert size to bytes
 if scale <> 0
-		shl		size, scale					; convert size to bytes
 		test	array, bmask				; if elements have wrong alignment
 		jnz		.sloop						;     then skip vector code
 end if
@@ -3564,7 +3916,7 @@ end if
 		movdqa	res4, limit					; res4 = limit
 ;---[Unaligned operation]------------------
 		add		size, aindex				; size += aindex
-		shl		aindex, 4					; compute shift in mask array
+		shl		aindex, VSCALE				; compute shift in mask array
 		movdqa	blend, dqword [maskS1 + aindex]
 		xor		index, index				; index = 0
 		sub		size, VSIZE					; if (size <= VSIZE)
@@ -3598,7 +3950,7 @@ end if
 		add		ptr, 4 * VSIZE				; ptr += 4 * VSIZE
 		jmp		.vloop						; do while (true)
 ;---[End of vector loop]-------------------
-.tail:	shl		size, 4						; compute shift in mask array
+.tail:	shl		size, VSCALE				; compute shift in mask array
 		pandn	blend, dqword [maskS2 + size]
 		movdqa	temp, [array + index]		; temp = array[index]
 	pblendvb	limit, temp					; blend temp with limit values
@@ -3707,7 +4059,7 @@ end if
 		xorp#x	flags4, flags4				; flags4 = 0
 ;---[Unaligned operation]------------------
 		add		size, aindex				; size += aindex
-		shl		aindex, 4					; compute shift in mask array
+		shl		aindex, VSCALE				; compute shift in mask array
 		movap#x	blend, dqword [maskS1 + aindex]
 		xor		index, index				; index = 0
 		sub		size, VSIZE					; if (size <= VSIZE)
@@ -3766,7 +4118,7 @@ end if
 		add		ptr, 4 * VSIZE				; ptr += 4 * VSIZE
 		jmp		.vloop						; do while (true)
 ;---[End of vector loop]-------------------
-.tail:	shl		size, 4						; compute shift in mask array
+.tail:	shl		size, VSCALE				; compute shift in mask array
 		andnp#x	blend, dqword [maskS2 + size]
 		movap#x	temp, [array + index]		; temp = array[index]
 if abs
@@ -3882,11 +4234,11 @@ value	equ		xmm4						; adjustment value
 data	equ		xmm5						; register which holds original data
 if x eq s
 smask	= SMASK_FLT32						; sign mask
-halfval	= HALF_FLT32						; 0.5
+halfval	= PHALF_FLT32						; +0.5
 scale	= 2									; scale value
 else if x eq d
 smask	= SMASK_FLT64						; sign mask
-halfval	= HALF_FLT64						; 0.5
+halfval	= PHALF_FLT64						; +0.5
 scale	= 3									; scale value
 end if
 bytes	= 1 shl scale						; size of array element (bytes)
@@ -3912,7 +4264,7 @@ if type = 1
 end if
 ;---[Unaligned sums]-----------------------
 		add		size, aindex				; size += aindex
-		shl		aindex, 4					; compute shift in mask array
+		shl		aindex, VSCALE				; compute shift in mask array
 		movap#x	blend, dqword [maskS1 + aindex]
 		xor		index, index				; index = 0
 		sub		size, VSIZE					; if (size <= VSIZE)
@@ -4007,7 +4359,7 @@ end if
 		add		ptr, 4 * VSIZE				; ptr += 4 * VSIZE
 		jmp		.vloop						; do while (true)
 ;---[End of vector loop]-------------------
-.tail:	shl		size, 4						; compute shift in mask array
+.tail:	shl		size, VSCALE				; compute shift in mask array
 		andnp#x	blend, dqword [maskS2 + size]
 		movap#x	temp, [array + index]		; temp = array[index]
 		movap#x	data, temp					; data = temp
@@ -4073,6 +4425,122 @@ RoundFrac_flt32:	ROUND	2, 0x3, s
 RoundFrac_flt64:	ROUND	2, 0x3, d
 
 ;******************************************************************************;
+;       Value counting                                                         ;
+;******************************************************************************;
+macro	COUNT	reg, x
+{
+;---[Parameters]---------------------------
+array	equ		rdi							; pointer to array
+size	equ		rsi							; array size (count of elements)
+patt	equ		rdx							; register which holds pattern
+;---[Internal variables]-------------------
+count	equ		rax							; count of pattern matches
+aindex	equ		rcx							; array offset from vector boundary
+aindexl	equ		cl							; low part of "aindex"
+cmask	equ		r8							; mask to clear unrequired results
+fmask	equ		r9							; result of pattern search
+flags	equ		xmm0						; pattern check flags
+pattern	equ		xmm1						; pattern to find
+if x eq b
+scale	= 0									; scale value
+else if x eq w
+scale	= 1									; scale value
+else if x eq d
+scale	= 2									; scale value
+else if x eq q
+scale	= 3									; scale value
+end if
+bytes	= 1 shl scale						; size of array element (bytes)
+bmask	= bytes - 1							; elements aligning mask
+;------------------------------------------
+	prefetchnta	[array]						; prefetch data
+		xor		count, count				; count = 0
+		mov		cmask, 1					; cmask = 1
+		test	size, size					; if (size == 0)
+		jz		.exit						;     then go to exit
+		shftl	size, scale					; convert size to bytes
+if scale <> 0
+		test	array, bmask				; if elements have wrong alignment
+		jnz		.sloop						;     then skip vector code
+end if
+;---[Normal execution branch]--------------
+		movq	pattern, patt				; pattern = patt
+		mov		aindex, array
+		and		aindex, VMASK				; get array offset from vector boundary
+		sub		array, aindex				; align pointer to vector boundary
+		clone	pattern, scale				; duplicate value through the entire register
+;---[Unaligned search for pattern]---------
+		add		size, aindex				; size += aindex
+		mov		cmask, VBITS
+		shl		cmask, aindexl				; adjust cmask for unaligned search
+		movdqa	flags, [array]
+	pcmpeq#x	flags, pattern				; check array[0] for pattaren
+	pmovmskb	fmask, flags				; save check results to fmask
+		and		fmask, cmask				; if pattern is found
+		sub		size, VSIZE					; if (size <= VSIZE)
+		jbe		.tail						;     then process array tail
+		popcnt	fmask, fmask				; get count of pattern matches
+		add		count, fmask				; count += mathes
+;---[Vector loop]--------------------------
+.vloop:	movdqa	flags, [array + 1*VSIZE]
+	pcmpeq#x	flags, pattern				; check array[1] for pattaren
+	pmovmskb	fmask, flags				; save check results to fmask
+		sub		size, VSIZE					; if (size <= VSIZE)
+		jbe		.tail						;     then process array tail
+		popcnt	fmask, fmask				; get count of pattern matches
+		add		count, fmask				; count += mathes
+		movdqa	flags, [array + 2*VSIZE]
+	pcmpeq#x	flags, pattern				; check array[2] for pattaren
+	pmovmskb	fmask, flags				; save check results to fmask
+		sub		size, VSIZE					; if (size <= VSIZE)
+		jbe		.tail						;     then process array tail
+		popcnt	fmask, fmask				; get count of pattern matches
+		add		count, fmask				; count += mathes
+		movdqa	flags, [array + 3*VSIZE]
+	pcmpeq#x	flags, pattern				; check array[3] for pattaren
+	pmovmskb	fmask, flags				; save check results to fmask
+		sub		size, VSIZE					; if (size <= VSIZE)
+		jbe		.tail						;     then process array tail
+		popcnt	fmask, fmask				; get count of pattern matches
+		add		count, fmask				; count += mathes
+		movdqa	flags, [array + 4*VSIZE]
+	pcmpeq#x	flags, pattern				; check array[4] for pattaren
+	pmovmskb	fmask, flags				; save check results to fmask
+		sub		size, VSIZE					; if (size <= VSIZE)
+		jbe		.tail						;     then process array tail
+		popcnt	fmask, fmask				; get count of pattern matches
+		add		count, fmask				; count += mathes
+	prefetchnta	[array + PSTEP]				; prefetch next portion of data
+		add		array, 4 * VSIZE			; array += 4 * VSIZE
+		jmp		.vloop						; do while (true)
+;---[End of vector loop]-------------------
+.tail:	xor		aindex, aindex
+		sub		aindex, size				; get count of tail elements
+		mov		cmask, VBITS
+		shr		cmask, aindexl				; adjust cmask for tail search
+		and		fmask, cmask				; if pattern is found
+		popcnt	fmask, fmask				; get count of pattern matches
+		add		count, fmask				; count += mathes
+		ret
+if scale <> 0
+;---[Scalar loop]--------------------------
+.sloop:	xor		fmask, fmask				; fmask = 0
+		cmp		[array], reg				; if (array[0] == pattern)
+		cmove	fmask, cmask				;     count++
+		add		count, fmask				; }
+		add		array, bytes				; array++
+		sub		size, bytes					; size--
+		jnz		.sloop						; do while (size != 0)
+end if
+;---[Normal exit]--------------------------
+.exit:	ret
+}
+Count8:		COUNT	dl, b
+Count16:	COUNT	dx, w
+Count32:	COUNT	edx, d
+Count64:	COUNT	rdx, q
+
+;******************************************************************************;
 ;       Value replacement                                                      ;
 ;******************************************************************************;
 macro	REPLACE	reg, val, x
@@ -4109,8 +4577,8 @@ bmask	= bytes - 1							; elements aligning mask
 	prefetchnta	[array]						; prefetch data
 		test	size, size					; if (size == 0)
 		jz		.exit						;     then go to exit
+		shftl	size, scale					; convert size to bytes
 if scale <> 0
-		shl		size, scale					; convert size to bytes
 		test	array, bmask				; if elements have wrong alignment
 		jnz		.sloop						;     then skip vector code
 end if
@@ -4126,7 +4594,7 @@ end if
 ;---[Unaligned search for pattern]---------
 		add		size, aindex				; size += aindex
 		xor		index, index				; index = 0
-		shl		aindex, 4					; compute shift in mask array
+		shl		aindex, VSCALE				; compute shift in mask array
 		movdqa	cmask, dqword [maskS1 + aindex]
 		movdqa	flags, [array]
 	pcmpeq#x	flags, pattern				; check array[0] for pattaren
@@ -4186,7 +4654,7 @@ end if
 	pblendvb	data, replace
 		movdqa	[array + index], data		; array[index] = replace (data, pattern, value)
 		jmp		addr						; go back into the searching loop
-@@:		shl		size, 4						; compute shift in mask array
+@@:		shl		size, VSCALE				; compute shift in mask array
 		pand	flags, dqword [maskS1 + size]
 		movdqa	data, [array + index]		; data = array[index]
 	pblendvb	data, replace
@@ -4250,8 +4718,8 @@ bmask	= bytes - 1							; elements aligning mask
 		xor		index, index				; index = 0
 		test	size, size					; if (size == 0)
 		jz		.ntfnd						;     then go to not found branch
+		shftl	size, scale					; convert size to bytes
 if scale <> 0
-		shl		size, scale					; convert size to bytes
 		test	array, bmask				; if elements have wrong alignment
 		jnz		.sloop						;     then skip vector code
 end if
@@ -4264,7 +4732,7 @@ end if
 ;---[Unaligned search for pattern]---------
 		add		size, aindex				; size += aindex
 		sub		index, aindex				; index -= aindex
-		mov		cmask, 0xFFFF
+		mov		cmask, VBITS
 		shl		cmask, aindexl				; adjust cmask for unaligned search
 		movdqa	flags, [array]
 	pcmpeq#x	flags, pattern				; check array[0] for pattaren
@@ -4369,8 +4837,8 @@ bmask	= bytes - 1							; elements aligning mask
 		mov		index, size					; index = size
 		test	size, size					; if (size == 0)
 		jz		.ntfnd						;     then go to not found branch
+		shftl	size, scale					; convert size to bytes
 if scale <> 0
-		shl		size, scale					; convert size to bytes
 		test	array, bmask				; if elements have wrong alignment
 		jnz		.sloop						;     then skip vector code
 end if
@@ -4384,7 +4852,7 @@ end if
 ;---[Unaligned search for pattern]---------
 		add		size, aindex				; size += aindex
 		lea		index, [size - VSIZE]		; index = size - VSIZE
-		mov		cmask, 0xFFFF
+		mov		cmask, VBITS
 		shr		cmask, aindexl				; adjust cmask for unaligned search
 		movdqa	flags, [array]
 	pcmpeq#x	flags, pattern				; check array[0] for pattaren
@@ -4457,72 +4925,270 @@ FindBwd64:	FIND_BWD	rdx, q
 ;==============================================================================;
 ;       Binary search                                                          ;
 ;==============================================================================;
-macro	FIND_BIN	value, x, scale
+macro	FIND_BIN	value, c, scale
 {
 ;---[Parameters]---------------------------
 array	equ		rdi							; pointer to array
 size	equ		rsi							; array size (count of elements)
 ;---[Internal variables]-------------------
+result	equ		rax							; result register
 median	equ		r8							; median value
 median1	equ		r9							; median value + 1
-left	equ		rax							; pointer to start of the data array
-right	equ		size						; pointer to end of the data array
+left	equ		r10							; pointer to start of the data array
+right	equ		r11							; pointer to end of the data array
 bytes	= 1 shl scale						; size of array element (bytes)
 ;------------------------------------------
+		mov		result, NOT_FOUND			; result = NOT_FOUND
 		test	size, size					; if (size == 0)
-		jz		.ntfnd						;     then go to not found branch
+		jz		.exit						;     then return NOT_FOUND
 		xor		left, left					; left = 0
-		sub		size, 1						; if (--size == 0)
-		jz		.skip						;     then skip binary search loop
+		mov		right, size					; right = size
 ;---[Binary search loop]-------------------
 .loop:	lea		median, [left + right]
 		shr		median, 1					; median = (left + right) / 2
 		lea		median1, [median + 1]		; median1 = median + 1
 		cmp		value, [array+median*bytes]	; if (value condition array[median])
-		cmov#x	left, median1				;     then left = median + 1
-		cmovn#x	right, median				;     else right = median
+		cmove	result, median				;     update matched position
+		cmov#c	left, median1				;     then left = median + 1
+		cmovn#c	right, median				;     else right = median
 		cmp		left, right
 		jb		.loop						; do while (left < right)
+;---[End of search loop]-------------------
+.exit:	ret
+}
+;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+macro	FIND_BIN_LEFT	value, c, scale
+{
+;---[Parameters]---------------------------
+array	equ		rdi							; pointer to array
+size	equ		rsi							; array size (count of elements)
+;---[Internal variables]-------------------
+result	equ		rax							; result register
+median	equ		r8							; median value
+median1	equ		r9							; median value + 1
+left	equ		r10							; pointer to start of the data array
+right	equ		r11							; pointer to end of the data array
+bytes	= 1 shl scale						; size of array element (bytes)
 ;------------------------------------------
-.skip:	cmp		value, [array + left*bytes]	; if (value != array[left])
-		jne		.ntfnd						;     then return NOT_FOUND
-		ret									;     else return left
-;---[Not found branch]---------------------
-.ntfnd:	mov		left, NOT_FOUND				; return NOT_FOUND
-		ret
+		mov		result, NOT_FOUND			; result = NOT_FOUND
+		test	size, size					; if (size == 0)
+		jz		.exit						;     then return NOT_FOUND
+		xor		left, left					; left = 0
+		mov		right, size					; right = size
+;---[Binary search loop]-------------------
+.loop:	lea		median, [left + right]
+		shr		median, 1					; median = (left + right) / 2
+		lea		median1, [median + 1]		; median1 = median + 1
+		cmp		value, [array+median*bytes]	; if (value condition array[median])
+		cmov#c	left, median1				;     then left = median + 1
+		cmovn#c	right, median				;     else right = median
+		cmp		left, right
+		jb		.loop						; do while (left < right)
+;---[End of search loop]-------------------
+		cmp		left, size					; if (left < size)
+		cmovb	result, left				;     then return left
+.exit:	ret									;     else return NOT_FOUND
+}
+;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+macro	FIND_BIN_RIGHT	value, c, scale
+{
+;---[Parameters]---------------------------
+array	equ		rdi							; pointer to array
+size	equ		rsi							; array size (count of elements)
+;---[Internal variables]-------------------
+result	equ		rax							; result register
+median	equ		r8							; median value
+median1	equ		r9							; median value + 1
+left	equ		r10							; pointer to start of the data array
+right	equ		r11							; pointer to end of the data array
+bytes	= 1 shl scale						; size of array element (bytes)
+;------------------------------------------
+		mov		result, NOT_FOUND			; result = NOT_FOUND
+		test	size, size					; if (size == 0)
+		jz		.exit						;     then return NOT_FOUND
+		xor		left, left					; left = 0
+		mov		right, size					; right = size
+;---[Binary search loop]-------------------
+.loop:	lea		median, [left + right]
+		shr		median, 1					; median = (left + right) / 2
+		lea		median1, [median + 1]		; median1 = median + 1
+		cmp		value, [array+median*bytes]	; if (value condition array[median])
+		cmov#c	left, median1				;     then left = median + 1
+		cmovn#c	right, median				;     else right = median
+		cmp		left, right
+		jb		.loop						; do while (left < right)
+;---[End of search loop]-------------------
+		lea		result, [left - 1]			; return left - 1
+.exit:	ret
 }
 
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 ;       Ascending sort order                                                   ;
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 
+;------------------------------------------------------------------------------;
+;       Searching for equal element                                            ;
+;------------------------------------------------------------------------------;
+
 ; Unsigned integer types
-FindAsc_uint8:	FIND_BIN	dl, a, 0
-FindAsc_uint16:	FIND_BIN	dx, a, 1
-FindAsc_uint32:	FIND_BIN	edx, a, 2
-FindAsc_uint64:	FIND_BIN	rdx, a, 3
+FindEqualAsc_uint8:			FIND_BIN	dl, a, 0
+FindEqualAsc_uint16:		FIND_BIN	dx, a, 1
+FindEqualAsc_uint32:		FIND_BIN	edx, a, 2
+FindEqualAsc_uint64:		FIND_BIN	rdx, a, 3
 
 ; Signed integer types
-FindAsc_sint8:	FIND_BIN	dl, g, 0
-FindAsc_sint16:	FIND_BIN	dx, g, 1
-FindAsc_sint32:	FIND_BIN	edx, g, 2
-FindAsc_sint64:	FIND_BIN	rdx, g, 3
+FindEqualAsc_sint8:			FIND_BIN	dl, g, 0
+FindEqualAsc_sint16:		FIND_BIN	dx, g, 1
+FindEqualAsc_sint32:		FIND_BIN	edx, g, 2
+FindEqualAsc_sint64:		FIND_BIN	rdx, g, 3
+
+;------------------------------------------------------------------------------;
+;       Searching for greater element                                          ;
+;------------------------------------------------------------------------------;
+
+; Unsigned integer types
+FindGreatAsc_uint8:			FIND_BIN_LEFT	dl, ae, 0
+FindGreatAsc_uint16:		FIND_BIN_LEFT	dx, ae, 1
+FindGreatAsc_uint32:		FIND_BIN_LEFT	edx, ae, 2
+FindGreatAsc_uint64:		FIND_BIN_LEFT	rdx, ae, 3
+
+; Signed integer types
+FindGreatAsc_sint8:			FIND_BIN_LEFT	dl, ge, 0
+FindGreatAsc_sint16:		FIND_BIN_LEFT	dx, ge, 1
+FindGreatAsc_sint32:		FIND_BIN_LEFT	edx, ge, 2
+FindGreatAsc_sint64:		FIND_BIN_LEFT	rdx, ge, 3
+
+;------------------------------------------------------------------------------;
+;       Searching for greater or equal element                                 ;
+;------------------------------------------------------------------------------;
+
+; Unsigned integer types
+FindGreatEqualAsc_uint8:	FIND_BIN_LEFT	dl, a, 0
+FindGreatEqualAsc_uint16:	FIND_BIN_LEFT	dx, a, 1
+FindGreatEqualAsc_uint32:	FIND_BIN_LEFT	edx, a, 2
+FindGreatEqualAsc_uint64:	FIND_BIN_LEFT	rdx, a, 3
+
+; Signed integer types
+FindGreatEqualAsc_sint8:	FIND_BIN_LEFT	dl, g, 0
+FindGreatEqualAsc_sint16:	FIND_BIN_LEFT	dx, g, 1
+FindGreatEqualAsc_sint32:	FIND_BIN_LEFT	edx, g, 2
+FindGreatEqualAsc_sint64:	FIND_BIN_LEFT	rdx, g, 3
+
+;------------------------------------------------------------------------------;
+;       Searching for less element                                             ;
+;------------------------------------------------------------------------------;
+
+; Unsigned integer types
+FindLessAsc_uint8:			FIND_BIN_RIGHT	dl, a, 0
+FindLessAsc_uint16:			FIND_BIN_RIGHT	dx, a, 1
+FindLessAsc_uint32:			FIND_BIN_RIGHT	edx, a, 2
+FindLessAsc_uint64:			FIND_BIN_RIGHT	rdx, a, 3
+
+; Signed integer types
+FindLessAsc_sint8:			FIND_BIN_RIGHT	dl, g, 0
+FindLessAsc_sint16:			FIND_BIN_RIGHT	dx, g, 1
+FindLessAsc_sint32:			FIND_BIN_RIGHT	edx, g, 2
+FindLessAsc_sint64:			FIND_BIN_RIGHT	rdx, g, 3
+
+;------------------------------------------------------------------------------;
+;       Searching for less or equal element                                    ;
+;------------------------------------------------------------------------------;
+
+; Unsigned integer types
+FindLessEqualAsc_uint8:		FIND_BIN_RIGHT	dl, ae, 0
+FindLessEqualAsc_uint16:	FIND_BIN_RIGHT	dx, ae, 1
+FindLessEqualAsc_uint32:	FIND_BIN_RIGHT	edx, ae, 2
+FindLessEqualAsc_uint64:	FIND_BIN_RIGHT	rdx, ae, 3
+
+; Signed integer types
+FindLessEqualAsc_sint8:		FIND_BIN_RIGHT	dl, ge, 0
+FindLessEqualAsc_sint16:	FIND_BIN_RIGHT	dx, ge, 1
+FindLessEqualAsc_sint32:	FIND_BIN_RIGHT	edx, ge, 2
+FindLessEqualAsc_sint64:	FIND_BIN_RIGHT	rdx, ge, 3
 
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 ;       Descending sort order                                                  ;
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 
+;------------------------------------------------------------------------------;
+;       Searching for equal element                                            ;
+;------------------------------------------------------------------------------;
+
 ; Unsigned integer types
-FindDsc_uint8:	FIND_BIN	dl, b, 0
-FindDsc_uint16:	FIND_BIN	dx, b, 1
-FindDsc_uint32:	FIND_BIN	edx, b, 2
-FindDsc_uint64:	FIND_BIN	rdx, b, 3
+FindEqualDsc_uint8:			FIND_BIN	dl, b, 0
+FindEqualDsc_uint16:		FIND_BIN	dx, b, 1
+FindEqualDsc_uint32:		FIND_BIN	edx, b, 2
+FindEqualDsc_uint64:		FIND_BIN	rdx, b, 3
 
 ; Signed integer types
-FindDsc_sint8:	FIND_BIN	dl, l, 0
-FindDsc_sint16:	FIND_BIN	dx, l, 1
-FindDsc_sint32:	FIND_BIN	edx, l, 2
-FindDsc_sint64:	FIND_BIN	rdx, l, 3
+FindEqualDsc_sint8:			FIND_BIN	dl, l, 0
+FindEqualDsc_sint16:		FIND_BIN	dx, l, 1
+FindEqualDsc_sint32:		FIND_BIN	edx, l, 2
+FindEqualDsc_sint64:		FIND_BIN	rdx, l, 3
+
+;------------------------------------------------------------------------------;
+;       Searching for less element                                             ;
+;------------------------------------------------------------------------------;
+
+; Unsigned integer types
+FindLessDsc_uint8:			FIND_BIN_LEFT	dl, be, 0
+FindLessDsc_uint16:			FIND_BIN_LEFT	dx, be, 1
+FindLessDsc_uint32:			FIND_BIN_LEFT	edx, be, 2
+FindLessDsc_uint64:			FIND_BIN_LEFT	rdx, be, 3
+
+; Signed integer types
+FindLessDsc_sint8:			FIND_BIN_LEFT	dl, le, 0
+FindLessDsc_sint16:			FIND_BIN_LEFT	dx, le, 1
+FindLessDsc_sint32:			FIND_BIN_LEFT	edx, le, 2
+FindLessDsc_sint64:			FIND_BIN_LEFT	rdx, le, 3
+
+;------------------------------------------------------------------------------;
+;       Searching for less or equal element                                    ;
+;------------------------------------------------------------------------------;
+
+; Unsigned integer types
+FindLessEqualDsc_uint8:		FIND_BIN_LEFT	dl, b, 0
+FindLessEqualDsc_uint16:	FIND_BIN_LEFT	dx, b, 1
+FindLessEqualDsc_uint32:	FIND_BIN_LEFT	edx, b, 2
+FindLessEqualDsc_uint64:	FIND_BIN_LEFT	rdx, b, 3
+
+; Signed integer types
+FindLessEqualDsc_sint8:		FIND_BIN_LEFT	dl, l, 0
+FindLessEqualDsc_sint16:	FIND_BIN_LEFT	dx, l, 1
+FindLessEqualDsc_sint32:	FIND_BIN_LEFT	edx, l, 2
+FindLessEqualDsc_sint64:	FIND_BIN_LEFT	rdx, l, 3
+
+;------------------------------------------------------------------------------;
+;       Searching for greater element                                          ;
+;------------------------------------------------------------------------------;
+
+; Unsigned integer types
+FindGreatDsc_uint8:			FIND_BIN_RIGHT	dl, b, 0
+FindGreatDsc_uint16:		FIND_BIN_RIGHT	dx, b, 1
+FindGreatDsc_uint32:		FIND_BIN_RIGHT	edx, b, 2
+FindGreatDsc_uint64:		FIND_BIN_RIGHT	rdx, b, 3
+
+; Signed integer types
+FindGreatDsc_sint8:			FIND_BIN_RIGHT	dl, l, 0
+FindGreatDsc_sint16:		FIND_BIN_RIGHT	dx, l, 1
+FindGreatDsc_sint32:		FIND_BIN_RIGHT	edx, l, 2
+FindGreatDsc_sint64:		FIND_BIN_RIGHT	rdx, l, 3
+
+;------------------------------------------------------------------------------;
+;       Searching for greater or equal element                                 ;
+;------------------------------------------------------------------------------;
+
+; Unsigned integer types
+FindGreatEqualDsc_uint8:	FIND_BIN_RIGHT	dl, be, 0
+FindGreatEqualDsc_uint16:	FIND_BIN_RIGHT	dx, be, 1
+FindGreatEqualDsc_uint32:	FIND_BIN_RIGHT	edx, be, 2
+FindGreatEqualDsc_uint64:	FIND_BIN_RIGHT	rdx, be, 3
+
+; Signed integer types
+FindGreatEqualDsc_sint8:	FIND_BIN_RIGHT	dl, le, 0
+FindGreatEqualDsc_sint16:	FIND_BIN_RIGHT	dx, le, 1
+FindGreatEqualDsc_sint32:	FIND_BIN_RIGHT	edx, le, 2
+FindGreatEqualDsc_sint64:	FIND_BIN_RIGHT	rdx, le, 3
 
 ;******************************************************************************;
 ;       Sorting algorithms                                                     ;
@@ -4569,7 +5235,7 @@ bmask	= bytes - 1							; elements aligning mask
 		clone	mask, scale					; duplicate value through the entire register
 ;---[Unaligned operation]------------------
 		add		size, aindex				; size += aindex
-		shl		aindex, 4					; compute shift in mask array
+		shl		aindex, VSCALE				; compute shift in mask array
 		movdqa	blend, dqword [maskS1 + aindex]
 		xor		index, index				; index = 0
 		sub		size, VSIZE					; if (size <= VSIZE)
@@ -4624,7 +5290,7 @@ bmask	= bytes - 1							; elements aligning mask
 		add		ptr, 4 * VSIZE				; ptr += 4 * VSIZE
 		jmp		.vloop						; do while (true)
 ;---[End of vector loop]-------------------
-.tail:	shl		size, 4						; compute shift in mask array
+.tail:	shl		size, VSCALE				; compute shift in mask array
 		pandn	blend, dqword [maskS2 + size]
 		movdqa	temp, [array + index]		; temp = array[index]
 		movdqa	data, temp					; data = temp
@@ -5971,6 +6637,266 @@ Duplicates64:	DUPLICATES	r8, r9, 3
 ;******************************************************************************;
 
 ;==============================================================================;
+;       Check for sort order                                                   ;
+;==============================================================================;
+macro	VCHECK	x, type, dsc
+{
+if type = 0
+		padd#x	temp0, mask					; map unsigned int to signed int
+		padd#x	temp1, mask					; map unsigned int to signed int
+else if type = 2
+		pxor	temp2, temp2				; temp2 = 0
+		pxor	temp3, temp3				; temp3 = 0
+	pcmpgt#x	temp2, temp0				; if (temp0 < 0), then temp2 = dmask
+	pcmpgt#x	temp3, temp1				; if (temp1 < 0), then temp3 = dmask
+		pand	temp2, mask
+		pand	temp3, mask
+		pxor	temp0, temp2				; map float to signed int
+		pxor	temp1, temp3				; map float to signed int
+end if
+if dsc
+	pcmpgt#x	temp1, temp0				; check elements sort order
+	pmovmskb	fmask, temp1				; save check results to fmask
+else
+	pcmpgt#x	temp0, temp1				; check elements sort order
+	pmovmskb	fmask, temp0				; save check results to fmask
+end if
+}
+;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+macro	SCHECK	elem1, elem2, mask1, mask2, type, dsc
+{
+if type = 0
+	if dsc
+		cmp		elem1, elem2				; if (array[0] > array[1])
+		jb		.exit						;     then go to exit
+	else
+		cmp		elem1, elem2				; if (array[0] > array[1])
+		ja		.exit						;     then go to exit
+	end if
+else if type = 1
+	if dsc
+		cmp		elem1, elem2				; if (array[0] > array[1])
+		jl		.exit						;     then go to exit
+	else
+		cmp		elem1, elem2				; if (array[0] > array[1])
+		jg		.exit						;     then go to exit
+	end if
+else if type = 2
+		mov		mask1, elem1				; mask1 = elem1
+		mov		mask2, elem2				; mask2 = elem2
+		sar		elem1, shift
+		sar		elem2, shift
+		shr		elem1, 1
+		shr		elem2, 1
+		xor		elem1, mask1				; map float to signed int
+		xor		elem2, mask2				; map float to signed int
+	if dsc
+		cmp		elem1, elem2				; if (array[0] > array[1])
+		jl		.exit						;     then go to exit
+	else
+		cmp		elem1, elem2				; if (array[0] > array[1])
+		jg		.exit						;     then go to exit
+	end if
+end if
+}
+;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+macro	CHECK_SORT	elem1, elem2, mask1, mask2, x, type, dsc
+{
+;---[Parameters]---------------------------
+array	equ		rdi							; pointer to array
+size	equ		rsi							; array size (count of elements)
+;---[Internal variables]-------------------
+index	equ		rax							; index of first occurence of pattern
+aindex	equ		rcx							; array offset from vector boundary
+aindexl	equ		cl							; low part of "aindex"
+cmask	equ		r8							; mask to clear unrequired results
+fmask	equ		r9							; result of sort order check
+temp0	equ		xmm0						; temporary register #1
+temp1	equ		xmm1						; temporary register #2
+temp2	equ		xmm2						; temporary register #3
+temp3	equ		xmm3						; temporary register #4
+mask	equ		xmm4						; mask to map numbers to signed int
+if x eq b
+scale	= 0									; scale value
+else if x eq w
+scale	= 1									; scale value
+else if x eq d
+dmask	= DMASK_FLT32						; data mask
+scale	= 2									; scale value
+else if x eq q
+dmask	= DMASK_FLT64						; data mask
+scale	= 3									; scale value
+end if
+bytes	= 1 shl scale						; size of array element (bytes)
+bmask	= bytes - 1							; elements aligning mask
+shift	= bytes * 8 - 1						; bit shift to extend number sign
+bias	= 1 shl (shift)						; bias to map unsigned int numbers to signed
+;------------------------------------------
+	prefetchnta	[array]						; prefetch data
+		shftl	size, scale					; convert size to bytes
+		sub		size, bytes					; if (--size <= 0)
+		jbe		.ntfnd						;     then go to not found branch
+		xor		index, index				; index = 0
+if scale <> 0
+		test	array, bmask				; if elements have wrong alignment
+		jnz		.sloop						;     then skip vector code
+end if
+;---[Normal execution branch]--------------
+if type = 0
+		initreg	mask, aindex, bias			; mask = bias
+		clone	mask, scale					; duplicate value through the entire register
+else if type = 2
+		initreg	mask, aindex, dmask			; mask = dmask
+		clone	mask, scale					; duplicate value through the entire register
+end if
+		mov		aindex, array
+		and		aindex, VMASK				; get array offset from vector boundary
+		sub		array, aindex				; align pointer to vector boundary
+;---[Unaligned search for pattern]---------
+		add		size, aindex				; size += aindex
+		mov		cmask, VBITS
+		shl		cmask, aindexl				; adjust cmask for unaligned search
+		sub		size, VSIZE					; if (size < VSIZE)
+		jb		.tail0						;     then check array tail
+		movdqa	temp0, [array]
+		movdqu	temp1, [array + bytes]
+		VCHECK	x, type, dsc				; check elements sort order
+		and		fmask, cmask				; if sort order is broken
+		jnz		.brk						;     then break the loop
+;---[Vector loop]--------------------------
+.vloop:	add		index, VSIZE				; index += VSIZE
+		sub		size, VSIZE					; if (size < VSIZE)
+		jb		.tail1						;     then check array tail
+		movdqa	temp0, [array + 1*VSIZE]
+		movdqu	temp1, [array + 1*VSIZE + bytes]
+		VCHECK	x, type, dsc				; check elements sort order
+		and		fmask, fmask				; if sort order is broken
+		jnz		.brk						;     then break the loop
+		add		index, VSIZE				; index += VSIZE
+		sub		size, VSIZE					; if (size < VSIZE)
+		jb		.tail1						;     then check array tail
+		movdqa	temp0, [array + 2*VSIZE]
+		movdqu	temp1, [array + 2*VSIZE + bytes]
+		VCHECK	x, type, dsc				; check elements sort order
+		and		fmask, fmask				; if sort order is broken
+		jnz		.brk						;     then break the loop
+		add		index, VSIZE				; index += VSIZE
+		sub		size, VSIZE					; if (size < VSIZE)
+		jb		.tail1						;     then check array tail
+		movdqa	temp0, [array + 3*VSIZE]
+		movdqu	temp1, [array + 3*VSIZE + bytes]
+		VCHECK	x, type, dsc				; check elements sort order
+		and		fmask, fmask				; if sort order is broken
+		jnz		.brk						;     then break the loop
+		add		index, VSIZE				; index += VSIZE
+		sub		size, VSIZE					; if (size < VSIZE)
+		jb		.tail1						;     then check array tail
+		movdqa	temp0, [array + 4*VSIZE]
+		movdqu	temp1, [array + 4*VSIZE + bytes]
+		VCHECK	x, type, dsc				; check elements sort order
+		and		fmask, fmask				; if sort order is broken
+		jnz		.brk						;     then break the loop
+	prefetchnta	[array + PSTEP]				; prefetch next portion of data
+		add		array, 4 * VSIZE			; array += 4 * VSIZE
+		jmp		.vloop						; do while (true)
+;---[End of vector loop]-------------------
+.brk:	bsf		fmask, fmask				; find index of element which broke sort order
+		sub		index, aindex				; index -= aindex
+		add		index, fmask				; index += fmask
+		shftr	index, scale
+		add		index, 1					; return index + 1
+		ret
+;---[Tail 0 branch]------------------------
+.tail0:	movdqa	temp0, [array]
+		movdqa	temp1, temp0
+		psrldq	temp1, bytes				; shift vector right to one position
+		VCHECK	x, type, dsc				; check elements sort order
+		and		fmask, cmask				; if sort order is correct
+		jz		.ntfnd						;     then go to not found branch
+		bsf		fmask, fmask				; find index of element which broke sort order
+		add		size, VSIZE					; size += VSIZE
+		cmp		size, fmask					; if (size <= fmask)
+		jbe		.ntfnd						;     then go to not found branch
+		sub		index, aindex				; index -= aindex
+		add		index, fmask				; index += fmask
+		shftr	index, scale
+		add		index, 1					; return index + 1
+		ret
+;---[Tail 1 branch]------------------------
+.tail1:	movdqa	temp0, [array + index]
+		movdqa	temp1, temp0
+		psrldq	temp1, bytes				; shift vector right to one position
+		VCHECK	x, type, dsc				; check elements sort order
+		and		fmask, fmask				; if sort order is correct
+		jz		.ntfnd						;     then go to not found branch
+		bsf		fmask, fmask				; find index of element which broke sort order
+		add		size, VSIZE					; size += VSIZE
+		cmp		size, fmask					; if (size <= fmask)
+		jbe		.ntfnd						;     then go to not found branch
+		sub		index, aindex				; index -= aindex
+		add		index, fmask				; index += fmask
+		shftr	index, scale
+		add		index, 1					; return index + 1
+		ret
+if scale <> 0
+;---[Scalar loop]--------------------------
+.sloop:	mov		elem1, [array]				; element1 = array[0]
+		mov		elem2, [array + bytes]		; element2 = array[1]
+		SCHECK	elem1, elem2, mask1, mask2, type, dsc
+		add		array, bytes				; array++
+		add		index, 1					; index++
+		sub		size, bytes					; size--
+		jnz		.sloop						; do while (size != 0)
+end if
+;---[Not found branch]---------------------
+.ntfnd:	mov		index, NOT_FOUND			; return NOT_FOUND
+		ret
+;---[Found branch]-------------------------
+.exit:	add		index, 1					; return index + 1
+		ret
+}
+
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+;       Check for ascending sort order                                         ;
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+
+; Unsigned integer types
+CheckSortAsc_uint8:		CHECK_SORT	dl, cl, r8b, r9b, b, 0, 0
+CheckSortAsc_uint16:	CHECK_SORT	dx, cx, r8w, r9w, w, 0, 0
+CheckSortAsc_uint32:	CHECK_SORT	edx, ecx, r8d, r9d, d, 0, 0
+CheckSortAsc_uint64:	CHECK_SORT	rdx, rcx, r8, r9, q, 0, 0
+
+; Signed integer types
+CheckSortAsc_sint8:		CHECK_SORT	dl, cl, r8b, r9b, b, 1, 0
+CheckSortAsc_sint16:	CHECK_SORT	dx, cx, r8w, r9w, w, 1, 0
+CheckSortAsc_sint32:	CHECK_SORT	edx, ecx, r8d, r9d, d, 1, 0
+CheckSortAsc_sint64:	CHECK_SORT	rdx, rcx, r8, r9, q, 1, 0
+
+; Floating-point types
+CheckSortAsc_flt32:		CHECK_SORT	edx, ecx, r8d, r9d, d, 2, 0
+CheckSortAsc_flt64:		CHECK_SORT	rdx, rcx, r8, r9, q, 2, 0
+
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+;       Check for descending sort order                                        ;
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+
+; Unsigned integer types
+CheckSortDsc_uint8:		CHECK_SORT	dl, cl, r8b, r9b, b, 0, 1
+CheckSortDsc_uint16:	CHECK_SORT	dx, cx, r8w, r9w, w, 0, 1
+CheckSortDsc_uint32:	CHECK_SORT	edx, ecx, r8d, r9d, d, 0, 1
+CheckSortDsc_uint64:	CHECK_SORT	rdx, rcx, r8, r9, q, 0, 1
+
+; Signed integer types
+CheckSortDsc_sint8:		CHECK_SORT	dl, cl, r8b, r9b, b, 1, 1
+CheckSortDsc_sint16:	CHECK_SORT	dx, cx, r8w, r9w, w, 1, 1
+CheckSortDsc_sint32:	CHECK_SORT	edx, ecx, r8d, r9d, d, 1, 1
+CheckSortDsc_sint64:	CHECK_SORT	rdx, rcx, r8, r9, q, 1, 1
+
+; Floating-point types
+CheckSortDsc_flt32:		CHECK_SORT	edx, ecx, r8d, r9d, d, 2, 1
+CheckSortDsc_flt64:		CHECK_SORT	rdx, rcx, r8, r9, q, 2, 1
+
+;==============================================================================;
 ;       Check for duplicate values                                             ;
 ;==============================================================================;
 macro	CHECK_DUP	element, x
@@ -6013,7 +6939,7 @@ end if
 		sub		array, aindex				; align pointer to vector boundary
 ;---[Unaligned search for pattern]---------
 		add		size, aindex				; size += aindex
-		mov		cmask, 0xFFFF
+		mov		cmask, VBITS
 		shl		cmask, aindexl				; adjust cmask for unaligned search
 		sub		size, VSIZE					; if (size < VSIZE)
 		jb		.tail0						;     then check array tail
@@ -6168,7 +7094,7 @@ bmask	= bytes - 1							; elements aligning mask
 ;---[Unaligned search for pattern]---------
 		add		size, aindex				; size += aindex
 		sub		index, aindex				; index -= aindex
-		mov		cmask, 0xFFFF
+		mov		cmask, VBITS
 		shl		cmask, aindexl				; adjust cmask for unaligned search
 		movdqa	flags, [array]
 		pand	flags, mask					; flags = Abs (array[0])
@@ -6281,8 +7207,8 @@ bmask	= bytes - 1							; elements aligning mask
 		test	size, size					; if (size == 0)
 		jz		.eql						;     then go to equal branch
 		xor		index, index				; index = 0
+		shftl	size, scale					; convert size to bytes
 if scale <> 0
-		shl		size, scale					; convert size to bytes
 		test	array2, bmask				; if elements have wrong alignment
 		jnz		.sloop						;     then skip vector code
 		test	array1, bmask				; if elements have wrong alignment
@@ -6306,7 +7232,7 @@ end if
 		movdqu	a1temp, [array1]			; a1temp = array1[0]
 	pcmpeq#x	a1temp, a2temp				; check if array1[0] == array2[0]
 	pmovmskb	fmask, a1temp				; save check results to fmask
-		xor		fmask, 0xFFFF				; if (array1[0] != array2[0])
+		xor		fmask, VBITS				; if (array1[0] != array2[0])
 		jnz		.brk0						;     then break the loop
 ;---[Vector loop]--------------------------
 .vloop:	add		index, VSIZE				; index += VSIZE
@@ -6316,7 +7242,7 @@ end if
 		movdqa	a1temp, [ptr1 + 1*VSIZE]	; a1temp = ptr1[1]
 	pcmpeq#x	a1temp, a2temp				; check if ptr1[1] == ptr2[1]
 	pmovmskb	fmask, a1temp				; save check results to fmask
-		xor		fmask, 0xFFFF				; if (ptr1[1] != ptr2[1])
+		xor		fmask, VBITS				; if (ptr1[1] != ptr2[1])
 		jnz		.brk1						;     then break the loop
 		add		index, VSIZE				; index += VSIZE
 		sub		size, VSIZE					; if (size <= VSIZE)
@@ -6325,7 +7251,7 @@ end if
 		movdqa	a1temp, [ptr1 + 2*VSIZE]	; a1temp = ptr1[2]
 	pcmpeq#x	a1temp, a2temp				; check if ptr1[2] == ptr2[2]
 	pmovmskb	fmask, a1temp				; save check results to fmask
-		xor		fmask, 0xFFFF				; if (ptr1[2] != ptr2[2])
+		xor		fmask, VBITS				; if (ptr1[2] != ptr2[2])
 		jnz		.brk1						;     then break the loop
 		add		index, VSIZE				; index += VSIZE
 		sub		size, VSIZE					; if (size <= VSIZE)
@@ -6334,7 +7260,7 @@ end if
 		movdqa	a1temp, [ptr1 + 3*VSIZE]	; a1temp = ptr1[3]
 	pcmpeq#x	a1temp, a2temp				; check if ptr1[3] == ptr2[3]
 	pmovmskb	fmask, a1temp				; save check results to fmask
-		xor		fmask, 0xFFFF				; if (ptr1[3] != ptr2[3])
+		xor		fmask, VBITS				; if (ptr1[3] != ptr2[3])
 		jnz		.brk1						;     then break the loop
 		add		index, VSIZE				; index += VSIZE
 		sub		size, VSIZE					; if (size <= VSIZE)
@@ -6343,7 +7269,7 @@ end if
 		movdqa	a1temp, [ptr1 + 4*VSIZE]	; a1temp = ptr1[4]
 	pcmpeq#x	a1temp, a2temp				; check if ptr1[4] == ptr2[4]
 	pmovmskb	fmask, a1temp				; save check results to fmask
-		xor		fmask, 0xFFFF				; if (ptr1[4] != ptr2[4])
+		xor		fmask, VBITS				; if (ptr1[4] != ptr2[4])
 		jnz		.brk1						;     then break the loop
 	prefetchnta	[ptr2 + PSTEP]				; prefetch next portion of temp
 	prefetchnta	[ptr1 + PSTEP]				; prefetch next portion of temp
@@ -6360,7 +7286,7 @@ end if
 		movdqu	a1temp, [array1 + index]	; a1temp = array1[index]
 	pcmpeq#x	a1temp, a2temp				; check if array1[index] == array2[index]
 	pmovmskb	fmask, a1temp				; save check results to fmask
-		xor		fmask, 0xFFFF				; if (array1[index] == array2[index])
+		xor		fmask, VBITS				; if (array1[index] == array2[index])
 		jz		.eql						;     then go to equal branch
 .brk1:	bsf		fmask, fmask				; find index of first different element
 		add		index, fmask				; index += fmask
@@ -6426,22 +7352,18 @@ maskS1		dq	0x0000000000000000, 0x0000000000000000
 			dq	0x00000000000000FF, 0x0000000000000000
 			dq	0x000000000000FFFF, 0x0000000000000000
 			dq	0x0000000000FFFFFF, 0x0000000000000000
-
 			dq	0x00000000FFFFFFFF, 0x0000000000000000
 			dq	0x000000FFFFFFFFFF, 0x0000000000000000
 			dq	0x0000FFFFFFFFFFFF, 0x0000000000000000
 			dq	0x00FFFFFFFFFFFFFF, 0x0000000000000000
-
 			dq	0xFFFFFFFFFFFFFFFF, 0x0000000000000000
 			dq	0xFFFFFFFFFFFFFFFF, 0x00000000000000FF
 			dq	0xFFFFFFFFFFFFFFFF, 0x000000000000FFFF
 			dq	0xFFFFFFFFFFFFFFFF, 0x0000000000FFFFFF
-
 			dq	0xFFFFFFFFFFFFFFFF, 0x00000000FFFFFFFF
 			dq	0xFFFFFFFFFFFFFFFF, 0x000000FFFFFFFFFF
 			dq	0xFFFFFFFFFFFFFFFF, 0x0000FFFFFFFFFFFF
 			dq	0xFFFFFFFFFFFFFFFF, 0x00FFFFFFFFFFFFFF
-
 maskS2		dq	0xFFFFFFFFFFFFFFFF, 0xFFFFFFFFFFFFFFFF
 
 align 16

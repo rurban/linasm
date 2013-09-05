@@ -693,38 +693,38 @@ static size_t FindEqualAsc (const size_t array[], size_t size, size_t value);
 //----------------------------------------------------------------------------//
 
 // Unsigned integer types
-static size_t FindGreaterAsc (const uint8_t array[], size_t size, uint8_t value);
-static size_t FindGreaterAsc (const uint16_t array[], size_t size, uint16_t value);
-static size_t FindGreaterAsc (const uint32_t array[], size_t size, uint32_t value);
-static size_t FindGreaterAsc (const uint64_t array[], size_t size, uint64_t value);
+static size_t FindGreatAsc (const uint8_t array[], size_t size, uint8_t value);
+static size_t FindGreatAsc (const uint16_t array[], size_t size, uint16_t value);
+static size_t FindGreatAsc (const uint32_t array[], size_t size, uint32_t value);
+static size_t FindGreatAsc (const uint64_t array[], size_t size, uint64_t value);
 
 // Signed integer types
-static size_t FindGreaterAsc (const sint8_t array[], size_t size, sint8_t value);
-static size_t FindGreaterAsc (const sint16_t array[], size_t size, sint16_t value);
-static size_t FindGreaterAsc (const sint32_t array[], size_t size, sint32_t value);
-static size_t FindGreaterAsc (const sint64_t array[], size_t size, sint64_t value);
+static size_t FindGreatAsc (const sint8_t array[], size_t size, sint8_t value);
+static size_t FindGreatAsc (const sint16_t array[], size_t size, sint16_t value);
+static size_t FindGreatAsc (const sint32_t array[], size_t size, sint32_t value);
+static size_t FindGreatAsc (const sint64_t array[], size_t size, sint64_t value);
 
 // Other types
-static size_t FindGreaterAsc (const size_t array[], size_t size, size_t value);
+static size_t FindGreatAsc (const size_t array[], size_t size, size_t value);
 
 //----------------------------------------------------------------------------//
 //      Searching for greater or equal element                                //
 //----------------------------------------------------------------------------//
 
 // Unsigned integer types
-static size_t FindGreaterOrEqualAsc (const uint8_t array[], size_t size, uint8_t value);
-static size_t FindGreaterOrEqualAsc (const uint16_t array[], size_t size, uint16_t value);
-static size_t FindGreaterOrEqualAsc (const uint32_t array[], size_t size, uint32_t value);
-static size_t FindGreaterOrEqualAsc (const uint64_t array[], size_t size, uint64_t value);
+static size_t FindGreatOrEqualAsc (const uint8_t array[], size_t size, uint8_t value);
+static size_t FindGreatOrEqualAsc (const uint16_t array[], size_t size, uint16_t value);
+static size_t FindGreatOrEqualAsc (const uint32_t array[], size_t size, uint32_t value);
+static size_t FindGreatOrEqualAsc (const uint64_t array[], size_t size, uint64_t value);
 
 // Signed integer types
-static size_t FindGreaterOrEqualAsc (const sint8_t array[], size_t size, sint8_t value);
-static size_t FindGreaterOrEqualAsc (const sint16_t array[], size_t size, sint16_t value);
-static size_t FindGreaterOrEqualAsc (const sint32_t array[], size_t size, sint32_t value);
-static size_t FindGreaterOrEqualAsc (const sint64_t array[], size_t size, sint64_t value);
+static size_t FindGreatOrEqualAsc (const sint8_t array[], size_t size, sint8_t value);
+static size_t FindGreatOrEqualAsc (const sint16_t array[], size_t size, sint16_t value);
+static size_t FindGreatOrEqualAsc (const sint32_t array[], size_t size, sint32_t value);
+static size_t FindGreatOrEqualAsc (const sint64_t array[], size_t size, sint64_t value);
 
 // Other types
-static size_t FindGreaterOrEqualAsc (const size_t array[], size_t size, size_t value);
+static size_t FindGreatOrEqualAsc (const size_t array[], size_t size, size_t value);
 
 //----------------------------------------------------------------------------//
 //      Searching for less element                                            //
@@ -830,38 +830,38 @@ static size_t FindLessOrEqualDsc (const size_t array[], size_t size, size_t valu
 //----------------------------------------------------------------------------//
 
 // Unsigned integer types
-static size_t FindGreaterDsc (const uint8_t array[], size_t size, uint8_t value);
-static size_t FindGreaterDsc (const uint16_t array[], size_t size, uint16_t value);
-static size_t FindGreaterDsc (const uint32_t array[], size_t size, uint32_t value);
-static size_t FindGreaterDsc (const uint64_t array[], size_t size, uint64_t value);
+static size_t FindGreatDsc (const uint8_t array[], size_t size, uint8_t value);
+static size_t FindGreatDsc (const uint16_t array[], size_t size, uint16_t value);
+static size_t FindGreatDsc (const uint32_t array[], size_t size, uint32_t value);
+static size_t FindGreatDsc (const uint64_t array[], size_t size, uint64_t value);
 
 // Signed integer types
-static size_t FindGreaterDsc (const sint8_t array[], size_t size, sint8_t value);
-static size_t FindGreaterDsc (const sint16_t array[], size_t size, sint16_t value);
-static size_t FindGreaterDsc (const sint32_t array[], size_t size, sint32_t value);
-static size_t FindGreaterDsc (const sint64_t array[], size_t size, sint64_t value);
+static size_t FindGreatDsc (const sint8_t array[], size_t size, sint8_t value);
+static size_t FindGreatDsc (const sint16_t array[], size_t size, sint16_t value);
+static size_t FindGreatDsc (const sint32_t array[], size_t size, sint32_t value);
+static size_t FindGreatDsc (const sint64_t array[], size_t size, sint64_t value);
 
 // Other types
-static size_t FindGreaterDsc (const size_t array[], size_t size, size_t value);
+static size_t FindGreatDsc (const size_t array[], size_t size, size_t value);
 
 //----------------------------------------------------------------------------//
 //      Searching for greater or equal element                                //
 //----------------------------------------------------------------------------//
 
 // Unsigned integer types
-static size_t FindGreaterOrEqualDsc (const uint8_t array[], size_t size, uint8_t value);
-static size_t FindGreaterOrEqualDsc (const uint16_t array[], size_t size, uint16_t value);
-static size_t FindGreaterOrEqualDsc (const uint32_t array[], size_t size, uint32_t value);
-static size_t FindGreaterOrEqualDsc (const uint64_t array[], size_t size, uint64_t value);
+static size_t FindGreatOrEqualDsc (const uint8_t array[], size_t size, uint8_t value);
+static size_t FindGreatOrEqualDsc (const uint16_t array[], size_t size, uint16_t value);
+static size_t FindGreatOrEqualDsc (const uint32_t array[], size_t size, uint32_t value);
+static size_t FindGreatOrEqualDsc (const uint64_t array[], size_t size, uint64_t value);
 
 // Signed integer types
-static size_t FindGreaterOrEqualDsc (const sint8_t array[], size_t size, sint8_t value);
-static size_t FindGreaterOrEqualDsc (const sint16_t array[], size_t size, sint16_t value);
-static size_t FindGreaterOrEqualDsc (const sint32_t array[], size_t size, sint32_t value);
-static size_t FindGreaterOrEqualDsc (const sint64_t array[], size_t size, sint64_t value);
+static size_t FindGreatOrEqualDsc (const sint8_t array[], size_t size, sint8_t value);
+static size_t FindGreatOrEqualDsc (const sint16_t array[], size_t size, sint16_t value);
+static size_t FindGreatOrEqualDsc (const sint32_t array[], size_t size, sint32_t value);
+static size_t FindGreatOrEqualDsc (const sint64_t array[], size_t size, sint64_t value);
 
 // Other types
-static size_t FindGreaterOrEqualDsc (const size_t array[], size_t size, size_t value);
+static size_t FindGreatOrEqualDsc (const size_t array[], size_t size, size_t value);
 
 //****************************************************************************//
 //      Sorting algorithms                                                    //
@@ -2009,38 +2009,38 @@ size_t Array_FindEqualAsc_size (const size_t array[], size_t size, size_t value)
 //----------------------------------------------------------------------------//
 
 // Unsigned integer types
-size_t Array_FindGreaterAsc_uint8 (const uint8_t array[], size_t size, uint8_t value);
-size_t Array_FindGreaterAsc_uint16 (const uint16_t array[], size_t size, uint16_t value);
-size_t Array_FindGreaterAsc_uint32 (const uint32_t array[], size_t size, uint32_t value);
-size_t Array_FindGreaterAsc_uint64 (const uint64_t array[], size_t size, uint64_t value);
+size_t Array_FindGreatAsc_uint8 (const uint8_t array[], size_t size, uint8_t value);
+size_t Array_FindGreatAsc_uint16 (const uint16_t array[], size_t size, uint16_t value);
+size_t Array_FindGreatAsc_uint32 (const uint32_t array[], size_t size, uint32_t value);
+size_t Array_FindGreatAsc_uint64 (const uint64_t array[], size_t size, uint64_t value);
 
 // Signed integer types
-size_t Array_FindGreaterAsc_sint8 (const sint8_t array[], size_t size, sint8_t value);
-size_t Array_FindGreaterAsc_sint16 (const sint16_t array[], size_t size, sint16_t value);
-size_t Array_FindGreaterAsc_sint32 (const sint32_t array[], size_t size, sint32_t value);
-size_t Array_FindGreaterAsc_sint64 (const sint64_t array[], size_t size, sint64_t value);
+size_t Array_FindGreatAsc_sint8 (const sint8_t array[], size_t size, sint8_t value);
+size_t Array_FindGreatAsc_sint16 (const sint16_t array[], size_t size, sint16_t value);
+size_t Array_FindGreatAsc_sint32 (const sint32_t array[], size_t size, sint32_t value);
+size_t Array_FindGreatAsc_sint64 (const sint64_t array[], size_t size, sint64_t value);
 
 // Other types
-size_t Array_FindGreaterAsc_size (const size_t array[], size_t size, size_t value);
+size_t Array_FindGreatAsc_size (const size_t array[], size_t size, size_t value);
 
 //----------------------------------------------------------------------------//
 //      Searching for greater or equal element                                //
 //----------------------------------------------------------------------------//
 
 // Unsigned integer types
-size_t Array_FindGreaterOrEqualAsc_uint8 (const uint8_t array[], size_t size, uint8_t value);
-size_t Array_FindGreaterOrEqualAsc_uint16 (const uint16_t array[], size_t size, uint16_t value);
-size_t Array_FindGreaterOrEqualAsc_uint32 (const uint32_t array[], size_t size, uint32_t value);
-size_t Array_FindGreaterOrEqualAsc_uint64 (const uint64_t array[], size_t size, uint64_t value);
+size_t Array_FindGreatOrEqualAsc_uint8 (const uint8_t array[], size_t size, uint8_t value);
+size_t Array_FindGreatOrEqualAsc_uint16 (const uint16_t array[], size_t size, uint16_t value);
+size_t Array_FindGreatOrEqualAsc_uint32 (const uint32_t array[], size_t size, uint32_t value);
+size_t Array_FindGreatOrEqualAsc_uint64 (const uint64_t array[], size_t size, uint64_t value);
 
 // Signed integer types
-size_t Array_FindGreaterOrEqualAsc_sint8 (const sint8_t array[], size_t size, sint8_t value);
-size_t Array_FindGreaterOrEqualAsc_sint16 (const sint16_t array[], size_t size, sint16_t value);
-size_t Array_FindGreaterOrEqualAsc_sint32 (const sint32_t array[], size_t size, sint32_t value);
-size_t Array_FindGreaterOrEqualAsc_sint64 (const sint64_t array[], size_t size, sint64_t value);
+size_t Array_FindGreatOrEqualAsc_sint8 (const sint8_t array[], size_t size, sint8_t value);
+size_t Array_FindGreatOrEqualAsc_sint16 (const sint16_t array[], size_t size, sint16_t value);
+size_t Array_FindGreatOrEqualAsc_sint32 (const sint32_t array[], size_t size, sint32_t value);
+size_t Array_FindGreatOrEqualAsc_sint64 (const sint64_t array[], size_t size, sint64_t value);
 
 // Other types
-size_t Array_FindGreaterOrEqualAsc_size (const size_t array[], size_t size, size_t value);
+size_t Array_FindGreatOrEqualAsc_size (const size_t array[], size_t size, size_t value);
 
 //----------------------------------------------------------------------------//
 //      Searching for less element                                            //
@@ -2146,38 +2146,38 @@ size_t Array_FindLessOrEqualDsc_size (const size_t array[], size_t size, size_t 
 //----------------------------------------------------------------------------//
 
 // Unsigned integer types
-size_t Array_FindGreaterDsc_uint8 (const uint8_t array[], size_t size, uint8_t value);
-size_t Array_FindGreaterDsc_uint16 (const uint16_t array[], size_t size, uint16_t value);
-size_t Array_FindGreaterDsc_uint32 (const uint32_t array[], size_t size, uint32_t value);
-size_t Array_FindGreaterDsc_uint64 (const uint64_t array[], size_t size, uint64_t value);
+size_t Array_FindGreatDsc_uint8 (const uint8_t array[], size_t size, uint8_t value);
+size_t Array_FindGreatDsc_uint16 (const uint16_t array[], size_t size, uint16_t value);
+size_t Array_FindGreatDsc_uint32 (const uint32_t array[], size_t size, uint32_t value);
+size_t Array_FindGreatDsc_uint64 (const uint64_t array[], size_t size, uint64_t value);
 
 // Signed integer types
-size_t Array_FindGreaterDsc_sint8 (const sint8_t array[], size_t size, sint8_t value);
-size_t Array_FindGreaterDsc_sint16 (const sint16_t array[], size_t size, sint16_t value);
-size_t Array_FindGreaterDsc_sint32 (const sint32_t array[], size_t size, sint32_t value);
-size_t Array_FindGreaterDsc_sint64 (const sint64_t array[], size_t size, sint64_t value);
+size_t Array_FindGreatDsc_sint8 (const sint8_t array[], size_t size, sint8_t value);
+size_t Array_FindGreatDsc_sint16 (const sint16_t array[], size_t size, sint16_t value);
+size_t Array_FindGreatDsc_sint32 (const sint32_t array[], size_t size, sint32_t value);
+size_t Array_FindGreatDsc_sint64 (const sint64_t array[], size_t size, sint64_t value);
 
 // Other types
-size_t Array_FindGreaterDsc_size (const size_t array[], size_t size, size_t value);
+size_t Array_FindGreatDsc_size (const size_t array[], size_t size, size_t value);
 
 //----------------------------------------------------------------------------//
 //      Searching for greater or equal element                                //
 //----------------------------------------------------------------------------//
 
 // Unsigned integer types
-size_t Array_FindGreaterOrEqualDsc_uint8 (const uint8_t array[], size_t size, uint8_t value);
-size_t Array_FindGreaterOrEqualDsc_uint16 (const uint16_t array[], size_t size, uint16_t value);
-size_t Array_FindGreaterOrEqualDsc_uint32 (const uint32_t array[], size_t size, uint32_t value);
-size_t Array_FindGreaterOrEqualDsc_uint64 (const uint64_t array[], size_t size, uint64_t value);
+size_t Array_FindGreatOrEqualDsc_uint8 (const uint8_t array[], size_t size, uint8_t value);
+size_t Array_FindGreatOrEqualDsc_uint16 (const uint16_t array[], size_t size, uint16_t value);
+size_t Array_FindGreatOrEqualDsc_uint32 (const uint32_t array[], size_t size, uint32_t value);
+size_t Array_FindGreatOrEqualDsc_uint64 (const uint64_t array[], size_t size, uint64_t value);
 
 // Signed integer types
-size_t Array_FindGreaterOrEqualDsc_sint8 (const sint8_t array[], size_t size, sint8_t value);
-size_t Array_FindGreaterOrEqualDsc_sint16 (const sint16_t array[], size_t size, sint16_t value);
-size_t Array_FindGreaterOrEqualDsc_sint32 (const sint32_t array[], size_t size, sint32_t value);
-size_t Array_FindGreaterOrEqualDsc_sint64 (const sint64_t array[], size_t size, sint64_t value);
+size_t Array_FindGreatOrEqualDsc_sint8 (const sint8_t array[], size_t size, sint8_t value);
+size_t Array_FindGreatOrEqualDsc_sint16 (const sint16_t array[], size_t size, sint16_t value);
+size_t Array_FindGreatOrEqualDsc_sint32 (const sint32_t array[], size_t size, sint32_t value);
+size_t Array_FindGreatOrEqualDsc_sint64 (const sint64_t array[], size_t size, sint64_t value);
 
 // Other types
-size_t Array_FindGreaterOrEqualDsc_size (const size_t array[], size_t size, size_t value);
+size_t Array_FindGreatOrEqualDsc_size (const size_t array[], size_t size, size_t value);
 
 //****************************************************************************//
 //      Sorting algorithms                                                    //
