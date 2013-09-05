@@ -455,6 +455,30 @@ static flt32_t Power (flt32_t base, sint8_t exp);
 static flt64_t Power (flt64_t base, sint16_t exp);
 
 //****************************************************************************//
+//      Logarithmic functions                                                 //
+//****************************************************************************//
+
+//============================================================================//
+//      Logarithm of 2                                                        //
+//============================================================================//
+
+// Integer logarithm of 2
+static uint8_t Log2 (uint8_t value);
+static uint8_t Log2 (uint16_t value);
+static uint8_t Log2 (uint32_t value);
+static uint8_t Log2 (uint64_t value);
+
+//============================================================================//
+//      Logarithm of 10                                                       //
+//============================================================================//
+
+// Integer logarithm of 10
+static uint8_t Log10 (uint8_t value);
+static uint8_t Log10 (uint16_t value);
+static uint8_t Log10 (uint32_t value);
+static uint8_t Log10 (uint64_t value);
+
+//****************************************************************************//
 //      Scale functions                                                       //
 //****************************************************************************//
 
@@ -729,8 +753,8 @@ sint32_t Math_Cmp_sint32 (sint32_t x, sint32_t y);
 sint64_t Math_Cmp_sint64 (sint64_t x, sint64_t y);
 
 // Floating-point types
-sint32_t Math_Cmp_flt32 (flt32_t x, flt32_t y);
-sint64_t Math_Cmp_flt64 (flt64_t x, flt64_t y);
+flt32_t Math_Cmp_flt32 (flt32_t x, flt32_t y);
+flt64_t Math_Cmp_flt64 (flt64_t x, flt64_t y);
 
 //============================================================================//
 //      Minimum and maximum value                                             //
@@ -935,6 +959,30 @@ sint64_t Math_Power_sint64 (sint64_t base, uint8_t exp);
 // Floating-point types
 flt32_t Math_Poweri_flt32 (flt32_t base, sint8_t exp);
 flt64_t Math_Poweri_flt64 (flt64_t base, sint16_t exp);
+
+//****************************************************************************//
+//      Logarithmic functions                                                 //
+//****************************************************************************//
+
+//============================================================================//
+//      Logarithm of 2                                                        //
+//============================================================================//
+
+// Integer logarithm of 2
+uint8_t Math_Log2_uint8 (uint8_t value);
+uint8_t Math_Log2_uint16 (uint16_t value);
+uint8_t Math_Log2_uint32 (uint32_t value);
+uint8_t Math_Log2_uint64 (uint64_t value);
+
+//============================================================================//
+//      Logarithm of 10                                                       //
+//============================================================================//
+
+// Integer logarithm of 10
+uint8_t Math_Log10_uint8 (uint8_t value);
+uint8_t Math_Log10_uint16 (uint16_t value);
+uint8_t Math_Log10_uint32 (uint32_t value);
+uint8_t Math_Log10_uint64 (uint64_t value);
 
 //****************************************************************************//
 //      Scale functions                                                       //
