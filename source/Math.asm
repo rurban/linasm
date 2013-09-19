@@ -290,6 +290,10 @@ public	Cmp_uint8			as	'_ZN4Math3CmpEhh'
 public	Cmp_uint16			as	'_ZN4Math3CmpEtt'
 public	Cmp_uint32			as	'_ZN4Math3CmpEjj'
 public	Cmp_uint64			as	'_ZN4Math3CmpEyy'
+public	Cmp_uint8			as	'_Z8CmpUint85adt_tS_'
+public	Cmp_uint16			as	'_Z9CmpUint165adt_tS_'
+public	Cmp_uint32			as	'_Z9CmpUint325adt_tS_'
+public	Cmp_uint64			as	'_Z9CmpUint645adt_tS_'
 
 ; Signed integer types
 public	Cmp_sint8			as	'Math_Cmp_sint8'
@@ -300,12 +304,18 @@ public	Cmp_sint8			as	'_ZN4Math3CmpEaa'
 public	Cmp_sint16			as	'_ZN4Math3CmpEss'
 public	Cmp_sint32			as	'_ZN4Math3CmpEii'
 public	Cmp_sint64			as	'_ZN4Math3CmpExx'
+public	Cmp_sint8			as	'_Z8CmpSint85adt_tS_'
+public	Cmp_sint16			as	'_Z9CmpSint165adt_tS_'
+public	Cmp_sint32			as	'_Z9CmpSint325adt_tS_'
+public	Cmp_sint64			as	'_Z9CmpSint645adt_tS_'
 
 ; Floating-point types
 public	Cmp_flt32			as	'Math_Cmp_flt32'
 public	Cmp_flt64			as	'Math_Cmp_flt64'
 public	Cmp_flt32			as	'_ZN4Math3CmpEff'
 public	Cmp_flt64			as	'_ZN4Math3CmpEdd'
+public	CmpFlt32			as	'_Z8CmpFlt325adt_tS_'
+public	CmpFlt64			as	'_Z8CmpFlt645adt_tS_'
 
 ;==============================================================================;
 ;       Minimum and maximum value                                              ;
@@ -602,6 +612,30 @@ public	Power_flt32			as	'Math_Poweri_flt32'
 public	Power_flt64			as	'Math_Poweri_flt64'
 public	Power_flt32			as	'_ZN4Math5PowerEfa'
 public	Power_flt64			as	'_ZN4Math5PowerEds'
+
+;******************************************************************************;
+;       Logarithmic functions                                                  ;
+;******************************************************************************;
+
+;==============================================================================;
+;       Logarithm of 2                                                         ;
+;==============================================================================;
+
+; Integer logarithm of 2
+public	Log2i_uint8			as	'_ZN4Math4Log2Eh'
+public	Log2i_uint16		as	'_ZN4Math4Log2Et'
+public	Log2i_uint32		as	'_ZN4Math4Log2Ej'
+public	Log2i_uint64		as	'_ZN4Math4Log2Ey'
+
+;==============================================================================;
+;       Logarithm of 10                                                        ;
+;==============================================================================;
+
+; Integer logarithm of 10
+public	Log10i_uint8		as	'_ZN4Math5Log10Eh'
+public	Log10i_uint16		as	'_ZN4Math5Log10Et'
+public	Log10i_uint32		as	'_ZN4Math5Log10Ej'
+public	Log10i_uint64		as	'_ZN4Math5Log10Ey'
 
 ;******************************************************************************;
 ;       Scale functions                                                        ;
@@ -1036,64 +1070,66 @@ NegAbs_flt64:	ABS_FLT		rax, 1, d
 ;==============================================================================;
 ;       Number sign                                                            ;
 ;==============================================================================;
-macro	SIGN_INT	value
+macro	SIGN_INT	value1, value2, c1, c2
 {
 ;---[Internal variables]-------------------
 result	equ		rax							; result register
-pone	equ		rdx							; +1
-mone	equ		rcx							; -1
+great	equ		rdx							; +1
+less	equ		rcx							; -1
 ;------------------------------------------
 		xor		result, result				; result = 0
-		mov		pone, +1					; pone = +1
-		mov		mone, -1					; mone = -1
-		cmp		value, 0					; check value sign
-		cmovg	result, pone				; if (value > 0), return +1
-		cmovl	result, mone				; if (value < 0), return -1
-		ret
+		mov		great, +1					; great = +1
+		mov		less, -1					; less = -1
+		cmp		value1, value2				; compare values
+		cmov#c1	result, great				; if (value1 > value2), return great
+		cmov#c2	result, less				; if (value1 < value2), return less
+		ret									; if (value1 == value2), return equal
 }
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	SIGN_FLT	temp, pone, mone, nan, x
+macro	SIGN_FLT	temp, great, less, nan, x, sign
 {
 ;---[Parameters]---------------------------
-value	equ		xmm0						; value
+value1	equ		xmm0						; first value
+value2	equ		xmm1						; second value
 ;---[Internal variables]-------------------
-zero	equ		xmm1						; 0.0
 if x eq s
-poneval	= PONE_FLT32						; +1.0
-moneval	= MONE_FLT32						; -1.0
-nanval	= DMASK_FLT32						; NaN
+gval	= PONE_FLT32						; +1.0
+lval	= MONE_FLT32						; -1.0
+nval	= DMASK_FLT32						; NaN
 else if x eq d
-poneval	= PONE_FLT64						; +1.0
-moneval	= MONE_FLT64						; -1.0
-nanval	= DMASK_FLT64						; NaN
+gval	= PONE_FLT64						; +1.0
+lval	= MONE_FLT64						; -1.0
+nval	= DMASK_FLT64						; NaN
 end if
 ;------------------------------------------
-		xorp#x	zero, zero					; zero = 0
+if sign
+		xorp#x	value2, value2				; value2 = 0
+end if
 		xor		temp, temp					; temp = 0
-		mov		pone, poneval				; pone = +1
-		mov		mone, moneval				; mone = -1
-		mov		nan, nanval					; nan = NaN
-		comis#x	value, zero					; check value sign
-		cmova	temp, pone					; if (value > 0), return +1
-		cmovb	temp, mone					; if (value < 0), return -1
-		cmovp	temp, nan					; if (value == NaN), return NaN
+		mov		great, gval					; great = +1
+		mov		less, lval					; less = -1
+		mov		nan, nval					; nan = NaN
+		comis#x	value1, value2				; compare values
+		cmova	temp, great					; if (value1 > value2), return great
+		cmovb	temp, less					; if (value1 < value1), return less
+		cmovp	temp, nan					; if NaN is detected, then return NaN
 if x eq s
-		movd	value, temp
+		movd	value1, temp
 else if x eq d
-		movq	value, temp
+		movq	value1, temp
 end if
 		ret
 }
 
 ; Signed integer types
-Sign_sint8:		SIGN_INT	dil
-Sign_sint16:	SIGN_INT	di
-Sign_sint32:	SIGN_INT	edi
-Sign_sint64:	SIGN_INT	rdi
+Sign_sint8:		SIGN_INT		dil, 0, g, l
+Sign_sint16:	SIGN_INT		di, 0, g, l
+Sign_sint32:	SIGN_INT		edi, 0, g, l
+Sign_sint64:	SIGN_INT		rdi, 0, g, l
 
 ; Floating-point types
-Sign_flt32:		SIGN_FLT	eax, edx, ecx, edi, s
-Sign_flt64:		SIGN_FLT	rax, rdx, rcx, rdi, d
+Sign_flt32:		SIGN_FLT		eax, edx, ecx, edi, s, 1
+Sign_flt64:		SIGN_FLT		rax, rdx, rcx, rdi, d, 1
 
 ;==============================================================================;
 ;       Square root                                                            ;
@@ -1138,47 +1174,52 @@ Sqrt_flt64:		SQRT_FLT	d
 ;==============================================================================;
 ;       Three-state comparison                                                 ;
 ;==============================================================================;
-macro	CMP_INT	value1, value2, c1, c2
+macro	SIGN_RAW		value1, value2, temp1, temp2, x
 {
 ;---[Internal variables]-------------------
 result	equ		rax							; result register
-pone	equ		rdx							; +1
-mone	equ		rcx							; -1
+great	equ		rdx							; +1
+less	equ		rcx							; -1
+if x eq s
+shift	= 30								; shift value
+else if x eq d
+shift	= 62								; shift value
+end if
 ;------------------------------------------
+		mov		temp1, value1				; temp1 = value1
+		mov		temp2, value2				; temp2 = value2
+		sar		temp1, shift
+		sar		temp2, shift
+		shr		temp1, 1					; temp1 = (unsigned) (value1 >> shift) >> 1
+		shr		temp2, 1					; temp2 = (unsigned) (value2 >> shift) >> 1
+		xor		value1, temp1				; value1 = value1 ^ temp1
+		xor		value2, temp2				; value2 = value2 ^ temp2
 		xor		result, result				; result = 0
-		mov		pone, +1					; pone = +1
-		mov		mone, -1					; mone = -1
+		mov		great, +1					; great = +1
+		mov		less, -1					; less = -1
 		cmp		value1, value2				; compare values
-		cmov#c1	result, pone				; if (value1 > value2), return +1
-		cmov#c2	result, mone				; if (value1 < value2), return -1
-		ret
-}
-;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	CMP_FLT	temp, pone, mone, nan, x
-{
-;---[Parameters]---------------------------
-value1	equ		xmm0						; first value
-value2	equ		xmm1						; second value
-;------------------------------------------
-		subs#x	value1, value2
-	SIGN_FLT	temp, pone, mone, nan, x
+		cmovg	result, great				; if (value1 > value2), return great
+		cmovl	result, less				; if (value1 < value2), return less
+		ret									; if (value1 == value2), return equal
 }
 
 ; Unsigned integer types
-Cmp_uint8:		CMP_INT		dil, sil, a, b
-Cmp_uint16:		CMP_INT		di, si, a, b
-Cmp_uint32:		CMP_INT		edi, esi, a, b
-Cmp_uint64:		CMP_INT		rdi, rsi, a, b
+Cmp_uint8:		SIGN_INT		dil, sil, a, b
+Cmp_uint16:		SIGN_INT		di, si, a, b
+Cmp_uint32:		SIGN_INT		edi, esi, a, b
+Cmp_uint64:		SIGN_INT		rdi, rsi, a, b
 
 ; Signed integer types
-Cmp_sint8:		CMP_INT		dil, sil, g, l
-Cmp_sint16:		CMP_INT		di, si, g, l
-Cmp_sint32:		CMP_INT		edi, esi, g, l
-Cmp_sint64:		CMP_INT		rdi, rsi, g, l
+Cmp_sint8:		SIGN_INT		dil, sil, g, l
+Cmp_sint16:		SIGN_INT		di, si, g, l
+Cmp_sint32:		SIGN_INT		edi, esi, g, l
+Cmp_sint64:		SIGN_INT		rdi, rsi, g, l
 
 ; Floating-point types
-Cmp_flt32:		CMP_FLT		eax, edx, ecx, edi, s
-Cmp_flt64:		CMP_FLT		rax, rdx, rcx, rdi, d
+Cmp_flt32:		SIGN_FLT		eax, edx, ecx, edi, s, 0
+Cmp_flt64:		SIGN_FLT		rax, rdx, rcx, rdi, d, 0
+CmpFlt32:		SIGN_RAW		edi, esi, r8d, r9d, s
+CmpFlt64:		SIGN_RAW		rdi, rsi, r8, r9, d
 
 ;==============================================================================;
 ;       Minimum and maximum value                                              ;
@@ -3490,6 +3531,67 @@ Power_flt32:	POWER_FLT	dil, eax, s
 Power_flt64:	POWER_FLT	di, rax, d
 
 ;******************************************************************************;
+;       Logarithmic functions                                                  ;
+;******************************************************************************;
+
+;==============================================================================;
+;       Logarithm of 2                                                         ;
+;==============================================================================;
+macro	LOG2I	val, scale
+{
+;---[Parameters]---------------------------
+value	equ		rdi							; value to operate
+;---[Internal variables]-------------------
+result	equ		rax							; result register
+;------------------------------------------
+if scale < 2
+		movzx	value, val					; zero extend value to 64-bit value
+end if
+		test	value, value				; if (value == 0)
+		jz		.error						;     then go to error branch
+;---[Normal execution branch]--------------
+		bsr		result, value				; return index of most significant bit
+		ret
+;---[Error branch]-------------------------
+.error:	mov		result, ERROR				; return ERROR
+		ret
+}
+
+; Integer logarithm of 2
+Log2i_uint8:	LOG2I	dil, 0
+Log2i_uint16:	LOG2I	di, 1
+Log2i_uint32:	LOG2I	edi, 2
+Log2i_uint64:	LOG2I	rdi, 3
+
+;==============================================================================;
+;       Logarithm of 10                                                        ;
+;==============================================================================;
+macro	LOG10I	val, index, scale
+{
+;---[Parameters]---------------------------
+value	equ		rdi							; value to operate
+;---[Internal variables]-------------------
+result	equ		rax							; result register
+;------------------------------------------
+if scale < 2
+		movzx	value, val					; zero extend value to 64-bit value
+end if
+		mov		result, index				; result = index
+;---[Search loop]--------------------------
+.loop:	sub		result, 1					; result--
+		cmp		value, [ten_table_int + result * 8]
+		jb		.loop						; do while (value < ten_table_int[resul])
+;---[End of search loop]-------------------
+		ret									; return result
+}
+
+; Integer logarithm of 10
+Log10i_uint8:	LOG10I	dil, 3, 0
+Log10i_uint16:	LOG10I	di, 5, 1
+Log10i_uint32:	LOG10I	edi, 10, 2
+Log10i_uint64:	LOG10I	rdi, 20, 3
+
+;******************************************************************************;
 ;       Scale functions                                                        ;
 ;******************************************************************************;
 macro	SCALE	treg, shift, exp_min, exp_max, svalue1, svalue2, table, x
@@ -3838,6 +3940,7 @@ IsNaN_flt64:	ISNAN	rax, rcx, rdx, q
 section	'.rodata'	align 16
 
 align 16
+				dq	0							; 10^-1 (fake power for 0 values)
 ten_table_int	dq	1							; 10^0
 				dq	10							; 10^1
 				dq	100							; 10^2
@@ -3860,7 +3963,9 @@ ten_table_int	dq	1							; 10^0
 				dq	10000000000000000000		; 10^19
 				dq	0							; 0 (overflow)
 
-; Coefficients to compute cos(x) for flt64_t type
+;******************************************************************************;
+;       Coefficients to compute cos(x) for flt64_t type                        ;
+;******************************************************************************;
 align 16
 cos_flt64		dq	0xBF56C16C16C16C17			; -1 / 6!
 				dq	0xBE927E4FB7789F5C			; -1 / 10!
@@ -3870,7 +3975,9 @@ cos_flt64		dq	0xBF56C16C16C16C17			; -1 / 6!
 				dq	0x3EFA01A01A01A01A			; +1 / 8!
 				dq	0x3E21EED8EFF8D898			; +1 / 12!
 
-; Coefficients to compute sin(x) for flt64_t type
+;******************************************************************************;
+;       Coefficients to compute sin(x) for flt64_t type                        ;
+;******************************************************************************;
 align 16
 sin_flt64		dq	0x3F81111111111111			; +1 / 5!
 				dq	0x3EC71DE3A556C734			; +1 / 9!
@@ -3880,7 +3987,9 @@ sin_flt64		dq	0x3F81111111111111			; +1 / 5!
 				dq	0xBF2A01A01A01A01A			; -1 / 7!
 				dq	0xBE5AE64567F544E4			; -1 / 11!
 
-; Coefficients to compute exp2(x) for flt64_t type
+;******************************************************************************;
+;       Coefficients to compute exp2(x) for flt64_t type                       ;
+;******************************************************************************;
 align 16
 exp2_flt64		dq	0x3F947FD3FFAC83B4			; ln(2)^2 / 4!
 				dq	0x3F3502D8FFB5A908			; ln(2)^4 / 6!
@@ -3895,7 +4004,9 @@ exp2_flt64		dq	0x3F947FD3FFAC83B4			; ln(2)^2 / 4!
 				dq	0x3E8C6EE35A409D22			; ln(2)^7 / 9!
 				dq	0x3E0FCADA8FCF0462			; ln(2)^9 / 11!
 
-; Coefficients to compute exp10(x) for flt64_t type
+;******************************************************************************;
+;       Coefficients to compute exp10(x) for flt64_t type                      ;
+;******************************************************************************;
 align 16
 exp10_flt64		dq	0x3FAC46DBB451388B			; (ln(10) / 2)^2 / 4!
 				dq	0x3F63FD4AB552C516			; (ln(10) / 2)^4 / 6!
@@ -3912,7 +4023,9 @@ exp10_flt64		dq	0x3FAC46DBB451388B			; (ln(10) / 2)^2 / 4!
 				dq	0x3E77E5CD1E140F6D			; (ln(10) / 2)^9 / 11!
 				dq	0x3E09FD87AF3B94D5			; (ln(10) / 2)^11 / 13!
 
-; Coefficients to compute exp(x) for flt64_t type
+;******************************************************************************;
+;       Coefficients to compute exp(x) for flt64_t type                        ;
+;******************************************************************************;
 align 16
 exp_flt64		dq	0x3FA5555555555555			; 1 / 4!
 				dq	0x3F56C16C16C16C17			; 1 / 6!
@@ -3929,7 +4042,9 @@ exp_flt64		dq	0x3FA5555555555555			; 1 / 4!
 				dq	0x3E5AE64567F544E4			; 1 / 11!
 				dq	0x3DE6124613A86D09			; 1 / 13!
 
-; Table of integer powers of 10^x for flt64_t type
+;******************************************************************************;
+;       Table of integer powers of 10^x for flt64_t type                       ;
+;******************************************************************************;
 align 16
 ten_table_flt64	dq	0x0000000000000000			; 10^-324
 				dq	0x0000000000000002			; 10^-323
@@ -4566,7 +4681,9 @@ ten_table_flt64	dq	0x0000000000000000			; 10^-324
 				dq	0x7FE1CCF385EBC8A0			; 10^+308
 				dq	0x7FF0000000000000			; 10^+309
 
-; Table of integer powers of e^x for flt64_t type
+;******************************************************************************;
+;       Table of integer powers of e^x for flt64_t type                        ;
+;******************************************************************************;
 align 16
 exp_table_flt64	dq	0x0000000000000000			; e^-746
 				dq	0x0000000000000001			; e^-745
@@ -6026,21 +6143,27 @@ exp_table_flt64	dq	0x0000000000000000			; e^-746
 				dq	0x7FDD422D2BE5DC9B			; e^+709
 				dq	0x7FF0000000000000			; e^+710
 
-; Coefficients to compute cos(x) for flt32_t type
+;******************************************************************************;
+;       Coefficients to compute cos(x) for flt32_t type                        ;
+;******************************************************************************;
 align 16
 cos_flt32		dd	0xBAB60B61					; -1 / 6!
 				dd	0xB493F27E					; -1 / 10!
 				dd	0x3D2AAAAB					; +1 / 4!
 				dd	0x37D00D01					; +1 / 8!
 
-; Coefficients to compute sin(x) for flt32_t type
+;******************************************************************************;
+;       Coefficients to compute sin(x) for flt32_t type                        ;
+;******************************************************************************;
 align 16
 sin_flt32		dd	0x3C088889					; +1 / 5!
 				dd	0x3638EF1D					; +1 / 9!
 				dd	0xBE2AAAAB					; -1 / 3!
 				dd	0xB9500D01					; -1 / 7!
 
-; Coefficients to compute exp2(x) for flt32_t type
+;******************************************************************************;
+;       Coefficients to compute exp2(x) for flt32_t type                       ;
+;******************************************************************************;
 align 16
 exp2_flt32		dd	0x3CA3FEA0					; ln(2)^2 / 4!
 				dd	0x39A816C8					; ln(2)^4 / 6!
@@ -6049,7 +6172,9 @@ exp2_flt32		dd	0x3CA3FEA0					; ln(2)^2 / 4!
 				dd	0x3DEC9820					; ln(2)^1 / 3!
 				dd	0x3B35E039					; ln(2)^3 / 5!
 
-; Coefficients to compute exp10(x) for flt32_t type
+;******************************************************************************;
+;       Coefficients to compute exp10(x) for flt32_t type                      ;
+;******************************************************************************;
 align 16
 exp10_flt32		dd	0x3D6236DE					; (ln(10) / 2)^2 / 4!
 				dd	0x3B1FEA56					; (ln(10) / 2)^4 / 6!
@@ -6059,7 +6184,9 @@ exp10_flt32		dd	0x3D6236DE					; (ln(10) / 2)^2 / 4!
 				dd	0x3C5059E1					; (ln(10) / 2)^3 / 5!
 				dd	0x39D26924					; (ln(10) / 2)^5 / 7!
 
-; Coefficients to compute exp(x) for flt32_t type
+;******************************************************************************;
+;       Coefficients to compute exp(x) for flt32_t type                        ;
+;******************************************************************************;
 align 16
 exp_flt32		dd	0x3D2AAAAB					; 1 / 4!
 				dd	0x3AB60B61					; 1 / 6!
@@ -6069,7 +6196,9 @@ exp_flt32		dd	0x3D2AAAAB					; 1 / 4!
 				dd	0x3C088889					; 1 / 5!
 				dd	0x39500D01					; 1 / 7!
 
-; Table of integer powers of 10^x for flt32_t type
+;******************************************************************************;
+;       Table of integer powers of 10^x for flt32_t type                       ;
+;******************************************************************************;
 align 16
 ten_table_flt32	dd	0x00000000					; 10^-46
 				dd	0x00000001					; 10^-45
@@ -6158,7 +6287,9 @@ ten_table_flt32	dd	0x00000000					; 10^-46
 				dd	0x7E967699					; 10^+38
 				dd	0x7F800000					; 10^+39
 
-; Table of integer powers of e^x for flt32_t type
+;******************************************************************************;
+;       Table of integer powers of e^x for flt32_t type                        ;
+;******************************************************************************;
 align 16
 exp_table_flt32	dd	0x00000000					; e^-104
 				dd	0x00000001					; e^-103

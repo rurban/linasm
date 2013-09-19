@@ -30,173 +30,249 @@ extrn	'_ZN8Sequence4FindEPKjmPK3BMH'	as	BMH_Find32
 ;******************************************************************************;
 ;       String length                                                          ;
 ;******************************************************************************;
-public	Len_char8			as	'String_Len_char8'
-public	Len_char16			as	'String_Len_char16'
-public	Len_char32			as	'String_Len_char32'
-public	Len_char8			as	'_ZN6String3LenEPKc'
-public	Len_char16			as	'_ZN6String3LenEPKs'
-public	Len_char32			as	'_ZN6String3LenEPKi'
+public	Len_char8				as	'String_Len_char8'
+public	Len_char16				as	'String_Len_char16'
+public	Len_char32				as	'String_Len_char32'
+public	Len_char8				as	'_ZN6String3LenEPKc'
+public	Len_char16				as	'_ZN6String3LenEPKs'
+public	Len_char32				as	'_ZN6String3LenEPKi'
 
 ;******************************************************************************;
 ;       Copying                                                                ;
 ;******************************************************************************;
 
 ; Copying of string to string
-public	Copy1_char8			as	'String_Copy_char8'
-public	Copy1_char16		as	'String_Copy_char16'
-public	Copy1_char32		as	'String_Copy_char32'
-public	Copy1_char8			as	'_ZN6String4CopyEPcmPKc'
-public	Copy1_char16		as	'_ZN6String4CopyEPsmPKs'
-public	Copy1_char32		as	'_ZN6String4CopyEPimPKi'
+public	CopyStr_char8			as	'String_Copy_char8'
+public	CopyStr_char16			as	'String_Copy_char16'
+public	CopyStr_char32			as	'String_Copy_char32'
+public	CopyStr_char8			as	'_ZN6String4CopyEPcmPKc'
+public	CopyStr_char16			as	'_ZN6String4CopyEPsmPKs'
+public	CopyStr_char32			as	'_ZN6String4CopyEPimPKi'
 
 ; Copying of characters sequence to string
-public	Copy2_char8			as	'String_CopyN_char8'
-public	Copy2_char16		as	'String_CopyN_char16'
-public	Copy2_char32		as	'String_CopyN_char32'
-public	Copy2_char8			as	'_ZN6String4CopyEPcmPKcm'
-public	Copy2_char16		as	'_ZN6String4CopyEPsmPKsm'
-public	Copy2_char32		as	'_ZN6String4CopyEPimPKim'
+public	CopySeq_char8			as	'String_CopyN_char8'
+public	CopySeq_char16			as	'String_CopyN_char16'
+public	CopySeq_char32			as	'String_CopyN_char32'
+public	CopySeq_char8			as	'_ZN6String4CopyEPcmPKcm'
+public	CopySeq_char16			as	'_ZN6String4CopyEPsmPKsm'
+public	CopySeq_char32			as	'_ZN6String4CopyEPimPKim'
 
 ;******************************************************************************;
 ;       Concatenating                                                          ;
 ;******************************************************************************;
 
 ; Concatenating of string to string
-public	Cat1_char8			as	'String_Cat_char8'
-public	Cat1_char16			as	'String_Cat_char16'
-public	Cat1_char32			as	'String_Cat_char32'
-public	Cat1_char8			as	'_ZN6String3CatEPcmPKc'
-public	Cat1_char16			as	'_ZN6String3CatEPsmPKs'
-public	Cat1_char32			as	'_ZN6String3CatEPimPKi'
+public	CatStr_char8			as	'String_Cat_char8'
+public	CatStr_char16			as	'String_Cat_char16'
+public	CatStr_char32			as	'String_Cat_char32'
+public	CatStr_char8			as	'_ZN6String3CatEPcmPKc'
+public	CatStr_char16			as	'_ZN6String3CatEPsmPKs'
+public	CatStr_char32			as	'_ZN6String3CatEPimPKi'
 
 ; Concatenating of characters sequence to string
-public	Cat2_char8			as	'String_CatN_char8'
-public	Cat2_char16			as	'String_CatN_char16'
-public	Cat2_char32			as	'String_CatN_char32'
-public	Cat2_char8			as	'_ZN6String3CatEPcmPKcm'
-public	Cat2_char16			as	'_ZN6String3CatEPsmPKsm'
-public	Cat2_char32			as	'_ZN6String3CatEPimPKim'
+public	CatSeq_char8			as	'String_CatN_char8'
+public	CatSeq_char16			as	'String_CatN_char16'
+public	CatSeq_char32			as	'String_CatN_char32'
+public	CatSeq_char8			as	'_ZN6String3CatEPcmPKcm'
+public	CatSeq_char16			as	'_ZN6String3CatEPsmPKsm'
+public	CatSeq_char32			as	'_ZN6String3CatEPimPKim'
 
 ;******************************************************************************;
 ;       String comparison                                                      ;
 ;******************************************************************************;
 
 ; Comparison of strings
-public	Compare1_char8		as	'String_Compare_char8'
-public	Compare1_char16		as	'String_Compare_char16'
-public	Compare1_char32		as	'String_Compare_char32'
-public	Compare1_char8		as	'_ZN6String7CompareEPKcS1_'
-public	Compare1_char16		as	'_ZN6String7CompareEPKsS1_'
-public	Compare1_char32		as	'_ZN6String7CompareEPKiS1_'
+public	CompareStr_char8		as	'String_Compare_char8'
+public	CompareStr_char16		as	'String_Compare_char16'
+public	CompareStr_char32		as	'String_Compare_char32'
+public	CompareStr_char8		as	'_ZN6String7CompareEPKcS1_'
+public	CompareStr_char16		as	'_ZN6String7CompareEPKsS1_'
+public	CompareStr_char32		as	'_ZN6String7CompareEPKiS1_'
 
 ; Comparison of characters sequences
-public	Compare2_char8		as	'String_CompareN_char8'
-public	Compare2_char16		as	'String_CompareN_char16'
-public	Compare2_char32		as	'String_CompareN_char32'
-public	Compare2_char8		as	'_ZN6String7CompareEPKcS1_m'
-public	Compare2_char16		as	'_ZN6String7CompareEPKsS1_m'
-public	Compare2_char32		as	'_ZN6String7CompareEPKiS1_m'
+public	CompareSeq_char8		as	'String_CompareN_char8'
+public	CompareSeq_char16		as	'String_CompareN_char16'
+public	CompareSeq_char32		as	'String_CompareN_char32'
+public	CompareSeq_char8		as	'_ZN6String7CompareEPKcS1_m'
+public	CompareSeq_char16		as	'_ZN6String7CompareEPKsS1_m'
+public	CompareSeq_char32		as	'_ZN6String7CompareEPKiS1_m'
 
 ;******************************************************************************;
 ;       Value replacement                                                      ;
 ;******************************************************************************;
 
-; Replacing of single symbol
-public	Replace_char8		as	'String_ReplaceSymbol_char8'
-public	Replace_char16		as	'String_ReplaceSymbol_char16'
-public	Replace_char32		as	'String_ReplaceSymbol_char32'
-public	Replace_char8		as	'_ZN6String13ReplaceSymbolEPccc'
-public	Replace_char16		as	'_ZN6String13ReplaceSymbolEPsss'
-public	Replace_char32		as	'_ZN6String13ReplaceSymbolEPiii'
+; Symbol replacing
+public	Replace_char8			as	'String_ReplaceSymbol_char8'
+public	Replace_char16			as	'String_ReplaceSymbol_char16'
+public	Replace_char32			as	'String_ReplaceSymbol_char32'
+public	Replace_char8			as	'_ZN6String13ReplaceSymbolEPccc'
+public	Replace_char16			as	'_ZN6String13ReplaceSymbolEPsss'
+public	Replace_char32			as	'_ZN6String13ReplaceSymbolEPiii'
+
+; String replacing
+public	Replace					as	'String_ReplaceString_char8'
+public	Replace					as	'String_ReplaceString_char16'
+public	Replace					as	'String_ReplaceString_char32'
+public	Replace					as	'_ZN6String13ReplaceStringEPPKcmS1_S1_PFiS1_S1_E'
+public	Replace					as	'_ZN6String13ReplaceStringEPPKsmS1_S1_PFiS1_S1_E'
+public	Replace					as	'_ZN6String13ReplaceStringEPPKimS1_S1_PFiS1_S1_E'
 
 ;******************************************************************************;
-;       Search algorithms                                                      ;
-;******************************************************************************;
-
-;==============================================================================;
 ;       Symbols search                                                         ;
-;==============================================================================;
+;******************************************************************************;
 
 ; Searching for single symbol
-public	Find1_char8			as	'String_FindSymbol_char8'
-public	Find1_char16		as	'String_FindSymbol_char16'
-public	Find1_char32		as	'String_FindSymbol_char32'
-public	Find1_char8			as	'_ZN6String10FindSymbolEPKcc'
-public	Find1_char16		as	'_ZN6String10FindSymbolEPKss'
-public	Find1_char32		as	'_ZN6String10FindSymbolEPKii'
+public	FindSymbol_char8		as	'String_FindSymbol_char8'
+public	FindSymbol_char16		as	'String_FindSymbol_char16'
+public	FindSymbol_char32		as	'String_FindSymbol_char32'
+public	FindSymbol_char8		as	'_ZN6String10FindSymbolEPKcc'
+public	FindSymbol_char16		as	'_ZN6String10FindSymbolEPKss'
+public	FindSymbol_char32		as	'_ZN6String10FindSymbolEPKii'
 
 ; Searching for symbols set
-public	Find2_char8			as	'String_FindSymbols_char8'
-public	Find2_char16		as	'String_FindSymbols_char16'
-public	Find2_char32		as	'String_FindSymbols_char32'
-public	Find2_char8			as	'_ZN6String11FindSymbolsEPKcS1_'
-public	Find2_char16		as	'_ZN6String11FindSymbolsEPKsS1_'
-public	Find2_char32		as	'_ZN6String11FindSymbolsEPKiS1_'
+public	FindSymbols_char8		as	'String_FindSymbols_char8'
+public	FindSymbols_char16		as	'String_FindSymbols_char16'
+public	FindSymbols_char32		as	'String_FindSymbols_char32'
+public	FindSymbols_char8		as	'_ZN6String11FindSymbolsEPKcS1_'
+public	FindSymbols_char16		as	'_ZN6String11FindSymbolsEPKsS1_'
+public	FindSymbols_char32		as	'_ZN6String11FindSymbolsEPKiS1_'
 
-;==============================================================================;
+;******************************************************************************;
 ;       Substring search                                                       ;
-;==============================================================================;
+;******************************************************************************;
 
 ; Searching string for pattern
-public	FindStr1_char8		as	'String_FindString_char8'
-public	FindStr1_char16		as	'String_FindString_char16'
-public	FindStr1_char32		as	'String_FindString_char32'
-public	FindStr1_char8		as	'_ZN6String10FindStringEPKcS1_'
-public	FindStr1_char16		as	'_ZN6String10FindStringEPKsS1_'
-public	FindStr1_char32		as	'_ZN6String10FindStringEPKiS1_'
+public	FindStrStr_char8		as	'String_FindString_char8'
+public	FindStrStr_char16		as	'String_FindString_char16'
+public	FindStrStr_char32		as	'String_FindString_char32'
+public	FindStrStr_char8		as	'_ZN6String10FindStringEPKcS1_'
+public	FindStrStr_char16		as	'_ZN6String10FindStringEPKsS1_'
+public	FindStrStr_char32		as	'_ZN6String10FindStringEPKiS1_'
 
 ; Searching characters sequence for pattern
-public	FindStr2_char8		as	'String_FindStringN_char8'
-public	FindStr2_char16		as	'String_FindStringN_char16'
-public	FindStr2_char32		as	'String_FindStringN_char32'
-public	FindStr2_char8		as	'_ZN6String10FindStringEPKcmS1_'
-public	FindStr2_char16		as	'_ZN6String10FindStringEPKsmS1_'
-public	FindStr2_char32		as	'_ZN6String10FindStringEPKimS1_'
+public	FindSeqStr_char8		as	'String_FindStringN_char8'
+public	FindSeqStr_char16		as	'String_FindStringN_char16'
+public	FindSeqStr_char32		as	'String_FindStringN_char32'
+public	FindSeqStr_char8		as	'_ZN6String10FindStringEPKcmS1_'
+public	FindSeqStr_char16		as	'_ZN6String10FindStringEPKsmS1_'
+public	FindSeqStr_char32		as	'_ZN6String10FindStringEPKimS1_'
 
-;==============================================================================;
+;******************************************************************************;
 ;       String search                                                          ;
-;==============================================================================;
+;******************************************************************************;
 
-;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+;==============================================================================;
 ;       Linear search                                                          ;
-;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+;==============================================================================;
 
 ; Forward direction search
-public	FindFwd_char8		as	"String_FindFwd_char8"
-public	FindFwd_char16		as	"String_FindFwd_char16"
-public	FindFwd_char32		as	"String_FindFwd_char32"
-public	FindFwd_char8		as	"_ZN6String7FindFwdEPPKcmS1_PFiS1_S1_E"
-public	FindFwd_char16		as	"_ZN6String7FindFwdEPPKsmS1_PFiS1_S1_E"
-public	FindFwd_char32		as	"_ZN6String7FindFwdEPPKimS1_PFiS1_S1_E"
+public	FindFwd					as	"String_FindFwd_char8"
+public	FindFwd					as	"String_FindFwd_char16"
+public	FindFwd					as	"String_FindFwd_char32"
+public	FindFwd					as	"_ZN6String7FindFwdEPPKcmS1_PFiS1_S1_E"
+public	FindFwd					as	"_ZN6String7FindFwdEPPKsmS1_PFiS1_S1_E"
+public	FindFwd					as	"_ZN6String7FindFwdEPPKimS1_PFiS1_S1_E"
 
 
 ; Backward direction search
-public	FindBwd_char8		as	"String_FindBwd_char8"
-public	FindBwd_char16		as	"String_FindBwd_char16"
-public	FindBwd_char32		as	"String_FindBwd_char32"
-public	FindBwd_char8		as	"_ZN6String7FindBwdEPPKcmS1_PFiS1_S1_E"
-public	FindBwd_char16		as	"_ZN6String7FindBwdEPPKsmS1_PFiS1_S1_E"
-public	FindBwd_char32		as	"_ZN6String7FindBwdEPPKimS1_PFiS1_S1_E"
+public	FindBwd					as	"String_FindBwd_char8"
+public	FindBwd					as	"String_FindBwd_char16"
+public	FindBwd					as	"String_FindBwd_char32"
+public	FindBwd					as	"_ZN6String7FindBwdEPPKcmS1_PFiS1_S1_E"
+public	FindBwd					as	"_ZN6String7FindBwdEPPKsmS1_PFiS1_S1_E"
+public	FindBwd					as	"_ZN6String7FindBwdEPPKimS1_PFiS1_S1_E"
 
-;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+;==============================================================================;
 ;       Binary search                                                          ;
+;==============================================================================;
+
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+;       Ascending sort order                                                   ;
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 
-; Ascending sort order
-public	FindAsc_char8		as	"String_FindAsc_char8"
-public	FindAsc_char16		as	"String_FindAsc_char16"
-public	FindAsc_char32		as	"String_FindAsc_char32"
-public	FindAsc_char8		as	"_ZN6String7FindAscEPPKcmS1_PFiS1_S1_E"
-public	FindAsc_char16		as	"_ZN6String7FindAscEPPKsmS1_PFiS1_S1_E"
-public	FindAsc_char32		as	"_ZN6String7FindAscEPPKimS1_PFiS1_S1_E"
+; Searching for equal string
+public	FindEqualAsc			as	"String_FindEqualAsc_char8"
+public	FindEqualAsc			as	"String_FindEqualAsc_char16"
+public	FindEqualAsc			as	"String_FindEqualAsc_char32"
+public	FindEqualAsc			as	"_ZN6String12FindEqualAscEPPKcmS1_PFiS1_S1_E"
+public	FindEqualAsc			as	"_ZN6String12FindEqualAscEPPKsmS1_PFiS1_S1_E"
+public	FindEqualAsc			as	"_ZN6String12FindEqualAscEPPKimS1_PFiS1_S1_E"
 
-; Descending sort order
-public	FindDsc_char8		as	"String_FindDsc_char8"
-public	FindDsc_char16		as	"String_FindDsc_char16"
-public	FindDsc_char32		as	"String_FindDsc_char32"
-public	FindDsc_char8		as	"_ZN6String7FindDscEPPKcmS1_PFiS1_S1_E"
-public	FindDsc_char16		as	"_ZN6String7FindDscEPPKsmS1_PFiS1_S1_E"
-public	FindDsc_char32		as	"_ZN6String7FindDscEPPKimS1_PFiS1_S1_E"
+; Searching for greater string
+public	FindGreatAsc			as	"String_FindGreatAsc_char8"
+public	FindGreatAsc			as	"String_FindGreatAsc_char16"
+public	FindGreatAsc			as	"String_FindGreatAsc_char32"
+public	FindGreatAsc			as	"_ZN6String12FindGreatAscEPPKcmS1_PFiS1_S1_E"
+public	FindGreatAsc			as	"_ZN6String12FindGreatAscEPPKsmS1_PFiS1_S1_E"
+public	FindGreatAsc			as	"_ZN6String12FindGreatAscEPPKimS1_PFiS1_S1_E"
+
+; Searching for greater or equal string
+public	FindGreatOrEqualAsc		as	"String_FindGreatOrEqualAsc_char8"
+public	FindGreatOrEqualAsc		as	"String_FindGreatOrEqualAsc_char16"
+public	FindGreatOrEqualAsc		as	"String_FindGreatOrEqualAsc_char32"
+public	FindGreatOrEqualAsc		as	"_ZN6String19FindGreatOrEqualAscEPPKcmS1_PFiS1_S1_E"
+public	FindGreatOrEqualAsc		as	"_ZN6String19FindGreatOrEqualAscEPPKsmS1_PFiS1_S1_E"
+public	FindGreatOrEqualAsc		as	"_ZN6String19FindGreatOrEqualAscEPPKimS1_PFiS1_S1_E"
+
+; Searching for less string
+public	FindLessAsc				as	"String_FindLessAsc_char8"
+public	FindLessAsc				as	"String_FindLessAsc_char16"
+public	FindLessAsc				as	"String_FindLessAsc_char32"
+public	FindLessAsc				as	"_ZN6String11FindLessAscEPPKcmS1_PFiS1_S1_E"
+public	FindLessAsc				as	"_ZN6String11FindLessAscEPPKsmS1_PFiS1_S1_E"
+public	FindLessAsc				as	"_ZN6String11FindLessAscEPPKimS1_PFiS1_S1_E"
+
+; Searching for less or equal string
+public	FindLessOrEqualAsc		as	"String_FindLessOrEqualAsc_char8"
+public	FindLessOrEqualAsc		as	"String_FindLessOrEqualAsc_char16"
+public	FindLessOrEqualAsc		as	"String_FindLessOrEqualAsc_char32"
+public	FindLessOrEqualAsc		as	"_ZN6String18FindLessOrEqualAscEPPKcmS1_PFiS1_S1_E"
+public	FindLessOrEqualAsc		as	"_ZN6String18FindLessOrEqualAscEPPKsmS1_PFiS1_S1_E"
+public	FindLessOrEqualAsc		as	"_ZN6String18FindLessOrEqualAscEPPKimS1_PFiS1_S1_E"
+
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+;       Descending sort order                                                  ;
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+
+; Searching for equal string
+public	FindEqualDsc			as	"String_FindEqualDsc_char8"
+public	FindEqualDsc			as	"String_FindEqualDsc_char16"
+public	FindEqualDsc			as	"String_FindEqualDsc_char32"
+public	FindEqualDsc			as	"_ZN6String12FindEqualDscEPPKcmS1_PFiS1_S1_E"
+public	FindEqualDsc			as	"_ZN6String12FindEqualDscEPPKsmS1_PFiS1_S1_E"
+public	FindEqualDsc			as	"_ZN6String12FindEqualDscEPPKimS1_PFiS1_S1_E"
+
+; Searching for less string
+public	FindLessDsc				as	"String_FindLessDsc_char8"
+public	FindLessDsc				as	"String_FindLessDsc_char16"
+public	FindLessDsc				as	"String_FindLessDsc_char32"
+public	FindLessDsc				as	"_ZN6String11FindLessDscEPPKcmS1_PFiS1_S1_E"
+public	FindLessDsc				as	"_ZN6String11FindLessDscEPPKsmS1_PFiS1_S1_E"
+public	FindLessDsc				as	"_ZN6String11FindLessDscEPPKimS1_PFiS1_S1_E"
+
+; Searching for less or equal string
+public	FindLessOrEqualDsc		as	"String_FindLessOrEqualDsc_char8"
+public	FindLessOrEqualDsc		as	"String_FindLessOrEqualDsc_char16"
+public	FindLessOrEqualDsc		as	"String_FindLessOrEqualDsc_char32"
+public	FindLessOrEqualDsc		as	"_ZN6String18FindLessOrEqualDscEPPKcmS1_PFiS1_S1_E"
+public	FindLessOrEqualDsc		as	"_ZN6String18FindLessOrEqualDscEPPKsmS1_PFiS1_S1_E"
+public	FindLessOrEqualDsc		as	"_ZN6String18FindLessOrEqualDscEPPKimS1_PFiS1_S1_E"
+
+; Searching for greater string
+public	FindGreatDsc			as	"String_FindGreatDsc_char8"
+public	FindGreatDsc			as	"String_FindGreatDsc_char16"
+public	FindGreatDsc			as	"String_FindGreatDsc_char32"
+public	FindGreatDsc			as	"_ZN6String12FindGreatDscEPPKcmS1_PFiS1_S1_E"
+public	FindGreatDsc			as	"_ZN6String12FindGreatDscEPPKsmS1_PFiS1_S1_E"
+public	FindGreatDsc			as	"_ZN6String12FindGreatDscEPPKimS1_PFiS1_S1_E"
+
+; Searching for greater or equal string
+public	FindGreatOrEqualDsc		as	"String_FindGreatOrEqualDsc_char8"
+public	FindGreatOrEqualDsc		as	"String_FindGreatOrEqualDsc_char16"
+public	FindGreatOrEqualDsc		as	"String_FindGreatOrEqualDsc_char32"
+public	FindGreatOrEqualDsc		as	"_ZN6String19FindGreatOrEqualDscEPPKcmS1_PFiS1_S1_E"
+public	FindGreatOrEqualDsc		as	"_ZN6String19FindGreatOrEqualDscEPPKsmS1_PFiS1_S1_E"
+public	FindGreatOrEqualDsc		as	"_ZN6String19FindGreatOrEqualDscEPPKimS1_PFiS1_S1_E"
 
 ;******************************************************************************;
 ;       Sorting algorithms                                                     ;
@@ -207,52 +283,52 @@ public	FindDsc_char32		as	"_ZN6String7FindDscEPPKimS1_PFiS1_S1_E"
 ;==============================================================================;
 
 ; Ascending sort order
-public	SortAsc_char8		as	"String_SortAsc_char8"
-public	SortAsc_char16		as	"String_SortAsc_char16"
-public	SortAsc_char32		as	"String_SortAsc_char32"
-public	SortAsc_char8		as	"_ZN6String7SortAscEPPKcmPFiS1_S1_E"
-public	SortAsc_char16		as	"_ZN6String7SortAscEPPKsmPFiS1_S1_E"
-public	SortAsc_char32		as	"_ZN6String7SortAscEPPKimPFiS1_S1_E"
+public	SortAsc					as	"String_SortAsc_char8"
+public	SortAsc					as	"String_SortAsc_char16"
+public	SortAsc					as	"String_SortAsc_char32"
+public	SortAsc					as	"_ZN6String7SortAscEPPKcmPFiS1_S1_E"
+public	SortAsc					as	"_ZN6String7SortAscEPPKsmPFiS1_S1_E"
+public	SortAsc					as	"_ZN6String7SortAscEPPKimPFiS1_S1_E"
 
 ; Descending sort order
-public	SortDsc_char8		as	"String_SortDsc_char8"
-public	SortDsc_char16		as	"String_SortDsc_char16"
-public	SortDsc_char32		as	"String_SortDsc_char32"
-public	SortDsc_char8		as	"_ZN6String7SortDscEPPKcmPFiS1_S1_E"
-public	SortDsc_char16		as	"_ZN6String7SortDscEPPKsmPFiS1_S1_E"
-public	SortDsc_char32		as	"_ZN6String7SortDscEPPKimPFiS1_S1_E"
+public	SortDsc					as	"String_SortDsc_char8"
+public	SortDsc					as	"String_SortDsc_char16"
+public	SortDsc					as	"String_SortDsc_char32"
+public	SortDsc					as	"_ZN6String7SortDscEPPKcmPFiS1_S1_E"
+public	SortDsc					as	"_ZN6String7SortDscEPPKsmPFiS1_S1_E"
+public	SortDsc					as	"_ZN6String7SortDscEPPKimPFiS1_S1_E"
 
 ;==============================================================================;
 ;       Key sorting                                                            ;
 ;==============================================================================;
 
 ; Ascending sort order
-public	SortKeyAsc_char8	as	"String_SortKeyAsc_char8"
-public	SortKeyAsc_char16	as	"String_SortKeyAsc_char16"
-public	SortKeyAsc_char32	as	"String_SortKeyAsc_char32"
-public	SortKeyAsc_char8	as	"_ZN6String7SortAscEPPKcPPKvmPFiS1_S1_E"
-public	SortKeyAsc_char16	as	"_ZN6String7SortAscEPPKsPPKvmPFiS1_S1_E"
-public	SortKeyAsc_char32	as	"_ZN6String7SortAscEPPKiPPKvmPFiS1_S1_E"
+public	SortKeyAsc				as	"String_SortKeyAsc_char8"
+public	SortKeyAsc				as	"String_SortKeyAsc_char16"
+public	SortKeyAsc				as	"String_SortKeyAsc_char32"
+public	SortKeyAsc				as	"_ZN6String7SortAscEPPKcPPKvmPFiS1_S1_E"
+public	SortKeyAsc				as	"_ZN6String7SortAscEPPKsPPKvmPFiS1_S1_E"
+public	SortKeyAsc				as	"_ZN6String7SortAscEPPKiPPKvmPFiS1_S1_E"
 
 ; Descending sort order
-public	SortKeyDsc_char8	as	"String_SortKeyDsc_char8"
-public	SortKeyDsc_char16	as	"String_SortKeyDsc_char16"
-public	SortKeyDsc_char32	as	"String_SortKeyDsc_char32"
-public	SortKeyDsc_char8	as	"_ZN6String7SortDscEPPKcPPKvmPFiS1_S1_E"
-public	SortKeyDsc_char16	as	"_ZN6String7SortDscEPPKsPPKvmPFiS1_S1_E"
-public	SortKeyDsc_char32	as	"_ZN6String7SortDscEPPKiPPKvmPFiS1_S1_E"
+public	SortKeyDsc				as	"String_SortKeyDsc_char8"
+public	SortKeyDsc				as	"String_SortKeyDsc_char16"
+public	SortKeyDsc				as	"String_SortKeyDsc_char32"
+public	SortKeyDsc				as	"_ZN6String7SortDscEPPKcPPKvmPFiS1_S1_E"
+public	SortKeyDsc				as	"_ZN6String7SortDscEPPKsPPKvmPFiS1_S1_E"
+public	SortKeyDsc				as	"_ZN6String7SortDscEPPKiPPKvmPFiS1_S1_E"
 
 ;******************************************************************************;
 ;       Checks                                                                 ;
 ;******************************************************************************;
 
 ; Check for duplicate values
-public	CheckDup_char8		as	"String_CheckDup_char8"
-public	CheckDup_char16		as	"String_CheckDup_char16"
-public	CheckDup_char32		as	"String_CheckDup_char32"
-public	CheckDup_char8		as	"_ZN6String8CheckDupEPPKcm"
-public	CheckDup_char16		as	"_ZN6String8CheckDupEPPKsm"
-public	CheckDup_char32		as	"_ZN6String8CheckDupEPPKim"
+public	CheckDup				as	"String_CheckDup_char8"
+public	CheckDup				as	"String_CheckDup_char16"
+public	CheckDup				as	"String_CheckDup_char32"
+public	CheckDup				as	"_ZN6String8CheckDupEPPKcmPFiS1_S1_E"
+public	CheckDup				as	"_ZN6String8CheckDupEPPKsmPFiS1_S1_E"
+public	CheckDup				as	"_ZN6String8CheckDupEPPKimPFiS1_S1_E"
 
 ;###############################################################################
 ;#      Code section                                                           #
@@ -323,25 +399,25 @@ end if
 		add		index, VSIZE				; index += VSIZE
 ;---[Vector loop]--------------------------
 .vloop:	pxor	echeck, echeck				; echeck = 0
-	pcmpeq#x	echeck, [string + 1*VSIZE]	; check string[1] for end of line
+	pcmpeq#x	echeck, [string + 1 * VSIZE]; check string[1] for end of line
 	pmovmskb	emask, echeck				; save check results to emask
 		and		emask, emask				; if eof is found
 		jnz		.brk						;     then break the loop
 		add		index, VSIZE				; index += VSIZE
 		pxor	echeck, echeck				; echeck = 0
-	pcmpeq#x	echeck, [string + 2*VSIZE]	; check string[2] for end of line
+	pcmpeq#x	echeck, [string + 2 * VSIZE]; check string[2] for end of line
 	pmovmskb	emask, echeck				; save check results to emask
 		and		emask, emask				; if eof is found
 		jnz		.brk						;     then break the loop
 		add		index, VSIZE				; index += VSIZE
 		pxor	echeck, echeck				; echeck = 0
-	pcmpeq#x	echeck, [string + 3*VSIZE]	; check string[3] for end of line
+	pcmpeq#x	echeck, [string + 3 * VSIZE]; check string[3] for end of line
 	pmovmskb	emask, echeck				; save check results to emask
 		and		emask, emask				; if eof is found
 		jnz		.brk						;     then break the loop
 		add		index, VSIZE				; index += VSIZE
 		pxor	echeck, echeck				; echeck = 0
-	pcmpeq#x	echeck, [string + 4*VSIZE]	; check string[4] for end of line
+	pcmpeq#x	echeck, [string + 4 * VSIZE]; check string[4] for end of line
 	pmovmskb	emask, echeck				; save check results to emask
 		and		emask, emask				; if eof is found
 		jnz		.brk						;     then break the loop
@@ -668,7 +744,7 @@ end if
 		add		index, VSIZE				; index += VSIZE
 		sub		maxlen, VSIZE				; if (maxlen < VSIZE)
 		jb		.nospc						;     then go to no space branch
-		movdqa	sdata1, [ptr2 + 1*VSIZE]	; sdata1 = ptr2[1]
+		movdqa	sdata1, [ptr2 + 1 * VSIZE]	; sdata1 = ptr2[1]
 		pxor	echeck1, echeck1			; echeck1 = 0
 	pcmpeq#x	echeck1, sdata1				; check ptr2[1] for end of line
 	pmovmskb	emask, echeck1				; save check results to emask
@@ -680,8 +756,8 @@ end if
 		movdqu	sdata0, [source]
 		movdqu	[target], sdata0			; target[0] = source[0]
 ;---[Vector loop]--------------------------
-.vloop:	movdqu	[ptr1 + 1*VSIZE], sdata1	; ptr1[1] = ptr2[1]
-		movdqa	sdata0, [ptr2 + 2*VSIZE]	; sdata0 = ptr2[2]
+.vloop:	movdqu	[ptr1 + 1 * VSIZE], sdata1	; ptr1[1] = ptr2[1]
+		movdqa	sdata0, [ptr2 + 2 * VSIZE]	; sdata0 = ptr2[2]
 		pxor	echeck0, echeck0			; echeck0 = 0
 	pcmpeq#x	echeck0, sdata0				; check ptr2[2] for end of line
 	pmovmskb	emask, echeck0				; save check results to emask
@@ -690,8 +766,8 @@ end if
 		add		index, VSIZE				; index += VSIZE
 		sub		maxlen, VSIZE				; if (maxlen < VSIZE)
 		jb		.nospc						;     then go to no space branch
-		movdqu	[ptr1 + 2*VSIZE], sdata0	; ptr1[2] = ptr2[2]
-		movdqa	sdata1, [ptr2 + 3*VSIZE]	; sdata1 = ptr2[3]
+		movdqu	[ptr1 + 2 * VSIZE], sdata0	; ptr1[2] = ptr2[2]
+		movdqa	sdata1, [ptr2 + 3 * VSIZE]	; sdata1 = ptr2[3]
 		pxor	echeck1, echeck1			; echeck1 = 0
 	pcmpeq#x	echeck1, sdata1				; check ptr2[3] for end of line
 	pmovmskb	emask, echeck1				; save check results to emask
@@ -700,8 +776,8 @@ end if
 		add		index, VSIZE				; index += VSIZE
 		sub		maxlen, VSIZE				; if (maxlen < VSIZE)
 		jb		.nospc						;     then go to no space branch
-		movdqu	[ptr1 + 3*VSIZE], sdata1	; ptr1[3] = ptr2[3]
-		movdqa	sdata0, [ptr2 + 4*VSIZE]	; sdata0 = ptr2[4]
+		movdqu	[ptr1 + 3 * VSIZE], sdata1	; ptr1[3] = ptr2[3]
+		movdqa	sdata0, [ptr2 + 4 * VSIZE]	; sdata0 = ptr2[4]
 		pxor	echeck0, echeck0			; echeck0 = 0
 	pcmpeq#x	echeck0, sdata0				; check ptr2[4] for end of line
 	pmovmskb	emask, echeck0				; save check results to emask
@@ -710,8 +786,8 @@ end if
 		add		index, VSIZE				; index += VSIZE
 		sub		maxlen, VSIZE				; if (maxlen < VSIZE)
 		jb		.nospc						;     then go to no space branch
-		movdqu	[ptr1 + 4*VSIZE], sdata0	; ptr1[4] = ptr2[4]
-		movdqa	sdata1, [ptr2 + 5*VSIZE]	; sdata1 = ptr2[5]
+		movdqu	[ptr1 + 4 * VSIZE], sdata0	; ptr1[4] = ptr2[4]
+		movdqa	sdata1, [ptr2 + 5 * VSIZE]	; sdata1 = ptr2[5]
 		pxor	echeck1, echeck1			; echeck1 = 0
 	pcmpeq#x	echeck1, sdata1				; check ptr2[5] for end of line
 	pmovmskb	emask, echeck1				; save check results to emask
@@ -757,9 +833,9 @@ end if
 		mov		index, NO_SPACE				; return NO_SPACE
 .exit:	ret
 }
-Copy1_char8:	COPY1	cl, b
-Copy1_char16:	COPY1	cx, w
-Copy1_char32:	COPY1	ecx, d
+CopyStr_char8:	COPY1	cl, b
+CopyStr_char16:	COPY1	cx, w
+CopyStr_char32:	COPY1	ecx, d
 
 ;==============================================================================;
 ;       Copying of characters sequence to string                               ;
@@ -823,7 +899,7 @@ end if
 		add		index, VSIZE				; index += VSIZE
 		sub		maxlen, VSIZE				; if (maxlen <= VSIZE)
 		jbe		.tail0						;     then copy maxlen elements from source
-		movdqa	sdata1, [ptr2 + 1*VSIZE]	; sdata1 = ptr2[1]
+		movdqa	sdata1, [ptr2 + 1 * VSIZE]	; sdata1 = ptr2[1]
 		pxor	echeck1, echeck1			; echeck1 = 0
 	pcmpeq#x	echeck1, sdata1				; check ptr2[1] for end of line
 	pmovmskb	emask, echeck1				; save check results to emask
@@ -835,8 +911,8 @@ end if
 		movdqu	sdata0, [source]
 		movdqu	[target], sdata0			; target[0] = source[0]
 ;---[Vector loop]--------------------------
-.vloop:	movdqu	[ptr1 + 1*VSIZE], sdata1	; ptr1[1] = ptr2[1]
-		movdqa	sdata0, [ptr2 + 2*VSIZE]	; sdata0 = ptr2[2]
+.vloop:	movdqu	[ptr1 + 1 * VSIZE], sdata1	; ptr1[1] = ptr2[1]
+		movdqa	sdata0, [ptr2 + 2 * VSIZE]	; sdata0 = ptr2[2]
 		pxor	echeck0, echeck0			; echeck0 = 0
 	pcmpeq#x	echeck0, sdata0				; check ptr2[2] for end of line
 	pmovmskb	emask, echeck0				; save check results to emask
@@ -845,8 +921,8 @@ end if
 		add		index, VSIZE				; index += VSIZE
 		sub		maxlen, VSIZE				; if (maxlen <= VSIZE)
 		jbe		.tail1						;     then copy maxlen elements from source
-		movdqu	[ptr1 + 2*VSIZE], sdata0	; ptr1[2] = ptr2[2]
-		movdqa	sdata1, [ptr2 + 3*VSIZE]	; sdata1 = ptr2[3]
+		movdqu	[ptr1 + 2 * VSIZE], sdata0	; ptr1[2] = ptr2[2]
+		movdqa	sdata1, [ptr2 + 3 * VSIZE]	; sdata1 = ptr2[3]
 		pxor	echeck1, echeck1			; echeck1 = 0
 	pcmpeq#x	echeck1, sdata1				; check ptr2[3] for end of line
 	pmovmskb	emask, echeck1				; save check results to emask
@@ -855,8 +931,8 @@ end if
 		add		index, VSIZE				; index += VSIZE
 		sub		maxlen, VSIZE				; if (maxlen <= VSIZE)
 		jbe		.tail1						;     then copy maxlen elements from source
-		movdqu	[ptr1 + 3*VSIZE], sdata1	; ptr1[3] = ptr2[3]
-		movdqa	sdata0, [ptr2 + 4*VSIZE]	; sdata0 = ptr2[4]
+		movdqu	[ptr1 + 3 * VSIZE], sdata1	; ptr1[3] = ptr2[3]
+		movdqa	sdata0, [ptr2 + 4 * VSIZE]	; sdata0 = ptr2[4]
 		pxor	echeck0, echeck0			; echeck0 = 0
 	pcmpeq#x	echeck0, sdata0				; check ptr2[4] for end of line
 	pmovmskb	emask, echeck0				; save check results to emask
@@ -865,8 +941,8 @@ end if
 		add		index, VSIZE				; index += VSIZE
 		sub		maxlen, VSIZE				; if (maxlen <= VSIZE)
 		jbe		.tail1						;     then copy maxlen elements from source
-		movdqu	[ptr1 + 4*VSIZE], sdata0	; ptr1[4] = ptr2[4]
-		movdqa	sdata1, [ptr2 + 5*VSIZE]	; sdata1 = ptr2[5]
+		movdqu	[ptr1 + 4 * VSIZE], sdata0	; ptr1[4] = ptr2[4]
+		movdqa	sdata1, [ptr2 + 5 * VSIZE]	; sdata1 = ptr2[5]
 		pxor	echeck1, echeck1			; echeck1 = 0
 	pcmpeq#x	echeck1, sdata1				; check ptr2[5] for end of line
 	pmovmskb	emask, echeck1				; save check results to emask
@@ -918,9 +994,9 @@ end if
 		mov		index, NO_SPACE				; return NO_SPACE
 		ret
 }
-Copy2_char8:	COPY2	cl, b
-Copy2_char16:	COPY2	cx, w
-Copy2_char32:	COPY2	ecx, d
+CopySeq_char8:	COPY2	cl, b
+CopySeq_char16:	COPY2	cx, w
+CopySeq_char32:	COPY2	ecx, d
 
 ;******************************************************************************;
 ;       Concatenating                                                          ;
@@ -943,15 +1019,15 @@ s_mlen	equ		stack + 1 * 8				; stack position of "maxlen" variable
 s_src	equ		stack + 2 * 8				; stack position of "source" variable
 if x eq b
 length	= Len_char8							; string length function
-copy	= Copy1_char8						; string copy function
+copy	= CopyStr_char8						; string copy function
 scale	= 0									; scale value
 else if x eq w
 length	= Len_char16						; string length function
-copy	= Copy1_char16						; string copy function
+copy	= CopyStr_char16					; string copy function
 scale	= 1									; scale value
 else if x eq d
 length	= Len_char32						; string length function
-copy	= Copy1_char32						; string copy function
+copy	= CopyStr_char32					; string copy function
 scale	= 2									; scale value
 end if
 space	= 3 * 8								; stack size required by the procedure
@@ -975,9 +1051,9 @@ bytes	= 1 shl scale						; size of element (bytes)
 		mov		result, NO_SPACE			; return NO_SPACE
 		ret
 }
-Cat1_char8:		CAT1	b
-Cat1_char16:	CAT1	w
-Cat1_char32:	CAT1	d
+CatStr_char8:	CAT1	b
+CatStr_char16:	CAT1	w
+CatStr_char32:	CAT1	d
 
 ;==============================================================================;
 ;       Concatenating of characters sequence to string                         ;
@@ -998,15 +1074,15 @@ s_src	equ		stack + 2 * 8				; stack position of "source" variable
 s_size	equ		stack + 3 * 8				; stack position of "size" variable
 if x eq b
 length	= Len_char8							; string length function
-copy	= Copy2_char8						; string copy function
+copy	= CopySeq_char8						; string copy function
 scale	= 0									; scale value
 else if x eq w
 length	= Len_char16						; string length function
-copy	= Copy2_char16						; string copy function
+copy	= CopySeq_char16					; string copy function
 scale	= 1									; scale value
 else if x eq d
 length	= Len_char32						; string length function
-copy	= Copy2_char32						; string copy function
+copy	= CopySeq_char32					; string copy function
 scale	= 2									; scale value
 end if
 space	= 5 * 8								; stack size required by the procedure
@@ -1032,9 +1108,9 @@ bytes	= 1 shl scale						; size of element (bytes)
 		mov		result, NO_SPACE			; return NO_SPACE
 		ret
 }
-Cat2_char8:		CAT2	b
-Cat2_char16:	CAT2	w
-Cat2_char32:	CAT2	d
+CatSeq_char8:	CAT2	b
+CatSeq_char16:	CAT2	w
+CatSeq_char32:	CAT2	d
 
 ;******************************************************************************;
 ;       String comparison                                                      ;
@@ -1049,8 +1125,8 @@ macro	COMPARE1	char, x
 string1	equ		rdi							; pointer to first string
 string2	equ		rsi							; pointer to second string
 ;---[Internal variables]-------------------
-size	equ		rdx							; string size (count of elements)
 result	equ		rax							; result register
+size	equ		rdx							; string size (count of elements)
 res1	equ		al							; result of comparison #1
 res2	equ		dl							; result of comparison #2
 index	equ		rax							; index of first occurence of pattern
@@ -1116,8 +1192,8 @@ end if
 .vloop:	add		index, VSIZE				; index += VSIZE
 		sub		size, VSIZE					; if (size <= VSIZE)
 		jbe		.tail						;     then check string tails
-		movdqu	s1temp, [ptr1 + 1*VSIZE]	; s1temp = ptr1[1]
-		movdqa	s2temp, [ptr2 + 1*VSIZE]	; s2temp = ptr2[1]
+		movdqu	s1temp, [ptr1 + 1 * VSIZE]	; s1temp = ptr1[1]
+		movdqa	s2temp, [ptr2 + 1 * VSIZE]	; s2temp = ptr2[1]
 	pcmpeq#x	s1temp, s2temp				; check if ptr1[1] == ptr2[1]
 	pcmpeq#x	s2temp, eol					; check ptr2[1] for end of line
 	pandn		s2temp, s1temp
@@ -1127,8 +1203,8 @@ end if
 		add		index, VSIZE				; index += VSIZE
 		sub		size, VSIZE					; if (size <= VSIZE)
 		jbe		.tail						;     then check string tails
-		movdqu	s1temp, [ptr1 + 2*VSIZE]	; s1temp = ptr1[2]
-		movdqa	s2temp, [ptr2 + 2*VSIZE]	; s2temp = ptr2[2]
+		movdqu	s1temp, [ptr1 + 2 * VSIZE]	; s1temp = ptr1[2]
+		movdqa	s2temp, [ptr2 + 2 * VSIZE]	; s2temp = ptr2[2]
 	pcmpeq#x	s1temp, s2temp				; check if ptr1[2] == ptr2[2]
 	pcmpeq#x	s2temp, eol					; check ptr2[2] for end of line
 	pandn		s2temp, s1temp
@@ -1138,8 +1214,8 @@ end if
 		add		index, VSIZE				; index += VSIZE
 		sub		size, VSIZE					; if (size <= VSIZE)
 		jbe		.tail						;     then check string tails
-		movdqu	s1temp, [ptr1 + 3*VSIZE]	; s1temp = ptr1[3]
-		movdqa	s2temp, [ptr2 + 3*VSIZE]	; s2temp = ptr2[3]
+		movdqu	s1temp, [ptr1 + 3 * VSIZE]	; s1temp = ptr1[3]
+		movdqa	s2temp, [ptr2 + 3 * VSIZE]	; s2temp = ptr2[3]
 	pcmpeq#x	s1temp, s2temp				; check if ptr1[3] == ptr2[3]
 	pcmpeq#x	s2temp, eol					; check ptr2[3] for end of line
 	pandn		s2temp, s1temp
@@ -1149,8 +1225,8 @@ end if
 		add		index, VSIZE				; index += VSIZE
 		sub		size, VSIZE					; if (size <= VSIZE)
 		jbe		.tail						;     then check string tails
-		movdqu	s1temp, [ptr1 + 4*VSIZE]	; s1temp = ptr1[4]
-		movdqa	s2temp, [ptr2 + 4*VSIZE]	; s2temp = ptr2[4]
+		movdqu	s1temp, [ptr1 + 4 * VSIZE]	; s1temp = ptr1[4]
+		movdqa	s2temp, [ptr2 + 4 * VSIZE]	; s2temp = ptr2[4]
 	pcmpeq#x	s1temp, s2temp				; check if ptr1[4] == ptr2[4]
 	pcmpeq#x	s2temp, eol					; check ptr2[4] for end of line
 	pandn		s2temp, s1temp
@@ -1221,9 +1297,9 @@ if scale <> 0
 		ret
 end if
 }
-Compare1_char8:		COMPARE1	cl, b
-Compare1_char16:	COMPARE1	cx, w
-Compare1_char32:	COMPARE1	ecx, d
+CompareStr_char8:	COMPARE1	cl, b
+CompareStr_char16:	COMPARE1	cx, w
+CompareStr_char32:	COMPARE1	ecx, d
 
 ;==============================================================================;
 ;       Comparison of characters sequences                                     ;
@@ -1293,8 +1369,8 @@ end if
 .vloop:	add		index, VSIZE				; index += VSIZE
 		sub		size, VSIZE					; if (size <= VSIZE)
 		jbe		.tail						;     then check string tails
-		movdqu	s1temp, [ptr1 + 1*VSIZE]	; s1temp = ptr1[1]
-		movdqa	s2temp, [ptr2 + 1*VSIZE]	; s2temp = ptr2[1]
+		movdqu	s1temp, [ptr1 + 1 * VSIZE]	; s1temp = ptr1[1]
+		movdqa	s2temp, [ptr2 + 1 * VSIZE]	; s2temp = ptr2[1]
 	pcmpeq#x	s1temp, s2temp				; check if ptr1[1] == ptr2[1]
 	pcmpeq#x	s2temp, eol					; check ptr2[1] for end of line
 	pandn		s2temp, s1temp
@@ -1304,8 +1380,8 @@ end if
 		add		index, VSIZE				; index += VSIZE
 		sub		size, VSIZE					; if (size <= VSIZE)
 		jbe		.tail						;     then check string tails
-		movdqu	s1temp, [ptr1 + 2*VSIZE]	; s1temp = ptr1[2]
-		movdqa	s2temp, [ptr2 + 2*VSIZE]	; s2temp = ptr2[2]
+		movdqu	s1temp, [ptr1 + 2 * VSIZE]	; s1temp = ptr1[2]
+		movdqa	s2temp, [ptr2 + 2 * VSIZE]	; s2temp = ptr2[2]
 	pcmpeq#x	s1temp, s2temp				; check if ptr1[2] == ptr2[2]
 	pcmpeq#x	s2temp, eol					; check ptr2[2] for end of line
 	pandn		s2temp, s1temp
@@ -1315,8 +1391,8 @@ end if
 		add		index, VSIZE				; index += VSIZE
 		sub		size, VSIZE					; if (size <= VSIZE)
 		jbe		.tail						;     then check string tails
-		movdqu	s1temp, [ptr1 + 3*VSIZE]	; s1temp = ptr1[3]
-		movdqa	s2temp, [ptr2 + 3*VSIZE]	; s2temp = ptr2[3]
+		movdqu	s1temp, [ptr1 + 3 * VSIZE]	; s1temp = ptr1[3]
+		movdqa	s2temp, [ptr2 + 3 * VSIZE]	; s2temp = ptr2[3]
 	pcmpeq#x	s1temp, s2temp				; check if ptr1[3] == ptr2[3]
 	pcmpeq#x	s2temp, eol					; check ptr2[3] for end of line
 	pandn		s2temp, s1temp
@@ -1326,8 +1402,8 @@ end if
 		add		index, VSIZE				; index += VSIZE
 		sub		size, VSIZE					; if (size <= VSIZE)
 		jbe		.tail						;     then check string tails
-		movdqu	s1temp, [ptr1 + 4*VSIZE]	; s1temp = ptr1[4]
-		movdqa	s2temp, [ptr2 + 4*VSIZE]	; s2temp = ptr2[4]
+		movdqu	s1temp, [ptr1 + 4 * VSIZE]	; s1temp = ptr1[4]
+		movdqa	s2temp, [ptr2 + 4 * VSIZE]	; s2temp = ptr2[4]
 	pcmpeq#x	s1temp, s2temp				; check if ptr1[4] == ptr2[4]
 	pcmpeq#x	s2temp, eol					; check ptr2[4] for end of line
 	pandn		s2temp, s1temp
@@ -1382,13 +1458,17 @@ end if
 		movsx	result, res1
 		ret
 }
-Compare2_char8:		COMPARE2	cl, b
-Compare2_char16:	COMPARE2	cx, w
-Compare2_char32:	COMPARE2	ecx, d
+CompareSeq_char8:	COMPARE2	cl, b
+CompareSeq_char16:	COMPARE2	cx, w
+CompareSeq_char32:	COMPARE2	ecx, d
 
 ;******************************************************************************;
 ;       Value replacement                                                      ;
 ;******************************************************************************;
+
+;==============================================================================;
+;       Symbol replacing                                                       ;
+;==============================================================================;
 macro	REPLACE_SYMBOL	patt, val, char, x
 {
 ;---[Parameters]---------------------------
@@ -1451,7 +1531,7 @@ end if
 		jnz		.brk						;     then break the loop
 .back0:	add		index, VSIZE				; index += VSIZE
 ;---[Vector loop]--------------------------
-.vloop:	movdqa	echeck, [ptr + 1*VSIZE]		; echeck = ptr[1]
+.vloop:	movdqa	echeck, [ptr + 1 * VSIZE]	; echeck = ptr[1]
 		movdqa	pcheck, echeck				; pcheck = ptr[1]
 	pcmpeq#x	echeck, eol					; check ptr[1] for end of line
 	pcmpeq#x	pcheck, pattern				; check ptr[1] for symbol
@@ -1461,7 +1541,7 @@ end if
 		and		emask, emask				; if eol or pattern is found
 		jnz		.brk						;     then break the loop
 .back1:	add		index, VSIZE				; index += VSIZE
-		movdqa	echeck, [ptr + 2*VSIZE]		; echeck = ptr[2]
+		movdqa	echeck, [ptr + 2 * VSIZE]	; echeck = ptr[2]
 		movdqa	pcheck, echeck				; pcheck = ptr[2]
 	pcmpeq#x	echeck, eol					; check ptr[2] for end of line
 	pcmpeq#x	pcheck, pattern				; check ptr[2] for symbol
@@ -1471,7 +1551,7 @@ end if
 		and		emask, emask				; if eol or pattern is found
 		jnz		.brk						;     then break the loop
 .back2:	add		index, VSIZE				; index += VSIZE
-		movdqa	echeck, [ptr + 3*VSIZE]		; echeck = ptr[3]
+		movdqa	echeck, [ptr + 3 * VSIZE]	; echeck = ptr[3]
 		movdqa	pcheck, echeck				; pcheck = ptr[3]
 	pcmpeq#x	echeck, eol					; check ptr[3] for end of line
 	pcmpeq#x	pcheck, pattern				; check ptr[3] for symbol
@@ -1481,7 +1561,7 @@ end if
 		and		emask, emask				; if eol or pattern is found
 		jnz		.brk						;     then break the loop
 .back3:	add		index, VSIZE				; index += VSIZE
-		movdqa	echeck, [ptr + 4*VSIZE]		; echeck = ptr[4]
+		movdqa	echeck, [ptr + 4 * VSIZE]	; echeck = ptr[4]
 		movdqa	pcheck, echeck				; pcheck = ptr[4]
 	pcmpeq#x	echeck, eol					; check ptr[4] for end of line
 	pcmpeq#x	pcheck, pattern				; check ptr[4] for symbol
@@ -1531,22 +1611,68 @@ Replace_char8:		REPLACE_SYMBOL	sil, dl, cl, b
 Replace_char16:		REPLACE_SYMBOL	si, dx, cx, w
 Replace_char32:		REPLACE_SYMBOL	esi, edx, ecx, d
 
-;******************************************************************************;
-;       Search algorithms                                                      ;
-;******************************************************************************;
-
 ;==============================================================================;
+;       String replacing                                                       ;
+;==============================================================================;
+Replace:
+;---[Parameters]---------------------------
+array	equ		rdi							; pointer to array of strings
+size	equ		rsi							; array size (count of elements)
+string	equ		rdx							; string to find
+value	equ		rcx							; string to replace matched string
+func	equ		r8							; pointer to string compare function
+;---[Internal variables]-------------------
+result	equ		eax							; result register
+param1	equ		rdi							; register to pass 1 parameter
+param2	equ		rsi							; register to pass 2 parameter
+stack	equ		rsp							; stack pointer
+s_array	equ		stack + 0 * 8				; stack position of "array" variable
+s_size	equ		stack + 1 * 8				; stack position of "size" variable
+s_str	equ		stack + 2 * 8				; stack position of "string" variable
+s_value	equ		stack + 3 * 8				; stack position of "value" variable
+s_func	equ		stack + 4 * 8				; stack position of "func" variable
+space	= 5 * 8								; stack size required by the procedure
+;------------------------------------------
+		sub		stack, space				; reserving stack size for local vars
+		test	size, size					; if (size == 0)
+		jz		.exit						;     then go to exit
+;---[Normal execution branch]--------------
+		mov		[s_array], array			; save "array" variable into the stack
+		mov		[s_size], size				; save "size" variable into the stack
+		mov		[s_str], string				; save "string" variable into the stack
+		mov		[s_value], value			; save "value" variable into the stack
+		mov		[s_func], func				; save "func" variable into the stack
+;---[Search loop]--------------------------
+.loop:	mov		param2, [array]
+		mov		param1, [s_str]
+		call	qword [s_func]				; result = Compare (string, array[0])
+		mov		array, [s_array]			; get "array" variable from the stack
+		test	result, result				; if (result == 0)
+		jz		.brk						;     then break the loop
+.back:	add		array, 8
+		add		qword [s_array], 8			; array++
+		sub		qword [s_size], 1			; size--
+		jnz		.loop						; do while (size != 0)
+;---[End of search loop]-------------------
+.exit:	add		stack, space				; restoring back the stack pointer
+		ret
+;---[Found branch]---------------------
+.brk:	mov		value, [s_value]			; get "value" variable from the stack
+		mov		[array], value				; array[0] = value
+		jmp		.back						; go back
+
+;******************************************************************************;
 ;       Symbols search                                                         ;
-;==============================================================================;
+;******************************************************************************;
 
-;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+;==============================================================================;
 ;       Searching for single symbol                                            ;
-;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
-macro	FIND_SYMBOL	patt, char, x
+;==============================================================================;
+macro	FIND_SYMBOL	symbol, char, x
 {
 ;---[Parameters]---------------------------
 string	equ		rdi							; pointer to string
-preg	equ		rsi							; register which holds symbol
+psymbol	equ		rsi							; register which holds symbol
 ;---[Internal variables]-------------------
 index	equ		rax							; index of first occurence of pattern
 sindex	equ		rcx							; string offset from vector boundary
@@ -1558,27 +1684,24 @@ eol		equ		xmm2						; end of line
 pattern	equ		xmm3						; pattern to find
 cmask	equ		xmm4						; mask to clear unrequired results
 if x eq b
-length	= Len_char8							; string length function
 scale	= 0									; scale value
 else if x eq w
-length	= Len_char16						; string length function
 scale	= 1									; scale value
 else if x eq d
-length	= Len_char32						; string length function
 scale	= 2									; scale value
 end if
 bytes	= 1 shl scale						; size of array element (bytes)
 bmask	= bytes - 1							; elements aligning mask
 ;------------------------------------------
-		test	patt, patt					; if (patt == eol)
-		jz		length						;     then call Len (string)
+		test	symbol, symbol				; if (symbol == eol)
+		jz		.ntfnd						;     then go to not found branch
 		xor		index, index				; index = 0
 if scale <> 0
 		test	string, bmask				; if elements have wrong alignment
-		jnz		.sloop						;     then skip vector code
+		jnz		.skip						;     then skip vector code
 end if
 ;---[Normal execution branch]--------------
-		movq	pattern, preg				; pattern = symbol
+		movq	pattern, psymbol			; pattern = symbol
 		mov		sindex, string
 		and		sindex, VMASK				; get string offset from vector boundary
 		sub		string, sindex				; align pointer to vector boundary
@@ -1600,7 +1723,7 @@ end if
 		jnz		.brk						;     then break the loop
 		add		index, VSIZE				; index += VSIZE
 ;---[Vector loop]--------------------------
-.vloop:	movdqa	echeck, [string + 1*VSIZE]	; echeck = string[1]
+.vloop:	movdqa	echeck, [string + 1 * VSIZE]; echeck = string[1]
 		movdqa	pcheck, echeck				; pcheck = string[1]
 	pcmpeq#x	echeck, eol					; check string[1] for end of line
 	pcmpeq#x	pcheck, pattern				; check string[1] for symbol
@@ -1609,7 +1732,7 @@ end if
 		and		emask, emask				; if eol or pattern is found
 		jnz		.brk						;     then break the loop
 		add		index, VSIZE				; index += VSIZE
-		movdqa	echeck, [string + 2*VSIZE]	; echeck = string[2]
+		movdqa	echeck, [string + 2 * VSIZE]; echeck = string[2]
 		movdqa	pcheck, echeck				; pcheck = string[2]
 	pcmpeq#x	echeck, eol					; check string[2] for end of line
 	pcmpeq#x	pcheck, pattern				; check string[2] for symbol
@@ -1618,7 +1741,7 @@ end if
 		and		emask, emask				; if eol or pattern is found
 		jnz		.brk						;     then break the loop
 		add		index, VSIZE				; index += VSIZE
-		movdqa	echeck, [string + 3*VSIZE]	; echeck = string[3]
+		movdqa	echeck, [string + 3 * VSIZE]; echeck = string[3]
 		movdqa	pcheck, echeck				; pcheck = string[3]
 	pcmpeq#x	echeck, eol					; check string[3] for end of line
 	pcmpeq#x	pcheck, pattern				; check string[3] for symbol
@@ -1627,7 +1750,7 @@ end if
 		and		emask, emask				; if eol or pattern is found
 		jnz		.brk						;     then break the loop
 		add		index, VSIZE				; index += VSIZE
-		movdqa	echeck, [string + 4*VSIZE]	; echeck = string[4]
+		movdqa	echeck, [string + 4 * VSIZE]; echeck = string[4]
 		movdqa	pcheck, echeck				; pcheck = string[4]
 	pcmpeq#x	echeck, eol					; check string[4] for end of line
 	pcmpeq#x	pcheck, pattern				; check string[4] for symbol
@@ -1650,11 +1773,11 @@ end if
 		ret
 if scale <> 0
 ;---[Scalar loop]--------------------------
-.sloop:	mov		char, [string]				; char = string[0]
-		cmp		char, patt					; if (char == patt)
+.sloop:	cmp		char, symbol				; if (char == symbol)
 		je		.exit						;     then go to exit
 		add		string, bytes				; string++
 		add		index, 1					; index++
+.skip:	mov		char, [string]				; char = string[0]
 		test	char, char
 		jnz		.sloop						; do while (char != 0)
 end if
@@ -1662,58 +1785,175 @@ end if
 .ntfnd:	mov		index, NOT_FOUND			; return NOT_FOUND
 .exit:	ret
 }
-Find1_char8:	FIND_SYMBOL	sil, cl, b
-Find1_char16:	FIND_SYMBOL	si, cx, w
-Find1_char32:	FIND_SYMBOL	esi, ecx, d
+FindSymbol_char8:	FIND_SYMBOL	sil, cl, b
+FindSymbol_char16:	FIND_SYMBOL	si, cx, w
+FindSymbol_char32:	FIND_SYMBOL	esi, ecx, d
 
-;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+;==============================================================================;
 ;       Searching for symbols set                                              ;
-;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
-macro	FIND_SYMBOLS	char1, char2, scale
+;==============================================================================;
+macro	FIND_SYMBOLS	symbol, char, x
 {
 ;---[Parameters]---------------------------
-string	equ		rdi							; source string
+string	equ		rdi							; pointer to string
 symbols	equ		rsi							; symbols to find
 ;---[Internal variables]-------------------
-ptr1	equ		rax							; temporary pointer to string
-ptr2	equ		r8							; temporary pointer to symbols
-bytes	= 1 shl scale						; size of element (bytes)
+result	equ		rax							; result register
+index	equ		rax							; index of first occurence of pattern
+sindex	equ		rcx							; string offset from vector boundary
+pindex	equ		r8							; pattern table index
+emask	equ		r9							; result of eol search
+pmask	equ		r10							; result of pattern search
+size	equ		r11							; size of pattern table
+wchar	equ		rdx							; register which holds char value
+count	equ		symbols						; count of patterns to check
+param1	equ		rdi							; register to pass 1 parameter
+pcheck	equ		xmm0						; pattern check mask
+echeck	equ		xmm1						; eol check mask
+eol		equ		xmm2						; end of line
+pattern	equ		xmm3						; pattern to find
+cmask	equ		xmm4						; mask to clear unrequired results
+stack	equ		rsp							; stack pointer
+table	equ		stack						; pattern table
+s_str	equ		stack + 0 * 8				; stack position of "string" variable
+s_smbls	equ		stack + 1 * 8				; stack position of "symbols" variable
+if x eq b
+length	= Len_char8							; string length function
+scale	= 0									; scale value
+else if x eq w
+length	= Len_char16						; string length function
+scale	= 1									; scale value
+else if x eq d
+length	= Len_char32						; string length function
+scale	= 2									; scale value
+end if
+space	= 3 * 8								; stack size required by the procedure
+bytes	= 1 shl scale						; size of array element (bytes)
+bmask	= bytes - 1							; elements aligning mask
 ;------------------------------------------
-		mov		ptr1, string				; ptr1 = string
-;---[Loop]---------------------------------
-.loop1:	mov		ptr2, symbols				; ptr2 = symbols
-		mov		char1, [ptr1]				; char1 = ptr1[0]
-;---[Internal loop]------------------------
-.loop2:	mov		char2, [ptr2]				; char2 = ptr2[0]
-		cmp		char2, char1				; if (char2 == char1)
-		je		.match						;     then go to match branch
-		add		ptr2, bytes					; ptr2++
-		test	char2, char2
-		jnz		.loop2						; do while (char2 != 0)
-;---[end of internal loop]-----------------
-		add		ptr1, bytes					; ptr1++
-		jmp		.loop1						; do while (true)
-;---[end of loop]--------------------------
-.match:	test	char1, char1				; if (char1 == 0)
-		jz		.ntfnd						;     then no matching symbol is found
-		sub		ptr1, string				; return ptr1 - string
-		shftr	ptr1, scale
+		mov		symbol, [symbols]			; symbol = symbols[0]
+		test	symbol, symbol				; if (symbol == eol)
+		jz		.ntfnd						;     then go to not found branch
+		xor		index, index				; index = 0
+if scale <> 0
+		test	string, bmask				; if elements have wrong alignment
+		jnz		.skip						;     then skip vector code
+end if
+;---[Creating pattern table]---------------
+		sub		stack, space				; reserving stack size for local vars
+		mov		[s_str], string				; save "string" variable into the stack
+		mov		[s_smbls], symbols			; save "symbols" variable into the stack
+		mov		param1, symbols
+		call	length						; result = Len (symbols)
+		mov		string, [s_str]				; get "string" variable from the stack
+		mov		symbols, [s_smbls]			; get "symbols" variable from the stack
+		shl		result, 4
+		sub		stack, result				; get space for pattern table
+		mov		size, result				; size = result
+		xor		pindex, pindex				; pindex = 0
+;---[Filling pattern table]----------------
+.ploop:	mov		char, [symbols]
+		movq	pattern, wchar				; pattern = char
+		clone	pattern, scale				; duplicate value through the entire register
+		movdqa	[table + pindex], pattern	; table[pindex] = pattern
+		add		symbols, bytes				; symbols++
+		add		pindex, VSIZE				; pindex++
+		sub		result, VSIZE				; result--
+		jnz		.ploop						; do while (result != 0)
+;---[Normal execution branch]--------------
+		mov		sindex, string
+		and		sindex, VMASK				; get string offset from vector boundary
+		sub		string, sindex				; align pointer to vector boundary
+		pxor	eol, eol					; eol = 0
+;---[Unaligned search for pattern]---------
+		sub		index, sindex				; index -= sindex
+		shl		sindex, 4					; compute shift in mask array
+		movdqa	cmask, dqword [maskA + sindex]
+		movdqa	echeck, [string]			; echeck = string[0]
+		pxor	pcheck, pcheck				; pcheck = 0
+		xor		pindex, pindex				; pindex = 0
+		mov		count, size					; count = size
+;---[Pattern matching loop]----------------
+.loop1:	movdqa	pattern, [table + pindex]	; pattern = table[pindex]
+	pcmpeq#x	pattern, echeck				; check string[1] for symbol
+		por		pcheck, pattern				; add patern matching mask to pcheck
+		add		pindex, VSIZE				; pindex++
+		sub		count, VSIZE				; count--
+		jnz		.loop1						; do while (count != 0)
+;---[End of pattern matching loop]---------
+	pcmpeq#x	echeck, eol					; check string[1] for end of line
+		pand	echeck, cmask				; apply cmask to eol search results
+		pand	pcheck, cmask				; apply cmask to pattern search results
+		por		echeck, pcheck				; echeck |= pcheck
+	pmovmskb	emask, echeck				; save check results to emask
+		and		emask, emask				; if eol or pattern is found
+		jnz		.brk						;     then break the loop
+		add		index, VSIZE				; index += VSIZE
+;---[Vector loop]--------------------------
+.vloop:	movdqa	echeck, [string + 1 * VSIZE]; echeck = string[1]
+		pxor	pcheck, pcheck				; pcheck = 0
+		xor		pindex, pindex				; pindex = 0
+		mov		count, size					; count = size
+;---[Pattern matching loop]----------------
+.loop2:	movdqa	pattern, [table + pindex]	; pattern = table[pindex]
+	pcmpeq#x	pattern, echeck				; check string[1] for symbol
+		por		pcheck, pattern				; add patern matching mask to pcheck
+		add		pindex, VSIZE				; pindex++
+		sub		count, VSIZE				; count--
+		jnz		.loop2						; do while (count != 0)
+;---[End of pattern matching loop]---------
+	pcmpeq#x	echeck, eol					; check string[1] for end of line
+		por		echeck, pcheck				; echeck |= pcheck
+	pmovmskb	emask, echeck				; save check results to emask
+		and		emask, emask				; if eol or pattern is found
+		jnz		.brk						;     then break the loop
+		add		index, VSIZE				; index += VSIZE
+		add		string, VSIZE				; string += VSIZE
+		jmp		.vloop						; do while (true)
+;---[End of vector loop]-------------------
+.brk:	lea		stack, [stack + size+space]	; restoring back the stack pointer
+	pmovmskb	pmask, pcheck				; save check results to pmask
+		bsf		emask, emask				; find index of first occurence of eol
+		bsf		pmask, pmask				; find index of first occurence of pattern
+		jz		.ntfnd						; if pattern is not found, then go to not found branch
+		cmp		pmask, emask				; if (index(pattern) > index (eol))
+		ja		.ntfnd						;     then go to not found branch
+		add		index, pmask				; index += pmask
+		shftr	index, scale				; return index
 		ret
+if scale <> 0
+;---[Scalar loop]--------------------------
+.sloop:	mov		ptr, symbols				; ptr = symbols
+		mov		symbol, [ptr]				; symbol = ptr[0]
+;---[Searching loop]-----------------------
+.iloop:	cmp		char, symbol				; if (char == symbol)
+		je		.exit						;     then go to exit
+		add		ptr, bytes					; ptr++
+		mov		symbol, [ptr]				; symbol = ptr[0]
+		test	symbol, symbol
+		jnz		.iloop						; do while (symbol)
+;---[End of searching loop]----------------
+		add		string, bytes				; string++
+		add		index, 1					; index++
+.skip:	mov		char, [string]				; char = string[0]
+		test	char, char
+		jnz		.sloop						; do while (char != 0)
+end if
 ;---[Not found branch]---------------------
-.ntfnd:	mov		ptr1, NOT_FOUND				; return NOT_FOUND
-		ret
+.ntfnd:	mov		index, NOT_FOUND			; return NOT_FOUND
+.exit:	ret
 }
-Find2_char8:	FIND_SYMBOLS	dl, cl, 0
-Find2_char16:	FIND_SYMBOLS	dx, cx, 1
-Find2_char32:	FIND_SYMBOLS	edx, ecx, 2
+FindSymbols_char8:	FIND_SYMBOLS	dl, cl, b
+FindSymbols_char16:	FIND_SYMBOLS	dx, cx, w
+FindSymbols_char32:	FIND_SYMBOLS	edi, ecx, d
 
-;==============================================================================;
+;******************************************************************************;
 ;       Substring search                                                       ;
-;==============================================================================;
+;******************************************************************************;
 
-;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+;==============================================================================;
 ;       Searching string for pattern                                           ;
-;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+;==============================================================================;
 macro	FIND_STRING1 x
 {
 ;---[Parameters]---------------------------
@@ -1760,15 +2000,15 @@ space	= 265 * 8							; stack size required by the procedure
 		jb		.ntfnd						;     then go to not found branch
 		mov		[s_ssize], result			; save string size into the stack
 ;---[Calling BMH constructor]--------------
-		lea		param1, [s_bmh]				; pass BMH object to BMH constructor
-		mov		param2, [s_patt]			; pass pattern string to BMH constructor
-		mov		param3, [s_psize]			; pass pattern size to BMH constructor
 		xor		param4, param4				; pass direction flag to BMH constructor
+		mov		param3, [s_psize]			; pass pattern size to BMH constructor
+		mov		param2, [s_patt]			; pass pattern string to BMH constructor
+		lea		param1, [s_bmh]				; pass BMH object to BMH constructor
 		call	hash						; call BMH constructor
 ;---[Calling BMH search algorithm]---------
-		mov		param1, [s_str]				; pass source string to BMH search algorithm
-		mov		param2, [s_ssize]			; pass source string size to BMH search algorithm
 		lea		param3, [s_bmh]				; pass BMH pattern to BMH search algorithm
+		mov		param2, [s_ssize]			; pass source string size to BMH search algorithm
+		mov		param1, [s_str]				; pass source string to BMH search algorithm
 		call	find						; call BMH search algorithm
 		add		stack, space				; restoring back the stack pointer
 		ret
@@ -1777,13 +2017,13 @@ space	= 265 * 8							; stack size required by the procedure
 		mov		result, NOT_FOUND			; return NOT_FOUND
 		ret
 }
-FindStr1_char8:		FIND_STRING1	b
-FindStr1_char16:	FIND_STRING1	w
-FindStr1_char32:	FIND_STRING1	d
+FindStrStr_char8:	FIND_STRING1	b
+FindStrStr_char16:	FIND_STRING1	w
+FindStrStr_char32:	FIND_STRING1	d
 
-;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+;==============================================================================;
 ;       Searching characters sequence for pattern                              ;
-;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+;==============================================================================;
 macro	FIND_STRING2 x
 {
 ;---[Parameters]---------------------------
@@ -1830,15 +2070,15 @@ space	= 265 * 8							; stack size required by the procedure
 		cmp		result, [s_psize]			; if (Len (string) < Len (pattern))
 		jb		.ntfnd						;     then go to not found branch
 ;---[Calling BMH constructor]--------------
-		lea		param1, [s_bmh]				; pass BMH object to BMH constructor
-		mov		param2, [s_patt]			; pass pattern string to BMH constructor
-		mov		param3, [s_psize]			; pass pattern size to BMH constructor
 		xor		param4, param4				; pass direction flag to BMH constructor
+		mov		param3, [s_psize]			; pass pattern size to BMH constructor
+		mov		param2, [s_patt]			; pass pattern string to BMH constructor
+		lea		param1, [s_bmh]				; pass BMH object to BMH constructor
 		call	hash						; call BMH constructor
 ;---[Calling BMH search algorithm]---------
-		mov		param1, [s_str]				; pass source string to BMH search algorithm
-		mov		param2, [s_ssize]			; pass source string size to BMH search algorithm
 		lea		param3, [s_bmh]				; pass BMH pattern to BMH search algorithm
+		mov		param2, [s_ssize]			; pass source string size to BMH search algorithm
+		mov		param1, [s_str]				; pass source string to BMH search algorithm
 		call	find						; call BMH search algorithm
 		add		stack, space				; restoring back the stack pointer
 		ret
@@ -1847,32 +2087,32 @@ space	= 265 * 8							; stack size required by the procedure
 		mov		result, NOT_FOUND			; return NOT_FOUND
 		ret
 }
-FindStr2_char8:		FIND_STRING2	b
-FindStr2_char16:	FIND_STRING2	w
-FindStr2_char32:	FIND_STRING2	d
+FindSeqStr_char8:	FIND_STRING2	b
+FindSeqStr_char16:	FIND_STRING2	w
+FindSeqStr_char32:	FIND_STRING2	d
 
-;==============================================================================;
+;******************************************************************************;
 ;       String search                                                          ;
+;******************************************************************************;
+
+;==============================================================================;
+;       Linear search                                                          ;
 ;==============================================================================;
 
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
-;       Linear search                                                          ;
-;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
-
-;------------------------------------------------------------------------------;
 ;       Forward direction search                                               ;
-;------------------------------------------------------------------------------;
-macro	FIND_FWD	result, x
-{
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+FindFwd:
 ;---[Parameters]---------------------------
 array	equ		rdi							; pointer to array of strings
 size	equ		rsi							; array size (count of elements)
 string	equ		rdx							; string to find
 func	equ		rcx							; pointer to string compare function
 ;---[Internal variables]-------------------
+result	equ		eax							; result register
 ptr		equ		rax							; pointer to current element
-str1	equ		rdi							; pointer to first string
-str2	equ		rsi							; pointer to second string
+param1	equ		rdi							; register to pass 1 parameter
+param2	equ		rsi							; register to pass 2 parameter
 stack	equ		rsp							; stack pointer
 s_array	equ		stack + 0 * 8				; stack position of "array" variable
 s_size	equ		stack + 1 * 8				; stack position of "size" variable
@@ -1881,9 +2121,10 @@ s_func	equ		stack + 3 * 8				; stack position of "func" variable
 s_ptr	equ		stack + 4 * 8				; stack position of "ptr" variable
 space	= 5 * 8								; stack size required by the procedure
 ;------------------------------------------
+		sub		stack, space				; reserving stack size for local vars
 		test	size, size					; if (size == 0)
 		jz		.exit						;     then go to exit
-		sub		stack, space				; reserving stack size for local vars
+;---[Normal execution branch]--------------
 		mov		ptr, array					; ptr = array
 		mov		[s_array], array			; save "array" variable into the stack
 		mov		[s_size], size				; save "size" variable into the stack
@@ -1891,45 +2132,40 @@ space	= 5 * 8								; stack size required by the procedure
 		mov		[s_func], func				; save "func" variable into the stack
 		mov		[s_ptr], ptr				; save "ptr" variable into the stack
 ;---[Search loop]--------------------------
-.loop:	mov		ptr, [s_ptr]
-		mov		str1, [ptr]
-		mov		str2, [s_str]
-		call	qword [s_func]				; result = Compare (ptr[0], string)
+.loop:	mov		param2, [ptr]
+		mov		param1, [s_str]
+		call	qword [s_func]				; result = Compare (string, ptr[0])
+		mov		ptr, [s_ptr]				; get "ptr" variable from the stack
 		test	result, result				; if (result == 0)
 		jz		.found						;     then go to found branch
+		add		ptr, 8
 		add		qword [s_ptr], 8			; ptr++
 		sub		qword [s_size], 1			; size--
 		jnz		.loop						; do while (size != 0)
 ;---[Not found branch]---------------------
-		add		stack, space				; restoring back the stack pointer
-.exit:	mov		ptr, NOT_FOUND				; return NOT_FOUND
+.exit:	add		stack, space				; restoring back the stack pointer
+		mov		ptr, NOT_FOUND				; return NOT_FOUND
 		ret
 ;---[Found branch]---------------------
-.found:	mov		ptr, [s_ptr]				; get "ptr" variable from the stack
-		mov		array, [s_array]
+.found:	sub		ptr, [s_array]
 		add		stack, space				; restoring back the stack pointer
-		sub		ptr, array					; return ptr - array
-		shr		ptr, 3
+		shr		ptr, 3						; return ptr - array
 		ret
-}
-FindFwd_char8:	FIND_FWD	al, b
-FindFwd_char16:	FIND_FWD	ax, w
-FindFwd_char32:	FIND_FWD	eax, d
 
-;------------------------------------------------------------------------------;
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 ;       Backward direction search                                              ;
-;------------------------------------------------------------------------------;
-macro	FIND_BWD	result, x
-{
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+FindBwd:
 ;---[Parameters]---------------------------
 array	equ		rdi							; pointer to array of strings
 size	equ		rsi							; array size (count of elements)
 string	equ		rdx							; string to find
 func	equ		rcx							; pointer to string compare function
 ;---[Internal variables]-------------------
+result	equ		eax							; result register
 ptr		equ		rax							; pointer to current element
-str1	equ		rdi							; pointer to first string
-str2	equ		rsi							; pointer to second string
+param1	equ		rdi							; register to pass 1 parameter
+param2	equ		rsi							; register to pass 2 parameter
 stack	equ		rsp							; stack pointer
 s_array	equ		stack + 0 * 8				; stack position of "array" variable
 s_size	equ		stack + 1 * 8				; stack position of "size" variable
@@ -1938,45 +2174,41 @@ s_func	equ		stack + 3 * 8				; stack position of "func" variable
 s_ptr	equ		stack + 4 * 8				; stack position of "ptr" variable
 space	= 5 * 8								; stack size required by the procedure
 ;------------------------------------------
+		sub		stack, space				; reserving stack size for local vars
 		test	size, size					; if (size == 0)
 		jz		.exit						;     then go to exit
-		sub		stack, space				; reserving stack size for local vars
-		lea		ptr, [array + size * 8]		; ptr = array + size
+;---[Normal execution branch]--------------
+		lea		ptr, [array + size * 8 - 8]	; ptr = array + size - 1
 		mov		[s_array], array			; save "array" variable into the stack
 		mov		[s_size], size				; save "size" variable into the stack
 		mov		[s_str], string				; save "string" variable into the stack
 		mov		[s_func], func				; save "func" variable into the stack
 		mov		[s_ptr], ptr				; save "ptr" variable into the stack
 ;---[Search loop]--------------------------
-.loop:	sub		qword [s_ptr], 8			; ptr--
-		mov		ptr, [s_ptr]
-		mov		str1, [ptr]
-		mov		str2, [s_str]
-		call	qword [s_func]				; result = Compare (ptr[0], string)
+.loop:	mov		param2, [ptr]
+		mov		param1, [s_str]
+		call	qword [s_func]				; result = Compare (string, ptr[0])
+		mov		ptr, [s_ptr]				; get "ptr" variable from the stack
 		test	result, result				; if (result == 0)
 		jz		.found						;     then go to found branch
+		sub		ptr, 8
+		sub		qword [s_ptr], 8			; ptr--
 		sub		qword [s_size], 1			; size--
 		jnz		.loop						; do while (size != 0)
 ;---[Not found branch]---------------------
-		add		stack, space				; restoring back the stack pointer
-.exit:	mov		ptr, NOT_FOUND				; return NOT_FOUND
+.exit:	add		stack, space				; restoring back the stack pointer
+		mov		ptr, NOT_FOUND				; return NOT_FOUND
 		ret
 ;---[Found branch]---------------------
-.found:	mov		ptr, [s_ptr]				; get "ptr" variable from the stack
-		mov		array, [s_array]
+.found:	sub		ptr, [s_array]
 		add		stack, space				; restoring back the stack pointer
-		sub		ptr, array					; return ptr - array
-		shr		ptr, 3
+		shr		ptr, 3						; return ptr - array
 		ret
-}
-FindBwd_char8:	FIND_BWD	al, b
-FindBwd_char16:	FIND_BWD	ax, w
-FindBwd_char32:	FIND_BWD	eax, d
 
-;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+;==============================================================================;
 ;       Binary search                                                          ;
-;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
-macro	FIND_BIN	result, x
+;==============================================================================;
+macro	FIND_BIN	cond1, cond2
 {
 ;---[Parameters]---------------------------
 array	equ		rdi							; pointer to array of strings
@@ -1984,79 +2216,84 @@ size	equ		rsi							; array size (count of elements)
 string	equ		rdx							; string to find
 func	equ		rcx							; pointer to string compare function
 ;---[Internal variables]-------------------
-left	equ		rax							; pointer to start of the data array
-right	equ		size						; pointer to end of the data array
-ptr		equ		size						; pointer to current element
+result	equ		rax							; result register
 median	equ		r8							; median value
 median1	equ		r9							; median value + 1
-str1	equ		rdi							; pointer to first string
-str2	equ		rsi							; pointer to second string
+left	equ		r10							; left index
+right	equ		size						; right index
+pos		equ		r12							; matched position
+param1	equ		rdi							; register to pass 1 parameter
+param2	equ		rsi							; register to pass 2 parameter
 stack	equ		rsp							; stack pointer
-s_array	equ		stack + 0 * 8				; stack position of "array" variable
-s_str	equ		stack + 1 * 8				; stack position of "string" variable
-s_cmp	equ		stack + 2 * 8				; stack position of "func" variable
-s_left	equ		stack + 3 * 8				; stack position of "left" variable
-s_right	equ		stack + 4 * 8				; stack position of "right" variable
-s_med	equ		stack + 5 * 8				; stack position of "median" variable
-s_med1	equ		stack + 6 * 8				; stack position of "median1" variable
+s_pos	equ		stack + 0 * 8				; stack position of "pos" variable
+s_array	equ		stack + 1 * 8				; stack position of "array" variable
+s_str	equ		stack + 2 * 8				; stack position of "string" variable
+s_func	equ		stack + 3 * 8				; stack position of "func" variable
+s_left	equ		stack + 4 * 8				; stack position of "left" variable
+s_right	equ		stack + 5 * 8				; stack position of "right" variable
+s_med	equ		stack + 6 * 8				; stack position of "median" variable
 space	= 7 * 8								; stack size required by the procedure
 ;------------------------------------------
-		test	size, size					; if (size == 0)
-		jz		.ntfnd						;     then go to not found branch
 		sub		stack, space				; reserving stack size for local vars
+		test	size, size					; if (size == 0)
+		jz		.exit						;     then go to exit
+;---[Normal execution branch]--------------
 		xor		left, left					; left = 0
-		sub		size, 1						; if (--size == 0)
-		jz		.skip						;     then skip binary search loop
+		mov		[s_pos], pos				; save old value of "pos" variable
 		mov		[s_array], array			; save "array" variable into the stack
 		mov		[s_str], string				; save "string" variable into the stack
-		mov		[s_cmp], func				; save "func" variable into the stack
-;---[Binary search loop]-------------------
-.loop:	mov		[s_left], left				; save "left" variable into the stack
+		mov		[s_func], func				; save "func" variable into the stack
+		mov		[s_left], left				; save "left" variable into the stack
 		mov		[s_right], right			; save "right" variable into the stack
-		lea		median, [left + right]
+		mov		pos, NOT_FOUND				; pos = NOT_FOUND
+;---[Binary search loop]-------------------
+.loop:	lea		median, [left + right]
 		shr		median, 1					; median = (left + right) / 2
-		lea		median1, [median + 1]		; median1 = median + 1
-		mov		ptr, [s_array]				; get "array" variable from the stack
 		mov		[s_med], median				; save "median" variable into the stack
-		mov		[s_med1], median1			; save "median1" variable into the stack
-		mov		str1, [s_str]				; str1 = string
-		mov		str2, [ptr + median * 8]	; str2 = array[median]
-		call	qword [s_cmp]				; if Compare (string, array[median]) condition is met
-		cmp		result, 0					; check compare result
-		cmov#x	left, [s_med1]				;     then left = median + 1
-		cmovn#x	left, [s_left]
-		cmovn#x	right, [s_med]				;     else right = median
-		cmov#x	right, [s_right]
+		mov		param2, [array + median * 8]
+		mov		param1, [s_str]
+		call	qword [s_func]				; result = Compare (string, array[median])
+		mov		array, [s_array]			; get "array" variable from the stack
+		mov		median, [s_med]				; get "median" variable from the stack
+		mov		left, [s_left]				; get "left" variable from the stack
+		mov		right, [s_right]			; get "right" variable from the stack
+		lea		median1, [median + 1]		; median1 = median + 1
+		cmp		result, 0					; if (string cond array[median])
+	cmov#cond1	pos, median					;     update matched position
+	cmov#cond2	left, median1				;     then left = median + 1
+	cmovn#cond2	right, median				;     else right = median
+		mov		[s_left], left				; save "left" variable into the stack
+		mov		[s_right], right			; save "right" variable into the stack
 		cmp		left, right
 		jb		.loop						; do while (left < right)
-;------------------------------------------
-		mov		ptr, [s_array]				; get "array" variable from the stack
-		mov		string, [s_str]				; get "string" variable from the stack
-		mov		func, [s_cmp]				; get "func" variable from the stack
-.skip:	mov		[s_left], left				; save "left" variable into the stack
-		mov		str1, string				; str1 = string
-		mov		str2, [ptr + left * 8]		; str2 = array[left]
-		call	func						; result = Compare (string, array[left])
-		cmp		result, 0					; if (result == 0)
-		jne		@f							; {
-		mov		left, [s_left]				;     return left
-		add		stack, space				; }
-		ret									; else
-@@:		add		stack, space				;     return NOT_FOUND
+;---[End of search loop]-------------------
+		mov		result, pos					; result = pos
+		mov		pos, [s_pos]				; restore old value of "pos" variable
+		add		stack, space				; restoring back the stack pointer
+		ret
 ;---[Not found branch]---------------------
-.ntfnd:	mov		left, NOT_FOUND				; return NOT_FOUND
+.exit:	add		stack, space				; restoring back the stack pointer
+		mov		result, NOT_FOUND			; return NOT_FOUND
 		ret
 }
 
-; Ascending sort order
-FindAsc_char8:	FIND_BIN	al, g
-FindAsc_char16:	FIND_BIN	ax, g
-FindAsc_char32:	FIND_BIN	eax, g
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+;       Ascending sort order                                                   ;
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+FindEqualAsc:			FIND_BIN	e, g
+FindGreatAsc:			FIND_BIN	l, ge
+FindGreatOrEqualAsc:	FIND_BIN	le, g
+FindLessAsc:			FIND_BIN	g, g
+FindLessOrEqualAsc:		FIND_BIN	ge, ge
 
-; Descending sort order
-FindDsc_char8:	FIND_BIN	al, l
-FindDsc_char16:	FIND_BIN	ax, l
-FindDsc_char32:	FIND_BIN	eax, l
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+;       Descending sort order                                                  ;
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+FindEqualDsc:			FIND_BIN	e, l
+FindLessDsc:			FIND_BIN	g, le
+FindLessOrEqualDsc:		FIND_BIN	ge, l
+FindGreatDsc:			FIND_BIN	l, l
+FindGreatOrEqualDsc:	FIND_BIN	le, le
 
 ;******************************************************************************;
 ;       Sorting algorithms                                                     ;
@@ -2065,41 +2302,45 @@ FindDsc_char32:	FIND_BIN	eax, l
 ;==============================================================================;
 ;       Array sorting                                                          ;
 ;==============================================================================;
-macro	SORT	median, ptr1, ptr2, result, op1, op2
+macro	SORT	op1, op2
 {
 ;---[Parameters]---------------------------
 array	equ		rdi							; pointer to strings array
 size	equ		rsi							; array size (count of elements)
 func	equ		rdx							; pointer to string compare function
 ;---[Internal variables]-------------------
-half	equ		rax							; half of array size
+result	equ		eax							; result register
+median	equ		rax							; median value
 left	equ		r8							; left index
 right	equ		r9							; right index
+ptr1	equ		r10							; temporary pointer #1
+ptr2	equ		r11							; temporary pointer #2
 lsize	equ		left						; size of left part of array
 rsize	equ		size						; size of right part of array
 larray	equ		array						; pointer to left part of array
 rarray	equ		right						; pointer to right part of array
-str1	equ		rdi							; pointer to first string
-str2	equ		rsi							; pointer to second string
+param1	equ		rdi							; register to pass 1 parameter
+param2	equ		rsi							; register to pass 2 parameter
 stack	equ		rsp							; stack pointer
 s_array	equ		stack + 0 * 8				; stack position of "array" variable
 s_size	equ		stack + 1 * 8				; stack position of "size" variable
-s_cmp	equ		stack + 2 * 8				; stack position of "func" variable
+s_func	equ		stack + 2 * 8				; stack position of "func" variable
 s_med	equ		stack + 3 * 8				; stack position of "median" variable
 s_left	equ		stack + 4 * 8				; stack position of "left" variable
 s_right	equ		stack + 5 * 8				; stack position of "right" variable
 space	= 7 * 8								; stack size required by the procedure
 ;------------------------------------------
-.start:	cmp		size, 1						; if (size <= 1)
+		cmp		size, 1						; if (size <= 1)
 		jbe		.exit						;     then go to exit
-		sub		stack, space				; reserving stack size for local vars
-		mov		[s_cmp], func				; save "func" variable into the stack
+;---[Normal execution branch]--------------
+.start:	sub		stack, space				; reserving stack size for local vars
+		mov		[s_func], func				; save "func" variable into the stack
 ;---[Sorting loop]-------------------------
-.sort:	mov		half, size
+.sort:	mov		median, size
+		shr		median, 1					; median = size / 2
 		mov		left, -1					; left = -1
-		shr		half, 1						; half = size / 2
 		mov		right, size					; right = size
-		mov		median, [array + half * 8]	; median = array[half]
+		mov		median, [array + median * 8]; median = array[median]
 		mov		[s_array], array			; save "array" variable into the stack
 		mov		[s_size], size				; save "size" variable into the stack
 		mov		[s_med], median				; save "median" variable into the stack
@@ -2117,18 +2358,18 @@ space	= 7 * 8								; stack size required by the procedure
 .loop1:	add		qword [s_left], 1			; left++
 		mov		left, [s_left]				; get "left" variable from the stack
 		mov		array, [s_array]			; get "array" variable from the stack
-		mov		str1, [array + left * 8]	; str1 = array[left]
-		mov		str2, [s_med]				; str2 = median
-		call	qword [s_cmp]				; result = Compare (array[left], median)
+		mov		param2, [s_med]
+		mov		param1, [array + left * 8]
+		call	qword [s_func]				; result = Compare (array[left], median)
 		cmp		result, 0					; check compare result
 		j#op1	.loop1						; do while compare condition is true
 ;---[Internal loop 2]----------------------
 .loop2:	sub		qword [s_right], 1			; right--
 		mov		right, [s_right]			; get "right" variable from the stack
 		mov		array, [s_array]			; get "array" variable from the stack
-		mov		str1, [array + right * 8]	; str1 = array[right]
-		mov		str2, [s_med]				; str2 = median
-		call	qword [s_cmp]				; result = Compare (array[right], median)
+		mov		param2, [s_med]
+		mov		param1, [array + right * 8]
+		call	qword [s_func]				; result = Compare (array[right], median)
 		cmp		result, 0					; check compare result
 		j#op2	.loop2						; do while compare condition is true
 ;------------------------------------------
@@ -2149,7 +2390,7 @@ space	= 7 * 8								; stack size required by the procedure
 		jbe		@f							; {
 		mov		[s_array], rarray			; save "rarray" variable into the stack
 		mov		[s_size], rsize				; save "rsize" variable into the stack
-		mov		func, [s_cmp]				; get "func" variable from the stack
+		mov		func, [s_func]				; get "func" variable from the stack
 		mov		size, lsize
 		call	.start						; call Sort (larray, lsize, func)
 		mov		rarray, [s_array]			; get "rarray" variable from the stack
@@ -2161,7 +2402,7 @@ space	= 7 * 8								; stack size required by the procedure
 		jbe		@f							; {
 		mov		[s_array], larray			; save "larray" variable into the stack
 		mov		[s_size], lsize				; save "lsize" variable into the stack
-		mov		func, [s_cmp]				; get "func" variable from the stack
+		mov		func, [s_func]				; get "func" variable from the stack
 		mov		array, rarray
 		call	.start						; call Sort (rarray, rsize, func)
 		mov		larray, [s_array]			; get "larray" variable from the stack
@@ -2174,21 +2415,13 @@ space	= 7 * 8								; stack size required by the procedure
 		add		stack, space				; restoring back the stack pointer
 .exit:	ret
 }
-
-; Ascending sort order
-SortAsc_char8:		SORT	rax, r10, r11, al, l, g
-SortAsc_char16:		SORT	rax, r10, r11, ax, l, g
-SortAsc_char32:		SORT	rax, r10, r11, eax, l, g
-
-; Descending sort order
-SortDsc_char8:		SORT	rax, r10, r11, al, g, l
-SortDsc_char16:		SORT	rax, r10, r11, ax, g, l
-SortDsc_char32:		SORT	rax, r10, r11, eax, g, l
+SortAsc:	SORT	l, g
+SortDsc:	SORT	g, l
 
 ;==============================================================================;
 ;       Key sorting                                                            ;
 ;==============================================================================;
-macro	SORT_KEY	median, ptr1, ptr2, result, op1, op2
+macro	SORT_KEY	op1, op2
 {
 ;---[Parameters]---------------------------
 array	equ		rdi							; pointer to strings array
@@ -2196,37 +2429,41 @@ ptr		equ		rsi							; pointer to array of pointers to data
 size	equ		rdx							; array size (count of elements)
 func	equ		rcx							; pointer to string func function
 ;---[Internal variables]-------------------
-half	equ		rax							; half of array size
+result	equ		eax							; result register
+median	equ		rax							; median value
 left	equ		r8							; left index
 right	equ		r9							; right index
+ptr1	equ		r10							; temporary pointer #1
+ptr2	equ		r11							; temporary pointer #2
 lsize	equ		left						; size of left part of array
 rsize	equ		size						; size of right part of array
 larray	equ		array						; pointer to left part of array
 rarray	equ		right						; pointer to right part of array
 lptr	equ		ptr							; pointer to left part of ptr array
-rptr	equ		half						; pointer to right part of ptr array
-str1	equ		rdi							; pointer to first string
-str2	equ		rsi							; pointer to second string
+rptr	equ		median						; pointer to right part of ptr array
+param1	equ		rdi							; register to pass 1 parameter
+param2	equ		rsi							; register to pass 2 parameter
 stack	equ		rsp							; stack pointer
 s_array	equ		stack + 0 * 8				; stack position of "array" variable
 s_ptr	equ		stack + 1 * 8				; stack position of "ptr" variable
 s_size	equ		stack + 2 * 8				; stack position of "size" variable
-s_cmp	equ		stack + 3 * 8				; stack position of "func" variable
+s_func	equ		stack + 3 * 8				; stack position of "func" variable
 s_med	equ		stack + 4 * 8				; stack position of "median" variable
 s_left	equ		stack + 5 * 8				; stack position of "left" variable
 s_right	equ		stack + 6 * 8				; stack position of "right" variable
 space	= 7 * 8								; stack size required by the procedure
 ;------------------------------------------
-.start:	cmp		size, 1						; if (size <= 1)
+		cmp		size, 1						; if (size <= 1)
 		jbe		.exit						;     then go to exit
-		sub		stack, space				; reserving stack size for local vars
-		mov		[s_cmp], func				; save "func" variable into the stack
+;---[Normal execution branch]--------------
+.start:	sub		stack, space				; reserving stack size for local vars
+		mov		[s_func], func				; save "func" variable into the stack
 ;---[Sorting loop]-------------------------
-.sort:	mov		half, size
+.sort:	mov		median, size
+		shr		median, 1					; median = size / 2
 		mov		left, -1					; left = -1
-		shr		half, 1						; half = size / 2
 		mov		right, size					; right = size
-		mov		median, [array + half * 8]	; median = array[half]
+		mov		median, [array + median * 8]; median = array[median]
 		mov		[s_array], array			; save "array" variable into the stack
 		mov		[s_ptr], ptr				; save "ptr" variable into the stack
 		mov		[s_size], size				; save "size" variable into the stack
@@ -2251,18 +2488,18 @@ space	= 7 * 8								; stack size required by the procedure
 .loop1:	add		qword [s_left], 1			; left++
 		mov		left, [s_left]				; get "left" variable from the stack
 		mov		array, [s_array]			; get "array" variable from the stack
-		mov		str1, [array + left * 8]	; str1 = array[left]
-		mov		str2, [s_med]				; str2 = median
-		call	qword [s_cmp]				; result = Compare (array[left], median)
+		mov		param2, [s_med]
+		mov		param1, [array + left * 8]
+		call	qword [s_func]				; result = Compare (array[left], median)
 		cmp		result, 0					; check compare result
 		j#op1	.loop1						; do while compare condition is true
 ;---[Internal loop 2]----------------------
 .loop2:	sub		qword [s_right], 1			; right--
 		mov		right, [s_right]			; get "right" variable from the stack
 		mov		array, [s_array]			; get "array" variable from the stack
-		mov		str1, [array + right * 8]	; str1 = array[right]
-		mov		str2, [s_med]				; str2 = median
-		call	qword [s_cmp]				; result = Compare (array[right], median)
+		mov		param2, [s_med]
+		mov		param1, [array + right * 8]
+		call	qword [s_func]				; result = Compare (array[right], median)
 		cmp		result, 0					; check compare result
 		j#op2	.loop2						; do while compare condition is true
 ;------------------------------------------
@@ -2286,7 +2523,7 @@ space	= 7 * 8								; stack size required by the procedure
 		mov		[s_array], rarray			; save "rarray" variable into the stack
 		mov		[s_ptr], rptr				; save "rptr" variable into the stack
 		mov		[s_size], rsize				; save "rsize" variable into the stack
-		mov		func	, [s_cmp]			; get "func" variable from the stack
+		mov		func	, [s_func]			; get "func" variable from the stack
 		mov		size, lsize
 		call	.start						; call Sort (larray, lptr, lsize, func)
 		mov		rarray, [s_array]			; get "rarray" variable from the stack
@@ -2301,7 +2538,7 @@ space	= 7 * 8								; stack size required by the procedure
 		mov		[s_array], larray			; save "larray" variable into the stack
 		mov		[s_ptr], lptr				; save "lptr" variable into the stack
 		mov		[s_size], lsize				; save "lsize" variable into the stack
-		mov		func, [s_cmp]				; get "func" variable from the stack
+		mov		func, [s_func]				; get "func" variable from the stack
 		mov		array, rarray
 		mov		ptr, rptr
 		call	.start						; call Sort (rarray, rptr, rsize, func)
@@ -2316,16 +2553,8 @@ space	= 7 * 8								; stack size required by the procedure
 		add		stack, space				; restoring back the stack pointer
 .exit:	ret
 }
-
-; Ascending sort order
-SortKeyAsc_char8:		SORT_KEY	rax, r10, r11, al, l, g
-SortKeyAsc_char16:		SORT_KEY	rax, r10, r11, ax, l, g
-SortKeyAsc_char32:		SORT_KEY	rax, r10, r11, eax, l, g
-
-; Descending sort order
-SortKeyDsc_char8:		SORT_KEY	rax, r10, r11, al, g, l
-SortKeyDsc_char16:		SORT_KEY	rax, r10, r11, ax, g, l
-SortKeyDsc_char32:		SORT_KEY	rax, r10, r11, eax, g, l
+SortKeyAsc:		SORT_KEY	l, g
+SortKeyDsc:		SORT_KEY	g, l
 
 ;******************************************************************************;
 ;       Checks                                                                 ;
@@ -2334,60 +2563,52 @@ SortKeyDsc_char32:		SORT_KEY	rax, r10, r11, eax, g, l
 ;==============================================================================;
 ;       Check for duplicate values                                             ;
 ;==============================================================================;
-macro	CHECK_DUP	result, x
-{
+CheckDup:
 ;---[Parameters]---------------------------
 array	equ		rdi							; pointer to array of strings
 size	equ		rsi							; array size (count of elements)
+func	equ		rdx							; pointer to string func function
 ;---[Internal variables]-------------------
+result	equ		eax							; result register
 ptr		equ		rax							; pointer to current element
-str1	equ		rdi							; pointer to first string
-str2	equ		rsi							; pointer to second string
+param1	equ		rdi							; register to pass 1 parameter
+param2	equ		rsi							; register to pass 2 parameter
 stack	equ		rsp							; stack pointer
 s_array	equ		stack + 0 * 8				; stack position of "array" variable
 s_size	equ		stack + 1 * 8				; stack position of "size" variable
-s_ptr	equ		stack + 2 * 8				; stack position of "ptr" variable
-if x eq b
-compare	= Compare1_char8					; compare function
-else if x eq w
-compare	= Compare1_char16					; compare function
-else if x eq d
-compare	= Compare1_char32					; compare function
-end if
-space	= 3 * 8								; stack size required by the procedure
+s_func	equ		stack + 2 * 8				; stack position of "func" variable
+s_ptr	equ		stack + 3 * 8				; stack position of "ptr" variable
+space	= 5 * 8								; stack size required by the procedure
 ;------------------------------------------
+		sub		stack, space				; reserving stack size for local vars
 		sub		size, 1						; if (--size <= 0)
 		jbe		.exit						;     then go to exit
-		sub		stack, space				; reserving stack size for local vars
+;---[Normal execution branch]--------------
 		mov		ptr, array					; ptr = array
 		mov		[s_array], array			; save "array" variable into the stack
 		mov		[s_size], size				; save "size" variable into the stack
+		mov		[s_func], func				; save "func" variable into the stack
 		mov		[s_ptr], ptr				; save "ptr" variable into the stack
 ;---[Search loop]--------------------------
 .loop:	mov		ptr, [s_ptr]
-		mov		str1, [ptr]
-		mov		str2, [ptr + 8]
-		call	compare						; result = Compare (ptr[0], ptr[1])
+		mov		param2, [ptr + 8]
+		mov		param1, [ptr]
+		call	qword [s_func]				; result = Compare (ptr[0], ptr[1])
 		test	result, result				; if (result == 0)
 		jz		.found						;     then go to found branch
 		add		qword [s_ptr], 8			; ptr++
 		sub		qword [s_size], 1			; size--
 		jnz		.loop						; do while (size != 0)
 ;---[Not found branch]---------------------
-		add		stack, space				; restoring back the stack pointer
-.exit:	mov		ptr, NOT_FOUND				; return NOT_FOUND
+.exit:	add		stack, space				; restoring back the stack pointer
+		mov		ptr, NOT_FOUND				; return NOT_FOUND
 		ret
 ;---[Found branch]---------------------
 .found:	mov		ptr, [s_ptr]				; get "ptr" variable from the stack
-		mov		array, [s_array]
+		sub		ptr, [s_array]
 		add		stack, space				; restoring back the stack pointer
-		sub		ptr, array					; return ptr - array
-		shr		ptr, 3
+		shr		ptr, 3						; return ptr - array
 		ret
-}
-CheckDup_char8:		CHECK_DUP	al, b
-CheckDup_char16:	CHECK_DUP	ax, w
-CheckDup_char32:	CHECK_DUP	eax, d
 
 ;###############################################################################
 ;#      Read-only data section                                                 #
