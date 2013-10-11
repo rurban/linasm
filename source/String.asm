@@ -1649,8 +1649,8 @@ space	= 5 * 8								; stack size required by the procedure
 		mov		array, [s_array]			; get "array" variable from the stack
 		test	result, result				; if (result == 0)
 		jz		.brk						;     then break the loop
-.back:	add		array, 8
-		add		qword [s_array], 8			; array++
+.back:	add		array, 8					; array++
+		mov		[s_array], array			; save "array" variable into the stack
 		sub		qword [s_size], 1			; size--
 		jnz		.loop						; do while (size != 0)
 ;---[End of search loop]-------------------
@@ -2138,8 +2138,8 @@ space	= 5 * 8								; stack size required by the procedure
 		mov		ptr, [s_ptr]				; get "ptr" variable from the stack
 		test	result, result				; if (result == 0)
 		jz		.found						;     then go to found branch
-		add		ptr, 8
-		add		qword [s_ptr], 8			; ptr++
+		add		ptr, 8						; ptr++
+		mov		[s_ptr], ptr				; save "ptr" variable into the stack
 		sub		qword [s_size], 1			; size--
 		jnz		.loop						; do while (size != 0)
 ;---[Not found branch]---------------------
@@ -2191,8 +2191,8 @@ space	= 5 * 8								; stack size required by the procedure
 		mov		ptr, [s_ptr]				; get "ptr" variable from the stack
 		test	result, result				; if (result == 0)
 		jz		.found						;     then go to found branch
-		sub		ptr, 8
-		sub		qword [s_ptr], 8			; ptr--
+		sub		ptr, 8						; ptr--
+		mov		[s_ptr], ptr				; save "ptr" variable into the stack
 		sub		qword [s_size], 1			; size--
 		jnz		.loop						; do while (size != 0)
 ;---[Not found branch]---------------------
@@ -2348,38 +2348,37 @@ space	= 7 * 8								; stack size required by the procedure
 		mov		[s_right], right			; save "right" variable into the stack
 		jmp		.loop1
 ;---[Swap loop]----------------------------
-.swap:	mov		array, [s_array]			; get "array" variable from the stack
-		mov		ptr1, [array + left * 8]	; ptr1 = array[left]
+.swap:	mov		ptr1, [array + left * 8]	; ptr1 = array[left]
 		mov		ptr2, [array + right * 8]	; ptr1 = array[left]
 		xchg	ptr1, ptr2
 		mov		[array + left * 8], ptr1	; array[left] = ptr2
 		mov		[array + right * 8], ptr2	; array[right] = ptr1
 ;---[Internal loop 1]----------------------
-.loop1:	add		qword [s_left], 1			; left++
-		mov		left, [s_left]				; get "left" variable from the stack
-		mov		array, [s_array]			; get "array" variable from the stack
+.loop1:	add		left, 1						; left++
+		mov		[s_left], left				; save "left" variable into the stack
 		mov		param2, [s_med]
 		mov		param1, [array + left * 8]
 		call	qword [s_func]				; result = Compare (array[left], median)
+		mov		array, [s_array]			; get "array" variable from the stack
+		mov		left, [s_left]				; get "left" variable from the stack
 		cmp		result, 0					; check compare result
 		j#op1	.loop1						; do while compare condition is true
 ;---[Internal loop 2]----------------------
-.loop2:	sub		qword [s_right], 1			; right--
-		mov		right, [s_right]			; get "right" variable from the stack
-		mov		array, [s_array]			; get "array" variable from the stack
+.loop2:	sub		right, 1					; right--
+		mov		[s_right], right			; save "right" variable into the stack
 		mov		param2, [s_med]
 		mov		param1, [array + right * 8]
 		call	qword [s_func]				; result = Compare (array[right], median)
+		mov		array, [s_array]			; get "array" variable from the stack
+		mov		right, [s_right]			; get "right" variable from the stack
 		cmp		result, 0					; check compare result
 		j#op2	.loop2						; do while compare condition is true
 ;------------------------------------------
 		mov		left, [s_left]				; get "left" variable from the stack
-		mov		right, [s_right]			; get "right" variable from the stack
 		cmp		left, right
 		jb		.swap						; do while (left < right)
 ;---[end of swap loop]---------------------
 		mov		size, [s_size]				; get "size" variable from the stack
-		mov		array, [s_array]			; get "array" variable from the stack
 		add		right, 1
 		sub		rsize, right				; rsize = size - (right + 1)
 		lea		rarray, [array + right * 8]	; rarray = array + (right + 1)
@@ -2472,9 +2471,7 @@ space	= 7 * 8								; stack size required by the procedure
 		mov		[s_right], right			; save "right" variable into the stack
 		jmp		.loop1
 ;---[Swap loop]----------------------------
-.swap:	mov		array, [s_array]			; get "array" variable from the stack
-		mov		ptr, [s_ptr]				; get "ptr" variable from the stack
-		mov		ptr1, [array + left * 8]	; ptr1 = array[left]
+.swap:	mov		ptr1, [array + left * 8]	; ptr1 = array[left]
 		mov		ptr2, [array + right * 8]	; ptr1 = array[left]
 		xchg	ptr1, ptr2
 		mov		[array + left * 8], ptr1	; array[left] = ptr2
@@ -2485,32 +2482,32 @@ space	= 7 * 8								; stack size required by the procedure
 		mov		[ptr + left * 8], ptr1		; ptr[left] = ptr2
 		mov		[ptr + right * 8], ptr2		; ptr[right] = ptr1
 ;---[Internal loop 1]----------------------
-.loop1:	add		qword [s_left], 1			; left++
-		mov		left, [s_left]				; get "left" variable from the stack
-		mov		array, [s_array]			; get "array" variable from the stack
+.loop1:	add		left, 1						; left++
+		mov		[s_left], left				; save "left" variable into the stack
 		mov		param2, [s_med]
 		mov		param1, [array + left * 8]
 		call	qword [s_func]				; result = Compare (array[left], median)
+		mov		array, [s_array]			; get "array" variable from the stack
+		mov		left, [s_left]				; get "left" variable from the stack
 		cmp		result, 0					; check compare result
 		j#op1	.loop1						; do while compare condition is true
 ;---[Internal loop 2]----------------------
-.loop2:	sub		qword [s_right], 1			; right--
-		mov		right, [s_right]			; get "right" variable from the stack
-		mov		array, [s_array]			; get "array" variable from the stack
+.loop2:	sub		right, 1					; right--
+		mov		[s_right], right			; save "right" variable into the stack
 		mov		param2, [s_med]
 		mov		param1, [array + right * 8]
 		call	qword [s_func]				; result = Compare (array[right], median)
+		mov		array, [s_array]			; get "array" variable from the stack
+		mov		right, [s_right]			; get "right" variable from the stack
 		cmp		result, 0					; check compare result
 		j#op2	.loop2						; do while compare condition is true
 ;------------------------------------------
+		mov		ptr, [s_ptr]				; get "ptr" variable from the stack
 		mov		left, [s_left]				; get "left" variable from the stack
-		mov		right, [s_right]			; get "right" variable from the stack
 		cmp		left, right
 		jb		.swap						; do while (left < right)
 ;---[end of swap loop]---------------------
 		mov		size, [s_size]				; get "size" variable from the stack
-		mov		array, [s_array]			; get "array" variable from the stack
-		mov		ptr, [s_ptr]				; get "ptr" variable from the stack
 		add		right, 1
 		sub		rsize, right				; rsize = size - (right + 1)
 		lea		rptr, [ptr + right * 8]		; rptr = ptr + (right + 1)
@@ -2590,13 +2587,14 @@ space	= 5 * 8								; stack size required by the procedure
 		mov		[s_func], func				; save "func" variable into the stack
 		mov		[s_ptr], ptr				; save "ptr" variable into the stack
 ;---[Search loop]--------------------------
-.loop:	mov		ptr, [s_ptr]
-		mov		param2, [ptr + 8]
+.loop:	mov		param2, [ptr + 8]
 		mov		param1, [ptr]
 		call	qword [s_func]				; result = Compare (ptr[0], ptr[1])
+		mov		ptr, [s_ptr]				; get "ptr" variable from the stack
 		test	result, result				; if (result == 0)
 		jz		.found						;     then go to found branch
-		add		qword [s_ptr], 8			; ptr++
+		add		ptr, 8						; ptr++
+		mov		[s_ptr], ptr				; save "ptr" variable into the stack
 		sub		qword [s_size], 1			; size--
 		jnz		.loop						; do while (size != 0)
 ;---[Not found branch]---------------------
