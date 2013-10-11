@@ -73,7 +73,7 @@ private:
 
 public:
 
-// Default constructor
+// Constructor
 Time (void);
 
 // Loading time zone data from tzfile
@@ -106,7 +106,10 @@ time_t LocalTime (time_t UTC) const;
 #       C prototypes                                                           #
 ################################################################################
 */
-struct tzone
+//****************************************************************************//
+//      Time zone structure                                                   //
+//****************************************************************************//
+struct Time
 {
 	time_t		change [TIME_CHANGE_SIZE];	// Array of time changes
 	uint8_t		index [TIME_CHANGE_SIZE];	// Array of time zone indexes
@@ -115,11 +118,11 @@ struct tzone
 	uint32_t	zone_size;					// Count of time zone records
 };
 
-// Cleaning time zone data
-void Time_CleanTimeZone (struct tzone *tz);
+// Init time zone structure
+void Time_InitTime (struct Time *tzone);
 
 // Loading time zone data from tzfile
-error_t Time_LoadTimeZone (struct tzone *tz, const char8_t tzfile[]);
+error_t Time_LoadTimeZone (struct Time *tzone, const char8_t tzfile[]);
 
 // Time conversion
 time_t Time_ConvertTime (uint8_t hour, uint8_t min, uint8_t sec);
@@ -140,7 +143,7 @@ uint8_t Time_WeekDay (time_t time);
 time_t Time_SystemTime (void);
 
 // Local time
-time_t Time_LocalTime (const struct tzone *tz, time_t UTC);
+time_t Time_LocalTime (const struct Time *tzone, time_t UTC);
 
 # endif
 /*

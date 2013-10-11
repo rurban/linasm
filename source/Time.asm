@@ -14,9 +14,9 @@ include	'Errno.inc'
 ;#      Export section                                                         #
 ;###############################################################################
 
-; Cleaning time zone data (default constructor)
-public	Time			as	'Time_CleanTimeZone'
-public	Time			as	'_ZN4TimeC1Ev'
+; Constructor
+public	Constructor		as	'Time_InitTime'
+public	Constructor		as	'_ZN4TimeC1Ev'
 
 ; Loading time zone data from tzfile
 public	LoadTimeZone	as	'Time_LoadTimeZone'
@@ -327,9 +327,9 @@ zsize_of	= csize_of + 4					; offset of Time::zone_size
 		ret
 
 ;******************************************************************************;
-;       Default constructor                                                    ;
+;       Constructor                                                            ;
 ;******************************************************************************;
-Time:
+Constructor:
 ;---[Parameters]---------------------------
 this	equ		rdi							; pointer to time zone object
 ;---[Internal variables]-------------------
