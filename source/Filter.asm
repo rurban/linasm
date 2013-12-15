@@ -7,6 +7,7 @@
 ;# License: LGPLv3+                              Copyleft (Ɔ) 2013, Jack Black #
 ;###############################################################################
 format	ELF64
+include	'Macro.inc'
 
 ;###############################################################################
 ;#      Import section                                                         #
@@ -44,7 +45,7 @@ extrn	'_Hamming_flt64'			as	Hamming_flt64
 extrn	'_Blackman_flt32'			as	Blackman_flt32
 extrn	'_Blackman_flt64'			as	Blackman_flt64
 
-; Blackman–Nuttall window
+; Blackman-Nuttall window
 extrn	'_Blackman_Nuttall_flt32'	as	Blackman_Nuttall_flt32
 extrn	'_Blackman_Nuttall_flt64'	as	Blackman_Nuttall_flt64
 
@@ -351,8 +352,6 @@ size	equ		rsi							; array size (count of elements)
 lfreq	equ		xmm0						; filter low cutoff frequency
 hfreq	equ		xmm1						; filter high cutoff frequency
 ;---[Internal variables]-------------------
-prm2	equ		rdi							; 2-rd function parameter
-prm3	equ		rsi							; 3-rd function parameter
 stack	equ		rsp							; stack pointer
 value	equ		lfreq						; argument value
 temp	equ		hfreq						; temporary register
@@ -407,12 +406,12 @@ s_one	equ		stack + 13 * 8				; stack position of "one" variable
 	unpcklp#x	value, value				; clone value through the entire register
 		mulp#x	value, [s_hfreq]			; {value * hfreq, value * lfreq}
 		movap#x	[s_arg], value				; arg = {value * hfreq, value * lfreq}
-		lea		prm2, [s_hsin]
-		lea		prm3, [s_hcos]
+		lea		param1, [s_hsin]
+		lea		param2, [s_hcos]
 		call	SinCos						; call SinCos (value * hfreq, &hsin, &hcos)
 		movs#x	value, [s_arg + bytes]
-		lea		prm2, [s_lsin]
-		lea		prm3, [s_lcos]
+		lea		param1, [s_lsin]
+		lea		param2, [s_lcos]
 		call	SinCos						; call SinCos (value * lfreq, &lsin, &lcos)
 		movap#x	value, [s_hcos]				; value = {hcos, lcos}
 		movs#x	temp, [s_temp]				; get "temp" variable from the stack
@@ -524,9 +523,6 @@ hfreq	equ		xmm1						; filter high cutoff frequency
 zero	equ		xmm2						; 0.0
 half	equ		xmm3						; 0.5
 one		equ		zero						; 1.0
-prm1	equ		rdi							; 1-st function parameter
-prm2	equ		rsi							; 2-rd function parameter
-prm3	equ		rdx							; 3-rd function parameter
 bool	equ		al							; boolean result
 value	equ		lfreq						; argument value
 s_filt	equ		stack + 0 * 8				; stack position of "filter" variable
@@ -583,9 +579,9 @@ end if
 		movs#x	value, [s_freq]				; get "lfreq" variable from the stack
 		call	LowPass						; call LowPass (filter + size, size, lfreq, window)
 ;---[Substract filters]--------------------
-		mov		prm1, [s_filt]
-		mov		prm3, [s_size]
-		lea		prm2, [prm1 + prm3 * bytes]
+		mov		param1, [s_filt]
+		mov		param3, [s_size]
+		lea		param2, [param1 + param3 * bytes]
 		call	ArrSub						; call ArrSub (filter, filter + size, size)
 ;---[Reflect filter impulse response]------
 		mov		size, [s_size]				; get "size" variable from the stack
@@ -708,9 +704,6 @@ fsize	equ		r8							; size of filter array
 ;---[Internal variables]-------------------
 value	equ		xmm0						; convolution value
 bool	equ		al							; boolean result
-prm1	equ		rdi							; 1-st function parameter
-prm2	equ		rsi							; 2-rd function parameter
-prm3	equ		rdx							; 3-rd function parameter
 stack	equ		rsp							; stack pointer
 s_resp	equ		stack + 0 * 8				; stack position of "resp" variable
 s_data	equ		stack + 1 * 8				; stack position of "data" variable
@@ -736,9 +729,9 @@ end if
 		mov		[s_filt], filt				; save "filt" variable into the stack
 		mov		[s_fsize], fsize			; save "fsize" variable into the stack
 ;---[Convolution loop]---------------------
-.loop:	mov		prm1, [s_data]
-		mov		prm2, [s_filt]
-		mov		prm3, [s_fsize]
+.loop:	mov		param1, [s_data]
+		mov		param2, [s_filt]
+		mov		param3, [s_fsize]
 		call	Conv
 		mov		resp, [s_resp]
 		movs#x	[resp], value				; resp[0] = Conv (data, filt, fsize)
@@ -771,14 +764,14 @@ align 16
 win_flt32		dq	Sine_flt32				; Sine window
 				dq	Hamming_flt32			; Hamming window
 				dq	Blackman_flt32			; Blackman window
-				dq	Blackman_Nuttall_flt32	; Blackman–Nuttall window
+				dq	Blackman_Nuttall_flt32	; Blackman-Nuttall window
 
 ; flt64_t
 align 16
 win_flt64		dq	Sine_flt64				; Sine window
 				dq	Hamming_flt64			; Hamming window
 				dq	Blackman_flt64			; Blackman window
-				dq	Blackman_Nuttall_flt64	; Blackman–Nuttall window
+				dq	Blackman_Nuttall_flt64	; Blackman-Nuttall window
 
 ;###############################################################################
 ;#                                 END OF FILE                                 #

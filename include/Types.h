@@ -10,6 +10,13 @@
 # pragma	once
 
 //****************************************************************************//
+//      Compare constants                                                     //
+//****************************************************************************//
+# define	CMP_EQUAL	(0) 		// First value is equal to second value
+# define	CMP_LESS	(-1) 		// First value is less than second value
+# define	CMP_GREAT	(+1) 		// First value is greater than second value
+
+//****************************************************************************//
 //      Scalar types                                                          //
 //****************************************************************************//
 
@@ -26,10 +33,10 @@
 # define	sint64_t		signed long long
 
 // Bit field types
-# define	bit8_t			uint8_t
-# define	bit16_t			uint16_t
-# define	bit32_t			uint32_t
-# define	bit64_t			uint64_t
+# define	bit8_t			unsigned char
+# define	bit16_t			unsigned short
+# define	bit32_t			unsigned int
+# define	bit64_t			unsigned long long
 
 // Character types
 # define	char8_t			char
@@ -43,9 +50,9 @@
 // Other types
 # define	size_t			unsigned long int
 # define	ptr_t			signed long int
-# define	time_t			sint64_t
-# define	error_t			uint32_t
-# define	enum_t			uint32_t
+# define	time_t			signed long long
+# define	error_t			unsigned int
+# define	enum_t			unsigned int
 
 // Boolean type
 # ifndef	__cplusplus
@@ -69,10 +76,10 @@ typedef		sint32_t		sint32v4_t		__attribute__ ((vector_size (16)));
 typedef		sint64_t		sint64v2_t		__attribute__ ((vector_size (16)));
 
 // Bit field types
-typedef		uint8v16_t		bit8v16_t;
-typedef		uint16v8_t		bit16v8_t;
-typedef		uint32v4_t		bit32v4_t;
-typedef		uint64v2_t		bit64v2_t;
+typedef		bit8_t			bit8v16_t		__attribute__ ((vector_size (16)));
+typedef		bit16_t			bit16v8_t		__attribute__ ((vector_size (16)));
+typedef		bit32_t			bit32v4_t		__attribute__ ((vector_size (16)));
+typedef		bit64_t			bit64v2_t		__attribute__ ((vector_size (16)));
 
 // Character types
 typedef		char8_t			char8v16_t		__attribute__ ((vector_size (16)));

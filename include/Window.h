@@ -21,7 +21,7 @@ class Window
 public:
 
 //****************************************************************************//
-//      High-resolution windows (low-dynamic-range)                           //
+//      High-resolution windows (low dynamic range)                           //
 //****************************************************************************//
 
 // Sine window
@@ -37,10 +37,10 @@ static void Blackman (flt32_t window[], size_t size);
 static void Blackman (flt64_t window[], size_t size);
 
 //****************************************************************************//
-//      Low-resolution windows (high-dynamic-range)                           //
+//      Low-resolution windows (high dynamic range)                           //
 //****************************************************************************//
 
-// Blackman–Nuttall window
+// Blackman-Nuttall window
 static void BlackmanNuttall (flt32_t window[], size_t size);
 static void BlackmanNuttall (flt64_t window[], size_t size);
 };
@@ -51,7 +51,7 @@ static void BlackmanNuttall (flt64_t window[], size_t size);
 ################################################################################
 */
 //****************************************************************************//
-//      High-resolution windows (low-dynamic-range)                           //
+//      High-resolution windows (low dynamic range)                           //
 //****************************************************************************//
 
 // Sine window
@@ -67,10 +67,10 @@ void Window_Blackman_flt32 (flt32_t window[], size_t size);
 void Window_Blackman_flt64 (flt64_t window[], size_t size);
 
 //****************************************************************************//
-//      Low-resolution windows (high-dynamic-range)                           //
+//      Low-resolution windows (high dynamic range)                           //
 //****************************************************************************//
 
-// Blackman–Nuttall window
+// Blackman-Nuttall window
 void Window_BlackmanNuttall_flt32 (flt32_t window[], size_t size);
 void Window_BlackmanNuttall_flt64 (flt64_t window[], size_t size);
 

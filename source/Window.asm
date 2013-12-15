@@ -44,7 +44,7 @@ public	Hamming_flt64				as	'_Hamming_flt64'
 public	Blackman_flt32				as	'_Blackman_flt32'
 public	Blackman_flt64				as	'_Blackman_flt64'
 
-; Blackman–Nuttall window
+; Blackman-Nuttall window
 public	Blackman_Nuttall_flt32		as	'_Blackman_Nuttall_flt32'
 public	Blackman_Nuttall_flt64		as	'_Blackman_Nuttall_flt64'
 
@@ -70,7 +70,7 @@ public	BlackmanWin_flt64			as	'Window_Blackman_flt64'
 public	BlackmanWin_flt32			as	'_ZN6Window8BlackmanEPfm'
 public	BlackmanWin_flt64			as	'_ZN6Window8BlackmanEPdm'
 
-; Blackman–Nuttall window
+; Blackman-Nuttall window
 public	Blackman_NuttallWin_flt32	as	'Window_BlackmanNuttall_flt32'
 public	Blackman_NuttallWin_flt64	as	'Window_BlackmanNuttall_flt64'
 public	Blackman_NuttallWin_flt32	as	'_ZN6Window15BlackmanNuttallEPfm'
@@ -142,7 +142,7 @@ macro	BLACKMAN	x
 }
 
 ;==============================================================================;
-;       Blackman–Nuttall window                                                ;
+;       Blackman-Nuttall window                                                ;
 ;==============================================================================;
 macro	BLACKMAN_NUTTALL	x
 {
@@ -188,7 +188,7 @@ win		= black_win_flt32					; Blackman window coefficients
 else if window eq BLACKMAN_NUTTALL
 Func	= Cos_flt32							; Cosine Function
 angle	= PI_FLT32							; Pi
-win		= black_nutt_win_flt32				; Blackman–Nuttall window coefficients
+win		= black_nutt_win_flt32				; Blackman-Nuttall window coefficients
 end if
 bytes	= 4									; array element size (bytes)
 else if x eq d
@@ -206,7 +206,7 @@ win		= black_win_flt64					; Blackman window coefficients
 else if window eq BLACKMAN_NUTTALL
 Func	= Cos_flt64							; Cosine Function
 angle	= PI_FLT64							; Pi
-win		= black_nutt_win_flt64				; Blackman–Nuttall window coefficients
+win		= black_nutt_win_flt64				; Blackman-Nuttall window coefficients
 end if
 bytes	= 8									; array element size (bytes)
 end if
@@ -240,7 +240,7 @@ end if
 }
 
 ;==============================================================================;
-;       High-resolution windows (low-dynamic-range)                            ;
+;       High-resolution windows (low dynamic range)                            ;
 ;==============================================================================;
 
 ; Sine window
@@ -256,10 +256,10 @@ Blackman_flt32:			APPLY_WINDOW	eax, BLACKMAN, s
 Blackman_flt64:			APPLY_WINDOW	rax, BLACKMAN, d
 
 ;==============================================================================;
-;       Low-resolution windows (high-dynamic-range)                            ;
+;       Low-resolution windows (high dynamic range)                            ;
 ;==============================================================================;
 
-; Blackman–Nuttall window
+; Blackman-Nuttall window
 Blackman_Nuttall_flt32:	APPLY_WINDOW	eax, BLACKMAN_NUTTALL, s
 Blackman_Nuttall_flt64:	APPLY_WINDOW	rax, BLACKMAN_NUTTALL, d
 
@@ -298,7 +298,7 @@ win		= black_win_flt32					; Blackman window coefficients
 else if window eq BLACKMAN_NUTTALL
 Func	= Cos_flt32							; Cosine Function
 angle	= PI_TWO_FLT32						; 2 * Pi
-win		= black_nutt_win_flt32				; Blackman–Nuttall window coefficients
+win		= black_nutt_win_flt32				; Blackman-Nuttall window coefficients
 end if
 reflect	= Reflect_flt32						; Array reflection Function
 bytes	= 4									; array element size (bytes)
@@ -317,7 +317,7 @@ win		= black_win_flt64					; Blackman window coefficients
 else if window eq BLACKMAN_NUTTALL
 Func	= Cos_flt64							; Cosine Function
 angle	= PI_TWO_FLT64						; 2 * Pi
-win		= black_nutt_win_flt64				; Blackman–Nuttall window coefficients
+win		= black_nutt_win_flt64				; Blackman-Nuttall window coefficients
 end if
 reflect	= Reflect_flt64						; Array reflection Function
 bytes	= 8									; array element size (bytes)
@@ -359,7 +359,7 @@ end if
 }
 
 ;==============================================================================;
-;       High-resolution windows (low-dynamic-range)                            ;
+;       High-resolution windows (low dynamic range)                            ;
 ;==============================================================================;
 
 ; Sine window
@@ -375,10 +375,10 @@ BlackmanWin_flt32:			COMPUTE_WINDOW	eax, BLACKMAN, s
 BlackmanWin_flt64:			COMPUTE_WINDOW	rax, BLACKMAN, d
 
 ;==============================================================================;
-;       Low-resolution windows (high-dynamic-range)                            ;
+;       Low-resolution windows (high dynamic range)                            ;
 ;==============================================================================;
 
-; Blackman–Nuttall window
+; Blackman-Nuttall window
 Blackman_NuttallWin_flt32:	COMPUTE_WINDOW	eax, BLACKMAN_NUTTALL, s
 Blackman_NuttallWin_flt64:	COMPUTE_WINDOW	rax, BLACKMAN_NUTTALL, d
 
@@ -418,7 +418,7 @@ black_win_flt64			dq	0x3FD5C28F5C28F5C3	; 0.34
 						dq	0x3FC47AE147AE147B	; 0.16
 
 ;******************************************************************************;
-;       Blackman–Nuttall window coefficients                                   ;
+;       Blackman-Nuttall window coefficients                                   ;
 ;******************************************************************************;
 
 ; flt32_t

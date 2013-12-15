@@ -30,7 +30,7 @@ enum window_t
 	WIN_BLACKMAN,						// Blackman window
 
 	// Low-resolution window functions
-	WIN_BLACKMAN_NUTTALL				// Blackman–Nuttall window
+	WIN_BLACKMAN_NUTTALL				// Blackman-Nuttall window
 };
 
 # ifdef	__cplusplus
