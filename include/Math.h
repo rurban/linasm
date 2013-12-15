@@ -235,20 +235,20 @@ static flt64_t Sqrt (flt64_t value);
 //============================================================================//
 
 // Unsigned integer types
-static sint8_t Cmp (uint8_t x, uint8_t y);
-static sint16_t Cmp (uint16_t x, uint16_t y);
-static sint32_t Cmp (uint32_t x, uint32_t y);
-static sint64_t Cmp (uint64_t x, uint64_t y);
+static sint8_t Compare (uint8_t x, uint8_t y);
+static sint16_t Compare (uint16_t x, uint16_t y);
+static sint32_t Compare (uint32_t x, uint32_t y);
+static sint64_t Compare (uint64_t x, uint64_t y);
 
 // Signed integer types
-static sint8_t Cmp (sint8_t x, sint8_t y);
-static sint16_t Cmp (sint16_t x, sint16_t y);
-static sint32_t Cmp (sint32_t x, sint32_t y);
-static sint64_t Cmp (sint64_t x, sint64_t y);
+static sint8_t Compare (sint8_t x, sint8_t y);
+static sint16_t Compare (sint16_t x, sint16_t y);
+static sint32_t Compare (sint32_t x, sint32_t y);
+static sint64_t Compare (sint64_t x, sint64_t y);
 
 // Floating-point types
-static flt32_t Cmp (flt32_t x, flt32_t y);
-static flt64_t Cmp (flt64_t x, flt64_t y);
+static flt32_t Compare (flt32_t x, flt32_t y);
+static flt64_t Compare (flt64_t x, flt64_t y);
 
 //============================================================================//
 //      Minimum and maximum value                                             //
@@ -741,20 +741,20 @@ flt64_t Math_Sqrt_flt64 (flt64_t value);
 //============================================================================//
 
 // Unsigned integer types
-sint8_t Math_Cmp_uint8 (uint8_t x, uint8_t y);
-sint16_t Math_Cmp_uint16 (uint16_t x, uint16_t y);
-sint32_t Math_Cmp_uint32 (uint32_t x, uint32_t y);
-sint64_t Math_Cmp_uint64 (uint64_t x, uint64_t y);
+sint8_t Math_Compare_uint8 (uint8_t x, uint8_t y);
+sint16_t Math_Compare_uint16 (uint16_t x, uint16_t y);
+sint32_t Math_Compare_uint32 (uint32_t x, uint32_t y);
+sint64_t Math_Compare_uint64 (uint64_t x, uint64_t y);
 
 // Signed integer types
-sint8_t Math_Cmp_sint8 (sint8_t x, sint8_t y);
-sint16_t Math_Cmp_sint16 (sint16_t x, sint16_t y);
-sint32_t Math_Cmp_sint32 (sint32_t x, sint32_t y);
-sint64_t Math_Cmp_sint64 (sint64_t x, sint64_t y);
+sint8_t Math_Compare_sint8 (sint8_t x, sint8_t y);
+sint16_t Math_Compare_sint16 (sint16_t x, sint16_t y);
+sint32_t Math_Compare_sint32 (sint32_t x, sint32_t y);
+sint64_t Math_Compare_sint64 (sint64_t x, sint64_t y);
 
 // Floating-point types
-flt32_t Math_Cmp_flt32 (flt32_t x, flt32_t y);
-flt64_t Math_Cmp_flt64 (flt64_t x, flt64_t y);
+flt32_t Math_Compare_flt32 (flt32_t x, flt32_t y);
+flt64_t Math_Compare_flt64 (flt64_t x, flt64_t y);
 
 //============================================================================//
 //      Minimum and maximum value                                             //
