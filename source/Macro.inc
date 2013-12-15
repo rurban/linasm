@@ -63,6 +63,18 @@ PHALF_FLT64	= 0x3FE0000000000000			; +0.5
 MHALF_FLT64	= 0xBFE0000000000000			; -0.5
 
 ;******************************************************************************;
+;       Function call parameters                                               ;
+;******************************************************************************;
+param1	equ		rdi			; register to pass 1 parameter to function
+param2	equ		rsi			; register to pass 2 parameter to function
+param3	equ		rdx			; register to pass 3 parameter to function
+param4	equ		rcx			; register to pass 4 parameter to function
+param5	equ		r8			; register to pass 5 parameter to function
+param6	equ		r9			; register to pass 6 parameter to function
+param7	equ		r10			; register to pass 7 parameter to function
+param8	equ		r11			; register to pass 8 parameter to function
+
+;******************************************************************************;
 ;       Clone value through the entire register                                ;
 ;******************************************************************************;
 macro	clone	reg, scale
