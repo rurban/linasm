@@ -1,7 +1,39 @@
 +==============================================================================+
-|   2013-XX-XX  Release 1.0 (stable)                                           |
+|   2013-12-16  Release 1.00 (stable)                                          |
 +==============================================================================+
-TODO: Написать текст
+
+Bug fixes:
+	* Array.asm, Statistics.asm, String.asm: Fixed error with zero size bit8_t arrays
+	* String.asm: Fixed function pointer error in functions "FindFwd" and "FindBwd"
+	* String.asm: Fixed incorrect export names for functions "FindFwd" and "FindBwd"
+
+New features:
+	* Added FPU control library
+	* Added SIMD control library
+	* Added Accumulating buffer library
+	* Added Object pool library
+	* Added Stack ADT
+	* Added Deque ADT
+	* Added Binary max heap ADT
+	* Added Binary min heap ADT
+	* Added Multiply keys b-tree ADT
+	* Added Unique keys b-tree ADT
+	* Array.asm: Added functions "FindEqualAsc", "FindGreatAsc", "FindGreatOrEqualAsc", "FindLessAsc", "FindLessOrEqualAsc", "FindEqualDsc", "FindLessDsc", "FindLessOrEqualDsc", "FindGreatDsc", "FindGreatOrEqualDsc"
+	* Array.asm: Added functions "CheckSortAsc", "CheckSortDsc" and "Count"
+	* String.asm: Added functions: "CountSymbol", "CountSymbols", "CountString", "Unique", "Duplicates", "MergeAsc", "MergeDsc", "MergeKeyAsc", "MergeKeyDsc", "CheckSortAsc", "CheckSortDsc"
+	* String.asm: Added functions: "FindEqualAsc", "FindGreatAsc", "FindGreatOrEqualAsc", "FindLessAsc", "FindLessOrEqualAsc", "FindEqualDsc", "FindLessDsc", "FindLessOrEqualDsc", "FindGreatDsc", "FindGreatOrEqualDsc" and "ReplaceString"
+	* Math.asm: Added functions "MinAbs", "MaxAbs", "Cmp"
+	* Math.asm: Added functions "ScanForward", "ScanBackward", "RotateLeft", "RotateRight" and "PopCount"
+	* Math.asm: Added function "BitReverse"
+
+Changes in behavior:
+	* Syscall.inc: Updated system calls
+	* Macro.inc: Updated constants
+	* Time.h: Struct tzone renamed to struct Time
+	* Angle.h: Standardized functions namespace
+	* Array.asm: Improved functions "Unique" and "Duplicates"
+	* String.asm: Improved function "FindSymbols"
+	* Numbers.asm: Improved functions "HexToNum"
 
 +==============================================================================+
 |   2013-02-04  Release 0.99 (beta)                                            |

@@ -7,9 +7,29 @@
 ################################################################################
 
 #******************************************************************************#
-#       Release 1.0 (stable) [2013-XX-XX]                                      #
+#       Release 1.00 (stable) [2013-12-16]                                     #
 #******************************************************************************#
-TODO: Написать текст
+
+Finally stable release after ten month of debugging, optimization and writing
+new libraries. In this release I am glad to present you new modules, which
+significantly extend LinAsm applications. They implement abstract data types
+such as Stack, Deque, Min/Max heaps and very powerful tree structure - in-memory
+b-trees. Also were added new libraries: Object pool and Accumulating buffer
+to optimize memory management routines. For detailed descriptions of the new
+modules, fixed bugs and new features see documentation and ChangeLog file inside
+the release archive.
+
+Here is brief description of new modules in the LinAsm project:
+	* Accumulator.h - Accumulating buffer library
+	* Pool.h - Object pool library
+	* FPU.h - FPU control functions library
+	* SIMD.h - SIMD control functions library
+	* Stack.h - Stack ADT
+	* Deque.h - Double-ended queue ADT
+	* MaxHeap.h - Binary max heap ADT
+	* MinHeap.h - Binary min heap ADT
+	* MultiTree.h - Multiply keys b-tree ADT
+	* UniqueTree.h - Unique keys b-tree ADT
 
 #******************************************************************************#
 #       Release 0.99 (beta) [2013-02-04]                                       #
