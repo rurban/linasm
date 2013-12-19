@@ -256,6 +256,13 @@ static void SortKeyDsc (const char16_t* key[], const void* ptr[], size_t size, C
 static void SortKeyDsc (const char32_t* key[], const void* ptr[], size_t size, CmpChar32 func);
 
 //****************************************************************************//
+//      Reversing elements order                                              //
+//****************************************************************************//
+static void Reverse (const char8_t* array[], size_t size);
+static void Reverse (const char16_t* array[], size_t size);
+static void Reverse (const char32_t* array[], size_t size);
+
+//****************************************************************************//
 //      Unique values                                                         //
 //****************************************************************************//
 static size_t Unique (char8_t* unique[], const char8_t* array[], size_t size, CmpChar8 func);
@@ -567,6 +574,13 @@ void String_SortKeyAsc_char32 (const char32_t* key[], const void* ptr[], size_t 
 void String_SortKeyDsc_char8 (const char8_t* key[], const void* ptr[], size_t size, CmpChar8 func);
 void String_SortKeyDsc_char16 (const char16_t* key[], const void* ptr[], size_t size, CmpChar16 func);
 void String_SortKeyDsc_char32 (const char32_t* key[], const void* ptr[], size_t size, CmpChar32 func);
+
+//****************************************************************************//
+//      Reversing elements order                                              //
+//****************************************************************************//
+void String_Reverse_char8 (const char8_t* array[], size_t size);
+void String_Reverse_char16 (const char16_t* array[], size_t size);
+void String_Reverse_char32 (const char32_t* array[], size_t size);
 
 //****************************************************************************//
 //      Unique values                                                         //

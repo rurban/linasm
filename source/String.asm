@@ -355,6 +355,16 @@ public	SortKeyDsc				as	"_ZN6String10SortKeyDscEPPKsPPKvmPFxS1_S1_E"
 public	SortKeyDsc				as	"_ZN6String10SortKeyDscEPPKiPPKvmPFxS1_S1_E"
 
 ;******************************************************************************;
+;       Reversing elements order                                               ;
+;******************************************************************************;
+public	Reverse					as	'String_Reverse_char8'
+public	Reverse					as	'String_Reverse_char16'
+public	Reverse					as	'String_Reverse_char32'
+public	Reverse					as	"_ZN6String7ReverseEPPKcm"
+public	Reverse					as	"_ZN6String7ReverseEPPKsm"
+public	Reverse					as	"_ZN6String7ReverseEPPKim"
+
+;******************************************************************************;
 ;       Unique values                                                          ;
 ;******************************************************************************;
 public	Unique					as	'String_Unique_char8'
@@ -3017,6 +3027,34 @@ space	= 7 * 8								; stack size required by the procedure
 }
 SortKeyAsc:		SORT_KEY	l, g
 SortKeyDsc:		SORT_KEY	g, l
+
+;******************************************************************************;
+;       Reversing elements order                                               ;
+;******************************************************************************;
+Reverse:
+;---[Parameters]---------------------------
+array	equ		rdi							; pointer to strings array
+size	equ		rsi							; array size (count of elements)
+;---[Internal variables]-------------------
+ptr		equ 	rax							; pointer to last element of array
+temp1	equ		r8							; temporary register #1
+temp2	equ		r9							; temporary register #2
+;------------------------------------------
+		lea		ptr, [array + size * 8]		; ptr = array + size
+		shr		size, 1						; size >>= 1
+		jz		.exit						; if (size == 0), then go to exit
+;---[Swap loop]----------------------------
+@@:		sub		ptr, 8						; ptr--
+		mov		temp1, [array]				; temp1 = array[0]
+		mov		temp2, [ptr]				; temp2 = ptr[0]
+		xchg	temp1, temp2				; exchange temp1 and temp2
+		mov		[array], temp1				; array[0] = temp2
+		mov		[ptr], temp2				; ptr[0] = temp1
+		add		array, 8					; array++
+		sub		size, 1						; size--
+		jnz		@b							; do while (size != 0)
+;------------------------------------------
+.exit:	ret
 
 ;******************************************************************************;
 ;       Unique values                                                          ;
