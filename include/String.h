@@ -340,6 +340,13 @@ static size_t CheckSortDsc (const char32_t* array[], size_t size, CmpChar32 func
 static size_t CheckDup (const char8_t* array[], size_t size, CmpChar8 func);
 static size_t CheckDup (const char16_t* array[], size_t size, CmpChar16 func);
 static size_t CheckDup (const char32_t* array[], size_t size, CmpChar32 func);
+
+//****************************************************************************//
+//      String hashing                                                        //
+//****************************************************************************//
+static uint32_t Hash (const char8_t string[]);
+static uint32_t Hash (const char16_t string[]);
+static uint32_t Hash (const char32_t string[]);
 };
 # else
 /*
@@ -660,6 +667,13 @@ size_t String_CheckSortDsc_char32 (const char32_t* array[], size_t size, CmpChar
 size_t String_CheckDup_char8 (const char8_t* array[], size_t size, CmpChar8 func);
 size_t String_CheckDup_char16 (const char16_t* array[], size_t size, CmpChar16 func);
 size_t String_CheckDup_char32 (const char32_t* array[], size_t size, CmpChar32 func);
+
+//****************************************************************************//
+//      String hashing                                                        //
+//****************************************************************************//
+uint32_t String_Hash_char8 (const char8_t string[]);
+uint32_t String_Hash_char16 (const char16_t string[]);
+uint32_t String_Hash_char32 (const char32_t string[]);
 
 # endif
 /*

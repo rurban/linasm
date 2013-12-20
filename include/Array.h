@@ -92,29 +92,6 @@ static void Move (size_t target[], const size_t source[], size_t size);
 static void Move (void *target, const void *source, size_t size);
 
 //****************************************************************************//
-//      Reversing elements order                                              //
-//****************************************************************************//
-
-// Unsigned integer types
-static void Reverse (uint8_t array[], size_t size);
-static void Reverse (uint16_t array[], size_t size);
-static void Reverse (uint32_t array[], size_t size);
-static void Reverse (uint64_t array[], size_t size);
-
-// Signed integer types
-static void Reverse (sint8_t array[], size_t size);
-static void Reverse (sint16_t array[], size_t size);
-static void Reverse (sint32_t array[], size_t size);
-static void Reverse (sint64_t array[], size_t size);
-
-// Floating-point types
-static void Reverse (flt32_t array[], size_t size);
-static void Reverse (flt64_t array[], size_t size);
-
-// Other types
-static void Reverse (size_t array[], size_t size);
-
-//****************************************************************************//
 //      Pattern cloning                                                       //
 //****************************************************************************//
 
@@ -1076,6 +1053,29 @@ static void RadixSortKeyDsc (flt64_t key[], flt64_t tkey[], const void* ptr[], c
 static void RadixSortKeyDsc (size_t key[], size_t tkey[], const void* ptr[], const void* tptr[], size_t size);
 
 //****************************************************************************//
+//      Reversing elements order                                              //
+//****************************************************************************//
+
+// Unsigned integer types
+static void Reverse (uint8_t array[], size_t size);
+static void Reverse (uint16_t array[], size_t size);
+static void Reverse (uint32_t array[], size_t size);
+static void Reverse (uint64_t array[], size_t size);
+
+// Signed integer types
+static void Reverse (sint8_t array[], size_t size);
+static void Reverse (sint16_t array[], size_t size);
+static void Reverse (sint32_t array[], size_t size);
+static void Reverse (sint64_t array[], size_t size);
+
+// Floating-point types
+static void Reverse (flt32_t array[], size_t size);
+static void Reverse (flt64_t array[], size_t size);
+
+// Other types
+static void Reverse (size_t array[], size_t size);
+
+//****************************************************************************//
 //      Unique values                                                         //
 //****************************************************************************//
 
@@ -1349,6 +1349,30 @@ static bool Overlap (const flt64_t array1[], size_t size1, const flt64_t array2[
 // Other types
 static bool Overlap (const size_t array1[], size_t size1, const size_t array2[], size_t size2);
 static bool Overlap (const void *array1, size_t size1, const void *array2, size_t size2);
+
+//****************************************************************************//
+//      Array hashing                                                         //
+//****************************************************************************//
+
+// Unsigned integer types
+static uint32_t Hash (const uint8_t array[], size_t size);
+static uint32_t Hash (const uint16_t array[], size_t size);
+static uint32_t Hash (const uint32_t array[], size_t size);
+static uint32_t Hash (const uint64_t array[], size_t size);
+
+// Unsigned integer types
+static uint32_t Hash (const sint8_t array[], size_t size);
+static uint32_t Hash (const sint16_t array[], size_t size);
+static uint32_t Hash (const sint32_t array[], size_t size);
+static uint32_t Hash (const sint64_t array[], size_t size);
+
+// Floating-point types
+static uint32_t Hash (const flt32_t array[], size_t size);
+static uint32_t Hash (const flt64_t array[], size_t size);
+
+// Other types
+static uint32_t Hash (const size_t array[], size_t size);
+static uint32_t Hash (const void *array, size_t size);
 };
 # else
 /*
@@ -1426,29 +1450,6 @@ void Array_Move_flt64 (flt64_t target[], const flt64_t source[], size_t size);
 // Other types
 void Array_Move_size (size_t target[], const size_t source[], size_t size);
 void Array_Move (void *target, const void *source, size_t size);
-
-//****************************************************************************//
-//      Reversing elements order                                              //
-//****************************************************************************//
-
-// Unsigned integer types
-void Array_Reverse_uint8 (uint8_t array[], size_t size);
-void Array_Reverse_uint16 (uint16_t array[], size_t size);
-void Array_Reverse_uint32 (uint32_t array[], size_t size);
-void Array_Reverse_uint64 (uint64_t array[], size_t size);
-
-// Signed integer types
-void Array_Reverse_sint8 (sint8_t array[], size_t size);
-void Array_Reverse_sint16 (sint16_t array[], size_t size);
-void Array_Reverse_sint32 (sint32_t array[], size_t size);
-void Array_Reverse_sint64 (sint64_t array[], size_t size);
-
-// Floating-point types
-void Array_Reverse_flt32 (flt32_t array[], size_t size);
-void Array_Reverse_flt64 (flt64_t array[], size_t size);
-
-// Other types
-void Array_Reverse_size (size_t array[], size_t size);
 
 //****************************************************************************//
 //      Pattern cloning                                                       //
@@ -2412,6 +2413,29 @@ void Array_RadixSortKeyDsc_flt64 (flt64_t key[], flt64_t tkey[], const void* ptr
 void Array_RadixSortKeyDsc_size (size_t key[], size_t tkey[], const void* ptr[], const void* tptr[], size_t size);
 
 //****************************************************************************//
+//      Reversing elements order                                              //
+//****************************************************************************//
+
+// Unsigned integer types
+void Array_Reverse_uint8 (uint8_t array[], size_t size);
+void Array_Reverse_uint16 (uint16_t array[], size_t size);
+void Array_Reverse_uint32 (uint32_t array[], size_t size);
+void Array_Reverse_uint64 (uint64_t array[], size_t size);
+
+// Signed integer types
+void Array_Reverse_sint8 (sint8_t array[], size_t size);
+void Array_Reverse_sint16 (sint16_t array[], size_t size);
+void Array_Reverse_sint32 (sint32_t array[], size_t size);
+void Array_Reverse_sint64 (sint64_t array[], size_t size);
+
+// Floating-point types
+void Array_Reverse_flt32 (flt32_t array[], size_t size);
+void Array_Reverse_flt64 (flt64_t array[], size_t size);
+
+// Other types
+void Array_Reverse_size (size_t array[], size_t size);
+
+//****************************************************************************//
 //      Unique values                                                         //
 //****************************************************************************//
 
@@ -2685,6 +2709,30 @@ bool Array_Overlap_flt64 (const flt64_t array1[], size_t size1, const flt64_t ar
 // Other types
 bool Array_Overlap_size (const size_t array1[], size_t size1, const size_t array2[], size_t size2);
 bool Array_Overlap_void (const void *array1, size_t size1, const void *array2, size_t size2);
+
+//****************************************************************************//
+//      Array hashing                                                         //
+//****************************************************************************//
+
+// Unsigned integer types
+uint32_t Array_Hash_uint8 (const uint8_t array[], size_t size);
+uint32_t Array_Hash_uint16 (const uint16_t array[], size_t size);
+uint32_t Array_Hash_uint32 (const uint32_t array[], size_t size);
+uint32_t Array_Hash_uint64 (const uint64_t array[], size_t size);
+
+// Unsigned integer types
+uint32_t Array_Hash_sint8 (const sint8_t array[], size_t size);
+uint32_t Array_Hash_sint16 (const sint16_t array[], size_t size);
+uint32_t Array_Hash_sint32 (const sint32_t array[], size_t size);
+uint32_t Array_Hash_sint64 (const sint64_t array[], size_t size);
+
+// Floating-point types
+uint32_t Array_Hash_flt32 (const flt32_t array[], size_t size);
+uint32_t Array_Hash_flt64 (const flt64_t array[], size_t size);
+
+// Other types
+uint32_t Array_Hash_size (const size_t array[], size_t size);
+uint32_t Array_Hash_void (const void *array, size_t size);
 
 # endif
 /*

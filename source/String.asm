@@ -470,6 +470,16 @@ public	CheckDup				as	"_ZN6String8CheckDupEPPKcmPFxS1_S1_E"
 public	CheckDup				as	"_ZN6String8CheckDupEPPKsmPFxS1_S1_E"
 public	CheckDup				as	"_ZN6String8CheckDupEPPKimPFxS1_S1_E"
 
+;******************************************************************************;
+;       String hashing                                                         ;
+;******************************************************************************;
+public	Hash_char8				as	'String_Hash_char8'
+public	Hash_char16				as	'String_Hash_char16'
+public	Hash_char32				as	'String_Hash_char32'
+public	Hash_char8				as	'_ZN6String4HashEPKc'
+public	Hash_char16				as	'_ZN6String4HashEPKs'
+public	Hash_char32				as	'_ZN6String4HashEPKi'
+
 ;###############################################################################
 ;#      Code section                                                           #
 ;###############################################################################
@@ -3488,6 +3498,42 @@ CheckSortDsc:	CHECK_CORE	l, 1
 
 ; Check for duplicate values
 CheckDup:		CHECK_CORE	e, 0
+
+;******************************************************************************;
+;       String hashing                                                         ;
+;******************************************************************************;
+macro	HASH	char, scale
+{
+;---[Parameters]---------------------------
+string	equ		rdi							; pointer to string
+;---[Internal variables]-------------------
+result	equ		eax							; result register
+temp	equ		edx							; temporary register
+bytes	= 1 shl scale						; size of string element (bytes)
+;------------------------------------------
+		xor		result, result				; result = 0
+		mov		char, [string]				; char = string[0]
+		test	char, char					; if (char == eol)
+		jz		.exit						;     then go to exit
+;---[Hashing loop]-------------------------
+.loop:
+i = 0
+while i < bytes
+		movzx	temp, byte [string + i]		; temp = string[i]
+		add		result, temp				; result += temp
+		imul 	result, result, 2654435769	; result *= 2654435769
+	i = i + 1
+end while
+		add		string, bytes				; string++
+		mov		char, [string]				; char = string[0]
+		test	char, char
+		jnz		.loop						; do while (char != eol)
+;---[End of hashing loop]------------------
+.exit:	ret
+}
+Hash_char8:		HASH	cl, 0
+Hash_char16:	HASH	cx, 1
+Hash_char32:	HASH	ecx, 2
 
 ;###############################################################################
 ;#      Read-only data section                                                 #

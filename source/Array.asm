@@ -120,40 +120,6 @@ public	Move64						as	'_ZN5Array4MoveEPmPKmm'
 public	Move8						as	'_ZN5Array4MoveEPvPKvm'
 
 ;******************************************************************************;
-;       Reversing elements order                                               ;
-;******************************************************************************;
-
-; Unsigned integer types
-public	Reverse8					as	'Array_Reverse_uint8'
-public	Reverse16					as	'Array_Reverse_uint16'
-public	Reverse32					as	'Array_Reverse_uint32'
-public	Reverse64					as	'Array_Reverse_uint64'
-public	Reverse8					as	'_ZN5Array7ReverseEPhm'
-public	Reverse16					as	'_ZN5Array7ReverseEPtm'
-public	Reverse32					as	'_ZN5Array7ReverseEPjm'
-public	Reverse64					as	'_ZN5Array7ReverseEPym'
-
-; Signed integer types
-public	Reverse8					as	'Array_Reverse_sint8'
-public	Reverse16					as	'Array_Reverse_sint16'
-public	Reverse32					as	'Array_Reverse_sint32'
-public	Reverse64					as	'Array_Reverse_sint64'
-public	Reverse8					as	'_ZN5Array7ReverseEPam'
-public	Reverse16					as	'_ZN5Array7ReverseEPsm'
-public	Reverse32					as	'_ZN5Array7ReverseEPim'
-public	Reverse64					as	'_ZN5Array7ReverseEPxm'
-
-; Floating-point types
-public	Reverse32					as	'Array_Reverse_flt32'
-public	Reverse64					as	'Array_Reverse_flt64'
-public	Reverse32					as	'_ZN5Array7ReverseEPfm'
-public	Reverse64					as	'_ZN5Array7ReverseEPdm'
-
-; Other types
-public	Reverse64					as	'Array_Reverse_size'
-public	Reverse64					as	'_ZN5Array7ReverseEPmm'
-
-;******************************************************************************;
 ;       Pattern cloning                                                        ;
 ;******************************************************************************;
 
@@ -1526,6 +1492,40 @@ public	RadixSortKeyDsc_uint64		as	'Array_RadixSortKeyDsc_size'
 public	RadixSortKeyDsc_uint64		as	'_ZN5Array15RadixSortKeyDscEPmS0_PPKvS3_m'
 
 ;******************************************************************************;
+;       Reversing elements order                                               ;
+;******************************************************************************;
+
+; Unsigned integer types
+public	Reverse8					as	'Array_Reverse_uint8'
+public	Reverse16					as	'Array_Reverse_uint16'
+public	Reverse32					as	'Array_Reverse_uint32'
+public	Reverse64					as	'Array_Reverse_uint64'
+public	Reverse8					as	'_ZN5Array7ReverseEPhm'
+public	Reverse16					as	'_ZN5Array7ReverseEPtm'
+public	Reverse32					as	'_ZN5Array7ReverseEPjm'
+public	Reverse64					as	'_ZN5Array7ReverseEPym'
+
+; Signed integer types
+public	Reverse8					as	'Array_Reverse_sint8'
+public	Reverse16					as	'Array_Reverse_sint16'
+public	Reverse32					as	'Array_Reverse_sint32'
+public	Reverse64					as	'Array_Reverse_sint64'
+public	Reverse8					as	'_ZN5Array7ReverseEPam'
+public	Reverse16					as	'_ZN5Array7ReverseEPsm'
+public	Reverse32					as	'_ZN5Array7ReverseEPim'
+public	Reverse64					as	'_ZN5Array7ReverseEPxm'
+
+; Floating-point types
+public	Reverse32					as	'Array_Reverse_flt32'
+public	Reverse64					as	'Array_Reverse_flt64'
+public	Reverse32					as	'_ZN5Array7ReverseEPfm'
+public	Reverse64					as	'_ZN5Array7ReverseEPdm'
+
+; Other types
+public	Reverse64					as	'Array_Reverse_size'
+public	Reverse64					as	'_ZN5Array7ReverseEPmm'
+
+;******************************************************************************;
 ;       Unique values                                                          ;
 ;******************************************************************************;
 
@@ -1916,6 +1916,42 @@ public	Overlap64					as	'_ZN5Array7OverlapEPKmmS1_m'
 public	Overlap8					as	'_ZN5Array7OverlapEPKvmS1_m'
 
 ;******************************************************************************;
+;       Array hashing                                                          ;
+;******************************************************************************;
+
+; Unsigned integer types
+public	Hash8						as	'Array_Hash_uint8'
+public	Hash16						as	'Array_Hash_uint16'
+public	Hash32						as	'Array_Hash_uint32'
+public	Hash64						as	'Array_Hash_uint64'
+public	Hash8						as	'_ZN5Array4HashEPKhm'
+public	Hash16						as	'_ZN5Array4HashEPKtm'
+public	Hash32						as	'_ZN5Array4HashEPKjm'
+public	Hash64						as	'_ZN5Array4HashEPKym'
+
+; Signed integer types
+public	Hash8						as	'Array_Hash_sint8'
+public	Hash16						as	'Array_Hash_sint16'
+public	Hash32						as	'Array_Hash_sint32'
+public	Hash64						as	'Array_Hash_sint64'
+public	Hash8						as	'_ZN5Array4HashEPKam'
+public	Hash16						as	'_ZN5Array4HashEPKsm'
+public	Hash32						as	'_ZN5Array4HashEPKim'
+public	Hash64						as	'_ZN5Array4HashEPKxm'
+
+; Floating-point types
+public	Hash32						as	'Array_Hash_flt32'
+public	Hash64						as	'Array_Hash_flt64'
+public	Hash32						as	'_ZN5Array4HashEPKfm'
+public	Hash64						as	'_ZN5Array4HashEPKdm'
+
+; Other types
+public	Hash64						as	'Array_Hash_size'
+public	Hash64						as	'Array_Hash_void'
+public	Hash64						as	'_ZN5Array4HashEPKmm'
+public	Hash64						as	'_ZN5Array4HashEPKvm'
+
+;******************************************************************************;
 ;       Blend masks                                                            ;
 ;******************************************************************************;
 public	maskS1						as	'maskS1'
@@ -2277,39 +2313,6 @@ Move8:	MOVE	b
 Move16:	MOVE	w
 Move32:	MOVE	d
 Move64:	MOVE	q
-
-;******************************************************************************;
-;       Reversing elements order                                               ;
-;******************************************************************************;
-macro	REVERSE	temp1, temp2, scale
-{
-;---[Parameters]---------------------------
-array	equ		rdi							; pointer to array
-size	equ		rsi							; array size (count of elements)
-;---[Internal variables]-------------------
-ptr		equ 	rax							; pointer to last element of array
-bytes	= 1 shl scale						; size of array element (bytes)
-;------------------------------------------
-		lea		ptr, [array + size * bytes]	; ptr = array + size
-		shr		size, 1						; size >>= 1
-		jz		.exit						; if (size == 0), then go to exit
-;---[Swap loop]----------------------------
-@@:		sub		ptr, bytes					; ptr--
-		mov		temp1, [array]				; temp1 = array[0]
-		mov		temp2, [ptr]				; temp2 = ptr[0]
-		xchg	temp1, temp2				; exchange temp1 and temp2
-		mov		[array], temp1				; array[0] = temp2
-		mov		[ptr], temp2				; ptr[0] = temp1
-		add		array, bytes				; array++
-		sub		size, 1						; size--
-		jnz		@b							; do while (size != 0)
-;------------------------------------------
-.exit:	ret
-}
-Reverse8:	REVERSE		cl, dl, 0
-Reverse16:	REVERSE		cx, dx, 1
-Reverse32:	REVERSE		ecx, edx, 2
-Reverse64:	REVERSE		rcx, rdx, 3
 
 ;******************************************************************************;
 ;       Pattern cloning                                                        ;
@@ -3187,7 +3190,7 @@ bytes	= 1 shl scale						; size of array element (bytes)
 bmask	= bytes - 1							; elements aligning mask
 ;------------------------------------------
 	prefetchnta	[array]						; prefetch data
-		shl		size, scale					; convert size to bytes
+		shftl	size, scale					; convert size to bytes
 		jz		.exit						; if (size == 0), then go to exit
 		test	array, bmask				; if elements have wrong alignment
 		jnz		.sloop						;     then skip vector code
@@ -3303,7 +3306,7 @@ bytes	= 1 shl scale						; size of array element (bytes)
 bmask	= bytes - 1							; elements aligning mask
 ;------------------------------------------
 	prefetchnta	[array]						; prefetch data
-		shl		size, scale					; convert size to bytes
+		shftl	size, scale					; convert size to bytes
 		jz		.exit						; if (size == 0), then go to exit
 		test	array, bmask				; if elements have wrong alignment
 		jnz		.sloop						;     then skip vector code
@@ -3400,7 +3403,7 @@ bmask	= bytes - 1							; elements aligning mask
 ;------------------------------------------
 	prefetchnta	[source]					; prefetch data
 	prefetchnta	[target]					; prefetch data
-		shl		size, scale					; convert size to bytes
+		shftl	size, scale					; convert size to bytes
 		jz		.exit						; if (size == 0), then go to exit
 		test	source, bmask				; if elements have wrong alignment
 		jnz		.sloop						;     then skip vector code
@@ -3613,7 +3616,7 @@ bytes	= 1 shl scale						; size of array element (bytes)
 bmask	= bytes - 1							; elements aligning mask
 ;------------------------------------------
 	prefetchnta	[array]						; prefetch data
-		shl		size, scale					; convert size to bytes
+		shftl	size, scale					; convert size to bytes
 		jz		.exit						; if (size == 0), then go to exit
 if type = 1
 		initreg	mask, index, smask			; mask = smask
@@ -3826,7 +3829,7 @@ bmask	= bytes - 1							; elements aligning mask
 ;------------------------------------------
 	prefetchnta	[array]						; prefetch data
 		xorp#x	result, result				; index = 0
-		shl		size, scale					; convert size to bytes
+		shftl	size, scale					; convert size to bytes
 		jz		.exit						; if (size == 0), then go to exit
 if type = 2
 		initreg	mask, index, dmask			; mask = dmask
@@ -3993,7 +3996,7 @@ bmask	= bytes - 1							; elements aligning mask
 	prefetchnta	[array2]					; prefetch data
 	prefetchnta	[array1]					; prefetch data
 		xorp#x	result, result				; result = 0
-		shl		size, scale					; convert size to bytes
+		shftl	size, scale					; convert size to bytes
 		jz		.exit						; if (size == 0), then go to exit
 		test	array2, bmask				; if elements have wrong alignment
 		jnz		.sloop						;     then skip vector code
@@ -4262,7 +4265,7 @@ bytes	= 1 shl scale						; size of array element (bytes)
 bmask	= bytes - 1							; elements aligning mask
 ;------------------------------------------
 	prefetchnta	[array]						; prefetch data
-		shl		size, scale					; convert size to bytes
+		shftl	size, scale					; convert size to bytes
 		jz		.error						; if (size == 0), then go to error branch
 		initreg	result, index, value		; result = value
 if abs
@@ -5579,7 +5582,7 @@ bytes	= 1 shl scale						; size of array element (bytes)
 .exit:	ret
 }
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	QUICKSORT_KEY_FLT	sort_func, convert_func
+macro	QUICKSORT_KEY_FLT	sortfunc, convertfunc
 {
 ;---[Parameters]---------------------------
 array	equ		rdi							; pointer to array
@@ -5598,17 +5601,18 @@ space	= 3 * 8								; stack size required by the procedure
 		mov		[s_ptr], ptr				; save "ptr" variable into the stack
 		mov		[s_size], size				; save "size" variable into the stack
 ;---[Convert array]------------------------
-		mov		csize, size
-		call	convert_func				; call converting function
+		mov		param2, size
+		mov		param1, array
+		call	convertfunc					; call convertfunc (array, size)
 ;---[Sort array]---------------------------
-		mov		array, [s_array]			; get "array" variable from the stack
-		mov		ptr, [s_ptr]				; get "ptr" variable from the stack
-		mov		size, [s_size]				; get "size" variable from the stack
-		call	sort_func					; call sorting function
+		mov		param3, [s_size]
+		mov		param2, [s_ptr]
+		mov		param1, [s_array]
+		call	sortfunc					; call sortfunc (array, ptr, size)
 ;---[Convert array]------------------------
-		mov		array, [s_array]			; get "array" variable from the stack
-		mov		csize, [s_size]				; get "size" variable from the stack
-		call	convert_func				; call converting function
+		mov		param2, [s_size]
+		mov		param1, [s_array]
+		call	convertfunc					; call convertfunc (array, size)
 		add		stack, space				; restoring back the stack pointer
 		ret
 }
@@ -6256,6 +6260,39 @@ RadixSortKeyDsc_sint64:		RADIXSORT_KEY_INT	RadixSortCoreKeyDsc_sint64
 ; Floating-point types
 RadixSortKeyDsc_flt32:		RADIXSORT_KEY_FLT	RadixSortCoreKeyDsc_sint32, Map_flt32
 RadixSortKeyDsc_flt64:		RADIXSORT_KEY_FLT	RadixSortCoreKeyDsc_sint64, Map_flt64
+
+;******************************************************************************;
+;       Reversing elements order                                               ;
+;******************************************************************************;
+macro	REVERSE	temp1, temp2, scale
+{
+;---[Parameters]---------------------------
+array	equ		rdi							; pointer to array
+size	equ		rsi							; array size (count of elements)
+;---[Internal variables]-------------------
+ptr		equ 	rax							; pointer to last element of array
+bytes	= 1 shl scale						; size of array element (bytes)
+;------------------------------------------
+		lea		ptr, [array + size * bytes]	; ptr = array + size
+		shr		size, 1						; size >>= 1
+		jz		.exit						; if (size == 0), then go to exit
+;---[Swap loop]----------------------------
+@@:		sub		ptr, bytes					; ptr--
+		mov		temp1, [array]				; temp1 = array[0]
+		mov		temp2, [ptr]				; temp2 = ptr[0]
+		xchg	temp1, temp2				; exchange temp1 and temp2
+		mov		[array], temp1				; array[0] = temp2
+		mov		[ptr], temp2				; ptr[0] = temp1
+		add		array, bytes				; array++
+		sub		size, 1						; size--
+		jnz		@b							; do while (size != 0)
+;------------------------------------------
+.exit:	ret
+}
+Reverse8:	REVERSE		cl, dl, 0
+Reverse16:	REVERSE		cx, dx, 1
+Reverse32:	REVERSE		ecx, edx, 2
+Reverse64:	REVERSE		rcx, rdx, 3
 
 ;******************************************************************************;
 ;       Unique values                                                          ;
@@ -7361,25 +7398,63 @@ source	equ 	rdx							; pointer to source array
 ssize	equ 	rcx							; source array size
 ;---[Internal variables]-------------------
 result	equ		al							; result register
-bytes	= 1 shl scale						; size of array element (bytes)
+max		equ		r8							; max value
+min		equ		r9							; max value
 ;------------------------------------------
-		cmp		target, source				; if (target >= source)
-		jb		@f
-;------------------------------------------
-		lea		source, [source+ssize*bytes]; then source += ssize
-		cmp		target, source				; return target >= source
-		setb	result
-		ret
-;------------------------------------------
-@@:		lea		target, [target+tsize*bytes]; else target += tsize
-		cmp		source, target				; return (source >= target)
-		setb	result
+		shl		tsize, scale				; convert tsize to bytes
+		shl		ssize, scale				; convert ssize to bytes
+		cmp		target, source
+		cmova	max, target					; if (target > source), max = target
+		cmovna	max, source					; if (target <= source), max = source
+		add		target, tsize				; taget += tsize
+		add		source, ssize				; source += ssize
+		cmp		target, source
+		cmovb	min, target					; if (target < source), min = target
+		cmovnb	min, source					; if (target >= source), min = source
+		cmp		max, min					; if (max < min)
+		setb	result						;     return true
 		ret
 }
 Overlap8:	OVERLAP	0
 Overlap16:	OVERLAP	1
 Overlap32:	OVERLAP	2
 Overlap64:	OVERLAP	3
+
+;******************************************************************************;
+;       Array hashing                                                          ;
+;******************************************************************************;
+macro	HASH	scale
+{
+;---[Parameters]---------------------------
+array	equ		rdi							; pointer to array
+size	equ		rsi							; array size (count of elements)
+;---[Internal variables]-------------------
+result	equ		eax							; result register
+temp	equ		edx							; temporary register
+bytes	= 1 shl scale						; size of array element (bytes)
+;------------------------------------------
+		xor		result, result				; result = 0
+		test	size, size					; if (size == 0)
+		jz		.exit						;     then go to exit
+;---[Hashing loop]-------------------------
+.loop:
+i = 0
+while i < bytes
+		movzx	temp, byte [array + i]		; temp = array[i]
+		add		result, temp				; result += temp
+		imul 	result, result, 2654435769	; result *= 2654435769
+	i = i + 1
+end while
+		add		array, bytes				; array++
+		sub		size, 1						; size--
+		jnz		.loop						; do while (size != 0)
+;---[End of hashing loop]------------------
+.exit:	ret
+}
+Hash8:	HASH	0
+Hash16:	HASH	1
+Hash32:	HASH	2
+Hash64:	HASH	3
 
 ;###############################################################################
 ;#      Read-only data section                                                 #
