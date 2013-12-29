@@ -1354,25 +1354,53 @@ static bool Overlap (const void *array1, size_t size1, const void *array2, size_
 //      Array hashing                                                         //
 //****************************************************************************//
 
-// Unsigned integer types
-static uint32_t Hash (const uint8_t array[], size_t size);
-static uint32_t Hash (const uint16_t array[], size_t size);
-static uint32_t Hash (const uint32_t array[], size_t size);
-static uint32_t Hash (const uint64_t array[], size_t size);
+//============================================================================//
+//      32-bit hash functions                                                 //
+//============================================================================//
 
 // Unsigned integer types
-static uint32_t Hash (const sint8_t array[], size_t size);
-static uint32_t Hash (const sint16_t array[], size_t size);
-static uint32_t Hash (const sint32_t array[], size_t size);
-static uint32_t Hash (const sint64_t array[], size_t size);
+static uint32_t Hash32 (const uint8_t array[], size_t size);
+static uint32_t Hash32 (const uint16_t array[], size_t size);
+static uint32_t Hash32 (const uint32_t array[], size_t size);
+static uint32_t Hash32 (const uint64_t array[], size_t size);
+
+// Unsigned integer types
+static uint32_t Hash32 (const sint8_t array[], size_t size);
+static uint32_t Hash32 (const sint16_t array[], size_t size);
+static uint32_t Hash32 (const sint32_t array[], size_t size);
+static uint32_t Hash32 (const sint64_t array[], size_t size);
 
 // Floating-point types
-static uint32_t Hash (const flt32_t array[], size_t size);
-static uint32_t Hash (const flt64_t array[], size_t size);
+static uint32_t Hash32 (const flt32_t array[], size_t size);
+static uint32_t Hash32 (const flt64_t array[], size_t size);
 
 // Other types
-static uint32_t Hash (const size_t array[], size_t size);
-static uint32_t Hash (const void *array, size_t size);
+static uint32_t Hash32 (const size_t array[], size_t size);
+static uint32_t Hash32 (const void *array, size_t size);
+
+//============================================================================//
+//      64-bit hash functions                                                 //
+//============================================================================//
+
+// Unsigned integer types
+static uint64_t Hash64 (const uint8_t array[], size_t size);
+static uint64_t Hash64 (const uint16_t array[], size_t size);
+static uint64_t Hash64 (const uint32_t array[], size_t size);
+static uint64_t Hash64 (const uint64_t array[], size_t size);
+
+// Unsigned integer types
+static uint64_t Hash64 (const sint8_t array[], size_t size);
+static uint64_t Hash64 (const sint16_t array[], size_t size);
+static uint64_t Hash64 (const sint32_t array[], size_t size);
+static uint64_t Hash64 (const sint64_t array[], size_t size);
+
+// Floating-point types
+static uint64_t Hash64 (const flt32_t array[], size_t size);
+static uint64_t Hash64 (const flt64_t array[], size_t size);
+
+// Other types
+static uint64_t Hash64 (const size_t array[], size_t size);
+static uint64_t Hash64 (const void *array, size_t size);
 };
 # else
 /*
@@ -2714,25 +2742,53 @@ bool Array_Overlap_void (const void *array1, size_t size1, const void *array2, s
 //      Array hashing                                                         //
 //****************************************************************************//
 
-// Unsigned integer types
-uint32_t Array_Hash_uint8 (const uint8_t array[], size_t size);
-uint32_t Array_Hash_uint16 (const uint16_t array[], size_t size);
-uint32_t Array_Hash_uint32 (const uint32_t array[], size_t size);
-uint32_t Array_Hash_uint64 (const uint64_t array[], size_t size);
+//============================================================================//
+//      32-bit hash functions                                                 //
+//============================================================================//
 
 // Unsigned integer types
-uint32_t Array_Hash_sint8 (const sint8_t array[], size_t size);
-uint32_t Array_Hash_sint16 (const sint16_t array[], size_t size);
-uint32_t Array_Hash_sint32 (const sint32_t array[], size_t size);
-uint32_t Array_Hash_sint64 (const sint64_t array[], size_t size);
+uint32_t Array_Hash32_uint8 (const uint8_t array[], size_t size);
+uint32_t Array_Hash32_uint16 (const uint16_t array[], size_t size);
+uint32_t Array_Hash32_uint32 (const uint32_t array[], size_t size);
+uint32_t Array_Hash32_uint64 (const uint64_t array[], size_t size);
+
+// Unsigned integer types
+uint32_t Array_Hash32_sint8 (const sint8_t array[], size_t size);
+uint32_t Array_Hash32_sint16 (const sint16_t array[], size_t size);
+uint32_t Array_Hash32_sint32 (const sint32_t array[], size_t size);
+uint32_t Array_Hash32_sint64 (const sint64_t array[], size_t size);
 
 // Floating-point types
-uint32_t Array_Hash_flt32 (const flt32_t array[], size_t size);
-uint32_t Array_Hash_flt64 (const flt64_t array[], size_t size);
+uint32_t Array_Hash32_flt32 (const flt32_t array[], size_t size);
+uint32_t Array_Hash32_flt64 (const flt64_t array[], size_t size);
 
 // Other types
-uint32_t Array_Hash_size (const size_t array[], size_t size);
-uint32_t Array_Hash_void (const void *array, size_t size);
+uint32_t Array_Hash32_size (const size_t array[], size_t size);
+uint32_t Array_Hash32_void (const void *array, size_t size);
+
+//============================================================================//
+//      64-bit hash functions                                                 //
+//============================================================================//
+
+// Unsigned integer types
+uint64_t Array_Hash64_uint8 (const uint8_t array[], size_t size);
+uint64_t Array_Hash64_uint16 (const uint16_t array[], size_t size);
+uint64_t Array_Hash64_uint32 (const uint32_t array[], size_t size);
+uint64_t Array_Hash64_uint64 (const uint64_t array[], size_t size);
+
+// Unsigned integer types
+uint64_t Array_Hash64_sint8 (const sint8_t array[], size_t size);
+uint64_t Array_Hash64_sint16 (const sint16_t array[], size_t size);
+uint64_t Array_Hash64_sint32 (const sint32_t array[], size_t size);
+uint64_t Array_Hash64_sint64 (const sint64_t array[], size_t size);
+
+// Floating-point types
+uint64_t Array_Hash64_flt32 (const flt32_t array[], size_t size);
+uint64_t Array_Hash64_flt64 (const flt64_t array[], size_t size);
+
+// Other types
+uint64_t Array_Hash64_size (const size_t array[], size_t size);
+uint64_t Array_Hash64_void (const void *array, size_t size);
 
 # endif
 /*

@@ -1919,37 +1919,77 @@ public	Overlap8					as	'_ZN5Array7OverlapEPKvmS1_m'
 ;       Array hashing                                                          ;
 ;******************************************************************************;
 
+;==============================================================================;
+;       32-bit hash functions                                                  ;
+;==============================================================================;
+
 ; Unsigned integer types
-public	Hash8						as	'Array_Hash_uint8'
-public	Hash16						as	'Array_Hash_uint16'
-public	Hash32						as	'Array_Hash_uint32'
-public	Hash64						as	'Array_Hash_uint64'
-public	Hash8						as	'_ZN5Array4HashEPKhm'
-public	Hash16						as	'_ZN5Array4HashEPKtm'
-public	Hash32						as	'_ZN5Array4HashEPKjm'
-public	Hash64						as	'_ZN5Array4HashEPKym'
+public	Hash32_bit8					as	'Array_Hash32_uint8'
+public	Hash32_bit16				as	'Array_Hash32_uint16'
+public	Hash32_bit32				as	'Array_Hash32_uint32'
+public	Hash32_bit64				as	'Array_Hash32_uint64'
+public	Hash32_bit8					as	'_ZN5Array6Hash32EPKhm'
+public	Hash32_bit16				as	'_ZN5Array6Hash32EPKtm'
+public	Hash32_bit32				as	'_ZN5Array6Hash32EPKjm'
+public	Hash32_bit64				as	'_ZN5Array6Hash32EPKym'
 
 ; Signed integer types
-public	Hash8						as	'Array_Hash_sint8'
-public	Hash16						as	'Array_Hash_sint16'
-public	Hash32						as	'Array_Hash_sint32'
-public	Hash64						as	'Array_Hash_sint64'
-public	Hash8						as	'_ZN5Array4HashEPKam'
-public	Hash16						as	'_ZN5Array4HashEPKsm'
-public	Hash32						as	'_ZN5Array4HashEPKim'
-public	Hash64						as	'_ZN5Array4HashEPKxm'
+public	Hash32_bit8					as	'Array_Hash32_sint8'
+public	Hash32_bit16				as	'Array_Hash32_sint16'
+public	Hash32_bit32				as	'Array_Hash32_sint32'
+public	Hash32_bit64				as	'Array_Hash32_sint64'
+public	Hash32_bit8					as	'_ZN5Array6Hash32EPKam'
+public	Hash32_bit16				as	'_ZN5Array6Hash32EPKsm'
+public	Hash32_bit32				as	'_ZN5Array6Hash32EPKim'
+public	Hash32_bit64				as	'_ZN5Array6Hash32EPKxm'
 
 ; Floating-point types
-public	Hash32						as	'Array_Hash_flt32'
-public	Hash64						as	'Array_Hash_flt64'
-public	Hash32						as	'_ZN5Array4HashEPKfm'
-public	Hash64						as	'_ZN5Array4HashEPKdm'
+public	Hash32_bit32				as	'Array_Hash32_flt32'
+public	Hash32_bit64				as	'Array_Hash32_flt64'
+public	Hash32_bit32				as	'_ZN5Array6Hash32EPKfm'
+public	Hash32_bit64				as	'_ZN5Array6Hash32EPKdm'
 
 ; Other types
-public	Hash64						as	'Array_Hash_size'
-public	Hash64						as	'Array_Hash_void'
-public	Hash64						as	'_ZN5Array4HashEPKmm'
-public	Hash64						as	'_ZN5Array4HashEPKvm'
+public	Hash32_bit64				as	'Array_Hash32_size'
+public	Hash32_bit8					as	'Array_Hash32_void'
+public	Hash32_bit64				as	'_ZN5Array6Hash32EPKmm'
+public	Hash32_bit8					as	'_ZN5Array6Hash32EPKvm'
+
+;==============================================================================;
+;       64-bit hash functions                                                  ;
+;==============================================================================;
+
+; Unsigned integer types
+public	Hash64_bit8					as	'Array_Hash64_uint8'
+public	Hash64_bit16				as	'Array_Hash64_uint16'
+public	Hash64_bit32				as	'Array_Hash64_uint32'
+public	Hash64_bit64				as	'Array_Hash64_uint64'
+public	Hash64_bit8					as	'_ZN5Array6Hash64EPKhm'
+public	Hash64_bit16				as	'_ZN5Array6Hash64EPKtm'
+public	Hash64_bit32				as	'_ZN5Array6Hash64EPKjm'
+public	Hash64_bit64				as	'_ZN5Array6Hash64EPKym'
+
+; Signed integer types
+public	Hash64_bit8					as	'Array_Hash64_sint8'
+public	Hash64_bit16				as	'Array_Hash64_sint16'
+public	Hash64_bit32				as	'Array_Hash64_sint32'
+public	Hash64_bit64				as	'Array_Hash64_sint64'
+public	Hash64_bit8					as	'_ZN5Array6Hash64EPKam'
+public	Hash64_bit16				as	'_ZN5Array6Hash64EPKsm'
+public	Hash64_bit32				as	'_ZN5Array6Hash64EPKim'
+public	Hash64_bit64				as	'_ZN5Array6Hash64EPKxm'
+
+; Floating-point types
+public	Hash64_bit32				as	'Array_Hash64_flt32'
+public	Hash64_bit64				as	'Array_Hash64_flt64'
+public	Hash64_bit32				as	'_ZN5Array6Hash64EPKfm'
+public	Hash64_bit64				as	'_ZN5Array6Hash64EPKdm'
+
+; Other types
+public	Hash64_bit64				as	'Array_Hash64_size'
+public	Hash64_bit8					as	'Array_Hash64_void'
+public	Hash64_bit64				as	'_ZN5Array6Hash64EPKmm'
+public	Hash64_bit8					as	'_ZN5Array6Hash64EPKvm'
 
 ;******************************************************************************;
 ;       Blend masks                                                            ;
@@ -7423,16 +7463,15 @@ Overlap64:	OVERLAP	3
 ;******************************************************************************;
 ;       Array hashing                                                          ;
 ;******************************************************************************;
-macro	HASH	scale
+macro	HASH	result, temp, value, const, scale
 {
 ;---[Parameters]---------------------------
 array	equ		rdi							; pointer to array
 size	equ		rsi							; array size (count of elements)
 ;---[Internal variables]-------------------
-result	equ		eax							; result register
-temp	equ		edx							; temporary register
 bytes	= 1 shl scale						; size of array element (bytes)
 ;------------------------------------------
+		mov		value, const				; value = const
 		xor		result, result				; result = 0
 		test	size, size					; if (size == 0)
 		jz		.exit						;     then go to exit
@@ -7442,7 +7481,7 @@ i = 0
 while i < bytes
 		movzx	temp, byte [array + i]		; temp = array[i]
 		add		result, temp				; result += temp
-		imul 	result, result, 2654435769	; result *= 2654435769
+		imul 	result, value				; result *= value
 	i = i + 1
 end while
 		add		array, bytes				; array++
@@ -7451,10 +7490,22 @@ end while
 ;---[End of hashing loop]------------------
 .exit:	ret
 }
-Hash8:	HASH	0
-Hash16:	HASH	1
-Hash32:	HASH	2
-Hash64:	HASH	3
+
+;==============================================================================;
+;       32-bit hash functions                                                  ;
+;==============================================================================;
+Hash32_bit8:	HASH	eax, edx, ecx, 2654435769, 0
+Hash32_bit16:	HASH	eax, edx, ecx, 2654435769, 1
+Hash32_bit32:	HASH	eax, edx, ecx, 2654435769, 2
+Hash32_bit64:	HASH	eax, edx, ecx, 2654435769, 3
+
+;==============================================================================;
+;       64-bit hash functions                                                  ;
+;==============================================================================;
+Hash64_bit8:	HASH	rax, rdx, rcx, 11400714819323198485, 0
+Hash64_bit16:	HASH	rax, rdx, rcx, 11400714819323198485, 1
+Hash64_bit32:	HASH	rax, rdx, rcx, 11400714819323198485, 2
+Hash64_bit64:	HASH	rax, rdx, rcx, 11400714819323198485, 3
 
 ;###############################################################################
 ;#      Read-only data section                                                 #

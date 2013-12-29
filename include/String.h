@@ -344,9 +344,20 @@ static size_t CheckDup (const char32_t* array[], size_t size, CmpChar32 func);
 //****************************************************************************//
 //      String hashing                                                        //
 //****************************************************************************//
-static uint32_t Hash (const char8_t string[]);
-static uint32_t Hash (const char16_t string[]);
-static uint32_t Hash (const char32_t string[]);
+
+//============================================================================//
+//      32-bit hash functions                                                 //
+//============================================================================//
+static uint32_t Hash32 (const char8_t string[]);
+static uint32_t Hash32 (const char16_t string[]);
+static uint32_t Hash32 (const char32_t string[]);
+
+//============================================================================//
+//      64-bit hash functions                                                 //
+//============================================================================//
+static uint64_t Hash64 (const char8_t string[]);
+static uint64_t Hash64 (const char16_t string[]);
+static uint64_t Hash64 (const char32_t string[]);
 };
 # else
 /*
@@ -671,9 +682,20 @@ size_t String_CheckDup_char32 (const char32_t* array[], size_t size, CmpChar32 f
 //****************************************************************************//
 //      String hashing                                                        //
 //****************************************************************************//
-uint32_t String_Hash_char8 (const char8_t string[]);
-uint32_t String_Hash_char16 (const char16_t string[]);
-uint32_t String_Hash_char32 (const char32_t string[]);
+
+//============================================================================//
+//      32-bit hash functions                                                 //
+//============================================================================//
+uint32_t String_Hash32_char8 (const char8_t string[]);
+uint32_t String_Hash32_char16 (const char16_t string[]);
+uint32_t String_Hash32_char32 (const char32_t string[]);
+
+//============================================================================//
+//      64-bit hash functions                                                 //
+//============================================================================//
+uint64_t String_Hash64_char8 (const char8_t string[]);
+uint64_t String_Hash64_char16 (const char16_t string[]);
+uint64_t String_Hash64_char32 (const char32_t string[]);
 
 # endif
 /*

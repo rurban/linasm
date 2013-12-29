@@ -473,12 +473,26 @@ public	CheckDup				as	"_ZN6String8CheckDupEPPKimPFxS1_S1_E"
 ;******************************************************************************;
 ;       String hashing                                                         ;
 ;******************************************************************************;
-public	Hash_char8				as	'String_Hash_char8'
-public	Hash_char16				as	'String_Hash_char16'
-public	Hash_char32				as	'String_Hash_char32'
-public	Hash_char8				as	'_ZN6String4HashEPKc'
-public	Hash_char16				as	'_ZN6String4HashEPKs'
-public	Hash_char32				as	'_ZN6String4HashEPKi'
+
+;==============================================================================;
+;       32-bit hash functions                                                  ;
+;==============================================================================;
+public	Hash32_char8			as	'String_Hash32_char8'
+public	Hash32_char16			as	'String_Hash32_char16'
+public	Hash32_char32			as	'String_Hash32_char32'
+public	Hash32_char8			as	'_ZN6String6Hash32EPKc'
+public	Hash32_char16			as	'_ZN6String6Hash32EPKs'
+public	Hash32_char32			as	'_ZN6String6Hash32EPKi'
+
+;==============================================================================;
+;       64-bit hash functions                                                  ;
+;==============================================================================;
+public	Hash64_char8			as	'String_Hash64_char8'
+public	Hash64_char16			as	'String_Hash64_char16'
+public	Hash64_char32			as	'String_Hash64_char32'
+public	Hash64_char8			as	'_ZN6String6Hash64EPKc'
+public	Hash64_char16			as	'_ZN6String6Hash64EPKs'
+public	Hash64_char32			as	'_ZN6String6Hash64EPKi'
 
 ;###############################################################################
 ;#      Code section                                                           #
@@ -3502,15 +3516,14 @@ CheckDup:		CHECK_CORE	e, 0
 ;******************************************************************************;
 ;       String hashing                                                         ;
 ;******************************************************************************;
-macro	HASH	char, scale
+macro	HASH	result, temp, value, char, const, scale
 {
 ;---[Parameters]---------------------------
 string	equ		rdi							; pointer to string
 ;---[Internal variables]-------------------
-result	equ		eax							; result register
-temp	equ		edx							; temporary register
 bytes	= 1 shl scale						; size of string element (bytes)
 ;------------------------------------------
+		mov		value, const				; value = const
 		xor		result, result				; result = 0
 		mov		char, [string]				; char = string[0]
 		test	char, char					; if (char == eol)
@@ -3521,7 +3534,7 @@ i = 0
 while i < bytes
 		movzx	temp, byte [string + i]		; temp = string[i]
 		add		result, temp				; result += temp
-		imul 	result, result, 2654435769	; result *= 2654435769
+		imul 	result, value				; result *= value
 	i = i + 1
 end while
 		add		string, bytes				; string++
@@ -3531,9 +3544,20 @@ end while
 ;---[End of hashing loop]------------------
 .exit:	ret
 }
-Hash_char8:		HASH	cl, 0
-Hash_char16:	HASH	cx, 1
-Hash_char32:	HASH	ecx, 2
+
+;==============================================================================;
+;       32-bit hash functions                                                  ;
+;==============================================================================;
+Hash32_char8:	HASH	eax, edx, ecx, r8b, 2654435769, 0
+Hash32_char16:	HASH	eax, edx, ecx, r8w, 2654435769, 1
+Hash32_char32:	HASH	eax, edx, ecx, r8d, 2654435769, 2
+
+;==============================================================================;
+;       64-bit hash functions                                                  ;
+;==============================================================================;
+Hash64_char8:	HASH	rax, rdx, rcx, r8b, 11400714819323198485, 0
+Hash64_char16:	HASH	rax, rdx, rcx, r8w, 11400714819323198485, 1
+Hash64_char32:	HASH	rax, rdx, rcx, r8d, 11400714819323198485, 2
 
 ;###############################################################################
 ;#      Read-only data section                                                 #
