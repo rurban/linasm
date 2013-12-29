@@ -89,7 +89,7 @@ size_t Merge (const MaxHeap *source);
 //****************************************************************************//
 //      Heap properties                                                       //
 //****************************************************************************//
-KeyCmp* CompareFunction (void) const;
+KeyCmp CompareFunction (void) const;
 size_t Capacity (void) const;
 size_t Size (void) const;
 bool IsEmpty (void) const;
@@ -168,7 +168,7 @@ size_t MaxHeap_Merge (struct MaxHeap *heap, const struct MaxHeap *source);
 //****************************************************************************//
 //      Heap properties                                                       //
 //****************************************************************************//
-KeyCmp* MaxHeap_CompareFunction (const struct MaxHeap *heap);
+KeyCmp MaxHeap_CompareFunction (const struct MaxHeap *heap);
 size_t MaxHeap_Capacity (const struct MaxHeap *heap);
 size_t MaxHeap_Size (const struct MaxHeap *heap);
 bool MaxHeap_IsEmpty (const struct MaxHeap *heap);

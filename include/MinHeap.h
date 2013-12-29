@@ -89,7 +89,7 @@ size_t Merge (const MinHeap *source);
 //****************************************************************************//
 //      Heap properties                                                       //
 //****************************************************************************//
-KeyCmp* CompareFunction (void) const;
+KeyCmp CompareFunction (void) const;
 size_t Capacity (void) const;
 size_t Size (void) const;
 bool IsEmpty (void) const;
@@ -171,7 +171,7 @@ size_t MinHeap_Merge (struct MinHeap *heap, const struct MinHeap *source);
 //****************************************************************************//
 //      Heap properties                                                       //
 //****************************************************************************//
-KeyCmp* MinHeap_CompareFunction (const struct MinHeap *heap);
+KeyCmp MinHeap_CompareFunction (const struct MinHeap *heap);
 size_t MinHeap_Capacity (const struct MinHeap *heap);
 size_t MinHeap_Size (const struct MinHeap *heap);
 bool MinHeap_IsEmpty (const struct MinHeap *heap);

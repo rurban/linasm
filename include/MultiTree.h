@@ -218,7 +218,7 @@ bool IsEqual (const MultiTree *source) const;
 //****************************************************************************//
 //      Tree properties                                                       //
 //****************************************************************************//
-KeyCmp* CompareFunction (void) const;
+KeyCmp CompareFunction (void) const;
 size_t Capacity (void) const;
 size_t Size (void) const;
 size_t Height (void) const;
@@ -430,7 +430,7 @@ bool MultiTree_IsEqual (const struct MultiTree *tree, const struct MultiTree *so
 //****************************************************************************//
 //      Tree properties                                                       //
 //****************************************************************************//
-KeyCmp* MultiTree_CompareFunction (const struct MultiTree *tree);
+KeyCmp MultiTree_CompareFunction (const struct MultiTree *tree);
 size_t MultiTree_Capacity (const struct MultiTree *tree);
 size_t MultiTree_Size (const struct MultiTree *tree);
 size_t MultiTree_Height (const struct MultiTree *tree);

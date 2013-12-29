@@ -207,7 +207,7 @@ bool IsEqual (const UniqueTree *source) const;
 //****************************************************************************//
 //      Tree properties                                                       //
 //****************************************************************************//
-KeyCmp* CompareFunction (void) const;
+KeyCmp CompareFunction (void) const;
 size_t Capacity (void) const;
 size_t Size (void) const;
 size_t Height (void) const;
@@ -408,7 +408,7 @@ bool UniqueTree_IsEqual (const struct UniqueTree *tree, const struct UniqueTree 
 //****************************************************************************//
 //      Tree properties                                                       //
 //****************************************************************************//
-KeyCmp* UniqueTree_CompareFunction (const struct UniqueTree *tree);
+KeyCmp UniqueTree_CompareFunction (const struct UniqueTree *tree);
 size_t UniqueTree_Capacity (const struct UniqueTree *tree);
 size_t UniqueTree_Size (const struct UniqueTree *tree);
 size_t UniqueTree_Height (const struct UniqueTree *tree);
