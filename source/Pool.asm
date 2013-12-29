@@ -79,6 +79,7 @@ section	'.text'		executable align 16
 ;       Consts                                                                 ;
 ;******************************************************************************;
 INUSE		= -1							; Marker if the node is in use
+MINCAP		= 1 shl	PSCALE					; Min capacity of pool object
 
 ;==============================================================================;
 ;       Offsets inside pool object                                             ;
@@ -104,13 +105,13 @@ next	equ		rax							; next free node
 		sub		array, 8					; array--
 		sub		cap, bsize					; cap--
 		jz		.exit						; if (cap == 0), then go to exit
-;---[Init loop]----------------------------
-.loop:	add		next, bsize					; next += bsize
+;---[Nodes init loop]----------------------
+.nloop:	add		next, bsize					; next += bsize
 		add		array, bsize				; array++
 		mov		[array], next				; array[0] = next
 		sub		cap, bsize					; cap--
-		jnz		.loop						; do while (cap != 0)
-;---[End of init loop]---------------------
+		jnz		.nloop						; do while (cap != 0)
+;---[End of nodes init loop]---------------
 .exit:	add		array, bsize				; array++
 		mov		qword [array], 0			; array[0] = NULL
 		ret
@@ -151,8 +152,8 @@ space	= 3 * 8								; stack size required by the procedure
 		mov		[s_osize], osize			; save "osize" variable into the stack
 		mov		array, cap
 		mul		osize
-		add		array, PSIZE - 1
-		and		array, -PSIZE				; cap = cap * osize + PSIZE - 1 & (-PSIZE)
+		add		array, MINCAP - 1
+		and		array, -MINCAP				; cap = cap * osize + MINCAP - 1 & (-MINCAP)
 		mov		[s_cap], array				; save "cap" variable into the stack
 ;---[Allocate memory for the object]-------
 		mov		sc_prm6, 0
@@ -204,11 +205,11 @@ space	= 1 * 8								; stack size required by the procedure
 		sub		stack, space				; reserving stack size for local vars
 		mov		[s_this], this				; save "this" variable into the stack
 		mov		sc_prm2, [this + CAPACITY]
-		add		sc_prm2, PSIZE - 1
-		and		sc_prm2, -PSIZE
+		add		sc_prm2, MINCAP - 1
+		and		sc_prm2, -MINCAP
 		mov		sc_prm1, [this + ARRAY]
 		mov		sc_num, SYSCALL_MUNMAP
-		syscall								; munmap (array, capacity + PSIZE - 1 & (-PSIZE))
+		syscall								; munmap (array, capacity + MINCAP - 1 & (-MINCAP))
 		mov		this, [s_this]				; get "this" variable from the stack
 		mov		qword [this + ARRAY], 0		; this.array = NULL
 		mov		qword [this + CAPACITY], 0	; this.capacity = 0

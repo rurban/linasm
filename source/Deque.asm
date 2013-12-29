@@ -236,6 +236,8 @@ section	'.text'		executable align 16
 ;******************************************************************************;
 KSCALE		= 4								; Key scale factor
 KSIZE		= 1 shl KSCALE					; Size of key (bytes)
+MINCAP		= 1 shl	PSCALE					; Min capacity of deque object
+MAXCAP		= 1 shl 63						; Max capacity of deque object
 
 ;==============================================================================;
 ;       Offsets inside deque object                                            ;
@@ -329,157 +331,6 @@ space	= 3 * 8								; stack size required by the procedure
 		ret
 
 ;******************************************************************************;
-;       Add elements from one deque to another                                 ;
-;******************************************************************************;
-macro	ADD_DATA	cmd1, cmd2, offst
-{
-;---[Parameters]---------------------------
-target	equ		rdi							; pointer to target deque object
-source	equ		rsi							; pointer to source deque object
-pos		equ		rdx							; beginning position
-count	equ		rcx							; count of nodes to copy
-;---[Internal variables]-------------------
-sarray	equ		r8							; pointer to source array of nodes
-scap	equ		r9							; source object capacity
-siter	equ		source						; iterator value for source object
-tarray	equ		r10							; pointer to target array of nodes
-tcap	equ		r11							; target object capacity
-titer	equ		target						; iterator value for target object
-bhead	equ		rax							; block head
-btail	equ		rdx							; block tail
-ptr		equ		rsi							; temporary pointer
-temp	equ		xmm0						; temporary register
-stack	equ		rsp							; stack pointer
-s_tgt	equ		stack + 0 * 8				; stack position of "target" variable
-space	= 1 * 8								; stack size required by the procedure
-;------------------------------------------
-		sub		stack, space				; reserving stack size for local vars
-		mov		[s_tgt], target				; save "target" variable into the stack
-		add		[target + SIZE], count		; size += count
-		mov		sarray, [source + ARRAY]	; get pointer to source array of nodes
-		mov		scap, [source + CAPACITY]	; get source object capacity
-		mov		siter, [source + offst]		; get iterator value for source object
-		mov		tarray, [target + ARRAY]	; get pointer to target array of nodes
-		mov		tcap, [target + CAPACITY]	; get target object capacity
-		mov		titer, [target + offst]		; get iterator value for target object
-		sub		scap, 1						; scap -= 1
-		sub		tcap, 1						; tcap -= 1
-		cmd1	siter, pos
-		cmd1	siter, count				; change source iterator value
-		and		siter, scap					; siter &= scap
-		mov		btail, siter				; btail = siter
-;---[Copying loop]-------------------------
-.loop:	cmd2	siter, KSIZE				; change source iterator value
-		cmd2	titer, KSIZE				; change target iterator value
-		and		siter, scap					; siter &= scap
-		and		titer, tcap					; titer &= tcap
-		movdqa	temp, [sarray + siter]
-		movdqa	[tarray + titer], temp		; array[titer] = source.array[siter]
-		sub		count, KSIZE				; count--
-		jnz		.loop						; do while (count != 0)
-;---[End of loop]--------------------------
-		mov		bhead, siter				; bhead = siter
-		mov		ptr, [s_tgt]				; get "target" variable from the stack
-		mov		[ptr + offst], titer		; update iterator value
-		add		stack, space				; restoring back the stack pointer
-		ret
-}
-AddHead:	ADD_DATA	add, sub, HEAD
-AddTail:	ADD_DATA	sub, add, TAIL
-
-;******************************************************************************;
-;       Delete elements from the deque                                         ;
-;******************************************************************************;
-macro	HEAD_BLOCK
-{
-		mov		size1, bhead
-		mov		size2, tail
-		sub		size1, head
-		sub		size2, btail
-		add		size2, KSIZE
-		and		size1, cap					; size1 = (bhead - head) & cap
-		and		size2, cap					; size2 = (tail - btail + 1) & cap
-}
-;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	TAIL_BLOCK
-{
-		mov		size1, tail
-		mov		size2, btail
-		sub		size1, bhead
-		sub		size2, head
-		add		size2, KSIZE
-		and		size1, cap					; size1 = (tail - bhead) & cap
-		and		size2, cap					; size2 = (btail - head + 1) & cap
-}
-;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	DELETE_DATA		getsize, cmd1, cmd2, offst1, offst2
-{
-;---[Parameters]---------------------------
-this	equ		rdi							; pointer to deque object
-bhead	equ		rsi							; block head
-btail	equ		rdx							; block tail
-count	equ		rcx							; count of nodes to delete
-;---[Internal variables]-------------------
-array	equ		rcx							; pointer to array of nodes
-head	equ		r8							; pointer to deque head
-tail	equ		r9							; pointer to deque tail
-size1	equ		r10							; size of first sequence
-size2	equ		r11							; size of second sequence
-cap		equ		rax							; object capacity
-temp	equ		xmm0						; temporary register
-;------------------------------------------
-		mov		cap, [this + CAPACITY]		; get object capacity
-		sub		[this + SIZE], count		; size -= count
-		jz		.empty						; if (size == 0), then set empty values
-		mov		array, [this + ARRAY]		; get pointer to array of nodes
-		mov		head, [this + HEAD]			; get head pointer
-		mov		tail, [this + TAIL]			; get tail pointer
-		sub		cap, 1						; cap -= 1
-		getsize								; invoke size computing code
-		cmp		size1, size2				; if (size1 > size2)
-		ja		.else						;     then go to else branch
-;---[if size1 <= size2]--------------------
-		test	size1, size1				; if (size1 == 0)
-		jz		@f							;     then skip deleting loop
-;---[Deleting loop]------------------------
-.loop1:	cmd1	bhead, KSIZE				; change block head iterator value
-		cmd1	btail, KSIZE				; change block tail iterator value
-		and		bhead, cap					; bhead &= cap
-		and		btail, cap					; btail &= cap
-		movdqa	temp, [array + bhead]
-		movdqa	[array + btail], temp		; array[btail] = source.array[bhead]
-		sub		size1, KSIZE				; size1--
-		jnz		.loop1						; do while (size1 != 0)
-;---[End of loop]--------------------------
-@@:		mov		[this + offst1], btail		; update iterator value
-		ret
-;---[else]---------------------------------
-.else:	test	size2, size2				; if (size2 == 0)
-		jz		@f							;     then skip deleting loop
-;---[Deleting loop]------------------------
-.loop2:	movdqa	temp, [array + btail]
-		movdqa	[array + bhead], temp		; array[bhead] = source.array[btail]
-		cmd2	btail, KSIZE				; change block tail iterator value
-		cmd2	bhead, KSIZE				; change block head iterator value
-		and		btail, cap					; btail &= cap
-		and		bhead, cap					; bhead &= cap
-		sub		size2, KSIZE				; size2--
-		jnz		.loop2						; do while (size2 != 0)
-;---[End of loop]--------------------------
-@@:		cmd1	bhead, KSIZE				; change block head iterator value
-		and		bhead, cap					; bhead &= cap
-		mov		[this + offst2], bhead		; update iterator value
-		ret
-;---[Clear the deque if empty]-------------
-.empty:	sub		cap, KSIZE
-		mov		qword [this + HEAD], 0		; head = 0
-		mov		qword [this + TAIL], cap	; tail = cap - 1
-		ret
-}
-DeleteHead:	DELETE_DATA		HEAD_BLOCK, sub, add, HEAD, TAIL
-DeleteTail:	DELETE_DATA		TAIL_BLOCK, add, sub, TAIL, HEAD
-
-;******************************************************************************;
 ;       Constructor                                                            ;
 ;******************************************************************************;
 Constructor:
@@ -496,7 +347,7 @@ space	= 3 * 8								; stack size required by the procedure
 		sub		stack, space				; reserving stack size for local vars
 		mov		[s_this], this				; save "this" variable into the stack
 		shl		cap, KSCALE
-	Capacity	cap, array					; compute capacity of the object
+	Capacity	cap, array, MINCAP, MAXCAP	; compute capacity of the object
 		mov		[s_cap], cap				; save "cap" variable into the stack
 ;---[Allocate memory for the object]-------
 		mov		sc_prm6, 0
@@ -615,6 +466,151 @@ space	= 1 * 8								; stack size required by the procedure
 ;******************************************************************************;
 ;       Copying elements                                                       ;
 ;******************************************************************************;
+macro	ADD_DATA	cmd1, cmd2, offst
+{
+;---[Parameters]---------------------------
+target	equ		rdi							; pointer to target deque object
+source	equ		rsi							; pointer to source deque object
+pos		equ		rdx							; beginning position
+count	equ		rcx							; count of nodes to copy
+;---[Internal variables]-------------------
+sarray	equ		r8							; pointer to source array of nodes
+scap	equ		r9							; source object capacity
+siter	equ		source						; iterator value for source object
+tarray	equ		r10							; pointer to target array of nodes
+tcap	equ		r11							; target object capacity
+titer	equ		target						; iterator value for target object
+bhead	equ		rax							; block head
+btail	equ		rdx							; block tail
+ptr		equ		rsi							; temporary pointer
+temp	equ		xmm0						; temporary register
+stack	equ		rsp							; stack pointer
+s_tgt	equ		stack + 0 * 8				; stack position of "target" variable
+space	= 1 * 8								; stack size required by the procedure
+;------------------------------------------
+		sub		stack, space				; reserving stack size for local vars
+		mov		[s_tgt], target				; save "target" variable into the stack
+		add		[target + SIZE], count		; size += count
+		mov		sarray, [source + ARRAY]	; get pointer to source array of nodes
+		mov		scap, [source + CAPACITY]	; get source object capacity
+		mov		siter, [source + offst]		; get iterator value for source object
+		mov		tarray, [target + ARRAY]	; get pointer to target array of nodes
+		mov		tcap, [target + CAPACITY]	; get target object capacity
+		mov		titer, [target + offst]		; get iterator value for target object
+		sub		scap, 1						; scap -= 1
+		sub		tcap, 1						; tcap -= 1
+		cmd1	siter, pos
+		cmd1	siter, count				; change source iterator value
+		and		siter, scap					; siter &= scap
+		mov		btail, siter				; btail = siter
+;---[Copying loop]-------------------------
+.loop:	cmd2	siter, KSIZE				; change source iterator value
+		cmd2	titer, KSIZE				; change target iterator value
+		and		siter, scap					; siter &= scap
+		and		titer, tcap					; titer &= tcap
+		movdqa	temp, [sarray + siter]
+		movdqa	[tarray + titer], temp		; array[titer] = source.array[siter]
+		sub		count, KSIZE				; count--
+		jnz		.loop						; do while (count != 0)
+;---[End of loop]--------------------------
+		mov		bhead, siter				; bhead = siter
+		mov		ptr, [s_tgt]				; get "target" variable from the stack
+		mov		[ptr + offst], titer		; update iterator value
+		add		stack, space				; restoring back the stack pointer
+		ret
+}
+AddHead:	ADD_DATA	add, sub, HEAD
+AddTail:	ADD_DATA	sub, add, TAIL
+;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+macro	HEAD_BLOCK
+{
+		mov		size1, bhead
+		mov		size2, tail
+		sub		size1, head
+		sub		size2, btail
+		add		size2, KSIZE
+		and		size1, cap					; size1 = (bhead - head) & cap
+		and		size2, cap					; size2 = (tail - btail + 1) & cap
+}
+;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+macro	TAIL_BLOCK
+{
+		mov		size1, tail
+		mov		size2, btail
+		sub		size1, bhead
+		sub		size2, head
+		add		size2, KSIZE
+		and		size1, cap					; size1 = (tail - bhead) & cap
+		and		size2, cap					; size2 = (btail - head + 1) & cap
+}
+;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+macro	DELETE_DATA		getsize, cmd1, cmd2, offst1, offst2
+{
+;---[Parameters]---------------------------
+this	equ		rdi							; pointer to deque object
+bhead	equ		rsi							; block head
+btail	equ		rdx							; block tail
+count	equ		rcx							; count of nodes to delete
+;---[Internal variables]-------------------
+array	equ		rcx							; pointer to array of nodes
+head	equ		r8							; pointer to deque head
+tail	equ		r9							; pointer to deque tail
+size1	equ		r10							; size of first sequence
+size2	equ		r11							; size of second sequence
+cap		equ		rax							; object capacity
+temp	equ		xmm0						; temporary register
+;------------------------------------------
+		mov		cap, [this + CAPACITY]		; get object capacity
+		sub		[this + SIZE], count		; size -= count
+		jz		.empty						; if (size == 0), then set empty values
+		mov		array, [this + ARRAY]		; get pointer to array of nodes
+		mov		head, [this + HEAD]			; get head pointer
+		mov		tail, [this + TAIL]			; get tail pointer
+		sub		cap, 1						; cap -= 1
+		getsize								; invoke size computing code
+		cmp		size1, size2				; if (size1 > size2)
+		ja		.else						;     then go to else branch
+;---[if size1 <= size2]--------------------
+		test	size1, size1				; if (size1 == 0)
+		jz		@f							;     then skip deleting loop
+;---[Deleting loop]------------------------
+.loop1:	cmd1	bhead, KSIZE				; change block head iterator value
+		cmd1	btail, KSIZE				; change block tail iterator value
+		and		bhead, cap					; bhead &= cap
+		and		btail, cap					; btail &= cap
+		movdqa	temp, [array + bhead]
+		movdqa	[array + btail], temp		; array[btail] = source.array[bhead]
+		sub		size1, KSIZE				; size1--
+		jnz		.loop1						; do while (size1 != 0)
+;---[End of loop]--------------------------
+@@:		mov		[this + offst1], btail		; update iterator value
+		ret
+;---[else]---------------------------------
+.else:	test	size2, size2				; if (size2 == 0)
+		jz		@f							;     then skip deleting loop
+;---[Deleting loop]------------------------
+.loop2:	movdqa	temp, [array + btail]
+		movdqa	[array + bhead], temp		; array[bhead] = source.array[btail]
+		cmd2	btail, KSIZE				; change block tail iterator value
+		cmd2	bhead, KSIZE				; change block head iterator value
+		and		btail, cap					; btail &= cap
+		and		bhead, cap					; bhead &= cap
+		sub		size2, KSIZE				; size2--
+		jnz		.loop2						; do while (size2 != 0)
+;---[End of loop]--------------------------
+@@:		cmd1	bhead, KSIZE				; change block head iterator value
+		and		bhead, cap					; bhead &= cap
+		mov		[this + offst2], bhead		; update iterator value
+		ret
+;---[Clear the deque if empty]-------------
+.empty:	sub		cap, KSIZE
+		mov		qword [this + HEAD], 0		; head = 0
+		mov		qword [this + TAIL], cap	; tail = cap - 1
+		ret
+}
+DeleteHead:	DELETE_DATA		HEAD_BLOCK, sub, add, HEAD, TAIL
+DeleteTail:	DELETE_DATA		TAIL_BLOCK, add, sub, TAIL, HEAD
+;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 macro	COPY_MOVE	copyfunc, delfunc, move
 {
 ;---[Parameters]---------------------------
@@ -655,7 +651,7 @@ space	= 5 * 8								; stack size required by the procedure
 		mov		[s_src], source				; save "source" variable into the stack
 		mov		[s_pos], pos				; save "pos" variable into the stack
 		add		size, count					; size += count
-	Capacity	size, count					; compute new capacity of target object
+	Capacity	size, count, MINCAP, MAXCAP	; compute new capacity of target object
 		cmp		size, [this + CAPACITY]		; if (size > capacity)
 		ja		.ext						;     then try to extend object capacity
 ;---[Copy elements to target object]-------
@@ -735,13 +731,18 @@ space	= 3 * 8								; stack size required by the procedure
 		mov		[s_this], this				; save "this" variable into the stack
 		mov		[s_data], data				; save "data" variable into the stack
 		lea		param2, [cap * 2]
+	Capacity	param2, iter, MINCAP, MAXCAP; compute new capacity of target object
+		cmp		param2, [this + CAPACITY]	; if (newcapacity <= capacity)
+		jbe		.error						;     then go to error branch
 		call	Extend						; status = this.Extend (cap * 2)
 		mov		this, [s_this]				; get "this" variable from the stack
 		mov		data, [s_data]				; get "data" variable from the stack
-		add		stack, space				; restoring back the stack pointer
 		mov		cap, [this + CAPACITY]		; get object capacity
 		test	status, status
 		jnz		.back						; if (status), then go back
+;---[Error branch]-------------------------
+.error:	add		stack, space				; restoring back the stack pointer
+		xor		status, status				; return false
 		ret
 }
 InsertIntoHead:	INSERT	sub, HEAD
@@ -1507,12 +1508,12 @@ s_total	equ		stack + 6 * 8				; stack position of "total" variable
 space	= 7 * 8								; stack size required by the procedure
 ;------------------------------------------
 		sub		stack, space				; reserving stack size for local vars
+		mov		qword [s_total], 0			; total = 0
 ;---[Check position]-----------------------
 		shl		pos, KSCALE
 		mov		size, [this + SIZE]			; get object size
 		sub		size, pos					; if (size <= pos)
-		jbe		.error						;     then go to error branch
-		mov		qword [s_total], 0			; total = 0
+		jbe		.exit						;     then go to exit
 ;---[Correct count]------------------------
 		shl		count, KSCALE
 		cmp		count, size					; if (count > size)
@@ -1552,10 +1553,6 @@ space	= 7 * 8								; stack size required by the procedure
 .exit:	mov		result, [s_total]
 		add		stack, space				; restoring back the stack pointer
 		ret									; return total
-;---[Error branch]-------------------------
-.error:	add		stack, space				; restoring back the stack pointer
-		mov		result, ERROR				; return ERROR
-		ret
 }
 CountKeyHead:	COUNT_KEY	add, HEAD
 CountKeyTail:	COUNT_KEY	sub, TAIL
@@ -1590,12 +1587,12 @@ s_total	equ		stack + 7 * 8				; stack position of "total" variable
 space	= 9 * 8								; stack size required by the procedure
 ;------------------------------------------
 		sub		stack, space				; reserving stack size for local vars
+		mov		qword [s_total], 0			; total = 0
 ;---[Check position]-----------------------
 		shl		pos, KSCALE
 		mov		size, [this + SIZE]			; get object size
 		sub		size, pos					; if (size <= pos)
-		jbe		.error						;     then go to error branch
-		mov		qword [s_total], 0			; total = 0
+		jbe		.exit						;     then go to exit
 ;---[Correct count]------------------------
 		shl		count, KSCALE
 		cmp		count, size					; if (count > size)
@@ -1639,10 +1636,6 @@ space	= 9 * 8								; stack size required by the procedure
 .exit:	mov		result, [s_total]
 		add		stack, space				; restoring back the stack pointer
 		ret									; return total
-;---[Error branch]-------------------------
-.error:	add		stack, space				; restoring back the stack pointer
-		mov		result, ERROR				; return ERROR
-		ret
 }
 CountKeysHead:	COUNT_KEYS	add, HEAD
 CountKeysTail:	COUNT_KEYS	sub, TAIL

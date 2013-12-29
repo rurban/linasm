@@ -128,7 +128,7 @@ public	MergeMax			as	'_ZN7MaxHeap5MergeEPKS_'
 ;       Heap properties                                                        ;
 ;******************************************************************************;
 
-; Heap compare function
+; Heap key compare function
 public	GetCompareFunction	as	'MinHeap_CompareFunction'
 public	GetCompareFunction	as	'MaxHeap_CompareFunction'
 public	GetCompareFunction	as	'_ZNK7MinHeap15CompareFunctionEv'
@@ -162,6 +162,8 @@ section	'.text'		executable align 16
 ;******************************************************************************;
 KSCALE		= 4								; Key scale factor
 KSIZE		= 1 shl KSCALE					; Size of key (bytes)
+MINCAP		= 1 shl	PSCALE					; Min capacity of heap object
+MAXCAP		= 1 shl 63						; Max capacity of heap object
 
 ;==============================================================================;
 ;       Offsets inside heap object                                             ;
@@ -368,7 +370,7 @@ space	= 3 * 8								; stack size required by the procedure
 		mov		[s_this], this				; save "this" variable into the stack
 		mov		[s_func], func				; save "func" variable into the stack
 		shl		cap, KSCALE
-	Capacity	cap, array					; compute capacity of the object
+	Capacity	cap, array, MINCAP, MAXCAP	; compute capacity of the object
 		mov		[s_cap], cap				; save "cap" variable into the stack
 ;---[Allocate memory for the object]-------
 		mov		sc_prm6, 0
@@ -513,13 +515,18 @@ space	= 3 * 8								; stack size required by the procedure
 		mov		[s_data], data				; save "data" variable into the stack
 		mov		param2, [this + CAPACITY]
 		shl		param2, 1
+	Capacity	param2, size, MINCAP, MAXCAP; compute new capacity of target object
+		cmp		param2, [this + CAPACITY]	; if (newcapacity <= capacity)
+		jbe		.error						;     then go to error branch
 		call	Extend						; status = this.Extend (cap * 2)
 		mov		this, [s_this]				; get "this" variable from the stack
 		mov		data, [s_data]				; get "data" variable from the stack
-		add		stack, space				; restoring back the stack pointer
 		mov		size, [this + SIZE]			; get object size
 		test	status, status
 		jnz		.back						; if (status), then go back
+;---[Error branch]-------------------------
+.error:	add		stack, space				; restoring back the stack pointer
+		xor		status, status				; return false
 		ret
 }
 PushDataMin:	PUSH_DATA	SiftMinUp
@@ -893,12 +900,12 @@ s_total	equ		stack + 4 * 8				; stack position of "total" variable
 space	= 5 * 8
 ;------------------------------------------
 		sub		stack, space				; reserving stack size for local vars
+		mov		qword [s_total], 0			; total = 0
 ;---[Check position]-----------------------
 		shl		pos, KSCALE
 		mov		size, [this + SIZE]			; get object size
 		sub		size, pos					; if (size <= pos)
-		jbe		.error						;     then go to error branch
-		mov		qword [s_total], 0			; total = 0
+		jbe		.exit						;     then go to exit
 ;---[Correct count]------------------------
 		shl		count, KSCALE
 		cmp		count, size					; if (count > size)
@@ -929,10 +936,6 @@ space	= 5 * 8
 .exit:	mov		result, [s_total]
 		add		stack, space				; restoring back the stack pointer
 		ret									; return total
-;---[Error branch]-------------------------
-.error:	add		stack, space				; restoring back the stack pointer
-		mov		result, ERROR				; return ERROR
-		ret
 
 ;==============================================================================;
 ;       Keys set counting                                                      ;
@@ -959,12 +962,12 @@ s_total	equ		stack + 5 * 8				; stack position of "total" variable
 space	= 7 * 8
 ;------------------------------------------
 		sub		stack, space				; reserving stack size for local vars
+		mov		qword [s_total], 0			; total = 0
 ;---[Check position]-----------------------
 		shl		pos, KSCALE
 		mov		size, [this + SIZE]			; get object size
 		sub		size, pos					; if (size <= pos)
-		jbe		.error						;     then go to error branch
-		mov		qword [s_total], 0			; total = 0
+		jbe		.exit						;     then go to exit
 ;---[Correct count]------------------------
 		shl		count, KSCALE
 		cmp		count, size					; if (count > size)
@@ -999,10 +1002,6 @@ space	= 7 * 8
 .exit:	mov		result, [s_total]
 		add		stack, space				; restoring back the stack pointer
 		ret									; return total
-;---[Error branch]-------------------------
-.error:	add		stack, space				; restoring back the stack pointer
-		mov		result, ERROR				; return ERROR
-		ret
 
 ;******************************************************************************;
 ;       Merging of heaps                                                       ;
@@ -1122,7 +1121,7 @@ space	= 5 * 8								; stack size required by the procedure
 		mov		[s_this], this				; save "this" variable into the stack
 		mov		[s_src], source				; save "source" variable into the stack
 		mov		[s_size], size				; save "size" variable into the stack
-	Capacity	size, ptr					; compute new capacity of target object
+	Capacity	size, ptr, MINCAP, MAXCAP	; compute new capacity of target object
 		cmp		size, [this + CAPACITY]		; if (size > capacity)
 		ja		.ext						;     then try to extend object capacity
 ;---[Copy nodes content]-------------------

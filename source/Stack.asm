@@ -176,6 +176,8 @@ section	'.text'		executable align 16
 ;******************************************************************************;
 KSCALE		= 4								; Key scale factor
 KSIZE		= 1 shl KSCALE					; Size of key (bytes)
+MINCAP		= 1 shl	PSCALE					; Min capacity of stack object
+MAXCAP		= 1 shl 63						; Max capacity of stack object
 
 ;==============================================================================;
 ;       Offsets inside stack object                                            ;
@@ -269,67 +271,6 @@ space	= 3 * 8								; stack size required by the procedure
 		ret
 
 ;******************************************************************************;
-;       Add elements from one stack to another                                 ;
-;******************************************************************************;
-AddData:
-;---[Parameters]---------------------------
-target	equ		rdi							; pointer to target stack object
-source	equ		rsi							; pointer to source stack object
-pos		equ		rdx							; beginning position
-count	equ		rcx							; count of nodes to copy
-;---[Internal variables]-------------------
-sarray	equ		r8							; pointer to source array of nodes
-tarray	equ		r9							; pointer to target array of nodes
-bhead	equ		rax							; block head
-btail	equ		rdx							; block tail
-stack	equ		rsp							; stack pointer
-s_sarr	equ		stack + 0 * 8				; stack position of "sarray" variable
-s_count	equ		stack + 1 * 8				; stack position of "count" variable
-space	= 3 * 8								; stack size required by the procedure
-;------------------------------------------
-		sub		stack, space				; reserving stack size for local vars
-		add		pos, count					; pos += count
-		mov		sarray, [source + ARRAY]	; get pointer to source array of nodes
-		add		sarray, [source + SIZE]
-		sub		sarray, pos					; sarray = sarray + source.size - (pos + count)
-		mov		tarray, [target + ARRAY]	; get pointer to target array of nodes
-		add		tarray, [target + SIZE]		; tarray = tarray + target.size
-		add		[target + SIZE], count		; size += count
-		mov		[s_sarr], sarray			; save "sarray" variable into the stack
-		mov		[s_count], count			; save "count" variable into the stack
-;---[Copy stack data]----------------------
-		mov		param3, count
-		mov		param2, sarray
-		mov		param1, tarray
-		call	Copy						; call Copy (tarray, sarray, count)
-		mov		btail, [s_count]
-		mov		bhead, [s_sarr]				; bhead = sarray
-		add		btail, bhead				; btail = sarray + count
-		add		stack, space				; restoring back the stack pointer
-		ret
-
-;******************************************************************************;
-;       Delete elements from the stack                                         ;
-;******************************************************************************;
-DeleteData:
-;---[Parameters]---------------------------
-this	equ		rdi							; pointer to deque object
-bhead	equ		rsi							; block head
-btail	equ		rdx							; block tail
-count	equ		rcx							; count of nodes to delete
-;---[Internal variables]-------------------
-size	equ		rax							; count of elements to shift down
-;------------------------------------------
-		mov		size, [this + ARRAY]		; get pointer to array of nodes
-		add		size, [this + SIZE]
-		sub		size, btail					; size = array + size - btail
-		sub		[this + SIZE], count		; size -= count
-		mov		param1, bhead
-		mov		param2, btail
-		mov		param3, size
-		jmp		Copy						; return Copy (bhead, btail, size)
-
-;******************************************************************************;
 ;       Constructor                                                            ;
 ;******************************************************************************;
 Constructor:
@@ -346,7 +287,7 @@ space	= 3 * 8								; stack size required by the procedure
 		sub		stack, space				; reserving stack size for local vars
 		mov		[s_this], this				; save "this" variable into the stack
 		shl		cap, KSCALE
-	Capacity	cap, array					; compute capacity of the object
+	Capacity	cap, array, MINCAP, MAXCAP	; compute capacity of the object
 		mov		[s_cap], cap				; save "cap" variable into the stack
 ;---[Allocate memory for the object]-------
 		mov		sc_prm6, 0
@@ -452,6 +393,61 @@ space	= 1 * 8								; stack size required by the procedure
 ;******************************************************************************;
 ;       Copying elements                                                       ;
 ;******************************************************************************;
+AddData:
+;---[Parameters]---------------------------
+target	equ		rdi							; pointer to target stack object
+source	equ		rsi							; pointer to source stack object
+pos		equ		rdx							; beginning position
+count	equ		rcx							; count of nodes to copy
+;---[Internal variables]-------------------
+sarray	equ		r8							; pointer to source array of nodes
+tarray	equ		r9							; pointer to target array of nodes
+bhead	equ		rax							; block head
+btail	equ		rdx							; block tail
+stack	equ		rsp							; stack pointer
+s_sarr	equ		stack + 0 * 8				; stack position of "sarray" variable
+s_count	equ		stack + 1 * 8				; stack position of "count" variable
+space	= 3 * 8								; stack size required by the procedure
+;------------------------------------------
+		sub		stack, space				; reserving stack size for local vars
+		add		pos, count					; pos += count
+		mov		sarray, [source + ARRAY]	; get pointer to source array of nodes
+		add		sarray, [source + SIZE]
+		sub		sarray, pos					; sarray = sarray + source.size - (pos + count)
+		mov		tarray, [target + ARRAY]	; get pointer to target array of nodes
+		add		tarray, [target + SIZE]		; tarray = tarray + target.size
+		add		[target + SIZE], count		; size += count
+		mov		[s_sarr], sarray			; save "sarray" variable into the stack
+		mov		[s_count], count			; save "count" variable into the stack
+;---[Copy stack data]----------------------
+		mov		param3, count
+		mov		param2, sarray
+		mov		param1, tarray
+		call	Copy						; call Copy (tarray, sarray, count)
+		mov		btail, [s_count]
+		mov		bhead, [s_sarr]				; bhead = sarray
+		add		btail, bhead				; btail = sarray + count
+		add		stack, space				; restoring back the stack pointer
+		ret
+;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+DeleteData:
+;---[Parameters]---------------------------
+this	equ		rdi							; pointer to deque object
+bhead	equ		rsi							; block head
+btail	equ		rdx							; block tail
+count	equ		rcx							; count of nodes to delete
+;---[Internal variables]-------------------
+size	equ		rax							; count of elements to shift down
+;------------------------------------------
+		mov		size, [this + ARRAY]		; get pointer to array of nodes
+		add		size, [this + SIZE]
+		sub		size, btail					; size = array + size - btail
+		sub		[this + SIZE], count		; size -= count
+		mov		param1, bhead
+		mov		param2, btail
+		mov		param3, size
+		jmp		Copy						; return Copy (bhead, btail, size)
+;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 macro	COPY_MOVE	copyfunc, delfunc, move
 {
 ;---[Parameters]---------------------------
@@ -492,7 +488,7 @@ space	= 5 * 8								; stack size required by the procedure
 		mov		[s_src], source				; save "source" variable into the stack
 		mov		[s_pos], pos				; save "pos" variable into the stack
 		add		size, count					; size += count
-	Capacity	size, count					; compute new capacity of target object
+	Capacity	size, count, MINCAP, MAXCAP	; compute new capacity of target object
 		cmp		size, [this + CAPACITY]		; if (size > capacity)
 		ja		.ext						;     then try to extend object capacity
 ;---[Copy elements to target object]-------
@@ -566,13 +562,18 @@ space	= 3 * 8								; stack size required by the procedure
 		mov		[s_data], data				; save "data" variable into the stack
 		mov		param2, [this + CAPACITY]
 		shl		param2, 1
+	Capacity	param2, iter, MINCAP, MAXCAP; compute new capacity of target object
+		cmp		param2, [this + CAPACITY]	; if (newcapacity <= capacity)
+		jbe		.error						;     then go to error branch
 		call	Extend						; status = this.Extend (cap * 2)
 		mov		this, [s_this]				; get "this" variable from the stack
 		mov		data, [s_data]				; get "data" variable from the stack
-		add		stack, space				; restoring back the stack pointer
 		mov		size, [this + SIZE]			; get object size
 		test	status, status
 		jnz		.back						; if (status), then go back
+;---[Error branch]-------------------------
+.error:	add		stack, space				; restoring back the stack pointer
+		xor		status, status				; return false
 		ret
 
 ;******************************************************************************;
@@ -1181,12 +1182,12 @@ s_total	equ		stack + 4 * 8				; stack position of "total" variable
 space	= 5 * 8
 ;------------------------------------------
 		sub		stack, space				; reserving stack size for local vars
+		mov		qword [s_total], 0			; total = 0
 ;---[Check position]-----------------------
 		shl		pos, KSCALE
 		mov		size, [this + SIZE]			; get object size
 		sub		size, pos					; if (size <= pos)
-		jbe		.error						;     then go to error branch
-		mov		qword [s_total], 0			; total = 0
+		jbe		.exit						;     then go to exit
 ;---[Correct count]------------------------
 		shl		count, KSCALE
 		cmp		count, size					; if (count > size)
@@ -1218,10 +1219,6 @@ space	= 5 * 8
 .exit:	mov		result, [s_total]
 		add		stack, space				; restoring back the stack pointer
 		ret									; return total
-;---[Error branch]-------------------------
-.error:	add		stack, space				; restoring back the stack pointer
-		mov		result, ERROR				; return ERROR
-		ret
 
 ;==============================================================================;
 ;       Keys set counting                                                      ;
@@ -1248,12 +1245,12 @@ s_total	equ		stack + 5 * 8				; stack position of "total" variable
 space	= 7 * 8
 ;------------------------------------------
 		sub		stack, space				; reserving stack size for local vars
+		mov		qword [s_total], 0			; total = 0
 ;---[Check position]-----------------------
 		shl		pos, KSCALE
 		mov		size, [this + SIZE]			; get object size
 		sub		size, pos					; if (size <= pos)
-		jbe		.error						;     then go to error branch
-		mov		qword [s_total], 0			; total = 0
+		jbe		.exit						;     then go to exit
 ;---[Correct count]------------------------
 		shl		count, KSCALE
 		cmp		count, size					; if (count > size)
@@ -1289,10 +1286,6 @@ space	= 7 * 8
 .exit:	mov		result, [s_total]
 		add		stack, space				; restoring back the stack pointer
 		ret									; return total
-;---[Error branch]-------------------------
-.error:	add		stack, space				; restoring back the stack pointer
-		mov		result, ERROR				; return ERROR
-		ret
 
 ;******************************************************************************;
 ;       Comparison of stacks                                                   ;

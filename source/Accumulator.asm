@@ -81,6 +81,12 @@ section	'.text'		executable align 16
 ;******************************************************************************;
 ;       Consts                                                                 ;
 ;******************************************************************************;
+MINCAP		= 1 shl	PSCALE					; Min capacity of accumulator object
+MAXCAP		= 1 shl 63						; Max capacity of accumulator object
+
+;==============================================================================;
+;       Offsets inside accumulator object                                      ;
+;==============================================================================;
 BUFFER		= 0 * 8							; Offset of buffer pointer
 CAPACITY	= 1 * 8							; Offset of object capacity field
 SIZE		= 2 * 8							; Offset of object size field
@@ -141,7 +147,7 @@ space	= 3 * 8								; stack size required by the procedure
 ;------------------------------------------
 		sub		stack, space				; reserving stack size for local vars
 		mov		[s_this], this				; save "this" variable into the stack
-	Capacity	cap, buffer					; cap = Capacity (cap)
+	Capacity	cap, buffer, MINCAP, MAXCAP	; compute capacity of the object
 		mov		[s_cap], cap				; save "cap" variable into the stack
 ;---[Allocate memory for the object]-------
 		mov		sc_prm6, 0
@@ -262,7 +268,7 @@ s_this	equ		stack + 0 * 8				; stack position of "this" variable
 space	= 1 * 8								; stack size required by the procedure
 ;---[Check object capacity]----------------
 		add		size, [this + SIZE]			; size = this.size + size
-	Capacity	size, result				; size = Capacity (size)
+	Capacity	size, result, MINCAP, MAXCAP; compute new capacity of target object
 		cmp		size, [this + CAPACITY]		; if (size > this.capacity)
 		ja		.ext						;     then try to extend object capacity
 ;---[Return pointer to reserved space]-----
