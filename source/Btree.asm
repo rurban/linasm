@@ -4810,10 +4810,10 @@ space	= 1 * 8								; stack size required by the procedure
 		mov		param2, iter
 		mov		param1, [this + ARRAY]
 		call	func						; result = func (array, iter, pos)
-		cmp		result, EMPTY				; if (result == EMPTY)
-		je		.error						;     then go to error branch
 		mov		this, [s_this]				; get "this" variable from the stack
 		mov		[this + offst], result		; update iterator position
+		cmp		result, EMPTY				; if (result == EMPTY)
+		je		.error						;     then go to error branch
 ;---[Normal exit branch]-------------------
 .exit:	add		stack, space				; restoring back the stack pointer
 		mov		status, 1					; return true
