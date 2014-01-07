@@ -338,8 +338,7 @@ array	equ		rax							; pointer to array of nodes
 ;******************************************************************************;
 ;       Pool properties                                                        ;
 ;******************************************************************************;
-macro	GET_PARAM	param
-{
+GetCapacity:
 ;---[Parameters]---------------------------
 this	equ		rdi							; pointer to pool object
 ;---[Internal variables]-------------------
@@ -347,12 +346,21 @@ result	equ		rax							; result register
 high	equ		rdx							; high part of value for div operation
 ;------------------------------------------
 		xor		high, high					; high = 0
-		mov		result, [this + param]		; get object parameter
+		mov		result, [this + CAPACITY]	; get object capacity
 		div		qword [this + BSIZE]		; return param / bsize
 		ret
-}
-GetCapacity:	GET_PARAM	CAPACITY
-GetSize:		GET_PARAM	SIZE
+;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+GetSize:
+;---[Parameters]---------------------------
+this	equ		rdi							; pointer to pool object
+;---[Internal variables]-------------------
+result	equ		rax							; result register
+high	equ		rdx							; high part of value for div operation
+;------------------------------------------
+		xor		high, high					; high = 0
+		mov		result, [this + SIZE]		; get object size
+		div		qword [this + BSIZE]		; return param / bsize
+		ret
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 IsEmpty:
 ;---[Parameters]---------------------------

@@ -163,7 +163,6 @@ section	'.text'		executable align 16
 KSCALE		= 4								; Key scale factor
 KSIZE		= 1 shl KSCALE					; Size of key (bytes)
 MINCAP		= 1 shl	PSCALE					; Min capacity of heap object
-MAXCAP		= 1 shl 63						; Max capacity of heap object
 
 ;==============================================================================;
 ;       Offsets inside heap object                                             ;
@@ -370,7 +369,7 @@ space	= 3 * 8								; stack size required by the procedure
 		mov		[s_this], this				; save "this" variable into the stack
 		mov		[s_func], func				; save "func" variable into the stack
 		shl		cap, KSCALE
-	Capacity	cap, array, MINCAP, MAXCAP	; compute capacity of the object
+	Capacity	cap, array, MINCAP			; compute capacity of the object
 		mov		[s_cap], cap				; save "cap" variable into the stack
 ;---[Allocate memory for the object]-------
 		mov		sc_prm6, 0
@@ -515,15 +514,17 @@ space	= 3 * 8								; stack size required by the procedure
 		mov		[s_data], data				; save "data" variable into the stack
 		mov		param2, [this + CAPACITY]
 		shl		param2, 1
-	Capacity	param2, size, MINCAP, MAXCAP; compute new capacity of target object
+	Capacity	param2, size, MINCAP		; compute new capacity of target object
 		cmp		param2, [this + CAPACITY]	; if (newcapacity <= capacity)
 		jbe		.error						;     then go to error branch
 		call	Extend						; status = this.Extend (cap * 2)
 		mov		this, [s_this]				; get "this" variable from the stack
 		mov		data, [s_data]				; get "data" variable from the stack
 		mov		size, [this + SIZE]			; get object size
+		add		stack, space				; restoring back the stack pointer
 		test	status, status
 		jnz		.back						; if (status), then go back
+		ret									;              else return false
 ;---[Error branch]-------------------------
 .error:	add		stack, space				; restoring back the stack pointer
 		xor		status, status				; return false
@@ -579,34 +580,39 @@ data	equ		rsi							; pointer to data structure
 pos		equ		rdx							; position of element to set
 ;---[Internal variables]-------------------
 status	equ		al							; operation status
-array	equ		rax							; pointer to array of nodes
+result	equ		rax							; result register
 func	equ		r8							; compare function
 temp	equ		xmm0						; temporary register
 stack	equ		rsp							; stack pointer
 s_this	equ		stack + 0 * 8				; stack position of "this" variable
 s_data	equ		stack + 1 * 8				; stack position of "data" variable
 s_pos	equ		stack + 2 * 8				; stack position of "pos" variable
-space	= 3 * 8								; stack size required by the procedure
+s_ptr	equ		stack + 3 * 8				; stack position of "ptr" variable
+space	= 5 * 8								; stack size required by the procedure
 ;------------------------------------------
 		sub		stack, space				; reserving stack size for local vars
 ;---[Check position]-----------------------
 		shl		pos, KSCALE
 		cmp		[this + SIZE], pos			; if (size <= pos)
-		jbe		.error						;     then go to error branch
+		setnbe	status						;     return false
+		jbe		.exit
 ;---[Normal execution branch]--------------
 		mov		[s_this], this				; save "this" variable into the stack
 		mov		[s_data], data				; save "data" variable into the stack
-		mov		[s_pos], pos				; save "pos" variable into the stack
-		mov		array, [this + ARRAY]		; get pointer to array of nodes
 		mov		func, [this + FUNC]			; get pointer to compare function
-		mov		param2, [data]
-		mov		param1, [array + pos]
-		call	func						; result = Compare (array[pos].key, data.key)
+		mov		[s_pos], pos				; save "pos" variable into the stack
+		add		pos, [this + ARRAY]			; pos += array
+		mov		[s_ptr], pos				; save "ptr" variable into the stack
+;---[Compare keys]-------------------------
+		mov		param1, [data]
+		mov		param2, [pos]
+		call	func						; result = Compare (data.key, array[pos].key)
 		mov		this, [s_this]				; get "this" variable from the stack
 		mov		data, [s_data]				; get "data" variable from the stack
 		movdqu	temp, [data]				; temp = data[0]
-		cmp		result, 0					; if (result cond 0)
-		j#c		.else						;     then go to else branch
+		cmp		result, 0					; if (result == 0)
+		je		.skip						;     then go to skip branch
+		j#c		.else						;     else sift the element
 ;---[if result cond 0]---------------------
 		mov		param3, [this + FUNC]
 		mov		param2, [s_pos]
@@ -620,13 +626,15 @@ space	= 3 * 8								; stack size required by the procedure
 		mov		param1, [this + ARRAY]
 		add		stack, space				; restoring back the stack pointer
 		jmp		SiftDown					; return SiftDown (array, size, pos, func, temp)
-;---[Error branch]-------------------------
-.error:	add		stack, space				; restoring back the stack pointer
-		xor		status, status				; return false
+;---[Skip branch]--------------------------
+.skip:	mov		pos, [s_ptr]				; get "ptr" variable from the stack
+		movdqa	[pos], temp					; array[pos].data = data[0]
+		mov		status, 1					; return true
+.exit:	add		stack, space				; restoring back the stack pointer
 		ret
 }
-SetMin:	SET		SiftMinUp, SiftMinDown, l
-SetMax:	SET		SiftMaxUp, SiftMaxDown, g
+SetMin:	SET		SiftMinUp, SiftMinDown, g
+SetMax:	SET		SiftMaxUp, SiftMaxDown, l
 
 ;******************************************************************************;
 ;       Getting element value                                                  ;
@@ -666,36 +674,41 @@ ndata	equ		rdx							; pointer to new data structure
 pos		equ		rcx							; position of element to replace
 ;---[Internal variables]-------------------
 status	equ		al							; operation status
-array	equ		rax							; pointer to array of nodes
+result	equ		rax							; result register
 func	equ		r8							; compare function
 temp	equ		xmm0						; temporary register
 stack	equ		rsp							; stack pointer
 s_this	equ		stack + 0 * 8				; stack position of "this" variable
 s_ndata	equ		stack + 1 * 8				; stack position of "ndata" variable
 s_pos	equ		stack + 2 * 8				; stack position of "pos" variable
-space	= 3 * 8								; stack size required by the procedure
+s_ptr	equ		stack + 3 * 8				; stack position of "ptr" variable
+space	= 5 * 8								; stack size required by the procedure
 ;------------------------------------------
 		sub		stack, space				; reserving stack size for local vars
 ;---[Check position]-----------------------
 		shl		pos, KSCALE
 		cmp		[this + SIZE], pos			; if (size <= pos)
-		jbe		.error						;     then go to error branch
+		setnbe	status						;     return false
+		jbe		.exit
 ;---[Normal execution branch]--------------
 		mov		[s_this], this				; save "this" variable into the stack
 		mov		[s_ndata], ndata			; save "ndata" variable into the stack
-		mov		[s_pos], pos				; save "pos" variable into the stack
-		mov		array, [this + ARRAY]		; get pointer to array of nodes
 		mov		func, [this + FUNC]			; get pointer to compare function
-		movdqa	temp, [array + pos]
-		movdqu	[odata], temp				; odata[0] = array[pos]
-		mov		param2, [ndata]
-		mov		param1, [array + pos]
-		call	func						; result = Compare (array[pos].key, ndata.key)
+		mov		[s_pos], pos				; save "pos" variable into the stack
+		add		pos, [this + ARRAY]			; pos += array
+		mov		[s_ptr], pos				; save "ptr" variable into the stack
+		movdqa	temp, [pos]
+		movdqu	[odata], temp				; odata[0] = array[pos].data
+;---[Compare keys]-------------------------
+		mov		param1, [ndata]
+		mov		param2, [pos]
+		call	func						; result = Compare (ndata[0].key, array[pos].key)
 		mov		this, [s_this]				; get "this" variable from the stack
 		mov		ndata, [s_ndata]			; get "ndata" variable from the stack
 		movdqu	temp, [ndata]				; temp = ndata[0]
-		cmp		result, 0					; if (result cond 0)
-		j#c		.else						;     then go to else branch
+		cmp		result, 0					; if (result == 0)
+		je		.skip						;     then go to skip branch
+		j#c		.else						;     else sift the element
 ;---[if result cond 0]---------------------
 		mov		param3, [this + FUNC]
 		mov		param2, [s_pos]
@@ -704,18 +717,20 @@ space	= 3 * 8								; stack size required by the procedure
 		jmp		SiftUp						; return SiftUp (array, pos, func, temp)
 ;---[else]---------------------------------
 .else:	mov		param4, [this + FUNC]
-		mov		param2, [s_pos]
-		mov		param3, [this + SIZE]
+		mov		param3, [s_pos]
+		mov		param2, [this + SIZE]
 		mov		param1, [this + ARRAY]
 		add		stack, space				; restoring back the stack pointer
 		jmp		SiftDown					; return SiftDown (array, size, pos, func, temp)
-;---[Error branch]-------------------------
-.error:	add		stack, space				; restoring back the stack pointer
-		xor		status, status				; return false
+;---[Skip branch]--------------------------
+.skip:	mov		pos, [s_ptr]				; get "ptr" variable from the stack
+		movdqa	[pos], temp					; array[pos].data = ndata[0]
+		mov		status, 1					; return true
+.exit:	add		stack, space				; restoring back the stack pointer
 		ret
 }
-ReplaceMin:		REPLACE		SiftMinUp, SiftMinDown, l
-ReplaceMax:		REPLACE		SiftMaxUp, SiftMaxDown, g
+ReplaceMin:		REPLACE		SiftMinUp, SiftMinDown, g
+ReplaceMax:		REPLACE		SiftMaxUp, SiftMaxDown, l
 
 ;******************************************************************************;
 ;       Key searching                                                          ;
@@ -769,9 +784,9 @@ space	= 7 * 8								; stack size required by the procedure
 		mov		[s_count], count			; save "count" variable into the stack
 		mov		[s_func], func				; save "func" variable into the stack
 ;---[Search loop]--------------------------
-.loop:	mov		param2, [s_key]
-		mov		param1, [iter]
-		call	qword [s_func]				; result = Compare (iter[0].key, key)
+.loop:	mov		param2, [iter]
+		mov		param1, [s_key]
+		call	qword [s_func]				; result = Compare (key, iter[0].key)
 		mov		iter, [s_iter]				; get "iter" variable from the stack
 		test	result, result				; if (result == 0)
 		jz		.found						;     then go to found branch
@@ -814,7 +829,7 @@ stack	equ		rsp							; stack pointer
 s_base	equ		stack + 0 * 8				; stack position of "base" variable
 s_iter	equ		stack + 1 * 8				; stack position of "iter" variable
 s_data	equ		stack + 2 * 8				; stack position of "data" variable
-s_keys	equ		stack + 3 * 8				; stack position of "key" variable
+s_keys	equ		stack + 3 * 8				; stack position of "keys" variable
 s_ksize	equ		stack + 4 * 8				; stack position of "ksize" variable
 s_count	equ		stack + 5 * 8				; stack position of "count" variable
 s_func	equ		stack + 6 * 8				; stack position of "func" variable
@@ -921,9 +936,9 @@ space	= 5 * 8
 		mov		[s_count], count			; save "count" variable into the stack
 		mov		[s_func], func				; save "func" variable into the stack
 ;---[Search loop]--------------------------
-.loop:	mov		param2, [s_key]
-		mov		param1, [iter]
-		call	qword [s_func]				; result = Compare (iter[0].key, key)
+.loop:	mov		param2, [iter]
+		mov		param1, [s_key]
+		call	qword [s_func]				; result = Compare (key, iter[0].key)
 		mov		iter, [s_iter]				; get "iter" variable from the stack
 		not		result
 		and		result, 0x1					; if (result)
@@ -954,7 +969,7 @@ size	equ		result						; object size
 func	equ		r10							; compare function
 stack	equ		rsp							; stack pointer
 s_iter	equ		stack + 0 * 8				; stack position of "iter" variable
-s_keys	equ		stack + 1 * 8				; stack position of "key" variable
+s_keys	equ		stack + 1 * 8				; stack position of "keys" variable
 s_ksize	equ		stack + 2 * 8				; stack position of "ksize" variable
 s_count	equ		stack + 3 * 8				; stack position of "count" variable
 s_func	equ		stack + 4 * 8				; stack position of "func" variable
@@ -1121,7 +1136,7 @@ space	= 5 * 8								; stack size required by the procedure
 		mov		[s_this], this				; save "this" variable into the stack
 		mov		[s_src], source				; save "source" variable into the stack
 		mov		[s_size], size				; save "size" variable into the stack
-	Capacity	size, ptr, MINCAP, MAXCAP	; compute new capacity of target object
+	Capacity	size, ptr, MINCAP			; compute new capacity of target object
 		cmp		size, [this + CAPACITY]		; if (size > capacity)
 		ja		.ext						;     then try to extend object capacity
 ;---[Copy nodes content]-------------------
@@ -1170,19 +1185,25 @@ result	equ		rax							; result register
 		mov		result, [this + FUNC]		; get pointer to compare function
 		ret
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	GET_PARAM	param
-{
+GetCapacity:
 ;---[Parameters]---------------------------
 this	equ		rdi							; pointer to heap object
 ;---[Internal variables]-------------------
 result	equ		rax							; result register
 ;------------------------------------------
-		mov		result, [this + param]		; get object parameter
+		mov		result, [this + CAPACITY]	; get object capacity
 		shr		result, KSCALE
 		ret
-}
-GetCapacity:	GET_PARAM	CAPACITY
-GetSize:		GET_PARAM	SIZE
+;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+GetSize:
+;---[Parameters]---------------------------
+this	equ		rdi							; pointer to heap object
+;---[Internal variables]-------------------
+result	equ		rax							; result register
+;------------------------------------------
+		mov		result, [this + SIZE]		; get object size
+		shr		result, KSCALE
+		ret
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 IsEmpty:
 ;---[Parameters]---------------------------

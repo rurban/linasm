@@ -30,7 +30,7 @@ private:
 	size_t	fwd;		// Current position of forward iterator
 	size_t	bwd;		// Current position of backward iterator
 	size_t	root;		// Index of b-tree root node
-	KeyCmp	func;		// Key ordering function
+	KeyCmp	func;		// Key compare function
 
 public:
 
@@ -243,7 +243,7 @@ struct MultiTree
 	size_t	fwd;		// Current position of forward iterator
 	size_t	bwd;		// Current position of backward iterator
 	size_t	root;		// Index of b-tree root node
-	KeyCmp	func;		// Key ordering function
+	KeyCmp	func;		// Key compare function
 };
 
 //****************************************************************************//

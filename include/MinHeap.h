@@ -25,7 +25,7 @@ private:
 	void	*array;		// Pointer to array which holds heap data
 	size_t	capacity;	// Capacity of the heap (auto extended if required)
 	size_t	size;		// Current heap size
-	KeyCmp	func;		// Key ordering function
+	KeyCmp	func;		// Key compare function
 
 public:
 
@@ -108,7 +108,7 @@ struct MinHeap
 	void	*array;		// Pointer to array which holds heap data
 	size_t	capacity;	// Capacity of the heap (auto extended if required)
 	size_t	size;		// Current heap size
-	KeyCmp	func;		// Key ordering function
+	KeyCmp	func;		// Key compare function
 };
 
 //****************************************************************************//

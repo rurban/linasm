@@ -141,7 +141,7 @@ end if
 ;******************************************************************************;
 ;       Compute object capacity (bytes)                                        ;
 ;******************************************************************************;
-macro	Capacity	value, temp, min, max
+macro	Capacity	value, temp, min
 {
 ;---[Internal variables]-------------------
 shift	equ		rcx							; position of the most significant bit
@@ -155,9 +155,6 @@ shiftl	equ		cl							; low part of shift register
 		mov		temp, min
 		cmp		value, temp					; if (value < min)
 		cmovb	value, temp					;     value = min
-		mov		temp, max
-		cmp		value, temp					; if (value > max)
-		cmova	value, temp					;     value = max
 }
 
 ;###############################################################################

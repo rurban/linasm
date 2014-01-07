@@ -237,7 +237,6 @@ section	'.text'		executable align 16
 KSCALE		= 4								; Key scale factor
 KSIZE		= 1 shl KSCALE					; Size of key (bytes)
 MINCAP		= 1 shl	PSCALE					; Min capacity of deque object
-MAXCAP		= 1 shl 63						; Max capacity of deque object
 
 ;==============================================================================;
 ;       Offsets inside deque object                                            ;
@@ -347,7 +346,7 @@ space	= 3 * 8								; stack size required by the procedure
 		sub		stack, space				; reserving stack size for local vars
 		mov		[s_this], this				; save "this" variable into the stack
 		shl		cap, KSCALE
-	Capacity	cap, array, MINCAP, MAXCAP	; compute capacity of the object
+	Capacity	cap, array, MINCAP			; compute capacity of the object
 		mov		[s_cap], cap				; save "cap" variable into the stack
 ;---[Allocate memory for the object]-------
 		mov		sc_prm6, 0
@@ -651,7 +650,7 @@ space	= 5 * 8								; stack size required by the procedure
 		mov		[s_src], source				; save "source" variable into the stack
 		mov		[s_pos], pos				; save "pos" variable into the stack
 		add		size, count					; size += count
-	Capacity	size, count, MINCAP, MAXCAP	; compute new capacity of target object
+	Capacity	size, count, MINCAP			; compute new capacity of target object
 		cmp		size, [this + CAPACITY]		; if (size > capacity)
 		ja		.ext						;     then try to extend object capacity
 ;---[Copy elements to target object]-------
@@ -731,15 +730,17 @@ space	= 3 * 8								; stack size required by the procedure
 		mov		[s_this], this				; save "this" variable into the stack
 		mov		[s_data], data				; save "data" variable into the stack
 		lea		param2, [cap * 2]
-	Capacity	param2, iter, MINCAP, MAXCAP; compute new capacity of target object
+	Capacity	param2, iter, MINCAP		; compute new capacity of target object
 		cmp		param2, [this + CAPACITY]	; if (newcapacity <= capacity)
 		jbe		.error						;     then go to error branch
 		call	Extend						; status = this.Extend (cap * 2)
 		mov		this, [s_this]				; get "this" variable from the stack
 		mov		data, [s_data]				; get "data" variable from the stack
 		mov		cap, [this + CAPACITY]		; get object capacity
+		add		stack, space				; restoring back the stack pointer
 		test	status, status
 		jnz		.back						; if (status), then go back
+		ret									;              else return false
 ;---[Error branch]-------------------------
 .error:	add		stack, space				; restoring back the stack pointer
 		xor		status, status				; return false
@@ -1075,9 +1076,9 @@ space	= 9 * 8								; stack size required by the procedure
 		mov		vptr, iter					; vptr = iter
 		jmp		.skip
 ;---[Search loop]--------------------------
-.loop:	mov		param2, value
-		mov		param1, [array + iter]
-		call	qword [s_func]				; result = Compare (array[iter].key, value)
+.loop:	mov		param2, [array + iter]
+		mov		param1, value
+		call	qword [s_func]				; result = Compare (value, array[iter].key)
 		mov		array, [s_array]			; get "array" variable from the stack
 		mov		iter, [s_iter]				; get "iter" variable from the stack
 		mov		cap, [s_cap]				; get "cap" variable from the stack
@@ -1111,12 +1112,12 @@ end if
 }
 
 ; Minimum value
-MinHead:	MINMAX		add, HEAD, l, 1
-MinTail:	MINMAX		sub, TAIL, l, 0
+MinHead:	MINMAX		add, HEAD, g, 1
+MinTail:	MINMAX		sub, TAIL, g, 0
 
 ; Maximum value
-MaxHead:	MINMAX		add, HEAD, g, 1
-MaxTail:	MINMAX		sub, TAIL, g, 0
+MaxHead:	MINMAX		add, HEAD, l, 1
+MaxTail:	MINMAX		sub, TAIL, l, 0
 
 ;******************************************************************************;
 ;       Search algorithms                                                      ;
@@ -1185,9 +1186,9 @@ space	= 9 * 8								; stack size required by the procedure
 		mov		[s_count], count			; save "count" variable into the stack
 		mov		[s_func], func				; save "func" variable into the stack
 ;---[Search loop]--------------------------
-.loop:	mov		param2, [s_key]
-		mov		param1, [array + iter]
-		call	qword [s_func]				; result = Compare (array[iter].key, key)
+.loop:	mov		param2, [array + iter]
+		mov		param1, [s_key]
+		call	qword [s_func]				; result = Compare (key, array[iter].key)
 		mov		array, [s_array]			; get "array" variable from the stack
 		mov		iter, [s_iter]				; get "iter" variable from the stack
 		mov		cap, [s_cap]				; get "cap" variable from the stack
@@ -1244,7 +1245,7 @@ s_base	equ		stack + 1 * 8				; stack position of "base" variable
 s_iter	equ		stack + 2 * 8				; stack position of "iter" variable
 s_cap	equ		stack + 3 * 8				; stack position of "cap" variable
 s_data	equ		stack + 4 * 8				; stack position of "data" variable
-s_keys	equ		stack + 5 * 8				; stack position of "key" variable
+s_keys	equ		stack + 5 * 8				; stack position of "keys" variable
 s_ksize	equ		stack + 6 * 8				; stack position of "ksize" variable
 s_count	equ		stack + 7 * 8				; stack position of "count" variable
 s_func	equ		stack + 10 * 8				; stack position of "func" variable
@@ -1535,9 +1536,9 @@ space	= 7 * 8								; stack size required by the procedure
 		mov		[s_count], count			; save "count" variable into the stack
 		mov		[s_func], func				; save "func" variable into the stack
 ;---[Search loop]--------------------------
-.loop:	mov		param2, [s_key]
-		mov		param1, [array + iter]
-		call	qword [s_func]				; result = Compare (array[iter].key, key)
+.loop:	mov		param2, [array + iter]
+		mov		param1, [s_key]
+		call	qword [s_func]				; result = Compare (key, array[iter].key)
 		mov		array, [s_array]			; get "array" variable from the stack
 		mov		iter, [s_iter]				; get "iter" variable from the stack
 		mov		cap, [s_cap]				; get "cap" variable from the stack
@@ -1579,7 +1580,7 @@ stack	equ		rsp							; stack pointer
 s_array	equ		stack + 0 * 8				; stack position of "array" variable
 s_iter	equ		stack + 1 * 8				; stack position of "iter" variable
 s_cap	equ		stack + 2 * 8				; stack position of "cap" variable
-s_keys	equ		stack + 3 * 8				; stack position of "key" variable
+s_keys	equ		stack + 3 * 8				; stack position of "keys" variable
 s_ksize	equ		stack + 4 * 8				; stack position of "ksize" variable
 s_count	equ		stack + 5 * 8				; stack position of "count" variable
 s_func	equ		stack + 6 * 8				; stack position of "func" variable
@@ -1744,19 +1745,25 @@ size	equ		rax							; object size
 ;******************************************************************************;
 ;       Deque properties                                                       ;
 ;******************************************************************************;
-macro	GET_PARAM	param
-{
+GetCapacity:
 ;---[Parameters]---------------------------
 this	equ		rdi							; pointer to deque object
 ;---[Internal variables]-------------------
 result	equ		rax							; result register
 ;------------------------------------------
-		mov		result, [this + param]		; get object parameter
+		mov		result, [this + CAPACITY]	; get object capacity
 		shr		result, KSCALE
 		ret
-}
-GetCapacity:	GET_PARAM	CAPACITY
-GetSize:		GET_PARAM	SIZE
+;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+GetSize:
+;---[Parameters]---------------------------
+this	equ		rdi							; pointer to deque object
+;---[Internal variables]-------------------
+result	equ		rax							; result register
+;------------------------------------------
+		mov		result, [this + SIZE]		; get object size
+		shr		result, KSCALE
+		ret
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 IsEmpty:
 ;---[Parameters]---------------------------
