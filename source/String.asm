@@ -4,7 +4,7 @@
 ;#                                                                             #
 ;#                            SAFE STRING FUNCTIONS                            #
 ;#                                                                             #
-;# License: LGPLv3+                              Copyleft (Ɔ) 2013, Jack Black #
+;# License: LGPLv3+                              Copyleft (Ɔ) 2014, Jack Black #
 ;###############################################################################
 format	ELF64
 include	'Macro.inc'
@@ -1313,6 +1313,8 @@ end if
 bytes	= 1 shl scale						; size of array element (bytes)
 bmask	= bytes - 1							; elements aligning mask
 ;------------------------------------------
+		cmp		string1, string2			; if (string1 == string2)
+		je		.equal						;     then go to equal branch
 if scale <> 0
 		test	string1, bmask				; if elements have wrong alignment
 		jnz		.sloop						;     then skip vector code
@@ -1461,6 +1463,9 @@ if scale <> 0
 		movsx	index, res1
 		ret
 end if
+;---[Equal branch]-------------------------
+.equal:	xor		index, index				; return 0
+		ret
 }
 CompareStr_char8:	COMPARE1	cl, b
 CompareStr_char16:	COMPARE1	cx, w
@@ -1497,8 +1502,10 @@ end if
 bytes	= 1 shl scale						; size of array element (bytes)
 bmask	= bytes - 1							; elements aligning mask
 ;------------------------------------------
+		cmp		string1, string2			; if (string1 == string2)
+		je		.equal						;     then go to equal branch
 		test	size, size					; if (size == 0)
-		jz		.exit						;     then go to exit
+		jz		.skip						;     then skip following code
 		shftl	size, scale					; convert size to bytes
 if scale <> 0
 		test	string1, bmask				; if elements have wrong alignment
@@ -1620,6 +1627,17 @@ end if
 		setb	res2						; if (string1[0] < string2[0]), then res2 = 1
 		sub		res1, res2					; return res1 - res2
 		movsx	index, res1
+		ret
+;---[Skip branch]--------------------------
+.skip:	xor		char, char					; char = 0
+		cmp		[string1], char
+		seta	res1						; if (string1[0] > 0), then res1 = 1
+		setb	res2						; if (string1[0] < 0), then res2 = 1
+		sub		res1, res2					; return res1 - res2
+		movsx	index, res1
+		ret
+;---[Equal branch]-------------------------
+.equal:	xor		index, index				; return 0
 		ret
 }
 CompareSeq_char8:	COMPARE2	cl, b
