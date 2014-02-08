@@ -4,7 +4,7 @@
 ;#                                                                             #
 ;#                 COMMON ROUTINES THAT ARE USEFUL FOR ARRAYS                  #
 ;#                                                                             #
-;# License: LGPLv3+                              Copyleft (Ɔ) 2013, Jack Black #
+;# License: LGPLv3+                              Copyleft (Ɔ) 2014, Jack Black #
 ;###############################################################################
 format	ELF64
 include	'Macro.inc'
@@ -6719,6 +6719,8 @@ s_arr2	equ		stack + 1 * 8				; stack position of "array2" variable
 space	= 3 * 8								; stack size required by the procedure
 ;------------------------------------------
 		sub		stack, space				; reserving stack size for local vars
+		cmp		array1, array2				; if (array1 == array2)
+		je		.equal						;     then go to equal branch
 		mov		[s_arr1], array1			; save "array1" variable into the stack
 		mov		[s_arr2], array2			; save "array2" variable into the stack
 		call	func						; result = func (array1, array2, size)
@@ -6733,6 +6735,10 @@ space	= 3 * 8								; stack size required by the procedure
 		sub		res1, res2					; return res1 - res2
 		movsx	result, res1
 		add		stack, space				; restoring back the stack pointer
+		ret
+;---[Equal branch]-------------------------
+.equal:	add		stack, space				; restoring back the stack pointer
+		xor		result, result				; return 0
 		ret
 }
 

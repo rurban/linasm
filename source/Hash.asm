@@ -4,17 +4,11 @@
 ;#                                                                             #
 ;#                            HASH TABLE DATA TYPE                             #
 ;#                                                                             #
-;# License: LGPLv3+                              Copyleft (Ɔ) 2013, Jack Black #
+;# License: LGPLv3+                              Copyleft (Ɔ) 2014, Jack Black #
 ;###############################################################################
 format	ELF64
 include	'Macro.inc'
 include	'Syscall.inc'
-
-
-
-public	InsertUnique			as	'_ZN9MultiHash7Insert1EPK6data_t'
-public	Override				as	'_ZN9MultiHash8OverrideEP6data_tPKS0_'
-
 
 ;###############################################################################
 ;#      Import section                                                         #
@@ -72,14 +66,14 @@ public	RemoveBwd				as	'_ZN10UniqueHash9RemoveBwdEP6data_t'
 ;******************************************************************************;
 ;       Setting element value                                                  ;
 ;******************************************************************************;
-public	MultiSetFwd				as	'MultiHash_SetFwd'
-public	UniqueSetFwd			as	'UniqueHash_SetFwd'
-public	MultiSetBwd				as	'MultiHash_SetBwd'
-public	UniqueSetBwd			as	'UniqueHash_SetBwd'
-public	MultiSetFwd				as	'_ZN9MultiHash6SetFwdEPK6data_t'
-public	UniqueSetFwd			as	'_ZN10UniqueHash6SetFwdEPK6data_t'
-public	MultiSetBwd				as	'_ZN9MultiHash6SetBwdEPK6data_t'
-public	UniqueSetBwd			as	'_ZN10UniqueHash6SetBwdEPK6data_t'
+public	SetFwdMulti				as	'MultiHash_SetFwd'
+public	SetFwdUnique			as	'UniqueHash_SetFwd'
+public	SetBwdMulti				as	'MultiHash_SetBwd'
+public	SetBwdUnique			as	'UniqueHash_SetBwd'
+public	SetFwdMulti				as	'_ZN9MultiHash6SetFwdEPK6data_t'
+public	SetFwdUnique			as	'_ZN10UniqueHash6SetFwdEPK6data_t'
+public	SetBwdMulti				as	'_ZN9MultiHash6SetBwdEPK6data_t'
+public	SetBwdUnique			as	'_ZN10UniqueHash6SetBwdEPK6data_t'
 
 ;******************************************************************************;
 ;       Getting element value                                                  ;
@@ -96,14 +90,14 @@ public	GetBwd					as	'_ZNK10UniqueHash6GetBwdEP6data_t'
 ;******************************************************************************;
 ;       Replacing element value                                                ;
 ;******************************************************************************;
-public	MultiReplaceFwd			as	'MultiHash_ReplaceFwd'
-public	UniqueReplaceFwd		as	'UniqueHash_ReplaceFwd'
-public	MultiReplaceBwd			as	'MultiHash_ReplaceBwd'
-public	UniqueReplaceBwd		as	'UniqueHash_ReplaceBwd'
-public	MultiReplaceFwd			as	'_ZN9MultiHash10ReplaceFwdEP6data_tPKS0_'
-public	UniqueReplaceFwd		as	'_ZN10UniqueHash10ReplaceFwdEP6data_tPKS0_'
-public	MultiReplaceBwd			as	'_ZN9MultiHash10ReplaceBwdEP6data_tPKS0_'
-public	UniqueReplaceBwd		as	'_ZN10UniqueHash10ReplaceBwdEP6data_tPKS0_'
+public	ReplaceFwdMulti			as	'MultiHash_ReplaceFwd'
+public	ReplaceFwdUnique		as	'UniqueHash_ReplaceFwd'
+public	ReplaceBwdMulti			as	'MultiHash_ReplaceBwd'
+public	ReplaceBwdUnique		as	'UniqueHash_ReplaceBwd'
+public	ReplaceFwdMulti			as	'_ZN9MultiHash10ReplaceFwdEP6data_tPKS0_'
+public	ReplaceFwdUnique		as	'_ZN10UniqueHash10ReplaceFwdEP6data_tPKS0_'
+public	ReplaceBwdMulti			as	'_ZN9MultiHash10ReplaceBwdEP6data_tPKS0_'
+public	ReplaceBwdUnique		as	'_ZN10UniqueHash10ReplaceBwdEP6data_tPKS0_'
 
 ;******************************************************************************;
 ;       Overriding element value                                               ;
@@ -437,7 +431,7 @@ space	= 5 * 8								; stack size required by the procedure
 		mov		[array + iter + FDIR], pool ; array[iter].fdir = this.pool
 		mov		[this + POOL], iter			; this.pool = iter
 		sub		qword [this + SIZE], NSIZE	; this.size--
-		call	InsertMultiCore				; result = this.InsertMultiCore (temp)
+		call	InsertCoreMulti				; result = this.InsertCoreMulti (temp)
 		mov		this, [s_this]				; get "this" variable from the stack
 		mov		fwd, [this + FWD]
 		cmp		fwd, [s_iter]				; if (fwd == iter)
@@ -459,7 +453,7 @@ space	= 5 * 8								; stack size required by the procedure
 		mov		qword [array + iter + BDIR], EMPTY
 		sub		qword [this + SIZE], NSIZE	; this.size--
 		movdqa	temp, [array + iter + NDATA]; temp = array[iter].data
-		call	InsertMultiCore				; result = this.InsertMultiCore (temp)
+		call	InsertCoreMulti					; result = this.InsertCoreMulti (temp)
 		mov		this, [s_this]				; get "this" variable from the stack
 		mov		fwd, [this + FWD]
 		cmp		fwd, [s_iter]				; if (fwd == iter)
@@ -877,8 +871,8 @@ else if type = 2
 		ret
 end if
 }
-InsertMultiCore:	INSERT_CORE		0
-InsertUniqueCore:	INSERT_CORE		1
+InsertCoreMulti:	INSERT_CORE		0
+InsertCoreUnique:	INSERT_CORE		1
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 macro	INSERT_ELEMENT	func
 {
@@ -905,7 +899,6 @@ space	= 3 * 8								; stack size required by the procedure
 		mov		[s_data], data				; save "data" variable into the stack
 		mov		param2, [this + CAPACITY]
 		shl		param2, 1
-	Capacity	param2, temp, MINCAP		; compute new capacity of target object
 		cmp		param2, [this + CAPACITY]	; if (newcapacity <= capacity)
 		jbe		.error						;     then go to error branch
 		call	Extend						; status = this.Extend (capacity * 2)
@@ -920,8 +913,8 @@ space	= 3 * 8								; stack size required by the procedure
 		xor		status, status				; return false
 		ret
 }
-InsertMulti:	INSERT_ELEMENT	InsertMultiCore
-InsertUnique:	INSERT_ELEMENT	InsertUniqueCore
+InsertMulti:	INSERT_ELEMENT	InsertCoreMulti
+InsertUnique:	INSERT_ELEMENT	InsertCoreUnique
 
 ;******************************************************************************;
 ;       Removing of element                                                    ;
@@ -1107,7 +1100,6 @@ space	= 5 * 8								; stack size required by the procedure
 ;---[Extend object capacity]---------------
 .ext:	mov		param2, [this + CAPACITY]
 		shl		param2, 1
-	Capacity	param2, result, MINCAP		; compute new capacity of target object
 		cmp		param2, [this + CAPACITY]	; if (newcapacity <= capacity)
 		jbe		.error						;     then go to error branch
 		call	Extend						; status = this.Extend (capacity * 2)
@@ -1128,10 +1120,10 @@ space	= 5 * 8								; stack size required by the procedure
 .exit:	add		stack, space				; restoring back the stack pointer
 		ret
 }
-MultiSetFwd:	SET_ELEMENT	InsertMultiCore, FWD
-MultiSetBwd:	SET_ELEMENT	InsertMultiCore, BWD
-UniqueSetFwd:	SET_ELEMENT	InsertUniqueCore, FWD
-UniqueSetBwd:	SET_ELEMENT	InsertUniqueCore, BWD
+SetFwdMulti:	SET_ELEMENT	InsertCoreMulti, FWD
+SetBwdMulti:	SET_ELEMENT	InsertCoreMulti, BWD
+SetFwdUnique:	SET_ELEMENT	InsertCoreUnique, FWD
+SetBwdUnique:	SET_ELEMENT	InsertCoreUnique, BWD
 
 ;******************************************************************************;
 ;       Getting element value                                                  ;
@@ -1217,7 +1209,6 @@ space	= 5 * 8								; stack size required by the procedure
 ;---[Extend object capacity]---------------
 .ext:	mov		param2, [this + CAPACITY]
 		shl		param2, 1
-	Capacity	param2, result, MINCAP		; compute new capacity of target object
 		cmp		param2, [this + CAPACITY]	; if (newcapacity <= capacity)
 		jbe		.error						;     then go to error branch
 		call	Extend						; status = this.Extend (capacity * 2)
@@ -1238,10 +1229,10 @@ space	= 5 * 8								; stack size required by the procedure
 .exit:	add		stack, space				; restoring back the stack pointer
 		ret
 }
-MultiReplaceFwd:	REPLACE_ELEMENT		InsertMultiCore, FWD
-MultiReplaceBwd:	REPLACE_ELEMENT		InsertMultiCore, BWD
-UniqueReplaceFwd:	REPLACE_ELEMENT		InsertUniqueCore, FWD
-UniqueReplaceBwd:	REPLACE_ELEMENT		InsertUniqueCore, BWD
+ReplaceFwdMulti:	REPLACE_ELEMENT		InsertCoreMulti, FWD
+ReplaceBwdMulti:	REPLACE_ELEMENT		InsertCoreMulti, BWD
+ReplaceFwdUnique:	REPLACE_ELEMENT		InsertCoreUnique, FWD
+ReplaceBwdUnique:	REPLACE_ELEMENT		InsertCoreUnique, BWD
 
 ;******************************************************************************;
 ;       Overriding element value                                               ;
@@ -1275,7 +1266,6 @@ space	= 3 * 8								; stack size required by the procedure
 		mov		[s_ndata], ndata			; save "ndata" variable into the stack
 		mov		param2, [this + CAPACITY]
 		shl		param2, 1
-	Capacity	param2, temp, MINCAP		; compute new capacity of target object
 		cmp		param2, [this + CAPACITY]	; if (newcapacity <= capacity)
 		jbe		.error						;     then go to error branch
 		call	Extend						; status = this.Extend (cap * 2)
@@ -1844,8 +1834,8 @@ macro	FIND_DUP	func, offst
 this	equ		rdi							; pointer to hash table object
 data	equ		rsi							; pointer to data structure
 ;---[Internal variables]-------------------
-result	equ		rax							; result register
 status	equ		al							; operation status
+result	equ		rax							; result register
 iter	equ		rcx							; iterator value
 temp	equ		xmm0						; temporary register
 stack	equ		rsp							; stack pointer
@@ -2055,8 +2045,8 @@ Unique:
 this	equ		rdi							; pointer to target hash table object
 source	equ		rsi							; pointer to source hash table object
 ;---[Internal variables]-------------------
-result	equ		rax							; result register
 status	equ		al							; operation status
+result	equ		rax							; result register
 iter	equ		rcx							; iterator value
 tbound	equ		rdx							; upper bound of hash table
 array	equ		r8							; pointer to array of nodes
@@ -2077,7 +2067,7 @@ s_value	equ		stack + 8 * 8				; stack position of "value" variable
 s_temp	equ		stack + 10 * 8				; stack position of "temp" variable
 space	= 13 * 8							; stack size required by the procedure
 ;------------------------------------------
-		sub		stack, space
+		sub		stack, space				; reserving stack size for local vars
 ;---[Check target object size]-------------
 		cmp		qword [this + SIZE], 0		; if (size)
 		jnz		.error						;     then go to error branch
@@ -2133,7 +2123,7 @@ space	= 13 * 8							; stack size required by the procedure
 		movq	value, [s_value]
 		movq	temp, [s_total]
 	punpcklqdq	value, temp					;     value.data = total
-		call	InsertMultiCore				;     call this.InsertMultiCore (value)
+		call	InsertCoreMulti				;     call this.InsertCoreMulti (value)
 		mov		this, [s_this]				;     get "this" variable from the stack
 		mov		array, [s_array]			;     get "array" variable from the stack
 		mov		iter, [s_iter]				;     get "iter" variable from the stack
@@ -2150,7 +2140,7 @@ space	= 13 * 8							; stack size required by the procedure
 .skip2:	movq	value, [s_value]
 		movq	temp, [s_total]
 	punpcklqdq	value, temp					; value.data = total
-		call	InsertMultiCore				; call this.InsertMultiCore (value)
+		call	InsertCoreMulti				; call this.InsertCoreMulti (value)
 		mov		this, [s_this]				; get "this" variable from the stack
 		mov		array, [s_array]			; get "array" variable from the stack
 		mov		iter, [s_iter]				; get "iter" variable from the stack
@@ -2180,8 +2170,8 @@ CheckDup:
 ;---[Parameters]---------------------------
 this	equ		rdi							; pointer to hash table object
 ;---[Internal variables]-------------------
-result	equ		rax							; result register
 status	equ		al							; operation status
+result	equ		rax							; result register
 stack	equ		rsp							; stack pointer
 s_this	equ		stack + 0 * 8				; stack position of "this" variable
 space	= 1 * 8								; stack size required by the procedure
