@@ -4,7 +4,7 @@
 #                                                                              #
 #                      MULTIPLY KEYS HASH TABLE DATA TYPE                      #
 #                                                                              #
-# License: LGPLv3+                               Copyleft (Ɔ) 2013, Jack Black #
+# License: LGPLv3+                               Copyleft (Ɔ) 2014, Jack Black #
 ################################################################################
 */
 # pragma	once
@@ -25,7 +25,7 @@ private:
 	void	*array;		// Pointer to array which holds hash table data
 	size_t	capacity;	// Capacity of the hash table (auto extended if required)
 	size_t	size;		// Current hash table size
-	size_t	pool;		// Index of fisrt free node in the pool
+	size_t	pool;		// Index of first free node in the pool
 	size_t	fwd;		// Current position of forward iterator
 	size_t	bwd;		// Current position of backward iterator
 	KeyCmp	kfunc;		// Key compare function
@@ -165,7 +165,7 @@ struct MultiHash
 	void	*array;		// Pointer to array which holds hash table data
 	size_t	capacity;	// Capacity of the hash table (auto extended if required)
 	size_t	size;		// Current hash table size
-	size_t	pool;		// Index of fisrt free node in the pool
+	size_t	pool;		// Index of first free node in the pool
 	size_t	fwd;		// Current position of forward iterator
 	size_t	bwd;		// Current position of backward iterator
 	KeyCmp	kfunc;		// Key compare function

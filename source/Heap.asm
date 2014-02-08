@@ -4,7 +4,7 @@
 ;#                                                                             #
 ;#                            BINARY HEAP DATA TYPE                            #
 ;#                                                                             #
-;# License: LGPLv3+                              Copyleft (Ɔ) 2013, Jack Black #
+;# License: LGPLv3+                              Copyleft (Ɔ) 2014, Jack Black #
 ;###############################################################################
 format	ELF64
 include	'Macro.inc'
@@ -514,7 +514,6 @@ space	= 3 * 8								; stack size required by the procedure
 		mov		[s_data], data				; save "data" variable into the stack
 		mov		param2, [this + CAPACITY]
 		shl		param2, 1
-	Capacity	param2, size, MINCAP		; compute new capacity of target object
 		cmp		param2, [this + CAPACITY]	; if (newcapacity <= capacity)
 		jbe		.error						;     then go to error branch
 		call	Extend						; status = this.Extend (cap * 2)
@@ -1115,47 +1114,48 @@ macro	MERGE	heapfunc
 this	equ		rdi							; pointer to target heap object
 source	equ		rsi							; pointer to source heap object
 ;---[Internal variables]-------------------
-result	equ		rax							; result register
 status	equ		al							; operation status
+result	equ		rax							; result register
 ptr		equ		rcx							; temporary pointer
 size	equ		result						; object size
 stack	equ		rsp							; stack pointer
 s_this	equ		stack + 0 * 8				; stack position of "this" variable
 s_src	equ		stack + 1 * 8				; stack position of "source" variable
 s_size	equ		stack + 2 * 8				; stack position of "size" variable
-s_total	equ		stack + 3 * 8				; stack position of "total" variable
-space	= 5 * 8								; stack size required by the procedure
+space	= 3 * 8								; stack size required by the procedure
 ;------------------------------------------
 		sub		stack, space				; reserving stack size for local vars
+		cmp		this, source				; if (this == source)
+		je		.error						;     then go to error branch
+;---[Check source object size]-------------
 		mov		size, [source + SIZE]		; get source object size
-		mov		[s_total], size				; total = source.size
+		mov		[s_this], this				; save "this" variable into the stack
+		mov		[s_src], source				; save "source" variable into the stack
+		mov		[s_size], size				; save "size" variable into the stack
 		test	size, size					; if (source.size == 0)
 		jz		.exit						;     then go to exit
 ;---[Check object capacity]----------------
 		add		size, [this + SIZE]			; size = this.size + source.size
-		mov		[s_this], this				; save "this" variable into the stack
-		mov		[s_src], source				; save "source" variable into the stack
-		mov		[s_size], size				; save "size" variable into the stack
 	Capacity	size, ptr, MINCAP			; compute new capacity of target object
 		cmp		size, [this + CAPACITY]		; if (size > capacity)
 		ja		.ext						;     then try to extend object capacity
 ;---[Copy nodes content]-------------------
 .back:	mov		ptr, [this + ARRAY]
 		add		ptr, [this + SIZE]			; ptr = array + size
-		mov		size, [s_size]
-		mov		[this + SIZE], size			; update object size
 		mov		param3, [source + SIZE]
 		mov		param2, [source + ARRAY]
 		mov		param1, ptr
 		call	Copy						; call Copy (this.array + size, source.array, source.size)
 ;---[Convert array to a heap]--------------
 		mov		this, [s_this]				; get "this" variable from the stack
+		mov		size, [s_size]				; get "size" variable from the stack
+		add		[this + SIZE], size			; this.size += source.size
 		mov		param3, [this + FUNC]
 		mov		param2, [this + SIZE]
 		mov		param1, [this + ARRAY]
 		call	heapfunc					; call heapfunc (array, size, func)
 ;---[Normal exit branch]-------------------
-.exit:	mov		result, [s_total]			; get "total" variable from the stack
+.exit:	mov		result, [s_size]			; get "size" variable from the stack
 		add		stack, space				; restoring back the stack pointer
 		shr		result, KSCALE				; return result
 		ret
@@ -1166,7 +1166,8 @@ space	= 5 * 8								; stack size required by the procedure
 		mov		source, [s_src]				; get "source" variable from the stack
 		test	status, status				; if (status)
 		jnz		.back						;     then go back
-		add		stack, space				; restoring back the stack pointer
+;---[Error branch]-------------------------
+.error:	add		stack, space				; restoring back the stack pointer
 		mov		result, ERROR				; return ERROR
 		ret
 }

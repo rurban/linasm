@@ -4,7 +4,7 @@
 ;#                                                                             #
 ;#                                 OBJECT POOL                                 #
 ;#                                                                             #
-;# License: LGPLv3+                              Copyleft (Ɔ) 2013, Jack Black #
+;# License: LGPLv3+                              Copyleft (Ɔ) 2014, Jack Black #
 ;###############################################################################
 format	ELF64
 include	'Macro.inc'
@@ -379,12 +379,10 @@ IsFull:
 this	equ		rdi							; pointer to pool object
 ;---[Internal variables]-------------------
 status	equ		al							; operation status
-cap		equ		rax							; object capacity
 size	equ		rdx							; object size
 ;------------------------------------------
-		mov		cap, [this + CAPACITY]		; get object capacity
 		mov		size, [this + SIZE]			; get object size
-		cmp		cap, size					; if (capacity == size)
+		cmp		size, [this + CAPACITY]		; if (size == capacity)
 		sete	status						;     return true
 		ret
 

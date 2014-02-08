@@ -4,7 +4,7 @@
 #                                                                              #
 #                                 OBJECT POOL                                  #
 #                                                                              #
-# License: LGPLv3+                               Copyleft (Ɔ) 2013, Jack Black #
+# License: LGPLv3+                               Copyleft (Ɔ) 2014, Jack Black #
 ################################################################################
 */
 # pragma	once
@@ -26,7 +26,7 @@ private:
 	size_t	capacity;	// Capacity of the pool
 	size_t	size;		// Current pool size
 	size_t	bsize;		// Block size
-	size_t	pool;		// Index of fisrt free node in the pool
+	size_t	pool;		// Index of first free node in the pool
 
 public:
 

@@ -4,7 +4,7 @@
 #                                                                              #
 #                         DOUBLE-ENDED QUEUE DATA TYPE                         #
 #                                                                              #
-# License: LGPLv3+                               Copyleft (Ɔ) 2013, Jack Black #
+# License: LGPLv3+                               Copyleft (Ɔ) 2014, Jack Black #
 ################################################################################
 */
 # pragma	once

@@ -4,7 +4,7 @@
 ;#                                                                             #
 ;#               WINDOW FUNCTIONS FOR DIGITAL SIGNAL PROCESSING                #
 ;#                                                                             #
-;# License: LGPLv3+                              Copyleft (Ɔ) 2013, Jack Black #
+;# License: LGPLv3+                              Copyleft (Ɔ) 2014, Jack Black #
 ;###############################################################################
 format	ELF64
 
@@ -323,9 +323,9 @@ reflect	= Reflect_flt64						; Array reflection Function
 bytes	= 8									; array element size (bytes)
 end if
 ;------------------------------------------
-		test	size, size
-		jz		.exit
 		sub		stack, space				; reserving stack size for local vars
+		test	size, size					; if (size == 0)
+		jz		.exit						;     then go to exit
 		mov		[s_array], array			; save "array" variable into the stack
 		mov		[s_size], size				; save "size" variable into the stack
 		add		size, 1						; size++
@@ -354,8 +354,8 @@ end if
 		mov		array, [s_array]			; get "array" variable from the stack
 		mov		size, [s_size]				; get "size" variable from the stack
 		call	reflect						; call reflect (array, size)
-		add		stack, space				; restoring back the stack pointer
-.exit:	ret
+.exit:	add		stack, space				; restoring back the stack pointer
+		ret
 }
 
 ;==============================================================================;
