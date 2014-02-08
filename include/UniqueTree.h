@@ -4,7 +4,7 @@
 #                                                                              #
 #                         UNIQUE KEYS B-TREE DATA TYPE                         #
 #                                                                              #
-# License: LGPLv3+                               Copyleft (Ɔ) 2013, Jack Black #
+# License: LGPLv3+                               Copyleft (Ɔ) 2014, Jack Black #
 ################################################################################
 */
 # pragma	once
@@ -26,7 +26,7 @@ private:
 	size_t	capacity;	// Capacity of the b-tree (auto extended if required)
 	size_t	size;		// Current b-tree size
 	size_t	height;		// Current b-tree height
-	size_t	pool;		// Index of fisrt free node in the pool
+	size_t	pool;		// Index of first free node in the pool
 	size_t	fwd;		// Current position of forward iterator
 	size_t	bwd;		// Current position of backward iterator
 	size_t	root;		// Index of b-tree root node
@@ -52,14 +52,14 @@ UniqueTree (const UniqueTree &source);
 //****************************************************************************//
 //      Copying elements                                                      //
 //****************************************************************************//
-size_t CopyFwd (const UniqueTree *source, size_t pos, size_t count);
-size_t CopyBwd (const UniqueTree *source, size_t pos, size_t count);
+size_t CopyFwd (const UniqueTree *source, size_t count);
+size_t CopyBwd (const UniqueTree *source, size_t count);
 
 //****************************************************************************//
 //      Moving elements                                                       //
 //****************************************************************************//
-size_t MoveFwd (UniqueTree *source, size_t pos, size_t count);
-size_t MoveBwd (UniqueTree *source, size_t pos, size_t count);
+size_t MoveFwd (UniqueTree *source, size_t count);
+size_t MoveBwd (UniqueTree *source, size_t count);
 
 //****************************************************************************//
 //      Insertion of element                                                  //
@@ -163,30 +163,30 @@ void SwapFwdBwd (void);
 //============================================================================//
 
 // Searching for equal key
-bool FindKeyEqualFwd (data_t *data, adt_t key);
-bool FindKeyEqualBwd (data_t *data, adt_t key);
+bool FindEqualFwd (data_t *data, adt_t key);
+bool FindEqualBwd (data_t *data, adt_t key);
 
 // Searching for greater key
-bool FindKeyGreatFwd (data_t *data, adt_t key);
-bool FindKeyGreatBwd (data_t *data, adt_t key);
+bool FindGreatFwd (data_t *data, adt_t key);
+bool FindGreatBwd (data_t *data, adt_t key);
 
 // Searching for greater or equal key
-bool FindKeyGreatOrEqualFwd (data_t *data, adt_t key);
-bool FindKeyGreatOrEqualBwd (data_t *data, adt_t key);
+bool FindGreatOrEqualFwd (data_t *data, adt_t key);
+bool FindGreatOrEqualBwd (data_t *data, adt_t key);
 
 // Searching for less key
-bool FindKeyLessFwd (data_t *data, adt_t key);
-bool FindKeyLessBwd (data_t *data, adt_t key);
+bool FindLessFwd (data_t *data, adt_t key);
+bool FindLessBwd (data_t *data, adt_t key);
 
 // Searching for less or equal key
-bool FindKeyLessOrEqualFwd (data_t *data, adt_t key);
-bool FindKeyLessOrEqualBwd (data_t *data, adt_t key);
+bool FindLessOrEqualFwd (data_t *data, adt_t key);
+bool FindLessOrEqualBwd (data_t *data, adt_t key);
 
 //============================================================================//
 //      Searching for differences                                             //
 //============================================================================//
-bool FindDiffFwd (data_t *data, const UniqueTree *source, size_t pos, size_t count);
-bool FindDiffBwd (data_t *data, const UniqueTree *source, size_t pos, size_t count);
+bool FindDiffFwd (data_t *data, const UniqueTree *source, ize_t count);
+bool FindDiffBwd (data_t *data, const UniqueTree *source, size_t count);
 
 //****************************************************************************//
 //      Key counting                                                          //
@@ -228,7 +228,7 @@ struct UniqueTree
 	size_t	capacity;	// Capacity of the b-tree (auto extended if required)
 	size_t	size;		// Current b-tree size
 	size_t	height;		// Current b-tree height
-	size_t	pool;		// Index of fisrt free node in the pool
+	size_t	pool;		// Index of first free node in the pool
 	size_t	fwd;		// Current position of forward iterator
 	size_t	bwd;		// Current position of backward iterator
 	size_t	root;		// Index of b-tree root node
@@ -253,14 +253,14 @@ UniqueTree_FreeUniqueTree (struct UniqueTree *tree);
 //****************************************************************************//
 //      Copying elements                                                      //
 //****************************************************************************//
-size_t UniqueTree_CopyFwd (struct UniqueTree *tree, const struct UniqueTree *source, size_t pos, size_t count);
-size_t UniqueTree_CopyBwd (struct UniqueTree *tree, const struct UniqueTree *source, size_t pos, size_t count);
+size_t UniqueTree_CopyFwd (struct UniqueTree *tree, const struct UniqueTree *source, size_t count);
+size_t UniqueTree_CopyBwd (struct UniqueTree *tree, const struct UniqueTree *source, size_t count);
 
 //****************************************************************************//
 //      Moving elements                                                       //
 //****************************************************************************//
-size_t UniqueTree_MoveFwd (struct UniqueTree *tree, struct UniqueTree *source, size_t pos, size_t count);
-size_t UniqueTree_MoveBwd (struct UniqueTree *tree, struct UniqueTree *source, size_t pos, size_t count);
+size_t UniqueTree_MoveFwd (struct UniqueTree *tree, struct UniqueTree *source, size_t count);
+size_t UniqueTree_MoveBwd (struct UniqueTree *tree, struct UniqueTree *source, size_t count);
 
 //****************************************************************************//
 //      Insertion of element                                                  //
@@ -364,30 +364,30 @@ void UniqueTree_SwapFwdBwd (struct UniqueTree *tree);
 //============================================================================//
 
 // Searching for equal key
-bool UniqueTree_FindKeyEqualFwd (struct UniqueTree *tree, struct data_t *data, union adt_t key);
-bool UniqueTree_FindKeyEqualBwd (struct UniqueTree *tree, struct data_t *data, union adt_t key);
+bool UniqueTree_FindEqualFwd (struct UniqueTree *tree, struct data_t *data, union adt_t key);
+bool UniqueTree_FindEqualBwd (struct UniqueTree *tree, struct data_t *data, union adt_t key);
 
 // Searching for greater key
-bool UniqueTree_FindKeyGreatFwd (struct UniqueTree *tree, struct data_t *data, union adt_t key);
-bool UniqueTree_FindKeyGreatBwd (struct UniqueTree *tree, struct data_t *data, union adt_t key);
+bool UniqueTree_FindGreatFwd (struct UniqueTree *tree, struct data_t *data, union adt_t key);
+bool UniqueTree_FindGreatBwd (struct UniqueTree *tree, struct data_t *data, union adt_t key);
 
 // Searching for greater or equal key
-bool UniqueTree_FindKeyGreatOrEqualFwd (struct UniqueTree *tree, struct data_t *data, union adt_t key);
-bool UniqueTree_FindKeyGreatOrEqualBwd (struct UniqueTree *tree, struct data_t *data, union adt_t key);
+bool UniqueTree_FindGreatOrEqualFwd (struct UniqueTree *tree, struct data_t *data, union adt_t key);
+bool UniqueTree_FindGreatOrEqualBwd (struct UniqueTree *tree, struct data_t *data, union adt_t key);
 
 // Searching for less key
-bool UniqueTree_FindKeyLessFwd (struct UniqueTree *tree, struct data_t *data, union adt_t key);
-bool UniqueTree_FindKeyLessBwd (struct UniqueTree *tree, struct data_t *data, union adt_t key);
+bool UniqueTree_FindLessFwd (struct UniqueTree *tree, struct data_t *data, union adt_t key);
+bool UniqueTree_FindLessBwd (struct UniqueTree *tree, struct data_t *data, union adt_t key);
 
 // Searching for less or equal key
-bool UniqueTree_FindKeyLessOrEqualFwd (struct UniqueTree *tree, struct data_t *data, union adt_t key);
-bool UniqueTree_FindKeyLessOrEqualBwd (struct UniqueTree *tree, struct data_t *data, union adt_t key);
+bool UniqueTree_FindLessOrEqualFwd (struct UniqueTree *tree, struct data_t *data, union adt_t key);
+bool UniqueTree_FindLessOrEqualBwd (struct UniqueTree *tree, struct data_t *data, union adt_t key);
 
 //============================================================================//
 //      Searching for differences                                             //
 //============================================================================//
-bool UniqueTree_FindDiffFwd (struct UniqueTree *tree, struct data_t *data, const struct UniqueTree *source, size_t pos, size_t count);
-bool UniqueTree_FindDiffBwd (struct UniqueTree *tree, struct data_t *data, const struct UniqueTree *source, size_t pos, size_t count);
+bool UniqueTree_FindDiffFwd (struct UniqueTree *tree, struct data_t *data, const struct UniqueTree *source, size_t count);
+bool UniqueTree_FindDiffBwd (struct UniqueTree *tree, struct data_t *data, const struct UniqueTree *source, size_t count);
 
 //****************************************************************************//
 //      Key counting                                                          //

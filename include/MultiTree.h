@@ -4,7 +4,7 @@
 #                                                                              #
 #                        MULTIPLY KEYS B-TREE DATA TYPE                        #
 #                                                                              #
-# License: LGPLv3+                               Copyleft (Ɔ) 2013, Jack Black #
+# License: LGPLv3+                               Copyleft (Ɔ) 2014, Jack Black #
 ################################################################################
 */
 # pragma	once
@@ -26,7 +26,7 @@ private:
 	size_t	capacity;	// Capacity of the b-tree (auto extended if required)
 	size_t	size;		// Current b-tree size
 	size_t	height;		// Current b-tree height
-	size_t	pool;		// Index of fisrt free node in the pool
+	size_t	pool;		// Index of first free node in the pool
 	size_t	fwd;		// Current position of forward iterator
 	size_t	bwd;		// Current position of backward iterator
 	size_t	root;		// Index of b-tree root node
@@ -52,14 +52,14 @@ MultiTree (const MultiTree &source);
 //****************************************************************************//
 //      Copying elements                                                      //
 //****************************************************************************//
-size_t CopyFwd (const MultiTree *source, size_t pos, size_t count);
-size_t CopyBwd (const MultiTree *source, size_t pos, size_t count);
+size_t CopyFwd (const MultiTree *source, size_t count);
+size_t CopyBwd (const MultiTree *source, size_t count);
 
 //****************************************************************************//
 //      Moving elements                                                       //
 //****************************************************************************//
-size_t MoveFwd (MultiTree *source, size_t pos, size_t count);
-size_t MoveBwd (MultiTree *source, size_t pos, size_t count);
+size_t MoveFwd (MultiTree *source, size_t count);
+size_t MoveBwd (MultiTree *source, size_t count);
 
 //****************************************************************************//
 //      Insertion of element                                                  //
@@ -158,24 +158,24 @@ void SwapFwdBwd (void);
 //============================================================================//
 
 // Searching for equal key
-bool FindKeyEqualFwd (data_t *data, adt_t key);
-bool FindKeyEqualBwd (data_t *data, adt_t key);
+bool FindEqualFwd (data_t *data, adt_t key);
+bool FindEqualBwd (data_t *data, adt_t key);
 
 // Searching for greater key
-bool FindKeyGreatFwd (data_t *data, adt_t key);
-bool FindKeyGreatBwd (data_t *data, adt_t key);
+bool FindGreatFwd (data_t *data, adt_t key);
+bool FindGreatBwd (data_t *data, adt_t key);
 
 // Searching for greater or equal key
-bool FindKeyGreatOrEqualFwd (data_t *data, adt_t key);
-bool FindKeyGreatOrEqualBwd (data_t *data, adt_t key);
+bool FindGreatOrEqualFwd (data_t *data, adt_t key);
+bool FindGreatOrEqualBwd (data_t *data, adt_t key);
 
 // Searching for less key
-bool FindKeyLessFwd (data_t *data, adt_t key);
-bool FindKeyLessBwd (data_t *data, adt_t key);
+bool FindLessFwd (data_t *data, adt_t key);
+bool FindLessBwd (data_t *data, adt_t key);
 
 // Searching for less or equal key
-bool FindKeyLessOrEqualFwd (data_t *data, adt_t key);
-bool FindKeyLessOrEqualBwd (data_t *data, adt_t key);
+bool FindLessOrEqualFwd (data_t *data, adt_t key);
+bool FindLessOrEqualBwd (data_t *data, adt_t key);
 
 //============================================================================//
 //      Duplicates searching                                                  //
@@ -186,8 +186,8 @@ bool FindDupBwd (data_t *data);
 //============================================================================//
 //      Searching for differences                                             //
 //============================================================================//
-bool FindDiffFwd (data_t *data, const MultiTree *source, size_t pos, size_t count);
-bool FindDiffBwd (data_t *data, const MultiTree *source, size_t pos, size_t count);
+bool FindDiffFwd (data_t *data, const MultiTree *source, size_t count);
+bool FindDiffBwd (data_t *data, const MultiTree *source, size_t count);
 
 //****************************************************************************//
 //      Key counting                                                          //
@@ -239,7 +239,7 @@ struct MultiTree
 	size_t	capacity;	// Capacity of the b-tree (auto extended if required)
 	size_t	size;		// Current b-tree size
 	size_t	height;		// Current b-tree height
-	size_t	pool;		// Index of fisrt free node in the pool
+	size_t	pool;		// Index of first free node in the pool
 	size_t	fwd;		// Current position of forward iterator
 	size_t	bwd;		// Current position of backward iterator
 	size_t	root;		// Index of b-tree root node
@@ -264,14 +264,14 @@ void MultiTree_FreeMultiTree (struct MultiTree *tree);
 //****************************************************************************//
 //      Copying elements                                                      //
 //****************************************************************************//
-size_t MultiTree_CopyFwd (struct MultiTree *tree, const struct MultiTree *source, size_t pos, size_t count);
-size_t MultiTree_CopyBwd (struct MultiTree *tree, const struct MultiTree *source, size_t pos, size_t count);
+size_t MultiTree_CopyFwd (struct MultiTree *tree, const struct MultiTree *source, size_t count);
+size_t MultiTree_CopyBwd (struct MultiTree *tree, const struct MultiTree *source, size_t count);
 
 //****************************************************************************//
 //      Moving elements                                                       //
 //****************************************************************************//
-size_t MultiTree_MoveFwd (struct MultiTree *tree, struct MultiTree *source, size_t pos, size_t count);
-size_t MultiTree_MoveBwd (struct MultiTree *tree, struct MultiTree *source, size_t pos, size_t count);
+size_t MultiTree_MoveFwd (struct MultiTree *tree, struct MultiTree *source, size_t count);
+size_t MultiTree_MoveBwd (struct MultiTree *tree, struct MultiTree *source, size_t count);
 
 //****************************************************************************//
 //      Insertion of element                                                  //
@@ -370,24 +370,24 @@ void MultiTree_SwapFwdBwd (struct MultiTree *tree);
 //============================================================================//
 
 // Searching for equal key
-bool MultiTree_FindKeyEqualFwd (struct MultiTree *tree, struct data_t *data, union adt_t key);
-bool MultiTree_FindKeyEqualBwd (struct MultiTree *tree, struct data_t *data, union adt_t key);
+bool MultiTree_FindEqualFwd (struct MultiTree *tree, struct data_t *data, union adt_t key);
+bool MultiTree_FindEqualBwd (struct MultiTree *tree, struct data_t *data, union adt_t key);
 
 // Searching for greater key
-bool MultiTree_FindKeyGreatFwd (struct MultiTree *tree, struct data_t *data, union adt_t key);
-bool MultiTree_FindKeyGreatBwd (struct MultiTree *tree, struct data_t *data, union adt_t key);
+bool MultiTree_FindGreatFwd (struct MultiTree *tree, struct data_t *data, union adt_t key);
+bool MultiTree_FindGreatBwd (struct MultiTree *tree, struct data_t *data, union adt_t key);
 
 // Searching for greater or equal key
-bool MultiTree_FindKeyGreatOrEqualFwd (struct MultiTree *tree, struct data_t *data, union adt_t key);
-bool MultiTree_FindKeyGreatOrEqualBwd (struct MultiTree *tree, struct data_t *data, union adt_t key);
+bool MultiTree_FindGreatOrEqualFwd (struct MultiTree *tree, struct data_t *data, union adt_t key);
+bool MultiTree_FindGreatOrEqualBwd (struct MultiTree *tree, struct data_t *data, union adt_t key);
 
 // Searching for less key
-bool MultiTree_FindKeyLessFwd (struct MultiTree *tree, struct data_t *data, union adt_t key);
-bool MultiTree_FindKeyLessBwd (struct MultiTree *tree, struct data_t *data, union adt_t key);
+bool MultiTree_FindLessFwd (struct MultiTree *tree, struct data_t *data, union adt_t key);
+bool MultiTree_FindLessBwd (struct MultiTree *tree, struct data_t *data, union adt_t key);
 
 // Searching for less or equal key
-bool MultiTree_FindKeyLessOrEqualFwd (struct MultiTree *tree, struct data_t *data, union adt_t key);
-bool MultiTree_FindKeyLessOrEqualBwd (struct MultiTree *tree, struct data_t *data, union adt_t key);
+bool MultiTree_FindLessOrEqualFwd (struct MultiTree *tree, struct data_t *data, union adt_t key);
+bool MultiTree_FindLessOrEqualBwd (struct MultiTree *tree, struct data_t *data, union adt_t key);
 
 //============================================================================//
 //      Duplicates searching                                                  //
@@ -398,8 +398,8 @@ bool MultiTree_FindDupBwd (struct MultiTree *tree, struct data_t *data);
 //============================================================================//
 //      Searching for differences                                             //
 //============================================================================//
-bool MultiTree_FindDiffFwd (struct MultiTree *tree, struct data_t *data, const struct MultiTree *source, size_t pos, size_t count);
-bool MultiTree_FindDiffBwd (struct MultiTree *tree, struct data_t *data, const struct MultiTree *source, size_t pos, size_t count);
+bool MultiTree_FindDiffFwd (struct MultiTree *tree, struct data_t *data, const struct MultiTree *source, size_t count);
+bool MultiTree_FindDiffBwd (struct MultiTree *tree, struct data_t *data, const struct MultiTree *source, size_t count);
 
 //****************************************************************************//
 //      Key counting                                                          //

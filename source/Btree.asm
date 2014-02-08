@@ -4,7 +4,7 @@
 ;#                                                                             #
 ;#                              B-TREE DATA TYPE                               #
 ;#                                                                             #
-;# License: LGPLv3+                              Copyleft (Ɔ) 2013, Jack Black #
+;# License: LGPLv3+                              Copyleft (Ɔ) 2014, Jack Black #
 ;###############################################################################
 format	ELF64
 include	'Macro.inc'
@@ -50,14 +50,14 @@ public	Destructor				as	'_ZN10UniqueTreeD1Ev'
 ; Using forward iterator
 public	CopyFwdMulti			as	'MultiTree_CopyFwd'
 public	CopyFwdUnique			as	'UniqueTree_CopyFwd'
-public	CopyFwdMulti			as	'_ZN9MultiTree7CopyFwdEPKS_mm'
-public	CopyFwdUnique			as	'_ZN10UniqueTree7CopyFwdEPKS_mm'
+public	CopyFwdMulti			as	'_ZN9MultiTree7CopyFwdEPKS_m'
+public	CopyFwdUnique			as	'_ZN10UniqueTree7CopyFwdEPKS_m'
 
 ; Using backward iterator
 public	CopyBwdMulti			as	'MultiTree_CopyBwd'
 public	CopyBwdUnique			as	'UniqueTree_CopyBwd'
-public	CopyBwdMulti			as	'_ZN9MultiTree7CopyBwdEPKS_mm'
-public	CopyBwdUnique			as	'_ZN10UniqueTree7CopyBwdEPKS_mm'
+public	CopyBwdMulti			as	'_ZN9MultiTree7CopyBwdEPKS_m'
+public	CopyBwdUnique			as	'_ZN10UniqueTree7CopyBwdEPKS_m'
 
 ;******************************************************************************;
 ;       Moving elements                                                        ;
@@ -66,14 +66,14 @@ public	CopyBwdUnique			as	'_ZN10UniqueTree7CopyBwdEPKS_mm'
 ; Using forward iterator
 public	MoveFwdMulti			as	'MultiTree_MoveFwd'
 public	MoveFwdUnique			as	'UniqueTree_MoveFwd'
-public	MoveFwdMulti			as	'_ZN9MultiTree7MoveFwdEPS_mm'
-public	MoveFwdUnique			as	'_ZN10UniqueTree7MoveFwdEPS_mm'
+public	MoveFwdMulti			as	'_ZN9MultiTree7MoveFwdEPS_m'
+public	MoveFwdUnique			as	'_ZN10UniqueTree7MoveFwdEPS_m'
 
 ; Using backward iterator
 public	MoveBwdMulti			as	'MultiTree_MoveBwd'
 public	MoveBwdUnique			as	'UniqueTree_MoveBwd'
-public	MoveBwdMulti			as	'_ZN9MultiTree7MoveBwdEPS_mm'
-public	MoveBwdUnique			as	'_ZN10UniqueTree7MoveBwdEPS_mm'
+public	MoveBwdMulti			as	'_ZN9MultiTree7MoveBwdEPS_m'
+public	MoveBwdUnique			as	'_ZN10UniqueTree7MoveBwdEPS_m'
 
 ;******************************************************************************;
 ;       Insertion of element                                                   ;
@@ -108,20 +108,20 @@ public	RemoveBwd				as	'_ZN10UniqueTree9RemoveBwdEP6data_t'
 ;******************************************************************************;
 
 ; By element index
-public	MultiSetIndex			as	'MultiTree_SetIndex'
-public	UniqueSetIndex			as	'UniqueTree_SetIndex'
-public	MultiSetIndex			as	'_ZN9MultiTree8SetIndexEPK6data_tm'
-public	UniqueSetIndex			as	'_ZN10UniqueTree8SetIndexEPK6data_tm'
+public	SetIndexMulti			as	'MultiTree_SetIndex'
+public	SetIndexUnique			as	'UniqueTree_SetIndex'
+public	SetIndexMulti			as	'_ZN9MultiTree8SetIndexEPK6data_tm'
+public	SetIndexUnique			as	'_ZN10UniqueTree8SetIndexEPK6data_tm'
 
 ; Using iterators
-public	MultiSetFwd				as	'MultiTree_SetFwd'
-public	UniqueSetFwd			as	'UniqueTree_SetFwd'
-public	MultiSetBwd				as	'MultiTree_SetBwd'
-public	UniqueSetBwd			as	'UniqueTree_SetBwd'
-public	MultiSetFwd				as	'_ZN9MultiTree6SetFwdEPK6data_t'
-public	UniqueSetFwd			as	'_ZN10UniqueTree6SetFwdEPK6data_t'
-public	MultiSetBwd				as	'_ZN9MultiTree6SetBwdEPK6data_t'
-public	UniqueSetBwd			as	'_ZN10UniqueTree6SetBwdEPK6data_t'
+public	SetFwdMulti				as	'MultiTree_SetFwd'
+public	SetFwdUnique			as	'UniqueTree_SetFwd'
+public	SetBwdMulti				as	'MultiTree_SetBwd'
+public	SetBwdUnique			as	'UniqueTree_SetBwd'
+public	SetFwdMulti				as	'_ZN9MultiTree6SetFwdEPK6data_t'
+public	SetFwdUnique			as	'_ZN10UniqueTree6SetFwdEPK6data_t'
+public	SetBwdMulti				as	'_ZN9MultiTree6SetBwdEPK6data_t'
+public	SetBwdUnique			as	'_ZN10UniqueTree6SetBwdEPK6data_t'
 
 ;******************************************************************************;
 ;       Getting element value                                                  ;
@@ -148,20 +148,20 @@ public	GetBwd					as	'_ZNK10UniqueTree6GetBwdEP6data_t'
 ;******************************************************************************;
 
 ; By element index
-public	MultiReplaceIndex		as	'MultiTree_ReplaceIndex'
-public	UniqueReplaceIndex		as	'UniqueTree_ReplaceIndex'
-public	MultiReplaceIndex		as	'_ZN9MultiTree12ReplaceIndexEP6data_tPKS0_m'
-public	UniqueReplaceIndex		as	'_ZN10UniqueTree12ReplaceIndexEP6data_tPKS0_m'
+public	ReplaceIndexMulti		as	'MultiTree_ReplaceIndex'
+public	ReplaceIndexUnique		as	'UniqueTree_ReplaceIndex'
+public	ReplaceIndexMulti		as	'_ZN9MultiTree12ReplaceIndexEP6data_tPKS0_m'
+public	ReplaceIndexUnique		as	'_ZN10UniqueTree12ReplaceIndexEP6data_tPKS0_m'
 
 ; Using iterators
-public	MultiReplaceFwd			as	'MultiTree_ReplaceFwd'
-public	UniqueReplaceFwd		as	'UniqueTree_ReplaceFwd'
-public	MultiReplaceBwd			as	'MultiTree_ReplaceBwd'
-public	UniqueReplaceBwd		as	'UniqueTree_ReplaceBwd'
-public	MultiReplaceFwd			as	'_ZN9MultiTree10ReplaceFwdEP6data_tPKS0_'
-public	UniqueReplaceFwd		as	'_ZN10UniqueTree10ReplaceFwdEP6data_tPKS0_'
-public	MultiReplaceBwd			as	'_ZN9MultiTree10ReplaceBwdEP6data_tPKS0_'
-public	UniqueReplaceBwd		as	'_ZN10UniqueTree10ReplaceBwdEP6data_tPKS0_'
+public	ReplaceFwdMulti			as	'MultiTree_ReplaceFwd'
+public	ReplaceFwdUnique		as	'UniqueTree_ReplaceFwd'
+public	ReplaceBwdMulti			as	'MultiTree_ReplaceBwd'
+public	ReplaceBwdUnique		as	'UniqueTree_ReplaceBwd'
+public	ReplaceFwdMulti			as	'_ZN9MultiTree10ReplaceFwdEP6data_tPKS0_'
+public	ReplaceFwdUnique		as	'_ZN10UniqueTree10ReplaceFwdEP6data_tPKS0_'
+public	ReplaceBwdMulti			as	'_ZN9MultiTree10ReplaceBwdEP6data_tPKS0_'
+public	ReplaceBwdUnique		as	'_ZN10UniqueTree10ReplaceBwdEP6data_tPKS0_'
 
 ;******************************************************************************;
 ;       Overriding element value                                               ;
@@ -298,54 +298,54 @@ public	SwapFwdBwd				as	'_ZN10UniqueTree10SwapFwdBwdEv'
 ;==============================================================================;
 
 ; Searching for equal key
-public	FindKeyEqualFwd			as	'MultiTree_FindKeyEqualFwd'
-public	FindKeyEqualFwd			as	'UniqueTree_FindKeyEqualFwd'
-public	FindKeyEqualBwd			as	'MultiTree_FindKeyEqualBwd'
-public	FindKeyEqualBwd			as	'UniqueTree_FindKeyEqualBwd'
-public	FindKeyEqualFwd			as	'_ZN9MultiTree15FindKeyEqualFwdEP6data_t5adt_t'
-public	FindKeyEqualFwd			as	'_ZN10UniqueTree15FindKeyEqualFwdEP6data_t5adt_t'
-public	FindKeyEqualBwd			as	'_ZN9MultiTree15FindKeyEqualBwdEP6data_t5adt_t'
-public	FindKeyEqualBwd			as	'_ZN10UniqueTree15FindKeyEqualBwdEP6data_t5adt_t'
+public	FindEqualFwd			as	'MultiTree_FindEqualFwd'
+public	FindEqualFwd			as	'UniqueTree_FindEqualFwd'
+public	FindEqualBwd			as	'MultiTree_FindEqualBwd'
+public	FindEqualBwd			as	'UniqueTree_FindEqualBwd'
+public	FindEqualFwd			as	'_ZN9MultiTree12FindEqualFwdEP6data_t5adt_t'
+public	FindEqualFwd			as	'_ZN10UniqueTree12FindEqualFwdEP6data_t5adt_t'
+public	FindEqualBwd			as	'_ZN9MultiTree12FindEqualBwdEP6data_t5adt_t'
+public	FindEqualBwd			as	'_ZN10UniqueTree12FindEqualBwdEP6data_t5adt_t'
 
 ; Searching for greater key
-public	FindKeyGreatFwd			as	'MultiTree_FindKeyGreatFwd'
-public	FindKeyGreatFwd			as	'UniqueTree_FindKeyGreatFwd'
-public	FindKeyGreatBwd			as	'MultiTree_FindKeyGreatBwd'
-public	FindKeyGreatBwd			as	'UniqueTree_FindKeyGreatBwd'
-public	FindKeyGreatFwd			as	'_ZN9MultiTree15FindKeyGreatFwdEP6data_t5adt_t'
-public	FindKeyGreatFwd			as	'_ZN10UniqueTree15FindKeyGreatFwdEP6data_t5adt_t'
-public	FindKeyGreatBwd			as	'_ZN9MultiTree15FindKeyGreatBwdEP6data_t5adt_t'
-public	FindKeyGreatBwd			as	'_ZN10UniqueTree15FindKeyGreatBwdEP6data_t5adt_t'
+public	FindGreatFwd			as	'MultiTree_FindGreatFwd'
+public	FindGreatFwd			as	'UniqueTree_FindGreatFwd'
+public	FindGreatBwd			as	'MultiTree_FindGreatBwd'
+public	FindGreatBwd			as	'UniqueTree_FindGreatBwd'
+public	FindGreatFwd			as	'_ZN9MultiTree12FindGreatFwdEP6data_t5adt_t'
+public	FindGreatFwd			as	'_ZN10UniqueTree12FindGreatFwdEP6data_t5adt_t'
+public	FindGreatBwd			as	'_ZN9MultiTree12FindGreatBwdEP6data_t5adt_t'
+public	FindGreatBwd			as	'_ZN10UniqueTree12FindGreatBwdEP6data_t5adt_t'
 
 ; Searching for greater or equal key
-public	FindKeyGreatOrEqualFwd	as	'MultiTree_FindKeyGreatOrEqualFwd'
-public	FindKeyGreatOrEqualFwd	as	'UniqueTree_FindKeyGreatOrEqualFwd'
-public	FindKeyGreatOrEqualBwd	as	'MultiTree_FindKeyGreatOrEqualBwd'
-public	FindKeyGreatOrEqualBwd	as	'UniqueTree_FindKeyGreatOrEqualBwd'
-public	FindKeyGreatOrEqualFwd	as	'_ZN9MultiTree22FindKeyGreatOrEqualFwdEP6data_t5adt_t'
-public	FindKeyGreatOrEqualFwd	as	'_ZN10UniqueTree22FindKeyGreatOrEqualFwdEP6data_t5adt_t'
-public	FindKeyGreatOrEqualBwd	as	'_ZN9MultiTree22FindKeyGreatOrEqualBwdEP6data_t5adt_t'
-public	FindKeyGreatOrEqualBwd	as	'_ZN10UniqueTree22FindKeyGreatOrEqualBwdEP6data_t5adt_t'
+public	FindGreatOrEqualFwd		as	'MultiTree_FindGreatOrEqualFwd'
+public	FindGreatOrEqualFwd		as	'UniqueTree_FindGreatOrEqualFwd'
+public	FindGreatOrEqualBwd		as	'MultiTree_FindGreatOrEqualBwd'
+public	FindGreatOrEqualBwd		as	'UniqueTree_FindGreatOrEqualBwd'
+public	FindGreatOrEqualFwd		as	'_ZN9MultiTree19FindGreatOrEqualFwdEP6data_t5adt_t'
+public	FindGreatOrEqualFwd		as	'_ZN10UniqueTree19FindGreatOrEqualFwdEP6data_t5adt_t'
+public	FindGreatOrEqualBwd		as	'_ZN9MultiTree19FindGreatOrEqualBwdEP6data_t5adt_t'
+public	FindGreatOrEqualBwd		as	'_ZN10UniqueTree19FindGreatOrEqualBwdEP6data_t5adt_t'
 
 ; Searching for less key
-public	FindKeyLessFwd			as	'MultiTree_FindKeyLessFwd'
-public	FindKeyLessFwd			as	'UniqueTree_FindKeyLessFwd'
-public	FindKeyLessBwd			as	'MultiTree_FindKeyLessBwd'
-public	FindKeyLessBwd			as	'UniqueTree_FindKeyLessBwd'
-public	FindKeyLessFwd			as	'_ZN9MultiTree14FindKeyLessFwdEP6data_t5adt_t'
-public	FindKeyLessFwd			as	'_ZN10UniqueTree14FindKeyLessFwdEP6data_t5adt_t'
-public	FindKeyLessBwd			as	'_ZN9MultiTree14FindKeyLessBwdEP6data_t5adt_t'
-public	FindKeyLessBwd			as	'_ZN10UniqueTree14FindKeyLessBwdEP6data_t5adt_t'
+public	FindLessFwd				as	'MultiTree_FindLessFwd'
+public	FindLessFwd				as	'UniqueTree_FindLessFwd'
+public	FindLessBwd				as	'MultiTree_FindLessBwd'
+public	FindLessBwd				as	'UniqueTree_FindLessBwd'
+public	FindLessFwd				as	'_ZN9MultiTree11FindLessFwdEP6data_t5adt_t'
+public	FindLessFwd				as	'_ZN10UniqueTree11FindLessFwdEP6data_t5adt_t'
+public	FindLessBwd				as	'_ZN9MultiTree11FindLessBwdEP6data_t5adt_t'
+public	FindLessBwd				as	'_ZN10UniqueTree11FindLessBwdEP6data_t5adt_t'
 
 ; Searching for less or equal key
-public	FindKeyLessOrEqualFwd	as	'MultiTree_FindKeyLessOrEqualFwd'
-public	FindKeyLessOrEqualFwd	as	'UniqueTree_FindKeyLessOrEqualFwd'
-public	FindKeyLessOrEqualBwd	as	'MultiTree_FindKeyLessOrEqualBwd'
-public	FindKeyLessOrEqualBwd	as	'UniqueTree_FindKeyLessOrEqualBwd'
-public	FindKeyLessOrEqualFwd	as	'_ZN9MultiTree21FindKeyLessOrEqualFwdEP6data_t5adt_t'
-public	FindKeyLessOrEqualFwd	as	'_ZN10UniqueTree21FindKeyLessOrEqualFwdEP6data_t5adt_t'
-public	FindKeyLessOrEqualBwd	as	'_ZN9MultiTree21FindKeyLessOrEqualBwdEP6data_t5adt_t'
-public	FindKeyLessOrEqualBwd	as	'_ZN10UniqueTree21FindKeyLessOrEqualBwdEP6data_t5adt_t'
+public	FindLessOrEqualFwd		as	'MultiTree_FindLessOrEqualFwd'
+public	FindLessOrEqualFwd		as	'UniqueTree_FindLessOrEqualFwd'
+public	FindLessOrEqualBwd		as	'MultiTree_FindLessOrEqualBwd'
+public	FindLessOrEqualBwd		as	'UniqueTree_FindLessOrEqualBwd'
+public	FindLessOrEqualFwd		as	'_ZN9MultiTree18FindLessOrEqualFwdEP6data_t5adt_t'
+public	FindLessOrEqualFwd		as	'_ZN10UniqueTree18FindLessOrEqualFwdEP6data_t5adt_t'
+public	FindLessOrEqualBwd		as	'_ZN9MultiTree18FindLessOrEqualBwdEP6data_t5adt_t'
+public	FindLessOrEqualBwd		as	'_ZN10UniqueTree18FindLessOrEqualBwdEP6data_t5adt_t'
 
 ;==============================================================================;
 ;       Duplicates searching                                                   ;
@@ -362,26 +362,26 @@ public	FindDiffFwd				as	'MultiTree_FindDiffFwd'
 public	FindDiffFwd				as	'UniqueTree_FindDiffFwd'
 public	FindDiffBwd				as	'MultiTree_FindDiffBwd'
 public	FindDiffBwd				as	'UniqueTree_FindDiffBwd'
-public	FindDiffFwd				as	'_ZN9MultiTree11FindDiffFwdEP6data_tPKS_mm'
-public	FindDiffFwd				as	'_ZN10UniqueTree11FindDiffFwdEP6data_tPKS_mm'
-public	FindDiffBwd				as	'_ZN9MultiTree11FindDiffBwdEP6data_tPKS_mm'
-public	FindDiffBwd				as	'_ZN10UniqueTree11FindDiffBwdEP6data_tPKS_mm'
+public	FindDiffFwd				as	'_ZN9MultiTree11FindDiffFwdEP6data_tPKS_m'
+public	FindDiffFwd				as	'_ZN10UniqueTree11FindDiffFwdEP6data_tPKS_m'
+public	FindDiffBwd				as	'_ZN9MultiTree11FindDiffBwdEP6data_tPKS_m'
+public	FindDiffBwd				as	'_ZN10UniqueTree11FindDiffBwdEP6data_tPKS_m'
 
 ;******************************************************************************;
 ;       Key counting                                                           ;
 ;******************************************************************************;
 
 ; Single key counting
-public	CountKey				as	'MultiTree_CountKey'
-public	CountKey				as	'UniqueTree_CountKey'
-public	CountKey				as	'_ZNK9MultiTree8CountKeyE5adt_t'
-public	CountKey				as	'_ZNK10UniqueTree8CountKeyE5adt_t'
+public	CountKeyMulti			as	'MultiTree_CountKey'
+public	CountKeyUnique			as	'UniqueTree_CountKey'
+public	CountKeyMulti			as	'_ZNK9MultiTree8CountKeyE5adt_t'
+public	CountKeyUnique			as	'_ZNK10UniqueTree8CountKeyE5adt_t'
 
 ; Keys set counting
-public	CountKeys				as	'MultiTree_CountKeys'
-public	CountKeys				as	'UniqueTree_CountKeys'
-public	CountKeys				as	'_ZNK9MultiTree9CountKeysEPK5adt_tm'
-public	CountKeys				as	'_ZNK10UniqueTree9CountKeysEPK5adt_tm'
+public	CountKeysMulti			as	'MultiTree_CountKeys'
+public	CountKeysUnique			as	'UniqueTree_CountKeys'
+public	CountKeysMulti			as	'_ZNK9MultiTree9CountKeysEPK5adt_tm'
+public	CountKeysUnique			as	'_ZNK10UniqueTree9CountKeysEPK5adt_tm'
 
 ;******************************************************************************;
 ;       Unique values                                                          ;
@@ -468,9 +468,9 @@ MINCAP		= 4 shl	PSCALE					; Min capacity of b-tree object
 ;       Limit sizes for the nodes                                              ;
 ;==============================================================================;
 LMAX		= NSIZE - KSIZE					; Max size of leaf node
-LMIN		= (LMAX / 2) and not LMASK		; Min size of leaf node
+LMIN		= (LMAX / 2) and -KSIZE			; Min size of leaf node
 BMAX		= LMIN							; Max size of branch node
-BMIN		= (BMAX / 2) and not LMASK		; Min size of branch node
+BMIN		= (BMAX / 2) and -KSIZE			; Min size of branch node
 
 ;==============================================================================;
 ;       Offsets inside b-tree object                                           ;
@@ -486,7 +486,7 @@ ROOT		= 7 * 8							; Offset of object root field
 FUNC		= 8 * 8							; Offset of pointer to key ordering function
 
 ;==============================================================================;
-;       Offsets inside b-tree node                                             ;
+;       Offsets inside node                                                    ;
 ;==============================================================================;
 BROOT		= 0 * 8							; Offset of subtree root field
 BSIZE		= 1 * 8							; Offset of node size field
@@ -642,15 +642,15 @@ vmask	= not smask							; mask for vector loop count
 		and		count, size					; apply mask to size variable
 		jz		.skip						; if (count == 0), then skip the loop
 ;---[Vector loop]--------------------------
-.vloop:	movdqa	temp1, [data + 1 * KSIZE]	; temp1 = data[+1]
-		movdqa	temp2, [data + 2 * KSIZE]	; temp2 = data[+2]
-		movdqa	temp3, [data + 3 * KSIZE]	; temp3 = data[+3]
-		movdqa	temp4, [data + 4 * KSIZE]	; temp4 = data[+4]
-		movdqa	[data + 0 * KSIZE], temp1	; data[+0] = temp1
-		movdqa	[data + 1 * KSIZE], temp2	; data[+1] = temp2
-		movdqa	[data + 2 * KSIZE], temp3	; data[+2] = temp3
-		movdqa	[data + 3 * KSIZE], temp4	; data[+3] = temp4
-		add		data, 4 * KSIZE				; data += 4
+.vloop:	movdqa	temp1, [data - 1 * KSIZE]	; temp1 = data[-1]
+		movdqa	temp2, [data - 2 * KSIZE]	; temp2 = data[-2]
+		movdqa	temp3, [data - 3 * KSIZE]	; temp3 = data[-3]
+		movdqa	temp4, [data - 4 * KSIZE]	; temp4 = data[-4]
+		movdqa	[data - 0 * KSIZE], temp1	; data[-0] = temp1
+		movdqa	[data - 1 * KSIZE], temp2	; data[-1] = temp2
+		movdqa	[data - 2 * KSIZE], temp3	; data[-2] = temp3
+		movdqa	[data - 3 * KSIZE], temp4	; data[-3] = temp4
+		sub		data, 4 * KSIZE				; data -= 4
 		sub		count, 4 * KSIZE			; count -= 4
 		jnz		.vloop						; do while (count != 0)
 ;---[End of vector loop]-------------------
@@ -658,9 +658,9 @@ vmask	= not smask							; mask for vector loop count
 		and		count, size					; apply mask to size variable
 		jz		.exit						; if (count == 0), then go to exit
 ;---[Scalar loop]--------------------------
-.sloop:	movdqa	temp1, [data + 1 * KSIZE]	; temp1 = data[+1]
-		movdqa	[data + 0 * KSIZE], temp1	; data[+0] = temp1
-		add		data, KSIZE					; data++
+.sloop:	movdqa	temp1, [data - 1 * KSIZE]	; temp1 = data[-1]
+		movdqa	[data - 0 * KSIZE], temp1	; data[-0] = temp1
+		sub		data, KSIZE					; data--
 		sub		count, KSIZE				; count--
 		jnz		.sloop						; do while (count != 0)
 ;---[End of scalar loop]-------------------
@@ -690,15 +690,15 @@ vmask	= not smask							; mask for vector loop count
 		and		count, size					; apply mask to size variable
 		jz		.skip						; if (count == 0), then skip the loop
 ;---[Vector loop]--------------------------
-.vloop:	movdqa	temp1, [data - 1 * KSIZE]	; temp1 = data[-1]
-		movdqa	temp2, [data - 2 * KSIZE]	; temp2 = data[-2]
-		movdqa	temp3, [data - 3 * KSIZE]	; temp3 = data[-3]
-		movdqa	temp4, [data - 4 * KSIZE]	; temp4 = data[-4]
-		movdqa	[data - 0 * KSIZE], temp1	; data[-0] = temp1
-		movdqa	[data - 1 * KSIZE], temp2	; data[-1] = temp2
-		movdqa	[data - 2 * KSIZE], temp3	; data[-2] = temp3
-		movdqa	[data - 3 * KSIZE], temp4	; data[-3] = temp4
-		sub		data, 4 * KSIZE				; data -= 4
+.vloop:	movdqa	temp1, [data + 1 * KSIZE]	; temp1 = data[+1]
+		movdqa	temp2, [data + 2 * KSIZE]	; temp2 = data[+2]
+		movdqa	temp3, [data + 3 * KSIZE]	; temp3 = data[+3]
+		movdqa	temp4, [data + 4 * KSIZE]	; temp4 = data[+4]
+		movdqa	[data + 0 * KSIZE], temp1	; data[+0] = temp1
+		movdqa	[data + 1 * KSIZE], temp2	; data[+1] = temp2
+		movdqa	[data + 2 * KSIZE], temp3	; data[+2] = temp3
+		movdqa	[data + 3 * KSIZE], temp4	; data[+3] = temp4
+		add		data, 4 * KSIZE				; data += 4
 		sub		count, 4 * KSIZE			; count -= 4
 		jnz		.vloop						; do while (count != 0)
 ;---[End of vector loop]-------------------
@@ -706,9 +706,9 @@ vmask	= not smask							; mask for vector loop count
 		and		count, size					; apply mask to size variable
 		jz		.exit						; if (count == 0), then go to exit
 ;---[Scalar loop]--------------------------
-.sloop:	movdqa	temp1, [data - 1 * KSIZE]	; temp1 = data[-1]
-		movdqa	[data - 0 * KSIZE], temp1	; data[-0] = temp1
-		sub		data, KSIZE					; data--
+.sloop:	movdqa	temp1, [data + 1 * KSIZE]	; temp1 = data[+1]
+		movdqa	[data + 0 * KSIZE], temp1	; data[+0] = temp1
+		add		data, KSIZE					; data++
 		sub		count, KSIZE				; count--
 		jnz		.sloop						; do while (count != 0)
 ;---[End of scalar loop]-------------------
@@ -737,6 +737,7 @@ vmask	= not smask							; mask for vector loop count
 		add		tdata, KSIZE				; tdata++
 		mov		count, vmask				; load vmask
 		and		count, size					; apply mask to size variable
+		jz		.skip						; if (count == 0), then skip the loop
 ;---[Vector loop]--------------------------
 .vloop:	movdqa	temp0, [sdata + 0 * KSIZE]	; temp0 = sdata[0]
 		movdqa	temp1, [sdata + 1 * KSIZE]	; temp1 = sdata[1]
@@ -751,8 +752,9 @@ vmask	= not smask							; mask for vector loop count
 		sub		count, 4 * KSIZE			; count -= 4
 		jnz		.vloop						; do while (count != 0)
 ;---[End of vector loop]-------------------
-		mov		count, smask				; load smask
+.skip:	mov		count, smask				; load smask
 		and		count, size					; apply mask to size variable
+		jz		.exit						; if (count == 0), then go to exit
 ;---[Scalar loop]--------------------------
 .sloop:	movdqa	temp0, [sdata]				; temp0 = sdata[0]
 		movdqa	[tdata], temp0				; tdata[0] = temp0
@@ -761,7 +763,7 @@ vmask	= not smask							; mask for vector loop count
 		sub		count, KSIZE				; count--
 		jnz		.sloop						; do while (count != 0)
 ;---[End of scalar loop]-------------------
-		ret
+.exit:	ret
 
 ;******************************************************************************;
 ;       Split the leaf node                                                    ;
@@ -777,7 +779,8 @@ temp1	equ		xmm1						; temporary register #2
 temp2	equ		xmm2						; temporary register #3
 temp3	equ		xmm3						; temporary register #4
 ;------------------------------------------
-		mov		count, (LMIN / 4) and not LMASK
+if (LMIN / 4) and -KSIZE
+		mov		count, (LMIN / 4) and -KSIZE
 ;---[Splitting loop]-----------------------
 .loop:	movdqa	temp0, [sdata + 0 * KSIZE]	; temp0 = sdata[0]
 		movdqa	temp1, [sdata + 1 * KSIZE]	; temp1 = sdata[1]
@@ -791,7 +794,7 @@ temp3	equ		xmm3						; temporary register #4
 		add		tdata, 4 * KSIZE			; tdata += 4
 		sub		count, KSIZE				; count--
 		jnz		.loop						; do while (count != 0)
-;---[End of splitting loop]----------------
+end if
 		movdqa	temp0, [sdata + 0 * KSIZE]	; temp0 = sdata[0]
 		movdqa	temp1, [sdata + 1 * KSIZE]	; temp1 = sdata[1]
 		movdqa	temp2, [sdata + 2 * KSIZE]	; temp2 = sdata[2]
@@ -909,94 +912,6 @@ temp8	equ		xmm8						; temporary register #8
 smask	= 1 shl (KSCALE + 2) - 1			; mask for scalar loop count
 vmask	= not smask							; mask for vector loop count
 ;------------------------------------------
-		test	size, size					; if (size == 0)
-		jz		.exit						;     then go to exit
-		mov		count, vmask				; load vmask
-		and		count, size					; apply mask to size variable
-		jz		.skip						; if (count == 0), then skip the loop
-;---[Vector loop]--------------------------
-.vloop:	movdqa	temp1, [data + 1 * KSIZE]	; temp1 = data[+1]
-		movdqa	temp2, [data + 2 * KSIZE]	; temp2 = data[+2]
-		movdqa	temp3, [data + 3 * KSIZE]	; temp3 = data[+3]
-		movdqa	temp4, [data + 4 * KSIZE]	; temp4 = data[+4]
-		movdqa	temp5, [bptr + 1 * KSIZE]	; temp5 = bptr[+1]
-		movdqa	temp6, [bptr + 2 * KSIZE]	; temp6 = bptr[+2]
-		movdqa	temp7, [bptr + 3 * KSIZE]	; temp7 = bptr[+3]
-		movdqa	temp8, [bptr + 4 * KSIZE]	; temp8 = bptr[+4]
-		movdqa	[data + 0 * KSIZE], temp1	; data[+0] = temp1
-		movdqa	[data + 1 * KSIZE], temp2	; data[+1] = temp2
-		movdqa	[data + 2 * KSIZE], temp3	; data[+2] = temp3
-		movdqa	[data + 3 * KSIZE], temp4	; data[+3] = temp4
-		add		data, 4 * KSIZE				; data += 4
-		movdqa	[bptr + 0 * KSIZE], temp5	; bptr[+0] = temp5
-		movdqa	[bptr + 1 * KSIZE], temp6	; bptr[+1] = temp6
-		movdqa	[bptr + 2 * KSIZE], temp7	; bptr[+2] = temp7
-		movdqa	[bptr + 3 * KSIZE], temp8	; bptr[+3] = temp8
-		add		bptr, 4 * KSIZE				; bptr += 4
-		movq	root, temp5					; root = temp5.root
-		mov		[array + root + BROOT], node
-		add		node, KSIZE					; node++
-		movq	root, temp6					; root = temp6.root
-		mov		[array + root + BROOT], node
-		add		node, KSIZE					; node++
-		movq	root, temp7					; root = temp7.root
-		mov		[array + root + BROOT], node
-		add		node, KSIZE					; node++
-		movq	root, temp8					; root = temp8.root
-		mov		[array + root + BROOT], node
-		add		node, KSIZE					; node++
-		sub		count, 4 * KSIZE			; count -= 4
-		jnz		.vloop						; do while (count != 0)
-;---[End of vector loop]-------------------
-.skip:	mov		count, smask				; load smask
-		and		count, size					; apply mask to size variable
-		jz		.exit						; if (count == 0), then go to exit
-;---[Scalar loop]--------------------------
-.sloop:	movdqa	temp1, [data + 1 * KSIZE]	; temp1 = data[+1]
-		movdqa	temp5, [bptr + 1 * KSIZE]	; temp5 = bptr[+1]
-		movdqa	[data + 0 * KSIZE], temp1	; data[+0] = temp1
-		movdqa	[bptr + 0 * KSIZE], temp5	; bptr[+0] = temp5
-		add		data, KSIZE					; data++
-		add		bptr, KSIZE					; bptr++
-		movq	root, temp5					; root = temp5.root
-		mov		[array + root + BROOT], node
-		add		node, KSIZE					; node++
-		sub		count, KSIZE				; count--
-		jnz		.sloop						; do while (count != 0)
-;---[End of scalar loop]-------------------
-.exit:	movdqa	[data], value				; data[0] = value
-		mov		[bptr + TROOT], proot		; bptr[0].root = proot
-		mov		[bptr + TSIZE], psize		; bptr[0].size = psize
-		mov		[array + proot + BROOT], node
-		ret
-
-;******************************************************************************;
-;       Replace element in the right branch node                               ;
-;******************************************************************************;
-BranchReplaceRightCore:
-;---[Parameters]---------------------------
-data	equ		rdi							; pointer to source array of keys
-bptr	equ		rsi							; pointer to source array of subtrees
-array	equ		rdx							; pointer to array of nodes
-node	equ		rcx							; index of branch node to process
-size	equ		r8							; count of elements to move
-proot	equ		r9							; pointer to subtree tree root
-psize	equ		r10							; size of subtree
-value	equ		xmm0						; key to insert
-;---[Internal variables]-------------------
-count	equ		rax							; count of iterations
-root	equ		r11							; index of subtree root node
-temp1	equ		xmm1						; temporary register #1
-temp2	equ		xmm2						; temporary register #2
-temp3	equ		xmm3						; temporary register #3
-temp4	equ		xmm4						; temporary register #4
-temp5	equ		xmm5						; temporary register #5
-temp6	equ		xmm6						; temporary register #6
-temp7	equ		xmm7						; temporary register #7
-temp8	equ		xmm8						; temporary register #8
-smask	= 1 shl (KSCALE + 2) - 1			; mask for scalar loop count
-vmask	= not smask							; mask for vector loop count
-;------------------------------------------
 		movdqa	temp5, [bptr - 1 * KSIZE]	; temp5 = bptr[-1]
 		movdqa	[bptr - 0 * KSIZE], temp5	; bptr[-0] = temp5
 		sub		bptr, KSIZE					; bptr--
@@ -1065,6 +980,94 @@ vmask	= not smask							; mask for vector loop count
 		ret
 
 ;******************************************************************************;
+;       Replace element in the right branch node                               ;
+;******************************************************************************;
+BranchReplaceRightCore:
+;---[Parameters]---------------------------
+data	equ		rdi							; pointer to source array of keys
+bptr	equ		rsi							; pointer to source array of subtrees
+array	equ		rdx							; pointer to array of nodes
+node	equ		rcx							; index of branch node to process
+size	equ		r8							; count of elements to move
+proot	equ		r9							; pointer to subtree tree root
+psize	equ		r10							; size of subtree
+value	equ		xmm0						; key to insert
+;---[Internal variables]-------------------
+count	equ		rax							; count of iterations
+root	equ		r11							; index of subtree root node
+temp1	equ		xmm1						; temporary register #1
+temp2	equ		xmm2						; temporary register #2
+temp3	equ		xmm3						; temporary register #3
+temp4	equ		xmm4						; temporary register #4
+temp5	equ		xmm5						; temporary register #5
+temp6	equ		xmm6						; temporary register #6
+temp7	equ		xmm7						; temporary register #7
+temp8	equ		xmm8						; temporary register #8
+smask	= 1 shl (KSCALE + 2) - 1			; mask for scalar loop count
+vmask	= not smask							; mask for vector loop count
+;------------------------------------------
+		test	size, size					; if (size == 0)
+		jz		.exit						;     then go to exit
+		mov		count, vmask				; load vmask
+		and		count, size					; apply mask to size variable
+		jz		.skip						; if (count == 0), then skip the loop
+;---[Vector loop]--------------------------
+.vloop:	movdqa	temp1, [data + 1 * KSIZE]	; temp1 = data[+1]
+		movdqa	temp2, [data + 2 * KSIZE]	; temp2 = data[+2]
+		movdqa	temp3, [data + 3 * KSIZE]	; temp3 = data[+3]
+		movdqa	temp4, [data + 4 * KSIZE]	; temp4 = data[+4]
+		movdqa	temp5, [bptr + 1 * KSIZE]	; temp5 = bptr[+1]
+		movdqa	temp6, [bptr + 2 * KSIZE]	; temp6 = bptr[+2]
+		movdqa	temp7, [bptr + 3 * KSIZE]	; temp7 = bptr[+3]
+		movdqa	temp8, [bptr + 4 * KSIZE]	; temp8 = bptr[+4]
+		movdqa	[data + 0 * KSIZE], temp1	; data[+0] = temp1
+		movdqa	[data + 1 * KSIZE], temp2	; data[+1] = temp2
+		movdqa	[data + 2 * KSIZE], temp3	; data[+2] = temp3
+		movdqa	[data + 3 * KSIZE], temp4	; data[+3] = temp4
+		add		data, 4 * KSIZE				; data += 4
+		movdqa	[bptr + 0 * KSIZE], temp5	; bptr[+0] = temp5
+		movdqa	[bptr + 1 * KSIZE], temp6	; bptr[+1] = temp6
+		movdqa	[bptr + 2 * KSIZE], temp7	; bptr[+2] = temp7
+		movdqa	[bptr + 3 * KSIZE], temp8	; bptr[+3] = temp8
+		add		bptr, 4 * KSIZE				; bptr += 4
+		movq	root, temp5					; root = temp5.root
+		mov		[array + root + BROOT], node
+		add		node, KSIZE					; node++
+		movq	root, temp6					; root = temp6.root
+		mov		[array + root + BROOT], node
+		add		node, KSIZE					; node++
+		movq	root, temp7					; root = temp7.root
+		mov		[array + root + BROOT], node
+		add		node, KSIZE					; node++
+		movq	root, temp8					; root = temp8.root
+		mov		[array + root + BROOT], node
+		add		node, KSIZE					; node++
+		sub		count, 4 * KSIZE			; count -= 4
+		jnz		.vloop						; do while (count != 0)
+;---[End of vector loop]-------------------
+.skip:	mov		count, smask				; load smask
+		and		count, size					; apply mask to size variable
+		jz		.exit						; if (count == 0), then go to exit
+;---[Scalar loop]--------------------------
+.sloop:	movdqa	temp1, [data + 1 * KSIZE]	; temp1 = data[+1]
+		movdqa	temp5, [bptr + 1 * KSIZE]	; temp5 = bptr[+1]
+		movdqa	[data + 0 * KSIZE], temp1	; data[+0] = temp1
+		movdqa	[bptr + 0 * KSIZE], temp5	; bptr[+0] = temp5
+		add		data, KSIZE					; data++
+		add		bptr, KSIZE					; bptr++
+		movq	root, temp5					; root = temp5.root
+		mov		[array + root + BROOT], node
+		add		node, KSIZE					; node++
+		sub		count, KSIZE				; count--
+		jnz		.sloop						; do while (count != 0)
+;---[End of scalar loop]-------------------
+.exit:	movdqa	[data], value				; data[0] = value
+		mov		[bptr + TROOT], proot		; bptr[0].root = proot
+		mov		[bptr + TSIZE], psize		; bptr[0].size = psize
+		mov		[array + proot + BROOT], node
+		ret
+
+;******************************************************************************;
 ;       Join two branch nodes                                                  ;
 ;******************************************************************************;
 BranchJoinCore:
@@ -1097,6 +1100,7 @@ vmask	= not smask							; mask for vector loop count
 		add		node, KSIZE					; node++
 		mov		count, vmask				; load vmask
 		and		count, size					; apply mask to size variable
+		jz		.skip						; if (count == 0), then skip the loop
 ;---[Vector loop]--------------------------
 .vloop:	movdqa	temp0, [sdata + 0 * KSIZE]	; temp0 = sdata[0]
 		movdqa	temp1, [sdata + 1 * KSIZE]	; temp1 = sdata[1]
@@ -1133,8 +1137,9 @@ vmask	= not smask							; mask for vector loop count
 		sub		count, 4 * KSIZE			; count -= 4
 		jnz		.vloop						; do while (count != 0)
 ;---[End of vector loop]-------------------
-		mov		count, smask				; load smask
+.skip:	mov		count, smask				; load smask
 		and		count, size					; apply mask to size variable
+		jz		.exit						; if (count == 0), then go to exit
 ;---[Scalar loop]--------------------------
 .sloop:	movdqa	temp0, [sdata]				; temp0 = sdata[0]
 		movdqa	temp4, [sbptr]				; temp4 = sbptr[0]
@@ -1150,7 +1155,7 @@ vmask	= not smask							; mask for vector loop count
 		sub		count, KSIZE				; count--
 		jnz		.sloop						; do while (count != 0)
 ;---[End of scalar loop]-------------------
-		movdqa	temp4, [sbptr]				; temp4 = sbptr[0]
+.exit:	movdqa	temp4, [sbptr]				; temp4 = sbptr[0]
 		movdqa	[tbptr], temp4				; tbptr[0] = temp4
 		movq	root, temp4					; root = temp4.root
 		mov		[array + root + BROOT], node
@@ -1181,7 +1186,8 @@ temp6	equ		xmm7						; temporary register #7
 temp7	equ		xmm8						; temporary register #8
 ;------------------------------------------
 		pxor	sum, sum					; sum = 0
-		mov		count, (BMIN / 4) and not LMASK
+if (BMIN / 4) and -KSIZE
+		mov		count, (BMIN / 4) and -KSIZE
 ;---[Splitting loop]-----------------------
 .loop:	movdqa	temp0, [sdata + 0 * KSIZE]	; temp0 = sdata[0]
 		movdqa	temp1, [sdata + 1 * KSIZE]	; temp1 = sdata[1]
@@ -1221,7 +1227,7 @@ temp7	equ		xmm8						; temporary register #8
 		add		node, KSIZE					; node++
 		sub		count, KSIZE				; count--
 		jnz		.loop						; do while (count != 0)
-;---[End of splitting loop]----------------
+end if
 		movdqa	temp0, [sdata + 0 * KSIZE]	; temp0 = sdata[0]
 		movdqa	temp1, [sdata + 1 * KSIZE]	; temp1 = sdata[1]
 		movdqa	temp2, [sdata + 2 * KSIZE]	; temp2 = sdata[2]
@@ -1433,396 +1439,145 @@ space	= 1 * 8								; stack size required by the procedure
 ;******************************************************************************;
 ;       Copying elements                                                       ;
 ;******************************************************************************;
-macro	IMPORT_DATA	func
-{
-;---[Parameters]---------------------------
-target	equ		rdi							; pointer to target b-tree object
-source	equ		rsi							; pointer to source b-tree object
-iter	equ		rdx							; iterator value
-count	equ		rcx							; count of nodes to copy
-;---[Internal variables]-------------------
-result	equ		rax							; result register
-tarray	equ		r8							; pointer to target array of nodes
-sarray	equ		r9							; pointer to source array of nodes
-pool	equ		r10							; pointer to pool free node
-node	equ		r11							; node index
-nsize	equ		result						; node size
-data	equ		source						; pointer to array of keys
-ptr		equ		count						; temporary pointer
-temp	equ		xmm0						; temporary register
-stack	equ		rsp							; stack pointer
-s_res	equ		stack + 0 * 8				; stack position of "result" variable
-s_tgt	equ		stack + 1 * 8				; stack position of "target" variable
-s_tarr	equ		stack + 2 * 8				; stack position of "tarray" variable
-s_sarr	equ		stack + 3 * 8				; stack position of "sarray" variable
-s_count	equ		stack + 4 * 8				; stack position of "count" variable
-s_pool	equ		stack + 5 * 8				; stack position of "pool" variable
-s_node	equ		stack + 6 * 8				; stack position of "node" variable
-s_nsize	equ		stack + 7 * 8				; stack position of "nsize" variable
-s_data	equ		stack + 8 * 8				; stack position of "data" variable
-space	= 9 * 8								; stack size required by the procedure
-;------------------------------------------
-		sub		stack, space				; reserving stack size for local vars
-		mov		sarray, [source + ARRAY]	; get pointer to source array of nodes
-		mov		tarray, [target + ARRAY]	; get pointer to target array of nodes
-		mov		pool, [target + POOL]		; get free node from pool
-		mov		[s_res], pool				; save index of data chain
-		mov		node, pool					; node = pool
-		mov		pool, [tarray + pool + BROOT]
-		mov		qword [tarray + node + BROOT], EMPTY
-		lea		data, [tarray + node + BDATA]
-		xor		nsize, nsize				; nsize = 0
-		mov		[s_tgt], target				; save "target" variable into the stack
-		mov		[s_tarr], tarray			; save "tarray" variable into the stack
-		mov		[s_sarr], sarray			; save "sarray" variable into the stack
-		mov		[s_count], count			; save "count" variable into the stack
-		mov		[s_pool], pool				; save "pool" variable into the stack
-		mov		[s_node], node				; save "node" variable into the stack
-		mov		[s_nsize], nsize			; save "nsize" variable into the stack
-		mov		[s_data], data				; save "data" variable into the stack
-;---[Copying loop]-------------------------
-.loop:	mov		ptr, PMASK
-		and		ptr, iter					; prt = iter & PMASK
-		movdqa	temp, [sarray + ptr + BDATA]
-		movdqa	[data], temp				; data[0] = sarray[ptr].data
-		add		data, KSIZE					; data++
-		add		nsize, KSIZE				; nsize += KSIZE
-		mov		[tarray + node + BSIZE], nsize
-		mov		[s_nsize], nsize			; save "nsize" variable into the stack
-		mov		[s_data], data				; save "data" variable into the stack
-		sub		qword [s_count], KSIZE		; count -= KSIZE
-		jz		.break						; if (count == 0), then break the loop
-		mov		param1, sarray
-		mov		param2, iter
-		mov		param3, KSIZE
-		call	func
-		mov		iter, result				; iter = source.func (sarray, iter, KSIZE)
-		mov		tarray, [s_tarr]			; get "tarray" variable from the stack
-		mov		sarray, [s_sarr]			; get "sarray" variable from the stack
-		mov		pool, [s_pool]				; get "pool" variable from the stack
-		mov		node, [s_node]				; get "node" variable from the stack
-		mov		nsize, [s_nsize]			; get "nsize" variable from the stack
-		mov		data, [s_data]				; get "data" variable from the stack
-		cmp		nsize, LMAX					; if (nsize == LMAX)
-		jne		.loop						; {
-		mov		[tarray + node + BROOT], pool
-		mov		node, pool					;     node = pool
-		mov		pool, [tarray + pool + BROOT]
-		mov		qword [tarray + node + BROOT], EMPTY
-		lea		data, [tarray + node + BDATA]
-		xor		nsize, nsize				;     nsize = 0
-		mov		[s_pool], pool				; save "pool" variable into the stack
-		mov		[s_node], node				; save "node" variable into the stack
-		mov		[s_nsize], nsize			; save "nsize" variable into the stack
-		mov		[s_data], data				; save "data" variable into the stack
-		jmp		.loop						; }
-;---[End of loop]--------------------------
-.break:	mov		result, [s_res]				; get "result" variable from the stack
-		mov		target, [s_tgt]				; get "target" variable from the stack
-		mov		[target + POOL], pool		; update pool free node index
-		add		stack, space				; restoring back the stack pointer
-		ret
-}
-ImportDataFwd:	IMPORT_DATA	GoNext
-ImportDataBwd:	IMPORT_DATA	GoPrev
-;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	ADD_DATA	func
-{
-;---[Parameters]---------------------------
-this	equ		rdi							; pointer to b-tree object
-node	equ		rdx							; index of node to start from
-;---[Internal variables]-------------------
-result	equ		rax							; result register
-array	equ		r8							; pointer to array of nodes
-next	equ		r9							; index of next node in the data chain
-nsize	equ		r10							; node size
-data	equ		r11							; pointer to array of keys
-value	equ		xmm0						; key value
-stack	equ		rsp							; stack pointer
-s_this	equ		stack + 0 * 8				; stack position of "this" variable
-s_array	equ		stack + 1 * 8				; stack position of "array" variable
-s_node	equ		stack + 2 * 8				; stack position of "node" variable
-s_nsize	equ		stack + 3 * 8				; stack position of "nsize" variable
-s_data	equ		stack + 4 * 8				; stack position of "data" variable
-space	= 5 * 8								; stack size required by the procedure
-;------------------------------------------
-		sub		stack, space				; reserving stack size for local vars
-		mov		array, [this + ARRAY]		; get pointer to array of nodes
-		mov		[s_this], this				; save "this" variable into the stack
-		mov		[s_array], array			; save "array" variable into the stack
-		mov		[s_node], node				; save "node" variable into the stack
-;---[Inserting loop]-----------------------
-.loop:	mov		nsize, [array + node + BSIZE]
-		lea		data, [array + node + BDATA]
-		mov		[s_nsize], nsize			; save "nsize" variable into the stack
-;---[Internal loop]------------------------
-.iloop:	movdqa	value, [data]				; value = data[0]
-		add		data, KSIZE					; data++
-		mov		[s_data], data				; save "data" variable into the stack
-		call	func						; status = this.func (value)
-		mov		this, [s_this]				; get "this" variable from the stack
-		mov		data, [s_data]				; get "data" variable from the stack
-		sub		qword [s_nsize], KSIZE		; nsize -= KSIZE
-		jnz		.iloop						; do while (nsize != 0)
-;---[End of internal loop]-----------------
-		mov		array, [s_array]			; get "array" variable from the stack
-		mov		node, [s_node]				; get "node" variable from the stack
-		mov		next, [array + node + BROOT]
-;---[Free node]----------------------------
-		mov		result, [this + POOL]		; array[node].root = this.pool
-		mov		[array + node + BROOT], result
-		mov		[this + POOL], node			; this.pool = node
-		mov		node, next					; node = next
-		mov		[s_node], next				; save "node" variable into the stack
-		cmp		next, EMPTY
-		jne		.loop						; do while (next != EMPTY)
-;---[End of loop]--------------------------
-		add		stack, space				; restoring back the stack pointer
-		ret
-}
-AddDataMulti:	ADD_DATA	InsertMultiCore
-AddDataUnique:	ADD_DATA	InsertUniqueCore
-;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-ReplaceDataUnique:
-;---[Parameters]---------------------------
-target	equ		rdi							; pointer to target b-tree object
-source	equ		rsi							; pointer to source b-tree object
-node	equ		rdx							; index of node to start from
-;---[Internal variables]-------------------
-result	equ		rax							; result register
-status	equ		al							; operation status
-array	equ		r8							; pointer to array of nodes
-next	equ		r9							; index of next node in the data chain
-nsize	equ		r10							; node size
-data	equ		r11							; pointer to array of keys
-value	equ		xmm0						; key value
-stack	equ		rsp							; stack pointer
-s_tgt	equ		stack + 0 * 8				; stack position of "target" variable
-s_src	equ		stack + 1 * 8				; stack position of "source" variable
-s_array	equ		stack + 2 * 8				; stack position of "array" variable
-s_node	equ		stack + 3 * 8				; stack position of "node" variable
-s_nsize	equ		stack + 4 * 8				; stack position of "nsize" variable
-s_data	equ		stack + 5 * 8				; stack position of "data" variable
-s_value	equ		stack + 6 * 8				; stack position of "value" variable
-space	= 9 * 8								; stack size required by the procedure
-;------------------------------------------
-		sub		stack, space				; reserving stack size for local vars
-		mov		array, [target + ARRAY]		; get pointer to array of nodes
-		mov		[s_tgt], target				; save "target" variable into the stack
-		mov		[s_src], source				; save "source" variable into the stack
-		mov		[s_array], array			; save "array" variable into the stack
-		mov		[s_node], node				; save "node" variable into the stack
-;---[Inserting loop]-----------------------
-.loop:	mov		nsize, [array + node + BSIZE]
-		lea		data, [array + node + BDATA]
-		mov		[s_nsize], nsize			; save "nsize" variable into the stack
-;---[Internal loop]------------------------
-.iloop:	movdqa	value, [data]				; value = data[0]
-		add		data, KSIZE					; data++
-		movdqa	[s_value], value			; save "value" variable into the stack
-		mov		[s_data], data				; save "data" variable into the stack
-		mov		param1, [s_tgt]
-		call	InsertUniqueCore			; status = target.InsertUniqueCore (value)
-		test	status, status				; if (status == false)
-		jz		.src						;     then return key into source b-tree
-.back:	mov		target, [s_tgt]				; get "target" variable from the stack
-		mov		data, [s_data]				; get "data" variable from the stack
-		sub		qword [s_nsize], KSIZE		; nsize -= KSIZE
-		jnz		.iloop						; do while (nsize != 0)
-;---[End of internal loop]-----------------
-		mov		array, [s_array]			; get "array" variable from the stack
-		mov		node, [s_node]				; get "node" variable from the stack
-		mov		next, [array + node + BROOT]
-;---[Free node]----------------------------
-		mov		result, [target + POOL]		; array[node].root = target.pool
-		mov		[array + node + BROOT], result
-		mov		[target + POOL], node		; target.pool = node
-		mov		node, next					; node = next
-		mov		[s_node], next				; save "node" variable into the stack
-		cmp		next, EMPTY
-		jne		.loop						; do while (next != EMPTY)
-;---[End of loop]--------------------------
-		add		stack, space				; restoring back the stack pointer
-		ret
-;---[Insert key into source b-tree]--------
-.src:	movdqa	value, [s_value]			; get "value" variable from the stack
-		mov		param1, [s_src]
-		call	InsertUniqueCore			; call source.InsertUniqueCore (value)
-		jmp		.back						; go back
-;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	DELETE_DATA		offst, bwd
-{
-;---[Parameters]---------------------------
-this	equ		rdi							; pointer to b-tree object
-iter	equ		rsi							; iterator value
-index	equ		rdx							; node index to restore iterator
-count	equ		rcx							; count of nodes to delete
-;---[Internal variables]-------------------
-result	equ		rax							; result register
-stack	equ		rsp							; stack pointer
-s_this	equ		stack + 0 * 8				; stack position of "this" variable
-s_index	equ		stack + 1 * 8				; stack position of "index" variable
-s_count	equ		stack + 2 * 8				; stack position of "count" variable
-space	= 3 * 8								; stack size required by the procedure
-;------------------------------------------
-		sub		stack, space				; reserving stack size for local vars
-		mov		[s_this], this				; save "this" variable into the stack
-		mov		[s_index], index			; save "index" variable into the stack
-		mov		[s_count], count			; save "count" variable into the stack
-		mov		[this + offst], iter		; set iterator value
-;---[Deleting loop]------------------------
-.loop:	mov		param2, [this + offst]
-		mov		param1, this
-		call	RemoveCore					; call this.RemoveCore (iter)
-		mov		this, [s_this]				; get "this" variable from the stack
-		sub		qword [s_count], KSIZE		; count -= KSIZE
-		jnz		.loop						; do while (count != 0)
-;---[End of loop]--------------------------
-		mov		index, [s_index]			; get "index" variable from the stack
-if bwd
-		add		index, KSIZE
-		neg		index
-		add		index, [this + SIZE]		; index = this.size - (index + KSIZE)
-end if
-;---[Restore iterator position]------------
-		cmp		index, [this + SIZE]		; if (index < this.size)
-		jnb		@f							; {
-		mov		param4, index
-		mov		param3, [this + HEIGHT]
-		mov		param2, [this + ROOT]
-		mov		param1, [this + ARRAY]
-		call	GetNode						;     iter = GetNode (array, root, height, index)
-		mov		this, [s_this]				; get "this" variable from the stack
-		mov		[this + offst], result		; }
-@@:		add		stack, space				; restoring back the stack pointer
-		ret
-}
-DeleteDataFwd:	DELETE_DATA		FWD, 0
-DeleteDataBwd:	DELETE_DATA		BWD, 1
-;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	COPY_MOVE	movefunc, importfunc, copyfunc, delfunc, offst, dir, move
+macro	COPY_MOVE	insfunc, movefunc, offst, bwd, move
 {
 ;---[Parameters]---------------------------
 this	equ		rdi							; pointer to target b-tree object
 source	equ		rsi							; pointer to source b-tree object
-pos		equ		rdx							; beginning position
-count	equ		rcx							; count of nodes to copy
+count	equ		rdx							; count of nodes to copy
 ;---[Internal variables]-------------------
-result	equ		rax							; result register
 status	equ		al							; operation status
+result	equ		rax							; result register
 low		equ		rax							; low part of value for div operation
 high	equ		rdx							; high part of value for div operation
-iter	equ		r8							; iterator value
-size	equ		r9							; b-tree size
+array	equ		r8							; pointer to array of nodes
+iter	equ		r9							; iterator value
+size	equ		r10							; object size
+value	equ		xmm0						; value to insert
 stack	equ		rsp							; stack pointer
 s_this	equ		stack + 0 * 8				; stack position of "this" variable
 s_src	equ		stack + 1 * 8				; stack position of "source" variable
-s_pos	equ		stack + 2 * 8				; stack position of "pos" variable
-s_count	equ		stack + 3 * 8				; stack position of "count" variable
+s_count	equ		stack + 2 * 8				; stack position of "count" variable
+s_array	equ		stack + 3 * 8				; stack position of "array" variable
 s_iter	equ		stack + 4 * 8				; stack position of "iter" variable
-s_index	equ		stack + 5 * 8				; stack position of "index" variable
-s_head	equ		stack + 6 * 8				; stack position of "head" variable
+s_cnt	equ		stack + 5 * 8				; stack position of "counter" variable
 space	= 7 * 8								; stack size required by the procedure
 ;------------------------------------------
 		sub		stack, space				; reserving stack size for local vars
-;---[Check target iterator]----------------
-		cmp		qword [this + offst], EMPTY	; if (iter == EMPTY)
+		cmp		this, source				; if (this == source)
 		je		.error						;     then go to error branch
 ;---[Check source iterator]----------------
+		mov		array, [source + ARRAY]		; get pointer to array of nodes
 		mov		iter, [source + offst]		; get source iterator value
 		cmp		iter, EMPTY					; if (iter == EMPTY)
 		je		.error						;     then go to error branch
 ;---[Get iterator position]----------------
-		shl		pos, KSCALE
-		shl		count, KSCALE
 		mov		[s_this], this				; save "this" variable into the stack
 		mov		[s_src], source				; save "source" variable into the stack
-		mov		[s_pos], pos				; save "pos" variable into the stack
 		mov		[s_count], count			; save "count" variable into the stack
+		mov		[s_array], array			; save "array" variable into the stack
 		mov		[s_iter], iter				; save "iter" variable into the stack
-		mov		param1, [source + ARRAY]
 		mov		param2, iter
+		mov		param1, array
 		call	GetPos						; result = GetPos (source.array, iter)
+		mov		this, [s_this]				; get "this" variable from the stack
 		mov		source, [s_src]				; get "source" variable from the stack
-		mov		pos, [s_pos]				; get "pos" variable from the stack
 		mov		count, [s_count]			; get "count" variable from the stack
-		mov		size, [source + SIZE]		; get size of source b-tree object
-if dir
-		add		result, KSIZE
-		neg		result
-		add		result, size				; result = size - (result + KSIZE)
+		mov		array, [s_array]			; get "array" variable from the stack
+		mov		iter, [s_iter]				; get "iter" variable from the stack
+if bwd
+		add		size, KSIZE					; size = result + KSIZE
+else
+		neg		size
+		add		size, [source + SIZE]		; size = source.size - result
 end if
-		mov		[s_index], result			; save "index" variable into the stack
-		add		result, pos
-		sub		size, result				; size -= result + pos
 ;---[Correct count]------------------------
+		shl		count, KSCALE
 		cmp		count, size					; if (count > size)
 		cmova	count, size					;     count = size
 		mov		[s_count], count			; save "count" variable into the stack
-;---[Move source iterator]-----------------
-		test	pos, pos					; if (pos == 0)
-		jz		.skip						;     then skip following code
-		mov		param1, [source + ARRAY]
-		mov		param2, [s_iter]
-		mov		param3, pos
-		call	movefunc					; result = movefunc (source.array, iter, pos)
-		cmp		result, EMPTY				; if (result == EMPTY)
-		je		.error						;     then go to error branch
-		mov		[s_iter], result			; save "iter" variable into the stack
-		mov		count, [s_count]			; get "count" variable from the stack
 ;---[Check count]--------------------------
-.skip:	test	count, count				; if (count == 0)
+		test	count, count				; if (count == 0)
 		jz		.exit						;     then go to exit
 ;---[Check object capacity]----------------
-		mov		this, [s_this]				; get "this" variable from the stack
-		mov		size, [this + SIZE]
-		lea		size, [size + count + BMAX - 2 * KSIZE]
-		add		count, LMAX - KSIZE
+		mov		low, [this + SIZE]
+		lea		low, [low + count + BMAX - 2 * KSIZE]
 		xor		high, high					; high = 0
-		mov		low, count
-		mov		count, LMAX
-		div		count						; low = (count + LMAX - KSIZE) / LMAX
-		shl		low, NSCALE
-		mov		count, low					; count = (count + LMAX - KSIZE) / LMAX * NSIZE
-		xor		high, high					; high = 0
-		mov		low, size
 		mov		size, BMAX - KSIZE
-		div		size						; low = (size + count + BMAX - 2 * KSIZE) / (BMAX - KSIZE)
-		shl		low, NSCALE
-		add		low, count					; low = (size + count + BMAX - 2 * KSIZE) / (BMAX - KSIZE) * NSIZE + count
+		div		size
+		shl		low, NSCALE					; low = (size + count + BMAX - 2 * KSIZE) / (BMAX - KSIZE) * NSIZE
 	Capacity	low, count, MINCAP			; compute new capacity of target object
 		cmp		low, [this + CAPACITY]		; if (low > capacity)
 		ja		.ext						;     then try to extend object capacity
-;---[Import elements to target object]-----
-.back:	mov		param4, [s_count]
-		mov		param3, [s_iter]
-		mov		param2, [s_src]
-		mov		param1, [s_this]
-		call	importfunc					; result = this.importfunc (source, iter, count)
-		mov		[s_head], result			; save "head" variable into the stack
-;---[Remove elements from source object]---
+.eback:	mov		count, [s_count]			; get "count" variable from the stack
+		mov		[s_cnt], count				; counter = count
+;---[Copying/moving loop]------------------
+.loop:	and		iter, PMASK
+		movdqa	value, [array + iter + BDATA]
+		call	insfunc						; call this.insfunc (value)
+		mov		source, [s_src]				; get "source" variable from the stack
+		test	status, status				; if (!status)
+		jz		.skip						;     then go to skip branch
 if move
-		mov		param4, [s_count]
-		mov		param3, [s_index]
+		mov		this, [s_src]				; get "source" variable from the stack
+		mov		param2, [source + offst]
+		call	RemoveCore					; call source.RemoveCore (iter)
+else
+		mov		param1, [s_array]
 		mov		param2, [s_iter]
-		mov		param1, [s_src]
-		call	delfunc						; call source.delfunc (iter, index, count)
+		mov		param3, KSIZE
+		call	movefunc					; result = movefunc (source.array, source.iter, KSIZE)
 end if
-;---[Insert elements into the object]------
-		mov		param3, [s_head]
-		mov		param2, [s_src]
-		mov		param1, [s_this]
-		call	copyfunc					; call this.copyfunc (source, head)
+		mov		this, [s_this]				; get "this" variable from the stack
+		mov		array, [s_array]			; get "array" variable from the stack
+if move
+		mov		source, [s_src]				; get "source" variable from the stack
+		mov		iter, [source + offst]		; iter = source.iter
+else
+		mov		iter, result				; iter = result
+		mov		[s_iter], result			; save "iter" variable into the stack
+end if
+		sub		qword [s_cnt], KSIZE		; counter--
+		jnz		.loop						; do while (counter != 0)
 ;---[Normal exit branch]-------------------
 .exit:	mov		result, [s_count]			; get "count" variable from the stack
+		add		stack, space				; restoring back the stack pointer
+		shr		result, KSCALE				; return count
+		ret
+;---[Skip element branch]------------------
+.skip:	sub		qword [s_count], KSIZE		; count--
+		mov		param1, [s_array]
+if move
+		mov		param2, [source + offst]
+else
+		mov		param2, [s_iter]
+end if
+		mov		param3, KSIZE
+		call	movefunc					; result = movefunc (source.array, source.iter, KSIZE)
+		mov		this, [s_this]				; get "this" variable from the stack
+		mov		array, [s_array]			; get "array" variable from the stack
+if move
+		mov		source, [s_src]				; get "source" variable from the stack
+		mov		iter, [source + offst]		; iter = source.iter
+else
+		mov		iter, result				; iter = result
+		mov		[s_iter], result			; save "iter" variable into the stack
+end if
+		sub		qword [s_cnt], KSIZE		; counter--
+		jnz		.loop						; do while (counter != 0)
+		mov		result, [s_count]			; get "count" variable from the stack
 		add		stack, space				; restoring back the stack pointer
 		shr		result, KSCALE				; return count
 		ret
 ;---[Extend object capacity]---------------
 .ext:	mov		param2, low
 		call	Extend						; status = this.Extend (low)
+		mov		this, [s_this]				; get "this" variable from the stack
+		mov		source, [s_src]				; get "source" variable from the stack
+		mov		array, [s_array]			; get "array" variable from the stack
+		mov		iter, [s_iter]				; get "iter" variable from the stack
 		test	status, status				; if (status)
-		jnz		.back						;     then go back
+		jnz		.eback						;     then go back
 ;---[Error branch]-------------------------
 .error:	add		stack, space				; restoring back the stack pointer
 		mov		result, ERROR				; return ERROR
@@ -1830,24 +1585,24 @@ end if
 }
 
 ; Using forward iterator
-CopyFwdMulti:	COPY_MOVE	GoNext, ImportDataFwd, AddDataMulti, DeleteDataFwd, FWD, 0, 0
-CopyFwdUnique:	COPY_MOVE	GoNext, ImportDataFwd, AddDataUnique, DeleteDataFwd, FWD, 0, 0
+CopyFwdMulti:	COPY_MOVE	InsertCoreMulti, GoNext, FWD, 0, 0
+CopyFwdUnique:	COPY_MOVE	InsertCoreUnique, GoNext, FWD, 0, 0
 
 ; Using backward iterator
-CopyBwdMulti:	COPY_MOVE	GoPrev, ImportDataBwd, AddDataMulti, DeleteDataBwd, BWD, 1, 0
-CopyBwdUnique:	COPY_MOVE	GoPrev, ImportDataBwd, AddDataUnique, DeleteDataBwd, BWD, 1, 0
+CopyBwdMulti:	COPY_MOVE	InsertCoreMulti, GoPrev, BWD, 0, 0
+CopyBwdUnique:	COPY_MOVE	InsertCoreUnique, GoPrev, BWD, 0, 0
 
 ;******************************************************************************;
 ;       Moving elements                                                        ;
 ;******************************************************************************;
 
 ; Using forward iterator
-MoveFwdMulti:	COPY_MOVE	GoNext, ImportDataFwd, AddDataMulti, DeleteDataFwd, FWD, 0, 1
-MoveFwdUnique:	COPY_MOVE	GoNext, ImportDataFwd, ReplaceDataUnique, DeleteDataFwd, FWD, 0, 1
+MoveFwdMulti:	COPY_MOVE	InsertCoreMulti, GoNext, FWD, 0, 1
+MoveFwdUnique:	COPY_MOVE	InsertCoreUnique, GoNext, FWD, 0, 1
 
 ; Using backward iterator
-MoveBwdMulti:	COPY_MOVE	GoPrev, ImportDataBwd, AddDataMulti, DeleteDataBwd, BWD, 1, 1
-MoveBwdUnique:	COPY_MOVE	GoPrev, ImportDataBwd, ReplaceDataUnique, DeleteDataBwd, BWD, 1, 1
+MoveBwdMulti:	COPY_MOVE	InsertCoreMulti, GoPrev, BWD, 0, 1
+MoveBwdUnique:	COPY_MOVE	InsertCoreUnique, GoPrev, BWD, 0, 1
 
 ;******************************************************************************;
 ;       Insertion of element                                                   ;
@@ -1875,9 +1630,9 @@ iter	equ		result						; iterator value
 .loop:	add		node, array
 		mov		iter, [node + BROOT]		; iter = array[node].root
 		sub		qword [node + index + BPTR + TSIZE], KSIZE
-		mov		node, NMASK
+		mov		node, NMASK					; load node mask
 		and		node, iter					; node = iter & NMASK
-		mov		index, IMASK
+		mov		index, IMASK				; load index mask
 		and		index, iter					; index = iter & IMASK
 		cmp		node, EMPTY
 		jne		.loop						; do while (node != EMPTY)
@@ -1925,19 +1680,19 @@ space	= 3 * 8								; stack size required by the procedure
 		add		node, size					; node += size
 		lea		param1, [array + node + BDATA]
 		lea		param2, [pos + size]
-		call	LeafReplaceRightCore		; call LeafReplaceRightCore (array[node].data + size, size - pos, value)
+		call	LeafReplaceLeftCore			; call LeafReplaceLeftCore (array[node].data + size, size - pos, value)
 		mov		this, [s_this]				; get "this" variable from the stack
 		mov		node, [s_node]				; get "node" variable from the stack
 		mov		pos, [s_pos]				; get "pos" variable from the stack
 ;---[Correct forward iterator]-------------
 		mov		iter, [this + FWD]			; iter = this.fwd
-		mov		nval, NMASK
+		mov		nval, NMASK					; load node mask
 		and		nval, iter					; nval = iter & NMASK
 		cmp		nval, node					; if (nval == node)
 		je		.fwd						;     then check iterator position
 ;---[Correct backward iterator]------------
 .back1:	mov		iter, [this + BWD]			; iter = this.bwd
-		mov		nval, NMASK
+		mov		nval, NMASK					; load node mask
 		and		nval, iter					; nval = iter & NMASK
 		cmp		nval, node					; if (nval == node)
 		je		.bwd						;     then check iterator position
@@ -1946,7 +1701,7 @@ space	= 3 * 8								; stack size required by the procedure
 		mov		result, 1					; return true
 		ret
 ;---[Correct forward iterator branch]------
-.fwd:	mov		ival, IMASK
+.fwd:	mov		ival, IMASK					; load index mask
 		and		ival, iter					; ival = iter & IMASK
 		lea		iter1, [iter + KSIZE]
 		cmp		ival, pos					; if (ival >= pos)
@@ -1954,7 +1709,7 @@ space	= 3 * 8								; stack size required by the procedure
 		mov		[this + FWD], iter			; update iterator position
 		jmp		.back1						; go back
 ;---[Correct backward iterator branch]-----
-.bwd:	mov		ival, IMASK
+.bwd:	mov		ival, IMASK					; load index mask
 		and		ival, iter					; ival = iter & IMASK
 		lea		iter1, [iter + KSIZE]
 		cmp		ival, pos					; if (ival >= pos)
@@ -2044,9 +1799,9 @@ space	= 11 * 8							; stack size required by the procedure
 		mov		[s_res2], res2				; save "res2" variable into the stack
 ;---[Insert median into the top node]------
 		mov		root, [array + node + BROOT]
-		mov		tnode, NMASK
+		mov		tnode, NMASK				; load node mask
 		and		tnode, root					; tnode = array[node].root & NMASK
-		mov		tindex, IMASK
+		mov		tindex, IMASK				; load index mask
 		and		tindex, root				; tindex = array[node].root & IMASK
 		mov		[s_tnode], tnode			; save "tnode" variable into the stack
 		mov		[s_tind], tindex			; save "tindex" variable into the stack
@@ -2072,13 +1827,13 @@ space	= 11 * 8							; stack size required by the procedure
 		mov		tindex, [s_tind]			; get "tindex" variable from the stack
 ;---[Correct forward iterator]-------------
 		mov		iter, [this + FWD]			; iter = this.fwd
-		mov		nval, NMASK
+		mov		nval, NMASK					; load node mask
 		and		nval, iter					; nval = iter & NMASK
 		cmp		nval, node					; if (nval == node)
 		je		.fwd						;     then check iterator position
 ;---[Correct backward iterator]------------
 .back1:	mov		iter, [this + BWD]			; iter = this.bwd
-		mov		nval, NMASK
+		mov		nval, NMASK					; load node mask
 		and		nval, iter					; nval = iter & NMASK
 		cmp		nval, node					; if (nval == node)
 		je		.bwd						;     then check iterator position
@@ -2088,7 +1843,7 @@ space	= 11 * 8							; stack size required by the procedure
 		add		stack, space				; restoring back the stack pointer
 		ret
 ;---[Correct forward iterator branch]------
-.fwd:	mov		ival, IMASK
+.fwd:	mov		ival, IMASK					; load index mask
 		and		ival, iter					; ival = iter & IMASK
 		lea		iter1, [tnode + tindex + 1]
 		lea		iter2, [nnode + ival - LMIN - KSIZE]
@@ -2100,10 +1855,10 @@ space	= 11 * 8							; stack size required by the procedure
 		mov		[this + FWD], iter			; update iterator position
 		jmp		.back1						; go back
 ;---[Correct backward iterator branch]-----
-.bwd:	mov		ival, IMASK
+.bwd:	mov		ival, IMASK					; load index mask
 		and		ival, iter					; ival = iter & IMASK
 		lea		iter1, [tnode + tindex + 1]
-		lea		iter2, [nnode + iter - LMIN - KSIZE]
+		lea		iter2, [nnode + ival - LMIN - KSIZE]
 		add		iter1, [s_level]
 		add		iter2, [s_level]
 		cmp		ival, LMIN
@@ -2159,19 +1914,19 @@ space	= 3 * 8								; stack size required by the procedure
 		mov		param3, array
 		lea		param1, [array + node + BDATA]
 		lea		param2, [array + node + KSIZE + BPTR]
-		call	BranchReplaceRightCore		; call BranchReplaceRightCore (array[node].data + nsize, array[node].bptr + nsize + KSIZE, array, node + nsize + KSIZE, nsize - pos, ptr, value)
+		call	BranchReplaceLeftCore		; call BranchReplaceLeftCore (array[node].data + nsize, array[node].bptr + nsize + KSIZE, array, node + nsize + KSIZE, nsize - pos, ptr, value)
 		mov		this, [s_this]				; get "this" variable from the stack
 		mov		node, [s_node]				; get "node" variable from the stack
 		mov		pos, [s_pos]				; get "pos" variable from the stack
 ;---[Correct forward iterator]-------------
 		mov		iter, [this + FWD]			; iter = this.fwd
-		mov		nval, NMASK
+		mov		nval, NMASK					; load node mask
 		and		nval, iter					; nval = iter & NMASK
 		cmp		nval, node					; if (nval == node)
 		je		.fwd						;     then check iterator position
 ;---[Correct backward iterator]------------
 .back1:	mov		iter, [this + BWD]			; iter = this.bwd
-		mov		nval, NMASK
+		mov		nval, NMASK					; load node mask
 		and		nval, iter					; nval = iter & NMASK
 		cmp		nval, node					; if (nval == node)
 		je		.bwd						;     then check iterator position
@@ -2180,7 +1935,7 @@ space	= 3 * 8								; stack size required by the procedure
 		mov		result, 1					; return true
 		ret
 ;---[Correct forward iterator branch]------
-.fwd:	mov		ival, IMASK
+.fwd:	mov		ival, IMASK					; load index mask
 		and		ival, iter					; ival = iter & IMASK
 		lea		iter1, [iter + KSIZE]
 		cmp		ival, pos					; if (ival >= pos)
@@ -2188,7 +1943,7 @@ space	= 3 * 8								; stack size required by the procedure
 		mov		[this + FWD], iter			; update iterator position
 		jmp		.back1						; go back
 ;---[Correct backward iterator branch]-----
-.bwd:	mov		ival, IMASK
+.bwd:	mov		ival, IMASK					; load index mask
 		and		ival, iter					; ival = iter & IMASK
 		lea		iter1, [iter + KSIZE]
 		cmp		ival, pos					; if (ival >= pos)
@@ -2265,9 +2020,9 @@ space	= 9 * 8								; stack size required by the procedure
 		movdqa	median, [array + node + BMIN + BDATA]
 ;---[Insert median into the top node]------
 		mov		root, [array + node + BROOT]
-		mov		tnode, NMASK
+		mov		tnode, NMASK				; load node mask
 		and		tnode, root					; tnode = array[node].root & NMASK
-		mov		tindex, IMASK
+		mov		tindex, IMASK				; load index mask
 		and		tindex, root				; tindex = array[node].root & IMASK
 		mov		[s_tnode], tnode			; save "tnode" variable into the stack
 		mov		[s_tind], tindex			; save "tindex" variable into the stack
@@ -2293,13 +2048,13 @@ space	= 9 * 8								; stack size required by the procedure
 		mov		tindex, [s_tind]			; get "tindex" variable from the stack
 ;---[Correct forward iterator]-------------
 		mov		iter, [this + FWD]			; iter = this.fwd
-		mov		nval, NMASK
+		mov		nval, NMASK					; load node mask
 		and		nval, iter					; nval = iter & NMASK
 		cmp		nval, node					; if (nval == node)
 		je		.fwd						;     then check iterator position
 ;---[Correct backward iterator]------------
 .back1:	mov		iter, [this + BWD]			; iter = this.bwd
-		mov		nval, NMASK
+		mov		nval, NMASK					; load node mask
 		and		nval, iter					; nval = iter & NMASK
 		cmp		nval, node					; if (nval == node)
 		je		.bwd						;     then check iterator position
@@ -2307,7 +2062,7 @@ space	= 9 * 8								; stack size required by the procedure
 .back2:	add		stack, space				; restoring back the stack pointer
 		ret
 ;---[Correct forward iterator branch]------
-.fwd:	mov		ival, IMASK
+.fwd:	mov		ival, IMASK					; load index mask
 		and		ival, iter					; ival = iter & IMASK
 		lea		iter1, [tnode + tindex + 1]
 		lea		iter2, [nnode + ival - BMIN - KSIZE]
@@ -2319,10 +2074,10 @@ space	= 9 * 8								; stack size required by the procedure
 		mov		[this + FWD], iter			; update iterator position
 		jmp		.back1						; go back
 ;---[Correct backward iterator branch]-----
-.bwd:	mov		ival, IMASK
+.bwd:	mov		ival, IMASK					; load index mask
 		and		ival, iter					; ival = iter & IMASK
 		lea		iter1, [tnode + tindex + 1]
-		lea		iter2, [nnode + iter - BMIN - KSIZE]
+		lea		iter2, [nnode + ival - BMIN - KSIZE]
 		add		iter1, [s_level]
 		add		iter2, [s_level]
 		cmp		ival, BMIN
@@ -2334,6 +2089,7 @@ space	= 9 * 8								; stack size required by the procedure
 ;==============================================================================;
 ;       Insert element into b-tree                                             ;
 ;==============================================================================;
+; TOOD: Попробовать удалить
 macro	INSERT_CORE	type
 {
 ;---[Parameters]---------------------------
@@ -2353,24 +2109,24 @@ node	equ		r11							; current node
 next	equ		rbx							; next root node
 left	equ		r12							; left index
 right	equ		r13							; right index
+data	equ		r14							; pointer to array of keys
+bptr	equ		r15							; pointer to array of subtrees
 median	equ		this						; median value
-data	equ		size						; pointer to array of keys
-bptr	equ		nsize						; pointer to array of subtrees
 stack	equ		rsp							; stack pointer
 s_this	equ		stack + 0 * 8				; stack position of "this" variable
 s_odata	equ		stack + 1 * 8				; stack position of "odata" variable
 s_value	equ		stack + 2 * 8				; stack position of "value" variable
 s_array	equ		stack + 4 * 8				; stack position of "array" variable
 s_node	equ		stack + 5 * 8				; stack position of "node" variable
-s_hght	equ		stack + 6 * 8				; stack position of "height" variable
-s_func	equ		stack + 7 * 8				; stack position of "func" variable
-s_nsize	equ		stack + 8 * 8				; stack position of "nsize" variable
+s_nsize	equ		stack + 6 * 8				; stack position of "nsize" variable
+s_hght	equ		stack + 7 * 8				; stack position of "height" variable
+s_func	equ		stack + 8 * 8				; stack position of "func" variable
 s_next	equ		stack + 9 * 8				; stack position of "next" variable
 s_left	equ		stack + 10 * 8				; stack position of "left" variable
 s_right	equ		stack + 11 * 8				; stack position of "right" variable
-s_med	equ		stack + 12 * 8				; stack position of "median" variable
-s_data	equ		stack + 13 * 8				; stack position of "data" variable
-s_bptr	equ		stack + 14 * 8				; stack position of "bptr" variable
+s_data	equ		stack + 12 * 8				; stack position of "data" variable
+s_bptr	equ		stack + 13 * 8				; stack position of "bptr" variable
+s_med	equ		stack + 14 * 8				; stack position of "median" variable
 space	= 15 * 8							; stack size required by the procedure
 ;------------------------------------------
 		sub		stack, space				; reserving stack size for local vars
@@ -2382,6 +2138,8 @@ space	= 15 * 8							; stack size required by the procedure
 		mov		[s_next], next				; save old value of "next" variable
 		mov		[s_left], left				; save old value of "left" variable
 		mov		[s_right], right			; save old value of "right" variable
+		mov		[s_data], data				; save old value of "data" variable
+		mov		[s_bptr], bptr				; save old value of "bptr" variable
 		mov		[s_this], this				; save "this" variable into the stack
 		mov		[s_odata], odata			; save "odata" variable into the stack
 		movdqa	[s_value], value			; save "value" variable into the stack
@@ -2408,8 +2166,6 @@ space	= 15 * 8							; stack size required by the procedure
 		lea		bptr, [array + node + BPTR]
 		mov		next, [array + node + BPTR + TROOT]
 		xor		left, left					; left = 0
-		mov		[s_data], data				; save "data" variable into the stack
-		mov		[s_bptr], bptr				; save "bptr" variable into the stack
 ;---[Binary search loop]-------------------
 .loop1:	lea		median, [left + right]
 		shr		median, 1
@@ -2421,8 +2177,7 @@ space	= 15 * 8							; stack size required by the procedure
 		mov		median, [s_med]				; get "median" variable from the stack
 		mov		array, [s_array]			; get "array" variable from the stack
 		mov		node, [s_node]				; get "node" variable from the stack
-		mov		data, [s_data]				; get "data" variable from the stack
-		mov		bptr, [s_bptr]				; get "bptr" variable from the stack
+		mov		nsize, [s_nsize]			; get "nsize" variable from the stack
 		cmp		result, 0					; if (result == 0)
 if type
 		je		.undo						;     then undo tree size changes
@@ -2439,7 +2194,6 @@ end if
 		jb		.loop1						; do while (left < right)
 ;---[End of binary search loop]------------
 		add		qword [bptr + left + TSIZE], KSIZE
-		mov		nsize, [s_nsize]			; get "nsize" variable from the stack
 		cmp		nsize, BMAX					; if (nsize == BMAX)
 		je		.bsplt						;     then split branch node
 .back2:	mov		node, next					; node = next
@@ -2452,7 +2206,6 @@ end if
 .leaf:	mov		right, nsize
 		lea		data, [array + node + BDATA]
 		xor		left, left					; left = 0
-		mov		[s_data], data				; save "data" variable into the stack
 ;---[Binary search loop]-------------------
 .loop2:	lea		median, [left + right]
 		shr		median, 1
@@ -2464,7 +2217,7 @@ end if
 		mov		median, [s_med]				; get "median" variable from the stack
 		mov		array, [s_array]			; get "array" variable from the stack
 		mov		node, [s_node]				; get "node" variable from the stack
-		mov		data, [s_data]				; get "data" variable from the stack
+		mov		nsize, [s_nsize]			; get "nsize" variable from the stack
 		cmp		result, 0					; if (result == 0)
 if type
 		je		.undo						;     then undo tree size changes
@@ -2479,7 +2232,6 @@ end if
 		cmp		left, right
 		jb		.loop2						; do while (left < right)
 ;---[End of binary search loop]------------
-		mov		nsize, [s_nsize]			; get "nsize" variable from the stack
 		cmp		nsize, LMAX					; if (nsize == LMAX)
 		je		.lsplt						;     then split leaf node
 .back3:	movdqa	value, [s_value]
@@ -2490,6 +2242,8 @@ end if
 		mov		next, [s_next]				; restore old value of "next" variable
 		mov		left, [s_left]				; restore old value of "left" variable
 		mov		right, [s_right]			; restore old value of "right" variable
+		mov		data, [s_data]				; restore old value of "data" variable
+		mov		bptr, [s_bptr]				; restore old value of "bptr" variable
 		add		stack, space				; restoring back the stack pointer
 		jmp		LeafInsert					; call this.LeafInsert (node, nsize, left, value)
 ;---[Init b-tree]--------------------------
@@ -2538,14 +2292,16 @@ end if
 if type = 1
 .undo:	mov		result, [array + node + BROOT]
 		xor		param4, param4
-		mov		param3, IMASK
+		mov		param3, IMASK				; load index mask
 		and		param3, result				; tindex = array[node].root & IMASK
-		mov		param2, NMASK
+		mov		param2, NMASK				; load node mask
 		and		param2, result				; tnode = array[node].root & NMASK
 		mov		param1, [s_this]
 		mov		next, [s_next]				; restore old value of "next" variable
 		mov		left, [s_left]				; restore old value of "left" variable
 		mov		right, [s_right]			; restore old value of "right" variable
+		mov		data, [s_data]				; restore old value of "data" variable
+		mov		bptr, [s_bptr]				; restore old value of "bptr" variable
 		add		stack, space				; restoring back the stack pointer
 		jmp		CorrectSize					; call this.CorrectSize (tnode, tindex, false)
 else if type = 2
@@ -2556,14 +2312,16 @@ else if type = 2
 		movdqa	[data + median], value		; data[median] = pdata[0]
 		mov		result, [array + node + BROOT]
 		mov		param4, 1
-		mov		param3, IMASK
+		mov		param3, IMASK				; load index mask
 		and		param3, result				; tindex = array[node].root & IMASK
-		mov		param2, NMASK
+		mov		param2, NMASK				; load node mask
 		and		param2, result				; tnode = array[node].root & NMASK
 		mov		param1, [s_this]
 		mov		next, [s_next]				; restore old value of "next" variable
 		mov		left, [s_left]				; restore old value of "left" variable
 		mov		right, [s_right]			; restore old value of "right" variable
+		mov		data, [s_data]				; restore old value of "data" variable
+		mov		bptr, [s_bptr]				; restore old value of "bptr" variable
 		add		stack, space				; restoring back the stack pointer
 		jmp		CorrectSize					; call this.CorrectSize (tnode, tindex, true)
 end if
@@ -2590,11 +2348,13 @@ end if
 		mov		next, [s_next]				; restore old value of "next" variable
 		mov		left, [s_left]				; restore old value of "left" variable
 		mov		right, [s_right]			; restore old value of "right" variable
+		mov		data, [s_data]				; restore old value of "data" variable
+		mov		bptr, [s_bptr]				; restore old value of "bptr" variable
 		add		stack, space				; restoring back the stack pointer
 		jmp		LeafInsert					; call this.LeafInsert (node, nsize, left, value)
 }
-InsertMultiCore:	INSERT_CORE	0
-InsertUniqueCore:	INSERT_CORE	1
+InsertCoreMulti:	INSERT_CORE	0
+InsertCoreUnique:	INSERT_CORE	1
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 macro	INSERT_ELEMENT	func
 {
@@ -2621,7 +2381,6 @@ space	= 3 * 8								; stack size required by the procedure
 		mov		[s_data], data				; save "data" variable into the stack
 		mov		param2, [this + CAPACITY]
 		shl		param2, 1
-	Capacity	param2, temp, MINCAP		; compute new capacity of target object
 		cmp		param2, [this + CAPACITY]	; if (newcapacity <= capacity)
 		jbe		.error						;     then go to error branch
 		call	Extend						; status = this.Extend (capacity * 2)
@@ -2636,8 +2395,8 @@ space	= 3 * 8								; stack size required by the procedure
 		xor		status, status				; return false
 		ret
 }
-InsertMulti:	INSERT_ELEMENT	InsertMultiCore
-InsertUnique:	INSERT_ELEMENT	InsertUniqueCore
+InsertMulti:	INSERT_ELEMENT	InsertCoreMulti
+InsertUnique:	INSERT_ELEMENT	InsertCoreUnique
 
 ;******************************************************************************;
 ;       Removing of element                                                    ;
@@ -2693,9 +2452,9 @@ space	= 5 * 8								; stack size required by the procedure
 		mov		array, [s_array]			; get "array" variable from the stack
 		mov		node, [s_node]				; get "node" variable from the stack
 		mov		root, [array + node + BROOT]
-		mov		tnode, NMASK
+		mov		tnode, NMASK				; load node mask
 		and		tnode, root					; tnode = array[node].root & NMASK
-		mov		tindex, IMASK
+		mov		tindex, IMASK				; load index mask
 		and		tindex, root				; tindex = array[node].root & IMASK
 		mov		param3, tindex
 		mov		param2, tnode
@@ -2707,13 +2466,13 @@ space	= 5 * 8								; stack size required by the procedure
 		jz		.free						;     then free leaf node
 ;---[Correct forward iterator]-------------
 		mov		iter, [this + FWD]			; iter = this.fwd
-		mov		nval, NMASK
+		mov		nval, NMASK					; load node mask
 		and		nval, iter					; nval = iter & NMASK
 		cmp		nval, node					; if (nval == node)
 		je		.fwd						;     then check iterator position
 ;---[Correct backward iterator]------------
 .back1:	mov		iter, [this + BWD]			; iter = this.bwd
-		mov		nval, NMASK
+		mov		nval, NMASK					; load node mask
 		and		nval, iter					; nval = iter & NMASK
 		cmp		nval, node					; if (nval == node)
 		je		.bwd						;     then check iterator position
@@ -2722,12 +2481,12 @@ space	= 5 * 8								; stack size required by the procedure
 		mov		result, 1					; return true
 		ret
 ;---[Correct forward iterator branch]------
-.fwd:	mov		ival, IMASK
+.fwd:	mov		ival, IMASK					; load index mask
 		and		ival, iter					; ival = iter & IMASK
 		lea		iter1, [iter - KSIZE]
 		cmp		ival, [s_pos]				; if (ival > pos)
 		cmova	iter, iter1					;     iter = iter - KSIZE
-		mov		ival, IMASK
+		mov		ival, IMASK					; load index mask
 		and		ival, iter					; ival = iter & IMASK
 		cmp		ival, [s_size]				; if (ival >= size)
 		jae		@f							;     then go to next element
@@ -2743,12 +2502,12 @@ space	= 5 * 8								; stack size required by the procedure
 		mov		[this + FWD], result		; update iterator position
 		jmp		.back1						; go back
 ;---[Correct backward iterator branch]-----
-.bwd:	mov		ival, IMASK
+.bwd:	mov		ival, IMASK					; load index mask
 		and		ival, iter					; ival = iter & IMASK
 		lea		iter1, [iter - KSIZE]
 		cmp		ival, [s_pos]				; if (ival >= pos)
 		cmovae	iter, iter1					;     iter = iter - KSIZE
-		mov		ival, IMASK
+		mov		ival, IMASK					; load index mask
 		and		ival, iter					; ival = iter & IMASK
 		cmp		ival, [s_size]				; if (ival > size)
 		ja		@f							;     then go to prev element
@@ -2823,123 +2582,117 @@ space	= 9 * 8								; stack size required by the procedure
 		add		tnode, array
 		movdqa	median, [tnode + tindex + BDATA]
 ;---[Correct root node]--------------------
-		add		rnode, array
-		movdqa	temp, [rnode + BDATA]
-		movdqa	[tnode + BDATA], temp		; array[tnode].data[tindex] = array[rnode].data[0]
+		add		lnode, array
+		add		lnode, size
+		movdqa	temp, [lnode + BDATA]
+		movdqa	[tnode + BDATA], temp		; array[tnode].data[tindex] = array[lnode].data[size]
 ;---[Replace element in the node]----------
-		add		lnode, pos					; lnode += pos
-		neg 	pos							; pos = -pos
-		lea		param2, [pos + LMIN - KSIZE]
-		lea		param1, [array + lnode + BDATA]
-		call	LeafReplaceLeftCore			; call LeafReplaceLeftCore (array[lnode].data + pos, LMIN - KSIZE - pos, median)
-		mov		array, [s_array]			; get "array" variable from the stack
-		mov		rnode, [s_rnode]			; get "rnode" variable from the stack
-		mov		size, [s_size]				; get "size" variable from the stack
-		mov		[array + rnode + BSIZE], size
-		mov		param2, size
+		add		rnode, pos					; rnode += pos
+		mov		param2, pos
 		lea		param1, [array + rnode + BDATA]
-		call	LeafDeleteCore				; call LeafDeleteCore (array[rnode].data, size)
+		call	LeafReplaceLeftCore			; call LeafReplaceLeftCore (array[rnode].data + pos, pos, median)
+		mov		array, [s_array]			; get "array" variable from the stack
+		mov		lnode, [s_lnode]			; get "lnode" variable from the stack
+		mov		size, [s_size]				; get "size" variable from the stack
+		mov		[array + lnode + BSIZE], size
 ;---[Correct tree size]--------------------
 		mov		param3, [s_tind]
-		add		param3, KSIZE
 		mov		param2, [s_tnode]
 		mov		param1, [s_this]
-		call	CorrectSize					; call this.CorrectSize (tnode, tindex + KSIZE)
+		call	CorrectSize					; call this.CorrectSize (tnode, tindex)
 		mov		this, [s_this]				; get "this" variable from the stack
 		mov		tnode, [s_tnode]			; get "tnode" variable from the stack
 		mov		tindex, [s_tind]			; get "tindex" variable from the stack
 		mov		lnode, [s_lnode]			; get "lnode" variable from the stack
 		mov		rnode, [s_rnode]			; get "rnode" variable from the stack
-;---[Correct forward iterator]-------------
-		mov		iter, [this + FWD]			; iter = this.fwd
-		mov		nval, NMASK
-		and		nval, iter					; nval = iter & NMASK
-		cmp		nval, tnode					; if (nval == tnode)
-		je		.ftop						;     then check iterator position
-		cmp		nval, rnode					; if (nval == rnode)
-		je		.frght						;     then check iterator position
-		cmp		nval, lnode					; if (nval == lnode)
-		je		.fleft						;     then check iterator position
 ;---[Correct backward iterator]------------
-.back1:	mov		iter, [this + BWD]			; iter = this.bwd
-		mov		nval, NMASK
+		mov		iter, [this + BWD]			; iter = this.bwd
+		mov		nval, NMASK					; load node mask
 		and		nval, iter					; nval = iter & NMASK
 		cmp		nval, tnode					; if (nval == tnode)
 		je		.btop						;     then check iterator position
-		cmp		nval, rnode					; if (nval == rnode)
-		je		.brght						;     then check iterator position
 		cmp		nval, lnode					; if (nval == lnode)
 		je		.bleft						;     then check iterator position
+		cmp		nval, rnode					; if (nval == rnode)
+		je		.brght						;     then check iterator position
+;---[Correct forward iterator]-------------
+.back1:	mov		iter, [this + FWD]			; iter = this.fwd
+		mov		nval, NMASK					; load node mask
+		and		nval, iter					; nval = iter & NMASK
+		cmp		nval, tnode					; if (nval == tnode)
+		je		.ftop						;     then check iterator position
+		cmp		nval, lnode					; if (nval == lnode)
+		je		.fleft						;     then check iterator position
+		cmp		nval, rnode					; if (nval == rnode)
+		je		.frght						;     then check iterator position
 ;---[Normal exit]--------------------------
 .back2:	add		stack, space				; restoring back the stack pointer
 		mov		result, 1					; return true
 		ret
-;---[Correct forward iterator branch]------
-.ftop:	mov		ival, IMASK
-		and		ival, iter					; ival = iter & IMASK
-		mov		lval, LMASK
-		and		lval, iter					; lval = iter & IMASK
-		lea		iter1, [lnode + lval + LMIN - KSIZE - 1]
-		cmp		ival, tindex				; if (ival == tindex)
-		cmove	iter, iter1					;     iter = lnode + lval + LMIN - KSIZE - 1
-		mov		[this + FWD], iter			; update iterator position
-		jmp		.back1						; go back
-.frght:	sub		iter, KSIZE					; iter -= KSIZE
-		mov		ival, IMASK
-		and		ival, iter					; ival = iter & IMASK
-		mov		lval, LMASK
-		and		lval, iter					; lval = iter & IMASK
-		lea		iter1, [tnode + tindex + 1]
-		add		iter1, lval
-		cmp		ival, [s_size]				; if (ival > size)
-		cmova	iter, iter1					;    iter = tnode + tindex + lval + 1
-		mov		[this + FWD], iter			; update iterator position
-		jmp		.back1						; go back
-.fleft:	mov		ival, IMASK
-		and		ival, iter					; ival = iter & IMASK
-		lea		iter1, [iter - KSIZE]
-		cmp		ival, [s_pos]				; if (ival > pos)
-		cmova	iter, iter1					;     iter = iter - KSIZE
-		mov		[this + FWD], iter			; update iterator position
-		jmp		.back1						; go back
 ;---[Correct backward iterator branch]-----
-.btop:	mov		ival, IMASK
+.btop:	mov		ival, IMASK					; load index mask
 		and		ival, iter					; ival = iter & IMASK
-		mov		lval, LMASK
+		mov		lval, IMASK					; load index mask
 		and		lval, iter					; lval = iter & IMASK
-		lea		iter1, [lnode + lval + LMIN - KSIZE - 1]
+		lea		iter1, [rnode + lval - 1]
 		cmp		ival, tindex				; if (ival == tindex)
-		cmove	iter, iter1					;     iter = lnode + lval + LMIN - KSIZE - 1
+		cmove	iter, iter1					;     iter = rnode + lval - 1
 		mov		[this + BWD], iter			; update iterator position
-		jmp		.back2						; go back
-.brght:	sub		iter, KSIZE					; iter -= KSIZE
-		mov		ival, IMASK
+		jmp		.back1						; go back
+.bleft:	mov		ival, IMASK					; load index mask
 		and		ival, iter					; ival = iter & IMASK
-		mov		lval, LMASK
+		mov		lval, IMASK					; load index mask
 		and		lval, iter					; lval = iter & IMASK
 		lea		iter1, [tnode + tindex + 1]
 		add		iter1, lval
-		cmp		ival, [s_size]				; if (ival > size)
-		cmova	iter, iter1					;    iter = tnode + tindex + lval + 1
+		cmp		ival, [s_size]				; if (ival == size)
+		cmove	iter, iter1					;     iter = tnode + tindex + 1
 		mov		[this + BWD], iter			; update iterator position
-		jmp		.back2						; go back
-.bleft:	mov		ival, IMASK
+		jmp		.back1						; go back
+.brght:	mov		ival, IMASK					; load index mask
 		and		ival, iter					; ival = iter & IMASK
-		lea		iter1, [iter - KSIZE]
-		cmp		ival, [s_pos]				; if (ival >= pos)
-		cmovae	iter, iter1					;     iter = iter - KSIZE
-		mov		ival, IMASK
+		lea		iter1, [iter + KSIZE]
+		cmp		ival, [s_pos]				; if (ival < pos)
+		cmovb	iter, iter1					;    iter = iter + KSIZE
+		mov		[this + BWD], iter			; update iterator position
+		jmp		.back1						; go back
+;---[Correct forward iterator branch]------
+.ftop:	mov		ival, IMASK					; load index mask
+		and		ival, iter					; ival = iter & IMASK
+		mov		lval, IMASK					; load index mask
+		and		lval, iter					; lval = iter & IMASK
+		lea		iter1, [rnode + lval - 1]
+		cmp		ival, tindex				; if (ival == tindex)
+		cmove	iter, iter1					;     iter = rnode + lval - 1
+		mov		[this + FWD], iter			; update iterator position
+		jmp		.back2						; go back
+.fleft:	mov		ival, IMASK					; load index mask
+		and		ival, iter					; ival = iter & IMASK
+		mov		lval, IMASK					; load index mask
+		and		lval, iter					; lval = iter & IMASK
+		lea		iter1, [tnode + tindex + 1]
+		add		iter1, lval
+		cmp		ival, [s_size]				; if (ival == size)
+		cmove	iter, iter1					;     iter = tnode + tindex + 1
+		mov		[this + FWD], iter			; update iterator position
+		jmp		.back2						; go back
+.frght:	mov		ival, IMASK					; load index mask
+		and		ival, iter					; ival = iter & IMASK
+		lea		iter1, [iter + KSIZE]
+		cmp		ival, [s_pos]				; if (ival <= pos)
+		cmovbe	iter, iter1					;    iter = iter + KSIZE
+		mov		ival, IMASK					; load index mask
 		and		ival, iter					; ival = iter & IMASK
 		cmp		ival, LMIN - KSIZE			; if (ival > LMIN - KSIZE)
 		ja		@f							;     then go to next element
-		mov		[this + BWD], iter			; update iterator position
+		mov		[this + FWD], iter			; update iterator position
 		jmp		.back2						; go back
 @@:		mov		param3, KSIZE
-		lea		param2, [iter + KSIZE]
+		lea		param2, [iter - KSIZE]
 		mov		param1, [s_array]
-		call	GoPrev						; bwd = GoPrev (array, iter + KSIZE, KSIZE)
+		call	GoNext						; fwd = GoNext (array, iter - KSIZE, KSIZE)
 		mov		this, [s_this]				; get "this" variable from the stack
-		mov		[this + BWD], result		; update iterator position
+		mov		[this + FWD], result		; update iterator position
 		jmp		.back2						; go back
 
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
@@ -2989,117 +2742,123 @@ space	= 9 * 8								; stack size required by the procedure
 		add		tnode, array
 		movdqa	median, [tnode + tindex + BDATA]
 ;---[Correct root node]--------------------
-		add		lnode, array
-		add		lnode, size
-		movdqa	temp, [lnode + BDATA]
-		movdqa	[tnode + BDATA], temp		; array[tnode].data[tindex] = array[lnode].data[size]
+		add		rnode, array
+		movdqa	temp, [rnode + BDATA]
+		movdqa	[tnode + BDATA], temp		; array[tnode].data[tindex] = array[rnode].data[0]
 ;---[Replace element in the node]----------
-		add		rnode, pos					; rnode += pos
-		mov		param2, pos
-		lea		param1, [array + rnode + BDATA]
-		call	LeafReplaceRightCore		; call LeafReplaceRightCore (array[rnode].data + pos, pos, median)
+		add		lnode, pos					; lnode += pos
+		neg 	pos							; pos = -pos
+		lea		param2, [pos + LMIN - KSIZE]
+		lea		param1, [array + lnode + BDATA]
+		call	LeafReplaceRightCore		; call LeafReplaceRightCore (array[lnode].data + pos, LMIN - KSIZE - pos, median)
 		mov		array, [s_array]			; get "array" variable from the stack
-		mov		lnode, [s_lnode]			; get "lnode" variable from the stack
+		mov		rnode, [s_rnode]			; get "rnode" variable from the stack
 		mov		size, [s_size]				; get "size" variable from the stack
-		mov		[array + lnode + BSIZE], size
+		mov		[array + rnode + BSIZE], size
+		mov		param2, size
+		lea		param1, [array + rnode + BDATA]
+		call	LeafDeleteCore				; call LeafDeleteCore (array[rnode].data, size)
 ;---[Correct tree size]--------------------
 		mov		param3, [s_tind]
+		add		param3, KSIZE
 		mov		param2, [s_tnode]
 		mov		param1, [s_this]
-		call	CorrectSize					; call this.CorrectSize (tnode, tindex)
+		call	CorrectSize					; call this.CorrectSize (tnode, tindex + KSIZE)
 		mov		this, [s_this]				; get "this" variable from the stack
 		mov		tnode, [s_tnode]			; get "tnode" variable from the stack
 		mov		tindex, [s_tind]			; get "tindex" variable from the stack
 		mov		lnode, [s_lnode]			; get "lnode" variable from the stack
 		mov		rnode, [s_rnode]			; get "rnode" variable from the stack
-;---[Correct backward iterator]------------
-		mov		iter, [this + BWD]			; iter = this.bwd
-		mov		nval, NMASK
-		and		nval, iter					; nval = iter & NMASK
-		cmp		nval, tnode					; if (nval == tnode)
-		je		.btop						;     then check iterator position
-		cmp		nval, lnode					; if (nval == lnode)
-		je		.bleft						;     then check iterator position
-		cmp		nval, rnode					; if (nval == rnode)
-		je		.brght						;     then check iterator position
 ;---[Correct forward iterator]-------------
-.back1:	mov		iter, [this + FWD]			; iter = this.fwd
-		mov		nval, NMASK
+		mov		iter, [this + FWD]			; iter = this.fwd
+		mov		nval, NMASK					; load node mask
 		and		nval, iter					; nval = iter & NMASK
 		cmp		nval, tnode					; if (nval == tnode)
 		je		.ftop						;     then check iterator position
-		cmp		nval, lnode					; if (nval == lnode)
-		je		.fleft						;     then check iterator position
 		cmp		nval, rnode					; if (nval == rnode)
 		je		.frght						;     then check iterator position
+		cmp		nval, lnode					; if (nval == lnode)
+		je		.fleft						;     then check iterator position
+;---[Correct backward iterator]------------
+.back1:	mov		iter, [this + BWD]			; iter = this.bwd
+		mov		nval, NMASK					; load node mask
+		and		nval, iter					; nval = iter & NMASK
+		cmp		nval, tnode					; if (nval == tnode)
+		je		.btop						;     then check iterator position
+		cmp		nval, rnode					; if (nval == rnode)
+		je		.brght						;     then check iterator position
+		cmp		nval, lnode					; if (nval == lnode)
+		je		.bleft						;     then check iterator position
 ;---[Normal exit]--------------------------
 .back2:	add		stack, space				; restoring back the stack pointer
 		mov		result, 1					; return true
 		ret
-;---[Correct backward iterator branch]-----
-.btop:	mov		ival, IMASK
-		and		ival, iter					; ival = iter & IMASK
-		mov		lval, IMASK
-		and		lval, iter					; lval = iter & IMASK
-		lea		iter1, [rnode + lval - 1]
-		cmp		ival, tindex				; if (ival == tindex)
-		cmove	iter, iter1					;     iter = rnode + lval - 1
-		mov		[this + BWD], iter			; update iterator position
-		jmp		.back1						; go back
-.bleft:	mov		ival, IMASK
-		and		ival, iter					; ival = iter & IMASK
-		mov		lval, IMASK
-		and		lval, iter					; lval = iter & IMASK
-		lea		iter1, [tnode + tindex + 1]
-		add		iter1, lval
-		cmp		ival, [s_size]				; if (ival == size)
-		cmove	iter, iter1					;     iter = tnode + tindex + 1
-		mov		[this + BWD], iter			; update iterator position
-		jmp		.back1						; go back
-.brght:	mov		ival, IMASK
-		and		ival, iter					; ival = iter & IMASK
-		lea		iter1, [iter + KSIZE]
-		cmp		ival, [s_pos]				; if (ival < pos)
-		cmovb	iter, iter1					;    iter = iter + KSIZE
-		mov		[this + BWD], iter			; update iterator position
-		jmp		.back1						; go back
 ;---[Correct forward iterator branch]------
-.ftop:	mov		ival, IMASK
+.ftop:	mov		ival, IMASK					; load index mask
 		and		ival, iter					; ival = iter & IMASK
-		mov		lval, IMASK
+		mov		lval, LMASK					; load level mask
 		and		lval, iter					; lval = iter & IMASK
-		lea		iter1, [rnode + lval - 1]
+		lea		iter1, [lnode + lval + LMIN - KSIZE - 1]
 		cmp		ival, tindex				; if (ival == tindex)
-		cmove	iter, iter1					;     iter = rnode + lval - 1
+		cmove	iter, iter1					;     iter = lnode + lval + LMIN - KSIZE - 1
 		mov		[this + FWD], iter			; update iterator position
-		jmp		.back2						; go back
-.fleft:	mov		ival, IMASK
+		jmp		.back1						; go back
+.frght:	sub		iter, KSIZE					; iter -= KSIZE
+		mov		ival, IMASK					; load index mask
 		and		ival, iter					; ival = iter & IMASK
-		mov		lval, IMASK
+		mov		lval, LMASK					; load level mask
 		and		lval, iter					; lval = iter & IMASK
 		lea		iter1, [tnode + tindex + 1]
 		add		iter1, lval
-		cmp		ival, [s_size]				; if (ival == size)
-		cmove	iter, iter1					;     iter = tnode + tindex + 1
+		cmp		ival, [s_size]				; if (ival > size)
+		cmova	iter, iter1					;    iter = tnode + tindex + lval + 1
 		mov		[this + FWD], iter			; update iterator position
-		jmp		.back2						; go back
-.frght:	mov		ival, IMASK
+		jmp		.back1						; go back
+.fleft:	mov		ival, IMASK					; load index mask
 		and		ival, iter					; ival = iter & IMASK
-		lea		iter1, [iter + KSIZE]
-		cmp		ival, [s_pos]				; if (ival <= pos)
-		cmovbe	iter, iter1					;    iter = iter + KSIZE
-		mov		ival, IMASK
+		lea		iter1, [iter - KSIZE]
+		cmp		ival, [s_pos]				; if (ival > pos)
+		cmova	iter, iter1					;     iter = iter - KSIZE
+		mov		[this + FWD], iter			; update iterator position
+		jmp		.back1						; go back
+;---[Correct backward iterator branch]-----
+.btop:	mov		ival, IMASK					; load index mask
+		and		ival, iter					; ival = iter & IMASK
+		mov		lval, LMASK					; load level mask
+		and		lval, iter					; lval = iter & IMASK
+		lea		iter1, [lnode + lval + LMIN - KSIZE - 1]
+		cmp		ival, tindex				; if (ival == tindex)
+		cmove	iter, iter1					;     iter = lnode + lval + LMIN - KSIZE - 1
+		mov		[this + BWD], iter			; update iterator position
+		jmp		.back2						; go back
+.brght:	sub		iter, KSIZE					; iter -= KSIZE
+		mov		ival, IMASK					; load index mask
+		and		ival, iter					; ival = iter & IMASK
+		mov		lval, LMASK					; load level mask
+		and		lval, iter					; lval = iter & IMASK
+		lea		iter1, [tnode + tindex + 1]
+		add		iter1, lval
+		cmp		ival, [s_size]				; if (ival > size)
+		cmova	iter, iter1					;    iter = tnode + tindex + lval + 1
+		mov		[this + BWD], iter			; update iterator position
+		jmp		.back2						; go back
+.bleft:	mov		ival, IMASK					; load index mask
+		and		ival, iter					; ival = iter & IMASK
+		lea		iter1, [iter - KSIZE]
+		cmp		ival, [s_pos]				; if (ival >= pos)
+		cmovae	iter, iter1					;     iter = iter - KSIZE
+		mov		ival, IMASK					; load index mask
 		and		ival, iter					; ival = iter & IMASK
 		cmp		ival, LMIN - KSIZE			; if (ival > LMIN - KSIZE)
 		ja		@f							;     then go to next element
-		mov		[this + FWD], iter			; update iterator position
+		mov		[this + BWD], iter			; update iterator position
 		jmp		.back2						; go back
 @@:		mov		param3, KSIZE
-		lea		param2, [iter - KSIZE]
+		lea		param2, [iter + KSIZE]
 		mov		param1, [s_array]
-		call	GoNext						; fwd = GoNext (array, iter - KSIZE, KSIZE)
+		call	GoPrev						; bwd = GoPrev (array, iter + KSIZE, KSIZE)
 		mov		this, [s_this]				; get "this" variable from the stack
-		mov		[this + FWD], result		; update iterator position
+		mov		[this + BWD], result		; update iterator position
 		jmp		.back2						; go back
 
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
@@ -3127,16 +2886,15 @@ ival	equ		result						; iterator index value
 lval	equ		pos							; iterator level value
 median	equ		xmm0						; median value
 stack	equ		rsp							; stack pointer
-s_this	equ		stack + 0 * 8				; stack position of "this" variable
-s_array	equ		stack + 1 * 8				; stack position of "array" variable
-s_tnode	equ		stack + 2 * 8				; stack position of "tnode" variable
-s_tind	equ		stack + 3 * 8				; stack position of "tindex" variable
-s_lnode	equ		stack + 4 * 8				; stack position of "lnode" variable
-s_rnode	equ		stack + 5 * 8				; stack position of "rnode" variable
-s_node	equ		stack + 6 * 8				; stack position of "node" variable
-s_pos	equ		stack + 7 * 8				; stack position of "pos" variable
-s_med	equ		stack + 8 * 8				; stack position of "median" variable
-space	= 11 * 8							; stack size required by the procedure
+s_med	equ		stack + 0 * 8				; stack position of "median" variable
+s_this	equ		stack + 2 * 8				; stack position of "this" variable
+s_array	equ		stack + 3 * 8				; stack position of "array" variable
+s_tnode	equ		stack + 4 * 8				; stack position of "tnode" variable
+s_tind	equ		stack + 5 * 8				; stack position of "tindex" variable
+s_lnode	equ		stack + 6 * 8				; stack position of "lnode" variable
+s_rnode	equ		stack + 7 * 8				; stack position of "rnode" variable
+s_pos	equ		stack + 8 * 8				; stack position of "pos" variable
+space	= 9 * 8								; stack size required by the procedure
 ;------------------------------------------
 		sub		stack, space				; reserving stack size for local vars
 		mov		array, [this + ARRAY]		; get pointer to array of nodes
@@ -3146,7 +2904,6 @@ space	= 11 * 8							; stack size required by the procedure
 		mov		[s_tind], tindex			; save "tindex" variable into the stack
 		mov		[s_lnode], lnode			; save "lnode" variable into the stack
 		mov		[s_rnode], rnode			; save "rnode" variable into the stack
-		mov		[s_node], node				; save "node" variable into the stack
 ;---[Correct position]---------------------
 		lea		result, [pos + LMIN + KSIZE]; result = pos + LMIN + KSIZE
 		cmp		node, lnode					; if (node == lnode)
@@ -3186,7 +2943,7 @@ space	= 11 * 8							; stack size required by the procedure
 		mov		rnode, [s_rnode]			; get "rnode" variable from the stack
 ;---[Correct forward iterator]-------------
 		mov		iter, [this + FWD]			; iter = this.fwd
-		mov		nval, NMASK
+		mov		nval, NMASK					; load node mask
 		and		nval, iter					; nval = iter & NMASK
 		cmp		nval, tnode					; if (nval == tnode)
 		je		.ftop						;     then check iterator position
@@ -3196,7 +2953,7 @@ space	= 11 * 8							; stack size required by the procedure
 		je		.fleft						;     then check iterator position
 ;---[Correct backward iterator]------------
 .back1:	mov		iter, [this + BWD]			; iter = this.bwd
-		mov		nval, NMASK
+		mov		nval, NMASK					; load node mask
 		and		nval, iter					; nval = iter & NMASK
 		cmp		nval, tnode					; if (nval == tnode)
 		je		.btop						;     then check iterator position
@@ -3212,26 +2969,26 @@ space	= 11 * 8							; stack size required by the procedure
 		add		stack, space				; restoring back the stack pointer
 		jmp		MergeUp						; call this.MergeUp (tnode, tindex)
 ;---[Correct forward iterator branch]------
-.ftop:	mov		ival, IMASK
+.ftop:	mov		ival, IMASK					; load index mask
 		and		ival, iter					; ival = iter & IMASK
-		mov		lval, LMASK
+		mov		lval, LMASK					; load level mask
 		and		lval, iter					; lval = iter & LMASK
 		lea		iter, [lnode + lval + LMIN - 1]
 		cmp		ival, tindex				; if (ival == tindex)
 		je		.fleft						;     then check left node
 		jmp		.back1						; go back
-.frght:	mov		ival, IMASK
+.frght:	mov		ival, IMASK					; load index mask
 		and		ival, iter					; ival = iter & IMASK
-		mov		lval, LMASK
+		mov		lval, LMASK					; load level mask
 		and		lval, iter					; lval = iter & LMASK
 		lea		iter, [lnode + ival + LMIN + KSIZE]
 		add		iter, lval					; iter = lnode + ival + lval + LMIN + KSIZE
-.fleft:	mov		ival, IMASK
+.fleft:	mov		ival, IMASK					; load index mask
 		and		ival, iter					; ival = iter & IMASK
 		lea		iter1, [iter - KSIZE]
 		cmp		ival, [s_pos]				; if (ival > pos)
 		cmova	iter, iter1					;     iter = iter - KSIZE
-		mov		ival, IMASK
+		mov		ival, IMASK					; load index mask
 		and		ival, iter					; ival = iter & IMASK
 		cmp		ival, LMAX - KSIZE			; if (ival >= LMAX - KSIZE)
 		jae		@f							;     then go to next element
@@ -3251,26 +3008,26 @@ space	= 11 * 8							; stack size required by the procedure
 		mov		[this + FWD], result		; update iterator position
 		jmp		.back1						; go back
 ;---[Correct backward iterator branch]-----
-.btop:	mov		ival, IMASK
+.btop:	mov		ival, IMASK					; load index mask
 		and		ival, iter					; ival = iter & IMASK
-		mov		lval, LMASK
+		mov		lval, LMASK					; load level mask
 		and		lval, iter					; lval = iter & LMASK
 		lea		iter, [lnode + lval + LMIN - 1]
 		cmp		ival, tindex				; if (ival == tindex)
 		je		.bleft						;     then check left node
 		jmp		.back2						; go back
-.brght:	mov		ival, IMASK
+.brght:	mov		ival, IMASK					; load index mask
 		and		ival, iter					; ival = iter & IMASK
-		mov		lval, LMASK
+		mov		lval, LMASK					; load level mask
 		and		lval, iter					; lval = iter & LMASK
 		lea		iter, [lnode + ival + LMIN + KSIZE]
 		add		iter, lval					; iter = lnode + ival + lval + LMIN + KSIZE
-.bleft:	mov		ival, IMASK
+.bleft:	mov		ival, IMASK					; load index mask
 		and		ival, iter					; ival = iter & IMASK
 		lea		iter1, [iter - KSIZE]
 		cmp		ival, [s_pos]				; if (ival >= pos)
 		cmovae	iter, iter1					;     iter = iter - KSIZE
-		mov		ival, IMASK
+		mov		ival, IMASK					; load index mask
 		and		ival, iter					; ival = iter & IMASK
 		cmp		ival, LMAX - KSIZE			; if (ival > LMAX - KSIZE)
 		ja		@f							;     then go to next element
@@ -3342,9 +3099,9 @@ space	= 5 * 8								; stack size required by the procedure
 		mov		array, [s_array]			; get "array" variable from the stack
 		mov		node, [s_node]				; get "node" variable from the stack
 		mov		root, [array + node + BROOT]
-		mov		tnode, NMASK
+		mov		tnode, NMASK				; load node mask
 		and		tnode, root					; tnode = array[node].root & NMASK
-		mov		tindex, IMASK
+		mov		tindex, IMASK				; load index mask
 		and		tindex, root				; tindex = array[node].root & IMASK
 		mov		param3, tindex
 		mov		param2, tnode
@@ -3356,13 +3113,13 @@ space	= 5 * 8								; stack size required by the procedure
 		jz		.free						;     then free leaf node
 ;---[Correct forward iterator]-------------
 		mov		iter, [this + FWD]			; iter = this.fwd
-		mov		nval, NMASK
+		mov		nval, NMASK					; load node mask
 		and		nval, iter					; nval = iter & NMASK
 		cmp		nval, node					; if (nval == node)
 		je		.fwd						;     then check iterator position
 ;---[Correct backward iterator]------------
 .back1:	mov		iter, [this + BWD]			; iter = this.bwd
-		mov		nval, NMASK
+		mov		nval, NMASK					; load node mask
 		and		nval, iter					; nval = iter & NMASK
 		cmp		nval, node					; if (nval == node)
 		je		.bwd						;     then check iterator position
@@ -3371,7 +3128,7 @@ space	= 5 * 8								; stack size required by the procedure
 		mov		result, 1					; return true
 		ret
 ;---[Correct forward iterator branch]------
-.fwd:	mov		ival, IMASK
+.fwd:	mov		ival, IMASK					; load index mask
 		and		ival, iter					; ival = iter & IMASK
 		lea		iter1, [iter - KSIZE]
 		cmp		ival, [s_pos]				; if (ival > pos)
@@ -3379,7 +3136,7 @@ space	= 5 * 8								; stack size required by the procedure
 		mov		[this + FWD], iter			; update iterator position
 		jmp		.back1						; go back
 ;---[Correct backward iterator branch]-----
-.bwd:	mov		ival, IMASK
+.bwd:	mov		ival, IMASK					; load index mask
 		and		ival, iter					; ival = iter & IMASK
 		lea		iter1, [iter - KSIZE]
 		cmp		ival, [s_pos]				; if (ival > pos)
@@ -3448,124 +3205,115 @@ space	= 9 * 8								; stack size required by the procedure
 		add		tnode, array
 		movdqa	median, [tnode + tindex + BDATA]
 ;---[Correct root node]--------------------
-		add		rnode, array
-		movdqa	temp, [rnode + BDATA]
-		mov		broot, [rnode + BPTR + TROOT]
-		mov		bsize, [rnode + BPTR + TSIZE]
+		add		lnode, array
+		add		lnode, size
+		movdqa	temp, [lnode + BDATA]
+		mov		broot, [lnode + KSIZE + BPTR + TROOT]
+		mov		bsize, [lnode + KSIZE + BPTR + TSIZE]
 		movdqa	[tnode + tindex + BDATA], temp
-		add		[tnode + tindex + BPTR + TSIZE], bsize
-		sub		[tnode + tindex + KSIZE + BPTR + TSIZE], bsize
+		sub		[tnode + tindex + BPTR + TSIZE], bsize
+		add		[tnode + tindex + KSIZE + BPTR + TSIZE], bsize
 ;---[Replace element in the node]----------
-		add		lnode, pos					; lnode += pos
-		neg 	pos							; pos = -pos
-		lea		param1, [array + lnode + BDATA]
-		lea		param2, [array + lnode + KSIZE + BPTR]
+		add		rnode, pos					; rnode += pos
+		lea		param1, [array + rnode + BDATA]
+		lea		param2, [array + rnode + KSIZE + BPTR]
 		mov		param3, array
-		lea		param4, [lnode + KSIZE]
-		lea		param5, [pos + BMIN - KSIZE]
+		lea		param4, [rnode + KSIZE]
+		mov		param5, pos
 		mov		param6, broot
 		mov		param7, bsize
-		call	BranchReplaceLeftCore		; call BranchReplaceLeftCore (array[lnode].data + pos, array[lnode].bptr + pos + KSIZE, array, lnode + pos + KSIZE, BMIN - KSIZE - pos, proot, psize, median)
+		call	BranchReplaceLeftCore		; call BranchReplaceLeftCore (array[rnode].data + pos, array[rnode].bptr + pos + KSIZE, array, rnode + pos + KSIZE, pos, ptr, median)
 		mov		array, [s_array]			; get "array" variable from the stack
-		mov		rnode, [s_rnode]			; get "rnode" variable from the stack
+		mov		lnode, [s_lnode]			; get "lnode" variable from the stack
 		mov		size, [s_size]				; get "size" variable from the stack
-		mov		[array + rnode + BSIZE], size
-		lea		param1, [array + rnode + BDATA]
-		lea		param2, [array + rnode + BPTR]
-		mov		param3, array
-		mov		param4, rnode
-		lea		param5, [size + KSIZE]
-		call	BranchDeleteCore			; call BranchDeleteCore (array[rnode].data, array[rnode].bptr, array, rnode, size + KSIZE)
+		mov		[array + lnode + BSIZE], size
 ;---[Correct tree size]--------------------
 		mov		param3, [s_tind]
-		add		param3, KSIZE
 		mov		param2, [s_tnode]
 		mov		param1, [s_this]
-		call	CorrectSize					; call this.CorrectSize (tnode, tindex + KSIZE)
+		call	CorrectSize					; call this.CorrectSize (tnode, tindex)
 		mov		this, [s_this]				; get "this" variable from the stack
 		mov		tnode, [s_tnode]			; get "tnode" variable from the stack
 		mov		tindex, [s_tind]			; get "tindex" variable from the stack
 		mov		lnode, [s_lnode]			; get "lnode" variable from the stack
 		mov		rnode, [s_rnode]			; get "rnode" variable from the stack
-;---[Correct forward iterator]-------------
-		mov		iter, [this + FWD]			; iter = this.fwd
-		mov		nval, NMASK
-		and		nval, iter					; nval = iter & NMASK
-		cmp		nval, tnode					; if (nval == tnode)
-		je		.ftop						;     then check iterator position
-		cmp		nval, rnode					; if (nval == rnode)
-		je		.frght						;     then check iterator position
-		cmp		nval, lnode					; if (nval == lnode)
-		je		.fleft						;     then check iterator position
 ;---[Correct backward iterator]------------
-.back1:	mov		iter, [this + BWD]			; iter = this.bwd
-		mov		nval, NMASK
+		mov		iter, [this + BWD]			; iter = this.bwd
+		mov		nval, NMASK					; load node mask
 		and		nval, iter					; nval = iter & NMASK
 		cmp		nval, tnode					; if (nval == tnode)
 		je		.btop						;     then check iterator position
-		cmp		nval, rnode					; if (nval == rnode)
-		je		.brght						;     then check iterator position
 		cmp		nval, lnode					; if (nval == lnode)
 		je		.bleft						;     then check iterator position
+		cmp		nval, rnode					; if (nval == rnode)
+		je		.brght						;     then check iterator position
+;---[Correct forward iterator]-------------
+.back1:	mov		iter, [this + FWD]			; iter = this.fwd
+		mov		nval, NMASK					; load node mask
+		and		nval, iter					; nval = iter & NMASK
+		cmp		nval, tnode					; if (nval == tnode)
+		je		.ftop						;     then check iterator position
+		cmp		nval, lnode					; if (nval == lnode)
+		je		.fleft						;     then check iterator position
+		cmp		nval, rnode					; if (nval == rnode)
+		je		.frght						;     then check iterator position
 ;---[Normal exit]--------------------------
 .back2:	add		stack, space				; restoring back the stack pointer
 		mov		result, 1					; return true
 		ret
-;---[Correct forward iterator branch]------
-.ftop:	mov		ival, IMASK
-		and		ival, iter					; ival = iter & IMASK
-		mov		lval, LMASK
-		and		lval, iter					; lval = iter & IMASK
-		lea		iter1, [lnode + lval + BMIN - KSIZE - 1]
-		cmp		ival, tindex				; if (ival == tindex)
-		cmove	iter, iter1					;     iter = lnode + lval + BMIN - KSIZE - 1
-		mov		[this + FWD], iter			; update iterator position
-		jmp		.back1						; go back
-.frght:	sub		iter, KSIZE					; iter -= KSIZE
-		mov		ival, IMASK
-		and		ival, iter					; ival = iter & IMASK
-		mov		lval, LMASK
-		and		lval, iter					; lval = iter & IMASK
-		lea		iter1, [tnode + tindex + 1]
-		add		iter1, lval
-		cmp		ival, [s_size]				; if (ival > size)
-		cmova	iter, iter1					;    iter = tnode + tindex + lval + 1
-		mov		[this + FWD], iter			; update iterator position
-		jmp		.back1						; go back
-.fleft:	mov		ival, IMASK
-		and		ival, iter					; ival = iter & IMASK
-		lea		iter1, [iter - KSIZE]
-		cmp		ival, [s_pos]				; if (ival > pos)
-		cmova	iter, iter1					;     iter = iter - KSIZE
-		mov		[this + FWD], iter			; update iterator position
-		jmp		.back1						; go back
 ;---[Correct backward iterator branch]-----
-.btop:	mov		ival, IMASK
+.btop:	mov		ival, IMASK					; load index mask
 		and		ival, iter					; ival = iter & IMASK
-		mov		lval, LMASK
+		mov		lval, IMASK					; load index mask
 		and		lval, iter					; lval = iter & IMASK
-		lea		iter1, [lnode + lval + BMIN - KSIZE - 1]
+		lea		iter1, [rnode + lval - 1]
 		cmp		ival, tindex				; if (ival == tindex)
-		cmove	iter, iter1					;     iter = lnode + lval + BMIN - KSIZE - 1
+		cmove	iter, iter1					;     iter = rnode + lval - 1
 		mov		[this + BWD], iter			; update iterator position
-		jmp		.back2						; go back
-.brght:	sub		iter, KSIZE					; iter -= KSIZE
-		mov		ival, IMASK
+		jmp		.back1						; go back
+.bleft:	mov		ival, IMASK					; load index mask
 		and		ival, iter					; ival = iter & IMASK
-		mov		lval, LMASK
+		mov		lval, IMASK					; load index mask
 		and		lval, iter					; lval = iter & IMASK
 		lea		iter1, [tnode + tindex + 1]
 		add		iter1, lval
-		cmp		ival, [s_size]				; if (ival > size)
-		cmova	iter, iter1					;    iter = tnode + tindex + lval + 1
+		cmp		ival, [s_size]				; if (ival == size)
+		cmove	iter, iter1					;     iter = tnode + tindex + 1
 		mov		[this + BWD], iter			; update iterator position
-		jmp		.back2						; go back
-.bleft:	mov		ival, IMASK
+		jmp		.back1						; go back
+.brght:	mov		ival, IMASK					; load index mask
 		and		ival, iter					; ival = iter & IMASK
-		lea		iter1, [iter - KSIZE]
-		cmp		ival, [s_pos]				; if (ival > pos)
-		cmova	iter, iter1					;     iter = iter - KSIZE
+		lea		iter1, [iter + KSIZE]
+		cmp		ival, [s_pos]				; if (ival < pos)
+		cmovb	iter, iter1					;    iter = iter + KSIZE
 		mov		[this + BWD], iter			; update iterator position
+		jmp		.back1						; go back
+;---[Correct forward iterator branch]------
+.ftop:	mov		ival, IMASK					; load index mask
+		and		ival, iter					; ival = iter & IMASK
+		mov		lval, IMASK					; load index mask
+		and		lval, iter					; lval = iter & IMASK
+		lea		iter1, [rnode + lval - 1]
+		cmp		ival, tindex				; if (ival == tindex)
+		cmove	iter, iter1					;     iter = rnode + lval - 1
+		mov		[this + FWD], iter			; update iterator position
+		jmp		.back2						; go back
+.fleft:	mov		ival, IMASK					; load index mask
+		and		ival, iter					; ival = iter & IMASK
+		mov		lval, IMASK					; load index mask
+		and		lval, iter					; lval = iter & IMASK
+		lea		iter1, [tnode + tindex + 1]
+		add		iter1, lval
+		cmp		ival, [s_size]				; if (ival == size)
+		cmove	iter, iter1					;     iter = tnode + tindex + 1
+		mov		[this + FWD], iter			; update iterator position
+		jmp		.back2						; go back
+.frght:	mov		ival, IMASK					; load index mask
+		and		ival, iter					; ival = iter & IMASK
+		lea		iter1, [iter + KSIZE]
+		cmp		ival, [s_pos]				; if (ival < pos)
+		cmovb	iter, iter1					;    iter = iter + KSIZE
+		mov		[this + FWD], iter			; update iterator position
 		jmp		.back2						; go back
 
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
@@ -3617,115 +3365,124 @@ space	= 9 * 8								; stack size required by the procedure
 		add		tnode, array
 		movdqa	median, [tnode + tindex + BDATA]
 ;---[Correct root node]--------------------
-		add		lnode, array
-		add		lnode, size
-		movdqa	temp, [lnode + BDATA]
-		mov		broot, [lnode + KSIZE + BPTR + TROOT]
-		mov		bsize, [lnode + KSIZE + BPTR + TSIZE]
+		add		rnode, array
+		movdqa	temp, [rnode + BDATA]
+		mov		broot, [rnode + BPTR + TROOT]
+		mov		bsize, [rnode + BPTR + TSIZE]
 		movdqa	[tnode + tindex + BDATA], temp
-		sub		[tnode + tindex + BPTR + TSIZE], bsize
-		add		[tnode + tindex + KSIZE + BPTR + TSIZE], bsize
+		add		[tnode + tindex + BPTR + TSIZE], bsize
+		sub		[tnode + tindex + KSIZE + BPTR + TSIZE], bsize
 ;---[Replace element in the node]----------
-		add		rnode, pos					; rnode += pos
-		lea		param1, [array + rnode + BDATA]
-		lea		param2, [array + rnode + KSIZE + BPTR]
+		add		lnode, pos					; lnode += pos
+		neg 	pos							; pos = -pos
+		lea		param1, [array + lnode + BDATA]
+		lea		param2, [array + lnode + KSIZE + BPTR]
 		mov		param3, array
-		lea		param4, [rnode + KSIZE]
-		mov		param5, pos
+		lea		param4, [lnode + KSIZE]
+		lea		param5, [pos + BMIN - KSIZE]
 		mov		param6, broot
 		mov		param7, bsize
-		call	BranchReplaceRightCore		; call BranchReplaceRightCore (array[rnode].data + pos, array[rnode].bptr + pos + KSIZE, array, rnode + pos + KSIZE, pos, ptr, median)
+		call	BranchReplaceRightCore		; call BranchReplaceRightCore (array[lnode].data + pos, array[lnode].bptr + pos + KSIZE, array, lnode + pos + KSIZE, BMIN - KSIZE - pos, proot, psize, median)
 		mov		array, [s_array]			; get "array" variable from the stack
-		mov		lnode, [s_lnode]			; get "lnode" variable from the stack
+		mov		rnode, [s_rnode]			; get "rnode" variable from the stack
 		mov		size, [s_size]				; get "size" variable from the stack
-		mov		[array + lnode + BSIZE], size
+		mov		[array + rnode + BSIZE], size
+		lea		param1, [array + rnode + BDATA]
+		lea		param2, [array + rnode + BPTR]
+		mov		param3, array
+		mov		param4, rnode
+		lea		param5, [size + KSIZE]
+		call	BranchDeleteCore			; call BranchDeleteCore (array[rnode].data, array[rnode].bptr, array, rnode, size + KSIZE)
 ;---[Correct tree size]--------------------
 		mov		param3, [s_tind]
+		add		param3, KSIZE
 		mov		param2, [s_tnode]
 		mov		param1, [s_this]
-		call	CorrectSize					; call this.CorrectSize (tnode, tindex)
+		call	CorrectSize					; call this.CorrectSize (tnode, tindex + KSIZE)
 		mov		this, [s_this]				; get "this" variable from the stack
 		mov		tnode, [s_tnode]			; get "tnode" variable from the stack
 		mov		tindex, [s_tind]			; get "tindex" variable from the stack
 		mov		lnode, [s_lnode]			; get "lnode" variable from the stack
 		mov		rnode, [s_rnode]			; get "rnode" variable from the stack
-;---[Correct backward iterator]------------
-		mov		iter, [this + BWD]			; iter = this.bwd
-		mov		nval, NMASK
-		and		nval, iter					; nval = iter & NMASK
-		cmp		nval, tnode					; if (nval == tnode)
-		je		.btop						;     then check iterator position
-		cmp		nval, lnode					; if (nval == lnode)
-		je		.bleft						;     then check iterator position
-		cmp		nval, rnode					; if (nval == rnode)
-		je		.brght						;     then check iterator position
 ;---[Correct forward iterator]-------------
-.back1:	mov		iter, [this + FWD]			; iter = this.fwd
-		mov		nval, NMASK
+		mov		iter, [this + FWD]			; iter = this.fwd
+		mov		nval, NMASK					; load node mask
 		and		nval, iter					; nval = iter & NMASK
 		cmp		nval, tnode					; if (nval == tnode)
 		je		.ftop						;     then check iterator position
-		cmp		nval, lnode					; if (nval == lnode)
-		je		.fleft						;     then check iterator position
 		cmp		nval, rnode					; if (nval == rnode)
 		je		.frght						;     then check iterator position
+		cmp		nval, lnode					; if (nval == lnode)
+		je		.fleft						;     then check iterator position
+;---[Correct backward iterator]------------
+.back1:	mov		iter, [this + BWD]			; iter = this.bwd
+		mov		nval, NMASK					; load node mask
+		and		nval, iter					; nval = iter & NMASK
+		cmp		nval, tnode					; if (nval == tnode)
+		je		.btop						;     then check iterator position
+		cmp		nval, rnode					; if (nval == rnode)
+		je		.brght						;     then check iterator position
+		cmp		nval, lnode					; if (nval == lnode)
+		je		.bleft						;     then check iterator position
 ;---[Normal exit]--------------------------
 .back2:	add		stack, space				; restoring back the stack pointer
 		mov		result, 1					; return true
 		ret
-;---[Correct backward iterator branch]-----
-.btop:	mov		ival, IMASK
-		and		ival, iter					; ival = iter & IMASK
-		mov		lval, IMASK
-		and		lval, iter					; lval = iter & IMASK
-		lea		iter1, [rnode + lval - 1]
-		cmp		ival, tindex				; if (ival == tindex)
-		cmove	iter, iter1					;     iter = rnode + lval - 1
-		mov		[this + BWD], iter			; update iterator position
-		jmp		.back1						; go back
-.bleft:	mov		ival, IMASK
-		and		ival, iter					; ival = iter & IMASK
-		mov		lval, IMASK
-		and		lval, iter					; lval = iter & IMASK
-		lea		iter1, [tnode + tindex + 1]
-		add		iter1, lval
-		cmp		ival, [s_size]				; if (ival == size)
-		cmove	iter, iter1					;     iter = tnode + tindex + 1
-		mov		[this + BWD], iter			; update iterator position
-		jmp		.back1						; go back
-.brght:	mov		ival, IMASK
-		and		ival, iter					; ival = iter & IMASK
-		lea		iter1, [iter + KSIZE]
-		cmp		ival, [s_pos]				; if (ival < pos)
-		cmovb	iter, iter1					;    iter = iter + KSIZE
-		mov		[this + BWD], iter			; update iterator position
-		jmp		.back1						; go back
 ;---[Correct forward iterator branch]------
-.ftop:	mov		ival, IMASK
+.ftop:	mov		ival, IMASK					; load index mask
 		and		ival, iter					; ival = iter & IMASK
-		mov		lval, IMASK
+		mov		lval, LMASK					; load level mask
 		and		lval, iter					; lval = iter & IMASK
-		lea		iter1, [rnode + lval - 1]
+		lea		iter1, [lnode + lval + BMIN - KSIZE - 1]
 		cmp		ival, tindex				; if (ival == tindex)
-		cmove	iter, iter1					;     iter = rnode + lval - 1
+		cmove	iter, iter1					;     iter = lnode + lval + BMIN - KSIZE - 1
 		mov		[this + FWD], iter			; update iterator position
-		jmp		.back2						; go back
-.fleft:	mov		ival, IMASK
+		jmp		.back1						; go back
+.frght:	sub		iter, KSIZE					; iter -= KSIZE
+		mov		ival, IMASK					; load index mask
 		and		ival, iter					; ival = iter & IMASK
-		mov		lval, IMASK
+		mov		lval, LMASK					; load level mask
 		and		lval, iter					; lval = iter & IMASK
 		lea		iter1, [tnode + tindex + 1]
 		add		iter1, lval
-		cmp		ival, [s_size]				; if (ival == size)
-		cmove	iter, iter1					;     iter = tnode + tindex + 1
+		cmp		ival, [s_size]				; if (ival > size)
+		cmova	iter, iter1					;    iter = tnode + tindex + lval + 1
 		mov		[this + FWD], iter			; update iterator position
-		jmp		.back2						; go back
-.frght:	mov		ival, IMASK
+		jmp		.back1						; go back
+.fleft:	mov		ival, IMASK					; load index mask
 		and		ival, iter					; ival = iter & IMASK
-		lea		iter1, [iter + KSIZE]
-		cmp		ival, [s_pos]				; if (ival < pos)
-		cmovb	iter, iter1					;    iter = iter + KSIZE
+		lea		iter1, [iter - KSIZE]
+		cmp		ival, [s_pos]				; if (ival > pos)
+		cmova	iter, iter1					;     iter = iter - KSIZE
 		mov		[this + FWD], iter			; update iterator position
+		jmp		.back1						; go back
+;---[Correct backward iterator branch]-----
+.btop:	mov		ival, IMASK					; load index mask
+		and		ival, iter					; ival = iter & IMASK
+		mov		lval, LMASK					; load level mask
+		and		lval, iter					; lval = iter & IMASK
+		lea		iter1, [lnode + lval + BMIN - KSIZE - 1]
+		cmp		ival, tindex				; if (ival == tindex)
+		cmove	iter, iter1					;     iter = lnode + lval + BMIN - KSIZE - 1
+		mov		[this + BWD], iter			; update iterator position
+		jmp		.back2						; go back
+.brght:	sub		iter, KSIZE					; iter -= KSIZE
+		mov		ival, IMASK					; load index mask
+		and		ival, iter					; ival = iter & IMASK
+		mov		lval, LMASK					; load level mask
+		and		lval, iter					; lval = iter & IMASK
+		lea		iter1, [tnode + tindex + 1]
+		add		iter1, lval
+		cmp		ival, [s_size]				; if (ival > size)
+		cmova	iter, iter1					;    iter = tnode + tindex + lval + 1
+		mov		[this + BWD], iter			; update iterator position
+		jmp		.back2						; go back
+.bleft:	mov		ival, IMASK					; load index mask
+		and		ival, iter					; ival = iter & IMASK
+		lea		iter1, [iter - KSIZE]
+		cmp		ival, [s_pos]				; if (ival > pos)
+		cmova	iter, iter1					;     iter = iter - KSIZE
+		mov		[this + BWD], iter			; update iterator position
 		jmp		.back2						; go back
 
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
@@ -3753,16 +3510,15 @@ ival	equ		result						; iterator index value
 lval	equ		pos							; iterator level value
 median	equ		xmm0						; median value
 stack	equ		rsp							; stack pointer
-s_this	equ		stack + 0 * 8				; stack position of "this" variable
-s_array	equ		stack + 1 * 8				; stack position of "array" variable
-s_tnode	equ		stack + 2 * 8				; stack position of "tnode" variable
-s_tind	equ		stack + 3 * 8				; stack position of "tindex" variable
-s_lnode	equ		stack + 4 * 8				; stack position of "lnode" variable
-s_rnode	equ		stack + 5 * 8				; stack position of "rnode" variable
-s_node	equ		stack + 6 * 8				; stack position of "node" variable
-s_pos	equ		stack + 7 * 8				; stack position of "pos" variable
-s_med	equ		stack + 8 * 8				; stack position of "median" variable
-space	= 11 * 8							; stack size required by the procedure
+s_med	equ		stack + 0 * 8				; stack position of "median" variable
+s_this	equ		stack + 2 * 8				; stack position of "this" variable
+s_array	equ		stack + 3 * 8				; stack position of "array" variable
+s_tnode	equ		stack + 4 * 8				; stack position of "tnode" variable
+s_tind	equ		stack + 5 * 8				; stack position of "tindex" variable
+s_lnode	equ		stack + 6 * 8				; stack position of "lnode" variable
+s_rnode	equ		stack + 7 * 8				; stack position of "rnode" variable
+s_pos	equ		stack + 8 * 8				; stack position of "pos" variable
+space	= 9 * 8								; stack size required by the procedure
 ;------------------------------------------
 		sub		stack, space				; reserving stack size for local vars
 		mov		array, [this + ARRAY]		; get pointer to array of nodes
@@ -3772,7 +3528,6 @@ space	= 11 * 8							; stack size required by the procedure
 		mov		[s_tind], tindex			; save "tindex" variable into the stack
 		mov		[s_lnode], lnode			; save "lnode" variable into the stack
 		mov		[s_rnode], rnode			; save "rnode" variable into the stack
-		mov		[s_node], node				; save "node" variable into the stack
 ;---[Correct position]---------------------
 		lea		result, [pos + BMIN + KSIZE]; result = pos + BMIN + KSIZE
 		cmp		node, lnode					; if (node == lnode)
@@ -3819,7 +3574,7 @@ space	= 11 * 8							; stack size required by the procedure
 		mov		rnode, [s_rnode]			; get "rnode" variable from the stack
 ;---[Correct forward iterator]-------------
 		mov		iter, [this + FWD]			; iter = this.fwd
-		mov		nval, NMASK
+		mov		nval, NMASK					; load node mask
 		and		nval, iter					; nval = iter & NMASK
 		cmp		nval, tnode					; if (nval == tnode)
 		je		.ftop						;     then check iterator position
@@ -3829,7 +3584,7 @@ space	= 11 * 8							; stack size required by the procedure
 		je		.fleft						;     then check iterator position
 ;---[Correct backward iterator]------------
 .back1:	mov		iter, [this + BWD]			; iter = this.bwd
-		mov		nval, NMASK
+		mov		nval, NMASK					; load node mask
 		and		nval, iter					; nval = iter & NMASK
 		cmp		nval, tnode					; if (nval == tnode)
 		je		.btop						;     then check iterator position
@@ -3844,21 +3599,21 @@ space	= 11 * 8							; stack size required by the procedure
 		add		stack, space				; restoring back the stack pointer
 		ret
 ;---[Correct forward iterator branch]------
-.ftop:	mov		ival, IMASK
+.ftop:	mov		ival, IMASK					; load index mask
 		and		ival, iter					; ival = iter & IMASK
-		mov		lval, LMASK
+		mov		lval, LMASK					; load level mask
 		and		lval, iter					; lval = iter & LMASK
 		lea		iter, [lnode + lval + BMIN - 1]
 		cmp		ival, tindex				; if (ival == tindex)
 		je		.fleft						;     then check left node
 		jmp		.back1						; go back
-.frght:	mov		ival, IMASK
+.frght:	mov		ival, IMASK					; load index mask
 		and		ival, iter					; ival = iter & IMASK
-		mov		lval, LMASK
+		mov		lval, LMASK					; load level mask
 		and		lval, iter					; lval = iter & LMASK
 		lea		iter, [lnode + ival + BMIN + KSIZE]
 		add		iter, lval					; iter = lnode + ival + lval + BMIN + KSIZE
-.fleft:	mov		ival, IMASK
+.fleft:	mov		ival, IMASK					; load index mask
 		and		ival, iter					; ival = iter & IMASK
 		lea		iter1, [iter - KSIZE]
 		cmp		ival, [s_pos]				; if (ival > pos)
@@ -3866,21 +3621,21 @@ space	= 11 * 8							; stack size required by the procedure
 		mov		[this + FWD], iter			; update iterator position
 		jmp		.back1						; go back
 ;---[Correct backward iterator branch]-----
-.btop:	mov		ival, IMASK
+.btop:	mov		ival, IMASK					; load index mask
 		and		ival, iter					; ival = iter & IMASK
-		mov		lval, LMASK
+		mov		lval, LMASK					; load level mask
 		and		lval, iter					; lval = iter & LMASK
 		lea		iter, [lnode + lval + BMIN - 1]
 		cmp		ival, tindex				; if (ival == tindex)
 		je		.bleft						;     then check left node
 		jmp		.back2						; go back
-.brght:	mov		ival, IMASK
+.brght:	mov		ival, IMASK					; load index mask
 		and		ival, iter					; ival = iter & IMASK
-		mov		lval, LMASK
+		mov		lval, LMASK					; load level mask
 		and		lval, iter					; lval = iter & LMASK
 		lea		iter, [lnode + ival + BMIN + KSIZE]
 		add		iter, lval					; iter = lnode + ival + lval + BMIN + KSIZE
-.bleft:	mov		ival, IMASK
+.bleft:	mov		ival, IMASK					; load index mask
 		and		ival, iter					; ival = iter & IMASK
 		lea		iter1, [iter - KSIZE]
 		cmp		ival, [s_pos]				; if (ival > pos)
@@ -3921,9 +3676,9 @@ space	= 5 * 8								; stack size required by the procedure
 .loop:	mov		root, [array + node + BROOT]; root = array[node].root
 		mov		nsize, [array + node + BSIZE]
 		sub		nsize, KSIZE				; nsize = array[node].size - KSIZE
-		mov		tnode, NMASK
+		mov		tnode, NMASK				; load node mask
 		and		tnode, root					; tnode = root & NMASK
-		mov		tindex, IMASK
+		mov		tindex, IMASK				; load index mask
 		and		tindex, root				; tindex = root & IMASK
 		mov		[s_tnode], tnode			; save "tnode" variable into the stack
 		mov		[s_tind], tindex			; save "tindex" variable into the stack
@@ -3940,7 +3695,7 @@ space	= 5 * 8								; stack size required by the procedure
 		mov		lsize, [array + lnode + BSIZE]
 		sub		lsize, KSIZE				; lsize = array[lnode].size - KSIZE
 		cmp		lsize, BMIN					; if (lsize >= BMIN)
-		jae		.right						;     then replace element in the right node
+		jae		.left						;     then replace element in the left node
 		mov		param7, index
 		mov		param6, node
 		mov		param5, node
@@ -3957,7 +3712,7 @@ space	= 5 * 8								; stack size required by the procedure
 		mov		rsize, [array + rnode + BSIZE]
 		sub		rsize, KSIZE				; rsize = array[rnode].size - KSIZE
 		cmp		rsize, BMIN					; if (rsize >= BMIN)
-		jae		.left						;     then replace element in the left node
+		jae		.right						;     then replace element in the right node
 		mov		param7, index
 		mov		param6, node
 		mov		param4, node
@@ -3973,23 +3728,22 @@ space	= 5 * 8								; stack size required by the procedure
 .del:	mov		param4, index
 		mov		param3, nsize
 		mov		param2, node
-		mov		param1, this
 		add		stack, space				; restoring back the stack pointer
 		jmp		BranchDelete				; call this.BranchDelete (node, nsize, index)
-;---[Replace element in the right node]----
-.right:	mov		param7, index
+;---[Replace element in the left node]-----
+.left:	mov		param7, index
 		mov		param5, node
 		mov		param3, [s_tind]
 		mov		param2, [s_tnode]
 		add		stack, space				; restoring back the stack pointer
-		jmp		BranchReplaceRight			; call this.BranchReplaceRight (tnode, tindex, lnode, node, lsize, index)
-;---[Replace element in the left node]-----
-.left:	mov		param7, index
+		jmp		BranchReplaceLeft			; call this.BranchReplaceLeft (tnode, tindex, lnode, node, lsize, index)
+;---[Replace element in the right node]----
+.right:	mov		param7, index
 		mov		param4, node
 		mov		param3, [s_tind]
 		mov		param2, [s_tnode]
 		add		stack, space				; restoring back the stack pointer
-		jmp		BranchReplaceLeft			; call this.BranchReplaceLeft (tnode, tindex, node, rnode, rsize, index)
+		jmp		BranchReplaceRight			; call this.BranchReplaceRight (tnode, tindex, node, rnode, rsize, index)
 
 ;==============================================================================;
 ;       Remove element from b-tree                                             ;
@@ -4026,18 +3780,18 @@ space	= 5 * 8								; stack size required by the procedure
 		mov		[s_array], array			; save "array" variable into the stack
 		mov		[s_iter], iter				; save "iter" variable into the stack
 ;---[Get node pointer]---------------------
-		mov		level, LMASK
+		mov		level, LMASK				; load level mask
 		and		level, iter					; level = iter & LMASK
-		mov		node, NMASK
+		mov		node, NMASK					; load node mask
 		and		node, iter					; node = iter & NMASK
 		and		index, IMASK				; index = iter & IMASK
 ;---[Get top node]-------------------------
 		mov		root, [array + node + BROOT]; root = array[node].root
 		mov		nsize, [array + node + BSIZE]
 		sub		nsize, KSIZE				; nsize = array[node].size - KSIZE
-		mov		tnode, NMASK
+		mov		tnode, NMASK				; load node mask
 		and		tnode, root					; tnode = root & NMASK
-		mov		tindex, IMASK
+		mov		tindex, IMASK				; load index mask
 		and		tindex, root				; tindex = root & IMASK
 		mov		[s_tnode], tnode			; save "tnode" variable into the stack
 		mov		[s_tind], tindex			; save "tindex" variable into the stack
@@ -4056,7 +3810,7 @@ space	= 5 * 8								; stack size required by the procedure
 		mov		lsize, [array + lnode + BSIZE]
 		sub		lsize, KSIZE				; lsize = array[lnode].size - KSIZE
 		cmp		lsize, LMIN					; if (lsize >= LMIN)
-		jae		.right						;     then replace element in the right node
+		jae		.left						;     then replace element in the left node
 		mov		param7, index
 		mov		param6, node
 		mov		param5, node
@@ -4069,7 +3823,7 @@ space	= 5 * 8								; stack size required by the procedure
 		mov		rsize, [array + rnode + BSIZE]
 		sub		rsize, KSIZE				; rsize = array[rnode].size - KSIZE
 		cmp		rsize, LMIN					; if (rsize >= LMIN)
-		jae		.left						;     then replace element in the left node
+		jae		.right						;     then replace element in the right node
 		mov		param7, index
 		mov		param6, node
 		mov		param4, node
@@ -4081,23 +3835,22 @@ space	= 5 * 8								; stack size required by the procedure
 .del:	mov		param4, index
 		mov		param2, node
 		mov		param3, nsize
-		mov		param1, this
 		add		stack, space				; restoring back the stack pointer
 		jmp		LeafDelete					; call this.LeafDelete (node, nsize, index)
-;---[Replace element in the right node]----
-.right:	mov		param7, index
+;---[Replace element in the left node]-----
+.left:	mov		param7, index
 		mov		param5, node
 		mov		param3, [s_tind]
 		mov		param2, [s_tnode]
 		add		stack, space				; restoring back the stack pointer
-		jmp		LeafReplaceRight			; call this.LeafReplaceRight (tnode, tindex, lnode, node, lsize, index)
-;---[Replace element in the left node]-----
-.left:	mov		param7, index
+		jmp		LeafReplaceLeft				; call this.LeafReplaceLeft (tnode, tindex, lnode, node, lsize, index)
+;---[Replace element in the right node]----
+.right:	mov		param7, index
 		mov		param4, node
 		mov		param3, [s_tind]
 		mov		param2, [s_tnode]
 		add		stack, space				; restoring back the stack pointer
-		jmp		LeafReplaceLeft				; call this.LeafReplaceLeft (tnode, tindex, node, rnode, rsize, index)
+		jmp		LeafReplaceRight			; call this.LeafReplaceRight (tnode, tindex, node, rnode, rsize, index)
 ;---[Swap element in the node]-------------
 .swap:	mov		iter, [s_iter]
 		cmp		iter, [this + FWD]			; if (fwd == iter)
@@ -4115,17 +3868,17 @@ space	= 5 * 8								; stack size required by the procedure
 		movdqa	temp, [array + result + BDATA]
 		movdqa	[array + iter + BDATA], temp; ptr[0] = array[node].data[index]
 ;---[Get node pointer]---------------------
-		mov		node, NMASK
+		mov		node, NMASK					; load node mask
 		and		node, result				; node = iter & NMASK
-		mov		index, IMASK
+		mov		index, IMASK				; load index mask
 		and		index, result				; index = iter & IMASK
 ;---[Get top node]-------------------------
 		mov		root, [array + node + BROOT]; root = array[node].root
 		mov		nsize, [array + node + BSIZE]
 		sub		nsize, KSIZE				; size = array[node].size - KSIZE
-		mov		tnode, NMASK
+		mov		tnode, NMASK				; load node mask
 		and		tnode, root					; tnode = root & NMASK
-		mov		tindex, IMASK
+		mov		tindex, IMASK				; load index mask
 		and		tindex, root				; tindex = root & IMASK
 		mov		[s_tnode], tnode			; save "tnode" variable into the stack
 		mov		[s_tind], tindex			; save "tindex" variable into the stack
@@ -4147,8 +3900,8 @@ this	equ		rdi							; pointer to b-tree object
 data	equ		rsi							; pointer to data structure
 index	equ		rdx							; element index
 ;---[Internal variables]-------------------
-result	equ		rax							; result register
 status	equ		al							; operation status
+result	equ		rax							; result register
 array	equ		rcx							; pointer to array of nodes
 ptr		equ		r8							; pointer to element value
 temp	equ		xmm0						; temporary register
@@ -4199,7 +3952,7 @@ iter	equ		rdx							; iterator value
 array	equ		rcx							; pointer to array of nodes
 ptr		equ		r8							; pointer to element value
 temp	equ		xmm0						; temporary register
-;------------------------------------------
+;---[Check iterator]-----------------------
 		mov		iter, [this + offst]		; get iterator value
 		cmp		iter, EMPTY					; if (iter == EMPTY)
 		je		.error						;     then go to error branch
@@ -4289,8 +4042,8 @@ space	= 5 * 8								; stack size required by the procedure
 .exit:	add		stack, space				; restoring back the stack pointer
 		ret
 }
-MultiSetIndex:	SET_INDEX	InsertMultiCore
-UniqueSetIndex:	SET_INDEX	InsertUniqueCore
+SetIndexMulti:	SET_INDEX	InsertCoreMulti
+SetIndexUnique:	SET_INDEX	InsertCoreUnique
 
 ;==============================================================================;
 ;       Using iterators                                                        ;
@@ -4352,10 +4105,10 @@ space	= 5 * 8								; stack size required by the procedure
 .exit:	add		stack, space				; restoring back the stack pointer
 		ret
 }
-MultiSetFwd:	SET_ITER	InsertMultiCore, FWD
-MultiSetBwd:	SET_ITER	InsertMultiCore, BWD
-UniqueSetFwd:	SET_ITER	InsertUniqueCore, FWD
-UniqueSetBwd:	SET_ITER	InsertUniqueCore, BWD
+SetFwdMulti:	SET_ITER	InsertCoreMulti, FWD
+SetBwdMulti:	SET_ITER	InsertCoreMulti, BWD
+SetFwdUnique:	SET_ITER	InsertCoreUnique, FWD
+SetBwdUnique:	SET_ITER	InsertCoreUnique, BWD
 
 ;******************************************************************************;
 ;       Getting element value                                                  ;
@@ -4414,7 +4167,7 @@ data	equ		rsi							; pointer to data structure
 status	equ		al							; operation status
 iter	equ		rcx							; iterator value
 temp	equ		xmm0						; temporary register
-;------------------------------------------
+;---[Check iterator]-----------------------
 		mov		iter, [this + offst]		; get iterator value
 		cmp		iter, EMPTY					; if (iter == EMPTY)
 		setne	status						;     return false
@@ -4506,8 +4259,8 @@ space	= 5 * 8								; stack size required by the procedure
 .exit:	add		stack, space				; restoring back the stack pointer
 		ret
 }
-MultiReplaceIndex:	REPLACE_INDEX	InsertMultiCore
-UniqueReplaceIndex:	REPLACE_INDEX	InsertUniqueCore
+ReplaceIndexMulti:	REPLACE_INDEX	InsertCoreMulti
+ReplaceIndexUnique:	REPLACE_INDEX	InsertCoreUnique
 
 ;==============================================================================;
 ;       Using iterators                                                        ;
@@ -4572,10 +4325,10 @@ space	= 5 * 8								; stack size required by the procedure
 .exit:	add		stack, space				; restoring back the stack pointer
 		ret
 }
-MultiReplaceFwd:	REPLACE_ITER	InsertMultiCore, FWD
-MultiReplaceBwd:	REPLACE_ITER	InsertMultiCore, BWD
-UniqueReplaceFwd:	REPLACE_ITER	InsertUniqueCore, FWD
-UniqueReplaceBwd:	REPLACE_ITER	InsertUniqueCore, BWD
+ReplaceFwdMulti:	REPLACE_ITER	InsertCoreMulti, FWD
+ReplaceBwdMulti:	REPLACE_ITER	InsertCoreMulti, BWD
+ReplaceFwdUnique:	REPLACE_ITER	InsertCoreUnique, FWD
+ReplaceBwdUnique:	REPLACE_ITER	InsertCoreUnique, BWD
 
 ;******************************************************************************;
 ;       Overriding element value                                               ;
@@ -4609,7 +4362,6 @@ space	= 3 * 8								; stack size required by the procedure
 		mov		[s_ndata], ndata			; save "ndata" variable into the stack
 		mov		param2, [this + CAPACITY]
 		shl		param2, 1
-	Capacity	param2, temp, MINCAP		; compute new capacity of target object
 		cmp		param2, [this + CAPACITY]	; if (newcapacity <= capacity)
 		jbe		.error						;     then go to error branch
 		call	Extend						; status = this.Extend (cap * 2)
@@ -4688,8 +4440,8 @@ bptr	equ		r11							; pointer to array of subtrees
 		mov		node, NMASK					; load node mask
 		mov		index, IMASK				; load index mask
 		mov		level, LMASK				; load level mask
-		and		node, iter					; nmask = node & NMASK
-		and		index, iter					; imask = node & IMASK
+		and		node, iter					; node = iter & NMASK
+		and		index, iter					; index = iter & IMASK
 		and		level, iter					; if (level != 0)
 		jz		@f							;     then skip the loop
 		lea		bptr, [array + node + BPTR]	; bptr = array[node].bptr
@@ -4704,7 +4456,7 @@ bptr	equ		r11							; pointer to array of subtrees
 		mov		iter, [array + node + BROOT]
 		mov		node, NMASK					; load node mask
 		mov		index, IMASK				; load index mask
-		and		node, iter					; nmask = iter & NMASK
+		and		node, iter					; node = iter & NMASK
 		and		index, iter					; index = iter & IMASK
 		cmp		node, EMPTY					; if (node == EMPTY)
 		je		.exit						;     return result
@@ -4723,7 +4475,7 @@ bptr	equ		r11							; pointer to array of subtrees
 		mov		iter, [array + node + BROOT]
 		mov		node, NMASK					; load node mask
 		mov		index, IMASK				; load index mask
-		and		node, iter					; nmask = iter & NMASK
+		and		node, iter					; node = iter & NMASK
 		and		index, iter					; index = iter & IMASK
 		cmp		node, EMPTY					; if (node == EMPTY)
 		jne		.iloop						; do while (node != EMPTY)
@@ -4746,8 +4498,8 @@ nsize	equ		r11							; node size
 		mov		node, NMASK					; load node mask
 		mov		index, IMASK				; load index mask
 		mov		level, LMASK				; load level mask
-		and		node, iter					; nmask = node & NMASK
-		and		index, iter					; index = node & IMASK
+		and		node, iter					; node = iter & NMASK
+		and		index, iter					; index = iter & IMASK
 		and		level, iter					; if (level != 0)
 		jnz		.else						;     then go to else branch
 ;---[Iteration loop]-----------------------
@@ -4760,7 +4512,7 @@ nsize	equ		r11							; node size
 @@:		mov		result, [array + node + BROOT]
 		mov		node, NMASK					; load node mask
 		mov		index, IMASK				; load index mask
-		and		node, result				; nmask = result & NMASK
+		and		node, result				; node = result & NMASK
 		and		index, result				; index = result & IMASK
 		cmp		node, EMPTY					; if (node == EMPTY)
 		je		.error						;     return EMPTY
@@ -4804,8 +4556,8 @@ level	equ		r10							; level of b-tree node
 		mov		node, NMASK					; load node mask
 		mov		index, IMASK				; load index mask
 		mov		level, LMASK				; load level mask
-		and		node, iter					; nmask = node & NMASK
-		and		index, iter					; index = node & IMASK
+		and		node, iter					; node = iter & NMASK
+		and		index, iter					; index = iter & IMASK
 		and		level, iter					; if (level != 0)
 		jnz		.else						;     then go to else branch
 ;---[Iteration loop]-----------------------
@@ -4817,7 +4569,7 @@ level	equ		r10							; level of b-tree node
 @@:		mov		result, [array + node + BROOT]
 		mov		node, NMASK					; load node mask
 		mov		index, IMASK				; load index mask
-		and		node, result				; nmask = result & NMASK
+		and		node, result				; node = result & NMASK
 		and		index, result				; index = result & IMASK
 		cmp		node, EMPTY					; if (node == EMPTY)
 		je		.error						;     return EMPTY
@@ -4892,6 +4644,7 @@ s_this	equ		stack + 0 * 8				; stack position of "this" variable
 space	= 1 * 8								; stack size required by the procedure
 ;------------------------------------------
 		sub		stack, space				; reserving stack size for local vars
+;---[Check object size]--------------------
 		mov		size, [this + SIZE]			; get object size
 		test	size, size					; if (size == 0)
 		jz		.error						;     then go to error branch
@@ -4935,7 +4688,7 @@ this	equ		rdi							; pointer to b-tree object
 ;---[Internal variables]-------------------
 result	equ		rax							; result register
 iter	equ		rcx							; iterator value
-;------------------------------------------
+;---[Check iterator]-----------------------
 		mov		iter, [this + offst]		; get iterator value
 		cmp		iter, EMPTY					; if (iter == EMPTY)
 		je		.error						;     then go to error branch
@@ -4963,6 +4716,7 @@ s_this	equ		stack + 0 * 8				; stack position of "this" variable
 space	= 1 * 8								; stack size required by the procedure
 ;------------------------------------------
 		sub		stack, space				; reserving stack size for local vars
+;---[Check iterator]-----------------------
 		mov		iter, [this + offst]		; get iterator value
 		cmp		iter, EMPTY					; if (iter == EMPTY)
 		je		.error						;     then go to error branch
@@ -4974,10 +4728,10 @@ space	= 1 * 8								; stack size required by the procedure
 		mov		param3, pos
 		mov		param2, iter
 		mov		param1, [this + ARRAY]
-		call	func						; result = func (array, iter, pos)
+		call	func						; iter = func (array, iter, pos)
 		mov		this, [s_this]				; get "this" variable from the stack
-		mov		[this + offst], result		; update iterator position
-		cmp		result, EMPTY				; if (result == EMPTY)
+		mov		[this + offst], iter		; update iterator position
+		cmp		iter, EMPTY					; if (iter == EMPTY)
 		je		.error						;     then go to error branch
 ;---[Normal exit branch]-------------------
 .exit:	add		stack, space				; restoring back the stack pointer
@@ -5190,7 +4944,8 @@ space	= 15 * 8							; stack size required by the procedure
 		add		stack, space				; restoring back the stack pointer
 		ret									; return level
 }
-Equal:			FIND_CORE	e, g
+EqualFwd:		FIND_CORE	e, g
+EqualBwd:		FIND_CORE	e, ge
 Great:			FIND_CORE	l, ge
 GreatOrEqual:	FIND_CORE	le, g
 Less:			FIND_CORE	g, g
@@ -5203,8 +4958,8 @@ this	equ		rdi							; pointer to b-tree object
 data	equ		rsi							; pointer to data structure
 key		equ		rdx							; key to find
 ;---[Internal variables]-------------------
-result	equ		rax							; result register
 status	equ		al							; operation status
+result	equ		rax							; result register
 temp	equ		xmm0						; temporary register
 stack	equ		rsp							; stack pointer
 s_this	equ		stack + 0 * 8				; stack position of "this" variable
@@ -5244,24 +4999,24 @@ space	= 3 * 8								; stack size required by the procedure
 }
 
 ; Searching for equal key
-FindKeyEqualFwd:		FIND_KEY	Equal, FWD
-FindKeyEqualBwd:		FIND_KEY	Equal, BWD
+FindEqualFwd:			FIND_KEY	EqualFwd, FWD
+FindEqualBwd:			FIND_KEY	EqualBwd, BWD
 
 ; Searching for greater key
-FindKeyGreatFwd:		FIND_KEY	Great, FWD
-FindKeyGreatBwd:		FIND_KEY	Great, BWD
+FindGreatFwd:			FIND_KEY	Great, FWD
+FindGreatBwd:			FIND_KEY	Great, BWD
 
 ; Searching for greater or equal key
-FindKeyGreatOrEqualFwd:	FIND_KEY	GreatOrEqual, FWD
-FindKeyGreatOrEqualBwd:	FIND_KEY	GreatOrEqual, BWD
+FindGreatOrEqualFwd:	FIND_KEY	GreatOrEqual, FWD
+FindGreatOrEqualBwd:	FIND_KEY	GreatOrEqual, BWD
 
 ; Searching for less key
-FindKeyLessFwd:			FIND_KEY	Less, FWD
-FindKeyLessBwd:			FIND_KEY	Less, BWD
+FindLessFwd:			FIND_KEY	Less, FWD
+FindLessBwd:			FIND_KEY	Less, BWD
 
 ; Searching for less or equal key
-FindKeyLessOrEqualFwd:	FIND_KEY	LessOrEqual, FWD
-FindKeyLessOrEqualBwd:	FIND_KEY	LessOrEqual, BWD
+FindLessOrEqualFwd:		FIND_KEY	LessOrEqual, FWD
+FindLessOrEqualBwd:		FIND_KEY	LessOrEqual, BWD
 
 ;==============================================================================;
 ;       Duplicates searching                                                   ;
@@ -5325,15 +5080,16 @@ space	= 5 * 8								; stack size required by the procedure
 DupFwd:	FIND_DUP_CORE	GoNext
 DupBwd:	FIND_DUP_CORE	GoPrev
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	FIND_DUP	func, offst
+macro	FIND_DUP	checkfunc, offst
 {
 ;---[Parameters]---------------------------
 this	equ		rdi							; pointer to b-tree object
 data	equ		rsi							; pointer to data structure
 ;---[Internal variables]-------------------
-result	equ		rax							; result register
 status	equ		al							; operation status
+result	equ		rax							; result register
 iter	equ		rcx							; iterator value
+size	equ		result						; object size
 temp	equ		xmm0						; temporary register
 stack	equ		rsp							; stack pointer
 s_this	equ		stack + 0 * 8				; stack position of "this" variable
@@ -5341,9 +5097,14 @@ s_data	equ		stack + 1 * 8				; stack position of "data" variable
 space	= 3 * 8								; stack size required by the procedure
 ;------------------------------------------
 		sub		stack, space				; reserving stack size for local vars
+;---[Check iterator]-----------------------
 		mov		iter, [this + offst]		; get iterator value
 		cmp		iter, EMPTY					; if (iter == EMPTY)
 		je		.ntfnd						;     return false
+;---[Check object size]--------------------
+		mov		size, [this + SIZE]			; get object size
+		sub		size, KSIZE					; if (size <= 1)
+		jbe		.ntfnd						;     return false
 ;---[Normal execution branch]--------------
 		mov		[s_this], this				; save "this" variable into the stack
 		mov		[s_data], data				; save "data" variable into the stack
@@ -5351,7 +5112,7 @@ space	= 3 * 8								; stack size required by the procedure
 		mov		param3, [this + FUNC]
 		mov		param2, iter
 		mov		param1, [this + ARRAY]
-		call	func						; result = func (array, iter, func)
+		call	checkfunc					; result = checkfunc (array, iter, func)
 		cmp		result, EMPTY				; if (result == EMPTY)
 		je		.ntfnd						;     return false
 ;---[Update iterator value]----------------
@@ -5446,66 +5207,49 @@ space	= 7 * 8								; stack size required by the procedure
 DiffFwd:	DIFF	GoNext
 DiffBwd:	DIFF	GoPrev
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	FIND_DIFF	checkfunc, movefunc, offst
+macro	FIND_DIFF	checkfunc, offst
 {
 ;---[Parameters]---------------------------
-this	equ		rdi							; pointer to target list/ring object
+this	equ		rdi							; pointer to target b-tree object
 data	equ		rsi							; pointer to data structure
-source	equ		rdx							; pointer to source list/ring object
-pos		equ		rcx							; beginning position
-count	equ		r8							; count of nodes to copy
+source	equ		rdx							; pointer to source b-tree object
+count	equ		rcx							; count of nodes to copy
 ;---[Internal variables]-------------------
-result	equ		rax							; result register
 status	equ		al							; operation status
-siter	equ		r11							; source iterator value
+result	equ		rax							; result register
 size	equ		result						; object size
 temp	equ		xmm0						; temporary register
 stack	equ		rsp							; stack pointer
 s_this	equ		stack + 0 * 8				; stack position of "this" variable
 s_data	equ		stack + 1 * 8				; stack position of "data" variable
-s_src	equ		stack + 2 * 8				; stack position of "source" variable
-s_count	equ		stack + 3 * 8				; stack position of "count" variable
-space	= 5 * 8								; stack size required by the procedure
+space	= 3 * 8								; stack size required by the procedure
 ;------------------------------------------
 		sub		stack, space				; reserving stack size for local vars
+		cmp		this, source				; if (this == source)
+		je		.ntfnd						;     then return false
 ;---[Check target iterator]----------------
-		cmp		qword [this + offst], EMPTY	; if (iter == EMPTY)
-		je		.ntfnd						;     return false
+		cmp		qword [this + offst], EMPTY
+		je		.ntfnd						; if (this.iter == EMPTY), then return false
 ;---[Check source iterator]----------------
-		mov		siter, [source + offst]		; get source iterator value
-		cmp		siter, EMPTY				; if (siter == EMPTY)
-		je		.ntfnd						;     return false
-;---[Move source iterator]-----------------
-		mov		[s_this], this				; save "this" variable into the stack
-		mov		[s_data], data				; save "data" variable into the stack
-		mov		[s_src], source				; save "source" variable into the stack
-		mov		[s_count], count			; save "count" variable into the stack
-		shl		pos, KSCALE					; if (pos == 0)
-		jz		.skip						;     then skip following code
-		mov		param3, pos
-		mov		param2, siter
-		mov		param1, [source + ARRAY]
-		call	movefunc					; result = movefunc (source.array, siter, pos)
-		cmp		result, EMPTY				; if (result == EMPTY)
-		je		.ntfnd						;     return false
-		mov		siter, result
-		mov		this, [s_this]				; get "this" variable from the stack
-		mov		source, [s_src]				; get "source" variable from the stack
-		mov		count, [s_count]			; get "count" variable from the stack
+		cmp		qword [source + offst], EMPTY
+		je		.ntfnd						; if (source.iter == EMPTY), then return false
 ;---[Correct count]------------------------
-.skip:	shl		count, KSCALE
+		shl		count, KSCALE
 		mov		size, [source + SIZE]		; get source object size
 		cmp		count, size					; if (count > size)
 		cmova	count, size					;     count = size
-		cmp		count, [this + SIZE]		; if (count > size)
-		cmova	count, [this + SIZE]		;     count = size
+		mov		size, [this + SIZE]			; get target object size
+		cmp		count, size					; if (count > size)
+		cmova	count, size					;     count = size
 ;---[Check count]--------------------------
 		test	count, count				; if (count == 0)
 		jz		.ntfnd						;     return false
 ;---[Call search function]-----------------
+		mov		[s_this], this				; save "this" variable into the stack
+		mov		[s_data], data				; save "data" variable into the stack
 		mov		param6, [this + FUNC]
 		mov		param5, count
-		mov		param4, siter
+		mov		param4, [source + offst]
 		mov		param2, [source + ARRAY]
 		mov		param3, [this + offst]
 		mov		param1, [this + ARRAY]
@@ -5528,8 +5272,8 @@ space	= 5 * 8								; stack size required by the procedure
 		xor		status, status				; return false
 		ret
 }
-FindDiffFwd:	FIND_DIFF	DiffFwd, GoNext, FWD
-FindDiffBwd:	FIND_DIFF	DiffBwd, GoPrev, BWD
+FindDiffFwd:	FIND_DIFF	DiffFwd, FWD
+FindDiffBwd:	FIND_DIFF	DiffBwd, BWD
 
 ;******************************************************************************;
 ;       Key counting                                                           ;
@@ -5657,7 +5401,8 @@ space	= 13 * 8							; stack size required by the procedure
 		add		stack, space				; restoring back the stack pointer
 		ret									; return size
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-Count:
+macro	COUNT	uniq
+{
 ;---[Parameters]---------------------------
 array	equ		rdi							; pointer to array of nodes
 root	equ		rsi							; begining node to start from
@@ -5784,9 +5529,12 @@ space	= 15 * 8							; stack size required by the procedure
 		jb		.loop2						; do while (left < right)
 ;---[End of binary search loop]------------
 		add		size, left					; size += left
+		mov		height, 1					; height = 1
 		xor		result, result				; result = 0
 		cmp		level, ERROR				; if (level == ERROR)
-		je		@f							;     then return 0
+		cmovne	result, height				;     then return 0
+		je		@f
+if ~uniq
 		mov		param5, [s_key]
 		mov		param4, [s_func]
 		mov		param3, [s_bhght]
@@ -5795,18 +5543,24 @@ space	= 15 * 8							; stack size required by the procedure
 		call	GreatIndex					; result = GreatIndex (array, root, height, func, key)
 		sub		result, size				; result -= size
 		shr		result, KSCALE
+end if
 @@:		mov		next, [s_next]				; restore old value of "next" variable
 		mov		level, [s_level]			; restore old value of "level" variable
 		mov		size, [s_size]				; restore old value of "size" variable
 		mov		left, [s_left]				; restore old value of "left" variable
 		mov		right, [s_right]			; restore old value of "right" variable
+
 		add		stack, space				; restoring back the stack pointer
 		ret									; return level
+}
+CountMulti:		COUNT	0
+CountUnique:	COUNT	1
 
 ;==============================================================================;
 ;       Single key counting                                                    ;
 ;==============================================================================;
-CountKey:
+macro	COUNT_KEY	func
+{
 ;---[Parameters]---------------------------
 this	equ		rdi							; pointer to b-tree object
 key		equ		rsi							; key to find
@@ -5821,15 +5575,19 @@ result	equ		rax							; result register
 		mov		param3, [this + HEIGHT]
 		mov		param2, [this + ROOT]
 		mov		param1, [this + ARRAY]
-		jmp		Count						; return Count (array, root, height, func, key)
+		jmp		func						; return func (array, root, height, func, key)
 ;---[Normal exit]--------------------------
 .exit:	xor		result, result				; return 0
 		ret
+}
+CountKeyMulti:	COUNT_KEY	CountMulti
+CountKeyUnique:	COUNT_KEY	CountUnique
 
 ;==============================================================================;
 ;       Keys set counting                                                      ;
 ;==============================================================================;
-CountKeys:
+macro	COUNT_KEYS	func
+{
 ;---[Parameters]---------------------------
 this	equ		rdi							; pointer to b-tree object
 keys	equ		rsi							; pointer to array of keys
@@ -5860,7 +5618,7 @@ space	= 5 * 8								; stack size required by the procedure
 		mov		param3, [this + HEIGHT]
 		mov		param2, [this + ROOT]
 		mov		param1, [this + ARRAY]
-		call	Count						; result = Count (array, root, height, func, keys[0])
+		call	func						; result = func (array, root, height, func, keys[0])
 		mov		this, [s_this]				; get "this" variable from the stack
 		mov		keys, [s_keys]				; get "keys" variable from the stack
 		add		[s_total], result			; if (result) then total++
@@ -5872,6 +5630,9 @@ space	= 5 * 8								; stack size required by the procedure
 .exit:	mov		result, [s_total]
 		add		stack, space				; restoring back the stack pointer
 		ret									; return total
+}
+CountKeysMulti:		COUNT_KEYS	CountMulti
+CountKeysUnique:	COUNT_KEYS	CountUnique
 
 ;******************************************************************************;
 ;       Unique values                                                          ;
@@ -5881,8 +5642,8 @@ Unique:
 this	equ		rdi							; pointer to target b-tree object
 source	equ		rsi							; pointer to source b-tree object
 ;---[Internal variables]-------------------
-result	equ		rax							; result register
 status	equ		al							; operation status
+result	equ		rax							; result register
 low		equ		rax							; low part of value for div operation
 high	equ		rdx							; high part of value for div operation
 ptr		equ		rcx							; temporary pointer
@@ -5902,7 +5663,7 @@ s_value	equ		stack + 6 * 8				; stack position of "value" variable
 s_temp	equ		stack + 8 * 8				; stack position of "temp" variable
 space	= 11 * 8							; stack size required by the procedure
 ;------------------------------------------
-		sub		stack, space
+		sub		stack, space				; reserving stack size for local vars
 ;---[Check target object size]-------------
 		cmp		qword [this + SIZE], 0		; if (size)
 		jnz		.error						;     then go to error branch
@@ -5920,8 +5681,8 @@ space	= 11 * 8							; stack size required by the procedure
 		xor		high, high					; high = 0
 		lea		low, [size + BMAX - 2 * KSIZE]
 		mov		size, BMAX - KSIZE
-		div		size						; low = (size + BMAX - 2 * KSIZE) / (BMAX - KSIZE)
-		shl		low, NSCALE
+		div		size
+		shl		low, NSCALE					; low = (size + BMAX - 2 * KSIZE) / (BMAX - KSIZE) * NSIZE
 	Capacity	low, ptr, MINCAP			; compute new capacity of target object
 		cmp		low, [this + CAPACITY]		; if (low > capacity)
 		ja		.ext						;     then try to extend object capacity
@@ -5961,7 +5722,7 @@ space	= 11 * 8							; stack size required by the procedure
 		movq	value, [s_value]
 		movq	temp, [s_total]
 	punpcklqdq	value, temp					;     value.data = total
-		call	InsertMultiCore				;     call this.InsertMultiCore (value)
+		call	InsertCoreMulti				;     call this.InsertCoreMulti (value)
 		movdqa	temp, [s_temp]				;     get "temp" variable from the stack
 		xor		total, total				;     total = 0
 		movdqa	[s_value], temp				;     value = temp }
@@ -5978,7 +5739,7 @@ space	= 11 * 8							; stack size required by the procedure
 		movq	value, [s_value]
 		movq	temp, [s_total]
 	punpcklqdq	value, temp					; value.data = total
-		call	InsertMultiCore				; call this.InsertMultiCore (value)
+		call	InsertCoreMulti				; call this.InsertCoreMulti (value)
 		mov		this, [s_this]				; get "this" variable from the stack
 ;---[Normal exit branch]-------------------
 .exit:	mov		result, [this + SIZE]
@@ -6078,8 +5839,8 @@ CheckDup:
 ;---[Parameters]---------------------------
 this	equ		rdi							; pointer to b-tree object
 ;---[Internal variables]-------------------
-result	equ		rax							; result register
 status	equ		al							; operation status
+result	equ		rax							; result register
 stack	equ		rsp							; stack pointer
 s_this	equ		stack + 0 * 8				; stack position of "this" variable
 space	= 1 * 8								; stack size required by the procedure
@@ -6114,8 +5875,8 @@ IsEqual:
 this	equ		rdi							; pointer to target b-tree object
 source	equ		rsi							; pointer to source b-tree object
 ;---[Internal variables]-------------------
-result	equ		rax							; result register
 status	equ		al							; operation status
+result	equ		rax							; result register
 size	equ		result						; object size
 stack	equ		rsp							; stack pointer
 s_this	equ		stack + 0 * 8				; stack position of "this" variable
