@@ -7,6 +7,20 @@
 ################################################################################
 
 #******************************************************************************#
+#       Release 1.01 (stable) [2014-02-08]                                     #
+#******************************************************************************#
+
+In this release were added new abstract data types:
+	* MultiHash.h - Multiply keys hash table ADT
+	* UniqueHash.h - Unique keys hash table ADT
+	* List.h - Doubly linked list ADT
+	* Ring.h - Circular doubly linked list ADT
+
+Also were fixed found bugs in following abstract data types: MaxHeap.h,
+MinHeap.h, MultiTree.h, UniqueTree.h. Check the ChangeLog file for more
+information about changes in this release.
+
+#******************************************************************************#
 #       Release 1.00 (stable) [2013-12-16]                                     #
 #******************************************************************************#
 

@@ -1,4 +1,25 @@
 +==============================================================================+
+|   2014-02-08  Release 1.01 (stable)                                          |
++==============================================================================+
+
+Bug fixes:
+	* MaxHeap.h, MinHeap.h, MultiTree.h, UniqueTree.h: Corrected prototype of CompareFunction in object properties section
+	* Btree.asm, Deque.asm, Heap.asm, Stack.asm: Fixed capacity overflow during extending object capacity procedure
+	* Btree.asm: Fixed iterator moving error for first/last element
+
+New features:
+	* Added Multiply/Unique keys hash table ADT
+	* Added List/Ring ADT
+	* String.asm: Added functions Reverse
+	* Array.asm, String.asm: Added Hash functions 32 and 64 bit versions
+
+Changes in behavior:
+	* Deque: Improved functions Copy and Move
+	* Stack: Improved functions Copy and Move
+	* Heap.asm: Corrected check condition in function Merge
+	* Btree.asm: Changed prototypes of CopyFwd, CopyBwd, MoveFwd, MoveBwd functions and changed function names: FindKeyEqualFwd, FindKeyEqualBwd, FindKeyGreatFwd, FindKeyGreatBwd, FindKeyGreatOrEqualFwd, FindKeyGreatOrEq
+
++==============================================================================+
 |   2013-12-16  Release 1.00 (stable)                                          |
 +==============================================================================+
 
