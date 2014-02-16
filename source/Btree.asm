@@ -483,7 +483,7 @@ POOL		= 4 * 8							; Offset of pool free node field
 FWD			= 5 * 8							; Offset of forward iterator field
 BWD			= 6 * 8							; Offset of backward iterator field
 ROOT		= 7 * 8							; Offset of object root field
-FUNC		= 8 * 8							; Offset of pointer to key ordering function
+FUNC		= 8 * 8							; Offset of pointer to key compare function
 
 ;==============================================================================;
 ;       Offsets inside node                                                    ;
@@ -2089,7 +2089,6 @@ space	= 9 * 8								; stack size required by the procedure
 ;==============================================================================;
 ;       Insert element into b-tree                                             ;
 ;==============================================================================;
-; TOOD: Попробовать удалить
 macro	INSERT_CORE	type
 {
 ;---[Parameters]---------------------------
@@ -4012,7 +4011,7 @@ space	= 5 * 8								; stack size required by the procedure
 		call	GetNode						; result = GetNode (array, root, height, index)
 		mov		this, [s_this]				; get "this" variable from the stack
 		mov		data, [s_data]				; get "data" variable from the stack
-		mov		func, [this + FUNC]			; get pointer to compare function
+		mov		func, [this + FUNC]			; get pointer to key compare function
 		mov		[s_iter], result			; save "iter" variable into the stack
 		and		result, PMASK
 		add		result, [this + ARRAY]		; result += array
@@ -4075,7 +4074,7 @@ space	= 5 * 8								; stack size required by the procedure
 ;---[Normal execution branch]--------------
 		mov		[s_this], this				; save "this" variable into the stack
 		mov		[s_data], data				; save "data" variable into the stack
-		mov		func, [this + FUNC]			; get pointer to compare function
+		mov		func, [this + FUNC]			; get pointer to key compare function
 		mov		[s_iter], iter				; save "iter" variable into the stack
 		and		iter, PMASK
 		add		iter, [this + ARRAY]		; iter += array
@@ -4227,7 +4226,7 @@ space	= 5 * 8								; stack size required by the procedure
 		mov		this, [s_this]				; get "this" variable from the stack
 		mov		odata, [s_odata]			; get "odata" variable from the stack
 		mov		ndata, [s_ndata]			; get "ndata" variable from the stack
-		mov		func, [this + FUNC]			; get pointer to compare function
+		mov		func, [this + FUNC]			; get pointer to key compare function
 		mov		[s_iter], result			; save "iter" variable into the stack
 		and		result, PMASK
 		add		result, [this + ARRAY]		; result += array
@@ -4293,7 +4292,7 @@ space	= 5 * 8								; stack size required by the procedure
 ;---[Normal execution branch]--------------
 		mov		[s_this], this				; save "this" variable into the stack
 		mov		[s_ndata], ndata			; save "ndata" variable into the stack
-		mov		func, [this + FUNC]			; get pointer to compare function
+		mov		func, [this + FUNC]			; get pointer to key compare function
 		mov		[s_iter], iter				; save "iter" variable into the stack
 		and		iter, PMASK
 		add		iter, [this + ARRAY]		; iter += array
@@ -5673,7 +5672,7 @@ space	= 11 * 8							; stack size required by the procedure
 		jz		.exit						;     then go to exit
 ;---[Check object capacity]----------------
 		mov		array, [source + ARRAY]		; get pointer to source array of nodes
-		mov		result, [this + FUNC]		; get pointer to compare function
+		mov		result, [this + FUNC]		; get pointer to key compare function
 		mov		[s_this], this				; save "this" variable into the stack
 		mov		[s_src], source				; save "source" variable into the stack
 		mov		[s_array], array			; save "array" variable into the stack
@@ -5933,7 +5932,7 @@ this	equ		rdi							; pointer to b-tree object
 ;---[Internal variables]-------------------
 result	equ		rax							; result register
 ;------------------------------------------
-		mov		result, [this + FUNC]		; get pointer to compare function
+		mov		result, [this + FUNC]		; get pointer to key compare function
 		ret
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 GetCapacity:

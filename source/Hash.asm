@@ -313,7 +313,7 @@ SIZE		= 2 * 8							; Offset of object size field
 POOL		= 3 * 8							; Offset of pool free node field
 FWD			= 4 * 8							; Offset of forward iterator field
 BWD			= 5 * 8							; Offset of backward iterator field
-KFUNC		= 6 * 8							; Offset of pointer to key ordering function
+KFUNC		= 6 * 8							; Offset of pointer to key compare function
 HFUNC		= 7 * 8							; Offset of pointer to hash function
 
 ;==============================================================================;
@@ -1075,7 +1075,7 @@ space	= 5 * 8								; stack size required by the procedure
 ;---[Normal execution branch]--------------
 		mov		[s_this], this				; save "this" variable into the stack
 		mov		[s_data], data				; save "data" variable into the stack
-		mov		func, [this + KFUNC]		; get pointer to compare function
+		mov		func, [this + KFUNC]		; get pointer to key compare function
 		mov		[s_iter], iter				; save "iter" variable into the stack
 		add		iter, [this + ARRAY]		; iter += array
 		mov		[s_ptr], iter				; save "ptr" variable into the stack
@@ -1182,7 +1182,7 @@ space	= 5 * 8								; stack size required by the procedure
 ;---[Normal execution branch]--------------
 		mov		[s_this], this				; save "this" variable into the stack
 		mov		[s_ndata], ndata			; save "ndata" variable into the stack
-		mov		func, [this + KFUNC]		; get pointer to compare function
+		mov		func, [this + KFUNC]		; get pointer to key compare function
 		mov		[s_iter], iter				; save "iter" variable into the stack
 		add		iter, [this + ARRAY]		; iter += array
 		mov		[s_ptr], iter				; save "ptr" variable into the stack
@@ -2078,7 +2078,7 @@ space	= 13 * 8							; stack size required by the procedure
 ;---[Check object capacity]----------------
 		mov		array, [source + ARRAY]		; get pointer to source array of nodes
 		mov		tbound, [source + CAPACITY]	; get source object capacity
-		mov		result, [this + KFUNC]		; get pointer to compare function
+		mov		result, [this + KFUNC]		; get pointer to key compare function
 		mov		[s_this], this				; save "this" variable into the stack
 		mov		[s_src], source				; save "source" variable into the stack
 		mov		[s_array], array			; save "array" variable into the stack

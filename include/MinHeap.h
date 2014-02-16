@@ -22,17 +22,18 @@
 class MinHeap
 {
 private:
-	void	*array;		// Pointer to array which holds heap data
-	size_t	capacity;	// Capacity of the heap (auto extended if required)
-	size_t	size;		// Current heap size
-	KeyCmp	func;		// Key compare function
+	void		*array;		// Pointer to array which holds heap data
+	size_t		capacity;	// Capacity of the heap (auto extended if required)
+	size_t		size;		// Current heap size
+	KeyCmp		kfunc;		// Key compare function
+	HeapIndex	ifunc;		// Heap index call back function
 
 public:
 
 //****************************************************************************//
 //      Constructor                                                           //
 //****************************************************************************//
-MinHeap (size_t capacity, KeyCmp func);
+MinHeap (size_t capacity, KeyCmp kfunc, HeapIndex ifunc);
 
 //****************************************************************************//
 //      Copy constructor                                                      //
@@ -50,9 +51,14 @@ MinHeap (const MinHeap &source);
 bool Push (const data_t *data);
 
 //****************************************************************************//
-//      Removing of element                                                   //
+//      Extraction of element                                                 //
 //****************************************************************************//
 bool Pop (data_t *data);
+
+//****************************************************************************//
+//      Removing of element                                                   //
+//****************************************************************************//
+bool Remove (data_t *data, size_t pos);
 
 //****************************************************************************//
 //      Setting element value                                                 //
@@ -84,12 +90,13 @@ size_t CountKeys (const adt_t keys[], size_t size, size_t pos, size_t count) con
 //****************************************************************************//
 //      Merging of heaps                                                      //
 //****************************************************************************//
-size_t Merge (const MinHeap *source);
+size_t Merge (MinHeap *source);
 
 //****************************************************************************//
 //      Heap properties                                                       //
 //****************************************************************************//
 KeyCmp CompareFunction (void) const;
+HeapIndex IndexFunction (void) const;
 size_t Capacity (void) const;
 size_t Size (void) const;
 bool IsEmpty (void) const;
@@ -105,16 +112,17 @@ bool IsEmpty (void) const;
 //****************************************************************************//
 struct MinHeap
 {
-	void	*array;		// Pointer to array which holds heap data
-	size_t	capacity;	// Capacity of the heap (auto extended if required)
-	size_t	size;		// Current heap size
-	KeyCmp	func;		// Key compare function
+	void		*array;		// Pointer to array which holds heap data
+	size_t		capacity;	// Capacity of the heap (auto extended if required)
+	size_t		size;		// Current heap size
+	KeyCmp		kfunc;		// Key compare function
+	HeapIndex	ifunc;		// Heap index call back function
 };
 
 //****************************************************************************//
 //      Init heap structure                                                   //
 //****************************************************************************//
-void MinHeap_InitMinHeap (struct MinHeap *heap, size_t capacity, KeyCmp func);
+void MinHeap_InitMaxHeap (struct MaxHeap *heap, size_t capacity, KeyCmp kfunc, HeapIndex ifunc);
 
 //****************************************************************************//
 //      Copy heap structure                                                   //
@@ -132,9 +140,14 @@ void MinHeap_FreeMinHeap (struct MinHeap *heap);
 bool MinHeap_Push (struct MinHeap *heap, const struct data_t *data);
 
 //****************************************************************************//
-//      Removing of element                                                   //
+//      Extraction of element                                                 //
 //****************************************************************************//
 bool MinHeap_Pop (struct MinHeap *heap, struct data_t *data);
+
+//****************************************************************************//
+//      Removing of element                                                   //
+//****************************************************************************//
+bool MinHeap_Remove (struct MinHeap *heap, struct data_t *data, size_t pos);
 
 //****************************************************************************//
 //      Setting element value                                                 //
@@ -166,12 +179,13 @@ size_t MinHeap_CountKeys (const struct MinHeap *heap, const union adt_t keys[], 
 //****************************************************************************//
 //      Merging of heaps                                                      //
 //****************************************************************************//
-size_t MinHeap_Merge (struct MinHeap *heap, const struct MinHeap *source);
+size_t MinHeap_Merge (struct MinHeap *heap, struct MinHeap *source);
 
 //****************************************************************************//
 //      Heap properties                                                       //
 //****************************************************************************//
 KeyCmp MinHeap_CompareFunction (const struct MinHeap *heap);
+HeapIndex MinHeap_IndexFunction (const struct MinHeap *heap);
 size_t MinHeap_Capacity (const struct MinHeap *heap);
 size_t MinHeap_Size (const struct MinHeap *heap);
 bool MinHeap_IsEmpty (const struct MinHeap *heap);

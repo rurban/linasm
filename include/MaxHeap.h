@@ -22,17 +22,18 @@
 class MaxHeap
 {
 private:
-	void	*array;		// Pointer to array which holds heap data
-	size_t	capacity;	// Capacity of the heap (auto extended if required)
-	size_t	size;		// Current heap size
-	KeyCmp	func;		// Key compare function
+	void		*array;		// Pointer to array which holds heap data
+	size_t		capacity;	// Capacity of the heap (auto extended if required)
+	size_t		size;		// Current heap size
+	KeyCmp		kfunc;		// Key compare function
+	HeapIndex	ifunc;		// Heap index call back function
 
 public:
 
 //****************************************************************************//
 //      Constructor                                                           //
 //****************************************************************************//
-MaxHeap (size_t capacity, KeyCmp func);
+MaxHeap (size_t capacity, KeyCmp kfunc, HeapIndex ifunc);
 
 //****************************************************************************//
 //      Copy constructor                                                      //
@@ -50,9 +51,14 @@ MaxHeap (const MaxHeap &source);
 bool Push (const data_t *data);
 
 //****************************************************************************//
-//      Removing of element                                                   //
+//      Extraction of element                                                 //
 //****************************************************************************//
 bool Pop (data_t *data);
+
+//****************************************************************************//
+//      Removing of element                                                   //
+//****************************************************************************//
+bool Remove (data_t *data, size_t pos);
 
 //****************************************************************************//
 //      Setting element value                                                 //
@@ -84,12 +90,13 @@ size_t CountKeys (const adt_t keys[], size_t size, size_t pos, size_t count) con
 //****************************************************************************//
 //      Merging of heaps                                                      //
 //****************************************************************************//
-size_t Merge (const MaxHeap *source);
+size_t Merge (MaxHeap *source);
 
 //****************************************************************************//
 //      Heap properties                                                       //
 //****************************************************************************//
 KeyCmp CompareFunction (void) const;
+HeapIndex IndexFunction (void) const;
 size_t Capacity (void) const;
 size_t Size (void) const;
 bool IsEmpty (void) const;
@@ -102,16 +109,17 @@ bool IsEmpty (void) const;
 */
 struct MaxHeap
 {
-	void	*array;		// Pointer to array which holds heap data
-	size_t	capacity;	// Capacity of the heap (auto extended if required)
-	size_t	size;		// Current heap size
-	KeyCmp	func;		// Key compare function
+	void		*array;		// Pointer to array which holds heap data
+	size_t		capacity;	// Capacity of the heap (auto extended if required)
+	size_t		size;		// Current heap size
+	KeyCmp		kfunc;		// Key compare function
+	HeapIndex	ifunc;		// Heap index call back function
 };
 
 //****************************************************************************//
 //      Init heap structure                                                   //
 //****************************************************************************//
-void MaxHeap_InitMaxHeap (struct MaxHeap *heap, size_t capacity, KeyCmp func);
+void MaxHeap_InitMaxHeap (struct MaxHeap *heap, size_t capacity, KeyCmp kfunc, HeapIndex ifunc);
 
 //****************************************************************************//
 //      Copy heap structure                                                   //
@@ -129,9 +137,14 @@ void MaxHeap_FreeMaxHeap (struct MaxHeap *heap);
 bool MaxHeap_Push (struct MaxHeap *heap, const struct data_t *data);
 
 //****************************************************************************//
-//      Removing of element                                                   //
+//      Extraction of element                                                 //
 //****************************************************************************//
 bool MaxHeap_Pop (struct MaxHeap *heap, struct data_t *data);
+
+//****************************************************************************//
+//      Removing of element                                                   //
+//****************************************************************************//
+bool MaxHeap_Remove (struct MaxHeap *heap, struct data_t *data, size_t pos);
 
 //****************************************************************************//
 //      Setting element value                                                 //
@@ -163,12 +176,13 @@ size_t MaxHeap_CountKeys (const struct MaxHeap *heap, const union adt_t keys[], 
 //****************************************************************************//
 //      Merging of heaps                                                      //
 //****************************************************************************//
-size_t MaxHeap_Merge (struct MaxHeap *heap, const struct MaxHeap *source);
+size_t MaxHeap_Merge (struct MaxHeap *heap, struct MaxHeap *source);
 
 //****************************************************************************//
 //      Heap properties                                                       //
 //****************************************************************************//
 KeyCmp MaxHeap_CompareFunction (const struct MaxHeap *heap);
+HeapIndex MaxHeap_IndexFunction (const struct MaxHeap *heap);
 size_t MaxHeap_Capacity (const struct MaxHeap *heap);
 size_t MaxHeap_Size (const struct MaxHeap *heap);
 bool MaxHeap_IsEmpty (const struct MaxHeap *heap);
