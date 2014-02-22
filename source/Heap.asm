@@ -47,26 +47,26 @@ public	Destructor			as	'_ZN7MaxHeapD1Ev'
 ;******************************************************************************;
 ;       Insertion of element                                                   ;
 ;******************************************************************************;
-public	PushDataMin			as	'MinHeap_Push'
-public	PushDataMax			as	'MaxHeap_Push'
-public	PushDataMin			as	'_ZN7MinHeap4PushEPK6data_t'
-public	PushDataMax			as	'_ZN7MaxHeap4PushEPK6data_t'
+public	PushMin				as	'MinHeap_Push'
+public	PushMax				as	'MaxHeap_Push'
+public	PushMin				as	'_ZN7MinHeap4PushEPK6data_t'
+public	PushMax				as	'_ZN7MaxHeap4PushEPK6data_t'
 
 ;******************************************************************************;
 ;       Extraction of element                                                  ;
 ;******************************************************************************;
-public	PopDataMin			as	'MinHeap_Pop'
-public	PopDataMax			as	'MaxHeap_Pop'
-public	PopDataMin			as	'_ZN7MinHeap3PopEP6data_t'
-public	PopDataMax			as	'_ZN7MaxHeap3PopEP6data_t'
+public	PopMin				as	'MinHeap_Pop'
+public	PopMax				as	'MaxHeap_Pop'
+public	PopMin				as	'_ZN7MinHeap3PopEP6data_t'
+public	PopMax				as	'_ZN7MaxHeap3PopEP6data_t'
 
 ;******************************************************************************;
 ;       Removing of element                                                    ;
 ;******************************************************************************;
-public	RemoveMin			as	'MinHeap_Remove'
-public	RemoveMax			as	'MaxHeap_Remove'
-public	RemoveMin			as	'_ZN7MinHeap6RemoveEP6data_tm'
-public	RemoveMax			as	'_ZN7MaxHeap6RemoveEP6data_tm'
+public	ExtractMin			as	'MinHeap_Extract'
+public	ExtractMax			as	'MaxHeap_Extract'
+public	ExtractMin			as	'_ZN7MinHeap7ExtractEP6data_tm'
+public	ExtractMax			as	'_ZN7MaxHeap7ExtractEP6data_tm'
 
 ;******************************************************************************;
 ;       Setting element value                                                  ;
@@ -565,7 +565,7 @@ space	= 1 * 8								; stack size required by the procedure
 		ret
 
 ;******************************************************************************;
-;       Insertion of element                                                   ;
+;       Addition of element                                                    ;
 ;******************************************************************************;
 macro	PUSH_DATA	SiftUp
 {
@@ -579,6 +579,7 @@ temp	equ		xmm0						; temporary register
 stack	equ		rsp							; stack pointer
 s_this	equ		stack + 0 * 8				; stack position of "this" variable
 s_data	equ		stack + 1 * 8				; stack position of "data" variable
+s_size	equ		stack + 2 * 8				; stack position of "size" variable
 space	= 3 * 8								; stack size required by the procedure
 ;------------------------------------------
 		mov		size, [this + SIZE]			; get object size
@@ -597,28 +598,26 @@ space	= 3 * 8								; stack size required by the procedure
 .ext:	sub		stack, space				; reserving stack size for local vars
 		mov		[s_this], this				; save "this" variable into the stack
 		mov		[s_data], data				; save "data" variable into the stack
+		mov		[s_size], size				; save "size" variable into the stack
 		mov		param2, [this + CAPACITY]
 		shl		param2, 1
 		cmp		param2, [this + CAPACITY]	; if (newcapacity <= capacity)
-		jbe		.error						;     then go to error branch
+		setnbe	status						;     then return false
+		jbe		.exit
 		call	Extend						; status = this.Extend (cap * 2)
 		mov		this, [s_this]				; get "this" variable from the stack
 		mov		data, [s_data]				; get "data" variable from the stack
-		mov		size, [this + SIZE]			; get object size
-		add		stack, space				; restoring back the stack pointer
+		mov		size, [s_size]				; get "size" variable from the stack
+.exit:	add		stack, space				; restoring back the stack pointer
 		test	status, status
 		jnz		.back						; if (status), then go back
 		ret									;              else return false
-;---[Error branch]-------------------------
-.error:	add		stack, space				; restoring back the stack pointer
-		xor		status, status				; return false
-		ret
 }
-PushDataMin:	PUSH_DATA	SiftMinUp
-PushDataMax:	PUSH_DATA	SiftMaxUp
+PushMin:	PUSH_DATA	SiftMinUp
+PushMax:	PUSH_DATA	SiftMaxUp
 
 ;******************************************************************************;
-;       Extraction of element                                                  ;
+;       Removal of element                                                     ;
 ;******************************************************************************;
 macro	POP_DATA	SiftDown
 {
@@ -655,18 +654,18 @@ temp	equ		xmm0						; temporary register
 .error:	xor		status, status				; return false
 		ret
 }
-PopDataMin:	POP_DATA	SiftMinDown
-PopDataMax:	POP_DATA	SiftMaxDown
+PopMin:	POP_DATA	SiftMinDown
+PopMax:	POP_DATA	SiftMaxDown
 
 ;******************************************************************************;
-;       Removing of element                                                    ;
+;       Extraction of element                                                  ;
 ;******************************************************************************;
-macro	REMOVE	SiftUp, SiftDown, cond
+macro	EXTRACT	SiftUp, SiftDown, cond
 {
 ;---[Parameters]---------------------------
 this	equ		rdi							; pointer to heap object
 data	equ		rsi							; pointer to data structure
-pos		equ		rdx							; position of element to remove
+pos		equ		rdx							; position of element to extract
 ;---[Internal variables]-------------------
 status	equ		al							; operation status
 result	equ		rax							; result register
@@ -688,8 +687,7 @@ space	= 5 * 8								; stack size required by the procedure
 		mov		size, [this + SIZE]			; get object size
 		mov		func, [this + KFUNC]		; get pointer to key compare function
 		cmp		size, pos					; if (size <= pos)
-		setnbe	status						;     return false
-		jbe		.exit
+		jbe		.error						;     then go to error branch
 ;---[Normal execution branch]--------------
 		sub		size, KSIZE					; size--
 		mov		[this + SIZE], size			; update object size
@@ -733,12 +731,16 @@ space	= 5 * 8								; stack size required by the procedure
 		mov		param2, pos
 		shr		param2, KSCALE
 		call	func						; call ifunc (array + pos, pos)
+		add		stack, space				; restoring back the stack pointer
 		mov		status, 1					; return true
-.exit:	add		stack, space				; restoring back the stack pointer
+		ret
+;---[Error branch]-------------------------
+.error:	add		stack, space				; restoring back the stack pointer
+		xor		status, status				; return false
 		ret
 }
-RemoveMin:	REMOVE	SiftMinUp, SiftMinDown, l
-RemoveMax:	REMOVE	SiftMaxUp, SiftMaxDown, g
+ExtractMin:	EXTRACT	SiftMinUp, SiftMinDown, l
+ExtractMax:	EXTRACT	SiftMaxUp, SiftMaxDown, g
 
 ;******************************************************************************;
 ;       Setting element value                                                  ;
@@ -771,8 +773,7 @@ space	= 5 * 8								; stack size required by the procedure
 		mov		size, [this + SIZE]			; get object size
 		mov		func, [this + KFUNC]		; get pointer to key compare function
 		cmp		size, pos					; if (size <= pos)
-		setnbe	status						;     return false
-		jbe		.exit
+		jbe		.error						;     then go to error branch
 ;---[Normal execution branch]--------------
 		mov		[s_this], this				; save "this" variable into the stack
 		mov		[s_data], data				; save "data" variable into the stack
@@ -814,8 +815,12 @@ space	= 5 * 8								; stack size required by the procedure
 		mov		param2, pos
 		shr		param2, KSCALE
 		call	func						; call ifunc (array + pos, pos)
+		add		stack, space				; restoring back the stack pointer
 		mov		status, 1					; return true
-.exit:	add		stack, space				; restoring back the stack pointer
+		ret
+;---[Error branch]-------------------------
+.error:	add		stack, space				; restoring back the stack pointer
+		xor		status, status				; return false
 		ret
 }
 SetMin:	SET	SiftMinUp, SiftMinDown, l
@@ -879,8 +884,7 @@ space	= 5 * 8								; stack size required by the procedure
 		mov		size, [this + SIZE]			; get object size
 		mov		func, [this + KFUNC]		; get pointer to key compare function
 		cmp		size, pos					; if (size <= pos)
-		setnbe	status						;     return false
-		jbe		.exit
+		jbe		.error						;     then go to error branch
 ;---[Normal execution branch]--------------
 		mov		[s_this], this				; save "this" variable into the stack
 		mov		[s_ndata], ndata			; save "ndata" variable into the stack
@@ -924,8 +928,12 @@ space	= 5 * 8								; stack size required by the procedure
 		mov		param2, pos
 		shr		param2, KSCALE
 		call	func						; call ifunc (array + pos, pos)
+		add		stack, space				; restoring back the stack pointer
 		mov		status, 1					; return true
-.exit:	add		stack, space				; restoring back the stack pointer
+		ret
+;---[Error branch]-------------------------
+.error:	add		stack, space				; restoring back the stack pointer
+		xor		status, status				; return false
 		ret
 }
 ReplaceMin:	REPLACE	SiftMinUp, SiftMinDown, l

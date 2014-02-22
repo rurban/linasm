@@ -46,19 +46,19 @@ MaxHeap (const MaxHeap &source);
 ~MaxHeap (void);
 
 //****************************************************************************//
-//      Insertion of element                                                  //
+//      Addition of element                                                   //
 //****************************************************************************//
 bool Push (const data_t *data);
 
 //****************************************************************************//
-//      Extraction of element                                                 //
+//      Removal of element                                                    //
 //****************************************************************************//
 bool Pop (data_t *data);
 
 //****************************************************************************//
-//      Removing of element                                                   //
+//      Extraction of element                                                 //
 //****************************************************************************//
-bool Remove (data_t *data, size_t pos);
+bool Extract (data_t *data, size_t pos);
 
 //****************************************************************************//
 //      Setting element value                                                 //
@@ -132,19 +132,19 @@ void MaxHeap_CopyMaxHeap (struct MaxHeap *heap, const struct MaxHeap *source);
 void MaxHeap_FreeMaxHeap (struct MaxHeap *heap);
 
 //****************************************************************************//
-//      Insertion of element                                                  //
+//      Addition of element                                                   //
 //****************************************************************************//
 bool MaxHeap_Push (struct MaxHeap *heap, const struct data_t *data);
 
 //****************************************************************************//
-//      Extraction of element                                                 //
+//      Removal of element                                                    //
 //****************************************************************************//
 bool MaxHeap_Pop (struct MaxHeap *heap, struct data_t *data);
 
 //****************************************************************************//
-//      Removing of element                                                   //
+//      Extraction of element                                                 //
 //****************************************************************************//
-bool MaxHeap_Remove (struct MaxHeap *heap, struct data_t *data, size_t pos);
+bool MaxHeap_Extract (struct MaxHeap *heap, struct data_t *data, size_t pos);
 
 //****************************************************************************//
 //      Setting element value                                                 //

@@ -46,19 +46,19 @@ MinHeap (const MinHeap &source);
 ~MinHeap (void);
 
 //****************************************************************************//
-//      Insertion of element                                                  //
+//      Addition of element                                                   //
 //****************************************************************************//
 bool Push (const data_t *data);
 
 //****************************************************************************//
-//      Extraction of element                                                 //
+//      Removal of element                                                    //
 //****************************************************************************//
 bool Pop (data_t *data);
 
 //****************************************************************************//
-//      Removing of element                                                   //
+//      Extraction of element                                                 //
 //****************************************************************************//
-bool Remove (data_t *data, size_t pos);
+bool Extract (data_t *data, size_t pos);
 
 //****************************************************************************//
 //      Setting element value                                                 //
@@ -135,19 +135,19 @@ void MinHeap_CopyMinHeap (struct MinHeap *heap, const struct MinHeap *source);
 void MinHeap_FreeMinHeap (struct MinHeap *heap);
 
 //****************************************************************************//
-//      Insertion of element                                                  //
+//      Addition of element                                                   //
 //****************************************************************************//
 bool MinHeap_Push (struct MinHeap *heap, const struct data_t *data);
 
 //****************************************************************************//
-//      Extraction of element                                                 //
+//      Removal of element                                                    //
 //****************************************************************************//
 bool MinHeap_Pop (struct MinHeap *heap, struct data_t *data);
 
 //****************************************************************************//
-//      Removing of element                                                   //
+//      Extraction of element                                                 //
 //****************************************************************************//
-bool MinHeap_Remove (struct MinHeap *heap, struct data_t *data, size_t pos);
+bool MinHeap_Extract (struct MinHeap *heap, struct data_t *data, size_t pos);
 
 //****************************************************************************//
 //      Setting element value                                                 //
