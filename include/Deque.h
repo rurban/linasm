@@ -58,16 +58,28 @@ size_t MoveHead (Deque *source, size_t pos, size_t count);
 size_t MoveTail (Deque *source, size_t pos, size_t count);
 
 //****************************************************************************//
-//      Insertion of element                                                  //
+//      Addition of element                                                   //
 //****************************************************************************//
-bool InsertIntoHead (const data_t *data);
-bool InsertIntoTail (const data_t *data);
+bool PushIntoHead (const data_t *data);
+bool PushIntoTail (const data_t *data);
 
 //****************************************************************************//
-//      Removing of element                                                   //
+//      Removal of element                                                    //
 //****************************************************************************//
-bool RemoveFromHead (data_t *data);
-bool RemoveFromTail (data_t *data);
+bool PopFromHead (data_t *data);
+bool PopFromTail (data_t *data);
+
+//****************************************************************************//
+//      Insertion of element                                                  //
+//****************************************************************************//
+bool InsertHead (const data_t *data, size_t pos);
+bool InsertTail (const data_t *data, size_t pos);
+
+//****************************************************************************//
+//      Extraction of element                                                 //
+//****************************************************************************//
+bool ExtractHead (data_t *data, size_t pos);
+bool ExtractTail (data_t *data, size_t pos);
 
 //****************************************************************************//
 //      Setting element value                                                 //
@@ -90,8 +102,12 @@ bool ReplaceTail (data_t *odata, const data_t *ndata, size_t pos);
 //****************************************************************************//
 //      Changing elements order                                               //
 //****************************************************************************//
+
+// Reversing elements order
 size_t ReverseHead (size_t pos, size_t count);
 size_t ReverseTail (size_t pos, size_t count);
+
+// Swapping element
 bool SwapHead (size_t pos);
 bool SwapTail (size_t pos);
 
@@ -204,16 +220,28 @@ size_t Deque_MoveHead (struct Deque *deque, struct Deque *source, size_t pos, si
 size_t Deque_MoveTail (struct Deque *deque, struct Deque *source, size_t pos, size_t count);
 
 //****************************************************************************//
-//      Insertion of element                                                  //
+//      Addition of element                                                   //
 //****************************************************************************//
-bool Deque_InsertIntoHead (struct Deque *deque, const struct data_t *data);
-bool Deque_InsertIntoTail (struct Deque *deque, const struct data_t *data);
+bool Deque_PushIntoHead (struct Deque *deque, const struct data_t *data);
+bool Deque_PushIntoTail (struct Deque *deque, const struct data_t *data);
 
 //****************************************************************************//
-//      Removing of element                                                   //
+//      Removal of element                                                    //
 //****************************************************************************//
-bool Deque_RemoveFromHead (struct Deque *deque, struct data_t *data);
-bool Deque_RemoveFromTail (struct Deque *deque, struct data_t *data);
+bool Deque_PopFromHead (struct Deque *deque, struct data_t *data);
+bool Deque_PopFromTail (struct Deque *deque, struct data_t *data);
+
+//****************************************************************************//
+//      Insertion of element                                                  //
+//****************************************************************************//
+bool Deque_InsertHead (struct Deque *deque, const struct data_t *data, size_t pos);
+bool Deque_InsertTail (struct Deque *deque, const struct data_t *data, size_t pos);
+
+//****************************************************************************//
+//      Extraction of element                                                 //
+//****************************************************************************//
+bool Deque_ExtractHead (struct Deque *deque, struct data_t *data, size_t pos);
+bool Deque_ExtractTail (struct Deque *deque, struct data_t *data, size_t pos);
 
 //****************************************************************************//
 //      Setting element value                                                 //
@@ -236,8 +264,12 @@ bool Deque_ReplaceTail (struct Deque *deque, struct data_t *odata, const struct 
 //****************************************************************************//
 //      Changing elements order                                               //
 //****************************************************************************//
+
+// Reversing elements order
 size_t Deque_ReverseHead (struct Deque *deque, size_t pos, size_t count);
 size_t Deque_ReverseTail (struct Deque *deque, size_t pos, size_t count);
+
+// Swapping element
 bool Deque_SwapHead (struct Deque *deque, size_t pos);
 bool Deque_SwapTail (struct Deque *deque, size_t pos);
 
