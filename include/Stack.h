@@ -54,14 +54,24 @@ size_t Copy (const Stack *source, size_t pos, size_t count);
 size_t Move (Stack *source, size_t pos, size_t count);
 
 //****************************************************************************//
-//      Insertion of element                                                  //
+//      Addition of element                                                   //
 //****************************************************************************//
 bool Push (const data_t *data);
 
 //****************************************************************************//
-//      Removing of element                                                   //
+//      Removal of element                                                    //
 //****************************************************************************//
 bool Pop (data_t *data);
+
+//****************************************************************************//
+//      Insertion of element                                                  //
+//****************************************************************************//
+bool Insert (const data_t *data, size_t pos);
+
+//****************************************************************************//
+//      Extraction of element                                                 //
+//****************************************************************************//
+bool Extract (data_t *data, size_t pos);
 
 //****************************************************************************//
 //      Setting element value                                                 //
@@ -170,14 +180,24 @@ size_t Stack_Copy (struct Stack *stack, const struct Stack *source, size_t pos, 
 size_t Stack_Move (struct Stack *stack, struct Stack *source, size_t pos, size_t count);
 
 //****************************************************************************//
-//      Insertion of element                                                  //
+//      Addition of element                                                   //
 //****************************************************************************//
 bool Stack_Push (struct Stack *stack, const struct data_t *data);
 
 //****************************************************************************//
-//      Removing of element                                                   //
+//      Removal of element                                                    //
 //****************************************************************************//
 bool Stack_Pop (struct Stack *stack, struct data_t *data);
+
+//****************************************************************************//
+//      Insertion of element                                                  //
+//****************************************************************************//
+bool Stack_Insert (struct Stack *stack, const struct data_t *data, size_t pos);
+
+//****************************************************************************//
+//      Extraction of element                                                 //
+//****************************************************************************//
+bool Stack_Extract (struct Stack *stack, struct data_t *data, size_t pos);
 
 //****************************************************************************//
 //      Setting element value                                                 //

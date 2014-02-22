@@ -900,18 +900,15 @@ space	= 3 * 8								; stack size required by the procedure
 		mov		param2, [this + CAPACITY]
 		shl		param2, 1
 		cmp		param2, [this + CAPACITY]	; if (newcapacity <= capacity)
-		jbe		.error						;     then go to error branch
+		setnbe	status						;     then return false
+		jbe		.exit
 		call	Extend						; status = this.Extend (capacity * 2)
 		mov		this, [s_this]				; get "this" variable from the stack
 		mov		data, [s_data]				; get "data" variable from the stack
-		add		stack, space				; restoring back the stack pointer
+.exit:	add		stack, space				; restoring back the stack pointer
 		test	status, status
 		jnz		.back						; if (status), then go back
 		ret									;              else return false
-;---[Error branch]-------------------------
-.error:	add		stack, space				; restoring back the stack pointer
-		xor		status, status				; return false
-		ret
 }
 InsertMulti:	INSERT_ELEMENT	InsertCoreMulti
 InsertUnique:	INSERT_ELEMENT	InsertCoreUnique
@@ -1070,8 +1067,7 @@ space	= 5 * 8								; stack size required by the procedure
 ;---[Check iterator]-----------------------
 		mov		iter, [this + offst]		; get iterator value
 		cmp		iter, EMPTY					; if (iter == EMPTY)
-		setne	status						;     return false
-		je		.exit
+		je		.error						;     return false
 ;---[Normal execution branch]--------------
 		mov		[s_this], this				; save "this" variable into the stack
 		mov		[s_data], data				; save "data" variable into the stack
@@ -1116,8 +1112,8 @@ space	= 5 * 8								; stack size required by the procedure
 		mov		iter, [s_ptr]				; get "ptr" variable from the stack
 		movdqu	temp, [data]
 		movdqa	[iter + NDATA], temp		; array[iter].data = data[0]
+		add		stack, space				; restoring back the stack pointer
 		mov		status, 1					; return true
-.exit:	add		stack, space				; restoring back the stack pointer
 		ret
 }
 SetFwdMulti:	SET_ELEMENT	InsertCoreMulti, FWD
@@ -1177,8 +1173,7 @@ space	= 5 * 8								; stack size required by the procedure
 ;---[Check iterator]-----------------------
 		mov		iter, [this + offst]		; get iterator value
 		cmp		iter, EMPTY					; if (iter == EMPTY)
-		setne	status						;     return false
-		je		.exit
+		je		.error						;     return false
 ;---[Normal execution branch]--------------
 		mov		[s_this], this				; save "this" variable into the stack
 		mov		[s_ndata], ndata			; save "ndata" variable into the stack
@@ -1225,8 +1220,8 @@ space	= 5 * 8								; stack size required by the procedure
 		mov		iter, [s_ptr]				; get "ptr" variable from the stack
 		movdqu	temp, [ndata]				; get "ndata" variable from the stack
 		movdqa	[iter + NDATA], temp		; array[iter].data = ndata[0]
+		add		stack, space				; restoring back the stack pointer
 		mov		status, 1					; return true
-.exit:	add		stack, space				; restoring back the stack pointer
 		ret
 }
 ReplaceFwdMulti:	REPLACE_ELEMENT		InsertCoreMulti, FWD
@@ -1267,19 +1262,16 @@ space	= 3 * 8								; stack size required by the procedure
 		mov		param2, [this + CAPACITY]
 		shl		param2, 1
 		cmp		param2, [this + CAPACITY]	; if (newcapacity <= capacity)
-		jbe		.error						;     then go to error branch
+		setnbe	status						;     then return false
+		jbe		.exit
 		call	Extend						; status = this.Extend (cap * 2)
 		mov		this, [s_this]				; get "this" variable from the stack
 		mov		odata, [s_odata]			; get "odata" variable from the stack
 		mov		ndata, [s_ndata]			; get "ndata" variable from the stack
-		add		stack, space				; restoring back the stack pointer
+.exit:	add		stack, space				; restoring back the stack pointer
 		test	status, status
 		jnz		.back						; if (status), then go back
 		ret									;              else return false
-;---[Error branch]-------------------------
-.error:	add		stack, space				; restoring back the stack pointer
-		xor		status, status				; return false
-		ret
 
 ;******************************************************************************;
 ;       Manipulation with forward iterator                                     ;

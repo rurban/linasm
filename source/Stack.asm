@@ -14,6 +14,7 @@ include	'Syscall.inc'
 ;#      Import section                                                         #
 ;###############################################################################
 extrn	'Array_Copy'		as	Copy
+extrn	'Array_Move'		as	Move
 
 ;###############################################################################
 ;#      Export section                                                         #
@@ -51,16 +52,28 @@ public	MoveData			as	'Stack_Move'
 public	MoveData			as	'_ZN5Stack4MoveEPS_mm'
 
 ;******************************************************************************;
-;       Insertion of element                                                   ;
+;       Addition of element                                                    ;
 ;******************************************************************************;
 public	PushData			as	'Stack_Push'
 public	PushData			as	'_ZN5Stack4PushEPK6data_t'
 
 ;******************************************************************************;
-;       Removing of element                                                    ;
+;       Removal of element                                                     ;
 ;******************************************************************************;
 public	PopData				as	'Stack_Pop'
 public	PopData				as	'_ZN5Stack3PopEP6data_t'
+
+;******************************************************************************;
+;       Insertion of element                                                   ;
+;******************************************************************************;
+public	InsertData			as	'Stack_Insert'
+public	InsertData			as	'_ZN5Stack6InsertEPK6data_tm'
+
+;******************************************************************************;
+;       Extraction of element                                                  ;
+;******************************************************************************;
+public	ExtractData			as	'Stack_Extract'
+public	ExtractData			as	'_ZN5Stack7ExtractEP6data_tm'
 
 ;******************************************************************************;
 ;       Setting element value                                                  ;
@@ -495,7 +508,7 @@ CopyData:	COPY_MOVE	0
 MoveData:	COPY_MOVE	1
 
 ;******************************************************************************;
-;       Insertion of element                                                   ;
+;       Addition of element                                                    ;
 ;******************************************************************************;
 PushData:
 ;---[Parameters]---------------------------
@@ -503,49 +516,45 @@ this	equ		rdi							; pointer to stack object
 data	equ		rsi							; pointer to data structure
 ;---[Internal variables]-------------------
 status	equ		al							; operation status
-iter	equ		rcx							; iterator value
-size	equ		rdx							; object size
+iter	equ		r8							; iterator value
 temp	equ		xmm0						; temporary register
 stack	equ		rsp							; stack pointer
 s_this	equ		stack + 0 * 8				; stack position of "this" variable
 s_data	equ		stack + 1 * 8				; stack position of "data" variable
+s_iter	equ		stack + 2 * 8				; stack position of "iter" variable
 space	= 3 * 8								; stack size required by the procedure
 ;------------------------------------------
-		mov		size, [this + SIZE]			; get object size
-		cmp		size, [this + CAPACITY]		; if (size == cap)
+		mov		iter, [this + SIZE]			; get object size
+		cmp		iter, [this + CAPACITY]		; if (iter == cap)
 		je		.ext						;     then try to extend object capacity
 ;---[Normal execution branch]--------------
-.back:	mov		iter, [this + ARRAY]		; get iterator value
-		add		iter, size					; iter = array + size
+.back:	add		iter, [this + ARRAY]		; iter += array
+		add		qword [this + SIZE], KSIZE	; this.size++
 		movdqu	temp, [data]
 		movdqa	[iter], temp				; iter[0] = data[0]
-		add		size, KSIZE					; size++
-		mov		[this + SIZE], size			; update object size
 		mov		status, 1					; return true
 		ret
 ;---[Extend object capacity]---------------
 .ext:	sub		stack, space				; reserving stack size for local vars
 		mov		[s_this], this				; save "this" variable into the stack
 		mov		[s_data], data				; save "data" variable into the stack
+		mov		[s_iter], iter				; save "iter" variable into the stack
 		mov		param2, [this + CAPACITY]
 		shl		param2, 1
 		cmp		param2, [this + CAPACITY]	; if (newcapacity <= capacity)
-		jbe		.error						;     then go to error branch
+		setnbe	status						;     then return false
+		jbe		.exit
 		call	Extend						; status = this.Extend (cap * 2)
 		mov		this, [s_this]				; get "this" variable from the stack
 		mov		data, [s_data]				; get "data" variable from the stack
-		mov		size, [this + SIZE]			; get object size
-		add		stack, space				; restoring back the stack pointer
+		mov		iter, [s_iter]				; get "iter" variable from the stack
+.exit:	add		stack, space				; restoring back the stack pointer
 		test	status, status
 		jnz		.back						; if (status), then go back
 		ret									;              else return false
-;---[Error branch]-------------------------
-.error:	add		stack, space				; restoring back the stack pointer
-		xor		status, status				; return false
-		ret
 
 ;******************************************************************************;
-;       Removing of element                                                    ;
+;       Removal of element                                                     ;
 ;******************************************************************************;
 PopData:
 ;---[Parameters]---------------------------
@@ -553,20 +562,115 @@ this	equ		rdi							; pointer to stack object
 data	equ		rsi							; pointer to data structure
 ;---[Internal variables]-------------------
 status	equ		al							; operation status
-iter	equ		rcx							; iterator value
-size	equ		rdx							; object size
+iter	equ		r8							; iterator value
 temp	equ		xmm0						; temporary register
 ;------------------------------------------
-		mov		size, [this + SIZE]			; get object size
-		test	size, size					; if (size == 0)
+		mov		iter, [this + SIZE]			; get object size
+		test	iter, iter					; if (iter == 0)
 		jz		.error						;     then go to error branch
 ;---[Normal execution branch]--------------
-		sub		size, KSIZE					; size--
-		mov		iter, [this + ARRAY]		; get iterator value
-		add		iter, size					; iter = array + size
+		sub		iter, KSIZE					; iter--
+		add		iter, [this + ARRAY]		; iter += aray
+		sub		qword [this + SIZE], KSIZE	; this.size--
 		movdqa	temp, [iter]
 		movdqu	[data], temp				; data[0] = iter[0]
-		mov		[this + SIZE], size			; update object size
+		mov		status, 1					; return true
+		ret
+;---[Error branch]-------------------------
+.error:	xor		status, status				; return false
+		ret
+
+;******************************************************************************;
+;       Insertion of element                                                   ;
+;******************************************************************************;
+InsertData:
+;---[Parameters]---------------------------
+this	equ		rdi							; pointer to stack object
+data	equ		rsi							; pointer to data structure
+pos		equ		rdx							; position where to insert element
+;---[Internal variables]-------------------
+status	equ		al							; operation status
+iter	equ		r8							; iterator value
+temp	equ		xmm0						; temporary register
+stack	equ		rsp							; stack pointer
+s_this	equ		stack + 0 * 8				; stack position of "this" variable
+s_data	equ		stack + 1 * 8				; stack position of "data" variable
+s_pos	equ		stack + 2 * 8				; stack position of "pos" variable
+s_iter	equ		stack + 3 * 8				; stack position of "iter" variable
+space	= 5 * 8								; stack size required by the procedure
+;------------------------------------------
+		sub		stack, space				; reserving stack size for local vars
+		shl		pos, KSCALE
+		mov		iter, [this + SIZE]			; get object size
+		mov		[s_this], this				; save "this" variable into the stack
+		mov		[s_data], data				; save "data" variable into the stack
+		mov		[s_pos], pos				; save "pos" variable into the stack
+		mov		[s_iter], iter				; save "iter" variable into the stack
+		cmp		iter, [this + CAPACITY]		; if (iter == cap)
+		je		.ext						;     then try to extend object capacity
+;---[Check position]-----------------------
+.back:	sub		iter, pos					; if (iter < pos)
+		jb		.error						;     then go to error branch
+;---[Normal execution branch]--------------
+		add		iter, [this + ARRAY]		; iter += array
+		mov		[s_iter], iter				; save "iter" variable into the stack
+		add		qword [this + SIZE], KSIZE	; this.size++
+		test	pos, pos					; if (pos == 0)
+		jz		@f							;     then skip following code
+		mov		param3, pos
+		mov		param2, iter
+		lea		param1, [iter + KSIZE]
+		call	Move						; call Move (iter + KSIZE, iter, pos)
+		mov		data, [s_data]				; get "data" variable from the stack
+		mov		iter, [s_iter]				; get "data" variable from the stack
+@@:		movdqu	temp, [data]
+		movdqa	[iter], temp				; iter[0] = data[0]
+		add		stack, space				; restoring back the stack pointer
+		mov		status, 1					; return true
+		ret
+;---[Extend object capacity]---------------
+.ext:	mov		param2, [this + CAPACITY]
+		shl		param2, 1
+		cmp		param2, [this + CAPACITY]	; if (newcapacity <= capacity)
+		jbe		.error						;     then go to error branch
+		call	Extend						; status = this.Extend (cap * 2)
+		mov		this, [s_this]				; get "this" variable from the stack
+		mov		pos, [s_pos]				; get "pos" variable from the stack
+		mov		iter, [s_iter]				; get "iter" variable from the stack
+		test	status, status
+		jnz		.back						; if (status), then go back
+;---[Error branch]-------------------------
+.error:	add		stack, space				; restoring back the stack pointer
+		xor		status, status				; return false
+		ret
+
+;******************************************************************************;
+;       Extraction of element                                                  ;
+;******************************************************************************;
+ExtractData:
+;---[Parameters]---------------------------
+this	equ		rdi							; pointer to stack object
+data	equ		rsi							; pointer to data structure
+pos		equ		rdx							; position of element to extract
+;---[Internal variables]-------------------
+status	equ		al							; operation status
+iter	equ		r8							; iterator value
+temp	equ		xmm0						; temporary register
+;---[Check position]-----------------------
+		shl		pos, KSCALE
+		mov		iter, [this + SIZE]			; get object size
+		sub		iter, KSIZE					; iter--
+		sub		iter, pos					; if (iter < pos)
+		jl		.error						;     then go to error branch
+;---[Normal execution branch]--------------
+		add		iter, [this + ARRAY]		; iter += array
+		sub		qword [this + SIZE], KSIZE	; this.size--
+		movdqa	temp, [iter]
+		movdqu	[data], temp				; data[0] = iter[0]
+		mov		param3, pos
+		lea		param2, [iter + KSIZE]
+		mov		param1, iter
+		call	Move						; call Move (iter, iter + KSIZE, pos)
 		mov		status, 1					; return true
 		ret
 ;---[Error branch]-------------------------
