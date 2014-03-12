@@ -3112,7 +3112,7 @@ bwd		equ		rdx							; forward iterator
 ;******************************************************************************;
 ;       Minimum and maximum value                                              ;
 ;******************************************************************************;
-macro	MINMAX	cmd, c, bwd
+macro	MINMAX	cmd, cond, bwd
 {
 ;---[Parameters]---------------------------
 this	equ		rdi							; pointer to list/ring object
@@ -3186,13 +3186,13 @@ end if
 		mov		vptr, iter					; vptr = iter
 		jmp		.skip
 ;---[Search loop]--------------------------
-.loop:	mov		param2, value
-		mov		param1, [array + iter + NDATA]
-		call	qword [s_func]				; status = Compare (array[iter].data.key, value)
+.loop:	mov		param2, [array + iter + NDATA]
+		mov		param1, value
+		call	qword [s_func]				; status = Compare (value, array[iter].data.key)
 		mov		array, [s_array]			; get "array" variable from the stack
 		mov		iter, [s_iter]				; get "iter" variable from the stack
 		cmp		result, 0					; if (result cond 0)
-		jn#c	.skip						; {
+		jn#cond	.skip						; {
 		mov		value, [array + iter+NDATA]	;     value = array[iter].data.key
 		mov		vptr, iter					;     vptr = iter }
 .skip:	mov		node, NMASK					; load node mask
@@ -3241,12 +3241,12 @@ end if
 }
 
 ; Minimum value
-MinFwd:	MINMAX	add, l, 0
-MinBwd:	MINMAX	sub, l, 1
+MinFwd:	MINMAX	add, g, 0
+MinBwd:	MINMAX	sub, g, 1
 
 ; Maximum value
-MaxFwd:	MINMAX	add, g, 0
-MaxBwd:	MINMAX	sub, g, 1
+MaxFwd:	MINMAX	add, l, 0
+MaxBwd:	MINMAX	sub, l, 1
 
 ;******************************************************************************;
 ;       Search algorithms                                                      ;

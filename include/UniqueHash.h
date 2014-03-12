@@ -114,6 +114,18 @@ bool BwdGoPrev (size_t pos);
 void SwapFwdBwd (void);
 
 //****************************************************************************//
+//      Minimum and maximum value                                             //
+//****************************************************************************//
+
+// Minimum value
+bool MinFwd (data_t *data);
+bool MinBwd (data_t *data);
+
+// Maximum value
+bool MaxFwd (data_t *data);
+bool MaxBwd (data_t *data);
+
+//****************************************************************************//
 //      Key searching                                                         //
 //****************************************************************************//
 
@@ -240,6 +252,18 @@ bool UniqueHash_BwdGoPrev (struct UniqueHash *hash, size_t pos);
 //      Swapping iterators                                                    //
 //****************************************************************************//
 void UniqueHash_SwapFwdBwd (struct UniqueHash *hash);
+
+//****************************************************************************//
+//      Minimum and maximum value                                             //
+//****************************************************************************//
+
+// Minimum value
+bool UniqueHash_MinFwd (struct UniqueHash *hash, struct data_t *data);
+bool UniqueHash_MinBwd (struct UniqueHash *hash, struct data_t *data);
+
+// Maximum value
+bool UniqueHash_MaxFwd (struct UniqueHash *hash, struct data_t *data);
+bool UniqueHash_MaxBwd (struct UniqueHash *hash, struct data_t *data);
 
 //****************************************************************************//
 //      Key searching                                                         //
