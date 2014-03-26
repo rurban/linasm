@@ -14,26 +14,18 @@ include	'Macro.inc'
 ;###############################################################################
 
 ; Mapping functions
-extrn	'_Map_flt32'			as	Map_flt32
-extrn	'_Map_flt64'			as	Map_flt64
+extrn	'_Map_flt32'				as	Map_flt32
+extrn	'_Map_flt64'				as	Map_flt64
 
 ; Sum of elements
-extrn	'Array_Sum_flt32'		as	Sum_flt32
-extrn	'Array_Sum_flt64'		as	Sum_flt64
-
-; Minimum value
-extrn	'Array_Min_flt32'		as	Min_flt32
-extrn	'Array_Min_flt64'		as	Min_flt64
-
-; Maximum value
-extrn	'Array_Max_flt32'		as	Max_flt32
-extrn	'Array_Max_flt64'		as	Max_flt64
+extrn	'Array_Sum_flt32'			as	Sum_flt32
+extrn	'Array_Sum_flt64'			as	Sum_flt64
 
 ; Blend masks
-extrn	'maskS1'				as	maskS1
-extrn	'maskS2'				as	maskS2
-extrn	'maskV1'				as	maskV1
-extrn	'maskV2'				as	maskV2
+extrn	'maskS1'					as	maskS1
+extrn	'maskS2'					as	maskS2
+extrn	'maskV1'					as	maskV1
+extrn	'maskV2'					as	maskV2
 
 ;###############################################################################
 ;#      Export section                                                         #
@@ -46,120 +38,120 @@ extrn	'maskV2'				as	maskV2
 ;==============================================================================;
 ;       Mean                                                                   ;
 ;==============================================================================;
-public	Mean_flt32				as	'Statistics_Mean_flt32'
-public	Mean_flt64				as	'Statistics_Mean_flt64'
-public	Mean_flt32				as	'_ZN10Statistics4MeanEPKfm'
-public	Mean_flt64				as	'_ZN10Statistics4MeanEPKdm'
+public	Mean_flt32					as	'Statistics_Mean_flt32'
+public	Mean_flt64					as	'Statistics_Mean_flt64'
+public	Mean_flt32					as	'_ZN10Statistics4MeanEPKfm'
+public	Mean_flt64					as	'_ZN10Statistics4MeanEPKdm'
 
 ;==============================================================================;
 ;       Median                                                                 ;
 ;==============================================================================;
 
 ; Unsigned integer types
-public	Median_uint8			as	'Statistics_Median_uint8'
-public	Median_uint16			as	'Statistics_Median_uint16'
-public	Median_uint32			as	'Statistics_Median_uint32'
-public	Median_uint64			as	'Statistics_Median_uint64'
-public	Median_uint8			as	'_ZN10Statistics6MedianEPhm'
-public	Median_uint16			as	'_ZN10Statistics6MedianEPtm'
-public	Median_uint32			as	'_ZN10Statistics6MedianEPjm'
-public	Median_uint64			as	'_ZN10Statistics6MedianEPym'
+public	Median_uint8				as	'Statistics_Median_uint8'
+public	Median_uint16				as	'Statistics_Median_uint16'
+public	Median_uint32				as	'Statistics_Median_uint32'
+public	Median_uint64				as	'Statistics_Median_uint64'
+public	Median_uint8				as	'_ZN10Statistics6MedianEPhm'
+public	Median_uint16				as	'_ZN10Statistics6MedianEPtm'
+public	Median_uint32				as	'_ZN10Statistics6MedianEPjm'
+public	Median_uint64				as	'_ZN10Statistics6MedianEPym'
 
 ; Signed integer types
-public	Median_sint8			as	'Statistics_Median_sint8'
-public	Median_sint16			as	'Statistics_Median_sint16'
-public	Median_sint32			as	'Statistics_Median_sint32'
-public	Median_sint64			as	'Statistics_Median_sint64'
-public	Median_sint8			as	'_ZN10Statistics6MedianEPam'
-public	Median_sint16			as	'_ZN10Statistics6MedianEPsm'
-public	Median_sint32			as	'_ZN10Statistics6MedianEPim'
-public	Median_sint64			as	'_ZN10Statistics6MedianEPxm'
+public	Median_sint8				as	'Statistics_Median_sint8'
+public	Median_sint16				as	'Statistics_Median_sint16'
+public	Median_sint32				as	'Statistics_Median_sint32'
+public	Median_sint64				as	'Statistics_Median_sint64'
+public	Median_sint8				as	'_ZN10Statistics6MedianEPam'
+public	Median_sint16				as	'_ZN10Statistics6MedianEPsm'
+public	Median_sint32				as	'_ZN10Statistics6MedianEPim'
+public	Median_sint64				as	'_ZN10Statistics6MedianEPxm'
 
 ; Floating-point types
-public	Median_flt32			as	'Statistics_Median_flt32'
-public	Median_flt64			as	'Statistics_Median_flt64'
-public	Median_flt32			as	'_ZN10Statistics6MedianEPfm'
-public	Median_flt64			as	'_ZN10Statistics6MedianEPdm'
+public	Median_flt32				as	'Statistics_Median_flt32'
+public	Median_flt64				as	'Statistics_Median_flt64'
+public	Median_flt32				as	'_ZN10Statistics6MedianEPfm'
+public	Median_flt64				as	'_ZN10Statistics6MedianEPdm'
 
 ; Other types
-public	Median_uint64			as	'Statistics_Median_size'
-public	Median_uint64			as	'_ZN10Statistics6MedianEPmm'
+public	Median_uint64				as	'Statistics_Median_size'
+public	Median_uint64				as	'_ZN10Statistics6MedianEPmm'
 
 ;==============================================================================;
 ;       Lower quartile                                                         ;
 ;==============================================================================;
 
 ; Unsigned integer types
-public	LowQuart_uint8			as	'Statistics_LowerQuartile_uint8'
-public	LowQuart_uint16			as	'Statistics_LowerQuartile_uint16'
-public	LowQuart_uint32			as	'Statistics_LowerQuartile_uint32'
-public	LowQuart_uint64			as	'Statistics_LowerQuartile_uint64'
-public	LowQuart_uint8			as	'_ZN10Statistics13LowerQuartileEPhm'
-public	LowQuart_uint16			as	'_ZN10Statistics13LowerQuartileEPtm'
-public	LowQuart_uint32			as	'_ZN10Statistics13LowerQuartileEPjm'
-public	LowQuart_uint64			as	'_ZN10Statistics13LowerQuartileEPym'
+public	LowerQuart_uint8			as	'Statistics_LowerQuartile_uint8'
+public	LowerQuart_uint16			as	'Statistics_LowerQuartile_uint16'
+public	LowerQuart_uint32			as	'Statistics_LowerQuartile_uint32'
+public	LowerQuart_uint64			as	'Statistics_LowerQuartile_uint64'
+public	LowerQuart_uint8			as	'_ZN10Statistics13LowerQuartileEPhm'
+public	LowerQuart_uint16			as	'_ZN10Statistics13LowerQuartileEPtm'
+public	LowerQuart_uint32			as	'_ZN10Statistics13LowerQuartileEPjm'
+public	LowerQuart_uint64			as	'_ZN10Statistics13LowerQuartileEPym'
 
 ; Signed integer types
-public	LowQuart_sint8			as	'Statistics_LowerQuartile_sint8'
-public	LowQuart_sint16			as	'Statistics_LowerQuartile_sint16'
-public	LowQuart_sint32			as	'Statistics_LowerQuartile_sint32'
-public	LowQuart_sint64			as	'Statistics_LowerQuartile_sint64'
-public	LowQuart_sint8			as	'_ZN10Statistics13LowerQuartileEPam'
-public	LowQuart_sint16			as	'_ZN10Statistics13LowerQuartileEPsm'
-public	LowQuart_sint32			as	'_ZN10Statistics13LowerQuartileEPim'
-public	LowQuart_sint64			as	'_ZN10Statistics13LowerQuartileEPxm'
+public	LowerQuart_sint8			as	'Statistics_LowerQuartile_sint8'
+public	LowerQuart_sint16			as	'Statistics_LowerQuartile_sint16'
+public	LowerQuart_sint32			as	'Statistics_LowerQuartile_sint32'
+public	LowerQuart_sint64			as	'Statistics_LowerQuartile_sint64'
+public	LowerQuart_sint8			as	'_ZN10Statistics13LowerQuartileEPam'
+public	LowerQuart_sint16			as	'_ZN10Statistics13LowerQuartileEPsm'
+public	LowerQuart_sint32			as	'_ZN10Statistics13LowerQuartileEPim'
+public	LowerQuart_sint64			as	'_ZN10Statistics13LowerQuartileEPxm'
 
 ; Floating-point types
-public	LowQuart_flt32			as	'Statistics_LowerQuartile_flt32'
-public	LowQuart_flt64			as	'Statistics_LowerQuartile_flt64'
-public	LowQuart_flt32			as	'_ZN10Statistics13LowerQuartileEPfm'
-public	LowQuart_flt64			as	'_ZN10Statistics13LowerQuartileEPdm'
+public	LowerQuart_flt32			as	'Statistics_LowerQuartile_flt32'
+public	LowerQuart_flt64			as	'Statistics_LowerQuartile_flt64'
+public	LowerQuart_flt32			as	'_ZN10Statistics13LowerQuartileEPfm'
+public	LowerQuart_flt64			as	'_ZN10Statistics13LowerQuartileEPdm'
 
 ; Other types
-public	LowQuart_uint64			as	'Statistics_LowerQuartile_size'
-public	LowQuart_uint64			as	'_ZN10Statistics13LowerQuartileEPmm'
+public	LowerQuart_uint64			as	'Statistics_LowerQuartile_size'
+public	LowerQuart_uint64			as	'_ZN10Statistics13LowerQuartileEPmm'
 
 ;==============================================================================;
 ;       Upper quartile                                                         ;
 ;==============================================================================;
 
 ; Unsigned integer types
-public	UpQuart_uint8			as	'Statistics_UpperQuartile_uint8'
-public	UpQuart_uint16			as	'Statistics_UpperQuartile_uint16'
-public	UpQuart_uint32			as	'Statistics_UpperQuartile_uint32'
-public	UpQuart_uint64			as	'Statistics_UpperQuartile_uint64'
-public	UpQuart_uint8			as	'_ZN10Statistics13UpperQuartileEPhm'
-public	UpQuart_uint16			as	'_ZN10Statistics13UpperQuartileEPtm'
-public	UpQuart_uint32			as	'_ZN10Statistics13UpperQuartileEPjm'
-public	UpQuart_uint64			as	'_ZN10Statistics13UpperQuartileEPym'
+public	UpperQuart_uint8			as	'Statistics_UpperQuartile_uint8'
+public	UpperQuart_uint16			as	'Statistics_UpperQuartile_uint16'
+public	UpperQuart_uint32			as	'Statistics_UpperQuartile_uint32'
+public	UpperQuart_uint64			as	'Statistics_UpperQuartile_uint64'
+public	UpperQuart_uint8			as	'_ZN10Statistics13UpperQuartileEPhm'
+public	UpperQuart_uint16			as	'_ZN10Statistics13UpperQuartileEPtm'
+public	UpperQuart_uint32			as	'_ZN10Statistics13UpperQuartileEPjm'
+public	UpperQuart_uint64			as	'_ZN10Statistics13UpperQuartileEPym'
 
 ; Signed integer types
-public	UpQuart_sint8			as	'Statistics_UpperQuartile_sint8'
-public	UpQuart_sint16			as	'Statistics_UpperQuartile_sint16'
-public	UpQuart_sint32			as	'Statistics_UpperQuartile_sint32'
-public	UpQuart_sint64			as	'Statistics_UpperQuartile_sint64'
-public	UpQuart_sint8			as	'_ZN10Statistics13UpperQuartileEPam'
-public	UpQuart_sint16			as	'_ZN10Statistics13UpperQuartileEPsm'
-public	UpQuart_sint32			as	'_ZN10Statistics13UpperQuartileEPim'
-public	UpQuart_sint64			as	'_ZN10Statistics13UpperQuartileEPxm'
+public	UpperQuart_sint8			as	'Statistics_UpperQuartile_sint8'
+public	UpperQuart_sint16			as	'Statistics_UpperQuartile_sint16'
+public	UpperQuart_sint32			as	'Statistics_UpperQuartile_sint32'
+public	UpperQuart_sint64			as	'Statistics_UpperQuartile_sint64'
+public	UpperQuart_sint8			as	'_ZN10Statistics13UpperQuartileEPam'
+public	UpperQuart_sint16			as	'_ZN10Statistics13UpperQuartileEPsm'
+public	UpperQuart_sint32			as	'_ZN10Statistics13UpperQuartileEPim'
+public	UpperQuart_sint64			as	'_ZN10Statistics13UpperQuartileEPxm'
 
 ; Floating-point types
-public	UpQuart_flt32			as	'Statistics_UpperQuartile_flt32'
-public	UpQuart_flt64			as	'Statistics_UpperQuartile_flt64'
-public	UpQuart_flt32			as	'_ZN10Statistics13UpperQuartileEPfm'
-public	UpQuart_flt64			as	'_ZN10Statistics13UpperQuartileEPdm'
+public	UpperQuart_flt32			as	'Statistics_UpperQuartile_flt32'
+public	UpperQuart_flt64			as	'Statistics_UpperQuartile_flt64'
+public	UpperQuart_flt32			as	'_ZN10Statistics13UpperQuartileEPfm'
+public	UpperQuart_flt64			as	'_ZN10Statistics13UpperQuartileEPdm'
 
 ; Other types
-public	UpQuart_uint64			as	'Statistics_UpperQuartile_size'
-public	UpQuart_uint64			as	'_ZN10Statistics13UpperQuartileEPmm'
+public	UpperQuart_uint64			as	'Statistics_UpperQuartile_size'
+public	UpperQuart_uint64			as	'_ZN10Statistics13UpperQuartileEPmm'
 
 ;==============================================================================;
 ;       Mid-range                                                              ;
 ;==============================================================================;
-public	Midrange_flt32			as	'Statistics_Midrange_flt32'
-public	Midrange_flt64			as	'Statistics_Midrange_flt64'
-public	Midrange_flt32			as	'_ZN10Statistics8MidrangeEPKfm'
-public	Midrange_flt64			as	'_ZN10Statistics8MidrangeEPKdm'
+public	Midrange_flt32				as	'Statistics_Midrange_flt32'
+public	Midrange_flt64				as	'Statistics_Midrange_flt64'
+public	Midrange_flt32				as	'_ZN10Statistics8MidrangeEPKfm'
+public	Midrange_flt64				as	'_ZN10Statistics8MidrangeEPKdm'
 
 ;******************************************************************************;
 ;       Measures of variability                                                ;
@@ -168,100 +160,104 @@ public	Midrange_flt64			as	'_ZN10Statistics8MidrangeEPKdm'
 ;==============================================================================;
 ;       Variance                                                               ;
 ;==============================================================================;
-public	Variance_flt32			as	'Statistics_Variance_flt32'
-public	Variance_flt64			as	'Statistics_Variance_flt64'
-public	Variance_flt32			as	'_ZN10Statistics8VarianceEPKfmf'
-public	Variance_flt64			as	'_ZN10Statistics8VarianceEPKdmd'
+public	Variance_flt32				as	'Statistics_Variance_flt32'
+public	Variance_flt64				as	'Statistics_Variance_flt64'
+public	Variance_flt32				as	'_ZN10Statistics8VarianceEPKfmf'
+public	Variance_flt64				as	'_ZN10Statistics8VarianceEPKdmd'
 
 ;==============================================================================;
 ;       Standard deviation                                                     ;
 ;==============================================================================;
-public	StdDeviation_flt32		as	'Statistics_StandardDeviation_flt32'
-public	StdDeviation_flt64		as	'Statistics_StandardDeviation_flt64'
-public	StdDeviation_flt32		as	'_ZN10Statistics17StandardDeviationEPKfmf'
-public	StdDeviation_flt64		as	'_ZN10Statistics17StandardDeviationEPKdmd'
+public	StdDeviation_flt32			as	'Statistics_StandardDeviation_flt32'
+public	StdDeviation_flt64			as	'Statistics_StandardDeviation_flt64'
+public	StdDeviation_flt32			as	'_ZN10Statistics17StandardDeviationEPKfmf'
+public	StdDeviation_flt64			as	'_ZN10Statistics17StandardDeviationEPKdmd'
 
 ;==============================================================================;
 ;       Absolute deviation                                                     ;
 ;==============================================================================;
-public	AbsDeviation_flt32		as	'Statistics_AbsoluteDeviation_flt32'
-public	AbsDeviation_flt64		as	'Statistics_AbsoluteDeviation_flt64'
-public	AbsDeviation_flt32		as	'_ZN10Statistics17AbsoluteDeviationEPKfmf'
-public	AbsDeviation_flt64		as	'_ZN10Statistics17AbsoluteDeviationEPKdmd'
+public	AbsDeviation_flt32			as	'Statistics_AbsoluteDeviation_flt32'
+public	AbsDeviation_flt64			as	'Statistics_AbsoluteDeviation_flt64'
+public	AbsDeviation_flt32			as	'_ZN10Statistics17AbsoluteDeviationEPKfmf'
+public	AbsDeviation_flt64			as	'_ZN10Statistics17AbsoluteDeviationEPKdmd'
 
 ;==============================================================================;
 ;       Interquartile range                                                    ;
 ;==============================================================================;
 
 ; Unsigned integer types
-public	QuartRange_uint8		as	'Statistics_InterquartileRange_uint8'
-public	QuartRange_uint16		as	'Statistics_InterquartileRange_uint16'
-public	QuartRange_uint32		as	'Statistics_InterquartileRange_uint32'
-public	QuartRange_uint64		as	'Statistics_InterquartileRange_uint64'
-public	QuartRange_uint8		as	'_ZN10Statistics18InterquartileRangeEPhm'
-public	QuartRange_uint16		as	'_ZN10Statistics18InterquartileRangeEPtm'
-public	QuartRange_uint32		as	'_ZN10Statistics18InterquartileRangeEPjm'
-public	QuartRange_uint64		as	'_ZN10Statistics18InterquartileRangeEPym'
+public	QuartRange_uint8			as	'Statistics_InterquartileRange_uint8'
+public	QuartRange_uint16			as	'Statistics_InterquartileRange_uint16'
+public	QuartRange_uint32			as	'Statistics_InterquartileRange_uint32'
+public	QuartRange_uint64			as	'Statistics_InterquartileRange_uint64'
+public	QuartRange_uint8			as	'_ZN10Statistics18InterquartileRangeEPhm'
+public	QuartRange_uint16			as	'_ZN10Statistics18InterquartileRangeEPtm'
+public	QuartRange_uint32			as	'_ZN10Statistics18InterquartileRangeEPjm'
+public	QuartRange_uint64			as	'_ZN10Statistics18InterquartileRangeEPym'
 
 ; Signed integer types
-public	QuartRange_sint8		as	'Statistics_InterquartileRange_sint8'
-public	QuartRange_sint16		as	'Statistics_InterquartileRange_sint16'
-public	QuartRange_sint32		as	'Statistics_InterquartileRange_sint32'
-public	QuartRange_sint64		as	'Statistics_InterquartileRange_sint64'
-public	QuartRange_sint8		as	'_ZN10Statistics18InterquartileRangeEPam'
-public	QuartRange_sint16		as	'_ZN10Statistics18InterquartileRangeEPsm'
-public	QuartRange_sint32		as	'_ZN10Statistics18InterquartileRangeEPim'
-public	QuartRange_sint64		as	'_ZN10Statistics18InterquartileRangeEPxm'
+public	QuartRange_sint8			as	'Statistics_InterquartileRange_sint8'
+public	QuartRange_sint16			as	'Statistics_InterquartileRange_sint16'
+public	QuartRange_sint32			as	'Statistics_InterquartileRange_sint32'
+public	QuartRange_sint64			as	'Statistics_InterquartileRange_sint64'
+public	QuartRange_sint8			as	'_ZN10Statistics18InterquartileRangeEPam'
+public	QuartRange_sint16			as	'_ZN10Statistics18InterquartileRangeEPsm'
+public	QuartRange_sint32			as	'_ZN10Statistics18InterquartileRangeEPim'
+public	QuartRange_sint64			as	'_ZN10Statistics18InterquartileRangeEPxm'
 
 ; Floating-point types
-public	QuartRange_flt32		as	'Statistics_InterquartileRange_flt32'
-public	QuartRange_flt64		as	'Statistics_InterquartileRange_flt64'
-public	QuartRange_flt32		as	'_ZN10Statistics18InterquartileRangeEPfm'
-public	QuartRange_flt64		as	'_ZN10Statistics18InterquartileRangeEPdm'
+public	QuartRange_flt32			as	'Statistics_InterquartileRange_flt32'
+public	QuartRange_flt64			as	'Statistics_InterquartileRange_flt64'
+public	QuartRange_flt32			as	'_ZN10Statistics18InterquartileRangeEPfm'
+public	QuartRange_flt64			as	'_ZN10Statistics18InterquartileRangeEPdm'
 
 ; Other types
-public	QuartRange_uint64		as	'Statistics_InterquartileRange_size'
-public	QuartRange_uint64		as	'_ZN10Statistics18InterquartileRangeEPmm'
+public	QuartRange_uint64			as	'Statistics_InterquartileRange_size'
+public	QuartRange_uint64			as	'_ZN10Statistics18InterquartileRangeEPmm'
 
 ;==============================================================================;
 ;       Range                                                                  ;
 ;==============================================================================;
-public	Range_flt32				as	'Statistics_Range_flt32'
-public	Range_flt64				as	'Statistics_Range_flt64'
-public	Range_flt32				as	'_ZN10Statistics5RangeEPKfm'
-public	Range_flt64				as	'_ZN10Statistics5RangeEPKdm'
+public	Range_flt32					as	'Statistics_Range_flt32'
+public	Range_flt64					as	'Statistics_Range_flt64'
+public	Range_flt32					as	'_ZN10Statistics5RangeEPKfm'
+public	Range_flt64					as	'_ZN10Statistics5RangeEPKdm'
 
 ;******************************************************************************;
 ;       Measures of shape                                                      ;
 ;******************************************************************************;
 
 ; Skewness
-public	Skewness_flt32			as	'Statistics_Skewness_flt32'
-public	Skewness_flt64			as	'Statistics_Skewness_flt64'
-public	Skewness_flt32			as	'_ZN10Statistics8SkewnessEPKfmf'
-public	Skewness_flt64			as	'_ZN10Statistics8SkewnessEPKdmd'
+public	Skewness_flt32				as	'Statistics_Skewness_flt32'
+public	Skewness_flt64				as	'Statistics_Skewness_flt64'
+public	Skewness_flt32				as	'_ZN10Statistics8SkewnessEPKfmf'
+public	Skewness_flt64				as	'_ZN10Statistics8SkewnessEPKdmd'
 
 ; Kurtosis
-public	Kurtosis_flt32			as	'Statistics_Kurtosis_flt32'
-public	Kurtosis_flt64			as	'Statistics_Kurtosis_flt64'
-public	Kurtosis_flt32			as	'_ZN10Statistics8KurtosisEPKfmf'
-public	Kurtosis_flt64			as	'_ZN10Statistics8KurtosisEPKdmd'
+public	Kurtosis_flt32				as	'Statistics_Kurtosis_flt32'
+public	Kurtosis_flt64				as	'Statistics_Kurtosis_flt64'
+public	Kurtosis_flt32				as	'_ZN10Statistics8KurtosisEPKfmf'
+public	Kurtosis_flt64				as	'_ZN10Statistics8KurtosisEPKdmd'
 
 ;******************************************************************************;
-;       Other functions                                                        ;
+;       Covariance                                                             ;
+;******************************************************************************;
+public	Covariance_flt32			as	'Statistics_Covariance_flt32'
+public	Covariance_flt64			as	'Statistics_Covariance_flt64'
+public	Covariance_flt32			as	'_ZN10Statistics10CovarianceEPKffS1_fm'
+public	Covariance_flt64			as	'_ZN10Statistics10CovarianceEPKddS1_dm'
+
+;******************************************************************************;
+;       Сorrelation                                                            ;
 ;******************************************************************************;
 
-; Covariance
-public	Covariance_flt32		as	'Statistics_Covariance_flt32'
-public	Covariance_flt64		as	'Statistics_Covariance_flt64'
-public	Covariance_flt32		as	'_ZN10Statistics10CovarianceEPKffS1_fm'
-public	Covariance_flt64		as	'_ZN10Statistics10CovarianceEPKddS1_dm'
-
-; Correlation
-public	Correlation_flt32		as	'Statistics_Correlation_flt32'
-public	Correlation_flt64		as	'Statistics_Correlation_flt64'
-public	Correlation_flt32		as	'_ZN10Statistics11CorrelationEPKffS1_fm'
-public	Correlation_flt64		as	'_ZN10Statistics11CorrelationEPKddS1_dm'
+;==============================================================================;
+;       Pearson correlation                                                    ;
+;==============================================================================;
+public	PearsonCorrelation_flt32	as	'Statistics_PearsonCorrelation_flt32'
+public	PearsonCorrelation_flt64	as	'Statistics_PearsonCorrelation_flt64'
+public	PearsonCorrelation_flt32	as	'_ZN10Statistics18PearsonCorrelationEPKffS1_fm'
+public	PearsonCorrelation_flt64	as	'_ZN10Statistics18PearsonCorrelationEPKddS1_dm'
 
 ;###############################################################################
 ;#      Code section                                                           #
@@ -339,17 +335,17 @@ bytes	= 1 shl scale						; size of type (bytes)
 ;------------------------------------------
 		cmp		l_ptr, r_ptr
 		jb		.swap						; do while (l_ptr < r_ptr)
-;---[end of swap loop]---------------------
+;---[End of swap loop]---------------------
 		cmp		r_ptr, ptr					; if (r_ptr < ptr)
 		jae		@f							; {
 		mov		left, r_ptr					;     left = r_ptr
 		jmp		.loop						; }
-;---[end of main loop]---------------------
+;---[End of main loop]---------------------
 @@:		cmp		l_ptr, ptr					; else if (l_ptr > ptr)
 		jbe		@f							; {
 		mov		right, l_ptr				;     right = l_ptr
 		jmp		.loop						; }
-;---[end of main loop]---------------------
+;---[End of main loop]---------------------
 @@:		ret									; else exit from the procedure
 }
 
@@ -584,44 +580,217 @@ Median_flt64:		QUARTILE_FLT	Quartile2_sint64, d
 ;==============================================================================;
 
 ; Unsigned integer types
-LowQuart_uint8:		QUARTILE_INT	Quartile1_uint8, al
-LowQuart_uint16:	QUARTILE_INT	Quartile1_uint16, ax
-LowQuart_uint32:	QUARTILE_INT	Quartile1_uint32, eax
-LowQuart_uint64:	QUARTILE_INT	Quartile1_uint64, rax
+LowerQuart_uint8:	QUARTILE_INT	Quartile1_uint8, al
+LowerQuart_uint16:	QUARTILE_INT	Quartile1_uint16, ax
+LowerQuart_uint32:	QUARTILE_INT	Quartile1_uint32, eax
+LowerQuart_uint64:	QUARTILE_INT	Quartile1_uint64, rax
 
 ; Signed integer types
-LowQuart_sint8:		QUARTILE_INT	Quartile1_sint8, al
-LowQuart_sint16:	QUARTILE_INT	Quartile1_sint16, ax
-LowQuart_sint32:	QUARTILE_INT	Quartile1_sint32, eax
-LowQuart_sint64:	QUARTILE_INT	Quartile1_sint64, rax
+LowerQuart_sint8:	QUARTILE_INT	Quartile1_sint8, al
+LowerQuart_sint16:	QUARTILE_INT	Quartile1_sint16, ax
+LowerQuart_sint32:	QUARTILE_INT	Quartile1_sint32, eax
+LowerQuart_sint64:	QUARTILE_INT	Quartile1_sint64, rax
 
 ; Floating-point types
-LowQuart_flt32:		QUARTILE_FLT	Quartile1_sint32, s
-LowQuart_flt64:		QUARTILE_FLT	Quartile1_sint64, d
+LowerQuart_flt32:	QUARTILE_FLT	Quartile1_sint32, s
+LowerQuart_flt64:	QUARTILE_FLT	Quartile1_sint64, d
 
 ;==============================================================================;
 ;       Upper quartile                                                         ;
 ;==============================================================================;
 
 ; Unsigned integer types
-UpQuart_uint8:		QUARTILE_INT	Quartile3_uint8, al
-UpQuart_uint16:		QUARTILE_INT	Quartile3_uint16, ax
-UpQuart_uint32:		QUARTILE_INT	Quartile3_uint32, eax
-UpQuart_uint64:		QUARTILE_INT	Quartile3_uint64, rax
+UpperQuart_uint8:	QUARTILE_INT	Quartile3_uint8, al
+UpperQuart_uint16:	QUARTILE_INT	Quartile3_uint16, ax
+UpperQuart_uint32:	QUARTILE_INT	Quartile3_uint32, eax
+UpperQuart_uint64:	QUARTILE_INT	Quartile3_uint64, rax
 
 ; Signed integer types
-UpQuart_sint8:		QUARTILE_INT	Quartile3_sint8, al
-UpQuart_sint16:		QUARTILE_INT	Quartile3_sint16, ax
-UpQuart_sint32:		QUARTILE_INT	Quartile3_sint32, eax
-UpQuart_sint64:		QUARTILE_INT	Quartile3_sint64, rax
+UpperQuart_sint8:	QUARTILE_INT	Quartile3_sint8, al
+UpperQuart_sint16:	QUARTILE_INT	Quartile3_sint16, ax
+UpperQuart_sint32:	QUARTILE_INT	Quartile3_sint32, eax
+UpperQuart_sint64:	QUARTILE_INT	Quartile3_sint64, rax
 
 ; Floating-point types
-UpQuart_flt32:		QUARTILE_FLT	Quartile3_sint32, s
-UpQuart_flt64:		QUARTILE_FLT	Quartile3_sint64, d
+UpperQuart_flt32:	QUARTILE_FLT	Quartile3_sint32, s
+UpperQuart_flt64:	QUARTILE_FLT	Quartile3_sint64, d
 
 ;==============================================================================;
 ;       Mid-range                                                              ;
 ;==============================================================================;
+macro	MAXMIN	maxvalue, minvalue, x
+{
+;---[Parameters]---------------------------
+array	equ		rdi							; pointer to array
+size	equ		rsi							; array size (count of elements)
+;---[Internal variables]-------------------
+index	equ		rax							; offset from beginning of array
+aindex	equ		rcx							; array offset from vector boundary
+fmask	equ		r9							; result of pattern search
+ptr		equ		r10							; temporary pointer to array
+max		equ		xmm0						; max value
+min		equ		xmm1						; min value
+temp	equ		xmm2						; temporary register
+max0	equ		xmm3						; intermediate max value #1
+max1	equ		xmm4						; intermediate max value #2
+max2	equ		xmm5						; intermediate max value #3
+max3	equ		xmm6						; intermediate max value #4
+max4	equ		xmm7						; intermediate max value #5
+min0	equ		xmm8						; intermediate min value #1
+min1	equ		xmm9						; intermediate min value #2
+min2	equ		xmm10						; intermediate min value #3
+min3	equ		xmm11						; intermediate min value #4
+min4	equ		xmm12						; intermediate min value #5
+maxinf	equ		xmm13						; max infinity value
+mininf	equ		xmm14						; min infinity value
+flags	equ		xmm15						; NaN matching flags
+blend	equ		max							; blending mask
+if x eq s
+nan		= DMASK_FLT32						; NaN
+scale	= 2									; scale value
+else if x eq d
+nan		= DMASK_FLT64						; NaN
+scale	= 3									; scale value
+end if
+bytes	= 1 shl scale						; size of array element (bytes)
+bmask	= bytes - 1							; elements aligning mask
+;------------------------------------------
+	prefetchnta	[array]						; prefetch data
+		shftl	size, scale					; convert size to bytes
+		jz		.error						; if (size == 0), then go to error branch
+		initreg	max, index, maxvalue		; max = maxvalue
+		initreg	min, index, minvalue		; min = minvalue
+		test	array, bmask				; if elements have wrong alignment
+		jnz		.sloop						;     then skip vector code
+;---[Normal execution branch]--------------
+		mov		aindex, array
+		and		aindex, VMASK				; get array offset from vector boundary
+		sub		array, aindex				; align pointer to vector boundary
+		mov		ptr, array					; ptr = array
+		shufp#x	max, max, 0x0				; duplicate value through the entire register
+		shufp#x	min, min, 0x0				; duplicate value through the entire register
+		movap#x	max0, max					; max0 = maxvalue
+		movap#x	min0, min					; min0 = minvalue
+		movap#x	max1, max					; max1 = maxvalue
+		movap#x	min1, min					; min1 = minvalue
+		movap#x	max2, max					; max2 = maxvalue
+		movap#x	min2, min					; min2 = minvalue
+		movap#x	max3, max					; max3 = maxvalue
+		movap#x	min3, min					; min3 = minvalue
+		movap#x	max4, max					; max4 = maxvalue
+		movap#x	min4, min					; min4 = minvalue
+		movap#x	maxinf, max					; maxinf = maxvalue
+		movap#x	mininf, min					; mininf = minvalue
+		xorp#x	flags, flags				; flags = 0
+;---[Unaligned operation]------------------
+		add		size, aindex				; size += aindex
+		shl		aindex, VSCALE				; compute shift in mask array
+		movap#x	blend, dqword [maskS1 + aindex]
+		xor		index, index				; index = 0
+		sub		size, VSIZE					; if (size <= VSIZE)
+		jbe		.tail						;     then process array tail
+		movap#x	temp, [array]				; temp = array[0]
+	blendvp#x	temp, maxinf				; blend temp with max infinity values
+		max#p#x	max0, temp					; find max value
+		movap#x	temp, [array]				; temp = array[0]
+	blendvp#x	temp, mininf				; blend temp with min infinity values
+		min#p#x	min0, temp					; find min value
+		cmpp#x	temp, temp, 3				; check values for NANs
+		orp#x	flags, temp					; accumulate NaN check results
+		xorp#x	blend, blend				; blend = 0
+;---[Vector loop]--------------------------
+.vloop:	add		index, VSIZE				; index += VSIZE
+		sub		size, VSIZE					; if (size <= VSIZE)
+		jbe		.tail						;     then process array tail
+		movap#x	temp, [ptr + 1*VSIZE]		; temp = ptr[1]
+		max#p#x	max1, temp					; find max value
+		min#p#x	min1, temp					; find min value
+		cmpp#x	temp, temp, 3				; check values for NANs
+		orp#x	flags, temp					; accumulate NaN check results
+		add		index, VSIZE				; index += VSIZE
+		sub		size, VSIZE					; if (size <= VSIZE)
+		jbe		.tail						;     then process array tail
+		movap#x	temp, [ptr + 2*VSIZE]		; temp = ptr[2]
+		max#p#x	max2, temp					; find max value
+		min#p#x	min2, temp					; find min value
+		cmpp#x	temp, temp, 3				; check values for NANs
+		orp#x	flags, temp					; accumulate NaN check results
+		add		index, VSIZE				; index += VSIZE
+		sub		size, VSIZE					; if (size <= VSIZE)
+		jbe		.tail						;     then process array tail
+		movap#x	temp, [ptr + 3*VSIZE]		; temp = ptr[3]
+		max#p#x	max3, temp					; find max value
+		min#p#x	min3, temp					; find min value
+		cmpp#x	temp, temp, 3				; check values for NANs
+		orp#x	flags, temp					; accumulate NaN check results
+		add		index, VSIZE				; index += VSIZE
+		sub		size, VSIZE					; if (size <= VSIZE)
+		jbe		.tail						;     then process array tail
+		movap#x	temp, [ptr + 4*VSIZE]		; temp = ptr[4]
+		max#p#x	max4, temp					; find max value
+		min#p#x	min4, temp					; find min value
+		cmpp#x	temp, temp, 3				; check values for NANs
+		orp#x	flags, temp					; accumulate NaN check results
+	prefetchnta	[ptr + PSTEP]				; prefetch next portion of data
+		add		ptr, 4 * VSIZE				; ptr += 4 * VSIZE
+		jmp		.vloop						; do while (true)
+;---[End of vector loop]-------------------
+.tail:	shl		size, VSCALE				; compute shift in mask array
+		andnp#x	blend, dqword [maskS2 + size]
+		movap#x	temp, [array + index]		; temp = array[index]
+	blendvp#x	maxinf, temp				; blend temp with max infinity values
+	blendvp#x	mininf, temp				; blend temp with min infinity values
+		max#p#x	max0, maxinf				; find max value
+		min#p#x	min0, mininf				; find min value
+		cmpp#x	maxinf, maxinf, 3			; check values for NANs
+		orp#x	flags, maxinf				; accumulate NaN check results
+		cmpp#x	mininf, mininf, 3			; check values for NANs
+		orp#x	flags, mininf				; accumulate NaN check results
+	pmovmskb	fmask, flags				; save check results to fmask
+		and		fmask, fmask				; if NAN is found,
+		jnz		.error						;     then go to error branch
+		max#p#x	max1, max2
+		min#p#x	min1, min2
+		max#p#x	max3, max4
+		min#p#x	min3, min4
+		max#p#x	max1, max3
+		min#p#x	min1, min3
+		max#p#x	max0, max1					; find max value from all accumulators
+		min#p#x	min0, min1					; find min value from all accumulators
+if x eq s
+		movhlps	temp, max0					; temp = upper half of max0
+		max#p#x	max0, temp					; find max value
+		movhlps	temp, min0					; temp = upper half of min0
+		min#p#x	min0, temp					; find min value
+end if
+		movap#x	temp, max0					; temp = max0
+		shufp#x	temp, temp, 0x1				; shuffle values in temp register
+		max#s#x	max0, temp					; find max value
+		movap#x	temp, min0					; temp = min0
+		shufp#x	temp, temp, 0x1				; shuffle values in temp register
+		min#s#x	min0, temp					; find min value
+		movs#x	max, max0					; return max0
+		movs#x	min, min0					; return min0
+		ret
+;---[Scalar loop]--------------------------
+.sloop:	movs#x	temp, [array]				; temp = array[0]
+		max#s#x	max, temp					; find max value
+		min#s#x	min, temp					; find min value
+		comis#x	temp, temp					; if NAN is found,
+		jp		.error						;     then go to error branch
+		add		array, bytes				; array++
+		sub		size, bytes					; size--
+		jnz		.sloop						; do while (size != 0)
+;---[End of scalar loop]-------------------
+		ret
+;---[Error branch]-------------------------
+.error:	initreg	max, index, nan
+		initreg	min, index, nan				; return {NaN, NaN}
+		ret
+}
+MaxMin_flt32:	MAXMIN	MINF_FLT32, PINF_FLT32, s
+MaxMin_flt64:	MAXMIN	MINF_FLT64, PINF_FLT64, d
+;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 macro	MIDRANGE	x
 {
 ;---[Parameters]---------------------------
@@ -629,47 +798,21 @@ array	equ		rdi							; data array
 size	equ		rsi							; array size (count of elements)
 ;---[Internal variables]-------------------
 temp	equ		rax							; temporary register
-result	equ		xmm0						; result register
-half	equ		xmm1						; 0.5
-stack	equ		rsp							; stack pointer
-s_array	equ		stack +  0 * 8				; stack position of "array" variable
-s_size	equ		stack +  1 * 8				; stack position of "size" variable
-s_res	equ		stack +  2 * 8				; stack position of "result" variable
+max		equ		xmm0						; max value
+min		equ		xmm1						; min value
+half	equ		xmm2						; 0.5
 if x eq s
-Min		= Min_flt32							; Minimum function (flt32_t type)
-Max		= Max_flt32							; Maximum function (flt32_t type)
+MaxMin	= MaxMin_flt32						; MaxMin function (flt32_t type)
 halfval	= PHALF_FLT32						; +0.5
-nan		= DMASK_FLT32						; NaN
 else if x eq d
-Min		= Min_flt64							; Minimum function (flt64_t type)
-Max		= Max_flt64							; Maximum function (flt64_t type)
+MaxMin	= MaxMin_flt64						; MaxMin function (flt64_t type)
 halfval	= PHALF_FLT64						; +0.5
-nan		= DMASK_FLT64						; NaN
 end if
-space	= 3 * 8								; stack size required by the procedure
 ;------------------------------------------
-		test	size, size					; if (size == 0)
-		jz		.error						;     then go to error branch
-;---[Normal execution branch]--------------
-		sub		stack, space				; reserving stack size for local vars
-;---[Call min function]--------------------
-		mov		[s_array], array			; save array variable into the stack
-		mov		[s_size], size				; save size variable into the stack
-		call	Min							; call function Min (array[], size)
-;------------------------------------------
-		movs#x	[s_res], result				; save min value into the stack
-;---[Call max function]--------------------
-		mov		array, [s_array]			; get array variable from the stack
-		mov		size, [s_size]				; get size variable from the stack
-		call	Max							; call function Max (array[], size)
-;---[Computing midrange]-------------------
+		call	MaxMin						; call MaxMin (array[], size)
 		initreg	half, temp, halfval			; half = 0.5
-		adds#x	result, [s_res]				; result = max(array[]) + min(array[])
-		muls#x	result, half				; result = 0.5 * max(array[]) + min(array[])
-		add		stack, space				; restoring back the stack pointer
-		ret
-;---[Error branch]-------------------------
-.error:	initreg	result, temp, nan			; return NaN
+		adds#x	max, min					; result = max(array[]) + min(array[])
+		muls#x	max, half					; result = 0.5 * max(array[]) + min(array[])
 		ret
 }
 Midrange_flt32:	MIDRANGE	s
@@ -1024,41 +1167,17 @@ array	equ		rdi							; data array
 size	equ		rsi							; array size (count of elements)
 ;---[Internal variables]-------------------
 temp	equ		rax							; temporary register
-result	equ		xmm0						; result register
-stack	equ		rsp							; stack pointer
-s_array	equ		stack +  0 * 8				; stack position of "array" variable
-s_size	equ		stack +  1 * 8				; stack position of "size" variable
-s_res	equ		s_array						; stack position of "result" variable
+max		equ		xmm0						; max value
+min		equ		xmm1						; min value
 if x eq s
-Min		= Min_flt32							; Minimum function (flt32_t type)
-Max		= Max_flt32							; Maximum function (flt32_t type)
-nan		= DMASK_FLT32						; NaN
+MaxMin	= MaxMin_flt32						; MaxMin function (flt32_t type)
 else if x eq d
-Min		= Min_flt64							; Minimum function (flt64_t type)
-Max		= Max_flt64							; Maximum function (flt64_t type)
-nan		= DMASK_FLT64						; NaN
+MaxMin	= MaxMin_flt64						; MaxMin function (flt64_t type)
 end if
-space	= 3 * 8								; stack size required by the procedure
 ;------------------------------------------
-		test	size, size					; if (size == 0)
-		jz		.error						;     then go to error branch
-;---[Normal execution branch]--------------
-		sub		stack, space				; reserving stack size for local vars
-;---[Call min function]--------------------
-		mov		[s_array], array			; push array variable into the stack
-		mov		[s_size], size				; push size variable into the stack
-		call	Min							; call function Min (array[], size)
-;---[Call max function]--------------------
-		mov		array, [s_array]			; pop array variable from the stack
-		mov		size, [s_size]				; pop size variable from the stack
-		movs#x	[s_res], result				; push res variable into the stack
-		call	Max							; call function Max (array[], size)
-;---[Compute range]------------------------
-		subs#x	result, [s_res]				; res = max(array[]) - min(array[])
-		add		stack, space				; restoring back the stack pointer
-		ret
-;---[Error branch]-------------------------
-.error:	initreg	result, temp, nan			; return NaN
+		call	MaxMin						; call MaxMin (array[], size)
+		initreg	half, temp, halfval			; half = 0.5
+		subs#x	max, min					; result = max(array[]) - min(array[])
 		ret
 }
 Range_flt32:	RANGE	s
@@ -1444,12 +1563,8 @@ Kurtosis_flt32:	KURTOSIS	s
 Kurtosis_flt64:	KURTOSIS	d
 
 ;******************************************************************************;
-;       Other functions                                                        ;
-;******************************************************************************;
-
-;==============================================================================;
 ;       Covariance                                                             ;
-;==============================================================================;
+;******************************************************************************;
 macro	COVARIANCE		x
 {
 ;---[Parameters]---------------------------
@@ -1615,10 +1730,14 @@ bmask	= bytes - 1							; elements aligning mask
 Covariance_flt32:	COVARIANCE	s
 Covariance_flt64:	COVARIANCE	d
 
-;==============================================================================;
+;******************************************************************************;
 ;       Correlation                                                            ;
+;******************************************************************************;
+
 ;==============================================================================;
-macro	CORRELATION		x
+;       Pearson correlation                                                    ;
+;==============================================================================;
+macro	PEARSON_CORRELATION		x
 {
 ;---[Parameters]---------------------------
 array1	equ		rdi							; pointer to first array
@@ -1813,8 +1932,8 @@ bmask	= bytes - 1							; elements aligning mask
 .error:	initreg	result, index, nan			; return NaN
 		ret
 }
-Correlation_flt32:	CORRELATION	s
-Correlation_flt64:	CORRELATION	d
+PearsonCorrelation_flt32:	PEARSON_CORRELATION	s
+PearsonCorrelation_flt64:	PEARSON_CORRELATION	d
 
 ;###############################################################################
 ;#                                 END OF FILE                                 #
