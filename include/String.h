@@ -228,32 +228,68 @@ static void ReplaceString (const char32_t* array[], size_t size, const char32_t 
 //****************************************************************************//
 
 //============================================================================//
+//      Insertion sort                                                        //
+//============================================================================//
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 //      Array sorting                                                         //
-//============================================================================//
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
 // Ascending sort order
-static void SortAsc (const char8_t* array[], size_t size, CmpChar8 func);
-static void SortAsc (const char16_t* array[], size_t size, CmpChar16 func);
-static void SortAsc (const char32_t* array[], size_t size, CmpChar32 func);
+static void InsertSortAsc (const char8_t* array[], size_t size, CmpChar8 func);
+static void InsertSortAsc (const char16_t* array[], size_t size, CmpChar16 func);
+static void InsertSortAsc (const char32_t* array[], size_t size, CmpChar32 func);
 
 // Descending sort order
-static void SortDsc (const char8_t* array[], size_t size, CmpChar8 func);
-static void SortDsc (const char16_t* array[], size_t size, CmpChar16 func);
-static void SortDsc (const char32_t* array[], size_t size, CmpChar32 func);
+static void InsertSortDsc (const char8_t* array[], size_t size, CmpChar8 func);
+static void InsertSortDsc (const char16_t* array[], size_t size, CmpChar16 func);
+static void InsertSortDsc (const char32_t* array[], size_t size, CmpChar32 func);
 
-//============================================================================//
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 //      Key sorting                                                           //
-//============================================================================//
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
 // Ascending sort order
-static void SortKeyAsc (const char8_t* key[], const void* ptr[], size_t size, CmpChar8 func);
-static void SortKeyAsc (const char16_t* key[], const void* ptr[], size_t size, CmpChar16 func);
-static void SortKeyAsc (const char32_t* key[], const void* ptr[], size_t size, CmpChar32 func);
+static void InsertSortKeyAsc (const char8_t* key[], const void* ptr[], size_t size, CmpChar8 func);
+static void InsertSortKeyAsc (const char16_t* key[], const void* ptr[], size_t size, CmpChar16 func);
+static void InsertSortKeyAsc (const char32_t* key[], const void* ptr[], size_t size, CmpChar32 func);
 
 // Descending sort order
-static void SortKeyDsc (const char8_t* key[], const void* ptr[], size_t size, CmpChar8 func);
-static void SortKeyDsc (const char16_t* key[], const void* ptr[], size_t size, CmpChar16 func);
-static void SortKeyDsc (const char32_t* key[], const void* ptr[], size_t size, CmpChar32 func);
+static void InsertSortKeyDsc (const char8_t* key[], const void* ptr[], size_t size, CmpChar8 func);
+static void InsertSortKeyDsc (const char16_t* key[], const void* ptr[], size_t size, CmpChar16 func);
+static void InsertSortKeyDsc (const char32_t* key[], const void* ptr[], size_t size, CmpChar32 func);
+
+//============================================================================//
+//      Quick sort                                                            //
+//============================================================================//
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//      Array sorting                                                         //
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+
+// Ascending sort order
+static void QuickSortAsc (const char8_t* array[], size_t size, CmpChar8 func);
+static void QuickSortAsc (const char16_t* array[], size_t size, CmpChar16 func);
+static void QuickSortAsc (const char32_t* array[], size_t size, CmpChar32 func);
+
+// Descending sort order
+static void QuickSortDsc (const char8_t* array[], size_t size, CmpChar8 func);
+static void QuickSortDsc (const char16_t* array[], size_t size, CmpChar16 func);
+static void QuickSortDsc (const char32_t* array[], size_t size, CmpChar32 func);
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//      Key sorting                                                           //
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+
+// Ascending sort order
+static void QuickSortKeyAsc (const char8_t* key[], const void* ptr[], size_t size, CmpChar8 func);
+static void QuickSortKeyAsc (const char16_t* key[], const void* ptr[], size_t size, CmpChar16 func);
+static void QuickSortKeyAsc (const char32_t* key[], const void* ptr[], size_t size, CmpChar32 func);
+
+// Descending sort order
+static void QuickSortKeyDsc (const char8_t* key[], const void* ptr[], size_t size, CmpChar8 func);
+static void QuickSortKeyDsc (const char16_t* key[], const void* ptr[], size_t size, CmpChar16 func);
+static void QuickSortKeyDsc (const char32_t* key[], const void* ptr[], size_t size, CmpChar32 func);
 
 //****************************************************************************//
 //      Reversing elements order                                              //
@@ -566,32 +602,68 @@ void String_ReplaceString_char32 (const char32_t* array[], size_t size, const ch
 //****************************************************************************//
 
 //============================================================================//
+//      Insertion sort                                                        //
+//============================================================================//
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 //      Array sorting                                                         //
-//============================================================================//
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
 // Ascending sort order
-void String_SortAsc_char8 (const char8_t* array[], size_t size, CmpChar8 func);
-void String_SortAsc_char16 (const char16_t* array[], size_t size, CmpChar16 func);
-void String_SortAsc_char32 (const char32_t* array[], size_t size, CmpChar32 func);
+void String_InsertSortAsc_char8 (const char8_t* array[], size_t size, CmpChar8 func);
+void String_InsertSortAsc_char16 (const char16_t* array[], size_t size, CmpChar16 func);
+void String_InsertSortAsc_char32 (const char32_t* array[], size_t size, CmpChar32 func);
 
 // Descending sort order
-void String_SortDsc_char8 (const char8_t* array[], size_t size, CmpChar8 func);
-void String_SortDsc_char16 (const char16_t* array[], size_t size, CmpChar16 func);
-void String_SortDsc_char32 (const char32_t* array[], size_t size, CmpChar32 func);
+void String_InsertSortDsc_char8 (const char8_t* array[], size_t size, CmpChar8 func);
+void String_InsertSortDsc_char16 (const char16_t* array[], size_t size, CmpChar16 func);
+void String_InsertSortDsc_char32 (const char32_t* array[], size_t size, CmpChar32 func);
 
-//============================================================================//
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 //      Key sorting                                                           //
-//============================================================================//
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
 // Ascending sort order
-void String_SortKeyAsc_char8 (const char8_t* key[], const void* ptr[], size_t size, CmpChar8 func);
-void String_SortKeyAsc_char16 (const char16_t* key[], const void* ptr[], size_t size, CmpChar16 func);
-void String_SortKeyAsc_char32 (const char32_t* key[], const void* ptr[], size_t size, CmpChar32 func);
+void String_InsertSortKeyAsc_char8 (const char8_t* key[], const void* ptr[], size_t size, CmpChar8 func);
+void String_InsertSortKeyAsc_char16 (const char16_t* key[], const void* ptr[], size_t size, CmpChar16 func);
+void String_InsertSortKeyAsc_char32 (const char32_t* key[], const void* ptr[], size_t size, CmpChar32 func);
 
 // Descending sort order
-void String_SortKeyDsc_char8 (const char8_t* key[], const void* ptr[], size_t size, CmpChar8 func);
-void String_SortKeyDsc_char16 (const char16_t* key[], const void* ptr[], size_t size, CmpChar16 func);
-void String_SortKeyDsc_char32 (const char32_t* key[], const void* ptr[], size_t size, CmpChar32 func);
+void String_InsertSortKeyDsc_char8 (const char8_t* key[], const void* ptr[], size_t size, CmpChar8 func);
+void String_InsertSortKeyDsc_char16 (const char16_t* key[], const void* ptr[], size_t size, CmpChar16 func);
+void String_InsertSortKeyDsc_char32 (const char32_t* key[], const void* ptr[], size_t size, CmpChar32 func);
+
+//============================================================================//
+//      Quick sort                                                            //
+//============================================================================//
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//      Array sorting                                                         //
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+
+// Ascending sort order
+void String_QuickSortAsc_char8 (const char8_t* array[], size_t size, CmpChar8 func);
+void String_QuickSortAsc_char16 (const char16_t* array[], size_t size, CmpChar16 func);
+void String_QuickSortAsc_char32 (const char32_t* array[], size_t size, CmpChar32 func);
+
+// Descending sort order
+void String_QuickSortDsc_char8 (const char8_t* array[], size_t size, CmpChar8 func);
+void String_QuickSortDsc_char16 (const char16_t* array[], size_t size, CmpChar16 func);
+void String_QuickSortDsc_char32 (const char32_t* array[], size_t size, CmpChar32 func);
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//      Key sorting                                                           //
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+
+// Ascending sort order
+void String_QuickSortKeyAsc_char8 (const char8_t* key[], const void* ptr[], size_t size, CmpChar8 func);
+void String_QuickSortKeyAsc_char16 (const char16_t* key[], const void* ptr[], size_t size, CmpChar16 func);
+void String_QuickSortKeyAsc_char32 (const char32_t* key[], const void* ptr[], size_t size, CmpChar32 func);
+
+// Descending sort order
+void String_QuickSortKeyDsc_char8 (const char8_t* key[], const void* ptr[], size_t size, CmpChar8 func);
+void String_QuickSortKeyDsc_char16 (const char16_t* key[], const void* ptr[], size_t size, CmpChar16 func);
+void String_QuickSortKeyDsc_char32 (const char32_t* key[], const void* ptr[], size_t size, CmpChar32 func);
 
 //****************************************************************************//
 //      Reversing elements order                                              //

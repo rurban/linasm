@@ -315,44 +315,44 @@ public	Replace					as	'_ZN6String13ReplaceStringEPPKimS1_S1_PFxS1_S1_E'
 ;******************************************************************************;
 
 ;==============================================================================;
-;       Array sorting                                                          ;
+;       Insertion sort                                                         ;
 ;==============================================================================;
 
 ; Ascending sort order
-public	SortAsc					as	"String_SortAsc_char8"
-public	SortAsc					as	"String_SortAsc_char16"
-public	SortAsc					as	"String_SortAsc_char32"
-public	SortAsc					as	"_ZN6String7SortAscEPPKcmPFxS1_S1_E"
-public	SortAsc					as	"_ZN6String7SortAscEPPKsmPFxS1_S1_E"
-public	SortAsc					as	"_ZN6String7SortAscEPPKimPFxS1_S1_E"
+public	InsertSortKeyAsc		as	"String_InsertSortKeyAsc_char8"
+public	InsertSortKeyAsc		as	"String_InsertSortKeyAsc_char16"
+public	InsertSortKeyAsc		as	"String_InsertSortKeyAsc_char32"
+public	InsertSortKeyAsc		as	"_ZN6String16InsertSortKeyAscEPPKcPPKvmPFxS1_S1_E"
+public	InsertSortKeyAsc		as	"_ZN6String16InsertSortKeyAscEPPKsPPKvmPFxS1_S1_E"
+public	InsertSortKeyAsc		as	"_ZN6String16InsertSortKeyAscEPPKiPPKvmPFxS1_S1_E"
 
 ; Descending sort order
-public	SortDsc					as	"String_SortDsc_char8"
-public	SortDsc					as	"String_SortDsc_char16"
-public	SortDsc					as	"String_SortDsc_char32"
-public	SortDsc					as	"_ZN6String7SortDscEPPKcmPFxS1_S1_E"
-public	SortDsc					as	"_ZN6String7SortDscEPPKsmPFxS1_S1_E"
-public	SortDsc					as	"_ZN6String7SortDscEPPKimPFxS1_S1_E"
+public	InsertSortKeyDsc		as	"String_InsertSortKeyDsc_char8"
+public	InsertSortKeyDsc		as	"String_InsertSortKeyDsc_char16"
+public	InsertSortKeyDsc		as	"String_InsertSortKeyDsc_char32"
+public	InsertSortKeyDsc		as	"_ZN6String16InsertSortKeyDscEPPKcPPKvmPFxS1_S1_E"
+public	InsertSortKeyDsc		as	"_ZN6String16InsertSortKeyDscEPPKsPPKvmPFxS1_S1_E"
+public	InsertSortKeyDsc		as	"_ZN6String16InsertSortKeyDscEPPKiPPKvmPFxS1_S1_E"
 
 ;==============================================================================;
-;       Key sorting                                                            ;
+;       Quick sort                                                             ;
 ;==============================================================================;
 
 ; Ascending sort order
-public	SortKeyAsc				as	"String_SortKeyAsc_char8"
-public	SortKeyAsc				as	"String_SortKeyAsc_char16"
-public	SortKeyAsc				as	"String_SortKeyAsc_char32"
-public	SortKeyAsc				as	"_ZN6String10SortKeyAscEPPKcPPKvmPFxS1_S1_E"
-public	SortKeyAsc				as	"_ZN6String10SortKeyAscEPPKsPPKvmPFxS1_S1_E"
-public	SortKeyAsc				as	"_ZN6String10SortKeyAscEPPKiPPKvmPFxS1_S1_E"
+public	QuickSortKeyAsc			as	"String_QuickSortKeyAsc_char8"
+public	QuickSortKeyAsc			as	"String_QuickSortKeyAsc_char16"
+public	QuickSortKeyAsc			as	"String_QuickSortKeyAsc_char32"
+public	QuickSortKeyAsc			as	"_ZN6String15QuickSortKeyAscEPPKcPPKvmPFxS1_S1_E"
+public	QuickSortKeyAsc			as	"_ZN6String15QuickSortKeyAscEPPKsPPKvmPFxS1_S1_E"
+public	QuickSortKeyAsc			as	"_ZN6String15QuickSortKeyAscEPPKiPPKvmPFxS1_S1_E"
 
 ; Descending sort order
-public	SortKeyDsc				as	"String_SortKeyDsc_char8"
-public	SortKeyDsc				as	"String_SortKeyDsc_char16"
-public	SortKeyDsc				as	"String_SortKeyDsc_char32"
-public	SortKeyDsc				as	"_ZN6String10SortKeyDscEPPKcPPKvmPFxS1_S1_E"
-public	SortKeyDsc				as	"_ZN6String10SortKeyDscEPPKsPPKvmPFxS1_S1_E"
-public	SortKeyDsc				as	"_ZN6String10SortKeyDscEPPKiPPKvmPFxS1_S1_E"
+public	QuickSortKeyDsc			as	"String_QuickSortKeyDsc_char8"
+public	QuickSortKeyDsc			as	"String_QuickSortKeyDsc_char16"
+public	QuickSortKeyDsc			as	"String_QuickSortKeyDsc_char32"
+public	QuickSortKeyDsc			as	"_ZN6String15QuickSortKeyDscEPPKcPPKvmPFxS1_S1_E"
+public	QuickSortKeyDsc			as	"_ZN6String15QuickSortKeyDscEPPKsPPKvmPFxS1_S1_E"
+public	QuickSortKeyDsc			as	"_ZN6String15QuickSortKeyDscEPPKiPPKvmPFxS1_S1_E"
 
 ;******************************************************************************;
 ;       Reversing elements order                                               ;
@@ -2819,126 +2819,91 @@ space	= 5 * 8								; stack size required by the procedure
 ;******************************************************************************;
 
 ;==============================================================================;
-;       Array sorting                                                          ;
+;       Insertion sort                                                         ;
 ;==============================================================================;
-macro	SORT	op1, op2
+macro	INSERTSORT	op
 {
 ;---[Parameters]---------------------------
 array	equ		rdi							; pointer to strings array
-size	equ		rsi							; array size (count of elements)
-func	equ		rdx							; pointer to string compare function
+ptr		equ		rsi							; pointer to array of pointers to data
+size	equ		rdx							; array size (count of elements)
+func	equ		rcx							; pointer to string func function
 ;---[Internal variables]-------------------
-result	equ		rax							; result register
-median	equ		rax							; median value
 left	equ		r8							; left index
 right	equ		r9							; right index
-ptr1	equ		r10							; temporary pointer #1
-ptr2	equ		r11							; temporary pointer #2
-lsize	equ		left						; size of left part of array
-rsize	equ		size						; size of right part of array
-larray	equ		array						; pointer to left part of array
-rarray	equ		right						; pointer to right part of array
+key1	equ		r12							; temporary key #1
+key2	equ		r13							; temporary key #2
+ptr1	equ		r14							; temporary ptr #1
+ptr2	equ		r15							; temporary ptr #2
 stack	equ		rsp							; stack pointer
-s_array	equ		stack + 0 * 8				; stack position of "array" variable
-s_size	equ		stack + 1 * 8				; stack position of "size" variable
-s_func	equ		stack + 2 * 8				; stack position of "func" variable
-s_med	equ		stack + 3 * 8				; stack position of "median" variable
-s_left	equ		stack + 4 * 8				; stack position of "left" variable
-s_right	equ		stack + 5 * 8				; stack position of "right" variable
-space	= 7 * 8								; stack size required by the procedure
+s_key1	equ		stack + 0 * 8				; stack position of "key1" variable
+s_key2	equ		stack + 1 * 8				; stack position of "key2" variable
+s_ptr1	equ		stack + 2 * 8				; stack position of "ptr1" variable
+s_ptr2	equ		stack + 3 * 8				; stack position of "ptr2" variable
+s_array	equ		stack + 4 * 8				; stack position of "array" variable
+s_ptr	equ		stack + 5 * 8				; stack position of "ptr" variable
+s_size	equ		stack + 6 * 8				; stack position of "size" variable
+s_func	equ		stack + 7 * 8				; stack position of "func" variable
+s_left	equ		stack + 8 * 8				; stack position of "left" variable
+s_right	equ		stack + 9 * 8				; stack position of "right" variable
+space	= 11 * 8							; stack size required by the procedure
 ;------------------------------------------
 		cmp		size, 1						; if (size <= 1)
 		jbe		.exit						;     then go to exit
-;---[Normal execution branch]--------------
-.start:	sub		stack, space				; reserving stack size for local vars
-		mov		[s_func], func				; save "func" variable into the stack
-;---[Sorting loop]-------------------------
-.sort:	mov		median, size
-		shr		median, 1					; median = size / 2
-		mov		left, -1					; left = -1
-		mov		right, size					; right = size
-		mov		median, [array + median * 8]; median = array[median]
+		sub		stack, space				; reserving stack size for local vars
+		mov		[s_key1], key1				; save old value of "key1" variable
+		mov		[s_key2], key2				; save old value of "key2" variable
+		mov		[s_ptr1], ptr1				; save old value of "ptr1" variable
+		mov		[s_ptr2], ptr2				; save old value of "ptr2" variable
 		mov		[s_array], array			; save "array" variable into the stack
+		mov		[s_ptr], ptr				; save "ptr" variable into the stack
 		mov		[s_size], size				; save "size" variable into the stack
-		mov		[s_med], median				; save "median" variable into the stack
+		mov		[s_func], func				; save "func" variable into the stack
+		mov		left, 1						; left = 1
 		mov		[s_left], left				; save "left" variable into the stack
+;---[Sorting loop]-------------------------
+.loop:	mov		right, left					; right = left
 		mov		[s_right], right			; save "right" variable into the stack
-		jmp		.loop1
-;---[Swap loop]----------------------------
-.swap:	mov		ptr1, [array + left * 8]	; ptr1 = array[left]
-		mov		ptr2, [array + right * 8]	; ptr1 = array[left]
-		xchg	ptr1, ptr2
-		mov		[array + left * 8], ptr1	; array[left] = ptr2
-		mov		[array + right * 8], ptr2	; array[right] = ptr1
-;---[Internal loop 1]----------------------
-.loop1:	mov		left, [s_left]				; get "left" variable from the stack
-		add		left, 1						; left++
-		mov		[s_left], left				; save "left" variable into the stack
-		mov		param2, [s_med]
-		mov		param1, [array + left * 8]
-		call	qword [s_func]				; result = Compare (array[left], median)
+		mov		key1, [array + right * 8]	; key1 = array[right]
+		mov		ptr1, [ptr + right * 8]		; ptr1 = ptr[right]
+;---[Internal loop]------------------------
+.iloop:	mov		key2, [array + right * 8 - 8]
+		mov		ptr2, [ptr + right * 8 - 8]	; ptr2 = ptr[right-1]
+		mov		param2, key2
+		mov		param1, key1
+		call	qword [s_func]				; result = Compare (key1, key2)
 		mov		array, [s_array]			; get "array" variable from the stack
-		cmp		result, 0					; check compare result
-		j#op1	.loop1						; do while compare condition is true
-;---[Internal loop 2]----------------------
-.loop2:	mov		right, [s_right]			; get "right" variable from the stack
-		sub		right, 1					; right--
-		mov		[s_right], right			; save "right" variable into the stack
-		mov		param2, [s_med]
-		mov		param1, [array + right * 8]
-		call	qword [s_func]				; result = Compare (array[right], median)
-		mov		array, [s_array]			; get "array" variable from the stack
-		cmp		result, 0					; check compare result
-		j#op2	.loop2						; do while compare condition is true
-;------------------------------------------
 		mov		left, [s_left]				; get "left" variable from the stack
 		mov		right, [s_right]			; get "right" variable from the stack
-		cmp		left, right
-		jb		.swap						; do while (left < right)
-;---[End of swap loop]---------------------
-		mov		size, [s_size]				; get "size" variable from the stack
-		add		right, 1
-		sub		rsize, right				; rsize = size - (right + 1)
-		lea		rarray, [array + right * 8]	; rarray = array + (right + 1)
-		cmp		lsize, rsize				; if (lsize <= rsize)
-		ja		.else						; {
-;---[if lsize <= rsize]--------------------
-		cmp		lsize, 1					; if (lsize > 1)
-		jbe		@f							; {
-		mov		[s_array], rarray			; save "rarray" variable into the stack
-		mov		[s_size], rsize				; save "rsize" variable into the stack
-		mov		func, [s_func]				; get "func" variable from the stack
-		mov		size, lsize
-		call	.start						; call Sort (larray, lsize, func)
-		mov		rarray, [s_array]			; get "rarray" variable from the stack
-		mov		rsize, [s_size]				; get "rsize" variable from the stack
-@@:		mov		array, rarray				; }
-		jmp		.end
-;---[else]---------------------------------
-.else:	cmp		rsize, 1					; if (rsize > 1)
-		jbe		@f							; {
-		mov		[s_array], larray			; save "larray" variable into the stack
-		mov		[s_size], lsize				; save "lsize" variable into the stack
-		mov		func, [s_func]				; get "func" variable from the stack
-		mov		array, rarray
-		call	.start						; call Sort (rarray, rsize, func)
-		mov		larray, [s_array]			; get "larray" variable from the stack
-		mov		lsize, [s_size]				; get "lsize" variable from the stack
-@@:		mov		size, lsize					; }
-;---[end if]-------------------------------
-.end:	cmp		size, 1
-		ja		.sort						; do while (size > 1)
+		cmp		result, 0					; if (result op 0)
+		jn#op	.break						; {
+		mov		[array + right * 8], key2	;     array[right] = key2
+		mov		[ptr + right * 8], ptr2		;     ptr[right] = ptr2
+		sub		right, 1					;     right-- }
+		mov		[s_right], right			; save "right" variable into the stack
+		jnz		.iloop						; do while (right != 0)
+;---[End of internal loop]-----------------
+.break:	mov		[array + right * 8], key1	; array[right] = key1
+		mov		[ptr + right * 8], ptr1		; ptr[right] = ptr1
+		add		left, 1						; left++
+		mov		[s_left], left				; save "left" variable into the stack
+		cmp		left, [s_size]
+		jb		.loop						; do while (left < size)
 ;---[End of sorting loop]------------------
+		mov		key1, [s_key1]				; restore old value of "key1" variable
+		mov		key2, [s_key2]				; restore old value of "key2" variable
+		mov		ptr1, [s_ptr1]				; restore old value of "ptr1" variable
+		mov		ptr2, [s_ptr2]				; restore old value of "ptr2" variable
 		add		stack, space				; restoring back the stack pointer
 .exit:	ret
 }
-SortAsc:	SORT	l, g
-SortDsc:	SORT	g, l
+InsertSortKeyAsc:	INSERTSORT	l
+InsertSortKeyDsc:	INSERTSORT	g
 
 ;==============================================================================;
-;       Key sorting                                                            ;
+;       Quick sort                                                             ;
 ;==============================================================================;
-macro	SORT_KEY	op1, op2
+macro	QUICKSORT	insertsort, op1, op2
 {
 ;---[Parameters]---------------------------
 array	equ		rdi							; pointer to strings array
@@ -2948,10 +2913,13 @@ func	equ		rcx							; pointer to string func function
 ;---[Internal variables]-------------------
 result	equ		rax							; result register
 median	equ		rax							; median value
+half	equ		rax							; half of array size
 left	equ		r8							; left index
 right	equ		r9							; right index
-ptr1	equ		r10							; temporary pointer #1
-ptr2	equ		r11							; temporary pointer #2
+ptr1	equ		r10							; temporary ptr #1
+ptr2	equ		r11							; temporary ptr #2
+key1	equ		r12							; temporary key #1
+key2	equ		r13							; temporary key #2
 lsize	equ		left						; size of left part of array
 rsize	equ		size						; size of right part of array
 larray	equ		array						; pointer to left part of array
@@ -2959,39 +2927,44 @@ rarray	equ		right						; pointer to right part of array
 lptr	equ		ptr							; pointer to left part of ptr array
 rptr	equ		median						; pointer to right part of ptr array
 stack	equ		rsp							; stack pointer
-s_array	equ		stack + 0 * 8				; stack position of "array" variable
-s_ptr	equ		stack + 1 * 8				; stack position of "ptr" variable
-s_size	equ		stack + 2 * 8				; stack position of "size" variable
-s_func	equ		stack + 3 * 8				; stack position of "func" variable
-s_med	equ		stack + 4 * 8				; stack position of "median" variable
-s_left	equ		stack + 5 * 8				; stack position of "left" variable
-s_right	equ		stack + 6 * 8				; stack position of "right" variable
-space	= 7 * 8								; stack size required by the procedure
+s_key1	equ		stack + 0 * 8				; stack position of "key1" variable
+s_key2	equ		stack + 1 * 8				; stack position of "key2" variable
+s_array	equ		stack + 2 * 8				; stack position of "array" variable
+s_ptr	equ		stack + 3 * 8				; stack position of "ptr" variable
+s_size	equ		stack + 4 * 8				; stack position of "size" variable
+s_func	equ		stack + 5 * 8				; stack position of "func" variable
+s_med	equ		stack + 6 * 8				; stack position of "median" variable
+s_left	equ		stack + 7 * 8				; stack position of "left" variable
+s_right	equ		stack + 8 * 8				; stack position of "right" variable
+space	= 9 * 8								; stack size required by the procedure
+minsize	= 32								; min array size is aceptable for Quick sort
 ;------------------------------------------
 		cmp		size, 1						; if (size <= 1)
 		jbe		.exit						;     then go to exit
+.start:	cmp		size, minsize				; if (size <= minsize)
+		jbe		insertsort					;     call insertsort (array, ptr, size, func)
 ;---[Normal execution branch]--------------
-.start:	sub		stack, space				; reserving stack size for local vars
-		mov		[s_func], func				; save "func" variable into the stack
+		sub		stack, space				; reserving stack size for local vars
+		mov		[s_key1], key1				; save old value of "key1" variable
+		mov		[s_key2], key2				; save old value of "key2" variable
 ;---[Sorting loop]-------------------------
-.sort:	mov		median, size
-		shr		median, 1					; median = size / 2
+.loop:	mov		half, size
+		shr		half, 1						; half = size / 2
 		mov		left, -1					; left = -1
 		mov		right, size					; right = size
-		mov		median, [array + median * 8]; median = array[median]
+		mov		median, [array + half * 8]	; median = array[half]
 		mov		[s_array], array			; save "array" variable into the stack
 		mov		[s_ptr], ptr				; save "ptr" variable into the stack
 		mov		[s_size], size				; save "size" variable into the stack
+		mov		[s_func], func				; save "func" variable into the stack
 		mov		[s_med], median				; save "median" variable into the stack
 		mov		[s_left], left				; save "left" variable into the stack
 		mov		[s_right], right			; save "right" variable into the stack
 		jmp		.loop1
 ;---[Swap loop]----------------------------
-.swap:	mov		ptr1, [array + left * 8]	; ptr1 = array[left]
-		mov		ptr2, [array + right * 8]	; ptr1 = array[left]
-		xchg	ptr1, ptr2
-		mov		[array + left * 8], ptr1	; array[left] = ptr2
-		mov		[array + right * 8], ptr2	; array[right] = ptr1
+.swap:	xchg	key1, key2
+		mov		[array + left * 8], key1	; array[left] = key2
+		mov		[array + right * 8], key2	; array[right] = key1
 		mov		ptr1, [ptr + left * 8]		; ptr1 = ptr[left]
 		mov		ptr2, [ptr + right * 8]		; ptr1 = ptr[left]
 		xchg	ptr1, ptr2
@@ -3000,9 +2973,10 @@ space	= 7 * 8								; stack size required by the procedure
 ;---[Internal loop 1]----------------------
 .loop1:	mov		left, [s_left]				; get "left" variable from the stack
 		add		left, 1						; left++
+		mov		key1, [array + left * 8]	; key1 = array[left]
 		mov		[s_left], left				; save "left" variable into the stack
 		mov		param2, [s_med]
-		mov		param1, [array + left * 8]
+		mov		param1, key1
 		call	qword [s_func]				; result = Compare (array[left], median)
 		mov		array, [s_array]			; get "array" variable from the stack
 		cmp		result, 0					; check compare result
@@ -3010,9 +2984,10 @@ space	= 7 * 8								; stack size required by the procedure
 ;---[Internal loop 2]----------------------
 .loop2:	mov		right, [s_right]			; get "right" variable from the stack
 		sub		right, 1					; right--
+		mov		key2, [array + right * 8]	; key2 = array[right]
 		mov		[s_right], right			; save "right" variable into the stack
 		mov		param2, [s_med]
-		mov		param1, [array + right * 8]
+		mov		param1, key2
 		call	qword [s_func]				; result = Compare (array[right], median)
 		mov		array, [s_array]			; get "array" variable from the stack
 		cmp		result, 0					; check compare result
@@ -3037,7 +3012,7 @@ space	= 7 * 8								; stack size required by the procedure
 		mov		[s_array], rarray			; save "rarray" variable into the stack
 		mov		[s_ptr], rptr				; save "rptr" variable into the stack
 		mov		[s_size], rsize				; save "rsize" variable into the stack
-		mov		func	, [s_func]			; get "func" variable from the stack
+		mov		func, [s_func]				; get "func" variable from the stack
 		mov		size, lsize
 		call	.start						; call Sort (larray, lptr, lsize, func)
 		mov		rarray, [s_array]			; get "rarray" variable from the stack
@@ -3062,13 +3037,17 @@ space	= 7 * 8								; stack size required by the procedure
 @@:		mov		size, lsize					; }
 ;---[end if]-------------------------------
 .end:	cmp		size, 1
-		ja		.sort						; do while (size > 1)
+		ja		.loop						; do while (size > 1)
 ;---[End of sorting loop]------------------
+		mov		key1, [s_key1]				; restore old value of "key1" variable
+		mov		key2, [s_key2]				; restore old value of "key2" variable
+		mov		func, [s_func]				; get "func" variable from the stack
 		add		stack, space				; restoring back the stack pointer
+		jmp		insertsort					; call insertsort (array, ptr, size, func)
 .exit:	ret
 }
-SortKeyAsc:		SORT_KEY	l, g
-SortKeyDsc:		SORT_KEY	g, l
+QuickSortKeyAsc:	QUICKSORT	InsertSortKeyAsc, l, g
+QuickSortKeyDsc:	QUICKSORT	InsertSortKeyDsc, g, l
 
 ;******************************************************************************;
 ;       Reversing elements order                                               ;
