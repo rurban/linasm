@@ -850,28 +850,46 @@ public	FindBwd64					as	'_ZN5Array7FindBwdEPKmmm'
 ;------------------------------------------------------------------------------;
 
 ; Unsigned integer types
-public	FindEqualAsc_uint8			as	'Array_FindEqualAsc_uint8'
-public	FindEqualAsc_uint16			as	'Array_FindEqualAsc_uint16'
-public	FindEqualAsc_uint32			as	'Array_FindEqualAsc_uint32'
-public	FindEqualAsc_uint64			as	'Array_FindEqualAsc_uint64'
-public	FindEqualAsc_uint8			as	'_ZN5Array12FindEqualAscEPKhmh'
-public	FindEqualAsc_uint16			as	'_ZN5Array12FindEqualAscEPKtmt'
-public	FindEqualAsc_uint32			as	'_ZN5Array12FindEqualAscEPKjmj'
-public	FindEqualAsc_uint64			as	'_ZN5Array12FindEqualAscEPKymy'
+public	FindFirstEqualAsc_uint8		as	'Array_FindFirstEqualAsc_uint8'
+public	FindFirstEqualAsc_uint16	as	'Array_FindFirstEqualAsc_uint16'
+public	FindFirstEqualAsc_uint32	as	'Array_FindFirstEqualAsc_uint32'
+public	FindFirstEqualAsc_uint64	as	'Array_FindFirstEqualAsc_uint64'
+public	FindLastEqualAsc_uint8		as	'Array_FindLastEqualAsc_uint8'
+public	FindLastEqualAsc_uint16		as	'Array_FindLastEqualAsc_uint16'
+public	FindLastEqualAsc_uint32		as	'Array_FindLastEqualAsc_uint32'
+public	FindLastEqualAsc_uint64		as	'Array_FindLastEqualAsc_uint64'
+public	FindFirstEqualAsc_uint8		as	'_ZN5Array17FindFirstEqualAscEPKhmh'
+public	FindFirstEqualAsc_uint16	as	'_ZN5Array17FindFirstEqualAscEPKtmt'
+public	FindFirstEqualAsc_uint32	as	'_ZN5Array17FindFirstEqualAscEPKjmj'
+public	FindFirstEqualAsc_uint64	as	'_ZN5Array17FindFirstEqualAscEPKymy'
+public	FindLastEqualAsc_uint8		as	'_ZN5Array16FindLastEqualAscEPKhmh'
+public	FindLastEqualAsc_uint16		as	'_ZN5Array16FindLastEqualAscEPKtmt'
+public	FindLastEqualAsc_uint32		as	'_ZN5Array16FindLastEqualAscEPKjmj'
+public	FindLastEqualAsc_uint64		as	'_ZN5Array16FindLastEqualAscEPKymy'
 
 ; Signed integer types
-public	FindEqualAsc_sint8			as	'Array_FindEqualAsc_sint8'
-public	FindEqualAsc_sint16			as	'Array_FindEqualAsc_sint16'
-public	FindEqualAsc_sint32			as	'Array_FindEqualAsc_sint32'
-public	FindEqualAsc_sint64			as	'Array_FindEqualAsc_sint64'
-public	FindEqualAsc_sint8			as	'_ZN5Array12FindEqualAscEPKama'
-public	FindEqualAsc_sint16			as	'_ZN5Array12FindEqualAscEPKsms'
-public	FindEqualAsc_sint32			as	'_ZN5Array12FindEqualAscEPKimi'
-public	FindEqualAsc_sint64			as	'_ZN5Array12FindEqualAscEPKxmx'
+public	FindFirstEqualAsc_sint8		as	'Array_FindFirstEqualAsc_sint8'
+public	FindFirstEqualAsc_sint16	as	'Array_FindFirstEqualAsc_sint16'
+public	FindFirstEqualAsc_sint32	as	'Array_FindFirstEqualAsc_sint32'
+public	FindFirstEqualAsc_sint64	as	'Array_FindFirstEqualAsc_sint64'
+public	FindLastEqualAsc_sint8		as	'Array_FindLastEqualAsc_sint8'
+public	FindLastEqualAsc_sint16		as	'Array_FindLastEqualAsc_sint16'
+public	FindLastEqualAsc_sint32		as	'Array_FindLastEqualAsc_sint32'
+public	FindLastEqualAsc_sint64		as	'Array_FindLastEqualAsc_sint64'
+public	FindFirstEqualAsc_sint8		as	'_ZN5Array17FindFirstEqualAscEPKama'
+public	FindFirstEqualAsc_sint16	as	'_ZN5Array17FindFirstEqualAscEPKsms'
+public	FindFirstEqualAsc_sint32	as	'_ZN5Array17FindFirstEqualAscEPKimi'
+public	FindFirstEqualAsc_sint64	as	'_ZN5Array17FindFirstEqualAscEPKxmx'
+public	FindLastEqualAsc_sint8		as	'_ZN5Array16FindLastEqualAscEPKama'
+public	FindLastEqualAsc_sint16		as	'_ZN5Array16FindLastEqualAscEPKsms'
+public	FindLastEqualAsc_sint32		as	'_ZN5Array16FindLastEqualAscEPKimi'
+public	FindLastEqualAsc_sint64		as	'_ZN5Array16FindLastEqualAscEPKxmx'
 
 ; Other types
-public	FindEqualAsc_uint64			as	'Array_FindEqualAsc_size'
-public	FindEqualAsc_uint64			as	'_ZN5Array12FindEqualAscEPKmmm'
+public	FindFirstEqualAsc_uint64	as	'Array_FindFirstEqualAsc_size'
+public	FindLastEqualAsc_uint64		as	'Array_FindLastEqualAsc_size'
+public	FindFirstEqualAsc_uint64	as	'_ZN5Array17FindFirstEqualAscEPKmmm'
+public	FindLastEqualAsc_uint64		as	'_ZN5Array16FindLastEqualAscEPKmmm'
 
 ;------------------------------------------------------------------------------;
 ;       Searching for greater element                                          ;
@@ -994,28 +1012,46 @@ public	FindLessEqualAsc_uint64		as	'_ZN5Array18FindLessOrEqualAscEPKmmm'
 ;------------------------------------------------------------------------------;
 
 ; Unsigned integer types
-public	FindEqualDsc_uint8			as	'Array_FindEqualDsc_uint8'
-public	FindEqualDsc_uint16			as	'Array_FindEqualDsc_uint16'
-public	FindEqualDsc_uint32			as	'Array_FindEqualDsc_uint32'
-public	FindEqualDsc_uint64			as	'Array_FindEqualDsc_uint64'
-public	FindEqualDsc_uint8			as	'_ZN5Array12FindEqualDscEPKhmh'
-public	FindEqualDsc_uint16			as	'_ZN5Array12FindEqualDscEPKtmt'
-public	FindEqualDsc_uint32			as	'_ZN5Array12FindEqualDscEPKjmj'
-public	FindEqualDsc_uint64			as	'_ZN5Array12FindEqualDscEPKymy'
+public	FindFirstEqualDsc_uint8		as	'Array_FindFirstEqualDsc_uint8'
+public	FindFirstEqualDsc_uint16	as	'Array_FindFirstEqualDsc_uint16'
+public	FindFirstEqualDsc_uint32	as	'Array_FindFirstEqualDsc_uint32'
+public	FindFirstEqualDsc_uint64	as	'Array_FindFirstEqualDsc_uint64'
+public	FindLastEqualDsc_uint8		as	'Array_FindLastEqualDsc_uint8'
+public	FindLastEqualDsc_uint16		as	'Array_FindLastEqualDsc_uint16'
+public	FindLastEqualDsc_uint32		as	'Array_FindLastEqualDsc_uint32'
+public	FindLastEqualDsc_uint64		as	'Array_FindLastEqualDsc_uint64'
+public	FindFirstEqualDsc_uint8		as	'_ZN5Array17FindFirstEqualDscEPKhmh'
+public	FindFirstEqualDsc_uint16	as	'_ZN5Array17FindFirstEqualDscEPKtmt'
+public	FindFirstEqualDsc_uint32	as	'_ZN5Array17FindFirstEqualDscEPKjmj'
+public	FindFirstEqualDsc_uint64	as	'_ZN5Array17FindFirstEqualDscEPKymy'
+public	FindLastEqualDsc_uint8		as	'_ZN5Array16FindLastEqualDscEPKhmh'
+public	FindLastEqualDsc_uint16		as	'_ZN5Array16FindLastEqualDscEPKtmt'
+public	FindLastEqualDsc_uint32		as	'_ZN5Array16FindLastEqualDscEPKjmj'
+public	FindLastEqualDsc_uint64		as	'_ZN5Array16FindLastEqualDscEPKymy'
 
 ; Signed integer types
-public	FindEqualDsc_sint8			as	'Array_FindEqualDsc_sint8'
-public	FindEqualDsc_sint16			as	'Array_FindEqualDsc_sint16'
-public	FindEqualDsc_sint32			as	'Array_FindEqualDsc_sint32'
-public	FindEqualDsc_sint64			as	'Array_FindEqualDsc_sint64'
-public	FindEqualDsc_sint8			as	'_ZN5Array12FindEqualDscEPKama'
-public	FindEqualDsc_sint16			as	'_ZN5Array12FindEqualDscEPKsms'
-public	FindEqualDsc_sint32			as	'_ZN5Array12FindEqualDscEPKimi'
-public	FindEqualDsc_sint64			as	'_ZN5Array12FindEqualDscEPKxmx'
+public	FindFirstEqualDsc_sint8		as	'Array_FindFirstEqualDsc_sint8'
+public	FindFirstEqualDsc_sint16	as	'Array_FindFirstEqualDsc_sint16'
+public	FindFirstEqualDsc_sint32	as	'Array_FindFirstEqualDsc_sint32'
+public	FindFirstEqualDsc_sint64	as	'Array_FindFirstEqualDsc_sint64'
+public	FindLastEqualDsc_sint8		as	'Array_FindLastEqualDsc_sint8'
+public	FindLastEqualDsc_sint16		as	'Array_FindLastEqualDsc_sint16'
+public	FindLastEqualDsc_sint32		as	'Array_FindLastEqualDsc_sint32'
+public	FindLastEqualDsc_sint64		as	'Array_FindLastEqualDsc_sint64'
+public	FindFirstEqualDsc_sint8		as	'_ZN5Array17FindFirstEqualDscEPKama'
+public	FindFirstEqualDsc_sint16	as	'_ZN5Array17FindFirstEqualDscEPKsms'
+public	FindFirstEqualDsc_sint32	as	'_ZN5Array17FindFirstEqualDscEPKimi'
+public	FindFirstEqualDsc_sint64	as	'_ZN5Array17FindFirstEqualDscEPKxmx'
+public	FindLastEqualDsc_sint8		as	'_ZN5Array16FindLastEqualDscEPKama'
+public	FindLastEqualDsc_sint16		as	'_ZN5Array16FindLastEqualDscEPKsms'
+public	FindLastEqualDsc_sint32		as	'_ZN5Array16FindLastEqualDscEPKimi'
+public	FindLastEqualDsc_sint64		as	'_ZN5Array16FindLastEqualDscEPKxmx'
 
 ; Other types
-public	FindEqualDsc_uint64			as	'Array_FindEqualDsc_size'
-public	FindEqualDsc_uint64			as	'_ZN5Array12FindEqualDscEPKmmm'
+public	FindFirstEqualDsc_uint64	as	'Array_FindFirstEqualDsc_size'
+public	FindLastEqualDsc_uint64		as	'Array_FindLastEqualDsc_size'
+public	FindFirstEqualDsc_uint64	as	'_ZN5Array17FindFirstEqualDscEPKmmm'
+public	FindLastEqualDsc_uint64		as	'_ZN5Array16FindLastEqualDscEPKmmm'
 
 ;------------------------------------------------------------------------------;
 ;       Searching for less element                                             ;
@@ -1196,6 +1232,182 @@ public	Map_flt32					as	'_Map_flt32'
 public	Map_flt64					as	'_Map_flt64'
 
 ;==============================================================================;
+;       Insertion sort                                                         ;
+;==============================================================================;
+
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+;       Array sorting                                                          ;
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+
+;------------------------------------------------------------------------------;
+;       Ascending sort order                                                   ;
+;------------------------------------------------------------------------------;
+
+; Unsigned integer types
+public	InsertSortAsc_uint8			as	'Array_InsertSortAsc_uint8'
+public	InsertSortAsc_uint16		as	'Array_InsertSortAsc_uint16'
+public	InsertSortAsc_uint32		as	'Array_InsertSortAsc_uint32'
+public	InsertSortAsc_uint64		as	'Array_InsertSortAsc_uint64'
+public	InsertSortAsc_uint8			as	'_ZN5Array13InsertSortAscEPhm'
+public	InsertSortAsc_uint16		as	'_ZN5Array13InsertSortAscEPtm'
+public	InsertSortAsc_uint32		as	'_ZN5Array13InsertSortAscEPjm'
+public	InsertSortAsc_uint64		as	'_ZN5Array13InsertSortAscEPym'
+
+; Signed integer types
+public	InsertSortAsc_sint8			as	'Array_InsertSortAsc_sint8'
+public	InsertSortAsc_sint16		as	'Array_InsertSortAsc_sint16'
+public	InsertSortAsc_sint32		as	'Array_InsertSortAsc_sint32'
+public	InsertSortAsc_sint64		as	'Array_InsertSortAsc_sint64'
+public	InsertSortAsc_sint8			as	'_ZN5Array13InsertSortAscEPam'
+public	InsertSortAsc_sint16		as	'_ZN5Array13InsertSortAscEPsm'
+public	InsertSortAsc_sint32		as	'_ZN5Array13InsertSortAscEPim'
+public	InsertSortAsc_sint64		as	'_ZN5Array13InsertSortAscEPxm'
+
+; Floating-point types
+public	InsertSortAsc_flt32			as	'Array_InsertSortAsc_flt32'
+public	InsertSortAsc_flt64			as	'Array_InsertSortAsc_flt64'
+public	InsertSortAsc_flt32			as	'_ZN5Array13InsertSortAscEPfm'
+public	InsertSortAsc_flt64			as	'_ZN5Array13InsertSortAscEPdm'
+
+; Other types
+public	InsertSortAsc_uint64		as	'Array_InsertSortAsc_size'
+public	InsertSortAsc_uint64		as	'_ZN5Array13InsertSortAscEPmm'
+
+;------------------------------------------------------------------------------;
+;       Descending sort order                                                  ;
+;------------------------------------------------------------------------------;
+
+; Unsigned integer types
+public	InsertSortDsc_uint8			as	'Array_InsertSortDsc_uint8'
+public	InsertSortDsc_uint16		as	'Array_InsertSortDsc_uint16'
+public	InsertSortDsc_uint32		as	'Array_InsertSortDsc_uint32'
+public	InsertSortDsc_uint64		as	'Array_InsertSortDsc_uint64'
+public	InsertSortDsc_uint8			as	'_ZN5Array13InsertSortDscEPhm'
+public	InsertSortDsc_uint16		as	'_ZN5Array13InsertSortDscEPtm'
+public	InsertSortDsc_uint32		as	'_ZN5Array13InsertSortDscEPjm'
+public	InsertSortDsc_uint64		as	'_ZN5Array13InsertSortDscEPym'
+
+; Signed integer types
+public	InsertSortDsc_sint8			as	'Array_InsertSortDsc_sint8'
+public	InsertSortDsc_sint16		as	'Array_InsertSortDsc_sint16'
+public	InsertSortDsc_sint32		as	'Array_InsertSortDsc_sint32'
+public	InsertSortDsc_sint64		as	'Array_InsertSortDsc_sint64'
+public	InsertSortDsc_sint8			as	'_ZN5Array13InsertSortDscEPam'
+public	InsertSortDsc_sint16		as	'_ZN5Array13InsertSortDscEPsm'
+public	InsertSortDsc_sint32		as	'_ZN5Array13InsertSortDscEPim'
+public	InsertSortDsc_sint64		as	'_ZN5Array13InsertSortDscEPxm'
+
+; Floating-point types
+public	InsertSortDsc_flt32			as	'Array_InsertSortDsc_flt32'
+public	InsertSortDsc_flt64			as	'Array_InsertSortDsc_flt64'
+public	InsertSortDsc_flt32			as	'_ZN5Array13InsertSortDscEPfm'
+public	InsertSortDsc_flt64			as	'_ZN5Array13InsertSortDscEPdm'
+
+; Other types
+public	InsertSortDsc_uint64		as	'Array_InsertSortDsc_size'
+public	InsertSortDsc_uint64		as	'_ZN5Array13InsertSortDscEPmm'
+
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+;       Key sorting                                                            ;
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+
+;------------------------------------------------------------------------------;
+;       Ascending sort order                                                   ;
+;------------------------------------------------------------------------------;
+
+; Unsigned integer types
+public	InsertSortKeyAsc_uint8		as	'Array_InsertSortKeyAsc_uint8'
+public	InsertSortKeyAsc_uint16		as	'Array_InsertSortKeyAsc_uint16'
+public	InsertSortKeyAsc_uint32		as	'Array_InsertSortKeyAsc_uint32'
+public	InsertSortKeyAsc_uint64		as	'Array_InsertSortKeyAsc_uint64'
+public	InsertSortKeyAsc_uint8		as	'_ZN5Array16InsertSortKeyAscEPhPPKvm'
+public	InsertSortKeyAsc_uint16		as	'_ZN5Array16InsertSortKeyAscEPtPPKvm'
+public	InsertSortKeyAsc_uint32		as	'_ZN5Array16InsertSortKeyAscEPjPPKvm'
+public	InsertSortKeyAsc_uint64		as	'_ZN5Array16InsertSortKeyAscEPyPPKvm'
+
+; Signed integer types
+public	InsertSortKeyAsc_sint8		as	'Array_InsertSortKeyAsc_sint8'
+public	InsertSortKeyAsc_sint16		as	'Array_InsertSortKeyAsc_sint16'
+public	InsertSortKeyAsc_sint32		as	'Array_InsertSortKeyAsc_sint32'
+public	InsertSortKeyAsc_sint64		as	'Array_InsertSortKeyAsc_sint64'
+public	InsertSortKeyAsc_sint8		as	'_ZN5Array16InsertSortKeyAscEPaPPKvm'
+public	InsertSortKeyAsc_sint16		as	'_ZN5Array16InsertSortKeyAscEPsPPKvm'
+public	InsertSortKeyAsc_sint32		as	'_ZN5Array16InsertSortKeyAscEPiPPKvm'
+public	InsertSortKeyAsc_sint64		as	'_ZN5Array16InsertSortKeyAscEPxPPKvvm'
+
+; Floating-point types
+public	InsertSortKeyAsc_flt32		as	'Array_InsertSortKeyAsc_flt32'
+public	InsertSortKeyAsc_flt64		as	'Array_InsertSortKeyAsc_flt64'
+public	InsertSortKeyAsc_flt32		as	'_ZN5Array16InsertSortKeyAscEPfPPKvm'
+public	InsertSortKeyAsc_flt64		as	'_ZN5Array16InsertSortKeyAscEPdPPKvm'
+
+; Other types
+public	InsertSortKeyAsc_uint64		as	'Array_InsertSortKeyAsc_size'
+public	InsertSortKeyAsc_uint64		as	'_ZN5Array16InsertSortKeyAscEPmPPKvm'
+
+;------------------------------------------------------------------------------;
+;       Descending sort order                                                  ;
+;------------------------------------------------------------------------------;
+
+; Unsigned integer types
+public	InsertSortKeyDsc_uint8		as	'Array_InsertSortKeyDsc_uint8'
+public	InsertSortKeyDsc_uint16		as	'Array_InsertSortKeyDsc_uint16'
+public	InsertSortKeyDsc_uint32		as	'Array_InsertSortKeyDsc_uint32'
+public	InsertSortKeyDsc_uint64		as	'Array_InsertSortKeyDsc_uint64'
+public	InsertSortKeyDsc_uint8		as	'_ZN5Array16InsertSortKeyDscEPhPPKvm'
+public	InsertSortKeyDsc_uint16		as	'_ZN5Array16InsertSortKeyDscEPtPPKvm'
+public	InsertSortKeyDsc_uint32		as	'_ZN5Array16InsertSortKeyDscEPjPPKvm'
+public	InsertSortKeyDsc_uint64		as	'_ZN5Array16InsertSortKeyDscEPyPPKvm'
+
+; Signed integer types
+public	InsertSortKeyDsc_sint8		as	'Array_InsertSortKeyDsc_sint8'
+public	InsertSortKeyDsc_sint16		as	'Array_InsertSortKeyDsc_sint16'
+public	InsertSortKeyDsc_sint32		as	'Array_InsertSortKeyDsc_sint32'
+public	InsertSortKeyDsc_sint64		as	'Array_InsertSortKeyDsc_sint64'
+public	InsertSortKeyDsc_sint8		as	'_ZN5Array16InsertSortKeyDscEPaPPKvm'
+public	InsertSortKeyDsc_sint16		as	'_ZN5Array16InsertSortKeyDscEPsPPKvm'
+public	InsertSortKeyDsc_sint32		as	'_ZN5Array16InsertSortKeyDscEPiPPKvm'
+public	InsertSortKeyDsc_sint64		as	'_ZN5Array16InsertSortKeyDscEPxPPKvm'
+
+; Floating-point types
+public	InsertSortKeyDsc_flt32		as	'Array_InsertSortKeyDsc_flt32'
+public	InsertSortKeyDsc_flt64		as	'Array_InsertSortKeyDsc_flt64'
+public	InsertSortKeyDsc_flt32		as	'_ZN5Array16InsertSortKeyDscEPfPPKvm'
+public	InsertSortKeyDsc_flt64		as	'_ZN5Array16InsertSortKeyDscEPdPPKvm'
+
+; Other types
+public	InsertSortKeyDsc_uint64		as	'Array_InsertSortKeyDsc_size'
+public	InsertSortKeyDsc_uint64		as	'_ZN5Array16InsertSortKeyDscEPmPPKvm'
+
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+;       Object sorting                                                         ;
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+
+;------------------------------------------------------------------------------;
+;       Ascending sort order                                                   ;
+;------------------------------------------------------------------------------;
+public	InsertSortObjectAsc			as	'Array_InsertSortObjectAsc'
+public	InsertSortObjectAsc			as	"String_InsertSortAsc_char8"
+public	InsertSortObjectAsc			as	"String_InsertSortAsc_char16"
+public	InsertSortObjectAsc			as	"String_InsertSortAsc_char32"
+public	InsertSortObjectAsc			as	'_ZN5Array19InsertSortObjectAscEPPKvmPFxS1_S1_E'
+public	InsertSortObjectAsc			as	"_ZN6String13InsertSortAscEPPKcmPFxS1_S1_E"
+public	InsertSortObjectAsc			as	"_ZN6String13InsertSortAscEPPKsmPFxS1_S1_E"
+public	InsertSortObjectAsc			as	"_ZN6String13InsertSortAscEPPKimPFxS1_S1_E"
+
+;------------------------------------------------------------------------------;
+;       Descending sort order                                                  ;
+;------------------------------------------------------------------------------;
+public	InsertSortObjectDsc			as	'Array_InsertSortObjectDsc'
+public	InsertSortObjectDsc			as	"String_InsertSortDsc_char8"
+public	InsertSortObjectDsc			as	"String_InsertSortDsc_char16"
+public	InsertSortObjectDsc			as	"String_InsertSortDsc_char32"
+public	InsertSortObjectDsc			as	'_ZN5Array19InsertSortObjectDscEPPKvmPFxS1_S1_E'
+public	InsertSortObjectDsc			as	"_ZN6String13InsertSortDscEPPKcmPFxS1_S1_E"
+public	InsertSortObjectDsc			as	"_ZN6String13InsertSortDscEPPKsmPFxS1_S1_E"
+public	InsertSortObjectDsc			as	"_ZN6String13InsertSortDscEPPKimPFxS1_S1_E"
+
+;==============================================================================;
 ;       Quick sort                                                             ;
 ;==============================================================================;
 
@@ -1284,10 +1496,10 @@ public	QuickSortKeyAsc_uint8		as	'Array_QuickSortKeyAsc_uint8'
 public	QuickSortKeyAsc_uint16		as	'Array_QuickSortKeyAsc_uint16'
 public	QuickSortKeyAsc_uint32		as	'Array_QuickSortKeyAsc_uint32'
 public	QuickSortKeyAsc_uint64		as	'Array_QuickSortKeyAsc_uint64'
-public	QuickSortKeyAsc_uint8		as	'_ZN5Array12QuickSortKeyAscEPhPPKvm'
-public	QuickSortKeyAsc_uint16		as	'_ZN5Array12QuickSortKeyAscEPtPPKvm'
-public	QuickSortKeyAsc_uint32		as	'_ZN5Array12QuickSortKeyAscEPjPPKvm'
-public	QuickSortKeyAsc_uint64		as	'_ZN5Array12QuickSortKeyAscEPyPPKvm'
+public	QuickSortKeyAsc_uint8		as	'_ZN5Array15QuickSortKeyAscEPhPPKvm'
+public	QuickSortKeyAsc_uint16		as	'_ZN5Array15QuickSortKeyAscEPtPPKvm'
+public	QuickSortKeyAsc_uint32		as	'_ZN5Array15QuickSortKeyAscEPjPPKvm'
+public	QuickSortKeyAsc_uint64		as	'_ZN5Array15QuickSortKeyAscEPyPPKvm'
 
 ; Signed integer types
 public	QuickSortKeyAsc_sint8		as	'Array_QuickSortKeyAsc_sint8'
@@ -1342,6 +1554,34 @@ public	QuickSortKeyDsc_flt64		as	'_ZN5Array15QuickSortKeyDscEPdPPKvm'
 ; Other types
 public	QuickSortKeyDsc_uint64		as	'Array_QuickSortKeyDsc_size'
 public	QuickSortKeyDsc_uint64		as	'_ZN5Array15QuickSortKeyDscEPmPPKvm'
+
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+;       Object sorting                                                         ;
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+
+;------------------------------------------------------------------------------;
+;       Ascending sort order                                                   ;
+;------------------------------------------------------------------------------;
+public	QuickSortObjectAsc			as	'Array_QuickSortObjectAsc'
+public	QuickSortObjectAsc			as	"String_QuickSortAsc_char8"
+public	QuickSortObjectAsc			as	"String_QuickSortAsc_char16"
+public	QuickSortObjectAsc			as	"String_QuickSortAsc_char32"
+public	QuickSortObjectAsc			as	'_ZN5Array18QuickSortObjectAscEPPKvmPFxS1_S1_E'
+public	QuickSortObjectAsc			as	"_ZN6String12QuickSortAscEPPKcmPFxS1_S1_E"
+public	QuickSortObjectAsc			as	"_ZN6String12QuickSortAscEPPKsmPFxS1_S1_E"
+public	QuickSortObjectAsc			as	"_ZN6String12QuickSortAscEPPKimPFxS1_S1_E"
+
+;------------------------------------------------------------------------------;
+;       Descending sort order                                                  ;
+;------------------------------------------------------------------------------;
+public	QuickSortObjectDsc			as	'Array_QuickSortObjectDsc'
+public	QuickSortObjectDsc			as	"String_QuickSortDsc_char8"
+public	QuickSortObjectDsc			as	"String_QuickSortDsc_char16"
+public	QuickSortObjectDsc			as	"String_QuickSortDsc_char32"
+public	QuickSortObjectDsc			as	'_ZN5Array18QuickSortObjectDscEPPKvmPFxS1_S1_E'
+public	QuickSortObjectDsc			as	"_ZN6String12QuickSortDscEPPKcmPFxS1_S1_E"
+public	QuickSortObjectDsc			as	"_ZN6String12QuickSortDscEPPKsmPFxS1_S1_E"
+public	QuickSortObjectDsc			as	"_ZN6String12QuickSortDscEPPKimPFxS1_S1_E"
 
 ;==============================================================================;
 ;       Radix sort                                                             ;
@@ -1876,7 +2116,7 @@ public	CheckDiff64					as	'_ZN5Array9CheckDiffEPKxS1_m'
 ; Other types
 public	CheckDiff64					as	'Array_CheckDiff_size'
 public	CheckDiff8					as	'Array_CheckDiff_void'
-public	CheckDiff64					as	'_ZN5Array9CheckDiffEPKmmS1_m'
+public	CheckDiff64					as	'_ZN5Array9CheckDiffEPKmS1_m'
 public	CheckDiff8					as	'_ZN5Array9CheckDiffEPKvmS1_m'
 
 ;==============================================================================;
@@ -1912,7 +2152,7 @@ public	Overlap64					as	'_ZN5Array7OverlapEPKdmS1_m'
 ; Other types
 public	Overlap64					as	'Array_Overlap_size'
 public	Overlap8					as	'Array_Overlap_void'
-public	Overlap64					as	'_ZN5Array7OverlapEPKmmS1_m'
+public	Overlap64					as	'_ZN5Array7OverlapEPKmS1_m'
 public	Overlap8					as	'_ZN5Array7OverlapEPKvmS1_m'
 
 ;******************************************************************************;
@@ -3847,8 +4087,7 @@ size	equ		rsi							; array size (count of elements)
 index	equ		rax							; offset from beginning of array
 aindex	equ		rcx							; array offset from vector boundary
 ptr		equ		r10							; temporary pointer to array
-blend	equ		xmm0						; blending mask
-result	equ		blend						; result register
+result	equ		xmm0						; result register
 temp	equ		xmm1						; temporary register
 mask	equ		xmm2						; data mask
 sum0	equ		xmm3						; intermediate sum #1
@@ -3857,6 +4096,7 @@ sum2	equ		xmm5						; intermediate sum #3
 sum3	equ		xmm6						; intermediate sum #4
 sum4	equ		xmm7						; intermediate sum #5
 zero	equ		xmm8						; 0
+blend	equ		result						; blending mask
 if x eq s
 dmask	= DMASK_FLT32						; data mask
 scale	= 2									; scale value
@@ -4015,8 +4255,7 @@ index	equ		rax							; offset from beginning of target array
 aindex	equ		rcx							; array offset from vector boundary
 ptr1	equ		r10							; temporary pointer to first array
 ptr2	equ		r11							; temporary pointer to second array
-blend	equ		xmm0						; blending mask
-result	equ		blend						; result register
+result	equ		xmm0						; result register
 a1temp	equ		xmm1						; temporary register #1
 a2temp	equ		xmm2						; temporary register #2
 sum0	equ		xmm3						; intermediate sum #1
@@ -4025,6 +4264,7 @@ sum2	equ		xmm5						; intermediate sum #3
 sum3	equ		xmm6						; intermediate sum #4
 sum4	equ		xmm7						; intermediate sum #5
 zero	equ		xmm8						; 0
+blend	equ		result						; blending mask
 if x eq s
 scale	= 2									; scale value
 else if x eq d
@@ -4277,8 +4517,7 @@ index	equ		rax							; offset from beginning of array
 aindex	equ		rcx							; array offset from vector boundary
 fmask	equ		r9							; result of pattern search
 ptr		equ		r10							; temporary pointer to array
-blend	equ		xmm0						; blending mask
-result	equ		blend						; result register
+result	equ		xmm0						; result register
 temp	equ		xmm1						; temporary register
 mask	equ		xmm2						; data mask
 res0	equ		xmm3						; intermediate result #1
@@ -4292,6 +4531,7 @@ flags1	equ		xmm10						; NaN matching flags #2
 flags2	equ		xmm11						; NaN matching flags #3
 flags3	equ		xmm12						; NaN matching flags #4
 flags4	equ		xmm13						; NaN matching flags #5
+blend	equ		result						; blending mask
 if x eq s
 dmask	= DMASK_FLT32						; data mask
 nan		= DMASK_FLT32						; NaN
@@ -4778,16 +5018,24 @@ bytes	= 1 shl scale						; size of array element (bytes)
 ;------------------------------------------------------------------------------;
 
 ; Unsigned integer types
-FindEqualAsc_uint8:			FIND_BIN	dl, e, a, 0
-FindEqualAsc_uint16:		FIND_BIN	dx, e, a, 1
-FindEqualAsc_uint32:		FIND_BIN	edx, e, a, 2
-FindEqualAsc_uint64:		FIND_BIN	rdx, e, a, 3
+FindFirstEqualAsc_uint8:	FIND_BIN	dl, e, a, 0
+FindFirstEqualAsc_uint16:	FIND_BIN	dx, e, a, 1
+FindFirstEqualAsc_uint32:	FIND_BIN	edx, e, a, 2
+FindFirstEqualAsc_uint64:	FIND_BIN	rdx, e, a, 3
+FindLastEqualAsc_uint8:		FIND_BIN	dl, e, ae, 0
+FindLastEqualAsc_uint16:	FIND_BIN	dx, e, ae, 1
+FindLastEqualAsc_uint32:	FIND_BIN	edx, e, ae, 2
+FindLastEqualAsc_uint64:	FIND_BIN	rdx, e, ae, 3
 
 ; Signed integer types
-FindEqualAsc_sint8:			FIND_BIN	dl, e, g, 0
-FindEqualAsc_sint16:		FIND_BIN	dx, e, g, 1
-FindEqualAsc_sint32:		FIND_BIN	edx, e, g, 2
-FindEqualAsc_sint64:		FIND_BIN	rdx, e, g, 3
+FindFirstEqualAsc_sint8:	FIND_BIN	dl, e, g, 0
+FindFirstEqualAsc_sint16:	FIND_BIN	dx, e, g, 1
+FindFirstEqualAsc_sint32:	FIND_BIN	edx, e, g, 2
+FindFirstEqualAsc_sint64:	FIND_BIN	rdx, e, g, 3
+FindLastEqualAsc_sint8:		FIND_BIN	dl, e, ge, 0
+FindLastEqualAsc_sint16:	FIND_BIN	dx, e, ge, 1
+FindLastEqualAsc_sint32:	FIND_BIN	edx, e, ge, 2
+FindLastEqualAsc_sint64:	FIND_BIN	rdx, e, ge, 3
 
 ;------------------------------------------------------------------------------;
 ;       Searching for greater element                                          ;
@@ -4862,16 +5110,24 @@ FindLessEqualAsc_sint64:	FIND_BIN	rdx, ge, ge, 3
 ;------------------------------------------------------------------------------;
 
 ; Unsigned integer types
-FindEqualDsc_uint8:			FIND_BIN	dl, e, b, 0
-FindEqualDsc_uint16:		FIND_BIN	dx, e, b, 1
-FindEqualDsc_uint32:		FIND_BIN	edx, e, b, 2
-FindEqualDsc_uint64:		FIND_BIN	rdx, e, b, 3
+FindFirstEqualDsc_uint8:	FIND_BIN	dl, e, b, 0
+FindFirstEqualDsc_uint16:	FIND_BIN	dx, e, b, 1
+FindFirstEqualDsc_uint32:	FIND_BIN	edx, e, b, 2
+FindFirstEqualDsc_uint64:	FIND_BIN	rdx, e, b, 3
+FindLastEqualDsc_uint8:		FIND_BIN	dl, e, be, 0
+FindLastEqualDsc_uint16:	FIND_BIN	dx, e, be, 1
+FindLastEqualDsc_uint32:	FIND_BIN	edx, e, be, 2
+FindLastEqualDsc_uint64:	FIND_BIN	rdx, e, be, 3
 
 ; Signed integer types
-FindEqualDsc_sint8:			FIND_BIN	dl, e, l, 0
-FindEqualDsc_sint16:		FIND_BIN	dx, e, l, 1
-FindEqualDsc_sint32:		FIND_BIN	edx, e, l, 2
-FindEqualDsc_sint64:		FIND_BIN	rdx, e, l, 3
+FindFirstEqualDsc_sint8:	FIND_BIN	dl, e, l, 0
+FindFirstEqualDsc_sint16:	FIND_BIN	dx, e, l, 1
+FindFirstEqualDsc_sint32:	FIND_BIN	edx, e, l, 2
+FindFirstEqualDsc_sint64:	FIND_BIN	rdx, e, l, 3
+FindLastEqualDsc_sint8:		FIND_BIN	dl, e, le, 0
+FindLastEqualDsc_sint16:	FIND_BIN	dx, e, le, 1
+FindLastEqualDsc_sint32:	FIND_BIN	edx, e, le, 2
+FindLastEqualDsc_sint64:	FIND_BIN	rdx, e, le, 3
 
 ;------------------------------------------------------------------------------;
 ;       Searching for less element                                             ;
@@ -5318,115 +5574,45 @@ Map_flt32:		MAP	eax, edx, d
 Map_flt64:		MAP	rax, rdx, q
 
 ;==============================================================================;
-;       Quick sort                                                             ;
+;       Insertion sort                                                         ;
 ;==============================================================================;
 
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 ;       Array sorting                                                          ;
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
-macro	QUICKSORT_INT	median, key1, key2, op1, op2, scale
+macro	INSERTSORT	key1, key2, op, scale
 {
 ;---[Parameters]---------------------------
 array	equ		rdi							; pointer to array
 size	equ		rsi							; array size (count of elements)
 ;---[Internal variables]-------------------
-half	equ		rax							; half of array size
 left	equ		r8							; left index
 right	equ		r9							; right index
-lsize	equ		left						; size of left part of array
-rsize	equ		size						; size of right part of array
-larray	equ		array						; pointer to left part of array
-rarray	equ		right						; pointer to right part of array
-stack	equ		rsp							; stack pointer
-s_array	equ		stack + 0 * 8				; stack position of "array" variable
-s_size	equ		stack + 1 * 8				; stack position of "size" variable
-space	= 3 * 8								; stack size required by the procedure
-minsize	= 32								; min array size is aceptable for Quick sort
 bytes	= 1 shl scale						; size of array element (bytes)
 ;------------------------------------------
 		cmp		size, 1						; if (size <= 1)
 		jbe		.exit						;     then go to exit
-		jmp		.start
-;---[QUICK SORT]---------------------------
-.qsort:	mov		half, size
-		shr		half, 1						; half = size / 2
-		mov		left, -1					; left = -1
-		mov		right, size					; right = size
-		mov		median, [array+half*bytes]	; median = array[half]
-		jmp		.loop1
-;---[Swap loop]----------------------------
-.swap:	xchg	key1, key2
-		mov		[array+left*bytes], key1	; array[left] = key2
-		mov		[array+right*bytes], key2	; array[right] = key1
-;---[Internal loop 1]----------------------
-.loop1:	add		left, 1						; left++
-		mov		key1, [array+left*bytes]	; key1 = array[left]
-		cmp		key1, median
-		j#op1	.loop1						; do while (key1 condition1 median)
-;---[Internal loop 2]----------------------
-.loop2:	sub		right, 1					; right--
-		mov		key2, [array+right*bytes]	; key2 = array[right]
-		cmp		key2, median
-		j#op2	.loop2						; do while (key2 condition2 median)
-;------------------------------------------
-		cmp		left, right
-		jb		.swap						; do while (left < right)
-;---[end of swap loop]---------------------
-		add		right, 1
-		sub		rsize, right				; rsize = size - (right + 1)
-		lea		rarray, [array+right*bytes]	; rarray = array + (right + 1)
-		cmp		lsize, rsize				; if (lsize <= rsize)
-		ja		.else						; {
-;---[if lsize <= rsize]--------------------
-		cmp		lsize, 1					; if (lsize > 1)
-		jbe		@f							; {
-		sub		stack, space				; reserving stack size for local vars
-		mov		[s_array], rarray			; save "rarray" variable into the stack
-		mov		[s_size], rsize				; save "rsize" variable into the stack
-		mov		size, lsize
-		call	.start						; call QuickSort (larray, lsize)
-		mov		rarray, [s_array]			; get "rarray" variable from the stack
-		mov		rsize, [s_size]				; get "rsize" variable from the stack
-		add		stack, space				; restoring back the stack pointer
-@@:		mov		array, rarray				; }
-		jmp		.start
-;---[else]---------------------------------
-.else:	cmp		rsize, 1					; if (rsize > 1)
-		jbe		@f							; {
-		sub		stack, space				; reserving stack size for local vars
-		mov		[s_array], larray			; save "larray" variable into the stack
-		mov		[s_size], lsize				; save "lsize" variable into the stack
-		mov		array, rarray
-		call	.start						; call QuickSort (rarray, rsize)
-		mov		larray, [s_array]			; get "larray" variable from the stack
-		mov		lsize, [s_size]				; get "lsize" variable from the stack
-		add		stack, space				; restoring back the stack pointer
-@@:		mov		size, lsize					; }
-;---[end if]-------------------------------
-.start:	cmp		size, minsize
-		ja		.qsort						; do while (size > minsize)
-;---[END OF QUICK SORT]--------------------
 		mov		left, 1						; left = 1
-;---[INSERT SORT]--------------------------
-.isort:	mov		right, left					; right = left
+;---[Sorting loop]-------------------------
+.loop:	mov		right, left					; right = left
 		mov		key1, [array + right*bytes]	; key1 = array[right]
 ;---[Internal loop]------------------------
 .iloop:	mov		key2, [array + right*bytes-bytes]
-		cmp		key1, key2					; if (key1 condition1 array[right-1])
-		jn#op1	.break						; {
-		mov		[array + right*bytes], key2	;     array[right] = array[right-1]
+		cmp		key1, key2					; if (key1 op array[right-1])
+		jn#op	.break						; {
+		mov		[array + right*bytes], key2	;     array[right] = key2
 		sub		right, 1					;     right-- }
 		jnz		.iloop						; do while (right != 0)
-;---[end of internal loop]-----------------
+;---[End of internal loop]-----------------
 .break:	mov		[array + right*bytes], key1	; array[right] = key1
 		add		left, 1						; left++
 		cmp		left, size
-		jb		.isort						; do while (left < size)
-;---[END OF INSERT SORT]-------------------
+		jb		.loop						; do while (left < size)
+;---[End of sorting loop]------------------
 .exit:	ret
 }
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	QUICKSORT_FLT	sort_func, convert_func
+macro	SORT	sortfunc, convertfunc
 {
 ;---[Parameters]---------------------------
 array	equ		rdi							; pointer to array
@@ -5441,15 +5627,15 @@ space	= 3 * 8								; stack size required by the procedure
 		mov		[s_array], array			; save "array" variable into the stack
 		mov		[s_size], size				; save "size" variable into the stack
 ;---[Convert array]------------------------
-		call	convert_func				; call converting function
+		call	convertfunc					; call converting function
 ;---[Sort array]---------------------------
 		mov		array, [s_array]			; get "array" variable from the stack
 		mov		size, [s_size]				; get "size" variable from the stack
-		call	sort_func					; call sorting function
+		call	sortfunc					; call sorting function
 ;---[Convert array]------------------------
 		mov		array, [s_array]			; get "array" variable from the stack
 		mov		size, [s_size]				; get "size" variable from the stack
-		call	convert_func				; call converting function
+		call	convertfunc					; call converting function
 		add		stack, space				; restoring back the stack pointer
 		ret
 }
@@ -5459,170 +5645,84 @@ space	= 3 * 8								; stack size required by the procedure
 ;------------------------------------------------------------------------------;
 
 ; Unsigned integer types
-QuickSortAsc_uint8:		QUICKSORT_INT	al, dl, cl, b, a, 0
-QuickSortAsc_uint16:	QUICKSORT_INT	ax, dx, cx, b, a, 1
-QuickSortAsc_uint32:	QUICKSORT_INT	eax, edx, ecx, b, a, 2
-QuickSortAsc_uint64:	QUICKSORT_INT	rax, rdx, rcx, b, a, 3
+InsertSortAsc_uint8:	INSERTSORT	dl, cl, b, 0
+InsertSortAsc_uint16:	INSERTSORT	dx, cx, b, 1
+InsertSortAsc_uint32:	INSERTSORT	edx, ecx, b, 2
+InsertSortAsc_uint64:	INSERTSORT	rdx, rcx, b, 3
 
 ; Signed integer types
-QuickSortAsc_sint8:		QUICKSORT_INT	al, dl, cl, l, g, 0
-QuickSortAsc_sint16:	QUICKSORT_INT	ax, dx, cx, l, g, 1
-QuickSortAsc_sint32:	QUICKSORT_INT	eax, edx, ecx, l, g, 2
-QuickSortAsc_sint64:	QUICKSORT_INT	rax, rdx, rcx, l, g, 3
+InsertSortAsc_sint8:	INSERTSORT	dl, cl, l, 0
+InsertSortAsc_sint16:	INSERTSORT	dx, cx, l, 1
+InsertSortAsc_sint32:	INSERTSORT	edx, ecx, l, 2
+InsertSortAsc_sint64:	INSERTSORT	rdx, rcx, l, 3
 
 ; Floating-point types
-QuickSortAsc_flt32:		QUICKSORT_FLT	QuickSortAsc_sint32, Map_flt32
-QuickSortAsc_flt64:		QUICKSORT_FLT	QuickSortAsc_sint64, Map_flt64
+InsertSortAsc_flt32:	SORT	InsertSortAsc_sint32, Map_flt32
+InsertSortAsc_flt64:	SORT	InsertSortAsc_sint64, Map_flt64
 
 ;------------------------------------------------------------------------------;
 ;       Descending sort order                                                  ;
 ;------------------------------------------------------------------------------;
 
 ; Unsigned integer types
-QuickSortDsc_uint8:		QUICKSORT_INT	al, dl, cl, a, b, 0
-QuickSortDsc_uint16:	QUICKSORT_INT	ax, dx, cx, a, b, 1
-QuickSortDsc_uint32:	QUICKSORT_INT	eax, edx, ecx, a, b, 2
-QuickSortDsc_uint64:	QUICKSORT_INT	rax, rdx, rcx, a, b, 3
+InsertSortDsc_uint8:	INSERTSORT	dl, cl, a, 0
+InsertSortDsc_uint16:	INSERTSORT	dx, cx, a, 1
+InsertSortDsc_uint32:	INSERTSORT	edx, ecx, a, 2
+InsertSortDsc_uint64:	INSERTSORT	rdx, rcx, a, 3
 
 ; Signed integer types
-QuickSortDsc_sint8:		QUICKSORT_INT	al, dl, cl, g, l, 0
-QuickSortDsc_sint16:	QUICKSORT_INT	ax, dx, cx, g, l, 1
-QuickSortDsc_sint32:	QUICKSORT_INT	eax, edx, ecx, g, l, 2
-QuickSortDsc_sint64:	QUICKSORT_INT	rax, rdx, rcx, g, l, 3
+InsertSortDsc_sint8:	INSERTSORT	dl, cl, g, 0
+InsertSortDsc_sint16:	INSERTSORT	dx, cx, g, 1
+InsertSortDsc_sint32:	INSERTSORT	edx, ecx, g, 2
+InsertSortDsc_sint64:	INSERTSORT	rdx, rcx, g, 3
 
 ; Floating-point types
-QuickSortDsc_flt32:		QUICKSORT_FLT	QuickSortDsc_sint32, Map_flt32
-QuickSortDsc_flt64:		QUICKSORT_FLT	QuickSortDsc_sint64, Map_flt64
+InsertSortDsc_flt32:	SORT	InsertSortDsc_sint32, Map_flt32
+InsertSortDsc_flt64:	SORT	InsertSortDsc_sint64, Map_flt64
 
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 ;       Key sorting                                                            ;
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
-macro	QUICKSORT_KEY_INT	median, key1, key2, op1, op2, scale
+macro	INSERTSORT_KEY	key1, key2, op, scale
 {
 ;---[Parameters]---------------------------
 array	equ		rdi							; pointer to array
 ptr		equ		rsi							; pointer to array of pointers to data
 size	equ		rdx							; array size (count of elements)
 ;---[Internal variables]-------------------
-half	equ		rax							; half of array size
 left	equ		r8							; left index
 right	equ		r9							; right index
 ptr1	equ		r10							; temporary ptr #1
 ptr2	equ		r11							; temporary ptr #2
-lsize	equ		left						; size of left part of array
-rsize	equ		size						; size of right part of array
-larray	equ		array						; pointer to left part of array
-rarray	equ		right						; pointer to right part of array
-lptr	equ		ptr							; pointer to left part of ptr array
-rptr	equ		half						; pointer to right part of ptr array
-temp	equ		half						; temporary register
-stack	equ		rsp							; stack pointer
-s_array	equ		stack + 0 * 8				; stack position of "array" variable
-s_ptr	equ		stack + 1 * 8				; stack position of "ptr" variable
-s_size	equ		stack + 2 * 8				; stack position of "size" variable
-space	= 3 * 8								; stack size required by the procedure
-minsize	= 32								; min array size is aceptable for Quick sort
 bytes	= 1 shl scale						; size of array element (bytes)
 ;------------------------------------------
 		cmp		size, 1						; if (size <= 1)
 		jbe		.exit						;     then go to exit
-		jmp		.start
-;---[QUICK SORT]---------------------------
-.qsort:	mov		half, size
-		shr		half, 1						; half = size / 2
-		mov		left, -1					; left = -1
-		mov		right, size					; right = size
-		mov		median, [array + half*bytes]; median = array[half]
-		jmp		.loop1
-;---[Swap loop]----------------------------
-.swap:	xchg	key1, key2
-		mov		[array + left*bytes], key1	; array[left] = key2
-		mov		[array + right*bytes], key2	; array[right] = key1
-		mov		ptr1, [ptr + left * 8]		; ptr1 = ptr[left]
-		mov		ptr2, [ptr + right * 8]		; ptr2 = ptr[right]
-		xchg	ptr1, ptr2
-		mov		[ptr + left * 8], ptr1		; ptr[left] = ptr2
-		mov		[ptr + right * 8], ptr2		; ptr[right] = ptr1
-;---[Internal loop 1]----------------------
-.loop1:	add		left, 1						; left++
-		mov		key1, [array + left*bytes]	; key1 = array[left]
-		cmp		key1, median
-		j#op1	.loop1						; do while (key1 condition1 median)
-;---[Internal loop 2]----------------------
-.loop2:	sub		right, 1					; right--
-		mov		key2, [array + right*bytes]	; key2 = array[right]
-		cmp		key2, median
-		j#op2	.loop2						; do while (key2 condition2 median)
-;------------------------------------------
-		cmp		left, right
-		jb		.swap						; do while (left < right)
-;---[end of swap loop]---------------------
-		add		right, 1
-		sub		rsize, right				; rsize = size - (right + 1)
-		lea		rptr, [ptr + right * 8]		; rptr = ptr + (right + 1)
-		lea		rarray, [array+right*bytes]	; rarray = array + (right + 1)
-		cmp		lsize, rsize				; if (lsize <= rsize)
-		ja		.else						; {
-;---[if lsize <= rsize]--------------------
-		cmp		lsize, 1					; if (lsize > 1)
-		jbe		@f							; {
-		sub		stack, space				; reserving stack size for local vars
-		mov		[s_array], rarray			; save "rarray" variable into the stack
-		mov		[s_ptr], rptr				; save "rptr" variable into the stack
-		mov		[s_size], rsize				; save "rsize" variable into the stack
-		mov		size, lsize
-		call	.start						; call QuickSortKey (larray, lptr, lsize)
-		mov		rarray, [s_array]			; get "rarray" variable from the stack
-		mov		rptr, [s_ptr]				; get "rptr" variable from the stack
-		mov		rsize, [s_size]				; get "rsize" variable from the stack
-		add		stack, space				; restoring back the stack pointer
-@@:		mov		array, rarray
-		mov		ptr, rptr					; }
-		jmp		.start
-;---[else]---------------------------------
-.else:	cmp		rsize, 1					; if (rsize > 1)
-		jbe		@f							; {
-		sub		stack, space				; reserving stack size for local vars
-		mov		[s_array], larray			; save "larray" variable into the stack
-		mov		[s_ptr], lptr				; save "lptr" variable into the stack
-		mov		[s_size], lsize				; save "lsize" variable into the stack
-		mov		array, rarray
-		mov		ptr, rptr
-		call	.start						; call QuickSortKey (rarray, rptr, rsize)
-		mov		larray, [s_array]			; get "larray" variable from the stack
-		mov		lptr, [s_ptr]				; get "lptr" variable from the stack
-		mov		lsize, [s_size]				; get "lsize" variable from the stack
-		add		stack, space				; restoring back the stack pointer
-@@:		mov		size, lsize					; }
-;---[end if]-------------------------------
-.start:	cmp		size, minsize
-		ja		.qsort						; do while (size > minsize)
-;---[END OF QUICK SORT]--------------------
 		mov		left, 1						; left = 1
-;---[INSERT SORT]--------------------------
-.isort:	mov		right, left					; right = left
+;---[Sorting loop]-------------------------
+.loop:	mov		right, left					; right = left
 		mov		key1, [array + right*bytes]	; key1 = array[right]
-		mov		temp, [ptr + right * 8]		; temp = ptr[right]
+		mov		ptr1, [ptr + right * 8]		; ptr1 = ptr[right]
 ;---[Internal loop]------------------------
 .iloop:	mov		key2, [array+right*bytes-bytes]
-		cmp		key1, key2					; if (key1 condition1 array[right-1])
-		jn#op1	.break						; {
-		mov		[array+right*bytes], key2	;     array[right] = array[right-1]
-		mov		ptr2, [ptr + right * 8 - 8]	;     ptr2 = ptr[right-1]
+		mov		ptr2, [ptr + right * 8 - 8]	; ptr2 = ptr[right-1]
+		cmp		key1, key2					; if (key1 op array[right-1])
+		jn#op	.break						; {
+		mov		[array+right*bytes], key2	;     array[right] = key2
 		mov		[ptr + right * 8], ptr2		;     ptr[right] = ptr2
 		sub		right, 1					;     right-- }
 		jnz		.iloop						; do while (right != 0)
-;---[end of internal loop]-----------------
+;---[End of internal loop]-----------------
 .break:	mov		[array + right*bytes], key1	; array[right] = key1
-		mov		[ptr + right * 8], temp		; ptr[right] = temp
+		mov		[ptr + right * 8], ptr1		; ptr[right] = ptr1
 		add		left, 1						; left++
 		cmp		left, size
-		jb		.isort						; do while (left < size)
-;---[END OF INSERT SORT]-------------------
+		jb		.loop						; do while (left < size)
+;---[End of sorting loop]------------------
 .exit:	ret
 }
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	QUICKSORT_KEY_FLT	sortfunc, convertfunc
+macro	SORT_KEY	sortfunc, convertfunc
 {
 ;---[Parameters]---------------------------
 array	equ		rdi							; pointer to array
@@ -5662,40 +5762,533 @@ space	= 3 * 8								; stack size required by the procedure
 ;------------------------------------------------------------------------------;
 
 ; Unsigned integer types
-QuickSortKeyAsc_uint8:	QUICKSORT_KEY_INT	al, r10b, r11b, b, a, 0
-QuickSortKeyAsc_uint16:	QUICKSORT_KEY_INT	ax, r10w, r11w, b, a, 1
-QuickSortKeyAsc_uint32:	QUICKSORT_KEY_INT	eax, r10d, r11d, b, a, 2
-QuickSortKeyAsc_uint64:	QUICKSORT_KEY_INT	rax, r10, r11, b, a, 3
+InsertSortKeyAsc_uint8:		INSERTSORT_KEY	r10b, r11b, b, 0
+InsertSortKeyAsc_uint16:	INSERTSORT_KEY	r10w, r11w, b, 1
+InsertSortKeyAsc_uint32:	INSERTSORT_KEY	r10d, r11d, b, 2
+InsertSortKeyAsc_uint64:	INSERTSORT_KEY	r10, r11, b, 3
 
 ; Signed integer types
-QuickSortKeyAsc_sint8:	QUICKSORT_KEY_INT	al, r10b, r11b, l, g, 0
-QuickSortKeyAsc_sint16:	QUICKSORT_KEY_INT	ax, r10w, r11w, l, g, 1
-QuickSortKeyAsc_sint32:	QUICKSORT_KEY_INT	eax, r10d, r11d, l, g, 2
-QuickSortKeyAsc_sint64:	QUICKSORT_KEY_INT	rax, r10, r11, l, g, 3
+InsertSortKeyAsc_sint8:		INSERTSORT_KEY	r10b, r11b, l, 0
+InsertSortKeyAsc_sint16:	INSERTSORT_KEY	r10w, r11w, l, 1
+InsertSortKeyAsc_sint32:	INSERTSORT_KEY	r10d, r11d, l, 2
+InsertSortKeyAsc_sint64:	INSERTSORT_KEY	r10, r11, l, 3
 
 ; Floating-point types
-QuickSortKeyAsc_flt32:	QUICKSORT_KEY_FLT	QuickSortKeyAsc_sint32, Map_flt32
-QuickSortKeyAsc_flt64:	QUICKSORT_KEY_FLT	QuickSortKeyAsc_sint64, Map_flt64
+InsertSortKeyAsc_flt32:		SORT_KEY	InsertSortKeyAsc_sint32, Map_flt32
+InsertSortKeyAsc_flt64:		SORT_KEY	InsertSortKeyAsc_sint64, Map_flt64
 
 ;------------------------------------------------------------------------------;
 ;       Descending sort order                                                  ;
 ;------------------------------------------------------------------------------;
 
 ; Unsigned integer types
-QuickSortKeyDsc_uint8:	QUICKSORT_KEY_INT	al, r10b, r11b, a, b, 0
-QuickSortKeyDsc_uint16:	QUICKSORT_KEY_INT	ax, r10w, r11w, a, b, 1
-QuickSortKeyDsc_uint32:	QUICKSORT_KEY_INT	eax, r10d, r11d, a, b, 2
-QuickSortKeyDsc_uint64:	QUICKSORT_KEY_INT	rax, r10, r11, a, b, 3
+InsertSortKeyDsc_uint8:		INSERTSORT_KEY	r10b, r11b, a, 0
+InsertSortKeyDsc_uint16:	INSERTSORT_KEY	r10w, r11w, a, 1
+InsertSortKeyDsc_uint32:	INSERTSORT_KEY	r10d, r11d, a, 2
+InsertSortKeyDsc_uint64:	INSERTSORT_KEY	r10, r11, a, 3
 
 ; Signed integer types
-QuickSortKeyDsc_sint8:	QUICKSORT_KEY_INT	al, r10b, r11b, g, l, 0
-QuickSortKeyDsc_sint16:	QUICKSORT_KEY_INT	ax, r10w, r11w, g, l, 1
-QuickSortKeyDsc_sint32:	QUICKSORT_KEY_INT	eax, r10d, r11d, g, l, 2
-QuickSortKeyDsc_sint64:	QUICKSORT_KEY_INT	rax, r10, r11, g, l, 3
+InsertSortKeyDsc_sint8:		INSERTSORT_KEY	r10b, r11b, g, 0
+InsertSortKeyDsc_sint16:	INSERTSORT_KEY	r10w, r11w, g, 1
+InsertSortKeyDsc_sint32:	INSERTSORT_KEY	r10d, r11d, g, 2
+InsertSortKeyDsc_sint64:	INSERTSORT_KEY	r10, r11, g, 3
 
 ; Floating-point types
-QuickSortKeyDsc_flt32:	QUICKSORT_KEY_FLT	QuickSortKeyDsc_sint32, Map_flt32
-QuickSortKeyDsc_flt64:	QUICKSORT_KEY_FLT	QuickSortKeyDsc_sint64, Map_flt64
+InsertSortKeyDsc_flt32:		SORT_KEY	InsertSortKeyDsc_sint32, Map_flt32
+InsertSortKeyDsc_flt64:		SORT_KEY	InsertSortKeyDsc_sint64, Map_flt64
+
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+;       Object sorting                                                         ;
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+macro	INSERTSORT_OBJ	op
+{
+;---[Parameters]---------------------------
+array	equ		rdi							; pointer to array
+size	equ		rsi							; array size (count of elements)
+func	equ		rdx							; pointer to compare function
+;---[Internal variables]-------------------
+left	equ		r8							; left index
+right	equ		r9							; right index
+key1	equ		r12							; temporary key #1
+key2	equ		r13							; temporary key #2
+stack	equ		rsp							; stack pointer
+s_key1	equ		stack + 0 * 8				; stack position of "key1" variable
+s_key2	equ		stack + 1 * 8				; stack position of "key2" variable
+s_array	equ		stack + 2 * 8				; stack position of "array" variable
+s_size	equ		stack + 3 * 8				; stack position of "size" variable
+s_func	equ		stack + 4 * 8				; stack position of "func" variable
+s_left	equ		stack + 5 * 8				; stack position of "left" variable
+s_right	equ		stack + 6 * 8				; stack position of "right" variable
+space	= 7 * 8								; stack size required by the procedure
+;------------------------------------------
+		cmp		size, 1						; if (size <= 1)
+		jbe		.exit						;     then go to exit
+		sub		stack, space				; reserving stack size for local vars
+		mov		[s_key1], key1				; save old value of "key1" variable
+		mov		[s_key2], key2				; save old value of "key2" variable
+		mov		[s_array], array			; save "array" variable into the stack
+		mov		[s_size], size				; save "size" variable into the stack
+		mov		[s_func], func				; save "func" variable into the stack
+		mov		left, 1						; left = 1
+		mov		[s_left], left				; save "left" variable into the stack
+;---[Sorting loop]-------------------------
+.loop:	mov		right, left					; right = left
+		mov		[s_right], right			; save "right" variable into the stack
+		mov		key1, [array + right * 8]	; key1 = array[right]
+;---[Internal loop]------------------------
+.iloop:	mov		key2, [array + right * 8 - 8]
+		mov		param2, key2
+		mov		param1, key1
+		call	qword [s_func]				; result = Compare (key1, key2)
+		mov		array, [s_array]			; get "array" variable from the stack
+		mov		left, [s_left]				; get "left" variable from the stack
+		mov		right, [s_right]			; get "right" variable from the stack
+		cmp		result, 0					; if (result op 0)
+		jn#op	.break						; {
+		mov		[array + right * 8], key2	;     array[right] = key2
+		sub		right, 1					;     right-- }
+		mov		[s_right], right			; save "right" variable into the stack
+		jnz		.iloop						; do while (right != 0)
+;---[End of internal loop]-----------------
+.break:	mov		[array + right * 8], key1	; array[right] = key1
+		add		left, 1						; left++
+		mov		[s_left], left				; save "left" variable into the stack
+		cmp		left, [s_size]
+		jb		.loop						; do while (left < size)
+;---[End of sorting loop]------------------
+		mov		key1, [s_key1]				; restore old value of "key1" variable
+		mov		key2, [s_key2]				; restore old value of "key2" variable
+		add		stack, space				; restoring back the stack pointer
+.exit:	ret
+}
+
+;------------------------------------------------------------------------------;
+;       Ascending sort order                                                   ;
+;------------------------------------------------------------------------------;
+InsertSortObjectAsc:	INSERTSORT_OBJ	l
+
+;------------------------------------------------------------------------------;
+;       Descending sort order                                                  ;
+;------------------------------------------------------------------------------;
+InsertSortObjectDsc:	INSERTSORT_OBJ	g
+
+;==============================================================================;
+;       Quick sort                                                             ;
+;==============================================================================;
+
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+;       Array sorting                                                          ;
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+macro	QUICKSORT	insertsort, median, key1, key2, op1, op2, scale
+{
+;---[Parameters]---------------------------
+array	equ		rdi							; pointer to array
+size	equ		rsi							; array size (count of elements)
+;---[Internal variables]-------------------
+half	equ		rax							; half of array size
+left	equ		r8							; left index
+right	equ		r9							; right index
+lsize	equ		left						; size of left part of array
+rsize	equ		size						; size of right part of array
+larray	equ		array						; pointer to left part of array
+rarray	equ		right						; pointer to right part of array
+stack	equ		rsp							; stack pointer
+s_array	equ		stack + 0 * 8				; stack position of "array" variable
+s_size	equ		stack + 1 * 8				; stack position of "size" variable
+space	= 3 * 8								; stack size required by the procedure
+minsize	= 32								; min array size is aceptable for Quick sort
+bytes	= 1 shl scale						; size of array element (bytes)
+;------------------------------------------
+		cmp		size, 1						; if (size <= 1)
+		jbe		.exit						;     then go to exit
+.start:	cmp		size, minsize				; if (size <= minsize)
+		jbe		insertsort					;     call insertsort (array, size)
+;---[Sorting loop]-------------------------
+.loop:	mov		half, size
+		shr		half, 1						; half = size / 2
+		mov		left, -1					; left = -1
+		mov		right, size					; right = size
+		mov		median, [array+half*bytes]	; median = array[half]
+		jmp		.loop1
+;---[Swap loop]----------------------------
+.swap:	xchg	key1, key2
+		mov		[array+left*bytes], key1	; array[left] = key2
+		mov		[array+right*bytes], key2	; array[right] = key1
+;---[Internal loop 1]----------------------
+.loop1:	add		left, 1						; left++
+		mov		key1, [array+left*bytes]	; key1 = array[left]
+		cmp		key1, median
+		j#op1	.loop1						; do while (key1 op1 median)
+;---[Internal loop 2]----------------------
+.loop2:	sub		right, 1					; right--
+		mov		key2, [array+right*bytes]	; key2 = array[right]
+		cmp		key2, median
+		j#op2	.loop2						; do while (key2 op2 median)
+;------------------------------------------
+		cmp		left, right
+		jb		.swap						; do while (left < right)
+;---[End of swap loop]---------------------
+		add		right, 1
+		sub		rsize, right				; rsize = size - (right + 1)
+		lea		rarray, [array+right*bytes]	; rarray = array + (right + 1)
+		cmp		lsize, rsize				; if (lsize <= rsize)
+		ja		.else						; {
+;---[if lsize <= rsize]--------------------
+		cmp		lsize, 1					; if (lsize > 1)
+		jbe		@f							; {
+		sub		stack, space				; reserving stack size for local vars
+		mov		[s_array], rarray			; save "rarray" variable into the stack
+		mov		[s_size], rsize				; save "rsize" variable into the stack
+		mov		size, lsize
+		call	.start						; call QuickSort (larray, lsize)
+		mov		rarray, [s_array]			; get "rarray" variable from the stack
+		mov		rsize, [s_size]				; get "rsize" variable from the stack
+		add		stack, space				; restoring back the stack pointer
+@@:		mov		array, rarray				; }
+		jmp		.end
+;---[else]---------------------------------
+.else:	cmp		rsize, 1					; if (rsize > 1)
+		jbe		@f							; {
+		sub		stack, space				; reserving stack size for local vars
+		mov		[s_array], larray			; save "larray" variable into the stack
+		mov		[s_size], lsize				; save "lsize" variable into the stack
+		mov		array, rarray
+		call	.start						; call QuickSort (rarray, rsize)
+		mov		larray, [s_array]			; get "larray" variable from the stack
+		mov		lsize, [s_size]				; get "lsize" variable from the stack
+		add		stack, space				; restoring back the stack pointer
+@@:		mov		size, lsize					; }
+;---[end if]-------------------------------
+.end:	cmp		size, minsize
+		ja		.loop						; do while (size > minsize)
+;---[End of sorting loop]------------------
+		jmp		insertsort					; call insertsort (array, size)
+.exit:	ret
+}
+
+;------------------------------------------------------------------------------;
+;       Ascending sort order                                                   ;
+;------------------------------------------------------------------------------;
+
+; Unsigned integer types
+QuickSortAsc_uint8:		QUICKSORT	InsertSortAsc_uint8, al, dl, cl, b, a, 0
+QuickSortAsc_uint16:	QUICKSORT	InsertSortAsc_uint16, ax, dx, cx, b, a, 1
+QuickSortAsc_uint32:	QUICKSORT	InsertSortAsc_uint32, eax, edx, ecx, b, a, 2
+QuickSortAsc_uint64:	QUICKSORT	InsertSortAsc_uint64, rax, rdx, rcx, b, a, 3
+
+; Signed integer types
+QuickSortAsc_sint8:		QUICKSORT	InsertSortAsc_sint8, al, dl, cl, l, g, 0
+QuickSortAsc_sint16:	QUICKSORT	InsertSortAsc_sint16, ax, dx, cx, l, g, 1
+QuickSortAsc_sint32:	QUICKSORT	InsertSortAsc_sint32, eax, edx, ecx, l, g, 2
+QuickSortAsc_sint64:	QUICKSORT	InsertSortAsc_sint64, rax, rdx, rcx, l, g, 3
+
+; Floating-point types
+QuickSortAsc_flt32:		SORT	QuickSortAsc_sint32, Map_flt32
+QuickSortAsc_flt64:		SORT	QuickSortAsc_sint64, Map_flt64
+
+;------------------------------------------------------------------------------;
+;       Descending sort order                                                  ;
+;------------------------------------------------------------------------------;
+
+; Unsigned integer types
+QuickSortDsc_uint8:		QUICKSORT	InsertSortDsc_uint8, al, dl, cl, a, b, 0
+QuickSortDsc_uint16:	QUICKSORT	InsertSortDsc_uint16, ax, dx, cx, a, b, 1
+QuickSortDsc_uint32:	QUICKSORT	InsertSortDsc_uint32, eax, edx, ecx, a, b, 2
+QuickSortDsc_uint64:	QUICKSORT	InsertSortDsc_uint64, rax, rdx, rcx, a, b, 3
+
+; Signed integer types
+QuickSortDsc_sint8:		QUICKSORT	InsertSortDsc_sint8, al, dl, cl, g, l, 0
+QuickSortDsc_sint16:	QUICKSORT	InsertSortDsc_sint16, ax, dx, cx, g, l, 1
+QuickSortDsc_sint32:	QUICKSORT	InsertSortDsc_sint32, eax, edx, ecx, g, l, 2
+QuickSortDsc_sint64:	QUICKSORT	InsertSortDsc_sint64, rax, rdx, rcx, g, l, 3
+
+; Floating-point types
+QuickSortDsc_flt32:		SORT	QuickSortDsc_sint32, Map_flt32
+QuickSortDsc_flt64:		SORT	QuickSortDsc_sint64, Map_flt64
+
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+;       Key sorting                                                            ;
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+macro	QUICKSORT_KEY	insertsort, median, key1, key2, op1, op2, scale
+{
+;---[Parameters]---------------------------
+array	equ		rdi							; pointer to array
+ptr		equ		rsi							; pointer to array of pointers to data
+size	equ		rdx							; array size (count of elements)
+;---[Internal variables]-------------------
+half	equ		rax							; half of array size
+left	equ		r8							; left index
+right	equ		r9							; right index
+ptr1	equ		r10							; temporary ptr #1
+ptr2	equ		r11							; temporary ptr #2
+lsize	equ		left						; size of left part of array
+rsize	equ		size						; size of right part of array
+larray	equ		array						; pointer to left part of array
+rarray	equ		right						; pointer to right part of array
+lptr	equ		ptr							; pointer to left part of ptr array
+rptr	equ		half						; pointer to right part of ptr array
+stack	equ		rsp							; stack pointer
+s_array	equ		stack + 0 * 8				; stack position of "array" variable
+s_ptr	equ		stack + 1 * 8				; stack position of "ptr" variable
+s_size	equ		stack + 2 * 8				; stack position of "size" variable
+space	= 3 * 8								; stack size required by the procedure
+minsize	= 32								; min array size is aceptable for Quick sort
+bytes	= 1 shl scale						; size of array element (bytes)
+;------------------------------------------
+		cmp		size, 1						; if (size <= 1)
+		jbe		.exit						;     then go to exit
+.start:	cmp		size, minsize				; if (size <= minsize)
+		jbe		insertsort					;     call insertsort (array, ptr, size)
+;---[Sorting loop]-------------------------
+.loop:	mov		half, size
+		shr		half, 1						; half = size / 2
+		mov		left, -1					; left = -1
+		mov		right, size					; right = size
+		mov		median, [array + half*bytes]; median = array[half]
+		jmp		.loop1
+;---[Swap loop]----------------------------
+.swap:	xchg	key1, key2
+		mov		[array + left*bytes], key1	; array[left] = key2
+		mov		[array + right*bytes], key2	; array[right] = key1
+		mov		ptr1, [ptr + left * 8]		; ptr1 = ptr[left]
+		mov		ptr2, [ptr + right * 8]		; ptr2 = ptr[right]
+		xchg	ptr1, ptr2
+		mov		[ptr + left * 8], ptr1		; ptr[left] = ptr2
+		mov		[ptr + right * 8], ptr2		; ptr[right] = ptr1
+;---[Internal loop 1]----------------------
+.loop1:	add		left, 1						; left++
+		mov		key1, [array + left*bytes]	; key1 = array[left]
+		cmp		key1, median
+		j#op1	.loop1						; do while (key1 op1 median)
+;---[Internal loop 2]----------------------
+.loop2:	sub		right, 1					; right--
+		mov		key2, [array + right*bytes]	; key2 = array[right]
+		cmp		key2, median
+		j#op2	.loop2						; do while (key2 op2 median)
+;------------------------------------------
+		cmp		left, right
+		jb		.swap						; do while (left < right)
+;---[End of swap loop]---------------------
+		add		right, 1
+		sub		rsize, right				; rsize = size - (right + 1)
+		lea		rptr, [ptr + right * 8]		; rptr = ptr + (right + 1)
+		lea		rarray, [array+right*bytes]	; rarray = array + (right + 1)
+		cmp		lsize, rsize				; if (lsize <= rsize)
+		ja		.else						; {
+;---[if lsize <= rsize]--------------------
+		cmp		lsize, 1					; if (lsize > 1)
+		jbe		@f							; {
+		sub		stack, space				; reserving stack size for local vars
+		mov		[s_array], rarray			; save "rarray" variable into the stack
+		mov		[s_ptr], rptr				; save "rptr" variable into the stack
+		mov		[s_size], rsize				; save "rsize" variable into the stack
+		mov		size, lsize
+		call	.start						; call QuickSortKey (larray, lptr, lsize)
+		mov		rarray, [s_array]			; get "rarray" variable from the stack
+		mov		rptr, [s_ptr]				; get "rptr" variable from the stack
+		mov		rsize, [s_size]				; get "rsize" variable from the stack
+		add		stack, space				; restoring back the stack pointer
+@@:		mov		array, rarray
+		mov		ptr, rptr					; }
+		jmp		.end
+;---[else]---------------------------------
+.else:	cmp		rsize, 1					; if (rsize > 1)
+		jbe		@f							; {
+		sub		stack, space				; reserving stack size for local vars
+		mov		[s_array], larray			; save "larray" variable into the stack
+		mov		[s_ptr], lptr				; save "lptr" variable into the stack
+		mov		[s_size], lsize				; save "lsize" variable into the stack
+		mov		array, rarray
+		mov		ptr, rptr
+		call	.start						; call QuickSortKey (rarray, rptr, rsize)
+		mov		larray, [s_array]			; get "larray" variable from the stack
+		mov		lptr, [s_ptr]				; get "lptr" variable from the stack
+		mov		lsize, [s_size]				; get "lsize" variable from the stack
+		add		stack, space				; restoring back the stack pointer
+@@:		mov		size, lsize					; }
+;---[end if]-------------------------------
+.end:	cmp		size, minsize
+		ja		.loop						; do while (size > minsize)
+;---[End of sorting loop]------------------
+		jmp		insertsort					; call insertsort (array, ptr, size)
+.exit:	ret
+}
+
+;------------------------------------------------------------------------------;
+;       Ascending sort order                                                   ;
+;------------------------------------------------------------------------------;
+
+; Unsigned integer types
+QuickSortKeyAsc_uint8:	QUICKSORT_KEY	InsertSortKeyAsc_uint8, al, r10b, r11b, b, a, 0
+QuickSortKeyAsc_uint16:	QUICKSORT_KEY	InsertSortKeyAsc_uint16, ax, r10w, r11w, b, a, 1
+QuickSortKeyAsc_uint32:	QUICKSORT_KEY	InsertSortKeyAsc_uint32, eax, r10d, r11d, b, a, 2
+QuickSortKeyAsc_uint64:	QUICKSORT_KEY	InsertSortKeyAsc_uint64, rax, r10, r11, b, a, 3
+
+; Signed integer types
+QuickSortKeyAsc_sint8:	QUICKSORT_KEY	InsertSortKeyAsc_sint8, al, r10b, r11b, l, g, 0
+QuickSortKeyAsc_sint16:	QUICKSORT_KEY	InsertSortKeyAsc_sint16, ax, r10w, r11w, l, g, 1
+QuickSortKeyAsc_sint32:	QUICKSORT_KEY	InsertSortKeyAsc_sint32, eax, r10d, r11d, l, g, 2
+QuickSortKeyAsc_sint64:	QUICKSORT_KEY	InsertSortKeyAsc_sint64, rax, r10, r11, l, g, 3
+
+; Floating-point types
+QuickSortKeyAsc_flt32:	SORT_KEY	QuickSortKeyAsc_sint32, Map_flt32
+QuickSortKeyAsc_flt64:	SORT_KEY	QuickSortKeyAsc_sint64, Map_flt64
+
+;------------------------------------------------------------------------------;
+;       Descending sort order                                                  ;
+;------------------------------------------------------------------------------;
+
+; Unsigned integer types
+QuickSortKeyDsc_uint8:	QUICKSORT_KEY	InsertSortKeyDsc_uint8, al, r10b, r11b, a, b, 0
+QuickSortKeyDsc_uint16:	QUICKSORT_KEY	InsertSortKeyDsc_uint16, ax, r10w, r11w, a, b, 1
+QuickSortKeyDsc_uint32:	QUICKSORT_KEY	InsertSortKeyDsc_uint32, eax, r10d, r11d, a, b, 2
+QuickSortKeyDsc_uint64:	QUICKSORT_KEY	InsertSortKeyDsc_uint64, rax, r10, r11, a, b, 3
+
+; Signed integer types
+QuickSortKeyDsc_sint8:	QUICKSORT_KEY	InsertSortKeyDsc_sint8, al, r10b, r11b, g, l, 0
+QuickSortKeyDsc_sint16:	QUICKSORT_KEY	InsertSortKeyDsc_sint16, ax, r10w, r11w, g, l, 1
+QuickSortKeyDsc_sint32:	QUICKSORT_KEY	InsertSortKeyDsc_sint32, eax, r10d, r11d, g, l, 2
+QuickSortKeyDsc_sint64:	QUICKSORT_KEY	InsertSortKeyDsc_sint64, rax, r10, r11, g, l, 3
+
+; Floating-point types
+QuickSortKeyDsc_flt32:	SORT_KEY	QuickSortKeyDsc_sint32, Map_flt32
+QuickSortKeyDsc_flt64:	SORT_KEY	QuickSortKeyDsc_sint64, Map_flt64
+
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+;       Object sorting                                                         ;
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+macro	QUICKSORT_OBJ	insertsort, op1, op2
+{
+;---[Parameters]---------------------------
+array	equ		rdi							; pointer to strings array
+size	equ		rsi							; array size (count of elements)
+func	equ		rdx							; pointer to compare function
+;---[Internal variables]-------------------
+result	equ		rax							; result register
+median	equ		rax							; median value
+half	equ		rax							; half of array size
+left	equ		r8							; left index
+right	equ		r9							; right index
+key1	equ		r12							; temporary key #1
+key2	equ		r13							; temporary key #2
+lsize	equ		left						; size of left part of array
+rsize	equ		size						; size of right part of array
+larray	equ		array						; pointer to left part of array
+rarray	equ		right						; pointer to right part of array
+stack	equ		rsp							; stack pointer
+s_key1	equ		stack + 0 * 8				; stack position of "key1" variable
+s_key2	equ		stack + 1 * 8				; stack position of "key2" variable
+s_array	equ		stack + 2 * 8				; stack position of "array" variable
+s_size	equ		stack + 3 * 8				; stack position of "size" variable
+s_func	equ		stack + 4 * 8				; stack position of "func" variable
+s_med	equ		stack + 5 * 8				; stack position of "median" variable
+s_left	equ		stack + 6 * 8				; stack position of "left" variable
+s_right	equ		stack + 7 * 8				; stack position of "right" variable
+space	= 9 * 8								; stack size required by the procedure
+;------------------------------------------
+		cmp		size, 1						; if (size <= 1)
+		jbe		.exit						;     then go to exit
+.start:	cmp		size, minsize				; if (size <= minsize)
+		jbe		insertsort					;     call insertsort (array, size, func)
+;---[Normal execution branch]--------------
+		sub		stack, space				; reserving stack size for local vars
+		mov		[s_key1], key1				; save old value of "key1" variable
+		mov		[s_key2], key2				; save old value of "key2" variable
+;---[Sorting loop]-------------------------
+.loop:	mov		half, size
+		shr		half, 1						; half = size / 2
+		mov		left, -1					; left = -1
+		mov		right, size					; right = size
+		mov		median, [array + median * 8]; median = array[median]
+		mov		[s_array], array			; save "array" variable into the stack
+		mov		[s_size], size				; save "size" variable into the stack
+		mov		[s_func], func				; save "func" variable into the stack
+		mov		[s_med], median				; save "median" variable into the stack
+		mov		[s_left], left				; save "left" variable into the stack
+		mov		[s_right], right			; save "right" variable into the stack
+		jmp		.loop1
+;---[Swap loop]----------------------------
+.swap:	xchg	key1, key2
+		mov		[array + left * 8], key1	; array[left] = key2
+		mov		[array + right * 8], key2	; array[right] = key1
+;---[Internal loop 1]----------------------
+.loop1:	mov		left, [s_left]				; get "left" variable from the stack
+		add		left, 1						; left++
+		mov		key1, [array + left * 8]	; key1 = array[left]
+		mov		[s_left], left				; save "left" variable into the stack
+		mov		param2, [s_med]
+		mov		param1, key1
+		call	qword [s_func]				; result = Compare (array[left], median)
+		mov		array, [s_array]			; get "array" variable from the stack
+		cmp		result, 0					; check compare result
+		j#op1	.loop1						; do while compare condition is true
+;---[Internal loop 2]----------------------
+.loop2:	mov		right, [s_right]			; get "right" variable from the stack
+		sub		right, 1					; right--
+		mov		key2, [array + right * 8]	; key2 = array[right]
+		mov		[s_right], right			; save "right" variable into the stack
+		mov		param2, [s_med]
+		mov		param1, key2
+		call	qword [s_func]				; result = Compare (array[right], median)
+		mov		array, [s_array]			; get "array" variable from the stack
+		cmp		result, 0					; check compare result
+		j#op2	.loop2						; do while compare condition is true
+;------------------------------------------
+		mov		left, [s_left]				; get "left" variable from the stack
+		mov		right, [s_right]			; get "right" variable from the stack
+		cmp		left, right
+		jb		.swap						; do while (left < right)
+;---[End of swap loop]---------------------
+		mov		size, [s_size]				; get "size" variable from the stack
+		add		right, 1
+		sub		rsize, right				; rsize = size - (right + 1)
+		lea		rarray, [array + right * 8]	; rarray = array + (right + 1)
+		cmp		lsize, rsize				; if (lsize <= rsize)
+		ja		.else						; {
+;---[if lsize <= rsize]--------------------
+		cmp		lsize, 1					; if (lsize > 1)
+		jbe		@f							; {
+		mov		[s_array], rarray			; save "rarray" variable into the stack
+		mov		[s_size], rsize				; save "rsize" variable into the stack
+		mov		func, [s_func]				; get "func" variable from the stack
+		mov		size, lsize
+		call	.start						; call Sort (larray, lsize, func)
+		mov		rarray, [s_array]			; get "rarray" variable from the stack
+		mov		rsize, [s_size]				; get "rsize" variable from the stack
+@@:		mov		array, rarray				; }
+		jmp		.end
+;---[else]---------------------------------
+.else:	cmp		rsize, 1					; if (rsize > 1)
+		jbe		@f							; {
+		mov		[s_array], larray			; save "larray" variable into the stack
+		mov		[s_size], lsize				; save "lsize" variable into the stack
+		mov		func, [s_func]				; get "func" variable from the stack
+		mov		array, rarray
+		call	.start						; call Sort (rarray, rsize, func)
+		mov		larray, [s_array]			; get "larray" variable from the stack
+		mov		lsize, [s_size]				; get "lsize" variable from the stack
+@@:		mov		size, lsize					; }
+;---[end if]-------------------------------
+.end:	cmp		size, minsize
+		ja		.loop						; do while (size > 1)
+;---[End of sorting loop]------------------
+		mov		key1, [s_key1]				; restore old value of "key1" variable
+		mov		key2, [s_key2]				; restore old value of "key2" variable
+		mov		func, [s_func]				; get "func" variable from the stack
+		add		stack, space				; restoring back the stack pointer
+		jmp		insertsort					; call insertsort (array, size, func)
+.exit:	ret
+}
+
+;------------------------------------------------------------------------------;
+;       Ascending sort order                                                   ;
+;------------------------------------------------------------------------------;
+QuickSortObjectAsc:	QUICKSORT_OBJ	InsertSortObjectAsc, l, g
+
+;------------------------------------------------------------------------------;
+;       Descending sort order                                                  ;
+;------------------------------------------------------------------------------;
+QuickSortObjectDsc:	QUICKSORT_OBJ	InsertSortObjectDsc, g, l
 
 ;==============================================================================;
 ;       Radix sort                                                             ;
