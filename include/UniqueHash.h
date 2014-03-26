@@ -151,6 +151,7 @@ Hash HashFunction (void) const;
 size_t Capacity (void) const;
 size_t Size (void) const;
 bool IsEmpty (void) const;
+bool IsInit (void) const;
 };
 # else
 /*
@@ -291,6 +292,7 @@ Hash UniqueHash_HashFunction (const struct UniqueHash *hash);
 size_t UniqueHash_Capacity (const struct UniqueHash *hash);
 size_t UniqueHash_Size (const struct UniqueHash *hash);
 bool UniqueHash_IsEmpty (const struct UniqueHash *hash);
+bool UniqueHash_IsInit (const struct UniqueHash *hash);
 
 # endif
 /*

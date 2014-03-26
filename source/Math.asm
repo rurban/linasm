@@ -282,50 +282,50 @@ public	Sqrt_flt64			as	'_ZN4Math4SqrtEd'
 ;==============================================================================;
 
 ; Unsigned integer types
-public	Cmp_uint8			as	'Math_Compare_uint8'
-public	Cmp_uint16			as	'Math_Compare_uint16'
-public	Cmp_uint32			as	'Math_Compare_uint32'
-public	Cmp_uint64			as	'Math_Compare_uint64'
-public	Cmp_uint8			as	'_ZN4Math7CompareEhh'
-public	Cmp_uint16			as	'_ZN4Math7CompareEtt'
-public	Cmp_uint32			as	'_ZN4Math7CompareEjj'
-public	Cmp_uint64			as	'_ZN4Math7CompareEyy'
-public	Cmp_uint8			as	'CmpUint8'
-public	Cmp_uint16			as	'CmpUint16'
-public	Cmp_uint32			as	'CmpUint32'
-public	Cmp_uint64			as	'CmpUint64'
-public	Cmp_uint8			as	'_Z8CmpUint85adt_tS_'
-public	Cmp_uint16			as	'_Z9CmpUint165adt_tS_'
-public	Cmp_uint32			as	'_Z9CmpUint325adt_tS_'
-public	Cmp_uint64			as	'_Z9CmpUint645adt_tS_'
+public	Compare_uint8		as	'Math_Compare_uint8'
+public	Compare_uint16		as	'Math_Compare_uint16'
+public	Compare_uint32		as	'Math_Compare_uint32'
+public	Compare_uint64		as	'Math_Compare_uint64'
+public	Compare_uint8		as	'_ZN4Math7CompareEhh'
+public	Compare_uint16		as	'_ZN4Math7CompareEtt'
+public	Compare_uint32		as	'_ZN4Math7CompareEjj'
+public	Compare_uint64		as	'_ZN4Math7CompareEyy'
+public	Compare_uint8		as	'CmpUint8'
+public	Compare_uint16		as	'CmpUint16'
+public	Compare_uint32		as	'CmpUint32'
+public	Compare_uint64		as	'CmpUint64'
+public	Compare_uint8		as	'_Z8CmpUint85adt_tS_'
+public	Compare_uint16		as	'_Z9CmpUint165adt_tS_'
+public	Compare_uint32		as	'_Z9CmpUint325adt_tS_'
+public	Compare_uint64		as	'_Z9CmpUint645adt_tS_'
 
 ; Signed integer types
-public	Cmp_sint8			as	'Math_Compare_sint8'
-public	Cmp_sint16			as	'Math_Compare_sint16'
-public	Cmp_sint32			as	'Math_Compare_sint32'
-public	Cmp_sint64			as	'Math_Compare_sint64'
-public	Cmp_sint8			as	'_ZN4Math7CompareEaa'
-public	Cmp_sint16			as	'_ZN4Math7CompareEss'
-public	Cmp_sint32			as	'_ZN4Math7CompareEii'
-public	Cmp_sint64			as	'_ZN4Math7CompareExx'
-public	Cmp_sint8			as	'CmpSint8'
-public	Cmp_sint16			as	'CmpSint16'
-public	Cmp_sint32			as	'CmpSint32'
-public	Cmp_sint64			as	'CmpSint64'
-public	Cmp_sint8			as	'_Z8CmpSint85adt_tS_'
-public	Cmp_sint16			as	'_Z9CmpSint165adt_tS_'
-public	Cmp_sint32			as	'_Z9CmpSint325adt_tS_'
-public	Cmp_sint64			as	'_Z9CmpSint645adt_tS_'
+public	Compare_sint8		as	'Math_Compare_sint8'
+public	Compare_sint16		as	'Math_Compare_sint16'
+public	Compare_sint32		as	'Math_Compare_sint32'
+public	Compare_sint64		as	'Math_Compare_sint64'
+public	Compare_sint8		as	'_ZN4Math7CompareEaa'
+public	Compare_sint16		as	'_ZN4Math7CompareEss'
+public	Compare_sint32		as	'_ZN4Math7CompareEii'
+public	Compare_sint64		as	'_ZN4Math7CompareExx'
+public	Compare_sint8		as	'CmpSint8'
+public	Compare_sint16		as	'CmpSint16'
+public	Compare_sint32		as	'CmpSint32'
+public	Compare_sint64		as	'CmpSint64'
+public	Compare_sint8		as	'_Z8CmpSint85adt_tS_'
+public	Compare_sint16		as	'_Z9CmpSint165adt_tS_'
+public	Compare_sint32		as	'_Z9CmpSint325adt_tS_'
+public	Compare_sint64		as	'_Z9CmpSint645adt_tS_'
 
 ; Floating-point types
-public	Cmp_flt32			as	'Math_Compare_flt32'
-public	Cmp_flt64			as	'Math_Compare_flt64'
-public	Cmp_flt32			as	'_ZN4Math7CompareEff'
-public	Cmp_flt64			as	'_ZN4Math7CompareEdd'
-public	CmpFlt32			as	'CmpFlt32'
-public	CmpFlt64			as	'CmpFlt64'
-public	CmpFlt32			as	'_Z8CmpFlt325adt_tS_'
-public	CmpFlt64			as	'_Z8CmpFlt645adt_tS_'
+public	Compare_flt32		as	'Math_Compare_flt32'
+public	Compare_flt64		as	'Math_Compare_flt64'
+public	Compare_flt32		as	'_ZN4Math7CompareEff'
+public	Compare_flt64		as	'_ZN4Math7CompareEdd'
+public	CompareFlt32		as	'CmpFlt32'
+public	CompareFlt64		as	'CmpFlt64'
+public	CompareFlt32		as	'_Z8CmpFlt325adt_tS_'
+public	CompareFlt64		as	'_Z8CmpFlt645adt_tS_'
 
 ;==============================================================================;
 ;       Minimum and maximum value                                              ;
@@ -1132,14 +1132,14 @@ end if
 }
 
 ; Signed integer types
-Sign_sint8:		SIGN_INT		dil, 0, g, l
-Sign_sint16:	SIGN_INT		di, 0, g, l
-Sign_sint32:	SIGN_INT		edi, 0, g, l
-Sign_sint64:	SIGN_INT		rdi, 0, g, l
+Sign_sint8:		SIGN_INT	dil, 0, g, l
+Sign_sint16:	SIGN_INT	di, 0, g, l
+Sign_sint32:	SIGN_INT	edi, 0, g, l
+Sign_sint64:	SIGN_INT	rdi, 0, g, l
 
 ; Floating-point types
-Sign_flt32:		SIGN_FLT		eax, edx, ecx, edi, s, 1
-Sign_flt64:		SIGN_FLT		rax, rdx, rcx, rdi, d, 1
+Sign_flt32:		SIGN_FLT	eax, edx, ecx, edi, s, 1
+Sign_flt64:		SIGN_FLT	rax, rdx, rcx, rdi, d, 1
 
 ;==============================================================================;
 ;       Square root                                                            ;
@@ -1214,22 +1214,22 @@ end if
 }
 
 ; Unsigned integer types
-Cmp_uint8:		SIGN_INT		dil, sil, a, b
-Cmp_uint16:		SIGN_INT		di, si, a, b
-Cmp_uint32:		SIGN_INT		edi, esi, a, b
-Cmp_uint64:		SIGN_INT		rdi, rsi, a, b
+Compare_uint8:	SIGN_INT	dil, sil, a, b
+Compare_uint16:	SIGN_INT	di, si, a, b
+Compare_uint32:	SIGN_INT	edi, esi, a, b
+Compare_uint64:	SIGN_INT	rdi, rsi, a, b
 
 ; Signed integer types
-Cmp_sint8:		SIGN_INT		dil, sil, g, l
-Cmp_sint16:		SIGN_INT		di, si, g, l
-Cmp_sint32:		SIGN_INT		edi, esi, g, l
-Cmp_sint64:		SIGN_INT		rdi, rsi, g, l
+Compare_sint8:	SIGN_INT	dil, sil, g, l
+Compare_sint16:	SIGN_INT	di, si, g, l
+Compare_sint32:	SIGN_INT	edi, esi, g, l
+Compare_sint64:	SIGN_INT	rdi, rsi, g, l
 
 ; Floating-point types
-Cmp_flt32:		SIGN_FLT		eax, edx, ecx, edi, s, 0
-Cmp_flt64:		SIGN_FLT		rax, rdx, rcx, rdi, d, 0
-CmpFlt32:		SIGN_RAW		edi, esi, r8d, r9d, s
-CmpFlt64:		SIGN_RAW		rdi, rsi, r8, r9, d
+Compare_flt32:	SIGN_FLT	eax, edx, ecx, edi, s, 0
+Compare_flt64:	SIGN_FLT	rax, rdx, rcx, rdi, d, 0
+CompareFlt32:	SIGN_RAW	edi, esi, r8d, r9d, s
+CompareFlt64:	SIGN_RAW	rdi, rsi, r8, r9, d
 
 ;==============================================================================;
 ;       Minimum and maximum value                                              ;

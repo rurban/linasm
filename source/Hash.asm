@@ -315,6 +315,12 @@ public	IsEmpty					as	'UniqueHash_IsEmpty'
 public	IsEmpty					as	'_ZNK9MultiHash7IsEmptyEv'
 public	IsEmpty					as	'_ZNK10UniqueHash7IsEmptyEv'
 
+; Check if hash table is initialized
+public	IsInit					as	'MultiHash_IsInit'
+public	IsInit					as	'UniqueHash_IsInit'
+public	IsInit					as	'_ZNK9MultiHash6IsInitEv'
+public	IsInit					as	'_ZNK10UniqueHash6IsInitEv'
+
 ;###############################################################################
 ;#      Code section                                                           #
 ;###############################################################################
@@ -2384,6 +2390,18 @@ size	equ		rdx							; object size
 		mov		size, [this + SIZE]			; get object size
 		test	size, size					; if (size == 0)
 		setz	status						;     return true
+		ret
+;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+IsInit:
+;---[Parameters]---------------------------
+this	equ		rdi							; pointer to hash table object
+;---[Internal variables]-------------------
+status	equ		al							; operation status
+cap		equ		rdx							; object capacity
+;------------------------------------------
+		mov		cap, [this + CAPACITY]		; get object capacity
+		test	cap, cap					; if (capacity == 0)
+		setnz	status						;     return true
 		ret
 
 ;###############################################################################

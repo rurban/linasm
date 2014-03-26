@@ -162,6 +162,7 @@ Hash HashFunction (void) const;
 size_t Capacity (void) const;
 size_t Size (void) const;
 bool IsEmpty (void) const;
+bool IsInit (void) const;
 };
 # else
 /*
@@ -313,6 +314,7 @@ Hash MultiHash_HashFunction (const struct MultiHash *hash);
 size_t MultiHash_Capacity (const struct MultiHash *hash);
 size_t MultiHash_Size (const struct MultiHash *hash);
 bool MultiHash_IsEmpty (const struct MultiHash *hash);
+bool MultiHash_IsInit (const struct MultiHash *hash);
 
 # endif
 /*
