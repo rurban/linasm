@@ -100,6 +100,7 @@ HeapIndex IndexFunction (void) const;
 size_t Capacity (void) const;
 size_t Size (void) const;
 bool IsEmpty (void) const;
+bool IsInit (void) const;
 };
 # else
 /*
@@ -186,6 +187,7 @@ HeapIndex MaxHeap_IndexFunction (const struct MaxHeap *heap);
 size_t MaxHeap_Capacity (const struct MaxHeap *heap);
 size_t MaxHeap_Size (const struct MaxHeap *heap);
 bool MaxHeap_IsEmpty (const struct MaxHeap *heap);
+bool MaxHeap_IsInit (const struct MaxHeap *heap);
 
 # endif
 /*

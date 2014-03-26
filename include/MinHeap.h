@@ -100,6 +100,7 @@ HeapIndex IndexFunction (void) const;
 size_t Capacity (void) const;
 size_t Size (void) const;
 bool IsEmpty (void) const;
+bool IsInit (void) const;
 };
 # else
 /*
@@ -189,6 +190,7 @@ HeapIndex MinHeap_IndexFunction (const struct MinHeap *heap);
 size_t MinHeap_Capacity (const struct MinHeap *heap);
 size_t MinHeap_Size (const struct MinHeap *heap);
 bool MinHeap_IsEmpty (const struct MinHeap *heap);
+bool MinHeap_IsInit (const struct MinHeap *heap);
 
 # endif
 /*
