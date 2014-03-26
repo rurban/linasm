@@ -47,7 +47,7 @@ struct data_t
 //****************************************************************************//
 //      Heap index call back function prototype                               //
 //****************************************************************************//
-typedef	void (*HeapIndex) (struct data_t *data, size_t index);
+typedef	void (*HeapIndex) (const struct data_t *data, size_t index);
 
 //****************************************************************************//
 //      Hash function prototype                                               //
