@@ -57,6 +57,7 @@ void Clear (void);
 size_t Capacity (void) const;
 size_t Size (void) const;
 bool IsEmpty (void) const;
+bool IsInit (void) const;
 };
 # else
 /*
@@ -103,6 +104,7 @@ void Accumulator_Clear (struct Accumulator *accumulator);
 size_t Accumulator_Capacity (const struct Accumulator *accumulator);
 size_t Accumulator_Size (const struct Accumulator *accumulator);
 bool Accumulator_IsEmpty (const struct Accumulator *accumulator);
+bool Accumulator_IsInit (const struct Accumulator *accumulator);
 
 # endif
 /*

@@ -693,7 +693,7 @@ s_time	equ		stack - 8					; stack position of "time" variable
 		sub		month, 1					; month--
 		cmp		time, [ptr]
 		jb		@b							; do while (time < ptr[0])
-;---[end of loop]--------------------------
+;---[End of loop]--------------------------
 		sub		time, [ptr]					; time -= ptr[0]
 		shl		month, 32
 		or		struct1, month				; store month to date structure
@@ -812,7 +812,7 @@ zsize_of	= csize_of + 4					; offset of zone_size variable inside time_zone
 		lea		temp, [left + 1]
 		cmp		right, temp
 		ja		.loop						; do while (right > left + 1)
-;---[end of loop]--------------------------
+;---[End of loop]--------------------------
 @@:		movzx	index, byte [this + index_of + left]
 		cmp		index, zsize				; if (index >= zsize)
 		jae		.error						;     then go to error branch

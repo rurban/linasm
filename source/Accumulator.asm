@@ -73,6 +73,10 @@ public	GetSize				as	'_ZNK11Accumulator4SizeEv'
 public	IsEmpty				as	'Accumulator_IsEmpty'
 public	IsEmpty				as	'_ZNK11Accumulator7IsEmptyEv'
 
+; Check if accumulator is initialized
+public	IsInit				as	'Accumulator_IsInit'
+public	IsInit				as	'_ZNK11Accumulator6IsInitEv'
+
 ;###############################################################################
 ;#      Code section                                                           #
 ;###############################################################################
@@ -360,6 +364,18 @@ size	equ		rdx							; object size
 		mov		size, [this + SIZE]			; get object size
 		test	size, size					; if (size == 0)
 		setz	status						;     return true
+		ret
+;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+IsInit:
+;---[Parameters]---------------------------
+this	equ		rdi							; pointer to accumulator object
+;---[Internal variables]-------------------
+status	equ		al							; operation status
+cap		equ		rdx							; object capacity
+;------------------------------------------
+		mov		cap, [this + CAPACITY]		; get object capacity
+		test	cap, cap					; if (capacity == 0)
+		setnz	status						;     return true
 		ret
 
 ;###############################################################################
