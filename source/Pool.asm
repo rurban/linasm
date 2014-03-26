@@ -62,13 +62,17 @@ public	GetCapacity			as	'_ZNK4Pool8CapacityEv'
 public	GetSize				as	'Pool_Size'
 public	GetSize				as	'_ZNK4Pool4SizeEv'
 
+; Check if pool is full
+public	IsFull				as	'Pool_IsFull'
+public	IsFull				as	'_ZNK4Pool6IsFullEv'
+
 ; Check if pool is empty
 public	IsEmpty				as	'Pool_IsEmpty'
 public	IsEmpty				as	'_ZNK4Pool7IsEmptyEv'
 
-; Check if pool is full
-public	IsFull				as	'Pool_IsFull'
-public	IsFull				as	'_ZNK4Pool6IsFullEv'
+; Check if pool is initialized
+public	IsInit				as	'Pool_IsInit'
+public	IsInit				as	'_ZNK4Pool6IsInitEv'
 
 ;###############################################################################
 ;#      Code section                                                           #
@@ -362,6 +366,18 @@ high	equ		rdx							; high part of value for div operation
 		div		qword [this + BSIZE]		; return param / bsize
 		ret
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+IsFull:
+;---[Parameters]---------------------------
+this	equ		rdi							; pointer to pool object
+;---[Internal variables]-------------------
+status	equ		al							; operation status
+size	equ		rdx							; object size
+;------------------------------------------
+		mov		size, [this + SIZE]			; get object size
+		cmp		size, [this + CAPACITY]		; if (size == capacity)
+		sete	status						;     return true
+		ret
+;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 IsEmpty:
 ;---[Parameters]---------------------------
 this	equ		rdi							; pointer to pool object
@@ -374,16 +390,16 @@ size	equ		rdx							; object size
 		setz	status						;     return true
 		ret
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-IsFull:
+IsInit:
 ;---[Parameters]---------------------------
 this	equ		rdi							; pointer to pool object
 ;---[Internal variables]-------------------
 status	equ		al							; operation status
-size	equ		rdx							; object size
+cap		equ		rdx							; object capacity
 ;------------------------------------------
-		mov		size, [this + SIZE]			; get object size
-		cmp		size, [this + CAPACITY]		; if (size == capacity)
-		sete	status						;     return true
+		mov		cap, [this + CAPACITY]		; get object capacity
+		test	cap, cap					; if (capacity == 0)
+		setnz	status						;     return true
 		ret
 
 ;###############################################################################

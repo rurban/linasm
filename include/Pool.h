@@ -54,8 +54,9 @@ void Clear (void);
 //****************************************************************************//
 size_t Capacity (void) const;
 size_t Size (void) const;
-bool IsEmpty (void) const;
 bool IsFull (void) const;
+bool IsEmpty (void) const;
+bool IsInit (void) const;
 };
 # else
 /*
@@ -99,8 +100,9 @@ void Pool_Clear (struct Pool *pool);
 //****************************************************************************//
 size_t Pool_Capacity (const struct Pool *pool);
 size_t Pool_Size (const struct Pool *pool);
-bool Pool_IsEmpty (const struct Pool *pool);
 bool Pool_IsFull (const struct Pool *pool);
+bool Pool_IsEmpty (const struct Pool *pool);
+bool Pool_IsInit (const struct Pool *pool);
 
 # endif
 /*
