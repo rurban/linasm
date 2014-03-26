@@ -250,6 +250,10 @@ public	GetSize				as	'_ZNK5Deque4SizeEv'
 public	IsEmpty				as	'Deque_IsEmpty'
 public	IsEmpty				as	'_ZNK5Deque7IsEmptyEv'
 
+; Check if deque is initialized
+public	IsInit				as	'Deque_IsInit'
+public	IsInit				as	'_ZNK5Deque6IsInitEv'
+
 ;###############################################################################
 ;#      Code section                                                           #
 ;###############################################################################
@@ -1943,6 +1947,18 @@ size	equ		rdx							; object size
 		mov		size, [this + SIZE]			; get object size
 		test	size, size					; if (size == 0)
 		setz	status						;     return true
+		ret
+;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+IsInit:
+;---[Parameters]---------------------------
+this	equ		rdi							; pointer to deque object
+;---[Internal variables]-------------------
+status	equ		al							; operation status
+cap		equ		rdx							; object capacity
+;------------------------------------------
+		mov		cap, [this + CAPACITY]		; get object capacity
+		test	cap, cap					; if (capacity == 0)
+		setnz	status						;     return true
 		ret
 
 ;###############################################################################

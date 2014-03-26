@@ -173,6 +173,7 @@ bool IsEqual (const Deque *source, KeyCmp func) const;
 size_t Capacity (void) const;
 size_t Size (void) const;
 bool IsEmpty (void) const;
+bool IsInit (void) const;
 };
 # else
 /*
@@ -335,6 +336,7 @@ bool Deque_IsEqual (const struct Deque *deque, const struct Deque *source, KeyCm
 size_t Deque_Capacity (const struct Deque *deque);
 size_t Deque_Size (const struct Deque *deque);
 bool Deque_IsEmpty (const struct Deque *deque);
+bool Deque_IsInit (const struct Deque *deque);
 
 # endif
 /*
