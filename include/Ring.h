@@ -284,6 +284,7 @@ bool IsEqual (const Ring *source, KeyCmp func) const;
 size_t Capacity (void) const;
 size_t Size (void) const;
 bool IsEmpty (void) const;
+bool IsInit (void) const;
 };
 # else
 /*
@@ -557,6 +558,7 @@ bool Ring_IsEqual (const struct Ring *ring, const struct Ring *source, KeyCmp fu
 size_t Ring_Capacity (const struct Ring *ring);
 size_t Ring_Size (const struct Ring *ring);
 bool Ring_IsEmpty (const struct Ring *ring);
+bool Ring_IsInit (const struct Ring *ring);
 
 # endif
 /*

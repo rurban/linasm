@@ -594,6 +594,12 @@ public	IsEmpty				as	'Ring_IsEmpty'
 public	IsEmpty				as	'_ZNK4List7IsEmptyEv'
 public	IsEmpty				as	'_ZNK4Ring7IsEmptyEv'
 
+; Check if list is initialized
+public	IsInit				as	'List_IsInit'
+public	IsInit				as	'Ring_IsInit'
+public	IsInit				as	'_ZNK4List6IsInitEv'
+public	IsInit				as	'_ZNK4Ring6IsInitEv'
+
 ;###############################################################################
 ;#      Code section                                                           #
 ;###############################################################################
@@ -5317,6 +5323,18 @@ size	equ		rdx							; object size
 		mov		size, [this + SIZE]			; get object size
 		test	size, size					; if (size == 0)
 		setz	status						;     return true
+		ret
+;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+IsInit:
+;---[Parameters]---------------------------
+this	equ		rdi							; pointer to list/ring object
+;---[Internal variables]-------------------
+status	equ		al							; operation status
+cap		equ		rdx							; object capacity
+;------------------------------------------
+		mov		cap, [this + CAPACITY]		; get object capacity
+		test	cap, cap					; if (capacity == 0)
+		setnz	status						;     return true
 		ret
 
 ;###############################################################################

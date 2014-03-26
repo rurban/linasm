@@ -292,6 +292,7 @@ bool IsEqual (const List *source, KeyCmp func) const;
 size_t Capacity (void) const;
 size_t Size (void) const;
 bool IsEmpty (void) const;
+bool IsInit (void) const;
 };
 # else
 /*
@@ -573,6 +574,7 @@ bool List_IsEqual (const struct List *list, const struct List *source, KeyCmp fu
 size_t List_Capacity (const struct List *list);
 size_t List_Size (const struct List *list);
 bool List_IsEmpty (const struct List *list);
+bool List_IsInit (const struct List *list);
 
 # endif
 /*
