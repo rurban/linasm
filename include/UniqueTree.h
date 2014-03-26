@@ -212,6 +212,7 @@ size_t Capacity (void) const;
 size_t Size (void) const;
 size_t Height (void) const;
 bool IsEmpty (void) const;
+bool IsInit (void) const;
 };
 # else
 /*
@@ -413,6 +414,7 @@ size_t UniqueTree_Capacity (const struct UniqueTree *tree);
 size_t UniqueTree_Size (const struct UniqueTree *tree);
 size_t UniqueTree_Height (const struct UniqueTree *tree);
 bool UniqueTree_IsEmpty (const struct UniqueTree *tree);
+bool UniqueTree_IsInit (const struct UniqueTree *tree);
 
 # endif
 /*

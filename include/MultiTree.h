@@ -223,6 +223,7 @@ size_t Capacity (void) const;
 size_t Size (void) const;
 size_t Height (void) const;
 bool IsEmpty (void) const;
+bool IsInit (void) const;
 };
 # else
 /*
@@ -435,6 +436,7 @@ size_t MultiTree_Capacity (const struct MultiTree *tree);
 size_t MultiTree_Size (const struct MultiTree *tree);
 size_t MultiTree_Height (const struct MultiTree *tree);
 bool MultiTree_IsEmpty (const struct MultiTree *tree);
+bool MultiTree_IsInit (const struct MultiTree *tree);
 
 # endif
 /*
