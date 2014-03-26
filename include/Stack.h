@@ -137,6 +137,7 @@ bool IsEqual (const Stack *source, KeyCmp func) const;
 size_t Capacity (void) const;
 size_t Size (void) const;
 bool IsEmpty (void) const;
+bool IsInit (void) const;
 };
 # else
 /*
@@ -263,6 +264,7 @@ bool Stack_IsEqual (const struct Stack *stack, const struct Stack *source, KeyCm
 size_t Stack_Capacity (const struct Stack *stack);
 size_t Stack_Size (const struct Stack *stack);
 bool Stack_IsEmpty (const struct Stack *stack);
+bool Stack_IsInit (const struct Stack *stack);
 
 # endif
 /*
