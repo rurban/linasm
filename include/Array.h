@@ -508,6 +508,22 @@ static flt32_t SumMul (const flt32_t array1[], const flt32_t array2[], size_t si
 static flt64_t SumMul (const flt64_t array1[], const flt64_t array2[], size_t size);
 
 //****************************************************************************//
+//      Minimum and maximum absolute value                                    //
+//****************************************************************************//
+
+//============================================================================//
+//      Minimum absolute value                                                //
+//============================================================================//
+static flt32_t MinAbs (const flt32_t array[], size_t size);
+static flt64_t MinAbs (const flt64_t array[], size_t size);
+
+//============================================================================//
+//      Maximum absolute value                                                //
+//============================================================================//
+static flt32_t MaxAbs (const flt32_t array[], size_t size);
+static flt64_t MaxAbs (const flt64_t array[], size_t size);
+
+//****************************************************************************//
 //      Minimum and maximum value                                             //
 //****************************************************************************//
 
@@ -530,12 +546,6 @@ static flt32_t Min (const flt32_t array[], size_t size);
 static flt64_t Min (const flt64_t array[], size_t size);
 
 //============================================================================//
-//      Minimum absolute value                                                //
-//============================================================================//
-static flt32_t MinAbs (const flt32_t array[], size_t size);
-static flt64_t MinAbs (const flt64_t array[], size_t size);
-
-//============================================================================//
 //      Maximum value                                                         //
 //============================================================================//
 
@@ -553,18 +563,12 @@ static sint32_t Max (const sint32_t array[], size_t size);
 static flt32_t Max (const flt32_t array[], size_t size);
 static flt64_t Max (const flt64_t array[], size_t size);
 
-//============================================================================//
-//      Maximum absolute value                                                //
-//============================================================================//
-static flt32_t MaxAbs (const flt32_t array[], size_t size);
-static flt64_t MaxAbs (const flt64_t array[], size_t size);
-
 //****************************************************************************//
-//      Search algorithms                                                     //
-//****************************************************************************//
-
-//============================================================================//
 //      Linear search                                                         //
+//****************************************************************************//
+
+//============================================================================//
+//      Regular array search                                                  //
 //============================================================================//
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
@@ -606,7 +610,25 @@ static size_t FindBwd (const sint64_t array[], size_t size, sint64_t value);
 static size_t FindBwd (const size_t array[], size_t size, size_t value);
 
 //============================================================================//
+//      Object array search                                                   //
+//============================================================================//
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//      Forward direction search                                              //
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+static size_t FindFwd (const void* array[], size_t size, const void *value, Cmp func);
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//      Backward direction search                                             //
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+static size_t FindBwd (const void* array[], size_t size, const void *value, Cmp func);
+
+//****************************************************************************//
 //      Binary search                                                         //
+//****************************************************************************//
+
+//============================================================================//
+//      Regular array search                                                  //
 //============================================================================//
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
@@ -622,24 +644,24 @@ static size_t FindFirstEqualAsc (const uint8_t array[], size_t size, uint8_t val
 static size_t FindFirstEqualAsc (const uint16_t array[], size_t size, uint16_t value);
 static size_t FindFirstEqualAsc (const uint32_t array[], size_t size, uint32_t value);
 static size_t FindFirstEqualAsc (const uint64_t array[], size_t size, uint64_t value);
-static size_t FindListEqualAsc (const uint8_t array[], size_t size, uint8_t value);
-static size_t FindListEqualAsc (const uint16_t array[], size_t size, uint16_t value);
-static size_t FindListEqualAsc (const uint32_t array[], size_t size, uint32_t value);
-static size_t FindListEqualAsc (const uint64_t array[], size_t size, uint64_t value);
+static size_t FindLastEqualAsc (const uint8_t array[], size_t size, uint8_t value);
+static size_t FindLastEqualAsc (const uint16_t array[], size_t size, uint16_t value);
+static size_t FindLastEqualAsc (const uint32_t array[], size_t size, uint32_t value);
+static size_t FindLastEqualAsc (const uint64_t array[], size_t size, uint64_t value);
 
 // Signed integer types
 static size_t FindFirstEqualAsc (const sint8_t array[], size_t size, sint8_t value);
 static size_t FindFirstEqualAsc (const sint16_t array[], size_t size, sint16_t value);
 static size_t FindFirstEqualAsc (const sint32_t array[], size_t size, sint32_t value);
 static size_t FindFirstEqualAsc (const sint64_t array[], size_t size, sint64_t value);
-static size_t FindListEqualAsc (const sint8_t array[], size_t size, sint8_t value);
-static size_t FindListEqualAsc (const sint16_t array[], size_t size, sint16_t value);
-static size_t FindListEqualAsc (const sint32_t array[], size_t size, sint32_t value);
-static size_t FindListEqualAsc (const sint64_t array[], size_t size, sint64_t value);
+static size_t FindLastEqualAsc (const sint8_t array[], size_t size, sint8_t value);
+static size_t FindLastEqualAsc (const sint16_t array[], size_t size, sint16_t value);
+static size_t FindLastEqualAsc (const sint32_t array[], size_t size, sint32_t value);
+static size_t FindLastEqualAsc (const sint64_t array[], size_t size, sint64_t value);
 
 // Other types
 static size_t FindFirstEqualAsc (const size_t array[], size_t size, size_t value);
-static size_t FindListEqualAsc (const size_t array[], size_t size, size_t value);
+static size_t FindLastEqualAsc (const size_t array[], size_t size, size_t value);
 
 //----------------------------------------------------------------------------//
 //      Searching for greater element                                         //
@@ -730,24 +752,24 @@ static size_t FindFirstEqualDsc (const uint8_t array[], size_t size, uint8_t val
 static size_t FindFirstEqualDsc (const uint16_t array[], size_t size, uint16_t value);
 static size_t FindFirstEqualDsc (const uint32_t array[], size_t size, uint32_t value);
 static size_t FindFirstEqualDsc (const uint64_t array[], size_t size, uint64_t value);
-static size_t FindListEqualDsc (const uint8_t array[], size_t size, uint8_t value);
-static size_t FindListEqualDsc (const uint16_t array[], size_t size, uint16_t value);
-static size_t FindListEqualDsc (const uint32_t array[], size_t size, uint32_t value);
-static size_t FindListEqualDsc (const uint64_t array[], size_t size, uint64_t value);
+static size_t FindLastEqualDsc (const uint8_t array[], size_t size, uint8_t value);
+static size_t FindLastEqualDsc (const uint16_t array[], size_t size, uint16_t value);
+static size_t FindLastEqualDsc (const uint32_t array[], size_t size, uint32_t value);
+static size_t FindLastEqualDsc (const uint64_t array[], size_t size, uint64_t value);
 
 // Signed integer types
 static size_t FindFirstEqualDsc (const sint8_t array[], size_t size, sint8_t value);
 static size_t FindFirstEqualDsc (const sint16_t array[], size_t size, sint16_t value);
 static size_t FindFirstEqualDsc (const sint32_t array[], size_t size, sint32_t value);
 static size_t FindFirstEqualDsc (const sint64_t array[], size_t size, sint64_t value);
-static size_t FindListEqualDsc (const sint8_t array[], size_t size, sint8_t value);
-static size_t FindListEqualDsc (const sint16_t array[], size_t size, sint16_t value);
-static size_t FindListEqualDsc (const sint32_t array[], size_t size, sint32_t value);
-static size_t FindListEqualDsc (const sint64_t array[], size_t size, sint64_t value);
+static size_t FindLastEqualDsc (const sint8_t array[], size_t size, sint8_t value);
+static size_t FindLastEqualDsc (const sint16_t array[], size_t size, sint16_t value);
+static size_t FindLastEqualDsc (const sint32_t array[], size_t size, sint32_t value);
+static size_t FindLastEqualDsc (const sint64_t array[], size_t size, sint64_t value);
 
 // Other types
 static size_t FindFirstEqualDsc (const size_t array[], size_t size, size_t value);
-static size_t FindListEqualDsc (const size_t array[], size_t size, size_t value);
+static size_t FindLastEqualDsc (const size_t array[], size_t size, size_t value);
 
 //----------------------------------------------------------------------------//
 //      Searching for less element                                            //
@@ -825,9 +847,77 @@ static size_t FindGreatOrEqualDsc (const sint64_t array[], size_t size, sint64_t
 // Other types
 static size_t FindGreatOrEqualDsc (const size_t array[], size_t size, size_t value);
 
+//============================================================================//
+//      Object array search                                                   //
+//============================================================================//
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//      Ascending sort order                                                  //
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+
+//----------------------------------------------------------------------------//
+//      Searching for equal element                                           //
+//----------------------------------------------------------------------------//
+static size_t FindFirstEqualAsc (const void* array[], size_t size, const void *value, Cmp func);
+static size_t FindLastEqualAsc (const void* array[], size_t size, const void *value, Cmp func);
+
+//----------------------------------------------------------------------------//
+//      Searching for greater element                                         //
+//----------------------------------------------------------------------------//
+static size_t FindGreatAsc (const void* array[], size_t size, const void *value, Cmp func);
+
+//----------------------------------------------------------------------------//
+//      Searching for greater or equal element                                //
+//----------------------------------------------------------------------------//
+static size_t FindGreatOrEqualAsc (const void* array[], size_t size, const void *value, Cmp func);
+
+//----------------------------------------------------------------------------//
+//      Searching for less element                                            //
+//----------------------------------------------------------------------------//
+static size_t FindLessAsc (const void* array[], size_t size, const void *value, Cmp func);
+
+//----------------------------------------------------------------------------//
+//      Searching for less or equal element                                   //
+//----------------------------------------------------------------------------//
+static size_t FindLessOrEqualAsc (const void* array[], size_t size, const void *value, Cmp func);
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//      Descending sort order                                                 //
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+
+//----------------------------------------------------------------------------//
+//      Searching for equal element                                           //
+//----------------------------------------------------------------------------//
+static size_t FindFirstEqualDsc (const void* array[], size_t size, const void *value, Cmp func);
+static size_t FindLastEqualDsc (const void* array[], size_t size, const void *value, Cmp func);
+
+//----------------------------------------------------------------------------//
+//      Searching for less element                                            //
+//----------------------------------------------------------------------------//
+static size_t FindLessDsc (const void* array[], size_t size, const void *value, Cmp func);
+
+//----------------------------------------------------------------------------//
+//      Searching for less or equal element                                   //
+//----------------------------------------------------------------------------//
+static size_t FindLessOrEqualDsc (const void* array[], size_t size, const void *value, Cmp func);
+
+//----------------------------------------------------------------------------//
+//      Searching for greater element                                         //
+//----------------------------------------------------------------------------//
+static size_t FindGreatDsc (const void* array[], size_t size, const void *value, Cmp func);
+
+//----------------------------------------------------------------------------//
+//      Searching for greater or equal element                                //
+//----------------------------------------------------------------------------//
+static size_t FindGreatOrEqualDsc (const void* array[], size_t size, const void *value, Cmp func);
+
 //****************************************************************************//
-//      Counting                                                              //
+//      Linear counting                                                       //
 //****************************************************************************//
+
+//============================================================================//
+//      Element counting                                                      //
+//============================================================================//
 
 // Unsigned integer types
 static size_t Count (const uint8_t array[], size_t size, uint8_t value);
@@ -844,9 +934,78 @@ static size_t Count (const sint64_t array[], size_t size, sint64_t value);
 // Other types
 static size_t Count (const size_t array[], size_t size, size_t value);
 
+//============================================================================//
+//      Object counting                                                       //
+//============================================================================//
+static size_t Count (const void* array[], size_t size, const void *value, Cmp func);
+
+//****************************************************************************//
+//      Binary counting                                                       //
+//****************************************************************************//
+
+//============================================================================//
+//      Element counting                                                      //
+//============================================================================//
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//      Ascending sort order                                                  //
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+
+// Unsigned integer types
+static size_t CountAsc (const uint8_t array[], size_t size, uint8_t value);
+static size_t CountAsc (const uint16_t array[], size_t size, uint16_t value);
+static size_t CountAsc (const uint32_t array[], size_t size, uint32_t value);
+static size_t CountAsc (const uint64_t array[], size_t size, uint64_t value);
+
+// Signed integer types
+static size_t CountAsc (const sint8_t array[], size_t size, sint8_t value);
+static size_t CountAsc (const sint16_t array[], size_t size, sint16_t value);
+static size_t CountAsc (const sint32_t array[], size_t size, sint32_t value);
+static size_t CountAsc (const sint64_t array[], size_t size, sint64_t value);
+
+// Other types
+static size_t CountAsc (const size_t array[], size_t size, size_t value);
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//      Descending sort order                                                 //
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+
+// Unsigned integer types
+static size_t CountDsc (const uint8_t array[], size_t size, uint8_t value);
+static size_t CountDsc (const uint16_t array[], size_t size, uint16_t value);
+static size_t CountDsc (const uint32_t array[], size_t size, uint32_t value);
+static size_t CountDsc (const uint64_t array[], size_t size, uint64_t value);
+
+// Signed integer types
+static size_t CountDsc (const sint8_t array[], size_t size, sint8_t value);
+static size_t CountDsc (const sint16_t array[], size_t size, sint16_t value);
+static size_t CountDsc (const sint32_t array[], size_t size, sint32_t value);
+static size_t CountDsc (const sint64_t array[], size_t size, sint64_t value);
+
+// Other types
+static size_t CountDsc (const size_t array[], size_t size, size_t value);
+
+//============================================================================//
+//      Object counting                                                       //
+//============================================================================//
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//      Ascending sort order                                                  //
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+static size_t CountAsc (const void* array[], size_t size, const void *value, Cmp func);
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//      Descending sort order                                                 //
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+static size_t CountDsc (const void* array[], size_t size, const void *value, Cmp func);
+
 //****************************************************************************//
 //      Replacing                                                             //
 //****************************************************************************//
+
+//============================================================================//
+//      Element replacing                                                     //
+//============================================================================//
 
 // Unsigned integer types
 static void Replace (uint8_t array[], size_t size, uint8_t pattern, uint8_t value);
@@ -863,21 +1022,110 @@ static void Replace (sint64_t array[], size_t size, sint64_t pattern, sint64_t v
 // Other types
 static void Replace (size_t array[], size_t size, size_t pattern, size_t value);
 
+//============================================================================//
+//      Object replacing                                                      //
+//============================================================================//
+static void Replace (const void* array[], size_t size, const void *pattern, const void *value, Cmp func);
+
 //****************************************************************************//
-//      Sorting algorithms                                                    //
+//      Order reversing                                                       //
 //****************************************************************************//
 
 //============================================================================//
+//      Regular array reversing                                               //
+//============================================================================//
+
+// Unsigned integer types
+static void Reverse (uint8_t array[], size_t size);
+static void Reverse (uint16_t array[], size_t size);
+static void Reverse (uint32_t array[], size_t size);
+static void Reverse (uint64_t array[], size_t size);
+
+// Signed integer types
+static void Reverse (sint8_t array[], size_t size);
+static void Reverse (sint16_t array[], size_t size);
+static void Reverse (sint32_t array[], size_t size);
+static void Reverse (sint64_t array[], size_t size);
+
+// Floating-point types
+static void Reverse (flt32_t array[], size_t size);
+static void Reverse (flt64_t array[], size_t size);
+
+// Other types
+static void Reverse (size_t array[], size_t size);
+
+//============================================================================//
+//      Object array reversing                                                //
+//============================================================================//
+static void Reverse (const void* array[], size_t size);
+
+//****************************************************************************//
+//      Unique values                                                         //
+//****************************************************************************//
+
+//============================================================================//
+//      Unique elements                                                       //
+//============================================================================//
+
+// Unsigned integer types
+static size_t Unique (uint8_t unique[], const uint8_t array[], size_t size);
+static size_t Unique (uint16_t unique[], const uint16_t array[], size_t size);
+static size_t Unique (uint32_t unique[], const uint32_t array[], size_t size);
+static size_t Unique (uint64_t unique[], const uint64_t array[], size_t size);
+
+// Signed integer types
+static size_t Unique (sint8_t unique[], const sint8_t array[], size_t size);
+static size_t Unique (sint16_t unique[], const sint16_t array[], size_t size);
+static size_t Unique (sint32_t unique[], const sint32_t array[], size_t size);
+static size_t Unique (sint64_t unique[], const sint64_t array[], size_t size);
+
+// Other types
+static size_t Unique (size_t unique[], const size_t array[], size_t size);
+
+//============================================================================//
+//      Unique objects                                                        //
+//============================================================================//
+static size_t Unique (const void* unique[], const void* array[], size_t size, Cmp func);
+
+//****************************************************************************//
+//      Duplicate values                                                      //
+//****************************************************************************//
+
+//============================================================================//
+//      Duplicate elements                                                    //
+//============================================================================//
+
+// Unsigned integer types
+static size_t Duplicates (uint8_t unique[], size_t count[], const uint8_t array[], size_t size);
+static size_t Duplicates (uint16_t unique[], size_t count[], const uint16_t array[], size_t size);
+static size_t Duplicates (uint32_t unique[], size_t count[], const uint32_t array[], size_t size);
+static size_t Duplicates (uint64_t unique[], size_t count[], const uint64_t array[], size_t size);
+
+// Signed integer types
+static size_t Duplicates (sint8_t unique[], size_t count[], const sint8_t array[], size_t size);
+static size_t Duplicates (sint16_t unique[], size_t count[], const sint16_t array[], size_t size);
+static size_t Duplicates (sint32_t unique[], size_t count[], const sint32_t array[], size_t size);
+static size_t Duplicates (sint64_t unique[], size_t count[], const sint64_t array[], size_t size);
+
+// Other types
+static size_t Duplicates (size_t unique[], size_t count[], const size_t array[], size_t size);
+
+//============================================================================//
+//      Duplicate objects                                                     //
+//============================================================================//
+static size_t Duplicates (const void* unique[], size_t count[], const void* array[], size_t size, Cmp func);
+
+//****************************************************************************//
 //      Insertion sort                                                        //
+//****************************************************************************//
+
+//============================================================================//
+//      Regular array sorting                                                 //
 //============================================================================//
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
-//      Array sorting                                                         //
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
-
-//----------------------------------------------------------------------------//
 //      Ascending sort order                                                  //
-//----------------------------------------------------------------------------//
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
 // Unsigned integer types
 static void InsertSortAsc (uint8_t array[], size_t size);
@@ -898,9 +1146,9 @@ static void InsertSortAsc (flt64_t array[], size_t size);
 // Other types
 static void InsertSortAsc (size_t array[], size_t size);
 
-//----------------------------------------------------------------------------//
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 //      Descending sort order                                                 //
-//----------------------------------------------------------------------------//
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
 // Unsigned integer types
 static void InsertSortDsc (uint8_t array[], size_t size);
@@ -921,13 +1169,13 @@ static void InsertSortDsc (flt64_t array[], size_t size);
 // Other types
 static void InsertSortDsc (size_t array[], size_t size);
 
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
-//      Key sorting                                                           //
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//============================================================================//
+//      Key array sorting                                                     //
+//============================================================================//
 
-//----------------------------------------------------------------------------//
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 //      Ascending sort order                                                  //
-//----------------------------------------------------------------------------//
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
 // Unsigned integer types
 static void InsertSortKeyAsc (uint8_t key[], const void* ptr[], size_t size);
@@ -948,9 +1196,9 @@ static void InsertSortKeyAsc (flt64_t key[], const void* ptr[], size_t size);
 // Other types
 static void InsertSortKeyAsc (size_t key[], const void* ptr[], size_t size);
 
-//----------------------------------------------------------------------------//
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 //      Descending sort order                                                 //
-//----------------------------------------------------------------------------//
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
 // Unsigned integer types
 static void InsertSortKeyDsc (uint8_t key[], const void* ptr[], size_t size);
@@ -971,31 +1219,31 @@ static void InsertSortKeyDsc (flt64_t key[], const void* ptr[], size_t size);
 // Other types
 static void InsertSortKeyDsc (size_t key[], const void* ptr[], size_t size);
 
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
-//      Object sorting                                                        //
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//============================================================================//
+//      Object array sorting                                                  //
+//============================================================================//
 
-//----------------------------------------------------------------------------//
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 //      Ascending sort order                                                  //
-//----------------------------------------------------------------------------//
-static void InsertSortObjectAsc (const void* array[], size_t size, Cmp func);
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+static void InsertSortAsc (const void* array[], size_t size, Cmp func);
 
-//----------------------------------------------------------------------------//
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 //      Descending sort order                                                 //
-//----------------------------------------------------------------------------//
-static void InsertSortObjectDsc (const void* array[], size_t size, Cmp func);
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+static void InsertSortDsc (const void* array[], size_t size, Cmp func);
 
-//============================================================================//
+//****************************************************************************//
 //      Quick sort                                                            //
+//****************************************************************************//
+
+//============================================================================//
+//      Regular array sorting                                                 //
 //============================================================================//
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
-//      Array sorting                                                         //
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
-
-//----------------------------------------------------------------------------//
 //      Ascending sort order                                                  //
-//----------------------------------------------------------------------------//
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
 // Unsigned integer types
 static void QuickSortAsc (uint8_t array[], size_t size);
@@ -1016,9 +1264,9 @@ static void QuickSortAsc (flt64_t array[], size_t size);
 // Other types
 static void QuickSortAsc (size_t array[], size_t size);
 
-//----------------------------------------------------------------------------//
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 //      Descending sort order                                                 //
-//----------------------------------------------------------------------------//
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
 // Unsigned integer types
 static void QuickSortDsc (uint8_t array[], size_t size);
@@ -1039,13 +1287,13 @@ static void QuickSortDsc (flt64_t array[], size_t size);
 // Other types
 static void QuickSortDsc (size_t array[], size_t size);
 
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
-//      Key sorting                                                           //
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//============================================================================//
+//      Key array sorting                                                     //
+//============================================================================//
 
-//----------------------------------------------------------------------------//
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 //      Ascending sort order                                                  //
-//----------------------------------------------------------------------------//
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
 // Unsigned integer types
 static void QuickSortKeyAsc (uint8_t key[], const void* ptr[], size_t size);
@@ -1066,9 +1314,9 @@ static void QuickSortKeyAsc (flt64_t key[], const void* ptr[], size_t size);
 // Other types
 static void QuickSortKeyAsc (size_t key[], const void* ptr[], size_t size);
 
-//----------------------------------------------------------------------------//
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 //      Descending sort order                                                 //
-//----------------------------------------------------------------------------//
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
 // Unsigned integer types
 static void QuickSortKeyDsc (uint8_t key[], const void* ptr[], size_t size);
@@ -1089,31 +1337,149 @@ static void QuickSortKeyDsc (flt64_t key[], const void* ptr[], size_t size);
 // Other types
 static void QuickSortKeyDsc (size_t key[], const void* ptr[], size_t size);
 
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
-//      Object sorting                                                        //
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//============================================================================//
+//      Object array sorting                                                  //
+//============================================================================//
 
-//----------------------------------------------------------------------------//
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 //      Ascending sort order                                                  //
-//----------------------------------------------------------------------------//
-static void QuickSortObjectAsc (const void* array[], size_t size, Cmp func);
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+static void QuickSortAsc (const void* array[], size_t size, Cmp func);
 
-//----------------------------------------------------------------------------//
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 //      Descending sort order                                                 //
-//----------------------------------------------------------------------------//
-static void QuickSortObjectDsc (const void* array[], size_t size, Cmp func);
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+static void QuickSortDsc (const void* array[], size_t size, Cmp func);
+
+//****************************************************************************//
+//      Merge sort                                                            //
+//****************************************************************************//
 
 //============================================================================//
-//      Radix sort                                                            //
+//      Regular array sorting                                                 //
 //============================================================================//
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
-//      Array sorting                                                         //
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
-
-//----------------------------------------------------------------------------//
 //      Ascending sort order                                                  //
-//----------------------------------------------------------------------------//
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+
+// Unsigned integer types
+static void MergeSortAsc (uint8_t array[], uint8_t temp[], size_t size);
+static void MergeSortAsc (uint16_t array[], uint16_t temp[], size_t size);
+static void MergeSortAsc (uint32_t array[], uint32_t temp[], size_t size);
+static void MergeSortAsc (uint64_t array[], uint64_t temp[], size_t size);
+
+// Signed integer types
+static void MergeSortAsc (sint8_t array[], sint8_t temp[], size_t size);
+static void MergeSortAsc (sint16_t array[], sint16_t temp[], size_t size);
+static void MergeSortAsc (sint32_t array[], sint32_t temp[], size_t size);
+static void MergeSortAsc (sint64_t array[], sint64_t temp[], size_t size);
+
+// Floating-point types
+static void MergeSortAsc (flt32_t array[], flt32_t temp[], size_t size);
+static void MergeSortAsc (flt64_t array[], flt64_t temp[], size_t size);
+
+// Other types
+static void MergeSortAsc (size_t array[], size_t temp[], size_t size);
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//      Descending sort order                                                 //
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+
+// Unsigned integer types
+static void MergeSortDsc (uint8_t array[], uint8_t temp[], size_t size);
+static void MergeSortDsc (uint16_t array[], uint16_t temp[], size_t size);
+static void MergeSortDsc (uint32_t array[], uint32_t temp[], size_t size);
+static void MergeSortDsc (uint64_t array[], uint64_t temp[], size_t size);
+
+// Signed integer types
+static void MergeSortDsc (sint8_t array[], sint8_t temp[], size_t size);
+static void MergeSortDsc (sint16_t array[], sint16_t temp[], size_t size);
+static void MergeSortDsc (sint32_t array[], sint32_t temp[], size_t size);
+static void MergeSortDsc (sint64_t array[], sint64_t temp[], size_t size);
+
+// Floating-point types
+static void MergeSortDsc (flt32_t array[], flt32_t temp[], size_t size);
+static void MergeSortDsc (flt64_t array[], flt64_t temp[], size_t size);
+
+// Other types
+static void MergeSortDsc (size_t array[], size_t temp[], size_t size);
+
+//============================================================================//
+//      Key array sorting                                                     //
+//============================================================================//
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//      Ascending sort order                                                  //
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+
+// Unsigned integer types
+static void MergeSortKeyAsc (uint8_t key[], uint8_t tkey[], const void* ptr[], const void* tptr[], size_t size);
+static void MergeSortKeyAsc (uint16_t key[], uint16_t tkey[], const void* ptr[], const void* tptr[], size_t size);
+static void MergeSortKeyAsc (uint32_t key[], uint32_t tkey[], const void* ptr[], const void* tptr[], size_t size);
+static void MergeSortKeyAsc (uint64_t key[], uint64_t tkey[], const void* ptr[], const void* tptr[], size_t size);
+
+// Signed integer types
+static void MergeSortKeyAsc (sint8_t key[], sint8_t tkey[], const void* ptr[], const void* tptr[], size_t size);
+static void MergeSortKeyAsc (sint16_t key[], sint16_t tkey[], const void* ptr[], const void* tptr[], size_t size);
+static void MergeSortKeyAsc (sint32_t key[], sint32_t tkey[], const void* ptr[], const void* tptr[], size_t size);
+static void MergeSortKeyAsc (sint64_t key[], sint64_t tkey[], const void* ptr[], const void* tptr[], size_t size);
+
+// Floating-point types
+static void MergeSortKeyAsc (flt32_t key[], flt32_t tkey[], const void* ptr[], const void* tptr[], size_t size);
+static void MergeSortKeyAsc (flt64_t key[], flt64_t tkey[], const void* ptr[], const void* tptr[], size_t size);
+
+// Other types
+static void MergeSortKeyAsc (size_t key[], size_t tkey[], const void* ptr[], const void* tptr[], size_t size);
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//      Descending sort order                                                 //
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+
+// Unsigned integer types
+static void MergeSortKeyDsc (uint8_t key[], uint8_t tkey[], const void* ptr[], const void* tptr[], size_t size);
+static void MergeSortKeyDsc (uint16_t key[], uint16_t tkey[], const void* ptr[], const void* tptr[], size_t size);
+static void MergeSortKeyDsc (uint32_t key[], uint32_t tkey[], const void* ptr[], const void* tptr[], size_t size);
+static void MergeSortKeyDsc (uint64_t key[], uint64_t tkey[], const void* ptr[], const void* tptr[], size_t size);
+
+// Signed integer types
+static void MergeSortKeyDsc (sint8_t key[], sint8_t tkey[], const void* ptr[], const void* tptr[], size_t size);
+static void MergeSortKeyDsc (sint16_t key[], sint16_t tkey[], const void* ptr[], const void* tptr[], size_t size);
+static void MergeSortKeyDsc (sint32_t key[], sint32_t tkey[], const void* ptr[], const void* tptr[], size_t size);
+static void MergeSortKeyDsc (sint64_t key[], sint64_t tkey[], const void* ptr[], const void* tptr[], size_t size);
+
+// Floating-point types
+static void MergeSortKeyDsc (flt32_t key[], flt32_t tkey[], const void* ptr[], const void* tptr[], size_t size);
+static void MergeSortKeyDsc (flt64_t key[], flt64_t tkey[], const void* ptr[], const void* tptr[], size_t size);
+
+// Other types
+static void MergeSortKeyDsc (size_t key[], size_t tkey[], const void* ptr[], const void* tptr[], size_t size);
+
+//============================================================================//
+//      Object array sorting                                                  //
+//============================================================================//
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//      Ascending sort order                                                  //
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+static void MergeSortAsc (const void* array[], const void* temp[], size_t size, Cmp func);
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//      Descending sort order                                                 //
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+static void MergeSortDsc (const void* array[], const void* temp[], size_t size, Cmp func);
+
+//****************************************************************************//
+//      Radix sort                                                            //
+//****************************************************************************//
+
+//============================================================================//
+//      Regular array sorting                                                 //
+//============================================================================//
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//      Ascending sort order                                                  //
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
 // Unsigned integer types
 static void RadixSortAsc (uint8_t array[], uint8_t temp[], size_t size);
@@ -1134,9 +1500,9 @@ static void RadixSortAsc (flt64_t array[], flt64_t temp[], size_t size);
 // Other types
 static void RadixSortAsc (size_t array[], size_t temp[], size_t size);
 
-//----------------------------------------------------------------------------//
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 //      Descending sort order                                                 //
-//----------------------------------------------------------------------------//
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
 // Unsigned integer types
 static void RadixSortDsc (uint8_t array[], uint8_t temp[], size_t size);
@@ -1157,13 +1523,13 @@ static void RadixSortDsc (flt64_t array[], flt64_t temp[], size_t size);
 // Other types
 static void RadixSortDsc (size_t array[], size_t temp[], size_t size);
 
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
-//      Key sorting                                                           //
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//============================================================================//
+//      Key array sorting                                                     //
+//============================================================================//
 
-//----------------------------------------------------------------------------//
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 //      Ascending sort order                                                  //
-//----------------------------------------------------------------------------//
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
 // Unsigned integer types
 static void RadixSortKeyAsc (uint8_t key[], uint8_t tkey[], const void* ptr[], const void* tptr[], size_t size);
@@ -1184,9 +1550,9 @@ static void RadixSortKeyAsc (flt64_t key[], flt64_t tkey[], const void* ptr[], c
 // Other types
 static void RadixSortKeyAsc (size_t key[], size_t tkey[], const void* ptr[], const void* tptr[], size_t size);
 
-//----------------------------------------------------------------------------//
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 //      Descending sort order                                                 //
-//----------------------------------------------------------------------------//
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
 // Unsigned integer types
 static void RadixSortKeyDsc (uint8_t key[], uint8_t tkey[], const void* ptr[], const void* tptr[], size_t size);
@@ -1208,72 +1574,11 @@ static void RadixSortKeyDsc (flt64_t key[], flt64_t tkey[], const void* ptr[], c
 static void RadixSortKeyDsc (size_t key[], size_t tkey[], const void* ptr[], const void* tptr[], size_t size);
 
 //****************************************************************************//
-//      Reversing elements order                                              //
-//****************************************************************************//
-
-// Unsigned integer types
-static void Reverse (uint8_t array[], size_t size);
-static void Reverse (uint16_t array[], size_t size);
-static void Reverse (uint32_t array[], size_t size);
-static void Reverse (uint64_t array[], size_t size);
-
-// Signed integer types
-static void Reverse (sint8_t array[], size_t size);
-static void Reverse (sint16_t array[], size_t size);
-static void Reverse (sint32_t array[], size_t size);
-static void Reverse (sint64_t array[], size_t size);
-
-// Floating-point types
-static void Reverse (flt32_t array[], size_t size);
-static void Reverse (flt64_t array[], size_t size);
-
-// Other types
-static void Reverse (size_t array[], size_t size);
-
-//****************************************************************************//
-//      Unique values                                                         //
-//****************************************************************************//
-
-// Unsigned integer types
-static size_t Unique (uint8_t unique[], const uint8_t array[], size_t size);
-static size_t Unique (uint16_t unique[], const uint16_t array[], size_t size);
-static size_t Unique (uint32_t unique[], const uint32_t array[], size_t size);
-static size_t Unique (uint64_t unique[], const uint64_t array[], size_t size);
-
-// Signed integer types
-static size_t Unique (sint8_t unique[], const sint8_t array[], size_t size);
-static size_t Unique (sint16_t unique[], const sint16_t array[], size_t size);
-static size_t Unique (sint32_t unique[], const sint32_t array[], size_t size);
-static size_t Unique (sint64_t unique[], const sint64_t array[], size_t size);
-
-// Other types
-static size_t Unique (size_t unique[], const size_t array[], size_t size);
-
-//****************************************************************************//
-//      Duplicate values                                                      //
-//****************************************************************************//
-
-// Unsigned integer types
-static size_t Duplicates (uint8_t unique[], size_t count[], const uint8_t array[], size_t size);
-static size_t Duplicates (uint16_t unique[], size_t count[], const uint16_t array[], size_t size);
-static size_t Duplicates (uint32_t unique[], size_t count[], const uint32_t array[], size_t size);
-static size_t Duplicates (uint64_t unique[], size_t count[], const uint64_t array[], size_t size);
-
-// Signed integer types
-static size_t Duplicates (sint8_t unique[], size_t count[], const sint8_t array[], size_t size);
-static size_t Duplicates (sint16_t unique[], size_t count[], const sint16_t array[], size_t size);
-static size_t Duplicates (sint32_t unique[], size_t count[], const sint32_t array[], size_t size);
-static size_t Duplicates (sint64_t unique[], size_t count[], const sint64_t array[], size_t size);
-
-// Other types
-static size_t Duplicates (size_t unique[], size_t count[], const size_t array[], size_t size);
-
-//****************************************************************************//
 //      Merging of sorted arrays                                              //
 //****************************************************************************//
 
 //============================================================================//
-//      Array merging                                                         //
+//      Regular array merging                                                 //
 //============================================================================//
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
@@ -1315,7 +1620,7 @@ static void MergeDsc (sint64_t target[], const sint64_t source1[], size_t size1,
 static void MergeDsc (size_t target[], const size_t source1[], size_t size1, const size_t source2[], size_t size2);
 
 //============================================================================//
-//      Key merging                                                           //
+//      Key array merging                                                     //
 //============================================================================//
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
@@ -1356,6 +1661,20 @@ static void MergeKeyDsc (sint64_t tkey[], void* tptr[], const sint64_t skey1[], 
 // Other types
 static void MergeKeyDsc (size_t tkey[], void* tptr[], const size_t skey1[], const void* sptr1[], size_t size1, const size_t skey2[], const void* sptr2[], size_t size2);
 
+//============================================================================//
+//      Object array merging                                                  //
+//============================================================================//
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//      Ascending sort order                                                  //
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+static void MergeAsc (const void* target[], const void* source1[], size_t size1, const void* source2[], size_t size2, Cmp func);
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//      Descending sort order                                                 //
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+static void MergeDsc (const void* target[], const void* source1[], size_t size1, const void* source2[], size_t size2, Cmp func);
+
 //****************************************************************************//
 //      Comparison of arrays                                                  //
 //****************************************************************************//
@@ -1385,8 +1704,12 @@ static sint64_t Compare (const void *array1, const void *array2, size_t size);
 //============================================================================//
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
-//      Check for ascending sort order                                        //
+//      Regular array check                                                   //
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+
+//----------------------------------------------------------------------------//
+//      Check for ascending sort order                                        //
+//----------------------------------------------------------------------------//
 
 // Unsigned integer types
 static size_t CheckSortAsc (const uint8_t array[], size_t size);
@@ -1407,9 +1730,9 @@ static size_t CheckSortAsc (const flt64_t array[], size_t size);
 // Other types
 static size_t CheckSortAsc (const size_t array[], size_t size);
 
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//----------------------------------------------------------------------------//
 //      Check for descending sort order                                       //
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//----------------------------------------------------------------------------//
 
 // Unsigned integer types
 static size_t CheckSortDsc (const uint8_t array[], size_t size);
@@ -1430,9 +1753,27 @@ static size_t CheckSortDsc (const flt64_t array[], size_t size);
 // Other types
 static size_t CheckSortDsc (const size_t array[], size_t size);
 
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//      Object array check                                                    //
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+
+//----------------------------------------------------------------------------//
+//      Check for ascending sort order                                        //
+//----------------------------------------------------------------------------//
+static size_t CheckSortAsc (const void* array[], size_t size, Cmp func);
+
+//----------------------------------------------------------------------------//
+//      Check for descending sort order                                       //
+//----------------------------------------------------------------------------//
+static size_t CheckSortDsc (const void* array[], size_t size, Cmp func);
+
 //============================================================================//
 //      Check for duplicate values                                            //
 //============================================================================//
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//      Regular array check                                                   //
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
 // Unsigned integer types
 static size_t CheckDup (const uint8_t array[], size_t size);
@@ -1448,6 +1789,11 @@ static size_t CheckDup (const sint64_t array[], size_t size);
 
 // Other types
 static size_t CheckDup (const size_t array[], size_t size);
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//      Object array check                                                    //
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+static size_t CheckDup (const void* array[], size_t size, Cmp func);
 
 //============================================================================//
 //      Check for infinite values                                             //
@@ -2046,6 +2392,22 @@ flt32_t Array_SumMul_flt32 (const flt32_t array1[], const flt32_t array2[], size
 flt64_t Array_SumMul_flt64 (const flt64_t array1[], const flt64_t array2[], size_t size);
 
 //****************************************************************************//
+//      Minimum and maximum absolute value                                    //
+//****************************************************************************//
+
+//============================================================================//
+//      Minimum absolute value                                                //
+//============================================================================//
+flt32_t Array_MinAbs_flt32 (const flt32_t array[], size_t size);
+flt64_t Array_MinAbs_flt64 (const flt64_t array[], size_t size);
+
+//============================================================================//
+//      Maximum absolute value                                                //
+//============================================================================//
+flt32_t Array_MaxAbs_flt32 (const flt32_t array[], size_t size);
+flt64_t Array_MaxAbs_flt64 (const flt64_t array[], size_t size);
+
+//****************************************************************************//
 //      Minimum and maximum value                                             //
 //****************************************************************************//
 
@@ -2068,12 +2430,6 @@ flt32_t Array_Min_flt32 (const flt32_t array[], size_t size);
 flt64_t Array_Min_flt64 (const flt64_t array[], size_t size);
 
 //============================================================================//
-//      Minimum absolute value                                                //
-//============================================================================//
-flt32_t Array_MinAbs_flt32 (const flt32_t array[], size_t size);
-flt64_t Array_MinAbs_flt64 (const flt64_t array[], size_t size);
-
-//============================================================================//
 //      Maximum value                                                         //
 //============================================================================//
 
@@ -2091,18 +2447,12 @@ sint32_t Array_Max_sint32 (const sint32_t array[], size_t size);
 flt32_t Array_Max_flt32 (const flt32_t array[], size_t size);
 flt64_t Array_Max_flt64 (const flt64_t array[], size_t size);
 
-//============================================================================//
-//      Maximum absolute value                                                //
-//============================================================================//
-flt32_t Array_MaxAbs_flt32 (const flt32_t array[], size_t size);
-flt64_t Array_MaxAbs_flt64 (const flt64_t array[], size_t size);
-
 //****************************************************************************//
-//      Search algorithms                                                     //
-//****************************************************************************//
-
-//============================================================================//
 //      Linear search                                                         //
+//****************************************************************************//
+
+//============================================================================//
+//      Regular array search                                                  //
 //============================================================================//
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
@@ -2144,7 +2494,25 @@ size_t Array_FindBwd_sint64 (const sint64_t array[], size_t size, sint64_t value
 size_t Array_FindBwd_size (const size_t array[], size_t size, size_t value);
 
 //============================================================================//
+//      Object array search                                                   //
+//============================================================================//
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//      Forward direction search                                              //
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+size_t Array_FindFwd (const void* array[], size_t size, const void *value, Cmp func);
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//      Backward direction search                                             //
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+size_t Array_FindBwd (const void* array[], size_t size, const void *value, Cmp func);
+
+//****************************************************************************//
 //      Binary search                                                         //
+//****************************************************************************//
+
+//============================================================================//
+//      Regular array search                                                  //
 //============================================================================//
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
@@ -2363,9 +2731,77 @@ size_t Array_FindGreatOrEqualDsc_sint64 (const sint64_t array[], size_t size, si
 // Other types
 size_t Array_FindGreatOrEqualDsc_size (const size_t array[], size_t size, size_t value);
 
+//============================================================================//
+//      Object array search                                                   //
+//============================================================================//
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//      Ascending sort order                                                  //
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+
+//----------------------------------------------------------------------------//
+//      Searching for equal element                                           //
+//----------------------------------------------------------------------------//
+size_t Array_FindFirstEqualAsc (const void* array[], size_t size, const void *value, Cmp func);
+size_t Array_FindLastEqualAsc (const void* array[], size_t size, const void *value, Cmp func);
+
+//----------------------------------------------------------------------------//
+//      Searching for greater element                                         //
+//----------------------------------------------------------------------------//
+size_t Array_FindGreatAsc (const void* array[], size_t size, const void *value, Cmp func);
+
+//----------------------------------------------------------------------------//
+//      Searching for greater or equal element                                //
+//----------------------------------------------------------------------------//
+size_t Array_FindGreatOrEqualAsc (const void* array[], size_t size, const void *value, Cmp func);
+
+//----------------------------------------------------------------------------//
+//      Searching for less element                                            //
+//----------------------------------------------------------------------------//
+size_t Array_FindLessAsc (const void* array[], size_t size, const void *value, Cmp func);
+
+//----------------------------------------------------------------------------//
+//      Searching for less or equal element                                   //
+//----------------------------------------------------------------------------//
+size_t Array_FindLessOrEqualAsc (const void* array[], size_t size, const void *value, Cmp func);
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//      Descending sort order                                                 //
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+
+//----------------------------------------------------------------------------//
+//      Searching for equal element                                           //
+//----------------------------------------------------------------------------//
+size_t Array_FindFirstEqualDsc (const void* array[], size_t size, const void *value, Cmp func);
+size_t Array_FindLastEqualDsc (const void* array[], size_t size, const void *value, Cmp func);
+
+//----------------------------------------------------------------------------//
+//      Searching for less element                                            //
+//----------------------------------------------------------------------------//
+size_t Array_FindLessDsc (const void* array[], size_t size, const void *value, Cmp func);
+
+//----------------------------------------------------------------------------//
+//      Searching for less or equal element                                   //
+//----------------------------------------------------------------------------//
+size_t Array_FindLessOrEqualDsc (const void* array[], size_t size, const void *value, Cmp func);
+
+//----------------------------------------------------------------------------//
+//      Searching for greater element                                         //
+//----------------------------------------------------------------------------//
+size_t Array_FindGreatDsc (const void* array[], size_t size, const void *value, Cmp func);
+
+//----------------------------------------------------------------------------//
+//      Searching for greater or equal element                                //
+//----------------------------------------------------------------------------//
+size_t Array_FindGreatOrEqualDsc (const void* array[], size_t size, const void *value, Cmp func);
+
 //****************************************************************************//
-//      Counting                                                              //
+//      Linear counting                                                       //
 //****************************************************************************//
+
+//============================================================================//
+//      Element counting                                                      //
+//============================================================================//
 
 // Unsigned integer types
 size_t Array_Count_uint8 (const uint8_t array[], size_t size, uint8_t value);
@@ -2382,9 +2818,78 @@ size_t Array_Count_sint64 (const sint64_t array[], size_t size, sint64_t value);
 // Other types
 size_t Array_Count_size (const size_t array[], size_t size, size_t value);
 
+//============================================================================//
+//      Object counting                                                       //
+//============================================================================//
+size_t Array_Count (const void* array[], size_t size, const void *value, Cmp func);
+
+//****************************************************************************//
+//      Binary counting                                                       //
+//****************************************************************************//
+
+//============================================================================//
+//      Element counting                                                      //
+//============================================================================//
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//      Ascending sort order                                                  //
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+
+// Unsigned integer types
+size_t Array_CountAsc_uint8 (const uint8_t array[], size_t size, uint8_t value);
+size_t Array_CountAsc_uint16 (const uint16_t array[], size_t size, uint16_t value);
+size_t Array_CountAsc_uint32 (const uint32_t array[], size_t size, uint32_t value);
+size_t Array_CountAsc_uint64 (const uint64_t array[], size_t size, uint64_t value);
+
+// Signed integer types
+size_t Array_CountAsc_sint8 (const sint8_t array[], size_t size, sint8_t value);
+size_t Array_CountAsc_sint16 (const sint16_t array[], size_t size, sint16_t value);
+size_t Array_CountAsc_sint32 (const sint32_t array[], size_t size, sint32_t value);
+size_t Array_CountAsc_sint64 (const sint64_t array[], size_t size, sint64_t value);
+
+// Other types
+size_t Array_CountAsc_size (const size_t array[], size_t size, size_t value);
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//      Descending sort order                                                 //
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+
+// Unsigned integer types
+size_t Array_CountDsc_uint8 (const uint8_t array[], size_t size, uint8_t value);
+size_t Array_CountDsc_uint16 (const uint16_t array[], size_t size, uint16_t value);
+size_t Array_CountDsc_uint32 (const uint32_t array[], size_t size, uint32_t value);
+size_t Array_CountDsc_uint64 (const uint64_t array[], size_t size, uint64_t value);
+
+// Signed integer types
+size_t Array_CountDsc_sint8 (const sint8_t array[], size_t size, sint8_t value);
+size_t Array_CountDsc_sint16 (const sint16_t array[], size_t size, sint16_t value);
+size_t Array_CountDsc_sint32 (const sint32_t array[], size_t size, sint32_t value);
+size_t Array_CountDsc_sint64 (const sint64_t array[], size_t size, sint64_t value);
+
+// Other types
+size_t Array_CountDsc_size (const size_t array[], size_t size, size_t value);
+
+//============================================================================//
+//      Object counting                                                       //
+//============================================================================//
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//      Ascending sort order                                                  //
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+size_t Array_CountAsc (const void* array[], size_t size, const void *value, Cmp func);
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//      Descending sort order                                                 //
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+size_t Array_CountDsc (const void* array[], size_t size, const void *value, Cmp func);
+
 //****************************************************************************//
 //      Replacing                                                             //
 //****************************************************************************//
+
+//============================================================================//
+//      Element replacing                                                     //
+//============================================================================//
 
 // Unsigned integer types
 void Array_Replace_uint8 (uint8_t array[], size_t size, uint8_t pattern, uint8_t value);
@@ -2401,21 +2906,110 @@ void Array_Replace_sint64 (sint64_t array[], size_t size, sint64_t pattern, sint
 // Other types
 void Array_Replace_size (size_t array[], size_t size, size_t pattern, size_t value);
 
+//============================================================================//
+//      Object replacing                                                      //
+//============================================================================//
+void Array_Replace (const void* array[], size_t size, const void *pattern, const void *value, Cmp func);
+
 //****************************************************************************//
-//      Sorting algorithms                                                    //
+//      Order reversing                                                       //
 //****************************************************************************//
 
 //============================================================================//
+//      Regular array reversing                                               //
+//============================================================================//
+
+// Unsigned integer types
+void Array_Reverse_uint8 (uint8_t array[], size_t size);
+void Array_Reverse_uint16 (uint16_t array[], size_t size);
+void Array_Reverse_uint32 (uint32_t array[], size_t size);
+void Array_Reverse_uint64 (uint64_t array[], size_t size);
+
+// Signed integer types
+void Array_Reverse_sint8 (sint8_t array[], size_t size);
+void Array_Reverse_sint16 (sint16_t array[], size_t size);
+void Array_Reverse_sint32 (sint32_t array[], size_t size);
+void Array_Reverse_sint64 (sint64_t array[], size_t size);
+
+// Floating-point types
+void Array_Reverse_flt32 (flt32_t array[], size_t size);
+void Array_Reverse_flt64 (flt64_t array[], size_t size);
+
+// Other types
+void Array_Reverse_size (size_t array[], size_t size);
+
+//============================================================================//
+//      Object array reversing                                                //
+//============================================================================//
+void Array_Reverse (const void* array[], size_t size);
+
+//****************************************************************************//
+//      Unique values                                                         //
+//****************************************************************************//
+
+//============================================================================//
+//      Unique elements                                                       //
+//============================================================================//
+
+// Unsigned integer types
+size_t Array_Unique_uint8 (uint8_t unique[], const uint8_t array[], size_t size);
+size_t Array_Unique_uint16 (uint16_t unique[], const uint16_t array[], size_t size);
+size_t Array_Unique_uint32 (uint32_t unique[], const uint32_t array[], size_t size);
+size_t Array_Unique_uint64 (uint64_t unique[], const uint64_t array[], size_t size);
+
+// Signed integer types
+size_t Array_Unique_sint8 (sint8_t unique[], const sint8_t array[], size_t size);
+size_t Array_Unique_sint16 (sint16_t unique[], const sint16_t array[], size_t size);
+size_t Array_Unique_sint32 (sint32_t unique[], const sint32_t array[], size_t size);
+size_t Array_Unique_sint64 (sint64_t unique[], const sint64_t array[], size_t size);
+
+// Other types
+size_t Array_Unique_size (size_t unique[], const size_t array[], size_t size);
+
+//============================================================================//
+//      Unique objects                                                        //
+//============================================================================//
+size_t Array_Unique (const void* unique[], const void* array[], size_t size, Cmp func);
+
+//****************************************************************************//
+//      Duplicate values                                                      //
+//****************************************************************************//
+
+//============================================================================//
+//      Duplicate elements                                                    //
+//============================================================================//
+
+// Unsigned integer types
+size_t Array_Duplicates_uint8 (uint8_t unique[], size_t count[], const uint8_t array[], size_t size);
+size_t Array_Duplicates_uint16 (uint16_t unique[], size_t count[], const uint16_t array[], size_t size);
+size_t Array_Duplicates_uint32 (uint32_t unique[], size_t count[], const uint32_t array[], size_t size);
+size_t Array_Duplicates_uint64 (uint64_t unique[], size_t count[], const uint64_t array[], size_t size);
+
+// Signed integer types
+size_t Array_Duplicates_sint8 (sint8_t unique[], size_t count[], const sint8_t array[], size_t size);
+size_t Array_Duplicates_sint16 (sint16_t unique[], size_t count[], const sint16_t array[], size_t size);
+size_t Array_Duplicates_sint32 (sint32_t unique[], size_t count[], const sint32_t array[], size_t size);
+size_t Array_Duplicates_sint64 (sint64_t unique[], size_t count[], const sint64_t array[], size_t size);
+
+// Other types
+size_t Array_Duplicates_size (size_t unique[], size_t count[], const size_t array[], size_t size);
+
+//============================================================================//
+//      Duplicate objects                                                     //
+//============================================================================//
+size_t Array_Duplicates (const void* unique[], size_t count[], const void* array[], size_t size, Cmp func);
+
+//****************************************************************************//
 //      Insertion sort                                                        //
+//****************************************************************************//
+
+//============================================================================//
+//      Regular array sorting                                                 //
 //============================================================================//
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
-//      Array sorting                                                         //
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
-
-//----------------------------------------------------------------------------//
 //      Ascending sort order                                                  //
-//----------------------------------------------------------------------------//
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
 // Unsigned integer types
 void Array_InsertSortAsc_uint8 (uint8_t array[], size_t size);
@@ -2436,9 +3030,9 @@ void Array_InsertSortAsc_flt64 (flt64_t array[], size_t size);
 // Other types
 void Array_InsertSortAsc_size (size_t array[], size_t size);
 
-//----------------------------------------------------------------------------//
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 //      Descending sort order                                                 //
-//----------------------------------------------------------------------------//
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
 // Unsigned integer types
 void Array_InsertSortDsc_uint8 (uint8_t array[], size_t size);
@@ -2459,13 +3053,13 @@ void Array_InsertSortDsc_flt64 (flt64_t array[], size_t size);
 // Other types
 void Array_InsertSortDsc_size (size_t array[], size_t size);
 
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
-//      Key sorting                                                           //
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//============================================================================//
+//      Key array sorting                                                     //
+//============================================================================//
 
-//----------------------------------------------------------------------------//
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 //      Ascending sort order                                                  //
-//----------------------------------------------------------------------------//
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
 // Unsigned integer types
 void Array_InsertSortKeyAsc_uint8 (uint8_t key[], const void* ptr[], size_t size);
@@ -2486,9 +3080,9 @@ void Array_InsertSortKeyAsc_flt64 (flt64_t key[], const void* ptr[], size_t size
 // Other types
 void Array_InsertSortKeyAsc_size (size_t key[], const void* ptr[], size_t size);
 
-//----------------------------------------------------------------------------//
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 //      Descending sort order                                                 //
-//----------------------------------------------------------------------------//
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
 // Unsigned integer types
 void Array_InsertSortKeyDsc_uint8 (uint8_t key[], const void* ptr[], size_t size);
@@ -2509,31 +3103,31 @@ void Array_InsertSortKeyDsc_flt64 (flt64_t key[], const void* ptr[], size_t size
 // Other types
 void Array_InsertSortKeyDsc_size (size_t key[], const void* ptr[], size_t size);
 
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
-//      Object sorting                                                        //
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//============================================================================//
+//      Object array sorting                                                  //
+//============================================================================//
 
-//----------------------------------------------------------------------------//
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 //      Ascending sort order                                                  //
-//----------------------------------------------------------------------------//
-void Array_InsertSortObjectAsc (const void* array[], size_t size, Cmp func);
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+void Array_InsertSortAsc (const void* array[], size_t size, Cmp func);
 
-//----------------------------------------------------------------------------//
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 //      Descending sort order                                                 //
-//----------------------------------------------------------------------------//
-void Array_InsertSortObjectDsc (const void* array[], size_t size, Cmp func);
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+void Array_InsertSortDsc (const void* array[], size_t size, Cmp func);
 
-//============================================================================//
+//****************************************************************************//
 //      Quick sort                                                            //
+//****************************************************************************//
+
+//============================================================================//
+//      Regular array sorting                                                 //
 //============================================================================//
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
-//      Array sorting                                                         //
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
-
-//----------------------------------------------------------------------------//
 //      Ascending sort order                                                  //
-//----------------------------------------------------------------------------//
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
 // Unsigned integer types
 void Array_QuickSortAsc_uint8 (uint8_t array[], size_t size);
@@ -2554,9 +3148,9 @@ void Array_QuickSortAsc_flt64 (flt64_t array[], size_t size);
 // Other types
 void Array_QuickSortAsc_size (size_t array[], size_t size);
 
-//----------------------------------------------------------------------------//
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 //      Descending sort order                                                 //
-//----------------------------------------------------------------------------//
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
 // Unsigned integer types
 void Array_QuickSortDsc_uint8 (uint8_t array[], size_t size);
@@ -2577,13 +3171,13 @@ void Array_QuickSortDsc_flt64 (flt64_t array[], size_t size);
 // Other types
 void Array_QuickSortDsc_size (size_t array[], size_t size);
 
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
-//      Key sorting                                                           //
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//============================================================================//
+//      Key array sorting                                                     //
+//============================================================================//
 
-//----------------------------------------------------------------------------//
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 //      Ascending sort order                                                  //
-//----------------------------------------------------------------------------//
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
 // Unsigned integer types
 void Array_QuickSortKeyAsc_uint8 (uint8_t key[], const void* ptr[], size_t size);
@@ -2604,9 +3198,9 @@ void Array_QuickSortKeyAsc_flt64 (flt64_t key[], const void* ptr[], size_t size)
 // Other types
 void Array_QuickSortKeyAsc_size (size_t key[], const void* ptr[], size_t size);
 
-//----------------------------------------------------------------------------//
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 //      Descending sort order                                                 //
-//----------------------------------------------------------------------------//
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
 // Unsigned integer types
 void Array_QuickSortKeyDsc_uint8 (uint8_t key[], const void* ptr[], size_t size);
@@ -2627,31 +3221,149 @@ void Array_QuickSortKeyDsc_flt64 (flt64_t key[], const void* ptr[], size_t size)
 // Other types
 void Array_QuickSortKeyDsc_size (size_t key[], const void* ptr[], size_t size);
 
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
-//      Object sorting                                                        //
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//============================================================================//
+//      Object array sorting                                                  //
+//============================================================================//
 
-//----------------------------------------------------------------------------//
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 //      Ascending sort order                                                  //
-//----------------------------------------------------------------------------//
-void Array_QuickSortObjectAsc (const void* array[], size_t size, Cmp func);
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+void Array_QuickSortAsc (const void* array[], size_t size, Cmp func);
 
-//----------------------------------------------------------------------------//
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 //      Descending sort order                                                 //
-//----------------------------------------------------------------------------//
-void Array_QuickSortObjectDsc (const void* array[], size_t size, Cmp func);
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+void Array_QuickSortDsc (const void* array[], size_t size, Cmp func);
+
+//****************************************************************************//
+//      Merge sort                                                            //
+//****************************************************************************//
 
 //============================================================================//
-//      Radix sort                                                            //
+//      Regular array sorting                                                 //
 //============================================================================//
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
-//      Array sorting                                                         //
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
-
-//----------------------------------------------------------------------------//
 //      Ascending sort order                                                  //
-//----------------------------------------------------------------------------//
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+
+// Unsigned integer types
+void Array_MergeSortAsc_uint8 (uint8_t array[], uint8_t temp[], size_t size);
+void Array_MergeSortAsc_uint16 (uint16_t array[], uint16_t temp[], size_t size);
+void Array_MergeSortAsc_uint32 (uint32_t array[], uint32_t temp[], size_t size);
+void Array_MergeSortAsc_uint64 (uint64_t array[], uint64_t temp[], size_t size);
+
+// Signed integer types
+void Array_MergeSortAsc_sint8 (sint8_t array[], sint8_t temp[], size_t size);
+void Array_MergeSortAsc_sint16 (sint16_t array[], sint16_t temp[], size_t size);
+void Array_MergeSortAsc_sint32 (sint32_t array[], sint32_t temp[], size_t size);
+void Array_MergeSortAsc_sint64 (sint64_t array[], sint64_t temp[], size_t size);
+
+// Floating-point types
+void Array_MergeSortAsc_flt32 (flt32_t array[], flt32_t temp[], size_t size);
+void Array_MergeSortAsc_flt64 (flt64_t array[], flt64_t temp[], size_t size);
+
+// Other types
+void Array_MergeSortAsc_size (size_t array[], size_t temp[], size_t size);
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//      Descending sort order                                                 //
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+
+// Unsigned integer types
+void Array_MergeSortDsc_uint8 (uint8_t array[], uint8_t temp[], size_t size);
+void Array_MergeSortDsc_uint16 (uint16_t array[], uint16_t temp[], size_t size);
+void Array_MergeSortDsc_uint32 (uint32_t array[], uint32_t temp[], size_t size);
+void Array_MergeSortDsc_uint64 (uint64_t array[], uint64_t temp[], size_t size);
+
+// Signed integer types
+void Array_MergeSortDsc_sint8 (sint8_t array[], sint8_t temp[], size_t size);
+void Array_MergeSortDsc_sint16 (sint16_t array[], sint16_t temp[], size_t size);
+void Array_MergeSortDsc_sint32 (sint32_t array[], sint32_t temp[], size_t size);
+void Array_MergeSortDsc_sint64 (sint64_t array[], sint64_t temp[], size_t size);
+
+// Floating-point types
+void Array_MergeSortDsc_flt32 (flt32_t array[], flt32_t temp[], size_t size);
+void Array_MergeSortDsc_flt64 (flt64_t array[], flt64_t temp[], size_t size);
+
+// Other types
+void Array_MergeSortDsc_size (size_t array[], size_t temp[], size_t size);
+
+//============================================================================//
+//      Key array sorting                                                     //
+//============================================================================//
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//      Ascending sort order                                                  //
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+
+// Unsigned integer types
+void Array_MergeSortKeyAsc_uint8 (uint8_t key[], uint8_t tkey[], const void* ptr[], const void* tptr[], size_t size);
+void Array_MergeSortKeyAsc_uint16 (uint16_t key[], uint16_t tkey[], const void* ptr[], const void* tptr[], size_t size);
+void Array_MergeSortKeyAsc_uint32 (uint32_t key[], uint32_t tkey[], const void* ptr[], const void* tptr[], size_t size);
+void Array_MergeSortKeyAsc_uint64 (uint64_t key[], uint64_t tkey[], const void* ptr[], const void* tptr[], size_t size);
+
+// Signed integer types
+void Array_MergeSortKeyAsc_sint8 (sint8_t key[], sint8_t tkey[], const void* ptr[], const void* tptr[], size_t size);
+void Array_MergeSortKeyAsc_sint16 (sint16_t key[], sint16_t tkey[], const void* ptr[], const void* tptr[], size_t size);
+void Array_MergeSortKeyAsc_sint32 (sint32_t key[], sint32_t tkey[], const void* ptr[], const void* tptr[], size_t size);
+void Array_MergeSortKeyAsc_sint64 (sint64_t key[], sint64_t tkey[], const void* ptr[], const void* tptr[], size_t size);
+
+// Floating-point types
+void Array_MergeSortKeyAsc_flt32 (flt32_t key[], flt32_t tkey[], const void* ptr[], const void* tptr[], size_t size);
+void Array_MergeSortKeyAsc_flt64 (flt64_t key[], flt64_t tkey[], const void* ptr[], const void* tptr[], size_t size);
+
+// Other types
+void Array_MergeSortKeyAsc_size (size_t key[], size_t tkey[], const void* ptr[], const void* tptr[], size_t size);
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//      Descending sort order                                                 //
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+
+// Unsigned integer types
+void Array_MergeSortKeyDsc_uint8 (uint8_t key[], uint8_t tkey[], const void* ptr[], const void* tptr[], size_t size);
+void Array_MergeSortKeyDsc_uint16 (uint16_t key[], uint16_t tkey[], const void* ptr[], const void* tptr[], size_t size);
+void Array_MergeSortKeyDsc_uint32 (uint32_t key[], uint32_t tkey[], const void* ptr[], const void* tptr[], size_t size);
+void Array_MergeSortKeyDsc_uint64 (uint64_t key[], uint64_t tkey[], const void* ptr[], const void* tptr[], size_t size);
+
+// Signed integer types
+void Array_MergeSortKeyDsc_sint8 (sint8_t key[], sint8_t tkey[], const void* ptr[], const void* tptr[], size_t size);
+void Array_MergeSortKeyDsc_sint16 (sint16_t key[], sint16_t tkey[], const void* ptr[], const void* tptr[], size_t size);
+void Array_MergeSortKeyDsc_sint32 (sint32_t key[], sint32_t tkey[], const void* ptr[], const void* tptr[], size_t size);
+void Array_MergeSortKeyDsc_sint64 (sint64_t key[], sint64_t tkey[], const void* ptr[], const void* tptr[], size_t size);
+
+// Floating-point types
+void Array_MergeSortKeyDsc_flt32 (flt32_t key[], flt32_t tkey[], const void* ptr[], const void* tptr[], size_t size);
+void Array_MergeSortKeyDsc_flt64 (flt64_t key[], flt64_t tkey[], const void* ptr[], const void* tptr[], size_t size);
+
+// Other types
+void Array_MergeSortKeyDsc_size (size_t key[], size_t tkey[], const void* ptr[], const void* tptr[], size_t size);
+
+//============================================================================//
+//      Object array sorting                                                  //
+//============================================================================//
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//      Ascending sort order                                                  //
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+void Array_MergeSortAsc (const void* array[], const void* temp[], size_t size, Cmp func);
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//      Descending sort order                                                 //
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+void Array_MergeSortDsc (const void* array[], const void* temp[], size_t size, Cmp func);
+
+//****************************************************************************//
+//      Radix sort                                                            //
+//****************************************************************************//
+
+//============================================================================//
+//      Regular array sorting                                                 //
+//============================================================================//
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//      Ascending sort order                                                  //
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
 // Unsigned integer types
 void Array_RadixSortAsc_uint8 (uint8_t array[], uint8_t temp[], size_t size);
@@ -2672,9 +3384,9 @@ void Array_RadixSortAsc_flt64 (flt64_t array[], flt64_t temp[], size_t size);
 // Other types
 void Array_RadixSortAsc_size (size_t array[], size_t temp[], size_t size);
 
-//----------------------------------------------------------------------------//
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 //      Descending sort order                                                 //
-//----------------------------------------------------------------------------//
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
 // Unsigned integer types
 void Array_RadixSortDsc_uint8 (uint8_t array[], uint8_t temp[], size_t size);
@@ -2695,13 +3407,13 @@ void Array_RadixSortDsc_flt64 (flt64_t array[], flt64_t temp[], size_t size);
 // Other types
 void Array_RadixSortDsc_size (size_t array[], size_t temp[], size_t size);
 
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
-//      Key sorting                                                           //
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//============================================================================//
+//      Key array sorting                                                     //
+//============================================================================//
 
-//----------------------------------------------------------------------------//
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 //      Ascending sort order                                                  //
-//----------------------------------------------------------------------------//
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
 // Unsigned integer types
 void Array_RadixSortKeyAsc_uint8 (uint8_t key[], uint8_t tkey[], const void* ptr[], const void* tptr[], size_t size);
@@ -2722,9 +3434,9 @@ void Array_RadixSortKeyAsc_flt64 (flt64_t key[], flt64_t tkey[], const void* ptr
 // Other types
 void Array_RadixSortKeyAsc_size (size_t key[], size_t tkey[], const void* ptr[], const void* tptr[], size_t size);
 
-//----------------------------------------------------------------------------//
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 //      Descending sort order                                                 //
-//----------------------------------------------------------------------------//
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
 // Unsigned integer types
 void Array_RadixSortKeyDsc_uint8 (uint8_t key[], uint8_t tkey[], const void* ptr[], const void* tptr[], size_t size);
@@ -2746,72 +3458,11 @@ void Array_RadixSortKeyDsc_flt64 (flt64_t key[], flt64_t tkey[], const void* ptr
 void Array_RadixSortKeyDsc_size (size_t key[], size_t tkey[], const void* ptr[], const void* tptr[], size_t size);
 
 //****************************************************************************//
-//      Reversing elements order                                              //
-//****************************************************************************//
-
-// Unsigned integer types
-void Array_Reverse_uint8 (uint8_t array[], size_t size);
-void Array_Reverse_uint16 (uint16_t array[], size_t size);
-void Array_Reverse_uint32 (uint32_t array[], size_t size);
-void Array_Reverse_uint64 (uint64_t array[], size_t size);
-
-// Signed integer types
-void Array_Reverse_sint8 (sint8_t array[], size_t size);
-void Array_Reverse_sint16 (sint16_t array[], size_t size);
-void Array_Reverse_sint32 (sint32_t array[], size_t size);
-void Array_Reverse_sint64 (sint64_t array[], size_t size);
-
-// Floating-point types
-void Array_Reverse_flt32 (flt32_t array[], size_t size);
-void Array_Reverse_flt64 (flt64_t array[], size_t size);
-
-// Other types
-void Array_Reverse_size (size_t array[], size_t size);
-
-//****************************************************************************//
-//      Unique values                                                         //
-//****************************************************************************//
-
-// Unsigned integer types
-size_t Array_Unique_uint8 (uint8_t unique[], const uint8_t array[], size_t size);
-size_t Array_Unique_uint16 (uint16_t unique[], const uint16_t array[], size_t size);
-size_t Array_Unique_uint32 (uint32_t unique[], const uint32_t array[], size_t size);
-size_t Array_Unique_uint64 (uint64_t unique[], const uint64_t array[], size_t size);
-
-// Signed integer types
-size_t Array_Unique_sint8 (sint8_t unique[], const sint8_t array[], size_t size);
-size_t Array_Unique_sint16 (sint16_t unique[], const sint16_t array[], size_t size);
-size_t Array_Unique_sint32 (sint32_t unique[], const sint32_t array[], size_t size);
-size_t Array_Unique_sint64 (sint64_t unique[], const sint64_t array[], size_t size);
-
-// Other types
-size_t Array_Unique_size (size_t unique[], const size_t array[], size_t size);
-
-//****************************************************************************//
-//      Duplicate values                                                      //
-//****************************************************************************//
-
-// Unsigned integer types
-size_t Array_Duplicates_uint8 (uint8_t unique[], size_t count[], const uint8_t array[], size_t size);
-size_t Array_Duplicates_uint16 (uint16_t unique[], size_t count[], const uint16_t array[], size_t size);
-size_t Array_Duplicates_uint32 (uint32_t unique[], size_t count[], const uint32_t array[], size_t size);
-size_t Array_Duplicates_uint64 (uint64_t unique[], size_t count[], const uint64_t array[], size_t size);
-
-// Signed integer types
-size_t Array_Duplicates_sint8 (sint8_t unique[], size_t count[], const sint8_t array[], size_t size);
-size_t Array_Duplicates_sint16 (sint16_t unique[], size_t count[], const sint16_t array[], size_t size);
-size_t Array_Duplicates_sint32 (sint32_t unique[], size_t count[], const sint32_t array[], size_t size);
-size_t Array_Duplicates_sint64 (sint64_t unique[], size_t count[], const sint64_t array[], size_t size);
-
-// Other types
-size_t Array_Duplicates_size (size_t unique[], size_t count[], const size_t array[], size_t size);
-
-//****************************************************************************//
 //      Merging of sorted arrays                                              //
 //****************************************************************************//
 
 //============================================================================//
-//      Array merging                                                         //
+//      Regular array merging                                                 //
 //============================================================================//
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
@@ -2853,7 +3504,7 @@ void Array_MergeDsc_sint64 (sint64_t target[], const sint64_t source1[], size_t 
 void Array_MergeDsc_size (size_t target[], const size_t source1[], size_t size1, const size_t source2[], size_t size2);
 
 //============================================================================//
-//      Key merging                                                           //
+//      Key array merging                                                     //
 //============================================================================//
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
@@ -2894,6 +3545,20 @@ void Array_MergeKeyDsc_sint64 (sint64_t tkey[], void* tptr[], const sint64_t ske
 // Other types
 void Array_MergeKeyDsc_size (size_t tkey[], void* tptr[], const size_t skey1[], const void* sptr1[], size_t size1, const size_t skey2[], const void* sptr2[], size_t size2);
 
+//============================================================================//
+//      Object array merging                                                  //
+//============================================================================//
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//      Ascending sort order                                                  //
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+void Array_MergeAsc (const void* target[], const void* source1[], size_t size1, const void* source2[], size_t size2, Cmp func);
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//      Descending sort order                                                 //
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+void Array_MergeDsc (const void* target[], const void* source1[], size_t size1, const void* source2[], size_t size2, Cmp func);
+
 //****************************************************************************//
 //      Comparison of arrays                                                  //
 //****************************************************************************//
@@ -2923,8 +3588,12 @@ sint64_t Array_Compare_void (const void *array1, const void *array2, size_t size
 //============================================================================//
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
-//      Check for ascending sort order                                        //
+//      Regular array check                                                   //
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+
+//----------------------------------------------------------------------------//
+//      Check for ascending sort order                                        //
+//----------------------------------------------------------------------------//
 
 // Unsigned integer types
 size_t Array_CheckSortAsc_uint8 (const uint8_t array[], size_t size);
@@ -2945,9 +3614,9 @@ size_t Array_CheckSortAsc_flt64 (const flt64_t array[], size_t size);
 // Other types
 size_t Array_CheckSortAsc_size (const size_t array[], size_t size);
 
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//----------------------------------------------------------------------------//
 //      Check for descending sort order                                       //
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//----------------------------------------------------------------------------//
 
 // Unsigned integer types
 size_t Array_CheckSortDsc_uint8 (const uint8_t array[], size_t size);
@@ -2968,9 +3637,27 @@ size_t Array_CheckSortDsc_flt64 (const flt64_t array[], size_t size);
 // Other types
 size_t Array_CheckSortDsc_size (const size_t array[], size_t size);
 
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//      Object array check                                                    //
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+
+//----------------------------------------------------------------------------//
+//      Check for ascending sort order                                        //
+//----------------------------------------------------------------------------//
+size_t Array_CheckSortAsc (const void* array[], size_t size, Cmp func);
+
+//----------------------------------------------------------------------------//
+//      Check for descending sort order                                       //
+//----------------------------------------------------------------------------//
+size_t Array_CheckSortDsc (const void* array[], size_t size, Cmp func);
+
 //============================================================================//
 //      Check for duplicate values                                            //
 //============================================================================//
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//      Regular array check                                                   //
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
 // Unsigned integer types
 size_t Array_CheckDup_uint8 (const uint8_t array[], size_t size);
@@ -2986,6 +3673,11 @@ size_t Array_CheckDup_sint64 (const sint64_t array[], size_t size);
 
 // Other types
 size_t Array_CheckDup_size (const size_t array[], size_t size);
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//      Object array check                                                    //
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+size_t Array_CheckDup (const void* array[], size_t size, Cmp func);
 
 //============================================================================//
 //      Check for infinite values                                             //
