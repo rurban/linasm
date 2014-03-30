@@ -1665,6 +1665,7 @@ pos		equ		rdx							; beginning position
 count	equ		rcx							; count of nodes to check
 func	equ		r8							; compare function
 ;---[Internal variables]-------------------
+status	equ		al							; operation status
 result	equ		rax							; result register
 array	equ		r10							; pointer to array of nodes
 iter	equ		r11							; iterator value
@@ -1714,9 +1715,10 @@ space	= 7 * 8								; stack size required by the procedure
 		mov		array, [s_array]			; get "array" variable from the stack
 		mov		iter, [s_iter]				; get "iter" variable from the stack
 		mov		cap, [s_cap]				; get "cap" variable from the stack
-		not		result
-		and		result, 0x1					; if (result)
-		add		[s_total], result			;     then total++
+		test	result, result				; if (result == 0)
+		setz	status						; {
+		movzx	result, status
+		add		[s_total], result			;     then total++ }
 		cmd		iter, KSIZE					; change iterator value
 		and		iter, cap					; iter &= cap
 		mov		[s_iter], iter				; save "iter" variable into the stack

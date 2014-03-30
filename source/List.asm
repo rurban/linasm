@@ -3930,6 +3930,7 @@ key		equ		rsi							; key to find
 count	equ		rdx							; count of nodes to check
 func	equ		rcx							; compare function
 ;---[Internal variables]-------------------
+status	equ		al							; operation status
 result	equ		rax							; result register
 array	equ		r10							; pointer to array of nodes
 iter	equ		r11							; iterator value
@@ -3990,9 +3991,10 @@ end if
 		call	qword [s_func]				; result = Compare (key, array[iter].data.key)
 		mov		array, [s_array]			; get "array" variable from the stack
 		mov		iter, [s_iter]				; get "iter" variable from the stack
-		not		result
-		and		result, 0x1					; if (result)
-		add		[s_total], result			;     then total++
+		test	result, result				; if (result == 0)
+		setz	status						; {
+		movzx	result, status
+		add		[s_total], result			;     then total++ }
 		mov		node, NMASK					; load node mask
 		and		node, iter					; node = iter & NMASK
 		cmd		iter, KSIZE					; change iterator position
@@ -4041,6 +4043,7 @@ ksize	equ		rdx							; size of array of keys
 count	equ		rcx							; count of nodes to check
 func	equ		r8							; compare function
 ;---[Internal variables]-------------------
+status	equ		al							; operation status
 result	equ		rax							; result register
 array	equ		r10							; pointer to array of nodes
 iter	equ		r11							; iterator value

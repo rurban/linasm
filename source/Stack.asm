@@ -1246,6 +1246,7 @@ pos		equ		rdx							; beginning position
 count	equ		rcx							; count of nodes to check
 func	equ		r8							; compare function
 ;---[Internal variables]-------------------
+status	equ		al							; operation status
 result	equ		rax							; result register
 iter	equ		r11							; iterator value
 size	equ		result						; object size
@@ -1284,9 +1285,10 @@ space	= 5 * 8
 		mov		param1, [s_key]
 		call	qword [s_func]				; result = Compare (key, iter[0].key)
 		mov		iter, [s_iter]				; get "iter" variable from the stack
-		not		result
-		and		result, 0x1					; if (result)
-		add		[s_total], result			;     then total++
+		test	result, result				; if (result == 0)
+		setz	status						; {
+		movzx	result, status
+		add		[s_total], result			;     then total++ }
 		sub		iter, KSIZE					; iter--
 		mov		[s_iter], iter				; save "iter" variable into the stack
 		sub		qword [s_count], KSIZE		; count--

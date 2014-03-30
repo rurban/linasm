@@ -2031,6 +2031,7 @@ CountKey:
 this	equ		rdi							; pointer to hash table object
 key		equ		rsi							; key to find
 ;---[Internal variables]-------------------
+status	equ		al							; operation status
 result	equ		rax							; result register
 array	equ		r8							; pointer to array of nodes
 iter	equ		r9							; iterator value
@@ -2081,9 +2082,10 @@ space	= 7 * 8								; stack size required by the procedure
 		mov		iter, [s_iter]				; get "iter" variable from the stack
 		cmp		result, 0
 		jl		.exit						; if (result < 0), then go to exit
-		not		result
-		and		result, 0x1					; if (result)
-		add		[s_total], result			;     then total++
+		test	result, result				; if (result == 0)
+		setz	status						; {
+		movzx	result, status
+		add		[s_total], result			;     then total++ }
 		mov		iter, [array + iter + FDIR]	; iter = array[iter].fdir
 		mov		[s_iter], iter				; save "iter" variable into the stack
 		cmp		iter, [s_table]
@@ -2162,9 +2164,10 @@ space	= 9 * 8								; stack size required by the procedure
 		mov		iter, [s_iter]				; get "iter" variable from the stack
 		cmp		result, 0
 		jl		.exit						; if (result < 0), then go to exit
-		not		result
-		and		result, 0x1					; if (result)
-		add		[s_total], result			;     then total++
+		test	result, result				; if (result == 0)
+		setz	status						; {
+		movzx	result, status
+		add		[s_total], result			;     then total++ }
 		mov		iter, [array + iter + FDIR]	; iter = array[iter].fdir
 		mov		[s_iter], iter				; save "iter" variable into the stack
 		cmp		iter, [s_table]

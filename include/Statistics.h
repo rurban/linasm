@@ -124,8 +124,8 @@ static flt64_t StandardDeviation (const flt64_t array[], size_t size, flt64_t me
 //============================================================================//
 //      Absolute deviation                                                    //
 //============================================================================//
-static flt32_t AbsoluteDeviation (const flt32_t array[], size_t size, flt32_t value);
-static flt64_t AbsoluteDeviation (const flt64_t array[], size_t size, flt64_t value);
+static flt32_t AbsoluteDeviation (const flt32_t array[], size_t size, flt32_t mean);
+static flt64_t AbsoluteDeviation (const flt64_t array[], size_t size, flt64_t mean);
 
 //============================================================================//
 //      Interquartile range                                                   //
@@ -169,16 +169,18 @@ static flt32_t Kurtosis (const flt32_t array[], size_t size, flt32_t mean);
 static flt64_t Kurtosis (const flt64_t array[], size_t size, flt64_t mean);
 
 //****************************************************************************//
-//      Other functions                                                       //
+//      Covariance                                                            //
 //****************************************************************************//
-
-// Covariance
 static flt32_t Covariance (const flt32_t arr1[], flt32_t mean1, const flt32_t arr2[], flt32_t mean2, size_t size);
 static flt64_t Covariance (const flt64_t arr1[], flt64_t mean1, const flt64_t arr2[], flt64_t mean2, size_t size);
 
-// Correlation
-static flt32_t Correlation (const flt32_t arr1[], flt32_t mean1, const flt32_t arr2[], flt32_t mean2, size_t size);
-static flt64_t Correlation (const flt64_t arr1[], flt64_t mean1, const flt64_t arr2[], flt64_t mean2, size_t size);
+//****************************************************************************//
+//      Correlation                                                           //
+//****************************************************************************//
+
+// Pearson correlation
+static flt32_t PearsonCorrelation (const flt32_t arr1[], flt32_t mean1, const flt32_t arr2[], flt32_t mean2, size_t size);
+static flt64_t PearsonCorrelation (const flt64_t arr1[], flt64_t mean1, const flt64_t arr2[], flt64_t mean2, size_t size);
 };
 # else
 /*
@@ -290,8 +292,8 @@ flt64_t Statistics_StandardDeviation_flt64 (const flt64_t array[], size_t size, 
 //============================================================================//
 //      Absolute deviation                                                    //
 //============================================================================//
-flt32_t Statistics_AbsoluteDeviation_flt32 (const flt32_t array[], size_t size, flt32_t value);
-flt64_t Statistics_AbsoluteDeviation_flt64 (const flt64_t array[], size_t size, flt64_t value);
+flt32_t Statistics_AbsoluteDeviation_flt32 (const flt32_t array[], size_t size, flt32_t mean);
+flt64_t Statistics_AbsoluteDeviation_flt64 (const flt64_t array[], size_t size, flt64_t mean);
 
 //============================================================================//
 //      Interquartile range                                                   //
@@ -335,16 +337,18 @@ flt32_t Statistics_Kurtosis_flt32 (const flt32_t array[], size_t size, flt32_t m
 flt64_t Statistics_Kurtosis_flt64 (const flt64_t array[], size_t size, flt64_t mean);
 
 //****************************************************************************//
-//      Other functions                                                       //
+//      Covariance                                                            //
 //****************************************************************************//
-
-// Covariance
 flt32_t Statistics_Covariance_flt32 (const flt32_t arr1[], flt32_t mean1, const flt32_t arr2[], flt32_t mean2, size_t size);
 flt64_t Statistics_Covariance_flt64 (const flt64_t arr1[], flt64_t mean1, const flt64_t arr2[], flt64_t mean2, size_t size);
 
-// Correlation
-flt32_t Statistics_Correlation_flt32 (const flt32_t arr1[], flt32_t mean1, const flt32_t arr2[], flt32_t mean2, size_t size);
-flt64_t Statistics_Correlation_flt64 (const flt64_t arr1[], flt64_t mean1, const flt64_t arr2[], flt64_t mean2, size_t size);
+//****************************************************************************//
+//      Correlation                                                           //
+//****************************************************************************//
+
+// Pearson correlation
+flt32_t Statistics_PearsonCorrelation_flt32 (const flt32_t arr1[], flt32_t mean1, const flt32_t arr2[], flt32_t mean2, size_t size);
+flt64_t Statistics_PearsonCorrelation_flt64 (const flt64_t arr1[], flt64_t mean1, const flt64_t arr2[], flt64_t mean2, size_t size);
 
 # endif
 /*

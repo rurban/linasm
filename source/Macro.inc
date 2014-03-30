@@ -73,6 +73,7 @@ param5	equ		r8			; register to pass 5 parameter to function
 param6	equ		r9			; register to pass 6 parameter to function
 param7	equ		r10			; register to pass 7 parameter to function
 param8	equ		r11			; register to pass 8 parameter to function
+param9	equ		rax			; register to pass 9 parameter to function
 
 ;******************************************************************************;
 ;       Clone value through the entire register                                ;

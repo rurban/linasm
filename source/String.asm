@@ -141,122 +141,6 @@ public	FindSeqStr_char16		as	'_ZN6String13FindSubStringEPKsmS1_'
 public	FindSeqStr_char32		as	'_ZN6String13FindSubStringEPKimS1_'
 
 ;******************************************************************************;
-;       String search                                                          ;
-;******************************************************************************;
-
-;==============================================================================;
-;       Linear search                                                          ;
-;==============================================================================;
-
-; Forward direction search
-public	FindFwd					as	"String_FindFwd_char8"
-public	FindFwd					as	"String_FindFwd_char16"
-public	FindFwd					as	"String_FindFwd_char32"
-public	FindFwd					as	"_ZN6String7FindFwdEPPKcmS1_PFxS1_S1_E"
-public	FindFwd					as	"_ZN6String7FindFwdEPPKsmS1_PFxS1_S1_E"
-public	FindFwd					as	"_ZN6String7FindFwdEPPKimS1_PFxS1_S1_E"
-
-; Backward direction search
-public	FindBwd					as	"String_FindBwd_char8"
-public	FindBwd					as	"String_FindBwd_char16"
-public	FindBwd					as	"String_FindBwd_char32"
-public	FindBwd					as	"_ZN6String7FindBwdEPPKcmS1_PFxS1_S1_E"
-public	FindBwd					as	"_ZN6String7FindBwdEPPKsmS1_PFxS1_S1_E"
-public	FindBwd					as	"_ZN6String7FindBwdEPPKimS1_PFxS1_S1_E"
-
-;==============================================================================;
-;       Binary search                                                          ;
-;==============================================================================;
-
-;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
-;       Ascending sort order                                                   ;
-;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
-
-; Searching for equal string
-public	FindEqualAsc			as	"String_FindEqualAsc_char8"
-public	FindEqualAsc			as	"String_FindEqualAsc_char16"
-public	FindEqualAsc			as	"String_FindEqualAsc_char32"
-public	FindEqualAsc			as	"_ZN6String12FindEqualAscEPPKcmS1_PFxS1_S1_E"
-public	FindEqualAsc			as	"_ZN6String12FindEqualAscEPPKsmS1_PFxS1_S1_E"
-public	FindEqualAsc			as	"_ZN6String12FindEqualAscEPPKimS1_PFxS1_S1_E"
-
-; Searching for greater string
-public	FindGreatAsc			as	"String_FindGreatAsc_char8"
-public	FindGreatAsc			as	"String_FindGreatAsc_char16"
-public	FindGreatAsc			as	"String_FindGreatAsc_char32"
-public	FindGreatAsc			as	"_ZN6String12FindGreatAscEPPKcmS1_PFxS1_S1_E"
-public	FindGreatAsc			as	"_ZN6String12FindGreatAscEPPKsmS1_PFxS1_S1_E"
-public	FindGreatAsc			as	"_ZN6String12FindGreatAscEPPKimS1_PFxS1_S1_E"
-
-; Searching for greater or equal string
-public	FindGreatOrEqualAsc		as	"String_FindGreatOrEqualAsc_char8"
-public	FindGreatOrEqualAsc		as	"String_FindGreatOrEqualAsc_char16"
-public	FindGreatOrEqualAsc		as	"String_FindGreatOrEqualAsc_char32"
-public	FindGreatOrEqualAsc		as	"_ZN6String19FindGreatOrEqualAscEPPKcmS1_PFxS1_S1_E"
-public	FindGreatOrEqualAsc		as	"_ZN6String19FindGreatOrEqualAscEPPKsmS1_PFxS1_S1_E"
-public	FindGreatOrEqualAsc		as	"_ZN6String19FindGreatOrEqualAscEPPKimS1_PFxS1_S1_E"
-
-; Searching for less string
-public	FindLessAsc				as	"String_FindLessAsc_char8"
-public	FindLessAsc				as	"String_FindLessAsc_char16"
-public	FindLessAsc				as	"String_FindLessAsc_char32"
-public	FindLessAsc				as	"_ZN6String11FindLessAscEPPKcmS1_PFxS1_S1_E"
-public	FindLessAsc				as	"_ZN6String11FindLessAscEPPKsmS1_PFxS1_S1_E"
-public	FindLessAsc				as	"_ZN6String11FindLessAscEPPKimS1_PFxS1_S1_E"
-
-; Searching for less or equal string
-public	FindLessOrEqualAsc		as	"String_FindLessOrEqualAsc_char8"
-public	FindLessOrEqualAsc		as	"String_FindLessOrEqualAsc_char16"
-public	FindLessOrEqualAsc		as	"String_FindLessOrEqualAsc_char32"
-public	FindLessOrEqualAsc		as	"_ZN6String18FindLessOrEqualAscEPPKcmS1_PFxS1_S1_E"
-public	FindLessOrEqualAsc		as	"_ZN6String18FindLessOrEqualAscEPPKsmS1_PFxS1_S1_E"
-public	FindLessOrEqualAsc		as	"_ZN6String18FindLessOrEqualAscEPPKimS1_PFxS1_S1_E"
-
-;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
-;       Descending sort order                                                  ;
-;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
-
-; Searching for equal string
-public	FindEqualDsc			as	"String_FindEqualDsc_char8"
-public	FindEqualDsc			as	"String_FindEqualDsc_char16"
-public	FindEqualDsc			as	"String_FindEqualDsc_char32"
-public	FindEqualDsc			as	"_ZN6String12FindEqualDscEPPKcmS1_PFxS1_S1_E"
-public	FindEqualDsc			as	"_ZN6String12FindEqualDscEPPKsmS1_PFxS1_S1_E"
-public	FindEqualDsc			as	"_ZN6String12FindEqualDscEPPKimS1_PFxS1_S1_E"
-
-; Searching for less string
-public	FindLessDsc				as	"String_FindLessDsc_char8"
-public	FindLessDsc				as	"String_FindLessDsc_char16"
-public	FindLessDsc				as	"String_FindLessDsc_char32"
-public	FindLessDsc				as	"_ZN6String11FindLessDscEPPKcmS1_PFxS1_S1_E"
-public	FindLessDsc				as	"_ZN6String11FindLessDscEPPKsmS1_PFxS1_S1_E"
-public	FindLessDsc				as	"_ZN6String11FindLessDscEPPKimS1_PFxS1_S1_E"
-
-; Searching for less or equal string
-public	FindLessOrEqualDsc		as	"String_FindLessOrEqualDsc_char8"
-public	FindLessOrEqualDsc		as	"String_FindLessOrEqualDsc_char16"
-public	FindLessOrEqualDsc		as	"String_FindLessOrEqualDsc_char32"
-public	FindLessOrEqualDsc		as	"_ZN6String18FindLessOrEqualDscEPPKcmS1_PFxS1_S1_E"
-public	FindLessOrEqualDsc		as	"_ZN6String18FindLessOrEqualDscEPPKsmS1_PFxS1_S1_E"
-public	FindLessOrEqualDsc		as	"_ZN6String18FindLessOrEqualDscEPPKimS1_PFxS1_S1_E"
-
-; Searching for greater string
-public	FindGreatDsc			as	"String_FindGreatDsc_char8"
-public	FindGreatDsc			as	"String_FindGreatDsc_char16"
-public	FindGreatDsc			as	"String_FindGreatDsc_char32"
-public	FindGreatDsc			as	"_ZN6String12FindGreatDscEPPKcmS1_PFxS1_S1_E"
-public	FindGreatDsc			as	"_ZN6String12FindGreatDscEPPKsmS1_PFxS1_S1_E"
-public	FindGreatDsc			as	"_ZN6String12FindGreatDscEPPKimS1_PFxS1_S1_E"
-
-; Searching for greater or equal string
-public	FindGreatOrEqualDsc		as	"String_FindGreatOrEqualDsc_char8"
-public	FindGreatOrEqualDsc		as	"String_FindGreatOrEqualDsc_char16"
-public	FindGreatOrEqualDsc		as	"String_FindGreatOrEqualDsc_char32"
-public	FindGreatOrEqualDsc		as	"_ZN6String19FindGreatOrEqualDscEPPKcmS1_PFxS1_S1_E"
-public	FindGreatOrEqualDsc		as	"_ZN6String19FindGreatOrEqualDscEPPKsmS1_PFxS1_S1_E"
-public	FindGreatOrEqualDsc		as	"_ZN6String19FindGreatOrEqualDscEPPKimS1_PFxS1_S1_E"
-
-;******************************************************************************;
 ;       Counting                                                               ;
 ;******************************************************************************;
 
@@ -280,16 +164,6 @@ public	CountSymbols_char8		as	'_ZN6String12CountSymbolsEPKcS1_'
 public	CountSymbols_char16		as	'_ZN6String12CountSymbolsEPKsS1_'
 public	CountSymbols_char32		as	'_ZN6String12CountSymbolsEPKiS1_'
 
-;==============================================================================;
-;       String counting                                                        ;
-;==============================================================================;
-public	CountString				as	"String_CountString_char8"
-public	CountString				as	"String_CountString_char16"
-public	CountString				as	"String_CountString_char32"
-public	CountString				as	"_ZN6String11CountStringEPPKcmS1_PFxS1_S1_E"
-public	CountString				as	"_ZN6String11CountStringEPPKsmS1_PFxS1_S1_E"
-public	CountString				as	"_ZN6String11CountStringEPPKimS1_PFxS1_S1_E"
-
 ;******************************************************************************;
 ;       Replacing                                                              ;
 ;******************************************************************************;
@@ -302,173 +176,85 @@ public	Replace_char8			as	'_ZN6String13ReplaceSymbolEPccc'
 public	Replace_char16			as	'_ZN6String13ReplaceSymbolEPsss'
 public	Replace_char32			as	'_ZN6String13ReplaceSymbolEPiii'
 
-; String replacing
-public	Replace					as	'String_ReplaceString_char8'
-public	Replace					as	'String_ReplaceString_char16'
-public	Replace					as	'String_ReplaceString_char32'
-public	Replace					as	'_ZN6String13ReplaceStringEPPKcmS1_S1_PFxS1_S1_E'
-public	Replace					as	'_ZN6String13ReplaceStringEPPKsmS1_S1_PFxS1_S1_E'
-public	Replace					as	'_ZN6String13ReplaceStringEPPKimS1_S1_PFxS1_S1_E'
-
 ;******************************************************************************;
-;       Sorting algorithms                                                     ;
-;******************************************************************************;
-
-;==============================================================================;
 ;       Insertion sort                                                         ;
-;==============================================================================;
+;******************************************************************************;
 
 ; Ascending sort order
-public	InsertSortKeyAsc		as	"String_InsertSortKeyAsc_char8"
-public	InsertSortKeyAsc		as	"String_InsertSortKeyAsc_char16"
-public	InsertSortKeyAsc		as	"String_InsertSortKeyAsc_char32"
-public	InsertSortKeyAsc		as	"_ZN6String16InsertSortKeyAscEPPKcPPKvmPFxS1_S1_E"
-public	InsertSortKeyAsc		as	"_ZN6String16InsertSortKeyAscEPPKsPPKvmPFxS1_S1_E"
-public	InsertSortKeyAsc		as	"_ZN6String16InsertSortKeyAscEPPKiPPKvmPFxS1_S1_E"
+public	InsertSortKeyAsc		as	'String_InsertSortKeyAsc_char8'
+public	InsertSortKeyAsc		as	'String_InsertSortKeyAsc_char16'
+public	InsertSortKeyAsc		as	'String_InsertSortKeyAsc_char32'
+public	InsertSortKeyAsc		as	'_ZN6String16InsertSortKeyAscEPPKcPPKvmPFxS1_S1_E'
+public	InsertSortKeyAsc		as	'_ZN6String16InsertSortKeyAscEPPKsPPKvmPFxS1_S1_E'
+public	InsertSortKeyAsc		as	'_ZN6String16InsertSortKeyAscEPPKiPPKvmPFxS1_S1_E'
 
 ; Descending sort order
-public	InsertSortKeyDsc		as	"String_InsertSortKeyDsc_char8"
-public	InsertSortKeyDsc		as	"String_InsertSortKeyDsc_char16"
-public	InsertSortKeyDsc		as	"String_InsertSortKeyDsc_char32"
-public	InsertSortKeyDsc		as	"_ZN6String16InsertSortKeyDscEPPKcPPKvmPFxS1_S1_E"
-public	InsertSortKeyDsc		as	"_ZN6String16InsertSortKeyDscEPPKsPPKvmPFxS1_S1_E"
-public	InsertSortKeyDsc		as	"_ZN6String16InsertSortKeyDscEPPKiPPKvmPFxS1_S1_E"
+public	InsertSortKeyDsc		as	'String_InsertSortKeyDsc_char8'
+public	InsertSortKeyDsc		as	'String_InsertSortKeyDsc_char16'
+public	InsertSortKeyDsc		as	'String_InsertSortKeyDsc_char32'
+public	InsertSortKeyDsc		as	'_ZN6String16InsertSortKeyDscEPPKcPPKvmPFxS1_S1_E'
+public	InsertSortKeyDsc		as	'_ZN6String16InsertSortKeyDscEPPKsPPKvmPFxS1_S1_E'
+public	InsertSortKeyDsc		as	'_ZN6String16InsertSortKeyDscEPPKiPPKvmPFxS1_S1_E'
 
-;==============================================================================;
+;******************************************************************************;
 ;       Quick sort                                                             ;
-;==============================================================================;
+;******************************************************************************;
 
 ; Ascending sort order
-public	QuickSortKeyAsc			as	"String_QuickSortKeyAsc_char8"
-public	QuickSortKeyAsc			as	"String_QuickSortKeyAsc_char16"
-public	QuickSortKeyAsc			as	"String_QuickSortKeyAsc_char32"
-public	QuickSortKeyAsc			as	"_ZN6String15QuickSortKeyAscEPPKcPPKvmPFxS1_S1_E"
-public	QuickSortKeyAsc			as	"_ZN6String15QuickSortKeyAscEPPKsPPKvmPFxS1_S1_E"
-public	QuickSortKeyAsc			as	"_ZN6String15QuickSortKeyAscEPPKiPPKvmPFxS1_S1_E"
+public	QuickSortKeyAsc			as	'String_QuickSortKeyAsc_char8'
+public	QuickSortKeyAsc			as	'String_QuickSortKeyAsc_char16'
+public	QuickSortKeyAsc			as	'String_QuickSortKeyAsc_char32'
+public	QuickSortKeyAsc			as	'_ZN6String15QuickSortKeyAscEPPKcPPKvmPFxS1_S1_E'
+public	QuickSortKeyAsc			as	'_ZN6String15QuickSortKeyAscEPPKsPPKvmPFxS1_S1_E'
+public	QuickSortKeyAsc			as	'_ZN6String15QuickSortKeyAscEPPKiPPKvmPFxS1_S1_E'
 
 ; Descending sort order
-public	QuickSortKeyDsc			as	"String_QuickSortKeyDsc_char8"
-public	QuickSortKeyDsc			as	"String_QuickSortKeyDsc_char16"
-public	QuickSortKeyDsc			as	"String_QuickSortKeyDsc_char32"
-public	QuickSortKeyDsc			as	"_ZN6String15QuickSortKeyDscEPPKcPPKvmPFxS1_S1_E"
-public	QuickSortKeyDsc			as	"_ZN6String15QuickSortKeyDscEPPKsPPKvmPFxS1_S1_E"
-public	QuickSortKeyDsc			as	"_ZN6String15QuickSortKeyDscEPPKiPPKvmPFxS1_S1_E"
+public	QuickSortKeyDsc			as	'String_QuickSortKeyDsc_char8'
+public	QuickSortKeyDsc			as	'String_QuickSortKeyDsc_char16'
+public	QuickSortKeyDsc			as	'String_QuickSortKeyDsc_char32'
+public	QuickSortKeyDsc			as	'_ZN6String15QuickSortKeyDscEPPKcPPKvmPFxS1_S1_E'
+public	QuickSortKeyDsc			as	'_ZN6String15QuickSortKeyDscEPPKsPPKvmPFxS1_S1_E'
+public	QuickSortKeyDsc			as	'_ZN6String15QuickSortKeyDscEPPKiPPKvmPFxS1_S1_E'
 
 ;******************************************************************************;
-;       Reversing elements order                                               ;
+;       Merge sort                                                             ;
 ;******************************************************************************;
-public	Reverse					as	'String_Reverse_char8'
-public	Reverse					as	'String_Reverse_char16'
-public	Reverse					as	'String_Reverse_char32'
-public	Reverse					as	"_ZN6String7ReverseEPPKcm"
-public	Reverse					as	"_ZN6String7ReverseEPPKsm"
-public	Reverse					as	"_ZN6String7ReverseEPPKim"
 
-;******************************************************************************;
-;       Unique values                                                          ;
-;******************************************************************************;
-public	Unique					as	'String_Unique_char8'
-public	Unique					as	'String_Unique_char16'
-public	Unique					as	'String_Unique_char32'
-public	Unique					as	'_ZN6String6UniqueEPPcPPKcmPFxS3_S3_E'
-public	Unique					as	'_ZN6String6UniqueEPPsPPKsmPFxS3_S3_E'
-public	Unique					as	'_ZN6String6UniqueEPPiPPKimPFxS3_S3_E'
+; Ascending sort order
+public	MergeSortKeyAsc			as	'String_MergeSortKeyAsc_char8'
+public	MergeSortKeyAsc			as	'String_MergeSortKeyAsc_char16'
+public	MergeSortKeyAsc			as	'String_MergeSortKeyAsc_char32'
+public	MergeSortKeyAsc			as	'_ZN6String15MergeSortKeyAscEPPKcS2_PPKvS5_mPFxS1_S1_E'
+public	MergeSortKeyAsc			as	'_ZN6String15MergeSortKeyAscEPPKsS2_PPKvS5_mPFxS1_S1_E'
+public	MergeSortKeyAsc			as	'_ZN6String15MergeSortKeyAscEPPKiS2_PPKvS5_mPFxS1_S1_E'
 
-;******************************************************************************;
-;       Duplicate values                                                       ;
-;******************************************************************************;
-public	Duplicates				as	'String_Duplicates_char8'
-public	Duplicates				as	'String_Duplicates_char16'
-public	Duplicates				as	'String_Duplicates_char32'
-public	Duplicates				as	'_ZN6String10DuplicatesEPPcPmPPKcmPFxS4_S4_E'
-public	Duplicates				as	'_ZN6String10DuplicatesEPPsPmPPKsmPFxS4_S4_E'
-public	Duplicates				as	'_ZN6String10DuplicatesEPPiPmPPKimPFxS4_S4_E'
+; Descending sort order
+public	MergeSortKeyDsc			as	'String_MergeSortKeyDsc_char8'
+public	MergeSortKeyDsc			as	'String_MergeSortKeyDsc_char16'
+public	MergeSortKeyDsc			as	'String_MergeSortKeyDsc_char32'
+public	MergeSortKeyDsc			as	'_ZN6String15MergeSortKeyDscEPPKcS2_PPKvS5_mPFxS1_S1_E'
+public	MergeSortKeyDsc			as	'_ZN6String15MergeSortKeyDscEPPKsS2_PPKvS5_mPFxS1_S1_E'
+public	MergeSortKeyDsc			as	'_ZN6String15MergeSortKeyDscEPPKiS2_PPKvS5_mPFxS1_S1_E'
 
 ;******************************************************************************;
 ;       Merging of sorted strings                                              ;
 ;******************************************************************************;
 
-;==============================================================================;
-;       Array merging                                                          ;
-;==============================================================================;
-
-;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
-;       Ascending sort order                                                   ;
-;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
-public	MergeAsc				as	'String_MergeAsc_char8'
-public	MergeAsc				as	'String_MergeAsc_char16'
-public	MergeAsc				as	'String_MergeAsc_char32'
-public	MergeAsc				as	'_ZN6String8MergeAscEPPcPPKcmS4_mPFxS3_S3_E'
-public	MergeAsc				as	'_ZN6String8MergeAscEPPsPPKsmS4_mPFxS3_S3_E'
-public	MergeAsc				as	'_ZN6String8MergeAscEPPiPPKimS4_mPFxS3_S3_E'
-
-;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
-;       Descending sort order                                                  ;
-;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
-public	MergeDsc				as	'String_MergeDsc_char8'
-public	MergeDsc				as	'String_MergeDsc_char16'
-public	MergeDsc				as	'String_MergeDsc_char32'
-public	MergeDsc				as	'_ZN6String8MergeDscEPPcPPKcmS4_mPFxS3_S3_E'
-public	MergeDsc				as	'_ZN6String8MergeDscEPPsPPKsmS4_mPFxS3_S3_E'
-public	MergeDsc				as	'_ZN6String8MergeDscEPPiPPKimS4_mPFxS3_S3_E'
-
-;==============================================================================;
-;       Key merging                                                            ;
-;==============================================================================;
-
-;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
-;       Ascending sort order                                                   ;
-;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+; Ascending sort order
 public	MergeKeyAsc				as	'String_MergeKeyAsc_char8'
 public	MergeKeyAsc				as	'String_MergeKeyAsc_char16'
 public	MergeKeyAsc				as	'String_MergeKeyAsc_char32'
-public	MergeKeyAsc				as	'_ZN6String11MergeKeyAscEPPcPPvPPKcPPKvmS6_S9_mPFxS5_S5_E'
-public	MergeKeyAsc				as	'_ZN6String11MergeKeyAscEPPsPPvPPKsPPKvmS6_S9_mPFxS5_S5_E'
-public	MergeKeyAsc				as	'_ZN6String11MergeKeyAscEPPiPPvPPKiPPKvmS6_S9_mPFxS5_S5_E'
+public	MergeKeyAsc				as	'_ZN6String11MergeKeyAscEPPKcPPKvPPKcPPKvmS6_S9_mPFxS5_S5_E'
+public	MergeKeyAsc				as	'_ZN6String11MergeKeyAscEPPKsPPKvPPKsPPKvmS6_S9_mPFxS5_S5_E'
+public	MergeKeyAsc				as	'_ZN6String11MergeKeyAscEPPKiPPKvPPKiPPKvmS6_S9_mPFxS5_S5_E'
 
-;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
-;       Descending sort order                                                  ;
-;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+; Descending sort order
 public	MergeKeyDsc				as	'String_MergeKeyDsc_char8'
 public	MergeKeyDsc				as	'String_MergeKeyDsc_char16'
 public	MergeKeyDsc				as	'String_MergeKeyDsc_char32'
-public	MergeKeyDsc				as	'_ZN6String11MergeKeyDscEPPcPPvPPKcPPKvmS6_S9_mPFxS5_S5_E'
-public	MergeKeyDsc				as	'_ZN6String11MergeKeyDscEPPsPPvPPKsPPKvmS6_S9_mPFxS5_S5_E'
-public	MergeKeyDsc				as	'_ZN6String11MergeKeyDscEPPiPPvPPKiPPKvmS6_S9_mPFxS5_S5_E'
-
-;******************************************************************************;
-;       Checks                                                                 ;
-;******************************************************************************;
-
-;==============================================================================;
-;       Check for sort order                                                   ;
-;==============================================================================;
-
-; Check for ascending sort order
-public	CheckSortAsc			as	"String_CheckSortAsc_char8"
-public	CheckSortAsc			as	"String_CheckSortAsc_char16"
-public	CheckSortAsc			as	"String_CheckSortAsc_char32"
-public	CheckSortAsc			as	"_ZN6String12CheckSortAscEPPKcmPFxS1_S1_E"
-public	CheckSortAsc			as	"_ZN6String12CheckSortAscEPPKsmPFxS1_S1_E"
-public	CheckSortAsc			as	"_ZN6String12CheckSortAscEPPKimPFxS1_S1_E"
-
-; Check for descending sort order
-public	CheckSortDsc			as	"String_CheckSortDsc_char8"
-public	CheckSortDsc			as	"String_CheckSortDsc_char16"
-public	CheckSortDsc			as	"String_CheckSortDsc_char32"
-public	CheckSortDsc			as	"_ZN6String12CheckSortDscEPPKcmPFxS1_S1_E"
-public	CheckSortDsc			as	"_ZN6String12CheckSortDscEPPKsmPFxS1_S1_E"
-public	CheckSortDsc			as	"_ZN6String12CheckSortDscEPPKimPFxS1_S1_E"
-
-;==============================================================================;
-;       Check for duplicate values                                             ;
-;==============================================================================;
-public	CheckDup				as	"String_CheckDup_char8"
-public	CheckDup				as	"String_CheckDup_char16"
-public	CheckDup				as	"String_CheckDup_char32"
-public	CheckDup				as	"_ZN6String8CheckDupEPPKcmPFxS1_S1_E"
-public	CheckDup				as	"_ZN6String8CheckDupEPPKsmPFxS1_S1_E"
-public	CheckDup				as	"_ZN6String8CheckDupEPPKimPFxS1_S1_E"
+public	MergeKeyDsc				as	'_ZN6String11MergeKeyDscEPPKcPPKvPPKcPPKvmS6_S9_mPFxS5_S5_E'
+public	MergeKeyDsc				as	'_ZN6String11MergeKeyDscEPPKsPPKvPPKsPPKvmS6_S9_mPFxS5_S5_E'
+public	MergeKeyDsc				as	'_ZN6String11MergeKeyDscEPPKiPPKvPPKiPPKvmS6_S9_mPFxS5_S5_E'
 
 ;******************************************************************************;
 ;       String hashing                                                         ;
@@ -2070,204 +1856,6 @@ FindSeqStr_char16:	FIND_STRING2	w
 FindSeqStr_char32:	FIND_STRING2	d
 
 ;******************************************************************************;
-;       String search                                                          ;
-;******************************************************************************;
-
-;==============================================================================;
-;       Linear search                                                          ;
-;==============================================================================;
-
-;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
-;       Forward direction search                                               ;
-;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
-FindFwd:
-;---[Parameters]---------------------------
-array	equ		rdi							; pointer to array of strings
-size	equ		rsi							; array size (count of elements)
-string	equ		rdx							; string to find
-func	equ		rcx							; pointer to string compare function
-;---[Internal variables]-------------------
-result	equ		rax							; result register
-ptr		equ		rax							; pointer to current element
-stack	equ		rsp							; stack pointer
-s_array	equ		stack + 0 * 8				; stack position of "array" variable
-s_size	equ		stack + 1 * 8				; stack position of "size" variable
-s_str	equ		stack + 2 * 8				; stack position of "string" variable
-s_func	equ		stack + 3 * 8				; stack position of "func" variable
-s_ptr	equ		stack + 4 * 8				; stack position of "ptr" variable
-space	= 5 * 8								; stack size required by the procedure
-;------------------------------------------
-		sub		stack, space				; reserving stack size for local vars
-		test	size, size					; if (size == 0)
-		jz		.exit						;     then go to exit
-;---[Normal execution branch]--------------
-		mov		ptr, array					; ptr = array
-		mov		[s_array], array			; save "array" variable into the stack
-		mov		[s_size], size				; save "size" variable into the stack
-		mov		[s_str], string				; save "string" variable into the stack
-		mov		[s_func], func				; save "func" variable into the stack
-		mov		[s_ptr], ptr				; save "ptr" variable into the stack
-;---[Search loop]--------------------------
-.loop:	mov		param2, [ptr]
-		mov		param1, [s_str]
-		call	qword [s_func]				; result = Compare (string, ptr[0])
-		mov		ptr, [s_ptr]				; get "ptr" variable from the stack
-		test	result, result				; if (result == 0)
-		jz		.found						;     then go to found branch
-		add		ptr, 8						; ptr++
-		mov		[s_ptr], ptr				; save "ptr" variable into the stack
-		sub		qword [s_size], 1			; size--
-		jnz		.loop						; do while (size != 0)
-;---[End of search loop]-------------------
-.exit:	add		stack, space				; restoring back the stack pointer
-		mov		ptr, NOT_FOUND				; return NOT_FOUND
-		ret
-;---[Found branch]---------------------
-.found:	sub		ptr, [s_array]
-		add		stack, space				; restoring back the stack pointer
-		shr		ptr, 3						; return ptr - array
-		ret
-
-;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
-;       Backward direction search                                              ;
-;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
-FindBwd:
-;---[Parameters]---------------------------
-array	equ		rdi							; pointer to array of strings
-size	equ		rsi							; array size (count of elements)
-string	equ		rdx							; string to find
-func	equ		rcx							; pointer to string compare function
-;---[Internal variables]-------------------
-result	equ		rax							; result register
-ptr		equ		rax							; pointer to current element
-stack	equ		rsp							; stack pointer
-s_array	equ		stack + 0 * 8				; stack position of "array" variable
-s_size	equ		stack + 1 * 8				; stack position of "size" variable
-s_str	equ		stack + 2 * 8				; stack position of "string" variable
-s_func	equ		stack + 3 * 8				; stack position of "func" variable
-s_ptr	equ		stack + 4 * 8				; stack position of "ptr" variable
-space	= 5 * 8								; stack size required by the procedure
-;------------------------------------------
-		sub		stack, space				; reserving stack size for local vars
-		test	size, size					; if (size == 0)
-		jz		.exit						;     then go to exit
-;---[Normal execution branch]--------------
-		lea		ptr, [array + size * 8 - 8]	; ptr = array + size - 1
-		mov		[s_array], array			; save "array" variable into the stack
-		mov		[s_size], size				; save "size" variable into the stack
-		mov		[s_str], string				; save "string" variable into the stack
-		mov		[s_func], func				; save "func" variable into the stack
-		mov		[s_ptr], ptr				; save "ptr" variable into the stack
-;---[Search loop]--------------------------
-.loop:	mov		param2, [ptr]
-		mov		param1, [s_str]
-		call	qword [s_func]				; result = Compare (string, ptr[0])
-		mov		ptr, [s_ptr]				; get "ptr" variable from the stack
-		test	result, result				; if (result == 0)
-		jz		.found						;     then go to found branch
-		sub		ptr, 8						; ptr--
-		mov		[s_ptr], ptr				; save "ptr" variable into the stack
-		sub		qword [s_size], 1			; size--
-		jnz		.loop						; do while (size != 0)
-;---[End of search loop]-------------------
-.exit:	add		stack, space				; restoring back the stack pointer
-		mov		ptr, NOT_FOUND				; return NOT_FOUND
-		ret
-;---[Found branch]---------------------
-.found:	sub		ptr, [s_array]
-		add		stack, space				; restoring back the stack pointer
-		shr		ptr, 3						; return ptr - array
-		ret
-
-;==============================================================================;
-;       Binary search                                                          ;
-;==============================================================================;
-macro	FIND_BIN	cond1, cond2
-{
-;---[Parameters]---------------------------
-array	equ		rdi							; pointer to array of strings
-size	equ		rsi							; array size (count of elements)
-string	equ		rdx							; string to find
-func	equ		rcx							; pointer to string compare function
-;---[Internal variables]-------------------
-result	equ		rax							; result register
-median	equ		r8							; median value
-median1	equ		r9							; median value + 1
-left	equ		r10							; left index
-right	equ		size						; right index
-pos		equ		r12							; matched position
-stack	equ		rsp							; stack pointer
-s_pos	equ		stack + 0 * 8				; stack position of "pos" variable
-s_array	equ		stack + 1 * 8				; stack position of "array" variable
-s_str	equ		stack + 2 * 8				; stack position of "string" variable
-s_func	equ		stack + 3 * 8				; stack position of "func" variable
-s_left	equ		stack + 4 * 8				; stack position of "left" variable
-s_right	equ		stack + 5 * 8				; stack position of "right" variable
-s_med	equ		stack + 6 * 8				; stack position of "median" variable
-space	= 7 * 8								; stack size required by the procedure
-;------------------------------------------
-		sub		stack, space				; reserving stack size for local vars
-		test	size, size					; if (size == 0)
-		jz		.exit						;     then go to exit
-;---[Normal execution branch]--------------
-		xor		left, left					; left = 0
-		mov		[s_pos], pos				; save old value of "pos" variable
-		mov		[s_array], array			; save "array" variable into the stack
-		mov		[s_str], string				; save "string" variable into the stack
-		mov		[s_func], func				; save "func" variable into the stack
-		mov		[s_left], left				; save "left" variable into the stack
-		mov		[s_right], right			; save "right" variable into the stack
-		mov		pos, NOT_FOUND				; pos = NOT_FOUND
-;---[Binary search loop]-------------------
-.loop:	lea		median, [left + right]
-		shr		median, 1					; median = (left + right) / 2
-		mov		[s_med], median				; save "median" variable into the stack
-		mov		param2, [array + median * 8]
-		mov		param1, [s_str]
-		call	qword [s_func]				; result = Compare (string, array[median])
-		mov		array, [s_array]			; get "array" variable from the stack
-		mov		median, [s_med]				; get "median" variable from the stack
-		mov		left, [s_left]				; get "left" variable from the stack
-		mov		right, [s_right]			; get "right" variable from the stack
-		lea		median1, [median + 1]		; median1 = median + 1
-		cmp		result, 0					; if (string cond array[median])
-	cmov#cond1	pos, median					;     update matched position
-	cmov#cond2	left, median1				;     then left = median + 1
-	cmovn#cond2	right, median				;     else right = median
-		mov		[s_left], left				; save "left" variable into the stack
-		mov		[s_right], right			; save "right" variable into the stack
-		cmp		left, right
-		jb		.loop						; do while (left < right)
-;---[End of search loop]-------------------
-		mov		result, pos					; result = pos
-		mov		pos, [s_pos]				; restore old value of "pos" variable
-		add		stack, space				; restoring back the stack pointer
-		ret
-;---[Not found branch]---------------------
-.exit:	add		stack, space				; restoring back the stack pointer
-		mov		result, NOT_FOUND			; return NOT_FOUND
-		ret
-}
-
-;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
-;       Ascending sort order                                                   ;
-;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
-FindEqualAsc:			FIND_BIN	e, g
-FindGreatAsc:			FIND_BIN	l, ge
-FindGreatOrEqualAsc:	FIND_BIN	le, g
-FindLessAsc:			FIND_BIN	g, g
-FindLessOrEqualAsc:		FIND_BIN	ge, ge
-
-;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
-;       Descending sort order                                                  ;
-;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
-FindEqualDsc:			FIND_BIN	e, l
-FindLessDsc:			FIND_BIN	g, le
-FindLessOrEqualDsc:		FIND_BIN	ge, l
-FindGreatDsc:			FIND_BIN	l, l
-FindGreatOrEqualDsc:	FIND_BIN	le, le
-
-;******************************************************************************;
 ;       Counting                                                               ;
 ;******************************************************************************;
 
@@ -2572,51 +2160,6 @@ CountSymbols_char8:		COUNT_SYMBOLS	dl, cl, b
 CountSymbols_char16:	COUNT_SYMBOLS	dx, cx, w
 CountSymbols_char32:	COUNT_SYMBOLS	edx, ecx, d
 
-;==============================================================================;
-;       String counting                                                        ;
-;==============================================================================;
-CountString:
-;---[Parameters]---------------------------
-array	equ		rdi							; pointer to array of strings
-size	equ		rsi							; array size (count of elements)
-string	equ		rdx							; string to find
-func	equ		rcx							; pointer to string compare function
-;---[Internal variables]-------------------
-result	equ		rax							; result register
-stack	equ		rsp							; stack pointer
-s_array	equ		stack + 0 * 8				; stack position of "array" variable
-s_size	equ		stack + 1 * 8				; stack position of "size" variable
-s_str	equ		stack + 2 * 8				; stack position of "string" variable
-s_func	equ		stack + 3 * 8				; stack position of "func" variable
-s_total	equ		stack + 4 * 8				; stack position of "total" variable
-space	= 5 * 8								; stack size required by the procedure
-;------------------------------------------
-		sub		stack, space				; reserving stack size for local vars
-		mov		qword [s_total], 0			; total = 0
-		test	size, size					; if (size == 0)
-		jz		.exit						;     then go to exit
-;---[Normal execution branch]--------------
-		mov		[s_array], array			; save "array" variable into the stack
-		mov		[s_size], size				; save "size" variable into the stack
-		mov		[s_str], string				; save "string" variable into the stack
-		mov		[s_func], func				; save "func" variable into the stack
-;---[Search loop]--------------------------
-.loop:	mov		param2, [array]
-		mov		param1, [s_str]
-		call	qword [s_func]				; result = Compare (string, array[0])
-		mov		array, [s_array]			; get "array" variable from the stack
-		not		result
-		and		result, 0x1					; if (result)
-		add		[s_total], result			;     then total++
-		add		array, 8					; array++
-		mov		[s_array], array			; save "array" variable into the stack
-		sub		qword [s_size], 1			; size--
-		jnz		.loop						; do while (size != 0)
-;---[End of search loop]-------------------
-.exit:	mov		result, [s_total]
-		add		stack, space				; restoring back the stack pointer
-		ret									; return total
-
 ;******************************************************************************;
 ;       Replacing                                                              ;
 ;******************************************************************************;
@@ -2766,68 +2309,16 @@ Replace_char8:		REPLACE_SYMBOL	sil, dl, cl, b
 Replace_char16:		REPLACE_SYMBOL	si, dx, cx, w
 Replace_char32:		REPLACE_SYMBOL	esi, edx, ecx, d
 
-;==============================================================================;
-;       String replacing                                                       ;
-;==============================================================================;
-Replace:
-;---[Parameters]---------------------------
-array	equ		rdi							; pointer to array of strings
-size	equ		rsi							; array size (count of elements)
-string	equ		rdx							; string to find
-value	equ		rcx							; string to replace matched string
-func	equ		r8							; pointer to string compare function
-;---[Internal variables]-------------------
-result	equ		rax							; result register
-stack	equ		rsp							; stack pointer
-s_array	equ		stack + 0 * 8				; stack position of "array" variable
-s_size	equ		stack + 1 * 8				; stack position of "size" variable
-s_str	equ		stack + 2 * 8				; stack position of "string" variable
-s_value	equ		stack + 3 * 8				; stack position of "value" variable
-s_func	equ		stack + 4 * 8				; stack position of "func" variable
-space	= 5 * 8								; stack size required by the procedure
-;------------------------------------------
-		sub		stack, space				; reserving stack size for local vars
-		test	size, size					; if (size == 0)
-		jz		.exit						;     then go to exit
-;---[Normal execution branch]--------------
-		mov		[s_array], array			; save "array" variable into the stack
-		mov		[s_size], size				; save "size" variable into the stack
-		mov		[s_str], string				; save "string" variable into the stack
-		mov		[s_value], value			; save "value" variable into the stack
-		mov		[s_func], func				; save "func" variable into the stack
-;---[Search loop]--------------------------
-.loop:	mov		param2, [array]
-		mov		param1, [s_str]
-		call	qword [s_func]				; result = Compare (string, array[0])
-		mov		array, [s_array]			; get "array" variable from the stack
-		test	result, result				; if (result == 0)
-		jz		.brk						;     then break the loop
-.back:	add		array, 8					; array++
-		mov		[s_array], array			; save "array" variable into the stack
-		sub		qword [s_size], 1			; size--
-		jnz		.loop						; do while (size != 0)
-;---[End of search loop]-------------------
-.exit:	add		stack, space				; restoring back the stack pointer
-		ret
-;---[Found branch]---------------------
-.brk:	mov		value, [s_value]			; get "value" variable from the stack
-		mov		[array], value				; array[0] = value
-		jmp		.back						; go back
-
 ;******************************************************************************;
-;       Sorting algorithms                                                     ;
-;******************************************************************************;
-
-;==============================================================================;
 ;       Insertion sort                                                         ;
-;==============================================================================;
+;******************************************************************************;
 macro	INSERTSORT	op
 {
 ;---[Parameters]---------------------------
 array	equ		rdi							; pointer to strings array
 ptr		equ		rsi							; pointer to array of pointers to data
 size	equ		rdx							; array size (count of elements)
-func	equ		rcx							; pointer to string func function
+func	equ		rcx							; pointer to string compare function
 ;---[Internal variables]-------------------
 left	equ		r8							; left index
 right	equ		r9							; right index
@@ -2873,6 +2364,7 @@ space	= 11 * 8							; stack size required by the procedure
 		mov		param1, key1
 		call	qword [s_func]				; result = Compare (key1, key2)
 		mov		array, [s_array]			; get "array" variable from the stack
+		mov		ptr, [s_ptr]				; get "ptr" variable from the stack
 		mov		left, [s_left]				; get "left" variable from the stack
 		mov		right, [s_right]			; get "right" variable from the stack
 		cmp		result, 0					; if (result op 0)
@@ -2900,16 +2392,16 @@ space	= 11 * 8							; stack size required by the procedure
 InsertSortKeyAsc:	INSERTSORT	l
 InsertSortKeyDsc:	INSERTSORT	g
 
-;==============================================================================;
+;******************************************************************************;
 ;       Quick sort                                                             ;
-;==============================================================================;
+;******************************************************************************;
 macro	QUICKSORT	insertsort, op1, op2
 {
 ;---[Parameters]---------------------------
 array	equ		rdi							; pointer to strings array
 ptr		equ		rsi							; pointer to array of pointers to data
 size	equ		rdx							; array size (count of elements)
-func	equ		rcx							; pointer to string func function
+func	equ		rcx							; pointer to string compare function
 ;---[Internal variables]-------------------
 result	equ		rax							; result register
 median	equ		rax							; median value
@@ -3050,277 +2542,101 @@ QuickSortKeyAsc:	QUICKSORT	InsertSortKeyAsc, l, g
 QuickSortKeyDsc:	QUICKSORT	InsertSortKeyDsc, g, l
 
 ;******************************************************************************;
-;       Reversing elements order                                               ;
+;       Merge sort                                                             ;
 ;******************************************************************************;
-Reverse:
+macro	MERGESORT	insertsort, mergefunc
+{
 ;---[Parameters]---------------------------
-array	equ		rdi							; pointer to strings array
-size	equ		rsi							; array size (count of elements)
+array	equ		rdi							; pointer to array
+temp	equ		rsi							; pointer to temporary array
+ptr		equ		rdx							; pointer to array of pointers to data
+tptr	equ		rcx							; pointer to temporary array of pointers to data
+size	equ		r8							; array size (count of elements)
+func	equ		r9							; pointer to string compare function
 ;---[Internal variables]-------------------
-ptr		equ 	rax							; pointer to last element of array
-temp1	equ		r8							; temporary register #1
-temp2	equ		r9							; temporary register #2
-;------------------------------------------
-		lea		ptr, [array + size * 8]		; ptr = array + size
-		shr		size, 1						; size >>= 1
-		jz		.exit						; if (size == 0), then go to exit
-;---[Swap loop]----------------------------
-@@:		sub		ptr, 8						; ptr--
-		mov		temp1, [array]				; temp1 = array[0]
-		mov		temp2, [ptr]				; temp2 = ptr[0]
-		xchg	temp1, temp2				; exchange temp1 and temp2
-		mov		[array], temp1				; array[0] = temp2
-		mov		[ptr], temp2				; ptr[0] = temp1
-		add		array, 8					; array++
-		sub		size, 1						; size--
-		jnz		@b							; do while (size != 0)
-;------------------------------------------
-.exit:	ret
-
-;******************************************************************************;
-;       Unique values                                                          ;
-;******************************************************************************;
-Unique:
-;---[Parameters]---------------------------
-unique	equ		rdi							; pointer to array of unique strings
-array	equ		rsi							; pointer to strings array
-size	equ		rdx							; array size (count of elements)
-func	equ		rcx							; pointer to string compare function
-;---[Internal variables]-------------------
-result	equ		rax							; result registet
-ptr		equ		r8							; pointer to unique sequnce
-value	equ		r9							; key value
 stack	equ		rsp							; stack pointer
-s_uniq	equ		stack + 0 * 8				; stack position of "unique" variable
-s_array	equ		stack + 1 * 8				; stack position of "array" variable
-s_size	equ		stack + 2 * 8				; stack position of "size" variable
-s_func	equ		stack + 3 * 8				; stack position of "func" variable
-s_ptr	equ		stack + 4 * 8				; stack position of "ptr" variable
-s_value	equ		stack + 5 * 8				; stack position of "value" variable
+s_array	equ		stack + 0 * 8				; stack position of "array" variable
+s_temp	equ		stack + 1 * 8				; stack position of "temp" variable
+s_ptr	equ		stack + 2 * 8				; stack position of "ptr" variable
+s_tptr	equ		stack + 3 * 8				; stack position of "tptr" variable
+s_size	equ		stack + 4 * 8				; stack position of "size" variable
+s_func	equ		stack + 5 * 8				; stack position of "func" variable
 space	= 7 * 8								; stack size required by the procedure
+minsize	= 32								; min array size is aceptable for Merge sort
 ;------------------------------------------
+		cmp		size, 1						; if (size <= 1)
+		jbe		.exit						;     then go to exit
+.start:	cmp		size, minsize				; if (size <= minsize)
+		jbe		.ins						;     then do insert sort
+;---[Normal execution branch]--------------
 		sub		stack, space				; reserving stack size for local vars
-		mov		[s_uniq], unique			; save "unique" variable into the stack
+;---[Sort first subarray]------------------
 		mov		[s_array], array			; save "array" variable into the stack
+		mov		[s_temp], temp				; save "temp" variable into the stack
+		mov		[s_ptr], ptr				; save "ptr" variable into the stack
+		mov		[s_tptr], tptr				; save "tptr" variable into the stack
 		mov		[s_size], size				; save "size" variable into the stack
 		mov		[s_func], func				; save "func" variable into the stack
-		mov		ptr, unique					; ptr = unique
-		test	size, size					; if (size == 0)
-		jz		.exit						;     then go to exit
-		mov		value, [array]				; value = array[0]
-		mov		[s_ptr], ptr				; save "ptr" variable into the stack
-		mov		[s_value], value			; save "value" variable into the stack
-		add		array, 8					; array++
-		mov		[s_array], array			; save "array" variable into the stack
-		sub		qword [s_size], 1			; size--
-		jz		.skip						; if (size == 0), then skip the loop
-;---[Unique loop]--------------------------
-.loop:	mov		param2, [array]
-		mov		param1, [s_value]
-		call	qword [s_func]				; result = func (value, array[0])
+		shr		size, 1						; size /= 2
+		call	.start						; call Sort (array, temp, ptr, tptr, size / 2, func)
+;---[Sort second subarray]-----------------
+		mov		array, [s_array]			; get "array" variable from the stack
+		mov		temp, [s_temp]				; get "temp" variable from the stack
+		mov		ptr, [s_ptr]				; get "ptr" variable from the stack
+		mov		tptr, [s_tptr]				; get "tptr" variable from the stack
+		mov		size, [s_size]				; get "size" variable from the stack
+		mov		func, [s_func]				; get "func" variable from the stack
+		shr		size, 1						; size /= 2
+		lea		array, [array + size * 8]
+		lea		temp, [temp + size * 8]
+		lea		ptr, [ptr + size * 8]
+		lea		tptr, [tptr + size * 8]
+		neg		size
+		add		size, [s_size]
+		call	.start						; call Sort (array + size / 2, temp + size / 2, ptr + size / 2, tptr + size / 2, size - size / 2, func)
+;---[Merge sorted arrays]------------------
 		mov		array, [s_array]			; get "array" variable from the stack
 		mov		ptr, [s_ptr]				; get "ptr" variable from the stack
-		mov		value, [s_value]			; get "value" variable from the stack
-		test	result, result				; if (result != 0)
-		jz		@f							; {
-		mov		[ptr], value				;     ptr[0] = value
-		add		ptr, 8						;     ptr++
-		mov		value, [array]				;     value = array[0]
-		mov		[s_ptr], ptr				; }
-		mov		[s_value], value			;
-@@:		add		array, 8					; array++
-		mov		[s_array], array			; save "array" variable into the stack
-		sub		qword [s_size], 1			; size--
-		jnz		.loop						; do while (size != 0)
-;---[End of unique loop]-------------------
-.skip:	mov		[ptr], value				; ptr[0] = value
-		add		ptr, 8						; ptr++
-;---[Normal exit branch]-------------------
-.exit:	sub		ptr, [s_uniq]
-		shr		ptr, 3
+		mov		size, [s_size]				; get "size" variable from the stack
+		mov		func, [s_func]				; get "func" variable from the stack
+		shr		size, 1						; size /= 2
+		mov		param9, func
+		mov		param8, size
+		neg		param8
+		add		param8, [s_size]
+		lea		param7, [ptr + size * 8]
+		lea		param6, [array + size * 8]
+		mov		param5, size
+		mov		param4, ptr
+		mov		param3, array
+		mov		param2, [s_tptr]
+		mov		param1, [s_temp]
+		call	mergefunc					; call mergefunc (temp, tptr, array, ptr, size / 2, array + size / 2, ptr + size / 2, size - size / 2, func)
+;---[Copy data from temporary array]-------
+		mov		param3, [s_size]
+		mov		param2, [s_tptr]
+		mov		param1, [s_ptr]
+		call	Copy						; call Copy (ptr, tptr, size)
+		mov		param3, [s_size]
+		mov		param2, [s_temp]
+		mov		param1, [s_array]
 		add		stack, space				; restoring back the stack pointer
-		mov		result, ptr					; return ptr - unique
-		ret
-
-;******************************************************************************;
-;       Duplicate values                                                       ;
-;******************************************************************************;
-Duplicates:
-;---[Parameters]---------------------------
-unique	equ		rdi							; pointer to array of unique strings
-count	equ		rsi							; pointer to array of counters
-array	equ		rdx							; pointer to strings array
-size	equ		rcx							; array size (count of elements)
-func	equ		r8							; pointer to string compare function
-;---[Internal variables]-------------------
-result	equ		rax							; result registet
-ptr		equ		r9							; pointer to unique sequnce
-value	equ		r10							; key value
-total	equ		r11							; count of duplicates
-stack	equ		rsp							; stack pointer
-s_uniq	equ		stack + 0 * 8				; stack position of "unique" variable
-s_count	equ		stack + 1 * 8				; stack position of "count" variable
-s_array	equ		stack + 2 * 8				; stack position of "array" variable
-s_size	equ		stack + 3 * 8				; stack position of "size" variable
-s_func	equ		stack + 4 * 8				; stack position of "func" variable
-s_ptr	equ		stack + 5 * 8				; stack position of "ptr" variable
-s_value	equ		stack + 6 * 8				; stack position of "value" variable
-s_total	equ		stack + 7 * 8				; stack position of "total" variable
-space	= 9 * 8								; stack size required by the procedure
-;------------------------------------------
-		sub		stack, space				; reserving stack size for local vars
-		mov		[s_uniq], unique			; save "unique" variable into the stack
-		mov		[s_count], count			; save "count" variable into the stack
-		mov		[s_array], array			; save "array" variable into the stack
-		mov		[s_size], size				; save "size" variable into the stack
-		mov		[s_func], func				; save "func" variable into the stack
-		mov		ptr, unique					; ptr = unique
-		test	size, size					; if (size == 0)
-		jz		.exit						;     then go to exit
-		mov		value, [array]				; value = array[0]
-		mov		[s_ptr], ptr				; save "ptr" variable into the stack
-		mov		[s_value], value			; save "value" variable into the stack
-		add		array, 8					; array++
-		mov		[s_array], array			; save "array" variable into the stack
-		mov		qword [s_total], 1			; total = 1
-		sub		qword [s_size], 1			; size--
-		jz		.skip						; if (size == 0), then skip the loop
-;---[Unique loop]--------------------------
-.loop:	mov		param2, [array]
-		mov		param1, [s_value]
-		call	qword [s_func]				; result = func (value, array[0])
-		mov		count, [s_count]			; get "count" variable from the stack
-		mov		array, [s_array]			; get "array" variable from the stack
-		mov		ptr, [s_ptr]				; get "ptr" variable from the stack
-		mov		value, [s_value]			; get "value" variable from the stack
-		mov		total, [s_total]			; get "total" variable from the stack
-		test	result, result				; if (result != 0)
-		jz		@f							; {
-		mov		[ptr], value				;     ptr[0] = value
-		add		ptr, 8						;     ptr++
-		mov		[count], total				;     count[0] = total
-		add		count, 8					;     count++
-		mov		value, [array]				;     value = array[0]
-		xor		total, total				;     total = 0 }
-		mov		[s_ptr], ptr				; save "ptr" variable into the stack
-		mov		[s_count], count			; save "count" variable into the stack
-		mov		[s_value], value			; save "value" variable into the stack
-@@:		add		array, 8					; array++
-		add		total, 1					; total++
-		mov		[s_array], array			; save "array" variable into the stack
-		mov		[s_total], total			; save "total" variable into the stack
-		sub		qword [s_size], 1			; size--
-		jnz		.loop						; do while (size != 0)
-;---[End of unique loop]-------------------
-.skip:	mov		[ptr], value				; ptr[0] = value
-		add		ptr, 8						; ptr++
-		mov		[count], total				; count[0] = total
-		add		count, 8					; count++
-;---[Normal exit branch]-------------------
-.exit:	sub		ptr, [s_uniq]
-		shr		ptr, 3
-		add		stack, space				; restoring back the stack pointer
-		mov		result, ptr					; return ptr - unique
-		ret
+		jmp		Copy						; call Copy (array, temp, size)
+;---[Insert sort branch]-------------------
+.ins:	mov		param1, array
+		mov		param2, ptr
+		mov		param3, size
+		mov		param4, func
+		jmp		insertsort					; call insertsort (array, ptr, size, func)
+.exit:	ret
+}
+MergeSortKeyAsc:	MERGESORT	InsertSortKeyAsc, MergeKeyCoreAsc
+MergeSortKeyDsc:	MERGESORT	InsertSortKeyDsc, MergeKeyCoreDsc
 
 ;******************************************************************************;
 ;       Merging of sorted strings                                              ;
 ;******************************************************************************;
-
-;==============================================================================;
-;       Array merging                                                          ;
-;==============================================================================;
-macro	MERGE	cond
-{
-;---[Parameters]---------------------------
-target	equ		rdi							; pointer to target strings array
-src1	equ		rsi							; pointer to first source strings array
-size1	equ		rdx							; size of first array
-src2	equ		rcx							; pointer to second source strings array
-size2	equ		r8							; size of second array
-func	equ		r9							; pointer to string compare function
-;---[Internal variables]-------------------
-temp	equ		rax							; temporary register
-value	equ		r10							; pointer to source string
-stack	equ		rsp							; stack pointer
-s_src1p	equ		stack + 0 * 8				; stack position of "src1p" variable
-s_sz1m	equ		stack + 1 * 8				; stack position of "size1m" variable
-s_src2p	equ		stack + 2 * 8				; stack position of "src2p" variable
-s_sz2m	equ		stack + 3 * 8				; stack position of "size2m" variable
-s_tgt	equ		stack + 4 * 8				; stack position of "target" variable
-s_src1	equ		stack + 5 * 8				; stack position of "src1" variable
-s_size1	equ		stack + 6 * 8				; stack position of "size1" variable
-s_src2	equ		stack + 7 * 8				; stack position of "src2" variable
-s_size2	equ		stack + 8 * 8				; stack position of "size2" variable
-s_func	equ		stack + 9 * 8				; stack position of "func" variable
-space	= 11 * 8							; stack size required by the procedure
-;------------------------------------------
-		sub		stack, space				; reserving stack size for local vars
-		mov		[s_tgt], target				; save "target" variable into the stack
-		mov		[s_src1], src1				; save "src1" variable into the stack
-		mov		[s_size1], size1			; save "size1" variable into the stack
-		mov		[s_src2], src2				; save "src2" variable into the stack
-		mov		[s_size2], size2			; save "size2" variable into the stack
-		mov		[s_func], func				; save "func" variable into the stack
-		test	size1, size1				; if (size1 == 0)
-		jz		.copy1						;     then go to copy1 branch
-		test	size2, size2				; if (size2 == 0)
-		jz		.copy2						;     then go to copy2 branch
-;---[Merging loop]-------------------------
-.loop:	add		src1, 8						; src1p = src1 + 1
-		mov		[s_src1p], src1				; save "src1p" variable into the stack
-		sub		size1, 1					; size1m = size1 - 1
-		mov		[s_sz1m], size1				; save "size1m" variable into the stack
-		add		src2, 8						; src2p = src2 + 1
-		mov		[s_src2p], src2				; save "src2p" variable into the stack
-		sub		size2, 1					; size2m = size2 - 1
-		mov		[s_sz2m], size2				; save "size2m" variable into the stack
-		mov		param1, [src1]
-		mov		param2, [src2]
-		call	qword [s_func]				; result = func (src1[0], src2[0])
-		mov		target, [s_tgt]				; get "target" variable from the stack
-		mov		src1, [s_src1]				; get "src1" variable from the stack
-		mov		size1, [s_size1]			; get "size1" variable from the stack
-		mov		src2, [s_src2]				; get "src2" variable from the stack
-		mov		size2, [s_size2]			; get "size2" variable from the stack
-		cmp		result, 0
-	cmov#cond	value, [src1]				; if (result cond 0), then value = src1[0]
-	cmovn#cond	value, [src2]				; if (result !cond 0), then value = src2[0]
-	cmov#cond	src1, [s_src1p]				; if (result cond 0), then src1 = src1 + 1
-	cmovn#cond	src2, [s_src2p]				; if (result !cond 0), then src2 = src2 + 1
-	cmov#cond	size1, [s_sz1m]				; if (result cond 0), then size1 = size1 - 1
-	cmovn#cond	size2, [s_sz2m]				; if (result !cond 0), then size2 = size2 - 1
-		mov		[target], value				; target[0] = value
-		add		target, 8					; target++
-		mov		[s_tgt], target				; save "target" variable into the stack
-		mov		[s_src1], src1				; save "src1" variable into the stack
-		mov		[s_size1], size1			; save "size1" variable into the stack
-		mov		[s_src2], src2				; save "src2" variable into the stack
-		mov		[s_size2], size2			; save "size2" variable into the stack
-		test	size1, size1				; if (size1 == 0)
-		jz		.copy1						;     then go to copy1 branch
-		test	size2, size2				; if (size2 == 0)
-		jz		.copy2						;     then go to copy2 branch
-		jmp		.loop						; do while (true)
-;---[End of merging loop]------------------
-.copy1:	mov		param1, [s_tgt]
-		mov		param2, [s_src2]
-		mov		param3, [s_size2]
-		add		stack, space				; restoring back the stack pointe
-		jmp		Copy						; call Copy (target, src2, size2)
-.copy2:	mov		param1, [s_tgt]
-		mov		param2, [s_src1]
-		mov		param3, [s_size1]
-		add		stack, space				; restoring back the stack pointe
-		jmp		Copy						; call Copy (target, src1, size1)
-}
-MergeAsc:	MERGE	le
-MergeDsc:	MERGE	ge
-
-;==============================================================================;
-;       Key merging                                                            ;
-;==============================================================================;
-macro	MERGE_KEY	cond
+macro	MERGE_KEY_CORE	cond
 {
 ;---[Parameters]---------------------------
 tkey	equ		rdi							; pointer to target strings array
@@ -3331,6 +2647,7 @@ size1	equ		r8							; size of first array
 skey2	equ		r9							; pointer to second source strings array
 sptr2	equ		r10							; pointer to second source array of pointers to data
 size2	equ		r11							; size of second array
+func	equ		rax							; pointer to string compare function
 ;---[Internal variables]-------------------
 temp	equ		rax							; temporary register
 value	equ		r12							; pointer to source string
@@ -3350,10 +2667,10 @@ s_skey1	equ		stack + 10 * 8				; stack position of "skey1" variable
 s_sptr1	equ		stack + 11 * 8				; stack position of "sptr1" variable
 s_size1	equ		stack + 12 * 8				; stack position of "size1" variable
 s_skey2	equ		stack + 13 * 8				; stack position of "skey2" variable
-s_sptr2	equ		stack + 16 * 8				; stack position of "sptr2" variable
-s_size2	equ		stack + 17 * 8				; stack position of "size2" variable
-s_func	equ		stack + 18 * 8				; stack position of "func" variable
-space	= 15 * 8							; stack size required by the procedure
+s_sptr2	equ		stack + 14 * 8				; stack position of "sptr2" variable
+s_size2	equ		stack + 15 * 8				; stack position of "size2" variable
+s_func	equ		stack + 16 * 8				; stack position of "func" variable
+space	= 17 * 8							; stack size required by the procedure
 ;------------------------------------------
 		sub		stack, space				; reserving stack size for local vars
 		mov		[s_value], value			; save old value of "value" variable
@@ -3364,25 +2681,26 @@ space	= 15 * 8							; stack size required by the procedure
 		mov		[s_sptr1], sptr1			; save "sptr1" variable into the stack
 		mov		[s_size1], size1			; save "size1" variable into the stack
 		mov		[s_skey2], skey2			; save "skey2" variable into the stack
-		mov		sptr2, [s_sptr2]			; get "sptr2" variable from the stack
-		mov		size2, [s_size2]			; get "size2" variable from the stack
+		mov		[s_sptr2], sptr2			; save "sptr2" variable into the stack
+		mov		[s_size2], size2			; save "size2" variable into the stack
+		mov		[s_func], func				; save "func" variable into the stack
 		test	size1, size1				; if (size1 == 0)
 		jz		.copy1						;     then go to copy1 branch
 		test	size2, size2				; if (size2 == 0)
 		jz		.copy2						;     then go to copy2 branch
 ;---[Merging loop]-------------------------
-.loop:	add		skey1, 8					; skey1p = skey1 + 1
-		mov		[s_sk1p], skey1				; save "skey1p" variable into the stack
-		add		sptr1, 8					; sptr1p = sptr1 + 1
-		mov		[s_sp1p], sptr1				; save "sptr1p" variable into the stack
-		sub		size1, 1					; size1m = size1 - 1
-		mov		[s_sz1m], size1				; save "size1m" variable into the stack
-		add		skey2, 8					; skey2p = skey2 + 1
-		mov		[s_sk2p], skey2				; save "skey2p" variable into the stack
-		add		sptr2, 8					; sptr2p = sptr2 + 1
-		mov		[s_sp2p], sptr2				; save "sptr2p" variable into the stack
-		sub		size2, 1					; size2m = size2 - 1
-		mov		[s_sz2m], size2				; save "size2m" variable into the stack
+.loop:	lea		temp, [skey1 + 8]			; skey1p = skey1 + 1
+		mov		[s_sk1p], temp				; save "skey1p" variable into the stack
+		lea		temp, [sptr1 + 8]			; sptr1p = sptr1 + 1
+		mov		[s_sp1p], temp				; save "sptr1p" variable into the stack
+		lea		temp, [size1 - 1]			; size1m = size1 - 1
+		mov		[s_sz1m], temp				; save "size1m" variable into the stack
+		lea		temp, [skey2 + 8]			; skey2p = skey2 + 1
+		mov		[s_sk2p], temp				; save "skey2p" variable into the stack
+		lea		temp, [sptr2 + 8]			; sptr2p = sptr2 + 1
+		mov		[s_sp2p], temp				; save "sptr2p" variable into the stack
+		lea		temp, [size2 - 1]			; size2m = size2 - 1
+		mov		[s_sz2m], temp				; save "size2m" variable into the stack
 		mov		param1, [skey1]
 		mov		param2, [skey2]
 		call	qword [s_func]				; result = func (skey1[0], skey2[0])
@@ -3446,69 +2764,32 @@ space	= 15 * 8							; stack size required by the procedure
 		add		stack, space				; restoring back the stack pointe
 		jmp		Copy						; call Copy (tptr, sptr1, size1)
 }
-MergeKeyAsc:	MERGE_KEY	le
-MergeKeyDsc:	MERGE_KEY	ge
-
-;******************************************************************************;
-;       Checks                                                                 ;
-;******************************************************************************;
-macro	CHECK_CORE	c, sort
+;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+macro	MERGE_KEY	mergefunc
 {
 ;---[Parameters]---------------------------
-array	equ		rdi							; pointer to array of strings
-size	equ		rsi							; array size (count of elements)
-func	equ		rdx							; pointer to string func function
+sptr2	equ		r10							; pointer to second source array of pointers to data
+size2	equ		r11							; size of second array
+func	equ		rax							; pointer to string compare function
 ;---[Internal variables]-------------------
-result	equ		rax							; result register
-ptr		equ		rcx							; pointer to current element
 stack	equ		rsp							; stack pointer
-s_array	equ		stack + 0 * 8				; stack position of "array" variable
-s_size	equ		stack + 1 * 8				; stack position of "size" variable
-s_func	equ		stack + 2 * 8				; stack position of "func" variable
-s_ptr	equ		stack + 3 * 8				; stack position of "ptr" variable
-space	= 5 * 8								; stack size required by the procedure
+s_sptr2	equ		stack + 1 * 8				; stack position of "sptr2" variable
+s_size2	equ		stack + 2 * 8				; stack position of "size2" variable
+s_func	equ		stack + 3 * 8				; stack position of "func" variable
 ;------------------------------------------
-		sub		stack, space				; reserving stack size for local vars
-		sub		size, 1						; if (--size <= 0)
-		jbe		.exit						;     then go to exit
-;---[Normal execution branch]--------------
-		mov		ptr, array					; ptr = array
-		mov		[s_array], array			; save "array" variable into the stack
-		mov		[s_size], size				; save "size" variable into the stack
-		mov		[s_func], func				; save "func" variable into the stack
-		mov		[s_ptr], ptr				; save "ptr" variable into the stack
-;---[Search loop]--------------------------
-.loop:	mov		param2, [ptr + 8]
-		mov		param1, [ptr]
-		call	qword [s_func]				; result = Compare (ptr[0], ptr[1])
-		mov		ptr, [s_ptr]				; get "ptr" variable from the stack
-		cmp		result, 0					; if (result cond 0)
-		j#c		.found						;     then go to found branch
-		add		ptr, 8						; ptr++
-		mov		[s_ptr], ptr				; save "ptr" variable into the stack
-		sub		qword [s_size], 1			; size--
-		jnz		.loop						; do while (size != 0)
-;---[End of search loop]-------------------
-.exit:	add		stack, space				; restoring back the stack pointer
-		mov		ptr, NOT_FOUND				; return NOT_FOUND
-		ret
-;---[Found branch]---------------------
-.found:	mov		result, [s_ptr]				; get "ptr" variable from the stack
-if sort
-		add		result, 8
-end if
-		sub		result, [s_array]
-		add		stack, space				; restoring back the stack pointer
-		shr		result, 3					; return ptr - array
-		ret
+		mov		sptr2, [s_sptr2]			; get "sptr2" variable from the stack
+		mov		size2, [s_size2]			; get "size2" variable from the stack
+		mov		func, [s_func]				; get "func" variable from the stack
+		jmp		mergefunc					; call mergefunc (tkey, tptr, skey1, sptr1, size1, skey2, sptr2, size2)
 }
 
-; Check for sort order
-CheckSortAsc:	CHECK_CORE	g, 1
-CheckSortDsc:	CHECK_CORE	l, 1
+; Ascending sort order
+MergeKeyCoreAsc:	MERGE_KEY_CORE	le
+MergeKeyAsc:		MERGE_KEY		MergeKeyCoreAsc
 
-; Check for duplicate values
-CheckDup:		CHECK_CORE	e, 0
+; Descending sort order
+MergeKeyCoreDsc:	MERGE_KEY_CORE	ge
+MergeKeyDsc:		MERGE_KEY		MergeKeyCoreDsc
 
 ;******************************************************************************;
 ;       String hashing                                                         ;

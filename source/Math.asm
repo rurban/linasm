@@ -328,6 +328,50 @@ public	CompareFlt32		as	'_Z8CmpFlt325adt_tS_'
 public	CompareFlt64		as	'_Z8CmpFlt645adt_tS_'
 
 ;==============================================================================;
+;       Minimum and maximum absolute value                                     ;
+;==============================================================================;
+
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+;       Minimum absolute value                                                 ;
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+
+; Signed integer types
+public	MinAbs_sint8		as	'Math_MinAbs_sint8'
+public	MinAbs_sint16		as	'Math_MinAbs_sint16'
+public	MinAbs_sint32		as	'Math_MinAbs_sint32'
+public	MinAbs_sint64		as	'Math_MinAbs_sint64'
+public	MinAbs_sint8		as	'_ZN4Math6MinAbsEaa'
+public	MinAbs_sint16		as	'_ZN4Math6MinAbsEss'
+public	MinAbs_sint32		as	'_ZN4Math6MinAbsEii'
+public	MinAbs_sint64		as	'_ZN4Math6MinAbsExx'
+
+; Floating-point types
+public	MinAbs_flt32		as	'Math_MinAbs_flt32'
+public	MinAbs_flt64		as	'Math_MinAbs_flt64'
+public	MinAbs_flt32		as	'_ZN4Math6MinAbsEff'
+public	MinAbs_flt64		as	'_ZN4Math6MinAbsEdd'
+
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+;       Maximum absolute value                                                 ;
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+
+; Signed integer types
+public	MaxAbs_sint8		as	'Math_MaxAbs_sint8'
+public	MaxAbs_sint16		as	'Math_MaxAbs_sint16'
+public	MaxAbs_sint32		as	'Math_MaxAbs_sint32'
+public	MaxAbs_sint64		as	'Math_MaxAbs_sint64'
+public	MaxAbs_sint8		as	'_ZN4Math6MaxAbsEaa'
+public	MaxAbs_sint16		as	'_ZN4Math6MaxAbsEss'
+public	MaxAbs_sint32		as	'_ZN4Math6MaxAbsEii'
+public	MaxAbs_sint64		as	'_ZN4Math6MaxAbsExx'
+
+; Floating-point types
+public	MaxAbs_flt32		as	'Math_MaxAbs_flt32'
+public	MaxAbs_flt64		as	'Math_MaxAbs_flt64'
+public	MaxAbs_flt32		as	'_ZN4Math6MaxAbsEff'
+public	MaxAbs_flt64		as	'_ZN4Math6MaxAbsEdd'
+
+;==============================================================================;
 ;       Minimum and maximum value                                              ;
 ;==============================================================================;
 
@@ -362,26 +406,6 @@ public	Min_flt32			as	'_ZN4Math3MinEff'
 public	Min_flt64			as	'_ZN4Math3MinEdd'
 
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
-;       Minimum absolute value                                                 ;
-;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
-
-; Signed integer types
-public	MinAbs_sint8		as	'Math_MinAbs_sint8'
-public	MinAbs_sint16		as	'Math_MinAbs_sint16'
-public	MinAbs_sint32		as	'Math_MinAbs_sint32'
-public	MinAbs_sint64		as	'Math_MinAbs_sint64'
-public	MinAbs_sint8		as	'_ZN4Math6MinAbsEaa'
-public	MinAbs_sint16		as	'_ZN4Math6MinAbsEss'
-public	MinAbs_sint32		as	'_ZN4Math6MinAbsEii'
-public	MinAbs_sint64		as	'_ZN4Math6MinAbsExx'
-
-; Floating-point types
-public	MinAbs_flt32		as	'Math_MinAbs_flt32'
-public	MinAbs_flt64		as	'Math_MinAbs_flt64'
-public	MinAbs_flt32		as	'_ZN4Math6MinAbsEff'
-public	MinAbs_flt64		as	'_ZN4Math6MinAbsEdd'
-
-;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 ;       Maximum value                                                          ;
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 
@@ -410,26 +434,6 @@ public	Max_flt32			as	'Math_Max_flt32'
 public	Max_flt64			as	'Math_Max_flt64'
 public	Max_flt32			as	'_ZN4Math3MaxEff'
 public	Max_flt64			as	'_ZN4Math3MaxEdd'
-
-;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
-;       Maximum absolute value                                                 ;
-;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
-
-; Signed integer types
-public	MaxAbs_sint8		as	'Math_MaxAbs_sint8'
-public	MaxAbs_sint16		as	'Math_MaxAbs_sint16'
-public	MaxAbs_sint32		as	'Math_MaxAbs_sint32'
-public	MaxAbs_sint64		as	'Math_MaxAbs_sint64'
-public	MaxAbs_sint8		as	'_ZN4Math6MaxAbsEaa'
-public	MaxAbs_sint16		as	'_ZN4Math6MaxAbsEss'
-public	MaxAbs_sint32		as	'_ZN4Math6MaxAbsEii'
-public	MaxAbs_sint64		as	'_ZN4Math6MaxAbsExx'
-
-; Floating-point types
-public	MaxAbs_flt32		as	'Math_MaxAbs_flt32'
-public	MaxAbs_flt64		as	'Math_MaxAbs_flt64'
-public	MaxAbs_flt32		as	'_ZN4Math6MaxAbsEff'
-public	MaxAbs_flt64		as	'_ZN4Math6MaxAbsEdd'
 
 ;==============================================================================;
 ;       Greatest common divisor                                                ;
@@ -1232,7 +1236,7 @@ CompareFlt32:	SIGN_RAW	edi, esi, r8d, r9d, s
 CompareFlt64:	SIGN_RAW	rdi, rsi, r8, r9, d
 
 ;==============================================================================;
-;       Minimum and maximum value                                              ;
+;       Minimum and maximum absolute value                                     ;
 ;==============================================================================;
 macro	MINMAX_INT	value1, value2, temp1, temp2, x, scale, abs
 {
@@ -1283,6 +1287,38 @@ end if
 }
 
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+;       Minimum absolute value                                                 ;
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+
+; Signed integer types
+MinAbs_sint8:	MINMAX_INT	dil, sil, al, dl, l, 0, 1
+MinAbs_sint16:	MINMAX_INT	di, si, ax, dx, l, 1, 1
+MinAbs_sint32:	MINMAX_INT	edi, esi, eax, edx, l, 2, 1
+MinAbs_sint64:	MINMAX_INT	rdi, rsi, rax, rdx, l, 3, 1
+
+; Floating-point types
+MinAbs_flt32:	MINMAX_FLT	mins, eax, s, 1
+MinAbs_flt64:	MINMAX_FLT	mins, rax, d, 1
+
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+;       Maximum absolute value                                                 ;
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+
+; Signed integer types
+MaxAbs_sint8:	MINMAX_INT	dil, sil, al, dl, g, 0, 1
+MaxAbs_sint16:	MINMAX_INT	di, si, ax, dx, g, 1, 1
+MaxAbs_sint32:	MINMAX_INT	edi, esi, eax, edx, g, 2, 1
+MaxAbs_sint64:	MINMAX_INT	rdi, rsi, rax, rdx, g, 3, 1
+
+; Floating-point types
+MaxAbs_flt32:	MINMAX_FLT	maxs, eax, s, 1
+MaxAbs_flt64:	MINMAX_FLT	maxs, rax, d, 1
+
+;==============================================================================;
+;       Minimum and maximum value                                              ;
+;==============================================================================;
+
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 ;       Minimum value                                                          ;
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 
@@ -1303,20 +1339,6 @@ Min_flt32:		MINMAX_FLT	mins, eax, s, 0
 Min_flt64:		MINMAX_FLT	mins, rax, d, 0
 
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
-;       Minimum absolute value                                                 ;
-;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
-
-; Signed integer types
-MinAbs_sint8:	MINMAX_INT	dil, sil, al, dl, l, 0, 1
-MinAbs_sint16:	MINMAX_INT	di, si, ax, dx, l, 1, 1
-MinAbs_sint32:	MINMAX_INT	edi, esi, eax, edx, l, 2, 1
-MinAbs_sint64:	MINMAX_INT	rdi, rsi, rax, rdx, l, 3, 1
-
-; Floating-point types
-MinAbs_flt32:	MINMAX_FLT	mins, eax, s, 1
-MinAbs_flt64:	MINMAX_FLT	mins, rax, d, 1
-
-;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 ;       Maximum value                                                          ;
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 
@@ -1335,20 +1357,6 @@ Max_sint64:		MINMAX_INT	rdi, rsi, rax, rdx, g, 3, 0
 ; Floating-point types
 Max_flt32:		MINMAX_FLT	maxs, eax, s, 0
 Max_flt64:		MINMAX_FLT	maxs, rax, d, 0
-
-;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
-;       Maximum absolute value                                                 ;
-;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
-
-; Signed integer types
-MaxAbs_sint8:	MINMAX_INT	dil, sil, al, dl, g, 0, 1
-MaxAbs_sint16:	MINMAX_INT	di, si, ax, dx, g, 1, 1
-MaxAbs_sint32:	MINMAX_INT	edi, esi, eax, edx, g, 2, 1
-MaxAbs_sint64:	MINMAX_INT	rdi, rsi, rax, rdx, g, 3, 1
-
-; Floating-point types
-MaxAbs_flt32:	MINMAX_FLT	maxs, eax, s, 1
-MaxAbs_flt64:	MINMAX_FLT	maxs, rax, d, 1
 
 ;==============================================================================;
 ;       Greatest common divisor                                                ;
