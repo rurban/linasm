@@ -150,6 +150,18 @@ bool BwdGoPrev (size_t pos);
 void SwapFwdBwd (void);
 
 //****************************************************************************//
+//      Minimum and maximum value                                             //
+//****************************************************************************//
+
+// Minimum value
+bool MinFwd (data_t *data);
+bool MinBwd (data_t *data);
+
+// Maximum value
+bool MaxFwd (data_t *data);
+bool MaxBwd (data_t *data);
+
+//****************************************************************************//
 //      Search algorithms                                                     //
 //****************************************************************************//
 
@@ -361,6 +373,18 @@ bool MultiTree_BwdGoPrev (struct MultiTree *tree, size_t pos);
 //      Swapping iterators                                                    //
 //****************************************************************************//
 void MultiTree_SwapFwdBwd (struct MultiTree *tree);
+
+//****************************************************************************//
+//      Minimum and maximum value                                             //
+//****************************************************************************//
+
+// Minimum value
+bool MultiTree_MinFwd (struct MultiTree *tree, struct data_t *data);
+bool MultiTree_MinBwd (struct MultiTree *tree, struct data_t *data);
+
+// Maximum value
+bool MultiTree_MaxFwd (struct MultiTree *tree, struct data_t *data);
+bool MultiTree_MaxBwd (struct MultiTree *tree, struct data_t *data);
 
 //****************************************************************************//
 //      Search algorithms                                                     //

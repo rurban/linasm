@@ -290,6 +290,30 @@ public	SwapFwdBwd				as	'_ZN9MultiTree10SwapFwdBwdEv'
 public	SwapFwdBwd				as	'_ZN10UniqueTree10SwapFwdBwdEv'
 
 ;******************************************************************************;
+;       Minimum and maximum value                                              ;
+;******************************************************************************;
+
+; Minimum value
+public	MinFwd					as	'MultiTree_MinFwd'
+public	MinFwd					as	'UniqueTree_MinFwd'
+public	MinBwd					as	'MultiTree_MinBwd'
+public	MinBwd					as	'UniqueTree_MinBwd'
+public	MinFwd					as	'_ZN9MultiTree6MinFwdEP6data_t'
+public	MinFwd					as	'_ZN10UniqueTree6MinFwdEP6data_t'
+public	MinBwd					as	'_ZN9MultiTree6MinBwdEP6data_t'
+public	MinBwd					as	'_ZN10UniqueTree6MinBwdEP6data_t'
+
+; Maximum value
+public	MaxFwd					as	'MultiTree_MaxFwd'
+public	MaxFwd					as	'UniqueTree_MaxFwd'
+public	MaxBwd					as	'MultiTree_MaxBwd'
+public	MaxBwd					as	'UniqueTree_MaxBwd'
+public	MaxFwd					as	'_ZN9MultiTree6MaxFwdEP6data_t'
+public	MaxFwd					as	'_ZN10UniqueTree6MaxFwdEP6data_t'
+public	MaxBwd					as	'_ZN9MultiTree6MaxBwdEP6data_t'
+public	MaxBwd					as	'_ZN10UniqueTree6MaxBwdEP6data_t'
+
+;******************************************************************************;
 ;       Search algorithms                                                      ;
 ;******************************************************************************;
 
@@ -4801,6 +4825,125 @@ bwd		equ		rdx							; forward iterator
 		ret
 
 ;******************************************************************************;
+;       Minimum and maximum value                                              ;
+;******************************************************************************;
+macro	MINMAX1	offst, max
+{
+;---[Parameters]---------------------------
+this	equ		rdi							; pointer to b-tree object
+data	equ		rsi							; pointer to data structure
+;---[Internal variables]-------------------
+status	equ		al							; operation status
+result	equ		rax							; result register
+size	equ		rdx							; object size
+temp	equ		xmm0						; temporary register
+stack	equ		rsp							; stack pointer
+s_this	equ		stack + 0 * 8				; stack position of "this" variable
+s_data	equ		stack + 1 * 8				; stack position of "data" variable
+space	= 3 * 8								; stack size required by the procedure
+;------------------------------------------
+		sub		stack, space				; reserving stack size for local vars
+;---[Check object size]--------------------
+		mov		size, [this + SIZE]			; get object size
+		test	size, size					; if (size == 0)
+		jz		.ntfnd						;     return false
+;---[Normal execution branch]--------------
+		mov		[s_this], this				; save "this" variable into the stack
+		mov		[s_data], data				; save "data" variable into the stack
+if max
+		lea		param4, [size - KSIZE]
+else
+		mov		param4, 0
+end if
+		mov		param3, [this + HEIGHT]
+		mov		param2, [this + ROOT]
+		mov		param1, [this + ARRAY]
+		call	GetNode						; result = GetNode (array, root, height, size)
+;---[Update iterator value]----------------
+		mov		this, [s_this]				; get "this" variable from the stack
+		mov		data, [s_data]				; get "data" variable from the stack
+		mov		[this + offst], result		; update iterator position
+		and		result, PMASK
+		add		result, [this + ARRAY]
+		movdqa	temp, [result + BDATA]
+		movdqu	[data], temp				; data[0] = array[iter].data
+		add		stack, space				; restoring back the stack pointer
+		mov		status, 1					; return true
+		ret
+;---[Not found branch]---------------------
+.ntfnd:	add		stack, space				; restoring back the stack pointer
+		xor		status, status				; return false
+		ret
+}
+;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+macro	MINMAX2	func, offst, max
+{
+;---[Parameters]---------------------------
+this	equ		rdi							; pointer to b-tree object
+data	equ		rsi							; pointer to data structure
+;---[Internal variables]-------------------
+status	equ		al							; operation status
+result	equ		rax							; result register
+size	equ		rdx							; object size
+temp	equ		xmm0						; temporary register
+stack	equ		rsp							; stack pointer
+s_this	equ		stack + 0 * 8				; stack position of "this" variable
+s_data	equ		stack + 1 * 8				; stack position of "data" variable
+space	= 3 * 8								; stack size required by the procedure
+;------------------------------------------
+		sub		stack, space				; reserving stack size for local vars
+;---[Check object size]--------------------
+		mov		size, [this + SIZE]			; get object size
+		test	size, size					; if (size == 0)
+		jz		.ntfnd						;     return false
+;---[Normal execution branch]--------------
+		mov		[s_this], this				; save "this" variable into the stack
+		mov		[s_data], data				; save "data" variable into the stack
+if max
+		lea		param4, [size - KSIZE]
+else
+		mov		param4, 0
+end if
+		mov		param3, [this + HEIGHT]
+		mov		param2, [this + ROOT]
+		mov		param1, [this + ARRAY]
+		call	GetNode						; result = GetNode (array, root, height, size)
+;---[Call search function]-----------------
+		mov		this, [s_this]				; get "this" variable from the stack
+		and		result, PMASK
+		add		result, [this + ARRAY]
+		mov		param5, [result + BDATA]
+		mov		param4, [this + FUNC]
+		mov		param3, [this + HEIGHT]
+		mov		param2, [this + ROOT]
+		mov		param1, [this + ARRAY]
+		call	func						; result = func (array, root, height, func, array[iter].data.key)
+;---[Update iterator value]----------------
+		mov		this, [s_this]				; get "this" variable from the stack
+		mov		data, [s_data]				; get "data" variable from the stack
+		mov		[this + offst], result		; update iterator position
+		and		result, PMASK
+		add		result, [this + ARRAY]
+		movdqa	temp, [result + BDATA]
+		movdqu	[data], temp				; data[0] = array[iter].data
+		add		stack, space				; restoring back the stack pointer
+		mov		status, 1					; return true
+		ret
+;---[Not found branch]---------------------
+.ntfnd:	add		stack, space				; restoring back the stack pointer
+		xor		status, status				; return false
+		ret
+}
+
+; Minimum value
+MinFwd:	MINMAX1	FWD, 0
+MinBwd:	MINMAX2	EqualBwd, BWD, 0
+
+; Maximum value
+MaxFwd:	MINMAX2	EqualFwd, FWD, 1
+MaxBwd:	MINMAX1	BWD, 1
+
+;******************************************************************************;
 ;       Search algorithms                                                      ;
 ;******************************************************************************;
 
@@ -4966,6 +5109,7 @@ s_data	equ		stack + 1 * 8				; stack position of "data" variable
 space	= 3 * 8								; stack size required by the procedure
 ;------------------------------------------
 		sub		stack, space				; reserving stack size for local vars
+;---[Check object size]--------------------
 		cmp		qword [this + SIZE], 0		; if (size == 0)
 		jz		.ntfnd						;     return false
 ;---[Normal execution branch]--------------
