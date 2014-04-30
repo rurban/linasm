@@ -162,11 +162,11 @@ bool MaxFwd (data_t *data);
 bool MaxBwd (data_t *data);
 
 //****************************************************************************//
-//      Search algorithms                                                     //
+//      Key searching                                                         //
 //****************************************************************************//
 
 //============================================================================//
-//      Key searching                                                         //
+//      Single key searching                                                  //
 //============================================================================//
 
 // Searching for equal key
@@ -190,14 +190,20 @@ bool FindLessOrEqualFwd (data_t *data, adt_t key);
 bool FindLessOrEqualBwd (data_t *data, adt_t key);
 
 //============================================================================//
-//      Duplicates searching                                                  //
+//      Sequence searching                                                    //
 //============================================================================//
+size_t FindSequenceFwd (data_t *data, adt_t key);
+size_t FindSequenceBwd (data_t *data, adt_t key);
+
+//****************************************************************************//
+//      Duplicates searching                                                  //
+//****************************************************************************//
 bool FindDupFwd (data_t *data);
 bool FindDupBwd (data_t *data);
 
-//============================================================================//
+//****************************************************************************//
 //      Searching for differences                                             //
-//============================================================================//
+//****************************************************************************//
 bool FindDiffFwd (data_t *data, const MultiTree *source, size_t count);
 bool FindDiffBwd (data_t *data, const MultiTree *source, size_t count);
 
@@ -387,11 +393,11 @@ bool MultiTree_MaxFwd (struct MultiTree *tree, struct data_t *data);
 bool MultiTree_MaxBwd (struct MultiTree *tree, struct data_t *data);
 
 //****************************************************************************//
-//      Search algorithms                                                     //
+//      Key searching                                                         //
 //****************************************************************************//
 
 //============================================================================//
-//      Key searching                                                         //
+//      Single key searching                                                  //
 //============================================================================//
 
 // Searching for equal key
@@ -415,14 +421,20 @@ bool MultiTree_FindLessOrEqualFwd (struct MultiTree *tree, struct data_t *data, 
 bool MultiTree_FindLessOrEqualBwd (struct MultiTree *tree, struct data_t *data, union adt_t key);
 
 //============================================================================//
-//      Duplicates searching                                                  //
+//      Sequence searching                                                    //
 //============================================================================//
+size_t MultiTree_FindSequenceFwd (struct MultiTree *tree, struct data_t *data, union adt_t key);
+size_t MultiTree_FindSequenceBwd (struct MultiTree *tree, struct data_t *data, union adt_t key);
+
+//****************************************************************************//
+//      Duplicates searching                                                  //
+//****************************************************************************//
 bool MultiTree_FindDupFwd (struct MultiTree *tree, struct data_t *data);
 bool MultiTree_FindDupBwd (struct MultiTree *tree, struct data_t *data);
 
-//============================================================================//
+//****************************************************************************//
 //      Searching for differences                                             //
-//============================================================================//
+//****************************************************************************//
 bool MultiTree_FindDiffFwd (struct MultiTree *tree, struct data_t *data, const struct MultiTree *source, size_t count);
 bool MultiTree_FindDiffBwd (struct MultiTree *tree, struct data_t *data, const struct MultiTree *source, size_t count);
 

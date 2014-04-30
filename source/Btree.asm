@@ -314,11 +314,11 @@ public	MaxBwd					as	'_ZN9MultiTree6MaxBwdEP6data_t'
 public	MaxBwd					as	'_ZN10UniqueTree6MaxBwdEP6data_t'
 
 ;******************************************************************************;
-;       Search algorithms                                                      ;
+;       Key searching                                                          ;
 ;******************************************************************************;
 
 ;==============================================================================;
-;       Key searching                                                          ;
+;       Single key searching                                                   ;
 ;==============================================================================;
 
 ; Searching for equal key
@@ -372,16 +372,24 @@ public	FindLessOrEqualBwd		as	'_ZN9MultiTree18FindLessOrEqualBwdEP6data_t5adt_t'
 public	FindLessOrEqualBwd		as	'_ZN10UniqueTree18FindLessOrEqualBwdEP6data_t5adt_t'
 
 ;==============================================================================;
-;       Duplicates searching                                                   ;
+;       Sequence searching                                                     ;
 ;==============================================================================;
+public	FindSequenceFwd			as	'MultiTree_FindSequenceFwd'
+public	FindSequenceBwd			as	'MultiTree_FindSequenceBwd'
+public	FindSequenceFwd			as	'_ZN9MultiTree15FindSequenceFwdEP6data_t5adt_t'
+public	FindSequenceBwd			as	'_ZN9MultiTree15FindSequenceBwdEP6data_t5adt_t'
+
+;******************************************************************************;
+;       Duplicates searching                                                   ;
+;******************************************************************************;
 public	FindDupFwd				as	'MultiTree_FindDupFwd'
 public	FindDupBwd				as	'MultiTree_FindDupBwd'
 public	FindDupFwd				as	'_ZN9MultiTree10FindDupFwdEP6data_t'
 public	FindDupBwd				as	'_ZN9MultiTree10FindDupBwdEP6data_t'
 
-;==============================================================================;
+;******************************************************************************;
 ;       Searching for differences                                              ;
-;==============================================================================;
+;******************************************************************************;
 public	FindDiffFwd				as	'MultiTree_FindDiffFwd'
 public	FindDiffFwd				as	'UniqueTree_FindDiffFwd'
 public	FindDiffBwd				as	'MultiTree_FindDiffBwd'
@@ -599,8 +607,8 @@ space	= 3 * 8								; stack size required by the procedure
 		add		stack, space				; restoring back the stack pointer
 		jmp		InitFree					; return InitFree (array, oldcap, newcap, pool)
 ;---[Error branch]-------------------------
-.error:	add		stack, space				; restoring back the stack pointer
-		xor		status, status				; return false
+.error:	xor		status, status				; return false
+		add		stack, space				; restoring back the stack pointer
 		ret
 
 ;******************************************************************************;
@@ -1571,8 +1579,8 @@ end if
 		jnz		.loop						; do while (counter != 0)
 ;---[Normal exit branch]-------------------
 .exit:	mov		result, [s_count]			; get "count" variable from the stack
-		add		stack, space				; restoring back the stack pointer
 		shr		result, KSCALE				; return count
+		add		stack, space				; restoring back the stack pointer
 		ret
 ;---[Skip element branch]------------------
 .skip:	sub		qword [s_count], KSIZE		; count--
@@ -1596,8 +1604,8 @@ end if
 		sub		qword [s_cnt], KSIZE		; counter--
 		jnz		.loop						; do while (counter != 0)
 		mov		result, [s_count]			; get "count" variable from the stack
-		add		stack, space				; restoring back the stack pointer
 		shr		result, KSCALE				; return count
+		add		stack, space				; restoring back the stack pointer
 		ret
 ;---[Extend object capacity]---------------
 .ext:	mov		param2, low
@@ -1609,8 +1617,8 @@ end if
 		test	status, status				; if (status)
 		jnz		.eback						;     then go back
 ;---[Error branch]-------------------------
-.error:	add		stack, space				; restoring back the stack pointer
-		mov		result, ERROR				; return ERROR
+.error:	mov		result, ERROR				; return ERROR
+		add		stack, space				; restoring back the stack pointer
 		ret
 }
 
@@ -1727,8 +1735,8 @@ space	= 3 * 8								; stack size required by the procedure
 		cmp		nval, node					; if (nval == node)
 		je		.bwd						;     then check iterator position
 ;---[Normal exit]--------------------------
-.back2:	add		stack, space				; restoring back the stack pointer
-		mov		result, 1					; return true
+.back2:	mov		result, 1					; return true
+		add		stack, space				; restoring back the stack pointer
 		ret
 ;---[Correct forward iterator branch]------
 .fwd:	mov		ival, IMASK					; load index mask
@@ -1961,8 +1969,8 @@ space	= 3 * 8								; stack size required by the procedure
 		cmp		nval, node					; if (nval == node)
 		je		.bwd						;     then check iterator position
 ;---[Normal exit]--------------------------
-.back2:	add		stack, space				; restoring back the stack pointer
-		mov		result, 1					; return true
+.back2:	mov		result, 1					; return true
+		add		stack, space				; restoring back the stack pointer
 		ret
 ;---[Correct forward iterator branch]------
 .fwd:	mov		ival, IMASK					; load index mask
@@ -2503,8 +2511,8 @@ space	= 5 * 8								; stack size required by the procedure
 		cmp		nval, node					; if (nval == node)
 		je		.bwd						;     then check iterator position
 ;---[Normal exit]--------------------------
-.back2:	add		stack, space				; restoring back the stack pointer
-		mov		result, 1					; return true
+.back2:	mov		result, 1					; return true
+		add		stack, space				; restoring back the stack pointer
 		ret
 ;---[Correct forward iterator branch]------
 .fwd:	mov		ival, IMASK					; load index mask
@@ -2557,8 +2565,8 @@ space	= 5 * 8								; stack size required by the procedure
 		mov		result, [this + POOL]		; array[node].root = this.pool
 		mov		[array + node + BROOT], result
 		mov		[this + POOL], node			; this.pool = node
-		add		stack, space				; restoring back the stack pointer
 		mov		result, 1					; return true
+		add		stack, space				; restoring back the stack pointer
 		ret
 
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
@@ -2652,8 +2660,8 @@ space	= 9 * 8								; stack size required by the procedure
 		cmp		nval, rnode					; if (nval == rnode)
 		je		.frght						;     then check iterator position
 ;---[Normal exit]--------------------------
-.back2:	add		stack, space				; restoring back the stack pointer
-		mov		result, 1					; return true
+.back2:	mov		result, 1					; return true
+		add		stack, space				; restoring back the stack pointer
 		ret
 ;---[Correct backward iterator branch]-----
 .btop:	mov		ival, IMASK					; load index mask
@@ -2773,7 +2781,7 @@ space	= 9 * 8								; stack size required by the procedure
 		movdqa	[tnode + BDATA], temp		; array[tnode].data[tindex] = array[rnode].data[0]
 ;---[Replace element in the node]----------
 		add		lnode, pos					; lnode += pos
-		neg 	pos							; pos = -pos
+		neg		pos							; pos = -pos
 		lea		param2, [pos + LMIN - KSIZE]
 		lea		param1, [array + lnode + BDATA]
 		call	LeafReplaceRightCore		; call LeafReplaceRightCore (array[lnode].data + pos, LMIN - KSIZE - pos, median)
@@ -2816,8 +2824,8 @@ space	= 9 * 8								; stack size required by the procedure
 		cmp		nval, lnode					; if (nval == lnode)
 		je		.bleft						;     then check iterator position
 ;---[Normal exit]--------------------------
-.back2:	add		stack, space				; restoring back the stack pointer
-		mov		result, 1					; return true
+.back2:	mov		result, 1					; return true
+		add		stack, space				; restoring back the stack pointer
 		ret
 ;---[Correct forward iterator branch]------
 .ftop:	mov		ival, IMASK					; load index mask
@@ -3150,8 +3158,8 @@ space	= 5 * 8								; stack size required by the procedure
 		cmp		nval, node					; if (nval == node)
 		je		.bwd						;     then check iterator position
 ;---[Normal exit]--------------------------
-.back2:	add		stack, space				; restoring back the stack pointer
-		mov		result, 1					; return true
+.back2:	mov		result, 1					; return true
+		add		stack, space				; restoring back the stack pointer
 		ret
 ;---[Correct forward iterator branch]------
 .fwd:	mov		ival, IMASK					; load index mask
@@ -3178,8 +3186,8 @@ space	= 5 * 8								; stack size required by the procedure
 		mov		result, [this + POOL]		; array[node].root = this.pool
 		mov		[array + node + BROOT], result
 		mov		[this + POOL], node			; this.pool = node
-		add		stack, space				; restoring back the stack pointer
 		mov		result, 1					; return true
+		add		stack, space				; restoring back the stack pointer
 		ret
 
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
@@ -3284,8 +3292,8 @@ space	= 9 * 8								; stack size required by the procedure
 		cmp		nval, rnode					; if (nval == rnode)
 		je		.frght						;     then check iterator position
 ;---[Normal exit]--------------------------
-.back2:	add		stack, space				; restoring back the stack pointer
-		mov		result, 1					; return true
+.back2:	mov		result, 1					; return true
+		add		stack, space				; restoring back the stack pointer
 		ret
 ;---[Correct backward iterator branch]-----
 .btop:	mov		ival, IMASK					; load index mask
@@ -3400,7 +3408,7 @@ space	= 9 * 8								; stack size required by the procedure
 		sub		[tnode + tindex + KSIZE + BPTR + TSIZE], bsize
 ;---[Replace element in the node]----------
 		add		lnode, pos					; lnode += pos
-		neg 	pos							; pos = -pos
+		neg		pos							; pos = -pos
 		lea		param1, [array + lnode + BDATA]
 		lea		param2, [array + lnode + KSIZE + BPTR]
 		mov		param3, array
@@ -3451,8 +3459,8 @@ space	= 9 * 8								; stack size required by the procedure
 		cmp		nval, lnode					; if (nval == lnode)
 		je		.bleft						;     then check iterator position
 ;---[Normal exit]--------------------------
-.back2:	add		stack, space				; restoring back the stack pointer
-		mov		result, 1					; return true
+.back2:	mov		result, 1					; return true
+		add		stack, space				; restoring back the stack pointer
 		ret
 ;---[Correct forward iterator branch]------
 .ftop:	mov		ival, IMASK					; load index mask
@@ -3963,8 +3971,8 @@ space	= 3 * 8								; stack size required by the procedure
 		mov		param2, result
 		jmp		RemoveCore					; call this.RemoveCore (result)
 ;---[Error branch]-------------------------
-.error:	add		stack, space				; restoring back the stack pointer
-		xor		status, status				; return false
+.error:	xor		status, status				; return false
+		add		stack, space				; restoring back the stack pointer
 		ret
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 macro	REMOVE_ELEMENT	offst
@@ -4757,12 +4765,12 @@ space	= 1 * 8								; stack size required by the procedure
 		cmp		iter, EMPTY					; if (iter == EMPTY)
 		je		.error						;     then go to error branch
 ;---[Normal exit branch]-------------------
-.exit:	add		stack, space				; restoring back the stack pointer
-		mov		status, 1					; return true
+.exit:	mov		status, 1					; return true
+		add		stack, space				; restoring back the stack pointer
 		ret
 ;---[Error branch]-------------------------
-.error:	add		stack, space				; restoring back the stack pointer
-		xor		status, status				; return false
+.error:	xor		status, status				; return false
+		add		stack, space				; restoring back the stack pointer
 		ret
 }
 
@@ -4867,12 +4875,12 @@ end if
 		add		result, [this + ARRAY]
 		movdqa	temp, [result + BDATA]
 		movdqu	[data], temp				; data[0] = array[iter].data
-		add		stack, space				; restoring back the stack pointer
 		mov		status, 1					; return true
+		add		stack, space				; restoring back the stack pointer
 		ret
 ;---[Not found branch]---------------------
-.ntfnd:	add		stack, space				; restoring back the stack pointer
-		xor		status, status				; return false
+.ntfnd:	xor		status, status				; return false
+		add		stack, space				; restoring back the stack pointer
 		ret
 }
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -4926,12 +4934,12 @@ end if
 		add		result, [this + ARRAY]
 		movdqa	temp, [result + BDATA]
 		movdqu	[data], temp				; data[0] = array[iter].data
-		add		stack, space				; restoring back the stack pointer
 		mov		status, 1					; return true
+		add		stack, space				; restoring back the stack pointer
 		ret
 ;---[Not found branch]---------------------
-.ntfnd:	add		stack, space				; restoring back the stack pointer
-		xor		status, status				; return false
+.ntfnd:	xor		status, status				; return false
+		add		stack, space				; restoring back the stack pointer
 		ret
 }
 
@@ -4944,11 +4952,11 @@ MaxFwd:	MINMAX2	EqualFwd, FWD, 1
 MaxBwd:	MINMAX1	BWD, 1
 
 ;******************************************************************************;
-;       Search algorithms                                                      ;
+;       Key searching                                                          ;
 ;******************************************************************************;
 
 ;==============================================================================;
-;       Key searching                                                          ;
+;       Single key searching                                                   ;
 ;==============================================================================;
 macro	FIND_CORE	cond1, cond2
 {
@@ -4962,14 +4970,14 @@ key		equ		r8							; key for searching
 result	equ		rax							; result register
 next	equ		rbx							; next root node
 level	equ		rbp							; level of b-tree iterator
-node	equ		r12							; node, where the key was found
-index	equ		r13							; index, where the key was found
-left	equ		r14							; left index
-right	equ		r15							; right index
 median	equ		r8							; median value
 median1	equ		r9							; median value + 1
 data	equ		r10							; pointer to array of keys
 bptr	equ		r11							; pointer to array of subtrees
+node	equ		r12							; node, where the key was found
+index	equ		r13							; index, where the key was found
+left	equ		r14							; left index
+right	equ		r15							; right index
 stack	equ		rsp							; stack pointer
 s_array	equ		stack + 0 * 8				; stack position of "array" variable
 s_root	equ		stack + 1 * 8				; stack position of "root" variable
@@ -5060,10 +5068,10 @@ space	= 15 * 8							; stack size required by the procedure
 		mov		param2, [data + median]
 		mov		param1, [s_key]
 		call	qword [s_func]				; result = Compare (key, data[median].key)
-		mov		median, [s_med]				; get "median" variable from the stack
 		mov		root, [s_root]				; get "root" variable from the stack
 		mov		height, [s_hght]			; get "height" variable from the stack
 		mov		data, [s_data]				; get "data" variable from the stack
+		mov		median, [s_med]				; get "median" variable from the stack
 		lea		median1, [median + KSIZE]	; median1 = median + KSIZE
 		cmp		result, 0
 	cmov#cond1	node, root					; if (result cond1 0), then node = root
@@ -5132,12 +5140,12 @@ space	= 3 * 8								; stack size required by the procedure
 		add		result, [this + ARRAY]
 		movdqa	temp, [result + BDATA]
 		movdqu	[data], temp				; data[0] = array[iter].data
-		add		stack, space				; restoring back the stack pointer
 		mov		status, 1					; return true
+		add		stack, space				; restoring back the stack pointer
 		ret
 ;---[Not found branch]---------------------
-.ntfnd:	add		stack, space				; restoring back the stack pointer
-		xor		status, status				; return false
+.ntfnd:	xor		status, status				; return false
+		add		stack, space				; restoring back the stack pointer
 		ret
 }
 
@@ -5162,8 +5170,235 @@ FindLessOrEqualFwd:		FIND_KEY	LessOrEqual, FWD
 FindLessOrEqualBwd:		FIND_KEY	LessOrEqual, BWD
 
 ;==============================================================================;
-;       Duplicates searching                                                   ;
+;       Sequence searching                                                     ;
 ;==============================================================================;
+macro	FIND_INDEX	cond1, cond2
+{
+;---[Parameters]---------------------------
+array	equ		rdi							; pointer to array of nodes
+root	equ		rsi							; begining node to start from
+height	equ		rdx							; b-tree height
+func	equ		rcx							; compare function
+key		equ		r8							; key for searching
+;---[Internal variables]-------------------
+result	equ		rax							; result register
+next	equ		rbx							; next root node
+level	equ		rbp							; level of b-tree iterator
+median	equ		r8							; median value
+median1	equ		r9							; median value + 1
+data	equ		r10							; pointer to array of keys
+bptr	equ		r11							; pointer to array of subtrees
+node	equ		r12							; node, where the key was found
+index	equ		r13							; index, where the key was found
+left	equ		r14							; left index
+right	equ		r15							; right index
+size	equ		func						; index, where the key was found
+stack	equ		rsp							; stack pointer
+s_array	equ		stack + 0 * 8				; stack position of "array" variable
+s_root	equ		stack + 1 * 8				; stack position of "root" variable
+s_hght	equ		stack + 2 * 8				; stack position of "height" variable
+s_func	equ		stack + 3 * 8				; stack position of "func" variable
+s_key	equ		stack + 4 * 8				; stack position of "key" variable
+s_next	equ		stack + 5 * 8				; stack position of "next" variable
+s_level	equ		stack + 6 * 8				; stack position of "level" variable
+s_node	equ		stack + 7 * 8				; stack position of "node" variable
+s_index	equ		stack + 8 * 8				; stack position of "index" variable
+s_left	equ		stack + 9 * 8				; stack position of "left" variable
+s_right	equ		stack + 10 * 8				; stack position of "right" variable
+s_med	equ		stack + 11 * 8				; stack position of "median" variable
+s_data	equ		stack + 12 * 8				; stack position of "data" variable
+s_bptr	equ		stack + 13 * 8				; stack position of "bptr" variable
+s_size	equ		stack + 14 * 8				; stack position of "size" variable
+space	= 15 * 8							; stack size required by the procedure
+;------------------------------------------
+		sub		stack, space				; reserving stack size for local vars
+		mov		[s_next], next				; save old value of "next" variable
+		mov		[s_level], level			; save old value of "level" variable
+		mov		[s_node], node				; save old value of "node" variable
+		mov		[s_index], index			; save old value of "index" variable
+		mov		[s_left], left				; save old value of "left" variable
+		mov		[s_right], right			; save old value of "right" variable
+		mov		[s_array], array			; save "array" variable into the stack
+		mov		[s_root], root				; save "root" variable into the stack
+		mov		[s_hght], height			; save "height" variable into the stack
+		mov		[s_func], func				; save "func" variable into the stack
+		mov		[s_key], key				; save "key" variable into the stack
+		mov		qword [s_size], 0			; size = 0
+		mov		node, EMPTY					; node = EMPTY
+		xor		index, index				; index = 0
+		xor		level, level				; level = 0
+		test	height, height				; if (height == 0)
+		jz		.leaf						;     then check only leaf node
+;---[Branch searching loop]----------------
+.bloop:	mov		right, [array + root + BSIZE]
+		lea		data, [array + root + BDATA]
+		lea		bptr, [array + root + BPTR]
+		mov		next, [array + root + BPTR + TROOT]
+		xor		left, left					; left = 0
+		mov		[s_data], data				; save "data" variable into the stack
+		mov		[s_bptr], bptr				; save "bptr" variable into the stack
+;---[Binary search loop]-------------------
+.loop1:	lea		median, [left + right]
+		shr		median, 1
+		and		median, -KSIZE				; median = (left + right) / 2
+		mov		[s_med], median				; save "median" variable into the stack
+		mov		param2, [data + median]
+		mov		param1, [s_key]
+		call	qword [s_func]				; result = Compare (key, data[median].key)
+		mov		median, [s_med]				; get "median" variable from the stack
+		mov		array, [s_array]			; get "array" variable from the stack
+		mov		root, [s_root]				; get "root" variable from the stack
+		mov		height, [s_hght]			; get "height" variable from the stack
+		mov		data, [s_data]				; get "data" variable from the stack
+		mov		bptr, [s_bptr]				; get "bptr" variable from the stack
+		cmp		result, 0
+	jn#cond1	@f							; if (result cond1 0)
+		mov		node, root					;     node = root
+		mov		index, median				;     index = median
+		mov		level, height				;     level = height
+@@:	jn#cond2	@f							; if (result cond2 0)
+;---[if result > 0]------------------------
+		mov		next, [bptr + median + KSIZE + TROOT]
+		lea		left, [median + KSIZE]		; left = median + KSIZE
+		cmp		left, right
+		jb		.loop1						; do while (left < right)
+;---[else]---------------------------------
+@@:		mov		right, median				; right = median
+		cmp		left, right
+		jb		.loop1						; do while (left < right)
+;---[End of binary search loop]------------
+		mov		size, [s_size]				; get "size" variable from the stack
+		add		size, left					; size += left
+		test	left, left					; if (left == 0)
+		jz		@f							;     then skip following loop
+;---[Index computation loop]---------------
+.iloop:	add		size, [bptr + TSIZE]		; size += bptr[0].size
+		add		bptr, KSIZE					; bptr++
+		sub		left, KSIZE					; left--
+		jnz		.iloop						; do while (left != 0)
+@@:		mov		[s_size], size				; save "size" variable into the stack
+;---[End of index computation loop]--------
+		mov		root, next					; root = next
+		mov		[s_root], next				; save "root" variable into the stack
+		sub		height, 1					; height--
+		mov		[s_hght], height			; save "height" variable into the stack
+		jnz		.bloop						; do while (height != 0)
+;---[End of branch searching loop]---------
+.leaf:	mov		right, [array + root + BSIZE]
+		lea		data, [array + root + BDATA]
+		xor		left, left					; left = 0
+		mov		[s_data], data				; save "data" variable into the stack
+;---[Binary search loop]-------------------
+.loop2:	lea		median, [left + right]
+		shr		median, 1
+		and		median, -KSIZE				; median = (left + right) / 2
+		mov		[s_med], median				; save "median" variable into the stack
+		mov		param2, [data + median]
+		mov		param1, [s_key]
+		call	qword [s_func]				; result = Compare (key, data[median].key)
+		mov		root, [s_root]				; get "root" variable from the stack
+		mov		height, [s_hght]			; get "height" variable from the stack
+		mov		data, [s_data]				; get "data" variable from the stack
+		mov		median, [s_med]				; get "median" variable from the stack
+		lea		median1, [median + KSIZE]	; median1 = median + KSIZE
+		cmp		result, 0
+	cmov#cond1	node, root					; if (result cond1 0), then node = root
+	cmov#cond1	index, median				; if (result cond1 0), then index = median
+	cmov#cond1	level, height				; if (result cond1 0), then level = height
+	cmov#cond2	left, median1				; if (result cond2 0), then left = median + KSIZE
+	cmovn#cond2	right, median				; if (result !cond2 0), then right = median
+		cmp		left, right
+		jb		.loop2						; do while (left < right)
+;---[End of binary search loop]------------
+		mov		size, [s_size]				; get "size" variable from the stack
+		add		size, left					; size += left
+		add		node, index
+		add		node, level
+		mov		result, node				; return node + index + level
+		mov		next, [s_next]				; restore old value of "next" variable
+		mov		level, [s_level]			; restore old value of "level" variable
+		mov		node, [s_node]				; restore old value of "node" variable
+		mov		index, [s_index]			; restore old value of "index" variable
+		mov		left, [s_left]				; restore old value of "left" variable
+		mov		right, [s_right]			; restore old value of "right" variable
+		add		stack, space				; restoring back the stack pointer
+		ret									; return level
+}
+FirstIndex:	FIND_INDEX	e, g
+LastIndex:	FIND_INDEX	e, ge
+;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+macro	FIND_SEQUENCE	func1, func2, offst, bwd
+{
+;---[Parameters]---------------------------
+this	equ		rdi							; pointer to b-tree object
+data	equ		rsi							; pointer to data structure
+key		equ		rdx							; key to find
+;---[Internal variables]-------------------
+result	equ		rax							; result register
+index	equ		rcx							; element index
+temp	equ		xmm0						; temporary register
+stack	equ		rsp							; stack pointer
+s_this	equ		stack + 0 * 8				; stack position of "this" variable
+s_data	equ		stack + 1 * 8				; stack position of "data" variable
+s_key	equ		stack + 2 * 8				; stack position of "key" variable
+s_index	equ		stack + 3 * 8				; stack position of "index" variable
+space	= 5 * 8								; stack size required by the procedure
+;------------------------------------------
+		sub		stack, space				; reserving stack size for local vars
+;---[Check object size]--------------------
+		cmp		qword [this + SIZE], 0		; if (size == 0)
+		jz		.ntfnd						;     then return 0
+;---[Normal execution branch]--------------
+		mov		[s_this], this				; save "this" variable into the stack
+		mov		[s_data], data				; save "data" variable into the stack
+		mov		[s_key], key				; save "key" variable into the stack
+;---[Call search function #1]--------------
+		mov		param5, key
+		mov		param4, [this + FUNC]
+		mov		param3, [this + HEIGHT]
+		mov		param2, [this + ROOT]
+		mov		param1, [this + ARRAY]
+		call	func1						; result = func1 (array, root, height, func, key)
+		cmp		result, EMPTY				; if (result == EMPTY)
+		je		.ntfnd						;     then return 0
+		mov		[s_index], index			; save "index" variable into the stack
+;---[Call search function #2]--------------
+		mov		this, [s_this]				; get "this" variable from the stack
+		mov		param5, [s_key]
+		mov		param4, [this + FUNC]
+		mov		param3, [this + HEIGHT]
+		mov		param2, [this + ROOT]
+		mov		param1, [this + ARRAY]
+		call	func2						; result = func2 (array, root, height, func, key)
+;---[Update iterator value]----------------
+		mov		this, [s_this]				; get "this" variable from the stack
+		mov		data, [s_data]				; get "data" variable from the stack
+		mov		[this + offst], result		; update iterator position
+		and		result, PMASK
+		add		result, [this + ARRAY]
+		movdqa	temp, [result + BDATA]
+		movdqu	[data], temp				; data[0] = array[iter].data
+if bwd
+		sub		index, [s_index]
+else
+		neg		index
+		add		index, [s_index]
+end if
+		shr		index, KSCALE
+		mov		result, index				; return index
+		add		stack, space				; restoring back the stack pointer
+		ret
+;---[Not found branch]---------------------
+.ntfnd:	xor		result, result				; return 0
+		add		stack, space				; restoring back the stack pointer
+		ret
+}
+FindSequenceFwd:	FIND_SEQUENCE	LastIndex, FirstIndex, FWD, 0
+FindSequenceBwd:	FIND_SEQUENCE	FirstIndex, LastIndex, BWD, 1
+
+;******************************************************************************;
+;       Duplicates searching                                                   ;
+;******************************************************************************;
 macro	FIND_DUP_CORE	next
 {
 ;---[Parameters]---------------------------
@@ -5266,20 +5501,20 @@ space	= 3 * 8								; stack size required by the procedure
 		add		result, [this + ARRAY]
 		movdqa	temp, [result + BDATA]
 		movdqu	[data], temp				; data[0] = array[iter].data
-		add		stack, space				; restoring back the stack pointer
 		mov		status, 1					; return true
+		add		stack, space				; restoring back the stack pointe
 		ret
 ;---[Not found branch]---------------------
-.ntfnd:	add		stack, space				; restoring back the stack pointer
-		xor		status, status				; return false
+.ntfnd:	xor		status, status				; return false
+		add		stack, space				; restoring back the stack pointer
 		ret
 }
 FindDupFwd:	FIND_DUP	DupFwd, FWD
 FindDupBwd:	FIND_DUP	DupBwd, BWD
 
-;==============================================================================;
+;******************************************************************************;
 ;       Searching for differences                                              ;
-;==============================================================================;
+;******************************************************************************;
 macro	DIFF	next
 {
 ;---[Parameters]---------------------------
@@ -5407,12 +5642,12 @@ space	= 3 * 8								; stack size required by the procedure
 		add		result, [this + ARRAY]
 		movdqa	temp, [result + BDATA]
 		movdqu	[data], temp				; data[0] = array[iter].data
-		add		stack, space				; restoring back the stack pointer
 		mov		status, 1					; return true
+		add		stack, space				; restoring back the stack pointer
 		ret
 ;---[Not found branch]---------------------
-.ntfnd:	add		stack, space				; restoring back the stack pointer
-		xor		status, status				; return false
+.ntfnd:	xor		status, status				; return false
+		add		stack, space				; restoring back the stack pointer
 		ret
 }
 FindDiffFwd:	FIND_DIFF	DiffFwd, FWD
@@ -5421,130 +5656,7 @@ FindDiffBwd:	FIND_DIFF	DiffBwd, BWD
 ;******************************************************************************;
 ;       Key counting                                                           ;
 ;******************************************************************************;
-GreatIndex:
-;---[Parameters]---------------------------
-array	equ		rdi							; pointer to array of nodes
-root	equ		rsi							; begining node to start from
-height	equ		rdx							; b-tree height
-func	equ		rcx							; compare function
-key		equ		r8							; key for searching
-;---[Internal variables]-------------------
-result	equ		rax							; result register
-next	equ		rbx							; next root node
-size	equ		r12							; index, where the key was found
-left	equ		r13							; left index
-right	equ		r14							; right index
-median	equ		r8							; median value
-median1	equ		r9							; median value + 1
-data	equ		r10							; pointer to array of keys
-bptr	equ		r11							; pointer to array of subtrees
-stack	equ		rsp							; stack pointer
-s_array	equ		stack + 0 * 8				; stack position of "array" variable
-s_root	equ		stack + 1 * 8				; stack position of "root" variable
-s_hght	equ		stack + 2 * 8				; stack position of "height" variable
-s_func	equ		stack + 3 * 8				; stack position of "func" variable
-s_key	equ		stack + 4 * 8				; stack position of "key" variable
-s_next	equ		stack + 5 * 8				; stack position of "next" variable
-s_size	equ		stack + 6 * 8				; stack position of "size" variable
-s_left	equ		stack + 7 * 8				; stack position of "left" variable
-s_right	equ		stack + 8 * 8				; stack position of "right" variable
-s_med	equ		stack + 9 * 8				; stack position of "median" variable
-s_data	equ		stack + 10 * 8				; stack position of "data" variable
-s_bptr	equ		stack + 11 * 8				; stack position of "bptr" variable
-space	= 13 * 8							; stack size required by the procedure
-;------------------------------------------
-		sub		stack, space				; reserving stack size for local vars
-		mov		[s_next], next				; save old value of "next" variable
-		mov		[s_size], size				; save old value of "size" variable
-		mov		[s_left], left				; save old value of "left" variable
-		mov		[s_right], right			; save old value of "right" variable
-		mov		[s_array], array			; save "array" variable into the stack
-		mov		[s_root], root				; save "root" variable into the stack
-		mov		[s_hght], height			; save "height" variable into the stack
-		mov		[s_func], func				; save "func" variable into the stack
-		mov		[s_key], key				; save "key" variable into the stack
-		xor		size, size					; size = 0
-		test	height, height				; if (height == 0)
-		jz		.leaf						;     then check only leaf node
-;---[Branch searching loop]----------------
-.bloop:	mov		right, [array + root + BSIZE]
-		lea		data, [array + root + BDATA]
-		lea		bptr, [array + root + BPTR]
-		mov		next, [array + root + BPTR + TROOT]
-		xor		left, left					; left = 0
-		mov		[s_data], data				; save "data" variable into the stack
-		mov		[s_bptr], bptr				; save "bptr" variable into the stack
-;---[Binary search loop]-------------------
-.loop1:	lea		median, [left + right]
-		shr		median, 1
-		and		median, -KSIZE				; median = (left + right) / 2
-		mov		[s_med], median				; save "median" variable into the stack
-		mov		param2, [data + median]
-		mov		param1, [s_key]
-		call	qword [s_func]				; result = Compare (key, data[median].key)
-		mov		median, [s_med]				; get "median" variable from the stack
-		mov		array, [s_array]			; get "array" variable from the stack
-		mov		height, [s_hght]			; get "height" variable from the stack
-		mov		data, [s_data]				; get "data" variable from the stack
-		mov		bptr, [s_bptr]				; get "bptr" variable from the stack
-		cmp		result, 0
-		jnge	@f							; if (result >= 0)
-;---[if result >= 0]-----------------------
-		mov		next, [bptr + median + KSIZE + TROOT]
-		lea		left, [median + KSIZE]		; left = median + KSIZE
-		cmp		left, right
-		jb		.loop1						; do while (left < right)
-;---[else]---------------------------------
-@@:		mov		right, median				; right = median
-		cmp		left, right
-		jb		.loop1						; do while (left < right)
-;---[End of binary search loop]------------
-		add		size, left					; size += left
-		test	left, left					; if (left == 0)
-		jz		@f							;     then skip following loop
-;---[Index computation loop]---------------
-.iloop:	add		size, [bptr + TSIZE]		; size += bptr[0].size
-		add		bptr, KSIZE					; bptr++
-		sub		left, KSIZE					; left--
-		jnz		.iloop						; do while (left != 0)
-;---[End of index computation loop]--------
-@@:		mov		root, next					; root = next
-		mov		[s_root], next				; save "root" variable into the stack
-		sub		height, 1					; height--
-		mov		[s_hght], height			; save "height" variable into the stack
-		jnz		.bloop						; do while (height != 0)
-;---[End of branch searching loop]---------
-.leaf:	mov		right, [array + root + BSIZE]
-		lea		data, [array + root + BDATA]
-		xor		left, left					; left = 0
-		mov		[s_data], data				; save "data" variable into the stack
-;---[Binary search loop]-------------------
-.loop2:	lea		median, [left + right]
-		shr		median, 1
-		and		median, -KSIZE				; median = (left + right) / 2
-		mov		[s_med], median				; save "median" variable into the stack
-		mov		param2, [data + median]
-		mov		param1, [s_key]
-		call	qword [s_func]				; result = Compare (key, data[median].key)
-		mov		median, [s_med]				; get "median" variable from the stack
-		mov		data, [s_data]				; get "data" variable from the stack
-		lea		median1, [median + KSIZE]	; median1 = median + KSIZE
-		cmp		result, 0
-		cmovge	left, median1				; if (result >= 0), then left = median + KSIZE
-		cmovnge	right, median				; if (result < 0), then right = median
-		cmp		left, right
-		jb		.loop2						; do while (left < right)
-;---[End of binary search loop]------------
-		add		size, left					; size += left
-		mov		result, size				; result = size
-		mov		next, [s_next]				; restore old value of "next" variable
-		mov		size, [s_size]				; restore old value of "size" variable
-		mov		left, [s_left]				; restore old value of "left" variable
-		mov		right, [s_right]			; restore old value of "right" variable
-		add		stack, space				; restoring back the stack pointer
-		ret									; return size
-;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	COUNT	uniq
+macro	COUNT_CORE	uniq
 {
 ;---[Parameters]---------------------------
 array	equ		rdi							; pointer to array of nodes
@@ -5554,150 +5666,51 @@ func	equ		rcx							; compare function
 key		equ		r8							; key for searching
 ;---[Internal variables]-------------------
 result	equ		rax							; result register
-next	equ		rbx							; next root node
-level	equ		rbp							; level of b-tree iterator
-size	equ		r12							; index, where the key was found
-left	equ		r13							; left index
-right	equ		r14							; right index
-median	equ		r8							; median value
-median1	equ		r9							; median value + 1
-data	equ		r10							; pointer to array of keys
-bptr	equ		r11							; pointer to array of subtrees
+index	equ		rcx							; element index
 stack	equ		rsp							; stack pointer
 s_array	equ		stack + 0 * 8				; stack position of "array" variable
 s_root	equ		stack + 1 * 8				; stack position of "root" variable
 s_hght	equ		stack + 2 * 8				; stack position of "height" variable
 s_func	equ		stack + 3 * 8				; stack position of "func" variable
 s_key	equ		stack + 4 * 8				; stack position of "key" variable
-s_next	equ		stack + 5 * 8				; stack position of "next" variable
-s_level	equ		stack + 6 * 8				; stack position of "level" variable
-s_size	equ		stack + 7 * 8				; stack position of "size" variable
-s_left	equ		stack + 8 * 8				; stack position of "left" variable
-s_right	equ		stack + 9 * 8				; stack position of "right" variable
-s_med	equ		stack + 10 * 8				; stack position of "median" variable
-s_data	equ		stack + 11 * 8				; stack position of "data" variable
-s_bptr	equ		stack + 12 * 8				; stack position of "bptr" variable
-s_broot	equ		stack + 13 * 8				; stack position of "root" variable
-s_bhght	equ		stack + 14 * 8				; stack position of "height" variable
-space	= 15 * 8							; stack size required by the procedure
+s_index	equ		stack + 5 * 8				; stack position of "index" variable
+space	= 7 * 8								; stack size required by the procedure
 ;------------------------------------------
 		sub		stack, space				; reserving stack size for local vars
-		mov		[s_next], next				; save old value of "next" variable
-		mov		[s_level], level			; save old value of "level" variable
-		mov		[s_size], size				; save old value of "size" variable
-		mov		[s_left], left				; save old value of "left" variable
-		mov		[s_right], right			; save old value of "right" variable
 		mov		[s_array], array			; save "array" variable into the stack
 		mov		[s_root], root				; save "root" variable into the stack
 		mov		[s_hght], height			; save "height" variable into the stack
 		mov		[s_func], func				; save "func" variable into the stack
 		mov		[s_key], key				; save "key" variable into the stack
-		mov		[s_broot], root				; save "root" variable into the stack
-		mov		[s_bhght], height			; save "height" variable into the stack
-		mov		level, ERROR				; level = ERROR
-		xor		size, size					; size = 0
-		test	height, height				; if (height == 0)
-		jz		.leaf						;     then check only leaf node
-;---[Branch searching loop]----------------
-.bloop:	mov		right, [array + root + BSIZE]
-		lea		data, [array + root + BDATA]
-		lea		bptr, [array + root + BPTR]
-		mov		next, [array + root + BPTR + TROOT]
-		xor		left, left					; left = 0
-		mov		[s_data], data				; save "data" variable into the stack
-		mov		[s_bptr], bptr				; save "bptr" variable into the stack
-;---[Binary search loop]-------------------
-.loop1:	lea		median, [left + right]
-		shr		median, 1
-		and		median, -KSIZE				; median = (left + right) / 2
-		mov		[s_med], median				; save "median" variable into the stack
-		mov		param2, [data + median]
-		mov		param1, [s_key]
-		call	qword [s_func]				; result = Compare (key, data[median].key)
-		mov		median, [s_med]				; get "median" variable from the stack
-		mov		array, [s_array]			; get "array" variable from the stack
-		mov		height, [s_hght]			; get "height" variable from the stack
-		mov		data, [s_data]				; get "data" variable from the stack
-		mov		bptr, [s_bptr]				; get "bptr" variable from the stack
-		cmp		result, 0
-		jne		@f							; if (result == 0)
-		mov		level, height				;     level = height
-@@:		jng		@f							; if (result > 0)
-;---[if result > 0]------------------------
-		mov		next, [bptr + median + KSIZE + TROOT]
-		lea		left, [median + KSIZE]		; left = median + KSIZE
-		cmp		left, right
-		jb		.loop1						; do while (left < right)
-;---[else]---------------------------------
-@@:		mov		right, median				; right = median
-		cmp		left, right
-		jb		.loop1						; do while (left < right)
-;---[End of binary search loop]------------
-		add		size, left					; size += left
-		test	left, left					; if (left == 0)
-		jz		@f							;     then skip following loop
-;---[Index computation loop]---------------
-.iloop:	add		size, [bptr + TSIZE]		; size += bptr[0].size
-		add		bptr, KSIZE					; bptr++
-		sub		left, KSIZE					; left--
-		jnz		.iloop						; do while (left != 0)
-;---[End of index computation loop]--------
-@@:		mov		root, next					; root = next
-		mov		[s_root], next				; save "root" variable into the stack
-		sub		height, 1					; height--
-		mov		[s_hght], height			; save "height" variable into the stack
-		jnz		.bloop						; do while (height != 0)
-;---[End of branch searching loop]---------
-.leaf:	mov		right, [array + root + BSIZE]
-		lea		data, [array + root + BDATA]
-		xor		left, left					; left = 0
-		mov		[s_data], data				; save "data" variable into the stack
-;---[Binary search loop]-------------------
-.loop2:	lea		median, [left + right]
-		shr		median, 1
-		and		median, -KSIZE				; median = (left + right) / 2
-		mov		[s_med], median				; save "median" variable into the stack
-		mov		param2, [data + median]
-		mov		param1, [s_key]
-		call	qword [s_func]				; result = Compare (key, data[median].key)
-		mov		median, [s_med]				; get "median" variable from the stack
-		mov		height, [s_hght]			; get "height" variable from the stack
-		mov		data, [s_data]				; get "data" variable from the stack
-		lea		median1, [median + KSIZE]	; median1 = median + KSIZE
-		cmp		result, 0
-		cmove	level, height				; if (result == 0), then level = height
-		cmovg	left, median1				; if (result > 0), then left = median + KSIZE
-		cmovng	right, median				; if (result <= 0), then right = median
-		cmp		left, right
-		jb		.loop2						; do while (left < right)
-;---[End of binary search loop]------------
-		add		size, left					; size += left
-		mov		height, 1					; height = 1
-		xor		result, result				; result = 0
-		cmp		level, ERROR				; if (level == ERROR)
-		cmovne	result, height				;     then return 0
-		je		@f
+;---[Call search function #1]--------------
+		call	FirstIndex					; result = FirstIndex (array, root, height, func, key)
+		cmp		result, EMPTY				; if (result == EMPTY)
+		je		.ntfnd						;     then return 0
 if ~uniq
-		mov		param5, [s_key]
-		mov		param4, [s_func]
-		mov		param3, [s_bhght]
-		mov		param2, [s_broot]
-		mov		param1, [s_array]
-		call	GreatIndex					; result = GreatIndex (array, root, height, func, key)
-		sub		result, size				; result -= size
-		shr		result, KSCALE
+		mov		[s_index], index			; save "index" variable into the stack
+;---[Call search function #2]--------------
+		mov		array, [s_array]			; get "array" variable from the stack
+		mov		root, [s_root]				; get "root" variable from the stack
+		mov		height, [s_hght]			; get "height" variable from the stack
+		mov		func, [s_func]				; get "func" variable from the stack
+		mov		key, [s_key]				; get "key" variable from the stack
+		call	LastIndex					; result = LastIndex (array, root, height, func, key)
+;---[Update iterator value]----------------
+		sub		index, [s_index]
+		shr		index, KSCALE
+		mov		result, index				; return index
+else
+		mov		result, 1					; return 1
 end if
-@@:		mov		next, [s_next]				; restore old value of "next" variable
-		mov		level, [s_level]			; restore old value of "level" variable
-		mov		size, [s_size]				; restore old value of "size" variable
-		mov		left, [s_left]				; restore old value of "left" variable
-		mov		right, [s_right]			; restore old value of "right" variable
-
 		add		stack, space				; restoring back the stack pointer
-		ret									; return level
+		ret
+;---[Not found branch]---------------------
+.ntfnd:	xor		result, result				; return 0
+		add		stack, space				; restoring back the stack pointer
+		ret
 }
-CountMulti:		COUNT	0
-CountUnique:	COUNT	1
+CountCoreMulti:		COUNT_CORE	0
+CountCoreUnique:	COUNT_CORE	1
 
 ;==============================================================================;
 ;       Single key counting                                                    ;
@@ -5709,7 +5722,7 @@ this	equ		rdi							; pointer to b-tree object
 key		equ		rsi							; key to find
 ;---[Internal variables]-------------------
 result	equ		rax							; result register
-;------------------------------------------
+;---[Check object size]--------------------
 		cmp		qword [this + SIZE], 0		; if (size == 0)
 		jz		.exit						;     then go to exit
 ;---[Normal execution branch]--------------
@@ -5723,8 +5736,8 @@ result	equ		rax							; result register
 .exit:	xor		result, result				; return 0
 		ret
 }
-CountKeyMulti:	COUNT_KEY	CountMulti
-CountKeyUnique:	COUNT_KEY	CountUnique
+CountKeyMulti:	COUNT_KEY	CountCoreMulti
+CountKeyUnique:	COUNT_KEY	CountCoreUnique
 
 ;==============================================================================;
 ;       Keys set counting                                                      ;
@@ -5746,6 +5759,7 @@ space	= 5 * 8								; stack size required by the procedure
 ;------------------------------------------
 		sub		stack, space				; reserving stack size for local vars
 		mov		qword [s_total], 0			; total = 0
+;---[Check object size]--------------------
 		cmp		qword [this + SIZE], 0		; if (size == 0)
 		jz		.exit						;     then go to exit
 ;---[Check ksize]--------------------------
@@ -5774,8 +5788,8 @@ space	= 5 * 8								; stack size required by the procedure
 		add		stack, space				; restoring back the stack pointer
 		ret									; return total
 }
-CountKeysMulti:		COUNT_KEYS	CountMulti
-CountKeysUnique:	COUNT_KEYS	CountUnique
+CountKeysMulti:		COUNT_KEYS	CountCoreMulti
+CountKeysUnique:	COUNT_KEYS	CountCoreUnique
 
 ;******************************************************************************;
 ;       Unique values                                                          ;
@@ -5792,19 +5806,19 @@ high	equ		rdx							; high part of value for div operation
 ptr		equ		rcx							; temporary pointer
 array	equ		r8							; pointer to array of nodes
 size	equ		r9							; b-tree size
-total	equ		r10							; count of duplicates
-value	equ		xmm0						; key value
-temp	equ		xmm1						; temporary register
+value	equ		r10							; key value
+total	equ		r11							; count of duplicates
+key		equ		xmm0						; key value
+data	equ		xmm1						; temporary register
 stack	equ		rsp							; stack pointer
 s_this	equ		stack + 0 * 8				; stack position of "this" variable
 s_src	equ		stack + 1 * 8				; stack position of "source" variable
-s_array	equ		stack + 2 * 8				; stack position of "array" variable
-s_func	equ		stack + 3 * 8				; stack position of "func" variable
+s_func	equ		stack + 2 * 8				; stack position of "func" variable
+s_array	equ		stack + 3 * 8				; stack position of "array" variable
 s_iter	equ		stack + 4 * 8				; stack position of "iter" variable
-s_total	equ		stack + 5 * 8				; stack position of "total" variable
-s_value	equ		stack + 6 * 8				; stack position of "value" variable
-s_temp	equ		stack + 8 * 8				; stack position of "temp" variable
-space	= 11 * 8							; stack size required by the procedure
+s_value	equ		stack + 5 * 8				; stack position of "value" variable
+s_total	equ		stack + 6 * 8				; stack position of "total" variable
+space	= 7 * 8							; stack size required by the procedure
 ;------------------------------------------
 		sub		stack, space				; reserving stack size for local vars
 ;---[Check target object size]-------------
@@ -5815,12 +5829,8 @@ space	= 11 * 8							; stack size required by the procedure
 		test	size, size					; if (size == 0)
 		jz		.exit						;     then go to exit
 ;---[Check object capacity]----------------
-		mov		array, [source + ARRAY]		; get pointer to source array of nodes
-		mov		result, [this + FUNC]		; get pointer to key compare function
 		mov		[s_this], this				; save "this" variable into the stack
 		mov		[s_src], source				; save "source" variable into the stack
-		mov		[s_array], array			; save "array" variable into the stack
-		mov		[s_func], result			; save "func" variable into the stack
 		xor		high, high					; high = 0
 		lea		low, [size + BMAX - 2 * KSIZE]
 		mov		size, BMAX - KSIZE
@@ -5830,7 +5840,11 @@ space	= 11 * 8							; stack size required by the procedure
 		cmp		low, [this + CAPACITY]		; if (low > capacity)
 		ja		.ext						;     then try to extend object capacity
 ;---[Normal execution branch]--------------
-.back:	xor		param4, param4
+.back:	mov		result, [this + FUNC]		; get pointer to key compare function
+		mov		array, [source + ARRAY]		; get pointer to source array of nodes
+		mov		[s_func], result			; save "func" variable into the stack
+		mov		[s_array], array			; save "array" variable into the stack
+		xor		param4, param4
 		mov		param3, [source + HEIGHT]
 		mov		param2, [source + ROOT]
 		mov		param1, array
@@ -5839,64 +5853,69 @@ space	= 11 * 8							; stack size required by the procedure
 		mov		[s_iter], result			; save "iter" variable into the stack
 		mov		ptr, PMASK
 		and		ptr, result					; ptr = iter & PMASK
-		movdqa	value, [array + ptr + BDATA]
-		movdqa	[s_value], value			; save "value" variable into the stack
+		mov		value, [array + ptr + BDATA]
+		mov		[s_value], value			; save "value" variable into the stack
 		mov		qword [s_total], 1			; total = 1
 		mov		param3, KSIZE
 		mov		param2, result
 		mov		param1, array
 		call	GoNext						; result = GoNext (array, iter, KSIZE)
+		mov		array, [s_array]			; get "array" variable from the stack
+		mov		[s_iter], result			; save "iter" variable into the stack
 		cmp		result, EMPTY				; if (result == EMPTY)
 		je		.skip						;     then skip the loop
 ;---[Unique loop]--------------------------
-.loop:	mov		array, [s_array]			; get "array" variable from the stack
-		mov		[s_iter], result			; save "iter" variable into the stack
-		mov		ptr, PMASK
+.loop:	mov		ptr, PMASK
 		and		ptr, result					; ptr = iter & PMASK
-		movdqa	temp, [array + ptr + BDATA]
-		movdqa	[s_temp], temp				; save "temp" variable into the stack
 		mov		param2, [array + ptr + BDATA]
 		mov		param1, [s_value]
-		call	qword [s_func]				; result = Compare (value.key, temp.key)
+		call	qword [s_func]				; result = Compare (value.key, array[ptr].key)
 		mov		this, [s_this]				; get "this" variable from the stack
 		mov		total, [s_total]			; get "total" variable from the stack
 		test	result, result				; if (result != 0)
 		jz		@f							; {
-		movq	value, [s_value]
-		movq	temp, [s_total]
-	punpcklqdq	value, temp					;     value.data = total
-		call	InsertCoreMulti				;     call this.InsertCoreMulti (value)
-		movdqa	temp, [s_temp]				;     get "temp" variable from the stack
-		xor		total, total				;     total = 0
-		movdqa	[s_value], temp				;     value = temp }
+		movq	key, [s_value]
+		movq	data, [s_total]
+	punpcklqdq	key, data
+		call	InsertCoreMulti				;     call this.InsertCoreMulti ({key, total})
+		mov		array, [s_array]			;     get "array" variable from the stack
+		mov		ptr, [s_iter]				;     get "iter" variable from the stack
+		and		ptr, PMASK					;     ptr = iter & PMASK
+		mov		value, [array + ptr + BDATA]
+		xor		total, total				;     total = 0 }
+		mov		[s_value], value			; save "value" variable into the stack
 @@:		add		total, 1					; total++
 		mov		[s_total], total			; save "total" variable into the stack
 		mov		param3, KSIZE
 		mov		param2, [s_iter]
 		mov		param1, [s_array]
 		call	GoNext						; result = GoNext (array, iter, KSIZE)
+		mov		array, [s_array]			; get "array" variable from the stack
+		mov		[s_iter], result			; save "iter" variable into the stack
 		cmp		result, EMPTY
 		jne		.loop						; do while (result != EMPTY)
 ;---[End of unique loop]-------------------
 .skip:	mov		this, [s_this]				; get "this" variable from the stack
-		movq	value, [s_value]
-		movq	temp, [s_total]
-	punpcklqdq	value, temp					; value.data = total
-		call	InsertCoreMulti				; call this.InsertCoreMulti (value)
+		movq	key, [s_value]
+		movq	data, [s_total]
+	punpcklqdq	key, data
+		call	InsertCoreMulti				; call this.InsertCoreMulti ({key, total})
 		mov		this, [s_this]				; get "this" variable from the stack
 ;---[Normal exit branch]-------------------
 .exit:	mov		result, [this + SIZE]
-		add		stack, space				; restoring back the stack pointer
 		shr		result, KSCALE				; return this.size
+		add		stack, space				; restoring back the stack pointer
 		ret
 ;---[Extend object capacity]---------------
 .ext:	mov		param2, low
 		call	Extend						; status = this.Extend (low)
+		mov		this, [s_this]				; get "this" variable from the stack
+		mov		source, [s_src]				; get "source" variable from the stack
 		test	status, status				; if (status)
 		jnz		.back						;     then go back
 ;---[Error branch]-------------------------
-.error:	add		stack, space				; restoring back the stack pointer
-		mov		result, ERROR				; return ERROR
+.error:	mov		result, ERROR				; return ERROR
+		add		stack, space				; restoring back the stack pointer
 		ret
 
 ;******************************************************************************;
@@ -5958,21 +5977,21 @@ space	= 5 * 8								; stack size required by the procedure
 		mov		this, [s_this]				; get "this" variable from the stack
 		mov		source, [s_src]				; get "source" variable from the stack
 .size:	add		stack, space				; restoring back the stack pointer
-		mov		size, [this + SIZE]
 		xor		result, result				; result = 0
 		mov		great, +1					; great = +1
 		mov		less, -1					; less = -1
+		mov		size, [this + SIZE]
 		cmp		size, [source + SIZE]
 		cmovg	result, great				; if (this.size > source.size), return great
 		cmovl	result, less				; if (this.size < source.size), return less
 		ret									; if (this.size == source.size), return equal
 ;---[Normal exit branch]-------------------
-.exit:	add		stack, space				; restoring back the stack pointer
-		mov		result, status				; return status
+.exit:	mov		result, status				; return status
+		add		stack, space				; restoring back the stack pointer
 		ret
 ;---[Equal b-trees branch]-----------------
-.equal:	add		stack, space				; restoring back the stack pointer
-		xor		result, result				; return 0
+.equal:	xor		result, result				; return 0
+		add		stack, space				; restoring back the stack pointer
 		ret
 
 ;******************************************************************************;
@@ -6020,7 +6039,7 @@ source	equ		rsi							; pointer to source b-tree object
 ;---[Internal variables]-------------------
 status	equ		al							; operation status
 result	equ		rax							; result register
-size	equ		result						; object size
+size	equ		rcx							; object size
 stack	equ		rsp							; stack pointer
 s_this	equ		stack + 0 * 8				; stack position of "this" variable
 s_src	equ		stack + 1 * 8				; stack position of "source" variable

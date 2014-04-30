@@ -167,11 +167,11 @@ bool MaxFwd (data_t *data);
 bool MaxBwd (data_t *data);
 
 //****************************************************************************//
-//      Search algorithms                                                     //
+//      Key searching                                                         //
 //****************************************************************************//
 
 //============================================================================//
-//      Key searching                                                         //
+//      Single key searching                                                  //
 //============================================================================//
 
 // Searching for equal key
@@ -194,9 +194,9 @@ bool FindLessBwd (data_t *data, adt_t key);
 bool FindLessOrEqualFwd (data_t *data, adt_t key);
 bool FindLessOrEqualBwd (data_t *data, adt_t key);
 
-//============================================================================//
+//****************************************************************************//
 //      Searching for differences                                             //
-//============================================================================//
+//****************************************************************************//
 bool FindDiffFwd (data_t *data, const UniqueTree *source, ize_t count);
 bool FindDiffBwd (data_t *data, const UniqueTree *source, size_t count);
 
@@ -381,11 +381,11 @@ bool UniqueTree_MaxFwd (struct UniqueTree *tree, struct data_t *data);
 bool UniqueTree_MaxBwd (struct UniqueTree *tree, struct data_t *data);
 
 //****************************************************************************//
-//      Search algorithms                                                     //
+//      Key searching                                                         //
 //****************************************************************************//
 
 //============================================================================//
-//      Key searching                                                         //
+//      Single key searching                                                  //
 //============================================================================//
 
 // Searching for equal key
@@ -408,9 +408,9 @@ bool UniqueTree_FindLessBwd (struct UniqueTree *tree, struct data_t *data, union
 bool UniqueTree_FindLessOrEqualFwd (struct UniqueTree *tree, struct data_t *data, union adt_t key);
 bool UniqueTree_FindLessOrEqualBwd (struct UniqueTree *tree, struct data_t *data, union adt_t key);
 
-//============================================================================//
+//****************************************************************************//
 //      Searching for differences                                             //
-//============================================================================//
+//****************************************************************************//
 bool UniqueTree_FindDiffFwd (struct UniqueTree *tree, struct data_t *data, const struct UniqueTree *source, size_t count);
 bool UniqueTree_FindDiffBwd (struct UniqueTree *tree, struct data_t *data, const struct UniqueTree *source, size_t count);
 
