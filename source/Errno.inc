@@ -10,12 +10,12 @@
 ;----------------------	-------	-----------------------------------------------
 ; Error					Code	Description
 ;----------------------	-------	-----------------------------------------------
-ERRNO_PERM			 	= 1		; Operation not permitted
-ERRNO_NOENT			 	= 2		; No such file or directory
-ERRNO_SRCH			 	= 3		; No such process
+ERRNO_PERM				= 1		; Operation not permitted
+ERRNO_NOENT				= 2		; No such file or directory
+ERRNO_SRCH				= 3		; No such process
 ERRNO_INTR				= 4		; Interrupted system call
 ERRNO_IO				= 5		; I/O error
-ERRNO_NXIO			 	= 6		; No such device or address
+ERRNO_NXIO				= 6		; No such device or address
 ERRNO_2BIG				= 7		; Argument list too long
 ERRNO_NOEXEC			= 8		; Exec format error
 ERRNO_BADF				= 9		; Bad file number

@@ -191,12 +191,8 @@ bool MaxFwd (data_t *data, size_t count, KeyCmp func);
 bool MaxBwd (data_t *data, size_t count, KeyCmp func);
 
 //****************************************************************************//
-//      Search algorithms                                                     //
-//****************************************************************************//
-
-//============================================================================//
 //      Key searching                                                         //
-//============================================================================//
+//****************************************************************************//
 
 // Single key searching
 bool FindKeyFwd (data_t *data, adt_t key, size_t count, KeyCmp func);
@@ -206,15 +202,15 @@ bool FindKeyBwd (data_t *data, adt_t key, size_t count, KeyCmp func);
 bool FindKeysFwd (data_t *data, const adt_t keys[], size_t size, size_t count, KeyCmp func);
 bool FindKeysBwd (data_t *data, const adt_t keys[], size_t size, size_t count, KeyCmp func);
 
-//============================================================================//
+//****************************************************************************//
 //      Duplicates searching                                                  //
-//============================================================================//
+//****************************************************************************//
 bool FindDupFwd (data_t *data, KeyCmp func);
 bool FindDupBwd (data_t *data, KeyCmp func);
 
-//============================================================================//
+//****************************************************************************//
 //      Unordered elements searching                                          //
-//============================================================================//
+//****************************************************************************//
 
 // Ascending sort order
 bool FindNonAscFwd (data_t *data, KeyCmp func);
@@ -224,9 +220,9 @@ bool FindNonAscBwd (data_t *data, KeyCmp func);
 bool FindNonDscFwd (data_t *data, KeyCmp func);
 bool FindNonDscBwd (data_t *data, KeyCmp func);
 
-//============================================================================//
+//****************************************************************************//
 //      Searching for differences                                             //
-//============================================================================//
+//****************************************************************************//
 bool FindDiffFwd (data_t *data, const Ring *source, size_t count, KeyCmp func);
 bool FindDiffBwd (data_t *data, const Ring *source, size_t count, KeyCmp func);
 
@@ -465,12 +461,8 @@ bool Ring_MaxFwd (struct Ring *ring, struct data_t *data, size_t count, KeyCmp f
 bool Ring_MaxBwd (struct Ring *ring, struct data_t *data, size_t count, KeyCmp func);
 
 //****************************************************************************//
-//      Search algorithms                                                     //
-//****************************************************************************//
-
-//============================================================================//
 //      Key searching                                                         //
-//============================================================================//
+//****************************************************************************//
 
 // Single key searching
 bool Ring_FindKeyFwd (struct Ring *ring, struct data_t *data, union adt_t key, size_t count, KeyCmp func);
@@ -480,15 +472,15 @@ bool Ring_FindKeyBwd (struct Ring *ring, struct data_t *data, union adt_t key, s
 bool Ring_FindKeysFwd (struct Ring *ring, struct data_t *data, const union adt_t keys[], size_t size, size_t count, KeyCmp func);
 bool Ring_FindKeysBwd (struct Ring *ring, struct data_t *data, const union adt_t keys[], size_t size, size_t count, KeyCmp func);
 
-//============================================================================//
+//****************************************************************************//
 //      Duplicates searching                                                  //
-//============================================================================//
+//****************************************************************************//
 bool Ring_FindDupFwd (struct Ring *ring, struct data_t *data, KeyCmp func);
 bool Ring_FindDupBwd (struct Ring *ring, struct data_t *data, KeyCmp func);
 
-//============================================================================//
+//****************************************************************************//
 //      Unordered elements searching                                          //
-//============================================================================//
+//****************************************************************************//
 
 // Ascending sort order
 bool Ring_FindNonAscFwd (struct Ring *ring, struct data_t *data, KeyCmp func);
@@ -498,9 +490,9 @@ bool Ring_FindNonAscBwd (struct Ring *ring, struct data_t *data, KeyCmp func);
 bool Ring_FindNonDscFwd (struct Ring *ring, struct data_t *data, KeyCmp func);
 bool Ring_FindNonDscBwd (struct Ring *ring, struct data_t *data, KeyCmp func);
 
-//============================================================================//
+//****************************************************************************//
 //      Searching for differences                                             //
-//============================================================================//
+//****************************************************************************//
 bool Ring_FindDiffFwd (struct Ring *ring, struct data_t *data, const struct Ring *source, size_t count, KeyCmp func);
 bool Ring_FindDiffBwd (struct Ring *ring, struct data_t *data, const struct Ring *source, size_t count, KeyCmp func);
 

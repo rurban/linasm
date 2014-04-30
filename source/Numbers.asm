@@ -371,8 +371,8 @@ space	= 3 * 8								; stack size required by the procedure
 		mov		power, exp
 		call	func						; call Scale (mantis)
 		mov		p_num, [s_num]				; get "p_num" variable from the stack
-		mov		ptr, [s_ptr]				; get "p_num" variable from the stack
-		mov		string, [s_str]				; get "p_num" variable from the stack
+		mov		ptr, [s_ptr]				; get "ptr" variable from the stack
+		mov		string, [s_str]				; get "string" variable from the stack
 		add		stack, space				; restoring back the stack pointer
 if x eq s
 	cvtsd2ss	mant, mant					; convert double to float if required

@@ -245,6 +245,12 @@ public	FindKeysFwd				as	'_ZN10UniqueHash11FindKeysFwdEP6data_tPK5adt_tm'
 public	FindKeysBwd				as	'_ZN9MultiHash11FindKeysBwdEP6data_tPK5adt_tm'
 public	FindKeysBwd				as	'_ZN10UniqueHash11FindKeysBwdEP6data_tPK5adt_tm'
 
+; Sequence searching
+public	FindSequenceFwd			as	'MultiHash_FindSequenceFwd'
+public	FindSequenceBwd			as	'MultiHash_FindSequenceBwd'
+public	FindSequenceFwd			as	'_ZN9MultiHash15FindSequenceFwdEP6data_t5adt_t'
+public	FindSequenceBwd			as	'_ZN9MultiHash15FindSequenceBwdEP6data_t5adt_t'
+
 ;******************************************************************************;
 ;       Duplicates searching                                                   ;
 ;******************************************************************************;
@@ -558,8 +564,8 @@ space	= 5 * 8								; stack size required by the procedure
 		add		stack, space				; restoring back the stack pointer
 		jmp		InitFree					; return InitFree (array, oldcap / 2, newcap / 2, oldpool)
 ;---[Error branch]-------------------------
-.error:	add		stack, space				; restoring back the stack pointer
-		xor		status, status				; return false
+.error:	xor		status, status				; return false
+		add		stack, space				; restoring back the stack pointer
 		ret
 
 ;******************************************************************************;
@@ -799,10 +805,8 @@ space	= 9 * 8								; stack size required by the procedure
 		cmp		result, 0					; if (result <= 0)
 if type
 		je		.undo1						;     then undo element insertion
-		jl		.head						;     then insert element into chain head
-else
-		jle		.head						;     then insert element into chain head
 end if
+		jl		.head						;     then insert element into chain head
 		cmp		next, [s_table]				; if (next >= table)
 		jae		.chain						;     then skip following code
 ;---[Searching loop]-----------------------
@@ -815,10 +819,8 @@ end if
 		cmp		result, 0					; if (result <= 0)
 if type
 		je		.undo2						;     then undo element insertion
-		jl		.chain						;     then break the loop
-else
-		jle		.chain						;     then break the loop
 end if
+		jl		.chain						;     then break the loop
 		mov		iter, [s_next]				; get "next" variable from the stack
 		mov		[s_iter], iter				; save "iter" variable into the stack
 		mov		next, [array + iter + FDIR] ; next = array[iter].fdir
@@ -838,8 +840,8 @@ end if
 		mov		[array + iter + FDIR], node	; array[iter].fdir = node
 		mov		[array + next + BDIR], node	; array[next].bdir = node
 		mov		iter, node					; iter = node
-		add		stack, space				; restoring back the stack pointer
 		mov		status, 1					; return {true, node}
+		add		stack, space				; restoring back the stack pointer
 		ret
 ;---[Insert into chain head]---------------
 .head:	mov		this, [s_this]				; get "this" variable from the stack
@@ -863,8 +865,8 @@ end if
 		cmp		bwd, iter					; if (bwd == iter)
 		cmove	bwd, node					;     bwd = node
 		mov		[this + BWD], bwd			; update iterator position
-		add		stack, space				; restoring back the stack pointer
 		mov		status, 1					; return {true, iter}
+		add		stack, space				; restoring back the stack pointer
 		ret
 ;---[Insert into empty chain]--------------
 .empty:	mov		this, [s_this]				; get "this" variable from the stack
@@ -873,15 +875,15 @@ end if
 		mov		[array + iter + FDIR], iter	; array[iter].fdir = iter
 		mov		[array + iter + BDIR], iter	; array[iter].bdir = iter
 		movdqa	[array + iter + NDATA], value
-		add		stack, space				; restoring back the stack pointer
 		mov		status, 1					; return {true, iter}
+		add		stack, space				; restoring back the stack pointer
 		ret
 ;---[Undo element insertion]---------------
 if type = 1
 .undo1:
 .undo2:	mov		iter, EMPTY
-		add		stack, space				; restoring back the stack pointer
 		xor		status, status				; return {false, EMPTY}
+		add		stack, space				; restoring back the stack pointer
 		ret
 else if type = 2
 .undo1:	mov		odata, [s_odata]			; get "odata" variable from the stack
@@ -889,8 +891,8 @@ else if type = 2
 		movdqu	[odata], value				; odata[0] = array[iter].data
 		movdqa	value, [s_value]			; array[iter].data = value
 		movdqa	[array + iter + NDATA], value
-		add		stack, space				; restoring back the stack pointer
 		mov		status, 1					; return {true, iter}
+		add		stack, space				; restoring back the stack pointer
 		ret
 .undo2:	mov		odata, [s_odata]			; get "odata" variable from the stack
 		movdqa	value, [array + next + NDATA]
@@ -898,8 +900,8 @@ else if type = 2
 		movdqa	value, [s_value]			; array[next].data = value
 		movdqa	[array + next + NDATA], value
 		mov		iter, next					; iter = next
-		add		stack, space				; restoring back the stack pointer
 		mov		status, 1					; return {true, next}
+		add		stack, space				; restoring back the stack pointer
 		ret
 end if
 }
@@ -988,8 +990,8 @@ space	= 3 * 8								; stack size required by the procedure
 		mov		qword [array + iter + FDIR], EMPTY
 		mov		qword [array + iter + BDIR], EMPTY
 		sub		qword [this + SIZE], NSIZE	; this.size--
-		add		stack, space				; restoring back the stack pointer
 		mov		status, 1					; return true
+		add		stack, space				; restoring back the stack pointer
 		ret
 ;---[Delete node]--------------------------
 .del:	mov		pool, [this + POOL]
@@ -1000,8 +1002,8 @@ space	= 3 * 8								; stack size required by the procedure
 		mov		[array + iter + FDIR], pool ; array[iter].fdir = this.pool
 		mov		[this + POOL], iter			; this.pool = iter
 		sub		qword [this + SIZE], NSIZE	; this.size--
-		add		stack, space				; restoring back the stack pointer
 		mov		status, 1					; return true
+		add		stack, space				; restoring back the stack pointer
 		ret
 ;---[Replace chain head]-------------------
 .rplc:	mov		pool, [this + POOL]
@@ -1021,8 +1023,8 @@ space	= 3 * 8								; stack size required by the procedure
 		cmp		bwd, next					; if (bwd == next)
 		cmove	bwd, iter					;     bwd = iter
 		mov		[this + BWD], bwd			; update iterator position
-		add		stack, space				; restoring back the stack pointer
 		mov		status, 1					; return true
+		add		stack, space				; restoring back the stack pointer
 		ret
 ;---[Correct forward iterator]-------------
 .fwd:	mov		param4, NSIZE
@@ -1136,16 +1138,16 @@ space	= 5 * 8								; stack size required by the procedure
 		test	status, status
 		jnz		.back						; if (status), then go back
 ;---[Error branch]-------------------------
-.error:	add		stack, space				; restoring back the stack pointer
-		xor		status, status				; return false
+.error:	xor		status, status				; return false
+		add		stack, space				; restoring back the stack pointer
 		ret
 ;---[Skip branch]--------------------------
 .skip:	mov		data, [s_data]				; get "data" variable from the stack
 		mov		iter, [s_ptr]				; get "ptr" variable from the stack
 		movdqu	temp, [data]
 		movdqa	[iter + NDATA], temp		; array[iter].data = data[0]
-		add		stack, space				; restoring back the stack pointer
 		mov		status, 1					; return true
+		add		stack, space				; restoring back the stack pointer
 		ret
 }
 SetFwdMulti:	SET_ELEMENT	InsertCoreMulti, FWD
@@ -1244,16 +1246,16 @@ space	= 5 * 8								; stack size required by the procedure
 		test	status, status
 		jnz		.back						; if (status), then go back
 ;---[Error branch]-------------------------
-.error:	add		stack, space				; restoring back the stack pointer
-		xor		status, status				; return false
+.error:	xor		status, status				; return false
+		add		stack, space				; restoring back the stack pointer
 		ret
 ;---[Skip branch]--------------------------
 .skip:	mov		ndata, [s_ndata]			; get "ndata" variable from the stack
 		mov		iter, [s_ptr]				; get "ptr" variable from the stack
 		movdqu	temp, [ndata]				; get "ndata" variable from the stack
 		movdqa	[iter + NDATA], temp		; array[iter].data = ndata[0]
-		add		stack, space				; restoring back the stack pointer
 		mov		status, 1					; return true
+		add		stack, space				; restoring back the stack pointer
 		ret
 }
 ReplaceFwdMulti:	REPLACE_ELEMENT		InsertCoreMulti, FWD
@@ -1473,12 +1475,12 @@ space	= 1 * 8								; stack size required by the procedure
 		cmp		result, EMPTY				; if (result == EMPTY)
 		je		.error						;     then go to error branch
 ;---[Normal exit branch]-------------------
-.exit:	add		stack, space				; restoring back the stack pointer
-		mov		status, 1					; return true
+.exit:	mov		status, 1					; return true
+		add		stack, space				; restoring back the stack pointer
 		ret
 ;---[Error branch]-------------------------
-.error:	add		stack, space				; restoring back the stack pointer
-		xor		status, status				; return false
+.error:	xor		status, status				; return false
+		add		stack, space				; restoring back the stack pointer
 		ret
 }
 
@@ -1629,12 +1631,12 @@ end if
 		mov		value, [s_value]			; restore old value of "value" variable
 		mov		vptr, [s_vptr]				; restore old value of "vptr" variable
 		mov		pos, [s_pos]				; restore old value of "pos" variable
-		add		stack, space				; restoring back the stack pointer
 		mov		status, 1					; return true
+		add		stack, space				; restoring back the stack pointer
 		ret
 ;---[Not found branch]---------------------
-.ntfnd:	add		stack, space				; restoring back the stack pointer
-		xor		status, status				; return false
+.ntfnd:	xor		status, status				; return false
+		add		stack, space				; restoring back the stack pointer
 		ret
 }
 
@@ -1725,8 +1727,8 @@ end if
 		cmp		iter, [s_table]
 		jb		.sloop						; do while (iter < table)
 ;---[Not found branch]---------------------
-.ntfnd:	add		stack, space				; restoring back the stack pointer
-		xor		status, status				; return false
+.ntfnd:	xor		status, status				; return false
+		add		stack, space				; restoring back the stack pointer
 		ret
 ;---[Found branch]-------------------------
 .found:	mov		this, [s_this]				; get "this" variable from the stack
@@ -1734,8 +1736,8 @@ end if
 		mov		[this + offst], iter		; update iterator position
 		movdqa	temp, [array + iter + NDATA]
 		movdqu	[data], temp				; data[0] = array[iter].data
-		add		stack, space				; restoring back the stack pointer
 		mov		status, 1					; return true
+		add		stack, space				; restoring back the stack pointer
 		ret
 }
 FindKeyFwd:	FIND_KEY	l, FWD, FDIR, 0
@@ -1832,8 +1834,8 @@ end if
 		sub		qword [s_ksize], 1			; ksize--
 		jnz		.loop						; do while (ksize != 0)
 ;---[Not found branch]---------------------
-.ntfnd:	add		stack, space				; restoring back the stack pointer
-		xor		status, status				; return false
+.ntfnd:	xor		status, status				; return false
+		add		stack, space				; restoring back the stack pointer
 		ret
 ;---[Found branch]-------------------------
 .found:	mov		this, [s_this]				; get "this" variable from the stack
@@ -1841,12 +1843,111 @@ end if
 		mov		[this + offst], iter		; update iterator position
 		movdqa	temp, [array + iter + NDATA]
 		movdqu	[data], temp				; data[0] = array[iter].data
-		add		stack, space				; restoring back the stack pointer
 		mov		status, 1					; return true
+		add		stack, space				; restoring back the stack pointer
 		ret
 }
 FindKeysFwd:	FIND_KEYS	l, FWD, FDIR, 0
 FindKeysBwd:	FIND_KEYS	g, BWD, BDIR, 1
+
+;==============================================================================;
+;       Sequence searching                                                     ;
+;==============================================================================;
+macro	FIND_SEQUENCE	cond, offst, dir, type
+{
+;---[Parameters]---------------------------
+this	equ		rdi							; pointer to hash table object
+data	equ		rsi							; pointer to data structure
+key		equ		rdx							; key to find
+;---[Internal variables]-------------------
+result	equ		rax							; result register
+array	equ		r8							; pointer to array of nodes
+iter	equ		r9							; iterator value
+func	equ		r10							; compare function
+vptr	equ		r12							; position of key
+temp	equ		xmm0						; temporary register
+stack	equ		rsp							; stack pointer
+s_vptr	equ		stack + 0 * 8				; stack position of "vptr" variable
+s_this	equ		stack + 1 * 8				; stack position of "this" variable
+s_data	equ		stack + 2 * 8				; stack position of "data" variable
+s_key	equ		stack + 3 * 8				; stack position of "key" variable
+s_array	equ		stack + 4 * 8				; stack position of "array" variable
+s_func	equ		stack + 5 * 8				; stack position of "func" variable
+s_table	equ		stack + 6 * 8				; stack position of "table" variable
+s_iter	equ		stack + 7 * 8				; stack position of "iter" variable
+s_total	equ		stack + 8 * 8				; stack position of "total" variable
+space	= 9 * 8								; stack size required by the procedure
+;------------------------------------------
+		sub		stack, space				; reserving stack size for local vars
+		mov		qword [s_total], 0			; total = 0
+;---[Check object size]--------------------
+		cmp		qword [this + SIZE], 0		; if (size == 0)
+		jz		.exit						;     then go to exit
+;---[Normal execution branch]--------------
+		mov		array, [this + ARRAY]		; get pointer to array of nodes
+		mov		result, [this + CAPACITY]	; get object capacity
+		mov		func, [this + KFUNC]		; get compare function
+		shr		result, 1
+		mov		[s_vptr], vptr				; save old value of "vptr" variable
+		mov		[s_this], this				; save "this" variable into the stack
+		mov		[s_data], data				; save "data" variable into the stack
+		mov		[s_key], key				; save "key" variable into the stack
+		mov		[s_array], array			; save "array" variable into the stack
+		mov		[s_func], func				; save "func" variable into the stack
+		mov		[s_table], result			; save "table" variable into the stack
+;---[Get hash value]-----------------------
+		mov		func, [this + HFUNC]
+		mov		param1, key
+		call	func
+		mov		array, [s_array]			; get "array" variable from the stack
+		mov		iter, [s_table]				; get "table" variable from the stack
+		shl		result, NSCALE				; result = hfunc (key) * NSIZE
+		sub		iter, 1
+		and		iter, result
+		add		iter, [s_table]				; iter = (hfunc (value) * NSIZE & mask) + table
+		mov		[s_iter], iter				; save "iter" variable into the stack
+		cmp		qword [array + iter + dir], EMPTY
+		je		.exit						; if (array[iter].fdir == EMPTY), then go to exit
+		mov		vptr, EMPTY					; vptr = EMPTY
+;---[Search loop]--------------------------
+.sloop:
+if type = 1
+		mov		iter, [array + iter + dir]	; iter = array[iter].dir
+		mov		[s_iter], iter				; save "iter" variable into the stack
+end if
+		mov		param2, [array + iter + NDATA]
+		mov		param1, [s_key]
+		call	qword [s_func]				; result = Compare (key, array[iter].data.key)
+		mov		array, [s_array]			; get "array" variable from the stack
+		mov		iter, [s_iter]				; get "iter" variable from the stack
+		cmp		result, 0
+		j#cond	.brk						; if (result cond 0), then break the loop
+		cmove	vptr, iter					; if (result == 0)
+		sete	status						; {
+		movzx	result, status				;     vptr = iter
+		add		[s_total], result			;     then total++ }
+if type = 0
+		mov		iter, [array + iter + dir]	; iter = array[iter].dir
+		mov		[s_iter], iter				; save "iter" variable into the stack
+end if
+		cmp		iter, [s_table]
+		jb		.sloop						; do while (iter < table)
+;---[End of search loop]-------------------
+.brk:	cmp		vptr, EMPTY					; if (vptr == EMPTY)
+		je		.skip						;     then key is not found
+		mov		this, [s_this]				; get "this" variable from the stack
+		mov		data, [s_data]				; get "data" variable from the stack
+		mov		[this + offst], vptr		; update iterator position
+		movdqa	temp, [array + vptr + NDATA]
+		movdqu	[data], temp				; data[0] = array[iter].data
+.skip:	mov		vptr, [s_vptr]				; restore old value of "vptr" variable
+;---[Normal exit]--------------------------
+.exit:	mov		result, [s_total]
+		add		stack, space				; restoring back the stack pointer
+		ret
+}
+FindSequenceFwd:	FIND_SEQUENCE	g, FWD, BDIR, 1
+FindSequenceBwd:	FIND_SEQUENCE	l, BWD, FDIR, 0
 
 ;******************************************************************************;
 ;       Duplicates searching                                                   ;
@@ -1905,8 +2006,8 @@ space	= 7 * 8								; stack size required by the procedure
 		je		.iloop						; do while (array[iter].fdir == EMPTY)
 		jmp		.loop						; do while (true)
 ;---[End of check loop]--------------------
-.break:	add		stack, space				; restoring back the stack pointer
-		mov		result, EMPTY				; return EMPTY
+.break:	mov		result, EMPTY				; return EMPTY
+		add		stack, space				; restoring back the stack pointer
 		ret
 ;---[Found branch]-------------------------
 .found:	mov		result, [s_prev]			; return prev
@@ -1962,8 +2063,8 @@ space	= 5 * 8								; stack size required by the procedure
 		mov		iter, [array + prev + BDIR]	; iter = array[prev].bdir
 		jmp		.loop						; do while (true)
 ;---[End of check loop]--------------------
-.break:	add		stack, space				; restoring back the stack pointer
-		mov		result, EMPTY				; return EMPTY
+.break:	mov		result, EMPTY				; return EMPTY
+		add		stack, space				; restoring back the stack pointer
 		ret
 ;---[Found branch]-------------------------
 .found:	mov		result, [s_prev]			; return prev
@@ -2008,12 +2109,12 @@ space	= 3 * 8								; stack size required by the procedure
 		add		result, [this + ARRAY]
 		movdqa	temp, [result + NDATA]
 		movdqu	[data], temp				; data[0] = array[iter].data
-		add		stack, space				; restoring back the stack pointer
 		mov		status, 1					; return true
+		add		stack, space				; restoring back the stack pointer
 		ret
 ;---[Not found branch]---------------------
-.ntfnd:	add		stack, space				; restoring back the stack pointer
-		xor		status, status				; return false
+.ntfnd:	xor		status, status				; return false
+		add		stack, space				; restoring back the stack pointer
 		ret
 }
 FindDupFwd:	FIND_DUP	DupFwd, FWD
@@ -2082,9 +2183,8 @@ space	= 7 * 8								; stack size required by the procedure
 		mov		iter, [s_iter]				; get "iter" variable from the stack
 		cmp		result, 0
 		jl		.exit						; if (result < 0), then go to exit
-		test	result, result				; if (result == 0)
-		setz	status						; {
-		movzx	result, status
+		sete	status						; if (result == 0)
+		movzx	result, status				; {
 		add		[s_total], result			;     then total++ }
 		mov		iter, [array + iter + FDIR]	; iter = array[iter].fdir
 		mov		[s_iter], iter				; save "iter" variable into the stack
@@ -2164,9 +2264,8 @@ space	= 9 * 8								; stack size required by the procedure
 		mov		iter, [s_iter]				; get "iter" variable from the stack
 		cmp		result, 0
 		jl		.exit						; if (result < 0), then go to exit
-		test	result, result				; if (result == 0)
-		setz	status						; {
-		movzx	result, status
+		sete	status						; if (result == 0)
+		movzx	result, status				; {
 		add		[s_total], result			;     then total++ }
 		mov		iter, [array + iter + FDIR]	; iter = array[iter].fdir
 		mov		[s_iter], iter				; save "iter" variable into the stack
@@ -2196,21 +2295,21 @@ iter	equ		rcx							; iterator value
 tbound	equ		rdx							; upper bound of hash table
 array	equ		r8							; pointer to array of nodes
 size	equ		r9							; hash table size
-total	equ		r10							; count of duplicates
-value	equ		xmm0						; key value
-temp	equ		xmm1						; temporary register
+value	equ		r10							; key value
+total	equ		r11							; count of duplicates
+key		equ		xmm0						; key value
+data	equ		xmm1						; temporary register
 stack	equ		rsp							; stack pointer
 s_this	equ		stack + 0 * 8				; stack position of "this" variable
 s_src	equ		stack + 1 * 8				; stack position of "source" variable
-s_array	equ		stack + 2 * 8				; stack position of "array" variable
-s_tbnd	equ		stack + 3 * 8				; stack position of "tbound" variable
-s_func	equ		stack + 4 * 8				; stack position of "func" variable
+s_func	equ		stack + 2 * 8				; stack position of "func" variable
+s_array	equ		stack + 3 * 8				; stack position of "array" variable
+s_tbnd	equ		stack + 4 * 8				; stack position of "tbound" variable
 s_table	equ		stack + 5 * 8				; stack position of "table" variable
 s_iter	equ		stack + 6 * 8				; stack position of "iter" variable
-s_total	equ		stack + 7 * 8				; stack position of "total" variable
-s_value	equ		stack + 8 * 8				; stack position of "value" variable
-s_temp	equ		stack + 10 * 8				; stack position of "temp" variable
-space	= 13 * 8							; stack size required by the procedure
+s_value	equ		stack + 7 * 8				; stack position of "value" variable
+s_total	equ		stack + 8 * 8				; stack position of "total" variable
+space	= 9 * 8								; stack size required by the procedure
 ;------------------------------------------
 		sub		stack, space				; reserving stack size for local vars
 ;---[Check target object size]-------------
@@ -2221,20 +2320,20 @@ space	= 13 * 8							; stack size required by the procedure
 		test	size, size					; if (size == 0)
 		jz		.exit						;     then go to exit
 ;---[Check object capacity]----------------
-		mov		array, [source + ARRAY]		; get pointer to source array of nodes
-		mov		tbound, [source + CAPACITY]	; get source object capacity
-		mov		result, [this + KFUNC]		; get pointer to key compare function
 		mov		[s_this], this				; save "this" variable into the stack
 		mov		[s_src], source				; save "source" variable into the stack
-		mov		[s_array], array			; save "array" variable into the stack
-		mov		[s_tbnd], tbound			; save "tbound" variable into the stack
-		mov		[s_func], result			; save "func" variable into the stack
 		shl		size, 1
 	Capacity	size, result, MINCAP		; compute new capacity of target object
 		cmp		size, [this + CAPACITY]		; if (size > capacity)
 		ja		.ext						;     then try to extend object capacity
 ;---[Normal execution branch]--------------
-.back:	shr		tbound, 1					; table = capacity / 2
+.back:	mov		result, [this + KFUNC]		; get pointer to key compare function
+		mov		array, [source + ARRAY]		; get pointer to source array of nodes
+		mov		tbound, [source + CAPACITY]	; get source object capacity
+		mov		[s_func], result			; save "func" variable into the stack
+		mov		[s_array], array			; save "array" variable into the stack
+		mov		[s_tbnd], tbound			; save "tbound" variable into the stack
+		shr		tbound, 1					; table = capacity / 2
 		mov		[s_table], tbound			; save "table" variable into the stack
 		lea		iter, [tbound - NSIZE]
 ;---[Internal loop]------------------------
@@ -2244,35 +2343,33 @@ space	= 13 * 8							; stack size required by the procedure
 		cmp		qword [array + iter + FDIR], EMPTY
 		je		.loop						; do while (array[iter].fdir == EMPTY)
 ;---[End of internal loop]-----------------
-		movdqa	value, [array + iter + NDATA]
-		movdqa	[s_value], value			; save "value" variable into the stack
+		mov		value, [array + iter + NDATA]
+		mov		[s_value], value			; save "value" variable into the stack
 		mov		qword [s_total], 1			; total = 1
 		mov		iter, [array + iter + FDIR]	; iter = array[iter].fdir
 		mov		[s_iter], iter				; save "iter" variable into the stack
 		cmp		iter, [s_table]				; if (iter >= table)
-		jae		.skip2						;     then skip the loop
+		jae		.skip						;     then skip the loop
 ;---[Duplicates check loop]----------------
-.dloop:	movdqa	temp, [array + iter + NDATA]
-		movdqa	[s_temp], temp				; save "temp" variable into the stack
-		mov		param2, [array + iter + NDATA]
-		mov		param1, [s_value]
-		call	qword [s_func]				; result = Compare (value.key, temp.key)
+.dloop:	mov		param2, [array + iter + NDATA]
+		mov		param1, value
+		call	qword [s_func]				; result = Compare (value.key, array[iter].key)
 		mov		this, [s_this]				; get "this" variable from the stack
 		mov		array, [s_array]			; get "array" variable from the stack
 		mov		iter, [s_iter]				; get "iter" variable from the stack
 		mov		total, [s_total]			; get "total" variable from the stack
 		test	result, result				; if (result != 0)
 		jz		@f							; {
-		movq	value, [s_value]
-		movq	temp, [s_total]
-	punpcklqdq	value, temp					;     value.data = total
-		call	InsertCoreMulti				;     call this.InsertCoreMulti (value)
+		movq	key, [s_value]
+		movq	data, [s_total]
+	punpcklqdq	key, data
+		call	InsertCoreMulti				;     call this.InsertCoreMulti ({key, total})
 		mov		this, [s_this]				;     get "this" variable from the stack
 		mov		array, [s_array]			;     get "array" variable from the stack
 		mov		iter, [s_iter]				;     get "iter" variable from the stack
-		movdqa	temp, [s_temp]				;     get "temp" variable from the stack
-		xor		total, total				;     total = 0
-		movdqa	[s_value], temp				;     value = temp }
+		mov		value, [array + iter + NDATA]
+		xor		total, total				;     total = 0 }
+		mov		[s_value], value			; save "value" variable into the stack
 @@:		add		total, 1					; total++
 		mov		[s_total], total			; save "total" variable into the stack
 		mov		iter, [array + iter + FDIR]	; iter = array[iter].fdir
@@ -2280,30 +2377,30 @@ space	= 13 * 8							; stack size required by the procedure
 		cmp		iter, [s_table]
 		jb		.dloop						; do while (iter < table)
 ;---[End of duplicates check loop]---------
-.skip2:	movq	value, [s_value]
-		movq	temp, [s_total]
-	punpcklqdq	value, temp					; value.data = total
-		call	InsertCoreMulti				; call this.InsertCoreMulti (value)
+.skip:	mov		this, [s_this]				; get "this" variable from the stack
+		movq	key, [s_value]
+		movq	data, [s_total]
+	punpcklqdq	key, data
+		call	InsertCoreMulti				; call this.InsertCoreMulti ({key, total})
 		mov		this, [s_this]				; get "this" variable from the stack
 		mov		array, [s_array]			; get "array" variable from the stack
 		mov		iter, [s_iter]				; get "iter" variable from the stack
 		jmp		.loop						; do while (true)
 ;---[Normal exit branch]-------------------
 .exit:	mov		result, [this + SIZE]
-		add		stack, space				; restoring back the stack pointer
 		shr		result, NSCALE				; return this.size
+		add		stack, space				; restoring back the stack pointer
 		ret
 ;---[Extend object capacity]---------------
 .ext:	mov		param2, size
 		call	Extend						; status = this.Extend (size)
 		mov		this, [s_this]				; get "this" variable from the stack
-		mov		array, [s_array]			; get "array" variable from the stack
-		mov		tbound, [s_tbnd]			; get "tbound" variable from the stack
+		mov		source, [s_src]				; get "source" variable from the stack
 		test	status, status				; if (status)
 		jnz		.back						;     then go back
 ;---[Error branch]-------------------------
-.error:	add		stack, space				; restoring back the stack pointer
-		mov		result, ERROR				; return ERROR
+.error:	mov		result, ERROR				; return ERROR
+		add		stack, space				; restoring back the stack pointer
 		ret
 
 ;******************************************************************************;

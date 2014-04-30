@@ -207,7 +207,7 @@ temp	equ		ecx							; temporary register
 change_of	= 0								; offset of Time::change
 index_of	= change_of + CHNG_SIZE * 8		; offset of Time::index
 zone_of		= index_of + CHNG_SIZE			; offset of Time::zone
-csize_of 	= zone_of + ZONE_SIZE * 4		; offset of Time::change_size
+csize_of	= zone_of + ZONE_SIZE * 4		; offset of Time::change_size
 zsize_of	= csize_of + 4					; offset of Time::zone_size
 ;---[Skipping 1 header and content]--------
 		sub		size, 44					; if (size <= 44)
@@ -333,7 +333,7 @@ Constructor:
 ;---[Parameters]---------------------------
 this	equ		rdi							; pointer to time zone object
 ;---[Internal variables]-------------------
-csize_of 	= CHNG_SIZE * 9 + ZONE_SIZE * 4	; offset of change_size variable inside time_zone
+csize_of	= CHNG_SIZE * 9 + ZONE_SIZE * 4	; offset of change_size variable inside time_zone
 zsize_of	= csize_of + 4					; offset of zone_size variable inside time_zone
 ;------------------------------------------
 		mov		dword [this + csize_of], 0	; this -> change_size = 0
@@ -785,7 +785,7 @@ median	equ		result						; pointer to median element of the time changes array
 index	equ		left						; index value
 index_of	= CHNG_SIZE * 8					; offset of index array inside time_zone
 zone_of		= index_of + CHNG_SIZE			; offset of zone array inside time_zone
-csize_of 	= zone_of + ZONE_SIZE * 4		; offset of change_size variable inside time_zone
+csize_of	= zone_of + ZONE_SIZE * 4		; offset of change_size variable inside time_zone
 zsize_of	= csize_of + 4					; offset of zone_size variable inside time_zone
 ;------------------------------------------
 		mov		temp, TIME_ERROR

@@ -132,6 +132,10 @@ bool FindKeyBwd (data_t *data, adt_t key);
 bool FindKeysFwd (data_t *data, const adt_t keys[], size_t size);
 bool FindKeysBwd (data_t *data, const adt_t keys[], size_t size);
 
+// Sequence searching
+size_t FindSequenceFwd (data_t *data, adt_t key);
+size_t FindSequenceBwd (data_t *data, adt_t key);
+
 //****************************************************************************//
 //      Duplicates searching                                                  //
 //****************************************************************************//
@@ -283,6 +287,10 @@ bool MultiHash_FindKeyBwd (struct MultiHash *hash, struct data_t *data, union ad
 // Keys set searching
 bool MultiHash_FindKeysFwd (struct MultiHash *hash, struct data_t *data, const union adt_t keys[], size_t size);
 bool MultiHash_FindKeysBwd (struct MultiHash *hash, struct data_t *data, const union adt_t keys[], size_t size);
+
+// Sequence searching
+size_t MultiHash_FindSequenceFwd (struct MultiHash *hash, struct data_t *data, union adt_t key);
+size_t MultiHash_FindSequenceBwd (struct MultiHash *hash, struct data_t *data, union adt_t key);
 
 //****************************************************************************//
 //      Duplicates searching                                                  //

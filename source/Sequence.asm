@@ -131,7 +131,7 @@ end if
 ;---[Backward hash branch]-----------------
 .bkwrd:	lea		pattern, [pattern + size]
 		jmp		@f
-.loop2:	sub		pattern, 1 					; pattern--
+.loop2:	sub		pattern, 1					; pattern--
 if scale = 0
 		movzx	elemnt, byte [pattern]		; elemnt = pattern[0]
 else if scale = 1

@@ -174,7 +174,7 @@ macro	REFLECT		treg, x, sign
 array	equ		rdi							; pointer to array
 size	equ		rsi							; array size (count of elements)
 ;---[Internal variables]-------------------
-ptr		equ 	rax							; pointer to last element of array
+ptr		equ		rax							; pointer to last element of array
 temp	equ		xmm0						; temporary register
 mask	equ		xmm1						; sign mask for inverting sign
 if x eq s
@@ -597,8 +597,8 @@ end if
 		add		size, 1
 		call	PosRefl						; call PosRefl (filter, 2 * size + 1)
 ;------------------------------------------
-		add		stack, space				; restoring back the stack pointer
 		mov		bool, 1						; return TRUE
+		add		stack, space				; restoring back the stack pointer
 		ret
 ;---[Error branch]-------------------------
 .error:	xor		bool, bool					; return FALSE (indicates an error)
@@ -674,8 +674,8 @@ end if
 		lea		size, [size * 2 + 1]
 		call	NegRefl						; call NegRefl (filter, 2 * size + 1)
 ;------------------------------------------
-		add		stack, space				; restoring back the stack pointer
 		mov		bool, 1						; return TRUE
+		add		stack, space				; restoring back the stack pointer
 		ret
 ;---[Error branch]-------------------------
 .error:	xor		bool, bool					; return FALSE (indicates an error)
@@ -740,8 +740,8 @@ end if
 		sub		qword [s_dsize], 1			; dsize--
 		jnz		.loop						; do while (dsize != 0)
 ;---[End of loop]--------------------------
-		add		stack, space				; restoring back the stack pointer
 		mov		bool, 1						; return TRUE
+		add		stack, space				; restoring back the stack pointer
 		ret
 ;---[Error branch]-------------------------
 .error:	xor		bool, bool					; return FALSE (indicates an error)

@@ -126,12 +126,12 @@ space	= 3 * 8								; stack size required by the procedure
 		mov		newcap, [s_ncap]			; get "newcap" variable from the stack
 		mov		[this + BUFFER], buffer		; this.buffer = buffer
 		mov		[this + CAPACITY], newcap	; this.capacity = newcap
-		add		stack, space				; restoring back the stack pointer
 		mov		status, 1					; return true
+		add		stack, space				; restoring back the stack pointer
 		ret
 ;---[Error branch]-------------------------
-.error:	add		stack, space				; restoring back the stack pointer
-		xor		status, status				; return false
+.error:	xor		status, status				; return false
+		add		stack, space				; restoring back the stack pointer
 		ret
 
 ;******************************************************************************;

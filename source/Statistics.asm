@@ -251,9 +251,7 @@ public	Covariance_flt64			as	'_ZN10Statistics10CovarianceEPKddS1_dm'
 ;       Сorrelation                                                            ;
 ;******************************************************************************;
 
-;==============================================================================;
-;       Pearson correlation                                                    ;
-;==============================================================================;
+; Pearson correlation
 public	PearsonCorrelation_flt32	as	'Statistics_PearsonCorrelation_flt32'
 public	PearsonCorrelation_flt64	as	'Statistics_PearsonCorrelation_flt64'
 public	PearsonCorrelation_flt32	as	'_ZN10Statistics18PearsonCorrelationEPKffS1_fm'
@@ -1402,7 +1400,7 @@ sum7	equ		xmm10						; intermediate sum #5
 sum8	equ		xmm11						; intermediate sum #5
 sum9	equ		xmm12						; intermediate sum #5
 zero	equ		xmm13						; 0
-asize 	equ		xmm14						; normalized array size
+asize	equ		xmm14						; normalized array size
 bias	equ		xmm15						; normal distribution bias
 if x eq s
 biasval	= 0x40400000						; bias const (3.0 for normal distribution)
