@@ -705,17 +705,13 @@ public	SumMul_flt64				as	'_ZN5Array6SumMulEPKdS1_m'
 ;       Minimum and maximum absolute value                                     ;
 ;******************************************************************************;
 
-;==============================================================================;
-;       Minimum absolute value                                                 ;
-;==============================================================================;
+; Minimum absolute value
 public	MinAbs_flt32				as	'Array_MinAbs_flt32'
 public	MinAbs_flt64				as	'Array_MinAbs_flt64'
 public	MinAbs_flt32				as	'_ZN5Array6MinAbsEPKfm'
 public	MinAbs_flt64				as	'_ZN5Array6MinAbsEPKdm'
 
-;==============================================================================;
-;       Maximum absolute value                                                 ;
-;==============================================================================;
+; Maximum absolute value
 public	MaxAbs_flt32				as	'Array_MaxAbs_flt32'
 public	MaxAbs_flt64				as	'Array_MaxAbs_flt64'
 public	MaxAbs_flt32				as	'_ZN5Array6MaxAbsEPKfm'
@@ -726,8 +722,12 @@ public	MaxAbs_flt64				as	'_ZN5Array6MaxAbsEPKdm'
 ;******************************************************************************;
 
 ;==============================================================================;
-;       Minimum value                                                          ;
+;       Regular array search                                                   ;
 ;==============================================================================;
+
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+;       Minimum value                                                          ;
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 
 ; Unsigned integer types
 public	Min_uint8					as	'Array_Min_uint8'
@@ -751,9 +751,9 @@ public	Min_flt64					as	'Array_Min_flt64'
 public	Min_flt32					as	'_ZN5Array3MinEPKfm'
 public	Min_flt64					as	'_ZN5Array3MinEPKdm'
 
-;==============================================================================;
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 ;       Maximum value                                                          ;
-;==============================================================================;
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 
 ; Unsigned integer types
 public	Max_uint8					as	'Array_Max_uint8'
@@ -776,6 +776,26 @@ public	Max_flt32					as	'Array_Max_flt32'
 public	Max_flt64					as	'Array_Max_flt64'
 public	Max_flt32					as	'_ZN5Array3MaxEPKfm'
 public	Max_flt64					as	'_ZN5Array3MaxEPKdm'
+
+;==============================================================================;
+;       Object array search                                                    ;
+;==============================================================================;
+
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+;       Minimum value                                                          ;
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+public	MinFwd						as	'MinFwd'
+public	MinBwd						as	'MinBwd'
+public	MinFwd						as	'_ZN5Array6MinFwdEPPKvmPFxS1_S1_E'
+public	MinBwd						as	'_ZN5Array6MinBwdEPPKvmPFxS1_S1_E'
+
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+;       Maximum value                                                          ;
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+public	MaxFwd						as	'MaxFwd'
+public	MaxBwd						as	'MaxBwd'
+public	MaxFwd						as	'_ZN5Array6MaxFwdEPPKvmPFxS1_S1_E'
+public	MaxBwd						as	'_ZN5Array6MaxBwdEPPKvmPFxS1_S1_E'
 
 ;******************************************************************************;
 ;       Linear search                                                          ;
@@ -2480,14 +2500,14 @@ public	MergeKeyDsc_uint64			as	'_ZN5Array11MergeKeyDscEPmPPvPKmPPKvmS4_S7_m'
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 ;       Ascending sort order                                                   ;
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
-public	MergeDsc					as	'Array_MergeAsc'
+public	MergeAsc					as	'Array_MergeAsc'
 public	MergeAsc					as	'String_MergeAsc_char8'
 public	MergeAsc					as	'String_MergeAsc_char16'
 public	MergeAsc					as	'String_MergeAsc_char32'
 public	MergeAsc					as	'_ZN5Array8MergeAscEPPKvS2_mS2_mPFxS1_S1_E'
-public	MergeAsc					as	'_ZN6String8MergeAscEPPKcPPKcmS4_mPFxS3_S3_E'
-public	MergeAsc					as	'_ZN6String8MergeAscEPPKsPPKsmS4_mPFxS3_S3_E'
-public	MergeAsc					as	'_ZN6String8MergeAscEPPKiPPKimS4_mPFxS3_S3_E'
+public	MergeAsc					as	'_ZN6String8MergeAscEPPKcS2_mS2_mPFxS1_S1_E'
+public	MergeAsc					as	'_ZN6String8MergeAscEPPKsS2_mS2_mPFxS1_S1_E'
+public	MergeAsc					as	'_ZN6String8MergeAscEPPKiS2_mS2_mPFxS1_S1_E'
 
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 ;       Descending sort order                                                  ;
@@ -2496,10 +2516,10 @@ public	MergeDsc					as	'Array_MergeDsc'
 public	MergeDsc					as	'String_MergeDsc_char8'
 public	MergeDsc					as	'String_MergeDsc_char16'
 public	MergeDsc					as	'String_MergeDsc_char32'
-public	MergeAsc					as	'_ZN5Array8MergeDscEPPKvS2_mS2_mPFxS1_S1_E'
-public	MergeDsc					as	'_ZN6String8MergeDscEPPKcPPKcmS4_mPFxS3_S3_E'
-public	MergeDsc					as	'_ZN6String8MergeDscEPPKsPPKsmS4_mPFxS3_S3_E'
-public	MergeDsc					as	'_ZN6String8MergeDscEPPKiPPKimS4_mPFxS3_S3_E'
+public	MergeDsc					as	'_ZN5Array8MergeDscEPPKvS2_mS2_mPFxS1_S1_E'
+public	MergeDsc					as	'_ZN6String8MergeDscEPPKcS2_mS2_mPFxS1_S1_E'
+public	MergeDsc					as	'_ZN6String8MergeDscEPPKsS2_mS2_mPFxS1_S1_E'
+public	MergeDsc					as	'_ZN6String8MergeDscEPPKiS2_mS2_mPFxS1_S1_E'
 
 ;******************************************************************************;
 ;       Comparison of arrays                                                   ;
@@ -2981,7 +3001,7 @@ size	equ		rdx							; array size (count of elements)
 index	equ		rax							; offset from beginning of target array
 ptr1	equ		r10							; temporary pointer to target array
 ptr2	equ		r11							; temporary pointer to source array
-temp	equ		xmm0						; temporary register #1
+temp	equ		xmm0						; temporary register
 if x eq b
 scale	= 0									; scale value
 else if x eq w
@@ -3008,8 +3028,8 @@ end if
 		jb		.sloop						;     then skip vector code
 ;---[Normal execution branch]--------------
 		mov		index, target
-		and		index, VMASK
-		neg 	index						; get array offset from vector boundary
+		and		index, VMASK				; get array offset from vector boundary
+		neg		index						; index = -index
 		lea		ptr2, [source + index]		; ptr2 = source + index
 		lea		ptr1, [target + index]		; ptr1 = target + index
 ;---[Unaligned operation]------------------
@@ -3069,7 +3089,7 @@ size	equ		rdx							; array size (count of elements)
 index	equ		rax							; offset from beginning of target array
 ptr1	equ		r10							; temporary pointer to target array
 ptr2	equ		r11							; temporary pointer to source array
-temp	equ		xmm0						; temporary register #1
+temp	equ		xmm0						; temporary register
 if x eq b
 scale	= 0									; scale value
 else if x eq w
@@ -3101,7 +3121,7 @@ end if
 		sub		target, VSIZE				; target -= VSIZE
 		mov		index, target
 		neg		index
-		and 	index, VMASK				; get array offset from vector boundary
+		and		index, VMASK				; get array offset from vector boundary
 		lea		ptr2, [source + index]		; ptr2 = source + index
 		lea		ptr1, [target + index]		; ptr1 = target + index
 ;---[Unaligned operation]------------------
@@ -3170,7 +3190,7 @@ macro	MOVE	x
 {
 ;---[Parameters]---------------------------
 target	equ		rdi							; pointer to target array
-source	equ 	rsi							; pointer to source array
+source	equ		rsi							; pointer to source array
 size	equ		rdx							; array size (count of elements)
 ;---[Internal variables]-------------------
 if x eq b
@@ -3188,7 +3208,6 @@ CopyBwd	= CopyBwd64							; Copy in backward direction function
 end if
 ;------------------------------------------
 		cmp		target, source
-		je		.exit						; if (target == source), then go to exit
 		jb		CopyFwd						; if (target <= source), then copy in forward direction
 		ja		CopyBwd						; if (target > source), then copy in backward direction
 .exit:	ret
@@ -3208,14 +3227,14 @@ array	equ		rdi							; pointer to array
 size	equ		rsi							; array size (count of elements)
 psize	equ		rdx							; pattern size (count of elements)
 ;---[Internal variables]-------------------
-ptr		equ 	psize						; pointer to first element after pattern
+ptr		equ		psize						; pointer to first element after pattern
 bytes	= 1 shl scale						; size of array element (bytes)
 ;------------------------------------------
 		test	psize, psize				; if (psize == 0)
 		jz		.exit						;     then go to exit
 		sub		size, psize					; size -= psize
 		jbe		.exit						; if (size <= psize), then go to exit
-		lea		ptr, [array+psize*bytes]	; ptr = array + psize
+		lea		ptr, [array + psize * bytes]; ptr = array + psize
 ;---[Cloning loop]-------------------------
 .loop:	mov		temp, [array]				; temp = array[0]
 		mov		[ptr], temp					; ptr[0] = temp
@@ -3234,459 +3253,349 @@ Clone64:	CLONE	rax, 3
 ;******************************************************************************;
 ;       Data conversion                                                        ;
 ;******************************************************************************;
-macro	CONVERT_VECTOR_FLT32_TO_FLT64
-{
-;---[Loop]---------------------------------
-@@:		movlps	temp0, [source + 0x00]		; temp0 = source[0]
-	cvtps2pd	temp0, temp0				; convert flt32_t to flt64_t
-		movlps	temp1, [source + 0x08]		; temp1 = source[8]
-	cvtps2pd	temp1, temp1				; convert flt32_t to flt64_t
-		movlps	temp2, [source + 0x10]		; temp2 = source[16]
-	cvtps2pd	temp2, temp2				; convert flt32_t to flt64_t
-		movlps	temp3, [source + 0x18]		; temp3 = source[24]
-	cvtps2pd	temp3, temp3				; convert flt32_t to flt64_t
-	prefetchnta	[source + PSTEP]			; prefetch next portion of data
-		movapd	[target + 0x00], temp0		; target[0] = temp0
-		movapd	[target + 0x10], temp1		; target[16] = temp1
-		movapd	[target + 0x20], temp2		; target[32] = temp2
-		movapd	[target + 0x30], temp3		; target[48] = temp3
-		add		source, block2				; source += block2
-		add		target, block1				; target += block1
-		sub		size, 1						; size--
-		jnz		@b							; do while (size != 0)
-;------------------------------------------
-}
-;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	CONVERT_VECTOR_FLT64_TO_FLT32
-{
-;---[Loop]---------------------------------
-@@:		movupd	temp0, [source + 0x00]		; temp0 = source[0]
-	cvtpd2ps	temp0, temp0				; convert flt64_t to flt32_t
-		movupd	temp1, [source + 0x10]		; temp1 = source[16]
-	cvtpd2ps	temp1, temp1				; convert flt64_t to flt32_t
-		movupd	temp2, [source + 0x20]		; temp2 = source[32]
-	cvtpd2ps	temp2, temp2				; convert flt64_t to flt32_t
-		movupd	temp3, [source + 0x30]		; temp3 = source[48]
-	cvtpd2ps	temp3, temp3				; convert flt64_t to flt32_t
-		movupd	temp4, [source + 0x40]		; temp4 = source[64]
-	cvtpd2ps	temp4, temp4				; convert flt64_t to flt32_t
-		movupd	temp5, [source + 0x50]		; temp5 = source[80]
-	cvtpd2ps	temp5, temp5				; convert flt64_t to flt32_t
-		movupd	temp6, [source + 0x60]		; temp6 = source[96]
-	cvtpd2ps	temp6, temp6				; convert flt64_t to flt32_t
-		movupd	temp7, [source + 0x70]		; temp7 = source[112]
-	cvtpd2ps	temp7, temp7				; convert flt64_t to flt32_t
-	prefetchnta	[source + PSTEP]			; prefetch next portion of data
-		movlps	[target + 0x00], temp0		; target[0] = temp0
-		movlps	[target + 0x08], temp1		; target[8] = temp1
-		movlps	[target + 0x10], temp2		; target[16] = temp2
-		movlps	[target + 0x18], temp3		; target[24] = temp3
-		movlps	[target + 0x20], temp4		; target[32] = temp4
-		movlps	[target + 0x28], temp5		; target[40] = temp5
-		movlps	[target + 0x30], temp6		; target[48] = temp6
-		movlps	[target + 0x38], temp7		; target[56] = temp7
-		add		source, block2				; source += block2
-		add		target, block1				; target += block1
-		sub		size, 1						; size--
-		jnz		@b							; do while (size != 0)
-;------------------------------------------
-}
-;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	CONVERT_VECTOR_SINT32_TO_FLT32
-{
-;---[Loop]---------------------------------
-@@:		movdqu	temp0, [source + 0x00]		; temp0 = source[0]
-	cvtdq2ps	temp0, temp0				; convert sint32_t to flt32_t
-		movdqu	temp1, [source + 0x10]		; temp1 = source[16]
-	cvtdq2ps	temp1, temp1				; convert sint32_t to flt32_t
-		movdqu	temp2, [source + 0x20]		; temp2 = source[32]
-	cvtdq2ps	temp2, temp2				; convert sint32_t to flt32_t
-		movdqu	temp3, [source + 0x30]		; temp3 = source[48]
-	cvtdq2ps	temp3, temp3				; convert sint32_t to flt32_t
-	prefetchnta	[source + PSTEP]			; prefetch next portion of data
-		movaps	[target + 0x00], temp0		; target[0] = temp0
-		movaps	[target + 0x10], temp1		; target[16] = temp1
-		movaps	[target + 0x20], temp2		; target[32] = temp2
-		movaps	[target + 0x30], temp3		; target[48] = temp3
-		add		source, block2				; source += block2
-		add		target, block1				; target += block1
-		sub		size, 1						; size--
-		jnz		@b							; do while (size != 0)
-;------------------------------------------
-}
-;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	CONVERT_VECTOR_SINT32_TO_FLT64
-{
-;---[Loop]---------------------------------
-@@:		movq	temp0, [source + 0x00]		; temp0 = source[0]
-	cvtdq2pd	temp0, temp0				; convert sint32_t to flt64_t
-		movq	temp1, [source + 0x08]		; temp1 = source[8]
-	cvtdq2pd	temp1, temp1				; convert sint32_t to flt64_t
-		movq	temp2, [source + 0x10]		; temp2 = source[16]
-	cvtdq2pd	temp2, temp2				; convert sint32_t to flt64_t
-		movq	temp3, [source + 0x18]		; temp3 = source[24]
-	cvtdq2pd	temp3, temp3				; convert sint32_t to flt64_t
-	prefetchnta	[source + PSTEP]			; prefetch next portion of data
-		movapd	[target + 0x00], temp0		; target[0] = temp0
-		movapd	[target + 0x10], temp1		; target[16] = temp1
-		movapd	[target + 0x20], temp2		; target[32] = temp2
-		movapd	[target + 0x30], temp3		; target[48] = temp3
-		add		source, block2				; source += block2
-		add		target, block1				; target += block1
-		sub		size, 1						; size--
-		jnz		@b							; do while (size != 0)
-;------------------------------------------
-}
-;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	CONVERT_VECTOR_FLT32_TO_SINT32
-{
-;---[Loop]---------------------------------
-@@:		movups	temp0, [source + 0x00]		; temp0 = source[0]
-	cvtps2dq	temp0, temp0				; convert flt32_t to sint32_t
-		movups	temp1, [source + 0x10]		; temp1 = source[16]
-	cvtps2dq	temp1, temp1				; convert flt32_t to sint32_t
-		movups	temp2, [source + 0x20]		; temp2 = source[32]
-	cvtps2dq	temp2, temp2				; convert flt32_t to sint32_t
-		movups	temp3, [source + 0x30]		; temp3 = source[48]
-	cvtps2dq	temp3, temp3				; convert flt32_t to sint32_t
-	prefetchnta	[source + PSTEP]			; prefetch next portion of data
-		movdqa	[target + 0x00], temp0		; target[0] = temp0
-		movdqa	[target + 0x10], temp1		; target[16] = temp1
-		movdqa	[target + 0x20], temp2		; target[32] = temp2
-		movdqa	[target + 0x30], temp3		; target[48] = temp3
-		add		source, block2				; source += block2
-		add		target, block1				; target += block1
-		sub		size, 1						; size--
-		jnz		@b							; do while (size != 0)
-;------------------------------------------
-}
-;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	CONVERT_VECTOR_FLT64_TO_SINT32
-{
-;---[Loop]---------------------------------
-@@:		movupd	temp0, [source + 0x00]		; temp0 = source[0]
-	cvtpd2dq	temp0, temp0				; convert flt64_t to sint32_t
-		movupd	temp1, [source + 0x10]		; temp1 = source[16]
-	cvtpd2dq	temp1, temp1				; convert flt64_t to sint32_t
-		movupd	temp2, [source + 0x20]		; temp2 = source[32]
-	cvtpd2dq	temp2, temp2				; convert flt64_t to sint32_t
-		movupd	temp3, [source + 0x30]		; temp3 = source[48]
-	cvtpd2dq	temp3, temp3				; convert flt64_t to sint32_t
-		movupd	temp4, [source + 0x40]		; temp4 = source[64]
-	cvtpd2dq	temp4, temp4				; convert flt64_t to sint32_t
-		movupd	temp5, [source + 0x50]		; temp5 = source[80]
-	cvtpd2dq	temp5, temp5				; convert flt64_t to sint32_t
-		movupd	temp6, [source + 0x60]		; temp6 = source[96]
-	cvtpd2dq	temp6, temp6				; convert flt64_t to sint32_t
-		movupd	temp7, [source + 0x70]		; temp7 = source[112]
-	cvtpd2dq	temp7, temp7				; convert flt64_t to sint32_t
-	prefetchnta	[source + PSTEP]			; prefetch next portion of data
-		movq	[target + 0x00], temp0		; target[0] = temp0
-		movq	[target + 0x08], temp1		; target[8] = temp1
-		movq	[target + 0x10], temp2		; target[16] = temp2
-		movq	[target + 0x18], temp3		; target[24] = temp3
-		movq	[target + 0x20], temp4		; target[32] = temp4
-		movq	[target + 0x28], temp5		; target[40] = temp5
-		movq	[target + 0x30], temp6		; target[48] = temp6
-		movq	[target + 0x38], temp7		; target[56] = temp7
-		add		source, block2				; source += block2
-		add		target, block1				; target += block1
-		sub		size, 1						; size--
-		jnz		@b							; do while (size != 0)
-;------------------------------------------
-}
-;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	TRUNCATE_VECTOR_FLT32_TO_SINT32
-{
-;---[Loop]---------------------------------
-@@:		movups	temp0, [source + 0x00]		; temp0 = source[0]
-	cvttps2dq	temp0, temp0				; truncate flt32_t to sint32_t
-		movups	temp1, [source + 0x10]		; temp1 = source[16]
-	cvttps2dq	temp1, temp1				; truncate flt32_t to sint32_t
-		movups	temp2, [source + 0x20]		; temp2 = source[32]
-	cvttps2dq	temp2, temp2				; truncate flt32_t to sint32_t
-		movups	temp3, [source + 0x30]		; temp3 = source[48]
-	cvttps2dq	temp3, temp3				; truncate flt32_t to sint32_t
-	prefetchnta	[source + PSTEP]			; prefetch next portion of data
-		movdqa	[target + 0x00], temp0		; target[0] = temp0
-		movdqa	[target + 0x10], temp1		; target[16] = temp1
-		movdqa	[target + 0x20], temp2		; target[32] = temp2
-		movdqa	[target + 0x30], temp3		; target[48] = temp3
-		add		source, block2				; source += block2
-		add		target, block1				; target += block1
-		sub		size, 1						; size--
-		jnz		@b							; do while (size != 0)
-;------------------------------------------
-}
-;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	TRUNCATE_VECTOR_FLT64_TO_SINT32
-{
-;---[Loop]---------------------------------
-@@:		movupd	temp0, [source + 0x00]		; temp0 = source[0]
-	cvttpd2dq	temp0, temp0				; truncate flt64_t to sint32_t
-		movupd	temp1, [source + 0x10]		; temp1 = source[16]
-	cvttpd2dq	temp1, temp1				; truncate flt64_t to sint32_t
-		movupd	temp2, [source + 0x20]		; temp2 = source[32]
-	cvttpd2dq	temp2, temp2				; truncate flt64_t to sint32_t
-		movupd	temp3, [source + 0x30]		; temp3 = source[48]
-	cvttpd2dq	temp3, temp3				; truncate flt64_t to sint32_t
-		movupd	temp4, [source + 0x40]		; temp4 = source[64]
-	cvttpd2dq	temp4, temp4				; truncate flt64_t to sint32_t
-		movupd	temp5, [source + 0x50]		; temp5 = source[80]
-	cvttpd2dq	temp5, temp5				; truncate flt64_t to sint32_t
-		movupd	temp6, [source + 0x60]		; temp6 = source[96]
-	cvttpd2dq	temp6, temp6				; truncate flt64_t to sint32_t
-		movupd	temp7, [source + 0x70]		; temp7 = source[112]
-	cvttpd2dq	temp7, temp7				; truncate flt64_t to sint32_t
-	prefetchnta	[source + PSTEP]			; prefetch next portion of data
-		movq	[target + 0x00], temp0		; target[0] = temp0
-		movq	[target + 0x08], temp1		; target[8] = temp1
-		movq	[target + 0x10], temp2		; target[16] = temp2
-		movq	[target + 0x18], temp3		; target[24] = temp3
-		movq	[target + 0x20], temp4		; target[32] = temp4
-		movq	[target + 0x28], temp5		; target[40] = temp5
-		movq	[target + 0x30], temp6		; target[48] = temp6
-		movq	[target + 0x38], temp7		; target[56] = temp7
-		add		source, block2				; source += block2
-		add		target, block1				; target += block1
-		sub		size, 1						; size--
-		jnz		@b							; do while (size != 0)
-;------------------------------------------
-}
-;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	CONVERT_SCALAR_FLT32_TO_FLT64	counter
-{
-;---[Internal variables]-------------------
-reg		equ		xmm0						; temporary register for data conversion
-;---[Loop]---------------------------------
-@@:	cvtss2sd	reg, [source]				; reg = convert (source[0])
-		movsd	[target], reg				; target[0] = reg
-		add		source, bytes2				; source++
-		add		target, bytes1				; target++
-		sub		counter, 1					; counter--
-		jnz		@b							; do while (counter != 0)
-;------------------------------------------
-}
-;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	CONVERT_SCALAR_FLT64_TO_FLT32	counter
-{
-;---[Internal variables]-------------------
-reg		equ		xmm0						; temporary register for data conversion
-;---[Loop]---------------------------------
-@@:	cvtsd2ss	reg, [source]				; reg = convert (source[0])
-		movss	[target], reg				; target[0] = reg
-		add		source, bytes2				; source++
-		add		target, bytes1				; target++
-		sub		counter, 1					; counter--
-		jnz		@b							; do while (counter != 0)
-;------------------------------------------
-}
-;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	CONVERT_SCALAR_SINT32_TO_FLT32	counter
-{
-;---[Internal variables]-------------------
-reg		equ		xmm0						; temporary register for data conversion
-;---[Loop]---------------------------------
-@@:	cvtsi2ss	reg, dword [source]			; reg = convert (source[0])
-		movss	[target], reg				; target[0] = reg
-		add		source, bytes2				; source++
-		add		target, bytes1				; target++
-		sub		counter, 1					; counter--
-		jnz		@b							; do while (counter != 0)
-;------------------------------------------
-}
-;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	CONVERT_SCALAR_SINT32_TO_FLT64	counter
-{
-;---[Internal variables]-------------------
-reg		equ		xmm0						; temporary register for data conversion
-;---[Loop]---------------------------------
-@@:	cvtsi2sd	reg, dword [source]			; reg = convert (source[0])
-		movsd	[target], reg				; target[0] = reg
-		add		source, bytes2				; source++
-		add		target, bytes1				; target++
-		sub		counter, 1					; counter--
-		jnz		@b							; do while (counter != 0)
-;------------------------------------------
-}
-;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	CONVERT_SCALAR_FLT32_TO_SINT32	counter
-{
-;---[Internal variables]-------------------
-reg		equ		eax							; temporary register for data conversion
-;---[Loop]---------------------------------
-@@:	cvtss2si	reg, [source]				; reg = convert (source[0])
-		mov		[target], reg				; target[0] = reg
-		add		source, bytes2				; source++
-		add		target, bytes1				; target++
-		sub		counter, 1					; counter--
-		jnz		@b							; do while (counter != 0)
-;------------------------------------------
-}
-;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	CONVERT_SCALAR_FLT64_TO_SINT32	counter
-{
-;---[Internal variables]-------------------
-reg		equ		eax							; temporary register for data conversion
-;---[Loop]---------------------------------
-@@:	cvtsd2si	reg, [source]				; reg = convert (source[0])
-		mov		[target], reg				; target[0] = reg
-		add		source, bytes2				; source++
-		add		target, bytes1				; target++
-		sub		counter, 1					; counter--
-		jnz		@b							; do while (counter != 0)
-;------------------------------------------
-}
-;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	TRUNCATE_SCALAR_FLT32_TO_SINT32	counter
-{
-;---[Internal variables]-------------------
-reg		equ		eax							; temporary register for data conversion
-;---[Loop]---------------------------------
-@@:	cvttss2si	reg, [source]				; reg = truncate (source[0])
-		mov		[target], reg				; target[0] = reg
-		add		source, bytes2				; source++
-		add		target, bytes1				; target++
-		sub		counter, 1					; counter--
-		jnz		@b							; do while (counter != 0)
-;------------------------------------------
-}
-;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	TRUNCATE_SCALAR_FLT64_TO_SINT32	counter
-{
-;---[Internal variables]-------------------
-reg		equ		eax							; temporary register for data conversion
-;---[Loop]---------------------------------
-@@:	cvttsd2si	reg, [source]				; reg = truncate (source[0])
-		mov		[target], reg				; target[0] = reg
-		add		source, bytes2				; source++
-		add		target, bytes1				; target++
-		sub		counter, 1					; counter--
-		jnz		@b							; do while (counter != 0)
-;------------------------------------------
-}
-;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	CONVERT1	vcode, scalar, scale1, scale2, bscale1, bscale2
+macro	CONVERT	reg, move1, move2, shift, vector, scalar, tscale, sscale, TSIZE, SSIZE
 {
 ;---[Parameters]---------------------------
 target	equ		rdi							; pointer to target array
 source	equ		rsi							; pointer to source array
-size	equ		rdx							; array size (count of elements)
+tsize	equ		rdx							; target array size (count of elements)
 ;---[Internal variables]-------------------
-count	equ		r8							; count of elements to align target
-temp	equ		r9							; temporary register
-temp0	equ		xmm0						; temporary register #1
-temp1	equ		xmm1						; temporary register #2
-temp2	equ		xmm2						; temporary register #3
-temp3	equ		xmm3						; temporary register #4
-temp4	equ		xmm4						; temporary register #5
-temp5	equ		xmm5						; temporary register #6
-temp6	equ		xmm6						; temporary register #7
-temp7	equ		xmm7						; temporary register #8
-amask	= VSIZE - 1							; align mask
-bytes1	= 1 shl scale1						; size of target array element (bytes)
-bytes2	= 1 shl scale2						; size of source array element (bytes)
-block1	= 1 shl bscale1						; block size of target array (bytes)
-block2	= 1 shl bscale2						; block size of source array (bytes)
-step	= 1 shl (bscale1 - scale1)			; step size (bytes)
+ssize	equ		rcx							; source array size (count of elements)
+tindex	equ		r8							; offset from beginning of target array
+sindex	equ		r9							; offset from beginning of source array
+ptr1	equ		r10							; temporary pointer to target array
+ptr2	equ		r11							; temporary pointer to source array
+temp	equ		xmm0						; temporary register
+if tscale >= sscale
+scale	= tscale - sscale					; scale value
+else
+scale	= sscale - tscale					; scale value
+end if
+tbytes	= 1 shl tscale						; size of target array element (bytes)
+sbytes	= 1 shl sscale						; size of source array element (bytes)
+tmask	= tbytes - 1						; target elements aligning mask
+smask	= sbytes - 1						; source elements aligning mask
+MASK	= TSIZE - 1							; vector boundary mask
 ;------------------------------------------
 	prefetchnta	[source]					; prefetch data
-		test	target, bytes1 - 1			; if (target & (bytes1 - 1))
-		jnz		.sclr						;     then skip vector code
-		mov		count, target
-		neg		count
-		and		count, amask
-		shr		count, scale1				; count = (-target & amask) >> scale1
-		lea		temp, [count + step]
-		cmp		size, temp					; if (size < count + step)
-		jb		.sclr						;     then skip vector code
-		sub		size, count					; size -= count
-		mov		temp, size					; temp = size
-		shr		size, bscale1 - scale1		; size = size / step
-		and		temp, step - 1				; temp = size % step
-		test	count, count				; if (count == 0)
-		jz		.vloop						;     then skip aligning loop
-;---[Aligning loop]------------------------
-		scalar	count						; invoke aligning code
+		test	tsize, tsize				; if (tsize == 0)
+		jz		.exit						;     then go to exit
+		shl		tsize, tscale				; convert tsize to bytes
+		mov		ssize, tsize				; ssize = tsize
+		shift	ssize, scale				; convert ssize to bytes
+		test	source, smask				; if elements have wrong alignment
+		jnz		.sloop						;     then skip vector code
+		test	target, tmask				; if elements have wrong alignment
+		jnz		.sloop						;     then skip vector code
+		cmp		ssize, SSIZE				; if (ssize < SSIZE)
+		jb		.sloop						;     then skip vector code
+		cmp		tsize, TSIZE				; if (tsize < TSIZE)
+		jb		.sloop						;     then skip vector code
+;---[Normal execution branch]--------------
+		mov		tindex, target
+		and		tindex, MASK				; get array offset from vector boundary
+		mov		sindex, tindex
+		shift	sindex, scale				; convert sindex to bytes
+		neg		sindex						; sindex = -sindex
+		neg		tindex						; tindex = -tindex
+		lea		ptr2, [source + sindex]		; ptr2 = source + sindex
+		lea		ptr1, [target + tindex]		; ptr1 = target + tindex
+;---[Unaligned operation]------------------
+		sub		ssize, sindex				; ssize -= sindex
+		sub		ssize, SSIZE				; if (ssize <= SSIZE)
+		sub		tsize, tindex				; tsize -= tindex
+		sub		tsize, TSIZE				; if (tsize <= TSIZE)
+		jbe		.tail						;     then process array tails
+		vector	reg, move1, target, source, 0, 0
 ;---[Vector loop]--------------------------
-.vloop:	vcode								; invoke vector code
-;------------------------------------------
-		mov		size, temp					; size = temp
-.sclr:	test	size, size					; if (size == 0)
-		jz		.exit						;     then go to exit
+.vloop:	add		sindex, SSIZE				; sindex += SSIZE
+		sub		ssize, SSIZE				; ssize -= SSIZE
+		add		tindex, TSIZE				; tindex += TSIZE
+		sub		tsize, TSIZE				; if (tsize <= TSIZE)
+		jbe		.tail						;     then process array tails
+		vector	reg, move2, ptr1, ptr2, 1 * TSIZE, 1 * SSIZE
+		add		sindex, SSIZE				; sindex += SSIZE
+		sub		ssize, SSIZE				; ssize -= SSIZE
+		add		tindex, TSIZE				; tindex += TSIZE
+		sub		tsize, TSIZE				; if (tsize <= TSIZE)
+		jbe		.tail						;     then process array tails
+		vector	reg, move2, ptr1, ptr2, 2 * TSIZE, 2 * SSIZE
+		add		sindex, SSIZE				; sindex += SSIZE
+		sub		ssize, SSIZE				; ssize -= SSIZE
+		add		tindex, TSIZE				; tindex += TSIZE
+		sub		tsize, TSIZE				; if (tsize <= TSIZE)
+		jbe		.tail						;     then process array tails
+		vector	reg, move2, ptr1, ptr2, 3 * TSIZE, 3 * SSIZE
+		add		sindex, SSIZE				; sindex += SSIZE
+		sub		ssize, SSIZE				; ssize -= SSIZE
+		add		tindex, TSIZE				; tindex += TSIZE
+		sub		tsize, TSIZE				; if (tsize <= TSIZE)
+		jbe		.tail						;     then process array tails
+		vector	reg, move2, ptr1, ptr2, 4 * TSIZE, 4 * SSIZE
+	prefetchnta	[ptr2 + PSTEP]				; prefetch next portion of temp
+		add		ptr2, 4 * SSIZE				; ptr2 += 4 * SSIZE
+		add		ptr1, 4 * TSIZE				; ptr1 += 4 * TSIZE
+		jmp		.vloop						; do while (true)
+;---[End of vector loop]-------------------
+.tail:	add		sindex, ssize				; sindex += ssize
+		add		tindex, tsize				; tindex += tsize
+		vector	reg, move1, target, source, tindex, sindex
+		ret
 ;---[Scalar loop]--------------------------
-		scalar	size						; invoke scalar code
-;------------------------------------------
+.sloop:	scalar	reg							; make scalar conversion
+		add		source, sbytes				; source++
+		add		target, tbytes				; target++
+		sub		tsize, tbytes				; tsize--
+		jnz		.sloop						; do while (tsize != 0)
+;---[Normal exit]--------------------------
 .exit:	ret
 }
-;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	CONVERT2	convert, move, scale
+
+;==============================================================================;
+;       Conversion between floating-point types                                ;
+;==============================================================================;
+
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+;       Convert flt32 to flt64                                                 ;
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+macro	CONVERT_FLT32_TO_FLT64_VECTOR	reg, move, iter1, iter2, toffst, soffst
 {
-;---[Parameters]---------------------------
-target	equ		rdi							; pointer to target array
-source	equ		rsi							; pointer to source array
-size	equ		rdx							; array size (count of elements)
-;---[Internal variables]-------------------
-temp	equ		xmm0						; temporary register
-bytes	= 1 shl scale						; size of target array element (bytes)
-;------------------------------------------
-		test	size, size					; if (size == 0)
-		jz		.exit						;     then go to exit
-;---[Loop]---------------------------------
-.loop:	convert	temp, qword [source]		; temp = convert (source[0])
-		move	[target], temp				; target[0] = temp
-		add		source, 8					; source++
-		add		target, bytes				; target++
-		sub		size, 1						; size--
-		jnz		.loop						; do while (size != 0)
-;------------------------------------------
-.exit:	ret
+		movlps	temp, [iter2 + soffst]
+	cvtps2pd	temp, temp
+		move	[iter1 + toffst], temp
 }
-;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	CONVERT3	convert, scale
+macro	CONVERT_FLT32_TO_FLT64_SCALAR	reg
 {
-;---[Parameters]---------------------------
-target	equ		rdi							; pointer to target array
-source	equ		rsi							; pointer to source array
-size	equ		rdx							; array size (count of elements)
-;---[Internal variables]-------------------
-temp	equ		rax							; temporary register
-bytes	= 1 shl scale						; size of source array element (bytes)
-;------------------------------------------
-		test	size, size					; if (size == 0)
-		jz		.exit						;     then go to exit
-;---[Loop]---------------------------------
-.loop:	convert	temp, [source]				; temp = convert (source[0])
-		mov		[target], temp				; target[0] = temp
-		add		source, bytes				; source++
-		add		target, 8					; target++
-		sub		size, 1						; size--
-		jnz		.loop						; do while (size != 0)
-;------------------------------------------
-.exit:	ret
+	cvtss2sd	temp, [source]
+		movsd	[target], temp
 }
+ConvertFlt32ToFlt64:	CONVERT	rax, movupd, movapd, shftr, CONVERT_FLT32_TO_FLT64_VECTOR, CONVERT_FLT32_TO_FLT64_SCALAR, 3, 2, 16, 8
 
-; Conversion between floating-point types
-ConvertFlt32ToFlt64:	CONVERT1	CONVERT_VECTOR_FLT32_TO_FLT64, CONVERT_SCALAR_FLT32_TO_FLT64, 3, 2, 6, 5
-ConvertFlt64ToFlt32:	CONVERT1	CONVERT_VECTOR_FLT64_TO_FLT32, CONVERT_SCALAR_FLT64_TO_FLT32, 2, 3, 6, 7
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+;       Convert flt64 to flt32                                                 ;
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+macro	CONVERT_FLT64_TO_FLT32_VECTOR	reg, move, iter1, iter2, toffst, soffst
+{
+		movupd	temp, [iter2 + soffst]
+	cvtpd2ps	temp, temp
+		move	[iter1 + toffst], temp
+}
+macro	CONVERT_FLT64_TO_FLT32_SCALAR	reg
+{
+	cvtsd2ss	temp, [source]
+		movss	[target], temp
+}
+ConvertFlt64ToFlt32:	CONVERT	eax, movlps, movlps, shftl, CONVERT_FLT64_TO_FLT32_VECTOR, CONVERT_FLT64_TO_FLT32_SCALAR, 2, 3, 8, 16
 
-; Conversion from signed integer types to floating-point types
-ConvertSint32ToFlt32:	CONVERT1	CONVERT_VECTOR_SINT32_TO_FLT32, CONVERT_SCALAR_SINT32_TO_FLT32, 2, 2, 6, 6
-ConvertSint32ToFlt64:	CONVERT1	CONVERT_VECTOR_SINT32_TO_FLT64, CONVERT_SCALAR_SINT32_TO_FLT64, 3, 2, 6, 5
-ConvertSint64ToFlt32:	CONVERT2	cvtsi2ss, movss, 2
-ConvertSint64ToFlt64:	CONVERT2	cvtsi2sd, movsd, 3
+;==============================================================================;
+;       Conversion from signed integer types to floating-point types           ;
+;==============================================================================;
 
-; Conversion from floating-point types to signed integer types
-ConvertFlt32ToSint32:	CONVERT1	CONVERT_VECTOR_FLT32_TO_SINT32, CONVERT_SCALAR_FLT32_TO_SINT32, 2, 2, 6, 6
-ConvertFlt32ToSint64:	CONVERT3	cvtss2si, 2
-ConvertFlt64ToSint32:	CONVERT1	CONVERT_VECTOR_FLT64_TO_SINT32, CONVERT_SCALAR_FLT64_TO_SINT32, 2, 3, 6, 7
-ConvertFlt64ToSint64:	CONVERT3	cvtsd2si, 3
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+;       Convert sint32 to flt32                                                ;
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+macro	CONVERT_SINT32_TO_FLT32_VECTOR	reg, move, iter1, iter2, toffst, soffst
+{
+		movdqu	temp, [iter2 + soffst]
+	cvtdq2ps	temp, temp
+		move	[iter1 + toffst], temp
+}
+macro	CONVERT_SINT32_TO_FLT32_SCALAR	reg
+{
+	cvtsi2ss 	temp, dword [source]
+		movss	[target], temp
+}
+ConvertSint32ToFlt32:	CONVERT	eax, movups, movaps, shftr, CONVERT_SINT32_TO_FLT32_VECTOR, CONVERT_SINT32_TO_FLT32_SCALAR, 2, 2, 16, 16
 
-; Truncating from floating-point types to signed integer types
-TruncateFlt32ToSint32:	CONVERT1	TRUNCATE_VECTOR_FLT32_TO_SINT32, TRUNCATE_SCALAR_FLT32_TO_SINT32, 2, 2, 6, 6
-TruncateFlt32ToSint64:	CONVERT3	cvttss2si, 2
-TruncateFlt64ToSint32:	CONVERT1	TRUNCATE_VECTOR_FLT64_TO_SINT32, TRUNCATE_SCALAR_FLT64_TO_SINT32, 2, 3, 6, 7
-TruncateFlt64ToSint64:	CONVERT3	cvttsd2si, 3
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+;       Convert sint32 to flt64                                                ;
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+macro	CONVERT_SINT32_TO_FLT64_VECTOR	reg, move, iter1, iter2, toffst, soffst
+{
+		movq	temp, [iter2 + soffst]
+	cvtdq2pd	temp, temp
+		move	[iter1 + toffst], temp
+}
+macro	CONVERT_SINT32_TO_FLT64_SCALAR	reg
+{
+	cvtsi2sd 	temp, dword [source]
+		movsd	[target], temp
+}
+ConvertSint32ToFlt64:	CONVERT	rax, movupd, movapd, shftr, CONVERT_SINT32_TO_FLT64_VECTOR, CONVERT_SINT32_TO_FLT64_SCALAR, 3, 2, 16, 8
+
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+;       Convert sint64 to flt32                                                ;
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+macro	CONVERT_SINT64_TO_FLT32_VECTOR	reg, move, iter1, iter2, toffst, soffst
+{
+	cvtsi2ss 	temp, qword [iter2 + soffst + 0 * sbytes]
+		move	[iter1 + toffst + 0 * tbytes], temp
+	cvtsi2ss 	temp, qword [iter2 + soffst + 1 * sbytes]
+		move	[iter1 + toffst + 1 * tbytes], temp
+}
+macro	CONVERT_SINT64_TO_FLT32_SCALAR	reg
+{
+	cvtsi2ss 	temp, qword [source]
+		movss	[target], temp
+}
+ConvertSint64ToFlt32:	CONVERT	eax, movss, movss, shftl, CONVERT_SINT64_TO_FLT32_VECTOR, CONVERT_SINT64_TO_FLT32_SCALAR, 2, 3, 8, 16
+
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+;       Convert sint64 to flt64                                                ;
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+macro	CONVERT_SINT64_TO_FLT64_VECTOR	reg, move, iter1, iter2, toffst, soffst
+{
+	cvtsi2sd 	temp, qword [iter2 + soffst + 0 * sbytes]
+		move	[iter1 + toffst + 0 * tbytes], temp
+	cvtsi2sd 	temp, qword [iter2 + soffst + 1 * sbytes]
+		move	[iter1 + toffst + 1 * tbytes], temp
+}
+macro	CONVERT_SINT64_TO_FLT64_SCALAR	reg
+{
+	cvtsi2sd 	temp, qword [source]
+		movsd	[target], temp
+}
+ConvertSint64ToFlt64:	CONVERT	rax, movsd, movsd, shftr, CONVERT_SINT64_TO_FLT64_VECTOR, CONVERT_SINT64_TO_FLT64_SCALAR, 3, 3, 16, 16
+
+;==============================================================================;
+;       Conversion from floating-point types to signed integer types           ;
+;==============================================================================;
+
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+;       Convert flt32 to sint32                                                ;
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+macro	CONVERT_FLT32_TO_SINT32_VECTOR	reg, move, iter1, iter2, toffst, soffst
+{
+		movups	temp, [iter2 + soffst]
+	cvtps2dq	temp, temp
+		move	[iter1 + toffst], temp
+}
+macro	CONVERT_FLT32_TO_SINT32_SCALAR	reg
+{
+	cvtss2si 	reg, [source]
+		mov		[target], reg
+}
+ConvertFlt32ToSint32:	CONVERT	eax, movdqu, movdqa, shftr, CONVERT_FLT32_TO_SINT32_VECTOR, CONVERT_FLT32_TO_SINT32_SCALAR, 2, 2, 16, 16
+
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+;       Convert flt32 to sint64                                                ;
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+macro	CONVERT_FLT32_TO_SINT64_VECTOR	reg, move, iter1, iter2, toffst, soffst
+{
+	cvtss2si 	reg, [iter2 + soffst + 0 * sbytes]
+		move	[iter1 + toffst + 0 * tbytes], reg
+	cvtss2si 	reg, [iter2 + soffst + 1 * sbytes]
+		move	[iter1 + toffst + 1 * tbytes], reg
+}
+macro	CONVERT_FLT32_TO_SINT64_SCALAR	reg
+{
+	cvtss2si 	reg, [source]
+		mov		[target], reg
+}
+ConvertFlt32ToSint64:	CONVERT	rax, mov, mov, shftr, CONVERT_FLT32_TO_SINT64_VECTOR, CONVERT_FLT32_TO_SINT64_SCALAR, 3, 2, 16, 8
+
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+;       Convert flt64 to sint32                                                ;
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+macro	CONVERT_FLT64_TO_SINT32_VECTOR	reg, move, iter1, iter2, toffst, soffst
+{
+		movupd	temp, [iter2 + soffst]
+	cvtpd2dq	temp, temp
+		move	[iter1 + toffst], temp
+}
+macro	CONVERT_FLT64_TO_SINT32_SCALAR	reg
+{
+	cvtsd2si 	reg, [source]
+		mov		[target], reg
+}
+ConvertFlt64ToSint32:	CONVERT	eax, movq, movq, shftl, CONVERT_FLT64_TO_SINT32_VECTOR, CONVERT_FLT64_TO_SINT32_SCALAR, 2, 3, 8, 16
+
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+;       Convert flt64 to sint64                                                ;
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+macro	CONVERT_FLT64_TO_SINT64_VECTOR	reg, move, iter1, iter2, toffst, soffst
+{
+	cvtsd2si 	reg, [iter2 + soffst + 0 * sbytes]
+		move	[iter1 + toffst + 0 * tbytes], reg
+	cvtsd2si 	reg, [iter2 + soffst + 1 * sbytes]
+		move	[iter1 + toffst + 1 * tbytes], reg
+}
+macro	CONVERT_FLT64_TO_SINT64_SCALAR	reg
+{
+	cvtsd2si 	reg, [source]
+		mov		[target], reg
+}
+ConvertFlt64ToSint64:	CONVERT	rax, mov, mov, shftr, CONVERT_FLT64_TO_SINT64_VECTOR, CONVERT_FLT64_TO_SINT64_SCALAR, 3, 3, 16, 16
+
+;==============================================================================;
+;       Truncating from floating-point types to signed integer types           ;
+;==============================================================================;
+
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+;       Truncate flt32 to sint32                                               ;
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+macro	TRUNCATE_FLT32_TO_SINT32_VECTOR	reg, move, iter1, iter2, toffst, soffst
+{
+		movups	temp, [iter2 + soffst]
+	cvttps2dq	temp, temp
+		move	[iter1 + toffst], temp
+}
+macro	TRUNCATE_FLT32_TO_SINT32_SCALAR	reg
+{
+	cvttss2si 	reg, [source]
+		mov		[target], reg
+}
+TruncateFlt32ToSint32:	CONVERT	eax, movdqu, movdqa, shftr, TRUNCATE_FLT32_TO_SINT32_VECTOR, TRUNCATE_FLT32_TO_SINT32_SCALAR, 2, 2, 16, 16
+
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+;       Truncate flt32 to sint64                                               ;
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+macro	TRUNCATE_FLT32_TO_SINT64_VECTOR	reg, move, iter1, iter2, toffst, soffst
+{
+	cvttss2si 	reg, [iter2 + soffst + 0 * sbytes]
+		move	[iter1 + toffst + 0 * tbytes], reg
+	cvttss2si 	reg, [iter2 + soffst + 1 * sbytes]
+		move	[iter1 + toffst + 1 * tbytes], reg
+}
+macro	TRUNCATE_FLT32_TO_SINT64_SCALAR	reg
+{
+	cvttss2si 	reg, [source]
+		mov		[target], reg
+}
+TruncateFlt32ToSint64:	CONVERT	rax, mov, mov, shftr, TRUNCATE_FLT32_TO_SINT64_VECTOR, TRUNCATE_FLT32_TO_SINT64_SCALAR, 3, 2, 16, 8
+
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+;       Truncate flt64 to sint32                                               ;
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+macro	TRUNCATE_FLT64_TO_SINT32_VECTOR	reg, move, iter1, iter2, toffst, soffst
+{
+		movupd	temp, [iter2 + soffst]
+	cvttpd2dq	temp, temp
+		move	[iter1 + toffst], temp
+}
+macro	TRUNCATE_FLT64_TO_SINT32_SCALAR	reg
+{
+	cvttsd2si 	reg, [source]
+		mov		[target], reg
+}
+TruncateFlt64ToSint32:	CONVERT	eax, movq, movq, shftl, TRUNCATE_FLT64_TO_SINT32_VECTOR, TRUNCATE_FLT64_TO_SINT32_SCALAR, 2, 3, 8, 16
+
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+;       Truncate flt64 to sint64                                               ;
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+macro	TRUNCATE_FLT64_TO_SINT64_VECTOR	reg, move, iter1, iter2, toffst, soffst
+{
+	cvttsd2si 	reg, [iter2 + soffst + 0 * sbytes]
+		move	[iter1 + toffst + 0 * tbytes], reg
+	cvttsd2si 	reg, [iter2 + soffst + 1 * sbytes]
+		move	[iter1 + toffst + 1 * tbytes], reg
+}
+macro	TRUNCATE_FLT64_TO_SINT64_SCALAR	reg
+{
+	cvttsd2si 	reg, [source]
+		mov		[target], reg
+}
+TruncateFlt64ToSint64:	CONVERT	rax, mov, mov, shftr, TRUNCATE_FLT64_TO_SINT64_VECTOR, TRUNCATE_FLT64_TO_SINT64_SCALAR, 3, 3, 16, 16
 
 ;******************************************************************************;
 ;       Bitwise operations                                                     ;
@@ -5303,8 +5212,12 @@ MaxAbs_flt64:	MINMAX_FLT	max, MINF_FLT64, 1, d
 ;******************************************************************************;
 
 ;==============================================================================;
-;       Minimum value                                                          ;
+;       Regular array search                                                   ;
 ;==============================================================================;
+
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+;       Minimum value                                                          ;
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 
 ; Unsigned integer types
 Min_uint8:		MINMAX_INT	min, al, dl, 0xFF, b, u, b
@@ -5320,9 +5233,9 @@ Min_sint32:		MINMAX_INT	min, eax, edx, 0x7FFFFFFF, l, s, d
 Min_flt32:		MINMAX_FLT	min, PINF_FLT32, 0, s
 Min_flt64:		MINMAX_FLT	min, PINF_FLT64, 0, d
 
-;==============================================================================;
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 ;       Maximum value                                                          ;
-;==============================================================================;
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 
 ; Unsigned integer types
 Max_uint8:		MINMAX_INT	max, al, dl, 0x00, a, u, b
@@ -5337,6 +5250,85 @@ Max_sint32:		MINMAX_INT	max, eax, edx, 0x80000000, g, s, d
 ; Floating-point types
 Max_flt32:		MINMAX_FLT	max, MINF_FLT32, 0, s
 Max_flt64:		MINMAX_FLT	max, MINF_FLT64, 0, d
+
+;==============================================================================;
+;       Object array search                                                    ;
+;==============================================================================;
+macro	MINMAX_OBJ	cmd, cond, bwd
+{
+;---[Parameters]---------------------------
+array	equ		rdi							; pointer to array
+size	equ		rsi							; array size (count of elements)
+func	equ		rdx							; pointer to compare function
+;---[Internal variables]-------------------
+result	equ		rax							; result register
+ptr		equ		r8							; pointer to current element
+value	equ		r12							; min or max max value
+vptr	equ		r13							; position of min or max value
+stack	equ		rsp							; stack pointer
+s_value	equ		stack + 0 * 8				; stack position of "value" variable
+s_vptr	equ		stack + 1 * 8				; stack position of "vptr" variable
+s_array	equ		stack + 2 * 8				; stack position of "array" variable
+s_size	equ		stack + 3 * 8				; stack position of "size" variable
+s_func	equ		stack + 4 * 8				; stack position of "func" variable
+s_ptr	equ		stack + 5 * 8				; stack position of "ptr" variable
+space	= 7 * 8								; stack size required by the procedure
+;------------------------------------------
+		sub		stack, space				; reserving stack size for local vars
+		test	size, size					; if (size == 0)
+		jz		.ntfnd						;     then go to exit
+;---[Normal execution branch]--------------
+if bwd
+		lea		ptr, [array + size * 8 - 8]	; ptr = array + size - 1
+else
+		mov		ptr, array					; ptr = array
+end if
+		mov		[s_value], value			; save old value of "value" variable
+		mov		[s_vptr], vptr				; save old value of "vptr" variable
+		mov		[s_array], array			; save "array" variable into the stack
+		mov		[s_size], size				; save "size" variable into the stack
+		mov		[s_func], func				; save "func" variable into the stack
+		mov		[s_ptr], ptr				; save "ptr" variable into the stack
+		mov		value, [ptr]				; value = ptr[0].key
+		mov		vptr, ptr					; vptr = ptr
+		jmp		.skip
+;---[Search loop]--------------------------
+.loop:	mov		param2, [ptr]
+		mov		param1, value
+		call	qword [s_func]				; result = Compare (value, ptr[0])
+		mov		ptr, [s_ptr]				; get "ptr" variable from the stack
+		cmp		result, 0					; if (result cond 0)
+	cmov#cond	value, [ptr]				;     value = ptr[0].key
+	cmov#cond	vptr, ptr					;     vptr = ptr
+.skip:	cmd		ptr, 8						; change ptr position
+		mov		[s_ptr], ptr				; save "ptr" variable into the stack
+		sub		qword [s_size], 1			; size--
+		jnz		.loop						; do while (size != 0)
+;---[Normal exit branch]-------------------
+		sub		vptr, [s_array]
+		shr		vptr, 3
+		mov		result, vptr				; return vptr - array
+		mov		value, [s_value]			; restore old value of "value" variable
+		mov		vptr, [s_vptr]				; restore old value of "vptr" variable
+		add		stack, space				; restoring back the stack pointer
+		ret
+;---[Not found branch]---------------------
+.ntfnd:	mov		result, NOT_FOUND			; return NOT_FOUND
+		add		stack, space				; restoring back the stack pointer
+		ret
+}
+
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+;       Minimum value                                                          ;
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+MinFwd:	MINMAX_OBJ	add, g, 0
+MinBwd:	MINMAX_OBJ	sub, g, 1
+
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+;       Maximum value                                                          ;
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+MaxFwd:	MINMAX_OBJ	add, l, 0
+MaxBwd:	MINMAX_OBJ	sub, l, 1
 
 ;******************************************************************************;
 ;       Linear search                                                          ;
@@ -5378,7 +5370,7 @@ bmask	= bytes - 1							; elements aligning mask
 	prefetchnta	[array]						; prefetch data
 		xor		index, index				; index = 0
 		test	size, size					; if (size == 0)
-		jz		.ntfnd						;     then go to not found branch
+		jz		.ntfnd						;     return NOT_FOUND
 		shftl	size, scale					; convert size to bytes
 if scale <> 0
 		test	array, bmask				; if elements have wrong alignment
@@ -5402,7 +5394,7 @@ end if
 		jnz		.brk						;     then break the loop
 		add		index, VSIZE				; index += VSIZE
 		sub		size, VSIZE					; if (size <= VSIZE)
-		jbe		.ntfnd						;     then go to not found branch
+		jbe		.ntfnd						;     return NOT_FOUND
 ;---[Vector loop]--------------------------
 .vloop:	movdqa	flags, [array + 1*VSIZE]
 	pcmpeq#x	flags, pattern				; check array[1] for pattaren
@@ -5411,7 +5403,7 @@ end if
 		jnz		.brk						;     then break the loop
 		add		index, VSIZE				; index += VSIZE
 		sub		size, VSIZE					; if (size <= VSIZE)
-		jbe		.ntfnd						;     then go to not found branch
+		jbe		.ntfnd						;     return NOT_FOUND
 		movdqa	flags, [array + 2*VSIZE]
 	pcmpeq#x	flags, pattern				; check array[2] for pattaren
 	pmovmskb	fmask, flags				; save check results to fmask
@@ -5419,7 +5411,7 @@ end if
 		jnz		.brk						;     then break the loop
 		add		index, VSIZE				; index += VSIZE
 		sub		size, VSIZE					; if (size <= VSIZE)
-		jbe		.ntfnd						;     then go to not found branch
+		jbe		.ntfnd						;     return NOT_FOUND
 		movdqa	flags, [array + 3*VSIZE]
 	pcmpeq#x	flags, pattern				; check array[3] for pattaren
 	pmovmskb	fmask, flags				; save check results to fmask
@@ -5427,7 +5419,7 @@ end if
 		jnz		.brk						;     then break the loop
 		add		index, VSIZE				; index += VSIZE
 		sub		size, VSIZE					; if (size <= VSIZE)
-		jbe		.ntfnd						;     then go to not found branch
+		jbe		.ntfnd						;     return NOT_FOUND
 		movdqa	flags, [array + 4*VSIZE]
 	pcmpeq#x	flags, pattern				; check array[4] for pattaren
 	pmovmskb	fmask, flags				; save check results to fmask
@@ -5435,14 +5427,14 @@ end if
 		jnz		.brk						;     then break the loop
 		add		index, VSIZE				; index += VSIZE
 		sub		size, VSIZE					; if (size <= VSIZE)
-		jbe		.ntfnd						;     then go to not found branch
+		jbe		.ntfnd						;     return NOT_FOUND
 	prefetchnta	[array + PSTEP]				; prefetch next portion of data
 		add		array, 4 * VSIZE			; array += 4 * VSIZE
 		jmp		.vloop						; do while (true)
 ;---[End of vector loop]-------------------
 .brk:	bsf		fmask, fmask				; find index of first occurence of pattern
 		cmp		size, fmask					; if (size <= fmask)
-		jbe		.ntfnd						;     then go to not found branch
+		jbe		.ntfnd						;     return NOT_FOUND
 		add		index, fmask				; index += fmask
 		shftr	index, scale				; return index
 		ret
@@ -5497,7 +5489,7 @@ bmask	= bytes - 1							; elements aligning mask
 	prefetchnta	[array]						; prefetch data
 		mov		index, size					; index = size
 		test	size, size					; if (size == 0)
-		jz		.ntfnd						;     then go to not found branch
+		jz		.ntfnd						;     return NOT_FOUND
 		shftl	size, scale					; convert size to bytes
 if scale <> 0
 		test	array, bmask				; if elements have wrong alignment
@@ -5507,7 +5499,7 @@ end if
 		movq	pattern, patt				; pattern = patt
 		mov		aindex, array
 		neg		aindex
-		and 	aindex, VMASK				; get array offset from vector boundary
+		and		aindex, VMASK				; get array offset from vector boundary
 		lea		array, [array+aindex-VSIZE]	; align pointer to vector boundary
 		clone	pattern, scale				; duplicate value through the entire register
 ;---[Unaligned search for pattern]---------
@@ -5522,7 +5514,7 @@ end if
 		jnz		.brk						;     then break the loop
 		sub		index, VSIZE				; index -= VSIZE
 		sub		size, VSIZE					; if (size <= VSIZE)
-		jbe		.ntfnd						;     then go to not found branch
+		jbe		.ntfnd						;     return NOT_FOUND
 ;---[Vector loop]--------------------------
 .vloop:	movdqa	flags, [array - 1*VSIZE]
 	pcmpeq#x	flags, pattern				; check array[-1] for pattaren
@@ -5531,7 +5523,7 @@ end if
 		jnz		.brk						;     then break the loop
 		sub		index, VSIZE				; index -= VSIZE
 		sub		size, VSIZE					; if (size <= VSIZE)
-		jbe		.ntfnd						;     then go to not found branch
+		jbe		.ntfnd						;     return NOT_FOUND
 		movdqa	flags, [array - 2*VSIZE]
 	pcmpeq#x	flags, pattern				; check array[-2] for pattaren
 	pmovmskb	fmask, flags				; save check results to fmask
@@ -5539,7 +5531,7 @@ end if
 		jnz		.brk						;     then break the loop
 		sub		index, VSIZE				; index -= VSIZE
 		sub		size, VSIZE					; if (size <= VSIZE)
-		jbe		.ntfnd						;     then go to not found branch
+		jbe		.ntfnd						;     return NOT_FOUND
 		movdqa	flags, [array - 3*VSIZE]
 	pcmpeq#x	flags, pattern				; check array[-3] for pattaren
 	pmovmskb	fmask, flags				; save check results to fmask
@@ -5547,7 +5539,7 @@ end if
 		jnz		.brk						;     then break the loop
 		sub		index, VSIZE				; index -= VSIZE
 		sub		size, VSIZE					; if (size <= VSIZE)
-		jbe		.ntfnd						;     then go to not found branch
+		jbe		.ntfnd						;     return NOT_FOUND
 		movdqa	flags, [array - 4*VSIZE]
 	pcmpeq#x	flags, pattern				; check array[-4] for pattaren
 	pmovmskb	fmask, flags				; save check results to fmask
@@ -5555,14 +5547,14 @@ end if
 		jnz		.brk						;     then break the loop
 		sub		index, VSIZE				; index -= VSIZE
 		sub		size, VSIZE					; if (size <= VSIZE)
-		jbe		.ntfnd						;     then go to not found branch
+		jbe		.ntfnd						;     return NOT_FOUND
 	prefetchnta	[array - PSTEP]				; prefetch next portion of data
 		sub		array, 4 * VSIZE			; array -= 4 * VSIZE
 		jmp		.vloop						; do while (true)
 ;---[End of vector loop]-------------------
 .brk:	bsr		fmask, fmask				; find index of first occurence of pattern
 		add		index, fmask				; if (index += fmask < 0), then go to not found branch
-		js		.ntfnd						;     then go to not found branch
+		js		.ntfnd						;     return NOT_FOUND
 		shftr	index, scale				; return index
 		ret
 if scale <> 0
@@ -5586,11 +5578,8 @@ FindBwd64:	FIND_BWD	rdx, q
 ;==============================================================================;
 ;       Object array search                                                    ;
 ;==============================================================================;
-
-;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
-;       Forward direction search                                               ;
-;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
-FindFwd:
+macro	FIND_OBJ	cmd, bwd
+{
 ;---[Parameters]---------------------------
 array	equ		rdi							; pointer to array
 size	equ		rsi							; array size (count of elements)
@@ -5609,61 +5598,13 @@ space	= 5 * 8								; stack size required by the procedure
 ;------------------------------------------
 		sub		stack, space				; reserving stack size for local vars
 		test	size, size					; if (size == 0)
-		jz		.exit						;     then go to exit
+		jz		.ntfnd						;     return NOT_FOUND
 ;---[Normal execution branch]--------------
-		mov		ptr, array					; ptr = array
-		mov		[s_array], array			; save "array" variable into the stack
-		mov		[s_size], size				; save "size" variable into the stack
-		mov		[s_value], value			; save "value" variable into the stack
-		mov		[s_func], func				; save "func" variable into the stack
-		mov		[s_ptr], ptr				; save "ptr" variable into the stack
-;---[Search loop]--------------------------
-.loop:	mov		param2, [ptr]
-		mov		param1, [s_value]
-		call	qword [s_func]				; result = Compare (value, ptr[0])
-		mov		ptr, [s_ptr]				; get "ptr" variable from the stack
-		test	result, result				; if (result == 0)
-		jz		.found						;     then go to found branch
-		add		ptr, 8						; ptr++
-		mov		[s_ptr], ptr				; save "ptr" variable into the stack
-		sub		qword [s_size], 1			; size--
-		jnz		.loop						; do while (size != 0)
-;---[End of search loop]-------------------
-.exit:	add		stack, space				; restoring back the stack pointer
-		mov		result, NOT_FOUND			; return NOT_FOUND
-		ret
-;---[Found branch]-------------------------
-.found:	sub		ptr, [s_array]
-		shr		ptr, 3
-		add		stack, space				; restoring back the stack pointer
-		mov		result, ptr					; return ptr - array
-		ret
-
-;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
-;       Backward direction search                                              ;
-;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
-FindBwd:
-;---[Parameters]---------------------------
-array	equ		rdi							; pointer to array
-size	equ		rsi							; array size (count of elements)
-value	equ		rdx							; value to find
-func	equ		rcx							; pointer to compare function
-;---[Internal variables]-------------------
-result	equ		rax							; result register
-ptr		equ		r8							; pointer to current element
-stack	equ		rsp							; stack pointer
-s_array	equ		stack + 0 * 8				; stack position of "array" variable
-s_size	equ		stack + 1 * 8				; stack position of "size" variable
-s_value	equ		stack + 2 * 8				; stack position of "value" variable
-s_func	equ		stack + 3 * 8				; stack position of "func" variable
-s_ptr	equ		stack + 4 * 8				; stack position of "ptr" variable
-space	= 5 * 8								; stack size required by the procedure
-;------------------------------------------
-		sub		stack, space				; reserving stack size for local vars
-		test	size, size					; if (size == 0)
-		jz		.exit						;     then go to exit
-;---[Normal execution branch]--------------
+if bwd
 		lea		ptr, [array + size * 8 - 8]	; ptr = array + size - 1
+else
+		mov		ptr, array					; ptr = array
+end if
 		mov		[s_array], array			; save "array" variable into the stack
 		mov		[s_size], size				; save "size" variable into the stack
 		mov		[s_value], value			; save "value" variable into the stack
@@ -5676,20 +5617,23 @@ space	= 5 * 8								; stack size required by the procedure
 		mov		ptr, [s_ptr]				; get "ptr" variable from the stack
 		test	result, result				; if (result == 0)
 		jz		.found						;     then go to found branch
-		sub		ptr, 8						; ptr--
+		cmd		ptr, 8						; change ptr position
 		mov		[s_ptr], ptr				; save "ptr" variable into the stack
 		sub		qword [s_size], 1			; size--
 		jnz		.loop						; do while (size != 0)
 ;---[End of search loop]-------------------
-.exit:	add		stack, space				; restoring back the stack pointer
-		mov		result, NOT_FOUND			; return NOT_FOUND
+.ntfnd:	mov		result, NOT_FOUND			; return NOT_FOUND
+		add		stack, space				; restoring back the stack pointer
 		ret
 ;---[Found branch]-------------------------
 .found:	sub		ptr, [s_array]
 		shr		ptr, 3
-		add		stack, space				; restoring back the stack pointer
 		mov		result, ptr					; return ptr - array
+		add		stack, space				; restoring back the stack pointer
 		ret
+}
+FindFwd:	FIND_OBJ	add, 0
+FindBwd:	FIND_OBJ	sub, 1
 
 ;******************************************************************************;
 ;       Binary search                                                          ;
@@ -5713,7 +5657,7 @@ pos		equ		r11							; matched position
 bytes	= 1 shl scale						; size of array element (bytes)
 ;------------------------------------------
 		test	size, size					; if (size == 0)
-		jz		.ntfnd						;     then return NOT_FOUND
+		jz		.ntfnd						;     return NOT_FOUND
 ;---[Normal execution branch]--------------
 		xor		left, left					; left = 0
 		mov		pos, NOT_FOUND				; pos = NOT_FOUND
@@ -5948,7 +5892,7 @@ space	= 7 * 8								; stack size required by the procedure
 ;------------------------------------------
 		sub		stack, space				; reserving stack size for local vars
 		test	size, size					; if (size == 0)
-		jz		.ntfnd						;     then return NOT_FOUND
+		jz		.ntfnd						;     return NOT_FOUND
 ;---[Normal execution branch]--------------
 		xor		left, left					; left = 0
 		mov		[s_pos], pos				; save old value of "pos" variable
@@ -5966,9 +5910,9 @@ space	= 7 * 8								; stack size required by the procedure
 		mov		param1, [s_value]
 		call	qword [s_func]				; result = Compare (value, array[median])
 		mov		array, [s_array]			; get "array" variable from the stack
-		mov		median, [s_med]				; get "median" variable from the stack
 		mov		left, [s_left]				; get "left" variable from the stack
 		mov		right, [s_right]			; get "right" variable from the stack
+		mov		median, [s_med]				; get "median" variable from the stack
 		lea		median1, [median + 1]		; median1 = median + 1
 		cmp		result, 0					; if (value cond array[median])
 	cmov#cond1	pos, median					;     update matched position
@@ -5984,8 +5928,8 @@ space	= 7 * 8								; stack size required by the procedure
 		add		stack, space				; restoring back the stack pointer
 		ret
 ;---[Not found branch]---------------------
-.ntfnd:	add		stack, space				; restoring back the stack pointer
-		mov		result, NOT_FOUND			; return NOT_FOUND
+.ntfnd:	mov		result, NOT_FOUND			; return NOT_FOUND
+		add		stack, space				; restoring back the stack pointer
 		ret
 }
 
@@ -5993,60 +5937,40 @@ space	= 7 * 8								; stack size required by the procedure
 ;       Ascending sort order                                                   ;
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 
-;------------------------------------------------------------------------------;
-;       Searching for equal element                                            ;
-;------------------------------------------------------------------------------;
+; Searching for equal element
 FindFirstEqualAsc:		FINDBIN_OBJ		e, g
 FindLastEqualAsc:		FINDBIN_OBJ		e, ge
 
-;------------------------------------------------------------------------------;
-;       Searching for greater element                                          ;
-;------------------------------------------------------------------------------;
+; Searching for greater element
 FindGreatAsc:			FINDBIN_OBJ		l, ge
 
-;------------------------------------------------------------------------------;
-;       Searching for greater or equal element                                 ;
-;------------------------------------------------------------------------------;
+; Searching for greater or equal element
 FindGreatOrEqualAsc:	FINDBIN_OBJ		le, g
 
-;------------------------------------------------------------------------------;
-;       Searching for less element                                             ;
-;------------------------------------------------------------------------------;
+; Searching for less element
 FindLessAsc:			FINDBIN_OBJ		g, g
 
-;------------------------------------------------------------------------------;
-;       Searching for less or equal element                                    ;
-;------------------------------------------------------------------------------;
+; Searching for less or equal element
 FindLessOrEqualAsc:		FINDBIN_OBJ		ge, ge
 
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 ;       Descending sort order                                                  ;
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 
-;------------------------------------------------------------------------------;
-;       Searching for equal element                                            ;
-;------------------------------------------------------------------------------;
+; Searching for equal element
 FindFirstEqualDsc:		FINDBIN_OBJ		e, l
 FindLastEqualDsc:		FINDBIN_OBJ		e, le
 
-;------------------------------------------------------------------------------;
-;       Searching for less element                                             ;
-;------------------------------------------------------------------------------;
+; Searching for less element
 FindLessDsc:			FINDBIN_OBJ		g, le
 
-;------------------------------------------------------------------------------;
-;       Searching for less or equal element                                    ;
-;------------------------------------------------------------------------------;
+; Searching for less or equal element
 FindLessOrEqualDsc:		FINDBIN_OBJ		ge, l
 
-;------------------------------------------------------------------------------;
-;       Searching for greater element                                          ;
-;------------------------------------------------------------------------------;
+; Searching for greater element
 FindGreatDsc:			FINDBIN_OBJ		l, l
 
-;------------------------------------------------------------------------------;
-;       Searching for greater or equal element                                 ;
-;------------------------------------------------------------------------------;
+; Searching for greater or equal element
 FindGreatOrEqualDsc:	FINDBIN_OBJ		le, le
 
 ;******************************************************************************;
@@ -6242,6 +6166,7 @@ space	= 5 * 8								; stack size required by the procedure
 		sub		stack, space				; reserving stack size for local vars
 		test	size, size					; if (size == 0)
 		jz		.ntfnd						;     return 0
+;---[Normal execution branch]--------------
 		mov		[s_array], array			; save "array" variable into the stack
 		mov		[s_size], size				; save "size" variable into the stack
 		mov		[s_value], value			; save "value" variable into the stack
@@ -6254,12 +6179,12 @@ space	= 5 * 8								; stack size required by the procedure
 		mov		value, [s_value]			; get "value" variable from the stack
 		call	func2						; result = func2 (array, size, value)
 		sub		result, [s_res]				; correct result
-		add		stack, space				; restoring back the stack pointer
 		add		result, 1					; return result + 1
+		add		stack, space				; restoring back the stack pointer
 		ret
 ;---[Not found branch]---------------------
-.ntfnd:	add		stack, space				; restoring back the stack pointer
-		xor		result, result				; return 0
+.ntfnd:	xor		result, result				; return 0
+		add		stack, space				; restoring back the stack pointer
 		ret
 }
 
@@ -6318,6 +6243,7 @@ space	= 5 * 8								; stack size required by the procedure
 		sub		stack, space				; reserving stack size for local vars
 		test	size, size					; if (size == 0)
 		jz		.ntfnd						;     return 0
+;---[Normal execution branch]--------------
 		mov		[s_array], array			; save "array" variable into the stack
 		mov		[s_size], size				; save "size" variable into the stack
 		mov		[s_value], value			; save "value" variable into the stack
@@ -6332,23 +6258,15 @@ space	= 5 * 8								; stack size required by the procedure
 		mov		func, [s_func]				; get "func" variable from the stack
 		call	func2						; result = func2 (array, size, value, func)
 		sub		result, [s_res]				; correct result
-		add		stack, space				; restoring back the stack pointer
 		add		result, 1					; return result + 1
+		add		stack, space				; restoring back the stack pointer
 		ret
 ;---[Not found branch]---------------------
-.ntfnd:	add		stack, space				; restoring back the stack pointer
-		xor		result, result				; return 0
+.ntfnd:	xor		result, result				; return 0
+		add		stack, space				; restoring back the stack pointer
 		ret
 }
-
-;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
-;       Ascending sort order                                                   ;
-;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 CountAsc:	COUNTBIN_OBJ	FindFirstEqualAsc, FindLastEqualAsc
-
-;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
-;       Descending sort order                                                  ;
-;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 CountDsc:	COUNTBIN_OBJ	FindFirstEqualDsc, FindLastEqualDsc
 
 ;******************************************************************************;
@@ -6553,7 +6471,7 @@ macro	REVERSE	key1, key2, scale
 array	equ		rdi							; pointer to array
 size	equ		rsi							; array size (count of elements)
 ;---[Internal variables]-------------------
-ptr		equ 	rax							; pointer to last element of array
+ptr		equ		rax							; pointer to last element of array
 bytes	= 1 shl scale						; size of array element (bytes)
 ;------------------------------------------
 		lea		ptr, [array + size * bytes]	; ptr = array + size
@@ -6585,7 +6503,7 @@ Reverse:
 array	equ		rdi							; pointer to object array
 size	equ		rsi							; array size (count of elements)
 ;---[Internal variables]-------------------
-ptr		equ 	rax							; pointer to last element of array
+ptr		equ		rax							; pointer to last element of array
 key1	equ		r8							; temporary key #1
 key2	equ		r9							; temporary key #2
 ;------------------------------------------
@@ -6714,8 +6632,8 @@ space	= 7 * 8								; stack size required by the procedure
 		mov		unique, [s_uniq]			; get "unique" variable from the stack
 .exit:	sub		ptr, unique
 		shr		ptr, 3
-		add		stack, space				; restoring back the stack pointer
 		mov		result, ptr					; return ptr - unique
+		add		stack, space				; restoring back the stack pointer
 		ret
 
 ;******************************************************************************;
@@ -6852,8 +6770,8 @@ space	= 9 * 8								; stack size required by the procedure
 		mov		unique, [s_uniq]			; get "unique" variable from the stack
 .exit:	sub		ptr, unique
 		shr		ptr, 3
-		add		stack, space				; restoring back the stack pointer
 		mov		result, ptr					; return ptr - unique
+		add		stack, space				; restoring back the stack pointer
 		ret
 
 ;******************************************************************************;
@@ -7365,7 +7283,7 @@ bytes	= 1 shl scale						; size of array element (bytes)
 ;---[end if]-------------------------------
 .end:	cmp		size, minsize
 		ja		.loop						; do while (size > minsize)
-;---[End of sorting loop]------------------
+;---[Insert sort]--------------------------
 		jmp		insertsort					; call insertsort (array, size)
 .exit:	ret
 }
@@ -7513,7 +7431,7 @@ bytes	= 1 shl scale						; size of array element (bytes)
 ;---[end if]-------------------------------
 .end:	cmp		size, minsize
 		ja		.loop						; do while (size > minsize)
-;---[End of sorting loop]------------------
+;---[Insert sort]--------------------------
 		jmp		insertsort					; call insertsort (array, ptr, size)
 .exit:	ret
 }
@@ -7604,7 +7522,7 @@ minsize	= 32								; min array size is aceptable for Quick sort
 		shr		half, 1						; half = size / 2
 		mov		left, -1					; left = -1
 		mov		right, size					; right = size
-		mov		median, [array + median * 8]; median = array[median]
+		mov		median, [array + half * 8]	; median = array[half]
 		mov		[s_array], array			; save "array" variable into the stack
 		mov		[s_size], size				; save "size" variable into the stack
 		mov		[s_func], func				; save "func" variable into the stack
@@ -7619,8 +7537,8 @@ minsize	= 32								; min array size is aceptable for Quick sort
 ;---[Internal loop 1]----------------------
 .loop1:	mov		left, [s_left]				; get "left" variable from the stack
 		add		left, 1						; left++
-		mov		key1, [array + left * 8]	; key1 = array[left]
 		mov		[s_left], left				; save "left" variable into the stack
+		mov		key1, [array + left * 8]	; key1 = array[left]
 		mov		param2, [s_med]
 		mov		param1, key1
 		call	qword [s_func]				; result = Compare (array[left], median)
@@ -7630,8 +7548,8 @@ minsize	= 32								; min array size is aceptable for Quick sort
 ;---[Internal loop 2]----------------------
 .loop2:	mov		right, [s_right]			; get "right" variable from the stack
 		sub		right, 1					; right--
-		mov		key2, [array + right * 8]	; key2 = array[right]
 		mov		[s_right], right			; save "right" variable into the stack
+		mov		key2, [array + right * 8]	; key2 = array[right]
 		mov		param2, [s_med]
 		mov		param1, key2
 		call	qword [s_func]				; result = Compare (array[right], median)
@@ -7644,7 +7562,7 @@ minsize	= 32								; min array size is aceptable for Quick sort
 		cmp		left, right
 		jb		.swap						; do while (left < right)
 ;---[End of swap loop]---------------------
-		mov		size, [s_size]				; get "size" variable from the stack
+		mov		rsize, [s_size]				; get "size" variable from the stack
 		add		right, 1
 		sub		rsize, right				; rsize = size - (right + 1)
 		lea		rarray, [array + right * 8]	; rarray = array + (right + 1)
@@ -7660,6 +7578,7 @@ minsize	= 32								; min array size is aceptable for Quick sort
 		call	.start						; call Sort (larray, lsize, func)
 		mov		rarray, [s_array]			; get "rarray" variable from the stack
 		mov		rsize, [s_size]				; get "rsize" variable from the stack
+		mov		func, [s_func]				; get "func" variable from the stack
 @@:		mov		array, rarray				; }
 		jmp		.end
 ;---[else]---------------------------------
@@ -7672,14 +7591,15 @@ minsize	= 32								; min array size is aceptable for Quick sort
 		call	.start						; call Sort (rarray, rsize, func)
 		mov		larray, [s_array]			; get "larray" variable from the stack
 		mov		lsize, [s_size]				; get "lsize" variable from the stack
+		mov		func, [s_func]				; get "func" variable from the stack
 @@:		mov		size, lsize					; }
 ;---[end if]-------------------------------
 .end:	cmp		size, minsize
-		ja		.loop						; do while (size > 1)
-;---[End of sorting loop]------------------
+		ja		.loop						; do while (size > minsize)
+;---[Insert sort]--------------------------
+		mov		func, [s_func]				; get "func" variable from the stack
 		mov		key1, [s_key1]				; restore old value of "key1" variable
 		mov		key2, [s_key2]				; restore old value of "key2" variable
-		mov		func, [s_func]				; get "func" variable from the stack
 		add		stack, space				; restoring back the stack pointer
 		jmp		insertsort					; call insertsort (array, size, func)
 .exit:	ret
@@ -7702,7 +7622,7 @@ QuickSortDsc:	QUICKSORT_OBJ	InsertSortDsc, g, l
 ;==============================================================================;
 ;       Regular array sorting                                                  ;
 ;==============================================================================;
-macro	MERGESORT	insertsort, mergefunc, copyfunc
+macro	MERGESORT	insertsort, mergefunc, copyfunc, scale
 {
 ;---[Parameters]---------------------------
 array	equ		rdi							; pointer to array
@@ -7715,6 +7635,7 @@ s_temp	equ		stack + 1 * 8				; stack position of "temp" variable
 s_size	equ		stack + 2 * 8				; stack position of "size" variable
 space	= 3 * 8								; stack size required by the procedure
 minsize	= 32								; min array size is aceptable for Merge sort
+bytes	= 1 shl scale						; size of array element (bytes)
 ;------------------------------------------
 		cmp		size, 1						; if (size <= 1)
 		jbe		.exit						;     then go to exit
@@ -7733,29 +7654,31 @@ minsize	= 32								; min array size is aceptable for Merge sort
 		mov		temp, [s_temp]				; get "temp" variable from the stack
 		mov		size, [s_size]				; get "size" variable from the stack
 		shr		size, 1						; size /= 2
-		lea		array, [array + size * 8]
-		lea		temp, [temp + size * 8]
+		lea		array, [array + size * bytes]
 		neg		size
 		add		size, [s_size]
 		call	.start						; call Sort (array + size / 2, temp + size / 2, size - size / 2)
+;---[Copy data into temporary array]-------
+		mov		size, [s_size]				; get "size" variable from the stack
+		shr		size, 1						; size /= 2
+		mov		param3, size
+		mov		param2, [s_array]
+		mov		param1, [s_temp]
+		call	copyfunc					; call copyfunc (temp, array, size / 2)
 ;---[Merge sorted arrays]------------------
 		mov		array, [s_array]			; get "array" variable from the stack
+		mov		temp, [s_temp]				; get "temp" variable from the stack
 		mov		size, [s_size]				; get "size" variable from the stack
 		shr		size, 1						; size /= 2
 		mov		param5, size
 		neg		param5
 		add		param5, [s_size]
-		lea		param4, [array + size * 8]
+		lea		param4, [array + size * bytes]
 		mov		param3, size
-		mov		param2, array
-		mov		param1, [s_temp]
-		call	mergefunc					; call mergefunc (temp, array, size / 2, array + size / 2, size - size / 2)
-;---[Copy data from temporary array]-------
-		mov		param3, [s_size]
-		mov		param2, [s_temp]
-		mov		param1, [s_array]
+		mov		param2, temp
+		mov		param1, array
 		add		stack, space				; restoring back the stack pointer
-		jmp		copyfunc					; call copyfunc (array, temp, size)
+		jmp		mergefunc					; call mergefunc (array, temp, size / 2, array + size / 2, size - size / 2)
 ;---[Insert sort branch]-------------------
 .ins:	mov		param1, array
 		mov		param2, size
@@ -7802,16 +7725,16 @@ space	= 3 * 8								; stack size required by the procedure
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 
 ; Unsigned integer types
-MergeSortAsc_uint8:		MERGESORT	InsertSortAsc_uint8, MergeAsc_uint8, CopyFwd8
-MergeSortAsc_uint16:	MERGESORT	InsertSortAsc_uint16, MergeAsc_uint16, CopyFwd16
-MergeSortAsc_uint32:	MERGESORT	InsertSortAsc_uint32, MergeAsc_uint32, CopyFwd32
-MergeSortAsc_uint64:	MERGESORT	InsertSortAsc_uint64, MergeAsc_uint64, CopyFwd64
+MergeSortAsc_uint8:		MERGESORT	InsertSortAsc_uint8, MergeAsc_uint8, CopyFwd8, 0
+MergeSortAsc_uint16:	MERGESORT	InsertSortAsc_uint16, MergeAsc_uint16, CopyFwd16, 1
+MergeSortAsc_uint32:	MERGESORT	InsertSortAsc_uint32, MergeAsc_uint32, CopyFwd32, 2
+MergeSortAsc_uint64:	MERGESORT	InsertSortAsc_uint64, MergeAsc_uint64, CopyFwd64, 3
 
 ; Signed integer types
-MergeSortAsc_sint8:		MERGESORT	InsertSortAsc_sint8, MergeAsc_sint8, CopyFwd8
-MergeSortAsc_sint16:	MERGESORT	InsertSortAsc_sint16, MergeAsc_sint16, CopyFwd16
-MergeSortAsc_sint32:	MERGESORT	InsertSortAsc_sint32, MergeAsc_sint32, CopyFwd32
-MergeSortAsc_sint64:	MERGESORT	InsertSortAsc_sint64, MergeAsc_sint64, CopyFwd64
+MergeSortAsc_sint8:		MERGESORT	InsertSortAsc_sint8, MergeAsc_sint8, CopyFwd8, 0
+MergeSortAsc_sint16:	MERGESORT	InsertSortAsc_sint16, MergeAsc_sint16, CopyFwd16, 1
+MergeSortAsc_sint32:	MERGESORT	InsertSortAsc_sint32, MergeAsc_sint32, CopyFwd32, 2
+MergeSortAsc_sint64:	MERGESORT	InsertSortAsc_sint64, MergeAsc_sint64, CopyFwd64, 3
 
 ; Floating-point types
 MergeSortAsc_flt32:		SORT1	MergeSortAsc_sint32, Map_flt32
@@ -7822,16 +7745,16 @@ MergeSortAsc_flt64:		SORT1	MergeSortAsc_sint64, Map_flt64
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 
 ; Unsigned integer types
-MergeSortDsc_uint8:		MERGESORT	InsertSortDsc_uint8, MergeDsc_uint8, CopyFwd8
-MergeSortDsc_uint16:	MERGESORT	InsertSortDsc_uint16, MergeDsc_uint16, CopyFwd16
-MergeSortDsc_uint32:	MERGESORT	InsertSortDsc_uint32, MergeDsc_uint32, CopyFwd32
-MergeSortDsc_uint64:	MERGESORT	InsertSortDsc_uint64, MergeDsc_uint64, CopyFwd64
+MergeSortDsc_uint8:		MERGESORT	InsertSortDsc_uint8, MergeDsc_uint8, CopyFwd8, 0
+MergeSortDsc_uint16:	MERGESORT	InsertSortDsc_uint16, MergeDsc_uint16, CopyFwd16, 1
+MergeSortDsc_uint32:	MERGESORT	InsertSortDsc_uint32, MergeDsc_uint32, CopyFwd32, 2
+MergeSortDsc_uint64:	MERGESORT	InsertSortDsc_uint64, MergeDsc_uint64, CopyFwd64, 3
 
 ; Signed integer types
-MergeSortDsc_sint8:		MERGESORT	InsertSortDsc_sint8, MergeDsc_sint8, CopyFwd8
-MergeSortDsc_sint16:	MERGESORT	InsertSortDsc_sint16, MergeDsc_sint16, CopyFwd16
-MergeSortDsc_sint32:	MERGESORT	InsertSortDsc_sint32, MergeDsc_sint32, CopyFwd32
-MergeSortDsc_sint64:	MERGESORT	InsertSortDsc_sint64, MergeDsc_sint64, CopyFwd64
+MergeSortDsc_sint8:		MERGESORT	InsertSortDsc_sint8, MergeDsc_sint8, CopyFwd8, 0
+MergeSortDsc_sint16:	MERGESORT	InsertSortDsc_sint16, MergeDsc_sint16, CopyFwd16, 1
+MergeSortDsc_sint32:	MERGESORT	InsertSortDsc_sint32, MergeDsc_sint32, CopyFwd32, 2
+MergeSortDsc_sint64:	MERGESORT	InsertSortDsc_sint64, MergeDsc_sint64, CopyFwd64, 3
 
 ; Floating-point types
 MergeSortDsc_flt32:		SORT1	MergeSortDsc_sint32, Map_flt32
@@ -7840,7 +7763,7 @@ MergeSortDsc_flt64:		SORT1	MergeSortDsc_sint64, Map_flt64
 ;==============================================================================;
 ;       Key array sorting                                                      ;
 ;==============================================================================;
-macro	MERGESORT_KEY	insertsort, mergefunc, copyfunc
+macro	MERGESORT_KEY	insertsort, mergefunc, copyfunc, scale
 {
 ;---[Parameters]---------------------------
 array	equ		rdi							; pointer to array
@@ -7857,6 +7780,7 @@ s_tptr	equ		stack + 3 * 8				; stack position of "tptr" variable
 s_size	equ		stack + 4 * 8				; stack position of "size" variable
 space	= 5 * 8								; stack size required by the procedure
 minsize	= 32								; min array size is aceptable for Merge sort
+bytes	= 1 shl scale						; size of array element (bytes)
 ;------------------------------------------
 		cmp		size, 1						; if (size <= 1)
 		jbe		.exit						;     then go to exit
@@ -7879,39 +7803,43 @@ minsize	= 32								; min array size is aceptable for Merge sort
 		mov		tptr, [s_tptr]				; get "tptr" variable from the stack
 		mov		size, [s_size]				; get "size" variable from the stack
 		shr		size, 1						; size /= 2
-		lea		array, [array + size * 8]
-		lea		temp, [temp + size * 8]
+		lea		array, [array + size * bytes]
 		lea		ptr, [ptr + size * 8]
-		lea		tptr, [tptr + size * 8]
 		neg		size
 		add		size, [s_size]
-		call	.start						; call Sort (array + size / 2, temp + size / 2, ptr + size / 2, tptr + size / 2, size - size / 2)
+		call	.start						; call Sort (array + size / 2, temp, ptr + size / 2, tptr, size - size / 2)
+;---[Copy data into temporary array]-------
+		mov		size, [s_size]				; get "size" variable from the stack
+		shr		size, 1						; size /= 2
+		mov		param3, size
+		mov		param2, [s_ptr]
+		mov		param1, [s_tptr]
+		call	CopyFwd64					; call CopyFwd64 (tptr, ptr, size / 2)
+		mov		size, [s_size]				; get "size" variable from the stack
+		shr		size, 1						; size /= 2
+		mov		param3, size
+		mov		param2, [s_array]
+		mov		param1, [s_temp]
+		call	copyfunc					; call copyfunc (temp, array, size / 2)
 ;---[Merge sorted arrays]------------------
 		mov		array, [s_array]			; get "array" variable from the stack
+		mov		temp, [s_temp]				; get "temp" variable from the stack
 		mov		ptr, [s_ptr]				; get "ptr" variable from the stack
+		mov		tptr, [s_tptr]				; get "tptr" variable from the stack
 		mov		size, [s_size]				; get "size" variable from the stack
 		shr		size, 1						; size /= 2
 		mov		param8, size
 		neg		param8
 		add		param8, [s_size]
 		lea		param7, [ptr + size * 8]
-		lea		param6, [array + size * 8]
+		lea		param6, [array + size * bytes]
 		mov		param5, size
-		mov		param4, ptr
-		mov		param3, array
-		mov		param2, [s_tptr]
-		mov		param1, [s_temp]
-		call	mergefunc					; call mergefunc (temp, tptr, array, ptr, size / 2, array + size / 2, ptr + size / 2, size - size / 2)
-;---[Copy data from temporary array]-------
-		mov		param3, [s_size]
-		mov		param2, [s_tptr]
-		mov		param1, [s_ptr]
-		call	CopyFwd64					; call CopyFwd64 (ptr, tptr, size)
-		mov		param3, [s_size]
-		mov		param2, [s_temp]
-		mov		param1, [s_array]
+		mov		param4, tptr
+		mov		param3, temp
+		mov		param2, [s_ptr]
+		mov		param1, array
 		add		stack, space				; restoring back the stack pointer
-		jmp		copyfunc					; call copyfunc (array, temp, size)
+		jmp		mergefunc					; call mergefunc (array, ptr, temp, tptr, size / 2, array + size / 2, ptr + size / 2, size - size / 2)
 ;---[Insert sort branch]-------------------
 .ins:	mov		param1, array
 		mov		param2, ptr
@@ -7967,16 +7895,16 @@ space	= 5 * 8								; stack size required by the procedure
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 
 ; Unsigned integer types
-MergeSortKeyAsc_uint8:	MERGESORT_KEY	InsertSortKeyAsc_uint8, MergeKeyCoreAsc_uint8, CopyFwd8
-MergeSortKeyAsc_uint16:	MERGESORT_KEY	InsertSortKeyAsc_uint16, MergeKeyCoreAsc_uint16, CopyFwd16
-MergeSortKeyAsc_uint32:	MERGESORT_KEY	InsertSortKeyAsc_uint32, MergeKeyCoreAsc_uint32, CopyFwd32
-MergeSortKeyAsc_uint64:	MERGESORT_KEY	InsertSortKeyAsc_uint64, MergeKeyCoreAsc_uint64, CopyFwd64
+MergeSortKeyAsc_uint8:	MERGESORT_KEY	InsertSortKeyAsc_uint8, MergeKeyCoreAsc_uint8, CopyFwd8, 0
+MergeSortKeyAsc_uint16:	MERGESORT_KEY	InsertSortKeyAsc_uint16, MergeKeyCoreAsc_uint16, CopyFwd16, 1
+MergeSortKeyAsc_uint32:	MERGESORT_KEY	InsertSortKeyAsc_uint32, MergeKeyCoreAsc_uint32, CopyFwd32, 2
+MergeSortKeyAsc_uint64:	MERGESORT_KEY	InsertSortKeyAsc_uint64, MergeKeyCoreAsc_uint64, CopyFwd64, 3
 
 ; Signed integer types
-MergeSortKeyAsc_sint8:	MERGESORT_KEY	InsertSortKeyAsc_sint8, MergeKeyCoreAsc_sint8, CopyFwd8
-MergeSortKeyAsc_sint16:	MERGESORT_KEY	InsertSortKeyAsc_sint16, MergeKeyCoreAsc_sint16, CopyFwd16
-MergeSortKeyAsc_sint32:	MERGESORT_KEY	InsertSortKeyAsc_sint32, MergeKeyCoreAsc_sint32, CopyFwd32
-MergeSortKeyAsc_sint64:	MERGESORT_KEY	InsertSortKeyAsc_sint64, MergeKeyCoreAsc_sint64, CopyFwd64
+MergeSortKeyAsc_sint8:	MERGESORT_KEY	InsertSortKeyAsc_sint8, MergeKeyCoreAsc_sint8, CopyFwd8, 0
+MergeSortKeyAsc_sint16:	MERGESORT_KEY	InsertSortKeyAsc_sint16, MergeKeyCoreAsc_sint16, CopyFwd16, 1
+MergeSortKeyAsc_sint32:	MERGESORT_KEY	InsertSortKeyAsc_sint32, MergeKeyCoreAsc_sint32, CopyFwd32, 2
+MergeSortKeyAsc_sint64:	MERGESORT_KEY	InsertSortKeyAsc_sint64, MergeKeyCoreAsc_sint64, CopyFwd64, 3
 
 ; Floating-point types
 MergeSortKeyAsc_flt32:	SORT1_KEY	MergeSortKeyAsc_sint32, Map_flt32
@@ -7987,16 +7915,16 @@ MergeSortKeyAsc_flt64:	SORT1_KEY	MergeSortKeyAsc_sint64, Map_flt64
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 
 ; Unsigned integer types
-MergeSortKeyDsc_uint8:	MERGESORT_KEY	InsertSortKeyDsc_uint8, MergeKeyCoreDsc_uint8, CopyFwd8
-MergeSortKeyDsc_uint16:	MERGESORT_KEY	InsertSortKeyDsc_uint16, MergeKeyCoreDsc_uint16, CopyFwd16
-MergeSortKeyDsc_uint32:	MERGESORT_KEY	InsertSortKeyDsc_uint32, MergeKeyCoreDsc_uint32, CopyFwd32
-MergeSortKeyDsc_uint64:	MERGESORT_KEY	InsertSortKeyDsc_uint64, MergeKeyCoreDsc_uint64, CopyFwd64
+MergeSortKeyDsc_uint8:	MERGESORT_KEY	InsertSortKeyDsc_uint8, MergeKeyCoreDsc_uint8, CopyFwd8, 0
+MergeSortKeyDsc_uint16:	MERGESORT_KEY	InsertSortKeyDsc_uint16, MergeKeyCoreDsc_uint16, CopyFwd16, 1
+MergeSortKeyDsc_uint32:	MERGESORT_KEY	InsertSortKeyDsc_uint32, MergeKeyCoreDsc_uint32, CopyFwd32, 2
+MergeSortKeyDsc_uint64:	MERGESORT_KEY	InsertSortKeyDsc_uint64, MergeKeyCoreDsc_uint64, CopyFwd64, 3
 
 ; Signed integer types
-MergeSortKeyDsc_sint8:	MERGESORT_KEY	InsertSortKeyDsc_sint8, MergeKeyCoreDsc_sint8, CopyFwd8
-MergeSortKeyDsc_sint16:	MERGESORT_KEY	InsertSortKeyDsc_sint16, MergeKeyCoreDsc_sint16, CopyFwd16
-MergeSortKeyDsc_sint32:	MERGESORT_KEY	InsertSortKeyDsc_sint32, MergeKeyCoreDsc_sint32, CopyFwd32
-MergeSortKeyDsc_sint64:	MERGESORT_KEY	InsertSortKeyDsc_sint64, MergeKeyCoreDsc_sint64, CopyFwd64
+MergeSortKeyDsc_sint8:	MERGESORT_KEY	InsertSortKeyDsc_sint8, MergeKeyCoreDsc_sint8, CopyFwd8, 0
+MergeSortKeyDsc_sint16:	MERGESORT_KEY	InsertSortKeyDsc_sint16, MergeKeyCoreDsc_sint16, CopyFwd16, 1
+MergeSortKeyDsc_sint32:	MERGESORT_KEY	InsertSortKeyDsc_sint32, MergeKeyCoreDsc_sint32, CopyFwd32, 2
+MergeSortKeyDsc_sint64:	MERGESORT_KEY	InsertSortKeyDsc_sint64, MergeKeyCoreDsc_sint64, CopyFwd64, 3
 
 ; Floating-point types
 MergeSortKeyDsc_flt32:	SORT1_KEY	MergeSortKeyDsc_sint32, Map_flt32
@@ -8041,12 +7969,19 @@ minsize	= 32								; min array size is aceptable for Merge sort
 		mov		func, [s_func]				; get "func" variable from the stack
 		shr		size, 1						; size /= 2
 		lea		array, [array + size * 8]
-		lea		temp, [temp + size * 8]
 		neg		size
 		add		size, [s_size]
-		call	.start						; call Sort (array + size / 2, temp + size / 2, size - size / 2, func)
+		call	.start						; call Sort (array + size / 2, temp, size - size / 2, func)
+;---[Copy data into temporary array]-------
+		mov		size, [s_size]				; get "size" variable from the stack
+		shr		size, 1						; size /= 2
+		mov		param3, size
+		mov		param2, [s_array]
+		mov		param1, [s_temp]
+		call	copyfunc					; call copyfunc (temp, array, size / 2)
 ;---[Merge sorted arrays]------------------
 		mov		array, [s_array]			; get "array" variable from the stack
+		mov		temp, [s_temp]				; get "temp" variable from the stack
 		mov		size, [s_size]				; get "size" variable from the stack
 		mov		func, [s_func]				; get "func" variable from the stack
 		shr		size, 1						; size /= 2
@@ -8056,15 +7991,10 @@ minsize	= 32								; min array size is aceptable for Merge sort
 		add		param5, [s_size]
 		lea		param4, [array + size * 8]
 		mov		param3, size
-		mov		param2, array
-		mov		param1, [s_temp]
-		call	mergefunc					; call mergefunc (temp, array, size / 2, array + size / 2, size - size / 2, func)
-;---[Copy data from temporary array]-------
-		mov		param3, [s_size]
-		mov		param2, [s_temp]
-		mov		param1, [s_array]
+		mov		param2, temp
+		mov		param1, array
 		add		stack, space				; restoring back the stack pointer
-		jmp		copyfunc					; call copyfunc (array, temp, size)
+		jmp		mergefunc					; call mergefunc (array, temp, size / 2, array + size / 2, size - size / 2, func)
 ;---[Insert sort branch]-------------------
 .ins:	mov		param1, array
 		mov		param2, size
@@ -9120,8 +9050,8 @@ space	= 3 * 8								; stack size required by the procedure
 		add		stack, space				; restoring back the stack pointer
 		ret
 ;---[Equal branch]-------------------------
-.equal:	add		stack, space				; restoring back the stack pointer
-		xor		result, result				; return 0
+.equal:	xor		result, result				; return 0
+		add		stack, space				; restoring back the stack pointer
 		ret
 }
 
@@ -9244,7 +9174,7 @@ bias	= 1 shl (shift)						; bias to map unsigned int numbers to signed
 	prefetchnta	[array]						; prefetch data
 		shftl	size, scale					; convert size to bytes
 		sub		size, bytes					; if (--size <= 0)
-		jbe		.ntfnd						;     then go to not found branch
+		jbe		.ntfnd						;     return NOT_FOUND
 		xor		index, index				; index = 0
 if scale <> 0
 		test	array, bmask				; if elements have wrong alignment
@@ -9321,11 +9251,11 @@ end if
 		psrldq	temp1, bytes				; shift vector right to one position
 		VCHECK	x, type, dsc				; check elements sort order
 		and		fmask, cmask				; if sort order is correct
-		jz		.ntfnd						;     then go to not found branch
+		jz		.ntfnd						;     return NOT_FOUND
 		bsf		fmask, fmask				; find index of element which broke sort order
 		add		size, VSIZE					; size += VSIZE
 		cmp		size, fmask					; if (size <= fmask)
-		jbe		.ntfnd						;     then go to not found branch
+		jbe		.ntfnd						;     return NOT_FOUND
 		sub		index, aindex				; index -= aindex
 		add		index, fmask				; index += fmask
 		shftr	index, scale
@@ -9337,11 +9267,11 @@ end if
 		psrldq	temp1, bytes				; shift vector right to one position
 		VCHECK	x, type, dsc				; check elements sort order
 		and		fmask, fmask				; if sort order is correct
-		jz		.ntfnd						;     then go to not found branch
+		jz		.ntfnd						;     return NOT_FOUND
 		bsf		fmask, fmask				; find index of element which broke sort order
 		add		size, VSIZE					; size += VSIZE
 		cmp		size, fmask					; if (size <= fmask)
-		jbe		.ntfnd						;     then go to not found branch
+		jbe		.ntfnd						;     return NOT_FOUND
 		sub		index, aindex				; index -= aindex
 		add		index, fmask				; index += fmask
 		shftr	index, scale
@@ -9445,8 +9375,8 @@ space	= 5 * 8								; stack size required by the procedure
 		sub		qword [s_size], 1			; size--
 		jnz		.loop						; do while (size != 0)
 ;---[End of search loop]-------------------
-.exit:	add		stack, space				; restoring back the stack pointer
-		mov		result, NOT_FOUND			; return NOT_FOUND
+.exit:	mov		result, NOT_FOUND			; return NOT_FOUND
+		add		stack, space				; restoring back the stack pointer
 		ret
 ;---[Found branch]---------------------
 .found:	mov		result, [s_ptr]				; get "ptr" variable from the stack
@@ -9454,8 +9384,8 @@ if sort
 		add		result, 8
 end if
 		sub		result, [s_array]
-		add		stack, space				; restoring back the stack pointer
 		shr		result, 3					; return ptr - array
+		add		stack, space				; restoring back the stack pointer
 		ret
 }
 CheckSortAsc:	CHECK_SORT_OBJ	g, 1
@@ -9496,7 +9426,7 @@ bmask	= bytes - 1							; elements aligning mask
 	prefetchnta	[array]						; prefetch data
 		shftl	size, scale					; convert size to bytes
 		sub		size, bytes					; if (--size <= 0)
-		jbe		.ntfnd						;     then go to not found branch
+		jbe		.ntfnd						;     return NOT_FOUND
 		xor		index, index				; index = 0
 if scale <> 0
 		test	array, bmask				; if elements have wrong alignment
@@ -9571,11 +9501,11 @@ end if
 	pcmpeq#x	temp0, temp1				; check elements for duplicates
 	pmovmskb	fmask, temp0				; save check results to fmask
 		and		fmask, cmask				; if duplicates are not found
-		jz		.ntfnd						;     then go to not found branch
+		jz		.ntfnd						;     return NOT_FOUND
 		bsf		fmask, fmask				; find index of first occurence of duplicate
 		add		size, VSIZE					; size += VSIZE
 		cmp		size, fmask					; if (size <= fmask)
-		jbe		.ntfnd						;     then go to not found branch
+		jbe		.ntfnd						;     return NOT_FOUND
 		sub		index, aindex				; index -= aindex
 		add		index, fmask				; index += fmask
 		shftr	index, scale				; return index
@@ -9587,11 +9517,11 @@ end if
 	pcmpeq#x	temp0, temp1				; check elements for duplicates
 	pmovmskb	fmask, temp0				; save check results to fmask
 		and		fmask, fmask				; if duplicates are not found
-		jz		.ntfnd						;     then go to not found branch
+		jz		.ntfnd						;     return NOT_FOUND
 		bsf		fmask, fmask				; find index of first occurence of duplicate
 		add		size, VSIZE					; size += VSIZE
 		cmp		size, fmask					; if (size <= fmask)
-		jbe		.ntfnd						;     then go to not found branch
+		jbe		.ntfnd						;     return NOT_FOUND
 		sub		index, aindex				; index -= aindex
 		add		index, fmask				; index += fmask
 		shftr	index, scale				; return index
@@ -9651,7 +9581,7 @@ bmask	= bytes - 1							; elements aligning mask
 ;------------------------------------------
 	prefetchnta	[array]						; prefetch data
 		shl		size, scale					; convert size to bytes
-		jz		.ntfnd						; if (size == 0), then go to not found branch
+		jz		.ntfnd						; if (size == 0), return NOT_FOUND
 		mov		amask, dmask				; load amask
 		mov		patt, infval				; load pattern
 		xor		index, index				; index = 0
@@ -9678,7 +9608,7 @@ bmask	= bytes - 1							; elements aligning mask
 		jnz		.brk						;     then break the loop
 		add		index, VSIZE				; index += VSIZE
 		sub		size, VSIZE					; if (size <= VSIZE)
-		jbe		.ntfnd						;     then go to not found branch
+		jbe		.ntfnd						;     return NOT_FOUND
 ;---[Vector loop]--------------------------
 .vloop:	movdqa	flags, [array + 1*VSIZE]
 		pand	flags, mask					; flags = Abs (array[1])
@@ -9688,7 +9618,7 @@ bmask	= bytes - 1							; elements aligning mask
 		jnz		.brk						;     then break the loop
 		add		index, VSIZE				; index += VSIZE
 		sub		size, VSIZE					; if (size <= VSIZE)
-		jbe		.ntfnd						;     then go to not found branch
+		jbe		.ntfnd						;     return NOT_FOUND
 		movdqa	flags, [array + 2*VSIZE]
 		pand	flags, mask					; flags = Abs (array[2])
 		cond1#x	flags, pattern				; check array[2] for infinity
@@ -9697,7 +9627,7 @@ bmask	= bytes - 1							; elements aligning mask
 		jnz		.brk						;     then break the loop
 		add		index, VSIZE				; index += VSIZE
 		sub		size, VSIZE					; if (size <= VSIZE)
-		jbe		.ntfnd						;     then go to not found branch
+		jbe		.ntfnd						;     return NOT_FOUND
 		movdqa	flags, [array + 3*VSIZE]
 		pand	flags, mask					; flags = Abs (array[3])
 		cond1#x	flags, pattern				; check array[3] for infinity
@@ -9706,7 +9636,7 @@ bmask	= bytes - 1							; elements aligning mask
 		jnz		.brk						;     then break the loop
 		add		index, VSIZE				; index += VSIZE
 		sub		size, VSIZE					; if (size <= VSIZE)
-		jbe		.ntfnd						;     then go to not found branch
+		jbe		.ntfnd						;     return NOT_FOUND
 		movdqa	flags, [array + 4*VSIZE]
 		pand	flags, mask					; flags = Abs (array[4])
 		cond1#x	flags, pattern				; check array[4] for infinity
@@ -9715,14 +9645,14 @@ bmask	= bytes - 1							; elements aligning mask
 		jnz		.brk						;     then break the loop
 		add		index, VSIZE				; index += VSIZE
 		sub		size, VSIZE					; if (size <= VSIZE)
-		jbe		.ntfnd						;     then go to not found branch
+		jbe		.ntfnd						;     return NOT_FOUND
 	prefetchnta	[array + PSTEP]				; prefetch next portion of data
 		add		array, 4 * VSIZE			; array += 4 * VSIZE
 		jmp		.vloop						; do while (true)
 ;---[End of vector loop]-------------------
 .brk:	bsf		fmask, fmask				; find index of first occurence of pattern
 		cmp		size, fmask					; if (size <= fmask)
-		jbe		.ntfnd						;     then go to not found branch
+		jbe		.ntfnd						;     return NOT_FOUND
 		add		index, fmask				; index += fmask
 		shftr	index, scale				; return index
 		ret
@@ -9890,10 +9820,10 @@ CheckDiff64:	CHECK_DIFF	rcx, q
 macro	OVERLAP	scale
 {
 ;---[Parameters]---------------------------
-target	equ 	rdi							; pointer to target array
+target	equ		rdi							; pointer to target array
 tsize	equ		rsi							; target array size
-source	equ 	rdx							; pointer to source array
-ssize	equ 	rcx							; source array size
+source	equ		rdx							; pointer to source array
+ssize	equ		rcx							; source array size
 ;---[Internal variables]-------------------
 result	equ		al							; result register
 max		equ		r8							; max value
@@ -9939,7 +9869,7 @@ i = 0
 while i < bytes
 		movzx	temp, byte [array + i]		; temp = array[i]
 		add		result, temp				; result += temp
-		imul 	result, value				; result *= value
+		imul	result, value				; result *= value
 	i = i + 1
 end while
 		add		array, bytes				; array++

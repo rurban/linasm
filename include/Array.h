@@ -528,8 +528,12 @@ static flt64_t MaxAbs (const flt64_t array[], size_t size);
 //****************************************************************************//
 
 //============================================================================//
-//      Minimum value                                                         //
+//      Regular array search                                                  //
 //============================================================================//
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//      Minimum value                                                         //
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
 // Unsigned integer types
 static uint8_t Min (const uint8_t array[], size_t size);
@@ -545,9 +549,9 @@ static sint32_t Min (const sint32_t array[], size_t size);
 static flt32_t Min (const flt32_t array[], size_t size);
 static flt64_t Min (const flt64_t array[], size_t size);
 
-//============================================================================//
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 //      Maximum value                                                         //
-//============================================================================//
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
 // Unsigned integer types
 static uint8_t Max (const uint8_t array[], size_t size);
@@ -562,6 +566,22 @@ static sint32_t Max (const sint32_t array[], size_t size);
 // Floating-point types
 static flt32_t Max (const flt32_t array[], size_t size);
 static flt64_t Max (const flt64_t array[], size_t size);
+
+//============================================================================//
+//      Object array search                                                   //
+//============================================================================//
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//      Minimum value                                                         //
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+static size_t MinFwd (const void* array[], size_t size, Cmp func);
+static size_t MinBwd (const void* array[], size_t size, Cmp func);
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//      Maximum value                                                         //
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+static size_t MaxFwd (const void* array[], size_t size, Cmp func);
+static size_t MaxBwd (const void* array[], size_t size, Cmp func);
 
 //****************************************************************************//
 //      Linear search                                                         //
@@ -2412,8 +2432,12 @@ flt64_t Array_MaxAbs_flt64 (const flt64_t array[], size_t size);
 //****************************************************************************//
 
 //============================================================================//
-//      Minimum value                                                         //
+//      Regular array search                                                  //
 //============================================================================//
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//      Minimum value                                                         //
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
 // Unsigned integer types
 uint8_t Array_Min_uint8 (const uint8_t array[], size_t size);
@@ -2429,9 +2453,9 @@ sint32_t Array_Min_sint32 (const sint32_t array[], size_t size);
 flt32_t Array_Min_flt32 (const flt32_t array[], size_t size);
 flt64_t Array_Min_flt64 (const flt64_t array[], size_t size);
 
-//============================================================================//
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 //      Maximum value                                                         //
-//============================================================================//
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
 // Unsigned integer types
 uint8_t Array_Max_uint8 (const uint8_t array[], size_t size);
@@ -2446,6 +2470,22 @@ sint32_t Array_Max_sint32 (const sint32_t array[], size_t size);
 // Floating-point types
 flt32_t Array_Max_flt32 (const flt32_t array[], size_t size);
 flt64_t Array_Max_flt64 (const flt64_t array[], size_t size);
+
+//============================================================================//
+//      Object array search                                                   //
+//============================================================================//
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//      Minimum value                                                         //
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+size_t Array_MinFwd (const void* array[], size_t size, Cmp func);
+size_t Array_MinBwd (const void* array[], size_t size, Cmp func);
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//      Maximum value                                                         //
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+size_t Array_MaxFwd (const void* array[], size_t size, Cmp func);
+size_t Array_MaxBwd (const void* array[], size_t size, Cmp func);
 
 //****************************************************************************//
 //      Linear search                                                         //
