@@ -632,20 +632,20 @@ public	Power_flt64			as	'_ZN4Math5PowerEds'
 ;******************************************************************************;
 
 ;==============================================================================;
-;       Logarithm of 2                                                         ;
+;       Logarithm to base 2                                                    ;
 ;==============================================================================;
 
-; Integer logarithm of 2
+; Integer logarithm to base 2
 public	Log2i_uint8			as	'_ZN4Math4Log2Eh'
 public	Log2i_uint16		as	'_ZN4Math4Log2Et'
 public	Log2i_uint32		as	'_ZN4Math4Log2Ej'
 public	Log2i_uint64		as	'_ZN4Math4Log2Ey'
 
 ;==============================================================================;
-;       Logarithm of 10                                                        ;
+;       Logarithm to base 10                                                   ;
 ;==============================================================================;
 
-; Integer logarithm of 10
+; Integer logarithm to base 10
 public	Log10i_uint8		as	'_ZN4Math5Log10Eh'
 public	Log10i_uint16		as	'_ZN4Math5Log10Et'
 public	Log10i_uint32		as	'_ZN4Math5Log10Ej'
@@ -3553,7 +3553,7 @@ Power_flt64:	POWER_FLT	di, rax, d
 ;******************************************************************************;
 
 ;==============================================================================;
-;       Logarithm of 2                                                         ;
+;       Logarithm to base 2                                                    ;
 ;==============================================================================;
 macro	LOG2I	val, scale
 {
@@ -3575,14 +3575,14 @@ end if
 		ret
 }
 
-; Integer logarithm of 2
+; Integer logarithm to base 2
 Log2i_uint8:	LOG2I	dil, 0
 Log2i_uint16:	LOG2I	di, 1
 Log2i_uint32:	LOG2I	edi, 2
 Log2i_uint64:	LOG2I	rdi, 3
 
 ;==============================================================================;
-;       Logarithm of 10                                                        ;
+;       Logarithm to base 10                                                   ;
 ;==============================================================================;
 macro	LOG10I	val, index, scale
 {
@@ -3603,7 +3603,7 @@ end if
 		ret									; return result
 }
 
-; Integer logarithm of 10
+; Integer logarithm to base 10
 Log10i_uint8:	LOG10I	dil, 3, 0
 Log10i_uint16:	LOG10I	di, 5, 1
 Log10i_uint32:	LOG10I	edi, 10, 2

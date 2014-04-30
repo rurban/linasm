@@ -464,20 +464,20 @@ static flt64_t Power (flt64_t base, sint16_t exp);
 //****************************************************************************//
 
 //============================================================================//
-//      Logarithm of 2                                                        //
+//      Logarithm to base 2                                                   //
 //============================================================================//
 
-// Integer logarithm of 2
+// Integer logarithm to base 2
 static uint8_t Log2 (uint8_t value);
 static uint8_t Log2 (uint16_t value);
 static uint8_t Log2 (uint32_t value);
 static uint8_t Log2 (uint64_t value);
 
 //============================================================================//
-//      Logarithm of 10                                                       //
+//      Logarithm to base 10                                                  //
 //============================================================================//
 
-// Integer logarithm of 10
+// Integer logarithm to base 10
 static uint8_t Log10 (uint8_t value);
 static uint8_t Log10 (uint16_t value);
 static uint8_t Log10 (uint32_t value);
@@ -974,20 +974,20 @@ flt64_t Math_Poweri_flt64 (flt64_t base, sint16_t exp);
 //****************************************************************************//
 
 //============================================================================//
-//      Logarithm of 2                                                        //
+//      Logarithm to base 2                                                   //
 //============================================================================//
 
-// Integer logarithm of 2
+// Integer logarithm to base 2
 uint8_t Math_Log2_uint8 (uint8_t value);
 uint8_t Math_Log2_uint16 (uint16_t value);
 uint8_t Math_Log2_uint32 (uint32_t value);
 uint8_t Math_Log2_uint64 (uint64_t value);
 
 //============================================================================//
-//      Logarithm of 10                                                       //
+//      Logarithm to base 10                                                  //
 //============================================================================//
 
-// Integer logarithm of 10
+// Integer logarithm to base 10
 uint8_t Math_Log10_uint8 (uint8_t value);
 uint8_t Math_Log10_uint16 (uint16_t value);
 uint8_t Math_Log10_uint32 (uint32_t value);

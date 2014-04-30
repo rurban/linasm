@@ -399,12 +399,8 @@ public	MaxBwd				as	'_ZN4List6MaxBwdEP6data_tmPFx5adt_tS2_E'
 public	MaxBwd				as	'_ZN4Ring6MaxBwdEP6data_tmPFx5adt_tS2_E'
 
 ;******************************************************************************;
-;       Search algorithms                                                      ;
-;******************************************************************************;
-
-;==============================================================================;
 ;       Key searching                                                          ;
-;==============================================================================;
+;******************************************************************************;
 
 ; Single key searching
 public	FindKeyFwd			as	'List_FindKeyFwd'
@@ -426,9 +422,9 @@ public	FindKeysFwd			as	'_ZN4Ring11FindKeysFwdEP6data_tPK5adt_tmmPFxS2_S2_E'
 public	FindKeysBwd			as	'_ZN4List11FindKeysBwdEP6data_tPK5adt_tmmPFxS2_S2_E'
 public	FindKeysBwd			as	'_ZN4Ring11FindKeysBwdEP6data_tPK5adt_tmmPFxS2_S2_E'
 
-;==============================================================================;
+;******************************************************************************;
 ;       Duplicates searching                                                   ;
-;==============================================================================;
+;******************************************************************************;
 public	FindDupFwd			as	'List_FindDupFwd'
 public	FindDupFwd			as	'Ring_FindDupFwd'
 public	FindDupBwd			as	'List_FindDupBwd'
@@ -438,9 +434,9 @@ public	FindDupFwd			as	'_ZN4Ring10FindDupFwdEP6data_tPFx5adt_tS2_E'
 public	FindDupBwd			as	'_ZN4List10FindDupBwdEP6data_tPFx5adt_tS2_E'
 public	FindDupBwd			as	'_ZN4Ring10FindDupBwdEP6data_tPFx5adt_tS2_E'
 
-;==============================================================================;
+;******************************************************************************;
 ;       Unordered elements searching                                           ;
-;==============================================================================;
+;******************************************************************************;
 
 ; Ascending sort order
 public	FindNonAscFwd		as	'List_FindNonAscFwd'
@@ -462,9 +458,9 @@ public	FindNonDscFwd		as	'_ZN4Ring13FindNonDscFwdEP6data_tPFx5adt_tS2_E'
 public	FindNonDscBwd		as	'_ZN4List13FindNonDscBwdEP6data_tPFx5adt_tS2_E'
 public	FindNonDscBwd		as	'_ZN4Ring13FindNonDscBwdEP6data_tPFx5adt_tS2_E'
 
-;==============================================================================;
+;******************************************************************************;
 ;       Searching for differences                                              ;
-;==============================================================================;
+;******************************************************************************;
 public	FindDiffFwd			as	'List_FindDiffFwd'
 public	FindDiffFwd			as	'Ring_FindDiffFwd'
 public	FindDiffBwd			as	'List_FindDiffBwd'
@@ -716,8 +712,8 @@ space	= 3 * 8								; stack size required by the procedure
 		add		stack, space				; restoring back the stack pointer
 		jmp		InitFree					; return InitFree (array, oldcap - NSIZE, newcap - NSIZE, pool)
 ;---[Error branch]-------------------------
-.error:	add		stack, space				; restoring back the stack pointer
-		xor		status, status				; return false
+.error:	xor		status, status				; return false
+		add		stack, space				; restoring back the stack pointer
 		ret
 
 ;******************************************************************************;
@@ -1263,8 +1259,8 @@ if move
 end if
 ;---[Normal exit branch]-------------------
 .exit:	mov		result, [s_count]			; get "count" variable from the stack
-		add		stack, space				; restoring back the stack pointer
 		shr		result, KSCALE				; return count
+		add		stack, space				; restoring back the stack pointer
 		ret
 ;---[Extend object capacity]---------------
 .ext:	mov		param2, count
@@ -1275,8 +1271,8 @@ end if
 		test	status, status				; if (status)
 		jnz		.eback						;     then go back
 ;---[Error branch]-------------------------
-.error:	add		stack, space				; restoring back the stack pointer
-		mov		result, ERROR				; return ERROR
+.error:	mov		result, ERROR				; return ERROR
+		add		stack, space				; restoring back the stack pointer
 		ret
 ;---[Correct iterator branch]--------------
 if ~ring | rev
@@ -1410,8 +1406,8 @@ end if
 		cmp		nval, node					; if (nval == node)
 		je		.bwd						;     then check iterator position
 ;---[Normal exit]--------------------------
-.back3:	add		stack, space				; restoring back the stack pointer
-		mov		result, 1					; return true
+.back3:	mov		result, 1					; return true
+		add		stack, space				; restoring back the stack pointer
 		ret
 ;---[Correct tail iterator]----------------
 if ~ring
@@ -1488,8 +1484,8 @@ space	= 3 * 8								; stack size required by the procedure
 		cmp		nval, node					; if (nval == node)
 		je		.bwd						;     then check iterator position
 ;---[Normal exit]--------------------------
-.back2:	add		stack, space				; restoring back the stack pointer
-		mov		result, 1					; return true
+.back2:	mov		result, 1					; return true
+		add		stack, space				; restoring back the stack pointer
 		ret
 ;---[Correct forward iterator branch]------
 .fwd:	mov		ival, IMASK					; load index mask
@@ -1555,8 +1551,8 @@ space	= 3 * 8								; stack size required by the procedure
 		cmp		nval, node					; if (nval == node)
 		je		.bwd						;     then check iterator position
 ;---[Normal exit]--------------------------
-.back2:	add		stack, space				; restoring back the stack pointer
-		mov		result, 1					; return true
+.back2:	mov		result, 1					; return true
+		add		stack, space				; restoring back the stack pointer
 		ret
 ;---[Correct forward iterator branch]------
 .fwd:	mov		ival, IMASK					; load index mask
@@ -1927,8 +1923,8 @@ end if
 		cmp		nval, node					; if (nval == node)
 		je		.bwd						;     then check iterator position
 ;---[Normal exit]--------------------------
-.back3:	add		stack, space				; restoring back the stack pointer
-		mov		result, 1					; return true
+.back3:	mov		result, 1					; return true
+		add		stack, space				; restoring back the stack pointer
 		ret
 ;---[Correct tail iterator branch]---------
 if ~ring
@@ -1989,8 +1985,8 @@ end if
 		mov		result, [this + POOL]		; array[node].fdir = this.pool
 		mov		[array + node + FDIR], result
 		mov		[this + POOL], node			; this.pool = node
-		add		stack, space				; restoring back the stack pointer
 		mov		result, 1					; return true
+		add		stack, space				; restoring back the stack pointer
 		ret
 }
 DeleteList:	DELETE	0
@@ -2064,8 +2060,8 @@ space	= 7 * 8								; stack size required by the procedure
 		cmp		nval, rnode					; if (nval == rnode)
 		je		.frght						;     then check iterator position
 ;---[Normal exit]--------------------------
-.back3:	add		stack, space				; restoring back the stack pointer
-		mov		result, 1					; return true
+.back3:	mov		result, 1					; return true
+		add		stack, space				; restoring back the stack pointer
 		ret
 ;---[Correct backward iterator branch]-----
 .bleft:	mov		ival, IMASK					; load index mask
@@ -2153,7 +2149,7 @@ space	= 7 * 8								; stack size required by the procedure
 		movdqa	value, [rnode + NDATA]		; value = array[rnode].data[0]
 ;---[Replace element in the node]----------
 		add		lnode, pos					; lnode += pos
-		neg 	pos							; pos = -pos
+		neg		pos							; pos = -pos
 		lea		param1, [array + lnode + NDATA]
 		lea		param2, [pos + NMIN - KSIZE]
 		call	ReplaceRightCore			; call ReplaceRightCore (array[lnode].data + pos, NMIN - KSIZE - pos, value)
@@ -2192,8 +2188,8 @@ end if
 		cmp		nval, lnode					; if (nval == lnode)
 		je		.bleft						;     then check iterator position
 ;---[Normal exit]--------------------------
-.back3:	add		stack, space				; restoring back the stack pointer
-		mov		result, 1					; return true
+.back3:	mov		result, 1					; return true
+		add		stack, space				; restoring back the stack pointer
 		ret
 ;---[Correct tail iterator branch]---------
 if ~ring
@@ -2343,8 +2339,8 @@ end if
 .back3:	mov		result, [this + POOL]		; array[rnode].fdir = this.pool
 		mov		[array + rnode + FDIR], result
 		mov		[this + POOL], rnode		; this.pool = rnode
-		add		stack, space				; restoring back the stack pointer
 		mov		result, 1					; return true
+		add		stack, space				; restoring back the stack pointer
 		ret
 ;---[Correct tail iterator branch]---------
 if ~ring
@@ -2755,12 +2751,12 @@ end if
 		jnz		.loop						; do while (count != 0)
 ;---[Normal exit branch]-------------------
 .exit:	mov		result, [s_count]			; get "count" variable from the stack
-		add		stack, space				; restoring back the stack pointer
 		shr		result, KSCALE				; return count
+		add		stack, space				; restoring back the stack pointer
 		ret
 ;---[Error branch]-------------------------
-.error:	add		stack, space				; restoring back the stack pointer
-		mov		result, ERROR				; return ERROR
+.error:	mov		result, ERROR				; return ERROR
+		add		stack, space				; restoring back the stack pointer
 		ret
 ;---[Correct iterator branch]--------------
 if ~ring
@@ -3048,12 +3044,12 @@ space	= 1 * 8								; stack size required by the procedure
 		cmp		iter, EMPTY					; if (iter == EMPTY)
 		je		.error						;     then go to error branch
 ;---[Normal exit branch]-------------------
-.exit:	add		stack, space				; restoring back the stack pointer
-		mov		status, 1					; return true
+.exit:	mov		status, 1					; return true
+		add		stack, space				; restoring back the stack pointer
 		ret
 ;---[Error branch]-------------------------
-.error:	add		stack, space				; restoring back the stack pointer
-		xor		status, status				; return false
+.error:	xor		status, status				; return false
+		add		stack, space				; restoring back the stack pointer
 		ret
 }
 
@@ -3221,12 +3217,12 @@ end if
 		movdqu	[data], temp				; data[0] = array[vptr].data
 		mov		value, [s_value]			; restore old value of "value" variable
 		mov		vptr, [s_vptr]				; restore old value of "vptr" variable
-		add		stack, space				; restoring back the stack pointer
 		mov		status, 1					; return true
+		add		stack, space				; restoring back the stack pointer
 		ret
 ;---[Not found branch]---------------------
-.ntfnd:	add		stack, space				; restoring back the stack pointer
-		xor 	status, status				; return false
+.ntfnd:	xor		status, status				; return false
+		add		stack, space				; restoring back the stack pointer
 		ret
 ;---[Go to another node branch]------------
 .next:	mov		next, NMASK					; load node mask
@@ -3255,16 +3251,12 @@ MaxFwd:	MINMAX	add, l, 0
 MaxBwd:	MINMAX	sub, l, 1
 
 ;******************************************************************************;
-;       Search algorithms                                                      ;
+;       Key searching                                                          ;
 ;******************************************************************************;
 
 ;==============================================================================;
-;       Key searching                                                          ;
-;==============================================================================;
-
-;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 ;       Single key searching                                                   ;
-;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+;==============================================================================;
 macro	FIND_KEY	cmd, bwd
 {
 ;---[Parameters]---------------------------
@@ -3353,8 +3345,8 @@ end if
 		sub		qword [s_count], KSIZE		; count--
 		jnz		.loop						; do while (count != 0)
 ;---[Not found branch]---------------------
-.ntfnd:	add		stack, space				; restoring back the stack pointer
-		xor 	status, status				; return false
+.ntfnd:	xor		status, status				; return false
+		add		stack, space				; restoring back the stack pointer
 		ret
 ;---[Found branch]-------------------------
 .found:	mov		this, [s_this]				; get "this" variable from the stack
@@ -3362,8 +3354,8 @@ end if
 		mov		[this + offst], iter		; update iterator position
 		movdqa	temp, [array + iter + NDATA]
 		movdqu	[data], temp				; data[0] = array[iter].data
-		add		stack, space				; restoring back the stack pointer
 		mov		status, 1					; return true
+		add		stack, space				; restoring back the stack pointer
 		ret
 ;---[Go to another node branch]------------
 .next:	mov		next, NMASK					; load node mask
@@ -3385,9 +3377,9 @@ end if
 FindKeyFwd:	FIND_KEY	add, 0
 FindKeyBwd:	FIND_KEY	sub, 1
 
-;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+;==============================================================================;
 ;       Keys set searching                                                     ;
-;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+;==============================================================================;
 macro	FIND_KEYS	cmd, bwd
 {
 ;---[Parameters]---------------------------
@@ -3481,8 +3473,8 @@ end if
 		sub		qword [s_count], KSIZE		; count--
 		jnz		.loop						; do while (count != 0)
 ;---[Not found branch]---------------------
-.ntfnd:	add		stack, space				; restoring back the stack pointer
-		xor 	status, status				; return false
+.ntfnd:	xor		status, status				; return false
+		add		stack, space				; restoring back the stack pointer
 		ret
 ;---[Found branch]-------------------------
 .found:	mov		this, [s_this]				; get "this" variable from the stack
@@ -3490,8 +3482,8 @@ end if
 		mov		[this + offst], iter		; update iterator position
 		movdqa	temp, [array + iter + NDATA]
 		movdqu	[data], temp				; data[0] = array[iter].data
-		add		stack, space				; restoring back the stack pointer
 		mov		status, 1					; return true
+		add		stack, space				; restoring back the stack pointer
 		ret
 ;---[Go to another node branch]------------
 .next:	mov		next, NMASK					; load node mask
@@ -3513,9 +3505,9 @@ end if
 FindKeysFwd:	FIND_KEYS	add, 0
 FindKeysBwd:	FIND_KEYS	sub, 1
 
-;==============================================================================;
+;******************************************************************************;
 ;       Duplicates searching                                                   ;
-;==============================================================================;
+;******************************************************************************;
 macro	FIND_CORE	cmd, cond, value, bwd
 {
 ;---[Parameters]---------------------------
@@ -3593,8 +3585,8 @@ end if
 		sub		qword [s_count], KSIZE		; count--
 		jnz		.loop						; do while (count != 0)
 ;---[Not found branch]---------------------
-.ntfnd:	add		stack, space				; restoring back the stack pointer
-		mov		result, EMPTY				; return EMPTY
+.ntfnd:	mov		result, EMPTY				; return EMPTY
+		add		stack, space				; restoring back the stack pointer
 		ret
 ;---[Found branch]-------------------------
 .found:	mov		result, [value]				; return value
@@ -3684,20 +3676,20 @@ space	= 3 * 8								; stack size required by the procedure
 		add		result, [this + ARRAY]
 		movdqa	temp, [result + NDATA]
 		movdqu	[data], temp				; data[0] = array[iter].data
-		add		stack, space				; restoring back the stack pointer
 		mov		status, 1					; return true
+		add		stack, space				; restoring back the stack pointer
 		ret
 ;---[Not found branch]---------------------
-.ntfnd:	add		stack, space				; restoring back the stack pointer
-		xor		status, status				; return false
+.ntfnd:	xor		status, status				; return false
+		add		stack, space				; restoring back the stack pointer
 		ret
 }
 FindDupFwd:		FIND	CheckDupFwd, FWD
 FindDupBwd:		FIND	CheckDupBwd, BWD
 
-;==============================================================================;
+;******************************************************************************;
 ;       Unordered elements searching                                           ;
-;==============================================================================;
+;******************************************************************************;
 
 ; Ascending sort order
 FindNonAscFwd:	FIND	CheckSortAscFwd, FWD
@@ -3707,9 +3699,9 @@ FindNonAscBwd:	FIND	CheckSortAscBwd, BWD
 FindNonDscFwd:	FIND	CheckSortDscFwd, FWD
 FindNonDscBwd:	FIND	CheckSortDscBwd, BWD
 
-;==============================================================================;
+;******************************************************************************;
 ;       Searching for differences                                              ;
-;==============================================================================;
+;******************************************************************************;
 macro	DIFF	cmd, bwd
 {
 ;---[Parameters]---------------------------
@@ -3904,12 +3896,12 @@ space	= 3 * 8								; stack size required by the procedure
 		add		result, [this + ARRAY]
 		movdqa	temp, [result + NDATA]
 		movdqu	[data], temp				; data[0] = array[iter].data
-		add		stack, space				; restoring back the stack pointer
 		mov		status, 1					; return true
+		add		stack, space				; restoring back the stack pointer
 		ret
 ;---[Not found branch]---------------------
-.ntfnd:	add		stack, space				; restoring back the stack pointer
-		xor		status, status				; return false
+.ntfnd:	xor		status, status				; return false
+		add		stack, space				; restoring back the stack pointer
 		ret
 }
 FindDiffFwd:	FIND_DIFF	DiffFwd, FWD
@@ -4497,7 +4489,7 @@ space	= 11 * 8							; stack size required by the procedure
 		mov		param3, rhead
 		mov		param2, [s_head]
 		mov		param1, [s_this]
-		call	mergefunc 					; result = this.mergefunc (head, rhead, size1, rsize, func)
+		call	mergefunc					; result = this.mergefunc (head, rhead, size1, rsize, func)
 		mov		rnext, [s_next]
 		mov		rsize, [s_size1]
 		add		rsize, [s_size2]
@@ -4580,8 +4572,8 @@ else
 end if
 ;---[Normal exit branch]-------------------
 .exit:	mov		result, [s_size]			; get "size" variable from the stack
-		add		stack, space				; restoring back the stack pointer
 		shr		result, KSCALE				; return count
+		add		stack, space				; restoring back the stack pointer
 		ret
 ;---[Extend object capacity]---------------
 .ext:	mov		param2, [this + CAPACITY]
@@ -4595,8 +4587,8 @@ end if
 		test	status, status
 		jnz		.back						; if (status), then go back
 ;---[Error branch]-------------------------
-.error:	add		stack, space				; restoring back the stack pointer
-		mov		result, ERROR				; return ERROR
+.error:	mov		result, ERROR				; return ERROR
+		add		stack, space				; restoring back the stack pointer
 		ret
 }
 
@@ -4893,8 +4885,8 @@ else
 end if
 ;---[Normal exit branch]-------------------
 .exit:	mov		result, [s_size]			; get "size" variable from the stack
-		add		stack, space				; restoring back the stack pointer
 		shr		result, KSCALE				; return count
+		add		stack, space				; restoring back the stack pointer
 		ret
 ;---[Extend object capacity]---------------
 .ext:	mov		param2, size
@@ -4905,8 +4897,8 @@ end if
 		test	status, status				; if (status)
 		jnz		.back						;     then go back
 ;---[Error branch]-------------------------
-.error:	add		stack, space				; restoring back the stack pointer
-		mov		result, ERROR				; return ERROR
+.error:	mov		result, ERROR				; return ERROR
+		add		stack, space				; restoring back the stack pointer
 		ret
 }
 
@@ -4931,14 +4923,15 @@ func	equ		r8							; compare function
 ;---[Internal variables]-------------------
 rhead	equ		rax							; chain head
 rtail	equ		rdx							; chain tail
+value	equ		r9							; key value
+total	equ		r10							; count of duplicates
 node	equ		r11							; node index
 tarray	equ		r12							; pointer to array of nodes
 pool	equ		r13							; pointer to pool free node
 titer	equ		r14							; target iterator
 count	equ		r15							; count of unique elements
-total	equ		r9							; count of duplicates
-value	equ		xmm0						; key value
-temp	equ		xmm1						; temporary register
+key		equ		xmm0						; key value
+data	equ		xmm1						; temporary register
 prev	equ		node						; previous node
 index	equ		func						; element index
 back	equ		func						; back address
@@ -4956,9 +4949,8 @@ s_pool	equ		stack + 9 * 8				; stack position of "pool" variable
 s_titer	equ		stack + 10 * 8				; stack position of "titer" variable
 s_count	equ		stack + 11 * 8				; stack position of "count" variable
 s_value	equ		stack + 12 * 8				; stack position of "value" variable
-s_temp	equ		stack + 14 * 8				; stack position of "temp" variable
-s_total	equ		stack + 16 * 8				; stack position of "total" variable
-space	= 17 * 8							; stack size required by the procedure
+s_total	equ		stack + 13 * 8				; stack position of "total" variable
+space	= 15 * 8							; stack size required by the procedure
 ;------------------------------------------
 		sub		stack, space				; reserving stack size for local vars
 		mov		[s_tarr], tarray			; save old value of "tarray" variable
@@ -4980,8 +4972,8 @@ space	= 17 * 8							; stack size required by the procedure
 		mov		[s_slim], size				; save "limit" variable into the stack
 		mov		[s_tlim], titer				; tlimit = EMPTY
 		mov		[s_head], pool				; save "head" variable into the stack
-		movdqa	value, [sarray + siter + NDATA]
-		movdqa	[s_value], value			; save "value" variable into the stack
+		mov		value, [sarray + siter + NDATA]
+		mov		[s_value], value			; save "value" variable into the stack
 		mov		qword [s_total], 1			; total = 1
 		mov		node, NMASK					; load node mask
 		and		node, siter					; node = siter & NMASK
@@ -4993,11 +4985,9 @@ space	= 17 * 8							; stack size required by the procedure
 		sub		qword [s_size], KSIZE		; if (--size == 0)
 		jz		.skip						;     then skip following code
 ;---[Unique loop]--------------------------
-.loop:	movdqa	temp, [sarray + siter + NDATA]
-		movdqa	[s_temp], temp				; save "temp" variable into the stack
-		mov		param2, [sarray + siter + NDATA]
+.loop:	mov		param2, [sarray + siter + NDATA]
 		mov		param1, [s_value]
-		call	qword [s_func]				; result = Compare (value.key, temp.key)
+		call	qword [s_func]				; result = Compare (value.key, sarray[siter].key)
 		mov		sarray, [s_sarr]			; get "sarray" variable from the stack
 		mov		siter, [s_siter]			; get "siter" variable from the stack
 		mov		total, [s_total]			; get "total" variable from the stack
@@ -5007,14 +4997,16 @@ space	= 17 * 8							; stack size required by the procedure
 		mov		back, .back2
 		cmp		titer, [s_tlim]				;     if (titer cond tlimit)
 		jg		.tnext						;         then go to next node
-.back2:	movq	value, [s_value]
-		movq	temp, [s_total]
-	punpcklqdq	value, temp					;     value.data = total
-		movdqa	[tarray + titer + NDATA], value
+.back2:	movq	key, [s_value]
+		movq	data, [s_total]
+	punpcklqdq	key, data
+		movdqa	[tarray + titer + NDATA], key
 		add		count, KSIZE				;     count++
-		movdqa	temp, [s_temp]				;     get "temp" variable from the stack
-		xor		total, total				;     total = 0
-		movdqa	[s_value], temp				;     value = temp }
+		mov		sarray, [s_sarr]			;     get "sarray" variable from the stack
+		mov		siter, [s_siter]			;     get "siter" variable from the stack
+		mov		value,  [sarray + siter + NDATA]
+		xor		total, total				;     total = 0 }
+		mov		[s_value], value			; save "value" variable into the stack
 @@:		add		total, 1					; total++
 		mov		[s_total], total			; save "total" variable into the stack
 		mov		node, NMASK					; load node mask
@@ -5031,10 +5023,10 @@ space	= 17 * 8							; stack size required by the procedure
 		mov		back, .back4
 		cmp		titer, [s_tlim]				; if (titer cond tlimit)
 		jg		.tnext						;     then go to next node
-.back4:	movq	value, [s_value]
-		movq	temp, [s_total]
-	punpcklqdq	value, temp					;     value.data = total
-		movdqa	[tarray + titer + NDATA], value
+.back4:	movq	key, [s_value]
+		movq	data, [s_total]
+	punpcklqdq	key, data
+		movdqa	[tarray + titer + NDATA], key
 		add		count, KSIZE				;     count++
 		mov		this, [s_this]				; get "this" variable from the stack
 		mov		node, NMASK					; load node mask
@@ -5132,8 +5124,8 @@ else
 end if
 ;---[Normal exit branch]-------------------
 .exit:	mov		result, [this + SIZE]
-		add		stack, space				; restoring back the stack pointer
 		shr		result, KSCALE				; return this.size
+		add		stack, space				; restoring back the stack pointer
 		ret
 ;---[Extend object capacity]---------------
 .ext:	mov		param2, size
@@ -5143,8 +5135,8 @@ end if
 		test	status, status				; if (status)
 		jnz		.back						;     then go back
 ;---[Error branch]-------------------------
-.error:	add		stack, space				; restoring back the stack pointer
-		mov		result, ERROR				; return ERROR
+.error:	mov		result, ERROR				; return ERROR
+		add		stack, space				; restoring back the stack pointer
 		ret
 }
 UniqueList:	UNIQUE	0
@@ -5193,21 +5185,21 @@ space	= 3 * 8								; stack size required by the procedure
 		mov		this, [s_this]				; get "this" variable from the stack
 		mov		source, [s_src]				; get "source" variable from the stack
 .size:	add		stack, space				; restoring back the stack pointer
-		mov		size, [this + SIZE]
 		xor		result, result				; result = 0
 		mov		great, +1					; great = +1
 		mov		less, -1					; less = -1
+		mov		size, [this + SIZE]
 		cmp		size, [source + SIZE]
 		cmovg	result, great				; if (this.size > source.size), return great
 		cmovl	result, less				; if (this.size < source.size), return less
 		ret									; if (this.size == source.size), return equal
 ;---[Normal exit branch]-------------------
-.exit:	add		stack, space				; restoring back the stack pointer
-		mov		result, status				; return status
+.exit:	mov		result, status				; return status
+		add		stack, space				; restoring back the stack pointer
 		ret
 ;---[Equal lists branch]-------------------
-.equal:	add		stack, space				; restoring back the stack pointer
-		xor		result, result				; return 0
+.equal:	xor		result, result				; return 0
+		add		stack, space				; restoring back the stack pointer
 		ret
 
 ;******************************************************************************;
@@ -5225,7 +5217,7 @@ func	equ		rsi							; compare function
 ;---[Internal variables]-------------------
 status	equ		al							; operation status
 result	equ		rax							; result register
-size	equ		result						; object size
+size	equ		r8							; object size
 ;------------------------------------------
 		mov		size, [this + SIZE]			; get object size
 		sub		size, NSIZE					; if (size <= 1)
@@ -5236,16 +5228,12 @@ size	equ		result						; object size
 		mov		param3, size
 		mov		param2, [this + HEAD]
 		mov		param1, [this + ARRAY]
-		call	checkfunc					; result = corefunc (array, iter, size - 1, func)
+		call	checkfunc					; result = checkfunc (array, iter, size - 1, func)
 		cmp		result, EMPTY				; check result
 		set#c2	status						; and return correct status
 .exit:	ret
 }
-
-; Check for ascending sort order
 CheckSortAsc:	CHECK	CheckSortAscFwd, be, e
-
-; Check for descending sort order
 CheckSortDsc:	CHECK	CheckSortDscFwd, be, e
 
 ;==============================================================================;

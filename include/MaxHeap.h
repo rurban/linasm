@@ -90,7 +90,7 @@ size_t CountKeys (const adt_t keys[], size_t size, size_t pos, size_t count) con
 //****************************************************************************//
 //      Merging of heaps                                                      //
 //****************************************************************************//
-size_t Merge (MaxHeap *source);
+size_t Merge (const MaxHeap *source);
 
 //****************************************************************************//
 //      Heap properties                                                       //
@@ -177,7 +177,7 @@ size_t MaxHeap_CountKeys (const struct MaxHeap *heap, const union adt_t keys[], 
 //****************************************************************************//
 //      Merging of heaps                                                      //
 //****************************************************************************//
-size_t MaxHeap_Merge (struct MaxHeap *heap, struct MaxHeap *source);
+size_t MaxHeap_Merge (struct MaxHeap *heap, const struct MaxHeap *source);
 
 //****************************************************************************//
 //      Heap properties                                                       //

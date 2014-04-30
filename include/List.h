@@ -199,12 +199,8 @@ bool MaxFwd (data_t *data, size_t count, KeyCmp func);
 bool MaxBwd (data_t *data, size_t count, KeyCmp func);
 
 //****************************************************************************//
-//      Search algorithms                                                     //
-//****************************************************************************//
-
-//============================================================================//
 //      Key searching                                                         //
-//============================================================================//
+//****************************************************************************//
 
 // Single key searching
 bool FindKeyFwd (data_t *data, adt_t key, size_t count, KeyCmp func);
@@ -214,15 +210,15 @@ bool FindKeyBwd (data_t *data, adt_t key, size_t count, KeyCmp func);
 bool FindKeysFwd (data_t *data, const adt_t keys[], size_t size, size_t count, KeyCmp func);
 bool FindKeysBwd (data_t *data, const adt_t keys[], size_t size, size_t count, KeyCmp func);
 
-//============================================================================//
+//****************************************************************************//
 //      Duplicates searching                                                  //
-//============================================================================//
+//****************************************************************************//
 bool FindDupFwd (data_t *data, KeyCmp func);
 bool FindDupBwd (data_t *data, KeyCmp func);
 
-//============================================================================//
+//****************************************************************************//
 //      Unordered elements searching                                          //
-//============================================================================//
+//****************************************************************************//
 
 // Ascending sort order
 bool FindNonAscFwd (data_t *data, KeyCmp func);
@@ -232,9 +228,9 @@ bool FindNonAscBwd (data_t *data, KeyCmp func);
 bool FindNonDscFwd (data_t *data, KeyCmp func);
 bool FindNonDscBwd (data_t *data, KeyCmp func);
 
-//============================================================================//
+//****************************************************************************//
 //      Searching for differences                                             //
-//============================================================================//
+//****************************************************************************//
 bool FindDiffFwd (data_t *data, const List *source, size_t count, KeyCmp func);
 bool FindDiffBwd (data_t *data, const List *source, size_t count, KeyCmp func);
 
@@ -481,12 +477,8 @@ bool List_MaxFwd (struct List *list, struct data_t *data, size_t count, KeyCmp f
 bool List_MaxBwd (struct List *list, struct data_t *data, size_t count, KeyCmp func);
 
 //****************************************************************************//
-//      Search algorithms                                                     //
-//****************************************************************************//
-
-//============================================================================//
 //      Key searching                                                         //
-//============================================================================//
+//****************************************************************************//
 
 // Single key searching
 bool List_FindKeyFwd (struct List *list, struct data_t *data, union adt_t key, size_t count, KeyCmp func);
@@ -496,15 +488,15 @@ bool List_FindKeyBwd (struct List *list, struct data_t *data, union adt_t key, s
 bool List_FindKeysFwd (struct List *list, struct data_t *data, const union adt_t keys[], size_t size, size_t count, KeyCmp func);
 bool List_FindKeysBwd (struct List *list, struct data_t *data, const union adt_t keys[], size_t size, size_t count, KeyCmp func);
 
-//============================================================================//
+//****************************************************************************//
 //      Duplicates searching                                                  //
-//============================================================================//
+//****************************************************************************//
 bool List_FindDupFwd (struct List *list, struct data_t *data, KeyCmp func);
 bool List_FindDupBwd (struct List *list, struct data_t *data, KeyCmp func);
 
-//============================================================================//
+//****************************************************************************//
 //      Unordered elements searching                                          //
-//============================================================================//
+//****************************************************************************//
 
 // Ascending sort order
 bool List_FindNonAscFwd (struct List *list, struct data_t *data, KeyCmp func);
@@ -514,9 +506,9 @@ bool List_FindNonAscBwd (struct List *list, struct data_t *data, KeyCmp func);
 bool List_FindNonDscFwd (struct List *list, struct data_t *data, KeyCmp func);
 bool List_FindNonDscBwd (struct List *list, struct data_t *data, KeyCmp func);
 
-//============================================================================//
+//****************************************************************************//
 //      Searching for differences                                             //
-//============================================================================//
+//****************************************************************************//
 bool List_FindDiffFwd (struct List *list, struct data_t *data, const struct List *source, size_t count, KeyCmp func);
 bool List_FindDiffBwd (struct List *list, struct data_t *data, const struct List *source, size_t count, KeyCmp func);
 

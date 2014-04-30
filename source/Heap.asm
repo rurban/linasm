@@ -129,8 +129,8 @@ public	CountKeys			as	'_ZNK7MaxHeap9CountKeysEPK5adt_tmmm'
 ;******************************************************************************;
 public	MergeMin			as	'MinHeap_Merge'
 public	MergeMax			as	'MaxHeap_Merge'
-public	MergeMin			as	'_ZN7MinHeap5MergeEPS_'
-public	MergeMax			as	'_ZN7MaxHeap5MergeEPS_'
+public	MergeMin			as	'_ZN7MinHeap5MergeEPKS_'
+public	MergeMax			as	'_ZN7MaxHeap5MergeEPKS_'
 
 ;******************************************************************************;
 ;       Heap properties                                                        ;
@@ -254,8 +254,8 @@ space	= 7 * 8								; stack size required by the procedure
 .exit:	movdqa	[array + size], data		; array[size] = data
 		test	ifunc, ifunc				; if (ifunc != NULL)
 		jnz		.corr2						;     then call index call back function
-.back2:	add		stack, space				; restoring back the stack pointer
-		mov		result, 1					; return true
+.back2:	mov		result, 1					; return true
+		add		stack, space				; restoring back the stack pointer
 		ret
 ;---[Invoke call back function branch]-----
 .corr1:	lea		param1, [array + size]
@@ -367,8 +367,8 @@ space	= 11 * 8							; stack size required by the procedure
 .back2:	mov		leaf, [s_leaf]				; restore old value of "leaf" variable
 		mov		value, [s_value]			; restore old value of "value" variable
 		mov		ptr, [s_ptr]				; restore old value of "ptr" variable
-		add		stack, space				; restoring back the stack pointer
 		mov		result, 1					; return true
+		add		stack, space				; restoring back the stack pointer
 		ret
 ;---[Invoke call back function branch]-----
 .corr1:	lea		param1, [array + root]
@@ -420,12 +420,12 @@ space	= 3 * 8								; stack size required by the procedure
 		mov		newcap, [s_ncap]			; get "newcap" variable from the stack
 		mov		[this + ARRAY], array		; this.array = array
 		mov		[this + CAPACITY], newcap	; this.capacity = newcap
-		add		stack, space				; restoring back the stack pointer
 		mov		status, 1					; return true
+		add		stack, space				; restoring back the stack pointer
 		ret
 ;---[Error branch]-------------------------
-.error:	add		stack, space				; restoring back the stack pointer
-		xor		status, status				; return false
+.error:	xor		status, status				; return false
+		add		stack, space				; restoring back the stack pointer
 		ret
 
 ;******************************************************************************;
@@ -593,8 +593,8 @@ space	= 3 * 8								; stack size required by the procedure
 		je		.ext						;     then try to extend object capacity
 ;---[Normal execution branch]--------------
 .back:	add		size, KSIZE					; size++
-		mov		[this + SIZE], size			; update object size
 		movdqu	temp, [data]
+		mov		[this + SIZE], size			; update object size
 		mov		param4, [this + IFUNC]
 		mov		param3, [this + KFUNC]
 		lea		param2, [size - KSIZE]
@@ -642,9 +642,9 @@ temp	equ		xmm0						; temporary register
 		jz		.error						;     then go to error branch
 ;---[Normal execution branch]--------------
 		sub		size, KSIZE					; size--
-		mov		[this + SIZE], size			; update object size
 		movdqa	temp, [array]
 		movdqu	[data], temp				; data[0] = array[0]
+		mov		[this + SIZE], size			; update object size
 		test	size, size					; if (size == 0)
 		jz		.exit						;     then go to exit
 		movdqa	temp, [array + size]		; temp = array[size]
@@ -692,17 +692,17 @@ space	= 5 * 8								; stack size required by the procedure
 		mov		array, [this + ARRAY]		; get pointer to array of nodes
 		mov		size, [this + SIZE]			; get object size
 		mov		func, [this + KFUNC]		; get pointer to key compare function
-		cmp		size, pos					; if (size <= pos)
-		jbe		.error						;     then go to error branch
-;---[Normal execution branch]--------------
 		sub		size, KSIZE					; size--
-		mov		[this + SIZE], size			; update object size
+		cmp		size, pos					; if (size < pos)
+		jl		.error						;     then go to error branch
+;---[Normal execution branch]--------------
 		mov		[s_this], this				; save "this" variable into the stack
 		mov		[s_pos], pos				; save "pos" variable into the stack
 		mov		[s_array], array			; save "array" variable into the stac
 		mov		[s_size], size				; save "size" variable into the stack
 		movdqa	temp, [array + pos]
 		movdqu	[data], temp				; odata[0] = array[pos].data
+		mov		[this + SIZE], size			; update object size
 ;---[Compare keys]-------------------------
 		mov		param1, [array + size]
 		mov		param2, [array + pos]
@@ -737,12 +737,12 @@ space	= 5 * 8								; stack size required by the procedure
 		mov		param2, pos
 		shr		param2, KSCALE
 		call	func						; call ifunc (array + pos, pos)
-		add		stack, space				; restoring back the stack pointer
 		mov		status, 1					; return true
+		add		stack, space				; restoring back the stack pointer
 		ret
 ;---[Error branch]-------------------------
-.error:	add		stack, space				; restoring back the stack pointer
-		xor		status, status				; return false
+.error:	xor		status, status				; return false
+		add		stack, space				; restoring back the stack pointer
 		ret
 }
 ExtractMin:	EXTRACT	SiftMinUp, SiftMinDown, l
@@ -821,12 +821,12 @@ space	= 5 * 8								; stack size required by the procedure
 		mov		param2, pos
 		shr		param2, KSCALE
 		call	func						; call ifunc (array + pos, pos)
-		add		stack, space				; restoring back the stack pointer
 		mov		status, 1					; return true
+		add		stack, space				; restoring back the stack pointer
 		ret
 ;---[Error branch]-------------------------
-.error:	add		stack, space				; restoring back the stack pointer
-		xor		status, status				; return false
+.error:	xor		status, status				; return false
+		add		stack, space				; restoring back the stack pointer
 		ret
 }
 SetMin:	SET	SiftMinUp, SiftMinDown, l
@@ -846,10 +846,10 @@ array	equ		rax							; pointer to array of nodes
 temp	equ		xmm0						; temporary register
 ;---[Check position]-----------------------
 		shl		pos, KSCALE
+		mov		array, [this + ARRAY]		; get pointer to array of nodes
 		cmp		[this + SIZE], pos			; if (size <= pos)
 		jbe		.error						;     then go to error branch
 ;---[Normal execution branch]--------------
-		mov		array, [this + ARRAY]		; get pointer to array of nodes
 		movdqa	temp, [array + pos]
 		movdqu	[data], temp				; data[0] = array[pos]
 		mov		status, 1					; return true
@@ -934,12 +934,12 @@ space	= 5 * 8								; stack size required by the procedure
 		mov		param2, pos
 		shr		param2, KSCALE
 		call	func						; call ifunc (array + pos, pos)
-		add		stack, space				; restoring back the stack pointer
 		mov		status, 1					; return true
+		add		stack, space				; restoring back the stack pointer
 		ret
 ;---[Error branch]-------------------------
-.error:	add		stack, space				; restoring back the stack pointer
-		xor		status, status				; return false
+.error:	xor		status, status				; return false
+		add		stack, space				; restoring back the stack pointer
 		ret
 }
 ReplaceMin:	REPLACE	SiftMinUp, SiftMinDown, l
@@ -962,12 +962,12 @@ count	equ		r8							; count of nodes to check
 ;---[Internal variables]-------------------
 result	equ		rax							; result register
 base	equ		r10							; base for pointer arithmetic
-iter	equ		r11							; iterator value
+array	equ		r11							; pointer to array of nodes
 size	equ		result						; object size
 func	equ		result						; compare function
 stack	equ		rsp							; stack pointer
 s_base	equ		stack + 0 * 8				; stack position of "base" variable
-s_iter	equ		stack + 1 * 8				; stack position of "iter" variable
+s_array	equ		stack + 1 * 8				; stack position of "array" variable
 s_data	equ		stack + 2 * 8				; stack position of "data" variable
 s_key	equ		stack + 3 * 8				; stack position of "key" variable
 s_count	equ		stack + 4 * 8				; stack position of "count" variable
@@ -977,6 +977,7 @@ space	= 7 * 8								; stack size required by the procedure
 		sub		stack, space				; reserving stack size for local vars
 ;---[Check position]-----------------------
 		shl		pos, KSCALE
+		mov		array, [this + ARRAY]		; get pointer to array of nodes
 		mov		size, [this + SIZE]			; get object size
 		sub		size, pos					; if (size <= pos)
 		jbe		.ntfnd						;     return NOT_FOUND
@@ -988,37 +989,36 @@ space	= 7 * 8								; stack size required by the procedure
 		test	count, count				; if (count == 0)
 		jz		.ntfnd						;     return NOT_FOUND
 ;---[Normal execution branch]--------------
-		mov		iter, [this + ARRAY]		; get pointer to array of nodes
-		mov		func, [this + KFUNC]			; get pointer to key compare function
-		mov		[s_base], iter				; save "base" variable into the stack
-		mov		[s_iter], iter				; save "iter" variable into the stack
+		mov		func, [this + KFUNC]		; get pointer to key compare function
+		mov		[s_base], array				; save "base" variable into the stack
+		mov		[s_array], array			; save "array" variable into the stack
 		mov		[s_data], data				; save "data" variable into the stack
 		mov		[s_key], key				; save "key" variable into the stack
 		mov		[s_count], count			; save "count" variable into the stack
 		mov		[s_func], func				; save "func" variable into the stack
 ;---[Search loop]--------------------------
-.loop:	mov		param2, [iter]
+.loop:	mov		param2, [array]
 		mov		param1, [s_key]
-		call	qword [s_func]				; result = Compare (key, iter[0].key)
-		mov		iter, [s_iter]				; get "iter" variable from the stack
+		call	qword [s_func]				; result = Compare (key, array[0].key)
+		mov		array, [s_array]			; get "array" variable from the stack
 		test	result, result				; if (result == 0)
 		jz		.found						;     then go to found branch
-		add		iter, KSIZE					; iter++
-		mov		[s_iter], iter				; save "iter" variable into the stack
+		add		array, KSIZE				; array++
+		mov		[s_array], array			; save "array" variable into the stack
 		sub		qword [s_count], KSIZE		; count--
 		jnz		.loop						; do while (count != 0)
 ;---[Not found branch]---------------------
-.ntfnd:	add		stack, space				; restoring back the stack pointer
-		mov		result, NOT_FOUND			; return NOT_FOUND
+.ntfnd:	mov		result, NOT_FOUND			; return NOT_FOUND
+		add		stack, space				; restoring back the stack pointer
 		ret
 ;---[Found branch]-------------------------
 .found:	mov		data, [s_data]				; get "data" variable from the stack
-		movdqa	temp, [iter]
-		movdqu	[data], temp				; data[0] = array[iter]
-		mov		result, iter
-		sub		result, [s_base]			; result = iter - (array + 1)
-		add		stack, space				; restoring back the stack pointer
+		movdqa	temp, [array]
+		movdqu	[data], temp				; data[0] = array[0]
+		sub		array, [s_base]				; array = array - base
+		mov		result, array				; result = array
 		shr		result, KSCALE				; return result
+		add		stack, space				; restoring back the stack pointer
 		ret
 
 ;==============================================================================;
@@ -1035,12 +1035,12 @@ count	equ		r9							; count of nodes to check
 ;---[Internal variables]-------------------
 result	equ		rax							; result register
 base	equ		r10							; base for pointer arithmetic
-iter	equ		r11							; iterator value
+array	equ		r11							; pointer to array of nodes
 size	equ		result						; object size
 func	equ		result						; compare function
 stack	equ		rsp							; stack pointer
 s_base	equ		stack + 0 * 8				; stack position of "base" variable
-s_iter	equ		stack + 1 * 8				; stack position of "iter" variable
+s_array	equ		stack + 1 * 8				; stack position of "array" variable
 s_data	equ		stack + 2 * 8				; stack position of "data" variable
 s_keys	equ		stack + 3 * 8				; stack position of "keys" variable
 s_ksize	equ		stack + 4 * 8				; stack position of "ksize" variable
@@ -1051,6 +1051,7 @@ space	= 7 * 8								; stack size required by the procedure
 		sub		stack, space				; reserving stack size for local vars
 ;---[Check position]-----------------------
 		shl		pos, KSCALE
+		mov		array, [this + ARRAY]		; get pointer to array of nodes
 		mov		size, [this + SIZE]			; get object size
 		sub		size, pos					; if (size <= pos)
 		jbe		.ntfnd						;     return NOT_FOUND
@@ -1065,10 +1066,9 @@ space	= 7 * 8								; stack size required by the procedure
 		test	ksize, ksize				; if (ksize == 0)
 		jz		.ntfnd						;     return NOT_FOUND
 ;---[Normal execution branch]--------------
-		mov		iter, [this + ARRAY]		; get pointer to array of nodes
 		mov		func, [this + KFUNC]		; get pointer to key compare function
-		mov		[s_base], iter				; save "base" variable into the stack
-		mov		[s_iter], iter				; save "iter" variable into the stack
+		mov		[s_base], array				; save "base" variable into the stack
+		mov		[s_array], array			; save "array" variable into the stack
 		mov		[s_data], data				; save "data" variable into the stack
 		mov		[s_keys], keys				; save "keys" variable into the stack
 		mov		[s_ksize], ksize			; save "ksize" variable into the stack
@@ -1076,29 +1076,29 @@ space	= 7 * 8								; stack size required by the procedure
 		mov		[s_func], func				; save "func" variable into the stack
 ;---[Search loop]--------------------------
 .loop:	mov		param4, [s_func]
-		mov		param3, [iter]
+		mov		param3, [array]
 		mov		param2, [s_ksize]
 		mov		param1, [s_keys]
-		call	FindSet						; result = FindSet (keys, ksize, iter[0].key, kfunc)
-		mov		iter, [s_iter]				; get "iter" variable from the stack
+		call	FindSet						; result = FindSet (keys, ksize, array[0].key, kfunc)
+		mov		array, [s_array]			; get "array" variable from the stack
 		test	result, result				; if (result)
 		jnz		.found						;     then go to found branch
-		add		iter, KSIZE					; iter++
-		mov		[s_iter], iter				; save "iter" variable into the stack
+		add		array, KSIZE				; array++
+		mov		[s_array], array			; save "array" variable into the stack
 		sub		qword [s_count], KSIZE		; count--
 		jnz		.loop						; do while (count != 0)
 ;---[Not found branch]---------------------
-.ntfnd:	add		stack, space				; restoring back the stack pointer
-		mov		result, NOT_FOUND			; return NOT_FOUND
+.ntfnd:	mov		result, NOT_FOUND			; return NOT_FOUND
+		add		stack, space				; restoring back the stack pointer
 		ret
 ;---[Found branch]-------------------------
 .found:	mov		data, [s_data]				; get "data" variable from the stack
-		movdqa	temp, [iter]
-		movdqu	[data], temp				; data[0] = array[iter]
-		mov		result, iter
-		sub		result, [s_base]			; result = iter - (array + 1)
-		add		stack, space				; restoring back the stack pointer
+		movdqa	temp, [array]
+		movdqu	[data], temp				; data[0] = array[0]
+		sub		array, [s_base]				; array = array - base
+		mov		result, array				; result = array
 		shr		result, KSCALE				; return result
+		add		stack, space				; restoring back the stack pointer
 		ret
 
 ;******************************************************************************;
@@ -1117,11 +1117,11 @@ count	equ		rcx							; count of nodes to check
 ;---[Internal variables]-------------------
 status	equ		al							; operation status
 result	equ		rax							; result register
-iter	equ		r9							; iterator value
+array	equ		r11							; pointer to array of nodes
 size	equ		result						; object size
-func	equ		r10							; compare function
+func	equ		result						; compare function
 stack	equ		rsp							; stack pointer
-s_iter	equ		stack + 0 * 8				; stack position of "iter" variable
+s_array	equ		stack + 0 * 8				; stack position of "array" variable
 s_key	equ		stack + 1 * 8				; stack position of "key" variable
 s_count	equ		stack + 2 * 8				; stack position of "count" variable
 s_func	equ		stack + 3 * 8				; stack position of "func" variable
@@ -1132,6 +1132,7 @@ space	= 5 * 8
 		mov		qword [s_total], 0			; total = 0
 ;---[Check position]-----------------------
 		shl		pos, KSCALE
+		mov		array, [this + ARRAY]		; get pointer to array of nodes
 		mov		size, [this + SIZE]			; get object size
 		sub		size, pos					; if (size <= pos)
 		jbe		.exit						;     then go to exit
@@ -1143,23 +1144,22 @@ space	= 5 * 8
 		test	count, count				; if (count == 0)
 		jz		.exit						;     then go to exit
 ;---[Normal execution branch]--------------
-		mov		iter, [this + ARRAY]		; get pointer to array of nodes
 		mov		func, [this + KFUNC]		; get pointer to key compare function
-		mov		[s_iter], iter				; save "iter" variable into the stack
+		mov		[s_array], array			; save "array" variable into the stack
 		mov		[s_key], key				; save "key" variable into the stack
 		mov		[s_count], count			; save "count" variable into the stack
 		mov		[s_func], func				; save "func" variable into the stack
 ;---[Search loop]--------------------------
-.loop:	mov		param2, [iter]
+.loop:	mov		param2, [array]
 		mov		param1, [s_key]
-		call	qword [s_func]				; result = Compare (key, iter[0].key)
-		mov		iter, [s_iter]				; get "iter" variable from the stack
+		call	qword [s_func]				; result = Compare (key, array[0].key)
+		mov		array, [s_array]			; get "array" variable from the stack
 		test	result, result				; if (result == 0)
 		setz	status						; {
 		movzx	result, status
 		add		[s_total], result			;     then total++ }
-		add		iter, KSIZE					; iter++
-		mov		[s_iter], iter				; save "iter" variable into the stack
+		add		array, KSIZE				; array++
+		mov		[s_array], array			; save "array" variable into the stack
 		sub		qword [s_count], KSIZE		; count--
 		jnz		.loop						; do while (count != 0)
 ;---[End of search loop]-------------------
@@ -1179,11 +1179,11 @@ pos		equ		rcx							; beginning position
 count	equ		r8							; count of nodes to check
 ;---[Internal variables]-------------------
 result	equ		rax							; result register
-iter	equ		r9							; iterator value
+array	equ		r11							; pointer to array of nodes
 size	equ		result						; object size
-func	equ		r10							; compare function
+func	equ		result						; compare function
 stack	equ		rsp							; stack pointer
-s_iter	equ		stack + 0 * 8				; stack position of "iter" variable
+s_array	equ		stack + 0 * 8				; stack position of "array" variable
 s_keys	equ		stack + 1 * 8				; stack position of "keys" variable
 s_ksize	equ		stack + 2 * 8				; stack position of "ksize" variable
 s_count	equ		stack + 3 * 8				; stack position of "count" variable
@@ -1195,6 +1195,7 @@ space	= 7 * 8
 		mov		qword [s_total], 0			; total = 0
 ;---[Check position]-----------------------
 		shl		pos, KSCALE
+		mov		array, [this + ARRAY]		; get pointer to array of nodes
 		mov		size, [this + SIZE]			; get object size
 		sub		size, pos					; if (size <= pos)
 		jbe		.exit						;     then go to exit
@@ -1209,23 +1210,22 @@ space	= 7 * 8
 		test	ksize, ksize				; if (ksize == 0)
 		jz		.exit						;     then go to exit
 ;---[Normal execution branch]--------------
-		mov		iter, [this + ARRAY]		; get pointer to array of nodes
 		mov		func, [this + KFUNC]		; get pointer to key compare function
-		mov		[s_iter], iter				; save "iter" variable into the stack
+		mov		[s_array], array			; save "array" variable into the stack
 		mov		[s_keys], keys				; save "keys" variable into the stack
 		mov		[s_ksize], ksize			; save "ksize" variable into the stack
 		mov		[s_count], count			; save "count" variable into the stack
 		mov		[s_func], func				; save "func" variable into the stack
 ;---[Search loop]--------------------------
 .loop:	mov		param4, [s_func]
-		mov		param3, [iter]
+		mov		param3, [array]
 		mov		param2, [s_ksize]
 		mov		param1, [s_keys]
-		call	FindSet						; result = FindSet (keys, ksize, iter[0].key, kfunc)
-		mov		iter, [s_iter]				; get "iter" variable from the stack
+		call	FindSet						; result = FindSet (keys, ksize, array[0].key, kfunc)
+		mov		array, [s_array]			; get "array" variable from the stack
 		add		[s_total], result			; if (result) then total++
-		add		iter, KSIZE					; iter++
-		mov		[s_iter], iter				; save "iter" variable into the stack
+		add		array, KSIZE				; array++
+		mov		[s_array], array			; save "array" variable into the stack
 		sub		qword [s_count], KSIZE		; count--
 		jnz		.loop						; do while (count != 0)
 ;---[End of search loop]-------------------
@@ -1417,7 +1417,6 @@ space	= 3 * 8								; stack size required by the procedure
 		mov		source, [s_src]				; get "source" variable from the stack
 		mov		size, [s_size]				; get "size" variable from the stack
 		add		[this + SIZE], size			; this.size += source.size
-		mov		qword [source + SIZE], 0	; source.size = 0
 		mov		param4, [this + IFUNC]
 		mov		param3, [this + KFUNC]
 		mov		param2, [this + SIZE]
@@ -1425,8 +1424,8 @@ space	= 3 * 8								; stack size required by the procedure
 		call	heapfunc					; call heapfunc (array, size, kfunc, ifunc)
 ;---[Normal exit branch]-------------------
 .exit:	mov		result, [s_size]			; get "size" variable from the stack
-		add		stack, space				; restoring back the stack pointer
 		shr		result, KSCALE				; return result
+		add		stack, space				; restoring back the stack pointer
 		ret
 ;---[Extend object capacity]---------------
 .ext:	mov		param2, size
@@ -1436,8 +1435,8 @@ space	= 3 * 8								; stack size required by the procedure
 		test	status, status				; if (status)
 		jnz		.back						;     then go back
 ;---[Error branch]-------------------------
-.error:	add		stack, space				; restoring back the stack pointer
-		mov		result, ERROR				; return ERROR
+.error:	mov		result, ERROR				; return ERROR
+		add		stack, space				; restoring back the stack pointer
 		ret
 }
 MergeMin:	MERGE	MakeHeapMin
