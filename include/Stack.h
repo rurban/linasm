@@ -46,12 +46,12 @@ Stack (const Stack &source);
 //****************************************************************************//
 //      Copying elements                                                      //
 //****************************************************************************//
-size_t Copy (const Stack *source, size_t pos, size_t count);
+size_t Copy (size_t tpos, const Stack *source, size_t spos, size_t count);
 
 //****************************************************************************//
 //      Moving elements                                                       //
 //****************************************************************************//
-size_t Move (Stack *source, size_t pos, size_t count);
+size_t Move (size_t tpos, Stack *source, size_t spos, size_t count);
 
 //****************************************************************************//
 //      Addition of element                                                   //
@@ -91,35 +91,54 @@ bool Replace (data_t *odata, const data_t *ndata, size_t pos);
 //****************************************************************************//
 //      Changing elements order                                               //
 //****************************************************************************//
+
+// Reversing elements order
 size_t Reverse (size_t pos, size_t count);
-bool Swap (size_t pos);
+
+// Swapping elements
+bool Swap (size_t pos1, size_t pos2);
 
 //****************************************************************************//
 //      Minimum and maximum value                                             //
 //****************************************************************************//
-size_t Min (data_t *data, size_t pos, size_t count, KeyCmp func) const;
-size_t Max (data_t *data, size_t pos, size_t count, KeyCmp func) const;
+
+// Minimum value
+size_t MinFwd (data_t *data, size_t pos, size_t count, KeyCmp func) const;
+size_t MinBwd (data_t *data, size_t pos, size_t count, KeyCmp func) const;
+
+// Maximum value
+size_t MaxFwd (data_t *data, size_t pos, size_t count, KeyCmp func) const;
+size_t MaxBwd (data_t *data, size_t pos, size_t count, KeyCmp func) const;
 
 //****************************************************************************//
-//      Search algorithms                                                     //
-//****************************************************************************//
-
-//============================================================================//
 //      Key searching                                                         //
-//============================================================================//
-size_t FindKey (data_t *data, adt_t key, size_t pos, size_t count, KeyCmp func) const;
-size_t FindKeys (data_t *data, const adt_t keys[], size_t size, size_t pos, size_t count, KeyCmp func) const;
+//****************************************************************************//
 
-//============================================================================//
+// Single key searching
+size_t FindKeyFwd (data_t *data, adt_t key, size_t pos, size_t count, KeyCmp func) const;
+size_t FindKeyBwd (data_t *data, adt_t key, size_t pos, size_t count, KeyCmp func) const;
+
+// Keys set searching
+size_t FindKeysFwd (data_t *data, const adt_t keys[], size_t size, size_t pos, size_t count, KeyCmp func) const;
+size_t FindKeysBwd (data_t *data, const adt_t keys[], size_t size, size_t pos, size_t count, KeyCmp func) const;
+
+//****************************************************************************//
 //      Searching for differences                                             //
-//============================================================================//
-size_t FindDiff (data_t *data, const Stack *source, size_t pos, size_t count, KeyCmp func) const;
+//****************************************************************************//
+size_t FindDiffFwd (data_t *data, size_t tpos, const Stack *source, size_t spos, size_t count, KeyCmp func) const;
+size_t FindDiffBwd (data_t *data, size_t tpos, const Stack *source, size_t spos, size_t count, KeyCmp func) const;
 
 //****************************************************************************//
 //      Key counting                                                          //
 //****************************************************************************//
-size_t CountKey (adt_t key, size_t pos, size_t count, KeyCmp func) const;
-size_t CountKeys (const adt_t keys[], size_t size, size_t pos, size_t count, KeyCmp func) const;
+
+// Single key counting
+size_t CountKeyFwd (adt_t key, size_t pos, size_t count, KeyCmp func) const;
+size_t CountKeyBwd (adt_t key, size_t pos, size_t count, KeyCmp func) const;
+
+// Keys set counting
+size_t CountKeysFwd (const adt_t keys[], size_t size, size_t pos, size_t count, KeyCmp func) const;
+size_t CountKeysBwd (const adt_t keys[], size_t size, size_t pos, size_t count, KeyCmp func) const;
 
 //****************************************************************************//
 //      Comparison of stacks                                                  //
@@ -173,12 +192,12 @@ void Stack_FreeStack (struct Stack *stack);
 //****************************************************************************//
 //      Copying elements                                                      //
 //****************************************************************************//
-size_t Stack_Copy (struct Stack *stack, const struct Stack *source, size_t pos, size_t count);
+size_t Stack_Copy (struct Stack *stack, size_t tpos, const struct Stack *source, size_t spos, size_t count);
 
 //****************************************************************************//
 //      Moving elements                                                       //
 //****************************************************************************//
-size_t Stack_Move (struct Stack *stack, struct Stack *source, size_t pos, size_t count);
+size_t Stack_Move (struct Stack *stack, size_t tpos, struct Stack *source, size_t spos, size_t count);
 
 //****************************************************************************//
 //      Addition of element                                                   //
@@ -218,35 +237,54 @@ bool Stack_Replace (struct Stack *stack, struct data_t *odata, const struct data
 //****************************************************************************//
 //      Changing elements order                                               //
 //****************************************************************************//
+
+// Reversing elements order
 size_t Stack_Reverse (struct Stack *stack, size_t pos, size_t count);
-bool Stack_Swap (struct Stack *stack, size_t pos);
+
+// Swapping elements
+bool Stack_Swap (struct Stack *stack, size_t pos1, size_t pos2);
 
 //****************************************************************************//
 //      Minimum and maximum value                                             //
 //****************************************************************************//
-size_t Stack_Min (const struct Stack *stack, struct data_t *data, size_t pos, size_t count, KeyCmp func);
-size_t Stack_Max (const struct Stack *stack, struct data_t *data, size_t pos, size_t count, KeyCmp func);
+
+// Minimum value
+size_t Stack_MinFwd (const struct Stack *stack, struct data_t *data, size_t pos, size_t count, KeyCmp func);
+size_t Stack_MinBwd (const struct Stack *stack, struct data_t *data, size_t pos, size_t count, KeyCmp func);
+
+// Maximum value
+size_t Stack_MaxFwd (const struct Stack *stack, struct data_t *data, size_t pos, size_t count, KeyCmp func);
+size_t Stack_MaxBwd (const struct Stack *stack, struct data_t *data, size_t pos, size_t count, KeyCmp func);
 
 //****************************************************************************//
-//      Search algorithms                                                     //
-//****************************************************************************//
-
-//============================================================================//
 //      Key searching                                                         //
-//============================================================================//
-size_t Stack_FindKey (const struct Stack *stack, struct data_t *data, union adt_t key, size_t pos, size_t count, KeyCmp func);
-size_t Stack_FindKeys (const struct Stack *stack, struct data_t *data, const union adt_t keys[], size_t size, size_t pos, size_t count, KeyCmp func);
+//****************************************************************************//
 
-//============================================================================//
+// Single key searching
+size_t Stack_FindKeyFwd (const struct Stack *stack, struct data_t *data, union adt_t key, size_t pos, size_t count, KeyCmp func);
+size_t Stack_FindKeyBwd (const struct Stack *stack, struct data_t *data, union adt_t key, size_t pos, size_t count, KeyCmp func);
+
+// Keys set searching
+size_t Stack_FindKeysFwd (const struct Stack *stack, struct data_t *data, const union adt_t keys[], size_t size, size_t pos, size_t count, KeyCmp func);
+size_t Stack_FindKeysBwd (const struct Stack *stack, struct data_t *data, const union adt_t keys[], size_t size, size_t pos, size_t count, KeyCmp func);
+
+//****************************************************************************//
 //      Searching for differences                                             //
-//============================================================================//
-size_t Stack_FindDiff (const struct Stack *stack, struct data_t *data, const struct Stack *source, size_t pos, size_t count, KeyCmp func);
+//****************************************************************************//
+size_t Stack_FindDiffFwd (const struct Stack *stack, struct data_t *data, size_t tpos, const struct Stack *source, size_t spos, size_t count, KeyCmp func);
+size_t Stack_FindDiffBwd (const struct Stack *stack, struct data_t *data, size_t tpos, const struct Stack *source, size_t spos, size_t count, KeyCmp func);
 
 //****************************************************************************//
 //      Key counting                                                          //
 //****************************************************************************//
-size_t Stack_CountKey (const struct Stack *stack, union adt_t key, size_t pos, size_t count, KeyCmp func);
-size_t Stack_CountKeys (const struct Stack *stack, const union adt_t keys[], size_t size, size_t pos, size_t count, KeyCmp func);
+
+// Single key counting
+size_t Stack_CountKeyFwd (const struct Stack *stack, union adt_t key, size_t pos, size_t count, KeyCmp func);
+size_t Stack_CountKeyBwd (const struct Stack *stack, union adt_t key, size_t pos, size_t count, KeyCmp func);
+
+// Keys set counting
+size_t Stack_CountKeysFwd (const struct Stack *stack, const union adt_t keys[], size_t size, size_t pos, size_t count, KeyCmp func);
+size_t Stack_CountKeysBwd (const struct Stack *stack, const union adt_t keys[], size_t size, size_t pos, size_t count, KeyCmp func);
 
 //****************************************************************************//
 //      Comparison of stacks                                                  //
