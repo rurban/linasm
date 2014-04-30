@@ -14,17 +14,17 @@ include	'Macro.inc'
 ;###############################################################################
 
 ; Copy function
-extrn	'Array_Copy_size'				as	Copy
+extrn	'Array_Copy_size'		as	Copy
 
 ; Boyer-Moore-Horspool pattern hash
-extrn	'_ZN3BMHC1EPKhmb'				as	BMH8
-extrn	'_ZN3BMHC1EPKtmb'				as	BMH16
-extrn	'_ZN3BMHC1EPKjmb'				as	BMH32
+extrn	'BMH_uint8'				as	BMH8
+extrn	'BMH_uint16'			as	BMH16
+extrn	'BMH_uint32'			as	BMH32
 
 ; Boyer-Moore-Horspool subsequence searching algorithm
-extrn	'_ZN8Sequence4FindEPKhmPK3BMH'	as	BMH_Find8
-extrn	'_ZN8Sequence4FindEPKtmPK3BMH'	as	BMH_Find16
-extrn	'_ZN8Sequence4FindEPKjmPK3BMH'	as	BMH_Find32
+extrn	'Sequence_Find_uint8'	as	BMH_Find8
+extrn	'Sequence_Find_uint16'	as	BMH_Find16
+extrn	'Sequence_Find_uint32'	as	BMH_Find32
 
 ;###############################################################################
 ;#      Export section                                                         #
@@ -104,41 +104,89 @@ public	CompareSeq_char32		as	'_ZN6String7CompareEPKiS1_m'
 ;       Symbol search                                                          ;
 ;******************************************************************************;
 
-; Searching for single symbol
-public	FindSymbol_char8		as	'String_FindSymbol_char8'
-public	FindSymbol_char16		as	'String_FindSymbol_char16'
-public	FindSymbol_char32		as	'String_FindSymbol_char32'
-public	FindSymbol_char8		as	'_ZN6String10FindSymbolEPKcc'
-public	FindSymbol_char16		as	'_ZN6String10FindSymbolEPKss'
-public	FindSymbol_char32		as	'_ZN6String10FindSymbolEPKii'
+;==============================================================================;
+;       Searching for single symbol                                            ;
+;==============================================================================;
 
-; Searching for symbols set
-public	FindSymbols_char8		as	'String_FindSymbols_char8'
-public	FindSymbols_char16		as	'String_FindSymbols_char16'
-public	FindSymbols_char32		as	'String_FindSymbols_char32'
-public	FindSymbols_char8		as	'_ZN6String11FindSymbolsEPKcS1_'
-public	FindSymbols_char16		as	'_ZN6String11FindSymbolsEPKsS1_'
-public	FindSymbols_char32		as	'_ZN6String11FindSymbolsEPKiS1_'
+; Forward direction search
+public	FindSymbolFwd_char8		as	'String_FindSymbolFwd_char8'
+public	FindSymbolFwd_char16	as	'String_FindSymbolFwd_char16'
+public	FindSymbolFwd_char32	as	'String_FindSymbolFwd_char32'
+public	FindSymbolFwd_char8		as	'_ZN6String13FindSymbolFwdEPKcc'
+public	FindSymbolFwd_char16	as	'_ZN6String13FindSymbolFwdEPKss'
+public	FindSymbolFwd_char32	as	'_ZN6String13FindSymbolFwdEPKii'
+
+; Backward direction search
+public	FindSymbolBwd_char8		as	'String_FindSymbolBwd_char8'
+public	FindSymbolBwd_char16	as	'String_FindSymbolBwd_char16'
+public	FindSymbolBwd_char32	as	'String_FindSymbolBwd_char32'
+public	FindSymbolBwd_char8		as	'_ZN6String13FindSymbolBwdEPKcc'
+public	FindSymbolBwd_char16	as	'_ZN6String13FindSymbolBwdEPKss'
+public	FindSymbolBwd_char32	as	'_ZN6String13FindSymbolBwdEPKii'
+
+;==============================================================================;
+;       Searching for symbols set                                              ;
+;==============================================================================;
+
+; Forward direction search
+public	FindSymbolsFwd_char8	as	'String_FindSymbolsFwd_char8'
+public	FindSymbolsFwd_char16	as	'String_FindSymbolsFwd_char16'
+public	FindSymbolsFwd_char32	as	'String_FindSymbolsFwd_char32'
+public	FindSymbolsFwd_char8	as	'_ZN6String14FindSymbolsFwdEPKcS1_'
+public	FindSymbolsFwd_char16	as	'_ZN6String14FindSymbolsFwdEPKsS1_'
+public	FindSymbolsFwd_char32	as	'_ZN6String14FindSymbolsFwdEPKiS1_'
+
+; Backward direction search
+public	FindSymbolsBwd_char8	as	'String_FindSymbolsBwd_char8'
+public	FindSymbolsBwd_char16	as	'String_FindSymbolsBwd_char16'
+public	FindSymbolsBwd_char32	as	'String_FindSymbolsBwd_char32'
+public	FindSymbolsBwd_char8	as	'_ZN6String14FindSymbolsBwdEPKcS1_'
+public	FindSymbolsBwd_char16	as	'_ZN6String14FindSymbolsBwdEPKsS1_'
+public	FindSymbolsBwd_char32	as	'_ZN6String14FindSymbolsBwdEPKiS1_'
 
 ;******************************************************************************;
 ;       Substring search                                                       ;
 ;******************************************************************************;
 
-; Searching string for pattern
-public	FindStrStr_char8		as	'String_FindSubString_char8'
-public	FindStrStr_char16		as	'String_FindSubString_char16'
-public	FindStrStr_char32		as	'String_FindSubString_char32'
-public	FindStrStr_char8		as	'_ZN6String13FindSubStringEPKcS1_'
-public	FindStrStr_char16		as	'_ZN6String13FindSubStringEPKsS1_'
-public	FindStrStr_char32		as	'_ZN6String13FindSubStringEPKiS1_'
+;==============================================================================;
+;       Searching string for pattern                                           ;
+;==============================================================================;
 
-; Searching characters sequence for pattern
-public	FindSeqStr_char8		as	'String_FindSubStringN_char8'
-public	FindSeqStr_char16		as	'String_FindSubStringN_char16'
-public	FindSeqStr_char32		as	'String_FindSubStringN_char32'
-public	FindSeqStr_char8		as	'_ZN6String13FindSubStringEPKcmS1_'
-public	FindSeqStr_char16		as	'_ZN6String13FindSubStringEPKsmS1_'
-public	FindSeqStr_char32		as	'_ZN6String13FindSubStringEPKimS1_'
+; Forward direction search
+public	FindStrStrFwd_char8		as	'String_FindSubStringFwd_char8'
+public	FindStrStrFwd_char16	as	'String_FindSubStringFwd_char16'
+public	FindStrStrFwd_char32	as	'String_FindSubStringFwd_char32'
+public	FindStrStrFwd_char8		as	'_ZN6String16FindSubStringFwdEPKcS1_'
+public	FindStrStrFwd_char16	as	'_ZN6String16FindSubStringFwdEPKsS1_'
+public	FindStrStrFwd_char32	as	'_ZN6String16FindSubStringFwdEPKiS1_'
+
+; Backward direction search
+public	FindStrStrBwd_char8		as	'String_FindSubStringBwd_char8'
+public	FindStrStrBwd_char16	as	'String_FindSubStringBwd_char16'
+public	FindStrStrBwd_char32	as	'String_FindSubStringBwd_char32'
+public	FindStrStrBwd_char8		as	'_ZN6String16FindSubStringBwdEPKcS1_'
+public	FindStrStrBwd_char16	as	'_ZN6String16FindSubStringBwdEPKsS1_'
+public	FindStrStrBwd_char32	as	'_ZN6String16FindSubStringBwdEPKiS1_'
+
+;==============================================================================;
+;       Searching characters sequence for pattern                              ;
+;==============================================================================;
+
+; Forward direction search
+public	FindSeqStrFwd_char8		as	'String_FindSubStringNFwd_char8'
+public	FindSeqStrFwd_char16	as	'String_FindSubStringNFwd_char16'
+public	FindSeqStrFwd_char32	as	'String_FindSubStringNFwd_char32'
+public	FindSeqStrFwd_char8		as	'_ZN6String16FindSubStringFwdEPKcmS1_'
+public	FindSeqStrFwd_char16	as	'_ZN6String16FindSubStringFwdEPKsmS1_'
+public	FindSeqStrFwd_char32	as	'_ZN6String16FindSubStringFwdEPKimS1_'
+
+; Backward direction search
+public	FindSeqStrBwd_char8		as	'String_FindSubStringNBwd_char8'
+public	FindSeqStrBwd_char16	as	'String_FindSubStringNBwd_char16'
+public	FindSeqStrBwd_char32	as	'String_FindSubStringNBwd_char32'
+public	FindSeqStrBwd_char8		as	'_ZN6String16FindSubStringBwdEPKcmS1_'
+public	FindSeqStrBwd_char16	as	'_ZN6String16FindSubStringBwdEPKsmS1_'
+public	FindSeqStrBwd_char32	as	'_ZN6String16FindSubStringBwdEPKimS1_'
 
 ;******************************************************************************;
 ;       Counting                                                               ;
@@ -260,9 +308,7 @@ public	MergeKeyDsc				as	'_ZN6String11MergeKeyDscEPPKiPPKvPPKiPPKvmS6_S9_mPFxS5_
 ;       String hashing                                                         ;
 ;******************************************************************************;
 
-;==============================================================================;
-;       32-bit hash functions                                                  ;
-;==============================================================================;
+; 32-bit hash functions
 public	Hash32_char8			as	'String_Hash32_char8'
 public	Hash32_char16			as	'String_Hash32_char16'
 public	Hash32_char32			as	'String_Hash32_char32'
@@ -270,9 +316,7 @@ public	Hash32_char8			as	'_ZN6String6Hash32EPKc'
 public	Hash32_char16			as	'_ZN6String6Hash32EPKs'
 public	Hash32_char32			as	'_ZN6String6Hash32EPKi'
 
-;==============================================================================;
-;       64-bit hash functions                                                  ;
-;==============================================================================;
+; 64-bit hash functions
 public	Hash64_char8			as	'String_Hash64_char8'
 public	Hash64_char16			as	'String_Hash64_char16'
 public	Hash64_char32			as	'String_Hash64_char32'
@@ -999,8 +1043,8 @@ bytes	= 1 shl scale						; size of element (bytes)
 		add		stack, space				; restoring back the stack pointer
 		jmp		copy						; return Copy (target + len, maxlen - len, source)
 ;---[No space branch]----------------------
-.nospc:	add		stack, space				; restoring back the stack pointer
-		mov		result, NO_SPACE			; return NO_SPACE
+.nospc:	mov		result, NO_SPACE			; return NO_SPACE
+		add		stack, space				; restoring back the stack pointer
 		ret
 }
 CatStr_char8:	CAT1	b
@@ -1056,8 +1100,8 @@ bytes	= 1 shl scale						; size of element (bytes)
 		add		stack, space				; restoring back the stack pointer
 		jmp		copy						; return Copy (target + len, maxlen - len, source, size)
 ;---[No space branch]----------------------
-.nospc:	add		stack, space				; restoring back the stack pointer
-		mov		result, NO_SPACE			; return NO_SPACE
+.nospc:	mov		result, NO_SPACE			; return NO_SPACE
+		add		stack, space				; restoring back the stack pointer
 		ret
 }
 CatSeq_char8:	CAT2	b
@@ -1437,14 +1481,19 @@ CompareSeq_char32:	COMPARE2	ecx, d
 ;==============================================================================;
 ;       Searching for single symbol                                            ;
 ;==============================================================================;
-macro	FIND_SYMBOL	symbol, char, x
+
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+;       Forward direction search                                               ;
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+macro	FIND_SYMBOL_FWD	symbol, char, x
 {
 ;---[Parameters]---------------------------
 string	equ		rdi							; pointer to string
 psymbol	equ		rsi							; register which holds symbol
 ;---[Internal variables]-------------------
-index	equ		rax							; index of first occurence of pattern
+result	equ		rax							; result register
 sindex	equ		rcx							; string offset from vector boundary
+index	equ		r8							; index of first occurence of pattern
 emask	equ		r9							; result of eol search
 fmask	equ		r10							; result of pattern search
 pcheck	equ		xmm0						; pattern check mask
@@ -1462,8 +1511,9 @@ end if
 bytes	= 1 shl scale						; size of array element (bytes)
 bmask	= bytes - 1							; elements aligning mask
 ;------------------------------------------
+		mov		result, NOT_FOUND			; result = NOT_FOUND
 		test	symbol, symbol				; if (symbol == eol)
-		jz		.ntfnd						;     then go to not found branch
+		jz		.exit						;     then go to exit
 		xor		index, index				; index = 0
 if scale <> 0
 		test	string, bmask				; if elements have wrong alignment
@@ -1471,11 +1521,11 @@ if scale <> 0
 end if
 ;---[Normal execution branch]--------------
 		movq	pattern, psymbol			; pattern = symbol
+		clone	pattern, scale				; duplicate value through the entire register
 		mov		sindex, string
 		and		sindex, VMASK				; get string offset from vector boundary
 		sub		string, sindex				; align pointer to vector boundary
 		pxor	eol, eol					; eol = 0
-		clone	pattern, scale				; duplicate value through the entire register
 ;---[Unaligned search for pattern]---------
 		sub		index, sindex				; index -= sindex
 		shl		sindex, 4					; compute shift in mask array
@@ -1532,17 +1582,26 @@ end if
 		jmp		.vloop						; do while (true)
 ;---[End of vector loop]-------------------
 .brk:pmovmskb	fmask, pcheck				; save check results to fmask
-		bsf		emask, emask				; find index of first occurence of eol
+		xor		emask, fmask				; if ((emask ^ fmask) == 0)
+		jz		.patt						;     then go to pattern found branch
+		sub		emask, 1					; emask--
+		and		fmask, emask				; clear non required bits in fmask
 		bsf		fmask, fmask				; find index of first occurence of pattern
-		jz		.ntfnd						; if pattern is not found, then go to not found branch
-		cmp		fmask, emask				; if (index(pattern) > index (eol))
-		ja		.ntfnd						;     then go to not found branch
+		jz		@f							; if pattern is not found, then go to exit
 		add		index, fmask				; index += fmask
-		shftr	index, scale				; return index
-		ret
+		shftr	index, scale
+		mov		result, index				; result = index
+@@:		ret									; return result
+;---[Pattern found branch]-----------------
+.patt:	bsf		fmask, fmask				; find index of first occurence of pattern
+		add		index, fmask				; index += fmask
+		shftr	index, scale
+		mov		result, index				; result = index
+		ret									; return result
 if scale <> 0
 ;---[Scalar loop]--------------------------
 .sloop:	cmp		char, symbol				; if (char == symbol)
+		cmove	result, index				;     result = index
 		je		.exit						;     then go to exit
 		add		index, 1					; index++
 		add		string, bytes				; string++
@@ -1550,32 +1609,175 @@ if scale <> 0
 		test	char, char
 		jnz		.sloop						; do while (char != 0)
 ;---[End of scalar loop]-------------------
-.exit:	ret
 end if
 ;---[Not found branch]---------------------
-.ntfnd:	mov		index, NOT_FOUND			; return NOT_FOUND
-		ret
+.exit:	ret									; return result
 }
-FindSymbol_char8:	FIND_SYMBOL	sil, cl, b
-FindSymbol_char16:	FIND_SYMBOL	si, cx, w
-FindSymbol_char32:	FIND_SYMBOL	esi, ecx, d
+FindSymbolFwd_char8:	FIND_SYMBOL_FWD	sil, cl, b
+FindSymbolFwd_char16:	FIND_SYMBOL_FWD	si, cx, w
+FindSymbolFwd_char32:	FIND_SYMBOL_FWD	esi, ecx, d
+
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+;       Backward direction search                                              ;
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+macro	FIND_SYMBOL_BWD	symbol, char, x
+{
+;---[Parameters]---------------------------
+string	equ		rdi							; pointer to string
+psymbol	equ		rsi							; register which holds symbol
+;---[Internal variables]-------------------
+result	equ		rax							; result register
+sindex	equ		rcx							; string offset from vector boundary
+index	equ		r8							; index of first occurence of pattern
+emask	equ		r9							; result of eol search
+fmask	equ		r10							; result of pattern search
+addr	equ		r11							; return address
+pcheck	equ		xmm0						; pattern check mask
+echeck	equ		xmm1						; eol check mask
+eol		equ		xmm2						; end of line
+pattern	equ		xmm3						; pattern to find
+cmask	equ		xmm4						; mask to clear unrequired results
+if x eq b
+scale	= 0									; scale value
+else if x eq w
+scale	= 1									; scale value
+else if x eq d
+scale	= 2									; scale value
+end if
+bytes	= 1 shl scale						; size of array element (bytes)
+bmask	= bytes - 1							; elements aligning mask
+;------------------------------------------
+		mov		result, NOT_FOUND			; result = NOT_FOUND
+		test	symbol, symbol				; if (symbol == eol)
+		jz		.exit						;     then go to exit
+		xor		index, index				; index = 0
+if scale <> 0
+		test	string, bmask				; if elements have wrong alignment
+		jnz		.skip						;     then skip vector code
+end if
+;---[Normal execution branch]--------------
+		movq	pattern, psymbol			; pattern = symbol
+		clone	pattern, scale				; duplicate value through the entire register
+		mov		sindex, string
+		and		sindex, VMASK				; get string offset from vector boundary
+		sub		string, sindex				; align pointer to vector boundary
+		pxor	eol, eol					; eol = 0
+;---[Unaligned search for pattern]---------
+		sub		index, sindex				; index -= sindex
+		shl		sindex, 4					; compute shift in mask array
+		movdqa	cmask, dqword [maskA + sindex]
+		movdqa	echeck, [string]			; echeck = string[0]
+		movdqa	pcheck, echeck				; pcheck = string[0]
+	pcmpeq#x	echeck, eol					; check string[0] for end of line
+	pcmpeq#x	pcheck, pattern				; check string[0] for symbol
+		pand	echeck, cmask				; apply cmask to eol search results
+		pand	pcheck, cmask				; apply cmask to pattern search results
+		por		echeck, pcheck				; echeck |= pcheck
+	pmovmskb	emask, echeck				; save check results to emask
+		mov		addr, .back0				; save return address
+		and		emask, emask				; if eol or pattern is found
+		jnz		.brk						;     then break the loop
+.back0:	add		index, VSIZE				; index += VSIZE
+;---[Vector loop]--------------------------
+.vloop:	movdqa	echeck, [string + 1 * VSIZE]; echeck = string[1]
+		movdqa	pcheck, echeck				; pcheck = string[1]
+	pcmpeq#x	echeck, eol					; check string[1] for end of line
+	pcmpeq#x	pcheck, pattern				; check string[1] for symbol
+		por		echeck, pcheck				; echeck |= pcheck
+	pmovmskb	emask, echeck				; save check results to emask
+		mov		addr, .back1				; save return address
+		and		emask, emask				; if eol or pattern is found
+		jnz		.brk						;     then break the loop
+.back1:	add		index, VSIZE				; index += VSIZE
+		movdqa	echeck, [string + 2 * VSIZE]; echeck = string[2]
+		movdqa	pcheck, echeck				; pcheck = string[2]
+	pcmpeq#x	echeck, eol					; check string[2] for end of line
+	pcmpeq#x	pcheck, pattern				; check string[2] for symbol
+		por		echeck, pcheck				; echeck |= pcheck
+	pmovmskb	emask, echeck				; save check results to emask
+		mov		addr, .back2				; save return address
+		and		emask, emask				; if eol or pattern is found
+		jnz		.brk						;     then break the loop
+.back2:	add		index, VSIZE				; index += VSIZE
+		movdqa	echeck, [string + 3 * VSIZE]; echeck = string[3]
+		movdqa	pcheck, echeck				; pcheck = string[3]
+	pcmpeq#x	echeck, eol					; check string[3] for end of line
+	pcmpeq#x	pcheck, pattern				; check string[3] for symbol
+		por		echeck, pcheck				; echeck |= pcheck
+	pmovmskb	emask, echeck				; save check results to emask
+		mov		addr, .back3				; save return address
+		and		emask, emask				; if eol or pattern is found
+		jnz		.brk						;     then break the loop
+.back3:	add		index, VSIZE				; index += VSIZE
+		movdqa	echeck, [string + 4 * VSIZE]; echeck = string[4]
+		movdqa	pcheck, echeck				; pcheck = string[4]
+	pcmpeq#x	echeck, eol					; check string[4] for end of line
+	pcmpeq#x	pcheck, pattern				; check string[4] for symbol
+		por		echeck, pcheck				; echeck |= pcheck
+	pmovmskb	emask, echeck				; save check results to emask
+		mov		addr, .back4				; save return address
+		and		emask, emask				; if eol or pattern is found
+		jnz		.brk						;     then break the loop
+.back4:	add		index, VSIZE				; index += VSIZE
+		add		string, 4 * VSIZE			; string += 4 * VSIZE
+		jmp		.vloop						; do while (true)
+;---[End of vector loop]-------------------
+.brk:pmovmskb	fmask, pcheck				; save check results to fmask
+		xor		emask, fmask				; if ((emask ^ fmask) == 0)
+		jz		.patt						;     then go to pattern found branch
+		sub		emask, 1					; emask--
+		and		fmask, emask				; clear non required bits in fmask
+		bsr		fmask, fmask				; find index of first occurence of pattern
+		jz		@f							; if pattern is not found, then go to exit
+		add		index, fmask				; index += fmask
+		shftr	index, scale
+		mov		result, index				; result = index
+@@:		ret									; return result
+;---[Pattern found branch]-----------------
+.patt:	bsr		fmask, fmask				; find index of first occurence of pattern
+		add		index, fmask				; index += fmask
+		shftr	index, scale
+		mov		result, index				; result = index
+		jmp		addr						; go back into the searching loop
+if scale <> 0
+;---[Scalar loop]--------------------------
+.sloop:	cmp		char, symbol				; if (char == symbol)
+		cmove	result, index				;     result = index
+		add		index, 1					; index++
+		add		string, bytes				; string++
+.skip:	mov		char, [string]				; char = string[0]
+		test	char, char
+		jnz		.sloop						; do while (char != 0)
+;---[End of scalar loop]-------------------
+end if
+;---[Not found branch]---------------------
+.exit:	ret									; return result
+}
+FindSymbolBwd_char8:	FIND_SYMBOL_BWD	sil, cl, b
+FindSymbolBwd_char16:	FIND_SYMBOL_BWD	si, cx, w
+FindSymbolBwd_char32:	FIND_SYMBOL_BWD	esi, ecx, d
 
 ;==============================================================================;
 ;       Searching for symbols set                                              ;
 ;==============================================================================;
-macro	FIND_SYMBOLS	symbol, char, x
+
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+;       Forward direction search                                               ;
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+macro	FIND_SYMBOLS_FWD	symbol, char, x
 {
 ;---[Parameters]---------------------------
 string	equ		rdi							; pointer to string
 symbols	equ		rsi							; symbols to find
 ;---[Internal variables]-------------------
-index	equ		rax							; index of first occurence of pattern
+result	equ		rax							; result register
 sindex	equ		rcx							; string offset from vector boundary
 pindex	equ		rdx							; pattern table index
+wchar	equ		rcx							; register which holds char value
+index	equ		r8							; index of first occurence of pattern
 emask	equ		r9							; result of eol search
 fmask	equ		r10							; result of pattern search
 size	equ		r11							; size of pattern table
-wchar	equ		rcx							; register which holds char value
 ptr		equ		size						; temporary pointer
 tsize	equ		symbols						; count of patterns to check
 pcheck	equ		xmm0						; pattern check mask
@@ -1601,9 +1803,10 @@ space	= 3 * 8								; stack size required by the procedure
 bytes	= 1 shl scale						; size of array element (bytes)
 bmask	= bytes - 1							; elements aligning mask
 ;------------------------------------------
+		mov		result, NOT_FOUND			; result = NOT_FOUND
 		mov		symbol, [symbols]			; symbol = symbols[0]
 		test	symbol, symbol				; if (symbol == eol)
-		jz		.ntfnd						;     then go to not found branch
+		jz		.exit						;     then go to exit
 		xor		index, index				; index = 0
 if scale <> 0
 		test	string, bmask				; if elements have wrong alignment
@@ -1614,12 +1817,12 @@ end if
 		mov		[s_str], string				; save "string" variable into the stack
 		mov		[s_smbls], symbols			; save "symbols" variable into the stack
 		mov		param1, symbols
-		call	length						; index = Len (symbols)
+		call	length						; result = Len (symbols)
+		shl		result, VSCALE
+		mov		size, result				; size = result
 		mov		string, [s_str]				; get "string" variable from the stack
 		mov		symbols, [s_smbls]			; get "symbols" variable from the stack
-		shl		index, VSCALE
-		sub		stack, index				; get space for pattern table
-		mov		size, index					; size = index
+		sub		stack, result				; get space for pattern table
 		xor		pindex, pindex				; pindex = 0
 ;---[Filling pattern table]----------------
 .ploop:	mov		char, [symbols]
@@ -1628,9 +1831,11 @@ end if
 		movdqa	[table + pindex], pattern	; table[pindex] = pattern
 		add		symbols, bytes				; symbols++
 		add		pindex, VSIZE				; pindex++
-		sub		index, VSIZE				; index--
-		jnz		.ploop						; do while (index != 0)
+		sub		result, VSIZE				; result--
+		jnz		.ploop						; do while (result != 0)
 ;---[Normal execution branch]--------------
+		mov		result, NOT_FOUND			; result = NOT_FOUND
+		xor		index, index				; index = 0
 		mov		sindex, string
 		and		sindex, VMASK				; get string offset from vector boundary
 		sub		string, sindex				; align pointer to vector boundary
@@ -1681,22 +1886,34 @@ end if
 		add		string, VSIZE				; string += VSIZE
 		jmp		.vloop						; do while (true)
 ;---[End of vector loop]-------------------
-.brk:	lea		stack, [stack + size+space]	; restoring back the stack pointer
-	pmovmskb	fmask, pcheck				; save check results to fmask
-		bsf		emask, emask				; find index of first occurence of eol
+.brk:pmovmskb	fmask, pcheck				; save check results to fmask
+		xor		emask, fmask				; if ((emask ^ fmask) == 0)
+		jz		.patt						;     then go to pattern found branch
+		sub		emask, 1					; emask--
+		and		fmask, emask				; clear non required bits in fmask
 		bsf		fmask, fmask				; find index of first occurence of pattern
-		jz		.ntfnd						; if pattern is not found, then go to not found branch
-		cmp		fmask, emask				; if (index(pattern) > index (eol))
-		ja		.ntfnd						;     then go to not found branch
+		jz		@f							; if pattern is not found, then go to exit
 		add		index, fmask				; index += fmask
-		shftr	index, scale				; return index
+		shftr	index, scale
+		mov		result, index				; result = index
+@@:		add		size, space					; size += space
+		add		stack, size					; restoring back the stack pointer
 		ret
+;---[Pattern found branch]-----------------
+.patt:	bsf		fmask, fmask				; find index of first occurence of pattern
+		add		index, fmask				; index += fmask
+		shftr	index, scale
+		mov		result, index				; result = index
+		add		size, space					; size += space
+		add		stack, size					; restoring back the stack pointer
+		ret									; return result
 if scale <> 0
 ;---[Scalar loop]--------------------------
 .sloop:	mov		ptr, symbols				; ptr = symbols
 		mov		symbol, [ptr]				; symbol = ptr[0]
 ;---[Searching loop]-----------------------
 .iloop:	cmp		char, symbol				; if (char == symbol)
+		cmove	result, index				;     result = index
 		je		.exit						;     then go to exit
 		add		ptr, bytes					; ptr++
 		mov		symbol, [ptr]				; symbol = ptr[0]
@@ -1709,15 +1926,203 @@ if scale <> 0
 		test	char, char
 		jnz		.sloop						; do while (char != 0)
 ;---[End of scalar loop]-------------------
-.exit:	ret
 end if
 ;---[Not found branch]---------------------
-.ntfnd:	mov		index, NOT_FOUND			; return NOT_FOUND
-		ret
+.exit:	ret
 }
-FindSymbols_char8:	FIND_SYMBOLS	dl, cl, b
-FindSymbols_char16:	FIND_SYMBOLS	dx, cx, w
-FindSymbols_char32:	FIND_SYMBOLS	edx, ecx, d
+FindSymbolsFwd_char8:	FIND_SYMBOLS_FWD	dl, cl, b
+FindSymbolsFwd_char16:	FIND_SYMBOLS_FWD	dx, cx, w
+FindSymbolsFwd_char32:	FIND_SYMBOLS_FWD	edx, ecx, d
+
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+;       Backward direction search                                              ;
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+macro	FIND_SYMBOLS_BWD	symbol, char, x
+{
+;---[Parameters]---------------------------
+string	equ		rdi							; pointer to string
+symbols	equ		rsi							; symbols to find
+;---[Internal variables]-------------------
+result	equ		rax							; result register
+sindex	equ		rcx							; string offset from vector boundary
+pindex	equ		rdx							; pattern table index
+wchar	equ		rcx							; register which holds char value
+index	equ		r8							; index of first occurence of pattern
+emask	equ		r9							; result of eol search
+fmask	equ		r10							; result of pattern search
+size	equ		r11							; size of pattern table
+ptr		equ		size						; temporary pointer
+tsize	equ		symbols						; count of patterns to check
+pcheck	equ		xmm0						; pattern check mask
+echeck	equ		xmm1						; eol check mask
+eol		equ		xmm2						; end of line
+pattern	equ		xmm3						; pattern to find
+cmask	equ		xmm4						; mask to clear unrequired results
+stack	equ		rsp							; stack pointer
+table	equ		stack						; pattern table
+s_str	equ		stack + 0 * 8				; stack position of "string" variable
+s_smbls	equ		stack + 1 * 8				; stack position of "symbols" variable
+if x eq b
+length	= Len_char8							; string length function
+scale	= 0									; scale value
+else if x eq w
+length	= Len_char16						; string length function
+scale	= 1									; scale value
+else if x eq d
+length	= Len_char32						; string length function
+scale	= 2									; scale value
+end if
+space	= 3 * 8								; stack size required by the procedure
+bytes	= 1 shl scale						; size of array element (bytes)
+bmask	= bytes - 1							; elements aligning mask
+;------------------------------------------
+		mov		result, NOT_FOUND			; result = NOT_FOUND
+		mov		symbol, [symbols]			; symbol = symbols[0]
+		test	symbol, symbol				; if (symbol == eol)
+		jz		.exit						;     then go to exit
+		xor		index, index				; index = 0
+if scale <> 0
+		test	string, bmask				; if elements have wrong alignment
+		jnz		.skip						;     then skip vector code
+end if
+;---[Creating pattern table]---------------
+		sub		stack, space				; reserving stack size for local vars
+		mov		[s_str], string				; save "string" variable into the stack
+		mov		[s_smbls], symbols			; save "symbols" variable into the stack
+		mov		param1, symbols
+		call	length						; result = Len (symbols)
+		shl		result, VSCALE
+		mov		size, result				; size = result
+		mov		string, [s_str]				; get "string" variable from the stack
+		mov		symbols, [s_smbls]			; get "symbols" variable from the stack
+		sub		stack, result				; get space for pattern table
+		xor		pindex, pindex				; pindex = 0
+;---[Filling pattern table]----------------
+.ploop:	mov		char, [symbols]
+		movq	pattern, wchar				; pattern = char
+		clone	pattern, scale				; duplicate value through the entire register
+		movdqa	[table + pindex], pattern	; table[pindex] = pattern
+		add		symbols, bytes				; symbols++
+		add		pindex, VSIZE				; pindex++
+		sub		result, VSIZE				; result--
+		jnz		.ploop						; do while (result != 0)
+;---[Normal execution branch]--------------
+		mov		result, NOT_FOUND			; result = NOT_FOUND
+		xor		index, index				; index = 0
+		mov		sindex, string
+		and		sindex, VMASK				; get string offset from vector boundary
+		sub		string, sindex				; align pointer to vector boundary
+		pxor	eol, eol					; eol = 0
+;---[Unaligned search for pattern]---------
+		sub		index, sindex				; index -= sindex
+		shl		sindex, 4					; compute shift in mask array
+		movdqa	cmask, dqword [maskA + sindex]
+		movdqa	echeck, [string]			; echeck = string[0]
+		pxor	pcheck, pcheck				; pcheck = 0
+		xor		pindex, pindex				; pindex = 0
+		mov		tsize, size					; tsize = size
+;---[Pattern matching loop]----------------
+.loop1:	movdqa	pattern, [table + pindex]	; pattern = table[pindex]
+	pcmpeq#x	pattern, echeck				; check string[1] for symbol
+		por		pcheck, pattern				; add patern matching mask to pcheck
+		add		pindex, VSIZE				; pindex++
+		sub		tsize, VSIZE				; tsize--
+		jnz		.loop1						; do while (tsize != 0)
+;---[End of pattern matching loop]---------
+	pcmpeq#x	echeck, eol					; check string[1] for end of line
+		pand	echeck, cmask				; apply cmask to eol search results
+		pand	pcheck, cmask				; apply cmask to pattern search results
+		por		echeck, pcheck				; echeck |= pcheck
+	pmovmskb	emask, echeck				; save check results to emask
+		and		emask, emask				; if eol or pattern is found
+		jnz		.brk0						;     then break the loop
+.back0:	add		index, VSIZE				; index += VSIZE
+;---[Vector loop]--------------------------
+.vloop:	movdqa	echeck, [string + 1 * VSIZE]; echeck = string[1]
+		pxor	pcheck, pcheck				; pcheck = 0
+		xor		pindex, pindex				; pindex = 0
+		mov		tsize, size					; tsize = size
+;---[Pattern matching loop]----------------
+.loop2:	movdqa	pattern, [table + pindex]	; pattern = table[pindex]
+	pcmpeq#x	pattern, echeck				; check string[1] for symbol
+		por		pcheck, pattern				; add patern matching mask to pcheck
+		add		pindex, VSIZE				; pindex++
+		sub		tsize, VSIZE				; tsize--
+		jnz		.loop2						; do while (tsize != 0)
+;---[End of pattern matching loop]---------
+	pcmpeq#x	echeck, eol					; check string[1] for end of line
+		por		echeck, pcheck				; echeck |= pcheck
+	pmovmskb	emask, echeck				; save check results to emask
+		and		emask, emask				; if eol or pattern is found
+		jnz		.brk1						;     then break the loop
+.back1:	add		index, VSIZE				; index += VSIZE
+		add		string, VSIZE				; string += VSIZE
+		jmp		.vloop						; do while (true)
+;---[End of vector loop]-------------------
+.brk0:pmovmskb	fmask, pcheck				; save check results to fmask
+		xor		emask, fmask				; if ((emask ^ fmask) == 0)
+		jz		.patt0						;     then go to pattern found branch
+		sub		emask, 1					; emask--
+		and		fmask, emask				; clear non required bits in fmask
+		bsr		fmask, fmask				; find index of first occurence of pattern
+		jz		@f							; if pattern is not found, then go to exit
+		add		index, fmask				; index += fmask
+		shftr	index, scale
+		mov		result, index				; result = index
+@@:		add		size, space					; size += space
+		add		stack, size					; restoring back the stack pointer
+		ret
+;---[Pattern found branch #1]--------------
+.patt0:	bsr		fmask, fmask				; find index of first occurence of pattern
+		add		index, fmask				; index += fmask
+		shftr	index, scale
+		mov		result, index				; result = index
+		jmp		.back0						; go back into the searching loop
+;---[Break loop branch #2]-----------------
+.brk1:pmovmskb	fmask, pcheck				; save check results to fmask
+		xor		emask, fmask				; if ((emask ^ fmask) == 0)
+		jz		.patt1						;     then go to pattern found branch
+		sub		emask, 1					; emask--
+		and		fmask, emask				; clear non required bits in fmask
+		bsr		fmask, fmask				; find index of first occurence of pattern
+		jz		@f							; if pattern is not found, then go to exit
+		add		index, fmask				; index += fmask
+		shftr	index, scale
+		mov		result, index				; result = index
+@@:		add		size, space					; size += space
+		add		stack, size					; restoring back the stack pointer
+		ret
+;---[Pattern found branch #2]--------------
+.patt1:	bsr		fmask, fmask				; find index of first occurence of pattern
+		add		index, fmask				; index += fmask
+		shftr	index, scale
+		mov		result, index				; result = index
+		jmp		.back1						; go back into the searching loop
+if scale <> 0
+;---[Scalar loop]--------------------------
+.sloop:	mov		ptr, symbols				; ptr = symbols
+		mov		symbol, [ptr]				; symbol = ptr[0]
+;---[Searching loop]-----------------------
+.iloop:	cmp		char, symbol				; if (char == symbol)
+		cmove	result, index				;     result = index
+		add		ptr, bytes					; ptr++
+		mov		symbol, [ptr]				; symbol = ptr[0]
+		test	symbol, symbol
+		jnz		.iloop						; do while (symbol)
+;---[End of searching loop]----------------
+		add		index, 1					; index++
+		add		string, bytes				; string++
+.skip:	mov		char, [string]				; char = string[0]
+		test	char, char
+		jnz		.sloop						; do while (char != 0)
+;---[End of scalar loop]-------------------
+end if
+;---[Not found branch]---------------------
+.exit:	ret
+}
+FindSymbolsBwd_char8:	FIND_SYMBOLS_BWD	dl, cl, b
+FindSymbolsBwd_char16:	FIND_SYMBOLS_BWD	dx, cx, w
+FindSymbolsBwd_char32:	FIND_SYMBOLS_BWD	edx, ecx, d
 
 ;******************************************************************************;
 ;       Substring search                                                       ;
@@ -1726,7 +2131,7 @@ FindSymbols_char32:	FIND_SYMBOLS	edx, ecx, d
 ;==============================================================================;
 ;       Searching string for pattern                                           ;
 ;==============================================================================;
-macro	FIND_STRING1 x
+macro	FIND_STRING1 x, bwd
 {
 ;---[Parameters]---------------------------
 string	equ		rdi							; source string
@@ -1757,23 +2162,29 @@ space	= 265 * 8							; stack size required by the procedure
 		sub		stack, space				; reserving stack size for local vars
 		mov		[s_str], string				; save "string" variable into the stack
 		mov		[s_patt], pattern			; save "pattern" variable into the stack
+;---[Get pattern length]-------------------
 		mov		param1, pattern
 		call	length						; result = Len (pattern)
+		mov		[s_psize], result			; save pattern size into the stack
 		test	result, result				; if (len == 0)
 		jz		.ntfnd						;     then go to not found branch
-		mov		[s_psize], result			; save pattern size into the stack
+;---[Get string length]--------------------
 		mov		param1, [s_str]
 		call	length						; result = Len (string)
+		mov		[s_ssize], result			; save string size into the stack
 		cmp		result, [s_psize]			; if (Len (string) < Len (pattern))
 		jb		.ntfnd						;     then go to not found branch
-		mov		[s_ssize], result			; save string size into the stack
-;---[Calling BMH constructor]--------------
-		xor		param4, param4				; pass direction flag to BMH constructor
+;---[Call BMH constructor]-----------------
+if bwd
+		mov		param4, 1					; backward direction
+else
+		xor		param4, param4				; forward direction
+end if
 		mov		param3, [s_psize]			; pass pattern size to BMH constructor
 		mov		param2, [s_patt]			; pass pattern string to BMH constructor
 		lea		param1, [s_bmh]				; pass BMH object to BMH constructor
 		call	hash						; call BMH constructor
-;---[Calling BMH search algorithm]---------
+;---[Call BMH search algorithm]------------
 		lea		param3, [s_bmh]				; pass BMH pattern to BMH search algorithm
 		mov		param2, [s_ssize]			; pass source string size to BMH search algorithm
 		mov		param1, [s_str]				; pass source string to BMH search algorithm
@@ -1781,18 +2192,25 @@ space	= 265 * 8							; stack size required by the procedure
 		add		stack, space				; restoring back the stack pointer
 		ret
 ;---[Error branch]-------------------------
-.ntfnd:	add		stack, space				; restoring back the stack pointer
-		mov		result, NOT_FOUND			; return NOT_FOUND
+.ntfnd:	mov		result, NOT_FOUND			; return NOT_FOUND
+		add		stack, space				; restoring back the stack pointer
 		ret
 }
-FindStrStr_char8:	FIND_STRING1	b
-FindStrStr_char16:	FIND_STRING1	w
-FindStrStr_char32:	FIND_STRING1	d
+
+; Forward direction search
+FindStrStrFwd_char8:	FIND_STRING1	b, 0
+FindStrStrFwd_char16:	FIND_STRING1	w, 0
+FindStrStrFwd_char32:	FIND_STRING1	d, 0
+
+; Backward direction search
+FindStrStrBwd_char8:	FIND_STRING1	b, 1
+FindStrStrBwd_char16:	FIND_STRING1	w, 1
+FindStrStrBwd_char32:	FIND_STRING1	d, 1
 
 ;==============================================================================;
 ;       Searching characters sequence for pattern                              ;
 ;==============================================================================;
-macro	FIND_STRING2 x
+macro	FIND_STRING2 x, bwd
 {
 ;---[Parameters]---------------------------
 string	equ		rdi							; source characters sequence
@@ -1825,21 +2243,26 @@ space	= 265 * 8							; stack size required by the procedure
 		mov		[s_str], string				; save "string" variable into the stack
 		mov		[s_ssize], size				; save string size into the stack
 		mov		[s_patt], pattern			; save "pattern" variable into the stack
+;---[Get pattern length]-------------------
 		mov		param1, pattern
 		call	length						; result = Len (pattern)
+		mov		[s_psize], result			; save pattern size into the stack
 		test	result, result				; if (len == 0)
 		jz		.ntfnd						;     then go to not found branch
-		mov		[s_psize], result			; save pattern size into the stack
 		mov		result, [s_ssize]			; result = Len (string)
 		cmp		result, [s_psize]			; if (Len (string) < Len (pattern))
 		jb		.ntfnd						;     then go to not found branch
-;---[Calling BMH constructor]--------------
-		xor		param4, param4				; pass direction flag to BMH constructor
+;---[Call BMH constructor]-----------------
+if bwd
+		mov		param4, 1					; backward direction
+else
+		xor		param4, param4				; forward direction
+end if
 		mov		param3, [s_psize]			; pass pattern size to BMH constructor
 		mov		param2, [s_patt]			; pass pattern string to BMH constructor
 		lea		param1, [s_bmh]				; pass BMH object to BMH constructor
 		call	hash						; call BMH constructor
-;---[Calling BMH search algorithm]---------
+;---[Call BMH search algorithm]------------
 		lea		param3, [s_bmh]				; pass BMH pattern to BMH search algorithm
 		mov		param2, [s_ssize]			; pass source string size to BMH search algorithm
 		mov		param1, [s_str]				; pass source string to BMH search algorithm
@@ -1847,13 +2270,20 @@ space	= 265 * 8							; stack size required by the procedure
 		add		stack, space				; restoring back the stack pointer
 		ret
 ;---[Error branch]-------------------------
-.ntfnd:	add		stack, space				; restoring back the stack pointer
-		mov		result, NOT_FOUND			; return NOT_FOUND
+.ntfnd:	mov		result, NOT_FOUND			; return NOT_FOUND
+		add		stack, space				; restoring back the stack pointer
 		ret
 }
-FindSeqStr_char8:	FIND_STRING2	b
-FindSeqStr_char16:	FIND_STRING2	w
-FindSeqStr_char32:	FIND_STRING2	d
+
+; Forward direction search
+FindSeqStrFwd_char8:	FIND_STRING2	b, 0
+FindSeqStrFwd_char16:	FIND_STRING2	w, 0
+FindSeqStrFwd_char32:	FIND_STRING2	d, 0
+
+; Backward direction search
+FindSeqStrBwd_char8:	FIND_STRING2	b, 1
+FindSeqStrBwd_char16:	FIND_STRING2	w, 1
+FindSeqStrBwd_char32:	FIND_STRING2	d, 1
 
 ;******************************************************************************;
 ;       Counting                                                               ;
@@ -1902,11 +2332,11 @@ if scale <> 0
 end if
 ;---[Normal execution branch]--------------
 		movq	pattern, psymbol			; pattern = symbol
+		clone	pattern, scale				; duplicate value through the entire register
 		mov		sindex, string
 		and		sindex, VMASK				; get string offset from vector boundary
 		sub		string, sindex				; align pointer to vector boundary
 		pxor	eol, eol					; eol = 0
-		clone	pattern, scale				; duplicate value through the entire register
 ;---[Unaligned search for pattern]---------
 		mov		cmask, VBITS
 		shl		cmask, sindexl				; adjust cmask for unaligned search
@@ -2176,10 +2606,10 @@ vreg	equ		rdx							; register which holds value
 ;---[Internal variables]-------------------
 index	equ		rax							; index of first occurence of pattern
 sindex	equ		rcx							; string offset from vector boundary
-addr	equ		r8							; return address
+ptr		equ		r8							; temporary pointer to string
 emask	equ		r9							; result of eol search
 fmask	equ		r10							; result of pattern search
-ptr		equ		r11							; temporary pointer to string
+addr	equ		r11							; return address
 pcheck	equ		xmm0						; pattern check mask
 echeck	equ		xmm1						; eol check mask #1
 eol		equ		xmm2						; end of line
@@ -2204,14 +2634,14 @@ if scale <> 0
 end if
 ;---[Normal execution branch]--------------
 		movq	pattern, preg				; pattern = symbol
+		clone	pattern, scale				; duplicate value through the entire register
 		movq	replace, vreg				; replace = value
+		clone	replace, scale				; duplicate value through the entire register
 		mov		sindex, string
 		and		sindex, VMASK				; get string offset from vector boundary
 		sub		string, sindex				; align pointer to vector boundary
 		mov		ptr, string					; ptr = string
 		pxor	eol, eol					; eol = 0
-		clone	pattern, scale				; duplicate value through the entire register
-		clone	replace, scale				; duplicate value through the entire register
 ;---[Unaligned search for pattern]---------
 		xor		index, index				; index = 0
 		shl		sindex, 4					; compute shift in mask array
@@ -2224,7 +2654,7 @@ end if
 		pand	pcheck, cmask				; apply cmask to pattern search results
 		por		echeck, pcheck				; echeck |= pcheck
 	pmovmskb	emask, echeck				; save check results to emask
-		mov		addr, .back0				;     save return address
+		mov		addr, .back0				; save return address
 		and		emask, emask				; if eol or pattern is found
 		jnz		.brk						;     then break the loop
 .back0:	add		index, VSIZE				; index += VSIZE
@@ -2235,7 +2665,7 @@ end if
 	pcmpeq#x	pcheck, pattern				; check ptr[1] for symbol
 		por		echeck, pcheck				; echeck |= pcheck
 	pmovmskb	emask, echeck				; save check results to emask
-		mov		addr, .back1				;     save return address
+		mov		addr, .back1				; save return address
 		and		emask, emask				; if eol or pattern is found
 		jnz		.brk						;     then break the loop
 .back1:	add		index, VSIZE				; index += VSIZE
@@ -2245,7 +2675,7 @@ end if
 	pcmpeq#x	pcheck, pattern				; check ptr[2] for symbol
 		por		echeck, pcheck				; echeck |= pcheck
 	pmovmskb	emask, echeck				; save check results to emask
-		mov		addr, .back2				;     save return address
+		mov		addr, .back2				; save return address
 		and		emask, emask				; if eol or pattern is found
 		jnz		.brk						;     then break the loop
 .back2:	add		index, VSIZE				; index += VSIZE
@@ -2255,7 +2685,7 @@ end if
 	pcmpeq#x	pcheck, pattern				; check ptr[3] for symbol
 		por		echeck, pcheck				; echeck |= pcheck
 	pmovmskb	emask, echeck				; save check results to emask
-		mov		addr, .back3				;     save return address
+		mov		addr, .back3				; save return address
 		and		emask, emask				; if eol or pattern is found
 		jnz		.brk						;     then break the loop
 .back3:	add		index, VSIZE				; index += VSIZE
@@ -2265,7 +2695,7 @@ end if
 	pcmpeq#x	pcheck, pattern				; check ptr[4] for symbol
 		por		echeck, pcheck				; echeck |= pcheck
 	pmovmskb	emask, echeck				; save check results to emask
-		mov		addr, .back4				;     save return address
+		mov		addr, .back4				; save return address
 		and		emask, emask				; if eol or pattern is found
 		jnz		.brk						;     then break the loop
 .back4:	add		index, VSIZE				; index += VSIZE
@@ -2283,15 +2713,15 @@ end if
 		jmp		addr						; go back into the searching loop
 @@:		bsf		emask, emask				; find index of first occurence of eol
 		bsf		fmask, fmask				; find index of first occurence of pattern
-		jz		@f							; if pattern is not found, then go to exit
+		jz		.exit						; if pattern is not found, then go to exit
 		cmp		fmask, emask				; if (index(pattern) > index (eol))
-		ja		@f							;     then go to exit
+		ja		.exit						;     then go to exit
 		shl		emask, 4					; compute shift in mask array
 		pand	pcheck, dqword [maskB + emask]
 		movdqa	echeck, [string + index]	; echeck = string[index]
 	pblendvb	echeck, replace
 		movdqa	[string + index], echeck	; string[index] = replace (echeck, pattern, value)
-@@:		ret
+		ret
 if scale <> 0
 ;---[Scalar loop]--------------------------
 .sloop:	mov		char, [string]				; char = string[0]
@@ -2465,8 +2895,8 @@ minsize	= 32								; min array size is aceptable for Quick sort
 ;---[Internal loop 1]----------------------
 .loop1:	mov		left, [s_left]				; get "left" variable from the stack
 		add		left, 1						; left++
-		mov		key1, [array + left * 8]	; key1 = array[left]
 		mov		[s_left], left				; save "left" variable into the stack
+		mov		key1, [array + left * 8]	; key1 = array[left]
 		mov		param2, [s_med]
 		mov		param1, key1
 		call	qword [s_func]				; result = Compare (array[left], median)
@@ -2476,8 +2906,8 @@ minsize	= 32								; min array size is aceptable for Quick sort
 ;---[Internal loop 2]----------------------
 .loop2:	mov		right, [s_right]			; get "right" variable from the stack
 		sub		right, 1					; right--
-		mov		key2, [array + right * 8]	; key2 = array[right]
 		mov		[s_right], right			; save "right" variable into the stack
+		mov		key2, [array + right * 8]	; key2 = array[right]
 		mov		param2, [s_med]
 		mov		param1, key2
 		call	qword [s_func]				; result = Compare (array[right], median)
@@ -2491,7 +2921,7 @@ minsize	= 32								; min array size is aceptable for Quick sort
 		cmp		left, right
 		jb		.swap						; do while (left < right)
 ;---[End of swap loop]---------------------
-		mov		size, [s_size]				; get "size" variable from the stack
+		mov		rsize, [s_size]				; get "size" variable from the stack
 		add		right, 1
 		sub		rsize, right				; rsize = size - (right + 1)
 		lea		rptr, [ptr + right * 8]		; rptr = ptr + (right + 1)
@@ -2510,6 +2940,7 @@ minsize	= 32								; min array size is aceptable for Quick sort
 		mov		rarray, [s_array]			; get "rarray" variable from the stack
 		mov		rptr, [s_ptr]				; get "rptr" variable from the stack
 		mov		rsize, [s_size]				; get "rsize" variable from the stack
+		mov		func, [s_func]				; get "func" variable from the stack
 @@:		mov		array, rarray				; }
 		mov		ptr, rptr
 		jmp		.end
@@ -2526,14 +2957,15 @@ minsize	= 32								; min array size is aceptable for Quick sort
 		mov		larray, [s_array]			; get "larray" variable from the stack
 		mov		lptr, [s_ptr]				; get "lptr" variable from the stack
 		mov		lsize, [s_size]				; get "lsize" variable from the stack
+		mov		func, [s_func]				; get "func" variable from the stack
 @@:		mov		size, lsize					; }
 ;---[end if]-------------------------------
 .end:	cmp		size, 1
 		ja		.loop						; do while (size > 1)
 ;---[End of sorting loop]------------------
+		mov		func, [s_func]				; get "func" variable from the stack
 		mov		key1, [s_key1]				; restore old value of "key1" variable
 		mov		key2, [s_key2]				; restore old value of "key2" variable
-		mov		func, [s_func]				; get "func" variable from the stack
 		add		stack, space				; restoring back the stack pointer
 		jmp		insertsort					; call insertsort (array, ptr, size, func)
 .exit:	ret
@@ -2547,8 +2979,8 @@ QuickSortKeyDsc:	QUICKSORT	InsertSortKeyDsc, g, l
 macro	MERGESORT	insertsort, mergefunc
 {
 ;---[Parameters]---------------------------
-array	equ		rdi							; pointer to array
-temp	equ		rsi							; pointer to temporary array
+array	equ		rdi							; pointer to array of strings
+temp	equ		rsi							; pointer to temporary array of strings
 ptr		equ		rdx							; pointer to array of pointers to data
 tptr	equ		rcx							; pointer to temporary array of pointers to data
 size	equ		r8							; array size (count of elements)
@@ -2588,15 +3020,28 @@ minsize	= 32								; min array size is aceptable for Merge sort
 		mov		func, [s_func]				; get "func" variable from the stack
 		shr		size, 1						; size /= 2
 		lea		array, [array + size * 8]
-		lea		temp, [temp + size * 8]
 		lea		ptr, [ptr + size * 8]
-		lea		tptr, [tptr + size * 8]
 		neg		size
 		add		size, [s_size]
-		call	.start						; call Sort (array + size / 2, temp + size / 2, ptr + size / 2, tptr + size / 2, size - size / 2, func)
+		call	.start						; call Sort (array + size / 2, temp, ptr + size / 2, tptr, size - size / 2, func)
+;---[Copy data into temporary array]-------
+		mov		size, [s_size]				; get "size" variable from the stack
+		shr		size, 1						; size /= 2
+		mov		param3, size
+		mov		param2, [s_ptr]
+		mov		param1, [s_tptr]
+		call	Copy						; call Copy (tptr, ptr, size / 2)
+		mov		size, [s_size]				; get "size" variable from the stack
+		shr		size, 1						; size /= 2
+		mov		param3, size
+		mov		param2, [s_array]
+		mov		param1, [s_temp]
+		call	Copy						; call Copy (temp, array, size / 2)
 ;---[Merge sorted arrays]------------------
 		mov		array, [s_array]			; get "array" variable from the stack
+		mov		temp, [s_temp]				; get "temp" variable from the stack
 		mov		ptr, [s_ptr]				; get "ptr" variable from the stack
+		mov		tptr, [s_tptr]				; get "tptr" variable from the stack
 		mov		size, [s_size]				; get "size" variable from the stack
 		mov		func, [s_func]				; get "func" variable from the stack
 		shr		size, 1						; size /= 2
@@ -2607,21 +3052,12 @@ minsize	= 32								; min array size is aceptable for Merge sort
 		lea		param7, [ptr + size * 8]
 		lea		param6, [array + size * 8]
 		mov		param5, size
-		mov		param4, ptr
-		mov		param3, array
-		mov		param2, [s_tptr]
-		mov		param1, [s_temp]
-		call	mergefunc					; call mergefunc (temp, tptr, array, ptr, size / 2, array + size / 2, ptr + size / 2, size - size / 2, func)
-;---[Copy data from temporary array]-------
-		mov		param3, [s_size]
-		mov		param2, [s_tptr]
-		mov		param1, [s_ptr]
-		call	Copy						; call Copy (ptr, tptr, size)
-		mov		param3, [s_size]
-		mov		param2, [s_temp]
-		mov		param1, [s_array]
+		mov		param4, tptr
+		mov		param3, temp
+		mov		param2, [s_ptr]
+		mov		param1, array
 		add		stack, space				; restoring back the stack pointer
-		jmp		Copy						; call Copy (array, temp, size)
+		jmp		mergefunc					; call mergefunc (array, ptr, temp, tptr, size / 2, array + size / 2, ptr + size / 2, size - size / 2, func)
 ;---[Insert sort branch]-------------------
 .ins:	mov		param1, array
 		mov		param2, ptr
@@ -2812,7 +3248,7 @@ i = 0
 while i < bytes
 		movzx	temp, byte [string + i]		; temp = string[i]
 		add		result, temp				; result += temp
-		imul 	result, value				; result *= value
+		imul	result, value				; result *= value
 	i = i + 1
 end while
 		add		string, bytes				; string++

@@ -80,29 +80,65 @@ static sint64_t Compare (const char32_t string1[], const char32_t string2[], siz
 //      Symbol search                                                         //
 //****************************************************************************//
 
-// Searching for single symbol
-static size_t FindSymbol (const char8_t string[], char8_t symbol);
-static size_t FindSymbol (const char16_t string[], char16_t symbol);
-static size_t FindSymbol (const char32_t string[], char32_t symbol);
+//============================================================================//
+//      Searching for single symbol                                           //
+//============================================================================//
 
-// Searching for symbols set
-static size_t FindSymbols (const char8_t string[], const char8_t symbols[]);
-static size_t FindSymbols (const char16_t string[], const char16_t symbols[]);
-static size_t FindSymbols (const char32_t string[], const char32_t symbols[]);
+// Forward direction search
+static size_t FindSymbolFwd (const char8_t string[], char8_t symbol);
+static size_t FindSymbolFwd (const char16_t string[], char16_t symbol);
+static size_t FindSymbolFwd (const char32_t string[], char32_t symbol);
+
+// Backward direction search
+static size_t FindSymbolBwd (const char8_t string[], char8_t symbol);
+static size_t FindSymbolBwd (const char16_t string[], char16_t symbol);
+static size_t FindSymbolBwd (const char32_t string[], char32_t symbol);
+
+//============================================================================//
+//      Searching for symbols set                                             //
+//============================================================================//
+
+// Forward direction search
+static size_t FindSymbolsFwd (const char8_t string[], const char8_t symbols[]);
+static size_t FindSymbolsFwd (const char16_t string[], const char16_t symbols[]);
+static size_t FindSymbolsFwd (const char32_t string[], const char32_t symbols[]);
+
+// Backward direction search
+static size_t FindSymbolsBwd (const char8_t string[], const char8_t symbols[]);
+static size_t FindSymbolsBwd (const char16_t string[], const char16_t symbols[]);
+static size_t FindSymbolsBwd (const char32_t string[], const char32_t symbols[]);
 
 //****************************************************************************//
 //      Substring search                                                      //
 //****************************************************************************//
 
-// Searching string for pattern
-static size_t FindSubString (const char8_t string[], const char8_t pattern[]);
-static size_t FindSubString (const char16_t string[], const char16_t pattern[]);
-static size_t FindSubString (const char32_t string[], const char32_t pattern[]);
+//============================================================================//
+//      Searching string for pattern                                          //
+//============================================================================//
 
-// Searching characters sequence for pattern
-static size_t FindSubString (const char8_t string[], size_t size, const char8_t pattern[]);
-static size_t FindSubString (const char16_t string[], size_t size, const char16_t pattern[]);
-static size_t FindSubString (const char32_t string[], size_t size, const char32_t pattern[]);
+// Forward direction search
+static size_t FindSubStringFwd (const char8_t string[], const char8_t pattern[]);
+static size_t FindSubStringFwd (const char16_t string[], const char16_t pattern[]);
+static size_t FindSubStringFwd (const char32_t string[], const char32_t pattern[]);
+
+// Backward direction search
+static size_t FindSubStringBwd (const char8_t string[], const char8_t pattern[]);
+static size_t FindSubStringBwd (const char16_t string[], const char16_t pattern[]);
+static size_t FindSubStringBwd (const char32_t string[], const char32_t pattern[]);
+
+//============================================================================//
+//      Searching characters sequence for pattern                             //
+//============================================================================//
+
+// Forward direction search
+static size_t FindSubStringFwd (const char8_t string[], size_t size, const char8_t pattern[]);
+static size_t FindSubStringFwd (const char16_t string[], size_t size, const char16_t pattern[]);
+static size_t FindSubStringFwd (const char32_t string[], size_t size, const char32_t pattern[]);
+
+// Backward direction search
+static size_t FindSubStringBwd (const char8_t string[], size_t size, const char8_t pattern[]);
+static size_t FindSubStringBwd (const char16_t string[], size_t size, const char16_t pattern[]);
+static size_t FindSubStringBwd (const char32_t string[], size_t size, const char32_t pattern[]);
 
 //****************************************************************************//
 //      String search                                                         //
@@ -510,29 +546,65 @@ sint64_t String_CompareN_char32 (const char32_t string1[], const char32_t string
 //      Symbol search                                                         //
 //****************************************************************************//
 
-// Searching for single symbol
-size_t String_FindSymbol_char8 (const char8_t string[], char8_t symbol);
-size_t String_FindSymbol_char16 (const char16_t string[], char16_t symbol);
-size_t String_FindSymbol_char32 (const char32_t string[], char32_t symbol);
+//============================================================================//
+//      Searching for single symbol                                           //
+//============================================================================//
 
-// Searching for symbols set
-size_t String_FindSymbols_char8 (const char8_t string[], const char8_t symbols[]);
-size_t String_FindSymbols_char16 (const char16_t string[], const char16_t symbols[]);
-size_t String_FindSymbols_char32 (const char32_t string[], const char32_t symbols[]);
+// Forward direction search
+size_t String_FindSymbolFwd_char8 (const char8_t string[], char8_t symbol);
+size_t String_FindSymbolFwd_char16 (const char16_t string[], char16_t symbol);
+size_t String_FindSymbolFwd_char32 (const char32_t string[], char32_t symbol);
+
+// Backward direction search
+size_t String_FindSymbolBwd_char8 (const char8_t string[], char8_t symbol);
+size_t String_FindSymbolBwd_char16 (const char16_t string[], char16_t symbol);
+size_t String_FindSymbolBwd_char32 (const char32_t string[], char32_t symbol);
+
+//============================================================================//
+//      Searching for symbols set                                             //
+//============================================================================//
+
+// Forward direction search
+size_t String_FindSymbolsFwd_char8 (const char8_t string[], const char8_t symbols[]);
+size_t String_FindSymbolsFwd_char16 (const char16_t string[], const char16_t symbols[]);
+size_t String_FindSymbolsFwd_char32 (const char32_t string[], const char32_t symbols[]);
+
+// Backward direction search
+size_t String_FindSymbolsBwd_char8 (const char8_t string[], const char8_t symbols[]);
+size_t String_FindSymbolsBwd_char16 (const char16_t string[], const char16_t symbols[]);
+size_t String_FindSymbolsBwd_char32 (const char32_t string[], const char32_t symbols[]);
 
 //****************************************************************************//
 //      Substring search                                                      //
 //****************************************************************************//
 
-// Searching string for pattern
-size_t String_FindSubString_char8 (const char8_t string[], const char8_t pattern[]);
-size_t String_FindSubString_char16 (const char16_t string[], const char16_t pattern[]);
-size_t String_FindSubString_char32 (const char32_t string[], const char32_t pattern[]);
+//============================================================================//
+//      Searching string for pattern                                          //
+//============================================================================//
 
-// Searching characters sequence for pattern
-size_t String_FindSubStringN_char8 (const char8_t string[], size_t size, const char8_t pattern[]);
-size_t String_FindSubStringN_char16 (const char16_t string[], size_t size, const char16_t pattern[]);
-size_t String_FindSubStringN_char32 (const char32_t string[], size_t size, const char32_t pattern[]);
+// Forward direction search
+size_t String_FindSubStringFwd_char8 (const char8_t string[], const char8_t pattern[]);
+size_t String_FindSubStringFwd_char16 (const char16_t string[], const char16_t pattern[]);
+size_t String_FindSubStringFwd_char32 (const char32_t string[], const char32_t pattern[]);
+
+// Backward direction search
+size_t String_FindSubStringBwd_char8 (const char8_t string[], const char8_t pattern[]);
+size_t String_FindSubStringBwd_char16 (const char16_t string[], const char16_t pattern[]);
+size_t String_FindSubStringBwd_char32 (const char32_t string[], const char32_t pattern[]);
+
+//============================================================================//
+//      Searching characters sequence for pattern                             //
+//============================================================================//
+
+// Forward direction search
+size_t String_FindSubStringNFwd_char8 (const char8_t string[], size_t size, const char8_t pattern[]);
+size_t String_FindSubStringNFwd_char16 (const char16_t string[], size_t size, const char16_t pattern[]);
+size_t String_FindSubStringNFwd_char32 (const char32_t string[], size_t size, const char32_t pattern[]);
+
+// Backward direction search
+size_t String_FindSubStringNBwd_char8 (const char8_t string[], size_t size, const char8_t pattern[]);
+size_t String_FindSubStringNBwd_char16 (const char16_t string[], size_t size, const char16_t pattern[]);
+size_t String_FindSubStringNBwd_char32 (const char32_t string[], size_t size, const char32_t pattern[]);
 
 //****************************************************************************//
 //      String search                                                         //
