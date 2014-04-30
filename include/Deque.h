@@ -48,14 +48,14 @@ Deque (const Deque &source);
 //****************************************************************************//
 //      Copying elements                                                      //
 //****************************************************************************//
-size_t CopyHead (const Deque *source, size_t pos, size_t count);
-size_t CopyTail (const Deque *source, size_t pos, size_t count);
+size_t CopyHead (size_t tpos, const Deque *source, size_t spos, size_t count);
+size_t CopyTail (size_t tpos, const Deque *source, size_t spos, size_t count);
 
 //****************************************************************************//
 //      Moving elements                                                       //
 //****************************************************************************//
-size_t MoveHead (Deque *source, size_t pos, size_t count);
-size_t MoveTail (Deque *source, size_t pos, size_t count);
+size_t MoveHead (size_t tpos, Deque *source, size_t spos, size_t count);
+size_t MoveTail (size_t tpos, Deque *source, size_t spos, size_t count);
 
 //****************************************************************************//
 //      Addition of element                                                   //
@@ -107,9 +107,9 @@ bool ReplaceTail (data_t *odata, const data_t *ndata, size_t pos);
 size_t ReverseHead (size_t pos, size_t count);
 size_t ReverseTail (size_t pos, size_t count);
 
-// Swapping element
-bool SwapHead (size_t pos);
-bool SwapTail (size_t pos);
+// Swapping elements
+bool SwapHead (size_t pos1, size_t pos2);
+bool SwapTail (size_t pos1, size_t pos2);
 
 //****************************************************************************//
 //      Minimum and maximum value                                             //
@@ -124,12 +124,8 @@ size_t MaxHead (data_t *data, size_t pos, size_t count, KeyCmp func) const;
 size_t MaxTail (data_t *data, size_t pos, size_t count, KeyCmp func) const;
 
 //****************************************************************************//
-//      Search algorithms                                                     //
-//****************************************************************************//
-
-//============================================================================//
 //      Key searching                                                         //
-//============================================================================//
+//****************************************************************************//
 
 // Single key searching
 size_t FindKeyHead (data_t *data, adt_t key, size_t pos, size_t count, KeyCmp func) const;
@@ -139,11 +135,11 @@ size_t FindKeyTail (data_t *data, adt_t key, size_t pos, size_t count, KeyCmp fu
 size_t FindKeysHead (data_t *data, const adt_t keys[], size_t size, size_t pos, size_t count, KeyCmp func) const;
 size_t FindKeysTail (data_t *data, const adt_t keys[], size_t size, size_t pos, size_t count, KeyCmp func) const;
 
-//============================================================================//
+//****************************************************************************//
 //      Searching for differences                                             //
-//============================================================================//
-size_t FindDiffHead (data_t *data, const Deque *source, size_t pos, size_t count, KeyCmp func) const;
-size_t FindDiffTail (data_t *data, const Deque *source, size_t pos, size_t count, KeyCmp func) const;
+//****************************************************************************//
+size_t FindDiffHead (data_t *data, size_t tpos, const Deque *source, size_t spos, size_t count, KeyCmp func) const;
+size_t FindDiffTail (data_t *data, size_t tpos, const Deque *source, size_t spos, size_t count, KeyCmp func) const;
 
 //****************************************************************************//
 //      Key counting                                                          //
@@ -211,14 +207,14 @@ void Deque_FreeDeque (struct Deque *deque);
 //****************************************************************************//
 //      Copying elements                                                      //
 //****************************************************************************//
-size_t Deque_CopyHead (struct Deque *deque, const struct Deque *source, size_t pos, size_t count);
-size_t Deque_CopyTail (struct Deque *deque, const struct Deque *source, size_t pos, size_t count);
+size_t Deque_CopyHead (struct Deque *deque, size_t tpos, const struct Deque *source, size_t spos, size_t count);
+size_t Deque_CopyTail (struct Deque *deque, size_t tpos, const struct Deque *source, size_t spos, size_t count);
 
 //****************************************************************************//
 //      Moving elements                                                       //
 //****************************************************************************//
-size_t Deque_MoveHead (struct Deque *deque, struct Deque *source, size_t pos, size_t count);
-size_t Deque_MoveTail (struct Deque *deque, struct Deque *source, size_t pos, size_t count);
+size_t Deque_MoveHead (struct Deque *deque, size_t tpos, struct Deque *source, size_t spos, size_t count);
+size_t Deque_MoveTail (struct Deque *deque, size_t tpos, struct Deque *source, size_t spos, size_t count);
 
 //****************************************************************************//
 //      Addition of element                                                   //
@@ -270,9 +266,9 @@ bool Deque_ReplaceTail (struct Deque *deque, struct data_t *odata, const struct 
 size_t Deque_ReverseHead (struct Deque *deque, size_t pos, size_t count);
 size_t Deque_ReverseTail (struct Deque *deque, size_t pos, size_t count);
 
-// Swapping element
-bool Deque_SwapHead (struct Deque *deque, size_t pos);
-bool Deque_SwapTail (struct Deque *deque, size_t pos);
+// Swapping elements
+bool Deque_SwapHead (struct Deque *deque, size_t pos1, size_t pos2);
+bool Deque_SwapTail (struct Deque *deque, size_t pos1, size_t pos2);
 
 //****************************************************************************//
 //      Minimum and maximum value                                             //
@@ -287,12 +283,8 @@ size_t Deque_MaxHead (const struct Deque *deque, struct data_t *data, size_t pos
 size_t Deque_MaxTail (const struct Deque *deque, struct data_t *data, size_t pos, size_t count, KeyCmp func);
 
 //****************************************************************************//
-//      Search algorithms                                                     //
-//****************************************************************************//
-
-//============================================================================//
 //      Key searching                                                         //
-//============================================================================//
+//****************************************************************************//
 
 // Single key searching
 size_t Deque_FindKeyHead (const struct Deque *deque, struct data_t *data, union adt_t key, size_t pos, size_t count, KeyCmp func);
@@ -302,11 +294,11 @@ size_t Deque_FindKeyTail (const struct Deque *deque, struct data_t *data, union 
 size_t Deque_FindKeysHead (const struct Deque *deque, struct data_t *data, const union adt_t keys[], size_t size, size_t pos, size_t count, KeyCmp func);
 size_t Deque_FindKeysTail (const struct Deque *deque, struct data_t *data, const union adt_t keys[], size_t size, size_t pos, size_t count, KeyCmp func);
 
-//============================================================================//
+//****************************************************************************//
 //      Searching for differences                                             //
-//============================================================================//
-size_t Deque_FindDiffHead (const struct Deque *deque, struct data_t *data, const struct Deque *source, size_t pos, size_t count, KeyCmp func);
-size_t Deque_FindDiffTail (const struct Deque *deque, struct data_t *data, const struct Deque *source, size_t pos, size_t count, KeyCmp func);
+//****************************************************************************//
+size_t Deque_FindDiffHead (const struct Deque *deque, struct data_t *data, size_t tpos, const struct Deque *source, size_t spos, size_t count, KeyCmp func);
+size_t Deque_FindDiffTail (const struct Deque *deque, struct data_t *data, size_t tpos, const struct Deque *source, size_t spos, size_t count, KeyCmp func);
 
 //****************************************************************************//
 //      Key counting                                                          //
