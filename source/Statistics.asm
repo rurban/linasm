@@ -693,44 +693,44 @@ bmask	= bytes - 1							; elements aligning mask
 		movap#x	temp, [array]				; temp = array[0]
 	blendvp#x	temp, mininf				; blend temp with min infinity values
 		min#p#x	min0, temp					; find min value
-		cmpp#x	temp, temp, 3				; check values for NANs
+	cmpunordp#x	temp, temp					; check values for NANs
 		orp#x	flags, temp					; accumulate NaN check results
 		xorp#x	blend, blend				; blend = 0
 ;---[Vector loop]--------------------------
 .vloop:	add		index, VSIZE				; index += VSIZE
 		sub		size, VSIZE					; if (size <= VSIZE)
 		jbe		.tail						;     then process array tail
-		movap#x	temp, [ptr + 1*VSIZE]		; temp = ptr[1]
+		movap#x	temp, [ptr + 1 * VSIZE]		; temp = ptr[1]
 		max#p#x	max1, temp					; find max value
 		min#p#x	min1, temp					; find min value
-		cmpp#x	temp, temp, 3				; check values for NANs
+	cmpunordp#x	temp, temp					; check values for NANs
 		orp#x	flags, temp					; accumulate NaN check results
 		add		index, VSIZE				; index += VSIZE
 		sub		size, VSIZE					; if (size <= VSIZE)
 		jbe		.tail						;     then process array tail
-		movap#x	temp, [ptr + 2*VSIZE]		; temp = ptr[2]
+		movap#x	temp, [ptr + 2 * VSIZE]		; temp = ptr[2]
 		max#p#x	max2, temp					; find max value
 		min#p#x	min2, temp					; find min value
-		cmpp#x	temp, temp, 3				; check values for NANs
+	cmpunordp#x	temp, temp					; check values for NANs
 		orp#x	flags, temp					; accumulate NaN check results
 		add		index, VSIZE				; index += VSIZE
 		sub		size, VSIZE					; if (size <= VSIZE)
 		jbe		.tail						;     then process array tail
-		movap#x	temp, [ptr + 3*VSIZE]		; temp = ptr[3]
+		movap#x	temp, [ptr + 3 * VSIZE]		; temp = ptr[3]
 		max#p#x	max3, temp					; find max value
 		min#p#x	min3, temp					; find min value
-		cmpp#x	temp, temp, 3				; check values for NANs
+	cmpunordp#x	temp, temp					; check values for NANs
 		orp#x	flags, temp					; accumulate NaN check results
 		add		index, VSIZE				; index += VSIZE
 		sub		size, VSIZE					; if (size <= VSIZE)
 		jbe		.tail						;     then process array tail
-		movap#x	temp, [ptr + 4*VSIZE]		; temp = ptr[4]
+		movap#x	temp, [ptr + 4 * VSIZE]		; temp = ptr[4]
 		max#p#x	max4, temp					; find max value
 		min#p#x	min4, temp					; find min value
-		cmpp#x	temp, temp, 3				; check values for NANs
+	cmpunordp#x	temp, temp					; check values for NANs
 		orp#x	flags, temp					; accumulate NaN check results
 	prefetchnta	[ptr + PSTEP]				; prefetch next portion of data
-		add		ptr, 4 * VSIZE				; ptr += 4 * VSIZE
+		add		ptr, CLINE					; ptr += CLINE
 		jmp		.vloop						; do while (true)
 ;---[End of vector loop]-------------------
 .tail:	shl		size, VSCALE				; compute shift in mask array
@@ -740,9 +740,9 @@ bmask	= bytes - 1							; elements aligning mask
 	blendvp#x	mininf, temp				; blend temp with min infinity values
 		max#p#x	max0, maxinf				; find max value
 		min#p#x	min0, mininf				; find min value
-		cmpp#x	maxinf, maxinf, 3			; check values for NANs
+	cmpunordp#x	maxinf, maxinf				; check values for NANs
 		orp#x	flags, maxinf				; accumulate NaN check results
-		cmpp#x	mininf, mininf, 3			; check values for NANs
+	cmpunordp#x	mininf, mininf				; check values for NANs
 		orp#x	flags, mininf				; accumulate NaN check results
 	pmovmskb	fmask, flags				; save check results to fmask
 		and		fmask, fmask				; if NAN is found,
@@ -907,7 +907,7 @@ end if
 .vloop:	add		index, VSIZE				; index += VSIZE
 		sub		size, VSIZE					; if (size <= VSIZE)
 		jbe		.tail						;     then process array tail
-		movap#x	temp, [ptr + 1*VSIZE]		; temp = ptr[1]
+		movap#x	temp, [ptr + 1 * VSIZE]		; temp = ptr[1]
 		subp#x	temp, vector				; temp -= vector
 if type = 1
 		mulp#x	temp, temp					; temp = temp ^ 2
@@ -918,7 +918,7 @@ end if
 		add		index, VSIZE				; index += VSIZE
 		sub		size, VSIZE					; if (size <= VSIZE)
 		jbe		.tail						;     then process array tail
-		movap#x	temp, [ptr + 2*VSIZE]		; temp = ptr[2]
+		movap#x	temp, [ptr + 2 * VSIZE]		; temp = ptr[2]
 		subp#x	temp, vector				; temp -= vector
 if type = 1
 		mulp#x	temp, temp					; temp = temp ^ 2
@@ -929,7 +929,7 @@ end if
 		add		index, VSIZE				; index += VSIZE
 		sub		size, VSIZE					; if (size <= VSIZE)
 		jbe		.tail						;     then process array tail
-		movap#x	temp, [ptr + 3*VSIZE]		; temp = ptr[3]
+		movap#x	temp, [ptr + 3 * VSIZE]		; temp = ptr[3]
 		subp#x	temp, vector				; temp -= vector
 if type = 1
 		mulp#x	temp, temp					; temp = temp ^ 2
@@ -940,7 +940,7 @@ end if
 		add		index, VSIZE				; index += VSIZE
 		sub		size, VSIZE					; if (size <= VSIZE)
 		jbe		.tail						;     then process array tail
-		movap#x	temp, [ptr + 4*VSIZE]		; temp = ptr[4]
+		movap#x	temp, [ptr + 4 * VSIZE]		; temp = ptr[4]
 		subp#x	temp, vector				; temp -= vector
 if type = 1
 		mulp#x	temp, temp					; temp = temp ^ 2
@@ -949,7 +949,7 @@ else if type = 2
 end if
 		addp#x	sum4, temp					; sum4 += temp
 	prefetchnta	[ptr + PSTEP]				; prefetch next portion of data
-		add		ptr, 4 * VSIZE				; ptr += 4 * VSIZE
+		add		ptr, CLINE					; ptr += CLINE
 		jmp		.vloop						; do while (true)
 ;---[End of vector loop]-------------------
 .tail:	shl		size, VSCALE				; compute shift in mask array
@@ -1279,7 +1279,7 @@ bmask	= bytes - 1							; elements aligning mask
 .vloop:	add		index, VSIZE				; index += VSIZE
 		sub		size, VSIZE					; if (size <= VSIZE)
 		jbe		.tail						;     then process array tail
-		movap#x	temp0, [ptr + 1*VSIZE]		; temp0 = ptr[1]
+		movap#x	temp0, [ptr + 1 * VSIZE]	; temp0 = ptr[1]
 		subp#x	temp0, vector				; temp0 -= vector
 		movap#x	temp1, temp0				; temp1 = temp0
 		mulp#x	temp0, temp0
@@ -1289,7 +1289,7 @@ bmask	= bytes - 1							; elements aligning mask
 		add		index, VSIZE				; index += VSIZE
 		sub		size, VSIZE					; if (size <= VSIZE)
 		jbe		.tail						;     then process array tail
-		movap#x	temp0, [ptr + 2*VSIZE]		; temp0 = ptr[2]
+		movap#x	temp0, [ptr + 2 * VSIZE]	; temp0 = ptr[2]
 		subp#x	temp0, vector				; temp0 -= vector
 		movap#x	temp1, temp0				; temp1 = temp0
 		mulp#x	temp0, temp0
@@ -1299,7 +1299,7 @@ bmask	= bytes - 1							; elements aligning mask
 		add		index, VSIZE				; index += VSIZE
 		sub		size, VSIZE					; if (size <= VSIZE)
 		jbe		.tail						;     then process array tail
-		movap#x	temp0, [ptr + 3*VSIZE]		; temp0 = ptr[3]
+		movap#x	temp0, [ptr + 3 * VSIZE]	; temp0 = ptr[3]
 		subp#x	temp0, vector				; temp0 -= vector
 		movap#x	temp1, temp0				; temp1 = temp0
 		mulp#x	temp0, temp0
@@ -1309,7 +1309,7 @@ bmask	= bytes - 1							; elements aligning mask
 		add		index, VSIZE				; index += VSIZE
 		sub		size, VSIZE					; if (size <= VSIZE)
 		jbe		.tail						;     then process array tail
-		movap#x	temp0, [ptr + 4*VSIZE]		; temp0 = ptr[4]
+		movap#x	temp0, [ptr + 4 * VSIZE]	; temp0 = ptr[4]
 		subp#x	temp0, vector				; temp0 -= vector
 		movap#x	temp1, temp0				; temp1 = temp0
 		mulp#x	temp0, temp0
@@ -1317,7 +1317,7 @@ bmask	= bytes - 1							; elements aligning mask
 		mulp#x	temp0, temp1
 		addp#x	sum9, temp0					; sum9 += (ptr[4] - mean)^3
 	prefetchnta	[ptr + PSTEP]				; prefetch next portion of data
-		add		ptr, 4 * VSIZE				; ptr += 4 * VSIZE
+		add		ptr, CLINE					; ptr += CLINE
 		jmp		.vloop						; do while (true)
 ;---[End of vector loop]-------------------
 .tail:	shl		size, VSCALE				; compute shift in mask array
@@ -1474,7 +1474,7 @@ bmask	= bytes - 1							; elements aligning mask
 .vloop:	add		index, VSIZE				; index += VSIZE
 		sub		size, VSIZE					; if (size <= VSIZE)
 		jbe		.tail						;     then process array tail
-		movap#x	temp, [ptr + 1*VSIZE]		; temp = ptr[1]
+		movap#x	temp, [ptr + 1 * VSIZE]		; temp = ptr[1]
 		subp#x	temp, vector				; temp -= vector
 		mulp#x	temp, temp
 		addp#x	sum2, temp					; sum2 += (ptr[1] - mean)^2
@@ -1483,7 +1483,7 @@ bmask	= bytes - 1							; elements aligning mask
 		add		index, VSIZE				; index += VSIZE
 		sub		size, VSIZE					; if (size <= VSIZE)
 		jbe		.tail						;     then process array tail
-		movap#x	temp, [ptr + 2*VSIZE]		; temp = ptr[2]
+		movap#x	temp, [ptr + 2 * VSIZE]		; temp = ptr[2]
 		subp#x	temp, vector				; temp -= vector
 		mulp#x	temp, temp
 		addp#x	sum4, temp					; sum4 += (ptr[2] - mean)^2
@@ -1492,7 +1492,7 @@ bmask	= bytes - 1							; elements aligning mask
 		add		index, VSIZE				; index += VSIZE
 		sub		size, VSIZE					; if (size <= VSIZE)
 		jbe		.tail						;     then process array tail
-		movap#x	temp, [ptr + 3*VSIZE]		; temp = ptr[3]
+		movap#x	temp, [ptr + 3 * VSIZE]		; temp = ptr[3]
 		subp#x	temp, vector				; temp -= vector
 		mulp#x	temp, temp
 		addp#x	sum6, temp					; sum6 += (ptr[3] - mean)^2
@@ -1501,14 +1501,14 @@ bmask	= bytes - 1							; elements aligning mask
 		add		index, VSIZE				; index += VSIZE
 		sub		size, VSIZE					; if (size <= VSIZE)
 		jbe		.tail						;     then process array tail
-		movap#x	temp, [ptr + 4*VSIZE]		; temp = ptr[4]
+		movap#x	temp, [ptr + 4 * VSIZE]		; temp = ptr[4]
 		subp#x	temp, vector				; temp -= vector
 		mulp#x	temp, temp
 		addp#x	sum8, temp					; sum8 += (ptr[4] - mean)^2
 		mulp#x	temp, temp
 		addp#x	sum9, temp					; sum9 += (ptr[4] - mean)^4
 	prefetchnta	[ptr + PSTEP]				; prefetch next portion of data
-		add		ptr, 4 * VSIZE				; ptr += 4 * VSIZE
+		add		ptr, CLINE					; ptr += CLINE
 		jmp		.vloop						; do while (true)
 ;---[End of vector loop]-------------------
 .tail:	shl		size, VSCALE				; compute shift in mask array
@@ -1650,43 +1650,43 @@ bmask	= bytes - 1							; elements aligning mask
 .vloop:	add		index, VSIZE				; index += VSIZE
 		sub		size, VSIZE					; if (size <= VSIZE)
 		jbe		.tail						;     then process array tails
-		movup#x	a2temp, [ptr2 + 1*VSIZE]	; a2temp = ptr2[1]
+		movup#x	a2temp, [ptr2 + 1 * VSIZE]	; a2temp = ptr2[1]
 		subp#x	a2temp, vector2				; a2temp -= vector2
-		movap#x	a1temp, [ptr1 + 1*VSIZE]	; a1temp = ptr1[1]
+		movap#x	a1temp, [ptr1 + 1 * VSIZE]	; a1temp = ptr1[1]
 		subp#x	a1temp, vector1				; a1temp -= vector1
 		mulp#x	a1temp, a2temp				; a1temp *= a2temp
 		addp#x	sum1, a1temp				; sum1 += a1temp
 		add		index, VSIZE				; index += VSIZE
 		sub		size, VSIZE					; if (size <= VSIZE)
 		jbe		.tail						;     then process array tails
-		movup#x	a2temp, [ptr2 + 2*VSIZE]	; a2temp = ptr2[2]
+		movup#x	a2temp, [ptr2 + 2 * VSIZE]	; a2temp = ptr2[2]
 		subp#x	a2temp, vector2				; a2temp -= vector2
-		movap#x	a1temp, [ptr1 + 2*VSIZE]	; a1temp = ptr1[2]
+		movap#x	a1temp, [ptr1 + 2 * VSIZE]	; a1temp = ptr1[2]
 		subp#x	a1temp, vector1				; a1temp -= vector1
 		mulp#x	a1temp, a2temp				; a1temp *= a2temp
 		addp#x	sum2, a1temp				; sum2 += a1temp
 		add		index, VSIZE				; index += VSIZE
 		sub		size, VSIZE					; if (size <= VSIZE)
 		jbe		.tail						;     then process array tails
-		movup#x	a2temp, [ptr2 + 3*VSIZE]	; a2temp = ptr2[3]
+		movup#x	a2temp, [ptr2 + 3 * VSIZE]	; a2temp = ptr2[3]
 		subp#x	a2temp, vector2				; a2temp -= vector2
-		movap#x	a1temp, [ptr1 + 3*VSIZE]	; a1temp = ptr1[3]
+		movap#x	a1temp, [ptr1 + 3 * VSIZE]	; a1temp = ptr1[3]
 		subp#x	a1temp, vector1				; a1temp -= vector1
 		mulp#x	a1temp, a2temp				; a1temp *= a2temp
 		addp#x	sum3, a1temp				; sum3 += a1temp
 		add		index, VSIZE				; index += VSIZE
 		sub		size, VSIZE					; if (size <= VSIZE)
 		jbe		.tail						;     then process array tails
-		movup#x	a2temp, [ptr2 + 4*VSIZE]	; a2temp = ptr2[4]
+		movup#x	a2temp, [ptr2 + 4 * VSIZE]	; a2temp = ptr2[4]
 		subp#x	a2temp, vector2				; a2temp -= vector2
-		movap#x	a1temp, [ptr1 + 4*VSIZE]	; a1temp = ptr1[4]
+		movap#x	a1temp, [ptr1 + 4 * VSIZE]	; a1temp = ptr1[4]
 		subp#x	a1temp, vector1				; a1temp -= vector1
 		mulp#x	a1temp, a2temp				; a1temp *= a2temp
 		addp#x	sum4, a1temp				; sum4 += a1temp
 	prefetchnta	[ptr2 + PSTEP]				; prefetch next portion of temp
 	prefetchnta	[ptr1 + PSTEP]				; prefetch next portion of temp
-		add		ptr2, 4 * VSIZE				; ptr2 += 4 * VSIZE
-		add		ptr1, 4 * VSIZE				; ptr1 += 4 * VSIZE
+		add		ptr2, CLINE					; ptr2 += CLINE
+		add		ptr1, CLINE					; ptr1 += CLINE
 		jmp		.vloop						; do while (true)
 ;---[End of vector loop]-------------------
 .tail:	add		index, size					; index += size
@@ -1821,9 +1821,9 @@ bmask	= bytes - 1							; elements aligning mask
 .vloop:	add		index, VSIZE				; index += VSIZE
 		sub		size, VSIZE					; if (size <= VSIZE)
 		jbe		.tail						;     then process array tails
-		movup#x	a2temp, [ptr2 + 1*VSIZE]	; a2temp = ptr2[1]
+		movup#x	a2temp, [ptr2 + 1 * VSIZE]	; a2temp = ptr2[1]
 		subp#x	a2temp, vector2				; a2temp -= vector2
-		movap#x	a1temp, [ptr1 + 1*VSIZE]	; a1temp = ptr1[1]
+		movap#x	a1temp, [ptr1 + 1 * VSIZE]	; a1temp = ptr1[1]
 		subp#x	a1temp, vector1				; a1temp -= vector1
 		movap#x	temp, a2temp
 		mulp#x	temp, a1temp				; temp = a1temp * a2temp
@@ -1835,9 +1835,9 @@ bmask	= bytes - 1							; elements aligning mask
 		add		index, VSIZE				; index += VSIZE
 		sub		size, VSIZE					; if (size <= VSIZE)
 		jbe		.tail						;     then process array tails
-		movup#x	a2temp, [ptr2 + 2*VSIZE]	; a2temp = ptr2[2]
+		movup#x	a2temp, [ptr2 + 2 * VSIZE]	; a2temp = ptr2[2]
 		subp#x	a2temp, vector2				; a2temp -= vector2
-		movap#x	a1temp, [ptr1 + 2*VSIZE]	; a1temp = ptr1[2]
+		movap#x	a1temp, [ptr1 + 2 * VSIZE]	; a1temp = ptr1[2]
 		subp#x	a1temp, vector1				; a1temp -= vector1
 		movap#x	temp, a2temp
 		mulp#x	temp, a1temp				; temp = a1temp * a2temp
@@ -1849,9 +1849,9 @@ bmask	= bytes - 1							; elements aligning mask
 		add		index, VSIZE				; index += VSIZE
 		sub		size, VSIZE					; if (size <= VSIZE)
 		jbe		.tail						;     then process array tails
-		movup#x	a2temp, [ptr2 + 3*VSIZE]	; a2temp = ptr2[3]
+		movup#x	a2temp, [ptr2 + 3 * VSIZE]	; a2temp = ptr2[3]
 		subp#x	a2temp, vector2				; a2temp -= vector2
-		movap#x	a1temp, [ptr1 + 3*VSIZE]	; a1temp = ptr1[3]
+		movap#x	a1temp, [ptr1 + 3 * VSIZE]	; a1temp = ptr1[3]
 		subp#x	a1temp, vector1				; a1temp -= vector1
 		movap#x	temp, a2temp
 		mulp#x	temp, a1temp				; temp = a1temp * a2temp
@@ -1863,9 +1863,9 @@ bmask	= bytes - 1							; elements aligning mask
 		add		index, VSIZE				; index += VSIZE
 		sub		size, VSIZE					; if (size <= VSIZE)
 		jbe		.tail						;     then process array tails
-		movup#x	a2temp, [ptr2 + 4*VSIZE]	; a2temp = ptr2[4]
+		movup#x	a2temp, [ptr2 + 4 * VSIZE]	; a2temp = ptr2[4]
 		subp#x	a2temp, vector2				; a2temp -= vector2
-		movap#x	a1temp, [ptr1 + 4*VSIZE]	; a1temp = ptr1[4]
+		movap#x	a1temp, [ptr1 + 4 * VSIZE]	; a1temp = ptr1[4]
 		subp#x	a1temp, vector1				; a1temp -= vector1
 		movap#x	temp, a2temp
 		mulp#x	temp, a1temp				; temp = a1temp * a2temp
@@ -1876,8 +1876,8 @@ bmask	= bytes - 1							; elements aligning mask
 		addp#x	sum1, a1temp				; sum1 += a1temp
 	prefetchnta	[ptr2 + PSTEP]				; prefetch next portion of temp
 	prefetchnta	[ptr1 + PSTEP]				; prefetch next portion of temp
-		add		ptr2, 4 * VSIZE				; ptr2 += 4 * VSIZE
-		add		ptr1, 4 * VSIZE				; ptr1 += 4 * VSIZE
+		add		ptr2, CLINE					; ptr2 += CLINE
+		add		ptr1, CLINE					; ptr1 += CLINE
 		jmp		.vloop						; do while (true)
 ;---[End of vector loop]-------------------
 .tail:	add		index, size					; index += size

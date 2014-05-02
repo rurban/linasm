@@ -7,14 +7,41 @@
 ################################################################################
 
 #******************************************************************************#
+#       Release 1.02 (stable) [2014-05-02]                                     #
+#******************************************************************************#
+
+New extends abstract data type library with new class called "Vector", which
+provides the same functionality as STL vector class, but works faster. Also were
+redesigned "Array" library. Were added object array functions such as object
+searching, sorting, counting, extracting unique objects and so on. String
+library also was recreated to works with array of strings. Were added
+bidirectional search for symbol, symbols set, and substrings.
+
+Minor changed in this release:
+    * Added function IsInit in all ADT classes.
+    * Improved data conversion functions in the "Array" library.
+    * Added functions FindSequenceFwd and FindSequenceBwd in MultiTree and
+      MultiHash abstract data types.
+    * Added functions MinFwd, MinBwd, MaxFwd, MaxBwd in MultiTree, UniqueTree,
+      MultiHash and UniqueHash ADTs.
+    * Added functions FindSymbolFwd, FindSymbolBwd, FindSymbolsFwd,
+      FindSymbolsBwd, FindSubStringFwd, FindSubStringBwd in the "String" library.
+    * Added functions: InsertHead, InsertTail, ExtractHead, ExtractTail in
+      Deque ADT.
+    * Added functions Insert, Extract in Stack ADT.
+    * Added index rearrangement call back function in Heap ADT, which allow
+      to trace objects when heap swap elements to correct their order during
+      Insert and Extract operations.
+
+#******************************************************************************#
 #       Release 1.01 (stable) [2014-02-08]                                     #
 #******************************************************************************#
 
 In this release were added new abstract data types:
-	* MultiHash.h - Multiply keys hash table ADT
-	* UniqueHash.h - Unique keys hash table ADT
-	* List.h - Doubly linked list ADT
-	* Ring.h - Circular doubly linked list ADT
+    * MultiHash.h - Multiply keys hash table ADT
+    * UniqueHash.h - Unique keys hash table ADT
+    * List.h - Doubly linked list ADT
+    * Ring.h - Circular doubly linked list ADT
 
 Also were fixed found bugs in following abstract data types: MaxHeap.h,
 MinHeap.h, MultiTree.h, UniqueTree.h. Check the ChangeLog file for more
@@ -34,16 +61,16 @@ modules, fixed bugs and new features see documentation and ChangeLog file inside
 the release archive.
 
 Here is brief description of new modules in the LinAsm project:
-	* Accumulator.h - Accumulating buffer library
-	* Pool.h - Object pool library
-	* FPU.h - FPU control functions library
-	* SIMD.h - SIMD control functions library
-	* Stack.h - Stack ADT
-	* Deque.h - Double-ended queue ADT
-	* MaxHeap.h - Binary max heap ADT
-	* MinHeap.h - Binary min heap ADT
-	* MultiTree.h - Multiply keys b-tree ADT
-	* UniqueTree.h - Unique keys b-tree ADT
+    * Accumulator.h - Accumulating buffer library
+    * Pool.h - Object pool library
+    * FPU.h - FPU control functions library
+    * SIMD.h - SIMD control functions library
+    * Stack.h - Stack ADT
+    * Deque.h - Double-ended queue ADT
+    * MaxHeap.h - Binary max heap ADT
+    * MinHeap.h - Binary min heap ADT
+    * MultiTree.h - Multiply keys b-tree ADT
+    * UniqueTree.h - Unique keys b-tree ADT
 
 #******************************************************************************#
 #       Release 0.99 (beta) [2013-02-04]                                       #

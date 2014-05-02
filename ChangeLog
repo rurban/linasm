@@ -1,4 +1,29 @@
 +==============================================================================+
+|   2014-05-02  Release 1.02 (stable)                                          |
++==============================================================================+
+
+New features:
+	* Added Vector ADT
+	* Array.asm: Improved Convert functions
+	* Accumulator.asm, Btree.asm, Deque.asm, Hash.asm, Heap.asm, List.asm, Pool.asm, Stack.asm: Added function IsInit
+	* Array.asm, String.asm: Add InsertSort and MergeSort function
+	* String.asm: Added functions FindSymbolFwd, FindSymbolBwd, FindSymbolsFwd, FindSymbolsBwd, FindSubStringFwd, FindSubStringBwd
+	* Btree.asm: Add functions FindSequenceFwd and FindSequenceBwd
+	* Btree.asm: Added functions MinFwd, MinBwd, MaxFwd, MaxBwd
+	* Hash.asm, Btree.asm: Add functions FindSequenceFwd and FindSequenceBwd
+	* Hash.asm: Added functions MinFwd, MinBwd, MaxFwd, MaxBwd
+	* Deque.asm: Added functions: InsertHead, InsertTail, ExtractHead, ExtractTail
+	* Stack.asm: Added functions Insert, Extract
+	* Heap.asm: Added function Extract
+	* Heap.asm: Added index call back function
+
+Changes in behavior:
+	* Statistics.asm: Function Correlation renamed to PearsonCorrelation
+	* Stack.h, Deque.h: Changed prototypes of functions: CopyHead, CopyTail, MoveHead, MoveTail, FindDiffHead, FindDiffTail
+	* Heap.asm: Changed prototype of Merge function
+	* Removed Stack.asm
+
++==============================================================================+
 |   2014-02-08  Release 1.01 (stable)                                          |
 +==============================================================================+
 

@@ -392,31 +392,16 @@ end if
 		jnz		.brk						;     then return string length
 		add		index, VSIZE				; index += VSIZE
 ;---[Vector loop]--------------------------
-.vloop:	pxor	echeck, echeck				; echeck = 0
-	pcmpeq#x	echeck, [string + 1 * VSIZE]; check string[1] for end of line
-	pmovmskb	emask, echeck				; save check results to emask
-		and		emask, emask				; if eof is found
-		jnz		.brk						;     then break the loop
-		add		index, VSIZE				; index += VSIZE
+.vloop:
+repeat	CLINE / VSIZE
 		pxor	echeck, echeck				; echeck = 0
-	pcmpeq#x	echeck, [string + 2 * VSIZE]; check string[2] for end of line
+	pcmpeq#x	echeck, [string + % * VSIZE]; check string[i] for end of line
 	pmovmskb	emask, echeck				; save check results to emask
 		and		emask, emask				; if eof is found
 		jnz		.brk						;     then break the loop
 		add		index, VSIZE				; index += VSIZE
-		pxor	echeck, echeck				; echeck = 0
-	pcmpeq#x	echeck, [string + 3 * VSIZE]; check string[3] for end of line
-	pmovmskb	emask, echeck				; save check results to emask
-		and		emask, emask				; if eof is found
-		jnz		.brk						;     then break the loop
-		add		index, VSIZE				; index += VSIZE
-		pxor	echeck, echeck				; echeck = 0
-	pcmpeq#x	echeck, [string + 4 * VSIZE]; check string[4] for end of line
-	pmovmskb	emask, echeck				; save check results to emask
-		and		emask, emask				; if eof is found
-		jnz		.brk						;     then break the loop
-		add		index, VSIZE				; index += VSIZE
-		add		string, 4 * VSIZE			; string += 4 * VSIZE
+end repeat
+		add		string, CLINE				; string += CLINE
 		jmp		.vloop						; do while (true)
 ;---[End of vector loop]-------------------
 .brk:	bsf		emask, emask				; find index of first occurence of eol
@@ -750,48 +735,21 @@ end if
 		movdqu	sdata0, [source]
 		movdqu	[target], sdata0			; target[0] = source[0]
 ;---[Vector loop]--------------------------
-.vloop:	movdqu	[ptr1 + 1 * VSIZE], sdata1	; ptr1[1] = ptr2[1]
-		movdqa	sdata0, [ptr2 + 2 * VSIZE]	; sdata0 = ptr2[2]
+.vloop:
+repeat	CLINE / VSIZE
+		movdqu	[ptr1 + % * VSIZE], sdata1	; ptr1[i] = ptr2[i]
+		movdqa	sdata0, [ptr2 + (%+1)*VSIZE]; sdata0 = ptr2[i+1]
 		pxor	echeck0, echeck0			; echeck0 = 0
-	pcmpeq#x	echeck0, sdata0				; check ptr2[2] for end of line
+	pcmpeq#x	echeck0, sdata0				; check ptr2[i+1] for end of line
 	pmovmskb	emask, echeck0				; save check results to emask
 		and		emask, emask				; if eof is found
 		jnz		.brk1						;     then break the loop
 		add		index, VSIZE				; index += VSIZE
 		sub		maxlen, VSIZE				; if (maxlen < VSIZE)
 		jb		.nospc						;     then go to no space branch
-		movdqu	[ptr1 + 2 * VSIZE], sdata0	; ptr1[2] = ptr2[2]
-		movdqa	sdata1, [ptr2 + 3 * VSIZE]	; sdata1 = ptr2[3]
-		pxor	echeck1, echeck1			; echeck1 = 0
-	pcmpeq#x	echeck1, sdata1				; check ptr2[3] for end of line
-	pmovmskb	emask, echeck1				; save check results to emask
-		and		emask, emask				; if eof is found
-		jnz		.brk1						;     then break the loop
-		add		index, VSIZE				; index += VSIZE
-		sub		maxlen, VSIZE				; if (maxlen < VSIZE)
-		jb		.nospc						;     then go to no space branch
-		movdqu	[ptr1 + 3 * VSIZE], sdata1	; ptr1[3] = ptr2[3]
-		movdqa	sdata0, [ptr2 + 4 * VSIZE]	; sdata0 = ptr2[4]
-		pxor	echeck0, echeck0			; echeck0 = 0
-	pcmpeq#x	echeck0, sdata0				; check ptr2[4] for end of line
-	pmovmskb	emask, echeck0				; save check results to emask
-		and		emask, emask				; if eof is found
-		jnz		.brk1						;     then break the loop
-		add		index, VSIZE				; index += VSIZE
-		sub		maxlen, VSIZE				; if (maxlen < VSIZE)
-		jb		.nospc						;     then go to no space branch
-		movdqu	[ptr1 + 4 * VSIZE], sdata0	; ptr1[4] = ptr2[4]
-		movdqa	sdata1, [ptr2 + 5 * VSIZE]	; sdata1 = ptr2[5]
-		pxor	echeck1, echeck1			; echeck1 = 0
-	pcmpeq#x	echeck1, sdata1				; check ptr2[5] for end of line
-	pmovmskb	emask, echeck1				; save check results to emask
-		and		emask, emask				; if eof is found
-		jnz		.brk1						;     then break the loop
-		add		index, VSIZE				; index += VSIZE
-		sub		maxlen, VSIZE				; if (maxlen < VSIZE)
-		jb		.nospc						;     then go to no space branch
-		add		ptr2, 4 * VSIZE				; ptr2 += 4 * VSIZE
-		add		ptr1, 4 * VSIZE				; ptr1 += 4 * VSIZE
+end repeat
+		add		ptr2, CLINE					; ptr2 += CLINE
+		add		ptr1, CLINE					; ptr1 += CLINE
 		jmp		.vloop						; do while (true)
 ;---[End of vector loop]-------------------
 .brk0:	bsf		emask, emask				; find index of first occurence of eol
@@ -907,48 +865,21 @@ end if
 		movdqu	sdata0, [source]
 		movdqu	[target], sdata0			; target[0] = source[0]
 ;---[Vector loop]--------------------------
-.vloop:	movdqu	[ptr1 + 1 * VSIZE], sdata1	; ptr1[1] = ptr2[1]
-		movdqa	sdata0, [ptr2 + 2 * VSIZE]	; sdata0 = ptr2[2]
+.vloop:
+repeat	CLINE / VSIZE
+		movdqu	[ptr1 + % * VSIZE], sdata1	; ptr1[i] = ptr2[i]
+		movdqa	sdata0, [ptr2 + (%+1)*VSIZE]; sdata0 = ptr2[i+1]
 		pxor	echeck0, echeck0			; echeck0 = 0
-	pcmpeq#x	echeck0, sdata0				; check ptr2[2] for end of line
+	pcmpeq#x	echeck0, sdata0				; check ptr2[i+1] for end of line
 	pmovmskb	emask, echeck0				; save check results to emask
 		and		emask, emask				; if eof is found
 		jnz		.brk1						;     then break the loop
 		add		index, VSIZE				; index += VSIZE
 		sub		maxlen, VSIZE				; if (maxlen <= VSIZE)
 		jbe		.tail1						;     then copy maxlen elements from source
-		movdqu	[ptr1 + 2 * VSIZE], sdata0	; ptr1[2] = ptr2[2]
-		movdqa	sdata1, [ptr2 + 3 * VSIZE]	; sdata1 = ptr2[3]
-		pxor	echeck1, echeck1			; echeck1 = 0
-	pcmpeq#x	echeck1, sdata1				; check ptr2[3] for end of line
-	pmovmskb	emask, echeck1				; save check results to emask
-		and		emask, emask				; if eof is found
-		jnz		.brk1						;     then break the loop
-		add		index, VSIZE				; index += VSIZE
-		sub		maxlen, VSIZE				; if (maxlen <= VSIZE)
-		jbe		.tail1						;     then copy maxlen elements from source
-		movdqu	[ptr1 + 3 * VSIZE], sdata1	; ptr1[3] = ptr2[3]
-		movdqa	sdata0, [ptr2 + 4 * VSIZE]	; sdata0 = ptr2[4]
-		pxor	echeck0, echeck0			; echeck0 = 0
-	pcmpeq#x	echeck0, sdata0				; check ptr2[4] for end of line
-	pmovmskb	emask, echeck0				; save check results to emask
-		and		emask, emask				; if eof is found
-		jnz		.brk1						;     then break the loop
-		add		index, VSIZE				; index += VSIZE
-		sub		maxlen, VSIZE				; if (maxlen <= VSIZE)
-		jbe		.tail1						;     then copy maxlen elements from source
-		movdqu	[ptr1 + 4 * VSIZE], sdata0	; ptr1[4] = ptr2[4]
-		movdqa	sdata1, [ptr2 + 5 * VSIZE]	; sdata1 = ptr2[5]
-		pxor	echeck1, echeck1			; echeck1 = 0
-	pcmpeq#x	echeck1, sdata1				; check ptr2[5] for end of line
-	pmovmskb	emask, echeck1				; save check results to emask
-		and		emask, emask				; if eof is found
-		jnz		.brk1						;     then break the loop
-		add		index, VSIZE				; index += VSIZE
-		sub		maxlen, VSIZE				; if (maxlen <= VSIZE)
-		jbe		.tail1						;     then copy maxlen elements from source
-		add		ptr2, 4 * VSIZE				; ptr2 += 4 * VSIZE
-		add		ptr1, 4 * VSIZE				; ptr1 += 4 * VSIZE
+end repeat
+		add		ptr2, CLINE					; ptr2 += CLINE
+		add		ptr1, CLINE					; ptr1 += CLINE
 		jmp		.vloop						; do while (true)
 ;---[End of vector loop]-------------------
 .brk0:	bsf		emask, emask				; find index of first occurence of eol
@@ -1186,52 +1117,22 @@ end if
 		xor		fmask, VBITS				; if string1[0] != string2[0] or eol is found
 		jnz		.brk0						;     then break the loop
 ;---[Vector loop]--------------------------
-.vloop:	add		index, VSIZE				; index += VSIZE
-		sub		size, VSIZE					; if (size <= VSIZE)
-		jbe		.tail						;     then check string tails
-		movdqu	s1temp, [ptr1 + 1 * VSIZE]	; s1temp = ptr1[1]
-		movdqa	s2temp, [ptr2 + 1 * VSIZE]	; s2temp = ptr2[1]
-	pcmpeq#x	s1temp, s2temp				; check if ptr1[1] == ptr2[1]
-	pcmpeq#x	s2temp, eol					; check ptr2[1] for end of line
-	pandn		s2temp, s1temp
-	pmovmskb	fmask, s2temp				; save check results to fmask
-		xor		fmask, VBITS				; if ptr1[1] != ptr2[1] or eol is found
-		jnz		.brk1						;     then break the loop
+.vloop:
+repeat	CLINE / VSIZE
 		add		index, VSIZE				; index += VSIZE
 		sub		size, VSIZE					; if (size <= VSIZE)
 		jbe		.tail						;     then check string tails
-		movdqu	s1temp, [ptr1 + 2 * VSIZE]	; s1temp = ptr1[2]
-		movdqa	s2temp, [ptr2 + 2 * VSIZE]	; s2temp = ptr2[2]
-	pcmpeq#x	s1temp, s2temp				; check if ptr1[2] == ptr2[2]
-	pcmpeq#x	s2temp, eol					; check ptr2[2] for end of line
+		movdqu	s1temp, [ptr1 + % * VSIZE]	; s1temp = ptr1[i]
+		movdqa	s2temp, [ptr2 + % * VSIZE]	; s2temp = ptr2[i]
+	pcmpeq#x	s1temp, s2temp				; check if ptr1[i] == ptr2[i]
+	pcmpeq#x	s2temp, eol					; check ptr2[i] for end of line
 	pandn		s2temp, s1temp
 	pmovmskb	fmask, s2temp				; save check results to fmask
-		xor		fmask, VBITS				; if ptr1[2] != ptr2[2] or eol is found
+		xor		fmask, VBITS				; if ptr1[i] != ptr2[i] or eol is found
 		jnz		.brk1						;     then break the loop
-		add		index, VSIZE				; index += VSIZE
-		sub		size, VSIZE					; if (size <= VSIZE)
-		jbe		.tail						;     then check string tails
-		movdqu	s1temp, [ptr1 + 3 * VSIZE]	; s1temp = ptr1[3]
-		movdqa	s2temp, [ptr2 + 3 * VSIZE]	; s2temp = ptr2[3]
-	pcmpeq#x	s1temp, s2temp				; check if ptr1[3] == ptr2[3]
-	pcmpeq#x	s2temp, eol					; check ptr2[3] for end of line
-	pandn		s2temp, s1temp
-	pmovmskb	fmask, s2temp				; save check results to fmask
-		xor		fmask, VBITS				; if ptr1[3] != ptr2[3] or eol is found
-		jnz		.brk1						;     then break the loop
-		add		index, VSIZE				; index += VSIZE
-		sub		size, VSIZE					; if (size <= VSIZE)
-		jbe		.tail						;     then check string tails
-		movdqu	s1temp, [ptr1 + 4 * VSIZE]	; s1temp = ptr1[4]
-		movdqa	s2temp, [ptr2 + 4 * VSIZE]	; s2temp = ptr2[4]
-	pcmpeq#x	s1temp, s2temp				; check if ptr1[4] == ptr2[4]
-	pcmpeq#x	s2temp, eol					; check ptr2[4] for end of line
-	pandn		s2temp, s1temp
-	pmovmskb	fmask, s2temp				; save check results to fmask
-		xor		fmask, VBITS				; if ptr1[4] != ptr2[4] or eol is found
-		jnz		.brk1						;     then break the loop
-		add		ptr1, 4 * VSIZE				; ptr1 += 4 * VSIZE
-		add		ptr2, 4 * VSIZE				; ptr2 += 4 * VSIZE
+end repeat
+		add		ptr1, CLINE					; ptr1 += CLINE
+		add		ptr2, CLINE					; ptr2 += CLINE
 		jmp		.vloop						; do while (true)
 ;---[End of vector loop]-------------------
 .brk0:	bsf		fmask, fmask				; find index of first different symbol
@@ -1367,52 +1268,22 @@ end if
 		xor		fmask, VBITS				; if string1[0] != string2[0] or eol is found
 		jnz		.brk0						;     then break the loop
 ;---[Vector loop]--------------------------
-.vloop:	add		index, VSIZE				; index += VSIZE
-		sub		size, VSIZE					; if (size <= VSIZE)
-		jbe		.tail						;     then check string tails
-		movdqu	s1temp, [ptr1 + 1 * VSIZE]	; s1temp = ptr1[1]
-		movdqa	s2temp, [ptr2 + 1 * VSIZE]	; s2temp = ptr2[1]
-	pcmpeq#x	s1temp, s2temp				; check if ptr1[1] == ptr2[1]
-	pcmpeq#x	s2temp, eol					; check ptr2[1] for end of line
-	pandn		s2temp, s1temp
-	pmovmskb	fmask, s2temp				; save check results to fmask
-		xor		fmask, VBITS				; if ptr1[1] != ptr2[1] or eol is found
-		jnz		.brk1						;     then break the loop
+.vloop:
+repeat	CLINE / VSIZE
 		add		index, VSIZE				; index += VSIZE
 		sub		size, VSIZE					; if (size <= VSIZE)
 		jbe		.tail						;     then check string tails
-		movdqu	s1temp, [ptr1 + 2 * VSIZE]	; s1temp = ptr1[2]
-		movdqa	s2temp, [ptr2 + 2 * VSIZE]	; s2temp = ptr2[2]
-	pcmpeq#x	s1temp, s2temp				; check if ptr1[2] == ptr2[2]
-	pcmpeq#x	s2temp, eol					; check ptr2[2] for end of line
+		movdqu	s1temp, [ptr1 + % * VSIZE]	; s1temp = ptr1[i]
+		movdqa	s2temp, [ptr2 + % * VSIZE]	; s2temp = ptr2[i]
+	pcmpeq#x	s1temp, s2temp				; check if ptr1[i] == ptr2[i]
+	pcmpeq#x	s2temp, eol					; check ptr2[i] for end of line
 	pandn		s2temp, s1temp
 	pmovmskb	fmask, s2temp				; save check results to fmask
-		xor		fmask, VBITS				; if ptr1[2] != ptr2[2] or eol is found
+		xor		fmask, VBITS				; if ptr1[i] != ptr2[i] or eol is found
 		jnz		.brk1						;     then break the loop
-		add		index, VSIZE				; index += VSIZE
-		sub		size, VSIZE					; if (size <= VSIZE)
-		jbe		.tail						;     then check string tails
-		movdqu	s1temp, [ptr1 + 3 * VSIZE]	; s1temp = ptr1[3]
-		movdqa	s2temp, [ptr2 + 3 * VSIZE]	; s2temp = ptr2[3]
-	pcmpeq#x	s1temp, s2temp				; check if ptr1[3] == ptr2[3]
-	pcmpeq#x	s2temp, eol					; check ptr2[3] for end of line
-	pandn		s2temp, s1temp
-	pmovmskb	fmask, s2temp				; save check results to fmask
-		xor		fmask, VBITS				; if ptr1[3] != ptr2[3] or eol is found
-		jnz		.brk1						;     then break the loop
-		add		index, VSIZE				; index += VSIZE
-		sub		size, VSIZE					; if (size <= VSIZE)
-		jbe		.tail						;     then check string tails
-		movdqu	s1temp, [ptr1 + 4 * VSIZE]	; s1temp = ptr1[4]
-		movdqa	s2temp, [ptr2 + 4 * VSIZE]	; s2temp = ptr2[4]
-	pcmpeq#x	s1temp, s2temp				; check if ptr1[4] == ptr2[4]
-	pcmpeq#x	s2temp, eol					; check ptr2[4] for end of line
-	pandn		s2temp, s1temp
-	pmovmskb	fmask, s2temp				; save check results to fmask
-		xor		fmask, VBITS				; if ptr1[4] != ptr2[4] or eol is found
-		jnz		.brk1						;     then break the loop
-		add		ptr1, 4 * VSIZE				; ptr1 += 4 * VSIZE
-		add		ptr2, 4 * VSIZE				; ptr2 += 4 * VSIZE
+end repeat
+		add		ptr1, CLINE					; ptr1 += CLINE
+		add		ptr2, CLINE					; ptr2 += CLINE
 		jmp		.vloop						; do while (true)
 ;---[End of vector loop]-------------------
 .brk0:	bsf		fmask, fmask				; find index of first different symbol
@@ -1528,7 +1399,7 @@ end if
 		pxor	eol, eol					; eol = 0
 ;---[Unaligned search for pattern]---------
 		sub		index, sindex				; index -= sindex
-		shl		sindex, 4					; compute shift in mask array
+		shl		sindex, VSCALE				; compute shift in mask array
 		movdqa	cmask, dqword [maskA + sindex]
 		movdqa	echeck, [string]			; echeck = string[0]
 		movdqa	pcheck, echeck				; pcheck = string[0]
@@ -1542,43 +1413,19 @@ end if
 		jnz		.brk						;     then break the loop
 		add		index, VSIZE				; index += VSIZE
 ;---[Vector loop]--------------------------
-.vloop:	movdqa	echeck, [string + 1 * VSIZE]; echeck = string[1]
-		movdqa	pcheck, echeck				; pcheck = string[1]
-	pcmpeq#x	echeck, eol					; check string[1] for end of line
-	pcmpeq#x	pcheck, pattern				; check string[1] for symbol
+.vloop:
+repeat	CLINE / VSIZE
+		movdqa	echeck, [string + % * VSIZE]; echeck = string[i]
+		movdqa	pcheck, echeck				; pcheck = string[i]
+	pcmpeq#x	echeck, eol					; check string[i] for end of line
+	pcmpeq#x	pcheck, pattern				; check string[i] for symbol
 		por		echeck, pcheck				; echeck |= pcheck
 	pmovmskb	emask, echeck				; save check results to emask
 		and		emask, emask				; if eol or pattern is found
 		jnz		.brk						;     then break the loop
 		add		index, VSIZE				; index += VSIZE
-		movdqa	echeck, [string + 2 * VSIZE]; echeck = string[2]
-		movdqa	pcheck, echeck				; pcheck = string[2]
-	pcmpeq#x	echeck, eol					; check string[2] for end of line
-	pcmpeq#x	pcheck, pattern				; check string[2] for symbol
-		por		echeck, pcheck				; echeck |= pcheck
-	pmovmskb	emask, echeck				; save check results to emask
-		and		emask, emask				; if eol or pattern is found
-		jnz		.brk						;     then break the loop
-		add		index, VSIZE				; index += VSIZE
-		movdqa	echeck, [string + 3 * VSIZE]; echeck = string[3]
-		movdqa	pcheck, echeck				; pcheck = string[3]
-	pcmpeq#x	echeck, eol					; check string[3] for end of line
-	pcmpeq#x	pcheck, pattern				; check string[3] for symbol
-		por		echeck, pcheck				; echeck |= pcheck
-	pmovmskb	emask, echeck				; save check results to emask
-		and		emask, emask				; if eol or pattern is found
-		jnz		.brk						;     then break the loop
-		add		index, VSIZE				; index += VSIZE
-		movdqa	echeck, [string + 4 * VSIZE]; echeck = string[4]
-		movdqa	pcheck, echeck				; pcheck = string[4]
-	pcmpeq#x	echeck, eol					; check string[4] for end of line
-	pcmpeq#x	pcheck, pattern				; check string[4] for symbol
-		por		echeck, pcheck				; echeck |= pcheck
-	pmovmskb	emask, echeck				; save check results to emask
-		and		emask, emask				; if eol or pattern is found
-		jnz		.brk						;     then break the loop
-		add		index, VSIZE				; index += VSIZE
-		add		string, 4 * VSIZE			; string += 4 * VSIZE
+end repeat
+		add		string, CLINE				; string += CLINE
 		jmp		.vloop						; do while (true)
 ;---[End of vector loop]-------------------
 .brk:pmovmskb	fmask, pcheck				; save check results to fmask
@@ -1664,7 +1511,7 @@ end if
 		pxor	eol, eol					; eol = 0
 ;---[Unaligned search for pattern]---------
 		sub		index, sindex				; index -= sindex
-		shl		sindex, 4					; compute shift in mask array
+		shl		sindex, VSCALE				; compute shift in mask array
 		movdqa	cmask, dqword [maskA + sindex]
 		movdqa	echeck, [string]			; echeck = string[0]
 		movdqa	pcheck, echeck				; pcheck = string[0]
@@ -1719,7 +1566,7 @@ end if
 		and		emask, emask				; if eol or pattern is found
 		jnz		.brk						;     then break the loop
 .back4:	add		index, VSIZE				; index += VSIZE
-		add		string, 4 * VSIZE			; string += 4 * VSIZE
+		add		string, CLINE				; string += CLINE
 		jmp		.vloop						; do while (true)
 ;---[End of vector loop]-------------------
 .brk:pmovmskb	fmask, pcheck				; save check results to fmask
@@ -1842,7 +1689,7 @@ end if
 		pxor	eol, eol					; eol = 0
 ;---[Unaligned search for pattern]---------
 		sub		index, sindex				; index -= sindex
-		shl		sindex, 4					; compute shift in mask array
+		shl		sindex, VSCALE				; compute shift in mask array
 		movdqa	cmask, dqword [maskA + sindex]
 		movdqa	echeck, [string]			; echeck = string[0]
 		pxor	pcheck, pcheck				; pcheck = 0
@@ -1850,13 +1697,13 @@ end if
 		mov		tsize, size					; tsize = size
 ;---[Pattern matching loop]----------------
 .loop1:	movdqa	pattern, [table + pindex]	; pattern = table[pindex]
-	pcmpeq#x	pattern, echeck				; check string[1] for symbol
+	pcmpeq#x	pattern, echeck				; check string[0] for symbol
 		por		pcheck, pattern				; add patern matching mask to pcheck
 		add		pindex, VSIZE				; pindex++
 		sub		tsize, VSIZE				; tsize--
 		jnz		.loop1						; do while (tsize != 0)
 ;---[End of pattern matching loop]---------
-	pcmpeq#x	echeck, eol					; check string[1] for end of line
+	pcmpeq#x	echeck, eol					; check string[0] for end of line
 		pand	echeck, cmask				; apply cmask to eol search results
 		pand	pcheck, cmask				; apply cmask to pattern search results
 		por		echeck, pcheck				; echeck |= pcheck
@@ -2015,7 +1862,7 @@ end if
 		pxor	eol, eol					; eol = 0
 ;---[Unaligned search for pattern]---------
 		sub		index, sindex				; index -= sindex
-		shl		sindex, 4					; compute shift in mask array
+		shl		sindex, VSCALE				; compute shift in mask array
 		movdqa	cmask, dqword [maskA + sindex]
 		movdqa	echeck, [string]			; echeck = string[0]
 		pxor	pcheck, pcheck				; pcheck = 0
@@ -2023,13 +1870,13 @@ end if
 		mov		tsize, size					; tsize = size
 ;---[Pattern matching loop]----------------
 .loop1:	movdqa	pattern, [table + pindex]	; pattern = table[pindex]
-	pcmpeq#x	pattern, echeck				; check string[1] for symbol
+	pcmpeq#x	pattern, echeck				; check string[0] for symbol
 		por		pcheck, pattern				; add patern matching mask to pcheck
 		add		pindex, VSIZE				; pindex++
 		sub		tsize, VSIZE				; tsize--
 		jnz		.loop1						; do while (tsize != 0)
 ;---[End of pattern matching loop]---------
-	pcmpeq#x	echeck, eol					; check string[1] for end of line
+	pcmpeq#x	echeck, eol					; check string[0] for end of line
 		pand	echeck, cmask				; apply cmask to eol search results
 		pand	pcheck, cmask				; apply cmask to pattern search results
 		por		echeck, pcheck				; echeck |= pcheck
@@ -2352,47 +2199,20 @@ end if
 		popcnt	fmask, fmask				; get count of pattern matches
 		add		count, fmask				; count += mathes
 ;---[Vector loop]--------------------------
-.vloop:	movdqa	echeck, [string + 1 * VSIZE]; echeck = string[1]
-		movdqa	pcheck, echeck				; pcheck = string[1]
-	pcmpeq#x	echeck, eol					; check string[1] for end of line
-	pcmpeq#x	pcheck, pattern				; check string[1] for symbol
+.vloop:
+repeat	CLINE / VSIZE
+		movdqa	echeck, [string + % * VSIZE]; echeck = string[i]
+		movdqa	pcheck, echeck				; pcheck = string[i]
+	pcmpeq#x	echeck, eol					; check string[i] for end of line
+	pcmpeq#x	pcheck, pattern				; check string[i] for symbol
 	pmovmskb	emask, echeck				; save check results to emask
 	pmovmskb	fmask, pcheck				; save check results to fmask
 		and		emask, emask				; if eol is found
 		jnz		.brk						;     then break the loop
 		popcnt	fmask, fmask				; get count of pattern matches
 		add		count, fmask				; count += mathes
-		movdqa	echeck, [string + 2 * VSIZE]; echeck = string[2]
-		movdqa	pcheck, echeck				; pcheck = string[2]
-	pcmpeq#x	echeck, eol					; check string[2] for end of line
-	pcmpeq#x	pcheck, pattern				; check string[2] for symbol
-	pmovmskb	emask, echeck				; save check results to emask
-	pmovmskb	fmask, pcheck				; save check results to fmask
-		and		emask, emask				; if eol is found
-		jnz		.brk						;     then break the loop
-		popcnt	fmask, fmask				; get count of pattern matches
-		add		count, fmask				; count += mathes
-		movdqa	echeck, [string + 3 * VSIZE]; echeck = string[3]
-		movdqa	pcheck, echeck				; pcheck = string[3]
-	pcmpeq#x	echeck, eol					; check string[3] for end of line
-	pcmpeq#x	pcheck, pattern				; check string[3] for symbol
-	pmovmskb	emask, echeck				; save check results to emask
-	pmovmskb	fmask, pcheck				; save check results to fmask
-		and		emask, emask				; if eol is found
-		jnz		.brk						;     then break the loop
-		popcnt	fmask, fmask				; get count of pattern matches
-		add		count, fmask				; count += mathes
-		movdqa	echeck, [string + 4 * VSIZE]; echeck = string[4]
-		movdqa	pcheck, echeck				; pcheck = string[4]
-	pcmpeq#x	echeck, eol					; check string[4] for end of line
-	pcmpeq#x	pcheck, pattern				; check string[4] for symbol
-	pmovmskb	emask, echeck				; save check results to emask
-	pmovmskb	fmask, pcheck				; save check results to fmask
-		and		emask, emask				; if eol is found
-		jnz		.brk						;     then break the loop
-		popcnt	fmask, fmask				; get count of pattern matches
-		add		count, fmask				; count += mathes
-		add		string, 4 * VSIZE			; string += 4 * VSIZE
+end repeat
+		add		string, CLINE				; string += CLINE
 		jmp		.vloop						; do while (true)
 ;---[End of vector loop]-------------------
 .brk:	bsf		emask, emask				; find index of first occurence of eol
@@ -2512,13 +2332,13 @@ end if
 		mov		tsize, size					; tsize = size
 ;---[Pattern matching loop]----------------
 .loop1:	movdqa	pattern, [table + pindex]	; pattern = table[pindex]
-	pcmpeq#x	pattern, echeck				; check string[1] for symbol
+	pcmpeq#x	pattern, echeck				; check string[0] for symbol
 		por		pcheck, pattern				; add patern matching mask to pcheck
 		add		pindex, VSIZE				; pindex++
 		sub		tsize, VSIZE				; tsize--
 		jnz		.loop1						; do while (tsize != 0)
 ;---[End of pattern matching loop]---------
-	pcmpeq#x	echeck, eol					; check string[1] for end of line
+	pcmpeq#x	echeck, eol					; check string[0] for end of line
 	pmovmskb	fmask, pcheck				; save check results to fmask
 	pmovmskb	emask, echeck				; save check results to emask
 		and		fmask, cmask				; clear unrequired results
@@ -2644,7 +2464,7 @@ end if
 		pxor	eol, eol					; eol = 0
 ;---[Unaligned search for pattern]---------
 		xor		index, index				; index = 0
-		shl		sindex, 4					; compute shift in mask array
+		shl		sindex, VSCALE				; compute shift in mask array
 		movdqa	cmask, dqword [maskA + sindex]
 		movdqa	echeck, [string]			; echeck = string[0]
 		movdqa	pcheck, echeck				; pcheck = string[0]
@@ -2699,7 +2519,7 @@ end if
 		and		emask, emask				; if eol or pattern is found
 		jnz		.brk						;     then break the loop
 .back4:	add		index, VSIZE				; index += VSIZE
-		add		ptr, 4 * VSIZE				; ptr += 4 * VSIZE
+		add		ptr, CLINE					; ptr += CLINE
 		jmp		.vloop						; do while (true)
 ;---[End of vector loop]-------------------
 .brk:	pxor	echeck, pcheck				; echeck ^= pcheck
@@ -2716,7 +2536,7 @@ end if
 		jz		.exit						; if pattern is not found, then go to exit
 		cmp		fmask, emask				; if (index(pattern) > index (eol))
 		ja		.exit						;     then go to exit
-		shl		emask, 4					; compute shift in mask array
+		shl		emask, VSCALE				; compute shift in mask array
 		pand	pcheck, dqword [maskB + emask]
 		movdqa	echeck, [string + index]	; echeck = string[index]
 	pblendvb	echeck, replace
