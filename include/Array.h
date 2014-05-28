@@ -315,6 +315,10 @@ static void Abs (flt64_t array[], size_t size);
 static void NegAbs (flt32_t array[], size_t size);
 static void NegAbs (flt64_t array[], size_t size);
 
+// Number sign
+static void Sign (flt32_t array[], size_t size);
+static void Sign (flt64_t array[], size_t size);
+
 // Square
 static void Sqr (flt32_t array[], size_t size);
 static void Sqr (flt64_t array[], size_t size);
@@ -506,6 +510,14 @@ static flt64_t SumAbs (const flt64_t array[], size_t size);
 // Sum of multiplied values
 static flt32_t SumMul (const flt32_t array1[], const flt32_t array2[], size_t size);
 static flt64_t SumMul (const flt64_t array1[], const flt64_t array2[], size_t size);
+
+// Sum of squared differences
+static flt32_t SumSqrDiff (const flt32_t array1[], const flt32_t array2[], size_t size);
+static flt64_t SumSqrDiff (const flt64_t array1[], const flt64_t array2[], size_t size);
+
+// Sum of absolute differences
+static flt32_t SumAbsDiff (const flt32_t array1[], const flt32_t array2[], size_t size);
+static flt64_t SumAbsDiff (const flt64_t array1[], const flt64_t array2[], size_t size);
 
 //****************************************************************************//
 //      Minimum and maximum absolute value                                    //
@@ -2219,6 +2231,10 @@ void Array_Abs_flt64 (flt64_t array[], size_t size);
 void Array_NegAbs_flt32 (flt32_t array[], size_t size);
 void Array_NegAbs_flt64 (flt64_t array[], size_t size);
 
+// Number sign
+void Array_Sign_flt32 (flt32_t array[], size_t size);
+void Array_Sign_flt64 (flt64_t array[], size_t size);
+
 // Square
 void Array_Sqr_flt32 (flt32_t array[], size_t size);
 void Array_Sqr_flt64 (flt64_t array[], size_t size);
@@ -2410,6 +2426,14 @@ flt64_t Array_SumAbs_flt32 (const flt64_t array[], size_t size);
 // Sum of multiplied values
 flt32_t Array_SumMul_flt32 (const flt32_t array1[], const flt32_t array2[], size_t size);
 flt64_t Array_SumMul_flt64 (const flt64_t array1[], const flt64_t array2[], size_t size);
+
+// Sum of squared differences
+flt32_t Array_SumSqrDiff_flt32 (const flt32_t array1[], const flt32_t array2[], size_t size);
+flt64_t Array_SumSqrDiff_flt64 (const flt64_t array1[], const flt64_t array2[], size_t size);
+
+// Sum of absolute differences
+flt32_t Array_SumAbsDiff_flt32 (const flt32_t array1[], const flt32_t array2[], size_t size);
+flt64_t Array_SumAbsDiff_flt64 (const flt64_t array1[], const flt64_t array2[], size_t size);
 
 //****************************************************************************//
 //      Minimum and maximum absolute value                                    //
