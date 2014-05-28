@@ -14,18 +14,26 @@ include	'Macro.inc'
 ;###############################################################################
 
 ; Mapping functions
-extrn	'_Map_flt32'				as	Map_flt32
-extrn	'_Map_flt64'				as	Map_flt64
+extrn	'Map_flt32'						as	Map_flt32
+extrn	'Map_flt64'						as	Map_flt64
 
 ; Sum of elements
-extrn	'Array_Sum_flt32'			as	Sum_flt32
-extrn	'Array_Sum_flt64'			as	Sum_flt64
+extrn	'Array_Sum_flt32'				as	Sum_flt32
+extrn	'Array_Sum_flt64'				as	Sum_flt64
+
+; Sum of squared differences
+extrn	'Array_SumSqrDiff_flt32'		as	SumSqrDiff_flt32
+extrn	'Array_SumSqrDiff_flt64'		as	SumSqrDiff_flt64
+
+; Radix sort
+extrn	'Array_RadixSortKeyAsc_flt32'	as	RadixSort_flt32
+extrn	'Array_RadixSortKeyAsc_flt64'	as	RadixSort_flt64
 
 ; Blend masks
-extrn	'maskS1'					as	maskS1
-extrn	'maskS2'					as	maskS2
-extrn	'maskV1'					as	maskV1
-extrn	'maskV2'					as	maskV2
+extrn	'maskS1'						as	maskS1
+extrn	'maskS2'						as	maskS2
+extrn	'maskV1'						as	maskV1
+extrn	'maskV2'						as	maskV2
 
 ;###############################################################################
 ;#      Export section                                                         #
@@ -244,8 +252,8 @@ public	Kurtosis_flt64				as	'_ZN10Statistics8KurtosisEPKdmd'
 ;******************************************************************************;
 public	Covariance_flt32			as	'Statistics_Covariance_flt32'
 public	Covariance_flt64			as	'Statistics_Covariance_flt64'
-public	Covariance_flt32			as	'_ZN10Statistics10CovarianceEPKffS1_fm'
-public	Covariance_flt64			as	'_ZN10Statistics10CovarianceEPKddS1_dm'
+public	Covariance_flt32			as	'_ZN10Statistics10CovarianceEPKfS1_mff'
+public	Covariance_flt64			as	'_ZN10Statistics10CovarianceEPKdS1_mdd'
 
 ;******************************************************************************;
 ;       Сorrelation                                                            ;
@@ -254,8 +262,20 @@ public	Covariance_flt64			as	'_ZN10Statistics10CovarianceEPKddS1_dm'
 ; Pearson correlation
 public	PearsonCorrelation_flt32	as	'Statistics_PearsonCorrelation_flt32'
 public	PearsonCorrelation_flt64	as	'Statistics_PearsonCorrelation_flt64'
-public	PearsonCorrelation_flt32	as	'_ZN10Statistics18PearsonCorrelationEPKffS1_fm'
-public	PearsonCorrelation_flt64	as	'_ZN10Statistics18PearsonCorrelationEPKddS1_dm'
+public	PearsonCorrelation_flt32	as	'_ZN10Statistics18PearsonCorrelationEPKfS1_mff'
+public	PearsonCorrelation_flt64	as	'_ZN10Statistics18PearsonCorrelationEPKdS1_mdd'
+
+; Fechner correlation
+public	FechnerCorrelation_flt32	as	'Statistics_FechnerCorrelation_flt32'
+public	FechnerCorrelation_flt64	as	'Statistics_FechnerCorrelation_flt64'
+public	FechnerCorrelation_flt32	as	'_ZN10Statistics18FechnerCorrelationEPKfS1_mff'
+public	FechnerCorrelation_flt64	as	'_ZN10Statistics18FechnerCorrelationEPKdS1_mdd'
+
+; Spearman correlation
+public	SpearmanCorrelation_flt32	as	'Statistics_SpearmanCorrelation_flt32'
+public	SpearmanCorrelation_flt64	as	'Statistics_SpearmanCorrelation_flt64'
+public	SpearmanCorrelation_flt32	as	'_ZN10Statistics19SpearmanCorrelationEPfPmS0_S1_S0_S1_m'
+public	SpearmanCorrelation_flt64	as	'_ZN10Statistics19SpearmanCorrelationEPdPmS0_S1_S0_S1_m'
 
 ;###############################################################################
 ;#      Code section                                                           #
@@ -276,7 +296,7 @@ array	equ		rdi							; pointer to array
 size	equ		rsi							; array size (count of elements)
 ;---[Internal variables]-------------------
 result	equ		xmm0						; result register
-asize	equ		xmm1						; array size
+temp	equ		xmm1						; temporary register
 stack	equ		rsp							; stack pointer
 s_size	equ		stack + 0 * 8				; stack position of "size" variable
 if x eq s
@@ -290,8 +310,9 @@ space	= 1 * 8								; stack size required by the procedure
 		mov		[s_size], size				; save "size" variable into the stack
 ;---[Call sum function]--------------------
 		call	Sum							; call Sum (array, size)
-	cvtsi2s#x	asize, [s_size]				; get "size" variable from the stack
-	divs#x		result, asize
+;---[Compute mean value]-------------------
+	cvtsi2s#x	temp, [s_size]				; get "size" variable from the stack
+		divs#x	result, temp
 		add		stack, space				; restoring back the stack pointer
 ;------------------------------------------
 		ret									; return (sum / size)
@@ -309,39 +330,39 @@ left	equ		rdi							; pointer to start of the data array
 right	equ		rsi							; pointer to end of the data array
 ptr		equ		rdx							; pointer to target element
 ;---[Internal variables]-------------------
-l_ptr	equ		r8							; left pointer to split data array
-r_ptr	equ		r9							; right pointer to split data array
+lptr	equ		r8							; left pointer to split data array
+rptr	equ		r9							; right pointer to split data array
 bytes	= 1 shl scale						; size of type (bytes)
 ;---[Main loop]----------------------------
 .loop:	mov		value, [ptr]				; value = ptr[0]
-		mov		l_ptr, left					; l_ptr = left
-		mov		r_ptr, right				; r_ptr = right
+		mov		lptr, left					; lptr = left
+		mov		rptr, right					; rptr = right
 		jmp		.loop1						; skip swap section
 ;---[Swap loop]----------------------------
-.swap:	mov		[l_ptr], swap2				; l_ptr[0] = swap2
-		mov		[r_ptr], swap1				; r_ptr[0] = swap1
+.swap:	mov		[lptr], swap2				; lptr[0] = swap2
+		mov		[rptr], swap1				; rptr[0] = swap1
 ;---[Internal loop 1]----------------------
-.loop1:	add		l_ptr, bytes				; l_ptr++
-		mov		swap1, [l_ptr]				; swap1 = l_ptr[0]
+.loop1:	add		lptr, bytes					; lptr++
+		mov		swap1, [lptr]				; swap1 = lptr[0]
 		cmp		swap1, value
 		cond1	.loop1						; do while (swap1 < value)
 ;---[Internal loop 2]----------------------
-.loop2:	sub		r_ptr, bytes				; r_ptr--
-		mov		swap2, [r_ptr]				; swap2 = r_ptr[0]
+.loop2:	sub		rptr, bytes					; rptr--
+		mov		swap2, [rptr]				; swap2 = rptr[0]
 		cmp		swap2, value
 		cond2	.loop2						; do while (swap2 > value)
 ;------------------------------------------
-		cmp		l_ptr, r_ptr
-		jb		.swap						; do while (l_ptr < r_ptr)
+		cmp		lptr, rptr
+		jb		.swap						; do while (lptr < rptr)
 ;---[End of swap loop]---------------------
-		cmp		r_ptr, ptr					; if (r_ptr < ptr)
+		cmp		rptr, ptr					; if (rptr < ptr)
 		jae		@f							; {
-		mov		left, r_ptr					;     left = r_ptr
+		mov		left, rptr					;     left = rptr
 		jmp		.loop						; }
 ;---[End of main loop]---------------------
-@@:		cmp		l_ptr, ptr					; else if (l_ptr > ptr)
+@@:		cmp		lptr, ptr					; else if (lptr > ptr)
 		jbe		@f							; {
-		mov		right, l_ptr				;     right = l_ptr
+		mov		right, lptr					;     right = lptr
 		jmp		.loop						; }
 ;---[End of main loop]---------------------
 @@:		ret									; else exit from the procedure
@@ -362,20 +383,20 @@ Quantile_sint64:	QUANTILE	rax, r10, r11, jl, jg, 3
 ;==============================================================================;
 ;       Quartile                                                               ;
 ;==============================================================================;
-macro	QUARTILE_CORE	Quant, quart, scale
+macro	QUARTILE_CORE	quant, quart, scale
 {
 ;---[Parameters]---------------------------
 array	equ		rdi							; pointer to array
 size	equ		rsi							; array size (count of elements)
 ;---[Internal variables]-------------------
-left	equ		array						; pointer to beginning of array
-right	equ		size						; pointer to ending of array
+result1	equ		rax							; first result register
+result2	equ		rdx							; second result register
 index	equ		rax							; index of target element
 ptr1	equ		rdx							; pointer to first target element
 ptr2	equ		rcx							; pointer to second target element
 ptr		equ		ptr1						; pointer parameter for Quantile function
-result1	equ		rax							; first result register
-result2	equ		rdx							; second result register
+left	equ		array						; pointer to beginning of array
+right	equ		size						; pointer to ending of array
 stack	equ		rsp							; stack pointer
 s_size	equ		stack + 0 * 8				; stack position of "size" variable
 s_left	equ		stack + 1 * 8				; stack position of "left" variable
@@ -409,7 +430,7 @@ end if
 		mov		[s_ptr2], ptr2				; save "ptr2" variable into the stack
 		mov		[s_left], left				; save "left" variable into the stack
 		mov		[s_right], right			; save "right" variable into the stack
-		call	Quant						; call Quantile (left, right, ptr1)
+		call	quant						; call Quantile (left, right, ptr1)
 ;---[Call quantile function]---------------
 		test	qword [s_size], mask		; if (size % mask == 0)
 		jnz		@f							; {
@@ -417,7 +438,7 @@ end if
 		mov		left, [s_left]
 		mov		right, [s_ptr1]
 		mov		ptr, [s_ptr2]				;     Quantile (left, right, ptr2)
-		call	Quant						; }
+		call	quant						; }
 ;---[Compute quartile]---------------------
 @@:		mov		result1, [s_ptr1]			; get "ptr1" variable from the stack
 		mov		result2, [s_ptr2]			; get "ptr2" variable from the stack
@@ -425,7 +446,7 @@ end if
 		ret
 }
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	QUARTILE_INT	Quart, result
+macro	QUARTILE_INT	quart, result
 {
 ;---[Parameters]---------------------------
 array	equ		rdi							; pointer to array
@@ -436,7 +457,7 @@ ptr2	equ		rdx							; pointer to second target element
 ;------------------------------------------
 		test	size, size					; if (size == 0)
 		jz		.error						;     then go to error branch
-		call	Quart						; call Quartile (array, size)
+		call	quart						; call Quartile (array, size)
 ;---[Compute quartile]---------------------
 		mov		result, [ptr1]
 		add		result, [ptr2]
@@ -453,7 +474,6 @@ macro	QUARTILE_FLT	Quart, x
 array	equ		rdi							; pointer to array
 size	equ		rsi							; array size (count of elements)
 ;---[Internal variables]-------------------
-temp	equ		rax							; temporary register
 ptr1	equ		rax							; pointer to first target element
 ptr2	equ		rdx							; pointer to second target element
 result	equ		xmm0						; result register
@@ -466,11 +486,11 @@ s_ptr2	equ		stack + 3 * 8				; stack position of "ptr2" variable
 if x eq s
 Map		= Map_flt32							; Mapping function
 halfval	= PHALF_FLT32						; +0.5
-nan		= DMASK_FLT32						; NaN
+nanval	= DMASK_FLT32						; NaN
 else if x eq d
 Map		= Map_flt64							; Mapping function
 halfval	= PHALF_FLT64						; +0.5
-nan		= DMASK_FLT64						; NaN
+nanval	= DMASK_FLT64						; NaN
 end if
 space	= 5 * 8								; stack size required by the procedure
 ;------------------------------------------
@@ -494,14 +514,14 @@ space	= 5 * 8								; stack size required by the procedure
 ;---[Compute quartile]---------------------
 		mov		ptr1, [s_ptr1]				; get "ptr1" variable from the stack
 		mov		ptr2, [s_ptr2]				; get "ptr2" variable from the stack
+		initreg	half, size, halfval			; half = 0.5
 		movs#x	result, [ptr1]
 		adds#x	result, [ptr2]
-		initreg	half, temp, halfval			; half = 0.5
 		muls#x	result, half				; return 0.5 * (ptr1[0] + ptr2[0])
 		add		stack, space				; restoring back the stack pointer
 		ret
 ;---[Error branch]-------------------------
-.error:	initreg	result, temp, nan			; return NaN
+.error:	initreg	result, size, nanval		; return NaN
 		ret
 }
 
@@ -616,15 +636,14 @@ UpperQuart_flt64:	QUARTILE_FLT	Quartile3_sint64, d
 ;==============================================================================;
 ;       Mid-range                                                              ;
 ;==============================================================================;
-macro	MAXMIN	maxvalue, minvalue, x
+macro	MAXMIN	x
 {
 ;---[Parameters]---------------------------
 array	equ		rdi							; pointer to array
 size	equ		rsi							; array size (count of elements)
 ;---[Internal variables]-------------------
 index	equ		rax							; offset from beginning of array
-aindex	equ		rcx							; array offset from vector boundary
-fmask	equ		r9							; result of pattern search
+fmask	equ		r9							; NaN check result
 ptr		equ		r10							; temporary pointer to array
 max		equ		xmm0						; max value
 min		equ		xmm1						; min value
@@ -644,29 +663,34 @@ mininf	equ		xmm14						; min infinity value
 flags	equ		xmm15						; NaN matching flags
 blend	equ		max							; blending mask
 if x eq s
-nan		= DMASK_FLT32						; NaN
+maxval	= MINF_FLT32						; -Inf
+minval	= PINF_FLT32						; +Inf
+nanval	= DMASK_FLT32						; NaN
 scale	= 2									; scale value
 else if x eq d
-nan		= DMASK_FLT64						; NaN
+maxval	= MINF_FLT64						; -Inf
+minval	= PINF_FLT64						; +Inf
+nanval	= DMASK_FLT64						; NaN
 scale	= 3									; scale value
 end if
 bytes	= 1 shl scale						; size of array element (bytes)
 bmask	= bytes - 1							; elements aligning mask
 ;------------------------------------------
 	prefetchnta	[array]						; prefetch data
-		shftl	size, scale					; convert size to bytes
-		jz		.error						; if (size == 0), then go to error branch
-		initreg	max, index, maxvalue		; max = maxvalue
-		initreg	min, index, minvalue		; min = minvalue
+		test	size, size					; if (size == 0)
+		jz		.error						;     then go to error branch
+		initreg	max, index, maxval			; max = maxval
+		initreg	min, index, minval			; min = minval
 		test	array, bmask				; if elements have wrong alignment
 		jnz		.sloop						;     then skip vector code
+		shl		size, scale					; convert size to bytes
 ;---[Normal execution branch]--------------
-		mov		aindex, array
-		and		aindex, VMASK				; get array offset from vector boundary
-		sub		array, aindex				; align pointer to vector boundary
-		mov		ptr, array					; ptr = array
 		shufp#x	max, max, 0x0				; duplicate value through the entire register
 		shufp#x	min, min, 0x0				; duplicate value through the entire register
+		mov		index, array
+		and		index, VMASK				; get array offset from vector boundary
+		sub		array, index				; align pointer to vector boundary
+		mov		ptr, array					; ptr = array
 		movap#x	max0, max					; max0 = maxvalue
 		movap#x	min0, min					; min0 = minvalue
 		movap#x	max1, max					; max1 = maxvalue
@@ -681,9 +705,9 @@ bmask	= bytes - 1							; elements aligning mask
 		movap#x	mininf, min					; mininf = minvalue
 		xorp#x	flags, flags				; flags = 0
 ;---[Unaligned operation]------------------
-		add		size, aindex				; size += aindex
-		shl		aindex, VSCALE				; compute shift in mask array
-		movap#x	blend, dqword [maskS1 + aindex]
+		add		size, index					; size += index
+		shl		index, VSCALE				; compute shift in mask array
+		movap#x	blend, dqword [maskS1 + index]
 		xor		index, index				; index = 0
 		sub		size, VSIZE					; if (size <= VSIZE)
 		jbe		.tail						;     then process array tail
@@ -740,8 +764,6 @@ bmask	= bytes - 1							; elements aligning mask
 	blendvp#x	mininf, temp				; blend temp with min infinity values
 		max#p#x	max0, maxinf				; find max value
 		min#p#x	min0, mininf				; find min value
-	cmpunordp#x	maxinf, maxinf				; check values for NANs
-		orp#x	flags, maxinf				; accumulate NaN check results
 	cmpunordp#x	mininf, mininf				; check values for NANs
 		orp#x	flags, mininf				; accumulate NaN check results
 	pmovmskb	fmask, flags				; save check results to fmask
@@ -767,8 +789,8 @@ end if
 		movap#x	temp, min0					; temp = min0
 		shufp#x	temp, temp, 0x1				; shuffle values in temp register
 		min#s#x	min0, temp					; find min value
-		movs#x	max, max0					; return max0
-		movs#x	min, min0					; return min0
+		movap#x	max, max0					; return max0
+		movap#x	min, min0					; return min0
 		ret
 ;---[Scalar loop]--------------------------
 .sloop:	movs#x	temp, [array]				; temp = array[0]
@@ -777,17 +799,17 @@ end if
 		comis#x	temp, temp					; if NAN is found,
 		jp		.error						;     then go to error branch
 		add		array, bytes				; array++
-		sub		size, bytes					; size--
+		sub		size, 1						; size--
 		jnz		.sloop						; do while (size != 0)
 ;---[End of scalar loop]-------------------
 		ret
 ;---[Error branch]-------------------------
-.error:	initreg	max, index, nan
-		initreg	min, index, nan				; return {NaN, NaN}
+.error:	initreg	max, index, nanval
+		initreg	min, index, nanval			; return {NaN, NaN}
 		ret
 }
-MaxMin_flt32:	MAXMIN	MINF_FLT32, PINF_FLT32, s
-MaxMin_flt64:	MAXMIN	MINF_FLT64, PINF_FLT64, d
+MaxMin_flt32:	MAXMIN	s
+MaxMin_flt64:	MAXMIN	d
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 macro	MIDRANGE	x
 {
@@ -809,8 +831,8 @@ end if
 ;------------------------------------------
 		call	MaxMin						; call MaxMin (array[], size)
 		initreg	half, temp, halfval			; half = 0.5
-		adds#x	max, min					; result = max(array[]) + min(array[])
-		muls#x	max, half					; result = 0.5 * max(array[]) + min(array[])
+		adds#x	max, min
+		muls#x	max, half					; result = 0.5 * (max(array[]) + min(array[]))
 		ret
 }
 Midrange_flt32:	MIDRANGE	s
@@ -831,28 +853,27 @@ size	equ		rsi							; array size (count of elements)
 mean	equ		xmm0						; data mean
 ;---[Internal variables]-------------------
 index	equ		rax							; offset from beginning of array
-aindex	equ		rcx							; array offset from vector boundary
 count	equ		r8							; normalized array size
 ptr		equ		r10							; temporary pointer to array
 blend	equ		xmm0						; blending mask
-result	equ		blend						; result register
-temp	equ		xmm1						; temporary register
-vector	equ		xmm2						; data mean value
+vector	equ		xmm1						; data mean value
+temp	equ		xmm2						; temporary register
 mask	equ		xmm3						; data mask
 sum0	equ		xmm4						; intermediate sum #1
 sum1	equ		xmm5						; intermediate sum #2
 sum2	equ		xmm6						; intermediate sum #3
 sum3	equ		xmm7						; intermediate sum #4
 sum4	equ		xmm8						; intermediate sum #5
-zero	equ		xmm9						; 0
-asize	equ		xmm10						; normalized array size
+zero	equ		xmm9						; 0.0
+nsize	equ		xmm10						; normalized array size
+result	equ		blend						; result register
 if x eq s
 dmask	= DMASK_FLT32						; data mask
-nan		= DMASK_FLT32						; NaN
+nanval	= DMASK_FLT32						; NaN
 scale	= 2									; scale value
 else if x eq d
 dmask	= DMASK_FLT64						; data mask
-nan		= DMASK_FLT64						; NaN
+nanval	= DMASK_FLT64						; NaN
 scale	= 3									; scale value
 end if
 bytes	= 1 shl scale						; size of array element (bytes)
@@ -862,8 +883,7 @@ bmask	= bytes - 1							; elements aligning mask
 		mov		count, size
 		sub		count, 1					; if (size <= 1)
 		jbe		.error						;     then go to error branch
-		shl		size, scale					; convert size to bytes
-	cvtsi2s#x	asize, count				; asize = size - 1
+	cvtsi2s#x	nsize, count				; nsize = size - 1
 		movap#x	vector, mean				; vector = mean
 if type = 2
 		initreg	mask, index, dmask			; mask = dmask
@@ -871,15 +891,16 @@ end if
 		xorp#x	result, result				; index = 0
 		test	array, bmask				; if elements have wrong alignment
 		jnz		.sloop						;     then skip vector code
+		shl		size, scale					; convert size to bytes
 ;---[Normal execution branch]--------------
-		mov		aindex, array
-		and		aindex, VMASK				; get array offset from vector boundary
-		sub		array, aindex				; align pointer to vector boundary
-		mov		ptr, array					; ptr = array
 		shufp#x	vector, vector, 0x0			; duplicate value through the entire register
 if type = 2
 		shufp#x	mask, mask, 0x0				; duplicate value through the entire register
 end if
+		mov		index, array
+		and		index, VMASK				; get array offset from vector boundary
+		sub		array, index				; align pointer to vector boundary
+		mov		ptr, array					; ptr = array
 		xorp#x	sum0, sum0					; sum0 = 0
 		xorp#x	sum1, sum1					; sum1 = 0
 		xorp#x	sum2, sum2					; sum2 = 0
@@ -887,9 +908,9 @@ end if
 		xorp#x	sum4, sum4					; sum4 = 0
 		xorp#x	zero, zero					; zero = 0
 ;---[Unaligned sums]-----------------------
-		add		size, aindex				; size += aindex
-		shl		aindex, VSCALE				; compute shift in mask array
-		movap#x	blend, dqword [maskS1 + aindex]
+		add		size, index					; size += index
+		shl		index, VSCALE				; compute shift in mask array
+		movap#x	blend, dqword [maskS1 + index]
 		xor		index, index				; index = 0
 		sub		size, VSIZE					; if (size <= VSIZE)
 		jbe		.tail						;     then process array tail
@@ -968,7 +989,7 @@ end if
 		addp#x	sum1, sum3
 		addp#x	sum0, sum1					; sum0 = sum0 + sum1 + sum2 + sum3 + sum4
 		summa	sum0, x						; get all parallel sums
-		divs#x	sum0, asize
+		divs#x	sum0, nsize
 		movap#x	result, sum0				; return sum0 / (size - 1)
 		ret
 ;---[Scalar loop]--------------------------
@@ -981,13 +1002,13 @@ else if type = 2
 end if
 		adds#x	result, temp				; result += temp
 		add		array, bytes				; array++
-		sub		size, bytes					; size--
+		sub		size, 1						; size--
 		jnz		.sloop						; do while (size != 0)
 ;---[End of scalar loop]-------------------
-		divs#x	result, asize				; return result / (size - 1)
+		divs#x	result, nsize				; return result / (size - 1)
 		ret
 ;---[Error branch]-------------------------
-.error:	initreg	result, index, nan			; return NaN
+.error:	initreg	result, index, nanval		; return NaN
 		ret
 }
 Variance_flt32:	VAR		1, s
@@ -1026,7 +1047,7 @@ AbsDeviation_flt64:	VAR		2, d
 ;==============================================================================;
 ;       Interquartile range                                                    ;
 ;==============================================================================;
-macro	QUART_RANGE_INT	Quart1, Quart3, result
+macro	QUART_RANGE_INT	quart1, quart3, result
 {
 ;---[Parameters]---------------------------
 array	equ		rdi							; pointer to array
@@ -1046,7 +1067,7 @@ space	= 3 * 8								; stack size required by the procedure
 ;---[Call quartile function]---------------
 		mov		[s_array], array			; save "array" variable into the stack
 		mov		[s_size], size				; save "size" variable into the stack
-		call	Quart1						; call Quartile1 (array, size)
+		call	quart1						; call Quartile1 (array, size)
 ;---[Compute 1-st quartile]----------------
 		mov		result, [ptr1]
 		add		result, [ptr2]
@@ -1055,7 +1076,7 @@ space	= 3 * 8								; stack size required by the procedure
 ;---[Call quartile function]---------------
 		mov		array, [s_array]			; get "array" variable from the stack
 		mov		size, [s_size]				; get "size" variable from the stack
-		call	Quart3						; call Quartile2 (array, size)
+		call	quart3						; call Quartile2 (array, size)
 ;---[Compute 3-st quartile]----------------
 		mov		result, [ptr1]
 		add		result, [ptr2]
@@ -1075,7 +1096,6 @@ macro	QUART_RANGE_FLT	Quart1, Quart3, x
 array	equ		rdi							; pointer to array
 size	equ		rsi							; array size (count of elements)
 ;---[Internal variables]-------------------
-temp	equ		rax							; temporary register
 ptr1	equ		rax							; pointer to first target element
 ptr2	equ		rdx							; pointer to second target element
 result	equ		xmm0						; result register
@@ -1090,11 +1110,11 @@ s_ptr4	equ		stack + 5 * 8				; stack position of "ptr4" variable
 if x eq s
 Map		= Map_flt32							; Mapping function
 halfval	= PHALF_FLT32						; +0.5
-nan		= DMASK_FLT32						; NaN
+nanval	= DMASK_FLT32						; NaN
 else if x eq d
 Map		= Map_flt64							; Mapping function
 halfval	= PHALF_FLT64						; +0.5
-nan		= DMASK_FLT64						; NaN
+nanval	= DMASK_FLT64						; NaN
 end if
 space	= 7 * 8								; stack size required by the procedure
 ;------------------------------------------
@@ -1128,14 +1148,14 @@ space	= 7 * 8								; stack size required by the procedure
 		adds#x	result, [ptr2]
 		mov		ptr1, [s_ptr1]				; get "ptr1" variable from the stack
 		mov		ptr2, [s_ptr2]				; get "ptr2" variable from the stack
+		initreg	half, size, halfval			; half = 0.5
 		subs#x	result, [ptr1]
 		subs#x	result, [ptr2]
-		initreg	half, temp, halfval			; half = 0.5
 		muls#x	result, half				; return 0.5 * (ptr3[0] + ptr4[0] - ptr1[0] - ptr2[0])
 		add		stack, space				; restoring back the stack pointer
 		ret
 ;---[Error branch]-------------------------
-.error:	initreg	result, temp, nan			; return NaN
+.error:	initreg	result, size, nanval		; return NaN
 		ret
 }
 
@@ -1164,7 +1184,6 @@ macro	RANGE	x
 array	equ		rdi							; data array
 size	equ		rsi							; array size (count of elements)
 ;---[Internal variables]-------------------
-temp	equ		rax							; temporary register
 max		equ		xmm0						; max value
 min		equ		xmm1						; min value
 if x eq s
@@ -1174,9 +1193,8 @@ MaxMin	= MaxMin_flt64						; MaxMin function (flt64_t type)
 end if
 ;------------------------------------------
 		call	MaxMin						; call MaxMin (array[], size)
-		initreg	half, temp, halfval			; half = 0.5
-		subs#x	max, min					; result = max(array[]) - min(array[])
-		ret
+		subs#x	max, min
+		ret									; result = max(array[]) - min(array[])
 }
 Range_flt32:	RANGE	s
 Range_flt64:	RANGE	d
@@ -1196,14 +1214,12 @@ size	equ		rsi							; array size (count of elements)
 mean	equ		xmm0						; data mean
 ;---[Internal variables]-------------------
 index	equ		rax							; offset from beginning of array
-aindex	equ		rcx							; array offset from vector boundary
 count	equ		r8							; normalized array size
 ptr		equ		r10							; temporary pointer to array
 blend	equ		xmm0						; blending mask
-result	equ		blend						; result register
-temp0	equ		xmm1						; temporary register #1
-temp1	equ		xmm2						; temporary register #1
-vector	equ		xmm3						; data mean value
+vector	equ		xmm1						; data mean value
+temp0	equ		xmm2						; temporary register #1
+temp1	equ		xmm3						; temporary register #1
 sum0	equ		xmm4						; intermediate sum #1
 sum1	equ		xmm5						; intermediate sum #2
 sum2	equ		xmm6						; intermediate sum #3
@@ -1214,13 +1230,14 @@ sum6	equ		xmm10						; intermediate sum #5
 sum7	equ		xmm11						; intermediate sum #5
 sum8	equ		xmm12						; intermediate sum #5
 sum9	equ		xmm13						; intermediate sum #5
-zero	equ		xmm14						; 0
-asize	equ		xmm15						; normalized array size
+zero	equ		xmm14						; 0.0
+nsize	equ		xmm15						; normalized array size
+result	equ		blend						; result register
 if x eq s
-nan		= DMASK_FLT32						; NaN
+nanval	= DMASK_FLT32						; NaN
 scale	= 2									; scale value
 else if x eq d
-nan		= DMASK_FLT64						; NaN
+nanval	= DMASK_FLT64						; NaN
 scale	= 3									; scale value
 end if
 bytes	= 1 shl scale						; size of array element (bytes)
@@ -1230,26 +1247,26 @@ bmask	= bytes - 1							; elements aligning mask
 		mov		count, size
 		sub		count, 2					; if (size <= 2)
 		jbe		.error						;     then go to error branch
-		shl		size, scale					; convert size to bytes
 	cvtsi2s#x	sum2, count					; sum2 = size - 2
 		add		count, 1
 	cvtsi2s#x	sum1, count					; sum1 = size - 1
 		add		count, 1
-	cvtsi2s#x	asize, count				; asize = size
+	cvtsi2s#x	nsize, count				; nsize = size
 		sqrts#x	sum1, sum1
-		divs#x	asize, sum2
-		muls#x	asize, sum1					; asize = size * sqrt (size - 1) / (size - 2)
+		divs#x	nsize, sum2
+		muls#x	nsize, sum1					; nsize = size * sqrt (size - 1) / (size - 2)
 		movap#x	vector, mean				; vector = mean
 		xorp#x	sum0, sum0					; sum0 = 0
 		xorp#x	sum1, sum1					; sum1 = 0
 		test	array, bmask				; if elements have wrong alignment
 		jnz		.sloop						;     then skip vector code
+		shl		size, scale					; convert size to bytes
 ;---[Normal execution branch]--------------
-		mov		aindex, array
-		and		aindex, VMASK				; get array offset from vector boundary
-		sub		array, aindex				; align pointer to vector boundary
-		mov		ptr, array					; ptr = array
 		shufp#x	vector, vector, 0x0			; duplicate value through the entire register
+		mov		index, array
+		and		index, VMASK				; get array offset from vector boundary
+		sub		array, index				; align pointer to vector boundary
+		mov		ptr, array					; ptr = array
 		xorp#x	sum2, sum2					; sum2 = 0
 		xorp#x	sum3, sum3					; sum3 = 0
 		xorp#x	sum4, sum4					; sum4 = 0
@@ -1260,9 +1277,9 @@ bmask	= bytes - 1							; elements aligning mask
 		xorp#x	sum9, sum9					; sum9 = 0
 		xorp#x	zero, zero					; zero = 0
 ;---[Unaligned sums]-----------------------
-		add		size, aindex				; size += aindex
-		shl		aindex, VSCALE				; compute shift in mask array
-		movap#x	blend, dqword [maskS1 + aindex]
+		add		size, index					; size += index
+		shl		index, VSCALE				; compute shift in mask array
+		movap#x	blend, dqword [maskS1 + index]
 		xor		index, index				; index = 0
 		sub		size, VSIZE					; if (size <= VSIZE)
 		jbe		.tail						;     then process array tail
@@ -1343,29 +1360,29 @@ bmask	= bytes - 1							; elements aligning mask
 		sqrts#x	temp0, sum0
 		muls#x	sum0, temp0
 		divs#x	sum1, sum0
-		muls#x	sum1, asize
-		movap#x	result, sum1				; return asize * sum1 / (sum0 * sqrt (sum0))
+		muls#x	sum1, nsize
+		movap#x	result, sum1				; return nsize * sum1 / (sum0 * sqrt (sum0))
 		ret
 ;---[Scalar loop]--------------------------
 .sloop:	movs#x	temp0, [array]				; temp0 = array[0]
 		subs#x	temp0, vector				; temp0 -= vector
-		movs#x	temp1, temp0				; temp1 = temp0
+		movap#x	temp1, temp0				; temp1 = temp0
 		muls#x	temp0, temp0
 		adds#x	sum0, temp0					; sum0 += (array[0] - mean)^2
 		muls#x	temp0, temp1
 		adds#x	sum1, temp0					; sum1 += (array[0] - mean)^3
 		add		array, bytes				; array++
-		sub		size, bytes					; size--
+		sub		size, 1						; size--
 		jnz		.sloop						; do while (size != 0)
 ;---[End of scalar loop]-------------------
 		sqrts#x	temp0, sum0
 		muls#x	sum0, temp0
 		divs#x	sum1, sum0
-		muls#x	sum1, asize
-		movs#x	result, sum1				; return asize * sum1 / (sum0 * sqrt (sum0))
+		muls#x	sum1, nsize
+		movap#x	result, sum1				; return nsize * sum1 / (sum0 * sqrt (sum0))
 		ret
 ;---[Error branch]-------------------------
-.error:	initreg	result, index, nan			; return NaN
+.error:	initreg	result, index, nanval		; return NaN
 		ret
 }
 Skewness_flt32:	SKEWNESS	s
@@ -1382,13 +1399,11 @@ size	equ		rsi							; array size (count of elements)
 mean	equ		xmm0						; data mean
 ;---[Internal variables]-------------------
 index	equ		rax							; offset from beginning of array
-aindex	equ		rcx							; array offset from vector boundary
 count	equ		r8							; normalized array size
 ptr		equ		r10							; temporary pointer to array
 blend	equ		xmm0						; blending mask
-result	equ		blend						; result register
-temp	equ		xmm1						; temporary register #1
-vector	equ		xmm2						; data mean value
+vector	equ		xmm1						; data mean value
+temp	equ		xmm2						; temporary register #1
 sum0	equ		xmm3						; intermediate sum #1
 sum1	equ		xmm4						; intermediate sum #2
 sum2	equ		xmm5						; intermediate sum #3
@@ -1399,16 +1414,17 @@ sum6	equ		xmm9						; intermediate sum #5
 sum7	equ		xmm10						; intermediate sum #5
 sum8	equ		xmm11						; intermediate sum #5
 sum9	equ		xmm12						; intermediate sum #5
-zero	equ		xmm13						; 0
-asize	equ		xmm14						; normalized array size
+zero	equ		xmm13						; 0.0
+nsize	equ		xmm14						; normalized array size
 bias	equ		xmm15						; normal distribution bias
+result	equ		blend						; result register
 if x eq s
 biasval	= 0x40400000						; bias const (3.0 for normal distribution)
-nan		= DMASK_FLT32						; NaN
+nanval	= DMASK_FLT32						; NaN
 scale	= 2									; scale value
 else if x eq d
 biasval	= 0x4008000000000000				; bias const (3.0 for normal distribution)
-nan		= DMASK_FLT64						; NaN
+nanval	= DMASK_FLT64						; NaN
 scale	= 3									; scale value
 end if
 bytes	= 1 shl scale						; size of array element (bytes)
@@ -1418,34 +1434,34 @@ bmask	= bytes - 1							; elements aligning mask
 		mov		count, size
 		sub		count, 3					; if (size <= 3)
 		jbe		.error						;     then go to error branch
-		shl		size, scale					; convert size to bytes
 	cvtsi2s#x	sum3, count					; sum3 = size - 3
 		add		count, 1
 	cvtsi2s#x	sum2, count					; sum2 = size - 2
 		add		count, 1
 	cvtsi2s#x	sum1, count					; sum1 = size - 1
 		add		count, 1
-	cvtsi2s#x	asize, count				; asize = size
+	cvtsi2s#x	nsize, count				; nsize = size
 		add		count, 1
 	cvtsi2s#x	sum0, count					; sum0 = size + 1
 		initreg	bias, index, biasval		; bias = 3.0
 		muls#x	sum2, sum3
 		muls#x	bias, sum1
-		muls#x	asize, sum0
+		muls#x	nsize, sum0
 		divs#x	sum1, sum2
 		muls#x	bias, sum1					; bias = 3 * (size - 1)^2 / ((size - 2) * (size - 3))
-		muls#x	asize, sum1					; asize = size * (size + 1) * (size - 1) / ((size - 2) * (size - 3))
+		muls#x	nsize, sum1					; nsize = size * (size + 1) * (size - 1) / ((size - 2) * (size - 3))
 		movap#x	vector, mean				; vector = mean
 		xorp#x	sum0, sum0					; sum0 = 0
 		xorp#x	sum1, sum1					; sum1 = 0
 		test	array, bmask				; if elements have wrong alignment
 		jnz		.sloop						;     then skip vector code
+		shl		size, scale					; convert size to bytes
 ;---[Normal execution branch]--------------
-		mov		aindex, array
-		and		aindex, VMASK				; get array offset from vector boundary
-		sub		array, aindex				; align pointer to vector boundary
-		mov		ptr, array					; ptr = array
 		shufp#x	vector, vector, 0x0			; duplicate value through the entire register
+		mov		index, array
+		and		index, VMASK				; get array offset from vector boundary
+		sub		array, index				; align pointer to vector boundary
+		mov		ptr, array					; ptr = array
 		xorp#x	sum2, sum2					; sum2 = 0
 		xorp#x	sum3, sum3					; sum3 = 0
 		xorp#x	sum4, sum4					; sum4 = 0
@@ -1456,9 +1472,9 @@ bmask	= bytes - 1							; elements aligning mask
 		xorp#x	sum9, sum9					; sum9 = 0
 		xorp#x	zero, zero					; zero = 0
 ;---[Unaligned sums]-----------------------
-		add		size, aindex				; size += aindex
-		shl		aindex, VSCALE				; compute shift in mask array
-		movap#x	blend, dqword [maskS1 + aindex]
+		add		size, index					; size += index
+		shl		index, VSCALE				; compute shift in mask array
+		movap#x	blend, dqword [maskS1 + index]
 		xor		index, index				; index = 0
 		sub		size, VSIZE					; if (size <= VSIZE)
 		jbe		.tail						;     then process array tail
@@ -1532,9 +1548,9 @@ bmask	= bytes - 1							; elements aligning mask
 		summa	sum1, x						; get all parallel sums
 		muls#x	sum0, sum0
 		divs#x	sum1, sum0
-		muls#x	sum1, asize
+		muls#x	sum1, nsize
 		subs#x	sum1, bias
-		movap#x	result, sum1				; return asize * sum1 / (sum0 * sum0) - bias
+		movap#x	result, sum1				; return nsize * sum1 / (sum0 * sum0) - bias
 		ret
 ;---[Scalar loop]--------------------------
 .sloop:	movs#x	temp, [array]				; temp = array[0]
@@ -1544,17 +1560,17 @@ bmask	= bytes - 1							; elements aligning mask
 		muls#x	temp, temp
 		adds#x	sum1, temp					; sum1 += (array[0] - mean)^4
 		add		array, bytes				; array++
-		sub		size, bytes					; size--
+		sub		size, 1						; size--
 		jnz		.sloop						; do while (size != 0)
 ;---[End of scalar loop]-------------------
 		muls#x	sum0, sum0
 		divs#x	sum1, sum0
-		muls#x	sum1, asize
+		muls#x	sum1, nsize
 		subs#x	sum1, bias
-		movs#x	result, sum1				; return asize * sum1 / (sum0 * sum0) - bias
+		movap#x	result, sum1				; return nsize * sum1 / (sum0 * sum0) - bias
 		ret
 ;---[Error branch]-------------------------
-.error:	initreg	result, index, nan			; return NaN
+.error:	initreg	result, index, nanval		; return NaN
 		ret
 }
 Kurtosis_flt32:	KURTOSIS	s
@@ -1573,28 +1589,28 @@ mean1	equ		xmm0						; data mean of first array
 mean2	equ		xmm1						; data mean of second array
 ;---[Internal variables]-------------------
 index	equ		rax							; offset from beginning of arrays
-aindex	equ		rcx							; array offset from vector boundary
+offst	equ		rcx							; offset in masks array
 count	equ		r8							; normalized array size
 ptr1	equ		r10							; temporary pointer to first array
 ptr2	equ		r11							; temporary pointer to second array
 blend	equ		xmm0						; blending mask
-result	equ		blend						; result register
-a1temp	equ		xmm1						; temporary register #1
-a2temp	equ		xmm2						; temporary register #2
-vector1	equ		xmm3						; data mean value #1
-vector2	equ		xmm4						; data mean value #2
+vector1	equ		xmm1						; data mean value #1
+vector2	equ		xmm2						; data mean value #2
+temp1	equ		xmm3						; temporary register #1
+temp2	equ		xmm4						; temporary register #2
 sum0	equ		xmm5						; intermediate sum #1
 sum1	equ		xmm6						; intermediate sum #2
 sum2	equ		xmm7						; intermediate sum #3
 sum3	equ		xmm8						; intermediate sum #4
 sum4	equ		xmm9						; intermediate sum #5
-zero	equ		xmm10						; 0
-asize	equ		xmm11						; normalized array size
+zero	equ		xmm10						; 0.0
+nsize	equ		xmm11						; normalized array size
+result	equ		blend						; result register
 if x eq s
-nan		= DMASK_FLT32						; NaN
+nanval	= DMASK_FLT32						; NaN
 scale	= 2									; scale value
 else if x eq d
-nan		= DMASK_FLT64						; NaN
+nanval	= DMASK_FLT64						; NaN
 scale	= 3									; scale value
 end if
 bytes	= 1 shl scale						; size of array element (bytes)
@@ -1605,27 +1621,26 @@ bmask	= bytes - 1							; elements aligning mask
 		mov		count, size
 		sub		count, 1					; if (size <= 1)
 		jbe		.error						;     then go to error branch
-		shl		size, scale					; convert size to bytes
-	cvtsi2s#x	asize, count				; asize = size - 1
-		movap#x	vector1, mean1				; vector = mean1
+	cvtsi2s#x	nsize, count				; nsize = size - 1
 		movap#x	vector2, mean2				; vector = mean2
+		movap#x	vector1, mean1				; vector = mean1
 		xorp#x	result, result				; index = 0
 		test	array2, bmask				; if elements have wrong alignment
 		jnz		.sloop						;     then skip vector code
 		test	array1, bmask				; if elements have wrong alignment
 		jnz		.sloop						;     then skip vector code
-		cmp		size, VSIZE					; if (size < VSIZE)
+		cmp		size, VSIZE / bytes			; if (size < VSIZE / bytes)
 		jb		.sloop						;     then skip vector code
+		shl		size, scale					; convert size to bytes
 ;---[Normal execution branch]--------------
+		shufp#x	vector2, vector2, 0x0		; duplicate value through the entire register
+		shufp#x	vector1, vector1, 0x0		; duplicate value through the entire register
 		mov		ptr2, array2				; ptr2 = array2
 		mov		ptr1, array1				; ptr1 = array1
-		mov		aindex, array1
-		and		aindex, VMASK				; get array offset from vector boundary
-		sub		ptr2, aindex				; ptr2 = array2 - aindex
-		sub		ptr1, aindex				; ptr1 = array1 - aindex
-		xor		index, index				; index = 0
-		shufp#x	vector1, vector1, 0x0		; duplicate value through the entire register
-		shufp#x	vector2, vector2, 0x0		; duplicate value through the entire register
+		mov		index, array1
+		and		index, VMASK				; get array offset from vector boundary
+		sub		ptr2, index					; ptr2 = array2 - index
+		sub		ptr1, index					; ptr1 = array1 - index
 		xorp#x	sum0, sum0					; sum0 = 0
 		xorp#x	sum1, sum1					; sum1 = 0
 		xorp#x	sum2, sum2					; sum2 = 0
@@ -1633,58 +1648,59 @@ bmask	= bytes - 1							; elements aligning mask
 		xorp#x	sum4, sum4					; sum4 = 0
 		xorp#x	zero, zero					; zero = 0
 ;---[Unaligned sum]------------------------
-		add		size, aindex				; size += aindex
-		sub		index, aindex				; index -= aindex
+		add		size, index					; size += index
 		sub		size, VSIZE					; if (size <= VSIZE)
 		jbe		.tail						;     then process array tails
-		shl		aindex, VSCALE				; compute shift in mask array
-		movap#x	blend, dqword [maskV1 + aindex]
-		movup#x	a2temp, [array2]			; a2temp = array2[0]
-		subp#x	a2temp, vector2				; a2temp -= vector2
-		movup#x	a1temp, [array1]			; a1temp = array1[0]
-		subp#x	a1temp, vector1				; a1temp -= vector1
-		mulp#x	a1temp, a2temp				; a1temp *= a2temp
-	blendvp#x	a1temp, zero				; blend a1temp with zero values
-		addp#x	sum0, a1temp				; sum0 += a1temp
+		mov		offst, index
+		shl		offst, VSCALE				; compute offset in mask array
+		neg		index						; index = -index
+		movap#x	blend, dqword [maskV1 + offst]
+		movup#x	temp2, [array2]				; temp2 = array2[0]
+		subp#x	temp2, vector2				; temp2 -= vector2
+		movup#x	temp1, [array1]				; temp1 = array1[0]
+		subp#x	temp1, vector1				; temp1 -= vector1
+		mulp#x	temp1, temp2				; temp1 *= temp2
+	blendvp#x	temp1, zero					; blend temp1 with zero values
+		addp#x	sum0, temp1					; sum0 += temp1
 ;---[Vector loop]--------------------------
 .vloop:	add		index, VSIZE				; index += VSIZE
 		sub		size, VSIZE					; if (size <= VSIZE)
 		jbe		.tail						;     then process array tails
-		movup#x	a2temp, [ptr2 + 1 * VSIZE]	; a2temp = ptr2[1]
-		subp#x	a2temp, vector2				; a2temp -= vector2
-		movap#x	a1temp, [ptr1 + 1 * VSIZE]	; a1temp = ptr1[1]
-		subp#x	a1temp, vector1				; a1temp -= vector1
-		mulp#x	a1temp, a2temp				; a1temp *= a2temp
-		addp#x	sum1, a1temp				; sum1 += a1temp
+		movup#x	temp2, [ptr2 + 1 * VSIZE]	; temp2 = ptr2[1]
+		subp#x	temp2, vector2				; temp2 -= vector2
+		movap#x	temp1, [ptr1 + 1 * VSIZE]	; temp1 = ptr1[1]
+		subp#x	temp1, vector1				; temp1 -= vector1
+		mulp#x	temp1, temp2				; temp1 *= temp2
+		addp#x	sum1, temp1					; sum1 += temp1
 		add		index, VSIZE				; index += VSIZE
 		sub		size, VSIZE					; if (size <= VSIZE)
 		jbe		.tail						;     then process array tails
-		movup#x	a2temp, [ptr2 + 2 * VSIZE]	; a2temp = ptr2[2]
-		subp#x	a2temp, vector2				; a2temp -= vector2
-		movap#x	a1temp, [ptr1 + 2 * VSIZE]	; a1temp = ptr1[2]
-		subp#x	a1temp, vector1				; a1temp -= vector1
-		mulp#x	a1temp, a2temp				; a1temp *= a2temp
-		addp#x	sum2, a1temp				; sum2 += a1temp
+		movup#x	temp2, [ptr2 + 2 * VSIZE]	; temp2 = ptr2[2]
+		subp#x	temp2, vector2				; temp2 -= vector2
+		movap#x	temp1, [ptr1 + 2 * VSIZE]	; temp1 = ptr1[2]
+		subp#x	temp1, vector1				; temp1 -= vector1
+		mulp#x	temp1, temp2				; temp1 *= temp2
+		addp#x	sum2, temp1					; sum2 += temp1
 		add		index, VSIZE				; index += VSIZE
 		sub		size, VSIZE					; if (size <= VSIZE)
 		jbe		.tail						;     then process array tails
-		movup#x	a2temp, [ptr2 + 3 * VSIZE]	; a2temp = ptr2[3]
-		subp#x	a2temp, vector2				; a2temp -= vector2
-		movap#x	a1temp, [ptr1 + 3 * VSIZE]	; a1temp = ptr1[3]
-		subp#x	a1temp, vector1				; a1temp -= vector1
-		mulp#x	a1temp, a2temp				; a1temp *= a2temp
-		addp#x	sum3, a1temp				; sum3 += a1temp
+		movup#x	temp2, [ptr2 + 3 * VSIZE]	; temp2 = ptr2[3]
+		subp#x	temp2, vector2				; temp2 -= vector2
+		movap#x	temp1, [ptr1 + 3 * VSIZE]	; temp1 = ptr1[3]
+		subp#x	temp1, vector1				; temp1 -= vector1
+		mulp#x	temp1, temp2				; temp1 *= temp2
+		addp#x	sum3, temp1					; sum3 += temp1
 		add		index, VSIZE				; index += VSIZE
 		sub		size, VSIZE					; if (size <= VSIZE)
 		jbe		.tail						;     then process array tails
-		movup#x	a2temp, [ptr2 + 4 * VSIZE]	; a2temp = ptr2[4]
-		subp#x	a2temp, vector2				; a2temp -= vector2
-		movap#x	a1temp, [ptr1 + 4 * VSIZE]	; a1temp = ptr1[4]
-		subp#x	a1temp, vector1				; a1temp -= vector1
-		mulp#x	a1temp, a2temp				; a1temp *= a2temp
-		addp#x	sum4, a1temp				; sum4 += a1temp
-	prefetchnta	[ptr2 + PSTEP]				; prefetch next portion of temp
-	prefetchnta	[ptr1 + PSTEP]				; prefetch next portion of temp
+		movup#x	temp2, [ptr2 + 4 * VSIZE]	; temp2 = ptr2[4]
+		subp#x	temp2, vector2				; temp2 -= vector2
+		movap#x	temp1, [ptr1 + 4 * VSIZE]	; temp1 = ptr1[4]
+		subp#x	temp1, vector1				; temp1 -= vector1
+		mulp#x	temp1, temp2				; temp1 *= temp2
+		addp#x	sum4, temp1					; sum4 += temp1
+	prefetchnta	[ptr2 + PSTEP]				; prefetch next portion of data
+	prefetchnta	[ptr1 + PSTEP]				; prefetch next portion of data
 		add		ptr2, CLINE					; ptr2 += CLINE
 		add		ptr1, CLINE					; ptr1 += CLINE
 		jmp		.vloop						; do while (true)
@@ -1692,37 +1708,37 @@ bmask	= bytes - 1							; elements aligning mask
 .tail:	add		index, size					; index += size
 		shl		size, VSCALE				; compute shift in mask array
 		movap#x	blend, dqword [maskV2 + size]
-		movup#x	a2temp, [array2 + index]	; a2temp = array2[index]
-		subp#x	a2temp, vector2				; a2temp -= vector2
-		movup#x	a1temp, [array1 + index]	; a1temp = array1[index]
-		subp#x	a1temp, vector1				; a1temp -= vector1
-		mulp#x	a1temp, a2temp				; a1temp *= a2temp
-	blendvp#x	zero, a1temp				; blend a1temp with zero values
-		addp#x	sum0, zero					; sum0 += a1temp
+		movup#x	temp2, [array2 + index]		; temp2 = array2[index]
+		subp#x	temp2, vector2				; temp2 -= vector2
+		movup#x	temp1, [array1 + index]		; temp1 = array1[index]
+		subp#x	temp1, vector1				; temp1 -= vector1
+		mulp#x	temp1, temp2				; temp1 *= temp2
+	blendvp#x	zero, temp1					; blend temp1 with zero values
+		addp#x	sum0, zero					; sum0 += temp1
 		addp#x	sum1, sum2
 		addp#x	sum3, sum4
 		addp#x	sum1, sum3
 		addp#x	sum0, sum1					; sum0 = sum0 + sum1 + sum2 + sum3 + sum4
 		summa	sum0, x						; get all parallel sums
-		divs#x	sum0, asize
+		divs#x	sum0, nsize
 		movap#x	result, sum0				; return sum0 / (size - 1)
 		ret
 ;---[Scalar loop]--------------------------
-.sloop:	movs#x	a2temp, [array2]			; a2temp = array2[0]
-		subs#x	a2temp, vector2				; a2temp -= vector2
-		movs#x	a1temp, [array1]			; a1temp = array1[0]
-		subs#x	a1temp, vector1				; a1temp -= vector1
-		muls#x	a1temp, a2temp				; a1temp *= a2temp
-		adds#x	result, a1temp				; result += a1temp
+.sloop:	movs#x	temp2, [array2]				; temp2 = array2[0]
+		subs#x	temp2, vector2				; temp2 -= vector2
+		movs#x	temp1, [array1]				; temp1 = array1[0]
+		subs#x	temp1, vector1				; temp1 -= vector1
+		muls#x	temp1, temp2				; temp1 *= temp2
+		adds#x	result, temp1				; result += temp1
 		add		array2, bytes				; array2++
 		add		array1, bytes				; array1++
-		sub		size, bytes					; size--
+		sub		size, 1						; size--
 		jnz		.sloop						; do while (size != 0)
 ;---[End of scalar loop]-------------------
-		divs#x	result, asize				; return result / (size - 1)
+		divs#x	result, nsize				; return result / (size - 1)
 		ret
 ;---[Error branch]-------------------------
-.error:	initreg	result, index, nan			; return NaN
+.error:	initreg	result, index, nanval		; return NaN
 		ret
 }
 Covariance_flt32:	COVARIANCE	s
@@ -1745,26 +1761,26 @@ mean1	equ		xmm0						; data mean of first array
 mean2	equ		xmm1						; data mean of second array
 ;---[Internal variables]-------------------
 index	equ		rax							; offset from beginning of arrays
-aindex	equ		rcx							; array offset from vector boundary
+offst	equ		rcx							; offset in masks array
 ptr1	equ		r10							; temporary pointer to first array
 ptr2	equ		r11							; temporary pointer to second array
 blend	equ		xmm0						; blending mask
-result	equ		blend						; result register
-temp	equ		xmm1						; temporary register
-a1temp	equ		xmm2						; temporary register #1
-a2temp	equ		xmm3						; temporary register #2
-vector1	equ		xmm4						; data mean value #1
-vector2	equ		xmm5						; data mean value #2
+vector1	equ		xmm1						; data mean value #1
+vector2	equ		xmm2						; data mean value #2
+temp0	equ		xmm3						; temporary register #1
+temp1	equ		xmm4						; temporary register #2
+temp2	equ		xmm5						; temporary register #3
 sum0	equ		xmm6						; intermediate sum #1
 sum1	equ		xmm7						; intermediate sum #2
 sum2	equ		xmm8						; intermediate sum #3
-zero1	equ		xmm9						; 0
-zero2	equ		xmm10						; 0
+zero1	equ		xmm9						; 0.0
+zero2	equ		xmm10						; 0.0
+result	equ		blend						; result register
 if x eq s
-nan		= DMASK_FLT32						; NaN
+nanval	= DMASK_FLT32						; NaN
 scale	= 2									; scale value
 else if x eq d
-nan		= DMASK_FLT64						; NaN
+nanval	= DMASK_FLT64						; NaN
 scale	= 3									; scale value
 end if
 bytes	= 1 shl scale						; size of array element (bytes)
@@ -1772,10 +1788,10 @@ bmask	= bytes - 1							; elements aligning mask
 ;------------------------------------------
 	prefetchnta	[array2]					; prefetch data
 	prefetchnta	[array1]					; prefetch data
-		shl		size, scale					; convert size to bytes
-		jz		.error						; if (size == 0), then go to error branch
-		movap#x	vector1, mean1				; vector = mean1
+		test	size, size					; if (size == 0)
+		jz		.error						;     then go to error branch
 		movap#x	vector2, mean2				; vector = mean2
+		movap#x	vector1, mean1				; vector = mean1
 		xorp#x	sum0, sum0					; sum0 = 0
 		xorp#x	sum1, sum1					; sum1 = 0
 		xorp#x	sum2, sum2					; sum2 = 0
@@ -1783,99 +1799,61 @@ bmask	= bytes - 1							; elements aligning mask
 		jnz		.sloop						;     then skip vector code
 		test	array1, bmask				; if elements have wrong alignment
 		jnz		.sloop						;     then skip vector code
-		cmp		size, VSIZE					; if (size < VSIZE)
+		cmp		size, VSIZE / bytes			; if (size < VSIZE / bytes)
 		jb		.sloop						;     then skip vector code
+		shl		size, scale					; convert size to bytes
 ;---[Normal execution branch]--------------
+		shufp#x	vector2, vector2, 0x0		; duplicate value through the entire register
+		shufp#x	vector1, vector1, 0x0		; duplicate value through the entire register
 		mov		ptr2, array2				; ptr2 = array2
 		mov		ptr1, array1				; ptr1 = array1
-		mov		aindex, array1
-		and		aindex, VMASK				; get array offset from vector boundary
-		sub		ptr2, aindex				; ptr2 = array2 - aindex
-		sub		ptr1, aindex				; ptr1 = array1 - aindex
-		xor		index, index				; index = 0
-		shufp#x	vector1, vector1, 0x0		; duplicate value through the entire register
-		shufp#x	vector2, vector2, 0x0		; duplicate value through the entire register
+		mov		index, array1
+		and		index, VMASK				; get array offset from vector boundary
+		sub		ptr2, index					; ptr2 = array2 - index
+		sub		ptr1, index					; ptr1 = array1 - index
 		xorp#x	zero1, zero1				; zero1 = 0
-		xorp#x	zero2, zero2				; zero1 = 0
+		xorp#x	zero2, zero2				; zero2 = 0
 ;---[Unaligned sum]------------------------
-		add		size, aindex				; size += aindex
-		sub		index, aindex				; index -= aindex
+		add		size, index					; size += index
 		sub		size, VSIZE					; if (size <= VSIZE)
 		jbe		.tail						;     then process array tails
-		shl		aindex, VSCALE				; compute shift in mask array
-		movap#x	blend, dqword [maskV1 + aindex]
-		movup#x	a2temp, [array2]			; a2temp = array2[0]
-		subp#x	a2temp, vector2				; a2temp -= vector2
-		movup#x	a1temp, [array1]			; a1temp = array1[0]
-		subp#x	a1temp, vector1				; a1temp -= vector1
-	blendvp#x	a2temp, zero2				; blend a2temp with zero values
-	blendvp#x	a1temp, zero1				; blend a1temp with zero values
-		movap#x	temp, a2temp
-		mulp#x	temp, a1temp				; temp = a1temp * a2temp
-		addp#x	sum0, temp					; sum0 += temp
-		mulp#x	a2temp, a2temp				; a2temp *= a2temp
-		addp#x	sum2, a2temp				; sum2 += a2temp
-		mulp#x	a1temp, a1temp				; a1temp *= a1temp
-		addp#x	sum1, a1temp				; sum1 += a1temp
+		mov		offst, index
+		shl		offst, VSCALE				; compute offset in mask array
+		neg		index						; index = -index
+		movap#x	blend, dqword [maskV1 + offst]
+		movup#x	temp2, [array2]				; temp2 = array2[0]
+		subp#x	temp2, vector2				; temp2 -= vector2
+		movup#x	temp1, [array1]				; temp1 = array1[0]
+		subp#x	temp1, vector1				; temp1 -= vector1
+	blendvp#x	temp2, zero2				; blend temp2 with zero values
+	blendvp#x	temp1, zero1				; blend temp1 with zero values
+		movap#x	temp0, temp2
+		mulp#x	temp0, temp1				; temp0 = temp1 * temp2
+		addp#x	sum0, temp0					; sum0 += temp0
+		mulp#x	temp2, temp2				; temp2 *= temp2
+		addp#x	sum2, temp2					; sum2 += temp2
+		mulp#x	temp1, temp1				; temp1 *= temp1
+		addp#x	sum1, temp1					; sum1 += temp1
 ;---[Vector loop]--------------------------
-.vloop:	add		index, VSIZE				; index += VSIZE
-		sub		size, VSIZE					; if (size <= VSIZE)
-		jbe		.tail						;     then process array tails
-		movup#x	a2temp, [ptr2 + 1 * VSIZE]	; a2temp = ptr2[1]
-		subp#x	a2temp, vector2				; a2temp -= vector2
-		movap#x	a1temp, [ptr1 + 1 * VSIZE]	; a1temp = ptr1[1]
-		subp#x	a1temp, vector1				; a1temp -= vector1
-		movap#x	temp, a2temp
-		mulp#x	temp, a1temp				; temp = a1temp * a2temp
-		addp#x	sum0, temp					; sum0 += temp
-		mulp#x	a2temp, a2temp				; a2temp *= a2temp
-		addp#x	sum2, a2temp				; sum2 += a2temp
-		mulp#x	a1temp, a1temp				; a1temp *= a1temp
-		addp#x	sum1, a1temp				; sum1 += a1temp
+.vloop:
+repeat	CLINE / VSIZE
 		add		index, VSIZE				; index += VSIZE
 		sub		size, VSIZE					; if (size <= VSIZE)
 		jbe		.tail						;     then process array tails
-		movup#x	a2temp, [ptr2 + 2 * VSIZE]	; a2temp = ptr2[2]
-		subp#x	a2temp, vector2				; a2temp -= vector2
-		movap#x	a1temp, [ptr1 + 2 * VSIZE]	; a1temp = ptr1[2]
-		subp#x	a1temp, vector1				; a1temp -= vector1
-		movap#x	temp, a2temp
-		mulp#x	temp, a1temp				; temp = a1temp * a2temp
-		addp#x	sum0, temp					; sum0 += temp
-		mulp#x	a2temp, a2temp				; a2temp *= a2temp
-		addp#x	sum2, a2temp				; sum2 += a2temp
-		mulp#x	a1temp, a1temp				; a1temp *= a1temp
-		addp#x	sum1, a1temp				; sum1 += a1temp
-		add		index, VSIZE				; index += VSIZE
-		sub		size, VSIZE					; if (size <= VSIZE)
-		jbe		.tail						;     then process array tails
-		movup#x	a2temp, [ptr2 + 3 * VSIZE]	; a2temp = ptr2[3]
-		subp#x	a2temp, vector2				; a2temp -= vector2
-		movap#x	a1temp, [ptr1 + 3 * VSIZE]	; a1temp = ptr1[3]
-		subp#x	a1temp, vector1				; a1temp -= vector1
-		movap#x	temp, a2temp
-		mulp#x	temp, a1temp				; temp = a1temp * a2temp
-		addp#x	sum0, temp					; sum0 += temp
-		mulp#x	a2temp, a2temp				; a2temp *= a2temp
-		addp#x	sum2, a2temp				; sum2 += a2temp
-		mulp#x	a1temp, a1temp				; a1temp *= a1temp
-		addp#x	sum1, a1temp				; sum1 += a1temp
-		add		index, VSIZE				; index += VSIZE
-		sub		size, VSIZE					; if (size <= VSIZE)
-		jbe		.tail						;     then process array tails
-		movup#x	a2temp, [ptr2 + 4 * VSIZE]	; a2temp = ptr2[4]
-		subp#x	a2temp, vector2				; a2temp -= vector2
-		movap#x	a1temp, [ptr1 + 4 * VSIZE]	; a1temp = ptr1[4]
-		subp#x	a1temp, vector1				; a1temp -= vector1
-		movap#x	temp, a2temp
-		mulp#x	temp, a1temp				; temp = a1temp * a2temp
-		addp#x	sum0, temp					; sum0 += temp
-		mulp#x	a2temp, a2temp				; a2temp *= a2temp
-		addp#x	sum2, a2temp				; sum2 += a2temp
-		mulp#x	a1temp, a1temp				; a1temp *= a1temp
-		addp#x	sum1, a1temp				; sum1 += a1temp
-	prefetchnta	[ptr2 + PSTEP]				; prefetch next portion of temp
-	prefetchnta	[ptr1 + PSTEP]				; prefetch next portion of temp
+		movup#x	temp2, [ptr2 + % * VSIZE]	; temp2 = ptr2[i]
+		subp#x	temp2, vector2				; temp2 -= vector2
+		movap#x	temp1, [ptr1 + % * VSIZE]	; temp1 = ptr1[i]
+		subp#x	temp1, vector1				; temp1 -= vector1
+		movap#x	temp0, temp2
+		mulp#x	temp0, temp1				; temp0 = temp1 * temp2
+		addp#x	sum0, temp0					; sum0 += temp0
+		mulp#x	temp2, temp2				; temp2 *= temp2
+		addp#x	sum2, temp2					; sum2 += temp2
+		mulp#x	temp1, temp1				; temp1 *= temp1
+		addp#x	sum1, temp1					; sum1 += temp1
+end repeat
+	prefetchnta	[ptr2 + PSTEP]				; prefetch next portion of data
+	prefetchnta	[ptr1 + PSTEP]				; prefetch next portion of data
 		add		ptr2, CLINE					; ptr2 += CLINE
 		add		ptr1, CLINE					; ptr1 += CLINE
 		jmp		.vloop						; do while (true)
@@ -1883,19 +1861,19 @@ bmask	= bytes - 1							; elements aligning mask
 .tail:	add		index, size					; index += size
 		shl		size, VSCALE				; compute shift in mask array
 		movap#x	blend, dqword [maskV2 + size]
-		movup#x	a2temp, [array2 + index]	; a2temp = array2[index]
-		subp#x	a2temp, vector2				; a2temp -= vector2
-		movup#x	a1temp, [array1 + index]	; a1temp = array1[index]
-		subp#x	a1temp, vector1				; a1temp -= vector1
-	blendvp#x	zero2, a2temp				; blend a2temp with zero values
-	blendvp#x	zero1, a1temp				; blend a1temp with zero values
-		movap#x	temp, zero2
-		mulp#x	temp, zero1					; temp = a1temp * a2temp
-		addp#x	sum0, temp					; sum0 += temp
-		mulp#x	zero2, zero2				; a2temp *= a2temp
-		addp#x	sum2, zero2					; sum2 += a2temp
-		mulp#x	zero1, zero1				; a1temp *= a1temp
-		addp#x	sum1, zero1					; sum1 += a1temp
+		movup#x	temp2, [array2 + index]		; temp2 = array2[index]
+		subp#x	temp2, vector2				; temp2 -= vector2
+		movup#x	temp1, [array1 + index]		; temp1 = array1[index]
+		subp#x	temp1, vector1				; temp1 -= vector1
+	blendvp#x	zero2, temp2				; blend temp2 with zero values
+	blendvp#x	zero1, temp1				; blend temp1 with zero values
+		movap#x	temp0, zero2
+		mulp#x	temp0, zero1				; temp0 = temp1 * temp2
+		addp#x	sum0, temp0					; sum0 += temp0
+		mulp#x	zero2, zero2				; temp2 *= temp2
+		addp#x	sum2, zero2					; sum2 += temp2
+		mulp#x	zero1, zero1				; temp1 *= temp1
+		addp#x	sum1, zero1					; sum1 += temp1
 		summa	sum0, x						; get all parallel sums
 		summa	sum2, x						; get all parallel sums
 		summa	sum1, x						; get all parallel sums
@@ -1905,33 +1883,430 @@ bmask	= bytes - 1							; elements aligning mask
 		movap#x	result, sum0				; return sum0 / sqrt (sum1 * sum2)
 		ret
 ;---[Scalar loop]--------------------------
-.sloop:	movs#x	a2temp, [array2]			; a2temp = array2[0]
-		subs#x	a2temp, vector2				; a2temp -= vector2
-		movs#x	a1temp, [array1]			; a1temp = array1[0]
-		subs#x	a1temp, vector1				; a1temp -= vector1
-		movs#x	temp, a2temp
-		muls#x	temp, a1temp				; temp = a1temp * a2temp
-		adds#x	sum0, temp					; sum0 += temp
-		muls#x	a2temp, a2temp				; a2temp *= a2temp
-		adds#x	sum2, a2temp				; sum2 += a2temp
-		muls#x	a1temp, a1temp				; a1temp *= a1temp
-		adds#x	sum1, a1temp				; sum1 += a1temp
+.sloop:	movs#x	temp2, [array2]				; temp2 = array2[0]
+		subs#x	temp2, vector2				; temp2 -= vector2
+		movs#x	temp1, [array1]				; temp1 = array1[0]
+		subs#x	temp1, vector1				; temp1 -= vector1
+		movap#x	temp0, temp2
+		muls#x	temp0, temp1				; temp0 = temp1 * temp2
+		adds#x	sum0, temp0					; sum0 += temp0
+		muls#x	temp2, temp2				; temp2 *= temp2
+		adds#x	sum2, temp2					; sum2 += temp2
+		muls#x	temp1, temp1				; temp1 *= temp1
+		adds#x	sum1, temp1					; sum1 += temp1
 		add		array2, bytes				; array2++
 		add		array1, bytes				; array1++
-		sub		size, bytes					; size--
+		sub		size, 1						; size--
 		jnz		.sloop						; do while (size != 0)
 ;---[End of scalar loop]-------------------
 		muls#x	sum1, sum2
 		sqrts#x	sum1, sum1
 		divs#x	sum0, sum1
-		movs#x	result, sum0				; return sum0 / sqrt (sum1 * sum2)
+		movap#x	result, sum0				; return sum0 / sqrt (sum1 * sum2)
 		ret
 ;---[Error branch]-------------------------
-.error:	initreg	result, index, nan			; return NaN
+.error:	initreg	result, index, nanval		; return NaN
 		ret
 }
 PearsonCorrelation_flt32:	PEARSON_CORRELATION	s
 PearsonCorrelation_flt64:	PEARSON_CORRELATION	d
+
+;==============================================================================;
+;       Fechner correlation                                                    ;
+;==============================================================================;
+macro	FECHNER_CORRELATION		x
+{
+;---[Parameters]---------------------------
+array1	equ		rdi							; pointer to first array
+array2	equ		rsi							; pointer to second array
+size	equ		rdx							; array size (count of elements)
+mean1	equ		xmm0						; data mean of first array
+mean2	equ		xmm1						; data mean of second array
+;---[Internal variables]-------------------
+index	equ		rax							; offset from beginning of array
+offst	equ		rcx							; offset in masks array
+fmask	equ		r9							; NaN check result
+ptr1	equ		r10							; temporary pointer to first array
+ptr2	equ		r11							; temporary pointer to second array
+blend	equ		xmm0						; blending mask
+vector1	equ		xmm1						; data mean value #1
+vector2	equ		xmm2						; data mean value #2
+temp1	equ		xmm3						; temporary register #1
+temp2	equ		xmm4						; temporary register #2
+great1	equ		xmm5						; great condition #1
+great2	equ		xmm6						; great condition #2
+less1	equ		xmm7						; less condition #1
+less2	equ		xmm8						; less condition #2
+equal1	equ		xmm9						; equal condition #1
+equal2	equ		xmm10						; equal condition #2
+sum		equ		xmm11						; intermediate sum
+zero	equ		xmm12						; 0.0
+one		equ		xmm13						; 1.0
+nsize	equ		xmm14						; normalized array size
+flags	equ		xmm15						; NaN matching flags
+result	equ		blend						; result register
+if x eq s
+oneval	= PONE_FLT32						; 1.0
+nanval	= DMASK_FLT32						; NaN
+scale	= 2									; scale value
+else if x eq d
+oneval	= PONE_FLT64						; 1.0
+nanval	= DMASK_FLT64						; NaN
+scale	= 3									; scale value
+end if
+bytes	= 1 shl scale						; size of array element (bytes)
+bmask	= bytes - 1							; elements aligning mask
+;------------------------------------------
+	prefetchnta	[array2]					; prefetch data
+	prefetchnta	[array1]					; prefetch data
+		test	size, size					; if (size == 0)
+		jz		.error						;     then go to error branch
+	cvtsi2s#x	nsize, size					; nsize = size
+		movap#x	vector2, mean2				; vector = mean2
+		movap#x	vector1, mean1				; vector = mean1
+		initreg	one, index, oneval			; one = +1
+		xorp#x	result, result				; index = 0
+		test	array2, bmask				; if elements have wrong alignment
+		jnz		.sloop						;     then skip vector code
+		test	array1, bmask				; if elements have wrong alignment
+		jnz		.sloop						;     then skip vector code
+		cmp		size, VSIZE / bytes			; if (size < VSIZE / bytes)
+		jb		.sloop						;     then skip vector code
+		shl		size, scale					; convert size to bytes
+;---[Normal execution branch]--------------
+		shufp#x	vector2, vector2, 0x0		; duplicate value through the entire register
+		shufp#x	vector1, vector1, 0x0		; duplicate value through the entire register
+		shufp#x	one, one, 0x0				; duplicate value through the entire register
+		mov		ptr2, array2				; ptr2 = array2
+		mov		ptr1, array1				; ptr1 = array1
+		mov		index, array1
+		and		index, VMASK				; get array offset from vector boundary
+		sub		ptr2, index					; ptr2 = array2 - index
+		sub		ptr1, index					; ptr1 = array1 - index
+		xorp#x	sum, sum					; sum = 0
+		xorp#x	zero, zero					; zero = 0
+		xorp#x	flags, flags				; flags = 0
+;---[Unaligned operation]------------------
+		add		size, index					; size += index
+		sub		size, VSIZE					; if (size <= VSIZE)
+		jbe		.tail						;     then process array tails
+		mov		offst, index
+		shl		offst, VSCALE				; compute offset in mask array
+		neg		index						; index = -index
+		movap#x	blend, dqword [maskV1 + offst]
+		movup#x	temp2, [array2]				; temp2 = array2[0]
+		movap#x	great2, vector2				; great2 = mean2
+		movap#x	less2, temp2				; less2 = array2[0]
+		movap#x	equal2, temp2				; equal2 = array2[0]
+	cmpltp#x	great2, temp2				; great2 = (mean2 < array2[0])
+	cmpltp#x	less2, vector2				; less2 = (array2[0] < mean2)
+	cmpeqp#x	equal2, vector2				; equal2 = (array2[0] == mean2)
+	cmpunordp#x	temp2, temp2				; temp2 = (temp2 == NaN)
+		movup#x	temp1, [array1]				; temp1 = array1[0]
+		movap#x	great1, vector1				; great1 = mean1
+		movap#x	less1, temp1				; less1 = array1[0]
+		movap#x	equal1, temp1				; equal1 = array1[0]
+	cmpltp#x	great1, temp1				; great1 = (mean1 < array1[0])
+	cmpltp#x	less1, vector1				; less1 = (array1[0] < mean1)
+	cmpeqp#x	equal1, vector1				; equal1 = (array1[0] == mean1)
+	cmpunordp#x	temp1, temp1				; temp1 = (temp1 == NaN)
+		andp#x	great1, great2				; great1 &= great2
+		andp#x	less1, less2				; less1 &= less2
+		andp#x	equal1, equal2				; equal1 &= equal2
+		orp#x	temp1, temp2				; temp1 |= temp2
+	blendvp#x	temp1, zero					; blend temp1 with zero values
+		orp#x	flags, temp1				; accumulate NaN check results
+		orp#x	great1, less1				; great1 |= less1
+		orp#x	great1, equal1				; great1 |= equal1
+		andp#x	great1, one					; great1 &= one
+	blendvp#x	great1, zero				; blend great1 with zero values
+		addp#x	sum, great1					; sum += great1
+;---[Vector loop]--------------------------
+.vloop:
+repeat	CLINE / VSIZE
+		add		index, VSIZE				; index += VSIZE
+		sub		size, VSIZE					; if (size <= VSIZE)
+		jbe		.tail						;     then process array tail
+		movup#x	temp2, [ptr2 + % * VSIZE]	; temp2 = ptr2[i]
+		movap#x	great2, vector2				; great2 = mean2
+		movap#x	less2, temp2				; less2 = ptr2[i]
+		movap#x	equal2, temp2				; equal2 = ptr2[i]
+	cmpltp#x	great2, temp2				; great2 = (mean2 < ptr2[i])
+	cmpltp#x	less2, vector2				; less2 = (ptr2[i] < mean2)
+	cmpeqp#x	equal2, vector2				; equal2 = (ptr2[i] == mean2)
+	cmpunordp#x	temp2, temp2				; temp2 = (temp2 == NaN)
+		movap#x	temp1, [ptr1 + % * VSIZE]	; temp1 = ptr1[i]
+		movap#x	great1, vector1				; great1 = mean1
+		movap#x	less1, temp1				; less1 = ptr1[i]
+		movap#x	equal1, temp1				; equal1 = ptr1[i]
+	cmpltp#x	great1, temp1				; great1 = (mean1 < ptr1[i])
+	cmpltp#x	less1, vector1				; less1 = (ptr1[i] < mean1)
+	cmpeqp#x	equal1, vector1				; equal1 = (ptr1[i] == mean1)
+	cmpunordp#x	temp1, temp1				; temp1 = (temp1 == NaN)
+		andp#x	great1, great2				; great1 &= great2
+		andp#x	less1, less2				; less1 &= less2
+		andp#x	equal1, equal2				; equal1 &= equal2
+		orp#x	temp1, temp2				; temp1 |= temp2
+		orp#x	flags, temp1				; accumulate NaN check results
+		orp#x	great1, less1				; great1 |= less1
+		orp#x	great1, equal1				; great1 |= equal1
+		andp#x	great1, one					; great1 &= one
+		addp#x	sum, great1					; sum += great1
+end repeat
+	prefetchnta	[ptr2 + PSTEP]				; prefetch next portion of data
+	prefetchnta	[ptr1 + PSTEP]				; prefetch next portion of data
+		add		ptr2, CLINE					; ptr2 += CLINE
+		add		ptr1, CLINE					; ptr1 += CLINE
+		jmp		.vloop						; do while (true)
+;---[End of vector loop]-------------------
+.tail:	add		index, size					; index += size
+		shl		size, VSCALE				; compute shift in mask array
+		movap#x	blend, dqword [maskV2 + size]
+		movup#x	temp2, [array2 + index]		; temp2 = array2[index]
+		movap#x	great2, vector2				; great2 = mean2
+		movap#x	less2, temp2				; less2 = array2[index]
+		movap#x	equal2, temp2				; equal2 = array2[index]
+	cmpltp#x	great2, temp2				; great2 = (mean2 < array2[index])
+	cmpltp#x	less2, vector2				; less2 = (array2[index] < mean2)
+	cmpeqp#x	equal2, vector2				; equal2 = (array2[index] == mean2)
+	cmpunordp#x	temp2, temp2				; temp2 = (temp2 == NaN)
+		movup#x	temp1, [array1 + index]		; temp1 = array1[index]
+		movap#x	great1, vector1				; great1 = mean1
+		movap#x	less1, temp1				; less1 = array1[index]
+		movap#x	equal1, temp1				; equal1 = array1[index]
+	cmpltp#x	great1, temp1				; great1 = (mean1 < array1[index])
+	cmpltp#x	less1, vector1				; less1 = (array1[index] < mean1)
+	cmpeqp#x	equal1, vector1				; equal1 = (array1[index] == mean1)
+	cmpunordp#x	temp1, temp1				; temp1 = (temp1 == NaN)
+		andp#x	great1, great2				; great1 &= great2
+		andp#x	less1, less2				; less1 &= less2
+		andp#x	equal1, equal2				; equal1 &= equal2
+		orp#x	temp1, temp2				; temp1 |= temp2
+		xorp#x	zero, zero					; zero = 0
+	blendvp#x	zero, temp1 				; blend temp1 with zero values
+		orp#x	flags, zero					; accumulate NaN check results
+		orp#x	great1, less1				; great1 |= less1
+		orp#x	great1, equal1				; great1 |= equal1
+		andp#x	great1, one					; great1 &= one
+		xorp#x	zero, zero					; zero = 0
+	blendvp#x	zero, great1 				; blend great1 with zero values
+		addp#x	sum, zero					; sum += great1
+	pmovmskb	fmask, flags				; save check results to fmask
+		and		fmask, fmask				; if NAN is found,
+		jnz		.error						;     then go to error branch
+		summa	sum, x						; get all parallel sums
+		adds#x	sum, sum
+		subs#x	sum, nsize
+		divs#x	sum, nsize
+		movap#x	result, sum					; return (2 * sum - size) / size
+		ret
+;---[Scalar branch]------------------------
+.sloop:	movs#x	temp2, [array2]				; temp2 = array2[0]
+		movap#x	great2, vector2				; great2 = mean2
+		movap#x	less2, temp2				; less2 = array2[0]
+		movap#x	equal2, temp2				; equal2 = array2[0]
+	cmplts#x	great2, temp2				; great2 = (mean2 < array2[0])
+	cmplts#x	less2, vector2				; less2 = (array2[0] < mean2)
+	cmpeqs#x	equal2, vector2				; equal2 = (array2[0] == mean2)
+		comis#x	temp2, temp2				; if NAN is found,
+		jp		.error						;     then go to error branch
+		movs#x	temp1, [array1]				; temp1 = array1[0]
+		movap#x	great1, vector1				; great1 = mean1
+		movap#x	less1, temp1				; less1 = array1[0]
+		movap#x	equal1, temp1				; equal1 = array1[0]
+	cmplts#x	great1, temp1				; great1 = (mean1 < array1[0])
+	cmplts#x	less1, vector1				; less1 = (array1[0] < mean1)
+	cmpeqs#x	equal1, vector1				; equal1 = (array1[0] == mean1)
+		comis#x	temp1, temp1				; if NAN is found,
+		jp		.error						;     then go to error branch
+		andp#x	great1, great2				; great1 &= great2
+		andp#x	less1, less2				; less1 &= less2
+		andp#x	equal1, equal2				; equal1 &= equal2
+		orp#x	great1, less1				; great1 |= less1
+		orp#x	great1, equal1				; great1 |= equal1
+		andp#x	great1, one					; great1 &= one
+		adds#x	sum, great1					; sum += great1
+		add		array2, bytes				; array2++
+		add		array1, bytes				; array1++
+		sub		size, 1						; size--
+		jnz		.sloop						; do while (size != 0)
+;---[End of scalar loop]-------------------
+		adds#x	sum, sum
+		subs#x	sum, nsize
+		divs#x	sum, nsize
+		movap#x	result, sum					; return (2 * sum - size) / size
+		ret
+;---[Error branch]-------------------------
+.error:	initreg	result, index, nanval		; return NaN
+		ret
+}
+FechnerCorrelation_flt32:	FECHNER_CORRELATION	s
+FechnerCorrelation_flt64:	FECHNER_CORRELATION	d
+
+;==============================================================================;
+;       Spearman correlation                                                   ;
+;==============================================================================;
+InitRanks:
+;---[Parameters]---------------------------
+rank1	equ		rdi							; pointer to first rank array
+rank2	equ		rsi							; pointer to second rank array
+size	equ		rdx							; rank array size (count of elements)
+;---[Internal variables]-------------------
+index	equ		rax							; index value
+;------------------------------------------
+		xor		index, index				; index = 0
+;---[Init loop]----------------------------
+.loop:	mov		[rank1], index				; rank1[0] = index
+		mov		[rank2], index				; rank2[0] = index
+		add		rank1, 8					; rank1++
+		add		rank2, 8					; rank2++
+		add		index, 1					; index++
+		sub		size, 1						; size--
+		jnz		.loop						; do while (size != 0)
+;---[End of init loop]---------------------
+		ret
+;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+macro	SET_RANKS	x
+{
+;---[Parameters]---------------------------
+array1	equ		rdi							; pointer to first data array
+array2	equ		rsi							; pointer to second data array
+rank1	equ		rdx							; pointer to first rank array
+rank2	equ		rcx							; pointer to second rank array
+size	equ		r8							; array size (count of elements)
+;---[Internal variables]-------------------
+temp	equ		rax							; temporary register
+index1	equ		r9							; first index value
+index2	equ		r10							; second index value
+index	equ		xmm0						; index value
+one		equ		xmm1						; 1.0
+if x eq s
+oneval	= PONE_FLT32						; +1.0
+scale	= 2									; scale value
+else if x eq d
+oneval	= PONE_FLT64						; +1.0
+scale	= 3									; scale value
+end if
+bytes	= 1 shl scale						; size of array element (bytes)
+;------------------------------------------
+		initreg	one, temp, oneval			; one = 1.0
+		xorp#x	index, index				; index = 0.0
+;---[Rank setting loop]--------------------
+.loop:	mov		index1, [rank1]				; index1 = rank1[0]
+		mov		index2, [rank2]				; index2 = rank2[0]
+		movs#x	[array1 + index1 * bytes], index
+		movs#x	[array2 + index2 * bytes], index
+		add		rank1, 8					; rank1++
+		add		rank2, 8					; rank2++
+		adds#x	index, one					; index++
+		sub		size, 1						; size--
+		jnz		.loop						; do while (size != 0)
+;---[End of rank setting loop]-------------
+		ret
+}
+SetRanks_flt32:	SET_RANKS	s
+SetRanks_flt64:	SET_RANKS	d
+;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+macro	SPEARMAN_CORRELATION	x
+{
+;---[Parameters]---------------------------
+array1	equ		rdi							; pointer to first data array
+rank1	equ		rsi							; pointer to first rank array
+array2	equ		rdx							; pointer to second data array
+rank2	equ		rcx							; pointer to second rank array
+tarray	equ		r8							; pointer to temp data array
+trank	equ		r9							; pointer to temp rank array
+;---[Internal variables]-------------------
+result	equ		xmm0						; result register
+size	equ		xmm1						; array size
+bias	equ		xmm2						; bias value
+temp	equ		xmm3						; temporary register
+stack	equ		rsp							; stack pointer
+s_arr1	equ		stack + 0 * 8				; stack position of "array1" variable
+s_rank1	equ		stack + 1 * 8				; stack position of "rank1" variable
+s_arr2	equ		stack + 2 * 8				; stack position of "array2" variable
+s_rank2	equ		stack + 3 * 8				; stack position of "rank2" variable
+s_tarr	equ		stack + 4 * 8				; stack position of "tarray" variable
+s_trank	equ		stack + 5 * 8				; stack position of "trank" variable
+s_size	equ		stack + 8 * 8				; stack position of "size" variable
+if x eq s
+sort	= RadixSort_flt32					; sort function
+rank	= SetRanks_flt32					; rank function
+diff	= SumSqrDiff_flt32					; rank difference function
+oneval	= PONE_FLT32						; 1.0
+nanval	= DMASK_FLT32						; NaN
+biasval	= 0x40C00000						; bias const (6.0 for normal distribution)
+else if x eq d
+sort	= RadixSort_flt64					; sort function
+rank	= SetRanks_flt64					; rank function
+diff	= SumSqrDiff_flt64					; rank difference function
+oneval	= PONE_FLT64						; 1.0
+nanval	= DMASK_FLT64						; NaN
+biasval	= 0x4018000000000000				; bias const (6.0 for normal distribution)
+end if
+space	= 7 * 8								; stack size required by the procedure
+;------------------------------------------
+		sub		stack, space				; reserving stack size for local vars
+		mov		[s_arr1], array1			; save "array1" variable into the stack
+		mov		[s_rank1], rank1			; save "rank1" variable into the stack
+		mov		[s_arr2], array2			; save "array2" variable into the stack
+		mov		[s_rank2], rank2			; save "rank2" variable into the stack
+		mov		[s_tarr], tarray			; save "tarray" variable into the stack
+		mov		[s_trank], trank			; save "trank" variable into the stack
+		cmp		qword [s_size], 0			; if (size == 0)
+		jz		.error						;     then go to error branch
+;---[Init ranks]---------------------------
+		mov		param1, rank1
+		mov		param2, rank2
+		mov		param3, [s_size]
+		call	InitRanks					; call InitRanks (rank1, rank2, size)
+;---[Sort first array]---------------------
+		mov		param5, [s_size]
+		mov		param4, [s_trank]
+		mov		param3, [s_rank1]
+		mov		param2, [s_tarr]
+		mov		param1, [s_arr1]
+		call	sort						; call sort (array1, tarray, rank1, trank, size)
+;---[Sort second array]--------------------
+		mov		param5, [s_size]
+		mov		param4, [s_trank]
+		mov		param3, [s_rank2]
+		mov		param2, [s_tarr]
+		mov		param1, [s_arr2]
+		call	sort						; call sort (array2, tarray, rank2, trank, size)
+;---[Set ranks]----------------------------
+		mov		param5, [s_size]
+		mov		param4, [s_rank2]
+		mov		param3, [s_rank1]
+		mov		param2, [s_arr2]
+		mov		param1, [s_arr1]
+		call	rank						; call rank (array1, array2, rank1, rank2, size)
+;---[Get ranks difference]-----------------
+		mov		param3, [s_size]
+		mov		param2, [s_arr2]
+		mov		param1, [s_arr1]
+		call	diff						; result = diff (array1, array2, size)
+;---[Compute result]-----------------------
+	cvtsi2s#x	size, [s_size]				; get "size" variable from the stack
+		initreg	bias, trank, oneval			; bias = 1.0
+		movap#x	temp, size
+		muls#x	temp, temp
+		subs#x	temp, bias
+		muls#x	size, temp					; size = size * (size * size - 1.0)
+		initreg	bias, trank, biasval		; bias = 6.0
+		divs#x	bias, size
+		muls#x	bias, result				; bias = result * 6.0 / (size * (size * size - 1.0))
+		initreg	result, trank, oneval		; result = 1.0
+		subs#x	result, bias				; return 1.0 - result * 6.0 / (size * (size * size - 1.0))
+		add		stack, space				; restoring back the stack pointer
+		ret
+;---[Error branch]-------------------------
+.error:	initreg	result, trank, nanval		; return NaN
+		add		stack, space				; restoring back the stack pointer
+		ret
+}
+SpearmanCorrelation_flt32:	SPEARMAN_CORRELATION	s
+SpearmanCorrelation_flt64:	SPEARMAN_CORRELATION	d
 
 ;###############################################################################
 ;#                                 END OF FILE                                 #

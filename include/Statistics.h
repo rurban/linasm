@@ -171,16 +171,24 @@ static flt64_t Kurtosis (const flt64_t array[], size_t size, flt64_t mean);
 //****************************************************************************//
 //      Covariance                                                            //
 //****************************************************************************//
-static flt32_t Covariance (const flt32_t arr1[], flt32_t mean1, const flt32_t arr2[], flt32_t mean2, size_t size);
-static flt64_t Covariance (const flt64_t arr1[], flt64_t mean1, const flt64_t arr2[], flt64_t mean2, size_t size);
+static flt32_t Covariance (const flt32_t arr1[], const flt32_t arr2[], size_t size, flt32_t mean1, flt32_t mean2);
+static flt64_t Covariance (const flt64_t arr1[], const flt64_t arr2[], size_t size, flt64_t mean1, flt64_t mean2);
 
 //****************************************************************************//
 //      Correlation                                                           //
 //****************************************************************************//
 
 // Pearson correlation
-static flt32_t PearsonCorrelation (const flt32_t arr1[], flt32_t mean1, const flt32_t arr2[], flt32_t mean2, size_t size);
-static flt64_t PearsonCorrelation (const flt64_t arr1[], flt64_t mean1, const flt64_t arr2[], flt64_t mean2, size_t size);
+static flt32_t PearsonCorrelation (const flt32_t arr1[], const flt32_t arr2[], size_t size, flt32_t mean1, flt32_t mean2);
+static flt64_t PearsonCorrelation (const flt64_t arr1[], const flt64_t arr2[], size_t size, flt64_t mean1, flt64_t mean2);
+
+// Fechner correlation
+static flt32_t FechnerCorrelation (const flt32_t arr1[], const flt32_t arr2[], size_t size, flt32_t mean1, flt32_t mean2);
+static flt64_t FechnerCorrelation (const flt64_t arr1[], const flt64_t arr2[], size_t size, flt64_t mean1, flt64_t mean2);
+
+// Spearman correlation
+static flt32_t SpearmanCorrelation (flt32_t arr1[], size_t rank1[], flt32_t arr2[], size_t rank2[], flt32_t tarr[], size_t trank[], size_t size);
+static flt64_t SpearmanCorrelation (flt64_t arr1[], size_t rank1[], flt64_t arr2[], size_t rank2[], flt64_t tarr[], size_t trank[], size_t size);
 };
 # else
 /*
@@ -339,16 +347,24 @@ flt64_t Statistics_Kurtosis_flt64 (const flt64_t array[], size_t size, flt64_t m
 //****************************************************************************//
 //      Covariance                                                            //
 //****************************************************************************//
-flt32_t Statistics_Covariance_flt32 (const flt32_t arr1[], flt32_t mean1, const flt32_t arr2[], flt32_t mean2, size_t size);
-flt64_t Statistics_Covariance_flt64 (const flt64_t arr1[], flt64_t mean1, const flt64_t arr2[], flt64_t mean2, size_t size);
+flt32_t Statistics_Covariance_flt32 (const flt32_t arr1[], const flt32_t arr2[], size_t size, flt32_t mean1, flt32_t mean2);
+flt64_t Statistics_Covariance_flt64 (const flt64_t arr1[], const flt64_t arr2[], size_t size, flt64_t mean1, flt64_t mean2);
 
 //****************************************************************************//
 //      Correlation                                                           //
 //****************************************************************************//
 
 // Pearson correlation
-flt32_t Statistics_PearsonCorrelation_flt32 (const flt32_t arr1[], flt32_t mean1, const flt32_t arr2[], flt32_t mean2, size_t size);
-flt64_t Statistics_PearsonCorrelation_flt64 (const flt64_t arr1[], flt64_t mean1, const flt64_t arr2[], flt64_t mean2, size_t size);
+flt32_t Statistics_PearsonCorrelation_flt32 (const flt32_t arr1[], const flt32_t arr2[], size_t size, flt32_t mean1, flt32_t mean2);
+flt64_t Statistics_PearsonCorrelation_flt64 (const flt64_t arr1[], const flt64_t arr2[], size_t size, flt64_t mean1, flt64_t mean2);
+
+// Fechner correlation
+flt32_t Statistics_FechnerCorrelation_flt32 (const flt32_t arr1[], const flt32_t arr2[], size_t size, flt32_t mean1, flt32_t mean2);
+flt64_t Statistics_FechnerCorrelation_flt64 (const flt64_t arr1[], const flt64_t arr2[], size_t size, flt64_t mean1, flt64_t mean2);
+
+// Spearman correlation
+flt32_t Statistics_SpearmanCorrelation_flt32 (flt32_t arr1[], size_t rank1[], flt32_t arr2[], size_t rank2[], flt32_t tarr[], size_t trank[], size_t size);
+flt64_t Statistics_SpearmanCorrelation_flt64 (flt64_t arr1[], size_t rank1[], flt64_t arr2[], size_t rank2[], flt64_t tarr[], size_t trank[], size_t size);
 
 # endif
 /*

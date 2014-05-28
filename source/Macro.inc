@@ -10,57 +10,67 @@
 ;******************************************************************************;
 ;       Consts                                                                 ;
 ;******************************************************************************;
-CLINE		= 64							; Size of cache line
-PSTEP		= 512							; Prefetch step
-VSCALE		= 4								; Vector scale factor
-PSCALE		= 12							; Memory page scale factor
-VSIZE		= 1 shl VSCALE					; Size of vector register (bytes)
-PSIZE		= 1 shl PSCALE					; Size of memory page (bytes)
-VMASK		= VSIZE - 1						; Vector boundary aligning mask
-PMASK		= PSIZE - 1						; Memory page boundary aligning mask
-VBITS		= 0xFFFF						; Vector bit mask
-NOT_FOUND	= -1							; Pattern is not found
-ERROR		= -1							; Error value
+CLINE			= 64						; Size of cache line
+PSTEP			= 512						; Prefetch step
+VSCALE			= 4							; Vector scale factor
+PSCALE			= 12						; Memory page scale factor
+VSIZE			= 1 shl VSCALE				; Size of vector register (bytes)
+PSIZE			= 1 shl PSCALE				; Size of memory page (bytes)
+VMASK			= VSIZE - 1					; Vector boundary aligning mask
+PMASK			= PSIZE - 1					; Memory page boundary aligning mask
+VBITS			= 0xFFFF					; Vector bit mask
+NOT_FOUND		= -1						; Pattern is not found
+ERROR			= -1						; Error value
 
 ;==============================================================================;
 ;       flt32_t consts                                                         ;
 ;==============================================================================;
 
 ; Data and sign mask
-DMASK_FLT32	= 0x7FFFFFFF					; Data mask and NaN value
-SMASK_FLT32	= 0x80000000					; Sign mask
+DMASK_FLT32		= 0x7FFFFFFF				; Data mask and NaN value
+SMASK_FLT32		= 0x80000000				; Sign mask
 
 ; Infinity
-PINF_FLT32	= 0x7F800000					; +inf
-MINF_FLT32	= 0xFF800000					; -inf
+PINF_FLT32		= 0x7F800000				; +inf
+MINF_FLT32		= 0xFF800000				; -inf
 
 ; One
-PONE_FLT32	= 0x3F800000					; +1.0
-MONE_FLT32	= 0xBF800000					; -1.0
+PONE_FLT32		= 0x3F800000				; +1.0
+MONE_FLT32		= 0xBF800000				; -1.0
 
 ; Half
-PHALF_FLT32	= 0x3F000000					; +0.5
-MHALF_FLT32	= 0xBF000000					; -0.5
+PHALF_FLT32		= 0x3F000000				; +0.5
+MHALF_FLT32		= 0xBF000000				; -0.5
+
+; Pi
+PI_FLT32		= 0x40490FDB				; Pi
+PI_TWO_FLT32	= 0x40C90FDB				; 2 * Pi
+PI_HALF_FLT32	= 0x3FC90FDB				; Pi / 2
 
 ;==============================================================================;
 ;       flt64_t consts                                                         ;
 ;==============================================================================;
 
 ; Data and sign mask
-DMASK_FLT64	= 0x7FFFFFFFFFFFFFFF			; Data mask and NaN value
-SMASK_FLT64	= 0x8000000000000000			; Sign mask
+DMASK_FLT64		= 0x7FFFFFFFFFFFFFFF		; Data mask and NaN value
+SMASK_FLT64		= 0x8000000000000000		; Sign mask
 
 ; Infinity
-PINF_FLT64	= 0x7FF0000000000000			; +inf
-MINF_FLT64	= 0xFFF0000000000000			; -inf
+PINF_FLT64		= 0x7FF0000000000000		; +inf
+MINF_FLT64		= 0xFFF0000000000000		; -inf
 
 ; One
-PONE_FLT64	= 0x3FF0000000000000			; +1.0
-MONE_FLT64	= 0xBFF0000000000000			; -1.0
+PONE_FLT64		= 0x3FF0000000000000		; +1.0
+MONE_FLT64		= 0xBFF0000000000000		; -1.0
 
 ; Half
-PHALF_FLT64	= 0x3FE0000000000000			; +0.5
-MHALF_FLT64	= 0xBFE0000000000000			; -0.5
+PHALF_FLT64		= 0x3FE0000000000000		; +0.5
+MHALF_FLT64		= 0xBFE0000000000000		; -0.5
+
+; Pi
+PI_FLT64		= 0x400921FB54442D18		; Pi
+PI_TWO_FLT64	= 0x401921FB54442D18		; 2 * Pi
+PI_HALF_FLT64	= 0x3FF921FB54442D18		; Pi / 2
 
 ;******************************************************************************;
 ;       Function call parameters                                               ;

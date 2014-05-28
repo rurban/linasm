@@ -7,6 +7,7 @@
 ;# License: LGPLv3+                              Copyleft (Ɔ) 2014, Jack Black #
 ;###############################################################################
 format	ELF64
+include	'Macro.inc'
 
 ;###############################################################################
 ;#      Import section                                                         #
@@ -21,8 +22,8 @@ extrn	'cosf'				as	Cos_flt32
 extrn	'cos'				as	Cos_flt64
 
 ; Array reflection
-extrn	'_Reflect_flt32'	as	Reflect_flt32
-extrn	'_Reflect_flt64'	as	Reflect_flt64
+extrn	'Reflect_flt32'		as	Reflect_flt32
+extrn	'Reflect_flt64'		as	Reflect_flt64
 
 ;###############################################################################
 ;#      Export section                                                         #
@@ -33,20 +34,20 @@ extrn	'_Reflect_flt64'	as	Reflect_flt64
 ;******************************************************************************;
 
 ; Sine window
-public	Sine_flt32					as	'_Sine_flt32'
-public	Sine_flt64					as	'_Sine_flt64'
+public	Sine_flt32					as	'Sine_flt32'
+public	Sine_flt64					as	'Sine_flt64'
 
 ; Hamming window
-public	Hamming_flt32				as	'_Hamming_flt32'
-public	Hamming_flt64				as	'_Hamming_flt64'
+public	Hamming_flt32				as	'Hamming_flt32'
+public	Hamming_flt64				as	'Hamming_flt64'
 
 ; Blackman window
-public	Blackman_flt32				as	'_Blackman_flt32'
-public	Blackman_flt64				as	'_Blackman_flt64'
+public	Blackman_flt32				as	'Blackman_flt32'
+public	Blackman_flt64				as	'Blackman_flt64'
 
 ; Blackman-Nuttall window
-public	Blackman_Nuttall_flt32		as	'_Blackman_Nuttall_flt32'
-public	Blackman_Nuttall_flt64		as	'_Blackman_Nuttall_flt64'
+public	Blackman_Nuttall_flt32		as	'Blackman_Nuttall_flt32'
+public	Blackman_Nuttall_flt64		as	'Blackman_Nuttall_flt64'
 
 ;******************************************************************************;
 ;       Computing windows Functions                                            ;
@@ -80,20 +81,6 @@ public	Blackman_NuttallWin_flt64	as	'_ZN6Window15BlackmanNuttallEPdm'
 ;#      Code section                                                           #
 ;###############################################################################
 section	'.text'		executable align 16
-
-;******************************************************************************;
-;       Consts                                                                 ;
-;******************************************************************************;
-
-; flt32_t
-PI_FLT32		= 0x40490FDB				; Pi
-PI_TWO_FLT32	= 0x40C90FDB				; 2 * Pi
-PI_HALF_FLT32	= 0x3FC90FDB				; Pi / 2
-
-; flt64_t
-PI_FLT64		= 0x400921FB54442D18		; Pi
-PI_TWO_FLT64	= 0x401921FB54442D18		; 2 * Pi
-PI_HALF_FLT64	= 0x3FF921FB54442D18		; Pi / 2
 
 ;******************************************************************************;
 ;       Init XMM register with const                                           ;

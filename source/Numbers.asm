@@ -397,10 +397,10 @@ macro	CHECK_SPECIAL	spec
 		and		str, 0x00FFFFFF				; remove unrequired char that was read
 		or		str, 0x00202020				; convert string to lower case
 		cmp		str, 'nan'					; nan (Little endian string value)
-		mov		spec, [nan + sign * bytes + bytes]
+		mov		spec, [nanval + sign * bytes + bytes]
 		je		@f
 		cmp		str, 'fni'					; inf (Little endian string value)
-		mov		spec, [inf + sign * bytes + bytes]
+		mov		spec, [infval + sign * bytes + bytes]
 		jne		.nonum
 @@:		add		ptr, 3
 		mov		[p_num], spec				; p_num[0] = spec
@@ -592,12 +592,12 @@ mant	equ		xmm0						; mantissa value
 base	equ		xmm1						; base of numeral system
 s_ptr	equ		rsp - 1 * 8					; stack position of "ptr" variable
 if x eq s
-inf		= inf_flt32
-nan		= nan_flt32
+infval	= inf_flt32
+nanval	= nan_flt32
 bytes	= 4
 else if x eq d
-inf		= inf_flt64
-nan		= nan_flt64
+infval	= inf_flt64
+nanval	= nan_flt64
 bytes	= 8
 end if
 ;---[Skipping white-symbols]---------------

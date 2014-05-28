@@ -1237,15 +1237,15 @@ bmask	= bytes - 1							; elements aligning mask
 		je		.equal						;     then go to equal branch
 		test	size, size					; if (size == 0)
 		jz		.skip						;     then skip following code
-		shftl	size, scale					; convert size to bytes
 if scale <> 0
 		test	string1, bmask				; if elements have wrong alignment
 		jnz		.sloop						;     then skip vector code
 		test	string2, bmask				; if elements have wrong alignment
 		jnz		.sloop						;     then skip vector code
 end if
-		cmp		size, VSIZE					; if (size < VSIZE)
+		cmp		size, VSIZE / bytes			; if (size < VSIZE / bytes)
 		jb		.sloop						;     then skip vector code
+		shftl	size, scale					; convert size to bytes
 ;---[Normal execution branch]--------------
 		mov		ptr1, string1				; ptr1 = string1
 		mov		ptr2, string2				; ptr2 = string2
@@ -1321,7 +1321,7 @@ end repeat
 		jz		.exit						;     then go to exit
 		add		string1, bytes				; string1++
 		add		string2, bytes				; string2++
-		sub		size, bytes					; size--
+		sub		size, 1						; size--
 		jnz		.sloop						; do while (size != 0)
 ;---[End of scalar loop]-------------------
 .exit:	seta	res1						; if (string1[0] > string2[0]), then res1 = 1
@@ -1978,7 +1978,7 @@ FindSymbolsBwd_char32:	FIND_SYMBOLS_BWD	edx, ecx, d
 ;==============================================================================;
 ;       Searching string for pattern                                           ;
 ;==============================================================================;
-macro	FIND_STRING1 x, bwd
+macro	FIND_STRING1	bwd, x
 {
 ;---[Parameters]---------------------------
 string	equ		rdi							; source string
@@ -2045,19 +2045,19 @@ end if
 }
 
 ; Forward direction search
-FindStrStrFwd_char8:	FIND_STRING1	b, 0
-FindStrStrFwd_char16:	FIND_STRING1	w, 0
-FindStrStrFwd_char32:	FIND_STRING1	d, 0
+FindStrStrFwd_char8:	FIND_STRING1	0, b
+FindStrStrFwd_char16:	FIND_STRING1	0, w
+FindStrStrFwd_char32:	FIND_STRING1	0, d
 
 ; Backward direction search
-FindStrStrBwd_char8:	FIND_STRING1	b, 1
-FindStrStrBwd_char16:	FIND_STRING1	w, 1
-FindStrStrBwd_char32:	FIND_STRING1	d, 1
+FindStrStrBwd_char8:	FIND_STRING1	1, b
+FindStrStrBwd_char16:	FIND_STRING1	1, w
+FindStrStrBwd_char32:	FIND_STRING1	1, d
 
 ;==============================================================================;
 ;       Searching characters sequence for pattern                              ;
 ;==============================================================================;
-macro	FIND_STRING2 x, bwd
+macro	FIND_STRING2	bwd, x
 {
 ;---[Parameters]---------------------------
 string	equ		rdi							; source characters sequence
@@ -2123,14 +2123,14 @@ end if
 }
 
 ; Forward direction search
-FindSeqStrFwd_char8:	FIND_STRING2	b, 0
-FindSeqStrFwd_char16:	FIND_STRING2	w, 0
-FindSeqStrFwd_char32:	FIND_STRING2	d, 0
+FindSeqStrFwd_char8:	FIND_STRING2	0, b
+FindSeqStrFwd_char16:	FIND_STRING2	0, w
+FindSeqStrFwd_char32:	FIND_STRING2	0, d
 
 ; Backward direction search
-FindSeqStrBwd_char8:	FIND_STRING2	b, 1
-FindSeqStrBwd_char16:	FIND_STRING2	w, 1
-FindSeqStrBwd_char32:	FIND_STRING2	d, 1
+FindSeqStrBwd_char8:	FIND_STRING2	1, b
+FindSeqStrBwd_char16:	FIND_STRING2	1, w
+FindSeqStrBwd_char32:	FIND_STRING2	1, d
 
 ;******************************************************************************;
 ;       Counting                                                               ;

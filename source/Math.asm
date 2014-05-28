@@ -1088,49 +1088,49 @@ macro	SIGN_INT	value1, value2, c1, c2
 {
 ;---[Internal variables]-------------------
 result	equ		rax							; result register
-great	equ		rdx							; +1
-less	equ		rcx							; -1
+pone	equ		rdx							; +1
+mone	equ		rcx							; -1
 ;------------------------------------------
 		xor		result, result				; result = 0
-		mov		great, +1					; great = +1
-		mov		less, -1					; less = -1
+		mov		pone, +1					; pone = +1
+		mov		mone, -1					; mone = -1
 		cmp		value1, value2				; compare values
-		cmov#c1	result, great				; if (value1 > value2), return great
-		cmov#c2	result, less				; if (value1 < value2), return less
-		ret									; if (value1 == value2), return equal
+		cmov#c1	result, pone				; if (value1 > value2), return +1
+		cmov#c2	result, mone				; if (value1 < value2), return -1
+		ret									; if (value1 == value2), return 0
 }
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	SIGN_FLT	temp, great, less, nan, x, sign
+macro	SIGN_FLT	reg, pone, mone, nan, x, sign
 {
 ;---[Parameters]---------------------------
 value1	equ		xmm0						; first value
 value2	equ		xmm1						; second value
 ;---[Internal variables]-------------------
 if x eq s
-gval	= PONE_FLT32						; +1.0
-lval	= MONE_FLT32						; -1.0
-nval	= DMASK_FLT32						; NaN
+poneval	= PONE_FLT32						; +1.0
+moneval	= MONE_FLT32						; -1.0
+nanval	= DMASK_FLT32						; NaN
 else if x eq d
-gval	= PONE_FLT64						; +1.0
-lval	= MONE_FLT64						; -1.0
-nval	= DMASK_FLT64						; NaN
+poneval	= PONE_FLT64						; +1.0
+moneval	= MONE_FLT64						; -1.0
+nanval	= DMASK_FLT64						; NaN
 end if
 ;------------------------------------------
+		mov		pone, poneval				; pone = +1
+		mov		mone, moneval				; mone = -1
+		mov		nan, nanval					; nan = NaN
 if sign
 		xorp#x	value2, value2				; value2 = 0
 end if
-		xor		temp, temp					; temp = 0
-		mov		great, gval					; great = +1
-		mov		less, lval					; less = -1
-		mov		nan, nval					; nan = NaN
+		xor		reg, reg					; reg = 0
 		comis#x	value1, value2				; compare values
-		cmova	temp, great					; if (value1 > value2), return great
-		cmovb	temp, less					; if (value1 < value1), return less
-		cmovp	temp, nan					; if NaN is detected, then return NaN
+		cmova	reg, pone					; if (value1 > value2), return +1
+		cmovb	reg, mone					; if (value1 < value1), return -1
+		cmovp	reg, nan					; if NaN is detected, then return NaN
 if x eq s
-		movd	value1, temp
+		movd	value1, reg					; value1 = reg
 else if x eq d
-		movq	value1, temp
+		movq	value1, reg					; value1 = reg
 end if
 		ret
 }
@@ -1192,29 +1192,31 @@ macro	SIGN_RAW		value1, value2, temp1, temp2, x
 {
 ;---[Internal variables]-------------------
 result	equ		rax							; result register
-great	equ		rdx							; +1
-less	equ		rcx							; -1
+pone	equ		rdx							; +1
+mone	equ		rcx							; -1
 if x eq s
 shift	= 30								; shift value
 else if x eq d
 shift	= 62								; shift value
 end if
-;------------------------------------------
+;---[Map first value to signed int]--------
 		mov		temp1, value1				; temp1 = value1
-		mov		temp2, value2				; temp2 = value2
 		sar		temp1, shift
-		sar		temp2, shift
 		shr		temp1, 1					; temp1 = (unsigned) (value1 >> shift) >> 1
-		shr		temp2, 1					; temp2 = (unsigned) (value2 >> shift) >> 1
 		xor		value1, temp1				; value1 = value1 ^ temp1
+;---[Map second value to signed int]-------
+		mov		temp2, value2				; temp2 = value2
+		sar		temp2, shift
+		shr		temp2, 1					; temp2 = (unsigned) (value2 >> shift) >> 1
 		xor		value2, temp2				; value2 = value2 ^ temp2
+;---[Compare values]-----------------------
 		xor		result, result				; result = 0
-		mov		great, +1					; great = +1
-		mov		less, -1					; less = -1
+		mov		pone, +1					; pone = +1
+		mov		mone, -1					; mone = -1
 		cmp		value1, value2				; compare values
-		cmovg	result, great				; if (value1 > value2), return great
-		cmovl	result, less				; if (value1 < value2), return less
-		ret									; if (value1 == value2), return equal
+		cmovg	result, pone				; if (value1 > value2), return +1
+		cmovl	result, mone				; if (value1 < value2), return -1
+		ret									; if (value1 == value2), return 0
 }
 
 ; Unsigned integer types
@@ -1781,16 +1783,16 @@ barier	equ		temp2						; PI / 4
 if x eq s
 dmask	= DMASK_FLT32						; data mask
 smask	= SMASK_FLT32						; sign mask
-pi		= PI4_FLT32							; PI / 4
+pival	= PI4_FLT32							; PI / 4
 else if x eq d
 dmask	= DMASK_FLT64						; data mask
 smask	= SMASK_FLT64						; sign mask
-pi		= PI4_FLT64							; PI / 4
+pival	= PI4_FLT64							; PI / 4
 end if
 ;------------------------------------------
 		initreg	mask, treg, dmask, x		; mask = dmask
 		mov		sval, smask					; set sign mask
-		initreg	barier, treg, pi, x			; barier = PI / 4
+		initreg	barier, treg, pival, x		; barier = PI / 4
 if x eq s
 		movd	sreg, angle					; sreg = angle
 else if x eq d
@@ -1857,16 +1859,16 @@ barier	equ		temp2						; PI / 4
 if x eq s
 dmask	= DMASK_FLT32						; data mask
 smask	= SMASK_FLT32						; sign mask
-pi		= PI4_FLT32							; PI / 4
+pival	= PI4_FLT32							; PI / 4
 else if x eq d
 dmask	= DMASK_FLT64						; data mask
 smask	= SMASK_FLT64						; sign mask
-pi		= PI4_FLT64							; PI / 4
+pival	= PI4_FLT64							; PI / 4
 end if
 ;------------------------------------------
 		initreg	mask, treg, dmask, x		; mask = dmask
 		mov		sval, smask					; set sign mask
-		initreg	barier, treg, pi, x			; barier = PI / 4
+		initreg	barier, treg, pival, x		; barier = PI / 4
 if x eq s
 		movd	sreg, angle					; sreg = angle
 else if x eq d
@@ -1951,16 +1953,16 @@ if x eq s
 dmask	= DMASK_FLT32						; data mask
 smask	= SMASK_FLT32						; sign mask
 oneval	= PONE_FLT64						; +1.0 (flt64_t)
-pi		= PI4_FLT32							; PI / 4
+pival	= PI4_FLT32							; PI / 4
 else if x eq d
 dmask	= DMASK_FLT64						; data mask
 smask	= SMASK_FLT64						; sign mask
-pi		= PI4_FLT64							; PI / 4
+pival	= PI4_FLT64							; PI / 4
 end if
 ;------------------------------------------
 		initreg	mask, treg, dmask, x		; mask = dmask
 		mov		sval, smask					; set sign mask
-		initreg	barier, treg, pi, x			; barier = PI / 4
+		initreg	barier, treg, pival, x		; barier = PI / 4
 if x eq s
 		movd	sreg, angle					; sreg = angle
 else if x eq d
@@ -2090,16 +2092,16 @@ if x eq s
 dmask	= DMASK_FLT32						; data mask
 smask	= SMASK_FLT32						; sign mask
 oneval	= PONE_FLT64						; +1.0 (flt64_t)
-pi		= PI4_FLT32							; PI / 4
+pival	= PI4_FLT32							; PI / 4
 else if x eq d
 dmask	= DMASK_FLT64						; data mask
 smask	= SMASK_FLT64						; sign mask
-pi		= PI4_FLT64							; PI / 4
+pival	= PI4_FLT64							; PI / 4
 end if
 ;------------------------------------------
 		initreg	mask, treg, dmask, x		; mask = dmask
 		mov		sval, smask					; set sign mask
-		initreg	barier, treg, pi, x			; barier = PI / 4
+		initreg	barier, treg, pival, x		; barier = PI / 4
 if x eq s
 		movd	sreg, angle					; sreg = angle
 else if x eq d
@@ -2225,17 +2227,17 @@ if x eq s
 dmask	= DMASK_FLT32						; data mask
 smask	= SMASK_FLT32						; sign mask
 oneval	= PONE_FLT32						; +1.0
-pi		= PI4_FLT32							; PI / 4
+pival	= PI4_FLT32							; PI / 4
 else if x eq d
 dmask	= DMASK_FLT64						; data mask
 smask	= SMASK_FLT64						; sign mask
 oneval	= PONE_FLT64						; +1.0
-pi		= PI4_FLT64							; PI / 4
+pival	= PI4_FLT64							; PI / 4
 end if
 ;------------------------------------------
 		initreg	mask, treg, dmask, x		; mask = dmask
 		mov		sval, smask					; set sign mask
-		initreg	barier, treg, pi, x			; barier = PI / 4
+		initreg	barier, treg, pival, x		; barier = PI / 4
 if x eq s
 		movd	sreg1, angle				; sreg1 = angle
 else if x eq d
@@ -2315,10 +2317,10 @@ macro	EXPI	exp, treg, exp_min, exp_max, table, x
 result	equ		xmm0						; result register
 index	equ		rdi							; index register
 if x eq s
-inf		= PINF_FLT32						; +inf
+infval	= PINF_FLT32						; +inf
 bytes	= 4									; array element size (bytes)
 else if x eq d
-inf		= PINF_FLT64						; +inf
+infval	= PINF_FLT64						; +inf
 bytes	= 8									; array element size (bytes)
 end if
 ;------------------------------------------
@@ -2330,7 +2332,7 @@ end if
 		movs#x	result, [table + index*bytes - exp_min*bytes]	; result = exp[index]
 		ret
 ;---[Infinity branch]----------------------
-.inf:	initreg	result, treg, inf, x		; return +inf
+.inf:	initreg	result, treg, infval, x		; return +inf
 		ret
 ;---[Zero branch]--------------------------
 .zero:	xorp#x	result, result				; return 0.0
@@ -2458,11 +2460,11 @@ macro	EXP2I	exp, temp, shift, x
 result	equ		xmm0						; result register
 shiftl	equ		cl							; low part of shift register
 if x eq s
-inf		= PINF_FLT32						; +inf
+infval	= PINF_FLT32						; +inf
 bias	= 127								; exponent bias
 digits	= 23								; count of bits into mantissa
 else if x eq d
-inf		= PINF_FLT64						; +inf
+infval	= PINF_FLT64						; +inf
 bias	= 1023								; exponent bias
 digits	= 52								; count of bits into mantissa
 end if
@@ -2484,7 +2486,7 @@ else if x eq d
 end if
 		ret									; return temp
 ;---[Infinity branch]----------------------
-.inf:	initreg	result, temp, inf, x		; return +inf
+.inf:	initreg	result, temp, infval, x		; return +inf
 		ret
 ;---[Subnormal branch]---------------------
 .sub:	sub		temp, exp_zer				; if (index < exp_zer)
@@ -2529,14 +2531,14 @@ stack	equ		rsp							; stack pointer
 s_value	equ		stack - 2 * 8				; stack position of "value" variable
 s_scale	equ		stack - 1 * 8				; stack position of "scale" variable
 if x eq s
-mvalue	= MAGIC_FLT32						; magic number to get integer part from value
-inf		= PINF_FLT32						; +inf
+magval	= MAGIC_FLT32						; magic number to get integer part from value
+infval	= PINF_FLT32						; +inf
 moneval	= MONE_FLT32						; -1.0
 exp_min	= 0xC3150000						; min exponent value
 exp_max	= 0x42FE0000						; max exponent value
 else if x eq d
-mvalue	= MAGIC_FLT64						; magic number to get integer part from value
-inf		= PINF_FLT64						; +inf
+magval	= MAGIC_FLT64						; magic number to get integer part from value
+infval	= PINF_FLT64						; +inf
 moneval	= MONE_FLT64						; -1.0
 exp_min	= 0xC090C80000000000				; min exponent value
 exp_max	= 0x408FF80000000000				; max exponent value
@@ -2545,7 +2547,7 @@ ln2		= 0x3FE62E42FEFA39EF				; ln(2)
 ;------------------------------------------
 		initreg	max, treg, exp_max, x		; load max exponent value
 		initreg	min, treg, exp_min, x		; load max exponent value
-		initreg	magic, treg, mvalue, x		; load magic number
+		initreg	magic, treg, magval, x		; load magic number
 		movap#x	ipart, value				; ipart = value
 		comis#x	value, max					; if (value > max)
 		ja		.inf						;     return inf
@@ -2598,7 +2600,7 @@ else if x eq d
 		ret
 end if
 ;----[Return inf]--------------------------
-.inf:	initreg	value, treg, inf, x			; return +inf
+.inf:	initreg	value, treg, infval, x		; return +inf
 		ret
 ;----[Return zero]-------------------------
 .zero:	xorp#x	value, value				; return 0.0
@@ -2632,14 +2634,14 @@ stack	equ		rsp							; stack pointer
 s_value	equ		stack - 2 * 8				; stack position of "value" variable
 s_scale	equ		stack - 1 * 8				; stack position of "scale" variable
 if x eq s
-mvalue	= MAGIC_FLT32						; magic number to get integer part from value
-inf		= PINF_FLT32						; +inf
+magval	= MAGIC_FLT32						; magic number to get integer part from value
+infval	= PINF_FLT32						; +inf
 moneval	= MONE_FLT32						; -1.0
 exp_min	= 0xC3150000						; min exponent value
 exp_max	= 0x42FE0000						; max exponent value
 else if x eq d
-mvalue	= MAGIC_FLT64						; magic number to get integer part from value
-inf		= PINF_FLT64						; +inf
+magval	= MAGIC_FLT64						; magic number to get integer part from value
+infval	= PINF_FLT64						; +inf
 moneval	= MONE_FLT64						; -1.0
 exp_min	= 0xC090C80000000000				; min exponent value
 exp_max	= 0x408FF80000000000				; max exponent value
@@ -2649,7 +2651,7 @@ ln2		= 0x3FE62E42FEFA39EF				; ln(2)
 ;------------------------------------------
 		initreg	max, treg, exp_max, x		; load max exponent value
 		initreg	min, treg, exp_min, x		; load max exponent value
-		initreg	magic, treg, mvalue, x		; load magic number
+		initreg	magic, treg, magval, x		; load magic number
 		movap#x	ipart, value				; ipart = value
 		comis#x	value, max					; if (value > max)
 		ja		.inf						;     return inf
@@ -2706,7 +2708,7 @@ else if x eq d
 		ret
 end if
 ;----[Return inf]--------------------------
-.inf:	initreg	value, treg, inf, x			; return +inf
+.inf:	initreg	value, treg, infval, x		; return +inf
 		ret
 ;----[Return minus one]--------------------
 .mone:	initreg	value, treg, moneval, x		; return -1.0
@@ -2860,14 +2862,14 @@ stack	equ		rsp							; stack pointer
 s_value	equ		stack - 2 * 8				; stack position of "value" variable
 s_scale	equ		stack - 1 * 8				; stack position of "scale" variable
 if x eq s
-mvalue	= MAGIC_FLT32						; magic number to get integer part from value
-inf		= PINF_FLT32						; +inf
+magval	= MAGIC_FLT32						; magic number to get integer part from value
+infval	= PINF_FLT32						; +inf
 moneval	= MONE_FLT32						; -1.0
 exp_min	= 0xC2380000						; min exponent value
 exp_max	= 0x421C0000						; max exponent value
 else if x eq d
-mvalue	= MAGIC_FLT64						; magic number to get integer part from value
-inf		= PINF_FLT64						; +inf
+magval	= MAGIC_FLT64						; magic number to get integer part from value
+infval	= PINF_FLT64						; +inf
 moneval	= MONE_FLT64						; -1.0
 exp_min	= 0xC074400000000000				; min exponent value
 exp_max	= 0x4073500000000000				; max exponent value
@@ -2876,7 +2878,7 @@ ln10	= 0x3FF26BB1BBB55516				; ln(10) / 2
 ;------------------------------------------
 		initreg	max, treg, exp_max, x		; load max exponent value
 		initreg	min, treg, exp_min, x		; load max exponent value
-		initreg	magic, treg, mvalue, x		; load magic number
+		initreg	magic, treg, magval, x		; load magic number
 		movap#x	ipart, value				; ipart = value
 		comis#x	value, max					; if (value > max)
 		ja		.inf						;     return inf
@@ -2937,7 +2939,7 @@ else if x eq d
 		ret
 end if
 ;----[Return inf]--------------------------
-.inf:	initreg	value, treg, inf, x			; return +inf
+.inf:	initreg	value, treg, infval, x		; return +inf
 		ret
 ;----[Return zero]-------------------------
 .zero:	xorp#x	value, value				; return 0.0
@@ -2973,14 +2975,14 @@ stack	equ		rsp							; stack pointer
 s_value	equ		stack - 2 * 8				; stack position of "value" variable
 s_scale	equ		stack - 1 * 8				; stack position of "scale" variable
 if x eq s
-mvalue	= MAGIC_FLT32						; magic number to get integer part from value
-inf		= PINF_FLT32						; +inf
+magval	= MAGIC_FLT32						; magic number to get integer part from value
+infval	= PINF_FLT32						; +inf
 moneval	= MONE_FLT32						; -1.0
 exp_min	= 0xC2380000						; min exponent value
 exp_max	= 0x421C0000						; max exponent value
 else if x eq d
-mvalue	= MAGIC_FLT64						; magic number to get integer part from value
-inf		= PINF_FLT64						; +inf
+magval	= MAGIC_FLT64						; magic number to get integer part from value
+infval	= PINF_FLT64						; +inf
 moneval	= MONE_FLT64						; -1.0
 exp_min	= 0xC074400000000000				; min exponent value
 exp_max	= 0x4073500000000000				; max exponent value
@@ -2990,7 +2992,7 @@ ln10	= 0x3FF26BB1BBB55516				; ln(10) / 2
 ;------------------------------------------
 		initreg	max, treg, exp_max, x		; load max exponent value
 		initreg	min, treg, exp_min, x		; load max exponent value
-		initreg	magic, treg, mvalue, x		; load magic number
+		initreg	magic, treg, magval, x		; load magic number
 		movap#x	ipart, value				; ipart = value
 		comis#x	value, max					; if (value > max)
 		ja		.inf						;     return inf
@@ -3055,7 +3057,7 @@ else if x eq d
 		ret
 end if
 ;----[Return inf]--------------------------
-.inf:	initreg	value, treg, inf, x			; return +inf
+.inf:	initreg	value, treg, infval, x		; return +inf
 		ret
 ;----[Return minus one]--------------------
 .mone:	initreg	value, treg, moneval, x		; return -1.0
@@ -3208,14 +3210,14 @@ stack	equ		rsp							; stack pointer
 s_value	equ		stack - 2 * 8				; stack position of "value" variable
 s_scale	equ		stack - 1 * 8				; stack position of "scale" variable
 if x eq s
-mvalue	= MAGIC_FLT32						; magic number to get integer part from value
-inf		= PINF_FLT32						; +inf
+magval	= MAGIC_FLT32						; magic number to get integer part from value
+infval	= PINF_FLT32						; +inf
 moneval	= MONE_FLT32						; -1.0
 exp_min	= 0xC2D00000						; min exponent value
 exp_max	= 0x42B20000						; max exponent value
 else if x eq d
-mvalue	= MAGIC_FLT64						; magic number to get integer part from value
-inf		= PINF_FLT64						; +inf
+magval	= MAGIC_FLT64						; magic number to get integer part from value
+infval	= PINF_FLT64						; +inf
 moneval	= MONE_FLT64						; -1.0
 exp_min	= 0xC087500000000000				; min exponent value
 exp_max	= 0x4086300000000000				; max exponent value
@@ -3223,7 +3225,7 @@ end if
 ;------------------------------------------
 		initreg	max, treg, exp_max, x		; load max exponent value
 		initreg	min, treg, exp_min, x		; load max exponent value
-		initreg	magic, treg, mvalue, x		; load magic number
+		initreg	magic, treg, magval, x		; load magic number
 		movap#x	ipart, value				; ipart = value
 		comis#x	value, max					; if (value > max)
 		ja		.inf						;     return inf
@@ -3273,7 +3275,7 @@ else if x eq d
 		ret
 end if
 ;----[Return inf]--------------------------
-.inf:	initreg	value, treg, inf, x			; return +inf
+.inf:	initreg	value, treg, infval, x		; return +inf
 		ret
 ;----[Return zero]-------------------------
 .zero:	xorp#x	value, value				; return 0.0
@@ -3307,14 +3309,14 @@ stack	equ		rsp							; stack pointer
 s_value	equ		stack - 2 * 8				; stack position of "value" variable
 s_scale	equ		stack - 1 * 8				; stack position of "scale" variable
 if x eq s
-mvalue	= MAGIC_FLT32						; magic number to get integer part from value
-inf		= PINF_FLT32						; +inf
+magval	= MAGIC_FLT32						; magic number to get integer part from value
+infval	= PINF_FLT32						; +inf
 moneval	= MONE_FLT32						; -1.0
 exp_min	= 0xC2D00000						; min exponent value
 exp_max	= 0x42B20000						; max exponent value
 else if x eq d
-mvalue	= MAGIC_FLT64						; magic number to get integer part from value
-inf		= PINF_FLT64						; +inf
+magval	= MAGIC_FLT64						; magic number to get integer part from value
+infval	= PINF_FLT64						; +inf
 moneval	= MONE_FLT64						; -1.0
 exp_min	= 0xC087500000000000				; min exponent value
 exp_max	= 0x4086300000000000				; max exponent value
@@ -3323,7 +3325,7 @@ oneval	= PONE_FLT64						; +1.0
 ;------------------------------------------
 		initreg	max, treg, exp_max, x		; load max exponent value
 		initreg	min, treg, exp_min, x		; load max exponent value
-		initreg	magic, treg, mvalue, x		; load magic number
+		initreg	magic, treg, magval, x		; load magic number
 		movap#x	ipart, value				; ipart = value
 		comis#x	value, max					; if (value > max)
 		ja		.inf						;     return inf
@@ -3377,7 +3379,7 @@ else if x eq d
 		ret
 end if
 ;----[Return inf]--------------------------
-.inf:	initreg	value, treg, inf, x			; return +inf
+.inf:	initreg	value, treg, infval, x		; return +inf
 		ret
 ;----[Return minus one]--------------------
 .mone:	initreg	value, treg, moneval, x		; return -1.0
@@ -3495,10 +3497,10 @@ zero	equ		xmm2						; 0.0
 one		equ		xmm3						; 1.0
 if x eq s
 oneval	= PONE_FLT32						; +1.0
-nan		= DMASK_FLT32						; NaN
+nanval	= DMASK_FLT32						; NaN
 else if x eq d
 oneval	= PONE_FLT64						; +1.0
-nan		= DMASK_FLT64						; NaN
+nanval	= DMASK_FLT64						; NaN
 end if
 ;------------------------------------------
 		xorp#x	zero, zero					; zero = 0.0
@@ -3528,7 +3530,7 @@ end if
 .zero:	test	exp, exp					; if (exp != 0)
 		jz		@f							; then
 		ret									;     return 0
-@@:		initreg	base, treg, nan, x			; else
+@@:		initreg	base, treg, nanval, x		; else
 		ret									;     return NaN
 }
 
@@ -3771,7 +3773,7 @@ mask	equ		xmm2						; data mask
 half	equ		xmm3						; 0.5
 ;------------------------------------------
 if type = 1
-		movs#x	temp, value
+		movap#x	temp, value
 		andp#x	temp, mask
 		orp#x	temp, half					; temp = 0.5 * Sign (value)
 		adds#x	value, temp					; value += temp
@@ -3820,18 +3822,18 @@ value	equ		xmm0						; floating-point value to check
 result	equ		al							; result register
 if x eq d
 dmask	= DMASK_FLT32						; data mask
-nvalue	= NORM_FLT32						; min normal value
-ivalue	= PINF_FLT32						; +inf
+normval	= NORM_FLT32						; min normal value
+infval	= PINF_FLT32						; +inf
 else if x eq d
 dmask	= DMASK_FLT64						; data mask
-nvalue	= NORM_FLT64						; min normal value
-ivalue	= PINF_FLT64						; +inf
+normval	= NORM_FLT64						; min normal value
+infval	= PINF_FLT64						; +inf
 end if
 ;------------------------------------------
 		mov#x	temp, value					; temp = bit snapshot of value
 		mov		mask, dmask					; mask = dmask
-		mov		norm, nvalue				; norm = nvalue
-		mov		inf, ivalue - nvalue		; inf = ivalue - nvalue
+		mov		norm, normval				; norm = normval
+		mov		inf, infval - normval		; inf = infval - normval
 		and		temp, mask					; temp = Abs (temp)
 		sub		temp, norm					; temp -= norm
 		cmp		temp, inf					; if (temp < inf)
@@ -3847,15 +3849,15 @@ value	equ		xmm0						; floating-point value to check
 result	equ		al							; result register
 if x eq d
 dmask	= DMASK_FLT32						; data mask
-nvalue	= NORM_FLT32						; min normal value
+normval	= NORM_FLT32						; min normal value
 else if x eq d
 dmask	= DMASK_FLT64						; data mask
-nvalue	= NORM_FLT64						; min normal value
+normval	= NORM_FLT64						; min normal value
 end if
 ;------------------------------------------
 		mov#x	temp, value					; temp = bit snapshot of value
 		mov		mask, dmask					; mask = dmask
-		mov		norm, nvalue				; norm = nvalue
+		mov		norm, normval				; norm = normval
 		and		temp, mask					; temp = Abs (temp)
 		cmp		temp, norm					; if (temp < norm)
 		setb	result						;     then return true
@@ -3870,15 +3872,15 @@ value	equ		xmm0						; floating-point value to check
 result	equ		al							; result register
 if x eq d
 dmask	= DMASK_FLT32						; data mask
-ivalue	= PINF_FLT32						; +inf
+infval	= PINF_FLT32						; +inf
 else if x eq d
 dmask	= DMASK_FLT64						; data mask
-ivalue	= PINF_FLT64						; +inf
+infval	= PINF_FLT64						; +inf
 end if
 ;------------------------------------------
 		mov#x	temp, value					; temp = bit snapshot of value
 		mov		mask, dmask					; mask = dmask
-		mov		inf, ivalue					; inf = ivalue
+		mov		inf, infval					; inf = infval
 		and		temp, mask					; temp = Abs (temp)
 		cmp		temp, inf					; if (temp < inf)
 		setb	result						;     then return true
@@ -3893,15 +3895,15 @@ value	equ		xmm0						; floating-point value to check
 result	equ		al							; result register
 if x eq d
 dmask	= DMASK_FLT32						; data mask
-ivalue	= PINF_FLT32						; +inf
+infval	= PINF_FLT32						; +inf
 else if x eq d
 dmask	= DMASK_FLT64						; data mask
-ivalue	= PINF_FLT64						; +inf
+infval	= PINF_FLT64						; +inf
 end if
 ;------------------------------------------
 		mov#x	temp, value					; temp = bit snapshot of value
 		mov		mask, dmask					; mask = dmask
-		mov		inf, ivalue					; inf = ivalue
+		mov		inf, infval					; inf = infval
 		and		temp, mask					; temp = Abs (temp)
 		cmp		temp, inf					; if (temp == inf)
 		sete	result						;     then return true
@@ -3916,15 +3918,15 @@ value	equ		xmm0						; floating-point value to check
 result	equ		al							; result register
 if x eq d
 dmask	= DMASK_FLT32						; data mask
-ivalue	= PINF_FLT32						; +inf
+infval	= PINF_FLT32						; +inf
 else if x eq d
 dmask	= DMASK_FLT64						; data mask
-ivalue	= PINF_FLT64						; +inf
+infval	= PINF_FLT64						; +inf
 end if
 ;------------------------------------------
 		mov#x	temp, value					; temp = bit snapshot of value
 		mov		mask, dmask					; mask = dmask
-		mov		inf, ivalue					; inf = ivalue
+		mov		inf, infval					; inf = infval
 		and		temp, mask					; temp = Abs (temp)
 		cmp		temp, inf					; if (temp > inf)
 		seta	result						;     then return true
