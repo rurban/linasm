@@ -367,11 +367,11 @@ InitTable:
 array	equ		rdi							; pointer to array of nodes
 cap		equ		rsi							; hash table capacity
 ;---[Internal variables]-------------------
-temp	equ		rax							; temporary register
+treg	equ		rax							; temporary register
 value	equ		xmm0						; init value for hash table
 ;------------------------------------------
 		add		array, cap					; array += cap
-		initreg	value, temp, EMPTY			; ptr = EMPTY
+		initreg	value, treg, EMPTY			; ptr = EMPTY
 		clone	value, 3					; duplicate value through the entire register
 ;---[Initialization loop]------------------
 .loop:	movdqa	[array], value				; array[0] = {EMPTY, EMPTY}
@@ -488,7 +488,7 @@ space	= 5 * 8								; stack size required by the procedure
 		mov		qword [array + iter + BDIR], EMPTY
 		sub		qword [this + SIZE], NSIZE	; this.size--
 		movdqa	temp, [array + iter + NDATA]; temp = array[iter].data
-		call	InsertCoreMulti					; result = this.InsertCoreMulti (temp)
+		call	InsertCoreMulti				; result = this.InsertCoreMulti (temp)
 		mov		this, [s_this]				; get "this" variable from the stack
 		mov		fwd, [this + FWD]
 		cmp		fwd, [s_iter]				; if (fwd == iter)
@@ -908,7 +908,7 @@ end if
 InsertCoreMulti:	INSERT_CORE		0
 InsertCoreUnique:	INSERT_CORE		1
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	INSERT_ELEMENT	func
+macro	INSERT_ELEMENT	Func
 {
 ;---[Parameters]---------------------------
 this	equ		rdi							; pointer to hash table object
@@ -926,7 +926,7 @@ space	= 3 * 8								; stack size required by the procedure
 		je		.ext						;     then try to extend object capacity
 ;---[Normal execution branch]--------------
 .back:	movdqu	value, [data]				; value = data[0]
-		jmp		func						; call func (value)
+		jmp		Func						; call Func (value)
 ;---[Extend object capacity]---------------
 .ext:	sub		stack, space				; reserving stack size for local vars
 		mov		[s_this], this				; save "this" variable into the stack
@@ -1400,7 +1400,7 @@ result	equ		rax							; result register
 .error:	mov		result, EMPTY				; return EMPTY
 		ret
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	SET_ITERATOR1	func, offst
+macro	SET_ITERATOR1	Func, offst
 {
 ;---[Parameters]---------------------------
 this	equ		rdi							; pointer to hash table object
@@ -1420,7 +1420,7 @@ space	= 1 * 8								; stack size required by the procedure
 		mov		param2, [this + CAPACITY]
 		shr		param2, 1
 		mov		param1, [this + ARRAY]
-		call	func						; result = func (array, capacity / 2)
+		call	Func						; result = Func (array, capacity / 2)
 		mov		this, [s_this]				; get "this" variable from the stack
 		mov		[this + offst], result		; update iterator position
 		add		stack, space				; restoring back the stack pointer
@@ -1443,7 +1443,7 @@ temp	equ		rax							; temporary register
 		ret
 }
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	MOVE_ITERATOR	func, offst
+macro	MOVE_ITERATOR	Func, offst
 {
 ;---[Parameters]---------------------------
 this	equ		rdi							; pointer to hash table object
@@ -1469,7 +1469,7 @@ space	= 1 * 8								; stack size required by the procedure
 		mov		param2, [this + CAPACITY]
 		shr		param2, 1
 		mov		param1, [this + ARRAY]
-		call	func						; result = func (array, capacity / 2, iter, pos)
+		call	Func						; result = Func (array, capacity / 2, iter, pos)
 		mov		this, [s_this]				; get "this" variable from the stack
 		mov		[this + offst], result		; update iterator position
 		cmp		result, EMPTY				; if (result == EMPTY)
@@ -2071,7 +2071,7 @@ space	= 5 * 8								; stack size required by the procedure
 		add		stack, space				; restoring back the stack pointer
 		ret
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	FIND_DUP	func, offst
+macro	FIND_DUP	Func, offst
 {
 ;---[Parameters]---------------------------
 this	equ		rdi							; pointer to hash table object
@@ -2099,7 +2099,7 @@ space	= 3 * 8								; stack size required by the procedure
 		mov		param2, [this + CAPACITY]
 		shr		param2, 1
 		mov		param1, [this + ARRAY]
-		call	func						; result = func (array, capacity / 2, iter, func)
+		call	Func						; result = Func (array, capacity / 2, iter, func)
 		cmp		result, EMPTY				; if (result == EMPTY)
 		je		.ntfnd						;     return false
 ;---[Update iterator value]----------------

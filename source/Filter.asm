@@ -18,16 +18,16 @@ include	'Macro.inc'
 ;******************************************************************************;
 
 ; Sine
-extrn	'sinf'						as	Sin_flt32
-extrn	'sin'						as	Sin_flt64
+extrn	'Math_Sin_flt32'			as	Sin_flt32
+extrn	'Math_Sin_flt64'			as	Sin_flt64
 
 ; Cosine
-extrn	'cosf'						as	Cos_flt32
-extrn	'cos'						as	Cos_flt64
+extrn	'Math_Cos_flt32'			as	Cos_flt32
+extrn	'Math_Cos_flt64'			as	Cos_flt64
 
 ; Sine and Cosine
-extrn	'sincosf'					as	SinCos_flt32
-extrn	'sincos'					as	SinCos_flt64
+extrn	'Math_SinCos_flt32'			as	SinCos_flt32
+extrn	'Math_SinCos_flt64'			as	SinCos_flt64
 
 ;******************************************************************************;
 ;       Window functions                                                       ;
@@ -74,38 +74,38 @@ extrn	'Array_SumMul_flt64'		as	SumMul_flt64
 ;###############################################################################
 
 ; Array reflection
-public	PosReflect_flt32	as	'Reflect_flt32'
-public	PosReflect_flt64	as	'Reflect_flt64'
+public	PosReflect_flt32		as	'Reflect_flt32'
+public	PosReflect_flt64		as	'Reflect_flt64'
 
 ; Band-pass filter
-public	BandPass_flt32		as	'Filter_BandPass_flt32'
-public	BandPass_flt64		as	'Filter_BandPass_flt64'
-public	BandPass_flt32		as	'_ZN6Filter8BandPassEPfmff8window_t'
-public	BandPass_flt64		as	'_ZN6Filter8BandPassEPdmdd8window_t'
+public	BandPass_flt32			as	'Filter_BandPass_flt32'
+public	BandPass_flt64			as	'Filter_BandPass_flt64'
+public	BandPass_flt32			as	'_ZN6Filter8BandPassEPfmff8window_t'
+public	BandPass_flt64			as	'_ZN6Filter8BandPassEPdmdd8window_t'
 
 ; Band-stop filter
-public	BandStop_flt32		as	'Filter_BandStop_flt32'
-public	BandStop_flt64		as	'Filter_BandStop_flt64'
-public	BandStop_flt32		as	'_ZN6Filter8BandStopEPfmff8window_t'
-public	BandStop_flt64		as	'_ZN6Filter8BandStopEPdmdd8window_t'
+public	BandStop_flt32			as	'Filter_BandStop_flt32'
+public	BandStop_flt64			as	'Filter_BandStop_flt64'
+public	BandStop_flt32			as	'_ZN6Filter8BandStopEPfmff8window_t'
+public	BandStop_flt64			as	'_ZN6Filter8BandStopEPdmdd8window_t'
 
 ; Hilbert filter
-public	Hilbert_flt32		as	'Filter_Hilbert_flt32'
-public	Hilbert_flt64		as	'Filter_Hilbert_flt64'
-public	Hilbert_flt32		as	'_ZN6Filter7HilbertEPfmff8window_t'
-public	Hilbert_flt64		as	'_ZN6Filter7HilbertEPdmdd8window_t'
+public	Hilbert_flt32			as	'Filter_Hilbert_flt32'
+public	Hilbert_flt64			as	'Filter_Hilbert_flt64'
+public	Hilbert_flt32			as	'_ZN6Filter7HilbertEPfmff8window_t'
+public	Hilbert_flt64			as	'_ZN6Filter7HilbertEPdmdd8window_t'
 
 ; Differential filter
-public	Diff_flt32			as	'Filter_Diff_flt32'
-public	Diff_flt64			as	'Filter_Diff_flt64'
-public	Diff_flt32			as	'_ZN6Filter4DiffEPfmff8window_t'
-public	Diff_flt64			as	'_ZN6Filter4DiffEPdmdd8window_t'
+public	Diff_flt32				as	'Filter_Diff_flt32'
+public	Diff_flt64				as	'Filter_Diff_flt64'
+public	Diff_flt32				as	'_ZN6Filter4DiffEPfmff8window_t'
+public	Diff_flt64				as	'_ZN6Filter4DiffEPdmdd8window_t'
 
 ; Filter response
-public	Response_flt32		as	'Filter_Response_flt32'
-public	Response_flt64		as	'Filter_Response_flt64'
-public	Response_flt32		as	'_ZN6Filter8ResponseEPfPKfmS2_m'
-public	Response_flt64		as	'_ZN6Filter8ResponseEPdPKdmS2_m'
+public	Response_flt32			as	'Filter_Response_flt32'
+public	Response_flt64			as	'Filter_Response_flt64'
+public	Response_flt32			as	'_ZN6Filter8ResponseEPfPKfmS2_m'
+public	Response_flt64			as	'_ZN6Filter8ResponseEPdPKdmS2_m'
 
 ;###############################################################################
 ;#      Code section                                                           #
@@ -143,28 +143,16 @@ end if
 }
 
 ;******************************************************************************;
-;       Init XMM register with const                                           ;
-;******************************************************************************;
-macro	initreg	reg, treg, value, x
-{
-		mov		treg, value
-if x eq s
-		movd	reg, treg					; reg = value
-else if x eq d
-		movq	reg, treg					; reg = value
-end if
-}
-
-;******************************************************************************;
 ;       Reflection of left half of array                                       ;
 ;******************************************************************************;
-macro	REFLECT		treg, x, sign
+macro	REFLECT		sign, x
 {
 ;---[Parameters]---------------------------
 array	equ		rdi							; pointer to array
 size	equ		rsi							; array size (count of elements)
 ;---[Internal variables]-------------------
 ptr		equ		rax							; pointer to last element of array
+treg	equ		rdx							; temporary register
 temp	equ		xmm0						; temporary register
 mask	equ		xmm1						; sign mask for inverting sign
 if x eq s
@@ -179,7 +167,7 @@ end if
 		jz		.exit						;     then go to exit
 		lea		ptr, [array + size * bytes]	; ptr = array + size
 if sign										; # if sign variant, then
-		initreg	mask, treg, smask, x		;     mask = smask
+		initreg	mask, treg, smask			;     mask = smask
 end if										; # end
 ;---[Reflection loop]----------------------
 .loop:	sub		ptr, bytes					; ptr--
@@ -196,12 +184,12 @@ end if										; # end
 }
 
 ; Positive reflection
-PosReflect_flt32:	REFLECT		edx, s, 0
-PosReflect_flt64:	REFLECT		rdx, d, 0
+PosReflect_flt32:	REFLECT		0, s
+PosReflect_flt64:	REFLECT		0, d
 
 ; Negative reflection
-NegReflect_flt32:	REFLECT		edx, s, 1
-NegReflect_flt64:	REFLECT		rdx, d, 1
+NegReflect_flt32:	REFLECT		1, s
+NegReflect_flt64:	REFLECT		1, d
 
 ;******************************************************************************;
 ;       Sinc filter core                                                       ;
@@ -216,12 +204,12 @@ freq	equ		xmm0						; filter cutoff frequency
 stack	equ		rsp							; stack pointer
 value	equ		freq						; argument value
 if x eq s
-Sin		= Sin_flt32							; Sine function
-pival	= PI_FLT32							; Pi
+Sin		= Sin_flt32							; sine function
+pival	= PPI_FLT32							; +Pi
 bytes	= 4									; array element size (bytes)
 else if x eq d
-Sin		= Sin_flt64							; Sine function
-pival	= PI_FLT64							; Pi
+Sin		= Sin_flt64							; sine function
+pival	= PPI_FLT64							; +Pi
 bytes	= 8									; array element size (bytes)
 end if
 space	= 5 * 8								; stack size required by the procedure
@@ -276,12 +264,12 @@ hfreq	equ		xmm1						; filter high cutoff frequency
 stack	equ		rsp							; stack pointer
 value	equ		lfreq						; argument value
 if x eq s
-Cos		= Cos_flt32							; Cosine function
-pival	= PI_FLT32							; Pi
+Cos		= Cos_flt32							; cosine function
+pival	= PPI_FLT32							; +Pi
 bytes	= 4									; array element size (bytes)
 else if x eq d
-Cos		= Cos_flt32							; Cosine function
-pival	= PI_FLT64							; Pi
+Cos		= Cos_flt32							; cosine function
+pival	= PPI_FLT64							; +Pi
 bytes	= 8									; array element size (bytes)
 end if
 space	= 7 * 8								; stack size required by the procedure
@@ -311,11 +299,11 @@ s_pi	equ		stack + 6 * 8				; stack position of "pi" variable
 		adds#x	value, [s_pi]				; value += PI
 		movs#x	[s_value], value			; save "value" variable into the stack
 		muls#x	value, [s_hfreq]			; value *= hfreq
-		call	Cos							; call cos (value * hfreq)
+		call	Cos							; call Cos (value * hfreq)
 		movs#x	[s_temp], value				; save "temp" variable into the stack
 		movs#x	value, [s_value]			; get "value" variable from the stack
 		muls#x	value, [s_lfreq]			; value *= lfreq
-		call	Cos							; call cos (value * lfreq)
+		call	Cos							; call Cos (value * lfreq)
 		mov		filter, [s_filt]			; get "filter" variable from the stack
 		subs#x	value, [s_temp]				; value -= temp
 		sub		filter, bytes				; filter--
@@ -346,14 +334,14 @@ stack	equ		rsp							; stack pointer
 value	equ		lfreq						; argument value
 temp	equ		hfreq						; temporary register
 if x eq s
-SinCos	= SinCos_flt32						; Cosine function
-pival	= PI_FLT32							; Pi
-oneval	= PONE_FLT32						; 1.0
+SinCos	= SinCos_flt32						; cosine function
+pival	= PPI_FLT32							; +Pi
+oneval	= PONE_FLT32						; +1.0
 bytes	= 4									; array element size (bytes)
 else if x eq d
-SinCos	= SinCos_flt32						; Cosine function
-pival	= PI_FLT64							; Pi
-oneval	= PONE_FLT64						; 1.0
+SinCos	= SinCos_flt32						; cosine function
+pival	= PPI_FLT64							; +Pi
+oneval	= PONE_FLT64						; +1.0
 bytes	= 8									; array element size (bytes)
 end if
 space	= 15 * 8							; stack size required by the procedure
@@ -398,11 +386,11 @@ s_one	equ		stack + 13 * 8				; stack position of "one" variable
 		movap#x	[s_arg], value				; arg = {value * hfreq, value * lfreq}
 		lea		param1, [s_hsin]
 		lea		param2, [s_hcos]
-		call	SinCos						; call SinCos (value * hfreq, &hsin, &hcos)
+		call	SinCos						; call SinCos (&hsin, &hcos, value * hfreq)
 		movs#x	value, [s_arg + bytes]
 		lea		param1, [s_lsin]
 		lea		param2, [s_lcos]
-		call	SinCos						; call SinCos (value * lfreq, &lsin, &lcos)
+		call	SinCos						; call SinCos (&lsin, &lcos, value * hfreq)
 		movap#x	value, [s_hcos]				; value = {hcos, lcos}
 		movs#x	temp, [s_temp]				; get "temp" variable from the stack
 		mulp#x	value, [s_arg]				; value *= {value * hfreq, value * lfreq}
@@ -426,7 +414,7 @@ DiffCore_flt64:	DIFF	rax, d
 ;******************************************************************************;
 ;       Low-pass filter core                                                   ;
 ;******************************************************************************;
-macro	LOWPASS	treg, x
+macro	LOWPASS	x
 {
 ;---[Parameters]---------------------------
 filter	equ		rdi							; pointer to filter impulse array
@@ -434,6 +422,7 @@ size	equ		rsi							; array size (count of elements)
 window	equ		rdx							; window function
 freq	equ		xmm0						; filter cutoff frequency
 ;---[Internal variables]-------------------
+treg	equ		rax							; temporary register
 stack	equ		rsp							; stack pointer
 temp	equ		xmm1						; temporary register
 zero	equ		xmm2						; 0.0
@@ -444,18 +433,18 @@ s_size	equ		stack + 1 * 8				; stack position of "size" variable
 s_win	equ		stack + 2 * 8				; stack position of "window" variable
 space	= 3 * 8								; stack size required by the procedure
 if x eq s
-Sinc	= SincCore_flt32					; Sinc filter core
-ArrSum	= Sum_flt32							; Sum of elements
-ArrMul	= Mul_flt32							; Scalar multiplication of array
+Sinc	= SincCore_flt32					; sinc filter core
+Sum		= Sum_flt32							; sum of elements
+Norm	= Mul_flt32							; scalar multiplication of array
 win		= win_flt32							; array of window functions
-oneval	= PONE_FLT32						; 1.0
+oneval	= PONE_FLT32						; +1.0
 bytes	= 4									; array element size (bytes)
 else if x eq d
-Sinc	= SincCore_flt64					; Sinc filter core
-ArrSum	= Sum_flt64							; Sum of elements
-ArrMul	= Mul_flt64							; Scalar multiplication of array
+Sinc	= SincCore_flt64					; sinc filter core
+Sum		= Sum_flt64							; sum of elements
+Norm	= Mul_flt64							; scalar multiplication of array
 win		= win_flt64							; array of window functions
-oneval	= PONE_FLT64						; 1.0
+oneval	= PONE_FLT64						; +1.0
 bytes	= 8									; array element size (bytes)
 end if
 ;------------------------------------------
@@ -476,7 +465,7 @@ end if
 ;---[Get sum of impulse response]----------
 @@:		mov		filter, [s_filt]			; get "filter" variable from the stack
 		mov		size, [s_size]				; get "size" variable from the stack
-		call	ArrSum						; call Sum (filter, size)
+		call	Sum							; call Sum (filter, size)
 		mov		filter, [s_filt]			; get "filter" variable from the stack
 		mov		size, [s_size]				; get "size" variable from the stack
 		adds#x	value, value				; value *= 2
@@ -486,22 +475,22 @@ end if
 		xorp#x	zero, zero					; zero = 0
 		comis#x	temp, zero					; if (temp != 0)
 		je		@f							; {
-		initreg	one, treg, oneval, x		;     one = 1.0
+		initreg	one, treg, oneval			;     one = 1.0
 		add		size, 1						;     size++
 		movap#x	value, one					;     value = one / temp
-		divs#x	value, temp					;     call Mul (filter, size, value)
-		call	ArrMul						; }
+		divs#x	value, temp					;     call Norm (filter, size, value)
+		call	Norm						; }
 ;------------------------------------------
 @@:		add		stack, space				; restoring back the stack pointer
 		ret
 }
-LowPassCore_flt32:	LOWPASS	eax, s
-LowPassCore_flt64:	LOWPASS	rax, d
+LowPassCore_flt32:	LOWPASS	s
+LowPassCore_flt64:	LOWPASS	d
 
 ;******************************************************************************;
 ;       Band-pass/stop filter                                                  ;
 ;******************************************************************************;
-macro	BAND	treg, stop, x
+macro	BAND	stop, x
 {
 ;---[Parameters]---------------------------
 filter	equ		rdi							; pointer to filter impulse array
@@ -510,6 +499,7 @@ window	equ		rdx							; window function
 lfreq	equ		xmm0						; filter low cutoff frequency
 hfreq	equ		xmm1						; filter high cutoff frequency
 ;---[Internal variables]-------------------
+treg	equ		rax							; temporary register
 zero	equ		xmm2						; 0.0
 half	equ		xmm3						; 0.5
 one		equ		zero						; 1.0
@@ -522,23 +512,23 @@ s_win	equ		stack + 3 * 8				; stack position of "window" variable
 s_temp	equ		stack + 4 * 8				; stack position of "temp" variable
 space	= 5 * 8								; stack size required by the procedure
 if x eq s
-LowPass	= LowPassCore_flt32					; Low-pass filter core
-ArrSub	= Sub_flt32							; Vector subtraction of arrays
-PosRefl	= PosReflect_flt32					; Positive reflection
-halfval	= PHALF_FLT32						; 0.5
-oneval	= PONE_FLT32						; 1.0
+LowPass	= LowPassCore_flt32					; low-pass filter core
+ArrSub	= Sub_flt32							; vector subtraction of arrays
+PosRefl	= PosReflect_flt32					; positive reflection function
+halfval	= PHALF_FLT32						; +0.5
+oneval	= PONE_FLT32						; +1.0
 bytes	= 4									; array element size (bytes)
 else if x eq d
-LowPass	= LowPassCore_flt64					; Low-pass filter core
-ArrSub	= Sub_flt64							; Vector subtraction of arrays
-PosRefl	= PosReflect_flt64					; Positive reflection
-halfval	= PHALF_FLT64						; 0.5
-oneval	= PONE_FLT64						; 1.0
+LowPass	= LowPassCore_flt64					; low-pass filter core
+ArrSub	= Sub_flt64							; vector subtraction of arrays
+PosRefl	= PosReflect_flt64					; positive reflection function
+halfval	= PHALF_FLT64						; +0.5
+oneval	= PONE_FLT64						; +1.0
 bytes	= 8									; array element size (bytes)
 end if
 ;------------------------------------------
 		xorp#x	zero, zero					; zero = 0
-		initreg	half, treg, halfval, x		; half = 0.5
+		initreg	half, treg, halfval			; half = 0.5
 		comis#x	lfreq, zero					; if (0 <= lfreq
 		jb		.error
 		comis#x	hfreq, lfreq				;     && lfreq <= hfreq
@@ -579,7 +569,7 @@ end if
 		movs#x	value, [s_temp]				; get "temp" variable from the stack
 		shl		size, 1						; size *= 2
 if stop
-		initreg	one, treg, oneval, x		; one = 1.0
+		initreg	one, treg, oneval			; one = 1.0
 		adds#x	value, one					; temp += 1
 end if
 		subs#x	value, [filter + size*bytes]; filter[size] = temp - filter[2 * size]
@@ -596,17 +586,17 @@ end if
 }
 
 ; Band-pass filter
-BandPass_flt32:	BAND	eax, 0, s
-BandPass_flt64:	BAND	rax, 0, d
+BandPass_flt32:	BAND	0, s
+BandPass_flt64:	BAND	0, d
 
 ; Band-stop filter
-BandStop_flt32:	BAND	eax, 1, s
-BandStop_flt64:	BAND	rax, 1, d
+BandStop_flt32:	BAND	1, s
+BandStop_flt64:	BAND	1, d
 
 ;******************************************************************************;
 ;       Hilbert/Differential filter                                            ;
 ;******************************************************************************;
-macro	FILTER treg, func, x
+macro	FILTER Func, x
 {
 ;---[Parameters]---------------------------
 filter	equ		rdi							; pointer to filter impulse array
@@ -615,6 +605,7 @@ window	equ		rdx							; window function
 lfreq	equ		xmm0						; filter low cutoff frequency
 hfreq	equ		xmm1						; filter high cutoff frequency
 ;---[Internal variables]-------------------
+treg	equ		rax							; temporary register
 zero	equ		xmm2						; 0.0
 half	equ		xmm3						; 0.5
 bool	equ		al							; boolean result
@@ -623,19 +614,19 @@ s_size	equ		stack + 1 * 8				; stack position of "size" variable
 s_win	equ		stack + 2 * 8				; stack position of "window" variable
 space	= 3 * 8								; stack size required by the procedure
 if x eq s
-NegRefl	= NegReflect_flt32					; Negative reflection
+NegRefl	= NegReflect_flt32					; negative reflection function
 win		= win_flt32							; array of window functions
-halfval	= PHALF_FLT32						; 0.5
+halfval	= PHALF_FLT32						; +0.5
 bytes	= 4									; array element size (bytes)
 else if x eq d
-NegRefl	= NegReflect_flt64					; Negative reflection
+NegRefl	= NegReflect_flt64					; negative reflection function
 win		= win_flt64							; array of window functions
-halfval	= PHALF_FLT64						; 0.5
+halfval	= PHALF_FLT64						; +0.5
 bytes	= 8									; array element size (bytes)
 end if
 ;------------------------------------------
 		xorp#x	zero, zero					; zero = 0
-		initreg	half, treg, halfval, x		; half = 0.5
+		initreg	half, treg, halfval			; half = 0.5
 		comis#x	lfreq, zero					; if (0 <= lfreq
 		jb		.error
 		comis#x	hfreq, lfreq				;     && lfreq <= hfreq
@@ -649,7 +640,7 @@ end if
 		mov		[s_filt], filter			; save "filter" variable into the stack
 		mov		[s_size], size				; save "size" variable into the stack
 		mov		[s_win], window				; save "window" variable into the stack
-		call	func						; call func (filter, size, lfreq, hfreq)
+		call	Func						; call Func (filter, size, lfreq, hfreq)
 ;---[Apply window function]----------------
 		mov		window, [s_win]				; get "window" variable from the stack
 		test	window, window				; if (window != WIN_NONE)
@@ -673,12 +664,12 @@ end if
 }
 
 ; Hilbert filter
-Hilbert_flt32:	FILTER	eax, HilbertCore_flt32, s
-Hilbert_flt64:	FILTER	rax, HilbertCore_flt64, d
+Hilbert_flt32:	FILTER	HilbertCore_flt32, s
+Hilbert_flt64:	FILTER	HilbertCore_flt64, d
 
 ; Differential filter
-Diff_flt32:		FILTER	eax, DiffCore_flt32, s
-Diff_flt64:		FILTER	rax, DiffCore_flt64, d
+Diff_flt32:		FILTER	DiffCore_flt32, s
+Diff_flt64:		FILTER	DiffCore_flt64, d
 
 ;******************************************************************************;
 ;       Filter response                                                        ;
@@ -702,10 +693,10 @@ s_filt	equ		stack + 3 * 8				; stack position of "filt" variable
 s_fsize	equ		stack + 4 * 8				; stack position of "fsize" variable
 space	= 5 * 8								; stack size required by the procedure
 if x eq s
-Conv	= SumMul_flt32						; Convolution function
+Conv	= SumMul_flt32						; convolution function
 bytes	= 4									; array element size (bytes)
 else if x eq d
-Conv	= SumMul_flt64						; Convolution function
+Conv	= SumMul_flt64						; convolution function
 bytes	= 8									; array element size (bytes)
 end if
 ;------------------------------------------

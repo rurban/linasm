@@ -330,11 +330,6 @@ public	Hash64_char32			as	'_ZN6String6Hash64EPKi'
 section	'.text'		executable align 16
 
 ;******************************************************************************;
-;       Consts                                                                 ;
-;******************************************************************************;
-NO_SPACE	= -1							; No space in target string
-
-;******************************************************************************;
 ;       Set End Of Line (EOL) macro                                            ;
 ;******************************************************************************;
 macro	seteol	ptr, x
@@ -784,7 +779,7 @@ if scale <> 0
 end if
 ;---[No space exit branch]-----------------
 .nospc:	seteol	target, x					; clear target string
-		mov		index, NO_SPACE				; return NO_SPACE
+		mov		index, ERROR				; return ERROR
 		ret
 }
 CopyStr_char8:	COPY1	cl, b
@@ -918,7 +913,7 @@ if scale <> 0
 end if
 ;---[No space exit branch]-----------------
 .nospc:	seteol	target, x					; clear target string
-		mov		index, NO_SPACE				; return NO_SPACE
+		mov		index, ERROR				; return ERROR
 		ret
 }
 CopySeq_char8:	COPY2	cl, b
@@ -945,16 +940,16 @@ s_trgt	equ		stack + 0 * 8				; stack position of "target" variable
 s_mlen	equ		stack + 1 * 8				; stack position of "maxlen" variable
 s_src	equ		stack + 2 * 8				; stack position of "source" variable
 if x eq b
-length	= Len_char8							; string length function
-copy	= CopyStr_char8						; string copy function
+Length	= Len_char8							; string length function
+CopyStr	= CopyStr_char8						; string copy function
 scale	= 0									; scale value
 else if x eq w
-length	= Len_char16						; string length function
-copy	= CopyStr_char16					; string copy function
+Length	= Len_char16						; string length function
+CopyStr	= CopyStr_char16					; string copy function
 scale	= 1									; scale value
 else if x eq d
-length	= Len_char32						; string length function
-copy	= CopyStr_char32					; string copy function
+Length	= Len_char32						; string length function
+CopyStr	= CopyStr_char32					; string copy function
 scale	= 2									; scale value
 end if
 space	= 3 * 8								; stack size required by the procedure
@@ -964,7 +959,7 @@ bytes	= 1 shl scale						; size of element (bytes)
 		mov		[s_trgt], target			; save "target" variable into the stack
 		mov		[s_mlen], maxlen			; save "maxlen" variable into the stack
 		mov		[s_src], source				; save "source" variable into the stack
-		call	length						; len = Len (target)
+		call	Length						; len = Len (target)
 		mov		maxlen, [s_mlen]			; get "maxlen" variable from the stack
 		sub		maxlen, result				; if (maxlen - len < 0)
 		jb		.nospc						;     then go to no space branch
@@ -972,9 +967,9 @@ bytes	= 1 shl scale						; size of element (bytes)
 		lea		target, [target + result * bytes]
 		mov		source, [s_src]
 		add		stack, space				; restoring back the stack pointer
-		jmp		copy						; return Copy (target + len, maxlen - len, source)
+		jmp		CopyStr						; return CopyStr (target + len, maxlen - len, source)
 ;---[No space branch]----------------------
-.nospc:	mov		result, NO_SPACE			; return NO_SPACE
+.nospc:	mov		result, ERROR				; return ERROR
 		add		stack, space				; restoring back the stack pointer
 		ret
 }
@@ -1000,16 +995,16 @@ s_mlen	equ		stack + 1 * 8				; stack position of "maxlen" variable
 s_src	equ		stack + 2 * 8				; stack position of "source" variable
 s_size	equ		stack + 3 * 8				; stack position of "size" variable
 if x eq b
-length	= Len_char8							; string length function
-copy	= CopySeq_char8						; string copy function
+Length	= Len_char8							; string length function
+CopyStr	= CopySeq_char8						; string copy function
 scale	= 0									; scale value
 else if x eq w
-length	= Len_char16						; string length function
-copy	= CopySeq_char16					; string copy function
+Length	= Len_char16						; string length function
+CopyStr	= CopySeq_char16					; string copy function
 scale	= 1									; scale value
 else if x eq d
-length	= Len_char32						; string length function
-copy	= CopySeq_char32					; string copy function
+Length	= Len_char32						; string length function
+CopyStr	= CopySeq_char32					; string copy function
 scale	= 2									; scale value
 end if
 space	= 5 * 8								; stack size required by the procedure
@@ -1020,7 +1015,7 @@ bytes	= 1 shl scale						; size of element (bytes)
 		mov		[s_mlen], maxlen			; save "maxlen" variable into the stack
 		mov		[s_src], source				; save "source" variable into the stack
 		mov		[s_size], size				; save "size" variable into the stack
-		call	length						; len = Len (target)
+		call	Length						; len = Len (target)
 		mov		maxlen, [s_mlen]			; get "maxlen" variable from the stack
 		sub		maxlen, result				; if (maxlen - len < 0)
 		jb		.nospc						;     then go to no space branch
@@ -1029,9 +1024,9 @@ bytes	= 1 shl scale						; size of element (bytes)
 		mov		source, [s_src]
 		mov		size, [s_size]
 		add		stack, space				; restoring back the stack pointer
-		jmp		copy						; return Copy (target + len, maxlen - len, source, size)
+		jmp		CopyStr						; return CopyStr (target + len, maxlen - len, source, size)
 ;---[No space branch]----------------------
-.nospc:	mov		result, NO_SPACE			; return NO_SPACE
+.nospc:	mov		result, ERROR				; return ERROR
 		add		stack, space				; restoring back the stack pointer
 		ret
 }
@@ -1637,13 +1632,13 @@ table	equ		stack						; pattern table
 s_str	equ		stack + 0 * 8				; stack position of "string" variable
 s_smbls	equ		stack + 1 * 8				; stack position of "symbols" variable
 if x eq b
-length	= Len_char8							; string length function
+Length	= Len_char8							; string length function
 scale	= 0									; scale value
 else if x eq w
-length	= Len_char16						; string length function
+Length	= Len_char16						; string length function
 scale	= 1									; scale value
 else if x eq d
-length	= Len_char32						; string length function
+Length	= Len_char32						; string length function
 scale	= 2									; scale value
 end if
 space	= 3 * 8								; stack size required by the procedure
@@ -1664,7 +1659,7 @@ end if
 		mov		[s_str], string				; save "string" variable into the stack
 		mov		[s_smbls], symbols			; save "symbols" variable into the stack
 		mov		param1, symbols
-		call	length						; result = Len (symbols)
+		call	Length						; result = Len (symbols)
 		shl		result, VSCALE
 		mov		size, result				; size = result
 		mov		string, [s_str]				; get "string" variable from the stack
@@ -1810,13 +1805,13 @@ table	equ		stack						; pattern table
 s_str	equ		stack + 0 * 8				; stack position of "string" variable
 s_smbls	equ		stack + 1 * 8				; stack position of "symbols" variable
 if x eq b
-length	= Len_char8							; string length function
+Length	= Len_char8							; string length function
 scale	= 0									; scale value
 else if x eq w
-length	= Len_char16						; string length function
+Length	= Len_char16						; string length function
 scale	= 1									; scale value
 else if x eq d
-length	= Len_char32						; string length function
+Length	= Len_char32						; string length function
 scale	= 2									; scale value
 end if
 space	= 3 * 8								; stack size required by the procedure
@@ -1837,7 +1832,7 @@ end if
 		mov		[s_str], string				; save "string" variable into the stack
 		mov		[s_smbls], symbols			; save "symbols" variable into the stack
 		mov		param1, symbols
-		call	length						; result = Len (symbols)
+		call	Length						; result = Len (symbols)
 		shl		result, VSCALE
 		mov		size, result				; size = result
 		mov		string, [s_str]				; get "string" variable from the stack
@@ -1992,17 +1987,17 @@ s_ssize	equ		stack + 2 * 8				; stack position of string size variable
 s_psize	equ		stack + 3 * 8				; stack position of pattern size variable
 s_bmh	equ		stack + 4 * 8				; stack position of BMH object
 if x eq b
-length	= Len_char8							; string length function
-hash	= BMH8								; BMH pattern hash function
-find	= BMH_Find8							; BMH subsequence searching function
+Length	= Len_char8							; string length function
+Hash	= BMH8								; BMH pattern hash function
+Find	= BMH_Find8							; BMH subsequence searching function
 else if x eq w
-length	= Len_char16						; string length function
-hash	= BMH16								; BMH pattern hash function
-find	= BMH_Find16						; BMH subsequence searching function
+Length	= Len_char16						; string length function
+Hash	= BMH16								; BMH pattern hash function
+Find	= BMH_Find16						; BMH subsequence searching function
 else if x eq d
-length	= Len_char32						; string length function
-hash	= BMH32								; BMH pattern hash function
-find	= BMH_Find32						; BMH subsequence searching function
+Length	= Len_char32						; string length function
+Hash	= BMH32								; BMH pattern hash function
+Find	= BMH_Find32						; BMH subsequence searching function
 end if
 space	= 265 * 8							; stack size required by the procedure
 ;------------------------------------------
@@ -2011,13 +2006,13 @@ space	= 265 * 8							; stack size required by the procedure
 		mov		[s_patt], pattern			; save "pattern" variable into the stack
 ;---[Get pattern length]-------------------
 		mov		param1, pattern
-		call	length						; result = Len (pattern)
+		call	Length						; result = Len (pattern)
 		mov		[s_psize], result			; save pattern size into the stack
 		test	result, result				; if (len == 0)
 		jz		.ntfnd						;     then go to not found branch
 ;---[Get string length]--------------------
 		mov		param1, [s_str]
-		call	length						; result = Len (string)
+		call	Length						; result = Len (string)
 		mov		[s_ssize], result			; save string size into the stack
 		cmp		result, [s_psize]			; if (Len (string) < Len (pattern))
 		jb		.ntfnd						;     then go to not found branch
@@ -2030,12 +2025,12 @@ end if
 		mov		param3, [s_psize]			; pass pattern size to BMH constructor
 		mov		param2, [s_patt]			; pass pattern string to BMH constructor
 		lea		param1, [s_bmh]				; pass BMH object to BMH constructor
-		call	hash						; call BMH constructor
+		call	Hash						; call BMH constructor
 ;---[Call BMH search algorithm]------------
 		lea		param3, [s_bmh]				; pass BMH pattern to BMH search algorithm
 		mov		param2, [s_ssize]			; pass source string size to BMH search algorithm
 		mov		param1, [s_str]				; pass source string to BMH search algorithm
-		call	find						; call BMH search algorithm
+		call	Find						; call BMH search algorithm
 		add		stack, space				; restoring back the stack pointer
 		ret
 ;---[Error branch]-------------------------
@@ -2072,17 +2067,17 @@ s_ssize	equ		stack + 2 * 8				; stack position of string size variable
 s_psize	equ		stack + 3 * 8				; stack position of pattern size variable
 s_bmh	equ		stack + 4 * 8				; stack position of BMH object
 if x eq b
-length	= Len_char8							; string length function
-hash	= BMH8								; BMH pattern hash function
-find	= BMH_Find8							; BMH subsequence searching function
+Length	= Len_char8							; string length function
+Hash	= BMH8								; BMH pattern hash function
+Find	= BMH_Find8							; BMH subsequence searching function
 else if x eq w
-length	= Len_char16						; string length function
-hash	= BMH16								; BMH pattern hash function
-find	= BMH_Find16						; BMH subsequence searching function
+Length	= Len_char16						; string length function
+Hash	= BMH16								; BMH pattern hash function
+Find	= BMH_Find16						; BMH subsequence searching function
 else if x eq d
-length	= Len_char32						; string length function
-hash	= BMH32								; BMH pattern hash function
-find	= BMH_Find32						; BMH subsequence searching function
+Length	= Len_char32						; string length function
+Hash	= BMH32								; BMH pattern hash function
+Find	= BMH_Find32						; BMH subsequence searching function
 end if
 space	= 265 * 8							; stack size required by the procedure
 ;------------------------------------------
@@ -2092,7 +2087,7 @@ space	= 265 * 8							; stack size required by the procedure
 		mov		[s_patt], pattern			; save "pattern" variable into the stack
 ;---[Get pattern length]-------------------
 		mov		param1, pattern
-		call	length						; result = Len (pattern)
+		call	Length						; result = Len (pattern)
 		mov		[s_psize], result			; save pattern size into the stack
 		test	result, result				; if (len == 0)
 		jz		.ntfnd						;     then go to not found branch
@@ -2108,12 +2103,12 @@ end if
 		mov		param3, [s_psize]			; pass pattern size to BMH constructor
 		mov		param2, [s_patt]			; pass pattern string to BMH constructor
 		lea		param1, [s_bmh]				; pass BMH object to BMH constructor
-		call	hash						; call BMH constructor
+		call	Hash						; call BMH constructor
 ;---[Call BMH search algorithm]------------
 		lea		param3, [s_bmh]				; pass BMH pattern to BMH search algorithm
 		mov		param2, [s_ssize]			; pass source string size to BMH search algorithm
 		mov		param1, [s_str]				; pass source string to BMH search algorithm
-		call	find						; call BMH search algorithm
+		call	Find						; call BMH search algorithm
 		add		stack, space				; restoring back the stack pointer
 		ret
 ;---[Error branch]-------------------------
@@ -2275,13 +2270,13 @@ table	equ		stack						; pattern table
 s_str	equ		stack + 0 * 8				; stack position of "string" variable
 s_smbls	equ		stack + 1 * 8				; stack position of "symbols" variable
 if x eq b
-length	= Len_char8							; string length function
+Length	= Len_char8							; string length function
 scale	= 0									; scale value
 else if x eq w
-length	= Len_char16						; string length function
+Length	= Len_char16						; string length function
 scale	= 1									; scale value
 else if x eq d
-length	= Len_char32						; string length function
+Length	= Len_char32						; string length function
 scale	= 2									; scale value
 end if
 space	= 3 * 8								; stack size required by the procedure
@@ -2302,7 +2297,7 @@ end if
 		mov		[s_str], string				; save "string" variable into the stack
 		mov		[s_smbls], symbols			; save "symbols" variable into the stack
 		mov		param1, symbols
-		call	length						; count = Len (symbols)
+		call	Length						; count = Len (symbols)
 		mov		string, [s_str]				; get "string" variable from the stack
 		mov		symbols, [s_smbls]			; get "symbols" variable from the stack
 		shl		count, VSCALE
@@ -2645,7 +2640,7 @@ InsertSortKeyDsc:	INSERTSORT	g
 ;******************************************************************************;
 ;       Quick sort                                                             ;
 ;******************************************************************************;
-macro	QUICKSORT	insertsort, op1, op2
+macro	QUICKSORT	InsertSort, op1, op2
 {
 ;---[Parameters]---------------------------
 array	equ		rdi							; pointer to strings array
@@ -2684,7 +2679,7 @@ minsize	= 32								; min array size is aceptable for Quick sort
 		cmp		size, 1						; if (size <= 1)
 		jbe		.exit						;     then go to exit
 .start:	cmp		size, minsize				; if (size <= minsize)
-		jbe		insertsort					;     call insertsort (array, ptr, size, func)
+		jbe		InsertSort					;     call InsertSort (array, ptr, size, func)
 ;---[Normal execution branch]--------------
 		sub		stack, space				; reserving stack size for local vars
 		mov		[s_key1], key1				; save old value of "key1" variable
@@ -2787,7 +2782,7 @@ minsize	= 32								; min array size is aceptable for Quick sort
 		mov		key1, [s_key1]				; restore old value of "key1" variable
 		mov		key2, [s_key2]				; restore old value of "key2" variable
 		add		stack, space				; restoring back the stack pointer
-		jmp		insertsort					; call insertsort (array, ptr, size, func)
+		jmp		InsertSort					; call InsertSort (array, ptr, size, func)
 .exit:	ret
 }
 QuickSortKeyAsc:	QUICKSORT	InsertSortKeyAsc, l, g
@@ -2796,7 +2791,7 @@ QuickSortKeyDsc:	QUICKSORT	InsertSortKeyDsc, g, l
 ;******************************************************************************;
 ;       Merge sort                                                             ;
 ;******************************************************************************;
-macro	MERGESORT	insertsort, mergefunc
+macro	MERGESORT	InsertSort, MergeFunc
 {
 ;---[Parameters]---------------------------
 array	equ		rdi							; pointer to array of strings
@@ -2877,13 +2872,13 @@ minsize	= 32								; min array size is aceptable for Merge sort
 		mov		param2, [s_ptr]
 		mov		param1, array
 		add		stack, space				; restoring back the stack pointer
-		jmp		mergefunc					; call mergefunc (array, ptr, temp, tptr, size / 2, array + size / 2, ptr + size / 2, size - size / 2, func)
+		jmp		MergeFunc					; call MergeFunc (array, ptr, temp, tptr, size / 2, array + size / 2, ptr + size / 2, size - size / 2, func)
 ;---[Insert sort branch]-------------------
 .ins:	mov		param1, array
 		mov		param2, ptr
 		mov		param3, size
 		mov		param4, func
-		jmp		insertsort					; call insertsort (array, ptr, size, func)
+		jmp		InsertSort					; call InsertSort (array, ptr, size, func)
 .exit:	ret
 }
 MergeSortKeyAsc:	MERGESORT	InsertSortKeyAsc, MergeKeyCoreAsc
@@ -3021,7 +3016,7 @@ space	= 17 * 8							; stack size required by the procedure
 		jmp		Copy						; call Copy (tptr, sptr1, size1)
 }
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	MERGE_KEY	mergefunc
+macro	MERGE_KEY	MergeFunc
 {
 ;---[Parameters]---------------------------
 sptr2	equ		r10							; pointer to second source array of pointers to data
@@ -3036,7 +3031,7 @@ s_func	equ		stack + 3 * 8				; stack position of "func" variable
 		mov		sptr2, [s_sptr2]			; get "sptr2" variable from the stack
 		mov		size2, [s_size2]			; get "size2" variable from the stack
 		mov		func, [s_func]				; get "func" variable from the stack
-		jmp		mergefunc					; call mergefunc (tkey, tptr, skey1, sptr1, size1, skey2, sptr2, size2)
+		jmp		MergeFunc					; call MergeFunc (tkey, tptr, skey1, sptr1, size1, skey2, sptr2, size2)
 }
 
 ; Ascending sort order

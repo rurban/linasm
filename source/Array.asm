@@ -2977,13 +2977,13 @@ value	equ		xmm0						; register which holds value
 ;---[Internal variables]-------------------
 reg		equ		rdx							; register which holds value
 if x eq s
-func	= Init_int32						; function to call
+Func	= Init_int32						; function to call
 else if x eq d
-func	= Init_int64						; function to call
+Func	= Init_int64						; function to call
 end if
 ;------------------------------------------
 		movq	reg, value					; load mask
-		jmp		func						; call appropriate function
+		jmp		Func						; call Func (array, size, value)
 }
 
 ; Integer types
@@ -3178,17 +3178,17 @@ source	equ		rsi							; pointer to source array
 size	equ		rdx							; array size (count of elements)
 ;---[Internal variables]-------------------
 if x eq b
-CopyFwd	= CopyFwd8							; Copy in forward direction function
-CopyBwd	= CopyBwd8							; Copy in backward direction function
+CopyFwd	= CopyFwd8							; copy in forward direction function
+CopyBwd	= CopyBwd8							; copy in backward direction function
 else if x eq w
-CopyFwd	= CopyFwd16							; Copy in forward direction function
-CopyBwd	= CopyBwd16							; Copy in backward direction function
+CopyFwd	= CopyFwd16							; copy in forward direction function
+CopyBwd	= CopyBwd16							; copy in backward direction function
 else if x eq d
-CopyFwd	= CopyFwd32							; Copy in forward direction function
-CopyBwd	= CopyBwd32							; Copy in backward direction function
+CopyFwd	= CopyFwd32							; copy in forward direction function
+CopyBwd	= CopyBwd32							; copy in backward direction function
 else if x eq q
-CopyFwd	= CopyFwd64							; Copy in forward direction function
-CopyBwd	= CopyBwd64							; Copy in backward direction function
+CopyFwd	= CopyFwd64							; copy in forward direction function
+CopyBwd	= CopyBwd64							; copy in backward direction function
 end if
 ;------------------------------------------
 		cmp		target, source
@@ -3811,21 +3811,21 @@ array	equ		rdi							; pointer to array
 size	equ		rsi							; array size (count of elements)
 ;---[Internal variables]-------------------
 if x eq b
-func	= XorS8								; function to call
+Func	= XorS8								; function to call
 mask	= 0xFF								; mask to apply to all elements
 else if x eq w
-func	= XorS16							; function to call
+Func	= XorS16							; function to call
 mask	= 0xFFFF							; mask to apply to all elements
 else if x eq d
-func	= XorS32							; function to call
+Func	= XorS32							; function to call
 mask	= 0xFFFFFFFF						; mask to apply to all elements
 else if x eq q
-func	= XorS64							; function to call
+Func	= XorS64							; function to call
 mask	= 0xFFFFFFFFFFFFFFFF				; mask to apply to all elements
 end if
 ;------------------------------------------
 		mov		reg, mask					; load mask
-		jmp		func						; call appropriate function
+		jmp		Func						; call Func (array, size)
 }
 Not8:	NOT		dl, b
 Not16:	NOT		dx, w
@@ -3891,14 +3891,14 @@ XorV64:	INT_VECTOR	xor, rax, 0, q
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 ;       Negative value                                                         ;
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
-macro	ABS	func, reg, mask
+macro	ABS	Func, reg, mask
 {
 ;---[Parameters]---------------------------
 array	equ		rdi							; pointer to array
 size	equ		rsi							; array size (count of elements)
 ;------------------------------------------
 		mov		reg, mask					; load mask
-		jmp		func						; call appropriate function
+		jmp		Func						; call Func (array, size)
 }
 Neg_flt32:		ABS		XorS32, edx, SMASK_FLT32
 Neg_flt64:		ABS		XorS64, rdx, SMASK_FLT64
@@ -3937,12 +3937,12 @@ less	equ		xmm7						; less condition
 if x eq s
 poneval	= PONE_FLT32						; +1.0
 moneval	= MONE_FLT32						; -1.0
-nanval	= DMASK_FLT32						; NaN
+nanval	= PNAN_FLT32						; +NaN
 scale	= 2									; scale value
 else if x eq d
 poneval	= PONE_FLT64						; +1.0
 moneval	= MONE_FLT64						; -1.0
-nanval	= DMASK_FLT64						; NaN
+nanval	= PNAN_FLT64						; +NaN
 scale	= 3									; scale value
 end if
 bytes	= 1 shl scale						; size of array element (bytes)
@@ -4126,14 +4126,14 @@ end repeat
 ;---[Normal exit]--------------------------
 .exit:	ret
 }
-Sqr_flt32:		SQR		mul, s
-Sqr_flt64:		SQR		mul, d
+Sqr_flt32:	SQR		mul, s
+Sqr_flt64:	SQR		mul, d
 
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 ;       Square root                                                            ;
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
-Sqrt_flt32:		SQR		sqrt, s
-Sqrt_flt64:		SQR		sqrt, d
+Sqrt_flt32:	SQR		sqrt, s
+Sqrt_flt64:	SQR		sqrt, d
 
 ;==============================================================================;
 ;       Binary operations                                                      ;
@@ -5102,11 +5102,11 @@ inf		equ		xmm13						; infinity value
 result	equ		blend						; result register
 if x eq s
 dmask	= DMASK_FLT32						; data mask
-nanval	= DMASK_FLT32						; NaN
+nanval	= PNAN_FLT32						; +NaN
 scale	= 2									; scale value
 else if x eq d
 dmask	= DMASK_FLT64						; data mask
-nanval	= DMASK_FLT64						; NaN
+nanval	= PNAN_FLT64						; +NaN
 scale	= 3									; scale value
 end if
 bytes	= 1 shl scale						; size of array element (bytes)
@@ -6149,7 +6149,7 @@ space	= 5 * 8								; stack size required by the procedure
 ;==============================================================================;
 ;       Element counting                                                       ;
 ;==============================================================================;
-macro	COUNTBIN	func1, func2
+macro	COUNTBIN	Func1, Func2
 {
 ;---[Parameters]---------------------------
 array	equ		rdi							; pointer to array
@@ -6171,14 +6171,14 @@ space	= 5 * 8								; stack size required by the procedure
 		mov		[s_array], array			; save "array" variable into the stack
 		mov		[s_size], size				; save "size" variable into the stack
 		mov		[s_value], value			; save "value" variable into the stack
-		call	func1						; result = func1 (array, size, value)
+		call	Func1						; result = Func1 (array, size, value)
 		cmp		result, NOT_FOUND			; if (result == NOT_FOUND)
 		je		.ntfnd						;     return 0
 		mov		[s_res], result				; save "result" variable into the stack
 		mov		array, [s_array]			; get "array" variable from the stack
 		mov		size, [s_size]				; get "size" variable from the stack
 		mov		value, [s_value]			; get "value" variable from the stack
-		call	func2						; result = func2 (array, size, value)
+		call	Func2						; result = Func2 (array, size, value)
 		sub		result, [s_res]				; correct result
 		add		result, 1					; return result + 1
 		add		stack, space				; restoring back the stack pointer
@@ -6224,7 +6224,7 @@ CountDsc_sint64:	COUNTBIN	FindFirstEqualDsc_sint64, FindLastEqualDsc_sint64
 ;==============================================================================;
 ;       Object counting                                                        ;
 ;==============================================================================;
-macro	COUNTBIN_OBJ	func1, func2
+macro	COUNTBIN_OBJ	Func1, Func2
 {
 ;---[Parameters]---------------------------
 array	equ		rdi							; pointer to array
@@ -6249,7 +6249,7 @@ space	= 5 * 8								; stack size required by the procedure
 		mov		[s_size], size				; save "size" variable into the stack
 		mov		[s_value], value			; save "value" variable into the stack
 		mov		[s_func], func				; save "func" variable into the stack
-		call	func1						; result = func1 (array, size, value, func)
+		call	Func1						; result = Func1 (array, size, value, func)
 		cmp		result, NOT_FOUND			; if (result == NOT_FOUND)
 		je		.ntfnd						;     return 0
 		mov		[s_res], result				; save "result" variable into the stack
@@ -6257,7 +6257,7 @@ space	= 5 * 8								; stack size required by the procedure
 		mov		size, [s_size]				; get "size" variable from the stack
 		mov		value, [s_value]			; get "value" variable from the stack
 		mov		func, [s_func]				; get "func" variable from the stack
-		call	func2						; result = func2 (array, size, value, func)
+		call	Func2						; result = Func2 (array, size, value, func)
 		sub		result, [s_res]				; correct result
 		add		result, 1					; return result + 1
 		add		stack, space				; restoring back the stack pointer
@@ -6910,7 +6910,7 @@ bytes	= 1 shl scale						; size of array element (bytes)
 .exit:	ret
 }
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	SORT	sortfunc, x
+macro	SORT	SortFunc, x
 {
 ;---[Parameters]---------------------------
 array	equ		rdi							; pointer to array
@@ -6920,9 +6920,9 @@ stack	equ		rsp							; stack pointer
 s_array	equ		stack + 0 * 8				; stack position of "array" variable
 s_size	equ		stack + 1 * 8				; stack position of "size" variable
 if x eq s
-map		= Map_flt32							; map function
+Map		= Map_flt32							; map function
 else if x eq d
-map		= Map_flt64							; map function
+Map		= Map_flt64							; map function
 end if
 space	= 3 * 8								; stack size required by the procedure
 ;------------------------------------------
@@ -6930,15 +6930,15 @@ space	= 3 * 8								; stack size required by the procedure
 		mov		[s_array], array			; save "array" variable into the stack
 		mov		[s_size], size				; save "size" variable into the stack
 ;---[Convert array]------------------------
-		call	map							; call map (array, size)
+		call	Map							; call Map (array, size)
 ;---[Sort array]---------------------------
 		mov		array, [s_array]			; get "array" variable from the stack
 		mov		size, [s_size]				; get "size" variable from the stack
-		call	sortfunc					; call sorting function
+		call	SortFunc					; call SortFunc (array, size)
 ;---[Convert array]------------------------
 		mov		array, [s_array]			; get "array" variable from the stack
 		mov		size, [s_size]				; get "size" variable from the stack
-		call	map							; call map (array, size)
+		call	Map							; call Map (array, size)
 		add		stack, space				; restoring back the stack pointer
 		ret
 }
@@ -7025,7 +7025,7 @@ bytes	= 1 shl scale						; size of array element (bytes)
 .exit:	ret
 }
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	SORT_KEY	sortfunc, x
+macro	SORT_KEY	SortFunc, x
 {
 ;---[Parameters]---------------------------
 key		equ		rdi							; pointer to key array
@@ -7037,9 +7037,9 @@ s_key	equ		stack + 0 * 8				; stack position of "key" variable
 s_ptr	equ		stack + 1 * 8				; stack position of "ptr" variable
 s_size	equ		stack + 2 * 8				; stack position of "size" variable
 if x eq s
-map		= Map_flt32							; map function
+Map		= Map_flt32							; map function
 else if x eq d
-map		= Map_flt64							; map function
+Map		= Map_flt64							; map function
 end if
 space	= 3 * 8								; stack size required by the procedure
 ;------------------------------------------
@@ -7050,16 +7050,16 @@ space	= 3 * 8								; stack size required by the procedure
 ;---[Convert array]------------------------
 		mov		param2, size
 		mov		param1, key
-		call	map							; call map (key, size)
+		call	Map							; call Map (key, size)
 ;---[Sort array]---------------------------
 		mov		param3, [s_size]
 		mov		param2, [s_ptr]
 		mov		param1, [s_key]
-		call	sortfunc					; call sortfunc (key, ptr, size)
+		call	SortFunc					; call SortFunc (key, ptr, size)
 ;---[Convert array]------------------------
 		mov		param2, [s_size]
 		mov		param1, [s_key]
-		call	map							; call map (key, size)
+		call	Map							; call Map (key, size)
 		add		stack, space				; restoring back the stack pointer
 		ret
 }
@@ -7186,7 +7186,7 @@ InsertSortDsc:	INSERTSORT_OBJ	g
 ;==============================================================================;
 ;       Regular array sorting                                                  ;
 ;==============================================================================;
-macro	QUICKSORT	insertsort, median, key1, key2, op1, op2, scale
+macro	QUICKSORT	InsertSort, median, key1, key2, op1, op2, scale
 {
 ;---[Parameters]---------------------------
 array	equ		rdi							; pointer to array
@@ -7209,7 +7209,7 @@ bytes	= 1 shl scale						; size of array element (bytes)
 		cmp		size, 1						; if (size <= 1)
 		jbe		.exit						;     then go to exit
 .start:	cmp		size, minsize				; if (size <= minsize)
-		jbe		insertsort					;     call insertsort (array, size)
+		jbe		InsertSort					;     call InsertSort (array, size)
 ;---[Sorting loop]-------------------------
 .loop:	mov		half, size
 		shr		half, 1						; half = size / 2
@@ -7269,7 +7269,7 @@ bytes	= 1 shl scale						; size of array element (bytes)
 .end:	cmp		size, minsize
 		ja		.loop						; do while (size > minsize)
 ;---[Insert sort]--------------------------
-		jmp		insertsort					; call insertsort (array, size)
+		jmp		InsertSort					; call InsertSort (array, size)
 .exit:	ret
 }
 
@@ -7316,7 +7316,7 @@ QuickSortDsc_flt64:		SORT	QuickSortDsc_sint64, d
 ;==============================================================================;
 ;       Key array sorting                                                      ;
 ;==============================================================================;
-macro	QUICKSORT_KEY	insertsort, median, key1, key2, op1, op2, scale
+macro	QUICKSORT_KEY	InsertSort, median, key1, key2, op1, op2, scale
 {
 ;---[Parameters]---------------------------
 array	equ		rdi							; pointer to array
@@ -7345,7 +7345,7 @@ bytes	= 1 shl scale						; size of array element (bytes)
 		cmp		size, 1						; if (size <= 1)
 		jbe		.exit						;     then go to exit
 .start:	cmp		size, minsize				; if (size <= minsize)
-		jbe		insertsort					;     call insertsort (array, ptr, size)
+		jbe		InsertSort					;     call InsertSort (array, ptr, size)
 ;---[Sorting loop]-------------------------
 .loop:	mov		half, size
 		shr		half, 1						; half = size / 2
@@ -7417,7 +7417,7 @@ bytes	= 1 shl scale						; size of array element (bytes)
 .end:	cmp		size, minsize
 		ja		.loop						; do while (size > minsize)
 ;---[Insert sort]--------------------------
-		jmp		insertsort					; call insertsort (array, ptr, size)
+		jmp		InsertSort					; call InsertSort (array, ptr, size)
 .exit:	ret
 }
 
@@ -7464,7 +7464,7 @@ QuickSortKeyDsc_flt64:	SORT_KEY	QuickSortKeyDsc_sint64, d
 ;==============================================================================;
 ;       Object array sorting                                                   ;
 ;==============================================================================;
-macro	QUICKSORT_OBJ	insertsort, op1, op2
+macro	QUICKSORT_OBJ	InsertSort, op1, op2
 {
 ;---[Parameters]---------------------------
 array	equ		rdi							; pointer to object array
@@ -7497,7 +7497,7 @@ minsize	= 32								; min array size is aceptable for Quick sort
 		cmp		size, 1						; if (size <= 1)
 		jbe		.exit						;     then go to exit
 .start:	cmp		size, minsize				; if (size <= minsize)
-		jbe		insertsort					;     call insertsort (array, size, func)
+		jbe		InsertSort					;     call InsertSort (array, size, func)
 ;---[Normal execution branch]--------------
 		sub		stack, space				; reserving stack size for local vars
 		mov		[s_key1], key1				; save old value of "key1" variable
@@ -7586,7 +7586,7 @@ minsize	= 32								; min array size is aceptable for Quick sort
 		mov		key1, [s_key1]				; restore old value of "key1" variable
 		mov		key2, [s_key2]				; restore old value of "key2" variable
 		add		stack, space				; restoring back the stack pointer
-		jmp		insertsort					; call insertsort (array, size, func)
+		jmp		InsertSort					; call InsertSort (array, size, func)
 .exit:	ret
 }
 
@@ -7607,7 +7607,7 @@ QuickSortDsc:	QUICKSORT_OBJ	InsertSortDsc, g, l
 ;==============================================================================;
 ;       Regular array sorting                                                  ;
 ;==============================================================================;
-macro	MERGESORT	insertsort, mergefunc, scale
+macro	MERGESORT	InsertSort, MergeFunc, scale
 {
 ;---[Parameters]---------------------------
 array	equ		rdi							; pointer to array
@@ -7619,13 +7619,13 @@ s_array	equ		stack + 0 * 8				; stack position of "array" variable
 s_temp	equ		stack + 1 * 8				; stack position of "temp" variable
 s_size	equ		stack + 2 * 8				; stack position of "size" variable
 if scale = 0
-copy	= CopyFwd8							; copy function
+Copy	= CopyFwd8							; copy function
 else if scale = 1
-copy	= CopyFwd16							; copy function
+Copy	= CopyFwd16							; copy function
 else if scale = 2
-copy	= CopyFwd32							; copy function
+Copy	= CopyFwd32							; copy function
 else if scale = 3
-copy	= CopyFwd64							; copy function
+Copy	= CopyFwd64							; copy function
 end if
 space	= 3 * 8								; stack size required by the procedure
 minsize	= 32								; min array size is aceptable for Merge sort
@@ -7658,7 +7658,7 @@ bytes	= 1 shl scale						; size of array element (bytes)
 		mov		param3, size
 		mov		param2, [s_array]
 		mov		param1, [s_temp]
-		call	copy						; call copy (temp, array, size / 2)
+		call	Copy						; call Copy (temp, array, size / 2)
 ;---[Merge sorted arrays]------------------
 		mov		array, [s_array]			; get "array" variable from the stack
 		mov		temp, [s_temp]				; get "temp" variable from the stack
@@ -7672,15 +7672,15 @@ bytes	= 1 shl scale						; size of array element (bytes)
 		mov		param2, temp
 		mov		param1, array
 		add		stack, space				; restoring back the stack pointer
-		jmp		mergefunc					; call mergefunc (array, temp, size / 2, array + size / 2, size - size / 2)
+		jmp		MergeFunc					; call MergeFunc (array, temp, size / 2, array + size / 2, size - size / 2)
 ;---[Insert sort branch]-------------------
 .ins:	mov		param1, array
 		mov		param2, size
-		jmp		insertsort					; call insertsort (array, size)
+		jmp		InsertSort					; call InsertSort (array, size)
 .exit:	ret
 }
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	SORT1	sortfunc, x
+macro	SORT1	SortFunc, x
 {
 ;---[Parameters]---------------------------
 array	equ		rdi							; pointer to array
@@ -7692,9 +7692,9 @@ s_array	equ		stack + 0 * 8				; stack position of "array" variable
 s_temp	equ		stack + 1 * 8				; stack position of "temp" variable
 s_size	equ		stack + 2 * 8				; stack position of "size" variable
 if x eq s
-map		= Map_flt32							; map function
+Map		= Map_flt32							; map function
 else if x eq d
-map		= Map_flt64							; map function
+Map		= Map_flt64							; map function
 end if
 space	= 3 * 8								; stack size required by the procedure
 ;------------------------------------------
@@ -7705,16 +7705,16 @@ space	= 3 * 8								; stack size required by the procedure
 ;---[Convert array]------------------------
 		mov		param1, array
 		mov		param2, size
-		call	map							; call map (array, size)
+		call	Map							; call Map (array, size)
 ;---[Sort array]---------------------------
 		mov		array, [s_array]			; get "array" variable from the stack
 		mov		temp, [s_temp]				; get "temp" variable from the stack
 		mov		size, [s_size]				; get "size" variable from the stack
-		call	sortfunc					; call sorting function
+		call	SortFunc					; call SortFunc (array, temp, size)
 ;---[Convert array]------------------------
 		mov		param1, [s_array]			; get "array" variable from the stack
 		mov		param2, [s_size]			; get "size" variable from the stack
-		call	map							; call map (array, size)
+		call	Map							; call Map (array, size)
 		add		stack, space				; restoring back the stack pointer
 		ret
 }
@@ -7762,7 +7762,7 @@ MergeSortDsc_flt64:		SORT1	MergeSortDsc_sint64, d
 ;==============================================================================;
 ;       Key array sorting                                                      ;
 ;==============================================================================;
-macro	MERGESORT_KEY	insertsort, mergefunc, scale
+macro	MERGESORT_KEY	InsertSort, MergeFunc, scale
 {
 ;---[Parameters]---------------------------
 array	equ		rdi							; pointer to array
@@ -7778,13 +7778,13 @@ s_ptr	equ		stack + 2 * 8				; stack position of "ptr" variable
 s_tptr	equ		stack + 3 * 8				; stack position of "tptr" variable
 s_size	equ		stack + 4 * 8				; stack position of "size" variable
 if scale = 0
-copy	= CopyFwd8							; copy function
+Copy	= CopyFwd8							; copy function
 else if scale = 1
-copy	= CopyFwd16							; copy function
+Copy	= CopyFwd16							; copy function
 else if scale = 2
-copy	= CopyFwd32							; copy function
+Copy	= CopyFwd32							; copy function
 else if scale = 3
-copy	= CopyFwd64							; copy function
+Copy	= CopyFwd64							; copy function
 end if
 space	= 5 * 8								; stack size required by the procedure
 minsize	= 32								; min array size is aceptable for Merge sort
@@ -7828,7 +7828,7 @@ bytes	= 1 shl scale						; size of array element (bytes)
 		mov		param3, size
 		mov		param2, [s_array]
 		mov		param1, [s_temp]
-		call	copy						; call copy (temp, array, size / 2)
+		call	Copy						; call Copy (temp, array, size / 2)
 ;---[Merge sorted arrays]------------------
 		mov		array, [s_array]			; get "array" variable from the stack
 		mov		temp, [s_temp]				; get "temp" variable from the stack
@@ -7847,16 +7847,16 @@ bytes	= 1 shl scale						; size of array element (bytes)
 		mov		param2, [s_ptr]
 		mov		param1, array
 		add		stack, space				; restoring back the stack pointer
-		jmp		mergefunc					; call mergefunc (array, ptr, temp, tptr, size / 2, array + size / 2, ptr + size / 2, size - size / 2)
+		jmp		MergeFunc					; call MergeFunc (array, ptr, temp, tptr, size / 2, array + size / 2, ptr + size / 2, size - size / 2)
 ;---[Insert sort branch]-------------------
 .ins:	mov		param1, array
 		mov		param2, ptr
 		mov		param3, size
-		jmp		insertsort					; call insertsort (array, ptr, size)
+		jmp		InsertSort					; call InsertSort (array, ptr, size)
 .exit:	ret
 }
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	SORT1_KEY	sortfunc, x
+macro	SORT1_KEY	SortFunc, x
 {
 ;---[Parameters]---------------------------
 key		equ		rdi							; pointer to key array
@@ -7872,9 +7872,9 @@ s_ptr	equ		stack + 2 * 8				; stack position of "ptr" variable
 s_tptr	equ		stack + 3 * 8				; stack position of "tptr" variable
 s_size	equ		stack + 4 * 8				; stack position of "size" variable
 if x eq s
-map		= Map_flt32							; map function
+Map		= Map_flt32							; map function
 else if x eq d
-map		= Map_flt64							; map function
+Map		= Map_flt64							; map function
 end if
 space	= 5 * 8								; stack size required by the procedure
 ;------------------------------------------
@@ -7887,18 +7887,18 @@ space	= 5 * 8								; stack size required by the procedure
 ;---[Convert array]------------------------
 		mov		param2, size
 		mov		param1, key
-		call	map							; call map (key, size)
+		call	Map							; call Map (key, size)
 ;---[Sort array]---------------------------
 		mov		param5, [s_size]
 		mov		param4, [s_tptr]
 		mov		param3, [s_ptr]
 		mov		param2, [s_tkey]
 		mov		param1, [s_key]
-		call	sortfunc					; call sortfunc (key, tkey, ptr, tptr, size)
+		call	SortFunc					; call SortFunc (key, tkey, ptr, tptr, size)
 ;---[Convert array]------------------------
 		mov		param2, [s_size]
 		mov		param1, [s_key]
-		call	map							; call map (key, size)
+		call	Map							; call Map (key, size)
 		add		stack, space				; restoring back the stack pointer
 		ret
 }
@@ -7946,7 +7946,7 @@ MergeSortKeyDsc_flt64:	SORT1_KEY	MergeSortKeyDsc_sint64, d
 ;==============================================================================;
 ;       Object array sorting                                                   ;
 ;==============================================================================;
-macro	MERGESORT_OBJ	insertsort, mergefunc
+macro	MERGESORT_OBJ	InsertSort, MergeFunc
 {
 ;---[Parameters]---------------------------
 array	equ		rdi							; pointer to object array
@@ -8007,12 +8007,12 @@ minsize	= 32								; min array size is aceptable for Merge sort
 		mov		param2, temp
 		mov		param1, array
 		add		stack, space				; restoring back the stack pointer
-		jmp		mergefunc					; call mergefunc (array, temp, size / 2, array + size / 2, size - size / 2, func)
+		jmp		MergeFunc					; call MergeFunc (array, temp, size / 2, array + size / 2, size - size / 2, func)
 ;---[Insert sort branch]-------------------
 .ins:	mov		param1, array
 		mov		param2, size
 		mov		param3, func
-		jmp		insertsort					; call insertsort (array, size, func)
+		jmp		InsertSort					; call InsertSort (array, size, func)
 .exit:	ret
 }
 
@@ -8215,7 +8215,7 @@ Stage64:	SORTSTAGE	rax, 3
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 ;       Radix sort core                                                        ;
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
-macro	RADIXSORT_CORE	order1, order2, scale
+macro	RADIXSORT_CORE	Order1, Order2, scale
 {
 ;---[Parameters]---------------------------
 array	equ		rdi							; pointer to source array
@@ -8229,17 +8229,17 @@ s_array	equ		stack + stat_sz + 0 * 8		; stack position of "array" variable
 s_temp	equ		stack + stat_sz + 1 * 8		; stack position of "temp" variable
 s_size	equ		stack + stat_sz + 2 * 8		; stack position of "size" variable
 if scale = 0
-stat	= Stat8								; stat function
-stage	= Stage8							; stage function
+Stat	= Stat8								; stat function
+Stage	= Stage8							; stage function
 else if scale = 1
-stat	= Stat16							; stat function
-stage	= Stage16							; stage function
+Stat	= Stat16							; stat function
+Stage	= Stage16							; stage function
 else if scale = 2
-stat	= Stat32							; stat function
-stage	= Stage32							; stage function
+Stat	= Stat32							; stat function
+Stage	= Stage32							; stage function
 else if scale = 3
-stat	= Stat64							; stat function
-stage	= Stage64							; stage function
+Stat	= Stat64							; stat function
+Stage	= Stage64							; stage function
 end if
 space	= stat_sz + 3 * 8					; stack size required by the procedure
 ;------------------------------------------
@@ -8250,7 +8250,7 @@ space	= stat_sz + 3 * 8					; stack size required by the procedure
 ;---[Collect statistics]-------------------
 		mov		param2, size
 		mov		param3, stack
-		call	stat						; call Statistics (array, size, stack);
+		call	Stat						; call Stat (array, size, stack);
 ;---[Sort partial keys]--------------------
 if bytes = 1
 		mov		param1, [s_temp]
@@ -8262,38 +8262,38 @@ i = 0
 while i < bytes - 1
 	if i mod 2 = 0
 		lea		param1, [stack + i * 256 * 8]
-		call	order1						; call order1 (stack[i])
+		call	Order1						; call Order1 (stack[i])
 		mov		param1, [s_temp]
 		mov		param2, [s_array]
 		mov		param3, [s_size]
 		lea		param4, [stack + i * 256 * 8]
 		mov		param5, i
-		call	stage						; call stage (temp, array, size, stack[i], i)
+		call	Stage						; call Stage (temp, array, size, stack[i], i)
 	else
 		lea		param1, [stack + i * 256 * 8]
-		call	order1						; call order1 (stack[i])
+		call	Order1						; call Order1 (stack[i])
 		mov		param1, [s_array]
 		mov		param2, [s_temp]
 		mov		param3, [s_size]
 		lea		param4, [stack + i * 256 * 8]
 		mov		param5, i
-		call	stage						; call stage (array, temp, size, stack[i], i)
+		call	Stage						; call Stage (array, temp, size, stack[i], i)
 	end if
 	i = i + 1
 end while
 		lea		param1, [stack + i * 256 * 8]
-		call	order2						; call order2 (stack[i])
+		call	Order2						; call Order2 (stack[i])
 		mov		param1, [s_array]
 		mov		param2, [s_temp]
 		mov		param3, [s_size]
 		lea		param4, [stack + i * 256 * 8]
 		mov		param5, i
-		call	stage						; call stage (array, temp, size, stack[i], i)
+		call	Stage						; call Stage (array, temp, size, stack[i], i)
 		add		stack, space				; restoring back the stack pointer
 		ret
 }
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	RADIXSORT_INT	sortfunc
+macro	RADIXSORT_INT	SortFunc
 {
 ;---[Parameters]---------------------------
 array	equ		rdi							; pointer to source array
@@ -8303,11 +8303,11 @@ size	equ		rdx							; size of array
 		cmp		size, 1						; if (size <= 1)
 		jbe		.exit						;     then go to exit from the procedure
 ;---[Call sort function]-------------------
-		jmp		sortfunc					; call sorting function
+		jmp		SortFunc					; call SortFunc (array, temp, size)
 .exit:	ret
 }
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	RADIXSORT_FLT	sortfunc, x
+macro	RADIXSORT_FLT	SortFunc, x
 {
 ;---[Parameters]---------------------------
 array	equ		rdi							; pointer to source array
@@ -8320,9 +8320,9 @@ s_array	equ		stack + 0 * 8				; stack position of "array" variable
 s_temp	equ		stack + 1 * 8				; stack position of "temp" variable
 s_size	equ		stack + 2 * 8				; stack position of "size" variable
 if x eq s
-map		= Map_flt32							; map function
+Map		= Map_flt32							; map function
 else if x eq d
-map		= Map_flt64							; map function
+Map		= Map_flt64							; map function
 end if
 space	= 3 * 8								; stack size required by the procedure
 ;------------------------------------------
@@ -8334,16 +8334,16 @@ space	= 3 * 8								; stack size required by the procedure
 		mov		[s_size], size				; save "size" variable into the stack
 ;---[Convert array]------------------------
 		mov		csize, size
-		call	map							; call map (array, size)
+		call	Map							; call Map (array, size)
 ;---[Sort array]---------------------------
 		mov		array, [s_array]			; get "array" variable from the stack
 		mov		temp, [s_temp]				; get "temp" variable from the stack
 		mov		size, [s_size]				; get "size" variable from the stack
-		call	sortfunc					; call sorting function
+		call	SortFunc					; call SortFunc (array, temp, size)
 ;---[Convert array]------------------------
 		mov		array, [s_array]			; get "array" variable from the stack
 		mov		csize, [s_size]				; get "size" variable from the stack
-		call	map							; call map (array, size)
+		call	Map							; call Map (array, size)
 		add		stack, space				; restoring back the stack pointer
 .exit:	ret
 }
@@ -8449,7 +8449,7 @@ StageKey64:	SORTSTAGE_KEY	rax, 3
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 ;       Radix sort core                                                        ;
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
-macro	RADIXSORT_KEY_CORE	order1, order2, scale
+macro	RADIXSORT_KEY_CORE	Order1, Order2, scale
 {
 ;---[Parameters]---------------------------
 key		equ		rdi							; pointer to key array
@@ -8467,17 +8467,17 @@ s_ptr	equ		stack + stat_sz + 2 * 8		; stack position of "ptr" variable
 s_tptr	equ		stack + stat_sz + 3 * 8		; stack position of "tptr" variable
 s_size	equ		stack + stat_sz + 4 * 8		; stack position of "size" variable
 if scale = 0
-stat	= Stat8								; stat function
-stage	= Stage8							; stage function
+Stat	= Stat8								; stat function
+Stage	= Stage8							; stage function
 else if scale = 1
-stat	= Stat16							; stat function
-stage	= Stage16							; stage function
+Stat	= Stat16							; stat function
+Stage	= Stage16							; stage function
 else if scale = 2
-stat	= Stat32							; stat function
-stage	= Stage32							; stage function
+Stat	= Stat32							; stat function
+Stage	= Stage32							; stage function
 else if scale = 3
-stat	= Stat64							; stat function
-stage	= Stage64							; stage function
+Stat	= Stat64							; stat function
+Stage	= Stage64							; stage function
 end if
 space	= stat_sz + 5 * 8					; stack size required by the procedure
 ;------------------------------------------
@@ -8490,7 +8490,7 @@ space	= stat_sz + 5 * 8					; stack size required by the procedure
 ;---[Collect statistics]-------------------
 		mov		param2, size
 		mov		param3, stack
-		call	stat						; call Statistics (key, size, stack);
+		call	Stat						; call Stat (key, size, stack);
 ;---[Sort partial keys]--------------------
 if bytes = 1
 		mov		param1, [s_tkey]
@@ -8506,7 +8506,7 @@ i = 0
 while i < bytes - 1
 	if i mod 2 = 0
 		lea		param1, [stack + i * 256 * 8]
-		call	order1						; call order1 (stack[i])
+		call	Order1						; call Order1 (stack[i])
 		mov		param1, [s_tkey]
 		mov		param2, [s_key]
 		mov		param3, [s_tptr]
@@ -8514,10 +8514,10 @@ while i < bytes - 1
 		mov		param5, [s_size]
 		lea		param6, [stack + i * 256 * 8]
 		mov		param7, i
-		call	stage						; call stage (tkey, key, tptr, ptr, size, stack[i], i)
+		call	Stage						; call Stage (tkey, key, tptr, ptr, size, stack[i], i)
 	else
 		lea		param1, [stack + i * 256 * 8]
-		call	order1						; call order1 (stack[i])
+		call	Order1						; call Order1 (stack[i])
 		mov		param1, [s_key]
 		mov		param2, [s_tkey]
 		mov		param3, [s_ptr]
@@ -8525,12 +8525,12 @@ while i < bytes - 1
 		mov		param5, [s_size]
 		lea		param6, [stack + i * 256 * 8]
 		mov		param7, i
-		call	stage						; call stage (key, tkey, ptr, tptr, size, stack[i], i)
+		call	Stage						; call Stage (key, tkey, ptr, tptr, size, stack[i], i)
 	end if
 	i = i + 1
 end while
 		lea		param1, [stack + i * 256 * 8]
-		call	order2						; call order2 (stack[i])
+		call	Order2						; call Order2 (stack[i])
 		mov		param1, [s_key]
 		mov		param2, [s_tkey]
 		mov		param3, [s_ptr]
@@ -8538,12 +8538,12 @@ end while
 		mov		param5, [s_size]
 		lea		param6, [stack + i * 256 * 8]
 		mov		param7, i
-		call	stage						; call stage (key, tkey, ptr, tptr, size, stack[i], i)
+		call	Stage						; call Stage (key, tkey, ptr, tptr, size, stack[i], i)
 		add		stack, space				; restoring back the stack pointer
 		ret
 }
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	RADIXSORT_KEY_INT	sortfunc
+macro	RADIXSORT_KEY_INT	SortFunc
 {
 ;---[Parameters]---------------------------
 key		equ		rdi							; pointer to key array
@@ -8555,11 +8555,11 @@ size	equ		r8							; size of array
 		cmp		size, 1						; if (size <= 1)
 		jbe		.exit						; then go to exit from the procedure
 ;---[Call sort function]-------------------
-		jmp		sortfunc					; call sorting function
+		jmp		SortFunc					; call SortFunc (key, tkey, ptr, tptr, size)
 .exit:	ret
 }
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	RADIXSORT_KEY_FLT	sortfunc, x
+macro	RADIXSORT_KEY_FLT	SortFunc, x
 {
 ;---[Parameters]---------------------------
 key		equ		rdi							; pointer to key array
@@ -8576,9 +8576,9 @@ s_ptr	equ		stack + 2 * 8				; stack position of "ptr" variable
 s_tptr	equ		stack + 3 * 8				; stack position of "tptr" variable
 s_size	equ		stack + 4 * 8				; stack position of "size" variable
 if x eq s
-map		= Map_flt32							; map function
+Map		= Map_flt32							; map function
 else if x eq d
-map		= Map_flt64							; map function
+Map		= Map_flt64							; map function
 end if
 space	= 5 * 8								; stack size required by the procedure
 ;------------------------------------------
@@ -8592,18 +8592,18 @@ space	= 5 * 8								; stack size required by the procedure
 		mov		[s_size], size				; save "size" variable into the stack
 ;---[Convert array]------------------------
 		mov		csize, size
-		call	map							; call map (key, size)
+		call	Map							; call Map (key, size)
 ;---[Sort array]---------------------------
 		mov		key, [s_key]				; get "key" variable from the stack
 		mov		tkey, [s_tkey]				; get "tkey" variable from the stack
 		mov		ptr, [s_ptr]				; get "ptr" variable from the stack
 		mov		tptr, [s_tptr]				; get "tptr" variable from the stack
 		mov		size, [s_size]				; get "size" variable from the stack
-		call	sortfunc					; call sorting function
+		call	SortFunc					; call SortFunc (key, tkey, ptr, tptr, size)
 ;---[Convert array]------------------------
 		mov		key, [s_key]				; get "key" variable from the stack
 		mov		csize, [s_size]				; get "size" variable from the stack
-		call	map							; call map (key, size)
+		call	Map							; call Map (key, size)
 		add		stack, space				; restoring back the stack pointer
 .exit:	ret
 }
@@ -8690,13 +8690,13 @@ s_sz1m	equ		stack - 3 * 8				; stack position of "size1m" variable
 s_src2p	equ		stack - 2 * 8				; stack position of "src2p" variable
 s_sz2m	equ		stack - 1 * 8				; stack position of "size2m" variable
 if scale = 0
-copy	= CopyFwd8							; copy function
+Copy	= CopyFwd8							; copy function
 else if scale = 1
-copy	= CopyFwd16							; copy function
+Copy	= CopyFwd16							; copy function
 else if scale = 2
-copy	= CopyFwd32							; copy function
+Copy	= CopyFwd32							; copy function
 else if scale = 3
-copy	= CopyFwd64							; copy function
+Copy	= CopyFwd64							; copy function
 end if
 bytes	= 1 shl scale						; size of array element (bytes)
 ;------------------------------------------
@@ -8733,11 +8733,11 @@ bytes	= 1 shl scale						; size of array element (bytes)
 .copy1:	mov		param1, target
 		mov		param2, src2
 		mov		param3, size2
-		jmp		copy						; call Copy (target, src2, size2)
+		jmp		Copy						; call Copy (target, src2, size2)
 .copy2:	mov		param1, target
 		mov		param2, src1
 		mov		param3, size1
-		jmp		copy						; call Copy (target, src1, size1)
+		jmp		Copy						; call Copy (target, src1, size1)
 }
 
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
@@ -8809,13 +8809,13 @@ s_size1	equ		stack + 12 * 8				; stack position of "size1" variable
 s_sptr2	equ		stack + 13 * 8				; stack position of "sptr2" variable
 s_size2	equ		stack + 14 * 8				; stack position of "size2" variable
 if scale = 0
-copy	= CopyFwd8							; copy function
+Copy	= CopyFwd8							; copy function
 else if scale = 1
-copy	= CopyFwd16							; copy function
+Copy	= CopyFwd16							; copy function
 else if scale = 2
-copy	= CopyFwd32							; copy function
+Copy	= CopyFwd32							; copy function
 else if scale = 3
-copy	= CopyFwd64							; copy function
+Copy	= CopyFwd64							; copy function
 end if
 space	= 15 * 8							; stack size required by the procedure
 bytes	= 1 shl scale						; size of array element (bytes)
@@ -8871,7 +8871,7 @@ bytes	= 1 shl scale						; size of array element (bytes)
 		mov		param1, tkey
 		mov		param2, skey2
 		mov		param3, size2
-		call	copy						; call Copy (tkey, skey2, size2)
+		call	Copy						; call Copy (tkey, skey2, size2)
 		mov		param1, [s_tptr]
 		mov		param2, [s_sptr2]
 		mov		param3, [s_size2]
@@ -8887,7 +8887,7 @@ bytes	= 1 shl scale						; size of array element (bytes)
 		mov		param1, tkey
 		mov		param2, skey1
 		mov		param3, size1
-		call	copy						; call Copy (tkey, skey1, size1)
+		call	Copy						; call Copy (tkey, skey1, size1)
 		mov		param1, [s_tptr]
 		mov		param2, [s_sptr1]
 		mov		param3, [s_size1]
@@ -8899,7 +8899,7 @@ bytes	= 1 shl scale						; size of array element (bytes)
 		jmp		CopyFwd64					; call Copy (tptr, sptr1, size1)
 }
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	MERGE_KEY	mergefunc
+macro	MERGE_KEY	MergeFunc
 {
 ;---[Parameters]---------------------------
 sptr2	equ		r10							; pointer to second source array of pointers to data
@@ -8911,7 +8911,7 @@ s_size2	equ		stack + 2 * 8				; stack position of "size2" variable
 ;------------------------------------------
 		mov		sptr2, [s_sptr2]			; get "sptr2" variable from the stack
 		mov		size2, [s_size2]			; get "size2" variable from the stack
-		jmp		mergefunc					; call mergefunc (tkey, tptr, skey1, sptr1, size1, skey2, sptr2, size2)
+		jmp		MergeFunc					; call MergeFunc (tkey, tptr, skey1, sptr1, size1, skey2, sptr2, size2)
 }
 
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
@@ -9063,7 +9063,7 @@ MergeDsc:	MERGE	ge
 ;******************************************************************************;
 ;       Comparison of arrays                                                   ;
 ;******************************************************************************;
-macro	COMPARE	func, value, c1, c2, scale
+macro	COMPARE	Func, value, c1, c2, scale
 {
 ;---[Parameters]---------------------------
 array1	equ		rdi							; pointer to first array
@@ -9083,7 +9083,7 @@ space	= 3 * 8								; stack size required by the procedure
 		je		.equal						;     then go to equal branch
 		mov		[s_arr1], array1			; save "array1" variable into the stack
 		mov		[s_arr2], array2			; save "array2" variable into the stack
-		call	func						; result = func (array1, array2, size)
+		call	Func						; result = Func (array1, array2, size)
 		cmp		result, NOT_FOUND			; if (result == NOT_FOUND)
 		je		.exit						;     return 0
 		mov		array1, [s_arr1]			; get "array1" variable from the stack
@@ -9568,11 +9568,11 @@ mask	equ		xmm1						; mask to get absolute value
 pattern	equ		xmm2						; pattern to find
 if x eq d
 dmask	= DMASK_FLT32						; data mask
-infval	= PINF_FLT32						; +inf
+infval	= PINF_FLT32						; +Inf
 scale	= 2									; scale value
 else if x eq q
 dmask	= DMASK_FLT64						; data mask
-infval	= PINF_FLT64						; +inf
+infval	= PINF_FLT64						; +Inf
 scale	= 3									; scale value
 end if
 bytes	= 1 shl scale						; size of array element (bytes)

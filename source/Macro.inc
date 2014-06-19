@@ -26,13 +26,19 @@ ERROR			= -1						; Error value
 ;       flt32_t consts                                                         ;
 ;==============================================================================;
 
-; Data and sign mask
-DMASK_FLT32		= 0x7FFFFFFF				; Data mask and NaN value
+; Masks
+DMASK_FLT32		= 0x7FFFFFFF				; Data mask
 SMASK_FLT32		= 0x80000000				; Sign mask
+EMASK_FLT32		= 0x7F800000				; Exponent mask
+MMASK_FLT32		= 0x007FFFFF				; Mantissa mask
+
+; Not a number
+PNAN_FLT32		= 0x7FC00000				; +NaN
+MNAN_FLT32		= 0xFFC00000				; -NaN
 
 ; Infinity
-PINF_FLT32		= 0x7F800000				; +inf
-MINF_FLT32		= 0xFF800000				; -inf
+PINF_FLT32		= 0x7F800000				; +Inf
+MINF_FLT32		= 0xFF800000				; -Inf
 
 ; One
 PONE_FLT32		= 0x3F800000				; +1.0
@@ -43,21 +49,34 @@ PHALF_FLT32		= 0x3F000000				; +0.5
 MHALF_FLT32		= 0xBF000000				; -0.5
 
 ; Pi
-PI_FLT32		= 0x40490FDB				; Pi
+PPI_FLT32		= 0x40490FDB				; +Pi
+MPI_FLT32		= 0xC0490FDB				; -Pi
 PI_TWO_FLT32	= 0x40C90FDB				; 2 * Pi
 PI_HALF_FLT32	= 0x3FC90FDB				; Pi / 2
+PI_FOUR_FLT32	= 0x3F490FDB				; Pi / 4
+
+; Misc
+NORM_FLT32		= 0x00800000				; Min normal value
+MBITS_FLT32		= 23						; Count of bits into mantissa
+EBIAS_FLT32		= 127						; Exponent bias
 
 ;==============================================================================;
 ;       flt64_t consts                                                         ;
 ;==============================================================================;
 
-; Data and sign mask
-DMASK_FLT64		= 0x7FFFFFFFFFFFFFFF		; Data mask and NaN value
+; Masks
+DMASK_FLT64		= 0x7FFFFFFFFFFFFFFF		; Data mask
 SMASK_FLT64		= 0x8000000000000000		; Sign mask
+EMASK_FLT64		= 0x7FF0000000000000		; Exponent mask
+MMASK_FLT64		= 0x000FFFFFFFFFFFFF		; Mantissa mask
+
+; Not a number
+PNAN_FLT64		= 0x7FF8000000000000		; +NaN
+MNAN_FLT64		= 0xFFF8000000000000		; -NaN
 
 ; Infinity
-PINF_FLT64		= 0x7FF0000000000000		; +inf
-MINF_FLT64		= 0xFFF0000000000000		; -inf
+PINF_FLT64		= 0x7FF0000000000000		; +Inf
+MINF_FLT64		= 0xFFF0000000000000		; -Inf
 
 ; One
 PONE_FLT64		= 0x3FF0000000000000		; +1.0
@@ -68,22 +87,29 @@ PHALF_FLT64		= 0x3FE0000000000000		; +0.5
 MHALF_FLT64		= 0xBFE0000000000000		; -0.5
 
 ; Pi
-PI_FLT64		= 0x400921FB54442D18		; Pi
+PPI_FLT64		= 0x400921FB54442D18		; +Pi
+MPI_FLT64		= 0xC00921FB54442D18		; -Pi
 PI_TWO_FLT64	= 0x401921FB54442D18		; 2 * Pi
 PI_HALF_FLT64	= 0x3FF921FB54442D18		; Pi / 2
+PI_FOUR_FLT64	= 0x3FE921FB54442D18		; Pi / 4
+
+; Misc
+NORM_FLT64		= 0x0010000000000000		; Min normal value
+MBITS_FLT64		= 52						; Count of bits into mantissa
+EBIAS_FLT64		= 1023						; Exponent bias
 
 ;******************************************************************************;
 ;       Function call parameters                                               ;
 ;******************************************************************************;
-param1	equ		rdi			; register to pass 1 parameter to function
-param2	equ		rsi			; register to pass 2 parameter to function
-param3	equ		rdx			; register to pass 3 parameter to function
-param4	equ		rcx			; register to pass 4 parameter to function
-param5	equ		r8			; register to pass 5 parameter to function
-param6	equ		r9			; register to pass 6 parameter to function
-param7	equ		r10			; register to pass 7 parameter to function
-param8	equ		r11			; register to pass 8 parameter to function
-param9	equ		rax			; register to pass 9 parameter to function
+param1	equ		rdi							; register to pass 1 parameter
+param2	equ		rsi							; register to pass 2 parameter
+param3	equ		rdx							; register to pass 3 parameter
+param4	equ		rcx							; register to pass 4 parameter
+param5	equ		r8							; register to pass 5 parameter
+param6	equ		r9							; register to pass 6 parameter
+param7	equ		r10							; register to pass 7 parameter
+param8	equ		r11							; register to pass 8 parameter
+param9	equ		rax							; register to pass 9 parameter
 
 ;******************************************************************************;
 ;       Clone value through the entire register                                ;
@@ -113,7 +139,7 @@ end if
 macro	initreg	reg, treg, value
 {
 		mov		treg, value
-		movq	reg, treg
+		movq	reg, treg					; reg = value
 }
 
 ;******************************************************************************;
@@ -125,7 +151,7 @@ if x eq s
 		haddp#x	reg, reg
 		haddp#x	reg, reg
 else if x eq d
-		haddp#x	reg, reg
+		haddp#x	reg, reg					; reg = summa (reg)
 end if
 }
 

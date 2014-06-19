@@ -7,6 +7,7 @@
 ;# License: LGPLv3+                              Copyleft (Ɔ) 2014, Jack Black #
 ;###############################################################################
 format	ELF64
+include	'Macro.inc'
 
 ;###############################################################################
 ;#      Import section                                                         #
@@ -146,11 +147,6 @@ public	DecToNum_uint64		as	'_ZN7Numbers8DecToNumEPmPKc'
 ;#      Code section                                                           #
 ;###############################################################################
 section	'.text'		executable align 16
-
-;******************************************************************************;
-;       Consts                                                                 ;
-;******************************************************************************;
-NOT_FOUND	= -1							; Number is not found
 
 ;******************************************************************************;
 ;       Skip white symbols macro                                               ;
@@ -354,7 +350,7 @@ local	.loop, .exit
 ;******************************************************************************;
 ;       Scaling mantissa value macro                                           ;
 ;******************************************************************************;
-macro	SCALE	func, x
+macro	SCALE	Func, x
 {
 ;---[Internal variables]-------------------
 power	equ		rdi							; scale power
@@ -369,7 +365,7 @@ space	= 3 * 8								; stack size required by the procedure
 		mov		[s_ptr], ptr				; save "ptr" variable into the stack
 		mov		[s_str], string				; save "string" variable into the stack
 		mov		power, exp
-		call	func						; call Scale (mantis)
+		call	Func						; call Scale (mantis)
 		mov		p_num, [s_num]				; get "p_num" variable from the stack
 		mov		ptr, [s_ptr]				; get "ptr" variable from the stack
 		mov		string, [s_str]				; get "string" variable from the stack
@@ -592,12 +588,12 @@ mant	equ		xmm0						; mantissa value
 base	equ		xmm1						; base of numeral system
 s_ptr	equ		rsp - 1 * 8					; stack position of "ptr" variable
 if x eq s
-infval	= inf_flt32
-nanval	= nan_flt32
+infval	= inf_flt32							; inf values array
+nanval	= nan_flt32							; nan values array
 bytes	= 4
 else if x eq d
-infval	= inf_flt64
-nanval	= nan_flt64
+infval	= inf_flt64							; inf values array
+nanval	= nan_flt64							; nan values array
 bytes	= 8
 end if
 ;---[Skipping white-symbols]---------------
@@ -769,12 +765,12 @@ hex_range	dq	5											; range of digits
 hex_shift	dq	10											; shift value
 
 ; flt32_t
-inf_flt32	dd	0xFF800000, 0x7F800000						; -inf, +inf
-nan_flt32	dd	0xFFC00000, 0x7FC00000						; -nan, +nan
+inf_flt32	dd	MINF_FLT32, PINF_FLT32						; -Inf, +Inf
+nan_flt32	dd	MNAN_FLT32, PNAN_FLT32						; -NaN, +NaN
 
 ; flt64_t
-inf_flt64	dq	0xFFF0000000000000, 0x7FF0000000000000		; -inf, +inf
-nan_flt64	dq	0xFFF8000000000000, 0x7FF8000000000000		; -nan, +nan
+inf_flt64	dq	MINF_FLT64, PINF_FLT64						; -Inf, +Inf
+nan_flt64	dq	MNAN_FLT64, PNAN_FLT64						; -NaN, +NaN
 
 ;###############################################################################
 ;#                                 END OF FILE                                 #

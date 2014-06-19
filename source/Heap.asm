@@ -1374,7 +1374,7 @@ space	= 13 * 8							; stack size required by the procedure
 MakeHeapMin:	MAKE_HEAP	le
 MakeHeapMax:	MAKE_HEAP	ge
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	MERGE	heapfunc
+macro	MERGE	HeapFunc
 {
 ;---[Parameters]---------------------------
 this	equ		rdi							; pointer to target heap object
@@ -1421,7 +1421,7 @@ space	= 3 * 8								; stack size required by the procedure
 		mov		param3, [this + KFUNC]
 		mov		param2, [this + SIZE]
 		mov		param1, [this + ARRAY]
-		call	heapfunc					; call heapfunc (array, size, kfunc, ifunc)
+		call	HeapFunc					; call HeapFunc (array, size, kfunc, ifunc)
 ;---[Normal exit branch]-------------------
 .exit:	mov		result, [s_size]			; get "size" variable from the stack
 		shr		result, KSCALE				; return result

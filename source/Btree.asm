@@ -1477,7 +1477,7 @@ space	= 1 * 8								; stack size required by the procedure
 ;******************************************************************************;
 ;       Copying elements                                                       ;
 ;******************************************************************************;
-macro	COPY_MOVE	insfunc, movefunc, offst, bwd, move
+macro	COPY_MOVE	InsFunc, MoveFunc, offst, bwd, move
 {
 ;---[Parameters]---------------------------
 this	equ		rdi							; pointer to target b-tree object
@@ -1552,7 +1552,7 @@ end if
 ;---[Copying/moving loop]------------------
 .loop:	and		iter, PMASK
 		movdqa	value, [array + iter + BDATA]
-		call	insfunc						; call this.insfunc (value)
+		call	InsFunc						; call this.InsFunc (value)
 		mov		source, [s_src]				; get "source" variable from the stack
 		test	status, status				; if (!status)
 		jz		.skip						;     then go to skip branch
@@ -1564,7 +1564,7 @@ else
 		mov		param1, [s_array]
 		mov		param2, [s_iter]
 		mov		param3, KSIZE
-		call	movefunc					; result = movefunc (source.array, source.iter, KSIZE)
+		call	MoveFunc					; result = MoveFunc (source.array, source.iter, KSIZE)
 end if
 		mov		this, [s_this]				; get "this" variable from the stack
 		mov		array, [s_array]			; get "array" variable from the stack
@@ -1591,7 +1591,7 @@ else
 		mov		param2, [s_iter]
 end if
 		mov		param3, KSIZE
-		call	movefunc					; result = movefunc (source.array, source.iter, KSIZE)
+		call	MoveFunc					; result = MoveFunc (source.array, source.iter, KSIZE)
 		mov		this, [s_this]				; get "this" variable from the stack
 		mov		array, [s_array]			; get "array" variable from the stack
 if move
@@ -2376,7 +2376,7 @@ end if
 		mov		param3, left
 		mov		param2, node
 		mov		param1, [s_this]
-		call	LeafSplit					; call this.BranchSplit (node, left, level)
+		call	LeafSplit					; call this.LeafSplit (node, left, level)
 		movdqa	value, [s_value]
 		mov		param4, res2
 		mov		param3, LMIN
@@ -2393,7 +2393,7 @@ end if
 InsertCoreMulti:	INSERT_CORE	0
 InsertCoreUnique:	INSERT_CORE	1
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	INSERT_ELEMENT	func
+macro	INSERT_ELEMENT	Func
 {
 ;---[Parameters]---------------------------
 this	equ		rdi							; pointer to b-tree object
@@ -2411,7 +2411,7 @@ space	= 3 * 8								; stack size required by the procedure
 		je		.ext						;     then try to extend object capacity
 ;---[Normal execution branch]--------------
 .back:	movdqu	value, [data]				; value = data[0]
-		jmp		func						; call func (value)
+		jmp		Func						; call Func (value)
 ;---[Extend object capacity]---------------
 .ext:	sub		stack, space				; reserving stack size for local vars
 		mov		[s_this], this				; save "this" variable into the stack
@@ -4734,7 +4734,7 @@ iter	equ		rcx							; iterator value
 		ret
 }
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	MOVE_ITERATOR	func, offst
+macro	MOVE_ITERATOR	Func, offst
 {
 ;---[Parameters]---------------------------
 this	equ		rdi							; pointer to b-tree object
@@ -4759,7 +4759,7 @@ space	= 1 * 8								; stack size required by the procedure
 		mov		param3, pos
 		mov		param2, iter
 		mov		param1, [this + ARRAY]
-		call	func						; iter = func (array, iter, pos)
+		call	Func						; iter = Func (array, iter, pos)
 		mov		this, [s_this]				; get "this" variable from the stack
 		mov		[this + offst], iter		; update iterator position
 		cmp		iter, EMPTY					; if (iter == EMPTY)
@@ -4884,7 +4884,7 @@ end if
 		ret
 }
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	MINMAX2	func, offst, max
+macro	MINMAX2	Func, offst, max
 {
 ;---[Parameters]---------------------------
 this	equ		rdi							; pointer to b-tree object
@@ -4925,7 +4925,7 @@ end if
 		mov		param3, [this + HEIGHT]
 		mov		param2, [this + ROOT]
 		mov		param1, [this + ARRAY]
-		call	func						; result = func (array, root, height, func, array[iter].data.key)
+		call	Func						; result = Func (array, root, height, func, array[iter].data.key)
 ;---[Update iterator value]----------------
 		mov		this, [s_this]				; get "this" variable from the stack
 		mov		data, [s_data]				; get "data" variable from the stack
@@ -5101,7 +5101,7 @@ GreatOrEqual:	FIND_CORE	le, g
 Less:			FIND_CORE	g, g
 LessOrEqual:	FIND_CORE	ge, ge
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	FIND_KEY	func, offst
+macro	FIND_KEY	Func, offst
 {
 ;---[Parameters]---------------------------
 this	equ		rdi							; pointer to b-tree object
@@ -5129,7 +5129,7 @@ space	= 3 * 8								; stack size required by the procedure
 		mov		param3, [this + HEIGHT]
 		mov		param2, [this + ROOT]
 		mov		param1, [this + ARRAY]
-		call	func						; result = func (array, root, height, func, key)
+		call	Func						; result = Func (array, root, height, func, key)
 		cmp		result, EMPTY				; if (result == EMPTY)
 		je		.ntfnd						;     return false
 ;---[Update iterator value]----------------
@@ -5327,7 +5327,7 @@ space	= 15 * 8							; stack size required by the procedure
 FirstIndex:	FIND_INDEX	e, g
 LastIndex:	FIND_INDEX	e, ge
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	FIND_SEQUENCE	func1, func2, offst, bwd
+macro	FIND_SEQUENCE	Func1, Func2, offst, bwd
 {
 ;---[Parameters]---------------------------
 this	equ		rdi							; pointer to b-tree object
@@ -5358,7 +5358,7 @@ space	= 5 * 8								; stack size required by the procedure
 		mov		param3, [this + HEIGHT]
 		mov		param2, [this + ROOT]
 		mov		param1, [this + ARRAY]
-		call	func1						; result = func1 (array, root, height, func, key)
+		call	Func1						; result = Func1 (array, root, height, func, key)
 		cmp		result, EMPTY				; if (result == EMPTY)
 		je		.ntfnd						;     then return 0
 		mov		[s_index], index			; save "index" variable into the stack
@@ -5369,7 +5369,7 @@ space	= 5 * 8								; stack size required by the procedure
 		mov		param3, [this + HEIGHT]
 		mov		param2, [this + ROOT]
 		mov		param1, [this + ARRAY]
-		call	func2						; result = func2 (array, root, height, func, key)
+		call	Func2						; result = Func2 (array, root, height, func, key)
 ;---[Update iterator value]----------------
 		mov		this, [s_this]				; get "this" variable from the stack
 		mov		data, [s_data]				; get "data" variable from the stack
@@ -5399,7 +5399,7 @@ FindSequenceBwd:	FIND_SEQUENCE	FirstIndex, LastIndex, BWD, 1
 ;******************************************************************************;
 ;       Duplicates searching                                                   ;
 ;******************************************************************************;
-macro	FIND_DUP_CORE	next
+macro	FIND_DUP_CORE	Next
 {
 ;---[Parameters]---------------------------
 array	equ		rdi							; pointer to array of nodes
@@ -5422,7 +5422,7 @@ space	= 5 * 8								; stack size required by the procedure
 		mov		param3, KSIZE
 		mov		param2, iter
 		mov		param1, array
-		call	next						; result = next (array, iter, KSIZE)
+		call	Next						; result = Next (array, iter, KSIZE)
 		mov		array, [s_array]			; get "array" variable from the stack
 		mov		prev, [s_iter]				; get "prev" variable from the stack
 		mov		[s_iter], result			; save "iter" variable into the stack
@@ -5440,7 +5440,7 @@ space	= 5 * 8								; stack size required by the procedure
 		mov		param3, KSIZE
 		mov		param2, [s_iter]
 		mov		param1, [s_array]
-		call	next						; result = next (array, iter, KSIZE)
+		call	Next						; result = Next (array, iter, KSIZE)
 		mov		array, [s_array]			; get "array" variable from the stack
 		mov		prev, [s_iter]				; get "prev" variable from the stack
 		mov		[s_iter], result			; save "iter" variable into the stack
@@ -5458,7 +5458,7 @@ space	= 5 * 8								; stack size required by the procedure
 DupFwd:	FIND_DUP_CORE	GoNext
 DupBwd:	FIND_DUP_CORE	GoPrev
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	FIND_DUP	checkfunc, offst
+macro	FIND_DUP	CheckFunc, offst
 {
 ;---[Parameters]---------------------------
 this	equ		rdi							; pointer to b-tree object
@@ -5490,7 +5490,7 @@ space	= 3 * 8								; stack size required by the procedure
 		mov		param3, [this + FUNC]
 		mov		param2, iter
 		mov		param1, [this + ARRAY]
-		call	checkfunc					; result = checkfunc (array, iter, func)
+		call	CheckFunc					; result = CheckFunc (array, iter, func)
 		cmp		result, EMPTY				; if (result == EMPTY)
 		je		.ntfnd						;     return false
 ;---[Update iterator value]----------------
@@ -5515,7 +5515,7 @@ FindDupBwd:	FIND_DUP	DupBwd, BWD
 ;******************************************************************************;
 ;       Searching for differences                                              ;
 ;******************************************************************************;
-macro	DIFF	next
+macro	DIFF	Next
 {
 ;---[Parameters]---------------------------
 tarray	equ		rdi							; pointer to target array of nodes
@@ -5554,14 +5554,14 @@ space	= 7 * 8								; stack size required by the procedure
 		mov		param3, KSIZE
 		mov		param2, [s_siter]
 		mov		param1, [s_sarr]
-		call	next						; result = next (sarray, siter, KSIZE)
+		call	Next						; result = Next (sarray, siter, KSIZE)
 		mov		[s_siter], result			; save "siter" variable into the stack
 		cmp		result, EMPTY				; if (result == EMPTY)
 		je		.break						;     then break the loop
 		mov		param3, KSIZE
 		mov		param2, [s_titer]
 		mov		param1, [s_tarr]
-		call	next						; result = next (tarray, titer, KSIZE)
+		call	Next						; result = Next (tarray, titer, KSIZE)
 		mov		[s_titer], result			; save "titer" variable into the stack
 		cmp		result, EMPTY				; if (result == EMPTY)
 		je		.break						;     then break the loop
@@ -5585,7 +5585,7 @@ space	= 7 * 8								; stack size required by the procedure
 DiffFwd:	DIFF	GoNext
 DiffBwd:	DIFF	GoPrev
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	FIND_DIFF	checkfunc, offst
+macro	FIND_DIFF	CheckFunc, offst
 {
 ;---[Parameters]---------------------------
 this	equ		rdi							; pointer to target b-tree object
@@ -5631,7 +5631,7 @@ space	= 3 * 8								; stack size required by the procedure
 		mov		param2, [source + ARRAY]
 		mov		param3, [this + offst]
 		mov		param1, [this + ARRAY]
-		call	checkfunc					; result = checkfunc (this.array, source.array, titer, siter, count, this.func)
+		call	CheckFunc					; result = CheckFunc (this.array, source.array, titer, siter, count, this.func)
 		cmp		result, EMPTY				; if (result == EMPTY)
 		je		.ntfnd						;     return false
 ;---[Update iterator value]----------------
@@ -5742,7 +5742,7 @@ CountKeyUnique:	COUNT_KEY	CountCoreUnique
 ;==============================================================================;
 ;       Keys set counting                                                      ;
 ;==============================================================================;
-macro	COUNT_KEYS	func
+macro	COUNT_KEYS	Func
 {
 ;---[Parameters]---------------------------
 this	equ		rdi							; pointer to b-tree object
@@ -5775,7 +5775,7 @@ space	= 5 * 8								; stack size required by the procedure
 		mov		param3, [this + HEIGHT]
 		mov		param2, [this + ROOT]
 		mov		param1, [this + ARRAY]
-		call	func						; result = func (array, root, height, func, keys[0])
+		call	Func						; result = Func (array, root, height, func, keys[0])
 		mov		this, [s_this]				; get "this" variable from the stack
 		mov		keys, [s_keys]				; get "keys" variable from the stack
 		add		[s_total], result			; if (result) then total++

@@ -1688,7 +1688,7 @@ CheckSortAscBwd:	FIND_CORE	sub, l, -, 1
 CheckSortDscFwd:	FIND_CORE	add, l, +, 1
 CheckSortDscBwd:	FIND_CORE	sub, g, -, 1
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	FIND	checkfunc, bwd
+macro	FIND	CheckFunc, bwd
 {
 ;---[Parameters]---------------------------
 this	equ		rdi							; pointer to vector object
@@ -1729,7 +1729,7 @@ end if
 		lea		param1, [array + pos]
 		mov		param2, count
 		mov		param3, func
-		call	checkfunc					; result = checkfunc (array + pos, count, func)
+		call	CheckFunc					; result = CheckFunc (array + pos, count, func)
 		cmp		result, NOT_FOUND			; if (result != NOT_FOUND)
 		jne		.found						;     then go to found branch
 ;---[Not found branch]---------------------
@@ -1813,7 +1813,7 @@ space	= 5 * 8								; stack size required by the procedure
 DiffFwd:	DIFF	add
 DiffBwd:	DIFF	sub
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	FIND_DIFF	diff, cmd, bwd, type
+macro	FIND_DIFF	Diff, cmd, bwd, type
 {
 ;---[Parameters]---------------------------
 this	equ		rdi							; pointer to target vector object
@@ -1880,7 +1880,7 @@ end if
 		mov		param3, count
 		mov		param2, sarray
 		mov		param1, tarray
-		call	diff						; result = diff (tarray, sarray, count, func)
+		call	Diff						; result = Diff (tarray, sarray, count, func)
 		cmp		result, NOT_FOUND			; if (result != NOT_FOUND)
 		jne		.found						;     then go to found branch
 ;---[Not found branch]---------------------
@@ -2067,7 +2067,7 @@ CountKeysBwdStack:	COUNT_KEYS	sub, add, 1, 1
 ;==============================================================================;
 ;       Binary counting                                                        ;
 ;==============================================================================;
-macro	COUNTBIN	func1, func2
+macro	COUNTBIN	Func1, Func2
 {
 ;---[Parameters]---------------------------
 this	equ		rdi							; pointer to vector object
@@ -2095,7 +2095,7 @@ space	= 7 * 8								; stack size required by the procedure
 		mov		param3, key
 		lea		param2, [s_data]
 		mov		param1, this
-		call	func1						; result = this.func1 (&data, key, func)
+		call	Func1						; result = this.Func1 (&data, key, func)
 		cmp		result, NOT_FOUND			; if (result == NOT_FOUND)
 		je		.ntfnd						;     return 0
 		mov		[s_res], result				; save "result" variable into the stack
@@ -2103,7 +2103,7 @@ space	= 7 * 8								; stack size required by the procedure
 		mov		param3, [s_key]
 		lea		param2, [s_data]
 		mov		param1, [s_this]
-		call	func2						; result = this.func2 (&data, key, func)
+		call	Func2						; result = this.Func2 (&data, key, func)
 		sub		result, [s_res]				; correct result
 		add		result, 1					; return result + 1
 		add		stack, space				; restoring back the stack pointer
@@ -2193,7 +2193,7 @@ space	= 9 * 8								; stack size required by the procedure
 InsertSortCoreAsc:	INSERTSORT_CORE	l
 InsertSortCoreDsc:	INSERTSORT_CORE	g
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	SORT	sortfunc
+macro	SORT	SortFunc
 {
 ;---[Parameters]---------------------------
 this	equ		rdi							; pointer to vector object
@@ -2215,7 +2215,7 @@ space	= 1 * 8								; stack size required by the procedure
 		mov		param3, func
 		mov		param2, size
 		mov		param1, [this + ARRAY]
-		call	sortfunc					; call sortfunc (array, size, func)
+		call	SortFunc					; call SortFunc (array, size, func)
 ;---[Normal exit]--------------------------
 .exit:	mov		result, [s_size]			; get "size" variable from the stack
 		shr		result, KSCALE				; return size
@@ -2228,7 +2228,7 @@ InsertSortDsc:	SORT	InsertSortCoreDsc
 ;******************************************************************************;
 ;       Quick sort                                                             ;
 ;******************************************************************************;
-macro	QUICKSORT_CORE	insertsort, op1, op2
+macro	QUICKSORT_CORE	InsertSort, op1, op2
 {
 ;---[Parameters]---------------------------
 array	equ		rdi							; pointer to array of nodes
@@ -2263,7 +2263,7 @@ space	= 11 * 8							; stack size required by the procedure
 minsize	= 16 * KSIZE						; min array size is aceptable for Quick sort
 ;------------------------------------------
 .start:	cmp		size, minsize				; if (size <= minsize)
-		jbe		insertsort					;     call insertsort (array, size, func)
+		jbe		InsertSort					;     call InsertSort (array, size, func)
 ;---[Normal execution branch]--------------
 		sub		stack, space				; reserving stack size for local vars
 		mov		[s_key1], key1				; save old value of "key1" variable
@@ -2362,7 +2362,7 @@ minsize	= 16 * KSIZE						; min array size is aceptable for Quick sort
 		mov		data1, [s_data1]			; restore old value of "data1" variable
 		mov		data2, [s_data2]			; restore old value of "data2" variable
 		add		stack, space				; restoring back the stack pointer
-		jmp		insertsort					; call insertsort (array, size, func)
+		jmp		InsertSort					; call InsertSort (array, size, func)
 		ret
 }
 QuickSortCoreAsc:	QUICKSORT_CORE	InsertSortCoreAsc, l, g
@@ -2373,7 +2373,7 @@ QuickSortDsc:		SORT	QuickSortCoreDsc
 ;******************************************************************************;
 ;       Merge sort                                                             ;
 ;******************************************************************************;
-macro	MERGESORT_CORE	insertsort, mergefunc, copyfunc
+macro	MERGESORT_CORE	InsertSort, MergeFunc, CopyFunc
 {
 ;---[Parameters]---------------------------
 array	equ		rdi							; pointer to array of nodes
@@ -2419,7 +2419,7 @@ minsize	= 16 * KSIZE						; min array size is aceptable for Merge sort
 		mov		param3, size
 		mov		param2, [s_array]
 		mov		param1, [s_temp]
-		call	copyfunc					; call copyfunc (temp, array, size / 2)
+		call	CopyFunc					; call CopyFunc (temp, array, size / 2)
 ;---[Merge sorted arrays]------------------
 		mov		array, [s_array]			; get "array" variable from the stack
 		mov		temp, [s_temp]				; get "temp" variable from the stack
@@ -2436,18 +2436,18 @@ minsize	= 16 * KSIZE						; min array size is aceptable for Merge sort
 		mov		param2, temp
 		mov		param1, array
 		add		stack, space				; restoring back the stack pointer
-		jmp		mergefunc					; call mergefunc (array, temp, size / 2, array + size / 2, size - size / 2, func)
+		jmp		MergeFunc					; call MergeFunc (array, temp, size / 2, array + size / 2, size - size / 2, func)
 ;---[Insert sort branch]-------------------
 .ins:	mov		param1, array
 		mov		param2, size
 		mov		param3, func
-		jmp		insertsort					; call insertsort (array, size, func)
+		jmp		InsertSort					; call InsertSort (array, size, func)
 		ret
 }
 MergeSortCoreAsc:	MERGESORT_CORE	InsertSortCoreAsc, MergeCoreAsc, Copy
 MergeSortCoreDsc:	MERGESORT_CORE	InsertSortCoreDsc, MergeCoreDsc, Copy
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	MERGESORT	sortfunc
+macro	MERGESORT	SortFunc
 {
 ;---[Parameters]---------------------------
 this	equ		rdi							; pointer to vector object
@@ -2483,7 +2483,7 @@ space	= 3 * 8								; stack size required by the procedure
 		mov		param2, [s_size]
 		add		param2, [this + ARRAY]
 		mov		param1, [this + ARRAY]
-		call	sortfunc					; call sortfunc (array, array + size, size, func)
+		call	SortFunc					; call SortFunc (array, array + size, size, func)
 ;---[Normal exit]--------------------------
 .exit:	mov		result, [s_size]			; get "size" variable from the stack
 		shr		result, KSCALE				; return size
@@ -2596,7 +2596,7 @@ space	= 11 * 8							; stack size required by the procedure
 MergeCoreAsc:	MERGE_CORE	le
 MergeCoreDsc:	MERGE_CORE	ge
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	MERGE	mergefunc
+macro	MERGE	MergeFunc
 {
 ;---[Parameters]---------------------------
 this	equ		rdi							; pointer to target vector object
@@ -2648,7 +2648,7 @@ space	= 5 * 8								; stack size required by the procedure
 		mov		param2, [this + ARRAY]
 		add		param2, size
 		mov		param1, [this + ARRAY]
-		call	mergefunc					; call mergefunc (this.array, this.array + source.size, this.size, source.array, source.size, func)
+		call	MergeFunc					; call MergeFunc (this.array, this.array + source.size, this.size, source.array, source.size, func)
 		mov		this, [s_this]				; get "this" variable from the stack
 		mov		size, [s_size]				; get "size" variable from the stack
 		add		[this + SIZE], size			; this.size += source.size
@@ -2802,9 +2802,9 @@ stack	equ		rsp							; stack pointer
 s_this	equ		stack + 0 * 8				; stack position of "this" variable
 s_src	equ		stack + 1 * 8				; stack position of "source" variable
 if type
-diff	= DiffBwd							; diff function
+Diff	= DiffBwd							; diff function
 else
-diff	= DiffFwd							; diff function
+Diff	= DiffFwd							; diff function
 end if
 space	= 3 * 8								; stack size required by the procedure
 ;------------------------------------------
@@ -2832,7 +2832,7 @@ end if
 		mov		param3, [this + SIZE]
 		mov		param2, sarray
 		mov		param1, tarray
-		call	diff						; result = diff (this.array, source.array, this.size, func)
+		call	Diff						; result = Diff (this.array, source.array, this.size, func)
 		cmp		result, NOT_FOUND			; if (result != NOT_FOUND)
 		jne		.exit						;     return status
 ;---[Compare object size]------------------
@@ -2866,7 +2866,7 @@ CompareStack:	COMPARE	1
 ;==============================================================================;
 ;       Check for sort order                                                   ;
 ;==============================================================================;
-macro	CHECK	checkfunc, c1, c2
+macro	CHECK	CheckFunc, c1, c2
 {
 ;---[Parameters]---------------------------
 this	equ		rdi							; pointer to vector object
@@ -2884,7 +2884,7 @@ size	equ		r8							; object size
 		mov		param3, func
 		mov		param2, size
 		mov		param1, [this + ARRAY]
-		call	checkfunc					; result = checkfunc (array, size - 1, func)
+		call	CheckFunc					; result = CheckFunc (array, size - 1, func)
 		cmp		result, NOT_FOUND			; check result
 		set#c2	status						; and return correct status
 .exit:	ret
@@ -2913,9 +2913,9 @@ size	equ		rcx							; object size
 tarray	equ		r8							; pointer to target array of nodes
 sarray	equ		r9							; pointer to source array of nodes
 if type
-diff	= DiffBwd							; diff function
+Diff	= DiffBwd							; diff function
 else
-diff	= DiffFwd							; diff function
+Diff	= DiffFwd							; diff function
 end if
 ;------------------------------------------
 		sub		stack, space				; reserving stack size for local vars
@@ -2941,7 +2941,7 @@ end if
 		mov		param3, [this + SIZE]
 		mov		param2, sarray
 		mov		param1, tarray
-		call	diff						; result = diff (this.array + this.size - 1, source.array + source.size - 1, this.size, func)
+		call	Diff						; result = Diff (this.array + this.size - 1, source.array + source.size - 1, this.size, func)
 		cmp		result, NOT_FOUND			; if (result == NOT_FOUND)
 .exit:	sete	status
 		add		stack, space				; restoring back the stack pointer

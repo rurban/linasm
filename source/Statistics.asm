@@ -383,7 +383,7 @@ Quantile_sint64:	QUANTILE	rax, r10, r11, jl, jg, 3
 ;==============================================================================;
 ;       Quartile                                                               ;
 ;==============================================================================;
-macro	QUARTILE_CORE	quant, quart, scale
+macro	QUARTILE_CORE	Quant, quart, scale
 {
 ;---[Parameters]---------------------------
 array	equ		rdi							; pointer to array
@@ -430,15 +430,15 @@ end if
 		mov		[s_ptr2], ptr2				; save "ptr2" variable into the stack
 		mov		[s_left], left				; save "left" variable into the stack
 		mov		[s_right], right			; save "right" variable into the stack
-		call	quant						; call Quantile (left, right, ptr1)
+		call	Quant						; call Quantile (left, right, ptr1)
 ;---[Call quantile function]---------------
 		test	qword [s_size], mask		; if (size % mask == 0)
 		jnz		@f							; {
 		sub		qword [s_ptr2], bytes		;     ptr2--
 		mov		left, [s_left]
 		mov		right, [s_ptr1]
-		mov		ptr, [s_ptr2]				;     Quantile (left, right, ptr2)
-		call	quant						; }
+		mov		ptr, [s_ptr2]				;     call Quantile (left, right, ptr2)
+		call	Quant						; }
 ;---[Compute quartile]---------------------
 @@:		mov		result1, [s_ptr1]			; get "ptr1" variable from the stack
 		mov		result2, [s_ptr2]			; get "ptr2" variable from the stack
@@ -446,7 +446,7 @@ end if
 		ret
 }
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	QUARTILE_INT	quart, result
+macro	QUARTILE_INT	Quart, result
 {
 ;---[Parameters]---------------------------
 array	equ		rdi							; pointer to array
@@ -457,7 +457,7 @@ ptr2	equ		rdx							; pointer to second target element
 ;------------------------------------------
 		test	size, size					; if (size == 0)
 		jz		.error						;     then go to error branch
-		call	quart						; call Quartile (array, size)
+		call	Quart						; call Quartile (array, size)
 ;---[Compute quartile]---------------------
 		mov		result, [ptr1]
 		add		result, [ptr2]
@@ -484,13 +484,13 @@ s_size	equ		stack + 1 * 8				; stack position of "size" variable
 s_ptr1	equ		stack + 2 * 8				; stack position of "ptr1" variable
 s_ptr2	equ		stack + 3 * 8				; stack position of "ptr2" variable
 if x eq s
-Map		= Map_flt32							; Mapping function
+Map		= Map_flt32							; map function
 halfval	= PHALF_FLT32						; +0.5
-nanval	= DMASK_FLT32						; NaN
+nanval	= PNAN_FLT32						; +NaN
 else if x eq d
-Map		= Map_flt64							; Mapping function
+Map		= Map_flt64							; map function
 halfval	= PHALF_FLT64						; +0.5
-nanval	= DMASK_FLT64						; NaN
+nanval	= PNAN_FLT64						; +NaN
 end if
 space	= 5 * 8								; stack size required by the procedure
 ;------------------------------------------
@@ -665,12 +665,12 @@ blend	equ		max							; blending mask
 if x eq s
 maxval	= MINF_FLT32						; -Inf
 minval	= PINF_FLT32						; +Inf
-nanval	= DMASK_FLT32						; NaN
+nanval	= PNAN_FLT32						; +NaN
 scale	= 2									; scale value
 else if x eq d
 maxval	= MINF_FLT64						; -Inf
 minval	= PINF_FLT64						; +Inf
-nanval	= DMASK_FLT64						; NaN
+nanval	= PNAN_FLT64						; +NaN
 scale	= 3									; scale value
 end if
 bytes	= 1 shl scale						; size of array element (bytes)
@@ -817,20 +817,20 @@ macro	MIDRANGE	x
 array	equ		rdi							; data array
 size	equ		rsi							; array size (count of elements)
 ;---[Internal variables]-------------------
-temp	equ		rax							; temporary register
+treg	equ		rax							; temporary register
 max		equ		xmm0						; max value
 min		equ		xmm1						; min value
 half	equ		xmm2						; 0.5
 if x eq s
-MaxMin	= MaxMin_flt32						; MaxMin function (flt32_t type)
+MaxMin	= MaxMin_flt32						; MaxMin function
 halfval	= PHALF_FLT32						; +0.5
 else if x eq d
-MaxMin	= MaxMin_flt64						; MaxMin function (flt64_t type)
+MaxMin	= MaxMin_flt64						; MaxMin function
 halfval	= PHALF_FLT64						; +0.5
 end if
 ;------------------------------------------
 		call	MaxMin						; call MaxMin (array[], size)
-		initreg	half, temp, halfval			; half = 0.5
+		initreg	half, treg, halfval			; half = 0.5
 		adds#x	max, min
 		muls#x	max, half					; result = 0.5 * (max(array[]) + min(array[]))
 		ret
@@ -869,11 +869,11 @@ nsize	equ		xmm10						; normalized array size
 result	equ		blend						; result register
 if x eq s
 dmask	= DMASK_FLT32						; data mask
-nanval	= DMASK_FLT32						; NaN
+nanval	= PNAN_FLT32						; +NaN
 scale	= 2									; scale value
 else if x eq d
 dmask	= DMASK_FLT64						; data mask
-nanval	= DMASK_FLT64						; NaN
+nanval	= PNAN_FLT64						; +NaN
 scale	= 3									; scale value
 end if
 bytes	= 1 shl scale						; size of array element (bytes)
@@ -1026,9 +1026,9 @@ mean	equ		xmm0						; data mean
 ;---[Internal variables]-------------------
 result	equ		xmm0						; result register
 if x eq s
-Var		= Variance_flt32					; Variance function
+Var		= Variance_flt32					; variance function
 else if x eq d
-Var		= Variance_flt64					; Variance function
+Var		= Variance_flt64					; variance function
 end if
 ;------------------------------------------
 		call	Var							; result = Variance (array, size, mean)
@@ -1047,7 +1047,7 @@ AbsDeviation_flt64:	VAR		2, d
 ;==============================================================================;
 ;       Interquartile range                                                    ;
 ;==============================================================================;
-macro	QUART_RANGE_INT	quart1, quart3, result
+macro	QUART_RANGE_INT	Quart1, Quart3, result
 {
 ;---[Parameters]---------------------------
 array	equ		rdi							; pointer to array
@@ -1067,7 +1067,7 @@ space	= 3 * 8								; stack size required by the procedure
 ;---[Call quartile function]---------------
 		mov		[s_array], array			; save "array" variable into the stack
 		mov		[s_size], size				; save "size" variable into the stack
-		call	quart1						; call Quartile1 (array, size)
+		call	Quart1						; call Quartile1 (array, size)
 ;---[Compute 1-st quartile]----------------
 		mov		result, [ptr1]
 		add		result, [ptr2]
@@ -1076,7 +1076,7 @@ space	= 3 * 8								; stack size required by the procedure
 ;---[Call quartile function]---------------
 		mov		array, [s_array]			; get "array" variable from the stack
 		mov		size, [s_size]				; get "size" variable from the stack
-		call	quart3						; call Quartile2 (array, size)
+		call	Quart3						; call Quartile3 (array, size)
 ;---[Compute 3-st quartile]----------------
 		mov		result, [ptr1]
 		add		result, [ptr2]
@@ -1108,13 +1108,13 @@ s_ptr2	equ		stack + 3 * 8				; stack position of "ptr2" variable
 s_ptr3	equ		stack + 4 * 8				; stack position of "ptr3" variable
 s_ptr4	equ		stack + 5 * 8				; stack position of "ptr4" variable
 if x eq s
-Map		= Map_flt32							; Mapping function
+Map		= Map_flt32							; map function
 halfval	= PHALF_FLT32						; +0.5
-nanval	= DMASK_FLT32						; NaN
+nanval	= PNAN_FLT32						; +NaN
 else if x eq d
-Map		= Map_flt64							; Mapping function
+Map		= Map_flt64							; map function
 halfval	= PHALF_FLT64						; +0.5
-nanval	= DMASK_FLT64						; NaN
+nanval	= PNAN_FLT64						; +NaN
 end if
 space	= 7 * 8								; stack size required by the procedure
 ;------------------------------------------
@@ -1187,9 +1187,9 @@ size	equ		rsi							; array size (count of elements)
 max		equ		xmm0						; max value
 min		equ		xmm1						; min value
 if x eq s
-MaxMin	= MaxMin_flt32						; MaxMin function (flt32_t type)
+MaxMin	= MaxMin_flt32						; MaxMin function
 else if x eq d
-MaxMin	= MaxMin_flt64						; MaxMin function (flt64_t type)
+MaxMin	= MaxMin_flt64						; MaxMin function
 end if
 ;------------------------------------------
 		call	MaxMin						; call MaxMin (array[], size)
@@ -1234,10 +1234,10 @@ zero	equ		xmm14						; 0.0
 nsize	equ		xmm15						; normalized array size
 result	equ		blend						; result register
 if x eq s
-nanval	= DMASK_FLT32						; NaN
+nanval	= PNAN_FLT32						; +NaN
 scale	= 2									; scale value
 else if x eq d
-nanval	= DMASK_FLT64						; NaN
+nanval	= PNAN_FLT64						; +NaN
 scale	= 3									; scale value
 end if
 bytes	= 1 shl scale						; size of array element (bytes)
@@ -1416,15 +1416,15 @@ sum8	equ		xmm11						; intermediate sum #5
 sum9	equ		xmm12						; intermediate sum #5
 zero	equ		xmm13						; 0.0
 nsize	equ		xmm14						; normalized array size
-bias	equ		xmm15						; normal distribution bias
+const	equ		xmm15						; const value
 result	equ		blend						; result register
 if x eq s
-biasval	= 0x40400000						; bias const (3.0 for normal distribution)
-nanval	= DMASK_FLT32						; NaN
+nanval	= PNAN_FLT32						; +NaN
+thrval	= 0x40400000						; +3.0
 scale	= 2									; scale value
 else if x eq d
-biasval	= 0x4008000000000000				; bias const (3.0 for normal distribution)
-nanval	= DMASK_FLT64						; NaN
+nanval	= PNAN_FLT64						; +NaN
+thrval	= 0x4008000000000000				; +3.0
 scale	= 3									; scale value
 end if
 bytes	= 1 shl scale						; size of array element (bytes)
@@ -1443,12 +1443,12 @@ bmask	= bytes - 1							; elements aligning mask
 	cvtsi2s#x	nsize, count				; nsize = size
 		add		count, 1
 	cvtsi2s#x	sum0, count					; sum0 = size + 1
-		initreg	bias, index, biasval		; bias = 3.0
+		initreg	const, index, thrval		; const = 3.0
 		muls#x	sum2, sum3
-		muls#x	bias, sum1
+		muls#x	const, sum1
 		muls#x	nsize, sum0
 		divs#x	sum1, sum2
-		muls#x	bias, sum1					; bias = 3 * (size - 1)^2 / ((size - 2) * (size - 3))
+		muls#x	const, sum1					; const = 3 * (size - 1)^2 / ((size - 2) * (size - 3))
 		muls#x	nsize, sum1					; nsize = size * (size + 1) * (size - 1) / ((size - 2) * (size - 3))
 		movap#x	vector, mean				; vector = mean
 		xorp#x	sum0, sum0					; sum0 = 0
@@ -1549,8 +1549,8 @@ bmask	= bytes - 1							; elements aligning mask
 		muls#x	sum0, sum0
 		divs#x	sum1, sum0
 		muls#x	sum1, nsize
-		subs#x	sum1, bias
-		movap#x	result, sum1				; return nsize * sum1 / (sum0 * sum0) - bias
+		subs#x	sum1, const
+		movap#x	result, sum1				; return nsize * sum1 / (sum0 * sum0) - const
 		ret
 ;---[Scalar loop]--------------------------
 .sloop:	movs#x	temp, [array]				; temp = array[0]
@@ -1566,8 +1566,8 @@ bmask	= bytes - 1							; elements aligning mask
 		muls#x	sum0, sum0
 		divs#x	sum1, sum0
 		muls#x	sum1, nsize
-		subs#x	sum1, bias
-		movap#x	result, sum1				; return nsize * sum1 / (sum0 * sum0) - bias
+		subs#x	sum1, const
+		movap#x	result, sum1				; return nsize * sum1 / (sum0 * sum0) - const
 		ret
 ;---[Error branch]-------------------------
 .error:	initreg	result, index, nanval		; return NaN
@@ -1607,10 +1607,10 @@ zero	equ		xmm10						; 0.0
 nsize	equ		xmm11						; normalized array size
 result	equ		blend						; result register
 if x eq s
-nanval	= DMASK_FLT32						; NaN
+nanval	= PNAN_FLT32						; +NaN
 scale	= 2									; scale value
 else if x eq d
-nanval	= DMASK_FLT64						; NaN
+nanval	= PNAN_FLT64						; +NaN
 scale	= 3									; scale value
 end if
 bytes	= 1 shl scale						; size of array element (bytes)
@@ -1777,10 +1777,10 @@ zero1	equ		xmm9						; 0.0
 zero2	equ		xmm10						; 0.0
 result	equ		blend						; result register
 if x eq s
-nanval	= DMASK_FLT32						; NaN
+nanval	= PNAN_FLT32						; +NaN
 scale	= 2									; scale value
 else if x eq d
-nanval	= DMASK_FLT64						; NaN
+nanval	= PNAN_FLT64						; +NaN
 scale	= 3									; scale value
 end if
 bytes	= 1 shl scale						; size of array element (bytes)
@@ -1946,12 +1946,12 @@ nsize	equ		xmm14						; normalized array size
 flags	equ		xmm15						; NaN matching flags
 result	equ		blend						; result register
 if x eq s
-oneval	= PONE_FLT32						; 1.0
-nanval	= DMASK_FLT32						; NaN
+oneval	= PONE_FLT32						; +1.0
+nanval	= PNAN_FLT32						; +NaN
 scale	= 2									; scale value
 else if x eq d
-oneval	= PONE_FLT64						; 1.0
-nanval	= DMASK_FLT64						; NaN
+oneval	= PONE_FLT64						; +1.0
+nanval	= PNAN_FLT64						; +NaN
 scale	= 3									; scale value
 end if
 bytes	= 1 shl scale						; size of array element (bytes)
@@ -2175,7 +2175,7 @@ rank1	equ		rdx							; pointer to first rank array
 rank2	equ		rcx							; pointer to second rank array
 size	equ		r8							; array size (count of elements)
 ;---[Internal variables]-------------------
-temp	equ		rax							; temporary register
+treg	equ		rax							; temporary register
 index1	equ		r9							; first index value
 index2	equ		r10							; second index value
 index	equ		xmm0						; index value
@@ -2189,7 +2189,7 @@ scale	= 3									; scale value
 end if
 bytes	= 1 shl scale						; size of array element (bytes)
 ;------------------------------------------
-		initreg	one, temp, oneval			; one = 1.0
+		initreg	one, treg, oneval			; one = 1.0
 		xorp#x	index, index				; index = 0.0
 ;---[Rank setting loop]--------------------
 .loop:	mov		index1, [rank1]				; index1 = rank1[0]
@@ -2219,8 +2219,8 @@ trank	equ		r9							; pointer to temp rank array
 ;---[Internal variables]-------------------
 result	equ		xmm0						; result register
 size	equ		xmm1						; array size
-bias	equ		xmm2						; bias value
-temp	equ		xmm3						; temporary register
+temp	equ		xmm2						; temporary register
+const	equ		xmm3						; const value
 stack	equ		rsp							; stack pointer
 s_arr1	equ		stack + 0 * 8				; stack position of "array1" variable
 s_rank1	equ		stack + 1 * 8				; stack position of "rank1" variable
@@ -2230,19 +2230,19 @@ s_tarr	equ		stack + 4 * 8				; stack position of "tarray" variable
 s_trank	equ		stack + 5 * 8				; stack position of "trank" variable
 s_size	equ		stack + 8 * 8				; stack position of "size" variable
 if x eq s
-sort	= RadixSort_flt32					; sort function
-rank	= SetRanks_flt32					; rank function
-diff	= SumSqrDiff_flt32					; rank difference function
-oneval	= PONE_FLT32						; 1.0
-nanval	= DMASK_FLT32						; NaN
-biasval	= 0x40C00000						; bias const (6.0 for normal distribution)
+Sort	= RadixSort_flt32					; sort function
+Rank	= SetRanks_flt32					; rank function
+Diff	= SumSqrDiff_flt32					; rank difference function
+nanval	= PNAN_FLT32						; +NaN
+oneval	= PONE_FLT32						; +1.0
+sixval	= 0x40C00000						; +6.0
 else if x eq d
-sort	= RadixSort_flt64					; sort function
-rank	= SetRanks_flt64					; rank function
-diff	= SumSqrDiff_flt64					; rank difference function
-oneval	= PONE_FLT64						; 1.0
-nanval	= DMASK_FLT64						; NaN
-biasval	= 0x4018000000000000				; bias const (6.0 for normal distribution)
+Sort	= RadixSort_flt64					; sort function
+Rank	= SetRanks_flt64					; rank function
+Diff	= SumSqrDiff_flt64					; rank difference function
+nanval	= PNAN_FLT64						; +NaN
+oneval	= PONE_FLT64						; +1.0
+sixval	= 0x4018000000000000				; +6.0
 end if
 space	= 7 * 8								; stack size required by the procedure
 ;------------------------------------------
@@ -2266,38 +2266,38 @@ space	= 7 * 8								; stack size required by the procedure
 		mov		param3, [s_rank1]
 		mov		param2, [s_tarr]
 		mov		param1, [s_arr1]
-		call	sort						; call sort (array1, tarray, rank1, trank, size)
+		call	Sort						; call Sort (array1, tarray, rank1, trank, size)
 ;---[Sort second array]--------------------
 		mov		param5, [s_size]
 		mov		param4, [s_trank]
 		mov		param3, [s_rank2]
 		mov		param2, [s_tarr]
 		mov		param1, [s_arr2]
-		call	sort						; call sort (array2, tarray, rank2, trank, size)
+		call	Sort						; call Sort (array2, tarray, rank2, trank, size)
 ;---[Set ranks]----------------------------
 		mov		param5, [s_size]
 		mov		param4, [s_rank2]
 		mov		param3, [s_rank1]
 		mov		param2, [s_arr2]
 		mov		param1, [s_arr1]
-		call	rank						; call rank (array1, array2, rank1, rank2, size)
+		call	Rank						; call Rank (array1, array2, rank1, rank2, size)
 ;---[Get ranks difference]-----------------
 		mov		param3, [s_size]
 		mov		param2, [s_arr2]
 		mov		param1, [s_arr1]
-		call	diff						; result = diff (array1, array2, size)
+		call	Diff						; result = Diff (array1, array2, size)
 ;---[Compute result]-----------------------
 	cvtsi2s#x	size, [s_size]				; get "size" variable from the stack
-		initreg	bias, trank, oneval			; bias = 1.0
+		initreg	const, trank, oneval		; const = 1.0
 		movap#x	temp, size
 		muls#x	temp, temp
-		subs#x	temp, bias
+		subs#x	temp, const
 		muls#x	size, temp					; size = size * (size * size - 1.0)
-		initreg	bias, trank, biasval		; bias = 6.0
-		divs#x	bias, size
-		muls#x	bias, result				; bias = result * 6.0 / (size * (size * size - 1.0))
+		initreg	const, trank, sixval		; const = 6.0
+		divs#x	const, size
+		muls#x	const, result				; const = result * 6.0 / (size * (size * size - 1.0))
 		initreg	result, trank, oneval		; result = 1.0
-		subs#x	result, bias				; return 1.0 - result * 6.0 / (size * (size * size - 1.0))
+		subs#x	result, const				; return 1.0 - result * 6.0 / (size * (size * size - 1.0))
 		add		stack, space				; restoring back the stack pointer
 		ret
 ;---[Error branch]-------------------------

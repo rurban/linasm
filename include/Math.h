@@ -363,31 +363,75 @@ static sint64_t LCM (sint64_t x, sint64_t y);
 //      Trigonometric functions                                               //
 //****************************************************************************//
 
-// Hypotenuse
+//============================================================================//
+//      Hypotenuse                                                            //
+//============================================================================//
 static flt32_t Hypot (flt32_t cath1, flt32_t cath2);
 static flt64_t Hypot (flt64_t cath1, flt64_t cath2);
 
-// Cathetus
+//============================================================================//
+//      Cathetus                                                              //
+//============================================================================//
 static flt32_t Cath (flt32_t hypot, flt32_t cath);
 static flt64_t Cath (flt64_t hypot, flt64_t cath);
 
-// Sine
+//============================================================================//
+//      Sine                                                                  //
+//============================================================================//
+
+// Sine of angle
+static flt32_t Sin (flt32_t angle);
+static flt64_t Sin (flt64_t angle);
+
+// Sine of angle and quadrant
 static flt32_t SinQ (flt32_t angle, sint64_t quadrant);
 static flt64_t SinQ (flt64_t angle, sint64_t quadrant);
 
-// Cosine
+//============================================================================//
+//      Cosine                                                                //
+//============================================================================//
+
+// Cosine of angle
+static flt32_t Cos (flt32_t angle);
+static flt64_t Cos (flt64_t angle);
+
+// Cosine of angle and quadrant
 static flt32_t CosQ (flt32_t angle, sint64_t quadrant);
 static flt64_t CosQ (flt64_t angle, sint64_t quadrant);
 
-// Tangent
+//============================================================================//
+//      Tangent                                                               //
+//============================================================================//
+
+// Tangent of angle
+static flt32_t Tan (flt32_t angle);
+static flt64_t Tan (flt64_t angle);
+
+// Tangent of angle and quadrant
 static flt32_t TanQ (flt32_t angle, sint64_t quadrant);
 static flt64_t TanQ (flt64_t angle, sint64_t quadrant);
 
-// Cotangent
+//============================================================================//
+//      Cotangent                                                             //
+//============================================================================//
+
+// Cotangent of angle
+static flt32_t Cot (flt32_t angle);
+static flt64_t Cot (flt64_t angle);
+
+// Cotangent of angle and quadrant
 static flt32_t CotQ (flt32_t angle, sint64_t quadrant);
 static flt64_t CotQ (flt64_t angle, sint64_t quadrant);
 
-// Sine and cosine
+//============================================================================//
+//      Sine and cosine                                                       //
+//============================================================================//
+
+// Sine and cosine of angle
+static flt32_t SinCos (flt32_t *sin, flt32_t *cos, flt32_t angle);
+static flt64_t SinCos (flt64_t *sin, flt64_t *cos, flt64_t angle);
+
+// Sine and cosine of angle and quadrant
 static flt32_t SinCosQ (flt32_t *sin, flt32_t *cos, flt32_t angle, sint64_t quadrant);
 static flt64_t SinCosQ (flt64_t *sin, flt64_t *cos, flt64_t angle, sint64_t quadrant);
 
@@ -873,31 +917,75 @@ sint64_t Math_LCM_sint64 (sint64_t x, sint64_t y);
 //      Trigonometric functions                                               //
 //****************************************************************************//
 
-// Hypotenuse
+//============================================================================//
+//      Hypotenuse                                                            //
+//============================================================================//
 flt32_t Math_Hypot_flt32 (flt32_t cath1, flt32_t cath2);
 flt64_t Math_Hypot_flt64 (flt64_t cath1, flt64_t cath2);
 
-// Cathetus
+//============================================================================//
+//      Cathetus                                                              //
+//============================================================================//
 flt32_t Math_Cath_flt32 (flt32_t hypot, flt32_t cath);
 flt64_t Math_Cath_flt64 (flt64_t hypot, flt64_t cath);
 
-// Sine
+//============================================================================//
+//      Sine                                                                  //
+//============================================================================//
+
+// Sine of angle
+flt32_t Math_Sin_flt32 (flt32_t angle);
+flt64_t Math_Sin_flt64 (flt64_t angle);
+
+// Sine of angle and quadrant
 flt32_t Math_SinQ_flt32 (flt32_t angle, sint64_t quadrant);
 flt64_t Math_SinQ_flt64 (flt64_t angle, sint64_t quadrant);
 
-// Cosine
+//============================================================================//
+//      Cosine                                                                //
+//============================================================================//
+
+// Cosine of angle
+flt32_t Math_Cos_flt32 (flt32_t angle);
+flt64_t Math_Cos_flt64 (flt64_t angle);
+
+// Cosine of angle and quadrant
 flt32_t Math_CosQ_flt32 (flt32_t angle, sint64_t quadrant);
 flt64_t Math_CosQ_flt64 (flt64_t angle, sint64_t quadrant);
 
-// Tangent
+//============================================================================//
+//      Tangent                                                               //
+//============================================================================//
+
+// Tangent of angle
+flt32_t Math_Tan_flt32 (flt32_t angle);
+flt64_t Math_Tan_flt64 (flt64_t angle);
+
+// Tangent of angle and quadrant
 flt32_t Math_TanQ_flt32 (flt32_t angle, sint64_t quadrant);
 flt64_t Math_TanQ_flt64 (flt64_t angle, sint64_t quadrant);
 
-// Cotangent
+//============================================================================//
+//      Cotangent                                                             //
+//============================================================================//
+
+// Cotangent of angle
+flt32_t Math_Cot_flt32 (flt32_t angle);
+flt64_t Math_Cot_flt64 (flt64_t angle);
+
+// Cotangent of angle and quadrant
 flt32_t Math_CotQ_flt32 (flt32_t angle, sint64_t quadrant);
 flt64_t Math_CotQ_flt64 (flt64_t angle, sint64_t quadrant);
 
-// Sine and cosine
+//============================================================================//
+//      Sine and cosine                                                       //
+//============================================================================//
+
+// Sine and cosine of angle
+flt32_t Math_SinCos_flt32 (flt32_t *sin, flt32_t *cos, flt32_t angle);
+flt64_t Math_SinCos_flt64 (flt64_t *sin, flt64_t *cos, flt64_t angle);
+
+// Sine and cosine of angle and quadrant
 flt32_t Math_SinCosQ_flt32 (flt32_t *sin, flt32_t *cos, flt32_t angle, sint64_t quadrant);
 flt64_t Math_SinCosQ_flt64 (flt64_t *sin, flt64_t *cos, flt64_t angle, sint64_t quadrant);
 
