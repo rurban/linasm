@@ -536,6 +536,22 @@ public	CosQ_flt32			as	'_ZN4Math4CosQEfx'
 public	CosQ_flt64			as	'_ZN4Math4CosQEdx'
 
 ;==============================================================================;
+;       Sine and cosine                                                        ;
+;==============================================================================;
+
+; Sine and cosine of angle
+public	SinCos_flt32		as	'Math_SinCos_flt32'
+public	SinCos_flt64		as	'Math_SinCos_flt64'
+public	SinCos_flt32		as	'_ZN4Math6SinCosEPfS0_f'
+public	SinCos_flt64		as	'_ZN4Math6SinCosEPdS0_d'
+
+; Sine and cosine of angle and quadrant
+public	SinCosQ_flt32		as	'Math_SinCosQ_flt32'
+public	SinCosQ_flt64		as	'Math_SinCosQ_flt64'
+public	SinCosQ_flt32		as	'_ZN4Math7SinCosQEPfS0_fx'
+public	SinCosQ_flt64		as	'_ZN4Math7SinCosQEPdS0_dx'
+
+;==============================================================================;
 ;       Tangent                                                                ;
 ;==============================================================================;
 
@@ -551,37 +567,37 @@ public	TanQ_flt64			as	'Math_TanQ_flt64'
 public	TanQ_flt32			as	'_ZN4Math4TanQEfx'
 public	TanQ_flt64			as	'_ZN4Math4TanQEdx'
 
-;==============================================================================;
-;       Cotangent                                                              ;
-;==============================================================================;
-
-; Cotangent of angle
-public	Cot_flt32			as	'Math_Cot_flt32'
-public	Cot_flt64			as	'Math_Cot_flt64'
-public	Cot_flt32			as	'_ZN4Math3CotEf'
-public	Cot_flt64			as	'_ZN4Math3CotEd'
-
-; Cotangent of angle and quadrant
-public	CotQ_flt32			as	'Math_CotQ_flt32'
-public	CotQ_flt64			as	'Math_CotQ_flt64'
-public	CotQ_flt32			as	'_ZN4Math4CotQEfx'
-public	CotQ_flt64			as	'_ZN4Math4CotQEdx'
+;******************************************************************************;
+;       Inverse trigonometric functions                                        ;
+;******************************************************************************;
 
 ;==============================================================================;
-;       Sine and cosine                                                        ;
+;       Inverse sine                                                           ;
 ;==============================================================================;
+public	ArcSin_flt32		as	'Math_ArcSin_flt32'
+public	ArcSin_flt64		as	'Math_ArcSin_flt64'
+public	ArcSin_flt32		as	'_ZN4Math6ArcSinEf'
+public	ArcSin_flt64		as	'_ZN4Math6ArcSinEd'
 
-; Sine and cosine of angle
-public	SinCos_flt32		as	'Math_SinCos_flt32'
-public	SinCos_flt64		as	'Math_SinCos_flt64'
-public	SinCos_flt32		as	'_ZN4Math6SinCosEPfS0_f'
-public	SinCos_flt64		as	'_ZN4Math6SinCosEPdS0_d'
+;==============================================================================;
+;       Inverse cosine                                                         ;
+;==============================================================================;
+public	ArcCos_flt32		as	'Math_ArcCos_flt32'
+public	ArcCos_flt64		as	'Math_ArcCos_flt64'
+public	ArcCos_flt32		as	'_ZN4Math6ArcCosEf'
+public	ArcCos_flt64		as	'_ZN4Math6ArcCosEd'
 
-; Sine and cosine of angle and quadrant
-public	SinCosQ_flt32		as	'Math_SinCosQ_flt32'
-public	SinCosQ_flt64		as	'Math_SinCosQ_flt64'
-public	SinCosQ_flt32		as	'_ZN4Math7SinCosQEPfS0_fx'
-public	SinCosQ_flt64		as	'_ZN4Math7SinCosQEPdS0_dx'
+;==============================================================================;
+;       Inverse tangent                                                        ;
+;==============================================================================;
+public	ArcTan_flt32		as	'Math_ArcTan_flt32'
+public	ArcTan_flt64		as	'Math_ArcTan_flt64'
+public	ArcTan2_flt32		as	'Math_ArcTan2_flt32'
+public	ArcTan2_flt64		as	'Math_ArcTan2_flt64'
+public	ArcTan_flt32		as	'_ZN4Math6ArcTanEf'
+public	ArcTan_flt64		as	'_ZN4Math6ArcTanEd'
+public	ArcTan2_flt32		as	'_ZN4Math7ArcTan2Eff'
+public	ArcTan2_flt64		as	'_ZN4Math7ArcTan2Edd'
 
 ;******************************************************************************;
 ;       Exponentiation functions                                               ;
@@ -690,20 +706,72 @@ public	Power_flt64			as	'_ZN4Math5PowerEds'
 ;==============================================================================;
 
 ; Integer logarithm to base 2
+public	Log2i_uint8			as	'Math_Log2_uint8'
+public	Log2i_uint16		as	'Math_Log2_uint16'
+public	Log2i_uint32		as	'Math_Log2_uint32'
+public	Log2i_uint64		as	'Math_Log2_uint64'
 public	Log2i_uint8			as	'_ZN4Math4Log2Eh'
 public	Log2i_uint16		as	'_ZN4Math4Log2Et'
 public	Log2i_uint32		as	'_ZN4Math4Log2Ej'
 public	Log2i_uint64		as	'_ZN4Math4Log2Ey'
+
+; Real logarithm to base 2
+public	Log2_flt32			as	'Math_Log2_flt32'
+public	Log2_flt64			as	'Math_Log2_flt64'
+public	Log2p1_flt32		as	'Math_Log2p1_flt32'
+public	Log2p1_flt64		as	'Math_Log2p1_flt64'
+public	Log2_flt32			as	'_ZN4Math4Log2Ef'
+public	Log2_flt64			as	'_ZN4Math4Log2Ed'
+public	Log2p1_flt32		as	'_ZN4Math6Log2p1Ef'
+public	Log2p1_flt64		as	'_ZN4Math6Log2p1Ed'
 
 ;==============================================================================;
 ;       Logarithm to base 10                                                   ;
 ;==============================================================================;
 
 ; Integer logarithm to base 10
+public	Log10i_uint8		as	'Math_Log10_uint8'
+public	Log10i_uint16		as	'Math_Log10_uint16'
+public	Log10i_uint32		as	'Math_Log10_uint32'
+public	Log10i_uint64		as	'Math_Log10_uint64'
 public	Log10i_uint8		as	'_ZN4Math5Log10Eh'
 public	Log10i_uint16		as	'_ZN4Math5Log10Et'
 public	Log10i_uint32		as	'_ZN4Math5Log10Ej'
 public	Log10i_uint64		as	'_ZN4Math5Log10Ey'
+
+; Real logarithm to base 10
+public	Log10_flt32			as	'Math_Log10_flt32'
+public	Log10_flt64			as	'Math_Log10_flt64'
+public	Log10p1_flt32		as	'Math_Log10p1_flt32'
+public	Log10p1_flt64		as	'Math_Log10p1_flt64'
+public	Log10_flt32			as	'_ZN4Math5Log10Ef'
+public	Log10_flt64			as	'_ZN4Math5Log10Ed'
+public	Log10p1_flt32		as	'_ZN4Math7Log10p1Ef'
+public	Log10p1_flt64		as	'_ZN4Math7Log10p1Ed'
+
+;==============================================================================;
+;       Logarithm to base E (natural logarithm)                                ;
+;==============================================================================;
+public	LogE_flt32			as	'Math_Log_flt32'
+public	LogE_flt64			as	'Math_Log_flt64'
+public	LogEp1_flt32		as	'Math_Logp1_flt32'
+public	LogEp1_flt64		as	'Math_Logp1_flt64'
+public	LogE_flt32			as	'_ZN4Math3LogEf'
+public	LogE_flt64			as	'_ZN4Math3LogEd'
+public	LogEp1_flt32		as	'_ZN4Math5Logp1Ef'
+public	LogEp1_flt64		as	'_ZN4Math5Logp1Ed'
+
+;==============================================================================;
+;       Logarithm to custom base                                               ;
+;==============================================================================;
+public	LogB_flt32			as	'Math_LogB_flt32'
+public	LogB_flt64			as	'Math_LogB_flt64'
+public	LogBp1_flt32		as	'Math_LogBp1_flt32'
+public	LogBp1_flt64		as	'Math_LogBp1_flt64'
+public	LogB_flt32			as	'_ZN4Math4LogBEff'
+public	LogB_flt64			as	'_ZN4Math4LogBEdd'
+public	LogBp1_flt32		as	'_ZN4Math6LogBp1Eff'
+public	LogBp1_flt64		as	'_ZN4Math6LogBp1Edd'
 
 ;******************************************************************************;
 ;       Scale functions                                                        ;
@@ -811,10 +879,22 @@ section	'.text'		executable align 16
 ;******************************************************************************;
 
 ; flt32_t
-MAGIC_FLT32	= 0x4B400000					; magic number for flt32_t to int conversion
+MAGIC_FLT32		= 0x4B400000				; magic number for flt32_t to int conversion
+LOG2_E_FLT32	= 0x3FB8AA3B				; log2 (e)
+LOG10_E_FLT32	= 0x3EDE5BD9				; log10 (e)
+LOGE_E_FLT32	= 0x3F800000				; logE (e)
+LOG2_2_FLT32	= 0x3F800000				; log2 (2)
+LOG10_2_FLT32	= 0x3E9A209B				; log10 (2)
+LOGE_2_FLT32	= 0x3F317218				; logE (2)
 
 ; flt64_t
-MAGIC_FLT64	= 0x4338000000000000			; magic number for flt64_t to int conversion
+MAGIC_FLT64		= 0x4338000000000000		; magic number for flt64_t to int conversion
+LOG2_E_FLT64	= 0x3FF71547652B82FE		; log2 (e)
+LOG10_E_FLT64	= 0x3FDBCB7B1526E50E		; log10 (e)
+LOGE_E_FLT64	= 0x3FF0000000000000		; logE (e)
+LOG2_2_FLT64	= 0x3FF0000000000000		; log2 (2)
+LOG10_2_FLT64	= 0x3FD34413509F79FF		; log10 (2)
+LOGE_2_FLT64	= 0x3FE62E42FEFA39EF		; logE (2)
 
 ;******************************************************************************;
 ;       Expansion of sign bit                                                  ;
@@ -841,6 +921,548 @@ if x eq s
 		movd	reg1, reg2					; reg1 = reg2
 else if x eq d
 		movq	reg1, reg2					; reg1 = reg2
+end if
+}
+
+;******************************************************************************;
+;       Fast computation of polynomial value of degree 3                       ;
+;******************************************************************************;
+macro	SINGLE4	array, value, x
+{
+if x eq s
+		shufp#x	value, value, 0x0			; duplicate value through the entire register
+		movap#x	temp1, [array + 0 * VSIZE]	; temp1 = array[0]
+;---[Stage 1]------------------------------
+		movap#x	temp2, temp1
+		shufp#x	temp2, temp2, 0xE			; extract high result from temp1
+		mulp#x	temp1, value
+		addp#x	temp1, temp2				; temp1 = temp1 + temp2 * value
+		mulp#x	value, value				; value *= value
+;---[Stage 2]------------------------------
+		movap#x	temp2, temp1
+		shufp#x	temp2, temp2, 0x1			; extract high result from temp1
+		muls#x	temp1, value
+		adds#x	temp1, temp2				; temp1 = temp2 + temp1 * value
+else if x eq d
+		shufp#x	value, value, 0x0			; duplicate value through the entire register
+		movap#x	temp1, [array + 0 * VSIZE]	; temp1 = array[0]
+;---[Stage 1]------------------------------
+		mulp#x	temp1, value
+		addp#x	temp1, [array + 1 * VSIZE]	; temp1 = array[1] + array[0] * value
+		mulp#x	value, value				; value *= value
+;---[Stage 2]------------------------------
+		movap#x	temp2, temp1
+		shufp#x	temp2, temp2, 0x1			; extract high result from temp1
+		muls#x	temp1, value
+		adds#x	temp1, temp2				; temp1 = temp2 + temp1 * value
+end if
+}
+;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+macro	PAIR4	array, value, x
+{
+if x eq s
+		shufp#x	value, value, 0x0			; duplicate value through the entire register
+		movap#x	temp1, [array + 0 * VSIZE]	; temp1 = array[0]
+		movap#x	temp2, [array + 1 * VSIZE]	; temp2 = array[1]
+;---[Stage 1]------------------------------
+		movap#x	temp3, temp1
+		shufp#x	temp3, temp3, 0xE			; extract high result from temp1
+		mulp#x	temp1, value
+		addp#x	temp1, temp3				; temp1 = temp1 + temp3 * value
+		movap#x	temp4, temp2
+		shufp#x	temp4, temp4, 0xE			; extract high result from temp2
+		mulp#x	temp2, value
+		addp#x	temp2, temp4				; temp2 = temp2 + temp4 * value
+		mulp#x	value, value				; value *= value
+;---[Stage 2]------------------------------
+		movap#x	temp3, temp1
+		shufp#x	temp3, temp3, 0x1			; extract high result from temp1
+		muls#x	temp1, value
+		adds#x	temp1, temp3				; temp1 = temp3 + temp1 * value
+		movap#x	temp4, temp2
+		shufp#x	temp4, temp4, 0x1			; extract high result from temp2
+		muls#x	temp2, value
+		adds#x	temp2, temp4				; temp2 = temp4 + temp2 * value
+else if x eq d
+		shufp#x	value, value, 0x0			; duplicate value through the entire register
+		movap#x	temp1, [array + 0 * VSIZE]	; temp1 = array[0]
+		movap#x	temp2, [array + 2 * VSIZE]	; temp2 = array[2]
+;---[Stage 1]------------------------------
+		mulp#x	temp1, value
+		addp#x	temp1, [array + 1 * VSIZE]	; temp1 = array[1] + array[0] * value
+		mulp#x	temp2, value
+		addp#x	temp2, [array + 3 * VSIZE]	; temp2 = array[3] + array[2] * value
+		mulp#x	value, value				; value *= value
+;---[Stage 2]------------------------------
+		movap#x	temp3, temp1
+		shufp#x	temp3, temp3, 0x1			; extract high result from temp1
+		muls#x	temp1, value
+		adds#x	temp1, temp3				; temp1 = temp3 + temp1 * value
+		movap#x	temp4, temp2
+		shufp#x	temp4, temp4, 0x1			; extract high result from temp2
+		muls#x	temp2, value
+		adds#x	temp2, temp4				; temp2 = temp4 + temp2 * value
+end if
+}
+
+;******************************************************************************;
+;       Fast computation of polynomial value of degree 7                       ;
+;******************************************************************************;
+macro	SINGLE8	array, value, x
+{
+if x eq s
+		shufp#x	value, value, 0x0			; duplicate value through the entire register
+		movap#x	temp1, [array + 0 * VSIZE]	; temp1 = array[0]
+;---[Stage 1]------------------------------
+		mulp#x	temp1, value
+		addp#x	temp1, [array + 1 * VSIZE]	; temp1 = array[1] + array[0] * value
+		mulp#x	value, value				; value *= value
+;---[Stage 2]------------------------------
+		movap#x	temp2, temp1
+		shufp#x	temp2, temp2, 0xE			; extract high result from temp1
+		mulp#x	temp1, value
+		addp#x	temp1, temp2				; temp1 = temp1 + temp2 * value
+		mulp#x	value, value				; value *= value
+;---[Stage 3]------------------------------
+		movap#x	temp2, temp1
+		shufp#x	temp2, temp2, 0x1			; extract high result from temp1
+		muls#x	temp1, value
+		adds#x	temp1, temp2				; temp1 = temp2 + temp1 * value
+else if x eq d
+		shufp#x	value, value, 0x0			; duplicate value through the entire register
+		movap#x	temp1, [array + 0 * VSIZE]	; temp1 = array[0]
+		movap#x	temp2, [array + 1 * VSIZE]	; temp2 = array[1]
+;---[Stage 1]------------------------------
+		mulp#x	temp1, value
+		addp#x	temp1, [array + 2 * VSIZE]	; temp1 = array[2] + array[0] * value
+		mulp#x	temp2, value
+		addp#x	temp2, [array + 3 * VSIZE]	; temp2 = array[3] + array[1] * value
+		mulp#x	value, value				; value *= value
+;---[Stage 2]------------------------------
+		mulp#x	temp1, value
+		addp#x	temp1, temp2				; temp1 = temp1 + temp2 * value
+		mulp#x	value, value				; value *= value
+;---[Stage 3]------------------------------
+		movap#x	temp2, temp1
+		shufp#x	temp2, temp2, 0x1			; extract high result from temp1
+		muls#x	temp1, value
+		adds#x	temp1, temp2				; temp1 = temp2 + temp1 * value
+end if
+}
+;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+macro	PAIR8	array, value, x
+{
+if x eq s
+		shufp#x	value, value, 0x0			; duplicate value through the entire register
+		movap#x	temp1, [array + 0 * VSIZE]	; temp1 = array[0]
+		movap#x	temp2, [array + 2 * VSIZE]	; temp2 = array[2]
+;---[Stage 1]------------------------------
+		mulp#x	temp1, value
+		addp#x	temp1, [array + 1 * VSIZE]	; temp1 = array[1] + array[0] * value
+		mulp#x	temp2, value
+		addp#x	temp2, [array + 3 * VSIZE]	; temp2 = array[3] + array[2] * value
+		mulp#x	value, value				; value *= value
+;---[Stage 2]------------------------------
+		movap#x	temp3, temp1
+		shufp#x	temp3, temp3, 0xE			; extract high result from temp1
+		mulp#x	temp1, value
+		addp#x	temp1, temp3				; temp1 = temp1 + temp3 * value
+		movap#x	temp4, temp2
+		shufp#x	temp4, temp4, 0xE			; extract high result from temp2
+		mulp#x	temp2, value
+		addp#x	temp2, temp4				; temp2 = temp2 + temp4 * value
+		mulp#x	value, value				; value *= value
+;---[Stage 3]------------------------------
+		movap#x	temp3, temp1
+		shufp#x	temp3, temp3, 0x1			; extract high result from temp1
+		muls#x	temp1, value
+		adds#x	temp1, temp3				; temp1 = temp3 + temp1 * value
+		movap#x	temp4, temp2
+		shufp#x	temp4, temp4, 0x1			; extract high result from temp2
+		muls#x	temp2, value
+		adds#x	temp2, temp4				; temp2 = temp4 + temp2 * value
+else if x eq d
+		shufp#x	value, value, 0x0			; duplicate value through the entire register
+		movap#x	temp1, [array + 0 * VSIZE]	; temp1 = array[0]
+		movap#x	temp3, [array + 1 * VSIZE]	; temp3 = array[1]
+		movap#x	temp2, [array + 4 * VSIZE]	; temp2 = array[4]
+		movap#x	temp4, [array + 5 * VSIZE]	; temp4 = array[5]
+;---[Stage 1]------------------------------
+		mulp#x	temp1, value
+		addp#x	temp1, [array + 2 * VSIZE]	; temp1 = array[2] + array[0] * value
+		mulp#x	temp3, value
+		addp#x	temp3, [array + 3 * VSIZE]	; temp3 = array[3] + array[1] * value
+		mulp#x	temp2, value
+		addp#x	temp2, [array + 6 * VSIZE]	; temp2 = array[6] + array[4] * value
+		mulp#x	temp4, value
+		addp#x	temp4, [array + 7 * VSIZE]	; temp4 = array[7] + array[5] * value
+		mulp#x	value, value				; value *= value
+;---[Stage 2]------------------------------
+		mulp#x	temp1, value
+		addp#x	temp1, temp3				; temp1 = temp1 + temp3 * value
+		mulp#x	temp2, value
+		addp#x	temp2, temp4				; temp2 = temp2 + temp4 * value
+		mulp#x	value, value				; value *= value
+;---[Stage 3]------------------------------
+		movap#x	temp3, temp1
+		shufp#x	temp3, temp3, 0x1			; extract high result from temp1
+		muls#x	temp1, value
+		adds#x	temp1, temp3				; temp1 = temp3 + temp1 * value
+		movap#x	temp4, temp2
+		shufp#x	temp4, temp4, 0x1			; extract high result from temp2
+		muls#x	temp2, value
+		adds#x	temp2, temp4				; temp2 = temp4 + temp2 * value
+end if
+}
+
+;******************************************************************************;
+;       Fast computation of polynomial value of degree 15                      ;
+;******************************************************************************;
+macro	SINGLE16	array, value, x
+{
+if x eq s
+		shufp#x	value, value, 0x0			; duplicate value through the entire register
+		movap#x	temp1, [array + 0 * VSIZE]	; temp1 = array[0]
+		movap#x	temp2, [array + 1 * VSIZE]	; temp2 = array[1]
+;---[Stage 1]------------------------------
+		mulp#x	temp1, value
+		addp#x	temp1, [array + 2 * VSIZE]	; temp1 = array[2] + array[0] * value
+		mulp#x	temp2, value
+		addp#x	temp2, [array + 3 * VSIZE]	; temp2 = array[3] + array[1] * value
+		mulp#x	value, value				; value *= value
+;---[Stage 2]------------------------------
+		mulp#x	temp1, value
+		addp#x	temp1, temp2				; temp1 = temp1 + temp2 * value
+		mulp#x	value, value				; value *= value
+;---[Stage 3]------------------------------
+		movap#x	temp2, temp1
+		shufp#x	temp2, temp2, 0xE			; extract high result from temp1
+		mulp#x	temp1, value
+		addp#x	temp1, temp2				; temp1 = temp1 + temp2 * value
+		mulp#x	value, value				; value *= value
+;---[Stage 4]------------------------------
+		movap#x	temp2, temp1
+		shufp#x	temp2, temp2, 0x1			; extract high result from temp1
+		muls#x	temp1, value
+		adds#x	temp1, temp2				; temp1 = temp2 + temp1 * value
+else if x eq d
+		shufp#x	value, value, 0x0			; duplicate value through the entire register
+		movap#x	temp1, [array + 0 * VSIZE]	; temp1 = array[0]
+		movap#x	temp2, [array + 1 * VSIZE]	; temp2 = array[1]
+		movap#x	temp3, [array + 2 * VSIZE]	; temp3 = array[2]
+		movap#x	temp4, [array + 3 * VSIZE]	; temp4 = array[3]
+;---[Stage 1]------------------------------
+		mulp#x	temp1, value
+		addp#x	temp1, [array + 4 * VSIZE]	; temp1 = array[4] + array[0] * value
+		mulp#x	temp2, value
+		addp#x	temp2, [array + 5 * VSIZE]	; temp2 = array[5] + array[1] * value
+		mulp#x	temp3, value
+		addp#x	temp3, [array + 6 * VSIZE]	; temp3 = array[6] + array[2] * value
+		mulp#x	temp4, value
+		addp#x	temp4, [array + 7 * VSIZE]	; temp4 = array[7] + array[3] * value
+		mulp#x	value, value				; value *= value
+;---[Stage 2]------------------------------
+		mulp#x	temp1, value
+		addp#x	temp1, temp3				; temp1 = temp1 + temp3 * value
+		mulp#x	temp2, value
+		addp#x	temp2, temp4				; temp2 = temp2 + temp4 * value
+		mulp#x	value, value				; value *= value
+;---[Stage 3]------------------------------
+		mulp#x	temp1, value
+		addp#x	temp1, temp2				; temp1 = temp1 + temp2 * value
+		mulp#x	value, value				; value *= value
+;---[Stage 4]------------------------------
+		movap#x	temp2, temp1
+		shufp#x	temp2, temp2, 0x1			; extract high result from temp1
+		muls#x	temp1, value
+		adds#x	temp1, temp2				; temp1 = temp2 + temp1 * value
+end if
+}
+
+;******************************************************************************;
+;       Fast computation of polynomial value of degree 31                      ;
+;******************************************************************************;
+macro	SINGLE32	array, value, x
+{
+if x eq s
+		shufp#x	value, value, 0x0			; duplicate value through the entire register
+		movap#x	temp1, [array + 0 * VSIZE]	; temp1 = array[0]
+		movap#x	temp2, [array + 1 * VSIZE]	; temp2 = array[1]
+		movap#x	temp3, [array + 2 * VSIZE]	; temp3 = array[2]
+		movap#x	temp4, [array + 3 * VSIZE]	; temp4 = array[3]
+;---[Stage 1]------------------------------
+		mulp#x	temp1, value
+		addp#x	temp1, [array + 4 * VSIZE]	; temp1 = array[4] + array[0] * value
+		mulp#x	temp2, value
+		addp#x	temp2, [array + 5 * VSIZE]	; temp2 = array[5] + array[1] * value
+		mulp#x	temp3, value
+		addp#x	temp3, [array + 6 * VSIZE]	; temp3 = array[6] + array[2] * value
+		mulp#x	temp4, value
+		addp#x	temp4, [array + 7 * VSIZE]	; temp4 = array[7] + array[3] * value
+		mulp#x	value, value				; value *= value
+;---[Stage 2]------------------------------
+		mulp#x	temp1, value
+		addp#x	temp1, temp3				; temp1 = temp1 + temp3 * value
+		mulp#x	temp2, value
+		addp#x	temp2, temp4				; temp2 = temp2 + temp4 * value
+		mulp#x	value, value				; value *= value
+;---[Stage 3]------------------------------
+		mulp#x	temp1, value
+		addp#x	temp1, temp2				; temp1 = temp1 + temp2 * value
+		mulp#x	value, value				; value *= value
+;---[Stage 4]------------------------------
+		movap#x	temp2, temp1
+		shufp#x	temp2, temp2, 0xE			; extract high result from temp1
+		mulp#x	temp1, value
+		addp#x	temp1, temp2				; temp1 = temp1 + temp2 * value
+		mulp#x	value, value				; value *= value
+;---[Stage 5]------------------------------
+		movap#x	temp2, temp1
+		shufp#x	temp2, temp2, 0x1			; extract high result from temp1
+		muls#x	temp1, value
+		adds#x	temp1, temp2				; temp1 = temp2 + temp1 * value
+else if x eq d
+		shufp#x	value, value, 0x0			; duplicate value through the entire register
+		movap#x	temp1, [array + 0 * VSIZE]	; temp1 = array[0]
+		movap#x	temp2, [array + 1 * VSIZE]	; temp2 = array[1]
+		movap#x	temp3, [array + 2 * VSIZE]	; temp3 = array[2]
+		movap#x	temp4, [array + 3 * VSIZE]	; temp4 = array[3]
+		movap#x	temp5, [array + 4 * VSIZE]	; temp5 = array[4]
+		movap#x	temp6, [array + 5 * VSIZE]	; temp6 = array[5]
+		movap#x	temp7, [array + 6 * VSIZE]	; temp7 = array[6]
+		movap#x	temp8, [array + 7 * VSIZE]	; temp8 = array[7]
+;---[Stage 1]------------------------------
+		mulp#x	temp1, value
+		addp#x	temp1, [array + 8 * VSIZE]	; temp1 = array[8] + array[0] * value
+		mulp#x	temp2, value
+		addp#x	temp2, [array + 9 * VSIZE]	; temp2 = array[9] + array[1] * value
+		mulp#x	temp3, value
+		addp#x	temp3, [array + 10 * VSIZE]	; temp3 = array[10] + array[2] * value
+		mulp#x	temp4, value
+		addp#x	temp4, [array + 11 * VSIZE]	; temp4 = array[11] + array[3] * value
+		mulp#x	temp5, value
+		addp#x	temp5, [array + 12 * VSIZE]	; temp5 = array[12] + array[4] * value
+		mulp#x	temp6, value
+		addp#x	temp6, [array + 13 * VSIZE]	; temp6 = array[13] + array[5] * value
+		mulp#x	temp7, value
+		addp#x	temp7, [array + 14 * VSIZE]	; temp7 = array[14] + array[6] * value
+		mulp#x	temp8, value
+		addp#x	temp8, [array + 15 * VSIZE]	; temp8 = array[15] + array[7] * value
+		mulp#x	value, value				; value *= value
+;---[Stage 2]------------------------------
+		mulp#x	temp1, value
+		addp#x	temp1, temp5				; temp1 = temp1 + temp5 * value
+		mulp#x	temp2, value
+		addp#x	temp2, temp6				; temp2 = temp2 + temp6 * value
+		mulp#x	temp3, value
+		addp#x	temp3, temp7				; temp3 = temp3 + temp7 * value
+		mulp#x	temp4, value
+		addp#x	temp4, temp8				; temp4 = temp4 + temp8 * value
+		mulp#x	value, value				; value *= value
+;---[Stage 3]------------------------------
+		mulp#x	temp1, value
+		addp#x	temp1, temp3				; temp1 = temp1 + temp3 * value
+		mulp#x	temp2, value
+		addp#x	temp2, temp4				; temp2 = temp2 + temp4 * value
+		mulp#x	value, value				; value *= value
+;---[Stage 4]------------------------------
+		mulp#x	temp1, value
+		addp#x	temp1, temp2				; temp1 = temp1 + temp2 * value
+		mulp#x	value, value				; value *= value
+;---[Stage 5]------------------------------
+		movap#x	temp2, temp1
+		shufp#x	temp2, temp2, 0x1			; extract high result from temp1
+		muls#x	temp1, value
+		adds#x	temp1, temp2				; temp1 = temp2 + temp1 * value
+end if
+}
+
+;******************************************************************************;
+;       Fast computation of polynomial value of degree 63                      ;
+;******************************************************************************;
+macro	SINGLE64	array, value, x
+{
+if x eq s
+		shufp#x	value, value, 0x0			; duplicate value through the entire register
+		movap#x	temp1, [array + 0 * VSIZE]	; temp1 = array[0]
+		movap#x	temp2, [array + 1 * VSIZE]	; temp2 = array[1]
+		movap#x	temp3, [array + 2 * VSIZE]	; temp3 = array[2]
+		movap#x	temp4, [array + 3 * VSIZE]	; temp4 = array[3]
+		movap#x	temp5, [array + 4 * VSIZE]	; temp5 = array[4]
+		movap#x	temp6, [array + 5 * VSIZE]	; temp6 = array[5]
+		movap#x	temp7, [array + 6 * VSIZE]	; temp7 = array[6]
+		movap#x	temp8, [array + 7 * VSIZE]	; temp8 = array[7]
+;---[Stage 1]------------------------------
+		mulp#x	temp1, value
+		addp#x	temp1, [array + 8 * VSIZE]	; temp1 = array[8] + array[0] * value
+		mulp#x	temp2, value
+		addp#x	temp2, [array + 9 * VSIZE]	; temp2 = array[9] + array[1] * value
+		mulp#x	temp3, value
+		addp#x	temp3, [array + 10 * VSIZE]	; temp3 = array[10] + array[2] * value
+		mulp#x	temp4, value
+		addp#x	temp4, [array + 11 * VSIZE]	; temp4 = array[11] + array[3] * value
+		mulp#x	temp5, value
+		addp#x	temp5, [array + 12 * VSIZE]	; temp5 = array[12] + array[4] * value
+		mulp#x	temp6, value
+		addp#x	temp6, [array + 13 * VSIZE]	; temp6 = array[13] + array[5] * value
+		mulp#x	temp7, value
+		addp#x	temp7, [array + 14 * VSIZE]	; temp7 = array[14] + array[6] * value
+		mulp#x	temp8, value
+		addp#x	temp8, [array + 15 * VSIZE]	; temp8 = array[15] + array[7] * value
+		mulp#x	value, value				; value *= value
+;---[Stage 2]------------------------------
+		mulp#x	temp1, value
+		addp#x	temp1, temp5				; temp1 = temp1 + temp5 * value
+		mulp#x	temp2, value
+		addp#x	temp2, temp6				; temp2 = temp2 + temp6 * value
+		mulp#x	temp3, value
+		addp#x	temp3, temp7				; temp3 = temp3 + temp7 * value
+		mulp#x	temp4, value
+		addp#x	temp4, temp8				; temp4 = temp4 + temp8 * value
+		mulp#x	value, value				; value *= value
+;---[Stage 3]------------------------------
+		mulp#x	temp1, value
+		addp#x	temp1, temp3				; temp1 = temp1 + temp3 * value
+		mulp#x	temp2, value
+		addp#x	temp2, temp4				; temp2 = temp2 + temp4 * value
+		mulp#x	value, value				; value *= value
+;---[Stage 4]------------------------------
+		mulp#x	temp1, value
+		addp#x	temp1, temp2				; temp1 = temp1 + temp2 * value
+		mulp#x	value, value				; value *= value
+;---[Stage 5]------------------------------
+		movap#x	temp2, temp1
+		shufp#x	temp2, temp2, 0xE			; extract high result from temp1
+		mulp#x	temp1, value
+		addp#x	temp1, temp2				; temp1 = temp1 + temp2 * value
+		mulp#x	value, value				; value *= value
+;---[Stage 6]------------------------------
+		movap#x	temp2, temp1
+		shufp#x	temp2, temp2, 0x1			; extract high result from temp1
+		muls#x	temp1, value
+		adds#x	temp1, temp2				; temp1 = temp2 + temp1 * value
+else if x eq d
+stack	equ		rsp							; stack pointer
+		sub		stack, 264					; reserving stack size for local vars
+		shufp#x	value, value, 0x0			; duplicate value through the entire register
+;---[Stage 1]------------------------------
+		movap#x	temp1, [array + 0 * VSIZE]	; temp1 = array[0]
+		movap#x	temp2, [array + 1 * VSIZE]	; temp2 = array[1]
+		movap#x	temp3, [array + 2 * VSIZE]	; temp3 = array[2]
+		movap#x	temp4, [array + 3 * VSIZE]	; temp4 = array[3]
+		movap#x	temp5, [array + 4 * VSIZE]	; temp5 = array[4]
+		movap#x	temp6, [array + 5 * VSIZE]	; temp6 = array[5]
+		movap#x	temp7, [array + 6 * VSIZE]	; temp7 = array[6]
+		movap#x	temp8, [array + 7 * VSIZE]	; temp8 = array[7]
+		mulp#x	temp1, value
+		addp#x	temp1, [array + 16 * VSIZE]	; temp1 = array[16] + array[0] * value
+		movap#x	[stack + 0 * VSIZE], temp1	; stack[0] = temp1
+		mulp#x	temp2, value
+		addp#x	temp2, [array + 17 * VSIZE]	; temp2 = array[17] + array[1] * value
+		movap#x	[stack + 1 * VSIZE], temp2	; stack[1] = temp2
+		mulp#x	temp3, value
+		addp#x	temp3, [array + 18 * VSIZE]	; temp3 = array[18] + array[2] * value
+		movap#x	[stack + 2 * VSIZE], temp3	; stack[2] = temp3
+		mulp#x	temp4, value
+		addp#x	temp4, [array + 19 * VSIZE]	; temp4 = array[19] + array[3] * value
+		movap#x	[stack + 3 * VSIZE], temp4	; stack[3] = temp4
+		mulp#x	temp5, value
+		addp#x	temp5, [array + 20 * VSIZE]	; temp5 = array[20] + array[4] * value
+		movap#x	[stack + 4 * VSIZE], temp5	; stack[4] = temp5
+		mulp#x	temp6, value
+		addp#x	temp6, [array + 21 * VSIZE]	; temp6 = array[21] + array[5] * value
+		movap#x	[stack + 5 * VSIZE], temp6	; stack[5] = temp6
+		mulp#x	temp7, value
+		addp#x	temp7, [array + 22 * VSIZE]	; temp7 = array[22] + array[6] * value
+		movap#x	[stack + 6 * VSIZE], temp7	; stack[6] = temp7
+		mulp#x	temp8, value
+		addp#x	temp8, [array + 23 * VSIZE]	; temp8 = array[23] + array[7] * value
+		movap#x	[stack + 7 * VSIZE], temp8	; stack[7] = temp8
+		movap#x	temp1, [array + 8 * VSIZE]	; temp1 = array[8]
+		movap#x	temp2, [array + 9 * VSIZE]	; temp2 = array[9]
+		movap#x	temp3, [array + 10 * VSIZE]	; temp3 = array[10]
+		movap#x	temp4, [array + 11 * VSIZE]	; temp4 = array[11]
+		movap#x	temp5, [array + 12 * VSIZE]	; temp5 = array[12]
+		movap#x	temp6, [array + 13 * VSIZE]	; temp6 = array[13]
+		movap#x	temp7, [array + 14 * VSIZE]	; temp7 = array[14]
+		movap#x	temp8, [array + 15 * VSIZE]	; temp8 = array[15]
+		mulp#x	temp1, value
+		addp#x	temp1, [array + 24 * VSIZE]	; temp1 = array[24] + array[8] * value
+		movap#x	[stack + 8 * VSIZE], temp1	; stack[8] = temp1
+		mulp#x	temp2, value
+		addp#x	temp2, [array + 25 * VSIZE]	; temp2 = array[25] + array[9] * value
+		movap#x	[stack + 9 * VSIZE], temp2	; stack[9] = temp2
+		mulp#x	temp3, value
+		addp#x	temp3, [array + 26 * VSIZE]	; temp3 = array[26] + array[10] * value
+		movap#x	[stack + 10 * VSIZE], temp3	; stack[10] = temp3
+		mulp#x	temp4, value
+		addp#x	temp4, [array + 27 * VSIZE]	; temp4 = array[27] + array[11] * value
+		movap#x	[stack + 11 * VSIZE], temp4	; stack[11] = temp4
+		mulp#x	temp5, value
+		addp#x	temp5, [array + 28 * VSIZE]	; temp5 = array[28] + array[12] * value
+		movap#x	[stack + 12 * VSIZE], temp5	; stack[12] = temp5
+		mulp#x	temp6, value
+		addp#x	temp6, [array + 29 * VSIZE]	; temp6 = array[29] + array[13] * value
+		movap#x	[stack + 13 * VSIZE], temp6	; stack[13] = temp6
+		mulp#x	temp7, value
+		addp#x	temp7, [array + 30 * VSIZE]	; temp7 = array[30] + array[14] * value
+		movap#x	[stack + 14 * VSIZE], temp7	; stack[14] = temp7
+		mulp#x	temp8, value
+		addp#x	temp8, [array + 31 * VSIZE]	; temp8 = array[31] + array[15] * value
+		movap#x	[stack + 15 * VSIZE], temp8	; stack[15] = temp8
+		mulp#x	value, value				; value *= value
+		movap#x	temp1, [stack + 0 * VSIZE]	; temp1 = stack[0]
+		movap#x	temp2, [stack + 1 * VSIZE]	; temp2 = stack[1]
+		movap#x	temp3, [stack + 2 * VSIZE]	; temp3 = stack[2]
+		movap#x	temp4, [stack + 3 * VSIZE]	; temp4 = stack[3]
+		movap#x	temp5, [stack + 4 * VSIZE]	; temp5 = stack[4]
+		movap#x	temp6, [stack + 5 * VSIZE]	; temp6 = stack[5]
+		movap#x	temp7, [stack + 6 * VSIZE]	; temp7 = stack[6]
+		movap#x	temp8, [stack + 7 * VSIZE]	; temp8 = stack[7]
+;---[Stage 2]------------------------------
+		mulp#x	temp1, value
+		addp#x	temp1, [stack + 8 * VSIZE]	; temp1 = stack[8] + stack[0] * value
+		mulp#x	temp2, value
+		addp#x	temp2, [stack + 9 * VSIZE]	; temp2 = stack[9] + stack[1] * value
+		mulp#x	temp3, value
+		addp#x	temp3, [stack + 10 * VSIZE]	; temp3 = stack[10] + stack[2] * value
+		mulp#x	temp4, value
+		addp#x	temp4, [stack + 11 * VSIZE]	; temp4 = stack[11] + stack[3] * value
+		mulp#x	temp5, value
+		addp#x	temp5, [stack + 12 * VSIZE]	; temp5 = stack[12] + stack[4] * value
+		mulp#x	temp6, value
+		addp#x	temp6, [stack + 13 * VSIZE]	; temp6 = stack[13] + stack[5] * value
+		mulp#x	temp7, value
+		addp#x	temp7, [stack + 14 * VSIZE]	; temp7 = stack[14] + stack[6] * value
+		mulp#x	temp8, value
+		addp#x	temp8, [stack + 15 * VSIZE]	; temp8 = stack[15] + stack[7] * value
+		mulp#x	value, value				; value *= value
+		add		stack, 264					; restoring back the stack pointer
+;---[Stage 3]------------------------------
+		mulp#x	temp1, value
+		addp#x	temp1, temp5				; temp1 = temp1 + temp5 * value
+		mulp#x	temp2, value
+		addp#x	temp2, temp6				; temp2 = temp2 + temp6 * value
+		mulp#x	temp3, value
+		addp#x	temp3, temp7				; temp3 = temp3 + temp7 * value
+		mulp#x	temp4, value
+		addp#x	temp4, temp8				; temp4 = temp4 + temp8 * value
+		mulp#x	value, value				; value *= value
+;---[Stage 4]------------------------------
+		mulp#x	temp1, value
+		addp#x	temp1, temp3				; temp1 = temp1 + temp3 * value
+		mulp#x	temp2, value
+		addp#x	temp2, temp4				; temp2 = temp2 + temp4 * value
+		mulp#x	value, value				; value *= value
+;---[Stage 5]------------------------------
+		mulp#x	temp1, value
+		addp#x	temp1, temp2				; temp1 = temp1 + temp2 * value
+		mulp#x	value, value				; value *= value
+;---[Stage 6]------------------------------
+		movap#x	temp2, temp1
+		shufp#x	temp2, temp2, 0x1			; extract high result from temp1
+		muls#x	temp1, value
+		adds#x	temp1, temp2				; temp1 = temp2 + temp1 * value
 end if
 }
 
@@ -1157,13 +1779,13 @@ value1	equ		xmm0						; first value
 value2	equ		xmm1						; second value
 ;---[Internal variables]-------------------
 if x eq s
+nanval	= PNAN_FLT32						; +NaN
 poneval	= PONE_FLT32						; +1.0
 moneval	= MONE_FLT32						; -1.0
-nanval	= PNAN_FLT32						; +NaN
 else if x eq d
+nanval	= PNAN_FLT64						; +NaN
 poneval	= PONE_FLT64						; +1.0
 moneval	= MONE_FLT64						; -1.0
-nanval	= PNAN_FLT64						; +NaN
 end if
 ;------------------------------------------
 		mov		pone, poneval				; pone = +1
@@ -1234,7 +1856,7 @@ Sqrt_flt64:		SQRT_FLT	d
 ;==============================================================================;
 ;       Three-state comparison                                                 ;
 ;==============================================================================;
-macro	SIGN_RAW		value1, value2, temp1, temp2, x
+macro	SIGN_RAW	value1, value2, temp1, temp2, x
 {
 ;---[Internal variables]-------------------
 result	equ		rax							; result register
@@ -1487,510 +2109,298 @@ LCM_sint64:	LCM	GCD_sint64, rdi, rsi, rcx, rax, rdx, 1, 3
 ;******************************************************************************;
 ;       Trigonometric functions                                                ;
 ;******************************************************************************;
-macro	SIN32
-{
-;---[Internal variables]-------------------
-array	= sin_flt32							; pointer to array of coefficients
-bytes	= 4									; size of array element (bytes)
-;------------------------------------------
-	prefetchnta	[array]						; prefetch data
-		movaps	scale, angle				; scale = angle
-		mulss	angle, angle				; angle *= angle
-		movaps	origin, angle				; origin = angle ^ 2
-;---[Stage 1]------------------------------
-		movss	temp1, [array + 0 * bytes]	; temp1 = array[0]
-		movss	temp2, [array + 1 * bytes]	; temp2 = array[1]
-		mulss	temp1, angle
-		addss	temp1, [array + 2 * bytes]	; temp1 = array[2] + array[0] * angle
-		mulss	temp2, angle
-		addss	temp2, [array + 3 * bytes]	; temp2 = array[3] + array[1] * angle
-		mulss	angle, angle				; angle *= angle
-;---[Stage 2]------------------------------
-		mulss	angle, temp2
-		addss	angle, temp1				; angle = temp1 + temp2 * angle
-;---[Stage 3]------------------------------
-		mulss	angle, origin
-		mulss	angle, scale
-		addss	angle, scale				; angle = scale + angle * origin * scale
-}
-;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	SIN64
-{
-;---[Internal variables]-------------------
-array	= sin_flt64							; pointer to array of coefficients
-bytes	= 8									; size of array element (bytes)
-;------------------------------------------
-	prefetchnta	[array]						; prefetch data
-		movapd	scale, angle				; scale = angle
-		mulsd	angle, angle				; angle *= angle
-		movapd	origin, angle				; origin = angle ^ 2
-;---[Stage 1]------------------------------
-		movsd	temp1, [array + 0 * bytes]	; temp1 = array[0]
-		movsd	temp2, [array + 1 * bytes]	; temp2 = array[1]
-		movsd	temp3, [array + 2 * bytes]	; temp3 = array[2]
-		movsd	temp4, [array + 3 * bytes]	; temp4 = array[3]
-		mulsd	temp1, angle
-		addsd	temp1, [array + 4 * bytes]	; temp1 = array[4] + array[0] * angle
-		mulsd	temp2, angle
-		addsd	temp2, [array + 5 * bytes]	; temp2 = array[5] + array[1] * angle
-		mulsd	temp3, angle
-		addsd	temp3, [array + 6 * bytes]	; temp3 = array[6] + array[2] * angle
-		mulsd	angle, angle				; angle *= angle
-;---[Stage 2]------------------------------
-		mulsd	temp2, angle
-		addsd	temp1, temp2				; temp1 = temp1 + temp2 * angle
-		mulsd	temp4, angle
-		addsd	temp3, temp4				; temp3 = temp3 + temp4 * angle
-		mulsd	angle, angle				; angle *= angle
-;---[Stage 3]------------------------------
-		mulsd	angle, temp3
-		addsd	angle, temp1				; angle = temp1 + temp3 * angle
-;---[Stage 4]------------------------------
-		mulsd	angle, origin
-		mulsd	angle, scale
-		addsd	angle, scale				; angle = scale + angle * origin * scale
-}
-;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	COS32
-{
-;---[Internal variables]-------------------
-array	= cos_flt32							; pointer to array of coefficients
-bytes	= 4									; size of array element (bytes)
-;------------------------------------------
-	prefetchnta	[array]						; prefetch data
-		mulss	angle, angle				; angle *= angle
-		movaps	scale, angle				; scale = angle ^ 2
-		movaps	origin, angle				; origin = angle ^ 2
-;---[Stage 1]------------------------------
-		movss	temp1, [array + 0 * bytes]	; temp1 = array[0]
-		movss	temp2, [array + 1 * bytes]	; temp2 = array[1]
-		mulss	temp1, angle
-		addss	temp1, [array + 2 * bytes]	; temp1 = array[2] + array[0] * angle
-		mulss	temp2, angle
-		addss	temp2, [array + 3 * bytes]	; temp2 = array[3] + array[1] * angle
-		mulss	angle, angle				; angle *= angle
-;---[Stage 2]------------------------------
-		mulss	angle, temp2
-		addss	angle, temp1				; angle = temp1 + temp2 * angle
-;---[Stage 3]------------------------------
-		initreg	temp2, treg, MHALF_FLT32	; temp2 = -0.5
-		mulss	temp2, scale
-		initreg	temp1, treg, PONE_FLT32		; temp1 = +1.0
-		mulss	angle, origin
-		mulss	angle, scale
-		addss	angle, temp2
-		addss	angle, temp1				; angle = 1 - 0.5 * scale + angle * origin * scale
-}
-;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	COS64
-{
-;---[Internal variables]-------------------
-array	= cos_flt64							; pointer to array of coefficients
-bytes	= 8									; size of array element (bytes)
-;------------------------------------------
-	prefetchnta	[array]						; prefetch data
-		mulsd	angle, angle				; angle *= angle
-		movapd	scale, angle				; scale = angle ^ 2
-		movapd	origin, angle				; origin = angle ^ 2
-;---[Stage 1]------------------------------
-		movsd	temp1, [array + 0 * bytes]	; temp1 = array[0]
-		movsd	temp2, [array + 1 * bytes]	; temp2 = array[1]
-		movsd	temp3, [array + 2 * bytes]	; temp3 = array[2]
-		movsd	temp4, [array + 3 * bytes]	; temp4 = array[3]
-		mulsd	temp1, angle
-		addsd	temp1, [array + 4 * bytes]	; temp1 = array[4] + array[0] * angle
-		mulsd	temp2, angle
-		addsd	temp2, [array + 5 * bytes]	; temp2 = array[5] + array[1] * angle
-		mulsd	temp3, angle
-		addsd	temp3, [array + 6 * bytes]	; temp3 = array[6] + array[2] * angle
-		mulsd	angle, angle				; angle *= angle
-;---[Stage 2]------------------------------
-		mulsd	temp2, angle
-		addsd	temp1, temp2				; temp1 = temp1 + temp2 * angle
-		mulsd	temp4, angle
-		addsd	temp3, temp4				; temp3 = temp3 + temp4 * angle
-		mulsd	angle, angle				; angle *= angle
-;---[Stage 3]------------------------------
-		mulsd	angle, temp3
-		addsd	angle, temp1				; angle = temp1 + temp3 * angle
-;---[Stage 4]------------------------------
-		initreg	temp2, treg, MHALF_FLT64	; temp2 = -0.5
-		mulsd	temp2, scale
-		initreg	temp1, treg, PONE_FLT64		; temp1 = +1.0
-		mulsd	angle, origin
-		mulsd	angle, scale
-		addsd	angle, temp2
-		addsd	angle, temp1				; angle = 1 - 0.5 * scale + angle * origin * scale
-}
-;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	SINCOS32
-{
-;---[Internal variables]-------------------
-array1	= cos_flt32							; pointer to array of cos coefficients
-array2	= sin_flt32							; pointer to array of sin coefficients
-bytes	= 4									; size of array element (bytes)
-;------------------------------------------
-	prefetchnta	[array1]					; prefetch data
-	prefetchnta	[array2]					; prefetch data
-		movaps	hsin, angle					; hsin = angle
-		mulss	angle, angle				; angle *= angle
-		movaps	scale, angle				; scale = angle ^ 2
-		movaps	origin, angle				; origin = angle ^ 2
-;---[Stage 1]------------------------------
-		movss	temp2, [array1 + 0 * bytes]	; temp2 = array1[0]
-		movss	temp4, [array1 + 1 * bytes]	; temp4 = array1[1]
-		movss	temp3, [array2 + 0 * bytes]	; temp3 = array2[0]
-		movss	temp5, [array2 + 1 * bytes]	; temp5 = array2[1]
-		mulss	temp2, angle
-		addss	temp2, [array1 + 2 * bytes]	; temp2 = array1[2] + array1[0] * angle
-		mulss	temp4, angle
-		addss	temp4, [array1 + 3 * bytes]	; temp4 = array1[3] + array1[1] * angle
-		mulss	temp3, angle
-		addss	temp3, [array2 + 2 * bytes]	; temp3 = array2[2] + array2[0] * angle
-		mulss	temp5, angle
-		addss	temp5, [array2 + 3 * bytes]	; temp5 = array2[3] + array2[1] * angle
-		mulss	angle, angle				; angle *= angle
-;---[Stage 2]------------------------------
-		mulss	temp4, angle
-		addss	temp2, temp4				; temp2 = temp2 + temp4 * angle
-		mulss	temp5, angle
-		addss	temp3, temp5				; temp3 = temp5 + temp5 * angle
-;---[Stage 3]------------------------------
-		initreg	hcos, treg, MHALF_FLT32
-		mulss	hcos, scale					; hcos = -0.5 * scale
-		mulss	lcos, origin
-		mulss	lsin, origin
-		mulss	lcos, scale					; lcos = temp2 * origin * scale
-		mulss	lsin, hsin					; temp3 = temp3 * origin * hsin
-}
-;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	SINCOS64
-{
-;---[Internal variables]-------------------
-array1	= cos_flt64							; pointer to array of cos coefficients
-array2	= sin_flt64							; pointer to array of sin coefficients
-bytes	= 8									; size of array element (bytes)
-;------------------------------------------
-	prefetchnta	[array1]					; prefetch data
-	prefetchnta	[array2]					; prefetch data
-		movapd	hsin, angle					; hsin = angle
-		mulsd	angle, angle				; angle *= angle
-		movapd	scale, angle				; scale = angle ^ 2
-		movapd	origin, angle				; origin = angle ^ 2
-;---[Stage 1]------------------------------
-		movsd	temp2, [array1 + 0 * bytes]	; temp2 = array1[0]
-		movsd	temp4, [array1 + 1 * bytes]	; temp4 = array1[1]
-		movsd	temp6, [array1 + 2 * bytes]	; temp6 = array1[2]
-		movsd	temp8, [array1 + 3 * bytes]	; temp8 = array1[3]
-		movsd	temp3, [array2 + 0 * bytes]	; temp3 = array2[0]
-		movsd	temp5, [array2 + 1 * bytes]	; temp5 = array2[1]
-		movsd	temp7, [array2 + 2 * bytes]	; temp7 = array2[2]
-		movsd	temp9, [array2 + 3 * bytes]	; temp9 = array2[3]
-		mulsd	temp2, angle
-		addsd	temp2, [array1 + 4 * bytes]	; temp2 = array1[4] + array1[0] * angle
-		mulsd	temp4, angle
-		addsd	temp4, [array1 + 5 * bytes]	; temp4 = array1[5] + array1[1] * angle
-		mulsd	temp6, angle
-		addsd	temp6, [array1 + 6 * bytes]	; temp6 = array1[6] + array1[2] * angle
-		mulsd	temp3, angle
-		addsd	temp3, [array2 + 4 * bytes]	; temp3 = array2[4] + array2[0] * angle
-		mulsd	temp5, angle
-		addsd	temp5, [array2 + 5 * bytes]	; temp5 = array2[5] + array2[1] * angle
-		mulsd	temp7, angle
-		addsd	temp7, [array2 + 6 * bytes]	; temp7 = array2[6] + array2[2] * angle
-		mulsd	angle, angle				; angle *= angle
-;---[Stage 2]------------------------------
-		mulsd	temp4, angle
-		addsd	temp2, temp4				; temp2 = temp2 + temp4 * angle
-		mulsd	temp8, angle
-		addsd	temp6, temp8				; temp6 = temp6 + temp8 * angle
-		mulsd	temp5, angle
-		addsd	temp3, temp5				; temp3 = temp5 + temp5 * angle
-		mulsd	temp9, angle
-		addsd	temp7, temp9				; temp7 = temp7 + temp9 * angle
-		mulsd	angle, angle				; angle *= angle
-;---[Stage 3]------------------------------
-		mulsd	temp6, angle
-		addsd	temp2, temp6				; temp2 = temp2 + temp6 * angle
-		mulsd	temp7, angle
-		addsd	temp3, temp7				; temp3 = temp3 + temp7 * angle
-;---[Stage 4]------------------------------
-		initreg	hcos, treg, MHALF_FLT64
-		mulsd	hcos, scale					; hcos = -0.5 * scale
-		mulsd	lcos, origin
-		mulsd	lsin, origin
-		mulsd	lcos, scale					; lcos = temp2 * origin * scale
-		mulsd	lsin, hsin					; temp3 = temp3 * origin * hsin
-}
-;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	TRIG1	cmd, abs, exp, mant, value, Func, x
+macro	TRIG1	Func, ivalue, mant, exp, ipart, res0, res1, temp0, temp1, x
 {
 ;---[Parameters]---------------------------
 angle	equ		xmm0						; angle value
 ;---[Internal variables]-------------------
-res0	equ		rax							; result register #1
-res1	equ		rdx							; result register #2
-temp0	equ		rdi							; temporary register #1
-temp1	equ		rsi							; temporary register #2
-mreg	equ		r8							; register which holds mantissa value
+treg	equ		rax							; temporary register
 index	equ		r10							; first index for long mul operation
 max		equ		r11							; last index for long mul operation
 expl	equ		cl							; low part of exponent value
-scale	equ		xmm1						; scale value
-sign	equ		xmm2						; sign bit
-fpart	equ		res0						; fraction part of result
-ipart	equ		res1						; integer part of result
-shift	equ		temp0						; shift value into long mul result
+angle1	equ		xmm0						; angle value #1
+angle2	equ		xmm1						; angle value #2
+scale1	equ		xmm2						; high part of scale value
+scale2	equ		xmm3						; low part of scale value
+sign	equ		xmm4						; sign bit
+fpart1	equ		res0						; fraction part of result #1
+fpart2	equ		res1						; fraction part of result #2
 stack	equ		rsp							; stack pointer
 target	equ		stack + 0 * 8				; stack position of "target" variable
 if x eq s
-source	= range_flt32						; pointer to range reduction constant
 dmask	= DMASK_FLT32						; data mask
 smask	= SMASK_FLT32						; sign mask
 emask	= EMASK_FLT32						; exponent mask
 mmask	= MMASK_FLT32						; mantissa mask
 nanval	= PNAN_FLT32						; +NaN
 infval	= PINF_FLT32						; +Inf
-maxval	= PI_FOUR_FLT32						; Pi / 4
+pi4val	= PI_FOUR_FLT32						; +Pi/4
 mbits	= MBITS_FLT32						; count of bits into mantissa
 bias	= EBIAS_FLT32						; exponent bias
-bits	= 192								; bits for long mul operation
-sclval	= 0x1FC90FDB						; scale value
+source	= range_flt32						; pointer to range reduction constant
+cbits	= 192								; count of bits into long mul constant
+bscale	= 5									; bits scale value
+sclval1	= 0x2FC90FDB						; Pi/2 * 2^-32
+sclval2	= 0x20490FDB						; Pi/2 * 2^-63
 else if x eq d
-source	= range_flt64						; pointer to range reduction constant
 dmask	= DMASK_FLT64						; data mask
 smask	= SMASK_FLT64						; sign mask
 emask	= EMASK_FLT64						; exponent mask
 mmask	= MMASK_FLT64						; mantissa mask
 nanval	= PNAN_FLT64						; +NaN
 infval	= PINF_FLT64						; +Inf
-maxval	= PI_FOUR_FLT64						; Pi / 4
+pi4val	= PI_FOUR_FLT64						; +Pi/4
 mbits	= MBITS_FLT64						; count of bits into mantissa
 bias	= EBIAS_FLT64						; exponent bias
-bits	= 1088								; bits for long mul operation
-sclval	= 0x3BF921FB54442D18				; scale value
+source	= range_flt64						; pointer to range reduction constant
+cbits	= 1152								; count of bits into long mul constant
+bscale	= 6									; bits scale value
+sclval1	= 0x3BF921FB54442D18				; Pi/2 * 2^-64
+sclval2	= 0x380921FB54442D18				; Pi/2 * 2^-127
 end if
+bits	= 1 shl bscale						; block size (bits)
+bytes	= 1 shl (bscale - 3)				; block size (bytes)
 space	= 19 * 8							; stack size required by the procedure
 ;------------------------------------------
 		sub		stack, space				; reserving stack size for local vars
-		movint	value, angle, x
-		mov		abs, dmask
-		and		abs, value					; abs = Abs (angle)
-		mov		mant, infval
-		cmp		abs, mant					; if (abs >= inf)
+		initreg	sign, treg, smask			; sign = smask
+		initreg	scale1, treg, sclval1		; scale1 = sclval1
+		initreg	scale2, treg, sclval2		; scale2 = sclval2
+		movint	ivalue, angle, x
+		mov		mant, dmask
+		and		mant, ivalue				; mant = Abs (angle)
+		mov		res0, infval
+		cmp		mant, res0					; if (mant >= Inf)
 		jae		.ovrfl						;     then go to overflow branch
-		mov		mant, maxval
-		cmp		abs, mant					; if (abs <= Pi / 4)
+		mov		res0, pi4val
+		cmp		mant, res0					; if (mant <= Pi/4)
 		jbe		.skip						;     then skip following code
-;---[Set correct sign to scale value]------
-		initreg	sign, shift, smask			; sign = smask
-		initreg	scale, shift, sclval		; scale = sclval
+;---[Set correct sign to scale values]-----
 		andp#x	sign, angle					; get angle sign
-		orp#x	scale, sign					; set angle sign
+		orp#x	scale1, sign				; set angle sign to scale value #1
+		orp#x	scale2, sign				; set angle sign to scale value #2
 ;---[Extract exponent]---------------------
 		mov		exp, emask
-		and		exp, value					; exp = angle & emask
+		and		exp, ivalue					; exp = angle & emask
 		shr		exp, mbits					; exp >>= mbits
 		sub		exp, bias					; exp -= bias
 		neg		exp
-		add		exp, bits + mbits			; exp = bits + mbits - exp
+		add		exp, cbits + mbits			; exp = cbits + mbits - exp
 ;---[Extract mantissa]---------------------
-		mov		abs, 1 shl mbits
+		mov		temp0, mmask + 1
 		mov		mant, mmask
-		and		mant, value					; mant = angle & mmask
-		or		mant, abs					; mant |= 1 << mbits
+		and		mant, ivalue				; mant = angle & mmask
+		or		mant, temp0					; mant |= 1 << mbits
 ;---[Long mul operation]-------------------
-		xor		shift, shift				; shift = 0
-		lea		index, [exp - 64]
-		shr		index, 6
-		sub		index, 1					; index = (exp - 64) / 64 - 1
-		cmp		index, shift				; if (index < shift)
-		cmovl	index, shift				;     index = shift
-		mov		shift, bits / 64			; shift = bits / 64
+		xor		treg, treg					; treg = 0
+		lea		index, [exp - 2 * bits]
+		shr		index, bscale
+		sub		index, 1					; index = (exp - 2 * bits) / bits - 1
+		cmp		index, treg					; if (index < treg)
+		cmovl	index, treg					;     index = treg
+		mov		treg, cbits / bits			; treg = cbits / bits
 		lea		max, [exp + 1]
-		shr		max, 6
-		add		max, 1						; max = (exp + 1) / 64 + 1
-		cmp		max, shift					; if (max > shift)
-		cmovg	max, shift					;     max = shift
+		shr		max, bscale
+		add		max, 1						; max = (exp + 1) / bits + 1
+		cmp		max, treg					; if (max > treg)
+		cmovg	max, treg					;     max = treg
 		xor		temp0, temp0				; temp0 = 0
 		xor		temp1, temp1				; temp1 = 0
 ;---[Multiplication loop]------------------
-.loop:	mov		res0, [source + index * 8]	; res0 = low (source[index] * mant)
-		mul		mreg						; res1 = high (source[index] * mant)
+.loop:	mov		res0, [source+index*bytes]	; res0 = low (source[index] * mant)
+		mul		mant						; res1 = high (source[index] * mant)
 		add		res0, temp0					; res0 += temp0
 		adc		res1, temp1					; res1 += temp1
-		mov		[target + index * 8], res0	; target[index] = res0
+		mov		[target+index*bytes], res0	; target[index] = res0
 		mov		temp0, res1					; temp0 = res1
 		add		index, 1					; index++
 		cmp		index, max
 		jb		.loop						; do while (index < max)
 ;---[End of multiplication loop------------
-		mov		[target + index * 8], temp0	; target[0] = temp0
-		lea		shift, [exp]
-		shr		shift, 3					; shift = exp / 8
+		mov		[target+index*bytes], temp0	; target[0] = temp0
+		lea		index, [exp]
+		shr		index, 3					; index = exp / 8
 		and		exp, 0x7					; exp %= 8
-		mov		fpart, [target + shift - 8]
-		movzx	ipart, word [target + shift]
-		shrd	fpart, ipart, expl			; extract fraction part
+		mov		fpart2, [target + index - 2 * bytes]
+		mov		fpart1, [target + index - 1 * bytes]
+		movzx	ipart, word [target + index]
+		shrd	fpart2, fpart1, expl		; extract fraction part #2
+		shrd	fpart1, ipart, expl			; extract fraction part #1
 		shr		ipart, expl					; extract integer part
+		shr		fpart2, 1					; correct fraction part
 ;---[Correct angle quadrant]---------------
-		mov		shift, fpart
-		shr		shift, 63					; if (fpart < 0)
-		add		ipart, shift				;     then ipart++
-		mov		shift, ipart
-		neg		shift
-		test	value, value				; if (angle < 0)
-		cmovs	ipart, shift				;     then ipart = -ipart
+		mov		temp1, fpart1
+		shr		temp1, bits - 1				; if (fpart1 < 0)
+		add		ipart, temp1				;     then ipart++
+		mov		temp1, ipart
+		neg		temp1
+		test	ivalue, ivalue				; if (angle < 0)
+		cmovs	ipart, temp1				;     then ipart = -ipart
 ;---[Compute angle]------------------------
-		cmd		angle, fpart
-		muls#x	angle, scale				; angle = fpart * scale
+	cvtsi2s#x	angle1, fpart1
+	cvtsi2s#x	angle2, fpart2
+		muls#x	angle1, scale1				; angle1 = fpart1 * scale1
+		muls#x	angle2, scale2				; angle2 = fpart2 * scale2
+		adds#x	angle1, angle2				; angle1 += angle2
 ;---[Call function]------------------------
-		mov		param1, ipart
+		lea		param1, [ipart]
 		add		stack, space				; restoring back the stack pointer
-		jmp		Func						; call Func (angle, ipart)
+		jmp		Func						; call Func (angle1 + angle2, ipart)
 ;---[Skip branch]--------------------------
 .skip:	xor		param1, param1
 		add		stack, space				; restoring back the stack pointer
 		jmp		Func						; call Func (angle, 0)
 ;---[Overflow branch]----------------------
-.ovrfl:	initreg	angle, shift, nanval		; return NaN
+.ovrfl:	initreg	angle, treg, nanval			; return NaN
 		add		stack, space				; restoring back the stack pointer
 		ret
 }
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	TRIG2	cmd, abs, exp, mant, value, Func, x
+macro	TRIG2	Func, ivalue, mant, exp, ipart, res0, res1, temp0, temp1, x
 {
 ;---[Parameters]---------------------------
 sin		equ		rdi							; pointer to place where to store sin value
 cos		equ		rsi							; pointer to place where to store cos value
 angle	equ		xmm0						; angle value
 ;---[Internal variables]-------------------
-res0	equ		rax							; result register #1
-res1	equ		rdx							; result register #2
-temp0	equ		rdi							; temporary register #1
-temp1	equ		rsi							; temporary register #2
-mreg	equ		r8							; register which holds mantissa value
+treg	equ		rax							; temporary register
 index	equ		r10							; first index for long mul operation
 max		equ		r11							; last index for long mul operation
 expl	equ		cl							; low part of exponent value
-scale	equ		xmm1						; scale value
-sign	equ		xmm2						; sign bit
-fpart	equ		res0						; fraction part of result
-ipart	equ		res1						; integer part of result
-shift	equ		temp0						; shift value into long mul result
+angle1	equ		xmm0						; angle value #1
+angle2	equ		xmm1						; angle value #2
+scale1	equ		xmm2						; high part of scale value
+scale2	equ		xmm3						; low part of scale value
+sign	equ		xmm4						; sign bit
+fpart1	equ		res0						; fraction part of result #1
+fpart2	equ		res1						; fraction part of result #2
 stack	equ		rsp							; stack pointer
 target	equ		stack + 0 * 8				; stack position of "target" variable
-s_sin	equ		stack + 18 * 8				; stack position of "sin" variable
-s_cos	equ		stack + 19 * 8				; stack position of "cos" variable
+s_sin	equ		stack + 19 * 8				; stack position of "sin" variable
+s_cos	equ		stack + 20 * 8				; stack position of "cos" variable
 if x eq s
-source	= range_flt32						; pointer to range reduction constant
 dmask	= DMASK_FLT32						; data mask
 smask	= SMASK_FLT32						; sign mask
 emask	= EMASK_FLT32						; exponent mask
 mmask	= MMASK_FLT32						; mantissa mask
 nanval	= PNAN_FLT32						; +NaN
 infval	= PINF_FLT32						; +Inf
-maxval	= PI_FOUR_FLT32						; Pi / 4
+pi4val	= PI_FOUR_FLT32						; +Pi/4
 mbits	= MBITS_FLT32						; count of bits into mantissa
 bias	= EBIAS_FLT32						; exponent bias
-bits	= 192								; bits for long mul operation
-sclval	= 0x1FC90FDB						; scale value
+source	= range_flt32						; pointer to range reduction constant
+cbits	= 192								; count of bits into long mul constant
+bscale	= 5									; bits scale value
+sclval1	= 0x2FC90FDB						; Pi/2 * 2^-32
+sclval2	= 0x20490FDB						; Pi/2 * 2^-63
 else if x eq d
-source	= range_flt64						; pointer to range reduction constant
 dmask	= DMASK_FLT64						; data mask
 smask	= SMASK_FLT64						; sign mask
 emask	= EMASK_FLT64						; exponent mask
 mmask	= MMASK_FLT64						; mantissa mask
 nanval	= PNAN_FLT64						; +NaN
 infval	= PINF_FLT64						; +Inf
-maxval	= PI_FOUR_FLT64						; Pi / 4
+pi4val	= PI_FOUR_FLT64						; +Pi/4
 mbits	= MBITS_FLT64						; count of bits into mantissa
 bias	= EBIAS_FLT64						; exponent bias
-bits	= 1088								; bits for long mul operation
-sclval	= 0x3BF921FB54442D18				; scale value
+source	= range_flt64						; pointer to range reduction constant
+cbits	= 1152								; count of bits into long mul constant
+bscale	= 6									; bits scale value
+sclval1	= 0x3BF921FB54442D18				; Pi/2 * 2^-64
+sclval2	= 0x380921FB54442D18				; Pi/2 * 2^-127
 end if
+bits	= 1 shl bscale						; block size (bits)
+bytes	= 1 shl (bscale - 3)				; block size (bytes)
 space	= 21 * 8							; stack size required by the procedure
 ;------------------------------------------
 		sub		stack, space				; reserving stack size for local vars
-		movint	value, angle, x
-		mov		abs, dmask
-		and		abs, value					; abs = Abs (angle)
-		mov		mant, infval
-		cmp		abs, mant					; if (abs >= inf)
+		initreg	sign, treg, smask			; sign = smask
+		initreg	scale1, treg, sclval1		; scale1 = sclval1
+		initreg	scale2, treg, sclval2		; scale2 = sclval2
+		movint	ivalue, angle, x
+		mov		mant, dmask
+		and		mant, ivalue				; mant = Abs (angle)
+		mov		res0, infval
+		cmp		mant, res0					; if (mant >= Inf)
 		jae		.ovrfl						;     then go to overflow branch
-		mov		mant, maxval
-		cmp		abs, mant					; if (abs <= Pi / 4)
+		mov		res0, pi4val
+		cmp		mant, res0					; if (mant <= Pi/4)
 		jbe		.skip						;     then skip following code
-;---[Set correct sign to scale value]------
 		mov		[s_sin], sin				; save "sin" variable into the stack
 		mov		[s_cos], cos				; save "cos" variable into the stack
-		initreg	sign, shift, smask			; sign = smask
-		initreg	scale, shift, sclval		; scale = sclval
+;---[Set correct sign to scale values]-----
 		andp#x	sign, angle					; get angle sign
-		orp#x	scale, sign					; set angle sign
+		orp#x	scale1, sign				; set angle sign to scale value #1
+		orp#x	scale2, sign				; set angle sign to scale value #2
 ;---[Extract exponent]---------------------
 		mov		exp, emask
-		and		exp, value					; exp = angle & emask
+		and		exp, ivalue					; exp = angle & emask
 		shr		exp, mbits					; exp >>= mbits
 		sub		exp, bias					; exp -= bias
 		neg		exp
-		add		exp, bits + mbits			; exp = bits + mbits - exp
+		add		exp, cbits + mbits			; exp = cbits + mbits - exp
 ;---[Extract mantissa]---------------------
-		mov		abs, 1 shl mbits
+		mov		temp0, mmask + 1
 		mov		mant, mmask
-		and		mant, value					; mant = angle & mmask
-		or		mant, abs					; mant |= 1 << mbits
+		and		mant, ivalue				; mant = angle & mmask
+		or		mant, temp0					; mant |= 1 << mbits
 ;---[Long mul operation]-------------------
-		xor		shift, shift				; shift = 0
-		lea		index, [exp - 64]
-		shr		index, 6
-		sub		index, 1					; index = (exp - 64) / 64 - 1
-		cmp		index, shift				; if (index < shift)
-		cmovl	index, shift				;     index = shift
-		mov		shift, bits / 64			; shift = bits / 64
+		xor		treg, treg					; treg = 0
+		lea		index, [exp - 2 * bits]
+		shr		index, bscale
+		sub		index, 1					; index = (exp - 2 * bits) / bits - 1
+		cmp		index, treg					; if (index < treg)
+		cmovl	index, treg					;     index = treg
+		mov		treg, cbits / bits			; treg = cbits / bits
 		lea		max, [exp + 1]
-		shr		max, 6
-		add		max, 1						; max = (exp + 1) / 64 + 1
-		cmp		max, shift					; if (max > shift)
-		cmovg	max, shift					;     max = shift
+		shr		max, bscale
+		add		max, 1						; max = (exp + 1) / bits + 1
+		cmp		max, treg					; if (max > treg)
+		cmovg	max, treg					;     max = treg
 		xor		temp0, temp0				; temp0 = 0
 		xor		temp1, temp1				; temp1 = 0
 ;---[Multiplication loop]------------------
-.loop:	mov		res0, [source + index * 8]	; res0 = low (source[index] * mant)
-		mul		mreg						; res1 = high (source[index] * mant)
+.loop:	mov		res0, [source+index*bytes]	; res0 = low (source[index] * mant)
+		mul		mant						; res1 = high (source[index] * mant)
 		add		res0, temp0					; res0 += temp0
 		adc		res1, temp1					; res1 += temp1
-		mov		[target + index * 8], res0	; target[index] = res0
+		mov		[target+index*bytes], res0	; target[index] = res0
 		mov		temp0, res1					; temp0 = res1
 		add		index, 1					; index++
 		cmp		index, max
 		jb		.loop						; do while (index < max)
 ;---[End of multiplication loop------------
-		mov		[target + index * 8], temp0	; target[0] = temp0
-		lea		shift, [exp]
-		shr		shift, 3					; shift = exp / 8
+		mov		[target+index*bytes], temp0	; target[0] = temp0
+		lea		index, [exp]
+		shr		index, 3					; index = exp / 8
 		and		exp, 0x7					; exp %= 8
-		mov		fpart, [target + shift - 8]
-		movzx	ipart, word [target + shift]
-		shrd	fpart, ipart, expl			; extract fraction part
+		mov		fpart2, [target + index - 2 * bytes]
+		mov		fpart1, [target + index - 1 * bytes]
+		movzx	ipart, word [target + index]
+		shrd	fpart2, fpart1, expl		; extract fraction part #2
+		shrd	fpart1, ipart, expl			; extract fraction part #1
 		shr		ipart, expl					; extract integer part
+		shr		fpart2, 1					; correct fraction part
 ;---[Correct angle quadrant]---------------
-		mov		shift, fpart
-		shr		shift, 63					; if (fpart < 0)
-		add		ipart, shift				;     then ipart++
-		mov		shift, ipart
-		neg		shift
-		test	value, value				; if (angle < 0)
-		cmovs	ipart, shift				;     then ipart = -ipart
+		mov		temp1, fpart1
+		shr		temp1, bits - 1				; if (fpart1 < 0)
+		add		ipart, temp1				;     then ipart++
+		mov		temp1, ipart
+		neg		temp1
+		test	ivalue, ivalue				; if (angle < 0)
+		cmovs	ipart, temp1				;     then ipart = -ipart
 ;---[Compute angle]------------------------
-		cmd		angle, fpart
-		muls#x	angle, scale				; angle = fpart * scale
+	cvtsi2s#x	angle1, fpart1
+	cvtsi2s#x	angle2, fpart2
+		muls#x	angle1, scale1				; angle1 = fpart1 * scale1
+		muls#x	angle2, scale2				; angle2 = fpart2 * scale2
+		adds#x	angle1, angle2				; angle1 += angle2
 ;---[Call function]------------------------
+		lea		param3, [ipart]
 		mov		sin, [s_sin]				; get "sin" variable from the stack
 		mov		cos, [s_cos]				; get "cos" variable from the stack
-		mov		param3, ipart
 		add		stack, space				; restoring back the stack pointer
-		jmp		Func						; call Func (&sin, &cos, angle, ipart)
+		jmp		Func						; call Func (&sin, &cos, angle1 + angle2, ipart)
 ;---[Skip branch]--------------------------
 .skip:	xor		param3, param3
 		add		stack, space				; restoring back the stack pointer
@@ -2167,38 +2577,49 @@ Cath_flt64:	CATH	d
 macro	SIN	sval, sreg, x
 {
 ;---[Parameters]---------------------------
-angle	equ		xmm0						; angle value
 quadr	equ		rdi							; quadrant
+angle	equ		xmm0						; angle value
 ;---[Internal variables]-------------------
 treg	equ		rax							; temporary register
 temp1	equ		xmm1						; temporary register #1
 temp2	equ		xmm2						; temporary register #2
-temp3	equ		xmm3						; temporary register #3
-temp4	equ		xmm4						; temporary register #4
-origin	equ		xmm5						; original value
-scale	equ		xmm6						; scale value
-sign	equ		xmm7						; sign bit
+scale	equ		xmm3						; scale value
+base	equ		xmm4						; base value
+sign	equ		xmm5						; sign bit
+one		equ		xmm6						; 1.0
+result	equ		angle						; result register
 mask	equ		temp1						; data mask
-max		equ		temp2						; max angle value
+pi		equ		temp2						; Pi/4
+half	equ		scale						; 0.5
 if x eq s
 dmask	= DMASK_FLT32						; data masko
 smask	= SMASK_FLT32						; sign mask
 nanval	= PNAN_FLT32						; +NaN
-maxval	= PI_FOUR_FLT32						; Pi / 4
+oneval	= PONE_FLT32						; +1.0
+halfval	= MHALF_FLT32						; -0.5
+pi4val	= PI_FOUR_FLT32						; +Pi/4
+sin		= sin_flt32							; pointer to array of sine coefficients
+cos		= cos_flt32							; pointer to array of cosine coefficients
 else if x eq d
 dmask	= DMASK_FLT64						; data mask
 smask	= SMASK_FLT64						; sign mask
 nanval	= PNAN_FLT64						; +NaN
-maxval	= PI_FOUR_FLT64						; Pi / 4
+oneval	= PONE_FLT64						; +1.0
+halfval	= MHALF_FLT64						; -0.5
+pi4val	= PI_FOUR_FLT64						; +Pi/4
+sin		= sin_flt64							; pointer to array of sine coefficients
+cos		= cos_flt64							; pointer to array of cosine coefficients
 end if
 ;------------------------------------------
 		initreg	mask, treg, dmask			; mask = dmask
-		initreg	max, treg, maxval			; max = PI / 4
+		initreg	pi, treg, pi4val			; pi = Pi/4
+		initreg	one, treg, oneval			; one = +1.0
+		initreg	half, treg, halfval			; half = -0.5
 		mov		sval, smask					; set sign mask
 		movint	sreg, angle, x				; sreg = angle
 		and		sreg, sval					; extract sign bit from angle value
 		andp#x	angle, mask					; angle = Abs (angle)
-		comis#x	angle, max					; if (angle > PI / 4)
+		comis#x	angle, pi					; if (angle > Pi/4)
 		ja		.ovrfl						;     then go to overflow branch
 		test	quadr, 0x1					; if (quadr & 0x1)
 		jnz		.cos						;     then compute cos value
@@ -2206,38 +2627,54 @@ end if
 		xor		sval, sreg
 		test	quadr, 0x2					; if (quadr & 0x2 != 0)
 		cmovnz	sreg, sval					;     sign = -sign
+		movap#x	base, angle					; base = angle
+		muls#x	angle, angle				; angle *= angle
+		movap#x	scale, angle				; scale = angle
 		movint	sign, sreg, x				; sign = sign bit
 if x eq s
-		SIN32								; computing sin value
+		SINGLE4	sin, angle, x				; compute single polynomial value
 else if x eq d
-		SIN64								; computing sin value
+		SINGLE8	sin, angle, x				; compute single polynomial value
 end if
-		orp#x	angle, sign					; set correct sign to the result
-		ret									; return sign * Sin (Abs(angle))
+		muls#x	temp1, scale
+		muls#x	temp1, base
+		adds#x	temp1, base					; temp1 = base + base * scale * temp1
+		orp#x	temp1, sign					; set correct sign to the result
+		movap#x	result, temp1				; return sign * Sin (Abs (angle))
+		ret
 ;---[Computing cos value]------------------
 .cos:	xor		sreg, sreg					; sign = +1.0
 		test	quadr, 0x2					; if (quadr & 0x2 != 0)
 		cmovnz	sreg, sval					;     sign = -1.0
+		movap#x	base, half					; base = 0.5
+		muls#x	angle, angle				; angle *= angle
+		movap#x	scale, angle				; scale = angle
+		muls#x	base, angle					; base *= angle
 		movint	sign, sreg, x				; sign = sign bit
 if x eq s
-		COS32								; computing cos value
+		SINGLE4	cos, angle, x				; compute single polynomial value
 else if x eq d
-		COS64								; computing cos value
+		SINGLE8	cos, angle, x				; compute single polynomial value
 end if
-		orp#x	angle, sign					; set correct sign to the result
-		ret									; return sign * Cos (Abs(angle))
+		muls#x	temp1, scale
+		muls#x	temp1, scale
+		adds#x	temp1, base					; temp1 = base + scale * scale * temp1
+		adds#x	temp1, one					; temp1 += 1.0
+		orp#x	temp1, sign					; set correct sign to the result
+		movap#x	result, temp1				; return sign * Cos (Abs (angle))
+		ret
 ;---[Overflow branch]----------------------
-.ovrfl:	initreg	angle, treg, nanval			; return NaN
+.ovrfl:	initreg	result, treg, nanval		; return NaN
 		ret
 }
 
 ; Sine of angle
-Sin_flt32:	TRIG1	cvtsi2ss, eax, ecx, r8d, r9d, SinQ_flt32, s
-Sin_flt64:	TRIG1	cvtsi2sd, rax, rcx, r8, r9, SinQ_flt64, d
+Sin_flt32:	TRIG1	SinQ_flt32, r8d, r9d, ecx, edi, eax, edx, edi, esi, s
+Sin_flt64:	TRIG1	SinQ_flt64, r8, r9, rcx, rdi, rax, rdx, rdi, rsi, d
 
 ; Sine of angle and quadrant
-SinQ_flt32:	SIN	ecx, edx, s
-SinQ_flt64:	SIN	rcx, rdx, d
+SinQ_flt32:	SIN		edx, ecx, s
+SinQ_flt64:	SIN		rdx, rcx, d
 
 ;==============================================================================;
 ;       Cosine                                                                 ;
@@ -2245,38 +2682,49 @@ SinQ_flt64:	SIN	rcx, rdx, d
 macro	COS	sval, sreg, x
 {
 ;---[Parameters]---------------------------
-angle	equ		xmm0						; angle value
 quadr	equ		rdi							; quadrant
+angle	equ		xmm0						; angle value
 ;---[Internal variables]-------------------
 treg	equ		rax							; temporary register
 temp1	equ		xmm1						; temporary register #1
 temp2	equ		xmm2						; temporary register #2
-temp3	equ		xmm3						; temporary register #3
-temp4	equ		xmm4						; temporary register #4
-origin	equ		xmm5						; original value
-scale	equ		xmm6						; scale value
-sign	equ		xmm7						; sign bit
+scale	equ		xmm3						; scale value
+base	equ		xmm4						; base value
+sign	equ		xmm5						; sign bit
+one		equ		xmm6						; 1.0
+result	equ		angle						; result register
 mask	equ		temp1						; data mask
-max		equ		temp2						; max angle value
+pi		equ		temp2						; Pi/4
+half	equ		scale						; 0.5
 if x eq s
-dmask	= DMASK_FLT32						; data mask
+dmask	= DMASK_FLT32						; data masko
 smask	= SMASK_FLT32						; sign mask
 nanval	= PNAN_FLT32						; +NaN
-maxval	= PI_FOUR_FLT32						; Pi / 4
+oneval	= PONE_FLT32						; +1.0
+halfval	= MHALF_FLT32						; -0.5
+pi4val	= PI_FOUR_FLT32						; +Pi/4
+sin		= sin_flt32							; pointer to array of sine coefficients
+cos		= cos_flt32							; pointer to array of cosine coefficients
 else if x eq d
 dmask	= DMASK_FLT64						; data mask
 smask	= SMASK_FLT64						; sign mask
 nanval	= PNAN_FLT64						; +NaN
-maxval	= PI_FOUR_FLT64						; Pi / 4
+oneval	= PONE_FLT64						; +1.0
+halfval	= MHALF_FLT64						; -0.5
+pi4val	= PI_FOUR_FLT64						; +Pi/4
+sin		= sin_flt64							; pointer to array of sine coefficients
+cos		= cos_flt64							; pointer to array of cosine coefficients
 end if
 ;------------------------------------------
 		initreg	mask, treg, dmask			; mask = dmask
-		initreg	max, treg, maxval			; max = PI / 4
+		initreg	pi, treg, pi4val			; pi = Pi/4
+		initreg	one, treg, oneval			; one = +1.0
+		initreg	half, treg, halfval			; half = -0.5
 		mov		sval, smask					; set sign mask
 		movint	sreg, angle, x				; sreg = angle
 		and		sreg, sval					; extract sign bit from angle value
 		andp#x	angle, mask					; angle = Abs (angle)
-		comis#x	angle, max					; if (angle > PI / 4)
+		comis#x	angle, pi					; if (angle > Pi/4)
 		ja		.ovrfl						;     then go to overflow branch
 		test	quadr, 0x1					; if (quadr & 0x1)
 		jnz		.sin						;     then compute sin value
@@ -2284,320 +2732,54 @@ end if
 		xor		sreg, sreg					; sign = +1.0
 		test	quadr, 0x2					; if (quadr & 0x2 != 0)
 		cmovnz	sreg, sval					;     sign = -1.0
+		movap#x	base, half					; base = 0.5
+		muls#x	angle, angle				; angle *= angle
+		movap#x	scale, angle				; scale = angle
+		muls#x	base, angle					; base *= angle
 		movint	sign, sreg, x				; sign = sign bit
 if x eq s
-		COS32								; computing cos value
+		SINGLE4	cos, angle, x				; compute single polynomial value
 else if x eq d
-		COS64								; computing cos value
+		SINGLE8	cos, angle, x				; compute single polynomial value
 end if
-		orp#x	angle, sign					; set correct sign to the result
-		ret									; return sign * Cos (Abs(angle))
+		muls#x	temp1, scale
+		muls#x	temp1, scale
+		adds#x	temp1, base					; temp1 = base + scale * scale * temp1
+		adds#x	temp1, one					; temp1 += 1.0
+		orp#x	temp1, sign					; set correct sign to the result
+		movap#x	result, temp1				; return sign * Cos (Abs (angle))
+		ret
 ;---[Computing sin value]------------------
 .sin:	xor		sval, sreg
 		test	quadr, 0x2					; if (quadr & 0x2 == 0)
 		cmovz	sreg, sval					;     sign = -sign
+		movap#x	base, angle					; base = angle
+		muls#x	angle, angle				; angle *= angle
+		movap#x	scale, angle				; scale = angle
 		movint	sign, sreg, x				; sign = sign bit
 if x eq s
-		SIN32								; computing sin value
+		SINGLE4	sin, angle, x				; compute single polynomial value
 else if x eq d
-		SIN64								; computing sin value
+		SINGLE8	sin, angle, x				; compute single polynomial value
 end if
-		orp#x	angle, sign					; set correct sign to the result
-		ret									; return sign * Sin (Abs(angle))
+		muls#x	temp1, scale
+		muls#x	temp1, base
+		adds#x	temp1, base					; temp1 = base + base * scale * temp1
+		orp#x	temp1, sign					; set correct sign to the result
+		movap#x	result, temp1				; return sign * Sin (Abs (angle))
+		ret
 ;---[Overflow branch]----------------------
-.ovrfl:	initreg	angle, treg, nanval			; return NaN
+.ovrfl:	initreg	result, treg, nanval		; return NaN
 		ret
 }
 
 ; Cosine of angle
-Cos_flt32:	TRIG1	cvtsi2ss, eax, ecx, r8d, r9d, CosQ_flt32, s
-Cos_flt64:	TRIG1	cvtsi2sd, rax, rcx, r8, r9, CosQ_flt64, d
+Cos_flt32:	TRIG1	CosQ_flt32, r8d, r9d, ecx, edi, eax, edx, edi, esi, s
+Cos_flt64:	TRIG1	CosQ_flt64, r8, r9, rcx, rdi, rax, rdx, rdi, rsi, d
 
 ; Cosine of angle and quadrant
-CosQ_flt32:	COS	ecx, edx, s
-CosQ_flt64:	COS	rcx, rdx, d
-
-;==============================================================================;
-;       Tangent                                                                ;
-;==============================================================================;
-macro	TAN	sval, sreg, x
-{
-;---[Parameters]---------------------------
-angle	equ		xmm0						; angle value
-quadr	equ		rdi							; quadrant
-;---[Internal variables]-------------------
-treg	equ		rax							; temporary register
-temp1	equ		xmm1						; temporary register #1
-temp2	equ		xmm2						; temporary register #2
-temp3	equ		xmm3						; temporary register #3
-temp4	equ		xmm4						; temporary register #4
-temp5	equ		xmm5						; temporary register #5
-temp6	equ		xmm6						; temporary register #6
-temp7	equ		xmm7						; temporary register #7
-temp8	equ		xmm8						; temporary register #8
-temp9	equ		xmm9						; temporary register #9
-origin	equ		xmm10						; original value
-scale	equ		xmm11						; scale value
-sign	equ		xmm12						; sign bit
-mask	equ		temp1						; data mask
-max		equ		temp2						; max angle value
-hcos	equ		xmm0						; high significant bits of cos value
-hsin	equ		xmm1						; high significant bits of sin value
-lcos	equ		xmm2						; low significant bits of cos value
-lsin	equ		xmm3						; low significant bits of sin value
-one		equ		xmm4						; 1.0
-stack	equ		rsp							; stack pointer
-s_res	equ		stack - 5 * 8				; stack position of "result" variable
-s_hcos	equ		stack - 4 * 8				; stack position of "hcos" variable
-s_lcos	equ		stack - 3 * 8				; stack position of "lcos" variable
-s_hsin	equ		stack - 2 * 8				; stack position of "hsin" variable
-s_lsin	equ		stack - 1 * 8				; stack position of "lsin" variable
-if x eq s
-dmask	= DMASK_FLT32						; data mask
-smask	= SMASK_FLT32						; sign mask
-nanval	= PNAN_FLT32						; +NaN
-maxval	= PI_FOUR_FLT32						; Pi / 4
-oneval	= PONE_FLT64						; +1.0 (flt64_t)
-else if x eq d
-dmask	= DMASK_FLT64						; data mask
-smask	= SMASK_FLT64						; sign mask
-nanval	= PNAN_FLT64						; +NaN
-maxval	= PI_FOUR_FLT64						; Pi / 4
-end if
-;------------------------------------------
-		initreg	mask, treg, dmask			; mask = dmask
-		initreg	max, treg, maxval			; max = PI / 4
-		mov		sval, smask					; set sign mask
-		movint	sreg, angle, x				; sreg = angle
-		and		sreg, sval					; extract sign bit from angle value
-		andp#x	angle, mask					; angle = Abs (angle)
-		comis#x	angle, max					; if (angle > PI / 4)
-		ja		.ovrfl						;     then go to overflow branch
-		test	quadr, 0x1					; if (quadr & 0x1)
-		jnz		.cot						;     then compute cot value
-;---[Computing tan value]------------------
-		movint	sign, sreg, x				; sign = sign bit
-if x eq s
-	SINCOS32								; computing sine and cosine value
-	cvtss2sd	hcos, hcos					; convert hcos to flt64_t type
-	cvtss2sd	hsin, hsin					; convert hsin to flt64_t type
-	cvtss2sd	lcos, lcos					; convert lcos to flt64_t type
-	cvtss2sd	lsin, lsin					; convert lsin to flt64_t type
-		initreg	one, treg, oneval			; one = 1.0
-		addsd	hcos, lcos					; hcos += lcos
-		addsd	hsin, lsin					; hsin += lsin
-		addsd	hcos, one					; hcos += 1.0
-		divsd	hsin, hcos
-		movapd	angle, hsin					; angle = sin / cos
-	cvtsd2ss	angle, angle				; convert angle to flt32_t type
-		orps	angle, sign					; set correct sign to the tan value
-		ret
-else if x eq d
-	SINCOS64								; computing sine and cosine value
-		movsd	[s_hcos], hcos				; save "hcos" variable into the stack
-		movsd	[s_hsin], hsin				; save "hsin" variable into the stack
-		movsd	[s_lcos], lcos				; save "lcos" variable into the stack
-		movsd	[s_lsin], lsin				; save "lsin" variable into the stack
-		fld		qword [s_hsin]
-		fadd	qword [s_lsin]				; sin = hsin + lsin
-		fld		qword [s_hcos]
-		fadd	qword [s_lcos]
-		fld1
-		faddp								; cos = hcos + lcos + 1
-		fdivp
-		fstp	qword [s_res]
-		movsd	angle, [s_res]				; return (sin / cos)
-		orpd	angle, sign					; set correct sign to the tan value
-		ret
-end if
-;---[Computing cot value]------------------
-.cot:	xor		sreg, sval					; sign = -sign
-		movint	sign, sreg, x				; sign = sign bit
-if x eq s
-	SINCOS32								; computing sine and cosine value
-	cvtss2sd	hcos, hcos					; convert hcos to flt64_t type
-	cvtss2sd	hsin, hsin					; convert hsin to flt64_t type
-	cvtss2sd	lcos, lcos					; convert lcos to flt64_t type
-	cvtss2sd	lsin, lsin					; convert lsin to flt64_t type
-		initreg	one, treg, oneval			; one = 1.0
-		addsd	hcos, lcos					; hcos += lcos
-		addsd	hsin, lsin					; hsin += lsin
-		addsd	hcos, one					; hcos += 1.0
-		divsd	hcos, hsin					; angle = cos / sin
-	cvtsd2ss	angle, angle				; convert angle to flt32_t type
-		orps	angle, sign					; set correct sign to the tan value
-		ret
-else if x eq d
-	SINCOS64								; computing sine and cosine value
-		movsd	[s_hcos], hcos				; save "hcos" variable into the stack
-		movsd	[s_hsin], hsin				; save "hsin" variable into the stack
-		movsd	[s_lcos], lcos				; save "lcos" variable into the stack
-		movsd	[s_lsin], lsin				; save "lsin" variable into the stack
-		fld		qword [s_hsin]
-		fadd	qword [s_lsin]				; sin = hsin + lsin
-		fld		qword [s_hcos]
-		fadd	qword [s_lcos]
-		fld1
-		faddp								; cos = hcos + lcos + 1
-		fdivrp
-		fstp	qword [s_res]
-		movsd	angle, [s_res]				; return (cos / sin)
-		orpd	angle, sign					; set correct sign to the tan value
-		ret
-end if
-;---[Overflow branch]----------------------
-.ovrfl:	initreg	angle, treg, nanval			; return NaN
-		ret
-}
-
-; Tangent of angle
-Tan_flt32:	TRIG1	cvtsi2ss, eax, ecx, r8d, r9d, TanQ_flt32, s
-Tan_flt64:	TRIG1	cvtsi2sd, rax, rcx, r8, r9, TanQ_flt64, d
-
-; Tangent of angle and quadrant
-TanQ_flt32:	TAN	ecx, edx, s
-TanQ_flt64:	TAN	rcx, rdx, d
-
-;==============================================================================;
-;       Cotangent                                                              ;
-;==============================================================================;
-macro	COT	sval, sreg, x
-{
-;---[Parameters]---------------------------
-angle	equ		xmm0						; angle value
-quadr	equ		rdi							; quadrant
-;---[Internal variables]-------------------
-treg	equ		rax							; temporary register
-temp1	equ		xmm1						; temporary register #1
-temp2	equ		xmm2						; temporary register #2
-temp3	equ		xmm3						; temporary register #3
-temp4	equ		xmm4						; temporary register #4
-temp5	equ		xmm5						; temporary register #5
-temp6	equ		xmm6						; temporary register #6
-temp7	equ		xmm7						; temporary register #7
-temp8	equ		xmm8						; temporary register #8
-temp9	equ		xmm9						; temporary register #9
-origin	equ		xmm10						; original value
-scale	equ		xmm11						; scale value
-sign	equ		xmm12						; sign bit
-mask	equ		temp1						; data mask
-max		equ		temp2						; max angle value
-hcos	equ		xmm0						; high significant bits of cos value
-hsin	equ		xmm1						; high significant bits of sin value
-lcos	equ		xmm2						; low significant bits of cos value
-lsin	equ		xmm3						; low significant bits of sin value
-one		equ		xmm4						; 1.0
-stack	equ		rsp							; stack pointer
-s_res	equ		stack - 5 * 8				; stack position of "result" variable
-s_hcos	equ		stack - 4 * 8				; stack position of "hcos" variable
-s_lcos	equ		stack - 3 * 8				; stack position of "lcos" variable
-s_hsin	equ		stack - 2 * 8				; stack position of "hsin" variable
-s_lsin	equ		stack - 1 * 8				; stack position of "lsin" variable
-if x eq s
-dmask	= DMASK_FLT32						; data mask
-smask	= SMASK_FLT32						; sign mask
-nanval	= PNAN_FLT32						; +NaN
-maxval	= PI_FOUR_FLT32						; Pi / 4
-oneval	= PONE_FLT64						; +1.0 (flt64_t)
-else if x eq d
-dmask	= DMASK_FLT64						; data mask
-smask	= SMASK_FLT64						; sign mask
-nanval	= PNAN_FLT64						; +NaN
-maxval	= PI_FOUR_FLT64						; Pi / 4
-end if
-;------------------------------------------
-		initreg	mask, treg, dmask			; mask = dmask
-		initreg	max, treg, maxval			; max = PI / 4
-		mov		sval, smask					; set sign mask
-		movint	sreg, angle, x				; sreg = angle
-		and		sreg, sval					; extract sign bit from angle value
-		andp#x	angle, mask					; angle = Abs (angle)
-		comis#x	angle, max					; if (angle > PI / 4)
-		ja		.ovrfl						;     then go to overflow branch
-		test	quadr, 0x1					; if (quadr & 0x1)
-		jnz		.tan						;     then compute tan value
-;---[Computing cot value]------------------
-		movint	sign, sreg, x				; sign = sign bit
-if x eq s
-	SINCOS32								; computing sine and cosine value
-	cvtss2sd	hcos, hcos					; convert hcos to flt64_t type
-	cvtss2sd	hsin, hsin					; convert hsin to flt64_t type
-	cvtss2sd	lcos, lcos					; convert lcos to flt64_t type
-	cvtss2sd	lsin, lsin					; convert lsin to flt64_t type
-		initreg	one, treg, oneval			; one = 1.0
-		addsd	hcos, lcos					; hcos += lcos
-		addsd	hsin, lsin					; hsin += lsin
-		addsd	hcos, one					; hcos += 1.0
-		divsd	hcos, hsin					; angle = cos / sin
-	cvtsd2ss	angle, angle				; convert angle to flt32_t type
-		orps	angle, sign					; set correct sign to the tan value
-		ret
-else if x eq d
-	SINCOS64								; computing sine and cosine value
-		movsd	[s_hcos], hcos				; save "hcos" variable into the stack
-		movsd	[s_hsin], hsin				; save "hsin" variable into the stack
-		movsd	[s_lcos], lcos				; save "lcos" variable into the stack
-		movsd	[s_lsin], lsin				; save "lsin" variable into the stack
-		fld		qword [s_hsin]
-		fadd	qword [s_lsin]				; sin = hsin + lsin
-		fld		qword [s_hcos]
-		fadd	qword [s_lcos]
-		fld1
-		faddp								; cos = hcos + lcos + 1
-		fdivrp
-		fstp	qword [s_res]
-		movsd	angle, [s_res]				; return (cos / sin)
-		orpd	angle, sign					; set correct sign to the tan value
-		ret
-end if
-;---[Computing tan value]------------------
-.tan:	xor		sreg, sval					; sign = -sign
-		movint	sign, sreg, x				; sign = sign bit
-if x eq s
-	SINCOS32								; computing sine and cosine value
-	cvtss2sd	hcos, hcos					; convert hcos to flt64_t type
-	cvtss2sd	hsin, hsin					; convert hsin to flt64_t type
-	cvtss2sd	lcos, lcos					; convert lcos to flt64_t type
-	cvtss2sd	lsin, lsin					; convert lsin to flt64_t type
-		initreg	one, treg, oneval			; one = 1.0
-		addsd	hcos, lcos					; hcos += lcos
-		addsd	hsin, lsin					; hsin += lsin
-		addsd	hcos, one					; hcos += 1.0
-		divsd	hsin, hcos
-		movapd	angle, hsin					; angle = sin / cos
-	cvtsd2ss	angle, angle				; convert angle to flt32_t type
-		orps	angle, sign					; set correct sign to the tan value
-		ret
-else if x eq d
-	SINCOS64								; computing sine and cosine value
-		movsd	[s_hcos], hcos				; save "hcos" variable into the stack
-		movsd	[s_hsin], hsin				; save "hsin" variable into the stack
-		movsd	[s_lcos], lcos				; save "lcos" variable into the stack
-		movsd	[s_lsin], lsin				; save "lsin" variable into the stack
-		fld		qword [s_hsin]
-		fadd	qword [s_lsin]				; sin = hsin + lsin
-		fld		qword [s_hcos]
-		fadd	qword [s_lcos]
-		fld1
-		faddp								; cos = hcos + lcos + 1
-		fdivp
-		fstp	qword [s_res]
-		movsd	angle, [s_res]				; return (sin / cos)
-		orpd	angle, sign					; set correct sign to the tan value
-		ret
-end if
-;---[Overflow branch]----------------------
-.ovrfl:	initreg	angle, treg, nanval			; return NaN
-		ret
-}
-
-; Cotangent of angle
-Cot_flt32:	TRIG1	cvtsi2ss, eax, ecx, r8d, r9d, CotQ_flt32, s
-Cot_flt64:	TRIG1	cvtsi2sd, rax, rcx, r8, r9, CotQ_flt64, d
-
-; Cotangent of angle and quadrant
-CotQ_flt32:	COT	ecx, edx, s
-CotQ_flt64:	COT	rcx, rdx, d
+CosQ_flt32:	COS		edx, ecx, s
+CosQ_flt64:	COS		rdx, rcx, d
 
 ;==============================================================================;
 ;       Sine and cosine                                                        ;
@@ -2615,38 +2797,38 @@ temp1	equ		xmm1						; temporary register #1
 temp2	equ		xmm2						; temporary register #2
 temp3	equ		xmm3						; temporary register #3
 temp4	equ		xmm4						; temporary register #4
-temp5	equ		xmm5						; temporary register #5
-temp6	equ		xmm6						; temporary register #6
-temp7	equ		xmm7						; temporary register #7
-temp8	equ		xmm8						; temporary register #8
-temp9	equ		xmm9						; temporary register #9
-origin	equ		xmm10						; original value
-scale	equ		xmm11						; scale value
-sign1	equ		xmm12						; sign bit of sine
-sign2	equ		xmm13						; sign bit of cosine
+scale	equ		xmm5						; scale value
+base1	equ		xmm6						; base value #1
+base2	equ		xmm7						; base value #2
+sign1	equ		xmm8						; sign bit #1
+sign2	equ		xmm9						; sign bit #2
+one		equ		xmm10						; 1.0
+result	equ		angle						; result register
 mask	equ		temp1						; data mask
-max		equ		temp2						; max angle value
-hcos	equ		xmm0						; high significant bits of cos value
-hsin	equ		xmm1						; high significant bits of sin value
-lcos	equ		xmm2						; low significant bits of cos value
-lsin	equ		xmm3						; low significant bits of sin value
-one		equ		xmm4						; 1.0
+pi		equ		temp2						; Pi/4
+half	equ		scale						; 0.5
 if x eq s
-dmask	= DMASK_FLT32						; data mask
+dmask	= DMASK_FLT32						; data masko
 smask	= SMASK_FLT32						; sign mask
 nanval	= PNAN_FLT32						; +NaN
-maxval	= PI_FOUR_FLT32						; Pi / 4
 oneval	= PONE_FLT32						; +1.0
+halfval	= MHALF_FLT32						; -0.5
+pi4val	= PI_FOUR_FLT32						; +Pi/4
+sincos	= sincos_flt32						; pointer to array of sine and cosine coefficients
 else if x eq d
 dmask	= DMASK_FLT64						; data mask
 smask	= SMASK_FLT64						; sign mask
 nanval	= PNAN_FLT64						; +NaN
-maxval	= PI_FOUR_FLT64						; Pi / 4
 oneval	= PONE_FLT64						; +1.0
+halfval	= MHALF_FLT64						; -0.5
+pi4val	= PI_FOUR_FLT64						; +Pi/4
+sincos	= sincos_flt64						; pointer to array of sine and cosine coefficients
 end if
 ;------------------------------------------
 		initreg	mask, treg, dmask			; mask = dmask
-		initreg	max, treg, maxval			; max = PI / 4
+		initreg	pi, treg, pi4val			; pi = Pi/4
+		initreg	one, treg, oneval			; one = +1.0
+		initreg	half, treg, halfval			; half = -0.5
 		mov		sval1, smask				; set sign mask
 		mov		sval2, smask				; set sign mask
 		movint	sreg1, angle, x				; sreg1 = angle
@@ -2654,7 +2836,7 @@ end if
 		and		sreg1, sval1				; extract sign bit from angle value
 		and		sreg2, sval2				; extract sign bit from angle value
 		andp#x	angle, mask					; angle = Abs (angle)
-		comis#x	angle, max					; if (angle > PI / 4)
+		comis#x	angle, pi					; if (angle > Pi/4)
 		ja		.ovrfl						;     then go to overflow branch
 		test	quadr, 0x1					; if (quadr & 0x1)
 		jnz		.xchng						;     then exchange sin and cos values
@@ -2664,58 +2846,526 @@ end if
 		test	quadr, 0x2					;
 		cmovnz	sreg1, sval1				; if (quadr & 0x2 != 0), then sign1 = -sign1
 		cmovnz	sreg2, sval2				; if (quadr & 0x2 != 0), then sign2 = -1.0
+		movap#x	base1, angle				; base1 = angle
+		movap#x	base2, half					; base2 = 0.5
+		muls#x	angle, angle				; angle *= angle
+		movap#x	scale, angle				; scale = angle
+		muls#x	base2, angle				; base2 *= angle
 		movint	sign1, sreg1, x				; sign1 = sign bit of sine
 		movint	sign2, sreg2, x				; sign2 = sign bit of cosine
 if x eq s
-	SINCOS32								; computing sine and cosine value
+		PAIR4	sincos, angle, x			; compute single polynomial value
 else if x eq d
-	SINCOS64								; computing sine and cosine value
+		PAIR8	sincos, angle, x			; compute single polynomial value
 end if
-		initreg	one, treg, oneval			; one = 1.0
-		adds#x	hcos, lcos					; hcos += lcos
-		adds#x	hsin, lsin					; hsin += lsin
-		adds#x	hcos, one					; hcos += 1.0
-		orp#x	hsin, sign1					; set correct sign to the sine value
-		orp#x	hcos, sign2					; set correct sign to the cosine value
-		movs#x	[sin], hsin					; sin[0] = sign1 * Sin (Abs(angle))
-		movs#x	[cos], hcos					; cos[0] = sign2 * Cos (Abs(angle))
+		muls#x	temp1, scale
+		muls#x	temp2, scale
+		muls#x	temp1, base1
+		muls#x	temp2, scale
+		adds#x	temp1, base1				; temp1 = base1 + base1 * scale * temp1
+		adds#x	temp2, base2				; temp2 = base2 + scale * scale * temp2
+		adds#x	temp2, one					; temp2 += 1.0
+		orp#x	temp1, sign1				; set correct sign to the sine result
+		orp#x	temp2, sign2				; set correct sign to the cosine result
+		movs#x	[sin], temp1				; sin[0] = sign1 * Sin (Abs(angle))
+		movs#x	[cos], temp2				; cos[0] = sign2 * Cos (Abs(angle))
 		ret
 ;---[Computing cos and sin value]----------
-.xchng:	xor		sreg1, sreg1				; sign1 = +1.0
-		xor		sval2, sreg2
+.xchng:	xor		sval1, sreg1
+		xor		sreg2, sreg2				; sign1 = +1.0
 		test	quadr, 0x2					;
-		cmovnz	sreg1, sval1				; if (quadr & 0x2 != 0), then sign1 = -1.0
-		cmovz	sreg2, sval2				; if (quadr & 0x2 == 0), then sign2 = -sign2
-		movint	sign1, sreg1, x				; sign1 = sign bit of cosine
-		movint	sign2, sreg2, x				; sign2 = sign bit of sine
+		cmovz	sreg1, sval1				; if (quadr & 0x2 == 0), then sign1 = -sign2
+		cmovnz	sreg2, sval2				; if (quadr & 0x2 != 0), then sign2 = -1.0
+		movap#x	base1, angle				; base1 = angle
+		movap#x	base2, half					; base2 = 0.5
+		muls#x	angle, angle				; angle *= angle
+		movap#x	scale, angle				; scale = angle
+		muls#x	base2, angle				; base2 *= angle
+		movint	sign1, sreg1, x				; sign1 = sign bit of sine
+		movint	sign2, sreg2, x				; sign2 = sign bit of cosine
 if x eq s
-	SINCOS32								; computing sine and cosine value
+		PAIR4	sincos, angle, x			; compute single polynomial value
 else if x eq d
-	SINCOS64								; computing sine and cosine value
+		PAIR8	sincos, angle, x			; compute single polynomial value
 end if
-		initreg	one, treg, oneval			; one = 1.0
-		adds#x	hcos, lcos					; hcos += lcos
-		adds#x	hsin, lsin					; hsin += lsin
-		adds#x	hcos, one					; hcos += 1.0
-		orp#x	hsin, sign2					; set correct sign to the sine value
-		orp#x	hcos, sign1					; set correct sign to the cosine value
-		movs#x	[sin], hcos					; sin[0] = sign2 * Cos (Abs(angle))
-		movs#x	[cos], hsin					; cos[0] = sign1 * Sin (Abs(angle))
+		muls#x	temp1, scale
+		muls#x	temp2, scale
+		muls#x	temp1, base1
+		muls#x	temp2, scale
+		adds#x	temp1, base1				; temp1 = base1 + base1 * scale * temp1
+		adds#x	temp2, base2				; temp2 = base2 + scale * scale * temp2
+		adds#x	temp2, one					; temp2 += 1.0
+		orp#x	temp1, sign1				; set correct sign to the sine result
+		orp#x	temp2, sign2				; set correct sign to the cosine result
+		movs#x	[sin], temp2				; sin[0] = sign2 * Cos (Abs(angle))
+		movs#x	[cos], temp1				; cos[0] = sign1 * Sin (Abs(angle))
 		ret
 ;---[Overflow branch]----------------------
-.ovrfl:	initreg	angle, treg, nanval
-		movs#x	[sin], angle				; sin[0] = NaN
-		movs#x	[cos], angle				; cos[0] = NaN
+.ovrfl:	initreg	result, treg, nanval
+		movs#x	[sin], result				; sin[0] = NaN
+		movs#x	[cos], result				; cos[0] = NaN
 		ret
 }
 
 ; Sine and cosine of angle
-SinCos_flt32:	TRIG2	cvtsi2ss, eax, ecx, r8d, r9d, SinCosQ_flt32, s
-SinCos_flt64:	TRIG2	cvtsi2sd, rax, rcx, r8, r9, SinCosQ_flt64, d
+SinCos_flt32:	TRIG2	SinCosQ_flt32, r8d, r9d, ecx, edi, eax, edx, edi, esi, s
+SinCos_flt64:	TRIG2	SinCosQ_flt64, r8, r9, rcx, rdi, rax, rdx, rdi, rsi, d
 
 ; Sine and cosine of angle and quadrant
 SinCosQ_flt32:	SINCOS	r8d, r9d, r10d, r11d, s
 SinCosQ_flt64:	SINCOS	r8, r9, r10, r11, d
+
+;==============================================================================;
+;       Tangent                                                                ;
+;==============================================================================;
+macro	TAN	sval, sreg, x
+{
+;---[Parameters]---------------------------
+quadr	equ		rdi							; quadrant
+angle	equ		xmm0						; angle value
+;---[Internal variables]-------------------
+treg	equ		rax							; temporary register
+temp1	equ		xmm1						; temporary register #1
+temp2	equ		xmm2						; temporary register #2
+temp3	equ		xmm3						; temporary register #3
+temp4	equ		xmm4						; temporary register #4
+temp5	equ		xmm5						; temporary register #5
+temp6	equ		xmm6						; temporary register #6
+temp7	equ		xmm7						; temporary register #7
+temp8	equ		xmm8						; temporary register #8
+scale	equ		xmm9						; scale value
+base	equ		xmm10						; base value
+sign	equ		xmm11						; sign bit
+one		equ		xmm12						; 1.0
+result	equ		angle						; result register
+mask	equ		temp1						; data mask
+pi		equ		temp2						; Pi/4
+if x eq s
+dmask	= DMASK_FLT32						; data mask
+smask	= SMASK_FLT32						; sign mask
+nanval	= PNAN_FLT32						; +NaN
+oneval	= PONE_FLT32						; +1.0
+pi4val	= PI_FOUR_FLT32						; +Pi/4
+tan		= tan_flt32							; pointer to array of sine coefficients
+else if x eq d
+dmask	= DMASK_FLT64						; data mask
+smask	= SMASK_FLT64						; sign mask
+nanval	= PNAN_FLT64						; +NaN
+oneval	= PONE_FLT64						; +1.0
+pi4val	= PI_FOUR_FLT64						; +Pi/4
+tan		= tan_flt64							; pointer to array of sine coefficients
+end if
+;------------------------------------------
+		initreg	mask, treg, dmask			; mask = dmask
+		initreg	pi, treg, pi4val			; pi = Pi/4
+		initreg	one, treg, oneval			; one = +1.0
+		mov		sval, smask					; set sign mask
+		movint	sreg, angle, x				; sreg = angle
+		and		sreg, sval					; extract sign bit from angle value
+		andp#x	angle, mask					; angle = Abs (angle)
+		comis#x	angle, pi					; if (angle > Pi/4)
+		ja		.ovrfl						;     then go to overflow branch
+		test	quadr, 0x1					; if (quadr & 0x1)
+		jnz		.cot						;     then compute cot value
+;---[Computing tan value]------------------
+		movap#x	base, angle					; base = angle
+		muls#x	angle, angle				; angle *= angle
+		movap#x	scale, angle				; scale = angle
+		movint	sign, sreg, x				; sign = sign bit
+if x eq s
+	SINGLE16	tan, angle, x				; compute single polynomial value
+else if x eq d
+	SINGLE32	tan, angle, x				; compute single polynomial value
+end if
+		muls#x	temp1, scale
+		muls#x	temp1, base
+		adds#x	temp1, base					; temp1 = base + base * scale * temp1
+		orp#x	temp1, sign					; set correct sign to the result
+		movap#x	result, temp1				; return sign * Tan (Abs (angle))
+		ret
+;---[Computing cot value]------------------
+.cot:	xor		sreg, sval					; sign = -sign
+		movap#x	base, angle					; base = angle
+		muls#x	angle, angle				; angle *= angle
+		movap#x	scale, angle				; scale = angle
+		movint	sign, sreg, x				; sign = sign bit
+if x eq s
+	SINGLE16	tan, angle, x				; compute single polynomial value
+else if x eq d
+	SINGLE32	tan, angle, x				; compute single polynomial value
+end if
+		muls#x	temp1, scale
+		muls#x	temp1, base
+		adds#x	temp1, base					; temp1 = base + base * scale * temp1
+		orp#x	temp1, sign					; set correct sign to the result
+		movap#x	result, one
+		divs#x	result, temp1				; return sign * 1.0 / Tan (Abs (angle))
+		ret
+;---[Overflow branch]----------------------
+.ovrfl:	initreg	result, treg, nanval		; return NaN
+		ret
+}
+
+; Tangent of angle
+Tan_flt32:	TRIG1	TanQ_flt32, r8d, r9d, ecx, edi, eax, edx, edi, esi, s
+Tan_flt64:	TRIG1	TanQ_flt64, r8, r9, rcx, rdi, rax, rdx, rdi, rsi, d
+
+; Tangent of angle and quadrant
+TanQ_flt32:	TAN		edx, ecx, s
+TanQ_flt64:	TAN		rdx, rcx, d
+
+;******************************************************************************;
+;       Inverse trigonometric functions                                        ;
+;******************************************************************************;
+
+;==============================================================================;
+;       Inverse sine                                                           ;
+;==============================================================================;
+macro	ASIN	sval, sreg, x
+{
+;---[Parameters]---------------------------
+value	equ		xmm0						; sine value
+;---[Internal variables]-------------------
+treg	equ		rax							; temporary register
+temp1	equ		xmm1						; temporary register #1
+temp2	equ		xmm2						; temporary register #2
+temp3	equ		xmm3						; temporary register #3
+temp4	equ		xmm4						; temporary register #4
+temp5	equ		xmm5						; temporary register #5
+temp6	equ		xmm6						; temporary register #6
+temp7	equ		xmm7						; temporary register #7
+temp8	equ		xmm8						; temporary register #8
+scale	equ		xmm9						; scale value
+base	equ		xmm10						; base value
+sign	equ		xmm11						; sign bit
+shift	equ		xmm12						; shift value
+result	equ		value						; result register
+mask	equ		temp1						; data mask
+phalf	equ		temp2						; +0.5
+mhalf	equ		temp3						; -0.5
+one		equ		temp4						; +1.0
+if x eq s
+dmask	= DMASK_FLT32						; data masko
+smask	= SMASK_FLT32						; sign mask
+nanval	= PNAN_FLT32						; +NaN
+phlfval	= PHALF_FLT32						; +0.5
+mhlfval	= MHALF_FLT32						; -0.5
+oneval	= PONE_FLT32						; +1.0
+pi2val	= PI_HALF_FLT32						; +Pi/2
+asin	= asin_flt32						; pointer to array of asin coefficients
+else if x eq d
+dmask	= DMASK_FLT64						; data mask
+smask	= SMASK_FLT64						; sign mask
+nanval	= PNAN_FLT64						; +NaN
+phlfval	= PHALF_FLT64						; +0.5
+mhlfval	= MHALF_FLT64						; -0.5
+oneval	= PONE_FLT64						; +1.0
+pi2val	= PI_HALF_FLT64						; +Pi/2
+asin	= asin_flt64						; pointer to array of asin coefficients
+end if
+;------------------------------------------
+		initreg	mask, treg, dmask			; mask = dmask
+		initreg	phalf, treg, phlfval		; phalf = +0.5
+		initreg	mhalf, treg, mhlfval		; mhalf = -0.5
+		initreg	one, treg, oneval			; one = 1.0
+		initreg	shift, treg, pi2val			; shift = Pi/2
+		mov		sval, smask					; set sign mask
+		movint	sreg, value, x				; sreg = value
+		and		sreg, sval					; extract sign bit from value
+		andp#x	value, mask					; value = Abs (value)
+		comis#x	value, one					; if (value > 1.0)
+		ja		.ovrfl						;     then go to overflow branch
+		comis#x	value, phalf				; if (value > 0.5)
+		ja		.else						;     then go to else branch
+;---[if value <= 0.5]----------------------
+		movap#x	base, value					; base = value
+		muls#x	value, value				; value *= value
+		movap#x	scale, value				; scale = value
+		movint	sign, sreg, x				; sign = sign bit
+if x eq s
+	SINGLE16	asin, value, x				; compute single polynomial value
+else if x eq d
+	SINGLE32	asin, value, x				; compute single polynomial value
+end if
+		muls#x	temp1, scale
+		muls#x	temp1, base
+		adds#x	temp1, base					; temp1 = base + base * scale * temp1
+		orp#x	temp1, sign					; set correct sign to the result
+		movap#x	result, temp1				; return sign * ArcSin (Abs (value))
+		ret
+;---[else]---------------------------------
+.else:	xor		sreg, sval					; sign = -sign
+		subs#x	value, one					; value -= 1.0
+		muls#x	value, mhalf				; value *= -0.5
+		sqrts#x	base, value					; base = sqrt (value)
+		movap#x	scale, value				; scale = value
+		movint	sign, sreg, x				; sign = sign bit
+if x eq s
+	SINGLE16	asin, value, x				; compute single polynomial value
+else if x eq d
+	SINGLE32	asin, value, x				; compute single polynomial value
+end if
+		muls#x	temp1, scale
+		muls#x	temp1, base
+		adds#x	temp1, base					; temp1 = base + base * scale * temp1
+		adds#x	temp1, temp1				; temp1 += temp1
+		subs#x	temp1, shift				; temp1 -= Pi/2
+		xorp#x	temp1, sign					; set correct sign to the result
+		movap#x	result, temp1				; return sign * (ArcSin (Abs (value)) - Pi/2)
+		ret
+;---[Overflow branch]----------------------
+.ovrfl:	initreg	result, treg, nanval		; return NaN
+		ret
+}
+ArcSin_flt32:	ASIN	edx, ecx, s
+ArcSin_flt64:	ASIN	rdx, rcx, d
+
+;==============================================================================;
+;       Inverse cosine                                                         ;
+;==============================================================================;
+macro	ACOS	sval, sreg, shreg, x
+{
+;---[Parameters]---------------------------
+value	equ		xmm0						; cosine value
+;---[Internal variables]-------------------
+treg	equ		rax							; temporary register
+temp1	equ		xmm1						; temporary register #1
+temp2	equ		xmm2						; temporary register #2
+temp3	equ		xmm3						; temporary register #3
+temp4	equ		xmm4						; temporary register #4
+temp5	equ		xmm5						; temporary register #5
+temp6	equ		xmm6						; temporary register #6
+temp7	equ		xmm7						; temporary register #7
+temp8	equ		xmm8						; temporary register #8
+scale	equ		xmm9						; scale value
+base	equ		xmm10						; base value
+sign	equ		xmm11						; sign bit
+shift	equ		xmm12						; shift value
+result	equ		value						; result register
+mask	equ		temp1						; data mask
+phalf	equ		temp2						; +0.5
+mhalf	equ		temp3						; -0.5
+one		equ		temp4						; +1.0
+if x eq s
+dmask	= DMASK_FLT32						; data masko
+smask	= SMASK_FLT32						; sign mask
+nanval	= PNAN_FLT32						; +NaN
+phlfval	= PHALF_FLT32						; +0.5
+mhlfval	= MHALF_FLT32						; -0.5
+oneval	= PONE_FLT32						; +1.0
+pi2val	= PI_HALF_FLT32						; +Pi/2
+pival	= PPI_FLT32							; +Pi
+asin	= asin_flt32						; pointer to array of asin coefficients
+else if x eq d
+dmask	= DMASK_FLT64						; data mask
+smask	= SMASK_FLT64						; sign mask
+nanval	= PNAN_FLT64						; +NaN
+phlfval	= PHALF_FLT64						; +0.5
+mhlfval	= MHALF_FLT64						; -0.5
+oneval	= PONE_FLT64						; +1.0
+pi2val	= PI_HALF_FLT64						; +Pi/2
+pival	= PPI_FLT64							; +Pi
+asin	= asin_flt64						; pointer to array of asin coefficients
+end if
+;------------------------------------------
+		initreg	mask, treg, dmask			; mask = dmask
+		initreg	phalf, treg, phlfval		; phalf = +0.5
+		initreg	mhalf, treg, mhlfval		; mhalf = -0.5
+		initreg	one, treg, oneval			; one = 1.0
+		mov		sval, smask					; set sign mask
+		movint	sreg, value, x				; sreg = value
+		and		sreg, sval					; extract sign bit from value
+		andp#x	value, mask					; value = Abs (value)
+		comis#x	value, one					; if (value > 1.0)
+		ja		.ovrfl						;     then go to overflow branch
+		comis#x	value, phalf				; if (value > 0.5)
+		ja		.else						;     then go to else branch
+;---[if value <= 0.5]----------------------
+		xor		sreg, sval					; sign = -sign
+		mov		shreg, pi2val				; shreg = Pi/2
+		movap#x	base, value					; base = value
+		muls#x	value, value				; value *= value
+		movap#x	scale, value				; scale = value
+		movint	sign, sreg, x				; sign = sign bit
+		movint	shift, shreg, x				; shift = shift value
+if x eq s
+	SINGLE16	asin, value, x				; compute single polynomial value
+else if x eq d
+	SINGLE32	asin, value, x				; compute single polynomial value
+end if
+		muls#x	temp1, scale
+		muls#x	temp1, base
+		adds#x	temp1, base					; temp1 = base + base * scale * temp1
+		orp#x	temp1, sign					; set correct sign to the result
+		adds#x	temp1, shift
+		movap#x	result, temp1				; return sign * ArcSin (Abs (value)) + shift
+		ret
+;---[else]---------------------------------
+.else:	mov		sval, pival
+		xor		shreg, shreg				; shreg = 0
+		test	sreg, sreg					; if (sreg)
+		cmovnz	shreg, sval					;     shreg = Pi
+		subs#x	value, one					; value -= 1.0
+		muls#x	value, mhalf				; value *= -0.5
+		sqrts#x	base, value					; base = sqrt (value)
+		movap#x	scale, value				; scale = value
+		movint	sign, sreg, x				; sign = sign bit
+		movint	shift, shreg, x				; shift = shift value
+if x eq s
+	SINGLE16	asin, value, x				; compute single polynomial value
+else if x eq d
+	SINGLE32	asin, value, x				; compute single polynomial value
+end if
+		muls#x	temp1, scale
+		muls#x	temp1, base
+		adds#x	temp1, base					; temp1 = base + base * scale * temp1
+		adds#x	temp1, temp1				; temp1 += temp1
+		orp#x	temp1, sign					; set correct sign to the result
+		adds#x	temp1, shift
+		movap#x	result, temp1				; return sign * ArcSin (Abs (value)) + shift
+		ret
+;---[Overflow branch]----------------------
+.ovrfl:	initreg	result, treg, nanval		; return NaN
+		ret
+}
+ArcCos_flt32:	ACOS	edx, ecx, edi, s
+ArcCos_flt64:	ACOS	rdx, rcx, rdi, d
+
+;==============================================================================;
+;       Inverse tangent                                                        ;
+;==============================================================================;
+macro	ATAN	sval, sreg, x
+{
+;---[Parameters]---------------------------
+value	equ		xmm0						; tangent value
+;---[Internal variables]-------------------
+treg	equ		rax							; temporary register
+temp1	equ		xmm1						; temporary register #1
+temp2	equ		xmm2						; temporary register #2
+temp3	equ		xmm3						; temporary register #3
+temp4	equ		xmm4						; temporary register #4
+temp5	equ		xmm5						; temporary register #5
+temp6	equ		xmm6						; temporary register #6
+temp7	equ		xmm7						; temporary register #7
+temp8	equ		xmm8						; temporary register #8
+scale	equ		xmm9						; scale value
+base	equ		xmm10						; base value
+sign	equ		xmm11						; sign bit
+shift	equ		xmm12						; shift value
+result	equ		value						; result register
+mask	equ		temp1						; data mask
+one		equ		temp2						; +1.0
+if x eq s
+dmask	= DMASK_FLT32						; data masko
+smask	= SMASK_FLT32						; sign mask
+oneval	= PONE_FLT32						; +1.0
+pi2val	= PI_HALF_FLT32						; +Pi/2
+atan	= atan_flt32						; pointer to array of atan coefficients
+else if x eq d
+dmask	= DMASK_FLT64						; data mask
+smask	= SMASK_FLT64						; sign mask
+oneval	= PONE_FLT64						; +1.0
+pi2val	= PI_HALF_FLT64						; +Pi/2
+atan	= atan_flt64						; pointer to array of atan coefficients
+end if
+;------------------------------------------
+		initreg	mask, treg, dmask			; mask = dmask
+		initreg	one, treg, oneval			; one = 1.0
+		initreg	shift, treg, pi2val			; shift = Pi/2
+		mov		sval, smask					; set sign mask
+		movint	sreg, value, x				; sreg = value
+		and		sreg, sval					; extract sign bit from value
+		andp#x	value, mask					; value = Abs (value)
+		comis#x	value, one					; if (value > 1.0)
+		ja		.else						;     then go to else branch
+;---[if value <= 1.0]----------------------
+		movap#x	scale, one					; scale = 1.0
+		movap#x	base, value					; base = value
+		muls#x	value, value
+		adds#x	value, one					; value = 1.0 + value * value
+		divs#x	scale, value				; scale = 1.0 / (1.0 + value * value)
+		muls#x	base, scale					; base = value / (1.0 + value * value)
+		movap#x	value, one
+		subs#x	value, scale				; value = 1.0 - 1.0 / (1.0 + value * value)
+		movap#x	scale, value				; scale = value
+		movint	sign, sreg, x				; sign = sign bit
+if x eq s
+	SINGLE32	atan, value, x				; compute single polynomial value
+else if x eq d
+	SINGLE64	atan, value, x				; compute single polynomial value
+end if
+		muls#x	temp1, scale
+		muls#x	temp1, base
+		adds#x	temp1, base					; temp1 = base + base * scale * temp1
+		orp#x	temp1, sign					; set correct sign to the result
+		movap#x	result, temp1				; return sign * ArcTan (Abs (value))
+		ret
+;---[else]---------------------------------
+.else:	xor		sreg, sval					; sign = -sign
+		movap#x	scale, one					; scale = 1.0
+		movap#x	base, value					; base = value
+		muls#x	value, value
+		adds#x	value, one					; value = 1.0 + value * value
+		divs#x	scale, value				; scale = 1.0 / (1.0 + value * value)
+		muls#x	base, scale					; base = value / (1.0 + value * value)
+		movap#x	value, scale				; value = 1.0 / (1.0 + value * value)
+		movint	sign, sreg, x				; sign = sign bit
+if x eq s
+	SINGLE32	atan, value, x				; compute single polynomial value
+else if x eq d
+	SINGLE64	atan, value, x				; compute single polynomial value
+end if
+		muls#x	temp1, scale
+		muls#x	temp1, base
+		adds#x	temp1, base					; temp1 = base + base * scale * temp1
+		subs#x	temp1, shift				; temp1 -= Pi/2
+		xorp#x	temp1, sign					; set correct sign to the result
+		movap#x	result, temp1				; return sign * (ArcTan (Abs (value)) - Pi/2)
+		ret
+}
+ArcTan_flt32:	ATAN	edx, ecx, s
+ArcTan_flt64:	ATAN	rdx, rcx, d
+;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+macro	ATAN2	sval, sreg, x
+{
+;---[Parameters]---------------------------
+sin		equ		xmm0						; sine value
+cos		equ		xmm1						; cosine value
+;---[Internal variables]-------------------
+zero	equ		xmm2						; 0.0
+result	equ		sin							; result register
+stack	equ		rsp							; stack pointer
+s_shift	equ		stack + 0 * 8				; stack position of "shift" variable
+if x eq s
+ArcTan	= ArcTan_flt32						; Inverse tangent function
+smask	= SMASK_FLT32						; sign mask
+pival	= PPI_FLT32							; +Pi
+else if x eq d
+ArcTan	= ArcTan_flt64						; Inverse tangent function
+smask	= SMASK_FLT64						; sign mask
+pival	= PPI_FLT64							; +Pi
+end if
+space	= 1 * 8								; stack size required by the procedure
+;------------------------------------------
+		sub		stack, space				; reserving stack size for local vars
+		xorps	zero, zero					; zero = 0
+		mov		sval, pival
+		xor		sreg, sreg					; sreg = 0
+		comis#x	cos, zero					; if (cos < 0.0)
+		cmovb	sreg, sval					;     sreg = Pi
+		mov		sval, smask
+		xor		sval, sreg
+		comis#x	sin, zero					; if (sin < 0.0)
+		cmovb	sreg, sval					;     sreg = -sreg
+		mov		[s_shift], sreg				; save "shift" variable into the stack
+		divs#x	sin, cos
+		call	ArcTan
+		adds#x	result, [s_shift]			; result = ArcTan (sin / cos) + shift
+		add		stack, space				; restoring back the stack pointer
+		ret
+}
+ArcTan2_flt32:	ATAN2	edx, ecx, s
+ArcTan2_flt64:	ATAN2	rdx, rcx, d
 
 ;******************************************************************************;
 ;       Exponentiation functions                                               ;
@@ -2749,7 +3399,7 @@ exp_zer	= exp_min - mbits					; min exponent of subnormal value
 		movint	result, temp, x				; reinterpret temp as floating-point value
 		ret									; return temp
 ;---[Infinity branch]----------------------
-.inf:	initreg	result, treg, infval		; return +inf
+.inf:	initreg	result, treg, infval		; return +Inf
 		ret
 ;---[Subnormal branch]---------------------
 .sub:	sub		temp, exp_zer				; if (index < exp_zer)
@@ -2786,7 +3436,7 @@ end if
 		movs#x	result, [table + index*bytes - exp_min*bytes]	; result = exp[index]
 		ret
 ;---[Infinity branch]----------------------
-.inf:	initreg	result, treg, infval		; return +inf
+.inf:	initreg	result, treg, infval		; return +Inf
 		ret
 ;---[Zero branch]--------------------------
 .zero:	xorp#x	result, result				; return 0.0
@@ -2808,7 +3458,6 @@ mbits	= MBITS_FLT32						; count of bits into mantissa
 bias	= EBIAS_FLT32						; exponent bias
 bytes	= 4									; size of array element (bytes)
 ;------------------------------------------
-	prefetchnta	[array]						; prefetch data
 		movaps	origin, value
 ;---[Stage 1]------------------------------
 		movss	temp1, [array + 0 * bytes]	; temp1 = array[0]
@@ -2855,8 +3504,6 @@ mbits	= MBITS_FLT64						; count of bits into mantissa
 bias	= EBIAS_FLT64						; exponent bias
 bytes	= 8									; size of array element (bytes)
 ;------------------------------------------
-	prefetchnta	[array]						; prefetch data
-	prefetchnta	[array + CLINE]				; prefetch data
 		movapd	origin, value
 ;---[Stage 1]------------------------------
 		movsd	temp1, [array + 0 * bytes]	; temp1 = array[0]
@@ -2953,7 +3600,7 @@ ln2		= 0x3FE62E42FEFA39EF				; ln(2)
 		initreg	magic, treg, magval			; load magic number
 		movap#x	ipart, value				; ipart = value
 		comis#x	value, max					; if (value > max)
-		ja		.inf						;     return inf
+		ja		.inf						;     return Inf
 		comis#x	value, min					; if (value < min)
 		jb		.zero						;     return 0.0
 		adds#x	ipart, magic
@@ -3002,7 +3649,7 @@ else if x eq d
 		ret
 end if
 ;----[Return inf]--------------------------
-.inf:	initreg	value, treg, infval			; return +inf
+.inf:	initreg	value, treg, infval			; return +Inf
 		ret
 ;----[Return zero]-------------------------
 .zero:	xorp#x	value, value				; return 0.0
@@ -3056,7 +3703,7 @@ ln2		= 0x3FE62E42FEFA39EF				; ln(2)
 		initreg	magic, treg, magval			; load magic number
 		movap#x	ipart, value				; ipart = value
 		comis#x	value, max					; if (value > max)
-		ja		.inf						;     return inf
+		ja		.inf						;     return Inf
 		comis#x	value, min					; if (value < min)
 		jb		.mone						;     return -1.0
 		adds#x	ipart, magic
@@ -3109,7 +3756,7 @@ else if x eq d
 		ret
 end if
 ;----[Return inf]--------------------------
-.inf:	initreg	value, treg, infval			; return +inf
+.inf:	initreg	value, treg, infval			; return +Inf
 		ret
 ;----[Return minus one]--------------------
 .mone:	initreg	value, treg, moneval		; return -1.0
@@ -3154,7 +3801,6 @@ array	= exp10_flt32						; pointer to array of coefficients
 offst	= 46								; offset of 10^0 from the beginning of table
 bytes	= 4									; size of array element (bytes)
 ;------------------------------------------
-	prefetchnta	[array]						; prefetch data
 		movaps	origin, value
 ;---[Stage 1]------------------------------
 		movss	temp1, [array + 0 * bytes]	; temp1 = array[0]
@@ -3188,8 +3834,6 @@ array	= exp10_flt64						; pointer to array of coefficients
 offst	= 324								; offset of 10^0 from the beginning of table
 bytes	= 8									; size of array element (bytes)
 ;------------------------------------------
-	prefetchnta	[array]						; prefetch data
-	prefetchnta	[array + CLINE]				; prefetch data
 		movapd	origin, value
 ;---[Stage 1]------------------------------
 		movsd	temp1, [array + 0 * bytes]	; temp1 = array[0]
@@ -3282,7 +3926,7 @@ ln10	= 0x3FF26BB1BBB55516				; ln(10) / 2
 		initreg	magic, treg, magval			; load magic number
 		movap#x	ipart, value				; ipart = value
 		comis#x	value, max					; if (value > max)
-		ja		.inf						;     return inf
+		ja		.inf						;     return Inf
 		comis#x	value, min					; if (value < min)
 		jb		.zero						;     return 0.0
 		adds#x	ipart, magic
@@ -3339,7 +3983,7 @@ else if x eq d
 		ret
 end if
 ;----[Return inf]--------------------------
-.inf:	initreg	value, treg, infval			; return +inf
+.inf:	initreg	value, treg, infval			; return +Inf
 		ret
 ;----[Return zero]-------------------------
 .zero:	xorp#x	value, value				; return 0.0
@@ -3395,7 +4039,7 @@ ln10	= 0x3FF26BB1BBB55516				; ln(10) / 2
 		initreg	magic, treg, magval			; load magic number
 		movap#x	ipart, value				; ipart = value
 		comis#x	value, max					; if (value > max)
-		ja		.inf						;     return inf
+		ja		.inf						;     return Inf
 		comis#x	value, min					; if (value < min)
 		jb		.mone						;     return -1.0
 		adds#x	ipart, magic
@@ -3456,7 +4100,7 @@ else if x eq d
 		ret
 end if
 ;----[Return inf]--------------------------
-.inf:	initreg	value, treg, infval			; return +inf
+.inf:	initreg	value, treg, infval			; return +Inf
 		ret
 ;----[Return minus one]--------------------
 .mone:	initreg	value, treg, moneval		; return -1.0
@@ -3473,7 +4117,6 @@ index	equ		rdi							; index register
 max		equ		rsi							; register which holds max exponent value
 exp_max	= 20								; max exponent value
 ;------------------------------------------
-	prefetchnta	[ten_table_int]				; prefetch data
 		movsx	index, exp					; index = exp
 		mov		max, exp_max				; max = max exponent value
 		cmp		index, exp_max				; if (index > exp_max)
@@ -3501,7 +4144,6 @@ array	= exp_flt32							; pointer to array of coefficients
 offst	= 104								; offset of e^0 from the beginning of table
 bytes	= 4									; size of array element (bytes)
 ;------------------------------------------
-	prefetchnta	[array]						; prefetch data
 		movaps	origin, value
 ;---[Stage 1]------------------------------
 		movss	temp1, [array + 0 * bytes]	; temp1 = array[0]
@@ -3535,8 +4177,6 @@ array	= exp_flt64							; pointer to array of coefficients
 offst	= 746								; offset of e^0 from the beginning of table
 bytes	= 8									; size of array element (bytes)
 ;------------------------------------------
-	prefetchnta	[array]						; prefetch data
-	prefetchnta	[array + CLINE]				; prefetch data
 		movapd	origin, value
 ;---[Stage 1]------------------------------
 		movsd	temp1, [array + 0 * bytes]	; temp1 = array[0]
@@ -3627,7 +4267,7 @@ end if
 		initreg	magic, treg, magval			; load magic number
 		movap#x	ipart, value				; ipart = value
 		comis#x	value, max					; if (value > max)
-		ja		.inf						;     return inf
+		ja		.inf						;     return Inf
 		comis#x	value, min					; if (value < min)
 		jb		.zero						;     return 0.0
 		adds#x	ipart, magic
@@ -3673,7 +4313,7 @@ else if x eq d
 		ret
 end if
 ;----[Return inf]--------------------------
-.inf:	initreg	value, treg, infval			; return +inf
+.inf:	initreg	value, treg, infval			; return +Inf
 		ret
 ;----[Return zero]-------------------------
 .zero:	xorp#x	value, value				; return 0.0
@@ -3726,7 +4366,7 @@ oneval	= PONE_FLT64						; +1.0
 		initreg	magic, treg, magval			; load magic number
 		movap#x	ipart, value				; ipart = value
 		comis#x	value, max					; if (value > max)
-		ja		.inf						;     return inf
+		ja		.inf						;     return Inf
 		comis#x	value, min					; if (value < min)
 		jb		.mone						;     return -1.0
 		adds#x	ipart, magic
@@ -3776,7 +4416,7 @@ else if x eq d
 		ret
 end if
 ;----[Return inf]--------------------------
-.inf:	initreg	value, treg, infval			; return +inf
+.inf:	initreg	value, treg, infval			; return +Inf
 		ret
 ;----[Return minus one]--------------------
 .mone:	initreg	value, treg, moneval		; return -1.0
@@ -3894,11 +4534,11 @@ temp	equ		xmm1						; temporary variable
 zero	equ		xmm2						; 0.0
 one		equ		xmm3						; 1.0
 if x eq s
-oneval	= PONE_FLT32						; +1.0
 nanval	= PNAN_FLT32						; +NaN
+oneval	= PONE_FLT32						; +1.0
 else if x eq d
-oneval	= PONE_FLT64						; +1.0
 nanval	= PNAN_FLT64						; +NaN
+oneval	= PONE_FLT64						; +1.0
 end if
 ;------------------------------------------
 		xorp#x	zero, zero					; zero = 0.0
@@ -3951,6 +4591,217 @@ Power_flt64:	POWER_FLT	di, d
 ;******************************************************************************;
 ;       Logarithmic functions                                                  ;
 ;******************************************************************************;
+macro	LOG		ivalue, mant, exp, mantscale, expscale, x
+{
+;---[Parameters]---------------------------
+value	equ		xmm0						; logarithm value
+;---[Internal variables]-------------------
+treg	equ		rax							; temporary register
+temp1	equ		xmm1						; temporary register #1
+temp2	equ		xmm2						; temporary register #2
+temp3	equ		xmm3						; temporary register #3
+temp4	equ		xmm4						; temporary register #4
+mscale	equ		xmm5						; mantisa scale value
+scale1	equ		xmm6						; scale value #1
+scale2	equ		xmm7						; scale value #2
+base	equ		xmm8						; base value
+origin	equ		xmm9						; origin value
+shift	equ		xmm10						; shift value
+result	equ		value						; result register
+two		equ		temp1						; 2.0
+half	equ		temp2						; 0.5
+one		equ		temp3						; 1.0
+cscale	equ		scale1						; correction scale value
+escale	equ		scale2						; exponent scale value
+if x eq s
+emask	= EMASK_FLT32						; exponent mask
+mmask	= MMASK_FLT32						; mantissa mask
+normval	= NORM_FLT32						; min normal value
+nanval	= PNAN_FLT32						; +NaN
+pinfval	= PINF_FLT32						; +Inf
+minfval	= MINF_FLT32						; -Inf
+twoval	= PTWO_FLT32						; 2.0
+halfval	= PHALF_FLT32						; 0.5
+oneval	= PONE_FLT32						; 1.0
+mbits	= MBITS_FLT32						; count of bits into mantissa
+bias	= EBIAS_FLT32						; exponent bias
+corrval	= 0x4B000000						; correction value
+loge	= log_flt32							; pointer to array of log coefficients
+else if x eq d
+emask	= EMASK_FLT64						; exponent mask
+mmask	= MMASK_FLT64						; mantissa mask
+normval	= NORM_FLT64						; min normal value
+nanval	= PNAN_FLT64						; +NaN
+pinfval	= PINF_FLT64						; +Inf
+minfval	= MINF_FLT64						; -Inf
+twoval	= PTWO_FLT64						; 2.0
+halfval	= PHALF_FLT64						; 0.5
+oneval	= PONE_FLT64						; 1.0
+mbits	= MBITS_FLT64						; count of bits into mantissa
+bias	= EBIAS_FLT64						; exponent bias
+corrval	= 0x4330000000000000				; correction value
+loge	= log_flt64							; pointer to array of log coefficients
+end if
+;---[Check logarithm value]----------------
+		movint	ivalue, value, x			; ivalue = value
+		xor		mant, mant
+		cmp		ivalue, mant
+		jl		.error						; if (ivalue < 0.0), then return NaN
+		je		.inf1						; if (ivalue == 0.0), then return -Inf
+		mov		mant, pinfval
+		cmp		ivalue, mant
+		ja		.exit						; if (ivalue > Inf), then go to exit
+		je		.inf2						; if (ivalue == Inf), then return +Inf
+;---[Loading scale values]-----------------
+		initreg	mscale, treg, mantscale		; mscale = mantscale
+		initreg	escale, treg, expscale		; escale = expscale
+;---[Loading consts]-----------------------
+		initreg	two, treg, twoval			; two = 2.0
+		initreg	half, treg, halfval			; half = 0.5
+		initreg	one, treg, oneval			; one = 1.0
+		initreg	cscale, treg, corrval		; cscale = correction value
+;---[Exponent extraction]------------------
+		mov		exp, emask
+		and		exp, ivalue					; exp = ivalue & emask
+		shr		exp, mbits					; exp >>= mbits
+		sub		exp, bias					; exp -= bias
+		mov		mant, normval
+		cmp		ivalue, mant				; if (ivalue < min normal value)
+		jb		.corr						;     then correct value
+;---[Mantissa extraction]------------------
+.back:	mov		mant, mmask
+		and		mant, ivalue				; mant = ivalue & mmask
+		mov		ivalue, bias shl mbits
+		or		mant, ivalue				; mant |= (bias << mbits)
+		mov		ivalue, 1 shl (mbits - 1)
+		and		ivalue, mant				; ivalue = mant & (1 << mbits - 1)
+		shl		ivalue, 1
+		sub		mant, ivalue				; mant -= ivalue << 1
+		movint	result, mant, x
+		subs#x	result, one					; result = mant - 1.0
+		shr		ivalue, mbits
+		add		exp, ivalue					; exp += ivalue >> mbits
+	cvtsi2s#x	shift, exp					; shift = exp
+		muls#x	shift, escale				; shift *= escale
+;---[Computing logarithm]------------------
+		movap#x	origin, result				; origin = result
+		movap#x	base, result
+		movap#x	scale1, result
+		movap#x	scale2, result
+		muls#x	base, result
+		adds#x	scale2, two
+		muls#x	base, half					; base = 0.5 * result * result
+		divs#x	scale1, scale2				; scale1 = result / (result + 2)
+		movap#x	scale2, scale1
+		muls#x	scale2, scale2				; scale2 = scale1 * scale1
+		movap#x	result, scale2				; result = scale2
+if x eq s
+	SINGLE8		loge, result, x				; compute single polynomial value
+else if x eq d
+	SINGLE16	loge, result, x				; compute single polynomial value
+end if
+		muls#x	temp1, scale2
+		adds#x	temp1, base
+		muls#x	temp1, scale1
+		subs#x	temp1, base
+		adds#x	temp1, origin				; temp1 = origin + (scale1 * (base + scale2 * temp1) - base)
+		muls#x	temp1, mscale				; temp1 *= mscale
+		adds#x	temp1, shift				; temp1 += shift
+		movap#x	result, temp1				; return mscale * log1p (value) + shift
+		ret
+;---[Mantissa correction branch]-----------
+.corr:	muls#x	result, cscale				; result *= cscale
+		sub		exp, mbits					; exp -= mbits
+		movint	ivalue, result, x			; ivalue = result
+		jmp		.back						; go back
+;---[Exit branch]--------------------------
+.exit:	movap#x	result, value				; return value
+		ret
+;---[Infinity branch #1]-------------------
+.inf1:	initreg	result, treg, minfval		; return -Inf
+		ret
+;---[Infinity branch #2]-------------------
+.inf2:	initreg	result, treg, pinfval		; return +Inf
+		ret
+;---[Error branch]-------------------------
+.error:	initreg	result, treg, nanval		; return NaN
+		ret
+}
+;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+macro	LOG1P	Func, ivalue, mant, mantscale, x
+{
+;---[Parameters]---------------------------
+value	equ		xmm0						; logarithm value
+;---[Internal variables]-------------------
+treg	equ		rax							; temporary register
+temp1	equ		xmm1						; temporary register #1
+temp2	equ		xmm2						; temporary register #2
+temp3	equ		xmm3						; temporary register #3
+temp4	equ		xmm4						; temporary register #4
+mscale	equ		xmm5						; mantisa scale value
+scale1	equ		xmm6						; scale value #1
+scale2	equ		xmm7						; scale value #2
+base	equ		xmm8						; base value
+origin	equ		xmm9						; origin value
+result	equ		value						; result register
+two		equ		temp1						; 2.0
+half	equ		temp2						; 0.5
+if x eq s
+twoval	= PTWO_FLT32						; +2.0
+phlfval	= PHALF_FLT32						; +0.5
+mhlfval	= MHALF_FLT32						; -0.5
+oneval	= PONE_FLT32						; +1.0
+loge	= log_flt32							; pointer to array of log coefficients
+else if x eq d
+twoval	= PTWO_FLT64						; +2.0
+phlfval	= PHALF_FLT64						; +0.5
+mhlfval	= MHALF_FLT64						; -0.5
+oneval	= PONE_FLT64						; +1.0
+loge	= log_flt64							; pointer to array of log coefficients
+end if
+;---[Check logarithm value]----------------
+		movint	ivalue, value, x			; ivalue = value
+		mov		mant, mhlfval
+		cmp		ivalue, mant				; if (ivalue < -0.5)
+		ja		.log						;     then go to log branch
+		mov		mant, oneval
+		cmp		ivalue, mant				; if (ivalue > +1.0)
+		jg		.log						;     then go to log branch
+;---[Loading scale values]-----------------
+		initreg	mscale, treg, mantscale		; mscale = mantscale
+;---[Loading consts]-----------------------
+		initreg	two, treg, twoval			; two = 2.0
+		initreg	half, treg, phlfval			; half = 0.5
+;---[Normal execution branch]--------------
+		movap#x	origin, result				; origin = result
+		movap#x	base, result
+		movap#x	scale1, result
+		movap#x	scale2, result
+		muls#x	base, result
+		adds#x	scale2, two
+		muls#x	base, half					; base = 0.5 * result * result
+		divs#x	scale1, scale2				; scale1 = result / (result + 2)
+		movap#x	scale2, scale1
+		muls#x	scale2, scale2				; scale2 = scale1 * scale1
+		movap#x	result, scale2				; result = scale2
+if x eq s
+	SINGLE8		loge, result, x				; compute single polynomial value
+else if x eq d
+	SINGLE16	loge, result, x				; compute single polynomial value
+end if
+		muls#x	temp1, scale2
+		adds#x	temp1, base
+		muls#x	temp1, scale1
+		subs#x	temp1, base
+		adds#x	temp1, origin				; temp1 = origin + (scale1 * (base + scale2 * temp1) - base)
+		muls#x	temp1, mscale				; temp1 *= mscale
+		movap#x	result, temp1				; return mscale * log1p (value)
+		ret
+;---[Log branch]---------------------------
+.log:	initreg	mscale, treg, oneval
+		adds#x	value, mscale
+		jmp		Func						; call Func (value + 1.0)
+}
 
 ;==============================================================================;
 ;       Logarithm to base 2                                                    ;
@@ -3981,6 +4832,12 @@ Log2i_uint16:	LOG2I	di, 1
 Log2i_uint32:	LOG2I	edi, 2
 Log2i_uint64:	LOG2I	rdi, 3
 
+; Real logarithm to base 2
+Log2_flt32:		LOG		edx, ecx, edi, LOG2_E_FLT32, LOG2_2_FLT32, s
+Log2_flt64:		LOG		rdx, rcx, rdi, LOG2_E_FLT64, LOG2_2_FLT64, d
+Log2p1_flt32:	LOG1P	Log2_flt32, edx, ecx, LOG2_E_FLT32, s
+Log2p1_flt64:	LOG1P	Log2_flt64, rdx, rcx, LOG2_E_FLT64, d
+
 ;==============================================================================;
 ;       Logarithm to base 10                                                   ;
 ;==============================================================================;
@@ -3994,6 +4851,9 @@ result	equ		rax							; result register
 if scale < 2
 		movzx	value, val					; zero extend value to 64-bit value
 end if
+		test	value, value				; if (value == 0)
+		jz		.error						;     then go to error branch
+;---[Normal execution branch]--------------
 		mov		result, index				; result = index
 ;---[Search loop]--------------------------
 .loop:	sub		result, 1					; result--
@@ -4001,6 +4861,9 @@ end if
 		jb		.loop						; do while (value < ten_table_int[resul])
 ;---[End of search loop]-------------------
 		ret									; return result
+;---[Error branch]-------------------------
+.error:	mov		result, ERROR				; return ERROR
+		ret
 }
 
 ; Integer logarithm to base 10
@@ -4008,6 +4871,306 @@ Log10i_uint8:	LOG10I	dil, 3, 0
 Log10i_uint16:	LOG10I	di, 5, 1
 Log10i_uint32:	LOG10I	edi, 10, 2
 Log10i_uint64:	LOG10I	rdi, 20, 3
+
+; Real logarithm to base 10
+Log10_flt32:	LOG		edx, ecx, edi, LOG10_E_FLT32, LOG10_2_FLT32, s
+Log10_flt64:	LOG		rdx, rcx, rdi, LOG10_E_FLT64, LOG10_2_FLT64, d
+Log10p1_flt32:	LOG1P	Log10_flt32, edx, ecx, LOG10_E_FLT32, s
+Log10p1_flt64:	LOG1P	Log10_flt64, rdx, rcx, LOG10_E_FLT64, d
+
+;==============================================================================;
+;       Logarithm to base E (natural logarithm)                                ;
+;==============================================================================;
+LogE_flt32:		LOG		edx, ecx, edi, LOGE_E_FLT32, LOGE_2_FLT32, s
+LogE_flt64:		LOG		rdx, rcx, rdi, LOGE_E_FLT64, LOGE_2_FLT64, d
+LogEp1_flt32:	LOG1P	LogE_flt32, edx, ecx, LOGE_E_FLT32, s
+LogEp1_flt64:	LOG1P	LogE_flt64, rdx, rcx, LOGE_E_FLT64, d
+
+;==============================================================================;
+;       Logarithm to custom base                                               ;
+;==============================================================================;
+macro	LOGB	Log, ivalue, mant, exp, res, inf1, inf2, x
+{
+;---[Parameters]---------------------------
+lbase	equ		xmm0						; logarithm base value
+value	equ		xmm1						; logarithm value
+;---[Internal variables]-------------------
+treg	equ		rax							; temporary register
+temp1	equ		xmm1						; temporary register #1
+temp2	equ		xmm2						; temporary register #2
+temp3	equ		xmm3						; temporary register #3
+temp4	equ		xmm4						; temporary register #4
+mscale	equ		xmm5						; mantisa scale value
+scale1	equ		xmm6						; scale value #1
+scale2	equ		xmm7						; scale value #2
+base	equ		xmm8						; base value
+origin	equ		xmm9						; origin value
+shift	equ		xmm10						; shift value
+result	equ		lbase						; result register
+two		equ		temp1						; 2.0
+half	equ		temp2						; 0.5
+one		equ		temp3						; 1.0
+cscale	equ		scale1						; correction scale value
+escale	equ		scale2						; exponent scale value
+stack	equ		rsp							; stack pointer
+s_value	equ		stack + 0 * 8				; stack position of "value" variable
+if x eq s
+emask	= EMASK_FLT32						; exponent mask
+mmask	= MMASK_FLT32						; mantissa mask
+normval	= NORM_FLT32						; min normal value
+nanval	= PNAN_FLT32						; +NaN
+pinfval	= PINF_FLT32						; +Inf
+minfval	= MINF_FLT32						; -Inf
+twoval	= PTWO_FLT32						; 2.0
+halfval	= PHALF_FLT32						; 0.5
+oneval	= PONE_FLT32						; 1.0
+logval	= LOGE_2_FLT32						; ln(2)
+mbits	= MBITS_FLT32						; count of bits into mantissa
+bias	= EBIAS_FLT32						; exponent bias
+corrval	= 0x4B000000						; correction value
+loge	= log_flt32							; pointer to array of log coefficients
+else if x eq d
+emask	= EMASK_FLT64						; exponent mask
+mmask	= MMASK_FLT64						; mantissa mask
+normval	= NORM_FLT64						; min normal value
+nanval	= PNAN_FLT64						; +NaN
+pinfval	= PINF_FLT64						; +Inf
+minfval	= MINF_FLT64						; -Inf
+twoval	= PTWO_FLT64						; 2.0
+halfval	= PHALF_FLT64						; 0.5
+oneval	= PONE_FLT64						; 1.0
+logval	= LOGE_2_FLT64						; ln(2)
+mbits	= MBITS_FLT64						; count of bits into mantissa
+bias	= EBIAS_FLT64						; exponent bias
+corrval	= 0x4330000000000000				; correction value
+loge	= log_flt64							; pointer to array of log coefficients
+end if
+space	= 1 * 8								; stack size required by the procedure
+;---[Check base value]---------------------
+		movint	ivalue, lbase, x			; ivalue = lbase
+		mov		mant, oneval
+		cmp		ivalue, mant				; if (ivalue == 1.0)
+		je		.error						;     return NaN
+		xor		mant, mant
+		cmp		ivalue, mant				; if (ivalue <= 0.0)
+		jle		.error						;     then return NaN
+		mov		mant, pinfval
+		cmp		ivalue, mant				; if (ivalue >= Inf)
+		jae		.error						;     then return NaN
+;---[Check logarithm value]----------------
+		movint	ivalue, value, x			; ivalue = value
+		xor		mant, mant
+		cmp		ivalue, mant
+		jl		.error						; if (ivalue < 0.0), then return NaN
+		je		.inf1						; if (ivalue == 0.0), then return correct Inf
+		mov		mant, pinfval
+		cmp		ivalue, mant
+		ja		.exit						; if (ivalue > Inf), then go to exit
+		je		.inf2						; if (ivalue == Inf), then return correct Inf
+;---[Loading scale values]-----------------
+		sub		stack, space				; reserving stack size for local vars
+		movs#x	[s_value], value			; save "value" variable into the stack
+		call	Log							; call Log (lbase)
+		initreg	mscale, treg, oneval
+		divs#x	mscale, result				; mscale = 1.0 / ln (lbase)
+		initreg	escale, treg, logval
+		divs#x	escale, result				; escale = ln(2) / ln (lbase)
+		movs#x	result, [s_value]			; get "value" variable from the stack
+		mov		ivalue, [s_value]			; ivalue = value
+		add		stack, space				; restoring back the stack pointer
+;---[Loading consts]-----------------------
+		initreg	two, treg, twoval			; two = 2.0
+		initreg	half, treg, halfval			; half = 0.5
+		initreg	one, treg, oneval			; one = 1.0
+		initreg	cscale, treg, corrval		; cscale = correction value
+;---[Exponent extraction]------------------
+		mov		exp, emask
+		and		exp, ivalue					; exp = ivalue & emask
+		shr		exp, mbits					; exp >>= mbits
+		sub		exp, bias					; exp -= bias
+		mov		mant, normval
+		cmp		ivalue, mant				; if (ivalue < min normal value)
+		jb		.corr						;     then correct value
+;---[Mantissa extraction]------------------
+.back:	mov		mant, mmask
+		and		mant, ivalue				; mant = ivalue & mmask
+		mov		ivalue, bias shl mbits
+		or		mant, ivalue				; mant |= (bias << mbits)
+		mov		ivalue, 1 shl (mbits - 1)
+		and		ivalue, mant				; ivalue = mant & (1 << mbits - 1)
+		shl		ivalue, 1
+		sub		mant, ivalue				; mant -= ivalue << 1
+		movint	result, mant, x
+		subs#x	result, one					; result = mant - 1.0
+		shr		ivalue, mbits
+		add		exp, ivalue					; exp += ivalue >> mbits
+	cvtsi2s#x	shift, exp					; shift = exp
+		muls#x	shift, escale				; shift *= escale
+;---[Computing logarithm]------------------
+		movap#x	origin, result				; origin = result
+		movap#x	base, result
+		movap#x	scale1, result
+		movap#x	scale2, result
+		muls#x	base, result
+		adds#x	scale2, two
+		muls#x	base, half					; base = 0.5 * result * result
+		divs#x	scale1, scale2				; scale1 = result / (result + 2)
+		movap#x	scale2, scale1
+		muls#x	scale2, scale2				; scale2 = scale1 * scale1
+		movap#x	result, scale2				; result = scale2
+if x eq s
+	SINGLE8		loge, result, x				; compute single polynomial value
+else if x eq d
+	SINGLE16	loge, result, x				; compute single polynomial value
+end if
+		muls#x	temp1, scale2
+		adds#x	temp1, base
+		muls#x	temp1, scale1
+		subs#x	temp1, base
+		adds#x	temp1, origin				; temp1 = origin + (scale1 * (base + scale2 * temp1) - base)
+		muls#x	temp1, mscale				; temp1 *= mscale
+		adds#x	temp1, shift				; temp1 += shift
+		movap#x	result, temp1				; return mscale * log1p (value) + shift
+		ret
+;---[Mantissa correction branch]-----------
+.corr:	muls#x	result, cscale				; result *= cscale
+		sub		exp, mbits					; exp -= mbits
+		movint	ivalue, result, x			; ivalue = result
+		jmp		.back						; go back
+;---[Exit branch]--------------------------
+.exit:	movap#x	result, value				; return value
+		ret
+;---[Infinity branch #1]-------------------
+.inf1:	mov		inf1, minfval				; inf1 = -Inf
+		mov		inf2, pinfval				; inf2 = +Inf
+		movint	ivalue, lbase, x			; ivalue = lbase
+		mov		mant, oneval
+		cmp		ivalue, mant				; if (ivalue > 1.0)
+		cmova	res, inf1					;     then res = -Inf
+		cmovb	res, inf2					;     else res = +Inf
+		movint	result, res, x				; return res
+		ret
+;---[Infinity branch #2]-------------------
+.inf2:	mov		inf1, pinfval				; inf1 = +Inf
+		mov		inf2, minfval				; inf2 = -Inf
+		movint	ivalue, lbase, x			; ivalue = lbase
+		mov		mant, oneval
+		cmp		ivalue, mant				; if (ivalue > 1.0)
+		cmova	res, inf1					;     then res = +Inf
+		cmovb	res, inf2					;     else res = -Inf
+		movint	result, res, x				; return res
+		ret
+;---[Error branch]-------------------------
+.error:	initreg	result, treg, nanval		; return NaN
+		ret
+}
+;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+macro	LOGB1P	Log, Func, ivalue, mant, x
+{
+;---[Parameters]---------------------------
+lbase	equ		xmm0						; logarithm base value
+value	equ		xmm1						; logarithm value
+;---[Internal variables]-------------------
+treg	equ		rax							; temporary register
+temp1	equ		xmm1						; temporary register #1
+temp2	equ		xmm2						; temporary register #2
+temp3	equ		xmm3						; temporary register #3
+temp4	equ		xmm4						; temporary register #4
+mscale	equ		xmm5						; mantisa scale value
+scale1	equ		xmm6						; scale value #1
+scale2	equ		xmm7						; scale value #2
+base	equ		xmm8						; base value
+origin	equ		xmm9						; origin value
+result	equ		lbase						; result register
+two		equ		temp1						; 2.0
+half	equ		temp2						; 0.5
+stack	equ		rsp							; stack pointer
+s_value	equ		stack + 0 * 8				; stack position of "value" variable
+if x eq s
+nanval	= PNAN_FLT32						; +NaN
+infval	= PINF_FLT32						; +Inf
+twoval	= PTWO_FLT32						; +2.0
+phlfval	= PHALF_FLT32						; +0.5
+mhlfval	= MHALF_FLT32						; -0.5
+oneval	= PONE_FLT32						; +1.0
+loge	= log_flt32							; pointer to array of log coefficients
+else if x eq d
+nanval	= PNAN_FLT64						; +NaN
+infval	= PINF_FLT64						; +Inf
+twoval	= PTWO_FLT64						; +2.0
+phlfval	= PHALF_FLT64						; +0.5
+mhlfval	= MHALF_FLT64						; -0.5
+oneval	= PONE_FLT64						; +1.0
+loge	= log_flt64							; pointer to array of log coefficients
+end if
+space	= 1 * 8								; stack size required by the procedure
+;---[Check base value]---------------------
+		movint	ivalue, lbase, x			; ivalue = lbase
+		mov		mant, oneval
+		cmp		ivalue, mant				; if (ivalue == 1.0)
+		je		.error						;     return NaN
+		xor		mant, mant
+		cmp		ivalue, mant				; if (ivalue <= 0.0)
+		jle		.error						;     then return NaN
+		mov		mant, infval
+		cmp		ivalue, mant				; if (ivalue >= Inf)
+		jae		.error						;     then return NaN
+;---[Check logarithm value]----------------
+		movint	ivalue, value, x			; ivalue = value
+		mov		mant, mhlfval
+		cmp		ivalue, mant				; if (ivalue < -0.5)
+		ja		.log						;     then go to log branch
+		mov		mant, oneval
+		cmp		ivalue, mant				; if (ivalue > +1.0)
+		jg		.log						;     then go to log branch
+;---[Loading scale values]-----------------
+		sub		stack, space				; reserving stack size for local vars
+		movs#x	[s_value], value			; save "value" variable into the stack
+		call	Log							; call Log (lbase)
+		initreg	mscale, treg, oneval
+		divs#x	mscale, result				; mscale = 1.0 / ln (lbase)
+		movs#x	result, [s_value]			; get "value" variable from the stack
+		add		stack, space				; restoring back the stack pointer
+;---[Loading consts]-----------------------
+		initreg	two, treg, twoval			; two = 2.0
+		initreg	half, treg, phlfval			; half = 0.5
+;---[Computing logarithm]------------------
+		movap#x	origin, result				; origin = result
+		movap#x	base, result
+		movap#x	scale1, result
+		movap#x	scale2, result
+		muls#x	base, result
+		adds#x	scale2, two
+		muls#x	base, half					; base = 0.5 * result * result
+		divs#x	scale1, scale2				; scale1 = result / (result + 2)
+		movap#x	scale2, scale1
+		muls#x	scale2, scale2				; scale2 = scale1 * scale1
+		movap#x	result, scale2				; result = scale2
+if x eq s
+	SINGLE8		loge, result, x				; compute single polynomial value
+else if x eq d
+	SINGLE16	loge, result, x				; compute single polynomial value
+end if
+		muls#x	temp1, scale2
+		adds#x	temp1, base
+		muls#x	temp1, scale1
+		subs#x	temp1, base
+		adds#x	temp1, origin				; temp1 = origin + (scale1 * (base + scale2 * temp1) - base)
+		muls#x	temp1, mscale				; temp1 *= mscale
+		movap#x	result, temp1				; return mscale * log1p (value)
+		ret
+;---[Log branch]---------------------------
+.log:	initreg	mscale, treg, oneval
+		adds#x	value, mscale
+		jmp		Func						; call Func (base, value + 1.0)
+;---[Error branch]-------------------------
+.error:	initreg	result, treg, nanval		; return NaN
+		ret
+}
+LogB_flt32:		LOGB	LogE_flt32, edx, ecx, edi, eax, edi, esi, s
+LogB_flt64:		LOGB	LogE_flt64, rdx, rcx, rdi, rax, rdi, rsi, d
+LogBp1_flt32:	LOGB1P	LogE_flt32, LogB_flt32, edx, ecx, s
+LogBp1_flt64:	LOGB1P	LogE_flt64, LogB_flt64, rdx, rcx, d
 
 ;******************************************************************************;
 ;       Scale functions                                                        ;
@@ -4355,17 +5518,16 @@ section	'.rodata'	align 16
 ;       Power of 10                                                            ;
 ;******************************************************************************;
 align 16
-				dq	0						; 10^-1 (fake power for 0 values)
-ten_table_int	dq	1						; 10^0
-				dq	10						; 10^1
-				dq	100						; 10^2
-				dq	1000					; 10^3
-				dq	10000					; 10^4
-				dq	100000					; 10^5
-				dq	1000000					; 10^6
-				dq	10000000				; 10^7
-				dq	100000000				; 10^8
-				dq	1000000000				; 10^9
+ten_table_int	dq	1						; 10^00
+				dq	10						; 10^01
+				dq	100						; 10^02
+				dq	1000					; 10^03
+				dq	10000					; 10^04
+				dq	100000					; 10^05
+				dq	1000000					; 10^06
+				dq	10000000				; 10^07
+				dq	100000000				; 10^08
+				dq	1000000000				; 10^09
 				dq	10000000000				; 10^10
 				dq	100000000000			; 10^11
 				dq	1000000000000			; 10^12
@@ -4376,7 +5538,7 @@ ten_table_int	dq	1						; 10^0
 				dq	100000000000000000		; 10^17
 				dq	1000000000000000000		; 10^18
 				dq	10000000000000000000	; 10^19
-				dq	0						; 0 (overflow)
+				dq	0						; 0 (overflow value)
 
 ;******************************************************************************;
 ;       flt32_t consts                                                         ;
@@ -4386,27 +5548,122 @@ ten_table_int	dq	1						; 10^0
 ;       Range reduction constant for trigonometric functions                   ;
 ;==============================================================================;
 align 16
-range_flt32		dq	0xDB6295993C439041
-				dq	0xFC2757D1F534DDC0
-				dq	0xA2F9836E4E441529
+range_flt32		dd	0x3C439041
+				dd	0xDB629599
+				dd	0xF534DDC0
+				dd	0xFC2757D1
+				dd	0x4E441529
+				dd	0xA2F9836E
 
 ;==============================================================================;
 ;       Coefficients to compute sin(x) for flt32_t type                        ;
 ;==============================================================================;
 align 16
-sin_flt32		dd	0x3C088889				; +1 / 5!
-				dd	0x3638EF1D				; +1 / 9!
-				dd	0xBE2AAAAB				; -1 / 3!
-				dd	0xB9500D01				; -1 / 7!
+sin_flt32		dd	0x3638EF1D				; +1 / 09!
+				dd	0x3C088889				; +1 / 05!
+				dd	0xB9500D01				; -1 / 07!
+				dd	0xBE2AAAAB				; -1 / 03!
 
 ;==============================================================================;
 ;       Coefficients to compute cos(x) for flt32_t type                        ;
 ;==============================================================================;
 align 16
-cos_flt32		dd	0xBAB60B61				; -1 / 6!
+cos_flt32		dd	0xB493F27E				; -1 / 10!
+				dd	0xBAB60B61				; -1 / 06!
+				dd	0x37D00D01				; +1 / 08!
+				dd	0x3D2AAAAB				; +1 / 04!
+
+;==============================================================================;
+;       Coefficients to compute sincos(x) for flt32_t type                     ;
+;==============================================================================;
+align 16
+sincos_flt32	dd	0x3638EF1D				; +1 / 09!
+				dd	0x3C088889				; +1 / 05!
+				dd	0xB9500D01				; -1 / 07!
+				dd	0xBE2AAAAB				; -1 / 03!
 				dd	0xB493F27E				; -1 / 10!
-				dd	0x3D2AAAAB				; +1 / 4!
-				dd	0x37D00D01				; +1 / 8!
+				dd	0xBAB60B61				; -1 / 06!
+				dd	0x37D00D01				; +1 / 08!
+				dd	0x3D2AAAAB				; +1 / 04!
+
+;==============================================================================;
+;       Coefficients to compute tan(x) for flt32_t type                        ;
+;==============================================================================;
+align 16
+tan_flt32		dd	0x34E694CF
+				dd	0x3A1AAC12
+				dd	0x37858997
+				dd	0x3CB327A4
+				dd	0x362F796D
+				dd	0x3B6B69E8
+				dd	0x38CB3F0C
+				dd	0x3E088889
+				dd	0x358E3BF0
+				dd	0x3ABED1B2
+				dd	0x3824BEC7
+				dd	0x3D5D0DD1
+				dd	0x36D87B97
+				dd	0x3C11371B
+				dd	0x397ABEBC
+				dd	0x3EAAAAAB
+
+;==============================================================================;
+;       Coefficients to compute arcsin(x) for flt32_t type                     ;
+;==============================================================================;
+align 16
+asin_flt32		dd	0x3B8AF74F				; (31)!! / (32)!! / 33
+				dd	0x3C3D43C4				; (15)!! / (16)!! / 17
+				dd	0x3BD3431F				; (23)!! / (24)!! / 25
+				dd	0x3CF8E38E				; (07)!! / (08)!! / 09
+				dd	0x3BA8DD18				; (27)!! / (28)!! / 29
+				dd	0x3C8E2762				; (11)!! / (12)!! / 13
+				dd	0x3C09779E				; (19)!! / (20)!! / 21
+				dd	0x3D99999A				; (03)!! / (04)!! / 05
+				dd	0x3B98B41E				; (29)!! / (30)!! / 31
+				dd	0x3C64CCCD				; (13)!! / (14)!! / 15
+				dd	0x3BEF9DEA				; (21)!! / (22)!! / 23
+				dd	0x3D36DB6E				; (05)!! / (06)!! / 07
+				dd	0x3BBC16ED				; (25)!! / (26)!! / 27
+				dd	0x3CB745D1				; (09)!! / (10)!! / 11
+				dd	0x3C1FEF28				; (17)!! / (18)!! / 19
+				dd	0x3E2AAAAB				; (01)!! / (02)!! / 03
+
+;==============================================================================;
+;       Coefficients to compute arctan(x) for flt32_t type                     ;
+;==============================================================================;
+align 16
+atan_flt32		dd	0x3E1E9308				; 2^64 * (32!)^2 / (65)!
+				dd	0x3E5DB96D				; 2^32 * (16!)^2 / (33)!
+				dd	0x3E3668B3				; 2^48 * (24!)^2 / (49)!
+				dd	0x3E995D18				; 2^16 * (08!)^2 / (17)!
+				dd	0x3E293EE9				; 2^56 * (28!)^2 / (57)!
+				dd	0x3E7E201B				; 2^24 * (12!)^2 / (25)!
+				dd	0x3E4736D0				; 2^40 * (20!)^2 / (41)!
+				dd	0x3ED00D01				; 2^08 * (04!)^2 / (09)!
+				dd	0x3E23A651				; 2^60 * (30!)^2 / (61)!
+				dd	0x3E6C4665				; 2^28 * (14!)^2 / (29)!
+				dd	0x3E3E41D8				; 2^44 * (22!)^2 / (45)!
+				dd	0x3EAE968C				; 2^12 * (06!)^2 / (13)!
+				dd	0x3E2F7549				; 2^52 * (26!)^2 / (53)!
+				dd	0x3E8A5F8B				; 2^20 * (10!)^2 / (21)!
+				dd	0x3E519168				; 2^36 * (18!)^2 / (37)!
+				dd	0x3F088889				; 2^04 * (02!)^2 / (05)!
+				dd	0x3E210D54				; 2^62 * (31!)^2 / (63)!
+				dd	0x3E64A738				; 2^30 * (15!)^2 / (31)!
+				dd	0x3E3A358C				; 2^46 * (23!)^2 / (47)!
+				dd	0x3EA2F2E9				; 2^14 * (07!)^2 / (15)!
+				dd	0x3E2C449B				; 2^54 * (27!)^2 / (55)!
+				dd	0x3E845B64				; 2^22 * (11!)^2 / (23)!
+				dd	0x3E4C31C8				; 2^38 * (19!)^2 / (39)!
+				dd	0x3EEA0EA1				; 2^06 * (03!)^2 / (07)!
+				dd	0x3E26608F				; 2^58 * (29!)^2 / (59)!
+				dd	0x3E74B69F				; 2^26 * (13!)^2 / (27)!
+				dd	0x3E4294CB				; 2^42 * (21!)^2 / (43)!
+				dd	0x3EBD2318				; 2^10 * (05!)^2 / (11)!
+				dd	0x3E32D514				; 2^50 * (25!)^2 / (51)!
+				dd	0x3E914AB8				; 2^18 * (09!)^2 / (19)!
+				dd	0x3E5763AB				; 2^34 * (17!)^2 / (35)!
+				dd	0x3F2AAAAB				; 2^02 * (01!)^2 / (03)!
 
 ;==============================================================================;
 ;       Coefficients to compute exp2(x) for flt32_t type                       ;
@@ -4442,6 +5699,19 @@ exp_flt32		dd	0x3D2AAAAB				; 1 / 4!
 				dd	0x3E2AAAAB				; 1 / 3!
 				dd	0x3C088889				; 1 / 5!
 				dd	0x39500D01				; 1 / 7!
+
+;==============================================================================;
+;       Coefficients to compute log(x) for flt32_t type                        ;
+;==============================================================================;
+align 16
+log_flt32		dd	0x3DF0F0F1				; 2 / 17
+				dd	0x3E638E39				; 2 / 09
+				dd	0x3E1D89D9				; 2 / 13
+				dd	0x3ECCCCCD				; 2 / 05
+				dd	0x3E088889				; 2 / 15
+				dd	0x3E924925				; 2 / 07
+				dd	0x3E3A2E8C				; 2 / 11
+				dd	0x3F2AAAAB				; 2 / 03
 
 ;==============================================================================;
 ;       Table of integer powers of 10^x for flt32_t type                       ;
@@ -4484,25 +5754,25 @@ ten_table_flt32	dd	0x00000000				; 10^-46
 				dd	0x2B8CBCCC				; 10^-12
 				dd	0x2D2FEBFF				; 10^-11
 				dd	0x2EDBE6FF				; 10^-10
-				dd	0x3089705F				; 10^-9
-				dd	0x322BCC77				; 10^-8
-				dd	0x33D6BF95				; 10^-7
-				dd	0x358637BD				; 10^-6
-				dd	0x3727C5AC				; 10^-5
-				dd	0x38D1B717				; 10^-4
-				dd	0x3A83126F				; 10^-3
-				dd	0x3C23D70A				; 10^-2
-				dd	0x3DCCCCCD				; 10^-1
-				dd	0x3F800000				; 10^0
-				dd	0x41200000				; 10^+1
-				dd	0x42C80000				; 10^+2
-				dd	0x447A0000				; 10^+3
-				dd	0x461C4000				; 10^+4
-				dd	0x47C35000				; 10^+5
-				dd	0x49742400				; 10^+6
-				dd	0x4B189680				; 10^+7
-				dd	0x4CBEBC20				; 10^+8
-				dd	0x4E6E6B28				; 10^+9
+				dd	0x3089705F				; 10^-09
+				dd	0x322BCC77				; 10^-08
+				dd	0x33D6BF95				; 10^-07
+				dd	0x358637BD				; 10^-06
+				dd	0x3727C5AC				; 10^-05
+				dd	0x38D1B717				; 10^-04
+				dd	0x3A83126F				; 10^-03
+				dd	0x3C23D70A				; 10^-02
+				dd	0x3DCCCCCD				; 10^-01
+				dd	0x3F800000				; 10^+00
+				dd	0x41200000				; 10^+01
+				dd	0x42C80000				; 10^+02
+				dd	0x447A0000				; 10^+03
+				dd	0x461C4000				; 10^+04
+				dd	0x47C35000				; 10^+05
+				dd	0x49742400				; 10^+06
+				dd	0x4B189680				; 10^+07
+				dd	0x4CBEBC20				; 10^+08
+				dd	0x4E6E6B28				; 10^+09
 				dd	0x501502F9				; 10^+10
 				dd	0x51BA43B7				; 10^+11
 				dd	0x5368D4A5				; 10^+12
@@ -4543,195 +5813,195 @@ exp_table_flt32	dd	0x00000000				; e^-104
 				dd	0x00000004				; e^-102
 				dd	0x0000000A				; e^-101
 				dd	0x0000001B				; e^-100
-				dd	0x00000048				; e^-99
-				dd	0x000000C4				; e^-98
-				dd	0x00000215				; e^-97
-				dd	0x000005A9				; e^-96
-				dd	0x00000F64				; e^-95
-				dd	0x000029D6				; e^-94
-				dd	0x000071B9				; e^-93
-				dd	0x00013521				; e^-92
-				dd	0x0003484B				; e^-91
-				dd	0x0008EC28				; e^-90
-				dd	0x001840FC				; e^-89
-				dd	0x0041EDC4				; e^-88
-				dd	0x00B33687				; e^-87
-				dd	0x01739362				; e^-86
-				dd	0x022586E0				; e^-85
-				dd	0x02E0F96D				; e^-84
-				dd	0x0398E2CB				; e^-83
-				dd	0x044FCB22				; e^-82
-				dd	0x050D35D7				; e^-81
-				dd	0x05BFECBA				; e^-80
-				dd	0x06826D27				; e^-79
-				dd	0x07314490				; e^-78
-				dd	0x07F0EE94				; e^-77
-				dd	0x08A3BAF0				; e^-76
-				dd	0x095E884F				; e^-75
-				dd	0x0A1739FB				; e^-74
-				dd	0x0ACD89C1				; e^-73
-				dd	0x0B8BAD78				; e^-72
-				dd	0x0C3DD771				; e^-71
-				dd	0x0D0102BF				; e^-70
-				dd	0x0DAF5800				; e^-69
-				dd	0x0E6E511E				; e^-68
-				dd	0x0F21F3FE				; e^-67
-				dd	0x0FDC1DF9				; e^-66
-				dd	0x109595C7				; e^-65
-				dd	0x114B4EA4				; e^-64
-				dd	0x120A295C				; e^-63
-				dd	0x12BBC7F1				; e^-62
-				dd	0x137F388B				; e^-61
-				dd	0x142D70C9				; e^-60
-				dd	0x14EBBAEC				; e^-59
-				dd	0x15A031FC				; e^-58
-				dd	0x1659BA5A				; e^-57
-				dd	0x1713F623				; e^-56
-				dd	0x17C919B9				; e^-55
-				dd	0x1888A975				; e^-54
-				dd	0x1939BE2B				; e^-53
-				dd	0x19FC7361				; e^-52
-				dd	0x1AAB8EDC				; e^-51
-				dd	0x1B692BEB				; e^-50
-				dd	0x1C1E74DD				; e^-49
-				dd	0x1CD75D5D				; e^-48
-				dd	0x1D925B02				; e^-47
-				dd	0x1E46EAF1				; e^-46
-				dd	0x1F072DBA				; e^-45
-				dd	0x1FB7BA0F				; e^-44
-				dd	0x2079B5EA				; e^-43
-				dd	0x2129B229				; e^-42
-				dd	0x21E6A405				; e^-41
-				dd	0x229CBC92				; e^-40
-				dd	0x235506F2				; e^-39
-				dd	0x2410C457				; e^-38
-				dd	0x24C4C239				; e^-37
-				dd	0x2585B61D				; e^-36
-				dd	0x2635BB8D				; e^-35
-				dd	0x26F7000F				; e^-34
-				dd	0x27A7DAA4				; e^-33
-				dd	0x28642328				; e^-32
-				dd	0x291B090F				; e^-31
-				dd	0x29D2B706				; e^-30
-				dd	0x2A8F3216				; e^-29
-				dd	0x2B429F81				; e^-28
-				dd	0x2C044295				; e^-27
-				dd	0x2CB3C295				; e^-26
-				dd	0x2D7451BD				; e^-25
-				dd	0x2E26083C				; e^-24
-				dd	0x2EE1A93F				; e^-23
-				dd	0x2F995A46				; e^-22
-				dd	0x30506D87				; e^-21
-				dd	0x310DA433				; e^-20
-				dd	0x31C082B8				; e^-19
-				dd	0x3282D314				; e^-18
-				dd	0x3331CF19				; e^-17
-				dd	0x33F1AADE				; e^-16
-				dd	0x34A43AE5				; e^-15
-				dd	0x355F3638				; e^-14
-				dd	0x3617B02A				; e^-13
-				dd	0x36CE2A62				; e^-12
-				dd	0x378C1AA1				; e^-11
-				dd	0x383E6BCE				; e^-10
-				dd	0x39016791				; e^-9
-				dd	0x39AFE108				; e^-8
-				dd	0x3A6F0B5D				; e^-7
-				dd	0x3B227290				; e^-6
-				dd	0x3BDCC9FF				; e^-5
-				dd	0x3C960AAE				; e^-4
-				dd	0x3D4BED86				; e^-3
-				dd	0x3E0A9555				; e^-2
-				dd	0x3EBC5AB2				; e^-1
-				dd	0x3F800000				; e^0
-				dd	0x402DF854				; e^+1
-				dd	0x40EC7326				; e^+2
-				dd	0x41A0AF2E				; e^+3
-				dd	0x425A6481				; e^+4
-				dd	0x431469C5				; e^+5
-				dd	0x43C9B6E3				; e^+6
-				dd	0x44891443				; e^+7
-				dd	0x453A4F54				; e^+8
-				dd	0x45FD38AC				; e^+9
-				dd	0x46AC14EE				; e^+10
-				dd	0x4769E224				; e^+11
-				dd	0x481EF0B3				; e^+12
-				dd	0x48D805AD				; e^+13
-				dd	0x4992CD62				; e^+14
-				dd	0x4A478665				; e^+15
-				dd	0x4B07975F				; e^+16
-				dd	0x4BB849A4				; e^+17
-				dd	0x4C7A7910				; e^+18
-				dd	0x4D2A36C8				; e^+19
-				dd	0x4DE75844				; e^+20
-				dd	0x4E9D3710				; e^+21
-				dd	0x4F55AD6E				; e^+22
-				dd	0x5011357A				; e^+23
-				dd	0x50C55BFE				; e^+24
-				dd	0x51861E9D				; e^+25
-				dd	0x52364993				; e^+26
-				dd	0x52F7C118				; e^+27
-				dd	0x53A85DD2				; e^+28
-				dd	0x5464D572				; e^+29
-				dd	0x551B8238				; e^+30
-				dd	0x55D35BB3				; e^+31
-				dd	0x568FA1FE				; e^+32
-				dd	0x5743379A				; e^+33
-				dd	0x5804A9F1				; e^+34
-				dd	0x58B44F11				; e^+35
-				dd	0x597510AD				; e^+36
-				dd	0x5A2689FE				; e^+37
-				dd	0x5AE2599A				; e^+38
-				dd	0x5B99D21F				; e^+39
-				dd	0x5C51106A				; e^+40
-				dd	0x5D0E12E4				; e^+41
-				dd	0x5DC1192B				; e^+42
-				dd	0x5E833952				; e^+43
-				dd	0x5F325A0E				; e^+44
-				dd	0x5FF267BB				; e^+45
-				dd	0x60A4BB3E				; e^+46
-				dd	0x615FE4A9				; e^+47
-				dd	0x621826B5				; e^+48
-				dd	0x62CECB81				; e^+49
-				dd	0x638C881F				; e^+50
-				dd	0x643F009E				; e^+51
-				dd	0x6501CCB3				; e^+52
-				dd	0x65B06A7B				; e^+53
-				dd	0x666FC62D				; e^+54
-				dd	0x6722F184				; e^+55
-				dd	0x67DD768B				; e^+56
-				dd	0x68967FF0				; e^+57
-				dd	0x694C8CE5				; e^+58
-				dd	0x6A0B01A3				; e^+59
-				dd	0x6ABCEDE5				; e^+60
-				dd	0x6B806408				; e^+61
-				dd	0x6C2E804A				; e^+62
-				dd	0x6CED2BEF				; e^+63
-				dd	0x6DA12CC1				; e^+64
-				dd	0x6E5B0F2E				; e^+65
-				dd	0x6F14DDC1				; e^+66
-				dd	0x6FCA5487				; e^+67
-				dd	0x70897F64				; e^+68
-				dd	0x713AE0EE				; e^+69
-				dd	0x71FDFE91				; e^+70
-				dd	0x72AC9B6A				; e^+71
-				dd	0x736A98EC				; e^+72
-				dd	0x741F6CE9				; e^+73
-				dd	0x74D8AE7F				; e^+74
-				dd	0x7593401C				; e^+75
-				dd	0x76482254				; e^+76
-				dd	0x77080156				; e^+77
-				dd	0x77B8D9AA				; e^+78
-				dd	0x787B3CCF				; e^+79
-				dd	0x792ABBCE				; e^+80
-				dd	0x79E80D11				; e^+81
-				dd	0x7A9DB1ED				; e^+82
-				dd	0x7B56546B				; e^+83
-				dd	0x7C11A6F5				; e^+84
-				dd	0x7CC5F63B				; e^+85
-				dd	0x7D86876D				; e^+86
-				dd	0x7E36D809				; e^+87
-				dd	0x7EF882B7				; e^+88
-				dd	0x7F800000				; e^+89
+				dd	0x00000048				; e^-099
+				dd	0x000000C4				; e^-098
+				dd	0x00000215				; e^-097
+				dd	0x000005A9				; e^-096
+				dd	0x00000F64				; e^-095
+				dd	0x000029D6				; e^-094
+				dd	0x000071B9				; e^-093
+				dd	0x00013521				; e^-092
+				dd	0x0003484B				; e^-091
+				dd	0x0008EC28				; e^-090
+				dd	0x001840FC				; e^-089
+				dd	0x0041EDC4				; e^-088
+				dd	0x00B33687				; e^-087
+				dd	0x01739362				; e^-086
+				dd	0x022586E0				; e^-085
+				dd	0x02E0F96D				; e^-084
+				dd	0x0398E2CB				; e^-083
+				dd	0x044FCB22				; e^-082
+				dd	0x050D35D7				; e^-081
+				dd	0x05BFECBA				; e^-080
+				dd	0x06826D27				; e^-079
+				dd	0x07314490				; e^-078
+				dd	0x07F0EE94				; e^-077
+				dd	0x08A3BAF0				; e^-076
+				dd	0x095E884F				; e^-075
+				dd	0x0A1739FB				; e^-074
+				dd	0x0ACD89C1				; e^-073
+				dd	0x0B8BAD78				; e^-072
+				dd	0x0C3DD771				; e^-071
+				dd	0x0D0102BF				; e^-070
+				dd	0x0DAF5800				; e^-069
+				dd	0x0E6E511E				; e^-068
+				dd	0x0F21F3FE				; e^-067
+				dd	0x0FDC1DF9				; e^-066
+				dd	0x109595C7				; e^-065
+				dd	0x114B4EA4				; e^-064
+				dd	0x120A295C				; e^-063
+				dd	0x12BBC7F1				; e^-062
+				dd	0x137F388B				; e^-061
+				dd	0x142D70C9				; e^-060
+				dd	0x14EBBAEC				; e^-059
+				dd	0x15A031FC				; e^-058
+				dd	0x1659BA5A				; e^-057
+				dd	0x1713F623				; e^-056
+				dd	0x17C919B9				; e^-055
+				dd	0x1888A975				; e^-054
+				dd	0x1939BE2B				; e^-053
+				dd	0x19FC7361				; e^-052
+				dd	0x1AAB8EDC				; e^-051
+				dd	0x1B692BEB				; e^-050
+				dd	0x1C1E74DD				; e^-049
+				dd	0x1CD75D5D				; e^-048
+				dd	0x1D925B02				; e^-047
+				dd	0x1E46EAF1				; e^-046
+				dd	0x1F072DBA				; e^-045
+				dd	0x1FB7BA0F				; e^-044
+				dd	0x2079B5EA				; e^-043
+				dd	0x2129B229				; e^-042
+				dd	0x21E6A405				; e^-041
+				dd	0x229CBC92				; e^-040
+				dd	0x235506F2				; e^-039
+				dd	0x2410C457				; e^-038
+				dd	0x24C4C239				; e^-037
+				dd	0x2585B61D				; e^-036
+				dd	0x2635BB8D				; e^-035
+				dd	0x26F7000F				; e^-034
+				dd	0x27A7DAA4				; e^-033
+				dd	0x28642328				; e^-032
+				dd	0x291B090F				; e^-031
+				dd	0x29D2B706				; e^-030
+				dd	0x2A8F3216				; e^-029
+				dd	0x2B429F81				; e^-028
+				dd	0x2C044295				; e^-027
+				dd	0x2CB3C295				; e^-026
+				dd	0x2D7451BD				; e^-025
+				dd	0x2E26083C				; e^-024
+				dd	0x2EE1A93F				; e^-023
+				dd	0x2F995A46				; e^-022
+				dd	0x30506D87				; e^-021
+				dd	0x310DA433				; e^-020
+				dd	0x31C082B8				; e^-019
+				dd	0x3282D314				; e^-018
+				dd	0x3331CF19				; e^-017
+				dd	0x33F1AADE				; e^-016
+				dd	0x34A43AE5				; e^-015
+				dd	0x355F3638				; e^-014
+				dd	0x3617B02A				; e^-013
+				dd	0x36CE2A62				; e^-012
+				dd	0x378C1AA1				; e^-011
+				dd	0x383E6BCE				; e^-010
+				dd	0x39016791				; e^-009
+				dd	0x39AFE108				; e^-008
+				dd	0x3A6F0B5D				; e^-007
+				dd	0x3B227290				; e^-006
+				dd	0x3BDCC9FF				; e^-005
+				dd	0x3C960AAE				; e^-004
+				dd	0x3D4BED86				; e^-003
+				dd	0x3E0A9555				; e^-002
+				dd	0x3EBC5AB2				; e^-001
+				dd	0x3F800000				; e^+000
+				dd	0x402DF854				; e^+001
+				dd	0x40EC7326				; e^+002
+				dd	0x41A0AF2E				; e^+003
+				dd	0x425A6481				; e^+004
+				dd	0x431469C5				; e^+005
+				dd	0x43C9B6E3				; e^+006
+				dd	0x44891443				; e^+007
+				dd	0x453A4F54				; e^+008
+				dd	0x45FD38AC				; e^+009
+				dd	0x46AC14EE				; e^+010
+				dd	0x4769E224				; e^+011
+				dd	0x481EF0B3				; e^+012
+				dd	0x48D805AD				; e^+013
+				dd	0x4992CD62				; e^+014
+				dd	0x4A478665				; e^+015
+				dd	0x4B07975F				; e^+016
+				dd	0x4BB849A4				; e^+017
+				dd	0x4C7A7910				; e^+018
+				dd	0x4D2A36C8				; e^+019
+				dd	0x4DE75844				; e^+020
+				dd	0x4E9D3710				; e^+021
+				dd	0x4F55AD6E				; e^+022
+				dd	0x5011357A				; e^+023
+				dd	0x50C55BFE				; e^+024
+				dd	0x51861E9D				; e^+025
+				dd	0x52364993				; e^+026
+				dd	0x52F7C118				; e^+027
+				dd	0x53A85DD2				; e^+028
+				dd	0x5464D572				; e^+029
+				dd	0x551B8238				; e^+030
+				dd	0x55D35BB3				; e^+031
+				dd	0x568FA1FE				; e^+032
+				dd	0x5743379A				; e^+033
+				dd	0x5804A9F1				; e^+034
+				dd	0x58B44F11				; e^+035
+				dd	0x597510AD				; e^+036
+				dd	0x5A2689FE				; e^+037
+				dd	0x5AE2599A				; e^+038
+				dd	0x5B99D21F				; e^+039
+				dd	0x5C51106A				; e^+040
+				dd	0x5D0E12E4				; e^+041
+				dd	0x5DC1192B				; e^+042
+				dd	0x5E833952				; e^+043
+				dd	0x5F325A0E				; e^+044
+				dd	0x5FF267BB				; e^+045
+				dd	0x60A4BB3E				; e^+046
+				dd	0x615FE4A9				; e^+047
+				dd	0x621826B5				; e^+048
+				dd	0x62CECB81				; e^+049
+				dd	0x638C881F				; e^+050
+				dd	0x643F009E				; e^+051
+				dd	0x6501CCB3				; e^+052
+				dd	0x65B06A7B				; e^+053
+				dd	0x666FC62D				; e^+054
+				dd	0x6722F184				; e^+055
+				dd	0x67DD768B				; e^+056
+				dd	0x68967FF0				; e^+057
+				dd	0x694C8CE5				; e^+058
+				dd	0x6A0B01A3				; e^+059
+				dd	0x6ABCEDE5				; e^+060
+				dd	0x6B806408				; e^+061
+				dd	0x6C2E804A				; e^+062
+				dd	0x6CED2BEF				; e^+063
+				dd	0x6DA12CC1				; e^+064
+				dd	0x6E5B0F2E				; e^+065
+				dd	0x6F14DDC1				; e^+066
+				dd	0x6FCA5487				; e^+067
+				dd	0x70897F64				; e^+068
+				dd	0x713AE0EE				; e^+069
+				dd	0x71FDFE91				; e^+070
+				dd	0x72AC9B6A				; e^+071
+				dd	0x736A98EC				; e^+072
+				dd	0x741F6CE9				; e^+073
+				dd	0x74D8AE7F				; e^+074
+				dd	0x7593401C				; e^+075
+				dd	0x76482254				; e^+076
+				dd	0x77080156				; e^+077
+				dd	0x77B8D9AA				; e^+078
+				dd	0x787B3CCF				; e^+079
+				dd	0x792ABBCE				; e^+080
+				dd	0x79E80D11				; e^+081
+				dd	0x7A9DB1ED				; e^+082
+				dd	0x7B56546B				; e^+083
+				dd	0x7C11A6F5				; e^+084
+				dd	0x7CC5F63B				; e^+085
+				dd	0x7D86876D				; e^+086
+				dd	0x7E36D809				; e^+087
+				dd	0x7EF882B7				; e^+088
+				dd	0x7F800000				; e^+089
 
 ;******************************************************************************;
 ;       flt64_t consts                                                         ;
@@ -4741,7 +6011,8 @@ exp_table_flt32	dd	0x00000000				; e^-104
 ;       Range reduction constant for trigonometric functions                   ;
 ;==============================================================================;
 align 16
-range_flt64		dq	0x3D0739F78A5292EA
+range_flt64		dq	0x6BFB5FB11F8D5D08
+				dq	0x3D0739F78A5292EA
 				dq	0x7527BAC7EBE5F17B
 				dq	0x4F463F669E5FEA2D
 				dq	0x6D367ECF27CB09B7
@@ -4763,80 +6034,267 @@ range_flt64		dq	0x3D0739F78A5292EA
 ;       Coefficients to compute sin(x) for flt64_t type                        ;
 ;==============================================================================;
 align 16
-sin_flt64		dq	0x3F81111111111111		; +1 / 5!
-				dq	0x3EC71DE3A556C734		; +1 / 9!
+sin_flt64		dq	0x3CE952C77030AD4A		; +1 / 17!
+				dq	0x3EC71DE3A556C734		; +1 / 09!
 				dq	0x3DE6124613A86D09		; +1 / 13!
+				dq	0x3F81111111111111		; +1 / 05!
 				dq	0xBD6AE7F3E733B81F		; -1 / 15!
-				dq	0xBFC5555555555555		; -1 / 3!
-				dq	0xBF2A01A01A01A01A		; -1 / 7!
+				dq	0xBF2A01A01A01A01A		; -1 / 07!
 				dq	0xBE5AE64567F544E4		; -1 / 11!
+				dq	0xBFC5555555555555		; -1 / 03!
 
 ;==============================================================================;
 ;       Coefficients to compute cos(x) for flt64_t type                        ;
 ;==============================================================================;
 align 16
-cos_flt64		dq	0xBF56C16C16C16C17		; -1 / 6!
+cos_flt64		dq	0xBCA6827863B97D97		; -1 / 18!
 				dq	0xBE927E4FB7789F5C		; -1 / 10!
 				dq	0xBDA93974A8C07C9D		; -1 / 14!
+				dq	0xBF56C16C16C16C17		; -1 / 06!
 				dq	0x3D2AE7F3E733B81F		; +1 / 16!
-				dq	0x3FA5555555555555		; +1 / 4!
-				dq	0x3EFA01A01A01A01A		; +1 / 8!
+				dq	0x3EFA01A01A01A01A		; +1 / 08!
 				dq	0x3E21EED8EFF8D898		; +1 / 12!
+				dq	0x3FA5555555555555		; +1 / 04!
+
+;==============================================================================;
+;       Coefficients to compute sincos(x) for flt64_t type                     ;
+;==============================================================================;
+align 16
+sincos_flt64	dq	0x3CE952C77030AD4A		; +1 / 17!
+				dq	0x3EC71DE3A556C734		; +1 / 09!
+				dq	0x3DE6124613A86D09		; +1 / 13!
+				dq	0x3F81111111111111		; +1 / 05!
+				dq	0xBD6AE7F3E733B81F		; -1 / 15!
+				dq	0xBF2A01A01A01A01A		; -1 / 07!
+				dq	0xBE5AE64567F544E4		; -1 / 11!
+				dq	0xBFC5555555555555		; -1 / 03!
+				dq	0xBCA6827863B97D97		; -1 / 18!
+				dq	0xBE927E4FB7789F5C		; -1 / 10!
+				dq	0xBDA93974A8C07C9D		; -1 / 14!
+				dq	0xBF56C16C16C16C17		; -1 / 06!
+				dq	0x3D2AE7F3E733B81F		; +1 / 16!
+				dq	0x3EFA01A01A01A01A		; +1 / 08!
+				dq	0x3E21EED8EFF8D898		; +1 / 12!
+				dq	0x3FA5555555555555		; +1 / 04!
+
+;==============================================================================;
+;       Coefficients to compute tan(x) for flt64_t type                        ;
+;==============================================================================;
+align 16
+tan_flt64		dq	0x3D500390E238ECB8
+				dq	0x3E9CD299DE4AE6BB
+				dq	0x3DF57BEA2950F11E
+				dq	0x3F43558248036744
+				dq	0x3DA28C65557EA2A5
+				dq	0x3EF0B132D39A6050
+				dq	0x3E48E25FF9327E2C
+				dq	0x3F9664F4882C10FA
+				dq	0x3D785F9BF8D6B2B2
+				dq	0x3EC5EF2DA474E5B7
+				dq	0x3E20597B61CB3092
+				dq	0x3F6D6D3D0E157DE0
+				dq	0x3DCC3B23B05E39F9
+				dq	0x3F1967E18AFCAFAD
+				dq	0x3E72EFE8DB3AFF1F
+				dq	0x3FC1111111111111
+				dq	0x3D63C1A3035E663D
+				dq	0x3EB1C77DF95C1C0D
+				dq	0x3E0A813F6EAA7058
+				dq	0x3F57DA36452B75E3
+				dq	0x3DB6E2193AE496D5
+				dq	0x3F0497D8EEA25259
+				dq	0x3E5EB3229047434C
+				dq	0x3FABA1BA1BA1BA1C
+				dq	0x3D8E11CF33C632A8
+				dq	0x3EDB0F72D3EE24E9
+				dq	0x3E342BA1A349B490
+				dq	0x3F8226E355E6C23D
+				dq	0x3DE16A101C5FDE96
+				dq	0x3F2F57D7734D1664
+				dq	0x3E875CDE6563FED9
+				dq	0x3FD5555555555555
+
+;==============================================================================;
+;       Coefficients to compute arcsin(x) for flt64_t type                     ;
+;==============================================================================;
+align 16
+asin_flt64		dq	0x3F590A9F747DB95D		; (63)!! / (64)!! / 65
+				dq	0x3F715EE9D45D1746		; (31)!! / (32)!! / 33
+				dq	0x3F63275586C5F2F0		; (47)!! / (48)!! / 49
+				dq	0x3F87A87878787878		; (15)!! / (16)!! / 17
+				dq	0x3F5E82BE60D9127E		; (55)!! / (56)!! / 57
+				dq	0x3F7A6863D70A3D71		; (23)!! / (24)!! / 25
+				dq	0x3F690CB77F60C7CE		; (39)!! / (40)!! / 41
+				dq	0x3F9F1C71C71C71C7		; (07)!! / (08)!! / 09
+				dq	0x3F5B8D2E5667CE6C		; (59)!! / (60)!! / 61
+				dq	0x3F751BA308D3DCB1		; (27)!! / (28)!! / 29
+				dq	0x3F65C5F56EFAAAAB		; (43)!! / (44)!! / 45
+				dq	0x3F91C4EC4EC4EC4F		; (11)!! / (12)!! / 13
+				dq	0x3F61052BC5FA960A		; (51)!! / (52)!! / 53
+				dq	0x3F812EF3CF3CF3CF		; (19)!! / (20)!! / 21
+				dq	0x3F6D3D2A8E0DD67D		; (35)!! / (36)!! / 37
+				dq	0x3FB3333333333333		; (03)!! / (04)!! / 05
+				dq	0x3F5A3F1EF82137EE		; (61)!! / (62)!! / 63
+				dq	0x3F731683BDEF7BDF		; (29)!! / (30)!! / 31
+				dq	0x3F6464C0950F7D47		; (45)!! / (46)!! / 47
+				dq	0x3F8C99999999999A		; (13)!! / (14)!! / 15
+				dq	0x3F6018F963C229BF		; (53)!! / (54)!! / 55
+				dq	0x3F7DF3BD37A6F4DF		; (21)!! / (22)!! / 23
+				dq	0x3F6B026F57B13B14		; (37)!! / (38)!! / 39
+				dq	0x3FA6DB6DB6DB6DB7		; (05)!! / (06)!! / 07
+				dq	0x3F5CF7DEA5B6E830		; (57)!! / (58)!! / 59
+				dq	0x3F7782DDA12F684C		; (25)!! / (26)!! / 27
+				dq	0x3F6750DE64D7D05F		; (41)!! / (42)!! / 43
+				dq	0x3F96E8BA2E8BA2E9		; (09)!! / (10)!! / 11
+				dq	0x3F6208D3570AE5A6		; (49)!! / (50)!! / 51
+				dq	0x3F83FDE50D79435E		; (17)!! / (18)!! / 19
+				dq	0x3F6FCAF8FB6DB6DB		; (33)!! / (34)!! / 35
+				dq	0x3FC5555555555555		; (01)!! / (02)!! / 03
+
+;==============================================================================;
+;       Coefficients to compute arctan(x) for flt64_t type                     ;
+;==============================================================================;
+align 16
+atan_flt64		dq	0x3FBC31C683947AA9		; 2^128 * (64!)^2 / (129)!
+				dq	0x3FC3D261037F0936		; 2^064 * (32!)^2 / (065)!
+				dq	0x3FC03F26B61999C3		; 2^096 * (48!)^2 / (097)!
+				dq	0x3FCBB72D930C5D8D		; 2^032 * (16!)^2 / (033)!
+				dq	0x3FBE1DBDE3EFE843		; 2^112 * (56!)^2 / (113)!
+				dq	0x3FC6CD166260E987		; 2^048 * (24!)^2 / (049)!
+				dq	0x3FC1C51D9ECB4AF3		; 2^080 * (40!)^2 / (081)!
+				dq	0x3FD32BA2FBE5D188		; 2^016 * (08!)^2 / (017)!
+				dq	0x3FBD1B9B2B9C6149		; 2^120 * (60!)^2 / (121)!
+				dq	0x3FC527DD294B0054		; 2^056 * (28!)^2 / (057)!
+				dq	0x3FC0F50D4259EA3B		; 2^088 * (44!)^2 / (089)!
+				dq	0x3FCFC403679615EB		; 2^024 * (12!)^2 / (025)!
+				dq	0x3FBF3CB512808855		; 2^104 * (52!)^2 / (105)!
+				dq	0x3FC8E6D9F9E68B50		; 2^040 * (20!)^2 / (041)!
+				dq	0x3FC2B64878F29FFB		; 2^072 * (36!)^2 / (073)!
+				dq	0x3FDA01A01A01A01A		; 2^008 * (04!)^2 / (009)!
+				dq	0x3FBCA3E551C1721F		; 2^124 * (62!)^2 / (125)!
+				dq	0x3FC474CA2EE60150		; 2^060 * (30!)^2 / (061)!
+				dq	0x3FC0972ED24B728D		; 2^092 * (46!)^2 / (093)!
+				dq	0x3FCD88CC90B2C6E4		; 2^028 * (14!)^2 / (029)!
+				dq	0x3FBEA94B080ACB93		; 2^108 * (54!)^2 / (109)!
+				dq	0x3FC7C83AF10BCE7A		; 2^044 * (22!)^2 / (045)!
+				dq	0x3FC23907DA1A12A5		; 2^076 * (38!)^2 / (077)!
+				dq	0x3FD5D2D18A2FE8D0		; 2^012 * (06!)^2 / (013)!
+				dq	0x3FBD9960D842D58D		; 2^116 * (58!)^2 / (117)!
+				dq	0x3FC5EEA916BEC52A		; 2^052 * (26!)^2 / (053)!
+				dq	0x3FC1596ED13F3DD2		; 2^084 * (42!)^2 / (085)!
+				dq	0x3FD14BF15E76D04C		; 2^020 * (10!)^2 / (021)!
+				dq	0x3FBFD8C06CB5931A		; 2^100 * (50!)^2 / (101)!
+				dq	0x3FCA322D0D750D80		; 2^036 * (18!)^2 / (037)!
+				dq	0x3FC33E32A7DBD86F		; 2^068 * (34!)^2 / (069)!
+				dq	0x3FE1111111111111		; 2^004 * (02!)^2 / (005)!
+				dq	0x3FBC6A2A109BA39E		; 2^126 * (63!)^2 / (127)!
+				dq	0x3FC421AA878D055B		; 2^062 * (31!)^2 / (063)!
+				dq	0x3FC06A79C7FF335D		; 2^094 * (47!)^2 / (095)!
+				dq	0x3FCC94E6FFA4C079		; 2^030 * (15!)^2 / (031)!
+				dq	0x3FBE629428420CA0		; 2^110 * (55!)^2 / (111)!
+				dq	0x3FC746B1846D990F		; 2^046 * (23!)^2 / (047)!
+				dq	0x3FC1FDFACA6108B0		; 2^078 * (39!)^2 / (079)!
+				dq	0x3FD45E5D2BA42EA0		; 2^014 * (07!)^2 / (015)!
+				dq	0x3FBD59B3EE1B8CC3		; 2^118 * (59!)^2 / (119)!
+				dq	0x3FC5889365757BC3		; 2^054 * (27!)^2 / (055)!
+				dq	0x3FC12661C603A9FB		; 2^086 * (43!)^2 / (087)!
+				dq	0x3FD08B6C709E2B6A		; 2^022 * (11!)^2 / (023)!
+				dq	0x3FBF8999465F4E91		; 2^102 * (51!)^2 / (103)!
+				dq	0x3FC98639068C4ECB		; 2^038 * (19!)^2 / (039)!
+				dq	0x3FC2F8D09712706D		; 2^070 * (35!)^2 / (071)!
+				dq	0x3FDD41D41D41D41D		; 2^006 * (03!)^2 / (007)!
+				dq	0x3FBCDF0622EE5C55		; 2^122 * (61!)^2 / (123)!
+				dq	0x3FC4CC11D1D03D11		; 2^058 * (29!)^2 / (059)!
+				dq	0x3FC0C55911CC447E		; 2^090 * (45!)^2 / (091)!
+				dq	0x3FCE96D3DF024DFE		; 2^026 * (13!)^2 / (027)!
+				dq	0x3FBEF1F8C3603A7F		; 2^106 * (53!)^2 / (107)!
+				dq	0x3FC852995F407042		; 2^042 * (21!)^2 / (043)!
+				dq	0x3FC27669A3B55CFF		; 2^074 * (37!)^2 / (075)!
+				dq	0x3FD7A463005E918C		; 2^010 * (05!)^2 / (011)!
+				dq	0x3FBDDAB355B62B41		; 2^114 * (57!)^2 / (115)!
+				dq	0x3FC65AA27E913543		; 2^050 * (25!)^2 / (051)!
+				dq	0x3FC18E4E9CE184A6		; 2^082 * (41!)^2 / (083)!
+				dq	0x3FD2295709965AB6		; 2^018 * (09!)^2 / (019)!
+				dq	0x3FC01523BC04A7BA		; 2^098 * (49!)^2 / (099)!
+				dq	0x3FCAEC756A4686C4		; 2^034 * (17!)^2 / (035)!
+				dq	0x3FC386A45780F5F8		; 2^066 * (33!)^2 / (067)!
+				dq	0x3FE5555555555555		; 2^002 * (01!)^2 / (003)!
 
 ;==============================================================================;
 ;       Coefficients to compute exp2(x) for flt64_t type                       ;
 ;==============================================================================;
 align 16
-exp2_flt64		dq	0x3F947FD3FFAC83B4		; ln(2)^2 / 4!
-				dq	0x3F3502D8FFB5A908		; ln(2)^4 / 6!
-				dq	0x3EC712EF11BE9AE4		; ln(2)^6 / 8!
-				dq	0x3E4F888B9368EF22		; ln(2)^8 / 10!
+exp2_flt64		dq	0x3F947FD3FFAC83B4		; ln(2)^02 / 04!
+				dq	0x3F3502D8FFB5A908		; ln(2)^04 / 06!
+				dq	0x3EC712EF11BE9AE4		; ln(2)^06 / 08!
+				dq	0x3E4F888B9368EF22		; ln(2)^08 / 10!
 				dq	0x3DCD61E5E658C886		; ln(2)^10 / 12!
 				dq	0x3D8910F686016B9B		; ln(2)^11 / 13!
-				dq	0x3FE0000000000000		; ln(2)^0 / 2!
-				dq	0x3FBD9303FEA2F7EA		; ln(2)^1 / 3!
-				dq	0x3F66BC07126A1A33		; ln(2)^3 / 5!
-				dq	0x3F00A4F3BC9A363E		; ln(2)^5 / 7!
-				dq	0x3E8C6EE35A409D22		; ln(2)^7 / 9!
-				dq	0x3E0FCADA8FCF0462		; ln(2)^9 / 11!
+				dq	0x3FE0000000000000		; ln(2)^00 / 02!
+				dq	0x3FBD9303FEA2F7EA		; ln(2)^01 / 03!
+				dq	0x3F66BC07126A1A33		; ln(2)^03 / 05!
+				dq	0x3F00A4F3BC9A363E		; ln(2)^05 / 07!
+				dq	0x3E8C6EE35A409D22		; ln(2)^07 / 09!
+				dq	0x3E0FCADA8FCF0462		; ln(2)^09 / 11!
 
 ;==============================================================================;
 ;       Coefficients to compute exp10(x) for flt64_t type                      ;
 ;==============================================================================;
 align 16
-exp10_flt64		dq	0x3FAC46DBB451388B		; (ln(10) / 2)^2 / 4!
-				dq	0x3F63FD4AB552C516		; (ln(10) / 2)^4 / 6!
-				dq	0x3F0E47D12E08E562		; (ln(10) / 2)^6 / 8!
-				dq	0x3EAC8A8CD552035C		; (ln(10) / 2)^8 / 10!
+exp10_flt64		dq	0x3FAC46DBB451388B		; (ln(10) / 2)^02 / 04!
+				dq	0x3F63FD4AB552C516		; (ln(10) / 2)^04 / 06!
+				dq	0x3F0E47D12E08E562		; (ln(10) / 2)^06 / 08!
+				dq	0x3EAC8A8CD552035C		; (ln(10) / 2)^08 / 10!
 				dq	0x3E42579602BBA583		; (ln(10) / 2)^10 / 12!
 				dq	0x3DD1193BE810E96B		; (ln(10) / 2)^12 / 14!
 				dq	0x3D94FF7127F17B2A		; (ln(10) / 2)^13 / 15!
-				dq	0x3FE0000000000000		; (ln(10) / 2)^0 / 2!
-				dq	0x3FC88F97A4F1C6C7		; (ln(10) / 2)^1 / 3!
-				dq	0x3F8A0B3C1C96ADD4		; (ln(10) / 2)^3 / 5!
-				dq	0x3F3A4D248DE3823A		; (ln(10) / 2)^5 / 7!
-				dq	0x3EDEFCFC6B05BD61		; (ln(10) / 2)^7 / 9!
-				dq	0x3E77E5CD1E140F6D		; (ln(10) / 2)^9 / 11!
+				dq	0x3FE0000000000000		; (ln(10) / 2)^00 / 02!
+				dq	0x3FC88F97A4F1C6C7		; (ln(10) / 2)^01 / 03!
+				dq	0x3F8A0B3C1C96ADD4		; (ln(10) / 2)^03 / 05!
+				dq	0x3F3A4D248DE3823A		; (ln(10) / 2)^05 / 07!
+				dq	0x3EDEFCFC6B05BD61		; (ln(10) / 2)^07 / 09!
+				dq	0x3E77E5CD1E140F6D		; (ln(10) / 2)^09 / 11!
 				dq	0x3E09FD87AF3B94D5		; (ln(10) / 2)^11 / 13!
 
 ;==============================================================================;
 ;       Coefficients to compute exp(x) for flt64_t type                        ;
 ;==============================================================================;
 align 16
-exp_flt64		dq	0x3FA5555555555555		; 1 / 4!
-				dq	0x3F56C16C16C16C17		; 1 / 6!
-				dq	0x3EFA01A01A01A01A		; 1 / 8!
+exp_flt64		dq	0x3FA5555555555555		; 1 / 04!
+				dq	0x3F56C16C16C16C17		; 1 / 06!
+				dq	0x3EFA01A01A01A01A		; 1 / 08!
 				dq	0x3E927E4FB7789F5C		; 1 / 10!
 				dq	0x3E21EED8EFF8D898		; 1 / 12!
 				dq	0x3DA93974A8C07C9D		; 1 / 14!
 				dq	0x3D6AE7F3E733B81F		; 1 / 15!
-				dq	0x3FE0000000000000		; 1 / 2!
-				dq	0x3FC5555555555555		; 1 / 3!
-				dq	0x3F81111111111111		; 1 / 5!
-				dq	0x3F2A01A01A01A01A		; 1 / 7!
-				dq	0x3EC71DE3A556C734		; 1 / 9!
+				dq	0x3FE0000000000000		; 1 / 02!
+				dq	0x3FC5555555555555		; 1 / 03!
+				dq	0x3F81111111111111		; 1 / 05!
+				dq	0x3F2A01A01A01A01A		; 1 / 07!
+				dq	0x3EC71DE3A556C734		; 1 / 09!
 				dq	0x3E5AE64567F544E4		; 1 / 11!
 				dq	0x3DE6124613A86D09		; 1 / 13!
+
+;==============================================================================;
+;       Coefficients to compute log(x) for flt64_t type                        ;
+;==============================================================================;
+align 16
+log_flt64		dq	0x3FAF07C1F07C1F08		; 2 / 33
+				dq	0x3FBE1E1E1E1E1E1E		; 2 / 17
+				dq	0x3FB47AE147AE147B		; 2 / 25
+				dq	0x3FCC71C71C71C71C		; 2 / 09
+				dq	0x3FB1A7B9611A7B96		; 2 / 29
+				dq	0x3FC3B13B13B13B14		; 2 / 13
+				dq	0x3FB8618618618618		; 2 / 21
+				dq	0x3FD999999999999A		; 2 / 05
+				dq	0x3FB0842108421084		; 2 / 31
+				dq	0x3FC1111111111111		; 2 / 15
+				dq	0x3FB642C8590B2164		; 2 / 23
+				dq	0x3FD2492492492492		; 2 / 07
+				dq	0x3FB2F684BDA12F68		; 2 / 27
+				dq	0x3FC745D1745D1746		; 2 / 11
+				dq	0x3FBAF286BCA1AF28		; 2 / 19
+				dq	0x3FE5555555555555		; 2 / 03
 
 ;==============================================================================;
 ;       Table of integer powers of 10^x for flt64_t type                       ;
@@ -5067,205 +6525,205 @@ ten_table_flt64	dq	0x0000000000000000		; 10^-324
 				dq	0x2AC1EAFF4A98553D		; 10^-102
 				dq	0x2AF665BF1D3E6A8D		; 10^-101
 				dq	0x2B2BFF2EE48E0530		; 10^-100
-				dq	0x2B617F7D4ED8C33E		; 10^-99
-				dq	0x2B95DF5CA28EF40D		; 10^-98
-				dq	0x2BCB5733CB32B111		; 10^-97
-				dq	0x2C0116805EFFAEAA		; 10^-96
-				dq	0x2C355C2076BF9A55		; 10^-95
-				dq	0x2C6AB328946F80EA		; 10^-94
-				dq	0x2CA0AFF95CC5B092		; 10^-93
-				dq	0x2CD4DBF7B3F71CB7		; 10^-92
-				dq	0x2D0A12F5A0F4E3E5		; 10^-91
-				dq	0x2D404BD984990E6F		; 10^-90
-				dq	0x2D745ECFE5BF520B		; 10^-89
-				dq	0x2DA97683DF2F268D		; 10^-88
-				dq	0x2DDFD424D6FAF031		; 10^-87
-				dq	0x2E13E497065CD61F		; 10^-86
-				dq	0x2E48DDBCC7F40BA6		; 10^-85
-				dq	0x2E7F152BF9F10E90		; 10^-84
-				dq	0x2EB36D3B7C36A91A		; 10^-83
-				dq	0x2EE8488A5B445360		; 10^-82
-				dq	0x2F1E5AACF2156838		; 10^-81
-				dq	0x2F52F8AC174D6123		; 10^-80
-				dq	0x2F87B6D71D20B96C		; 10^-79
-				dq	0x2FBDA48CE468E7C7		; 10^-78
-				dq	0x2FF286D80EC190DC		; 10^-77
-				dq	0x3027288E1271F513		; 10^-76
-				dq	0x305CF2B1970E7258		; 10^-75
-				dq	0x309217AEFE690777		; 10^-74
-				dq	0x30C69D9ABE034955		; 10^-73
-				dq	0x30FC45016D841BAA		; 10^-72
-				dq	0x3131AB20E472914A		; 10^-71
-				dq	0x316615E91D8F359D		; 10^-70
-				dq	0x319B9B6364F30304		; 10^-69
-				dq	0x31D1411E1F17E1E3		; 10^-68
-				dq	0x32059165A6DDDA5B		; 10^-67
-				dq	0x323AF5BF109550F2		; 10^-66
-				dq	0x3270D9976A5D5297		; 10^-65
-				dq	0x32A50FFD44F4A73D		; 10^-64
-				dq	0x32DA53FC9631D10D		; 10^-63
-				dq	0x3310747DDDDF22A8		; 10^-62
-				dq	0x3344919D5556EB52		; 10^-61
-				dq	0x3379B604AAACA626		; 10^-60
-				dq	0x33B011C2EAABE7D8		; 10^-59
-				dq	0x33E41633A556E1CE		; 10^-58
-				dq	0x34191BC08EAC9A41		; 10^-57
-				dq	0x344F62B0B257C0D2		; 10^-56
-				dq	0x34839DAE6F76D883		; 10^-55
-				dq	0x34B8851A0B548EA4		; 10^-54
-				dq	0x34EEA6608E29B24D		; 10^-53
-				dq	0x352327FC58DA0F70		; 10^-52
-				dq	0x3557F1FB6F10934C		; 10^-51
-				dq	0x358DEE7A4AD4B81F		; 10^-50
-				dq	0x35C2B50C6EC4F313		; 10^-49
-				dq	0x35F7624F8A762FD8		; 10^-48
-				dq	0x362D3AE36D13BBCE		; 10^-47
-				dq	0x366244CE242C5561		; 10^-46
-				dq	0x3696D601AD376AB9		; 10^-45
-				dq	0x36CC8B8218854567		; 10^-44
-				dq	0x3701D7314F534B61		; 10^-43
-				dq	0x37364CFDA3281E39		; 10^-42
-				dq	0x376BE03D0BF225C7		; 10^-41
-				dq	0x37A16C262777579C		; 10^-40
-				dq	0x37D5C72FB1552D83		; 10^-39
-				dq	0x380B38FB9DAA78E4		; 10^-38
-				dq	0x3841039D428A8B8F		; 10^-37
-				dq	0x38754484932D2E72		; 10^-36
-				dq	0x38AA95A5B7F87A0F		; 10^-35
-				dq	0x38E09D8792FB4C49		; 10^-34
-				dq	0x3914C4E977BA1F5C		; 10^-33
-				dq	0x3949F623D5A8A733		; 10^-32
-				dq	0x398039D665896880		; 10^-31
-				dq	0x39B4484BFEEBC2A0		; 10^-30
-				dq	0x39E95A5EFEA6B347		; 10^-29
-				dq	0x3A1FB0F6BE506019		; 10^-28
-				dq	0x3A53CE9A36F23C10		; 10^-27
-				dq	0x3A88C240C4AECB14		; 10^-26
-				dq	0x3ABEF2D0F5DA7DD9		; 10^-25
-				dq	0x3AF357C299A88EA7		; 10^-24
-				dq	0x3B282DB34012B251		; 10^-23
-				dq	0x3B5E392010175EE6		; 10^-22
-				dq	0x3B92E3B40A0E9B4F		; 10^-21
-				dq	0x3BC79CA10C924223		; 10^-20
-				dq	0x3BFD83C94FB6D2AC		; 10^-19
-				dq	0x3C32725DD1D243AC		; 10^-18
-				dq	0x3C670EF54646D497		; 10^-17
-				dq	0x3C9CD2B297D889BC		; 10^-16
-				dq	0x3CD203AF9EE75616		; 10^-15
-				dq	0x3D06849B86A12B9B		; 10^-14
-				dq	0x3D3C25C268497682		; 10^-13
-				dq	0x3D719799812DEA11		; 10^-12
-				dq	0x3DA5FD7FE1796495		; 10^-11
-				dq	0x3DDB7CDFD9D7BDBB		; 10^-10
-				dq	0x3E112E0BE826D695		; 10^-9
-				dq	0x3E45798EE2308C3A		; 10^-8
-				dq	0x3E7AD7F29ABCAF48		; 10^-7
-				dq	0x3EB0C6F7A0B5ED8D		; 10^-6
-				dq	0x3EE4F8B588E368F1		; 10^-5
-				dq	0x3F1A36E2EB1C432D		; 10^-4
-				dq	0x3F50624DD2F1A9FC		; 10^-3
-				dq	0x3F847AE147AE147B		; 10^-2
-				dq	0x3FB999999999999A		; 10^-1
-				dq	0x3FF0000000000000		; 10^0
-				dq	0x4024000000000000		; 10^+1
-				dq	0x4059000000000000		; 10^+2
-				dq	0x408F400000000000		; 10^+3
-				dq	0x40C3880000000000		; 10^+4
-				dq	0x40F86A0000000000		; 10^+5
-				dq	0x412E848000000000		; 10^+6
-				dq	0x416312D000000000		; 10^+7
-				dq	0x4197D78400000000		; 10^+8
-				dq	0x41CDCD6500000000		; 10^+9
-				dq	0x4202A05F20000000		; 10^+10
-				dq	0x42374876E8000000		; 10^+11
-				dq	0x426D1A94A2000000		; 10^+12
-				dq	0x42A2309CE5400000		; 10^+13
-				dq	0x42D6BCC41E900000		; 10^+14
-				dq	0x430C6BF526340000		; 10^+15
-				dq	0x4341C37937E08000		; 10^+16
-				dq	0x4376345785D8A000		; 10^+17
-				dq	0x43ABC16D674EC800		; 10^+18
-				dq	0x43E158E460913D00		; 10^+19
-				dq	0x4415AF1D78B58C40		; 10^+20
-				dq	0x444B1AE4D6E2EF50		; 10^+21
-				dq	0x4480F0CF064DD592		; 10^+22
-				dq	0x44B52D02C7E14AF6		; 10^+23
-				dq	0x44EA784379D99DB4		; 10^+24
-				dq	0x45208B2A2C280291		; 10^+25
-				dq	0x4554ADF4B7320335		; 10^+26
-				dq	0x4589D971E4FE8402		; 10^+27
-				dq	0x45C027E72F1F1281		; 10^+28
-				dq	0x45F431E0FAE6D721		; 10^+29
-				dq	0x46293E5939A08CEA		; 10^+30
-				dq	0x465F8DEF8808B024		; 10^+31
-				dq	0x4693B8B5B5056E17		; 10^+32
-				dq	0x46C8A6E32246C99C		; 10^+33
-				dq	0x46FED09BEAD87C03		; 10^+34
-				dq	0x4733426172C74D82		; 10^+35
-				dq	0x476812F9CF7920E3		; 10^+36
-				dq	0x479E17B84357691B		; 10^+37
-				dq	0x47D2CED32A16A1B1		; 10^+38
-				dq	0x48078287F49C4A1D		; 10^+39
-				dq	0x483D6329F1C35CA5		; 10^+40
-				dq	0x48725DFA371A19E7		; 10^+41
-				dq	0x48A6F578C4E0A061		; 10^+42
-				dq	0x48DCB2D6F618C879		; 10^+43
-				dq	0x4911EFC659CF7D4C		; 10^+44
-				dq	0x49466BB7F0435C9E		; 10^+45
-				dq	0x497C06A5EC5433C6		; 10^+46
-				dq	0x49B18427B3B4A05C		; 10^+47
-				dq	0x49E5E531A0A1C873		; 10^+48
-				dq	0x4A1B5E7E08CA3A8F		; 10^+49
-				dq	0x4A511B0EC57E649A		; 10^+50
-				dq	0x4A8561D276DDFDC0		; 10^+51
-				dq	0x4ABABA4714957D30		; 10^+52
-				dq	0x4AF0B46C6CDD6E3E		; 10^+53
-				dq	0x4B24E1878814C9CE		; 10^+54
-				dq	0x4B5A19E96A19FC41		; 10^+55
-				dq	0x4B905031E2503DA9		; 10^+56
-				dq	0x4BC4643E5AE44D13		; 10^+57
-				dq	0x4BF97D4DF19D6057		; 10^+58
-				dq	0x4C2FDCA16E04B86D		; 10^+59
-				dq	0x4C63E9E4E4C2F344		; 10^+60
-				dq	0x4C98E45E1DF3B015		; 10^+61
-				dq	0x4CCF1D75A5709C1B		; 10^+62
-				dq	0x4D03726987666191		; 10^+63
-				dq	0x4D384F03E93FF9F5		; 10^+64
-				dq	0x4D6E62C4E38FF872		; 10^+65
-				dq	0x4DA2FDBB0E39FB47		; 10^+66
-				dq	0x4DD7BD29D1C87A19		; 10^+67
-				dq	0x4E0DAC74463A989F		; 10^+68
-				dq	0x4E428BC8ABE49F64		; 10^+69
-				dq	0x4E772EBAD6DDC73D		; 10^+70
-				dq	0x4EACFA698C95390C		; 10^+71
-				dq	0x4EE21C81F7DD43A7		; 10^+72
-				dq	0x4F16A3A275D49491		; 10^+73
-				dq	0x4F4C4C8B1349B9B5		; 10^+74
-				dq	0x4F81AFD6EC0E1411		; 10^+75
-				dq	0x4FB61BCCA7119916		; 10^+76
-				dq	0x4FEBA2BFD0D5FF5B		; 10^+77
-				dq	0x502145B7E285BF99		; 10^+78
-				dq	0x50559725DB272F7F		; 10^+79
-				dq	0x508AFCEF51F0FB5F		; 10^+80
-				dq	0x50C0DE1593369D1B		; 10^+81
-				dq	0x50F5159AF8044462		; 10^+82
-				dq	0x512A5B01B605557B		; 10^+83
-				dq	0x516078E111C3556D		; 10^+84
-				dq	0x5194971956342AC8		; 10^+85
-				dq	0x51C9BCDFABC1357A		; 10^+86
-				dq	0x5200160BCB58C16C		; 10^+87
-				dq	0x52341B8EBE2EF1C7		; 10^+88
-				dq	0x526922726DBAAE39		; 10^+89
-				dq	0x529F6B0F092959C7		; 10^+90
-				dq	0x52D3A2E965B9D81D		; 10^+91
-				dq	0x53088BA3BF284E24		; 10^+92
-				dq	0x533EAE8CAEF261AD		; 10^+93
-				dq	0x53732D17ED577D0C		; 10^+94
-				dq	0x53A7F85DE8AD5C4F		; 10^+95
-				dq	0x53DDF67562D8B363		; 10^+96
-				dq	0x5412BA095DC7701E		; 10^+97
-				dq	0x5447688BB5394C25		; 10^+98
-				dq	0x547D42AEA2879F2E		; 10^+99
+				dq	0x2B617F7D4ED8C33E		; 10^-099
+				dq	0x2B95DF5CA28EF40D		; 10^-098
+				dq	0x2BCB5733CB32B111		; 10^-097
+				dq	0x2C0116805EFFAEAA		; 10^-096
+				dq	0x2C355C2076BF9A55		; 10^-095
+				dq	0x2C6AB328946F80EA		; 10^-094
+				dq	0x2CA0AFF95CC5B092		; 10^-093
+				dq	0x2CD4DBF7B3F71CB7		; 10^-092
+				dq	0x2D0A12F5A0F4E3E5		; 10^-091
+				dq	0x2D404BD984990E6F		; 10^-090
+				dq	0x2D745ECFE5BF520B		; 10^-089
+				dq	0x2DA97683DF2F268D		; 10^-088
+				dq	0x2DDFD424D6FAF031		; 10^-087
+				dq	0x2E13E497065CD61F		; 10^-086
+				dq	0x2E48DDBCC7F40BA6		; 10^-085
+				dq	0x2E7F152BF9F10E90		; 10^-084
+				dq	0x2EB36D3B7C36A91A		; 10^-083
+				dq	0x2EE8488A5B445360		; 10^-082
+				dq	0x2F1E5AACF2156838		; 10^-081
+				dq	0x2F52F8AC174D6123		; 10^-080
+				dq	0x2F87B6D71D20B96C		; 10^-079
+				dq	0x2FBDA48CE468E7C7		; 10^-078
+				dq	0x2FF286D80EC190DC		; 10^-077
+				dq	0x3027288E1271F513		; 10^-076
+				dq	0x305CF2B1970E7258		; 10^-075
+				dq	0x309217AEFE690777		; 10^-074
+				dq	0x30C69D9ABE034955		; 10^-073
+				dq	0x30FC45016D841BAA		; 10^-072
+				dq	0x3131AB20E472914A		; 10^-071
+				dq	0x316615E91D8F359D		; 10^-070
+				dq	0x319B9B6364F30304		; 10^-069
+				dq	0x31D1411E1F17E1E3		; 10^-068
+				dq	0x32059165A6DDDA5B		; 10^-067
+				dq	0x323AF5BF109550F2		; 10^-066
+				dq	0x3270D9976A5D5297		; 10^-065
+				dq	0x32A50FFD44F4A73D		; 10^-064
+				dq	0x32DA53FC9631D10D		; 10^-063
+				dq	0x3310747DDDDF22A8		; 10^-062
+				dq	0x3344919D5556EB52		; 10^-061
+				dq	0x3379B604AAACA626		; 10^-060
+				dq	0x33B011C2EAABE7D8		; 10^-059
+				dq	0x33E41633A556E1CE		; 10^-058
+				dq	0x34191BC08EAC9A41		; 10^-057
+				dq	0x344F62B0B257C0D2		; 10^-056
+				dq	0x34839DAE6F76D883		; 10^-055
+				dq	0x34B8851A0B548EA4		; 10^-054
+				dq	0x34EEA6608E29B24D		; 10^-053
+				dq	0x352327FC58DA0F70		; 10^-052
+				dq	0x3557F1FB6F10934C		; 10^-051
+				dq	0x358DEE7A4AD4B81F		; 10^-050
+				dq	0x35C2B50C6EC4F313		; 10^-049
+				dq	0x35F7624F8A762FD8		; 10^-048
+				dq	0x362D3AE36D13BBCE		; 10^-047
+				dq	0x366244CE242C5561		; 10^-046
+				dq	0x3696D601AD376AB9		; 10^-045
+				dq	0x36CC8B8218854567		; 10^-044
+				dq	0x3701D7314F534B61		; 10^-043
+				dq	0x37364CFDA3281E39		; 10^-042
+				dq	0x376BE03D0BF225C7		; 10^-041
+				dq	0x37A16C262777579C		; 10^-040
+				dq	0x37D5C72FB1552D83		; 10^-039
+				dq	0x380B38FB9DAA78E4		; 10^-038
+				dq	0x3841039D428A8B8F		; 10^-037
+				dq	0x38754484932D2E72		; 10^-036
+				dq	0x38AA95A5B7F87A0F		; 10^-035
+				dq	0x38E09D8792FB4C49		; 10^-034
+				dq	0x3914C4E977BA1F5C		; 10^-033
+				dq	0x3949F623D5A8A733		; 10^-032
+				dq	0x398039D665896880		; 10^-031
+				dq	0x39B4484BFEEBC2A0		; 10^-030
+				dq	0x39E95A5EFEA6B347		; 10^-029
+				dq	0x3A1FB0F6BE506019		; 10^-028
+				dq	0x3A53CE9A36F23C10		; 10^-027
+				dq	0x3A88C240C4AECB14		; 10^-026
+				dq	0x3ABEF2D0F5DA7DD9		; 10^-025
+				dq	0x3AF357C299A88EA7		; 10^-024
+				dq	0x3B282DB34012B251		; 10^-023
+				dq	0x3B5E392010175EE6		; 10^-022
+				dq	0x3B92E3B40A0E9B4F		; 10^-021
+				dq	0x3BC79CA10C924223		; 10^-020
+				dq	0x3BFD83C94FB6D2AC		; 10^-019
+				dq	0x3C32725DD1D243AC		; 10^-018
+				dq	0x3C670EF54646D497		; 10^-017
+				dq	0x3C9CD2B297D889BC		; 10^-016
+				dq	0x3CD203AF9EE75616		; 10^-015
+				dq	0x3D06849B86A12B9B		; 10^-014
+				dq	0x3D3C25C268497682		; 10^-013
+				dq	0x3D719799812DEA11		; 10^-012
+				dq	0x3DA5FD7FE1796495		; 10^-011
+				dq	0x3DDB7CDFD9D7BDBB		; 10^-010
+				dq	0x3E112E0BE826D695		; 10^-009
+				dq	0x3E45798EE2308C3A		; 10^-008
+				dq	0x3E7AD7F29ABCAF48		; 10^-007
+				dq	0x3EB0C6F7A0B5ED8D		; 10^-006
+				dq	0x3EE4F8B588E368F1		; 10^-005
+				dq	0x3F1A36E2EB1C432D		; 10^-004
+				dq	0x3F50624DD2F1A9FC		; 10^-003
+				dq	0x3F847AE147AE147B		; 10^-002
+				dq	0x3FB999999999999A		; 10^-001
+				dq	0x3FF0000000000000		; 10^+000
+				dq	0x4024000000000000		; 10^+001
+				dq	0x4059000000000000		; 10^+002
+				dq	0x408F400000000000		; 10^+003
+				dq	0x40C3880000000000		; 10^+004
+				dq	0x40F86A0000000000		; 10^+005
+				dq	0x412E848000000000		; 10^+006
+				dq	0x416312D000000000		; 10^+007
+				dq	0x4197D78400000000		; 10^+008
+				dq	0x41CDCD6500000000		; 10^+009
+				dq	0x4202A05F20000000		; 10^+010
+				dq	0x42374876E8000000		; 10^+011
+				dq	0x426D1A94A2000000		; 10^+012
+				dq	0x42A2309CE5400000		; 10^+013
+				dq	0x42D6BCC41E900000		; 10^+014
+				dq	0x430C6BF526340000		; 10^+015
+				dq	0x4341C37937E08000		; 10^+016
+				dq	0x4376345785D8A000		; 10^+017
+				dq	0x43ABC16D674EC800		; 10^+018
+				dq	0x43E158E460913D00		; 10^+019
+				dq	0x4415AF1D78B58C40		; 10^+020
+				dq	0x444B1AE4D6E2EF50		; 10^+021
+				dq	0x4480F0CF064DD592		; 10^+022
+				dq	0x44B52D02C7E14AF6		; 10^+023
+				dq	0x44EA784379D99DB4		; 10^+024
+				dq	0x45208B2A2C280291		; 10^+025
+				dq	0x4554ADF4B7320335		; 10^+026
+				dq	0x4589D971E4FE8402		; 10^+027
+				dq	0x45C027E72F1F1281		; 10^+028
+				dq	0x45F431E0FAE6D721		; 10^+029
+				dq	0x46293E5939A08CEA		; 10^+030
+				dq	0x465F8DEF8808B024		; 10^+031
+				dq	0x4693B8B5B5056E17		; 10^+032
+				dq	0x46C8A6E32246C99C		; 10^+033
+				dq	0x46FED09BEAD87C03		; 10^+034
+				dq	0x4733426172C74D82		; 10^+035
+				dq	0x476812F9CF7920E3		; 10^+036
+				dq	0x479E17B84357691B		; 10^+037
+				dq	0x47D2CED32A16A1B1		; 10^+038
+				dq	0x48078287F49C4A1D		; 10^+039
+				dq	0x483D6329F1C35CA5		; 10^+040
+				dq	0x48725DFA371A19E7		; 10^+041
+				dq	0x48A6F578C4E0A061		; 10^+042
+				dq	0x48DCB2D6F618C879		; 10^+043
+				dq	0x4911EFC659CF7D4C		; 10^+044
+				dq	0x49466BB7F0435C9E		; 10^+045
+				dq	0x497C06A5EC5433C6		; 10^+046
+				dq	0x49B18427B3B4A05C		; 10^+047
+				dq	0x49E5E531A0A1C873		; 10^+048
+				dq	0x4A1B5E7E08CA3A8F		; 10^+049
+				dq	0x4A511B0EC57E649A		; 10^+050
+				dq	0x4A8561D276DDFDC0		; 10^+051
+				dq	0x4ABABA4714957D30		; 10^+052
+				dq	0x4AF0B46C6CDD6E3E		; 10^+053
+				dq	0x4B24E1878814C9CE		; 10^+054
+				dq	0x4B5A19E96A19FC41		; 10^+055
+				dq	0x4B905031E2503DA9		; 10^+056
+				dq	0x4BC4643E5AE44D13		; 10^+057
+				dq	0x4BF97D4DF19D6057		; 10^+058
+				dq	0x4C2FDCA16E04B86D		; 10^+059
+				dq	0x4C63E9E4E4C2F344		; 10^+060
+				dq	0x4C98E45E1DF3B015		; 10^+061
+				dq	0x4CCF1D75A5709C1B		; 10^+062
+				dq	0x4D03726987666191		; 10^+063
+				dq	0x4D384F03E93FF9F5		; 10^+064
+				dq	0x4D6E62C4E38FF872		; 10^+065
+				dq	0x4DA2FDBB0E39FB47		; 10^+066
+				dq	0x4DD7BD29D1C87A19		; 10^+067
+				dq	0x4E0DAC74463A989F		; 10^+068
+				dq	0x4E428BC8ABE49F64		; 10^+069
+				dq	0x4E772EBAD6DDC73D		; 10^+070
+				dq	0x4EACFA698C95390C		; 10^+071
+				dq	0x4EE21C81F7DD43A7		; 10^+072
+				dq	0x4F16A3A275D49491		; 10^+073
+				dq	0x4F4C4C8B1349B9B5		; 10^+074
+				dq	0x4F81AFD6EC0E1411		; 10^+075
+				dq	0x4FB61BCCA7119916		; 10^+076
+				dq	0x4FEBA2BFD0D5FF5B		; 10^+077
+				dq	0x502145B7E285BF99		; 10^+078
+				dq	0x50559725DB272F7F		; 10^+079
+				dq	0x508AFCEF51F0FB5F		; 10^+080
+				dq	0x50C0DE1593369D1B		; 10^+081
+				dq	0x50F5159AF8044462		; 10^+082
+				dq	0x512A5B01B605557B		; 10^+083
+				dq	0x516078E111C3556D		; 10^+084
+				dq	0x5194971956342AC8		; 10^+085
+				dq	0x51C9BCDFABC1357A		; 10^+086
+				dq	0x5200160BCB58C16C		; 10^+087
+				dq	0x52341B8EBE2EF1C7		; 10^+088
+				dq	0x526922726DBAAE39		; 10^+089
+				dq	0x529F6B0F092959C7		; 10^+090
+				dq	0x52D3A2E965B9D81D		; 10^+091
+				dq	0x53088BA3BF284E24		; 10^+092
+				dq	0x533EAE8CAEF261AD		; 10^+093
+				dq	0x53732D17ED577D0C		; 10^+094
+				dq	0x53A7F85DE8AD5C4F		; 10^+095
+				dq	0x53DDF67562D8B363		; 10^+096
+				dq	0x5412BA095DC7701E		; 10^+097
+				dq	0x5447688BB5394C25		; 10^+098
+				dq	0x547D42AEA2879F2E		; 10^+099
 				dq	0x54B249AD2594C37D		; 10^+100
 				dq	0x54E6DC186EF9F45C		; 10^+101
 				dq	0x551C931E8AB87173		; 10^+102
@@ -6128,205 +7586,205 @@ exp_table_flt64	dq	0x0000000000000000		; e^-746
 				dq	0x36BCBE0A45F75EB1		; e^-102
 				dq	0x36D3884E838AEA68		; e^-101
 				dq	0x36EA8C1F14E2AF5D		; e^-100
-				dq	0x37020A717E64A9BD		; e^-99
-				dq	0x3718851D84118908		; e^-98
-				dq	0x3730A9BDFB02D240		; e^-97
-				dq	0x3746A5BEA046B42E		; e^-96
-				dq	0x375EC7F3B269EFA8		; e^-95
-				dq	0x3774EAFB87EAB0F2		; e^-94
-				dq	0x378C6E2D05BBC000		; e^-93
-				dq	0x37A35208867C2683		; e^-92
-				dq	0x37BA425B317EEACD		; e^-91
-				dq	0x37D1D8508FA8246A		; e^-90
-				dq	0x37E840FBC08FDC8A		; e^-89
-				dq	0x38007B7112BC1FFE		; e^-88
-				dq	0x381666D0DAD2961D		; e^-87
-				dq	0x382E726C3F64D0FE		; e^-86
-				dq	0x3844B0DC07CABF98		; e^-85
-				dq	0x385C1F2DAF3B6A46		; e^-84
-				dq	0x38731C5957A47DE2		; e^-83
-				dq	0x3889F96445648B9F		; e^-82
-				dq	0x38A1A6BAEADB4FD1		; e^-81
-				dq	0x38B7FD974D372E45		; e^-80
-				dq	0x38D04DA4D1452919		; e^-79
-				dq	0x38E62891F06B3450		; e^-78
-				dq	0x38FE1DD273AA8A4A		; e^-77
-				dq	0x3914775E0840BFDD		; e^-76
-				dq	0x392BD109D9D94BDA		; e^-75
-				dq	0x3942E73F53FBA844		; e^-74
-				dq	0x3959B138170D6BFE		; e^-73
-				dq	0x397175AF0CF60EC5		; e^-72
-				dq	0x3987BAEE1BFFA80B		; e^-71
-				dq	0x39A02057D1245CEB		; e^-70
-				dq	0x39B5EAFFFB34BA31		; e^-69
-				dq	0x39CDCA23BAE16424		; e^-68
-				dq	0x39E43E7FC88B8056		; e^-67
-				dq	0x39FB83BF23A9A9EB		; e^-66
-				dq	0x3A12B2B8DD05B318		; e^-65
-				dq	0x3A2969D47321E4CC		; e^-64
-				dq	0x3A41452B7723AED2		; e^-63
-				dq	0x3A5778FE2497184C		; e^-62
-				dq	0x3A6FE7116182E9CC		; e^-61
-				dq	0x3A85AE191A99585A		; e^-60
-				dq	0x3A9D775D87DA854D		; e^-59
-				dq	0x3AB4063F8CC8BB98		; e^-58
-				dq	0x3ACB374B315F87C1		; e^-57
-				dq	0x3AE27EC458C65E3C		; e^-56
-				dq	0x3AF923372C67A074		; e^-55
-				dq	0x3B11152EAEB73C08		; e^-54
-				dq	0x3B2737C5645114B5		; e^-53
-				dq	0x3B3F8E6C24B5592E		; e^-52
-				dq	0x3B5571DB733A9D61		; e^-51
-				dq	0x3B6D257D547E083F		; e^-50
-				dq	0x3B83CE9B9DE78F85		; e^-49
-				dq	0x3B9AEBABAE3A41B5		; e^-48
-				dq	0x3BB24B6031B49BDA		; e^-47
-				dq	0x3BC8DD5E1BB09D7E		; e^-46
-				dq	0x3BE0E5B73D1FF53D		; e^-45
-				dq	0x3BF6F741DE1748EC		; e^-44
-				dq	0x3C0F36BD37F42F3E		; e^-43
-				dq	0x3C2536452EE2F75C		; e^-42
-				dq	0x3C3CD480A1B74820		; e^-41
-				dq	0x3C539792499B1A24		; e^-40
-				dq	0x3C6AA0DE4BF35B38		; e^-39
-				dq	0x3C82188AD6AE3303		; e^-38
-				dq	0x3C9898471FCA6055		; e^-37
-				dq	0x3CB0B6C3AFDDE064		; e^-36
-				dq	0x3CC6B7719A59F0E0		; e^-35
-				dq	0x3CDEE001EED62AA0		; e^-34
-				dq	0x3CF4FB547C775DA8		; e^-33
-				dq	0x3D0C8464F7616468		; e^-32
-				dq	0x3D236121E24D3BBA		; e^-31
-				dq	0x3D3A56E0C2AC7F75		; e^-30
-				dq	0x3D51E642BAEB84A0		; e^-29
-				dq	0x3D6853F01D6D53BA		; e^-28
-				dq	0x3D80885298767E9A		; e^-27
-				dq	0x3D967852A7007E42		; e^-26
-				dq	0x3DAE8A37A45FC32E		; e^-25
-				dq	0x3DC4C1078FE9228A		; e^-24
-				dq	0x3DDC3527E433FAB1		; e^-23
-				dq	0x3DF32B48BF117DA2		; e^-22
-				dq	0x3E0A0DB0D0DDB3EC		; e^-21
-				dq	0x3E21B48655F37267		; e^-20
-				dq	0x3E381056FF2C5772		; e^-19
-				dq	0x3E505A628C699FA1		; e^-18
-				dq	0x3E6639E3175A689D		; e^-17
-				dq	0x3E7E355BBAEE85CB		; e^-16
-				dq	0x3E94875CA227EC38		; e^-15
-				dq	0x3EABE6C6FDB01612		; e^-14
-				dq	0x3EC2F6053B981D98		; e^-13
-				dq	0x3ED9C54C3B43BC8B		; e^-12
-				dq	0x3EF18354238F6764		; e^-11
-				dq	0x3F07CD79B5647C9B		; e^-10
-				dq	0x3F202CF22526545A		; e^-9
-				dq	0x3F35FC21041027AD		; e^-8
-				dq	0x3F4DE16B9C24A98F		; e^-7
-				dq	0x3F644E51F113D4D6		; e^-6
-				dq	0x3F7B993FE00D5376		; e^-5
-				dq	0x3F92C155B8213CF4		; e^-4
-				dq	0x3FA97DB0CCCEB0AF		; e^-3
-				dq	0x3FC152AAA3BF81CC		; e^-2
-				dq	0x3FD78B56362CEF38		; e^-1
-				dq	0x3FF0000000000000		; e^0
-				dq	0x4005BF0A8B145769		; e^+1
-				dq	0x401D8E64B8D4DDAE		; e^+2
-				dq	0x403415E5BF6FB106		; e^+3
-				dq	0x404B4C902E273A58		; e^+4
-				dq	0x40628D389970338F		; e^+5
-				dq	0x407936DC5690C08F		; e^+6
-				dq	0x409122885AAEDDAA		; e^+7
-				dq	0x40A749EA7D470C6E		; e^+8
-				dq	0x40BFA7157C470F82		; e^+9
-				dq	0x40D5829DCF950560		; e^+10
-				dq	0x40ED3C4488EE4F7F		; e^+11
-				dq	0x4103DE1654D37C9A		; e^+12
-				dq	0x411B00B5916AC955		; e^+13
-				dq	0x413259AC48BF05D7		; e^+14
-				dq	0x4148F0CCAFAD2A87		; e^+15
-				dq	0x4160F2EBD0A80020		; e^+16
-				dq	0x417709348C0EA4F9		; e^+17
-				dq	0x418F4F22091940BD		; e^+18
-				dq	0x41A546D8F9ED26E1		; e^+19
-				dq	0x41BCEB088B68E804		; e^+20
-				dq	0x41D3A6E1FD9EECFD		; e^+21
-				dq	0x41EAB5ADB9C43600		; e^+22
-				dq	0x420226AF33B1FDC1		; e^+23
-				dq	0x4218AB7FB5475FB7		; e^+24
-				dq	0x4230C3D3920962C9		; e^+25
-				dq	0x4246C932696A6B5D		; e^+26
-				dq	0x425EF822F7F6731D		; e^+27
-				dq	0x42750BBA3796379A		; e^+28
-				dq	0x428C9AAE4631C056		; e^+29
-				dq	0x42A370470AEC28ED		; e^+30
-				dq	0x42BA6B765D8CDF6D		; e^+31
-				dq	0x42D1F43FCC4B662C		; e^+32
-				dq	0x42E866F34A725782		; e^+33
-				dq	0x4300953E2F3A1EF7		; e^+34
-				dq	0x431689E221BC8D5B		; e^+35
-				dq	0x432EA215A1D20D76		; e^+36
-				dq	0x4344D13FBB1A001A		; e^+37
-				dq	0x435C4B334617CC67		; e^+38
-				dq	0x43733A43D282A519		; e^+39
-				dq	0x438A220D397972EB		; e^+40
-				dq	0x43A1C25C88DF6862		; e^+41
-				dq	0x43B8232558201159		; e^+42
-				dq	0x43D0672A3C9EB871		; e^+43
-				dq	0x43E64B41C6D37832		; e^+44
-				dq	0x43FE4CF766FE49BE		; e^+45
-				dq	0x44149767BC0483E3		; e^+46
-				dq	0x442BFC951EB8BB76		; e^+47
-				dq	0x444304D6AECA254B		; e^+48
-				dq	0x4459D97010884251		; e^+49
-				dq	0x44719103E4080B45		; e^+50
-				dq	0x4487E013CD114461		; e^+51
-				dq	0x44A03996528E074C		; e^+52
-				dq	0x44B60D4F6FDAC731		; e^+53
-				dq	0x44CDF8C5AF17BA3B		; e^+54
-				dq	0x44E45E3076D61699		; e^+55
-				dq	0x44FBAED16A6E0DA7		; e^+56
-				dq	0x4512CFFDFEBDE1A1		; e^+57
-				dq	0x4529919CABEFCB69		; e^+58
-				dq	0x454160345C9953E3		; e^+59
-				dq	0x45579DBC9DC53C66		; e^+60
-				dq	0x45700C810D464097		; e^+61
-				dq	0x4585D009394C5C27		; e^+62
-				dq	0x459DA57DE8F107A8		; e^+63
-				dq	0x45B425982CF597CD		; e^+64
-				dq	0x45CB61E5CA3A5E31		; e^+65
-				dq	0x45E29BB825DFCF87		; e^+66
-				dq	0x45F94A90DB0D6FE2		; e^+67
-				dq	0x46112FEC759586FD		; e^+68
-				dq	0x46275C1DC469E3AF		; e^+69
-				dq	0x463FBFD219C43B04		; e^+70
-				dq	0x4655936D44E1A146		; e^+71
-				dq	0x466D531D8A7EE79C		; e^+72
-				dq	0x4683ED9D24A2D51B		; e^+73
-				dq	0x469B15CFE5B6E17B		; e^+74
-				dq	0x46B268038C2C0E00		; e^+75
-				dq	0x46C9044A73545D48		; e^+76
-				dq	0x46E1002AB6218B38		; e^+77
-				dq	0x46F71B3540CBF921		; e^+78
-				dq	0x470F6799EA9C414A		; e^+79
-				dq	0x47255779B984F3EB		; e^+80
-				dq	0x473D01A210C44AA4		; e^+81
-				dq	0x4753B63DA8E91210		; e^+82
-				dq	0x476ACA8D6B0116B8		; e^+83
-				dq	0x478234DE9E0C74E9		; e^+84
-				dq	0x4798BEC7503CA477		; e^+85
-				dq	0x47B0D0EDA9796B90		; e^+86
-				dq	0x47C6DB0118477245		; e^+87
-				dq	0x47DF1056DC7BF22D		; e^+88
-				dq	0x47F51C2CC3433801		; e^+89
-				dq	0x480CB108FFBEC164		; e^+90
-				dq	0x48237F780991B584		; e^+91
-				dq	0x483A801C0EA8AC4D		; e^+92
-				dq	0x48520247CC4C46C1		; e^+93
-				dq	0x48687A0553328015		; e^+94
-				dq	0x4880A233DEE4F9BB		; e^+95
-				dq	0x48969B7F55B808BA		; e^+96
-				dq	0x48AEBA064644060A		; e^+97
-				dq	0x48C4E184933D9364		; e^+98
-				dq	0x48DC614FE2531841		; e^+99
+				dq	0x37020A717E64A9BD		; e^-099
+				dq	0x3718851D84118908		; e^-098
+				dq	0x3730A9BDFB02D240		; e^-097
+				dq	0x3746A5BEA046B42E		; e^-096
+				dq	0x375EC7F3B269EFA8		; e^-095
+				dq	0x3774EAFB87EAB0F2		; e^-094
+				dq	0x378C6E2D05BBC000		; e^-093
+				dq	0x37A35208867C2683		; e^-092
+				dq	0x37BA425B317EEACD		; e^-091
+				dq	0x37D1D8508FA8246A		; e^-090
+				dq	0x37E840FBC08FDC8A		; e^-089
+				dq	0x38007B7112BC1FFE		; e^-088
+				dq	0x381666D0DAD2961D		; e^-087
+				dq	0x382E726C3F64D0FE		; e^-086
+				dq	0x3844B0DC07CABF98		; e^-085
+				dq	0x385C1F2DAF3B6A46		; e^-084
+				dq	0x38731C5957A47DE2		; e^-083
+				dq	0x3889F96445648B9F		; e^-082
+				dq	0x38A1A6BAEADB4FD1		; e^-081
+				dq	0x38B7FD974D372E45		; e^-080
+				dq	0x38D04DA4D1452919		; e^-079
+				dq	0x38E62891F06B3450		; e^-078
+				dq	0x38FE1DD273AA8A4A		; e^-077
+				dq	0x3914775E0840BFDD		; e^-076
+				dq	0x392BD109D9D94BDA		; e^-075
+				dq	0x3942E73F53FBA844		; e^-074
+				dq	0x3959B138170D6BFE		; e^-073
+				dq	0x397175AF0CF60EC5		; e^-072
+				dq	0x3987BAEE1BFFA80B		; e^-071
+				dq	0x39A02057D1245CEB		; e^-070
+				dq	0x39B5EAFFFB34BA31		; e^-069
+				dq	0x39CDCA23BAE16424		; e^-068
+				dq	0x39E43E7FC88B8056		; e^-067
+				dq	0x39FB83BF23A9A9EB		; e^-066
+				dq	0x3A12B2B8DD05B318		; e^-065
+				dq	0x3A2969D47321E4CC		; e^-064
+				dq	0x3A41452B7723AED2		; e^-063
+				dq	0x3A5778FE2497184C		; e^-062
+				dq	0x3A6FE7116182E9CC		; e^-061
+				dq	0x3A85AE191A99585A		; e^-060
+				dq	0x3A9D775D87DA854D		; e^-059
+				dq	0x3AB4063F8CC8BB98		; e^-058
+				dq	0x3ACB374B315F87C1		; e^-057
+				dq	0x3AE27EC458C65E3C		; e^-056
+				dq	0x3AF923372C67A074		; e^-055
+				dq	0x3B11152EAEB73C08		; e^-054
+				dq	0x3B2737C5645114B5		; e^-053
+				dq	0x3B3F8E6C24B5592E		; e^-052
+				dq	0x3B5571DB733A9D61		; e^-051
+				dq	0x3B6D257D547E083F		; e^-050
+				dq	0x3B83CE9B9DE78F85		; e^-049
+				dq	0x3B9AEBABAE3A41B5		; e^-048
+				dq	0x3BB24B6031B49BDA		; e^-047
+				dq	0x3BC8DD5E1BB09D7E		; e^-046
+				dq	0x3BE0E5B73D1FF53D		; e^-045
+				dq	0x3BF6F741DE1748EC		; e^-044
+				dq	0x3C0F36BD37F42F3E		; e^-043
+				dq	0x3C2536452EE2F75C		; e^-042
+				dq	0x3C3CD480A1B74820		; e^-041
+				dq	0x3C539792499B1A24		; e^-040
+				dq	0x3C6AA0DE4BF35B38		; e^-039
+				dq	0x3C82188AD6AE3303		; e^-038
+				dq	0x3C9898471FCA6055		; e^-037
+				dq	0x3CB0B6C3AFDDE064		; e^-036
+				dq	0x3CC6B7719A59F0E0		; e^-035
+				dq	0x3CDEE001EED62AA0		; e^-034
+				dq	0x3CF4FB547C775DA8		; e^-033
+				dq	0x3D0C8464F7616468		; e^-032
+				dq	0x3D236121E24D3BBA		; e^-031
+				dq	0x3D3A56E0C2AC7F75		; e^-030
+				dq	0x3D51E642BAEB84A0		; e^-029
+				dq	0x3D6853F01D6D53BA		; e^-028
+				dq	0x3D80885298767E9A		; e^-027
+				dq	0x3D967852A7007E42		; e^-026
+				dq	0x3DAE8A37A45FC32E		; e^-025
+				dq	0x3DC4C1078FE9228A		; e^-024
+				dq	0x3DDC3527E433FAB1		; e^-023
+				dq	0x3DF32B48BF117DA2		; e^-022
+				dq	0x3E0A0DB0D0DDB3EC		; e^-021
+				dq	0x3E21B48655F37267		; e^-020
+				dq	0x3E381056FF2C5772		; e^-019
+				dq	0x3E505A628C699FA1		; e^-018
+				dq	0x3E6639E3175A689D		; e^-017
+				dq	0x3E7E355BBAEE85CB		; e^-016
+				dq	0x3E94875CA227EC38		; e^-015
+				dq	0x3EABE6C6FDB01612		; e^-014
+				dq	0x3EC2F6053B981D98		; e^-013
+				dq	0x3ED9C54C3B43BC8B		; e^-012
+				dq	0x3EF18354238F6764		; e^-011
+				dq	0x3F07CD79B5647C9B		; e^-010
+				dq	0x3F202CF22526545A		; e^-009
+				dq	0x3F35FC21041027AD		; e^-008
+				dq	0x3F4DE16B9C24A98F		; e^-007
+				dq	0x3F644E51F113D4D6		; e^-006
+				dq	0x3F7B993FE00D5376		; e^-005
+				dq	0x3F92C155B8213CF4		; e^-004
+				dq	0x3FA97DB0CCCEB0AF		; e^-003
+				dq	0x3FC152AAA3BF81CC		; e^-002
+				dq	0x3FD78B56362CEF38		; e^-001
+				dq	0x3FF0000000000000		; e^+000
+				dq	0x4005BF0A8B145769		; e^+001
+				dq	0x401D8E64B8D4DDAE		; e^+002
+				dq	0x403415E5BF6FB106		; e^+003
+				dq	0x404B4C902E273A58		; e^+004
+				dq	0x40628D389970338F		; e^+005
+				dq	0x407936DC5690C08F		; e^+006
+				dq	0x409122885AAEDDAA		; e^+007
+				dq	0x40A749EA7D470C6E		; e^+008
+				dq	0x40BFA7157C470F82		; e^+009
+				dq	0x40D5829DCF950560		; e^+010
+				dq	0x40ED3C4488EE4F7F		; e^+011
+				dq	0x4103DE1654D37C9A		; e^+012
+				dq	0x411B00B5916AC955		; e^+013
+				dq	0x413259AC48BF05D7		; e^+014
+				dq	0x4148F0CCAFAD2A87		; e^+015
+				dq	0x4160F2EBD0A80020		; e^+016
+				dq	0x417709348C0EA4F9		; e^+017
+				dq	0x418F4F22091940BD		; e^+018
+				dq	0x41A546D8F9ED26E1		; e^+019
+				dq	0x41BCEB088B68E804		; e^+020
+				dq	0x41D3A6E1FD9EECFD		; e^+021
+				dq	0x41EAB5ADB9C43600		; e^+022
+				dq	0x420226AF33B1FDC1		; e^+023
+				dq	0x4218AB7FB5475FB7		; e^+024
+				dq	0x4230C3D3920962C9		; e^+025
+				dq	0x4246C932696A6B5D		; e^+026
+				dq	0x425EF822F7F6731D		; e^+027
+				dq	0x42750BBA3796379A		; e^+028
+				dq	0x428C9AAE4631C056		; e^+029
+				dq	0x42A370470AEC28ED		; e^+030
+				dq	0x42BA6B765D8CDF6D		; e^+031
+				dq	0x42D1F43FCC4B662C		; e^+032
+				dq	0x42E866F34A725782		; e^+033
+				dq	0x4300953E2F3A1EF7		; e^+034
+				dq	0x431689E221BC8D5B		; e^+035
+				dq	0x432EA215A1D20D76		; e^+036
+				dq	0x4344D13FBB1A001A		; e^+037
+				dq	0x435C4B334617CC67		; e^+038
+				dq	0x43733A43D282A519		; e^+039
+				dq	0x438A220D397972EB		; e^+040
+				dq	0x43A1C25C88DF6862		; e^+041
+				dq	0x43B8232558201159		; e^+042
+				dq	0x43D0672A3C9EB871		; e^+043
+				dq	0x43E64B41C6D37832		; e^+044
+				dq	0x43FE4CF766FE49BE		; e^+045
+				dq	0x44149767BC0483E3		; e^+046
+				dq	0x442BFC951EB8BB76		; e^+047
+				dq	0x444304D6AECA254B		; e^+048
+				dq	0x4459D97010884251		; e^+049
+				dq	0x44719103E4080B45		; e^+050
+				dq	0x4487E013CD114461		; e^+051
+				dq	0x44A03996528E074C		; e^+052
+				dq	0x44B60D4F6FDAC731		; e^+053
+				dq	0x44CDF8C5AF17BA3B		; e^+054
+				dq	0x44E45E3076D61699		; e^+055
+				dq	0x44FBAED16A6E0DA7		; e^+056
+				dq	0x4512CFFDFEBDE1A1		; e^+057
+				dq	0x4529919CABEFCB69		; e^+058
+				dq	0x454160345C9953E3		; e^+059
+				dq	0x45579DBC9DC53C66		; e^+060
+				dq	0x45700C810D464097		; e^+061
+				dq	0x4585D009394C5C27		; e^+062
+				dq	0x459DA57DE8F107A8		; e^+063
+				dq	0x45B425982CF597CD		; e^+064
+				dq	0x45CB61E5CA3A5E31		; e^+065
+				dq	0x45E29BB825DFCF87		; e^+066
+				dq	0x45F94A90DB0D6FE2		; e^+067
+				dq	0x46112FEC759586FD		; e^+068
+				dq	0x46275C1DC469E3AF		; e^+069
+				dq	0x463FBFD219C43B04		; e^+070
+				dq	0x4655936D44E1A146		; e^+071
+				dq	0x466D531D8A7EE79C		; e^+072
+				dq	0x4683ED9D24A2D51B		; e^+073
+				dq	0x469B15CFE5B6E17B		; e^+074
+				dq	0x46B268038C2C0E00		; e^+075
+				dq	0x46C9044A73545D48		; e^+076
+				dq	0x46E1002AB6218B38		; e^+077
+				dq	0x46F71B3540CBF921		; e^+078
+				dq	0x470F6799EA9C414A		; e^+079
+				dq	0x47255779B984F3EB		; e^+080
+				dq	0x473D01A210C44AA4		; e^+081
+				dq	0x4753B63DA8E91210		; e^+082
+				dq	0x476ACA8D6B0116B8		; e^+083
+				dq	0x478234DE9E0C74E9		; e^+084
+				dq	0x4798BEC7503CA477		; e^+085
+				dq	0x47B0D0EDA9796B90		; e^+086
+				dq	0x47C6DB0118477245		; e^+087
+				dq	0x47DF1056DC7BF22D		; e^+088
+				dq	0x47F51C2CC3433801		; e^+089
+				dq	0x480CB108FFBEC164		; e^+090
+				dq	0x48237F780991B584		; e^+091
+				dq	0x483A801C0EA8AC4D		; e^+092
+				dq	0x48520247CC4C46C1		; e^+093
+				dq	0x48687A0553328015		; e^+094
+				dq	0x4880A233DEE4F9BB		; e^+095
+				dq	0x48969B7F55B808BA		; e^+096
+				dq	0x48AEBA064644060A		; e^+097
+				dq	0x48C4E184933D9364		; e^+098
+				dq	0x48DC614FE2531841		; e^+099
 				dq	0x48F3494A9B171BF5		; e^+100
 				dq	0x490A36798B9D969B		; e^+101
 				dq	0x4921D03D8C0C04AF		; e^+102

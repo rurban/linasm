@@ -2049,7 +2049,7 @@ end if
 		mov		param1, [s_keys]
 		call	FindSet						; result = FindSet (keys, ksize, array[0].key, func)
 		mov		array, [s_array]			; get "array" variable from the stack
-		add		[s_total], result			; if (result) then total++
+		add		[s_total], result			; if (result), then total++
 		cmd2	array, KSIZE				; change array position
 		mov		[s_array], array			; save "array" variable into the stack
 		sub		qword [s_count], KSIZE		; count--

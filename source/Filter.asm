@@ -201,8 +201,13 @@ filter	equ		rdi							; pointer to filter impulse array
 size	equ		rsi							; array size (count of elements)
 freq	equ		xmm0						; filter cutoff frequency
 ;---[Internal variables]-------------------
-stack	equ		rsp							; stack pointer
 value	equ		freq						; argument value
+stack	equ		rsp							; stack pointer
+s_filt	equ		stack + 0 * 8				; stack position of "filter" variable
+s_size	equ		stack + 1 * 8				; stack position of "size" variable
+s_freq	equ		stack + 2 * 8				; stack position of "freq" variable
+s_value	equ		stack + 3 * 8				; stack position of "value" variable
+s_pi	equ		stack + 4 * 8				; stack position of "pi" variable
 if x eq s
 Sin		= Sin_flt32							; sine function
 pival	= PPI_FLT32							; +Pi
@@ -213,26 +218,21 @@ pival	= PPI_FLT64							; +Pi
 bytes	= 8									; array element size (bytes)
 end if
 space	= 5 * 8								; stack size required by the procedure
-s_filt	equ		stack + 0 * 8				; stack position of "filter" variable
-s_size	equ		stack + 1 * 8				; stack position of "size" variable
-s_freq	equ		stack + 2 * 8				; stack position of "freq" variable
-s_value	equ		stack + 3 * 8				; stack position of "value" variable
-s_pi	equ		stack + 4 * 8				; stack position of "pi" variable
 ;------------------------------------------
+		sub		stack, space				; reserving stack size for local vars
 		lea		filter, [filter+size*bytes]	; filter += size
 		adds#x	freq, freq					; freq *= 2
 		movs#x	[filter], freq				; filter[0] = freq
 		test	size, size
 		jz		.exit
-		sub		stack, space				; reserving stack size for local vars
 		ldzero	s_value, x					; value = 0
-		ldvalue	s_pi, treg, pival, x		; pi = PI
+		ldvalue	s_pi, treg, pival, x		; pi = Pi
 		movs#x	[s_freq], freq				; save "freq" variable into the stack
 		mov		[s_filt], filter			; save "filter" variable into the stack
 		mov		[s_size], size				; save "size" variable into the stack
 ;---[Window computing loop]----------------
 .loop:	movs#x	value, [s_value]			; get "value" variable from the stack
-		adds#x	value, [s_pi]					; value += PI
+		adds#x	value, [s_pi]					; value += Pi
 		movs#x	[s_value], value			; save "value" variable into the stack
 		muls#x	value, [s_freq]				; value *= freq
 		call	Sin							; call Sin (value * freq)
@@ -244,8 +244,8 @@ s_pi	equ		stack + 4 * 8				; stack position of "pi" variable
 		mov		[s_filt], filter			; save "filter" variable into the stack
 		jnz		.loop						; do while (size != 0)
 ;---[End of loop]--------------------------
-		add		stack, space				; restoring back the stack pointer
-.exit:	ret
+.exit:	add		stack, space				; restoring back the stack pointer
+		ret
 }
 SincCore_flt32:	SINC	eax, s
 SincCore_flt64:	SINC	rax, d
@@ -261,8 +261,15 @@ size	equ		rsi							; array size (count of elements)
 lfreq	equ		xmm0						; filter low cutoff frequency
 hfreq	equ		xmm1						; filter high cutoff frequency
 ;---[Internal variables]-------------------
-stack	equ		rsp							; stack pointer
 value	equ		lfreq						; argument value
+stack	equ		rsp							; stack pointer
+s_filt	equ		stack + 0 * 8				; stack position of "filter" variable
+s_size	equ		stack + 1 * 8				; stack position of "size" variable
+s_lfreq	equ		stack + 2 * 8				; stack position of "lfreq" variable
+s_hfreq	equ		stack + 3 * 8				; stack position of "hfreq" variable
+s_value	equ		stack + 4 * 8				; stack position of "value" variable
+s_temp	equ		stack + 5 * 8				; stack position of "temp" variable
+s_pi	equ		stack + 6 * 8				; stack position of "pi" variable
 if x eq s
 Cos		= Cos_flt32							; cosine function
 pival	= PPI_FLT32							; +Pi
@@ -273,30 +280,23 @@ pival	= PPI_FLT64							; +Pi
 bytes	= 8									; array element size (bytes)
 end if
 space	= 7 * 8								; stack size required by the procedure
-s_filt	equ		stack + 0 * 8				; stack position of "filter" variable
-s_size	equ		stack + 1 * 8				; stack position of "size" variable
-s_lfreq	equ		stack + 2 * 8				; stack position of "lfreq" variable
-s_hfreq	equ		stack + 3 * 8				; stack position of "hfreq" variable
-s_value	equ		stack + 4 * 8				; stack position of "value" variable
-s_temp	equ		stack + 5 * 8				; stack position of "temp" variable
-s_pi	equ		stack + 6 * 8				; stack position of "pi" variable
 ;------------------------------------------
+		sub		stack, space				; reserving stack size for local vars
 		lea		filter, [filter+size*bytes]	; filter += size
 		adds#x	lfreq, lfreq				; lfreq *= 2
 		adds#x	hfreq, hfreq				; hfreq *= 2
 		ldzero	filter, x					; filter[0] = 0
 		test	size, size
 		jz		.exit
-		sub		stack, space				; reserving stack size for local vars
 		ldzero	s_value, x					; value = 0
-		ldvalue	s_pi, treg, pival, x		; pi = PI
+		ldvalue	s_pi, treg, pival, x		; pi = Pi
 		movs#x	[s_lfreq], lfreq			; save "lfreq" variable into the stack
 		movs#x	[s_hfreq], hfreq			; save "lfreq" variable into the stack
 		mov		[s_filt], filter			; save "filter" variable into the stack
 		mov		[s_size], size				; save "size" variable into the stack
 ;---[Window computing loop]----------------
 .loop:	movs#x	value, [s_value]			; get "value" variable from the stack
-		adds#x	value, [s_pi]				; value += PI
+		adds#x	value, [s_pi]				; value += Pi
 		movs#x	[s_value], value			; save "value" variable into the stack
 		muls#x	value, [s_hfreq]			; value *= hfreq
 		call	Cos							; call Cos (value * hfreq)
@@ -313,8 +313,8 @@ s_pi	equ		stack + 6 * 8				; stack position of "pi" variable
 		mov		[s_filt], filter			; save "filter" variable into the stack
 		jnz		.loop						; do while (size != 0)
 ;---[End of loop]--------------------------
-		add		stack, space				; restoring back the stack pointer
-.exit:	ret
+.exit:	add		stack, space				; restoring back the stack pointer
+		ret
 }
 HilbertCore_flt32:	HILBERT	eax, s
 HilbertCore_flt64:	HILBERT	rax, d
@@ -330,9 +330,9 @@ size	equ		rsi							; array size (count of elements)
 lfreq	equ		xmm0						; filter low cutoff frequency
 hfreq	equ		xmm1						; filter high cutoff frequency
 ;---[Internal variables]-------------------
-stack	equ		rsp							; stack pointer
 value	equ		lfreq						; argument value
 temp	equ		hfreq						; temporary register
+stack	equ		rsp							; stack pointer
 if x eq s
 SinCos	= SinCos_flt32						; cosine function
 pival	= PPI_FLT32							; +Pi
@@ -344,7 +344,6 @@ pival	= PPI_FLT64							; +Pi
 oneval	= PONE_FLT64						; +1.0
 bytes	= 8									; array element size (bytes)
 end if
-space	= 15 * 8							; stack size required by the procedure
 s_filt	equ		stack + 0 * 8				; stack position of "filter" variable
 s_size	equ		stack + 1 * 8				; stack position of "size" variable
 s_hfreq	equ		stack + 2 * 8				; stack position of "hfreq" variable
@@ -358,17 +357,18 @@ s_value	equ		stack + 10 * 8				; stack position of "value" variable
 s_temp	equ		stack + 11 * 8				; stack position of "temp" variable
 s_pi	equ		stack + 12 * 8				; stack position of "pi" variable
 s_one	equ		stack + 13 * 8				; stack position of "one" variable
+space	= 15 * 8							; stack size required by the procedure
 ;------------------------------------------
+		sub		stack, space				; reserving stack size for local vars
 		lea		filter, [filter+size*bytes]	; filter += size
 		adds#x	lfreq, lfreq				; lfreq *= 2
 		adds#x	hfreq, hfreq				; hfreq *= 2
 		ldzero	filter, x					; filter[0] = 0
 		test	size, size
 		jz		.exit
-		sub		stack, space				; reserving stack size for local vars
 		ldzero	s_value, x					; value = 0
 		ldzero	s_temp, x					; temp = 0
-		ldvalue	s_pi, treg, pival, x		; pi = PI
+		ldvalue	s_pi, treg, pival, x		; pi = Pi
 		ldvalue	s_one, treg, oneval, x		; one = 1.0
 		movs#x	[s_lfreq], lfreq			; save "lfreq" variable into the stack
 		movs#x	[s_hfreq], hfreq			; save "lfreq" variable into the stack
@@ -377,7 +377,7 @@ s_one	equ		stack + 13 * 8				; stack position of "one" variable
 ;---[Window computing loop]----------------
 .loop:	movs#x	value, [s_value]			; get "value" variable from the stack
 		movs#x	temp, [s_temp]				; get "temp" variable from the stack
-		adds#x	value, [s_pi]				; value += PI
+		adds#x	value, [s_pi]				; value += Pi
 		adds#x	temp, [s_one]				; temp += 1.0
 		movs#x	[s_value], value			; save "value" variable into the stack
 		movs#x	[s_temp], temp				; save "temp" variable into the stack
@@ -405,8 +405,8 @@ s_one	equ		stack + 13 * 8				; stack position of "one" variable
 		mov		[s_filt], filter			; save "filter" variable into the stack
 		jnz		.loop						; do while (size != 0)
 ;---[End of loop]--------------------------
-		add		stack, space				; restoring back the stack pointer
-.exit:	ret
+.exit:	add		stack, space				; restoring back the stack pointer
+		ret
 }
 DiffCore_flt32:	DIFF	eax, s
 DiffCore_flt64:	DIFF	rax, d
@@ -423,15 +423,14 @@ window	equ		rdx							; window function
 freq	equ		xmm0						; filter cutoff frequency
 ;---[Internal variables]-------------------
 treg	equ		rax							; temporary register
-stack	equ		rsp							; stack pointer
 temp	equ		xmm1						; temporary register
 zero	equ		xmm2						; 0.0
 one		equ		xmm3						; 1.0
 value	equ		freq						; argument value
+stack	equ		rsp							; stack pointer
 s_filt	equ		stack + 0 * 8				; stack position of "filter" variable
 s_size	equ		stack + 1 * 8				; stack position of "size" variable
 s_win	equ		stack + 2 * 8				; stack position of "window" variable
-space	= 3 * 8								; stack size required by the procedure
 if x eq s
 Sinc	= SincCore_flt32					; sinc filter core
 Sum		= Sum_flt32							; sum of elements
@@ -447,6 +446,7 @@ win		= win_flt64							; array of window functions
 oneval	= PONE_FLT64						; +1.0
 bytes	= 8									; array element size (bytes)
 end if
+space	= 3 * 8								; stack size required by the procedure
 ;------------------------------------------
 		sub		stack, space				; reserving stack size for local vars
 ;---[Compute Sinc filter core]-------------
@@ -499,18 +499,18 @@ window	equ		rdx							; window function
 lfreq	equ		xmm0						; filter low cutoff frequency
 hfreq	equ		xmm1						; filter high cutoff frequency
 ;---[Internal variables]-------------------
+status	equ		al							; operation status
 treg	equ		rax							; temporary register
 zero	equ		xmm2						; 0.0
 half	equ		xmm3						; 0.5
 one		equ		zero						; 1.0
-bool	equ		al							; boolean result
 value	equ		lfreq						; argument value
+stack	equ		rsp							; stack pointer
 s_filt	equ		stack + 0 * 8				; stack position of "filter" variable
 s_size	equ		stack + 1 * 8				; stack position of "size" variable
 s_freq	equ		stack + 2 * 8				; stack position of "freq" variable
 s_win	equ		stack + 3 * 8				; stack position of "window" variable
 s_temp	equ		stack + 4 * 8				; stack position of "temp" variable
-space	= 5 * 8								; stack size required by the procedure
 if x eq s
 LowPass	= LowPassCore_flt32					; low-pass filter core
 ArrSub	= Sub_flt32							; vector subtraction of arrays
@@ -526,7 +526,9 @@ halfval	= PHALF_FLT64						; +0.5
 oneval	= PONE_FLT64						; +1.0
 bytes	= 8									; array element size (bytes)
 end if
+space	= 5 * 8								; stack size required by the procedure
 ;------------------------------------------
+		sub		stack, space				; reserving stack size for local vars
 		xorp#x	zero, zero					; zero = 0
 		initreg	half, treg, halfval			; half = 0.5
 		comis#x	lfreq, zero					; if (0 <= lfreq
@@ -537,7 +539,6 @@ end if
 		ja		.error
 		cmp		window, MAX_WIN				;     && window <= WIN_MAX)
 		ja		.error						; {
-		sub		stack, space				; reserving stack size for local vars
 ;---[Compute 1-st low-pass filter core]----
 		mov		[s_filt], filter			; save "filter" variable into the stack
 		mov		[s_size], size				; save "size" variable into the stack
@@ -577,11 +578,12 @@ end if
 		add		size, 1
 		call	PosRefl						; call PosRefl (filter, 2 * size + 1)
 ;------------------------------------------
-		mov		bool, 1						; return TRUE
+		mov		status, 1					; return true
 		add		stack, space				; restoring back the stack pointer
 		ret
 ;---[Error branch]-------------------------
-.error:	xor		bool, bool					; return FALSE (indicates an error)
+.error:	xor		status, status				; return false
+		add		stack, space				; restoring back the stack pointer
 		ret
 }
 
@@ -605,14 +607,14 @@ window	equ		rdx							; window function
 lfreq	equ		xmm0						; filter low cutoff frequency
 hfreq	equ		xmm1						; filter high cutoff frequency
 ;---[Internal variables]-------------------
+status	equ		al							; operation status
 treg	equ		rax							; temporary register
 zero	equ		xmm2						; 0.0
 half	equ		xmm3						; 0.5
-bool	equ		al							; boolean result
+stack	equ		rsp							; stack pointer
 s_filt	equ		stack + 0 * 8				; stack position of "filter" variable
 s_size	equ		stack + 1 * 8				; stack position of "size" variable
 s_win	equ		stack + 2 * 8				; stack position of "window" variable
-space	= 3 * 8								; stack size required by the procedure
 if x eq s
 NegRefl	= NegReflect_flt32					; negative reflection function
 win		= win_flt32							; array of window functions
@@ -624,7 +626,9 @@ win		= win_flt64							; array of window functions
 halfval	= PHALF_FLT64						; +0.5
 bytes	= 8									; array element size (bytes)
 end if
+space	= 3 * 8								; stack size required by the procedure
 ;------------------------------------------
+		sub		stack, space				; reserving stack size for local vars
 		xorp#x	zero, zero					; zero = 0
 		initreg	half, treg, halfval			; half = 0.5
 		comis#x	lfreq, zero					; if (0 <= lfreq
@@ -635,7 +639,6 @@ end if
 		ja		.error
 		cmp		window, MAX_WIN				;     && window <= WIN_MAX)
 		ja		.error						; {
-		sub		stack, space				; reserving stack size for local vars
 ;---[Compute Hilbert filter core]----------
 		mov		[s_filt], filter			; save "filter" variable into the stack
 		mov		[s_size], size				; save "size" variable into the stack
@@ -655,11 +658,12 @@ end if
 		lea		size, [size * 2 + 1]
 		call	NegRefl						; call NegRefl (filter, 2 * size + 1)
 ;------------------------------------------
-		mov		bool, 1						; return TRUE
+		mov		status, 1					; return true
 		add		stack, space				; restoring back the stack pointer
 		ret
 ;---[Error branch]-------------------------
-.error:	xor		bool, bool					; return FALSE (indicates an error)
+.error:	xor		status, status				; return false
+		add		stack, space				; restoring back the stack pointer
 		ret
 }
 
@@ -683,15 +687,14 @@ dsize	equ		rdx							; size of data array
 filt	equ		rcx							; pointer to filter array
 fsize	equ		r8							; size of filter array
 ;---[Internal variables]-------------------
+status	equ		al							; operation status
 value	equ		xmm0						; convolution value
-bool	equ		al							; boolean result
 stack	equ		rsp							; stack pointer
 s_resp	equ		stack + 0 * 8				; stack position of "resp" variable
 s_data	equ		stack + 1 * 8				; stack position of "data" variable
 s_dsize	equ		stack + 2 * 8				; stack position of "dsize" variable
 s_filt	equ		stack + 3 * 8				; stack position of "filt" variable
 s_fsize	equ		stack + 4 * 8				; stack position of "fsize" variable
-space	= 5 * 8								; stack size required by the procedure
 if x eq s
 Conv	= SumMul_flt32						; convolution function
 bytes	= 4									; array element size (bytes)
@@ -699,10 +702,11 @@ else if x eq d
 Conv	= SumMul_flt64						; convolution function
 bytes	= 8									; array element size (bytes)
 end if
+space	= 5 * 8								; stack size required by the procedure
 ;------------------------------------------
+		sub		stack, space				; reserving stack size for local vars
 		sub		dsize, fsize				; dsize -= fsize
 		jb		.error						; if (dsize < fsize), go to error branch
-		sub		stack, space				; reserving stack size for local vars
 		add		dsize, 1					; dsize++
 		mov		[s_resp], resp				; save "resp" variable into the stack
 		mov		[s_data], data				; save "data" variable into the stack
@@ -721,11 +725,12 @@ end if
 		sub		qword [s_dsize], 1			; dsize--
 		jnz		.loop						; do while (dsize != 0)
 ;---[End of loop]--------------------------
-		mov		bool, 1						; return TRUE
+		mov		status, 1					; return true
 		add		stack, space				; restoring back the stack pointer
 		ret
 ;---[Error branch]-------------------------
-.error:	xor		bool, bool					; return FALSE (indicates an error)
+.error:	xor		status, status				; return false
+		add		stack, space				; restoring back the stack pointer
 		ret
 }
 Response_flt32:	RESPONSE	s

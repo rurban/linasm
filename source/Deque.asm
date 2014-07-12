@@ -1913,7 +1913,7 @@ space	= 9 * 8								; stack size required by the procedure
 		mov		array, [s_array]			; get "array" variable from the stack
 		mov		iter, [s_iter]				; get "iter" variable from the stack
 		mov		cap, [s_cap]				; get "cap" variable from the stack
-		add		[s_total], result			; if (result) then total++
+		add		[s_total], result			; if (result), then total++
 		cmd		iter, KSIZE					; change iterator value
 		and		iter, cap					; iter &= cap
 		mov		[s_iter], iter				; save "iter" variable into the stack

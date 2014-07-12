@@ -147,11 +147,10 @@ s_array	equ		stack + 0 * 8				; stack position of "array" variable
 s_size	equ		stack + 1 * 8				; stack position of "size" variable
 s_value	equ		stack + 2 * 8				; stack position of "value" variable
 s_step	equ		stack + 3 * 8				; stack position of "step" variable
-space	= 5 * 8								; stack size required by the procedure
 if x eq s
 if window eq SINE
 Func	= Sin_flt32							; sine function
-angle	= PI_HALF_FLT32						; Pi / 2
+angle	= PI_HALF_FLT32						; +Pi/2
 else if window eq HAMMING
 Func	= Cos_flt32							; cosine function
 angle	= PPI_FLT32							; +Pi
@@ -169,7 +168,7 @@ bytes	= 4									; array element size (bytes)
 else if x eq d
 if window eq SINE
 Func	= Sin_flt64							; sine function
-angle	= PI_HALF_FLT64						; Pi / 2
+angle	= PI_HALF_FLT64						; +Pi/2
 else if window eq HAMMING
 Func	= Cos_flt64							; cosine function
 angle	= PPI_FLT64							; +Pi
@@ -185,6 +184,7 @@ win		= black_nutt_win_flt64				; Blackman-Nuttall window coefficients
 end if
 bytes	= 8									; array element size (bytes)
 end if
+space	= 5 * 8								; stack size required by the procedure
 ;------------------------------------------
 		sub		stack, space				; reserving stack size for local vars
 		add		size, 1						; size++
@@ -258,7 +258,6 @@ s_ptr	equ		stack + 2 * 8				; stack position of "ptr" variable
 s_i		equ		stack + 3 * 8				; stack position of "i" variable
 s_value	equ		stack + 4 * 8				; stack position of "value" variable
 s_step	equ		stack + 5 * 8				; stack position of "step" variable
-space	= 7 * 8								; stack size required by the procedure
 if x eq s
 if window eq SINE
 Func	= Sin_flt32							; sine function
@@ -298,6 +297,7 @@ end if
 Reflect	= Reflect_flt64						; array reflection function
 bytes	= 8									; array element size (bytes)
 end if
+space	= 7 * 8								; stack size required by the procedure
 ;------------------------------------------
 		sub		stack, space				; reserving stack size for local vars
 		test	size, size					; if (size == 0)
@@ -369,12 +369,12 @@ section	'.rodata'	align 16
 
 ; flt32_t
 align 16
-hamm_win_flt32			dd	0x3F0A3D71			; 0.54
+hamm_win_flt32			dd	0x3F0A3D71			; +0.54
 						dd	0xBEEB851F			; -0.46
 
 ; flt64_t
 align 16
-hamm_win_flt64			dq	0x3FE147AE147AE148	; 0.54
+hamm_win_flt64			dq	0x3FE147AE147AE148	; +0.54
 						dq	0xBFDD70A3D70A3D71	; -0.46
 
 ;******************************************************************************;
@@ -383,15 +383,15 @@ hamm_win_flt64			dq	0x3FE147AE147AE148	; 0.54
 
 ; flt32_t
 align 16
-black_win_flt32			dd	0x3EAE147B			; 0.34
+black_win_flt32			dd	0x3EAE147B			; +0.34
 						dd	0xBF000000			; -0.5
-						dd	0x3E23D70A			; 0.16
+						dd	0x3E23D70A			; +0.16
 
 ; flt64_t
 align 16
-black_win_flt64			dq	0x3FD5C28F5C28F5C3	; 0.34
+black_win_flt64			dq	0x3FD5C28F5C28F5C3	; +0.34
 						dq	0xBFE0000000000000	; -0.5
-						dq	0x3FC47AE147AE147B	; 0.16
+						dq	0x3FC47AE147AE147B	; +0.16
 
 ;******************************************************************************;
 ;       Blackman-Nuttall window coefficients                                   ;
@@ -399,16 +399,16 @@ black_win_flt64			dq	0x3FD5C28F5C28F5C3	; 0.34
 
 ; flt32_t
 align 16
-black_nutt_win_flt32	dd	0x3E686E13			; 0.2269824
+black_nutt_win_flt32	dd	0x3E686E13			; +0.2269824
 						dd	0xBEEA1D39			; -0.4572542
-						dd	0x3E8BE0BD			; 0.2731990
+						dd	0x3E8BE0BD			; +0.2731990
 						dd	0xBD2E5802			; -0.0425644
 
 ; flt64_t
 align 16
-black_nutt_win_flt64	dq	0x3FCD0DC260624067	; 0.2269824
+black_nutt_win_flt64	dq	0x3FCD0DC260624067	; +0.2269824
 						dq	0xBFDD43A71EBD5A69	; -0.4572542
-						dq	0x3FD17C17A89331A1	; 0.2731990
+						dq	0x3FD17C17A89331A1	; +0.2731990
 						dq	0xBFA5CB0043F29E18	; -0.0425644
 
 ;###############################################################################

@@ -5778,7 +5778,7 @@ space	= 5 * 8								; stack size required by the procedure
 		call	Func						; result = Func (array, root, height, func, keys[0])
 		mov		this, [s_this]				; get "this" variable from the stack
 		mov		keys, [s_keys]				; get "keys" variable from the stack
-		add		[s_total], result			; if (result) then total++
+		add		[s_total], result			; if (result), then total++
 		add		keys, 8						; keys++
 		mov		[s_keys], keys				; save "keys" variable into the stack
 		sub		qword [s_ksize], 1			; ksize--
