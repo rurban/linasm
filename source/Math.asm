@@ -322,10 +322,10 @@ public	Compare_flt32		as	'Math_Compare_flt32'
 public	Compare_flt64		as	'Math_Compare_flt64'
 public	Compare_flt32		as	'_ZN4Math7CompareEff'
 public	Compare_flt64		as	'_ZN4Math7CompareEdd'
-public	CompareFlt32		as	'CmpFlt32'
-public	CompareFlt64		as	'CmpFlt64'
-public	CompareFlt32		as	'_Z8CmpFlt325adt_tS_'
-public	CompareFlt64		as	'_Z8CmpFlt645adt_tS_'
+public	Compare_raw32		as	'CmpFlt32'
+public	Compare_raw64		as	'CmpFlt64'
+public	Compare_raw32		as	'_Z8CmpFlt325adt_tS_'
+public	Compare_raw64		as	'_Z8CmpFlt645adt_tS_'
 
 ;==============================================================================;
 ;       Minimum and maximum absolute value                                     ;
@@ -484,138 +484,42 @@ public	LCM_uint32			as	'_ZN4Math3LCMEii'
 public	LCM_uint64			as	'_ZN4Math3LCMExx'
 
 ;******************************************************************************;
-;       Trigonometric functions                                                ;
+;       Scale functions                                                        ;
 ;******************************************************************************;
 
-;==============================================================================;
-;       Hypotenuse                                                             ;
-;==============================================================================;
-public	Hypot_flt32			as	'Math_Hypot_flt32'
-public	Hypot_flt64			as	'Math_Hypot_flt64'
-public	Hypot_flt32			as	'_ZN4Math5HypotEff'
-public	Hypot_flt64			as	'_ZN4Math5HypotEdd'
+; Scale by power of 2
+public	Scale2_flt32		as	'Math_Scale2_flt32'
+public	Scale2_flt64		as	'Math_Scale2_flt64'
+public	Scale2_flt32		as	'_ZN4Math6Scale2Efs'
+public	Scale2_flt64		as	'_ZN4Math6Scale2Eds'
 
-;==============================================================================;
-;       Cathetus                                                               ;
-;==============================================================================;
-public	Cath_flt32			as	'Math_Cath_flt32'
-public	Cath_flt64			as	'Math_Cath_flt64'
-public	Cath_flt32			as	'_ZN4Math4CathEff'
-public	Cath_flt64			as	'_ZN4Math4CathEdd'
-
-;==============================================================================;
-;       Sine                                                                   ;
-;==============================================================================;
-
-; Sine of angle
-public	Sin_flt32			as	'Math_Sin_flt32'
-public	Sin_flt64			as	'Math_Sin_flt64'
-public	Sin_flt32			as	'_ZN4Math3SinEf'
-public	Sin_flt64			as	'_ZN4Math3SinEd'
-
-; Sine of angle and quadrant
-public	SinQ_flt32			as	'Math_SinQ_flt32'
-public	SinQ_flt64			as	'Math_SinQ_flt64'
-public	SinQ_flt32			as	'_ZN4Math4SinQEfx'
-public	SinQ_flt64			as	'_ZN4Math4SinQEdx'
-
-;==============================================================================;
-;       Cosine                                                                 ;
-;==============================================================================;
-
-; Cosine of angle
-public	Cos_flt32			as	'Math_Cos_flt32'
-public	Cos_flt64			as	'Math_Cos_flt64'
-public	Cos_flt32			as	'_ZN4Math3CosEf'
-public	Cos_flt64			as	'_ZN4Math3CosEd'
-
-; Cosine of angle and quadrant
-public	CosQ_flt32			as	'Math_CosQ_flt32'
-public	CosQ_flt64			as	'Math_CosQ_flt64'
-public	CosQ_flt32			as	'_ZN4Math4CosQEfx'
-public	CosQ_flt64			as	'_ZN4Math4CosQEdx'
-
-;==============================================================================;
-;       Sine and cosine                                                        ;
-;==============================================================================;
-
-; Sine and cosine of angle
-public	SinCos_flt32		as	'Math_SinCos_flt32'
-public	SinCos_flt64		as	'Math_SinCos_flt64'
-public	SinCos_flt32		as	'_ZN4Math6SinCosEPfS0_f'
-public	SinCos_flt64		as	'_ZN4Math6SinCosEPdS0_d'
-
-; Sine and cosine of angle and quadrant
-public	SinCosQ_flt32		as	'Math_SinCosQ_flt32'
-public	SinCosQ_flt64		as	'Math_SinCosQ_flt64'
-public	SinCosQ_flt32		as	'_ZN4Math7SinCosQEPfS0_fx'
-public	SinCosQ_flt64		as	'_ZN4Math7SinCosQEPdS0_dx'
-
-;==============================================================================;
-;       Tangent                                                                ;
-;==============================================================================;
-
-; Tangent of angle
-public	Tan_flt32			as	'Math_Tan_flt32'
-public	Tan_flt64			as	'Math_Tan_flt64'
-public	Tan_flt32			as	'_ZN4Math3TanEf'
-public	Tan_flt64			as	'_ZN4Math3TanEd'
-
-; Tangent of angle and quadrant
-public	TanQ_flt32			as	'Math_TanQ_flt32'
-public	TanQ_flt64			as	'Math_TanQ_flt64'
-public	TanQ_flt32			as	'_ZN4Math4TanQEfx'
-public	TanQ_flt64			as	'_ZN4Math4TanQEdx'
-
-;******************************************************************************;
-;       Inverse trigonometric functions                                        ;
-;******************************************************************************;
-
-;==============================================================================;
-;       Inverse sine                                                           ;
-;==============================================================================;
-public	ArcSin_flt32		as	'Math_ArcSin_flt32'
-public	ArcSin_flt64		as	'Math_ArcSin_flt64'
-public	ArcSin_flt32		as	'_ZN4Math6ArcSinEf'
-public	ArcSin_flt64		as	'_ZN4Math6ArcSinEd'
-
-;==============================================================================;
-;       Inverse cosine                                                         ;
-;==============================================================================;
-public	ArcCos_flt32		as	'Math_ArcCos_flt32'
-public	ArcCos_flt64		as	'Math_ArcCos_flt64'
-public	ArcCos_flt32		as	'_ZN4Math6ArcCosEf'
-public	ArcCos_flt64		as	'_ZN4Math6ArcCosEd'
-
-;==============================================================================;
-;       Inverse tangent                                                        ;
-;==============================================================================;
-public	ArcTan_flt32		as	'Math_ArcTan_flt32'
-public	ArcTan_flt64		as	'Math_ArcTan_flt64'
-public	ArcTan2_flt32		as	'Math_ArcTan2_flt32'
-public	ArcTan2_flt64		as	'Math_ArcTan2_flt64'
-public	ArcTan_flt32		as	'_ZN4Math6ArcTanEf'
-public	ArcTan_flt64		as	'_ZN4Math6ArcTanEd'
-public	ArcTan2_flt32		as	'_ZN4Math7ArcTan2Eff'
-public	ArcTan2_flt64		as	'_ZN4Math7ArcTan2Edd'
+; Scale by power of 10
+public	Scale10_flt32		as	'Math_Scale10_flt32'
+public	Scale10_flt64		as	'Math_Scale10_flt64'
+public	Scale10_flt32		as	'_ZN4Math7Scale10Efs'
+public	Scale10_flt64		as	'_ZN4Math7Scale10Eds'
 
 ;******************************************************************************;
 ;       Exponentiation functions                                               ;
 ;******************************************************************************;
 
 ;==============================================================================;
-;       Power of 2                                                             ;
+;       Exponentiation by base 2                                               ;
 ;==============================================================================;
 
-; Integer power of 2
-public	Exp2_int			as	'Math_Exp2_uint64'
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+;       Integer exponentiation by base 2                                       ;
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+public	Exp2i_int			as	'Math_Exp2i_uint64'
 public	Exp2i_flt32			as	'Math_Exp2i_flt32'
 public	Exp2i_flt64			as	'Math_Exp2i_flt64'
-public	Exp2_int			as	'_ZN4Math4Exp2Eh'
-public	Exp2i_flt32			as	'_ZN4Math4Exp2Ea'
-public	Exp2i_flt64			as	'_ZN4Math4Exp2Es'
+public	Exp2i_int			as	'_ZN4Math5Exp2iEh'
+public	Exp2i_flt32			as	'_ZN4Math5Exp2iEa'
+public	Exp2i_flt64			as	'_ZN4Math5Exp2iEs'
 
-; Real power of 2
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+;       Real exponentiation by base 2                                          ;
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 public	Exp2_flt32			as	'Math_Exp2_flt32'
 public	Exp2_flt64			as	'Math_Exp2_flt64'
 public	Exp2m1_flt32		as	'Math_Exp2m1_flt32'
@@ -626,18 +530,22 @@ public	Exp2m1_flt32		as	'_ZN4Math6Exp2m1Ef'
 public	Exp2m1_flt64		as	'_ZN4Math6Exp2m1Ed'
 
 ;==============================================================================;
-;       Power of 10                                                            ;
+;       Exponentiation by base 10                                              ;
 ;==============================================================================;
 
-; Integer power of 10
-public	Exp10_int			as	'Math_Exp10_uint64'
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+;       Integer exponentiation by base 10                                      ;
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+public	Exp10i_int			as	'Math_Exp10i_uint64'
 public	Exp10i_flt32		as	'Math_Exp10i_flt32'
 public	Exp10i_flt64		as	'Math_Exp10i_flt64'
-public	Exp10_int			as	'_ZN4Math5Exp10Eh'
-public	Exp10i_flt32		as	'_ZN4Math5Exp10Ea'
-public	Exp10i_flt64		as	'_ZN4Math5Exp10Es'
+public	Exp10i_int			as	'_ZN4Math6Exp10iEh'
+public	Exp10i_flt32		as	'_ZN4Math6Exp10iEa'
+public	Exp10i_flt64		as	'_ZN4Math6Exp10iEs'
 
-; Real power of 10
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+;       Real exponentiation by base 10                                         ;
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 public	Exp10_flt32			as	'Math_Exp10_flt32'
 public	Exp10_flt64			as	'Math_Exp10_flt64'
 public	Exp10m1_flt32		as	'Math_Exp10m1_flt32'
@@ -648,16 +556,8 @@ public	Exp10m1_flt32		as	'_ZN4Math7Exp10m1Ef'
 public	Exp10m1_flt64		as	'_ZN4Math7Exp10m1Ed'
 
 ;==============================================================================;
-;       Power of E                                                             ;
+;       Exponentiation by base E (natural logarithm)                           ;
 ;==============================================================================;
-
-; Integer power of E
-public	ExpEi_flt32			as	'Math_Expi_flt32'
-public	ExpEi_flt64			as	'Math_Expi_flt64'
-public	ExpEi_flt32			as	'_ZN4Math3ExpEa'
-public	ExpEi_flt64			as	'_ZN4Math3ExpEs'
-
-; Real power of E
 public	ExpE_flt32			as	'Math_Exp_flt32'
 public	ExpE_flt64			as	'Math_Exp_flt64'
 public	ExpEm1_flt32		as	'Math_Expm1_flt32'
@@ -668,34 +568,50 @@ public	ExpEm1_flt32		as	'_ZN4Math5Expm1Ef'
 public	ExpEm1_flt64		as	'_ZN4Math5Expm1Ed'
 
 ;==============================================================================;
-;       Power                                                                  ;
+;       Exponentiation by custom base                                          ;
 ;==============================================================================;
 
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+;       Integer exponentiation by custom base                                  ;
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+
 ; Unsigned integer types
-public	Power_uint8			as	'Math_Power_uint8'
-public	Power_uint16		as	'Math_Power_uint16'
-public	Power_uint32		as	'Math_Power_uint32'
-public	Power_uint64		as	'Math_Power_uint64'
-public	Power_uint8			as	'_ZN4Math5PowerEhh'
-public	Power_uint16		as	'_ZN4Math5PowerEth'
-public	Power_uint32		as	'_ZN4Math5PowerEjh'
-public	Power_uint64		as	'_ZN4Math5PowerEyh'
+public	ExpBi_uint8			as	'Math_ExpBi_uint8'
+public	ExpBi_uint16		as	'Math_ExpBi_uint16'
+public	ExpBi_uint32		as	'Math_ExpBi_uint32'
+public	ExpBi_uint64		as	'Math_ExpBi_uint64'
+public	ExpBi_uint8			as	'_ZN4Math5ExpBiEhh'
+public	ExpBi_uint16		as	'_ZN4Math5ExpBiEth'
+public	ExpBi_uint32		as	'_ZN4Math5ExpBiEjh'
+public	ExpBi_uint64		as	'_ZN4Math5ExpBiEyh'
 
 ; Signed integer types
-public	Power_sint8			as	'Math_Power_sint8'
-public	Power_sint16		as	'Math_Power_sint16'
-public	Power_sint32		as	'Math_Power_sint32'
-public	Power_sint64		as	'Math_Power_sint64'
-public	Power_sint8			as	'_ZN4Math5PowerEah'
-public	Power_sint16		as	'_ZN4Math5PowerEsh'
-public	Power_sint32		as	'_ZN4Math5PowerEih'
-public	Power_sint64		as	'_ZN4Math5PowerExh'
+public	ExpBi_sint8			as	'Math_ExpBi_sint8'
+public	ExpBi_sint16		as	'Math_ExpBi_sint16'
+public	ExpBi_sint32		as	'Math_ExpBi_sint32'
+public	ExpBi_sint64		as	'Math_ExpBi_sint64'
+public	ExpBi_sint8			as	'_ZN4Math5ExpBiEah'
+public	ExpBi_sint16		as	'_ZN4Math5ExpBiEsh'
+public	ExpBi_sint32		as	'_ZN4Math5ExpBiEih'
+public	ExpBi_sint64		as	'_ZN4Math5ExpBiExh'
 
 ; Floating-point types
-public	Power_flt32			as	'Math_Poweri_flt32'
-public	Power_flt64			as	'Math_Poweri_flt64'
-public	Power_flt32			as	'_ZN4Math5PowerEfa'
-public	Power_flt64			as	'_ZN4Math5PowerEds'
+public	ExpBi_flt32			as	'Math_ExpBi_flt32'
+public	ExpBi_flt64			as	'Math_ExpBi_flt64'
+public	ExpBi_flt32			as	'_ZN4Math5ExpBiEfa'
+public	ExpBi_flt64			as	'_ZN4Math5ExpBiEds'
+
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+;       Real exponentiation by custom base                                     ;
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+public	ExpB_flt32			as	'Math_ExpB_flt32'
+public	ExpB_flt64			as	'Math_ExpB_flt64'
+public	ExpBm1_flt32		as	'Math_ExpBm1_flt32'
+public	ExpBm1_flt64		as	'Math_ExpBm1_flt64'
+public	ExpB_flt32			as	'_ZN4Math4ExpBEff'
+public	ExpB_flt64			as	'_ZN4Math4ExpBEdd'
+public	ExpBm1_flt32		as	'_ZN4Math6ExpBm1Eff'
+public	ExpBm1_flt64		as	'_ZN4Math6ExpBm1Edd'
 
 ;******************************************************************************;
 ;       Logarithmic functions                                                  ;
@@ -705,17 +621,21 @@ public	Power_flt64			as	'_ZN4Math5PowerEds'
 ;       Logarithm to base 2                                                    ;
 ;==============================================================================;
 
-; Integer logarithm to base 2
-public	Log2i_uint8			as	'Math_Log2_uint8'
-public	Log2i_uint16		as	'Math_Log2_uint16'
-public	Log2i_uint32		as	'Math_Log2_uint32'
-public	Log2i_uint64		as	'Math_Log2_uint64'
-public	Log2i_uint8			as	'_ZN4Math4Log2Eh'
-public	Log2i_uint16		as	'_ZN4Math4Log2Et'
-public	Log2i_uint32		as	'_ZN4Math4Log2Ej'
-public	Log2i_uint64		as	'_ZN4Math4Log2Ey'
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+;       Integer logarithm to base 2                                            ;
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+public	Log2i_uint8			as	'Math_Log2i_uint8'
+public	Log2i_uint16		as	'Math_Log2i_uint16'
+public	Log2i_uint32		as	'Math_Log2i_uint32'
+public	Log2i_uint64		as	'Math_Log2i_uint64'
+public	Log2i_uint8			as	'_ZN4Math5Log2iEh'
+public	Log2i_uint16		as	'_ZN4Math5Log2iEt'
+public	Log2i_uint32		as	'_ZN4Math5Log2iEj'
+public	Log2i_uint64		as	'_ZN4Math5Log2iEy'
 
-; Real logarithm to base 2
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+;       Real logarithm to base 2                                               ;
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 public	Log2_flt32			as	'Math_Log2_flt32'
 public	Log2_flt64			as	'Math_Log2_flt64'
 public	Log2p1_flt32		as	'Math_Log2p1_flt32'
@@ -729,17 +649,21 @@ public	Log2p1_flt64		as	'_ZN4Math6Log2p1Ed'
 ;       Logarithm to base 10                                                   ;
 ;==============================================================================;
 
-; Integer logarithm to base 10
-public	Log10i_uint8		as	'Math_Log10_uint8'
-public	Log10i_uint16		as	'Math_Log10_uint16'
-public	Log10i_uint32		as	'Math_Log10_uint32'
-public	Log10i_uint64		as	'Math_Log10_uint64'
-public	Log10i_uint8		as	'_ZN4Math5Log10Eh'
-public	Log10i_uint16		as	'_ZN4Math5Log10Et'
-public	Log10i_uint32		as	'_ZN4Math5Log10Ej'
-public	Log10i_uint64		as	'_ZN4Math5Log10Ey'
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+;       Integer logarithm to base 10                                           ;
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+public	Log10i_uint8		as	'Math_Log10i_uint8'
+public	Log10i_uint16		as	'Math_Log10i_uint16'
+public	Log10i_uint32		as	'Math_Log10i_uint32'
+public	Log10i_uint64		as	'Math_Log10i_uint64'
+public	Log10i_uint8		as	'_ZN4Math6Log10iEh'
+public	Log10i_uint16		as	'_ZN4Math6Log10iEt'
+public	Log10i_uint32		as	'_ZN4Math6Log10iEj'
+public	Log10i_uint64		as	'_ZN4Math6Log10iEy'
 
-; Real logarithm to base 10
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+;       Real logarithm to base 10                                              ;
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 public	Log10_flt32			as	'Math_Log10_flt32'
 public	Log10_flt64			as	'Math_Log10_flt64'
 public	Log10p1_flt32		as	'Math_Log10p1_flt32'
@@ -774,26 +698,88 @@ public	LogBp1_flt32		as	'_ZN4Math6LogBp1Eff'
 public	LogBp1_flt64		as	'_ZN4Math6LogBp1Edd'
 
 ;******************************************************************************;
-;       Scale functions                                                        ;
+;       Trigonometric functions                                                ;
 ;******************************************************************************;
 
-; Scale by power of 2
-public	Scale2_flt32		as	'Math_Scale2_flt32'
-public	Scale2_flt64		as	'Math_Scale2_flt64'
-public	Scale2_flt32		as	'_ZN4Math6Scale2Efs'
-public	Scale2_flt64		as	'_ZN4Math6Scale2Eds'
+;==============================================================================;
+;       Hypotenuse                                                             ;
+;==============================================================================;
+public	Hypot_flt32			as	'Math_Hypot_flt32'
+public	Hypot_flt64			as	'Math_Hypot_flt64'
+public	Hypot_flt32			as	'_ZN4Math5HypotEff'
+public	Hypot_flt64			as	'_ZN4Math5HypotEdd'
 
-; Scale by power of 10
-public	Scale10_flt32		as	'Math_Scale10_flt32'
-public	Scale10_flt64		as	'Math_Scale10_flt64'
-public	Scale10_flt32		as	'_ZN4Math7Scale10Efs'
-public	Scale10_flt64		as	'_ZN4Math7Scale10Eds'
+;==============================================================================;
+;       Cathetus                                                               ;
+;==============================================================================;
+public	Cath_flt32			as	'Math_Cath_flt32'
+public	Cath_flt64			as	'Math_Cath_flt64'
+public	Cath_flt32			as	'_ZN4Math4CathEff'
+public	Cath_flt64			as	'_ZN4Math4CathEdd'
 
-; Scale by power of E
-public	ScaleE_flt32		as	'Math_Scale_flt32'
-public	ScaleE_flt64		as	'Math_Scale_flt64'
-public	ScaleE_flt32		as	'_ZN4Math5ScaleEfs'
-public	ScaleE_flt64		as	'_ZN4Math5ScaleEds'
+;==============================================================================;
+;       Sine                                                                   ;
+;==============================================================================;
+public	Sin_flt32			as	'Math_Sin_flt32'
+public	Sin_flt64			as	'Math_Sin_flt64'
+public	Sin_flt32			as	'_ZN4Math3SinEf'
+public	Sin_flt64			as	'_ZN4Math3SinEd'
+
+;==============================================================================;
+;       Cosine                                                                 ;
+;==============================================================================;
+public	Cos_flt32			as	'Math_Cos_flt32'
+public	Cos_flt64			as	'Math_Cos_flt64'
+public	Cos_flt32			as	'_ZN4Math3CosEf'
+public	Cos_flt64			as	'_ZN4Math3CosEd'
+
+;==============================================================================;
+;       Sine and cosine                                                        ;
+;==============================================================================;
+public	SinCos_flt32		as	'Math_SinCos_flt32'
+public	SinCos_flt64		as	'Math_SinCos_flt64'
+public	SinCos_flt32		as	'_ZN4Math6SinCosEPfS0_f'
+public	SinCos_flt64		as	'_ZN4Math6SinCosEPdS0_d'
+
+;==============================================================================;
+;       Tangent                                                                ;
+;==============================================================================;
+public	Tan_flt32			as	'Math_Tan_flt32'
+public	Tan_flt64			as	'Math_Tan_flt64'
+public	Tan_flt32			as	'_ZN4Math3TanEf'
+public	Tan_flt64			as	'_ZN4Math3TanEd'
+
+;******************************************************************************;
+;       Inverse trigonometric functions                                        ;
+;******************************************************************************;
+
+;==============================================================================;
+;       Inverse sine                                                           ;
+;==============================================================================;
+public	ArcSin_flt32		as	'Math_ArcSin_flt32'
+public	ArcSin_flt64		as	'Math_ArcSin_flt64'
+public	ArcSin_flt32		as	'_ZN4Math6ArcSinEf'
+public	ArcSin_flt64		as	'_ZN4Math6ArcSinEd'
+
+;==============================================================================;
+;       Inverse cosine                                                         ;
+;==============================================================================;
+public	ArcCos_flt32		as	'Math_ArcCos_flt32'
+public	ArcCos_flt64		as	'Math_ArcCos_flt64'
+public	ArcCos_flt32		as	'_ZN4Math6ArcCosEf'
+public	ArcCos_flt64		as	'_ZN4Math6ArcCosEd'
+
+;==============================================================================;
+;       Inverse tangent                                                        ;
+;==============================================================================;
+public	ArcTan_flt32		as	'Math_ArcTan_flt32'
+public	ArcTan_flt64		as	'Math_ArcTan_flt64'
+public	ArcTan2_flt32		as	'Math_ArcTan2_flt32'
+public	ArcTan2_flt64		as	'Math_ArcTan2_flt64'
+public	ArcTan_flt32		as	'_ZN4Math6ArcTanEf'
+public	ArcTan_flt64		as	'_ZN4Math6ArcTanEd'
+public	ArcTan2_flt32		as	'_ZN4Math7ArcTan2Eff'
+public	ArcTan2_flt64		as	'_ZN4Math7ArcTan2Edd'
 
 ;******************************************************************************;
 ;       Rounding                                                               ;
@@ -879,22 +865,20 @@ section	'.text'		executable align 16
 ;******************************************************************************;
 
 ; flt32_t
-MAGIC_FLT32		= 0x4B400000				; magic number for flt32_t to int conversion
-LOG2_E_FLT32	= 0x3FB8AA3B				; log2 (e)
-LOG10_E_FLT32	= 0x3EDE5BD9				; log10 (e)
-LOGE_E_FLT32	= 0x3F800000				; logE (e)
 LOG2_2_FLT32	= 0x3F800000				; log2 (2)
+LOG2_E_FLT32	= 0x3FB8AA3B				; log2 (e)
 LOG10_2_FLT32	= 0x3E9A209B				; log10 (2)
+LOG10_E_FLT32	= 0x3EDE5BD9				; log10 (e)
 LOGE_2_FLT32	= 0x3F317218				; logE (2)
+LOGE_E_FLT32	= 0x3F800000				; logE (e)
 
 ; flt64_t
-MAGIC_FLT64		= 0x4338000000000000		; magic number for flt64_t to int conversion
-LOG2_E_FLT64	= 0x3FF71547652B82FE		; log2 (e)
-LOG10_E_FLT64	= 0x3FDBCB7B1526E50E		; log10 (e)
-LOGE_E_FLT64	= 0x3FF0000000000000		; logE (e)
 LOG2_2_FLT64	= 0x3FF0000000000000		; log2 (2)
+LOG2_E_FLT64	= 0x3FF71547652B82FE		; log2 (e)
 LOG10_2_FLT64	= 0x3FD34413509F79FF		; log10 (2)
+LOG10_E_FLT64	= 0x3FDBCB7B1526E50E		; log10 (e)
 LOGE_2_FLT64	= 0x3FE62E42FEFA39EF		; logE (2)
+LOGE_E_FLT64	= 0x3FF0000000000000		; logE (e)
 
 ;******************************************************************************;
 ;       Expansion of sign bit                                                  ;
@@ -1720,10 +1704,10 @@ smask	= SMASK_FLT64						; sign mask
 end if
 ;------------------------------------------
 if negative
-		initreg	mask, treg, smask
+		initreg	mask, treg, smask			; load sign mask
 		orp#x	value, mask					; value = -Abs (value)
 else
-		initreg	mask, treg, dmask
+		initreg	mask, treg, dmask			; load data mask
 		andp#x	value, mask					; value = Abs (value)
 end if
 		ret
@@ -1902,8 +1886,8 @@ Compare_sint64:	SIGN_INT	rdi, rsi, g, l
 ; Floating-point types
 Compare_flt32:	SIGN_FLT	eax, edx, ecx, edi, s, 0
 Compare_flt64:	SIGN_FLT	rax, rdx, rcx, rdi, d, 0
-CompareFlt32:	SIGN_RAW	edi, esi, r8d, r9d, s
-CompareFlt64:	SIGN_RAW	rdi, rsi, r8, r9, d
+Compare_raw32:	SIGN_RAW	edi, esi, r8d, r9d, s
+Compare_raw64:	SIGN_RAW	rdi, rsi, r8, r9, d
 
 ;==============================================================================;
 ;       Minimum and maximum absolute value                                     ;
@@ -2107,6 +2091,1286 @@ LCM_sint32:	LCM	GCD_sint32, edi, esi, ecx, eax, edx, 1, 2
 LCM_sint64:	LCM	GCD_sint64, rdi, rsi, rcx, rax, rdx, 1, 3
 
 ;******************************************************************************;
+;       Scale functions                                                        ;
+;******************************************************************************;
+
+;==============================================================================;
+;       Scale by power of 2                                                    ;
+;==============================================================================;
+macro	SCALE2	temp, x
+{
+;---[Parameters]---------------------------
+value	equ		xmm0						; value to scale
+exp		equ		di							; exponent value
+;---[Internal variables]-------------------
+treg	equ		rax							; temporary register
+scale	equ		xmm1						; scale value
+if x eq s
+mbits	= MBITS_FLT32						; count of bits into mantissa
+bias	= EBIAS_FLT32						; exponent bias
+svalue1	= 0x7F000000						; 2^+127
+svalue2	= 0x00800000						; 2^-126
+else if x eq d
+mbits	= MBITS_FLT64						; count of bits into mantissa
+bias	= EBIAS_FLT64						; exponent bias
+svalue1	= 0x7FE0000000000000				; 2^+1023
+svalue2	= 0x0008000000000000				; 2^-1022
+end if
+minpow	= 1 - bias							; min power of 2
+maxpow	= bias								; max power of 2
+;------------------------------------------
+		movsx	temp, exp					; temp = exp
+		test	temp, temp					; if (temp < 0)
+		js		.neg						;     then go to negative exponent branch
+;---[Positive exponent branch]-------------
+		cmp		temp, maxpow				; if (temp > maxpow)
+		jg		.pcorr						;     then correct the exponent
+@@:		add		temp, bias					; temp = exp + bias
+		shl		temp, mbits					; temp <<= mbits
+		movint	scale, temp, x				; scale = 2^exp
+		muls#x	value, scale				; return (value * scale)
+		ret
+;---[Correcting positive power]------------
+.pcorr:	initreg	scale, treg, svalue1		; scale = svalue1
+		sub		temp, maxpow				; temp -= maxpow
+		muls#x	value, scale				; value *= scale
+		cmp		temp, maxpow				; if (temp <= maxpow)
+		jle		@b							;     then exp is correct now
+		sub		temp, maxpow				; temp -= maxpow
+		muls#x	value, scale				; value *= scale
+		cmp		temp, maxpow				; if (temp <= maxpow)
+		jle		@b							;     then exp is correct now
+		muls#x	value, scale				; return (value * scale)
+		ret
+;---[Negative exponent branch]-------------
+.neg:	cmp		temp, minpow				; if (temp < minpow)
+		jl		.ncorr						;     then correct the exponent
+@@:		add		temp, bias					; temp = exp + bias
+		shl		temp, mbits					; temp <<= mbits
+		movint	scale, temp, x				; scale = 2^exp
+		muls#x	value, scale				; return (value * scale)
+		ret
+;---[Correcting negative power]------------
+.ncorr:	initreg	scale, treg, svalue2		; scale = svalue2
+		sub		temp, minpow				; temp -= minpow
+		muls#x	value, scale				; value *= scale
+		cmp		temp, minpow				; if (temp >= minpow)
+		jge		@b							;     then exp is correct now
+		sub		temp, minpow				; temp -= minpow
+		muls#x	value, scale				; value *= scale
+		cmp		temp, minpow				; if (temp >= minpow)
+		jge		@b							;     then exp is correct now
+		muls#x	value, scale				; return (value * scale)
+		ret
+}
+Scale2_flt32:	SCALE2	edx, s
+Scale2_flt64:	SCALE2	rdx, d
+
+;==============================================================================;
+;       Scale by power of 10                                                   ;
+;==============================================================================;
+macro	SCALE10		x
+{
+;---[Parameters]---------------------------
+value	equ		xmm0						; value to scale
+exp		equ		di							; exponent value
+;---[Internal variables]-------------------
+treg	equ		rax							; temporary register
+index	equ		rdi							; index register
+scale	equ		xmm1						; scale value
+if x eq s
+ten		= ten_flt32							; table of integer powers of 10^x
+svalue1	= 0x7E967699						; 10^+38
+svalue2	= 0x02081CEA						; 10^-37
+shift	= 46								; shift value
+minpow	= -37								; min power of 10
+maxpow	= +38								; max power of 10
+bytes	= 4									; array element size (bytes)
+else if x eq d
+ten		= ten_flt64							; table of integer powers of 10^x
+svalue1	= 0x7FE1CCF385EBC8A0				; 10^+308
+svalue2	= 0x0031FA182C40C60D				; 10^-307
+shift	= 324								; shift value
+minpow	= -307								; min power of 10
+maxpow	= +308								; max power of 10
+bytes	= 8									; array element size (bytes)
+end if
+;------------------------------------------
+		movsx	index, exp					; index = exp
+		test	index, index				; if (index < 0)
+		js		.neg						;     then go to negative exponent branch
+;---[Positive exponent branch]-------------
+		cmp		index, maxpow				; if (index > maxpow)
+		jg		.pcorr						;     then correct the exponent
+@@:		movs#x	scale, [ten + index * bytes + shift * bytes]
+		muls#x	value, scale				; return (value * scale)
+		ret
+;---[Correcting positive power]------------
+.pcorr:	initreg	scale, treg, svalue1		; scale = svalue1
+		sub		index, maxpow				; index -= maxpow
+		muls#x	value, scale				; value *= scale
+		cmp		index, maxpow				; if (index <= maxpow)
+		jle		@b							;     then exp is correct now
+		sub		index, maxpow				; index -= maxpow
+		muls#x	value, scale				; value *= scale
+		cmp		index, maxpow				; if (index <= maxpow)
+		jle		@b							;     then exp is correct now
+		muls#x	value, scale				; return (value * scale)
+		ret
+;---[Negative exponent branch]-------------
+.neg:	cmp		index, minpow				; if (index < minpow)
+		jl		.ncorr						;     then correct the exponent
+@@:		movs#x	scale, [ten + index * bytes + shift * bytes]
+		muls#x	value, scale				; return (value * scale)
+		ret
+;---[Correcting negative power]------------
+.ncorr:	initreg	scale, treg, svalue2		; scale = svalue2
+		sub		index, minpow				; index -= minpow
+		muls#x	value, scale				; value *= scale
+		cmp		index, minpow				; if (index >= minpow)
+		jge		@b							;     then exp is correct now
+		sub		index, minpow				; index -= minpow
+		muls#x	value, scale				; value *= scale
+		cmp		index, minpow				; if (index >= minpow)
+		jge		@b							;     then exp is correct now
+		muls#x	value, scale				; return (value * scale)
+		ret
+}
+Scale10_flt32:	SCALE10	s
+Scale10_flt64:	SCALE10	d
+
+;******************************************************************************;
+;       Exponentiation functions                                               ;
+;******************************************************************************;
+macro	EXP		cmd, mant, exp, shiftval, x
+{
+;---[Parameters]---------------------------
+value	equ		xmm0						; exponent value
+;---[Internal variables]-------------------
+treg	equ		rax							; temporary register
+status	equ		ax							; status word register
+expl	equ		cl							; low part of exp register
+temp1	equ		xmm1						; temporary register #1
+temp2	equ		xmm2						; temporary register #2
+temp3	equ		xmm3						; temporary register #3
+temp4	equ		xmm4						; temporary register #4
+iscale	equ		xmm5						; iscale value
+scale	equ		xmm6						; scale value
+base	equ		xmm7						; base value
+shift	equ		xmm8						; shift value
+zero	equ		iscale						; 0.0
+result	equ		value						; result register
+stack	equ		rsp							; stack pointer
+ipart	equ		stack - 1 * 8				; stack position of "ipart" variable
+fpart	equ		stack - 2 * 8				; stack position of "fpart" variable
+if x eq s
+infval	= PINF_FLT32						; +Inf
+logval	= LOGE_2_FLT32						; ln(2)
+mbits	= MBITS_FLT32						; count of bits into mantissa
+bias	= EBIAS_FLT32						; exponent bias
+expe	= exp_flt32							; pointer to array of exp coefficients
+else if x eq d
+infval	= PINF_FLT64						; +Inf
+logval	= LOGE_2_FLT64						; ln(2)
+mbits	= MBITS_FLT64						; count of bits into mantissa
+bias	= EBIAS_FLT64						; exponent bias
+expe	= exp_flt64							; pointer to array of exp coefficients
+end if
+minpow	= 1 - bias							; min power of 2
+maxpow	= bias								; max power of 2
+;---[Compute integer and fraction parts]---
+		movs#x	[fpart], value
+if x eq s
+		fld		dword [fpart]				; load value into FPU stack
+		cmd									; load logarithm value
+		fmulp	st1, st0					; multiply value and logarithm
+		fld		st0
+		fclex								; clear FPU exceptions
+		fisttp	dword [ipart]				; ipart = int (value * log2 (base))
+		fstsw 	status						; store FPU status word
+		and		status, 0x1					; if (overflow is occured)
+		jnz		.ierr						;     then go to rounding error branch
+		fild	dword [ipart]
+		fsubp	st1, st0
+		fstp	dword [fpart]				; fpart = value - int (value)
+else if x eq d
+		fld		qword [fpart]				; load value into FPU stack
+		cmd									; load logarithm value
+		fmulp	st1, st0					; multiply value and logarithm
+		fld		st0
+		fclex								; clear FPU exceptions
+		fisttp	qword [ipart]				; ipart = int (value * log2 (base))
+		fstsw 	status						; store FPU status word
+		and		status, 0x1					; if (overflow is occured)
+		jnz		.ierr						;     then go to rounding error branch
+		fild	qword [ipart]
+		fsubp	st1, st0
+		fstp	qword [fpart]				; fpart = value - int (value)
+end if
+;---[Compute exponent]---------------------
+		initreg	shift, treg, shiftval		; shift = shiftval
+		initreg	scale, treg, logval			; scale = ln(2)
+		mov		exp, [ipart]				; exp = ipart
+		cmp		exp, minpow					; if (exp < minpow)
+		jl		.sub						;     then go to subnormal branch
+		cmp		exp, maxpow					; if (exp > maxpow)
+		jg		.max						;     then go to max exponent branch
+		add		exp, bias					; exp += bias
+		shl		exp, mbits					; exp <<= mbits
+		movint	iscale, exp, x				; reinterpret exp as floating-point value
+.back:	adds#x	shift, iscale				; shift += iscale
+		movs#x	result, [fpart]				; result = fpart
+		muls#x	result, scale				; result *= ln(2)
+		movap#x	scale, result
+		muls#x	scale, scale				; scale = result * result
+		movap#x	base, result				; base = result
+if x eq s
+	SINGLE8		expe, result, x				; compute single polynomial value
+else if x eq d
+	SINGLE16	expe, result, x				; compute single polynomial value
+end if
+		muls#x	temp1, scale
+		adds#x	temp1, base					; temp1 = base + scale * temp1
+		muls#x	temp1, iscale
+		adds#x	temp1, shift				; temp1 = temp1 * iscale + shift
+		movap#x	result, temp1				; return temp1
+		ret
+;---[Subnormal branch]---------------------
+.sub:	neg		exp
+		add		exp, minpow					; exp = minpow - exp
+		mov		mant, mbits + 1
+		cmp		exp, mbits					; if (exp > mbits)
+		cmovg	exp, mant					;     exp = mbits + 1
+		mov		mant, 1 shl mbits			; mant = 1 << mbits
+		shr		mant, expl					; mant >>= exp
+		movint	iscale, mant, x				; reinterpret mant as floating-point value
+		jmp		.back						; go back
+;---[Rounding error branch]----------------
+.ierr:	xorps	zero, zero					; zero = 0.0
+		comis#x	value, zero
+		jp		.error						; if (value == NaN), then return NaN
+		je		.error						; if (value == 0), then return NaN
+		ja		.max						; if (value > 0), then go to max exponent branch
+;---[Min exponent branch]------------------
+.min:	initreg	result, treg, shiftval		; return shiftval
+		ret
+;---[Max exponent branch]------------------
+.max:	initreg	result, treg, infval		; return +Inf
+		ret
+;---[Error branch]-------------------------
+.error:	initreg	result, treg, nanval		; return NaN
+		ret
+}
+
+;==============================================================================;
+;       Exponentiation by base 2                                               ;
+;==============================================================================;
+
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+;       Integer exponentiation by base 2                                       ;
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+Exp2i_int:
+;---[Parameters]---------------------------
+exp		equ		dil							; exponent value
+;---[Internal variables]-------------------
+shift	equ		cl							; binary shift value
+result	equ		rax							; result register
+maxval	= 64								; max exponent value
+;------------------------------------------
+		mov		shift, exp					; shift = exp
+		cmp		exp, maxval					; if (shift >= maxval)
+		jae		.ovfl						;     then go to overflow branch
+		mov		result, 1					; result = 1
+		shl		result, shift				; return (1 <<= shift)
+		ret
+;---[Overflow branch]----------------------
+.ovfl:	xor		result, result				; return 0 (means result overflow)
+		ret
+;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+macro	EXP2I	exp, shift, temp, x
+{
+;---[Internal variables]-------------------
+result	equ		xmm0						; result register
+shiftl	equ		cl							; low part of shift register
+if x eq s
+mbits	= MBITS_FLT32						; count of bits into mantissa
+bias	= EBIAS_FLT32						; exponent bias
+else if x eq d
+mbits	= MBITS_FLT64						; count of bits into mantissa
+bias	= EBIAS_FLT64						; exponent bias
+end if
+minpow	= 1 - bias							; min power of 2
+maxpow	= bias								; max power of 2
+;------------------------------------------
+		movsx	shift, exp					; shift = exp
+		cmp		shift, minpow				; if (shift < minpow)
+		jl		.sub						;     then go to subnormal branch
+		mov		temp, maxpow + 1
+		cmp		shift, maxpow				; if (shift > maxpow)
+		cmovg	shift, temp					;     shift = maxpow + 1
+		add		shift, bias					; shift += bias
+		shl		shift, mbits				; shift <<= mbits
+		movint	result, shift, x			; reinterpret shift as floating-point value
+		ret									; return shift
+;---[Subnormal branch]---------------------
+.sub:	neg		shift
+		add		shift, minpow				; shift = minpow - shift
+		mov		temp, mbits + 1
+		cmp		shift, mbits				; if (shift > mbits)
+		cmovg	shift, temp					;     shift = mbits + 1
+		mov		temp, 1 shl mbits			; temp = 1 << mbits
+		shr		temp, shiftl				; temp >>= shift
+		movint	result, temp, x				; reinterpret temp as floating-point value
+		ret									; return temp
+}
+Exp2i_flt32:	EXP2I	dil, ecx, eax, s
+Exp2i_flt64:	EXP2I	di, rcx, rax, d
+
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+;       Real exponentiation by base 2                                          ;
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+Exp2_flt32:		EXP		fld1, edx, ecx, PZERO_FLT32, s
+Exp2_flt64:		EXP		fld1, rdx, rcx, PZERO_FLT64, d
+Exp2m1_flt32:	EXP		fld1, edx, ecx, MONE_FLT32, s
+Exp2m1_flt64:	EXP		fld1, rdx, rcx, MONE_FLT64, d
+
+;==============================================================================;
+;       Exponentiation by base 10                                              ;
+;==============================================================================;
+
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+;       Integer exponentiation by base 10                                      ;
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+Exp10i_int:
+;---[Parameters]---------------------------
+exp		equ		dil							; exponent value
+;---[Internal variables]-------------------
+result	equ		rax							; result register
+index	equ		rdi							; index register
+temp	equ		rdx							; temporary register
+maxval	= 20								; max exponent value
+;------------------------------------------
+		movzx	index, exp					; index = exp
+		mov		temp, maxval				; temp = max exponent value
+		cmp		index, maxval				; if (index > max)
+		cmova	index, temp					;     index = max
+		mov		result, [ten_int + index * 8]; return ten_int [index]
+		ret
+;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+macro	EXP10I	exp, x
+{
+;---[Internal variables]-------------------
+result	equ		xmm0						; result register
+index	equ		rdi							; index register
+temp	equ		rdx							; temporary register
+if x eq s
+ten		= ten_flt32							; table of integer powers of 10^x
+minpow	= -46								; min power of 10
+maxpow	= +39								; max power of 10
+bytes	= 4									; array element size (bytes)
+else if x eq d
+ten		= ten_flt64							; table of integer powers of 10^x
+minpow	= -324								; min power of 10
+maxpow	= +309								; max power of 10
+bytes	= 8									; array element size (bytes)
+end if
+;------------------------------------------
+		movsx	index, exp					; index = exp
+		mov		temp, maxpow
+		cmp		index, maxpow				; if (index > maxpow)
+		cmovg	index, temp					;     index = maxpow
+		mov		temp, minpow
+		cmp		index, minpow				; if (index > minpow)
+		cmovl	index, temp					;     index = minpow
+		movs#x	result, [ten + index * bytes - minpow * bytes]
+		ret									; result = exp[index]
+}
+Exp10i_flt32:	EXP10I	dil, s
+Exp10i_flt64:	EXP10I	di, d
+
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+;       Real exponentiation by base 10                                         ;
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+Exp10_flt32:	EXP		fldl2t, edx, ecx, PZERO_FLT32, s
+Exp10_flt64:	EXP		fldl2t, rdx, rcx, PZERO_FLT64, d
+Exp10m1_flt32:	EXP		fldl2t, edx, ecx, MONE_FLT32, s
+Exp10m1_flt64:	EXP		fldl2t, rdx, rcx, MONE_FLT64, d
+
+;==============================================================================;
+;       Exponentiation by base E (natural logarithm)                           ;
+;==============================================================================;
+ExpE_flt32:		EXP		fldl2e, edx, ecx, PZERO_FLT32, s
+ExpE_flt64:		EXP		fldl2e, rdx, rcx, PZERO_FLT64, d
+ExpEm1_flt32:	EXP		fldl2e, edx, ecx, MONE_FLT32, s
+ExpEm1_flt64:	EXP		fldl2e, rdx, rcx, MONE_FLT64, d
+
+;==============================================================================;
+;       Exponentiation by custom base                                          ;
+;==============================================================================;
+
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+;       Integer exponentiation by custom base                                  ;
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+macro	EXPBI_INT	cmd, result, base
+{
+;---[Parameters]---------------------------
+exp		equ		sil							; exponent value
+;------------------------------------------
+		test	base, base					; if (base == 0)
+		jz		.ovrfl						;     then go to overflow branch
+		mov		result, 1					; result = 1
+		shr		exp, 1
+		jnc		@f							; if (exp & 0x1)
+		mov		result, base				;     result = base
+@@:		jz		.exit						; if (exp == 0), then got to exit
+;---[Exponentiation loop]------------------
+.loop:	xchg	result, base
+		cmd		result						; base *= base
+		jc		.ovrfl						; if (overflow), then go to overflow branch
+		xchg	result, base
+		shr		exp, 1
+		ja		.loop						; if (exp & 0x1 == 0 && exp != 0), then continue
+		cmd		base						;     result *= base
+		jc		.ovrfl						; if (overflow), then go to overflow branch
+		test	exp, exp
+		jnz		.loop						; do while (exp != 0)
+;---[End of exponentiation loop]-----------
+.exit:	ret									; return result
+;---[Overflow branch]----------------------
+.ovrfl:	xor		result, result				; return 0 (means result overflow)
+		ret
+}
+;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+macro	EXPBI_FLT	ivalue, mant, exp, x
+{
+;---[Parameters]---------------------------
+base	equ		xmm0						; power base
+;---[Internal variables]-------------------
+treg	equ		rax							; temporary register
+result	equ		xmm0						; result register
+temp1	equ		xmm1						; temporary register #1
+temp2	equ		xmm2						; temporary register #2
+if x eq s
+dmask	= DMASK_FLT32						; data mask
+nanval	= PNAN_FLT32						; +NaN
+infval	= PINF_FLT32						; +Inf
+oneval	= PONE_FLT32						; +1.0
+else if x eq d
+dmask	= DMASK_FLT64						; data mask
+nanval	= PNAN_FLT64						; +NaN
+infval	= PINF_FLT64						; +Inf
+oneval	= PONE_FLT64						; +1.0
+end if
+;------------------------------------------
+		movap#x	temp1, base					; temp = base
+		initreg	result, treg, oneval		; result = 1.0
+		cmp		exp, 0
+		jg		.pos						; if (exp > 0), then go to positive branch
+		jl		.neg						; if (exp < 0), then go to negative branch
+;---[Zero exponent branch]-----------------
+		movint	ivalue, temp1, x			; ivalue = temp1
+		mov		mant, dmask					; load data mask
+		and		ivalue, mant				; ivalue = Abs (temp1)
+		xor		mant, mant
+		cmp		ivalue, mant				; if (ivalue == 0)
+		je		.error						;     then return NaN
+		mov		mant, infval
+		cmp		ivalue, mant				; if (ivalue >= Inf)
+		jae		.error						;     then return NaN
+		ret									; return result
+;---[Positive exponent branch]-------------
+.pos:	shr		exp, 1
+		jnc		@f							; if (exp & 0x1)
+		movap#x	result, temp1				;     result = temp1
+@@:		jz		.exit1						; if (exp == 0), then got to exit
+;---[Exponentiation loop]------------------
+.loop1:	muls#x	temp1, temp1				; temp1 *= temp1
+		shr		exp, 1
+		ja		.loop1						; if (exp & 0x1 == 0 && exp != 0), then continue
+		muls#x	result, temp1				;     result *= temp1
+		jnz		.loop1						; do while (exp != 0)
+;---[End of exponentiation loop]-----------
+.exit1:	ret
+;---[Negative exponent branch]-------------
+.neg:	initreg	temp2, treg, oneval
+		neg		exp							; exp = -exp
+		divs#x	temp2, temp1
+		movap#x	temp1, temp2				; temp1 = 1.0 / temp1
+		shr		exp, 1
+		jnc		@f							; if (exp & 0x1)
+		movap#x	result, temp1				;     result = temp1
+@@:		jz		.exit2						; if (exp == 0), then got to exit
+;---[Exponentiation loop]------------------
+.loop2:	muls#x	temp1, temp1				; temp1 *= temp1
+		shr		exp, 1
+		ja		.loop2						; if (exp & 0x1 == 0 && exp != 0), then continue
+		muls#x	result, temp1				;     result *= temp1
+		jnz		.loop2						; do while (exp != 0)
+;---[End of exponentiation loop]-----------
+.exit2:	ret
+;---[Error branch]-------------------------
+.error:	initreg	result, treg, nanval		; return NaN
+		ret
+}
+
+; Unsigned integer types
+ExpBi_uint8:	EXPBI_INT	mul, al, dil
+ExpBi_uint16:	EXPBI_INT	mul, ax, di
+ExpBi_uint32:	EXPBI_INT	mul, eax, edi
+ExpBi_uint64:	EXPBI_INT	mul, rax, rdi
+
+; Signed integer types
+ExpBi_sint8:	EXPBI_INT	imul, al, dil
+ExpBi_sint16:	EXPBI_INT	imul, ax, di
+ExpBi_sint32:	EXPBI_INT	imul, eax, edi
+ExpBi_sint64:	EXPBI_INT	imul, rax, rdi
+
+; Floating-point types
+ExpBi_flt32:	EXPBI_FLT	eax, edx, dil, s
+ExpBi_flt64:	EXPBI_FLT	rax, rdx, di, d
+
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+;       Real exponentiation by custom base                                     ;
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+macro	EXPB	mant, exp, res, val1, val2, shiftval, x
+{
+;---[Parameters]---------------------------
+ebase	equ		xmm0						; exponentiation base
+value	equ		xmm1						; exponent value
+;---[Internal variables]-------------------
+treg	equ		rax							; temporary register
+status	equ		ax							; status word register
+expl	equ		cl							; low part of exp register
+temp1	equ		xmm1						; temporary register #1
+temp2	equ		xmm2						; temporary register #2
+temp3	equ		xmm3						; temporary register #3
+temp4	equ		xmm4						; temporary register #4
+iscale	equ		xmm5						; iscale value
+scale	equ		xmm6						; scale value
+base	equ		xmm7						; base value
+shift	equ		xmm8						; shift value
+zero	equ		iscale						; 0.0
+result	equ		ebase						; result register
+stack	equ		rsp							; stack pointer
+ipart	equ		stack - 1 * 8				; stack position of "ipart" variable
+fpart	equ		stack - 2 * 8				; stack position of "fpart" variable
+if x eq s
+nanval	= PNAN_FLT32						; +NaN
+infval	= PINF_FLT32						; +Inf
+oneval	= PONE_FLT32						; +1.0
+logval	= LOGE_2_FLT32						; ln(2)
+mbits	= MBITS_FLT32						; count of bits into mantissa
+bias	= EBIAS_FLT32						; exponent bias
+expe	= exp_flt32							; pointer to array of exp coefficients
+else if x eq d
+nanval	= PNAN_FLT64						; +NaN
+infval	= PINF_FLT64						; +Inf
+oneval	= PONE_FLT64						; +1.0
+logval	= LOGE_2_FLT64						; ln(2)
+mbits	= MBITS_FLT64						; count of bits into mantissa
+bias	= EBIAS_FLT64						; exponent bias
+expe	= exp_flt64							; pointer to array of exp coefficients
+end if
+minpow	= 1 - bias							; min power of 2
+maxpow	= bias								; max power of 2
+;---[Check base value]---------------------
+		movint	exp, ebase, x
+		xor		mant, mant
+		cmp		exp, mant
+		jl		.error						; if (ebase < 0.0), then return NaN
+		je		.ierr						; if (ebase == 0.0), then go to rounding error branch
+		mov		mant, infval
+		cmp		exp, mant
+		ja		.error						; if (ebase > Inf), then return NaN
+		je		.ierr						; if (ebase == Inf), then go to rounding error branch
+;---[Compute integer and fraction parts]---
+		movs#x	[fpart], value
+		movs#x	[ipart], ebase
+if x eq s
+		fld		dword [fpart]				; load value into FPU stack
+		fld1
+		fld		dword [ipart]				; load base into FPU stack
+		fyl2x								; compute log2 (base)
+		fmulp	st1, st0					; multiply value and logarithm
+		fld		st0
+		fclex								; clear FPU exceptions
+		fisttp	dword [ipart]				; ipart = int (value * log2 (base))
+		fstsw 	status						; store FPU status word
+		and		status, 0x1					; if (overflow is occured)
+		jnz		.ierr						;     then go to rounding error branch
+		fild	dword [ipart]
+		fsubp	st1, st0
+		fstp	dword [fpart]				; fpart = value - int (value)
+else if x eq d
+		fld		qword [fpart]				; load value into FPU stack
+		fld1
+		fld		qword [ipart]				; load base into FPU stack
+		fyl2x								; compute log2 (base)
+		fmulp	st1, st0					; multiply value and logarithm
+		fld		st0
+		fclex								; clear FPU exceptions
+		fisttp	qword [ipart]				; ipart = int (value * log2 (base))
+		fstsw 	status						; store FPU status word
+		and		status, 0x1					; if (overflow is occured)
+		jnz		.ierr						;     then go to rounding error branch
+		fild	qword [ipart]
+		fsubp	st1, st0
+		fstp	qword [fpart]				; fpart = value - int (value)
+end if
+;---[Compute exponent]---------------------
+		initreg	shift, treg, shiftval		; shift = shiftval
+		initreg	scale, treg, logval			; scale = ln(2)
+		mov		exp, [ipart]				; exp = ipart
+		cmp		exp, minpow					; if (exp < minpow)
+		jl		.sub						;     then go to subnormal branch
+		cmp		exp, maxpow					; if (exp > maxpow)
+		jg		.max						;     then go to max exponent branch
+		add		exp, bias					; exp += bias
+		shl		exp, mbits					; exp <<= mbits
+		movint	iscale, exp, x				; reinterpret exp as floating-point value
+.back:	adds#x	shift, iscale				; shift += iscale
+		movs#x	result, [fpart]				; result = fpart
+		muls#x	result, scale				; result *= ln(2)
+		movap#x	scale, result
+		muls#x	scale, scale				; scale = result * result
+		movap#x	base, result				; base = result
+if x eq s
+	SINGLE8		expe, result, x				; compute single polynomial value
+else if x eq d
+	SINGLE16	expe, result, x				; compute single polynomial value
+end if
+		muls#x	temp1, scale
+		adds#x	temp1, base					; temp1 = base + scale * temp1
+		muls#x	temp1, iscale
+		adds#x	temp1, shift				; temp1 = temp1 * iscale + shift
+		movap#x	result, temp1				; return temp1
+		ret
+;---[Subnormal branch]---------------------
+.sub:	neg		exp
+		add		exp, minpow					; exp = minpow - exp
+		mov		mant, mbits + 1
+		cmp		exp, mbits					; if (exp > mbits)
+		cmovg	exp, mant					;     exp = mbits + 1
+		mov		mant, 1 shl mbits			; mant = 1 << mbits
+		shr		mant, expl					; mant >>= exp
+		movint	iscale, mant, x				; reinterpret mant as floating-point value
+		jmp		.back						; go back
+;---[Rounding error branch]----------------
+.ierr:	xorps	zero, zero					; zero = 0.0
+		comis#x	value, zero
+		jp		.error						; if (value == NaN), then return NaN
+		je		.error						; if (value == 0), then return NaN
+		ja		.max						; if (value > 0), then go to max exponent branch
+;---[Min exponent branch]------------------
+.min:	mov		val1, shiftval				; val1 = shiftval
+		mov		val2, infval				; val2 = +Inf
+		mov		res, nanval					; res = NaN
+		movint	exp, ebase, x
+		mov		mant, oneval
+		cmp		exp, mant
+		cmova	res, val1					; if (ebase > 1.0), then res = shiftval
+		cmovb	res, val2					; if (ebase < 1.0), then res = +Inf
+		movint	result, res, x				; return res
+		ret
+;---[Max exponent branch]------------------
+.max:	mov		val1, infval				; val1 = +Inf
+		mov		val2, shiftval				; val2 = shiftval
+		mov		res, nanval					; res = NaN
+		movint	exp, ebase, x
+		mov		mant, oneval
+		cmp		exp, mant
+		cmova	res, val1					; if (ebase > 1.0), then res = +Inf
+		cmovb	res, val2					; if (ebase < 1.0), then res = shiftval
+		movint	result, res, x				; return res
+		ret
+;---[Error branch]-------------------------
+.error:	initreg	result, treg, nanval		; return NaN
+		ret
+}
+ExpB_flt32:		EXPB	edx, ecx, eax, edi, esi, PZERO_FLT32, s
+ExpB_flt64:		EXPB	rdx, rcx, rax, rdi, rsi, PZERO_FLT64, d
+ExpBm1_flt32:	EXPB	edx, ecx, eax, edi, esi, MONE_FLT32, s
+ExpBm1_flt64:	EXPB	rdx, rcx, rax, rdi, rsi, MONE_FLT64, d
+
+;******************************************************************************;
+;       Logarithmic functions                                                  ;
+;******************************************************************************;
+macro	LOG		ivalue, mant, exp, mantscale, expscale, x
+{
+;---[Parameters]---------------------------
+value	equ		xmm0						; logarithm value
+;---[Internal variables]-------------------
+treg	equ		rax							; temporary register
+temp1	equ		xmm1						; temporary register #1
+temp2	equ		xmm2						; temporary register #2
+temp3	equ		xmm3						; temporary register #3
+temp4	equ		xmm4						; temporary register #4
+mscale	equ		xmm5						; mantisa scale value
+scale1	equ		xmm6						; scale value #1
+scale2	equ		xmm7						; scale value #2
+base	equ		xmm8						; base value
+origin	equ		xmm9						; origin value
+shift	equ		xmm10						; shift value
+result	equ		value						; result register
+two		equ		temp1						; 2.0
+half	equ		temp2						; 0.5
+one		equ		temp3						; 1.0
+cscale	equ		scale1						; correction scale value
+escale	equ		scale2						; exponent scale value
+if x eq s
+emask	= EMASK_FLT32						; exponent mask
+mmask	= MMASK_FLT32						; mantissa mask
+normval	= NORM_FLT32						; min normal value
+nanval	= PNAN_FLT32						; +NaN
+pinfval	= PINF_FLT32						; +Inf
+minfval	= MINF_FLT32						; -Inf
+twoval	= PTWO_FLT32						; 2.0
+halfval	= PHALF_FLT32						; 0.5
+oneval	= PONE_FLT32						; 1.0
+mbits	= MBITS_FLT32						; count of bits into mantissa
+bias	= EBIAS_FLT32						; exponent bias
+corrval	= 0x4B000000						; correction value
+loge	= log_flt32							; pointer to array of log coefficients
+else if x eq d
+emask	= EMASK_FLT64						; exponent mask
+mmask	= MMASK_FLT64						; mantissa mask
+normval	= NORM_FLT64						; min normal value
+nanval	= PNAN_FLT64						; +NaN
+pinfval	= PINF_FLT64						; +Inf
+minfval	= MINF_FLT64						; -Inf
+twoval	= PTWO_FLT64						; 2.0
+halfval	= PHALF_FLT64						; 0.5
+oneval	= PONE_FLT64						; 1.0
+mbits	= MBITS_FLT64						; count of bits into mantissa
+bias	= EBIAS_FLT64						; exponent bias
+corrval	= 0x4330000000000000				; correction value
+loge	= log_flt64							; pointer to array of log coefficients
+end if
+;---[Check logarithm value]----------------
+		movint	ivalue, value, x			; ivalue = value
+		xor		mant, mant
+		cmp		ivalue, mant
+		jl		.error						; if (ivalue < 0.0), then return NaN
+		je		.min						; if (ivalue == 0.0), then return -Inf
+		mov		mant, pinfval
+		cmp		ivalue, mant
+		ja		.error						; if (ivalue > Inf), then return NaN
+		je		.max						; if (ivalue == Inf), then return +Inf
+;---[Loading scale values]-----------------
+		initreg	mscale, treg, mantscale		; mscale = mantscale
+		initreg	escale, treg, expscale		; escale = expscale
+;---[Loading consts]-----------------------
+		initreg	two, treg, twoval			; two = 2.0
+		initreg	half, treg, halfval			; half = 0.5
+		initreg	one, treg, oneval			; one = 1.0
+		initreg	cscale, treg, corrval		; cscale = correction value
+;---[Exponent extraction]------------------
+		mov		exp, emask
+		and		exp, ivalue					; exp = ivalue & emask
+		shr		exp, mbits					; exp >>= mbits
+		sub		exp, bias					; exp -= bias
+		mov		mant, normval
+		cmp		ivalue, mant				; if (ivalue < min normal value)
+		jb		.corr						;     then correct value
+;---[Mantissa extraction]------------------
+.back:	mov		mant, mmask
+		and		mant, ivalue				; mant = ivalue & mmask
+		mov		ivalue, bias shl mbits
+		or		mant, ivalue				; mant |= (bias << mbits)
+		mov		ivalue, 1 shl (mbits - 1)
+		and		ivalue, mant				; ivalue = mant & (1 << mbits - 1)
+		shl		ivalue, 1
+		sub		mant, ivalue				; mant -= ivalue << 1
+		movint	result, mant, x
+		subs#x	result, one					; result = mant - 1.0
+		shr		ivalue, mbits
+		add		exp, ivalue					; exp += ivalue >> mbits
+	cvtsi2s#x	shift, exp					; shift = exp
+		muls#x	shift, escale				; shift *= escale
+;---[Computing logarithm]------------------
+		movap#x	origin, result				; origin = result
+		movap#x	base, result
+		movap#x	scale1, result
+		movap#x	scale2, result
+		muls#x	base, result
+		adds#x	scale2, two
+		muls#x	base, half					; base = 0.5 * result * result
+		divs#x	scale1, scale2				; scale1 = result / (result + 2)
+		movap#x	scale2, scale1
+		muls#x	scale2, scale2				; scale2 = scale1 * scale1
+		movap#x	result, scale2				; result = scale2
+if x eq s
+	SINGLE8		loge, result, x				; compute single polynomial value
+else if x eq d
+	SINGLE16	loge, result, x				; compute single polynomial value
+end if
+		muls#x	temp1, scale2
+		adds#x	temp1, base
+		muls#x	temp1, scale1
+		subs#x	temp1, base
+		adds#x	temp1, origin				; temp1 = origin + (scale1 * (base + scale2 * temp1) - base)
+		muls#x	temp1, mscale				; temp1 *= mscale
+		adds#x	temp1, shift				; temp1 += shift
+		movap#x	result, temp1				; return mscale * log1p (value) + shift
+		ret
+;---[Mantissa correction branch]-----------
+.corr:	muls#x	result, cscale				; result *= cscale
+		sub		exp, mbits					; exp -= mbits
+		movint	ivalue, result, x			; ivalue = result
+		jmp		.back						; go back
+;---[Min value branch]---------------------
+.min:	initreg	result, treg, minfval		; return -Inf
+		ret
+;---[Max value branch]---------------------
+.max:	initreg	result, treg, pinfval		; return +Inf
+		ret
+;---[Error branch]-------------------------
+.error:	initreg	result, treg, nanval		; return NaN
+		ret
+}
+;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+macro	LOG1P	Func, ivalue, mant, mantscale, x
+{
+;---[Parameters]---------------------------
+value	equ		xmm0						; logarithm value
+;---[Internal variables]-------------------
+treg	equ		rax							; temporary register
+temp1	equ		xmm1						; temporary register #1
+temp2	equ		xmm2						; temporary register #2
+temp3	equ		xmm3						; temporary register #3
+temp4	equ		xmm4						; temporary register #4
+mscale	equ		xmm5						; mantisa scale value
+scale1	equ		xmm6						; scale value #1
+scale2	equ		xmm7						; scale value #2
+base	equ		xmm8						; base value
+origin	equ		xmm9						; origin value
+result	equ		value						; result register
+two		equ		temp1						; 2.0
+half	equ		temp2						; 0.5
+if x eq s
+twoval	= PTWO_FLT32						; +2.0
+phlfval	= PHALF_FLT32						; +0.5
+mhlfval	= MHALF_FLT32						; -0.5
+oneval	= PONE_FLT32						; +1.0
+loge	= log_flt32							; pointer to array of log coefficients
+else if x eq d
+twoval	= PTWO_FLT64						; +2.0
+phlfval	= PHALF_FLT64						; +0.5
+mhlfval	= MHALF_FLT64						; -0.5
+oneval	= PONE_FLT64						; +1.0
+loge	= log_flt64							; pointer to array of log coefficients
+end if
+;---[Check logarithm value]----------------
+		movint	ivalue, value, x			; ivalue = value
+		mov		mant, mhlfval
+		cmp		ivalue, mant				; if (ivalue < -0.5)
+		ja		.log						;     then go to log branch
+		mov		mant, oneval
+		cmp		ivalue, mant				; if (ivalue > +1.0)
+		jg		.log						;     then go to log branch
+;---[Loading scale values]-----------------
+		initreg	mscale, treg, mantscale		; mscale = mantscale
+;---[Loading consts]-----------------------
+		initreg	two, treg, twoval			; two = 2.0
+		initreg	half, treg, phlfval			; half = 0.5
+;---[Normal execution branch]--------------
+		movap#x	origin, result				; origin = result
+		movap#x	base, result
+		movap#x	scale1, result
+		movap#x	scale2, result
+		muls#x	base, result
+		adds#x	scale2, two
+		muls#x	base, half					; base = 0.5 * result * result
+		divs#x	scale1, scale2				; scale1 = result / (result + 2)
+		movap#x	scale2, scale1
+		muls#x	scale2, scale2				; scale2 = scale1 * scale1
+		movap#x	result, scale2				; result = scale2
+if x eq s
+	SINGLE8		loge, result, x				; compute single polynomial value
+else if x eq d
+	SINGLE16	loge, result, x				; compute single polynomial value
+end if
+		muls#x	temp1, scale2
+		adds#x	temp1, base
+		muls#x	temp1, scale1
+		subs#x	temp1, base
+		adds#x	temp1, origin				; temp1 = origin + (scale1 * (base + scale2 * temp1) - base)
+		muls#x	temp1, mscale				; temp1 *= mscale
+		movap#x	result, temp1				; return mscale * log1p (value)
+		ret
+;---[Log branch]---------------------------
+.log:	initreg	mscale, treg, oneval
+		adds#x	value, mscale
+		jmp		Func						; call Func (value + 1.0)
+}
+
+;==============================================================================;
+;       Logarithm to base 2                                                    ;
+;==============================================================================;
+macro	LOG2I	val, scale
+{
+;---[Parameters]---------------------------
+value	equ		rdi							; value to operate
+;---[Internal variables]-------------------
+result	equ		rax							; result register
+;------------------------------------------
+if scale < 2
+		movzx	value, val					; zero extend value to 64-bit value
+end if
+		test	value, value				; if (value == 0)
+		jz		.error						;     then go to error branch
+;---[Normal execution branch]--------------
+		bsr		result, value				; return index of most significant bit
+		ret
+;---[Error branch]-------------------------
+.error:	mov		result, ERROR				; return ERROR
+		ret
+}
+
+; Integer logarithm to base 2
+Log2i_uint8:	LOG2I	dil, 0
+Log2i_uint16:	LOG2I	di, 1
+Log2i_uint32:	LOG2I	edi, 2
+Log2i_uint64:	LOG2I	rdi, 3
+
+; Real logarithm to base 2
+Log2_flt32:		LOG		edi, edx, ecx, LOG2_E_FLT32, LOG2_2_FLT32, s
+Log2_flt64:		LOG		rdi, rdx, rcx, LOG2_E_FLT64, LOG2_2_FLT64, d
+Log2p1_flt32:	LOG1P	Log2_flt32, edi, edx, LOG2_E_FLT32, s
+Log2p1_flt64:	LOG1P	Log2_flt64, rdi, rdx, LOG2_E_FLT64, d
+
+;==============================================================================;
+;       Logarithm to base 10                                                   ;
+;==============================================================================;
+macro	LOG10I	val, index, scale
+{
+;---[Parameters]---------------------------
+value	equ		rdi							; value to operate
+;---[Internal variables]-------------------
+result	equ		rax							; result register
+;------------------------------------------
+if scale < 2
+		movzx	value, val					; zero extend value to 64-bit value
+end if
+		test	value, value				; if (value == 0)
+		jz		.error						;     then go to error branch
+;---[Normal execution branch]--------------
+		mov		result, index				; result = index
+;---[Search loop]--------------------------
+.loop:	sub		result, 1					; result--
+		cmp		value, [ten_int + result * 8]
+		jb		.loop						; do while (value < ten_int[resul])
+;---[End of search loop]-------------------
+		ret									; return result
+;---[Error branch]-------------------------
+.error:	mov		result, ERROR				; return ERROR
+		ret
+}
+
+; Integer logarithm to base 10
+Log10i_uint8:	LOG10I	dil, 3, 0
+Log10i_uint16:	LOG10I	di, 5, 1
+Log10i_uint32:	LOG10I	edi, 10, 2
+Log10i_uint64:	LOG10I	rdi, 20, 3
+
+; Real logarithm to base 10
+Log10_flt32:	LOG		edi, edx, ecx, LOG10_E_FLT32, LOG10_2_FLT32, s
+Log10_flt64:	LOG		rdi, rdx, rcx, LOG10_E_FLT64, LOG10_2_FLT64, d
+Log10p1_flt32:	LOG1P	Log10_flt32, edi, edx, LOG10_E_FLT32, s
+Log10p1_flt64:	LOG1P	Log10_flt64, rdi, rdx, LOG10_E_FLT64, d
+
+;==============================================================================;
+;       Logarithm to base E (natural logarithm)                                ;
+;==============================================================================;
+LogE_flt32:		LOG		edi, edx, ecx, LOGE_E_FLT32, LOGE_2_FLT32, s
+LogE_flt64:		LOG		rdi, rdx, rcx, LOGE_E_FLT64, LOGE_2_FLT64, d
+LogEp1_flt32:	LOG1P	LogE_flt32, edi, edx, LOGE_E_FLT32, s
+LogEp1_flt64:	LOG1P	LogE_flt64, rdi, rdx, LOGE_E_FLT64, d
+
+;==============================================================================;
+;       Logarithm to custom base                                               ;
+;==============================================================================;
+macro	LOGB	Log, ivalue, mant, exp, res, val1, val2, x
+{
+;---[Parameters]---------------------------
+lbase	equ		xmm0						; logarithm base value
+value	equ		xmm1						; logarithm value
+;---[Internal variables]-------------------
+treg	equ		rax							; temporary register
+temp1	equ		xmm1						; temporary register #1
+temp2	equ		xmm2						; temporary register #2
+temp3	equ		xmm3						; temporary register #3
+temp4	equ		xmm4						; temporary register #4
+mscale	equ		xmm5						; mantisa scale value
+scale1	equ		xmm6						; scale value #1
+scale2	equ		xmm7						; scale value #2
+base	equ		xmm8						; base value
+origin	equ		xmm9						; origin value
+shift	equ		xmm10						; shift value
+result	equ		lbase						; result register
+two		equ		temp1						; 2.0
+half	equ		temp2						; 0.5
+one		equ		temp3						; 1.0
+cscale	equ		scale1						; correction scale value
+escale	equ		scale2						; exponent scale value
+stack	equ		rsp							; stack pointer
+s_value	equ		stack + 0 * 8				; stack position of "value" variable
+if x eq s
+emask	= EMASK_FLT32						; exponent mask
+mmask	= MMASK_FLT32						; mantissa mask
+normval	= NORM_FLT32						; min normal value
+nanval	= PNAN_FLT32						; +NaN
+pinfval	= PINF_FLT32						; +Inf
+minfval	= MINF_FLT32						; -Inf
+twoval	= PTWO_FLT32						; 2.0
+halfval	= PHALF_FLT32						; 0.5
+oneval	= PONE_FLT32						; 1.0
+logval	= LOGE_2_FLT32						; ln(2)
+mbits	= MBITS_FLT32						; count of bits into mantissa
+bias	= EBIAS_FLT32						; exponent bias
+corrval	= 0x4B000000						; correction value
+loge	= log_flt32							; pointer to array of log coefficients
+else if x eq d
+emask	= EMASK_FLT64						; exponent mask
+mmask	= MMASK_FLT64						; mantissa mask
+normval	= NORM_FLT64						; min normal value
+nanval	= PNAN_FLT64						; +NaN
+pinfval	= PINF_FLT64						; +Inf
+minfval	= MINF_FLT64						; -Inf
+twoval	= PTWO_FLT64						; 2.0
+halfval	= PHALF_FLT64						; 0.5
+oneval	= PONE_FLT64						; 1.0
+logval	= LOGE_2_FLT64						; ln(2)
+mbits	= MBITS_FLT64						; count of bits into mantissa
+bias	= EBIAS_FLT64						; exponent bias
+corrval	= 0x4330000000000000				; correction value
+loge	= log_flt64							; pointer to array of log coefficients
+end if
+space	= 1 * 8								; stack size required by the procedure
+;---[Check base value]---------------------
+		movint	exp, lbase, x
+		mov		mant, oneval
+		cmp		exp, mant					; if (lbase == 1.0)
+		je		.error						;     return NaN
+		xor		mant, mant
+		cmp		exp, mant					; if (lbase <= 0.0)
+		jle		.error						;     then return NaN
+		mov		mant, pinfval
+		cmp		exp, mant					; if (lbase >= Inf)
+		jae		.error						;     then return NaN
+;---[Check logarithm value]----------------
+		movint	ivalue, value, x			; ivalue = value
+		xor		mant, mant
+		cmp		ivalue, mant
+		jl		.error						; if (ivalue < 0.0), then return NaN
+		je		.min						; if (ivalue == 0.0), then return correct Inf
+		mov		mant, pinfval
+		cmp		ivalue, mant
+		ja		.error						; if (ivalue > Inf), then return NaN
+		je		.max						; if (ivalue == Inf), then return correct Inf
+;---[Loading scale values]-----------------
+		sub		stack, space				; reserving stack size for local vars
+		movs#x	[s_value], value			; save "value" variable into the stack
+		call	Log							; call Log (lbase)
+		initreg	mscale, treg, oneval
+		divs#x	mscale, result				; mscale = 1.0 / ln (lbase)
+		initreg	escale, treg, logval
+		divs#x	escale, result				; escale = ln(2) / ln (lbase)
+		movs#x	result, [s_value]			; get "value" variable from the stack
+		mov		ivalue, [s_value]			; ivalue = value
+		add		stack, space				; restoring back the stack pointer
+;---[Loading consts]-----------------------
+		initreg	two, treg, twoval			; two = 2.0
+		initreg	half, treg, halfval			; half = 0.5
+		initreg	one, treg, oneval			; one = 1.0
+		initreg	cscale, treg, corrval		; cscale = correction value
+;---[Exponent extraction]------------------
+		mov		exp, emask
+		and		exp, ivalue					; exp = ivalue & emask
+		shr		exp, mbits					; exp >>= mbits
+		sub		exp, bias					; exp -= bias
+		mov		mant, normval
+		cmp		ivalue, mant				; if (ivalue < min normal value)
+		jb		.corr						;     then correct value
+;---[Mantissa extraction]------------------
+.back:	mov		mant, mmask
+		and		mant, ivalue				; mant = ivalue & mmask
+		mov		ivalue, bias shl mbits
+		or		mant, ivalue				; mant |= (bias << mbits)
+		mov		ivalue, 1 shl (mbits - 1)
+		and		ivalue, mant				; ivalue = mant & (1 << mbits - 1)
+		shl		ivalue, 1
+		sub		mant, ivalue				; mant -= ivalue << 1
+		movint	result, mant, x
+		subs#x	result, one					; result = mant - 1.0
+		shr		ivalue, mbits
+		add		exp, ivalue					; exp += ivalue >> mbits
+	cvtsi2s#x	shift, exp					; shift = exp
+		muls#x	shift, escale				; shift *= escale
+;---[Computing logarithm]------------------
+		movap#x	origin, result				; origin = result
+		movap#x	base, result
+		movap#x	scale1, result
+		movap#x	scale2, result
+		muls#x	base, result
+		adds#x	scale2, two
+		muls#x	base, half					; base = 0.5 * result * result
+		divs#x	scale1, scale2				; scale1 = result / (result + 2)
+		movap#x	scale2, scale1
+		muls#x	scale2, scale2				; scale2 = scale1 * scale1
+		movap#x	result, scale2				; result = scale2
+if x eq s
+	SINGLE8		loge, result, x				; compute single polynomial value
+else if x eq d
+	SINGLE16	loge, result, x				; compute single polynomial value
+end if
+		muls#x	temp1, scale2
+		adds#x	temp1, base
+		muls#x	temp1, scale1
+		subs#x	temp1, base
+		adds#x	temp1, origin				; temp1 = origin + (scale1 * (base + scale2 * temp1) - base)
+		muls#x	temp1, mscale				; temp1 *= mscale
+		adds#x	temp1, shift				; temp1 += shift
+		movap#x	result, temp1				; return mscale * log1p (value) + shift
+		ret
+;---[Mantissa correction branch]-----------
+.corr:	muls#x	result, cscale				; result *= cscale
+		sub		exp, mbits					; exp -= mbits
+		movint	ivalue, result, x			; ivalue = result
+		jmp		.back						; go back
+;---[Min value branch]---------------------
+.min:	mov		val1, minfval				; val1 = -Inf
+		mov		val2, pinfval				; val2 = +Inf
+		movint	exp, lbase, x
+		mov		mant, oneval
+		cmp		exp, mant
+		cmova	res, val1					; if (lbase > 1.0), then res = -Inf
+		cmovb	res, val2					; if (lbase < 1.0), then res = +Inf
+		movint	result, res, x				; return res
+		ret
+;---[Max value branch]---------------------
+.max:	mov		val1, pinfval				; val1 = +Inf
+		mov		val2, minfval				; val2 = -Inf
+		movint	exp, lbase, x
+		mov		mant, oneval
+		cmp		exp, mant
+		cmova	res, val1					; if (lbase > 1.0), then res = +Inf
+		cmovb	res, val2					; if (lbase < 1.0), then res = -Inf
+		movint	result, res, x				; return res
+		ret
+;---[Error branch]-------------------------
+.error:	initreg	result, treg, nanval		; return NaN
+		ret
+}
+;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+macro	LOGB1P	Log, Func, ivalue, mant, x
+{
+;---[Parameters]---------------------------
+lbase	equ		xmm0						; logarithm base value
+value	equ		xmm1						; logarithm value
+;---[Internal variables]-------------------
+treg	equ		rax							; temporary register
+temp1	equ		xmm1						; temporary register #1
+temp2	equ		xmm2						; temporary register #2
+temp3	equ		xmm3						; temporary register #3
+temp4	equ		xmm4						; temporary register #4
+mscale	equ		xmm5						; mantisa scale value
+scale1	equ		xmm6						; scale value #1
+scale2	equ		xmm7						; scale value #2
+base	equ		xmm8						; base value
+origin	equ		xmm9						; origin value
+result	equ		lbase						; result register
+two		equ		temp1						; 2.0
+half	equ		temp2						; 0.5
+stack	equ		rsp							; stack pointer
+s_value	equ		stack + 0 * 8				; stack position of "value" variable
+if x eq s
+nanval	= PNAN_FLT32						; +NaN
+infval	= PINF_FLT32						; +Inf
+twoval	= PTWO_FLT32						; +2.0
+phlfval	= PHALF_FLT32						; +0.5
+mhlfval	= MHALF_FLT32						; -0.5
+oneval	= PONE_FLT32						; +1.0
+loge	= log_flt32							; pointer to array of log coefficients
+else if x eq d
+nanval	= PNAN_FLT64						; +NaN
+infval	= PINF_FLT64						; +Inf
+twoval	= PTWO_FLT64						; +2.0
+phlfval	= PHALF_FLT64						; +0.5
+mhlfval	= MHALF_FLT64						; -0.5
+oneval	= PONE_FLT64						; +1.0
+loge	= log_flt64							; pointer to array of log coefficients
+end if
+space	= 1 * 8								; stack size required by the procedure
+;---[Check base value]---------------------
+		movint	ivalue, lbase, x			; ivalue = lbase
+		mov		mant, oneval
+		cmp		ivalue, mant				; if (ivalue == 1.0)
+		je		.error						;     return NaN
+		xor		mant, mant
+		cmp		ivalue, mant				; if (ivalue <= 0.0)
+		jle		.error						;     then return NaN
+		mov		mant, infval
+		cmp		ivalue, mant				; if (ivalue >= Inf)
+		jae		.error						;     then return NaN
+;---[Check logarithm value]----------------
+		movint	ivalue, value, x			; ivalue = value
+		mov		mant, mhlfval
+		cmp		ivalue, mant				; if (ivalue < -0.5)
+		ja		.log						;     then go to log branch
+		mov		mant, oneval
+		cmp		ivalue, mant				; if (ivalue > +1.0)
+		jg		.log						;     then go to log branch
+;---[Loading scale values]-----------------
+		sub		stack, space				; reserving stack size for local vars
+		movs#x	[s_value], value			; save "value" variable into the stack
+		call	Log							; call Log (lbase)
+		initreg	mscale, treg, oneval
+		divs#x	mscale, result				; mscale = 1.0 / ln (lbase)
+		movs#x	result, [s_value]			; get "value" variable from the stack
+		add		stack, space				; restoring back the stack pointer
+;---[Loading consts]-----------------------
+		initreg	two, treg, twoval			; two = 2.0
+		initreg	half, treg, phlfval			; half = 0.5
+;---[Computing logarithm]------------------
+		movap#x	origin, result				; origin = result
+		movap#x	base, result
+		movap#x	scale1, result
+		movap#x	scale2, result
+		muls#x	base, result
+		adds#x	scale2, two
+		muls#x	base, half					; base = 0.5 * result * result
+		divs#x	scale1, scale2				; scale1 = result / (result + 2)
+		movap#x	scale2, scale1
+		muls#x	scale2, scale2				; scale2 = scale1 * scale1
+		movap#x	result, scale2				; result = scale2
+if x eq s
+	SINGLE8		loge, result, x				; compute single polynomial value
+else if x eq d
+	SINGLE16	loge, result, x				; compute single polynomial value
+end if
+		muls#x	temp1, scale2
+		adds#x	temp1, base
+		muls#x	temp1, scale1
+		subs#x	temp1, base
+		adds#x	temp1, origin				; temp1 = origin + (scale1 * (base + scale2 * temp1) - base)
+		muls#x	temp1, mscale				; temp1 *= mscale
+		movap#x	result, temp1				; return mscale * log1p (value)
+		ret
+;---[Log branch]---------------------------
+.log:	initreg	mscale, treg, oneval
+		adds#x	value, mscale
+		jmp		Func						; call Func (base, value + 1.0)
+;---[Error branch]-------------------------
+.error:	initreg	result, treg, nanval		; return NaN
+		ret
+}
+LogB_flt32:		LOGB	LogE_flt32, edi, edx, ecx, eax, edi, esi, s
+LogB_flt64:		LOGB	LogE_flt64, rdi, rdx, rcx, rax, rdi, rsi, d
+LogBp1_flt32:	LOGB1P	LogE_flt32, LogB_flt32, edi, edx, s
+LogBp1_flt64:	LOGB1P	LogE_flt64, LogB_flt64, rdi, rdx, d
+
+;******************************************************************************;
 ;       Trigonometric functions                                                ;
 ;******************************************************************************;
 macro	TRIG1	Func, ivalue, mant, exp, ipart, res0, res1, temp0, temp1, x
@@ -2138,10 +3402,10 @@ pi4val	= PI_FOUR_FLT32						; +Pi/4
 mbits	= MBITS_FLT32						; count of bits into mantissa
 bias	= EBIAS_FLT32						; exponent bias
 source	= range_flt32						; pointer to range reduction constant
-cbits	= 192								; count of bits into long mul constant
-bscale	= 5									; bits scale value
 sclval1	= 0x2FC90FDB						; Pi/2 * 2^-32
 sclval2	= 0x20490FDB						; Pi/2 * 2^-63
+cbits	= 192								; count of bits into long mul constant
+bscale	= 5									; bits scale value
 else if x eq d
 dmask	= DMASK_FLT64						; data mask
 smask	= SMASK_FLT64						; sign mask
@@ -2153,10 +3417,10 @@ pi4val	= PI_FOUR_FLT64						; +Pi/4
 mbits	= MBITS_FLT64						; count of bits into mantissa
 bias	= EBIAS_FLT64						; exponent bias
 source	= range_flt64						; pointer to range reduction constant
-cbits	= 1152								; count of bits into long mul constant
-bscale	= 6									; bits scale value
 sclval1	= 0x3BF921FB54442D18				; Pi/2 * 2^-64
 sclval2	= 0x380921FB54442D18				; Pi/2 * 2^-127
+cbits	= 1152								; count of bits into long mul constant
+bscale	= 6									; bits scale value
 end if
 bits	= 1 shl bscale						; block size (bits)
 bytes	= 1 shl (bscale - 3)				; block size (bytes)
@@ -2167,13 +3431,14 @@ space	= 19 * 8							; stack size required by the procedure
 		initreg	scale1, treg, sclval1		; scale1 = sclval1
 		initreg	scale2, treg, sclval2		; scale2 = sclval2
 		movint	ivalue, angle, x
-		mov		mant, dmask
+;---[Check angle value]--------------------
+		mov		mant, dmask					; load data mask
 		and		mant, ivalue				; mant = Abs (angle)
-		mov		res0, infval
-		cmp		mant, res0					; if (mant >= Inf)
+		mov		ipart, infval
+		cmp		mant, ipart					; if (mant >= Inf)
 		jae		.ovrfl						;     then go to overflow branch
-		mov		res0, pi4val
-		cmp		mant, res0					; if (mant <= Pi/4)
+		mov		ipart, pi4val
+		cmp		mant, ipart					; if (mant <= Pi/4)
 		jbe		.skip						;     then skip following code
 ;---[Set correct sign to scale values]-----
 		andp#x	sign, angle					; get angle sign
@@ -2187,10 +3452,10 @@ space	= 19 * 8							; stack size required by the procedure
 		neg		exp
 		add		exp, cbits + mbits			; exp = cbits + mbits - exp
 ;---[Extract mantissa]---------------------
-		mov		temp0, mmask + 1
+		mov		ipart, mmask + 1
 		mov		mant, mmask
 		and		mant, ivalue				; mant = angle & mmask
-		or		mant, temp0					; mant |= 1 << mbits
+		or		mant, ipart					; mant |= 1 << mbits
 ;---[Long mul operation]-------------------
 		xor		treg, treg					; treg = 0
 		lea		index, [exp - 2 * bits]
@@ -2289,10 +3554,10 @@ pi4val	= PI_FOUR_FLT32						; +Pi/4
 mbits	= MBITS_FLT32						; count of bits into mantissa
 bias	= EBIAS_FLT32						; exponent bias
 source	= range_flt32						; pointer to range reduction constant
-cbits	= 192								; count of bits into long mul constant
-bscale	= 5									; bits scale value
 sclval1	= 0x2FC90FDB						; Pi/2 * 2^-32
 sclval2	= 0x20490FDB						; Pi/2 * 2^-63
+cbits	= 192								; count of bits into long mul constant
+bscale	= 5									; bits scale value
 else if x eq d
 dmask	= DMASK_FLT64						; data mask
 smask	= SMASK_FLT64						; sign mask
@@ -2304,10 +3569,10 @@ pi4val	= PI_FOUR_FLT64						; +Pi/4
 mbits	= MBITS_FLT64						; count of bits into mantissa
 bias	= EBIAS_FLT64						; exponent bias
 source	= range_flt64						; pointer to range reduction constant
-cbits	= 1152								; count of bits into long mul constant
-bscale	= 6									; bits scale value
 sclval1	= 0x3BF921FB54442D18				; Pi/2 * 2^-64
 sclval2	= 0x380921FB54442D18				; Pi/2 * 2^-127
+cbits	= 1152								; count of bits into long mul constant
+bscale	= 6									; bits scale value
 end if
 bits	= 1 shl bscale						; block size (bits)
 bytes	= 1 shl (bscale - 3)				; block size (bytes)
@@ -2318,13 +3583,14 @@ space	= 21 * 8							; stack size required by the procedure
 		initreg	scale1, treg, sclval1		; scale1 = sclval1
 		initreg	scale2, treg, sclval2		; scale2 = sclval2
 		movint	ivalue, angle, x
-		mov		mant, dmask
+;---[Check angle value]--------------------
+		mov		mant, dmask					; load data mask
 		and		mant, ivalue				; mant = Abs (angle)
-		mov		res0, infval
-		cmp		mant, res0					; if (mant >= Inf)
+		mov		ipart, infval
+		cmp		mant, ipart					; if (mant >= Inf)
 		jae		.ovrfl						;     then go to overflow branch
-		mov		res0, pi4val
-		cmp		mant, res0					; if (mant <= Pi/4)
+		mov		ipart, pi4val
+		cmp		mant, ipart					; if (mant <= Pi/4)
 		jbe		.skip						;     then skip following code
 		mov		[s_sin], sin				; save "sin" variable into the stack
 		mov		[s_cos], cos				; save "cos" variable into the stack
@@ -2340,10 +3606,10 @@ space	= 21 * 8							; stack size required by the procedure
 		neg		exp
 		add		exp, cbits + mbits			; exp = cbits + mbits - exp
 ;---[Extract mantissa]---------------------
-		mov		temp0, mmask + 1
+		mov		ipart, mmask + 1
 		mov		mant, mmask
 		and		mant, ivalue				; mant = angle & mmask
-		or		mant, temp0					; mant |= 1 << mbits
+		or		mant, ipart					; mant |= 1 << mbits
 ;---[Long mul operation]-------------------
 		xor		treg, treg					; treg = 0
 		lea		index, [exp - 2 * bits]
@@ -2592,7 +3858,7 @@ mask	equ		temp1						; data mask
 pi		equ		temp2						; Pi/4
 half	equ		scale						; 0.5
 if x eq s
-dmask	= DMASK_FLT32						; data masko
+dmask	= DMASK_FLT32						; data mask
 smask	= SMASK_FLT32						; sign mask
 nanval	= PNAN_FLT32						; +NaN
 oneval	= PONE_FLT32						; +1.0
@@ -2629,7 +3895,8 @@ end if
 		cmovnz	sreg, sval					;     sign = -sign
 		movap#x	base, angle					; base = angle
 		muls#x	angle, angle				; angle *= angle
-		movap#x	scale, angle				; scale = angle
+		movap#x	scale, angle
+		muls#x	scale, base					; scale = angle * base
 		movint	sign, sreg, x				; sign = sign bit
 if x eq s
 		SINGLE4	sin, angle, x				; compute single polynomial value
@@ -2637,8 +3904,7 @@ else if x eq d
 		SINGLE8	sin, angle, x				; compute single polynomial value
 end if
 		muls#x	temp1, scale
-		muls#x	temp1, base
-		adds#x	temp1, base					; temp1 = base + base * scale * temp1
+		adds#x	temp1, base					; temp1 = base + scale * temp1
 		orp#x	temp1, sign					; set correct sign to the result
 		movap#x	result, temp1				; return sign * Sin (Abs (angle))
 		ret
@@ -2648,7 +3914,8 @@ end if
 		cmovnz	sreg, sval					;     sign = -1.0
 		movap#x	base, half					; base = 0.5
 		muls#x	angle, angle				; angle *= angle
-		movap#x	scale, angle				; scale = angle
+		movap#x	scale, angle
+		muls#x	scale, scale				; scale = angle * angle
 		muls#x	base, angle					; base *= angle
 		movint	sign, sreg, x				; sign = sign bit
 if x eq s
@@ -2657,8 +3924,7 @@ else if x eq d
 		SINGLE8	cos, angle, x				; compute single polynomial value
 end if
 		muls#x	temp1, scale
-		muls#x	temp1, scale
-		adds#x	temp1, base					; temp1 = base + scale * scale * temp1
+		adds#x	temp1, base					; temp1 = base + scale * temp1
 		adds#x	temp1, one					; temp1 += 1.0
 		orp#x	temp1, sign					; set correct sign to the result
 		movap#x	result, temp1				; return sign * Cos (Abs (angle))
@@ -2697,7 +3963,7 @@ mask	equ		temp1						; data mask
 pi		equ		temp2						; Pi/4
 half	equ		scale						; 0.5
 if x eq s
-dmask	= DMASK_FLT32						; data masko
+dmask	= DMASK_FLT32						; data mask
 smask	= SMASK_FLT32						; sign mask
 nanval	= PNAN_FLT32						; +NaN
 oneval	= PONE_FLT32						; +1.0
@@ -2734,7 +4000,8 @@ end if
 		cmovnz	sreg, sval					;     sign = -1.0
 		movap#x	base, half					; base = 0.5
 		muls#x	angle, angle				; angle *= angle
-		movap#x	scale, angle				; scale = angle
+		movap#x	scale, angle
+		muls#x	scale, scale				; scale = angle * angle
 		muls#x	base, angle					; base *= angle
 		movint	sign, sreg, x				; sign = sign bit
 if x eq s
@@ -2743,8 +4010,7 @@ else if x eq d
 		SINGLE8	cos, angle, x				; compute single polynomial value
 end if
 		muls#x	temp1, scale
-		muls#x	temp1, scale
-		adds#x	temp1, base					; temp1 = base + scale * scale * temp1
+		adds#x	temp1, base					; temp1 = base + scale * temp1
 		adds#x	temp1, one					; temp1 += 1.0
 		orp#x	temp1, sign					; set correct sign to the result
 		movap#x	result, temp1				; return sign * Cos (Abs (angle))
@@ -2755,7 +4021,8 @@ end if
 		cmovz	sreg, sval					;     sign = -sign
 		movap#x	base, angle					; base = angle
 		muls#x	angle, angle				; angle *= angle
-		movap#x	scale, angle				; scale = angle
+		movap#x	scale, angle
+		muls#x	scale, base					; scale = angle * base
 		movint	sign, sreg, x				; sign = sign bit
 if x eq s
 		SINGLE4	sin, angle, x				; compute single polynomial value
@@ -2763,8 +4030,7 @@ else if x eq d
 		SINGLE8	sin, angle, x				; compute single polynomial value
 end if
 		muls#x	temp1, scale
-		muls#x	temp1, base
-		adds#x	temp1, base					; temp1 = base + base * scale * temp1
+		adds#x	temp1, base					; temp1 = base + scale * temp1
 		orp#x	temp1, sign					; set correct sign to the result
 		movap#x	result, temp1				; return sign * Sin (Abs (angle))
 		ret
@@ -2797,18 +4063,19 @@ temp1	equ		xmm1						; temporary register #1
 temp2	equ		xmm2						; temporary register #2
 temp3	equ		xmm3						; temporary register #3
 temp4	equ		xmm4						; temporary register #4
-scale	equ		xmm5						; scale value
-base1	equ		xmm6						; base value #1
-base2	equ		xmm7						; base value #2
-sign1	equ		xmm8						; sign bit #1
-sign2	equ		xmm9						; sign bit #2
-one		equ		xmm10						; 1.0
+scale1	equ		xmm5						; scale value #1
+scale2	equ		xmm6						; scale value #2
+base1	equ		xmm7						; base value #1
+base2	equ		xmm8						; base value #2
+sign1	equ		xmm9						; sign bit #1
+sign2	equ		xmm10						; sign bit #2
+one		equ		xmm11						; 1.0
 result	equ		angle						; result register
 mask	equ		temp1						; data mask
 pi		equ		temp2						; Pi/4
 half	equ		scale						; 0.5
 if x eq s
-dmask	= DMASK_FLT32						; data masko
+dmask	= DMASK_FLT32						; data mask
 smask	= SMASK_FLT32						; sign mask
 nanval	= PNAN_FLT32						; +NaN
 oneval	= PONE_FLT32						; +1.0
@@ -2843,13 +4110,17 @@ end if
 ;---[Computing sin and cos value]----------
 		xor		sval1, sreg1
 		xor		sreg2, sreg2				; sign2 = +1.0
-		test	quadr, 0x2					;
+		test	quadr, 0x2
 		cmovnz	sreg1, sval1				; if (quadr & 0x2 != 0), then sign1 = -sign1
 		cmovnz	sreg2, sval2				; if (quadr & 0x2 != 0), then sign2 = -1.0
+
 		movap#x	base1, angle				; base1 = angle
 		movap#x	base2, half					; base2 = 0.5
 		muls#x	angle, angle				; angle *= angle
-		movap#x	scale, angle				; scale = angle
+		movap#x	scale1, angle
+		muls#x	scale1, base1				; scale1 = angle * base1
+		movap#x	scale2, angle
+		muls#x	scale2, scale2				; scale2 = angle * angle
 		muls#x	base2, angle				; base2 *= angle
 		movint	sign1, sreg1, x				; sign1 = sign bit of sine
 		movint	sign2, sreg2, x				; sign2 = sign bit of cosine
@@ -2858,12 +4129,10 @@ if x eq s
 else if x eq d
 		PAIR8	sincos, angle, x			; compute single polynomial value
 end if
-		muls#x	temp1, scale
-		muls#x	temp2, scale
-		muls#x	temp1, base1
-		muls#x	temp2, scale
-		adds#x	temp1, base1				; temp1 = base1 + base1 * scale * temp1
-		adds#x	temp2, base2				; temp2 = base2 + scale * scale * temp2
+		muls#x	temp1, scale1
+		adds#x	temp1, base1				; temp1 = base1 + scale1 * temp1
+		muls#x	temp2, scale2
+		adds#x	temp2, base2				; temp2 = base2 + scale2 * temp2
 		adds#x	temp2, one					; temp2 += 1.0
 		orp#x	temp1, sign1				; set correct sign to the sine result
 		orp#x	temp2, sign2				; set correct sign to the cosine result
@@ -2873,13 +4142,16 @@ end if
 ;---[Computing cos and sin value]----------
 .xchng:	xor		sval1, sreg1
 		xor		sreg2, sreg2				; sign1 = +1.0
-		test	quadr, 0x2					;
+		test	quadr, 0x2
 		cmovz	sreg1, sval1				; if (quadr & 0x2 == 0), then sign1 = -sign2
 		cmovnz	sreg2, sval2				; if (quadr & 0x2 != 0), then sign2 = -1.0
 		movap#x	base1, angle				; base1 = angle
 		movap#x	base2, half					; base2 = 0.5
 		muls#x	angle, angle				; angle *= angle
-		movap#x	scale, angle				; scale = angle
+		movap#x	scale1, angle
+		muls#x	scale1, base1				; scale1 = angle * base1
+		movap#x	scale2, angle
+		muls#x	scale2, scale2				; scale2 = angle * angle
 		muls#x	base2, angle				; base2 *= angle
 		movint	sign1, sreg1, x				; sign1 = sign bit of sine
 		movint	sign2, sreg2, x				; sign2 = sign bit of cosine
@@ -2888,12 +4160,10 @@ if x eq s
 else if x eq d
 		PAIR8	sincos, angle, x			; compute single polynomial value
 end if
-		muls#x	temp1, scale
-		muls#x	temp2, scale
-		muls#x	temp1, base1
-		muls#x	temp2, scale
-		adds#x	temp1, base1				; temp1 = base1 + base1 * scale * temp1
-		adds#x	temp2, base2				; temp2 = base2 + scale * scale * temp2
+		muls#x	temp1, scale1
+		adds#x	temp1, base1				; temp1 = base1 + scale1 * temp1
+		muls#x	temp2, scale2
+		adds#x	temp2, base2				; temp2 = base2 + scale2 * temp2
 		adds#x	temp2, one					; temp2 += 1.0
 		orp#x	temp1, sign1				; set correct sign to the sine result
 		orp#x	temp2, sign2				; set correct sign to the cosine result
@@ -2970,7 +4240,8 @@ end if
 ;---[Computing tan value]------------------
 		movap#x	base, angle					; base = angle
 		muls#x	angle, angle				; angle *= angle
-		movap#x	scale, angle				; scale = angle
+		movap#x	scale, angle
+		muls#x	scale, base					; scale = angle * base
 		movint	sign, sreg, x				; sign = sign bit
 if x eq s
 	SINGLE16	tan, angle, x				; compute single polynomial value
@@ -2978,8 +4249,7 @@ else if x eq d
 	SINGLE32	tan, angle, x				; compute single polynomial value
 end if
 		muls#x	temp1, scale
-		muls#x	temp1, base
-		adds#x	temp1, base					; temp1 = base + base * scale * temp1
+		adds#x	temp1, base					; temp1 = base + scale * temp1
 		orp#x	temp1, sign					; set correct sign to the result
 		movap#x	result, temp1				; return sign * Tan (Abs (angle))
 		ret
@@ -2987,7 +4257,8 @@ end if
 .cot:	xor		sreg, sval					; sign = -sign
 		movap#x	base, angle					; base = angle
 		muls#x	angle, angle				; angle *= angle
-		movap#x	scale, angle				; scale = angle
+		movap#x	scale, angle
+		muls#x	scale, base					; scale = angle * base
 		movint	sign, sreg, x				; sign = sign bit
 if x eq s
 	SINGLE16	tan, angle, x				; compute single polynomial value
@@ -2995,8 +4266,7 @@ else if x eq d
 	SINGLE32	tan, angle, x				; compute single polynomial value
 end if
 		muls#x	temp1, scale
-		muls#x	temp1, base
-		adds#x	temp1, base					; temp1 = base + base * scale * temp1
+		adds#x	temp1, base					; temp1 = base + scale * temp1
 		orp#x	temp1, sign					; set correct sign to the result
 		movap#x	result, one
 		divs#x	result, temp1				; return sign * 1.0 / Tan (Abs (angle))
@@ -3045,7 +4315,7 @@ phalf	equ		temp2						; +0.5
 mhalf	equ		temp3						; -0.5
 one		equ		temp4						; +1.0
 if x eq s
-dmask	= DMASK_FLT32						; data masko
+dmask	= DMASK_FLT32						; data mask
 smask	= SMASK_FLT32						; sign mask
 nanval	= PNAN_FLT32						; +NaN
 phlfval	= PHALF_FLT32						; +0.5
@@ -3080,7 +4350,8 @@ end if
 ;---[if value <= 0.5]----------------------
 		movap#x	base, value					; base = value
 		muls#x	value, value				; value *= value
-		movap#x	scale, value				; scale = value
+		movap#x	scale, value
+		muls#x	scale, base					; scale = value * base
 		movint	sign, sreg, x				; sign = sign bit
 if x eq s
 	SINGLE16	asin, value, x				; compute single polynomial value
@@ -3088,8 +4359,7 @@ else if x eq d
 	SINGLE32	asin, value, x				; compute single polynomial value
 end if
 		muls#x	temp1, scale
-		muls#x	temp1, base
-		adds#x	temp1, base					; temp1 = base + base * scale * temp1
+		adds#x	temp1, base					; temp1 = base + scale * temp1
 		orp#x	temp1, sign					; set correct sign to the result
 		movap#x	result, temp1				; return sign * ArcSin (Abs (value))
 		ret
@@ -3098,7 +4368,8 @@ end if
 		subs#x	value, one					; value -= 1.0
 		muls#x	value, mhalf				; value *= -0.5
 		sqrts#x	base, value					; base = sqrt (value)
-		movap#x	scale, value				; scale = value
+		movap#x	scale, value
+		muls#x	scale, base					; scale = value * base
 		movint	sign, sreg, x				; sign = sign bit
 if x eq s
 	SINGLE16	asin, value, x				; compute single polynomial value
@@ -3106,8 +4377,7 @@ else if x eq d
 	SINGLE32	asin, value, x				; compute single polynomial value
 end if
 		muls#x	temp1, scale
-		muls#x	temp1, base
-		adds#x	temp1, base					; temp1 = base + base * scale * temp1
+		adds#x	temp1, base					; temp1 = base + scale * temp1
 		adds#x	temp1, temp1				; temp1 += temp1
 		subs#x	temp1, shift				; temp1 -= Pi/2
 		xorp#x	temp1, sign					; set correct sign to the result
@@ -3147,7 +4417,7 @@ phalf	equ		temp2						; +0.5
 mhalf	equ		temp3						; -0.5
 one		equ		temp4						; +1.0
 if x eq s
-dmask	= DMASK_FLT32						; data masko
+dmask	= DMASK_FLT32						; data mask
 smask	= SMASK_FLT32						; sign mask
 nanval	= PNAN_FLT32						; +NaN
 phlfval	= PHALF_FLT32						; +0.5
@@ -3185,7 +4455,8 @@ end if
 		mov		shreg, pi2val				; shreg = Pi/2
 		movap#x	base, value					; base = value
 		muls#x	value, value				; value *= value
-		movap#x	scale, value				; scale = value
+		movap#x	scale, value
+		muls#x	scale, base					; scale = value * base
 		movint	sign, sreg, x				; sign = sign bit
 		movint	shift, shreg, x				; shift = shift value
 if x eq s
@@ -3194,8 +4465,7 @@ else if x eq d
 	SINGLE32	asin, value, x				; compute single polynomial value
 end if
 		muls#x	temp1, scale
-		muls#x	temp1, base
-		adds#x	temp1, base					; temp1 = base + base * scale * temp1
+		adds#x	temp1, base					; temp1 = base + scale * temp1
 		orp#x	temp1, sign					; set correct sign to the result
 		adds#x	temp1, shift
 		movap#x	result, temp1				; return sign * ArcSin (Abs (value)) + shift
@@ -3208,7 +4478,8 @@ end if
 		subs#x	value, one					; value -= 1.0
 		muls#x	value, mhalf				; value *= -0.5
 		sqrts#x	base, value					; base = sqrt (value)
-		movap#x	scale, value				; scale = value
+		movap#x	scale, value
+		muls#x	scale, base					; scale = value * base
 		movint	sign, sreg, x				; sign = sign bit
 		movint	shift, shreg, x				; shift = shift value
 if x eq s
@@ -3217,8 +4488,7 @@ else if x eq d
 	SINGLE32	asin, value, x				; compute single polynomial value
 end if
 		muls#x	temp1, scale
-		muls#x	temp1, base
-		adds#x	temp1, base					; temp1 = base + base * scale * temp1
+		adds#x	temp1, base					; temp1 = base + scale * temp1
 		adds#x	temp1, temp1				; temp1 += temp1
 		orp#x	temp1, sign					; set correct sign to the result
 		adds#x	temp1, shift
@@ -3256,7 +4526,7 @@ result	equ		value						; result register
 mask	equ		temp1						; data mask
 one		equ		temp2						; +1.0
 if x eq s
-dmask	= DMASK_FLT32						; data masko
+dmask	= DMASK_FLT32						; data mask
 smask	= SMASK_FLT32						; sign mask
 oneval	= PONE_FLT32						; +1.0
 pi2val	= PI_HALF_FLT32						; +Pi/2
@@ -3287,7 +4557,8 @@ end if
 		muls#x	base, scale					; base = value / (1.0 + value * value)
 		movap#x	value, one
 		subs#x	value, scale				; value = 1.0 - 1.0 / (1.0 + value * value)
-		movap#x	scale, value				; scale = value
+		movap#x	scale, value
+		muls#x	scale, base					; scale = value * base
 		movint	sign, sreg, x				; sign = sign bit
 if x eq s
 	SINGLE32	atan, value, x				; compute single polynomial value
@@ -3295,8 +4566,7 @@ else if x eq d
 	SINGLE64	atan, value, x				; compute single polynomial value
 end if
 		muls#x	temp1, scale
-		muls#x	temp1, base
-		adds#x	temp1, base					; temp1 = base + base * scale * temp1
+		adds#x	temp1, base					; temp1 = base + scale * temp1
 		orp#x	temp1, sign					; set correct sign to the result
 		movap#x	result, temp1				; return sign * ArcTan (Abs (value))
 		ret
@@ -3309,6 +4579,7 @@ end if
 		divs#x	scale, value				; scale = 1.0 / (1.0 + value * value)
 		muls#x	base, scale					; base = value / (1.0 + value * value)
 		movap#x	value, scale				; value = 1.0 / (1.0 + value * value)
+		muls#x	scale, base					; scale = value * base
 		movint	sign, sreg, x				; sign = sign bit
 if x eq s
 	SINGLE32	atan, value, x				; compute single polynomial value
@@ -3316,8 +4587,7 @@ else if x eq d
 	SINGLE64	atan, value, x				; compute single polynomial value
 end if
 		muls#x	temp1, scale
-		muls#x	temp1, base
-		adds#x	temp1, base					; temp1 = base + base * scale * temp1
+		adds#x	temp1, base					; temp1 = base + scale * temp1
 		subs#x	temp1, shift				; temp1 -= Pi/2
 		xorp#x	temp1, sign					; set correct sign to the result
 		movap#x	result, temp1				; return sign * (ArcTan (Abs (value)) - Pi/2)
@@ -3366,1954 +4636,6 @@ space	= 1 * 8								; stack size required by the procedure
 }
 ArcTan2_flt32:	ATAN2	edx, ecx, s
 ArcTan2_flt64:	ATAN2	rdx, rcx, d
-
-;******************************************************************************;
-;       Exponentiation functions                                               ;
-;******************************************************************************;
-macro	EXP2I	exp, shift, temp, x
-{
-;---[Internal variables]-------------------
-treg	equ		rax							; temporary register
-result	equ		xmm0						; result register
-shiftl	equ		cl							; low part of shift register
-if x eq s
-infval	= PINF_FLT32						; +Inf
-mbits	= MBITS_FLT32						; count of bits into mantissa
-bias	= EBIAS_FLT32						; exponent bias
-else if x eq d
-infval	= PINF_FLT64						; +Inf
-mbits	= MBITS_FLT64						; count of bits into mantissa
-bias	= EBIAS_FLT64						; exponent bias
-end if
-exp_max	= bias								; max exponent
-exp_min	= 1 - bias							; min exponent
-exp_zer	= exp_min - mbits					; min exponent of subnormal value
-;------------------------------------------
-		movsx	temp, exp					; temp = exp
-		cmp		temp, exp_max				; if (temp > exp_max)
-		jg		.inf						;     then go to infinity branch
-		cmp		temp, exp_min				; if (temp < exp_min)
-		jl		.sub						;     then go to subnormal branch
-		add		temp, bias					; temp = exp + bias
-		shl		temp, mbits					; temp <<= mbits
-		movint	result, temp, x				; reinterpret temp as floating-point value
-		ret									; return temp
-;---[Infinity branch]----------------------
-.inf:	initreg	result, treg, infval		; return +Inf
-		ret
-;---[Subnormal branch]---------------------
-.sub:	sub		temp, exp_zer				; if (index < exp_zer)
-		jl		.zero						;     then go to zero branch
-		mov		shift, temp					; shift = temp
-		mov		temp, 1
-		shl		temp, shiftl				; produce subnormal value
-		movint	result, temp, x				; reinterpret temp as floating-point value
-		ret									; return temp
-;---[Zero branch]--------------------------
-.zero:	xorp#x	result, result				; return 0.0
-		ret
-}
-;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	EXPI	exp, exp_min, exp_max, table, x
-{
-;---[Internal variables]-------------------
-treg	equ		rax							; temporary register
-result	equ		xmm0						; result register
-index	equ		rdi							; index register
-if x eq s
-infval	= PINF_FLT32						; +Inf
-bytes	= 4									; array element size (bytes)
-else if x eq d
-infval	= PINF_FLT64						; +Inf
-bytes	= 8									; array element size (bytes)
-end if
-;------------------------------------------
-		movsx	index, exp					; index = exp
-		cmp		index, exp_max				; if (index > exp_max)
-		jg		.inf						;     then go to infinity branch
-		cmp		index, exp_min				; if (index < exp_min)
-		jl		.zero						;     then go to zero branch
-		movs#x	result, [table + index*bytes - exp_min*bytes]	; result = exp[index]
-		ret
-;---[Infinity branch]----------------------
-.inf:	initreg	result, treg, infval		; return +Inf
-		ret
-;---[Zero branch]--------------------------
-.zero:	xorp#x	result, result				; return 0.0
-		ret
-}
-
-;==============================================================================;
-;       Power of 2                                                             ;
-;==============================================================================;
-macro	EXP2_FLT32	iexp
-{
-;---[Internal variables]-------------------
-min		equ		edi							; min exponent value
-underfl	equ		esi							; count of underflow digits
-shift	equ		ecx							; shift value to form subnormal number
-shiftl	equ		cl							; low part of shift register
-array	= exp2_flt32						; pointer to array of coefficients
-mbits	= MBITS_FLT32						; count of bits into mantissa
-bias	= EBIAS_FLT32						; exponent bias
-bytes	= 4									; size of array element (bytes)
-;------------------------------------------
-		movaps	origin, value
-;---[Stage 1]------------------------------
-		movss	temp1, [array + 0 * bytes]	; temp1 = array[0]
-		movss	temp2, [array + 1 * bytes]	; temp2 = array[1]
-		movss	temp3, [array + 2 * bytes]	; temp3 = array[2]
-		movss	temp4, [array + 3 * bytes]	; temp4 = array[3]
-		add		iexp, bias					; iexp += bias
-		mov		underfl, 1
-		mov		min, 1						; min = 1
-		sub		underfl, iexp				; underfl = 1 - iexp
-		xor		shift, shift				; shift = 0
-		cmp		iexp, 1						; if (iexp < min)
-		cmovl	iexp, min					;     iexp = min
-		cmovl	shift, underfl				;     shift = underfl
-		shl		iexp, mbits					; iexp << mbits
-		shr		iexp, shiftl				; iexp >> shift
-		movd	sfactor, iexp				; reinterpret iexp as flt32_t
-		mulss	temp1, value
-		addss	temp1, [array + 4 * bytes]	; temp1 = array[4] + array[0] * value
-		mulss	temp2, value
-		addss	temp2, [array + 5 * bytes]	; temp2 = array[5] + array[1] * value
-		mulss	value, value				; value *= value
-;---[Stage 2]------------------------------
-		mulss	temp2, value
-		addss	temp1, temp2				; temp1 = temp1 + temp2 * value
-		mulss	value, value				; value *= value
-;---[Stage 3]------------------------------
-		mulss	value, temp3
-		addss	value, temp1				; value = temp1 + temp3 * value
-;------------------------------------------
-		mulss	value, origin				; value *= origin
-		addss	value, temp4				; value += temp4
-}
-;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	EXP2_FLT64	iexp
-{
-;---[Internal variables]-------------------
-min		equ		rdi							; min exponent value
-underfl	equ		rsi							; count of underflow digits
-shift	equ		rcx							; shift value to form subnormal number
-shiftl	equ		cl							; low part of shift register
-array	= exp2_flt64						; pointer to array of coefficients
-mbits	= MBITS_FLT64						; count of bits into mantissa
-bias	= EBIAS_FLT64						; exponent bias
-bytes	= 8									; size of array element (bytes)
-;------------------------------------------
-		movapd	origin, value
-;---[Stage 1]------------------------------
-		movsd	temp1, [array + 0 * bytes]	; temp1 = array[0]
-		movsd	temp2, [array + 1 * bytes]	; temp2 = array[1]
-		movsd	temp3, [array + 2 * bytes]	; temp3 = array[2]
-		movsd	temp4, [array + 3 * bytes]	; temp4 = array[3]
-		movsd	temp5, [array + 4 * bytes]	; temp5 = array[4]
-		movsd	temp6, [array + 5 * bytes]	; temp6 = array[5]
-		movsd	temp7, [array + 6 * bytes]	; temp7 = array[6]
-		add		iexp, bias					; iexp += bias
-		mov		underfl, 1
-		mov		min, 1						; min = 1
-		sub		underfl, iexp				; underfl = 1 - iexp
-		xor		shift, shift				; shift = 0
-		cmp		iexp, 1						; if (iexp < min)
-		cmovl	iexp, min					;     iexp = min
-		cmovl	shift, underfl				;     shift = underfl
-		shl		iexp, mbits					; iexp << mbits
-		shr		iexp, shiftl				; iexp >> shift
-		movq	sfactor, iexp				; reinterpret iexp as flt64_t
-		mulsd	temp1, value
-		addsd	temp1, [array + 7 * bytes]	; temp1 = array[7] + array[0] * value
-		mulsd	temp2, value
-		addsd	temp2, [array + 8 * bytes]	; temp2 = array[8] + array[1] * value
-		mulsd	temp3, value
-		addsd	temp3, [array + 9 * bytes]	; temp3 = array[9] + array[2] * value
-		mulsd	temp4, value
-		addsd	temp4, [array + 10 * bytes]	; temp4 = array[10] + array[3] * value
-		mulsd	temp5, value
-		addsd	temp5, [array + 11 * bytes]	; temp5 = array[11] + array[4] * value
-		mulsd	value, value				; value *= value
-;---[Stage 2]------------------------------
-		mulsd	temp2, value
-		addsd	temp1, temp2				; temp1 = temp1 + temp2 * value
-		mulsd	temp4, value
-		addsd	temp3, temp4				; temp3 = temp3 + temp4 * value
-		mulsd	temp6, value
-		addsd	temp5, temp6				; temp5 = temp5 + temp6 * value
-		mulsd	value, value				; value *= value
-;---[Stage 3]------------------------------
-		mulsd	temp3, value
-		addsd	temp1, temp3				; temp1 = temp1 + temp3 * value
-		mulsd	value, value				; value *= value
-;---[Stage 4]------------------------------
-		mulsd	value, temp5
-		addsd	value, temp1				; value = temp1 + temp5 * value
-;------------------------------------------
-		mulsd	value, origin				; value *= origin
-		addsd	value, temp7				; value += temp7
-}
-;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	EXP2	iexp, x
-{
-;---[Parameters]---------------------------
-value	equ		xmm0						; value to compute exponent function
-;---[Internal variables]-------------------
-treg	equ		rdx							; temporary register
-temp1	equ		xmm1						; temporary register #1
-temp2	equ		xmm2						; temporary register #2
-temp3	equ		xmm3						; temporary register #3
-temp4	equ		xmm4						; temporary register #4
-temp5	equ		xmm5						; temporary register #5
-temp6	equ		xmm6						; temporary register #6
-temp7	equ		xmm7						; temporary register #7
-origin	equ		xmm8						; original value
-sfactor	equ		xmm9						; scale factor
-val1	equ		xmm10						; temporary register #1 that hold value
-val2	equ		xmm11						; temporary register #2 that hold value
-magic	equ		temp1						; magic number to get integer part
-ipart	equ		temp2						; integer part of value
-max		equ		temp3						; max exponent value
-min		equ		temp4						; max exponent value
-log		equ		temp5						; ln(2)
-stack	equ		rsp							; stack pointer
-s_value	equ		stack - 2 * 8				; stack position of "value" variable
-s_scale	equ		stack - 1 * 8				; stack position of "scale" variable
-if x eq s
-magval	= MAGIC_FLT32						; magic number to get integer part from value
-infval	= PINF_FLT32						; +Inf
-moneval	= MONE_FLT32						; -1.0
-exp_min	= 0xC3150000						; min exponent value
-exp_max	= 0x42FE0000						; max exponent value
-else if x eq d
-magval	= MAGIC_FLT64						; magic number to get integer part from value
-infval	= PINF_FLT64						; +Inf
-moneval	= MONE_FLT64						; -1.0
-exp_min	= 0xC090C80000000000				; min exponent value
-exp_max	= 0x408FF80000000000				; max exponent value
-end if
-ln2		= 0x3FE62E42FEFA39EF				; ln(2)
-;------------------------------------------
-		initreg	max, treg, exp_max			; load max exponent value
-		initreg	min, treg, exp_min			; load max exponent value
-		initreg	magic, treg, magval			; load magic number
-		movap#x	ipart, value				; ipart = value
-		comis#x	value, max					; if (value > max)
-		ja		.inf						;     return Inf
-		comis#x	value, min					; if (value < min)
-		jb		.zero						;     return 0.0
-		adds#x	ipart, magic
-		movint	iexp, ipart, x				; iexp = rint (value)
-if x eq s
-		cwde
-else if x eq d
-		cdqe
-end if
-		subs#x	ipart, magic				; ipart = rint (value)
-		subs#x	value, ipart				; value = fractional_part (value)
-if x eq s
-;---[Single precision code]----------------
-		initreg	log, treg, ln2				; log = ln(2)
-	cvtss2sd	val1, value
-		mulsd	val1, log					; val1 = value * ln(2)
-		movapd	val2, val1
-		mulsd	val2, val2					; val2 = val1 ^ 2
-	EXP2_FLT32	iexp						; compute exp(value) and sfactor
-	cvtss2sd	value, value
-	cvtss2sd	sfactor, sfactor
-		mulsd	val2, value
-		addsd	val1, val2					; val1 = value + value ^ 2 * R
-		mulsd	val1, sfactor				; val1 *= scale
-		addsd	val1, sfactor				; val1 = val1 * sfactor + sfactor
-	cvtsd2ss	value, val1					; return val1
-		ret
-else if x eq d
-;---[Double precision code]----------------
-		fldln2								; log = ln(2)
-		movsd	[s_value], value
-		fmul	qword [s_value]				; val1 = value * ln(2)
-		fld		st0
-		fmul	st0, st0					; val2 = val1 ^ 2
-	EXP2_FLT64	iexp						; compute exp(value) and sfactor
-		movsd	[s_value], value
-		movsd	[s_scale], sfactor
-		fld		qword [s_value]
-		fmulp	st1, st0
-		faddp	st1, st0					; val1 = value + value ^ 2 * R
-		fld		qword [s_scale]
-		fmul	st1, st0					; val1 *= scale
-		faddp	st1, st0					; val1 = val1 * sfactor + sfactor
-		fstp	qword [s_value]
-		movsd	value, [s_value]			; return val1
-		ret
-end if
-;----[Return inf]--------------------------
-.inf:	initreg	value, treg, infval			; return +Inf
-		ret
-;----[Return zero]-------------------------
-.zero:	xorp#x	value, value				; return 0.0
-		ret
-}
-;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	EXP2M1	iexp, x
-{
-;---[Parameters]---------------------------
-value	equ		xmm0						; value to compute exponent function
-;---[Internal variables]-------------------
-treg	equ		rdx							; temporary register
-temp1	equ		xmm1						; temporary register #1
-temp2	equ		xmm2						; temporary register #2
-temp3	equ		xmm3						; temporary register #3
-temp4	equ		xmm4						; temporary register #4
-temp5	equ		xmm5						; temporary register #5
-temp6	equ		xmm6						; temporary register #6
-temp7	equ		xmm7						; temporary register #7
-origin	equ		xmm8						; original value
-sfactor	equ		xmm9						; scale factor
-val1	equ		xmm10						; temporary register #1 that hold value
-val2	equ		xmm11						; temporary register #2 that hold value
-magic	equ		temp1						; magic number to get integer part
-ipart	equ		temp2						; integer part of value
-max		equ		temp3						; max exponent value
-min		equ		temp4						; max exponent value
-log		equ		temp5						; ln(2)
-one		equ		temp6						; 1.0
-stack	equ		rsp							; stack pointer
-s_value	equ		stack - 2 * 8				; stack position of "value" variable
-s_scale	equ		stack - 1 * 8				; stack position of "scale" variable
-if x eq s
-magval	= MAGIC_FLT32						; magic number to get integer part from value
-infval	= PINF_FLT32						; +Inf
-moneval	= MONE_FLT32						; -1.0
-exp_min	= 0xC3150000						; min exponent value
-exp_max	= 0x42FE0000						; max exponent value
-else if x eq d
-magval	= MAGIC_FLT64						; magic number to get integer part from value
-infval	= PINF_FLT64						; +Inf
-moneval	= MONE_FLT64						; -1.0
-exp_min	= 0xC090C80000000000				; min exponent value
-exp_max	= 0x408FF80000000000				; max exponent value
-end if
-oneval	= PONE_FLT64						; +1.0
-ln2		= 0x3FE62E42FEFA39EF				; ln(2)
-;------------------------------------------
-		initreg	max, treg, exp_max			; load max exponent value
-		initreg	min, treg, exp_min			; load max exponent value
-		initreg	magic, treg, magval			; load magic number
-		movap#x	ipart, value				; ipart = value
-		comis#x	value, max					; if (value > max)
-		ja		.inf						;     return Inf
-		comis#x	value, min					; if (value < min)
-		jb		.mone						;     return -1.0
-		adds#x	ipart, magic
-		movint	iexp, ipart, x				; iexp = rint (value)
-if x eq s
-		cwde
-else if x eq d
-		cdqe
-end if
-		subs#x	ipart, magic				; ipart = rint (value)
-		subs#x	value, ipart				; value = fractional_part (value)
-if x eq s
-;---[Single precision code]----------------
-		initreg	log, treg, ln2				; log = ln(2)
-	cvtss2sd	val1, value
-		mulsd	val1, log					; val1 = value * ln(2)
-		movapd	val2, val1
-		mulsd	val2, val2					; val2 = val1 ^ 2
-	EXP2_FLT32	iexp						; compute exp(value) and sfactor
-	cvtss2sd	value, value
-	cvtss2sd	sfactor, sfactor
-		mulsd	val2, value
-		addsd	val1, val2					; val1 = value + value ^ 2 * R
-		initreg	one, treg, oneval			; one = 1.0
-		mulsd	val1, sfactor				; val1 *= scale
-		subsd	sfactor, one				; sfactor -= 1.0
-		addsd	val1, sfactor				; val1 = val1 * sfactor + (sfactor - 1)
-	cvtsd2ss	value, val1					; return val1
-		ret
-else if x eq d
-;---[Double precision code]----------------
-		fldln2								; log = ln(2)
-		movsd	[s_value], value
-		fmul	qword [s_value]				; val1 = value * ln(2)
-		fld		st0
-		fmul	st0, st0					; val2 = val1 ^ 2
-	EXP2_FLT64	iexp						; compute exp(value) and sfactor
-		movsd	[s_value], value
-		movsd	[s_scale], sfactor
-		fld		qword [s_value]
-		fmulp	st1, st0
-		faddp	st1, st0					; val1 = value + value ^ 2 * R
-		fld1
-		fld		qword [s_scale]
-		fmul	st2, st0					; val1 *= scale
-		fsubrp	st1, st0					; sfactor -= 1.0
-		faddp	st1, st0					; val1 = val1 * sfactor + (sfactor - 1)
-		fstp	qword [s_value]
-		movsd	value, [s_value]			; return val1
-		ret
-end if
-;----[Return inf]--------------------------
-.inf:	initreg	value, treg, infval			; return +Inf
-		ret
-;----[Return minus one]--------------------
-.mone:	initreg	value, treg, moneval		; return -1.0
-		ret
-}
-;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-Exp2_int:
-;---[Parameters]---------------------------
-exp		equ		dil							; exponent value
-;---[Internal variables]-------------------
-shift	equ		cl							; binary shift value
-result	equ		rax							; result register
-maxval	= 64								; max exponent value
-;------------------------------------------
-		mov		shift, exp					; shift = exp
-		cmp		exp, maxval					; if (shift >= maxval)
-		jae		.ovfl						;     then go to overflow branch
-		mov		result, 1					; result = 1
-		shl		result, shift				; return (1 <<= shift)
-		ret
-;---[Overflow branch]----------------------
-.ovfl:	xor		result, result				; return 0 (means result overflow)
-		ret
-
-; Integer power of 2
-Exp2i_flt32:	EXP2I	dil, ecx, eax, s
-Exp2i_flt64:	EXP2I	di, rcx, rax, d
-
-; Real power of 2
-Exp2_flt32:		EXP2	eax, s
-Exp2_flt64:		EXP2	rax, d
-Exp2m1_flt32:	EXP2M1	eax, s
-Exp2m1_flt64:	EXP2M1	rax, d
-
-;==============================================================================;
-;       Power of 10                                                            ;
-;==============================================================================;
-macro	EXP10_FLT32	iexp
-{
-;---[Internal variables]-------------------
-array	= exp10_flt32						; pointer to array of coefficients
-offst	= 46								; offset of 10^0 from the beginning of table
-bytes	= 4									; size of array element (bytes)
-;------------------------------------------
-		movaps	origin, value
-;---[Stage 1]------------------------------
-		movss	temp1, [array + 0 * bytes]	; temp1 = array[0]
-		movss	temp2, [array + 1 * bytes]	; temp2 = array[1]
-		movss	temp3, [array + 2 * bytes]	; temp3 = array[2]
-		movss	temp4, [array + 3 * bytes]	; temp4 = array[3]
-		movss	sfactor, [ten_table_flt32 + iexp * bytes + offst * bytes]
-		mulss	temp1, value
-		addss	temp1, [array + 4 * bytes]	; temp1 = array[4] + array[0] * value
-		mulss	temp2, value
-		addss	temp2, [array + 5 * bytes]	; temp2 = array[5] + array[1] * value
-		mulss	temp3, value
-		addss	temp3, [array + 6 * bytes]	; temp3 = array[6] + array[2] * value
-		mulss	value, value				; value *= value
-;---[Stage 2]------------------------------
-		mulss	temp2, value
-		addss	temp1, temp2				; temp1 = temp1 + temp2 * value
-		mulss	value, value				; value *= value
-;---[Stage 3]------------------------------
-		mulss	value, temp3
-		addss	value, temp1				; value = temp1 + temp3 * value
-;------------------------------------------
-		mulss	value, origin				; value *= origin
-		addss	value, temp4				; value += temp4
-}
-;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	EXP10_FLT64	iexp
-{
-;---[Internal variables]-------------------
-array	= exp10_flt64						; pointer to array of coefficients
-offst	= 324								; offset of 10^0 from the beginning of table
-bytes	= 8									; size of array element (bytes)
-;------------------------------------------
-		movapd	origin, value
-;---[Stage 1]------------------------------
-		movsd	temp1, [array + 0 * bytes]	; temp1 = array[0]
-		movsd	temp2, [array + 1 * bytes]	; temp2 = array[1]
-		movsd	temp3, [array + 2 * bytes]	; temp3 = array[2]
-		movsd	temp4, [array + 3 * bytes]	; temp4 = array[3]
-		movsd	temp5, [array + 4 * bytes]	; temp5 = array[4]
-		movsd	temp6, [array + 5 * bytes]	; temp6 = array[5]
-		movsd	temp7, [array + 6 * bytes]	; temp7 = array[6]
-		movsd	temp8, [array + 7 * bytes]	; temp8 = array[7]
-		movsd	sfactor, [ten_table_flt64 + iexp * bytes + offst * bytes]
-		mulsd	temp1, value
-		addsd	temp1, [array + 8 * bytes]	; temp1 = array[8] + array[0] * value
-		mulsd	temp2, value
-		addsd	temp2, [array + 9 * bytes]	; temp2 = array[9] + array[1] * value
-		mulsd	temp3, value
-		addsd	temp3, [array + 10 * bytes]	; temp3 = array[10] + array[2] * value
-		mulsd	temp4, value
-		addsd	temp4, [array + 11 * bytes]	; temp4 = array[11] + array[3] * value
-		mulsd	temp5, value
-		addsd	temp5, [array + 12 * bytes]	; temp5 = array[12] + array[4] * value
-		mulsd	temp6, value
-		addsd	temp6, [array + 13 * bytes]	; temp6 = array[13] + array[5] * value
-		mulsd	value, value				; value *= value
-;---[Stage 2]------------------------------
-		mulsd	temp2, value
-		addsd	temp1, temp2				; temp1 = temp1 + temp2 * value
-		mulsd	temp4, value
-		addsd	temp3, temp4				; temp3 = temp3 + temp4 * value
-		mulsd	temp6, value
-		addsd	temp5, temp6				; temp5 = temp5 + temp6 * value
-		mulsd	value, value				; value *= value
-;---[Stage 3]------------------------------
-		mulsd	temp3, value
-		addsd	temp1, temp3				; temp1 = temp1 + temp3 * value
-		mulsd	temp7, value
-		addsd	temp5, temp7				; temp5 = temp5 + temp7 * value
-		mulsd	value, value				; value *= value
-;---[Stage 4]------------------------------
-		mulsd	value, temp5
-		addsd	value, temp1				; value = temp1 + temp5 * value
-;------------------------------------------
-		mulsd	value, origin				; value *= origin
-		addsd	value, temp8				; value += temp8
-}
-;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	EXP10	iexp, x
-{
-;---[Parameters]---------------------------
-value	equ		xmm0						; value to compute exponent function
-;---[Internal variables]-------------------
-treg	equ		rdx							; temporary register
-temp1	equ		xmm1						; temporary register #1
-temp2	equ		xmm2						; temporary register #2
-temp3	equ		xmm3						; temporary register #3
-temp4	equ		xmm4						; temporary register #4
-temp5	equ		xmm5						; temporary register #5
-temp6	equ		xmm6						; temporary register #6
-temp7	equ		xmm7						; temporary register #7
-temp8	equ		xmm8						; temporary register #8
-origin	equ		xmm9						; original value
-sfactor	equ		xmm10						; scale factor
-val1	equ		xmm11						; temporary register #1 that hold value
-val2	equ		xmm12						; temporary register #2 that hold value
-magic	equ		temp1						; magic number to get integer part
-ipart	equ		temp2						; integer part of value
-max		equ		temp3						; max exponent value
-min		equ		temp4						; max exponent value
-log		equ		temp5						; ln(10) / 2
-stack	equ		rsp							; stack pointer
-s_value	equ		stack - 2 * 8				; stack position of "value" variable
-s_scale	equ		stack - 1 * 8				; stack position of "scale" variable
-if x eq s
-magval	= MAGIC_FLT32						; magic number to get integer part from value
-infval	= PINF_FLT32						; +Inf
-moneval	= MONE_FLT32						; -1.0
-exp_min	= 0xC2380000						; min exponent value
-exp_max	= 0x421C0000						; max exponent value
-else if x eq d
-magval	= MAGIC_FLT64						; magic number to get integer part from value
-infval	= PINF_FLT64						; +Inf
-moneval	= MONE_FLT64						; -1.0
-exp_min	= 0xC074400000000000				; min exponent value
-exp_max	= 0x4073500000000000				; max exponent value
-end if
-ln10	= 0x3FF26BB1BBB55516				; ln(10) / 2
-;------------------------------------------
-		initreg	max, treg, exp_max			; load max exponent value
-		initreg	min, treg, exp_min			; load max exponent value
-		initreg	magic, treg, magval			; load magic number
-		movap#x	ipart, value				; ipart = value
-		comis#x	value, max					; if (value > max)
-		ja		.inf						;     return Inf
-		comis#x	value, min					; if (value < min)
-		jb		.zero						;     return 0.0
-		adds#x	ipart, magic
-		movint	iexp, ipart, x				; iexp = rint (value)
-if x eq s
-		cwde
-else if x eq d
-		cdqe
-end if
-		subs#x	ipart, magic				; ipart = rint (value)
-		subs#x	value, ipart				; value = fractional_part (value)
-if x eq s
-;---[Single precision code]----------------
-		initreg	log, treg, ln10				; log = ln(10) / 2
-	cvtss2sd	val1, value
-		mulsd	val1, log					; val1 = value * ln(10) / 2
-		movapd	val2, val1
-		mulsd	val2, val2					; val2 = val1 ^ 2
-	EXP10_FLT32	iexp						; compute exp(value) and sfactor
-	cvtss2sd	value, value
-	cvtss2sd	sfactor, sfactor
-		mulsd	val2, value
-		addsd	val1, val2					; val1 = value + value ^ 2 * R
-		movapd	val2, val1
-		mulsd	val1, val1
-		addsd	val2, val2
-		addsd	val1, val2					; val1 = val1 ^ 2 + val1 * 2
-		mulsd	val1, sfactor				; val1 *= scale
-		addsd	val1, sfactor				; val1 = val1 * sfactor + sfactor
-	cvtsd2ss	value, val1					; return val1
-		ret
-else if x eq d
-;---[Double precision code]----------------
-		fld		tbyte [.logt]				; log = ln(10) / 2
-		movsd	[s_value], value
-		fmul	qword [s_value]				; val1 = value * ln(10) / 2
-		fld		st0
-		fmul	st0, st0					; val2 = val1 ^ 2
-	EXP10_FLT64	iexp						; compute exp(value) and sfactor
-		movsd	[s_value], value
-		movsd	[s_scale], sfactor
-		fld		qword [s_value]
-		fmulp	st1, st0
-		faddp	st1, st0					; val1 = value + value ^ 2 * R
-		fld		st0
-		fmul	st1, st0
-		fadd	st0, st0
-		faddp	st1, st0					; val1 = val1 ^ 2 + val1 * 2
-		fld		qword [s_scale]
-		fmul	st1, st0					; val1 *= scale
-		faddp	st1, st0					; val1 = val1 * sfactor + sfactor
-		fstp	qword [s_value]
-		movsd	value, [s_value]			; return val1
-		ret
-end if
-;----[Return inf]--------------------------
-.inf:	initreg	value, treg, infval			; return +Inf
-		ret
-;----[Return zero]-------------------------
-.zero:	xorp#x	value, value				; return 0.0
-		ret
-.logt:	dt		1.1512925464970228420089957	; ln(10) / 2
-}
-;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	EXP10M1	iexp, x
-{
-;---[Parameters]---------------------------
-value	equ		xmm0						; value to compute exponent function
-;---[Internal variables]-------------------
-treg	equ		rdx							; temporary register
-temp1	equ		xmm1						; temporary register #1
-temp2	equ		xmm2						; temporary register #2
-temp3	equ		xmm3						; temporary register #3
-temp4	equ		xmm4						; temporary register #4
-temp5	equ		xmm5						; temporary register #5
-temp6	equ		xmm6						; temporary register #6
-temp7	equ		xmm7						; temporary register #7
-temp8	equ		xmm8						; temporary register #8
-origin	equ		xmm9						; original value
-sfactor	equ		xmm10						; scale factor
-val1	equ		xmm11						; temporary register #1 that hold value
-val2	equ		xmm12						; temporary register #2 that hold value
-magic	equ		temp1						; magic number to get integer part
-ipart	equ		temp2						; integer part of value
-max		equ		temp3						; max exponent value
-min		equ		temp4						; max exponent value
-log		equ		temp5						; ln(10) / 2
-one		equ		temp6						; 1.0
-stack	equ		rsp							; stack pointer
-s_value	equ		stack - 2 * 8				; stack position of "value" variable
-s_scale	equ		stack - 1 * 8				; stack position of "scale" variable
-if x eq s
-magval	= MAGIC_FLT32						; magic number to get integer part from value
-infval	= PINF_FLT32						; +Inf
-moneval	= MONE_FLT32						; -1.0
-exp_min	= 0xC2380000						; min exponent value
-exp_max	= 0x421C0000						; max exponent value
-else if x eq d
-magval	= MAGIC_FLT64						; magic number to get integer part from value
-infval	= PINF_FLT64						; +Inf
-moneval	= MONE_FLT64						; -1.0
-exp_min	= 0xC074400000000000				; min exponent value
-exp_max	= 0x4073500000000000				; max exponent value
-end if
-oneval	= PONE_FLT64						; +1.0
-ln10	= 0x3FF26BB1BBB55516				; ln(10) / 2
-;------------------------------------------
-		initreg	max, treg, exp_max			; load max exponent value
-		initreg	min, treg, exp_min			; load max exponent value
-		initreg	magic, treg, magval			; load magic number
-		movap#x	ipart, value				; ipart = value
-		comis#x	value, max					; if (value > max)
-		ja		.inf						;     return Inf
-		comis#x	value, min					; if (value < min)
-		jb		.mone						;     return -1.0
-		adds#x	ipart, magic
-		movint	iexp, ipart, x				; iexp = rint (value)
-if x eq s
-		cwde
-else if x eq d
-		cdqe
-end if
-		subs#x	ipart, magic				; ipart = rint (value)
-		subs#x	value, ipart				; value = fractional_part (value)
-if x eq s
-;---[Single precision code]----------------
-		initreg	log, treg, ln10				; log = ln(10) / 2
-	cvtss2sd	val1, value
-		mulsd	val1, log					; val1 = value * ln(10) / 2
-		movapd	val2, val1
-		mulsd	val2, val2					; val2 = val1 ^ 2
-	EXP10_FLT32	iexp						; compute exp(value) and sfactor
-	cvtss2sd	value, value
-	cvtss2sd	sfactor, sfactor
-		mulsd	val2, value
-		addsd	val1, val2					; val1 = value + value ^ 2 * R
-		movapd	val2, val1
-		mulsd	val1, val1
-		addsd	val2, val2
-		addsd	val1, val2					; val1 = val1 ^ 2 + val1 * 2
-		initreg	one, treg, oneval			; one = 1.0
-		mulsd	val1, sfactor				; val1 *= scale
-		subsd	sfactor, one				; sfactor -= 1.0
-		addsd	val1, sfactor				; val1 = val1 * sfactor + (sfactor - 1)
-	cvtsd2ss	value, val1					; return val1
-		ret
-else if x eq d
-;---[Double precision code]----------------
-		fld		tbyte [.logt]				; log = ln(10) / 2
-		movsd	[s_value], value
-		fmul	qword [s_value]				; val1 = value * ln(10) / 2
-		fld		st0
-		fmul	st0, st0					; val2 = val1 ^ 2
-	EXP10_FLT64	iexp						; compute exp(value) and sfactor
-		movsd	[s_value], value
-		movsd	[s_scale], sfactor
-		fld		qword [s_value]
-		fmulp	st1, st0
-		faddp	st1, st0					; val1 = value + value ^ 2 * R
-		fld		st0
-		fmul	st1, st0
-		fadd	st0, st0
-		faddp	st1, st0					; val1 = val1 ^ 2 + val1 * 2
-		fld1
-		fld		qword [s_scale]
-		fmul	st2, st0					; val1 *= scale
-		fsubrp	st1, st0					; sfactor -= 1.0
-		faddp	st1, st0					; val1 = val1 * sfactor + (sfactor - 1)
-		fstp	qword [s_value]
-		movsd	value, [s_value]			; return val1
-		ret
-end if
-;----[Return inf]--------------------------
-.inf:	initreg	value, treg, infval			; return +Inf
-		ret
-;----[Return minus one]--------------------
-.mone:	initreg	value, treg, moneval		; return -1.0
-		ret
-.logt:	dt		1.1512925464970228420089957	; ln(10) / 2
-}
-;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-Exp10_int:
-;---[Parameters]---------------------------
-exp		equ		dil							; exponent value
-;---[Internal variables]-------------------
-result	equ		rax							; result register
-index	equ		rdi							; index register
-max		equ		rsi							; register which holds max exponent value
-exp_max	= 20								; max exponent value
-;------------------------------------------
-		movsx	index, exp					; index = exp
-		mov		max, exp_max				; max = max exponent value
-		cmp		index, exp_max				; if (index > exp_max)
-		cmova	index, max					;     index = exp_max
-		mov		result, [ten_table_int+index*8]; return ten_table [index]
-		ret
-
-; Integer power of 10
-Exp10i_flt32:	EXPI	dil, -46, +39, ten_table_flt32, s
-Exp10i_flt64:	EXPI	di, -324, +309, ten_table_flt64, d
-
-; Real power of 10
-Exp10_flt32:	EXP10	eax, s
-Exp10_flt64:	EXP10	rax, d
-Exp10m1_flt32:	EXP10M1	eax, s
-Exp10m1_flt64:	EXP10M1	rax, d
-
-;==============================================================================;
-;       Power of E                                                             ;
-;==============================================================================;
-macro	EXPE_FLT32	iexp
-{
-;---[Internal variables]-------------------
-array	= exp_flt32							; pointer to array of coefficients
-offst	= 104								; offset of e^0 from the beginning of table
-bytes	= 4									; size of array element (bytes)
-;------------------------------------------
-		movaps	origin, value
-;---[Stage 1]------------------------------
-		movss	temp1, [array + 0 * bytes]	; temp1 = array[0]
-		movss	temp2, [array + 1 * bytes]	; temp2 = array[1]
-		movss	temp3, [array + 2 * bytes]	; temp3 = array[2]
-		movss	temp4, [array + 3 * bytes]	; temp4 = array[3]
-		movss	sfactor, [exp_table_flt32 + iexp * bytes + offst * bytes]
-		mulss	temp1, value
-		addss	temp1, [array + 4 * bytes]	; temp1 = array[4] + array[0] * value
-		mulss	temp2, value
-		addss	temp2, [array + 5 * bytes]	; temp2 = array[5] + array[1] * value
-		mulss	temp3, value
-		addss	temp3, [array + 6 * bytes]	; temp3 = array[6] + array[2] * value
-		mulss	value, value				; value *= value
-;---[Stage 2]------------------------------
-		mulss	temp2, value
-		addss	temp1, temp2				; temp1 = temp1 + temp2 * value
-		mulss	value, value				; value *= value
-;---[Stage 3]------------------------------
-		mulss	value, temp3
-		addss	value, temp1				; value = temp1 + temp3 * value
-;------------------------------------------
-		mulss	value, origin				; value *= origin
-		addss	value, temp4				; value += temp4
-}
-;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	EXPE_FLT64	iexp
-{
-;---[Internal variables]-------------------
-array	= exp_flt64							; pointer to array of coefficients
-offst	= 746								; offset of e^0 from the beginning of table
-bytes	= 8									; size of array element (bytes)
-;------------------------------------------
-		movapd	origin, value
-;---[Stage 1]------------------------------
-		movsd	temp1, [array + 0 * bytes]	; temp1 = array[0]
-		movsd	temp2, [array + 1 * bytes]	; temp2 = array[1]
-		movsd	temp3, [array + 2 * bytes]	; temp3 = array[2]
-		movsd	temp4, [array + 3 * bytes]	; temp4 = array[3]
-		movsd	temp5, [array + 4 * bytes]	; temp5 = array[4]
-		movsd	temp6, [array + 5 * bytes]	; temp6 = array[5]
-		movsd	temp7, [array + 6 * bytes]	; temp7 = array[6]
-		movsd	temp8, [array + 7 * bytes]	; temp8 = array[7]
-		movsd	sfactor, [exp_table_flt64 + iexp * bytes + offst * bytes]
-		mulsd	temp1, value
-		addsd	temp1, [array + 8 * bytes]	; temp1 = array[8] + array[0] * value
-		mulsd	temp2, value
-		addsd	temp2, [array + 9 * bytes]	; temp2 = array[9] + array[1] * value
-		mulsd	temp3, value
-		addsd	temp3, [array + 10 * bytes]	; temp3 = array[10] + array[2] * value
-		mulsd	temp4, value
-		addsd	temp4, [array + 11 * bytes]	; temp4 = array[11] + array[3] * value
-		mulsd	temp5, value
-		addsd	temp5, [array + 12 * bytes]	; temp5 = array[12] + array[4] * value
-		mulsd	temp6, value
-		addsd	temp6, [array + 13 * bytes]	; temp6 = array[13] + array[5] * value
-		mulsd	value, value				; value *= value
-;---[Stage 2]------------------------------
-		mulsd	temp2, value
-		addsd	temp1, temp2				; temp1 = temp1 + temp2 * value
-		mulsd	temp4, value
-		addsd	temp3, temp4				; temp3 = temp3 + temp4 * value
-		mulsd	temp6, value
-		addsd	temp5, temp6				; temp5 = temp5 + temp6 * value
-		mulsd	value, value				; value *= value
-;---[Stage 3]------------------------------
-		mulsd	temp3, value
-		addsd	temp1, temp3				; temp1 = temp1 + temp3 * value
-		mulsd	temp7, value
-		addsd	temp5, temp7				; temp5 = temp5 + temp7 * value
-		mulsd	value, value				; value *= value
-;---[Stage 4]------------------------------
-		mulsd	value, temp5
-		addsd	value, temp1				; value = temp1 + temp5 * value
-;------------------------------------------
-		mulsd	value, origin				; value *= origin
-		addsd	value, temp8				; value += temp8
-}
-;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	EXPE	iexp, x
-{
-;---[Parameters]---------------------------
-value	equ		xmm0						; value to compute exponent function
-;---[Internal variables]-------------------
-treg	equ		rdx							; temporary register
-temp1	equ		xmm1						; temporary register #1
-temp2	equ		xmm2						; temporary register #2
-temp3	equ		xmm3						; temporary register #3
-temp4	equ		xmm4						; temporary register #4
-temp5	equ		xmm5						; temporary register #5
-temp6	equ		xmm6						; temporary register #6
-temp7	equ		xmm7						; temporary register #7
-temp8	equ		xmm8						; temporary register #8
-origin	equ		xmm9						; original value
-sfactor	equ		xmm10						; scale factor
-val1	equ		xmm11						; temporary register #1 that hold value
-val2	equ		xmm12						; temporary register #2 that hold value
-magic	equ		temp1						; magic number to get integer part
-ipart	equ		temp2						; integer part of value
-max		equ		temp3						; max exponent value
-min		equ		temp4						; max exponent value
-stack	equ		rsp							; stack pointer
-s_value	equ		stack - 2 * 8				; stack position of "value" variable
-s_scale	equ		stack - 1 * 8				; stack position of "scale" variable
-if x eq s
-magval	= MAGIC_FLT32						; magic number to get integer part from value
-infval	= PINF_FLT32						; +Inf
-moneval	= MONE_FLT32						; -1.0
-exp_min	= 0xC2D00000						; min exponent value
-exp_max	= 0x42B20000						; max exponent value
-else if x eq d
-magval	= MAGIC_FLT64						; magic number to get integer part from value
-infval	= PINF_FLT64						; +Inf
-moneval	= MONE_FLT64						; -1.0
-exp_min	= 0xC087500000000000				; min exponent value
-exp_max	= 0x4086300000000000				; max exponent value
-end if
-;------------------------------------------
-		initreg	max, treg, exp_max			; load max exponent value
-		initreg	min, treg, exp_min			; load max exponent value
-		initreg	magic, treg, magval			; load magic number
-		movap#x	ipart, value				; ipart = value
-		comis#x	value, max					; if (value > max)
-		ja		.inf						;     return Inf
-		comis#x	value, min					; if (value < min)
-		jb		.zero						;     return 0.0
-		adds#x	ipart, magic
-		movint	iexp, ipart, x				; iexp = rint (value)
-if x eq s
-		cwde
-else if x eq d
-		cdqe
-end if
-		subs#x	ipart, magic				; ipart = rint (value)
-		subs#x	value, ipart				; value = fractional_part (value)
-if x eq s
-;---[Single precision code]----------------
-	cvtss2sd	val1, value					; val1 = value
-		movapd	val2, val1
-		mulsd	val2, val2					; val2 = val1 ^ 2
-	EXPE_FLT32	iexp						; compute exp(value) and sfactor
-	cvtss2sd	value, value
-	cvtss2sd	sfactor, sfactor
-		mulsd	val2, value
-		addsd	val1, val2					; val1 = value + value ^ 2 * R
-		mulsd	val1, sfactor				; val1 *= scale
-		addsd	val1, sfactor				; val1 = val1 * sfactor + sfactor
-	cvtsd2ss	value, val1					; return val1
-		ret
-else if x eq d
-;---[Double precision code]----------------
-		movsd	[s_value], value
-		fld		qword [s_value]				; val1 = value
-		fld		st0
-		fmul	st0, st0					; val2 = val1 ^ 2
-	EXPE_FLT64	iexp						; compute exp(value) and sfactor
-		movsd	[s_value], value
-		movsd	[s_scale], sfactor
-		fld		qword [s_value]
-		fmulp	st1, st0
-		faddp	st1, st0					; val1 = value + value ^ 2 * R
-		fld		qword [s_scale]
-		fmul	st1, st0					; val1 *= scale
-		faddp	st1, st0					; val1 = val1 * sfactor + sfactor
-		fstp	qword [s_value]
-		movsd	value, [s_value]			; return val1
-		ret
-end if
-;----[Return inf]--------------------------
-.inf:	initreg	value, treg, infval			; return +Inf
-		ret
-;----[Return zero]-------------------------
-.zero:	xorp#x	value, value				; return 0.0
-		ret
-}
-;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	EXPEM1	iexp, x
-{
-;---[Parameters]---------------------------
-value	equ		xmm0						; value to compute exponent function
-;---[Internal variables]-------------------
-treg	equ		rdx							; temporary register
-temp1	equ		xmm1						; temporary register #1
-temp2	equ		xmm2						; temporary register #2
-temp3	equ		xmm3						; temporary register #3
-temp4	equ		xmm4						; temporary register #4
-temp5	equ		xmm5						; temporary register #5
-temp6	equ		xmm6						; temporary register #6
-temp7	equ		xmm7						; temporary register #7
-temp8	equ		xmm8						; temporary register #8
-origin	equ		xmm9						; original value
-sfactor	equ		xmm10						; scale factor
-val1	equ		xmm11						; temporary register #1 that hold value
-val2	equ		xmm12						; temporary register #2 that hold value
-magic	equ		temp1						; magic number to get integer part
-ipart	equ		temp2						; integer part of value
-max		equ		temp3						; max exponent value
-min		equ		temp4						; max exponent value
-one		equ		temp5						; 1.0
-stack	equ		rsp							; stack pointer
-s_value	equ		stack - 2 * 8				; stack position of "value" variable
-s_scale	equ		stack - 1 * 8				; stack position of "scale" variable
-if x eq s
-magval	= MAGIC_FLT32						; magic number to get integer part from value
-infval	= PINF_FLT32						; +Inf
-moneval	= MONE_FLT32						; -1.0
-exp_min	= 0xC2D00000						; min exponent value
-exp_max	= 0x42B20000						; max exponent value
-else if x eq d
-magval	= MAGIC_FLT64						; magic number to get integer part from value
-infval	= PINF_FLT64						; +Inf
-moneval	= MONE_FLT64						; -1.0
-exp_min	= 0xC087500000000000				; min exponent value
-exp_max	= 0x4086300000000000				; max exponent value
-end if
-oneval	= PONE_FLT64						; +1.0
-;------------------------------------------
-		initreg	max, treg, exp_max			; load max exponent value
-		initreg	min, treg, exp_min			; load max exponent value
-		initreg	magic, treg, magval			; load magic number
-		movap#x	ipart, value				; ipart = value
-		comis#x	value, max					; if (value > max)
-		ja		.inf						;     return Inf
-		comis#x	value, min					; if (value < min)
-		jb		.mone						;     return -1.0
-		adds#x	ipart, magic
-		movint	iexp, ipart, x				; iexp = rint (value)
-if x eq s
-		cwde
-else if x eq d
-		cdqe
-end if
-		subs#x	ipart, magic				; ipart = rint (value)
-		subs#x	value, ipart				; value = fractional_part (value)
-if x eq s
-;---[Single precision code]----------------
-	cvtss2sd	val1, value					; val1 = value
-		movapd	val2, val1
-		mulsd	val2, val2					; val2 = val1 ^ 2
-	EXPE_FLT32	iexp						; compute exp(value) and sfactor
-	cvtss2sd	value, value
-	cvtss2sd	sfactor, sfactor
-		mulsd	val2, value
-		addsd	val1, val2					; val1 = value + value ^ 2 * R
-		initreg	one, treg, oneval			; one = 1.0
-		mulsd	val1, sfactor				; val1 *= scale
-		subsd	sfactor, one				; sfactor -= 1.0
-		addsd	val1, sfactor				; val1 = val1 * sfactor + (sfactor - 1)
-	cvtsd2ss	value, val1					; return val1
-		ret
-else if x eq d
-;---[Double precision code]----------------
-		movsd	[s_value], value
-		fld		qword [s_value]				; val1 = value
-		fld		st0
-		fmul	st0, st0					; val2 = val1 ^ 2
-	EXPE_FLT64	iexp						; compute exp(value) and sfactor
-		movsd	[s_value], value
-		movsd	[s_scale], sfactor
-		fld		qword [s_value]
-		fmulp	st1, st0
-		faddp	st1, st0					; val1 = value + value ^ 2 * R
-		fld1
-		fld		qword [s_scale]
-		fmul	st2, st0					; val1 *= scale
-		fsubrp	st1, st0					; sfactor -= 1.0
-		faddp	st1, st0					; val1 = val1 * sfactor + (sfactor - 1)
-		fstp	qword [s_value]
-		movsd	value, [s_value]			; return val1
-		ret
-end if
-;----[Return inf]--------------------------
-.inf:	initreg	value, treg, infval			; return +Inf
-		ret
-;----[Return minus one]--------------------
-.mone:	initreg	value, treg, moneval		; return -1.0
-		ret
-}
-
-; Integer power of E
-ExpEi_flt32:	EXPI	dil, -104, +89, exp_table_flt32, s
-ExpEi_flt64:	EXPI	di, -746, +710, exp_table_flt64, d
-
-; Real power of E
-ExpE_flt32:		EXPE	eax, s
-ExpE_flt64:		EXPE	rax, d
-ExpEm1_flt32:	EXPEM1	eax, s
-ExpEm1_flt64:	EXPEM1	rax, d
-
-;==============================================================================;
-;       Power                                                                  ;
-;==============================================================================;
-macro	POWER_UINT	base, pow, temp, temph
-{
-;---[Parameters]---------------------------
-exp		equ		sil							; exponent value
-;---[Internal variables]-------------------
-powd	equ		ecx							; double word register which holds result
-one		equ		r10d						; 1
-;------------------------------------------
-		test	base, base					; if (base == 0)
-		jz		.ovfl						;     then return 0
-		mov		one, 1						; one = 1
-		mov		pow, base					; pow = base
-		shr		exp, 1						; if (exp & 0x1 == 0), then
-		cmovnc	powd, one					;     pow = 1
-		jz		.skip						; if ((exp >>= 1) == 0), then skip loop
-;---[Exponentiation loop]------------------
-.loop:	mov		temp, base					; temp = base
-		mul		temp						; temp = base * base
-		test	temph, temph				; if overflow is detected, then
-		jnz		.ovfl						;     go to overflow branch
-		mov		base, temp					; base = base * base
-		shr		exp, 1						; exp >>= 1
-		ja		.loop						; if (exp & 0x1 == 0 && exp != 0), then continue
-		mul		pow							; temp = pow * base
-		test	temph, temph				; if overflow is detected, then
-		jnz		.ovfl						;     go to overflow branch
-		mov		pow, temp					; pow = pow * base
-		test	exp, exp
-		jnz		.loop						; do while (exp != 0)
-;---[End of loop]--------------------------
-.skip:	mov		temp, pow					; return pow
-		ret
-;---[Overflow branch]----------------------
-.ovfl:	xor		temp, temp					; return 0 (means result overflow)
-		ret
-}
-;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	POWER_SINT	base, sign, pow, max, temp, temph, scale
-{
-;---[Parameters]---------------------------
-exp		equ		sil							; exponent value
-;---[Internal variables]-------------------
-powd	equ		ecx							; double word register which holds result
-signq	equ		r8							; quad word register which base sign
-one		equ		r10d						; 1
-zero	equ		r11							; 0
-shft	= (1 shl scale) * 8 - 1				; shift value
-;------------------------------------------
-		test	base, base					; if (base == 0)
-		jz		.ovfl						;     then return 0
-		mov		sign, base					; sign = base
-		mov		max, 1 shl shft				; max value that can be represented
-		sar		sign, shft					; next 3 lines are hacker trick
-		xor		base, sign					; to get absolute value of base
-		sub		base, sign					; base = Abs (base)
-		mov		one, 1						; one = 1
-		xor		zero, zero					; zero = 0
-		mov		pow, base					; pow = base
-		shr		exp, 1						; if (exp & 0x1 == 0), then
-		cmovnc	powd, one					;     pow = 1
-		cmovnc	signq, zero					;     sign = 0
-		jz		.skip						; if ((exp >>= 1) == 0), then skip loop
-;---[Exponentiation loop]------------------
-.loop:	mov		temp, base					; temp = base
-		mul		temp						; temp = base * base
-		test	temph, temph				; if overflow is detected, then
-		jnz		.ovfl						;     go to overflow branch
-		mov		base, temp					; base = base * base
-		shr		exp, 1						; exp >>= 1
-		ja		.loop						; if (exp & 0x1 == 0 && exp != 0), then continue
-		mul		pow							; temp = pow * base
-		test	temph, temph				; if overflow is detected, then
-		jnz		.ovfl						;     go to overflow branch
-		cmp		temp, max					; if (temp > max)
-		ja		.ovfl						;     go to overflow branch
-		mov		pow, temp					; pow = pow * base }
-		test	exp, exp
-		jnz		.loop						; do while (exp != 0)
-;---[End of loop]--------------------------
-.skip:	xor		pow, sign
-		sub		pow, sign					; corect result sign
-		mov		temp, pow					; return pow
-		ret
-;---[Overflow branch]----------------------
-.ovfl:	xor		temp, temp					; return 0 (means result overflow)
-		ret
-}
-;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	POWER_FLT	exp, x
-{
-;---[Parameters]---------------------------
-base	equ		xmm0						; power base
-;---[Internal variables]-------------------
-treg	equ		rax							; temporary register
-temp	equ		xmm1						; temporary variable
-zero	equ		xmm2						; 0.0
-one		equ		xmm3						; 1.0
-if x eq s
-nanval	= PNAN_FLT32						; +NaN
-oneval	= PONE_FLT32						; +1.0
-else if x eq d
-nanval	= PNAN_FLT64						; +NaN
-oneval	= PONE_FLT64						; +1.0
-end if
-;------------------------------------------
-		xorp#x	zero, zero					; zero = 0.0
-		initreg	one, treg, oneval			; one = 1.0
-		comis#x	base, zero					; if (base == 0)
-		je		.zero						;     then go to zero base branch
-		movap#x	temp, base					; temp = base
-		cmp		exp, 0						; if (exp < 0)
-		jge		@f							; {
-		movap#x	temp, one					;     temp = 1 / base
-		neg		exp							;     exp = -exp
-		divs#x	temp, base					; }
-@@:		shr		exp, 1						; exp >>= 1
-		movap#x	base, temp					; base = temp
-		jc		@f							; if (exp & 0x1 == 0)
-		movap#x	base, one					;     base = 1
-@@:		jz		.skip						; if (exp == 0), then skip loop
-;---[Exponentiation loop]------------------
-.loop:	muls#x	temp, temp					; temp *= temp
-		shr		exp, 1						; exp >>= 1
-		ja		.loop						; if (exp & 0x1 == 0 && exp != 0), then continue
-		muls#x	base, temp					; base *= temp
-		jnz		.loop						; do while (exp != 0)
-;---[End of loop]--------------------------
-.skip:	ret
-;---[Zero base branch]---------------------
-.zero:	test	exp, exp					; if (exp != 0)
-		jz		@f							; then
-		ret									;     return 0
-@@:		initreg	base, treg, nanval			; else
-		ret									;     return NaN
-}
-
-; Unsigned integer types
-Power_uint8:	POWER_UINT	dil, cl, al, ah
-Power_uint16:	POWER_UINT	di, cx, ax, dx
-Power_uint32:	POWER_UINT	edi, ecx, eax, edx
-Power_uint64:	POWER_UINT	rdi, rcx, rax, rdx
-
-; Signed integer types
-Power_sint8:	POWER_SINT	dil, r8b, cl, r9b, al, ah, 0
-Power_sint16:	POWER_SINT	di, r8w, cx, r9w, ax, dx, 1
-Power_sint32:	POWER_SINT	edi, r8d, ecx, r9d, eax, edx, 2
-Power_sint64:	POWER_SINT	rdi, r8, rcx, r9, rax, rdx, 3
-
-; Floating-point types
-Power_flt32:	POWER_FLT	dil, s
-Power_flt64:	POWER_FLT	di, d
-
-;******************************************************************************;
-;       Logarithmic functions                                                  ;
-;******************************************************************************;
-macro	LOG		ivalue, mant, exp, mantscale, expscale, x
-{
-;---[Parameters]---------------------------
-value	equ		xmm0						; logarithm value
-;---[Internal variables]-------------------
-treg	equ		rax							; temporary register
-temp1	equ		xmm1						; temporary register #1
-temp2	equ		xmm2						; temporary register #2
-temp3	equ		xmm3						; temporary register #3
-temp4	equ		xmm4						; temporary register #4
-mscale	equ		xmm5						; mantisa scale value
-scale1	equ		xmm6						; scale value #1
-scale2	equ		xmm7						; scale value #2
-base	equ		xmm8						; base value
-origin	equ		xmm9						; origin value
-shift	equ		xmm10						; shift value
-result	equ		value						; result register
-two		equ		temp1						; 2.0
-half	equ		temp2						; 0.5
-one		equ		temp3						; 1.0
-cscale	equ		scale1						; correction scale value
-escale	equ		scale2						; exponent scale value
-if x eq s
-emask	= EMASK_FLT32						; exponent mask
-mmask	= MMASK_FLT32						; mantissa mask
-normval	= NORM_FLT32						; min normal value
-nanval	= PNAN_FLT32						; +NaN
-pinfval	= PINF_FLT32						; +Inf
-minfval	= MINF_FLT32						; -Inf
-twoval	= PTWO_FLT32						; 2.0
-halfval	= PHALF_FLT32						; 0.5
-oneval	= PONE_FLT32						; 1.0
-mbits	= MBITS_FLT32						; count of bits into mantissa
-bias	= EBIAS_FLT32						; exponent bias
-corrval	= 0x4B000000						; correction value
-loge	= log_flt32							; pointer to array of log coefficients
-else if x eq d
-emask	= EMASK_FLT64						; exponent mask
-mmask	= MMASK_FLT64						; mantissa mask
-normval	= NORM_FLT64						; min normal value
-nanval	= PNAN_FLT64						; +NaN
-pinfval	= PINF_FLT64						; +Inf
-minfval	= MINF_FLT64						; -Inf
-twoval	= PTWO_FLT64						; 2.0
-halfval	= PHALF_FLT64						; 0.5
-oneval	= PONE_FLT64						; 1.0
-mbits	= MBITS_FLT64						; count of bits into mantissa
-bias	= EBIAS_FLT64						; exponent bias
-corrval	= 0x4330000000000000				; correction value
-loge	= log_flt64							; pointer to array of log coefficients
-end if
-;---[Check logarithm value]----------------
-		movint	ivalue, value, x			; ivalue = value
-		xor		mant, mant
-		cmp		ivalue, mant
-		jl		.error						; if (ivalue < 0.0), then return NaN
-		je		.inf1						; if (ivalue == 0.0), then return -Inf
-		mov		mant, pinfval
-		cmp		ivalue, mant
-		ja		.exit						; if (ivalue > Inf), then go to exit
-		je		.inf2						; if (ivalue == Inf), then return +Inf
-;---[Loading scale values]-----------------
-		initreg	mscale, treg, mantscale		; mscale = mantscale
-		initreg	escale, treg, expscale		; escale = expscale
-;---[Loading consts]-----------------------
-		initreg	two, treg, twoval			; two = 2.0
-		initreg	half, treg, halfval			; half = 0.5
-		initreg	one, treg, oneval			; one = 1.0
-		initreg	cscale, treg, corrval		; cscale = correction value
-;---[Exponent extraction]------------------
-		mov		exp, emask
-		and		exp, ivalue					; exp = ivalue & emask
-		shr		exp, mbits					; exp >>= mbits
-		sub		exp, bias					; exp -= bias
-		mov		mant, normval
-		cmp		ivalue, mant				; if (ivalue < min normal value)
-		jb		.corr						;     then correct value
-;---[Mantissa extraction]------------------
-.back:	mov		mant, mmask
-		and		mant, ivalue				; mant = ivalue & mmask
-		mov		ivalue, bias shl mbits
-		or		mant, ivalue				; mant |= (bias << mbits)
-		mov		ivalue, 1 shl (mbits - 1)
-		and		ivalue, mant				; ivalue = mant & (1 << mbits - 1)
-		shl		ivalue, 1
-		sub		mant, ivalue				; mant -= ivalue << 1
-		movint	result, mant, x
-		subs#x	result, one					; result = mant - 1.0
-		shr		ivalue, mbits
-		add		exp, ivalue					; exp += ivalue >> mbits
-	cvtsi2s#x	shift, exp					; shift = exp
-		muls#x	shift, escale				; shift *= escale
-;---[Computing logarithm]------------------
-		movap#x	origin, result				; origin = result
-		movap#x	base, result
-		movap#x	scale1, result
-		movap#x	scale2, result
-		muls#x	base, result
-		adds#x	scale2, two
-		muls#x	base, half					; base = 0.5 * result * result
-		divs#x	scale1, scale2				; scale1 = result / (result + 2)
-		movap#x	scale2, scale1
-		muls#x	scale2, scale2				; scale2 = scale1 * scale1
-		movap#x	result, scale2				; result = scale2
-if x eq s
-	SINGLE8		loge, result, x				; compute single polynomial value
-else if x eq d
-	SINGLE16	loge, result, x				; compute single polynomial value
-end if
-		muls#x	temp1, scale2
-		adds#x	temp1, base
-		muls#x	temp1, scale1
-		subs#x	temp1, base
-		adds#x	temp1, origin				; temp1 = origin + (scale1 * (base + scale2 * temp1) - base)
-		muls#x	temp1, mscale				; temp1 *= mscale
-		adds#x	temp1, shift				; temp1 += shift
-		movap#x	result, temp1				; return mscale * log1p (value) + shift
-		ret
-;---[Mantissa correction branch]-----------
-.corr:	muls#x	result, cscale				; result *= cscale
-		sub		exp, mbits					; exp -= mbits
-		movint	ivalue, result, x			; ivalue = result
-		jmp		.back						; go back
-;---[Exit branch]--------------------------
-.exit:	movap#x	result, value				; return value
-		ret
-;---[Infinity branch #1]-------------------
-.inf1:	initreg	result, treg, minfval		; return -Inf
-		ret
-;---[Infinity branch #2]-------------------
-.inf2:	initreg	result, treg, pinfval		; return +Inf
-		ret
-;---[Error branch]-------------------------
-.error:	initreg	result, treg, nanval		; return NaN
-		ret
-}
-;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	LOG1P	Func, ivalue, mant, mantscale, x
-{
-;---[Parameters]---------------------------
-value	equ		xmm0						; logarithm value
-;---[Internal variables]-------------------
-treg	equ		rax							; temporary register
-temp1	equ		xmm1						; temporary register #1
-temp2	equ		xmm2						; temporary register #2
-temp3	equ		xmm3						; temporary register #3
-temp4	equ		xmm4						; temporary register #4
-mscale	equ		xmm5						; mantisa scale value
-scale1	equ		xmm6						; scale value #1
-scale2	equ		xmm7						; scale value #2
-base	equ		xmm8						; base value
-origin	equ		xmm9						; origin value
-result	equ		value						; result register
-two		equ		temp1						; 2.0
-half	equ		temp2						; 0.5
-if x eq s
-twoval	= PTWO_FLT32						; +2.0
-phlfval	= PHALF_FLT32						; +0.5
-mhlfval	= MHALF_FLT32						; -0.5
-oneval	= PONE_FLT32						; +1.0
-loge	= log_flt32							; pointer to array of log coefficients
-else if x eq d
-twoval	= PTWO_FLT64						; +2.0
-phlfval	= PHALF_FLT64						; +0.5
-mhlfval	= MHALF_FLT64						; -0.5
-oneval	= PONE_FLT64						; +1.0
-loge	= log_flt64							; pointer to array of log coefficients
-end if
-;---[Check logarithm value]----------------
-		movint	ivalue, value, x			; ivalue = value
-		mov		mant, mhlfval
-		cmp		ivalue, mant				; if (ivalue < -0.5)
-		ja		.log						;     then go to log branch
-		mov		mant, oneval
-		cmp		ivalue, mant				; if (ivalue > +1.0)
-		jg		.log						;     then go to log branch
-;---[Loading scale values]-----------------
-		initreg	mscale, treg, mantscale		; mscale = mantscale
-;---[Loading consts]-----------------------
-		initreg	two, treg, twoval			; two = 2.0
-		initreg	half, treg, phlfval			; half = 0.5
-;---[Normal execution branch]--------------
-		movap#x	origin, result				; origin = result
-		movap#x	base, result
-		movap#x	scale1, result
-		movap#x	scale2, result
-		muls#x	base, result
-		adds#x	scale2, two
-		muls#x	base, half					; base = 0.5 * result * result
-		divs#x	scale1, scale2				; scale1 = result / (result + 2)
-		movap#x	scale2, scale1
-		muls#x	scale2, scale2				; scale2 = scale1 * scale1
-		movap#x	result, scale2				; result = scale2
-if x eq s
-	SINGLE8		loge, result, x				; compute single polynomial value
-else if x eq d
-	SINGLE16	loge, result, x				; compute single polynomial value
-end if
-		muls#x	temp1, scale2
-		adds#x	temp1, base
-		muls#x	temp1, scale1
-		subs#x	temp1, base
-		adds#x	temp1, origin				; temp1 = origin + (scale1 * (base + scale2 * temp1) - base)
-		muls#x	temp1, mscale				; temp1 *= mscale
-		movap#x	result, temp1				; return mscale * log1p (value)
-		ret
-;---[Log branch]---------------------------
-.log:	initreg	mscale, treg, oneval
-		adds#x	value, mscale
-		jmp		Func						; call Func (value + 1.0)
-}
-
-;==============================================================================;
-;       Logarithm to base 2                                                    ;
-;==============================================================================;
-macro	LOG2I	val, scale
-{
-;---[Parameters]---------------------------
-value	equ		rdi							; value to operate
-;---[Internal variables]-------------------
-result	equ		rax							; result register
-;------------------------------------------
-if scale < 2
-		movzx	value, val					; zero extend value to 64-bit value
-end if
-		test	value, value				; if (value == 0)
-		jz		.error						;     then go to error branch
-;---[Normal execution branch]--------------
-		bsr		result, value				; return index of most significant bit
-		ret
-;---[Error branch]-------------------------
-.error:	mov		result, ERROR				; return ERROR
-		ret
-}
-
-; Integer logarithm to base 2
-Log2i_uint8:	LOG2I	dil, 0
-Log2i_uint16:	LOG2I	di, 1
-Log2i_uint32:	LOG2I	edi, 2
-Log2i_uint64:	LOG2I	rdi, 3
-
-; Real logarithm to base 2
-Log2_flt32:		LOG		edx, ecx, edi, LOG2_E_FLT32, LOG2_2_FLT32, s
-Log2_flt64:		LOG		rdx, rcx, rdi, LOG2_E_FLT64, LOG2_2_FLT64, d
-Log2p1_flt32:	LOG1P	Log2_flt32, edx, ecx, LOG2_E_FLT32, s
-Log2p1_flt64:	LOG1P	Log2_flt64, rdx, rcx, LOG2_E_FLT64, d
-
-;==============================================================================;
-;       Logarithm to base 10                                                   ;
-;==============================================================================;
-macro	LOG10I	val, index, scale
-{
-;---[Parameters]---------------------------
-value	equ		rdi							; value to operate
-;---[Internal variables]-------------------
-result	equ		rax							; result register
-;------------------------------------------
-if scale < 2
-		movzx	value, val					; zero extend value to 64-bit value
-end if
-		test	value, value				; if (value == 0)
-		jz		.error						;     then go to error branch
-;---[Normal execution branch]--------------
-		mov		result, index				; result = index
-;---[Search loop]--------------------------
-.loop:	sub		result, 1					; result--
-		cmp		value, [ten_table_int + result * 8]
-		jb		.loop						; do while (value < ten_table_int[resul])
-;---[End of search loop]-------------------
-		ret									; return result
-;---[Error branch]-------------------------
-.error:	mov		result, ERROR				; return ERROR
-		ret
-}
-
-; Integer logarithm to base 10
-Log10i_uint8:	LOG10I	dil, 3, 0
-Log10i_uint16:	LOG10I	di, 5, 1
-Log10i_uint32:	LOG10I	edi, 10, 2
-Log10i_uint64:	LOG10I	rdi, 20, 3
-
-; Real logarithm to base 10
-Log10_flt32:	LOG		edx, ecx, edi, LOG10_E_FLT32, LOG10_2_FLT32, s
-Log10_flt64:	LOG		rdx, rcx, rdi, LOG10_E_FLT64, LOG10_2_FLT64, d
-Log10p1_flt32:	LOG1P	Log10_flt32, edx, ecx, LOG10_E_FLT32, s
-Log10p1_flt64:	LOG1P	Log10_flt64, rdx, rcx, LOG10_E_FLT64, d
-
-;==============================================================================;
-;       Logarithm to base E (natural logarithm)                                ;
-;==============================================================================;
-LogE_flt32:		LOG		edx, ecx, edi, LOGE_E_FLT32, LOGE_2_FLT32, s
-LogE_flt64:		LOG		rdx, rcx, rdi, LOGE_E_FLT64, LOGE_2_FLT64, d
-LogEp1_flt32:	LOG1P	LogE_flt32, edx, ecx, LOGE_E_FLT32, s
-LogEp1_flt64:	LOG1P	LogE_flt64, rdx, rcx, LOGE_E_FLT64, d
-
-;==============================================================================;
-;       Logarithm to custom base                                               ;
-;==============================================================================;
-macro	LOGB	Log, ivalue, mant, exp, res, inf1, inf2, x
-{
-;---[Parameters]---------------------------
-lbase	equ		xmm0						; logarithm base value
-value	equ		xmm1						; logarithm value
-;---[Internal variables]-------------------
-treg	equ		rax							; temporary register
-temp1	equ		xmm1						; temporary register #1
-temp2	equ		xmm2						; temporary register #2
-temp3	equ		xmm3						; temporary register #3
-temp4	equ		xmm4						; temporary register #4
-mscale	equ		xmm5						; mantisa scale value
-scale1	equ		xmm6						; scale value #1
-scale2	equ		xmm7						; scale value #2
-base	equ		xmm8						; base value
-origin	equ		xmm9						; origin value
-shift	equ		xmm10						; shift value
-result	equ		lbase						; result register
-two		equ		temp1						; 2.0
-half	equ		temp2						; 0.5
-one		equ		temp3						; 1.0
-cscale	equ		scale1						; correction scale value
-escale	equ		scale2						; exponent scale value
-stack	equ		rsp							; stack pointer
-s_value	equ		stack + 0 * 8				; stack position of "value" variable
-if x eq s
-emask	= EMASK_FLT32						; exponent mask
-mmask	= MMASK_FLT32						; mantissa mask
-normval	= NORM_FLT32						; min normal value
-nanval	= PNAN_FLT32						; +NaN
-pinfval	= PINF_FLT32						; +Inf
-minfval	= MINF_FLT32						; -Inf
-twoval	= PTWO_FLT32						; 2.0
-halfval	= PHALF_FLT32						; 0.5
-oneval	= PONE_FLT32						; 1.0
-logval	= LOGE_2_FLT32						; ln(2)
-mbits	= MBITS_FLT32						; count of bits into mantissa
-bias	= EBIAS_FLT32						; exponent bias
-corrval	= 0x4B000000						; correction value
-loge	= log_flt32							; pointer to array of log coefficients
-else if x eq d
-emask	= EMASK_FLT64						; exponent mask
-mmask	= MMASK_FLT64						; mantissa mask
-normval	= NORM_FLT64						; min normal value
-nanval	= PNAN_FLT64						; +NaN
-pinfval	= PINF_FLT64						; +Inf
-minfval	= MINF_FLT64						; -Inf
-twoval	= PTWO_FLT64						; 2.0
-halfval	= PHALF_FLT64						; 0.5
-oneval	= PONE_FLT64						; 1.0
-logval	= LOGE_2_FLT64						; ln(2)
-mbits	= MBITS_FLT64						; count of bits into mantissa
-bias	= EBIAS_FLT64						; exponent bias
-corrval	= 0x4330000000000000				; correction value
-loge	= log_flt64							; pointer to array of log coefficients
-end if
-space	= 1 * 8								; stack size required by the procedure
-;---[Check base value]---------------------
-		movint	ivalue, lbase, x			; ivalue = lbase
-		mov		mant, oneval
-		cmp		ivalue, mant				; if (ivalue == 1.0)
-		je		.error						;     return NaN
-		xor		mant, mant
-		cmp		ivalue, mant				; if (ivalue <= 0.0)
-		jle		.error						;     then return NaN
-		mov		mant, pinfval
-		cmp		ivalue, mant				; if (ivalue >= Inf)
-		jae		.error						;     then return NaN
-;---[Check logarithm value]----------------
-		movint	ivalue, value, x			; ivalue = value
-		xor		mant, mant
-		cmp		ivalue, mant
-		jl		.error						; if (ivalue < 0.0), then return NaN
-		je		.inf1						; if (ivalue == 0.0), then return correct Inf
-		mov		mant, pinfval
-		cmp		ivalue, mant
-		ja		.exit						; if (ivalue > Inf), then go to exit
-		je		.inf2						; if (ivalue == Inf), then return correct Inf
-;---[Loading scale values]-----------------
-		sub		stack, space				; reserving stack size for local vars
-		movs#x	[s_value], value			; save "value" variable into the stack
-		call	Log							; call Log (lbase)
-		initreg	mscale, treg, oneval
-		divs#x	mscale, result				; mscale = 1.0 / ln (lbase)
-		initreg	escale, treg, logval
-		divs#x	escale, result				; escale = ln(2) / ln (lbase)
-		movs#x	result, [s_value]			; get "value" variable from the stack
-		mov		ivalue, [s_value]			; ivalue = value
-		add		stack, space				; restoring back the stack pointer
-;---[Loading consts]-----------------------
-		initreg	two, treg, twoval			; two = 2.0
-		initreg	half, treg, halfval			; half = 0.5
-		initreg	one, treg, oneval			; one = 1.0
-		initreg	cscale, treg, corrval		; cscale = correction value
-;---[Exponent extraction]------------------
-		mov		exp, emask
-		and		exp, ivalue					; exp = ivalue & emask
-		shr		exp, mbits					; exp >>= mbits
-		sub		exp, bias					; exp -= bias
-		mov		mant, normval
-		cmp		ivalue, mant				; if (ivalue < min normal value)
-		jb		.corr						;     then correct value
-;---[Mantissa extraction]------------------
-.back:	mov		mant, mmask
-		and		mant, ivalue				; mant = ivalue & mmask
-		mov		ivalue, bias shl mbits
-		or		mant, ivalue				; mant |= (bias << mbits)
-		mov		ivalue, 1 shl (mbits - 1)
-		and		ivalue, mant				; ivalue = mant & (1 << mbits - 1)
-		shl		ivalue, 1
-		sub		mant, ivalue				; mant -= ivalue << 1
-		movint	result, mant, x
-		subs#x	result, one					; result = mant - 1.0
-		shr		ivalue, mbits
-		add		exp, ivalue					; exp += ivalue >> mbits
-	cvtsi2s#x	shift, exp					; shift = exp
-		muls#x	shift, escale				; shift *= escale
-;---[Computing logarithm]------------------
-		movap#x	origin, result				; origin = result
-		movap#x	base, result
-		movap#x	scale1, result
-		movap#x	scale2, result
-		muls#x	base, result
-		adds#x	scale2, two
-		muls#x	base, half					; base = 0.5 * result * result
-		divs#x	scale1, scale2				; scale1 = result / (result + 2)
-		movap#x	scale2, scale1
-		muls#x	scale2, scale2				; scale2 = scale1 * scale1
-		movap#x	result, scale2				; result = scale2
-if x eq s
-	SINGLE8		loge, result, x				; compute single polynomial value
-else if x eq d
-	SINGLE16	loge, result, x				; compute single polynomial value
-end if
-		muls#x	temp1, scale2
-		adds#x	temp1, base
-		muls#x	temp1, scale1
-		subs#x	temp1, base
-		adds#x	temp1, origin				; temp1 = origin + (scale1 * (base + scale2 * temp1) - base)
-		muls#x	temp1, mscale				; temp1 *= mscale
-		adds#x	temp1, shift				; temp1 += shift
-		movap#x	result, temp1				; return mscale * log1p (value) + shift
-		ret
-;---[Mantissa correction branch]-----------
-.corr:	muls#x	result, cscale				; result *= cscale
-		sub		exp, mbits					; exp -= mbits
-		movint	ivalue, result, x			; ivalue = result
-		jmp		.back						; go back
-;---[Exit branch]--------------------------
-.exit:	movap#x	result, value				; return value
-		ret
-;---[Infinity branch #1]-------------------
-.inf1:	mov		inf1, minfval				; inf1 = -Inf
-		mov		inf2, pinfval				; inf2 = +Inf
-		movint	ivalue, lbase, x			; ivalue = lbase
-		mov		mant, oneval
-		cmp		ivalue, mant				; if (ivalue > 1.0)
-		cmova	res, inf1					;     then res = -Inf
-		cmovb	res, inf2					;     else res = +Inf
-		movint	result, res, x				; return res
-		ret
-;---[Infinity branch #2]-------------------
-.inf2:	mov		inf1, pinfval				; inf1 = +Inf
-		mov		inf2, minfval				; inf2 = -Inf
-		movint	ivalue, lbase, x			; ivalue = lbase
-		mov		mant, oneval
-		cmp		ivalue, mant				; if (ivalue > 1.0)
-		cmova	res, inf1					;     then res = +Inf
-		cmovb	res, inf2					;     else res = -Inf
-		movint	result, res, x				; return res
-		ret
-;---[Error branch]-------------------------
-.error:	initreg	result, treg, nanval		; return NaN
-		ret
-}
-;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	LOGB1P	Log, Func, ivalue, mant, x
-{
-;---[Parameters]---------------------------
-lbase	equ		xmm0						; logarithm base value
-value	equ		xmm1						; logarithm value
-;---[Internal variables]-------------------
-treg	equ		rax							; temporary register
-temp1	equ		xmm1						; temporary register #1
-temp2	equ		xmm2						; temporary register #2
-temp3	equ		xmm3						; temporary register #3
-temp4	equ		xmm4						; temporary register #4
-mscale	equ		xmm5						; mantisa scale value
-scale1	equ		xmm6						; scale value #1
-scale2	equ		xmm7						; scale value #2
-base	equ		xmm8						; base value
-origin	equ		xmm9						; origin value
-result	equ		lbase						; result register
-two		equ		temp1						; 2.0
-half	equ		temp2						; 0.5
-stack	equ		rsp							; stack pointer
-s_value	equ		stack + 0 * 8				; stack position of "value" variable
-if x eq s
-nanval	= PNAN_FLT32						; +NaN
-infval	= PINF_FLT32						; +Inf
-twoval	= PTWO_FLT32						; +2.0
-phlfval	= PHALF_FLT32						; +0.5
-mhlfval	= MHALF_FLT32						; -0.5
-oneval	= PONE_FLT32						; +1.0
-loge	= log_flt32							; pointer to array of log coefficients
-else if x eq d
-nanval	= PNAN_FLT64						; +NaN
-infval	= PINF_FLT64						; +Inf
-twoval	= PTWO_FLT64						; +2.0
-phlfval	= PHALF_FLT64						; +0.5
-mhlfval	= MHALF_FLT64						; -0.5
-oneval	= PONE_FLT64						; +1.0
-loge	= log_flt64							; pointer to array of log coefficients
-end if
-space	= 1 * 8								; stack size required by the procedure
-;---[Check base value]---------------------
-		movint	ivalue, lbase, x			; ivalue = lbase
-		mov		mant, oneval
-		cmp		ivalue, mant				; if (ivalue == 1.0)
-		je		.error						;     return NaN
-		xor		mant, mant
-		cmp		ivalue, mant				; if (ivalue <= 0.0)
-		jle		.error						;     then return NaN
-		mov		mant, infval
-		cmp		ivalue, mant				; if (ivalue >= Inf)
-		jae		.error						;     then return NaN
-;---[Check logarithm value]----------------
-		movint	ivalue, value, x			; ivalue = value
-		mov		mant, mhlfval
-		cmp		ivalue, mant				; if (ivalue < -0.5)
-		ja		.log						;     then go to log branch
-		mov		mant, oneval
-		cmp		ivalue, mant				; if (ivalue > +1.0)
-		jg		.log						;     then go to log branch
-;---[Loading scale values]-----------------
-		sub		stack, space				; reserving stack size for local vars
-		movs#x	[s_value], value			; save "value" variable into the stack
-		call	Log							; call Log (lbase)
-		initreg	mscale, treg, oneval
-		divs#x	mscale, result				; mscale = 1.0 / ln (lbase)
-		movs#x	result, [s_value]			; get "value" variable from the stack
-		add		stack, space				; restoring back the stack pointer
-;---[Loading consts]-----------------------
-		initreg	two, treg, twoval			; two = 2.0
-		initreg	half, treg, phlfval			; half = 0.5
-;---[Computing logarithm]------------------
-		movap#x	origin, result				; origin = result
-		movap#x	base, result
-		movap#x	scale1, result
-		movap#x	scale2, result
-		muls#x	base, result
-		adds#x	scale2, two
-		muls#x	base, half					; base = 0.5 * result * result
-		divs#x	scale1, scale2				; scale1 = result / (result + 2)
-		movap#x	scale2, scale1
-		muls#x	scale2, scale2				; scale2 = scale1 * scale1
-		movap#x	result, scale2				; result = scale2
-if x eq s
-	SINGLE8		loge, result, x				; compute single polynomial value
-else if x eq d
-	SINGLE16	loge, result, x				; compute single polynomial value
-end if
-		muls#x	temp1, scale2
-		adds#x	temp1, base
-		muls#x	temp1, scale1
-		subs#x	temp1, base
-		adds#x	temp1, origin				; temp1 = origin + (scale1 * (base + scale2 * temp1) - base)
-		muls#x	temp1, mscale				; temp1 *= mscale
-		movap#x	result, temp1				; return mscale * log1p (value)
-		ret
-;---[Log branch]---------------------------
-.log:	initreg	mscale, treg, oneval
-		adds#x	value, mscale
-		jmp		Func						; call Func (base, value + 1.0)
-;---[Error branch]-------------------------
-.error:	initreg	result, treg, nanval		; return NaN
-		ret
-}
-LogB_flt32:		LOGB	LogE_flt32, edx, ecx, edi, eax, edi, esi, s
-LogB_flt64:		LOGB	LogE_flt64, rdx, rcx, rdi, rax, rdi, rsi, d
-LogBp1_flt32:	LOGB1P	LogE_flt32, LogB_flt32, edx, ecx, s
-LogBp1_flt64:	LOGB1P	LogE_flt64, LogB_flt64, rdx, rcx, d
-
-;******************************************************************************;
-;       Scale functions                                                        ;
-;******************************************************************************;
-macro	SCALE	shift, exp_min, exp_max, svalue1, svalue2, table, x
-{
-;---[Parameters]---------------------------
-value	equ		xmm0						; value to scale
-exp		equ		di							; exponent value
-;---[Internal variables]-------------------
-treg	equ		rax							; temporary register
-index	equ		rdi							; index register
-scale	equ		xmm1						; scale value
-if x eq s
-bytes	= 4									; array element size (bytes)
-else if x eq d
-bytes	= 8									; array element size (bytes)
-end if
-;------------------------------------------
-		movsx	index, exp					; index = exp
-		test	index, index				; if (index < 0)
-		js		.neg						;     then go to negative exponent branch
-;---[Positive exponent branch]-------------
-		cmp		index, exp_max				; if (index > exp_max)
-		jg		.pcorr						;     then correct the exponent
-@@:		movs#x	scale, [table + index*bytes + shift*bytes]	; scale = exp[index]
-		muls#x	value, scale				; return (value * scale)
-		ret
-;---[Correcting positive power]------------
-.pcorr:	initreg	scale, treg, svalue1		; scale = svalue1
-		sub		index, exp_max				; index -= exp_max
-		muls#x	value, scale				; value *= scale
-		cmp		index, exp_max				; if (index <= exp_max)
-		jle		@b							;     then exp is correct now
-		sub		index, exp_max				; index -= exp_max
-		muls#x	value, scale				; value *= scale
-		cmp		index, exp_max				; if (index <= exp_max)
-		jle		@b							;     then exp is correct now
-		muls#x	value, scale				; return (value * scale)
-		ret
-;---[Negative exponent branch]-------------
-.neg:	cmp		index, exp_min				; if (index < exp_min)
-		jl		.ncorr						;     then correct the exponent
-@@:		movs#x	scale, [table + index*bytes + shift*bytes]	; scale = exp[index]
-		muls#x	value, scale				; return (value * scale)
-		ret
-;---[Correcting negative power]------------
-.ncorr:	initreg	scale, treg, svalue2		; scale = svalue2
-		sub		index, exp_min				; index -= exp_min
-		muls#x	value, scale				; value *= scale
-		cmp		index, exp_min				; if (index >= exp_min)
-		jge		@b							;     then exp is correct now
-		sub		index, exp_min				; index -= exp_min
-		muls#x	value, scale				; value *= scale
-		cmp		index, exp_min				; if (index >= exp_min)
-		jge		@b							;     then exp is correct now
-		muls#x	value, scale				; return (value * scale)
-		ret
-}
-
-;==============================================================================;
-;       Scale by power of 2                                                    ;
-;==============================================================================;
-macro	SCALE2	temp, x
-{
-;---[Parameters]---------------------------
-value	equ		xmm0						; value to scale
-exp		equ		di							; exponent value
-;---[Internal variables]-------------------
-treg	equ		rax							; temporary register
-scale	equ		xmm1						; scale value
-if x eq s
-mbits	= MBITS_FLT32						; count of bits into mantissa
-bias	= EBIAS_FLT32						; exponent bias
-svalue1	= 0x7F000000						; 2^+127
-svalue2	= 0x00800000						; 2^-126
-else if x eq d
-mbits	= MBITS_FLT64						; count of bits into mantissa
-bias	= EBIAS_FLT64						; exponent bias
-svalue1	= 0x7FE0000000000000				; 2^+1023
-svalue2	= 0x0008000000000000				; 2^-1022
-end if
-exp_max	= bias								; max exponent
-exp_min	= 1 - bias							; min exponent
-;------------------------------------------
-		movsx	temp, exp					; temp = exp
-		test	temp, temp					; if (temp < 0)
-		js		.neg						;     then go to negative exponent branch
-;---[Positive exponent branch]-------------
-		cmp		temp, exp_max				; if (temp > exp_max)
-		jg		.pcorr						;     then correct the exponent
-@@:		add		temp, bias					; temp = exp + bias
-		shl		temp, mbits					; temp <<= mbits
-		movint	scale, temp, x				; scale = 2^exp
-		muls#x	value, scale				; return (value * scale)
-		ret
-;---[Correcting positive power]------------
-.pcorr:	initreg	scale, treg, svalue1		; scale = svalue1
-		sub		temp, exp_max				; temp -= exp_max
-		muls#x	value, scale				; value *= scale
-		cmp		temp, exp_max				; if (temp <= exp_max)
-		jle		@b							;     then exp is correct now
-		sub		temp, exp_max				; temp -= exp_max
-		muls#x	value, scale				; value *= scale
-		cmp		temp, exp_max				; if (temp <= exp_max)
-		jle		@b							;     then exp is correct now
-		muls#x	value, scale				; return (value * scale)
-		ret
-;---[Negative exponent branch]-------------
-.neg:	cmp		temp, exp_min				; if (temp < exp_min)
-		jl		.ncorr						;     then correct the exponent
-@@:		add		temp, bias					; temp = exp + bias
-		shl		temp, mbits					; temp <<= mbits
-		movint	scale, temp, x				; scale = 2^exp
-		muls#x	value, scale				; return (value * scale)
-		ret
-;---[Correcting negative power]------------
-.ncorr:	initreg	scale, treg, svalue2		; scale = svalue2
-		sub		temp, exp_min				; temp -= exp_min
-		muls#x	value, scale				; value *= scale
-		cmp		temp, exp_min				; if (temp >= exp_min)
-		jge		@b							;     then exp is correct now
-		sub		temp, exp_min				; temp -= exp_min
-		muls#x	value, scale				; value *= scale
-		cmp		temp, exp_min				; if (temp >= exp_min)
-		jge		@b							;     then exp is correct now
-		muls#x	value, scale				; return (value * scale)
-		ret
-}
-Scale2_flt32:	SCALE2	edx, s
-Scale2_flt64:	SCALE2	rdx, d
-
-;==============================================================================;
-;       Scale by power of 10                                                   ;
-;==============================================================================;
-Scale10_flt32:	SCALE	46, -37, 38, 0x7E967699, 0x02081CEA, ten_table_flt32, s
-Scale10_flt64:	SCALE	324, -307, 308, 0x7FE1CCF385EBC8A0, 0x0031FA182C40C60D, ten_table_flt64, d
-
-;==============================================================================;
-;       Scale by power of E                                                    ;
-;==============================================================================;
-ScaleE_flt32:	SCALE	104, -87, 88, 0x7EF882B7 ,0x00B33687, exp_table_flt32, s
-ScaleE_flt64:	SCALE	746, -708, 709, 0x7FDD422D2BE5DC9B, 0x0017C8AB2288C9AB, exp_table_flt64, d
 
 ;******************************************************************************;
 ;       Rounding                                                               ;
@@ -5379,7 +4701,7 @@ if x eq d
 dmask	= DMASK_FLT32						; data mask
 normval	= NORM_FLT32						; min normal value
 infval	= PINF_FLT32						; +Inf
-else if x eq d
+else if x eq q
 dmask	= DMASK_FLT64						; data mask
 normval	= NORM_FLT64						; min normal value
 infval	= PINF_FLT64						; +Inf
@@ -5405,7 +4727,7 @@ result	equ		al							; result register
 if x eq d
 dmask	= DMASK_FLT32						; data mask
 normval	= NORM_FLT32						; min normal value
-else if x eq d
+else if x eq q
 dmask	= DMASK_FLT64						; data mask
 normval	= NORM_FLT64						; min normal value
 end if
@@ -5428,7 +4750,7 @@ result	equ		al							; result register
 if x eq d
 dmask	= DMASK_FLT32						; data mask
 infval	= PINF_FLT32						; +Inf
-else if x eq d
+else if x eq q
 dmask	= DMASK_FLT64						; data mask
 infval	= PINF_FLT64						; +Inf
 end if
@@ -5451,7 +4773,7 @@ result	equ		al							; result register
 if x eq d
 dmask	= DMASK_FLT32						; data mask
 infval	= PINF_FLT32						; +Inf
-else if x eq d
+else if x eq q
 dmask	= DMASK_FLT64						; data mask
 infval	= PINF_FLT64						; +Inf
 end if
@@ -5474,7 +4796,7 @@ result	equ		al							; result register
 if x eq d
 dmask	= DMASK_FLT32						; data mask
 infval	= PINF_FLT32						; +Inf
-else if x eq d
+else if x eq q
 dmask	= DMASK_FLT64						; data mask
 infval	= PINF_FLT64						; +Inf
 end if
@@ -5518,7 +4840,7 @@ section	'.rodata'	align 16
 ;       Power of 10                                                            ;
 ;******************************************************************************;
 align 16
-ten_table_int	dq	1						; 10^00
+ten_int			dq	1						; 10^00
 				dq	10						; 10^01
 				dq	100						; 10^02
 				dq	1000					; 10^03
@@ -5666,39 +4988,17 @@ atan_flt32		dd	0x3E1E9308				; 2^64 * (32!)^2 / (65)!
 				dd	0x3F2AAAAB				; 2^02 * (01!)^2 / (03)!
 
 ;==============================================================================;
-;       Coefficients to compute exp2(x) for flt32_t type                       ;
-;==============================================================================;
-align 16
-exp2_flt32		dd	0x3CA3FEA0				; ln(2)^2 / 4!
-				dd	0x39A816C8				; ln(2)^4 / 6!
-				dd	0x3805279E				; ln(2)^5 / 7!
-				dd	0x3F000000				; ln(2)^0 / 2!
-				dd	0x3DEC9820				; ln(2)^1 / 3!
-				dd	0x3B35E039				; ln(2)^3 / 5!
-
-;==============================================================================;
-;       Coefficients to compute exp10(x) for flt32_t type                      ;
-;==============================================================================;
-align 16
-exp10_flt32		dd	0x3D6236DE				; (ln(10) / 2)^2 / 4!
-				dd	0x3B1FEA56				; (ln(10) / 2)^4 / 6!
-				dd	0x38723E89				; (ln(10) / 2)^6 / 8!
-				dd	0x3F000000				; (ln(10) / 2)^0 / 2!
-				dd	0x3E447CBD				; (ln(10) / 2)^1 / 3!
-				dd	0x3C5059E1				; (ln(10) / 2)^3 / 5!
-				dd	0x39D26924				; (ln(10) / 2)^5 / 7!
-
-;==============================================================================;
 ;       Coefficients to compute exp(x) for flt32_t type                        ;
 ;==============================================================================;
 align 16
-exp_flt32		dd	0x3D2AAAAB				; 1 / 4!
-				dd	0x3AB60B61				; 1 / 6!
-				dd	0x37D00D01				; 1 / 8!
-				dd	0x3F000000				; 1 / 2!
-				dd	0x3E2AAAAB				; 1 / 3!
+exp_flt32		dd	0x3638EF1D				; 1 / 9!
 				dd	0x3C088889				; 1 / 5!
 				dd	0x39500D01				; 1 / 7!
+				dd	0x3E2AAAAB				; 1 / 3!
+				dd	0x37D00D01				; 1 / 8!
+				dd	0x3D2AAAAB				; 1 / 4!
+				dd	0x3AB60B61				; 1 / 6!
+				dd	0x3F000000				; 1 / 2!
 
 ;==============================================================================;
 ;       Coefficients to compute log(x) for flt32_t type                        ;
@@ -5717,7 +5017,7 @@ log_flt32		dd	0x3DF0F0F1				; 2 / 17
 ;       Table of integer powers of 10^x for flt32_t type                       ;
 ;==============================================================================;
 align 16
-ten_table_flt32	dd	0x00000000				; 10^-46
+ten_flt32		dd	0x00000000				; 10^-46
 				dd	0x00000001				; 10^-45
 				dd	0x00000007				; 10^-44
 				dd	0x00000047				; 10^-43
@@ -5803,205 +5103,6 @@ ten_table_flt32	dd	0x00000000				; 10^-46
 				dd	0x7CF0BDC2				; 10^+37
 				dd	0x7E967699				; 10^+38
 				dd	0x7F800000				; 10^+39
-
-;==============================================================================;
-;       Table of integer powers of e^x for flt32_t type                        ;
-;==============================================================================;
-align 16
-exp_table_flt32	dd	0x00000000				; e^-104
-				dd	0x00000001				; e^-103
-				dd	0x00000004				; e^-102
-				dd	0x0000000A				; e^-101
-				dd	0x0000001B				; e^-100
-				dd	0x00000048				; e^-099
-				dd	0x000000C4				; e^-098
-				dd	0x00000215				; e^-097
-				dd	0x000005A9				; e^-096
-				dd	0x00000F64				; e^-095
-				dd	0x000029D6				; e^-094
-				dd	0x000071B9				; e^-093
-				dd	0x00013521				; e^-092
-				dd	0x0003484B				; e^-091
-				dd	0x0008EC28				; e^-090
-				dd	0x001840FC				; e^-089
-				dd	0x0041EDC4				; e^-088
-				dd	0x00B33687				; e^-087
-				dd	0x01739362				; e^-086
-				dd	0x022586E0				; e^-085
-				dd	0x02E0F96D				; e^-084
-				dd	0x0398E2CB				; e^-083
-				dd	0x044FCB22				; e^-082
-				dd	0x050D35D7				; e^-081
-				dd	0x05BFECBA				; e^-080
-				dd	0x06826D27				; e^-079
-				dd	0x07314490				; e^-078
-				dd	0x07F0EE94				; e^-077
-				dd	0x08A3BAF0				; e^-076
-				dd	0x095E884F				; e^-075
-				dd	0x0A1739FB				; e^-074
-				dd	0x0ACD89C1				; e^-073
-				dd	0x0B8BAD78				; e^-072
-				dd	0x0C3DD771				; e^-071
-				dd	0x0D0102BF				; e^-070
-				dd	0x0DAF5800				; e^-069
-				dd	0x0E6E511E				; e^-068
-				dd	0x0F21F3FE				; e^-067
-				dd	0x0FDC1DF9				; e^-066
-				dd	0x109595C7				; e^-065
-				dd	0x114B4EA4				; e^-064
-				dd	0x120A295C				; e^-063
-				dd	0x12BBC7F1				; e^-062
-				dd	0x137F388B				; e^-061
-				dd	0x142D70C9				; e^-060
-				dd	0x14EBBAEC				; e^-059
-				dd	0x15A031FC				; e^-058
-				dd	0x1659BA5A				; e^-057
-				dd	0x1713F623				; e^-056
-				dd	0x17C919B9				; e^-055
-				dd	0x1888A975				; e^-054
-				dd	0x1939BE2B				; e^-053
-				dd	0x19FC7361				; e^-052
-				dd	0x1AAB8EDC				; e^-051
-				dd	0x1B692BEB				; e^-050
-				dd	0x1C1E74DD				; e^-049
-				dd	0x1CD75D5D				; e^-048
-				dd	0x1D925B02				; e^-047
-				dd	0x1E46EAF1				; e^-046
-				dd	0x1F072DBA				; e^-045
-				dd	0x1FB7BA0F				; e^-044
-				dd	0x2079B5EA				; e^-043
-				dd	0x2129B229				; e^-042
-				dd	0x21E6A405				; e^-041
-				dd	0x229CBC92				; e^-040
-				dd	0x235506F2				; e^-039
-				dd	0x2410C457				; e^-038
-				dd	0x24C4C239				; e^-037
-				dd	0x2585B61D				; e^-036
-				dd	0x2635BB8D				; e^-035
-				dd	0x26F7000F				; e^-034
-				dd	0x27A7DAA4				; e^-033
-				dd	0x28642328				; e^-032
-				dd	0x291B090F				; e^-031
-				dd	0x29D2B706				; e^-030
-				dd	0x2A8F3216				; e^-029
-				dd	0x2B429F81				; e^-028
-				dd	0x2C044295				; e^-027
-				dd	0x2CB3C295				; e^-026
-				dd	0x2D7451BD				; e^-025
-				dd	0x2E26083C				; e^-024
-				dd	0x2EE1A93F				; e^-023
-				dd	0x2F995A46				; e^-022
-				dd	0x30506D87				; e^-021
-				dd	0x310DA433				; e^-020
-				dd	0x31C082B8				; e^-019
-				dd	0x3282D314				; e^-018
-				dd	0x3331CF19				; e^-017
-				dd	0x33F1AADE				; e^-016
-				dd	0x34A43AE5				; e^-015
-				dd	0x355F3638				; e^-014
-				dd	0x3617B02A				; e^-013
-				dd	0x36CE2A62				; e^-012
-				dd	0x378C1AA1				; e^-011
-				dd	0x383E6BCE				; e^-010
-				dd	0x39016791				; e^-009
-				dd	0x39AFE108				; e^-008
-				dd	0x3A6F0B5D				; e^-007
-				dd	0x3B227290				; e^-006
-				dd	0x3BDCC9FF				; e^-005
-				dd	0x3C960AAE				; e^-004
-				dd	0x3D4BED86				; e^-003
-				dd	0x3E0A9555				; e^-002
-				dd	0x3EBC5AB2				; e^-001
-				dd	0x3F800000				; e^+000
-				dd	0x402DF854				; e^+001
-				dd	0x40EC7326				; e^+002
-				dd	0x41A0AF2E				; e^+003
-				dd	0x425A6481				; e^+004
-				dd	0x431469C5				; e^+005
-				dd	0x43C9B6E3				; e^+006
-				dd	0x44891443				; e^+007
-				dd	0x453A4F54				; e^+008
-				dd	0x45FD38AC				; e^+009
-				dd	0x46AC14EE				; e^+010
-				dd	0x4769E224				; e^+011
-				dd	0x481EF0B3				; e^+012
-				dd	0x48D805AD				; e^+013
-				dd	0x4992CD62				; e^+014
-				dd	0x4A478665				; e^+015
-				dd	0x4B07975F				; e^+016
-				dd	0x4BB849A4				; e^+017
-				dd	0x4C7A7910				; e^+018
-				dd	0x4D2A36C8				; e^+019
-				dd	0x4DE75844				; e^+020
-				dd	0x4E9D3710				; e^+021
-				dd	0x4F55AD6E				; e^+022
-				dd	0x5011357A				; e^+023
-				dd	0x50C55BFE				; e^+024
-				dd	0x51861E9D				; e^+025
-				dd	0x52364993				; e^+026
-				dd	0x52F7C118				; e^+027
-				dd	0x53A85DD2				; e^+028
-				dd	0x5464D572				; e^+029
-				dd	0x551B8238				; e^+030
-				dd	0x55D35BB3				; e^+031
-				dd	0x568FA1FE				; e^+032
-				dd	0x5743379A				; e^+033
-				dd	0x5804A9F1				; e^+034
-				dd	0x58B44F11				; e^+035
-				dd	0x597510AD				; e^+036
-				dd	0x5A2689FE				; e^+037
-				dd	0x5AE2599A				; e^+038
-				dd	0x5B99D21F				; e^+039
-				dd	0x5C51106A				; e^+040
-				dd	0x5D0E12E4				; e^+041
-				dd	0x5DC1192B				; e^+042
-				dd	0x5E833952				; e^+043
-				dd	0x5F325A0E				; e^+044
-				dd	0x5FF267BB				; e^+045
-				dd	0x60A4BB3E				; e^+046
-				dd	0x615FE4A9				; e^+047
-				dd	0x621826B5				; e^+048
-				dd	0x62CECB81				; e^+049
-				dd	0x638C881F				; e^+050
-				dd	0x643F009E				; e^+051
-				dd	0x6501CCB3				; e^+052
-				dd	0x65B06A7B				; e^+053
-				dd	0x666FC62D				; e^+054
-				dd	0x6722F184				; e^+055
-				dd	0x67DD768B				; e^+056
-				dd	0x68967FF0				; e^+057
-				dd	0x694C8CE5				; e^+058
-				dd	0x6A0B01A3				; e^+059
-				dd	0x6ABCEDE5				; e^+060
-				dd	0x6B806408				; e^+061
-				dd	0x6C2E804A				; e^+062
-				dd	0x6CED2BEF				; e^+063
-				dd	0x6DA12CC1				; e^+064
-				dd	0x6E5B0F2E				; e^+065
-				dd	0x6F14DDC1				; e^+066
-				dd	0x6FCA5487				; e^+067
-				dd	0x70897F64				; e^+068
-				dd	0x713AE0EE				; e^+069
-				dd	0x71FDFE91				; e^+070
-				dd	0x72AC9B6A				; e^+071
-				dd	0x736A98EC				; e^+072
-				dd	0x741F6CE9				; e^+073
-				dd	0x74D8AE7F				; e^+074
-				dd	0x7593401C				; e^+075
-				dd	0x76482254				; e^+076
-				dd	0x77080156				; e^+077
-				dd	0x77B8D9AA				; e^+078
-				dd	0x787B3CCF				; e^+079
-				dd	0x792ABBCE				; e^+080
-				dd	0x79E80D11				; e^+081
-				dd	0x7A9DB1ED				; e^+082
-				dd	0x7B56546B				; e^+083
-				dd	0x7C11A6F5				; e^+084
-				dd	0x7CC5F63B				; e^+085
-				dd	0x7D86876D				; e^+086
-				dd	0x7E36D809				; e^+087
-				dd	0x7EF882B7				; e^+088
-				dd	0x7F800000				; e^+089
 
 ;******************************************************************************;
 ;       flt64_t consts                                                         ;
@@ -6221,59 +5322,25 @@ atan_flt64		dq	0x3FBC31C683947AA9		; 2^128 * (64!)^2 / (129)!
 				dq	0x3FE5555555555555		; 2^002 * (01!)^2 / (003)!
 
 ;==============================================================================;
-;       Coefficients to compute exp2(x) for flt64_t type                       ;
-;==============================================================================;
-align 16
-exp2_flt64		dq	0x3F947FD3FFAC83B4		; ln(2)^02 / 04!
-				dq	0x3F3502D8FFB5A908		; ln(2)^04 / 06!
-				dq	0x3EC712EF11BE9AE4		; ln(2)^06 / 08!
-				dq	0x3E4F888B9368EF22		; ln(2)^08 / 10!
-				dq	0x3DCD61E5E658C886		; ln(2)^10 / 12!
-				dq	0x3D8910F686016B9B		; ln(2)^11 / 13!
-				dq	0x3FE0000000000000		; ln(2)^00 / 02!
-				dq	0x3FBD9303FEA2F7EA		; ln(2)^01 / 03!
-				dq	0x3F66BC07126A1A33		; ln(2)^03 / 05!
-				dq	0x3F00A4F3BC9A363E		; ln(2)^05 / 07!
-				dq	0x3E8C6EE35A409D22		; ln(2)^07 / 09!
-				dq	0x3E0FCADA8FCF0462		; ln(2)^09 / 11!
-
-;==============================================================================;
-;       Coefficients to compute exp10(x) for flt64_t type                      ;
-;==============================================================================;
-align 16
-exp10_flt64		dq	0x3FAC46DBB451388B		; (ln(10) / 2)^02 / 04!
-				dq	0x3F63FD4AB552C516		; (ln(10) / 2)^04 / 06!
-				dq	0x3F0E47D12E08E562		; (ln(10) / 2)^06 / 08!
-				dq	0x3EAC8A8CD552035C		; (ln(10) / 2)^08 / 10!
-				dq	0x3E42579602BBA583		; (ln(10) / 2)^10 / 12!
-				dq	0x3DD1193BE810E96B		; (ln(10) / 2)^12 / 14!
-				dq	0x3D94FF7127F17B2A		; (ln(10) / 2)^13 / 15!
-				dq	0x3FE0000000000000		; (ln(10) / 2)^00 / 02!
-				dq	0x3FC88F97A4F1C6C7		; (ln(10) / 2)^01 / 03!
-				dq	0x3F8A0B3C1C96ADD4		; (ln(10) / 2)^03 / 05!
-				dq	0x3F3A4D248DE3823A		; (ln(10) / 2)^05 / 07!
-				dq	0x3EDEFCFC6B05BD61		; (ln(10) / 2)^07 / 09!
-				dq	0x3E77E5CD1E140F6D		; (ln(10) / 2)^09 / 11!
-				dq	0x3E09FD87AF3B94D5		; (ln(10) / 2)^11 / 13!
-
-;==============================================================================;
 ;       Coefficients to compute exp(x) for flt64_t type                        ;
 ;==============================================================================;
 align 16
-exp_flt64		dq	0x3FA5555555555555		; 1 / 04!
-				dq	0x3F56C16C16C16C17		; 1 / 06!
-				dq	0x3EFA01A01A01A01A		; 1 / 08!
-				dq	0x3E927E4FB7789F5C		; 1 / 10!
-				dq	0x3E21EED8EFF8D898		; 1 / 12!
-				dq	0x3DA93974A8C07C9D		; 1 / 14!
-				dq	0x3D6AE7F3E733B81F		; 1 / 15!
-				dq	0x3FE0000000000000		; 1 / 02!
-				dq	0x3FC5555555555555		; 1 / 03!
-				dq	0x3F81111111111111		; 1 / 05!
-				dq	0x3F2A01A01A01A01A		; 1 / 07!
+exp_flt64		dq	0x3CE952C77030AD4A		; 1 / 17!
 				dq	0x3EC71DE3A556C734		; 1 / 09!
-				dq	0x3E5AE64567F544E4		; 1 / 11!
 				dq	0x3DE6124613A86D09		; 1 / 13!
+				dq	0x3F81111111111111		; 1 / 05!
+				dq	0x3D6AE7F3E733B81F		; 1 / 15!
+				dq	0x3F2A01A01A01A01A		; 1 / 07!
+				dq	0x3E5AE64567F544E4		; 1 / 11!
+				dq	0x3FC5555555555555		; 1 / 03!
+				dq	0x3D2AE7F3E733B81F		; 1 / 16!
+				dq	0x3EFA01A01A01A01A		; 1 / 08!
+				dq	0x3E21EED8EFF8D898		; 1 / 12!
+				dq	0x3FA5555555555555		; 1 / 04!
+				dq	0x3DA93974A8C07C9D		; 1 / 14!
+				dq	0x3F56C16C16C16C17		; 1 / 06!
+				dq	0x3E927E4FB7789F5C		; 1 / 10!
+				dq	0x3FE0000000000000		; 1 / 02!
 
 ;==============================================================================;
 ;       Coefficients to compute log(x) for flt64_t type                        ;
@@ -6300,7 +5367,7 @@ log_flt64		dq	0x3FAF07C1F07C1F08		; 2 / 33
 ;       Table of integer powers of 10^x for flt64_t type                       ;
 ;==============================================================================;
 align 16
-ten_table_flt64	dq	0x0000000000000000		; 10^-324
+ten_flt64		dq	0x0000000000000000		; 10^-324
 				dq	0x0000000000000002		; 10^-323
 				dq	0x0000000000000014		; 10^-322
 				dq	0x00000000000000CA		; 10^-321
@@ -6934,1468 +6001,6 @@ ten_table_flt64	dq	0x0000000000000000		; 10^-324
 				dq	0x7FAC7B1F3CAC7433		; 10^+307
 				dq	0x7FE1CCF385EBC8A0		; 10^+308
 				dq	0x7FF0000000000000		; 10^+309
-
-;==============================================================================;
-;       Table of integer powers of e^x for flt64_t type                        ;
-;==============================================================================;
-align 16
-exp_table_flt64	dq	0x0000000000000000		; e^-746
-				dq	0x0000000000000001		; e^-745
-				dq	0x0000000000000002		; e^-744
-				dq	0x0000000000000004		; e^-743
-				dq	0x000000000000000B		; e^-742
-				dq	0x000000000000001F		; e^-741
-				dq	0x0000000000000055		; e^-740
-				dq	0x00000000000000E6		; e^-739
-				dq	0x0000000000000272		; e^-738
-				dq	0x00000000000006A7		; e^-737
-				dq	0x0000000000001215		; e^-736
-				dq	0x0000000000003127		; e^-735
-				dq	0x000000000000859B		; e^-734
-				dq	0x0000000000016B2E		; e^-733
-				dq	0x000000000003DB39		; e^-732
-				dq	0x00000000000A7B8C		; e^-731
-				dq	0x00000000001C7EA3		; e^-730
-				dq	0x00000000004D74E0		; e^-729
-				dq	0x0000000000D28C78		; e^-728
-				dq	0x00000000023C54AB		; e^-727
-				dq	0x000000000613C199		; e^-726
-				dq	0x000000001084FBE1		; e^-725
-				dq	0x000000002CE791F3		; e^-724
-				dq	0x000000007A103308		; e^-723
-				dq	0x000000014BCD6996		; e^-722
-				dq	0x0000000385EEB2AB		; e^-721
-				dq	0x0000000993B4DC95		; e^-720
-				dq	0x0000001A086DE03B		; e^-719
-				dq	0x00000046C3CBFB01		; e^-718
-				dq	0x000000C05BD75BEA		; e^-717
-				dq	0x0000020AE2A389EA		; e^-716
-				dq	0x0000058D59816822		; e^-715
-				dq	0x00000F17A0FDD8E1		; e^-714
-				dq	0x000029066EA1F013		; e^-713
-				dq	0x00006F84920BB2D4		; e^-712
-				dq	0x00012F230F75FE3F		; e^-711
-				dq	0x00033802FD28B3C3		; e^-710
-				dq	0x0008BFE55DE02338		; e^-709
-				dq	0x0017C8AB2288C9AB		; e^-708
-				dq	0x003029ADE2342558		; e^-707
-				dq	0x0045F7B06B2C0FE5		; e^-706
-				dq	0x005DDB62D06B3019		; e^-705
-				dq	0x00744A3824E5285F		; e^-704
-				dq	0x008B93AD0D66DEFD		; e^-703
-				dq	0x00A2BD8C17B493DC		; e^-702
-				dq	0x00B9788AF0D610E6		; e^-701
-				dq	0x00D14F2B0FB9307F		; e^-700
-				dq	0x00E78694FE9F73CC		; e^-699
-				dq	0x00FFF989A16D0DBB		; e^-698
-				dq	0x0115BAA6485E5782		; e^-697
-				dq	0x012D886CB184CAE4		; e^-696
-				dq	0x014411D758400B4D		; e^-695
-				dq	0x015B470CD81CA546		; e^-694
-				dq	0x017289797F3EB1AF		; e^-693
-				dq	0x018931C4C86F15C5		; e^-692
-				dq	0x01A11F127F22EEA9		; e^-691
-				dq	0x01B745367BEACEC7		; e^-690
-				dq	0x01CFA0B112945ED6		; e^-689
-				dq	0x01E57E45C0C5B59D		; e^-688
-				dq	0x01FD365D1770A040		; e^-687
-				dq	0x0213DA1332F99EDE		; e^-686
-				dq	0x022AFB418CF3E80F		; e^-685
-				dq	0x024255F7978A67A0		; e^-684
-				dq	0x0258EBC347A39184		; e^-683
-				dq	0x0270EF7F9293E5DA		; e^-682
-				dq	0x0287048D9C2DCB01		; e^-681
-				dq	0x029F48CF6261D064		; e^-680
-				dq	0x02B5428CFD1C5F1E		; e^-679
-				dq	0x02CCE53181A80DE5		; e^-678
-				dq	0x02E3A2EA01C991EE		; e^-677
-				dq	0x02FAB048DC506EC0		; e^-676
-				dq	0x03122304CE8D412E		; e^-675
-				dq	0x0328A6844C05657D		; e^-674
-				dq	0x0340C070D6B59CA4		; e^-673
-				dq	0x0356C49866B51C22		; e^-672
-				dq	0x036EF1E1E2DFE53B		; e^-671
-				dq	0x0385077A2B3A069B		; e^-670
-				dq	0x039C94E7769839F2		; e^-669
-				dq	0x03B36C5A1621103F		; e^-668
-				dq	0x03CA66207D01DE07		; e^-667
-				dq	0x03E1F09F9699E8FA		; e^-666
-				dq	0x03F86205B914C66C		; e^-665
-				dq	0x041091E4DC3968C8		; e^-664
-				dq	0x04268554E847D59B		; e^-663
-				dq	0x043E9BE5ED8B2664		; e^-662
-				dq	0x0454CD0B7E05A5C6		; e^-661
-				dq	0x046C457C838EC18B		; e^-660
-				dq	0x04833661C61DA1B7		; e^-659
-				dq	0x049A1CC62C31E026		; e^-658
-				dq	0x04B1BEC6665408BB		; e^-657
-				dq	0x04C81E45782FC195		; e^-656
-				dq	0x04E063DA37CD3C33		; e^-655
-				dq	0x04F646C133183202		; e^-654
-				dq	0x050E46D8E33D72F8		; e^-653
-				dq	0x0524933F2D676E53		; e^-652
-				dq	0x053BF6EE3CA69D34		; e^-651
-				dq	0x055300FF6C7C2E28		; e^-650
-				dq	0x0569D437AD527EDA		; e^-649
-				dq	0x05818D77B8A44AD7		; e^-648
-				dq	0x0597DB417881EFAD		; e^-647
-				dq	0x05B0364F82109118		; e^-646
-				dq	0x05C608DB5EB484AD		; e^-645
-				dq	0x05DDF2B82C19897E		; e^-644
-				dq	0x05F45A13763AE1F1		; e^-643
-				dq	0x060BA93A3CB53A35		; e^-642
-				dq	0x0622CC31688C252A		; e^-641
-				dq	0x06398C72CA0CAE46		; e^-640
-				dq	0x06515CB20CAC7D62		; e^-639
-				dq	0x066798F7AEF4551C		; e^-638
-				dq	0x06800943578974D3		; e^-637
-				dq	0x0695CBA187F85526		; e^-636
-				dq	0x06AD9F813776CA1F		; e^-635
-				dq	0x06C421869A4110E5		; e^-634
-				dq	0x06DB5C5E2537C88E		; e^-633
-				dq	0x06F297F61E22C99D		; e^-632
-				dq	0x07094575522F0869		; e^-631
-				dq	0x07212C73E5BBD5FC		; e^-630
-				dq	0x07375766161D6EFA		; e^-629
-				dq	0x074FB968B133627C		; e^-628
-				dq	0x07658F11D0FDA401		; e^-627
-				dq	0x077D4D317BCD311C		; e^-626
-				dq	0x0793E996E012FEE2		; e^-625
-				dq	0x07AB10579E40BCD8		; e^-624
-				dq	0x07C2644BF58EA085		; e^-623
-				dq	0x07D8FF3D1B9CB882		; e^-622
-				dq	0x07F0FCBBCB435662		; e^-621
-				dq	0x0807168AAE316C71		; e^-620
-				dq	0x081F614252E8284B		; e^-619
-				dq	0x0835532A610E58A3		; e^-618
-				dq	0x084CFBC676A188E2		; e^-617
-				dq	0x0863B24293142DAB		; e^-616
-				dq	0x087AC5245665858A		; e^-615
-				dq	0x089231315B8B02C6		; e^-614
-				dq	0x08A8B9C8023C95F8		; e^-613
-				dq	0x08C0CD8848CA512E		; e^-612
-				dq	0x08D6D6637CF293E3		; e^-611
-				dq	0x08EF0A10E423A904		; e^-610
-				dq	0x090517E96495D782		; e^-609
-				dq	0x091CAB3DAC71D32F		; e^-608
-				dq	0x09337B8803654D1B		; e^-607
-				dq	0x094A7AC202AC7312		; e^-606
-				dq	0x0961FEA4C133D172		; e^-605
-				dq	0x09787513E7E86E26		; e^-604
-				dq	0x09909ED7EDE30E86		; e^-603
-				dq	0x09A696EE8DA1D378		; e^-602
-				dq	0x09BEB3D1BC502A62		; e^-601
-				dq	0x09D4DD4D0D12C071		; e^-600
-				dq	0x09EC5B94A8A1E898		; e^-599
-				dq	0x0A03456585D7102A		; e^-598
-				dq	0x0A1A312E5E7AD231		; e^-597
-				dq	0x0A31CCA49BF94C40		; e^-596
-				dq	0x0A48311EB45C7CA5		; e^-595
-				dq	0x0A6070A94E1F9059		; e^-594
-				dq	0x0A765829F0EF7C8F		; e^-593
-				dq	0x0A8E5E823A3B0994		; e^-592
-				dq	0x0AA4A3539108D490		; e^-591
-				dq	0x0ABC0CC8FD684DF1		; e^-590
-				dq	0x0AD30FD973DD2691		; e^-589
-				dq	0x0AE9E8672B833817		; e^-588
-				dq	0x0B019B2F659409CA		; e^-587
-				dq	0x0B17EDE655271177		; e^-586
-				dq	0x0B3042FB010675D2		; e^-585
-				dq	0x0B461A13BCEC2990		; e^-584
-				dq	0x0B5E0A1FC40034A2		; e^-583
-				dq	0x0B7469FB2BF30362		; e^-582
-				dq	0x0B8BBED843BB3EF0		; e^-581
-				dq	0x0BA2DAE22B815A8F		; e^-580
-				dq	0x0BB9A06A31B3FFAD		; e^-579
-				dq	0x0BD16A439BF9113A		; e^-578
-				dq	0x0BE7AB68BD9864AA		; e^-577
-				dq	0x0C0015CBA207FDA9		; e^-576
-				dq	0x0C15DCAA0CF9CDC5		; e^-575
-				dq	0x0C2DB6A7C6F5DCCD		; e^-574
-				dq	0x0C4431421E359EAD		; e^-573
-				dq	0x0C5B71C01B3DED84		; e^-572
-				dq	0x0C72A67E0F56D28A		; e^-571
-				dq	0x0C8959353F25F783		; e^-570
-				dq	0x0CA139DFC14E1511		; e^-569
-				dq	0x0CB769A3E6B296E5		; e^-568
-				dq	0x0CCFD233A0E64E00		; e^-567
-				dq	0x0CE59FEB01BCEEA9		; e^-566
-				dq	0x0CFD6417B798615D		; e^-565
-				dq	0x0D13F926AD10B4A7		; e^-564
-				dq	0x0D2B257E2A2DF540		; e^-563
-				dq	0x0D4272AB866D760E		; e^-562
-				dq	0x0D5912C6280B3FE7		; e^-561
-				dq	0x0D710A025BDDCE90		; e^-560
-				dq	0x0D872895CF19DE71		; e^-559
-				dq	0x0D9F79C85ED5E0EC		; e^-558
-				dq	0x0DB563D4C10E0648		; e^-557
-				dq	0x0DCD126D11767245		; e^-556
-				dq	0x0DE3C1A72292901E		; e^-555
-				dq	0x0DFADA101D510258		; e^-554
-				dq	0x0E123F68FC4575DB		; e^-553
-				dq	0x0E28CD1AC69E588E		; e^-552
-				dq	0x0E40DAA9F60C798E		; e^-551
-				dq	0x0E56E83C7B04E02F		; e^-550
-				dq	0x0E6F2252CBB76A33		; e^-549
-				dq	0x0E85286575EB0E41		; e^-548
-				dq	0x0E9CC1A5571D69E9		; e^-547
-				dq	0x0EB38AC1CD8A5E11		; e^-546
-				dq	0x0ECA8F73A7E2AB8F		; e^-545
-				dq	0x0EE20CB4E0C2F693		; e^-544
-				dq	0x0EF88830FB115D59		; e^-543
-				dq	0x0F10ABD51E4C7042		; e^-542
-				dq	0x0F26A895F42D3418		; e^-541
-				dq	0x0F3ECBD03CE14DD8		; e^-540
-				dq	0x0F54ED9B506932EF		; e^-539
-				dq	0x0F6C71BE1205DD8D		; e^-538
-				dq	0x0F835475017AF871		; e^-537
-				dq	0x0F9A45A683827EA0		; e^-536
-				dq	0x0FB1DA8DA821DDAD		; e^-535
-				dq	0x0FC84406AB7D71AE		; e^-534
-				dq	0x0FE07D826712E6B6		; e^-533
-				dq	0x0FF669A049C014B6		; e^-532
-				dq	0x100E763E0F12CD39		; e^-531
-				dq	0x1024B37485A6AE4A		; e^-530
-				dq	0x103C22B4D28063BD		; e^-529
-				dq	0x10531EBF168DD58E		; e^-528
-				dq	0x1069FCA670223E80		; e^-527
-				dq	0x1081A8F1CAE9C04F		; e^-526
-				dq	0x10980099C3D259DE		; e^-525
-				dq	0x10B04FB066CCC58F		; e^-524
-				dq	0x10C62B59904F3938		; e^-523
-				dq	0x10DE2199A65F706A		; e^-522
-				dq	0x10F479EF4FBCCA24		; e^-521
-				dq	0x110BD4872FA2901F		; e^-520
-				dq	0x1122E99E69861BD4		; e^-519
-				dq	0x1139B47133F452F4		; e^-518
-				dq	0x115177DFC5E1F3B3		; e^-517
-				dq	0x1167BDE835C64224		; e^-516
-				dq	0x1180225DB7D3A3C5		; e^-515
-				dq	0x1195EDBFE1C1D991		; e^-514
-				dq	0x11ADCDE06E1AA8B3		; e^-513
-				dq	0x11C44109EDB20931		; e^-512
-				dq	0x11DB8732C7342422		; e^-511
-				dq	0x11F2B5115BB3D972		; e^-510
-				dq	0x12096D049B5A68FF		; e^-509
-				dq	0x122147561A05BEB0		; e^-508
-				dq	0x12377BEFF8C5B2B3		; e^-507
-				dq	0x124FEB11F0C5BE05		; e^-506
-				dq	0x1265B0D15D45DC40		; e^-505
-				dq	0x127D7B0FD8C3ABB6		; e^-504
-				dq	0x129408C2A36C769C		; e^-503
-				dq	0x12AB3AB53D9C73EB		; e^-502
-				dq	0x12C2811652E75F7D		; e^-501
-				dq	0x12D9265E78D4438D		; e^-500
-				dq	0x12F117534C78AC15		; e^-499
-				dq	0x13073AAF09E3B05D		; e^-498
-				dq	0x131F92619519A49B		; e^-497
-				dq	0x1335748C27412D46		; e^-496
-				dq	0x134D29255FF1867D		; e^-495
-				dq	0x1363D117B9A41B90		; e^-494
-				dq	0x137AEF0C3DCFFEFB		; e^-493
-				dq	0x13924DABB964C046		; e^-492
-				dq	0x13A8E07CA4EEBBE2		; e^-491
-				dq	0x13C0E7D5E67AFD77		; e^-490
-				dq	0x13D6FA236BCA0954		; e^-489
-				dq	0x13EF3AA7A8605559		; e^-488
-				dq	0x140538EE69433DD8		; e^-487
-				dq	0x141CD81E843F67F6		; e^-486
-				dq	0x14339A077DD59A6E		; e^-485
-				dq	0x144AA435793E3BEE		; e^-484
-				dq	0x14621ACFFDD7705B		; e^-483
-				dq	0x14789B5CFE32F146		; e^-482
-				dq	0x1490B8DC755E3E18		; e^-481
-				dq	0x14A6BA4B26A9CD8A		; e^-480
-				dq	0x14BEE3E17DDAB2DD		; e^-479
-				dq	0x14D4FDF651F6AC5A		; e^-478
-				dq	0x14EC87F8CD392224		; e^-477
-				dq	0x150363904234EF34		; e^-476
-				dq	0x151A5A2EA7BF96DD		; e^-475
-				dq	0x1531E881934609FB		; e^-474
-				dq	0x154856FD6915A764		; e^-473
-				dq	0x15608A658A79F58B		; e^-472
-				dq	0x15767B24482BF236		; e^-471
-				dq	0x158E8E0C7038478F		; e^-470
-				dq	0x15A4C3A215131439		; e^-469
-				dq	0x15BC38B1C947E18A		; e^-468
-				dq	0x15D32DB05DA054BB		; e^-467
-				dq	0x15EA10F58783A1BE		; e^-466
-				dq	0x1601B6BEF106327D		; e^-465
-				dq	0x1618135BCFE6D2E6		; e^-464
-				dq	0x16305C6FBB2079C6		; e^-463
-				dq	0x16463CACE362200E		; e^-462
-				dq	0x165E3925E1829EDA		; e^-461
-				dq	0x167489EFEB4F052E		; e^-460
-				dq	0x168BEA470D9F1A19		; e^-459
-				dq	0x16A2F8662B934E56		; e^-458
-				dq	0x16B9C887DCFF7642		; e^-457
-				dq	0x16D1858692B0A160		; e^-456
-				dq	0x16E7D07622C153BF		; e^-455
-				dq	0x17002EF9A093E03C		; e^-454
-				dq	0x1715FEE310B7ABB4		; e^-453
-				dq	0x172DE52B3B08D7C9		; e^-452
-				dq	0x174450DE12522184		; e^-451
-				dq	0x175B9CB63629A932		; e^-450
-				dq	0x1772C3B00C19D57A		; e^-449
-				dq	0x178980E372DC48AD		; e^-448
-				dq	0x17A154D6F815489C		; e^-447
-				dq	0x17B78E4A577ADCB4		; e^-446
-				dq	0x17D00201D7FB0DB5		; e^-445
-				dq	0x17E5C1C4EDE2B7E9		; e^-444
-				dq	0x17FD9219ED4B7068		; e^-443
-				dq	0x1814186ACCA762E8		; e^-442
-				dq	0x182B4FFCE5772C07		; e^-441
-				dq	0x18428F8C63C3AB07		; e^-440
-				dq	0x18593A0619E62B15		; e^-439
-				dq	0x187124AEA52F9DDC		; e^-438
-				dq	0x18874CD669940799		; e^-437
-				dq	0x189FAB0E04ADC91C		; e^-436
-				dq	0x18B585509DD58108		; e^-435
-				dq	0x18CD3FEF6FE84946		; e^-434
-				dq	0x18E3E09461AF856E		; e^-433
-				dq	0x18FB0418C4A989D9		; e^-432
-				dq	0x19125BF99B97CBCC		; e^-431
-				dq	0x1928F3EDA8FB0088		; e^-430
-				dq	0x1940F50C221B0447		; e^-429
-				dq	0x19570C185A2895CC		; e^-428
-				dq	0x196F530F88EF2209		; e^-427
-				dq	0x1985498448AFD169		; e^-426
-				dq	0x199CEEA94186E084		; e^-425
-				dq	0x19B3A9591D939844		; e^-424
-				dq	0x19CAB9078362B189		; e^-423
-				dq	0x19E228F6210807EB		; e^-422
-				dq	0x19F8AE97FCF99F91		; e^-421
-				dq	0x1A10C5EDFB075673		; e^-420
-				dq	0x1A26CC0E2FDFDC75		; e^-419
-				dq	0x1A3EFC058DE3E67A		; e^-418
-				dq	0x1A550E5E1BB09E26		; e^-417
-				dq	0x1A6C9E44E7C4C3CF		; e^-416
-				dq	0x1A8372B75137B3C5		; e^-415
-				dq	0x1A9A6EC6D7B289DD		; e^-414
-				dq	0x1AB1F68065E4BCB1		; e^-413
-				dq	0x1AC86A02F8B1239C		; e^-412
-				dq	0x1AE09752C02D903D		; e^-411
-				dq	0x1AF68CB5F6DD5C08		; e^-410
-				dq	0x1B0EA5ED6C2A4D75		; e^-409
-				dq	0x1B24D3DC4927CBDA		; e^-408
-				dq	0x1B3C4EBFEF2238B1		; e^-407
-				dq	0x1B533CAD522DD473		; e^-406
-				dq	0x1B6A25547E0513F7		; e^-405
-				dq	0x1B81C496E050B08F		; e^-404
-				dq	0x1B98262C84D06CB5		; e^-403
-				dq	0x1BB0693905C49814		; e^-402
-				dq	0x1BC64E0DC0B1829F		; e^-401
-				dq	0x1BDE50C483C04DCD		; e^-400
-				dq	0x1BF499FD08681AF2		; e^-399
-				dq	0x1C0C0017EAEF1AA2		; e^-398
-				dq	0x1C2307397AA8DA7C		; e^-397
-				dq	0x1C39DCAE3910BF72		; e^-396
-				dq	0x1C5193380AB510C9		; e^-395
-				dq	0x1C67E3128FD5CD18		; e^-394
-				dq	0x1C803B9F63F62777		; e^-393
-				dq	0x1C961013A44A98A8		; e^-392
-				dq	0x1CADFC883BEF20CE		; e^-391
-				dq	0x1CC460BE95B93B11		; e^-390
-				dq	0x1CDBB24A7537EE42		; e^-389
-				dq	0x1CF2D25A296FAD56		; e^-388
-				dq	0x1D0994D1D1C4EF99		; e^-387
-				dq	0x1D21626263B5908B		; e^-386
-				dq	0x1D37A0B30DFEE42C		; e^-385
-				dq	0x1D500E8476D3D23E		; e^-384
-				dq	0x1D65D2C5BDE5D77A		; e^-383
-				dq	0x1D7DA9360336FDCE		; e^-382
-				dq	0x1D94281F324A0531		; e^-381
-				dq	0x1DAB65552EB32927		; e^-380
-				dq	0x1DC29E0DC1D08325		; e^-379
-				dq	0x1DD94DBD1738B12B		; e^-378
-				dq	0x1DF132146E24A8F9		; e^-377
-				dq	0x1E075F0BF938A647		; e^-376
-				dq	0x1E1FC3CDBC9858C5		; e^-375
-				dq	0x1E3596222F00A953		; e^-374
-				dq	0x1E4D56CB4F3B0E14		; e^-373
-				dq	0x1E63F01D2422DC00		; e^-372
-				dq	0x1E7B1935BEAEADB3		; e^-371
-				dq	0x1E926A52AB944B6C		; e^-370
-				dq	0x1EA9076DDE99A035		; e^-369
-				dq	0x1EC1024CB0F7F9E9		; e^-368
-				dq	0x1ED71E1B510F90E2		; e^-367
-				dq	0x1EEF6B8A7C401BE2		; e^-366
-				dq	0x1F055A271E4A125D		; e^-365
-				dq	0x1F1D05459CAD9872		; e^-364
-				dq	0x1F33B8B6B6183219		; e^-363
-				dq	0x1F4ACDE9D2FD7A56		; e^-362
-				dq	0x1F62372752F23CC1		; e^-361
-				dq	0x1F78C1E2031AFD5F		; e^-360
-				dq	0x1F90D309B73CCAE2		; e^-359
-				dq	0x1FA6DDDF1AA00AA3		; e^-358
-				dq	0x1FBF143C7BAFE995		; e^-357
-				dq	0x1FD51ED2B794422F		; e^-356
-				dq	0x1FECB4A26F3C63F6		; e^-355
-				dq	0x200381EA37BD35B3		; e^-354
-				dq	0x201A836F1FE58BBE		; e^-353
-				dq	0x2032048A2883850B		; e^-352
-				dq	0x20487D1765E4F251		; e^-351
-				dq	0x2060A44A100CAC19		; e^-350
-				dq	0x20769E556086EEE2		; e^-349
-				dq	0x208EBDE1117307D4		; e^-348
-				dq	0x20A4E4232BC64D77		; e^-347
-				dq	0x20BC64DF517D5120		; e^-346
-				dq	0x20D34BB5FD56A155		; e^-345
-				dq	0x20EA39C3600DF153		; e^-344
-				dq	0x2101D279A1371C02		; e^-343
-				dq	0x2118390BEE040482		; e^-342
-				dq	0x2130760C4E8236F6		; e^-341
-				dq	0x21465F7C32D2440B		; e^-340
-				dq	0x215E68759B7A3FAE		; e^-339
-				dq	0x2174AA16B0CE0F41		; e^-338
-				dq	0x218C15F9D4DB28FE		; e^-337
-				dq	0x21A316185FCDB131		; e^-336
-				dq	0x21B9F0E4546D1388		; e^-335
-				dq	0x21D1A0F43645B77A		; e^-334
-				dq	0x21E7F5BD8858B612		; e^-333
-				dq	0x2200484F09ADEDE8		; e^-332
-				dq	0x22162151A6F21C90		; e^-331
-				dq	0x222E13F77F074FF1		; e^-330
-				dq	0x224470AB81923181		; e^-329
-				dq	0x225BC7EF9182A19B		; e^-328
-				dq	0x2272E10FBCA33CB4		; e^-327
-				dq	0x2289A8CFC4372B65		; e^-326
-				dq	0x22A16FF86525E12C		; e^-325
-				dq	0x22B7B32A2787541B		; e^-324
-				dq	0x22D01B10DC8B3B1D		; e^-323
-				dq	0x22E5E3D3D7A9A1CD		; e^-322
-				dq	0x22FDC064289898E4		; e^-321
-				dq	0x231437DFDDE45C6A		; e^-320
-				dq	0x232B7ABE264F972D		; e^-319
-				dq	0x2342AC9A75E2F3FA		; e^-318
-				dq	0x235961837CCCEACD		; e^-317
-				dq	0x23713F84AF802D9D		; e^-316
-				dq	0x2387714FC3E7F204		; e^-315
-				dq	0x239FDCA0CBEB1B9C		; e^-314
-				dq	0x23B5A700E5004888		; e^-313
-				dq	0x23CD6DB90BD50085		; e^-312
-				dq	0x23E3FFB20A738C27		; e^-311
-				dq	0x23FB2E6338BA7970		; e^-310
-				dq	0x241278B6F216C0AD		; e^-309
-				dq	0x24291AFD51AA54F3		; e^-308
-				dq	0x24410F979B2393BD		; e^-307
-				dq	0x2457302C5B769158		; e^-306
-				dq	0x246F8418913B2B95		; e^-305
-				dq	0x24856AD6F4332E86		; e^-304
-				dq	0x249D1BF3A3780EA3		; e^-303
-				dq	0x24B3C82050BE8C92		; e^-302
-				dq	0x24CAE2DC74C5EC9D		; e^-301
-				dq	0x24E245639C3A49F7		; e^-300
-				dq	0x24F8D53B1C55C677		; e^-299
-				dq	0x2510E02FB1F9E4EF		; e^-298
-				dq	0x2526EFBDF1C3759B		; e^-297
-				dq	0x253F2C8655FD39E2		; e^-296
-				dq	0x25552F542FA6A0CE		; e^-295
-				dq	0x256CCB11713E403A		; e^-294
-				dq	0x25839128FF069A6E		; e^-293
-				dq	0x259A98278CEC9D6A		; e^-292
-				dq	0x25B2129EE3AE9B2D		; e^-291
-				dq	0x25C8903ABC4F2CB1		; e^-290
-				dq	0x25E0B14B81FC651F		; e^-289
-				dq	0x25F6B0028FE3A3B8		; e^-288
-				dq	0x260ED5E76EA7FC79		; e^-287
-				dq	0x2624F476C6D7CA24		; e^-286
-				dq	0x263C7B0FFDD19182		; e^-285
-				dq	0x26535ACA684229D8		; e^-284
-				dq	0x266A4E423A0F478C		; e^-283
-				dq	0x2681E0673C2DECBD		; e^-282
-				dq	0x26984BFA16FF6B94		; e^-281
-				dq	0x26B082E99D288282		; e^-280
-				dq	0x26C670F844618C78		; e^-279
-				dq	0x26DE8039371D7439		; e^-278
-				dq	0x26F4BA3CEE4E8949		; e^-277
-				dq	0x270C2BECD8B63E07		; e^-276
-				dq	0x27232502E40FD165		; e^-275
-				dq	0x273A052A3B62EE2A		; e^-274
-				dq	0x2751AEBB1DBF8F18		; e^-273
-				dq	0x2768087717A7F1BB		; e^-272
-				dq	0x278055089974ACB1		; e^-271
-				dq	0x2796329D232DE199		; e^-270
-				dq	0x27AE2B7912964F75		; e^-269
-				dq	0x27C480A4DF8F6E9C		; e^-268
-				dq	0x27DBDDA59837B646		; e^-267
-				dq	0x27F2EFD0CEA959AA		; e^-266
-				dq	0x2809BCDD565F45B5		; e^-265
-				dq	0x28217D9904ABF72C		; e^-264
-				dq	0x2837C5AFAF527A12		; e^-263
-				dq	0x285027A710C54ACD		; e^-262
-				dq	0x2865F4EF4590950A		; e^-261
-				dq	0x287DD7A46B8D85D6		; e^-260
-				dq	0x289447ACD90DE0A6		; e^-259
-				dq	0x28AB9037D955CA2E		; e^-258
-				dq	0x28C2BB3288D6F0AD		; e^-257
-				dq	0x28D9755956AD4E9C		; e^-256
-				dq	0x28F14CFF7170EC0D		; e^-255
-				dq	0x290783A1D4C0FAA7		; e^-254
-				dq	0x291FF58741C3A08D		; e^-253
-				dq	0x2935B7ECCA1A01D7		; e^-252
-				dq	0x294D84B8B3AC2CDB		; e^-251
-				dq	0x29640F531E1E6723		; e^-250
-				dq	0x297B43A13FB207F5		; e^-249
-				dq	0x2992872677E280EB		; e^-248
-				dq	0x29A92E9C0E16205F		; e^-247
-				dq	0x29C11CECE8B5D57F		; e^-246
-				dq	0x29D7424B845DC019		; e^-245
-				dq	0x29EF9CB9D6D3DFFE		; e^-244
-				dq	0x2A057B93D4943E4D		; e^-243
-				dq	0x2A1D32B363B58467		; e^-242
-				dq	0x2A33D795F6E91C26		; e^-241
-				dq	0x2A4AF7DF757D4EB7		; e^-240
-				dq	0x2A6253AB058B2B8A		; e^-239
-				dq	0x2A78E8A35471E469		; e^-238
-				dq	0x2A90ED5FF3402AFB		; e^-237
-				dq	0x2AA701AAC02BB536		; e^-236
-				dq	0x2ABF44E32B95DAE1		; e^-235
-				dq	0x2AD53FE28DF496F2		; e^-234
-				dq	0x2AECE191FB733AC4		; e^-233
-				dq	0x2B03A073B05C42E7		; e^-232
-				dq	0x2B1AACF02B65943F		; e^-231
-				dq	0x2B3220BE9FF8E556		; e^-230
-				dq	0x2B48A36D07970034		; e^-229
-				dq	0x2B60BE571DE802D5		; e^-228
-				dq	0x2B76C1BD8FB6D644		; e^-227
-				dq	0x2B8EEE00926A16FA		; e^-226
-				dq	0x2BA504D7244D31C8		; e^-225
-				dq	0x2BBC915201A1E776		; e^-224
-				dq	0x2BD369EA9C1F03D9		; e^-223
-				dq	0x2BEA62D11883DD7F		; e^-222
-				dq	0x2C01EE5FB9B0362F		; e^-221
-				dq	0x2C185EF70B496E3E		; e^-220
-				dq	0x2C308FD0F98CC130		; e^-219
-				dq	0x2C4682820004CF81		; e^-218
-				dq	0x2C5E980F65223146		; e^-217
-				dq	0x2C74CA6FCABED982		; e^-216
-				dq	0x2C8C41F103DDBC48		; e^-215
-				dq	0x2CA333F910844D90		; e^-214
-				dq	0x2CBA197FFA4A691E		; e^-213
-				dq	0x2CD1BC8CC9861A79		; e^-212
-				dq	0x2CE81B3F492A453B		; e^-211
-				dq	0x2D0061CC1B09E660		; e^-210
-				dq	0x2D1643F62385C65C		; e^-209
-				dq	0x2D2E430D04EC3068		; e^-208
-				dq	0x2D4490AAB96AF02F		; e^-207
-				dq	0x2D5BF36C968F6C0E		; e^-206
-				dq	0x2D72FE9D687DDA2E		; e^-205
-				dq	0x2D89D0FA94730B8E		; e^-204
-				dq	0x2DA18B444A94063D		; e^-203
-				dq	0x2DB7D843B0A76D0D		; e^-202
-				dq	0x2DD034471B2BFC6C		; e^-201
-				dq	0x2DE6061812054CFA		; e^-200
-				dq	0x2DFDEEF6DA3E109F		; e^-199
-				dq	0x2E1457862D6588F1		; e^-198
-				dq	0x2E2BA5C254D94663		; e^-197
-				dq	0x2E42C9D6038F58D1		; e^-196
-				dq	0x2E59893EB0EDBC2F		; e^-195
-				dq	0x2E715A84BC2C099D		; e^-194
-				dq	0x2E87960236EB8104		; e^-193
-				dq	0x2EA0074096A5A34C		; e^-192
-				dq	0x2EB5C8E5E89B7F87		; e^-191
-				dq	0x2ECD9BCA54C1887C		; e^-190
-				dq	0x2EE41F0068A7A854		; e^-189
-				dq	0x2EFB58EFE08487FC		; e^-188
-				dq	0x2F1295A145C1BAB3		; e^-187
-				dq	0x2F29424A1FCF52E8		; e^-186
-				dq	0x2F412A4CA1CD1638		; e^-185
-				dq	0x2F575478D6CDDEE7		; e^-184
-				dq	0x2F6FB56E5C09773B		; e^-183
-				dq	0x2F858C5DC99E4AE4		; e^-182
-				dq	0x2F9D4984EB4005E2		; e^-181
-				dq	0x2FB3E717B201AAD5		; e^-180
-				dq	0x2FCB0CF2E1EEDED3		; e^-179
-				dq	0x2FE261FD9796A399		; e^-178
-				dq	0x2FF8FC1AB74075B7		; e^-177
-				dq	0x3010FA9A8317651F		; e^-176
-				dq	0x302713A590C2E245		; e^-175
-				dq	0x303F5D530B4F5EDD		; e^-174
-				dq	0x3055507DDC92DC42		; e^-173
-				dq	0x306CF8241B8EE293		; e^-172
-				dq	0x3083AFCA550DD136		; e^-171
-				dq	0x309AC1C907F821BE		; e^-170
-				dq	0x30B22EE965FBFD1B		; e^-169
-				dq	0x30C8B6AE536CB5AF		; e^-168
-				dq	0x30E0CB6CEBC0FD13		; e^-167
-				dq	0x30F6D3866ACC4B97		; e^-166
-				dq	0x310F062C8B65B198		; e^-165
-				dq	0x312515444E1F3930		; e^-164
-				dq	0x313CA7A56A7BCFC8		; e^-163
-				dq	0x31537916A222F236		; e^-162
-				dq	0x316A777007F03AC8		; e^-161
-				dq	0x3181FC63223FAC81		; e^-160
-				dq	0x31987202D671DAE5		; e^-159
-				dq	0x31B09CC26B8A5898		; e^-158
-				dq	0x31C694197069D2BB		; e^-157
-				dq	0x31DEAFF8340C0B95		; e^-156
-				dq	0x31F4DAAF4FFBFFB3		; e^-155
-				dq	0x320C580663B97826		; e^-154
-				dq	0x322342FAEE475139		; e^-153
-				dq	0x323A2DE59D8543CC		; e^-152
-				dq	0x3251CA6942036ABB		; e^-151
-				dq	0x32682E16284F5EC5		; e^-150
-				dq	0x32806E9996332BA1		; e^-149
-				dq	0x3296555CB289E44B		; e^-148
-				dq	0x32AE5AB364643354		; e^-147
-				dq	0x32C4A0BD18E64DF7		; e^-146
-				dq	0x32DC094499CC578E		; e^-145
-				dq	0x32F30D759323998C		; e^-144
-				dq	0x3309E5278AB1D4CF		; e^-143
-				dq	0x332198FA3F30BE25		; e^-142
-				dq	0x3337EAE636D6144E		; e^-141
-				dq	0x335040F1036F4863		; e^-140
-				dq	0x3366174E477A895F		; e^-139
-				dq	0x337E065B82DD95A0		; e^-138
-				dq	0x3394676BE491D129		; e^-137
-				dq	0x33ABBB5DA5F7C823		; e^-136
-				dq	0x33C2D884EEF5FDCB		; e^-135
-				dq	0x33D99D3397AB8371		; e^-134
-				dq	0x33F1681497ED15B3		; e^-133
-				dq	0x3407A870F597FDBD		; e^-132
-				dq	0x342013C74EDBA307		; e^-131
-				dq	0x3435D9EC4ADA7938		; e^-130
-				dq	0x344DB2EDFD20FA7C		; e^-129
-				dq	0x34642EB9F39AFB0B		; e^-128
-				dq	0x347B6E4F282B43F4		; e^-127
-				dq	0x3492A42764857B19		; e^-126
-				dq	0x34A9560792D19314		; e^-125
-				dq	0x34C137B6CE8E052C		; e^-124
-				dq	0x34D766B45DD84F18		; e^-123
-				dq	0x34EFCE362FE6E7D0		; e^-122
-				dq	0x35059D34DD8A5473		; e^-121
-				dq	0x351D606847FC727A		; e^-120
-				dq	0x3533F6A58B795DE3		; e^-119
-				dq	0x354B2216C6EFDAC1		; e^-118
-				dq	0x3562705B5B153FB8		; e^-117
-				dq	0x35790FA1509BD50D		; e^-116
-				dq	0x359107DF698DA211		; e^-115
-				dq	0x35A725AE6E7B9D35		; e^-114
-				dq	0x35BF75D6040AEFF6		; e^-113
-				dq	0x35D56126259E093C		; e^-112
-				dq	0x35ED0EC7DF4F7BD4		; e^-111
-				dq	0x3603BF2CF6722E46		; e^-110
-				dq	0x361AD6B22F55DB42		; e^-109
-				dq	0x36323D1F3E5834A0		; e^-108
-				dq	0x3648C9FEAB89B876		; e^-107
-				dq	0x3660D88CF37F00DD		; e^-106
-				dq	0x3676E55D2BF838A7		; e^-105
-				dq	0x368F1E6B68529E33		; e^-104
-				dq	0x36A525BE4E4E601D		; e^-103
-				dq	0x36BCBE0A45F75EB1		; e^-102
-				dq	0x36D3884E838AEA68		; e^-101
-				dq	0x36EA8C1F14E2AF5D		; e^-100
-				dq	0x37020A717E64A9BD		; e^-099
-				dq	0x3718851D84118908		; e^-098
-				dq	0x3730A9BDFB02D240		; e^-097
-				dq	0x3746A5BEA046B42E		; e^-096
-				dq	0x375EC7F3B269EFA8		; e^-095
-				dq	0x3774EAFB87EAB0F2		; e^-094
-				dq	0x378C6E2D05BBC000		; e^-093
-				dq	0x37A35208867C2683		; e^-092
-				dq	0x37BA425B317EEACD		; e^-091
-				dq	0x37D1D8508FA8246A		; e^-090
-				dq	0x37E840FBC08FDC8A		; e^-089
-				dq	0x38007B7112BC1FFE		; e^-088
-				dq	0x381666D0DAD2961D		; e^-087
-				dq	0x382E726C3F64D0FE		; e^-086
-				dq	0x3844B0DC07CABF98		; e^-085
-				dq	0x385C1F2DAF3B6A46		; e^-084
-				dq	0x38731C5957A47DE2		; e^-083
-				dq	0x3889F96445648B9F		; e^-082
-				dq	0x38A1A6BAEADB4FD1		; e^-081
-				dq	0x38B7FD974D372E45		; e^-080
-				dq	0x38D04DA4D1452919		; e^-079
-				dq	0x38E62891F06B3450		; e^-078
-				dq	0x38FE1DD273AA8A4A		; e^-077
-				dq	0x3914775E0840BFDD		; e^-076
-				dq	0x392BD109D9D94BDA		; e^-075
-				dq	0x3942E73F53FBA844		; e^-074
-				dq	0x3959B138170D6BFE		; e^-073
-				dq	0x397175AF0CF60EC5		; e^-072
-				dq	0x3987BAEE1BFFA80B		; e^-071
-				dq	0x39A02057D1245CEB		; e^-070
-				dq	0x39B5EAFFFB34BA31		; e^-069
-				dq	0x39CDCA23BAE16424		; e^-068
-				dq	0x39E43E7FC88B8056		; e^-067
-				dq	0x39FB83BF23A9A9EB		; e^-066
-				dq	0x3A12B2B8DD05B318		; e^-065
-				dq	0x3A2969D47321E4CC		; e^-064
-				dq	0x3A41452B7723AED2		; e^-063
-				dq	0x3A5778FE2497184C		; e^-062
-				dq	0x3A6FE7116182E9CC		; e^-061
-				dq	0x3A85AE191A99585A		; e^-060
-				dq	0x3A9D775D87DA854D		; e^-059
-				dq	0x3AB4063F8CC8BB98		; e^-058
-				dq	0x3ACB374B315F87C1		; e^-057
-				dq	0x3AE27EC458C65E3C		; e^-056
-				dq	0x3AF923372C67A074		; e^-055
-				dq	0x3B11152EAEB73C08		; e^-054
-				dq	0x3B2737C5645114B5		; e^-053
-				dq	0x3B3F8E6C24B5592E		; e^-052
-				dq	0x3B5571DB733A9D61		; e^-051
-				dq	0x3B6D257D547E083F		; e^-050
-				dq	0x3B83CE9B9DE78F85		; e^-049
-				dq	0x3B9AEBABAE3A41B5		; e^-048
-				dq	0x3BB24B6031B49BDA		; e^-047
-				dq	0x3BC8DD5E1BB09D7E		; e^-046
-				dq	0x3BE0E5B73D1FF53D		; e^-045
-				dq	0x3BF6F741DE1748EC		; e^-044
-				dq	0x3C0F36BD37F42F3E		; e^-043
-				dq	0x3C2536452EE2F75C		; e^-042
-				dq	0x3C3CD480A1B74820		; e^-041
-				dq	0x3C539792499B1A24		; e^-040
-				dq	0x3C6AA0DE4BF35B38		; e^-039
-				dq	0x3C82188AD6AE3303		; e^-038
-				dq	0x3C9898471FCA6055		; e^-037
-				dq	0x3CB0B6C3AFDDE064		; e^-036
-				dq	0x3CC6B7719A59F0E0		; e^-035
-				dq	0x3CDEE001EED62AA0		; e^-034
-				dq	0x3CF4FB547C775DA8		; e^-033
-				dq	0x3D0C8464F7616468		; e^-032
-				dq	0x3D236121E24D3BBA		; e^-031
-				dq	0x3D3A56E0C2AC7F75		; e^-030
-				dq	0x3D51E642BAEB84A0		; e^-029
-				dq	0x3D6853F01D6D53BA		; e^-028
-				dq	0x3D80885298767E9A		; e^-027
-				dq	0x3D967852A7007E42		; e^-026
-				dq	0x3DAE8A37A45FC32E		; e^-025
-				dq	0x3DC4C1078FE9228A		; e^-024
-				dq	0x3DDC3527E433FAB1		; e^-023
-				dq	0x3DF32B48BF117DA2		; e^-022
-				dq	0x3E0A0DB0D0DDB3EC		; e^-021
-				dq	0x3E21B48655F37267		; e^-020
-				dq	0x3E381056FF2C5772		; e^-019
-				dq	0x3E505A628C699FA1		; e^-018
-				dq	0x3E6639E3175A689D		; e^-017
-				dq	0x3E7E355BBAEE85CB		; e^-016
-				dq	0x3E94875CA227EC38		; e^-015
-				dq	0x3EABE6C6FDB01612		; e^-014
-				dq	0x3EC2F6053B981D98		; e^-013
-				dq	0x3ED9C54C3B43BC8B		; e^-012
-				dq	0x3EF18354238F6764		; e^-011
-				dq	0x3F07CD79B5647C9B		; e^-010
-				dq	0x3F202CF22526545A		; e^-009
-				dq	0x3F35FC21041027AD		; e^-008
-				dq	0x3F4DE16B9C24A98F		; e^-007
-				dq	0x3F644E51F113D4D6		; e^-006
-				dq	0x3F7B993FE00D5376		; e^-005
-				dq	0x3F92C155B8213CF4		; e^-004
-				dq	0x3FA97DB0CCCEB0AF		; e^-003
-				dq	0x3FC152AAA3BF81CC		; e^-002
-				dq	0x3FD78B56362CEF38		; e^-001
-				dq	0x3FF0000000000000		; e^+000
-				dq	0x4005BF0A8B145769		; e^+001
-				dq	0x401D8E64B8D4DDAE		; e^+002
-				dq	0x403415E5BF6FB106		; e^+003
-				dq	0x404B4C902E273A58		; e^+004
-				dq	0x40628D389970338F		; e^+005
-				dq	0x407936DC5690C08F		; e^+006
-				dq	0x409122885AAEDDAA		; e^+007
-				dq	0x40A749EA7D470C6E		; e^+008
-				dq	0x40BFA7157C470F82		; e^+009
-				dq	0x40D5829DCF950560		; e^+010
-				dq	0x40ED3C4488EE4F7F		; e^+011
-				dq	0x4103DE1654D37C9A		; e^+012
-				dq	0x411B00B5916AC955		; e^+013
-				dq	0x413259AC48BF05D7		; e^+014
-				dq	0x4148F0CCAFAD2A87		; e^+015
-				dq	0x4160F2EBD0A80020		; e^+016
-				dq	0x417709348C0EA4F9		; e^+017
-				dq	0x418F4F22091940BD		; e^+018
-				dq	0x41A546D8F9ED26E1		; e^+019
-				dq	0x41BCEB088B68E804		; e^+020
-				dq	0x41D3A6E1FD9EECFD		; e^+021
-				dq	0x41EAB5ADB9C43600		; e^+022
-				dq	0x420226AF33B1FDC1		; e^+023
-				dq	0x4218AB7FB5475FB7		; e^+024
-				dq	0x4230C3D3920962C9		; e^+025
-				dq	0x4246C932696A6B5D		; e^+026
-				dq	0x425EF822F7F6731D		; e^+027
-				dq	0x42750BBA3796379A		; e^+028
-				dq	0x428C9AAE4631C056		; e^+029
-				dq	0x42A370470AEC28ED		; e^+030
-				dq	0x42BA6B765D8CDF6D		; e^+031
-				dq	0x42D1F43FCC4B662C		; e^+032
-				dq	0x42E866F34A725782		; e^+033
-				dq	0x4300953E2F3A1EF7		; e^+034
-				dq	0x431689E221BC8D5B		; e^+035
-				dq	0x432EA215A1D20D76		; e^+036
-				dq	0x4344D13FBB1A001A		; e^+037
-				dq	0x435C4B334617CC67		; e^+038
-				dq	0x43733A43D282A519		; e^+039
-				dq	0x438A220D397972EB		; e^+040
-				dq	0x43A1C25C88DF6862		; e^+041
-				dq	0x43B8232558201159		; e^+042
-				dq	0x43D0672A3C9EB871		; e^+043
-				dq	0x43E64B41C6D37832		; e^+044
-				dq	0x43FE4CF766FE49BE		; e^+045
-				dq	0x44149767BC0483E3		; e^+046
-				dq	0x442BFC951EB8BB76		; e^+047
-				dq	0x444304D6AECA254B		; e^+048
-				dq	0x4459D97010884251		; e^+049
-				dq	0x44719103E4080B45		; e^+050
-				dq	0x4487E013CD114461		; e^+051
-				dq	0x44A03996528E074C		; e^+052
-				dq	0x44B60D4F6FDAC731		; e^+053
-				dq	0x44CDF8C5AF17BA3B		; e^+054
-				dq	0x44E45E3076D61699		; e^+055
-				dq	0x44FBAED16A6E0DA7		; e^+056
-				dq	0x4512CFFDFEBDE1A1		; e^+057
-				dq	0x4529919CABEFCB69		; e^+058
-				dq	0x454160345C9953E3		; e^+059
-				dq	0x45579DBC9DC53C66		; e^+060
-				dq	0x45700C810D464097		; e^+061
-				dq	0x4585D009394C5C27		; e^+062
-				dq	0x459DA57DE8F107A8		; e^+063
-				dq	0x45B425982CF597CD		; e^+064
-				dq	0x45CB61E5CA3A5E31		; e^+065
-				dq	0x45E29BB825DFCF87		; e^+066
-				dq	0x45F94A90DB0D6FE2		; e^+067
-				dq	0x46112FEC759586FD		; e^+068
-				dq	0x46275C1DC469E3AF		; e^+069
-				dq	0x463FBFD219C43B04		; e^+070
-				dq	0x4655936D44E1A146		; e^+071
-				dq	0x466D531D8A7EE79C		; e^+072
-				dq	0x4683ED9D24A2D51B		; e^+073
-				dq	0x469B15CFE5B6E17B		; e^+074
-				dq	0x46B268038C2C0E00		; e^+075
-				dq	0x46C9044A73545D48		; e^+076
-				dq	0x46E1002AB6218B38		; e^+077
-				dq	0x46F71B3540CBF921		; e^+078
-				dq	0x470F6799EA9C414A		; e^+079
-				dq	0x47255779B984F3EB		; e^+080
-				dq	0x473D01A210C44AA4		; e^+081
-				dq	0x4753B63DA8E91210		; e^+082
-				dq	0x476ACA8D6B0116B8		; e^+083
-				dq	0x478234DE9E0C74E9		; e^+084
-				dq	0x4798BEC7503CA477		; e^+085
-				dq	0x47B0D0EDA9796B90		; e^+086
-				dq	0x47C6DB0118477245		; e^+087
-				dq	0x47DF1056DC7BF22D		; e^+088
-				dq	0x47F51C2CC3433801		; e^+089
-				dq	0x480CB108FFBEC164		; e^+090
-				dq	0x48237F780991B584		; e^+091
-				dq	0x483A801C0EA8AC4D		; e^+092
-				dq	0x48520247CC4C46C1		; e^+093
-				dq	0x48687A0553328015		; e^+094
-				dq	0x4880A233DEE4F9BB		; e^+095
-				dq	0x48969B7F55B808BA		; e^+096
-				dq	0x48AEBA064644060A		; e^+097
-				dq	0x48C4E184933D9364		; e^+098
-				dq	0x48DC614FE2531841		; e^+099
-				dq	0x48F3494A9B171BF5		; e^+100
-				dq	0x490A36798B9D969B		; e^+101
-				dq	0x4921D03D8C0C04AF		; e^+102
-				dq	0x493836026385C974		; e^+103
-				dq	0x495073FBE9AC901D		; e^+104
-				dq	0x49665CAE0969F286		; e^+105
-				dq	0x497E64A58639CAE8		; e^+106
-				dq	0x4994A77F5F9B50F9		; e^+107
-				dq	0x49AC12744A3A28E3		; e^+108
-				dq	0x49C313B3B6978E85		; e^+109
-				dq	0x49D9EDA3A31E587E		; e^+110
-				dq	0x49F19EBE56B56453		; e^+111
-				dq	0x4A07F2BC6E599B7E		; e^+112
-				dq	0x4A204644610DF2FF		; e^+113
-				dq	0x4A361E8B490AC4E6		; e^+114
-				dq	0x4A4E103201F299B3		; e^+115
-				dq	0x4A646E1B637BEAF5		; e^+116
-				dq	0x4A7BC473CFEDE104		; e^+117
-				dq	0x4A92DEB1B9C85E2D		; e^+118
-				dq	0x4AA9A5981CA67D10		; e^+119
-				dq	0x4AC16DC8A9EF670B		; e^+120
-				dq	0x4AD7B03166942309		; e^+121
-				dq	0x4AF0190BE03150A7		; e^+122
-				dq	0x4B05E1152F9A8119		; e^+123
-				dq	0x4B1DBCA9263F8487		; e^+124
-				dq	0x4B343556DEE93BEE		; e^+125
-				dq	0x4B4B774C12967DFA		; e^+126
-				dq	0x4B62AA4306E922C2		; e^+127
-				dq	0x4B795E54C5DD4217		; e^+128
-				dq	0x4B913D5B07929253		; e^+129
-				dq	0x4BA76E5F44CE9C2F		; e^+130
-				dq	0x4BBFD8A20C3CC006		; e^+131
-				dq	0x4BD5A449DD5CCAB9		; e^+132
-				dq	0x4BED6A0867193D6C		; e^+133
-				dq	0x4C03FD3016C9D64C		; e^+134
-				dq	0x4C1B2AFAB7F7FC66		; e^+135
-				dq	0x4C32766604B71D6D		; e^+136
-				dq	0x4C4917D7728472A7		; e^+137
-				dq	0x4C610D73F59D48DF		; e^+138
-				dq	0x4C772D4407457C1D		; e^+139
-				dq	0x4C8F8024EB633B1D		; e^+140
-				dq	0x4CA5682777CA4725		; e^+141
-				dq	0x4CBD184D3F8C34F5		; e^+142
-				dq	0x4CD3C5A554D381AF		; e^+143
-				dq	0x4CEADF7D6C5FBB7A		; e^+144
-				dq	0x4D0243191E60BE32		; e^+145
-				dq	0x4D18D21DFC67715A		; e^+146
-				dq	0x4D30DE11FE284410		; e^+147
-				dq	0x4D46ECDDB1C8C6E7		; e^+148
-				dq	0x4D5F289DAB234C40		; e^+149
-				dq	0x4D752CAC29822593		; e^+150
-				dq	0x4D8CC77531A4F011		; e^+151
-				dq	0x4DA38EB4E77DDDDD		; e^+152
-				dq	0x4DBA94D1E2925340		; e^+153
-				dq	0x4DD2105AC3794C20		; e^+154
-				dq	0x4DE88D26434A71B6		; e^+155
-				dq	0x4E00AF33AF5B2D7A		; e^+156
-				dq	0x4E16AD2A4DAC90E3		; e^+157
-				dq	0x4E2ED209A0495E91		; e^+158
-				dq	0x4E44F1D6223BCF5A		; e^+159
-				dq	0x4E5C777DC65C9488		; e^+160
-				dq	0x4E73585D21F52AD4		; e^+161
-				dq	0x4E8A4AF5D3B99D59		; e^+162
-				dq	0x4EA1DE2967ECAFCC		; e^+163
-				dq	0x4EB848EE2CD9E02A		; e^+164
-				dq	0x4ED080D79B61580F		; e^+165
-				dq	0x4EE66E27E9B9AB09		; e^+166
-				dq	0x4EFE7C66270C39F4		; e^+167
-				dq	0x4F14B7A396B8BFF6		; e^+168
-				dq	0x4F2C28648D85AB83		; e^+169
-				dq	0x4F43229C5C0D358F		; e^+170
-				dq	0x4F5A01E6FF52EFB1		; e^+171
-				dq	0x4F71AC8383F35FBD		; e^+172
-				dq	0x4F880573A499F824		; e^+173
-				dq	0x4FA052FC585E98A2		; e^+174
-				dq	0x4FB62FD49A1E79F8		; e^+175
-				dq	0x4FCE27B0A2F86833		; e^+176
-				dq	0x4FE47E12C0B6846F		; e^+177
-				dq	0x4FFBDA271DB91986		; e^+178
-				dq	0x5012ED70F2346931		; e^+179
-				dq	0x5029B9A32B1D8885		; e^+180
-				dq	0x50417B6794066E66		; e^+181
-				dq	0x5057C2B49BD687CA		; e^+182
-				dq	0x507025A080643D67		; e^+183
-				dq	0x5085F22E785FF70E		; e^+184
-				dq	0x509DD3E67EDBD369		; e^+185
-				dq	0x50B44521DEE0E199		; e^+186
-				dq	0x50CB8CC314434B52		; e^+187
-				dq	0x50E2B8D945670408		; e^+188
-				dq	0x50F9722823092B4D		; e^+189
-				dq	0x51114AD418D3B94C		; e^+190
-				dq	0x512780AF0992E0C5		; e^+191
-				dq	0x513FF18562CC483E		; e^+192
-				dq	0x5155B533A34ADB32		; e^+193
-				dq	0x516D81052CB19D0C		; e^+194
-				dq	0x51840CCF34C420DE		; e^+195
-				dq	0x519B40361511970E		; e^+196
-				dq	0x51B284D3BB227032		; e^+197
-				dq	0x51C92B73B924EDF1		; e^+198
-				dq	0x51E11AC797323903		; e^+199
-				dq	0x51F73F60EA79F5B9		; e^+200
-				dq	0x520F98C31A5FDD25		; e^+201
-				dq	0x522578E23EE4F2D2		; e^+202
-				dq	0x523D2F0A258E2D01		; e^+203
-				dq	0x5253D5190ABF8313		; e^+204
-				dq	0x526AF47DCA9FD133		; e^+205
-				dq	0x5282515EBD58BF5C		; e^+206
-				dq	0x5298E583C58E35C4		; e^+207
-				dq	0x52B0EB40981671AC		; e^+208
-				dq	0x52C6FEC840CEA3D5		; e^+209
-				dq	0x52DF40F772B4AA1B		; e^+210
-				dq	0x52F53D38745E9AA6		; e^+211
-				dq	0x530CDDF2E98B780D		; e^+212
-				dq	0x53239DFDADF7D8F2		; e^+213
-				dq	0x533AA997E5E614A7		; e^+214
-				dq	0x53521E78BA644953		; e^+215
-				dq	0x5368A056265FE3CE		; e^+216
-				dq	0x5380BC3DA8870386		; e^+217
-				dq	0x5396BEE3145C2812		; e^+218
-				dq	0x53AEEA1FBE812D0F		; e^+219
-				dq	0x53C50234720464C9		; e^+220
-				dq	0x53DC8DBCFFB57D24		; e^+221
-				dq	0x53F3677B704A40D8		; e^+222
-				dq	0x540A5F821E46BD6C		; e^+223
-				dq	0x5421EC2024FB6CEF		; e^+224
-				dq	0x54385BE8BFA1AFCE		; e^+225
-				dq	0x54508DBD59915B4F		; e^+226
-				dq	0x54667FAF7266BF9B		; e^+227
-				dq	0x547E943957EC0C43		; e^+228
-				dq	0x5494C7D46B30E5B0		; e^+229
-				dq	0x54AC3E65F5F6F8E0		; e^+230
-				dq	0x54C33190A83F0958		; e^+231
-				dq	0x54DA163A317C9571		; e^+232
-				dq	0x54F1BA5374247313		; e^+233
-				dq	0x550818397B37B180		; e^+234
-				dq	0x55205FBE403E820D		; e^+235
-				dq	0x5536412B6D9C72F9		; e^+236
-				dq	0x554E3F41A0776B59		; e^+237
-				dq	0x55648E16983EA89A		; e^+238
-				dq	0x557BEFEB61064EA1		; e^+239
-				dq	0x5592FC3BB0FCB841		; e^+240
-				dq	0x55A9CDBDE38932E0		; e^+241
-				dq	0x55C189112329934D		; e^+242
-				dq	0x55D7D54648D217A1		; e^+243
-				dq	0x55F0323EF5880BF3		; e^+244
-				dq	0x560603551E060B72		; e^+245
-				dq	0x561DEB3600EC79D4		; e^+246
-				dq	0x563454F9367A4B04		; e^+247
-				dq	0x564BA24ADC52A6B6		; e^+248
-				dq	0x5662C77AEA3B35AC		; e^+249
-				dq	0x5679860AFEA3876D		; e^+250
-				dq	0x56915857B18D19C4		; e^+251
-				dq	0x56A7930D1DDD0C34		; e^+252
-				dq	0x56C0053E164D25FF		; e^+253
-				dq	0x56D5C62AA0F8323A		; e^+254
-				dq	0x56ED9813E9473A60		; e^+255
-				dq	0x57041C7A8814BEBA		; e^+256
-				dq	0x571B558209F140FD		; e^+257
-				dq	0x5732934CB8371AB4		; e^+258
-				dq	0x57493F1F5326A019		; e^+259
-				dq	0x57612825A2FDAE13		; e^+260
-				dq	0x5777518BF570C588		; e^+261
-				dq	0x578FB174868F8418		; e^+262
-				dq	0x57A589AA1904B8FD		; e^+263
-				dq	0x57BD45D8D0A28247		; e^+264
-				dq	0x57D3E498D415B213		; e^+265
-				dq	0x57EB098E928AFB64		; e^+266
-				dq	0x58025FAF83A52372		; e^+267
-				dq	0x5818F8F8B78094E9		; e^+268
-				dq	0x5830F8797F4ABAB9		; e^+269
-				dq	0x584710C0D041C387		; e^+270
-				dq	0x585F59644203C1DE		; e^+271
-				dq	0x58754DD1ADEC0B48		; e^+272
-				dq	0x588CF48235243089		; e^+273
-				dq	0x58A3AD52664E1DF7		; e^+274
-				dq	0x58BABE6E254A0BCA		; e^+275
-				dq	0x58D22CA1B9A5C3DF		; e^+276
-				dq	0x58E8B3950821A800		; e^+277
-				dq	0x5900C951D258F4BF		; e^+278
-				dq	0x5916D0A9B49138CB		; e^+279
-				dq	0x592F0248AF95F4C5		; e^+280
-				dq	0x5945129F8C8EC869		; e^+281
-				dq	0x595CA40D9BE99BD8		; e^+282
-				dq	0x597376A58F4AF93B		; e^+283
-				dq	0x598A741E77C7EC9D		; e^+284
-				dq	0x59A1FA21CBB8DF30		; e^+285
-				dq	0x59B86EF2276B93A5		; e^+286
-				dq	0x59D09AAD2C170340		; e^+287
-				dq	0x59E69144AE1D9F07		; e^+288
-				dq	0x59FEAC1F275B04AF		; e^+289
-				dq	0x5A14D811E6DF8552		; e^+290
-				dq	0x5A2C547890F4370C		; e^+291
-				dq	0x5A434090A44810F8		; e^+292
-				dq	0x5A5A2A9D45FB7BB3		; e^+293
-				dq	0x5A71C82E2FB1A15B		; e^+294
-				dq	0x5A882B0DFDA106AA		; e^+295
-				dq	0x5AA06C8A20724675		; e^+296
-				dq	0x5AB6528FCE13764B		; e^+297
-				dq	0x5ACE56E508C916D8		; e^+298
-				dq	0x5AE49E26F3D4B60A		; e^+299
-				dq	0x5AFC05C0A7166B4A		; e^+300
-				dq	0x5B130B11FF23056A		; e^+301
-				dq	0x5B29E1E852274ADB		; e^+302
-				dq	0x5B4196C55FAA7A5C		; e^+303
-				dq	0x5B57E7E678D54EB5		; e^+304
-				dq	0x5B703EE7474BBDF2		; e^+305
-				dq	0x5B8614892AFE2EA5		; e^+306
-				dq	0x5B9E0297BAA30C57		; e^+307
-				dq	0x5BB464DCEF5ABE49		; e^+308
-				dq	0x5BCBB7E377E0A776		; e^+309
-				dq	0x5BE2D627FE4E6AF9		; e^+310
-				dq	0x5BF999FD64C82181		; e^+311
-				dq	0x5C1165E5D9F93ADE		; e^+312
-				dq	0x5C27A5798CDC2FF0		; e^+313
-				dq	0x5C4011C33C6D0DB8		; e^+314
-				dq	0x5C55D72EE0B93BB4		; e^+315
-				dq	0x5C6DAF34AAE43996		; e^+316
-				dq	0x5C842C321A4628C7		; e^+317
-				dq	0x5C9B6ADEA38EA430		; e^+318
-				dq	0x5CB2A1D104C50F06		; e^+319
-				dq	0x5CC952DA4C83AF00		; e^+320
-				dq	0x5CE1358E212351EF		; e^+321
-				dq	0x5CF763C53339E998		; e^+322
-				dq	0x5D0FCA393EFB439C		; e^+323
-				dq	0x5D259A7F106151AC		; e^+324
-				dq	0x5D3D5CB94EAC5631		; e^+325
-				dq	0x5D53F424BA4604DF		; e^+326
-				dq	0x5D6B1EAFD0F4DBEE		; e^+327
-				dq	0x5D826E0B79FD6017		; e^+328
-				dq	0x5D990C7CDE176CFA		; e^+329
-				dq	0x5DB105BCBBD22B5D		; e^+330
-				dq	0x5DC722C76B1366FE		; e^+331
-				dq	0x5DDF71E427EFE008		; e^+332
-				dq	0x5DF55E77E045CB62		; e^+333
-				dq	0x5E0D0B23222BA489		; e^+334
-				dq	0x5E23BCB319D66A0E		; e^+335
-				dq	0x5E3AD354AD6E368F		; e^+336
-				dq	0x5E523AD5C9DCF903		; e^+337
-				dq	0x5E68C6E2F447B147		; e^+338
-				dq	0x5E80D67034C7AE68		; e^+339
-				dq	0x5E96E27E391E9C6C		; e^+340
-				dq	0x5EAF1A84823DAF20		; e^+341
-				dq	0x5EC523177BDA38EC		; e^+342
-				dq	0x5EDCBA6FA88F5082		; e^+343
-				dq	0x5EF385DB883320EE		; e^+344
-				dq	0x5F0A88CAECC9E7DB		; e^+345
-				dq	0x5F22082E64AC4EB5		; e^+346
-				dq	0x5F38820A6FCEEEED		; e^+347
-				dq	0x5F50A7A71AD2DC6D		; e^+348
-				dq	0x5F66A2E7A7930F81		; e^+349
-				dq	0x5F7EC417A3E63C6A		; e^+350
-				dq	0x5F94E85C13A81660		; e^+351
-				dq	0x5FAC6A9C6BEE04C8		; e^+352
-				dq	0x5FC34F9C594A7140		; e^+353
-				dq	0x5FDA3F1049398066		; e^+354
-				dq	0x5FF1D613BF0A8036		; e^+355
-				dq	0x60083DF1374D259D		; e^+356
-				dq	0x6020796000C48F27		; e^+357
-				dq	0x60366401C61A8A8A		; e^+358
-				dq	0x604E6E9AEA52153A		; e^+359
-				dq	0x6064AE43DD40AA42		; e^+360
-				dq	0x607C1BA6FD34B612		; e^+361
-				dq	0x609319F3E5B014A7		; e^+362
-				dq	0x60A9F622833F3047		; e^+363
-				dq	0x60C1A48451E14885		; e^+364
-				dq	0x60D7FA9537377F3C		; e^+365
-				dq	0x60F04B997D645645		; e^+366
-				dq	0x610625CAA9C1FA57		; e^+367
-				dq	0x611E1A0BBA3C3728		; e^+368
-				dq	0x613474CD132F0B40		; e^+369
-				dq	0x614BCD8CF413A3B1		; e^+370
-				dq	0x6162E4E08A904D9A		; e^+371
-				dq	0x6179ADFF619C3B18		; e^+372
-				dq	0x6191737E9A5911FE		; e^+373
-				dq	0x61A7B7F461C81AEE		; e^+374
-				dq	0x61C01E522B6573E7		; e^+375
-				dq	0x61D5E8406CEA7625		; e^+376
-				dq	0x61EDC6677F9DB7B8		; e^+377
-				dq	0x62043BF5F4EA4CBB		; e^+378
-				dq	0x621B804BEEEB8CFA		; e^+379
-				dq	0x6232B060A9A32244		; e^+380
-				dq	0x624966A4B13F9CBC		; e^+381
-				dq	0x6261430119CD2ADB		; e^+382
-				dq	0x6277760CAEEE052E		; e^+383
-				dq	0x628FE31152B7EF6B		; e^+384
-				dq	0x62A5AB612F3A7119		; e^+385
-				dq	0x62BD73ABAD99A482		; e^+386
-				dq	0x62D403BCC6C7D1BC		; e^+387
-				dq	0x62EB33E192BB1ADE		; e^+388
-				dq	0x63027C72A91FBAD6		; e^+389
-				dq	0x631920104534DE5E		; e^+390
-				dq	0x6331130A55C01A76		; e^+391
-				dq	0x634734DC1C3D5C6C		; e^+392
-				dq	0x635F8A773363F085		; e^+393
-				dq	0x63756F2B158F14E4		; e^+394
-				dq	0x638D21D5BE691B49		; e^+395
-				dq	0x63A3CC1FD1EDC5F0		; e^+396
-				dq	0x63BAE84B8B0C7D2A		; e^+397
-				dq	0x63D24914F3AFE2F6		; e^+398
-				dq	0x63E8DA3FF6931B1B		; e^+399
-				dq	0x6400E398D7D01704		; e^+400
-				dq	0x6416F460ACDFA1C0		; e^+401
-				dq	0x642F32D34539D4B2		; e^+402
-				dq	0x6445339C49EDC516		; e^+403
-				dq	0x645CD0E33347995C		; e^+404
-				dq	0x6473951D6445BC31		; e^+405
-				dq	0x648A9D8789E33ADB		; e^+406
-				dq	0x64A21645F863ADE5		; e^+407
-				dq	0x64B89531A46C33ED		; e^+408
-				dq	0x64D0B4AB2DAB9B53		; e^+409
-				dq	0x64E6B4986984352D		; e^+410
-				dq	0x64FEDC22DC262BD7		; e^+411
-				dq	0x6514F8B2FB75CAB5		; e^+412
-				dq	0x652C80D1945F81B6		; e^+413
-				dq	0x65435EB3D06F7247		; e^+414
-				dq	0x655A539347AA34FD		; e^+415
-				dq	0x6571E4042AA53CFD		; e^+416
-				dq	0x658850E333BC3230		; e^+417
-				dq	0x65A0863FE9061C49		; e^+418
-				dq	0x65B675816050FD04		; e^+419
-				dq	0x65CE86635382509D		; e^+420
-				dq	0x65E4BE6D5E5227A4		; e^+421
-				dq	0x65FC319E70B6D934		; e^+422
-				dq	0x661328E16DB3B964		; e^+423
-				dq	0x662A0A6C8321DB88		; e^+424
-				dq	0x6641B24E022CA821		; e^+425
-				dq	0x66580D528F58D861		; e^+426
-				dq	0x667058559F8CDDBD		; e^+427
-				dq	0x66863719A4D337E8		; e^+428
-				dq	0x669E31920DFFC6D5		; e^+429
-				dq	0x66B484C9ABAB9169		; e^+430
-				dq	0x66CBE3475E1C3855		; e^+431
-				dq	0x66E2F3A497F7830C		; e^+432
-				dq	0x66F9C211014E93A7		; e^+433
-				dq	0x67118121FAF407D4		; e^+434
-				dq	0x6727CA7DA7E1607C		; e^+435
-				dq	0x67402AEAEADBE65C		; e^+436
-				dq	0x6755F95F4FF07902		; e^+437
-				dq	0x676DDDAC7593D338		; e^+438
-				dq	0x67844BC6219A92EF		; e^+439
-				dq	0x679B95C9F913F1F2		; e^+440
-				dq	0x67B2BEFBAFAF11F3		; e^+441
-				dq	0x67C97A7E8D674EEE		; e^+442
-				dq	0x67E1507E952BA07A		; e^+443
-				dq	0x67F7886273AE678C		; e^+444
-				dq	0x680FFBFCD0E62482		; e^+445
-				dq	0x6825BC507FD7CDEF		; e^+446
-				dq	0x683D8AAFFB634BD5		; e^+447
-				dq	0x685413610319D4CC		; e^+448
-				dq	0x686B4923E4C56E4A		; e^+449
-				dq	0x68828AE519D14E71		; e^+450
-				dq	0x689933B2F8C452EC		; e^+451
-				dq	0x68B12062552E2E87		; e^+452
-				dq	0x68C746FEEEC205E9		; e^+453
-				dq	0x68DFA31D735687C6		; e^+454
-				dq	0x68F57FEB57F30DEA		; e^+455
-				dq	0x690D389A17AEA099		; e^+456
-				dq	0x6923DB9897F88BA3		; e^+457
-				dq	0x693AFD52CAE8B9E7		; e^+458
-				dq	0x6952575F3FCB3E2D		; e^+459
-				dq	0x6968EDAC1ACE3095		; e^+460
-				dq	0x6980F0CBC375532D		; e^+461
-				dq	0x699706511AB813A2		; e^+462
-				dq	0x69AF4B350757662A		; e^+463
-				dq	0x69C5442E00D851D5		; e^+464
-				dq	0x69DCE76849BE1B4F		; e^+465
-				dq	0x69F3A46B2CCD0C40		; e^+466
-				dq	0x6A0AB2545BB447C1		; e^+467
-				dq	0x6A2224688F739E9B		; e^+468
-				dq	0x6A38A867D0ECEB08		; e^+469
-				dq	0x6A50C1B96C8E2131		; e^+470
-				dq	0x6A66C656FEB698A8		; e^+471
-				dq	0x6A7EF440DEBEB36B		; e^+472
-				dq	0x6A950916A83B9497		; e^+473
-				dq	0x6AAC971817CE5687		; e^+474
-				dq	0x6AC36DD712E784FD		; e^+475
-				dq	0x6ADA68264DCAE606		; e^+476
-				dq	0x6AF1F1FF7AFEA1EC		; e^+477
-				dq	0x6B0863E3FE774D18		; e^+478
-				dq	0x6B209329E10DC999		; e^+479
-				dq	0x6B36870EA75E682D		; e^+480
-				dq	0x6B4E9E3E52D4FB85		; e^+481
-				dq	0x6B64CEA380E07B71		; e^+482
-				dq	0x6B7C47A70EFCEABA		; e^+483
-				dq	0x6B9337DAA044DC04		; e^+484
-				dq	0x6BAA1EC65E29E512		; e^+485
-				dq	0x6BC1C02278F1CE0F		; e^+486
-				dq	0x6BD8201E8CA26D36		; e^+487
-				dq	0x6BF0651BB58667C7		; e^+488
-				dq	0x6C06487626BBE6CD		; e^+489
-				dq	0x6C1E492AC440B0F6		; e^+490
-				dq	0x6C3494D2C28C45D0		; e^+491
-				dq	0x6C4BF912C335512C		; e^+492
-				dq	0x6C6302742F81B217		; e^+493
-				dq	0x6C79D63250176FF6		; e^+494
-				dq	0x6C918ED00417FD64		; e^+495
-				dq	0x6CA7DD156A715F16		; e^+496
-				dq	0x6CC0378D827BECBD		; e^+497
-				dq	0x6CD60A8B9437FB07		; e^+498
-				dq	0x6CEDF5039AF1B491		; e^+499
-				dq	0x6D045BA2A9F7E439		; e^+500
-				dq	0x6D1BAB58CF1DFBE2		; e^+501
-				dq	0x6D32CDA21FCD896D		; e^+502
-				dq	0x6D498E67ED111611		; e^+503
-				dq	0x6D615E069B7580CA		; e^+504
-				dq	0x6D779AC68CA512B5		; e^+505
-				dq	0x6D900A7DE459292B		; e^+506
-				dq	0x6DA5CD4D0C89278C		; e^+507
-				dq	0x6DBDA1C6460D161E		; e^+508
-				dq	0x6DD4231178C235D2		; e^+509
-				dq	0x6DEB5E76D405A221		; e^+510
-				dq	0x6E029962D4DE103D		; e^+511
-				dq	0x6E19476504BA852E		; e^+512
-				dq	0x6E312DC4C23C62A5		; e^+513
-				dq	0x6E47592FEDAC601F		; e^+514
-				dq	0x6E5FBBD6F6C9EBDB		; e^+515
-				dq	0x6E7590B8B1A4CEF4		; e^+516
-				dq	0x6E8D4F703BD90D4D		; e^+517
-				dq	0x6EA3EB1D75626C30		; e^+518
-				dq	0x6EBB126A79D0C0EA		; e^+519
-				dq	0x6ED265B4B6E28EA1		; e^+520
-				dq	0x6EE901276CCC73A1		; e^+521
-				dq	0x6F00FE08FFC0CA7A		; e^+522
-				dq	0x6F17184F8D943F98		; e^+523
-				dq	0x6F2F63A9D76EF559		; e^+524
-				dq	0x6F4554CCAAB0A066		; e^+525
-				dq	0x6F5CFDFEF9A92A43		; e^+526
-				dq	0x6F73B3C4EB1A94F3		; e^+527
-				dq	0x6F8AC7316EE74ED5		; e^+528
-				dq	0x6FA2329632777761		; e^+529
-				dq	0x6FB8BBAD0103B9D8		; e^+530
-				dq	0x6FD0CED1DF6D80DD		; e^+531
-				dq	0x6FE6D82371F82D97		; e^+532
-				dq	0x6FFF0C71BA5F2499		; e^+533
-				dq	0x7015198723F42CBE		; e^+534
-				dq	0x702CAD7003CABD3E		; e^+535
-				dq	0x70437D0629EA48C6		; e^+536
-				dq	0x705A7CC96822A2C7		; e^+537
-				dq	0x70720005B89A1B4E		; e^+538
-				dq	0x708876F3A3109AEE		; e^+539
-				dq	0x70A0A01DF0B89337		; e^+540
-				dq	0x70B698A9A5F2BA1D		; e^+541
-				dq	0x70CEB62BF6D099A4		; e^+542
-				dq	0x70E4DEE64ECAA3C2		; e^+543
-				dq	0x70FC5DC0E57174A2		; e^+544
-				dq	0x711346DF86817F67		; e^+545
-				dq	0x712A333020BB8CF2		; e^+546
-				dq	0x7141CE01BE9C7EC8		; e^+547
-				dq	0x715832F93A863BA1		; e^+548
-				dq	0x717071EBC718172C		; e^+549
-				dq	0x718659E03A0E42FE		; e^+550
-				dq	0x719E60D5EB5D1CE2		; e^+551
-				dq	0x71B4A4E86194B8FD		; e^+552
-				dq	0x71CC0EEF30A430E4		; e^+553
-				dq	0x71E3114F5A338843		; e^+554
-				dq	0x71F9EA635A38A191		; e^+555
-				dq	0x72119C88BE195116		; e^+556
-				dq	0x7227EFBBB4CA4749		; e^+557
-				dq	0x72404439F9F70D32		; e^+558
-				dq	0x72561BC54435D88C		; e^+559
-				dq	0x726E0C6CFDED96E2		; e^+560
-				dq	0x72846B8B97AAAFC3		; e^+561
-				dq	0x729BC0F87E2A0DC0		; e^+562
-				dq	0x72B2DC5402EA2744		; e^+563
-				dq	0x72C9A260DC5CB4DD		; e^+564
-				dq	0x72E16B9934E80525		; e^+565
-				dq	0x72F7AD390504C236		; e^+566
-				dq	0x7310170724AA620B		; e^+567
-				dq	0x7325DE56DFA64C4A		; e^+568
-				dq	0x733DB8EE9BA5C134		; e^+569
-				dq	0x735432CE314E8E01		; e^+570
-				dq	0x736B73DA6D77A018		; e^+571
-				dq	0x7382A7EBE318D57A		; e^+572
-				dq	0x73995B26751587AC		; e^+573
-				dq	0x73B13B31A5110B69		; e^+574
-				dq	0x73C76B6F24100909		; e^+575
-				dq	0x73DFD4A3CCCC1D98		; e^+576
-				dq	0x73F5A1932CDF6917		; e^+577
-				dq	0x740D665838D00FAB		; e^+578
-				dq	0x7423FAAE739E7564		; e^+579
-				dq	0x743B2792A49C67FC		; e^+580
-				dq	0x7452741561B0251F		; e^+581
-				dq	0x746914B1F86AA42E		; e^+582
-				dq	0x74810B5094C22C64		; e^+583
-				dq	0x74972A5C1068FC7E		; e^+584
-				dq	0x74AF7C31C464AE3D		; e^+585
-				dq	0x74C5657851955475		; e^+586
-				dq	0x74DD14A750C9D177		; e^+587
-				dq	0x74F3C32AA887226F		; e^+588
-				dq	0x750ADC1ED0307635		; e^+589
-				dq	0x752240CEEA1148AE		; e^+590
-				dq	0x7538CF01406C6A50		; e^+591
-				dq	0x7550DBF48E430396		; e^+592
-				dq	0x7566E9FDCE1F593A		; e^+593
-				dq	0x757F24B57DC24AC4		; e^+594
-				dq	0x75952A0478A2186A		; e^+595
-				dq	0x75ACC3D965EF8971		; e^+596
-				dq	0x75C38C411EB69117		; e^+597
-				dq	0x75DA917CA34244DC		; e^+598
-				dq	0x75F20E16EC01BCA6		; e^+599
-				dq	0x76088A122D234B39		; e^+600
-				dq	0x7620AD1C1FE99A69		; e^+601
-				dq	0x7636AA5266C63B13		; e^+602
-				dq	0x764ECE2C4E0708BD		; e^+603
-				dq	0x7664EF35D1F7558F		; e^+604
-				dq	0x767C73EC01897D05		; e^+605
-				dq	0x769355F0298EC67C		; e^+606
-				dq	0x76AA47A9D744C255		; e^+607
-				dq	0x76C1DBEBDB9F1388		; e^+608
-				dq	0x76D845E2A47F335B		; e^+609
-				dq	0x76F07EC5DC0F22CC		; e^+610
-				dq	0x77066B57E964CB61		; e^+611
-				dq	0x771E789391BE6C6F		; e^+612
-				dq	0x7734B50A92901CE5		; e^+613
-				dq	0x774C24DCB3B87927		; e^+614
-				dq	0x776320362118BF56		; e^+615
-				dq	0x7779FEA42BFD8E3D		; e^+616
-				dq	0x7791AA4C3152E3C8		; e^+617
-				dq	0x77A8027092472297		; e^+618
-				dq	0x77C050F05904D117		; e^+619
-				dq	0x77D62D0C6A6719E7		; e^+620
-				dq	0x77EE23E8ACC8D097		; e^+621
-				dq	0x78047B80F462F0F4		; e^+622
-				dq	0x781BD6A91362CCAD		; e^+623
-				dq	0x7832EB1161F782B7		; e^+624
-				dq	0x7849B669677367A7		; e^+625
-				dq	0x7861793669C6D744		; e^+626
-				dq	0x7877BFB9E808F200		; e^+627
-				dq	0x7890239A3108D4F3		; e^+628
-				dq	0x78A5EF6E038F1FC9		; e^+629
-				dq	0x78BDD0290A47075C		; e^+630
-				dq	0x78D442973653EDCD		; e^+631
-				dq	0x78EB894EBE21778C		; e^+632
-				dq	0x7902B6804D5B58B3		; e^+633
-				dq	0x79196EF755DCCC33		; e^+634
-				dq	0x793148A905D8DBEA		; e^+635
-				dq	0x79477DBC9D0946AF		; e^+636
-				dq	0x795FED840476E1BE		; e^+637
-				dq	0x7975B27AD3E5EC3A		; e^+638
-				dq	0x798D7D521C8633E3		; e^+639
-				dq	0x79A40A4B9C27178A		; e^+640
-				dq	0x79BB3CCB582D8E5D		; e^+641
-				dq	0x79D2828148F52492		; e^+642
-				dq	0x79E9284BC98EC768		; e^+643
-				dq	0x7A0118A28A8F752B		; e^+644
-				dq	0x7A173C76AE33B12E		; e^+645
-				dq	0x7A2F94CCDD28600F		; e^+646
-				dq	0x7A457630FFACFA49		; e^+647
-				dq	0x7A5D2B615CEBDBE2		; e^+648
-				dq	0x7A73D29C6E72CED5		; e^+649
-				dq	0x7A8AF11C8C4DD193		; e^+650
-				dq	0x7AA24F12BEE9E227		; e^+651
-				dq	0x7AB8E2649AEBF1DA		; e^+652
-				dq	0x7AD0E921810E2DE5		; e^+653
-				dq	0x7AE6FBE61E0AF908		; e^+654
-				dq	0x7AFF3D0C37AE7434		; e^+655
-				dq	0x7B153A8EB04FAF7C		; e^+656
-				dq	0x7B2CDA544BE2308C		; e^+657
-				dq	0x7B439B87FA926B13		; e^+658
-				dq	0x7B5AA6400BC477DC		; e^+659
-				dq	0x7B721C331DC645E8		; e^+660
-				dq	0x7B889D3FA8539F82		; e^+661
-				dq	0x7BA0BA24768A2A6F		; e^+662
-				dq	0x7BB6BC08F49993F9		; e^+663
-				dq	0x7BCEE63F67158979		; e^+664
-				dq	0x7BE4FF92145502B2		; e^+665
-				dq	0x7BFC8A2870C48E4E		; e^+666
-				dq	0x7C13650C9298F9CA		; e^+667
-				dq	0x7C2A5C338E3D2B1E		; e^+668
-				dq	0x7C41E9E0D8727F6B		; e^+669
-				dq	0x7C5858DAD6113CE5		; e^+670
-				dq	0x7C708BA9FC3EDA5B		; e^+671
-				dq	0x7C867CDD3F624846		; e^+672
-				dq	0x7C9E9063C5D944BE		; e^+673
-				dq	0x7CB4C5395F514AE2		; e^+674
-				dq	0x7CCC3ADB59CC32B6		; e^+675
-				dq	0x7CE32F288D4422DA		; e^+676
-				dq	0x7CFA12F4D1BB3776		; e^+677
-				dq	0x7D11B81A66261DE4		; e^+678
-				dq	0x7D2815340E4BDA5E		; e^+679
-				dq	0x7D405DB0A762C9AC		; e^+680
-				dq	0x7D563E611150F9CC		; e^+681
-				dq	0x7D6E3B76B5CFDC19		; e^+682
-				dq	0x7D848B82C9D83550		; e^+683
-				dq	0x7D9BEC6A9BFD27F8		; e^+684
-				dq	0x7DB2F9DA45EF311F		; e^+685
-				dq	0x7DC9CA819A87EBC5		; e^+686
-				dq	0x7DE186DE425C1646		; e^+687
-				dq	0x7DF7D24940F5E537		; e^+688
-				dq	0x7E103037111C911B		; e^+689
-				dq	0x7E26009282ABA144		; e^+690
-				dq	0x7E3DE775A015A7E4		; e^+691
-				dq	0x7E54526C916EE2BF		; e^+692
-				dq	0x7E6B9ED3D3136570		; e^+693
-				dq	0x7E82C5201C863F21		; e^+694
-				dq	0x7E9982D7B3212B2C		; e^+695
-				dq	0x7EB1562AECC6EAB2		; e^+696
-				dq	0x7EC7901863BD0DEC		; e^+697
-				dq	0x7EE0033BD677E517		; e^+698
-				dq	0x7EF5C36FB1036D55		; e^+699
-				dq	0x7F0D945DF4F8EC8E		; e^+700
-				dq	0x7F2419F4F87E2B37		; e^+701
-				dq	0x7F3B5214A170249D		; e^+702
-				dq	0x7F5290F875798760		; e^+703
-				dq	0x7F693BF4EC282EFB		; e^+704
-				dq	0x7F8125FEE944F2C3		; e^+705
-				dq	0x7F974E9F71FA5B35		; e^+706
-				dq	0x7FAFAD7B30B5865E		; e^+707
-				dq	0x7FC586F6BF260CF1		; e^+708
-				dq	0x7FDD422D2BE5DC9B		; e^+709
-				dq	0x7FF0000000000000		; e^+710
 
 ;###############################################################################
 ;#                                 END OF FILE                                 #

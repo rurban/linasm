@@ -360,6 +360,160 @@ static sint32_t LCM (sint32_t x, sint32_t y);
 static sint64_t LCM (sint64_t x, sint64_t y);
 
 //****************************************************************************//
+//      Scale functions                                                       //
+//****************************************************************************//
+
+// Scale by power of 2
+static flt32_t Scale2 (flt32_t value, sint16_t exp);
+static flt64_t Scale2 (flt64_t value, sint16_t exp);
+
+// Scale by power of 10
+static flt32_t Scale10 (flt32_t value, sint16_t exp);
+static flt64_t Scale10 (flt64_t value, sint16_t exp);
+
+//****************************************************************************//
+//      Exponentiation functions                                              //
+//****************************************************************************//
+
+//============================================================================//
+//      Exponentiation by base 2                                              //
+//============================================================================//
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//      Integer exponentiation by base 2                                      //
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+static uint64_t Exp2i (uint8_t exp);
+static flt32_t Exp2i (sint8_t exp);
+static flt64_t Exp2i (sint16_t exp);
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//      Real exponentiation by base 2                                         //
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+static flt32_t Exp2 (flt32_t exp);
+static flt64_t Exp2 (flt64_t exp);
+static flt32_t Exp2m1 (flt32_t exp);
+static flt64_t Exp2m1 (flt64_t exp);
+
+//============================================================================//
+//      Exponentiation by base 10                                             //
+//============================================================================//
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//      Integer exponentiation by base 10                                     //
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+static uint64_t Exp10i (uint8_t exp);
+static flt32_t Exp10i (sint8_t exp);
+static flt64_t Exp10i (sint16_t exp);
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//      Real exponentiation by base 10                                        //
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+static flt32_t Exp10 (flt32_t exp);
+static flt64_t Exp10 (flt64_t exp);
+static flt32_t Exp10m1 (flt32_t exp);
+static flt64_t Exp10m1 (flt64_t exp);
+
+//============================================================================//
+//      Exponentiation by base E (natural logarithm)                          //
+//============================================================================//
+static flt32_t Exp (flt32_t exp);
+static flt64_t Exp (flt64_t exp);
+static flt32_t Expm1 (flt32_t exp);
+static flt64_t Expm1 (flt64_t exp);
+
+//============================================================================//
+//      Exponentiation by custom base                                         //
+//============================================================================//
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//      Integer exponentiation by custom base                                 //
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+
+// Unsigned integer types
+static uint8_t ExpBi (uint8_t base, uint8_t exp);
+static uint16_t ExpBi (uint16_t base, uint8_t exp);
+static uint32_t ExpBi (uint32_t base, uint8_t exp);
+static uint64_t ExpBi (uint64_t base, uint8_t exp);
+
+// Signed integer types
+static sint8_t ExpBi (sint8_t base, uint8_t exp);
+static sint16_t ExpBi (sint16_t base, uint8_t exp);
+static sint32_t ExpBi (sint32_t base, uint8_t exp);
+static sint64_t ExpBi (sint64_t base, uint8_t exp);
+
+// Floating-point types
+static flt32_t ExpBi (flt32_t base, sint8_t exp);
+static flt64_t ExpBi (flt64_t base, sint16_t exp);
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//      Real exponentiation by custom base                                    //
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+static flt32_t ExpB (flt32_t base, flt32_t exp);
+static flt64_t ExpB (flt64_t base, flt64_t exp);
+static flt32_t ExpBm1 (flt32_t base, flt32_t exp);
+static flt64_t ExpBm1 (flt64_t base, flt64_t exp);
+
+//****************************************************************************//
+//      Logarithmic functions                                                 //
+//****************************************************************************//
+
+//============================================================================//
+//      Logarithm to base 2                                                   //
+//============================================================================//
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//      Integer logarithm to base 2                                           //
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+static sint8_t Log2i (uint8_t value);
+static sint8_t Log2i (uint16_t value);
+static sint8_t Log2i (uint32_t value);
+static sint8_t Log2i (uint64_t value);
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//      Real logarithm to base 2                                              //
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+static flt32_t Log2 (flt32_t value);
+static flt64_t Log2 (flt64_t value);
+static flt32_t Log2p1 (flt32_t value);
+static flt64_t Log2p1 (flt64_t value);
+
+//============================================================================//
+//      Logarithm to base 10                                                  //
+//============================================================================//
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//      Integer logarithm to base 10                                          //
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+static sint8_t Log10i (uint8_t value);
+static sint8_t Log10i (uint16_t value);
+static sint8_t Log10i (uint32_t value);
+static sint8_t Log10i (uint64_t value);
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//      Real logarithm to base 10                                             //
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+static flt32_t Log10 (flt32_t value);
+static flt64_t Log10 (flt64_t value);
+static flt32_t Log10p1 (flt32_t value);
+static flt64_t Log10p1 (flt64_t value);
+
+//============================================================================//
+//      Logarithm to base E (natural logarithm)                               //
+//============================================================================//
+static flt32_t Log (flt32_t value);
+static flt64_t Log (flt64_t value);
+static flt32_t Logp1 (flt32_t value);
+static flt64_t Logp1 (flt64_t value);
+
+//============================================================================//
+//      Logarithm to custom base                                              //
+//============================================================================//
+static flt32_t LogB (flt32_t base, flt32_t value);
+static flt64_t LogB (flt64_t base, flt64_t value);
+static flt32_t LogBp1 (flt32_t base, flt32_t value);
+static flt64_t LogBp1 (flt64_t base, flt64_t value);
+
+//****************************************************************************//
 //      Trigonometric functions                                               //
 //****************************************************************************//
 
@@ -378,50 +532,26 @@ static flt64_t Cath (flt64_t hypot, flt64_t cath);
 //============================================================================//
 //      Sine                                                                  //
 //============================================================================//
-
-// Sine of angle
 static flt32_t Sin (flt32_t angle);
 static flt64_t Sin (flt64_t angle);
-
-// Sine of angle and quadrant
-static flt32_t SinQ (flt32_t angle, sint64_t quadrant);
-static flt64_t SinQ (flt64_t angle, sint64_t quadrant);
 
 //============================================================================//
 //      Cosine                                                                //
 //============================================================================//
-
-// Cosine of angle
 static flt32_t Cos (flt32_t angle);
 static flt64_t Cos (flt64_t angle);
-
-// Cosine of angle and quadrant
-static flt32_t CosQ (flt32_t angle, sint64_t quadrant);
-static flt64_t CosQ (flt64_t angle, sint64_t quadrant);
 
 //============================================================================//
 //      Sine and cosine                                                       //
 //============================================================================//
-
-// Sine and cosine of angle
-static flt32_t SinCos (flt32_t *sin, flt32_t *cos, flt32_t angle);
-static flt64_t SinCos (flt64_t *sin, flt64_t *cos, flt64_t angle);
-
-// Sine and cosine of angle and quadrant
-static flt32_t SinCosQ (flt32_t *sin, flt32_t *cos, flt32_t angle, sint64_t quadrant);
-static flt64_t SinCosQ (flt64_t *sin, flt64_t *cos, flt64_t angle, sint64_t quadrant);
+static void SinCos (flt32_t *sin, flt32_t *cos, flt32_t angle);
+static void SinCos (flt64_t *sin, flt64_t *cos, flt64_t angle);
 
 //============================================================================//
 //      Tangent                                                               //
 //============================================================================//
-
-// Tangent of angle
 static flt32_t Tan (flt32_t angle);
 static flt64_t Tan (flt64_t angle);
-
-// Tangent of angle and quadrant
-static flt32_t TanQ (flt32_t angle, sint64_t quadrant);
-static flt64_t TanQ (flt64_t angle, sint64_t quadrant);
 
 //****************************************************************************//
 //      Inverse trigonometric functions                                       //
@@ -446,142 +576,6 @@ static flt32_t ArcTan (flt32_t value);
 static flt64_t ArcTan (flt64_t value);
 static flt32_t ArcTan2 (flt32_t sin, flt32_t cos);
 static flt64_t ArcTan2 (flt64_t sin, flt64_t cos);
-
-//****************************************************************************//
-//      Exponentiation functions                                              //
-//****************************************************************************//
-
-//============================================================================//
-//      Power of 2                                                            //
-//============================================================================//
-
-// Integer power of 2
-static uint64_t Exp2 (uint8_t exp);
-static flt32_t Exp2 (sint8_t exp);
-static flt64_t Exp2 (sint16_t exp);
-
-// Real power of 2
-static flt32_t Exp2 (flt32_t exp);
-static flt64_t Exp2 (flt64_t exp);
-static flt32_t Exp2m1 (flt32_t exp);
-static flt64_t Exp2m1 (flt64_t exp);
-
-//============================================================================//
-//      Power of 10                                                           //
-//============================================================================//
-
-// Integer power of 10
-static uint64_t Exp10 (uint8_t exp);
-static flt32_t Exp10 (sint8_t exp);
-static flt64_t Exp10 (sint16_t exp);
-
-// Real power of 10
-static flt32_t Exp10 (flt32_t exp);
-static flt64_t Exp10 (flt64_t exp);
-static flt32_t Exp10m1 (flt32_t exp);
-static flt64_t Exp10m1 (flt64_t exp);
-
-//============================================================================//
-//      Power of E                                                            //
-//============================================================================//
-
-// Integer power of E
-static flt32_t Exp (sint8_t exp);
-static flt64_t Exp (sint16_t exp);
-
-// Real power of E
-static flt32_t Exp (flt32_t exp);
-static flt64_t Exp (flt64_t exp);
-static flt32_t Expm1 (flt32_t exp);
-static flt64_t Expm1 (flt64_t exp);
-
-//============================================================================//
-//      Power                                                                 //
-//============================================================================//
-
-// Unsigned integer types
-static uint8_t Power (uint8_t base, uint8_t exp);
-static uint16_t Power (uint16_t base, uint8_t exp);
-static uint32_t Power (uint32_t base, uint8_t exp);
-static uint64_t Power (uint64_t base, uint8_t exp);
-
-// Signed integer types
-static sint8_t Power (sint8_t base, uint8_t exp);
-static sint16_t Power (sint16_t base, uint8_t exp);
-static sint32_t Power (sint32_t base, uint8_t exp);
-static sint64_t Power (sint64_t base, uint8_t exp);
-
-// Floating-point types
-static flt32_t Power (flt32_t base, sint8_t exp);
-static flt64_t Power (flt64_t base, sint16_t exp);
-
-//****************************************************************************//
-//      Logarithmic functions                                                 //
-//****************************************************************************//
-
-//============================================================================//
-//      Logarithm to base 2                                                   //
-//============================================================================//
-
-// Integer logarithm to base 2
-static sint8_t Log2 (uint8_t value);
-static sint8_t Log2 (uint16_t value);
-static sint8_t Log2 (uint32_t value);
-static sint8_t Log2 (uint64_t value);
-
-// Real logarithm to base 2
-static flt32_t Log2 (flt32_t value);
-static flt64_t Log2 (flt64_t value);
-static flt32_t Log2p1 (flt32_t value);
-static flt64_t Log2p1 (flt64_t value);
-
-//============================================================================//
-//      Logarithm to base 10                                                  //
-//============================================================================//
-
-// Integer logarithm to base 10
-static sint8_t Log10 (uint8_t value);
-static sint8_t Log10 (uint16_t value);
-static sint8_t Log10 (uint32_t value);
-static sint8_t Log10 (uint64_t value);
-
-// Real logarithm to base 10
-static flt32_t Log10 (flt32_t value);
-static flt64_t Log10 (flt64_t value);
-static flt32_t Log10p1 (flt32_t value);
-static flt64_t Log10p1 (flt64_t value);
-
-//============================================================================//
-//      Logarithm to base E (natural logarithm)                               //
-//============================================================================//
-static flt32_t Log (flt32_t value);
-static flt64_t Log (flt64_t value);
-static flt32_t Logp1 (flt32_t value);
-static flt64_t Logp1 (flt64_t value);
-
-//============================================================================//
-//      Logarithm to custom base                                              //
-//============================================================================//
-static flt32_t LogB (flt32_t base, flt32_t value);
-static flt64_t LogB (flt64_t base, flt64_t value);
-static flt32_t LogBp1 (flt32_t base, flt32_t value);
-static flt64_t LogBp1 (flt64_t base, flt64_t value);
-
-//****************************************************************************//
-//      Scale functions                                                       //
-//****************************************************************************//
-
-// Scale by power of 2
-static flt32_t Scale2 (flt32_t value, sint16_t exp);
-static flt64_t Scale2 (flt64_t value, sint16_t exp);
-
-// Scale by power of 10
-static flt32_t Scale10 (flt32_t value, sint16_t exp);
-static flt64_t Scale10 (flt64_t value, sint16_t exp);
-
-// Scale by power of E
-static flt32_t Scale (flt32_t value, sint16_t exp);
-static flt64_t Scale (flt64_t value, sint16_t exp);
 
 //****************************************************************************//
 //      Rounding                                                              //
@@ -954,6 +948,156 @@ sint32_t Math_LCM_sint32 (sint32_t x, sint32_t y);
 sint64_t Math_LCM_sint64 (sint64_t x, sint64_t y);
 
 //****************************************************************************//
+//      Scale functions                                                       //
+//****************************************************************************//
+
+// Scale by power of 2
+flt32_t Math_Scale2_flt32 (flt32_t value, sint16_t exp);
+flt64_t Math_Scale2_flt64 (flt64_t value, sint16_t exp);
+
+// Scale by power of 10
+flt32_t Math_Scale10_flt32 (flt32_t value, sint16_t exp);
+flt64_t Math_Scale10_flt64 (flt64_t value, sint16_t exp);
+
+//****************************************************************************//
+//      Exponentiation functions                                              //
+//****************************************************************************//
+
+//============================================================================//
+//      Exponentiation by base 2                                              //
+//============================================================================//
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//      Integer exponentiation by base 2                                      //
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+uint64_t Math_Exp2i_uint64 (uint8_t exp);
+flt32_t Math_Exp2i_flt32 (sint8_t exp);
+flt64_t Math_Exp2i_flt64 (sint16_t exp);
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//      Real exponentiation by base 2                                         //
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+flt32_t Math_Exp2_flt32 (flt32_t exp);
+flt64_t Math_Exp2_flt64 (flt64_t exp);
+flt32_t Math_Exp2m1_flt32 (flt32_t exp);
+flt64_t Math_Exp2m1_flt64 (flt64_t exp);
+
+//============================================================================//
+//      Exponentiation by base 10                                             //
+//============================================================================//
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//      Integer exponentiation by base 10                                     //
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+uint64_t Math_Exp10i_uint64 (uint8_t exp);
+flt32_t Math_Exp10i_flt32 (sint8_t exp);
+flt64_t Math_Exp10i_flt64 (sint16_t exp);
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//      Real exponentiation by base 10                                        //
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+flt32_t Math_Exp10_flt32 (flt32_t exp);
+flt64_t Math_Exp10_flt64 (flt64_t exp);
+flt32_t Math_Exp10m1_flt32 (flt32_t exp);
+flt64_t Math_Exp10m1_flt64 (flt64_t exp);
+
+//============================================================================//
+//      Exponentiation by base E (natural logarithm)                          //
+//============================================================================//
+flt32_t Math_Exp_flt32 (flt32_t exp);
+flt64_t Math_Exp_flt64 (flt64_t exp);
+flt32_t Math_Expm1_flt32 (flt32_t exp);
+flt64_t Math_Expm1_flt64 (flt64_t exp);
+
+//============================================================================//
+//      Exponentiation by custom base                                         //
+//============================================================================//
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//      Integer exponentiation by custom base                                 //
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+
+// Unsigned integer types
+uint8_t Math_ExpBi_uint8 (uint8_t base, uint8_t exp);
+uint16_t Math_ExpBi_uint16 (uint16_t base, uint8_t exp);
+uint32_t Math_ExpBi_uint32 (uint32_t base, uint8_t exp);
+uint64_t Math_ExpBi_uint64 (uint64_t base, uint8_t exp);
+
+// Signed integer types
+sint8_t Math_ExpBi_sint8 (sint8_t base, uint8_t exp);
+sint16_t Math_ExpBi_sint16 (sint16_t base, uint8_t exp);
+sint32_t Math_ExpBi_sint32 (sint32_t base, uint8_t exp);
+sint64_t Math_ExpBi_sint64 (sint64_t base, uint8_t exp);
+
+// Floating-point types
+flt32_t Math_ExpBi_flt32 (flt32_t base, sint8_t exp);
+flt64_t Math_ExpBi_flt64 (flt64_t base, sint16_t exp);
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//      Real exponentiation by custom base                                    //
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+flt32_t Math_ExpB_flt32 (flt32_t base, flt32_t exp);
+flt64_t Math_ExpB_flt64 (flt64_t base, flt64_t exp);
+flt32_t Math_ExpBm1_flt32 (flt32_t base, flt32_t exp);
+flt64_t Math_ExpBm1_flt64 (flt64_t base, flt64_t exp);
+
+//****************************************************************************//
+//      Logarithmic functions                                                 //
+//****************************************************************************//
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//      Integer logarithm to base 2                                           //
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+sint8_t Math_Log2i_uint8 (uint8_t value);
+sint8_t Math_Log2i_uint16 (uint16_t value);
+sint8_t Math_Log2i_uint32 (uint32_t value);
+sint8_t Math_Log2i_uint64 (uint64_t value);
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//      Real logarithm to base 2                                              //
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+flt32_t Math_Log2_flt32 (flt32_t value);
+flt64_t Math_Log2_flt64 (flt64_t value);
+flt32_t Math_Log2p1_flt32 (flt32_t value);
+flt64_t Math_Log2p1_flt64 (flt64_t value);
+
+//============================================================================//
+//      Logarithm to base 10                                                  //
+//============================================================================//
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//      Integer logarithm to base 10                                          //
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+sint8_t Math_Log10i_uint8 (uint8_t value);
+sint8_t Math_Log10i_uint16 (uint16_t value);
+sint8_t Math_Log10i_uint32 (uint32_t value);
+sint8_t Math_Log10i_uint64 (uint64_t value);
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//      Real logarithm to base 10                                             //
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+flt32_t Math_Log10_flt32 (flt32_t value);
+flt64_t Math_Log10_flt64 (flt64_t value);
+flt32_t Math_Log10p1_flt32 (flt32_t value);
+flt64_t Math_Log10p1_flt64 (flt64_t value);
+
+//============================================================================//
+//      Logarithm to base E (natural logarithm)                               //
+//============================================================================//
+flt32_t Math_Log_flt32 (flt32_t value);
+flt64_t Math_Log_flt64 (flt64_t value);
+flt32_t Math_Logp1_flt32 (flt32_t value);
+flt64_t Math_Logp1_flt64 (flt64_t value);
+
+//============================================================================//
+//      Logarithm to custom base                                              //
+//============================================================================//
+flt32_t Math_LogB_flt32 (flt32_t base, flt32_t value);
+flt64_t Math_LogB_flt64 (flt64_t base, flt64_t value);
+flt32_t Math_LogBp1_flt32 (flt32_t base, flt32_t value);
+flt64_t Math_LogBp1_flt64 (flt64_t base, flt64_t value);
+
+//****************************************************************************//
 //      Trigonometric functions                                               //
 //****************************************************************************//
 
@@ -972,50 +1116,26 @@ flt64_t Math_Cath_flt64 (flt64_t hypot, flt64_t cath);
 //============================================================================//
 //      Sine                                                                  //
 //============================================================================//
-
-// Sine of angle
 flt32_t Math_Sin_flt32 (flt32_t angle);
 flt64_t Math_Sin_flt64 (flt64_t angle);
-
-// Sine of angle and quadrant
-flt32_t Math_SinQ_flt32 (flt32_t angle, sint64_t quadrant);
-flt64_t Math_SinQ_flt64 (flt64_t angle, sint64_t quadrant);
 
 //============================================================================//
 //      Cosine                                                                //
 //============================================================================//
-
-// Cosine of angle
 flt32_t Math_Cos_flt32 (flt32_t angle);
 flt64_t Math_Cos_flt64 (flt64_t angle);
-
-// Cosine of angle and quadrant
-flt32_t Math_CosQ_flt32 (flt32_t angle, sint64_t quadrant);
-flt64_t Math_CosQ_flt64 (flt64_t angle, sint64_t quadrant);
 
 //============================================================================//
 //      Sine and cosine                                                       //
 //============================================================================//
-
-// Sine and cosine of angle
-flt32_t Math_SinCos_flt32 (flt32_t *sin, flt32_t *cos, flt32_t angle);
-flt64_t Math_SinCos_flt64 (flt64_t *sin, flt64_t *cos, flt64_t angle);
-
-// Sine and cosine of angle and quadrant
-flt32_t Math_SinCosQ_flt32 (flt32_t *sin, flt32_t *cos, flt32_t angle, sint64_t quadrant);
-flt64_t Math_SinCosQ_flt64 (flt64_t *sin, flt64_t *cos, flt64_t angle, sint64_t quadrant);
+void Math_SinCos_flt32 (flt32_t *sin, flt32_t *cos, flt32_t angle);
+void Math_SinCos_flt64 (flt64_t *sin, flt64_t *cos, flt64_t angle);
 
 //============================================================================//
 //      Tangent                                                               //
 //============================================================================//
-
-// Tangent of angle
 flt32_t Math_Tan_flt32 (flt32_t angle);
 flt64_t Math_Tan_flt64 (flt64_t angle);
-
-// Tangent of angle and quadrant
-flt32_t Math_TanQ_flt32 (flt32_t angle, sint64_t quadrant);
-flt64_t Math_TanQ_flt64 (flt64_t angle, sint64_t quadrant);
 
 //****************************************************************************//
 //      Inverse trigonometric functions                                       //
@@ -1040,142 +1160,6 @@ flt32_t Math_ArcTan_flt32 (flt32_t value);
 flt64_t Math_ArcTan_flt64 (flt64_t value);
 flt32_t Math_ArcTan2_flt32 (flt32_t sin, flt32_t cos);
 flt64_t Math_ArcTan2_flt64 (flt64_t sin, flt64_t cos);
-
-//****************************************************************************//
-//      Exponentiation functions                                              //
-//****************************************************************************//
-
-//============================================================================//
-//      Power of 2                                                            //
-//============================================================================//
-
-// Integer power of 2
-uint64_t Math_Exp2_uint64 (uint8_t exp);
-flt32_t Math_Exp2i_flt32 (sint8_t exp);
-flt64_t Math_Exp2i_flt64 (sint16_t exp);
-
-// Real power of 2
-flt32_t Math_Exp2_flt32 (flt32_t exp);
-flt64_t Math_Exp2_flt64 (flt64_t exp);
-flt32_t Math_Exp2m1_flt32 (flt32_t exp);
-flt64_t Math_Exp2m1_flt64 (flt64_t exp);
-
-//============================================================================//
-//      Power of 10                                                           //
-//============================================================================//
-
-// Integer power of 10
-uint64_t Math_Exp10_uint64 (uint8_t exp);
-flt32_t Math_Exp10i_flt32 (sint8_t exp);
-flt64_t Math_Exp10i_flt64 (sint16_t exp);
-
-// Real power of 10
-flt32_t Math_Exp10_flt32 (flt32_t exp);
-flt64_t Math_Exp10_flt64 (flt64_t exp);
-flt32_t Math_Exp10m1_flt32 (flt32_t exp);
-flt64_t Math_Exp10m1_flt64 (flt64_t exp);
-
-//============================================================================//
-//      Power of E                                                            //
-//============================================================================//
-
-// Integer power of E
-flt32_t Math_Expi_flt32 (sint8_t exp);
-flt64_t Math_Expi_flt64 (sint16_t exp);
-
-// Real power of E
-flt32_t Math_Exp_flt32 (flt32_t exp);
-flt64_t Math_Exp_flt64 (flt64_t exp);
-flt32_t Math_Expm1_flt32 (flt32_t exp);
-flt64_t Math_Expm1_flt64 (flt64_t exp);
-
-//============================================================================//
-//      Power                                                                 //
-//============================================================================//
-
-// Unsigned integer types
-uint8_t Math_Power_uint8 (uint8_t base, uint8_t exp);
-uint16_t Math_Power_uint16 (uint16_t base, uint8_t exp);
-uint32_t Math_Power_uint32 (uint32_t base, uint8_t exp);
-uint64_t Math_Power_uint64 (uint64_t base, uint8_t exp);
-
-// Signed integer types
-sint8_t Math_Power_sint8 (sint8_t base, uint8_t exp);
-sint16_t Math_Power_sint16 (sint16_t base, uint8_t exp);
-sint32_t Math_Power_sint32 (sint32_t base, uint8_t exp);
-sint64_t Math_Power_sint64 (sint64_t base, uint8_t exp);
-
-// Floating-point types
-flt32_t Math_Poweri_flt32 (flt32_t base, sint8_t exp);
-flt64_t Math_Poweri_flt64 (flt64_t base, sint16_t exp);
-
-//****************************************************************************//
-//      Logarithmic functions                                                 //
-//****************************************************************************//
-
-//============================================================================//
-//      Logarithm to base 2                                                   //
-//============================================================================//
-
-// Integer logarithm to base 2
-sint8_t Math_Log2_uint8 (uint8_t value);
-sint8_t Math_Log2_uint16 (uint16_t value);
-sint8_t Math_Log2_uint32 (uint32_t value);
-sint8_t Math_Log2_uint64 (uint64_t value);
-
-// Real logarithm to base 2
-flt32_t Math_Log2_flt32 (flt32_t value);
-flt64_t Math_Log2_flt64 (flt64_t value);
-flt32_t Math_Log2p1_flt32 (flt32_t value);
-flt64_t Math_Log2p1_flt64 (flt64_t value);
-
-//============================================================================//
-//      Logarithm to base 10                                                  //
-//============================================================================//
-
-// Integer logarithm to base 10
-sint8_t Math_Log10_uint8 (uint8_t value);
-sint8_t Math_Log10_uint16 (uint16_t value);
-sint8_t Math_Log10_uint32 (uint32_t value);
-sint8_t Math_Log10_uint64 (uint64_t value);
-
-// Real logarithm to base 10
-flt32_t Math_Log10_flt32 (flt32_t value);
-flt64_t Math_Log10_flt64 (flt64_t value);
-flt32_t Math_Log10p1_flt32 (flt32_t value);
-flt64_t Math_Log10p1_flt64 (flt64_t value);
-
-//============================================================================//
-//      Logarithm to base E (natural logarithm)                               //
-//============================================================================//
-flt32_t Math_Log_flt32 (flt32_t value);
-flt64_t Math_Log_flt64 (flt64_t value);
-flt32_t Math_Logp1_flt32 (flt32_t value);
-flt64_t Math_Logp1_flt64 (flt64_t value);
-
-//============================================================================//
-//      Logarithm to custom base                                              //
-//============================================================================//
-flt32_t Math_LogB_flt32 (flt32_t base, flt32_t value);
-flt64_t Math_LogB_flt64 (flt64_t base, flt64_t value);
-flt32_t Math_LogBp1_flt32 (flt32_t base, flt32_t value);
-flt64_t Math_LogBp1_flt64 (flt64_t base, flt64_t value);
-
-//****************************************************************************//
-//      Scale functions                                                       //
-//****************************************************************************//
-
-// Scale by power of 2
-flt32_t Math_Scale2_flt32 (flt32_t value, sint16_t exp);
-flt64_t Math_Scale2_flt64 (flt64_t value, sint16_t exp);
-
-// Scale by power of 10
-flt32_t Math_Scale10_flt32 (flt32_t value, sint16_t exp);
-flt64_t Math_Scale10_flt64 (flt64_t value, sint16_t exp);
-
-// Scale by power of E
-flt32_t Math_Scale_flt32 (flt32_t value, sint16_t exp);
-flt64_t Math_Scale_flt64 (flt64_t value, sint16_t exp);
 
 //****************************************************************************//
 //      Rounding                                                              //
