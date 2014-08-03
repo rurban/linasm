@@ -7,6 +7,30 @@
 ################################################################################
 
 #******************************************************************************#
+#       Release 1.03 (stable) [2014-08-03]                                     #
+#******************************************************************************#
+
+This release adds new math functions which were not developed until now,
+such as inverse trigonometric and logarithmic functions. Also were rewrote
+exponentiation functions and trigonometric functions too.
+
+The detailed list of new functions is here:
+    * Math library: Were added functions: Sin, Cos, Tan, SinCos. All of them
+      do range reductions for all available angle values supported by
+      floating-point format.
+    * Math library: Inverse trigonometric functions: ArcSin, ArcCos, ArcTan
+      compute inverse sine, cosine and tangent values.
+    * Math library: New logarithmic functions compute logarithm values to base
+      2, 10, e (natural logarithm base) and to custom base.
+    * Math library: Functions ExpB and ExpBm1 can compute "base" raised to "exp"
+      power, where "base" and "exp" are floating-point numbers. Base should be
+      positive number or zero.
+    * Array library: Were added functions Sign (replace value with its sign,
+      using three-state comparison comparison), SumSqrDiff, SumAbsDiff.
+    * Statistics library: Were released Fechner and Spearman correlation,
+      fast and efficient for big data series.
+
+#******************************************************************************#
 #       Release 1.02 (stable) [2014-05-02]                                     #
 #******************************************************************************#
 

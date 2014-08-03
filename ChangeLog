@@ -1,4 +1,23 @@
 +==============================================================================+
+|   2014-08-03  Release 1.03 (stable)                                          |
++==============================================================================+
+
+Bug fixes:
+	Math.asm: Fixed incorrect consts are used in functions IsNormal, IsSubnormal, IsFinite, IsInfinite, IsNaN
+
+New features:
+	* Math.asm: Added ExpB and ExpBm1 functions
+	* Math.asm: Added inverse trigonometric functions ArcSin, ArcCos, ArcTan
+	* Math.asm: Added inverse logarithmic functions to base 2, 10, natural logarithm base and custom base
+	* Math.asm: Added functions Sin, Cos, Tan, SinCos with range reduction
+	* Statistics.asm: Added functions: FechnerCorrelation, SpearmanCorrelation
+	* Array.ash: Added functions: Sign, SumSqrDiff, SumAbsDiff
+
+Changes in behavior:
+	* Math.asm: Power functions renamed to ExpBi functions
+	* Math.asm: Removed functions SinQ, CosQ, TanQ, CotQ
+
++==============================================================================+
 |   2014-05-02  Release 1.02 (stable)                                          |
 +==============================================================================+
 
