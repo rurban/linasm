@@ -2285,7 +2285,6 @@ if x eq s
 		cmd									; load logarithm value
 		fmulp	st1, st0					; multiply value and logarithm
 		fld		st0
-		fclex								; clear FPU exceptions
 		fisttp	dword [ipart]				; ipart = int (value * log2 (base))
 		fstsw 	status						; store FPU status word
 		and		status, 0x1					; if (overflow is occured)
@@ -2298,7 +2297,6 @@ else if x eq d
 		cmd									; load logarithm value
 		fmulp	st1, st0					; multiply value and logarithm
 		fld		st0
-		fclex								; clear FPU exceptions
 		fisttp	qword [ipart]				; ipart = int (value * log2 (base))
 		fstsw 	status						; store FPU status word
 		and		status, 0x1					; if (overflow is occured)
@@ -2693,7 +2691,6 @@ if x eq s
 		fyl2x								; compute log2 (base)
 		fmulp	st1, st0					; multiply value and logarithm
 		fld		st0
-		fclex								; clear FPU exceptions
 		fisttp	dword [ipart]				; ipart = int (value * log2 (base))
 		fstsw 	status						; store FPU status word
 		and		status, 0x1					; if (overflow is occured)
@@ -2708,7 +2705,6 @@ else if x eq d
 		fyl2x								; compute log2 (base)
 		fmulp	st1, st0					; multiply value and logarithm
 		fld		st0
-		fclex								; clear FPU exceptions
 		fisttp	qword [ipart]				; ipart = int (value * log2 (base))
 		fstsw 	status						; store FPU status word
 		and		status, 0x1					; if (overflow is occured)
@@ -2795,7 +2791,7 @@ ExpBm1_flt64:	EXPB	rdx, rcx, rax, rdi, rsi, MONE_FLT64, d
 ;******************************************************************************;
 ;       Logarithmic functions                                                  ;
 ;******************************************************************************;
-macro	LOG		ivalue, mant, exp, mantscale, expscale, x
+macro	LOG	ivalue, mant, exp, mantscale, expscale, x
 {
 ;---[Parameters]---------------------------
 value	equ		xmm0						; logarithm value
@@ -3387,8 +3383,8 @@ angle2	equ		xmm1						; angle value #2
 scale1	equ		xmm2						; high part of scale value
 scale2	equ		xmm3						; low part of scale value
 sign	equ		xmm4						; sign bit
-fpart1	equ		res0						; fraction part of result #1
-fpart2	equ		res1						; fraction part of result #2
+fpart1	equ		temp0						; fraction part of result #1
+fpart2	equ		temp1						; fraction part of result #2
 stack	equ		rsp							; stack pointer
 target	equ		stack + 0 * 8				; stack position of "target" variable
 if x eq s
@@ -3537,8 +3533,8 @@ angle2	equ		xmm1						; angle value #2
 scale1	equ		xmm2						; high part of scale value
 scale2	equ		xmm3						; low part of scale value
 sign	equ		xmm4						; sign bit
-fpart1	equ		res0						; fraction part of result #1
-fpart2	equ		res1						; fraction part of result #2
+fpart1	equ		temp0						; fraction part of result #1
+fpart2	equ		temp1						; fraction part of result #2
 stack	equ		rsp							; stack pointer
 target	equ		stack + 0 * 8				; stack position of "target" variable
 s_sin	equ		stack + 19 * 8				; stack position of "sin" variable
@@ -3935,8 +3931,8 @@ end if
 }
 
 ; Sine of angle
-Sin_flt32:	TRIG1	SinQ_flt32, r8d, r9d, ecx, edi, eax, edx, edi, esi, s
-Sin_flt64:	TRIG1	SinQ_flt64, r8, r9, rcx, rdi, rax, rdx, rdi, rsi, d
+Sin_flt32:	TRIG1	SinQ_flt32, r8d, r9d, ecx, edx, eax, edx, edi, esi, s
+Sin_flt64:	TRIG1	SinQ_flt64, r8, r9, rcx, rdx, rax, rdx, rdi, rsi, d
 
 ; Sine of angle and quadrant
 SinQ_flt32:	SIN		edx, ecx, s
@@ -4040,8 +4036,8 @@ end if
 }
 
 ; Cosine of angle
-Cos_flt32:	TRIG1	CosQ_flt32, r8d, r9d, ecx, edi, eax, edx, edi, esi, s
-Cos_flt64:	TRIG1	CosQ_flt64, r8, r9, rcx, rdi, rax, rdx, rdi, rsi, d
+Cos_flt32:	TRIG1	CosQ_flt32, r8d, r9d, ecx, edx, eax, edx, edi, esi, s
+Cos_flt64:	TRIG1	CosQ_flt64, r8, r9, rcx, rdx, rax, rdx, rdi, rsi, d
 
 ; Cosine of angle and quadrant
 CosQ_flt32:	COS		edx, ecx, s
@@ -4113,7 +4109,6 @@ end if
 		test	quadr, 0x2
 		cmovnz	sreg1, sval1				; if (quadr & 0x2 != 0), then sign1 = -sign1
 		cmovnz	sreg2, sval2				; if (quadr & 0x2 != 0), then sign2 = -1.0
-
 		movap#x	base1, angle				; base1 = angle
 		movap#x	base2, half					; base2 = 0.5
 		muls#x	angle, angle				; angle *= angle
@@ -4178,8 +4173,8 @@ end if
 }
 
 ; Sine and cosine of angle
-SinCos_flt32:	TRIG2	SinCosQ_flt32, r8d, r9d, ecx, edi, eax, edx, edi, esi, s
-SinCos_flt64:	TRIG2	SinCosQ_flt64, r8, r9, rcx, rdi, rax, rdx, rdi, rsi, d
+SinCos_flt32:	TRIG2	SinCosQ_flt32, r8d, r9d, ecx, edx, eax, edx, edi, esi, s
+SinCos_flt64:	TRIG2	SinCosQ_flt64, r8, r9, rcx, rdx, rax, rdx, rdi, rsi, d
 
 ; Sine and cosine of angle and quadrant
 SinCosQ_flt32:	SINCOS	r8d, r9d, r10d, r11d, s
@@ -4277,8 +4272,8 @@ end if
 }
 
 ; Tangent of angle
-Tan_flt32:	TRIG1	TanQ_flt32, r8d, r9d, ecx, edi, eax, edx, edi, esi, s
-Tan_flt64:	TRIG1	TanQ_flt64, r8, r9, rcx, rdi, rax, rdx, rdi, rsi, d
+Tan_flt32:	TRIG1	TanQ_flt32, r8d, r9d, ecx, edx, eax, edx, edi, esi, s
+Tan_flt64:	TRIG1	TanQ_flt64, r8, r9, rcx, rdx, rax, rdx, rdi, rsi, d
 
 ; Tangent of angle and quadrant
 TanQ_flt32:	TAN		edx, ecx, s
