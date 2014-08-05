@@ -3421,13 +3421,8 @@ end if
 bits	= 1 shl bscale						; block size (bits)
 bytes	= 1 shl (bscale - 3)				; block size (bytes)
 space	= 19 * 8							; stack size required by the procedure
-;------------------------------------------
-		sub		stack, space				; reserving stack size for local vars
-		initreg	sign, treg, smask			; sign = smask
-		initreg	scale1, treg, sclval1		; scale1 = sclval1
-		initreg	scale2, treg, sclval2		; scale2 = sclval2
-		movint	ivalue, angle, x
 ;---[Check angle value]--------------------
+		movint	ivalue, angle, x
 		mov		mant, dmask					; load data mask
 		and		mant, ivalue				; mant = Abs (angle)
 		mov		ipart, infval
@@ -3437,6 +3432,10 @@ space	= 19 * 8							; stack size required by the procedure
 		cmp		mant, ipart					; if (mant <= Pi/4)
 		jbe		.skip						;     then skip following code
 ;---[Set correct sign to scale values]-----
+		sub		stack, space				; reserving stack size for local vars
+		initreg	sign, treg, smask			; sign = smask
+		initreg	scale1, treg, sclval1		; scale1 = sclval1
+		initreg	scale2, treg, sclval2		; scale2 = sclval2
 		andp#x	sign, angle					; get angle sign
 		orp#x	scale1, sign				; set angle sign to scale value #1
 		orp#x	scale2, sign				; set angle sign to scale value #2
@@ -3509,11 +3508,9 @@ space	= 19 * 8							; stack size required by the procedure
 		jmp		Func						; call Func (angle1 + angle2, ipart)
 ;---[Skip branch]--------------------------
 .skip:	xor		param1, param1
-		add		stack, space				; restoring back the stack pointer
 		jmp		Func						; call Func (angle, 0)
 ;---[Overflow branch]----------------------
 .ovrfl:	initreg	angle, treg, nanval			; return NaN
-		add		stack, space				; restoring back the stack pointer
 		ret
 }
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -3573,13 +3570,8 @@ end if
 bits	= 1 shl bscale						; block size (bits)
 bytes	= 1 shl (bscale - 3)				; block size (bytes)
 space	= 21 * 8							; stack size required by the procedure
-;------------------------------------------
-		sub		stack, space				; reserving stack size for local vars
-		initreg	sign, treg, smask			; sign = smask
-		initreg	scale1, treg, sclval1		; scale1 = sclval1
-		initreg	scale2, treg, sclval2		; scale2 = sclval2
-		movint	ivalue, angle, x
 ;---[Check angle value]--------------------
+		movint	ivalue, angle, x
 		mov		mant, dmask					; load data mask
 		and		mant, ivalue				; mant = Abs (angle)
 		mov		ipart, infval
@@ -3588,12 +3580,16 @@ space	= 21 * 8							; stack size required by the procedure
 		mov		ipart, pi4val
 		cmp		mant, ipart					; if (mant <= Pi/4)
 		jbe		.skip						;     then skip following code
-		mov		[s_sin], sin				; save "sin" variable into the stack
-		mov		[s_cos], cos				; save "cos" variable into the stack
 ;---[Set correct sign to scale values]-----
+		sub		stack, space				; reserving stack size for local vars
+		initreg	sign, treg, smask			; sign = smask
+		initreg	scale1, treg, sclval1		; scale1 = sclval1
+		initreg	scale2, treg, sclval2		; scale2 = sclval2
 		andp#x	sign, angle					; get angle sign
 		orp#x	scale1, sign				; set angle sign to scale value #1
 		orp#x	scale2, sign				; set angle sign to scale value #2
+		mov		[s_sin], sin				; save "sin" variable into the stack
+		mov		[s_cos], cos				; save "cos" variable into the stack
 ;---[Extract exponent]---------------------
 		mov		exp, emask
 		and		exp, ivalue					; exp = angle & emask
@@ -3665,13 +3661,11 @@ space	= 21 * 8							; stack size required by the procedure
 		jmp		Func						; call Func (&sin, &cos, angle1 + angle2, ipart)
 ;---[Skip branch]--------------------------
 .skip:	xor		param3, param3
-		add		stack, space				; restoring back the stack pointer
 		jmp		Func						; call Func (&sin, &cos, angle, 0)
 ;---[Overflow branch]----------------------
 .ovrfl:	mov		mant, nanval
 		mov		[sin], mant					; sin[0] = NaN
 		mov		[cos], mant					; cos[0] = NaN
-		add		stack, space				; restoring back the stack pointer
 		ret
 }
 
