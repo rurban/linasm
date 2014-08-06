@@ -2791,7 +2791,7 @@ ExpBm1_flt64:	EXPB	rdx, rcx, rax, rdi, rsi, MONE_FLT64, d
 ;******************************************************************************;
 ;       Logarithmic functions                                                  ;
 ;******************************************************************************;
-macro	LOG	ivalue, mant, exp, mantscale, expscale, x
+macro	LOG		ivalue, temp, exp, mantscale, expscale, x
 {
 ;---[Parameters]---------------------------
 value	equ		xmm0						; logarithm value
@@ -2801,18 +2801,22 @@ temp1	equ		xmm1						; temporary register #1
 temp2	equ		xmm2						; temporary register #2
 temp3	equ		xmm3						; temporary register #3
 temp4	equ		xmm4						; temporary register #4
-mscale	equ		xmm5						; mantisa scale value
-scale1	equ		xmm6						; scale value #1
-scale2	equ		xmm7						; scale value #2
-base	equ		xmm8						; base value
-origin	equ		xmm9						; origin value
-shift	equ		xmm10						; shift value
+temp5	equ		xmm5						; temporary register #5
+temp6	equ		xmm6						; temporary register #6
+temp7	equ		xmm7						; temporary register #7
+temp8	equ		xmm8						; temporary register #8
+mscale	equ		xmm9						; mantisa scale value
+scale	equ		xmm10						; scale value
+base	equ		xmm11						; base value
+shift	equ		xmm12						; shift value
 result	equ		value						; result register
-two		equ		temp1						; 2.0
-half	equ		temp2						; 0.5
-one		equ		temp3						; 1.0
-cscale	equ		scale1						; correction scale value
-escale	equ		scale2						; exponent scale value
+escale	equ		temp1						; exponent scale value
+cscale	equ		temp2						; correction scale value
+mask1	equ		temp3						; mask value #1
+mask2	equ		temp4						; mask value #2
+max		equ		temp5						; max value
+half	equ		temp6						; 0.5
+one		equ		temp7						; 1.0
 if x eq s
 emask	= EMASK_FLT32						; exponent mask
 mmask	= MMASK_FLT32						; mantissa mask
@@ -2820,11 +2824,11 @@ normval	= NORM_FLT32						; min normal value
 nanval	= PNAN_FLT32						; +NaN
 pinfval	= PINF_FLT32						; +Inf
 minfval	= MINF_FLT32						; -Inf
-twoval	= PTWO_FLT32						; 2.0
 halfval	= PHALF_FLT32						; 0.5
 oneval	= PONE_FLT32						; 1.0
 mbits	= MBITS_FLT32						; count of bits into mantissa
 bias	= EBIAS_FLT32						; exponent bias
+maxval	= 0x3FAAAAAB						; max value
 corrval	= 0x4B000000						; correction value
 loge	= log_flt32							; pointer to array of log coefficients
 else if x eq d
@@ -2834,29 +2838,31 @@ normval	= NORM_FLT64						; min normal value
 nanval	= PNAN_FLT64						; +NaN
 pinfval	= PINF_FLT64						; +Inf
 minfval	= MINF_FLT64						; -Inf
-twoval	= PTWO_FLT64						; 2.0
 halfval	= PHALF_FLT64						; 0.5
 oneval	= PONE_FLT64						; 1.0
 mbits	= MBITS_FLT64						; count of bits into mantissa
 bias	= EBIAS_FLT64						; exponent bias
+maxval	= 0x3FF5555555555555				; max value
 corrval	= 0x4330000000000000				; correction value
 loge	= log_flt64							; pointer to array of log coefficients
 end if
 ;---[Check logarithm value]----------------
 		movint	ivalue, value, x			; ivalue = value
-		xor		mant, mant
-		cmp		ivalue, mant
+		xor		temp, temp
+		cmp		ivalue, temp
 		jl		.error						; if (ivalue < 0.0), then return NaN
 		je		.min						; if (ivalue == 0.0), then return -Inf
-		mov		mant, pinfval
-		cmp		ivalue, mant
+		mov		temp, pinfval
+		cmp		ivalue, temp
 		ja		.error						; if (ivalue > Inf), then return NaN
 		je		.max						; if (ivalue == Inf), then return +Inf
 ;---[Loading scale values]-----------------
 		initreg	mscale, treg, mantscale		; mscale = mantscale
 		initreg	escale, treg, expscale		; escale = expscale
 ;---[Loading consts]-----------------------
-		initreg	two, treg, twoval			; two = 2.0
+		initreg	mask1, treg, mmask			; mask1 = mmask
+		initreg	mask2, treg, bias shl mbits	; mask = bias << mbits
+		initreg	max, treg, maxval			; max = maxval
 		initreg	half, treg, halfval			; half = 0.5
 		initreg	one, treg, oneval			; one = 1.0
 		initreg	cscale, treg, corrval		; cscale = correction value
@@ -2865,54 +2871,37 @@ end if
 		and		exp, ivalue					; exp = ivalue & emask
 		shr		exp, mbits					; exp >>= mbits
 		sub		exp, bias					; exp -= bias
-		mov		mant, normval
-		cmp		ivalue, mant				; if (ivalue < min normal value)
+		mov		temp, normval
+		cmp		ivalue, temp				; if (ivalue < min normal value)
 		jb		.corr						;     then correct value
 ;---[Mantissa extraction]------------------
-.back:	mov		mant, mmask
-		and		mant, ivalue				; mant = ivalue & mmask
-		mov		ivalue, bias shl mbits
-		or		mant, ivalue				; mant |= (bias << mbits)
-		mov		ivalue, 1 shl (mbits - 1)
-		and		ivalue, mant				; ivalue = mant & (1 << mbits - 1)
-		shl		ivalue, 1
-		sub		mant, ivalue				; mant -= ivalue << 1
-		movint	result, mant, x
-		subs#x	result, one					; result = mant - 1.0
-		shr		ivalue, mbits
-		add		exp, ivalue					; exp += ivalue >> mbits
-	cvtsi2s#x	shift, exp					; shift = exp
+.back:cvtsi2s#x	shift, exp					; shift = exp
+		andp#x	result, mask1				; result &= mmask
+		orp#x	result, mask2				; result |= bias << mbits
+		comis#x	result, max					; if (result > max)
+		jbe		@f							; {
+		muls#x	result, half				;     result *= 0.5
+		adds#x	shift, one					;     shift += 1.0
+;---[Computing logarithm]------------------	; }
+@@:		subs#x	result, one					; result -= 1.0
+		movap#x	base, result				; base = result
 		muls#x	shift, escale				; shift *= escale
-;---[Computing logarithm]------------------
-		movap#x	origin, result				; origin = result
-		movap#x	base, result
-		movap#x	scale1, result
-		movap#x	scale2, result
-		muls#x	base, result
-		adds#x	scale2, two
-		muls#x	base, half					; base = 0.5 * result * result
-		divs#x	scale1, scale2				; scale1 = result / (result + 2)
-		movap#x	scale2, scale1
-		muls#x	scale2, scale2				; scale2 = scale1 * scale1
-		movap#x	result, scale2				; result = scale2
+		movap#x	scale, result
+		muls#x	scale, scale				; scale = result * result
 if x eq s
-	SINGLE8		loge, result, x				; compute single polynomial value
-else if x eq d
 	SINGLE16	loge, result, x				; compute single polynomial value
+else if x eq d
+	SINGLE32	loge, result, x				; compute single polynomial value
 end if
-		muls#x	temp1, scale2
-		adds#x	temp1, base
-		muls#x	temp1, scale1
-		subs#x	temp1, base
-		adds#x	temp1, origin				; temp1 = origin + (scale1 * (base + scale2 * temp1) - base)
+		muls#x	temp1, scale
+		adds#x	temp1, base					; temp1 = base + scale * temp1
 		muls#x	temp1, mscale				; temp1 *= mscale
 		adds#x	temp1, shift				; temp1 += shift
-		movap#x	result, temp1				; return mscale * log1p (value) + shift
+		movap#x	result, temp1				; return mscale * log (value) + shift
 		ret
 ;---[Mantissa correction branch]-----------
 .corr:	muls#x	result, cscale				; result *= cscale
 		sub		exp, mbits					; exp -= mbits
-		movint	ivalue, result, x			; ivalue = result
 		jmp		.back						; go back
 ;---[Min value branch]---------------------
 .min:	initreg	result, treg, minfval		; return -Inf
@@ -2925,7 +2914,7 @@ end if
 		ret
 }
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	LOG1P	Func, ivalue, mant, mantscale, x
+macro	LOG1P	Func, ivalue, temp, mantscale, x
 {
 ;---[Parameters]---------------------------
 value	equ		xmm0						; logarithm value
@@ -2948,21 +2937,21 @@ twoval	= PTWO_FLT32						; +2.0
 phlfval	= PHALF_FLT32						; +0.5
 mhlfval	= MHALF_FLT32						; -0.5
 oneval	= PONE_FLT32						; +1.0
-loge	= log_flt32							; pointer to array of log coefficients
+loge	= log1p_flt32						; pointer to array of log coefficients
 else if x eq d
 twoval	= PTWO_FLT64						; +2.0
 phlfval	= PHALF_FLT64						; +0.5
 mhlfval	= MHALF_FLT64						; -0.5
 oneval	= PONE_FLT64						; +1.0
-loge	= log_flt64							; pointer to array of log coefficients
+loge	= log1p_flt64						; pointer to array of log coefficients
 end if
 ;---[Check logarithm value]----------------
 		movint	ivalue, value, x			; ivalue = value
-		mov		mant, mhlfval
-		cmp		ivalue, mant				; if (ivalue < -0.5)
+		mov		temp, mhlfval
+		cmp		ivalue, temp				; if (ivalue < -0.5)
 		ja		.log						;     then go to log branch
-		mov		mant, oneval
-		cmp		ivalue, mant				; if (ivalue > +1.0)
+		mov		temp, oneval
+		cmp		ivalue, temp				; if (ivalue > +1.0)
 		jg		.log						;     then go to log branch
 ;---[Loading scale values]-----------------
 		initreg	mscale, treg, mantscale		; mscale = mantscale
@@ -3086,7 +3075,7 @@ LogEp1_flt64:	LOG1P	LogE_flt64, rdi, rdx, LOGE_E_FLT64, d
 ;==============================================================================;
 ;       Logarithm to custom base                                               ;
 ;==============================================================================;
-macro	LOGB	Log, ivalue, mant, exp, res, val1, val2, x
+macro	LOGB	Log, ivalue, temp, exp, res, val1, val2, x
 {
 ;---[Parameters]---------------------------
 lbase	equ		xmm0						; logarithm base value
@@ -3097,18 +3086,22 @@ temp1	equ		xmm1						; temporary register #1
 temp2	equ		xmm2						; temporary register #2
 temp3	equ		xmm3						; temporary register #3
 temp4	equ		xmm4						; temporary register #4
-mscale	equ		xmm5						; mantisa scale value
-scale1	equ		xmm6						; scale value #1
-scale2	equ		xmm7						; scale value #2
-base	equ		xmm8						; base value
-origin	equ		xmm9						; origin value
-shift	equ		xmm10						; shift value
+temp5	equ		xmm5						; temporary register #5
+temp6	equ		xmm6						; temporary register #6
+temp7	equ		xmm7						; temporary register #7
+temp8	equ		xmm8						; temporary register #8
+mscale	equ		xmm9						; mantisa scale value
+scale	equ		xmm10						; scale value #1
+base	equ		xmm11						; base value
+shift	equ		xmm12						; shift value
 result	equ		lbase						; result register
-two		equ		temp1						; 2.0
-half	equ		temp2						; 0.5
-one		equ		temp3						; 1.0
-cscale	equ		scale1						; correction scale value
-escale	equ		scale2						; exponent scale value
+escale	equ		temp1						; exponent scale value
+cscale	equ		temp2						; correction scale value
+mask1	equ		temp3						; mask value #1
+mask2	equ		temp4						; mask value #2
+max		equ		temp5						; max value
+half	equ		temp6						; 0.5
+one		equ		temp7						; 1.0
 stack	equ		rsp							; stack pointer
 s_value	equ		stack + 0 * 8				; stack position of "value" variable
 if x eq s
@@ -3118,12 +3111,12 @@ normval	= NORM_FLT32						; min normal value
 nanval	= PNAN_FLT32						; +NaN
 pinfval	= PINF_FLT32						; +Inf
 minfval	= MINF_FLT32						; -Inf
-twoval	= PTWO_FLT32						; 2.0
 halfval	= PHALF_FLT32						; 0.5
 oneval	= PONE_FLT32						; 1.0
 logval	= LOGE_2_FLT32						; ln(2)
 mbits	= MBITS_FLT32						; count of bits into mantissa
 bias	= EBIAS_FLT32						; exponent bias
+maxval	= 0x3FAAAAAB						; max value
 corrval	= 0x4B000000						; correction value
 loge	= log_flt32							; pointer to array of log coefficients
 else if x eq d
@@ -3133,35 +3126,35 @@ normval	= NORM_FLT64						; min normal value
 nanval	= PNAN_FLT64						; +NaN
 pinfval	= PINF_FLT64						; +Inf
 minfval	= MINF_FLT64						; -Inf
-twoval	= PTWO_FLT64						; 2.0
 halfval	= PHALF_FLT64						; 0.5
 oneval	= PONE_FLT64						; 1.0
 logval	= LOGE_2_FLT64						; ln(2)
 mbits	= MBITS_FLT64						; count of bits into mantissa
 bias	= EBIAS_FLT64						; exponent bias
+maxval	= 0x3FF5555555555555				; max value
 corrval	= 0x4330000000000000				; correction value
 loge	= log_flt64							; pointer to array of log coefficients
 end if
 space	= 1 * 8								; stack size required by the procedure
 ;---[Check base value]---------------------
 		movint	exp, lbase, x
-		mov		mant, oneval
-		cmp		exp, mant					; if (lbase == 1.0)
+		mov		temp, oneval
+		cmp		exp, temp					; if (lbase == 1.0)
 		je		.error						;     return NaN
-		xor		mant, mant
-		cmp		exp, mant					; if (lbase <= 0.0)
+		xor		temp, temp
+		cmp		exp, temp					; if (lbase <= 0.0)
 		jle		.error						;     then return NaN
-		mov		mant, pinfval
-		cmp		exp, mant					; if (lbase >= Inf)
+		mov		temp, pinfval
+		cmp		exp, temp					; if (lbase >= Inf)
 		jae		.error						;     then return NaN
 ;---[Check logarithm value]----------------
 		movint	ivalue, value, x			; ivalue = value
-		xor		mant, mant
-		cmp		ivalue, mant
+		xor		temp, temp
+		cmp		ivalue, temp
 		jl		.error						; if (ivalue < 0.0), then return NaN
 		je		.min						; if (ivalue == 0.0), then return correct Inf
-		mov		mant, pinfval
-		cmp		ivalue, mant
+		mov		temp, pinfval
+		cmp		ivalue, temp
 		ja		.error						; if (ivalue > Inf), then return NaN
 		je		.max						; if (ivalue == Inf), then return correct Inf
 ;---[Loading scale values]-----------------
@@ -3176,7 +3169,9 @@ space	= 1 * 8								; stack size required by the procedure
 		mov		ivalue, [s_value]			; ivalue = value
 		add		stack, space				; restoring back the stack pointer
 ;---[Loading consts]-----------------------
-		initreg	two, treg, twoval			; two = 2.0
+		initreg	mask1, treg, mmask			; mask1 = mmask
+		initreg	mask2, treg, bias shl mbits	; mask = bias << mbits
+		initreg	max, treg, maxval			; max = maxval
 		initreg	half, treg, halfval			; half = 0.5
 		initreg	one, treg, oneval			; one = 1.0
 		initreg	cscale, treg, corrval		; cscale = correction value
@@ -3185,61 +3180,44 @@ space	= 1 * 8								; stack size required by the procedure
 		and		exp, ivalue					; exp = ivalue & emask
 		shr		exp, mbits					; exp >>= mbits
 		sub		exp, bias					; exp -= bias
-		mov		mant, normval
-		cmp		ivalue, mant				; if (ivalue < min normal value)
+		mov		temp, normval
+		cmp		ivalue, temp				; if (ivalue < min normal value)
 		jb		.corr						;     then correct value
 ;---[Mantissa extraction]------------------
-.back:	mov		mant, mmask
-		and		mant, ivalue				; mant = ivalue & mmask
-		mov		ivalue, bias shl mbits
-		or		mant, ivalue				; mant |= (bias << mbits)
-		mov		ivalue, 1 shl (mbits - 1)
-		and		ivalue, mant				; ivalue = mant & (1 << mbits - 1)
-		shl		ivalue, 1
-		sub		mant, ivalue				; mant -= ivalue << 1
-		movint	result, mant, x
-		subs#x	result, one					; result = mant - 1.0
-		shr		ivalue, mbits
-		add		exp, ivalue					; exp += ivalue >> mbits
-	cvtsi2s#x	shift, exp					; shift = exp
+.back:cvtsi2s#x	shift, exp					; shift = exp
+		andp#x	result, mask1				; result &= mmask
+		orp#x	result, mask2				; result |= bias << mbits
+		comis#x	result, max					; if (result > max)
+		jbe		@f							; {
+		muls#x	result, half				;     result *= 0.5
+		adds#x	shift, one					;     shift += 1.0
+;---[Computing logarithm]------------------	; }
+@@:		subs#x	result, one					; result -= 1.0
+		movap#x	base, result				; base = result
 		muls#x	shift, escale				; shift *= escale
-;---[Computing logarithm]------------------
-		movap#x	origin, result				; origin = result
-		movap#x	base, result
-		movap#x	scale1, result
-		movap#x	scale2, result
-		muls#x	base, result
-		adds#x	scale2, two
-		muls#x	base, half					; base = 0.5 * result * result
-		divs#x	scale1, scale2				; scale1 = result / (result + 2)
-		movap#x	scale2, scale1
-		muls#x	scale2, scale2				; scale2 = scale1 * scale1
-		movap#x	result, scale2				; result = scale2
+		movap#x	scale, result
+		muls#x	scale, scale				; scale = result * result
 if x eq s
-	SINGLE8		loge, result, x				; compute single polynomial value
-else if x eq d
 	SINGLE16	loge, result, x				; compute single polynomial value
+else if x eq d
+	SINGLE32	loge, result, x				; compute single polynomial value
 end if
-		muls#x	temp1, scale2
-		adds#x	temp1, base
-		muls#x	temp1, scale1
-		subs#x	temp1, base
-		adds#x	temp1, origin				; temp1 = origin + (scale1 * (base + scale2 * temp1) - base)
+		muls#x	temp1, scale
+		adds#x	temp1, base					; temp1 = base + scale * temp1
 		muls#x	temp1, mscale				; temp1 *= mscale
 		adds#x	temp1, shift				; temp1 += shift
-		movap#x	result, temp1				; return mscale * log1p (value) + shift
+		movap#x	result, temp1				; return mscale * log (value) + shift
 		ret
 ;---[Mantissa correction branch]-----------
 .corr:	muls#x	result, cscale				; result *= cscale
 		sub		exp, mbits					; exp -= mbits
-		movint	ivalue, result, x			; ivalue = result
 		jmp		.back						; go back
 ;---[Min value branch]---------------------
 .min:	mov		val1, minfval				; val1 = -Inf
 		mov		val2, pinfval				; val2 = +Inf
 		movint	exp, lbase, x
-		mov		mant, oneval
-		cmp		exp, mant
+		mov		temp, oneval
+		cmp		exp, temp
 		cmova	res, val1					; if (lbase > 1.0), then res = -Inf
 		cmovb	res, val2					; if (lbase < 1.0), then res = +Inf
 		movint	result, res, x				; return res
@@ -3248,8 +3226,8 @@ end if
 .max:	mov		val1, pinfval				; val1 = +Inf
 		mov		val2, minfval				; val2 = -Inf
 		movint	exp, lbase, x
-		mov		mant, oneval
-		cmp		exp, mant
+		mov		temp, oneval
+		cmp		exp, temp
 		cmova	res, val1					; if (lbase > 1.0), then res = +Inf
 		cmovb	res, val2					; if (lbase < 1.0), then res = -Inf
 		movint	result, res, x				; return res
@@ -3259,7 +3237,7 @@ end if
 		ret
 }
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	LOGB1P	Log, Func, ivalue, mant, x
+macro	LOGB1P	Log, Func, ivalue, temp, x
 {
 ;---[Parameters]---------------------------
 lbase	equ		xmm0						; logarithm base value
@@ -3287,7 +3265,7 @@ twoval	= PTWO_FLT32						; +2.0
 phlfval	= PHALF_FLT32						; +0.5
 mhlfval	= MHALF_FLT32						; -0.5
 oneval	= PONE_FLT32						; +1.0
-loge	= log_flt32							; pointer to array of log coefficients
+loge	= log1p_flt32						; pointer to array of log coefficients
 else if x eq d
 nanval	= PNAN_FLT64						; +NaN
 infval	= PINF_FLT64						; +Inf
@@ -3295,27 +3273,27 @@ twoval	= PTWO_FLT64						; +2.0
 phlfval	= PHALF_FLT64						; +0.5
 mhlfval	= MHALF_FLT64						; -0.5
 oneval	= PONE_FLT64						; +1.0
-loge	= log_flt64							; pointer to array of log coefficients
+loge	= log1p_flt64						; pointer to array of log coefficients
 end if
 space	= 1 * 8								; stack size required by the procedure
 ;---[Check base value]---------------------
 		movint	ivalue, lbase, x			; ivalue = lbase
-		mov		mant, oneval
-		cmp		ivalue, mant				; if (ivalue == 1.0)
+		mov		temp, oneval
+		cmp		ivalue, temp				; if (ivalue == 1.0)
 		je		.error						;     return NaN
-		xor		mant, mant
-		cmp		ivalue, mant				; if (ivalue <= 0.0)
+		xor		temp, temp
+		cmp		ivalue, temp				; if (ivalue <= 0.0)
 		jle		.error						;     then return NaN
-		mov		mant, infval
-		cmp		ivalue, mant				; if (ivalue >= Inf)
+		mov		temp, infval
+		cmp		ivalue, temp				; if (ivalue >= Inf)
 		jae		.error						;     then return NaN
 ;---[Check logarithm value]----------------
 		movint	ivalue, value, x			; ivalue = value
-		mov		mant, mhlfval
-		cmp		ivalue, mant				; if (ivalue < -0.5)
+		mov		temp, mhlfval
+		cmp		ivalue, temp				; if (ivalue < -0.5)
 		ja		.log						;     then go to log branch
-		mov		mant, oneval
-		cmp		ivalue, mant				; if (ivalue > +1.0)
+		mov		temp, oneval
+		cmp		ivalue, temp				; if (ivalue > +1.0)
 		jg		.log						;     then go to log branch
 ;---[Loading scale values]-----------------
 		sub		stack, space				; reserving stack size for local vars
@@ -4993,7 +4971,28 @@ exp_flt32		dd	0x3638EF1D				; 1 / 9!
 ;       Coefficients to compute log(x) for flt32_t type                        ;
 ;==============================================================================;
 align 16
-log_flt32		dd	0x3DF0F0F1				; 2 / 17
+log_flt32		dd	0x3D70F0F1				; +1 / 17
+				dd	0x3DE38E39				; +1 / 09
+				dd	0x3D9D89D9				; +1 / 13
+				dd	0x3E4CCCCD				; +1 / 05
+				dd	0x3D888889				; +1 / 15
+				dd	0x3E124925				; +1 / 07
+				dd	0x3DBA2E8C				; +1 / 11
+				dd	0x3EAAAAAB				; +1 / 03
+				dd	0xBD800000				; -1 / 16
+				dd	0xBE000000				; -1 / 08
+				dd	0xBDAAAAAB				; -1 / 12
+				dd	0xBE800000				; -1 / 04
+				dd	0xBD924925				; -1 / 14
+				dd	0xBE2AAAAB				; -1 / 06
+				dd	0xBDCCCCCD				; -1 / 10
+				dd	0xBF000000				; -1 / 02
+
+;==============================================================================;
+;       Coefficients to compute log(1+x) for flt32_t type                      ;
+;==============================================================================;
+align 16
+log1p_flt32		dd	0x3DF0F0F1				; 2 / 17
 				dd	0x3E638E39				; 2 / 09
 				dd	0x3E1D89D9				; 2 / 13
 				dd	0x3ECCCCCD				; 2 / 05
@@ -5335,7 +5334,44 @@ exp_flt64		dq	0x3CE952C77030AD4A		; 1 / 17!
 ;       Coefficients to compute log(x) for flt64_t type                        ;
 ;==============================================================================;
 align 16
-log_flt64		dq	0x3FAF07C1F07C1F08		; 2 / 33
+log_flt64		dq	0x3F9F07C1F07C1F08		; +1 / 33
+				dq	0x3FAE1E1E1E1E1E1E		; +1 / 17
+				dq	0x3FA47AE147AE147B		; +1 / 25
+				dq	0x3FBC71C71C71C71C		; +1 / 09
+				dq	0x3FA1A7B9611A7B96		; +1 / 29
+				dq	0x3FB3B13B13B13B14		; +1 / 13
+				dq	0x3FA8618618618618		; +1 / 21
+				dq	0x3FC999999999999A		; +1 / 05
+				dq	0x3FA0842108421084		; +1 / 31
+				dq	0x3FB1111111111111		; +1 / 15
+				dq	0x3FA642C8590B2164		; +1 / 23
+				dq	0x3FC2492492492492		; +1 / 07
+				dq	0x3FA2F684BDA12F68		; +1 / 27
+				dq	0x3FB745D1745D1746		; +1 / 11
+				dq	0x3FAAF286BCA1AF28		; +1 / 19
+				dq	0x3FD5555555555555		; +1 / 03
+				dq	0xBFA0000000000000		; -1 / 32
+				dq	0xBFB0000000000000		; -1 / 16
+				dq	0xBFA5555555555555		; -1 / 24
+				dq	0xBFC0000000000000		; -1 / 08
+				dq	0xBFA2492492492492		; -1 / 28
+				dq	0xBFB5555555555555		; -1 / 12
+				dq	0xBFA999999999999A		; -1 / 20
+				dq	0xBFD0000000000000		; -1 / 04
+				dq	0xBFA1111111111111		; -1 / 30
+				dq	0xBFB2492492492492		; -1 / 14
+				dq	0xBFA745D1745D1746		; -1 / 22
+				dq	0xBFC5555555555555		; -1 / 06
+				dq	0xBFA3B13B13B13B14		; -1 / 26
+				dq	0xBFB999999999999A		; -1 / 10
+				dq	0xBFAC71C71C71C71C		; -1 / 18
+				dq	0xBFE0000000000000		; -1 / 02
+
+;==============================================================================;
+;       Coefficients to compute log(1+x) for flt64_t type                      ;
+;==============================================================================;
+align 16
+log1p_flt64		dq	0x3FAF07C1F07C1F08		; 2 / 33
 				dq	0x3FBE1E1E1E1E1E1E		; 2 / 17
 				dq	0x3FB47AE147AE147B		; 2 / 25
 				dq	0x3FCC71C71C71C71C		; 2 / 09
@@ -5351,6 +5387,8 @@ log_flt64		dq	0x3FAF07C1F07C1F08		; 2 / 33
 				dq	0x3FC745D1745D1746		; 2 / 11
 				dq	0x3FBAF286BCA1AF28		; 2 / 19
 				dq	0x3FE5555555555555		; 2 / 03
+
+
 
 ;==============================================================================;
 ;       Table of integer powers of 10^x for flt64_t type                       ;
