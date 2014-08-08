@@ -483,6 +483,50 @@ public	LCM_uint16			as	'_ZN4Math3LCMEss'
 public	LCM_uint32			as	'_ZN4Math3LCMEii'
 public	LCM_uint64			as	'_ZN4Math3LCMExx'
 
+;==============================================================================;
+;       Cancellation                                                           ;
+;==============================================================================;
+
+; Unsigned integer types
+public	Cancel_uint8		as	'Math_Cancel_uint8'
+public	Cancel_uint16		as	'Math_Cancel_uint16'
+public	Cancel_uint32		as	'Math_Cancel_uint32'
+public	Cancel_uint64		as	'Math_Cancel_uint64'
+public	Cancel_uint8		as	'_ZN4Math6CancelEPhS0_'
+public	Cancel_uint16		as	'_ZN4Math6CancelEPtS0_'
+public	Cancel_uint32		as	'_ZN4Math6CancelEPjS0_'
+public	Cancel_uint64		as	'_ZN4Math6CancelEPyS0_'
+
+; Signed integer types
+public	Cancel_sint8		as	'Math_Cancel_sint8'
+public	Cancel_sint16		as	'Math_Cancel_sint16'
+public	Cancel_sint32		as	'Math_Cancel_sint32'
+public	Cancel_sint64		as	'Math_Cancel_sint64'
+public	Cancel_sint8		as	'_ZN4Math6CancelEPaS0_'
+public	Cancel_sint16		as	'_ZN4Math6CancelEPsS0_'
+public	Cancel_sint32		as	'_ZN4Math6CancelEPiS0_'
+public	Cancel_sint64		as	'_ZN4Math6CancelEPxS0_'
+
+;******************************************************************************;
+;       Observational error                                                    ;
+;******************************************************************************;
+
+;==============================================================================;
+;       Absolute error                                                         ;
+;==============================================================================;
+public	AbsError_flt32		as	'Math_AbsError_flt32'
+public	AbsError_flt64		as	'Math_AbsError_flt64'
+public	AbsError_flt32		as	'_ZN4Math8AbsErrorEff'
+public	AbsError_flt64		as	'_ZN4Math8AbsErrorEdd'
+
+;==============================================================================;
+;       Relative error                                                         ;
+;==============================================================================;
+public	RelError_flt32		as	'Math_RelError_flt32'
+public	RelError_flt64		as	'Math_RelError_flt64'
+public	RelError_flt32		as	'_ZN4Math8RelErrorEff'
+public	RelError_flt64		as	'_ZN4Math8RelErrorEdd'
+
 ;******************************************************************************;
 ;       Scale functions                                                        ;
 ;******************************************************************************;
@@ -2055,10 +2099,10 @@ GCD_sint64:	GCD	rdi, rsi, rcx, rax, rdx, 1, 3
 ;==============================================================================;
 ;       Least common multiple                                                  ;
 ;==============================================================================;
-macro	LCM		Gcd, value1, value2, temp, quot, remain, sign, scale
+macro	LCM		Func, value1, value2, temp, quot, remain, sign, scale
 {
 ;------------------------------------------
-		call	Gcd							; quot = GCD (value1, value2)
+		call	Func						; quot = GCD (value1, value2)
 		test	quot, quot					; if (quot == 0)
 		jz		.ovfl						;     then go to overflow branch
 		mov		temp, quot					; temp = quot
@@ -2089,6 +2133,115 @@ LCM_sint8:	LCM	GCD_sint8, dil, sil, cl, al, ah, 1, 0
 LCM_sint16:	LCM	GCD_sint16, di, si, cx, ax, dx, 1, 1
 LCM_sint32:	LCM	GCD_sint32, edi, esi, ecx, eax, edx, 1, 2
 LCM_sint64:	LCM	GCD_sint64, rdi, rsi, rcx, rax, rdx, 1, 3
+
+;==============================================================================;
+;       Cancellation                                                           ;
+;==============================================================================;
+macro	CANCEL	Func, ptr1, ptr2, temp, result, high, sign, scale
+{
+;---[Internal variables]-------------------
+stack	equ		rsp							; stack pointer
+s_ptr1	equ		stack + 0 * 8				; stack position of "ptr1" variable
+s_ptr2	equ		stack + 1 * 8				; stack position of "ptr2" variable
+space	= 3 * 8								; stack size required by the procedure
+;------------------------------------------
+		sub		stack, space				; reserving stack size for local vars
+		mov		[s_ptr1], ptr1				; save "ptr1" variable into the stack
+		mov		[s_ptr2], ptr2				; save "ptr2" variable into the stack
+		mov		param1, [ptr1]
+		mov		param2, [ptr2]
+		call	Func
+		mov		temp, result				; temp = GCD (ptr1[0], ptr2[0])
+		mov		ptr1, [s_ptr1]				; get "ptr1" variable from the stack
+		mov		ptr2, [s_ptr2]				; get "ptr2" variable from the stack
+		mov		result, [ptr1]				; result = ptr1[0]
+if sign
+		esign	scale
+		idiv	temp						; ptr1[0] /= temp
+else
+		xor		high, high
+		div		temp						; ptr1[0] /= temp
+end if
+		mov		[ptr1], result				; ptr1[0] = result
+		mov		result, [ptr2]				; result = ptr2[0]
+if sign
+		esign	scale
+		idiv	temp						; ptr2[0] /= temp
+else
+		xor		high, high
+		div		temp						; ptr2[0] /= temp
+end if
+		mov		[ptr2], result				; ptr2[0] = result
+		add		stack, space				; restoring back the stack pointer
+		ret
+}
+
+; Unsigned integer types
+Cancel_uint8:	CANCEL	GCD_uint8, rdi, rsi, cl, al, ah, 0, 0
+Cancel_uint16:	CANCEL	GCD_uint16, rdi, rsi, cx, ax, dx, 0, 1
+Cancel_uint32:	CANCEL	GCD_uint32, rdi, rsi, ecx, eax, edx, 0, 2
+Cancel_uint64:	CANCEL	GCD_uint64, rdi, rsi, rcx, rax, rdx, 0, 3
+
+; Signed integer types
+Cancel_sint8:	CANCEL	GCD_sint8, rdi, rsi, cl, al, ah, 1, 0
+Cancel_sint16:	CANCEL	GCD_sint16, rdi, rsi, cx, ax, dx, 1, 1
+Cancel_sint32:	CANCEL	GCD_sint32, rdi, rsi, ecx, eax, edx, 1, 2
+Cancel_sint64:	CANCEL	GCD_sint64, rdi, rsi, rcx, rax, rdx, 1, 3
+
+;******************************************************************************;
+;       Observational error                                                    ;
+;******************************************************************************;
+
+;==============================================================================;
+;       Absolute error                                                         ;
+;==============================================================================;
+macro	ABS_ERROR	x
+{
+;---[Parameters]---------------------------
+approx	equ		xmm0						; approximate value
+accur	equ		xmm1						; accurate value
+;---[Internal variables]-------------------
+treg	equ		rax							; temporary register
+mask	equ		xmm2						; data mask to get absolute value
+if x eq s
+dmask	= DMASK_FLT32						; data mask
+else if x eq d
+dmask	= DMASK_FLT64						; data mask
+end if
+;------------------------------------------
+		initreg	mask, treg, dmask			; load data mask
+		subs#x	approx, accur
+		andp#x	approx, mask				; return Abs (approx - accur)
+		ret
+}
+AbsError_flt32:	ABS_ERROR	s
+AbsError_flt64:	ABS_ERROR	d
+
+;==============================================================================;
+;       Relative error                                                         ;
+;==============================================================================;
+macro	REL_ERROR	x
+{
+;---[Parameters]---------------------------
+approx	equ		xmm0						; approximate value
+accur	equ		xmm1						; accurate value
+;---[Internal variables]-------------------
+treg	equ		rax							; temporary register
+mask	equ		xmm2						; data mask to get absolute value
+if x eq s
+dmask	= DMASK_FLT32						; data mask
+else if x eq d
+dmask	= DMASK_FLT64						; data mask
+end if
+;------------------------------------------
+		initreg	mask, treg, dmask			; load data mask
+		subs#x	approx, accur
+		divs#x	approx, accur
+		andp#x	approx, mask				; return Abs ((approx - accur) / accur)
+		ret
+}
+RelError_flt32:	REL_ERROR	s
+RelError_flt64:	REL_ERROR	d
 
 ;******************************************************************************;
 ;       Scale functions                                                        ;
