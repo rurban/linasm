@@ -6807,7 +6807,7 @@ bmask	= bytes - 1							; elements aligning mask
 		shl		size, scale					; convert size to bytes
 ;---[Normal execution branch]--------------
 		initreg	mask, index, dmask			; mask = dmask
-		shufp#x	mask, mask, 0x0				; duplicate value through the entire register
+		clone	mask, scale					; duplicate value through the entire register
 		mov		index, array
 		and		index, VMASK				; get array offset from vector boundary
 		sub		array, index				; align pointer to vector boundary
