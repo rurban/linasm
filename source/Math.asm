@@ -2401,7 +2401,6 @@ macro	EXP		cmd, mant, exp, shiftval, x
 value	equ		xmm0						; exponent value
 ;---[Internal variables]-------------------
 treg	equ		rax							; temporary register
-status	equ		ax							; status word register
 expl	equ		cl							; low part of exp register
 temp1	equ		xmm1						; temporary register #1
 temp2	equ		xmm2						; temporary register #2
@@ -2411,52 +2410,72 @@ iscale	equ		xmm5						; iscale value
 scale	equ		xmm6						; scale value
 base	equ		xmm7						; base value
 shift	equ		xmm8						; shift value
-zero	equ		iscale						; 0.0
 result	equ		value						; result register
 stack	equ		rsp							; stack pointer
-ipart	equ		stack - 1 * 8				; stack position of "ipart" variable
-fpart	equ		stack - 2 * 8				; stack position of "fpart" variable
+fpart	equ		stack - 1 * 8				; stack position of "fpart" variable
+ipart	equ		stack - 2 * 8				; stack position of "ipart" variable
+emin	equ		stack - 3 * 8				; stack position of "emin" variable
+emax	equ		stack - 4 * 8				; stack position of "emax" variable
+magic	equ		stack - 5 * 8				; stack position of "magic" variable
 if x eq s
+nanval	= PNAN_FLT32						; +NaN
 infval	= PINF_FLT32						; +Inf
 logval	= LOGE_2_FLT32						; ln(2)
 mbits	= MBITS_FLT32						; count of bits into mantissa
 bias	= EBIAS_FLT32						; exponent bias
+rmagic	= 0x5F400000						; magic number to round value to int
 expe	= exp_flt32							; pointer to array of exp coefficients
 else if x eq d
+nanval	= PNAN_FLT64						; +NaN
 infval	= PINF_FLT64						; +Inf
 logval	= LOGE_2_FLT64						; ln(2)
 mbits	= MBITS_FLT64						; count of bits into mantissa
 bias	= EBIAS_FLT64						; exponent bias
+rmagic	= 0x43E8000000000000				; magic number to round value to int
 expe	= exp_flt64							; pointer to array of exp coefficients
 end if
 minpow	= 1 - bias							; min power of 2
 maxpow	= bias								; max power of 2
 ;---[Compute integer and fraction parts]---
+		comis#x	value, value				; if (value == NaN)
+		jp		.error						;     then return NaN
+		mov		mant, rmagic
 		movs#x	[fpart], value
+		mov		word [emin], minpow - mbits - 1
+		mov		word [emax], maxpow + 1
+		mov		[magic], mant
 if x eq s
 		fld		dword [fpart]				; load value into FPU stack
 		cmd									; load logarithm value
 		fmulp	st1, st0					; multiply value and logarithm
+		fild 	word [emin]					; load min exponent value
+		fcomip	st0, st1					; if (emin >= value * log2 (base))
+		jae		.min						;     then go to min exponent branch
+		fild 	word [emax]					; load max exponent value
+		fcomip	st0, st1					; if (emax <= value * log2 (base))
+		jbe		.max						;     then go to max exponent branch
 		fld		st0
-		fisttp	dword [ipart]				; ipart = int (value * log2 (base))
-		fstsw 	status						; store FPU status word
-		and		status, 0x1					; if (overflow is occured)
-		jnz		.ierr						;     then go to rounding error branch
-		fild	dword [ipart]
-		fsubp	st1, st0
-		fstp	dword [fpart]				; fpart = value - int (value)
+		fadd	dword [magic]
+		fsub	dword [magic]
+		fsub	st1, st0
+		fistp	dword [ipart]				; ipart = int (value * log2 (base))
+		fstp	dword [fpart]				; fpart = frac (value * log2 (base))
 else if x eq d
 		fld		qword [fpart]				; load value into FPU stack
 		cmd									; load logarithm value
 		fmulp	st1, st0					; multiply value and logarithm
+		fild 	word [emin]					; load min exponent value
+		fcomip	st0, st1					; if (emin >= value * log2 (base))
+		jae		.min						;     then go to min exponent branch
+		fild 	word [emax]					; load max exponent value
+		fcomip	st0, st1					; if (emax <= value * log2 (base))
+		jbe		.max						;     then go to max exponent branch
 		fld		st0
-		fisttp	qword [ipart]				; ipart = int (value * log2 (base))
-		fstsw 	status						; store FPU status word
-		and		status, 0x1					; if (overflow is occured)
-		jnz		.ierr						;     then go to rounding error branch
-		fild	qword [ipart]
-		fsubp	st1, st0
-		fstp	qword [fpart]				; fpart = value - int (value)
+		fadd	qword [magic]
+		fsub	qword [magic]
+		fsub	st1, st0
+		fistp	qword [ipart]				; ipart = int (value * log2 (base))
+		fstp	qword [fpart]				; fpart = frac (value * log2 (base))
 end if
 ;---[Compute exponent]---------------------
 		initreg	shift, treg, shiftval		; shift = shiftval
@@ -2464,8 +2483,6 @@ end if
 		mov		exp, [ipart]				; exp = ipart
 		cmp		exp, minpow					; if (exp < minpow)
 		jl		.sub						;     then go to subnormal branch
-		cmp		exp, maxpow					; if (exp > maxpow)
-		jg		.max						;     then go to max exponent branch
 		add		exp, bias					; exp += bias
 		shl		exp, mbits					; exp <<= mbits
 		movint	iscale, exp, x				; reinterpret exp as floating-point value
@@ -2490,23 +2507,27 @@ end if
 .sub:	neg		exp
 		add		exp, minpow					; exp = minpow - exp
 		mov		mant, mbits + 1
-		cmp		exp, mbits					; if (exp > mbits)
+		cmp		exp, mbits + 1				; if (exp > mbits + 1)
 		cmovg	exp, mant					;     exp = mbits + 1
 		mov		mant, 1 shl mbits			; mant = 1 << mbits
 		shr		mant, expl					; mant >>= exp
 		movint	iscale, mant, x				; reinterpret mant as floating-point value
 		jmp		.back						; go back
-;---[Rounding error branch]----------------
-.ierr:	xorps	zero, zero					; zero = 0.0
-		comis#x	value, zero
-		jp		.error						; if (value == NaN), then return NaN
-		je		.error						; if (value == 0), then return NaN
-		ja		.max						; if (value > 0), then go to max exponent branch
 ;---[Min exponent branch]------------------
-.min:	initreg	result, treg, shiftval		; return shiftval
+if x eq s
+.min:	fstp	dword [fpart]				; pop value frop FPU stack
+else if x eq d
+.min:	fstp	qword [fpart]				; pop value frop FPU stack
+end if
+		initreg	result, treg, shiftval		; return shiftval
 		ret
 ;---[Max exponent branch]------------------
-.max:	initreg	result, treg, infval		; return +Inf
+if x eq s
+.max:	fstp	dword [fpart]				; pop value frop FPU stack
+else if x eq d
+.max:	fstp	qword [fpart]				; pop value frop FPU stack
+end if
+		initreg	result, treg, infval		; return +Inf
 		ret
 ;---[Error branch]-------------------------
 .error:	initreg	result, treg, nanval		; return NaN
@@ -2567,7 +2588,7 @@ maxpow	= bias								; max power of 2
 .sub:	neg		shift
 		add		shift, minpow				; shift = minpow - shift
 		mov		temp, mbits + 1
-		cmp		shift, mbits				; if (shift > mbits)
+		cmp		shift, mbits + 1			; if (shift > mbits + 1)
 		cmovg	shift, temp					;     shift = mbits + 1
 		mov		temp, 1 shl mbits			; temp = 1 << mbits
 		shr		temp, shiftl				; temp >>= shift
@@ -2790,7 +2811,6 @@ ebase	equ		xmm0						; exponentiation base
 value	equ		xmm1						; exponent value
 ;---[Internal variables]-------------------
 treg	equ		rax							; temporary register
-status	equ		ax							; status word register
 expl	equ		cl							; low part of exp register
 temp1	equ		xmm1						; temporary register #1
 temp2	equ		xmm2						; temporary register #2
@@ -2800,11 +2820,13 @@ iscale	equ		xmm5						; iscale value
 scale	equ		xmm6						; scale value
 base	equ		xmm7						; base value
 shift	equ		xmm8						; shift value
-zero	equ		iscale						; 0.0
 result	equ		ebase						; result register
 stack	equ		rsp							; stack pointer
-ipart	equ		stack - 1 * 8				; stack position of "ipart" variable
-fpart	equ		stack - 2 * 8				; stack position of "fpart" variable
+fpart	equ		stack - 1 * 8				; stack position of "fpart" variable
+ipart	equ		stack - 2 * 8				; stack position of "ipart" variable
+emin	equ		stack - 3 * 8				; stack position of "emin" variable
+emax	equ		stack - 4 * 8				; stack position of "emax" variable
+magic	equ		stack - 5 * 8				; stack position of "magic" variable
 if x eq s
 nanval	= PNAN_FLT32						; +NaN
 infval	= PINF_FLT32						; +Inf
@@ -2812,6 +2834,7 @@ oneval	= PONE_FLT32						; +1.0
 logval	= LOGE_2_FLT32						; ln(2)
 mbits	= MBITS_FLT32						; count of bits into mantissa
 bias	= EBIAS_FLT32						; exponent bias
+rmagic	= 0x5F400000						; magic number to round value to int
 expe	= exp_flt32							; pointer to array of exp coefficients
 else if x eq d
 nanval	= PNAN_FLT64						; +NaN
@@ -2820,6 +2843,7 @@ oneval	= PONE_FLT64						; +1.0
 logval	= LOGE_2_FLT64						; ln(2)
 mbits	= MBITS_FLT64						; count of bits into mantissa
 bias	= EBIAS_FLT64						; exponent bias
+rmagic	= 0x43E8000000000000				; magic number to round value to int
 expe	= exp_flt64							; pointer to array of exp coefficients
 end if
 minpow	= 1 - bias							; min power of 2
@@ -2829,42 +2853,56 @@ maxpow	= bias								; max power of 2
 		xor		mant, mant
 		cmp		exp, mant
 		jl		.error						; if (ebase < 0.0), then return NaN
-		je		.ierr						; if (ebase == 0.0), then go to rounding error branch
+		je		.spec						; if (ebase == 0.0), then go to special branch
 		mov		mant, infval
 		cmp		exp, mant
 		ja		.error						; if (ebase > Inf), then return NaN
-		je		.ierr						; if (ebase == Inf), then go to rounding error branch
+		je		.spec						; if (ebase == Inf), then go to special branch
 ;---[Compute integer and fraction parts]---
+		comis#x	value, value				; if (value == NaN)
+		jp		.error						;     then return NaN
+		mov		mant, rmagic
 		movs#x	[fpart], value
 		movs#x	[ipart], ebase
+		mov		word [emin], minpow - mbits - 1
+		mov		word [emax], maxpow + 1
+		mov		[magic], mant
 if x eq s
 		fld		dword [fpart]				; load value into FPU stack
 		fld1
 		fld		dword [ipart]				; load base into FPU stack
 		fyl2x								; compute log2 (base)
 		fmulp	st1, st0					; multiply value and logarithm
+		fild 	word [emin]					; load min exponent value
+		fcomip	st0, st1					; if (emin >= value * log2 (base))
+		jae		.min						;     then go to min exponent branch
+		fild 	word [emax]					; load max exponent value
+		fcomip	st0, st1					; if (emax <= value * log2 (base))
+		jbe		.max						;     then go to max exponent branch
 		fld		st0
-		fisttp	dword [ipart]				; ipart = int (value * log2 (base))
-		fstsw 	status						; store FPU status word
-		and		status, 0x1					; if (overflow is occured)
-		jnz		.ierr						;     then go to rounding error branch
-		fild	dword [ipart]
-		fsubp	st1, st0
-		fstp	dword [fpart]				; fpart = value - int (value)
+		fadd	dword [magic]
+		fsub	dword [magic]
+		fsub	st1, st0
+		fistp	dword [ipart]				; ipart = int (value * log2 (base))
+		fstp	dword [fpart]				; fpart = frac (value * log2 (base))
 else if x eq d
 		fld		qword [fpart]				; load value into FPU stack
 		fld1
 		fld		qword [ipart]				; load base into FPU stack
 		fyl2x								; compute log2 (base)
 		fmulp	st1, st0					; multiply value and logarithm
+		fild 	word [emin]					; load min exponent value
+		fcomip	st0, st1					; if (emin >= value * log2 (base))
+		jae		.min						;     then go to min exponent branch
+		fild 	word [emax]					; load max exponent value
+		fcomip	st0, st1					; if (emax <= value * log2 (base))
+		jbe		.max						;     then go to max exponent branch
 		fld		st0
-		fisttp	qword [ipart]				; ipart = int (value * log2 (base))
-		fstsw 	status						; store FPU status word
-		and		status, 0x1					; if (overflow is occured)
-		jnz		.ierr						;     then go to rounding error branch
-		fild	qword [ipart]
-		fsubp	st1, st0
-		fstp	qword [fpart]				; fpart = value - int (value)
+		fadd	qword [magic]
+		fsub	qword [magic]
+		fsub	st1, st0
+		fistp	qword [ipart]				; ipart = int (value * log2 (base))
+		fstp	qword [fpart]				; fpart = frac (value * log2 (base))
 end if
 ;---[Compute exponent]---------------------
 		initreg	shift, treg, shiftval		; shift = shiftval
@@ -2872,8 +2910,6 @@ end if
 		mov		exp, [ipart]				; exp = ipart
 		cmp		exp, minpow					; if (exp < minpow)
 		jl		.sub						;     then go to subnormal branch
-		cmp		exp, maxpow					; if (exp > maxpow)
-		jg		.max						;     then go to max exponent branch
 		add		exp, bias					; exp += bias
 		shl		exp, mbits					; exp <<= mbits
 		movint	iscale, exp, x				; reinterpret exp as floating-point value
@@ -2898,20 +2934,19 @@ end if
 .sub:	neg		exp
 		add		exp, minpow					; exp = minpow - exp
 		mov		mant, mbits + 1
-		cmp		exp, mbits					; if (exp > mbits)
+		cmp		exp, mbits + 1				; if (exp > mbits + 1)
 		cmovg	exp, mant					;     exp = mbits + 1
 		mov		mant, 1 shl mbits			; mant = 1 << mbits
 		shr		mant, expl					; mant >>= exp
 		movint	iscale, mant, x				; reinterpret mant as floating-point value
 		jmp		.back						; go back
-;---[Rounding error branch]----------------
-.ierr:	xorps	zero, zero					; zero = 0.0
-		comis#x	value, zero
-		jp		.error						; if (value == NaN), then return NaN
-		je		.error						; if (value == 0), then return NaN
-		ja		.max						; if (value > 0), then go to max exponent branch
 ;---[Min exponent branch]------------------
-.min:	mov		val1, shiftval				; val1 = shiftval
+if x eq s
+.min:	fstp	dword [fpart]				; pop value frop FPU stack
+else if x eq d
+.min:	fstp	qword [fpart]				; pop value frop FPU stack
+end if
+.smin:	mov		val1, shiftval				; val1 = shiftval
 		mov		val2, infval				; val2 = +Inf
 		mov		res, nanval					; res = NaN
 		movint	exp, ebase, x
@@ -2922,7 +2957,12 @@ end if
 		movint	result, res, x				; return res
 		ret
 ;---[Max exponent branch]------------------
-.max:	mov		val1, infval				; val1 = +Inf
+if x eq s
+.max:	fstp	dword [fpart]				; pop value frop FPU stack
+else if x eq d
+.max:	fstp	qword [fpart]				; pop value frop FPU stack
+end if
+.smax:	mov		val1, infval				; val1 = +Inf
 		mov		val2, shiftval				; val2 = shiftval
 		mov		res, nanval					; res = NaN
 		movint	exp, ebase, x
@@ -2932,6 +2972,12 @@ end if
 		cmovb	res, val2					; if (ebase < 1.0), then res = shiftval
 		movint	result, res, x				; return res
 		ret
+;---[Special branch]-----------------------
+.spec:	xorp#x	base, base					; base = 0.0
+		comis#x	value, base
+		jp		.error						; if (value == NaN), then return NaN
+		jb		.smin						; if (value < 0), then go to min exponent branch
+		ja		.smax						; if (value > 0), then go to max exponent branch
 ;---[Error branch]-------------------------
 .error:	initreg	result, treg, nanval		; return NaN
 		ret
