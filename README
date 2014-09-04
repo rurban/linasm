@@ -9,13 +9,13 @@
 INTRODUCTION
 ============
 
-    Linux assembly libraries project called "LinAsm" is the collection of fast
-    libraries,‭ ‬which‭ ‬are written in pure assembly language for x86-64‭ ‬Linux OS.
+    Linux assembly libraries project called "LinAsm" is the collection of very
+    fast and optimized assembly written libraries for x86-64 Linux.
 
-    It implements many common and widely used algorithms, mostly developed
-    for acceleration of data analysis and time series processing. Later they
-    were extended with more mathematical and general algorithms that are used
-    inside C and C++ programs and make them very fast on that platform.
+    It implements many common and widely used algorithms, mostly developed for
+    acceleration of data analysis and time series processing. Later they were
+    extended with more mathematical and general algorithms that are used inside
+    C and C++ programs and make them very fast on that platform.
 
     To get more information about this software, please visit the official
     web site: http://linasm.sourceforge.net
@@ -32,8 +32,8 @@ LICENSING
 PACKAGE STRUCTURE
 =================
 
-    The source codes of the libraries are placed into separate directories
-    called "include" and "source".
+    The source code of LinAsm library is placed into separate directories
+    are called "include" and "source".
 
     The "include" directory holds C and C++ header files that define functions
     prototypes, structures and data types. They should be copied as is into your
@@ -47,14 +47,14 @@ PACKAGE STRUCTURE
 
     The source code should be compiled by "fasm" executable file, which
     is placed into "build" directory of LinAsm release. To allow this file
-    to be launched, please check that a file system has the mount option "exec"
+    to be launched, please check that a file system has mount option "exec"
     and the file "build/fasm" has appropriate execution permission.
 
 INSTALLATION
 ============
 
-    Libraries compilation and installation process is fully described
-    in "INSTALL" file. Please revise the appropriate document for details.
+    Library compilation and installation process is fully described in "INSTALL"
+    file. Please revise the appropriate document for details.
 
 ################################################################################
 #                                 END OF FILE                                  #

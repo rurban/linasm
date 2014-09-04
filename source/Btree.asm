@@ -1383,6 +1383,7 @@ source	equ		rsi							; pointer to source b-tree object
 ;---[Internal variables]-------------------
 array	equ		rax							; pointer to array of nodes
 temp	equ		rcx							; temporary register
+fptr	equ		rax							; pointer to call external function
 stack	equ		rsp							; stack pointer
 s_this	equ		stack + 0 * 8				; stack position of "this" variable
 s_src	equ		stack + 1 * 8				; stack position of "source" variable
@@ -1429,7 +1430,8 @@ space	= 3 * 8								; stack size required by the procedure
 		mov		param2, [source + ARRAY]
 		mov		param1, array
 		add		stack, space				; restoring back the stack pointer
-		jmp		Copy						; return Array::Copy (this.array, source.array, source.capacity)
+		mov		fptr, Copy
+		jmp		fptr						; return Array::Copy (this.array, source.array, source.capacity)
 ;---[Error branch]-------------------------
 .error:	mov		qword [this + ARRAY], 0		; this.array = NULL
 		mov		qword [this + CAPACITY], 0	; this.capacity = 0

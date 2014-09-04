@@ -25,8 +25,8 @@ extrn	'FindSet'			as	FindSet
 ;******************************************************************************;
 public	Constructor			as	'MinHeap_InitMinHeap'
 public	Constructor			as	'MaxHeap_InitMaxHeap'
-public	Constructor			as	'_ZN7MinHeapC1EmPFx5adt_tS0_EPFvP6data_tmE'
-public	Constructor			as	'_ZN7MaxHeapC1EmPFx5adt_tS0_EPFvP6data_tmE'
+public	Constructor			as	'_ZN7MinHeapC1EmPFx5adt_tS0_EPFvPK6data_tmE'
+public	Constructor			as	'_ZN7MaxHeapC1EmPFx5adt_tS0_EPFvPK6data_tmE'
 
 ;******************************************************************************;
 ;       Copy constructor                                                       ;
@@ -494,6 +494,7 @@ source	equ		rsi							; pointer to source heap object
 ;---[Internal variables]-------------------
 array	equ		rax							; pointer to array of nodes
 temp	equ		rcx							; temporary register
+fptr	equ		rax							; pointer to call external function
 stack	equ		rsp							; stack pointer
 s_this	equ		stack + 0 * 8				; stack position of "this" variable
 s_src	equ		stack + 1 * 8				; stack position of "source" variable
@@ -532,7 +533,8 @@ space	= 3 * 8								; stack size required by the procedure
 		mov		param2, [source + ARRAY]
 		mov		param1, array
 		add		stack, space				; restoring back the stack pointer
-		jmp		Copy						; return Array::Copy (this.array, source.array, source.size)
+		mov		fptr, Copy
+		jmp		fptr						; return Array::Copy (this.array, source.array, source.size)
 ;---[Error branch]-------------------------
 .error:	mov		qword [this + ARRAY], 0		; this.array = NULL
 		mov		qword [this + CAPACITY], 0	; this.capacity = 0
@@ -1034,6 +1036,7 @@ pos		equ		r8							; beginning position
 count	equ		r9							; count of nodes to check
 ;---[Internal variables]-------------------
 result	equ		rax							; result register
+fptr	equ		rax							; pointer to call external function
 base	equ		r10							; base for pointer arithmetic
 array	equ		r11							; pointer to array of nodes
 size	equ		result						; object size
@@ -1079,7 +1082,8 @@ space	= 7 * 8								; stack size required by the procedure
 		mov		param3, [array]
 		mov		param2, [s_ksize]
 		mov		param1, [s_keys]
-		call	FindSet						; result = FindSet (keys, ksize, array[0].key, kfunc)
+		mov		fptr, FindSet
+		call	fptr						; result = FindSet (keys, ksize, array[0].key, kfunc)
 		mov		array, [s_array]			; get "array" variable from the stack
 		test	result, result				; if (result)
 		jnz		.found						;     then go to found branch
@@ -1179,6 +1183,7 @@ pos		equ		rcx							; beginning position
 count	equ		r8							; count of nodes to check
 ;---[Internal variables]-------------------
 result	equ		rax							; result register
+fptr	equ		rax							; pointer to call external function
 array	equ		r11							; pointer to array of nodes
 size	equ		result						; object size
 func	equ		result						; compare function
@@ -1221,7 +1226,8 @@ space	= 7 * 8
 		mov		param3, [array]
 		mov		param2, [s_ksize]
 		mov		param1, [s_keys]
-		call	FindSet						; result = FindSet (keys, ksize, array[0].key, kfunc)
+		mov		fptr, FindSet
+		call	fptr						; result = FindSet (keys, ksize, array[0].key, kfunc)
 		mov		array, [s_array]			; get "array" variable from the stack
 		add		[s_total], result			; if (result), then total++
 		add		array, KSIZE				; array++
@@ -1280,6 +1286,8 @@ space	= 13 * 8							; stack size required by the procedure
 		mov		[s_root], root				; save "root" variable into the stack
 		mov		[s_pos], root				; save "pos" variable into the stack
 		lea		ptr, [root + KSIZE]			; ptr = root + 1
+		test	ifunc, ifunc				; if (ifunc == NULL)
+		jz		.hloop						;     then skip following code
 ;---[Index call back loop]-----------------
 .cloop:	lea		param1, [array + ptr]
 		mov		param2, ptr
@@ -1383,6 +1391,7 @@ source	equ		rsi							; pointer to source heap object
 status	equ		al							; operation status
 result	equ		rax							; result register
 ptr		equ		rcx							; temporary pointer
+fptr	equ		rax							; pointer to call external function
 size	equ		result						; object size
 stack	equ		rsp							; stack pointer
 s_this	equ		stack + 0 * 8				; stack position of "this" variable
@@ -1411,7 +1420,8 @@ space	= 3 * 8								; stack size required by the procedure
 		mov		param3, [source + SIZE]
 		mov		param2, [source + ARRAY]
 		mov		param1, ptr
-		call	Copy						; call Copy (this.array + size, source.array, source.size)
+		mov		fptr, Copy
+		call	fptr						; call Copy (this.array + size, source.array, source.size)
 ;---[Convert array to a heap]--------------
 		mov		this, [s_this]				; get "this" variable from the stack
 		mov		source, [s_src]				; get "source" variable from the stack

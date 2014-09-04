@@ -648,6 +648,8 @@ static flt64_t ArcSinH (flt64_t value);
 //============================================================================//
 static flt32_t ArcCosH (flt32_t value);
 static flt64_t ArcCosH (flt64_t value);
+static flt32_t ArcCosHp1 (flt32_t value);
+static flt64_t ArcCosHp1 (flt64_t value);
 
 //============================================================================//
 //      Inverse tangent                                                       //
@@ -1310,6 +1312,8 @@ flt64_t Math_ArcSinH_flt64 (flt64_t value);
 //============================================================================//
 flt32_t Math_ArcCosH_flt32 (flt32_t value);
 flt64_t Math_ArcCosH_flt64 (flt64_t value);
+flt32_t Math_ArcCosHp1_flt32 (flt32_t value);
+flt64_t Math_ArcCosHp1_flt64 (flt64_t value);
 
 //============================================================================//
 //      Inverse tangent                                                       //

@@ -54,12 +54,12 @@ extrn	'Blackman_Nuttall_flt64'	as	Blackman_Nuttall_flt64
 ;******************************************************************************;
 
 ; Vector subtraction
-extrn	'Array_Sub_flt32'			as	Sub_flt32
-extrn	'Array_Sub_flt64'			as	Sub_flt64
+extrn	'Array_SubVector_flt32'		as	Sub_flt32
+extrn	'Array_SubVector_flt64'		as	Sub_flt64
 
 ; Scalar multiplication
-extrn	'Array_Mul_flt32'			as	Mul_flt32
-extrn	'Array_Mul_flt64'			as	Mul_flt64
+extrn	'Array_MulVector_flt32'		as	Mul_flt32
+extrn	'Array_MulVector_flt64'		as	Mul_flt64
 
 ; Sum of elements
 extrn	'Array_Sum_flt32'			as	Sum_flt32
@@ -201,7 +201,8 @@ filter	equ		rdi							; pointer to filter impulse array
 size	equ		rsi							; array size (count of elements)
 freq	equ		xmm0						; filter cutoff frequency
 ;---[Internal variables]-------------------
-value	equ		freq						; argument value
+fptr	equ		rax							; pointer to call external function
+value	equ		xmm0						; argument value
 stack	equ		rsp							; stack pointer
 s_filt	equ		stack + 0 * 8				; stack position of "filter" variable
 s_size	equ		stack + 1 * 8				; stack position of "size" variable
@@ -235,7 +236,8 @@ space	= 5 * 8								; stack size required by the procedure
 		adds#x	value, [s_pi]					; value += Pi
 		movs#x	[s_value], value			; save "value" variable into the stack
 		muls#x	value, [s_freq]				; value *= freq
-		call	Sin							; call Sin (value * freq)
+		mov		fptr, Sin
+		call	fptr						; call Sin (value * freq)
 		mov		filter, [s_filt]			; get "filter" variable from the stack
 		sub		filter, bytes				; filter--
 		divs#x	value, [s_value]			; value = sin (value * freq) / value
@@ -261,7 +263,8 @@ size	equ		rsi							; array size (count of elements)
 lfreq	equ		xmm0						; filter low cutoff frequency
 hfreq	equ		xmm1						; filter high cutoff frequency
 ;---[Internal variables]-------------------
-value	equ		lfreq						; argument value
+fptr	equ		rax							; pointer to call external function
+value	equ		xmm0						; argument value
 stack	equ		rsp							; stack pointer
 s_filt	equ		stack + 0 * 8				; stack position of "filter" variable
 s_size	equ		stack + 1 * 8				; stack position of "size" variable
@@ -299,11 +302,13 @@ space	= 7 * 8								; stack size required by the procedure
 		adds#x	value, [s_pi]				; value += Pi
 		movs#x	[s_value], value			; save "value" variable into the stack
 		muls#x	value, [s_hfreq]			; value *= hfreq
-		call	Cos							; call Cos (value * hfreq)
+		mov		fptr, Cos
+		call	fptr						; call Cos (value * hfreq)
 		movs#x	[s_temp], value				; save "temp" variable into the stack
 		movs#x	value, [s_value]			; get "value" variable from the stack
 		muls#x	value, [s_lfreq]			; value *= lfreq
-		call	Cos							; call Cos (value * lfreq)
+		mov		fptr, Cos
+		call	fptr						; call Cos (value * lfreq)
 		mov		filter, [s_filt]			; get "filter" variable from the stack
 		subs#x	value, [s_temp]				; value -= temp
 		sub		filter, bytes				; filter--
@@ -330,8 +335,9 @@ size	equ		rsi							; array size (count of elements)
 lfreq	equ		xmm0						; filter low cutoff frequency
 hfreq	equ		xmm1						; filter high cutoff frequency
 ;---[Internal variables]-------------------
-value	equ		lfreq						; argument value
-temp	equ		hfreq						; temporary register
+fptr	equ		rax							; pointer to call external function
+value	equ		xmm0						; argument value
+temp	equ		xmm1						; temporary register
 stack	equ		rsp							; stack pointer
 if x eq s
 SinCos	= SinCos_flt32						; cosine function
@@ -386,11 +392,13 @@ space	= 15 * 8							; stack size required by the procedure
 		movap#x	[s_arg], value				; arg = {value * hfreq, value * lfreq}
 		lea		param1, [s_hsin]
 		lea		param2, [s_hcos]
-		call	SinCos						; call SinCos (&hsin, &hcos, value * hfreq)
+		mov		fptr, SinCos
+		call	fptr						; call SinCos (&hsin, &hcos, value * hfreq)
 		movs#x	value, [s_arg + bytes]
 		lea		param1, [s_lsin]
 		lea		param2, [s_lcos]
-		call	SinCos						; call SinCos (&lsin, &lcos, value * hfreq)
+		mov		fptr, SinCos
+		call	fptr						; call SinCos (&lsin, &lcos, value * hfreq)
 		movap#x	value, [s_hcos]				; value = {hcos, lcos}
 		movs#x	temp, [s_temp]				; get "temp" variable from the stack
 		mulp#x	value, [s_arg]				; value *= {value * hfreq, value * lfreq}
@@ -423,10 +431,12 @@ window	equ		rdx							; window function
 freq	equ		xmm0						; filter cutoff frequency
 ;---[Internal variables]-------------------
 treg	equ		rax							; temporary register
-temp	equ		xmm1						; temporary register
+fptr	equ		rax							; pointer to call external function
+table	equ		r8							; pointer to blending table
+value	equ		xmm0						; argument value
+one		equ		xmm1						; 1.0
 zero	equ		xmm2						; 0.0
-one		equ		xmm3						; 1.0
-value	equ		freq						; argument value
+temp	equ		xmm3						; temporary register
 stack	equ		rsp							; stack pointer
 s_filt	equ		stack + 0 * 8				; stack position of "filter" variable
 s_size	equ		stack + 1 * 8				; stack position of "size" variable
@@ -460,12 +470,14 @@ space	= 3 * 8								; stack size required by the procedure
 		jz		@f							; {
 		sub		window, 1					;     window--
 		mov		filter, [s_filt]
-		mov		size, [s_size]				;     call Win[window] (filter, size)
-		call	qword [win + window * 8]	; }
+		mov		size, [s_size]				;     call table[window] (filter, size)
+		lea		table, [win]
+		call	qword [table + window * 8]	; }
 ;---[Get sum of impulse response]----------
 @@:		mov		filter, [s_filt]			; get "filter" variable from the stack
 		mov		size, [s_size]				; get "size" variable from the stack
-		call	Sum							; call Sum (filter, size)
+		mov		fptr, Sum
+		call	fptr						; call Sum (filter, size)
 		mov		filter, [s_filt]			; get "filter" variable from the stack
 		mov		size, [s_size]				; get "size" variable from the stack
 		adds#x	value, value				; value *= 2
@@ -479,7 +491,8 @@ space	= 3 * 8								; stack size required by the procedure
 		add		size, 1						;     size++
 		movap#x	value, one					;     value = one / temp
 		divs#x	value, temp					;     call Norm (filter, size, value)
-		call	Norm						; }
+		mov		fptr, Norm					; }
+		call	fptr
 ;------------------------------------------
 @@:		add		stack, space				; restoring back the stack pointer
 		ret
@@ -500,11 +513,12 @@ lfreq	equ		xmm0						; filter low cutoff frequency
 hfreq	equ		xmm1						; filter high cutoff frequency
 ;---[Internal variables]-------------------
 status	equ		al							; operation status
+fptr	equ		rax							; pointer to call external function
 treg	equ		rax							; temporary register
+value	equ		xmm0						; argument value
+one		equ		xmm1						; 1.0
 zero	equ		xmm2						; 0.0
 half	equ		xmm3						; 0.5
-one		equ		zero						; 1.0
-value	equ		lfreq						; argument value
 stack	equ		rsp							; stack pointer
 s_filt	equ		stack + 0 * 8				; stack position of "filter" variable
 s_size	equ		stack + 1 * 8				; stack position of "size" variable
@@ -563,7 +577,8 @@ end if
 		mov		param1, [s_filt]
 		mov		param3, [s_size]
 		lea		param2, [param1 + param3 * bytes]
-		call	ArrSub						; call ArrSub (filter, filter + size, size)
+		mov		fptr, ArrSub
+		call	fptr						; call ArrSub (filter, filter + size, size)
 ;---[Reflect filter impulse response]------
 		mov		size, [s_size]				; get "size" variable from the stack
 		mov		filter, [s_filt]			; get "filter" variable from the stack
@@ -609,6 +624,7 @@ hfreq	equ		xmm1						; filter high cutoff frequency
 ;---[Internal variables]-------------------
 status	equ		al							; operation status
 treg	equ		rax							; temporary register
+table	equ		r8							; pointer to blending table
 zero	equ		xmm2						; 0.0
 half	equ		xmm3						; 0.5
 stack	equ		rsp							; stack pointer
@@ -651,7 +667,8 @@ space	= 3 * 8								; stack size required by the procedure
 		sub		window, 1					;     window--
 		mov		filter, [s_filt]
 		mov		size, [s_size]				;     call Win[window] (filter, size)
-		call	qword [win + window * 8]	; }
+		lea		table, [win]
+		call	qword [table + window * 8]	; }
 ;---[Reflect filter impulse response]------
 @@:		mov		size, [s_size]				; get "size" variable from the stack
 		mov		filter, [s_filt]			; get "filter" variable from the stack
@@ -688,6 +705,7 @@ filt	equ		rcx							; pointer to filter array
 fsize	equ		r8							; size of filter array
 ;---[Internal variables]-------------------
 status	equ		al							; operation status
+fptr	equ		rax							; pointer to call external function
 value	equ		xmm0						; convolution value
 stack	equ		rsp							; stack pointer
 s_resp	equ		stack + 0 * 8				; stack position of "resp" variable
@@ -717,7 +735,8 @@ space	= 5 * 8								; stack size required by the procedure
 .loop:	mov		param1, [s_data]
 		mov		param2, [s_filt]
 		mov		param3, [s_fsize]
-		call	Conv
+		mov		fptr, Conv
+		call	fptr
 		mov		resp, [s_resp]
 		movs#x	[resp], value				; resp[0] = Conv (data, filt, fsize)
 		add		qword [s_data], bytes		; data++

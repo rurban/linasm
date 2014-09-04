@@ -2873,14 +2873,6 @@ public	Hash64_bit8					as	'Array_Hash64_void'
 public	Hash64_bit64				as	'_ZN5Array6Hash64EPKmm'
 public	Hash64_bit8					as	'_ZN5Array6Hash64EPKvm'
 
-;******************************************************************************;
-;       Blend masks                                                            ;
-;******************************************************************************;
-public	maskS1						as	'maskS1'
-public	maskS2						as	'maskS2'
-public	maskV1						as	'maskV1'
-public	maskV2						as	'maskV2'
-
 ;###############################################################################
 ;#      Code section                                                           #
 ;###############################################################################
@@ -2897,6 +2889,7 @@ size	equ		rsi							; array size (count of elements)
 value	equ		rdx							; register which holds value
 ;---[Internal variables]-------------------
 index	equ		rax							; offset from beginning of array
+table	equ		r8							; pointer to blending table
 ptr		equ		r10							; temporary pointer to array
 blend	equ		xmm0						; blending mask
 vector	equ		xmm1						; value to process with
@@ -2931,7 +2924,8 @@ end if
 ;---[Unaligned sums]-----------------------
 		add		size, index					; size += index
 		shl		index, VSCALE				; compute shift in mask array
-		movdqa	blend, dqword [maskS1 + index]
+		lea		table, [maskS1]				; set pointer to blending table
+		movdqa	blend, [table + index]
 		xor		index, index				; index = 0
 		sub		size, VSIZE					; if (size <= VSIZE)
 		jbe		.tail						;     then process array tail
@@ -2952,7 +2946,8 @@ end repeat
 		jmp		.vloop						; do while (true)
 ;---[End of vector loop]-------------------
 .tail:	shl		size, VSCALE				; compute shift in mask array
-		pandn	blend, dqword [maskS2 + size]
+		lea		table, [maskS2]				; set pointer to blending table
+		pandn	blend, [table + size]
 		movdqa	data, [array + index]		; data = array[index]
 	pblendvb	data, vector				; blend value with original data
 		movdqa	[array + index], data		; array[index] = vector
@@ -3600,6 +3595,7 @@ size	equ		rsi							; array size (count of elements)
 value	equ		rdx							; register which holds value
 ;---[Internal variables]-------------------
 index	equ		rax							; offset from beginning of array
+table	equ		r8							; pointer to blending table
 ptr		equ		r10							; temporary pointer to array
 blend	equ		xmm0						; blending mask
 vector	equ		xmm1						; value to process with
@@ -3635,7 +3631,8 @@ end if
 ;---[Unaligned operation]------------------
 		add		size, index					; size += index
 		shl		index, VSCALE				; compute shift in mask array
-		movdqa	blend, dqword [maskS1 + index]
+		lea		table, [maskS1]				; set pointer to blending table
+		movdqa	blend, [table + index]
 		xor		index, index				; index = 0
 		sub		size, VSIZE					; if (size <= VSIZE)
 		jbe		.tail						;     then process array tail
@@ -3668,7 +3665,8 @@ end repeat
 		jmp		.vloop						; do while (true)
 ;---[End of vector loop]-------------------
 .tail:	shl		size, VSCALE				; compute shift in mask array
-		pandn	blend, dqword [maskS2 + size]
+		lea		table, [maskS2]				; set pointer to blending table
+		pandn	blend, [table + size]
 		movdqa	temp, [array + index]		; temp = array[index]
 		movdqa	data, temp					; data = temp
 if type = 1
@@ -3699,6 +3697,7 @@ size	equ		rdx							; array size (count of elements)
 ;---[Internal variables]-------------------
 index	equ		rax							; offset from beginning of target array
 offst	equ		rcx							; offset in masks array
+table	equ		r8							; pointer to blending table
 ptr1	equ		r10							; temporary pointer to target array
 ptr2	equ		r11							; temporary pointer to source array
 blend	equ		xmm0						; blending mask
@@ -3744,7 +3743,8 @@ end if
 		mov		offst, index
 		shl		offst, VSCALE				; compute offset in mask array
 		neg		index						; index = -index
-		movdqa	blend, dqword [maskV1 + offst]
+		lea		table, [maskV1]				; set pointer to blending table
+		movdqa	blend, [table + offst]
 		movdqu	temp2, [source]				; temp2 = source[0]
 		movdqu	temp1, [target]				; temp1 = target[0]
 		movdqa	data, temp1					; data = temp1
@@ -3778,7 +3778,8 @@ end repeat
 ;---[End of vector loop]-------------------
 .tail:	add		index, size					; index += size
 		shl		size, VSCALE				; compute shift in mask array
-		movdqa	blend, dqword [maskV2 + size]
+		lea		table, [maskV2]				; set pointer to blending table
+		movdqa	blend, [table + size]
 		movdqu	temp2, [source + index]		; temp2 = source[index]
 		movdqu	temp1, [target + index]		; temp1 = target[index]
 		movdqa	data, temp1					; data = temp1
@@ -3925,6 +3926,7 @@ array	equ		rdi							; pointer to array
 size	equ		rsi							; array size (count of elements)
 ;---[Internal variables]-------------------
 index	equ		rax							; offset from beginning of array
+table	equ		r8							; pointer to blending table
 ptr		equ		r10							; temporary pointer to array
 blend	equ		xmm0						; blending mask
 temp	equ		xmm1						; temporary register
@@ -3967,7 +3969,8 @@ bmask	= bytes - 1							; elements aligning mask
 ;---[Unaligned operation]------------------
 		add		size, index					; size += index
 		shl		index, VSCALE				; compute shift in mask array
-		movap#x	blend, dqword [maskS1 + index]
+		lea		table, [maskS1]				; set pointer to blending table
+		movap#x	blend, [table + index]
 		xor		index, index				; index = 0
 		sub		size, VSIZE					; if (size <= VSIZE)
 		jbe		.tail						;     then process array tail
@@ -4010,7 +4013,8 @@ end repeat
 		jmp		.vloop						; do while (true)
 ;---[End of vector loop]-------------------
 .tail:	shl		size, VSCALE				; compute shift in mask array
-		andnp#x	blend, dqword [maskS2 + size]
+		lea		table, [maskS2]				; set pointer to blending table
+		andnp#x	blend, [table + size]
 		movap#x	temp, [array + index]		; temp = array[index]
 		movap#x	data, temp					; data = temp
 		xorp#x	great, great				; great = 0
@@ -4058,6 +4062,7 @@ array	equ		rdi							; pointer to array
 size	equ		rsi							; array size (count of elements)
 ;---[Internal variables]-------------------
 index	equ		rax							; offset from beginning of array
+table	equ		r8							; pointer to blending table
 ptr		equ		r10							; temporary pointer to array
 blend	equ		xmm0						; blending mask
 temp	equ		xmm1						; temporary register
@@ -4084,7 +4089,8 @@ bmask	= bytes - 1							; elements aligning mask
 ;---[Unaligned sums]-----------------------
 		add		size, index					; size += index
 		shl		index, VSCALE				; compute shift in mask array
-		movap#x	blend, dqword [maskS1 + index]
+		lea		table, [maskS1]				; set pointer to blending table
+		movap#x	blend, [table + index]
 		xor		index, index				; index = 0
 		sub		size, VSIZE					; if (size <= VSIZE)
 		jbe		.tail						;     then process array tail
@@ -4109,7 +4115,8 @@ end repeat
 		jmp		.vloop						; do while (true)
 ;---[End of vector loop]-------------------
 .tail:	shl		size, VSCALE				; compute shift in mask array
-		andnp#x	blend, dqword [maskS2 + size]
+		lea		table, [maskS2]				; set pointer to blending table
+		andnp#x	blend, [table + size]
 		movap#x	temp, [array + index]		; temp = array[index]
 		movap#x	data, temp					; data = temp
 		op#p#x	temp, temp					; do operation to temp value
@@ -4146,6 +4153,7 @@ size	equ		rsi							; array size (count of elements)
 value	equ		xmm0						; value to process with
 ;---[Internal variables]-------------------
 index	equ		rax							; offset from beginning of array
+table	equ		r8							; pointer to blending table
 ptr		equ		r10							; temporary pointer to array
 blend	equ		xmm0						; blending mask
 vector	equ		xmm1						; value to process with
@@ -4175,7 +4183,8 @@ bmask	= bytes - 1							; elements aligning mask
 ;---[Unaligned operation]------------------
 		add		size, index					; size += index
 		shl		index, VSCALE				; compute shift in mask array
-		movap#x	blend, dqword [maskS1 + index]
+		lea		table, [maskS1]				; set pointer to blending table
+		movap#x	blend, [table + index]
 		xor		index, index				; index = 0
 		sub		size, VSIZE					; if (size <= VSIZE)
 		jbe		.tail						;     then process array tail
@@ -4200,7 +4209,8 @@ end repeat
 		jmp		.vloop						; do while (true)
 ;---[End of vector loop]-------------------
 .tail:	shl		size, VSCALE				; compute shift in mask array
-		andnp#x	blend, dqword [maskS2 + size]
+		lea		table, [maskS2]				; set pointer to blending table
+		andnp#x	blend, [table + size]
 		movap#x	temp, [array + index]		; temp = array[index]
 		movap#x	data, temp					; data = temp
 		op#p#x	temp, vector				; do operation to temp value
@@ -4227,6 +4237,7 @@ size	equ		rdx							; array size (count of elements)
 ;---[Internal variables]-------------------
 index	equ		rax							; offset from beginning of target array
 offst	equ		rcx							; offset in masks array
+table	equ		r8							; pointer to blending table
 ptr1	equ		r10							; temporary pointer to target array
 ptr2	equ		r11							; temporary pointer to source array
 blend	equ		xmm0						; blending mask
@@ -4266,7 +4277,8 @@ bmask	= bytes - 1							; elements aligning mask
 		mov		offst, index
 		shl		offst, VSCALE				; compute offset in mask array
 		neg		index						; index = -index
-		movap#x	blend, dqword [maskV1 + offst]
+		lea		table, [maskV1]				; set pointer to blending table
+		movap#x	blend, [table + offst]
 		movup#x	temp2, [source]				; temp2 = source[0]
 		movup#x	temp1, [target]				; temp1 = target[0]
 		movap#x	data, temp1					; data = temp1
@@ -4292,7 +4304,8 @@ end repeat
 ;---[End of vector loop]-------------------
 .tail:	add		index, size					; index += size
 		shl		size, VSCALE				; compute shift in mask array
-		movap#x	blend, dqword [maskV2 + size]
+		lea		table, [maskV2]				; set pointer to blending table
+		movap#x	blend, [table + size]
 		movup#x	temp2, [source + index]		; temp2 = source[index]
 		movup#x	temp1, [target + index]		; temp1 = target[index]
 		movap#x	data, temp1					; data = temp1
@@ -4419,6 +4432,7 @@ array	equ		rdi							; pointer to array
 size	equ		rsi							; array size (count of elements)
 ;---[Internal variables]-------------------
 index	equ		rax							; offset from beginning of array
+table	equ		r8							; pointer to blending table
 ptr		equ		r10							; temporary pointer to array
 blend	equ		xmm0						; blending mask
 temp	equ		xmm1						; temporary register
@@ -4460,7 +4474,8 @@ end if
 ;---[Unaligned sums]-----------------------
 		add		size, index					; size += index
 		shl		index, VSCALE				; compute shift in mask array
-		movap#x	blend, dqword [maskS1 + index]
+		lea		table, [maskS1]				; set pointer to blending table
+		movap#x	blend, [table + index]
 		xor		index, index				; index = 0
 		sub		size, VSIZE					; if (size <= VSIZE)
 		jbe		.tail						;     then process array tail
@@ -4507,7 +4522,8 @@ end repeat
 		jmp		.vloop						; do while (true)
 ;---[End of vector loop]-------------------
 .tail:	shl		size, VSCALE				; compute shift in mask array
-		andnp#x	blend, dqword [maskS2 + size]
+		lea		table, [maskS2]				; set pointer to blending table
+		andnp#x	blend, [table + size]
 		movap#x	temp, [array + index]		; temp = array[index]
 		movap#x	data, temp					; data = temp
 if type = 1
@@ -4581,6 +4597,7 @@ array	equ		rdi							; pointer to array
 size	equ		rsi							; array size (count of elements)
 ;---[Internal variables]-------------------
 index	equ		rax							; offset from beginning of array
+table	equ		r8							; pointer to blending table
 ptr		equ		r10							; temporary pointer to array
 blend	equ		xmm0						; blending mask
 temp	equ		xmm1						; temporary register
@@ -4629,7 +4646,8 @@ end if
 ;---[Unaligned sums]-----------------------
 		add		size, index					; size += index
 		shl		index, VSCALE				; compute shift in mask array
-		movap#x	blend, dqword [maskS1 + index]
+		lea		table, [maskS1]				; set pointer to blending table
+		movap#x	blend, [table + index]
 		xor		index, index				; index = 0
 		sub		size, VSIZE					; if (size <= VSIZE)
 		jbe		.tail						;     then process array tail
@@ -4688,7 +4706,8 @@ end if
 		jmp		.vloop						; do while (true)
 ;---[End of vector loop]-------------------
 .tail:	shl		size, VSCALE				; compute shift in mask array
-		andnp#x	blend, dqword [maskS2 + size]
+		lea		table, [maskS2]				; set pointer to blending table
+		andnp#x	blend, [table + size]
 		movap#x	temp, [array + index]		; temp = array[index]
 if type = 1
 		mulp#x	temp, temp					; temp = temp ^ 2
@@ -4728,6 +4747,7 @@ size	equ		rdx							; array size (count of elements)
 ;---[Internal variables]-------------------
 index	equ		rax							; offset from beginning of target array
 offst	equ		rcx							; offset in masks array
+table	equ		r8							; pointer to blending table
 ptr1	equ		r10							; temporary pointer to first array
 ptr2	equ		r11							; temporary pointer to second array
 blend	equ		xmm0						; blending mask
@@ -4784,7 +4804,8 @@ end if
 		mov		offst, index
 		shl		offst, VSCALE				; compute offset in mask array
 		neg		index						; index = -index
-		movap#x	blend, dqword [maskV1 + offst]
+		lea		table, [maskV1]				; set pointer to blending table
+		movap#x	blend, [table + offst]
 		movup#x	temp2, [array2]				; temp2 = array2[0]
 		movup#x	temp1, [array1]				; temp1 = array1[0]
 if type = 1
@@ -4867,7 +4888,8 @@ end if
 ;---[End of vector loop]-------------------
 .tail:	add		index, size					; index += size
 		shl		size, VSCALE				; compute shift in mask array
-		movap#x	blend, dqword [maskV2 + size]
+		lea		table, [maskV2]				; set pointer to blending table
+		movap#x	blend, [table + size]
 		movup#x	temp2, [array2 + index]		; temp2 = array2[index]
 		movup#x	temp1, [array1 + index]		; temp1 = array1[index]
 if type = 1
@@ -4957,6 +4979,7 @@ size	equ		rsi							; array size (count of elements)
 index	equ		rax							; offset from beginning of array
 result	equ		index						; result register
 value	equ		index						; register which holds limit value
+table	equ		r8							; pointer to blending table
 ptr		equ		r10							; temporary pointer to array
 blend	equ		xmm0						; blending mask
 temp	equ		xmm1						; temporary register
@@ -5002,7 +5025,8 @@ end if
 ;---[Unaligned operation]------------------
 		add		size, index					; size += index
 		shl		index, VSCALE				; compute shift in mask array
-		movdqa	blend, dqword [maskS1 + index]
+		lea		table, [maskS1]				; set pointer to blending table
+		movdqa	blend, [table + index]
 		xor		index, index				; index = 0
 		sub		size, VSIZE					; if (size <= VSIZE)
 		jbe		.tail						;     then process array tail
@@ -5036,7 +5060,8 @@ end if
 		jmp		.vloop						; do while (true)
 ;---[End of vector loop]-------------------
 .tail:	shl		size, VSCALE				; compute shift in mask array
-		pandn	blend, dqword [maskS2 + size]
+		lea		table, [maskS2]				; set pointer to blending table
+		pandn	blend, [table + size]
 		movdqa	temp, [array + index]		; temp = array[index]
 	pblendvb	limit, temp					; blend temp with limit values
 	p#op#type#x	res0, limit					; find min or max value
@@ -5083,6 +5108,7 @@ array	equ		rdi							; pointer to array
 size	equ		rsi							; array size (count of elements)
 ;---[Internal variables]-------------------
 index	equ		rax							; offset from beginning of array
+table	equ		r8							; pointer to blending table
 fmask	equ		r9							; NaN check result
 ptr		equ		r10							; temporary pointer to array
 blend	equ		xmm0						; blending mask
@@ -5145,7 +5171,8 @@ end if
 ;---[Unaligned operation]------------------
 		add		size, index					; size += index
 		shl		index, VSCALE				; compute shift in mask array
-		movap#x	blend, dqword [maskS1 + index]
+		lea		table, [maskS1]				; set pointer to blending table
+		movap#x	blend, [table + index]
 		xor		index, index				; index = 0
 		sub		size, VSIZE					; if (size <= VSIZE)
 		jbe		.tail						;     then process array tail
@@ -5204,7 +5231,8 @@ end if
 		jmp		.vloop						; do while (true)
 ;---[End of vector loop]-------------------
 .tail:	shl		size, VSCALE				; compute shift in mask array
-		andnp#x	blend, dqword [maskS2 + size]
+		lea		table, [maskS2]				; set pointer to blending table
+		andnp#x	blend, [table + size]
 		movap#x	temp, [array + index]		; temp = array[index]
 if abs
 		andp#x	temp, mask					; temp = Abs (temp)
@@ -6286,9 +6314,10 @@ patt	equ		rdx							; register which holds pattern
 value	equ		rcx							; register which holds replacement value
 ;---[Internal variables]-------------------
 index	equ		rax							; index of first occurence of pattern
-addr	equ		r8							; return address
-fmask	equ		r9							; result of pattern search
-ptr		equ		r11							; temporary pointer to array
+table	equ		r8							; pointer to blending table
+ptr		equ		r9							; temporary pointer to array
+fmask	equ		r10							; result of pattern search
+back	equ		table						; back address
 flags	equ		xmm0						; pattern check flags
 data	equ		xmm1						; register which holds original data
 pattern	equ		xmm2						; pattern to find
@@ -6326,14 +6355,15 @@ end if
 ;---[Unaligned search for pattern]---------
 		add		size, index					; size += index
 		shl		index, VSCALE				; compute shift in mask array
-		movdqa	cmask, dqword [maskS1 + index]
+		lea		table, [maskS1]				; set pointer to blending table
+		movdqa	cmask, [table + index]
 		xor		index, index				; index = 0
 		movdqa	flags, [array]
 	pcmpeq#x	flags, pattern				; check array[0] for pattaren
 		pandn	cmask, flags				; apply mask to pattern search results
 		movdqa	flags, cmask
 	pmovmskb	fmask, cmask				; save check results to fmask
-		mov		addr, .back0				;     save return address
+		lea		back, [.back0]				;     save return address
 		and		fmask, fmask				; if pattern is found
 		jnz		.brk						;     then break the loop
 .back0:	add		index, VSIZE				; index += VSIZE
@@ -6343,7 +6373,7 @@ end if
 .vloop:	movdqa	flags, [ptr + 1 * VSIZE]
 	pcmpeq#x	flags, pattern				; check ptr[1] for pattaren
 	pmovmskb	fmask, flags				; save check results to fmask
-		mov		addr, .back1				;     save return address
+		lea		back, [.back1]				;     save return address
 		and		fmask, fmask				; if pattern is found
 		jnz		.brk						;     then break the loop
 .back1:	add		index, VSIZE				; index += VSIZE
@@ -6352,7 +6382,7 @@ end if
 		movdqa	flags, [ptr + 2 * VSIZE]
 	pcmpeq#x	flags, pattern				; check ptr[2] for pattaren
 	pmovmskb	fmask, flags				; save check results to fmask
-		mov		addr, .back2				;     save return address
+		lea		back, [.back2]				;     save return address
 		and		fmask, fmask				; if pattern is found
 		jnz		.brk						;     then break the loop
 .back2:	add		index, VSIZE				; index += VSIZE
@@ -6361,7 +6391,7 @@ end if
 		movdqa	flags, [ptr + 3 * VSIZE]
 	pcmpeq#x	flags, pattern				; check ptr[3] for pattaren
 	pmovmskb	fmask, flags				; save check results to fmask
-		mov		addr, .back3				;     save return address
+		lea		back, [.back3]				;     save return address
 		and		fmask, fmask				; if pattern is found
 		jnz		.brk						;     then break the loop
 .back3:	add		index, VSIZE				; index += VSIZE
@@ -6370,7 +6400,7 @@ end if
 		movdqa	flags, [ptr + 4 * VSIZE]
 	pcmpeq#x	flags, pattern				; check ptr[4] for pattaren
 	pmovmskb	fmask, flags				; save check results to fmask
-		mov		addr, .back4				;     save return address
+		lea		back, [.back4]				;     save return address
 		and		fmask, fmask				; if pattern is found
 		jnz		.brk						;     then break the loop
 .back4:	add		index, VSIZE				; index += VSIZE
@@ -6385,9 +6415,10 @@ end if
 		movdqa	data, [array + index]		; data = array[index]
 	pblendvb	data, replace
 		movdqa	[array + index], data		; array[index] = replace (data, pattern, value)
-		jmp		addr						; go back into the searching loop
+		jmp		back						; go back into the searching loop
 @@:		shl		size, VSCALE				; compute shift in mask array
-		pand	flags, dqword [maskS1 + size]
+		lea		table, [maskS2]				; set pointer to blending table
+		pand	flags, [table + size]
 		movdqa	data, [array + index]		; data = array[index]
 	pblendvb	data, replace
 		movdqa	[array + index], data		; array[index] = replace (data, pattern, value)
@@ -6783,6 +6814,7 @@ array	equ		rdi							; pointer to array
 size	equ		rsi							; array size (count of elements)
 ;---[Internal variables]-------------------
 index	equ		rax							; offset from beginning of array
+table	equ		r8							; pointer to blending table
 ptr		equ		r10							; temporary pointer to array
 blend	equ		xmm0						; blending mask
 temp	equ		xmm1						; temporary register
@@ -6815,7 +6847,8 @@ bmask	= bytes - 1							; elements aligning mask
 ;---[Unaligned operation]------------------
 		add		size, index					; size += index
 		shl		index, VSCALE				; compute shift in mask array
-		movdqa	blend, dqword [maskS1 + index]
+		lea		table, [maskS1]				; set pointer to blending table
+		movdqa	blend, [table + index]
 		xor		index, index				; index = 0
 		sub		size, VSIZE					; if (size <= VSIZE)
 		jbe		.tail						;     then process array tail
@@ -6846,7 +6879,8 @@ end repeat
 		jmp		.vloop						; do while (true)
 ;---[End of vector loop]-------------------
 .tail:	shl		size, VSCALE				; compute shift in mask array
-		pandn	blend, dqword [maskS2 + size]
+		lea		table, [maskS2]				; set pointer to blending table
+		pandn	blend, [table + size]
 		movdqa	temp, [array + index]		; temp = array[index]
 		movdqa	data, temp					; data = temp
 		pxor	zero, zero					; zero = 0

@@ -61,7 +61,8 @@ SMASK		= 0x003F						; Mask to extract SIMD status word
 ;==============================================================================;
 Init:
 ;---[Internal variables]-------------------
-mxcsr	equ		rsp - 1 * 8					; stack position to store MXCSR register
+stack	equ		rsp							; stack pointer
+mxcsr	equ		stack - 1 * 8				; stack position to store MXCSR register
 ;------------------------------------------
 		mov		dword [mxcsr], DEFAULT		; set default SIMD mode
 		ldmxcsr	[mxcsr]						; load MXCSR register from the stack
@@ -74,7 +75,8 @@ SetMode:
 ;---[Parameters]---------------------------
 cword	equ		edi							; SIMD control word
 ;---[Internal variables]-------------------
-mxcsr	equ		rsp - 1 * 8					; stack position to store MXCSR register
+stack	equ		rsp							; stack pointer
+mxcsr	equ		stack - 1 * 8				; stack position to store MXCSR register
 ;------------------------------------------
 		stmxcsr	[mxcsr]						; store MXCSR register into the stack
 		and		cword, CMASK				; clear unrequired bits into control word
@@ -90,7 +92,8 @@ mxcsr	equ		rsp - 1 * 8					; stack position to store MXCSR register
 GetMode:
 ;---[Internal variables]-------------------
 cword	equ		eax							; SIMD control word
-mxcsr	equ		rsp - 1 * 8					; stack position to store MXCSR register
+stack	equ		rsp							; stack pointer
+mxcsr	equ		stack - 1 * 8				; stack position to store MXCSR register
 ;------------------------------------------
 		stmxcsr	[mxcsr]						; store MXCSR register into the stack
 		mov		cword, [mxcsr]				; get value of MXCSR register
@@ -107,7 +110,8 @@ mxcsr	equ		rsp - 1 * 8					; stack position to store MXCSR register
 ;==============================================================================;
 ClearExceptions:
 ;---[Internal variables]-------------------
-mxcsr	equ		rsp - 1 * 8					; stack position to store MXCSR register
+stack	equ		rsp							; stack pointer
+mxcsr	equ		stack - 1 * 8				; stack position to store MXCSR register
 ;------------------------------------------
 		stmxcsr	[mxcsr]						; store MXCSR register into the stack
 		and		dword [mxcsr], not SMASK	; clear old value of status word
@@ -120,7 +124,8 @@ mxcsr	equ		rsp - 1 * 8					; stack position to store MXCSR register
 GetStatus:
 ;---[Internal variables]-------------------
 sword	equ		eax							; SIMD status word
-mxcsr	equ		rsp - 1 * 8					; stack position to store MXCSR register
+stack	equ		rsp							; stack pointer
+mxcsr	equ		stack - 1 * 8				; stack position to store MXCSR register
 ;------------------------------------------
 		stmxcsr	[mxcsr]						; store MXCSR register into the stack
 		mov		sword, [mxcsr]				; get value of MXCSR register

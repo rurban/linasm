@@ -281,6 +281,7 @@ newcap	equ		rsi							; new object capacity
 ;---[Internal variables]-------------------
 status	equ		al							; operation status
 array	equ		rax							; pointer to array of nodes
+fptr	equ		rax							; pointer to call external function
 head	equ		r8							; pointer to deque head
 tail	equ		r9							; pointer to deque tail
 size1	equ		r10							; size of first sequence
@@ -327,7 +328,8 @@ space	= 3 * 8								; stack size required by the procedure
 		mov		param3, size1
 		mov		param2, array
 		lea		param1, [array + oldcap]
-		call	Copy						; call Copy (array + oldcap, array, size1)
+		mov		fptr, Copy
+		call	fptr						; call Copy (array + oldcap, array, size1)
 		mov		status, 1					; return true
 		add		stack, space				; restoring back the stack pointer
 		ret
@@ -338,7 +340,8 @@ space	= 3 * 8								; stack size required by the procedure
 		mov		param3, size2
 		mov		param2, array
 		lea		param1, [array + newcap]
-		call	Copy						; call Copy (array + newcap, array, size2)
+		mov		fptr, Copy
+		call	fptr						; call Copy (array + newcap, array, size2)
 		mov		status, 1					; return true
 		add		stack, space				; restoring back the stack pointer
 		ret
@@ -470,6 +473,7 @@ source	equ		rsi							; pointer to source deque object
 ;---[Internal variables]-------------------
 array	equ		rax							; pointer to array of nodes
 temp	equ		rcx							; temporary register
+fptr	equ		rax							; pointer to call external function
 stack	equ		rsp							; stack pointer
 s_this	equ		stack + 0 * 8				; stack position of "this" variable
 s_src	equ		stack + 1 * 8				; stack position of "source" variable
@@ -508,7 +512,8 @@ space	= 3 * 8								; stack size required by the procedure
 		mov		param2, [source + ARRAY]
 		mov		param1, array
 		add		stack, space				; restoring back the stack pointer
-		jmp		Copy						; return Array::Copy (this.array, source.array, source.capacity)
+		mov		fptr, Copy
+		jmp		fptr						; return Array::Copy (this.array, source.array, source.capacity)
 ;---[Error branch]-------------------------
 .error:	mov		qword [this + ARRAY], 0		; this.array = NULL
 		mov		qword [this + CAPACITY], 0	; this.capacity = 0
@@ -1504,6 +1509,7 @@ pos		equ		r8							; beginning position
 count	equ		r9							; count of nodes to check
 ;---[Internal variables]-------------------
 result	equ		rax							; result register
+fptr	equ		rax							; pointer to call external function
 array	equ		r10							; pointer to array of nodes
 iter	equ		r11							; iterator value
 size	equ		result						; object size
@@ -1557,7 +1563,8 @@ space	= 9 * 8								; stack size required by the procedure
 		mov		param3, [array + iter]
 		mov		param2, [s_ksize]
 		mov		param1, [s_keys]
-		call	FindSet						; result = FindSet (keys, ksize, array[iter].key, func)
+		mov		fptr, FindSet
+		call	fptr						; result = FindSet (keys, ksize, array[iter].key, func)
 		mov		array, [s_array]			; get "array" variable from the stack
 		mov		iter, [s_iter]				; get "iter" variable from the stack
 		mov		cap, [s_cap]				; get "cap" variable from the stack
@@ -1858,6 +1865,7 @@ count	equ		r8							; count of nodes to check
 func	equ		r9							; compare function
 ;---[Internal variables]-------------------
 result	equ		rax							; result register
+fptr	equ		rax							; pointer to call external function
 array	equ		r10							; pointer to array of nodes
 iter	equ		r11							; iterator value
 size	equ		result						; object size
@@ -1909,7 +1917,8 @@ space	= 9 * 8								; stack size required by the procedure
 		mov		param3, [array + iter]
 		mov		param2, [s_ksize]
 		mov		param1, [s_keys]
-		call	FindSet						; result = FindSet (keys, ksize, array[iter].key, func)
+		mov		fptr, FindSet
+		call	fptr						; result = FindSet (keys, ksize, array[iter].key, func)
 		mov		array, [s_array]			; get "array" variable from the stack
 		mov		iter, [s_iter]				; get "iter" variable from the stack
 		mov		cap, [s_cap]				; get "cap" variable from the stack

@@ -584,6 +584,7 @@ source	equ		rsi							; pointer to source vector object
 ;---[Internal variables]-------------------
 array	equ		rax							; pointer to array of nodes
 temp	equ		rcx							; temporary register
+fptr	equ		rax							; pointer to call external function
 stack	equ		rsp							; stack pointer
 s_this	equ		stack + 0 * 8				; stack position of "this" variable
 s_src	equ		stack + 1 * 8				; stack position of "source" variable
@@ -618,7 +619,8 @@ space	= 3 * 8								; stack size required by the procedure
 		mov		param2, [source + ARRAY]
 		mov		param1, array
 		add		stack, space				; restoring back the stack pointer
-		jmp		Copy						; return Array::Copy (this.array, source.array, source.size)
+		mov		fptr, Copy
+		jmp		fptr						; return Array::Copy (this.array, source.array, source.size)
 ;---[Error branch]-------------------------
 .error:	mov		qword [this + ARRAY], 0		; this.array = NULL
 		mov		qword [this + CAPACITY], 0	; this.capacity = 0
@@ -665,6 +667,7 @@ count	equ		r8							; count of nodes to copy
 status	equ		al							; operation status
 result	equ		rax							; result register
 ptr		equ		rax							; temporary pointer
+fptr	equ		rax							; pointer to call external function
 size	equ		r9							; object size
 stack	equ		rsp							; stack pointer
 s_this	equ		stack + 0 * 8				; stack position of "this" variable
@@ -734,7 +737,8 @@ end if
 		mov		param3, size
 		mov		param2, ptr
 		lea		param1, [ptr + count]
-		call	Move						; call Move (ptr + count, ptr, tsize)
+		mov		fptr, Move
+		call	fptr						; call Move (ptr + count, ptr, tsize)
 ;---[Insert elements into target vector]---
 .copy:	mov		this, [s_this]				; get "this" variable from the stack
 		mov		source, [s_src]				; get "source" variable from the stack
@@ -743,7 +747,8 @@ end if
 		mov		param1, [this + ARRAY]
 		add		param1, [s_tpos]
 		mov		param3, [s_count]
-		call	Copy						; call Copy (this.array + tpos, source.array + spos, count)
+		mov		fptr, Copy
+		call	fptr						; call Copy (this.array + tpos, source.array + spos, count)
 ;---[Remove elements from source vector]---
 if move
 		mov		source, [s_src]				; get "source" variable from the stack
@@ -758,7 +763,8 @@ if move
 		mov		param3, size
 		lea		param2, [ptr + count]
 		mov		param1, ptr
-		call	Move						; call Move (ptr, ptr + count, size)
+		mov		fptr, Move
+		call	fptr						; call Move (ptr, ptr + count, size)
 end if
 ;---[Normal exit branch]-------------------
 .exit:	mov		result, [s_count]			; get "count" variable from the stack
@@ -872,6 +878,7 @@ data	equ		rsi							; pointer to data structure
 pos		equ		rdx							; position where to insert element
 ;---[Internal variables]-------------------
 status	equ		al							; operation status
+fptr	equ		rax							; pointer to call external function
 array	equ		r8							; pointer to array of nodes
 size	equ		r9							; object size
 temp	equ		xmm0						; temporary register
@@ -934,7 +941,8 @@ end if
 .move:	mov		param3, size
 		mov		param2, array
 		lea		param1, [array + KSIZE]
-		call	Move						; call Move (array + KSIZE, array, size)
+		mov		fptr, Move
+		call	fptr						; call Move (array + KSIZE, array, size)
 		mov		this, [s_this]				; get "this" variable from the stack
 		mov		data, [s_data]				; get "data" variable from the stack
 		mov		array, [s_array]			; get "array" variable from the stack
@@ -954,6 +962,7 @@ data	equ		rsi							; pointer to data structure
 pos		equ		rdx							; position of element to extract
 ;---[Internal variables]-------------------
 status	equ		al							; operation status
+fptr	equ		rax							; pointer to call external function
 array	equ		r8							; pointer to array of nodes
 size	equ		r9							; object size
 temp	equ		xmm0						; temporary register
@@ -986,7 +995,8 @@ end if
 .move:	mov		param3, size
 		lea		param2, [array + KSIZE]
 		mov		param1, array
-		call	Move						; call Move (array, array + KSIZE, size)
+		mov		fptr, Move
+		call	fptr						; call Move (array, array + KSIZE, size)
 		mov		status, 1					; return true
 		ret
 }
@@ -2381,6 +2391,7 @@ temp	equ		rsi							; pointer to temporary array of nodes
 size	equ		rdx							; object size
 func	equ		rcx							; compare function
 ;---[Internal variables]-------------------
+fptr	equ		rax							; pointer to call external function
 stack	equ		rsp							; stack pointer
 s_array	equ		stack + 0 * 8				; stack position of "array" variable
 s_temp	equ		stack + 1 * 8				; stack position of "temp" variable
@@ -2419,7 +2430,8 @@ minsize	= 16 * KSIZE						; min array size is aceptable for Merge sort
 		mov		param3, size
 		mov		param2, [s_array]
 		mov		param1, [s_temp]
-		call	CopyFunc					; call CopyFunc (temp, array, size / 2)
+		mov		fptr, CopyFunc
+		call	fptr						; call CopyFunc (temp, array, size / 2)
 ;---[Merge sorted arrays]------------------
 		mov		array, [s_array]			; get "array" variable from the stack
 		mov		temp, [s_temp]				; get "temp" variable from the stack
@@ -2516,6 +2528,7 @@ size2	equ		r8							; size of second array
 func	equ		r9							; pointer to compare function
 ;---[Internal variables]-------------------
 temp	equ		rax							; temporary register
+fptr	equ		rax							; pointer to call external function
 key		equ		r10							; key value
 data	equ		r11							; data value
 stack	equ		rsp							; stack pointer
@@ -2586,12 +2599,14 @@ space	= 11 * 8							; stack size required by the procedure
 		mov		param2, [s_src2]
 		mov		param3, [s_size2]
 		add		stack, space				; restoring back the stack pointe
-		jmp		Copy						; call Copy (target, src2, size2)
+		mov		fptr, Copy
+		jmp		fptr						; call Copy (target, src2, size2)
 .copy2:	mov		param1, [s_tgt]
 		mov		param2, [s_src1]
 		mov		param3, [s_size1]
 		add		stack, space				; restoring back the stack pointe
-		jmp		Copy						; call Copy (target, src1, size1)
+		mov		fptr, Copy
+		jmp		fptr						; call Copy (target, src1, size1)
 }
 MergeCoreAsc:	MERGE_CORE	le
 MergeCoreDsc:	MERGE_CORE	ge
@@ -2605,6 +2620,7 @@ func	equ		rdx							; compare function
 ;---[Internal variables]-------------------
 status	equ		al							; operation status
 result	equ		rax							; result register
+fptr	equ		rax							; pointer to call external function
 size	equ		result						; object size
 stack	equ		rsp							; stack pointer
 s_this	equ		stack + 0 * 8				; stack position of "this" variable
@@ -2635,7 +2651,8 @@ space	= 5 * 8								; stack size required by the procedure
 		mov		param2, [this + ARRAY]
 		mov		param1, [this + ARRAY]
 		add		param1, size
-		call	Move						; call Move (this.array + source.size, this.array, this.size)
+		mov		fptr, Move
+		call	fptr						; call Move (this.array + source.size, this.array, this.size)
 ;---[Merge vectors]------------------------
 		mov		this, [s_this]				; get "this" variable from the stack
 		mov		source, [s_src]				; get "source" variable from the stack

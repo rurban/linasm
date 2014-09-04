@@ -177,7 +177,8 @@ s_end	equ		r11							; pointer to the end of source sequence
 hash	equ		pattern						; pointer to hash array
 p_pat	equ		psize						; pointer to current element of pattern
 p_src	equ		ssize						; pointer to current element of source
-s_src	equ		rsp - 1 * 8					; stack position of "source" variable
+stack	equ		rsp							; stack pointer
+s_src	equ		stack - 1 * 8				; stack position of "source" variable
 hash_of	= 256								; size of hash array
 size_of	= hash_of * 8						; offset of size variable inside BMH_charX
 patt_of	= size_of + 8						; offset of pattern variable inside BMH_charX

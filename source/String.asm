@@ -352,8 +352,8 @@ macro	LEN		char, x
 string	equ		rdi							; pointer to string
 ;---[Internal variables]-------------------
 index	equ		rax							; index of eol symbol
-sindex	equ		rcx							; string offset from vector boundary
-sindexl	equ		cl							; low part of "sindex"
+shft	equ		rcx							; shift value
+low		equ		cl							; low part of shift value
 cmask	equ		r8							; mask to clear unrequired results
 emask	equ		r9							; result of eol search
 echeck	equ		xmm0						; eol check mask
@@ -373,13 +373,13 @@ if scale <> 0
 		jnz		.sloop						;     then skip vector code
 end if
 ;---[Normal execution branch]--------------
-		mov		sindex, string
-		and		sindex, VMASK				; get string offset from vector boundary
-		sub		string, sindex				; align pointer to vector boundary
+		mov		shft, string
+		and		shft, VMASK					; get string offset from vector boundary
+		sub		string, shft				; align pointer to vector boundary
 ;---[Unaligned search for eol]-------------
-		sub		index, sindex				; index -= sindex
+		sub		index, shft					; index -= shft
 		mov		cmask, VBITS
-		shl		cmask, sindexl				; adjust cmask for unaligned search
+		shl		cmask, low					; adjust cmask for unaligned search
 		pxor	echeck, echeck				; echeck = 0
 	pcmpeq#x	echeck, [string]			; check string[0] for end of line
 	pmovmskb	emask, echeck				; save check results to emask
@@ -671,13 +671,14 @@ maxlen	equ		rsi							; maximum length of target string
 source	equ		rdx							; source string
 ;---[Internal variables]-------------------
 index	equ		rax							; index of eol symbol
-sindex	equ		rcx							; string offset from vector boundary
-sindexl	equ		cl							; low part of "sindex"
+shft	equ		rcx							; shift value
+low		equ		cl							; low part of shift value
+table	equ		r8							; pointer to functions table
 cmask	equ		r8							; mask to clear unrequired results
 emask	equ		r9							; result of eol search
 ptr1	equ		r10							; temporary pointer to target string
 ptr2	equ		r11							; temporary pointer to source string
-func	equ		cmask						; pointer to copy function
+func	equ		table						; pointer to copy function
 echeck0	equ		xmm0						; eol check mask #1
 echeck1	equ		xmm1						; eol check mask #2
 sdata0	equ		xmm2						; string data #1
@@ -700,16 +701,16 @@ if scale <> 0
 		jnz		.sloop						;     then skip vector code
 end if
 ;---[Normal execution branch]--------------
-		mov		sindex, source
-		and		sindex, VMASK				; get string offset from vector boundary
-		sub		ptr2, sindex				; ptr2 = source - sindex
-		sub		ptr1, sindex				; ptr1 = target - sindex
+		mov		shft, source
+		and		shft, VMASK					; get string offset from vector boundary
+		sub		ptr2, shft					; ptr2 = source - shft
+		sub		ptr1, shft					; ptr1 = target - shft
 		shftl	maxlen, scale				; convert maxlen to bytes
 ;---[Unaligned copy]-----------------------
-		add		maxlen, sindex				; maxlen += sindex
-		sub		index, sindex				; index -= sindex
+		add		maxlen, shft				; maxlen += shft
+		sub		index, shft					; index -= shft
 		mov		cmask, VBITS
-		shl		cmask, sindexl				; adjust cmask for unaligned search
+		shl		cmask, low					; adjust cmask for unaligned search
 		pxor	echeck0, echeck0			; echeck0 = 0
 	pcmpeq#x	echeck0, [ptr2]				; check ptr2[0] for end of line
 	pmovmskb	emask, echeck0				; save check results to emask
@@ -751,7 +752,8 @@ end repeat
 		cmp		maxlen, emask				; if (maxlen < emask)
 		jb		.nospc						;     then go to no space branch
 		add		index, emask				; index += emask
-		lea		func, [copytable + index * 8 + 8]
+		lea		table, [copytable]			; load pointer to functions table
+		lea		func, [table + index * 8 + 8]
 		shftr	index, scale				; return index
 		jmp		qword [func]				; call associated copy function
 ;---[Loop break branch]--------------------
@@ -798,13 +800,14 @@ source	equ		rdx							; source string
 size	equ		rcx							; characters to copy
 ;---[Internal variables]-------------------
 index	equ		rax							; index of eol symbol
-sindex	equ		rcx							; string offset from vector boundary
-sindexl	equ		cl							; low part of "sindex"
+shft	equ		rcx							; shift value
+low		equ		cl							; low part of shift value
+table	equ		r8							; pointer to functions table
 cmask	equ		r8							; mask to clear unrequired results
 emask	equ		r9							; result of eol search
 ptr1	equ		r10							; temporary pointer to target string
 ptr2	equ		r11							; temporary pointer to source string
-func	equ		cmask						; pointer to copy function
+func	equ		table						; pointer to copy function
 echeck0	equ		xmm0						; eol check mask #1
 echeck1	equ		xmm1						; eol check mask #2
 sdata0	equ		xmm2						; string data #1
@@ -830,16 +833,16 @@ if scale <> 0
 		jnz		.sloop						;     then skip vector code
 end if
 ;---[Normal execution branch]--------------
-		mov		sindex, source
-		and		sindex, VMASK				; get string offset from vector boundary
-		sub		ptr2, sindex				; ptr2 = source - sindex
-		sub		ptr1, sindex				; ptr1 = target - sindex
+		mov		shft, source
+		and		shft, VMASK					; get string offset from vector boundary
+		sub		ptr2, shft					; ptr2 = source - shft
+		sub		ptr1, shft					; ptr1 = target - shft
 		shftl	maxlen, scale				; convert maxlen to bytes
 ;---[Unaligned copy]-----------------------
-		add		maxlen, sindex				; maxlen += sindex
-		sub		index, sindex				; index -= sindex
+		add		maxlen, shft				; maxlen += shft
+		sub		index, shft					; index -= shft
 		mov		cmask, VBITS
-		shl		cmask, sindexl				; adjust cmask for unaligned search
+		shl		cmask, low					; adjust cmask for unaligned search
 		pxor	echeck0, echeck0			; echeck0 = 0
 	pcmpeq#x	echeck0, [ptr2]				; check ptr2[0] for end of line
 	pmovmskb	emask, echeck0				; save check results to emask
@@ -882,7 +885,8 @@ end repeat
 		cmova	maxlen, emask				;     maxlen = emask
 .tail0:	add		index, maxlen				; index += maxlen
 		seteol	(target + index), x			; put eol symbol into target string
-		lea		func, [copytable + index * 8]
+		lea		table, [copytable]			; load pointer to functions table
+		lea		func, [table + index * 8]
 		shftr	index, scale				; return index
 		jmp		qword [func]				; call associated copy function
 ;---[Loop break branch]--------------------
@@ -1358,10 +1362,11 @@ string	equ		rdi							; pointer to string
 psymbol	equ		rsi							; register which holds symbol
 ;---[Internal variables]-------------------
 result	equ		rax							; result register
-sindex	equ		rcx							; string offset from vector boundary
-index	equ		r8							; index of first occurence of pattern
-emask	equ		r9							; result of eol search
-fmask	equ		r10							; result of pattern search
+shft	equ		rcx							; shift value
+table	equ		r8							; pointer to blending table
+index	equ		r9							; index of first occurence of pattern
+emask	equ		r10							; result of eol search
+fmask	equ		r11							; result of pattern search
 pcheck	equ		xmm0						; pattern check mask
 echeck	equ		xmm1						; eol check mask
 eol		equ		xmm2						; end of line
@@ -1388,14 +1393,15 @@ end if
 ;---[Normal execution branch]--------------
 		movq	pattern, psymbol			; pattern = symbol
 		clone	pattern, scale				; duplicate value through the entire register
-		mov		sindex, string
-		and		sindex, VMASK				; get string offset from vector boundary
-		sub		string, sindex				; align pointer to vector boundary
+		mov		shft, string
+		and		shft, VMASK					; get string offset from vector boundary
+		sub		string, shft				; align pointer to vector boundary
 		pxor	eol, eol					; eol = 0
 ;---[Unaligned search for pattern]---------
-		sub		index, sindex				; index -= sindex
-		shl		sindex, VSCALE				; compute shift in mask array
-		movdqa	cmask, dqword [maskA + sindex]
+		sub		index, shft					; index -= shft
+		shl		shft, VSCALE				; compute shift in mask array
+		lea		table, [maskA]				; set pointer to blending table
+		movdqa	cmask, [table + shft]
 		movdqa	echeck, [string]			; echeck = string[0]
 		movdqa	pcheck, echeck				; pcheck = string[0]
 	pcmpeq#x	echeck, eol					; check string[0] for end of line
@@ -1469,11 +1475,12 @@ string	equ		rdi							; pointer to string
 psymbol	equ		rsi							; register which holds symbol
 ;---[Internal variables]-------------------
 result	equ		rax							; result register
-sindex	equ		rcx							; string offset from vector boundary
-index	equ		r8							; index of first occurence of pattern
-emask	equ		r9							; result of eol search
-fmask	equ		r10							; result of pattern search
-addr	equ		r11							; return address
+shft	equ		rcx							; shift value
+table	equ		r8							; pointer to blending table
+index	equ		r9							; index of first occurence of pattern
+emask	equ		r10							; result of eol search
+fmask	equ		r11							; result of pattern search
+back	equ		table						; back address
 pcheck	equ		xmm0						; pattern check mask
 echeck	equ		xmm1						; eol check mask
 eol		equ		xmm2						; end of line
@@ -1500,14 +1507,15 @@ end if
 ;---[Normal execution branch]--------------
 		movq	pattern, psymbol			; pattern = symbol
 		clone	pattern, scale				; duplicate value through the entire register
-		mov		sindex, string
-		and		sindex, VMASK				; get string offset from vector boundary
-		sub		string, sindex				; align pointer to vector boundary
+		mov		shft, string
+		and		shft, VMASK					; get string offset from vector boundary
+		sub		string, shft				; align pointer to vector boundary
 		pxor	eol, eol					; eol = 0
 ;---[Unaligned search for pattern]---------
-		sub		index, sindex				; index -= sindex
-		shl		sindex, VSCALE				; compute shift in mask array
-		movdqa	cmask, dqword [maskA + sindex]
+		sub		index, shft					; index -= shft
+		shl		shft, VSCALE				; compute shift in mask array
+		lea		table, [maskA]				; set pointer to blending table
+		movdqa	cmask, [table + shft]
 		movdqa	echeck, [string]			; echeck = string[0]
 		movdqa	pcheck, echeck				; pcheck = string[0]
 	pcmpeq#x	echeck, eol					; check string[0] for end of line
@@ -1516,7 +1524,7 @@ end if
 		pand	pcheck, cmask				; apply cmask to pattern search results
 		por		echeck, pcheck				; echeck |= pcheck
 	pmovmskb	emask, echeck				; save check results to emask
-		mov		addr, .back0				; save return address
+		lea		back, [.back0]				; save return address
 		and		emask, emask				; if eol or pattern is found
 		jnz		.brk						;     then break the loop
 .back0:	add		index, VSIZE				; index += VSIZE
@@ -1527,7 +1535,7 @@ end if
 	pcmpeq#x	pcheck, pattern				; check string[1] for symbol
 		por		echeck, pcheck				; echeck |= pcheck
 	pmovmskb	emask, echeck				; save check results to emask
-		mov		addr, .back1				; save return address
+		lea		back, [.back1]				; save return address
 		and		emask, emask				; if eol or pattern is found
 		jnz		.brk						;     then break the loop
 .back1:	add		index, VSIZE				; index += VSIZE
@@ -1537,7 +1545,7 @@ end if
 	pcmpeq#x	pcheck, pattern				; check string[2] for symbol
 		por		echeck, pcheck				; echeck |= pcheck
 	pmovmskb	emask, echeck				; save check results to emask
-		mov		addr, .back2				; save return address
+		lea		back, [.back2]				; save return address
 		and		emask, emask				; if eol or pattern is found
 		jnz		.brk						;     then break the loop
 .back2:	add		index, VSIZE				; index += VSIZE
@@ -1547,7 +1555,7 @@ end if
 	pcmpeq#x	pcheck, pattern				; check string[3] for symbol
 		por		echeck, pcheck				; echeck |= pcheck
 	pmovmskb	emask, echeck				; save check results to emask
-		mov		addr, .back3				; save return address
+		lea		back, [.back3]				; save return address
 		and		emask, emask				; if eol or pattern is found
 		jnz		.brk						;     then break the loop
 .back3:	add		index, VSIZE				; index += VSIZE
@@ -1557,7 +1565,7 @@ end if
 	pcmpeq#x	pcheck, pattern				; check string[4] for symbol
 		por		echeck, pcheck				; echeck |= pcheck
 	pmovmskb	emask, echeck				; save check results to emask
-		mov		addr, .back4				; save return address
+		lea		back, [.back4]				; save return address
 		and		emask, emask				; if eol or pattern is found
 		jnz		.brk						;     then break the loop
 .back4:	add		index, VSIZE				; index += VSIZE
@@ -1580,7 +1588,7 @@ end if
 		add		index, fmask				; index += fmask
 		shftr	index, scale
 		mov		result, index				; result = index
-		jmp		addr						; go back into the searching loop
+		jmp		back						; go back into the searching loop
 if scale <> 0
 ;---[Scalar loop]--------------------------
 .sloop:	cmp		char, symbol				; if (char == symbol)
@@ -1613,7 +1621,7 @@ string	equ		rdi							; pointer to string
 symbols	equ		rsi							; symbols to find
 ;---[Internal variables]-------------------
 result	equ		rax							; result register
-sindex	equ		rcx							; string offset from vector boundary
+shft	equ		rcx							; shift value
 pindex	equ		rdx							; pattern table index
 wchar	equ		rcx							; register which holds char value
 index	equ		r8							; index of first occurence of pattern
@@ -1622,13 +1630,14 @@ fmask	equ		r10							; result of pattern search
 size	equ		r11							; size of pattern table
 ptr		equ		size						; temporary pointer
 tsize	equ		symbols						; count of patterns to check
+table	equ		symbols						; pointer to blending table
 pcheck	equ		xmm0						; pattern check mask
 echeck	equ		xmm1						; eol check mask
 eol		equ		xmm2						; end of line
 pattern	equ		xmm3						; pattern to find
 cmask	equ		xmm4						; mask to clear unrequired results
 stack	equ		rsp							; stack pointer
-table	equ		stack						; pattern table
+ptable	equ		stack						; pattern table
 s_str	equ		stack + 0 * 8				; stack position of "string" variable
 s_smbls	equ		stack + 1 * 8				; stack position of "symbols" variable
 if x eq b
@@ -1670,7 +1679,7 @@ end if
 .ploop:	mov		char, [symbols]
 		movq	pattern, wchar				; pattern = char
 		clone	pattern, scale				; duplicate value through the entire register
-		movdqa	[table + pindex], pattern	; table[pindex] = pattern
+		movdqa	[ptable + pindex], pattern	; ptable[pindex] = pattern
 		add		symbols, bytes				; symbols++
 		add		pindex, VSIZE				; pindex++
 		sub		result, VSIZE				; result--
@@ -1678,20 +1687,21 @@ end if
 ;---[Normal execution branch]--------------
 		mov		result, NOT_FOUND			; result = NOT_FOUND
 		xor		index, index				; index = 0
-		mov		sindex, string
-		and		sindex, VMASK				; get string offset from vector boundary
-		sub		string, sindex				; align pointer to vector boundary
+		mov		shft, string
+		and		shft, VMASK					; get string offset from vector boundary
+		sub		string, shft				; align pointer to vector boundary
 		pxor	eol, eol					; eol = 0
 ;---[Unaligned search for pattern]---------
-		sub		index, sindex				; index -= sindex
-		shl		sindex, VSCALE				; compute shift in mask array
-		movdqa	cmask, dqword [maskA + sindex]
+		sub		index, shft					; index -= shft
+		shl		shft, VSCALE				; compute shift in mask array
+		lea		table, [maskA]				; set pointer to blending table
+		movdqa	cmask, [table + shft]
 		movdqa	echeck, [string]			; echeck = string[0]
 		pxor	pcheck, pcheck				; pcheck = 0
 		xor		pindex, pindex				; pindex = 0
 		mov		tsize, size					; tsize = size
 ;---[Pattern matching loop]----------------
-.loop1:	movdqa	pattern, [table + pindex]	; pattern = table[pindex]
+.loop1:	movdqa	pattern, [ptable + pindex]	; pattern = ptable[pindex]
 	pcmpeq#x	pattern, echeck				; check string[0] for symbol
 		por		pcheck, pattern				; add patern matching mask to pcheck
 		add		pindex, VSIZE				; pindex++
@@ -1712,7 +1722,7 @@ end if
 		xor		pindex, pindex				; pindex = 0
 		mov		tsize, size					; tsize = size
 ;---[Pattern matching loop]----------------
-.loop2:	movdqa	pattern, [table + pindex]	; pattern = table[pindex]
+.loop2:	movdqa	pattern, [ptable + pindex]	; pattern = ptable[pindex]
 	pcmpeq#x	pattern, echeck				; check string[1] for symbol
 		por		pcheck, pattern				; add patern matching mask to pcheck
 		add		pindex, VSIZE				; pindex++
@@ -1786,7 +1796,7 @@ string	equ		rdi							; pointer to string
 symbols	equ		rsi							; symbols to find
 ;---[Internal variables]-------------------
 result	equ		rax							; result register
-sindex	equ		rcx							; string offset from vector boundary
+shft	equ		rcx							; shift value
 pindex	equ		rdx							; pattern table index
 wchar	equ		rcx							; register which holds char value
 index	equ		r8							; index of first occurence of pattern
@@ -1795,13 +1805,14 @@ fmask	equ		r10							; result of pattern search
 size	equ		r11							; size of pattern table
 ptr		equ		size						; temporary pointer
 tsize	equ		symbols						; count of patterns to check
+table	equ		symbols						; pointer to blending table
 pcheck	equ		xmm0						; pattern check mask
 echeck	equ		xmm1						; eol check mask
 eol		equ		xmm2						; end of line
 pattern	equ		xmm3						; pattern to find
 cmask	equ		xmm4						; mask to clear unrequired results
 stack	equ		rsp							; stack pointer
-table	equ		stack						; pattern table
+ptable	equ		stack						; pattern table
 s_str	equ		stack + 0 * 8				; stack position of "string" variable
 s_smbls	equ		stack + 1 * 8				; stack position of "symbols" variable
 if x eq b
@@ -1843,7 +1854,7 @@ end if
 .ploop:	mov		char, [symbols]
 		movq	pattern, wchar				; pattern = char
 		clone	pattern, scale				; duplicate value through the entire register
-		movdqa	[table + pindex], pattern	; table[pindex] = pattern
+		movdqa	[ptable + pindex], pattern	; ptable[pindex] = pattern
 		add		symbols, bytes				; symbols++
 		add		pindex, VSIZE				; pindex++
 		sub		result, VSIZE				; result--
@@ -1851,20 +1862,21 @@ end if
 ;---[Normal execution branch]--------------
 		mov		result, NOT_FOUND			; result = NOT_FOUND
 		xor		index, index				; index = 0
-		mov		sindex, string
-		and		sindex, VMASK				; get string offset from vector boundary
-		sub		string, sindex				; align pointer to vector boundary
+		mov		shft, string
+		and		shft, VMASK					; get string offset from vector boundary
+		sub		string, shft				; align pointer to vector boundary
 		pxor	eol, eol					; eol = 0
 ;---[Unaligned search for pattern]---------
-		sub		index, sindex				; index -= sindex
-		shl		sindex, VSCALE				; compute shift in mask array
-		movdqa	cmask, dqword [maskA + sindex]
+		sub		index, shft					; index -= shft
+		shl		shft, VSCALE				; compute shift in mask array
+		lea		table, [maskA]				; set pointer to blending table
+		movdqa	cmask, [table + shft]
 		movdqa	echeck, [string]			; echeck = string[0]
 		pxor	pcheck, pcheck				; pcheck = 0
 		xor		pindex, pindex				; pindex = 0
 		mov		tsize, size					; tsize = size
 ;---[Pattern matching loop]----------------
-.loop1:	movdqa	pattern, [table + pindex]	; pattern = table[pindex]
+.loop1:	movdqa	pattern, [ptable + pindex]	; pattern = ptable[pindex]
 	pcmpeq#x	pattern, echeck				; check string[0] for symbol
 		por		pcheck, pattern				; add patern matching mask to pcheck
 		add		pindex, VSIZE				; pindex++
@@ -1885,7 +1897,7 @@ end if
 		xor		pindex, pindex				; pindex = 0
 		mov		tsize, size					; tsize = size
 ;---[Pattern matching loop]----------------
-.loop2:	movdqa	pattern, [table + pindex]	; pattern = table[pindex]
+.loop2:	movdqa	pattern, [ptable + pindex]	; pattern = ptable[pindex]
 	pcmpeq#x	pattern, echeck				; check string[1] for symbol
 		por		pcheck, pattern				; add patern matching mask to pcheck
 		add		pindex, VSIZE				; pindex++
@@ -1980,6 +1992,7 @@ string	equ		rdi							; source string
 pattern	equ		rsi							; pattern to find
 ;---[Internal variables]-------------------
 result	equ		rax							; result register
+fptr	equ		rax							; pointer to call external function
 stack	equ		rsp							; stack pointer
 s_str	equ		stack + 0 * 8				; stack position of "string" variable
 s_patt	equ		stack + 1 * 8				; stack position of "pattern" variable
@@ -2025,12 +2038,14 @@ end if
 		mov		param3, [s_psize]			; pass pattern size to BMH constructor
 		mov		param2, [s_patt]			; pass pattern string to BMH constructor
 		lea		param1, [s_bmh]				; pass BMH object to BMH constructor
-		call	Hash						; call BMH constructor
+		mov		fptr, Hash
+		call	fptr						; call BMH constructor
 ;---[Call BMH search algorithm]------------
 		lea		param3, [s_bmh]				; pass BMH pattern to BMH search algorithm
 		mov		param2, [s_ssize]			; pass source string size to BMH search algorithm
 		mov		param1, [s_str]				; pass source string to BMH search algorithm
-		call	Find						; call BMH search algorithm
+		mov		fptr, Find
+		call	fptr						; call BMH search algorithm
 		add		stack, space				; restoring back the stack pointer
 		ret
 ;---[Error branch]-------------------------
@@ -2060,6 +2075,7 @@ size	equ		rsi							; size of source characters sequence
 pattern	equ		rdx							; pattern to find
 ;---[Internal variables]-------------------
 result	equ		rax							; result register
+fptr	equ		rax							; pointer to call external function
 stack	equ		rsp							; stack pointer
 s_str	equ		stack + 0 * 8				; stack position of "string" variable
 s_patt	equ		stack + 1 * 8				; stack position of "pattern" variable
@@ -2103,12 +2119,14 @@ end if
 		mov		param3, [s_psize]			; pass pattern size to BMH constructor
 		mov		param2, [s_patt]			; pass pattern string to BMH constructor
 		lea		param1, [s_bmh]				; pass BMH object to BMH constructor
-		call	Hash						; call BMH constructor
+		mov		fptr, Hash
+		call	fptr						; call BMH constructor
 ;---[Call BMH search algorithm]------------
 		lea		param3, [s_bmh]				; pass BMH pattern to BMH search algorithm
 		mov		param2, [s_ssize]			; pass source string size to BMH search algorithm
 		mov		param1, [s_str]				; pass source string to BMH search algorithm
-		call	Find						; call BMH search algorithm
+		mov		fptr, Find
+		call	fptr						; call BMH search algorithm
 		add		stack, space				; restoring back the stack pointer
 		ret
 ;---[Error branch]-------------------------
@@ -2145,8 +2163,8 @@ string	equ		rdi							; pointer to string
 psymbol	equ		rsi							; register which holds symbol
 ;---[Internal variables]-------------------
 count	equ		rax							; count of pattern matches
-sindex	equ		rcx							; string offset from vector boundary
-sindexl	equ		cl							; low part of "sindex"
+shft	equ		rcx							; shift value
+low		equ		cl							; low part of shift value
 cmask	equ		r8							; mask to clear unrequired results
 emask	equ		r9							; result of eol search
 fmask	equ		r10							; result of pattern search
@@ -2175,13 +2193,13 @@ end if
 ;---[Normal execution branch]--------------
 		movq	pattern, psymbol			; pattern = symbol
 		clone	pattern, scale				; duplicate value through the entire register
-		mov		sindex, string
-		and		sindex, VMASK				; get string offset from vector boundary
-		sub		string, sindex				; align pointer to vector boundary
+		mov		shft, string
+		and		shft, VMASK					; get string offset from vector boundary
+		sub		string, shft				; align pointer to vector boundary
 		pxor	eol, eol					; eol = 0
 ;---[Unaligned search for pattern]---------
 		mov		cmask, VBITS
-		shl		cmask, sindexl				; adjust cmask for unaligned search
+		shl		cmask, low					; adjust cmask for unaligned search
 		movdqa	echeck, [string]			; echeck = string[0]
 		movdqa	pcheck, echeck				; pcheck = string[0]
 	pcmpeq#x	echeck, eol					; check string[0] for end of line
@@ -2211,10 +2229,10 @@ end repeat
 		jmp		.vloop						; do while (true)
 ;---[End of vector loop]-------------------
 .brk:	bsf		emask, emask				; find index of first occurence of eol
-		mov		sindex, VSIZE
-		sub		sindex, emask				; get count of tail elements
+		mov		shft, VSIZE
+		sub		shft, emask					; get count of tail elements
 		mov		cmask, VBITS
-		shr		cmask, sindexl				; adjust cmask for tail search
+		shr		cmask, low					; adjust cmask for tail search
 		and		fmask, cmask				; if pattern is found
 		popcnt	fmask, fmask				; get count of pattern matches
 		add		count, fmask				; count += mathes
@@ -2251,8 +2269,8 @@ string	equ		rdi							; pointer to string
 symbols	equ		rsi							; symbols to find
 ;---[Internal variables]-------------------
 count	equ		rax							; count of pattern matches
-sindex	equ		rcx							; string offset from vector boundary
-sindexl	equ		cl							; low part of "sindex"
+shft	equ		rcx							; shift value
+low		equ		cl							; low part of shift value
 pindex	equ		rdx							; pattern table index
 cmask	equ		r8							; mask to clear unrequired results
 emask	equ		r9							; result of eol search
@@ -2266,7 +2284,7 @@ echeck	equ		xmm1						; eol check mask
 eol		equ		xmm2						; end of line
 pattern	equ		xmm3						; pattern to find
 stack	equ		rsp							; stack pointer
-table	equ		stack						; pattern table
+ptable	equ		stack						; pattern table
 s_str	equ		stack + 0 * 8				; stack position of "string" variable
 s_smbls	equ		stack + 1 * 8				; stack position of "symbols" variable
 if x eq b
@@ -2308,25 +2326,25 @@ end if
 .ploop:	mov		char, [symbols]
 		movq	pattern, wchar				; pattern = char
 		clone	pattern, scale				; duplicate value through the entire register
-		movdqa	[table + pindex], pattern	; table[pindex] = pattern
+		movdqa	[ptable + pindex], pattern	; ptable[pindex] = pattern
 		add		symbols, bytes				; symbols++
 		add		pindex, VSIZE				; pindex++
 		sub		count, VSIZE				; count--
 		jnz		.ploop						; do while (count != 0)
 ;---[Normal execution branch]--------------
-		mov		sindex, string
-		and		sindex, VMASK				; get string offset from vector boundary
-		sub		string, sindex				; align pointer to vector boundary
+		mov		shft, string
+		and		shft, VMASK					; get string offset from vector boundary
+		sub		string, shft				; align pointer to vector boundary
 		pxor	eol, eol					; eol = 0
 ;---[Unaligned search for pattern]---------
 		mov		cmask, VBITS
-		shl		cmask, sindexl				; adjust cmask for unaligned search
+		shl		cmask, low					; adjust cmask for unaligned search
 		movdqa	echeck, [string]			; echeck = string[0]
 		pxor	pcheck, pcheck				; pcheck = 0
 		xor		pindex, pindex				; pindex = 0
 		mov		tsize, size					; tsize = size
 ;---[Pattern matching loop]----------------
-.loop1:	movdqa	pattern, [table + pindex]	; pattern = table[pindex]
+.loop1:	movdqa	pattern, [ptable + pindex]	; pattern = ptable[pindex]
 	pcmpeq#x	pattern, echeck				; check string[0] for symbol
 		por		pcheck, pattern				; add patern matching mask to pcheck
 		add		pindex, VSIZE				; pindex++
@@ -2347,7 +2365,7 @@ end if
 		xor		pindex, pindex				; pindex = 0
 		mov		tsize, size					; tsize = size
 ;---[Pattern matching loop]----------------
-.loop2:	movdqa	pattern, [table + pindex]	; pattern = table[pindex]
+.loop2:	movdqa	pattern, [ptable + pindex]	; pattern = ptable[pindex]
 	pcmpeq#x	pattern, echeck				; check string[1] for symbol
 		por		pcheck, pattern				; add patern matching mask to pcheck
 		add		pindex, VSIZE				; pindex++
@@ -2366,10 +2384,10 @@ end if
 ;---[End of vector loop]-------------------
 .brk:	lea		stack, [stack + size+space]	; restoring back the stack pointer
 		bsf		emask, emask				; find index of first occurence of eol
-		mov		sindex, VSIZE
-		sub		sindex, emask				; get count of tail elements
+		mov		shft, VSIZE
+		sub		shft, emask					; get count of tail elements
 		mov		cmask, VBITS
-		shr		cmask, sindexl				; adjust cmask for tail search
+		shr		cmask, low					; adjust cmask for tail search
 		and		fmask, cmask				; if pattern is found
 		popcnt	fmask, fmask				; get count of pattern matches
 		add		count, fmask				; count += mathes
@@ -2420,11 +2438,11 @@ preg	equ		rsi							; register which holds symbol
 vreg	equ		rdx							; register which holds value
 ;---[Internal variables]-------------------
 index	equ		rax							; index of first occurence of pattern
-sindex	equ		rcx							; string offset from vector boundary
-ptr		equ		r8							; temporary pointer to string
-emask	equ		r9							; result of eol search
-fmask	equ		r10							; result of pattern search
-addr	equ		r11							; return address
+table	equ		r8							; pointer to blending table
+ptr		equ		r9							; temporary pointer to string
+emask	equ		r10							; result of eol search
+fmask	equ		r11							; result of pattern search
+back	equ		table						; back address
 pcheck	equ		xmm0						; pattern check mask
 echeck	equ		xmm1						; eol check mask #1
 eol		equ		xmm2						; end of line
@@ -2452,15 +2470,16 @@ end if
 		clone	pattern, scale				; duplicate value through the entire register
 		movq	replace, vreg				; replace = value
 		clone	replace, scale				; duplicate value through the entire register
-		mov		sindex, string
-		and		sindex, VMASK				; get string offset from vector boundary
-		sub		string, sindex				; align pointer to vector boundary
+		mov		index, string
+		and		index, VMASK				; get string offset from vector boundary
+		sub		string, index				; align pointer to vector boundary
 		mov		ptr, string					; ptr = string
 		pxor	eol, eol					; eol = 0
 ;---[Unaligned search for pattern]---------
+		shl		index, VSCALE				; compute shift in mask array
+		lea		table, [maskA]				; set pointer to blending table
+		movdqa	cmask, [table + index]
 		xor		index, index				; index = 0
-		shl		sindex, VSCALE				; compute shift in mask array
-		movdqa	cmask, dqword [maskA + sindex]
 		movdqa	echeck, [string]			; echeck = string[0]
 		movdqa	pcheck, echeck				; pcheck = string[0]
 	pcmpeq#x	echeck, eol					; check string[0] for end of line
@@ -2469,7 +2488,7 @@ end if
 		pand	pcheck, cmask				; apply cmask to pattern search results
 		por		echeck, pcheck				; echeck |= pcheck
 	pmovmskb	emask, echeck				; save check results to emask
-		mov		addr, .back0				; save return address
+		lea		back, [.back0]				; save return address
 		and		emask, emask				; if eol or pattern is found
 		jnz		.brk						;     then break the loop
 .back0:	add		index, VSIZE				; index += VSIZE
@@ -2480,7 +2499,7 @@ end if
 	pcmpeq#x	pcheck, pattern				; check ptr[1] for symbol
 		por		echeck, pcheck				; echeck |= pcheck
 	pmovmskb	emask, echeck				; save check results to emask
-		mov		addr, .back1				; save return address
+		lea		back, [.back1]				; save return address
 		and		emask, emask				; if eol or pattern is found
 		jnz		.brk						;     then break the loop
 .back1:	add		index, VSIZE				; index += VSIZE
@@ -2490,7 +2509,7 @@ end if
 	pcmpeq#x	pcheck, pattern				; check ptr[2] for symbol
 		por		echeck, pcheck				; echeck |= pcheck
 	pmovmskb	emask, echeck				; save check results to emask
-		mov		addr, .back2				; save return address
+		lea		back, [.back2]				; save return address
 		and		emask, emask				; if eol or pattern is found
 		jnz		.brk						;     then break the loop
 .back2:	add		index, VSIZE				; index += VSIZE
@@ -2500,7 +2519,7 @@ end if
 	pcmpeq#x	pcheck, pattern				; check ptr[3] for symbol
 		por		echeck, pcheck				; echeck |= pcheck
 	pmovmskb	emask, echeck				; save check results to emask
-		mov		addr, .back3				; save return address
+		lea		back, [.back3]				; save return address
 		and		emask, emask				; if eol or pattern is found
 		jnz		.brk						;     then break the loop
 .back3:	add		index, VSIZE				; index += VSIZE
@@ -2510,7 +2529,7 @@ end if
 	pcmpeq#x	pcheck, pattern				; check ptr[4] for symbol
 		por		echeck, pcheck				; echeck |= pcheck
 	pmovmskb	emask, echeck				; save check results to emask
-		mov		addr, .back4				; save return address
+		lea		back, [.back4]				; save return address
 		and		emask, emask				; if eol or pattern is found
 		jnz		.brk						;     then break the loop
 .back4:	add		index, VSIZE				; index += VSIZE
@@ -2525,14 +2544,15 @@ end if
 		movdqa	echeck, [string + index]	; echeck = string[index]
 	pblendvb	echeck, replace
 		movdqa	[string + index], echeck	; string[index] = replace (echeck, pattern, value)
-		jmp		addr						; go back into the searching loop
+		jmp		back						; go back into the searching loop
 @@:		bsf		emask, emask				; find index of first occurence of eol
 		bsf		fmask, fmask				; find index of first occurence of pattern
 		jz		.exit						; if pattern is not found, then go to exit
 		cmp		fmask, emask				; if (index(pattern) > index (eol))
 		ja		.exit						;     then go to exit
 		shl		emask, VSCALE				; compute shift in mask array
-		pand	pcheck, dqword [maskB + emask]
+		lea		table, [maskB]				; set pointer to blending table
+		pand	pcheck, [table + emask]
 		movdqa	echeck, [string + index]	; echeck = string[index]
 	pblendvb	echeck, replace
 		movdqa	[string + index], echeck	; string[index] = replace (echeck, pattern, value)
@@ -2801,6 +2821,7 @@ tptr	equ		rcx							; pointer to temporary array of pointers to data
 size	equ		r8							; array size (count of elements)
 func	equ		r9							; pointer to string compare function
 ;---[Internal variables]-------------------
+fptr	equ		rax							; pointer to call external function
 stack	equ		rsp							; stack pointer
 s_array	equ		stack + 0 * 8				; stack position of "array" variable
 s_temp	equ		stack + 1 * 8				; stack position of "temp" variable
@@ -2845,13 +2866,15 @@ minsize	= 32								; min array size is aceptable for Merge sort
 		mov		param3, size
 		mov		param2, [s_ptr]
 		mov		param1, [s_tptr]
-		call	Copy						; call Copy (tptr, ptr, size / 2)
+		mov		fptr, Copy
+		call	fptr						; call Copy (tptr, ptr, size / 2)
 		mov		size, [s_size]				; get "size" variable from the stack
 		shr		size, 1						; size /= 2
 		mov		param3, size
 		mov		param2, [s_array]
 		mov		param1, [s_temp]
-		call	Copy						; call Copy (temp, array, size / 2)
+		mov		fptr, Copy
+		call	fptr						; call Copy (temp, array, size / 2)
 ;---[Merge sorted arrays]------------------
 		mov		array, [s_array]			; get "array" variable from the stack
 		mov		temp, [s_temp]				; get "temp" variable from the stack
@@ -2901,6 +2924,7 @@ size2	equ		r11							; size of second array
 func	equ		rax							; pointer to string compare function
 ;---[Internal variables]-------------------
 temp	equ		rax							; temporary register
+fptr	equ		rax							; pointer to call external function
 value	equ		r12							; pointer to source string
 ptr		equ		r13							; pointer to assigned string data
 stack	equ		rsp							; stack pointer
@@ -2995,25 +3019,29 @@ space	= 17 * 8							; stack size required by the procedure
 .copy1:	mov		param1, [s_tkey]
 		mov		param2, [s_skey2]
 		mov		param3, [s_size2]
-		call	Copy						; call Copy (tkey, skey2, size2)
+		mov		fptr, Copy
+		call	fptr						; call Copy (tkey, skey2, size2)
 		mov		param1, [s_tptr]
 		mov		param2, [s_sptr2]
 		mov		param3, [s_size2]
 		mov		value, [s_value]			; restore old value of "value" variable
 		mov		ptr, [s_ptr]				; restore old value of "ptr" variable
 		add		stack, space				; restoring back the stack pointe
-		jmp		Copy						; call Copy (tptr, sptr2, size2)
+		mov		fptr, Copy
+		jmp		fptr						; call Copy (tptr, sptr2, size2)
 .copy2:	mov		param1, [s_tkey]
 		mov		param2, [s_skey1]
 		mov		param3, [s_size1]
-		call	Copy						; call Copy (tkey, skey1, size1)
+		mov		fptr, Copy
+		call	fptr						; call Copy (tkey, skey1, size1)
 		mov		param1, [s_tptr]
 		mov		param2, [s_sptr1]
 		mov		param3, [s_size1]
 		mov		value, [s_value]			; restore old value of "value" variable
 		mov		ptr, [s_ptr]				; restore old value of "ptr" variable
 		add		stack, space				; restoring back the stack pointe
-		jmp		Copy						; call Copy (tptr, sptr1, size1)
+		mov		fptr, Copy
+		jmp		fptr						; call Copy (tptr, sptr1, size1)
 }
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 macro	MERGE_KEY	MergeFunc

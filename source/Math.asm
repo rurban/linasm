@@ -876,6 +876,10 @@ public	ArcCosH_flt32		as	'Math_ArcCosH_flt32'
 public	ArcCosH_flt64		as	'Math_ArcCosH_flt64'
 public	ArcCosH_flt32		as	'_ZN4Math7ArcCosHEf'
 public	ArcCosH_flt64		as	'_ZN4Math7ArcCosHEd'
+public	ArcCosHp1_flt32		as	'Math_ArcCosHp1_flt32'
+public	ArcCosHp1_flt64		as	'Math_ArcCosHp1_flt64'
+public	ArcCosHp1_flt32		as	'_ZN4Math9ArcCosHp1Ef'
+public	ArcCosHp1_flt64		as	'_ZN4Math9ArcCosHp1Ed'
 
 ;==============================================================================;
 ;       Inverse tangent                                                        ;
@@ -1011,647 +1015,6 @@ if x eq s
 		movd	reg1, reg2					; reg1 = reg2
 else if x eq d
 		movq	reg1, reg2					; reg1 = reg2
-end if
-}
-
-;******************************************************************************;
-;       Fast computation of polynomial value of degree 3                       ;
-;******************************************************************************;
-macro	SINGLE4	array, value, x
-{
-if x eq s
-		shufp#x	value, value, 0x0			; duplicate value through the entire register
-		movap#x	temp1, [array + 0 * VSIZE]	; temp1 = array[0]
-;---[Stage 1]------------------------------
-		movap#x	temp2, temp1
-		shufp#x	temp2, temp2, 0xE			; extract high result from temp1
-		mulp#x	temp1, value
-		addp#x	temp1, temp2				; temp1 = temp1 + temp2 * value
-		mulp#x	value, value				; value *= value
-;---[Stage 2]------------------------------
-		movap#x	temp2, temp1
-		shufp#x	temp2, temp2, 0x1			; extract high result from temp1
-		muls#x	temp1, value
-		adds#x	temp1, temp2				; temp1 = temp2 + temp1 * value
-else if x eq d
-		shufp#x	value, value, 0x0			; duplicate value through the entire register
-		movap#x	temp1, [array + 0 * VSIZE]	; temp1 = array[0]
-;---[Stage 1]------------------------------
-		mulp#x	temp1, value
-		addp#x	temp1, [array + 1 * VSIZE]	; temp1 = array[1] + array[0] * value
-		mulp#x	value, value				; value *= value
-;---[Stage 2]------------------------------
-		movap#x	temp2, temp1
-		shufp#x	temp2, temp2, 0x1			; extract high result from temp1
-		muls#x	temp1, value
-		adds#x	temp1, temp2				; temp1 = temp2 + temp1 * value
-end if
-}
-;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	PAIR4	array, value, x
-{
-if x eq s
-		shufp#x	value, value, 0x0			; duplicate value through the entire register
-		movap#x	temp1, [array + 0 * VSIZE]	; temp1 = array[0]
-		movap#x	temp2, [array + 1 * VSIZE]	; temp2 = array[1]
-;---[Stage 1]------------------------------
-		movap#x	temp3, temp1
-		shufp#x	temp3, temp3, 0xE			; extract high result from temp1
-		mulp#x	temp1, value
-		addp#x	temp1, temp3				; temp1 = temp1 + temp3 * value
-		movap#x	temp4, temp2
-		shufp#x	temp4, temp4, 0xE			; extract high result from temp2
-		mulp#x	temp2, value
-		addp#x	temp2, temp4				; temp2 = temp2 + temp4 * value
-		mulp#x	value, value				; value *= value
-;---[Stage 2]------------------------------
-		movap#x	temp3, temp1
-		shufp#x	temp3, temp3, 0x1			; extract high result from temp1
-		muls#x	temp1, value
-		adds#x	temp1, temp3				; temp1 = temp3 + temp1 * value
-		movap#x	temp4, temp2
-		shufp#x	temp4, temp4, 0x1			; extract high result from temp2
-		muls#x	temp2, value
-		adds#x	temp2, temp4				; temp2 = temp4 + temp2 * value
-else if x eq d
-		shufp#x	value, value, 0x0			; duplicate value through the entire register
-		movap#x	temp1, [array + 0 * VSIZE]	; temp1 = array[0]
-		movap#x	temp2, [array + 2 * VSIZE]	; temp2 = array[2]
-;---[Stage 1]------------------------------
-		mulp#x	temp1, value
-		addp#x	temp1, [array + 1 * VSIZE]	; temp1 = array[1] + array[0] * value
-		mulp#x	temp2, value
-		addp#x	temp2, [array + 3 * VSIZE]	; temp2 = array[3] + array[2] * value
-		mulp#x	value, value				; value *= value
-;---[Stage 2]------------------------------
-		movap#x	temp3, temp1
-		shufp#x	temp3, temp3, 0x1			; extract high result from temp1
-		muls#x	temp1, value
-		adds#x	temp1, temp3				; temp1 = temp3 + temp1 * value
-		movap#x	temp4, temp2
-		shufp#x	temp4, temp4, 0x1			; extract high result from temp2
-		muls#x	temp2, value
-		adds#x	temp2, temp4				; temp2 = temp4 + temp2 * value
-end if
-}
-
-;******************************************************************************;
-;       Fast computation of polynomial value of degree 7                       ;
-;******************************************************************************;
-macro	SINGLE8	array, value, x
-{
-if x eq s
-		shufp#x	value, value, 0x0			; duplicate value through the entire register
-		movap#x	temp1, [array + 0 * VSIZE]	; temp1 = array[0]
-;---[Stage 1]------------------------------
-		mulp#x	temp1, value
-		addp#x	temp1, [array + 1 * VSIZE]	; temp1 = array[1] + array[0] * value
-		mulp#x	value, value				; value *= value
-;---[Stage 2]------------------------------
-		movap#x	temp2, temp1
-		shufp#x	temp2, temp2, 0xE			; extract high result from temp1
-		mulp#x	temp1, value
-		addp#x	temp1, temp2				; temp1 = temp1 + temp2 * value
-		mulp#x	value, value				; value *= value
-;---[Stage 3]------------------------------
-		movap#x	temp2, temp1
-		shufp#x	temp2, temp2, 0x1			; extract high result from temp1
-		muls#x	temp1, value
-		adds#x	temp1, temp2				; temp1 = temp2 + temp1 * value
-else if x eq d
-		shufp#x	value, value, 0x0			; duplicate value through the entire register
-		movap#x	temp1, [array + 0 * VSIZE]	; temp1 = array[0]
-		movap#x	temp2, [array + 1 * VSIZE]	; temp2 = array[1]
-;---[Stage 1]------------------------------
-		mulp#x	temp1, value
-		addp#x	temp1, [array + 2 * VSIZE]	; temp1 = array[2] + array[0] * value
-		mulp#x	temp2, value
-		addp#x	temp2, [array + 3 * VSIZE]	; temp2 = array[3] + array[1] * value
-		mulp#x	value, value				; value *= value
-;---[Stage 2]------------------------------
-		mulp#x	temp1, value
-		addp#x	temp1, temp2				; temp1 = temp1 + temp2 * value
-		mulp#x	value, value				; value *= value
-;---[Stage 3]------------------------------
-		movap#x	temp2, temp1
-		shufp#x	temp2, temp2, 0x1			; extract high result from temp1
-		muls#x	temp1, value
-		adds#x	temp1, temp2				; temp1 = temp2 + temp1 * value
-end if
-}
-;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	PAIR8	array, value, x
-{
-if x eq s
-		shufp#x	value, value, 0x0			; duplicate value through the entire register
-		movap#x	temp1, [array + 0 * VSIZE]	; temp1 = array[0]
-		movap#x	temp2, [array + 2 * VSIZE]	; temp2 = array[2]
-;---[Stage 1]------------------------------
-		mulp#x	temp1, value
-		addp#x	temp1, [array + 1 * VSIZE]	; temp1 = array[1] + array[0] * value
-		mulp#x	temp2, value
-		addp#x	temp2, [array + 3 * VSIZE]	; temp2 = array[3] + array[2] * value
-		mulp#x	value, value				; value *= value
-;---[Stage 2]------------------------------
-		movap#x	temp3, temp1
-		shufp#x	temp3, temp3, 0xE			; extract high result from temp1
-		mulp#x	temp1, value
-		addp#x	temp1, temp3				; temp1 = temp1 + temp3 * value
-		movap#x	temp4, temp2
-		shufp#x	temp4, temp4, 0xE			; extract high result from temp2
-		mulp#x	temp2, value
-		addp#x	temp2, temp4				; temp2 = temp2 + temp4 * value
-		mulp#x	value, value				; value *= value
-;---[Stage 3]------------------------------
-		movap#x	temp3, temp1
-		shufp#x	temp3, temp3, 0x1			; extract high result from temp1
-		muls#x	temp1, value
-		adds#x	temp1, temp3				; temp1 = temp3 + temp1 * value
-		movap#x	temp4, temp2
-		shufp#x	temp4, temp4, 0x1			; extract high result from temp2
-		muls#x	temp2, value
-		adds#x	temp2, temp4				; temp2 = temp4 + temp2 * value
-else if x eq d
-		shufp#x	value, value, 0x0			; duplicate value through the entire register
-		movap#x	temp1, [array + 0 * VSIZE]	; temp1 = array[0]
-		movap#x	temp3, [array + 1 * VSIZE]	; temp3 = array[1]
-		movap#x	temp2, [array + 4 * VSIZE]	; temp2 = array[4]
-		movap#x	temp4, [array + 5 * VSIZE]	; temp4 = array[5]
-;---[Stage 1]------------------------------
-		mulp#x	temp1, value
-		addp#x	temp1, [array + 2 * VSIZE]	; temp1 = array[2] + array[0] * value
-		mulp#x	temp3, value
-		addp#x	temp3, [array + 3 * VSIZE]	; temp3 = array[3] + array[1] * value
-		mulp#x	temp2, value
-		addp#x	temp2, [array + 6 * VSIZE]	; temp2 = array[6] + array[4] * value
-		mulp#x	temp4, value
-		addp#x	temp4, [array + 7 * VSIZE]	; temp4 = array[7] + array[5] * value
-		mulp#x	value, value				; value *= value
-;---[Stage 2]------------------------------
-		mulp#x	temp1, value
-		addp#x	temp1, temp3				; temp1 = temp1 + temp3 * value
-		mulp#x	temp2, value
-		addp#x	temp2, temp4				; temp2 = temp2 + temp4 * value
-		mulp#x	value, value				; value *= value
-;---[Stage 3]------------------------------
-		movap#x	temp3, temp1
-		shufp#x	temp3, temp3, 0x1			; extract high result from temp1
-		muls#x	temp1, value
-		adds#x	temp1, temp3				; temp1 = temp3 + temp1 * value
-		movap#x	temp4, temp2
-		shufp#x	temp4, temp4, 0x1			; extract high result from temp2
-		muls#x	temp2, value
-		adds#x	temp2, temp4				; temp2 = temp4 + temp2 * value
-end if
-}
-
-;******************************************************************************;
-;       Fast computation of polynomial value of degree 15                      ;
-;******************************************************************************;
-macro	SINGLE16	array, value, x
-{
-if x eq s
-		shufp#x	value, value, 0x0			; duplicate value through the entire register
-		movap#x	temp1, [array + 0 * VSIZE]	; temp1 = array[0]
-		movap#x	temp2, [array + 1 * VSIZE]	; temp2 = array[1]
-;---[Stage 1]------------------------------
-		mulp#x	temp1, value
-		addp#x	temp1, [array + 2 * VSIZE]	; temp1 = array[2] + array[0] * value
-		mulp#x	temp2, value
-		addp#x	temp2, [array + 3 * VSIZE]	; temp2 = array[3] + array[1] * value
-		mulp#x	value, value				; value *= value
-;---[Stage 2]------------------------------
-		mulp#x	temp1, value
-		addp#x	temp1, temp2				; temp1 = temp1 + temp2 * value
-		mulp#x	value, value				; value *= value
-;---[Stage 3]------------------------------
-		movap#x	temp2, temp1
-		shufp#x	temp2, temp2, 0xE			; extract high result from temp1
-		mulp#x	temp1, value
-		addp#x	temp1, temp2				; temp1 = temp1 + temp2 * value
-		mulp#x	value, value				; value *= value
-;---[Stage 4]------------------------------
-		movap#x	temp2, temp1
-		shufp#x	temp2, temp2, 0x1			; extract high result from temp1
-		muls#x	temp1, value
-		adds#x	temp1, temp2				; temp1 = temp2 + temp1 * value
-else if x eq d
-		shufp#x	value, value, 0x0			; duplicate value through the entire register
-		movap#x	temp1, [array + 0 * VSIZE]	; temp1 = array[0]
-		movap#x	temp2, [array + 1 * VSIZE]	; temp2 = array[1]
-		movap#x	temp3, [array + 2 * VSIZE]	; temp3 = array[2]
-		movap#x	temp4, [array + 3 * VSIZE]	; temp4 = array[3]
-;---[Stage 1]------------------------------
-		mulp#x	temp1, value
-		addp#x	temp1, [array + 4 * VSIZE]	; temp1 = array[4] + array[0] * value
-		mulp#x	temp2, value
-		addp#x	temp2, [array + 5 * VSIZE]	; temp2 = array[5] + array[1] * value
-		mulp#x	temp3, value
-		addp#x	temp3, [array + 6 * VSIZE]	; temp3 = array[6] + array[2] * value
-		mulp#x	temp4, value
-		addp#x	temp4, [array + 7 * VSIZE]	; temp4 = array[7] + array[3] * value
-		mulp#x	value, value				; value *= value
-;---[Stage 2]------------------------------
-		mulp#x	temp1, value
-		addp#x	temp1, temp3				; temp1 = temp1 + temp3 * value
-		mulp#x	temp2, value
-		addp#x	temp2, temp4				; temp2 = temp2 + temp4 * value
-		mulp#x	value, value				; value *= value
-;---[Stage 3]------------------------------
-		mulp#x	temp1, value
-		addp#x	temp1, temp2				; temp1 = temp1 + temp2 * value
-		mulp#x	value, value				; value *= value
-;---[Stage 4]------------------------------
-		movap#x	temp2, temp1
-		shufp#x	temp2, temp2, 0x1			; extract high result from temp1
-		muls#x	temp1, value
-		adds#x	temp1, temp2				; temp1 = temp2 + temp1 * value
-end if
-}
-;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	PAIR16	array, value, x
-{
-if x eq s
-		shufp#x	value, value, 0x0			; duplicate value through the entire register
-		movap#x	temp1, [array + 0 * VSIZE]	; temp1 = array[0]
-		movap#x	temp3, [array + 1 * VSIZE]	; temp3 = array[1]
-		movap#x	temp2, [array + 4 * VSIZE]	; temp2 = array[4]
-		movap#x	temp4, [array + 5 * VSIZE]	; temp4 = array[5]
-;---[Stage 1]------------------------------
-		mulp#x	temp1, value
-		addp#x	temp1, [array + 2 * VSIZE]	; temp1 = array[2] + array[0] * value
-		mulp#x	temp3, value
-		addp#x	temp3, [array + 3 * VSIZE]	; temp3 = array[3] + array[1] * value
-		mulp#x	temp2, value
-		addp#x	temp2, [array + 6 * VSIZE]	; temp2 = array[6] + array[4] * value
-		mulp#x	temp4, value
-		addp#x	temp4, [array + 7 * VSIZE]	; temp4 = array[7] + array[5] * value
-		mulp#x	value, value				; value *= value
-;---[Stage 2]------------------------------
-		mulp#x	temp1, value
-		addp#x	temp1, temp3				; temp1 = temp1 + temp3 * value
-		mulp#x	temp2, value
-		addp#x	temp2, temp4				; temp2 = temp2 + temp4 * value
-		mulp#x	value, value				; value *= value
-;---[Stage 3]------------------------------
-		movap#x	temp3, temp1
-		shufp#x	temp3, temp3, 0xE			; extract high result from temp1
-		mulp#x	temp1, value
-		addp#x	temp1, temp3				; temp1 = temp1 + temp3 * value
-		movap#x	temp4, temp2
-		shufp#x	temp4, temp4, 0xE			; extract high result from temp2
-		mulp#x	temp2, value
-		addp#x	temp2, temp4				; temp2 = temp2 + temp4 * value
-		mulp#x	value, value				; value *= value
-;---[Stage 4]------------------------------
-		movap#x	temp3, temp1
-		shufp#x	temp3, temp3, 0x1			; extract high result from temp1
-		muls#x	temp1, value
-		adds#x	temp1, temp3				; temp1 = temp3 + temp1 * value
-		movap#x	temp4, temp2
-		shufp#x	temp4, temp4, 0x1			; extract high result from temp2
-		muls#x	temp2, value
-		adds#x	temp2, temp4				; temp2 = temp4 + temp2 * value
-else if x eq d
-		shufp#x	value, value, 0x0			; duplicate value through the entire register
-		movap#x	temp1, [array + 0 * VSIZE]	; temp1 = array[0]
-		movap#x	temp3, [array + 1 * VSIZE]	; temp3 = array[1]
-		movap#x	temp5, [array + 2 * VSIZE]	; temp5 = array[2]
-		movap#x	temp7, [array + 3 * VSIZE]	; temp7 = array[3]
-		movap#x	temp2, [array + 8 * VSIZE]	; temp2 = array[8]
-		movap#x	temp4, [array + 9 * VSIZE]	; temp4 = array[9]
-		movap#x	temp6, [array + 10 * VSIZE]	; temp6 = array[10]
-		movap#x	temp8, [array + 11 * VSIZE]	; temp8 = array[11]
-;---[Stage 1]------------------------------
-		mulp#x	temp1, value
-		addp#x	temp1, [array + 4 * VSIZE]	; temp1 = array[4] + array[0] * value
-		mulp#x	temp3, value
-		addp#x	temp3, [array + 5 * VSIZE]	; temp3 = array[5] + array[1] * value
-		mulp#x	temp5, value
-		addp#x	temp5, [array + 6 * VSIZE]	; temp5 = array[6] + array[2] * value
-		mulp#x	temp7, value
-		addp#x	temp7, [array + 7 * VSIZE]	; temp7 = array[7] + array[3] * value
-		mulp#x	temp2, value
-		addp#x	temp2, [array + 12 * VSIZE]	; temp2 = array[12] + array[8] * value
-		mulp#x	temp4, value
-		addp#x	temp4, [array + 13 * VSIZE]	; temp4 = array[13] + array[9] * value
-		mulp#x	temp6, value
-		addp#x	temp6, [array + 14 * VSIZE]	; temp6 = array[14] + array[10] * value
-		mulp#x	temp8, value
-		addp#x	temp8, [array + 15 * VSIZE]	; temp8 = array[15] + array[11] * value
-		mulp#x	value, value				; value *= value
-;---[Stage 2]------------------------------
-		mulp#x	temp1, value
-		addp#x	temp1, temp5				; temp1 = temp1 + temp5 * value
-		mulp#x	temp3, value
-		addp#x	temp3, temp7				; temp3 = temp3 + temp7 * value
-		mulp#x	temp2, value
-		addp#x	temp2, temp6				; temp2 = temp2 + temp6 * value
-		mulp#x	temp4, value
-		addp#x	temp4, temp8				; temp4 = temp4 + temp8 * value
-		mulp#x	value, value				; value *= value
-;---[Stage 3]------------------------------
-		mulp#x	temp1, value
-		addp#x	temp1, temp3				; temp1 = temp1 + temp3 * value
-		mulp#x	temp2, value
-		addp#x	temp2, temp4				; temp2 = temp2 + temp4 * value
-		mulp#x	value, value				; value *= value
-;---[Stage 4]------------------------------
-		movap#x	temp3, temp1
-		shufp#x	temp3, temp3, 0x1			; extract high result from temp1
-		muls#x	temp1, value
-		adds#x	temp1, temp3				; temp1 = temp3 + temp1 * value
-		movap#x	temp4, temp2
-		shufp#x	temp4, temp4, 0x1			; extract high result from temp2
-		muls#x	temp2, value
-		adds#x	temp2, temp4				; temp2 = temp4 + temp2 * value
-end if
-}
-
-;******************************************************************************;
-;       Fast computation of polynomial value of degree 31                      ;
-;******************************************************************************;
-macro	SINGLE32	array, value, x
-{
-if x eq s
-		shufp#x	value, value, 0x0			; duplicate value through the entire register
-		movap#x	temp1, [array + 0 * VSIZE]	; temp1 = array[0]
-		movap#x	temp2, [array + 1 * VSIZE]	; temp2 = array[1]
-		movap#x	temp3, [array + 2 * VSIZE]	; temp3 = array[2]
-		movap#x	temp4, [array + 3 * VSIZE]	; temp4 = array[3]
-;---[Stage 1]------------------------------
-		mulp#x	temp1, value
-		addp#x	temp1, [array + 4 * VSIZE]	; temp1 = array[4] + array[0] * value
-		mulp#x	temp2, value
-		addp#x	temp2, [array + 5 * VSIZE]	; temp2 = array[5] + array[1] * value
-		mulp#x	temp3, value
-		addp#x	temp3, [array + 6 * VSIZE]	; temp3 = array[6] + array[2] * value
-		mulp#x	temp4, value
-		addp#x	temp4, [array + 7 * VSIZE]	; temp4 = array[7] + array[3] * value
-		mulp#x	value, value				; value *= value
-;---[Stage 2]------------------------------
-		mulp#x	temp1, value
-		addp#x	temp1, temp3				; temp1 = temp1 + temp3 * value
-		mulp#x	temp2, value
-		addp#x	temp2, temp4				; temp2 = temp2 + temp4 * value
-		mulp#x	value, value				; value *= value
-;---[Stage 3]------------------------------
-		mulp#x	temp1, value
-		addp#x	temp1, temp2				; temp1 = temp1 + temp2 * value
-		mulp#x	value, value				; value *= value
-;---[Stage 4]------------------------------
-		movap#x	temp2, temp1
-		shufp#x	temp2, temp2, 0xE			; extract high result from temp1
-		mulp#x	temp1, value
-		addp#x	temp1, temp2				; temp1 = temp1 + temp2 * value
-		mulp#x	value, value				; value *= value
-;---[Stage 5]------------------------------
-		movap#x	temp2, temp1
-		shufp#x	temp2, temp2, 0x1			; extract high result from temp1
-		muls#x	temp1, value
-		adds#x	temp1, temp2				; temp1 = temp2 + temp1 * value
-else if x eq d
-		shufp#x	value, value, 0x0			; duplicate value through the entire register
-		movap#x	temp1, [array + 0 * VSIZE]	; temp1 = array[0]
-		movap#x	temp2, [array + 1 * VSIZE]	; temp2 = array[1]
-		movap#x	temp3, [array + 2 * VSIZE]	; temp3 = array[2]
-		movap#x	temp4, [array + 3 * VSIZE]	; temp4 = array[3]
-		movap#x	temp5, [array + 4 * VSIZE]	; temp5 = array[4]
-		movap#x	temp6, [array + 5 * VSIZE]	; temp6 = array[5]
-		movap#x	temp7, [array + 6 * VSIZE]	; temp7 = array[6]
-		movap#x	temp8, [array + 7 * VSIZE]	; temp8 = array[7]
-;---[Stage 1]------------------------------
-		mulp#x	temp1, value
-		addp#x	temp1, [array + 8 * VSIZE]	; temp1 = array[8] + array[0] * value
-		mulp#x	temp2, value
-		addp#x	temp2, [array + 9 * VSIZE]	; temp2 = array[9] + array[1] * value
-		mulp#x	temp3, value
-		addp#x	temp3, [array + 10 * VSIZE]	; temp3 = array[10] + array[2] * value
-		mulp#x	temp4, value
-		addp#x	temp4, [array + 11 * VSIZE]	; temp4 = array[11] + array[3] * value
-		mulp#x	temp5, value
-		addp#x	temp5, [array + 12 * VSIZE]	; temp5 = array[12] + array[4] * value
-		mulp#x	temp6, value
-		addp#x	temp6, [array + 13 * VSIZE]	; temp6 = array[13] + array[5] * value
-		mulp#x	temp7, value
-		addp#x	temp7, [array + 14 * VSIZE]	; temp7 = array[14] + array[6] * value
-		mulp#x	temp8, value
-		addp#x	temp8, [array + 15 * VSIZE]	; temp8 = array[15] + array[7] * value
-		mulp#x	value, value				; value *= value
-;---[Stage 2]------------------------------
-		mulp#x	temp1, value
-		addp#x	temp1, temp5				; temp1 = temp1 + temp5 * value
-		mulp#x	temp2, value
-		addp#x	temp2, temp6				; temp2 = temp2 + temp6 * value
-		mulp#x	temp3, value
-		addp#x	temp3, temp7				; temp3 = temp3 + temp7 * value
-		mulp#x	temp4, value
-		addp#x	temp4, temp8				; temp4 = temp4 + temp8 * value
-		mulp#x	value, value				; value *= value
-;---[Stage 3]------------------------------
-		mulp#x	temp1, value
-		addp#x	temp1, temp3				; temp1 = temp1 + temp3 * value
-		mulp#x	temp2, value
-		addp#x	temp2, temp4				; temp2 = temp2 + temp4 * value
-		mulp#x	value, value				; value *= value
-;---[Stage 4]------------------------------
-		mulp#x	temp1, value
-		addp#x	temp1, temp2				; temp1 = temp1 + temp2 * value
-		mulp#x	value, value				; value *= value
-;---[Stage 5]------------------------------
-		movap#x	temp2, temp1
-		shufp#x	temp2, temp2, 0x1			; extract high result from temp1
-		muls#x	temp1, value
-		adds#x	temp1, temp2				; temp1 = temp2 + temp1 * value
-end if
-}
-
-;******************************************************************************;
-;       Fast computation of polynomial value of degree 63                      ;
-;******************************************************************************;
-macro	SINGLE64	array, value, x
-{
-if x eq s
-		shufp#x	value, value, 0x0			; duplicate value through the entire register
-		movap#x	temp1, [array + 0 * VSIZE]	; temp1 = array[0]
-		movap#x	temp2, [array + 1 * VSIZE]	; temp2 = array[1]
-		movap#x	temp3, [array + 2 * VSIZE]	; temp3 = array[2]
-		movap#x	temp4, [array + 3 * VSIZE]	; temp4 = array[3]
-		movap#x	temp5, [array + 4 * VSIZE]	; temp5 = array[4]
-		movap#x	temp6, [array + 5 * VSIZE]	; temp6 = array[5]
-		movap#x	temp7, [array + 6 * VSIZE]	; temp7 = array[6]
-		movap#x	temp8, [array + 7 * VSIZE]	; temp8 = array[7]
-;---[Stage 1]------------------------------
-		mulp#x	temp1, value
-		addp#x	temp1, [array + 8 * VSIZE]	; temp1 = array[8] + array[0] * value
-		mulp#x	temp2, value
-		addp#x	temp2, [array + 9 * VSIZE]	; temp2 = array[9] + array[1] * value
-		mulp#x	temp3, value
-		addp#x	temp3, [array + 10 * VSIZE]	; temp3 = array[10] + array[2] * value
-		mulp#x	temp4, value
-		addp#x	temp4, [array + 11 * VSIZE]	; temp4 = array[11] + array[3] * value
-		mulp#x	temp5, value
-		addp#x	temp5, [array + 12 * VSIZE]	; temp5 = array[12] + array[4] * value
-		mulp#x	temp6, value
-		addp#x	temp6, [array + 13 * VSIZE]	; temp6 = array[13] + array[5] * value
-		mulp#x	temp7, value
-		addp#x	temp7, [array + 14 * VSIZE]	; temp7 = array[14] + array[6] * value
-		mulp#x	temp8, value
-		addp#x	temp8, [array + 15 * VSIZE]	; temp8 = array[15] + array[7] * value
-		mulp#x	value, value				; value *= value
-;---[Stage 2]------------------------------
-		mulp#x	temp1, value
-		addp#x	temp1, temp5				; temp1 = temp1 + temp5 * value
-		mulp#x	temp2, value
-		addp#x	temp2, temp6				; temp2 = temp2 + temp6 * value
-		mulp#x	temp3, value
-		addp#x	temp3, temp7				; temp3 = temp3 + temp7 * value
-		mulp#x	temp4, value
-		addp#x	temp4, temp8				; temp4 = temp4 + temp8 * value
-		mulp#x	value, value				; value *= value
-;---[Stage 3]------------------------------
-		mulp#x	temp1, value
-		addp#x	temp1, temp3				; temp1 = temp1 + temp3 * value
-		mulp#x	temp2, value
-		addp#x	temp2, temp4				; temp2 = temp2 + temp4 * value
-		mulp#x	value, value				; value *= value
-;---[Stage 4]------------------------------
-		mulp#x	temp1, value
-		addp#x	temp1, temp2				; temp1 = temp1 + temp2 * value
-		mulp#x	value, value				; value *= value
-;---[Stage 5]------------------------------
-		movap#x	temp2, temp1
-		shufp#x	temp2, temp2, 0xE			; extract high result from temp1
-		mulp#x	temp1, value
-		addp#x	temp1, temp2				; temp1 = temp1 + temp2 * value
-		mulp#x	value, value				; value *= value
-;---[Stage 6]------------------------------
-		movap#x	temp2, temp1
-		shufp#x	temp2, temp2, 0x1			; extract high result from temp1
-		muls#x	temp1, value
-		adds#x	temp1, temp2				; temp1 = temp2 + temp1 * value
-else if x eq d
-stack	equ		rsp							; stack pointer
-		sub		stack, 264					; reserving stack size for local vars
-		shufp#x	value, value, 0x0			; duplicate value through the entire register
-;---[Stage 1]------------------------------
-		movap#x	temp1, [array + 0 * VSIZE]	; temp1 = array[0]
-		movap#x	temp2, [array + 1 * VSIZE]	; temp2 = array[1]
-		movap#x	temp3, [array + 2 * VSIZE]	; temp3 = array[2]
-		movap#x	temp4, [array + 3 * VSIZE]	; temp4 = array[3]
-		movap#x	temp5, [array + 4 * VSIZE]	; temp5 = array[4]
-		movap#x	temp6, [array + 5 * VSIZE]	; temp6 = array[5]
-		movap#x	temp7, [array + 6 * VSIZE]	; temp7 = array[6]
-		movap#x	temp8, [array + 7 * VSIZE]	; temp8 = array[7]
-		mulp#x	temp1, value
-		addp#x	temp1, [array + 16 * VSIZE]	; temp1 = array[16] + array[0] * value
-		movap#x	[stack + 0 * VSIZE], temp1	; stack[0] = temp1
-		mulp#x	temp2, value
-		addp#x	temp2, [array + 17 * VSIZE]	; temp2 = array[17] + array[1] * value
-		movap#x	[stack + 1 * VSIZE], temp2	; stack[1] = temp2
-		mulp#x	temp3, value
-		addp#x	temp3, [array + 18 * VSIZE]	; temp3 = array[18] + array[2] * value
-		movap#x	[stack + 2 * VSIZE], temp3	; stack[2] = temp3
-		mulp#x	temp4, value
-		addp#x	temp4, [array + 19 * VSIZE]	; temp4 = array[19] + array[3] * value
-		movap#x	[stack + 3 * VSIZE], temp4	; stack[3] = temp4
-		mulp#x	temp5, value
-		addp#x	temp5, [array + 20 * VSIZE]	; temp5 = array[20] + array[4] * value
-		movap#x	[stack + 4 * VSIZE], temp5	; stack[4] = temp5
-		mulp#x	temp6, value
-		addp#x	temp6, [array + 21 * VSIZE]	; temp6 = array[21] + array[5] * value
-		movap#x	[stack + 5 * VSIZE], temp6	; stack[5] = temp6
-		mulp#x	temp7, value
-		addp#x	temp7, [array + 22 * VSIZE]	; temp7 = array[22] + array[6] * value
-		movap#x	[stack + 6 * VSIZE], temp7	; stack[6] = temp7
-		mulp#x	temp8, value
-		addp#x	temp8, [array + 23 * VSIZE]	; temp8 = array[23] + array[7] * value
-		movap#x	[stack + 7 * VSIZE], temp8	; stack[7] = temp8
-		movap#x	temp1, [array + 8 * VSIZE]	; temp1 = array[8]
-		movap#x	temp2, [array + 9 * VSIZE]	; temp2 = array[9]
-		movap#x	temp3, [array + 10 * VSIZE]	; temp3 = array[10]
-		movap#x	temp4, [array + 11 * VSIZE]	; temp4 = array[11]
-		movap#x	temp5, [array + 12 * VSIZE]	; temp5 = array[12]
-		movap#x	temp6, [array + 13 * VSIZE]	; temp6 = array[13]
-		movap#x	temp7, [array + 14 * VSIZE]	; temp7 = array[14]
-		movap#x	temp8, [array + 15 * VSIZE]	; temp8 = array[15]
-		mulp#x	temp1, value
-		addp#x	temp1, [array + 24 * VSIZE]	; temp1 = array[24] + array[8] * value
-		movap#x	[stack + 8 * VSIZE], temp1	; stack[8] = temp1
-		mulp#x	temp2, value
-		addp#x	temp2, [array + 25 * VSIZE]	; temp2 = array[25] + array[9] * value
-		movap#x	[stack + 9 * VSIZE], temp2	; stack[9] = temp2
-		mulp#x	temp3, value
-		addp#x	temp3, [array + 26 * VSIZE]	; temp3 = array[26] + array[10] * value
-		movap#x	[stack + 10 * VSIZE], temp3	; stack[10] = temp3
-		mulp#x	temp4, value
-		addp#x	temp4, [array + 27 * VSIZE]	; temp4 = array[27] + array[11] * value
-		movap#x	[stack + 11 * VSIZE], temp4	; stack[11] = temp4
-		mulp#x	temp5, value
-		addp#x	temp5, [array + 28 * VSIZE]	; temp5 = array[28] + array[12] * value
-		movap#x	[stack + 12 * VSIZE], temp5	; stack[12] = temp5
-		mulp#x	temp6, value
-		addp#x	temp6, [array + 29 * VSIZE]	; temp6 = array[29] + array[13] * value
-		movap#x	[stack + 13 * VSIZE], temp6	; stack[13] = temp6
-		mulp#x	temp7, value
-		addp#x	temp7, [array + 30 * VSIZE]	; temp7 = array[30] + array[14] * value
-		movap#x	[stack + 14 * VSIZE], temp7	; stack[14] = temp7
-		mulp#x	temp8, value
-		addp#x	temp8, [array + 31 * VSIZE]	; temp8 = array[31] + array[15] * value
-		movap#x	[stack + 15 * VSIZE], temp8	; stack[15] = temp8
-		mulp#x	value, value				; value *= value
-		movap#x	temp1, [stack + 0 * VSIZE]	; temp1 = stack[0]
-		movap#x	temp2, [stack + 1 * VSIZE]	; temp2 = stack[1]
-		movap#x	temp3, [stack + 2 * VSIZE]	; temp3 = stack[2]
-		movap#x	temp4, [stack + 3 * VSIZE]	; temp4 = stack[3]
-		movap#x	temp5, [stack + 4 * VSIZE]	; temp5 = stack[4]
-		movap#x	temp6, [stack + 5 * VSIZE]	; temp6 = stack[5]
-		movap#x	temp7, [stack + 6 * VSIZE]	; temp7 = stack[6]
-		movap#x	temp8, [stack + 7 * VSIZE]	; temp8 = stack[7]
-;---[Stage 2]------------------------------
-		mulp#x	temp1, value
-		addp#x	temp1, [stack + 8 * VSIZE]	; temp1 = stack[8] + stack[0] * value
-		mulp#x	temp2, value
-		addp#x	temp2, [stack + 9 * VSIZE]	; temp2 = stack[9] + stack[1] * value
-		mulp#x	temp3, value
-		addp#x	temp3, [stack + 10 * VSIZE]	; temp3 = stack[10] + stack[2] * value
-		mulp#x	temp4, value
-		addp#x	temp4, [stack + 11 * VSIZE]	; temp4 = stack[11] + stack[3] * value
-		mulp#x	temp5, value
-		addp#x	temp5, [stack + 12 * VSIZE]	; temp5 = stack[12] + stack[4] * value
-		mulp#x	temp6, value
-		addp#x	temp6, [stack + 13 * VSIZE]	; temp6 = stack[13] + stack[5] * value
-		mulp#x	temp7, value
-		addp#x	temp7, [stack + 14 * VSIZE]	; temp7 = stack[14] + stack[6] * value
-		mulp#x	temp8, value
-		addp#x	temp8, [stack + 15 * VSIZE]	; temp8 = stack[15] + stack[7] * value
-		mulp#x	value, value				; value *= value
-		add		stack, 264					; restoring back the stack pointer
-;---[Stage 3]------------------------------
-		mulp#x	temp1, value
-		addp#x	temp1, temp5				; temp1 = temp1 + temp5 * value
-		mulp#x	temp2, value
-		addp#x	temp2, temp6				; temp2 = temp2 + temp6 * value
-		mulp#x	temp3, value
-		addp#x	temp3, temp7				; temp3 = temp3 + temp7 * value
-		mulp#x	temp4, value
-		addp#x	temp4, temp8				; temp4 = temp4 + temp8 * value
-		mulp#x	value, value				; value *= value
-;---[Stage 4]------------------------------
-		mulp#x	temp1, value
-		addp#x	temp1, temp3				; temp1 = temp1 + temp3 * value
-		mulp#x	temp2, value
-		addp#x	temp2, temp4				; temp2 = temp2 + temp4 * value
-		mulp#x	value, value				; value *= value
-;---[Stage 5]------------------------------
-		mulp#x	temp1, value
-		addp#x	temp1, temp2				; temp1 = temp1 + temp2 * value
-		mulp#x	value, value				; value *= value
-;---[Stage 6]------------------------------
-		movap#x	temp2, temp1
-		shufp#x	temp2, temp2, 0x1			; extract high result from temp1
-		muls#x	temp1, value
-		adds#x	temp1, temp2				; temp1 = temp2 + temp1 * value
 end if
 }
 
@@ -2422,13 +1785,13 @@ scale	equ		xmm1						; scale value
 if x eq s
 mbits	= MBITS_FLT32						; count of bits into mantissa
 bias	= EBIAS_FLT32						; exponent bias
-svalue1	= 0x7F000000						; 2^+127
-svalue2	= 0x00800000						; 2^-126
+sclval1	= 0x7F000000						; 2^+127
+sclval2	= 0x00800000						; 2^-126
 else if x eq d
 mbits	= MBITS_FLT64						; count of bits into mantissa
 bias	= EBIAS_FLT64						; exponent bias
-svalue1	= 0x7FE0000000000000				; 2^+1023
-svalue2	= 0x0008000000000000				; 2^-1022
+sclval1	= 0x7FE0000000000000				; 2^+1023
+sclval2	= 0x0008000000000000				; 2^-1022
 end if
 minpow	= 1 - bias							; min power of 2
 maxpow	= bias								; max power of 2
@@ -2445,7 +1808,7 @@ maxpow	= bias								; max power of 2
 		muls#x	value, scale				; return (value * scale)
 		ret
 ;---[Correcting positive power]------------
-.pcorr:	initreg	scale, treg, svalue1		; scale = svalue1
+.pcorr:	initreg	scale, treg, sclval1		; scale = sclval1
 		sub		temp, maxpow				; temp -= maxpow
 		muls#x	value, scale				; value *= scale
 		cmp		temp, maxpow				; if (temp <= maxpow)
@@ -2465,7 +1828,7 @@ maxpow	= bias								; max power of 2
 		muls#x	value, scale				; return (value * scale)
 		ret
 ;---[Correcting negative power]------------
-.ncorr:	initreg	scale, treg, svalue2		; scale = svalue2
+.ncorr:	initreg	scale, treg, sclval2		; scale = sclval2
 		sub		temp, minpow				; temp -= minpow
 		muls#x	value, scale				; value *= scale
 		cmp		temp, minpow				; if (temp >= minpow)
@@ -2490,37 +1853,39 @@ value	equ		xmm0						; value to scale
 exp		equ		di							; exponent value
 ;---[Internal variables]-------------------
 treg	equ		rax							; temporary register
-index	equ		rdi							; index register
+table	equ		rdx							; pointer to table of 10 powers
+index	equ		rcx							; index register
 scale	equ		xmm1						; scale value
 if x eq s
-ten		= ten_flt32							; table of integer powers of 10^x
-svalue1	= 0x7E967699						; 10^+38
-svalue2	= 0x02081CEA						; 10^-37
+tent	= ten_flt32							; table of integer powers of 10^x
+sclval1	= 0x7E967699						; 10^+38
+sclval2	= 0x02081CEA						; 10^-37
 shift	= 46								; shift value
 minpow	= -37								; min power of 10
 maxpow	= +38								; max power of 10
 bytes	= 4									; array element size (bytes)
 else if x eq d
-ten		= ten_flt64							; table of integer powers of 10^x
-svalue1	= 0x7FE1CCF385EBC8A0				; 10^+308
-svalue2	= 0x0031FA182C40C60D				; 10^-307
+tent	= ten_flt64							; table of integer powers of 10^x
+sclval1	= 0x7FE1CCF385EBC8A0				; 10^+308
+sclval2	= 0x0031FA182C40C60D				; 10^-307
 shift	= 324								; shift value
 minpow	= -307								; min power of 10
 maxpow	= +308								; max power of 10
 bytes	= 8									; array element size (bytes)
 end if
 ;------------------------------------------
+		lea		table, [tent]				; set pointer to table of 10 powers
 		movsx	index, exp					; index = exp
 		test	index, index				; if (index < 0)
 		js		.neg						;     then go to negative exponent branch
 ;---[Positive exponent branch]-------------
 		cmp		index, maxpow				; if (index > maxpow)
 		jg		.pcorr						;     then correct the exponent
-@@:		movs#x	scale, [ten + index * bytes + shift * bytes]
+@@:		movs#x	scale, [table + index * bytes + shift * bytes]
 		muls#x	value, scale				; return (value * scale)
 		ret
 ;---[Correcting positive power]------------
-.pcorr:	initreg	scale, treg, svalue1		; scale = svalue1
+.pcorr:	initreg	scale, treg, sclval1		; scale = sclval1
 		sub		index, maxpow				; index -= maxpow
 		muls#x	value, scale				; value *= scale
 		cmp		index, maxpow				; if (index <= maxpow)
@@ -2534,11 +1899,11 @@ end if
 ;---[Negative exponent branch]-------------
 .neg:	cmp		index, minpow				; if (index < minpow)
 		jl		.ncorr						;     then correct the exponent
-@@:		movs#x	scale, [ten + index * bytes + shift * bytes]
+@@:		movs#x	scale, [table + index * bytes + shift * bytes]
 		muls#x	value, scale				; return (value * scale)
 		ret
 ;---[Correcting negative power]------------
-.ncorr:	initreg	scale, treg, svalue2		; scale = svalue2
+.ncorr:	initreg	scale, treg, sclval2		; scale = sclval2
 		sub		index, minpow				; index -= minpow
 		muls#x	value, scale				; value *= scale
 		cmp		index, minpow				; if (index >= minpow)
@@ -2572,6 +1937,7 @@ scale	equ		xmm6						; scale value
 base	equ		xmm7						; base value
 shift	equ		xmm8						; shift value
 result	equ		xmm0						; result register
+table	equ		treg						; pointer to array of coefficients
 stack	equ		rsp							; stack pointer
 fpart	equ		stack - 1 * 8				; stack position of "fpart" variable
 ipart	equ		stack - 2 * 8				; stack position of "ipart" variable
@@ -2653,10 +2019,11 @@ end if
 		movap#x	scale, result
 		muls#x	scale, scale				; scale = result * result
 		movap#x	base, result				; base = result
+		lea		table, [expt]				; set pointer to array of coefficients
 if x eq s
-	SINGLE8		expt, result, x				; compute single polynomial value
+	SINGLE8		table, result, x			; compute single polynomial value
 else if x eq d
-	SINGLE16	expt, result, x				; compute single polynomial value
+	SINGLE16	table, result, x			; compute single polynomial value
 end if
 		muls#x	temp1, scale
 		adds#x	temp1, base					; temp1 = base + scale * temp1
@@ -2779,35 +2146,39 @@ Exp10i_int:
 exp		equ		dil							; exponent value
 ;---[Internal variables]-------------------
 result	equ		rax							; result register
-index	equ		rdi							; index register
-temp	equ		rdx							; temporary register
+table	equ		rdx							; pointer to table of 10 powers
+index	equ		rcx							; index register
+temp	equ		rax							; temporary register
 maxval	= 20								; max exponent value
 ;------------------------------------------
+		lea		table, [ten_int]			; set pointer to table of 10 powers
 		movzx	index, exp					; index = exp
 		mov		temp, maxval				; temp = max exponent value
 		cmp		index, maxval				; if (index > max)
 		cmova	index, temp					;     index = max
-		mov		result, [ten_int + index * 8]; return ten_int [index]
+		mov		result, [table + index * 8]	; return exp [index]
 		ret
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 macro	EXP10I	exp, x
 {
 ;---[Internal variables]-------------------
 result	equ		xmm0						; result register
-index	equ		rdi							; index register
-temp	equ		rdx							; temporary register
+table	equ		rdx							; pointer to table of 10 powers
+index	equ		rcx							; index register
+temp	equ		rax							; temporary register
 if x eq s
-ten		= ten_flt32							; table of integer powers of 10^x
+tent	= ten_flt32							; table of integer powers of 10^x
 minpow	= -46								; min power of 10
 maxpow	= +39								; max power of 10
 bytes	= 4									; array element size (bytes)
 else if x eq d
-ten		= ten_flt64							; table of integer powers of 10^x
+tent	= ten_flt64							; table of integer powers of 10^x
 minpow	= -324								; min power of 10
 maxpow	= +309								; max power of 10
 bytes	= 8									; array element size (bytes)
 end if
 ;------------------------------------------
+		lea		table, [tent]				; set pointer to table of 10 powers
 		movsx	index, exp					; index = exp
 		mov		temp, maxpow
 		cmp		index, maxpow				; if (index > maxpow)
@@ -2815,7 +2186,7 @@ end if
 		mov		temp, minpow
 		cmp		index, minpow				; if (index > minpow)
 		cmovl	index, temp					;     index = minpow
-		movs#x	result, [ten + index * bytes - minpow * bytes]
+		movs#x	result, [table + index * bytes - minpow * bytes]
 		ret									; result = exp[index]
 }
 Exp10i_flt32:	EXP10I	dil, s
@@ -2982,6 +2353,7 @@ scale	equ		xmm6						; scale value
 base	equ		xmm7						; base value
 shift	equ		xmm8						; shift value
 result	equ		xmm0						; result register
+table	equ		treg						; pointer to array of coefficients
 stack	equ		rsp							; stack pointer
 fpart	equ		stack - 1 * 8				; stack position of "fpart" variable
 ipart	equ		stack - 2 * 8				; stack position of "ipart" variable
@@ -3080,10 +2452,11 @@ end if
 		movap#x	scale, result
 		muls#x	scale, scale				; scale = result * result
 		movap#x	base, result				; base = result
+		lea		table, [expt]				; set pointer to array of coefficients
 if x eq s
-	SINGLE8		expt, result, x				; compute single polynomial value
+	SINGLE8		table, result, x			; compute single polynomial value
 else if x eq d
-	SINGLE16	expt, result, x				; compute single polynomial value
+	SINGLE16	table, result, x			; compute single polynomial value
 end if
 		muls#x	temp1, scale
 		adds#x	temp1, base					; temp1 = base + scale * temp1
@@ -3177,6 +2550,7 @@ mask2	equ		temp4						; mask value #2
 max		equ		temp5						; max value
 half	equ		temp6						; 0.5
 one		equ		temp7						; 1.0
+table	equ		treg						; pointer to array of coefficients
 if x eq s
 emask	= EMASK_FLT32						; exponent mask
 mmask	= MMASK_FLT32						; mantissa mask
@@ -3248,10 +2622,11 @@ end if
 		muls#x	shift, escale				; shift *= escale
 		movap#x	scale, result
 		muls#x	scale, scale				; scale = result * result
+		lea		table, [logt]				; set pointer to array of coefficients
 if x eq s
-	SINGLE16	logt, result, x				; compute single polynomial value
+	SINGLE16	table, result, x			; compute single polynomial value
 else if x eq d
-	SINGLE32	logt, result, x				; compute single polynomial value
+	SINGLE32	table, result, x			; compute single polynomial value
 end if
 		muls#x	temp1, scale
 		adds#x	temp1, base					; temp1 = base + scale * temp1
@@ -3292,6 +2667,7 @@ origin	equ		xmm9						; origin value
 result	equ		xmm0						; result register
 two		equ		temp1						; 2.0
 half	equ		temp2						; 0.5
+table	equ		treg						; pointer to array of coefficients
 if x eq s
 oneval	= PONE_FLT32						; +1.0
 twoval	= PTWO_FLT32						; +2.0
@@ -3330,10 +2706,11 @@ end if
 		movap#x	scale2, scale1
 		muls#x	scale2, scale2				; scale2 = scale1 * scale1
 		movap#x	result, scale2				; result = scale2
+		lea		table, [logt]				; set pointer to array of coefficients
 if x eq s
-	SINGLE8		logt, result, x				; compute single polynomial value
+	SINGLE8		table, result, x			; compute single polynomial value
 else if x eq d
-	SINGLE16	logt, result, x				; compute single polynomial value
+	SINGLE16	table, result, x			; compute single polynomial value
 end if
 		muls#x	temp1, scale2
 		adds#x	temp1, base
@@ -3393,7 +2770,9 @@ macro	LOG10I	val, index, scale
 value	equ		rdi							; value to operate
 ;---[Internal variables]-------------------
 result	equ		rax							; result register
+table	equ		rdx							; pointer to table of 10 powers
 ;------------------------------------------
+		lea		table, [ten_int]			; set pointer to table of 10 powers
 if scale < 2
 		movzx	value, val					; zero extend value to 64-bit value
 end if
@@ -3403,8 +2782,8 @@ end if
 		mov		result, index				; result = index
 ;---[Search loop]--------------------------
 .loop:	sub		result, 1					; result--
-		cmp		value, [ten_int + result * 8]
-		jb		.loop						; do while (value < ten_int[resul])
+		cmp		value, [table + result * 8]
+		jb		.loop						; do while (value < exp[resul])
 ;---[End of search loop]-------------------
 		ret									; return result
 ;---[Error branch]-------------------------
@@ -3462,6 +2841,7 @@ mask2	equ		temp4						; mask value #2
 max		equ		temp5						; max value
 half	equ		temp6						; 0.5
 one		equ		temp7						; 1.0
+table	equ		treg						; pointer to array of coefficients
 stack	equ		rsp							; stack pointer
 s_value	equ		stack + 0 * 8				; stack position of "value" variable
 if x eq s
@@ -3557,10 +2937,11 @@ space	= 1 * 8								; stack size required by the procedure
 		muls#x	shift, escale				; shift *= escale
 		movap#x	scale, result
 		muls#x	scale, scale				; scale = result * result
+		lea		table, [logt]				; set pointer to array of coefficients
 if x eq s
-	SINGLE16	logt, result, x				; compute single polynomial value
+	SINGLE16	table, result, x			; compute single polynomial value
 else if x eq d
-	SINGLE32	logt, result, x				; compute single polynomial value
+	SINGLE32	table, result, x			; compute single polynomial value
 end if
 		muls#x	temp1, scale
 		adds#x	temp1, base					; temp1 = base + scale * temp1
@@ -3616,6 +2997,7 @@ origin	equ		xmm9						; origin value
 result	equ		xmm0						; result register
 two		equ		temp1						; 2.0
 half	equ		temp2						; 0.5
+table	equ		treg						; pointer to array of coefficients
 stack	equ		rsp							; stack pointer
 s_value	equ		stack + 0 * 8				; stack position of "value" variable
 if x eq s
@@ -3678,10 +3060,11 @@ space	= 1 * 8								; stack size required by the procedure
 		movap#x	scale2, scale1
 		muls#x	scale2, scale2				; scale2 = scale1 * scale1
 		movap#x	result, scale2				; result = scale2
+		lea		table, [logt]				; set pointer to array of coefficients
 if x eq s
-	SINGLE8		logt, result, x				; compute single polynomial value
+	SINGLE8		table, result, x			; compute single polynomial value
 else if x eq d
-	SINGLE16	logt, result, x				; compute single polynomial value
+	SINGLE16	table, result, x			; compute single polynomial value
 end if
 		muls#x	temp1, scale2
 		adds#x	temp1, base
@@ -3713,6 +3096,7 @@ macro	TRIG1	Func, ivalue, mant, exp, ipart, res0, res1, temp0, temp1, x
 value	equ		xmm0						; angle value
 ;---[Internal variables]-------------------
 treg	equ		rax							; temporary register
+table	equ		r8							; pointer to array of coefficients
 index	equ		r10							; first index for long mul operation
 max		equ		r11							; last index for long mul operation
 expl	equ		cl							; low part of exponent value
@@ -3724,7 +3108,7 @@ sign	equ		xmm4						; sign bit
 fpart1	equ		temp0						; fraction part of result #1
 fpart2	equ		temp1						; fraction part of result #2
 stack	equ		rsp							; stack pointer
-target	equ		stack + 0 * 8				; stack position of "target" variable
+array	equ		stack + 0 * 8				; stack position of "array" variable
 if x eq s
 dmask	= DMASK_FLT32						; data mask
 smask	= SMASK_FLT32						; sign mask
@@ -3735,7 +3119,7 @@ infval	= PINF_FLT32						; +Inf
 pi4val	= PI_FOUR_FLT32						; +Pi/4
 mbits	= MBITS_FLT32						; count of bits into mantissa
 bias	= EBIAS_FLT32						; exponent bias
-source	= range_flt32						; pointer to range reduction constant
+range	= range_flt32						; pointer to range reduction constant
 sclval1	= 0x2FC90FDB						; Pi/2 * 2^-32
 sclval2	= 0x20490FDB						; Pi/2 * 2^-63
 cbits	= 192								; count of bits into long mul constant
@@ -3750,7 +3134,7 @@ infval	= PINF_FLT64						; +Inf
 pi4val	= PI_FOUR_FLT64						; +Pi/4
 mbits	= MBITS_FLT64						; count of bits into mantissa
 bias	= EBIAS_FLT64						; exponent bias
-source	= range_flt64						; pointer to range reduction constant
+range	= range_flt64						; pointer to range reduction constant
 sclval1	= 0x3BF921FB54442D18				; Pi/2 * 2^-64
 sclval2	= 0x380921FB54442D18				; Pi/2 * 2^-127
 cbits	= 1152								; count of bits into long mul constant
@@ -3790,6 +3174,7 @@ space	= 19 * 8							; stack size required by the procedure
 		and		mant, ivalue				; mant = value & mmask
 		or		mant, ipart					; mant |= 1 << mbits
 ;---[Long mul operation]-------------------
+		lea		table, [range]				; set pointer to array of coefficients
 		xor		treg, treg					; treg = 0
 		lea		index, [exp - 2 * bits]
 		shr		index, bscale
@@ -3805,23 +3190,23 @@ space	= 19 * 8							; stack size required by the procedure
 		xor		temp0, temp0				; temp0 = 0
 		xor		temp1, temp1				; temp1 = 0
 ;---[Multiplication loop]------------------
-.loop:	mov		res0, [source+index*bytes]	; res0 = low (source[index] * mant)
-		mul		mant						; res1 = high (source[index] * mant)
+.loop:	mov		res0, [table+index*bytes]	; res0 = low (table[index] * mant)
+		mul		mant						; res1 = high (table[index] * mant)
 		add		res0, temp0					; res0 += temp0
 		adc		res1, temp1					; res1 += temp1
-		mov		[target+index*bytes], res0	; target[index] = res0
+		mov		[array+index*bytes], res0	; array[index] = res0
 		mov		temp0, res1					; temp0 = res1
 		add		index, 1					; index++
 		cmp		index, max
 		jb		.loop						; do while (index < max)
 ;---[End of multiplication loop------------
-		mov		[target+index*bytes], temp0	; target[0] = temp0
+		mov		[array+index*bytes], temp0	; array[0] = temp0
 		lea		index, [exp]
 		shr		index, 3					; index = exp / 8
 		and		exp, 0x7					; exp %= 8
-		mov		fpart2, [target + index - 2 * bytes]
-		mov		fpart1, [target + index - 1 * bytes]
-		movzx	ipart, word [target + index]
+		mov		fpart2, [array + index - 2 * bytes]
+		mov		fpart1, [array + index - 1 * bytes]
+		movzx	ipart, word [array + index]
 		shrd	fpart2, fpart1, expl		; extract fraction part #2
 		shrd	fpart1, ipart, expl			; extract fraction part #1
 		shr		ipart, expl					; extract integer part
@@ -3832,8 +3217,9 @@ space	= 19 * 8							; stack size required by the procedure
 		add		ipart, temp1				;     then ipart++
 		mov		temp1, ipart
 		neg		temp1
-		test	ivalue, ivalue				; if (value < 0)
-		cmovs	ipart, temp1				;     then ipart = -ipart
+		xorp#x	sign, sign					; sign = 0
+		comis#x	value, sign					; if (value < 0)
+		cmovb	ipart, temp1				;     then ipart = -ipart
 ;---[Compute angle]------------------------
 	cvtsi2s#x	value1, fpart1
 	cvtsi2s#x	value2, fpart2
@@ -3860,6 +3246,7 @@ cos		equ		rsi							; pointer to place where to store cos value
 value	equ		xmm0						; angle value
 ;---[Internal variables]-------------------
 treg	equ		rax							; temporary register
+table	equ		r8							; pointer to array of coefficients
 index	equ		r10							; first index for long mul operation
 max		equ		r11							; last index for long mul operation
 expl	equ		cl							; low part of exponent value
@@ -3871,7 +3258,7 @@ sign	equ		xmm4						; sign bit
 fpart1	equ		temp0						; fraction part of result #1
 fpart2	equ		temp1						; fraction part of result #2
 stack	equ		rsp							; stack pointer
-target	equ		stack + 0 * 8				; stack position of "target" variable
+array	equ		stack + 0 * 8				; stack position of "array" variable
 s_sin	equ		stack + 19 * 8				; stack position of "sin" variable
 s_cos	equ		stack + 20 * 8				; stack position of "cos" variable
 if x eq s
@@ -3884,7 +3271,7 @@ infval	= PINF_FLT32						; +Inf
 pi4val	= PI_FOUR_FLT32						; +Pi/4
 mbits	= MBITS_FLT32						; count of bits into mantissa
 bias	= EBIAS_FLT32						; exponent bias
-source	= range_flt32						; pointer to range reduction constant
+range	= range_flt32						; pointer to range reduction constant
 sclval1	= 0x2FC90FDB						; Pi/2 * 2^-32
 sclval2	= 0x20490FDB						; Pi/2 * 2^-63
 cbits	= 192								; count of bits into long mul constant
@@ -3899,7 +3286,7 @@ infval	= PINF_FLT64						; +Inf
 pi4val	= PI_FOUR_FLT64						; +Pi/4
 mbits	= MBITS_FLT64						; count of bits into mantissa
 bias	= EBIAS_FLT64						; exponent bias
-source	= range_flt64						; pointer to range reduction constant
+range	= range_flt64						; pointer to range reduction constant
 sclval1	= 0x3BF921FB54442D18				; Pi/2 * 2^-64
 sclval2	= 0x380921FB54442D18				; Pi/2 * 2^-127
 cbits	= 1152								; count of bits into long mul constant
@@ -3941,6 +3328,7 @@ space	= 21 * 8							; stack size required by the procedure
 		and		mant, ivalue				; mant = value & mmask
 		or		mant, ipart					; mant |= 1 << mbits
 ;---[Long mul operation]-------------------
+		lea		table, [range]				; set pointer to array of coefficients
 		xor		treg, treg					; treg = 0
 		lea		index, [exp - 2 * bits]
 		shr		index, bscale
@@ -3956,23 +3344,23 @@ space	= 21 * 8							; stack size required by the procedure
 		xor		temp0, temp0				; temp0 = 0
 		xor		temp1, temp1				; temp1 = 0
 ;---[Multiplication loop]------------------
-.loop:	mov		res0, [source+index*bytes]	; res0 = low (source[index] * mant)
-		mul		mant						; res1 = high (source[index] * mant)
+.loop:	mov		res0, [table+index*bytes]	; res0 = low (table[index] * mant)
+		mul		mant						; res1 = high (table[index] * mant)
 		add		res0, temp0					; res0 += temp0
 		adc		res1, temp1					; res1 += temp1
-		mov		[target+index*bytes], res0	; target[index] = res0
+		mov		[array+index*bytes], res0	; array[index] = res0
 		mov		temp0, res1					; temp0 = res1
 		add		index, 1					; index++
 		cmp		index, max
 		jb		.loop						; do while (index < max)
 ;---[End of multiplication loop------------
-		mov		[target+index*bytes], temp0	; target[0] = temp0
+		mov		[array+index*bytes], temp0	; array[0] = temp0
 		lea		index, [exp]
 		shr		index, 3					; index = exp / 8
 		and		exp, 0x7					; exp %= 8
-		mov		fpart2, [target + index - 2 * bytes]
-		mov		fpart1, [target + index - 1 * bytes]
-		movzx	ipart, word [target + index]
+		mov		fpart2, [array + index - 2 * bytes]
+		mov		fpart1, [array + index - 1 * bytes]
+		movzx	ipart, word [array + index]
 		shrd	fpart2, fpart1, expl		; extract fraction part #2
 		shrd	fpart1, ipart, expl			; extract fraction part #1
 		shr		ipart, expl					; extract integer part
@@ -3983,8 +3371,9 @@ space	= 21 * 8							; stack size required by the procedure
 		add		ipart, temp1				;     then ipart++
 		mov		temp1, ipart
 		neg		temp1
-		test	ivalue, ivalue				; if (value < 0)
-		cmovs	ipart, temp1				;     then ipart = -ipart
+		xorp#x	sign, sign					; sign = 0
+		comis#x	value, sign					; if (value < 0)
+		cmovb	ipart, temp1				;     then ipart = -ipart
 ;---[Compute angle]------------------------
 	cvtsi2s#x	value1, fpart1
 	cvtsi2s#x	value2, fpart2
@@ -4185,6 +3574,7 @@ result	equ		xmm0						; result register
 mask	equ		temp1						; data mask
 pi		equ		temp2						; Pi/4
 half	equ		scale						; 0.5
+table	equ		treg						; pointer to array of coefficients
 if x eq s
 dmask	= DMASK_FLT32						; data mask
 smask	= SMASK_FLT32						; sign mask
@@ -4226,10 +3616,11 @@ end if
 		movap#x	scale, value
 		muls#x	scale, base					; scale = value * base
 		movint	sign, sreg, x				; sign = sign bit
+		lea		table, [sint]				; set pointer to array of coefficients
 if x eq s
-		SINGLE4	sint, value, x				; compute single polynomial value
+		SINGLE4	table, value, x				; compute single polynomial value
 else if x eq d
-		SINGLE8	sint, value, x				; compute single polynomial value
+		SINGLE8	table, value, x				; compute single polynomial value
 end if
 		muls#x	temp1, scale
 		adds#x	temp1, base					; temp1 = base + scale * temp1
@@ -4240,16 +3631,17 @@ end if
 .cos:	xor		sreg, sreg					; sign = +1.0
 		test	quadr, 0x2					; if (quadr & 0x2 != 0)
 		cmovnz	sreg, sval					;     sign = -1.0
-		movap#x	base, half					; base = 0.5
+		movap#x	base, half					; base = -0.5
 		muls#x	value, value				; value *= value
 		movap#x	scale, value
 		muls#x	scale, scale				; scale = value * value
 		muls#x	base, value					; base *= value
 		movint	sign, sreg, x				; sign = sign bit
+		lea		table, [cost]				; set pointer to array of coefficients
 if x eq s
-		SINGLE4	cost, value, x				; compute single polynomial value
+		SINGLE4	table, value, x				; compute single polynomial value
 else if x eq d
-		SINGLE8	cost, value, x				; compute single polynomial value
+		SINGLE8	table, value, x				; compute single polynomial value
 end if
 		muls#x	temp1, scale
 		adds#x	temp1, base					; temp1 = base + scale * temp1
@@ -4261,14 +3653,10 @@ end if
 .ovrfl:	initreg	result, treg, nanval		; return NaN
 		ret
 }
-
-; Sine of angle
-Sin_flt32:	TRIG1	SinQ_flt32, r8d, r9d, ecx, edx, eax, edx, edi, esi, s
-Sin_flt64:	TRIG1	SinQ_flt64, r8, r9, rcx, rdx, rax, rdx, rdi, rsi, d
-
-; Sine of angle and quadrant
 SinQ_flt32:	SIN		edx, ecx, s
 SinQ_flt64:	SIN		rdx, rcx, d
+Sin_flt32:	TRIG1	SinQ_flt32, r8d, r9d, ecx, edx, eax, edx, edi, esi, s
+Sin_flt64:	TRIG1	SinQ_flt64, r8, r9, rcx, rdx, rax, rdx, rdi, rsi, d
 
 ;==============================================================================;
 ;       Cosine                                                                 ;
@@ -4290,6 +3678,7 @@ result	equ		xmm0						; result register
 mask	equ		temp1						; data mask
 pi		equ		temp2						; Pi/4
 half	equ		scale						; 0.5
+table	equ		treg						; pointer to array of coefficients
 if x eq s
 dmask	= DMASK_FLT32						; data mask
 smask	= SMASK_FLT32						; sign mask
@@ -4326,16 +3715,17 @@ end if
 		xor		sreg, sreg					; sign = +1.0
 		test	quadr, 0x2					; if (quadr & 0x2 != 0)
 		cmovnz	sreg, sval					;     sign = -1.0
-		movap#x	base, half					; base = 0.5
+		movap#x	base, half					; base = -0.5
 		muls#x	value, value				; value *= value
 		movap#x	scale, value
 		muls#x	scale, scale				; scale = value * value
 		muls#x	base, value					; base *= value
 		movint	sign, sreg, x				; sign = sign bit
+		lea		table, [cost]				; set pointer to array of coefficients
 if x eq s
-		SINGLE4	cost, value, x				; compute single polynomial value
+		SINGLE4	table, value, x				; compute single polynomial value
 else if x eq d
-		SINGLE8	cost, value, x				; compute single polynomial value
+		SINGLE8	table, value, x				; compute single polynomial value
 end if
 		muls#x	temp1, scale
 		adds#x	temp1, base					; temp1 = base + scale * temp1
@@ -4352,10 +3742,11 @@ end if
 		movap#x	scale, value
 		muls#x	scale, base					; scale = value * base
 		movint	sign, sreg, x				; sign = sign bit
+		lea		table, [sint]				; set pointer to array of coefficients
 if x eq s
-		SINGLE4	sint, value, x				; compute single polynomial value
+		SINGLE4	table, value, x				; compute single polynomial value
 else if x eq d
-		SINGLE8	sint, value, x				; compute single polynomial value
+		SINGLE8	table, value, x				; compute single polynomial value
 end if
 		muls#x	temp1, scale
 		adds#x	temp1, base					; temp1 = base + scale * temp1
@@ -4366,14 +3757,10 @@ end if
 .ovrfl:	initreg	result, treg, nanval		; return NaN
 		ret
 }
-
-; Cosine of angle
-Cos_flt32:	TRIG1	CosQ_flt32, r8d, r9d, ecx, edx, eax, edx, edi, esi, s
-Cos_flt64:	TRIG1	CosQ_flt64, r8, r9, rcx, rdx, rax, rdx, rdi, rsi, d
-
-; Cosine of angle and quadrant
 CosQ_flt32:	COS		edx, ecx, s
 CosQ_flt64:	COS		rdx, rcx, d
+Cos_flt32:	TRIG1	CosQ_flt32, r8d, r9d, ecx, edx, eax, edx, edi, esi, s
+Cos_flt64:	TRIG1	CosQ_flt64, r8, r9, rcx, rdx, rax, rdx, rdi, rsi, d
 
 ;==============================================================================;
 ;       Sine and cosine                                                        ;
@@ -4402,6 +3789,7 @@ result	equ		xmm0						; result register
 mask	equ		temp1						; data mask
 pi		equ		temp2						; Pi/4
 half	equ		scale						; 0.5
+table	equ		treg						; pointer to array of coefficients
 if x eq s
 dmask	= DMASK_FLT32						; data mask
 smask	= SMASK_FLT32						; sign mask
@@ -4451,10 +3839,11 @@ end if
 		muls#x	base2, value				; base2 *= value
 		movint	sign1, sreg1, x				; sign1 = sign bit of sine
 		movint	sign2, sreg2, x				; sign2 = sign bit of cosine
+		lea		table, [sincost]			; set pointer to array of coefficients
 if x eq s
-		PAIR4	sincost, value, x			; compute single polynomial value
+		PAIR4	table, value, x				; compute single polynomial value
 else if x eq d
-		PAIR8	sincost, value, x			; compute single polynomial value
+		PAIR8	table, value, x				; compute single polynomial value
 end if
 		muls#x	temp1, scale1
 		adds#x	temp1, base1				; temp1 = base1 + scale1 * temp1
@@ -4473,7 +3862,7 @@ end if
 		cmovz	sreg1, sval1				; if (quadr & 0x2 == 0), then sign1 = -sign2
 		cmovnz	sreg2, sval2				; if (quadr & 0x2 != 0), then sign2 = -1.0
 		movap#x	base1, value				; base1 = value
-		movap#x	base2, half					; base2 = 0.5
+		movap#x	base2, half					; base2 = -0.5
 		muls#x	value, value				; value *= value
 		movap#x	scale1, value
 		muls#x	scale1, base1				; scale1 = value * base1
@@ -4482,10 +3871,11 @@ end if
 		muls#x	base2, value				; base2 *= value
 		movint	sign1, sreg1, x				; sign1 = sign bit of sine
 		movint	sign2, sreg2, x				; sign2 = sign bit of cosine
+		lea		table, [sincost]			; set pointer to array of coefficients
 if x eq s
-		PAIR4	sincost, value, x			; compute pair polynomial value
+		PAIR4	table, value, x				; compute pair polynomial value
 else if x eq d
-		PAIR8	sincost, value, x			; compute pair polynomial value
+		PAIR8	table, value, x				; compute pair polynomial value
 end if
 		muls#x	temp1, scale1
 		adds#x	temp1, base1				; temp1 = base1 + scale1 * temp1
@@ -4503,14 +3893,10 @@ end if
 		movs#x	[cos], result				; cos[0] = NaN
 		ret
 }
-
-; Sine and cosine of angle
-SinCos_flt32:	TRIG2	SinCosQ_flt32, r8d, r9d, ecx, edx, eax, edx, edi, esi, s
-SinCos_flt64:	TRIG2	SinCosQ_flt64, r8, r9, rcx, rdx, rax, rdx, rdi, rsi, d
-
-; Sine and cosine of angle and quadrant
 SinCosQ_flt32:	SINCOS	r8d, r9d, r10d, r11d, s
 SinCosQ_flt64:	SINCOS	r8, r9, r10, r11, d
+SinCos_flt32:	TRIG2	SinCosQ_flt32, r8d, r9d, ecx, edx, eax, edx, edi, esi, s
+SinCos_flt64:	TRIG2	SinCosQ_flt64, r8, r9, rcx, rdx, rax, rdx, rdi, rsi, d
 
 ;==============================================================================;
 ;       Tangent                                                                ;
@@ -4537,20 +3923,21 @@ one		equ		xmm12						; 1.0
 result	equ		xmm0						; result register
 mask	equ		temp1						; data mask
 pi		equ		temp2						; Pi/4
+table	equ		treg						; pointer to array of coefficients
 if x eq s
 dmask	= DMASK_FLT32						; data mask
 smask	= SMASK_FLT32						; sign mask
 nanval	= PNAN_FLT32						; +NaN
 oneval	= PONE_FLT32						; +1.0
 pi4val	= PI_FOUR_FLT32						; +Pi/4
-tant	= tan_flt32							; pointer to array of sine coefficients
+tant	= tan_flt32							; pointer to array of tangent coefficients
 else if x eq d
 dmask	= DMASK_FLT64						; data mask
 smask	= SMASK_FLT64						; sign mask
 nanval	= PNAN_FLT64						; +NaN
 oneval	= PONE_FLT64						; +1.0
 pi4val	= PI_FOUR_FLT64						; +Pi/4
-tant	= tan_flt64							; pointer to array of sine coefficients
+tant	= tan_flt64							; pointer to array of tangent coefficients
 end if
 ;------------------------------------------
 		initreg	mask, treg, dmask			; mask = dmask
@@ -4570,10 +3957,11 @@ end if
 		movap#x	scale, value
 		muls#x	scale, base					; scale = value * base
 		movint	sign, sreg, x				; sign = sign bit
+		lea		table, [tant]				; set pointer to array of coefficients
 if x eq s
-	SINGLE16	tant, value, x				; compute single polynomial value
+	SINGLE16	table, value, x				; compute single polynomial value
 else if x eq d
-	SINGLE32	tant, value, x				; compute single polynomial value
+	SINGLE32	table, value, x				; compute single polynomial value
 end if
 		muls#x	temp1, scale
 		adds#x	temp1, base					; temp1 = base + scale * temp1
@@ -4587,10 +3975,11 @@ end if
 		movap#x	scale, value
 		muls#x	scale, base					; scale = value * base
 		movint	sign, sreg, x				; sign = sign bit
+		lea		table, [tant]				; set pointer to array of coefficients
 if x eq s
-	SINGLE16	tant, value, x				; compute single polynomial value
+	SINGLE16	table, value, x				; compute single polynomial value
 else if x eq d
-	SINGLE32	tant, value, x				; compute single polynomial value
+	SINGLE32	table, value, x				; compute single polynomial value
 end if
 		muls#x	temp1, scale
 		adds#x	temp1, base					; temp1 = base + scale * temp1
@@ -4602,14 +3991,10 @@ end if
 .ovrfl:	initreg	result, treg, nanval		; return NaN
 		ret
 }
-
-; Tangent of angle
-Tan_flt32:	TRIG1	TanQ_flt32, r8d, r9d, ecx, edx, eax, edx, edi, esi, s
-Tan_flt64:	TRIG1	TanQ_flt64, r8, r9, rcx, rdx, rax, rdx, rdi, rsi, d
-
-; Tangent of angle and quadrant
 TanQ_flt32:	TAN		edx, ecx, s
 TanQ_flt64:	TAN		rdx, rcx, d
+Tan_flt32:	TRIG1	TanQ_flt32, r8d, r9d, ecx, edx, eax, edx, edi, esi, s
+Tan_flt64:	TRIG1	TanQ_flt64, r8, r9, rcx, rdx, rax, rdx, rdi, rsi, d
 
 ;******************************************************************************;
 ;       Inverse trigonometric functions                                        ;
@@ -4641,6 +4026,7 @@ mask	equ		temp1						; data mask
 phalf	equ		temp2						; +0.5
 mhalf	equ		temp3						; -0.5
 one		equ		temp4						; +1.0
+table	equ		treg						; pointer to array of coefficients
 if x eq s
 dmask	= DMASK_FLT32						; data mask
 smask	= SMASK_FLT32						; sign mask
@@ -4680,10 +4066,11 @@ end if
 		movap#x	scale, value
 		muls#x	scale, base					; scale = value * base
 		movint	sign, sreg, x				; sign = sign bit
+		lea		table, [asint]				; set pointer to array of coefficients
 if x eq s
-	SINGLE16	asint, value, x				; compute single polynomial value
+	SINGLE16	table, value, x				; compute single polynomial value
 else if x eq d
-	SINGLE32	asint, value, x				; compute single polynomial value
+	SINGLE32	table, value, x				; compute single polynomial value
 end if
 		muls#x	temp1, scale
 		adds#x	temp1, base					; temp1 = base + scale * temp1
@@ -4698,10 +4085,11 @@ end if
 		movap#x	scale, value
 		muls#x	scale, base					; scale = value * base
 		movint	sign, sreg, x				; sign = sign bit
+		lea		table, [asint]				; set pointer to array of coefficients
 if x eq s
-	SINGLE16	asint, value, x				; compute single polynomial value
+	SINGLE16	table, value, x				; compute single polynomial value
 else if x eq d
-	SINGLE32	asint, value, x				; compute single polynomial value
+	SINGLE32	table, value, x				; compute single polynomial value
 end if
 		muls#x	temp1, scale
 		adds#x	temp1, base					; temp1 = base + scale * temp1
@@ -4743,6 +4131,7 @@ mask	equ		temp1						; data mask
 phalf	equ		temp2						; +0.5
 mhalf	equ		temp3						; -0.5
 one		equ		temp4						; +1.0
+table	equ		treg						; pointer to array of coefficients
 if x eq s
 dmask	= DMASK_FLT32						; data mask
 smask	= SMASK_FLT32						; sign mask
@@ -4786,10 +4175,11 @@ end if
 		muls#x	scale, base					; scale = value * base
 		movint	sign, sreg, x				; sign = sign bit
 		movint	shift, shreg, x				; shift = shift value
+		lea		table, [asint]				; set pointer to array of coefficients
 if x eq s
-	SINGLE16	asint, value, x				; compute single polynomial value
+	SINGLE16	table, value, x				; compute single polynomial value
 else if x eq d
-	SINGLE32	asint, value, x				; compute single polynomial value
+	SINGLE32	table, value, x				; compute single polynomial value
 end if
 		muls#x	temp1, scale
 		adds#x	temp1, base					; temp1 = base + scale * temp1
@@ -4809,10 +4199,11 @@ end if
 		muls#x	scale, base					; scale = value * base
 		movint	sign, sreg, x				; sign = sign bit
 		movint	shift, shreg, x				; shift = shift value
+		lea		table, [asint]				; set pointer to array of coefficients
 if x eq s
-	SINGLE16	asint, value, x				; compute single polynomial value
+	SINGLE16	table, value, x				; compute single polynomial value
 else if x eq d
-	SINGLE32	asint, value, x				; compute single polynomial value
+	SINGLE32	table, value, x				; compute single polynomial value
 end if
 		muls#x	temp1, scale
 		adds#x	temp1, base					; temp1 = base + scale * temp1
@@ -4852,6 +4243,7 @@ shift	equ		xmm12						; shift value
 result	equ		xmm0						; result register
 mask	equ		temp1						; data mask
 one		equ		temp2						; +1.0
+table	equ		treg						; pointer to array of coefficients
 if x eq s
 dmask	= DMASK_FLT32						; data mask
 smask	= SMASK_FLT32						; sign mask
@@ -4887,10 +4279,11 @@ end if
 		movap#x	scale, value
 		muls#x	scale, base					; scale = value * base
 		movint	sign, sreg, x				; sign = sign bit
+		lea		table, [atant]				; set pointer to array of coefficients
 if x eq s
-	SINGLE32	atant, value, x				; compute single polynomial value
+	SINGLE32	table, value, x				; compute single polynomial value
 else if x eq d
-	SINGLE64	atant, value, x				; compute single polynomial value
+	SINGLE64	table, value, x				; compute single polynomial value
 end if
 		muls#x	temp1, scale
 		adds#x	temp1, base					; temp1 = base + scale * temp1
@@ -4908,10 +4301,11 @@ end if
 		movap#x	value, scale				; value = 1.0 / (1.0 + value * value)
 		muls#x	scale, base					; scale = value * base
 		movint	sign, sreg, x				; sign = sign bit
+		lea		table, [atant]				; set pointer to array of coefficients
 if x eq s
-	SINGLE32	atant, value, x				; compute single polynomial value
+	SINGLE32	table, value, x				; compute single polynomial value
 else if x eq d
-	SINGLE64	atant, value, x				; compute single polynomial value
+	SINGLE64	table, value, x				; compute single polynomial value
 end if
 		muls#x	temp1, scale
 		adds#x	temp1, base					; temp1 = base + scale * temp1
@@ -4990,6 +4384,7 @@ shift1	equ		xmm14						; shift value #1
 shift2	equ		xmm15						; shift value #2
 result1	equ		xmm0						; result register #1
 result2	equ		xmm1						; result register #2
+table	equ		treg						; pointer to array of coefficients
 stack	equ		rsp							; stack pointer
 fpart	equ		stack - 1 * 8				; stack position of "fpart" variable
 ipart	equ		stack - 2 * 8				; stack position of "ipart" variable
@@ -5067,10 +4462,11 @@ end if
 		xorp#x	base2, base2
 		movap#x	base1, value				; base1 = +value
 		subs#x	base2, value				; base2 = -value
+		lea		table, [expt]				; set pointer to array of coefficients
 if x eq s
-		PAIR8	expt, value, x				; compute pair polynomial value
+		PAIR8	table, value, x				; compute pair polynomial value
 else if x eq d
-		PAIR16	expt, value, x				; compute pair polynomial value
+		PAIR16	table, value, x				; compute pair polynomial value
 end if
 		muls#x	temp1, scale
 		adds#x	temp1, base1				; temp1 = base1 + scale * temp1
@@ -5116,6 +4512,7 @@ res2	equ		xmm1						; result register #2
 mask	equ		temp1						; data mask
 pi		equ		temp2						; Pi/4
 half	equ		scale						; 0.5
+table	equ		treg						; pointer to array of coefficients
 stack	equ		rsp							; stack pointer
 s_sign	equ		stack + 0 * 8				; stack position of "sign" variable
 if x eq s
@@ -5147,10 +4544,11 @@ space	= 3 * 8								; stack size required by the procedure
 		muls#x	value, value				; value *= value
 		movap#x	scale, value
 		muls#x	scale, base					; scale = value * base
+		lea		table, [sint]				; set pointer to array of coefficients
 if x eq s
-		SINGLE4	sint, value, x				; compute single polynomial value
+		SINGLE4	table, value, x				; compute single polynomial value
 else if x eq d
-		SINGLE8	sint, value, x				; compute single polynomial value
+		SINGLE8	table, value, x				; compute single polynomial value
 end if
 		muls#x	temp1, scale
 		adds#x	temp1, base					; temp1 = base + scale * temp1
@@ -5191,6 +4589,7 @@ res2	equ		xmm1						; result register #2
 mask	equ		temp1						; data mask
 pi		equ		temp2						; Pi/4
 half	equ		scale						; 0.5
+table	equ		treg						; pointer to array of coefficients
 if x eq s
 Exp2	= ExpCore_flt32						; exp pair function
 dmask	= DMASK_FLT32						; data mask
@@ -5218,10 +4617,11 @@ end if
 		movap#x	scale, value
 		muls#x	scale, scale				; scale = value * value
 		muls#x	base, value					; base *= value
+		lea		table, [cost]				; set pointer to array of coefficients
 if x eq s
-		SINGLE4	cost, value, x				; compute single polynomial value
+		SINGLE4	table, value, x				; compute single polynomial value
 else if x eq d
-		SINGLE8	cost, value, x				; compute single polynomial value
+		SINGLE8	table, value, x				; compute single polynomial value
 end if
 		muls#x	temp1, scale
 		adds#x	temp1, base					; temp1 = base + scale * temp1
@@ -5267,6 +4667,7 @@ mask	equ		temp1						; data mask
 max		equ		temp2						; max value
 pi		equ		temp3						; Pi/4
 two		equ		scale						; 2.0
+table	equ		treg						; pointer to array of coefficients
 stack	equ		rsp							; stack pointer
 s_sign	equ		stack + 0 * 8				; stack position of "sign" variable
 if x eq s
@@ -5305,10 +4706,11 @@ space	= 3 * 8								; stack size required by the procedure
 		muls#x	value, value				; value *= value
 		movap#x	scale, value
 		muls#x	scale, base					; scale = value * base
+		lea		table, [tant]				; set pointer to array of coefficients
 if x eq s
-	SINGLE16	tant, value, x				; compute single polynomial value
+	SINGLE16	table, value, x				; compute single polynomial value
 else if x eq d
-	SINGLE32	tant, value, x				; compute single polynomial value
+	SINGLE32	table, value, x				; compute single polynomial value
 end if
 		muls#x	temp1, scale
 		adds#x	temp1, base					; temp1 = base + scale * temp1
@@ -5353,29 +4755,20 @@ mask	equ		xmm2						; data mask
 one		equ		xmm3						; +1.0
 barier	equ		xmm4						; barier value
 origin	equ		xmm5						; origin value
-scale1	equ		xmm6						; first scale factor
-scale2	equ		xmm7						; second scale factor
-inf		equ		xmm8						; +Inf
 stack	equ		rsp							; stack pointer
 s_sign	equ		stack + 0 * 8				; stack position of "sign" variable
 if x eq s
 Logp1	= LogEp1_flt32						; log function
 dmask	= DMASK_FLT32						; data mask
 smask	= SMASK_FLT32						; sign mask
-infval	= PINF_FLT32						; +Inf
 oneval	= PONE_FLT32						; +1.0
 barval	= 0x5F800000						; 2^+64
-sclval1	= 0x1F800000						; 2^-64
-sclval2	= 0x5F800000						; 2^+64
 else if x eq d
 Logp1	= LogEp1_flt64						; log function
 dmask	= DMASK_FLT64						; data mask
 smask	= SMASK_FLT64						; sign mask
-infval	= PINF_FLT64						; +Inf
 oneval	= PONE_FLT64						; +1.0
 barval	= 0x5FF0000000000000				; 2^+512
-sclval1	= 0x1FF0000000000000				; 2^-512
-sclval2	= 0x5FF0000000000000				; 2^+512
 end if
 space	= 3 * 8								; stack size required by the procedure
 ;------------------------------------------
@@ -5386,18 +4779,18 @@ space	= 3 * 8								; stack size required by the procedure
 		andp#x	sign, value					; extract sign bit from value
 		andp#x	value, mask					; value = Abs (value)
 		movap#x	origin, value				; origin = value
-;---[Computing hypotenuse value]-----------
+;---[Computing sqrt value]-----------------
 		comis#x	value, barier				; if (value >= barier)
 		jae		.over						;     then go to overflow prevention branch
-		muls#x	value, value				; value = value^2
-		adds#x	value, one					; value = value^2 + one
+		muls#x	value, value
+		adds#x	value, one					; value = value * value + one
 		sqrts#x	value, value				; value = sqrt (value)
 ;---[Computing logarithm value]------------
-.back:	adds#x	one, value					; one = 1.0 + hypot (value, 1.0)
+		adds#x	one, value					; one = 1.0 + hypot (value, 1.0)
 		movap#x	value, origin
 		divs#x	value, one					; value = origin / (1.0 + hypot (value, 1.0))
 		muls#x	value, origin
-		adds#x	value, origin				; value = origin + value * origin
+		adds#x	value, origin				; value = value * origin + origin
 		sub		stack, space				; reserving stack size for local vars
 		movap#x	[s_sign], sign				; save "sign" variable into the stack
 		call	Logp1						; value = Logp1 (value)
@@ -5405,20 +4798,8 @@ space	= 3 * 8								; stack size required by the procedure
 		add		stack, space				; restoring back the stack pointer
 		ret
 ;---[Overflow prevention branch]-----------
-.over:	initreg	scale1, treg, sclval1		; scale1 = sclval1
-		initreg	scale2, treg, sclval2		; scale2 = sclval2
-		initreg	inf, treg, infval			; inf = infval
-		muls#x	value, scale1				; value *= scale1
-		muls#x	one, scale1					; one *= scale1
-		muls#x	value, value				; value = value^2
-		adds#x	value, one					; value = value^2 + one
-		sqrts#x	value, value
-		muls#x	value, scale2				; value = scale2 * sqrt (value)
-		comis#x	value, inf					; if (value != Inf)
-		jne		.back						;     then go back
-		initreg	value, treg, infval
-		orp#x	value, sign					; return sign * Inf
-		ret
+.over:	adds#x	value, value				; value = 2 * value
+		jmp		Logp1						; return Logp1 (value)
 }
 ArcSinH_flt32:	ASINH	s
 ArcSinH_flt64:	ASINH	d
@@ -5435,25 +4816,16 @@ treg	equ		rax							; temporary register
 one		equ		xmm1						; +1.0
 barier	equ		xmm2						; barier value
 origin	equ		xmm3						; origin value
-scale1	equ		xmm4						; first scale factor
-scale2	equ		xmm5						; second scale factor
-inf		equ		xmm6						; +Inf
 if x eq s
 Logp1	= LogEp1_flt32						; log function
 nanval	= PNAN_FLT32						; +NaN
-infval	= PINF_FLT32						; +Inf
 oneval	= PONE_FLT32						; +1.0
 barval	= 0x5F800000						; 2^+64
-sclval1	= 0x1F800000						; 2^-64
-sclval2	= 0x5F800000						; 2^+64
 else if x eq d
 Logp1	= LogEp1_flt64						; log function
 nanval	= PNAN_FLT64						; +NaN
-infval	= PINF_FLT64						; +Inf
 oneval	= PONE_FLT64						; +1.0
 barval	= 0x5FF0000000000000				; 2^+512
-sclval1	= 0x1FF0000000000000				; 2^-512
-sclval2	= 0x5FF0000000000000				; 2^+512
 end if
 ;------------------------------------------
 		initreg	one, treg, oneval			; one = 1.0
@@ -5461,7 +4833,7 @@ end if
 		comis#x	value, one					; if (value < 1.0)
 		jb		.error						;     then go to error branch
 		movap#x	origin, value				; origin = value
-;---[Computing hypotenuse value]-----------
+;---[Computing sqrt value]-----------------
 		comis#x	value, barier				; if (value >= barier)
 		jae		.over						;     then go to overflow prevention branch
 		movap#x	barier, value
@@ -5470,31 +4842,67 @@ end if
 		muls#x	value, barier				; value = (value + one) * (value - one)
 		sqrts#x	value, value				; value = sqrt (value)
 ;---[Computing logarithm value]------------
-.back:	subs#x	origin, one					; origin = origin - 1.0
-		adds#x	value, origin				; value = origin + value * origin
+		subs#x	origin, one					; origin = origin - 1.0
+		adds#x	value, origin				; value = value + origin
 		jmp		Logp1						; return Logp1 (value)
 ;---[Overflow prevention branch]-----------
-.over:	initreg	scale1, treg, sclval1		; scale1 = sclval1
-		initreg	scale2, treg, sclval2		; scale2 = sclval2
-		initreg	inf, treg, infval			; inf = infval
-		muls#x	value, scale1				; value *= scale1
-		muls#x	one, scale1					; one *= scale1
-		movap#x	barier, value
-		adds#x	value, one
-		subs#x	barier, one
-		muls#x	value, barier				; value = (value + one) * (value - one)
-		sqrts#x	value, value
-		muls#x	value, scale2				; value = scale2 * sqrt (value)
-		comis#x	value, inf					; if (value != Inf)
-		jne		.back						;     then go back
-		initreg	value, treg, infval			; return Inf
-		ret
+.over:	adds#x	value, value				; value = 2 * value
+		jmp		Logp1						; return Logp1 (value)
 ;---[Error branch]-------------------------
 .error:	initreg	value, treg, nanval			; return NaN
 		ret
 }
-ArcCosH_flt32:	ACOSH	s
-ArcCosH_flt64:	ACOSH	d
+;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+macro	ACOSH1P		x
+{
+;---[Parameters]---------------------------
+value	equ		xmm0						; hyperbolic sine value
+;---[Internal variables]-------------------
+treg	equ		rax							; temporary register
+two		equ		xmm1						; +2.0
+barier	equ		xmm2						; barier value
+origin	equ		xmm3						; origin value
+zero	equ		origin						; 0.0
+if x eq s
+Logp1	= LogEp1_flt32						; log function
+nanval	= PNAN_FLT32						; +NaN
+twoval	= PTWO_FLT32						; +2.0
+barval	= 0x5F800000						; 2^+64
+else if x eq d
+Logp1	= LogEp1_flt64						; log function
+nanval	= PNAN_FLT64						; +NaN
+twoval	= PTWO_FLT64						; +2.0
+barval	= 0x5FF0000000000000				; 2^+512
+end if
+;------------------------------------------
+		xorp#x	zero, zero					; zero = 0.0
+		initreg	barier, treg, barval		; barier = barval
+		initreg	two, treg, twoval			; two = 2.0
+		comis#x	value, zero					; if (value < 0.0)
+		jb		.error						;     then go to error branch
+		movap#x	origin, value				; origin = value
+;---[Computing sqrt value]-----------------
+		comis#x	value, barier				; if (value >= barier)
+		jae		.over						;     then go to overflow prevention branch
+		movap#x	barier, value
+		muls#x	value, value
+		muls#x	barier, two
+		adds#x	value, barier				; value = value * value + value * 2.0
+		sqrts#x	value, value				; value = sqrt (value)
+;---[Computing logarithm value]------------
+		adds#x	value, origin				; value = value + origin
+		jmp		Logp1						; return Logp1 (value)
+;---[Overflow prevention branch]-----------
+.over:	adds#x	value, value				; value = 2 * value
+		jmp		Logp1						; return Logp1 (value)
+;---[Error branch]-------------------------
+.error:	initreg	value, treg, nanval			; return NaN
+		ret
+}
+ArcCosH_flt32:		ACOSH	s
+ArcCosH_flt64:		ACOSH	d
+ArcCosHp1_flt32:	ACOSH1P	s
+ArcCosHp1_flt64:	ACOSH1P	d
 
 ;==============================================================================;
 ;       Inverse tangent                                                        ;

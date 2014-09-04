@@ -64,7 +64,8 @@ SetMode:
 ;---[Parameters]---------------------------
 cword	equ		edi							; FPU control word
 ;---[Internal variables]-------------------
-fpucr	equ		rsp - 1 * 8					; stack position to store FPUCR register
+stack	equ		rsp							; stack pointer
+fpucr	equ		stack - 1 * 8				; stack position to store FPUCR register
 ;------------------------------------------
 		and		cword, 0xFFFF				; clear unrequired bits into control word
 		mov		[fpucr], cword				; set new value of FPUCR register
@@ -77,7 +78,8 @@ fpucr	equ		rsp - 1 * 8					; stack position to store FPUCR register
 GetMode:
 ;---[Internal variables]-------------------
 cword	equ		eax							; FPU control word
-fpucr	equ		rsp - 1 * 8					; stack position to store FPUCR register
+stack	equ		rsp							; stack pointer
+fpucr	equ		stack - 1 * 8				; stack position to store FPUCR register
 ;------------------------------------------
 		fstcw	[fpucr]						; store FPUCR register into the stack
 		mov		cword, [fpucr]				; get value of FPUCR register
@@ -102,7 +104,8 @@ ClearExceptions:
 GetStatus:
 ;---[Internal variables]-------------------
 sword	equ		eax							; FPU status word
-fpusr	equ		rsp - 1 * 8					; stack position to store FPUSR register
+stack	equ		rsp							; stack pointer
+fpusr	equ		stack - 1 * 8				; stack position to store FPUSR register
 ;------------------------------------------
 		fstsw	[fpusr]						; store FPUSR register into the stack
 		mov		sword, [fpusr]				; get value of FPUSR register

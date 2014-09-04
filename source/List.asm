@@ -1019,7 +1019,8 @@ this	equ		rdi							; pointer to target list/ring object
 source	equ		rsi							; pointer to source list/ring object
 ;---[Internal variables]-------------------
 array	equ		rax							; pointer to array of nodes
-temp	equ		array						; temporary register
+temp	equ		rcx							; temporary register
+fptr	equ		rax							; pointer to call external function
 stack	equ		rsp							; stack pointer
 s_this	equ		stack + 0 * 8				; stack position of "this" variable
 s_src	equ		stack + 1 * 8				; stack position of "source" variable
@@ -1069,7 +1070,8 @@ end if
 		mov		param1, [this + ARRAY]
 		sub		param1, NSIZE
 		add		stack, space				; restoring back the stack pointer
-		jmp		Copy						; return Array::Copy (this.array - 1, source.array - 1, source.capacity)
+		mov		fptr, Copy
+		jmp		fptr						; return Array::Copy (this.array - 1, source.array - 1, source.capacity)
 ;---[Error branch]-------------------------
 .error:	mov		qword [this + ARRAY], 0		; this.array = NULL
 		mov		qword [this + CAPACITY], 0	; this.capacity = 0
@@ -3392,6 +3394,7 @@ func	equ		r9							; compare function
 ;---[Internal variables]-------------------
 status	equ		al							; operation status
 result	equ		rax							; result register
+fptr	equ		rax							; pointer to call external function
 array	equ		r10							; pointer to array of nodes
 iter	equ		r11							; iterator value
 size	equ		result						; object size
@@ -3455,7 +3458,8 @@ end if
 		mov		param3, [array + iter + NDATA]
 		mov		param2, [s_ksize]
 		mov		param1, [s_keys]
-		call	FindSet						; result = FindSet (keys, ksize, array[iter].data.key, func)
+		mov		fptr, FindSet
+		call	fptr						; result = FindSet (keys, ksize, array[iter].data.key, func)
 		mov		array, [s_array]			; get "array" variable from the stack
 		mov		iter, [s_iter]				; get "iter" variable from the stack
 		test	result, result				; if (result == 0)
@@ -4037,6 +4041,7 @@ func	equ		r8							; compare function
 ;---[Internal variables]-------------------
 status	equ		al							; operation status
 result	equ		rax							; result register
+fptr	equ		rax							; pointer to call external function
 array	equ		r10							; pointer to array of nodes
 iter	equ		r11							; iterator value
 size	equ		result						; object size
@@ -4097,7 +4102,8 @@ end if
 		mov		param3, [array + iter + NDATA]
 		mov		param2, [s_ksize]
 		mov		param1, [s_keys]
-		call	FindSet						; result = FindSet (keys, ksize, iter[0].key, func)
+		mov		fptr, FindSet
+		call	fptr						; result = FindSet (keys, ksize, iter[0].key, func)
 		mov		array, [s_array]			; get "array" variable from the stack
 		mov		iter, [s_iter]				; get "iter" variable from the stack
 		add		[s_total], result			;     then total++
@@ -4296,12 +4302,12 @@ space	= 17 * 8							; stack size required by the procedure
 		mov		node, NMASK					; load node mask
 		and		node, siter1				; node = siter1 & NMASK
 		add		siter1, KSIZE				; siter1++
-		mov		back, .back1
+		lea		back, [.back1]
 		cmp		siter1, [s_slim1]			; if (siter1 cond slimit1)
 		jg		.snxt1						;     then go to next node
 .back1:	mov		[s_iter1], siter1			; save "siter1" variable into the stack
 		add		titer, KSIZE				; titer++
-		mov		back, .back2
+		lea		back, [.back2]
 		cmp		titer, [s_tlim]				; if (titer cond tlimit)
 		jg		.tnext						;     then go to next node
 .back2:	movdqa	[array + titer + NDATA], value1
@@ -4312,12 +4318,12 @@ space	= 17 * 8							; stack size required by the procedure
 		mov		node, NMASK					; load node mask
 		and		node, siter2				; node = siter2 & NMASK
 		add		siter2, KSIZE				; siter2++
-		mov		back, .back3
+		lea		back, [.back3]
 		cmp		siter2, [s_slim2]			; if (siter2 cond slimit2)
 		jg		.snxt2						;     then go to next node
 .back3:	mov		[s_iter2], siter2			; save "siter2" variable into the stack
 		add		titer, KSIZE				; titer++
-		mov		back, .back4
+		lea		back, [.back4]
 		cmp		titer, [s_tlim]				; if (titer cond tlimit)
 		jg		.tnext						;     then go to next node
 .back4:	movdqa	[array + titer + NDATA], value2
@@ -4343,12 +4349,12 @@ space	= 17 * 8							; stack size required by the procedure
 .else:	mov		node, NMASK					; load node mask
 		and		node, siter2				; node = siter2 & NMASK
 		add		siter2, KSIZE				; siter2++
-		mov		back, .back5
+		lea		back, [.back5]
 		cmp		siter2, [s_slim2]			; if (siter2 cond slimit2)
 		jg		.snxt2						;     then go to next node
 .back5:	mov		[s_iter2], siter2			; save "siter2" variable into the stack
 		add		titer, KSIZE				; titer++
-		mov		back, .back6
+		lea		back, [.back6]
 		cmp		titer, [s_tlim]				; if (titer cond tlimit)
 		jg		.tnext						;     then go to next node
 .back6:	movdqa	[array + titer + NDATA], value2
@@ -4359,12 +4365,12 @@ space	= 17 * 8							; stack size required by the procedure
 		mov		node, NMASK					; load node mask
 		and		node, siter1				; node = siter1 & NMASK
 		add		siter1, KSIZE				; siter1++
-		mov		back, .back7
+		lea		back, [.back7]
 		cmp		siter1, [s_slim1]			; if (siter1 cond slimit1)
 		jg		.snxt1						;     then go to next node
 .back7:	mov		[s_iter1], siter1			; save "siter1" variable into the stack
 		add		titer, KSIZE				; titer++
-		mov		back, .back8
+		lea		back, [.back8]
 		cmp		titer, [s_tlim]				; if (titer cond tlimit)
 		jg		.tnext						;     then go to next node
 .back8:	movdqa	[array + titer + NDATA], value1
@@ -4690,12 +4696,12 @@ space	= 19 * 8							; stack size required by the procedure
 		mov		node, NMASK					; load node mask
 		and		node, siter1				; node = siter1 & NMASK
 		add		siter1, KSIZE				; siter1++
-		mov		back, .back1
+		lea		back, [.back1]
 		cmp		siter1, [s_slim1]			; if (siter1 cond slimit1)
 		jg		.snxt1						;     then go to next node
 .back1:	mov		[s_iter1], siter1			; save "siter1" variable into the stack
 		add		titer, KSIZE				; titer++
-		mov		back, .back2
+		lea		back, [.back2]
 		cmp		titer, [s_tlim]				; if (titer cond tlimit)
 		jg		.tnext						;     then go to next node
 .back2:	movdqa	[tarray + titer + NDATA], value1
@@ -4706,12 +4712,12 @@ space	= 19 * 8							; stack size required by the procedure
 		mov		node, NMASK					; load node mask
 		and		node, siter2				; node = siter2 & NMASK
 		add		siter2, KSIZE				; siter2++
-		mov		back, .back3
+		lea		back, [.back3]
 		cmp		siter2, [s_slim2]			; if (siter2 cond slimit2)
 		jg		.snxt2						;     then go to next node
 .back3:	mov		[s_iter2], siter2			; save "siter2" variable into the stack
 		add		titer, KSIZE				; titer++
-		mov		back, .back4
+		lea		back, [.back4]
 		cmp		titer, [s_tlim]				; if (titer cond tlimit)
 		jg		.tnext						;     then go to next node
 .back4:	movdqa	[tarray + titer + NDATA], value2
@@ -4737,12 +4743,12 @@ space	= 19 * 8							; stack size required by the procedure
 .else:	mov		node, NMASK					; load node mask
 		and		node, siter2				; node = siter2 & NMASK
 		add		siter2, KSIZE				; siter2++
-		mov		back, .back5
+		lea		back, [.back5]
 		cmp		siter2, [s_slim2]			; if (siter2 cond slimit2)
 		jg		.snxt2						;     then go to next node
 .back5:	mov		[s_iter2], siter2			; save "siter2" variable into the stack
 		add		titer, KSIZE				; titer++
-		mov		back, .back6
+		lea		back, [.back6]
 		cmp		titer, [s_tlim]				; if (titer cond tlimit)
 		jg		.tnext						;     then go to next node
 .back6:	movdqa	[tarray + titer + NDATA], value2
@@ -4753,12 +4759,12 @@ space	= 19 * 8							; stack size required by the procedure
 		mov		node, NMASK					; load node mask
 		and		node, siter1				; node = siter1 & NMASK
 		add		siter1, KSIZE				; siter1++
-		mov		back, .back7
+		lea		back, [.back7]
 		cmp		siter1, [s_slim1]			; if (siter1 cond slimit1)
 		jg		.snxt1						;     then go to next node
 .back7:	mov		[s_iter1], siter1			; save "siter1" variable into the stack
 		add		titer, KSIZE				; titer++
-		mov		back, .back8
+		lea		back, [.back8]
 		cmp		titer, [s_tlim]				; if (titer cond tlimit)
 		jg		.tnext						;     then go to next node
 .back8:	movdqa	[tarray + titer + NDATA], value1
@@ -4978,7 +4984,7 @@ space	= 15 * 8							; stack size required by the procedure
 		mov		node, NMASK					; load node mask
 		and		node, siter					; node = siter & NMASK
 		add		siter, KSIZE				; siter++
-		mov		back, .back1
+		lea		back, [.back1]
 		cmp		siter, [s_slim]				; if (siter cond slimit)
 		jg		.snext						;     then go to next node
 .back1:	mov		[s_siter], siter			; save "siter" variable into the stack
@@ -4994,7 +5000,7 @@ space	= 15 * 8							; stack size required by the procedure
 		test	result, result				; if (result != 0)
 		jz		@f							; {
 		add		titer, KSIZE				;     titer++
-		mov		back, .back2
+		lea		back, [.back2]
 		cmp		titer, [s_tlim]				;     if (titer cond tlimit)
 		jg		.tnext						;         then go to next node
 .back2:	movq	key, [s_value]
@@ -5012,7 +5018,7 @@ space	= 15 * 8							; stack size required by the procedure
 		mov		node, NMASK					; load node mask
 		and		node, siter					; node = siter & NMASK
 		add		siter, KSIZE				; siter++
-		mov		back, .back3
+		lea		back, [.back3]
 		cmp		siter, [s_slim]				; if (siter cond slimit)
 		jg		.snext						;     then go to next node
 .back3:	mov		[s_siter], siter			; save "siter" variable into the stack
@@ -5020,7 +5026,7 @@ space	= 15 * 8							; stack size required by the procedure
 		jnz		.loop						; do while (size != 0)
 ;---[End of unique loop]-------------------
 .skip:	add		titer, KSIZE				; titer++
-		mov		back, .back4
+		lea		back, [.back4]
 		cmp		titer, [s_tlim]				; if (titer cond tlimit)
 		jg		.tnext						;     then go to next node
 .back4:	movq	key, [s_value]

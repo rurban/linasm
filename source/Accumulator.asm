@@ -187,6 +187,7 @@ source	equ		rsi							; pointer to source accumulator object
 ;---[Internal variables]-------------------
 buffer	equ		rax							; pointer to memory buffer
 temp	equ		rcx							; temporary register
+fptr	equ		rax							; pointer to call external function
 stack	equ		rsp							; stack pointer
 s_this	equ		stack + 0 * 8				; stack position of "this" variable
 s_src	equ		stack + 1 * 8				; stack position of "source" variable
@@ -221,7 +222,8 @@ space	= 3 * 8								; stack size required by the procedure
 		mov		param2, [source + BUFFER]
 		mov		param1, buffer
 		add		stack, space				; restoring back the stack pointer
-		jmp		Copy						; return Array::Copy (this.buffer, source.buffer, source.size)
+		mov		fptr, Copy
+		jmp		fptr						; return Array::Copy (this.buffer, source.buffer, source.size)
 ;---[Error branch]-------------------------
 .error:	mov		qword [this + BUFFER], 0	; this.buffer = NULL
 		mov		qword [this + CAPACITY], 0	; this.capacity = 0

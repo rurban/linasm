@@ -200,6 +200,7 @@ macro	SKIP_SIGN
 macro	READ_SIGN	const
 {
 local	.nosgn
+;------------------------------------------
 		xor		sign, sign					; sign = 0
 		cmp		temp, const					; if (ptr[0] != '+')
 		je		@f							; {
@@ -213,11 +214,11 @@ local	.nosgn
 ;******************************************************************************;
 ;       Skip decimal point macro                                               ;
 ;******************************************************************************;
-macro	SKIP_POINT	value
+macro	SKIP_POINT
 {
 		add		exp, ptr					; exp = ptr - exp (count of read digits)
-		cmp		temp, value					; if (temp != '.')
-		jne		.cnvrt						; then go to convert section
+		cmp		byte [ptr], '.'				; if (ptr[0] != '.')
+		jne		.cnvrt						;     then go to convert section
 		add		ptr, 1						; ptr++
 }
 
@@ -227,6 +228,7 @@ macro	SKIP_POINT	value
 macro	READ_DEC_DIGITS
 {
 local	.loop, .start
+;------------------------------------------
 		jmp		.start
 ;---[Parsing loop]-------------------------
 .loop:	cmp		value, max					; if (value < max)
@@ -247,18 +249,8 @@ local	.loop, .start
 ;******************************************************************************;
 macro	READ_HEX_DIGITS
 {
-;---[Internal variables]-------------------
-symbol	equ		r12							; first symbol
-range	equ		r13							; range of digits
-shift	equ		r14							; shift value
-s_symb	equ		stack + -3 * 8				; stack position of "symbol" variable
-s_range	equ		stack + -2 * 8				; stack position of "range" variable
-s_shift	equ		stack + -1 * 8				; stack position of "shift" variable
 local	.loop, .start, .shift
 ;------------------------------------------
-		mov		[s_symb], symbol			; save old value of "symbol" into the stack
-		mov		[s_range], range			; save old value of "range" into the stack
-		mov		[s_shift], shift			; save old value of "shift" into the stack
 		jmp		.start
 ;---[Parsing loop]-------------------------
 .loop:	add		temp, shift					; temp += shift
@@ -274,49 +266,49 @@ local	.loop, .start, .shift
 		mov		range, 9					; range = 9
 		xor		shift, shift				; shift = 0
 		cmp		temp, 'a'					; if (temp >= 'a')
-		cmovae	symbol, [hex_symbol]		;     symbol = hex_symbol
-		cmovae	range, [hex_range]			;     range = hex_range
-		cmovae	shift, [hex_shift]			;     shift = hex_shift
+		cmovae	symbol, [h_symb]			;     symbol = hex_symbol
+		cmovae	range, [h_range]			;     range = hex_range
+		cmovae	shift, [h_shift]			;     shift = hex_shift
 		sub		temp, symbol				; temp -= symbol
 		cmp		temp, range
 		jbe		.loop						; do while (temp <= range)
 ;---[End of loop]--------------------------
-		mov		symbol, [s_symb]			; get old value of "symbol" from the stack
-		mov		range, [s_range]			; get old value of "range" from the stack
-		mov		shift, [s_shift]			; get old value of "shift" from the stack
 }
 
 ;******************************************************************************;
 ;       Read mantissa value macro                                              ;
 ;******************************************************************************;
-macro	GET_MANTISSA	digit, point
+macro	GET_MANTISSA	digit, hex
 {
 		mov		exp, ptr					; exp = ptr
 		xor		value, value				; value = 0
 		mov		max, 1 shl 53				; max = 1 << 53 (max value of mantissa)
 		xor		digits, digits				; digits = 0
 		neg		exp							; exp = -ptr
-		digit								; Parse integer part of mantissa
-	SKIP_POINT	point						; Skip decimal point symbol
-		digit								; Parse fraction part of mantissa
+		digit								; parse integer part of mantissa
+		SKIP_POINT							; skip decimal point symbol
+		digit								; parse fraction part of mantissa
 .cnvrt:	test	digits, digits				; if no digits are found
 		jz		.spcl						;     then check for special values
 		add		value, sign
 		sub		exp, digits					; exp -= digits (scale factor for mantissa)
 		xor		value, sign					; apply sign to the number value (hacker's trick)
 	cvtsi2sd	mant, value					; mantissa = value
+if hex
+		shl		exp, 2						; correct exponent value
+end if
 }
 
 ;******************************************************************************;
 ;       Read exponent value macro                                              ;
 ;******************************************************************************;
-macro	GET_EXP	symbol
+macro	GET_EXP	char
 {
 local	.loop, .exit
 ;---[Skipping exponent prefix]-------------
 		movzx	temp, byte [ptr]			; temp = ptr[0]
 		or		temp, 0x20					; convert char to lower case
-		cmp		temp, symbol				; if exponent symbol is not found
+		cmp		temp, char					; if exponent symbol is not found
 		jne		.exit						;     then go to exit from the macro
 		mov		[s_ptr], ptr				; copy ptr to stack
 ;---[Reading number sign]------------------
@@ -352,30 +344,18 @@ local	.loop, .exit
 ;******************************************************************************;
 macro	SCALE	Func, x
 {
-;---[Internal variables]-------------------
-power	equ		rdi							; scale power
-stack	equ		rsp							; stack pointer
-s_num	equ		stack +  0 * 8				; stack position of "array" variable
-s_ptr	equ		stack +  1 * 8				; stack position of "size" variable
-s_str	equ		stack +  2 * 8				; stack position of "left" variable
-space	= 3 * 8								; stack size required by the procedure
-;------------------------------------------
-		sub		stack, space				; reserving stack size for local vars
-		mov		[s_num], p_num				; save "p_num" variable into the stack
 		mov		[s_ptr], ptr				; save "ptr" variable into the stack
-		mov		[s_str], string				; save "string" variable into the stack
-		mov		power, exp
-		call	Func						; call Scale (mantis)
-		mov		p_num, [s_num]				; get "p_num" variable from the stack
-		mov		ptr, [s_ptr]				; get "ptr" variable from the stack
-		mov		string, [s_str]				; get "string" variable from the stack
-		add		stack, space				; restoring back the stack pointer
+		mov		param1, exp
+		mov		fptr, Func
+		call	fptr						; call Func (mantis)
 if x eq s
 	cvtsd2ss	mant, mant					; convert double to float if required
 end if
-		movs#x	[p_num], mant				; p_num[0] = mantissa
-		sub		ptr, string					; return ptr - string
-		ret
+		mov		pnum, [s_num]				; get "pnum" variable from the stack
+		mov		string, [s_str]				; get "string" variable from the stack
+		mov		ptr, [s_ptr]				; get "ptr" variable from the stack
+		movs#x	[pnum], mant				; pnum[0] = mantissa
+		sub		ptr, string					; ptr -= string
 }
 
 ;******************************************************************************;
@@ -392,16 +372,17 @@ macro	CHECK_SPECIAL	spec
 		mov		str, [ptr]					; read buffer content to string
 		and		str, 0x00FFFFFF				; remove unrequired char that was read
 		or		str, 0x00202020				; convert string to lower case
-		cmp		str, 'nan'					; nan (Little endian string value)
-		mov		spec, [nanval + sign * bytes + bytes]
-		je		@f
-		cmp		str, 'fni'					; inf (Little endian string value)
-		mov		spec, [infval + sign * bytes + bytes]
-		jne		.nonum
-@@:		add		ptr, 3
-		mov		[p_num], spec				; p_num[0] = spec
-		sub		ptr, string					; return ptr - string
-		ret
+		lea		tptr, [nanval]				; set pointer to nan array
+		mov		spec, [tptr + sign * bytes + bytes]
+		cmp		str, 'nan'					; if (str == 'nan')
+		je		@f							;     then skip following code
+		lea		tptr, [infval]				; set pointer to inf array
+		mov		spec, [tptr + sign * bytes + bytes]
+		cmp		str, 'inf'					; if (str != 'inf')
+		jne		.nonum						;     then go to exit
+@@:		add		ptr, 3						; ptr += 3
+		mov		[pnum], spec				; pnum[0] = spec
+		sub		ptr, string					; ptr -= string
 }
 
 ;******************************************************************************;
@@ -410,7 +391,7 @@ macro	CHECK_SPECIAL	spec
 macro	BIN_TO_NUM	part, max_value
 {
 ;---[Parameters]---------------------------
-p_num	equ		rdi							; pointer to number
+pnum	equ		rdi							; pointer to number
 string	equ		rsi							; source string
 ;---[Internal variables]-------------------
 ptr		equ		rax							; temporary pointer to string
@@ -438,7 +419,7 @@ max		equ		r11							; max value
 		cmp		temp, 1
 		jbe		.loop						; do while (temp <= 1)
 ;---[Normal exit branch]-------------------
-		mov		[p_num], part				; p_num[0] = value
+		mov		[pnum], part				; pnum[0] = value
 		sub		ptr, string					; return ptr - string
 		ret
 ;---[Overflow exit branch]-----------------
@@ -461,7 +442,7 @@ BinToNum_int64:	BIN_TO_NUM	rdx, 0x8000000000000000
 macro	OCT_TO_NUM	part, max_value
 {
 ;---[Parameters]---------------------------
-p_num	equ		rdi							; pointer to number
+pnum	equ		rdi							; pointer to number
 string	equ		rsi							; source string
 ;---[Internal variables]-------------------
 ptr		equ		rax							; temporary pointer to string
@@ -487,7 +468,7 @@ max		equ		r11							; max value
 		cmp		temp, 7
 		jbe		.loop						; do while (temp <= 7)
 ;---[Normal exit branch]-------------------
-		mov		[p_num], part				; p_num[0] = value
+		mov		[pnum], part				; pnum[0] = value
 		sub		ptr, string					; return ptr - string
 		ret
 ;---[Overflow exit branch]-----------------
@@ -510,7 +491,7 @@ OctToNum_int64:	OCT_TO_NUM	rdx, 0x2000000000000000
 macro	HEX_TO_NUM	part, max_value
 {
 ;---[Parameters]---------------------------
-p_num	equ		rdi							; pointer to number
+pnum	equ		rdi							; pointer to number
 string	equ		rsi							; source string
 ;---[Internal variables]-------------------
 ptr		equ		rax							; temporary pointer to string
@@ -520,11 +501,18 @@ symbol	equ		r8							; first symbol
 range	equ		r9							; range of digits
 shift	equ		r10							; shift value
 max		equ		r11							; max value
+stack	equ		rsp							; stack pointer
+h_symb	equ		stack - 3 * 8				; stack position of "hex_symbol" variable
+h_range	equ		stack - 2 * 8				; stack position of "hex_range" variable
+h_shift	equ		stack - 1 * 8				; stack position of "hex_shift" variable
 ;---[Skipping white-symbols]---------------
 		SKIP_WHITE
 ;---[Skip hex prefix if found]-------------
 		SKIP_PREFIX	'x'
 ;---[Getting number digits]----------------
+		mov		qword [h_symb], 'a'			; load hex symbol value
+		mov		qword [h_range], 5			; load hex range value
+		mov		qword [h_shift], 10			; load hex shift value
 		mov		max, max_value				; max = max_value
 		xor		value, value				; value = 0
 		movzx	temp, byte [ptr]			; temp = ptr[0]
@@ -533,9 +521,9 @@ max		equ		r11							; max value
 		mov		range, 9					; range = 9
 		xor		shift, shift				; shift = 0
 		cmp		temp, 'a'					; if (temp >= 'a')
-		cmovae	symbol, [hex_symbol]		;     symbol = hex_symbol
-		cmovae	range, [hex_range]			;     range = hex_range
-		cmovae	shift, [hex_shift]			;     shift = hex_shift
+		cmovae	symbol, [h_symb]			;     symbol = hex_symbol
+		cmovae	range, [h_range]			;     range = hex_range
+		cmovae	shift, [h_shift]			;     shift = hex_shift
 		sub		temp, symbol				; temp -= symbol
 		cmp		temp, range					; if (temp > range)
 		ja		.nonum						;     then go to no number branch
@@ -552,14 +540,14 @@ max		equ		r11							; max value
 		mov		range, 9					; range = 9
 		xor		shift, shift				; shift = 0
 		cmp		temp, 'a'					; if (temp >= 'a')
-		cmovae	symbol, [hex_symbol]		;     symbol = hex_symbol
-		cmovae	range, [hex_range]			;     range = hex_range
-		cmovae	shift, [hex_shift]			;     shift = hex_shift
+		cmovae	symbol, [h_symb]			;     symbol = hex_symbol
+		cmovae	range, [h_range]			;     range = hex_range
+		cmovae	shift, [h_shift]			;     shift = hex_shift
 		sub		temp, symbol				; temp -= symbol
 		cmp		temp, range
 		jbe		.loop						; do while (temp <= range)
 ;---[Normal exit branch]-------------------
-		mov		[p_num], part				; p_num[0] = value
+		mov		[pnum], part				; pnum[0] = value
 		sub		ptr, string					; return ptr - string
 		ret
 ;---[Overflow exit branch]-----------------
@@ -573,9 +561,10 @@ max		equ		r11							; max value
 macro	FLOAT_TO_NUM	spec, x, dec_variant
 {
 ;---[Parameters]---------------------------
-p_num	equ		rdi							; pointer to number
+pnum	equ		rdi							; pointer to number
 string	equ		rsi							; source string
 ;---[Internal variables]-------------------
+fptr	equ		rax							; pointer to call external function
 ptr		equ		rax							; temporary pointer to string
 str		equ		ecx
 temp	equ		rcx							; temporary value
@@ -584,9 +573,22 @@ digits	equ		r8							; count of digits that number has
 sign	equ		r9							; number sign
 exp		equ		r10							; number exponent
 max		equ		r11							; max value that mantissa can hold
+symbol	equ		r12							; first symbol
+range	equ		r13							; range of digits
+shift	equ		r14							; shift value
+tptr	equ		digits						; temporary pointer
 mant	equ		xmm0						; mantissa value
 base	equ		xmm1						; base of numeral system
-s_ptr	equ		rsp - 1 * 8					; stack position of "ptr" variable
+stack	equ		rsp							; stack pointer
+s_symb	equ		stack + 0 * 8				; stack position of "symbol" variable
+s_range	equ		stack + 1 * 8				; stack position of "range" variable
+s_shift	equ		stack + 2 * 8				; stack position of "shift" variable
+s_num	equ		stack + 3 * 8				; stack position of "pnum" variable
+s_str	equ		stack + 4 * 8				; stack position of "string" variable
+s_ptr	equ		stack + 5 * 8				; stack position of "ptr" variable
+h_symb	equ		stack + 6 * 8				; stack position of "hex_symbol" variable
+h_range	equ		stack + 7 * 8				; stack position of "hex_range" variable
+h_shift	equ		stack + 8 * 8				; stack position of "hex_shift" variable
 if x eq s
 infval	= inf_flt32							; inf values array
 nanval	= nan_flt32							; nan values array
@@ -596,28 +598,57 @@ infval	= inf_flt64							; inf values array
 nanval	= nan_flt64							; nan values array
 bytes	= 8
 end if
+space	= 9 * 8								; stack size required by the procedure
+;------------------------------------------
+		sub		stack, space				; reserving stack size for local vars
+		mov		[s_symb], symbol			; save old value of "symbol" into the stack
+		mov		[s_range], range			; save old value of "range" into the stack
+		mov		[s_shift], shift			; save old value of "shift" into the stack
+		mov		[s_num], pnum				; save "pnum" variable into the stack
+		mov		[s_str], string				; save "string" variable into the stack
 ;---[Skipping white-symbols]---------------
 		SKIP_WHITE
 ;---[Reading number sign]------------------
 		READ_SIGN	0x22
 ;---[Reading number value]-----------------
+		mov		qword [h_symb], 'a'			; load hex symbol value
+		mov		qword [h_range], 5			; load hex range value
+		mov		qword [h_shift], 10			; load hex shift value
 if dec_variant
-		GET_MANTISSA	READ_DEC_DIGITS, -2
+		GET_MANTISSA	READ_DEC_DIGITS, 0
 		GET_EXP			'e'
 		SCALE			Scale10, x
 else
 		SKIP_PREFIX		'x'
-		GET_MANTISSA	READ_HEX_DIGITS, -51
+		GET_MANTISSA	READ_HEX_DIGITS, 1
 		GET_EXP			'p'
 		SCALE			Scale2, x
 end if
+		mov		symbol, [s_symb]			; get old value of "symbol" from the stack
+		mov		range, [s_range]			; get old value of "range" from the stack
+		mov		shift, [s_shift]			; get old value of "shift" from the stack
+		add		stack, space				; restoring back the stack pointer
+		ret
 ;---[Special values branch]----------------
 		CHECK_SPECIAL	spec
+		mov		symbol, [s_symb]			; get old value of "symbol" from the stack
+		mov		range, [s_range]			; get old value of "range" from the stack
+		mov		shift, [s_shift]			; get old value of "shift" from the stack
+		add		stack, space				; restoring back the stack pointer
+		ret
 ;---[Overflow exit branch]-----------------
 .ovrfl:	xor		ptr, ptr					; return 0
+		mov		symbol, [s_symb]			; get old value of "symbol" from the stack
+		mov		range, [s_range]			; get old value of "range" from the stack
+		mov		shift, [s_shift]			; get old value of "shift" from the stack
+		add		stack, space				; restoring back the stack pointer
 		ret
 ;---[No number exit branch]----------------
 .nonum:	mov		ptr, NOT_FOUND				; return NOT_FOUND
+		mov		symbol, [s_symb]			; get old value of "symbol" from the stack
+		mov		range, [s_range]			; get old value of "range" from the stack
+		mov		shift, [s_shift]			; get old value of "shift" from the stack
+		add		stack, space				; restoring back the stack pointer
 		ret
 }
 
@@ -637,7 +668,7 @@ HexToNum_flt64:	FLOAT_TO_NUM	rdx, d, 0
 macro	DEC_TO_NUM_UINT	part, max_value, scale
 {
 ;---[Parameters]---------------------------
-p_num	equ		rdi							; pointer to number
+pnum	equ		rdi							; pointer to number
 string	equ		rsi							; source string
 ;---[Internal variables]-------------------
 ptr		equ		rax							; temporary pointer to string
@@ -675,7 +706,7 @@ if scale <> 3
 		cmp		value, limit				; if (value > limit)
 		jae		.ovrfl						;     then go to overflow branch
 end if
-		mov		[p_num], part				; p_num[0] = value
+		mov		[pnum], part				; pnum[0] = value
 		sub		ptr, string					; return ptr - string
 		ret
 ;---[Overflow exit branch]-----------------
@@ -689,7 +720,7 @@ end if
 macro	DEC_TO_NUM_SINT	part, max_value, scale
 {
 ;---[Parameters]---------------------------
-p_num	equ		rdi							; pointer to number
+pnum	equ		rdi							; pointer to number
 string	equ		rsi							; source string
 ;---[Internal variables]-------------------
 ptr		equ		rax							; temporary pointer to string
@@ -727,7 +758,7 @@ bytes	= 1 shl scale						; size of signed integer type
 ;---[Normal exit branch]-------------------
 		add		value, sign					; apply sign to the number value
 		xor		value, sign					; (hacker's trick)
-		mov		[p_num], part				; p_num[0] = value
+		mov		[pnum], part				; pnum[0] = value
 		sub		ptr, string					; return ptr - string
 		ret
 ;---[Overflow exit branch]-----------------
@@ -758,11 +789,6 @@ DecToNum_flt64:		FLOAT_TO_NUM	rdx, d, 1
 ;#      Read-only data section                                                 #
 ;###############################################################################
 section	'.rodata'	align 16
-
-; Consts to convert hexadecimal numbers
-hex_symbol	dq	'a'											; first symbol
-hex_range	dq	5											; range of digits
-hex_shift	dq	10											; shift value
 
 ; flt32_t
 inf_flt32	dd	MINF_FLT32, PINF_FLT32						; -Inf, +Inf

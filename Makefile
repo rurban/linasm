@@ -55,13 +55,15 @@ man8ext			:= .8
 #******************************************************************************#
 
 # Utilities names
-AR				:= ar
 AS				:= build/fasm
+LD				:= ld
+LN				:= ln
 INSTALL			:= install
 
 # Utilities flags
-ARFLAGS			:= rs
 ASFLAGS			:=
+LDFLAGS			:=
+LNFLAGS			:=
 INSTALLFLAGS	:=
 
 #******************************************************************************#
@@ -72,9 +74,11 @@ vpath	%.inc	$(srcdir)
 vpath	%.asm	$(srcdir)
 
 INSTALL_PROGRAM := $(INSTALL)
-INSTALL_DATA	:= $(INSTALL) -m 644
+INSTALL_DATA	:= $(INSTALL) -m 755
 
-lib				:= liblinasm.a
+lib				:= liblinasm.so
+ver				:= 1.1
+vlib			:= $(lib).$(ver)
 includes		:= $(notdir $(wildcard $(incdir)/*.h))
 objects			:= $(notdir $(patsubst %.asm, %.o, $(wildcard $(srcdir)/*.asm)))
 
@@ -87,7 +91,7 @@ objects			:= $(notdir $(patsubst %.asm, %.o, $(wildcard $(srcdir)/*.asm)))
 all: $(lib)
 
 $(lib): $(objects)
-	$(AR) $(ARFLAGS) $@ $?
+	$(LD) --shared $(LDFLAGS) $^ -o $@
 
 %.o: %.asm
 	$(AS) $(ASFLAGS) $< $@
@@ -96,11 +100,12 @@ Time.o: Errno.inc Syscall.inc
 
 install: $(lib) $(includes)
 	$(INSTALL) -d $(INSTALLFLAGS) $(DESTDIR)$(includedir)
-	$(INSTALL_DATA) -Dp $(INSTALLFLAGS) $(lib) $(DESTDIR)$(libdir)/$(lib)
+	$(INSTALL_DATA) -Dp $(INSTALLFLAGS) $(lib) $(DESTDIR)$(libdir)/$(vlib)
+	$(LN) -sf $(DESTDIR)$(libdir)/$(vlib) $(DESTDIR)$(libdir)/$(lib)
 	cd $(incdir) && $(INSTALL_DATA) -p $(INSTALLFLAGS) $(includes) $(DESTDIR)$(includedir)
 
 uninstall:
-	-cd $(DESTDIR)$(libdir) && rm -f $(lib)
+	-cd $(DESTDIR)$(libdir) && rm -f $(lib) $(vlib)
 	-cd $(DESTDIR)$(includedir) && rm -f $(includes)
 
 clean:

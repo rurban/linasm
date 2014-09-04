@@ -210,6 +210,647 @@ shiftl	equ		cl							; low part of shift register
 		cmovb	value, temp					;     value = min
 }
 
+;******************************************************************************;
+;       Fast computation of polynomial value of degree 3                       ;
+;******************************************************************************;
+macro	SINGLE4	array, value, x
+{
+if x eq s
+		shufp#x	value, value, 0x0			; duplicate value through the entire register
+		movap#x	temp1, [array + 0 * VSIZE]	; temp1 = array[0]
+;---[Stage 1]------------------------------
+		movap#x	temp2, temp1
+		shufp#x	temp2, temp2, 0xE			; extract high result from temp1
+		mulp#x	temp1, value
+		addp#x	temp1, temp2				; temp1 = temp1 + temp2 * value
+		mulp#x	value, value				; value *= value
+;---[Stage 2]------------------------------
+		movap#x	temp2, temp1
+		shufp#x	temp2, temp2, 0x1			; extract high result from temp1
+		muls#x	temp1, value
+		adds#x	temp1, temp2				; temp1 = temp2 + temp1 * value
+else if x eq d
+		shufp#x	value, value, 0x0			; duplicate value through the entire register
+		movap#x	temp1, [array + 0 * VSIZE]	; temp1 = array[0]
+;---[Stage 1]------------------------------
+		mulp#x	temp1, value
+		addp#x	temp1, [array + 1 * VSIZE]	; temp1 = array[1] + array[0] * value
+		mulp#x	value, value				; value *= value
+;---[Stage 2]------------------------------
+		movap#x	temp2, temp1
+		shufp#x	temp2, temp2, 0x1			; extract high result from temp1
+		muls#x	temp1, value
+		adds#x	temp1, temp2				; temp1 = temp2 + temp1 * value
+end if
+}
+;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+macro	PAIR4	array, value, x
+{
+if x eq s
+		shufp#x	value, value, 0x0			; duplicate value through the entire register
+		movap#x	temp1, [array + 0 * VSIZE]	; temp1 = array[0]
+		movap#x	temp2, [array + 1 * VSIZE]	; temp2 = array[1]
+;---[Stage 1]------------------------------
+		movap#x	temp3, temp1
+		shufp#x	temp3, temp3, 0xE			; extract high result from temp1
+		mulp#x	temp1, value
+		addp#x	temp1, temp3				; temp1 = temp1 + temp3 * value
+		movap#x	temp4, temp2
+		shufp#x	temp4, temp4, 0xE			; extract high result from temp2
+		mulp#x	temp2, value
+		addp#x	temp2, temp4				; temp2 = temp2 + temp4 * value
+		mulp#x	value, value				; value *= value
+;---[Stage 2]------------------------------
+		movap#x	temp3, temp1
+		shufp#x	temp3, temp3, 0x1			; extract high result from temp1
+		muls#x	temp1, value
+		adds#x	temp1, temp3				; temp1 = temp3 + temp1 * value
+		movap#x	temp4, temp2
+		shufp#x	temp4, temp4, 0x1			; extract high result from temp2
+		muls#x	temp2, value
+		adds#x	temp2, temp4				; temp2 = temp4 + temp2 * value
+else if x eq d
+		shufp#x	value, value, 0x0			; duplicate value through the entire register
+		movap#x	temp1, [array + 0 * VSIZE]	; temp1 = array[0]
+		movap#x	temp2, [array + 2 * VSIZE]	; temp2 = array[2]
+;---[Stage 1]------------------------------
+		mulp#x	temp1, value
+		addp#x	temp1, [array + 1 * VSIZE]	; temp1 = array[1] + array[0] * value
+		mulp#x	temp2, value
+		addp#x	temp2, [array + 3 * VSIZE]	; temp2 = array[3] + array[2] * value
+		mulp#x	value, value				; value *= value
+;---[Stage 2]------------------------------
+		movap#x	temp3, temp1
+		shufp#x	temp3, temp3, 0x1			; extract high result from temp1
+		muls#x	temp1, value
+		adds#x	temp1, temp3				; temp1 = temp3 + temp1 * value
+		movap#x	temp4, temp2
+		shufp#x	temp4, temp4, 0x1			; extract high result from temp2
+		muls#x	temp2, value
+		adds#x	temp2, temp4				; temp2 = temp4 + temp2 * value
+end if
+}
+
+;******************************************************************************;
+;       Fast computation of polynomial value of degree 7                       ;
+;******************************************************************************;
+macro	SINGLE8	array, value, x
+{
+if x eq s
+		shufp#x	value, value, 0x0			; duplicate value through the entire register
+		movap#x	temp1, [array + 0 * VSIZE]	; temp1 = array[0]
+;---[Stage 1]------------------------------
+		mulp#x	temp1, value
+		addp#x	temp1, [array + 1 * VSIZE]	; temp1 = array[1] + array[0] * value
+		mulp#x	value, value				; value *= value
+;---[Stage 2]------------------------------
+		movap#x	temp2, temp1
+		shufp#x	temp2, temp2, 0xE			; extract high result from temp1
+		mulp#x	temp1, value
+		addp#x	temp1, temp2				; temp1 = temp1 + temp2 * value
+		mulp#x	value, value				; value *= value
+;---[Stage 3]------------------------------
+		movap#x	temp2, temp1
+		shufp#x	temp2, temp2, 0x1			; extract high result from temp1
+		muls#x	temp1, value
+		adds#x	temp1, temp2				; temp1 = temp2 + temp1 * value
+else if x eq d
+		shufp#x	value, value, 0x0			; duplicate value through the entire register
+		movap#x	temp1, [array + 0 * VSIZE]	; temp1 = array[0]
+		movap#x	temp2, [array + 1 * VSIZE]	; temp2 = array[1]
+;---[Stage 1]------------------------------
+		mulp#x	temp1, value
+		addp#x	temp1, [array + 2 * VSIZE]	; temp1 = array[2] + array[0] * value
+		mulp#x	temp2, value
+		addp#x	temp2, [array + 3 * VSIZE]	; temp2 = array[3] + array[1] * value
+		mulp#x	value, value				; value *= value
+;---[Stage 2]------------------------------
+		mulp#x	temp1, value
+		addp#x	temp1, temp2				; temp1 = temp1 + temp2 * value
+		mulp#x	value, value				; value *= value
+;---[Stage 3]------------------------------
+		movap#x	temp2, temp1
+		shufp#x	temp2, temp2, 0x1			; extract high result from temp1
+		muls#x	temp1, value
+		adds#x	temp1, temp2				; temp1 = temp2 + temp1 * value
+end if
+}
+;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+macro	PAIR8	array, value, x
+{
+if x eq s
+		shufp#x	value, value, 0x0			; duplicate value through the entire register
+		movap#x	temp1, [array + 0 * VSIZE]	; temp1 = array[0]
+		movap#x	temp2, [array + 2 * VSIZE]	; temp2 = array[2]
+;---[Stage 1]------------------------------
+		mulp#x	temp1, value
+		addp#x	temp1, [array + 1 * VSIZE]	; temp1 = array[1] + array[0] * value
+		mulp#x	temp2, value
+		addp#x	temp2, [array + 3 * VSIZE]	; temp2 = array[3] + array[2] * value
+		mulp#x	value, value				; value *= value
+;---[Stage 2]------------------------------
+		movap#x	temp3, temp1
+		shufp#x	temp3, temp3, 0xE			; extract high result from temp1
+		mulp#x	temp1, value
+		addp#x	temp1, temp3				; temp1 = temp1 + temp3 * value
+		movap#x	temp4, temp2
+		shufp#x	temp4, temp4, 0xE			; extract high result from temp2
+		mulp#x	temp2, value
+		addp#x	temp2, temp4				; temp2 = temp2 + temp4 * value
+		mulp#x	value, value				; value *= value
+;---[Stage 3]------------------------------
+		movap#x	temp3, temp1
+		shufp#x	temp3, temp3, 0x1			; extract high result from temp1
+		muls#x	temp1, value
+		adds#x	temp1, temp3				; temp1 = temp3 + temp1 * value
+		movap#x	temp4, temp2
+		shufp#x	temp4, temp4, 0x1			; extract high result from temp2
+		muls#x	temp2, value
+		adds#x	temp2, temp4				; temp2 = temp4 + temp2 * value
+else if x eq d
+		shufp#x	value, value, 0x0			; duplicate value through the entire register
+		movap#x	temp1, [array + 0 * VSIZE]	; temp1 = array[0]
+		movap#x	temp3, [array + 1 * VSIZE]	; temp3 = array[1]
+		movap#x	temp2, [array + 4 * VSIZE]	; temp2 = array[4]
+		movap#x	temp4, [array + 5 * VSIZE]	; temp4 = array[5]
+;---[Stage 1]------------------------------
+		mulp#x	temp1, value
+		addp#x	temp1, [array + 2 * VSIZE]	; temp1 = array[2] + array[0] * value
+		mulp#x	temp3, value
+		addp#x	temp3, [array + 3 * VSIZE]	; temp3 = array[3] + array[1] * value
+		mulp#x	temp2, value
+		addp#x	temp2, [array + 6 * VSIZE]	; temp2 = array[6] + array[4] * value
+		mulp#x	temp4, value
+		addp#x	temp4, [array + 7 * VSIZE]	; temp4 = array[7] + array[5] * value
+		mulp#x	value, value				; value *= value
+;---[Stage 2]------------------------------
+		mulp#x	temp1, value
+		addp#x	temp1, temp3				; temp1 = temp1 + temp3 * value
+		mulp#x	temp2, value
+		addp#x	temp2, temp4				; temp2 = temp2 + temp4 * value
+		mulp#x	value, value				; value *= value
+;---[Stage 3]------------------------------
+		movap#x	temp3, temp1
+		shufp#x	temp3, temp3, 0x1			; extract high result from temp1
+		muls#x	temp1, value
+		adds#x	temp1, temp3				; temp1 = temp3 + temp1 * value
+		movap#x	temp4, temp2
+		shufp#x	temp4, temp4, 0x1			; extract high result from temp2
+		muls#x	temp2, value
+		adds#x	temp2, temp4				; temp2 = temp4 + temp2 * value
+end if
+}
+
+;******************************************************************************;
+;       Fast computation of polynomial value of degree 15                      ;
+;******************************************************************************;
+macro	SINGLE16	array, value, x
+{
+if x eq s
+		shufp#x	value, value, 0x0			; duplicate value through the entire register
+		movap#x	temp1, [array + 0 * VSIZE]	; temp1 = array[0]
+		movap#x	temp2, [array + 1 * VSIZE]	; temp2 = array[1]
+;---[Stage 1]------------------------------
+		mulp#x	temp1, value
+		addp#x	temp1, [array + 2 * VSIZE]	; temp1 = array[2] + array[0] * value
+		mulp#x	temp2, value
+		addp#x	temp2, [array + 3 * VSIZE]	; temp2 = array[3] + array[1] * value
+		mulp#x	value, value				; value *= value
+;---[Stage 2]------------------------------
+		mulp#x	temp1, value
+		addp#x	temp1, temp2				; temp1 = temp1 + temp2 * value
+		mulp#x	value, value				; value *= value
+;---[Stage 3]------------------------------
+		movap#x	temp2, temp1
+		shufp#x	temp2, temp2, 0xE			; extract high result from temp1
+		mulp#x	temp1, value
+		addp#x	temp1, temp2				; temp1 = temp1 + temp2 * value
+		mulp#x	value, value				; value *= value
+;---[Stage 4]------------------------------
+		movap#x	temp2, temp1
+		shufp#x	temp2, temp2, 0x1			; extract high result from temp1
+		muls#x	temp1, value
+		adds#x	temp1, temp2				; temp1 = temp2 + temp1 * value
+else if x eq d
+		shufp#x	value, value, 0x0			; duplicate value through the entire register
+		movap#x	temp1, [array + 0 * VSIZE]	; temp1 = array[0]
+		movap#x	temp2, [array + 1 * VSIZE]	; temp2 = array[1]
+		movap#x	temp3, [array + 2 * VSIZE]	; temp3 = array[2]
+		movap#x	temp4, [array + 3 * VSIZE]	; temp4 = array[3]
+;---[Stage 1]------------------------------
+		mulp#x	temp1, value
+		addp#x	temp1, [array + 4 * VSIZE]	; temp1 = array[4] + array[0] * value
+		mulp#x	temp2, value
+		addp#x	temp2, [array + 5 * VSIZE]	; temp2 = array[5] + array[1] * value
+		mulp#x	temp3, value
+		addp#x	temp3, [array + 6 * VSIZE]	; temp3 = array[6] + array[2] * value
+		mulp#x	temp4, value
+		addp#x	temp4, [array + 7 * VSIZE]	; temp4 = array[7] + array[3] * value
+		mulp#x	value, value				; value *= value
+;---[Stage 2]------------------------------
+		mulp#x	temp1, value
+		addp#x	temp1, temp3				; temp1 = temp1 + temp3 * value
+		mulp#x	temp2, value
+		addp#x	temp2, temp4				; temp2 = temp2 + temp4 * value
+		mulp#x	value, value				; value *= value
+;---[Stage 3]------------------------------
+		mulp#x	temp1, value
+		addp#x	temp1, temp2				; temp1 = temp1 + temp2 * value
+		mulp#x	value, value				; value *= value
+;---[Stage 4]------------------------------
+		movap#x	temp2, temp1
+		shufp#x	temp2, temp2, 0x1			; extract high result from temp1
+		muls#x	temp1, value
+		adds#x	temp1, temp2				; temp1 = temp2 + temp1 * value
+end if
+}
+;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+macro	PAIR16	array, value, x
+{
+if x eq s
+		shufp#x	value, value, 0x0			; duplicate value through the entire register
+		movap#x	temp1, [array + 0 * VSIZE]	; temp1 = array[0]
+		movap#x	temp3, [array + 1 * VSIZE]	; temp3 = array[1]
+		movap#x	temp2, [array + 4 * VSIZE]	; temp2 = array[4]
+		movap#x	temp4, [array + 5 * VSIZE]	; temp4 = array[5]
+;---[Stage 1]------------------------------
+		mulp#x	temp1, value
+		addp#x	temp1, [array + 2 * VSIZE]	; temp1 = array[2] + array[0] * value
+		mulp#x	temp3, value
+		addp#x	temp3, [array + 3 * VSIZE]	; temp3 = array[3] + array[1] * value
+		mulp#x	temp2, value
+		addp#x	temp2, [array + 6 * VSIZE]	; temp2 = array[6] + array[4] * value
+		mulp#x	temp4, value
+		addp#x	temp4, [array + 7 * VSIZE]	; temp4 = array[7] + array[5] * value
+		mulp#x	value, value				; value *= value
+;---[Stage 2]------------------------------
+		mulp#x	temp1, value
+		addp#x	temp1, temp3				; temp1 = temp1 + temp3 * value
+		mulp#x	temp2, value
+		addp#x	temp2, temp4				; temp2 = temp2 + temp4 * value
+		mulp#x	value, value				; value *= value
+;---[Stage 3]------------------------------
+		movap#x	temp3, temp1
+		shufp#x	temp3, temp3, 0xE			; extract high result from temp1
+		mulp#x	temp1, value
+		addp#x	temp1, temp3				; temp1 = temp1 + temp3 * value
+		movap#x	temp4, temp2
+		shufp#x	temp4, temp4, 0xE			; extract high result from temp2
+		mulp#x	temp2, value
+		addp#x	temp2, temp4				; temp2 = temp2 + temp4 * value
+		mulp#x	value, value				; value *= value
+;---[Stage 4]------------------------------
+		movap#x	temp3, temp1
+		shufp#x	temp3, temp3, 0x1			; extract high result from temp1
+		muls#x	temp1, value
+		adds#x	temp1, temp3				; temp1 = temp3 + temp1 * value
+		movap#x	temp4, temp2
+		shufp#x	temp4, temp4, 0x1			; extract high result from temp2
+		muls#x	temp2, value
+		adds#x	temp2, temp4				; temp2 = temp4 + temp2 * value
+else if x eq d
+		shufp#x	value, value, 0x0			; duplicate value through the entire register
+		movap#x	temp1, [array + 0 * VSIZE]	; temp1 = array[0]
+		movap#x	temp3, [array + 1 * VSIZE]	; temp3 = array[1]
+		movap#x	temp5, [array + 2 * VSIZE]	; temp5 = array[2]
+		movap#x	temp7, [array + 3 * VSIZE]	; temp7 = array[3]
+		movap#x	temp2, [array + 8 * VSIZE]	; temp2 = array[8]
+		movap#x	temp4, [array + 9 * VSIZE]	; temp4 = array[9]
+		movap#x	temp6, [array + 10 * VSIZE]	; temp6 = array[10]
+		movap#x	temp8, [array + 11 * VSIZE]	; temp8 = array[11]
+;---[Stage 1]------------------------------
+		mulp#x	temp1, value
+		addp#x	temp1, [array + 4 * VSIZE]	; temp1 = array[4] + array[0] * value
+		mulp#x	temp3, value
+		addp#x	temp3, [array + 5 * VSIZE]	; temp3 = array[5] + array[1] * value
+		mulp#x	temp5, value
+		addp#x	temp5, [array + 6 * VSIZE]	; temp5 = array[6] + array[2] * value
+		mulp#x	temp7, value
+		addp#x	temp7, [array + 7 * VSIZE]	; temp7 = array[7] + array[3] * value
+		mulp#x	temp2, value
+		addp#x	temp2, [array + 12 * VSIZE]	; temp2 = array[12] + array[8] * value
+		mulp#x	temp4, value
+		addp#x	temp4, [array + 13 * VSIZE]	; temp4 = array[13] + array[9] * value
+		mulp#x	temp6, value
+		addp#x	temp6, [array + 14 * VSIZE]	; temp6 = array[14] + array[10] * value
+		mulp#x	temp8, value
+		addp#x	temp8, [array + 15 * VSIZE]	; temp8 = array[15] + array[11] * value
+		mulp#x	value, value				; value *= value
+;---[Stage 2]------------------------------
+		mulp#x	temp1, value
+		addp#x	temp1, temp5				; temp1 = temp1 + temp5 * value
+		mulp#x	temp3, value
+		addp#x	temp3, temp7				; temp3 = temp3 + temp7 * value
+		mulp#x	temp2, value
+		addp#x	temp2, temp6				; temp2 = temp2 + temp6 * value
+		mulp#x	temp4, value
+		addp#x	temp4, temp8				; temp4 = temp4 + temp8 * value
+		mulp#x	value, value				; value *= value
+;---[Stage 3]------------------------------
+		mulp#x	temp1, value
+		addp#x	temp1, temp3				; temp1 = temp1 + temp3 * value
+		mulp#x	temp2, value
+		addp#x	temp2, temp4				; temp2 = temp2 + temp4 * value
+		mulp#x	value, value				; value *= value
+;---[Stage 4]------------------------------
+		movap#x	temp3, temp1
+		shufp#x	temp3, temp3, 0x1			; extract high result from temp1
+		muls#x	temp1, value
+		adds#x	temp1, temp3				; temp1 = temp3 + temp1 * value
+		movap#x	temp4, temp2
+		shufp#x	temp4, temp4, 0x1			; extract high result from temp2
+		muls#x	temp2, value
+		adds#x	temp2, temp4				; temp2 = temp4 + temp2 * value
+end if
+}
+
+;******************************************************************************;
+;       Fast computation of polynomial value of degree 31                      ;
+;******************************************************************************;
+macro	SINGLE32	array, value, x
+{
+if x eq s
+		shufp#x	value, value, 0x0			; duplicate value through the entire register
+		movap#x	temp1, [array + 0 * VSIZE]	; temp1 = array[0]
+		movap#x	temp2, [array + 1 * VSIZE]	; temp2 = array[1]
+		movap#x	temp3, [array + 2 * VSIZE]	; temp3 = array[2]
+		movap#x	temp4, [array + 3 * VSIZE]	; temp4 = array[3]
+;---[Stage 1]------------------------------
+		mulp#x	temp1, value
+		addp#x	temp1, [array + 4 * VSIZE]	; temp1 = array[4] + array[0] * value
+		mulp#x	temp2, value
+		addp#x	temp2, [array + 5 * VSIZE]	; temp2 = array[5] + array[1] * value
+		mulp#x	temp3, value
+		addp#x	temp3, [array + 6 * VSIZE]	; temp3 = array[6] + array[2] * value
+		mulp#x	temp4, value
+		addp#x	temp4, [array + 7 * VSIZE]	; temp4 = array[7] + array[3] * value
+		mulp#x	value, value				; value *= value
+;---[Stage 2]------------------------------
+		mulp#x	temp1, value
+		addp#x	temp1, temp3				; temp1 = temp1 + temp3 * value
+		mulp#x	temp2, value
+		addp#x	temp2, temp4				; temp2 = temp2 + temp4 * value
+		mulp#x	value, value				; value *= value
+;---[Stage 3]------------------------------
+		mulp#x	temp1, value
+		addp#x	temp1, temp2				; temp1 = temp1 + temp2 * value
+		mulp#x	value, value				; value *= value
+;---[Stage 4]------------------------------
+		movap#x	temp2, temp1
+		shufp#x	temp2, temp2, 0xE			; extract high result from temp1
+		mulp#x	temp1, value
+		addp#x	temp1, temp2				; temp1 = temp1 + temp2 * value
+		mulp#x	value, value				; value *= value
+;---[Stage 5]------------------------------
+		movap#x	temp2, temp1
+		shufp#x	temp2, temp2, 0x1			; extract high result from temp1
+		muls#x	temp1, value
+		adds#x	temp1, temp2				; temp1 = temp2 + temp1 * value
+else if x eq d
+		shufp#x	value, value, 0x0			; duplicate value through the entire register
+		movap#x	temp1, [array + 0 * VSIZE]	; temp1 = array[0]
+		movap#x	temp2, [array + 1 * VSIZE]	; temp2 = array[1]
+		movap#x	temp3, [array + 2 * VSIZE]	; temp3 = array[2]
+		movap#x	temp4, [array + 3 * VSIZE]	; temp4 = array[3]
+		movap#x	temp5, [array + 4 * VSIZE]	; temp5 = array[4]
+		movap#x	temp6, [array + 5 * VSIZE]	; temp6 = array[5]
+		movap#x	temp7, [array + 6 * VSIZE]	; temp7 = array[6]
+		movap#x	temp8, [array + 7 * VSIZE]	; temp8 = array[7]
+;---[Stage 1]------------------------------
+		mulp#x	temp1, value
+		addp#x	temp1, [array + 8 * VSIZE]	; temp1 = array[8] + array[0] * value
+		mulp#x	temp2, value
+		addp#x	temp2, [array + 9 * VSIZE]	; temp2 = array[9] + array[1] * value
+		mulp#x	temp3, value
+		addp#x	temp3, [array + 10 * VSIZE]	; temp3 = array[10] + array[2] * value
+		mulp#x	temp4, value
+		addp#x	temp4, [array + 11 * VSIZE]	; temp4 = array[11] + array[3] * value
+		mulp#x	temp5, value
+		addp#x	temp5, [array + 12 * VSIZE]	; temp5 = array[12] + array[4] * value
+		mulp#x	temp6, value
+		addp#x	temp6, [array + 13 * VSIZE]	; temp6 = array[13] + array[5] * value
+		mulp#x	temp7, value
+		addp#x	temp7, [array + 14 * VSIZE]	; temp7 = array[14] + array[6] * value
+		mulp#x	temp8, value
+		addp#x	temp8, [array + 15 * VSIZE]	; temp8 = array[15] + array[7] * value
+		mulp#x	value, value				; value *= value
+;---[Stage 2]------------------------------
+		mulp#x	temp1, value
+		addp#x	temp1, temp5				; temp1 = temp1 + temp5 * value
+		mulp#x	temp2, value
+		addp#x	temp2, temp6				; temp2 = temp2 + temp6 * value
+		mulp#x	temp3, value
+		addp#x	temp3, temp7				; temp3 = temp3 + temp7 * value
+		mulp#x	temp4, value
+		addp#x	temp4, temp8				; temp4 = temp4 + temp8 * value
+		mulp#x	value, value				; value *= value
+;---[Stage 3]------------------------------
+		mulp#x	temp1, value
+		addp#x	temp1, temp3				; temp1 = temp1 + temp3 * value
+		mulp#x	temp2, value
+		addp#x	temp2, temp4				; temp2 = temp2 + temp4 * value
+		mulp#x	value, value				; value *= value
+;---[Stage 4]------------------------------
+		mulp#x	temp1, value
+		addp#x	temp1, temp2				; temp1 = temp1 + temp2 * value
+		mulp#x	value, value				; value *= value
+;---[Stage 5]------------------------------
+		movap#x	temp2, temp1
+		shufp#x	temp2, temp2, 0x1			; extract high result from temp1
+		muls#x	temp1, value
+		adds#x	temp1, temp2				; temp1 = temp2 + temp1 * value
+end if
+}
+
+;******************************************************************************;
+;       Fast computation of polynomial value of degree 63                      ;
+;******************************************************************************;
+macro	SINGLE64	array, value, x
+{
+if x eq s
+		shufp#x	value, value, 0x0			; duplicate value through the entire register
+		movap#x	temp1, [array + 0 * VSIZE]	; temp1 = array[0]
+		movap#x	temp2, [array + 1 * VSIZE]	; temp2 = array[1]
+		movap#x	temp3, [array + 2 * VSIZE]	; temp3 = array[2]
+		movap#x	temp4, [array + 3 * VSIZE]	; temp4 = array[3]
+		movap#x	temp5, [array + 4 * VSIZE]	; temp5 = array[4]
+		movap#x	temp6, [array + 5 * VSIZE]	; temp6 = array[5]
+		movap#x	temp7, [array + 6 * VSIZE]	; temp7 = array[6]
+		movap#x	temp8, [array + 7 * VSIZE]	; temp8 = array[7]
+;---[Stage 1]------------------------------
+		mulp#x	temp1, value
+		addp#x	temp1, [array + 8 * VSIZE]	; temp1 = array[8] + array[0] * value
+		mulp#x	temp2, value
+		addp#x	temp2, [array + 9 * VSIZE]	; temp2 = array[9] + array[1] * value
+		mulp#x	temp3, value
+		addp#x	temp3, [array + 10 * VSIZE]	; temp3 = array[10] + array[2] * value
+		mulp#x	temp4, value
+		addp#x	temp4, [array + 11 * VSIZE]	; temp4 = array[11] + array[3] * value
+		mulp#x	temp5, value
+		addp#x	temp5, [array + 12 * VSIZE]	; temp5 = array[12] + array[4] * value
+		mulp#x	temp6, value
+		addp#x	temp6, [array + 13 * VSIZE]	; temp6 = array[13] + array[5] * value
+		mulp#x	temp7, value
+		addp#x	temp7, [array + 14 * VSIZE]	; temp7 = array[14] + array[6] * value
+		mulp#x	temp8, value
+		addp#x	temp8, [array + 15 * VSIZE]	; temp8 = array[15] + array[7] * value
+		mulp#x	value, value				; value *= value
+;---[Stage 2]------------------------------
+		mulp#x	temp1, value
+		addp#x	temp1, temp5				; temp1 = temp1 + temp5 * value
+		mulp#x	temp2, value
+		addp#x	temp2, temp6				; temp2 = temp2 + temp6 * value
+		mulp#x	temp3, value
+		addp#x	temp3, temp7				; temp3 = temp3 + temp7 * value
+		mulp#x	temp4, value
+		addp#x	temp4, temp8				; temp4 = temp4 + temp8 * value
+		mulp#x	value, value				; value *= value
+;---[Stage 3]------------------------------
+		mulp#x	temp1, value
+		addp#x	temp1, temp3				; temp1 = temp1 + temp3 * value
+		mulp#x	temp2, value
+		addp#x	temp2, temp4				; temp2 = temp2 + temp4 * value
+		mulp#x	value, value				; value *= value
+;---[Stage 4]------------------------------
+		mulp#x	temp1, value
+		addp#x	temp1, temp2				; temp1 = temp1 + temp2 * value
+		mulp#x	value, value				; value *= value
+;---[Stage 5]------------------------------
+		movap#x	temp2, temp1
+		shufp#x	temp2, temp2, 0xE			; extract high result from temp1
+		mulp#x	temp1, value
+		addp#x	temp1, temp2				; temp1 = temp1 + temp2 * value
+		mulp#x	value, value				; value *= value
+;---[Stage 6]------------------------------
+		movap#x	temp2, temp1
+		shufp#x	temp2, temp2, 0x1			; extract high result from temp1
+		muls#x	temp1, value
+		adds#x	temp1, temp2				; temp1 = temp2 + temp1 * value
+else if x eq d
+stack	equ		rsp							; stack pointer
+		sub		stack, 264					; reserving stack size for local vars
+		shufp#x	value, value, 0x0			; duplicate value through the entire register
+;---[Stage 1]------------------------------
+		movap#x	temp1, [array + 0 * VSIZE]	; temp1 = array[0]
+		movap#x	temp2, [array + 1 * VSIZE]	; temp2 = array[1]
+		movap#x	temp3, [array + 2 * VSIZE]	; temp3 = array[2]
+		movap#x	temp4, [array + 3 * VSIZE]	; temp4 = array[3]
+		movap#x	temp5, [array + 4 * VSIZE]	; temp5 = array[4]
+		movap#x	temp6, [array + 5 * VSIZE]	; temp6 = array[5]
+		movap#x	temp7, [array + 6 * VSIZE]	; temp7 = array[6]
+		movap#x	temp8, [array + 7 * VSIZE]	; temp8 = array[7]
+		mulp#x	temp1, value
+		addp#x	temp1, [array + 16 * VSIZE]	; temp1 = array[16] + array[0] * value
+		movap#x	[stack + 0 * VSIZE], temp1	; stack[0] = temp1
+		mulp#x	temp2, value
+		addp#x	temp2, [array + 17 * VSIZE]	; temp2 = array[17] + array[1] * value
+		movap#x	[stack + 1 * VSIZE], temp2	; stack[1] = temp2
+		mulp#x	temp3, value
+		addp#x	temp3, [array + 18 * VSIZE]	; temp3 = array[18] + array[2] * value
+		movap#x	[stack + 2 * VSIZE], temp3	; stack[2] = temp3
+		mulp#x	temp4, value
+		addp#x	temp4, [array + 19 * VSIZE]	; temp4 = array[19] + array[3] * value
+		movap#x	[stack + 3 * VSIZE], temp4	; stack[3] = temp4
+		mulp#x	temp5, value
+		addp#x	temp5, [array + 20 * VSIZE]	; temp5 = array[20] + array[4] * value
+		movap#x	[stack + 4 * VSIZE], temp5	; stack[4] = temp5
+		mulp#x	temp6, value
+		addp#x	temp6, [array + 21 * VSIZE]	; temp6 = array[21] + array[5] * value
+		movap#x	[stack + 5 * VSIZE], temp6	; stack[5] = temp6
+		mulp#x	temp7, value
+		addp#x	temp7, [array + 22 * VSIZE]	; temp7 = array[22] + array[6] * value
+		movap#x	[stack + 6 * VSIZE], temp7	; stack[6] = temp7
+		mulp#x	temp8, value
+		addp#x	temp8, [array + 23 * VSIZE]	; temp8 = array[23] + array[7] * value
+		movap#x	[stack + 7 * VSIZE], temp8	; stack[7] = temp8
+		movap#x	temp1, [array + 8 * VSIZE]	; temp1 = array[8]
+		movap#x	temp2, [array + 9 * VSIZE]	; temp2 = array[9]
+		movap#x	temp3, [array + 10 * VSIZE]	; temp3 = array[10]
+		movap#x	temp4, [array + 11 * VSIZE]	; temp4 = array[11]
+		movap#x	temp5, [array + 12 * VSIZE]	; temp5 = array[12]
+		movap#x	temp6, [array + 13 * VSIZE]	; temp6 = array[13]
+		movap#x	temp7, [array + 14 * VSIZE]	; temp7 = array[14]
+		movap#x	temp8, [array + 15 * VSIZE]	; temp8 = array[15]
+		mulp#x	temp1, value
+		addp#x	temp1, [array + 24 * VSIZE]	; temp1 = array[24] + array[8] * value
+		movap#x	[stack + 8 * VSIZE], temp1	; stack[8] = temp1
+		mulp#x	temp2, value
+		addp#x	temp2, [array + 25 * VSIZE]	; temp2 = array[25] + array[9] * value
+		movap#x	[stack + 9 * VSIZE], temp2	; stack[9] = temp2
+		mulp#x	temp3, value
+		addp#x	temp3, [array + 26 * VSIZE]	; temp3 = array[26] + array[10] * value
+		movap#x	[stack + 10 * VSIZE], temp3	; stack[10] = temp3
+		mulp#x	temp4, value
+		addp#x	temp4, [array + 27 * VSIZE]	; temp4 = array[27] + array[11] * value
+		movap#x	[stack + 11 * VSIZE], temp4	; stack[11] = temp4
+		mulp#x	temp5, value
+		addp#x	temp5, [array + 28 * VSIZE]	; temp5 = array[28] + array[12] * value
+		movap#x	[stack + 12 * VSIZE], temp5	; stack[12] = temp5
+		mulp#x	temp6, value
+		addp#x	temp6, [array + 29 * VSIZE]	; temp6 = array[29] + array[13] * value
+		movap#x	[stack + 13 * VSIZE], temp6	; stack[13] = temp6
+		mulp#x	temp7, value
+		addp#x	temp7, [array + 30 * VSIZE]	; temp7 = array[30] + array[14] * value
+		movap#x	[stack + 14 * VSIZE], temp7	; stack[14] = temp7
+		mulp#x	temp8, value
+		addp#x	temp8, [array + 31 * VSIZE]	; temp8 = array[31] + array[15] * value
+		movap#x	[stack + 15 * VSIZE], temp8	; stack[15] = temp8
+		mulp#x	value, value				; value *= value
+		movap#x	temp1, [stack + 0 * VSIZE]	; temp1 = stack[0]
+		movap#x	temp2, [stack + 1 * VSIZE]	; temp2 = stack[1]
+		movap#x	temp3, [stack + 2 * VSIZE]	; temp3 = stack[2]
+		movap#x	temp4, [stack + 3 * VSIZE]	; temp4 = stack[3]
+		movap#x	temp5, [stack + 4 * VSIZE]	; temp5 = stack[4]
+		movap#x	temp6, [stack + 5 * VSIZE]	; temp6 = stack[5]
+		movap#x	temp7, [stack + 6 * VSIZE]	; temp7 = stack[6]
+		movap#x	temp8, [stack + 7 * VSIZE]	; temp8 = stack[7]
+;---[Stage 2]------------------------------
+		mulp#x	temp1, value
+		addp#x	temp1, [stack + 8 * VSIZE]	; temp1 = stack[8] + stack[0] * value
+		mulp#x	temp2, value
+		addp#x	temp2, [stack + 9 * VSIZE]	; temp2 = stack[9] + stack[1] * value
+		mulp#x	temp3, value
+		addp#x	temp3, [stack + 10 * VSIZE]	; temp3 = stack[10] + stack[2] * value
+		mulp#x	temp4, value
+		addp#x	temp4, [stack + 11 * VSIZE]	; temp4 = stack[11] + stack[3] * value
+		mulp#x	temp5, value
+		addp#x	temp5, [stack + 12 * VSIZE]	; temp5 = stack[12] + stack[4] * value
+		mulp#x	temp6, value
+		addp#x	temp6, [stack + 13 * VSIZE]	; temp6 = stack[13] + stack[5] * value
+		mulp#x	temp7, value
+		addp#x	temp7, [stack + 14 * VSIZE]	; temp7 = stack[14] + stack[6] * value
+		mulp#x	temp8, value
+		addp#x	temp8, [stack + 15 * VSIZE]	; temp8 = stack[15] + stack[7] * value
+		mulp#x	value, value				; value *= value
+		add		stack, 264					; restoring back the stack pointer
+;---[Stage 3]------------------------------
+		mulp#x	temp1, value
+		addp#x	temp1, temp5				; temp1 = temp1 + temp5 * value
+		mulp#x	temp2, value
+		addp#x	temp2, temp6				; temp2 = temp2 + temp6 * value
+		mulp#x	temp3, value
+		addp#x	temp3, temp7				; temp3 = temp3 + temp7 * value
+		mulp#x	temp4, value
+		addp#x	temp4, temp8				; temp4 = temp4 + temp8 * value
+		mulp#x	value, value				; value *= value
+;---[Stage 4]------------------------------
+		mulp#x	temp1, value
+		addp#x	temp1, temp3				; temp1 = temp1 + temp3 * value
+		mulp#x	temp2, value
+		addp#x	temp2, temp4				; temp2 = temp2 + temp4 * value
+		mulp#x	value, value				; value *= value
+;---[Stage 5]------------------------------
+		mulp#x	temp1, value
+		addp#x	temp1, temp2				; temp1 = temp1 + temp2 * value
+		mulp#x	value, value				; value *= value
+;---[Stage 6]------------------------------
+		movap#x	temp2, temp1
+		shufp#x	temp2, temp2, 0x1			; extract high result from temp1
+		muls#x	temp1, value
+		adds#x	temp1, temp2				; temp1 = temp2 + temp1 * value
+end if
+}
+
 ;###############################################################################
 ;#                                 END OF FILE                                 #
 ;###############################################################################

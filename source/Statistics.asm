@@ -29,12 +29,6 @@ extrn	'Array_SumSqrDiff_flt64'		as	SumSqrDiff_flt64
 extrn	'Array_RadixSortKeyAsc_flt32'	as	RadixSort_flt32
 extrn	'Array_RadixSortKeyAsc_flt64'	as	RadixSort_flt64
 
-; Blend masks
-extrn	'maskS1'						as	maskS1
-extrn	'maskS2'						as	maskS2
-extrn	'maskV1'						as	maskV1
-extrn	'maskV2'						as	maskV2
-
 ;###############################################################################
 ;#      Export section                                                         #
 ;###############################################################################
@@ -295,6 +289,7 @@ macro	MEAN	x
 array	equ		rdi							; pointer to array
 size	equ		rsi							; array size (count of elements)
 ;---[Internal variables]-------------------
+fptr	equ		rax							; pointer to call external function
 result	equ		xmm0						; result register
 temp	equ		xmm1						; temporary register
 stack	equ		rsp							; stack pointer
@@ -309,7 +304,8 @@ space	= 1 * 8								; stack size required by the procedure
 		sub		stack, space				; reserving stack size for local vars
 		mov		[s_size], size				; save "size" variable into the stack
 ;---[Call sum function]--------------------
-		call	Sum							; call Sum (array, size)
+		mov		fptr, Sum
+		call	fptr						; call Sum (array, size)
 ;---[Compute mean value]-------------------
 	cvtsi2s#x	temp, [s_size]				; get "size" variable from the stack
 		divs#x	result, temp
@@ -476,6 +472,7 @@ size	equ		rsi							; array size (count of elements)
 ;---[Internal variables]-------------------
 ptr1	equ		rax							; pointer to first target element
 ptr2	equ		rdx							; pointer to second target element
+fptr	equ		rax							; pointer to call external function
 result	equ		xmm0						; result register
 half	equ		xmm1						; 0.5
 stack	equ		rsp							; stack pointer
@@ -500,7 +497,8 @@ space	= 5 * 8								; stack size required by the procedure
 ;---[Call convert function]----------------
 		mov		[s_array], array			; save "array" variable into the stack
 		mov		[s_size], size				; save "size" variable into the stack
-		call	Map							; Call Map (array, size)
+		mov		fptr, Map
+		call	fptr						; Call Map (array, size)
 ;---[Call quartile function]---------------
 		mov		array, [s_array]			; get "array" variable from the stack
 		mov		size, [s_size]				; get "size" variable from the stack
@@ -510,7 +508,8 @@ space	= 5 * 8								; stack size required by the procedure
 ;---[Call convert function]----------------
 		mov		array, [s_array]			; get "array" variable from the stack
 		mov		size, [s_size]				; get "size" variable from the stack
-		call	Map							; Call Map (array, size)
+		mov		fptr, Map
+		call	fptr						; Call Map (array, size)
 ;---[Compute quartile]---------------------
 		mov		ptr1, [s_ptr1]				; get "ptr1" variable from the stack
 		mov		ptr2, [s_ptr2]				; get "ptr2" variable from the stack
@@ -643,6 +642,7 @@ array	equ		rdi							; pointer to array
 size	equ		rsi							; array size (count of elements)
 ;---[Internal variables]-------------------
 index	equ		rax							; offset from beginning of array
+table	equ		r8							; pointer to blending table
 fmask	equ		r9							; NaN check result
 ptr		equ		r10							; temporary pointer to array
 max		equ		xmm0						; max value
@@ -707,7 +707,8 @@ bmask	= bytes - 1							; elements aligning mask
 ;---[Unaligned operation]------------------
 		add		size, index					; size += index
 		shl		index, VSCALE				; compute shift in mask array
-		movap#x	blend, dqword [maskS1 + index]
+		lea		table, [maskS1]				; set pointer to blending table
+		movap#x	blend, [table + index]
 		xor		index, index				; index = 0
 		sub		size, VSIZE					; if (size <= VSIZE)
 		jbe		.tail						;     then process array tail
@@ -758,7 +759,8 @@ bmask	= bytes - 1							; elements aligning mask
 		jmp		.vloop						; do while (true)
 ;---[End of vector loop]-------------------
 .tail:	shl		size, VSCALE				; compute shift in mask array
-		andnp#x	blend, dqword [maskS2 + size]
+		lea		table, [maskS2]				; set pointer to blending table
+		andnp#x	blend, [table + size]
 		movap#x	temp, [array + index]		; temp = array[index]
 	blendvp#x	maxinf, temp				; blend temp with max infinity values
 	blendvp#x	mininf, temp				; blend temp with min infinity values
@@ -853,7 +855,8 @@ size	equ		rsi							; array size (count of elements)
 mean	equ		xmm0						; data mean
 ;---[Internal variables]-------------------
 index	equ		rax							; offset from beginning of array
-count	equ		r8							; normalized array size
+table	equ		r8							; pointer to blending table
+count	equ		r9							; normalized array size
 ptr		equ		r10							; temporary pointer to array
 blend	equ		xmm0						; blending mask
 vector	equ		xmm1						; data mean value
@@ -910,7 +913,8 @@ end if
 ;---[Unaligned sums]-----------------------
 		add		size, index					; size += index
 		shl		index, VSCALE				; compute shift in mask array
-		movap#x	blend, dqword [maskS1 + index]
+		lea		table, [maskS1]				; set pointer to blending table
+		movap#x	blend, [table + index]
 		xor		index, index				; index = 0
 		sub		size, VSIZE					; if (size <= VSIZE)
 		jbe		.tail						;     then process array tail
@@ -974,7 +978,8 @@ end if
 		jmp		.vloop						; do while (true)
 ;---[End of vector loop]-------------------
 .tail:	shl		size, VSCALE				; compute shift in mask array
-		andnp#x	blend, dqword [maskS2 + size]
+		lea		table, [maskS2]				; set pointer to blending table
+		andnp#x	blend, [table + size]
 		movap#x	temp, [array + index]		; temp = array[index]
 		subp#x	temp, vector				; temp -= vector
 	blendvp#x	zero, temp					; blend temp with zero values
@@ -1098,6 +1103,7 @@ size	equ		rsi							; array size (count of elements)
 ;---[Internal variables]-------------------
 ptr1	equ		rax							; pointer to first target element
 ptr2	equ		rdx							; pointer to second target element
+fptr	equ		rax							; pointer to call external function
 result	equ		xmm0						; result register
 half	equ		xmm1						; 0.5
 stack	equ		rsp							; stack pointer
@@ -1124,7 +1130,8 @@ space	= 7 * 8								; stack size required by the procedure
 ;---[Call convert function]----------------
 		mov		[s_array], array			; save "array" variable into the stack
 		mov		[s_size], size				; save "size" variable into the stack
-		call	Map							; Call Map (array, size)
+		mov		fptr, Map
+		call	fptr						; Call Map (array, size)
 ;---[Call quartile function]---------------
 		mov		array, [s_array]			; get "array" variable from the stack
 		mov		size, [s_size]				; get "size" variable from the stack
@@ -1140,7 +1147,8 @@ space	= 7 * 8								; stack size required by the procedure
 ;---[Call convert function]----------------
 		mov		array, [s_array]			; get "array" variable from the stack
 		mov		size, [s_size]				; get "size" variable from the stack
-		call	Map							; Call Map (array, size)
+		mov		fptr, Map
+		call	fptr						; Call Map (array, size)
 ;---[Compute interquartile range]----------
 		mov		ptr1, [s_ptr3]				; get "ptr3" variable from the stack
 		mov		ptr2, [s_ptr4]				; get "ptr4" variable from the stack
@@ -1214,7 +1222,8 @@ size	equ		rsi							; array size (count of elements)
 mean	equ		xmm0						; data mean
 ;---[Internal variables]-------------------
 index	equ		rax							; offset from beginning of array
-count	equ		r8							; normalized array size
+table	equ		r8							; pointer to blending table
+count	equ		r9							; normalized array size
 ptr		equ		r10							; temporary pointer to array
 blend	equ		xmm0						; blending mask
 vector	equ		xmm1						; data mean value
@@ -1279,7 +1288,8 @@ bmask	= bytes - 1							; elements aligning mask
 ;---[Unaligned sums]-----------------------
 		add		size, index					; size += index
 		shl		index, VSCALE				; compute shift in mask array
-		movap#x	blend, dqword [maskS1 + index]
+		lea		table, [maskS1]				; set pointer to blending table
+		movap#x	blend, [table + index]
 		xor		index, index				; index = 0
 		sub		size, VSIZE					; if (size <= VSIZE)
 		jbe		.tail						;     then process array tail
@@ -1338,7 +1348,8 @@ bmask	= bytes - 1							; elements aligning mask
 		jmp		.vloop						; do while (true)
 ;---[End of vector loop]-------------------
 .tail:	shl		size, VSCALE				; compute shift in mask array
-		andnp#x	blend, dqword [maskS2 + size]
+		lea		table, [maskS2]				; set pointer to blending table
+		andnp#x	blend, [table + size]
 		movap#x	temp0, [array + index]		; temp = array[index]
 		subp#x	temp0, vector				; temp -= vector
 	blendvp#x	zero, temp0					; blend temp with zero values
@@ -1399,7 +1410,8 @@ size	equ		rsi							; array size (count of elements)
 mean	equ		xmm0						; data mean
 ;---[Internal variables]-------------------
 index	equ		rax							; offset from beginning of array
-count	equ		r8							; normalized array size
+table	equ		r8							; pointer to blending table
+count	equ		r9							; normalized array size
 ptr		equ		r10							; temporary pointer to array
 blend	equ		xmm0						; blending mask
 vector	equ		xmm1						; data mean value
@@ -1474,7 +1486,8 @@ bmask	= bytes - 1							; elements aligning mask
 ;---[Unaligned sums]-----------------------
 		add		size, index					; size += index
 		shl		index, VSCALE				; compute shift in mask array
-		movap#x	blend, dqword [maskS1 + index]
+		lea		table, [maskS1]				; set pointer to blending table
+		movap#x	blend, [table + index]
 		xor		index, index				; index = 0
 		sub		size, VSIZE					; if (size <= VSIZE)
 		jbe		.tail						;     then process array tail
@@ -1528,7 +1541,8 @@ bmask	= bytes - 1							; elements aligning mask
 		jmp		.vloop						; do while (true)
 ;---[End of vector loop]-------------------
 .tail:	shl		size, VSCALE				; compute shift in mask array
-		andnp#x	blend, dqword [maskS2 + size]
+		lea		table, [maskS2]				; set pointer to blending table
+		andnp#x	blend, [table + size]
 		movap#x	temp, [array + index]		; temp = array[index]
 		subp#x	temp, vector				; temp -= vector
 	blendvp#x	zero, temp					; blend temp with zero values
@@ -1590,7 +1604,8 @@ mean2	equ		xmm1						; data mean of second array
 ;---[Internal variables]-------------------
 index	equ		rax							; offset from beginning of arrays
 offst	equ		rcx							; offset in masks array
-count	equ		r8							; normalized array size
+table	equ		r8							; pointer to blending table
+count	equ		r9							; normalized array size
 ptr1	equ		r10							; temporary pointer to first array
 ptr2	equ		r11							; temporary pointer to second array
 blend	equ		xmm0						; blending mask
@@ -1654,7 +1669,8 @@ bmask	= bytes - 1							; elements aligning mask
 		mov		offst, index
 		shl		offst, VSCALE				; compute offset in mask array
 		neg		index						; index = -index
-		movap#x	blend, dqword [maskV1 + offst]
+		lea		table, [maskV1]				; set pointer to blending table
+		movap#x	blend, [table + offst]
 		movup#x	temp2, [array2]				; temp2 = array2[0]
 		subp#x	temp2, vector2				; temp2 -= vector2
 		movup#x	temp1, [array1]				; temp1 = array1[0]
@@ -1707,7 +1723,8 @@ bmask	= bytes - 1							; elements aligning mask
 ;---[End of vector loop]-------------------
 .tail:	add		index, size					; index += size
 		shl		size, VSCALE				; compute shift in mask array
-		movap#x	blend, dqword [maskV2 + size]
+		lea		table, [maskV2]				; set pointer to blending table
+		movap#x	blend, [table + size]
 		movup#x	temp2, [array2 + index]		; temp2 = array2[index]
 		subp#x	temp2, vector2				; temp2 -= vector2
 		movup#x	temp1, [array1 + index]		; temp1 = array1[index]
@@ -1762,6 +1779,7 @@ mean2	equ		xmm1						; data mean of second array
 ;---[Internal variables]-------------------
 index	equ		rax							; offset from beginning of arrays
 offst	equ		rcx							; offset in masks array
+table	equ		r8							; pointer to blending table
 ptr1	equ		r10							; temporary pointer to first array
 ptr2	equ		r11							; temporary pointer to second array
 blend	equ		xmm0						; blending mask
@@ -1820,7 +1838,8 @@ bmask	= bytes - 1							; elements aligning mask
 		mov		offst, index
 		shl		offst, VSCALE				; compute offset in mask array
 		neg		index						; index = -index
-		movap#x	blend, dqword [maskV1 + offst]
+		lea		table, [maskV1]				; set pointer to blending table
+		movap#x	blend, [table + offst]
 		movup#x	temp2, [array2]				; temp2 = array2[0]
 		subp#x	temp2, vector2				; temp2 -= vector2
 		movup#x	temp1, [array1]				; temp1 = array1[0]
@@ -1860,7 +1879,8 @@ end repeat
 ;---[End of vector loop]-------------------
 .tail:	add		index, size					; index += size
 		shl		size, VSCALE				; compute shift in mask array
-		movap#x	blend, dqword [maskV2 + size]
+		lea		table, [maskV2]				; set pointer to blending table
+		movap#x	blend, [table + size]
 		movup#x	temp2, [array2 + index]		; temp2 = array2[index]
 		subp#x	temp2, vector2				; temp2 -= vector2
 		movup#x	temp1, [array1 + index]		; temp1 = array1[index]
@@ -1925,6 +1945,7 @@ mean2	equ		xmm1						; data mean of second array
 ;---[Internal variables]-------------------
 index	equ		rax							; offset from beginning of array
 offst	equ		rcx							; offset in masks array
+table	equ		r8							; pointer to call external function
 fmask	equ		r9							; NaN check result
 ptr1	equ		r10							; temporary pointer to first array
 ptr2	equ		r11							; temporary pointer to second array
@@ -1993,7 +2014,8 @@ bmask	= bytes - 1							; elements aligning mask
 		mov		offst, index
 		shl		offst, VSCALE				; compute offset in mask array
 		neg		index						; index = -index
-		movap#x	blend, dqword [maskV1 + offst]
+		lea		table, [maskV1]				; set pointer to blending table
+		movap#x	blend, [table + offst]
 		movup#x	temp2, [array2]				; temp2 = array2[0]
 		movap#x	great2, vector2				; great2 = mean2
 		movap#x	less2, temp2				; less2 = array2[0]
@@ -2061,7 +2083,8 @@ end repeat
 ;---[End of vector loop]-------------------
 .tail:	add		index, size					; index += size
 		shl		size, VSCALE				; compute shift in mask array
-		movap#x	blend, dqword [maskV2 + size]
+		lea		table, [maskV2]				; set pointer to blending table
+		movap#x	blend, [table + size]
 		movup#x	temp2, [array2 + index]		; temp2 = array2[index]
 		movap#x	great2, vector2				; great2 = mean2
 		movap#x	less2, temp2				; less2 = array2[index]
@@ -2217,6 +2240,7 @@ rank2	equ		rcx							; pointer to second rank array
 tarray	equ		r8							; pointer to temp data array
 trank	equ		r9							; pointer to temp rank array
 ;---[Internal variables]-------------------
+fptr	equ		rax							; pointer to call external function
 result	equ		xmm0						; result register
 size	equ		xmm1						; array size
 temp	equ		xmm2						; temporary register
@@ -2266,14 +2290,16 @@ space	= 7 * 8								; stack size required by the procedure
 		mov		param3, [s_rank1]
 		mov		param2, [s_tarr]
 		mov		param1, [s_arr1]
-		call	Sort						; call Sort (array1, tarray, rank1, trank, size)
+		mov		fptr, Sort
+		call	fptr						; call Sort (array1, tarray, rank1, trank, size)
 ;---[Sort second array]--------------------
 		mov		param5, [s_size]
 		mov		param4, [s_trank]
 		mov		param3, [s_rank2]
 		mov		param2, [s_tarr]
 		mov		param1, [s_arr2]
-		call	Sort						; call Sort (array2, tarray, rank2, trank, size)
+		mov		fptr, Sort
+		call	fptr						; call Sort (array2, tarray, rank2, trank, size)
 ;---[Set ranks]----------------------------
 		mov		param5, [s_size]
 		mov		param4, [s_rank2]
@@ -2285,7 +2311,8 @@ space	= 7 * 8								; stack size required by the procedure
 		mov		param3, [s_size]
 		mov		param2, [s_arr2]
 		mov		param1, [s_arr1]
-		call	Diff						; result = Diff (array1, array2, size)
+		mov		fptr, Diff
+		call	fptr						; result = Diff (array1, array2, size)
 ;---[Compute result]-----------------------
 	cvtsi2s#x	size, [s_size]				; get "size" variable from the stack
 		initreg	const, trank, oneval		; const = 1.0
@@ -2307,6 +2334,49 @@ space	= 7 * 8								; stack size required by the procedure
 }
 SpearmanCorrelation_flt32:	SPEARMAN_CORRELATION	s
 SpearmanCorrelation_flt64:	SPEARMAN_CORRELATION	d
+
+;###############################################################################
+;#      Read-only data section                                                 #
+;###############################################################################
+section	'.rodata'	align 16
+
+align 16
+maskS1		dq	0x0000000000000000, 0x0000000000000000
+			dq	0x00000000000000FF, 0x0000000000000000
+			dq	0x000000000000FFFF, 0x0000000000000000
+			dq	0x0000000000FFFFFF, 0x0000000000000000
+			dq	0x00000000FFFFFFFF, 0x0000000000000000
+			dq	0x000000FFFFFFFFFF, 0x0000000000000000
+			dq	0x0000FFFFFFFFFFFF, 0x0000000000000000
+			dq	0x00FFFFFFFFFFFFFF, 0x0000000000000000
+			dq	0xFFFFFFFFFFFFFFFF, 0x0000000000000000
+			dq	0xFFFFFFFFFFFFFFFF, 0x00000000000000FF
+			dq	0xFFFFFFFFFFFFFFFF, 0x000000000000FFFF
+			dq	0xFFFFFFFFFFFFFFFF, 0x0000000000FFFFFF
+			dq	0xFFFFFFFFFFFFFFFF, 0x00000000FFFFFFFF
+			dq	0xFFFFFFFFFFFFFFFF, 0x000000FFFFFFFFFF
+			dq	0xFFFFFFFFFFFFFFFF, 0x0000FFFFFFFFFFFF
+			dq	0xFFFFFFFFFFFFFFFF, 0x00FFFFFFFFFFFFFF
+maskS2		dq	0xFFFFFFFFFFFFFFFF, 0xFFFFFFFFFFFFFFFF
+
+align 16
+maskV1		dq	0x0000000000000000, 0x0000000000000000
+			dq	0x0000000000000000, 0xFF00000000000000
+			dq	0x0000000000000000, 0xFFFF000000000000
+			dq	0x0000000000000000, 0xFFFFFF0000000000
+			dq	0x0000000000000000, 0xFFFFFFFF00000000
+			dq	0x0000000000000000, 0xFFFFFFFFFF000000
+			dq	0x0000000000000000, 0xFFFFFFFFFFFF0000
+			dq	0x0000000000000000, 0xFFFFFFFFFFFFFF00
+			dq	0x0000000000000000, 0xFFFFFFFFFFFFFFFF
+			dq	0xFF00000000000000, 0xFFFFFFFFFFFFFFFF
+			dq	0xFFFF000000000000, 0xFFFFFFFFFFFFFFFF
+			dq	0xFFFFFF0000000000, 0xFFFFFFFFFFFFFFFF
+			dq	0xFFFFFFFF00000000, 0xFFFFFFFFFFFFFFFF
+			dq	0xFFFFFFFFFF000000, 0xFFFFFFFFFFFFFFFF
+			dq	0xFFFFFFFFFFFF0000, 0xFFFFFFFFFFFFFFFF
+			dq	0xFFFFFFFFFFFFFF00, 0xFFFFFFFFFFFFFFFF
+maskV2		dq	0xFFFFFFFFFFFFFFFF, 0xFFFFFFFFFFFFFFFF
 
 ;###############################################################################
 ;#                                 END OF FILE                                 #
