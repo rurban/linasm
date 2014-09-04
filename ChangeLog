@@ -1,4 +1,21 @@
 +==============================================================================+
+|   2014-09-05  Release 1.1 (stable)                                           |
++==============================================================================+
+
+Bug fixes:
+	* Array.asm: Fixed compilation error in MAP macro
+
+New features:
+	* Math.asm: Added functions Cancel, AbsError, RelError
+	* Math.asm: Added functions SinH, CosH, TanH, ArcSinH, ArcCosH, ArcTanH
+	* Math.asm: Improved functions Exp2, Exp2m1, Exp10, Exp10m1, Exp, Expm1
+	* Math.asm: Improved trigonometric functions
+	* Math.asm: Improved speed of Log functions
+
+Changes in behavior:
+	* Library converted into shared object file
+
++==============================================================================+
 |   2014-08-03  Release 1.03 (stable)                                          |
 +==============================================================================+
 

@@ -7,6 +7,22 @@
 ################################################################################
 
 #******************************************************************************#
+#       Release 1.1 (stable) [2014-09-05]                                      #
+#******************************************************************************#
+
+LinAsm library is converted into shared object file (*.so) instead of static lib
+file (*.a). Also was fixed compilation bag in MAP macro and added new functions
+into Math block.
+
+Here is the list of changed were made:
+    * Array library: Fixed compilation error in MAP macro.
+    * Math.asm library: Added functions Cancel, AbsError, RelError, SinH, CosH,
+      TanH, ArcSinH, ArcCosH, ArcTanH.
+    * Math.asm library: Improved functions Exp2, Exp2m1, Exp10, Exp10m1, Exp,
+      Expm1 and trigonometric functions.
+    * Math.asm library: Improved speed of Log functions.
+
+#******************************************************************************#
 #       Release 1.03 (stable) [2014-08-03]                                     #
 #******************************************************************************#
 
