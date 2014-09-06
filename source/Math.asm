@@ -4762,13 +4762,13 @@ Logp1	= LogEp1_flt32						; log function
 dmask	= DMASK_FLT32						; data mask
 smask	= SMASK_FLT32						; sign mask
 oneval	= PONE_FLT32						; +1.0
-barval	= 0x5F800000						; 2^+64
+barval	= 0x4F800000						; 2^32
 else if x eq d
 Logp1	= LogEp1_flt64						; log function
 dmask	= DMASK_FLT64						; data mask
 smask	= SMASK_FLT64						; sign mask
 oneval	= PONE_FLT64						; +1.0
-barval	= 0x5FF0000000000000				; 2^+512
+barval	= 0x43F0000000000000				; 2^64
 end if
 space	= 3 * 8								; stack size required by the procedure
 ;------------------------------------------
@@ -4820,12 +4820,12 @@ if x eq s
 Logp1	= LogEp1_flt32						; log function
 nanval	= PNAN_FLT32						; +NaN
 oneval	= PONE_FLT32						; +1.0
-barval	= 0x5F800000						; 2^+64
+barval	= 0x4F800000						; 2^32
 else if x eq d
 Logp1	= LogEp1_flt64						; log function
 nanval	= PNAN_FLT64						; +NaN
 oneval	= PONE_FLT64						; +1.0
-barval	= 0x5FF0000000000000				; 2^+512
+barval	= 0x43F0000000000000				; 2^64
 end if
 ;------------------------------------------
 		initreg	one, treg, oneval			; one = 1.0
@@ -4867,12 +4867,12 @@ if x eq s
 Logp1	= LogEp1_flt32						; log function
 nanval	= PNAN_FLT32						; +NaN
 twoval	= PTWO_FLT32						; +2.0
-barval	= 0x5F800000						; 2^+64
+barval	= 0x4F800000						; 2^32
 else if x eq d
 Logp1	= LogEp1_flt64						; log function
 nanval	= PNAN_FLT64						; +NaN
 twoval	= PTWO_FLT64						; +2.0
-barval	= 0x5FF0000000000000				; 2^+512
+barval	= 0x43F0000000000000				; 2^64
 end if
 ;------------------------------------------
 		xorp#x	zero, zero					; zero = 0.0
