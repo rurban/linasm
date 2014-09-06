@@ -2332,6 +2332,7 @@ minsize	= 16 * KSIZE						; min array size is aceptable for Quick sort
 		jb		.swap						; do while (left < right)
 ;---[End of swap loop]---------------------
 		mov		rsize, [s_size]				; get "size" variable from the stack
+		mov		func, [s_func]				; get "func" variable from the stack
 		add		right, KSIZE
 		sub		rsize, right				; rsize = size - (right + 1)
 		lea		rarray, [array + right]		; rarray = array + (right + 1)
@@ -2342,7 +2343,6 @@ minsize	= 16 * KSIZE						; min array size is aceptable for Quick sort
 		jbe		@f							; {
 		mov		[s_array], rarray			; save "rarray" variable into the stack
 		mov		[s_size], rsize				; save "rsize" variable into the stack
-		mov		func, [s_func]				; get "func" variable from the stack
 		mov		size, lsize
 		call	.start						; call Sort (larray, lsize, func)
 		mov		rarray, [s_array]			; get "rarray" variable from the stack
@@ -2355,7 +2355,6 @@ minsize	= 16 * KSIZE						; min array size is aceptable for Quick sort
 		jbe		@f							; {
 		mov		[s_array], larray			; save "larray" variable into the stack
 		mov		[s_size], lsize				; save "lsize" variable into the stack
-		mov		func, [s_func]				; get "func" variable from the stack
 		mov		array, rarray
 		call	.start						; call Sort (rarray, rsize, func)
 		mov		larray, [s_array]			; get "larray" variable from the stack
