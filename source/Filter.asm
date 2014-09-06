@@ -761,17 +761,17 @@ Response_flt64:	RESPONSE	d
 section	'.rodata'	align 16
 
 ;******************************************************************************;
-;       Vector of window functions                                             ;
+;       flt32_t consts                                                         ;
 ;******************************************************************************;
-
-; flt32_t
 align 16
 win_flt32		dq	Sine_flt32				; Sine window
 				dq	Hamming_flt32			; Hamming window
 				dq	Blackman_flt32			; Blackman window
 				dq	Blackman_Nuttall_flt32	; Blackman-Nuttall window
 
-; flt64_t
+;******************************************************************************;
+;       flt64_t consts                                                         ;
+;******************************************************************************;
 align 16
 win_flt64		dq	Sine_flt64				; Sine window
 				dq	Hamming_flt64			; Hamming window

@@ -422,243 +422,6 @@ Len_char32:	LEN	ecx, d
 ;******************************************************************************;
 ;       Copying                                                                ;
 ;******************************************************************************;
-target	equ		rdi							; target string
-source	equ		rdx							; source string
-temp8	equ		cl							; temporary register which holds 8-bit value
-temp16	equ		cx							; temporary register which holds 16-bit value
-temp32	equ		ecx							; temporary register which holds 32-bit value
-temp64	equ		rcx							; temporary register which holds 64-bit value
-temp128	equ		xmm0						; temporary register which holds 128-bit value
-;------------------------------------------
-Copy0:	ret
-;------------------------------------------
-Copy1:	mov		temp8, [source]
-		mov		[target], temp8				; Copy 1 byte from source string to target string
-		ret
-;------------------------------------------
-Copy2:	mov		temp16, [source]
-		mov		[target], temp16			; Copy 2 bytes from source string to target string
-		ret
-;------------------------------------------
-Copy3:	mov		temp16, [source]
-		mov		[target], temp16			; Copy 2 bytes from source string to target string
-		mov		temp8, [source + 2]
-		mov		[target + 2], temp8			; Copy 1 byte from source string to target string
-		ret
-;------------------------------------------
-Copy4:	mov		temp32, [source]
-		mov		[target], temp32			; Copy 4 bytes from source string to target string
-		ret
-;------------------------------------------
-Copy5:	mov		temp32, [source]
-		mov		[target], temp32			; Copy 4 bytes from source string to target string
-		mov		temp8, [source + 4]
-		mov		[target + 4], temp8			; Copy 1 byte from source string to target string
-		ret
-;------------------------------------------
-Copy6:	mov		temp32, [source]
-		mov		[target], temp32			; Copy 4 bytes from source string to target string
-		mov		temp16, [source + 4]
-		mov		[target + 4], temp16		; Copy 2 bytes from source string to target string
-		ret
-;------------------------------------------
-Copy7:	mov		temp32, [source]
-		mov		[target], temp32			; Copy 4 bytes from source string to target string
-		mov		temp16, [source + 4]
-		mov		[target + 4], temp16		; Copy 2 bytes from source string to target string
-		mov		temp8, [source + 6]
-		mov		[target + 6], temp8			; Copy 1 byte from source string to target string
-		ret
-;------------------------------------------
-Copy8:	mov		temp64, [source]
-		mov		[target], temp64			; Copy 8 bytes from source string to target string
-		ret
-;------------------------------------------
-Copy9:	mov		temp64, [source]
-		mov		[target], temp64			; Copy 8 bytes from source string to target string
-		mov		temp8, [source + 8]
-		mov		[target + 8], temp8			; Copy 1 byte from source string to target string
-		ret
-;------------------------------------------
-Copy10:	mov		temp64, [source]
-		mov		[target], temp64			; Copy 8 bytes from source string to target string
-		mov		temp16, [source + 8]
-		mov		[target + 8], temp16		; Copy 2 bytes from source string to target string
-		ret
-;------------------------------------------
-Copy11:	mov		temp64, [source]
-		mov		[target], temp64			; Copy 8 bytes from source string to target string
-		mov		temp16, [source + 8]
-		mov		[target + 8], temp16		; Copy 2 bytes from source string to target string
-		mov		temp8, [source + 10]
-		mov		[target + 10], temp8		; Copy 1 byte from source string to target string
-		ret
-;------------------------------------------
-Copy12:	mov		temp64, [source]
-		mov		[target], temp64			; Copy 8 bytes from source string to target string
-		mov		temp32, [source + 8]
-		mov		[target + 8], temp32		; Copy 4 bytes from source string to target string
-		ret
-;------------------------------------------
-Copy13:	mov		temp64, [source]
-		mov		[target], temp64			; Copy 8 bytes from source string to target string
-		mov		temp32, [source + 8]
-		mov		[target + 8], temp32		; Copy 4 bytes from source string to target string
-		mov		temp8, [source + 12]
-		mov		[target + 12], temp8		; Copy 1 byte from source string to target string
-		ret
-;------------------------------------------
-Copy14:	mov		temp64, [source]
-		mov		[target], temp64			; Copy 8 bytes from source string to target string
-		mov		temp32, [source + 8]
-		mov		[target + 8], temp32		; Copy 4 bytes from source string to target string
-		mov		temp16, [source + 12]
-		mov		[target + 12], temp16		; Copy 2 bytes from source string to target string
-		ret
-;------------------------------------------
-Copy15:	mov		temp64, [source]
-		mov		[target], temp64			; Copy 8 bytes from source string to target string
-		mov		temp32, [source + 8]
-		mov		[target + 8], temp32		; Copy 4 bytes from source string to target string
-		mov		temp16, [source + 12]
-		mov		[target + 12], temp16		; Copy 2 bytes from source string to target string
-		mov		temp8, [source + 14]
-		mov		[target + 14], temp8		; Copy 1 byte from source string to target string
-		ret
-;------------------------------------------
-Copy16:	movdqu	temp128, [source]
-		movdqu	[target], temp128			; Copy 16 bytes from source string to target string
-		ret
-;------------------------------------------
-Copy17:	movdqu	temp128, [source]
-		movdqu	[target], temp128			; Copy 16 bytes from source string to target string
-		mov		temp8, [source + 16]
-		mov		[target + 16], temp8		; Copy 1 byte from source string to target string
-		ret
-;------------------------------------------
-Copy18:	movdqu	temp128, [source]
-		movdqu	[target], temp128			; Copy 16 bytes from source string to target string
-		mov		temp16, [source + 16]
-		mov		[target + 16], temp16		; Copy 2 bytes from source string to target string
-		ret
-;------------------------------------------
-Copy19:	movdqu	temp128, [source]
-		movdqu	[target], temp128			; Copy 16 bytes from source string to target string
-		mov		temp16, [source + 16]
-		mov		[target + 16], temp16		; Copy 2 bytes from source string to target string
-		mov		temp8, [source + 18]
-		mov		[target + 18], temp8		; Copy 1 byte from source string to target string
-		ret
-;------------------------------------------
-Copy20:	movdqu	temp128, [source]
-		movdqu	[target], temp128			; Copy 16 bytes from source string to target string
-		mov		temp32, [source + 16]
-		mov		[target + 16], temp32		; Copy 4 bytes from source string to target string
-		ret
-;------------------------------------------
-Copy21:	movdqu	temp128, [source]
-		movdqu	[target], temp128			; Copy 16 bytes from source string to target string
-		mov		temp32, [source + 16]
-		mov		[target + 16], temp32		; Copy 4 bytes from source string to target string
-		mov		temp8, [source + 20]
-		mov		[target + 20], temp8		; Copy 1 byte from source string to target string
-		ret
-;------------------------------------------
-Copy22:	movdqu	temp128, [source]
-		movdqu	[target], temp128			; Copy 16 bytes from source string to target string
-		mov		temp32, [source + 16]
-		mov		[target + 16], temp32		; Copy 4 bytes from source string to target string
-		mov		temp16, [source + 20]
-		mov		[target + 20], temp16		; Copy 2 bytes from source string to target string
-		ret
-;------------------------------------------
-Copy23:	movdqu	temp128, [source]
-		movdqu	[target], temp128			; Copy 16 bytes from source string to target string
-		mov		temp32, [source + 16]
-		mov		[target + 16], temp32		; Copy 4 bytes from source string to target string
-		mov		temp16, [source + 20]
-		mov		[target + 20], temp16		; Copy 2 bytes from source string to target string
-		mov		temp8, [source + 22]
-		mov		[target + 22], temp8		; Copy 1 byte from source string to target string
-		ret
-;------------------------------------------
-Copy24:	movdqu	temp128, [source]
-		movdqu	[target], temp128			; Copy 16 bytes from source string to target string
-		mov		temp64, [source + 16]
-		mov		[target + 16], temp64		; Copy 8 bytes from source string to target string
-		ret
-;------------------------------------------
-Copy25:	movdqu	temp128, [source]
-		movdqu	[target], temp128			; Copy 16 bytes from source string to target string
-		mov		temp64, [source + 16]
-		mov		[target + 16], temp64		; Copy 8 bytes from source string to target string
-		mov		temp8, [source + 24]
-		mov		[target + 24], temp8		; Copy 1 byte from source string to target string
-		ret
-;------------------------------------------
-Copy26:	movdqu	temp128, [source]
-		movdqu	[target], temp128			; Copy 16 bytes from source string to target string
-		mov		temp64, [source + 16]
-		mov		[target + 16], temp64		; Copy 8 bytes from source string to target string
-		mov		temp16, [source + 24]
-		mov		[target + 24], temp16		; Copy 2 bytes from source string to target string
-		ret
-;------------------------------------------
-Copy27:	movdqu	temp128, [source]
-		movdqu	[target], temp128			; Copy 16 bytes from source string to target string
-		mov		temp64, [source + 16]
-		mov		[target + 16], temp64		; Copy 8 bytes from source string to target string
-		mov		temp16, [source + 24]
-		mov		[target + 24], temp16		; Copy 2 bytes from source string to target string
-		mov		temp8, [source + 26]
-		mov		[target + 26], temp8		; Copy 1 byte from source string to target string
-		ret
-;------------------------------------------
-Copy28:	movdqu	temp128, [source]
-		movdqu	[target], temp128			; Copy 16 bytes from source string to target string
-		mov		temp64, [source + 16]
-		mov		[target + 16], temp64		; Copy 8 bytes from source string to target string
-		mov		temp32, [source + 24]
-		mov		[target + 24], temp32		; Copy 4 bytes from source string to target string
-		ret
-;------------------------------------------
-Copy29:	movdqu	temp128, [source]
-		movdqu	[target], temp128			; Copy 16 bytes from source string to target string
-		mov		temp64, [source + 16]
-		mov		[target + 16], temp64		; Copy 8 bytes from source string to target string
-		mov		temp32, [source + 24]
-		mov		[target + 24], temp32		; Copy 4 bytes from source string to target string
-		mov		temp8, [source + 28]
-		mov		[target + 28], temp8		; Copy 1 byte from source string to target string
-		ret
-;------------------------------------------
-Copy30:	movdqu	temp128, [source]
-		movdqu	[target], temp128			; Copy 16 bytes from source string to target string
-		mov		temp64, [source + 16]
-		mov		[target + 16], temp64		; Copy 8 bytes from source string to target string
-		mov		temp32, [source + 24]
-		mov		[target + 24], temp32		; Copy 4 bytes from source string to target string
-		mov		temp16, [source + 28]
-		mov		[target + 28], temp16		; Copy 2 bytes from source string to target string
-		ret
-;------------------------------------------
-Copy31:	movdqu	temp128, [source]
-		movdqu	[target], temp128			; Copy 16 bytes from source string to target string
-		mov		temp64, [source + 16]
-		mov		[target + 16], temp64		; Copy 8 bytes from source string to target string
-		mov		temp32, [source + 24]
-		mov		[target + 24], temp32		; Copy 4 bytes from source string to target string
-		mov		temp16, [source + 28]
-		mov		[target + 28], temp16		; Copy 2 bytes from source string to target string
-		mov		temp8, [source + 30]
-		mov		[target + 30], temp8		; Copy 1 byte from source string to target string
-		ret
-;------------------------------------------
-Copy32:	movdqu	temp128, [source]
-		movdqu	[target], temp128			; Copy 16 bytes from source string to target string
-		movdqu	temp128, [source + 16]
-		movdqu	[target + 16], temp128		; Copy 16 bytes from source string to target string
-		ret
 
 ;==============================================================================;
 ;       Copying of string to string                                            ;
@@ -673,12 +436,11 @@ source	equ		rdx							; source string
 index	equ		rax							; index of eol symbol
 shft	equ		rcx							; shift value
 low		equ		cl							; low part of shift value
-table	equ		r8							; pointer to functions table
 cmask	equ		r8							; mask to clear unrequired results
 emask	equ		r9							; result of eol search
 ptr1	equ		r10							; temporary pointer to target string
 ptr2	equ		r11							; temporary pointer to source string
-func	equ		table						; pointer to copy function
+size	equ		cmask						; string size (bytes)
 echeck0	equ		xmm0						; eol check mask #1
 echeck1	equ		xmm1						; eol check mask #2
 sdata0	equ		xmm2						; string data #1
@@ -752,10 +514,18 @@ end repeat
 		cmp		maxlen, emask				; if (maxlen < emask)
 		jb		.nospc						;     then go to no space branch
 		add		index, emask				; index += emask
-		lea		table, [copytable]			; load pointer to functions table
-		lea		func, [table + index * 8 + 8]
+		mov		size, index					; size = index
+		seteol	(target + index), x			; put eol symbol into target string
+;---[Scalar loop]--------------------------
+.sclr:	mov		char, [source]				; reg = source[0]
+		mov		[target], char				; target[0] = reg
+		add		source, bytes				; source++
+		add		target, bytes				; target++
+		sub		size, bytes					; size--
+		jnz		.sclr						; do while (size != 0)
+;---[End of scalar loop]-------------------
 		shftr	index, scale				; return index
-		jmp		qword [func]				; call associated copy function
+		ret
 ;---[Loop break branch]--------------------
 .brk1:	bsf		emask, emask				; find index of first occurence of eol
 		cmp		maxlen, emask				; if (maxlen < emask)
@@ -802,12 +572,11 @@ size	equ		rcx							; characters to copy
 index	equ		rax							; index of eol symbol
 shft	equ		rcx							; shift value
 low		equ		cl							; low part of shift value
-table	equ		r8							; pointer to functions table
 cmask	equ		r8							; mask to clear unrequired results
 emask	equ		r9							; result of eol search
 ptr1	equ		r10							; temporary pointer to target string
 ptr2	equ		r11							; temporary pointer to source string
-func	equ		table						; pointer to copy function
+size	equ		cmask						; string size (bytes)
 echeck0	equ		xmm0						; eol check mask #1
 echeck1	equ		xmm1						; eol check mask #2
 sdata0	equ		xmm2						; string data #1
@@ -884,11 +653,18 @@ end repeat
 		cmp		maxlen, emask				; if (maxlen > emask)
 		cmova	maxlen, emask				;     maxlen = emask
 .tail0:	add		index, maxlen				; index += maxlen
+		mov		size, index					; size = index
 		seteol	(target + index), x			; put eol symbol into target string
-		lea		table, [copytable]			; load pointer to functions table
-		lea		func, [table + index * 8]
+;---[Scalar loop]--------------------------
+.sclr:	mov		char, [source]				; reg = source[0]
+		mov		[target], char				; target[0] = reg
+		add		source, bytes				; source++
+		add		target, bytes				; target++
+		sub		size, bytes					; size--
+		jnz		.sclr						; do while (size != 0)
+;---[End of scalar loop]-------------------
 		shftr	index, scale				; return index
-		jmp		qword [func]				; call associated copy function
+		ret
 ;---[Loop break branch]--------------------
 .brk1:	bsf		emask, emask				; find index of first occurence of eol
 		cmp		maxlen, emask				; if (maxlen > emask)
@@ -2757,6 +2533,7 @@ minsize	= 32								; min array size is aceptable for Quick sort
 		jb		.swap						; do while (left < right)
 ;---[End of swap loop]---------------------
 		mov		rsize, [s_size]				; get "size" variable from the stack
+		mov		func, [s_func]				; get "func" variable from the stack
 		add		right, 1
 		sub		rsize, right				; rsize = size - (right + 1)
 		lea		rptr, [ptr + right * 8]		; rptr = ptr + (right + 1)
@@ -2769,7 +2546,6 @@ minsize	= 32								; min array size is aceptable for Quick sort
 		mov		[s_array], rarray			; save "rarray" variable into the stack
 		mov		[s_ptr], rptr				; save "rptr" variable into the stack
 		mov		[s_size], rsize				; save "rsize" variable into the stack
-		mov		func, [s_func]				; get "func" variable from the stack
 		mov		size, lsize
 		call	.start						; call Sort (larray, lptr, lsize, func)
 		mov		rarray, [s_array]			; get "rarray" variable from the stack
@@ -2785,7 +2561,6 @@ minsize	= 32								; min array size is aceptable for Quick sort
 		mov		[s_array], larray			; save "larray" variable into the stack
 		mov		[s_ptr], lptr				; save "lptr" variable into the stack
 		mov		[s_size], lsize				; save "lsize" variable into the stack
-		mov		func, [s_func]				; get "func" variable from the stack
 		mov		array, rarray
 		mov		ptr, rptr
 		call	.start						; call Sort (rarray, rptr, rsize, func)
@@ -3120,44 +2895,6 @@ Hash64_char32:	HASH	rax, rdx, rcx, r8d, 11400714819323198485, 2
 ;#      Read-only data section                                                 #
 ;###############################################################################
 section	'.rodata'	align 16
-
-;******************************************************************************;
-;       Vector of copy functions                                               ;
-;******************************************************************************;
-align 16
-copytable	dq	Copy0						; Copy 0 bytes function
-			dq	Copy1						; Copy 1 byte function
-			dq	Copy2						; Copy 2 bytes function
-			dq	Copy3						; Copy 3 bytes function
-			dq	Copy4						; Copy 4 bytes function
-			dq	Copy5						; Copy 5 bytes function
-			dq	Copy6						; Copy 6 bytes function
-			dq	Copy7						; Copy 7 bytes function
-			dq	Copy8						; Copy 8 bytes function
-			dq	Copy9						; Copy 9 bytes function
-			dq	Copy10						; Copy 10 bytes function
-			dq	Copy11						; Copy 11 bytes function
-			dq	Copy12						; Copy 12 bytes function
-			dq	Copy13						; Copy 13 bytes function
-			dq	Copy14						; Copy 14 bytes function
-			dq	Copy15						; Copy 15 bytes function
-			dq	Copy16						; Copy 16 bytes function
-			dq	Copy17						; Copy 17 bytes function
-			dq	Copy18						; Copy 18 bytes function
-			dq	Copy19						; Copy 19 bytes function
-			dq	Copy20						; Copy 20 bytes function
-			dq	Copy21						; Copy 21 bytes function
-			dq	Copy22						; Copy 22 bytes function
-			dq	Copy23						; Copy 23 bytes function
-			dq	Copy24						; Copy 24 bytes function
-			dq	Copy25						; Copy 25 bytes function
-			dq	Copy26						; Copy 26 bytes function
-			dq	Copy27						; Copy 27 bytes function
-			dq	Copy28						; Copy 28 bytes function
-			dq	Copy29						; Copy 29 bytes function
-			dq	Copy30						; Copy 30 bytes function
-			dq	Copy31						; Copy 31 bytes function
-			dq	Copy32						; Copy 32 bytes function
 
 ;******************************************************************************;
 ;       Arrays of masks                                                        ;
