@@ -2921,7 +2921,7 @@ end if
 		and		index, VMASK				; get array offset from vector boundary
 		sub		array, index				; align pointer to vector boundary
 		mov		ptr, array					; ptr = array
-;---[Unaligned sums]-----------------------
+;---[Unaligned operation]------------------
 		add		size, index					; size += index
 		shl		index, VSCALE				; compute shift in mask array
 		lea		table, [maskS1]				; set pointer to blending table
@@ -4086,7 +4086,7 @@ bmask	= bytes - 1							; elements aligning mask
 		and		index, VMASK				; get array offset from vector boundary
 		sub		array, index				; align pointer to vector boundary
 		mov		ptr, array					; ptr = array
-;---[Unaligned sums]-----------------------
+;---[Unaligned operation]------------------
 		add		size, index					; size += index
 		shl		index, VSCALE				; compute shift in mask array
 		lea		table, [maskS1]				; set pointer to blending table
@@ -4471,7 +4471,7 @@ end if
 		and		index, VMASK				; get array offset from vector boundary
 		sub		array, index				; align pointer to vector boundary
 		mov		ptr, array					; ptr = array
-;---[Unaligned sums]-----------------------
+;---[Unaligned operation]------------------
 		add		size, index					; size += index
 		shl		index, VSCALE				; compute shift in mask array
 		lea		table, [maskS1]				; set pointer to blending table
@@ -4643,7 +4643,7 @@ end if
 		xorp#x	sum3, sum3					; sum3 = 0
 		xorp#x	sum4, sum4					; sum4 = 0
 		xorp#x	zero, zero					; zero = 0
-;---[Unaligned sums]-----------------------
+;---[Unaligned operation]------------------
 		add		size, index					; size += index
 		shl		index, VSCALE				; compute shift in mask array
 		lea		table, [maskS1]				; set pointer to blending table
@@ -4797,7 +4797,7 @@ end if
 		xorp#x	sum3, sum3					; sum3 = 0
 		xorp#x	sum4, sum4					; sum4 = 0
 		xorp#x	zero, zero					; zero = 0
-;---[Unaligned sum]------------------------
+;---[Unaligned operation]------------------
 		add		size, index					; size += index
 		sub		size, VSIZE					; if (size <= VSIZE)
 		jbe		.tail						;     then process array tails
@@ -5465,7 +5465,7 @@ end if
 		mov		index, array
 		and		index, VMASK				; get array offset from vector boundary
 		sub		array, index				; align pointer to vector boundary
-;---[Unaligned search for pattern]---------
+;---[Unaligned operation]------------------
 		add		size, index					; size += index
 		mov		shft, index					; shft = index
 		neg		index						; index = -index
@@ -5566,7 +5566,7 @@ end if
 		neg		index
 		and		index, VMASK				; get array offset from vector boundary
 		lea		array, [array+index-VSIZE]	; align pointer to vector boundary
-;---[Unaligned search for pattern]---------
+;---[Unaligned operation]------------------
 		add		size, index					; size += index
 		mov		shft, index					; shft = index
 		lea		index, [size - VSIZE]		; index = size - VSIZE
@@ -6067,7 +6067,7 @@ end if
 		mov		shft, array
 		and		shft, VMASK					; get array offset from vector boundary
 		sub		array, shft					; align pointer to vector boundary
-;---[Unaligned search for pattern]---------
+;---[Unaligned operation]------------------
 		add		size, shft					; size += shft
 		mov		cmask, VBITS
 		shl		cmask, low					; adjust cmask for unaligned search
@@ -6352,7 +6352,7 @@ end if
 		and		index, VMASK				; get array offset from vector boundary
 		sub		array, index				; align pointer to vector boundary
 		mov		ptr, array					; ptr = array
-;---[Unaligned search for pattern]---------
+;---[Unaligned operation]------------------
 		add		size, index					; size += index
 		shl		index, VSCALE				; compute shift in mask array
 		lea		table, [maskS1]				; set pointer to blending table
@@ -9270,7 +9270,7 @@ end if
 		mov		index, array
 		and		index, VMASK				; get array offset from vector boundary
 		sub		array, index				; align pointer to vector boundary
-;---[Unaligned search for pattern]---------
+;---[Unaligned operation]------------------
 		add		size, index					; size += index
 		mov		shft, index					; shft = index
 		neg		index						; index = -index
@@ -9492,7 +9492,7 @@ end if
 		mov		index, array
 		and		index, VMASK				; get array offset from vector boundary
 		sub		array, index				; align pointer to vector boundary
-;---[Unaligned search for pattern]---------
+;---[Unaligned operation]------------------
 		add		size, index					; size += index
 		mov		shft, index					; shft = index
 		neg		index						; index = -index
@@ -9627,7 +9627,7 @@ bmask	= bytes - 1							; elements aligning mask
 		mov		index, array
 		and		index, VMASK				; get array offset from vector boundary
 		sub		array, index				; align pointer to vector boundary
-;---[Unaligned search for pattern]---------
+;---[Unaligned operation]------------------
 		add		size, index					; size += index
 		mov		shft, index					; shft = index
 		neg		index						; index = -index
@@ -9738,7 +9738,7 @@ end if
 		and		index, VMASK				; get array offset from vector boundary
 		sub		ptr2, index					; ptr2 = array2 - index
 		sub		ptr1, index					; ptr1 = array1 - index
-;---[Unaligned check]----------------------
+;---[Unaligned operation]------------------
 		add		size, index					; size += index
 		neg		index						; index = -index
 		sub		size, VSIZE					; if (size <= VSIZE)

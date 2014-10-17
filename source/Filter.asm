@@ -58,8 +58,8 @@ extrn	'Array_SubVector_flt32'		as	Sub_flt32
 extrn	'Array_SubVector_flt64'		as	Sub_flt64
 
 ; Scalar multiplication
-extrn	'Array_MulVector_flt32'		as	Mul_flt32
-extrn	'Array_MulVector_flt64'		as	Mul_flt64
+extrn	'Array_MulScalar_flt32'		as	Mul_flt32
+extrn	'Array_MulScalar_flt64'		as	Mul_flt64
 
 ; Sum of elements
 extrn	'Array_Sum_flt32'			as	Sum_flt32
@@ -233,7 +233,7 @@ space	= 5 * 8								; stack size required by the procedure
 		mov		[s_size], size				; save "size" variable into the stack
 ;---[Window computing loop]----------------
 .loop:	movs#x	value, [s_value]			; get "value" variable from the stack
-		adds#x	value, [s_pi]					; value += Pi
+		adds#x	value, [s_pi]				; value += Pi
 		movs#x	[s_value], value			; save "value" variable into the stack
 		muls#x	value, [s_freq]				; value *= freq
 		mov		fptr, Sin
@@ -434,9 +434,8 @@ treg	equ		rax							; temporary register
 fptr	equ		rax							; pointer to call external function
 table	equ		r8							; pointer to blending table
 value	equ		xmm0						; argument value
-one		equ		xmm1						; 1.0
-zero	equ		xmm2						; 0.0
-temp	equ		xmm3						; temporary register
+zero	equ		xmm1						; 0.0
+temp	equ		xmm2						; temporary register
 stack	equ		rsp							; stack pointer
 s_filt	equ		stack + 0 * 8				; stack position of "filter" variable
 s_size	equ		stack + 1 * 8				; stack position of "size" variable
@@ -487,9 +486,8 @@ space	= 3 * 8								; stack size required by the procedure
 		xorp#x	zero, zero					; zero = 0
 		comis#x	temp, zero					; if (temp != 0)
 		je		@f							; {
-		initreg	one, treg, oneval			;     one = 1.0
 		add		size, 1						;     size++
-		movap#x	value, one					;     value = one / temp
+		initreg	value, treg, oneval			;     value = 1.0 / temp
 		divs#x	value, temp					;     call Norm (filter, size, value)
 		mov		fptr, Norm					; }
 		call	fptr

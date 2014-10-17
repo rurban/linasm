@@ -910,7 +910,7 @@ end if
 		xorp#x	sum3, sum3					; sum3 = 0
 		xorp#x	sum4, sum4					; sum4 = 0
 		xorp#x	zero, zero					; zero = 0
-;---[Unaligned sums]-----------------------
+;---[Unaligned operation]------------------
 		add		size, index					; size += index
 		shl		index, VSCALE				; compute shift in mask array
 		lea		table, [maskS1]				; set pointer to blending table
@@ -1285,7 +1285,7 @@ bmask	= bytes - 1							; elements aligning mask
 		xorp#x	sum8, sum8					; sum8 = 0
 		xorp#x	sum9, sum9					; sum9 = 0
 		xorp#x	zero, zero					; zero = 0
-;---[Unaligned sums]-----------------------
+;---[Unaligned operation]------------------
 		add		size, index					; size += index
 		shl		index, VSCALE				; compute shift in mask array
 		lea		table, [maskS1]				; set pointer to blending table
@@ -1483,7 +1483,7 @@ bmask	= bytes - 1							; elements aligning mask
 		xorp#x	sum8, sum8					; sum8 = 0
 		xorp#x	sum9, sum9					; sum9 = 0
 		xorp#x	zero, zero					; zero = 0
-;---[Unaligned sums]-----------------------
+;---[Unaligned operation]------------------
 		add		size, index					; size += index
 		shl		index, VSCALE				; compute shift in mask array
 		lea		table, [maskS1]				; set pointer to blending table
@@ -1662,7 +1662,7 @@ bmask	= bytes - 1							; elements aligning mask
 		xorp#x	sum3, sum3					; sum3 = 0
 		xorp#x	sum4, sum4					; sum4 = 0
 		xorp#x	zero, zero					; zero = 0
-;---[Unaligned sum]------------------------
+;---[Unaligned operation]------------------
 		add		size, index					; size += index
 		sub		size, VSIZE					; if (size <= VSIZE)
 		jbe		.tail						;     then process array tails
@@ -1831,7 +1831,7 @@ bmask	= bytes - 1							; elements aligning mask
 		sub		ptr1, index					; ptr1 = array1 - index
 		xorp#x	zero1, zero1				; zero1 = 0
 		xorp#x	zero2, zero2				; zero2 = 0
-;---[Unaligned sum]------------------------
+;---[Unaligned operation]------------------
 		add		size, index					; size += index
 		sub		size, VSIZE					; if (size <= VSIZE)
 		jbe		.tail						;     then process array tails
