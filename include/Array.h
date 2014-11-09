@@ -178,38 +178,38 @@ static void Not (size_t array[], size_t size);
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
 // Unsigned integer types
-static void And (uint8_t target[], size_t size, uint8_t value);
-static void And (uint16_t target[], size_t size, uint16_t value);
-static void And (uint32_t target[], size_t size, uint32_t value);
-static void And (uint64_t target[], size_t size, uint64_t value);
+static void AndScalar (uint8_t target[], size_t size, uint8_t value);
+static void AndScalar (uint16_t target[], size_t size, uint16_t value);
+static void AndScalar (uint32_t target[], size_t size, uint32_t value);
+static void AndScalar (uint64_t target[], size_t size, uint64_t value);
 
 // Signed integer types
-static void And (sint8_t target[], size_t size, sint8_t value);
-static void And (sint16_t target[], size_t size, sint16_t value);
-static void And (sint32_t target[], size_t size, sint32_t value);
-static void And (sint64_t target[], size_t size, sint64_t value);
+static void AndScalar (sint8_t target[], size_t size, sint8_t value);
+static void AndScalar (sint16_t target[], size_t size, sint16_t value);
+static void AndScalar (sint32_t target[], size_t size, sint32_t value);
+static void AndScalar (sint64_t target[], size_t size, sint64_t value);
 
 // Other types
-static void And (size_t target[], size_t size, size_t value);
+static void AndScalar (size_t target[], size_t size, size_t value);
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 //      Vector bitwise AND                                                    //
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
 // Unsigned integer types
-static void And (uint8_t target[], const uint8_t source[], size_t size);
-static void And (uint16_t target[], const uint16_t source[], size_t size);
-static void And (uint32_t target[], const uint32_t source[], size_t size);
-static void And (uint64_t target[], const uint64_t source[], size_t size);
+static void AndVector (uint8_t target[], const uint8_t source[], size_t size);
+static void AndVector (uint16_t target[], const uint16_t source[], size_t size);
+static void AndVector (uint32_t target[], const uint32_t source[], size_t size);
+static void AndVector (uint64_t target[], const uint64_t source[], size_t size);
 
 // Signed integer types
-static void And (sint8_t target[], const sint8_t source[], size_t size);
-static void And (sint16_t target[], const sint16_t source[], size_t size);
-static void And (sint32_t target[], const sint32_t source[], size_t size);
-static void And (sint64_t target[], const sint64_t source[], size_t size);
+static void AndVector (sint8_t target[], const sint8_t source[], size_t size);
+static void AndVector (sint16_t target[], const sint16_t source[], size_t size);
+static void AndVector (sint32_t target[], const sint32_t source[], size_t size);
+static void AndVector (sint64_t target[], const sint64_t source[], size_t size);
 
 // Other types
-static void And (size_t target[], const size_t source[], size_t size);
+static void AndVector (size_t target[], const size_t source[], size_t size);
 
 //============================================================================//
 //      Bitwise OR                                                            //
@@ -220,38 +220,38 @@ static void And (size_t target[], const size_t source[], size_t size);
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
 // Unsigned integer types
-static void Or (uint8_t target[], size_t size, uint8_t value);
-static void Or (uint16_t target[], size_t size, uint16_t value);
-static void Or (uint32_t target[], size_t size, uint32_t value);
-static void Or (uint64_t target[], size_t size, uint64_t value);
+static void OrScalar (uint8_t target[], size_t size, uint8_t value);
+static void OrScalar (uint16_t target[], size_t size, uint16_t value);
+static void OrScalar (uint32_t target[], size_t size, uint32_t value);
+static void OrScalar (uint64_t target[], size_t size, uint64_t value);
 
 // Signed integer types
-static void Or (sint8_t target[], size_t size, sint8_t value);
-static void Or (sint16_t target[], size_t size, sint16_t value);
-static void Or (sint32_t target[], size_t size, sint32_t value);
-static void Or (sint64_t target[], size_t size, sint64_t value);
+static void OrScalar (sint8_t target[], size_t size, sint8_t value);
+static void OrScalar (sint16_t target[], size_t size, sint16_t value);
+static void OrScalar (sint32_t target[], size_t size, sint32_t value);
+static void OrScalar (sint64_t target[], size_t size, sint64_t value);
 
 // Other types
-static void Or (size_t target[], size_t size, size_t value);
+static void OrScalar (size_t target[], size_t size, size_t value);
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 //      Vector bitwise OR                                                     //
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
 // Unsigned integer types
-static void Or (uint8_t target[], const uint8_t source[], size_t size);
-static void Or (uint16_t target[], const uint16_t source[], size_t size);
-static void Or (uint32_t target[], const uint32_t source[], size_t size);
-static void Or (uint64_t target[], const uint64_t source[], size_t size);
+static void OrVector (uint8_t target[], const uint8_t source[], size_t size);
+static void OrVector (uint16_t target[], const uint16_t source[], size_t size);
+static void OrVector (uint32_t target[], const uint32_t source[], size_t size);
+static void OrVector (uint64_t target[], const uint64_t source[], size_t size);
 
 // Signed integer types
-static void Or (sint8_t target[], const sint8_t source[], size_t size);
-static void Or (sint16_t target[], const sint16_t source[], size_t size);
-static void Or (sint32_t target[], const sint32_t source[], size_t size);
-static void Or (sint64_t target[], const sint64_t source[], size_t size);
+static void OrVector (sint8_t target[], const sint8_t source[], size_t size);
+static void OrVector (sint16_t target[], const sint16_t source[], size_t size);
+static void OrVector (sint32_t target[], const sint32_t source[], size_t size);
+static void OrVector (sint64_t target[], const sint64_t source[], size_t size);
 
 // Other types
-static void Or (size_t target[], const size_t source[], size_t size);
+static void OrVector (size_t target[], const size_t source[], size_t size);
 
 //============================================================================//
 //      Bitwise XOR                                                           //
@@ -262,38 +262,38 @@ static void Or (size_t target[], const size_t source[], size_t size);
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
 // Unsigned integer types
-static void Xor (uint8_t target[], size_t size, uint8_t value);
-static void Xor (uint16_t target[], size_t size, uint16_t value);
-static void Xor (uint32_t target[], size_t size, uint32_t value);
-static void Xor (uint64_t target[], size_t size, uint64_t value);
+static void XorScalar (uint8_t target[], size_t size, uint8_t value);
+static void XorScalar (uint16_t target[], size_t size, uint16_t value);
+static void XorScalar (uint32_t target[], size_t size, uint32_t value);
+static void XorScalar (uint64_t target[], size_t size, uint64_t value);
 
 // Signed integer types
-static void Xor (sint8_t target[], size_t size, sint8_t value);
-static void Xor (sint16_t target[], size_t size, sint16_t value);
-static void Xor (sint32_t target[], size_t size, sint32_t value);
-static void Xor (sint64_t target[], size_t size, sint64_t value);
+static void XorScalar (sint8_t target[], size_t size, sint8_t value);
+static void XorScalar (sint16_t target[], size_t size, sint16_t value);
+static void XorScalar (sint32_t target[], size_t size, sint32_t value);
+static void XorScalar (sint64_t target[], size_t size, sint64_t value);
 
 // Other types
-static void Xor (size_t target[], size_t size, size_t value);
+static void XorScalar (size_t target[], size_t size, size_t value);
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 //      Vector bitwise XOR                                                    //
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
 // Unsigned integer types
-static void Xor (uint8_t target[], const uint8_t source[], size_t size);
-static void Xor (uint16_t target[], const uint16_t source[], size_t size);
-static void Xor (uint32_t target[], const uint32_t source[], size_t size);
-static void Xor (uint64_t target[], const uint64_t source[], size_t size);
+static void XorVector (uint8_t target[], const uint8_t source[], size_t size);
+static void XorVector (uint16_t target[], const uint16_t source[], size_t size);
+static void XorVector (uint32_t target[], const uint32_t source[], size_t size);
+static void XorVector (uint64_t target[], const uint64_t source[], size_t size);
 
 // Signed integer types
-static void Xor (sint8_t target[], const sint8_t source[], size_t size);
-static void Xor (sint16_t target[], const sint16_t source[], size_t size);
-static void Xor (sint32_t target[], const sint32_t source[], size_t size);
-static void Xor (sint64_t target[], const sint64_t source[], size_t size);
+static void XorVector (sint8_t target[], const sint8_t source[], size_t size);
+static void XorVector (sint16_t target[], const sint16_t source[], size_t size);
+static void XorVector (sint32_t target[], const sint32_t source[], size_t size);
+static void XorVector (sint64_t target[], const sint64_t source[], size_t size);
 
 // Other types
-static void Xor (size_t target[], const size_t source[], size_t size);
+static void XorVector (size_t target[], const size_t source[], size_t size);
 
 //****************************************************************************//
 //      Arithmetic operations                                                 //
@@ -340,46 +340,46 @@ static void Sqrt (flt64_t array[], size_t size);
 //----------------------------------------------------------------------------//
 
 // Unsigned integer types
-static void Add (uint8_t array[], size_t size, uint8_t value);
-static void Add (uint16_t array[], size_t size, uint16_t value);
-static void Add (uint32_t array[], size_t size, uint32_t value);
-static void Add (uint64_t array[], size_t size, uint64_t value);
+static void AddScalar (uint8_t array[], size_t size, uint8_t value);
+static void AddScalar (uint16_t array[], size_t size, uint16_t value);
+static void AddScalar (uint32_t array[], size_t size, uint32_t value);
+static void AddScalar (uint64_t array[], size_t size, uint64_t value);
 
 // Signed integer types
-static void Add (sint8_t array[], size_t size, sint8_t value);
-static void Add (sint16_t array[], size_t size, sint16_t value);
-static void Add (sint32_t array[], size_t size, sint32_t value);
-static void Add (sint64_t array[], size_t size, sint64_t value);
+static void AddScalar (sint8_t array[], size_t size, sint8_t value);
+static void AddScalar (sint16_t array[], size_t size, sint16_t value);
+static void AddScalar (sint32_t array[], size_t size, sint32_t value);
+static void AddScalar (sint64_t array[], size_t size, sint64_t value);
 
 // Floating-point types
-static void Add (flt32_t array[], size_t size, flt32_t value);
-static void Add (flt64_t array[], size_t size, flt64_t value);
+static void AddScalar (flt32_t array[], size_t size, flt32_t value);
+static void AddScalar (flt64_t array[], size_t size, flt64_t value);
 
 // Other types
-static void Add (size_t array[], size_t size, size_t value);
+static void AddScalar (size_t array[], size_t size, size_t value);
 
 //----------------------------------------------------------------------------//
 //      Vector addition                                                       //
 //----------------------------------------------------------------------------//
 
 // Unsigned integer types
-static void Add (uint8_t target[], const uint8_t source[], size_t size);
-static void Add (uint16_t target[], const uint16_t source[], size_t size);
-static void Add (uint32_t target[], const uint32_t source[], size_t size);
-static void Add (uint64_t target[], const uint64_t source[], size_t size);
+static void AddVector (uint8_t target[], const uint8_t source[], size_t size);
+static void AddVector (uint16_t target[], const uint16_t source[], size_t size);
+static void AddVector (uint32_t target[], const uint32_t source[], size_t size);
+static void AddVector (uint64_t target[], const uint64_t source[], size_t size);
 
 // Signed integer types
-static void Add (sint8_t target[], const sint8_t source[], size_t size);
-static void Add (sint16_t target[], const sint16_t source[], size_t size);
-static void Add (sint32_t target[], const sint32_t source[], size_t size);
-static void Add (sint64_t target[], const sint64_t source[], size_t size);
+static void AddVector (sint8_t target[], const sint8_t source[], size_t size);
+static void AddVector (sint16_t target[], const sint16_t source[], size_t size);
+static void AddVector (sint32_t target[], const sint32_t source[], size_t size);
+static void AddVector (sint64_t target[], const sint64_t source[], size_t size);
 
 // Floating-point types
-static void Add (flt32_t target[], const flt32_t source[], size_t size);
-static void Add (flt64_t target[], const flt64_t source[], size_t size);
+static void AddVector (flt32_t target[], const flt32_t source[], size_t size);
+static void AddVector (flt64_t target[], const flt64_t source[], size_t size);
 
 // Other types
-static void Add (size_t target[], const size_t source[], size_t size);
+static void AddVector (size_t target[], const size_t source[], size_t size);
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 //      Subtraction                                                           //
@@ -390,46 +390,46 @@ static void Add (size_t target[], const size_t source[], size_t size);
 //----------------------------------------------------------------------------//
 
 // Unsigned integer types
-static void Sub (uint8_t array[], size_t size, uint8_t value);
-static void Sub (uint16_t array[], size_t size, uint16_t value);
-static void Sub (uint32_t array[], size_t size, uint32_t value);
-static void Sub (uint64_t array[], size_t size, uint64_t value);
+static void SubScalar (uint8_t array[], size_t size, uint8_t value);
+static void SubScalar (uint16_t array[], size_t size, uint16_t value);
+static void SubScalar (uint32_t array[], size_t size, uint32_t value);
+static void SubScalar (uint64_t array[], size_t size, uint64_t value);
 
 // Signed integer types
-static void Sub (sint8_t array[], size_t size, sint8_t value);
-static void Sub (sint16_t array[], size_t size, sint16_t value);
-static void Sub (sint32_t array[], size_t size, sint32_t value);
-static void Sub (sint64_t array[], size_t size, sint64_t value);
+static void SubScalar (sint8_t array[], size_t size, sint8_t value);
+static void SubScalar (sint16_t array[], size_t size, sint16_t value);
+static void SubScalar (sint32_t array[], size_t size, sint32_t value);
+static void SubScalar (sint64_t array[], size_t size, sint64_t value);
 
 // Floating-point types
-static void Sub (flt32_t array[], size_t size, flt32_t value);
-static void Sub (flt64_t array[], size_t size, flt64_t value);
+static void SubScalar (flt32_t array[], size_t size, flt32_t value);
+static void SubScalar (flt64_t array[], size_t size, flt64_t value);
 
 // Other types
-static void Sub (size_t array[], size_t size, size_t value);
+static void SubScalar (size_t array[], size_t size, size_t value);
 
 //----------------------------------------------------------------------------//
 //      Vector subtraction                                                    //
 //----------------------------------------------------------------------------//
 
 // Unsigned integer types
-static void Sub (uint8_t target[], const uint8_t source[], size_t size);
-static void Sub (uint16_t target[], const uint16_t source[], size_t size);
-static void Sub (uint32_t target[], const uint32_t source[], size_t size);
-static void Sub (uint64_t target[], const uint64_t source[], size_t size);
+static void SubVector (uint8_t target[], const uint8_t source[], size_t size);
+static void SubVector (uint16_t target[], const uint16_t source[], size_t size);
+static void SubVector (uint32_t target[], const uint32_t source[], size_t size);
+static void SubVector (uint64_t target[], const uint64_t source[], size_t size);
 
 // Signed integer types
-static void Sub (sint8_t target[], const sint8_t source[], size_t size);
-static void Sub (sint16_t target[], const sint16_t source[], size_t size);
-static void Sub (sint32_t target[], const sint32_t source[], size_t size);
-static void Sub (sint64_t target[], const sint64_t source[], size_t size);
+static void SubVector (sint8_t target[], const sint8_t source[], size_t size);
+static void SubVector (sint16_t target[], const sint16_t source[], size_t size);
+static void SubVector (sint32_t target[], const sint32_t source[], size_t size);
+static void SubVector (sint64_t target[], const sint64_t source[], size_t size);
 
 // Floating-point types
-static void Sub (flt32_t target[], const flt32_t source[], size_t size);
-static void Sub (flt64_t target[], const flt64_t source[], size_t size);
+static void SubVector (flt32_t target[], const flt32_t source[], size_t size);
+static void SubVector (flt64_t target[], const flt64_t source[], size_t size);
 
 // Other types
-static void Sub (size_t target[], const size_t source[], size_t size);
+static void SubVector (size_t target[], const size_t source[], size_t size);
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 //      Multiplication                                                        //
@@ -438,14 +438,14 @@ static void Sub (size_t target[], const size_t source[], size_t size);
 //----------------------------------------------------------------------------//
 //      Scalar multiplication                                                 //
 //----------------------------------------------------------------------------//
-static void Mul (flt32_t array[], size_t size, flt32_t value);
-static void Mul (flt64_t array[], size_t size, flt64_t value);
+static void MulScalar (flt32_t array[], size_t size, flt32_t value);
+static void MulScalar (flt64_t array[], size_t size, flt64_t value);
 
 //----------------------------------------------------------------------------//
 //      Vector multiplication                                                 //
 //----------------------------------------------------------------------------//
-static void Mul (flt32_t target[], const flt32_t source[], size_t size);
-static void Mul (flt64_t target[], const flt64_t source[], size_t size);
+static void MulVector (flt32_t target[], const flt32_t source[], size_t size);
+static void MulVector (flt64_t target[], const flt64_t source[], size_t size);
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 //      Division                                                              //
@@ -454,14 +454,14 @@ static void Mul (flt64_t target[], const flt64_t source[], size_t size);
 //----------------------------------------------------------------------------//
 //      Scalar division                                                       //
 //----------------------------------------------------------------------------//
-static void Div (flt32_t array[], size_t size, flt32_t value);
-static void Div (flt64_t array[], size_t size, flt64_t value);
+static void DivScalar (flt32_t array[], size_t size, flt32_t value);
+static void DivScalar (flt64_t array[], size_t size, flt64_t value);
 
 //----------------------------------------------------------------------------//
 //      Vector division                                                       //
 //----------------------------------------------------------------------------//
-static void Div (flt32_t target[], const flt32_t source[], size_t size);
-static void Div (flt64_t target[], const flt64_t source[], size_t size);
+static void DivVector (flt32_t target[], const flt32_t source[], size_t size);
+static void DivVector (flt64_t target[], const flt64_t source[], size_t size);
 
 //****************************************************************************//
 //      Rounding                                                              //

@@ -240,24 +240,24 @@ public	AndS8						as	'Array_AndScalar_uint8'
 public	AndS16						as	'Array_AndScalar_uint16'
 public	AndS32						as	'Array_AndScalar_uint32'
 public	AndS64						as	'Array_AndScalar_uint64'
-public	AndS8						as	'_ZN5Array3AndEPhmh'
-public	AndS16						as	'_ZN5Array3AndEPtmt'
-public	AndS32						as	'_ZN5Array3AndEPjmj'
-public	AndS64						as	'_ZN5Array3AndEPymy'
+public	AndS8						as	'_ZN5Array9AndScalarEPhmh'
+public	AndS16						as	'_ZN5Array9AndScalarEPtmt'
+public	AndS32						as	'_ZN5Array9AndScalarEPjmj'
+public	AndS64						as	'_ZN5Array9AndScalarEPymy'
 
 ; Signed integer types
 public	AndS8						as	'Array_AndScalar_sint8'
 public	AndS16						as	'Array_AndScalar_sint16'
 public	AndS32						as	'Array_AndScalar_sint32'
 public	AndS64						as	'Array_AndScalar_sint64'
-public	AndS8						as	'_ZN5Array3AndEPama'
-public	AndS16						as	'_ZN5Array3AndEPsms'
-public	AndS32						as	'_ZN5Array3AndEPimi'
-public	AndS64						as	'_ZN5Array3AndEPxmx'
+public	AndS8						as	'_ZN5Array9AndScalarEPama'
+public	AndS16						as	'_ZN5Array9AndScalarEPsms'
+public	AndS32						as	'_ZN5Array9AndScalarEPimi'
+public	AndS64						as	'_ZN5Array9AndScalarEPxmx'
 
 ; Other types
 public	AndS64						as	'Array_AndScalar_size'
-public	AndS64						as	'_ZN5Array3AndEPmmm'
+public	AndS64						as	'_ZN5Array9AndScalarEPmmm'
 
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 ;       Vector bitwise AND                                                     ;
@@ -268,24 +268,24 @@ public	AndV8						as	'Array_AndVector_uint8'
 public	AndV16						as	'Array_AndVector_uint16'
 public	AndV32						as	'Array_AndVector_uint32'
 public	AndV64						as	'Array_AndVector_uint64'
-public	AndV8						as	'_ZN5Array3AndEPhPKhm'
-public	AndV16						as	'_ZN5Array3AndEPtPKtm'
-public	AndV32						as	'_ZN5Array3AndEPjPKjm'
-public	AndV64						as	'_ZN5Array3AndEPyPKym'
+public	AndV8						as	'_ZN5Array9AndVectorEPhPKhm'
+public	AndV16						as	'_ZN5Array9AndVectorEPtPKtm'
+public	AndV32						as	'_ZN5Array9AndVectorEPjPKjm'
+public	AndV64						as	'_ZN5Array9AndVectorEPyPKym'
 
 ; Signed integer types
 public	AndV8						as	'Array_AndVector_sint8'
 public	AndV16						as	'Array_AndVector_sint16'
 public	AndV32						as	'Array_AndVector_sint32'
 public	AndV64						as	'Array_AndVector_sint64'
-public	AndV8						as	'_ZN5Array3AndEPaPKam'
-public	AndV16						as	'_ZN5Array3AndEPsPKsm'
-public	AndV32						as	'_ZN5Array3AndEPiPKim'
-public	AndV64						as	'_ZN5Array3AndEPxPKxm'
+public	AndV8						as	'_ZN5Array9AndVectorEPaPKam'
+public	AndV16						as	'_ZN5Array9AndVectorEPsPKsm'
+public	AndV32						as	'_ZN5Array9AndVectorEPiPKim'
+public	AndV64						as	'_ZN5Array9AndVectorEPxPKxm'
 
 ; Other types
 public	AndV64						as	'Array_AndVector_size'
-public	AndV64						as	'_ZN5Array3AndEPmPKmm'
+public	AndV64						as	'_ZN5Array9AndVectorEPmPKmm'
 
 ;==============================================================================;
 ;       Bitwise OR                                                             ;
@@ -300,24 +300,24 @@ public	OrS8						as	'Array_OrScalar_uint8'
 public	OrS16						as	'Array_OrScalar_uint16'
 public	OrS32						as	'Array_OrScalar_uint32'
 public	OrS64						as	'Array_OrScalar_uint64'
-public	OrS8						as	'_ZN5Array2OrEPhmh'
-public	OrS16						as	'_ZN5Array2OrEPtmt'
-public	OrS32						as	'_ZN5Array2OrEPjmj'
-public	OrS64						as	'_ZN5Array2OrEPymy'
+public	OrS8						as	'_ZN5Array8OrScalarEPhmh'
+public	OrS16						as	'_ZN5Array8OrScalarEPtmt'
+public	OrS32						as	'_ZN5Array8OrScalarEPjmj'
+public	OrS64						as	'_ZN5Array8OrScalarEPymy'
 
 ; Signed integer types
 public	OrS8						as	'Array_OrScalar_sint8'
 public	OrS16						as	'Array_OrScalar_sint16'
 public	OrS32						as	'Array_OrScalar_sint32'
 public	OrS64						as	'Array_OrScalar_sint64'
-public	OrS8						as	'_ZN5Array2OrEPama'
-public	OrS16						as	'_ZN5Array2OrEPsms'
-public	OrS32						as	'_ZN5Array2OrEPimi'
-public	OrS64						as	'_ZN5Array2OrEPxmx'
+public	OrS8						as	'_ZN5Array8OrScalarEPama'
+public	OrS16						as	'_ZN5Array8OrScalarEPsms'
+public	OrS32						as	'_ZN5Array8OrScalarEPimi'
+public	OrS64						as	'_ZN5Array8OrScalarEPxmx'
 
 ; Other types
 public	OrS64						as	'Array_OrScalar_size'
-public	OrS64						as	'_ZN5Array2OrEPmmm'
+public	OrS64						as	'_ZN5Array8OrScalarEPmmm'
 
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 ;       Vector bitwise OR                                                      ;
@@ -328,24 +328,24 @@ public	OrV8						as	'Array_OrVector_uint8'
 public	OrV16						as	'Array_OrVector_uint16'
 public	OrV32						as	'Array_OrVector_uint32'
 public	OrV64						as	'Array_OrVector_uint64'
-public	OrV8						as	'_ZN5Array2OrEPhPKhm'
-public	OrV16						as	'_ZN5Array2OrEPtPKtm'
-public	OrV32						as	'_ZN5Array2OrEPjPKjm'
-public	OrV64						as	'_ZN5Array2OrEPyPKym'
+public	OrV8						as	'_ZN5Array8OrVectorEPhPKhm'
+public	OrV16						as	'_ZN5Array8OrVectorEPtPKtm'
+public	OrV32						as	'_ZN5Array8OrVectorEPjPKjm'
+public	OrV64						as	'_ZN5Array8OrVectorEPyPKym'
 
 ; Signed integer types
 public	OrV8						as	'Array_OrVector_sint8'
 public	OrV16						as	'Array_OrVector_sint16'
 public	OrV32						as	'Array_OrVector_sint32'
 public	OrV64						as	'Array_OrVector_sint64'
-public	OrV8						as	'_ZN5Array2OrEPaPKam'
-public	OrV16						as	'_ZN5Array2OrEPsPKsm'
-public	OrV32						as	'_ZN5Array2OrEPiPKim'
-public	OrV64						as	'_ZN5Array2OrEPxPKxm'
+public	OrV8						as	'_ZN5Array8OrVectorEPaPKam'
+public	OrV16						as	'_ZN5Array8OrVectorEPsPKsm'
+public	OrV32						as	'_ZN5Array8OrVectorEPiPKim'
+public	OrV64						as	'_ZN5Array8OrVectorEPxPKxm'
 
 ; Other types
 public	OrV64						as	'Array_OrVector_size'
-public	OrV64						as	'_ZN5Array2OrEPmPKmm'
+public	OrV64						as	'_ZN5Array8OrVectorEPmPKmm'
 
 ;==============================================================================;
 ;       Bitwise XOR                                                            ;
@@ -360,24 +360,24 @@ public	XorS8						as	'Array_XorScalar_uint8'
 public	XorS16						as	'Array_XorScalar_uint16'
 public	XorS32						as	'Array_XorScalar_uint32'
 public	XorS64						as	'Array_XorScalar_uint64'
-public	XorS8						as	'_ZN5Array3XorEPhmh'
-public	XorS16						as	'_ZN5Array3XorEPtmt'
-public	XorS32						as	'_ZN5Array3XorEPjmj'
-public	XorS64						as	'_ZN5Array3XorEPymy'
+public	XorS8						as	'_ZN5Array9XorScalarEPhmh'
+public	XorS16						as	'_ZN5Array9XorScalarEPtmt'
+public	XorS32						as	'_ZN5Array9XorScalarEPjmj'
+public	XorS64						as	'_ZN5Array9XorScalarEPymy'
 
 ; Signed integer types
 public	XorS8						as	'Array_XorScalar_sint8'
 public	XorS16						as	'Array_XorScalar_sint16'
 public	XorS32						as	'Array_XorScalar_sint32'
 public	XorS64						as	'Array_XorScalar_sint64'
-public	XorS8						as	'_ZN5Array3XorEPama'
-public	XorS16						as	'_ZN5Array3XorEPsms'
-public	XorS32						as	'_ZN5Array3XorEPimi'
-public	XorS64						as	'_ZN5Array3XorEPxmx'
+public	XorS8						as	'_ZN5Array9XorScalarEPama'
+public	XorS16						as	'_ZN5Array9XorScalarEPsms'
+public	XorS32						as	'_ZN5Array9XorScalarEPimi'
+public	XorS64						as	'_ZN5Array9XorScalarEPxmx'
 
 ; Other types
 public	XorS64						as	'Array_XorScalar_size'
-public	XorS64						as	'_ZN5Array3XorEPmmm'
+public	XorS64						as	'_ZN5Array9XorScalarEPmmm'
 
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 ;       Vector bitwise XOR                                                     ;
@@ -388,24 +388,24 @@ public	XorV8						as	'Array_XorVector_uint8'
 public	XorV16						as	'Array_XorVector_uint16'
 public	XorV32						as	'Array_XorVector_uint32'
 public	XorV64						as	'Array_XorVector_uint64'
-public	XorV8						as	'_ZN5Array3XorEPhPKhm'
-public	XorV16						as	'_ZN5Array3XorEPtPKtm'
-public	XorV32						as	'_ZN5Array3XorEPjPKjm'
-public	XorV64						as	'_ZN5Array3XorEPyPKym'
+public	XorV8						as	'_ZN5Array9XorVectorEPhPKhm'
+public	XorV16						as	'_ZN5Array9XorVectorEPtPKtm'
+public	XorV32						as	'_ZN5Array9XorVectorEPjPKjm'
+public	XorV64						as	'_ZN5Array9XorVectorEPyPKym'
 
 ; Signed integer types
 public	XorV8						as	'Array_XorVector_sint8'
 public	XorV16						as	'Array_XorVector_sint16'
 public	XorV32						as	'Array_XorVector_sint32'
 public	XorV64						as	'Array_XorVector_sint64'
-public	XorV8						as	'_ZN5Array3XorEPaPKam'
-public	XorV16						as	'_ZN5Array3XorEPsPKsm'
-public	XorV32						as	'_ZN5Array3XorEPiPKim'
-public	XorV64						as	'_ZN5Array3XorEPxPKxm'
+public	XorV8						as	'_ZN5Array9XorVectorEPaPKam'
+public	XorV16						as	'_ZN5Array9XorVectorEPsPKsm'
+public	XorV32						as	'_ZN5Array9XorVectorEPiPKim'
+public	XorV64						as	'_ZN5Array9XorVectorEPxPKxm'
 
 ; Other types
 public	XorV64						as	'Array_XorVector_size'
-public	XorV64						as	'_ZN5Array3XorEPmPKmm'
+public	XorV64						as	'_ZN5Array9XorVectorEPmPKmm'
 
 ;******************************************************************************;
 ;       Arithmetic operations                                                  ;
@@ -468,30 +468,30 @@ public	AddS8						as	'Array_AddScalar_uint8'
 public	AddS16						as	'Array_AddScalar_uint16'
 public	AddS32						as	'Array_AddScalar_uint32'
 public	AddS64						as	'Array_AddScalar_uint64'
-public	AddS8						as	'_ZN5Array3AddEPhmh'
-public	AddS16						as	'_ZN5Array3AddEPtmt'
-public	AddS32						as	'_ZN5Array3AddEPjmj'
-public	AddS64						as	'_ZN5Array3AddEPymy'
+public	AddS8						as	'_ZN5Array9AddScalarEPhmh'
+public	AddS16						as	'_ZN5Array9AddScalarEPtmt'
+public	AddS32						as	'_ZN5Array9AddScalarEPjmj'
+public	AddS64						as	'_ZN5Array9AddScalarEPymy'
 
 ; Signed integer types
 public	AddS8						as	'Array_AddScalar_sint8'
 public	AddS16						as	'Array_AddScalar_sint16'
 public	AddS32						as	'Array_AddScalar_sint32'
 public	AddS64						as	'Array_AddScalar_sint64'
-public	AddS8						as	'_ZN5Array3AddEPama'
-public	AddS16						as	'_ZN5Array3AddEPsms'
-public	AddS32						as	'_ZN5Array3AddEPimi'
-public	AddS64						as	'_ZN5Array3AddEPxmx'
+public	AddS8						as	'_ZN5Array9AddScalarEPama'
+public	AddS16						as	'_ZN5Array9AddScalarEPsms'
+public	AddS32						as	'_ZN5Array9AddScalarEPimi'
+public	AddS64						as	'_ZN5Array9AddScalarEPxmx'
 
 ; Floating-point types
 public	AddS_flt32					as	'Array_AddScalar_flt32'
 public	AddS_flt64					as	'Array_AddScalar_flt64'
-public	AddS_flt32					as	'_ZN5Array3AddEPfmf'
-public	AddS_flt64					as	'_ZN5Array3AddEPdmd'
+public	AddS_flt32					as	'_ZN5Array9AddScalarEPfmf'
+public	AddS_flt64					as	'_ZN5Array9AddScalarEPdmd'
 
 ; Other types
 public	AddS64						as	'Array_AddScalar_size'
-public	AddS64						as	'_ZN5Array3AddEPmmm'
+public	AddS64						as	'_ZN5Array9AddScalarEPmmm'
 
 ;------------------------------------------------------------------------------;
 ;       Vector addition                                                        ;
@@ -502,30 +502,30 @@ public	AddV8						as	'Array_AddVector_uint8'
 public	AddV16						as	'Array_AddVector_uint16'
 public	AddV32						as	'Array_AddVector_uint32'
 public	AddV64						as	'Array_AddVector_uint64'
-public	AddV8						as	'_ZN5Array3AddEPhPKhm'
-public	AddV16						as	'_ZN5Array3AddEPtPKtm'
-public	AddV32						as	'_ZN5Array3AddEPjPKjm'
-public	AddV64						as	'_ZN5Array3AddEPyPKym'
+public	AddV8						as	'_ZN5Array9AddVectorEPhPKhm'
+public	AddV16						as	'_ZN5Array9AddVectorEPtPKtm'
+public	AddV32						as	'_ZN5Array9AddVectorEPjPKjm'
+public	AddV64						as	'_ZN5Array9AddVectorEPyPKym'
 
 ; Signed integer types
 public	AddV8						as	'Array_AddVector_sint8'
 public	AddV16						as	'Array_AddVector_sint16'
 public	AddV32						as	'Array_AddVector_sint32'
 public	AddV64						as	'Array_AddVector_sint64'
-public	AddV8						as	'_ZN5Array3AddEPaPKam'
-public	AddV16						as	'_ZN5Array3AddEPsPKsm'
-public	AddV32						as	'_ZN5Array3AddEPiPKim'
-public	AddV64						as	'_ZN5Array3AddEPxPKxm'
+public	AddV8						as	'_ZN5Array9AddVectorEPaPKam'
+public	AddV16						as	'_ZN5Array9AddVectorEPsPKsm'
+public	AddV32						as	'_ZN5Array9AddVectorEPiPKim'
+public	AddV64						as	'_ZN5Array9AddVectorEPxPKxm'
 
 ; Floating-point types
 public	AddV_flt32					as	'Array_AddVector_flt32'
 public	AddV_flt64					as	'Array_AddVector_flt64'
-public	AddV_flt32					as	'_ZN5Array3AddEPfPKfm'
-public	AddV_flt64					as	'_ZN5Array3AddEPdPKdm'
+public	AddV_flt32					as	'_ZN5Array9AddVectorEPfPKfm'
+public	AddV_flt64					as	'_ZN5Array9AddVectorEPdPKdm'
 
 ; Other types
 public	AddV64						as	'Array_AddVector_size'
-public	AddV64						as	'_ZN5Array3AddEPmPKmm'
+public	AddV64						as	'_ZN5Array9AddVectorEPmPKmm'
 
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 ;       Subtraction                                                            ;
@@ -540,30 +540,30 @@ public	SubS8						as	'Array_SubScalar_uint8'
 public	SubS16						as	'Array_SubScalar_uint16'
 public	SubS32						as	'Array_SubScalar_uint32'
 public	SubS64						as	'Array_SubScalar_uint64'
-public	SubS8						as	'_ZN5Array3SubEPhmh'
-public	SubS16						as	'_ZN5Array3SubEPtmt'
-public	SubS32						as	'_ZN5Array3SubEPjmj'
-public	SubS64						as	'_ZN5Array3SubEPymy'
+public	SubS8						as	'_ZN5Array9SubScalarEPhmh'
+public	SubS16						as	'_ZN5Array9SubScalarEPtmt'
+public	SubS32						as	'_ZN5Array9SubScalarEPjmj'
+public	SubS64						as	'_ZN5Array9SubScalarEPymy'
 
 ; Signed integer types
 public	SubS8						as	'Array_SubScalar_sint8'
 public	SubS16						as	'Array_SubScalar_sint16'
 public	SubS32						as	'Array_SubScalar_sint32'
 public	SubS64						as	'Array_SubScalar_sint64'
-public	SubS8						as	'_ZN5Array3SubEPama'
-public	SubS16						as	'_ZN5Array3SubEPsms'
-public	SubS32						as	'_ZN5Array3SubEPimi'
-public	SubS64						as	'_ZN5Array3SubEPxmx'
+public	SubS8						as	'_ZN5Array9SubScalarEPama'
+public	SubS16						as	'_ZN5Array9SubScalarEPsms'
+public	SubS32						as	'_ZN5Array9SubScalarEPimi'
+public	SubS64						as	'_ZN5Array9SubScalarEPxmx'
 
 ; Floating-point types
 public	SubS_flt32					as	'Array_SubScalar_flt32'
 public	SubS_flt64					as	'Array_SubScalar_flt64'
-public	SubS_flt32					as	'_ZN5Array3SubEPfmf'
-public	SubS_flt64					as	'_ZN5Array3SubEPdmd'
+public	SubS_flt32					as	'_ZN5Array9SubScalarEPfmf'
+public	SubS_flt64					as	'_ZN5Array9SubScalarEPdmd'
 
 ; Other types
 public	SubS64						as	'Array_SubScalar_size'
-public	SubS64						as	'_ZN5Array3SubEPmmm'
+public	SubS64						as	'_ZN5Array9SubScalarEPmmm'
 
 ;------------------------------------------------------------------------------;
 ;       Vector subtraction                                                     ;
@@ -574,30 +574,30 @@ public	SubV8						as	'Array_SubVector_uint8'
 public	SubV16						as	'Array_SubVector_uint16'
 public	SubV32						as	'Array_SubVector_uint32'
 public	SubV64						as	'Array_SubVector_uint64'
-public	SubV8						as	'_ZN5Array3SubEPhPKhm'
-public	SubV16						as	'_ZN5Array3SubEPtPKtm'
-public	SubV32						as	'_ZN5Array3SubEPjPKjm'
-public	SubV64						as	'_ZN5Array3SubEPyPKym'
+public	SubV8						as	'_ZN5Array9SubVectorEPhPKhm'
+public	SubV16						as	'_ZN5Array9SubVectorEPtPKtm'
+public	SubV32						as	'_ZN5Array9SubVectorEPjPKjm'
+public	SubV64						as	'_ZN5Array9SubVectorEPyPKym'
 
 ; Signed integer types
 public	SubV8						as	'Array_SubVector_sint8'
 public	SubV16						as	'Array_SubVector_sint16'
 public	SubV32						as	'Array_SubVector_sint32'
 public	SubV64						as	'Array_SubVector_sint64'
-public	SubV8						as	'_ZN5Array3SubEPaPKam'
-public	SubV16						as	'_ZN5Array3SubEPsPKsm'
-public	SubV32						as	'_ZN5Array3SubEPiPKim'
-public	SubV64						as	'_ZN5Array3SubEPxPKxm'
+public	SubV8						as	'_ZN5Array9SubVectorEPaPKam'
+public	SubV16						as	'_ZN5Array9SubVectorEPsPKsm'
+public	SubV32						as	'_ZN5Array9SubVectorEPiPKim'
+public	SubV64						as	'_ZN5Array9SubVectorEPxPKxm'
 
 ; Floating-point types
 public	SubV_flt32					as	'Array_SubVector_flt32'
 public	SubV_flt64					as	'Array_SubVector_flt64'
-public	SubV_flt32					as	'_ZN5Array3SubEPfPKfm'
-public	SubV_flt64					as	'_ZN5Array3SubEPdPKdm'
+public	SubV_flt32					as	'_ZN5Array9SubVectorEPfPKfm'
+public	SubV_flt64					as	'_ZN5Array9SubVectorEPdPKdm'
 
 ; Other types
 public	SubV64						as	'Array_SubVector_size'
-public	SubV64						as	'_ZN5Array3SubEPmPKmm'
+public	SubV64						as	'_ZN5Array9SubVectorEPmPKmm'
 
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 ;       Multiplication                                                         ;
@@ -608,16 +608,16 @@ public	SubV64						as	'_ZN5Array3SubEPmPKmm'
 ;------------------------------------------------------------------------------;
 public	MulS_flt32					as	'Array_MulScalar_flt32'
 public	MulS_flt64					as	'Array_MulScalar_flt64'
-public	MulS_flt32					as	'_ZN5Array3MulEPfmf'
-public	MulS_flt64					as	'_ZN5Array3MulEPdmd'
+public	MulS_flt32					as	'_ZN5Array9MulScalarEPfmf'
+public	MulS_flt64					as	'_ZN5Array9MulScalarEPdmd'
 
 ;------------------------------------------------------------------------------;
 ;       Vector multiplication                                                  ;
 ;------------------------------------------------------------------------------;
 public	MulV_flt32					as	'Array_MulVector_flt32'
 public	MulV_flt64					as	'Array_MulVector_flt64'
-public	MulV_flt32					as	'_ZN5Array3MulEPfPKfm'
-public	MulV_flt64					as	'_ZN5Array3MulEPdPKdm'
+public	MulV_flt32					as	'_ZN5Array9MulVectorEPfPKfm'
+public	MulV_flt64					as	'_ZN5Array9MulVectorEPdPKdm'
 
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 ;       Division                                                               ;
@@ -628,16 +628,16 @@ public	MulV_flt64					as	'_ZN5Array3MulEPdPKdm'
 ;------------------------------------------------------------------------------;
 public	DivS_flt32					as	'Array_DivScalar_flt32'
 public	DivS_flt64					as	'Array_DivScalar_flt64'
-public	DivS_flt32					as	'_ZN5Array3DivEPfmf'
-public	DivS_flt64					as	'_ZN5Array3DivEPdmd'
+public	DivS_flt32					as	'_ZN5Array9DivScalarEPfmf'
+public	DivS_flt64					as	'_ZN5Array9DivScalarEPdmd'
 
 ;------------------------------------------------------------------------------;
 ;       Vector division                                                        ;
 ;------------------------------------------------------------------------------;
 public	DivV_flt32					as	'Array_DivVector_flt32'
 public	DivV_flt64					as	'Array_DivVector_flt64'
-public	DivV_flt32					as	'_ZN5Array3DivEPfPKfm'
-public	DivV_flt64					as	'_ZN5Array3DivEPdPKdm'
+public	DivV_flt32					as	'_ZN5Array9DivVectorEPfPKfm'
+public	DivV_flt64					as	'_ZN5Array9DivVectorEPdPKdm'
 
 ;******************************************************************************;
 ;       Rounding                                                               ;

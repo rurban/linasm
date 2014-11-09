@@ -26,12 +26,9 @@ bindir			:= $(exec_prefix)/bin
 libdir			:= $(exec_prefix)/lib
 datadir			:= $(datarootdir)
 localedir		:= $(datarootdir)/locale
+icondir			:= $(datarootdir)/icons
 infodir			:= $(datarootdir)/info
 docdir			:= $(datarootdir)/doc/pkg_name
-htmldir			:= $(docdir)
-pdfdir			:= $(docdir)
-dvidir			:= $(docdir)
-psdir			:= $(docdir)
 mandir			:= $(datarootdir)/man
 man1dir			:= $(mandir)/man1
 man2dir			:= $(mandir)/man2
@@ -41,6 +38,10 @@ man5dir			:= $(mandir)/man5
 man6dir			:= $(mandir)/man6
 man7dir			:= $(mandir)/man7
 man8dir			:= $(mandir)/man8
+htmldir			:= $(docdir)
+pdfdir			:= $(docdir)
+dvidir			:= $(docdir)
+psdir			:= $(docdir)
 man1ext			:= .1
 man2ext			:= .2
 man3ext			:= .3
@@ -51,16 +52,16 @@ man7ext			:= .7
 man8ext			:= .8
 
 #******************************************************************************#
-#       Utilities configuration                                                #
+#       Utility configuration                                                  #
 #******************************************************************************#
 
-# Utilities names
+# Utility names
 AS				:= build/fasm
 LD				:= ld
 LN				:= ln
 INSTALL			:= install
 
-# Utilities flags
+# Utility flags
 ASFLAGS			:=
 LDFLAGS			:=
 LNFLAGS			:=
@@ -74,7 +75,7 @@ vpath	%.inc	$(srcdir)
 vpath	%.asm	$(srcdir)
 
 INSTALL_PROGRAM := $(INSTALL)
-INSTALL_DATA	:= $(INSTALL) -m 755
+INSTALL_DATA	:= $(INSTALL) -m 644
 
 lib				:= liblinasm.so
 ver				:= 1.1
@@ -96,13 +97,27 @@ $(lib): $(objects)
 %.o: %.asm
 	$(AS) $(ASFLAGS) $< $@
 
-Time.o: Errno.inc Syscall.inc
+Accumulator.o:	Macro.inc Syscall.inc
+Array.o:		Macro.inc
+Btree.o:		Macro.inc Syscall.inc
+Deque.o:		Macro.inc Syscall.inc
+FHT.o:			Macro.inc
+Filter.o:		Macro.inc
+Hash.o:			Macro.inc Syscall.inc Macro.inc Syscall.inc
+List.o:			Macro.inc Syscall.inc
+Math.o:			Macro.inc
+Numbers.o:		Macro.inc
+Pool.o:			Macro.inc Syscall.inc
+Statistics.o:	Macro.inc
+String.o:		Macro.inc
+Time.o:			Syscall.inc Errno.inc
+Vector.o:		Macro.inc Syscall.inc
+Window.o:		Macro.inc
 
 install: $(lib) $(includes)
-	$(INSTALL) -d $(INSTALLFLAGS) $(DESTDIR)$(includedir)
 	$(INSTALL_DATA) -Dp $(INSTALLFLAGS) $(lib) $(DESTDIR)$(libdir)/$(vlib)
 	$(LN) -sf $(DESTDIR)$(libdir)/$(vlib) $(DESTDIR)$(libdir)/$(lib)
-	cd $(incdir) && $(INSTALL_DATA) -p $(INSTALLFLAGS) $(includes) $(DESTDIR)$(includedir)
+	cd $(incdir) && $(INSTALL_DATA) -Dp $(INSTALLFLAGS) $(includes) $(DESTDIR)$(includedir)
 
 uninstall:
 	-cd $(DESTDIR)$(libdir) && rm -f $(lib) $(vlib)
