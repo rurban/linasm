@@ -103,7 +103,8 @@ Btree.o:		Macro.inc Syscall.inc
 Deque.o:		Macro.inc Syscall.inc
 FHT.o:			Macro.inc
 Filter.o:		Macro.inc
-Hash.o:			Macro.inc Syscall.inc Macro.inc Syscall.inc
+Hash.o:			Macro.inc Syscall.inc
+Heap.o:			Macro.inc Syscall.inc
 List.o:			Macro.inc Syscall.inc
 Math.o:			Macro.inc
 Numbers.o:		Macro.inc
