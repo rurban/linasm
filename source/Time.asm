@@ -695,7 +695,9 @@ s_time	equ		stack - 8					; stack position of "time" variable
 		add		time, result1				; time += (3 * year2) / 4
 		mul366	result2, result1
 		sub		time, result2				; time -= year2 * 366
-		or		struct1, year				; store year to date structure
+		mov		const, 0xFFFFFFFF
+		and		const, year					; clear non required year bits
+		or		struct1, const				; store year to date structure
 		mov		const, 4294967296
 		sub		year, -2147483648
 		cmp		year, const					; if year doesn't fit into sint32_t
