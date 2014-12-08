@@ -15,7 +15,7 @@ incdir			:= include
 srcdir			:= source
 
 # System directories
-prefix			:= /usr
+prefix			:= /usr/local
 exec_prefix		:= $(prefix)
 sysconfdir		:= $(prefix)/etc
 includedir		:= $(prefix)/include
