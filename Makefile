@@ -15,7 +15,7 @@ incdir			:= include
 srcdir			:= source
 
 # System directories
-prefix			:= /usr/local
+prefix			:= /usr
 exec_prefix		:= $(prefix)
 sysconfdir		:= $(prefix)/etc
 includedir		:= $(prefix)/include
@@ -118,7 +118,7 @@ Window.o:		Macro.inc
 install: $(lib) $(includes)
 	$(INSTALL_DATA) -Dp $(INSTALLFLAGS) $(lib) $(DESTDIR)$(libdir)/$(vlib)
 	$(LN) -sf $(DESTDIR)$(libdir)/$(vlib) $(DESTDIR)$(libdir)/$(lib)
-	cd $(incdir) && $(INSTALL_DATA) -Dp $(INSTALLFLAGS) $(includes) $(DESTDIR)$(includedir)
+	cd $(incdir) && $(foreach file, $(includes), $(INSTALL_DATA) -Dp $(INSTALLFLAGS) $(file) $(DESTDIR)$(includedir)/$(file);)
 
 uninstall:
 	-cd $(DESTDIR)$(libdir) && rm -f $(lib) $(vlib)
