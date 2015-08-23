@@ -4,7 +4,7 @@
 #                                                                              #
 #                    CIRCULAR DOUBLY LINKED LIST DATA TYPE                     #
 #                                                                              #
-# License: LGPLv3+                               Copyleft (Ɔ) 2013, Jack Black #
+# License: LGPLv3+                               Copyleft (Ɔ) 2015, Jack Black #
 ################################################################################
 */
 # pragma	once

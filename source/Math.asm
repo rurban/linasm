@@ -4,7 +4,7 @@
 ;#                                                                             #
 ;#                             FAST MATH FUNCTIONS                             #
 ;#                                                                             #
-;# License: LGPLv3+                              Copyleft (Ɔ) 2014, Jack Black #
+;# License: LGPLv3+                              Copyleft (Ɔ) 2015, Jack Black #
 ;###############################################################################
 format	ELF64
 include	'Macro.inc'
@@ -22,48 +22,48 @@ include	'Macro.inc'
 ;==============================================================================;
 
 ; Unsigned integer types
-public	ByteSwap8			as	'Math_ByteSwap_uint8'
-public	ByteSwap16			as	'Math_ByteSwap_uint16'
-public	ByteSwap32			as	'Math_ByteSwap_uint32'
-public	ByteSwap64			as	'Math_ByteSwap_uint64'
-public	ByteSwap8			as	'_ZN4Math8ByteSwapEh'
-public	ByteSwap16			as	'_ZN4Math8ByteSwapEt'
-public	ByteSwap32			as	'_ZN4Math8ByteSwapEj'
-public	ByteSwap64			as	'_ZN4Math8ByteSwapEy'
+public	ByteSwap8				as	'Math_ByteSwap_uint8'
+public	ByteSwap16				as	'Math_ByteSwap_uint16'
+public	ByteSwap32				as	'Math_ByteSwap_uint32'
+public	ByteSwap64				as	'Math_ByteSwap_uint64'
+public	ByteSwap8				as	'_ZN4Math8ByteSwapEh'
+public	ByteSwap16				as	'_ZN4Math8ByteSwapEt'
+public	ByteSwap32				as	'_ZN4Math8ByteSwapEj'
+public	ByteSwap64				as	'_ZN4Math8ByteSwapEy'
 
 ; Signed integer types
-public	ByteSwap8			as	'Math_ByteSwap_sint8'
-public	ByteSwap16			as	'Math_ByteSwap_sint16'
-public	ByteSwap32			as	'Math_ByteSwap_sint32'
-public	ByteSwap64			as	'Math_ByteSwap_sint64'
-public	ByteSwap8			as	'_ZN4Math8ByteSwapEa'
-public	ByteSwap16			as	'_ZN4Math8ByteSwapEs'
-public	ByteSwap32			as	'_ZN4Math8ByteSwapEi'
-public	ByteSwap64			as	'_ZN4Math8ByteSwapEx'
+public	ByteSwap8				as	'Math_ByteSwap_sint8'
+public	ByteSwap16				as	'Math_ByteSwap_sint16'
+public	ByteSwap32				as	'Math_ByteSwap_sint32'
+public	ByteSwap64				as	'Math_ByteSwap_sint64'
+public	ByteSwap8				as	'_ZN4Math8ByteSwapEa'
+public	ByteSwap16				as	'_ZN4Math8ByteSwapEs'
+public	ByteSwap32				as	'_ZN4Math8ByteSwapEi'
+public	ByteSwap64				as	'_ZN4Math8ByteSwapEx'
 
 ;==============================================================================;
 ;       Bit reversal permutation                                               ;
 ;==============================================================================;
 
 ; Unsigned integer types
-public	BitReverse8			as	'Math_BitReverse_uint8'
-public	BitReverse16		as	'Math_BitReverse_uint16'
-public	BitReverse32		as	'Math_BitReverse_uint32'
-public	BitReverse64		as	'Math_BitReverse_uint64'
-public	BitReverse8			as	'_ZN4Math10BitReverseEh'
-public	BitReverse16		as	'_ZN4Math10BitReverseEt'
-public	BitReverse32		as	'_ZN4Math10BitReverseEj'
-public	BitReverse64		as	'_ZN4Math10BitReverseEy'
+public	BitReverse8				as	'Math_BitReverse_uint8'
+public	BitReverse16			as	'Math_BitReverse_uint16'
+public	BitReverse32			as	'Math_BitReverse_uint32'
+public	BitReverse64			as	'Math_BitReverse_uint64'
+public	BitReverse8				as	'_ZN4Math10BitReverseEh'
+public	BitReverse16			as	'_ZN4Math10BitReverseEt'
+public	BitReverse32			as	'_ZN4Math10BitReverseEj'
+public	BitReverse64			as	'_ZN4Math10BitReverseEy'
 
 ; Signed integer types
-public	BitReverse8			as	'Math_BitReverse_sint8'
-public	BitReverse16		as	'Math_BitReverse_sint16'
-public	BitReverse32		as	'Math_BitReverse_sint32'
-public	BitReverse64		as	'Math_BitReverse_sint64'
-public	BitReverse8			as	'_ZN4Math10BitReverseEa'
-public	BitReverse16		as	'_ZN4Math10BitReverseEs'
-public	BitReverse32		as	'_ZN4Math10BitReverseEi'
-public	BitReverse64		as	'_ZN4Math10BitReverseEx'
+public	BitReverse8				as	'Math_BitReverse_sint8'
+public	BitReverse16			as	'Math_BitReverse_sint16'
+public	BitReverse32			as	'Math_BitReverse_sint32'
+public	BitReverse64			as	'Math_BitReverse_sint64'
+public	BitReverse8				as	'_ZN4Math10BitReverseEa'
+public	BitReverse16			as	'_ZN4Math10BitReverseEs'
+public	BitReverse32			as	'_ZN4Math10BitReverseEi'
+public	BitReverse64			as	'_ZN4Math10BitReverseEx'
 
 ;==============================================================================;
 ;       Bit scan                                                               ;
@@ -74,48 +74,48 @@ public	BitReverse64		as	'_ZN4Math10BitReverseEx'
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 
 ; Unsigned integer types
-public	ScanFwd8			as	'Math_ScanForward_uint8'
-public	ScanFwd16			as	'Math_ScanForward_uint16'
-public	ScanFwd32			as	'Math_ScanForward_uint32'
-public	ScanFwd64			as	'Math_ScanForward_uint64'
-public	ScanFwd8			as	'_ZN4Math11ScanForwardEh'
-public	ScanFwd16			as	'_ZN4Math11ScanForwardEt'
-public	ScanFwd32			as	'_ZN4Math11ScanForwardEj'
-public	ScanFwd64			as	'_ZN4Math11ScanForwardEy'
+public	ScanFwd8				as	'Math_ScanForward_uint8'
+public	ScanFwd16				as	'Math_ScanForward_uint16'
+public	ScanFwd32				as	'Math_ScanForward_uint32'
+public	ScanFwd64				as	'Math_ScanForward_uint64'
+public	ScanFwd8				as	'_ZN4Math11ScanForwardEh'
+public	ScanFwd16				as	'_ZN4Math11ScanForwardEt'
+public	ScanFwd32				as	'_ZN4Math11ScanForwardEj'
+public	ScanFwd64				as	'_ZN4Math11ScanForwardEy'
 
 ; Signed integer types
-public	ScanFwd8			as	'Math_ScanForward_sint8'
-public	ScanFwd16			as	'Math_ScanForward_sint16'
-public	ScanFwd32			as	'Math_ScanForward_sint32'
-public	ScanFwd64			as	'Math_ScanForward_sint64'
-public	ScanFwd8			as	'_ZN4Math11ScanForwardEa'
-public	ScanFwd16			as	'_ZN4Math11ScanForwardEs'
-public	ScanFwd32			as	'_ZN4Math11ScanForwardEi'
-public	ScanFwd64			as	'_ZN4Math11ScanForwardEx'
+public	ScanFwd8				as	'Math_ScanForward_sint8'
+public	ScanFwd16				as	'Math_ScanForward_sint16'
+public	ScanFwd32				as	'Math_ScanForward_sint32'
+public	ScanFwd64				as	'Math_ScanForward_sint64'
+public	ScanFwd8				as	'_ZN4Math11ScanForwardEa'
+public	ScanFwd16				as	'_ZN4Math11ScanForwardEs'
+public	ScanFwd32				as	'_ZN4Math11ScanForwardEi'
+public	ScanFwd64				as	'_ZN4Math11ScanForwardEx'
 
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 ;       Bit scan backward                                                      ;
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 
 ; Unsigned integer types
-public	ScanBwd8			as	'Math_ScanBackward_uint8'
-public	ScanBwd16			as	'Math_ScanBackward_uint16'
-public	ScanBwd32			as	'Math_ScanBackward_uint32'
-public	ScanBwd64			as	'Math_ScanBackward_uint64'
-public	ScanBwd8			as	'_ZN4Math12ScanBackwardEh'
-public	ScanBwd16			as	'_ZN4Math12ScanBackwardEt'
-public	ScanBwd32			as	'_ZN4Math12ScanBackwardEj'
-public	ScanBwd64			as	'_ZN4Math12ScanBackwardEy'
+public	ScanBwd8				as	'Math_ScanBackward_uint8'
+public	ScanBwd16				as	'Math_ScanBackward_uint16'
+public	ScanBwd32				as	'Math_ScanBackward_uint32'
+public	ScanBwd64				as	'Math_ScanBackward_uint64'
+public	ScanBwd8				as	'_ZN4Math12ScanBackwardEh'
+public	ScanBwd16				as	'_ZN4Math12ScanBackwardEt'
+public	ScanBwd32				as	'_ZN4Math12ScanBackwardEj'
+public	ScanBwd64				as	'_ZN4Math12ScanBackwardEy'
 
 ; Signed integer types
-public	ScanBwd8			as	'Math_ScanBackward_sint8'
-public	ScanBwd16			as	'Math_ScanBackward_sint16'
-public	ScanBwd32			as	'Math_ScanBackward_sint32'
-public	ScanBwd64			as	'Math_ScanBackward_sint64'
-public	ScanBwd8			as	'_ZN4Math12ScanBackwardEa'
-public	ScanBwd16			as	'_ZN4Math12ScanBackwardEs'
-public	ScanBwd32			as	'_ZN4Math12ScanBackwardEi'
-public	ScanBwd64			as	'_ZN4Math12ScanBackwardEx'
+public	ScanBwd8				as	'Math_ScanBackward_sint8'
+public	ScanBwd16				as	'Math_ScanBackward_sint16'
+public	ScanBwd32				as	'Math_ScanBackward_sint32'
+public	ScanBwd64				as	'Math_ScanBackward_sint64'
+public	ScanBwd8				as	'_ZN4Math12ScanBackwardEa'
+public	ScanBwd16				as	'_ZN4Math12ScanBackwardEs'
+public	ScanBwd32				as	'_ZN4Math12ScanBackwardEi'
+public	ScanBwd64				as	'_ZN4Math12ScanBackwardEx'
 
 ;==============================================================================;
 ;       Circular rotation                                                      ;
@@ -126,206 +126,252 @@ public	ScanBwd64			as	'_ZN4Math12ScanBackwardEx'
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 
 ; Unsigned integer types
-public	RotateLeft8			as	'Math_RotateLeft_uint8'
-public	RotateLeft16		as	'Math_RotateLeft_uint16'
-public	RotateLeft32		as	'Math_RotateLeft_uint32'
-public	RotateLeft64		as	'Math_RotateLeft_uint64'
-public	RotateLeft8			as	'_ZN4Math10RotateLeftEhh'
-public	RotateLeft16		as	'_ZN4Math10RotateLeftEth'
-public	RotateLeft32		as	'_ZN4Math10RotateLeftEjh'
-public	RotateLeft64		as	'_ZN4Math10RotateLeftEyh'
+public	RotateLeft8				as	'Math_RotateLeft_uint8'
+public	RotateLeft16			as	'Math_RotateLeft_uint16'
+public	RotateLeft32			as	'Math_RotateLeft_uint32'
+public	RotateLeft64			as	'Math_RotateLeft_uint64'
+public	RotateLeft8				as	'_ZN4Math10RotateLeftEhh'
+public	RotateLeft16			as	'_ZN4Math10RotateLeftEth'
+public	RotateLeft32			as	'_ZN4Math10RotateLeftEjh'
+public	RotateLeft64			as	'_ZN4Math10RotateLeftEyh'
 
 ; Signed integer types
-public	RotateLeft8			as	'Math_RotateLeft_sint8'
-public	RotateLeft16		as	'Math_RotateLeft_sint16'
-public	RotateLeft32		as	'Math_RotateLeft_sint32'
-public	RotateLeft64		as	'Math_RotateLeft_sint64'
-public	RotateLeft8			as	'_ZN4Math10RotateLeftEah'
-public	RotateLeft16		as	'_ZN4Math10RotateLeftEsh'
-public	RotateLeft32		as	'_ZN4Math10RotateLeftEih'
-public	RotateLeft64		as	'_ZN4Math10RotateLeftExh'
+public	RotateLeft8				as	'Math_RotateLeft_sint8'
+public	RotateLeft16			as	'Math_RotateLeft_sint16'
+public	RotateLeft32			as	'Math_RotateLeft_sint32'
+public	RotateLeft64			as	'Math_RotateLeft_sint64'
+public	RotateLeft8				as	'_ZN4Math10RotateLeftEah'
+public	RotateLeft16			as	'_ZN4Math10RotateLeftEsh'
+public	RotateLeft32			as	'_ZN4Math10RotateLeftEih'
+public	RotateLeft64			as	'_ZN4Math10RotateLeftExh'
 
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 ;       Circular rotation to the right                                         ;
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 
 ; Unsigned integer types
-public	RotateRight8		as	'Math_RotateRight_uint8'
-public	RotateRight16		as	'Math_RotateRight_uint16'
-public	RotateRight32		as	'Math_RotateRight_uint32'
-public	RotateRight64		as	'Math_RotateRight_uint64'
-public	RotateRight8		as	'_ZN4Math11RotateRightEhh'
-public	RotateRight16		as	'_ZN4Math11RotateRightEth'
-public	RotateRight32		as	'_ZN4Math11RotateRightEjh'
-public	RotateRight64		as	'_ZN4Math11RotateRightEyh'
+public	RotateRight8			as	'Math_RotateRight_uint8'
+public	RotateRight16			as	'Math_RotateRight_uint16'
+public	RotateRight32			as	'Math_RotateRight_uint32'
+public	RotateRight64			as	'Math_RotateRight_uint64'
+public	RotateRight8			as	'_ZN4Math11RotateRightEhh'
+public	RotateRight16			as	'_ZN4Math11RotateRightEth'
+public	RotateRight32			as	'_ZN4Math11RotateRightEjh'
+public	RotateRight64			as	'_ZN4Math11RotateRightEyh'
 
 ; Signed integer types
-public	RotateRight8		as	'Math_RotateRight_sint8'
-public	RotateRight16		as	'Math_RotateRight_sint16'
-public	RotateRight32		as	'Math_RotateRight_sint32'
-public	RotateRight64		as	'Math_RotateRight_sint64'
-public	RotateRight8		as	'_ZN4Math11RotateRightEah'
-public	RotateRight16		as	'_ZN4Math11RotateRightEsh'
-public	RotateRight32		as	'_ZN4Math11RotateRightEih'
-public	RotateRight64		as	'_ZN4Math11RotateRightExh'
+public	RotateRight8			as	'Math_RotateRight_sint8'
+public	RotateRight16			as	'Math_RotateRight_sint16'
+public	RotateRight32			as	'Math_RotateRight_sint32'
+public	RotateRight64			as	'Math_RotateRight_sint64'
+public	RotateRight8			as	'_ZN4Math11RotateRightEah'
+public	RotateRight16			as	'_ZN4Math11RotateRightEsh'
+public	RotateRight32			as	'_ZN4Math11RotateRightEih'
+public	RotateRight64			as	'_ZN4Math11RotateRightExh'
 
 ;==============================================================================;
 ;       Population count                                                       ;
 ;==============================================================================;
 
 ; Unsigned integer types
-public	PopCount8			as	'Math_PopCount_uint8'
-public	PopCount16			as	'Math_PopCount_uint16'
-public	PopCount32			as	'Math_PopCount_uint32'
-public	PopCount64			as	'Math_PopCount_uint64'
-public	PopCount8			as	'_ZN4Math8PopCountEh'
-public	PopCount16			as	'_ZN4Math8PopCountEt'
-public	PopCount32			as	'_ZN4Math8PopCountEj'
-public	PopCount64			as	'_ZN4Math8PopCountEy'
+public	PopCount8				as	'Math_PopCount_uint8'
+public	PopCount16				as	'Math_PopCount_uint16'
+public	PopCount32				as	'Math_PopCount_uint32'
+public	PopCount64				as	'Math_PopCount_uint64'
+public	PopCount8				as	'_ZN4Math8PopCountEh'
+public	PopCount16				as	'_ZN4Math8PopCountEt'
+public	PopCount32				as	'_ZN4Math8PopCountEj'
+public	PopCount64				as	'_ZN4Math8PopCountEy'
 
 ; Signed integer types
-public	PopCount8			as	'Math_PopCount_sint8'
-public	PopCount16			as	'Math_PopCount_sint16'
-public	PopCount32			as	'Math_PopCount_sint32'
-public	PopCount64			as	'Math_PopCount_sint64'
-public	PopCount8			as	'_ZN4Math8PopCountEa'
-public	PopCount16			as	'_ZN4Math8PopCountEs'
-public	PopCount32			as	'_ZN4Math8PopCountEi'
-public	PopCount64			as	'_ZN4Math8PopCountEx'
+public	PopCount8				as	'Math_PopCount_sint8'
+public	PopCount16				as	'Math_PopCount_sint16'
+public	PopCount32				as	'Math_PopCount_sint32'
+public	PopCount64				as	'Math_PopCount_sint64'
+public	PopCount8				as	'_ZN4Math8PopCountEa'
+public	PopCount16				as	'_ZN4Math8PopCountEs'
+public	PopCount32				as	'_ZN4Math8PopCountEi'
+public	PopCount64				as	'_ZN4Math8PopCountEx'
 
 ;******************************************************************************;
 ;       Arithmetic operations                                                  ;
 ;******************************************************************************;
 
 ;==============================================================================;
+;       Inverse value                                                          ;
+;==============================================================================;
+public	Inverse_flt32			as	'Math_Inverse_flt32'
+public	Inverse_flt64			as	'Math_Inverse_flt64'
+public	Inverse_flt32			as	'_ZN4Math7InverseEf'
+public	Inverse_flt64			as	'_ZN4Math7InverseEd'
+
+;==============================================================================;
+;       Inverse square value                                                   ;
+;==============================================================================;
+public	InverseSquare_flt32		as	'Math_InverseSquare_flt32'
+public	InverseSquare_flt64		as	'Math_InverseSquare_flt64'
+public	InverseSquare_flt32		as	'_ZN4Math13InverseSquareEf'
+public	InverseSquare_flt64		as	'_ZN4Math13InverseSquareEd'
+
+;==============================================================================;
 ;       Absolute value                                                         ;
 ;==============================================================================;
 
 ; Signed integer types
-public	Abs_sint8			as	'Math_Abs_sint8'
-public	Abs_sint16			as	'Math_Abs_sint16'
-public	Abs_sint32			as	'Math_Abs_sint32'
-public	Abs_sint64			as	'Math_Abs_sint64'
-public	Abs_sint8			as	'_ZN4Math3AbsEa'
-public	Abs_sint16			as	'_ZN4Math3AbsEs'
-public	Abs_sint32			as	'_ZN4Math3AbsEi'
-public	Abs_sint64			as	'_ZN4Math3AbsEx'
+public	Abs_sint8				as	'Math_Abs_sint8'
+public	Abs_sint16				as	'Math_Abs_sint16'
+public	Abs_sint32				as	'Math_Abs_sint32'
+public	Abs_sint64				as	'Math_Abs_sint64'
+public	Abs_sint8				as	'_ZN4Math3AbsEa'
+public	Abs_sint16				as	'_ZN4Math3AbsEs'
+public	Abs_sint32				as	'_ZN4Math3AbsEi'
+public	Abs_sint64				as	'_ZN4Math3AbsEx'
 
 ; Floating-point types
-public	Abs_flt32			as	'Math_Abs_flt32'
-public	Abs_flt64			as	'Math_Abs_flt64'
-public	Abs_flt32			as	'_ZN4Math3AbsEf'
-public	Abs_flt64			as	'_ZN4Math3AbsEd'
+public	Abs_flt32				as	'Math_Abs_flt32'
+public	Abs_flt64				as	'Math_Abs_flt64'
+public	Abs_flt32				as	'_ZN4Math3AbsEf'
+public	Abs_flt64				as	'_ZN4Math3AbsEd'
 
 ;==============================================================================;
 ;       Negative absolute value                                                ;
 ;==============================================================================;
 
 ; Signed integer types
-public	NegAbs_sint8		as	'Math_NegAbs_sint8'
-public	NegAbs_sint16		as	'Math_NegAbs_sint16'
-public	NegAbs_sint32		as	'Math_NegAbs_sint32'
-public	NegAbs_sint64		as	'Math_NegAbs_sint64'
-public	NegAbs_sint8		as	'_ZN4Math6NegAbsEa'
-public	NegAbs_sint16		as	'_ZN4Math6NegAbsEs'
-public	NegAbs_sint32		as	'_ZN4Math6NegAbsEi'
-public	NegAbs_sint64		as	'_ZN4Math6NegAbsEx'
+public	NegAbs_sint8			as	'Math_NegAbs_sint8'
+public	NegAbs_sint16			as	'Math_NegAbs_sint16'
+public	NegAbs_sint32			as	'Math_NegAbs_sint32'
+public	NegAbs_sint64			as	'Math_NegAbs_sint64'
+public	NegAbs_sint8			as	'_ZN4Math6NegAbsEa'
+public	NegAbs_sint16			as	'_ZN4Math6NegAbsEs'
+public	NegAbs_sint32			as	'_ZN4Math6NegAbsEi'
+public	NegAbs_sint64			as	'_ZN4Math6NegAbsEx'
 
 ; Floating-point types
-public	NegAbs_flt32		as	'Math_NegAbs_flt32'
-public	NegAbs_flt64		as	'Math_NegAbs_flt64'
-public	NegAbs_flt32		as	'_ZN4Math6NegAbsEf'
-public	NegAbs_flt64		as	'_ZN4Math6NegAbsEd'
+public	NegAbs_flt32			as	'Math_NegAbs_flt32'
+public	NegAbs_flt64			as	'Math_NegAbs_flt64'
+public	NegAbs_flt32			as	'_ZN4Math6NegAbsEf'
+public	NegAbs_flt64			as	'_ZN4Math6NegAbsEd'
 
 ;==============================================================================;
 ;       Number sign                                                            ;
 ;==============================================================================;
 
 ; Signed integer types
-public	Sign_sint8			as	'Math_Sign_sint8'
-public	Sign_sint16			as	'Math_Sign_sint16'
-public	Sign_sint32			as	'Math_Sign_sint32'
-public	Sign_sint64			as	'Math_Sign_sint64'
-public	Sign_sint8			as	'_ZN4Math4SignEa'
-public	Sign_sint16			as	'_ZN4Math4SignEs'
-public	Sign_sint32			as	'_ZN4Math4SignEi'
-public	Sign_sint64			as	'_ZN4Math4SignEx'
+public	Sign_sint8				as	'Math_Sign_sint8'
+public	Sign_sint16				as	'Math_Sign_sint16'
+public	Sign_sint32				as	'Math_Sign_sint32'
+public	Sign_sint64				as	'Math_Sign_sint64'
+public	Sign_sint8				as	'_ZN4Math4SignEa'
+public	Sign_sint16				as	'_ZN4Math4SignEs'
+public	Sign_sint32				as	'_ZN4Math4SignEi'
+public	Sign_sint64				as	'_ZN4Math4SignEx'
 
 ; Floating-point types
-public	Sign_flt32			as	'Math_Sign_flt32'
-public	Sign_flt64			as	'Math_Sign_flt64'
-public	Sign_flt32			as	'_ZN4Math4SignEf'
-public	Sign_flt64			as	'_ZN4Math4SignEd'
+public	Sign_flt32				as	'Math_Sign_flt32'
+public	Sign_flt64				as	'Math_Sign_flt64'
+public	Sign_flt32				as	'_ZN4Math4SignEf'
+public	Sign_flt64				as	'_ZN4Math4SignEd'
 
 ;==============================================================================;
 ;       Square root                                                            ;
 ;==============================================================================;
 
 ; Unsigned integer types
-public	Sqrt_uint8			as	'Math_Sqrt_uint8'
-public	Sqrt_uint16			as	'Math_Sqrt_uint16'
-public	Sqrt_uint32			as	'Math_Sqrt_uint32'
-public	Sqrt_uint64			as	'Math_Sqrt_uint64'
-public	Sqrt_uint8			as	'_ZN4Math4SqrtEh'
-public	Sqrt_uint16			as	'_ZN4Math4SqrtEt'
-public	Sqrt_uint32			as	'_ZN4Math4SqrtEj'
-public	Sqrt_uint64			as	'_ZN4Math4SqrtEy'
+public	Sqrt_uint8				as	'Math_Sqrt_uint8'
+public	Sqrt_uint16				as	'Math_Sqrt_uint16'
+public	Sqrt_uint32				as	'Math_Sqrt_uint32'
+public	Sqrt_uint64				as	'Math_Sqrt_uint64'
+public	Sqrt_uint8				as	'_ZN4Math4SqrtEh'
+public	Sqrt_uint16				as	'_ZN4Math4SqrtEt'
+public	Sqrt_uint32				as	'_ZN4Math4SqrtEj'
+public	Sqrt_uint64				as	'_ZN4Math4SqrtEy'
 
 ; Floating-point types
-public	Sqrt_flt32			as	'Math_Sqrt_flt32'
-public	Sqrt_flt64			as	'Math_Sqrt_flt64'
-public	Sqrt_flt32			as	'_ZN4Math4SqrtEf'
-public	Sqrt_flt64			as	'_ZN4Math4SqrtEd'
+public	Sqrt_flt32				as	'Math_Sqrt_flt32'
+public	Sqrt_flt64				as	'Math_Sqrt_flt64'
+public	Sqrt_flt32				as	'_ZN4Math4SqrtEf'
+public	Sqrt_flt64				as	'_ZN4Math4SqrtEd'
+
+;==============================================================================;
+;       Square number                                                          ;
+;==============================================================================;
+
+; Unsigned integer types
+public	Sqr_uint8				as	'Math_Sqr_uint8'
+public	Sqr_uint16				as	'Math_Sqr_uint16'
+public	Sqr_uint32				as	'Math_Sqr_uint32'
+public	Sqr_uint64				as	'Math_Sqr_uint64'
+public	Sqr_uint8				as	'_ZN4Math3SqrEh'
+public	Sqr_uint16				as	'_ZN4Math3SqrEt'
+public	Sqr_uint32				as	'_ZN4Math3SqrEj'
+public	Sqr_uint64				as	'_ZN4Math3SqrEy'
+
+; Signed integer types
+public	Sqr_sint8				as	'Math_Sqr_sint8'
+public	Sqr_sint16				as	'Math_Sqr_sint16'
+public	Sqr_sint32				as	'Math_Sqr_sint32'
+public	Sqr_sint64				as	'Math_Sqr_sint64'
+public	Sqr_sint8				as	'_ZN4Math3SqrEa'
+public	Sqr_sint16				as	'_ZN4Math3SqrEs'
+public	Sqr_sint32				as	'_ZN4Math3SqrEi'
+public	Sqr_sint64				as	'_ZN4Math3SqrEx'
+
+; Floating-point types
+public	Sqr_flt32				as	'Math_Sqr_flt32'
+public	Sqr_flt64				as	'Math_Sqr_flt64'
+public	Sqr_flt32				as	'_ZN4Math3SqrEf'
+public	Sqr_flt64				as	'_ZN4Math3SqrEd'
 
 ;==============================================================================;
 ;       Three-state comparison                                                 ;
 ;==============================================================================;
 
 ; Unsigned integer types
-public	Compare_uint8		as	'Math_Compare_uint8'
-public	Compare_uint16		as	'Math_Compare_uint16'
-public	Compare_uint32		as	'Math_Compare_uint32'
-public	Compare_uint64		as	'Math_Compare_uint64'
-public	Compare_uint8		as	'_ZN4Math7CompareEhh'
-public	Compare_uint16		as	'_ZN4Math7CompareEtt'
-public	Compare_uint32		as	'_ZN4Math7CompareEjj'
-public	Compare_uint64		as	'_ZN4Math7CompareEyy'
-public	Compare_uint8		as	'CmpUint8'
-public	Compare_uint16		as	'CmpUint16'
-public	Compare_uint32		as	'CmpUint32'
-public	Compare_uint64		as	'CmpUint64'
-public	Compare_uint8		as	'_Z8CmpUint85adt_tS_'
-public	Compare_uint16		as	'_Z9CmpUint165adt_tS_'
-public	Compare_uint32		as	'_Z9CmpUint325adt_tS_'
-public	Compare_uint64		as	'_Z9CmpUint645adt_tS_'
+public	Compare_uint8			as	'Math_Compare_uint8'
+public	Compare_uint16			as	'Math_Compare_uint16'
+public	Compare_uint32			as	'Math_Compare_uint32'
+public	Compare_uint64			as	'Math_Compare_uint64'
+public	Compare_uint8			as	'_ZN4Math7CompareEhh'
+public	Compare_uint16			as	'_ZN4Math7CompareEtt'
+public	Compare_uint32			as	'_ZN4Math7CompareEjj'
+public	Compare_uint64			as	'_ZN4Math7CompareEyy'
+public	Compare_uint8			as	'CmpUint8'
+public	Compare_uint16			as	'CmpUint16'
+public	Compare_uint32			as	'CmpUint32'
+public	Compare_uint64			as	'CmpUint64'
+public	Compare_uint8			as	'_Z8CmpUint85adt_tS_'
+public	Compare_uint16			as	'_Z9CmpUint165adt_tS_'
+public	Compare_uint32			as	'_Z9CmpUint325adt_tS_'
+public	Compare_uint64			as	'_Z9CmpUint645adt_tS_'
 
 ; Signed integer types
-public	Compare_sint8		as	'Math_Compare_sint8'
-public	Compare_sint16		as	'Math_Compare_sint16'
-public	Compare_sint32		as	'Math_Compare_sint32'
-public	Compare_sint64		as	'Math_Compare_sint64'
-public	Compare_sint8		as	'_ZN4Math7CompareEaa'
-public	Compare_sint16		as	'_ZN4Math7CompareEss'
-public	Compare_sint32		as	'_ZN4Math7CompareEii'
-public	Compare_sint64		as	'_ZN4Math7CompareExx'
-public	Compare_sint8		as	'CmpSint8'
-public	Compare_sint16		as	'CmpSint16'
-public	Compare_sint32		as	'CmpSint32'
-public	Compare_sint64		as	'CmpSint64'
-public	Compare_sint8		as	'_Z8CmpSint85adt_tS_'
-public	Compare_sint16		as	'_Z9CmpSint165adt_tS_'
-public	Compare_sint32		as	'_Z9CmpSint325adt_tS_'
-public	Compare_sint64		as	'_Z9CmpSint645adt_tS_'
+public	Compare_sint8			as	'Math_Compare_sint8'
+public	Compare_sint16			as	'Math_Compare_sint16'
+public	Compare_sint32			as	'Math_Compare_sint32'
+public	Compare_sint64			as	'Math_Compare_sint64'
+public	Compare_sint8			as	'_ZN4Math7CompareEaa'
+public	Compare_sint16			as	'_ZN4Math7CompareEss'
+public	Compare_sint32			as	'_ZN4Math7CompareEii'
+public	Compare_sint64			as	'_ZN4Math7CompareExx'
+public	Compare_sint8			as	'CmpSint8'
+public	Compare_sint16			as	'CmpSint16'
+public	Compare_sint32			as	'CmpSint32'
+public	Compare_sint64			as	'CmpSint64'
+public	Compare_sint8			as	'_Z8CmpSint85adt_tS_'
+public	Compare_sint16			as	'_Z9CmpSint165adt_tS_'
+public	Compare_sint32			as	'_Z9CmpSint325adt_tS_'
+public	Compare_sint64			as	'_Z9CmpSint645adt_tS_'
 
 ; Floating-point types
-public	Compare_flt32		as	'Math_Compare_flt32'
-public	Compare_flt64		as	'Math_Compare_flt64'
-public	Compare_flt32		as	'_ZN4Math7CompareEff'
-public	Compare_flt64		as	'_ZN4Math7CompareEdd'
-public	Compare_raw32		as	'CmpFlt32'
-public	Compare_raw64		as	'CmpFlt64'
-public	Compare_raw32		as	'_Z8CmpFlt325adt_tS_'
-public	Compare_raw64		as	'_Z8CmpFlt645adt_tS_'
+public	Compare_flt32			as	'Math_Compare_flt32'
+public	Compare_flt64			as	'Math_Compare_flt64'
+public	Compare_flt32			as	'_ZN4Math7CompareEff'
+public	Compare_flt64			as	'_ZN4Math7CompareEdd'
+public	Compare_raw32			as	'CmpFlt32'
+public	Compare_raw64			as	'CmpFlt64'
+public	Compare_raw32			as	'_Z8CmpFlt325adt_tS_'
+public	Compare_raw64			as	'_Z8CmpFlt645adt_tS_'
 
 ;==============================================================================;
 ;       Minimum and maximum absolute value                                     ;
@@ -336,40 +382,40 @@ public	Compare_raw64		as	'_Z8CmpFlt645adt_tS_'
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 
 ; Signed integer types
-public	MinAbs_sint8		as	'Math_MinAbs_sint8'
-public	MinAbs_sint16		as	'Math_MinAbs_sint16'
-public	MinAbs_sint32		as	'Math_MinAbs_sint32'
-public	MinAbs_sint64		as	'Math_MinAbs_sint64'
-public	MinAbs_sint8		as	'_ZN4Math6MinAbsEaa'
-public	MinAbs_sint16		as	'_ZN4Math6MinAbsEss'
-public	MinAbs_sint32		as	'_ZN4Math6MinAbsEii'
-public	MinAbs_sint64		as	'_ZN4Math6MinAbsExx'
+public	MinAbs_sint8			as	'Math_MinAbs_sint8'
+public	MinAbs_sint16			as	'Math_MinAbs_sint16'
+public	MinAbs_sint32			as	'Math_MinAbs_sint32'
+public	MinAbs_sint64			as	'Math_MinAbs_sint64'
+public	MinAbs_sint8			as	'_ZN4Math6MinAbsEaa'
+public	MinAbs_sint16			as	'_ZN4Math6MinAbsEss'
+public	MinAbs_sint32			as	'_ZN4Math6MinAbsEii'
+public	MinAbs_sint64			as	'_ZN4Math6MinAbsExx'
 
 ; Floating-point types
-public	MinAbs_flt32		as	'Math_MinAbs_flt32'
-public	MinAbs_flt64		as	'Math_MinAbs_flt64'
-public	MinAbs_flt32		as	'_ZN4Math6MinAbsEff'
-public	MinAbs_flt64		as	'_ZN4Math6MinAbsEdd'
+public	MinAbs_flt32			as	'Math_MinAbs_flt32'
+public	MinAbs_flt64			as	'Math_MinAbs_flt64'
+public	MinAbs_flt32			as	'_ZN4Math6MinAbsEff'
+public	MinAbs_flt64			as	'_ZN4Math6MinAbsEdd'
 
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 ;       Maximum absolute value                                                 ;
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 
 ; Signed integer types
-public	MaxAbs_sint8		as	'Math_MaxAbs_sint8'
-public	MaxAbs_sint16		as	'Math_MaxAbs_sint16'
-public	MaxAbs_sint32		as	'Math_MaxAbs_sint32'
-public	MaxAbs_sint64		as	'Math_MaxAbs_sint64'
-public	MaxAbs_sint8		as	'_ZN4Math6MaxAbsEaa'
-public	MaxAbs_sint16		as	'_ZN4Math6MaxAbsEss'
-public	MaxAbs_sint32		as	'_ZN4Math6MaxAbsEii'
-public	MaxAbs_sint64		as	'_ZN4Math6MaxAbsExx'
+public	MaxAbs_sint8			as	'Math_MaxAbs_sint8'
+public	MaxAbs_sint16			as	'Math_MaxAbs_sint16'
+public	MaxAbs_sint32			as	'Math_MaxAbs_sint32'
+public	MaxAbs_sint64			as	'Math_MaxAbs_sint64'
+public	MaxAbs_sint8			as	'_ZN4Math6MaxAbsEaa'
+public	MaxAbs_sint16			as	'_ZN4Math6MaxAbsEss'
+public	MaxAbs_sint32			as	'_ZN4Math6MaxAbsEii'
+public	MaxAbs_sint64			as	'_ZN4Math6MaxAbsExx'
 
 ; Floating-point types
-public	MaxAbs_flt32		as	'Math_MaxAbs_flt32'
-public	MaxAbs_flt64		as	'Math_MaxAbs_flt64'
-public	MaxAbs_flt32		as	'_ZN4Math6MaxAbsEff'
-public	MaxAbs_flt64		as	'_ZN4Math6MaxAbsEdd'
+public	MaxAbs_flt32			as	'Math_MaxAbs_flt32'
+public	MaxAbs_flt64			as	'Math_MaxAbs_flt64'
+public	MaxAbs_flt32			as	'_ZN4Math6MaxAbsEff'
+public	MaxAbs_flt64			as	'_ZN4Math6MaxAbsEdd'
 
 ;==============================================================================;
 ;       Minimum and maximum value                                              ;
@@ -380,132 +426,132 @@ public	MaxAbs_flt64		as	'_ZN4Math6MaxAbsEdd'
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 
 ; Unsigned integer types
-public	Min_uint8			as	'Math_Min_uint8'
-public	Min_uint16			as	'Math_Min_uint16'
-public	Min_uint32			as	'Math_Min_uint32'
-public	Min_uint64			as	'Math_Min_uint64'
-public	Min_uint8			as	'_ZN4Math3MinEhh'
-public	Min_uint16			as	'_ZN4Math3MinEtt'
-public	Min_uint32			as	'_ZN4Math3MinEjj'
-public	Min_uint64			as	'_ZN4Math3MinEyy'
+public	Min_uint8				as	'Math_Min_uint8'
+public	Min_uint16				as	'Math_Min_uint16'
+public	Min_uint32				as	'Math_Min_uint32'
+public	Min_uint64				as	'Math_Min_uint64'
+public	Min_uint8				as	'_ZN4Math3MinEhh'
+public	Min_uint16				as	'_ZN4Math3MinEtt'
+public	Min_uint32				as	'_ZN4Math3MinEjj'
+public	Min_uint64				as	'_ZN4Math3MinEyy'
 
 ; Signed integer types
-public	Min_sint8			as	'Math_Min_sint8'
-public	Min_sint16			as	'Math_Min_sint16'
-public	Min_sint32			as	'Math_Min_sint32'
-public	Min_sint64			as	'Math_Min_sint64'
-public	Min_sint8			as	'_ZN4Math3MinEaa'
-public	Min_sint16			as	'_ZN4Math3MinEss'
-public	Min_sint32			as	'_ZN4Math3MinEii'
-public	Min_sint64			as	'_ZN4Math3MinExx'
+public	Min_sint8				as	'Math_Min_sint8'
+public	Min_sint16				as	'Math_Min_sint16'
+public	Min_sint32				as	'Math_Min_sint32'
+public	Min_sint64				as	'Math_Min_sint64'
+public	Min_sint8				as	'_ZN4Math3MinEaa'
+public	Min_sint16				as	'_ZN4Math3MinEss'
+public	Min_sint32				as	'_ZN4Math3MinEii'
+public	Min_sint64				as	'_ZN4Math3MinExx'
 
 ; Floating-point types
-public	Min_flt32			as	'Math_Min_flt32'
-public	Min_flt64			as	'Math_Min_flt64'
-public	Min_flt32			as	'_ZN4Math3MinEff'
-public	Min_flt64			as	'_ZN4Math3MinEdd'
+public	Min_flt32				as	'Math_Min_flt32'
+public	Min_flt64				as	'Math_Min_flt64'
+public	Min_flt32				as	'_ZN4Math3MinEff'
+public	Min_flt64				as	'_ZN4Math3MinEdd'
 
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 ;       Maximum value                                                          ;
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 
 ; Unsigned integer types
-public	Max_uint8			as	'Math_Max_uint8'
-public	Max_uint16			as	'Math_Max_uint16'
-public	Max_uint32			as	'Math_Max_uint32'
-public	Max_uint64			as	'Math_Max_uint64'
-public	Max_uint8			as	'_ZN4Math3MaxEhh'
-public	Max_uint16			as	'_ZN4Math3MaxEtt'
-public	Max_uint32			as	'_ZN4Math3MaxEjj'
-public	Max_uint64			as	'_ZN4Math3MaxEyy'
+public	Max_uint8				as	'Math_Max_uint8'
+public	Max_uint16				as	'Math_Max_uint16'
+public	Max_uint32				as	'Math_Max_uint32'
+public	Max_uint64				as	'Math_Max_uint64'
+public	Max_uint8				as	'_ZN4Math3MaxEhh'
+public	Max_uint16				as	'_ZN4Math3MaxEtt'
+public	Max_uint32				as	'_ZN4Math3MaxEjj'
+public	Max_uint64				as	'_ZN4Math3MaxEyy'
 
 ; Signed integer types
-public	Max_sint8			as	'Math_Max_sint8'
-public	Max_sint16			as	'Math_Max_sint16'
-public	Max_sint32			as	'Math_Max_sint32'
-public	Max_sint64			as	'Math_Max_sint64'
-public	Max_sint8			as	'_ZN4Math3MaxEaa'
-public	Max_sint16			as	'_ZN4Math3MaxEss'
-public	Max_sint32			as	'_ZN4Math3MaxEii'
-public	Max_sint64			as	'_ZN4Math3MaxExx'
+public	Max_sint8				as	'Math_Max_sint8'
+public	Max_sint16				as	'Math_Max_sint16'
+public	Max_sint32				as	'Math_Max_sint32'
+public	Max_sint64				as	'Math_Max_sint64'
+public	Max_sint8				as	'_ZN4Math3MaxEaa'
+public	Max_sint16				as	'_ZN4Math3MaxEss'
+public	Max_sint32				as	'_ZN4Math3MaxEii'
+public	Max_sint64				as	'_ZN4Math3MaxExx'
 
 ; Floating-point types
-public	Max_flt32			as	'Math_Max_flt32'
-public	Max_flt64			as	'Math_Max_flt64'
-public	Max_flt32			as	'_ZN4Math3MaxEff'
-public	Max_flt64			as	'_ZN4Math3MaxEdd'
+public	Max_flt32				as	'Math_Max_flt32'
+public	Max_flt64				as	'Math_Max_flt64'
+public	Max_flt32				as	'_ZN4Math3MaxEff'
+public	Max_flt64				as	'_ZN4Math3MaxEdd'
 
 ;==============================================================================;
 ;       Greatest common divisor                                                ;
 ;==============================================================================;
 
 ; Unsigned integer types
-public	GCD_uint8			as	'Math_GCD_uint8'
-public	GCD_uint16			as	'Math_GCD_uint16'
-public	GCD_uint32			as	'Math_GCD_uint32'
-public	GCD_uint64			as	'Math_GCD_uint64'
-public	GCD_uint8			as	'_ZN4Math3GCDEhh'
-public	GCD_uint16			as	'_ZN4Math3GCDEtt'
-public	GCD_uint32			as	'_ZN4Math3GCDEjj'
-public	GCD_uint64			as	'_ZN4Math3GCDEyy'
+public	GCD_uint8				as	'Math_GCD_uint8'
+public	GCD_uint16				as	'Math_GCD_uint16'
+public	GCD_uint32				as	'Math_GCD_uint32'
+public	GCD_uint64				as	'Math_GCD_uint64'
+public	GCD_uint8				as	'_ZN4Math3GCDEhh'
+public	GCD_uint16				as	'_ZN4Math3GCDEtt'
+public	GCD_uint32				as	'_ZN4Math3GCDEjj'
+public	GCD_uint64				as	'_ZN4Math3GCDEyy'
 
 ; Signed integer types
-public	GCD_sint8			as	'Math_GCD_sint8'
-public	GCD_sint16			as	'Math_GCD_sint16'
-public	GCD_sint32			as	'Math_GCD_sint32'
-public	GCD_sint64			as	'Math_GCD_sint64'
-public	GCD_uint8			as	'_ZN4Math3GCDEaa'
-public	GCD_uint16			as	'_ZN4Math3GCDEss'
-public	GCD_uint32			as	'_ZN4Math3GCDEii'
-public	GCD_uint64			as	'_ZN4Math3GCDExx'
+public	GCD_sint8				as	'Math_GCD_sint8'
+public	GCD_sint16				as	'Math_GCD_sint16'
+public	GCD_sint32				as	'Math_GCD_sint32'
+public	GCD_sint64				as	'Math_GCD_sint64'
+public	GCD_uint8				as	'_ZN4Math3GCDEaa'
+public	GCD_uint16				as	'_ZN4Math3GCDEss'
+public	GCD_uint32				as	'_ZN4Math3GCDEii'
+public	GCD_uint64				as	'_ZN4Math3GCDExx'
 
 ;==============================================================================;
 ;       Least common multiple                                                  ;
 ;==============================================================================;
 
 ; Unsigned integer types
-public	LCM_uint8			as	'Math_LCM_uint8'
-public	LCM_uint16			as	'Math_LCM_uint16'
-public	LCM_uint32			as	'Math_LCM_uint32'
-public	LCM_uint64			as	'Math_LCM_uint64'
-public	LCM_uint8			as	'_ZN4Math3LCMEhh'
-public	LCM_uint16			as	'_ZN4Math3LCMEtt'
-public	LCM_uint32			as	'_ZN4Math3LCMEjj'
-public	LCM_uint64			as	'_ZN4Math3LCMEyy'
+public	LCM_uint8				as	'Math_LCM_uint8'
+public	LCM_uint16				as	'Math_LCM_uint16'
+public	LCM_uint32				as	'Math_LCM_uint32'
+public	LCM_uint64				as	'Math_LCM_uint64'
+public	LCM_uint8				as	'_ZN4Math3LCMEhh'
+public	LCM_uint16				as	'_ZN4Math3LCMEtt'
+public	LCM_uint32				as	'_ZN4Math3LCMEjj'
+public	LCM_uint64				as	'_ZN4Math3LCMEyy'
 
 ; Signed integer types
-public	LCM_sint8			as	'Math_LCM_sint8'
-public	LCM_sint16			as	'Math_LCM_sint16'
-public	LCM_sint32			as	'Math_LCM_sint32'
-public	LCM_sint64			as	'Math_LCM_sint64'
-public	LCM_uint8			as	'_ZN4Math3LCMEaa'
-public	LCM_uint16			as	'_ZN4Math3LCMEss'
-public	LCM_uint32			as	'_ZN4Math3LCMEii'
-public	LCM_uint64			as	'_ZN4Math3LCMExx'
+public	LCM_sint8				as	'Math_LCM_sint8'
+public	LCM_sint16				as	'Math_LCM_sint16'
+public	LCM_sint32				as	'Math_LCM_sint32'
+public	LCM_sint64				as	'Math_LCM_sint64'
+public	LCM_uint8				as	'_ZN4Math3LCMEaa'
+public	LCM_uint16				as	'_ZN4Math3LCMEss'
+public	LCM_uint32				as	'_ZN4Math3LCMEii'
+public	LCM_uint64				as	'_ZN4Math3LCMExx'
 
 ;==============================================================================;
 ;       Cancellation                                                           ;
 ;==============================================================================;
 
 ; Unsigned integer types
-public	Cancel_uint8		as	'Math_Cancel_uint8'
-public	Cancel_uint16		as	'Math_Cancel_uint16'
-public	Cancel_uint32		as	'Math_Cancel_uint32'
-public	Cancel_uint64		as	'Math_Cancel_uint64'
-public	Cancel_uint8		as	'_ZN4Math6CancelEPhS0_'
-public	Cancel_uint16		as	'_ZN4Math6CancelEPtS0_'
-public	Cancel_uint32		as	'_ZN4Math6CancelEPjS0_'
-public	Cancel_uint64		as	'_ZN4Math6CancelEPyS0_'
+public	Cancel_uint8			as	'Math_Cancel_uint8'
+public	Cancel_uint16			as	'Math_Cancel_uint16'
+public	Cancel_uint32			as	'Math_Cancel_uint32'
+public	Cancel_uint64			as	'Math_Cancel_uint64'
+public	Cancel_uint8			as	'_ZN4Math6CancelEPhS0_'
+public	Cancel_uint16			as	'_ZN4Math6CancelEPtS0_'
+public	Cancel_uint32			as	'_ZN4Math6CancelEPjS0_'
+public	Cancel_uint64			as	'_ZN4Math6CancelEPyS0_'
 
 ; Signed integer types
-public	Cancel_sint8		as	'Math_Cancel_sint8'
-public	Cancel_sint16		as	'Math_Cancel_sint16'
-public	Cancel_sint32		as	'Math_Cancel_sint32'
-public	Cancel_sint64		as	'Math_Cancel_sint64'
-public	Cancel_sint8		as	'_ZN4Math6CancelEPaS0_'
-public	Cancel_sint16		as	'_ZN4Math6CancelEPsS0_'
-public	Cancel_sint32		as	'_ZN4Math6CancelEPiS0_'
-public	Cancel_sint64		as	'_ZN4Math6CancelEPxS0_'
+public	Cancel_sint8			as	'Math_Cancel_sint8'
+public	Cancel_sint16			as	'Math_Cancel_sint16'
+public	Cancel_sint32			as	'Math_Cancel_sint32'
+public	Cancel_sint64			as	'Math_Cancel_sint64'
+public	Cancel_sint8			as	'_ZN4Math6CancelEPaS0_'
+public	Cancel_sint16			as	'_ZN4Math6CancelEPsS0_'
+public	Cancel_sint32			as	'_ZN4Math6CancelEPiS0_'
+public	Cancel_sint64			as	'_ZN4Math6CancelEPxS0_'
 
 ;******************************************************************************;
 ;       Observational error                                                    ;
@@ -514,34 +560,34 @@ public	Cancel_sint64		as	'_ZN4Math6CancelEPxS0_'
 ;==============================================================================;
 ;       Absolute error                                                         ;
 ;==============================================================================;
-public	AbsError_flt32		as	'Math_AbsError_flt32'
-public	AbsError_flt64		as	'Math_AbsError_flt64'
-public	AbsError_flt32		as	'_ZN4Math8AbsErrorEff'
-public	AbsError_flt64		as	'_ZN4Math8AbsErrorEdd'
+public	AbsError_flt32			as	'Math_AbsError_flt32'
+public	AbsError_flt64			as	'Math_AbsError_flt64'
+public	AbsError_flt32			as	'_ZN4Math8AbsErrorEff'
+public	AbsError_flt64			as	'_ZN4Math8AbsErrorEdd'
 
 ;==============================================================================;
 ;       Relative error                                                         ;
 ;==============================================================================;
-public	RelError_flt32		as	'Math_RelError_flt32'
-public	RelError_flt64		as	'Math_RelError_flt64'
-public	RelError_flt32		as	'_ZN4Math8RelErrorEff'
-public	RelError_flt64		as	'_ZN4Math8RelErrorEdd'
+public	RelError_flt32			as	'Math_RelError_flt32'
+public	RelError_flt64			as	'Math_RelError_flt64'
+public	RelError_flt32			as	'_ZN4Math8RelErrorEff'
+public	RelError_flt64			as	'_ZN4Math8RelErrorEdd'
 
 ;******************************************************************************;
 ;       Scale functions                                                        ;
 ;******************************************************************************;
 
 ; Scale by power of 2
-public	Scale2_flt32		as	'Math_Scale2_flt32'
-public	Scale2_flt64		as	'Math_Scale2_flt64'
-public	Scale2_flt32		as	'_ZN4Math6Scale2Efs'
-public	Scale2_flt64		as	'_ZN4Math6Scale2Eds'
+public	Scale2_flt32			as	'Math_Scale2_flt32'
+public	Scale2_flt64			as	'Math_Scale2_flt64'
+public	Scale2_flt32			as	'_ZN4Math6Scale2Efs'
+public	Scale2_flt64			as	'_ZN4Math6Scale2Eds'
 
 ; Scale by power of 10
-public	Scale10_flt32		as	'Math_Scale10_flt32'
-public	Scale10_flt64		as	'Math_Scale10_flt64'
-public	Scale10_flt32		as	'_ZN4Math7Scale10Efs'
-public	Scale10_flt64		as	'_ZN4Math7Scale10Eds'
+public	Scale10_flt32			as	'Math_Scale10_flt32'
+public	Scale10_flt64			as	'Math_Scale10_flt64'
+public	Scale10_flt32			as	'_ZN4Math7Scale10Efs'
+public	Scale10_flt64			as	'_ZN4Math7Scale10Eds'
 
 ;******************************************************************************;
 ;       Exponentiation functions                                               ;
@@ -554,24 +600,24 @@ public	Scale10_flt64		as	'_ZN4Math7Scale10Eds'
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 ;       Integer exponentiation by base 2                                       ;
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
-public	Exp2i_int			as	'Math_Exp2i_uint64'
-public	Exp2i_flt32			as	'Math_Exp2i_flt32'
-public	Exp2i_flt64			as	'Math_Exp2i_flt64'
-public	Exp2i_int			as	'_ZN4Math5Exp2iEh'
-public	Exp2i_flt32			as	'_ZN4Math5Exp2iEa'
-public	Exp2i_flt64			as	'_ZN4Math5Exp2iEs'
+public	Exp2i_int				as	'Math_Exp2i_uint64'
+public	Exp2i_flt32				as	'Math_Exp2i_flt32'
+public	Exp2i_flt64				as	'Math_Exp2i_flt64'
+public	Exp2i_int				as	'_ZN4Math5Exp2iEh'
+public	Exp2i_flt32				as	'_ZN4Math5Exp2iEa'
+public	Exp2i_flt64				as	'_ZN4Math5Exp2iEs'
 
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 ;       Real exponentiation by base 2                                          ;
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
-public	Exp2_flt32			as	'Math_Exp2_flt32'
-public	Exp2_flt64			as	'Math_Exp2_flt64'
-public	Exp2m1_flt32		as	'Math_Exp2m1_flt32'
-public	Exp2m1_flt64		as	'Math_Exp2m1_flt64'
-public	Exp2_flt32			as	'_ZN4Math4Exp2Ef'
-public	Exp2_flt64			as	'_ZN4Math4Exp2Ed'
-public	Exp2m1_flt32		as	'_ZN4Math6Exp2m1Ef'
-public	Exp2m1_flt64		as	'_ZN4Math6Exp2m1Ed'
+public	Exp2_flt32				as	'Math_Exp2_flt32'
+public	Exp2_flt64				as	'Math_Exp2_flt64'
+public	Exp2m1_flt32			as	'Math_Exp2m1_flt32'
+public	Exp2m1_flt64			as	'Math_Exp2m1_flt64'
+public	Exp2_flt32				as	'_ZN4Math4Exp2Ef'
+public	Exp2_flt64				as	'_ZN4Math4Exp2Ed'
+public	Exp2m1_flt32			as	'_ZN4Math6Exp2m1Ef'
+public	Exp2m1_flt64			as	'_ZN4Math6Exp2m1Ed'
 
 ;==============================================================================;
 ;       Exponentiation by base 10                                              ;
@@ -580,36 +626,36 @@ public	Exp2m1_flt64		as	'_ZN4Math6Exp2m1Ed'
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 ;       Integer exponentiation by base 10                                      ;
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
-public	Exp10i_int			as	'Math_Exp10i_uint64'
-public	Exp10i_flt32		as	'Math_Exp10i_flt32'
-public	Exp10i_flt64		as	'Math_Exp10i_flt64'
-public	Exp10i_int			as	'_ZN4Math6Exp10iEh'
-public	Exp10i_flt32		as	'_ZN4Math6Exp10iEa'
-public	Exp10i_flt64		as	'_ZN4Math6Exp10iEs'
+public	Exp10i_int				as	'Math_Exp10i_uint64'
+public	Exp10i_flt32			as	'Math_Exp10i_flt32'
+public	Exp10i_flt64			as	'Math_Exp10i_flt64'
+public	Exp10i_int				as	'_ZN4Math6Exp10iEh'
+public	Exp10i_flt32			as	'_ZN4Math6Exp10iEa'
+public	Exp10i_flt64			as	'_ZN4Math6Exp10iEs'
 
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 ;       Real exponentiation by base 10                                         ;
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
-public	Exp10_flt32			as	'Math_Exp10_flt32'
-public	Exp10_flt64			as	'Math_Exp10_flt64'
-public	Exp10m1_flt32		as	'Math_Exp10m1_flt32'
-public	Exp10m1_flt64		as	'Math_Exp10m1_flt64'
-public	Exp10_flt32			as	'_ZN4Math5Exp10Ef'
-public	Exp10_flt64			as	'_ZN4Math5Exp10Ed'
-public	Exp10m1_flt32		as	'_ZN4Math7Exp10m1Ef'
-public	Exp10m1_flt64		as	'_ZN4Math7Exp10m1Ed'
+public	Exp10_flt32				as	'Math_Exp10_flt32'
+public	Exp10_flt64				as	'Math_Exp10_flt64'
+public	Exp10m1_flt32			as	'Math_Exp10m1_flt32'
+public	Exp10m1_flt64			as	'Math_Exp10m1_flt64'
+public	Exp10_flt32				as	'_ZN4Math5Exp10Ef'
+public	Exp10_flt64				as	'_ZN4Math5Exp10Ed'
+public	Exp10m1_flt32			as	'_ZN4Math7Exp10m1Ef'
+public	Exp10m1_flt64			as	'_ZN4Math7Exp10m1Ed'
 
 ;==============================================================================;
 ;       Exponentiation by base E (natural logarithm)                           ;
 ;==============================================================================;
-public	ExpE_flt32			as	'Math_Exp_flt32'
-public	ExpE_flt64			as	'Math_Exp_flt64'
-public	ExpEm1_flt32		as	'Math_Expm1_flt32'
-public	ExpEm1_flt64		as	'Math_Expm1_flt64'
-public	ExpE_flt32			as	'_ZN4Math3ExpEf'
-public	ExpE_flt64			as	'_ZN4Math3ExpEd'
-public	ExpEm1_flt32		as	'_ZN4Math5Expm1Ef'
-public	ExpEm1_flt64		as	'_ZN4Math5Expm1Ed'
+public	ExpE_flt32				as	'Math_Exp_flt32'
+public	ExpE_flt64				as	'Math_Exp_flt64'
+public	ExpEm1_flt32			as	'Math_Expm1_flt32'
+public	ExpEm1_flt64			as	'Math_Expm1_flt64'
+public	ExpE_flt32				as	'_ZN4Math3ExpEf'
+public	ExpE_flt64				as	'_ZN4Math3ExpEd'
+public	ExpEm1_flt32			as	'_ZN4Math5Expm1Ef'
+public	ExpEm1_flt64			as	'_ZN4Math5Expm1Ed'
 
 ;==============================================================================;
 ;       Exponentiation by custom base                                          ;
@@ -620,42 +666,42 @@ public	ExpEm1_flt64		as	'_ZN4Math5Expm1Ed'
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 
 ; Unsigned integer types
-public	ExpBi_uint8			as	'Math_ExpBi_uint8'
-public	ExpBi_uint16		as	'Math_ExpBi_uint16'
-public	ExpBi_uint32		as	'Math_ExpBi_uint32'
-public	ExpBi_uint64		as	'Math_ExpBi_uint64'
-public	ExpBi_uint8			as	'_ZN4Math5ExpBiEhh'
-public	ExpBi_uint16		as	'_ZN4Math5ExpBiEth'
-public	ExpBi_uint32		as	'_ZN4Math5ExpBiEjh'
-public	ExpBi_uint64		as	'_ZN4Math5ExpBiEyh'
+public	ExpBi_uint8				as	'Math_ExpBi_uint8'
+public	ExpBi_uint16			as	'Math_ExpBi_uint16'
+public	ExpBi_uint32			as	'Math_ExpBi_uint32'
+public	ExpBi_uint64			as	'Math_ExpBi_uint64'
+public	ExpBi_uint8				as	'_ZN4Math5ExpBiEhh'
+public	ExpBi_uint16			as	'_ZN4Math5ExpBiEth'
+public	ExpBi_uint32			as	'_ZN4Math5ExpBiEjh'
+public	ExpBi_uint64			as	'_ZN4Math5ExpBiEyh'
 
 ; Signed integer types
-public	ExpBi_sint8			as	'Math_ExpBi_sint8'
-public	ExpBi_sint16		as	'Math_ExpBi_sint16'
-public	ExpBi_sint32		as	'Math_ExpBi_sint32'
-public	ExpBi_sint64		as	'Math_ExpBi_sint64'
-public	ExpBi_sint8			as	'_ZN4Math5ExpBiEah'
-public	ExpBi_sint16		as	'_ZN4Math5ExpBiEsh'
-public	ExpBi_sint32		as	'_ZN4Math5ExpBiEih'
-public	ExpBi_sint64		as	'_ZN4Math5ExpBiExh'
+public	ExpBi_sint8				as	'Math_ExpBi_sint8'
+public	ExpBi_sint16			as	'Math_ExpBi_sint16'
+public	ExpBi_sint32			as	'Math_ExpBi_sint32'
+public	ExpBi_sint64			as	'Math_ExpBi_sint64'
+public	ExpBi_sint8				as	'_ZN4Math5ExpBiEah'
+public	ExpBi_sint16			as	'_ZN4Math5ExpBiEsh'
+public	ExpBi_sint32			as	'_ZN4Math5ExpBiEih'
+public	ExpBi_sint64			as	'_ZN4Math5ExpBiExh'
 
 ; Floating-point types
-public	ExpBi_flt32			as	'Math_ExpBi_flt32'
-public	ExpBi_flt64			as	'Math_ExpBi_flt64'
-public	ExpBi_flt32			as	'_ZN4Math5ExpBiEfa'
-public	ExpBi_flt64			as	'_ZN4Math5ExpBiEds'
+public	ExpBi_flt32				as	'Math_ExpBi_flt32'
+public	ExpBi_flt64				as	'Math_ExpBi_flt64'
+public	ExpBi_flt32				as	'_ZN4Math5ExpBiEfa'
+public	ExpBi_flt64				as	'_ZN4Math5ExpBiEds'
 
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 ;       Real exponentiation by custom base                                     ;
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
-public	ExpB_flt32			as	'Math_ExpB_flt32'
-public	ExpB_flt64			as	'Math_ExpB_flt64'
-public	ExpBm1_flt32		as	'Math_ExpBm1_flt32'
-public	ExpBm1_flt64		as	'Math_ExpBm1_flt64'
-public	ExpB_flt32			as	'_ZN4Math4ExpBEff'
-public	ExpB_flt64			as	'_ZN4Math4ExpBEdd'
-public	ExpBm1_flt32		as	'_ZN4Math6ExpBm1Eff'
-public	ExpBm1_flt64		as	'_ZN4Math6ExpBm1Edd'
+public	ExpB_flt32				as	'Math_ExpB_flt32'
+public	ExpB_flt64				as	'Math_ExpB_flt64'
+public	ExpBm1_flt32			as	'Math_ExpBm1_flt32'
+public	ExpBm1_flt64			as	'Math_ExpBm1_flt64'
+public	ExpB_flt32				as	'_ZN4Math4ExpBEff'
+public	ExpB_flt64				as	'_ZN4Math4ExpBEdd'
+public	ExpBm1_flt32			as	'_ZN4Math6ExpBm1Eff'
+public	ExpBm1_flt64			as	'_ZN4Math6ExpBm1Edd'
 
 ;******************************************************************************;
 ;       Logarithmic functions                                                  ;
@@ -668,26 +714,26 @@ public	ExpBm1_flt64		as	'_ZN4Math6ExpBm1Edd'
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 ;       Integer logarithm to base 2                                            ;
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
-public	Log2i_uint8			as	'Math_Log2i_uint8'
-public	Log2i_uint16		as	'Math_Log2i_uint16'
-public	Log2i_uint32		as	'Math_Log2i_uint32'
-public	Log2i_uint64		as	'Math_Log2i_uint64'
-public	Log2i_uint8			as	'_ZN4Math5Log2iEh'
-public	Log2i_uint16		as	'_ZN4Math5Log2iEt'
-public	Log2i_uint32		as	'_ZN4Math5Log2iEj'
-public	Log2i_uint64		as	'_ZN4Math5Log2iEy'
+public	Log2i_uint8				as	'Math_Log2i_uint8'
+public	Log2i_uint16			as	'Math_Log2i_uint16'
+public	Log2i_uint32			as	'Math_Log2i_uint32'
+public	Log2i_uint64			as	'Math_Log2i_uint64'
+public	Log2i_uint8				as	'_ZN4Math5Log2iEh'
+public	Log2i_uint16			as	'_ZN4Math5Log2iEt'
+public	Log2i_uint32			as	'_ZN4Math5Log2iEj'
+public	Log2i_uint64			as	'_ZN4Math5Log2iEy'
 
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 ;       Real logarithm to base 2                                               ;
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
-public	Log2_flt32			as	'Math_Log2_flt32'
-public	Log2_flt64			as	'Math_Log2_flt64'
-public	Log2p1_flt32		as	'Math_Log2p1_flt32'
-public	Log2p1_flt64		as	'Math_Log2p1_flt64'
-public	Log2_flt32			as	'_ZN4Math4Log2Ef'
-public	Log2_flt64			as	'_ZN4Math4Log2Ed'
-public	Log2p1_flt32		as	'_ZN4Math6Log2p1Ef'
-public	Log2p1_flt64		as	'_ZN4Math6Log2p1Ed'
+public	Log2_flt32				as	'Math_Log2_flt32'
+public	Log2_flt64				as	'Math_Log2_flt64'
+public	Log2p1_flt32			as	'Math_Log2p1_flt32'
+public	Log2p1_flt64			as	'Math_Log2p1_flt64'
+public	Log2_flt32				as	'_ZN4Math4Log2Ef'
+public	Log2_flt64				as	'_ZN4Math4Log2Ed'
+public	Log2p1_flt32			as	'_ZN4Math6Log2p1Ef'
+public	Log2p1_flt64			as	'_ZN4Math6Log2p1Ed'
 
 ;==============================================================================;
 ;       Logarithm to base 10                                                   ;
@@ -696,50 +742,50 @@ public	Log2p1_flt64		as	'_ZN4Math6Log2p1Ed'
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 ;       Integer logarithm to base 10                                           ;
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
-public	Log10i_uint8		as	'Math_Log10i_uint8'
-public	Log10i_uint16		as	'Math_Log10i_uint16'
-public	Log10i_uint32		as	'Math_Log10i_uint32'
-public	Log10i_uint64		as	'Math_Log10i_uint64'
-public	Log10i_uint8		as	'_ZN4Math6Log10iEh'
-public	Log10i_uint16		as	'_ZN4Math6Log10iEt'
-public	Log10i_uint32		as	'_ZN4Math6Log10iEj'
-public	Log10i_uint64		as	'_ZN4Math6Log10iEy'
+public	Log10i_uint8			as	'Math_Log10i_uint8'
+public	Log10i_uint16			as	'Math_Log10i_uint16'
+public	Log10i_uint32			as	'Math_Log10i_uint32'
+public	Log10i_uint64			as	'Math_Log10i_uint64'
+public	Log10i_uint8			as	'_ZN4Math6Log10iEh'
+public	Log10i_uint16			as	'_ZN4Math6Log10iEt'
+public	Log10i_uint32			as	'_ZN4Math6Log10iEj'
+public	Log10i_uint64			as	'_ZN4Math6Log10iEy'
 
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 ;       Real logarithm to base 10                                              ;
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
-public	Log10_flt32			as	'Math_Log10_flt32'
-public	Log10_flt64			as	'Math_Log10_flt64'
-public	Log10p1_flt32		as	'Math_Log10p1_flt32'
-public	Log10p1_flt64		as	'Math_Log10p1_flt64'
-public	Log10_flt32			as	'_ZN4Math5Log10Ef'
-public	Log10_flt64			as	'_ZN4Math5Log10Ed'
-public	Log10p1_flt32		as	'_ZN4Math7Log10p1Ef'
-public	Log10p1_flt64		as	'_ZN4Math7Log10p1Ed'
+public	Log10_flt32				as	'Math_Log10_flt32'
+public	Log10_flt64				as	'Math_Log10_flt64'
+public	Log10p1_flt32			as	'Math_Log10p1_flt32'
+public	Log10p1_flt64			as	'Math_Log10p1_flt64'
+public	Log10_flt32				as	'_ZN4Math5Log10Ef'
+public	Log10_flt64				as	'_ZN4Math5Log10Ed'
+public	Log10p1_flt32			as	'_ZN4Math7Log10p1Ef'
+public	Log10p1_flt64			as	'_ZN4Math7Log10p1Ed'
 
 ;==============================================================================;
 ;       Logarithm to base E (natural logarithm)                                ;
 ;==============================================================================;
-public	LogE_flt32			as	'Math_Log_flt32'
-public	LogE_flt64			as	'Math_Log_flt64'
-public	LogEp1_flt32		as	'Math_Logp1_flt32'
-public	LogEp1_flt64		as	'Math_Logp1_flt64'
-public	LogE_flt32			as	'_ZN4Math3LogEf'
-public	LogE_flt64			as	'_ZN4Math3LogEd'
-public	LogEp1_flt32		as	'_ZN4Math5Logp1Ef'
-public	LogEp1_flt64		as	'_ZN4Math5Logp1Ed'
+public	LogE_flt32				as	'Math_Log_flt32'
+public	LogE_flt64				as	'Math_Log_flt64'
+public	LogEp1_flt32			as	'Math_Logp1_flt32'
+public	LogEp1_flt64			as	'Math_Logp1_flt64'
+public	LogE_flt32				as	'_ZN4Math3LogEf'
+public	LogE_flt64				as	'_ZN4Math3LogEd'
+public	LogEp1_flt32			as	'_ZN4Math5Logp1Ef'
+public	LogEp1_flt64			as	'_ZN4Math5Logp1Ed'
 
 ;==============================================================================;
 ;       Logarithm to custom base                                               ;
 ;==============================================================================;
-public	LogB_flt32			as	'Math_LogB_flt32'
-public	LogB_flt64			as	'Math_LogB_flt64'
-public	LogBp1_flt32		as	'Math_LogBp1_flt32'
-public	LogBp1_flt64		as	'Math_LogBp1_flt64'
-public	LogB_flt32			as	'_ZN4Math4LogBEff'
-public	LogB_flt64			as	'_ZN4Math4LogBEdd'
-public	LogBp1_flt32		as	'_ZN4Math6LogBp1Eff'
-public	LogBp1_flt64		as	'_ZN4Math6LogBp1Edd'
+public	LogB_flt32				as	'Math_LogB_flt32'
+public	LogB_flt64				as	'Math_LogB_flt64'
+public	LogBp1_flt32			as	'Math_LogBp1_flt32'
+public	LogBp1_flt64			as	'Math_LogBp1_flt64'
+public	LogB_flt32				as	'_ZN4Math4LogBEff'
+public	LogB_flt64				as	'_ZN4Math4LogBEdd'
+public	LogBp1_flt32			as	'_ZN4Math6LogBp1Eff'
+public	LogBp1_flt64			as	'_ZN4Math6LogBp1Edd'
 
 ;******************************************************************************;
 ;       Trigonometric functions                                                ;
@@ -748,50 +794,54 @@ public	LogBp1_flt64		as	'_ZN4Math6LogBp1Edd'
 ;==============================================================================;
 ;       Hypotenuse                                                             ;
 ;==============================================================================;
-public	Hypot_flt32			as	'Math_Hypot_flt32'
-public	Hypot_flt64			as	'Math_Hypot_flt64'
-public	Hypot_flt32			as	'_ZN4Math5HypotEff'
-public	Hypot_flt64			as	'_ZN4Math5HypotEdd'
+public	Hypot2D_flt32			as	'Math_Hypot2D_flt32'
+public	Hypot2D_flt64			as	'Math_Hypot2D_flt64'
+public	Hypot3D_flt32			as	'Math_Hypot3D_flt32'
+public	Hypot3D_flt64			as	'Math_Hypot3D_flt64'
+public	Hypot2D_flt32			as	'_ZN4Math7Hypot2DEff'
+public	Hypot2D_flt64			as	'_ZN4Math7Hypot2DEdd'
+public	Hypot3D_flt32			as	'_ZN4Math7Hypot3DEfff'
+public	Hypot3D_flt64			as	'_ZN4Math7Hypot3DEddd'
 
 ;==============================================================================;
 ;       Cathetus                                                               ;
 ;==============================================================================;
-public	Cath_flt32			as	'Math_Cath_flt32'
-public	Cath_flt64			as	'Math_Cath_flt64'
-public	Cath_flt32			as	'_ZN4Math4CathEff'
-public	Cath_flt64			as	'_ZN4Math4CathEdd'
+public	Cath_flt32				as	'Math_Cath_flt32'
+public	Cath_flt64				as	'Math_Cath_flt64'
+public	Cath_flt32				as	'_ZN4Math4CathEff'
+public	Cath_flt64				as	'_ZN4Math4CathEdd'
 
 ;==============================================================================;
 ;       Sine                                                                   ;
 ;==============================================================================;
-public	Sin_flt32			as	'Math_Sin_flt32'
-public	Sin_flt64			as	'Math_Sin_flt64'
-public	Sin_flt32			as	'_ZN4Math3SinEf'
-public	Sin_flt64			as	'_ZN4Math3SinEd'
+public	Sin_flt32				as	'Math_Sin_flt32'
+public	Sin_flt64				as	'Math_Sin_flt64'
+public	Sin_flt32				as	'_ZN4Math3SinEf'
+public	Sin_flt64				as	'_ZN4Math3SinEd'
 
 ;==============================================================================;
 ;       Cosine                                                                 ;
 ;==============================================================================;
-public	Cos_flt32			as	'Math_Cos_flt32'
-public	Cos_flt64			as	'Math_Cos_flt64'
-public	Cos_flt32			as	'_ZN4Math3CosEf'
-public	Cos_flt64			as	'_ZN4Math3CosEd'
+public	Cos_flt32				as	'Math_Cos_flt32'
+public	Cos_flt64				as	'Math_Cos_flt64'
+public	Cos_flt32				as	'_ZN4Math3CosEf'
+public	Cos_flt64				as	'_ZN4Math3CosEd'
 
 ;==============================================================================;
 ;       Sine and cosine                                                        ;
 ;==============================================================================;
-public	SinCos_flt32		as	'Math_SinCos_flt32'
-public	SinCos_flt64		as	'Math_SinCos_flt64'
-public	SinCos_flt32		as	'_ZN4Math6SinCosEPfS0_f'
-public	SinCos_flt64		as	'_ZN4Math6SinCosEPdS0_d'
+public	SinCos_flt32			as	'Math_SinCos_flt32'
+public	SinCos_flt64			as	'Math_SinCos_flt64'
+public	SinCos_flt32			as	'_ZN4Math6SinCosEPfS0_f'
+public	SinCos_flt64			as	'_ZN4Math6SinCosEPdS0_d'
 
 ;==============================================================================;
 ;       Tangent                                                                ;
 ;==============================================================================;
-public	Tan_flt32			as	'Math_Tan_flt32'
-public	Tan_flt64			as	'Math_Tan_flt64'
-public	Tan_flt32			as	'_ZN4Math3TanEf'
-public	Tan_flt64			as	'_ZN4Math3TanEd'
+public	Tan_flt32				as	'Math_Tan_flt32'
+public	Tan_flt64				as	'Math_Tan_flt64'
+public	Tan_flt32				as	'_ZN4Math3TanEf'
+public	Tan_flt64				as	'_ZN4Math3TanEd'
 
 ;******************************************************************************;
 ;       Inverse trigonometric functions                                        ;
@@ -800,30 +850,30 @@ public	Tan_flt64			as	'_ZN4Math3TanEd'
 ;==============================================================================;
 ;       Inverse sine                                                           ;
 ;==============================================================================;
-public	ArcSin_flt32		as	'Math_ArcSin_flt32'
-public	ArcSin_flt64		as	'Math_ArcSin_flt64'
-public	ArcSin_flt32		as	'_ZN4Math6ArcSinEf'
-public	ArcSin_flt64		as	'_ZN4Math6ArcSinEd'
+public	ArcSin_flt32			as	'Math_ArcSin_flt32'
+public	ArcSin_flt64			as	'Math_ArcSin_flt64'
+public	ArcSin_flt32			as	'_ZN4Math6ArcSinEf'
+public	ArcSin_flt64			as	'_ZN4Math6ArcSinEd'
 
 ;==============================================================================;
 ;       Inverse cosine                                                         ;
 ;==============================================================================;
-public	ArcCos_flt32		as	'Math_ArcCos_flt32'
-public	ArcCos_flt64		as	'Math_ArcCos_flt64'
-public	ArcCos_flt32		as	'_ZN4Math6ArcCosEf'
-public	ArcCos_flt64		as	'_ZN4Math6ArcCosEd'
+public	ArcCos_flt32			as	'Math_ArcCos_flt32'
+public	ArcCos_flt64			as	'Math_ArcCos_flt64'
+public	ArcCos_flt32			as	'_ZN4Math6ArcCosEf'
+public	ArcCos_flt64			as	'_ZN4Math6ArcCosEd'
 
 ;==============================================================================;
 ;       Inverse tangent                                                        ;
 ;==============================================================================;
-public	ArcTan_flt32		as	'Math_ArcTan_flt32'
-public	ArcTan_flt64		as	'Math_ArcTan_flt64'
-public	ArcTan2_flt32		as	'Math_ArcTan2_flt32'
-public	ArcTan2_flt64		as	'Math_ArcTan2_flt64'
-public	ArcTan_flt32		as	'_ZN4Math6ArcTanEf'
-public	ArcTan_flt64		as	'_ZN4Math6ArcTanEd'
-public	ArcTan2_flt32		as	'_ZN4Math7ArcTan2Eff'
-public	ArcTan2_flt64		as	'_ZN4Math7ArcTan2Edd'
+public	ArcTan_flt32			as	'Math_ArcTan_flt32'
+public	ArcTan_flt64			as	'Math_ArcTan_flt64'
+public	ArcTan2_flt32			as	'Math_ArcTan2_flt32'
+public	ArcTan2_flt64			as	'Math_ArcTan2_flt64'
+public	ArcTan_flt32			as	'_ZN4Math6ArcTanEf'
+public	ArcTan_flt64			as	'_ZN4Math6ArcTanEd'
+public	ArcTan2_flt32			as	'_ZN4Math7ArcTan2Eff'
+public	ArcTan2_flt64			as	'_ZN4Math7ArcTan2Edd'
 
 ;******************************************************************************;
 ;       Hyperbolic functions                                                   ;
@@ -832,30 +882,30 @@ public	ArcTan2_flt64		as	'_ZN4Math7ArcTan2Edd'
 ;==============================================================================;
 ;       Sine                                                                   ;
 ;==============================================================================;
-public	SinH_flt32			as	'Math_SinH_flt32'
-public	SinH_flt64			as	'Math_SinH_flt64'
-public	SinH_flt32			as	'_ZN4Math4SinHEf'
-public	SinH_flt64			as	'_ZN4Math4SinHEd'
+public	SinH_flt32				as	'Math_SinH_flt32'
+public	SinH_flt64				as	'Math_SinH_flt64'
+public	SinH_flt32				as	'_ZN4Math4SinHEf'
+public	SinH_flt64				as	'_ZN4Math4SinHEd'
 
 ;==============================================================================;
 ;       Cosine                                                                 ;
 ;==============================================================================;
-public	CosH_flt32			as	'Math_CosH_flt32'
-public	CosH_flt64			as	'Math_CosH_flt64'
-public	CosHm1_flt32		as	'Math_CosHm1_flt32'
-public	CosHm1_flt64		as	'Math_CosHm1_flt64'
-public	CosH_flt32			as	'_ZN4Math4CosHEf'
-public	CosH_flt64			as	'_ZN4Math4CosHEd'
-public	CosHm1_flt32		as	'_ZN4Math6CosHm1Ef'
-public	CosHm1_flt64		as	'_ZN4Math6CosHm1Ed'
+public	CosH_flt32				as	'Math_CosH_flt32'
+public	CosH_flt64				as	'Math_CosH_flt64'
+public	CosHm1_flt32			as	'Math_CosHm1_flt32'
+public	CosHm1_flt64			as	'Math_CosHm1_flt64'
+public	CosH_flt32				as	'_ZN4Math4CosHEf'
+public	CosH_flt64				as	'_ZN4Math4CosHEd'
+public	CosHm1_flt32			as	'_ZN4Math6CosHm1Ef'
+public	CosHm1_flt64			as	'_ZN4Math6CosHm1Ed'
 
 ;==============================================================================;
 ;       Tangent                                                                ;
 ;==============================================================================;
-public	TanH_flt32			as	'Math_TanH_flt32'
-public	TanH_flt64			as	'Math_TanH_flt64'
-public	TanH_flt32			as	'_ZN4Math4TanHEf'
-public	TanH_flt64			as	'_ZN4Math4TanHEd'
+public	TanH_flt32				as	'Math_TanH_flt32'
+public	TanH_flt64				as	'Math_TanH_flt64'
+public	TanH_flt32				as	'_ZN4Math4TanHEf'
+public	TanH_flt64				as	'_ZN4Math4TanHEd'
 
 ;******************************************************************************;
 ;       Inverse hyperbolic functions                                           ;
@@ -864,104 +914,104 @@ public	TanH_flt64			as	'_ZN4Math4TanHEd'
 ;==============================================================================;
 ;       Inverse sine                                                           ;
 ;==============================================================================;
-public	ArcSinH_flt32		as	'Math_ArcSinH_flt32'
-public	ArcSinH_flt64		as	'Math_ArcSinH_flt64'
-public	ArcSinH_flt32		as	'_ZN4Math7ArcSinHEf'
-public	ArcSinH_flt64		as	'_ZN4Math7ArcSinHEd'
+public	ArcSinH_flt32			as	'Math_ArcSinH_flt32'
+public	ArcSinH_flt64			as	'Math_ArcSinH_flt64'
+public	ArcSinH_flt32			as	'_ZN4Math7ArcSinHEf'
+public	ArcSinH_flt64			as	'_ZN4Math7ArcSinHEd'
 
 ;==============================================================================;
 ;       Inverse cosine                                                         ;
 ;==============================================================================;
-public	ArcCosH_flt32		as	'Math_ArcCosH_flt32'
-public	ArcCosH_flt64		as	'Math_ArcCosH_flt64'
-public	ArcCosH_flt32		as	'_ZN4Math7ArcCosHEf'
-public	ArcCosH_flt64		as	'_ZN4Math7ArcCosHEd'
-public	ArcCosHp1_flt32		as	'Math_ArcCosHp1_flt32'
-public	ArcCosHp1_flt64		as	'Math_ArcCosHp1_flt64'
-public	ArcCosHp1_flt32		as	'_ZN4Math9ArcCosHp1Ef'
-public	ArcCosHp1_flt64		as	'_ZN4Math9ArcCosHp1Ed'
+public	ArcCosH_flt32			as	'Math_ArcCosH_flt32'
+public	ArcCosH_flt64			as	'Math_ArcCosH_flt64'
+public	ArcCosH_flt32			as	'_ZN4Math7ArcCosHEf'
+public	ArcCosH_flt64			as	'_ZN4Math7ArcCosHEd'
+public	ArcCosHp1_flt32			as	'Math_ArcCosHp1_flt32'
+public	ArcCosHp1_flt64			as	'Math_ArcCosHp1_flt64'
+public	ArcCosHp1_flt32			as	'_ZN4Math9ArcCosHp1Ef'
+public	ArcCosHp1_flt64			as	'_ZN4Math9ArcCosHp1Ed'
 
 ;==============================================================================;
 ;       Inverse tangent                                                        ;
 ;==============================================================================;
-public	ArcTanH_flt32		as	'Math_ArcTanH_flt32'
-public	ArcTanH_flt64		as	'Math_ArcTanH_flt64'
-public	ArcTanH_flt32		as	'_ZN4Math7ArcTanHEf'
-public	ArcTanH_flt64		as	'_ZN4Math7ArcTanHEd'
+public	ArcTanH_flt32			as	'Math_ArcTanH_flt32'
+public	ArcTanH_flt64			as	'Math_ArcTanH_flt64'
+public	ArcTanH_flt32			as	'_ZN4Math7ArcTanHEf'
+public	ArcTanH_flt64			as	'_ZN4Math7ArcTanHEd'
 
 ;******************************************************************************;
 ;       Rounding                                                               ;
 ;******************************************************************************;
 
 ; Round down (floor)
-public	RoundDown_flt32		as	'Math_RoundDown_flt32'
-public	RoundDown_flt64		as	'Math_RoundDown_flt64'
-public	RoundDown_flt32		as	'_ZN4Math9RoundDownEf'
-public	RoundDown_flt64		as	'_ZN4Math9RoundDownEd'
+public	RoundDown_flt32			as	'Math_RoundDown_flt32'
+public	RoundDown_flt64			as	'Math_RoundDown_flt64'
+public	RoundDown_flt32			as	'_ZN4Math9RoundDownEf'
+public	RoundDown_flt64			as	'_ZN4Math9RoundDownEd'
 
 ; Round up (ceil)
-public	RoundUp_flt32		as	'Math_RoundUp_flt32'
-public	RoundUp_flt64		as	'Math_RoundUp_flt64'
-public	RoundUp_flt32		as	'_ZN4Math7RoundUpEf'
-public	RoundUp_flt64		as	'_ZN4Math7RoundUpEd'
+public	RoundUp_flt32			as	'Math_RoundUp_flt32'
+public	RoundUp_flt64			as	'Math_RoundUp_flt64'
+public	RoundUp_flt32			as	'_ZN4Math7RoundUpEf'
+public	RoundUp_flt64			as	'_ZN4Math7RoundUpEd'
 
 ; Round to nearest even integer
-public	RoundInt_flt32		as	'Math_RoundInt_flt32'
-public	RoundInt_flt64		as	'Math_RoundInt_flt64'
-public	RoundInt_flt32		as	'_ZN4Math8RoundIntEf'
-public	RoundInt_flt64		as	'_ZN4Math8RoundIntEd'
+public	RoundInt_flt32			as	'Math_RoundInt_flt32'
+public	RoundInt_flt64			as	'Math_RoundInt_flt64'
+public	RoundInt_flt32			as	'_ZN4Math8RoundIntEf'
+public	RoundInt_flt64			as	'_ZN4Math8RoundIntEd'
 
 ; Round to nearest integer, away from zero
-public	RoundRound_flt32	as	'Math_Round_flt32'
-public	RoundRound_flt64	as	'Math_Round_flt64'
-public	RoundRound_flt32	as	'_ZN4Math5RoundEf'
-public	RoundRound_flt64	as	'_ZN4Math5RoundEd'
+public	RoundRound_flt32		as	'Math_Round_flt32'
+public	RoundRound_flt64		as	'Math_Round_flt64'
+public	RoundRound_flt32		as	'_ZN4Math5RoundEf'
+public	RoundRound_flt64		as	'_ZN4Math5RoundEd'
 
 ; Round to nearest integer, toward zero (truncation)
-public	RoundTrunc_flt32	as	'Math_Truncate_flt32'
-public	RoundTrunc_flt64	as	'Math_Truncate_flt64'
-public	RoundTrunc_flt32	as	'_ZN4Math8TruncateEf'
-public	RoundTrunc_flt64	as	'_ZN4Math8TruncateEd'
+public	RoundTrunc_flt32		as	'Math_Truncate_flt32'
+public	RoundTrunc_flt64		as	'Math_Truncate_flt64'
+public	RoundTrunc_flt32		as	'_ZN4Math8TruncateEf'
+public	RoundTrunc_flt64		as	'_ZN4Math8TruncateEd'
 
 ; Fractional part
-public	RoundFrac_flt32		as	'Math_Frac_flt32'
-public	RoundFrac_flt64		as	'Math_Frac_flt64'
-public	RoundFrac_flt32		as	'_ZN4Math4FracEf'
-public	RoundFrac_flt64		as	'_ZN4Math4FracEd'
+public	RoundFrac_flt32			as	'Math_Frac_flt32'
+public	RoundFrac_flt64			as	'Math_Frac_flt64'
+public	RoundFrac_flt32			as	'_ZN4Math4FracEf'
+public	RoundFrac_flt64			as	'_ZN4Math4FracEd'
 
 ;******************************************************************************;
 ;       Checks                                                                 ;
 ;******************************************************************************;
 
 ; Check for normal value
-public	IsNorm_flt32		as	'Math_IsNormal_flt32'
-public	IsNorm_flt64		as	'Math_IsNormal_flt64'
-public	IsNorm_flt32		as	'_ZN4Math8IsNormalEf'
-public	IsNorm_flt64		as	'_ZN4Math8IsNormalEd'
+public	IsNorm_flt32			as	'Math_IsNormal_flt32'
+public	IsNorm_flt64			as	'Math_IsNormal_flt64'
+public	IsNorm_flt32			as	'_ZN4Math8IsNormalEf'
+public	IsNorm_flt64			as	'_ZN4Math8IsNormalEd'
 
 ; Check for subnormal value
-public	IsSub_flt32			as	'Math_IsSubnormal_flt32'
-public	IsSub_flt64			as	'Math_IsSubnormal_flt64'
-public	IsSub_flt32			as	'_ZN4Math11IsSubnormalEf'
-public	IsSub_flt64			as	'_ZN4Math11IsSubnormalEd'
+public	IsSub_flt32				as	'Math_IsSubnormal_flt32'
+public	IsSub_flt64				as	'Math_IsSubnormal_flt64'
+public	IsSub_flt32				as	'_ZN4Math11IsSubnormalEf'
+public	IsSub_flt64				as	'_ZN4Math11IsSubnormalEd'
 
 ; Check for finite value
-public	IsFin_flt32			as	'Math_IsFinite_flt32'
-public	IsFin_flt64			as	'Math_IsFinite_flt64'
-public	IsFin_flt32			as	'_ZN4Math8IsFiniteEf'
-public	IsFin_flt64			as	'_ZN4Math8IsFiniteEd'
+public	IsFin_flt32				as	'Math_IsFinite_flt32'
+public	IsFin_flt64				as	'Math_IsFinite_flt64'
+public	IsFin_flt32				as	'_ZN4Math8IsFiniteEf'
+public	IsFin_flt64				as	'_ZN4Math8IsFiniteEd'
 
 ; Check for infinite value
-public	IsInf_flt32			as	'Math_IsInfinite_flt32'
-public	IsInf_flt64			as	'Math_IsInfinite_flt64'
-public	IsInf_flt32			as	'_ZN4Math10IsInfiniteEf'
-public	IsInf_flt64			as	'_ZN4Math10IsInfiniteEd'
+public	IsInf_flt32				as	'Math_IsInfinite_flt32'
+public	IsInf_flt64				as	'Math_IsInfinite_flt64'
+public	IsInf_flt32				as	'_ZN4Math10IsInfiniteEf'
+public	IsInf_flt64				as	'_ZN4Math10IsInfiniteEd'
 
 ; Check for NaN value
-public	IsNaN_flt32			as	'Math_IsNaN_flt32'
-public	IsNaN_flt64			as	'Math_IsNaN_flt64'
-public	IsNaN_flt32			as	'_ZN4Math5IsNaNEf'
-public	IsNaN_flt64			as	'_ZN4Math5IsNaNEd'
+public	IsNaN_flt32				as	'Math_IsNaN_flt32'
+public	IsNaN_flt64				as	'Math_IsNaN_flt64'
+public	IsNaN_flt32				as	'_ZN4Math5IsNaNEf'
+public	IsNaN_flt64				as	'_ZN4Math5IsNaNEd'
 
 ;###############################################################################
 ;#      Code section                                                           #
@@ -1238,6 +1288,35 @@ PopCount64:	POP_COUNT	rax, rdi, 3
 ;******************************************************************************;
 
 ;==============================================================================;
+;       Inverse value                                                          ;
+;==============================================================================;
+macro	INVERSE	sqr, x
+{
+;---[Parameters]---------------------------
+value	equ		xmm0						; value
+;---[Internal variables]-------------------
+treg	equ		rax							; temporary register
+temp	equ		xmm1						; temporary register
+if x eq s
+oneval	= PONE_FLT32						; +1.0
+else if x eq d
+oneval	= PONE_FLT64						; +1.0
+end if
+;------------------------------------------
+		movap#x	temp, value					; temp = value
+if sqr
+		muls#x	temp, temp					; temp *= temp
+end if
+		initreg	value, treg, oneval			; value = 1.0
+		divs#x	value, temp					; return 1.0 / value
+		ret
+}
+Inverse_flt32:			INVERSE		0, s
+Inverse_flt64:			INVERSE		0, d
+InverseSquare_flt32:	INVERSE		1, s
+InverseSquare_flt64:	INVERSE		1, d
+
+;==============================================================================;
 ;       Absolute value                                                         ;
 ;==============================================================================;
 macro	ABS_INT	result, value, scale, negative
@@ -1370,6 +1449,7 @@ Sign_flt64:		SIGN_FLT	rax, rdx, rcx, rdi, d, 1
 ;==============================================================================;
 macro	SQRT_INT	root, value, mask, temp, size
 {
+;------------------------------------------
 		xor		root, root					; root = 0
 		mov		mask, 1 shl (size * 8 - 2)	; mask = 1 << (sizeof(value) - 2)
 ;---[Loop]---------------------------------
@@ -1404,6 +1484,41 @@ Sqrt_uint64:	SQRT_INT	rax, rdi, rcx, rdx, 8
 ; Floating-point types
 Sqrt_flt32:		SQRT_FLT	s
 Sqrt_flt64:		SQRT_FLT	d
+
+;==============================================================================;
+;       Square number                                                          ;
+;==============================================================================;
+macro	SQR_INT		cmd, result, value
+{
+		mov		result, value				; result = value
+		cmd		value						; return result * value
+		ret
+}
+;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+macro	SQR_FLT		x
+{
+;---[Parameters]---------------------------
+value	equ		xmm0						; value
+;------------------------------------------
+		muls#x	value, value				; ret sqr (value)
+		ret
+}
+
+; Unsigned integer types
+Sqr_uint8:	SQR_INT		mul, al, dil
+Sqr_uint16:	SQR_INT		mul, ax, di
+Sqr_uint32:	SQR_INT		mul, eax, edi
+Sqr_uint64:	SQR_INT		mul, rax, rdi
+
+; Signed integer types
+Sqr_sint8:	SQR_INT		imul, al, dil
+Sqr_sint16:	SQR_INT		imul, ax, di
+Sqr_sint32:	SQR_INT		imul, eax, edi
+Sqr_sint64:	SQR_INT		imul, rax, rdi
+
+; Floating-point types
+Sqr_flt32:	SQR_FLT		s
+Sqr_flt64:	SQR_FLT		d
 
 ;==============================================================================;
 ;       Three-state comparison                                                 ;
@@ -3399,19 +3514,20 @@ space	= 21 * 8							; stack size required by the procedure
 ;==============================================================================;
 ;       Hypotenuse                                                             ;
 ;==============================================================================;
-macro	HYPOT	x
+macro	HYPOT	dim, x
 {
 ;---[Parameters]---------------------------
-val1	equ		xmm0						; first cathetus
-val2	equ		xmm1						; second cathetus
+cath1	equ		xmm0						; first cathetus
+cath2	equ		xmm1						; second cathetus
+cath3	equ		xmm2						; third cathetus
 ;---[Internal variables]-------------------
 treg	equ		rax							; temporary register
-mask	equ		xmm2						; data mask to get absolute value
-max		equ		xmm3						; max value
-barier1	equ		xmm4						; first barier
-barier2	equ		xmm5						; second barier
-scale1	equ		xmm6						; first scale factor
-scale2	equ		xmm7						; second scale factor
+mask	equ		xmm3						; data mask to get absolute value
+max		equ		xmm4						; max value
+barier1	equ		xmm5						; first barier
+barier2	equ		xmm6						; second barier
+scale1	equ		xmm7						; first scale factor
+scale2	equ		xmm8						; second scale factor
 if x eq s
 dmask	= DMASK_FLT32						; data mask
 const1	= 0x5F800000						; 2^+64
@@ -3433,45 +3549,75 @@ end if
 		initreg	mask, treg, dmask			; mask = dmask
 		initreg	barier1, treg, const1		; barier1 = const1
 		initreg	barier2, treg, const2		; barier2 = const2
-		andp#x	val1, mask					; val1 = Abs(val1)
-		andp#x	val2, mask					; val2 = Abs(val2)
-		movap#x	max, val1
-		maxs#x	max, val2					; max = Max (val1, val2)
+		andp#x	cath1, mask					; cath1 = Abs(cath1)
+		andp#x	cath2, mask					; cath2 = Abs(cath2)
+		andp#x	cath3, mask					; cath3 = Abs(cath3)
+		movap#x	max, cath1
+		maxs#x	max, cath2					; max = Max (cath1, cath2)
+if dim = 3
+		maxs#x	max, cath3					; max = Max (cath1, cath3)
+end if
 		comis#x	max, barier1				; if (max >= barier1)
 		jae		.over						;     then go to overflow prevention branch
 		comis#x	max, barier2				; if (max < barier2)
 		jb		.under						;     then go to underflow prevention branch
 ;---[Normal execution branch]--------------
-		muls#x	val1, val1					; val1 = val1^2
-		muls#x	val2, val2					; val2 = val2^2
-		adds#x	val1, val2					; val1 = val1^2 + val2^2
-		sqrts#x	val1, val1					; return sqrt (val1)
+		muls#x	cath1, cath1					; cath1 = cath1^2
+		muls#x	cath2, cath2					; cath2 = cath2^2
+if dim = 3
+		muls#x	cath3, cath3					; cath3 = cath3^2
+end if
+		adds#x	cath1, cath2					; cath1 += cath2^2
+if dim = 3
+		adds#x	cath1, cath3					; cath1 += cath3^2
+end if
+		sqrts#x	cath1, cath1					; return sqrt (cath1)
 		ret
 ;---[Overflow prevention branch]-----------
 .over:	initreg	scale1, treg, sclval1		; scale1 = sclval1
 		initreg	scale2, treg, sclval2		; scale2 = sclval2
-		muls#x	val1, scale1				; val1 *= scale1
-		muls#x	val2, scale1				; val2 *= scale1
-		muls#x	val1, val1					; val1 = val1^2
-		muls#x	val2, val2					; val2 = val2^2
-		adds#x	val1, val2					; val1 = val1^2 + val2^2
-		sqrts#x	val1, val1
-		muls#x	val1, scale2				; return scale2 * sqrt (val1)
+		muls#x	cath1, scale1				; cath1 *= scale1
+		muls#x	cath2, scale1				; cath2 *= scale1
+if dim = 3
+		muls#x	cath3, scale1				; cath3 *= scale1
+end if
+		muls#x	cath1, cath1					; cath1 = cath1^2
+		muls#x	cath2, cath2					; cath2 = cath2^2
+if dim = 3
+		muls#x	cath3, cath3					; cath3 = cath3^2
+end if
+		adds#x	cath1, cath2					; cath1 += cath2^2
+if dim = 3
+		adds#x	cath1, cath3					; cath1 += cath3^2
+end if
+		sqrts#x	cath1, cath1
+		muls#x	cath1, scale2				; return scale2 * sqrt (cath1)
 		ret
 ;---[Underflow prevention branch]----------
 .under:	initreg	scale1, treg, sclval3		; scale1 = sclval3
 		initreg	scale2, treg, sclval4		; scale2 = sclval4
-		muls#x	val1, scale1				; val1 *= scale1
-		muls#x	val2, scale1				; val2 *= scale1
-		muls#x	val1, val1					; val1 = val1^2
-		muls#x	val2, val2					; val2 = val2^2
-		adds#x	val1, val2					; val1 = val1^2 + val2^2
-		sqrts#x	val1, val1
-		muls#x	val1, scale2				; return scale2 * sqrt (val1)
+		muls#x	cath1, scale1				; cath1 *= scale1
+		muls#x	cath2, scale1				; cath2 *= scale1
+if dim = 3
+		muls#x	cath3, scale1				; cath3 *= scale1
+end if
+		muls#x	cath1, cath1					; cath1 = cath1^2
+		muls#x	cath2, cath2					; cath2 = cath2^2
+if dim = 3
+		muls#x	cath3, cath3					; cath3 = cath3^2
+end if
+		adds#x	cath1, cath2					; cath1 += cath2^2
+if dim = 3
+		adds#x	cath1, cath3					; cath1 += cath3^2
+end if
+		sqrts#x	cath1, cath1
+		muls#x	cath1, scale2				; return scale2 * sqrt (cath1)
 		ret
 }
-Hypot_flt32:	HYPOT	s
-Hypot_flt64:	HYPOT	d
+Hypot2D_flt32:	HYPOT	2, s
+Hypot2D_flt64:	HYPOT	2, d
+Hypot3D_flt32:	HYPOT	3, s
+Hypot3D_flt64:	HYPOT	3, d
 
 ;==============================================================================;
 ;       Cathetus                                                               ;
@@ -3483,13 +3629,13 @@ hypot	equ		xmm0						; hypotenuse
 cath	equ		xmm1						; cathetus
 ;---[Internal variables]-------------------
 treg	equ		rax							; temporary register
-temp	equ		xmm2						; temporary register
-mask	equ		xmm3						; data mask to get absolute value
-max		equ		xmm4						; max value
-barier1	equ		xmm5						; first barier
-barier2	equ		xmm6						; second barier
-scale1	equ		xmm7						; first scale factor
-scale2	equ		xmm8						; second scale factor
+temp	equ		xmm3						; temporary register
+mask	equ		xmm4						; data mask to get absolute value
+max		equ		xmm5						; max value
+barier1	equ		xmm6						; first barier
+barier2	equ		xmm7						; second barier
+scale1	equ		xmm8						; first scale factor
+scale2	equ		xmm9						; second scale factor
 if x eq s
 dmask	= DMASK_FLT32						; data mask
 const1	= 0x5F800000						; 2^+64

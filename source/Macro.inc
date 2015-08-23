@@ -4,7 +4,7 @@
 ;#                                                                             #
 ;#                      MACROS ARE USED BY LINASM MODULES                      #
 ;#                                                                             #
-;# License: LGPLv3+                              Copyleft (Ɔ) 2014, Jack Black #
+;# License: LGPLv3+                              Copyleft (Ɔ) 2015, Jack Black #
 ;###############################################################################
 
 ;******************************************************************************;
@@ -176,7 +176,7 @@ end if
 ;******************************************************************************;
 macro	shftl	value, shift
 {
-if shift <> 0
+if shift
 		shl		value, shift				; value <<= shift
 end if
 }
@@ -186,7 +186,7 @@ end if
 ;******************************************************************************;
 macro	shftr	value, shift
 {
-if shift <> 0
+if shift
 		shr		value, shift				; value >>= shift
 end if
 }

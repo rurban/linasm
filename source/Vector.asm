@@ -4,7 +4,7 @@
 ;#                                                                             #
 ;#                              VECTOR DATA TYPE                               #
 ;#                                                                             #
-;# License: LGPLv3+                              Copyleft (Ɔ) 2014, Jack Black #
+;# License: LGPLv3+                              Copyleft (Ɔ) 2015, Jack Black #
 ;###############################################################################
 format	ELF64
 include	'Macro.inc'
@@ -440,7 +440,7 @@ KSIZE		= 1 shl KSCALE					; Size of key (bytes)
 MINCAP		= 1 shl	PSCALE					; Min capacity of vector object
 
 ;==============================================================================;
-;       Offsets inside vector object                                            ;
+;       Offsets inside vector object                                           ;
 ;==============================================================================;
 ARRAY		= 0 * 8							; Offset of array pointer
 CAPACITY	= 1 * 8							; Offset of object capacity field
@@ -2295,12 +2295,12 @@ minsize	= 16 * KSIZE						; min array size is aceptable for Quick sort
 		mov		[s_right], right			; save "right" variable into the stack
 		jmp		.loop1
 ;---[Swap loop]----------------------------
-.swap:	xchg	key1, key2
-		mov		[array + left], key1		; array[left].key = key2
-		mov		[array + right], key2		; array[right].key = key1
-		xchg	data1, data2
-		mov		[array + left + 8], data1	; array[left].data = data2
-		mov		[array + right + 8], data2	; array[right].data = data1
+.swap:	xchg	key1, key2					; exchange key1 and key2
+		mov		[array + left], key1		; array[left].key = key1
+		mov		[array + right], key2		; array[right].key = key2
+		xchg	data1, data2				; exchange data1 and data2
+		mov		[array + left + 8], data1	; array[left].data = data1
+		mov		[array + right + 8], data2	; array[right].data = data2
 ;---[Internal loop 1]----------------------
 .loop1:	mov		left, [s_left]				; get "left" variable from the stack
 		add		left, KSIZE					; left++

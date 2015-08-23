@@ -4,7 +4,7 @@
 ;#                                                                             #
 ;#                 COMMON ROUTINES THAT ARE USEFUL FOR ARRAYS                  #
 ;#                                                                             #
-;# License: LGPLv3+                              Copyleft (Ɔ) 2014, Jack Black #
+;# License: LGPLv3+                              Copyleft (Ɔ) 2015, Jack Black #
 ;###############################################################################
 format	ELF64
 include	'Macro.inc'
@@ -412,7 +412,7 @@ public	XorV64						as	'_ZN5Array9XorVectorEPmPKmm'
 ;******************************************************************************;
 
 ;==============================================================================;
-;       Unitary operations                                                     ;
+;       Unary operations                                                       ;
 ;==============================================================================;
 
 ; Negative value
@@ -2909,7 +2909,7 @@ bmask	= bytes - 1							; elements aligning mask
 	prefetchnta	[array]						; prefetch data
 		test	size, size					; if (size == 0)
 		jz		.exit						;     then go to exit
-if scale <> 0
+if scale
 		test	array, bmask				; if elements have wrong alignment
 		jnz		.sloop						;     then skip vector code
 end if
@@ -2952,7 +2952,7 @@ end repeat
 	pblendvb	data, vector				; blend value with original data
 		movdqa	[array + index], data		; array[index] = vector
 		ret
-if scale <> 0
+if scale
 ;---[Scalar loop]--------------------------
 .sloop:	mov		[array], reg				; array[0] = reg
 		add		array, bytes				; array++
@@ -3020,7 +3020,7 @@ bmask	= bytes - 1							; elements aligning mask
 	prefetchnta	[source]					; prefetch data
 		test	size, size					; if (size == 0)
 		jz		.exit						;     then go to exit
-if scale <> 0
+if scale
 		test	source, bmask				; if elements have wrong alignment
 		jnz		.sloop						;     then skip vector code
 		test	target, bmask				; if elements have wrong alignment
@@ -3098,7 +3098,7 @@ bmask	= bytes - 1							; elements aligning mask
 	prefetchnta	[source]					; prefetch data
 		test	size, size					; if (size == 0)
 		jz		.exit						;     then go to exit
-if scale <> 0
+if scale
 		test	source, bmask				; if elements have wrong alignment
 		jnz		.sloop						;     then skip vector code
 		test	target, bmask				; if elements have wrong alignment
@@ -3616,7 +3616,7 @@ bmask	= bytes - 1							; elements aligning mask
 	prefetchnta	[array]						; prefetch data
 		test	size, size					; if (size == 0)
 		jz		.exit						;     then go to exit
-if scale <> 0
+if scale
 		test	array, bmask				; if elements have wrong alignment
 		jnz		.sloop						;     then skip vector code
 end if
@@ -3677,7 +3677,7 @@ end if
 	pblendvb	data, temp					; blend temp with original data
 		movdqa	[array + index], data		; array[index] = temp
 		ret
-if scale <> 0
+if scale
 ;---[Scalar loop]--------------------------
 .sloop:	op		[array], reg				; do operation to array[0] value
 		add		array, bytes				; array++
@@ -3720,7 +3720,7 @@ bmask	= bytes - 1							; elements aligning mask
 	prefetchnta	[target]					; prefetch data
 		test	size, size					; if (size == 0)
 		jz		.exit						;     then go to exit
-if scale <> 0
+if scale
 		test	source, bmask				; if elements have wrong alignment
 		jnz		.sloop						;     then skip vector code
 		test	target, bmask				; if elements have wrong alignment
@@ -3886,7 +3886,7 @@ XorV64:	INT_VECTOR	xor, rax, 0, q
 ;******************************************************************************;
 
 ;==============================================================================;
-;       Unitary operations                                                     ;
+;       Unary operations                                                       ;
 ;==============================================================================;
 
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
@@ -5005,7 +5005,7 @@ bmask	= bytes - 1							; elements aligning mask
 		test	size, size					; if (size == 0)
 		jz		.error						;     then go to error branch
 		mov		res, val					; result = value
-if scale <> 0
+if scale
 		test	array, bmask				; if elements have wrong alignment
 		jnz		.sloop						;     then skip vector code
 end if
@@ -5085,7 +5085,7 @@ if scale < 1
 end if
 		movq	result, res0				; return min or max value
 		ret
-if scale <> 0
+if scale
 ;---[Scalar loop]--------------------------
 .sloop:	mov		reg, [array]				; reg = array[0]
 		cmp		reg, res					; if (reg condition result)
@@ -5454,7 +5454,7 @@ bmask	= bytes - 1							; elements aligning mask
 	prefetchnta	[array]						; prefetch data
 		test	size, size					; if (size == 0)
 		jz		.ntfnd						;     return NOT_FOUND
-if scale <> 0
+if scale
 		test	array, bmask				; if elements have wrong alignment
 		jnz		.sclr						;     then skip vector code
 end if
@@ -5501,7 +5501,7 @@ end repeat
 		add		index, fmask				; index += fmask
 		shftr	index, scale				; return index
 		ret
-if scale <> 0
+if scale
 ;---[Scalar branch]------------------------
 .sclr:	xor		index, index				; index = 0
 ;---[Scalar loop]--------------------------
@@ -5554,7 +5554,7 @@ bmask	= bytes - 1							; elements aligning mask
 	prefetchnta	[array]						; prefetch data
 		test	size, size					; if (size == 0)
 		jz		.ntfnd						;     return NOT_FOUND
-if scale <> 0
+if scale
 		test	array, bmask				; if elements have wrong alignment
 		jnz		.sclr						;     then skip vector code
 end if
@@ -5601,7 +5601,7 @@ end repeat
 		js		.ntfnd						;     return NOT_FOUND
 		shftr	index, scale				; return index
 		ret
-if scale <> 0
+if scale
 ;---[Scalar branch]------------------------
 .sclr:	mov		index, size					; index = size
 ;---[Scalar loop]--------------------------
@@ -6056,7 +6056,7 @@ bmask	= bytes - 1							; elements aligning mask
 		xor		count, count				; count = 0
 		test	size, size					; if (size == 0)
 		jz		.exit						;     then go to exit
-if scale <> 0
+if scale
 		test	array, bmask				; if elements have wrong alignment
 		jnz		.sclr						;     then skip vector code
 end if
@@ -6103,7 +6103,7 @@ end repeat
 		add		count, fmask				; count += mathes
 		shftr	count, scale				; return count
 		ret
-if scale <> 0
+if scale
 ;---[Scalar branch]------------------------
 .sclr:	mov		cmask, 1					; cmask = 1
 ;---[Scalar loop]--------------------------
@@ -6338,7 +6338,7 @@ bmask	= bytes - 1							; elements aligning mask
 	prefetchnta	[array]						; prefetch data
 		test	size, size					; if (size == 0)
 		jz		.exit						;     then go to exit
-if scale <> 0
+if scale
 		test	array, bmask				; if elements have wrong alignment
 		jnz		.sloop						;     then skip vector code
 end if
@@ -6423,7 +6423,7 @@ end if
 	pblendvb	data, replace
 		movdqa	[array + index], data		; array[index] = replace (data, pattern, value)
 		ret
-if scale <> 0
+if scale
 ;---[Scalar loop]--------------------------
 .sloop:	cmp		[array], reg				; if (array[0] == pattern) {
 		jne		@f							;     array[0] = value
@@ -6512,8 +6512,8 @@ bytes	= 1 shl scale						; size of array element (bytes)
 		mov		key1, [array]				; key1 = array[0]
 		mov		key2, [ptr]					; key2 = ptr[0]
 		xchg	key1, key2					; exchange key1 and key2
-		mov		[array], key1				; array[0] = key2
-		mov		[ptr], key2					; ptr[0] = key1
+		mov		[array], key1				; array[0] = key1
+		mov		[ptr], key2					; ptr[0] = key2
 		add		array, bytes				; array++
 		sub		size, 1						; size--
 		jnz		.loop						; do while (size != 0)
@@ -6545,8 +6545,8 @@ key2	equ		r9							; temporary key #2
 		mov		key1, [array]				; key1 = array[0]
 		mov		key2, [ptr]					; key2 = ptr[0]
 		xchg	key1, key2					; exchange key1 and key2
-		mov		[array], key1				; array[0] = key2
-		mov		[ptr], key2					; ptr[0] = key1
+		mov		[array], key1				; array[0] = key1
+		mov		[ptr], key2					; ptr[0] = key2
 		add		array, 8					; array++
 		sub		size, 1						; size--
 		jnz		.loop						; do while (size != 0)
@@ -6807,6 +6807,41 @@ space	= 9 * 8								; stack size required by the procedure
 ;******************************************************************************;
 ;       Mapping functions                                                      ;
 ;******************************************************************************;
+; TODO: Удалить в релизной версии
+macro	MAP_DEL		reg1, reg2, x
+{
+;---[Parameters]---------------------------
+array	equ		rdi							; pointer to array
+size	equ		rsi							; array size (count of elements)
+;---[Internal variables]-------------------
+if x eq d
+shift	= 30								; shift value
+scale	= 2									; scale value
+else if x eq q
+shift	= 62								; shift value
+scale	= 3									; scale value
+end if
+bytes	= 1 shl scale						; size of array element (bytes)
+;------------------------------------------
+	prefetchnta	[array]						; prefetch data
+		test	size, size					; if (size == 0)
+		jz		.exit						;     then go to exit
+;---[Mapping loop]-------------------------
+.loop:	mov		reg1, [array]
+		mov		reg2, reg1
+		sar		reg2, shift
+		shr		reg2, 1
+		xor		reg1, reg2
+		mov		[array], reg1
+		add		array, bytes
+		sub		size, 1
+		jnz		.loop
+;---[End of mapping loop]------------------
+.exit:	ret
+}
+Map_flt32:		MAP_DEL	eax, edx, d
+Map_flt64:		MAP_DEL	rax, rdx, q
+
 macro	MAP		reg1, reg2, x
 {
 ;---[Parameters]---------------------------
@@ -6902,8 +6937,8 @@ end repeat
 ;---[Normal exit]--------------------------
 .exit:	ret
 }
-Map_flt32:		MAP	eax, edx, d
-Map_flt64:		MAP	rax, rdx, q
+;Map_flt32:		MAP	eax, edx, d
+;Map_flt64:		MAP	rax, rdx, q
 
 ;******************************************************************************;
 ;       Insertion sort                                                         ;
@@ -7252,9 +7287,9 @@ bytes	= 1 shl scale						; size of array element (bytes)
 		mov		median, [array+half*bytes]	; median = array[half]
 		jmp		.loop1
 ;---[Swap loop]----------------------------
-.swap:	xchg	key1, key2
-		mov		[array+left*bytes], key1	; array[left] = key2
-		mov		[array+right*bytes], key2	; array[right] = key1
+.swap:	xchg	key1, key2					; exchange key1 and key2
+		mov		[array+left*bytes], key1	; array[left] = key1
+		mov		[array+right*bytes], key2	; array[right] = key2
 ;---[Internal loop 1]----------------------
 .loop1:	add		left, 1						; left++
 		mov		key1, [array+left*bytes]	; key1 = array[left]
@@ -7388,14 +7423,14 @@ bytes	= 1 shl scale						; size of array element (bytes)
 		mov		median, [array + half*bytes]; median = array[half]
 		jmp		.loop1
 ;---[Swap loop]----------------------------
-.swap:	xchg	key1, key2
-		mov		[array + left*bytes], key1	; array[left] = key2
-		mov		[array + right*bytes], key2	; array[right] = key1
+.swap:	xchg	key1, key2					; exchange key1 and key2
+		mov		[array + left*bytes], key1	; array[left] = key1
+		mov		[array + right*bytes], key2	; array[right] = key2
 		mov		ptr1, [ptr + left * 8]		; ptr1 = ptr[left]
 		mov		ptr2, [ptr + right * 8]		; ptr2 = ptr[right]
-		xchg	ptr1, ptr2
-		mov		[ptr + left * 8], ptr1		; ptr[left] = ptr2
-		mov		[ptr + right * 8], ptr2		; ptr[right] = ptr1
+		xchg	ptr1, ptr2					; exchange ptr1 and ptr2
+		mov		[ptr + left * 8], ptr1		; ptr[left] = ptr1
+		mov		[ptr + right * 8], ptr2		; ptr[right] = ptr2
 ;---[Internal loop 1]----------------------
 .loop1:	add		left, 1						; left++
 		mov		key1, [array + left*bytes]	; key1 = array[left]
@@ -7550,9 +7585,9 @@ minsize	= 32								; min array size is aceptable for Quick sort
 		mov		[s_right], right			; save "right" variable into the stack
 		jmp		.loop1
 ;---[Swap loop]----------------------------
-.swap:	xchg	key1, key2
-		mov		[array + left * 8], key1	; array[left] = key2
-		mov		[array + right * 8], key2	; array[right] = key1
+.swap:	xchg	key1, key2					; exchange key1 and key2
+		mov		[array + left * 8], key1	; array[left] = key1
+		mov		[array + right * 8], key2	; array[right] = key2
 ;---[Internal loop 1]----------------------
 .loop1:	mov		left, [s_left]				; get "left" variable from the stack
 		add		left, 1						; left++
@@ -8479,6 +8514,8 @@ StageKey16:	SORTSTAGE_KEY	ax, 1
 StageKey32:	SORTSTAGE_KEY	eax, 2
 StageKey64:	SORTSTAGE_KEY	rax, 3
 
+public	StageKey32	as	'_StageKey32'
+
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 ;       Radix sort core                                                        ;
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
@@ -8501,16 +8538,16 @@ s_tptr	equ		stack + stat_sz + 3 * 8		; stack position of "tptr" variable
 s_size	equ		stack + stat_sz + 4 * 8		; stack position of "size" variable
 if scale = 0
 Stat	= Stat8								; stat function
-Stage	= Stage8							; stage function
+Stage	= StageKey8							; stage function
 else if scale = 1
 Stat	= Stat16							; stat function
-Stage	= Stage16							; stage function
+Stage	= StageKey16						; stage function
 else if scale = 2
 Stat	= Stat32							; stat function
-Stage	= Stage32							; stage function
+Stage	= StageKey32						; stage function
 else if scale = 3
 Stat	= Stat64							; stat function
-Stage	= Stage64							; stage function
+Stage	= StageKey64						; stage function
 end if
 space	= stat_sz + 5 * 8					; stack size required by the procedure
 ;------------------------------------------
@@ -9254,7 +9291,7 @@ bias	= 1 shl (shift)						; bias to map unsigned int numbers to signed
 	prefetchnta	[array]						; prefetch data
 		sub		size, 1						; if (--size <= 0)
 		jbe		.ntfnd						;     return NOT_FOUND
-if scale <> 0
+if scale
 		test	array, bmask				; if elements have wrong alignment
 		jnz		.sclr						;     then skip vector code
 end if
@@ -9332,7 +9369,7 @@ end repeat
 		shftr	index, scale
 		add		index, 1					; return index + 1
 		ret
-if scale <> 0
+if scale
 ;---[Scalar branch]------------------------
 .sclr:	xor		index, index				; index = 0
 ;---[Scalar loop]--------------------------
@@ -9483,7 +9520,7 @@ bmask	= bytes - 1							; elements aligning mask
 	prefetchnta	[array]						; prefetch data
 		sub		size, 1						; if (--size <= 0)
 		jbe		.ntfnd						;     return NOT_FOUND
-if scale <> 0
+if scale
 		test	array, bmask				; if elements have wrong alignment
 		jnz		.sclr						;     then skip vector code
 end if
@@ -9555,7 +9592,7 @@ end repeat
 		add		index, fmask				; index += fmask
 		shftr	index, scale				; return index
 		ret
-if scale <> 0
+if scale
 ;---[Scalar branch]------------------------
 .sclr:	xor		index, index				; index = 0
 ;---[Scalar loop]--------------------------
@@ -9722,7 +9759,7 @@ bmask	= bytes - 1							; elements aligning mask
 		test	size, size					; if (size == 0)
 		jz		.eql						;     then go to equal branch
 		xor		index, index				; index = 0
-if scale <> 0
+if scale
 		test	array2, bmask				; if elements have wrong alignment
 		jnz		.sloop						;     then skip vector code
 		test	array1, bmask				; if elements have wrong alignment

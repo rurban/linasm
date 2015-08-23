@@ -4,7 +4,7 @@
 #                                                                              #
 #                  COMMON ROUTINES THAT ARE USEFUL FOR ARRAYS                  #
 #                                                                              #
-# License: LGPLv3+                               Copyleft (Ɔ) 2014, Jack Black #
+# License: LGPLv3+                               Copyleft (Ɔ) 2015, Jack Black #
 ################################################################################
 */
 # pragma	once
@@ -300,7 +300,7 @@ static void XorVector (size_t target[], const size_t source[], size_t size);
 //****************************************************************************//
 
 //============================================================================//
-//      Unitary operations                                                    //
+//      Unary operations                                                      //
 //============================================================================//
 
 // Negative value
@@ -2216,7 +2216,7 @@ void Array_XorVector_size (size_t target[], const size_t source[], size_t size);
 //****************************************************************************//
 
 //============================================================================//
-//      Unitary operations                                                    //
+//      Unary operations                                                      //
 //============================================================================//
 
 // Negative value

@@ -4,7 +4,7 @@
 ;#                                                                             #
 ;#               DOUBLY LINKED LIST AND CIRCULAR LIST DATA TYPES               #
 ;#                                                                             #
-;# License: LGPLv3+                              Copyleft (Ɔ) 2014, Jack Black #
+;# License: LGPLv3+                              Copyleft (Ɔ) 2015, Jack Black #
 ;###############################################################################
 format	ELF64
 include	'Macro.inc'

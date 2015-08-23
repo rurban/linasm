@@ -4,7 +4,7 @@
 ;#                                                                             #
 ;#                            SAFE STRING FUNCTIONS                            #
 ;#                                                                             #
-;# License: LGPLv3+                              Copyleft (Ɔ) 2014, Jack Black #
+;# License: LGPLv3+                              Copyleft (Ɔ) 2015, Jack Black #
 ;###############################################################################
 format	ELF64
 include	'Macro.inc'
@@ -368,7 +368,7 @@ bytes	= 1 shl scale						; size of array element (bytes)
 bmask	= bytes - 1							; elements aligning mask
 ;------------------------------------------
 		xor		index, index				; index = 0
-if scale <> 0
+if scale
 		test	string, bmask				; if elements have wrong alignment
 		jnz		.sloop						;     then skip vector code
 end if
@@ -403,7 +403,7 @@ end repeat
 		add		index, emask				; index += emask
 		shftr	index, scale				; return index
 		ret
-if scale <> 0
+if scale
 ;---[Scalar loop]--------------------------
 .sloop:	mov		char, [string]				; char = string[0]
 		test	char, char					; if (char == eol)
@@ -458,7 +458,7 @@ bmask	= bytes - 1							; elements aligning mask
 		mov		ptr2, source				; ptr2 = source
 		mov		ptr1, target				; ptr1 = target
 		xor		index, index				; index = 0
-if scale <> 0
+if scale
 		test	source, bmask				; if elements have wrong alignment
 		jnz		.sloop						;     then skip vector code
 end if
@@ -535,7 +535,7 @@ end repeat
 		movdqu	[target + index - VSIZE + 1], sdata0
 		shftr	index, scale				; return index
 		ret
-if scale <> 0
+if scale
 ;---[Scalar loop]--------------------------
 .sloop:	mov		char, [ptr2]
 		mov		[ptr1], char				; ptr1[0] = ptr2[0]
@@ -597,7 +597,7 @@ bmask	= bytes - 1							; elements aligning mask
 		mov		ptr2, source				; ptr2 = source
 		mov		ptr1, target				; ptr1 = target
 		xor		index, index				; index = 0
-if scale <> 0
+if scale
 		test	source, bmask				; if elements have wrong alignment
 		jnz		.sloop						;     then skip vector code
 end if
@@ -675,7 +675,7 @@ end repeat
 		movdqu	[target + index - VSIZE], sdata0
 		shftr	index, scale				; return index
 		ret
-if scale <> 0
+if scale
 ;---[Scalar loop]--------------------------
 .sloop:	mov		char, [ptr2]
 		mov		[ptr1], char				; ptr1[0] = ptr2[0]
@@ -851,7 +851,7 @@ bmask	= bytes - 1							; elements aligning mask
 ;------------------------------------------
 		cmp		string1, string2			; if (string1 == string2)
 		je		.equal						;     then go to equal branch
-if scale <> 0
+if scale
 		test	string1, bmask				; if elements have wrong alignment
 		jnz		.sloop						;     then skip vector code
 		test	string2, bmask				; if elements have wrong alignment
@@ -953,7 +953,7 @@ end repeat
 		jnz		.tloop						; do while (size != 0)
 ;---[End of tail loop]---------------------
 		jmp		.start						; compare another memory block
-if scale <> 0
+if scale
 ;---[Scalar loop]--------------------------
 .sloop:	mov		char, [string1]
 		cmp		char, [string2]				; if (string1[0] != string2[0])
@@ -1012,7 +1012,7 @@ bmask	= bytes - 1							; elements aligning mask
 		je		.equal						;     then go to equal branch
 		test	size, size					; if (size == 0)
 		jz		.skip						;     then skip following code
-if scale <> 0
+if scale
 		test	string1, bmask				; if elements have wrong alignment
 		jnz		.sloop						;     then skip vector code
 		test	string2, bmask				; if elements have wrong alignment
@@ -1162,7 +1162,7 @@ bmask	= bytes - 1							; elements aligning mask
 		test	symbol, symbol				; if (symbol == eol)
 		jz		.exit						;     then go to exit
 		xor		index, index				; index = 0
-if scale <> 0
+if scale
 		test	string, bmask				; if elements have wrong alignment
 		jnz		.skip						;     then skip vector code
 end if
@@ -1222,7 +1222,7 @@ end repeat
 		shftr	index, scale
 		mov		result, index				; result = index
 		ret									; return result
-if scale <> 0
+if scale
 ;---[Scalar loop]--------------------------
 .sloop:	cmp		char, symbol				; if (char == symbol)
 		cmove	result, index				;     result = index
@@ -1276,7 +1276,7 @@ bmask	= bytes - 1							; elements aligning mask
 		test	symbol, symbol				; if (symbol == eol)
 		jz		.exit						;     then go to exit
 		xor		index, index				; index = 0
-if scale <> 0
+if scale
 		test	string, bmask				; if elements have wrong alignment
 		jnz		.skip						;     then skip vector code
 end if
@@ -1365,7 +1365,7 @@ end if
 		shftr	index, scale
 		mov		result, index				; result = index
 		jmp		back						; go back into the searching loop
-if scale <> 0
+if scale
 ;---[Scalar loop]--------------------------
 .sloop:	cmp		char, symbol				; if (char == symbol)
 		cmove	result, index				;     result = index
@@ -1435,7 +1435,7 @@ bmask	= bytes - 1							; elements aligning mask
 		test	symbol, symbol				; if (symbol == eol)
 		jz		.exit						;     then go to exit
 		xor		index, index				; index = 0
-if scale <> 0
+if scale
 		test	string, bmask				; if elements have wrong alignment
 		jnz		.skip						;     then skip vector code
 end if
@@ -1535,7 +1535,7 @@ end if
 		add		size, space					; size += space
 		add		stack, size					; restoring back the stack pointer
 		ret									; return result
-if scale <> 0
+if scale
 ;---[Scalar loop]--------------------------
 .sloop:	mov		ptr, symbols				; ptr = symbols
 		mov		symbol, [ptr]				; symbol = ptr[0]
@@ -1610,7 +1610,7 @@ bmask	= bytes - 1							; elements aligning mask
 		test	symbol, symbol				; if (symbol == eol)
 		jz		.exit						;     then go to exit
 		xor		index, index				; index = 0
-if scale <> 0
+if scale
 		test	string, bmask				; if elements have wrong alignment
 		jnz		.skip						;     then skip vector code
 end if
@@ -1728,7 +1728,7 @@ end if
 		shftr	index, scale
 		mov		result, index				; result = index
 		jmp		.back1						; go back into the searching loop
-if scale <> 0
+if scale
 ;---[Scalar loop]--------------------------
 .sloop:	mov		ptr, symbols				; ptr = symbols
 		mov		symbol, [ptr]				; symbol = ptr[0]
@@ -1962,7 +1962,7 @@ bmask	= bytes - 1							; elements aligning mask
 		jz		.error						;     then go to error branch
 		xor		count, count				; count = 0
 		mov		cmask, 1					; cmask = 1
-if scale <> 0
+if scale
 		test	string, bmask				; if elements have wrong alignment
 		jnz		.skip						;     then skip vector code
 end if
@@ -2014,7 +2014,7 @@ end repeat
 		add		count, fmask				; count += mathes
 		shftr	count, scale				; return count
 		ret
-if scale <> 0
+if scale
 ;---[Scalar loop]--------------------------
 .sloop:	xor		fmask, fmask				; fmask = 0
 		cmp		char, symbol				; if (char == symbol) {
@@ -2082,7 +2082,7 @@ bmask	= bytes - 1							; elements aligning mask
 		jz		.error						;     then go to error branch
 		xor		count, count				; count = 0
 		mov		cmask, 1					; cmask = 1
-if scale <> 0
+if scale
 		test	string, bmask				; if elements have wrong alignment
 		jnz		.skip						;     then skip vector code
 end if
@@ -2169,7 +2169,7 @@ end if
 		add		count, fmask				; count += mathes
 		shftr	count, scale				; return count
 		ret
-if scale <> 0
+if scale
 ;---[Scalar loop]--------------------------
 .sloop:	mov		ptr, symbols				; ptr = symbols
 		mov		symbol, [ptr]				; symbol = ptr[0]
@@ -2237,7 +2237,7 @@ bmask	= bytes - 1							; elements aligning mask
 ;------------------------------------------
 		test	patt, patt					; if (patt == eol)
 		jz		.exit						;     then go to exit
-if scale <> 0
+if scale
 		test	string, bmask				; if elements have wrong alignment
 		jnz		.sloop						;     then skip vector code
 end if
@@ -2333,7 +2333,7 @@ end if
 	pblendvb	echeck, replace
 		movdqa	[string + index], echeck	; string[index] = replace (echeck, pattern, value)
 		ret
-if scale <> 0
+if scale
 ;---[Scalar loop]--------------------------
 .sloop:	mov		char, [string]				; char = string[0]
 		cmp		char, patt					; if (char == patt) {
@@ -2495,14 +2495,14 @@ minsize	= 32								; min array size is aceptable for Quick sort
 		mov		[s_right], right			; save "right" variable into the stack
 		jmp		.loop1
 ;---[Swap loop]----------------------------
-.swap:	xchg	key1, key2
-		mov		[array + left * 8], key1	; array[left] = key2
-		mov		[array + right * 8], key2	; array[right] = key1
+.swap:	xchg	key1, key2					; exchange key1 and key2
+		mov		[array + left * 8], key1	; array[left] = key1
+		mov		[array + right * 8], key2	; array[right] = key2
 		mov		ptr1, [ptr + left * 8]		; ptr1 = ptr[left]
 		mov		ptr2, [ptr + right * 8]		; ptr1 = ptr[left]
-		xchg	ptr1, ptr2
-		mov		[ptr + left * 8], ptr1		; ptr[left] = ptr2
-		mov		[ptr + right * 8], ptr2		; ptr[right] = ptr1
+		xchg	ptr1, ptr2					; exchange ptr1 and ptr2
+		mov		[ptr + left * 8], ptr1		; ptr[left] = ptr1
+		mov		[ptr + right * 8], ptr2		; ptr[right] = ptr2
 ;---[Internal loop 1]----------------------
 .loop1:	mov		left, [s_left]				; get "left" variable from the stack
 		add		left, 1						; left++
