@@ -97,23 +97,26 @@ $(lib): $(objects)
 %.o: %.asm
 	$(AS) $(ASFLAGS) $< $@
 
-Accumulator.o:	Macro.inc Syscall.inc
-Array.o:		Macro.inc
-Btree.o:		Macro.inc Syscall.inc
-Deque.o:		Macro.inc Syscall.inc
-FHT.o:			Macro.inc
-Filter.o:		Macro.inc
-Hash.o:			Macro.inc Syscall.inc
-Heap.o:			Macro.inc Syscall.inc
-List.o:			Macro.inc Syscall.inc
-Math.o:			Macro.inc
-Numbers.o:		Macro.inc
-Pool.o:			Macro.inc Syscall.inc
-Statistics.o:	Macro.inc
-String.o:		Macro.inc
-Time.o:			Syscall.inc Errno.inc
-Vector.o:		Macro.inc Syscall.inc
-Window.o:		Macro.inc
+Accumulator.o:		Macro.inc Syscall.inc
+Approximation.o:	Macro.inc
+Array.o:			Macro.inc
+Btree.o:			Macro.inc Syscall.inc
+Deque.o:			Macro.inc Syscall.inc
+FHT.o:				Macro.inc
+Filter.o:			Macro.inc
+Hash.o:				Macro.inc Syscall.inc
+Heap.o:				Macro.inc Syscall.inc
+List.o:				Macro.inc Syscall.inc
+Math.o:				Macro.inc
+Matrix.o:			Macro.inc
+Numbers.o:			Macro.inc
+Pool.o:				Macro.inc Syscall.inc
+Statistics.o:		Macro.inc
+String.o:			Macro.inc
+Time.o:				Errno.inc Syscall.inc
+Vector.o:			Macro.inc Syscall.inc
+VectorXD.o:			Macro.inc
+Window.o:			Macro.inc
 
 install: $(lib) $(includes)
 	$(INSTALL_DATA) -Dp $(INSTALLFLAGS) $(lib) $(DESTDIR)$(libdir)/$(vlib)
