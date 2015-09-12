@@ -6902,8 +6902,8 @@ end repeat
 ;---[Normal exit]--------------------------
 .exit:	ret
 }
-;Map_flt32:		MAP	eax, edx, d
-;Map_flt64:		MAP	rax, rdx, q
+Map_flt32:		MAP	eax, edx, d
+Map_flt64:		MAP	rax, rdx, q
 
 ;******************************************************************************;
 ;       Insertion sort                                                         ;
