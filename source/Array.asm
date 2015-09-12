@@ -6807,41 +6807,6 @@ space	= 9 * 8								; stack size required by the procedure
 ;******************************************************************************;
 ;       Mapping functions                                                      ;
 ;******************************************************************************;
-; TODO: Удалить в релизной версии
-macro	MAP_DEL		reg1, reg2, x
-{
-;---[Parameters]---------------------------
-array	equ		rdi							; pointer to array
-size	equ		rsi							; array size (count of elements)
-;---[Internal variables]-------------------
-if x eq d
-shift	= 30								; shift value
-scale	= 2									; scale value
-else if x eq q
-shift	= 62								; shift value
-scale	= 3									; scale value
-end if
-bytes	= 1 shl scale						; size of array element (bytes)
-;------------------------------------------
-	prefetchnta	[array]						; prefetch data
-		test	size, size					; if (size == 0)
-		jz		.exit						;     then go to exit
-;---[Mapping loop]-------------------------
-.loop:	mov		reg1, [array]
-		mov		reg2, reg1
-		sar		reg2, shift
-		shr		reg2, 1
-		xor		reg1, reg2
-		mov		[array], reg1
-		add		array, bytes
-		sub		size, 1
-		jnz		.loop
-;---[End of mapping loop]------------------
-.exit:	ret
-}
-Map_flt32:		MAP_DEL	eax, edx, d
-Map_flt64:		MAP_DEL	rax, rdx, q
-
 macro	MAP		reg1, reg2, x
 {
 ;---[Parameters]---------------------------
