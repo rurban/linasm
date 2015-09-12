@@ -7,6 +7,33 @@
 ################################################################################
 
 #******************************************************************************#
+#       Release 1.11 (stable) [2015-09-13]                                     #
+#******************************************************************************#
+
+New version of LinAsm library is completely ready after one year of testing and
+developing. Version 1.11 fixes few bugs were found after conversion library to
+shared object file and adds new modules/libraries to fast mathematical
+operations.
+
+The bugs where fixed:
+    * Time library: Fixed negative year extraction error in ExtractDate function
+    * Filter library: Fixed broken pointer to Array::Mul function
+    * String library: Fixed pointer error in Copy functions
+    * Array and Vector library: Fixed pointer error in QuickSort and
+      QuickSortKey functions
+
+New libraries are added in this release:
+    * Approximation - library for approximation of empirical data by well known
+      math functions
+    * Complex - fast core functions to operate with complex numbers
+    * FHT - Fast Hartley transformation (analog of fast Fourier transformation)
+    * Matrix - Typical matrix operations and solvers for linear systems
+    * 2D vector - primitives to work with two dimensional vectors
+    * 3D vector - primitives to work with three dimensional vectors
+
+More detailed information about LinAsm changes see into ChangeLog file.
+
+#******************************************************************************#
 #       Release 1.1 (stable) [2014-09-05]                                      #
 #******************************************************************************#
 
@@ -16,11 +43,11 @@ into Math block.
 
 Here is the list of changed were made:
     * Array library: Fixed compilation error in MAP macro.
-    * Math.asm library: Added functions Cancel, AbsError, RelError, SinH, CosH,
+    * Math library: Added functions Cancel, AbsError, RelError, SinH, CosH,
       TanH, ArcSinH, ArcCosH, ArcTanH.
-    * Math.asm library: Improved functions Exp2, Exp2m1, Exp10, Exp10m1, Exp,
-      Expm1 and trigonometric functions.
-    * Math.asm library: Improved speed of Log functions.
+    * Math library: Improved functions Exp2, Exp2m1, Exp10, Exp10m1, Exp, Expm1
+      and trigonometric functions.
+    * Math library: Improved speed of Log functions.
 
 #******************************************************************************#
 #       Release 1.03 (stable) [2014-08-03]                                     #

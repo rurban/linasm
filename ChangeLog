@@ -1,4 +1,28 @@
 +==============================================================================+
+|   2015-09-13  Release 1.11 (stable)                                          |
++==============================================================================+
+
+Bug fixes:
+	* Time.asm: Fixed negative year extraction error in ExtractDate function
+	* Filter.asm: Fixed broken pointer to Arra::Mul function
+	* String.asm: Fixed pointer error in Copy functions
+	* Array.asm: Fixed pointer error in QuickSort functions
+	* Vector.asm: Fixed pointer error in QuickSortKey functions
+
+New features:
+	* Added Vector2D and Vector3D libraries
+	* Added Complex library
+	* Added FHT library
+	* Added Matrix library
+	* Added Approximation library
+	* Math.asm: Add funtions Inverse InverseSqr and Sqr
+
+Changes in behavior:
+	* Math.asm: Function Hypot is split onto Hypot2D and Hypot3D
+	* Array.asm: Changed vector and scalar function names
+	* Math.asm: Changed barier value into inverse hyperbolic functions
+
++==============================================================================+
 |   2014-09-05  Release 1.1 (stable)                                           |
 +==============================================================================+
 
