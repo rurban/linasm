@@ -1037,7 +1037,7 @@ Var		= Variance_flt64					; variance function
 end if
 ;------------------------------------------
 		call	Var							; result = Variance (array, size, mean)
-		sqrts#x	result, result				; result = sqrt (res)
+		sqrts#x	result, result				; result = Sqrt (res)
 		ret
 }
 StdDeviation_flt32:	STD_DEV	s
@@ -1263,7 +1263,7 @@ bmask	= bytes - 1							; elements aligning mask
 	cvtsi2s#x	nsize, count				; nsize = size
 		sqrts#x	sum1, sum1
 		divs#x	nsize, sum2
-		muls#x	nsize, sum1					; nsize = size * sqrt (size - 1) / (size - 2)
+		muls#x	nsize, sum1					; nsize = size * Sqrt (size - 1) / (size - 2)
 		movap#x	vector, mean				; vector = mean
 		xorp#x	sum0, sum0					; sum0 = 0
 		xorp#x	sum1, sum1					; sum1 = 0
@@ -1372,7 +1372,7 @@ bmask	= bytes - 1							; elements aligning mask
 		muls#x	sum0, temp0
 		divs#x	sum1, sum0
 		muls#x	sum1, nsize
-		movap#x	result, sum1				; return nsize * sum1 / (sum0 * sqrt (sum0))
+		movap#x	result, sum1				; return nsize * sum1 / (sum0 * Sqrt (sum0))
 		ret
 ;---[Scalar loop]--------------------------
 .sloop:	movs#x	temp0, [array]				; temp0 = array[0]
@@ -1390,7 +1390,7 @@ bmask	= bytes - 1							; elements aligning mask
 		muls#x	sum0, temp0
 		divs#x	sum1, sum0
 		muls#x	sum1, nsize
-		movap#x	result, sum1				; return nsize * sum1 / (sum0 * sqrt (sum0))
+		movap#x	result, sum1				; return nsize * sum1 / (sum0 * Sqrt (sum0))
 		ret
 ;---[Error branch]-------------------------
 .error:	initreg	result, index, nanval		; return NaN
@@ -1900,7 +1900,7 @@ end repeat
 		muls#x	sum1, sum2
 		sqrts#x	sum1, sum1
 		divs#x	sum0, sum1
-		movap#x	result, sum0				; return sum0 / sqrt (sum1 * sum2)
+		movap#x	result, sum0				; return sum0 / Sqrt (sum1 * sum2)
 		ret
 ;---[Scalar loop]--------------------------
 .sloop:	movs#x	temp2, [array2]				; temp2 = array2[0]
@@ -1922,7 +1922,7 @@ end repeat
 		muls#x	sum1, sum2
 		sqrts#x	sum1, sum1
 		divs#x	sum0, sum1
-		movap#x	result, sum0				; return sum0 / sqrt (sum1 * sum2)
+		movap#x	result, sum0				; return sum0 / Sqrt (sum1 * sum2)
 		ret
 ;---[Error branch]-------------------------
 .error:	initreg	result, index, nanval		; return NaN

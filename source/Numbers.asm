@@ -154,7 +154,7 @@ section	'.text'		executable align 16
 macro	SKIP_WHITE
 {
 local	.loop
-		lea		ptr, [string - 1]			; ptr = string -1
+		lea		ptr, [string - 1]			; ptr = string - 1
 ;---[Skipping loop]------------------------
 .loop:	add		ptr, 1						; ptr++
 		movzx	temp, byte [ptr]			; temp = ptr[0]

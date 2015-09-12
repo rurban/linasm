@@ -2972,13 +2972,13 @@ value	equ		xmm0						; register which holds value
 ;---[Internal variables]-------------------
 reg		equ		rdx							; register which holds value
 if x eq s
-Func	= Init_int32						; function to call
+Init	= Init_int32						; function to call
 else if x eq d
-Func	= Init_int64						; function to call
+Init	= Init_int64						; function to call
 end if
 ;------------------------------------------
 		movq	reg, value					; load mask
-		jmp		Func						; call Func (array, size, value)
+		jmp		Init						; call Init (array, size, value)
 }
 
 ; Integer types
@@ -3812,21 +3812,21 @@ array	equ		rdi							; pointer to array
 size	equ		rsi							; array size (count of elements)
 ;---[Internal variables]-------------------
 if x eq b
-Func	= XorS8								; function to call
+XorFunc	= XorS8								; function to call
 mask	= 0xFF								; mask to apply to all elements
 else if x eq w
-Func	= XorS16							; function to call
+XorFunc	= XorS16							; function to call
 mask	= 0xFFFF							; mask to apply to all elements
 else if x eq d
-Func	= XorS32							; function to call
+XorFunc	= XorS32							; function to call
 mask	= 0xFFFFFFFF						; mask to apply to all elements
 else if x eq q
-Func	= XorS64							; function to call
+XorFunc	= XorS64							; function to call
 mask	= 0xFFFFFFFFFFFFFFFF				; mask to apply to all elements
 end if
 ;------------------------------------------
 		mov		reg, mask					; load mask
-		jmp		Func						; call Func (array, size)
+		jmp		XorFunc						; call XorFunc (array, size)
 }
 Not8:	NOT		dl, b
 Not16:	NOT		dx, w
@@ -9133,7 +9133,7 @@ MergeDsc:	MERGE	ge
 ;******************************************************************************;
 ;       Comparison of arrays                                                   ;
 ;******************************************************************************;
-macro	COMPARE	Func, value, c1, c2, scale
+macro	COMPARE	DiffFunc, value, c1, c2, scale
 {
 ;---[Parameters]---------------------------
 array1	equ		rdi							; pointer to first array
@@ -9153,7 +9153,7 @@ space	= 3 * 8								; stack size required by the procedure
 		je		.equal						;     then go to equal branch
 		mov		[s_arr1], array1			; save "array1" variable into the stack
 		mov		[s_arr2], array2			; save "array2" variable into the stack
-		call	Func						; result = Func (array1, array2, size)
+		call	DiffFunc					; result = DiffFunc (array1, array2, size)
 		cmp		result, NOT_FOUND			; if (result == NOT_FOUND)
 		je		.exit						;     return 0
 		mov		array1, [s_arr1]			; get "array1" variable from the stack

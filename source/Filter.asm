@@ -611,7 +611,7 @@ BandStop_flt64:	BAND	1, d
 ;******************************************************************************;
 ;       Hilbert/Differential filter                                            ;
 ;******************************************************************************;
-macro	FILTER Func, x
+macro	FILTER	FilterCore, x
 {
 ;---[Parameters]---------------------------
 filter	equ		rdi							; pointer to filter impulse array
@@ -657,7 +657,7 @@ space	= 3 * 8								; stack size required by the procedure
 		mov		[s_filt], filter			; save "filter" variable into the stack
 		mov		[s_size], size				; save "size" variable into the stack
 		mov		[s_win], window				; save "window" variable into the stack
-		call	Func						; call Func (filter, size, lfreq, hfreq)
+		call	FilterCore					; call FilterCore (filter, size, lfreq, hfreq)
 ;---[Apply window function]----------------
 		mov		window, [s_win]				; get "window" variable from the stack
 		test	window, window				; if (window != WIN_NONE)

@@ -175,18 +175,6 @@ static sint64_t PopCount (sint64_t value);
 //****************************************************************************//
 
 //============================================================================//
-//      Inverse value                                                         //
-//============================================================================//
-static flt32_t Inverse (flt32_t value);
-static flt64_t Inverse (flt64_t value);
-
-//============================================================================//
-//      Inverse square value                                                  //
-//============================================================================//
-static flt32_t InverseSquare (flt32_t value);
-static flt64_t InverseSquare (flt64_t value);
-
-//============================================================================//
 //      Absolute value                                                        //
 //============================================================================//
 
@@ -243,7 +231,7 @@ static flt32_t Sqrt (flt32_t value);
 static flt64_t Sqrt (flt64_t value);
 
 //============================================================================//
-//      Square number                                                         //
+//      Square value                                                          //
 //============================================================================//
 
 // Unsigned integer types
@@ -261,6 +249,44 @@ static sint64_t Sqr (sint64_t value);
 // Floating-point types
 static flt32_t Sqr (flt32_t value);
 static flt64_t Sqr (flt64_t value);
+
+//============================================================================//
+//      Cube value                                                            //
+//============================================================================//
+
+// Unsigned integer types
+static uint8_t Cube (uint8_t value);
+static uint16_t Cube (uint16_t value);
+static uint32_t Cube (uint32_t value);
+static uint64_t Cube (uint64_t value);
+
+// Signed integer types
+static sint8_t Cube (sint8_t value);
+static sint16_t Cube (sint16_t value);
+static sint32_t Cube (sint32_t value);
+static sint64_t Cube (sint64_t value);
+
+// Floating-point types
+static flt32_t Cube (flt32_t value);
+static flt64_t Cube (flt64_t value);
+
+//============================================================================//
+//      Inverse value                                                         //
+//============================================================================//
+static flt32_t InverseValue (flt32_t value);
+static flt64_t InverseValue (flt64_t value);
+
+//============================================================================//
+//      Inverse square value                                                  //
+//============================================================================//
+static flt32_t InverseSquare (flt32_t value);
+static flt64_t InverseSquare (flt64_t value);
+
+//============================================================================//
+//      Inverse cube value                                                    //
+//============================================================================//
+static flt32_t InverseCube (flt32_t value);
+static flt64_t InverseCube (flt64_t value);
 
 //============================================================================//
 //      Three-state comparison                                                //
@@ -584,8 +610,16 @@ static flt64_t LogBp1 (flt64_t base, flt64_t value);
 //============================================================================//
 //      Hypotenuse                                                            //
 //============================================================================//
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//      2 dimensional hypotenuse                                              //
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 static flt32_t Hypot2D (flt32_t cath1, flt32_t cath2);
 static flt64_t Hypot2D (flt64_t cath1, flt64_t cath2);
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//      3 dimensional hypotenuse                                              //
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 static flt32_t Hypot3D (flt32_t cath1, flt32_t cath2, flt32_t cath3);
 static flt64_t Hypot3D (flt64_t cath1, flt64_t cath2, flt64_t cath3);
 
@@ -878,18 +912,6 @@ sint64_t Math_PopCount_sint64 (sint64_t value);
 //****************************************************************************//
 
 //============================================================================//
-//      Inverse value                                                         //
-//============================================================================//
-flt32_t Math_Inverse_flt32 (flt32_t value);
-flt64_t Math_Inverse_flt64 (flt64_t value);
-
-//============================================================================//
-//      Inverse square value                                                  //
-//============================================================================//
-flt32_t Math_InverseSquare_flt32 (flt32_t value);
-flt64_t Math_InverseSquare_flt64 (flt64_t value);
-
-//============================================================================//
 //      Absolute value                                                        //
 //============================================================================//
 
@@ -946,7 +968,7 @@ flt32_t Math_Sqrt_flt32 (flt32_t value);
 flt64_t Math_Sqrt_flt64 (flt64_t value);
 
 //============================================================================//
-//      Square number                                                         //
+//      Square value                                                          //
 //============================================================================//
 
 // Unsigned integer types
@@ -964,6 +986,44 @@ sint64_t Math_Sqr_sint64 (sint64_t value);
 // Floating-point types
 flt32_t Math_Sqr_flt32 (flt32_t value);
 flt64_t Math_Sqr_flt64 (flt64_t value);
+
+//============================================================================//
+//      Cube value                                                            //
+//============================================================================//
+
+// Unsigned integer types
+uint8_t Math_Cube_uint8 (uint8_t value);
+uint16_t Math_Cube_uint16 (uint16_t value);
+uint32_t Math_Cube_uint32 (uint32_t value);
+uint64_t Math_Cube_uint64 (uint64_t value);
+
+// Signed integer types
+sint8_t Math_Cube_sint8 (sint8_t value);
+sint16_t Math_Cube_sint16 (sint16_t value);
+sint32_t Math_Cube_sint32 (sint32_t value);
+sint64_t Math_Cube_sint64 (sint64_t value);
+
+// Floating-point types
+flt32_t Math_Cube_flt32 (flt32_t value);
+flt64_t Math_Cube_flt64 (flt64_t value);
+
+//============================================================================//
+//      Inverse value                                                         //
+//============================================================================//
+flt32_t Math_InverseValue_flt32 (flt32_t value);
+flt64_t Math_InverseValue_flt64 (flt64_t value);
+
+//============================================================================//
+//      Inverse square value                                                  //
+//============================================================================//
+flt32_t Math_InverseSquare_flt32 (flt32_t value);
+flt64_t Math_InverseSquare_flt64 (flt64_t value);
+
+//============================================================================//
+//      Inverse cube value                                                    //
+//============================================================================//
+flt32_t Math_InverseCube_flt32 (flt32_t value);
+flt64_t Math_InverseCube_flt64 (flt64_t value);
 
 //============================================================================//
 //      Three-state comparison                                                //
@@ -1282,8 +1342,16 @@ flt64_t Math_LogBp1_flt64 (flt64_t base, flt64_t value);
 //============================================================================//
 //      Hypotenuse                                                            //
 //============================================================================//
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//      2 dimensional hypotenuse                                              //
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 flt32_t Math_Hypot2D_flt32 (flt32_t cath1, flt32_t cath2);
 flt64_t Math_Hypot2D_flt64 (flt64_t cath1, flt64_t cath2);
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//      3 dimensional hypotenuse                                              //
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 flt32_t Math_Hypot3D_flt32 (flt32_t cath1, flt32_t cath2, flt32_t cath3);
 flt64_t Math_Hypot3D_flt64 (flt64_t cath1, flt64_t cath2, flt64_t cath3);
 

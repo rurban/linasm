@@ -198,22 +198,6 @@ public	PopCount64				as	'_ZN4Math8PopCountEx'
 ;******************************************************************************;
 
 ;==============================================================================;
-;       Inverse value                                                          ;
-;==============================================================================;
-public	Inverse_flt32			as	'Math_Inverse_flt32'
-public	Inverse_flt64			as	'Math_Inverse_flt64'
-public	Inverse_flt32			as	'_ZN4Math7InverseEf'
-public	Inverse_flt64			as	'_ZN4Math7InverseEd'
-
-;==============================================================================;
-;       Inverse square value                                                   ;
-;==============================================================================;
-public	InverseSquare_flt32		as	'Math_InverseSquare_flt32'
-public	InverseSquare_flt64		as	'Math_InverseSquare_flt64'
-public	InverseSquare_flt32		as	'_ZN4Math13InverseSquareEf'
-public	InverseSquare_flt64		as	'_ZN4Math13InverseSquareEd'
-
-;==============================================================================;
 ;       Absolute value                                                         ;
 ;==============================================================================;
 
@@ -294,7 +278,7 @@ public	Sqrt_flt32				as	'_ZN4Math4SqrtEf'
 public	Sqrt_flt64				as	'_ZN4Math4SqrtEd'
 
 ;==============================================================================;
-;       Square number                                                          ;
+;       Square value                                                           ;
 ;==============================================================================;
 
 ; Unsigned integer types
@@ -322,6 +306,60 @@ public	Sqr_flt32				as	'Math_Sqr_flt32'
 public	Sqr_flt64				as	'Math_Sqr_flt64'
 public	Sqr_flt32				as	'_ZN4Math3SqrEf'
 public	Sqr_flt64				as	'_ZN4Math3SqrEd'
+
+;==============================================================================;
+;       Cube value                                                             ;
+;==============================================================================;
+
+; Unsigned integer types
+public	Cube_uint8				as	'Math_Cube_uint8'
+public	Cube_uint16				as	'Math_Cube_uint16'
+public	Cube_uint32				as	'Math_Cube_uint32'
+public	Cube_uint64				as	'Math_Cube_uint64'
+public	Cube_uint8				as	'_ZN4Math4CubeEh'
+public	Cube_uint16				as	'_ZN4Math4CubeEt'
+public	Cube_uint32				as	'_ZN4Math4CubeEj'
+public	Cube_uint64				as	'_ZN4Math4CubeEy'
+
+; Signed integer types
+public	Cube_sint8				as	'Math_Cube_sint8'
+public	Cube_sint16				as	'Math_Cube_sint16'
+public	Cube_sint32				as	'Math_Cube_sint32'
+public	Cube_sint64				as	'Math_Cube_sint64'
+public	Cube_sint8				as	'_ZN4Math4CubeEa'
+public	Cube_sint16				as	'_ZN4Math4CubeEs'
+public	Cube_sint32				as	'_ZN4Math4CubeEi'
+public	Cube_sint64				as	'_ZN4Math4CubeEx'
+
+; Floating-point types
+public	Cube_flt32				as	'Math_Cube_flt32'
+public	Cube_flt64				as	'Math_Cube_flt64'
+public	Cube_flt32				as	'_ZN4Math4CubeEf'
+public	Cube_flt64				as	'_ZN4Math4CubeEd'
+
+;==============================================================================;
+;       Inverse value                                                          ;
+;==============================================================================;
+public	InverseValue_flt32		as	'Math_InverseValue_flt32'
+public	InverseValue_flt64		as	'Math_InverseValue_flt64'
+public	InverseValue_flt32		as	'_ZN4Math12InverseValueEf'
+public	InverseValue_flt64		as	'_ZN4Math12InverseValueEd'
+
+;==============================================================================;
+;       Inverse square value                                                   ;
+;==============================================================================;
+public	InverseSquare_flt32		as	'Math_InverseSquare_flt32'
+public	InverseSquare_flt64		as	'Math_InverseSquare_flt64'
+public	InverseSquare_flt32		as	'_ZN4Math13InverseSquareEf'
+public	InverseSquare_flt64		as	'_ZN4Math13InverseSquareEd'
+
+;==============================================================================;
+;       Inverse cube value                                                     ;
+;==============================================================================;
+public	InverseCube_flt32		as	'Math_InverseCube_flt32'
+public	InverseCube_flt64		as	'Math_InverseCube_flt64'
+public	InverseCube_flt32		as	'_ZN4Math11InverseCubeEf'
+public	InverseCube_flt64		as	'_ZN4Math11InverseCubeEd'
 
 ;==============================================================================;
 ;       Three-state comparison                                                 ;
@@ -1288,35 +1326,6 @@ PopCount64:	POP_COUNT	rax, rdi, 3
 ;******************************************************************************;
 
 ;==============================================================================;
-;       Inverse value                                                          ;
-;==============================================================================;
-macro	INVERSE	sqr, x
-{
-;---[Parameters]---------------------------
-value	equ		xmm0						; value
-;---[Internal variables]-------------------
-treg	equ		rax							; temporary register
-temp	equ		xmm1						; temporary register
-if x eq s
-oneval	= PONE_FLT32						; +1.0
-else if x eq d
-oneval	= PONE_FLT64						; +1.0
-end if
-;------------------------------------------
-		movap#x	temp, value					; temp = value
-if sqr
-		muls#x	temp, temp					; temp *= temp
-end if
-		initreg	value, treg, oneval			; value = 1.0
-		divs#x	value, temp					; return 1.0 / value
-		ret
-}
-Inverse_flt32:			INVERSE		0, s
-Inverse_flt64:			INVERSE		0, d
-InverseSquare_flt32:	INVERSE		1, s
-InverseSquare_flt64:	INVERSE		1, d
-
-;==============================================================================;
 ;       Absolute value                                                         ;
 ;==============================================================================;
 macro	ABS_INT	result, value, scale, negative
@@ -1471,7 +1480,7 @@ macro	SQRT_FLT	x
 ;---[Parameters]---------------------------
 value	equ		xmm0						; value
 ;------------------------------------------
-		sqrts#x	value, value				; ret sqrt (value)
+		sqrts#x	value, value				; ret Sqrt (value)
 		ret
 }
 
@@ -1486,13 +1495,13 @@ Sqrt_flt32:		SQRT_FLT	s
 Sqrt_flt64:		SQRT_FLT	d
 
 ;==============================================================================;
-;       Square number                                                          ;
+;       Square value                                                           ;
 ;==============================================================================;
 macro	SQR_INT		cmd, result, value
 {
 		mov		result, value				; result = value
-		cmd		value						; return result * value
-		ret
+		cmd		value						; result *= value
+		ret									; return result
 }
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 macro	SQR_FLT		x
@@ -1500,25 +1509,106 @@ macro	SQR_FLT		x
 ;---[Parameters]---------------------------
 value	equ		xmm0						; value
 ;------------------------------------------
-		muls#x	value, value				; ret sqr (value)
-		ret
+		muls#x	value, value				; value *= value
+		ret									; return value
 }
 
 ; Unsigned integer types
-Sqr_uint8:	SQR_INT		mul, al, dil
-Sqr_uint16:	SQR_INT		mul, ax, di
-Sqr_uint32:	SQR_INT		mul, eax, edi
-Sqr_uint64:	SQR_INT		mul, rax, rdi
+Sqr_uint8:		SQR_INT		mul, al, dil
+Sqr_uint16:		SQR_INT		mul, ax, di
+Sqr_uint32:		SQR_INT		mul, eax, edi
+Sqr_uint64:		SQR_INT		mul, rax, rdi
 
 ; Signed integer types
-Sqr_sint8:	SQR_INT		imul, al, dil
-Sqr_sint16:	SQR_INT		imul, ax, di
-Sqr_sint32:	SQR_INT		imul, eax, edi
-Sqr_sint64:	SQR_INT		imul, rax, rdi
+Sqr_sint8:		SQR_INT		imul, al, dil
+Sqr_sint16:		SQR_INT		imul, ax, di
+Sqr_sint32:		SQR_INT		imul, eax, edi
+Sqr_sint64:		SQR_INT		imul, rax, rdi
 
 ; Floating-point types
-Sqr_flt32:	SQR_FLT		s
-Sqr_flt64:	SQR_FLT		d
+Sqr_flt32:		SQR_FLT		s
+Sqr_flt64:		SQR_FLT		d
+
+;==============================================================================;
+;       Cube value                                                             ;
+;==============================================================================;
+macro	CUBE_INT	cmd, result, value
+{
+		mov		result, value				; result = value
+		cmd		value						; result *= value
+		cmd		value						; result *= value
+		ret									; return result
+}
+;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+macro	CUBE_FLT		x
+{
+;---[Parameters]---------------------------
+value	equ		xmm0						; value
+temp	equ		xmm1						; temporary register
+;------------------------------------------
+		movap#x	temp, value					; temp = value
+		muls#x	value, value				; value *= value
+		muls#x	value, temp					; value *= temp
+		ret									; return value
+}
+
+; Unsigned integer types
+Cube_uint8:		CUBE_INT	mul, al, dil
+Cube_uint16:	CUBE_INT	mul, ax, di
+Cube_uint32:	CUBE_INT	mul, eax, edi
+Cube_uint64:	CUBE_INT	mul, rax, rdi
+
+; Signed integer types
+Cube_sint8:		CUBE_INT	imul, al, dil
+Cube_sint16:	CUBE_INT	imul, ax, di
+Cube_sint32:	CUBE_INT	imul, eax, edi
+Cube_sint64:	CUBE_INT	imul, rax, rdi
+
+; Floating-point types
+Cube_flt32:		CUBE_FLT	s
+Cube_flt64:		CUBE_FLT	d
+
+;==============================================================================;
+;       Inverse value                                                          ;
+;==============================================================================;
+macro	INVERSE		type, x
+{
+;---[Parameters]---------------------------
+value	equ		xmm0						; value
+;---[Internal variables]-------------------
+treg	equ		rax							; temporary register
+temp	equ		xmm1						; temporary register
+if x eq s
+oneval	= PONE_FLT32						; +1.0
+else if x eq d
+oneval	= PONE_FLT64						; +1.0
+end if
+;------------------------------------------
+		movap#x	temp, value					; temp = value
+if type
+		muls#x	temp, temp					; temp *= temp
+end if
+if type > 1
+		muls#x	temp, value					; temp *= value
+end if
+		initreg	value, treg, oneval			; value = 1.0
+		divs#x	value, temp					; return 1.0 / temp
+		ret
+}
+InverseValue_flt32:		INVERSE	0, s
+InverseValue_flt64:		INVERSE	0, d
+
+;==============================================================================;
+;       Inverse square value                                                   ;
+;==============================================================================;
+InverseSquare_flt32:	INVERSE	1, s
+InverseSquare_flt64:	INVERSE	1, d
+
+;==============================================================================;
+;       Inverse cube value                                                     ;
+;==============================================================================;
+InverseCube_flt32:		INVERSE	2, s
+InverseCube_flt64:		INVERSE	2, d
 
 ;==============================================================================;
 ;       Three-state comparison                                                 ;
@@ -1738,10 +1828,10 @@ GCD_sint64:	GCD	rdi, rsi, rcx, rax, rdx, 1, 3
 ;==============================================================================;
 ;       Least common multiple                                                  ;
 ;==============================================================================;
-macro	LCM		Func, value1, value2, temp, quot, remain, sign, scale
+macro	LCM		CoreFunc, value1, value2, temp, quot, remain, sign, scale
 {
 ;------------------------------------------
-		call	Func						; quot = GCD (value1, value2)
+		call	CoreFunc					; quot = GCD (value1, value2)
 		test	quot, quot					; if (quot == 0)
 		jz		.ovfl						;     then go to overflow branch
 		mov		temp, quot					; temp = quot
@@ -1776,7 +1866,7 @@ LCM_sint64:	LCM	GCD_sint64, rdi, rsi, rcx, rax, rdx, 1, 3
 ;==============================================================================;
 ;       Cancellation                                                           ;
 ;==============================================================================;
-macro	CANCEL	Func, ptr1, ptr2, temp, result, high, sign, scale
+macro	CANCEL	CoreFunc, ptr1, ptr2, temp, result, high, sign, scale
 {
 ;---[Internal variables]-------------------
 stack	equ		rsp							; stack pointer
@@ -1789,7 +1879,7 @@ space	= 3 * 8								; stack size required by the procedure
 		mov		[s_ptr2], ptr2				; save "ptr2" variable into the stack
 		mov		param1, [ptr1]
 		mov		param2, [ptr2]
-		call	Func
+		call	CoreFunc
 		mov		temp, result				; temp = GCD (ptr1[0], ptr2[0])
 		mov		ptr1, [s_ptr1]				; get "ptr1" variable from the stack
 		mov		ptr2, [s_ptr2]				; get "ptr2" variable from the stack
@@ -2764,7 +2854,7 @@ end if
 		ret
 }
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	LOG1P	Func, ivalue, temp, mantscale, x
+macro	LOG1P	LogFunc, ivalue, temp, mantscale, x
 {
 ;---[Parameters]---------------------------
 value	equ		xmm0						; logarithm value
@@ -2838,7 +2928,7 @@ end if
 ;---[Log branch]---------------------------
 .log:	initreg	mscale, treg, oneval
 		adds#x	value, mscale
-		jmp		Func						; call Func (value + 1.0)
+		jmp		LogFunc						; call LogFunc (value + 1.0)
 }
 
 ;==============================================================================;
@@ -2929,7 +3019,7 @@ LogEp1_flt64:	LOG1P	LogE_flt64, rdi, rdx, LOGE_E_FLT64, d
 ;==============================================================================;
 ;       Logarithm to custom base                                               ;
 ;==============================================================================;
-macro	LOGB	Log, ivalue, temp, exp, res, val1, val2, x
+macro	LOGB	LogFunc, ivalue, temp, exp, res, val1, val2, x
 {
 ;---[Parameters]---------------------------
 lbase	equ		xmm0						; logarithm base value
@@ -3015,7 +3105,7 @@ space	= 1 * 8								; stack size required by the procedure
 ;---[Loading scale values]-----------------
 		sub		stack, space				; reserving stack size for local vars
 		movs#x	[s_value], value			; save "value" variable into the stack
-		call	Log							; call Log (lbase)
+		call	LogFunc						; call LogFunc (lbase)
 		initreg	mscale, treg, oneval
 		divs#x	mscale, result				; mscale = 1.0 / ln (lbase)
 		initreg	escale, treg, logval
@@ -3093,7 +3183,7 @@ end if
 		ret
 }
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	LOGB1P	Log, Func, ivalue, temp, x
+macro	LOGB1P	LogFunc1, LogFunc2, ivalue, temp, x
 {
 ;---[Parameters]---------------------------
 lbase	equ		xmm0						; logarithm base value
@@ -3155,7 +3245,7 @@ space	= 1 * 8								; stack size required by the procedure
 ;---[Loading scale values]-----------------
 		sub		stack, space				; reserving stack size for local vars
 		movs#x	[s_value], value			; save "value" variable into the stack
-		call	Log							; call Log (lbase)
+		call	LogFunc1					; call LogFunc1 (lbase)
 		initreg	mscale, treg, oneval
 		divs#x	mscale, result				; mscale = 1.0 / ln (lbase)
 		movs#x	result, [s_value]			; get "value" variable from the stack
@@ -3192,7 +3282,7 @@ end if
 ;---[Log branch]---------------------------
 .log:	initreg	mscale, treg, oneval
 		adds#x	value, mscale
-		jmp		Func						; call Func (base, value + 1.0)
+		jmp		LogFunc2					; call LogFunc2 (base, value + 1.0)
 ;---[Error branch]-------------------------
 .error:	initreg	result, treg, nanval		; return NaN
 		ret
@@ -3205,7 +3295,7 @@ LogBp1_flt64:	LOGB1P	LogE_flt64, LogB_flt64, rdi, rdx, d
 ;******************************************************************************;
 ;       Trigonometric functions                                                ;
 ;******************************************************************************;
-macro	TRIG1	Func, ivalue, mant, exp, ipart, res0, res1, temp0, temp1, x
+macro	TRIG1	CoreFunc, ivalue, mant, exp, ipart, res0, res1, temp0, temp1, x
 {
 ;---[Parameters]---------------------------
 value	equ		xmm0						; angle value
@@ -3344,16 +3434,16 @@ space	= 19 * 8							; stack size required by the procedure
 ;---[Call function]------------------------
 		lea		param1, [ipart]
 		add		stack, space				; restoring back the stack pointer
-		jmp		Func						; call Func (value1 + value2, ipart)
+		jmp		CoreFunc					; call CoreFunc (value1 + value2, ipart)
 ;---[Skip branch]--------------------------
 .skip:	xor		param1, param1
-		jmp		Func						; call Func (value, 0)
+		jmp		CoreFunc					; call CoreFunc (value, 0)
 ;---[Overflow branch]----------------------
 .ovrfl:	initreg	value, treg, nanval			; return NaN
 		ret
 }
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	TRIG2	Func, ivalue, mant, exp, ipart, res0, res1, temp0, temp1, x
+macro	TRIG2	CoreFunc, ivalue, mant, exp, ipart, res0, res1, temp0, temp1, x
 {
 ;---[Parameters]---------------------------
 sin		equ		rdi							; pointer to place where to store sin value
@@ -3500,10 +3590,10 @@ space	= 21 * 8							; stack size required by the procedure
 		mov		sin, [s_sin]				; get "sin" variable from the stack
 		mov		cos, [s_cos]				; get "cos" variable from the stack
 		add		stack, space				; restoring back the stack pointer
-		jmp		Func						; call Func (&sin, &cos, value1 + value2, ipart)
+		jmp		CoreFunc					; call CoreFunc (&sin, &cos, value1 + value2, ipart)
 ;---[Skip branch]--------------------------
 .skip:	xor		param3, param3
-		jmp		Func						; call Func (&sin, &cos, value, 0)
+		jmp		CoreFunc					; call CoreFunc (&sin, &cos, value, 0)
 ;---[Overflow branch]----------------------
 .ovrfl:	mov		mant, nanval
 		mov		[sin], mant					; sin[0] = NaN
@@ -3562,16 +3652,16 @@ end if
 		comis#x	max, barier2				; if (max < barier2)
 		jb		.under						;     then go to underflow prevention branch
 ;---[Normal execution branch]--------------
-		muls#x	cath1, cath1					; cath1 = cath1^2
-		muls#x	cath2, cath2					; cath2 = cath2^2
+		muls#x	cath1, cath1				; cath1 = cath1^2
+		muls#x	cath2, cath2				; cath2 = cath2^2
 if dim = 3
-		muls#x	cath3, cath3					; cath3 = cath3^2
+		muls#x	cath3, cath3				; cath3 = cath3^2
 end if
-		adds#x	cath1, cath2					; cath1 += cath2^2
+		adds#x	cath1, cath2				; cath1 += cath2^2
 if dim = 3
-		adds#x	cath1, cath3					; cath1 += cath3^2
+		adds#x	cath1, cath3				; cath1 += cath3^2
 end if
-		sqrts#x	cath1, cath1					; return sqrt (cath1)
+		sqrts#x	cath1, cath1				; return Sqrt (cath1)
 		ret
 ;---[Overflow prevention branch]-----------
 .over:	initreg	scale1, treg, sclval1		; scale1 = sclval1
@@ -3581,17 +3671,17 @@ end if
 if dim = 3
 		muls#x	cath3, scale1				; cath3 *= scale1
 end if
-		muls#x	cath1, cath1					; cath1 = cath1^2
-		muls#x	cath2, cath2					; cath2 = cath2^2
+		muls#x	cath1, cath1				; cath1 = cath1^2
+		muls#x	cath2, cath2				; cath2 = cath2^2
 if dim = 3
-		muls#x	cath3, cath3					; cath3 = cath3^2
+		muls#x	cath3, cath3				; cath3 = cath3^2
 end if
-		adds#x	cath1, cath2					; cath1 += cath2^2
+		adds#x	cath1, cath2				; cath1 += cath2^2
 if dim = 3
-		adds#x	cath1, cath3					; cath1 += cath3^2
+		adds#x	cath1, cath3				; cath1 += cath3^2
 end if
 		sqrts#x	cath1, cath1
-		muls#x	cath1, scale2				; return scale2 * sqrt (cath1)
+		muls#x	cath1, scale2				; return scale2 * Sqrt (cath1)
 		ret
 ;---[Underflow prevention branch]----------
 .under:	initreg	scale1, treg, sclval3		; scale1 = sclval3
@@ -3601,17 +3691,17 @@ end if
 if dim = 3
 		muls#x	cath3, scale1				; cath3 *= scale1
 end if
-		muls#x	cath1, cath1					; cath1 = cath1^2
-		muls#x	cath2, cath2					; cath2 = cath2^2
+		muls#x	cath1, cath1				; cath1 = cath1^2
+		muls#x	cath2, cath2				; cath2 = cath2^2
 if dim = 3
-		muls#x	cath3, cath3					; cath3 = cath3^2
+		muls#x	cath3, cath3				; cath3 = cath3^2
 end if
-		adds#x	cath1, cath2					; cath1 += cath2^2
+		adds#x	cath1, cath2				; cath1 += cath2^2
 if dim = 3
-		adds#x	cath1, cath3					; cath1 += cath3^2
+		adds#x	cath1, cath3				; cath1 += cath3^2
 end if
 		sqrts#x	cath1, cath1
-		muls#x	cath1, scale2				; return scale2 * sqrt (cath1)
+		muls#x	cath1, scale2				; return scale2 * Sqrt (cath1)
 		ret
 }
 Hypot2D_flt32:	HYPOT	2, s
@@ -3670,7 +3760,7 @@ end if
 		adds#x	hypot, cath
 		subs#x	temp, cath
 		muls#x	hypot, temp					; hypot = (hypot + cath) * (hypot - cath)
-		sqrts#x	hypot, hypot				; return sqrt (hypot)
+		sqrts#x	hypot, hypot				; return Sqrt (hypot)
 		ret
 ;---[Overflow prevention branch]-----------
 .over:	initreg	scale1, treg, sclval1		; scale1 = sclval1
@@ -3682,7 +3772,7 @@ end if
 		subs#x	temp, cath
 		muls#x	hypot, temp					; hypot = (hypot + cath) * (hypot - cath)
 		sqrts#x	hypot, hypot
-		muls#x	hypot, scale2				; return scale2 * sqrt (hypot)
+		muls#x	hypot, scale2				; return scale2 * Sqrt (hypot)
 		ret
 ;---[Underflow prevention branch]----------
 .under:	initreg	scale1, treg, sclval3		; scale1 = sclval3
@@ -3694,7 +3784,7 @@ end if
 		subs#x	temp, cath
 		muls#x	hypot, temp					; hypot = (hypot + cath) * (hypot - cath)
 		sqrts#x	hypot, hypot
-		muls#x	hypot, scale2				; return scale2 * sqrt (hypot)
+		muls#x	hypot, scale2				; return scale2 * Sqrt (hypot)
 		ret
 }
 Cath_flt32:	CATH	s
@@ -4227,7 +4317,7 @@ end if
 .else:	xor		sreg, sval					; sign = -sign
 		subs#x	value, one					; value -= 1.0
 		muls#x	value, mhalf				; value *= -0.5
-		sqrts#x	base, value					; base = sqrt (value)
+		sqrts#x	base, value					; base = Sqrt (value)
 		movap#x	scale, value
 		muls#x	scale, base					; scale = value * base
 		movint	sign, sreg, x				; sign = sign bit
@@ -4340,7 +4430,7 @@ end if
 		cmovnz	shreg, sval					;     shreg = Pi
 		subs#x	value, one					; value -= 1.0
 		muls#x	value, mhalf				; value *= -0.5
-		sqrts#x	base, value					; base = sqrt (value)
+		sqrts#x	base, value					; base = Sqrt (value)
 		movap#x	scale, value
 		muls#x	scale, base					; scale = value * base
 		movint	sign, sreg, x				; sign = sign bit
@@ -4388,29 +4478,35 @@ sign	equ		xmm11						; sign bit
 shift	equ		xmm12						; shift value
 result	equ		xmm0						; result register
 mask	equ		temp1						; data mask
-one		equ		temp2						; +1.0
+inf		equ		temp2						; +Inf
+one		equ		temp3						; +1.0
 table	equ		treg						; pointer to array of coefficients
 if x eq s
 dmask	= DMASK_FLT32						; data mask
 smask	= SMASK_FLT32						; sign mask
+infval	= PINF_FLT32						; +Inf
 oneval	= PONE_FLT32						; +1.0
 pi2val	= PI_HALF_FLT32						; +Pi/2
 atant	= atan_flt32						; pointer to array of atan coefficients
 else if x eq d
 dmask	= DMASK_FLT64						; data mask
 smask	= SMASK_FLT64						; sign mask
+infval	= PINF_FLT64						; +Inf
 oneval	= PONE_FLT64						; +1.0
 pi2val	= PI_HALF_FLT64						; +Pi/2
 atant	= atan_flt64						; pointer to array of atan coefficients
 end if
 ;------------------------------------------
 		initreg	mask, treg, dmask			; mask = dmask
+		initreg	inf, treg, infval			; inf = Inf
 		initreg	one, treg, oneval			; one = 1.0
 		initreg	shift, treg, pi2val			; shift = Pi/2
 		mov		sval, smask					; set sign mask
 		movint	sreg, value, x				; sreg = value
 		and		sreg, sval					; extract sign bit from value
 		andp#x	value, mask					; value = Abs (value)
+		comis#x	value, inf					; if (value >= inf)
+		jae		.inf						;     then go to infinity branch
 		comis#x	value, one					; if (value > 1.0)
 		ja		.else						;     then go to else branch
 ;---[if value <= 1.0]----------------------
@@ -4458,6 +4554,11 @@ end if
 		subs#x	temp1, shift				; temp1 -= Pi/2
 		xorp#x	temp1, sign					; set correct sign to the result
 		movap#x	result, temp1				; return sign * (ArcTan (Abs (value)) - Pi/2)
+		ret
+;---[Infinity branch]----------------------
+.inf:	movint	sign, sreg, x				; sign = sign bit
+		orp#x	shift, sign					; set correct sign to the result
+		movap#x	result, shift				; return sign * (ArcTan (Abs (value)) - Pi/2)
 		ret
 }
 ArcTan_flt32:	ATAN	edx, ecx, s
@@ -4930,7 +5031,7 @@ space	= 3 * 8								; stack size required by the procedure
 		jae		.over						;     then go to overflow prevention branch
 		muls#x	value, value
 		adds#x	value, one					; value = value * value + one
-		sqrts#x	value, value				; value = sqrt (value)
+		sqrts#x	value, value				; value = Sqrt (value)
 ;---[Computing logarithm value]------------
 		adds#x	one, value					; one = 1.0 + hypot (value, 1.0)
 		movap#x	value, origin
@@ -4986,7 +5087,7 @@ end if
 		adds#x	value, one
 		subs#x	barier, one
 		muls#x	value, barier				; value = (value + one) * (value - one)
-		sqrts#x	value, value				; value = sqrt (value)
+		sqrts#x	value, value				; value = Sqrt (value)
 ;---[Computing logarithm value]------------
 		subs#x	origin, one					; origin = origin - 1.0
 		adds#x	value, origin				; value = value + origin
@@ -5034,7 +5135,7 @@ end if
 		muls#x	value, value
 		muls#x	barier, two
 		adds#x	value, barier				; value = value * value + value * 2.0
-		sqrts#x	value, value				; value = sqrt (value)
+		sqrts#x	value, value				; value = Sqrt (value)
 ;---[Computing logarithm value]------------
 		adds#x	value, origin				; value = value + origin
 		jmp		Logp1						; return Logp1 (value)

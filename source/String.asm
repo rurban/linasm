@@ -14,17 +14,17 @@ include	'Macro.inc'
 ;###############################################################################
 
 ; Copy function
-extrn	'Array_Copy_size'		as	Copy
+extrn	'Array_Copy_size'		as	Copy_size
 
 ; Boyer-Moore-Horspool pattern hash
-extrn	'BMH_uint8'				as	BMH8
-extrn	'BMH_uint16'			as	BMH16
-extrn	'BMH_uint32'			as	BMH32
+extrn	'BMH_uint8'				as	BMH_uint8
+extrn	'BMH_uint16'			as	BMH_uint16
+extrn	'BMH_uint32'			as	BMH_uint32
 
 ; Boyer-Moore-Horspool subsequence searching algorithm
-extrn	'Sequence_Find_uint8'	as	BMH_Find8
-extrn	'Sequence_Find_uint16'	as	BMH_Find16
-extrn	'Sequence_Find_uint32'	as	BMH_Find32
+extrn	'Sequence_Find_uint8'	as	BMH_Find_uint8
+extrn	'Sequence_Find_uint16'	as	BMH_Find_uint16
+extrn	'Sequence_Find_uint32'	as	BMH_Find_uint32
 
 ;###############################################################################
 ;#      Export section                                                         #
@@ -1777,16 +1777,16 @@ s_psize	equ		stack + 3 * 8				; stack position of pattern size variable
 s_bmh	equ		stack + 4 * 8				; stack position of BMH object
 if x eq b
 Length	= Len_char8							; string length function
-Hash	= BMH8								; BMH pattern hash function
-Find	= BMH_Find8							; BMH subsequence searching function
+Hash	= BMH_uint8							; BMH pattern hash function
+Find	= BMH_Find_uint8					; BMH subsequence searching function
 else if x eq w
 Length	= Len_char16						; string length function
-Hash	= BMH16								; BMH pattern hash function
-Find	= BMH_Find16						; BMH subsequence searching function
+Hash	= BMH_uint16						; BMH pattern hash function
+Find	= BMH_Find_uint16					; BMH subsequence searching function
 else if x eq d
 Length	= Len_char32						; string length function
-Hash	= BMH32								; BMH pattern hash function
-Find	= BMH_Find32						; BMH subsequence searching function
+Hash	= BMH_uint32						; BMH pattern hash function
+Find	= BMH_Find_uint32					; BMH subsequence searching function
 end if
 space	= 265 * 8							; stack size required by the procedure
 ;------------------------------------------
@@ -1860,16 +1860,16 @@ s_psize	equ		stack + 3 * 8				; stack position of pattern size variable
 s_bmh	equ		stack + 4 * 8				; stack position of BMH object
 if x eq b
 Length	= Len_char8							; string length function
-Hash	= BMH8								; BMH pattern hash function
-Find	= BMH_Find8							; BMH subsequence searching function
+Hash	= BMH_uint8							; BMH pattern hash function
+Find	= BMH_Find_uint8					; BMH subsequence searching function
 else if x eq w
 Length	= Len_char16						; string length function
-Hash	= BMH16								; BMH pattern hash function
-Find	= BMH_Find16						; BMH subsequence searching function
+Hash	= BMH_uint16						; BMH pattern hash function
+Find	= BMH_Find_uint16					; BMH subsequence searching function
 else if x eq d
 Length	= Len_char32						; string length function
-Hash	= BMH32								; BMH pattern hash function
-Find	= BMH_Find32						; BMH subsequence searching function
+Hash	= BMH_uint32						; BMH pattern hash function
+Find	= BMH_Find_uint32					; BMH subsequence searching function
 end if
 space	= 265 * 8							; stack size required by the procedure
 ;------------------------------------------
@@ -2641,14 +2641,14 @@ minsize	= 32								; min array size is aceptable for Merge sort
 		mov		param3, size
 		mov		param2, [s_ptr]
 		mov		param1, [s_tptr]
-		mov		fptr, Copy
+		mov		fptr, Copy_size
 		call	fptr						; call Copy (tptr, ptr, size / 2)
 		mov		size, [s_size]				; get "size" variable from the stack
 		shr		size, 1						; size /= 2
 		mov		param3, size
 		mov		param2, [s_array]
 		mov		param1, [s_temp]
-		mov		fptr, Copy
+		mov		fptr, Copy_size
 		call	fptr						; call Copy (temp, array, size / 2)
 ;---[Merge sorted arrays]------------------
 		mov		array, [s_array]			; get "array" variable from the stack
@@ -2794,7 +2794,7 @@ space	= 17 * 8							; stack size required by the procedure
 .copy1:	mov		param1, [s_tkey]
 		mov		param2, [s_skey2]
 		mov		param3, [s_size2]
-		mov		fptr, Copy
+		mov		fptr, Copy_size
 		call	fptr						; call Copy (tkey, skey2, size2)
 		mov		param1, [s_tptr]
 		mov		param2, [s_sptr2]
@@ -2802,12 +2802,12 @@ space	= 17 * 8							; stack size required by the procedure
 		mov		value, [s_value]			; restore old value of "value" variable
 		mov		ptr, [s_ptr]				; restore old value of "ptr" variable
 		add		stack, space				; restoring back the stack pointe
-		mov		fptr, Copy
+		mov		fptr, Copy_size
 		jmp		fptr						; call Copy (tptr, sptr2, size2)
 .copy2:	mov		param1, [s_tkey]
 		mov		param2, [s_skey1]
 		mov		param3, [s_size1]
-		mov		fptr, Copy
+		mov		fptr, Copy_size
 		call	fptr						; call Copy (tkey, skey1, size1)
 		mov		param1, [s_tptr]
 		mov		param2, [s_sptr1]
@@ -2815,7 +2815,7 @@ space	= 17 * 8							; stack size required by the procedure
 		mov		value, [s_value]			; restore old value of "value" variable
 		mov		ptr, [s_ptr]				; restore old value of "ptr" variable
 		add		stack, space				; restoring back the stack pointe
-		mov		fptr, Copy
+		mov		fptr, Copy_size
 		jmp		fptr						; call Copy (tptr, sptr1, size1)
 }
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::

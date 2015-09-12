@@ -910,7 +910,7 @@ end if
 InsertCoreMulti:	INSERT_CORE		0
 InsertCoreUnique:	INSERT_CORE		1
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	INSERT_ELEMENT	Func
+macro	INSERT_ELEMENT	InsertCore
 {
 ;---[Parameters]---------------------------
 this	equ		rdi							; pointer to hash table object
@@ -928,7 +928,7 @@ space	= 3 * 8								; stack size required by the procedure
 		je		.ext						;     then try to extend object capacity
 ;---[Normal execution branch]--------------
 .back:	movdqu	value, [data]				; value = data[0]
-		jmp		Func						; call Func (value)
+		jmp		InsertCore					; call InsertCore (value)
 ;---[Extend object capacity]---------------
 .ext:	sub		stack, space				; reserving stack size for local vars
 		mov		[s_this], this				; save "this" variable into the stack
@@ -1081,7 +1081,7 @@ RemoveBwd:	REMOVE_ELEMENT	BWD
 ;******************************************************************************;
 ;       Setting element value                                                  ;
 ;******************************************************************************;
-macro	SET_ELEMENT		insfunc, offst
+macro	SET_ELEMENT		InsertCore, offst
 {
 ;---[Parameters]---------------------------
 this	equ		rdi							; pointer to hash table object
@@ -1128,7 +1128,7 @@ space	= 5 * 8								; stack size required by the procedure
 		je		.ext						;     then try to extend object capacity
 .back:	movdqu	temp, [data]
 		add		stack, space				; restoring back the stack pointer
-		jmp		insfunc						; return this.insfunc (data[0])
+		jmp		InsertCore					; return this.InsertCore (data[0])
 ;---[Extend object capacity]---------------
 .ext:	mov		param2, [this + CAPACITY]
 		shl		param2, 1
@@ -1186,7 +1186,7 @@ GetBwd:	GET_ELEMENT		BWD
 ;******************************************************************************;
 ;       Replacing element value                                                ;
 ;******************************************************************************;
-macro	REPLACE_ELEMENT		insfunc, offst
+macro	REPLACE_ELEMENT		InsertCore, offst
 {
 ;---[Parameters]---------------------------
 this	equ		rdi							; pointer to hash table object
@@ -1236,7 +1236,7 @@ space	= 5 * 8								; stack size required by the procedure
 		je		.ext						;     then try to extend object capacity
 .back:	movdqu	temp, [ndata]
 		add		stack, space				; restoring back the stack pointer
-		jmp		insfunc						; return this.insfunc (ndata[0])
+		jmp		InsertCore					; return this.InsertCore (ndata[0])
 ;---[Extend object capacity]---------------
 .ext:	mov		param2, [this + CAPACITY]
 		shl		param2, 1
@@ -1402,7 +1402,7 @@ result	equ		rax							; result register
 .error:	mov		result, EMPTY				; return EMPTY
 		ret
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	SET_ITERATOR1	Func, offst
+macro	SET_ITERATOR1	IterFunc, offst
 {
 ;---[Parameters]---------------------------
 this	equ		rdi							; pointer to hash table object
@@ -1422,7 +1422,7 @@ space	= 1 * 8								; stack size required by the procedure
 		mov		param2, [this + CAPACITY]
 		shr		param2, 1
 		mov		param1, [this + ARRAY]
-		call	Func						; result = Func (array, capacity / 2)
+		call	IterFunc					; result = IterFunc (array, capacity / 2)
 		mov		this, [s_this]				; get "this" variable from the stack
 		mov		[this + offst], result		; update iterator position
 		add		stack, space				; restoring back the stack pointer
@@ -1445,7 +1445,7 @@ temp	equ		rax							; temporary register
 		ret
 }
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	MOVE_ITERATOR	Func, offst
+macro	MOVE_ITERATOR	IterFunc, offst
 {
 ;---[Parameters]---------------------------
 this	equ		rdi							; pointer to hash table object
@@ -1471,7 +1471,7 @@ space	= 1 * 8								; stack size required by the procedure
 		mov		param2, [this + CAPACITY]
 		shr		param2, 1
 		mov		param1, [this + ARRAY]
-		call	Func						; result = Func (array, capacity / 2, iter, pos)
+		call	IterFunc					; result = IterFunc (array, capacity / 2, iter, pos)
 		mov		this, [s_this]				; get "this" variable from the stack
 		mov		[this + offst], result		; update iterator position
 		cmp		result, EMPTY				; if (result == EMPTY)
@@ -2073,7 +2073,7 @@ space	= 5 * 8								; stack size required by the procedure
 		add		stack, space				; restoring back the stack pointer
 		ret
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	FIND_DUP	Func, offst
+macro	FIND_DUP	DupFunc, offst
 {
 ;---[Parameters]---------------------------
 this	equ		rdi							; pointer to hash table object
@@ -2101,7 +2101,7 @@ space	= 3 * 8								; stack size required by the procedure
 		mov		param2, [this + CAPACITY]
 		shr		param2, 1
 		mov		param1, [this + ARRAY]
-		call	Func						; result = Func (array, capacity / 2, iter, func)
+		call	DupFunc						; result = DupFunc (array, capacity / 2, iter, func)
 		cmp		result, EMPTY				; if (result == EMPTY)
 		je		.ntfnd						;     return false
 ;---[Update iterator value]----------------

@@ -1823,7 +1823,7 @@ space	= 5 * 8								; stack size required by the procedure
 DiffFwd:	DIFF	add
 DiffBwd:	DIFF	sub
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	FIND_DIFF	Diff, cmd, bwd, type
+macro	FIND_DIFF	DiffFunc, cmd, bwd, type
 {
 ;---[Parameters]---------------------------
 this	equ		rdi							; pointer to target vector object
@@ -1890,7 +1890,7 @@ end if
 		mov		param3, count
 		mov		param2, sarray
 		mov		param1, tarray
-		call	Diff						; result = Diff (tarray, sarray, count, func)
+		call	DiffFunc					; result = DiffFunc (tarray, sarray, count, func)
 		cmp		result, NOT_FOUND			; if (result != NOT_FOUND)
 		jne		.found						;     then go to found branch
 ;---[Not found branch]---------------------
@@ -2077,7 +2077,7 @@ CountKeysBwdStack:	COUNT_KEYS	sub, add, 1, 1
 ;==============================================================================;
 ;       Binary counting                                                        ;
 ;==============================================================================;
-macro	COUNTBIN	Func1, Func2
+macro	COUNTBIN	FindFirstFunc, FindLastFunc
 {
 ;---[Parameters]---------------------------
 this	equ		rdi							; pointer to vector object
@@ -2105,7 +2105,7 @@ space	= 7 * 8								; stack size required by the procedure
 		mov		param3, key
 		lea		param2, [s_data]
 		mov		param1, this
-		call	Func1						; result = this.Func1 (&data, key, func)
+		call	FindFirstFunc				; result = this.FindFirstFunc (&data, key, func)
 		cmp		result, NOT_FOUND			; if (result == NOT_FOUND)
 		je		.ntfnd						;     return 0
 		mov		[s_res], result				; save "result" variable into the stack
@@ -2113,7 +2113,7 @@ space	= 7 * 8								; stack size required by the procedure
 		mov		param3, [s_key]
 		lea		param2, [s_data]
 		mov		param1, [s_this]
-		call	Func2						; result = this.Func2 (&data, key, func)
+		call	FindLastFunc				; result = this.FindLastFunc (&data, key, func)
 		sub		result, [s_res]				; correct result
 		add		result, 1					; return result + 1
 		add		stack, space				; restoring back the stack pointer
@@ -2203,7 +2203,7 @@ space	= 9 * 8								; stack size required by the procedure
 InsertSortCoreAsc:	INSERTSORT_CORE	l
 InsertSortCoreDsc:	INSERTSORT_CORE	g
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	SORT	SortFunc
+macro	SORT	SortCore
 {
 ;---[Parameters]---------------------------
 this	equ		rdi							; pointer to vector object
@@ -2225,7 +2225,7 @@ space	= 1 * 8								; stack size required by the procedure
 		mov		param3, func
 		mov		param2, size
 		mov		param1, [this + ARRAY]
-		call	SortFunc					; call SortFunc (array, size, func)
+		call	SortCore					; call SortCore (array, size, func)
 ;---[Normal exit]--------------------------
 .exit:	mov		result, [s_size]			; get "size" variable from the stack
 		shr		result, KSCALE				; return size

@@ -1128,7 +1128,7 @@ DestructorRing:	DESTRUCTOR	1
 ;******************************************************************************;
 ;       Copying elements                                                       ;
 ;******************************************************************************;
-macro	COPY_MOVE	Func, cmd, offst1, offst2, shift, check, rev, bwd, ring, move
+macro	COPY_MOVE	IterFunc, cmd, offst1, offst2, shift, check, rev, bwd, ring, move
 {
 ;---[Parameters]---------------------------
 this	equ		rdi							; pointer to target list/ring object
@@ -1197,7 +1197,7 @@ if ~ring | rev
 		lea		param3, [count - KSIZE]
 		mov		param2, iter
 		mov		param1, array
-		call	Func						; result = Func (array, iter1, count - KSIZE)
+		call	IterFunc					; result = IterFunc (array, iter1, count - KSIZE)
 		mov		this, [s_this]				; get "this" variable from the stack
 		mov		source, [s_src]				; get "source" variable from the stack
 		mov		array, [s_array]			; get "array" variable from the stack
@@ -1698,7 +1698,7 @@ SplitRing:	SPLIT	1
 ;==============================================================================;
 ;       Insert element into list                                               ;
 ;==============================================================================;
-macro	INSERT_CORE	insfunc, splitfunc, val, ring
+macro	INSERT_CORE	InsFunc, SplitFunc, val, ring
 {
 ;---[Parameters]---------------------------
 this	equ		rdi							; pointer to list/ring object
@@ -1728,11 +1728,11 @@ nsize	equ		result						; node size
 		mov		param4, index
 		mov		param3, nsize
 		mov		param2, node
-		jmp		insfunc						; return this.insfunc (node, nsize, index, value)
+		jmp		InsFunc						; return this.InsFunc (node, nsize, index, value)
 ;---[Split node branch]--------------------
 .split:	mov		param3, index
 		mov		param2, node
-		jmp		splitfunc					; return this.splitfunc (node, index, value)
+		jmp		SplitFunc					; return this.SplitFunc (node, index, value)
 ;---[Init list]----------------------------
 .init:	mov		nnode, [this + POOL]		; nnode = this.pool
 		mov		result, [array + nnode + FDIR]
@@ -1752,7 +1752,7 @@ end if
 InsertCoreList:	INSERT_CORE	InsertList, SplitList, EMPTY, 0
 InsertCoreRing:	INSERT_CORE	InsertRing, SplitRing, nnode, 1
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	INSERT1		Func, offst, shift
+macro	INSERT1		InsertCore, offst, shift
 {
 ;---[Parameters]---------------------------
 this	equ		rdi							; pointer to list/ring object
@@ -1772,7 +1772,7 @@ space	= 3 * 8								; stack size required by the procedure
 .back:	mov		iter, [this + offst]		; get iterator value
 		movdqu	value, [data]				; value = data[0]
 		lea		param2, [iter + shift]
-		jmp		Func						; call Func (iter, value)
+		jmp		InsertCore					; call InsertCore (iter, value)
 ;---[Extend object capacity]---------------
 .ext:	sub		stack, space				; reserving stack size for local vars
 		mov		[s_this], this				; save "this" variable into the stack
@@ -1791,7 +1791,7 @@ space	= 3 * 8								; stack size required by the procedure
 		ret									;              else return false
 }
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	INSERT2		Func, offst, shift
+macro	INSERT2		InsertCore, offst, shift
 {
 ;---[Parameters]---------------------------
 this	equ		rdi							; pointer to list/ring object
@@ -1814,7 +1814,7 @@ space	= 3 * 8								; stack size required by the procedure
 ;---[Normal execution branch]--------------
 		movdqu	value, [data]				; value = data[0]
 		lea		param2, [iter + shift]
-		jmp		Func						; call Func (iter, value)
+		jmp		InsertCore					; call InsertCore (iter, value)
 ;---[Extend object capacity]---------------
 .ext:	sub		stack, space				; reserving stack size for local vars
 		mov		[s_this], this				; save "this" variable into the stack
@@ -2503,7 +2503,7 @@ space	= 3 * 8								; stack size required by the procedure
 RemoveCoreList:	REMOVE_CORE	DeleteList, ReplaceLeftList, ReplaceRightList, JoinList
 RemoveCoreRing:	REMOVE_CORE	DeleteRing, ReplaceLeftRing, ReplaceRightRing, JoinRing
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	REMOVE		Func, offst
+macro	REMOVE	RemoveCore, offst
 {
 ;---[Parameters]---------------------------
 this	equ		rdi							; pointer to list/ring object
@@ -2522,7 +2522,7 @@ temp	equ		xmm0						; temporary register
 		movdqa	temp, [array + iter + NDATA]
 		movdqu	[data], temp				; data[0] = array[iter].data
 		mov		param2, iter
-		jmp		Func						; call this.Func (iter)
+		jmp		RemoveCore					; call this.RemoveCore (iter)
 ;---[Error branch]-------------------------
 .error:	xor		status, status				; return false
 		ret
@@ -2640,7 +2640,7 @@ ReplaceBwd:		REPLACE_ELEMENT		BWD
 ;==============================================================================;
 ;       Reversing elements order                                               ;
 ;==============================================================================;
-macro	REVERSE		Func, cmd1, cmd2, offst1, offst2, bwd, ring
+macro	REVERSE		IterFunc, cmd1, cmd2, offst1, offst2, bwd, ring
 {
 ;---[Parameters]---------------------------
 this	equ		rdi							; pointer to list/ring object
@@ -2694,7 +2694,7 @@ end if
 		lea		param3, [count - KSIZE]
 		mov		param2, iter1
 		mov		param1, array
-		call	Func						; result = Func (array, iter1, count - KSIZE)
+		call	IterFunc					; result = IterFunc (array, iter1, count - KSIZE)
 		mov		this, [s_this]				; get "this" variable from the stack
 		mov		count, [s_count]			; get "count" variable from the stack
 		mov		array, [s_array]			; get "array" variable from the stack
@@ -3015,7 +3015,7 @@ temp	equ		rdx							; temporary register
 		ret
 }
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	MOVE_ITERATOR	Func, offst
+macro	MOVE_ITERATOR	IterFunc, offst
 {
 ;---[Parameters]---------------------------
 this	equ		rdi							; pointer to list/ring object
@@ -3040,7 +3040,7 @@ space	= 1 * 8								; stack size required by the procedure
 		mov		param3, pos
 		mov		param2, iter
 		mov		param1, [this + ARRAY]
-		call	Func						; iter = Func (array, iter, pos)
+		call	IterFunc					; iter = IterFunc (array, iter, pos)
 		mov		this, [s_this]				; get "this" variable from the stack
 		mov		[this + offst], iter		; update iterator position
 		cmp		iter, EMPTY					; if (iter == EMPTY)
@@ -3843,7 +3843,7 @@ end if
 DiffFwd:	DIFF	add, 0
 DiffBwd:	DIFF	sub, 1
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	FIND_DIFF	CheckFunc, offst
+macro	FIND_DIFF	DiffFunc, offst
 {
 ;---[Parameters]---------------------------
 this	equ		rdi							; pointer to target list/ring object
@@ -3890,7 +3890,7 @@ space	= 3 * 8								; stack size required by the procedure
 		mov		param2, [source + ARRAY]
 		mov		param3, [this + offst]
 		mov		param1, [this + ARRAY]
-		call	CheckFunc					; result = CheckFunc (this.array, source.array, titer, siter, count, func)
+		call	DiffFunc					; result = DiffFunc (this.array, source.array, titer, siter, count, func)
 		cmp		result, EMPTY				; if (result == EMPTY)
 		je		.ntfnd						;     return false
 ;---[Update iterator value]----------------

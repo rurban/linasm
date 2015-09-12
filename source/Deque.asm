@@ -552,7 +552,7 @@ space	= 1 * 8								; stack size required by the procedure
 ;******************************************************************************;
 ;       Copying elements                                                       ;
 ;******************************************************************************;
-macro	COPY_MOVE	cmd1, cmd2, Move1, Move2, Copy, offst1, offst2, move
+macro	COPY_MOVE	cmd1, cmd2, MoveFunc1, MoveFunc2, CopyFunc, offst1, offst2, move
 {
 ;---[Parameters]---------------------------
 this	equ		rdi							; pointer to target deque object
@@ -632,7 +632,7 @@ space	= 7 * 8								; stack size required by the procedure
 		mov		param3, ptr
 		mov		param2, iter
 		mov		param1, [this + ARRAY]
-		call	Move1						; call Move1 (array, iter cmd1 count, iter, cap, tpos)
+		call	MoveFunc1					; call MoveFunc1 (array, iter cmd1 count, iter, cap, tpos)
 		jmp		.copy
 ;---[else]---------------------------------
 .else1:	mov		iter, [this + offst2]		; get iterator value
@@ -648,7 +648,7 @@ space	= 7 * 8								; stack size required by the procedure
 		mov		param3, ptr
 		mov		param2, iter
 		mov		param1, [this + ARRAY]
-		call	Move2						; call Move2 (array, iter cmd2 count, iter, cap, size)
+		call	MoveFunc2					; call MoveFunc2 (array, iter cmd2 count, iter, cap, size)
 ;---[Insert elements into target deque]----
 .copy:	mov		this, [s_this]				; get "this" variable from the stack
 		mov		source, [s_src]				; get "source" variable from the stack
@@ -665,7 +665,7 @@ space	= 7 * 8								; stack size required by the procedure
 		and		param3, param5
 		mov		param1, [this + ARRAY]
 		mov		param7, [s_count]
-		call	Copy						; call Copy (this.array, source.array, this.iter cmd2 tpos, source.iter cmd2 spos, this.capacity - 1, source.capacity - 1, count)
+		call	CopyFunc					; call CopyFunc (this.array, source.array, this.iter cmd2 tpos, source.iter cmd2 spos, this.capacity - 1, source.capacity - 1, count)
 ;---[Remove elements from source deque]----
 if move
 		mov		source, [s_src]				; get "source" variable from the stack
@@ -697,7 +697,7 @@ if move
 		cmd2	param2, count
 		and		param2, cap
 		mov		param1, [source + ARRAY]
-		call	Move2						; Move2 (source.array, iter cmd2 count, iter, cap, spos)
+		call	MoveFunc2					; MoveFunc2 (source.array, iter cmd2 count, iter, cap, spos)
 		jmp		.exit
 ;---[else]---------------------------------
 .else2:	and		iter, cap					; iter = iter & cap
@@ -714,7 +714,7 @@ if move
 		and		param3, cap
 		mov		param2, iter
 		mov		param1, [source + ARRAY]
-		call	Move1						; Move1 (source.array, iter, iter cmd2 count, cap, size)
+		call	MoveFunc1					; MoveFunc1 (source.array, iter, iter cmd2 count, cap, size)
 end if
 ;---[Normal exit branch]-------------------
 .exit:	mov		result, [s_count]			; get "count" variable from the stack
@@ -852,7 +852,7 @@ PopFromTail:	POP_DATA	sub, TAIL
 ;******************************************************************************;
 ;       Insertion of element                                                   ;
 ;******************************************************************************;
-macro	INSERT	cmd1, cmd2, Move1, Move2, offst1, offst2
+macro	INSERT	cmd1, cmd2, MoveFunc1, MoveFunc2, offst1, offst2
 {
 ;---[Parameters]---------------------------
 this	equ		rdi							; pointer to deque object
@@ -948,7 +948,7 @@ space	= 5 * 8								; stack size required by the procedure
 		and		param3, cap
 		mov		param2, iter
 		mov		param1, [this + ARRAY]
-		call	Move1						; call Move1 (array, iter, iter cmd2 KSIZE, cap, pos)
+		call	MoveFunc1					; call MoveFunc1 (array, iter, iter cmd2 KSIZE, cap, pos)
 		mov		this, [s_this]				; get "this" variable from the stack
 		mov		data, [s_data]				; get "data" variable from the stack
 		mov		iter, [s_iter]				; get "iter" variable from the stack
@@ -962,7 +962,7 @@ space	= 5 * 8								; stack size required by the procedure
 		and		param3, cap
 		mov		param2, iter
 		mov		param1, [this + ARRAY]
-		call	Move2						; call Move2 (array, iter, iter cmd1 KSIZE, cap, size)
+		call	MoveFunc2					; call MoveFunc2 (array, iter, iter cmd1 KSIZE, cap, size)
 		mov		this, [s_this]				; get "this" variable from the stack
 		mov		data, [s_data]				; get "data" variable from the stack
 		mov		iter, [s_iter]				; get "iter" variable from the stack
@@ -974,7 +974,7 @@ InsertTail:	INSERT	add, sub, MoveBwd, MoveFwd, TAIL, HEAD
 ;******************************************************************************;
 ;       Extraction of element                                                  ;
 ;******************************************************************************;
-macro	EXTRACT	cmd1, cmd2, Move1, Move2, offst1, offst2
+macro	EXTRACT	cmd1, cmd2, MoveFunc1, MoveFunc2, offst1, offst2
 {
 ;---[Parameters]---------------------------
 this	equ		rdi							; pointer to deque object
@@ -1042,7 +1042,7 @@ temp	equ		xmm0						; temporary register
 		and		param3, cap
 		mov		param2, ptr
 		mov		param1, [this + ARRAY]
-		call	Move1						; call Move1 (array, ptr, ptr cmd2 KSIZE, cap, pos)
+		call	MoveFunc1					; call MoveFunc1 (array, ptr, ptr cmd2 KSIZE, cap, pos)
 		mov		status, 1					; return true
 		ret
 ;---[Move elements branch #2]--------------
@@ -1053,7 +1053,7 @@ temp	equ		xmm0						; temporary register
 		and		param3, cap
 		mov		param2, ptr
 		mov		param1, [this + ARRAY]
-		call	Move2						; call Move2 (array, ptr, ptr cmd1 KSIZE, cap, size)
+		call	MoveFunc2					; call MoveFunc2 (array, ptr, ptr cmd1 KSIZE, cap, size)
 		mov		status, 1					; return true
 		ret
 }
@@ -1391,12 +1391,12 @@ end if
 }
 
 ; Minimum value
-MinHead:	MINMAX		add, HEAD, g, 0
-MinTail:	MINMAX		sub, TAIL, g, 1
+MinHead:	MINMAX	add, HEAD, g, 0
+MinTail:	MINMAX	sub, TAIL, g, 1
 
 ; Maximum value
-MaxHead:	MINMAX		add, HEAD, l, 0
-MaxTail:	MINMAX		sub, TAIL, l, 1
+MaxHead:	MINMAX	add, HEAD, l, 0
+MaxTail:	MINMAX	sub, TAIL, l, 1
 
 ;******************************************************************************;
 ;       Key searching                                                          ;
