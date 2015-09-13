@@ -196,6 +196,130 @@ public	TruncateFlt64ToSint32		as	'_ZN5Array8TruncateEPiPKdm'
 public	TruncateFlt64ToSint64		as	'_ZN5Array8TruncateEPxPKdm'
 
 ;******************************************************************************;
+;       Bit field operations                                                   ;
+;******************************************************************************;
+
+;==============================================================================;
+;       Get bit value from bit field                                           ;
+;==============================================================================;
+
+; Unsigned integer types
+public	GetBit						as	'Array_GetBit_uint8'
+public	GetBit						as	'Array_GetBit_uint16'
+public	GetBit						as	'Array_GetBit_uint32'
+public	GetBit						as	'Array_GetBit_uint64'
+public	GetBit						as	'_ZN5Array6GetBitEPKhm'
+public	GetBit						as	'_ZN5Array6GetBitEPKtm'
+public	GetBit						as	'_ZN5Array6GetBitEPKjm'
+public	GetBit						as	'_ZN5Array6GetBitEPKym'
+
+; Signed integer types
+public	GetBit						as	'Array_GetBit_sint8'
+public	GetBit						as	'Array_GetBit_sint16'
+public	GetBit						as	'Array_GetBit_sint32'
+public	GetBit						as	'Array_GetBit_sint64'
+public	GetBit						as	'_ZN5Array6GetBitEPKam'
+public	GetBit						as	'_ZN5Array6GetBitEPKsm'
+public	GetBit						as	'_ZN5Array6GetBitEPKim'
+public	GetBit						as	'_ZN5Array6GetBitEPKxm'
+
+; Other types
+public	GetBit						as	'Array_GetBit_size'
+public	GetBit						as	'Array_GetBit'
+public	GetBit						as	'_ZN5Array6GetBitEPKmm'
+public	GetBit						as	'_ZN5Array6GetBitEPKvm'
+
+;==============================================================================;
+;       Set bit value in bit field                                             ;
+;==============================================================================;
+
+; Unsigned integer types
+public	SetBit						as	'Array_SetBit_uint8'
+public	SetBit						as	'Array_SetBit_uint16'
+public	SetBit						as	'Array_SetBit_uint32'
+public	SetBit						as	'Array_SetBit_uint64'
+public	SetBit						as	'_ZN5Array6SetBitEPhm'
+public	SetBit						as	'_ZN5Array6SetBitEPtm'
+public	SetBit						as	'_ZN5Array6SetBitEPjm'
+public	SetBit						as	'_ZN5Array6SetBitEPym'
+
+; Signed integer types
+public	SetBit						as	'Array_SetBit_sint8'
+public	SetBit						as	'Array_SetBit_sint16'
+public	SetBit						as	'Array_SetBit_sint32'
+public	SetBit						as	'Array_SetBit_sint64'
+public	SetBit						as	'_ZN5Array6SetBitEPam'
+public	SetBit						as	'_ZN5Array6SetBitEPsm'
+public	SetBit						as	'_ZN5Array6SetBitEPim'
+public	SetBit						as	'_ZN5Array6SetBitEPxm'
+
+; Other types
+public	SetBit						as	'Array_SetBit_size'
+public	SetBit						as	'Array_SetBit'
+public	SetBit						as	'_ZN5Array6SetBitEPmm'
+public	SetBit						as	'_ZN5Array6SetBitEPvm'
+
+;==============================================================================;
+;       Reset bit value in bit field                                           ;
+;==============================================================================;
+
+; Unsigned integer types
+public	ResetBit					as	'Array_ResetBit_uint8'
+public	ResetBit					as	'Array_ResetBit_uint16'
+public	ResetBit					as	'Array_ResetBit_uint32'
+public	ResetBit					as	'Array_ResetBit_uint64'
+public	ResetBit					as	'_ZN5Array8ResetBitEPhm'
+public	ResetBit					as	'_ZN5Array8ResetBitEPtm'
+public	ResetBit					as	'_ZN5Array8ResetBitEPjm'
+public	ResetBit					as	'_ZN5Array8ResetBitEPym'
+
+; Signed integer types
+public	ResetBit					as	'Array_ResetBit_sint8'
+public	ResetBit					as	'Array_ResetBit_sint16'
+public	ResetBit					as	'Array_ResetBit_sint32'
+public	ResetBit					as	'Array_ResetBit_sint64'
+public	ResetBit					as	'_ZN5Array8ResetBitEPam'
+public	ResetBit					as	'_ZN5Array8ResetBitEPsm'
+public	ResetBit					as	'_ZN5Array8ResetBitEPim'
+public	ResetBit					as	'_ZN5Array8ResetBitEPxm'
+
+; Other types
+public	ResetBit					as	'Array_ResetBit_size'
+public	ResetBit					as	'Array_ResetBit'
+public	ResetBit					as	'_ZN5Array8ResetBitEPmm'
+public	ResetBit					as	'_ZN5Array8ResetBitEPvm'
+
+;==============================================================================;
+;       Invert bit value in bit field                                          ;
+;==============================================================================;
+
+; Unsigned integer types
+public	InvertBit					as	'Array_InvertBit_uint8'
+public	InvertBit					as	'Array_InvertBit_uint16'
+public	InvertBit					as	'Array_InvertBit_uint32'
+public	InvertBit					as	'Array_InvertBit_uint64'
+public	InvertBit					as	'_ZN5Array9InvertBitEPhm'
+public	InvertBit					as	'_ZN5Array9InvertBitEPtm'
+public	InvertBit					as	'_ZN5Array9InvertBitEPjm'
+public	InvertBit					as	'_ZN5Array9InvertBitEPym'
+
+; Signed integer types
+public	InvertBit					as	'Array_InvertBit_sint8'
+public	InvertBit					as	'Array_InvertBit_sint16'
+public	InvertBit					as	'Array_InvertBit_sint32'
+public	InvertBit					as	'Array_InvertBit_sint64'
+public	InvertBit					as	'_ZN5Array9InvertBitEPam'
+public	InvertBit					as	'_ZN5Array9InvertBitEPsm'
+public	InvertBit					as	'_ZN5Array9InvertBitEPim'
+public	InvertBit					as	'_ZN5Array9InvertBitEPxm'
+
+; Other types
+public	InvertBit					as	'Array_InvertBit_size'
+public	InvertBit					as	'Array_InvertBit'
+public	InvertBit					as	'_ZN5Array9InvertBitEPmm'
+public	InvertBit					as	'_ZN5Array9InvertBitEPvm'
+
+;******************************************************************************;
 ;       Bitwise operations                                                     ;
 ;******************************************************************************;
 
@@ -3585,6 +3709,67 @@ macro	TRUNCATE_FLT64_TO_SINT64_SCALAR	reg
 TruncateFlt64ToSint64:	CONVERT	rax, mov, mov, TRUNCATE_FLT64_TO_SINT64_VECTOR, TRUNCATE_FLT64_TO_SINT64_SCALAR, 3, 3, 16, 16
 
 ;******************************************************************************;
+;       Bit field operations                                                   ;
+;******************************************************************************;
+macro	CHANGE_BIT		cmd, inv
+{
+;---[Parameters]---------------------------
+array	equ		rdi							; pointer to array
+index	equ		rsi							; bit position (index)
+;---[Internal variables]-------------------
+shft	equ		rcx							; shift value
+low		equ		cl							; low part of shift value
+bitmask	equ		al							; bit mask
+;------------------------------------------
+		mov		shft, index
+		and		shft, 0x7					; shft = index & 0x7
+		mov		bitmask, 1					; bitmask = 1
+		shl		bitmask, low				; bitmask = 1 << shft
+if inv
+		not		bitmask						; bitmask = ~bitmask
+end if
+		shr		index, 3					; index >>= 3
+		cmd		[array + index], bitmask	; change selected bit
+		ret
+}
+
+;==============================================================================;
+;       Get bit value from bit field                                           ;
+;==============================================================================;
+GetBit:
+;---[Parameters]---------------------------
+array	equ		rdi							; pointer to array
+index	equ		rsi							; bit position (index)
+;---[Internal variables]-------------------
+shft	equ		rcx							; shift value
+low		equ		cl							; low part of shift value
+bitmask	equ		al							; bit mask
+;------------------------------------------
+		mov		shft, index
+		and		shft, 0x7					; shft = index & 0x7
+		mov		bitmask, 1					; bitmask = 1
+		shl		bitmask, low				; bitmask = 1 << shft
+		shr		index, 3					; index >>= 3
+		test	[array + index], bitmask	; test selected bit
+		setnz	bitmask						; return bit state
+		ret
+
+;==============================================================================;
+;       Set bit value in bit field                                             ;
+;==============================================================================;
+SetBit:		CHANGE_BIT	or, 0
+
+;==============================================================================;
+;       Reset bit value in bit field                                           ;
+;==============================================================================;
+ResetBit:	CHANGE_BIT	and, 1
+
+;==============================================================================;
+;       Invert bit value in bit field                                          ;
+;==============================================================================;
+InvertBit:	CHANGE_BIT	xor, 0
+
+;******************************************************************************;
 ;       Bitwise operations                                                     ;
 ;******************************************************************************;
 macro	INT_SCALAR	op, reg, type, x
@@ -3888,10 +4073,6 @@ XorV64:	INT_VECTOR	xor, rax, 0, q
 ;==============================================================================;
 ;       Unary operations                                                       ;
 ;==============================================================================;
-
-;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
-;       Negative value                                                         ;
-;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 macro	ABS	Func, reg, mask
 {
 ;---[Parameters]---------------------------
@@ -3901,6 +4082,10 @@ size	equ		rsi							; array size (count of elements)
 		mov		reg, mask					; load mask
 		jmp		Func						; call Func (array, size)
 }
+
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+;       Negative value                                                         ;
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 Neg_flt32:		ABS		XorS32, edx, SMASK_FLT32
 Neg_flt64:		ABS		XorS64, rdx, SMASK_FLT64
 

@@ -147,6 +147,90 @@ static void Truncate (sint32_t target[], const flt64_t source[], size_t size);
 static void Truncate (sint64_t target[], const flt64_t source[], size_t size);
 
 //****************************************************************************//
+//      Bit field operations                                                  //
+//****************************************************************************//
+
+//============================================================================//
+//      Get bit value from bit field                                          //
+//============================================================================//
+
+// Unsigned integer types
+static bool GetBit (const uint8_t array[], size_t index);
+static bool GetBit (const uint16_t array[], size_t index);
+static bool GetBit (const uint32_t array[], size_t index);
+static bool GetBit (const uint64_t array[], size_t index);
+
+// Signed integer types
+static bool GetBit (const sint8_t array[], size_t index);
+static bool GetBit (const sint16_t array[], size_t index);
+static bool GetBit (const sint32_t array[], size_t index);
+static bool GetBit (const sint64_t array[], size_t index);
+
+// Other types
+static bool GetBit (const size_t array[], size_t index);
+static bool GetBit (const void *array, size_t index);
+
+//============================================================================//
+//      Set bit value in bit field                                            //
+//============================================================================//
+
+// Unsigned integer types
+static void SetBit (uint8_t array[], size_t index);
+static void SetBit (uint16_t array[], size_t index);
+static void SetBit (uint32_t array[], size_t index);
+static void SetBit (uint64_t array[], size_t index);
+
+// Signed integer types
+static void SetBit (sint8_t array[], size_t index);
+static void SetBit (sint16_t array[], size_t index);
+static void SetBit (sint32_t array[], size_t index);
+static void SetBit (sint64_t array[], size_t index);
+
+// Other types
+static void SetBit (size_t array[], size_t index);
+static void SetBit (void *array, size_t index);
+
+//============================================================================//
+//      Reset bit value in bit field                                          //
+//============================================================================//
+
+// Unsigned integer types
+static void ResetBit (uint8_t array[], size_t index);
+static void ResetBit (uint16_t array[], size_t index);
+static void ResetBit (uint32_t array[], size_t index);
+static void ResetBit (uint64_t array[], size_t index);
+
+// Signed integer types
+static void ResetBit (sint8_t array[], size_t index);
+static void ResetBit (sint16_t array[], size_t index);
+static void ResetBit (sint32_t array[], size_t index);
+static void ResetBit (sint64_t array[], size_t index);
+
+// Other types
+static void ResetBit (size_t array[], size_t index);
+static void ResetBit (void *array, size_t index);
+
+//============================================================================//
+//      Invert bit value in bit field                                         //
+//============================================================================//
+
+// Unsigned integer types
+static void InvertBit (uint8_t array[], size_t index);
+static void InvertBit (uint16_t array[], size_t index);
+static void InvertBit (uint32_t array[], size_t index);
+static void InvertBit (uint64_t array[], size_t index);
+
+// Signed integer types
+static void InvertBit (sint8_t array[], size_t index);
+static void InvertBit (sint16_t array[], size_t index);
+static void InvertBit (sint32_t array[], size_t index);
+static void InvertBit (sint64_t array[], size_t index);
+
+// Other types
+static void InvertBit (size_t array[], size_t index);
+static void InvertBit (void *array, size_t index);
+
+//****************************************************************************//
 //      Bitwise operations                                                    //
 //****************************************************************************//
 
@@ -178,19 +262,19 @@ static void Not (size_t array[], size_t size);
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
 // Unsigned integer types
-static void AndScalar (uint8_t target[], size_t size, uint8_t value);
-static void AndScalar (uint16_t target[], size_t size, uint16_t value);
-static void AndScalar (uint32_t target[], size_t size, uint32_t value);
-static void AndScalar (uint64_t target[], size_t size, uint64_t value);
+static void AndScalar (uint8_t array[], size_t size, uint8_t value);
+static void AndScalar (uint16_t array[], size_t size, uint16_t value);
+static void AndScalar (uint32_t array[], size_t size, uint32_t value);
+static void AndScalar (uint64_t array[], size_t size, uint64_t value);
 
 // Signed integer types
-static void AndScalar (sint8_t target[], size_t size, sint8_t value);
-static void AndScalar (sint16_t target[], size_t size, sint16_t value);
-static void AndScalar (sint32_t target[], size_t size, sint32_t value);
-static void AndScalar (sint64_t target[], size_t size, sint64_t value);
+static void AndScalar (sint8_t array[], size_t size, sint8_t value);
+static void AndScalar (sint16_t array[], size_t size, sint16_t value);
+static void AndScalar (sint32_t array[], size_t size, sint32_t value);
+static void AndScalar (sint64_t array[], size_t size, sint64_t value);
 
 // Other types
-static void AndScalar (size_t target[], size_t size, size_t value);
+static void AndScalar (size_t array[], size_t size, size_t value);
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 //      Vector bitwise AND                                                    //
@@ -220,19 +304,19 @@ static void AndVector (size_t target[], const size_t source[], size_t size);
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
 // Unsigned integer types
-static void OrScalar (uint8_t target[], size_t size, uint8_t value);
-static void OrScalar (uint16_t target[], size_t size, uint16_t value);
-static void OrScalar (uint32_t target[], size_t size, uint32_t value);
-static void OrScalar (uint64_t target[], size_t size, uint64_t value);
+static void OrScalar (uint8_t array[], size_t size, uint8_t value);
+static void OrScalar (uint16_t array[], size_t size, uint16_t value);
+static void OrScalar (uint32_t array[], size_t size, uint32_t value);
+static void OrScalar (uint64_t array[], size_t size, uint64_t value);
 
 // Signed integer types
-static void OrScalar (sint8_t target[], size_t size, sint8_t value);
-static void OrScalar (sint16_t target[], size_t size, sint16_t value);
-static void OrScalar (sint32_t target[], size_t size, sint32_t value);
-static void OrScalar (sint64_t target[], size_t size, sint64_t value);
+static void OrScalar (sint8_t array[], size_t size, sint8_t value);
+static void OrScalar (sint16_t array[], size_t size, sint16_t value);
+static void OrScalar (sint32_t array[], size_t size, sint32_t value);
+static void OrScalar (sint64_t array[], size_t size, sint64_t value);
 
 // Other types
-static void OrScalar (size_t target[], size_t size, size_t value);
+static void OrScalar (size_t array[], size_t size, size_t value);
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 //      Vector bitwise OR                                                     //
@@ -262,19 +346,19 @@ static void OrVector (size_t target[], const size_t source[], size_t size);
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
 // Unsigned integer types
-static void XorScalar (uint8_t target[], size_t size, uint8_t value);
-static void XorScalar (uint16_t target[], size_t size, uint16_t value);
-static void XorScalar (uint32_t target[], size_t size, uint32_t value);
-static void XorScalar (uint64_t target[], size_t size, uint64_t value);
+static void XorScalar (uint8_t array[], size_t size, uint8_t value);
+static void XorScalar (uint16_t array[], size_t size, uint16_t value);
+static void XorScalar (uint32_t array[], size_t size, uint32_t value);
+static void XorScalar (uint64_t array[], size_t size, uint64_t value);
 
 // Signed integer types
-static void XorScalar (sint8_t target[], size_t size, sint8_t value);
-static void XorScalar (sint16_t target[], size_t size, sint16_t value);
-static void XorScalar (sint32_t target[], size_t size, sint32_t value);
-static void XorScalar (sint64_t target[], size_t size, sint64_t value);
+static void XorScalar (sint8_t array[], size_t size, sint8_t value);
+static void XorScalar (sint16_t array[], size_t size, sint16_t value);
+static void XorScalar (sint32_t array[], size_t size, sint32_t value);
+static void XorScalar (sint64_t array[], size_t size, sint64_t value);
 
 // Other types
-static void XorScalar (size_t target[], size_t size, size_t value);
+static void XorScalar (size_t array[], size_t size, size_t value);
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 //      Vector bitwise XOR                                                    //
@@ -2063,6 +2147,90 @@ void Array_TruncateFlt64ToSint32 (sint32_t target[], const flt64_t source[], siz
 void Array_TruncateFlt64ToSint64 (sint64_t target[], const flt64_t source[], size_t size);
 
 //****************************************************************************//
+//      Bit field operations                                                  //
+//****************************************************************************//
+
+//============================================================================//
+//      Get bit value from bit field                                          //
+//============================================================================//
+
+// Unsigned integer types
+bool Array_GetBit_uint8 (const uint8_t array[], size_t index);
+bool Array_GetBit_uint16 (const uint16_t array[], size_t index);
+bool Array_GetBit_uint32 (const uint32_t array[], size_t index);
+bool Array_GetBit_uint64 (const uint64_t array[], size_t index);
+
+// Signed integer types
+bool Array_GetBit_sint8 (const sint8_t array[], size_t index);
+bool Array_GetBit_sint16 (const sint16_t array[], size_t index);
+bool Array_GetBit_sint32 (const sint32_t array[], size_t index);
+bool Array_GetBit_sint64 (const sint64_t array[], size_t index);
+
+// Other types
+bool Array_GetBit_size (const size_t array[], size_t index);
+bool Array_GetBit (const void *array, size_t index);
+
+//============================================================================//
+//      Set bit value in bit field                                            //
+//============================================================================//
+
+// Unsigned integer types
+void Array_SetBit_uint8 (uint8_t array[], size_t index);
+void Array_SetBit_uint16 (uint16_t array[], size_t index);
+void Array_SetBit_uint32 (uint32_t array[], size_t index);
+void Array_SetBit_uint64 (uint64_t array[], size_t index);
+
+// Signed integer types
+void Array_SetBit_sint8 (sint8_t array[], size_t index);
+void Array_SetBit_sint16 (sint16_t array[], size_t index);
+void Array_SetBit_sint32 (sint32_t array[], size_t index);
+void Array_SetBit_sint64 (sint64_t array[], size_t index);
+
+// Other types
+void Array_SetBit_size (size_t array[], size_t index);
+void Array_SetBit (void *array, size_t index);
+
+//============================================================================//
+//      Reset bit value in bit field                                          //
+//============================================================================//
+
+// Unsigned integer types
+void Array_ResetBit_uint8 (uint8_t array[], size_t index);
+void Array_ResetBit_uint16 (uint16_t array[], size_t index);
+void Array_ResetBit_uint32 (uint32_t array[], size_t index);
+void Array_ResetBit_uint64 (uint64_t array[], size_t index);
+
+// Signed integer types
+void Array_ResetBit_sint8 (sint8_t array[], size_t index);
+void Array_ResetBit_sint16 (sint16_t array[], size_t index);
+void Array_ResetBit_sint32 (sint32_t array[], size_t index);
+void Array_ResetBit_sint64 (sint64_t array[], size_t index);
+
+// Other types
+void Array_ResetBit_size (size_t array[], size_t index);
+void Array_ResetBit (void *array, size_t index);
+
+//============================================================================//
+//      Invert bit value in bit field                                         //
+//============================================================================//
+
+// Unsigned integer types
+void Array_InvertBit_uint8 (uint8_t array[], size_t index);
+void Array_InvertBit_uint16 (uint16_t array[], size_t index);
+void Array_InvertBit_uint32 (uint32_t array[], size_t index);
+void Array_InvertBit_uint64 (uint64_t array[], size_t index);
+
+// Signed integer types
+void Array_InvertBit_sint8 (sint8_t array[], size_t index);
+void Array_InvertBit_sint16 (sint16_t array[], size_t index);
+void Array_InvertBit_sint32 (sint32_t array[], size_t index);
+void Array_InvertBit_sint64 (sint64_t array[], size_t index);
+
+// Other types
+void Array_InvertBit_size (size_t array[], size_t index);
+void Array_InvertBit (void *array, size_t index);
+
+//****************************************************************************//
 //      Bitwise operations                                                    //
 //****************************************************************************//
 
@@ -2094,19 +2262,19 @@ void Array_Not_size (size_t array[], size_t size);
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
 // Unsigned integer types
-void Array_AndScalar_uint8 (uint8_t target[], size_t size, uint8_t value);
-void Array_AndScalar_uint16 (uint16_t target[], size_t size, uint16_t value);
-void Array_AndScalar_uint32 (uint32_t target[], size_t size, uint32_t value);
-void Array_AndScalar_uint64 (uint64_t target[], size_t size, uint64_t value);
+void Array_AndScalar_uint8 (uint8_t array[], size_t size, uint8_t value);
+void Array_AndScalar_uint16 (uint16_t array[], size_t size, uint16_t value);
+void Array_AndScalar_uint32 (uint32_t array[], size_t size, uint32_t value);
+void Array_AndScalar_uint64 (uint64_t array[], size_t size, uint64_t value);
 
 // Signed integer types
-void Array_AndScalar_sint8 (sint8_t target[], size_t size, sint8_t value);
-void Array_AndScalar_sint16 (sint16_t target[], size_t size, sint16_t value);
-void Array_AndScalar_sint32 (sint32_t target[], size_t size, sint32_t value);
-void Array_AndScalar_sint64 (sint64_t target[], size_t size, sint64_t value);
+void Array_AndScalar_sint8 (sint8_t array[], size_t size, sint8_t value);
+void Array_AndScalar_sint16 (sint16_t array[], size_t size, sint16_t value);
+void Array_AndScalar_sint32 (sint32_t array[], size_t size, sint32_t value);
+void Array_AndScalar_sint64 (sint64_t array[], size_t size, sint64_t value);
 
 // Other types
-void Array_AndScalar_size (size_t target[], size_t size, size_t value);
+void Array_AndScalar_size (size_t array[], size_t size, size_t value);
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 //      Vector bitwise AND                                                    //
@@ -2136,19 +2304,19 @@ void Array_AndVector_size (size_t target[], const size_t source[], size_t size);
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
 // Unsigned integer types
-void Array_OrScalar_uint8 (uint8_t target[], size_t size, uint8_t value);
-void Array_OrScalar_uint16 (uint16_t target[], size_t size, uint16_t value);
-void Array_OrScalar_uint32 (uint32_t target[], size_t size, uint32_t value);
-void Array_OrScalar_uint64 (uint64_t target[], size_t size, uint64_t value);
+void Array_OrScalar_uint8 (uint8_t array[], size_t size, uint8_t value);
+void Array_OrScalar_uint16 (uint16_t array[], size_t size, uint16_t value);
+void Array_OrScalar_uint32 (uint32_t array[], size_t size, uint32_t value);
+void Array_OrScalar_uint64 (uint64_t array[], size_t size, uint64_t value);
 
 // Signed integer types
-void Array_OrScalar_sint8 (sint8_t target[], size_t size, sint8_t value);
-void Array_OrScalar_sint16 (sint16_t target[], size_t size, sint16_t value);
-void Array_OrScalar_sint32 (sint32_t target[], size_t size, sint32_t value);
-void Array_OrScalar_sint64 (sint64_t target[], size_t size, sint64_t value);
+void Array_OrScalar_sint8 (sint8_t array[], size_t size, sint8_t value);
+void Array_OrScalar_sint16 (sint16_t array[], size_t size, sint16_t value);
+void Array_OrScalar_sint32 (sint32_t array[], size_t size, sint32_t value);
+void Array_OrScalar_sint64 (sint64_t array[], size_t size, sint64_t value);
 
 // Other types
-void Array_OrScalar_size (size_t target[], size_t size, size_t value);
+void Array_OrScalar_size (size_t array[], size_t size, size_t value);
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 //      Vector bitwise OR                                                     //
@@ -2178,19 +2346,19 @@ void Array_OrVector_size (size_t target[], const size_t source[], size_t size);
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
 // Unsigned integer types
-void Array_XorScalar_uint8 (uint8_t target[], size_t size, uint8_t value);
-void Array_XorScalar_uint16 (uint16_t target[], size_t size, uint16_t value);
-void Array_XorScalar_uint32 (uint32_t target[], size_t size, uint32_t value);
-void Array_XorScalar_uint64 (uint64_t target[], size_t size, uint64_t value);
+void Array_XorScalar_uint8 (uint8_t array[], size_t size, uint8_t value);
+void Array_XorScalar_uint16 (uint16_t array[], size_t size, uint16_t value);
+void Array_XorScalar_uint32 (uint32_t array[], size_t size, uint32_t value);
+void Array_XorScalar_uint64 (uint64_t array[], size_t size, uint64_t value);
 
 // Signed integer types
-void Array_XorScalar_sint8 (sint8_t target[], size_t size, sint8_t value);
-void Array_XorScalar_sint16 (sint16_t target[], size_t size, sint16_t value);
-void Array_XorScalar_sint32 (sint32_t target[], size_t size, sint32_t value);
-void Array_XorScalar_sint64 (sint64_t target[], size_t size, sint64_t value);
+void Array_XorScalar_sint8 (sint8_t array[], size_t size, sint8_t value);
+void Array_XorScalar_sint16 (sint16_t array[], size_t size, sint16_t value);
+void Array_XorScalar_sint32 (sint32_t array[], size_t size, sint32_t value);
+void Array_XorScalar_sint64 (sint64_t array[], size_t size, sint64_t value);
 
 // Other types
-void Array_XorScalar_size (size_t target[], size_t size, size_t value);
+void Array_XorScalar_size (size_t array[], size_t size, size_t value);
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 //      Vector bitwise XOR                                                    //

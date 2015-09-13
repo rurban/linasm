@@ -1201,100 +1201,71 @@ BitReverse64:	BIT_REVERSE		rax, rdi, rdx, rcx, 3
 ;==============================================================================;
 ;       Bit scan                                                               ;
 ;==============================================================================;
+macro	SCAN_BIT	cmd, result, value, error, scale
+{
+;---[Internal variables]-------------------
+if scale = 0
+mask	= 0xFF								; mask to clear unrequired bits
+else if scale = 1
+mask	= 0xFFFF							; mask to clear unrequired bits
+else if scale = 2
+mask	= 0xFFFFFFFF						; mask to clear unrequired bits
+else if scale = 3
+mask	= 0xFFFFFFFFFFFFFFFF				; mask to clear unrequired bits
+end if
+;------------------------------------------
+		and		value, mask					; clear unrequired bits
+		mov		error, mask					; error = -1
+		cmd		result, value				; result = required set bit
+		cmovz	result, error				; if value = 0, then result = error
+		ret									; return result
+}
 
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 ;       Bit scan forward                                                       ;
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
-macro	SCAN_FWD	result, value, error, scale
-{
-;---[Internal variables]-------------------
-if scale = 0
-mask	= 0xFF								; mask to clear unrequired bits
-else if scale = 1
-mask	= 0xFFFF							; mask to clear unrequired bits
-else if scale = 2
-mask	= 0xFFFFFFFF						; mask to clear unrequired bits
-else if scale = 3
-mask	= 0xFFFFFFFFFFFFFFFF				; mask to clear unrequired bits
-end if
-;------------------------------------------
-		and		value, mask					; clear unrequired bits
-		mov		error, mask					; error = -1
-		bsf		result, value				; result = least significant set bit
-		cmovz	result, error				; if value = 0, then result = error
-		ret									; return result
-}
-ScanFwd8:	SCAN_FWD	ax, di, si, 0
-ScanFwd16:	SCAN_FWD	ax, di, si, 1
-ScanFwd32:	SCAN_FWD	eax, edi, esi, 2
-ScanFwd64:	SCAN_FWD	rax, rdi, rsi, 3
+ScanFwd8:	SCAN_BIT	bsf, ax, di, si, 0
+ScanFwd16:	SCAN_BIT	bsf, ax, di, si, 1
+ScanFwd32:	SCAN_BIT	bsf, eax, edi, esi, 2
+ScanFwd64:	SCAN_BIT	bsf, rax, rdi, rsi, 3
 
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 ;       Bit scan backward                                                      ;
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
-macro	SCAN_BWD	result, value, error, scale
-{
-;---[Internal variables]-------------------
-if scale = 0
-mask	= 0xFF								; mask to clear unrequired bits
-else if scale = 1
-mask	= 0xFFFF							; mask to clear unrequired bits
-else if scale = 2
-mask	= 0xFFFFFFFF						; mask to clear unrequired bits
-else if scale = 3
-mask	= 0xFFFFFFFFFFFFFFFF				; mask to clear unrequired bits
-end if
-;------------------------------------------
-		and		value, mask					; clear unrequired bits
-		mov		error, mask					; error = -1
-		bsr		result, value				; result = most significant set bit
-		cmovz	result, error				; if value = 0, then result = error
-		ret									; return result
-}
-ScanBwd8:	SCAN_BWD	ax, di, si, 0
-ScanBwd16:	SCAN_BWD	ax, di, si, 1
-ScanBwd32:	SCAN_BWD	eax, edi, esi, 2
-ScanBwd64:	SCAN_BWD	rax, rdi, rsi, 3
+ScanBwd8:	SCAN_BIT	bsr, ax, di, si, 0
+ScanBwd16:	SCAN_BIT	bsr, ax, di, si, 1
+ScanBwd32:	SCAN_BIT	bsr, eax, edi, esi, 2
+ScanBwd64:	SCAN_BIT	bsr, rax, rdi, rsi, 3
 
 ;==============================================================================;
 ;       Circular rotation                                                      ;
 ;==============================================================================;
+macro	ROTATE	cmd, result, value, shift
+{
+;---[Internal variables]-------------------
+rot		equ		cl							; rotation value
+;------------------------------------------
+		mov		rot, shift					; rot = shift
+		cmd		value, rot					; rotate value to rot bits
+		mov		result, value				; return RotateLeft (value, shift)
+		ret
+}
 
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 ;       Circular rotation to the left                                          ;
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
-macro	ROTATE_LEFT		result, value, shift
-{
-;---[Internal variables]-------------------
-rot		equ		cl							; rotation value
-;------------------------------------------
-		mov		rot, shift					; rot = shift
-		rol		value, rot					; rotate value left to rot bits
-		mov		result, value				; return RotateLeft (value, shift)
-		ret
-}
-RotateLeft8:	ROTATE_LEFT		al, dil, sil
-RotateLeft16:	ROTATE_LEFT		ax, di, sil
-RotateLeft32:	ROTATE_LEFT		eax, edi, sil
-RotateLeft64:	ROTATE_LEFT		rax, rdi, sil
+RotateLeft8:	ROTATE	rol, al, dil, sil
+RotateLeft16:	ROTATE	rol, ax, di, sil
+RotateLeft32:	ROTATE	rol, eax, edi, sil
+RotateLeft64:	ROTATE	rol, rax, rdi, sil
 
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 ;       Circular rotation to the right                                         ;
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
-macro	ROTATE_RIGHT		result, value, shift
-{
-;---[Internal variables]-------------------
-rot		equ		cl							; rotation value
-;------------------------------------------
-		mov		rot, shift					; rot = shift
-		ror		value, rot					; rotate value right to rot bits
-		mov		result, value				; return RotateRight (value, shift)
-		ret
-}
-RotateRight8:	ROTATE_RIGHT	al, dil, sil
-RotateRight16:	ROTATE_RIGHT	ax, di, sil
-RotateRight32:	ROTATE_RIGHT	eax, edi, sil
-RotateRight64:	ROTATE_RIGHT	rax, rdi, sil
+RotateRight8:	ROTATE	ror, al, dil, sil
+RotateRight16:	ROTATE	ror, ax, di, sil
+RotateRight32:	ROTATE	ror, eax, edi, sil
+RotateRight64:	ROTATE	ror, rax, rdi, sil
 
 ;==============================================================================;
 ;       Population count                                                       ;
