@@ -42,14 +42,14 @@ extrn	'Math_ArcTan2_flt64'		as	ArcTan2_flt64
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 ;       Normalization (direction cosines)                                      ;
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
-public	Normalize3D_flt32		as	'Vector3D32_Normalize'
-public	Normalize3D_flt64		as	'Vector3D64_Normalize'
-public	Normalize2D_flt32		as	'Vector2D32_Normalize'
-public	Normalize2D_flt64		as	'Vector2D64_Normalize'
-public	Normalize3D_flt32		as	'_ZN10Vector3D329NormalizeEv'
-public	Normalize3D_flt64		as	'_ZN10Vector3D649NormalizeEv'
-public	Normalize2D_flt32		as	'_ZN10Vector2D329NormalizeEv'
-public	Normalize2D_flt64		as	'_ZN10Vector2D649NormalizeEv'
+public	Normalize3D_flt32		as	'Vector3D_Normalize_flt32'
+public	Normalize3D_flt64		as	'Vector3D_Normalize_flt64'
+public	Normalize2D_flt32		as	'Vector2D_Normalize_flt32'
+public	Normalize2D_flt64		as	'Vector2D_Normalize_flt64'
+public	Normalize3D_flt32		as	'_ZN8Vector3D9NormalizeEP7v3D32_t'
+public	Normalize3D_flt64		as	'_ZN8Vector3D9NormalizeEP7v3D64_t'
+public	Normalize2D_flt32		as	'_ZN8Vector2D9NormalizeEP7v2D32_t'
+public	Normalize2D_flt64		as	'_ZN8Vector2D9NormalizeEP7v2D64_t'
 
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 ;       Reflection of vector                                                   ;
@@ -58,98 +58,98 @@ public	Normalize2D_flt64		as	'_ZN10Vector2D649NormalizeEv'
 ;------------------------------------------------------------------------------;
 ;       Reflection through the origin                                          ;
 ;------------------------------------------------------------------------------;
-public	ReflectOrigin3D_flt32	as	'Vector3D32_ReflectOrigin'
-public	ReflectOrigin3D_flt64	as	'Vector3D64_ReflectOrigin'
-public	ReflectOrigin2D_flt32	as	'Vector2D32_ReflectOrigin'
-public	ReflectOrigin2D_flt64	as	'Vector2D64_ReflectOrigin'
-public	ReflectOrigin2D_flt32	as	'Complex32_Neg'
-public	ReflectOrigin2D_flt64	as	'Complex64_Neg'
-public	ReflectOrigin3D_flt32	as	'_ZN10Vector3D3213ReflectOriginEv'
-public	ReflectOrigin3D_flt64	as	'_ZN10Vector3D6413ReflectOriginEv'
-public	ReflectOrigin2D_flt32	as	'_ZN10Vector2D3213ReflectOriginEv'
-public	ReflectOrigin2D_flt64	as	'_ZN10Vector2D6413ReflectOriginEv'
-public	ReflectOrigin2D_flt32	as	'_ZN9Complex323NegEv'
-public	ReflectOrigin2D_flt64	as	'_ZN9Complex643NegEv'
+public	ReflectOrigin3D_flt32	as	'Vector3D_ReflectOrigin_flt32'
+public	ReflectOrigin3D_flt64	as	'Vector3D_ReflectOrigin_flt64'
+public	ReflectOrigin2D_flt32	as	'Vector2D_ReflectOrigin_flt32'
+public	ReflectOrigin2D_flt64	as	'Vector2D_ReflectOrigin_flt64'
+public	ReflectOrigin2D_flt32	as	'Complex_Neg_flt32'
+public	ReflectOrigin2D_flt64	as	'Complex_Neg_flt64'
+public	ReflectOrigin3D_flt32	as	'_ZN8Vector3D13ReflectOriginEP7v3D32_t'
+public	ReflectOrigin3D_flt64	as	'_ZN8Vector3D13ReflectOriginEP7v3D64_t'
+public	ReflectOrigin2D_flt32	as	'_ZN8Vector2D13ReflectOriginEP7v2D32_t'
+public	ReflectOrigin2D_flt64	as	'_ZN8Vector2D13ReflectOriginEP7v2D64_t'
+public	ReflectOrigin2D_flt32	as	'_ZN7Complex3NegEP9cmplx32_t'
+public	ReflectOrigin2D_flt64	as	'_ZN7Complex3NegEP9cmplx64_t'
 
 ;------------------------------------------------------------------------------;
 ;       Reflection through the axis                                            ;
 ;------------------------------------------------------------------------------;
 
 ; Reflection through the X axis
-public	ReflectX_flt32			as	'Vector3D32_ReflectX'
-public	ReflectX_flt64			as	'Vector3D64_ReflectX'
-public	ReflectX_flt32			as	'_ZN10Vector3D328ReflectXEv'
-public	ReflectX_flt64			as	'_ZN10Vector3D648ReflectXEv'
+public	ReflectX_flt32			as	'Vector3D_ReflectX_flt32'
+public	ReflectX_flt64			as	'Vector3D_ReflectX_flt64'
+public	ReflectX_flt32			as	'_ZN8Vector3D8ReflectXEP7v3D32_t'
+public	ReflectX_flt64			as	'_ZN8Vector3D8ReflectXEP7v3D64_t'
 
 ; Reflection through the Y axis
-public	ReflectY_flt32			as	'Vector3D32_ReflectY'
-public	ReflectY_flt64			as	'Vector3D64_ReflectY'
-public	ReflectY_flt32			as	'_ZN10Vector3D328ReflectYEv'
-public	ReflectY_flt64			as	'_ZN10Vector3D648ReflectYEv'
+public	ReflectY_flt32			as	'Vector3D_ReflectY_flt32'
+public	ReflectY_flt64			as	'Vector3D_ReflectY_flt64'
+public	ReflectY_flt32			as	'_ZN8Vector3D8ReflectYEP7v3D32_t'
+public	ReflectY_flt64			as	'_ZN8Vector3D8ReflectYEP7v3D64_t'
 
 ; Reflection through the Z axis
-public	ReflectZ_flt32			as	'Vector3D32_ReflectZ'
-public	ReflectZ_flt64			as	'Vector3D64_ReflectZ'
-public	ReflectZ_flt32			as	'_ZN10Vector3D328ReflectZEv'
-public	ReflectZ_flt64			as	'_ZN10Vector3D648ReflectZEv'
+public	ReflectZ_flt32			as	'Vector3D_ReflectZ_flt32'
+public	ReflectZ_flt64			as	'Vector3D_ReflectZ_flt64'
+public	ReflectZ_flt32			as	'_ZN8Vector3D8ReflectZEP7v3D32_t'
+public	ReflectZ_flt64			as	'_ZN8Vector3D8ReflectZEP7v3D64_t'
 
 ;------------------------------------------------------------------------------;
 ;       Reflection through the plane                                           ;
 ;------------------------------------------------------------------------------;
 
 ; Reflection through the YZ plane
-public	ReflectYZ_flt32			as	'Vector3D32_ReflectYZ'
-public	ReflectYZ_flt64			as	'Vector3D64_ReflectYZ'
-public	ReflectYZ_flt32			as	'Vector2D32_ReflectY'
-public	ReflectYZ_flt64			as	'Vector2D64_ReflectY'
-public	ReflectYZ_flt32			as	'_ZN10Vector3D329ReflectYZEv'
-public	ReflectYZ_flt64			as	'_ZN10Vector3D649ReflectYZEv'
-public	ReflectYZ_flt32			as	'_ZN10Vector2D328ReflectYEv'
-public	ReflectYZ_flt64			as	'_ZN10Vector2D648ReflectYEv'
+public	ReflectYZ_flt32			as	'Vector3D_ReflectYZ_flt32'
+public	ReflectYZ_flt64			as	'Vector3D_ReflectYZ_flt64'
+public	ReflectYZ_flt32			as	'Vector2D_ReflectY_flt32'
+public	ReflectYZ_flt64			as	'Vector2D_ReflectY_flt64'
+public	ReflectYZ_flt32			as	'_ZN8Vector3D9ReflectYZEP7v3D32_t'
+public	ReflectYZ_flt64			as	'_ZN8Vector3D9ReflectYZEP7v3D64_t'
+public	ReflectYZ_flt32			as	'_ZN8Vector2D8ReflectYEP7v2D32_t'
+public	ReflectYZ_flt64			as	'_ZN8Vector2D8ReflectYEP7v2D64_t'
 
 ; Reflection through the XZ plane
-public	ReflectXZ_flt32			as	'Vector3D32_ReflectXZ'
-public	ReflectXZ_flt64			as	'Vector3D64_ReflectXZ'
-public	ReflectXZ_flt32			as	'Vector2D32_ReflectX'
-public	ReflectXZ_flt64			as	'Vector2D64_ReflectX'
-public	ReflectXZ_flt32			as	'Complex32_Conj'
-public	ReflectXZ_flt64			as	'Complex64_Conj'
-public	ReflectXZ_flt32			as	'_ZN10Vector3D329ReflectXZEv'
-public	ReflectXZ_flt64			as	'_ZN10Vector3D649ReflectXZEv'
-public	ReflectXZ_flt32			as	'_ZN10Vector2D328ReflectXEv'
-public	ReflectXZ_flt64			as	'_ZN10Vector2D648ReflectXEv'
-public	ReflectXZ_flt32			as	'_ZN9Complex324ConjEv'
-public	ReflectXZ_flt64			as	'_ZN9Complex644ConjEv'
+public	ReflectXZ_flt32			as	'Vector3D_ReflectXZ_flt32'
+public	ReflectXZ_flt64			as	'Vector3D_ReflectXZ_flt64'
+public	ReflectXZ_flt32			as	'Vector2D_ReflectX_flt32'
+public	ReflectXZ_flt64			as	'Vector2D_ReflectX_flt64'
+public	ReflectXZ_flt32			as	'Complex_Conj_flt32'
+public	ReflectXZ_flt64			as	'Complex_Conj_flt64'
+public	ReflectXZ_flt32			as	'_ZN8Vector3D9ReflectXZEP7v3D32_t'
+public	ReflectXZ_flt64			as	'_ZN8Vector3D9ReflectXZEP7v3D64_t'
+public	ReflectXZ_flt32			as	'_ZN8Vector2D8ReflectXEP7v2D32_t'
+public	ReflectXZ_flt64			as	'_ZN8Vector2D8ReflectXEP7v2D64_t'
+public	ReflectXZ_flt32			as	'_ZN7Complex4ConjEP9cmplx32_t'
+public	ReflectXZ_flt64			as	'_ZN7Complex4ConjEP9cmplx64_t'
 
 ; Reflection through the XY plane
-public	ReflectXY_flt32			as	'Vector3D32_ReflectXY'
-public	ReflectXY_flt64			as	'Vector3D64_ReflectXY'
-public	ReflectXY_flt32			as	'_ZN10Vector3D329ReflectXYEv'
-public	ReflectXY_flt64			as	'_ZN10Vector3D649ReflectXYEv'
+public	ReflectXY_flt32			as	'Vector3D_ReflectXY_flt32'
+public	ReflectXY_flt64			as	'Vector3D_ReflectXY_flt64'
+public	ReflectXY_flt32			as	'_ZN8Vector3D9ReflectXYEP7v3D32_t'
+public	ReflectXY_flt64			as	'_ZN8Vector3D9ReflectXYEP7v3D64_t'
 
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 ;       Square root of the vector                                              ;
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
-public	Sqrt_flt32				as	'Complex32_Sqrt'
-public	Sqrt_flt64				as	'Complex64_Sqrt'
-public	Sqrt_flt32				as	'_ZN9Complex324SqrtEv'
-public	Sqrt_flt64				as	'_ZN9Complex644SqrtEv'
+public	Sqrt_flt32				as	'Complex_Sqrt_flt32'
+public	Sqrt_flt64				as	'Complex_Sqrt_flt64'
+public	Sqrt_flt32				as	'_ZN7Complex4SqrtEP9cmplx32_t'
+public	Sqrt_flt64				as	'_ZN7Complex4SqrtEP9cmplx64_t'
 
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 ;       Square value of the vector                                             ;
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
-public	Sqr_flt32				as	'Complex32_Sqr'
-public	Sqr_flt64				as	'Complex64_Sqr'
-public	Sqr_flt32				as	'_ZN9Complex323SqrEv'
-public	Sqr_flt64				as	'_ZN9Complex643SqrEv'
+public	Sqr_flt32				as	'Complex_Sqr_flt32'
+public	Sqr_flt64				as	'Complex_Sqr_flt64'
+public	Sqr_flt32				as	'_ZN7Complex3SqrEP9cmplx32_t'
+public	Sqr_flt64				as	'_ZN7Complex3SqrEP9cmplx64_t'
 
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 ;       Inverse vector                                                         ;
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
-public	Inverse_flt32			as	'Complex32_Inverse'
-public	Inverse_flt64			as	'Complex64_Inverse'
-public	Inverse_flt32			as	'_ZN9Complex327InverseEv'
-public	Inverse_flt64			as	'_ZN9Complex647InverseEv'
+public	Inverse_flt32			as	'Complex_Inverse_flt32'
+public	Inverse_flt64			as	'Complex_Inverse_flt64'
+public	Inverse_flt32			as	'_ZN7Complex7InverseEP9cmplx32_t'
+public	Inverse_flt64			as	'_ZN7Complex7InverseEP9cmplx64_t'
 
 ;==============================================================================;
 ;       Binary operations                                                      ;
@@ -158,100 +158,100 @@ public	Inverse_flt64			as	'_ZN9Complex647InverseEv'
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 ;       Addition of vectors                                                    ;
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
-public	Add3D_flt32				as	'Vector3D32_Add'
-public	Add3D_flt64				as	'Vector3D64_Add'
-public	Add2D_flt32				as	'Vector2D32_Add'
-public	Add2D_flt64				as	'Vector2D64_Add'
-public	Add2D_flt32				as	'Complex32_Add'
-public	Add2D_flt64				as	'Complex64_Add'
-public	Add3D_flt32				as	'_ZN10Vector3D323AddEPKS_'
-public	Add3D_flt64				as	'_ZN10Vector3D643AddEPKS_'
-public	Add2D_flt32				as	'_ZN10Vector2D323AddEPKS_'
-public	Add2D_flt64				as	'_ZN10Vector2D643AddEPKS_'
-public	Add2D_flt32				as	'_ZN9Complex323AddEPKS_'
-public	Add2D_flt64				as	'_ZN9Complex643AddEPKS_'
+public	Add3D_flt32				as	'Vector3D_Add_flt32'
+public	Add3D_flt64				as	'Vector3D_Add_flt64'
+public	Add2D_flt32				as	'Vector2D_Add_flt32'
+public	Add2D_flt64				as	'Vector2D_Add_flt64'
+public	Add2D_flt32				as	'Complex_Add_flt32'
+public	Add2D_flt64				as	'Complex_Add_flt64'
+public	Add3D_flt32				as	'_ZN8Vector3D3AddEP7v3D32_tPKS0_'
+public	Add3D_flt64				as	'_ZN8Vector3D3AddEP7v3D64_tPKS0_'
+public	Add2D_flt32				as	'_ZN8Vector2D3AddEP7v2D32_tPKS0_'
+public	Add2D_flt64				as	'_ZN8Vector2D3AddEP7v2D64_tPKS0_'
+public	Add2D_flt32				as	'_ZN7Complex3AddEP9cmplx32_tPKS0_'
+public	Add2D_flt64				as	'_ZN7Complex3AddEP9cmplx64_tPKS0_'
 
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 ;       Subtraction of vectors                                                 ;
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
-public	Sub3D_flt32				as	'Vector3D32_Sub'
-public	Sub3D_flt64				as	'Vector3D64_Sub'
-public	Sub2D_flt32				as	'Vector2D32_Sub'
-public	Sub2D_flt64				as	'Vector2D64_Sub'
-public	Sub2D_flt32				as	'Complex32_Sub'
-public	Sub2D_flt64				as	'Complex64_Sub'
-public	Sub3D_flt32				as	'_ZN10Vector3D323SubEPKS_'
-public	Sub3D_flt64				as	'_ZN10Vector3D643SubEPKS_'
-public	Sub2D_flt32				as	'_ZN10Vector2D323SubEPKS_'
-public	Sub2D_flt64				as	'_ZN10Vector2D643SubEPKS_'
-public	Sub2D_flt32				as	'_ZN9Complex323SubEPKS_'
-public	Sub2D_flt64				as	'_ZN9Complex643SubEPKS_'
+public	Sub3D_flt32				as	'Vector3D_Sub_flt32'
+public	Sub3D_flt64				as	'Vector3D_Sub_flt64'
+public	Sub2D_flt32				as	'Vector2D_Sub_flt32'
+public	Sub2D_flt64				as	'Vector2D_Sub_flt64'
+public	Sub2D_flt32				as	'Complex_Sub_flt32'
+public	Sub2D_flt64				as	'Complex_Sub_flt64'
+public	Sub3D_flt32				as	'_ZN8Vector3D3SubEP7v3D32_tPKS0_'
+public	Sub3D_flt64				as	'_ZN8Vector3D3SubEP7v3D64_tPKS0_'
+public	Sub2D_flt32				as	'_ZN8Vector2D3SubEP7v2D32_tPKS0_'
+public	Sub2D_flt64				as	'_ZN8Vector2D3SubEP7v2D64_tPKS0_'
+public	Sub2D_flt32				as	'_ZN7Complex3SubEP9cmplx32_tPKS0_'
+public	Sub2D_flt64				as	'_ZN7Complex3SubEP9cmplx64_tPKS0_'
 
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 ;       Multiplication by scalar value                                         ;
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
-public	Mul3D_flt32				as	'Vector3D32_Mul'
-public	Mul3D_flt64				as	'Vector3D64_Mul'
-public	Mul2D_flt32				as	'Vector2D32_Mul'
-public	Mul2D_flt64				as	'Vector2D64_Mul'
-public	Mul3D_flt32				as	'_ZN10Vector3D323MulEf'
-public	Mul3D_flt64				as	'_ZN10Vector3D643MulEd'
-public	Mul2D_flt32				as	'_ZN10Vector2D323MulEf'
-public	Mul2D_flt64				as	'_ZN10Vector2D643MulEd'
+public	Mul3D_flt32				as	'Vector3D_Mul_flt32'
+public	Mul3D_flt64				as	'Vector3D_Mul_flt64'
+public	Mul2D_flt32				as	'Vector2D_Mul_flt32'
+public	Mul2D_flt64				as	'Vector2D_Mul_flt64'
+public	Mul3D_flt32				as	'_ZN8Vector3D3MulEP7v3D32_tf'
+public	Mul3D_flt64				as	'_ZN8Vector3D3MulEP7v3D64_td'
+public	Mul2D_flt32				as	'_ZN8Vector2D3MulEP7v2D32_tf'
+public	Mul2D_flt64				as	'_ZN8Vector2D3MulEP7v2D64_td'
 
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 ;       Multiplication of vectors                                              ;
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
-public	VectorMul_flt32			as	'Complex32_Mul'
-public	VectorMul_flt64			as	'Complex64_Mul'
-public	VectorMul_flt32			as	'_ZN9Complex323MulEPKS_'
-public	VectorMul_flt64			as	'_ZN9Complex643MulEPKS_'
+public	VectorMul_flt32			as	'Complex_Mul_flt32'
+public	VectorMul_flt64			as	'Complex_Mul_flt64'
+public	VectorMul_flt32			as	'_ZN7Complex3MulEP9cmplx32_tPKS0_'
+public	VectorMul_flt64			as	'_ZN7Complex3MulEP9cmplx64_tPKS0_'
 
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 ;       Division by scalar value                                               ;
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
-public	Div3D_flt32				as	'Vector3D32_Div'
-public	Div3D_flt64				as	'Vector3D64_Div'
-public	Div2D_flt32				as	'Vector2D32_Div'
-public	Div2D_flt64				as	'Vector2D64_Div'
-public	Div3D_flt32				as	'_ZN10Vector3D323DivEf'
-public	Div3D_flt64				as	'_ZN10Vector3D643DivEd'
-public	Div2D_flt32				as	'_ZN10Vector2D323DivEf'
-public	Div2D_flt64				as	'_ZN10Vector2D643DivEd'
+public	Div3D_flt32				as	'Vector3D_Div_flt32'
+public	Div3D_flt64				as	'Vector3D_Div_flt64'
+public	Div2D_flt32				as	'Vector2D_Div_flt32'
+public	Div2D_flt64				as	'Vector2D_Div_flt64'
+public	Div3D_flt32				as	'_ZN8Vector3D3DivEP7v3D32_tf'
+public	Div3D_flt64				as	'_ZN8Vector3D3DivEP7v3D64_td'
+public	Div2D_flt32				as	'_ZN8Vector2D3DivEP7v2D32_tf'
+public	Div2D_flt64				as	'_ZN8Vector2D3DivEP7v2D64_td'
 
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 ;       Division of vectors                                                    ;
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
-public	VectorDiv_flt32			as	'Complex32_Div'
-public	VectorDiv_flt64			as	'Complex64_Div'
-public	VectorDiv_flt32			as	'_ZN9Complex323DivEPKS_'
-public	VectorDiv_flt64			as	'_ZN9Complex643DivEPKS_'
+public	VectorDiv_flt32			as	'Complex_Div_flt32'
+public	VectorDiv_flt64			as	'Complex_Div_flt64'
+public	VectorDiv_flt32			as	'_ZN7Complex3DivEP9cmplx32_tPKS0_'
+public	VectorDiv_flt64			as	'_ZN7Complex3DivEP9cmplx64_tPKS0_'
 
 ;******************************************************************************;
 ;       Rotation of vector                                                     ;
 ;******************************************************************************;
 
 ; Rotation around the X axis
-public	RotateX_flt32			as	'Vector3D32_RotateX'
-public	RotateX_flt64			as	'Vector3D64_RotateX'
-public	RotateX_flt32			as	'_ZN10Vector3D327RotateXEf'
-public	RotateX_flt64			as	'_ZN10Vector3D647RotateXEd'
+public	RotateX_flt32			as	'Vector3D_RotateX_flt32'
+public	RotateX_flt64			as	'Vector3D_RotateX_flt64'
+public	RotateX_flt32			as	'_ZN8Vector3D7RotateXEP7v3D32_tf'
+public	RotateX_flt64			as	'_ZN8Vector3D7RotateXEP7v3D64_td'
 
 ; Rotation around the Y axis
-public	RotateY_flt32			as	'Vector3D32_RotateY'
-public	RotateY_flt64			as	'Vector3D64_RotateY'
-public	RotateY_flt32			as	'_ZN10Vector3D327RotateYEf'
-public	RotateY_flt64			as	'_ZN10Vector3D647RotateYEd'
+public	RotateY_flt32			as	'Vector3D_RotateY_flt32'
+public	RotateY_flt64			as	'Vector3D_RotateY_flt64'
+public	RotateY_flt32			as	'_ZN8Vector3D7RotateYEP7v3D32_tf'
+public	RotateY_flt64			as	'_ZN8Vector3D7RotateYEP7v3D64_td'
 
 ; Rotation around the Z axis
-public	RotateZ_flt32			as	'Vector3D32_RotateZ'
-public	RotateZ_flt64			as	'Vector3D64_RotateZ'
-public	RotateZ_flt32			as	'Vector2D32_Rotate'
-public	RotateZ_flt64			as	'Vector2D64_Rotate'
-public	RotateZ_flt32			as	'_ZN10Vector3D327RotateZEf'
-public	RotateZ_flt64			as	'_ZN10Vector3D647RotateZEd'
-public	RotateZ_flt32			as	'_ZN10Vector2D326RotateEf'
-public	RotateZ_flt64			as	'_ZN10Vector2D646RotateEd'
+public	RotateZ_flt32			as	'Vector3D_RotateZ_flt32'
+public	RotateZ_flt64			as	'Vector3D_RotateZ_flt64'
+public	RotateZ_flt32			as	'Vector2D_Rotate_flt32'
+public	RotateZ_flt64			as	'Vector2D_Rotate_flt64'
+public	RotateZ_flt32			as	'_ZN8Vector3D7RotateZEP7v3D32_tf'
+public	RotateZ_flt64			as	'_ZN8Vector3D7RotateZEP7v3D64_td'
+public	RotateZ_flt32			as	'_ZN8Vector2D6RotateEP7v2D32_tf'
+public	RotateZ_flt64			as	'_ZN8Vector2D6RotateEP7v2D64_td'
 
 ;******************************************************************************;
 ;       Shearing of vector                                                     ;
@@ -262,50 +262,50 @@ public	RotateZ_flt64			as	'_ZN10Vector2D646RotateEd'
 ;==============================================================================;
 
 ; Shearing parallel to the X axis
-public	ShearX_flt32			as	'Vector2D32_ShearX'
-public	ShearX_flt64			as	'Vector2D64_ShearX'
-public	ShearX_flt32			as	'_ZN10Vector2D326ShearXEf'
-public	ShearX_flt64			as	'_ZN10Vector2D646ShearXEd'
+public	ShearX_flt32			as	'Vector2D_ShearX_flt32'
+public	ShearX_flt64			as	'Vector2D_ShearX_flt64'
+public	ShearX_flt32			as	'_ZN8Vector2D6ShearXEP7v2D32_tf'
+public	ShearX_flt64			as	'_ZN8Vector2D6ShearXEP7v2D64_td'
 
 ; Shearing parallel to the Y axis
-public	ShearY_flt32			as	'Vector2D32_ShearY'
-public	ShearY_flt64			as	'Vector2D64_ShearY'
-public	ShearY_flt32			as	'_ZN10Vector2D326ShearYEf'
-public	ShearY_flt64			as	'_ZN10Vector2D646ShearYEd'
+public	ShearY_flt32			as	'Vector2D_ShearY_flt32'
+public	ShearY_flt64			as	'Vector2D_ShearY_flt64'
+public	ShearY_flt32			as	'_ZN8Vector2D6ShearYEP7v2D32_tf'
+public	ShearY_flt64			as	'_ZN8Vector2D6ShearYEP7v2D64_td'
 
 ;==============================================================================;
 ;       Shearing parallel to the plane                                         ;
 ;==============================================================================;
 
 ; Shearing parallel to the YZ plane
-public	ShearYZ_flt32			as	'Vector3D32_ShearYZ'
-public	ShearYZ_flt64			as	'Vector3D64_ShearYZ'
-public	ShearYZ_flt32			as	'_ZN10Vector3D327ShearYZEff'
-public	ShearYZ_flt64			as	'_ZN10Vector3D647ShearYZEdd'
+public	ShearYZ_flt32			as	'Vector3D_ShearYZ_flt32'
+public	ShearYZ_flt64			as	'Vector3D_ShearYZ_flt64'
+public	ShearYZ_flt32			as	'_ZN8Vector3D7ShearYZEP7v3D32_tff'
+public	ShearYZ_flt64			as	'_ZN8Vector3D7ShearYZEP7v3D64_tdd'
 
 ; Shearing parallel to the XZ plane
-public	ShearXZ_flt32			as	'Vector3D32_ShearXZ'
-public	ShearXZ_flt64			as	'Vector3D64_ShearXZ'
-public	ShearXZ_flt32			as	'_ZN10Vector3D327ShearXZEff'
-public	ShearXZ_flt64			as	'_ZN10Vector3D647ShearXZEdd'
+public	ShearXZ_flt32			as	'Vector3D_ShearXZ_flt32'
+public	ShearXZ_flt64			as	'Vector3D_ShearXZ_flt64'
+public	ShearXZ_flt32			as	'_ZN8Vector3D7ShearXZEP7v3D32_tff'
+public	ShearXZ_flt64			as	'_ZN8Vector3D7ShearXZEP7v3D64_tdd'
 
 ; Shearing parallel to the XY plane
-public	ShearXY_flt32			as	'Vector3D32_ShearXY'
-public	ShearXY_flt64			as	'Vector3D64_ShearXY'
-public	ShearXY_flt32			as	'_ZN10Vector3D327ShearXYEff'
-public	ShearXY_flt64			as	'_ZN10Vector3D647ShearXYEdd'
+public	ShearXY_flt32			as	'Vector3D_ShearXY_flt32'
+public	ShearXY_flt64			as	'Vector3D_ShearXY_flt64'
+public	ShearXY_flt32			as	'_ZN8Vector3D7ShearXYEP7v3D32_tff'
+public	ShearXY_flt64			as	'_ZN8Vector3D7ShearXYEP7v3D64_tdd'
 
 ;******************************************************************************;
 ;       Scaling of vector                                                      ;
 ;******************************************************************************;
-public	Scale3D_flt32			as	'Vector3D32_Scale'
-public	Scale3D_flt64			as	'Vector3D64_Scale'
-public	Scale2D_flt32			as	'Vector2D32_Scale'
-public	Scale2D_flt64			as	'Vector2D64_Scale'
-public	Scale3D_flt32			as	'_ZN10Vector3D325ScaleEPKS_'
-public	Scale3D_flt64			as	'_ZN10Vector3D645ScaleEPKS_'
-public	Scale2D_flt32			as	'_ZN10Vector2D325ScaleEPKS_'
-public	Scale2D_flt64			as	'_ZN10Vector2D645ScaleEPKS_'
+public	Scale3D_flt32			as	'Vector3D_Scale_flt32'
+public	Scale3D_flt64			as	'Vector3D_Scale_flt64'
+public	Scale2D_flt32			as	'Vector2D_Scale_flt32'
+public	Scale2D_flt64			as	'Vector2D_Scale_flt64'
+public	Scale3D_flt32			as	'_ZN8Vector3D5ScaleEP7v3D32_tPKS0_'
+public	Scale3D_flt64			as	'_ZN8Vector3D5ScaleEP7v3D64_tPKS0_'
+public	Scale2D_flt32			as	'_ZN8Vector2D5ScaleEP7v2D32_tPKS0_'
+public	Scale2D_flt64			as	'_ZN8Vector2D5ScaleEP7v2D64_tPKS0_'
 
 ;******************************************************************************;
 ;       Products                                                               ;
@@ -314,78 +314,78 @@ public	Scale2D_flt64			as	'_ZN10Vector2D645ScaleEPKS_'
 ;==============================================================================;
 ;       Vector product                                                         ;
 ;==============================================================================;
-public	VectorProduct_flt32		as	'Vector3D32_VectorProduct'
-public	VectorProduct_flt64		as	'Vector3D64_VectorProduct'
-public	VectorProduct_flt32		as	'_ZN10Vector3D3213VectorProductEPKS_'
-public	VectorProduct_flt64		as	'_ZN10Vector3D6413VectorProductEPKS_'
+public	VectorProduct_flt32		as	'Vector3D_VectorProduct_flt32'
+public	VectorProduct_flt64		as	'Vector3D_VectorProduct_flt64'
+public	VectorProduct_flt32		as	'_ZN8Vector3D13VectorProductEP7v3D32_tPKS0_'
+public	VectorProduct_flt64		as	'_ZN8Vector3D13VectorProductEP7v3D64_tPKS0_'
 
 ;==============================================================================;
 ;       Scalar product                                                         ;
 ;==============================================================================;
-public	ScalarProduct3D_flt32	as	'Vector3D32_ScalarProduct'
-public	ScalarProduct3D_flt64	as	'Vector3D64_ScalarProduct'
-public	ScalarProduct2D_flt32	as	'Vector2D32_ScalarProduct'
-public	ScalarProduct2D_flt64	as	'Vector2D64_ScalarProduct'
-public	ScalarProduct3D_flt32	as	'_ZNK10Vector3D3213ScalarProductEPKS_'
-public	ScalarProduct3D_flt64	as	'_ZNK10Vector3D6413ScalarProductEPKS_'
-public	ScalarProduct2D_flt32	as	'_ZNK10Vector2D3213ScalarProductEPKS_'
-public	ScalarProduct2D_flt64	as	'_ZNK10Vector2D6413ScalarProductEPKS_'
+public	ScalarProduct3D_flt32	as	'Vector3D_ScalarProduct_flt32'
+public	ScalarProduct3D_flt64	as	'Vector3D_ScalarProduct_flt64'
+public	ScalarProduct2D_flt32	as	'Vector2D_ScalarProduct_flt32'
+public	ScalarProduct2D_flt64	as	'Vector2D_ScalarProduct_flt64'
+public	ScalarProduct3D_flt32	as	'_ZN8Vector3D13ScalarProductEPK7v3D32_tS2_'
+public	ScalarProduct3D_flt64	as	'_ZN8Vector3D13ScalarProductEPK7v3D64_tS2_'
+public	ScalarProduct2D_flt32	as	'_ZN8Vector2D13ScalarProductEPK7v2D32_tS2_'
+public	ScalarProduct2D_flt64	as	'_ZN8Vector2D13ScalarProductEPK7v2D64_tS2_'
 
 ;==============================================================================;
 ;       Triple product                                                         ;
 ;==============================================================================;
-public	TripleProduct_flt32		as	'Vector3D32_TripleProduct'
-public	TripleProduct_flt64		as	'Vector3D64_TripleProduct'
-public	TripleProduct_flt32		as	'_ZNK10Vector3D3213TripleProductEPKS_S1_'
-public	TripleProduct_flt64		as	'_ZNK10Vector3D6413TripleProductEPKS_S1_'
+public	TripleProduct_flt32		as	'Vector3D_TripleProduct_flt32'
+public	TripleProduct_flt64		as	'Vector3D_TripleProduct_flt64'
+public	TripleProduct_flt32		as	'_ZN8Vector3D13TripleProductEPK7v3D32_tS2_S2_'
+public	TripleProduct_flt64		as	'_ZN8Vector3D13TripleProductEPK7v3D64_tS2_S2_'
 
 ;******************************************************************************;
 ;       Absolute value                                                         ;
 ;******************************************************************************;
-public	Abs3D_flt32				as	'Vector3D32_Abs'
-public	Abs3D_flt64				as	'Vector3D64_Abs'
-public	Abs2D_flt32				as	'Vector2D32_Abs'
-public	Abs2D_flt64				as	'Vector2D64_Abs'
-public	Abs2D_flt32				as	'Complex32_Magnitude'
-public	Abs2D_flt64				as	'Complex64_Magnitude'
-public	Abs3D_flt32				as	'_ZNK10Vector3D323AbsEv'
-public	Abs3D_flt64				as	'_ZNK10Vector3D643AbsEv'
-public	Abs2D_flt32				as	'_ZNK10Vector2D323AbsEv'
-public	Abs2D_flt64				as	'_ZNK10Vector2D643AbsEv'
-public	Abs2D_flt32				as	'_ZNK9Complex329MagnitudeEv'
-public	Abs2D_flt64				as	'_ZNK9Complex649MagnitudeEv'
+public	Abs3D_flt32				as	'Vector3D_Abs_flt32'
+public	Abs3D_flt64				as	'Vector3D_Abs_flt64'
+public	Abs2D_flt32				as	'Vector2D_Abs_flt32'
+public	Abs2D_flt64				as	'Vector2D_Abs_flt64'
+public	Abs2D_flt32				as	'Complex_Magnitude_flt32'
+public	Abs2D_flt64				as	'Complex_Magnitude_flt64'
+public	Abs3D_flt32				as	'_ZN8Vector3D3AbsEPK7v3D32_t'
+public	Abs3D_flt64				as	'_ZN8Vector3D3AbsEPK7v3D64_t'
+public	Abs2D_flt32				as	'_ZN8Vector2D3AbsEPK7v2D32_t'
+public	Abs2D_flt64				as	'_ZN8Vector2D3AbsEPK7v2D64_t'
+public	Abs2D_flt32				as	'_ZN7Complex9MagnitudeEPK9cmplx32_t'
+public	Abs2D_flt64				as	'_ZN7Complex9MagnitudeEPK9cmplx64_t'
 
 ;******************************************************************************;
 ;       Angle value                                                            ;
 ;******************************************************************************;
-public	Angle_flt32				as	'Complex32_Argument'
-public	Angle_flt64				as	'Complex64_Argument'
-public	Angle_flt32				as	'_ZNK9Complex328ArgumentEv'
-public	Angle_flt64				as	'_ZNK9Complex648ArgumentEv'
+public	Angle_flt32				as	'Complex_Argument_flt32'
+public	Angle_flt64				as	'Complex_Argument_flt64'
+public	Angle_flt32				as	'_ZN7Complex8ArgumentEPK9cmplx32_t'
+public	Angle_flt64				as	'_ZN7Complex8ArgumentEPK9cmplx64_t'
 
 ;******************************************************************************;
 ;       Cosine value of angle between the vectors                              ;
 ;******************************************************************************;
-public	Cos3D_flt32				as	'Vector3D32_Cos'
-public	Cos3D_flt64				as	'Vector3D64_Cos'
-public	Cos2D_flt32				as	'Vector2D32_Cos'
-public	Cos2D_flt64				as	'Vector2D64_Cos'
-public	Cos3D_flt32				as	'_ZNK10Vector3D323CosEPKS_'
-public	Cos3D_flt64				as	'_ZNK10Vector3D643CosEPKS_'
-public	Cos2D_flt32				as	'_ZNK10Vector2D323CosEPKS_'
-public	Cos2D_flt64				as	'_ZNK10Vector2D643CosEPKS_'
+public	Cos3D_flt32				as	'Vector3D_Cos_flt32'
+public	Cos3D_flt64				as	'Vector3D_Cos_flt64'
+public	Cos2D_flt32				as	'Vector2D_Cos_flt32'
+public	Cos2D_flt64				as	'Vector2D_Cos_flt64'
+public	Cos3D_flt32				as	'_ZN8Vector3D3CosEPK7v3D32_tS2_'
+public	Cos3D_flt64				as	'_ZN8Vector3D3CosEPK7v3D64_tS2_'
+public	Cos2D_flt32				as	'_ZN8Vector2D3CosEPK7v2D32_tS2_'
+public	Cos2D_flt64				as	'_ZN8Vector2D3CosEPK7v2D64_tS2_'
 
 ;******************************************************************************;
 ;       Projection of the vector to another vector                             ;
 ;******************************************************************************;
-public	Projection3D_flt32		as	'Vector3D32_Projection'
-public	Projection3D_flt64		as	'Vector3D64_Projection'
-public	Projection2D_flt32		as	'Vector2D32_Projection'
-public	Projection2D_flt64		as	'Vector2D64_Projection'
-public	Projection3D_flt32		as	'_ZNK10Vector3D3210ProjectionEPKS_'
-public	Projection3D_flt64		as	'_ZNK10Vector3D6410ProjectionEPKS_'
-public	Projection2D_flt32		as	'_ZNK10Vector2D3210ProjectionEPKS_'
-public	Projection2D_flt64		as	'_ZNK10Vector2D6410ProjectionEPKS_'
+public	Projection3D_flt32		as	'Vector3D_Projection_flt32'
+public	Projection3D_flt64		as	'Vector3D_Projection_flt64'
+public	Projection2D_flt32		as	'Vector2D_Projection_flt32'
+public	Projection2D_flt64		as	'Vector2D_Projection_flt64'
+public	Projection3D_flt32		as	'_ZN8Vector3D10ProjectionEPK7v3D32_tS2_'
+public	Projection3D_flt64		as	'_ZN8Vector3D10ProjectionEPK7v3D64_tS2_'
+public	Projection2D_flt32		as	'_ZN8Vector2D10ProjectionEPK7v2D32_tS2_'
+public	Projection2D_flt64		as	'_ZN8Vector2D10ProjectionEPK7v2D64_tS2_'
 
 ;******************************************************************************;
 ;       Checks                                                                 ;
@@ -394,82 +394,82 @@ public	Projection2D_flt64		as	'_ZNK10Vector2D6410ProjectionEPKS_'
 ;==============================================================================;
 ;       Check for zero vector                                                  ;
 ;==============================================================================;
-public	IsZero3D_flt32			as	'Vector3D32_IsZero'
-public	IsZero3D_flt64			as	'Vector3D64_IsZero'
-public	IsZero2D_flt32			as	'Vector2D32_IsZero'
-public	IsZero2D_flt64			as	'Vector2D64_IsZero'
-public	IsZero2D_flt32			as	'Complex32_IsZero'
-public	IsZero2D_flt64			as	'Complex64_IsZero'
-public	IsZero3D_flt32			as	'_ZNK10Vector3D326IsZeroEv'
-public	IsZero3D_flt64			as	'_ZNK10Vector3D646IsZeroEv'
-public	IsZero2D_flt32			as	'_ZNK10Vector2D326IsZeroEv'
-public	IsZero2D_flt64			as	'_ZNK10Vector2D646IsZeroEv'
-public	IsZero2D_flt32			as	'_ZNK9Complex326IsZeroEv'
-public	IsZero2D_flt64			as	'_ZNK9Complex646IsZeroEv'
+public	IsZero3D_flt32			as	'Vector3D_IsZero_flt32'
+public	IsZero3D_flt64			as	'Vector3D_IsZero_flt64'
+public	IsZero2D_flt32			as	'Vector2D_IsZero_flt32'
+public	IsZero2D_flt64			as	'Vector2D_IsZero_flt64'
+public	IsZero2D_flt32			as	'Complex_IsZero_flt32'
+public	IsZero2D_flt64			as	'Complex_IsZero_flt64'
+public	IsZero3D_flt32			as	'_ZN8Vector3D6IsZeroEPK7v3D32_t'
+public	IsZero3D_flt64			as	'_ZN8Vector3D6IsZeroEPK7v3D64_t'
+public	IsZero2D_flt32			as	'_ZN8Vector2D6IsZeroEPK7v2D32_t'
+public	IsZero2D_flt64			as	'_ZN8Vector2D6IsZeroEPK7v2D64_t'
+public	IsZero2D_flt32			as	'_ZN7Complex6IsZeroEPK9cmplx32_t'
+public	IsZero2D_flt64			as	'_ZN7Complex6IsZeroEPK9cmplx64_t'
 
 ;==============================================================================;
 ;       Check for equality of the vectors                                      ;
 ;==============================================================================;
-public	IsEqual3D_flt32			as	'Vector3D32_IsEqual'
-public	IsEqual3D_flt64			as	'Vector3D64_IsEqual'
-public	IsEqual2D_flt32			as	'Vector2D32_IsEqual'
-public	IsEqual2D_flt64			as	'Vector2D64_IsEqual'
-public	IsEqual2D_flt32			as	'Complex32_IsEqual'
-public	IsEqual2D_flt64			as	'Complex64_IsEqual'
-public	IsEqual3D_flt32			as	'_ZNK10Vector3D327IsEqualEPKS_'
-public	IsEqual3D_flt64			as	'_ZNK10Vector3D647IsEqualEPKS_'
-public	IsEqual2D_flt32			as	'_ZNK10Vector2D327IsEqualEPKS_'
-public	IsEqual2D_flt64			as	'_ZNK10Vector2D647IsEqualEPKS_'
-public	IsEqual2D_flt32			as	'_ZNK9Complex327IsEqualEPKS_'
-public	IsEqual2D_flt64			as	'_ZNK9Complex647IsEqualEPKS_'
+public	IsEqual3D_flt32			as	'Vector3D_IsEqual_flt32'
+public	IsEqual3D_flt64			as	'Vector3D_IsEqual_flt64'
+public	IsEqual2D_flt32			as	'Vector2D_IsEqual_flt32'
+public	IsEqual2D_flt64			as	'Vector2D_IsEqual_flt64'
+public	IsEqual2D_flt32			as	'Complex_IsEqual_flt32'
+public	IsEqual2D_flt64			as	'Complex_IsEqual_flt64'
+public	IsEqual3D_flt32			as	'_ZN8Vector3D7IsEqualEPK7v3D32_tS2_'
+public	IsEqual3D_flt64			as	'_ZN8Vector3D7IsEqualEPK7v3D64_tS2_'
+public	IsEqual2D_flt32			as	'_ZN8Vector2D7IsEqualEPK7v2D32_tS2_'
+public	IsEqual2D_flt64			as	'_ZN8Vector2D7IsEqualEPK7v2D64_tS2_'
+public	IsEqual2D_flt32			as	'_ZN7Complex7IsEqualEPK9cmplx32_tS2_'
+public	IsEqual2D_flt64			as	'_ZN7Complex7IsEqualEPK9cmplx64_tS2_'
 
 ;==============================================================================;
 ;       Check for negativity of the vectors                                    ;
 ;==============================================================================;
-public	IsNeg3D_flt32			as	'Vector3D32_IsNeg'
-public	IsNeg3D_flt64			as	'Vector3D64_IsNeg'
-public	IsNeg2D_flt32			as	'Vector2D32_IsNeg'
-public	IsNeg2D_flt64			as	'Vector2D64_IsNeg'
-public	IsNeg2D_flt32			as	'Complex32_IsNeg'
-public	IsNeg2D_flt64			as	'Complex64_IsNeg'
-public	IsNeg3D_flt32			as	'_ZNK10Vector3D325IsNegEPKS_'
-public	IsNeg3D_flt64			as	'_ZNK10Vector3D645IsNegEPKS_'
-public	IsNeg2D_flt32			as	'_ZNK10Vector2D325IsNegEPKS_'
-public	IsNeg2D_flt64			as	'_ZNK10Vector2D645IsNegEPKS_'
-public	IsNeg2D_flt32			as	'_ZNK9Complex325IsNegEPKS_'
-public	IsNeg2D_flt64			as	'_ZNK9Complex645IsNegEPKS_'
+public	IsNeg3D_flt32			as	'Vector3D_IsNeg_flt32'
+public	IsNeg3D_flt64			as	'Vector3D_IsNeg_flt64'
+public	IsNeg2D_flt32			as	'Vector2D_IsNeg_flt32'
+public	IsNeg2D_flt64			as	'Vector2D_IsNeg_flt64'
+public	IsNeg2D_flt32			as	'Complex_IsNeg_flt32'
+public	IsNeg2D_flt64			as	'Complex_IsNeg_flt64'
+public	IsNeg3D_flt32			as	'_ZN8Vector3D5IsNegEPK7v3D32_tS2_'
+public	IsNeg3D_flt64			as	'_ZN8Vector3D5IsNegEPK7v3D64_tS2_'
+public	IsNeg2D_flt32			as	'_ZN8Vector2D5IsNegEPK7v2D32_tS2_'
+public	IsNeg2D_flt64			as	'_ZN8Vector2D5IsNegEPK7v2D64_tS2_'
+public	IsNeg2D_flt32			as	'_ZN7Complex5IsNegEPK9cmplx32_tS2_'
+public	IsNeg2D_flt64			as	'_ZN7Complex5IsNegEPK9cmplx64_tS2_'
 
 ;==============================================================================;
 ;       Check for collinearity of the vectors                                  ;
 ;==============================================================================;
-public	IsCollinear3D_flt32		as	'Vector3D32_IsCollinear'
-public	IsCollinear3D_flt64		as	'Vector3D64_IsCollinear'
-public	IsCollinear2D_flt32		as	'Vector2D32_IsCollinear'
-public	IsCollinear2D_flt64		as	'Vector2D64_IsCollinear'
-public	IsCollinear3D_flt32		as	'_ZNK10Vector3D3211IsCollinearEPKS_'
-public	IsCollinear3D_flt64		as	'_ZNK10Vector3D6411IsCollinearEPKS_'
-public	IsCollinear2D_flt32		as	'_ZNK10Vector2D3211IsCollinearEPKS_'
-public	IsCollinear2D_flt64		as	'_ZNK10Vector2D6411IsCollinearEPKS_'
+public	IsCollinear3D_flt32		as	'Vector3D_IsCollinear_flt32'
+public	IsCollinear3D_flt64		as	'Vector3D_IsCollinear_flt64'
+public	IsCollinear2D_flt32		as	'Vector2D_IsCollinear_flt32'
+public	IsCollinear2D_flt64		as	'Vector2D_IsCollinear_flt64'
+public	IsCollinear3D_flt32		as	'_ZN8Vector3D11IsCollinearEPK7v3D32_tS2_'
+public	IsCollinear3D_flt64		as	'_ZN8Vector3D11IsCollinearEPK7v3D64_tS2_'
+public	IsCollinear2D_flt32		as	'_ZN8Vector2D11IsCollinearEPK7v2D32_tS2_'
+public	IsCollinear2D_flt64		as	'_ZN8Vector2D11IsCollinearEPK7v2D64_tS2_'
 
 ;==============================================================================;
 ;       Check for orthogonality of the vectors                                 ;
 ;==============================================================================;
-public	IsOrthogonal3D_flt32	as	'Vector3D32_IsOrthogonal'
-public	IsOrthogonal3D_flt64	as	'Vector3D64_IsOrthogonal'
-public	IsOrthogonal2D_flt32	as	'Vector2D32_IsOrthogonal'
-public	IsOrthogonal2D_flt64	as	'Vector2D64_IsOrthogonal'
-public	IsOrthogonal3D_flt32	as	'_ZNK10Vector3D3212IsOrthogonalEPKS_'
-public	IsOrthogonal3D_flt64	as	'_ZNK10Vector3D6412IsOrthogonalEPKS_'
-public	IsOrthogonal2D_flt32	as	'_ZNK10Vector2D3212IsOrthogonalEPKS_'
-public	IsOrthogonal2D_flt64	as	'_ZNK10Vector2D6412IsOrthogonalEPKS_'
+public	IsOrthogonal3D_flt32	as	'Vector3D_IsOrthogonal_flt32'
+public	IsOrthogonal3D_flt64	as	'Vector3D_IsOrthogonal_flt64'
+public	IsOrthogonal2D_flt32	as	'Vector2D_IsOrthogonal_flt32'
+public	IsOrthogonal2D_flt64	as	'Vector2D_IsOrthogonal_flt64'
+public	IsOrthogonal3D_flt32	as	'_ZN8Vector3D12IsOrthogonalEPK7v3D32_tS2_'
+public	IsOrthogonal3D_flt64	as	'_ZN8Vector3D12IsOrthogonalEPK7v3D64_tS2_'
+public	IsOrthogonal2D_flt32	as	'_ZN8Vector2D12IsOrthogonalEPK7v2D32_tS2_'
+public	IsOrthogonal2D_flt64	as	'_ZN8Vector2D12IsOrthogonalEPK7v2D64_tS2_'
 
 ;==============================================================================;
 ;       Check for coplanarity of the vectors                                   ;
 ;==============================================================================;
-public	IsCoplanar_flt32		as	'Vector3D32_IsCoplanar'
-public	IsCoplanar_flt64		as	'Vector3D64_IsCoplanar'
-public	IsCoplanar_flt32		as	'_ZNK10Vector3D3210IsCoplanarEPKS_S1_'
-public	IsCoplanar_flt64		as	'_ZNK10Vector3D6410IsCoplanarEPKS_S1_'
+public	IsCoplanar_flt32		as	'Vector3D_IsCoplanar_flt32'
+public	IsCoplanar_flt64		as	'Vector3D_IsCoplanar_flt64'
+public	IsCoplanar_flt32		as	'_ZN8Vector3D10IsCoplanarEPK7v3D32_tS2_S2_'
+public	IsCoplanar_flt64		as	'_ZN8Vector3D10IsCoplanarEPK7v3D64_tS2_S2_'
 
 ;###############################################################################
 ;#      Code section                                                           #
@@ -1249,12 +1249,6 @@ src		equ		rsi							; pointer to source vector object
 xval	equ		xmm0						; x value of vector
 yval	equ		xmm1						; y value of vector
 zval	equ		xmm2						; z value of vector
-if x eq s
-scale	= 2									; scale value
-else if x eq d
-scale	= 3									; scale value
-end if
-bytes	= 1 shl scale						; size of vector element (bytes)
 ;------------------------------------------
 	SPRODUCT	this, src, xval, yval, zval, dim, x
 		ret									; return result
@@ -1318,12 +1312,6 @@ temp5	equ		xmm5						; temporary register #6
 temp6	equ		xmm6						; temporary register #7
 temp7	equ		xmm7						; temporary register #8
 temp8	equ		xmm8						; temporary register #9
-if x eq s
-scale	= 2									; scale value
-else if x eq d
-scale	= 3									; scale value
-end if
-bytes	= 1 shl scale						; size of vector element (bytes)
 ;------------------------------------------
 	TPRODUCT	this, src1, src2, temp0, temp1, temp2, temp3, temp4, temp5, temp6, temp7, temp8, x
 		ret									; return result

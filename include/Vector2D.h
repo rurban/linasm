@@ -10,20 +10,33 @@
 # pragma	once
 # include	<Types.h>
 
+//****************************************************************************//
+//      2D vector structure (32-bit)                                          //
+//****************************************************************************//
+struct v2D32_t
+{
+	flt32_t	x;		// X coordinate
+	flt32_t	y;		// Y coordinate
+};
+
+//****************************************************************************//
+//      2D vector structure (64-bit)                                          //
+//****************************************************************************//
+struct v2D64_t
+{
+	flt64_t	x;		// X coordinate
+	flt64_t	y;		// Y coordinate
+};
+
 # ifdef	__cplusplus
 /*
 ################################################################################
 #       C++ prototypes                                                         #
 ################################################################################
 */
-//****************************************************************************//
-//      2D vector class (32-bit)                                              //
-//****************************************************************************//
-class Vector2D32
+class Vector2D
 {
 public:
-	flt32_t	x;		// X coordinate
-	flt32_t	y;		// Y coordinate
 
 //****************************************************************************//
 //      Arithmetic operations                                                 //
@@ -36,206 +49,116 @@ public:
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 //      Normalization (direction cosines)                                     //
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
-void Normalize (void);
+static void Normalize (v2D32_t *vector);
+static void Normalize (v2D64_t *vector);
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 //      Reflection of vector                                                  //
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
 // Reflection through the origin
-void ReflectOrigin (void);
+static void ReflectOrigin (v2D32_t *vector);
+static void ReflectOrigin (v2D64_t *vector);
 
 // Reflection through the X axis
-void ReflectX (void);
+static void ReflectX (v2D32_t *vector);
+static void ReflectX (v2D64_t *vector);
 
 // Reflection through the Y axis
-void ReflectY (void);
+static void ReflectY (v2D32_t *vector);
+static void ReflectY (v2D64_t *vector);
 
 //============================================================================//
 //      Binary operations                                                     //
 //============================================================================//
 
 // Addition of vectors
-void Add (const Vector2D32 *source);
+static void Add (v2D32_t *target, const v2D32_t *source);
+static void Add (v2D64_t *target, const v2D64_t *source);
 
 // Subtraction of vectors
-void Sub (const Vector2D32 *source);
+static void Sub (v2D32_t *target, const v2D32_t *source);
+static void Sub (v2D64_t *target, const v2D64_t *source);
 
 // Multiplication by scalar value
-void Mul (flt32_t value);
+static void Mul (v2D32_t *vector, flt32_t value);
+static void Mul (v2D64_t *vector, flt64_t value);
 
 // Division by scalar value
-void Div (flt32_t value);
+static void Div (v2D32_t *vector, flt32_t value);
+static void Div (v2D64_t *vector, flt64_t value);
 
 //****************************************************************************//
 //      Rotation of vector                                                    //
 //****************************************************************************//
-void Rotate (flt32_t angle);
+static void Rotate (v2D32_t *vector, flt32_t angle);
+static void Rotate (v2D64_t *vector, flt64_t angle);
 
 //****************************************************************************//
 //      Shearing of vector                                                    //
 //****************************************************************************//
 
 // Shearing parallel to the X axis
-void ShearX (flt32_t value);
+static void ShearX (v2D32_t *vector, flt32_t value);
+static void ShearX (v2D64_t *vector, flt64_t value);
 
 // Shearing parallel to the Y axis
-void ShearY (flt32_t value);
+static void ShearY (v2D32_t *vector, flt32_t value);
+static void ShearY (v2D64_t *vector, flt64_t value);
 
 //****************************************************************************//
 //      Scaling of vector                                                     //
 //****************************************************************************//
-void Scale (const Vector2D32 *source);
+static void Scale (v2D32_t *target, const v2D32_t *source);
+static void Scale (v2D64_t *target, const v2D64_t *source);
 
 //****************************************************************************//
 //      Scalar product                                                        //
 //****************************************************************************//
-flt32_t ScalarProduct (const Vector2D32 *source) const;
+static flt32_t ScalarProduct (const v2D32_t *target, const v2D32_t *source);
+static flt64_t ScalarProduct (const v2D64_t *target, const v2D64_t *source);
 
 //****************************************************************************//
 //      Absolute value                                                        //
 //****************************************************************************//
-flt32_t Abs (void) const;
+static flt32_t Abs (const v2D32_t *vector);
+static flt64_t Abs (const v2D64_t *vector);
 
 //****************************************************************************//
 //      Cosine value of angle between the vectors                             //
 //****************************************************************************//
-flt32_t Cos (const Vector2D32 *source) const;
+static flt32_t Cos (const v2D32_t *target, const v2D32_t *source);
+static flt64_t Cos (const v2D64_t *target, const v2D64_t *source);
 
 //****************************************************************************//
 //      Projection of the vector to another vector                            //
 //****************************************************************************//
-flt32_t Projection (const Vector2D32 *source) const;
+static flt32_t Projection (const v2D32_t *target, const v2D32_t *source);
+static flt64_t Projection (const v2D64_t *target, const v2D64_t *source);
 
 //****************************************************************************//
 //      Checks                                                                //
 //****************************************************************************//
 
 // Check for zero vector
-bool IsZero (void) const;
+static bool IsZero (const v2D32_t *vector);
+static bool IsZero (const v2D64_t *vector);
 
 // Check for equality of the vectors
-bool IsEqual (const Vector2D32 *source) const;
+static bool IsEqual (const v2D32_t *target, const v2D32_t *source);
+static bool IsEqual (const v2D64_t *target, const v2D64_t *source);
 
 // Check for negativity of the vectors
-bool IsNeg (const Vector2D32 *source) const;
+static bool IsNeg (const v2D32_t *target, const v2D32_t *source);
+static bool IsNeg (const v2D64_t *target, const v2D64_t *source);
 
 // Check for collinearity of the vectors
-bool IsCollinear (const Vector2D32 *source) const;
+static bool IsCollinear (const v2D32_t *target, const v2D32_t *source);
+static bool IsCollinear (const v2D64_t *target, const v2D64_t *source);
 
 // Check for orthogonality of the vectors
-bool IsOrthogonal (const Vector2D32 *source) const;
-};
-
-//****************************************************************************//
-//      2D vector class (64-bit)                                              //
-//****************************************************************************//
-class Vector2D64
-{
-public:
-	flt64_t	x;		// X coordinate
-	flt64_t	y;		// Y coordinate
-
-//****************************************************************************//
-//      Arithmetic operations                                                 //
-//****************************************************************************//
-
-//============================================================================//
-//      Unary operations                                                      //
-//============================================================================//
-
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
-//      Normalization (direction cosines)                                     //
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
-void Normalize (void);
-
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
-//      Reflection of vector                                                  //
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
-
-// Reflection through the origin
-void ReflectOrigin (void);
-
-// Reflection through the X axis
-void ReflectX (void);
-
-// Reflection through the Y axis
-void ReflectY (void);
-
-//============================================================================//
-//      Binary operations                                                     //
-//============================================================================//
-
-// Addition of vectors
-void Add (const Vector2D64 *source);
-
-// Subtraction of vectors
-void Sub (const Vector2D64 *source);
-
-// Multiplication by scalar value
-void Mul (flt64_t value);
-
-// Division by scalar value
-void Div (flt64_t value);
-
-//****************************************************************************//
-//      Rotation of vector                                                    //
-//****************************************************************************//
-void Rotate (flt64_t angle);
-
-//****************************************************************************//
-//      Shearing of vector                                                    //
-//****************************************************************************//
-
-// Shearing parallel to the X axis
-void ShearX (flt64_t value);
-
-// Shearing parallel to the Y axis
-void ShearY (flt64_t value);
-
-//****************************************************************************//
-//      Scaling of vector                                                     //
-//****************************************************************************//
-void Scale (const Vector2D64 *source);
-
-//****************************************************************************//
-//      Scalar product                                                        //
-//****************************************************************************//
-flt64_t ScalarProduct (const Vector2D64 *source) const;
-
-//****************************************************************************//
-//      Absolute value                                                        //
-//****************************************************************************//
-flt64_t Abs (void) const;
-
-//****************************************************************************//
-//      Cosine value of angle between the vectors                             //
-//****************************************************************************//
-flt64_t Cos (const Vector2D64 *source) const;
-
-//****************************************************************************//
-//      Projection of the vector to another vector                            //
-//****************************************************************************//
-flt64_t Projection (const Vector2D64 *source) const;
-
-//****************************************************************************//
-//      Checks                                                                //
-//****************************************************************************//
-
-// Check for zero vector
-bool IsZero (void) const;
-
-// Check for equality of the vectors
-bool IsEqual (const Vector2D64 *source) const;
-
-// Check for negativity of the vectors
-bool IsNeg (const Vector2D64 *source) const;
-
-// Check for collinearity of the vectors
-bool IsCollinear (const Vector2D64 *source) const;
-
-// Check for orthogonality of the vectors
-bool IsOrthogonal (const Vector2D64 *source) const;
+static bool IsOrthogonal (const v2D32_t *target, const v2D32_t *source);
+static bool IsOrthogonal (const v2D64_t *target, const v2D64_t *source);
 };
 # else
 /*
@@ -244,15 +167,6 @@ bool IsOrthogonal (const Vector2D64 *source) const;
 ################################################################################
 */
 //****************************************************************************//
-//      2D vector structure (32-bit)                                          //
-//****************************************************************************//
-struct Vector2D32
-{
-	flt32_t	x;		// X coordinate
-	flt32_t	y;		// Y coordinate
-};
-
-//****************************************************************************//
 //      Arithmetic operations                                                 //
 //****************************************************************************//
 
@@ -263,205 +177,116 @@ struct Vector2D32
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 //      Normalization (direction cosines)                                     //
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
-void Vector2D32_Normalize (struct Vector2D32 *vector);
+void Vector2D_Normalize_flt32 (struct v2D32_t *vector);
+void Vector2D_Normalize_flt64 (struct v2D64_t *vector);
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 //      Reflection of vector                                                  //
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
 // Reflection through the origin
-void Vector2D32_ReflectOrigin (struct Vector2D32 *vector);
+void Vector2D_ReflectOrigin_flt32 (struct v2D32_t *vector);
+void Vector2D_ReflectOrigin_flt64 (struct v2D64_t *vector);
 
 // Reflection through the X axis
-void Vector2D32_ReflectX (struct Vector2D32 *vector);
+void Vector2D_ReflectX_flt32 (struct v2D32_t *vector);
+void Vector2D_ReflectX_flt64 (struct v2D64_t *vector);
 
 // Reflection through the Y axis
-void Vector2D32_ReflectY (struct Vector2D32 *vector);
+void Vector2D_ReflectY_flt32 (struct v2D32_t *vector);
+void Vector2D_ReflectY_flt64 (struct v2D64_t *vector);
 
 //============================================================================//
 //      Binary operations                                                     //
 //============================================================================//
 
 // Addition of vectors
-void Vector2D32_Add (struct Vector2D32 *target, const struct Vector2D32 *source);
+void Vector2D_Add_flt32 (struct v2D32_t *target, const struct v2D32_t *source);
+void Vector2D_Add_flt64 (struct v2D64_t *target, const struct v2D64_t *source);
 
 // Subtraction of vectors
-void Vector2D32_Sub (struct Vector2D32 *target, const struct Vector2D32 *source);
+void Vector2D_Sub_flt32 (struct v2D32_t *target, const struct v2D32_t *source);
+void Vector2D_Sub_flt64 (struct v2D64_t *target, const struct v2D64_t *source);
 
 // Multiplication by scalar value
-void Vector2D32_Mul (struct Vector2D32 *vector, flt32_t value);
+void Vector2D_Mul_flt32 (struct v2D32_t *vector, flt32_t value);
+void Vector2D_Mul_flt64 (struct v2D64_t *vector, flt64_t value);
 
 // Division by scalar value
-void Vector2D32_Div (struct Vector2D32 *vector, flt32_t value);
+void Vector2D_Div_flt32 (struct v2D32_t *vector, flt32_t value);
+void Vector2D_Div_flt64 (struct v2D64_t *vector, flt64_t value);
 
 //****************************************************************************//
 //      Rotation of vector                                                    //
 //****************************************************************************//
-void Vector2D32_Rotate (struct Vector2D32 *vector, flt32_t angle);
+void Vector2D_Rotate_flt32 (struct v2D32_t *vector, flt32_t angle);
+void Vector2D_Rotate_flt64 (struct v2D64_t *vector, flt64_t angle);
 
 //****************************************************************************//
 //      Shearing of vector                                                    //
 //****************************************************************************//
 
 // Shearing parallel to the X axis
-void Vector2D32_ShearX (struct Vector2D32 *vector, flt32_t value);
+void Vector2D_ShearX_flt32 (struct v2D32_t *vector, flt32_t value);
+void Vector2D_ShearX_flt64 (struct v2D64_t *vector, flt64_t value);
 
 // Shearing parallel to the Y axis
-void Vector2D32_ShearY (struct Vector2D32 *vector, flt32_t value);
+void Vector2D_ShearY_flt32 (struct v2D32_t *vector, flt32_t value);
+void Vector2D_ShearY_flt64 (struct v2D64_t *vector, flt64_t value);
 
 //****************************************************************************//
 //      Scaling of vector                                                     //
 //****************************************************************************//
-void Vector2D32_Scale (struct Vector2D32 *target, const struct Vector2D32 *source);
+void Vector2D_Scale_flt32 (struct v2D32_t *target, const struct v2D32_t *source);
+void Vector2D_Scale_flt64 (struct v2D64_t *target, const struct v2D64_t *source);
 
 //****************************************************************************//
 //      Scalar product                                                        //
 //****************************************************************************//
-flt32_t Vector2D32_ScalarProduct (const struct Vector2D32 *target, const struct Vector2D32 *source);
+flt32_t Vector2D_ScalarProduct_flt32 (const struct v2D32_t *target, const struct v2D32_t *source);
+flt64_t Vector2D_ScalarProduct_flt64 (const struct v2D64_t *target, const struct v2D64_t *source);
 
 //****************************************************************************//
 //      Absolute value                                                        //
 //****************************************************************************//
-flt32_t Vector2D32_Abs (const struct Vector2D32 *vector);
+flt32_t Vector2D_Abs_flt32 (const struct v2D32_t *vector);
+flt64_t Vector2D_Abs_flt64 (const struct v2D64_t *vector);
 
 //****************************************************************************//
 //      Cosine value of angle between the vectors                             //
 //****************************************************************************//
-flt32_t Vector2D32_Cos (const struct Vector2D32 *target, const struct Vector2D32 *source);
+flt32_t Vector2D_Cos_flt32 (const struct v2D32_t *target, const struct v2D32_t *source);
+flt64_t Vector2D_Cos_flt64 (const struct v2D64_t *target, const struct v2D64_t *source);
 
 //****************************************************************************//
 //      Projection of the vector to another vector                            //
 //****************************************************************************//
-flt32_t Vector2D32_Projection (const struct Vector2D32 *target, const struct Vector2D32 *source);
+flt32_t Vector2D_Projection_flt32 (const struct v2D32_t *target, const struct v2D32_t *source);
+flt64_t Vector2D_Projection_flt64 (const struct v2D64_t *target, const struct v2D64_t *source);
 
 //****************************************************************************//
 //      Checks                                                                //
 //****************************************************************************//
 
 // Check for zero vector
-bool Vector2D32_IsZero (const struct Vector2D32 *vector);
+bool Vector2D_IsZero_flt32 (const struct v2D32_t *vector);
+bool Vector2D_IsZero_flt64 (const struct v2D64_t *vector);
 
 // Check for equality of the vectors
-bool Vector2D32_IsEqual (const struct Vector2D32 *vector, const struct Vector2D32 *source);
+bool Vector2D_IsEqual_flt32 (const struct v2D32_t *target, const struct v2D32_t *source);
+bool Vector2D_IsEqual_flt64 (const struct v2D64_t *target, const struct v2D64_t *source);
 
 // Check for negativity of the vectors
-bool Vector2D32_IsNeg (const struct Vector2D32 *vector, const struct Vector2D32 *source);
+bool Vector2D_IsNeg_flt32 (const struct v2D32_t *target, const struct v2D32_t *source);
+bool Vector2D_IsNeg_flt64 (const struct v2D64_t *target, const struct v2D64_t *source);
 
 // Check for collinearity of the vectors
-bool Vector2D32_IsCollinear (const struct Vector2D32 *vector, const struct Vector2D32 *source);
+bool Vector2D_IsCollinear_flt32 (const struct v2D32_t *target, const struct v2D32_t *source);
+bool Vector2D_IsCollinear_flt64 (const struct v2D64_t *target, const struct v2D64_t *source);
 
 // Check for orthogonality of the vectors
-bool Vector2D32_IsOrthogonal (const struct Vector2D32 *vector, const struct Vector2D32 *source);
-
-//****************************************************************************//
-//      2D vector structure (64-bit)                                          //
-//****************************************************************************//
-struct Vector2D64
-{
-	flt64_t	x;		// X coordinate
-	flt64_t	y;		// Y coordinate
-};
-
-//****************************************************************************//
-//      Arithmetic operations                                                 //
-//****************************************************************************//
-
-//============================================================================//
-//      Unary operations                                                      //
-//============================================================================//
-
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
-//      Normalization (direction cosines)                                     //
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
-void Vector2D64_Normalize (struct Vector2D64 *vector);
-
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
-//      Reflection of vector                                                  //
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
-
-// Reflection through the origin
-void Vector2D64_ReflectOrigin (struct Vector2D64 *vector);
-
-// Reflection through the X axis
-void Vector2D64_ReflectX (struct Vector2D64 *vector);
-
-// Reflection through the Y axis
-void Vector2D64_ReflectY (struct Vector2D64 *vector);
-
-//============================================================================//
-//      Binary operations                                                     //
-//============================================================================//
-
-// Addition of vectors
-void Vector2D64_Add (struct Vector2D64 *target, const struct Vector2D64 *source);
-
-// Subtraction of vectors
-void Vector2D64_Sub (struct Vector2D64 *target, const struct Vector2D64 *source);
-
-// Multiplication by scalar value
-void Vector2D64_Mul (struct Vector2D64 *vector, flt64_t value);
-
-// Division by scalar value
-void Vector2D64_Div (struct Vector2D64 *vector, flt64_t value);
-
-//****************************************************************************//
-//      Rotation of vector                                                    //
-//****************************************************************************//
-void Vector2D64_Rotate (struct Vector2D64 *vector, flt64_t angle);
-
-//****************************************************************************//
-//      Shearing of vector                                                    //
-//****************************************************************************//
-
-// Shearing parallel to the X axis
-void Vector2D64_ShearX (struct Vector2D64 *vector, flt64_t value);
-
-// Shearing parallel to the Y axis
-void Vector2D64_ShearY (struct Vector2D64 *vector, flt64_t value);
-
-//****************************************************************************//
-//      Scaling of vector                                                     //
-//****************************************************************************//
-void Vector2D64_Scale (struct Vector2D64 *target, const struct Vector2D64 *source);
-
-//****************************************************************************//
-//      Scalar product                                                        //
-//****************************************************************************//
-flt64_t Vector2D64_ScalarProduct (const struct Vector2D64 *target, const struct Vector2D64 *source);
-
-//****************************************************************************//
-//      Absolute value                                                        //
-//****************************************************************************//
-flt64_t Vector2D64_Abs (const struct Vector2D64 *vector);
-
-//****************************************************************************//
-//      Cosine value of angle between the vectors                             //
-//****************************************************************************//
-flt64_t Vector2D64_Cos (const struct Vector2D64 *target, const struct Vector2D64 *source);
-
-//****************************************************************************//
-//      Projection of the vector to another vector                            //
-//****************************************************************************//
-flt64_t Vector2D64_Projection (const struct Vector2D64 *target, const struct Vector2D64 *source);
-
-//****************************************************************************//
-//      Checks                                                                //
-//****************************************************************************//
-
-// Check for zero vector
-bool Vector2D64_IsZero (const struct Vector2D64 *vector);
-
-// Check for equality of the vectors
-bool Vector2D64_IsEqual (const struct Vector2D64 *vector, const struct Vector2D64 *source);
-
-// Check for negativity of the vectors
-bool Vector2D64_IsNeg (const struct Vector2D64 *vector, const struct Vector2D64 *source);
-
-// Check for collinearity of the vectors
-bool Vector2D64_IsCollinear (const struct Vector2D64 *vector, const struct Vector2D64 *source);
-
-// Check for orthogonality of the vectors
-bool Vector2D64_IsOrthogonal (const struct Vector2D64 *vector, const struct Vector2D64 *source);
+bool Vector2D_IsOrthogonal_flt32 (const struct v2D32_t *target, const struct v2D32_t *source);
+bool Vector2D_IsOrthogonal_flt64 (const struct v2D64_t *target, const struct v2D64_t *source);
 
 # endif
 /*

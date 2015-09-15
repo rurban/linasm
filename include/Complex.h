@@ -10,20 +10,33 @@
 # pragma	once
 # include	<Types.h>
 
+//****************************************************************************//
+//      Complex number structure (32-bit)                                     //
+//****************************************************************************//
+struct cmplx32_t
+{
+	flt32_t	re;		// Real part
+	flt32_t	im;		// Imaginary part
+};
+
+//****************************************************************************//
+//      Complex number structure (64-bit)                                     //
+//****************************************************************************//
+struct cmplx64_t
+{
+	flt64_t	re;		// Real part
+	flt64_t	im;		// Imaginary part
+};
+
 # ifdef	__cplusplus
 /*
 ################################################################################
 #       C++ prototypes                                                         #
 ################################################################################
 */
-//****************************************************************************//
-//      Complex number class (32-bit)                                         //
-//****************************************************************************//
-class Complex32
+class Complex
 {
 public:
-	flt32_t	re;		// Real part
-	flt32_t	im;		// Imaginary part
 
 //****************************************************************************//
 //      Arithmetic operations                                                 //
@@ -34,130 +47,72 @@ public:
 //============================================================================//
 
 // Negative value
-void Neg (void);
+static void Neg (cmplx32_t *number);
+static void Neg (cmplx64_t *number);
 
 // Complex conjugate value
-void Conj (void);
+static void Conj (cmplx32_t *number);
+static void Conj (cmplx64_t *number);
 
 // Square root
-void Sqrt (void);
+static void Sqrt (cmplx32_t *number);
+static void Sqrt (cmplx64_t *number);
 
 // Square value
-void Sqr (void);
+static void Sqr (cmplx32_t *number);
+static void Sqr (cmplx64_t *number);
 
 // Inverse value
-void Inverse (void);
+static void Inverse (cmplx32_t *number);
+static void Inverse (cmplx64_t *number);
 
 //============================================================================//
 //      Binary operations                                                     //
 //============================================================================//
 
 // Addition
-void Add (const Complex32 *source);
+static void Add (cmplx32_t *target, const cmplx32_t *source);
+static void Add (cmplx64_t *target, const cmplx64_t *source);
 
 // Subtraction
-void Sub (const Complex32 *source);
+static void Sub (cmplx32_t *target, const cmplx32_t *source);
+static void Sub (cmplx64_t *target, const cmplx64_t *source);
 
 // Multiplication
-void Mul (const Complex32 *source);
+static void Mul (cmplx32_t *target, const cmplx32_t *source);
+static void Mul (cmplx64_t *target, const cmplx64_t *source);
 
 // Division
-void Div (const Complex32 *source);
+static void Div (cmplx32_t *target, const cmplx32_t *source);
+static void Div (cmplx64_t *target, const cmplx64_t *source);
 
 //****************************************************************************//
 //      Complex number properties                                             //
 //****************************************************************************//
 
 // Magnitude value
-flt32_t Magnitude (void) const;
+static flt32_t Magnitude (const cmplx32_t *number);
+static flt64_t Magnitude (const cmplx64_t *number);
 
 // Argument value
-flt32_t Argument (void) const;
+static flt32_t Argument (const cmplx32_t *number);
+static flt64_t Argument (const cmplx64_t *number);
 
 //****************************************************************************//
 //      Checks                                                                //
 //****************************************************************************//
 
 // Check for zero number
-bool IsZero (void) const;
+static bool IsZero (const cmplx32_t *number);
+static bool IsZero (const cmplx64_t *number);
 
 // Check for equality of the numbers
-bool IsEqual (const Complex32 *source) const;
+static bool IsEqual (const cmplx32_t *target, const cmplx32_t *source);
+static bool IsEqual (const cmplx64_t *target, const cmplx64_t *source);
 
 // Check for negativity of the numbers
-bool IsNeg (const Complex32 *source) const;
-};
-
-//****************************************************************************//
-//      Complex number class (64-bit)                                         //
-//****************************************************************************//
-class Complex64
-{
-public:
-	flt64_t	re;		// Real part
-	flt64_t	im;		// Imaginary part
-
-//****************************************************************************//
-//      Arithmetic operations                                                 //
-//****************************************************************************//
-
-//============================================================================//
-//      Unary operations                                                      //
-//============================================================================//
-
-// Negative value
-void Neg (void);
-
-// Complex conjugate value
-void Conj (void);
-
-// Square root
-void Sqrt (void);
-
-// Square value
-void Sqr (void);
-
-// Inverse value
-void Inverse (void);
-
-//============================================================================//
-//      Binary operations                                                     //
-//============================================================================//
-
-// Addition
-void Add (const Complex64 *source);
-
-// Subtraction
-void Sub (const Complex64 *source);
-
-// Multiplication
-void Mul (const Complex64 *source);
-
-// Division
-void Div (const Complex64 *source);
-
-//****************************************************************************//
-//      Complex number properties                                             //
-//****************************************************************************//
-
-// Magnitude value
-flt64_t Magnitude (void) const;
-
-// Argument value
-flt64_t Argument (void) const;
-
-//****************************************************************************//
-//      Checks                                                                //
-//****************************************************************************//
-
-// Check for zero number
-bool IsZero (void) const;
-
-// Check for equality of the numbers
-bool IsEqual (const Complex64 *source) const;
-
-// Check for negativity of the numbers
-bool IsNeg (const Complex64 *source) const;
+static bool IsNeg (const cmplx32_t *target, const cmplx32_t *source);
+static bool IsNeg (const cmplx64_t *target, const cmplx64_t *source);
 };
 # else
 /*
@@ -166,15 +121,6 @@ bool IsNeg (const Complex64 *source) const;
 ################################################################################
 */
 //****************************************************************************//
-//      Complex number structure (32-bit)                                     //
-//****************************************************************************//
-struct Complex32
-{
-	flt32_t	re;		// Real part
-	flt32_t	im;		// Imaginary part
-};
-
-//****************************************************************************//
 //      Arithmetic operations                                                 //
 //****************************************************************************//
 
@@ -183,129 +129,72 @@ struct Complex32
 //============================================================================//
 
 // Negative value
-void Complex32_Neg (struct Complex32 *number);
+void Complex_Neg_flt32 (struct cmplx32_t *number);
+void Complex_Neg_flt64 (struct cmplx64_t *number);
 
 // Complex conjugate value
-void Complex32_Conj (struct Complex32 *number);
+void Complex_Conj_flt32 (struct cmplx32_t *number);
+void Complex_Conj_flt64 (struct cmplx64_t *number);
 
 // Square root
-void Complex32_Sqrt (struct Complex32 *number);
+void Complex_Sqrt_flt32 (struct cmplx32_t *number);
+void Complex_Sqrt_flt64 (struct cmplx64_t *number);
 
 // Square value
-void Complex32_Sqr (struct Complex32 *number);
+void Complex_Sqr_flt32 (struct cmplx32_t *number);
+void Complex_Sqr_flt64 (struct cmplx64_t *number);
 
 // Inverse value
-void Complex32_Inverse (struct Complex32 *number);
+void Complex_Inverse_flt32 (struct cmplx32_t *number);
+void Complex_Inverse_flt64 (struct cmplx64_t *number);
 
 //============================================================================//
 //      Binary operations                                                     //
 //============================================================================//
 
 // Addition
-void Complex32_Add (struct Complex32 *target, const struct Complex32 *source);
+void Complex_Add_flt32 (struct cmplx32_t *target, const struct cmplx32_t *source);
+void Complex_Add_flt64 (struct cmplx64_t *target, const struct cmplx64_t *source);
 
 // Subtraction
-void Complex32_Sub (struct Complex32 *target, const struct Complex32 *source);
+void Complex_Sub_flt32 (struct cmplx32_t *target, const struct cmplx32_t *source);
+void Complex_Sub_flt64 (struct cmplx64_t *target, const struct cmplx64_t *source);
 
 // Multiplication
-void Complex32_Mul (struct Complex32 *target, const struct Complex32 *source);
+void Complex_Mul_flt32 (struct cmplx32_t *target, const struct cmplx32_t *source);
+void Complex_Mul_flt64 (struct cmplx64_t *target, const struct cmplx64_t *source);
 
 // Division
-void Complex32_Div (struct Complex32 *target, const struct Complex32 *source);
+void Complex_Div_flt32 (struct cmplx32_t *target, const struct cmplx32_t *source);
+void Complex_Div_flt64 (struct cmplx64_t *target, const struct cmplx64_t *source);
 
 //****************************************************************************//
 //      Complex number properties                                             //
 //****************************************************************************//
 
 // Magnitude value
-flt32_t Complex32_Magnitude (const struct Complex32 *number);
+flt32_t Complex_Magnitude_flt32 (const struct cmplx32_t *number);
+flt64_t Complex_Magnitude_flt64 (const struct cmplx64_t *number);
 
 // Argument value
-flt32_t Complex32_Argument (const struct Complex32 *number);
+flt32_t Complex_Argument_flt32 (const struct cmplx32_t *number);
+flt64_t Complex_Argument_flt64 (const struct cmplx64_t *number);
 
 //****************************************************************************//
 //      Checks                                                                //
 //****************************************************************************//
 
 // Check for zero number
-bool Complex32_IsZero (const struct Complex32 *number);
+bool Complex_IsZero_flt32 (const struct cmplx32_t *number);
+bool Complex_IsZero_flt64 (const struct cmplx64_t *number);
 
 // Check for equality of the numbers
-bool Complex32_IsEqual (const struct Complex32 *number, const struct Complex32 *source);
+bool Complex_IsEqual_flt32 (const struct cmplx32_t *target, const struct cmplx32_t *source);
+bool Complex_IsEqual_flt64 (const struct cmplx64_t *target, const struct cmplx64_t *source);
 
 // Check for negativity of the numbers
-bool Complex32_IsNeg (const struct Complex32 *number, const struct Complex32 *source);
-
-//****************************************************************************//
-//      Complex number structure (64-bit)                                     //
-//****************************************************************************//
-struct Complex64
-{
-	flt64_t	re;		// Real part
-	flt64_t	im;		// Imaginary part
-};
-
-//****************************************************************************//
-//      Arithmetic operations                                                 //
-//****************************************************************************//
-
-//============================================================================//
-//      Unary operations                                                      //
-//============================================================================//
-
-// Negative value
-void Complex64_Neg (struct Complex64 *number);
-
-// Complex conjugate value
-void Complex64_Conj (struct Complex64 *number);
-
-// Square root
-void Complex64_Sqrt (struct Complex64 *number);
-
-// Square value
-void Complex64_Sqr (struct Complex64 *number);
-
-// Inverse value
-void Complex64_Inverse (struct Complex64 *number);
-
-//============================================================================//
-//      Binary operations                                                     //
-//============================================================================//
-
-// Addition
-void Complex64_Add (struct Complex64 *target, const struct Complex64 *source);
-
-// Subtraction
-void Complex64_Sub (struct Complex64 *target, const struct Complex64 *source);
-
-// Multiplication
-void Complex64_Mul (struct Complex64 *target, const struct Complex64 *source);
-
-// Division
-void Complex64_Div (struct Complex64 *target, const struct Complex64 *source);
-
-//****************************************************************************//
-//      Complex number properties                                             //
-//****************************************************************************//
-
-// Magnitude value
-flt64_t Complex64_Magnitude (const struct Complex64 *number);
-
-// Argument value
-flt64_t Complex64_Argument (const struct Complex64 *number);
-
-//****************************************************************************//
-//      Checks                                                                //
-//****************************************************************************//
-
-// Check for zero number
-bool Complex64_IsZero (const struct Complex64 *number);
-
-// Check for equality of the numbers
-bool Complex64_IsEqual (const struct Complex64 *number, const struct Complex64 *source);
-
-// Check for negativity of the numbers
-bool Complex64_IsNeg (const struct Complex64 *number, const struct Complex64 *source);
+bool Complex_IsNeg_flt32 (const struct cmplx32_t *target, const struct cmplx32_t *source);
+bool Complex_IsNeg_flt64 (const struct cmplx64_t *target, const struct cmplx64_t *source);
 
 # endif
 /*

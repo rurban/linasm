@@ -3719,17 +3719,17 @@ index	equ		rsi							; bit position (index)
 ;---[Internal variables]-------------------
 shft	equ		rcx							; shift value
 low		equ		cl							; low part of shift value
-bitmask	equ		al							; bit mask
+mask	equ		al							; bit mask
 ;------------------------------------------
 		mov		shft, index
 		and		shft, 0x7					; shft = index & 0x7
-		mov		bitmask, 1					; bitmask = 1
-		shl		bitmask, low				; bitmask = 1 << shft
+		mov		mask, 1
+		shl		mask, low					; mask = 1 << shft
 if inv
-		not		bitmask						; bitmask = ~bitmask
+		not		mask						; mask = ~mask
 end if
 		shr		index, 3					; index >>= 3
-		cmd		[array + index], bitmask	; change selected bit
+		cmd		[array + index], mask		; change selected bit
 		ret
 }
 
@@ -3743,15 +3743,15 @@ index	equ		rsi							; bit position (index)
 ;---[Internal variables]-------------------
 shft	equ		rcx							; shift value
 low		equ		cl							; low part of shift value
-bitmask	equ		al							; bit mask
+mask	equ		al							; bit mask
 ;------------------------------------------
 		mov		shft, index
 		and		shft, 0x7					; shft = index & 0x7
-		mov		bitmask, 1					; bitmask = 1
-		shl		bitmask, low				; bitmask = 1 << shft
+		mov		mask, 1
+		shl		mask, low					; mask = 1 << shft
 		shr		index, 3					; index >>= 3
-		test	[array + index], bitmask	; test selected bit
-		setnz	bitmask						; return bit state
+		test	[array + index], mask		; test selected bit
+		setnz	mask						; return bit state
 		ret
 
 ;==============================================================================;
@@ -3998,19 +3998,19 @@ size	equ		rsi							; array size (count of elements)
 ;---[Internal variables]-------------------
 if x eq b
 XorFunc	= XorS8								; function to call
-mask	= 0xFF								; mask to apply to all elements
+bmask	= 0xFF								; mask to apply to all elements
 else if x eq w
 XorFunc	= XorS16							; function to call
-mask	= 0xFFFF							; mask to apply to all elements
+bmask	= 0xFFFF							; mask to apply to all elements
 else if x eq d
 XorFunc	= XorS32							; function to call
-mask	= 0xFFFFFFFF						; mask to apply to all elements
+bmask	= 0xFFFFFFFF						; mask to apply to all elements
 else if x eq q
 XorFunc	= XorS64							; function to call
-mask	= 0xFFFFFFFFFFFFFFFF				; mask to apply to all elements
+bmask	= 0xFFFFFFFFFFFFFFFF				; mask to apply to all elements
 end if
 ;------------------------------------------
-		mov		reg, mask					; load mask
+		mov		reg, bmask					; load mask
 		jmp		XorFunc						; call XorFunc (array, size)
 }
 Not8:	NOT		dl, b
@@ -8663,8 +8663,6 @@ StageKey8:	SORTSTAGE_KEY	al, 0
 StageKey16:	SORTSTAGE_KEY	ax, 1
 StageKey32:	SORTSTAGE_KEY	eax, 2
 StageKey64:	SORTSTAGE_KEY	rax, 3
-
-public	StageKey32	as	'_StageKey32'
 
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 ;       Radix sort core                                                        ;

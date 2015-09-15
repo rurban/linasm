@@ -219,6 +219,80 @@ public	CholeskyLow_flt64			as	'_ZN6Matrix11CholeskyLowEPdS0_m'
 section	'.text'		executable align 16
 
 ;******************************************************************************;
+;       Determinant of 1 order matrix                                          ;
+;******************************************************************************;
+macro	DET1	matrix, temp0, x
+{
+;---[Internal variables]-------------------
+if x eq s
+scale	= 2									; scale value
+else if x eq d
+scale	= 3									; scale value
+end if
+bytes	= 1 shl scale						; size of array element (bytes)
+;------------------------------------------
+		movs#x	temp0, [matrix + 0 * bytes]	; temp0 = matrix[0]
+}
+
+;******************************************************************************;
+;       Determinant of 2 order matrix                                          ;
+;******************************************************************************;
+macro	DET2	matrix, temp0, temp1, x
+{
+;---[Internal variables]-------------------
+if x eq s
+scale	= 2									; scale value
+else if x eq d
+scale	= 3									; scale value
+end if
+bytes	= 1 shl scale						; size of array element (bytes)
+;------------------------------------------
+		movs#x	temp0, [matrix + 0 * bytes]
+		muls#x	temp0, [matrix + 3 * bytes]	; temp0 = matrix[0] * matrix[3]
+		movs#x	temp1, [matrix + 2 * bytes]
+		muls#x	temp1, [matrix + 1 * bytes]	; temp1 = matrix[2] * matrix[1]
+		subs#x	temp0, temp1				; temp0 -= temp1
+}
+
+;******************************************************************************;
+;       Determinant of 3 order matrix                                          ;
+;******************************************************************************;
+macro	DET3	matrix, temp0, temp1, temp2, temp3, temp4, temp5, temp6, temp7, temp8, x
+{
+;---[Internal variables]-------------------
+if x eq s
+scale	= 2									; scale value
+else if x eq d
+scale	= 3									; scale value
+end if
+bytes	= 1 shl scale						; size of array element (bytes)
+;------------------------------------------
+		movs#x	temp0, [matrix + 0 * bytes]	; temp0 = matrix[0]
+		movs#x	temp1, [matrix + 3 * bytes]	; temp1 = matrix[3]
+		movs#x	temp2, [matrix + 6 * bytes]	; temp2 = matrix[6]
+		movs#x	temp3, [matrix + 1 * bytes]
+		muls#x	temp3, [matrix + 5 * bytes]	; temp3 = matrix[1] * matrix[5]
+		movs#x	temp4, [matrix + 4 * bytes]
+		muls#x	temp4, [matrix + 8 * bytes]	; temp4 = matrix[4] * matrix[8]
+		movs#x	temp5, [matrix + 7 * bytes]
+		muls#x	temp5, [matrix + 2 * bytes]	; temp5 = matrix[7] * matrix[2]
+		movs#x	temp6, [matrix + 2 * bytes]
+		muls#x	temp6, [matrix + 4 * bytes]	; temp6 = matrix[2] * matrix[4]
+		movs#x	temp7, [matrix + 5 * bytes]
+		muls#x	temp7, [matrix + 7 * bytes]	; temp7 = matrix[5] * matrix[7]
+		movs#x	temp8, [matrix + 8 * bytes]
+		muls#x	temp8, [matrix + 1 * bytes]	; temp8 = matrix[8] * matrix[1]
+		subs#x	temp4, temp7				; temp4 -= temp7
+		muls#x	temp0, temp4				; temp0 *= temp4
+		subs#x	temp5, temp8				; temp5 -= temp8
+		muls#x	temp1, temp5				; temp1 *= temp5
+		subs#x	temp3, temp6				; temp3 -= temp6
+		muls#x	temp2, temp3				; temp2 *= temp3
+		adds#x	temp0, temp1				; temp0 += temp1
+		adds#x	temp0, temp2				; temp0 += temp2
+}
+
+;******************************************************************************;
 ;       Multiply matrix rows                                                   ;
 ;******************************************************************************;
 macro	MUL_ROWS	x
@@ -809,7 +883,7 @@ scale	= 3									; scale value
 end if
 bytes	= 1 shl scale						; size of array element (bytes)
 ;---[Compute matrix determinant]-----------
-		movs#x	temp0, [matrix + 0 * bytes]	; temp0 = matrix[0]
+		DET1	matrix, temp0, x
 ;---[Check matrix determinant]-------------
 		xorp#x	zero, zero					; zero = 0
 		comis#x	temp0, zero					; if (temp0 == 0)
@@ -855,11 +929,7 @@ scale	= 3									; scale value
 end if
 bytes	= 1 shl scale						; size of array element (bytes)
 ;---[Compute matrix determinant]-----------
-		movs#x	temp0, [matrix + 0 * bytes]
-		muls#x	temp0, [matrix + 3 * bytes]	; temp0 = matrix[0] * matrix[3]
-		movs#x	temp1, [matrix + 2 * bytes]
-		muls#x	temp1, [matrix + 1 * bytes]	; temp1 = matrix[2] * matrix[1]
-		subs#x	temp0, temp1				; temp0 -= temp1
+		DET2	matrix, temp0, temp1, x
 ;---[Check matrix determinant]-------------
 		xorp#x	zero, zero					; zero = 0
 		comis#x	temp0, zero					; if (temp0 == 0)
@@ -923,29 +993,7 @@ scale	= 3									; scale value
 end if
 bytes	= 1 shl scale						; size of array element (bytes)
 ;---[Compute matrix determinant]-----------
-		movs#x	temp0, [matrix + 0 * bytes]	; temp0 = matrix[0]
-		movs#x	temp1, [matrix + 3 * bytes]	; temp1 = matrix[3]
-		movs#x	temp2, [matrix + 6 * bytes]	; temp2 = matrix[6]
-		movs#x	temp3, [matrix + 1 * bytes]
-		muls#x	temp3, [matrix + 5 * bytes]	; temp3 = matrix[1] * matrix[5]
-		movs#x	temp4, [matrix + 4 * bytes]
-		muls#x	temp4, [matrix + 8 * bytes]	; temp4 = matrix[4] * matrix[8]
-		movs#x	temp5, [matrix + 7 * bytes]
-		muls#x	temp5, [matrix + 2 * bytes]	; temp5 = matrix[7] * matrix[2]
-		movs#x	temp6, [matrix + 2 * bytes]
-		muls#x	temp6, [matrix + 4 * bytes]	; temp6 = matrix[2] * matrix[4]
-		movs#x	temp7, [matrix + 5 * bytes]
-		muls#x	temp7, [matrix + 7 * bytes]	; temp7 = matrix[5] * matrix[7]
-		movs#x	temp8, [matrix + 8 * bytes]
-		muls#x	temp8, [matrix + 1 * bytes]	; temp8 = matrix[8] * matrix[1]
-		subs#x	temp4, temp7				; temp4 -= temp7
-		muls#x	temp0, temp4				; temp0 *= temp4
-		subs#x	temp5, temp8				; temp5 -= temp8
-		muls#x	temp1, temp5				; temp1 *= temp5
-		subs#x	temp3, temp6				; temp3 -= temp6
-		muls#x	temp2, temp3				; temp2 *= temp3
-		adds#x	temp0, temp1				; temp0 += temp1
-		adds#x	temp0, temp2				; temp0 += temp2
+		DET3	matrix, temp0, temp1, temp2, temp3, temp4, temp5, temp6, temp7, temp8, x
 ;---[Check matrix determinant]-------------
 		xorp#x	zero, zero					; zero = 0
 		comis#x	temp0, zero					; if (temp0 == 0)
@@ -1373,15 +1421,9 @@ macro	DETERMINANT1	x
 matrix	equ		rdi							; pointer to matrix
 ;---[Internal variables]-------------------
 temp0	equ		xmm0						; temporary register #1
-if x eq s
-scale	= 2									; scale value
-else if x eq d
-scale	= 3									; scale value
-end if
-bytes	= 1 shl scale						; size of array element (bytes)
 ;------------------------------------------
-		movs#x	temp0, [matrix + 0 * bytes]	; temp0 = matrix[0]
-		ret									; return temp0
+		DET1	matrix, temp0, x
+		ret									; return result
 }
 Determinant1_flt32:	DETERMINANT1	s
 Determinant1_flt64:	DETERMINANT1	d
@@ -1396,19 +1438,9 @@ matrix	equ		rdi							; pointer to matrix
 ;---[Internal variables]-------------------
 temp0	equ		xmm0						; temporary register #1
 temp1	equ		xmm1						; temporary register #2
-if x eq s
-scale	= 2									; scale value
-else if x eq d
-scale	= 3									; scale value
-end if
-bytes	= 1 shl scale						; size of array element (bytes)
 ;------------------------------------------
-		movs#x	temp0, [matrix + 0 * bytes]
-		muls#x	temp0, [matrix + 3 * bytes]	; temp0 = matrix[0] * matrix[3]
-		movs#x	temp1, [matrix + 2 * bytes]
-		muls#x	temp1, [matrix + 1 * bytes]	; temp1 = matrix[2] * matrix[1]
-		subs#x	temp0, temp1				; temp0 -= temp1
-		ret									; return temp0
+		DET2	matrix, temp0, temp1, x
+		ret									; return result
 }
 Determinant2_flt32:	DETERMINANT2	s
 Determinant2_flt64:	DETERMINANT2	d
@@ -1430,37 +1462,9 @@ temp5	equ		xmm5						; temporary register #6
 temp6	equ		xmm6						; temporary register #7
 temp7	equ		xmm7						; temporary register #8
 temp8	equ		xmm8						; temporary register #9
-if x eq s
-scale	= 2									; scale value
-else if x eq d
-scale	= 3									; scale value
-end if
-bytes	= 1 shl scale						; size of array element (bytes)
 ;------------------------------------------
-		movs#x	temp0, [matrix + 0 * bytes]	; temp0 = matrix[0]
-		movs#x	temp1, [matrix + 3 * bytes]	; temp1 = matrix[3]
-		movs#x	temp2, [matrix + 6 * bytes]	; temp2 = matrix[6]
-		movs#x	temp3, [matrix + 1 * bytes]
-		muls#x	temp3, [matrix + 5 * bytes]	; temp3 = matrix[1] * matrix[5]
-		movs#x	temp4, [matrix + 4 * bytes]
-		muls#x	temp4, [matrix + 8 * bytes]	; temp4 = matrix[4] * matrix[8]
-		movs#x	temp5, [matrix + 7 * bytes]
-		muls#x	temp5, [matrix + 2 * bytes]	; temp5 = matrix[7] * matrix[2]
-		movs#x	temp6, [matrix + 2 * bytes]
-		muls#x	temp6, [matrix + 4 * bytes]	; temp6 = matrix[2] * matrix[4]
-		movs#x	temp7, [matrix + 5 * bytes]
-		muls#x	temp7, [matrix + 7 * bytes]	; temp7 = matrix[5] * matrix[7]
-		movs#x	temp8, [matrix + 8 * bytes]
-		muls#x	temp8, [matrix + 1 * bytes]	; temp8 = matrix[8] * matrix[1]
-		subs#x	temp4, temp7				; temp4 -= temp7
-		muls#x	temp0, temp4				; temp0 *= temp4
-		subs#x	temp5, temp8				; temp5 -= temp8
-		muls#x	temp1, temp5				; temp1 *= temp5
-		subs#x	temp3, temp6				; temp3 -= temp6
-		muls#x	temp2, temp3				; temp2 *= temp3
-		adds#x	temp0, temp1				; temp0 += temp1
-		adds#x	temp0, temp2				; temp0 += temp2
-		ret									; return temp0
+		DET3	matrix, temp0, temp1, temp2, temp3, temp4, temp5, temp6, temp7, temp8, x
+		ret									; return result
 }
 Determinant3_flt32:	DETERMINANT3	s
 Determinant3_flt64:	DETERMINANT3	d
@@ -1733,7 +1737,7 @@ scale	= 3									; scale value
 end if
 bytes	= 1 shl scale						; size of array element (bytes)
 ;---[Compute matrix determinant]-----------
-		movs#x	temp0, [matrix + 0 * bytes]
+		DET1	matrix, temp0, x
 ;---[Check matrix determinant]-------------
 		xorp#x	zero, zero					; zero = 0
 		comis#x	temp0, zero					; if (temp0 == 0)
@@ -1781,11 +1785,7 @@ scale	= 3									; scale value
 end if
 bytes	= 1 shl scale						; size of array element (bytes)
 ;---[Compute matrix determinant]-----------
-		movs#x	temp0, [matrix + 0 * bytes]
-		muls#x	temp0, [matrix + 3 * bytes]	; temp0 = matrix[0] * matrix[3]
-		movs#x	temp1, [matrix + 2 * bytes]
-		muls#x	temp1, [matrix + 1 * bytes]	; temp1 = matrix[2] * matrix[1]
-		subs#x	temp0, temp1				; temp0 -= temp1
+		DET2	matrix, temp0, temp1, x
 ;---[Check matrix determinant]-------------
 		xorp#x	zero, zero					; zero = 0
 		comis#x	temp0, zero					; if (temp0 == 0)
@@ -1855,29 +1855,7 @@ scale	= 3									; scale value
 end if
 bytes	= 1 shl scale						; size of array element (bytes)
 ;---[Compute matrix determinant]-----------
-		movs#x	temp0, [matrix + 0 * bytes]	; temp0 = matrix[0]
-		movs#x	temp1, [matrix + 3 * bytes]	; temp1 = matrix[3]
-		movs#x	temp2, [matrix + 6 * bytes]	; temp2 = matrix[6]
-		movs#x	temp3, [matrix + 1 * bytes]
-		muls#x	temp3, [matrix + 5 * bytes]	; temp3 = matrix[1] * matrix[5]
-		movs#x	temp4, [matrix + 4 * bytes]
-		muls#x	temp4, [matrix + 8 * bytes]	; temp4 = matrix[4] * matrix[8]
-		movs#x	temp5, [matrix + 7 * bytes]
-		muls#x	temp5, [matrix + 2 * bytes]	; temp5 = matrix[7] * matrix[2]
-		movs#x	temp6, [matrix + 2 * bytes]
-		muls#x	temp6, [matrix + 4 * bytes]	; temp6 = matrix[2] * matrix[4]
-		movs#x	temp7, [matrix + 5 * bytes]
-		muls#x	temp7, [matrix + 7 * bytes]	; temp7 = matrix[5] * matrix[7]
-		movs#x	temp8, [matrix + 8 * bytes]
-		muls#x	temp8, [matrix + 1 * bytes]	; temp8 = matrix[8] * matrix[1]
-		subs#x	temp4, temp7				; temp4 -= temp7
-		muls#x	temp0, temp4				; temp0 *= temp4
-		subs#x	temp5, temp8				; temp5 -= temp8
-		muls#x	temp1, temp5				; temp1 *= temp5
-		subs#x	temp3, temp6				; temp3 -= temp6
-		muls#x	temp2, temp3				; temp2 *= temp3
-		adds#x	temp0, temp1				; temp0 += temp1
-		adds#x	temp0, temp2				; temp0 += temp2
+		DET3	matrix, temp0, temp1, temp2, temp3, temp4, temp5, temp6, temp7, temp8, x
 ;---[Check matrix determinant]-------------
 		xorp#x	zero, zero					; zero = 0
 		comis#x	temp0, zero					; if (temp0 == 0)

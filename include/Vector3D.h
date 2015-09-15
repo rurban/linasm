@@ -10,21 +10,35 @@
 # pragma	once
 # include	<Types.h>
 
+//****************************************************************************//
+//      3D vector structure (32-bit)                                          //
+//****************************************************************************//
+struct v3D32_t
+{
+	flt32_t	x;		// X coordinate
+	flt32_t	y;		// Y coordinate
+	flt32_t	z;		// Z coordinate
+};
+
+//****************************************************************************//
+//      3D vector structure (64-bit)                                          //
+//****************************************************************************//
+struct v3D64_t
+{
+	flt64_t	x;		// X coordinate
+	flt64_t	y;		// Y coordinate
+	flt64_t	z;		// Z coordinate
+};
+
 # ifdef	__cplusplus
 /*
 ################################################################################
 #       C++ prototypes                                                         #
 ################################################################################
 */
-//****************************************************************************//
-//      3D vector class (32-bit)                                              //
-//****************************************************************************//
-class Vector3D32
+class Vector3D
 {
 public:
-	flt32_t	x;		// X coordinate
-	flt32_t	y;		// Y coordinate
-	flt32_t	z;		// Z coordinate
 
 //****************************************************************************//
 //      Arithmetic operations                                                 //
@@ -37,275 +51,160 @@ public:
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 //      Normalization (direction cosines)                                     //
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
-void Normalize (void);
+static void Normalize (v3D32_t *vector);
+static void Normalize (v3D64_t *vector);
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 //      Reflection of vector                                                  //
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
 // Reflection through the origin
-void ReflectOrigin (void);
+static void ReflectOrigin (v3D32_t *vector);
+static void ReflectOrigin (v3D64_t *vector);
 
 // Reflection through the X axis
-void ReflectX (void);
+static void ReflectX (v3D32_t *vector);
+static void ReflectX (v3D64_t *vector);
 
 // Reflection through the Y axis
-void ReflectY (void);
+static void ReflectY (v3D32_t *vector);
+static void ReflectY (v3D64_t *vector);
 
 // Reflection through the Z axis
-void ReflectZ (void);
+static void ReflectZ (v3D32_t *vector);
+static void ReflectZ (v3D64_t *vector);
 
 // Reflection through the YZ plane
-void ReflectYZ (void);
+static void ReflectYZ (v3D32_t *vector);
+static void ReflectYZ (v3D64_t *vector);
 
 // Reflection through the XZ plane
-void ReflectXZ (void);
+static void ReflectXZ (v3D32_t *vector);
+static void ReflectXZ (v3D64_t *vector);
 
 // Reflection through the XY plane
-void ReflectXY (void);
+static void ReflectXY (v3D32_t *vector);
+static void ReflectXY (v3D64_t *vector);
 
 //============================================================================//
 //      Binary operations                                                     //
 //============================================================================//
 
 // Addition of vectors
-void Add (const Vector3D32 *source);
+static void Add (v3D32_t *target, const v3D32_t *source);
+static void Add (v3D64_t *target, const v3D64_t *source);
 
 // Subtraction of vectors
-void Sub (const Vector3D32 *source);
+static void Sub (v3D32_t *target, const v3D32_t *source);
+static void Sub (v3D64_t *target, const v3D64_t *source);
 
 // Multiplication by scalar value
-void Mul (flt32_t value);
+static void Mul (v3D32_t *vector, flt32_t value);
+static void Mul (v3D64_t *vector, flt64_t value);
 
 // Division by scalar value
-void Div (flt32_t value);
+static void Div (v3D32_t *vector, flt32_t value);
+static void Div (v3D64_t *vector, flt64_t value);
 
 //****************************************************************************//
 //      Rotation of vector                                                    //
 //****************************************************************************//
 
 // Rotation around the X axis
-void RotateX (flt32_t angle);
+static void RotateX (v3D32_t *vector, flt32_t angle);
+static void RotateX (v3D64_t *vector, flt64_t angle);
 
 // Rotation around the Y axis
-void RotateY (flt32_t angle);
+static void RotateY (v3D32_t *vector, flt32_t angle);
+static void RotateY (v3D64_t *vector, flt64_t angle);
 
 // Rotation around the Z axis
-void RotateZ (flt32_t angle);
+static void RotateZ (v3D32_t *vector, flt32_t angle);
+static void RotateZ (v3D64_t *vector, flt64_t angle);
 
 //****************************************************************************//
 //      Shearing of vector                                                    //
 //****************************************************************************//
 
 // Shearing parallel to the YZ plane
-void ShearYZ (flt32_t value1, flt32_t value2);
+static void ShearYZ (v3D32_t *vector, flt32_t value1, flt32_t value2);
+static void ShearYZ (v3D64_t *vector, flt64_t value1, flt64_t value2);
 
 // Shearing parallel to the XZ plane
-void ShearXZ (flt32_t value1, flt32_t value2);
+static void ShearXZ (v3D32_t *vector, flt32_t value1, flt32_t value2);
+static void ShearXZ (v3D64_t *vector, flt64_t value1, flt64_t value2);
 
 // Shearing parallel to the XY plane
-void ShearXY (flt32_t value1, flt32_t value2);
+static void ShearXY (v3D32_t *vector, flt32_t value1, flt32_t value2);
+static void ShearXY (v3D64_t *vector, flt64_t value1, flt64_t value2);
 
 //****************************************************************************//
 //      Scaling of vector                                                     //
 //****************************************************************************//
-void Scale (const Vector3D32 *source);
+static void Scale (v3D32_t *target, const v3D32_t *source);
+static void Scale (v3D64_t *target, const v3D64_t *source);
 
 //****************************************************************************//
 //      Products                                                              //
 //****************************************************************************//
 
 // Vector product
-void VectorProduct (const Vector3D32 *source);
+static void VectorProduct (v3D32_t *target, const v3D32_t *source);
+static void VectorProduct (v3D64_t *target, const v3D64_t *source);
 
 // Scalar product
-flt32_t ScalarProduct (const Vector3D32 *source) const;
+static flt32_t ScalarProduct (const v3D32_t *target, const v3D32_t *source);
+static flt64_t ScalarProduct (const v3D64_t *target, const v3D64_t *source);
 
 // Triple product
-flt32_t TripleProduct (const Vector3D32 *source1, const Vector3D32 *source2) const;
+static flt32_t TripleProduct (const v3D32_t *target, const v3D32_t *source1, const v3D32_t *source2);
+static flt64_t TripleProduct (const v3D64_t *target, const v3D64_t *source1, const v3D64_t *source2);
 
 //****************************************************************************//
 //      Absolute value                                                        //
 //****************************************************************************//
-flt32_t Abs (void) const;
+static flt32_t Abs (const v3D32_t *vector);
+static flt64_t Abs (const v3D64_t *vector);
 
 //****************************************************************************//
 //      Cosine value of angle between the vectors                             //
 //****************************************************************************//
-flt32_t Cos (const Vector3D32 *source) const;
+static flt32_t Cos (const v3D32_t *target, const v3D32_t *source);
+static flt64_t Cos (const v3D64_t *target, const v3D64_t *source);
 
 //****************************************************************************//
 //      Projection of the vector to another vector                            //
 //****************************************************************************//
-flt32_t Projection (const Vector3D32 *source) const;
+static flt32_t Projection (const v3D32_t *target, const v3D32_t *source);
+static flt64_t Projection (const v3D64_t *target, const v3D64_t *source);
 
 //****************************************************************************//
 //      Checks                                                                //
 //****************************************************************************//
 
 // Check for zero vector
-bool IsZero (void) const;
+static bool IsZero (const v3D32_t *vector);
+static bool IsZero (const v3D64_t *vector);
 
 // Check for equality of the vectors
-bool IsEqual (const Vector3D32 *source) const;
+static bool IsEqual (const v3D32_t *target, const v3D32_t *source);
+static bool IsEqual (const v3D64_t *target, const v3D64_t *source);
 
 // Check for negativity of the vectors
-bool IsNeg (const Vector3D32 *source) const;
+static bool IsNeg (const v3D32_t *target, const v3D32_t *source);
+static bool IsNeg (const v3D64_t *target, const v3D64_t *source);
 
 // Check for collinearity of the vectors
-bool IsCollinear (const Vector3D32 *source) const;
+static bool IsCollinear (const v3D32_t *target, const v3D32_t *source);
+static bool IsCollinear (const v3D64_t *target, const v3D64_t *source);
 
 // Check for orthogonality of the vectors
-bool IsOrthogonal (const Vector3D32 *source) const;
+static bool IsOrthogonal (const v3D32_t *target, const v3D32_t *source);
+static bool IsOrthogonal (const v3D64_t *target, const v3D64_t *source);
 
 // Check for coplanarity of the vectors
-bool IsCoplanar (const Vector3D32 *source1, const Vector3D32 *source2) const;
-};
-
-//****************************************************************************//
-//      3D vector class (64-bit)                                              //
-//****************************************************************************//
-class Vector3D64
-{
-public:
-	flt64_t	x;		// X coordinate
-	flt64_t	y;		// Y coordinate
-	flt64_t	z;		// Z coordinate
-
-//****************************************************************************//
-//      Arithmetic operations                                                 //
-//****************************************************************************//
-
-//============================================================================//
-//      Unary operations                                                      //
-//============================================================================//
-
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
-//      Normalization (direction cosines)                                     //
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
-void Normalize (void);
-
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
-//      Reflection of vector                                                  //
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
-
-// Reflection through the origin
-void ReflectOrigin (void);
-
-// Reflection through the X axis
-void ReflectX (void);
-
-// Reflection through the Y axis
-void ReflectY (void);
-
-// Reflection through the Z axis
-void ReflectZ (void);
-
-// Reflection through the YZ plane
-void ReflectYZ (void);
-
-// Reflection through the XZ plane
-void ReflectXZ (void);
-
-// Reflection through the XY plane
-void ReflectXY (void);
-
-//============================================================================//
-//      Binary operations                                                     //
-//============================================================================//
-
-// Addition of vectors
-void Add (const Vector3D64 *source);
-
-// Subtraction of vectors
-void Sub (const Vector3D64 *source);
-
-// Multiplication by scalar value
-void Mul (flt64_t value);
-
-// Division by scalar value
-void Div (flt64_t value);
-
-//****************************************************************************//
-//      Rotation of vector                                                    //
-//****************************************************************************//
-
-// Rotation around the X axis
-void RotateX (flt64_t angle);
-
-// Rotation around the Y axis
-void RotateY (flt64_t angle);
-
-// Rotation around the Z axis
-void RotateZ (flt64_t angle);
-
-//****************************************************************************//
-//      Shearing of vector                                                    //
-//****************************************************************************//
-
-// Shearing parallel to the YZ plane
-void ShearYZ (flt64_t value1, flt64_t value2);
-
-// Shearing parallel to the XZ plane
-void ShearXZ (flt64_t value1, flt64_t value2);
-
-// Shearing parallel to the XY plane
-void ShearXY (flt64_t value1, flt64_t value2);
-
-//****************************************************************************//
-//      Scaling of vector                                                     //
-//****************************************************************************//
-void Scale (const Vector3D64 *source);
-
-//****************************************************************************//
-//      Products                                                              //
-//****************************************************************************//
-
-// Vector product
-void VectorProduct (const Vector3D64 *source);
-
-// Scalar product
-flt64_t ScalarProduct (const Vector3D64 *source) const;
-
-// Triple product
-flt64_t TripleProduct (const Vector3D64 *source1, const Vector3D64 *source2) const;
-
-//****************************************************************************//
-//      Absolute value                                                        //
-//****************************************************************************//
-flt64_t Abs (void) const;
-
-//****************************************************************************//
-//      Cosine value of angle between the vectors                             //
-//****************************************************************************//
-flt64_t Cos (const Vector3D64 *source) const;
-
-//****************************************************************************//
-//      Projection of the vector to another vector                            //
-//****************************************************************************//
-flt64_t Projection (const Vector3D64 *source) const;
-
-//****************************************************************************//
-//      Checks                                                                //
-//****************************************************************************//
-
-// Check for zero vector
-bool IsZero (void) const;
-
-// Check for equality of the vectors
-bool IsEqual (const Vector3D64 *source) const;
-
-// Check for negativity of the vectors
-bool IsNeg (const Vector3D64 *source) const;
-
-// Check for collinearity of the vectors
-bool IsCollinear (const Vector3D64 *source) const;
-
-// Check for orthogonality of the vectors
-bool IsOrthogonal (const Vector3D64 *source) const;
-
-// Check for coplanarity of the vectors
-bool IsCoplanar (const Vector3D64 *source1, const Vector3D64 *source2) const;
+static bool IsCoplanar (const v3D32_t *target, const v3D32_t *source1, const v3D32_t *source2);
+static bool IsCoplanar (const v3D64_t *target, const v3D64_t *source1, const v3D64_t *source2);
 };
 # else
 /*
@@ -314,16 +213,6 @@ bool IsCoplanar (const Vector3D64 *source1, const Vector3D64 *source2) const;
 ################################################################################
 */
 //****************************************************************************//
-//      3D vector structure (32-bit)                                          //
-//****************************************************************************//
-struct Vector3D32
-{
-	flt32_t	x;		// X coordinate
-	flt32_t	y;		// Y coordinate
-	flt32_t	z;		// Z coordinate
-};
-
-//****************************************************************************//
 //      Arithmetic operations                                                 //
 //****************************************************************************//
 
@@ -334,274 +223,160 @@ struct Vector3D32
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 //      Normalization (direction cosines)                                     //
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
-void Vector3D32_Normalize (struct Vector3D32 *vector);
+void Vector3D_Normalize_flt32 (struct v3D32_t *vector);
+void Vector3D_Normalize_flt64 (struct v3D64_t *vector);
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 //      Reflection of vector                                                  //
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
 // Reflection through the origin
-void Vector3D32_ReflectOrigin (struct Vector3D32 *vector);
+void Vector3D_ReflectOrigin_flt32 (struct v3D32_t *vector);
+void Vector3D_ReflectOrigin_flt64 (struct v3D64_t *vector);
 
 // Reflection through the X axis
-void Vector3D32_ReflectX (struct Vector3D32 *vector);
+void Vector3D_ReflectX_flt32 (struct v3D32_t *vector);
+void Vector3D_ReflectX_flt64 (struct v3D64_t *vector);
 
 // Reflection through the Y axis
-void Vector3D32_ReflectY (struct Vector3D32 *vector);
+void Vector3D_ReflectY_flt32 (struct v3D32_t *vector);
+void Vector3D_ReflectY_flt64 (struct v3D64_t *vector);
 
 // Reflection through the Z axis
-void Vector3D32_ReflectZ (struct Vector3D32 *vector);
+void Vector3D_ReflectZ_flt32 (struct v3D32_t *vector);
+void Vector3D_ReflectZ_flt64 (struct v3D64_t *vector);
 
 // Reflection through the YZ plane
-void Vector3D32_ReflectYZ (struct Vector3D32 *vector);
+void Vector3D_ReflectYZ_flt32 (struct v3D32_t *vector);
+void Vector3D_ReflectYZ_flt64 (struct v3D64_t *vector);
 
 // Reflection through the XZ plane
-void Vector3D32_ReflectXZ (struct Vector3D32 *vector);
+void Vector3D_ReflectXZ_flt32 (struct v3D32_t *vector);
+void Vector3D_ReflectXZ_flt64 (struct v3D64_t *vector);
 
 // Reflection through the XY plane
-void Vector3D32_ReflectXY (struct Vector3D32 *vector);
+void Vector3D_ReflectXY_flt32 (struct v3D32_t *vector);
+void Vector3D_ReflectXY_flt64 (struct v3D64_t *vector);
 
 //============================================================================//
 //      Binary operations                                                     //
 //============================================================================//
 
 // Addition of vectors
-void Vector3D32_Add (struct Vector3D32 *target, const struct Vector3D32 *source);
+void Vector3D_Add_flt32 (struct v3D32_t *target, const struct v3D32_t *source);
+void Vector3D_Add_flt64 (struct v3D64_t *target, const struct v3D64_t *source);
 
 // Subtraction of vectors
-void Vector3D32_Sub (struct Vector3D32 *target, const struct Vector3D32 *source);
+void Vector3D_Sub_flt32 (struct v3D32_t *target, const struct v3D32_t *source);
+void Vector3D_Sub_flt64 (struct v3D64_t *target, const struct v3D64_t *source);
 
 // Multiplication by scalar value
-void Vector3D32_Mul (struct Vector3D32 *vector, flt32_t value);
+void Vector3D_Mul_flt32 (struct v3D32_t *vector, flt32_t value);
+void Vector3D_Mul_flt64 (struct v3D64_t *vector, flt64_t value);
 
 // Division by scalar value
-void Vector3D32_Div (struct Vector3D32 *vector, flt32_t value);
+void Vector3D_Div_flt32 (struct v3D32_t *vector, flt32_t value);
+void Vector3D_Div_flt64 (struct v3D64_t *vector, flt64_t value);
 
 //****************************************************************************//
 //      Rotation of vector                                                    //
 //****************************************************************************//
 
 // Rotation around the X axis
-void Vector3D32_RotateX (struct Vector3D32 *vector, flt32_t angle);
+void Vector3D_RotateX_flt32 (struct v3D32_t *vector, flt32_t angle);
+void Vector3D_RotateX_flt64 (struct v3D64_t *vector, flt64_t angle);
 
 // Rotation around the Y axis
-void Vector3D32_RotateY (struct Vector3D32 *vector, flt32_t angle);
+void Vector3D_RotateY_flt32 (struct v3D32_t *vector, flt32_t angle);
+void Vector3D_RotateY_flt64 (struct v3D64_t *vector, flt64_t angle);
 
 // Rotation around the Z axis
-void Vector3D32_RotateZ (struct Vector3D32 *vector, flt32_t angle);
+void Vector3D_RotateZ_flt32 (struct v3D32_t *vector, flt32_t angle);
+void Vector3D_RotateZ_flt64 (struct v3D64_t *vector, flt64_t angle);
 
 //****************************************************************************//
 //      Shearing of vector                                                    //
 //****************************************************************************//
 
 // Shearing parallel to the YZ plane
-void Vector3D32_ShearYZ (struct Vector3D32 *vector, flt32_t value1, flt32_t value2);
+void Vector3D_ShearYZ_flt32 (struct v3D32_t *vector, flt32_t value1, flt32_t value2);
+void Vector3D_ShearYZ_flt64 (struct v3D64_t *vector, flt64_t value1, flt64_t value2);
 
 // Shearing parallel to the XZ plane
-void Vector3D32_ShearXZ (struct Vector3D32 *vector, flt32_t value1, flt32_t value2);
+void Vector3D_ShearXZ_flt32 (struct v3D32_t *vector, flt32_t value1, flt32_t value2);
+void Vector3D_ShearXZ_flt64 (struct v3D64_t *vector, flt64_t value1, flt64_t value2);
 
 // Shearing parallel to the XY plane
-void Vector3D32_ShearXY (struct Vector3D32 *vector, flt32_t value1, flt32_t value2);
+void Vector3D_ShearXY_flt32 (struct v3D32_t *vector, flt32_t value1, flt32_t value2);
+void Vector3D_ShearXY_flt64 (struct v3D64_t *vector, flt64_t value1, flt64_t value2);
 
 //****************************************************************************//
 //      Scaling of vector                                                     //
 //****************************************************************************//
-void Vector3D32_Scale (struct Vector3D32 *target, const struct Vector3D32 *source);
+void Vector3D_Scale_flt32 (struct v3D32_t *target, const struct v3D32_t *source);
+void Vector3D_Scale_flt64 (struct v3D64_t *target, const struct v3D64_t *source);
 
 //****************************************************************************//
 //      Products                                                              //
 //****************************************************************************//
 
 // Vector product
-void Vector3D32_VectorProduct (struct Vector3D32 *target, const struct Vector3D32 *source);
+void Vector3D_VectorProduct_flt32 (struct v3D32_t *target, const struct v3D32_t *source);
+void Vector3D_VectorProduct_flt64 (struct v3D64_t *target, const struct v3D64_t *source);
 
 // Scalar product
-flt32_t Vector3D32_ScalarProduct (const struct Vector3D32 *target, const struct Vector3D32 *source);
+flt32_t Vector3D_ScalarProduct_flt32 (const struct v3D32_t *target, const struct v3D32_t *source);
+flt64_t Vector3D_ScalarProduct_flt64 (const struct v3D64_t *target, const struct v3D64_t *source);
 
 // Triple product
-flt32_t Vector3D32_TripleProduct (const struct Vector3D32 *target, const struct Vector3D32 *source1, const struct Vector3D32 *source2);
+flt32_t Vector3D_TripleProduct_flt32 (const struct v3D32_t *target, const struct v3D32_t *source1, const struct v3D32_t *source2);
+flt64_t Vector3D_TripleProduct_flt64 (const struct v3D64_t *target, const struct v3D64_t *source1, const struct v3D64_t *source2);
 
 //****************************************************************************//
 //      Absolute value                                                        //
 //****************************************************************************//
-flt32_t Vector3D32_Abs (const struct Vector3D32 *vector);
+flt32_t Vector3D_Abs_flt32 (const struct v3D32_t *vector);
+flt64_t Vector3D_Abs_flt64 (const struct v3D64_t *vector);
 
 //****************************************************************************//
 //      Cosine value of angle between the vectors                             //
 //****************************************************************************//
-flt32_t Vector3D32_Cos (const struct Vector3D32 *target, const struct Vector3D32 *source);
+flt32_t Vector3D_Cos_flt32 (const struct v3D32_t *target, const struct v3D32_t *source);
+flt64_t Vector3D_Cos_flt64 (const struct v3D64_t *target, const struct v3D64_t *source);
 
 //****************************************************************************//
 //      Projection of the vector to another vector                            //
 //****************************************************************************//
-flt32_t Vector3D32_Projection (const struct Vector3D32 *target, const struct Vector3D32 *source);
+flt32_t Vector3D_Projection_flt32 (const struct v3D32_t *target, const struct v3D32_t *source);
+flt64_t Vector3D_Projection_flt64 (const struct v3D64_t *target, const struct v3D64_t *source);
 
 //****************************************************************************//
 //      Checks                                                                //
 //****************************************************************************//
 
 // Check for zero vector
-bool Vector3D32_IsZero (const struct Vector3D32 *vector);
+bool Vector3D_IsZero_flt32 (const struct v3D32_t *vector);
+bool Vector3D_IsZero_flt64 (const struct v3D64_t *vector);
 
 // Check for equality of the vectors
-bool Vector3D32_IsEqual (const struct Vector3D32 *vector, const struct Vector3D32 *source);
+bool Vector3D_IsEqual_flt32 (const struct v3D32_t *target, const struct v3D32_t *source);
+bool Vector3D_IsEqual_flt64 (const struct v3D64_t *target, const struct v3D64_t *source);
 
 // Check for negativity of the vectors
-bool Vector3D32_IsNeg (const struct Vector3D32 *vector, const struct Vector3D32 *source);
+bool Vector3D_IsNeg_flt32 (const struct v3D32_t *target, const struct v3D32_t *source);
+bool Vector3D_IsNeg_flt64 (const struct v3D64_t *target, const struct v3D64_t *source);
 
 // Check for collinearity of the vectors
-bool Vector3D32_IsCollinear (const struct Vector3D32 *vector, const struct Vector3D32 *source);
+bool Vector3D_IsCollinear_flt32 (const struct v3D32_t *target, const struct v3D32_t *source);
+bool Vector3D_IsCollinear_flt64 (const struct v3D64_t *target, const struct v3D64_t *source);
 
 // Check for orthogonality of the vectors
-bool Vector3D32_IsOrthogonal (const struct Vector3D32 *vector, const struct Vector3D32 *source);
+bool Vector3D_IsOrthogonal_flt32 (const struct v3D32_t *target, const struct v3D32_t *source);
+bool Vector3D_IsOrthogonal_flt64 (const struct v3D64_t *target, const struct v3D64_t *source);
 
 // Check for coplanarity of the vectors
-bool Vector3D32_IsCoplanar (const struct Vector3D32 *vector, const struct Vector3D32 *source1, const struct Vector3D32 *source2);
-
-//****************************************************************************//
-//      3D vector structure (64-bit)                                          //
-//****************************************************************************//
-struct Vector3D64
-{
-	flt64_t	x;		// X coordinate
-	flt64_t	y;		// Y coordinate
-	flt64_t	z;		// Z coordinate
-};
-
-//****************************************************************************//
-//      Arithmetic operations                                                 //
-//****************************************************************************//
-
-//============================================================================//
-//      Unary operations                                                      //
-//============================================================================//
-
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
-//      Normalization (direction cosines)                                     //
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
-void Vector3D64_Normalize (struct Vector3D64 *vector);
-
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
-//      Reflection of vector                                                  //
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
-
-// Reflection through the origin
-void Vector3D64_ReflectOrigin (struct Vector3D64 *vector);
-
-// Reflection through the X axis
-void Vector3D64_ReflectX (struct Vector3D64 *vector);
-
-// Reflection through the Y axis
-void Vector3D64_ReflectY (struct Vector3D64 *vector);
-
-// Reflection through the Z axis
-void Vector3D64_ReflectZ (struct Vector3D64 *vector);
-
-// Reflection through the YZ plane
-void Vector3D64_ReflectYZ (struct Vector3D64 *vector);
-
-// Reflection through the XZ plane
-void Vector3D64_ReflectXZ (struct Vector3D64 *vector);
-
-// Reflection through the XY plane
-void Vector3D64_ReflectXY (struct Vector3D64 *vector);
-
-//============================================================================//
-//      Binary operations                                                     //
-//============================================================================//
-
-// Addition of vectors
-void Vector3D64_Add (struct Vector3D64 *target, const struct Vector3D64 *source);
-
-// Subtraction of vectors
-void Vector3D64_Sub (struct Vector3D64 *target, const struct Vector3D64 *source);
-
-// Multiplication by scalar value
-void Vector3D64_Mul (struct Vector3D64 *vector, flt64_t value);
-
-// Division by scalar value
-void Vector3D64_Div (struct Vector3D64 *vector, flt64_t value);
-
-//****************************************************************************//
-//      Rotation of vector                                                    //
-//****************************************************************************//
-
-// Rotation around the X axis
-void Vector3D64_RotateX (struct Vector3D64 *vector, flt64_t angle);
-
-// Rotation around the Y axis
-void Vector3D64_RotateY (struct Vector3D64 *vector, flt64_t angle);
-
-// Rotation around the Z axis
-void Vector3D64_RotateZ (struct Vector3D64 *vector, flt64_t angle);
-
-//****************************************************************************//
-//      Shearing of vector                                                    //
-//****************************************************************************//
-
-// Shearing parallel to the YZ plane
-void Vector3D64_ShearYZ (struct Vector3D64 *vector, flt64_t value1, flt64_t value2);
-
-// Shearing parallel to the XZ plane
-void Vector3D64_ShearXZ (struct Vector3D64 *vector, flt64_t value1, flt64_t value2);
-
-// Shearing parallel to the XY plane
-void Vector3D64_ShearXY (struct Vector3D64 *vector, flt64_t value1, flt64_t value2);
-
-//****************************************************************************//
-//      Scaling of vector                                                     //
-//****************************************************************************//
-void Vector3D64_Scale (struct Vector3D64 *target, const struct Vector3D64 *source);
-
-//****************************************************************************//
-//      Products                                                              //
-//****************************************************************************//
-
-// Vector product
-void Vector3D64_VectorProduct (struct Vector3D64 *target, const struct Vector3D64 *source);
-
-// Scalar product
-flt64_t Vector3D64_ScalarProduct (const struct Vector3D64 *target, const struct Vector3D64 *source);
-
-// Triple product
-flt64_t Vector3D64_TripleProduct (const struct Vector3D64 *target, const struct Vector3D64 *source1, const struct Vector3D64 *source2);
-
-//****************************************************************************//
-//      Absolute value                                                        //
-//****************************************************************************//
-flt64_t Vector3D64_Abs (const struct Vector3D64 *vector);
-
-//****************************************************************************//
-//      Cosine value of angle between the vectors                             //
-//****************************************************************************//
-flt64_t Vector3D64_Cos (const struct Vector3D64 *target, const struct Vector3D64 *source);
-
-//****************************************************************************//
-//      Projection of the vector to another vector                            //
-//****************************************************************************//
-flt64_t Vector3D64_Projection (const struct Vector3D64 *target, const struct Vector3D64 *source);
-
-//****************************************************************************//
-//      Checks                                                                //
-//****************************************************************************//
-
-// Check for zero vector
-bool Vector3D64_IsZero (const struct Vector3D64 *vector);
-
-// Check for equality of the vectors
-bool Vector3D64_IsEqual (const struct Vector3D64 *vector, const struct Vector3D64 *source);
-
-// Check for negativity of the vectors
-bool Vector3D64_IsNeg (const struct Vector3D64 *vector, const struct Vector3D64 *source);
-
-// Check for collinearity of the vectors
-bool Vector3D64_IsCollinear (const struct Vector3D64 *vector, const struct Vector3D64 *source);
-
-// Check for orthogonality of the vectors
-bool Vector3D64_IsOrthogonal (const struct Vector3D64 *vector, const struct Vector3D64 *source);
-
-// Check for coplanarity of the vectors
-bool Vector3D64_IsCoplanar (const struct Vector3D64 *vector, const struct Vector3D64 *source1, const struct Vector3D64 *source2);
+bool Vector3D_IsCoplanar_flt32 (const struct v3D32_t *target, const struct v3D32_t *source1, const struct v3D32_t *source2);
+bool Vector3D_IsCoplanar_flt64 (const struct v3D64_t *target, const struct v3D64_t *source1, const struct v3D64_t *source2);
 
 # endif
 /*
