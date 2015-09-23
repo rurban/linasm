@@ -91,8 +91,8 @@ static void Div (v2D64_t *vector, flt64_t value);
 //****************************************************************************//
 //      Rotation of vector                                                    //
 //****************************************************************************//
-static void Rotate (v2D32_t *vector, flt32_t angle);
-static void Rotate (v2D64_t *vector, flt64_t angle);
+static void Rotate (v2D32_t *vector, flt32_t cos, flt32_t sin);
+static void Rotate (v2D64_t *vector, flt64_t cos, flt64_t sin;
 
 //****************************************************************************//
 //      Shearing of vector                                                    //
@@ -219,8 +219,8 @@ void Vector2D_Div_flt64 (struct v2D64_t *vector, flt64_t value);
 //****************************************************************************//
 //      Rotation of vector                                                    //
 //****************************************************************************//
-void Vector2D_Rotate_flt32 (struct v2D32_t *vector, flt32_t angle);
-void Vector2D_Rotate_flt64 (struct v2D64_t *vector, flt64_t angle);
+void Vector2D_Rotate_flt32 (struct v2D32_t *vector, flt32_t cos, flt32_t sin);
+void Vector2D_Rotate_flt64 (struct v2D64_t *vector, flt64_t cos, flt64_t sin);
 
 //****************************************************************************//
 //      Shearing of vector                                                    //

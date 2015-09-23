@@ -111,16 +111,16 @@ static void Div (v3D64_t *vector, flt64_t value);
 //****************************************************************************//
 
 // Rotation around the X axis
-static void RotateX (v3D32_t *vector, flt32_t angle);
-static void RotateX (v3D64_t *vector, flt64_t angle);
+static void RotateX (v3D32_t *vector, flt32_t cos, flt32_t sin);
+static void RotateX (v3D64_t *vector, flt64_t cos, flt64_t sin);
 
 // Rotation around the Y axis
-static void RotateY (v3D32_t *vector, flt32_t angle);
-static void RotateY (v3D64_t *vector, flt64_t angle);
+static void RotateY (v3D32_t *vector, flt32_t cos, flt32_t sin);
+static void RotateY (v3D64_t *vector, flt64_t cos, flt64_t sin);
 
 // Rotation around the Z axis
-static void RotateZ (v3D32_t *vector, flt32_t angle);
-static void RotateZ (v3D64_t *vector, flt64_t angle);
+static void RotateZ (v3D32_t *vector, flt32_t cos, flt32_t sin);
+static void RotateZ (v3D64_t *vector, flt64_t cos, flt64_t sin);
 
 //****************************************************************************//
 //      Shearing of vector                                                    //
@@ -283,16 +283,16 @@ void Vector3D_Div_flt64 (struct v3D64_t *vector, flt64_t value);
 //****************************************************************************//
 
 // Rotation around the X axis
-void Vector3D_RotateX_flt32 (struct v3D32_t *vector, flt32_t angle);
-void Vector3D_RotateX_flt64 (struct v3D64_t *vector, flt64_t angle);
+void Vector3D_RotateX_flt32 (struct v3D32_t *vector, flt32_t cos, flt32_t sin);
+void Vector3D_RotateX_flt64 (struct v3D64_t *vector, flt64_t cos, flt64_t sin);
 
 // Rotation around the Y axis
-void Vector3D_RotateY_flt32 (struct v3D32_t *vector, flt32_t angle);
-void Vector3D_RotateY_flt64 (struct v3D64_t *vector, flt64_t angle);
+void Vector3D_RotateY_flt32 (struct v3D32_t *vector, flt32_t cos, flt32_t sin);
+void Vector3D_RotateY_flt64 (struct v3D64_t *vector, flt64_t cos, flt64_t sin);
 
 // Rotation around the Z axis
-void Vector3D_RotateZ_flt32 (struct v3D32_t *vector, flt32_t angle);
-void Vector3D_RotateZ_flt64 (struct v3D64_t *vector, flt64_t angle);
+void Vector3D_RotateZ_flt32 (struct v3D32_t *vector, flt32_t cos, flt32_t sin);
+void Vector3D_RotateZ_flt64 (struct v3D64_t *vector, flt64_t cos, flt64_t sin);
 
 //****************************************************************************//
 //      Shearing of vector                                                    //
