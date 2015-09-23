@@ -1069,8 +1069,8 @@ end if
 		sub		param2, NSIZE
 		mov		param1, [this + ARRAY]
 		sub		param1, NSIZE
-		add		stack, space				; restoring back the stack pointer
 		mov		fptr, Copy
+		add		stack, space				; restoring back the stack pointer
 		jmp		fptr						; return Array::Copy (this.array - 1, source.array - 1, source.capacity)
 ;---[Error branch]-------------------------
 .error:	mov		qword [this + ARRAY], 0		; this.array = NULL
@@ -5190,15 +5190,15 @@ space	= 3 * 8								; stack size required by the procedure
 ;---[Compare object size]------------------
 		mov		this, [s_this]				; get "this" variable from the stack
 		mov		source, [s_src]				; get "source" variable from the stack
-.size:	add		stack, space				; restoring back the stack pointer
-		xor		result, result				; result = 0
+.size:	xor		result, result				; result = 0
 		mov		great, +1					; great = +1
 		mov		less, -1					; less = -1
 		mov		size, [this + SIZE]
-		cmp		size, [source + SIZE]
-		cmovg	result, great				; if (this.size > source.size), return great
-		cmovl	result, less				; if (this.size < source.size), return less
-		ret									; if (this.size == source.size), return equal
+		cmp		size, [source + SIZE]		; if (this.size > source.size), return great
+		cmovg	result, great				; if (this.size < source.size), return less
+		cmovl	result, less				; if (this.size == source.size), return equal
+		add		stack, space				; restoring back the stack pointer
+		ret
 ;---[Normal exit branch]-------------------
 .exit:	mov		result, status				; return status
 		add		stack, space				; restoring back the stack pointer

@@ -13,6 +13,28 @@ include	'Macro.inc'
 ;#      Import section                                                         #
 ;###############################################################################
 
+; Copying of vector
+extrn	'Array_Copy'				as	Copy
+
+; Moving of vector
+extrn	'Array_Move'				as	Move
+
+; Multiplication of vector
+extrn	'Array_MulVector_flt32'		as	Mul_flt32
+extrn	'Array_MulVector_flt64'		as	Mul_flt64
+
+; Sum of elements
+extrn	'Array_Sum_flt32'			as	Sum_flt32
+extrn	'Array_Sum_flt64'			as	Sum_flt64
+
+; Sum of multiplied elements
+extrn	'Array_SumMul_flt32'		as	SumMul_flt32
+extrn	'Array_SumMul_flt64'		as	SumMul_flt64
+
+; Cholesky decomposition to lower triangular matrix
+extrn	'Matrix_CholeskyLow_flt32'	as	Cholesky_flt32
+extrn	'Matrix_CholeskyLow_flt64'	as	Cholesky_flt64
+
 ; Square root
 extrn	'Math_Sqrt_flt32'			as	Sqrt_flt32
 extrn	'Math_Sqrt_flt64'			as	Sqrt_flt64
@@ -60,30 +82,6 @@ extrn	'Math_ArcSinH_flt64'		as	ArcSinH_flt64
 ; Inverse hyperbolic
 extrn	'Math_ArcCosH_flt32'		as	ArcCosH_flt32
 extrn	'Math_ArcCosH_flt64'		as	ArcCosH_flt64
-
-; Copying of vector
-extrn	'Array_Copy_flt32'			as	Copy_flt32
-extrn	'Array_Copy_flt64'			as	Copy_flt64
-
-; Moving of vector
-extrn	'Array_Move_flt32'			as	Move_flt32
-extrn	'Array_Move_flt64'			as	Move_flt64
-
-; Multiplication of vector
-extrn	'Array_MulVector_flt32'		as	Mul_flt32
-extrn	'Array_MulVector_flt64'		as	Mul_flt64
-
-; Sum of elements
-extrn	'Array_Sum_flt32'			as	Sum_flt32
-extrn	'Array_Sum_flt64'			as	Sum_flt64
-
-; Sum of multiplied elements
-extrn	'Array_SumMul_flt32'		as	SumMul_flt32
-extrn	'Array_SumMul_flt64'		as	SumMul_flt64
-
-; Cholesky decomposition to lower triangular matrix
-extrn	'Matrix_CholeskyLow_flt32'	as	Cholesky_flt32
-extrn	'Matrix_CholeskyLow_flt64'	as	Cholesky_flt64
 
 ;###############################################################################
 ;#      Export section                                                         #
@@ -282,15 +280,11 @@ s_pptr	equ		stack + 8 * 8				; stack position of "ptr" variable
 s_count	equ		stack + 9 * 8				; stack position of "count" variable
 s_step	equ		stack + 10 * 8				; stack position of "step" variable
 if x eq s
-Copy	= Copy_flt32						; Copy function
-Move	= Move_flt32						; Move function
 MulVect	= Mul_flt32							; Vector multiply function
 Sum		= Sum_flt32							; Sum of array elements
 SumMul	= SumMul_flt32						; Sum of multiplied array elements
 scale	= 2									; scale value
 else if x eq d
-Copy	= Copy_flt64						; Copy function
-Move	= Move_flt64						; Move function
 MulVect	= Mul_flt64							; Vector multiply function
 Sum		= Sum_flt64							; Sum of array elements
 SumMul	= SumMul_flt64						; Sum of multiplied array elements
@@ -332,6 +326,7 @@ bytes	= 1 shl scale						; size of array element (bytes)
 		mov		param1, [s_temp]
 		mov		param2, [s_args]
 		mov		param3, [s_size]
+		shl		param3, scale
 		mov		status, Copy
 		call	status						; call Copy (temp, args, size)
 ;---[Fill matrix and coefficients]---------
@@ -412,6 +407,7 @@ bytes	= 1 shl scale						; size of array element (bytes)
 .loop3:	mov		param1, [s_mtrx]
 		mov		param2, [s_uptr]
 		mov		param3, [s_deg]
+		shl		param3, scale
 		mov		status, Move
 		call	status						; call Move (matrix, ptr, degree)
 		mov		matrix, [s_mtrx]			; get "matrix" variable from the stack
@@ -536,8 +532,8 @@ end if
 		add		stack, space				; restoring back the stack pointer
 		ret									; return status
 ;---[Error branch]-------------------------
-.error:	add		stack, space				; restoring back the stack pointer
-		xor		status, status				; return false
+.error:	xor		status, status				; return false
+		add		stack, space				; restoring back the stack pointer
 		ret
 }
 
@@ -640,8 +636,8 @@ end if
 		add		stack, space				; restoring back the stack pointer
 		jmp		status						; return Solve (coeff, matrix, degree + 1)
 ;---[Error branch]-------------------------
-.error:	add		stack, space				; restoring back the stack pointer
-		xor		status, status				; return false
+.error:	xor		status, status				; return false
+		add		stack, space				; restoring back the stack pointer
 		ret
 }
 

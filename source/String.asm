@@ -2801,8 +2801,8 @@ space	= 17 * 8							; stack size required by the procedure
 		mov		param3, [s_size2]
 		mov		value, [s_value]			; restore old value of "value" variable
 		mov		ptr, [s_ptr]				; restore old value of "ptr" variable
-		add		stack, space				; restoring back the stack pointe
 		mov		fptr, Copy_size
+		add		stack, space				; restoring back the stack pointe
 		jmp		fptr						; call Copy (tptr, sptr2, size2)
 .copy2:	mov		param1, [s_tkey]
 		mov		param2, [s_skey1]
@@ -2814,8 +2814,8 @@ space	= 17 * 8							; stack size required by the procedure
 		mov		param3, [s_size1]
 		mov		value, [s_value]			; restore old value of "value" variable
 		mov		ptr, [s_ptr]				; restore old value of "ptr" variable
-		add		stack, space				; restoring back the stack pointe
 		mov		fptr, Copy_size
+		add		stack, space				; restoring back the stack pointe
 		jmp		fptr						; call Copy (tptr, sptr1, size1)
 }
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::

@@ -532,8 +532,8 @@ space	= 3 * 8								; stack size required by the procedure
 		mov		param3, [source + SIZE]
 		mov		param2, [source + ARRAY]
 		mov		param1, array
-		add		stack, space				; restoring back the stack pointer
 		mov		fptr, Copy
+		add		stack, space				; restoring back the stack pointer
 		jmp		fptr						; return Array::Copy (this.array, source.array, source.size)
 ;---[Error branch]-------------------------
 .error:	mov		qword [this + ARRAY], 0		; this.array = NULL

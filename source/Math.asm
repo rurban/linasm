@@ -3610,9 +3610,11 @@ end if
 		initreg	mask, treg, dmask			; mask = dmask
 		initreg	barier1, treg, const1		; barier1 = const1
 		initreg	barier2, treg, const2		; barier2 = const2
-		andp#x	cath1, mask					; cath1 = Abs(cath1)
-		andp#x	cath2, mask					; cath2 = Abs(cath2)
-		andp#x	cath3, mask					; cath3 = Abs(cath3)
+		andp#x	cath1, mask					; cath1 = Abs (cath1)
+		andp#x	cath2, mask					; cath2 = Abs (cath2)
+if dim = 3
+		andp#x	cath3, mask					; cath3 = Abs (cath3)
+end if
 		movap#x	max, cath1
 		maxs#x	max, cath2					; max = Max (cath1, cath2)
 if dim = 3
@@ -3692,11 +3694,10 @@ cath	equ		xmm1						; cathetus
 treg	equ		rax							; temporary register
 temp	equ		xmm3						; temporary register
 mask	equ		xmm4						; data mask to get absolute value
-max		equ		xmm5						; max value
-barier1	equ		xmm6						; first barier
-barier2	equ		xmm7						; second barier
-scale1	equ		xmm8						; first scale factor
-scale2	equ		xmm9						; second scale factor
+barier1	equ		xmm5						; first barier
+barier2	equ		xmm6						; second barier
+scale1	equ		xmm7						; first scale factor
+scale2	equ		xmm8						; second scale factor
 if x eq s
 dmask	= DMASK_FLT32						; data mask
 const1	= 0x5F800000						; 2^+64
@@ -3718,13 +3719,11 @@ end if
 		initreg	mask, treg, dmask			; mask = dmask
 		initreg	barier1, treg, const1		; barier1 = const1
 		initreg	barier2, treg, const2		; barier2 = const2
-		andp#x	hypot, mask					; hypot = Abs(hypot)
-		andp#x	cath, mask					; cath = Abs(cath)
-		movap#x	max, hypot
-		maxs#x	max, cath					; max = Max (hypot, cath)
-		comis#x	max, barier1				; if (max >= barier1)
+		andp#x	hypot, mask					; hypot = Abs (hypot)
+		andp#x	cath, mask					; cath = Abs (cath)
+		comis#x	hypot, barier1				; if (hypot >= barier1)
 		jae		.over						;     then go to overflow prevention branch
-		comis#x	max, barier2				; if (max < barier2)
+		comis#x	hypot, barier2				; if (hypot < barier2)
 		jb		.under						;     then go to underflow prevention branch
 ;---[Normal execution branch]--------------
 		movap#x	temp, hypot

@@ -1429,8 +1429,8 @@ space	= 3 * 8								; stack size required by the procedure
 		mov		param3, [source + CAPACITY]
 		mov		param2, [source + ARRAY]
 		mov		param1, array
-		add		stack, space				; restoring back the stack pointer
 		mov		fptr, Copy
+		add		stack, space				; restoring back the stack pointer
 		jmp		fptr						; return Array::Copy (this.array, source.array, source.capacity)
 ;---[Error branch]-------------------------
 .error:	mov		qword [this + ARRAY], 0		; this.array = NULL
@@ -3969,8 +3969,8 @@ space	= 3 * 8								; stack size required by the procedure
 		and		ptr, result
 		movdqa	temp, [array + ptr + BDATA]
 		movdqu	[data], temp				; data[0] = array[node].data[index]
-		add		stack, space				; restoring back the stack pointer
 		mov		param2, result
+		add		stack, space				; restoring back the stack pointer
 		jmp		RemoveCore					; call this.RemoveCore (result)
 ;---[Error branch]-------------------------
 .error:	xor		status, status				; return false
