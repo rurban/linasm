@@ -19,10 +19,6 @@ extrn	'Math_Hypot2D_flt64'		as	Hypot2D_flt64
 extrn	'Math_Hypot3D_flt32'		as	Hypot3D_flt32
 extrn	'Math_Hypot3D_flt64'		as	Hypot3D_flt64
 
-; Sine and Cosine
-extrn	'Math_SinCos_flt32'			as	SinCos_flt32
-extrn	'Math_SinCos_flt64'			as	SinCos_flt64
-
 ; Inverse tangent
 extrn	'Math_ArcTan2_flt32'		as	ArcTan2_flt32
 extrn	'Math_ArcTan2_flt64'		as	ArcTan2_flt64
@@ -234,24 +230,24 @@ public	VectorDiv_flt64			as	'_ZN7Complex3DivEP9cmplx64_tPKS0_'
 ; Rotation around the X axis
 public	RotateX_flt32			as	'Vector3D_RotateX_flt32'
 public	RotateX_flt64			as	'Vector3D_RotateX_flt64'
-public	RotateX_flt32			as	'_ZN8Vector3D7RotateXEP7v3D32_tf'
-public	RotateX_flt64			as	'_ZN8Vector3D7RotateXEP7v3D64_td'
+public	RotateX_flt32			as	'_ZN8Vector3D7RotateXEP7v3D32_tff'
+public	RotateX_flt64			as	'_ZN8Vector3D7RotateXEP7v3D64_tdd'
 
 ; Rotation around the Y axis
 public	RotateY_flt32			as	'Vector3D_RotateY_flt32'
 public	RotateY_flt64			as	'Vector3D_RotateY_flt64'
-public	RotateY_flt32			as	'_ZN8Vector3D7RotateYEP7v3D32_tf'
-public	RotateY_flt64			as	'_ZN8Vector3D7RotateYEP7v3D64_td'
+public	RotateY_flt32			as	'_ZN8Vector3D7RotateYEP7v3D32_tff'
+public	RotateY_flt64			as	'_ZN8Vector3D7RotateYEP7v3D64_tdd'
 
 ; Rotation around the Z axis
 public	RotateZ_flt32			as	'Vector3D_RotateZ_flt32'
 public	RotateZ_flt64			as	'Vector3D_RotateZ_flt64'
 public	RotateZ_flt32			as	'Vector2D_Rotate_flt32'
 public	RotateZ_flt64			as	'Vector2D_Rotate_flt64'
-public	RotateZ_flt32			as	'_ZN8Vector3D7RotateZEP7v3D32_tf'
-public	RotateZ_flt64			as	'_ZN8Vector3D7RotateZEP7v3D64_td'
-public	RotateZ_flt32			as	'_ZN8Vector2D6RotateEP7v2D32_tf'
-public	RotateZ_flt64			as	'_ZN8Vector2D6RotateEP7v2D64_td'
+public	RotateZ_flt32			as	'_ZN8Vector3D7RotateZEP7v3D32_tff'
+public	RotateZ_flt64			as	'_ZN8Vector3D7RotateZEP7v3D64_tdd'
+public	RotateZ_flt32			as	'_ZN8Vector2D6RotateEP7v2D32_tff'
+public	RotateZ_flt64			as	'_ZN8Vector2D6RotateEP7v2D64_tdd'
 
 ;******************************************************************************;
 ;       Shearing of vector                                                     ;
@@ -477,7 +473,7 @@ public	IsCoplanar_flt64		as	'_ZN8Vector3D10IsCoplanarEPK7v3D64_tS2_S2_'
 section	'.text'		executable align 16
 
 ;******************************************************************************;
-;       Offsets inside vector structures                                       ;
+;       Offsets inside vector structure                                        ;
 ;******************************************************************************;
 XPOS	= 0									; Offset of X value
 YPOS	= 1									; Offset of Y value
@@ -507,8 +503,10 @@ hypot	equ		xmm3						; absolute value of vector
 stack	equ		rsp							; stack pointer
 s_this	equ		stack + 0 * 8				; stack position of "this" variable
 if x eq s
+oneval	= PONE_FLT32						; 1.0
 scale	= 2									; scale value
 else if x eq d
+oneval	= PONE_FLT64						; 1.0
 scale	= 3									; scale value
 end if
 space	= 1 * 8								; stack size required by the procedure
@@ -526,21 +524,22 @@ end if
 		call	fptr						; call Hypot (this->x, this->y, this->z)
 ;---[Normalize cathetus]-------------------
 		mov		this, [s_this]				; get "this" variable from the stack
-		movs#x	hypot, xval					; hypot = Hypot (this->x, this->y, this->z)
+		initreg	hypot, fptr, oneval			; hypot = 1.0
+		divs#x	hypot, xval					; hypot = 1.0 / Hypot (this->x, this->y, this->z)
 		movs#x	xval, [this + XPOS*bytes]	; load x value of vector
 		movs#x	yval, [this + YPOS*bytes]	; load y value of vector
 if dim = 3
 		movs#x	zval, [this + ZPOS*bytes]	; load z value of vector
 end if
-		divs#x	xval, hypot					; change x value
-		divs#x	yval, hypot					; change y value
+		muls#x	xval, hypot					; change x value
+		muls#x	yval, hypot					; change y value
 if dim = 3
-		divs#x	zval, hypot					; change z value
+		muls#x	zval, hypot					; change z value
 end if
-		movs#x	[this + XPOS*bytes], xval	; store new x value of vector
-		movs#x	[this + YPOS*bytes], yval	; store new y value of vector
+		movs#x	[this + XPOS*bytes], xval	; this->x = xval
+		movs#x	[this + YPOS*bytes], yval	; this->y = yval
 if dim = 3
-		movs#x	[this + ZPOS*bytes], zval	; store new z value of vector
+		movs#x	[this + ZPOS*bytes], zval	; this->z = zval
 end if
 		add		stack, space				; restoring back the stack pointer
 		ret
@@ -587,10 +586,10 @@ end if
 if dim = 3
 		xorp#x	zval, mask					; z = -z
 end if
-		movs#x	[this + XPOS*bytes], xval	; store new x value of vector
-		movs#x	[this + YPOS*bytes], yval	; store new y value of vector
+		movs#x	[this + XPOS*bytes], xval	; this->x = xval
+		movs#x	[this + YPOS*bytes], yval	; this->y = yval
 if dim = 3
-		movs#x	[this + ZPOS*bytes], zval	; store new z value of vector
+		movs#x	[this + ZPOS*bytes], zval	; this->z = zval
 end if
 		ret
 }
@@ -667,7 +666,7 @@ ReflectXY_flt64:	REFLECT_CORE	ZPOS, -1, 2, d
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 ;       Square root of the vector                                              ;
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
-macro	SQRT	Hypot, x
+macro	SQRT	x
 {
 ;---[Parameters]---------------------------
 this	equ		rdi							; pointer to vector object
@@ -675,17 +674,19 @@ this	equ		rdi							; pointer to vector object
 fptr	equ		rax							; pointer to call external function
 xval	equ		xmm0						; x value of vector
 yval	equ		xmm1						; y value of vector
-sqrt	equ		xmm2						; Sqrt (2)
-mask	equ		xmm3						; sign mask
-sign	equ		xmm4						; sign bit
+mask	equ		xmm2						; sign mask
+vscale	equ		xmm3						; vector scale factor
+sign	equ		xmm4						; sign value
 stack	equ		rsp							; stack pointer
 s_this	equ		stack + 0 * 8				; stack position of "this" variable
 if x eq s
 smask	= SMASK_FLT32						; sign mask
+Hypot	= Hypot2D_flt32						; Hypotenuse function
 sqrtval	= SQRT12_FLT32						; 1 / Sqrt (2)
 scale	= 2									; scale value
 else if x eq d
 smask	= SMASK_FLT64						; sign mask
+Hypot	= Hypot2D_flt64						; Hypotenuse function
 sqrtval	= SQRT12_FLT64						; 1 / Sqrt (2)
 scale	= 3									; scale value
 end if
@@ -698,28 +699,28 @@ bytes	= 1 shl scale						; size of vector element (bytes)
 		movs#x	xval, [this + XPOS*bytes]	; load x value of vector
 		movs#x	yval, [this + YPOS*bytes]	; load y value of vector
 		mov		fptr, Hypot
-		call	fptr						; call Hypot (this->x, this->y)
-;---[Compute square root of vector]--------
+		call	fptr						; call Hypot (xval, yval)
+;---[Compute square root of number]--------
 		mov		this, [s_this]				; get "this" variable from the stack
-		movs#x	yval, xval					; xval = yval = Hypot (this->x, this->y)
-		initreg	sqrt, fptr, sqrtval			; sqrt = Sqrt (2)
 		initreg	mask, fptr, smask			; load sign mask
-		adds#x	xval, [this + XPOS*bytes]	; xval = Hypot (this->x, this->y) + this->x
-		sqrts#s	xval, xval					; xval = Sqrt (xval)
-		muls#x	xval, sqrt					; xval *= 1 / Sqrt (2)
-		subs#x	yval, [this + XPOS*bytes]	; yval = Hypot (this->x, this->y) - this->x
-		sqrts#s	yval, yval					; yval = Sqrt (yval)
-		muls#x	yval, sqrt					; yval *= 1 / Sqrt (2)
+		initreg	vscale, fptr, sqrtval		; vscale = 1.0 / Sqrt (2)
 		movs#x	sign, [this + YPOS*bytes]
-		andp#x	sign, mask					; sign = Sign (this->y)
-		orp#x	yval, sign					; yval *= Sign (this->y)
+		andp#x	sign, mask					; sign = Sign (this->yval)
+		movap#x	yval, xval					; xval = yval = Hypot (xval, yval)
+		adds#x	xval, [this + XPOS*bytes]	; yval = Hypot (xval, yval) + this->xval
+		sqrts#x	xval, xval					; xval = Sqrt (yval)
+		muls#x	xval, vscale				; xval *= vscale
+		subs#x	yval, [this + XPOS*bytes]	; yval = Hypot (xval, yval) - this->xval
+		sqrts#x	yval, yval					; yval = Sqrt (yval)
+		muls#x	yval, vscale				; yval *= vscale
+		orp#x	yval, sign					; yval *= sign
 		movs#x	[this + XPOS*bytes], xval	; this->x = xval
 		movs#x	[this + YPOS*bytes], yval	; this->y = yval
 		add		stack, space				; restoring back the stack pointer
 		ret
 }
-Sqrt_flt32:	SQRT	Hypot2D_flt32, s
-Sqrt_flt64:	SQRT	Hypot2D_flt64, d
+Sqrt_flt32:	SQRT	s
+Sqrt_flt64:	SQRT	d
 
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 ;       Square value of the vector                                             ;
@@ -729,9 +730,9 @@ macro	SQR		x
 ;---[Parameters]---------------------------
 this	equ		rdi							; pointer to vector object
 ;---[Internal variables]-------------------
-temp0	equ		xmm0						; temporary register #1
-temp1	equ		xmm1						; temporary register #2
-temp2	equ		xmm2						; temporary register #3
+xval	equ		xmm0						; x value of vector
+yval	equ		xmm1						; y value of vector
+temp	equ		xmm2						; temporary register
 if x eq s
 scale	= 2									; scale value
 else if x eq d
@@ -739,16 +740,16 @@ scale	= 3									; scale value
 end if
 bytes	= 1 shl scale						; size of vector element (bytes)
 ;------------------------------------------
-		movs#x	temp0, [this + XPOS*bytes]
-		movs#x	temp1, [this + XPOS*bytes]
-		movs#x	temp2, [this + XPOS*bytes]
-		adds#x	temp0, [this + YPOS*bytes]	; temp0 = this->x + this->y
-		subs#x	temp1, [this + YPOS*bytes]	; temp1 = this->x - this->y
-		muls#x	temp2, [this + YPOS*bytes]	; temp2 = this->x - this->y
-		muls#x	temp0, temp1				; temp0 *= temp1
-		adds#x	temp2, temp2				; temp2 *= 2
-		movs#x	[this + XPOS*bytes], temp0	; this->x = temp0
-		movs#x	[this + YPOS*bytes], temp2	; this->y = temp2
+		movs#x	xval, [this + XPOS*bytes]	; load x value of vector
+		movs#x	yval, [this + YPOS*bytes]	; load y value of vector
+		movap#x	temp, yval					; temp = yval
+		muls#x	yval, xval					; yval *= xval
+		adds#x	yval, yval					; yval += yval
+		muls#x	xval, xval					; xval *= xval
+		muls#x	temp, temp					; temp *= temp
+		subs#x	xval, temp					; xval -= temp
+		movs#x	[this + XPOS*bytes], xval	; this->x = xval
+		movs#x	[this + YPOS*bytes], yval	; this->y = yval
 		ret
 }
 Sqr_flt32:	SQR	s
@@ -757,56 +758,116 @@ Sqr_flt64:	SQR	d
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 ;       Inverse vector                                                         ;
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
-macro	INVERSE	Hypot, x
+macro	INVERSE		x
 {
 ;---[Parameters]---------------------------
-this	equ		rdi							; pointer to target vector object
+this	equ		rdi							; pointer to vector object
 ;---[Internal variables]-------------------
-fptr	equ		rax							; pointer to call external function
+treg	equ		rax							; temporary register
 xval	equ		xmm0						; x value of vector
 yval	equ		xmm1						; y value of vector
-mask	equ		xmm2						; sign mask
-inv		equ		xmm3						; inverse hypotenuse value
-stack	equ		rsp							; stack pointer
-s_this	equ		stack + 0 * 8				; stack position of "this" variable
+temp0	equ		xmm2						; temporary register #1
+temp1	equ		xmm3						; temporary register #2
+mask	equ		xmm4						; data mask to get absolute value
+max		equ		xmm5						; max value
+barier1	equ		xmm6						; first barier
+barier2	equ		xmm7						; second barier
+vscale	equ		xmm8						; vector scale factor
+inv		equ		xmm9						; inverse value
 if x eq s
+dmask	= DMASK_FLT32						; data mask
 smask	= SMASK_FLT32						; sign mask
 oneval	= PONE_FLT32						; 1.0
+const1	= 0x5F800000						; 2^+64
+const2	= 0x20000000						; 2^-63
+sclval1	= 0x1F800000						; 2^-64
+sclval2	= 0x6A800000						; 2^+86
 scale	= 2									; scale value
 else if x eq d
+dmask	= DMASK_FLT64						; data mask
 smask	= SMASK_FLT64						; sign mask
 oneval	= PONE_FLT64						; 1.0
+const1	= 0x5FF0000000000000				; 2^+512
+const2	= 0x2000000000000000				; 2^-511
+sclval1	= 0x1FF0000000000000				; 2^-512
+sclval2	= 0x6330000000000000				; 2^+564
 scale	= 3									; scale value
 end if
-space	= 1 * 8								; stack size required by the procedure
 bytes	= 1 shl scale						; size of vector element (bytes)
 ;------------------------------------------
-		sub		stack, space				; reserving stack size for local vars
-		mov		[s_this], this				; save "this" variable into the stack
-;---[Call hypotenuse functon]--------------
+		initreg	mask, treg, dmask			; mask = dmask
+		initreg	barier1, treg, const1		; barier1 = const1
+		initreg	barier2, treg, const2		; barier2 = const2
 		movs#x	xval, [this + XPOS*bytes]	; load x value of vector
 		movs#x	yval, [this + YPOS*bytes]	; load y value of vector
-		mov		fptr, Hypot
-		call	fptr						; call Hypot (scr->x, scr->y)
-;---[Divide vectors]-----------------------
-		mov		this, [s_this]				; get "this" variable from the stack
-		initreg	mask, fptr, smask			; load sign mask
-		initreg	inv, fptr, oneval			; inv = 1.0
-		divs#x	inv, xval					; inv = 1.0 / Hypot (scr->x, scr->y)
-		movs#x	xval, [this + XPOS*bytes]
-		muls#x	xval, inv					; xval = this->x / Hypot (scr->x, scr->y)
-		muls#x	xval, inv					; xval *= 1.0 / Hypot (scr->x, scr->y)
-		movs#x	yval, [this + YPOS*bytes]
-		xorp#x	yval, mask
-		muls#x	yval, inv					; yval = -this->y / Hypot (scr->x, scr->y)
-		muls#x	yval, inv					; yval *= 1.0 / Hypot (scr->x, scr->y)
+		movap#x	temp0, xval
+		andp#x	temp0, mask					; temp0 = Abs (xval)
+		movap#x	temp1, yval
+		andp#x	temp1, mask					; temp1 = Abs (yval)
+		movap#x	max, temp0
+		maxs#x	max, temp1					; max = Max (temp0, temp1)
+		comis#x	max, barier1				; if (max >= barier1)
+		jae		.over						;     then go to overflow prevention branch
+		comis#x	max, barier2				; if (max < barier2)
+		jb		.under						;     then go to underflow prevention branch
+;---[Normal execution branch]--------------
+		initreg	mask, treg, smask			; mask = smask
+		xorp#x	yval, mask					; yval = -yval
+		initreg	inv, treg, oneval			; one = 1.0
+		movap#x	temp0, xval					; temp0 = xval
+		movap#x	temp1, yval					; temp1 = yval
+		muls#x	temp0, temp0				; temp0 *= temp0
+		muls#x	temp1, temp1				; temp1 *= temp1
+		adds#x	temp0, temp1				; temp0 += temp1
+		divs#x	inv, temp0					; inv = 1.0 / temp0
+		muls#x	xval, inv					; xval *= inv
+		muls#x	yval, inv					; yval *= inv
 		movs#x	[this + XPOS*bytes], xval	; this->x = xval
 		movs#x	[this + YPOS*bytes], yval	; this->y = yval
-		add		stack, space				; restoring back the stack pointer
+		ret
+;---[Overflow prevention branch]-----------
+.over:	initreg	vscale, treg, sclval1		; vscale = sclval1
+		muls#x	xval, vscale				; xval *= vscale
+		muls#x	yval, vscale				; yval *= vscale
+		initreg	mask, treg, smask			; mask = smask
+		xorp#x	yval, mask					; yval = -yval
+		initreg	inv, treg, oneval			; one = 1.0
+		movap#x	temp0, xval					; temp0 = xval
+		movap#x	temp1, yval					; temp1 = yval
+		muls#x	temp0, temp0				; temp0 *= temp0
+		muls#x	temp1, temp1				; temp1 *= temp1
+		adds#x	temp0, temp1				; temp0 += temp1
+		divs#x	inv, temp0					; inv = 1.0 / temp0
+		muls#x	xval, inv					; xval *= inv
+		muls#x	yval, inv					; yval *= inv
+		muls#x	xval, vscale				; xval *= vscale
+		muls#x	yval, vscale				; yval *= vscale
+		movs#x	[this + XPOS*bytes], xval	; this->x = xval
+		movs#x	[this + YPOS*bytes], yval	; this->y = yval
+		ret
+;---[Underflow prevention branch]----------
+.under:	initreg	vscale, treg, sclval2		; vscale = sclval2
+		muls#x	xval, vscale				; xval *= vscale
+		muls#x	yval, vscale				; yval *= vscale
+		initreg	mask, treg, smask			; mask = smask
+		xorp#x	yval, mask					; yval = -yval
+		initreg	inv, treg, oneval			; one = 1.0
+		movap#x	temp0, xval					; temp0 = xval
+		movap#x	temp1, yval					; temp1 = yval
+		muls#x	temp0, temp0				; temp0 *= temp0
+		muls#x	temp1, temp1				; temp1 *= temp1
+		adds#x	temp0, temp1				; temp0 += temp1
+		divs#x	inv, temp0					; inv = 1.0 / temp0
+		muls#x	xval, inv					; xval *= inv
+		muls#x	yval, inv					; yval *= inv
+		muls#x	xval, vscale				; xval *= vscale
+		muls#x	yval, vscale				; yval *= vscale
+		movs#x	[this + XPOS*bytes], xval	; this->x = xval
+		movs#x	[this + YPOS*bytes], yval	; this->y = yval
 		ret
 }
-Inverse_flt32:	INVERSE	Hypot2D_flt32, s
-Inverse_flt64:	INVERSE	Hypot2D_flt64, d
+Inverse_flt32:	INVERSE	s
+Inverse_flt64:	INVERSE	d
 
 ;==============================================================================;
 ;       Binary operations                                                      ;
@@ -837,10 +898,10 @@ end if
 if dim = 3
 		op#s#x	zval, value					; change z value
 end if
-		movs#x	[this + XPOS*bytes], xval	; store new x value of vector
-		movs#x	[this + YPOS*bytes], yval	; store new y value of vector
+		movs#x	[this + XPOS*bytes], xval	; this->x = xval
+		movs#x	[this + YPOS*bytes], yval	; this->y = yval
 if dim = 3
-		movs#x	[this + ZPOS*bytes], zval	; store new z value of vector
+		movs#x	[this + ZPOS*bytes], zval	; this->z = zval
 end if
 		ret
 }
@@ -871,10 +932,10 @@ end if
 if dim = 3
 		op#s#x	zval, [src + ZPOS*bytes]	; change z value of target vector
 end if
-		movs#x	[this + XPOS*bytes], xval	; store new x value of target vector
-		movs#x	[this + YPOS*bytes], yval	; store new y value of target vector
+		movs#x	[this + XPOS*bytes], xval	; this->x = xval
+		movs#x	[this + YPOS*bytes], yval	; this->y = yval
 if dim = 3
-		movs#x	[this + ZPOS*bytes], zval	; store new z value of target vector
+		movs#x	[this + ZPOS*bytes], zval	; this->z = zval
 end if
 		ret
 }
@@ -912,10 +973,12 @@ macro	VECTOR_MUL	x
 this	equ		rdi							; pointer to target vector object
 src		equ		rsi							; pointer to source vector object
 ;---[Internal variables]-------------------
-temp0	equ		xmm0						; temporary register #1
-temp1	equ		xmm1						; temporary register #2
-temp2	equ		xmm2						; temporary register #3
-temp3	equ		xmm3						; temporary register #4
+txval	equ		xmm0						; x value of target vector
+tyval	equ		xmm1						; y value of target vector
+sxval	equ		xmm2						; x value of source vector
+syval	equ		xmm3						; y value of source vector
+temp0	equ		xmm4						; temporary register #1
+temp1	equ		xmm5						; temporary register #2
 if x eq s
 scale	= 2									; scale value
 else if x eq d
@@ -923,18 +986,20 @@ scale	= 3									; scale value
 end if
 bytes	= 1 shl scale						; size of vector element (bytes)
 ;------------------------------------------
-		movs#x	temp0, [this + XPOS*bytes]
-		muls#x	temp0, [src + XPOS*bytes]	; temp0 = this->x * src->x
-		movs#x	temp2, [this + YPOS*bytes]
-		muls#x	temp2, [src + YPOS*bytes]	; temp2 = this->y * src->y
-		subs#x	temp0, temp2				; temp0 -= temp2
-		movs#x	temp1, [this + YPOS*bytes]
-		muls#x	temp1, [src + XPOS*bytes]	; temp1 = this->y * src->x
-		movs#x	temp3, [this + XPOS*bytes]
-		muls#x	temp3, [src + YPOS*bytes]	; temp3 = this->x * src->y
-		adds#x	temp1, temp3				; temp1 += temp3
-		movs#x	[this + XPOS*bytes], temp0	; this->x = temp0
-		movs#x	[this + YPOS*bytes], temp1	; this->y = temp1
+		movs#x	txval, [this + XPOS*bytes]	; load x value of target vector
+		movs#x	tyval, [this + YPOS*bytes]	; load y value of target vector
+		movs#x	sxval, [src + XPOS*bytes]	; load x value of source vector
+		movs#x	syval, [src + YPOS*bytes]	; load y value of source vector
+		movap#x	temp0, txval				; temp0 = txval
+		movap#x	temp1, tyval				; temp1 = tyval
+		muls#x	txval, sxval				; txval *= sxval
+		muls#x	temp1, syval				; temp1 *= syval
+		subs#x	txval, temp1				; txval -= temp1
+		muls#x	tyval, sxval				; tyval *= sxval
+		muls#x	temp0, syval				; temp0 *= syval
+		adds#x	tyval, temp0				; tyval += temp0
+		movs#x	[this + XPOS*bytes], txval	; this->x = txval
+		movs#x	[this + YPOS*bytes], tyval	; this->y = tyval
 		ret
 }
 VectorMul_flt32:	VECTOR_MUL	s
@@ -951,129 +1016,185 @@ Div2D_flt64:	SCALAR	div, 2, d
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 ;       Division of vectors                                                    ;
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
-macro	VECTOR_DIV	Hypot, x
+macro	VECTOR_DIV	x
 {
 ;---[Parameters]---------------------------
 this	equ		rdi							; pointer to target vector object
 src		equ		rsi							; pointer to source vector object
 ;---[Internal variables]-------------------
-fptr	equ		rax							; pointer to call external function
-temp0	equ		xmm0						; temporary register #1
-temp1	equ		xmm1						; temporary register #2
-temp2	equ		xmm2						; temporary register #3
-temp3	equ		xmm3						; temporary register #4
-cos		equ		xmm4						; cosine value
-sin		equ		xmm5						; sine value
-inv		equ		xmm6						; inverse hypotenuse value
-stack	equ		rsp							; stack pointer
-s_this	equ		stack + 0 * 8				; stack position of "this" variable
+treg	equ		rax							; temporary register
+txval	equ		xmm0						; x value of target vector
+tyval	equ		xmm1						; y value of target vector
+sxval	equ		xmm2						; x value of source vector
+syval	equ		xmm3						; y value of source vector
+temp0	equ		xmm4						; temporary register #1
+temp1	equ		xmm5						; temporary register #2
+mask	equ		xmm6						; data mask to get absolute value
+max		equ		xmm7						; max value
+barier1	equ		xmm8						; first barier
+barier2	equ		xmm9						; second barier
+vscale	equ		xmm10						; vector scale factor
+inv		equ		xmm11						; inverse value
 if x eq s
+dmask	= DMASK_FLT32						; data mask
 oneval	= PONE_FLT32						; 1.0
+const1	= 0x5F800000						; 2^+64
+const2	= 0x20000000						; 2^-63
+sclval1	= 0x1F800000						; 2^-64
+sclval2	= 0x6A800000						; 2^+86
 scale	= 2									; scale value
 else if x eq d
+dmask	= DMASK_FLT64						; data mask
 oneval	= PONE_FLT64						; 1.0
+const1	= 0x5FF0000000000000				; 2^+512
+const2	= 0x2000000000000000				; 2^-511
+sclval1	= 0x1FF0000000000000				; 2^-512
+sclval2	= 0x6330000000000000				; 2^+564
 scale	= 3									; scale value
 end if
-space	= 1 * 8								; stack size required by the procedure
 bytes	= 1 shl scale						; size of vector element (bytes)
 ;------------------------------------------
-		sub		stack, space				; reserving stack size for local vars
-		mov		[s_this], this				; save "this" variable into the stack
-;---[Call hypotenuse functon]--------------
-		movs#x	temp0, [src + XPOS*bytes]	; load x value of source vector
-		movs#x	temp1, [src + YPOS*bytes]	; load y value of source vector
-		mov		fptr, Hypot
-		call	fptr						; call Hypot (scr->x, scr->y)
-;---[Divide vectors]-----------------------
-		mov		this, [s_this]				; get "this" variable from the stack
-		initreg	inv, fptr, oneval			; inv = 1.0
-		divs#x	inv, temp0					; inv = 1.0 / Hypot (scr->x, scr->y)
-		movs#x	temp0, [this + XPOS*bytes]
-		muls#x	temp0, inv					; temp0 = this->x / Hypot (scr->x, scr->y)
-		movap#x	temp3, temp0				; temp3 = this->x / Hypot (scr->x, scr->y)
-		movs#x	temp1, [this + YPOS*bytes]
-		muls#x	temp1, inv					; temp1 = this->y / Hypot (scr->x, scr->y)
-		movap#x	temp2, temp1				; temp2 = this->y / Hypot (scr->x, scr->y)
-		movs#x	cos, [src + XPOS*bytes]
-		muls#x	cos, inv					; cos = src->x / Hypot (scr->x, scr->y)
-		movs#x	sin, [src + YPOS*bytes]
-		muls#x	sin, inv					; sin = src->y / Hypot (scr->x, scr->y)
-		muls#x	temp0, cos					; temp0 *= cos
-		muls#x	temp2, sin					; temp2 *= sin
-		adds#x	temp0, temp2				; temp0 += temp2
-		muls#x	temp1, cos					; temp1 *= cos
-		muls#x	temp3, sin					; temp3 *= sin
-		subs#x	temp1, temp3				; temp1 -= temp3
-		movs#x	[this + XPOS*bytes], temp0	; this->x = temp0
-		movs#x	[this + YPOS*bytes], temp1	; this->y = temp1
-		add		stack, space				; restoring back the stack pointer
+		initreg	mask, treg, dmask			; mask = dmask
+		initreg	barier1, treg, const1		; barier1 = const1
+		initreg	barier2, treg, const2		; barier2 = const2
+		movs#x	txval, [this + XPOS*bytes]	; load x value of target vector
+		movs#x	tyval, [this + YPOS*bytes]	; load y value of target vector
+		movs#x	sxval, [src + XPOS*bytes]	; load x value of source vector
+		movs#x	syval, [src + YPOS*bytes]	; load y value of source vector
+		movap#x	temp0, sxval
+		andp#x	temp0, mask					; temp0 = Abs (sxval)
+		movap#x	temp1, syval
+		andp#x	temp1, mask					; temp1 = Abs (syval)
+		movap#x	max, temp0
+		maxs#x	max, temp1					; max = Max (temp0, temp1)
+		comis#x	max, barier1				; if (max >= barier1)
+		jae		.over						;     then go to overflow prevention branch
+		comis#x	max, barier2				; if (max < barier2)
+		jb		.under						;     then go to underflow prevention branch
+;---[Normal execution branch]--------------
+		initreg	inv, treg, oneval			; one = 1.0
+		movap#x	temp0, sxval				; temp0 = sxval
+		movap#x	temp1, syval				; temp1 = syval
+		muls#x	temp0, temp0				; temp0 *= temp0
+		muls#x	temp1, temp1				; temp1 *= temp1
+		adds#x	temp0, temp1				; temp0 += temp1
+		divs#x	inv, temp0					; inv = 1.0 / temp0
+		movap#x	temp0, txval				; temp0 = txval
+		movap#x	temp1, tyval				; temp1 = tyval
+		muls#x	txval, sxval				; txval *= sxval
+		muls#x	temp1, syval				; temp1 *= syval
+		adds#x	txval, temp1				; txval += temp1
+		muls#x	tyval, sxval				; tyval *= sxval
+		muls#x	temp0, syval				; temp0 *= syval
+		subs#x	tyval, temp0				; tyval -= temp0
+		muls#x	txval, inv					; txval *= inv
+		muls#x	tyval, inv					; tyval *= inv
+		movs#x	[this + XPOS*bytes], txval	; this->x = txval
+		movs#x	[this + YPOS*bytes], tyval	; this->y = tyval
+		ret
+;---[Overflow prevention branch]-----------
+.over:	initreg	vscale, treg, sclval1		; vscale = sclval1
+		muls#x	sxval, vscale				; sxval *= vscale
+		muls#x	syval, vscale				; syval *= vscale
+		initreg	inv, treg, oneval			; one = 1.0
+		movap#x	temp0, sxval				; temp0 = sxval
+		movap#x	temp1, syval				; temp1 = syval
+		muls#x	temp0, temp0				; temp0 *= temp0
+		muls#x	temp1, temp1				; temp1 *= temp1
+		adds#x	temp0, temp1				; temp0 += temp1
+		divs#x	inv, temp0					; inv = 1.0 / temp0
+		movap#x	temp0, txval				; temp0 = txval
+		movap#x	temp1, tyval				; temp1 = tyval
+		muls#x	txval, sxval				; txval *= sxval
+		muls#x	temp1, syval				; temp1 *= syval
+		adds#x	txval, temp1				; txval += temp1
+		muls#x	tyval, sxval				; tyval *= sxval
+		muls#x	temp0, syval				; temp0 *= syval
+		subs#x	tyval, temp0				; tyval -= temp0
+		muls#x	txval, inv					; txval *= inv
+		muls#x	tyval, inv					; tyval *= inv
+		muls#x	txval, vscale				; txval *= vscale
+		muls#x	tyval, vscale				; tyval *= vscale
+		movs#x	[this + XPOS*bytes], txval	; this->x = txval
+		movs#x	[this + YPOS*bytes], tyval	; this->y = tyval
+		ret
+;---[Underflow prevention branch]----------
+.under:	initreg	vscale, treg, sclval2		; vscale = sclval2
+		muls#x	sxval, vscale				; sxval *= vscale
+		muls#x	syval, vscale				; syval *= vscale
+		initreg	inv, treg, oneval			; one = 1.0
+		movap#x	temp0, sxval				; temp0 = sxval
+		movap#x	temp1, syval				; temp1 = syval
+		muls#x	temp0, temp0				; temp0 *= temp0
+		muls#x	temp1, temp1				; temp1 *= temp1
+		adds#x	temp0, temp1				; temp0 += temp1
+		divs#x	inv, temp0					; inv = 1.0 / temp0
+		movap#x	temp0, txval				; temp0 = txval
+		movap#x	temp1, tyval				; temp1 = tyval
+		muls#x	txval, sxval				; txval *= sxval
+		muls#x	temp1, syval				; temp1 *= syval
+		adds#x	txval, temp1				; txval += temp1
+		muls#x	tyval, sxval				; tyval *= sxval
+		muls#x	temp0, syval				; temp0 *= syval
+		subs#x	tyval, temp0				; tyval -= temp0
+		muls#x	txval, inv					; txval *= inv
+		muls#x	tyval, inv					; tyval *= inv
+		muls#x	txval, vscale				; txval *= vscale
+		muls#x	tyval, vscale				; tyval *= vscale
+		movs#x	[this + XPOS*bytes], txval	; this->x = txval
+		movs#x	[this + YPOS*bytes], tyval	; this->y = tyval
 		ret
 }
-VectorDiv_flt32:	VECTOR_DIV	Hypot2D_flt32, s
-VectorDiv_flt64:	VECTOR_DIV	Hypot2D_flt64, d
+VectorDiv_flt32:	VECTOR_DIV	s
+VectorDiv_flt64:	VECTOR_DIV	d
 
 ;******************************************************************************;
 ;       Rotation of vector                                                     ;
 ;******************************************************************************;
-macro	ROTATE	SinCos, pos1, pos2, x
+macro	ROTATE	pos1, pos2, x
 {
 ;---[Parameters]---------------------------
-this	equ		rdi							; pointer to vector object
-angle	equ		xmm0						; angle to process with
+this	equ		rdi							; pointer to target vector object
+cos		equ		xmm0						; cosine value of angle
+sin		equ		xmm1						; sine value of angle
 ;---[Internal variables]-------------------
-fptr	equ		rax							; pointer to call external function
-temp0	equ		xmm0						; temporary register #1
-temp1	equ		xmm1						; temporary register #2
-temp2	equ		xmm2						; temporary register #3
-temp3	equ		xmm3						; temporary register #4
-stack	equ		rsp							; stack pointer
-s_this	equ		stack + 0 * 8				; stack position of "this" variable
-s_sin	equ		stack + 1 * 8				; stack position of sin (angle)
-s_cos	equ		stack + 2 * 8				; stack position of cos (angle)
+val1	equ		xmm2						; first value of vector
+val2	equ		xmm3						; second value of vector
+temp0	equ		xmm4						; temporary register #1
+temp1	equ		xmm5						; temporary register #2
 if x eq s
 scale	= 2									; scale value
 else if x eq d
 scale	= 3									; scale value
 end if
-space	= 3 * 8								; stack size required by the procedure
 bytes	= 1 shl scale						; size of vector element (bytes)
 ;------------------------------------------
-		sub		stack, space				; reserving stack size for local vars
-		mov		[s_this], this				; save "this" variable into the stack
-;---[Call SinCos functon]------------------
-		lea		param1, [s_sin]
-		lea		param2, [s_cos]
-		mov		fptr, SinCos
-		call	fptr						; call SinCos (&hsin, &hcos, angle)
-;---[Rotate vector]------------------------
-		mov		this, [s_this]				; get "this" variable from the stack
-		movs#x	temp0, [this + pos1*bytes]
-		muls#x	temp0, [s_cos]				; temp0 = this->pos1 * Cos (angle)
-		movs#x	temp2, [this + pos2*bytes]
-		muls#x	temp2, [s_sin]				; temp2 = this->pos2 * Sin (angle)
-		subs#x	temp0, temp2				; temp0 -= temp2
-		movs#x	temp1, [this + pos2*bytes]
-		muls#x	temp1, [s_cos]				; temp1 = this->pos2 * Cos (angle)
-		movs#x	temp3, [this + pos1*bytes]
-		muls#x	temp3, [s_sin]				; temp3 = this->pos1 * Sin (angle)
-		adds#x	temp1, temp3				; temp1 += temp3
-		movs#x	[this + pos1*bytes], temp0	; this->pos1 = temp0
-		movs#x	[this + pos2*bytes], temp1	; this->pos2 = temp1
-		add		stack, space				; restoring back the stack pointer
+		movs#x	val1, [this + pos1*bytes]	; val1 = this->pos1
+		movs#x	val2, [this + pos2*bytes]	; val2 = this->pos2
+		movap#x	temp0, val1					; temp0 = val1
+		movap#x	temp1, val2					; temp1 = val2
+		muls#x	val1, cos					; val1 *= cos
+		muls#x	temp1, sin					; temp1 *= sin
+		subs#x	val1, temp1					; val1 -= temp1
+		muls#x	val2, cos					; val2 *= cos
+		muls#x	temp0, sin					; temp0 *= sin
+		adds#x	val2, temp0					; val2 += temp0
+		movs#x	[this + pos1*bytes], val1	; this->pos1 = val1
+		movs#x	[this + pos2*bytes], val2	; this->pos2 = val2
 		ret
 }
 
 ; Rotation around the X axis
-RotateX_flt32:	ROTATE	SinCos_flt32, YPOS, ZPOS, s
-RotateX_flt64:	ROTATE	SinCos_flt64, YPOS, ZPOS, d
+RotateX_flt32:	ROTATE	YPOS, ZPOS, s
+RotateX_flt64:	ROTATE	YPOS, ZPOS, d
 
 ; Rotation around the Y axis
-RotateY_flt32:	ROTATE	SinCos_flt32, ZPOS, XPOS, s
-RotateY_flt64:	ROTATE	SinCos_flt64, ZPOS, XPOS, d
+RotateY_flt32:	ROTATE	ZPOS, XPOS, s
+RotateY_flt64:	ROTATE	ZPOS, XPOS, d
 
 ; Rotation around the Z axis
-RotateZ_flt32:	ROTATE	SinCos_flt32, XPOS, YPOS, s
-RotateZ_flt64:	ROTATE	SinCos_flt64, XPOS, YPOS, d
+RotateZ_flt32:	ROTATE	XPOS, YPOS, s
+RotateZ_flt64:	ROTATE	XPOS, YPOS, d
 
 ;******************************************************************************;
 ;       Shearing of vector                                                     ;
@@ -1089,9 +1210,9 @@ this	equ		rdi							; pointer to vector object
 value1	equ		xmm0						; first value to process with
 value2	equ		xmm1						; second value to process with
 ;---[Internal variables]-------------------
-temp1	equ		xmm1						; temporary register #1
-temp2	equ		xmm2						; temporary register #2
-temp3	equ		xmm3						; temporary register #3
+val1	equ		xmm1						; first value of vector
+val2	equ		xmm2						; second value of vector
+val3	equ		xmm3						; third value of vector
 if x eq s
 scale	= 2									; scale value
 else if x eq d
@@ -1099,20 +1220,20 @@ scale	= 3									; scale value
 end if
 bytes	= 1 shl scale						; size of vector element (bytes)
 ;------------------------------------------
-		movs#x	temp1, [this + pos1*bytes]	; temp1 = this->pos1
+		movs#x	val1, [this + pos1*bytes]	; val1 = this->pos1
 if dim = 3
-		movs#x	temp2, [this + pos2*bytes]	; temp2 = this->pos2
+		movs#x	val2, [this + pos2*bytes]	; val2 = this->pos2
 end if
-		movs#x	temp3, [this + pos3*bytes]	; temp3 = this->pos3
-		muls#x	value1, temp3				; value1 *= temp3
-		adds#x	temp1, value1				; temp1 += value1
+		movs#x	val3, [this + pos3*bytes]	; val3 = this->pos3
+		muls#x	value1, val3				; value1 *= val3
+		adds#x	val1, value1				; val1 += value1
 if dim = 3
-		muls#x	value2, temp3				; value2 *= temp3
-		adds#x	temp2, value2				; temp2 += value2
+		muls#x	value2, val3				; value2 *= val3
+		adds#x	val2, value2				; val2 += value2
 end if
-		movs#x	[this + pos1*bytes], temp1	; this->pos1 = temp1
+		movs#x	[this + pos1*bytes], val1	; this->pos1 = val1
 if dim = 3
-		movs#x	[this + pos2*bytes], temp2	; this->pos2 = temp2
+		movs#x	[this + pos2*bytes], val2	; this->pos2 = val2
 end if
 		ret
 }
@@ -1205,9 +1326,9 @@ end if
 bytes	= 1 shl scale						; size of vector element (bytes)
 ;------------------------------------------
 	VPRODUCT	this, src, temp0, temp1, temp2, temp3, temp4, temp5, 3, x
-		movs#x	[this + XPOS*bytes], temp0	; store new x value of target vector
-		movs#x	[this + YPOS*bytes], temp1	; store new y value of target vector
-		movs#x	[this + ZPOS*bytes], temp2	; store new z value of target vector
+		movs#x	[this + XPOS*bytes], temp0	; this->x = temp0
+		movs#x	[this + YPOS*bytes], temp1	; this->y = temp1
+		movs#x	[this + ZPOS*bytes], temp2	; this->z = temp2
 		ret
 }
 VectorProduct_flt32:	VECTOR_PRODUCT	s
@@ -1231,12 +1352,12 @@ bytes	= 1 shl scale						; size of vector element (bytes)
 if dim = 3
 		movs#x	zval, [vect1 + ZPOS*bytes]	; load z value of target vector
 end if
-		muls#x	xval, [vect2 + XPOS*bytes]	; target->x *= vect2->x
-		muls#x	yval, [vect2 + YPOS*bytes]	; target->y *= vect2->y
-		adds#x	xval, yval					; result += target->y * vect2->y
+		muls#x	xval, [vect2 + XPOS*bytes]	; xval *= vect2->x
+		muls#x	yval, [vect2 + YPOS*bytes]	; yval *= vect2->y
+		adds#x	xval, yval					; xval += yval
 if dim = 3
-		muls#x	zval, [vect2 + ZPOS*bytes]	; target->z *= vect2->z
-		adds#x	xval, zval					; result += target->z * vect2->z
+		muls#x	zval, [vect2 + ZPOS*bytes]	; zval *= vect2->z
+		adds#x	xval, zval					; xval += zval
 end if
 }
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -1274,24 +1395,29 @@ bytes	= 1 shl scale						; size of vector element (bytes)
 		movs#x	temp0, [vect1 + XPOS*bytes]	; temp0 = vect1->x
 		movs#x	temp1, [vect2 + XPOS*bytes]	; temp1 = vect2->x
 		movs#x	temp2, [vect3 + XPOS*bytes]	; temp2 = vect3->x
-		movs#x	temp3, [vect1 + YPOS*bytes]
-		muls#x	temp3, [vect2 + ZPOS*bytes]	; temp3 = vect1->y * vect2->z
-		movs#x	temp4, [vect2 + YPOS*bytes]
-		muls#x	temp4, [vect3 + ZPOS*bytes]	; temp4 = vect2->y * vect3->z
-		movs#x	temp5, [vect3 + YPOS*bytes]
-		muls#x	temp5, [vect1 + ZPOS*bytes]	; temp5 = vect3->y * vect1->z
-		movs#x	temp6, [vect1 + ZPOS*bytes]
-		muls#x	temp6, [vect2 + YPOS*bytes]	; temp6 = vect1->z * vect2->y
-		movs#x	temp7, [vect2 + ZPOS*bytes]
-		muls#x	temp7, [vect3 + YPOS*bytes]	; temp7 = vect2->z * vect3->y
-		movs#x	temp8, [vect3 + ZPOS*bytes]
-		muls#x	temp8, [vect1 + YPOS*bytes]	; temp8 = vect3->z * vect1->y
-		subs#x	temp4, temp7				; temp4 -= temp7
-		muls#x	temp0, temp4				; temp0 *= temp4
-		subs#x	temp5, temp8				; temp5 -= temp8
-		muls#x	temp1, temp5				; temp1 *= temp5
+;---[Compute intermediate value #1]--------
+		movs#x	temp3, [vect2 + YPOS*bytes]
+		muls#x	temp3, [vect3 + ZPOS*bytes]	; temp3 = vect2->y * vect3->z
+		movs#x	temp6, [vect2 + ZPOS*bytes]
+		muls#x	temp6, [vect3 + YPOS*bytes]	; temp6 = vect2->z * vect3->y
 		subs#x	temp3, temp6				; temp3 -= temp6
-		muls#x	temp2, temp3				; temp2 *= temp3
+;---[Compute intermediate value #2]--------
+		movs#x	temp4, [vect3 + YPOS*bytes]
+		muls#x	temp4, [vect1 + ZPOS*bytes]	; temp4 = vect3->y * vect1->z
+		movs#x	temp7, [vect3 + ZPOS*bytes]
+		muls#x	temp7, [vect1 + YPOS*bytes]	; temp7 = vect3->z * vect1->y
+		subs#x	temp4, temp7				; temp4 -= temp7
+;---[Compute intermediate value #3]--------
+		movs#x	temp5, [vect1 + YPOS*bytes]
+		muls#x	temp5, [vect2 + ZPOS*bytes]	; temp5 = vect1->y * vect2->z
+		movs#x	temp8, [vect1 + ZPOS*bytes]
+		muls#x	temp8, [vect2 + YPOS*bytes]	; temp8 = vect1->z * vect2->y
+		subs#x	temp5, temp8				; temp5 -= temp8
+;---[Multiply intermediate values]---------
+		muls#x	temp0, temp3				; temp0 *= temp3
+		muls#x	temp1, temp4				; temp1 *= temp4
+		muls#x	temp2, temp5				; temp2 *= temp5
+;---[Compute sum of values]----------------
 		adds#x	temp0, temp1				; temp0 += temp1
 		adds#x	temp0, temp2				; temp0 += temp2
 }
@@ -1494,23 +1620,29 @@ Projection2D_flt64:	PROJECTION	Hypot2D_flt64, 2, d
 ;******************************************************************************;
 ;       Checks                                                                 ;
 ;******************************************************************************;
-macro	ZERO	result, xval, yval, zval, zero, dim, x
+macro	ZERO	status, result, xval, yval, zval, zero, mask, dim, x
 {
+;---[Internal variables]-------------------
+if x eq s
+dmask	= DMASK_FLT32						; data mask
+else if x eq d
+dmask	= DMASK_FLT64						; data mask
+end if
+;------------------------------------------
+		initreg	mask, result, dmask			; load data mask
+		andp#x	xval, mask					; xval = Abs (xval)
+		andp#x	yval, mask					; yval = Abs (yval)
+		adds#x	xval, yval					; xval += yval
+if dim = 3
+		andp#x	zval, mask					; zval = Abs (zval)
+		adds#x	xval, zval					; xval += zval
+end if
 		xor		result, result				; result = 0
 		xorp#x	zero, zero					; zero = 0
 		comis#x	xval, zero					; if (xval == NAN || xval != 0)
-		jp		@f							;     then return false
-		jne		@f
-		comis#x	yval, zero					; if (yval == NAN || yval != 0)
-		jp		@f							;     then return false
-		jne		@f
-if dim = 3
-		comis#x	zval, zero					; if (zval == NAN || zval !=0)
-		jp		@f							;     then return false
-		jne		@f
-end if
-		mov		result, 1					; return true
-@@:		ret
+		jp		.nteql						;     then return false
+		sete	status						;     else return true
+.nteql:	ret
 }
 
 ;==============================================================================;
@@ -1521,11 +1653,13 @@ macro	IS_ZERO	dim, x
 ;---[Parameters]---------------------------
 this	equ		rdi							; pointer to vector object
 ;---[Internal variables]-------------------
+status	equ		al							; operation status
 result	equ		rax							; result register
 xval	equ		xmm0						; x value of vector
 yval	equ		xmm1						; y value of vector
 zval	equ		xmm2						; z value of vector
 zero	equ		xmm3						; 0.0
+mask	equ		xmm4						; data mask
 if x eq s
 scale	= 2									; scale value
 else if x eq d
@@ -1538,7 +1672,7 @@ bytes	= 1 shl scale						; size of vector element (bytes)
 if dim = 3
 		movs#x	zval, [this + ZPOS*bytes]	; load z value of vector
 end if
-		ZERO	result, xval, yval, zval, zero, dim, x
+		ZERO	status, result, xval, yval, zval, zero, mask, dim, x
 }
 IsZero3D_flt32:	IS_ZERO	3, s
 IsZero3D_flt64:	IS_ZERO	3, d
@@ -1554,11 +1688,13 @@ macro	EQUAL_CORE	op, dim, x
 this	equ		rdi							; pointer to first vector object
 src		equ		rsi							; pointer to second vector object
 ;---[Internal variables]-------------------
+status	equ		al							; operation status
 result	equ		rax							; result register
 xval	equ		xmm0						; x value of vector
 yval	equ		xmm1						; y value of vector
 zval	equ		xmm2						; z value of vector
 zero	equ		xmm3						; 0.0
+mask	equ		xmm4						; data mask
 if x eq s
 scale	= 2									; scale value
 else if x eq d
@@ -1576,7 +1712,7 @@ end if
 if dim = 3
 		op#s#x	zval, [src + ZPOS*bytes]	; change z value
 end if
-		ZERO	result, xval, yval, zval, zero, dim, x
+		ZERO	status, result, xval, yval, zval, zero, mask, dim, x
 }
 IsEqual3D_flt32:	EQUAL_CORE	sub, 3, s
 IsEqual3D_flt64:	EQUAL_CORE	sub, 3, d
@@ -1600,6 +1736,7 @@ macro	IS_COLLINEAR	dim, x
 this	equ		rdi							; pointer to first vector object
 src		equ		rsi							; pointer to second vector object
 ;---[Internal variables]-------------------
+status	equ		al							; operation status
 result	equ		rax							; result register
 temp0	equ		xmm0						; temporary register #1
 temp1	equ		xmm1						; temporary register #2
@@ -1608,6 +1745,7 @@ temp3	equ		xmm3						; temporary register #4
 temp4	equ		xmm4						; temporary register #5
 temp5	equ		xmm5						; temporary register #6
 zero	equ		xmm6						; 0.0
+mask	equ		xmm7						; data mask
 if x eq s
 scale	= 2									; scale value
 else if x eq d
@@ -1616,7 +1754,7 @@ end if
 bytes	= 1 shl scale						; size of vector element (bytes)
 ;------------------------------------------
 	VPRODUCT	this, src, temp0, temp1, temp2, temp3, temp4, temp5, dim, x
-		ZERO	result, temp0, temp1, temp2, zero, dim, x
+		ZERO	status, result, temp0, temp1, temp2, zero, mask, dim, x
 }
 IsCollinear3D_flt32:	IS_COLLINEAR	3, s
 IsCollinear3D_flt64:	IS_COLLINEAR	3, d
