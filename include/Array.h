@@ -684,6 +684,98 @@ static size_t MaxBwd (const void* array[], size_t size, Cmp func);
 //****************************************************************************//
 
 //============================================================================//
+//      Bit field search                                                      //
+//============================================================================//
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//      Forward direction search                                              //
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+
+//----------------------------------------------------------------------------//
+//      Searching for set bit                                                 //
+//----------------------------------------------------------------------------//
+
+// Unsigned integer types
+static size_t FindSetBitFwd (const uint8_t array[], size_t spos, size_t epos);
+static size_t FindSetBitFwd (const uint16_t array[], size_t spos, size_t epos);
+static size_t FindSetBitFwd (const uint32_t array[], size_t spos, size_t epos);
+static size_t FindSetBitFwd (const uint64_t array[], size_t spos, size_t epos);
+
+// Signed integer types
+static size_t FindSetBitFwd (const sint8_t array[], size_t spos, size_t epos);
+static size_t FindSetBitFwd (const sint16_t array[], size_t spos, size_t epos);
+static size_t FindSetBitFwd (const sint32_t array[], size_t spos, size_t epos);
+static size_t FindSetBitFwd (const sint64_t array[], size_t spos, size_t epos);
+
+// Other types
+static size_t FindSetBitFwd (const size_t array[], size_t spos, size_t epos);
+static size_t FindSetBitFwd (const void *array, size_t spos, size_t epos);
+
+//----------------------------------------------------------------------------//
+//      Searching for reset bit                                               //
+//----------------------------------------------------------------------------//
+
+// Unsigned integer types
+static size_t FindResetBitFwd (const uint8_t array[], size_t spos, size_t epos);
+static size_t FindResetBitFwd (const uint16_t array[], size_t spos, size_t epos);
+static size_t FindResetBitFwd (const uint32_t array[], size_t spos, size_t epos);
+static size_t FindResetBitFwd (const uint64_t array[], size_t spos, size_t epos);
+
+// Signed integer types
+static size_t FindResetBitFwd (const sint8_t array[], size_t spos, size_t epos);
+static size_t FindResetBitFwd (const sint16_t array[], size_t spos, size_t epos);
+static size_t FindResetBitFwd (const sint32_t array[], size_t spos, size_t epos);
+static size_t FindResetBitFwd (const sint64_t array[], size_t spos, size_t epos);
+
+// Other types
+static size_t FindResetBitFwd (const size_t array[], size_t spos, size_t epos);
+static size_t FindResetBitFwd (const void *array, size_t spos, size_t epos);
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//      Backward direction search                                             //
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+
+//----------------------------------------------------------------------------//
+//      Searching for set bit                                                 //
+//----------------------------------------------------------------------------//
+
+// Unsigned integer types
+static size_t FindSetBitBwd (const uint8_t array[], size_t spos, size_t epos);
+static size_t FindSetBitBwd (const uint16_t array[], size_t spos, size_t epos);
+static size_t FindSetBitBwd (const uint32_t array[], size_t spos, size_t epos);
+static size_t FindSetBitBwd (const uint64_t array[], size_t spos, size_t epos);
+
+// Signed integer types
+static size_t FindSetBitBwd (const sint8_t array[], size_t spos, size_t epos);
+static size_t FindSetBitBwd (const sint16_t array[], size_t spos, size_t epos);
+static size_t FindSetBitBwd (const sint32_t array[], size_t spos, size_t epos);
+static size_t FindSetBitBwd (const sint64_t array[], size_t spos, size_t epos);
+
+// Other types
+static size_t FindSetBitBwd (const size_t array[], size_t spos, size_t epos);
+static size_t FindSetBitBwd (const void *array, size_t spos, size_t epos);
+
+//----------------------------------------------------------------------------//
+//      Searching for reset bit                                               //
+//----------------------------------------------------------------------------//
+
+// Unsigned integer types
+static size_t FindResetBitBwd (const uint8_t array[], size_t spos, size_t epos);
+static size_t FindResetBitBwd (const uint16_t array[], size_t spos, size_t epos);
+static size_t FindResetBitBwd (const uint32_t array[], size_t spos, size_t epos);
+static size_t FindResetBitBwd (const uint64_t array[], size_t spos, size_t epos);
+
+// Signed integer types
+static size_t FindResetBitBwd (const sint8_t array[], size_t spos, size_t epos);
+static size_t FindResetBitBwd (const sint16_t array[], size_t spos, size_t epos);
+static size_t FindResetBitBwd (const sint32_t array[], size_t spos, size_t epos);
+static size_t FindResetBitBwd (const sint64_t array[], size_t spos, size_t epos);
+
+// Other types
+static size_t FindResetBitBwd (const size_t array[], size_t spos, size_t epos);
+static size_t FindResetBitBwd (const void *array, size_t spos, size_t epos);
+
+//============================================================================//
 //      Regular array search                                                  //
 //============================================================================//
 
@@ -1030,6 +1122,26 @@ static size_t FindGreatOrEqualDsc (const void* array[], size_t size, const void 
 //****************************************************************************//
 //      Linear counting                                                       //
 //****************************************************************************//
+
+//============================================================================//
+//      Bit counting                                                          //
+//============================================================================//
+
+// Unsigned integer types
+static size_t CountBits (const uint8_t array[], size_t spos, size_t epos);
+static size_t CountBits (const uint16_t array[], size_t spos, size_t epos);
+static size_t CountBits (const uint32_t array[], size_t spos, size_t epos);
+static size_t CountBits (const uint64_t array[], size_t spos, size_t epos);
+
+// Signed integer types
+static size_t CountBits (const sint8_t array[], size_t spos, size_t epos);
+static size_t CountBits (const sint16_t array[], size_t spos, size_t epos);
+static size_t CountBits (const sint32_t array[], size_t spos, size_t epos);
+static size_t CountBits (const sint64_t array[], size_t spos, size_t epos);
+
+// Other types
+static size_t CountBits (const size_t array[], size_t spos, size_t epos);
+static size_t CountBits (const void *array, size_t spos, size_t epos);
 
 //============================================================================//
 //      Element counting                                                      //
@@ -2684,6 +2796,98 @@ size_t Array_MaxBwd (const void* array[], size_t size, Cmp func);
 //****************************************************************************//
 
 //============================================================================//
+//      Bit field search                                                      //
+//============================================================================//
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//      Forward direction search                                              //
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+
+//----------------------------------------------------------------------------//
+//      Searching for set bit                                                 //
+//----------------------------------------------------------------------------//
+
+// Unsigned integer types
+size_t Array_FindSetBitFwd_uint8 (const uint8_t array[], size_t spos, size_t epos);
+size_t Array_FindSetBitFwd_uint16 (const uint16_t array[], size_t spos, size_t epos);
+size_t Array_FindSetBitFwd_uint32 (const uint32_t array[], size_t spos, size_t epos);
+size_t Array_FindSetBitFwd_uint64 (const uint64_t array[], size_t spos, size_t epos);
+
+// Signed integer types
+size_t Array_FindSetBitFwd_sint8 (const sint8_t array[], size_t spos, size_t epos);
+size_t Array_FindSetBitFwd_sint16 (const sint16_t array[], size_t spos, size_t epos);
+size_t Array_FindSetBitFwd_sint32 (const sint32_t array[], size_t spos, size_t epos);
+size_t Array_FindSetBitFwd_sint64 (const sint64_t array[], size_t spos, size_t epos);
+
+// Other types
+size_t Array_FindSetBitFwd_size (const size_t array[], size_t spos, size_t epos);
+size_t Array_FindSetBitFwd (const void *array, size_t spos, size_t epos);
+
+//----------------------------------------------------------------------------//
+//      Searching for reset bit                                               //
+//----------------------------------------------------------------------------//
+
+// Unsigned integer types
+size_t Array_FindResetBitFwd_uint8 (const uint8_t array[], size_t spos, size_t epos);
+size_t Array_FindResetBitFwd_uint16 (const uint16_t array[], size_t spos, size_t epos);
+size_t Array_FindResetBitFwd_uint32 (const uint32_t array[], size_t spos, size_t epos);
+size_t Array_FindResetBitFwd_uint64 (const uint64_t array[], size_t spos, size_t epos);
+
+// Signed integer types
+size_t Array_FindResetBitFwd_sint8 (const sint8_t array[], size_t spos, size_t epos);
+size_t Array_FindResetBitFwd_sint16 (const sint16_t array[], size_t spos, size_t epos);
+size_t Array_FindResetBitFwd_sint32 (const sint32_t array[], size_t spos, size_t epos);
+size_t Array_FindResetBitFwd_sint64 (const sint64_t array[], size_t spos, size_t epos);
+
+// Other types
+size_t Array_FindResetBitFwd_size (const size_t array[], size_t spos, size_t epos);
+size_t Array_FindResetBitFwd (const void *array, size_t spos, size_t epos);
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+//      Backward direction search                                             //
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+
+//----------------------------------------------------------------------------//
+//      Searching for set bit                                                 //
+//----------------------------------------------------------------------------//
+
+// Unsigned integer types
+size_t Array_FindSetBitBwd_uint8 (const uint8_t array[], size_t spos, size_t epos);
+size_t Array_FindSetBitBwd_uint16 (const uint16_t array[], size_t spos, size_t epos);
+size_t Array_FindSetBitBwd_uint32 (const uint32_t array[], size_t spos, size_t epos);
+size_t Array_FindSetBitBwd_uint64 (const uint64_t array[], size_t spos, size_t epos);
+
+// Signed integer types
+size_t Array_FindSetBitBwd_sint8 (const sint8_t array[], size_t spos, size_t epos);
+size_t Array_FindSetBitBwd_sint16 (const sint16_t array[], size_t spos, size_t epos);
+size_t Array_FindSetBitBwd_sint32 (const sint32_t array[], size_t spos, size_t epos);
+size_t Array_FindSetBitBwd_sint64 (const sint64_t array[], size_t spos, size_t epos);
+
+// Other types
+size_t Array_FindSetBitBwd_size (const size_t array[], size_t spos, size_t epos);
+size_t Array_FindSetBitBwd (const void *array, size_t spos, size_t epos);
+
+//----------------------------------------------------------------------------//
+//      Searching for reset bit                                               //
+//----------------------------------------------------------------------------//
+
+// Unsigned integer types
+size_t Array_FindResetBitBwd_uint8 (const uint8_t array[], size_t spos, size_t epos);
+size_t Array_FindResetBitBwd_uint16 (const uint16_t array[], size_t spos, size_t epos);
+size_t Array_FindResetBitBwd_uint32 (const uint32_t array[], size_t spos, size_t epos);
+size_t Array_FindResetBitBwd_uint64 (const uint64_t array[], size_t spos, size_t epos);
+
+// Signed integer types
+size_t Array_FindResetBitBwd_sint8 (const sint8_t array[], size_t spos, size_t epos);
+size_t Array_FindResetBitBwd_sint16 (const sint16_t array[], size_t spos, size_t epos);
+size_t Array_FindResetBitBwd_sint32 (const sint32_t array[], size_t spos, size_t epos);
+size_t Array_FindResetBitBwd_sint64 (const sint64_t array[], size_t spos, size_t epos);
+
+// Other types
+size_t Array_FindResetBitBwd_size (const size_t array[], size_t spos, size_t epos);
+size_t Array_FindResetBitBwd (const void *array, size_t spos, size_t epos);
+
+//============================================================================//
 //      Regular array search                                                  //
 //============================================================================//
 
@@ -3030,6 +3234,26 @@ size_t Array_FindGreatOrEqualDsc (const void* array[], size_t size, const void *
 //****************************************************************************//
 //      Linear counting                                                       //
 //****************************************************************************//
+
+//============================================================================//
+//      Bit counting                                                          //
+//============================================================================//
+
+// Unsigned integer types
+size_t Array_CountBits_uint8 (const uint8_t array[], size_t spos, size_t epos);
+size_t Array_CountBits_uint16 (const uint16_t array[], size_t spos, size_t epos);
+size_t Array_CountBits_uint32 (const uint32_t array[], size_t spos, size_t epos);
+size_t Array_CountBits_uint64 (const uint64_t array[], size_t spos, size_t epos);
+
+// Signed integer types
+size_t Array_CountBits_sint8 (const sint8_t array[], size_t spos, size_t epos);
+size_t Array_CountBits_sint16 (const sint16_t array[], size_t spos, size_t epos);
+size_t Array_CountBits_sint32 (const sint32_t array[], size_t spos, size_t epos);
+size_t Array_CountBits_sint64 (const sint64_t array[], size_t spos, size_t epos);
+
+// Other types
+size_t Array_CountBits_size (const size_t array[], size_t spos, size_t epos);
+size_t Array_CountBits (const void *array, size_t spos, size_t epos);
 
 //============================================================================//
 //      Element counting                                                      //

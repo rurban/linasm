@@ -944,6 +944,138 @@ public	MaxBwd						as	'_ZN5Array6MaxBwdEPPKvmPFxS1_S1_E'
 ;******************************************************************************;
 
 ;==============================================================================;
+;       Bit field search                                                       ;
+;==============================================================================;
+
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+;       Forward direction search                                               ;
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+
+;------------------------------------------------------------------------------;
+;       Searching for set bit                                                  ;
+;------------------------------------------------------------------------------;
+
+; Unsigned integer types
+public	FindSetBitFwd				as	'Array_FindSetBitFwd_uint8'
+public	FindSetBitFwd				as	'Array_FindSetBitFwd_uint16'
+public	FindSetBitFwd				as	'Array_FindSetBitFwd_uint32'
+public	FindSetBitFwd				as	'Array_FindSetBitFwd_uint64'
+public	FindSetBitFwd				as	'_ZN5Array13FindSetBitFwdEPKhmm'
+public	FindSetBitFwd				as	'_ZN5Array13FindSetBitFwdEPKtmm'
+public	FindSetBitFwd				as	'_ZN5Array13FindSetBitFwdEPKjmm'
+public	FindSetBitFwd				as	'_ZN5Array13FindSetBitFwdEPKymm'
+
+; Signed integer types
+public	FindSetBitFwd				as	'Array_FindSetBitFwd_sint8'
+public	FindSetBitFwd				as	'Array_FindSetBitFwd_sint16'
+public	FindSetBitFwd				as	'Array_FindSetBitFwd_sint32'
+public	FindSetBitFwd				as	'Array_FindSetBitFwd_sint64'
+public	FindSetBitFwd				as	'_ZN5Array13FindSetBitFwdEPKamm'
+public	FindSetBitFwd				as	'_ZN5Array13FindSetBitFwdEPKsmm'
+public	FindSetBitFwd				as	'_ZN5Array13FindSetBitFwdEPKimm'
+public	FindSetBitFwd				as	'_ZN5Array13FindSetBitFwdEPKxmm'
+
+; Other types
+public	FindSetBitFwd				as	'Array_FindSetBitFwd_size'
+public	FindSetBitFwd				as	'Array_FindSetBitFwd'
+public	FindSetBitFwd				as	'_ZN5Array13FindSetBitFwdEPKmmm'
+public	FindSetBitFwd				as	'_ZN5Array13FindSetBitFwdEPKvmm'
+
+;------------------------------------------------------------------------------;
+;       Searching for reset bit                                                ;
+;------------------------------------------------------------------------------;
+
+; Unsigned integer types
+public	FindResetBitFwd				as	'Array_FindResetBitFwd_uint8'
+public	FindResetBitFwd				as	'Array_FindResetBitFwd_uint16'
+public	FindResetBitFwd				as	'Array_FindResetBitFwd_uint32'
+public	FindResetBitFwd				as	'Array_FindResetBitFwd_uint64'
+public	FindResetBitFwd				as	'_ZN5Array15FindResetBitFwdEPKhmm'
+public	FindResetBitFwd				as	'_ZN5Array15FindResetBitFwdEPKtmm'
+public	FindResetBitFwd				as	'_ZN5Array15FindResetBitFwdEPKjmm'
+public	FindResetBitFwd				as	'_ZN5Array15FindResetBitFwdEPKymm'
+
+; Signed integer types
+public	FindResetBitFwd				as	'Array_FindResetBitFwd_sint8'
+public	FindResetBitFwd				as	'Array_FindResetBitFwd_sint16'
+public	FindResetBitFwd				as	'Array_FindResetBitFwd_sint32'
+public	FindResetBitFwd				as	'Array_FindResetBitFwd_sint64'
+public	FindResetBitFwd				as	'_ZN5Array15FindResetBitFwdEPKamm'
+public	FindResetBitFwd				as	'_ZN5Array15FindResetBitFwdEPKsmm'
+public	FindResetBitFwd				as	'_ZN5Array15FindResetBitFwdEPKimm'
+public	FindResetBitFwd				as	'_ZN5Array15FindResetBitFwdEPKxmm'
+
+; Other types
+public	FindResetBitFwd				as	'Array_FindResetBitFwd_size'
+public	FindResetBitFwd				as	'Array_FindResetBitFwd'
+public	FindResetBitFwd				as	'_ZN5Array15FindResetBitFwdEPKmmm'
+public	FindResetBitFwd				as	'_ZN5Array15FindResetBitFwdEPKvmm'
+
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+;       Backward direction search                                              ;
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+
+;------------------------------------------------------------------------------;
+;       Searching for set bit                                                  ;
+;------------------------------------------------------------------------------;
+
+; Unsigned integer types
+public	FindSetBitBwd				as	'Array_FindSetBitBwd_uint8'
+public	FindSetBitBwd				as	'Array_FindSetBitBwd_uint16'
+public	FindSetBitBwd				as	'Array_FindSetBitBwd_uint32'
+public	FindSetBitBwd				as	'Array_FindSetBitBwd_uint64'
+public	FindSetBitBwd				as	'_ZN5Array13FindSetBitBwdEPKhmm'
+public	FindSetBitBwd				as	'_ZN5Array13FindSetBitBwdEPKtmm'
+public	FindSetBitBwd				as	'_ZN5Array13FindSetBitBwdEPKjmm'
+public	FindSetBitBwd				as	'_ZN5Array13FindSetBitBwdEPKymm'
+
+; Signed integer types
+public	FindSetBitBwd				as	'Array_FindSetBitBwd_sint8'
+public	FindSetBitBwd				as	'Array_FindSetBitBwd_sint16'
+public	FindSetBitBwd				as	'Array_FindSetBitBwd_sint32'
+public	FindSetBitBwd				as	'Array_FindSetBitBwd_sint64'
+public	FindSetBitBwd				as	'_ZN5Array13FindSetBitBwdEPKamm'
+public	FindSetBitBwd				as	'_ZN5Array13FindSetBitBwdEPKsmm'
+public	FindSetBitBwd				as	'_ZN5Array13FindSetBitBwdEPKimm'
+public	FindSetBitBwd				as	'_ZN5Array13FindSetBitBwdEPKxmm'
+
+; Other types
+public	FindSetBitBwd				as	'Array_FindSetBitBwd_size'
+public	FindSetBitBwd				as	'Array_FindSetBitBwd'
+public	FindSetBitBwd				as	'_ZN5Array13FindSetBitBwdEPKmmm'
+public	FindSetBitBwd				as	'_ZN5Array13FindSetBitBwdEPKvmm'
+
+;------------------------------------------------------------------------------;
+;       Searching for reset bit                                                ;
+;------------------------------------------------------------------------------;
+
+; Unsigned integer types
+public	FindResetBitBwd				as	'Array_FindResetBitBwd_uint8'
+public	FindResetBitBwd				as	'Array_FindResetBitBwd_uint16'
+public	FindResetBitBwd				as	'Array_FindResetBitBwd_uint32'
+public	FindResetBitBwd				as	'Array_FindResetBitBwd_uint64'
+public	FindResetBitBwd				as	'_ZN5Array15FindResetBitBwdEPKhmm'
+public	FindResetBitBwd				as	'_ZN5Array15FindResetBitBwdEPKtmm'
+public	FindResetBitBwd				as	'_ZN5Array15FindResetBitBwdEPKjmm'
+public	FindResetBitBwd				as	'_ZN5Array15FindResetBitBwdEPKymm'
+
+; Signed integer types
+public	FindResetBitBwd				as	'Array_FindResetBitBwd_sint8'
+public	FindResetBitBwd				as	'Array_FindResetBitBwd_sint16'
+public	FindResetBitBwd				as	'Array_FindResetBitBwd_sint32'
+public	FindResetBitBwd				as	'Array_FindResetBitBwd_sint64'
+public	FindResetBitBwd				as	'_ZN5Array15FindResetBitBwdEPKamm'
+public	FindResetBitBwd				as	'_ZN5Array15FindResetBitBwdEPKsmm'
+public	FindResetBitBwd				as	'_ZN5Array15FindResetBitBwdEPKimm'
+public	FindResetBitBwd				as	'_ZN5Array15FindResetBitBwdEPKxmm'
+
+; Other types
+public	FindResetBitBwd				as	'Array_FindResetBitBwd_size'
+public	FindResetBitBwd				as	'Array_FindResetBitBwd'
+public	FindResetBitBwd				as	'_ZN5Array15FindResetBitBwdEPKmmm'
+public	FindResetBitBwd				as	'_ZN5Array15FindResetBitBwdEPKvmm'
+
+;==============================================================================;
 ;       Regular array search                                                   ;
 ;==============================================================================;
 
@@ -1514,6 +1646,36 @@ public	FindGreatOrEqualDsc			as	'_ZN6String19FindGreatOrEqualDscEPPKimS1_PFxS1_S
 ;******************************************************************************;
 ;       Linear counting                                                        ;
 ;******************************************************************************;
+
+;==============================================================================;
+;       Bit counting                                                           ;
+;==============================================================================;
+
+; Unsigned integer types
+public	CountBits					as	'Array_CountBits_uint8'
+public	CountBits					as	'Array_CountBits_uint16'
+public	CountBits					as	'Array_CountBits_uint32'
+public	CountBits					as	'Array_CountBits_uint64'
+public	CountBits					as	'_ZN5Array9CountBitsEPKhmm'
+public	CountBits					as	'_ZN5Array9CountBitsEPKtmm'
+public	CountBits					as	'_ZN5Array9CountBitsEPKjmm'
+public	CountBits					as	'_ZN5Array9CountBitsEPKymm'
+
+; Signed integer types
+public	CountBits					as	'Array_CountBits_sint8'
+public	CountBits					as	'Array_CountBits_sint16'
+public	CountBits					as	'Array_CountBits_sint32'
+public	CountBits					as	'Array_CountBits_sint64'
+public	CountBits					as	'_ZN5Array9CountBitsEPKamm'
+public	CountBits					as	'_ZN5Array9CountBitsEPKsmm'
+public	CountBits					as	'_ZN5Array9CountBitsEPKimm'
+public	CountBits					as	'_ZN5Array9CountBitsEPKxmm'
+
+; Other types
+public	CountBits					as	'Array_CountBits_size'
+public	CountBits					as	'Array_CountBits'
+public	CountBits					as	'_ZN5Array9CountBitsEPKmmm'
+public	CountBits					as	'_ZN5Array9CountBitsEPKvmm'
 
 ;==============================================================================;
 ;       Element counting                                                       ;
@@ -5604,6 +5766,158 @@ MaxBwd:	MINMAX_OBJ	sub, l, 1
 ;******************************************************************************;
 
 ;==============================================================================;
+;       Bit field search                                                       ;
+;==============================================================================;
+
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+;       Forward direction search                                               ;
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+macro	FIND_BIT_FWD	inv
+{
+;---[Parameters]---------------------------
+array	equ		rdi							; pointer to array
+spos	equ		rsi							; start position
+epos	equ		rdx							; end position
+;---[Internal variables]-------------------
+index	equ		rax							; index of first occurence of pattern
+shft	equ		rcx							; shift value
+low		equ		cl							; low part of shift value
+cmask	equ		r8							; mask to clear unrequired results
+fmask	equ		r9							; result of bitfield search
+;------------------------------------------
+		lea		array, [array * 8 + spos]	; convert bytes to bits
+	prefetchnta	[array]						; prefetch data
+		sub		epos, spos					; if (epos <= spos)
+		jbe		.ntfnd						;     return NOT_FOUND
+;---[Normal execution branch]--------------
+		mov		index, array
+		and		index, 0x3F					; get array offset from vector boundary
+		sub		array, index				; align pointer to vector boundary
+		shr		array, 3					; convert bits to bytes
+;---[Unaligned operation]------------------
+		add		epos, index					; epos += index
+		mov		shft, index					; shft = index
+		neg		index						; index = -index
+		mov		cmask, -1
+		shl		cmask, low					; adjust cmask for unaligned search
+		mov		fmask, [array]
+if inv
+		not		fmask						; fmask = -fmask
+end if
+		and		fmask, cmask				; if any bit is set
+		jnz		.brk						;     then break the loop
+		add		index, 64					; index += 64
+		sub		epos, 64					; if (epos <= 64)
+		jbe		.ntfnd						;     return NOT_FOUND
+;---[Vector loop]--------------------------
+.vloop:
+repeat	CLINE / 8
+		mov		fmask, [array + % * 8]
+if inv
+		not		fmask						; fmask = -fmask
+end if
+		and		fmask, fmask				; if any bit is set
+		jnz		.brk						;     then break the loop
+		add		index, 64					; index += 64
+		sub		epos, 64					; if (epos <= 64)
+		jbe		.ntfnd						;     return NOT_FOUND
+end repeat
+	prefetchnta	[array + PSTEP]				; prefetch next portion of data
+		add		array, CLINE				; array += CLINE
+		jmp		.vloop						; do while (true)
+;---[End of vector loop]-------------------
+.brk:	bsf		fmask, fmask				; find index of first set bit
+		cmp		epos, fmask					; if (epos <= fmask)
+		jbe		.ntfnd						;     return NOT_FOUND
+		add		index, fmask				; index += fmask
+		add		index, spos					; index += spos
+		ret									; return index
+;---[Not found branch]---------------------
+.ntfnd:	mov		index, NOT_FOUND			; return NOT_FOUND
+.exit:	ret
+}
+
+; Searching for set bit
+FindSetBitFwd:		FIND_BIT_FWD	0
+
+; Searching for reset bit
+FindResetBitFwd:	FIND_BIT_FWD	1
+
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+;       Backward direction search                                              ;
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+macro	FIND_BIT_BWD	inv
+{
+;---[Parameters]---------------------------
+array	equ		rdi							; pointer to array
+spos	equ		rsi							; start position
+epos	equ		rdx							; end position
+;---[Internal variables]-------------------
+index	equ		rax							; index of first occurence of pattern
+shft	equ		rcx							; shift value
+low		equ		cl							; low part of shift value
+cmask	equ		r8							; mask to clear unrequired results
+fmask	equ		r9							; result of bitfield search
+;------------------------------------------
+		lea		array, [array * 8 + epos]	; convert bytes to bits
+	prefetchnta	[array]						; prefetch data
+		sub		epos, spos					; if (epos <= spos)
+		jbe		.ntfnd						;     return NOT_FOUND
+;---[Normal execution branch]--------------
+		mov		index, array
+		neg		index
+		and		index, 0x3F					; get array offset from vector boundary
+		lea		array, [array + index - 64]	; align pointer to vector boundary
+		shr		array, 3					; convert bits to bytes
+;---[Unaligned operation]------------------
+		add		epos, index					; epos += index
+		mov		shft, index					; shft = index
+		lea		index, [epos - 64]			; index = epos - 64
+		mov		cmask, -1
+		shr		cmask, low					; adjust cmask for unaligned search
+		mov		fmask, [array]
+if inv
+		not		fmask						; fmask = -fmask
+end if
+		and		fmask, cmask				; if any bit is set
+		jnz		.brk						;     then break the loop
+		sub		index, 64					; index -= 64
+		sub		epos, 64					; if (epos <= 64)
+		jbe		.ntfnd						;     return NOT_FOUND
+;---[Vector loop]--------------------------
+.vloop:
+repeat	CLINE / 8
+		mov		fmask, [array - % * 8]
+if inv
+		not		fmask						; fmask = -fmask
+end if
+		and		fmask, fmask				; if any bit is set
+		jnz		.brk						;     then break the loop
+		sub		index, 64					; index -= 64
+		sub		epos, 64					; if (epos <= 64)
+		jbe		.ntfnd						;     return NOT_FOUND
+end repeat
+	prefetchnta	[array - PSTEP]				; prefetch next portion of data
+		sub		array, CLINE				; array -= CLINE
+		jmp		.vloop						; do while (true)
+;---[End of vector loop]-------------------
+.brk:	bsr		fmask, fmask				; find index of first occurence of pattern
+		add		index, fmask				; if (index += fmask < 0), then go to not found branch
+		js		.ntfnd						;     return NOT_FOUND
+		add		index, spos					; index += spos
+		ret
+;---[Not found branch]---------------------
+.ntfnd:	mov		index, NOT_FOUND			; return NOT_FOUND
+.exit:	ret
+}
+
+; Searching for set bit
+FindSetBitBwd:		FIND_BIT_BWD	0
+
+; Searching for reset bit
+FindResetBitBwd:	FIND_BIT_BWD	1
+
+;==============================================================================;
 ;       Regular array search                                                   ;
 ;==============================================================================;
 
@@ -6207,6 +6521,65 @@ FindGreatOrEqualDsc:	FINDBIN_OBJ		le, le
 ;******************************************************************************;
 ;       Linear counting                                                        ;
 ;******************************************************************************;
+
+;==============================================================================;
+;       Bit counting                                                           ;
+;==============================================================================;
+CountBits:
+;---[Parameters]---------------------------
+array	equ		rdi							; pointer to array
+spos	equ		rsi							; start position
+epos	equ		rdx							; end position
+;---[Internal variables]-------------------
+count	equ		rax							; count of pattern matches
+shft	equ		rcx							; shift value
+low		equ		cl							; low part of shift value
+cmask	equ		r8							; mask to clear unrequired results
+fmask	equ		r9							; result of pattern search
+;------------------------------------------
+		lea		array, [array * 8 + spos]	; convert bytes to bits
+	prefetchnta	[array]						; prefetch data
+		xor		count, count				; count = 0
+		sub		epos, spos					; if (epos <= spos)
+		jbe		.exit						;     then go to exit
+;---[Normal execution branch]--------------
+		mov		shft, array
+		and		shft, 0x3F					; get array offset from vector boundary
+		sub		array, shft					; align pointer to vector boundary
+		shr		array, 3					; convert bits to bytes
+;---[Unaligned operation]------------------
+		add		epos, shft					; epos += shft
+		mov		cmask, -1
+		shl		cmask, low					; adjust cmask for unaligned search
+		mov		fmask, [array]
+		and		fmask, cmask				; clear unrequired bits
+		sub		epos, 64					; if (epos <= 64)
+		jbe		.tail						;     then process array tail
+		popcnt	fmask, fmask				; get count of pattern matches
+		add		count, fmask				; count += bits
+;---[Vector loop]--------------------------
+.vloop:
+repeat	CLINE / 8
+		mov		fmask, [array + % * 8]
+		sub		epos, 64					; if (epos <= 64)
+		jbe		.tail						;     then process array tail
+		popcnt	fmask, fmask				; get count of pattern matches
+		add		count, fmask				; count += bits
+end repeat
+	prefetchnta	[array + PSTEP]				; prefetch next portion of data
+		add		array, CLINE				; array += CLINE
+		jmp		.vloop						; do while (true)
+;---[End of vector loop]-------------------
+.tail:	xor		shft, shft
+		sub		shft, epos					; get count of tail elements
+		mov		cmask, -1
+		shr		cmask, low					; adjust cmask for tail search
+		and		fmask, cmask				; clear unrequired bits
+		popcnt	fmask, fmask				; get count of pattern matches
+		add		count, fmask				; count += bits
+		ret
+;---[Normal exit]--------------------------
+.exit:	ret
 
 ;==============================================================================;
 ;       Element counting                                                       ;
