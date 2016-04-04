@@ -4,7 +4,7 @@
 #                                                                              #
 #                         DOUBLY LINKED LIST DATA TYPE                         #
 #                                                                              #
-# License: LGPLv3+                               Copyleft (Ɔ) 2015, Jack Black #
+# License: LGPLv3+                               Copyleft (Ɔ) 2016, Jack Black #
 ################################################################################
 */
 # pragma	once
@@ -125,6 +125,7 @@ bool GetHead (data_t *data) const;
 bool GetTail (data_t *data) const;
 bool GetFwd (data_t *data) const;
 bool GetBwd (data_t *data) const;
+bool GetIter (data_t *data, ptr_t iter) const;
 
 //****************************************************************************//
 //      Replacing element value                                               //
@@ -182,6 +183,24 @@ bool BwdGoNext (size_t pos);
 bool BwdGoPrev (size_t pos);
 
 //****************************************************************************//
+//      Manipulation with external iterator                                   //
+//****************************************************************************//
+
+// Set iterator position
+ptr_t IterToIndex (size_t index) const;
+ptr_t IterToHead (void) const;
+ptr_t IterToTail (void) const;
+ptr_t IterToFwd (void) const;
+ptr_t IterToBwd (void) const;
+
+// Get iterator position
+size_t GetIterPos (ptr_t iter) const;
+
+// Change iterator position
+bool IterGoFwd (size_t pos, ptr_t *iter) const;
+bool IterGoBwd (size_t pos, ptr_t *iter) const;
+
+//****************************************************************************//
 //      Swapping iterators                                                    //
 //****************************************************************************//
 void SwapFwdBwd (void);
@@ -193,10 +212,14 @@ void SwapFwdBwd (void);
 // Minimum value
 bool MinFwd (data_t *data, size_t count, KeyCmp func);
 bool MinBwd (data_t *data, size_t count, KeyCmp func);
+bool MinIterFwd (data_t *data, size_t count, KeyCmp func, ptr_t *iter) const;
+bool MinIterBwd (data_t *data, size_t count, KeyCmp func, ptr_t *iter) const;
 
 // Maximum value
 bool MaxFwd (data_t *data, size_t count, KeyCmp func);
 bool MaxBwd (data_t *data, size_t count, KeyCmp func);
+bool MaxIterFwd (data_t *data, size_t count, KeyCmp func, ptr_t *iter) const;
+bool MaxIterBwd (data_t *data, size_t count, KeyCmp func, ptr_t *iter) const;
 
 //****************************************************************************//
 //      Key searching                                                         //
@@ -205,16 +228,22 @@ bool MaxBwd (data_t *data, size_t count, KeyCmp func);
 // Single key searching
 bool FindKeyFwd (data_t *data, adt_t key, size_t count, KeyCmp func);
 bool FindKeyBwd (data_t *data, adt_t key, size_t count, KeyCmp func);
+bool FindKeyIterFwd (data_t *data, adt_t key, size_t count, KeyCmp func, ptr_t *iter) const;
+bool FindKeyIterBwd (data_t *data, adt_t key, size_t count, KeyCmp func, ptr_t *iter) const;
 
 // Keys set searching
 bool FindKeysFwd (data_t *data, const adt_t keys[], size_t size, size_t count, KeyCmp func);
 bool FindKeysBwd (data_t *data, const adt_t keys[], size_t size, size_t count, KeyCmp func);
+bool FindKeysIterFwd (data_t *data, const adt_t keys[], size_t size, size_t count, KeyCmp func, ptr_t *iter) const;
+bool FindKeysIterBwd (data_t *data, const adt_t keys[], size_t size, size_t count, KeyCmp func, ptr_t *iter) const;
 
 //****************************************************************************//
 //      Duplicates searching                                                  //
 //****************************************************************************//
 bool FindDupFwd (data_t *data, KeyCmp func);
 bool FindDupBwd (data_t *data, KeyCmp func);
+bool FindDupIterFwd (data_t *data, KeyCmp func, ptr_t *iter) const;
+bool FindDupIterBwd (data_t *data, KeyCmp func, ptr_t *iter) const;
 
 //****************************************************************************//
 //      Unordered elements searching                                          //
@@ -223,16 +252,22 @@ bool FindDupBwd (data_t *data, KeyCmp func);
 // Ascending sort order
 bool FindNonAscFwd (data_t *data, KeyCmp func);
 bool FindNonAscBwd (data_t *data, KeyCmp func);
+bool FindNonAscIterFwd (data_t *data, KeyCmp func, ptr_t *iter) const;
+bool FindNonAscIterBwd (data_t *data, KeyCmp func, ptr_t *iter) const;
 
 // Descending sort order
 bool FindNonDscFwd (data_t *data, KeyCmp func);
 bool FindNonDscBwd (data_t *data, KeyCmp func);
+bool FindNonDscIterFwd (data_t *data, KeyCmp func, ptr_t *iter) const;
+bool FindNonDscIterBwd (data_t *data, KeyCmp func, ptr_t *iter) const;
 
 //****************************************************************************//
 //      Searching for differences                                             //
 //****************************************************************************//
 bool FindDiffFwd (data_t *data, const List *source, size_t count, KeyCmp func);
 bool FindDiffBwd (data_t *data, const List *source, size_t count, KeyCmp func);
+bool FindDiffIterFwd (data_t *data, const List *source, size_t count, KeyCmp func, ptr_t *titer, ptr_t siter) const;
+bool FindDiffIterBwd (data_t *data, const List *source, size_t count, KeyCmp func, ptr_t *titer, ptr_t siter) const;
 
 //****************************************************************************//
 //      Key counting                                                          //
@@ -241,10 +276,14 @@ bool FindDiffBwd (data_t *data, const List *source, size_t count, KeyCmp func);
 // Single key counting
 size_t CountKeyFwd (adt_t key, size_t count, KeyCmp func) const;
 size_t CountKeyBwd (adt_t key, size_t count, KeyCmp func) const;
+size_t CountKeyIterFwd (adt_t key, size_t count, KeyCmp func, ptr_t iter) const;
+size_t CountKeyIterBwd (adt_t key, size_t count, KeyCmp func, ptr_t iter) const;
 
 // Keys set counting
 size_t CountKeysFwd (const adt_t keys[], size_t size, size_t count, KeyCmp func) const;
 size_t CountKeysBwd (const adt_t keys[], size_t size, size_t count, KeyCmp func) const;
+size_t CountKeysIterFwd (const adt_t keys[], size_t size, size_t count, KeyCmp func, ptr_t iter) const;
+size_t CountKeysIterBwd (const adt_t keys[], size_t size, size_t count, KeyCmp func, ptr_t iter) const;
 
 //****************************************************************************//
 //      Sorting                                                               //
@@ -403,6 +442,7 @@ bool List_GetHead (const struct List *list, struct data_t *data);
 bool List_GetTail (const struct List *list, struct data_t *data);
 bool List_GetFwd (const struct List *list, struct data_t *data);
 bool List_GetBwd (const struct List *list, struct data_t *data);
+bool List_GetIter (const struct List *list, struct data_t *data, ptr_t iter);
 
 //****************************************************************************//
 //      Replacing element value                                               //
@@ -460,6 +500,24 @@ bool List_BwdGoNext (struct List *list, size_t pos);
 bool List_BwdGoPrev (struct List *list, size_t pos);
 
 //****************************************************************************//
+//      Manipulation with external iterator                                   //
+//****************************************************************************//
+
+// Set iterator position
+ptr_t List_IterToIndex (const struct List *list, size_t index);
+ptr_t List_IterToHead (const struct List *list);
+ptr_t List_IterToTail (const struct List *list);
+ptr_t List_IterToFwd (const struct List *list);
+ptr_t List_IterToBwd (const struct List *list);
+
+// Get iterator position
+size_t List_GetIterPos (const struct List *list, ptr_t iter);
+
+// Change iterator position
+bool List_IterGoFwd (const struct List *list, size_t pos, ptr_t *iter);
+bool List_IterGoBwd (const struct List *list, size_t pos, ptr_t *iter);
+
+//****************************************************************************//
 //      Swapping iterators                                                    //
 //****************************************************************************//
 void List_SwapFwdBwd (struct List *list);
@@ -471,10 +529,14 @@ void List_SwapFwdBwd (struct List *list);
 // Minimum value
 bool List_MinFwd (struct List *list, struct data_t *data, size_t count, KeyCmp func);
 bool List_MinBwd (struct List *list, struct data_t *data, size_t count, KeyCmp func);
+bool List_MinIterFwd (const struct List *list, struct data_t *data, size_t count, KeyCmp func, ptr_t *iter);
+bool List_MinIterBwd (const struct List *list, struct data_t *data, size_t count, KeyCmp func, ptr_t *iter);
 
 // Maximum value
 bool List_MaxFwd (struct List *list, struct data_t *data, size_t count, KeyCmp func);
 bool List_MaxBwd (struct List *list, struct data_t *data, size_t count, KeyCmp func);
+bool List_MaxIterFwd (const struct List *list, struct data_t *data, size_t count, KeyCmp func, ptr_t *iter);
+bool List_MaxIterBwd (const struct List *list, struct data_t *data, size_t count, KeyCmp func, ptr_t *iter);
 
 //****************************************************************************//
 //      Key searching                                                         //
@@ -483,16 +545,22 @@ bool List_MaxBwd (struct List *list, struct data_t *data, size_t count, KeyCmp f
 // Single key searching
 bool List_FindKeyFwd (struct List *list, struct data_t *data, union adt_t key, size_t count, KeyCmp func);
 bool List_FindKeyBwd (struct List *list, struct data_t *data, union adt_t key, size_t count, KeyCmp func);
+bool List_FindKeyIterFwd (const struct List *list, struct data_t *data, union adt_t key, size_t count, KeyCmp func, ptr_t *iter);
+bool List_FindKeyIterBwd (const struct List *list, struct data_t *data, union adt_t key, size_t count, KeyCmp func, ptr_t *iter);
 
 // Keys set searching
 bool List_FindKeysFwd (struct List *list, struct data_t *data, const union adt_t keys[], size_t size, size_t count, KeyCmp func);
 bool List_FindKeysBwd (struct List *list, struct data_t *data, const union adt_t keys[], size_t size, size_t count, KeyCmp func);
+bool List_FindKeysIterFwd (const struct List *list, struct data_t *data, const union adt_t keys[], size_t size, size_t count, KeyCmp func, ptr_t *iter);
+bool List_FindKeysIterBwd (const struct List *list, struct data_t *data, const union adt_t keys[], size_t size, size_t count, KeyCmp func, ptr_t *iter);
 
 //****************************************************************************//
 //      Duplicates searching                                                  //
 //****************************************************************************//
 bool List_FindDupFwd (struct List *list, struct data_t *data, KeyCmp func);
 bool List_FindDupBwd (struct List *list, struct data_t *data, KeyCmp func);
+bool List_FindDupIterFwd (const struct List *list, struct data_t *data, KeyCmp func, ptr_t *iter);
+bool List_FindDupIterBwd (const struct List *list, struct data_t *data, KeyCmp func, ptr_t *iter);
 
 //****************************************************************************//
 //      Unordered elements searching                                          //
@@ -501,16 +569,22 @@ bool List_FindDupBwd (struct List *list, struct data_t *data, KeyCmp func);
 // Ascending sort order
 bool List_FindNonAscFwd (struct List *list, struct data_t *data, KeyCmp func);
 bool List_FindNonAscBwd (struct List *list, struct data_t *data, KeyCmp func);
+bool List_FindNonAscIterFwd (const struct List *list, struct data_t *data, KeyCmp func, ptr_t *iter);
+bool List_FindNonAscIterBwd (const struct List *list, struct data_t *data, KeyCmp func, ptr_t *iter);
 
 // Descending sort order
 bool List_FindNonDscFwd (struct List *list, struct data_t *data, KeyCmp func);
 bool List_FindNonDscBwd (struct List *list, struct data_t *data, KeyCmp func);
+bool List_FindNonDscIterFwd (const struct List *list, struct data_t *data, KeyCmp func, ptr_t *iter);
+bool List_FindNonDscIterBwd (const struct List *list, struct data_t *data, KeyCmp func, ptr_t *iter);
 
 //****************************************************************************//
 //      Searching for differences                                             //
 //****************************************************************************//
 bool List_FindDiffFwd (struct List *list, struct data_t *data, const struct List *source, size_t count, KeyCmp func);
 bool List_FindDiffBwd (struct List *list, struct data_t *data, const struct List *source, size_t count, KeyCmp func);
+bool List_FindDiffIterFwd (const struct List *list, struct data_t *data, const struct List *source, size_t count, KeyCmp func, ptr_t *titer, ptr_t siter);
+bool List_FindDiffIterBwd (const struct List *list, struct data_t *data, const struct List *source, size_t count, KeyCmp func, ptr_t *titer, ptr_t siter);
 
 //****************************************************************************//
 //      Key counting                                                          //
@@ -519,10 +593,14 @@ bool List_FindDiffBwd (struct List *list, struct data_t *data, const struct List
 // Single key counting
 size_t List_CountKeyFwd (const struct List *list, union adt_t key, size_t count, KeyCmp func);
 size_t List_CountKeyBwd (const struct List *list, union adt_t key, size_t count, KeyCmp func);
+size_t List_CountKeyIterFwd (const struct List *list, union adt_t key, size_t count, KeyCmp func, ptr_t *iter);
+size_t List_CountKeyIterBwd (const struct List *list, union adt_t key, size_t count, KeyCmp func, ptr_t *iter);
 
 // Keys set counting
 size_t List_CountKeysFwd (const struct List *list, const union adt_t keys[], size_t size, size_t count, KeyCmp func);
 size_t List_CountKeysBwd (const struct List *list, const union adt_t keys[], size_t size, size_t count, KeyCmp func);
+size_t List_CountKeysIterFwd (const struct List *list, const union adt_t keys[], size_t size, size_t count, KeyCmp func, ptr_t *iter);
+size_t List_CountKeysIterBwd (const struct List *list, const union adt_t keys[], size_t size, size_t count, KeyCmp func, ptr_t *iter);
 
 //****************************************************************************//
 //      Sorting                                                               //

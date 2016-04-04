@@ -4,7 +4,7 @@
 #                                                                              #
 #                         UNIQUE KEYS B-TREE DATA TYPE                         #
 #                                                                              #
-# License: LGPLv3+                               Copyleft (Ɔ) 2015, Jack Black #
+# License: LGPLv3+                               Copyleft (Ɔ) 2016, Jack Black #
 ################################################################################
 */
 # pragma	once
@@ -98,6 +98,7 @@ bool GetIndex (data_t *data, size_t index) const;
 // Using iterators
 bool GetFwd (data_t *data) const;
 bool GetBwd (data_t *data) const;
+bool GetIter (data_t *data, ptr_t iter) const;
 
 //****************************************************************************//
 //      Replacing element value                                               //
@@ -150,6 +151,24 @@ bool BwdGoNext (size_t pos);
 bool BwdGoPrev (size_t pos);
 
 //****************************************************************************//
+//      Manipulation with external iterator                                   //
+//****************************************************************************//
+
+// Set iterator position
+ptr_t IterToIndex (size_t index) const;
+ptr_t IterToMin (void) const;
+ptr_t IterToMax (void) const;
+ptr_t IterToFwd (void) const;
+ptr_t IterToBwd (void) const;
+
+// Get iterator position
+size_t GetIterPos (ptr_t iter) const;
+
+// Change iterator position
+bool IterGoFwd (size_t pos, ptr_t *iter) const;
+bool IterGoBwd (size_t pos, ptr_t *iter) const;
+
+//****************************************************************************//
 //      Swapping iterators                                                    //
 //****************************************************************************//
 void SwapFwdBwd (void);
@@ -161,10 +180,14 @@ void SwapFwdBwd (void);
 // Minimum value
 bool MinFwd (data_t *data);
 bool MinBwd (data_t *data);
+bool MinIterFwd (data_t *data, ptr_t *iter) const;
+bool MinIterBwd (data_t *data, ptr_t *iter) const;
 
 // Maximum value
 bool MaxFwd (data_t *data);
 bool MaxBwd (data_t *data);
+bool MaxIterFwd (data_t *data, ptr_t *iter) const;
+bool MaxIterBwd (data_t *data, ptr_t *iter) const;
 
 //****************************************************************************//
 //      Key searching                                                         //
@@ -177,28 +200,36 @@ bool MaxBwd (data_t *data);
 // Searching for equal key
 bool FindEqualFwd (data_t *data, adt_t key);
 bool FindEqualBwd (data_t *data, adt_t key);
+bool FindEqualIterFwd (data_t *data, adt_t key, ptr_t *iter) const;
+bool FindEqualIterBwd (data_t *data, adt_t key, ptr_t *iter) const;
 
 // Searching for greater key
 bool FindGreatFwd (data_t *data, adt_t key);
 bool FindGreatBwd (data_t *data, adt_t key);
+bool FindGreatIter (data_t *data, adt_t key, ptr_t *iter) const;
 
 // Searching for greater or equal key
 bool FindGreatOrEqualFwd (data_t *data, adt_t key);
 bool FindGreatOrEqualBwd (data_t *data, adt_t key);
+bool FindGreatOrEqualIter (data_t *data, adt_t key, ptr_t *iter) const;
 
 // Searching for less key
 bool FindLessFwd (data_t *data, adt_t key);
 bool FindLessBwd (data_t *data, adt_t key);
+bool FindLessIter (data_t *data, adt_t key, ptr_t *iter) const;
 
 // Searching for less or equal key
 bool FindLessOrEqualFwd (data_t *data, adt_t key);
 bool FindLessOrEqualBwd (data_t *data, adt_t key);
+bool FindLessOrEqualIter (data_t *data, adt_t key, ptr_t *iter) const;
 
 //****************************************************************************//
 //      Searching for differences                                             //
 //****************************************************************************//
-bool FindDiffFwd (data_t *data, const UniqueTree *source, ize_t count);
+bool FindDiffFwd (data_t *data, const UniqueTree *source, size_t count);
 bool FindDiffBwd (data_t *data, const UniqueTree *source, size_t count);
+bool FindDiffIterFwd (data_t *data, const UniqueTree *source, size_t count, ptr_t *titer, ptr_t siter) const;
+bool FindDiffIterBwd (data_t *data, const UniqueTree *source, size_t count, ptr_t *titer, ptr_t siter) const;
 
 //****************************************************************************//
 //      Key counting                                                          //
@@ -312,6 +343,7 @@ bool UniqueTree_GetIndex (const struct UniqueTree *tree, struct data_t *data, si
 // Using iterators
 bool UniqueTree_GetFwd (const struct UniqueTree *tree, struct data_t *data);
 bool UniqueTree_GetBwd (const struct UniqueTree *tree, struct data_t *data);
+bool UniqueTree_GetIter (const struct UniqueTree *tree, struct data_t *data, ptr_t iter);
 
 //****************************************************************************//
 //      Replacing element value                                               //
@@ -364,6 +396,24 @@ bool UniqueTree_BwdGoNext (struct UniqueTree *tree, size_t pos);
 bool UniqueTree_BwdGoPrev (struct UniqueTree *tree, size_t pos);
 
 //****************************************************************************//
+//      Manipulation with external iterator                                   //
+//****************************************************************************//
+
+// Set iterator position
+ptr_t UniqueTree_IterToIndex (const struct UniqueTree *tree, size_t index);
+ptr_t UniqueTree_IterToMin (const struct UniqueTree *tree);
+ptr_t UniqueTree_IterToMax (const struct UniqueTree *tree);
+ptr_t UniqueTree_IterToFwd (const struct UniqueTree *tree);
+ptr_t UniqueTree_IterToBwd (const struct UniqueTree *tree);
+
+// Get iterator position
+size_t UniqueTree_GetIterPos (const struct UniqueTree *tree, ptr_t iter);
+
+// Change iterator position
+bool UniqueTree_IterGoFwd (const struct UniqueTree *tree, size_t pos, ptr_t *iter);
+bool UniqueTree_IterGoBwd (const struct UniqueTree *tree, size_t pos, ptr_t *iter);
+
+//****************************************************************************//
 //      Swapping iterators                                                    //
 //****************************************************************************//
 void UniqueTree_SwapFwdBwd (struct UniqueTree *tree);
@@ -375,10 +425,14 @@ void UniqueTree_SwapFwdBwd (struct UniqueTree *tree);
 // Minimum value
 bool UniqueTree_MinFwd (struct UniqueTree *tree, struct data_t *data);
 bool UniqueTree_MinBwd (struct UniqueTree *tree, struct data_t *data);
+bool UniqueTree_MinIterFwd (const struct UniqueTree *tree, struct data_t *data, ptr_t *iter);
+bool UniqueTree_MinIterBwd (const struct UniqueTree *tree, struct data_t *data, ptr_t *iter);
 
 // Maximum value
 bool UniqueTree_MaxFwd (struct UniqueTree *tree, struct data_t *data);
 bool UniqueTree_MaxBwd (struct UniqueTree *tree, struct data_t *data);
+bool UniqueTree_MaxIterFwd (const struct UniqueTree *tree, struct data_t *data, ptr_t *iter);
+bool UniqueTree_MaxIterBwd (const struct UniqueTree *tree, struct data_t *data, ptr_t *iter);
 
 //****************************************************************************//
 //      Key searching                                                         //
@@ -391,28 +445,36 @@ bool UniqueTree_MaxBwd (struct UniqueTree *tree, struct data_t *data);
 // Searching for equal key
 bool UniqueTree_FindEqualFwd (struct UniqueTree *tree, struct data_t *data, union adt_t key);
 bool UniqueTree_FindEqualBwd (struct UniqueTree *tree, struct data_t *data, union adt_t key);
+bool UniqueTree_FindEqualIterFwd (const struct UniqueTree *tree, struct data_t *data, union adt_t key, ptr_t *iter);
+bool UniqueTree_FindEqualIterBwd (const struct UniqueTree *tree, struct data_t *data, union adt_t key, ptr_t *iter);
 
 // Searching for greater key
 bool UniqueTree_FindGreatFwd (struct UniqueTree *tree, struct data_t *data, union adt_t key);
 bool UniqueTree_FindGreatBwd (struct UniqueTree *tree, struct data_t *data, union adt_t key);
+bool UniqueTree_FindGreatIter (const struct UniqueTree *tree, struct data_t *data, union adt_t key, ptr_t *iter);
 
 // Searching for greater or equal key
 bool UniqueTree_FindGreatOrEqualFwd (struct UniqueTree *tree, struct data_t *data, union adt_t key);
 bool UniqueTree_FindGreatOrEqualBwd (struct UniqueTree *tree, struct data_t *data, union adt_t key);
+bool UniqueTree_FindGreatOrEqualIter (const struct UniqueTree *tree, struct data_t *data, union adt_t key, ptr_t *iter);
 
 // Searching for less key
 bool UniqueTree_FindLessFwd (struct UniqueTree *tree, struct data_t *data, union adt_t key);
 bool UniqueTree_FindLessBwd (struct UniqueTree *tree, struct data_t *data, union adt_t key);
+bool UniqueTree_FindLessIter (const struct UniqueTree *tree, struct data_t *data, union adt_t key, ptr_t *iter);
 
 // Searching for less or equal key
 bool UniqueTree_FindLessOrEqualFwd (struct UniqueTree *tree, struct data_t *data, union adt_t key);
 bool UniqueTree_FindLessOrEqualBwd (struct UniqueTree *tree, struct data_t *data, union adt_t key);
+bool UniqueTree_FindLessOrEqualIter (const struct UniqueTree *tree, struct data_t *data, union adt_t key, ptr_t *iter);
 
 //****************************************************************************//
 //      Searching for differences                                             //
 //****************************************************************************//
 bool UniqueTree_FindDiffFwd (struct UniqueTree *tree, struct data_t *data, const struct UniqueTree *source, size_t count);
 bool UniqueTree_FindDiffBwd (struct UniqueTree *tree, struct data_t *data, const struct UniqueTree *source, size_t count);
+bool UniqueTree_FindDiffIterFwd (const struct UniqueTree *tree, struct data_t *data, const struct UniqueTree *source, size_t count, ptr_t *titer, ptr_t siter);
+bool UniqueTree_FindDiffIterBwd (const struct UniqueTree *tree, struct data_t *data, const struct UniqueTree *source, size_t count, ptr_t *titer, ptr_t siter);
 
 //****************************************************************************//
 //      Key counting                                                          //

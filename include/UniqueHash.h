@@ -4,7 +4,7 @@
 #                                                                              #
 #                       UNIQUE KEYS HASH TABLE DATA TYPE                       #
 #                                                                              #
-# License: LGPLv3+                               Copyleft (Ɔ) 2015, Jack Black #
+# License: LGPLv3+                               Copyleft (Ɔ) 2016, Jack Black #
 ################################################################################
 */
 # pragma	once
@@ -70,6 +70,7 @@ bool SetBwd (const data_t *data);
 //****************************************************************************//
 bool GetFwd (data_t *data) const;
 bool GetBwd (data_t *data) const;
+bool GetIter (data_t *data, ptr_t iter) const;
 
 //****************************************************************************//
 //      Replacing element value                                               //
@@ -109,6 +110,20 @@ bool BwdGoNext (size_t pos);
 bool BwdGoPrev (size_t pos);
 
 //****************************************************************************//
+//      Manipulation with external iterator                                   //
+//****************************************************************************//
+
+// Set iterator position
+ptr_t IterToHead (void) const;
+ptr_t IterToTail (void) const;
+ptr_t IterToFwd (void) const;
+ptr_t IterToBwd (void) const;
+
+// Change iterator position
+bool IterGoFwd (size_t pos, ptr_t *iter) const;
+bool IterGoBwd (size_t pos, ptr_t *iter) const;
+
+//****************************************************************************//
 //      Swapping iterators                                                    //
 //****************************************************************************//
 void SwapFwdBwd (void);
@@ -120,10 +135,14 @@ void SwapFwdBwd (void);
 // Minimum value
 bool MinFwd (data_t *data);
 bool MinBwd (data_t *data);
+bool MinIterFwd (data_t *data, ptr_t *iter) const;
+bool MinIterBwd (data_t *data, ptr_t *iter) const;
 
 // Maximum value
 bool MaxFwd (data_t *data);
 bool MaxBwd (data_t *data);
+bool MaxIterFwd (data_t *data, ptr_t *iter) const;
+bool MaxIterBwd (data_t *data, ptr_t *iter) const;
 
 //****************************************************************************//
 //      Key searching                                                         //
@@ -132,10 +151,14 @@ bool MaxBwd (data_t *data);
 // Single key searching
 bool FindKeyFwd (data_t *data, adt_t key);
 bool FindKeyBwd (data_t *data, adt_t key);
+bool FindKeyIterFwd (data_t *data, adt_t key, ptr_t *iter) const;
+bool FindKeyIterBwd (data_t *data, adt_t key, ptr_t *iter) const;
 
 // Keys set searching
 bool FindKeysFwd (data_t *data, const adt_t keys[], size_t size);
 bool FindKeysBwd (data_t *data, const adt_t keys[], size_t size);
+bool FindKeysIterFwd (data_t *data, const adt_t keys[], size_t size, ptr_t *iter) const;
+bool FindKeysIterBwd (data_t *data, const adt_t keys[], size_t size, ptr_t *iter) const;
 
 //****************************************************************************//
 //      Key counting                                                          //
@@ -211,6 +234,7 @@ bool UniqueHash_SetBwd (struct UniqueHash *hash, const struct data_t *data);
 //****************************************************************************//
 bool UniqueHash_GetFwd (const struct UniqueHash *hash, struct data_t *data);
 bool UniqueHash_GetBwd (const struct UniqueHash *hash, struct data_t *data);
+bool UniqueHash_GetIter (const struct UniqueHash *hash, struct data_t *data, ptr_t iter);
 
 //****************************************************************************//
 //      Replacing element value                                               //
@@ -250,6 +274,20 @@ bool UniqueHash_BwdGoNext (struct UniqueHash *hash, size_t pos);
 bool UniqueHash_BwdGoPrev (struct UniqueHash *hash, size_t pos);
 
 //****************************************************************************//
+//      Manipulation with external iterator                                   //
+//****************************************************************************//
+
+// Set iterator position
+ptr_t UniqueHash_IterToHead (const struct UniqueHash *hash);
+ptr_t UniqueHash_IterToTail (const struct UniqueHash *hash);
+ptr_t UniqueHash_IterToFwd (const struct UniqueHash *hash);
+ptr_t UniqueHash_IterToBwd (const struct UniqueHash *hash);
+
+// Change iterator position
+bool UniqueHash_IterGoFwd (const struct UniqueHash *hash, size_t pos, ptr_t *iter);
+bool UniqueHash_IterGoBwd (const struct UniqueHash *hash, size_t pos, ptr_t *iter);
+
+//****************************************************************************//
 //      Swapping iterators                                                    //
 //****************************************************************************//
 void UniqueHash_SwapFwdBwd (struct UniqueHash *hash);
@@ -261,10 +299,14 @@ void UniqueHash_SwapFwdBwd (struct UniqueHash *hash);
 // Minimum value
 bool UniqueHash_MinFwd (struct UniqueHash *hash, struct data_t *data);
 bool UniqueHash_MinBwd (struct UniqueHash *hash, struct data_t *data);
+bool UniqueHash_MinIterFwd (const struct UniqueHash *hash, struct data_t *data, ptr_t *iter);
+bool UniqueHash_MinIterBwd (const struct UniqueHash *hash, struct data_t *data, ptr_t *iter);
 
 // Maximum value
 bool UniqueHash_MaxFwd (struct UniqueHash *hash, struct data_t *data);
 bool UniqueHash_MaxBwd (struct UniqueHash *hash, struct data_t *data);
+bool UniqueHash_MaxIterFwd (const struct UniqueHash *hash, struct data_t *data, ptr_t *iter);
+bool UniqueHash_MaxIterBwd (const struct UniqueHash *hash, struct data_t *data, ptr_t *iter);
 
 //****************************************************************************//
 //      Key searching                                                         //
@@ -273,10 +315,14 @@ bool UniqueHash_MaxBwd (struct UniqueHash *hash, struct data_t *data);
 // Single key searching
 bool UniqueHash_FindKeyFwd (struct UniqueHash *hash, struct data_t *data, union adt_t key);
 bool UniqueHash_FindKeyBwd (struct UniqueHash *hash, struct data_t *data, union adt_t key);
+bool UniqueHash_FindKeyIterFwd (const struct UniqueHash *hash, struct data_t *data, union adt_t key, ptr_t *iter);
+bool UniqueHash_FindKeyIterBwd (const struct UniqueHash *hash, struct data_t *data, union adt_t key, ptr_t *iter);
 
 // Keys set searching
 bool UniqueHash_FindKeysFwd (struct UniqueHash *hash, struct data_t *data, const union adt_t keys[], size_t size);
 bool UniqueHash_FindKeysBwd (struct UniqueHash *hash, struct data_t *data, const union adt_t keys[], size_t size);
+bool UniqueHash_FindKeysIterFwd (const struct UniqueHash *hash, struct data_t *data, const union adt_t keys[], size_t size, ptr_t *iter);
+bool UniqueHash_FindKeysIterBwd (const struct UniqueHash *hash, struct data_t *data, const union adt_t keys[], size_t size, ptr_t *iter);
 
 //****************************************************************************//
 //      Key counting                                                          //

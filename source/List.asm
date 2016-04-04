@@ -4,7 +4,7 @@
 ;#                                                                             #
 ;#               DOUBLY LINKED LIST AND CIRCULAR LIST DATA TYPES               #
 ;#                                                                             #
-;# License: LGPLv3+                              Copyleft (Ɔ) 2015, Jack Black #
+;# License: LGPLv3+                              Copyleft (Ɔ) 2016, Jack Black #
 ;###############################################################################
 format	ELF64
 include	'Macro.inc'
@@ -230,6 +230,12 @@ public	GetBwd				as	'Ring_GetBwd'
 public	GetBwd				as	'_ZNK4List6GetBwdEP6data_t'
 public	GetBwd				as	'_ZNK4Ring6GetBwdEP6data_t'
 
+; Get element which is pointed by external iterator
+public	GetIter				as	'List_GetIter'
+public	GetIter				as	'Ring_GetIter'
+public	GetIter				as	'_ZNK4List7GetIterEP6data_tl'
+public	GetIter				as	'_ZNK4Ring7GetIterEP6data_tl'
+
 ;******************************************************************************;
 ;       Replacing element value                                                ;
 ;******************************************************************************;
@@ -298,35 +304,55 @@ public	Swap				as	'_ZN4Ring4SwapEv'
 ;       Manipulation with forward iterator                                     ;
 ;******************************************************************************;
 
-; Set iterator position
+;==============================================================================;
+;       Set iterator position                                                  ;
+;==============================================================================;
+
+; By index
 public	FwdToIndex			as	'List_FwdToIndex'
 public	FwdToIndex			as	'Ring_FwdToIndex'
-public	FwdToHead			as	'List_FwdToHead'
-public	FwdToHead			as	'Ring_FwdToLink'
-public	FwdToTail			as	'List_FwdToTail'
-public	FwdToBwd			as	'List_FwdToBwd'
-public	FwdToBwd			as	'Ring_FwdToBwd'
 public	FwdToIndex			as	'_ZN4List10FwdToIndexEm'
 public	FwdToIndex			as	'_ZN4Ring10FwdToIndexEm'
+
+; To head element
+public	FwdToHead			as	'List_FwdToHead'
 public	FwdToHead			as	'_ZN4List9FwdToHeadEv'
-public	FwdToHead			as	'_ZN4Ring9FwdToLinkEv'
+
+; To tail element
+public	FwdToTail			as	'List_FwdToTail'
 public	FwdToTail			as	'_ZN4List9FwdToTailEv'
+
+; To link element
+public	FwdToHead			as	'Ring_FwdToLink'
+public	FwdToHead			as	'_ZN4Ring9FwdToLinkEv'
+
+; To backward iterator
+public	FwdToBwd			as	'List_FwdToBwd'
+public	FwdToBwd			as	'Ring_FwdToBwd'
 public	FwdToBwd			as	'_ZN4List8FwdToBwdEv'
 public	FwdToBwd			as	'_ZN4Ring8FwdToBwdEv'
 
-; Get iterator position
+;==============================================================================;
+;       Get iterator position                                                  ;
+;==============================================================================;
 public	GetFwdPos			as	'List_GetFwdPos'
 public	GetFwdPos			as	'Ring_GetFwdPos'
 public	GetFwdPos			as	'_ZNK4List9GetFwdPosEv'
 public	GetFwdPos			as	'_ZNK4Ring9GetFwdPosEv'
 
-; Change iterator position
+;==============================================================================;
+;       Change iterator position                                               ;
+;==============================================================================;
+
+; Move to next position
 public	FwdGoNext			as	'List_FwdGoNext'
 public	FwdGoNext			as	'Ring_FwdGoNext'
-public	FwdGoPrev			as	'List_FwdGoPrev'
-public	FwdGoPrev			as	'Ring_FwdGoPrev'
 public	FwdGoNext			as	'_ZN4List9FwdGoNextEm'
 public	FwdGoNext			as	'_ZN4Ring9FwdGoNextEm'
+
+; Move to prev position
+public	FwdGoPrev			as	'List_FwdGoPrev'
+public	FwdGoPrev			as	'Ring_FwdGoPrev'
 public	FwdGoPrev			as	'_ZN4List9FwdGoPrevEm'
 public	FwdGoPrev			as	'_ZN4Ring9FwdGoPrevEm'
 
@@ -334,37 +360,119 @@ public	FwdGoPrev			as	'_ZN4Ring9FwdGoPrevEm'
 ;       Manipulation with backward iterator                                    ;
 ;******************************************************************************;
 
-; Set iterator position
+;==============================================================================;
+;       Set iterator position                                                  ;
+;==============================================================================;
+
+; By index
 public	BwdToIndex			as	'List_BwdToIndex'
 public	BwdToIndex			as	'Ring_BwdToIndex'
-public	BwdToHead			as	'List_BwdToHead'
-public	BwdToHead			as	'Ring_BwdToLink'
-public	BwdToTail			as	'List_BwdToTail'
-public	BwdToFwd			as	'List_BwdToFwd'
-public	BwdToFwd			as	'Ring_BwdToFwd'
 public	BwdToIndex			as	'_ZN4List10BwdToIndexEm'
 public	BwdToIndex			as	'_ZN4Ring10BwdToIndexEm'
+
+; To head element
+public	BwdToHead			as	'List_BwdToHead'
 public	BwdToHead			as	'_ZN4List9BwdToHeadEv'
-public	BwdToHead			as	'_ZN4Ring9BwdToLinkEv'
+
+; To tail element
+public	BwdToTail			as	'List_BwdToTail'
 public	BwdToTail			as	'_ZN4List9BwdToTailEv'
+
+; To link element
+public	BwdToHead			as	'Ring_BwdToLink'
+public	BwdToHead			as	'_ZN4Ring9BwdToLinkEv'
+
+; To forward iterator
+public	BwdToFwd			as	'List_BwdToFwd'
+public	BwdToFwd			as	'Ring_BwdToFwd'
 public	BwdToFwd			as	'_ZN4List8BwdToFwdEv'
 public	BwdToFwd			as	'_ZN4Ring8BwdToFwdEv'
 
-; Get iterator position
+;==============================================================================;
+;       Get iterator position                                                  ;
+;==============================================================================;
 public	GetBwdPos			as	'List_GetBwdPos'
 public	GetBwdPos			as	'Ring_GetBwdPos'
 public	GetBwdPos			as	'_ZNK4List9GetBwdPosEv'
 public	GetBwdPos			as	'_ZNK4Ring9GetBwdPosEv'
 
-; Change iterator position
+;==============================================================================;
+;       Change iterator position                                               ;
+;==============================================================================;
+
+; Move to next position
 public	BwdGoNext			as	'List_BwdGoNext'
 public	BwdGoNext			as	'Ring_BwdGoNext'
-public	BwdGoPrev			as	'List_BwdGoPrev'
-public	BwdGoPrev			as	'Ring_BwdGoPrev'
 public	BwdGoNext			as	'_ZN4List9BwdGoNextEm'
 public	BwdGoNext			as	'_ZN4Ring9BwdGoNextEm'
+
+; Move to prev position
+public	BwdGoPrev			as	'List_BwdGoPrev'
+public	BwdGoPrev			as	'Ring_BwdGoPrev'
 public	BwdGoPrev			as	'_ZN4List9BwdGoPrevEm'
 public	BwdGoPrev			as	'_ZN4Ring9BwdGoPrevEm'
+
+;******************************************************************************;
+;       Manipulation with external iterator                                    ;
+;******************************************************************************;
+
+;==============================================================================;
+;       Set iterator position                                                  ;
+;==============================================================================;
+
+; By index
+public	IterToIndex			as	'List_IterToIndex'
+public	IterToIndex			as	'Ring_IterToIndex'
+public	IterToIndex			as	'_ZNK4List11IterToIndexEm'
+public	IterToIndex			as	'_ZNK4Ring11IterToIndexEm'
+
+; To head element
+public	IterToHead			as	'List_IterToHead'
+public	IterToHead			as	'_ZNK4List10IterToHeadEv'
+
+; To tail element
+public	IterToTail			as	'List_IterToTail'
+public	IterToTail			as	'_ZNK4List10IterToTailEv'
+
+; To link element
+public	IterToHead			as	'Ring_IterToLink'
+public	IterToHead			as	'_ZNK4Ring10IterToLinkEv'
+
+; To forward iterator
+public	IterToFwd			as	'List_IterToFwd'
+public	IterToFwd			as	'Ring_IterToFwd'
+public	IterToFwd			as	'_ZNK4List9IterToFwdEv'
+public	IterToFwd			as	'_ZNK4Ring9IterToFwdEv'
+
+; To backward iterator
+public	IterToBwd			as	'List_IterToBwd'
+public	IterToBwd			as	'Ring_IterToBwd'
+public	IterToBwd			as	'_ZNK4List9IterToBwdEv'
+public	IterToBwd			as	'_ZNK4Ring9IterToBwdEv'
+
+;==============================================================================;
+;       Get iterator position                                                  ;
+;==============================================================================;
+public	GetIterPos			as	'List_GetIterPos'
+public	GetIterPos			as	'Ring_GetIterPos'
+public	GetIterPos			as	'_ZNK4List10GetIterPosEl'
+public	GetIterPos			as	'_ZNK4Ring10GetIterPosEl'
+
+;==============================================================================;
+;       Change iterator position                                               ;
+;==============================================================================;
+
+; Move in forward direction
+public	IterGoFwd			as	'List_IterGoFwd'
+public	IterGoFwd			as	'Ring_IterGoFwd'
+public	IterGoFwd			as	'_ZNK4List9IterGoFwdEmPl'
+public	IterGoFwd			as	'_ZNK4Ring9IterGoFwdEmPl'
+
+; Move in backward direction
+public	IterGoBwd			as	'List_IterGoBwd'
+public	IterGoBwd			as	'Ring_IterGoBwd'
+public	IterGoBwd			as	'_ZNK4List9IterGoBwdEmPl'
+public	IterGoBwd			as	'_ZNK4Ring9IterGoBwdEmPl'
 
 ;******************************************************************************;
 ;       Swapping iterators                                                     ;
@@ -383,20 +491,36 @@ public	MinFwd				as	'List_MinFwd'
 public	MinFwd				as	'Ring_MinFwd'
 public	MinBwd				as	'List_MinBwd'
 public	MinBwd				as	'Ring_MinBwd'
+public	MinIterFwd			as	'List_MinIterFwd'
+public	MinIterFwd			as	'Ring_MinIterFwd'
+public	MinIterBwd			as	'List_MinIterBwd'
+public	MinIterBwd			as	'Ring_MinIterBwd'
 public	MinFwd				as	'_ZN4List6MinFwdEP6data_tmPFx5adt_tS2_E'
 public	MinFwd				as	'_ZN4Ring6MinFwdEP6data_tmPFx5adt_tS2_E'
 public	MinBwd				as	'_ZN4List6MinBwdEP6data_tmPFx5adt_tS2_E'
 public	MinBwd				as	'_ZN4Ring6MinBwdEP6data_tmPFx5adt_tS2_E'
+public	MinIterFwd			as	'_ZNK4List10MinIterFwdEP6data_tmPFx5adt_tS2_EPl'
+public	MinIterFwd			as	'_ZNK4Ring10MinIterFwdEP6data_tmPFx5adt_tS2_EPl'
+public	MinIterBwd			as	'_ZNK4List10MinIterBwdEP6data_tmPFx5adt_tS2_EPl'
+public	MinIterBwd			as	'_ZNK4Ring10MinIterBwdEP6data_tmPFx5adt_tS2_EPl'
 
 ; Maximum value
 public	MaxFwd				as	'List_MaxFwd'
 public	MaxFwd				as	'Ring_MaxFwd'
 public	MaxBwd				as	'List_MaxBwd'
 public	MaxBwd				as	'Ring_MaxBwd'
+public	MaxIterFwd			as	'List_MaxIterFwd'
+public	MaxIterFwd			as	'Ring_MaxIterFwd'
+public	MaxIterBwd			as	'List_MaxIterBwd'
+public	MaxIterBwd			as	'Ring_MaxIterBwd'
 public	MaxFwd				as	'_ZN4List6MaxFwdEP6data_tmPFx5adt_tS2_E'
 public	MaxFwd				as	'_ZN4Ring6MaxFwdEP6data_tmPFx5adt_tS2_E'
 public	MaxBwd				as	'_ZN4List6MaxBwdEP6data_tmPFx5adt_tS2_E'
 public	MaxBwd				as	'_ZN4Ring6MaxBwdEP6data_tmPFx5adt_tS2_E'
+public	MaxIterFwd			as	'_ZNK4List10MaxIterFwdEP6data_tmPFx5adt_tS2_EPl'
+public	MaxIterFwd			as	'_ZNK4Ring10MaxIterFwdEP6data_tmPFx5adt_tS2_EPl'
+public	MaxIterBwd			as	'_ZNK4List10MaxIterBwdEP6data_tmPFx5adt_tS2_EPl'
+public	MaxIterBwd			as	'_ZNK4Ring10MaxIterBwdEP6data_tmPFx5adt_tS2_EPl'
 
 ;******************************************************************************;
 ;       Key searching                                                          ;
@@ -407,20 +531,36 @@ public	FindKeyFwd			as	'List_FindKeyFwd'
 public	FindKeyFwd			as	'Ring_FindKeyFwd'
 public	FindKeyBwd			as	'List_FindKeyBwd'
 public	FindKeyBwd			as	'Ring_FindKeyBwd'
+public	FindKeyIterFwd		as	'List_FindKeyIterFwd'
+public	FindKeyIterFwd		as	'Ring_FindKeyIterFwd'
+public	FindKeyIterBwd		as	'List_FindKeyIterBwd'
+public	FindKeyIterBwd		as	'Ring_FindKeyIterBwd'
 public	FindKeyFwd			as	'_ZN4List10FindKeyFwdEP6data_t5adt_tmPFxS2_S2_E'
 public	FindKeyFwd			as	'_ZN4Ring10FindKeyFwdEP6data_t5adt_tmPFxS2_S2_E'
 public	FindKeyBwd			as	'_ZN4List10FindKeyBwdEP6data_t5adt_tmPFxS2_S2_E'
 public	FindKeyBwd			as	'_ZN4Ring10FindKeyBwdEP6data_t5adt_tmPFxS2_S2_E'
+public	FindKeyIterFwd		as	'_ZNK4List14FindKeyIterFwdEP6data_t5adt_tmPFxS2_S2_EPl'
+public	FindKeyIterFwd		as	'_ZNK4Ring14FindKeyIterFwdEP6data_t5adt_tmPFxS2_S2_EPl'
+public	FindKeyIterBwd		as	'_ZNK4List14FindKeyIterBwdEP6data_t5adt_tmPFxS2_S2_EPl'
+public	FindKeyIterBwd		as	'_ZNK4Ring14FindKeyIterBwdEP6data_t5adt_tmPFxS2_S2_EPl'
 
 ; Keys set searching
 public	FindKeysFwd			as	'List_FindKeysFwd'
 public	FindKeysFwd			as	'Ring_FindKeysFwd'
 public	FindKeysBwd			as	'List_FindKeysBwd'
 public	FindKeysBwd			as	'Ring_FindKeysBwd'
+public	FindKeysIterFwd		as	'List_FindKeysIterFwd'
+public	FindKeysIterFwd		as	'Ring_FindKeysIterFwd'
+public	FindKeysIterBwd		as	'List_FindKeysIterBwd'
+public	FindKeysIterBwd		as	'Ring_FindKeysIterBwd'
 public	FindKeysFwd			as	'_ZN4List11FindKeysFwdEP6data_tPK5adt_tmmPFxS2_S2_E'
 public	FindKeysFwd			as	'_ZN4Ring11FindKeysFwdEP6data_tPK5adt_tmmPFxS2_S2_E'
 public	FindKeysBwd			as	'_ZN4List11FindKeysBwdEP6data_tPK5adt_tmmPFxS2_S2_E'
 public	FindKeysBwd			as	'_ZN4Ring11FindKeysBwdEP6data_tPK5adt_tmmPFxS2_S2_E'
+public	FindKeysIterFwd		as	'_ZNK4List15FindKeysIterFwdEP6data_tPK5adt_tmmPFxS2_S2_EPl'
+public	FindKeysIterFwd		as	'_ZNK4Ring15FindKeysIterFwdEP6data_tPK5adt_tmmPFxS2_S2_EPl'
+public	FindKeysIterBwd		as	'_ZNK4List15FindKeysIterBwdEP6data_tPK5adt_tmmPFxS2_S2_EPl'
+public	FindKeysIterBwd		as	'_ZNK4Ring15FindKeysIterBwdEP6data_tPK5adt_tmmPFxS2_S2_EPl'
 
 ;******************************************************************************;
 ;       Duplicates searching                                                   ;
@@ -429,10 +569,18 @@ public	FindDupFwd			as	'List_FindDupFwd'
 public	FindDupFwd			as	'Ring_FindDupFwd'
 public	FindDupBwd			as	'List_FindDupBwd'
 public	FindDupBwd			as	'Ring_FindDupBwd'
+public	FindDupIterFwd		as	'List_FindDupIterFwd'
+public	FindDupIterFwd		as	'Ring_FindDupIterFwd'
+public	FindDupIterBwd		as	'List_FindDupIterBwd'
+public	FindDupIterBwd		as	'Ring_FindDupIterBwd'
 public	FindDupFwd			as	'_ZN4List10FindDupFwdEP6data_tPFx5adt_tS2_E'
 public	FindDupFwd			as	'_ZN4Ring10FindDupFwdEP6data_tPFx5adt_tS2_E'
 public	FindDupBwd			as	'_ZN4List10FindDupBwdEP6data_tPFx5adt_tS2_E'
 public	FindDupBwd			as	'_ZN4Ring10FindDupBwdEP6data_tPFx5adt_tS2_E'
+public	FindDupIterFwd		as	'_ZNK4List14FindDupIterFwdEP6data_tPFx5adt_tS2_EPl'
+public	FindDupIterFwd		as	'_ZNK4Ring14FindDupIterFwdEP6data_tPFx5adt_tS2_EPl'
+public	FindDupIterBwd		as	'_ZNK4List14FindDupIterBwdEP6data_tPFx5adt_tS2_EPl'
+public	FindDupIterBwd		as	'_ZNK4Ring14FindDupIterBwdEP6data_tPFx5adt_tS2_EPl'
 
 ;******************************************************************************;
 ;       Unordered elements searching                                           ;
@@ -443,20 +591,36 @@ public	FindNonAscFwd		as	'List_FindNonAscFwd'
 public	FindNonAscFwd		as	'Ring_FindNonAscFwd'
 public	FindNonAscBwd		as	'List_FindNonAscBwd'
 public	FindNonAscBwd		as	'Ring_FindNonAscBwd'
+public	FindNonAscIterFwd	as	'List_FindNonAscIterFwd'
+public	FindNonAscIterFwd	as	'Ring_FindNonAscIterFwd'
+public	FindNonAscIterBwd	as	'List_FindNonAscIterBwd'
+public	FindNonAscIterBwd	as	'Ring_FindNonAscIterBwd'
 public	FindNonAscFwd		as	'_ZN4List13FindNonAscFwdEP6data_tPFx5adt_tS2_E'
 public	FindNonAscFwd		as	'_ZN4Ring13FindNonAscFwdEP6data_tPFx5adt_tS2_E'
 public	FindNonAscBwd		as	'_ZN4List13FindNonAscBwdEP6data_tPFx5adt_tS2_E'
 public	FindNonAscBwd		as	'_ZN4Ring13FindNonAscBwdEP6data_tPFx5adt_tS2_E'
+public	FindNonAscIterFwd	as	'_ZNK4List17FindNonAscIterFwdEP6data_tPFx5adt_tS2_EPl'
+public	FindNonAscIterFwd	as	'_ZNK4Ring17FindNonAscIterFwdEP6data_tPFx5adt_tS2_EPl'
+public	FindNonAscIterBwd	as	'_ZNK4List17FindNonAscIterBwdEP6data_tPFx5adt_tS2_EPl'
+public	FindNonAscIterBwd	as	'_ZNK4Ring17FindNonAscIterBwdEP6data_tPFx5adt_tS2_EPl'
 
 ; Descending sort order
 public	FindNonDscFwd		as	'List_FindNonDscFwd'
 public	FindNonDscFwd		as	'Ring_FindNonDscFwd'
 public	FindNonDscBwd		as	'List_FindNonDscBwd'
 public	FindNonDscBwd		as	'Ring_FindNonDscBwd'
+public	FindNonDscIterFwd	as	'List_FindNonDscIterFwd'
+public	FindNonDscIterFwd	as	'Ring_FindNonDscIterFwd'
+public	FindNonDscIterBwd	as	'List_FindNonDscIterBwd'
+public	FindNonDscIterBwd	as	'Ring_FindNonDscIterBwd'
 public	FindNonDscFwd		as	'_ZN4List13FindNonDscFwdEP6data_tPFx5adt_tS2_E'
 public	FindNonDscFwd		as	'_ZN4Ring13FindNonDscFwdEP6data_tPFx5adt_tS2_E'
 public	FindNonDscBwd		as	'_ZN4List13FindNonDscBwdEP6data_tPFx5adt_tS2_E'
 public	FindNonDscBwd		as	'_ZN4Ring13FindNonDscBwdEP6data_tPFx5adt_tS2_E'
+public	FindNonDscIterFwd	as	'_ZNK4List17FindNonDscIterFwdEP6data_tPFx5adt_tS2_EPl'
+public	FindNonDscIterFwd	as	'_ZNK4Ring17FindNonDscIterFwdEP6data_tPFx5adt_tS2_EPl'
+public	FindNonDscIterBwd	as	'_ZNK4List17FindNonDscIterBwdEP6data_tPFx5adt_tS2_EPl'
+public	FindNonDscIterBwd	as	'_ZNK4Ring17FindNonDscIterBwdEP6data_tPFx5adt_tS2_EPl'
 
 ;******************************************************************************;
 ;       Searching for differences                                              ;
@@ -465,10 +629,18 @@ public	FindDiffFwd			as	'List_FindDiffFwd'
 public	FindDiffFwd			as	'Ring_FindDiffFwd'
 public	FindDiffBwd			as	'List_FindDiffBwd'
 public	FindDiffBwd			as	'Ring_FindDiffBwd'
+public	FindDiffIterFwd		as	'List_FindDiffIterFwd'
+public	FindDiffIterFwd		as	'Ring_FindDiffIterFwd'
+public	FindDiffIterBwd		as	'List_FindDiffIterBwd'
+public	FindDiffIterBwd		as	'Ring_FindDiffIterBwd'
 public	FindDiffFwd			as	'_ZN4List11FindDiffFwdEP6data_tPKS_mPFx5adt_tS4_E'
 public	FindDiffFwd			as	'_ZN4Ring11FindDiffFwdEP6data_tPKS_mPFx5adt_tS4_E'
 public	FindDiffBwd			as	'_ZN4List11FindDiffBwdEP6data_tPKS_mPFx5adt_tS4_E'
 public	FindDiffBwd			as	'_ZN4Ring11FindDiffBwdEP6data_tPKS_mPFx5adt_tS4_E'
+public	FindDiffIterFwd		as	'_ZNK4List15FindDiffIterFwdEP6data_tPKS_mPFx5adt_tS4_EPll'
+public	FindDiffIterFwd		as	'_ZNK4Ring15FindDiffIterFwdEP6data_tPKS_mPFx5adt_tS4_EPll'
+public	FindDiffIterBwd		as	'_ZNK4List15FindDiffIterBwdEP6data_tPKS_mPFx5adt_tS4_EPll'
+public	FindDiffIterBwd		as	'_ZNK4Ring15FindDiffIterBwdEP6data_tPKS_mPFx5adt_tS4_EPll'
 
 ;******************************************************************************;
 ;       Key counting                                                           ;
@@ -479,20 +651,36 @@ public	CountKeyFwd			as	'List_CountKeyFwd'
 public	CountKeyFwd			as	'Ring_CountKeyFwd'
 public	CountKeyBwd			as	'List_CountKeyBwd'
 public	CountKeyBwd			as	'Ring_CountKeyBwd'
+public	CountKeyIterFwd		as	'List_CountKeyIterFwd'
+public	CountKeyIterFwd		as	'Ring_CountKeyIterFwd'
+public	CountKeyIterBwd		as	'List_CountKeyIterBwd'
+public	CountKeyIterBwd		as	'Ring_CountKeyIterBwd'
 public	CountKeyFwd			as	'_ZNK4List11CountKeyFwdE5adt_tmPFxS0_S0_E'
 public	CountKeyFwd			as	'_ZNK4Ring11CountKeyFwdE5adt_tmPFxS0_S0_E'
 public	CountKeyBwd			as	'_ZNK4List11CountKeyBwdE5adt_tmPFxS0_S0_E'
 public	CountKeyBwd			as	'_ZNK4Ring11CountKeyBwdE5adt_tmPFxS0_S0_E'
+public	CountKeyIterFwd		as	'_ZNK4List15CountKeyIterFwdE5adt_tmPFxS0_S0_El'
+public	CountKeyIterFwd		as	'_ZNK4Ring15CountKeyIterFwdE5adt_tmPFxS0_S0_El'
+public	CountKeyIterBwd		as	'_ZNK4List15CountKeyIterBwdE5adt_tmPFxS0_S0_El'
+public	CountKeyIterBwd		as	'_ZNK4Ring15CountKeyIterBwdE5adt_tmPFxS0_S0_El'
 
 ; Keys set counting
 public	CountKeysFwd		as	'List_CountKeysFwd'
 public	CountKeysFwd		as	'Ring_CountKeysFwd'
 public	CountKeysBwd		as	'List_CountKeysBwd'
 public	CountKeysBwd		as	'Ring_CountKeysBwd'
+public	CountKeysIterFwd	as	'List_CountKeysIterFwd'
+public	CountKeysIterFwd	as	'Ring_CountKeysIterFwd'
+public	CountKeysIterBwd	as	'List_CountKeysIterBwd'
+public	CountKeysIterBwd	as	'Ring_CountKeysIterBwd'
 public	CountKeysFwd		as	'_ZNK4List12CountKeysFwdEPK5adt_tmmPFxS0_S0_E'
 public	CountKeysFwd		as	'_ZNK4Ring12CountKeysFwdEPK5adt_tmmPFxS0_S0_E'
 public	CountKeysBwd		as	'_ZNK4List12CountKeysBwdEPK5adt_tmmPFxS0_S0_E'
 public	CountKeysBwd		as	'_ZNK4Ring12CountKeysBwdEPK5adt_tmmPFxS0_S0_E'
+public	CountKeysIterFwd	as	'_ZNK4List16CountKeysIterFwdEPK5adt_tmmPFxS0_S0_El'
+public	CountKeysIterFwd	as	'_ZNK4Ring16CountKeysIterFwdEPK5adt_tmmPFxS0_S0_El'
+public	CountKeysIterBwd	as	'_ZNK4List16CountKeysIterBwdEPK5adt_tmmPFxS0_S0_El'
+public	CountKeysIterBwd	as	'_ZNK4Ring16CountKeysIterBwdEPK5adt_tmmPFxS0_S0_El'
 
 ;******************************************************************************;
 ;       Sorting                                                                ;
@@ -2575,19 +2763,21 @@ SetBwd:		SET_ELEMENT		BWD
 ;******************************************************************************;
 ;       Getting element value                                                  ;
 ;******************************************************************************;
-macro	GET_ELEMENT		offst
+macro	GET_ELEMENT		offst, ext
 {
 ;---[Parameters]---------------------------
 this	equ		rdi							; pointer to list/ring object
 data	equ		rsi							; pointer to data structure
+iter	equ		rdx							; iterator value
 ;---[Internal variables]-------------------
 status	equ		al							; operation status
 array	equ		r8							; pointer to array of nodes
-iter	equ		r9							; iterator value
 temp	equ		xmm0						; temporary register
 ;---[Check iterator]-----------------------
 		mov		array, [this + ARRAY]		; get pointer to array of nodes
+if ~ext
 		mov		iter, [this + offst]		; get iterator value
+end if
 		cmp		iter, EMPTY					; if (iter == EMPTY)
 		setne	status						;     return false
 		je		.exit
@@ -2596,10 +2786,11 @@ temp	equ		xmm0						; temporary register
 		movdqu	[data], temp				; data[0] = array[iter].data
 .exit:	ret									; return true
 }
-GetHead:	GET_ELEMENT		HEAD
-GetTail:	GET_ELEMENT		TAIL
-GetFwd:		GET_ELEMENT		FWD
-GetBwd:		GET_ELEMENT		BWD
+GetHead:	GET_ELEMENT		HEAD, 0
+GetTail:	GET_ELEMENT		TAIL, 0
+GetFwd:		GET_ELEMENT		FWD, 0
+GetBwd:		GET_ELEMENT		BWD, 0
+GetIter:	GET_ELEMENT		EMPTY, 1
 
 ;******************************************************************************;
 ;       Replacing element value                                                ;
@@ -2918,16 +3109,16 @@ index	equ		r9							; element index
 .error:	mov		result, EMPTY				; return EMPTY
 		ret
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	SET_ITER_INDEX	offst
+macro	SET_ITER_INDEX	offst, ext
 {
 ;---[Parameters]---------------------------
 this	equ		rdi							; pointer to list/ring object
 index	equ		rsi							; element index
 ;---[Internal variables]-------------------
+node	equ		rax							; node index
 array	equ		r8							; pointer to array of nodes
-node	equ		r9							; node index
-next	equ		r10							; next node
-nsize	equ		r11							; node size
+next	equ		r9							; next node
+nsize	equ		r10							; node size
 temp	equ		rdx							; temporary register
 ;---[Check index]--------------------------
 		shl		index, KSCALE
@@ -2956,38 +3147,47 @@ temp	equ		rdx							; temporary register
 ;---[End of searching loop]----------------
 .exit:	add		index, nsize
 		add		node, index					; iter = node + index
+if ~ext
 		mov		[this + offst], node		; update iterator position
+end if
 		ret
 ;---[Error branch]-------------------------
-.error:	mov		qword [this + offst], EMPTY	; update iterator position
+.error:	mov		node, EMPTY					; return EMPTY
+if ~ext
+		mov		[this + offst], node		; update iterator position
+end if
 		ret
 }
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	SET_ITERATOR	target, source
+macro	SET_ITERATOR	target, source, ext
 {
 ;---[Parameters]---------------------------
 this	equ		rdi							; pointer to list/ring object
 ;---[Internal variables]-------------------
-temp	equ		rax							; temporary register
+result	equ		rax							; result register
 ;------------------------------------------
-		mov		temp, [this + source]
-		mov		[this + target], temp		; set target iterator by source value
+		mov		result, [this + source]
+if ~ext
+		mov		[this + target], result		; set target iterator by source value
+end if
 		ret
 }
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	GET_POS		offst
+macro	GET_POS		offst, ext
 {
 ;---[Parameters]---------------------------
 this	equ		rdi							; pointer to list/ring object
+iter	equ		rsi							; iterator value
 ;---[Internal variables]-------------------
 index	equ		rax							; position index
 array	equ		r8							; pointer to array of nodes
 node	equ		r9							; node index
 prev	equ		r10							; previous node
-iter	equ		r11							; iterator value
 temp	equ		rdx							; temporary register
 ;---[Check iterator]-----------------------
+if ~ext
 		mov		iter, [this + offst]		; get iterator value
+end if
 		cmp		iter, EMPTY					; if (iter == EMPTY)
 		je		.error						;     then go to error branch
 ;---[Normal execution branch]--------------
@@ -3015,21 +3215,27 @@ temp	equ		rdx							; temporary register
 		ret
 }
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	MOVE_ITERATOR	IterFunc, offst
+macro	MOVE_ITERATOR	IterFunc, offst, ext
 {
 ;---[Parameters]---------------------------
 this	equ		rdi							; pointer to list/ring object
 pos		equ		rsi							; number of positions to move
+ptr		equ		rdx							; pointer to iterator
 ;---[Internal variables]-------------------
 status	equ		al							; operation status
 iter	equ		rax							; iterator value
 stack	equ		rsp							; stack pointer
 s_this	equ		stack + 0 * 8				; stack position of "this" variable
-space	= 1 * 8								; stack size required by the procedure
+s_ptr	equ		stack + 1 * 8				; stack position of "ptr" variable
+space	= 3 * 8								; stack size required by the procedure
 ;------------------------------------------
 		sub		stack, space				; reserving stack size for local vars
 ;---[Check iterator]-----------------------
+if ~ext
 		mov		iter, [this + offst]		; get iterator value
+else
+		mov		iter, [ptr]					; get iterator value
+end if
 		cmp		iter, EMPTY					; if (iter == EMPTY)
 		je		.error						;     then go to error branch
 ;---[Check position]-----------------------
@@ -3037,12 +3243,18 @@ space	= 1 * 8								; stack size required by the procedure
 		jz		.exit						;     then go to exit
 ;---[Normal execution branch]--------------
 		mov		[s_this], this				; save "this" variable into the stack
+		mov		[s_ptr], ptr				; save "ptr" variable into the stack
 		mov		param3, pos
 		mov		param2, iter
 		mov		param1, [this + ARRAY]
 		call	IterFunc					; iter = IterFunc (array, iter, pos)
 		mov		this, [s_this]				; get "this" variable from the stack
+		mov		ptr, [s_ptr]				; get "ptr" variable from the stack
+if ~ext
 		mov		[this + offst], iter		; update iterator position
+else
+		mov		[ptr], iter					; update iterator position
+end if
 		cmp		iter, EMPTY					; if (iter == EMPTY)
 		je		.error						;     then go to error branch
 ;---[Normal exit branch]-------------------
@@ -3058,21 +3270,21 @@ space	= 1 * 8								; stack size required by the procedure
 ;==============================================================================;
 ;       Set iterator position                                                  ;
 ;==============================================================================;
-FwdToIndex:	SET_ITER_INDEX	FWD
-FwdToHead:	SET_ITERATOR	FWD, HEAD
-FwdToTail:	SET_ITERATOR	FWD, TAIL
-FwdToBwd:	SET_ITERATOR	FWD, BWD
+FwdToIndex:		SET_ITER_INDEX	FWD, 0
+FwdToHead:		SET_ITERATOR	FWD, HEAD, 0
+FwdToTail:		SET_ITERATOR	FWD, TAIL, 0
+FwdToBwd:		SET_ITERATOR	FWD, BWD, 0
 
 ;==============================================================================;
 ;       Get iterator position                                                  ;
 ;==============================================================================;
-GetFwdPos:	GET_POS			FWD
+GetFwdPos:		GET_POS			FWD, 0
 
 ;==============================================================================;
 ;       Change iterator position                                               ;
 ;==============================================================================;
-FwdGoNext:	MOVE_ITERATOR	GoNext, FWD
-FwdGoPrev:	MOVE_ITERATOR	GoPrev, FWD
+FwdGoNext:		MOVE_ITERATOR	GoNext, FWD, 0
+FwdGoPrev:		MOVE_ITERATOR	GoPrev, FWD, 0
 
 ;******************************************************************************;
 ;       Manipulation with backward iterator                                    ;
@@ -3081,21 +3293,45 @@ FwdGoPrev:	MOVE_ITERATOR	GoPrev, FWD
 ;==============================================================================;
 ;       Set iterator position                                                  ;
 ;==============================================================================;
-BwdToIndex:	SET_ITER_INDEX	BWD
-BwdToHead:	SET_ITERATOR	BWD, HEAD
-BwdToTail:	SET_ITERATOR	BWD, TAIL
-BwdToFwd:	SET_ITERATOR	BWD, FWD
+BwdToIndex:		SET_ITER_INDEX	BWD, 0
+BwdToHead:		SET_ITERATOR	BWD, HEAD, 0
+BwdToTail:		SET_ITERATOR	BWD, TAIL, 0
+BwdToFwd:		SET_ITERATOR	BWD, FWD, 0
 
 ;==============================================================================;
 ;       Get iterator position                                                  ;
 ;==============================================================================;
-GetBwdPos:	GET_POS			BWD
+GetBwdPos:		GET_POS			BWD, 0
 
 ;==============================================================================;
 ;       Change iterator position                                               ;
 ;==============================================================================;
-BwdGoNext:	MOVE_ITERATOR	GoPrev, BWD
-BwdGoPrev:	MOVE_ITERATOR	GoNext, BWD
+BwdGoNext:		MOVE_ITERATOR	GoPrev, BWD, 0
+BwdGoPrev:		MOVE_ITERATOR	GoNext, BWD, 0
+
+;******************************************************************************;
+;       Manipulation with external iterator                                    ;
+;******************************************************************************;
+
+;==============================================================================;
+;       Set iterator position                                                  ;
+;==============================================================================;
+IterToIndex:	SET_ITER_INDEX	EMPTY, 1
+IterToHead:		SET_ITERATOR	EMPTY, HEAD, 1
+IterToTail:		SET_ITERATOR	EMPTY, TAIL, 1
+IterToFwd:		SET_ITERATOR	EMPTY, FWD, 1
+IterToBwd:		SET_ITERATOR	EMPTY, BWD, 1
+
+;==============================================================================;
+;       Get iterator position                                                  ;
+;==============================================================================;
+GetIterPos:		GET_POS			EMPTY, 1
+
+;==============================================================================;
+;       Change iterator position                                               ;
+;==============================================================================;
+IterGoFwd:		MOVE_ITERATOR	GoNext, EMPTY, 1
+IterGoBwd:		MOVE_ITERATOR	GoPrev, EMPTY, 1
 
 ;******************************************************************************;
 ;       Swapping iterators                                                     ;
@@ -3116,13 +3352,14 @@ bwd		equ		rdx							; forward iterator
 ;******************************************************************************;
 ;       Minimum and maximum value                                              ;
 ;******************************************************************************;
-macro	MINMAX	cmd, cond, bwd
+macro	MINMAX	cmd, cond, bwd, ext
 {
 ;---[Parameters]---------------------------
 this	equ		rdi							; pointer to list/ring object
 data	equ		rsi							; pointer to data structure
 count	equ		rdx							; count of nodes to check
 func	equ		rcx							; compare function
+ptr		equ		r8							; pointer to iterator
 ;---[Internal variables]-------------------
 status	equ		al							; operation status
 result	equ		rax							; result register
@@ -3141,10 +3378,11 @@ s_this	equ		stack + 2 * 8				; stack position of "this" variable
 s_data	equ		stack + 3 * 8				; stack position of "data" variable
 s_count	equ		stack + 4 * 8				; stack position of "count" variable
 s_func	equ		stack + 5 * 8				; stack position of "func" variable
-s_array	equ		stack + 6 * 8				; stack position of "array" variable
-s_iter	equ		stack + 7 * 8				; stack position of "iter" variable
-s_limit	equ		stack + 8 * 8				; stack position of "limit" variable
-space	= 9 * 8								; stack size required by the procedure
+s_ptr	equ		stack + 6 * 8				; stack position of "ptr" variable
+s_array	equ		stack + 7 * 8				; stack position of "array" variable
+s_iter	equ		stack + 8 * 8				; stack position of "iter" variable
+s_limit	equ		stack + 9 * 8				; stack position of "limit" variable
+space	= 11 * 8								; stack size required by the procedure
 if bwd
 offst	= BWD								; offset of iterator field
 dir		= BDIR								; direction of iteration
@@ -3155,7 +3393,11 @@ end if
 ;------------------------------------------
 		sub		stack, space				; reserving stack size for local vars
 ;---[Check iterator]-----------------------
+if ~ext
 		mov		iter, [this + offst]		; get iterator value
+else
+		mov		iter, [ptr]					; get iterator value
+end if
 		cmp		iter, EMPTY					; if (iter == EMPTY)
 		je		.ntfnd						;     return false
 ;---[Correct count]------------------------
@@ -3174,6 +3416,7 @@ end if
 		mov		[s_data], data				; save "data" variable into the stack
 		mov		[s_count], count			; save "count" variable into the stack
 		mov		[s_func], func				; save "func" variable into the stack
+		mov		[s_ptr], ptr				; save "ptr" variable into the stack
 		mov		[s_array], array			; save "array" variable into the stack
 		mov		[s_iter], iter				; save "iter" variable into the stack
 		mov		node, NMASK					; load node mask
@@ -3214,7 +3457,12 @@ end if
 ;---[Normal exit branch]-------------------
 .exit:	mov		this, [s_this]				; get "this" variable from the stack
 		mov		data, [s_data]				; get "data" variable from the stack
+		mov		ptr, [s_ptr]				; get "ptr" variable from the stack
+if ~ext
 		mov		[this + offst], vptr		; update iterator position
+else
+		mov		[ptr], vptr					; update iterator position
+end if
 		movdqa	temp, [array + vptr + NDATA]
 		movdqu	[data], temp				; data[0] = array[vptr].data
 		mov		value, [s_value]			; restore old value of "value" variable
@@ -3245,12 +3493,16 @@ end if
 }
 
 ; Minimum value
-MinFwd:	MINMAX	add, g, 0
-MinBwd:	MINMAX	sub, g, 1
+MinFwd:		MINMAX	add, g, 0, 0
+MinBwd:		MINMAX	sub, g, 1, 0
+MinIterFwd:	MINMAX	add, g, 0, 1
+MinIterBwd:	MINMAX	sub, g, 1, 1
 
 ; Maximum value
-MaxFwd:	MINMAX	add, l, 0
-MaxBwd:	MINMAX	sub, l, 1
+MaxFwd:		MINMAX	add, l, 0, 0
+MaxBwd:		MINMAX	sub, l, 1, 0
+MaxIterFwd:	MINMAX	add, l, 0, 1
+MaxIterBwd:	MINMAX	sub, l, 1, 1
 
 ;******************************************************************************;
 ;       Key searching                                                          ;
@@ -3259,7 +3511,7 @@ MaxBwd:	MINMAX	sub, l, 1
 ;==============================================================================;
 ;       Single key searching                                                   ;
 ;==============================================================================;
-macro	FIND_KEY	cmd, bwd
+macro	FIND_KEY	cmd, bwd, ext
 {
 ;---[Parameters]---------------------------
 this	equ		rdi							; pointer to list/ring object
@@ -3267,6 +3519,7 @@ data	equ		rsi							; pointer to data structure
 key		equ		rdx							; key to find
 count	equ		rcx							; count of nodes to check
 func	equ		r8							; compare function
+ptr		equ		r9							; pointer to iterator
 ;---[Internal variables]-------------------
 status	equ		al							; operation status
 result	equ		rax							; result register
@@ -3282,9 +3535,10 @@ s_data	equ		stack + 1 * 8				; stack position of "data" variable
 s_key	equ		stack + 2 * 8				; stack position of "key" variable
 s_count	equ		stack + 3 * 8				; stack position of "count" variable
 s_func	equ		stack + 4 * 8				; stack position of "func" variable
-s_array	equ		stack + 5 * 8				; stack position of "array" variable
-s_iter	equ		stack + 6 * 8				; stack position of "iter" variable
-s_limit	equ		stack + 7 * 8				; stack position of "limit" variable
+s_ptr	equ		stack + 5 * 8				; stack position of "ptr" variable
+s_array	equ		stack + 6 * 8				; stack position of "array" variable
+s_iter	equ		stack + 7 * 8				; stack position of "iter" variable
+s_limit	equ		stack + 8 * 8				; stack position of "limit" variable
 space	= 9 * 8								; stack size required by the procedure
 if bwd
 offst	= BWD								; offset of iterator field
@@ -3296,7 +3550,11 @@ end if
 ;------------------------------------------
 		sub		stack, space				; reserving stack size for local vars
 ;---[Check iterator]-----------------------
+if ~ext
 		mov		iter, [this + offst]		; get iterator value
+else
+		mov		iter, [ptr]					; get iterator value
+end if
 		cmp		iter, EMPTY					; if (iter == EMPTY)
 		je		.ntfnd						;     return false
 ;---[Correct count]------------------------
@@ -3314,6 +3572,7 @@ end if
 		mov		[s_key], key				; save "key" variable into the stack
 		mov		[s_count], count			; save "count" variable into the stack
 		mov		[s_func], func				; save "func" variable into the stack
+		mov		[s_ptr], ptr				; save "ptr" variable into the stack
 		mov		[s_array], array			; save "array" variable into the stack
 		mov		[s_iter], iter				; save "iter" variable into the stack
 		mov		node, NMASK					; load node mask
@@ -3353,7 +3612,12 @@ end if
 ;---[Found branch]-------------------------
 .found:	mov		this, [s_this]				; get "this" variable from the stack
 		mov		data, [s_data]				; get "data" variable from the stack
+		mov		ptr, [s_ptr]				; get "ptr" variable from the stack
+if ~ext
 		mov		[this + offst], iter		; update iterator position
+else
+		mov		[ptr], iter					; update iterator position
+end if
 		movdqa	temp, [array + iter + NDATA]
 		movdqu	[data], temp				; data[0] = array[iter].data
 		mov		status, 1					; return true
@@ -3376,13 +3640,15 @@ else
 end if
 		jmp		.back						; go back
 }
-FindKeyFwd:	FIND_KEY	add, 0
-FindKeyBwd:	FIND_KEY	sub, 1
+FindKeyFwd:		FIND_KEY	add, 0, 0
+FindKeyBwd:		FIND_KEY	sub, 1, 0
+FindKeyIterFwd:	FIND_KEY	add, 0, 1
+FindKeyIterBwd:	FIND_KEY	sub, 1, 1
 
 ;==============================================================================;
 ;       Keys set searching                                                     ;
 ;==============================================================================;
-macro	FIND_KEYS	cmd, bwd
+macro	FIND_KEYS	cmd, bwd, ext
 {
 ;---[Parameters]---------------------------
 this	equ		rdi							; pointer to list/ring object
@@ -3400,6 +3666,7 @@ iter	equ		r11							; iterator value
 size	equ		result						; object size
 node	equ		count						; node index
 next	equ		func						; next node
+ptr		equ		func						; pointer to iterator
 temp	equ		xmm0						; temporary register
 stack	equ		rsp							; stack pointer
 s_this	equ		stack + 0 * 8				; stack position of "this" variable
@@ -3411,6 +3678,7 @@ s_func	equ		stack + 5 * 8				; stack position of "func" variable
 s_array	equ		stack + 6 * 8				; stack position of "array" variable
 s_iter	equ		stack + 7 * 8				; stack position of "iter" variable
 s_limit	equ		stack + 8 * 8				; stack position of "limit" variable
+s_ptr	equ		stack + 10 * 8				; stack position of "ptr" variable
 space	= 9 * 8								; stack size required by the procedure
 if bwd
 offst	= BWD								; offset of iterator field
@@ -3422,7 +3690,12 @@ end if
 ;------------------------------------------
 		sub		stack, space				; reserving stack size for local vars
 ;---[Check iterator]-----------------------
+if ~ext
 		mov		iter, [this + offst]		; get iterator value
+else
+		mov		iter, [s_ptr]
+		mov		iter, [iter]				; get iterator value
+end if
 		cmp		iter, EMPTY					; if (iter == EMPTY)
 		je		.ntfnd						;     return false
 ;---[Correct count]------------------------
@@ -3483,7 +3756,12 @@ end if
 ;---[Found branch]-------------------------
 .found:	mov		this, [s_this]				; get "this" variable from the stack
 		mov		data, [s_data]				; get "data" variable from the stack
+		mov		ptr, [s_ptr]				; get "ptr" variable from the stack
+if ~ext
 		mov		[this + offst], iter		; update iterator position
+else
+		mov		[ptr], iter					; update iterator position
+end if
 		movdqa	temp, [array + iter + NDATA]
 		movdqu	[data], temp				; data[0] = array[iter].data
 		mov		status, 1					; return true
@@ -3506,8 +3784,10 @@ else
 end if
 		jmp		.back						; go back
 }
-FindKeysFwd:	FIND_KEYS	add, 0
-FindKeysBwd:	FIND_KEYS	sub, 1
+FindKeysFwd:		FIND_KEYS	add, 0, 0
+FindKeysBwd:		FIND_KEYS	sub, 1, 0
+FindKeysIterFwd:	FIND_KEYS	add, 0, 1
+FindKeysIterBwd:	FIND_KEYS	sub, 1, 1
 
 ;******************************************************************************;
 ;       Duplicates searching                                                   ;
@@ -3636,12 +3916,13 @@ CheckSortAscBwd:	FIND_CORE	sub, l, s_iter, 1
 CheckSortDscFwd:	FIND_CORE	add, l, s_iter, 0
 CheckSortDscBwd:	FIND_CORE	sub, g, s_iter, 1
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	FIND	CheckFunc, offst
+macro	FIND	CheckFunc, offst, ext
 {
 ;---[Parameters]---------------------------
 this	equ		rdi							; pointer to list/ring object
 data	equ		rsi							; pointer to data structure
 func	equ		rdx							; compare function
+ptr		equ		rcx							; pointer to iterator
 ;---[Internal variables]-------------------
 status	equ		al							; operation status
 result	equ		rax							; result register
@@ -3651,20 +3932,26 @@ temp	equ		xmm0						; temporary register
 stack	equ		rsp							; stack pointer
 s_this	equ		stack + 0 * 8				; stack position of "this" variable
 s_data	equ		stack + 1 * 8				; stack position of "data" variable
+s_ptr	equ		stack + 2 * 8				; stack position of "ptr" variable
 space	= 3 * 8								; stack size required by the procedure
 ;------------------------------------------
 		sub		stack, space				; reserving stack size for local vars
 ;---[Check iterator]-----------------------
+if ~ext
 		mov		iter, [this + offst]		; get iterator value
+else
+		mov		iter, [ptr]					; get iterator value
+end if
 		cmp		iter, EMPTY					; if (iter == EMPTY)
 		je		.ntfnd						;     return false
 ;---[Check object size]--------------------
 		mov		size, [this + SIZE]			; get object size
-		sub		size, NSIZE					; if (size <= 1)
+		sub		size, KSIZE					; if (size <= 1)
 		jbe		.ntfnd						;     return false
 ;---[Normal execution branch]--------------
 		mov		[s_this], this				; save "this" variable into the stack
 		mov		[s_data], data				; save "data" variable into the stack
+		mov		[s_ptr], ptr				; save "ptr" variable into the stack
 ;---[Call search function]-----------------
 		mov		param4, func
 		mov		param3, size
@@ -3676,7 +3963,12 @@ space	= 3 * 8								; stack size required by the procedure
 ;---[Update iterator value]----------------
 		mov		this, [s_this]				; get "this" variable from the stack
 		mov		data, [s_data]				; get "data" variable from the stack
+		mov		ptr, [s_ptr]				; get "ptr" variable from the stack
+if ~ext
 		mov		[this + offst], result		; update iterator position
+else
+		mov		[ptr], result				; update iterator position
+end if
 		add		result, [this + ARRAY]
 		movdqa	temp, [result + NDATA]
 		movdqu	[data], temp				; data[0] = array[iter].data
@@ -3688,20 +3980,26 @@ space	= 3 * 8								; stack size required by the procedure
 		add		stack, space				; restoring back the stack pointer
 		ret
 }
-FindDupFwd:		FIND	CheckDupFwd, FWD
-FindDupBwd:		FIND	CheckDupBwd, BWD
+FindDupFwd:			FIND	CheckDupFwd, FWD, 0
+FindDupBwd:			FIND	CheckDupBwd, BWD, 0
+FindDupIterFwd:		FIND	CheckDupFwd, EMPTY, 1
+FindDupIterBwd:		FIND	CheckDupBwd, EMPTY, 1
 
 ;******************************************************************************;
 ;       Unordered elements searching                                           ;
 ;******************************************************************************;
 
 ; Ascending sort order
-FindNonAscFwd:	FIND	CheckSortAscFwd, FWD
-FindNonAscBwd:	FIND	CheckSortAscBwd, BWD
+FindNonAscFwd:		FIND	CheckSortAscFwd, FWD, 0
+FindNonAscBwd:		FIND	CheckSortAscBwd, BWD, 0
+FindNonAscIterFwd:	FIND	CheckSortAscFwd, EMPTY, 1
+FindNonAscIterBwd:	FIND	CheckSortAscBwd, EMPTY, 1
 
 ; Descending sort order
-FindNonDscFwd:	FIND	CheckSortDscFwd, FWD
-FindNonDscBwd:	FIND	CheckSortDscBwd, BWD
+FindNonDscFwd:		FIND	CheckSortDscFwd, FWD, 0
+FindNonDscBwd:		FIND	CheckSortDscBwd, BWD, 0
+FindNonDscIterFwd:	FIND	CheckSortDscFwd, EMPTY, 1
+FindNonDscIterBwd:	FIND	CheckSortDscBwd, EMPTY, 1
 
 ;******************************************************************************;
 ;       Searching for differences                                              ;
@@ -3843,7 +4141,7 @@ end if
 DiffFwd:	DIFF	add, 0
 DiffBwd:	DIFF	sub, 1
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	FIND_DIFF	DiffFunc, offst
+macro	FIND_DIFF	DiffFunc, offst, ext
 {
 ;---[Parameters]---------------------------
 this	equ		rdi							; pointer to target list/ring object
@@ -3851,24 +4149,39 @@ data	equ		rsi							; pointer to data structure
 source	equ		rdx							; pointer to source list/ring object
 count	equ		rcx							; count of nodes to copy
 func	equ		r8							; compare function
+ptr		equ		r9							; pointer to first iterator
 ;---[Internal variables]-------------------
 status	equ		al							; operation status
 result	equ		rax							; result register
+titer	equ		r10							; target iterator
+siter	equ		r11							; source iterator
 size	equ		result						; object size
 temp	equ		xmm0						; temporary register
 stack	equ		rsp							; stack pointer
 s_this	equ		stack + 0 * 8				; stack position of "this" variable
 s_data	equ		stack + 1 * 8				; stack position of "data" variable
+s_ptr	equ		stack + 2 * 8				; stack position of "ptr" variable
+s_siter	equ		stack + 4 * 8				; stack position of "siter" variable
 space	= 3 * 8								; stack size required by the procedure
 ;------------------------------------------
 		sub		stack, space				; reserving stack size for local vars
 		cmp		this, source				; if (this == source)
 		je		.ntfnd						;     then return false
 ;---[Check target iterator]----------------
-		cmp		qword [this + offst], EMPTY
+if ~ext
+		mov		titer, [this + offst]		; load target iterator value
+else
+		mov		titer, [ptr]				; load target iterator value
+end if
+		cmp		titer, EMPTY
 		je		.ntfnd						; if (this.iter == EMPTY), then return false
 ;---[Check source iterator]----------------
-		cmp		qword [source + offst], EMPTY
+if ~ext
+		mov		siter, [source + offst]		; load source iterator value
+else
+		mov		siter, [s_siter]			; get "siter" variable from the stack
+end if
+		cmp		siter, EMPTY
 		je		.ntfnd						; if (source.iter == EMPTY), then return false
 ;---[Correct count]------------------------
 		shl		count, KSCALE
@@ -3884,11 +4197,12 @@ space	= 3 * 8								; stack size required by the procedure
 ;---[Call search function]-----------------
 		mov		[s_this], this				; save "this" variable into the stack
 		mov		[s_data], data				; save "data" variable into the stack
+		mov		[s_ptr], ptr				; save "ptr" variable into the stack
 		mov		param6, func
 		mov		param5, count
-		mov		param4, [source + offst]
+		mov		param4, siter
 		mov		param2, [source + ARRAY]
-		mov		param3, [this + offst]
+		mov		param3, titer
 		mov		param1, [this + ARRAY]
 		call	DiffFunc					; result = DiffFunc (this.array, source.array, titer, siter, count, func)
 		cmp		result, EMPTY				; if (result == EMPTY)
@@ -3896,7 +4210,12 @@ space	= 3 * 8								; stack size required by the procedure
 ;---[Update iterator value]----------------
 		mov		this, [s_this]				; get "this" variable from the stack
 		mov		data, [s_data]				; get "data" variable from the stack
+		mov		ptr, [s_ptr]				; get "ptr" variable from the stack
+if ~ext
 		mov		[this + offst], result		; update iterator position
+else
+		mov		[ptr], result				; update iterator position
+end if
 		add		result, [this + ARRAY]
 		movdqa	temp, [result + NDATA]
 		movdqu	[data], temp				; data[0] = array[iter].data
@@ -3908,8 +4227,10 @@ space	= 3 * 8								; stack size required by the procedure
 		add		stack, space				; restoring back the stack pointer
 		ret
 }
-FindDiffFwd:	FIND_DIFF	DiffFwd, FWD
-FindDiffBwd:	FIND_DIFF	DiffBwd, BWD
+FindDiffFwd:		FIND_DIFF	DiffFwd, FWD, 0
+FindDiffBwd:		FIND_DIFF	DiffBwd, BWD, 0
+FindDiffIterFwd:	FIND_DIFF	DiffFwd, EMPTY, 1
+FindDiffIterBwd:	FIND_DIFF	DiffBwd, EMPTY, 1
 
 ;******************************************************************************;
 ;       Key counting                                                           ;
@@ -3918,18 +4239,18 @@ FindDiffBwd:	FIND_DIFF	DiffBwd, BWD
 ;==============================================================================;
 ;       Single key counting                                                    ;
 ;==============================================================================;
-macro	COUNT_KEY	cmd, bwd
+macro	COUNT_KEY	cmd, bwd, ext
 {
 ;---[Parameters]---------------------------
 this	equ		rdi							; pointer to list/ring object
 key		equ		rsi							; key to find
 count	equ		rdx							; count of nodes to check
 func	equ		rcx							; compare function
+iter	equ		r8							; iterator value
 ;---[Internal variables]-------------------
 status	equ		al							; operation status
 result	equ		rax							; result register
 array	equ		r10							; pointer to array of nodes
-iter	equ		r11							; iterator value
 size	equ		result						; object size
 node	equ		count						; node index
 next	equ		func						; next node
@@ -3953,7 +4274,9 @@ end if
 		sub		stack, space				; reserving stack size for local vars
 		mov		qword [s_total], 0			; total = 0
 ;---[Check iterator]-----------------------
+if ~ext
 		mov		iter, [this + offst]		; get iterator value
+end if
 		cmp		iter, EMPTY					; if (iter == EMPTY)
 		je		.exit						;     then go to exit
 ;---[Correct count]------------------------
@@ -4024,13 +4347,15 @@ else
 end if
 		jmp		.back						; go back
 }
-CountKeyFwd:	COUNT_KEY	add, 0
-CountKeyBwd:	COUNT_KEY	sub, 1
+CountKeyFwd:		COUNT_KEY	add, 0, 0
+CountKeyBwd:		COUNT_KEY	sub, 1, 0
+CountKeyIterFwd:	COUNT_KEY	add, 0, 1
+CountKeyIterBwd:	COUNT_KEY	sub, 1, 1
 
 ;==============================================================================;
 ;       Keys set counting                                                      ;
 ;==============================================================================;
-macro	COUNT_KEYS	cmd, bwd
+macro	COUNT_KEYS	cmd, bwd, ext
 {
 ;---[Parameters]---------------------------
 this	equ		rdi							; pointer to list/ring object
@@ -4038,12 +4363,12 @@ keys	equ		rsi							; pointer to array of keys
 ksize	equ		rdx							; size of array of keys
 count	equ		rcx							; count of nodes to check
 func	equ		r8							; compare function
+iter	equ		r9							; iterator value
 ;---[Internal variables]-------------------
 status	equ		al							; operation status
 result	equ		rax							; result register
 fptr	equ		rax							; pointer to call external function
 array	equ		r10							; pointer to array of nodes
-iter	equ		r11							; iterator value
 size	equ		result						; object size
 node	equ		count						; node index
 next	equ		func						; next node
@@ -4068,7 +4393,9 @@ end if
 		sub		stack, space				; reserving stack size for local vars
 		mov		qword [s_total], 0			; total = 0
 ;---[Check iterator]-----------------------
+if ~ext
 		mov		iter, [this + offst]		; get iterator value
+end if
 		cmp		iter, EMPTY					; if (iter == EMPTY)
 		je		.exit						;     then go to exit
 ;---[Correct count]------------------------
@@ -4140,8 +4467,10 @@ else
 end if
 		jmp		.back						; go back
 }
-CountKeysFwd:	COUNT_KEYS	add, 0
-CountKeysBwd:	COUNT_KEYS	sub, 1
+CountKeysFwd:		COUNT_KEYS	add, 0, 0
+CountKeysBwd:		COUNT_KEYS	sub, 1, 0
+CountKeysIterFwd:	COUNT_KEYS	add, 0, 1
+CountKeysIterBwd:	COUNT_KEYS	sub, 1, 1
 
 ;******************************************************************************;
 ;       Sorting                                                                ;
@@ -4153,6 +4482,7 @@ data	equ		rdi							; pointer to data array
 size	equ		rsi							; count of keys to sort
 func	equ		rdx							; compare function
 ;---[Internal variables]-------------------
+result	equ		rax							; result register
 ptr		equ		rcx							; temporary pointer
 left	equ		r12							; left index
 right	equ		r13							; right index
@@ -5226,7 +5556,7 @@ result	equ		rax							; result register
 size	equ		r8							; object size
 ;------------------------------------------
 		mov		size, [this + SIZE]			; get object size
-		sub		size, NSIZE					; if (size <= 1)
+		sub		size, KSIZE					; if (size <= 1)
 		set#c1	status						;     then set status and
 		jbe		.exit						;     go to exit
 ;---[Call check function]------------------

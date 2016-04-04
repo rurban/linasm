@@ -4,7 +4,7 @@
 #                                                                              #
 #                      MULTIPLY KEYS HASH TABLE DATA TYPE                      #
 #                                                                              #
-# License: LGPLv3+                               Copyleft (Ɔ) 2015, Jack Black #
+# License: LGPLv3+                               Copyleft (Ɔ) 2016, Jack Black #
 ################################################################################
 */
 # pragma	once
@@ -70,6 +70,7 @@ bool SetBwd (const data_t *data);
 //****************************************************************************//
 bool GetFwd (data_t *data) const;
 bool GetBwd (data_t *data) const;
+bool GetIter (data_t *data, ptr_t iter) const;
 
 //****************************************************************************//
 //      Replacing element value                                               //
@@ -104,6 +105,20 @@ bool BwdGoNext (size_t pos);
 bool BwdGoPrev (size_t pos);
 
 //****************************************************************************//
+//      Manipulation with external iterator                                   //
+//****************************************************************************//
+
+// Set iterator position
+ptr_t IterToHead (void) const;
+ptr_t IterToTail (void) const;
+ptr_t IterToFwd (void) const;
+ptr_t IterToBwd (void) const;
+
+// Change iterator position
+bool IterGoFwd (size_t pos, ptr_t *iter) const;
+bool IterGoBwd (size_t pos, ptr_t *iter) const;
+
+//****************************************************************************//
 //      Swapping iterators                                                    //
 //****************************************************************************//
 void SwapFwdBwd (void);
@@ -115,10 +130,14 @@ void SwapFwdBwd (void);
 // Minimum value
 bool MinFwd (data_t *data);
 bool MinBwd (data_t *data);
+bool MinIterFwd (data_t *data, ptr_t *iter) const;
+bool MinIterBwd (data_t *data, ptr_t *iter) const;
 
 // Maximum value
 bool MaxFwd (data_t *data);
 bool MaxBwd (data_t *data);
+bool MaxIterFwd (data_t *data, ptr_t *iter) const;
+bool MaxIterBwd (data_t *data, ptr_t *iter) const;
 
 //****************************************************************************//
 //      Key searching                                                         //
@@ -127,20 +146,28 @@ bool MaxBwd (data_t *data);
 // Single key searching
 bool FindKeyFwd (data_t *data, adt_t key);
 bool FindKeyBwd (data_t *data, adt_t key);
+bool FindKeyIterFwd (data_t *data, adt_t key, ptr_t *iter) const;
+bool FindKeyIterBwd (data_t *data, adt_t key, ptr_t *iter) const;
 
 // Keys set searching
 bool FindKeysFwd (data_t *data, const adt_t keys[], size_t size);
 bool FindKeysBwd (data_t *data, const adt_t keys[], size_t size);
+bool FindKeysIterFwd (data_t *data, const adt_t keys[], size_t size, ptr_t *iter) const;
+bool FindKeysIterBwd (data_t *data, const adt_t keys[], size_t size, ptr_t *iter) const;
 
 // Sequence searching
 size_t FindSequenceFwd (data_t *data, adt_t key);
 size_t FindSequenceBwd (data_t *data, adt_t key);
+size_t FindSequenceIterFwd (data_t *data, adt_t key, ptr_t *iter) const;
+size_t FindSequenceIterBwd (data_t *data, adt_t key, ptr_t *iter) const;
 
 //****************************************************************************//
 //      Duplicates searching                                                  //
 //****************************************************************************//
 bool FindDupFwd (data_t *data);
 bool FindDupBwd (data_t *data);
+bool FindDupIterFwd (data_t *data, ptr_t *iter) const;
+bool FindDupIterBwd (data_t *data, ptr_t *iter) const;
 
 //****************************************************************************//
 //      Key counting                                                          //
@@ -226,6 +253,7 @@ bool MultiHash_SetBwd (struct MultiHash *hash, const struct data_t *data);
 //****************************************************************************//
 bool MultiHash_GetFwd (const struct MultiHash *hash, struct data_t *data);
 bool MultiHash_GetBwd (const struct MultiHash *hash, struct data_t *data);
+bool MultiHash_GetIter (const struct MultiHash *hash, struct data_t *data, ptr_t iter);
 
 //****************************************************************************//
 //      Replacing element value                                               //
@@ -260,6 +288,20 @@ bool MultiHash_BwdGoNext (struct MultiHash *hash, size_t pos);
 bool MultiHash_BwdGoPrev (struct MultiHash *hash, size_t pos);
 
 //****************************************************************************//
+//      Manipulation with external iterator                                   //
+//****************************************************************************//
+
+// Set iterator position
+ptr_t MultiHash_IterToHead (const struct MultiHash *hash);
+ptr_t MultiHash_IterToTail (const struct MultiHash *hash);
+ptr_t MultiHash_IterToFwd (const struct MultiHash *hash);
+ptr_t MultiHash_IterToBwd (const struct MultiHash *hash);
+
+// Change iterator position
+bool MultiHash_IterGoFwd (const struct MultiHash *hash, size_t pos, ptr_t *iter);
+bool MultiHash_IterGoBwd (const struct MultiHash *hash, size_t pos, ptr_t *iter);
+
+//****************************************************************************//
 //      Swapping iterators                                                    //
 //****************************************************************************//
 void MultiHash_SwapFwdBwd (struct MultiHash *hash);
@@ -271,10 +313,14 @@ void MultiHash_SwapFwdBwd (struct MultiHash *hash);
 // Minimum value
 bool MultiHash_MinFwd (struct UniqueHash *hash, struct data_t *data);
 bool MultiHash_MinBwd (struct UniqueHash *hash, struct data_t *data);
+bool MultiHash_MinIterFwd (const struct MultiHash *hash, struct data_t *data, ptr_t *iter);
+bool MultiHash_MinIterBwd (const struct MultiHash *hash, struct data_t *data, ptr_t *iter);
 
 // Maximum value
 bool MultiHash_MaxFwd (struct UniqueHash *hash, struct data_t *data);
 bool MultiHash_MaxBwd (struct UniqueHash *hash, struct data_t *data);
+bool MultiHash_MaxIterFwd (const struct MultiHash *hash, struct data_t *data, ptr_t *iter);
+bool MultiHash_MaxIterBwd (const struct MultiHash *hash, struct data_t *data, ptr_t *iter);
 
 //****************************************************************************//
 //      Key searching                                                         //
@@ -283,20 +329,28 @@ bool MultiHash_MaxBwd (struct UniqueHash *hash, struct data_t *data);
 // Single key searching
 bool MultiHash_FindKeyFwd (struct MultiHash *hash, struct data_t *data, union adt_t key);
 bool MultiHash_FindKeyBwd (struct MultiHash *hash, struct data_t *data, union adt_t key);
+bool MultiHash_FindKeyIterFwd (const struct MultiHash *hash, struct data_t *data, union adt_t key, ptr_t *iter);
+bool MultiHash_FindKeyIterBwd (const struct MultiHash *hash, struct data_t *data, union adt_t key, ptr_t *iter);
 
 // Keys set searching
 bool MultiHash_FindKeysFwd (struct MultiHash *hash, struct data_t *data, const union adt_t keys[], size_t size);
 bool MultiHash_FindKeysBwd (struct MultiHash *hash, struct data_t *data, const union adt_t keys[], size_t size);
+bool MultiHash_FindKeysIterFwd (const struct MultiHash *hash, struct data_t *data, const union adt_t keys[], size_t size, ptr_t *iter);
+bool MultiHash_FindKeysIterBwd (const struct MultiHash *hash, struct data_t *data, const union adt_t keys[], size_t size, ptr_t *iter);
 
 // Sequence searching
 size_t MultiHash_FindSequenceFwd (struct MultiHash *hash, struct data_t *data, union adt_t key);
 size_t MultiHash_FindSequenceBwd (struct MultiHash *hash, struct data_t *data, union adt_t key);
+size_t MultiHash_FindSequenceIterFwd (const struct MultiHash *hash, struct data_t *data, union adt_t key, ptr_t *iter);
+size_t MultiHash_FindSequenceIterBwd (const struct MultiHash *hash, struct data_t *data, union adt_t key, ptr_t *iter);
 
 //****************************************************************************//
 //      Duplicates searching                                                  //
 //****************************************************************************//
 bool MultiHash_FindDupFwd (struct MultiHash *hash, struct data_t *data);
 bool MultiHash_FindDupBwd (struct MultiHash *hash, struct data_t *data);
+bool MultiHash_FindDupIterFwd (const struct MultiHash *hash, struct data_t *data, ptr_t *iter);
+bool MultiHash_FindDupIterBwd (const struct MultiHash *hash, struct data_t *data, ptr_t *iter);
 
 //****************************************************************************//
 //      Key counting                                                          //

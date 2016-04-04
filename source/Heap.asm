@@ -4,7 +4,7 @@
 ;#                                                                             #
 ;#                            BINARY HEAP DATA TYPE                            #
 ;#                                                                             #
-;# License: LGPLv3+                              Copyleft (Ɔ) 2015, Jack Black #
+;# License: LGPLv3+                              Copyleft (Ɔ) 2016, Jack Black #
 ;###############################################################################
 format	ELF64
 include	'Macro.inc'

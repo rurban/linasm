@@ -4,7 +4,7 @@
 ;#                                                                             #
 ;#                              B-TREE DATA TYPE                               #
 ;#                                                                             #
-;# License: LGPLv3+                              Copyleft (Ɔ) 2015, Jack Black #
+;# License: LGPLv3+                              Copyleft (Ɔ) 2016, Jack Black #
 ;###############################################################################
 format	ELF64
 include	'Macro.inc'
@@ -138,10 +138,14 @@ public	GetFwd					as	'MultiTree_GetFwd'
 public	GetFwd					as	'UniqueTree_GetFwd'
 public	GetBwd					as	'MultiTree_GetBwd'
 public	GetBwd					as	'UniqueTree_GetBwd'
+public	GetIter					as	'MultiTree_GetIter'
+public	GetIter					as	'UniqueTree_GetIter'
 public	GetFwd					as	'_ZNK9MultiTree6GetFwdEP6data_t'
 public	GetFwd					as	'_ZNK10UniqueTree6GetFwdEP6data_t'
 public	GetBwd					as	'_ZNK9MultiTree6GetBwdEP6data_t'
 public	GetBwd					as	'_ZNK10UniqueTree6GetBwdEP6data_t'
+public	GetIter					as	'_ZNK9MultiTree7GetIterEP6data_tl'
+public	GetIter					as	'_ZNK10UniqueTree7GetIterEP6data_tl'
 
 ;******************************************************************************;
 ;       Replacing element value                                                ;
@@ -282,6 +286,68 @@ public	BwdGoPrev				as	'_ZN9MultiTree9BwdGoPrevEm'
 public	BwdGoPrev				as	'_ZN10UniqueTree9BwdGoPrevEm'
 
 ;******************************************************************************;
+;       Manipulation with external iterator                                    ;
+;******************************************************************************;
+
+;==============================================================================;
+;       Set iterator position                                                  ;
+;==============================================================================;
+
+; By index
+public	IterToIndex				as	'MultiTree_IterToIndex'
+public	IterToIndex				as	'UniqueTree_IterToIndex'
+public	IterToIndex				as	'_ZNK9MultiTree11IterToIndexEm'
+public	IterToIndex				as	'_ZNK10UniqueTree11IterToIndexEm'
+
+; To min element
+public	IterToMin				as	'MultiTree_IterToMin'
+public	IterToMin				as	'UniqueTree_IterToMin'
+public	IterToMin				as	'_ZNK9MultiTree9IterToMinEv'
+public	IterToMin				as	'_ZNK10UniqueTree9IterToMinEv'
+
+; To max element
+public	IterToMax				as	'MultiTree_IterToMax'
+public	IterToMax				as	'UniqueTree_IterToMax'
+public	IterToMax				as	'_ZNK9MultiTree9IterToMaxEv'
+public	IterToMax				as	'_ZNK10UniqueTree9IterToMaxEv'
+
+; To forward iterator
+public	IterToFwd				as	'MultiTree_IterToFwd'
+public	IterToFwd				as	'UniqueTree_IterToFwd'
+public	IterToFwd				as	'_ZNK9MultiTree9IterToFwdEv'
+public	IterToFwd				as	'_ZNK10UniqueTree9IterToFwdEv'
+
+; To backward iterator
+public	IterToBwd				as	'MultiTree_IterToBwd'
+public	IterToBwd				as	'UniqueTree_IterToBwd'
+public	IterToBwd				as	'_ZNK9MultiTree9IterToBwdEv'
+public	IterToBwd				as	'_ZNK10UniqueTree9IterToBwdEv'
+
+;==============================================================================;
+;       Get iterator position                                                  ;
+;==============================================================================;
+public	GetIterPos				as	'MultiTree_GetIterPos'
+public	GetIterPos				as	'UniqueTree_GetIterPos'
+public	GetIterPos				as	'_ZNK9MultiTree10GetIterPosEl'
+public	GetIterPos				as	'_ZNK10UniqueTree10GetIterPosEl'
+
+;==============================================================================;
+;       Change iterator position                                               ;
+;==============================================================================;
+
+; Move in forward direction
+public	IterGoFwd				as	'MultiTree_IterGoFwd'
+public	IterGoFwd				as	'UniqueTree_IterGoFwd'
+public	IterGoFwd				as	'_ZNK9MultiTree9IterGoFwdEmPl'
+public	IterGoFwd				as	'_ZNK10UniqueTree9IterGoFwdEmPl'
+
+; Move in backward direction
+public	IterGoBwd				as	'MultiTree_IterGoBwd'
+public	IterGoBwd				as	'UniqueTree_IterGoBwd'
+public	IterGoBwd				as	'_ZNK9MultiTree9IterGoBwdEmPl'
+public	IterGoBwd				as	'_ZNK10UniqueTree9IterGoBwdEmPl'
+
+;******************************************************************************;
 ;       Swapping iterators                                                     ;
 ;******************************************************************************;
 public	SwapFwdBwd				as	'MultiTree_SwapFwdBwd'
@@ -298,20 +364,36 @@ public	MinFwd					as	'MultiTree_MinFwd'
 public	MinFwd					as	'UniqueTree_MinFwd'
 public	MinBwd					as	'MultiTree_MinBwd'
 public	MinBwd					as	'UniqueTree_MinBwd'
+public	MinIterFwd				as	'MultiTree_MinIterFwd'
+public	MinIterFwd				as	'UniqueTree_MinIterFwd'
+public	MinIterBwd				as	'MultiTree_MinIterBwd'
+public	MinIterBwd				as	'UniqueTree_MinIterBwd'
 public	MinFwd					as	'_ZN9MultiTree6MinFwdEP6data_t'
 public	MinFwd					as	'_ZN10UniqueTree6MinFwdEP6data_t'
 public	MinBwd					as	'_ZN9MultiTree6MinBwdEP6data_t'
 public	MinBwd					as	'_ZN10UniqueTree6MinBwdEP6data_t'
+public	MinIterFwd				as	'_ZNK9MultiTree10MinIterFwdEP6data_tPl'
+public	MinIterFwd				as	'_ZNK10UniqueTree10MinIterFwdEP6data_tPl'
+public	MinIterBwd				as	'_ZNK9MultiTree10MinIterBwdEP6data_tPl'
+public	MinIterBwd				as	'_ZNK10UniqueTree10MinIterBwdEP6data_tPl'
 
 ; Maximum value
 public	MaxFwd					as	'MultiTree_MaxFwd'
 public	MaxFwd					as	'UniqueTree_MaxFwd'
 public	MaxBwd					as	'MultiTree_MaxBwd'
 public	MaxBwd					as	'UniqueTree_MaxBwd'
+public	MaxIterFwd				as	'MultiTree_MaxIterFwd'
+public	MaxIterFwd				as	'UniqueTree_MaxIterFwd'
+public	MaxIterBwd				as	'MultiTree_MaxIterBwd'
+public	MaxIterBwd				as	'UniqueTree_MaxIterBwd'
 public	MaxFwd					as	'_ZN9MultiTree6MaxFwdEP6data_t'
 public	MaxFwd					as	'_ZN10UniqueTree6MaxFwdEP6data_t'
 public	MaxBwd					as	'_ZN9MultiTree6MaxBwdEP6data_t'
 public	MaxBwd					as	'_ZN10UniqueTree6MaxBwdEP6data_t'
+public	MaxIterFwd				as	'_ZNK9MultiTree10MaxIterFwdEP6data_tPl'
+public	MaxIterFwd				as	'_ZNK10UniqueTree10MaxIterFwdEP6data_tPl'
+public	MaxIterBwd				as	'_ZNK9MultiTree10MaxIterBwdEP6data_tPl'
+public	MaxIterBwd				as	'_ZNK10UniqueTree10MaxIterBwdEP6data_tPl'
 
 ;******************************************************************************;
 ;       Key searching                                                          ;
@@ -326,66 +408,98 @@ public	FindEqualFwd			as	'MultiTree_FindEqualFwd'
 public	FindEqualFwd			as	'UniqueTree_FindEqualFwd'
 public	FindEqualBwd			as	'MultiTree_FindEqualBwd'
 public	FindEqualBwd			as	'UniqueTree_FindEqualBwd'
+public	FindEqualIterFwd		as	'MultiTree_FindEqualIterFwd'
+public	FindEqualIterFwd		as	'UniqueTree_FindEqualIterFwd'
+public	FindEqualIterBwd		as	'MultiTree_FindEqualIterBwd'
+public	FindEqualIterBwd		as	'UniqueTree_FindEqualIterBwd'
 public	FindEqualFwd			as	'_ZN9MultiTree12FindEqualFwdEP6data_t5adt_t'
 public	FindEqualFwd			as	'_ZN10UniqueTree12FindEqualFwdEP6data_t5adt_t'
 public	FindEqualBwd			as	'_ZN9MultiTree12FindEqualBwdEP6data_t5adt_t'
 public	FindEqualBwd			as	'_ZN10UniqueTree12FindEqualBwdEP6data_t5adt_t'
+public	FindEqualIterFwd		as	'_ZNK9MultiTree16FindEqualIterFwdEP6data_t5adt_tPl'
+public	FindEqualIterFwd		as	'_ZNK10UniqueTree16FindEqualIterFwdEP6data_t5adt_tPl'
+public	FindEqualIterBwd		as	'_ZNK9MultiTree16FindEqualIterBwdEP6data_t5adt_tPl'
+public	FindEqualIterBwd		as	'_ZNK10UniqueTree16FindEqualIterBwdEP6data_t5adt_tPl'
 
 ; Searching for greater key
 public	FindGreatFwd			as	'MultiTree_FindGreatFwd'
 public	FindGreatFwd			as	'UniqueTree_FindGreatFwd'
 public	FindGreatBwd			as	'MultiTree_FindGreatBwd'
 public	FindGreatBwd			as	'UniqueTree_FindGreatBwd'
+public	FindGreatIter			as	'MultiTree_FindGreatIter'
+public	FindGreatIter			as	'UniqueTree_FindGreatIter'
 public	FindGreatFwd			as	'_ZN9MultiTree12FindGreatFwdEP6data_t5adt_t'
 public	FindGreatFwd			as	'_ZN10UniqueTree12FindGreatFwdEP6data_t5adt_t'
 public	FindGreatBwd			as	'_ZN9MultiTree12FindGreatBwdEP6data_t5adt_t'
 public	FindGreatBwd			as	'_ZN10UniqueTree12FindGreatBwdEP6data_t5adt_t'
+public	FindGreatIter			as	'_ZNK9MultiTree13FindGreatIterEP6data_t5adt_tPl'
+public	FindGreatIter			as	'_ZNK10UniqueTree13FindGreatIterEP6data_t5adt_tPl'
 
 ; Searching for greater or equal key
 public	FindGreatOrEqualFwd		as	'MultiTree_FindGreatOrEqualFwd'
 public	FindGreatOrEqualFwd		as	'UniqueTree_FindGreatOrEqualFwd'
 public	FindGreatOrEqualBwd		as	'MultiTree_FindGreatOrEqualBwd'
 public	FindGreatOrEqualBwd		as	'UniqueTree_FindGreatOrEqualBwd'
+public	FindGreatOrEqualIter	as	'MultiTree_FindGreatOrEqualIter'
+public	FindGreatOrEqualIter	as	'UniqueTree_FindGreatOrEqualIter'
 public	FindGreatOrEqualFwd		as	'_ZN9MultiTree19FindGreatOrEqualFwdEP6data_t5adt_t'
 public	FindGreatOrEqualFwd		as	'_ZN10UniqueTree19FindGreatOrEqualFwdEP6data_t5adt_t'
 public	FindGreatOrEqualBwd		as	'_ZN9MultiTree19FindGreatOrEqualBwdEP6data_t5adt_t'
 public	FindGreatOrEqualBwd		as	'_ZN10UniqueTree19FindGreatOrEqualBwdEP6data_t5adt_t'
+public	FindGreatOrEqualIter	as	'_ZNK9MultiTree20FindGreatOrEqualIterEP6data_t5adt_tPl'
+public	FindGreatOrEqualIter	as	'_ZNK10UniqueTree20FindGreatOrEqualIterEP6data_t5adt_tPl'
 
 ; Searching for less key
 public	FindLessFwd				as	'MultiTree_FindLessFwd'
 public	FindLessFwd				as	'UniqueTree_FindLessFwd'
 public	FindLessBwd				as	'MultiTree_FindLessBwd'
 public	FindLessBwd				as	'UniqueTree_FindLessBwd'
+public	FindLessIter			as	'MultiTree_FindLessIter'
+public	FindLessIter			as	'UniqueTree_FindLessIter'
 public	FindLessFwd				as	'_ZN9MultiTree11FindLessFwdEP6data_t5adt_t'
 public	FindLessFwd				as	'_ZN10UniqueTree11FindLessFwdEP6data_t5adt_t'
 public	FindLessBwd				as	'_ZN9MultiTree11FindLessBwdEP6data_t5adt_t'
 public	FindLessBwd				as	'_ZN10UniqueTree11FindLessBwdEP6data_t5adt_t'
+public	FindLessIter			as	'_ZNK9MultiTree12FindLessIterEP6data_t5adt_tPl'
+public	FindLessIter			as	'_ZNK10UniqueTree12FindLessIterEP6data_t5adt_tPl'
 
 ; Searching for less or equal key
 public	FindLessOrEqualFwd		as	'MultiTree_FindLessOrEqualFwd'
 public	FindLessOrEqualFwd		as	'UniqueTree_FindLessOrEqualFwd'
 public	FindLessOrEqualBwd		as	'MultiTree_FindLessOrEqualBwd'
 public	FindLessOrEqualBwd		as	'UniqueTree_FindLessOrEqualBwd'
+public	FindLessOrEqualIter		as	'MultiTree_FindLessOrEqualIter'
+public	FindLessOrEqualIter		as	'UniqueTree_FindLessOrEqualIter'
 public	FindLessOrEqualFwd		as	'_ZN9MultiTree18FindLessOrEqualFwdEP6data_t5adt_t'
 public	FindLessOrEqualFwd		as	'_ZN10UniqueTree18FindLessOrEqualFwdEP6data_t5adt_t'
 public	FindLessOrEqualBwd		as	'_ZN9MultiTree18FindLessOrEqualBwdEP6data_t5adt_t'
 public	FindLessOrEqualBwd		as	'_ZN10UniqueTree18FindLessOrEqualBwdEP6data_t5adt_t'
+public	FindLessOrEqualIter		as	'_ZNK9MultiTree19FindLessOrEqualIterEP6data_t5adt_tPl'
+public	FindLessOrEqualIter		as	'_ZNK10UniqueTree19FindLessOrEqualIterEP6data_t5adt_tPl'
 
 ;==============================================================================;
 ;       Sequence searching                                                     ;
 ;==============================================================================;
 public	FindSequenceFwd			as	'MultiTree_FindSequenceFwd'
 public	FindSequenceBwd			as	'MultiTree_FindSequenceBwd'
+public	FindSequenceIterFwd		as	'MultiTree_FindSequenceIterFwd'
+public	FindSequenceIterBwd		as	'MultiTree_FindSequenceIterBwd'
 public	FindSequenceFwd			as	'_ZN9MultiTree15FindSequenceFwdEP6data_t5adt_t'
 public	FindSequenceBwd			as	'_ZN9MultiTree15FindSequenceBwdEP6data_t5adt_t'
+public	FindSequenceIterFwd		as	'_ZNK9MultiTree19FindSequenceIterFwdEP6data_t5adt_tPl'
+public	FindSequenceIterBwd		as	'_ZNK9MultiTree19FindSequenceIterBwdEP6data_t5adt_tPl'
 
 ;******************************************************************************;
 ;       Duplicates searching                                                   ;
 ;******************************************************************************;
 public	FindDupFwd				as	'MultiTree_FindDupFwd'
 public	FindDupBwd				as	'MultiTree_FindDupBwd'
+public	FindDupIterFwd			as	'MultiTree_FindDupIterFwd'
+public	FindDupIterBwd			as	'MultiTree_FindDupIterBwd'
 public	FindDupFwd				as	'_ZN9MultiTree10FindDupFwdEP6data_t'
 public	FindDupBwd				as	'_ZN9MultiTree10FindDupBwdEP6data_t'
+public	FindDupIterFwd			as	'_ZNK9MultiTree14FindDupIterFwdEP6data_tPl'
+public	FindDupIterBwd			as	'_ZNK9MultiTree14FindDupIterBwdEP6data_tPl'
 
 ;******************************************************************************;
 ;       Searching for differences                                              ;
@@ -394,10 +508,18 @@ public	FindDiffFwd				as	'MultiTree_FindDiffFwd'
 public	FindDiffFwd				as	'UniqueTree_FindDiffFwd'
 public	FindDiffBwd				as	'MultiTree_FindDiffBwd'
 public	FindDiffBwd				as	'UniqueTree_FindDiffBwd'
+public	FindDiffIterFwd			as	'MultiTree_FindDiffIterFwd'
+public	FindDiffIterFwd			as	'UniqueTree_FindDiffIterFwd'
+public	FindDiffIterBwd			as	'MultiTree_FindDiffIterBwd'
+public	FindDiffIterBwd			as	'UniqueTree_FindDiffIterBwd'
 public	FindDiffFwd				as	'_ZN9MultiTree11FindDiffFwdEP6data_tPKS_m'
 public	FindDiffFwd				as	'_ZN10UniqueTree11FindDiffFwdEP6data_tPKS_m'
 public	FindDiffBwd				as	'_ZN9MultiTree11FindDiffBwdEP6data_tPKS_m'
 public	FindDiffBwd				as	'_ZN10UniqueTree11FindDiffBwdEP6data_tPKS_m'
+public	FindDiffIterFwd			as	'_ZNK9MultiTree15FindDiffIterFwdEP6data_tPKS_mPll'
+public	FindDiffIterFwd			as	'_ZNK10UniqueTree15FindDiffIterFwdEP6data_tPKS_mPll'
+public	FindDiffIterBwd			as	'_ZNK9MultiTree15FindDiffIterBwdEP6data_tPKS_mPll'
+public	FindDiffIterBwd			as	'_ZNK10UniqueTree15FindDiffIterBwdEP6data_tPKS_mPll'
 
 ;******************************************************************************;
 ;       Key counting                                                           ;
@@ -4194,17 +4316,19 @@ space	= 3 * 8								; stack size required by the procedure
 ;==============================================================================;
 ;       Using iterators                                                        ;
 ;==============================================================================;
-macro	GET_ITER	offst
+macro	GET_ITER	offst, ext
 {
 ;---[Parameters]---------------------------
 this	equ		rdi							; pointer to b-tree object
 data	equ		rsi							; pointer to data structure
+iter	equ		rdx							; iterator value
 ;---[Internal variables]-------------------
 status	equ		al							; operation status
-iter	equ		rcx							; iterator value
 temp	equ		xmm0						; temporary register
 ;---[Check iterator]-----------------------
+if ~ext
 		mov		iter, [this + offst]		; get iterator value
+end if
 		cmp		iter, EMPTY					; if (iter == EMPTY)
 		setne	status						;     return false
 		je		.exit
@@ -4215,8 +4339,9 @@ temp	equ		xmm0						; temporary register
 		movdqu	[data], temp				; data[0] = array[iter].data
 .exit:	ret									; return true
 }
-GetFwd:	GET_ITER	FWD
-GetBwd:	GET_ITER	BWD
+GetFwd:		GET_ITER	FWD, 0
+GetBwd:		GET_ITER	BWD, 0
+GetIter:	GET_ITER	EMPTY, 1
 
 ;******************************************************************************;
 ;       Replacing element value                                                ;
@@ -4632,7 +4757,7 @@ level	equ		r10							; level of b-tree node
 .error:	mov		result, EMPTY				; return EMPTY
 		ret
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	SET_ITER_INDEX	offst
+macro	SET_ITER_INDEX	offst, ext
 {
 ;---[Parameters]---------------------------
 this	equ		rdi							; pointer to b-tree object
@@ -4656,16 +4781,21 @@ space	= 1 * 8								; stack size required by the procedure
 		mov		param1, [this + ARRAY]
 		call	GetNode						; result = GetNode (array, root, height, index)
 		mov		this, [s_this]				; get "this" variable from the stack
+if ~ext
 		mov		[this + offst], result		; update iterator position
+end if
 		add		stack, space				; restoring back the stack pointer
 		ret
 ;---[Error branch]-------------------------
-.error:	mov		qword [this + offst], EMPTY	; update iterator position
+.error:	mov		result, EMPTY				; return EMPTY
+if ~ext
+		mov		[this + offst], result		; update iterator position
+end if
 		add		stack, space				; restoring back the stack pointer
 		ret
 }
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	SET_ITERATOR1	offst, max
+macro	SET_ITERATOR1	offst, max, ext
 {
 ;---[Parameters]---------------------------
 this	equ		rdi							; pointer to b-tree object
@@ -4693,36 +4823,45 @@ end if
 		mov		param1, [this + ARRAY]
 		call	GetNode						; result = GetNode (array, root, height, size)
 		mov		this, [s_this]				; get "this" variable from the stack
+if ~ext
 		mov		[this + offst], result		; update iterator position
+end if
 		add		stack, space				; restoring back the stack pointer
 		ret
 ;---[Error branch]-------------------------
-.error:	mov		qword [this + offst], EMPTY	; update iterator position
+.error:	mov		result, EMPTY				; return EMPTY
+if ~ext
+		mov		[this + offst], result		; update iterator position
+end if
 		add		stack, space				; restoring back the stack pointer
 		ret
 }
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	SET_ITERATOR2	target, source
-{
-;---[Parameters]---------------------------
-this	equ		rdi							; pointer to b-tree object
-;---[Internal variables]-------------------
-temp	equ		rax							; temporary register
-;------------------------------------------
-		mov		temp, [this + source]
-		mov		[this + target], temp		; set target iterator by source value
-		ret
-}
-;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	GET_POS		offst
+macro	SET_ITERATOR2	target, source, ext
 {
 ;---[Parameters]---------------------------
 this	equ		rdi							; pointer to b-tree object
 ;---[Internal variables]-------------------
 result	equ		rax							; result register
-iter	equ		rcx							; iterator value
+;------------------------------------------
+		mov		result, [this + source]
+if ~ext
+		mov		[this + target], result		; set target iterator by source value
+end if
+		ret
+}
+;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+macro	GET_POS		offst, ext
+{
+;---[Parameters]---------------------------
+this	equ		rdi							; pointer to b-tree object
+iter	equ		rsi							; iterator value
+;---[Internal variables]-------------------
+result	equ		rax							; result register
 ;---[Check iterator]-----------------------
+if ~ext
 		mov		iter, [this + offst]		; get iterator value
+end if
 		cmp		iter, EMPTY					; if (iter == EMPTY)
 		je		.error						;     then go to error branch
 ;---[Normal execution branch]--------------
@@ -4736,21 +4875,27 @@ iter	equ		rcx							; iterator value
 		ret
 }
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	MOVE_ITERATOR	IterFunc, offst
+macro	MOVE_ITERATOR	IterFunc, offst, ext
 {
 ;---[Parameters]---------------------------
 this	equ		rdi							; pointer to b-tree object
 pos		equ		rsi							; number of positions to move
+ptr		equ		rdx							; pointer to iterator
 ;---[Internal variables]-------------------
 status	equ		al							; operation status
 iter	equ		rax							; iterator value
 stack	equ		rsp							; stack pointer
 s_this	equ		stack + 0 * 8				; stack position of "this" variable
-space	= 1 * 8								; stack size required by the procedure
+s_ptr	equ		stack + 1 * 8				; stack position of "ptr" variable
+space	= 3 * 8								; stack size required by the procedure
 ;------------------------------------------
 		sub		stack, space				; reserving stack size for local vars
 ;---[Check iterator]-----------------------
+if ~ext
 		mov		iter, [this + offst]		; get iterator value
+else
+		mov		iter, [ptr]					; get iterator value
+end if
 		cmp		iter, EMPTY					; if (iter == EMPTY)
 		je		.error						;     then go to error branch
 ;---[Check position]-----------------------
@@ -4758,12 +4903,18 @@ space	= 1 * 8								; stack size required by the procedure
 		jz		.exit						;     then go to exit
 ;---[Normal execution branch]--------------
 		mov		[s_this], this				; save "this" variable into the stack
+		mov		[s_ptr], ptr				; save "ptr" variable into the stack
 		mov		param3, pos
 		mov		param2, iter
 		mov		param1, [this + ARRAY]
 		call	IterFunc					; iter = IterFunc (array, iter, pos)
 		mov		this, [s_this]				; get "this" variable from the stack
+		mov		ptr, [s_ptr]				; get "ptr" variable from the stack
+if ~ext
 		mov		[this + offst], iter		; update iterator position
+else
+		mov		[ptr], iter					; update iterator position
+end if
 		cmp		iter, EMPTY					; if (iter == EMPTY)
 		je		.error						;     then go to error branch
 ;---[Normal exit branch]-------------------
@@ -4779,21 +4930,21 @@ space	= 1 * 8								; stack size required by the procedure
 ;==============================================================================;
 ;       Set iterator position                                                  ;
 ;==============================================================================;
-FwdToIndex:	SET_ITER_INDEX	FWD
-FwdToMin:	SET_ITERATOR1	FWD, 0
-FwdToMax:	SET_ITERATOR1	FWD, 1
-FwdToBwd:	SET_ITERATOR2	FWD, BWD
+FwdToIndex:		SET_ITER_INDEX	FWD, 0
+FwdToMin:		SET_ITERATOR1	FWD, 0, 0
+FwdToMax:		SET_ITERATOR1	FWD, 1, 0
+FwdToBwd:		SET_ITERATOR2	FWD, BWD, 0
 
 ;==============================================================================;
 ;       Get iterator position                                                  ;
 ;==============================================================================;
-GetFwdPos:	GET_POS			FWD
+GetFwdPos:		GET_POS			FWD, 0
 
 ;==============================================================================;
 ;       Change iterator position                                               ;
 ;==============================================================================;
-FwdGoNext:	MOVE_ITERATOR	GoNext, FWD
-FwdGoPrev:	MOVE_ITERATOR	GoPrev, FWD
+FwdGoNext:		MOVE_ITERATOR	GoNext, FWD, 0
+FwdGoPrev:		MOVE_ITERATOR	GoPrev, FWD, 0
 
 ;******************************************************************************;
 ;       Manipulation with backward iterator                                    ;
@@ -4802,21 +4953,45 @@ FwdGoPrev:	MOVE_ITERATOR	GoPrev, FWD
 ;==============================================================================;
 ;       Set iterator position                                                  ;
 ;==============================================================================;
-BwdToIndex:	SET_ITER_INDEX	BWD
-BwdToMin:	SET_ITERATOR1	BWD, 0
-BwdToMax:	SET_ITERATOR1	BWD, 1
-BwdToFwd:	SET_ITERATOR2	BWD, FWD
+BwdToIndex:		SET_ITER_INDEX	BWD, 0
+BwdToMin:		SET_ITERATOR1	BWD, 0, 0
+BwdToMax:		SET_ITERATOR1	BWD, 1, 0
+BwdToFwd:		SET_ITERATOR2	BWD, FWD, 0
 
 ;==============================================================================;
 ;       Get iterator position                                                  ;
 ;==============================================================================;
-GetBwdPos:	GET_POS			BWD
+GetBwdPos:		GET_POS			BWD, 0
 
 ;==============================================================================;
 ;       Change iterator position                                               ;
 ;==============================================================================;
-BwdGoNext:	MOVE_ITERATOR	GoPrev, BWD
-BwdGoPrev:	MOVE_ITERATOR	GoNext, BWD
+BwdGoNext:		MOVE_ITERATOR	GoPrev, BWD, 0
+BwdGoPrev:		MOVE_ITERATOR	GoNext, BWD, 0
+
+;******************************************************************************;
+;       Manipulation with external iterator                                    ;
+;******************************************************************************;
+
+;==============================================================================;
+;       Set iterator position                                                  ;
+;==============================================================================;
+IterToIndex:	SET_ITER_INDEX	EMPTY, 1
+IterToMin:		SET_ITERATOR1	EMPTY, 0, 1
+IterToMax:		SET_ITERATOR1	EMPTY, 1, 1
+IterToFwd:		SET_ITERATOR2	EMPTY, FWD, 1
+IterToBwd:		SET_ITERATOR2	EMPTY, BWD, 1
+
+;==============================================================================;
+;       Get iterator position                                                  ;
+;==============================================================================;
+GetIterPos:		GET_POS			EMPTY, 1
+
+;==============================================================================;
+;       Change iterator position                                               ;
+;==============================================================================;
+IterGoFwd:		MOVE_ITERATOR	GoNext, EMPTY, 1
+IterGoBwd:		MOVE_ITERATOR	GoPrev, EMPTY, 1
 
 ;******************************************************************************;
 ;       Swapping iterators                                                     ;
@@ -4837,19 +5012,21 @@ bwd		equ		rdx							; forward iterator
 ;******************************************************************************;
 ;       Minimum and maximum value                                              ;
 ;******************************************************************************;
-macro	MINMAX1	offst, max
+macro	MINMAX1	offst, max, ext
 {
 ;---[Parameters]---------------------------
 this	equ		rdi							; pointer to b-tree object
 data	equ		rsi							; pointer to data structure
+ptr		equ		rdx							; pointer to iterator
 ;---[Internal variables]-------------------
 status	equ		al							; operation status
 result	equ		rax							; result register
-size	equ		rdx							; object size
+size	equ		rcx							; object size
 temp	equ		xmm0						; temporary register
 stack	equ		rsp							; stack pointer
 s_this	equ		stack + 0 * 8				; stack position of "this" variable
 s_data	equ		stack + 1 * 8				; stack position of "data" variable
+s_ptr	equ		stack + 2 * 8				; stack position of "ptr" variable
 space	= 3 * 8								; stack size required by the procedure
 ;------------------------------------------
 		sub		stack, space				; reserving stack size for local vars
@@ -4860,6 +5037,7 @@ space	= 3 * 8								; stack size required by the procedure
 ;---[Normal execution branch]--------------
 		mov		[s_this], this				; save "this" variable into the stack
 		mov		[s_data], data				; save "data" variable into the stack
+		mov		[s_ptr], ptr				; save "ptr" variable into the stack
 if max
 		lea		param4, [size - KSIZE]
 else
@@ -4872,7 +5050,12 @@ end if
 ;---[Update iterator value]----------------
 		mov		this, [s_this]				; get "this" variable from the stack
 		mov		data, [s_data]				; get "data" variable from the stack
+		mov		ptr, [s_ptr]				; get "ptr" variable from the stack
+if ~ext
 		mov		[this + offst], result		; update iterator position
+else
+		mov		[ptr], result				; update iterator position
+end if
 		and		result, PMASK
 		add		result, [this + ARRAY]
 		movdqa	temp, [result + BDATA]
@@ -4886,19 +5069,21 @@ end if
 		ret
 }
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	MINMAX2	CmpFunc, offst, max
+macro	MINMAX2	CmpFunc, offst, max, ext
 {
 ;---[Parameters]---------------------------
 this	equ		rdi							; pointer to b-tree object
 data	equ		rsi							; pointer to data structure
+ptr		equ		rdx							; pointer to iterator
 ;---[Internal variables]-------------------
 status	equ		al							; operation status
 result	equ		rax							; result register
-size	equ		rdx							; object size
+size	equ		rcx							; object size
 temp	equ		xmm0						; temporary register
 stack	equ		rsp							; stack pointer
 s_this	equ		stack + 0 * 8				; stack position of "this" variable
 s_data	equ		stack + 1 * 8				; stack position of "data" variable
+s_ptr	equ		stack + 2 * 8				; stack position of "ptr" variable
 space	= 3 * 8								; stack size required by the procedure
 ;------------------------------------------
 		sub		stack, space				; reserving stack size for local vars
@@ -4909,6 +5094,7 @@ space	= 3 * 8								; stack size required by the procedure
 ;---[Normal execution branch]--------------
 		mov		[s_this], this				; save "this" variable into the stack
 		mov		[s_data], data				; save "data" variable into the stack
+		mov		[s_ptr], ptr				; save "ptr" variable into the stack
 if max
 		lea		param4, [size - KSIZE]
 else
@@ -4931,7 +5117,12 @@ end if
 ;---[Update iterator value]----------------
 		mov		this, [s_this]				; get "this" variable from the stack
 		mov		data, [s_data]				; get "data" variable from the stack
+		mov		ptr, [s_ptr]				; get "ptr" variable from the stack
+if ~ext
 		mov		[this + offst], result		; update iterator position
+else
+		mov		[ptr], result				; update iterator position
+end if
 		and		result, PMASK
 		add		result, [this + ARRAY]
 		movdqa	temp, [result + BDATA]
@@ -4946,12 +5137,16 @@ end if
 }
 
 ; Minimum value
-MinFwd:	MINMAX1	FWD, 0
-MinBwd:	MINMAX2	EqualBwd, BWD, 0
+MinFwd:		MINMAX1		FWD, 0, 0
+MinBwd:		MINMAX2		EqualBwd, BWD, 0, 0
+MinIterFwd:	MINMAX1		EMPTY, 0, 1
+MinIterBwd:	MINMAX2		EqualBwd, EMPTY, 0, 1
 
 ; Maximum value
-MaxFwd:	MINMAX2	EqualFwd, FWD, 1
-MaxBwd:	MINMAX1	BWD, 1
+MaxFwd:		MINMAX2		EqualFwd, FWD, 1, 0
+MaxBwd:		MINMAX1		BWD, 1, 0
+MaxIterFwd:	MINMAX2		EqualFwd, EMPTY, 1, 1
+MaxIterBwd:	MINMAX1		EMPTY, 1, 1
 
 ;******************************************************************************;
 ;       Key searching                                                          ;
@@ -5103,12 +5298,13 @@ GreatOrEqual:	FIND_CORE	le, g
 Less:			FIND_CORE	g, g
 LessOrEqual:	FIND_CORE	ge, ge
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	FIND_KEY	CmpFunc, offst
+macro	FIND_KEY	CmpFunc, offst, ext
 {
 ;---[Parameters]---------------------------
 this	equ		rdi							; pointer to b-tree object
 data	equ		rsi							; pointer to data structure
 key		equ		rdx							; key to find
+ptr		equ		rcx							; pointer to iterator
 ;---[Internal variables]-------------------
 status	equ		al							; operation status
 result	equ		rax							; result register
@@ -5116,6 +5312,7 @@ temp	equ		xmm0						; temporary register
 stack	equ		rsp							; stack pointer
 s_this	equ		stack + 0 * 8				; stack position of "this" variable
 s_data	equ		stack + 1 * 8				; stack position of "data" variable
+s_ptr	equ		stack + 2 * 8				; stack position of "ptr" variable
 space	= 3 * 8								; stack size required by the procedure
 ;------------------------------------------
 		sub		stack, space				; reserving stack size for local vars
@@ -5125,6 +5322,7 @@ space	= 3 * 8								; stack size required by the procedure
 ;---[Normal execution branch]--------------
 		mov		[s_this], this				; save "this" variable into the stack
 		mov		[s_data], data				; save "data" variable into the stack
+		mov		[s_ptr], ptr				; save "ptr" variable into the stack
 ;---[Call search function]-----------------
 		mov		param5, key
 		mov		param4, [this + FUNC]
@@ -5137,7 +5335,12 @@ space	= 3 * 8								; stack size required by the procedure
 ;---[Update iterator value]----------------
 		mov		this, [s_this]				; get "this" variable from the stack
 		mov		data, [s_data]				; get "data" variable from the stack
+		mov		ptr, [s_ptr]				; get "ptr" variable from the stack
+if ~ext
 		mov		[this + offst], result		; update iterator position
+else
+		mov		[ptr], result				; update iterator position
+end if
 		and		result, PMASK
 		add		result, [this + ARRAY]
 		movdqa	temp, [result + BDATA]
@@ -5152,24 +5355,30 @@ space	= 3 * 8								; stack size required by the procedure
 }
 
 ; Searching for equal key
-FindEqualFwd:			FIND_KEY	EqualFwd, FWD
-FindEqualBwd:			FIND_KEY	EqualBwd, BWD
+FindEqualFwd:				FIND_KEY	EqualFwd, FWD, 0
+FindEqualBwd:				FIND_KEY	EqualBwd, BWD, 0
+FindEqualIterFwd:			FIND_KEY	EqualFwd, EMPTY, 1
+FindEqualIterBwd:			FIND_KEY	EqualBwd, EMPTY, 1
 
 ; Searching for greater key
-FindGreatFwd:			FIND_KEY	Great, FWD
-FindGreatBwd:			FIND_KEY	Great, BWD
+FindGreatFwd:				FIND_KEY	Great, FWD, 0
+FindGreatBwd:				FIND_KEY	Great, BWD, 0
+FindGreatIter:				FIND_KEY	Great, EMPTY, 1
 
 ; Searching for greater or equal key
-FindGreatOrEqualFwd:	FIND_KEY	GreatOrEqual, FWD
-FindGreatOrEqualBwd:	FIND_KEY	GreatOrEqual, BWD
+FindGreatOrEqualFwd:		FIND_KEY	GreatOrEqual, FWD, 0
+FindGreatOrEqualBwd:		FIND_KEY	GreatOrEqual, BWD, 0
+FindGreatOrEqualIter:		FIND_KEY	GreatOrEqual, EMPTY, 1
 
 ; Searching for less key
-FindLessFwd:			FIND_KEY	Less, FWD
-FindLessBwd:			FIND_KEY	Less, BWD
+FindLessFwd:				FIND_KEY	Less, FWD, 0
+FindLessBwd:				FIND_KEY	Less, BWD, 0
+FindLessIter:				FIND_KEY	Less, EMPTY, 1
 
 ; Searching for less or equal key
-FindLessOrEqualFwd:		FIND_KEY	LessOrEqual, FWD
-FindLessOrEqualBwd:		FIND_KEY	LessOrEqual, BWD
+FindLessOrEqualFwd:			FIND_KEY	LessOrEqual, FWD, 0
+FindLessOrEqualBwd:			FIND_KEY	LessOrEqual, BWD, 0
+FindLessOrEqualIter:		FIND_KEY	LessOrEqual, EMPTY, 1
 
 ;==============================================================================;
 ;       Sequence searching                                                     ;
@@ -5329,12 +5538,13 @@ space	= 15 * 8							; stack size required by the procedure
 FirstIndex:	FIND_INDEX	e, g
 LastIndex:	FIND_INDEX	e, ge
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	FIND_SEQUENCE	Func1, Func2, offst, bwd
+macro	FIND_SEQUENCE	Func1, Func2, offst, bwd, ext
 {
 ;---[Parameters]---------------------------
 this	equ		rdi							; pointer to b-tree object
 data	equ		rsi							; pointer to data structure
 key		equ		rdx							; key to find
+ptr		equ		rcx							; pointer to iterator
 ;---[Internal variables]-------------------
 result	equ		rax							; result register
 index	equ		rcx							; element index
@@ -5343,7 +5553,8 @@ stack	equ		rsp							; stack pointer
 s_this	equ		stack + 0 * 8				; stack position of "this" variable
 s_data	equ		stack + 1 * 8				; stack position of "data" variable
 s_key	equ		stack + 2 * 8				; stack position of "key" variable
-s_index	equ		stack + 3 * 8				; stack position of "index" variable
+s_ptr	equ		stack + 3 * 8				; stack position of "ptr" variable
+s_index	equ		stack + 4 * 8				; stack position of "index" variable
 space	= 5 * 8								; stack size required by the procedure
 ;------------------------------------------
 		sub		stack, space				; reserving stack size for local vars
@@ -5354,6 +5565,7 @@ space	= 5 * 8								; stack size required by the procedure
 		mov		[s_this], this				; save "this" variable into the stack
 		mov		[s_data], data				; save "data" variable into the stack
 		mov		[s_key], key				; save "key" variable into the stack
+		mov		[s_ptr], ptr				; save "ptr" variable into the stack
 ;---[Call search function #1]--------------
 		mov		param5, key
 		mov		param4, [this + FUNC]
@@ -5372,14 +5584,7 @@ space	= 5 * 8								; stack size required by the procedure
 		mov		param2, [this + ROOT]
 		mov		param1, [this + ARRAY]
 		call	Func2						; result = Func2 (array, root, height, func, key)
-;---[Update iterator value]----------------
-		mov		this, [s_this]				; get "this" variable from the stack
-		mov		data, [s_data]				; get "data" variable from the stack
-		mov		[this + offst], result		; update iterator position
-		and		result, PMASK
-		add		result, [this + ARRAY]
-		movdqa	temp, [result + BDATA]
-		movdqu	[data], temp				; data[0] = array[iter].data
+;---[Compute total key count]--------------
 if bwd
 		sub		index, [s_index]
 else
@@ -5387,7 +5592,21 @@ else
 		add		index, [s_index]
 end if
 		shr		index, KSCALE
-		mov		result, index				; return index
+		mov		key, index					; key = count
+;---[Update iterator value]----------------
+		mov		this, [s_this]				; get "this" variable from the stack
+		mov		data, [s_data]				; get "data" variable from the stack
+		mov		ptr, [s_ptr]				; get "ptr" variable from the stack
+if ~ext
+		mov		[this + offst], result		; update iterator position
+else
+		mov		[ptr], result				; update iterator position
+end if
+		and		result, PMASK
+		add		result, [this + ARRAY]
+		movdqa	temp, [result + BDATA]
+		movdqu	[data], temp				; data[0] = array[iter].data
+		mov		result, key					; return count
 		add		stack, space				; restoring back the stack pointer
 		ret
 ;---[Not found branch]---------------------
@@ -5395,8 +5614,10 @@ end if
 		add		stack, space				; restoring back the stack pointer
 		ret
 }
-FindSequenceFwd:	FIND_SEQUENCE	LastIndex, FirstIndex, FWD, 0
-FindSequenceBwd:	FIND_SEQUENCE	FirstIndex, LastIndex, BWD, 1
+FindSequenceFwd:		FIND_SEQUENCE	LastIndex, FirstIndex, FWD, 0, 0
+FindSequenceBwd:		FIND_SEQUENCE	FirstIndex, LastIndex, BWD, 1, 0
+FindSequenceIterFwd:	FIND_SEQUENCE	LastIndex, FirstIndex, EMPTY, 0, 1
+FindSequenceIterBwd:	FIND_SEQUENCE	FirstIndex, LastIndex, EMPTY, 1, 1
 
 ;******************************************************************************;
 ;       Duplicates searching                                                   ;
@@ -5460,11 +5681,12 @@ space	= 5 * 8								; stack size required by the procedure
 DupFwd:	FIND_DUP_CORE	GoNext
 DupBwd:	FIND_DUP_CORE	GoPrev
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	FIND_DUP	CheckFunc, offst
+macro	FIND_DUP	CheckFunc, offst, ext
 {
 ;---[Parameters]---------------------------
 this	equ		rdi							; pointer to b-tree object
 data	equ		rsi							; pointer to data structure
+ptr		equ		rdx							; pointer to iterator
 ;---[Internal variables]-------------------
 status	equ		al							; operation status
 result	equ		rax							; result register
@@ -5474,11 +5696,16 @@ temp	equ		xmm0						; temporary register
 stack	equ		rsp							; stack pointer
 s_this	equ		stack + 0 * 8				; stack position of "this" variable
 s_data	equ		stack + 1 * 8				; stack position of "data" variable
+s_ptr	equ		stack + 2 * 8				; stack position of "ptr" variable
 space	= 3 * 8								; stack size required by the procedure
 ;------------------------------------------
 		sub		stack, space				; reserving stack size for local vars
 ;---[Check iterator]-----------------------
+if ~ext
 		mov		iter, [this + offst]		; get iterator value
+else
+		mov		iter, [ptr]					; get iterator value
+end if
 		cmp		iter, EMPTY					; if (iter == EMPTY)
 		je		.ntfnd						;     return false
 ;---[Check object size]--------------------
@@ -5488,6 +5715,7 @@ space	= 3 * 8								; stack size required by the procedure
 ;---[Normal execution branch]--------------
 		mov		[s_this], this				; save "this" variable into the stack
 		mov		[s_data], data				; save "data" variable into the stack
+		mov		[s_ptr], ptr				; save "ptr" variable into the stack
 ;---[Call search function]-----------------
 		mov		param3, [this + FUNC]
 		mov		param2, iter
@@ -5498,7 +5726,12 @@ space	= 3 * 8								; stack size required by the procedure
 ;---[Update iterator value]----------------
 		mov		this, [s_this]				; get "this" variable from the stack
 		mov		data, [s_data]				; get "data" variable from the stack
+		mov		ptr, [s_ptr]				; get "ptr" variable from the stack
+if ~ext
 		mov		[this + offst], result		; update iterator position
+else
+		mov		[ptr], result				; update iterator position
+end if
 		and		result, PMASK
 		add		result, [this + ARRAY]
 		movdqa	temp, [result + BDATA]
@@ -5511,8 +5744,10 @@ space	= 3 * 8								; stack size required by the procedure
 		add		stack, space				; restoring back the stack pointer
 		ret
 }
-FindDupFwd:	FIND_DUP	DupFwd, FWD
-FindDupBwd:	FIND_DUP	DupBwd, BWD
+FindDupFwd:		FIND_DUP	DupFwd, FWD, 0
+FindDupBwd:		FIND_DUP	DupBwd, BWD, 0
+FindDupIterFwd:	FIND_DUP	DupFwd, EMPTY, 1
+FindDupIterBwd:	FIND_DUP	DupBwd, EMPTY, 1
 
 ;******************************************************************************;
 ;       Searching for differences                                              ;
@@ -5587,31 +5822,43 @@ space	= 7 * 8								; stack size required by the procedure
 DiffFwd:	DIFF	GoNext
 DiffBwd:	DIFF	GoPrev
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	FIND_DIFF	CheckFunc, offst
+macro	FIND_DIFF	CheckFunc, offst, ext
 {
 ;---[Parameters]---------------------------
 this	equ		rdi							; pointer to target b-tree object
 data	equ		rsi							; pointer to data structure
 source	equ		rdx							; pointer to source b-tree object
-count	equ		rcx							; count of nodes to copy
+count	equ		rcx							; count of elements to check
+ptr		equ		r8							; pointer to first iterator
+siter	equ		r9							; source iterator
 ;---[Internal variables]-------------------
 status	equ		al							; operation status
 result	equ		rax							; result register
+titer	equ		r10							; target iterator
 size	equ		result						; object size
 temp	equ		xmm0						; temporary register
 stack	equ		rsp							; stack pointer
 s_this	equ		stack + 0 * 8				; stack position of "this" variable
 s_data	equ		stack + 1 * 8				; stack position of "data" variable
+s_ptr	equ		stack + 2 * 8				; stack position of "ptr" variable
 space	= 3 * 8								; stack size required by the procedure
 ;------------------------------------------
 		sub		stack, space				; reserving stack size for local vars
 		cmp		this, source				; if (this == source)
 		je		.ntfnd						;     then return false
 ;---[Check target iterator]----------------
-		cmp		qword [this + offst], EMPTY
+if ~ext
+		mov		titer, [this + offst]		; load target iterator value
+else
+		mov		titer, [ptr]				; load target iterator value
+end if
+		cmp		titer, EMPTY
 		je		.ntfnd						; if (this.iter == EMPTY), then return false
 ;---[Check source iterator]----------------
-		cmp		qword [source + offst], EMPTY
+if ~ext
+		mov		siter, [source + offst]		; load source iterator value
+end if
+		cmp		siter, EMPTY
 		je		.ntfnd						; if (source.iter == EMPTY), then return false
 ;---[Correct count]------------------------
 		shl		count, KSCALE
@@ -5627,11 +5874,12 @@ space	= 3 * 8								; stack size required by the procedure
 ;---[Call search function]-----------------
 		mov		[s_this], this				; save "this" variable into the stack
 		mov		[s_data], data				; save "data" variable into the stack
-		mov		param6, [this + FUNC]
+		mov		[s_ptr], ptr				; save "ptr" variable into the stack
 		mov		param5, count
-		mov		param4, [source + offst]
+		mov		param4, siter
 		mov		param2, [source + ARRAY]
-		mov		param3, [this + offst]
+		mov		param3, titer
+		mov		param6, [this + FUNC]
 		mov		param1, [this + ARRAY]
 		call	CheckFunc					; result = CheckFunc (this.array, source.array, titer, siter, count, this.func)
 		cmp		result, EMPTY				; if (result == EMPTY)
@@ -5639,7 +5887,12 @@ space	= 3 * 8								; stack size required by the procedure
 ;---[Update iterator value]----------------
 		mov		this, [s_this]				; get "this" variable from the stack
 		mov		data, [s_data]				; get "data" variable from the stack
+		mov		ptr, [s_ptr]				; get "ptr" variable from the stack
+if ~ext
 		mov		[this + offst], result		; update iterator position
+else
+		mov		[ptr], result				; update iterator position
+end if
 		and		result, PMASK
 		add		result, [this + ARRAY]
 		movdqa	temp, [result + BDATA]
@@ -5652,8 +5905,10 @@ space	= 3 * 8								; stack size required by the procedure
 		add		stack, space				; restoring back the stack pointer
 		ret
 }
-FindDiffFwd:	FIND_DIFF	DiffFwd, FWD
-FindDiffBwd:	FIND_DIFF	DiffBwd, BWD
+FindDiffFwd:		FIND_DIFF	DiffFwd, FWD, 0
+FindDiffBwd:		FIND_DIFF	DiffBwd, BWD, 0
+FindDiffIterFwd:	FIND_DIFF	DiffFwd, EMPTY, 1
+FindDiffIterBwd:	FIND_DIFF	DiffBwd, EMPTY, 1
 
 ;******************************************************************************;
 ;       Key counting                                                           ;
@@ -5697,10 +5952,10 @@ if ~uniq
 		mov		func, [s_func]				; get "func" variable from the stack
 		mov		key, [s_key]				; get "key" variable from the stack
 		call	LastIndex					; result = LastIndex (array, root, height, func, key)
-;---[Update iterator value]----------------
+;---[Compute total key count]--------------
 		sub		index, [s_index]
 		shr		index, KSCALE
-		mov		result, index				; return index
+		mov		result, index				; return count
 else
 		mov		result, 1					; return 1
 end if

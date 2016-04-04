@@ -2,9 +2,9 @@
 ################################################################################
 # Encoding: UTF-8                                                  Tab size: 4 #
 #                                                                              #
-#                    CIRCULAR DOUBLY LINKED LIST DATA TYPE                     #
+#                    CIRCULAR DOUBLY LINKED Ring DATA TYPE                     #
 #                                                                              #
-# License: LGPLv3+                               Copyleft (Ɔ) 2015, Jack Black #
+# License: LGPLv3+                               Copyleft (Ɔ) 2016, Jack Black #
 ################################################################################
 */
 # pragma	once
@@ -121,6 +121,7 @@ bool SetBwd (const data_t *data);
 bool GetLink (data_t *data) const;
 bool GetFwd (data_t *data) const;
 bool GetBwd (data_t *data) const;
+bool GetIter (data_t *data, ptr_t iter) const;
 
 //****************************************************************************//
 //      Replacing element value                                               //
@@ -174,6 +175,23 @@ bool BwdGoNext (size_t pos);
 bool BwdGoPrev (size_t pos);
 
 //****************************************************************************//
+//      Manipulation with external iterator                                   //
+//****************************************************************************//
+
+// Set iterator position
+ptr_t IterToIndex (size_t index) const;
+ptr_t IterToLink (void) const;
+ptr_t IterToFwd (void) const;
+ptr_t IterToBwd (void) const;
+
+// Get iterator position
+size_t GetIterPos (ptr_t iter) const;
+
+// Change iterator position
+bool IterGoFwd (size_t pos, ptr_t *iter) const;
+bool IterGoBwd (size_t pos, ptr_t *iter) const;
+
+//****************************************************************************//
 //      Swapping iterators                                                    //
 //****************************************************************************//
 void SwapFwdBwd (void);
@@ -185,10 +203,14 @@ void SwapFwdBwd (void);
 // Minimum value
 bool MinFwd (data_t *data, size_t count, KeyCmp func);
 bool MinBwd (data_t *data, size_t count, KeyCmp func);
+bool MinIterFwd (data_t *data, size_t count, KeyCmp func, ptr_t *iter) const;
+bool MinIterBwd (data_t *data, size_t count, KeyCmp func, ptr_t *iter) const;
 
 // Maximum value
 bool MaxFwd (data_t *data, size_t count, KeyCmp func);
 bool MaxBwd (data_t *data, size_t count, KeyCmp func);
+bool MaxIterFwd (data_t *data, size_t count, KeyCmp func, ptr_t *iter) const;
+bool MaxIterBwd (data_t *data, size_t count, KeyCmp func, ptr_t *iter) const;
 
 //****************************************************************************//
 //      Key searching                                                         //
@@ -197,16 +219,22 @@ bool MaxBwd (data_t *data, size_t count, KeyCmp func);
 // Single key searching
 bool FindKeyFwd (data_t *data, adt_t key, size_t count, KeyCmp func);
 bool FindKeyBwd (data_t *data, adt_t key, size_t count, KeyCmp func);
+bool FindKeyIterFwd (data_t *data, adt_t key, size_t count, KeyCmp func, ptr_t *iter) const;
+bool FindKeyIterBwd (data_t *data, adt_t key, size_t count, KeyCmp func, ptr_t *iter) const;
 
 // Keys set searching
 bool FindKeysFwd (data_t *data, const adt_t keys[], size_t size, size_t count, KeyCmp func);
 bool FindKeysBwd (data_t *data, const adt_t keys[], size_t size, size_t count, KeyCmp func);
+bool FindKeysIterFwd (data_t *data, const adt_t keys[], size_t size, size_t count, KeyCmp func, ptr_t *iter) const;
+bool FindKeysIterBwd (data_t *data, const adt_t keys[], size_t size, size_t count, KeyCmp func, ptr_t *iter) const;
 
 //****************************************************************************//
 //      Duplicates searching                                                  //
 //****************************************************************************//
 bool FindDupFwd (data_t *data, KeyCmp func);
 bool FindDupBwd (data_t *data, KeyCmp func);
+bool FindDupIterFwd (data_t *data, KeyCmp func, ptr_t *iter) const;
+bool FindDupIterBwd (data_t *data, KeyCmp func, ptr_t *iter) const;
 
 //****************************************************************************//
 //      Unordered elements searching                                          //
@@ -215,16 +243,22 @@ bool FindDupBwd (data_t *data, KeyCmp func);
 // Ascending sort order
 bool FindNonAscFwd (data_t *data, KeyCmp func);
 bool FindNonAscBwd (data_t *data, KeyCmp func);
+bool FindNonAscIterFwd (data_t *data, KeyCmp func, ptr_t *iter) const;
+bool FindNonAscIterBwd (data_t *data, KeyCmp func, ptr_t *iter) const;
 
 // Descending sort order
 bool FindNonDscFwd (data_t *data, KeyCmp func);
 bool FindNonDscBwd (data_t *data, KeyCmp func);
+bool FindNonDscIterFwd (data_t *data, KeyCmp func, ptr_t *iter) const;
+bool FindNonDscIterBwd (data_t *data, KeyCmp func, ptr_t *iter) const;
 
 //****************************************************************************//
 //      Searching for differences                                             //
 //****************************************************************************//
 bool FindDiffFwd (data_t *data, const Ring *source, size_t count, KeyCmp func);
 bool FindDiffBwd (data_t *data, const Ring *source, size_t count, KeyCmp func);
+bool FindDiffIterFwd (data_t *data, const Ring *source, size_t count, KeyCmp func, ptr_t *titer, ptr_t siter) const;
+bool FindDiffIterBwd (data_t *data, const Ring *source, size_t count, KeyCmp func, ptr_t *titer, ptr_t siter) const;
 
 //****************************************************************************//
 //      Key counting                                                          //
@@ -233,10 +267,14 @@ bool FindDiffBwd (data_t *data, const Ring *source, size_t count, KeyCmp func);
 // Single key counting
 size_t CountKeyFwd (adt_t key, size_t count, KeyCmp func) const;
 size_t CountKeyBwd (adt_t key, size_t count, KeyCmp func) const;
+size_t CountKeyIterFwd (adt_t key, size_t count, KeyCmp func, ptr_t iter) const;
+size_t CountKeyIterBwd (adt_t key, size_t count, KeyCmp func, ptr_t iter) const;
 
 // Keys set counting
 size_t CountKeysFwd (const adt_t keys[], size_t size, size_t count, KeyCmp func) const;
 size_t CountKeysBwd (const adt_t keys[], size_t size, size_t count, KeyCmp func) const;
+size_t CountKeysIterFwd (const adt_t keys[], size_t size, size_t count, KeyCmp func, ptr_t iter) const;
+size_t CountKeysIterBwd (const adt_t keys[], size_t size, size_t count, KeyCmp func, ptr_t iter) const;
 
 //****************************************************************************//
 //      Sorting                                                               //
@@ -391,6 +429,7 @@ bool Ring_SetBwd (struct Ring *ring, const struct data_t *data);
 bool Ring_GetLink (const struct Ring *ring, struct data_t *data);
 bool Ring_GetFwd (const struct Ring *ring, struct data_t *data);
 bool Ring_GetBwd (const struct Ring *ring, struct data_t *data);
+bool Ring_GetIter (const struct Ring *ring, struct data_t *data, ptr_t iter);
 
 //****************************************************************************//
 //      Replacing element value                                               //
@@ -444,6 +483,23 @@ bool Ring_BwdGoNext (struct Ring *ring, size_t pos);
 bool Ring_BwdGoPrev (struct Ring *ring, size_t pos);
 
 //****************************************************************************//
+//      Manipulation with external iterator                                   //
+//****************************************************************************//
+
+// Set iterator position
+ptr_t Ring_IterToIndex (const struct Ring *ring, size_t index);
+ptr_t Ring_IterToLink (const struct Ring *ring);
+ptr_t Ring_IterToFwd (const struct Ring *ring);
+ptr_t Ring_IterToBwd (const struct Ring *ring);
+
+// Get iterator position
+size_t Ring_GetIterPos (const struct Ring *ring, ptr_t iter);
+
+// Change iterator position
+bool Ring_IterGoFwd (const struct Ring *ring, size_t pos, ptr_t *iter);
+bool Ring_IterGoBwd (const struct Ring *ring, size_t pos, ptr_t *iter);
+
+//****************************************************************************//
 //      Swapping iterators                                                    //
 //****************************************************************************//
 void Ring_SwapFwdBwd (struct Ring *ring);
@@ -455,10 +511,14 @@ void Ring_SwapFwdBwd (struct Ring *ring);
 // Minimum value
 bool Ring_MinFwd (struct Ring *ring, struct data_t *data, size_t count, KeyCmp func);
 bool Ring_MinBwd (struct Ring *ring, struct data_t *data, size_t count, KeyCmp func);
+bool Ring_MinIterFwd (const struct Ring *ring, struct data_t *data, size_t count, KeyCmp func, ptr_t *iter);
+bool Ring_MinIterBwd (const struct Ring *ring, struct data_t *data, size_t count, KeyCmp func, ptr_t *iter);
 
 // Maximum value
 bool Ring_MaxFwd (struct Ring *ring, struct data_t *data, size_t count, KeyCmp func);
 bool Ring_MaxBwd (struct Ring *ring, struct data_t *data, size_t count, KeyCmp func);
+bool Ring_MaxIterFwd (const struct Ring *ring, struct data_t *data, size_t count, KeyCmp func, ptr_t *iter);
+bool Ring_MaxIterBwd (const struct Ring *ring, struct data_t *data, size_t count, KeyCmp func, ptr_t *iter);
 
 //****************************************************************************//
 //      Key searching                                                         //
@@ -467,16 +527,22 @@ bool Ring_MaxBwd (struct Ring *ring, struct data_t *data, size_t count, KeyCmp f
 // Single key searching
 bool Ring_FindKeyFwd (struct Ring *ring, struct data_t *data, union adt_t key, size_t count, KeyCmp func);
 bool Ring_FindKeyBwd (struct Ring *ring, struct data_t *data, union adt_t key, size_t count, KeyCmp func);
+bool Ring_FindKeyIterFwd (const struct Ring *ring, struct data_t *data, union adt_t key, size_t count, KeyCmp func, ptr_t *iter);
+bool Ring_FindKeyIterBwd (const struct Ring *ring, struct data_t *data, union adt_t key, size_t count, KeyCmp func, ptr_t *iter);
 
 // Keys set searching
 bool Ring_FindKeysFwd (struct Ring *ring, struct data_t *data, const union adt_t keys[], size_t size, size_t count, KeyCmp func);
 bool Ring_FindKeysBwd (struct Ring *ring, struct data_t *data, const union adt_t keys[], size_t size, size_t count, KeyCmp func);
+bool Ring_FindKeysIterFwd (const struct Ring *ring, struct data_t *data, const union adt_t keys[], size_t size, size_t count, KeyCmp func, ptr_t *iter);
+bool Ring_FindKeysIterBwd (const struct Ring *ring, struct data_t *data, const union adt_t keys[], size_t size, size_t count, KeyCmp func, ptr_t *iter);
 
 //****************************************************************************//
 //      Duplicates searching                                                  //
 //****************************************************************************//
 bool Ring_FindDupFwd (struct Ring *ring, struct data_t *data, KeyCmp func);
 bool Ring_FindDupBwd (struct Ring *ring, struct data_t *data, KeyCmp func);
+bool Ring_FindDupIterFwd (const struct Ring *ring, struct data_t *data, KeyCmp func, ptr_t *iter);
+bool Ring_FindDupIterBwd (const struct Ring *ring, struct data_t *data, KeyCmp func, ptr_t *iter);
 
 //****************************************************************************//
 //      Unordered elements searching                                          //
@@ -485,16 +551,22 @@ bool Ring_FindDupBwd (struct Ring *ring, struct data_t *data, KeyCmp func);
 // Ascending sort order
 bool Ring_FindNonAscFwd (struct Ring *ring, struct data_t *data, KeyCmp func);
 bool Ring_FindNonAscBwd (struct Ring *ring, struct data_t *data, KeyCmp func);
+bool Ring_FindNonAscIterFwd (const struct Ring *ring, struct data_t *data, KeyCmp func, ptr_t *iter);
+bool Ring_FindNonAscIterBwd (const struct Ring *ring, struct data_t *data, KeyCmp func, ptr_t *iter);
 
 // Descending sort order
 bool Ring_FindNonDscFwd (struct Ring *ring, struct data_t *data, KeyCmp func);
 bool Ring_FindNonDscBwd (struct Ring *ring, struct data_t *data, KeyCmp func);
+bool Ring_FindNonDscIterFwd (const struct Ring *ring, struct data_t *data, KeyCmp func, ptr_t *iter);
+bool Ring_FindNonDscIterBwd (const struct Ring *ring, struct data_t *data, KeyCmp func, ptr_t *iter);
 
 //****************************************************************************//
 //      Searching for differences                                             //
 //****************************************************************************//
 bool Ring_FindDiffFwd (struct Ring *ring, struct data_t *data, const struct Ring *source, size_t count, KeyCmp func);
 bool Ring_FindDiffBwd (struct Ring *ring, struct data_t *data, const struct Ring *source, size_t count, KeyCmp func);
+bool Ring_FindDiffIterFwd (const struct Ring *ring, struct data_t *data, const struct Ring *source, size_t count, KeyCmp func, ptr_t *titer, ptr_t siter);
+bool Ring_FindDiffIterBwd (const struct Ring *ring, struct data_t *data, const struct Ring *source, size_t count, KeyCmp func, ptr_t *titer, ptr_t siter);
 
 //****************************************************************************//
 //      Key counting                                                          //
@@ -503,10 +575,14 @@ bool Ring_FindDiffBwd (struct Ring *ring, struct data_t *data, const struct Ring
 // Single key counting
 size_t Ring_CountKeyFwd (const struct Ring *ring, union adt_t key, size_t count, KeyCmp func);
 size_t Ring_CountKeyBwd (const struct Ring *ring, union adt_t key, size_t count, KeyCmp func);
+size_t Ring_CountKeyIterFwd (const struct Ring *ring, union adt_t key, size_t count, KeyCmp func, ptr_t *iter);
+size_t Ring_CountKeyIterBwd (const struct Ring *ring, union adt_t key, size_t count, KeyCmp func, ptr_t *iter);
 
 // Keys set counting
 size_t Ring_CountKeysFwd (const struct Ring *ring, const union adt_t keys[], size_t size, size_t count, KeyCmp func);
 size_t Ring_CountKeysBwd (const struct Ring *ring, const union adt_t keys[], size_t size, size_t count, KeyCmp func);
+size_t Ring_CountKeysIterFwd (const struct Ring *ring, const union adt_t keys[], size_t size, size_t count, KeyCmp func, ptr_t *iter);
+size_t Ring_CountKeysIterBwd (const struct Ring *ring, const union adt_t keys[], size_t size, size_t count, KeyCmp func, ptr_t *iter);
 
 //****************************************************************************//
 //      Sorting                                                               //
