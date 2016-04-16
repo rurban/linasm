@@ -1588,7 +1588,7 @@ if ~ext
 else
 		mov		[ptr], iter					; update iterator position
 end if
-		cmp		result, EMPTY				; if (result == EMPTY)
+		cmp		iter, EMPTY					; if (iter == EMPTY)
 		je		.error						;     then go to error branch
 ;---[Normal exit branch]-------------------
 .exit:	mov		status, 1					; return true

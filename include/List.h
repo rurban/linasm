@@ -593,14 +593,14 @@ bool List_FindDiffIterBwd (const struct List *list, struct data_t *data, const s
 // Single key counting
 size_t List_CountKeyFwd (const struct List *list, union adt_t key, size_t count, KeyCmp func);
 size_t List_CountKeyBwd (const struct List *list, union adt_t key, size_t count, KeyCmp func);
-size_t List_CountKeyIterFwd (const struct List *list, union adt_t key, size_t count, KeyCmp func, ptr_t *iter);
-size_t List_CountKeyIterBwd (const struct List *list, union adt_t key, size_t count, KeyCmp func, ptr_t *iter);
+size_t List_CountKeyIterFwd (const struct List *list, union adt_t key, size_t count, KeyCmp func, ptr_t iter);
+size_t List_CountKeyIterBwd (const struct List *list, union adt_t key, size_t count, KeyCmp func, ptr_t iter);
 
 // Keys set counting
 size_t List_CountKeysFwd (const struct List *list, const union adt_t keys[], size_t size, size_t count, KeyCmp func);
 size_t List_CountKeysBwd (const struct List *list, const union adt_t keys[], size_t size, size_t count, KeyCmp func);
-size_t List_CountKeysIterFwd (const struct List *list, const union adt_t keys[], size_t size, size_t count, KeyCmp func, ptr_t *iter);
-size_t List_CountKeysIterBwd (const struct List *list, const union adt_t keys[], size_t size, size_t count, KeyCmp func, ptr_t *iter);
+size_t List_CountKeysIterFwd (const struct List *list, const union adt_t keys[], size_t size, size_t count, KeyCmp func, ptr_t iter);
+size_t List_CountKeysIterBwd (const struct List *list, const union adt_t keys[], size_t size, size_t count, KeyCmp func, ptr_t iter);
 
 //****************************************************************************//
 //      Sorting                                                               //

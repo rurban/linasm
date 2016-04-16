@@ -575,14 +575,14 @@ bool Ring_FindDiffIterBwd (const struct Ring *ring, struct data_t *data, const s
 // Single key counting
 size_t Ring_CountKeyFwd (const struct Ring *ring, union adt_t key, size_t count, KeyCmp func);
 size_t Ring_CountKeyBwd (const struct Ring *ring, union adt_t key, size_t count, KeyCmp func);
-size_t Ring_CountKeyIterFwd (const struct Ring *ring, union adt_t key, size_t count, KeyCmp func, ptr_t *iter);
-size_t Ring_CountKeyIterBwd (const struct Ring *ring, union adt_t key, size_t count, KeyCmp func, ptr_t *iter);
+size_t Ring_CountKeyIterFwd (const struct Ring *ring, union adt_t key, size_t count, KeyCmp func, ptr_t iter);
+size_t Ring_CountKeyIterBwd (const struct Ring *ring, union adt_t key, size_t count, KeyCmp func, ptr_t iter);
 
 // Keys set counting
 size_t Ring_CountKeysFwd (const struct Ring *ring, const union adt_t keys[], size_t size, size_t count, KeyCmp func);
 size_t Ring_CountKeysBwd (const struct Ring *ring, const union adt_t keys[], size_t size, size_t count, KeyCmp func);
-size_t Ring_CountKeysIterFwd (const struct Ring *ring, const union adt_t keys[], size_t size, size_t count, KeyCmp func, ptr_t *iter);
-size_t Ring_CountKeysIterBwd (const struct Ring *ring, const union adt_t keys[], size_t size, size_t count, KeyCmp func, ptr_t *iter);
+size_t Ring_CountKeysIterFwd (const struct Ring *ring, const union adt_t keys[], size_t size, size_t count, KeyCmp func, ptr_t iter);
+size_t Ring_CountKeysIterBwd (const struct Ring *ring, const union adt_t keys[], size_t size, size_t count, KeyCmp func, ptr_t iter);
 
 //****************************************************************************//
 //      Sorting                                                               //

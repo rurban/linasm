@@ -1,4 +1,19 @@
 +==============================================================================+
+|   2016-04-16  Release 1.12 (stable)                                          |
++==============================================================================+
+
+New features:
+	* List.asm, Btree.asm, Hash.asm: Added external iterators for multithreaded read only access
+	* Array.asm: Added functions GetBit, SetBit, ResetBit and InvertBit
+	* Array.asm: Added functions FindSetBitFwd, FindResetBitFwd, FindSetBitBwd, FindResetBitBwd, CountBits
+	* VectorXD.asm: Improved functions to operate with complex numbers
+	* Matrix.asm: Added functions to operate with complex number matrices
+
+Changes in behavior:
+	* Vector2D.h, Vector3D.h: Changed prototype of Rotate function
+	* Vector2D.h, Vector3d.h Complex.h: Changed function prototypes
+
++==============================================================================+
 |   2015-09-13  Release 1.11 (stable)                                          |
 +==============================================================================+
 

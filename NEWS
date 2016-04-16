@@ -3,8 +3,28 @@
 #                                                                              #
 #                                 LINASM NEWS                                  #
 #                                                                              #
-# License: LGPLv3+                               Copyleft (Ɔ) 2015, Jack Black #
+# License: LGPLv3+                               Copyleft (Ɔ) 2016, Jack Black #
 ################################################################################
+
+#******************************************************************************#
+#       Release 1.12 (stable) [2016-04-16]                                     #
+#******************************************************************************#
+
+To provide multithreaded highly concurrent read only access to elements of ADT
+containers were developed external iterators. They allow to walk through
+the elements in very fast and efficient way. You can not change data, using
+this iterator, but can do non blocking multithreaded access for reading,
+searching and counting elements. In opposite to forward and backward iterators
+the external iterator lost its actual position when you change ADT structure
+(insert, remove set or overwrite its elements). In such case you should
+each time to reassign external iterator before doing sequence of read only
+operations.
+
+Minor changes:
+    * Array library: Added functions GetBit, SetBit, ResetBit, InvertBit,
+      FindSetBitFwd, FindResetBitFwd, FindSetBitBwd, FindResetBitBwd, CountBits
+    * Complex library: Improved functions to operate with complex numbers
+    * Matrix library: Added functions to operate with complex number matrices
 
 #******************************************************************************#
 #       Release 1.11 (stable) [2015-09-13]                                     #
