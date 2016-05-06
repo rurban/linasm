@@ -1364,7 +1364,7 @@ end if
 		add		index, fmask				; index += fmask
 		shftr	index, scale
 		mov		result, index				; result = index
-		jmp		back						; go back into the searching loop
+		jmp		back						; go back into the search loop
 if scale
 ;---[Scalar loop]--------------------------
 .sloop:	cmp		char, symbol				; if (char == symbol)
@@ -1539,7 +1539,7 @@ if scale
 ;---[Scalar loop]--------------------------
 .sloop:	mov		ptr, symbols				; ptr = symbols
 		mov		symbol, [ptr]				; symbol = ptr[0]
-;---[Searching loop]-----------------------
+;---[Search loop]--------------------------
 .iloop:	cmp		char, symbol				; if (char == symbol)
 		cmove	result, index				;     result = index
 		je		.exit						;     then go to exit
@@ -1547,7 +1547,7 @@ if scale
 		mov		symbol, [ptr]				; symbol = ptr[0]
 		test	symbol, symbol
 		jnz		.iloop						; do while (symbol)
-;---[End of searching loop]----------------
+;---[End of search loop]-------------------
 		add		index, 1					; index++
 		add		string, bytes				; string++
 .skip:	mov		char, [string]				; char = string[0]
@@ -1707,7 +1707,7 @@ end if
 		add		index, fmask				; index += fmask
 		shftr	index, scale
 		mov		result, index				; result = index
-		jmp		.back0						; go back into the searching loop
+		jmp		.back0						; go back into the search loop
 ;---[Break loop branch #2]-----------------
 .brk1:pmovmskb	fmask, pcheck				; save check results to fmask
 		xor		emask, fmask				; if ((emask ^ fmask) == 0)
@@ -1727,19 +1727,19 @@ end if
 		add		index, fmask				; index += fmask
 		shftr	index, scale
 		mov		result, index				; result = index
-		jmp		.back1						; go back into the searching loop
+		jmp		.back1						; go back into the search loop
 if scale
 ;---[Scalar loop]--------------------------
 .sloop:	mov		ptr, symbols				; ptr = symbols
 		mov		symbol, [ptr]				; symbol = ptr[0]
-;---[Searching loop]-----------------------
+;---[Search loop]--------------------------
 .iloop:	cmp		char, symbol				; if (char == symbol)
 		cmove	result, index				;     result = index
 		add		ptr, bytes					; ptr++
 		mov		symbol, [ptr]				; symbol = ptr[0]
 		test	symbol, symbol
 		jnz		.iloop						; do while (symbol)
-;---[End of searching loop]----------------
+;---[End of search loop]-------------------
 		add		index, 1					; index++
 		add		string, bytes				; string++
 .skip:	mov		char, [string]				; char = string[0]
@@ -2173,7 +2173,7 @@ if scale
 ;---[Scalar loop]--------------------------
 .sloop:	mov		ptr, symbols				; ptr = symbols
 		mov		symbol, [ptr]				; symbol = ptr[0]
-;---[Searching loop]-----------------------
+;---[Search loop]--------------------------
 .iloop:	xor		fmask, fmask				; fmask = 0
 		cmp		char, symbol				; if (char == symbol) {
 		cmove	fmask, cmask				;     count++
@@ -2182,7 +2182,7 @@ if scale
 		mov		symbol, [ptr]				; symbol = ptr[0]
 		test	symbol, symbol
 		jnz		.iloop						; do while (symbol)
-;---[End of searching loop]----------------
+;---[End of search loop]-------------------
 @@:		add		count, fmask
 		add		string, bytes				; string++
 .skip:	mov		char, [string]				; char = string[0]
@@ -2320,7 +2320,7 @@ end if
 		movdqa	echeck, [string + index]	; echeck = string[index]
 	pblendvb	echeck, replace
 		movdqa	[string + index], echeck	; string[index] = replace (echeck, pattern, value)
-		jmp		back						; go back into the searching loop
+		jmp		back						; go back into the search loop
 @@:		bsf		emask, emask				; find index of first occurence of eol
 		bsf		fmask, fmask				; find index of first occurence of pattern
 		jz		.exit						; if pattern is not found, then go to exit

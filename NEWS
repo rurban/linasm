@@ -54,7 +54,7 @@ New libraries are added in this release:
 More detailed information about LinAsm changes see into ChangeLog file.
 
 #******************************************************************************#
-#       Release 1.1 (stable) [2014-09-05]                                      #
+#       Release 1.10 (stable) [2014-09-05]                                     #
 #******************************************************************************#
 
 LinAsm library is converted into shared object file (*.so) instead of static lib

@@ -13,254 +13,263 @@ include	'Syscall.inc'
 ;###############################################################################
 ;#      Import section                                                         #
 ;###############################################################################
-extrn	'Array_Copy'		as	Copy
-extrn	'FindSet'			as	FindSet
+extrn	'Array_Copy'			as	Copy
+extrn	'FindSet'				as	FindSet
+extrn	'NodeDeleteCore'		as	DeleteCore
+extrn	'NodeReplaceLeftCore'	as	ReplaceLeftCore
+extrn	'NodeReplaceRightCore'	as	ReplaceRightCore
 
 ;###############################################################################
 ;#      Export section                                                         #
 ;###############################################################################
 
 ;******************************************************************************;
+;       ADT internal functions                                                 ;
+;******************************************************************************;
+public	JoinCore				as	'NodeJoinCore'
+public	SplitCore				as	'NodeSplitCore'
+
+;******************************************************************************;
 ;       Constructor                                                            ;
 ;******************************************************************************;
-public	ConstructorList		as	'List_InitList'
-public	ConstructorRing		as	'Ring_InitRing'
-public	ConstructorList		as	'_ZN4ListC1Em'
-public	ConstructorRing		as	'_ZN4RingC1Em'
+public	ConstructorList			as	'List_InitList'
+public	ConstructorRing			as	'Ring_InitRing'
+public	ConstructorList			as	'_ZN4ListC1Em'
+public	ConstructorRing			as	'_ZN4RingC1Em'
 
 ;******************************************************************************;
 ;       Copy constructor                                                       ;
 ;******************************************************************************;
-public	CopyConstructorList	as	'List_CopyList'
-public	CopyConstructorRing	as	'Ring_CopyRing'
-public	CopyConstructorList	as	'_ZN4ListC1ERKS_'
-public	CopyConstructorRing	as	'_ZN4RingC1ERKS_'
+public	CopyConstructorList		as	'List_CopyList'
+public	CopyConstructorRing		as	'Ring_CopyRing'
+public	CopyConstructorList		as	'_ZN4ListC1ERKS_'
+public	CopyConstructorRing		as	'_ZN4RingC1ERKS_'
 
 ;******************************************************************************;
 ;       Destructor                                                             ;
 ;******************************************************************************;
-public	DestructorList		as	'List_FreeList'
-public	DestructorRing		as	'Ring_FreeRing'
-public	DestructorList		as	'_ZN4ListD1Ev'
-public	DestructorRing		as	'_ZN4RingD1Ev'
+public	DestructorList			as	'List_FreeList'
+public	DestructorRing			as	'Ring_FreeRing'
+public	DestructorList			as	'_ZN4ListD1Ev'
+public	DestructorRing			as	'_ZN4RingD1Ev'
 
 ;******************************************************************************;
 ;       Copying elements                                                       ;
 ;******************************************************************************;
 
 ; Into list head/tail
-public	CopyIntoHead		as	'List_CopyIntoHead'
-public	CopyIntoTail		as	'List_CopyIntoTail'
-public	CopyIntoHead		as	'_ZN4List12CopyIntoHeadEPKS_m'
-public	CopyIntoTail		as	'_ZN4List12CopyIntoTailEPKS_m'
+public	CopyIntoHead			as	'List_CopyIntoHead'
+public	CopyIntoTail			as	'List_CopyIntoTail'
+public	CopyIntoHead			as	'_ZN4List12CopyIntoHeadEPKS_m'
+public	CopyIntoTail			as	'_ZN4List12CopyIntoTailEPKS_m'
 
 ; Using ring link
-public	CopyAfterLink		as	'Ring_CopyAfterLink'
-public	CopyBeforeLink		as	'Ring_CopyBeforeLink'
-public	CopyAfterLink		as	'_ZN4Ring13CopyAfterLinkEPKS_m'
-public	CopyBeforeLink		as	'_ZN4Ring14CopyBeforeLinkEPKS_m'
+public	CopyAfterLink			as	'Ring_CopyAfterLink'
+public	CopyBeforeLink			as	'Ring_CopyBeforeLink'
+public	CopyAfterLink			as	'_ZN4Ring13CopyAfterLinkEPKS_m'
+public	CopyBeforeLink			as	'_ZN4Ring14CopyBeforeLinkEPKS_m'
 
 ; Using forward iterator
-public	CopyAfterFwdList	as	'List_CopyAfterFwd'
-public	CopyAfterFwdRing	as	'Ring_CopyAfterFwd'
-public	CopyBeforeFwdList	as	'List_CopyBeforeFwd'
-public	CopyBeforeFwdRing	as	'Ring_CopyBeforeFwd'
-public	CopyAfterFwdList	as	'_ZN4List12CopyAfterFwdEPKS_m'
-public	CopyAfterFwdRing	as	'_ZN4Ring12CopyAfterFwdEPKS_m'
-public	CopyBeforeFwdList	as	'_ZN4List13CopyBeforeFwdEPKS_m'
-public	CopyBeforeFwdRing	as	'_ZN4Ring13CopyBeforeFwdEPKS_m'
+public	CopyAfterFwdList		as	'List_CopyAfterFwd'
+public	CopyAfterFwdRing		as	'Ring_CopyAfterFwd'
+public	CopyBeforeFwdList		as	'List_CopyBeforeFwd'
+public	CopyBeforeFwdRing		as	'Ring_CopyBeforeFwd'
+public	CopyAfterFwdList		as	'_ZN4List12CopyAfterFwdEPKS_m'
+public	CopyAfterFwdRing		as	'_ZN4Ring12CopyAfterFwdEPKS_m'
+public	CopyBeforeFwdList		as	'_ZN4List13CopyBeforeFwdEPKS_m'
+public	CopyBeforeFwdRing		as	'_ZN4Ring13CopyBeforeFwdEPKS_m'
 
 ; Using backward iterator
-public	CopyAfterBwdList	as	'List_CopyAfterBwd'
-public	CopyAfterBwdRing	as	'Ring_CopyAfterBwd'
-public	CopyBeforeBwdList	as	'List_CopyBeforeBwd'
-public	CopyBeforeBwdRing	as	'Ring_CopyBeforeBwd'
-public	CopyAfterBwdList	as	'_ZN4List12CopyAfterBwdEPKS_m'
-public	CopyAfterBwdRing	as	'_ZN4Ring12CopyAfterBwdEPKS_m'
-public	CopyBeforeBwdList	as	'_ZN4List13CopyBeforeBwdEPKS_m'
-public	CopyBeforeBwdRing	as	'_ZN4Ring13CopyBeforeBwdEPKS_m'
+public	CopyAfterBwdList		as	'List_CopyAfterBwd'
+public	CopyAfterBwdRing		as	'Ring_CopyAfterBwd'
+public	CopyBeforeBwdList		as	'List_CopyBeforeBwd'
+public	CopyBeforeBwdRing		as	'Ring_CopyBeforeBwd'
+public	CopyAfterBwdList		as	'_ZN4List12CopyAfterBwdEPKS_m'
+public	CopyAfterBwdRing		as	'_ZN4Ring12CopyAfterBwdEPKS_m'
+public	CopyBeforeBwdList		as	'_ZN4List13CopyBeforeBwdEPKS_m'
+public	CopyBeforeBwdRing		as	'_ZN4Ring13CopyBeforeBwdEPKS_m'
 
 ;******************************************************************************;
 ;       Moving elements                                                        ;
 ;******************************************************************************;
 
 ; Into list head/tail
-public	MoveIntoHead		as	'List_MoveIntoHead'
-public	MoveIntoTail		as	'List_MoveIntoTail'
-public	MoveIntoHead		as	'_ZN4List12MoveIntoHeadEPS_m'
-public	MoveIntoTail		as	'_ZN4List12MoveIntoTailEPS_m'
+public	MoveIntoHead			as	'List_MoveIntoHead'
+public	MoveIntoTail			as	'List_MoveIntoTail'
+public	MoveIntoHead			as	'_ZN4List12MoveIntoHeadEPS_m'
+public	MoveIntoTail			as	'_ZN4List12MoveIntoTailEPS_m'
 
 ; Using ring link
-public	MoveAfterLink		as	'Ring_MoveAfterLink'
-public	MoveBeforeLink		as	'Ring_MoveBeforeLink'
-public	MoveAfterLink		as	'_ZN4Ring13MoveAfterLinkEPS_m'
-public	MoveBeforeLink		as	'_ZN4Ring14MoveBeforeLinkEPS_m'
+public	MoveAfterLink			as	'Ring_MoveAfterLink'
+public	MoveBeforeLink			as	'Ring_MoveBeforeLink'
+public	MoveAfterLink			as	'_ZN4Ring13MoveAfterLinkEPS_m'
+public	MoveBeforeLink			as	'_ZN4Ring14MoveBeforeLinkEPS_m'
 
 ; Using forward iterator
-public	MoveAfterFwdList	as	'List_MoveAfterFwd'
-public	MoveAfterFwdRing	as	'Ring_MoveAfterFwd'
-public	MoveBeforeFwdList	as	'List_MoveBeforeFwd'
-public	MoveBeforeFwdRing	as	'Ring_MoveBeforeFwd'
-public	MoveAfterFwdList	as	'_ZN4List12MoveAfterFwdEPS_m'
-public	MoveAfterFwdRing	as	'_ZN4Ring12MoveAfterFwdEPS_m'
-public	MoveBeforeFwdList	as	'_ZN4List13MoveBeforeFwdEPS_m'
-public	MoveBeforeFwdRing	as	'_ZN4Ring13MoveBeforeFwdEPS_m'
+public	MoveAfterFwdList		as	'List_MoveAfterFwd'
+public	MoveAfterFwdRing		as	'Ring_MoveAfterFwd'
+public	MoveBeforeFwdList		as	'List_MoveBeforeFwd'
+public	MoveBeforeFwdRing		as	'Ring_MoveBeforeFwd'
+public	MoveAfterFwdList		as	'_ZN4List12MoveAfterFwdEPS_m'
+public	MoveAfterFwdRing		as	'_ZN4Ring12MoveAfterFwdEPS_m'
+public	MoveBeforeFwdList		as	'_ZN4List13MoveBeforeFwdEPS_m'
+public	MoveBeforeFwdRing		as	'_ZN4Ring13MoveBeforeFwdEPS_m'
 
 ; Using backward iterator
-public	MoveAfterBwdList	as	'List_MoveAfterBwd'
-public	MoveAfterBwdRing	as	'Ring_MoveAfterBwd'
-public	MoveBeforeBwdList	as	'List_MoveBeforeBwd'
-public	MoveBeforeBwdRing	as	'Ring_MoveBeforeBwd'
-public	MoveAfterBwdList	as	'_ZN4List12MoveAfterBwdEPS_m'
-public	MoveAfterBwdRing	as	'_ZN4Ring12MoveAfterBwdEPS_m'
-public	MoveBeforeBwdList	as	'_ZN4List13MoveBeforeBwdEPS_m'
-public	MoveBeforeBwdRing	as	'_ZN4Ring13MoveBeforeBwdEPS_m'
+public	MoveAfterBwdList		as	'List_MoveAfterBwd'
+public	MoveAfterBwdRing		as	'Ring_MoveAfterBwd'
+public	MoveBeforeBwdList		as	'List_MoveBeforeBwd'
+public	MoveBeforeBwdRing		as	'Ring_MoveBeforeBwd'
+public	MoveAfterBwdList		as	'_ZN4List12MoveAfterBwdEPS_m'
+public	MoveAfterBwdRing		as	'_ZN4Ring12MoveAfterBwdEPS_m'
+public	MoveBeforeBwdList		as	'_ZN4List13MoveBeforeBwdEPS_m'
+public	MoveBeforeBwdRing		as	'_ZN4Ring13MoveBeforeBwdEPS_m'
 
 ;******************************************************************************;
 ;       Insertion of element                                                   ;
 ;******************************************************************************;
 
 ; Into list head/tail
-public	InsertIntoHead		as	'List_InsertIntoHead'
-public	InsertIntoTail		as	'List_InsertIntoTail'
-public	InsertIntoHead		as	'_ZN4List14InsertIntoHeadEPK6data_t'
-public	InsertIntoTail		as	'_ZN4List14InsertIntoTailEPK6data_t'
+public	InsertIntoHead			as	'List_InsertIntoHead'
+public	InsertIntoTail			as	'List_InsertIntoTail'
+public	InsertIntoHead			as	'_ZN4List14InsertIntoHeadEPK6data_t'
+public	InsertIntoTail			as	'_ZN4List14InsertIntoTailEPK6data_t'
 
 ; Using ring link
-public	InsertAfterLink		as	'Ring_InsertAfterLink'
-public	InsertBeforeLink	as	'Ring_InsertBeforeLink'
-public	InsertAfterLink		as	'_ZN4Ring15InsertAfterLinkEPK6data_t'
-public	InsertBeforeLink	as	'_ZN4Ring16InsertBeforeLinkEPK6data_t'
+public	InsertAfterLink			as	'Ring_InsertAfterLink'
+public	InsertBeforeLink		as	'Ring_InsertBeforeLink'
+public	InsertAfterLink			as	'_ZN4Ring15InsertAfterLinkEPK6data_t'
+public	InsertBeforeLink		as	'_ZN4Ring16InsertBeforeLinkEPK6data_t'
 
 ; Using forward iterator
-public	InsertAfterFwdList	as	'List_InsertAfterFwd'
-public	InsertAfterFwdRing	as	'Ring_InsertAfterFwd'
-public	InsertBeforeFwdList	as	'List_InsertBeforeFwd'
-public	InsertBeforeFwdRing	as	'Ring_InsertBeforeFwd'
-public	InsertAfterFwdList	as	'_ZN4List14InsertAfterFwdEPK6data_t'
-public	InsertAfterFwdRing	as	'_ZN4Ring14InsertAfterFwdEPK6data_t'
-public	InsertBeforeFwdList	as	'_ZN4List15InsertBeforeFwdEPK6data_t'
-public	InsertBeforeFwdRing	as	'_ZN4Ring15InsertBeforeFwdEPK6data_t'
+public	InsertAfterFwdList		as	'List_InsertAfterFwd'
+public	InsertAfterFwdRing		as	'Ring_InsertAfterFwd'
+public	InsertBeforeFwdList		as	'List_InsertBeforeFwd'
+public	InsertBeforeFwdRing		as	'Ring_InsertBeforeFwd'
+public	InsertAfterFwdList		as	'_ZN4List14InsertAfterFwdEPK6data_t'
+public	InsertAfterFwdRing		as	'_ZN4Ring14InsertAfterFwdEPK6data_t'
+public	InsertBeforeFwdList		as	'_ZN4List15InsertBeforeFwdEPK6data_t'
+public	InsertBeforeFwdRing		as	'_ZN4Ring15InsertBeforeFwdEPK6data_t'
 
 ; Using backward iterator
-public	InsertAfterBwdList	as	'List_InsertAfterBwd'
-public	InsertAfterBwdRing	as	'Ring_InsertAfterBwd'
-public	InsertBeforeBwdList	as	'List_InsertBeforeBwd'
-public	InsertBeforeBwdRing	as	'Ring_InsertBeforeBwd'
-public	InsertAfterBwdList	as	'_ZN4List14InsertAfterBwdEPK6data_t'
-public	InsertAfterBwdRing	as	'_ZN4Ring14InsertAfterBwdEPK6data_t'
-public	InsertBeforeBwdList	as	'_ZN4List15InsertBeforeBwdEPK6data_t'
-public	InsertBeforeBwdRing	as	'_ZN4Ring15InsertBeforeBwdEPK6data_t'
+public	InsertAfterBwdList		as	'List_InsertAfterBwd'
+public	InsertAfterBwdRing		as	'Ring_InsertAfterBwd'
+public	InsertBeforeBwdList		as	'List_InsertBeforeBwd'
+public	InsertBeforeBwdRing		as	'Ring_InsertBeforeBwd'
+public	InsertAfterBwdList		as	'_ZN4List14InsertAfterBwdEPK6data_t'
+public	InsertAfterBwdRing		as	'_ZN4Ring14InsertAfterBwdEPK6data_t'
+public	InsertBeforeBwdList		as	'_ZN4List15InsertBeforeBwdEPK6data_t'
+public	InsertBeforeBwdRing		as	'_ZN4Ring15InsertBeforeBwdEPK6data_t'
 
 ;******************************************************************************;
 ;       Removing of element                                                    ;
 ;******************************************************************************;
 
 ; From list head/tail
-public	RemoveHead			as	'List_RemoveHead'
-public	RemoveTail			as	'List_RemoveTail'
-public	RemoveHead			as	'_ZN4List10RemoveHeadEP6data_t'
-public	RemoveTail			as	'_ZN4List10RemoveTailEP6data_t'
+public	RemoveHead				as	'List_RemoveHead'
+public	RemoveTail				as	'List_RemoveTail'
+public	RemoveHead				as	'_ZN4List10RemoveHeadEP6data_t'
+public	RemoveTail				as	'_ZN4List10RemoveTailEP6data_t'
 
 ; Using ring link
-public	RemoveLink			as	'Ring_RemoveLink'
-public	RemoveLink			as	'_ZN4Ring10RemoveLinkEP6data_t'
+public	RemoveLink				as	'Ring_RemoveLink'
+public	RemoveLink				as	'_ZN4Ring10RemoveLinkEP6data_t'
 
 ; Using forward iterator
-public	RemoveFwdList		as	'List_RemoveFwd'
-public	RemoveFwdRing		as	'Ring_RemoveFwd'
-public	RemoveFwdList		as	'_ZN4List9RemoveFwdEP6data_t'
-public	RemoveFwdRing		as	'_ZN4Ring9RemoveFwdEP6data_t'
+public	RemoveFwdList			as	'List_RemoveFwd'
+public	RemoveFwdRing			as	'Ring_RemoveFwd'
+public	RemoveFwdList			as	'_ZN4List9RemoveFwdEP6data_t'
+public	RemoveFwdRing			as	'_ZN4Ring9RemoveFwdEP6data_t'
 
 ; Using backward iterator
-public	RemoveBwdList		as	'List_RemoveBwd'
-public	RemoveBwdRing		as	'Ring_RemoveBwd'
-public	RemoveBwdList		as	'_ZN4List9RemoveBwdEP6data_t'
-public	RemoveBwdRing		as	'_ZN4Ring9RemoveBwdEP6data_t'
+public	RemoveBwdList			as	'List_RemoveBwd'
+public	RemoveBwdRing			as	'Ring_RemoveBwd'
+public	RemoveBwdList			as	'_ZN4List9RemoveBwdEP6data_t'
+public	RemoveBwdRing			as	'_ZN4Ring9RemoveBwdEP6data_t'
 
 ;******************************************************************************;
 ;       Setting element value                                                  ;
 ;******************************************************************************;
 
 ; Set head/tail element
-public	SetHead				as	'List_SetHead'
-public	SetTail				as	'List_SetTail'
-public	SetHead				as	'_ZN4List7SetHeadEPK6data_t'
-public	SetTail				as	'_ZN4List7SetTailEPK6data_t'
+public	SetHead					as	'List_SetHead'
+public	SetTail					as	'List_SetTail'
+public	SetHead					as	'_ZN4List7SetHeadEPK6data_t'
+public	SetTail					as	'_ZN4List7SetTailEPK6data_t'
 
 ; Set link element
-public	SetHead				as	'Ring_SetLink'
-public	SetHead				as	'_ZN4Ring7SetLinkEPK6data_t'
+public	SetHead					as	'Ring_SetLink'
+public	SetHead					as	'_ZN4Ring7SetLinkEPK6data_t'
 
 ; Set element which is pointed by forward iterator
-public	SetFwd				as	'List_SetFwd'
-public	SetFwd				as	'Ring_SetFwd'
-public	SetFwd				as	'_ZN4List6SetFwdEPK6data_t'
-public	SetFwd				as	'_ZN4Ring6SetFwdEPK6data_t'
+public	SetFwd					as	'List_SetFwd'
+public	SetFwd					as	'Ring_SetFwd'
+public	SetFwd					as	'_ZN4List6SetFwdEPK6data_t'
+public	SetFwd					as	'_ZN4Ring6SetFwdEPK6data_t'
 
 ; Set element which is pointed by backward iterator
-public	SetBwd				as	'List_SetBwd'
-public	SetBwd				as	'Ring_SetBwd'
-public	SetBwd				as	'_ZN4List6SetBwdEPK6data_t'
-public	SetBwd				as	'_ZN4Ring6SetBwdEPK6data_t'
+public	SetBwd					as	'List_SetBwd'
+public	SetBwd					as	'Ring_SetBwd'
+public	SetBwd					as	'_ZN4List6SetBwdEPK6data_t'
+public	SetBwd					as	'_ZN4Ring6SetBwdEPK6data_t'
 
 ;******************************************************************************;
 ;       Getting element value                                                  ;
 ;******************************************************************************;
 
 ; Get head/tail element
-public	GetHead				as	'List_GetHead'
-public	GetTail				as	'List_GetTail'
-public	GetHead				as	'_ZNK4List7GetHeadEP6data_t'
-public	GetTail				as	'_ZNK4List7GetTailEP6data_t'
+public	GetHead					as	'List_GetHead'
+public	GetTail					as	'List_GetTail'
+public	GetHead					as	'_ZNK4List7GetHeadEP6data_t'
+public	GetTail					as	'_ZNK4List7GetTailEP6data_t'
 
 ; Get link element
-public	GetHead				as	'Ring_GetLink'
-public	GetHead				as	'_ZNK4Ring7GetLinkEP6data_t'
+public	GetHead					as	'Ring_GetLink'
+public	GetHead					as	'_ZNK4Ring7GetLinkEP6data_t'
 
 ; Get element which is pointed by forward iterator
-public	GetFwd				as	'List_GetFwd'
-public	GetFwd				as	'Ring_GetFwd'
-public	GetFwd				as	'_ZNK4List6GetFwdEP6data_t'
-public	GetFwd				as	'_ZNK4Ring6GetFwdEP6data_t'
+public	GetFwd					as	'List_GetFwd'
+public	GetFwd					as	'Ring_GetFwd'
+public	GetFwd					as	'_ZNK4List6GetFwdEP6data_t'
+public	GetFwd					as	'_ZNK4Ring6GetFwdEP6data_t'
 
 ; Get element which is pointed by backward iterator
-public	GetBwd				as	'List_GetBwd'
-public	GetBwd				as	'Ring_GetBwd'
-public	GetBwd				as	'_ZNK4List6GetBwdEP6data_t'
-public	GetBwd				as	'_ZNK4Ring6GetBwdEP6data_t'
+public	GetBwd					as	'List_GetBwd'
+public	GetBwd					as	'Ring_GetBwd'
+public	GetBwd					as	'_ZNK4List6GetBwdEP6data_t'
+public	GetBwd					as	'_ZNK4Ring6GetBwdEP6data_t'
 
 ; Get element which is pointed by external iterator
-public	GetIter				as	'List_GetIter'
-public	GetIter				as	'Ring_GetIter'
-public	GetIter				as	'_ZNK4List7GetIterEP6data_tl'
-public	GetIter				as	'_ZNK4Ring7GetIterEP6data_tl'
+public	GetIter					as	'List_GetIter'
+public	GetIter					as	'Ring_GetIter'
+public	GetIter					as	'_ZNK4List7GetIterEP6data_tl'
+public	GetIter					as	'_ZNK4Ring7GetIterEP6data_tl'
 
 ;******************************************************************************;
 ;       Replacing element value                                                ;
 ;******************************************************************************;
 
 ; Replace head/tail element
-public	ReplaceHead			as	'List_ReplaceHead'
-public	ReplaceTail			as	'List_ReplaceTail'
-public	ReplaceHead			as	'_ZN4List11ReplaceHeadEP6data_tPKS0_'
-public	ReplaceTail			as	'_ZN4List11ReplaceTailEP6data_tPKS0_'
+public	ReplaceHead				as	'List_ReplaceHead'
+public	ReplaceTail				as	'List_ReplaceTail'
+public	ReplaceHead				as	'_ZN4List11ReplaceHeadEP6data_tPKS0_'
+public	ReplaceTail				as	'_ZN4List11ReplaceTailEP6data_tPKS0_'
 
 ; Replace link element
-public	ReplaceHead			as	'Ring_ReplaceLink'
-public	ReplaceHead			as	'_ZN4Ring11ReplaceLinkEP6data_tPKS0_'
+public	ReplaceHead				as	'Ring_ReplaceLink'
+public	ReplaceHead				as	'_ZN4Ring11ReplaceLinkEP6data_tPKS0_'
 
 ; Replace element which is pointed by forward iterator
-public	ReplaceFwd			as	'List_ReplaceFwd'
-public	ReplaceFwd			as	'Ring_ReplaceFwd'
-public	ReplaceFwd			as	'_ZN4List10ReplaceFwdEP6data_tPKS0_'
-public	ReplaceFwd			as	'_ZN4Ring10ReplaceFwdEP6data_tPKS0_'
+public	ReplaceFwd				as	'List_ReplaceFwd'
+public	ReplaceFwd				as	'Ring_ReplaceFwd'
+public	ReplaceFwd				as	'_ZN4List10ReplaceFwdEP6data_tPKS0_'
+public	ReplaceFwd				as	'_ZN4Ring10ReplaceFwdEP6data_tPKS0_'
 
 ; Replace element which is pointed by backward iterator
-public	ReplaceBwd			as	'List_ReplaceBwd'
-public	ReplaceBwd			as	'Ring_ReplaceBwd'
-public	ReplaceBwd			as	'_ZN4List10ReplaceBwdEP6data_tPKS0_'
-public	ReplaceBwd			as	'_ZN4Ring10ReplaceBwdEP6data_tPKS0_'
+public	ReplaceBwd				as	'List_ReplaceBwd'
+public	ReplaceBwd				as	'Ring_ReplaceBwd'
+public	ReplaceBwd				as	'_ZN4List10ReplaceBwdEP6data_tPKS0_'
+public	ReplaceBwd				as	'_ZN4Ring10ReplaceBwdEP6data_tPKS0_'
 
 ;******************************************************************************;
 ;       Changing elements order                                                ;
@@ -271,34 +280,34 @@ public	ReplaceBwd			as	'_ZN4Ring10ReplaceBwdEP6data_tPKS0_'
 ;==============================================================================;
 
 ; Using list head/tail
-public	ReverseHead			as	'List_ReverseHead'
-public	ReverseTail			as	'List_ReverseTail'
-public	ReverseHead			as	'_ZN4List11ReverseHeadEm'
-public	ReverseTail			as	'_ZN4List11ReverseTailEm'
+public	ReverseHead				as	'List_ReverseHead'
+public	ReverseTail				as	'List_ReverseTail'
+public	ReverseHead				as	'_ZN4List11ReverseHeadEm'
+public	ReverseTail				as	'_ZN4List11ReverseTailEm'
 
 ; Using ring link
-public	ReverseLink			as	'Ring_ReverseLink'
-public	ReverseLink			as	'_ZN4Ring11ReverseLinkEm'
+public	ReverseLink				as	'Ring_ReverseLink'
+public	ReverseLink				as	'_ZN4Ring11ReverseLinkEm'
 
 ; Using forward iterator
-public	ReverseFwdList		as	'List_ReverseFwd'
-public	ReverseFwdRing		as	'Ring_ReverseFwd'
-public	ReverseFwdList		as	'_ZN4List10ReverseFwdEm'
-public	ReverseFwdRing		as	'_ZN4Ring10ReverseFwdEm'
+public	ReverseFwdList			as	'List_ReverseFwd'
+public	ReverseFwdRing			as	'Ring_ReverseFwd'
+public	ReverseFwdList			as	'_ZN4List10ReverseFwdEm'
+public	ReverseFwdRing			as	'_ZN4Ring10ReverseFwdEm'
 
 ; Using backward iterator
-public	ReverseBwdList		as	'List_ReverseBwd'
-public	ReverseBwdRing		as	'Ring_ReverseBwd'
-public	ReverseBwdList		as	'_ZN4List10ReverseBwdEm'
-public	ReverseBwdRing		as	'_ZN4Ring10ReverseBwdEm'
+public	ReverseBwdList			as	'List_ReverseBwd'
+public	ReverseBwdRing			as	'Ring_ReverseBwd'
+public	ReverseBwdList			as	'_ZN4List10ReverseBwdEm'
+public	ReverseBwdRing			as	'_ZN4Ring10ReverseBwdEm'
 
 ;==============================================================================;
 ;       Swapping elements                                                      ;
 ;==============================================================================;
-public	Swap				as	'List_Swap'
-public	Swap				as	'Ring_Swap'
-public	Swap				as	'_ZN4List4SwapEv'
-public	Swap				as	'_ZN4Ring4SwapEv'
+public	Swap					as	'List_Swap'
+public	Swap					as	'Ring_Swap'
+public	Swap					as	'_ZN4List4SwapEv'
+public	Swap					as	'_ZN4Ring4SwapEv'
 
 ;******************************************************************************;
 ;       Manipulation with forward iterator                                     ;
@@ -309,52 +318,52 @@ public	Swap				as	'_ZN4Ring4SwapEv'
 ;==============================================================================;
 
 ; By index
-public	FwdToIndex			as	'List_FwdToIndex'
-public	FwdToIndex			as	'Ring_FwdToIndex'
-public	FwdToIndex			as	'_ZN4List10FwdToIndexEm'
-public	FwdToIndex			as	'_ZN4Ring10FwdToIndexEm'
+public	FwdToIndex				as	'List_FwdToIndex'
+public	FwdToIndex				as	'Ring_FwdToIndex'
+public	FwdToIndex				as	'_ZN4List10FwdToIndexEm'
+public	FwdToIndex				as	'_ZN4Ring10FwdToIndexEm'
 
 ; To head element
-public	FwdToHead			as	'List_FwdToHead'
-public	FwdToHead			as	'_ZN4List9FwdToHeadEv'
+public	FwdToHead				as	'List_FwdToHead'
+public	FwdToHead				as	'_ZN4List9FwdToHeadEv'
 
 ; To tail element
-public	FwdToTail			as	'List_FwdToTail'
-public	FwdToTail			as	'_ZN4List9FwdToTailEv'
+public	FwdToTail				as	'List_FwdToTail'
+public	FwdToTail				as	'_ZN4List9FwdToTailEv'
 
 ; To link element
-public	FwdToHead			as	'Ring_FwdToLink'
-public	FwdToHead			as	'_ZN4Ring9FwdToLinkEv'
+public	FwdToHead				as	'Ring_FwdToLink'
+public	FwdToHead				as	'_ZN4Ring9FwdToLinkEv'
 
 ; To backward iterator
-public	FwdToBwd			as	'List_FwdToBwd'
-public	FwdToBwd			as	'Ring_FwdToBwd'
-public	FwdToBwd			as	'_ZN4List8FwdToBwdEv'
-public	FwdToBwd			as	'_ZN4Ring8FwdToBwdEv'
+public	FwdToBwd				as	'List_FwdToBwd'
+public	FwdToBwd				as	'Ring_FwdToBwd'
+public	FwdToBwd				as	'_ZN4List8FwdToBwdEv'
+public	FwdToBwd				as	'_ZN4Ring8FwdToBwdEv'
 
 ;==============================================================================;
 ;       Get iterator position                                                  ;
 ;==============================================================================;
-public	GetFwdPos			as	'List_GetFwdPos'
-public	GetFwdPos			as	'Ring_GetFwdPos'
-public	GetFwdPos			as	'_ZNK4List9GetFwdPosEv'
-public	GetFwdPos			as	'_ZNK4Ring9GetFwdPosEv'
+public	GetFwdPos				as	'List_GetFwdPos'
+public	GetFwdPos				as	'Ring_GetFwdPos'
+public	GetFwdPos				as	'_ZNK4List9GetFwdPosEv'
+public	GetFwdPos				as	'_ZNK4Ring9GetFwdPosEv'
 
 ;==============================================================================;
 ;       Change iterator position                                               ;
 ;==============================================================================;
 
 ; Move to next position
-public	FwdGoNext			as	'List_FwdGoNext'
-public	FwdGoNext			as	'Ring_FwdGoNext'
-public	FwdGoNext			as	'_ZN4List9FwdGoNextEm'
-public	FwdGoNext			as	'_ZN4Ring9FwdGoNextEm'
+public	FwdGoNext				as	'List_FwdGoNext'
+public	FwdGoNext				as	'Ring_FwdGoNext'
+public	FwdGoNext				as	'_ZN4List9FwdGoNextEm'
+public	FwdGoNext				as	'_ZN4Ring9FwdGoNextEm'
 
 ; Move to prev position
-public	FwdGoPrev			as	'List_FwdGoPrev'
-public	FwdGoPrev			as	'Ring_FwdGoPrev'
-public	FwdGoPrev			as	'_ZN4List9FwdGoPrevEm'
-public	FwdGoPrev			as	'_ZN4Ring9FwdGoPrevEm'
+public	FwdGoPrev				as	'List_FwdGoPrev'
+public	FwdGoPrev				as	'Ring_FwdGoPrev'
+public	FwdGoPrev				as	'_ZN4List9FwdGoPrevEm'
+public	FwdGoPrev				as	'_ZN4Ring9FwdGoPrevEm'
 
 ;******************************************************************************;
 ;       Manipulation with backward iterator                                    ;
@@ -365,52 +374,52 @@ public	FwdGoPrev			as	'_ZN4Ring9FwdGoPrevEm'
 ;==============================================================================;
 
 ; By index
-public	BwdToIndex			as	'List_BwdToIndex'
-public	BwdToIndex			as	'Ring_BwdToIndex'
-public	BwdToIndex			as	'_ZN4List10BwdToIndexEm'
-public	BwdToIndex			as	'_ZN4Ring10BwdToIndexEm'
+public	BwdToIndex				as	'List_BwdToIndex'
+public	BwdToIndex				as	'Ring_BwdToIndex'
+public	BwdToIndex				as	'_ZN4List10BwdToIndexEm'
+public	BwdToIndex				as	'_ZN4Ring10BwdToIndexEm'
 
 ; To head element
-public	BwdToHead			as	'List_BwdToHead'
-public	BwdToHead			as	'_ZN4List9BwdToHeadEv'
+public	BwdToHead				as	'List_BwdToHead'
+public	BwdToHead				as	'_ZN4List9BwdToHeadEv'
 
 ; To tail element
-public	BwdToTail			as	'List_BwdToTail'
-public	BwdToTail			as	'_ZN4List9BwdToTailEv'
+public	BwdToTail				as	'List_BwdToTail'
+public	BwdToTail				as	'_ZN4List9BwdToTailEv'
 
 ; To link element
-public	BwdToHead			as	'Ring_BwdToLink'
-public	BwdToHead			as	'_ZN4Ring9BwdToLinkEv'
+public	BwdToHead				as	'Ring_BwdToLink'
+public	BwdToHead				as	'_ZN4Ring9BwdToLinkEv'
 
 ; To forward iterator
-public	BwdToFwd			as	'List_BwdToFwd'
-public	BwdToFwd			as	'Ring_BwdToFwd'
-public	BwdToFwd			as	'_ZN4List8BwdToFwdEv'
-public	BwdToFwd			as	'_ZN4Ring8BwdToFwdEv'
+public	BwdToFwd				as	'List_BwdToFwd'
+public	BwdToFwd				as	'Ring_BwdToFwd'
+public	BwdToFwd				as	'_ZN4List8BwdToFwdEv'
+public	BwdToFwd				as	'_ZN4Ring8BwdToFwdEv'
 
 ;==============================================================================;
 ;       Get iterator position                                                  ;
 ;==============================================================================;
-public	GetBwdPos			as	'List_GetBwdPos'
-public	GetBwdPos			as	'Ring_GetBwdPos'
-public	GetBwdPos			as	'_ZNK4List9GetBwdPosEv'
-public	GetBwdPos			as	'_ZNK4Ring9GetBwdPosEv'
+public	GetBwdPos				as	'List_GetBwdPos'
+public	GetBwdPos				as	'Ring_GetBwdPos'
+public	GetBwdPos				as	'_ZNK4List9GetBwdPosEv'
+public	GetBwdPos				as	'_ZNK4Ring9GetBwdPosEv'
 
 ;==============================================================================;
 ;       Change iterator position                                               ;
 ;==============================================================================;
 
 ; Move to next position
-public	BwdGoNext			as	'List_BwdGoNext'
-public	BwdGoNext			as	'Ring_BwdGoNext'
-public	BwdGoNext			as	'_ZN4List9BwdGoNextEm'
-public	BwdGoNext			as	'_ZN4Ring9BwdGoNextEm'
+public	BwdGoNext				as	'List_BwdGoNext'
+public	BwdGoNext				as	'Ring_BwdGoNext'
+public	BwdGoNext				as	'_ZN4List9BwdGoNextEm'
+public	BwdGoNext				as	'_ZN4Ring9BwdGoNextEm'
 
 ; Move to prev position
-public	BwdGoPrev			as	'List_BwdGoPrev'
-public	BwdGoPrev			as	'Ring_BwdGoPrev'
-public	BwdGoPrev			as	'_ZN4List9BwdGoPrevEm'
-public	BwdGoPrev			as	'_ZN4Ring9BwdGoPrevEm'
+public	BwdGoPrev				as	'List_BwdGoPrev'
+public	BwdGoPrev				as	'Ring_BwdGoPrev'
+public	BwdGoPrev				as	'_ZN4List9BwdGoPrevEm'
+public	BwdGoPrev				as	'_ZN4Ring9BwdGoPrevEm'
 
 ;******************************************************************************;
 ;       Manipulation with external iterator                                    ;
@@ -421,368 +430,368 @@ public	BwdGoPrev			as	'_ZN4Ring9BwdGoPrevEm'
 ;==============================================================================;
 
 ; By index
-public	IterToIndex			as	'List_IterToIndex'
-public	IterToIndex			as	'Ring_IterToIndex'
-public	IterToIndex			as	'_ZNK4List11IterToIndexEm'
-public	IterToIndex			as	'_ZNK4Ring11IterToIndexEm'
+public	IterToIndex				as	'List_IterToIndex'
+public	IterToIndex				as	'Ring_IterToIndex'
+public	IterToIndex				as	'_ZNK4List11IterToIndexEm'
+public	IterToIndex				as	'_ZNK4Ring11IterToIndexEm'
 
 ; To head element
-public	IterToHead			as	'List_IterToHead'
-public	IterToHead			as	'_ZNK4List10IterToHeadEv'
+public	IterToHead				as	'List_IterToHead'
+public	IterToHead				as	'_ZNK4List10IterToHeadEv'
 
 ; To tail element
-public	IterToTail			as	'List_IterToTail'
-public	IterToTail			as	'_ZNK4List10IterToTailEv'
+public	IterToTail				as	'List_IterToTail'
+public	IterToTail				as	'_ZNK4List10IterToTailEv'
 
 ; To link element
-public	IterToHead			as	'Ring_IterToLink'
-public	IterToHead			as	'_ZNK4Ring10IterToLinkEv'
+public	IterToHead				as	'Ring_IterToLink'
+public	IterToHead				as	'_ZNK4Ring10IterToLinkEv'
 
 ; To forward iterator
-public	IterToFwd			as	'List_IterToFwd'
-public	IterToFwd			as	'Ring_IterToFwd'
-public	IterToFwd			as	'_ZNK4List9IterToFwdEv'
-public	IterToFwd			as	'_ZNK4Ring9IterToFwdEv'
+public	IterToFwd				as	'List_IterToFwd'
+public	IterToFwd				as	'Ring_IterToFwd'
+public	IterToFwd				as	'_ZNK4List9IterToFwdEv'
+public	IterToFwd				as	'_ZNK4Ring9IterToFwdEv'
 
 ; To backward iterator
-public	IterToBwd			as	'List_IterToBwd'
-public	IterToBwd			as	'Ring_IterToBwd'
-public	IterToBwd			as	'_ZNK4List9IterToBwdEv'
-public	IterToBwd			as	'_ZNK4Ring9IterToBwdEv'
+public	IterToBwd				as	'List_IterToBwd'
+public	IterToBwd				as	'Ring_IterToBwd'
+public	IterToBwd				as	'_ZNK4List9IterToBwdEv'
+public	IterToBwd				as	'_ZNK4Ring9IterToBwdEv'
 
 ;==============================================================================;
 ;       Get iterator position                                                  ;
 ;==============================================================================;
-public	GetIterPos			as	'List_GetIterPos'
-public	GetIterPos			as	'Ring_GetIterPos'
-public	GetIterPos			as	'_ZNK4List10GetIterPosEl'
-public	GetIterPos			as	'_ZNK4Ring10GetIterPosEl'
+public	GetIterPos				as	'List_GetIterPos'
+public	GetIterPos				as	'Ring_GetIterPos'
+public	GetIterPos				as	'_ZNK4List10GetIterPosEl'
+public	GetIterPos				as	'_ZNK4Ring10GetIterPosEl'
 
 ;==============================================================================;
 ;       Change iterator position                                               ;
 ;==============================================================================;
 
 ; Move in forward direction
-public	IterGoFwd			as	'List_IterGoFwd'
-public	IterGoFwd			as	'Ring_IterGoFwd'
-public	IterGoFwd			as	'_ZNK4List9IterGoFwdEmPl'
-public	IterGoFwd			as	'_ZNK4Ring9IterGoFwdEmPl'
+public	IterGoFwd				as	'List_IterGoFwd'
+public	IterGoFwd				as	'Ring_IterGoFwd'
+public	IterGoFwd				as	'_ZNK4List9IterGoFwdEmPl'
+public	IterGoFwd				as	'_ZNK4Ring9IterGoFwdEmPl'
 
 ; Move in backward direction
-public	IterGoBwd			as	'List_IterGoBwd'
-public	IterGoBwd			as	'Ring_IterGoBwd'
-public	IterGoBwd			as	'_ZNK4List9IterGoBwdEmPl'
-public	IterGoBwd			as	'_ZNK4Ring9IterGoBwdEmPl'
+public	IterGoBwd				as	'List_IterGoBwd'
+public	IterGoBwd				as	'Ring_IterGoBwd'
+public	IterGoBwd				as	'_ZNK4List9IterGoBwdEmPl'
+public	IterGoBwd				as	'_ZNK4Ring9IterGoBwdEmPl'
 
 ;******************************************************************************;
 ;       Swapping iterators                                                     ;
 ;******************************************************************************;
-public	SwapFwdBwd			as	'List_SwapFwdBwd'
-public	SwapFwdBwd			as	'Ring_SwapFwdBwd'
-public	SwapFwdBwd			as	'_ZN4List10SwapFwdBwdEv'
-public	SwapFwdBwd			as	'_ZN4Ring10SwapFwdBwdEv'
+public	SwapFwdBwd				as	'List_SwapFwdBwd'
+public	SwapFwdBwd				as	'Ring_SwapFwdBwd'
+public	SwapFwdBwd				as	'_ZN4List10SwapFwdBwdEv'
+public	SwapFwdBwd				as	'_ZN4Ring10SwapFwdBwdEv'
 
 ;******************************************************************************;
 ;       Minimum and maximum value                                              ;
 ;******************************************************************************;
 
 ; Minimum value
-public	MinFwd				as	'List_MinFwd'
-public	MinFwd				as	'Ring_MinFwd'
-public	MinBwd				as	'List_MinBwd'
-public	MinBwd				as	'Ring_MinBwd'
-public	MinIterFwd			as	'List_MinIterFwd'
-public	MinIterFwd			as	'Ring_MinIterFwd'
-public	MinIterBwd			as	'List_MinIterBwd'
-public	MinIterBwd			as	'Ring_MinIterBwd'
-public	MinFwd				as	'_ZN4List6MinFwdEP6data_tmPFx5adt_tS2_E'
-public	MinFwd				as	'_ZN4Ring6MinFwdEP6data_tmPFx5adt_tS2_E'
-public	MinBwd				as	'_ZN4List6MinBwdEP6data_tmPFx5adt_tS2_E'
-public	MinBwd				as	'_ZN4Ring6MinBwdEP6data_tmPFx5adt_tS2_E'
-public	MinIterFwd			as	'_ZNK4List10MinIterFwdEP6data_tmPFx5adt_tS2_EPl'
-public	MinIterFwd			as	'_ZNK4Ring10MinIterFwdEP6data_tmPFx5adt_tS2_EPl'
-public	MinIterBwd			as	'_ZNK4List10MinIterBwdEP6data_tmPFx5adt_tS2_EPl'
-public	MinIterBwd			as	'_ZNK4Ring10MinIterBwdEP6data_tmPFx5adt_tS2_EPl'
+public	MinFwd					as	'List_MinFwd'
+public	MinFwd					as	'Ring_MinFwd'
+public	MinBwd					as	'List_MinBwd'
+public	MinBwd					as	'Ring_MinBwd'
+public	MinIterFwd				as	'List_MinIterFwd'
+public	MinIterFwd				as	'Ring_MinIterFwd'
+public	MinIterBwd				as	'List_MinIterBwd'
+public	MinIterBwd				as	'Ring_MinIterBwd'
+public	MinFwd					as	'_ZN4List6MinFwdEP6data_tmPFx5adt_tS2_E'
+public	MinFwd					as	'_ZN4Ring6MinFwdEP6data_tmPFx5adt_tS2_E'
+public	MinBwd					as	'_ZN4List6MinBwdEP6data_tmPFx5adt_tS2_E'
+public	MinBwd					as	'_ZN4Ring6MinBwdEP6data_tmPFx5adt_tS2_E'
+public	MinIterFwd				as	'_ZNK4List10MinIterFwdEP6data_tmPFx5adt_tS2_EPl'
+public	MinIterFwd				as	'_ZNK4Ring10MinIterFwdEP6data_tmPFx5adt_tS2_EPl'
+public	MinIterBwd				as	'_ZNK4List10MinIterBwdEP6data_tmPFx5adt_tS2_EPl'
+public	MinIterBwd				as	'_ZNK4Ring10MinIterBwdEP6data_tmPFx5adt_tS2_EPl'
 
 ; Maximum value
-public	MaxFwd				as	'List_MaxFwd'
-public	MaxFwd				as	'Ring_MaxFwd'
-public	MaxBwd				as	'List_MaxBwd'
-public	MaxBwd				as	'Ring_MaxBwd'
-public	MaxIterFwd			as	'List_MaxIterFwd'
-public	MaxIterFwd			as	'Ring_MaxIterFwd'
-public	MaxIterBwd			as	'List_MaxIterBwd'
-public	MaxIterBwd			as	'Ring_MaxIterBwd'
-public	MaxFwd				as	'_ZN4List6MaxFwdEP6data_tmPFx5adt_tS2_E'
-public	MaxFwd				as	'_ZN4Ring6MaxFwdEP6data_tmPFx5adt_tS2_E'
-public	MaxBwd				as	'_ZN4List6MaxBwdEP6data_tmPFx5adt_tS2_E'
-public	MaxBwd				as	'_ZN4Ring6MaxBwdEP6data_tmPFx5adt_tS2_E'
-public	MaxIterFwd			as	'_ZNK4List10MaxIterFwdEP6data_tmPFx5adt_tS2_EPl'
-public	MaxIterFwd			as	'_ZNK4Ring10MaxIterFwdEP6data_tmPFx5adt_tS2_EPl'
-public	MaxIterBwd			as	'_ZNK4List10MaxIterBwdEP6data_tmPFx5adt_tS2_EPl'
-public	MaxIterBwd			as	'_ZNK4Ring10MaxIterBwdEP6data_tmPFx5adt_tS2_EPl'
+public	MaxFwd					as	'List_MaxFwd'
+public	MaxFwd					as	'Ring_MaxFwd'
+public	MaxBwd					as	'List_MaxBwd'
+public	MaxBwd					as	'Ring_MaxBwd'
+public	MaxIterFwd				as	'List_MaxIterFwd'
+public	MaxIterFwd				as	'Ring_MaxIterFwd'
+public	MaxIterBwd				as	'List_MaxIterBwd'
+public	MaxIterBwd				as	'Ring_MaxIterBwd'
+public	MaxFwd					as	'_ZN4List6MaxFwdEP6data_tmPFx5adt_tS2_E'
+public	MaxFwd					as	'_ZN4Ring6MaxFwdEP6data_tmPFx5adt_tS2_E'
+public	MaxBwd					as	'_ZN4List6MaxBwdEP6data_tmPFx5adt_tS2_E'
+public	MaxBwd					as	'_ZN4Ring6MaxBwdEP6data_tmPFx5adt_tS2_E'
+public	MaxIterFwd				as	'_ZNK4List10MaxIterFwdEP6data_tmPFx5adt_tS2_EPl'
+public	MaxIterFwd				as	'_ZNK4Ring10MaxIterFwdEP6data_tmPFx5adt_tS2_EPl'
+public	MaxIterBwd				as	'_ZNK4List10MaxIterBwdEP6data_tmPFx5adt_tS2_EPl'
+public	MaxIterBwd				as	'_ZNK4Ring10MaxIterBwdEP6data_tmPFx5adt_tS2_EPl'
 
 ;******************************************************************************;
 ;       Key searching                                                          ;
 ;******************************************************************************;
 
 ; Single key searching
-public	FindKeyFwd			as	'List_FindKeyFwd'
-public	FindKeyFwd			as	'Ring_FindKeyFwd'
-public	FindKeyBwd			as	'List_FindKeyBwd'
-public	FindKeyBwd			as	'Ring_FindKeyBwd'
-public	FindKeyIterFwd		as	'List_FindKeyIterFwd'
-public	FindKeyIterFwd		as	'Ring_FindKeyIterFwd'
-public	FindKeyIterBwd		as	'List_FindKeyIterBwd'
-public	FindKeyIterBwd		as	'Ring_FindKeyIterBwd'
-public	FindKeyFwd			as	'_ZN4List10FindKeyFwdEP6data_t5adt_tmPFxS2_S2_E'
-public	FindKeyFwd			as	'_ZN4Ring10FindKeyFwdEP6data_t5adt_tmPFxS2_S2_E'
-public	FindKeyBwd			as	'_ZN4List10FindKeyBwdEP6data_t5adt_tmPFxS2_S2_E'
-public	FindKeyBwd			as	'_ZN4Ring10FindKeyBwdEP6data_t5adt_tmPFxS2_S2_E'
-public	FindKeyIterFwd		as	'_ZNK4List14FindKeyIterFwdEP6data_t5adt_tmPFxS2_S2_EPl'
-public	FindKeyIterFwd		as	'_ZNK4Ring14FindKeyIterFwdEP6data_t5adt_tmPFxS2_S2_EPl'
-public	FindKeyIterBwd		as	'_ZNK4List14FindKeyIterBwdEP6data_t5adt_tmPFxS2_S2_EPl'
-public	FindKeyIterBwd		as	'_ZNK4Ring14FindKeyIterBwdEP6data_t5adt_tmPFxS2_S2_EPl'
+public	FindKeyFwd				as	'List_FindKeyFwd'
+public	FindKeyFwd				as	'Ring_FindKeyFwd'
+public	FindKeyBwd				as	'List_FindKeyBwd'
+public	FindKeyBwd				as	'Ring_FindKeyBwd'
+public	FindKeyIterFwd			as	'List_FindKeyIterFwd'
+public	FindKeyIterFwd			as	'Ring_FindKeyIterFwd'
+public	FindKeyIterBwd			as	'List_FindKeyIterBwd'
+public	FindKeyIterBwd			as	'Ring_FindKeyIterBwd'
+public	FindKeyFwd				as	'_ZN4List10FindKeyFwdEP6data_t5adt_tmPFxS2_S2_E'
+public	FindKeyFwd				as	'_ZN4Ring10FindKeyFwdEP6data_t5adt_tmPFxS2_S2_E'
+public	FindKeyBwd				as	'_ZN4List10FindKeyBwdEP6data_t5adt_tmPFxS2_S2_E'
+public	FindKeyBwd				as	'_ZN4Ring10FindKeyBwdEP6data_t5adt_tmPFxS2_S2_E'
+public	FindKeyIterFwd			as	'_ZNK4List14FindKeyIterFwdEP6data_t5adt_tmPFxS2_S2_EPl'
+public	FindKeyIterFwd			as	'_ZNK4Ring14FindKeyIterFwdEP6data_t5adt_tmPFxS2_S2_EPl'
+public	FindKeyIterBwd			as	'_ZNK4List14FindKeyIterBwdEP6data_t5adt_tmPFxS2_S2_EPl'
+public	FindKeyIterBwd			as	'_ZNK4Ring14FindKeyIterBwdEP6data_t5adt_tmPFxS2_S2_EPl'
 
 ; Keys set searching
-public	FindKeysFwd			as	'List_FindKeysFwd'
-public	FindKeysFwd			as	'Ring_FindKeysFwd'
-public	FindKeysBwd			as	'List_FindKeysBwd'
-public	FindKeysBwd			as	'Ring_FindKeysBwd'
-public	FindKeysIterFwd		as	'List_FindKeysIterFwd'
-public	FindKeysIterFwd		as	'Ring_FindKeysIterFwd'
-public	FindKeysIterBwd		as	'List_FindKeysIterBwd'
-public	FindKeysIterBwd		as	'Ring_FindKeysIterBwd'
-public	FindKeysFwd			as	'_ZN4List11FindKeysFwdEP6data_tPK5adt_tmmPFxS2_S2_E'
-public	FindKeysFwd			as	'_ZN4Ring11FindKeysFwdEP6data_tPK5adt_tmmPFxS2_S2_E'
-public	FindKeysBwd			as	'_ZN4List11FindKeysBwdEP6data_tPK5adt_tmmPFxS2_S2_E'
-public	FindKeysBwd			as	'_ZN4Ring11FindKeysBwdEP6data_tPK5adt_tmmPFxS2_S2_E'
-public	FindKeysIterFwd		as	'_ZNK4List15FindKeysIterFwdEP6data_tPK5adt_tmmPFxS2_S2_EPl'
-public	FindKeysIterFwd		as	'_ZNK4Ring15FindKeysIterFwdEP6data_tPK5adt_tmmPFxS2_S2_EPl'
-public	FindKeysIterBwd		as	'_ZNK4List15FindKeysIterBwdEP6data_tPK5adt_tmmPFxS2_S2_EPl'
-public	FindKeysIterBwd		as	'_ZNK4Ring15FindKeysIterBwdEP6data_tPK5adt_tmmPFxS2_S2_EPl'
+public	FindKeysFwd				as	'List_FindKeysFwd'
+public	FindKeysFwd				as	'Ring_FindKeysFwd'
+public	FindKeysBwd				as	'List_FindKeysBwd'
+public	FindKeysBwd				as	'Ring_FindKeysBwd'
+public	FindKeysIterFwd			as	'List_FindKeysIterFwd'
+public	FindKeysIterFwd			as	'Ring_FindKeysIterFwd'
+public	FindKeysIterBwd			as	'List_FindKeysIterBwd'
+public	FindKeysIterBwd			as	'Ring_FindKeysIterBwd'
+public	FindKeysFwd				as	'_ZN4List11FindKeysFwdEP6data_tPK5adt_tmmPFxS2_S2_E'
+public	FindKeysFwd				as	'_ZN4Ring11FindKeysFwdEP6data_tPK5adt_tmmPFxS2_S2_E'
+public	FindKeysBwd				as	'_ZN4List11FindKeysBwdEP6data_tPK5adt_tmmPFxS2_S2_E'
+public	FindKeysBwd				as	'_ZN4Ring11FindKeysBwdEP6data_tPK5adt_tmmPFxS2_S2_E'
+public	FindKeysIterFwd			as	'_ZNK4List15FindKeysIterFwdEP6data_tPK5adt_tmmPFxS2_S2_EPl'
+public	FindKeysIterFwd			as	'_ZNK4Ring15FindKeysIterFwdEP6data_tPK5adt_tmmPFxS2_S2_EPl'
+public	FindKeysIterBwd			as	'_ZNK4List15FindKeysIterBwdEP6data_tPK5adt_tmmPFxS2_S2_EPl'
+public	FindKeysIterBwd			as	'_ZNK4Ring15FindKeysIterBwdEP6data_tPK5adt_tmmPFxS2_S2_EPl'
 
 ;******************************************************************************;
 ;       Duplicates searching                                                   ;
 ;******************************************************************************;
-public	FindDupFwd			as	'List_FindDupFwd'
-public	FindDupFwd			as	'Ring_FindDupFwd'
-public	FindDupBwd			as	'List_FindDupBwd'
-public	FindDupBwd			as	'Ring_FindDupBwd'
-public	FindDupIterFwd		as	'List_FindDupIterFwd'
-public	FindDupIterFwd		as	'Ring_FindDupIterFwd'
-public	FindDupIterBwd		as	'List_FindDupIterBwd'
-public	FindDupIterBwd		as	'Ring_FindDupIterBwd'
-public	FindDupFwd			as	'_ZN4List10FindDupFwdEP6data_tPFx5adt_tS2_E'
-public	FindDupFwd			as	'_ZN4Ring10FindDupFwdEP6data_tPFx5adt_tS2_E'
-public	FindDupBwd			as	'_ZN4List10FindDupBwdEP6data_tPFx5adt_tS2_E'
-public	FindDupBwd			as	'_ZN4Ring10FindDupBwdEP6data_tPFx5adt_tS2_E'
-public	FindDupIterFwd		as	'_ZNK4List14FindDupIterFwdEP6data_tPFx5adt_tS2_EPl'
-public	FindDupIterFwd		as	'_ZNK4Ring14FindDupIterFwdEP6data_tPFx5adt_tS2_EPl'
-public	FindDupIterBwd		as	'_ZNK4List14FindDupIterBwdEP6data_tPFx5adt_tS2_EPl'
-public	FindDupIterBwd		as	'_ZNK4Ring14FindDupIterBwdEP6data_tPFx5adt_tS2_EPl'
+public	FindDupFwd				as	'List_FindDupFwd'
+public	FindDupFwd				as	'Ring_FindDupFwd'
+public	FindDupBwd				as	'List_FindDupBwd'
+public	FindDupBwd				as	'Ring_FindDupBwd'
+public	FindDupIterFwd			as	'List_FindDupIterFwd'
+public	FindDupIterFwd			as	'Ring_FindDupIterFwd'
+public	FindDupIterBwd			as	'List_FindDupIterBwd'
+public	FindDupIterBwd			as	'Ring_FindDupIterBwd'
+public	FindDupFwd				as	'_ZN4List10FindDupFwdEP6data_tPFx5adt_tS2_E'
+public	FindDupFwd				as	'_ZN4Ring10FindDupFwdEP6data_tPFx5adt_tS2_E'
+public	FindDupBwd				as	'_ZN4List10FindDupBwdEP6data_tPFx5adt_tS2_E'
+public	FindDupBwd				as	'_ZN4Ring10FindDupBwdEP6data_tPFx5adt_tS2_E'
+public	FindDupIterFwd			as	'_ZNK4List14FindDupIterFwdEP6data_tPFx5adt_tS2_EPl'
+public	FindDupIterFwd			as	'_ZNK4Ring14FindDupIterFwdEP6data_tPFx5adt_tS2_EPl'
+public	FindDupIterBwd			as	'_ZNK4List14FindDupIterBwdEP6data_tPFx5adt_tS2_EPl'
+public	FindDupIterBwd			as	'_ZNK4Ring14FindDupIterBwdEP6data_tPFx5adt_tS2_EPl'
 
 ;******************************************************************************;
 ;       Unordered elements searching                                           ;
 ;******************************************************************************;
 
 ; Ascending sort order
-public	FindNonAscFwd		as	'List_FindNonAscFwd'
-public	FindNonAscFwd		as	'Ring_FindNonAscFwd'
-public	FindNonAscBwd		as	'List_FindNonAscBwd'
-public	FindNonAscBwd		as	'Ring_FindNonAscBwd'
-public	FindNonAscIterFwd	as	'List_FindNonAscIterFwd'
-public	FindNonAscIterFwd	as	'Ring_FindNonAscIterFwd'
-public	FindNonAscIterBwd	as	'List_FindNonAscIterBwd'
-public	FindNonAscIterBwd	as	'Ring_FindNonAscIterBwd'
-public	FindNonAscFwd		as	'_ZN4List13FindNonAscFwdEP6data_tPFx5adt_tS2_E'
-public	FindNonAscFwd		as	'_ZN4Ring13FindNonAscFwdEP6data_tPFx5adt_tS2_E'
-public	FindNonAscBwd		as	'_ZN4List13FindNonAscBwdEP6data_tPFx5adt_tS2_E'
-public	FindNonAscBwd		as	'_ZN4Ring13FindNonAscBwdEP6data_tPFx5adt_tS2_E'
-public	FindNonAscIterFwd	as	'_ZNK4List17FindNonAscIterFwdEP6data_tPFx5adt_tS2_EPl'
-public	FindNonAscIterFwd	as	'_ZNK4Ring17FindNonAscIterFwdEP6data_tPFx5adt_tS2_EPl'
-public	FindNonAscIterBwd	as	'_ZNK4List17FindNonAscIterBwdEP6data_tPFx5adt_tS2_EPl'
-public	FindNonAscIterBwd	as	'_ZNK4Ring17FindNonAscIterBwdEP6data_tPFx5adt_tS2_EPl'
+public	FindNonAscFwd			as	'List_FindNonAscFwd'
+public	FindNonAscFwd			as	'Ring_FindNonAscFwd'
+public	FindNonAscBwd			as	'List_FindNonAscBwd'
+public	FindNonAscBwd			as	'Ring_FindNonAscBwd'
+public	FindNonAscIterFwd		as	'List_FindNonAscIterFwd'
+public	FindNonAscIterFwd		as	'Ring_FindNonAscIterFwd'
+public	FindNonAscIterBwd		as	'List_FindNonAscIterBwd'
+public	FindNonAscIterBwd		as	'Ring_FindNonAscIterBwd'
+public	FindNonAscFwd			as	'_ZN4List13FindNonAscFwdEP6data_tPFx5adt_tS2_E'
+public	FindNonAscFwd			as	'_ZN4Ring13FindNonAscFwdEP6data_tPFx5adt_tS2_E'
+public	FindNonAscBwd			as	'_ZN4List13FindNonAscBwdEP6data_tPFx5adt_tS2_E'
+public	FindNonAscBwd			as	'_ZN4Ring13FindNonAscBwdEP6data_tPFx5adt_tS2_E'
+public	FindNonAscIterFwd		as	'_ZNK4List17FindNonAscIterFwdEP6data_tPFx5adt_tS2_EPl'
+public	FindNonAscIterFwd		as	'_ZNK4Ring17FindNonAscIterFwdEP6data_tPFx5adt_tS2_EPl'
+public	FindNonAscIterBwd		as	'_ZNK4List17FindNonAscIterBwdEP6data_tPFx5adt_tS2_EPl'
+public	FindNonAscIterBwd		as	'_ZNK4Ring17FindNonAscIterBwdEP6data_tPFx5adt_tS2_EPl'
 
 ; Descending sort order
-public	FindNonDscFwd		as	'List_FindNonDscFwd'
-public	FindNonDscFwd		as	'Ring_FindNonDscFwd'
-public	FindNonDscBwd		as	'List_FindNonDscBwd'
-public	FindNonDscBwd		as	'Ring_FindNonDscBwd'
-public	FindNonDscIterFwd	as	'List_FindNonDscIterFwd'
-public	FindNonDscIterFwd	as	'Ring_FindNonDscIterFwd'
-public	FindNonDscIterBwd	as	'List_FindNonDscIterBwd'
-public	FindNonDscIterBwd	as	'Ring_FindNonDscIterBwd'
-public	FindNonDscFwd		as	'_ZN4List13FindNonDscFwdEP6data_tPFx5adt_tS2_E'
-public	FindNonDscFwd		as	'_ZN4Ring13FindNonDscFwdEP6data_tPFx5adt_tS2_E'
-public	FindNonDscBwd		as	'_ZN4List13FindNonDscBwdEP6data_tPFx5adt_tS2_E'
-public	FindNonDscBwd		as	'_ZN4Ring13FindNonDscBwdEP6data_tPFx5adt_tS2_E'
-public	FindNonDscIterFwd	as	'_ZNK4List17FindNonDscIterFwdEP6data_tPFx5adt_tS2_EPl'
-public	FindNonDscIterFwd	as	'_ZNK4Ring17FindNonDscIterFwdEP6data_tPFx5adt_tS2_EPl'
-public	FindNonDscIterBwd	as	'_ZNK4List17FindNonDscIterBwdEP6data_tPFx5adt_tS2_EPl'
-public	FindNonDscIterBwd	as	'_ZNK4Ring17FindNonDscIterBwdEP6data_tPFx5adt_tS2_EPl'
+public	FindNonDscFwd			as	'List_FindNonDscFwd'
+public	FindNonDscFwd			as	'Ring_FindNonDscFwd'
+public	FindNonDscBwd			as	'List_FindNonDscBwd'
+public	FindNonDscBwd			as	'Ring_FindNonDscBwd'
+public	FindNonDscIterFwd		as	'List_FindNonDscIterFwd'
+public	FindNonDscIterFwd		as	'Ring_FindNonDscIterFwd'
+public	FindNonDscIterBwd		as	'List_FindNonDscIterBwd'
+public	FindNonDscIterBwd		as	'Ring_FindNonDscIterBwd'
+public	FindNonDscFwd			as	'_ZN4List13FindNonDscFwdEP6data_tPFx5adt_tS2_E'
+public	FindNonDscFwd			as	'_ZN4Ring13FindNonDscFwdEP6data_tPFx5adt_tS2_E'
+public	FindNonDscBwd			as	'_ZN4List13FindNonDscBwdEP6data_tPFx5adt_tS2_E'
+public	FindNonDscBwd			as	'_ZN4Ring13FindNonDscBwdEP6data_tPFx5adt_tS2_E'
+public	FindNonDscIterFwd		as	'_ZNK4List17FindNonDscIterFwdEP6data_tPFx5adt_tS2_EPl'
+public	FindNonDscIterFwd		as	'_ZNK4Ring17FindNonDscIterFwdEP6data_tPFx5adt_tS2_EPl'
+public	FindNonDscIterBwd		as	'_ZNK4List17FindNonDscIterBwdEP6data_tPFx5adt_tS2_EPl'
+public	FindNonDscIterBwd		as	'_ZNK4Ring17FindNonDscIterBwdEP6data_tPFx5adt_tS2_EPl'
 
 ;******************************************************************************;
 ;       Searching for differences                                              ;
 ;******************************************************************************;
-public	FindDiffFwd			as	'List_FindDiffFwd'
-public	FindDiffFwd			as	'Ring_FindDiffFwd'
-public	FindDiffBwd			as	'List_FindDiffBwd'
-public	FindDiffBwd			as	'Ring_FindDiffBwd'
-public	FindDiffIterFwd		as	'List_FindDiffIterFwd'
-public	FindDiffIterFwd		as	'Ring_FindDiffIterFwd'
-public	FindDiffIterBwd		as	'List_FindDiffIterBwd'
-public	FindDiffIterBwd		as	'Ring_FindDiffIterBwd'
-public	FindDiffFwd			as	'_ZN4List11FindDiffFwdEP6data_tPKS_mPFx5adt_tS4_E'
-public	FindDiffFwd			as	'_ZN4Ring11FindDiffFwdEP6data_tPKS_mPFx5adt_tS4_E'
-public	FindDiffBwd			as	'_ZN4List11FindDiffBwdEP6data_tPKS_mPFx5adt_tS4_E'
-public	FindDiffBwd			as	'_ZN4Ring11FindDiffBwdEP6data_tPKS_mPFx5adt_tS4_E'
-public	FindDiffIterFwd		as	'_ZNK4List15FindDiffIterFwdEP6data_tPKS_mPFx5adt_tS4_EPll'
-public	FindDiffIterFwd		as	'_ZNK4Ring15FindDiffIterFwdEP6data_tPKS_mPFx5adt_tS4_EPll'
-public	FindDiffIterBwd		as	'_ZNK4List15FindDiffIterBwdEP6data_tPKS_mPFx5adt_tS4_EPll'
-public	FindDiffIterBwd		as	'_ZNK4Ring15FindDiffIterBwdEP6data_tPKS_mPFx5adt_tS4_EPll'
+public	FindDiffFwd				as	'List_FindDiffFwd'
+public	FindDiffFwd				as	'Ring_FindDiffFwd'
+public	FindDiffBwd				as	'List_FindDiffBwd'
+public	FindDiffBwd				as	'Ring_FindDiffBwd'
+public	FindDiffIterFwd			as	'List_FindDiffIterFwd'
+public	FindDiffIterFwd			as	'Ring_FindDiffIterFwd'
+public	FindDiffIterBwd			as	'List_FindDiffIterBwd'
+public	FindDiffIterBwd			as	'Ring_FindDiffIterBwd'
+public	FindDiffFwd				as	'_ZN4List11FindDiffFwdEP6data_tPKS_mPFx5adt_tS4_E'
+public	FindDiffFwd				as	'_ZN4Ring11FindDiffFwdEP6data_tPKS_mPFx5adt_tS4_E'
+public	FindDiffBwd				as	'_ZN4List11FindDiffBwdEP6data_tPKS_mPFx5adt_tS4_E'
+public	FindDiffBwd				as	'_ZN4Ring11FindDiffBwdEP6data_tPKS_mPFx5adt_tS4_E'
+public	FindDiffIterFwd			as	'_ZNK4List15FindDiffIterFwdEP6data_tPKS_mPFx5adt_tS4_EPll'
+public	FindDiffIterFwd			as	'_ZNK4Ring15FindDiffIterFwdEP6data_tPKS_mPFx5adt_tS4_EPll'
+public	FindDiffIterBwd			as	'_ZNK4List15FindDiffIterBwdEP6data_tPKS_mPFx5adt_tS4_EPll'
+public	FindDiffIterBwd			as	'_ZNK4Ring15FindDiffIterBwdEP6data_tPKS_mPFx5adt_tS4_EPll'
 
 ;******************************************************************************;
 ;       Key counting                                                           ;
 ;******************************************************************************;
 
 ; Single key counting
-public	CountKeyFwd			as	'List_CountKeyFwd'
-public	CountKeyFwd			as	'Ring_CountKeyFwd'
-public	CountKeyBwd			as	'List_CountKeyBwd'
-public	CountKeyBwd			as	'Ring_CountKeyBwd'
-public	CountKeyIterFwd		as	'List_CountKeyIterFwd'
-public	CountKeyIterFwd		as	'Ring_CountKeyIterFwd'
-public	CountKeyIterBwd		as	'List_CountKeyIterBwd'
-public	CountKeyIterBwd		as	'Ring_CountKeyIterBwd'
-public	CountKeyFwd			as	'_ZNK4List11CountKeyFwdE5adt_tmPFxS0_S0_E'
-public	CountKeyFwd			as	'_ZNK4Ring11CountKeyFwdE5adt_tmPFxS0_S0_E'
-public	CountKeyBwd			as	'_ZNK4List11CountKeyBwdE5adt_tmPFxS0_S0_E'
-public	CountKeyBwd			as	'_ZNK4Ring11CountKeyBwdE5adt_tmPFxS0_S0_E'
-public	CountKeyIterFwd		as	'_ZNK4List15CountKeyIterFwdE5adt_tmPFxS0_S0_El'
-public	CountKeyIterFwd		as	'_ZNK4Ring15CountKeyIterFwdE5adt_tmPFxS0_S0_El'
-public	CountKeyIterBwd		as	'_ZNK4List15CountKeyIterBwdE5adt_tmPFxS0_S0_El'
-public	CountKeyIterBwd		as	'_ZNK4Ring15CountKeyIterBwdE5adt_tmPFxS0_S0_El'
+public	CountKeyFwd				as	'List_CountKeyFwd'
+public	CountKeyFwd				as	'Ring_CountKeyFwd'
+public	CountKeyBwd				as	'List_CountKeyBwd'
+public	CountKeyBwd				as	'Ring_CountKeyBwd'
+public	CountKeyIterFwd			as	'List_CountKeyIterFwd'
+public	CountKeyIterFwd			as	'Ring_CountKeyIterFwd'
+public	CountKeyIterBwd			as	'List_CountKeyIterBwd'
+public	CountKeyIterBwd			as	'Ring_CountKeyIterBwd'
+public	CountKeyFwd				as	'_ZNK4List11CountKeyFwdE5adt_tmPFxS0_S0_E'
+public	CountKeyFwd				as	'_ZNK4Ring11CountKeyFwdE5adt_tmPFxS0_S0_E'
+public	CountKeyBwd				as	'_ZNK4List11CountKeyBwdE5adt_tmPFxS0_S0_E'
+public	CountKeyBwd				as	'_ZNK4Ring11CountKeyBwdE5adt_tmPFxS0_S0_E'
+public	CountKeyIterFwd			as	'_ZNK4List15CountKeyIterFwdE5adt_tmPFxS0_S0_El'
+public	CountKeyIterFwd			as	'_ZNK4Ring15CountKeyIterFwdE5adt_tmPFxS0_S0_El'
+public	CountKeyIterBwd			as	'_ZNK4List15CountKeyIterBwdE5adt_tmPFxS0_S0_El'
+public	CountKeyIterBwd			as	'_ZNK4Ring15CountKeyIterBwdE5adt_tmPFxS0_S0_El'
 
 ; Keys set counting
-public	CountKeysFwd		as	'List_CountKeysFwd'
-public	CountKeysFwd		as	'Ring_CountKeysFwd'
-public	CountKeysBwd		as	'List_CountKeysBwd'
-public	CountKeysBwd		as	'Ring_CountKeysBwd'
-public	CountKeysIterFwd	as	'List_CountKeysIterFwd'
-public	CountKeysIterFwd	as	'Ring_CountKeysIterFwd'
-public	CountKeysIterBwd	as	'List_CountKeysIterBwd'
-public	CountKeysIterBwd	as	'Ring_CountKeysIterBwd'
-public	CountKeysFwd		as	'_ZNK4List12CountKeysFwdEPK5adt_tmmPFxS0_S0_E'
-public	CountKeysFwd		as	'_ZNK4Ring12CountKeysFwdEPK5adt_tmmPFxS0_S0_E'
-public	CountKeysBwd		as	'_ZNK4List12CountKeysBwdEPK5adt_tmmPFxS0_S0_E'
-public	CountKeysBwd		as	'_ZNK4Ring12CountKeysBwdEPK5adt_tmmPFxS0_S0_E'
-public	CountKeysIterFwd	as	'_ZNK4List16CountKeysIterFwdEPK5adt_tmmPFxS0_S0_El'
-public	CountKeysIterFwd	as	'_ZNK4Ring16CountKeysIterFwdEPK5adt_tmmPFxS0_S0_El'
-public	CountKeysIterBwd	as	'_ZNK4List16CountKeysIterBwdEPK5adt_tmmPFxS0_S0_El'
-public	CountKeysIterBwd	as	'_ZNK4Ring16CountKeysIterBwdEPK5adt_tmmPFxS0_S0_El'
+public	CountKeysFwd			as	'List_CountKeysFwd'
+public	CountKeysFwd			as	'Ring_CountKeysFwd'
+public	CountKeysBwd			as	'List_CountKeysBwd'
+public	CountKeysBwd			as	'Ring_CountKeysBwd'
+public	CountKeysIterFwd		as	'List_CountKeysIterFwd'
+public	CountKeysIterFwd		as	'Ring_CountKeysIterFwd'
+public	CountKeysIterBwd		as	'List_CountKeysIterBwd'
+public	CountKeysIterBwd		as	'Ring_CountKeysIterBwd'
+public	CountKeysFwd			as	'_ZNK4List12CountKeysFwdEPK5adt_tmmPFxS0_S0_E'
+public	CountKeysFwd			as	'_ZNK4Ring12CountKeysFwdEPK5adt_tmmPFxS0_S0_E'
+public	CountKeysBwd			as	'_ZNK4List12CountKeysBwdEPK5adt_tmmPFxS0_S0_E'
+public	CountKeysBwd			as	'_ZNK4Ring12CountKeysBwdEPK5adt_tmmPFxS0_S0_E'
+public	CountKeysIterFwd		as	'_ZNK4List16CountKeysIterFwdEPK5adt_tmmPFxS0_S0_El'
+public	CountKeysIterFwd		as	'_ZNK4Ring16CountKeysIterFwdEPK5adt_tmmPFxS0_S0_El'
+public	CountKeysIterBwd		as	'_ZNK4List16CountKeysIterBwdEPK5adt_tmmPFxS0_S0_El'
+public	CountKeysIterBwd		as	'_ZNK4Ring16CountKeysIterBwdEPK5adt_tmmPFxS0_S0_El'
 
 ;******************************************************************************;
 ;       Sorting                                                                ;
 ;******************************************************************************;
 
 ; Ascending sort order
-public	SortAscList			as	'List_SortAsc'
-public	SortAscRing			as	'Ring_SortAsc'
-public	SortAscList			as	'_ZN4List7SortAscEPFx5adt_tS0_E'
-public	SortAscRing			as	'_ZN4Ring7SortAscEPFx5adt_tS0_E'
+public	SortAscList				as	'List_SortAsc'
+public	SortAscRing				as	'Ring_SortAsc'
+public	SortAscList				as	'_ZN4List7SortAscEPFx5adt_tS0_E'
+public	SortAscRing				as	'_ZN4Ring7SortAscEPFx5adt_tS0_E'
 
 ; Descending sort order
-public	SortDscList			as	'List_SortDsc'
-public	SortDscRing			as	'Ring_SortDsc'
-public	SortDscList			as	'_ZN4List7SortDscEPFx5adt_tS0_E'
-public	SortDscRing			as	'_ZN4Ring7SortDscEPFx5adt_tS0_E'
+public	SortDscList				as	'List_SortDsc'
+public	SortDscRing				as	'Ring_SortDsc'
+public	SortDscList				as	'_ZN4List7SortDscEPFx5adt_tS0_E'
+public	SortDscRing				as	'_ZN4Ring7SortDscEPFx5adt_tS0_E'
 
 ;******************************************************************************;
 ;       Merging of sorted lists                                                ;
 ;******************************************************************************;
 
 ; Ascending sort order
-public	MergeAscList		as	'List_MergeAsc'
-public	MergeAscRing		as	'Ring_MergeAsc'
-public	MergeAscList		as	'_ZN4List8MergeAscEPKS_PFx5adt_tS2_E'
-public	MergeAscRing		as	'_ZN4Ring8MergeAscEPKS_PFx5adt_tS2_E'
+public	MergeAscList			as	'List_MergeAsc'
+public	MergeAscRing			as	'Ring_MergeAsc'
+public	MergeAscList			as	'_ZN4List8MergeAscEPKS_PFx5adt_tS2_E'
+public	MergeAscRing			as	'_ZN4Ring8MergeAscEPKS_PFx5adt_tS2_E'
 
 ; Descending sort order
-public	MergeDscList		as	'List_MergeDsc'
-public	MergeDscRing		as	'Ring_MergeDsc'
-public	MergeDscList		as	'_ZN4List8MergeDscEPKS_PFx5adt_tS2_E'
-public	MergeDscRing		as	'_ZN4Ring8MergeDscEPKS_PFx5adt_tS2_E'
+public	MergeDscList			as	'List_MergeDsc'
+public	MergeDscRing			as	'Ring_MergeDsc'
+public	MergeDscList			as	'_ZN4List8MergeDscEPKS_PFx5adt_tS2_E'
+public	MergeDscRing			as	'_ZN4Ring8MergeDscEPKS_PFx5adt_tS2_E'
 
 ;******************************************************************************;
 ;       Unique values                                                          ;
 ;******************************************************************************;
-public	UniqueList			as	'List_Unique'
-public	UniqueRing			as	'Ring_Unique'
-public	UniqueList			as	'_ZN4List6UniqueEPKS_PFx5adt_tS2_E'
-public	UniqueRing			as	'_ZN4Ring6UniqueEPKS_PFx5adt_tS2_E'
+public	UniqueList				as	'List_Unique'
+public	UniqueRing				as	'Ring_Unique'
+public	UniqueList				as	'_ZN4List6UniqueEPKS_PFx5adt_tS2_E'
+public	UniqueRing				as	'_ZN4Ring6UniqueEPKS_PFx5adt_tS2_E'
 
 ;******************************************************************************;
 ;       Comparison of lists/rings                                              ;
 ;******************************************************************************;
-public	Compare				as	'List_Compare'
-public	Compare				as	'Ring_Compare'
-public	Compare				as	'_ZNK4List7CompareEPKS_PFx5adt_tS2_E'
-public	Compare				as	'_ZNK4Ring7CompareEPKS_PFx5adt_tS2_E'
+public	Compare					as	'List_Compare'
+public	Compare					as	'Ring_Compare'
+public	Compare					as	'_ZNK4List7CompareEPKS_PFx5adt_tS2_E'
+public	Compare					as	'_ZNK4Ring7CompareEPKS_PFx5adt_tS2_E'
 
 ;******************************************************************************;
 ;       Checks                                                                 ;
 ;******************************************************************************;
 
 ; Check for sort order
-public	CheckSortAsc		as	'List_CheckSortAsc'
-public	CheckSortAsc		as	'Ring_CheckSortAsc'
-public	CheckSortDsc		as	'List_CheckSortDsc'
-public	CheckSortDsc		as	'Ring_CheckSortDsc'
-public	CheckSortAsc		as	'_ZNK4List12CheckSortAscEPFx5adt_tS0_E'
-public	CheckSortAsc		as	'_ZNK4Ring12CheckSortAscEPFx5adt_tS0_E'
-public	CheckSortDsc		as	'_ZNK4List12CheckSortDscEPFx5adt_tS0_E'
-public	CheckSortDsc		as	'_ZNK4Ring12CheckSortDscEPFx5adt_tS0_E'
+public	CheckSortAsc			as	'List_CheckSortAsc'
+public	CheckSortAsc			as	'Ring_CheckSortAsc'
+public	CheckSortDsc			as	'List_CheckSortDsc'
+public	CheckSortDsc			as	'Ring_CheckSortDsc'
+public	CheckSortAsc			as	'_ZNK4List12CheckSortAscEPFx5adt_tS0_E'
+public	CheckSortAsc			as	'_ZNK4Ring12CheckSortAscEPFx5adt_tS0_E'
+public	CheckSortDsc			as	'_ZNK4List12CheckSortDscEPFx5adt_tS0_E'
+public	CheckSortDsc			as	'_ZNK4Ring12CheckSortDscEPFx5adt_tS0_E'
 
 ; Check for duplicate values
-public	CheckDup			as	'List_CheckDup'
-public	CheckDup			as	'Ring_CheckDup'
-public	CheckDup			as	'_ZNK4List8CheckDupEPFx5adt_tS0_E'
-public	CheckDup			as	'_ZNK4Ring8CheckDupEPFx5adt_tS0_E'
+public	CheckDup				as	'List_CheckDup'
+public	CheckDup				as	'Ring_CheckDup'
+public	CheckDup				as	'_ZNK4List8CheckDupEPFx5adt_tS0_E'
+public	CheckDup				as	'_ZNK4Ring8CheckDupEPFx5adt_tS0_E'
 
 ; Check for equality
-public	IsEqual				as	'List_IsEqual'
-public	IsEqual				as	'Ring_IsEqual'
-public	IsEqual				as	'_ZNK4List7IsEqualEPKS_PFx5adt_tS2_E'
-public	IsEqual				as	'_ZNK4Ring7IsEqualEPKS_PFx5adt_tS2_E'
+public	IsEqual					as	'List_IsEqual'
+public	IsEqual					as	'Ring_IsEqual'
+public	IsEqual					as	'_ZNK4List7IsEqualEPKS_PFx5adt_tS2_E'
+public	IsEqual					as	'_ZNK4Ring7IsEqualEPKS_PFx5adt_tS2_E'
 
 ;******************************************************************************;
 ;       List/ring properties                                                   ;
 ;******************************************************************************;
 
 ; List capacity
-public	GetCapacity			as	'List_Capacity'
-public	GetCapacity			as	'Ring_Capacity'
-public	GetCapacity			as	'_ZNK4List8CapacityEv'
-public	GetCapacity			as	'_ZNK4Ring8CapacityEv'
+public	GetCapacity				as	'List_Capacity'
+public	GetCapacity				as	'Ring_Capacity'
+public	GetCapacity				as	'_ZNK4List8CapacityEv'
+public	GetCapacity				as	'_ZNK4Ring8CapacityEv'
 
 ; List size
-public	GetSize				as	'List_Size'
-public	GetSize				as	'Ring_Size'
-public	GetSize				as	'_ZNK4List4SizeEv'
-public	GetSize				as	'_ZNK4Ring4SizeEv'
+public	GetSize					as	'List_Size'
+public	GetSize					as	'Ring_Size'
+public	GetSize					as	'_ZNK4List4SizeEv'
+public	GetSize					as	'_ZNK4Ring4SizeEv'
 
 ; Check if list is empty
-public	IsEmpty				as	'List_IsEmpty'
-public	IsEmpty				as	'Ring_IsEmpty'
-public	IsEmpty				as	'_ZNK4List7IsEmptyEv'
-public	IsEmpty				as	'_ZNK4Ring7IsEmptyEv'
+public	IsEmpty					as	'List_IsEmpty'
+public	IsEmpty					as	'Ring_IsEmpty'
+public	IsEmpty					as	'_ZNK4List7IsEmptyEv'
+public	IsEmpty					as	'_ZNK4Ring7IsEmptyEv'
 
 ; Check if list is initialized
-public	IsInit				as	'List_IsInit'
-public	IsInit				as	'Ring_IsInit'
-public	IsInit				as	'_ZNK4List6IsInitEv'
-public	IsInit				as	'_ZNK4Ring6IsInitEv'
+public	IsInit					as	'List_IsInit'
+public	IsInit					as	'Ring_IsInit'
+public	IsInit					as	'_ZNK4List6IsInitEv'
+public	IsInit					as	'_ZNK4Ring6IsInitEv'
 
 ;###############################################################################
 ;#      Code section                                                           #
@@ -792,9 +801,7 @@ section	'.text'		executable align 16
 ;******************************************************************************;
 ;       Consts                                                                 ;
 ;******************************************************************************;
-KSCALE		= 4								; Key scale factor
 NSCALE		= 8								; Node scale factor
-KSIZE		= 1 shl KSCALE					; Size of key (bytes)
 NSIZE		= 1 shl NSCALE					; Size of node (bytes)
 NMASK		= not (NSIZE - 1)				; Mask to extract node index
 IMASK		= NSIZE - KSIZE					; Mask to extract element index
@@ -905,148 +912,6 @@ space	= 3 * 8								; stack size required by the procedure
 		ret
 
 ;******************************************************************************;
-;       Delete element from the node                                           ;
-;******************************************************************************;
-DeleteCore:
-;---[Parameters]---------------------------
-data	equ		rdi							; pointer to data array
-size	equ		rsi							; count of keys to move
-;---[Internal variables]-------------------
-count	equ		rax							; count of iterations
-temp1	equ		xmm1						; temporary register #1
-temp2	equ		xmm2						; temporary register #2
-temp3	equ		xmm3						; temporary register #3
-temp4	equ		xmm4						; temporary register #4
-smask	= 1 shl (KSCALE + 2) - 1			; mask for scalar loop count
-vmask	= not smask							; mask for vector loop count
-;------------------------------------------
-		test	size, size					; if (size == 0)
-		jz		.exit						;     then go to exit
-		mov		count, vmask				; load vmask
-		and		count, size					; apply mask to size variable
-		jz		.skip						; if (count == 0), then skip the loop
-;---[Vector loop]--------------------------
-.vloop:	movdqa	temp1, [data + 1 * KSIZE]	; temp1 = data[+1]
-		movdqa	temp2, [data + 2 * KSIZE]	; temp2 = data[+2]
-		movdqa	temp3, [data + 3 * KSIZE]	; temp3 = data[+3]
-		movdqa	temp4, [data + 4 * KSIZE]	; temp4 = data[+4]
-		movdqa	[data + 0 * KSIZE], temp1	; data[+0] = temp1
-		movdqa	[data + 1 * KSIZE], temp2	; data[+1] = temp2
-		movdqa	[data + 2 * KSIZE], temp3	; data[+2] = temp3
-		movdqa	[data + 3 * KSIZE], temp4	; data[+3] = temp4
-		add		data, 4 * KSIZE				; data += 4
-		sub		count, 4 * KSIZE			; count -= 4
-		jnz		.vloop						; do while (count != 0)
-;---[End of vector loop]-------------------
-.skip:	mov		count, smask				; load smask
-		and		count, size					; apply mask to size variable
-		jz		.exit						; if (count == 0), then go to exit
-;---[Scalar loop]--------------------------
-.sloop:	movdqa	temp1, [data + 1 * KSIZE]	; temp1 = data[+1]
-		movdqa	[data + 0 * KSIZE], temp1	; data[+0] = temp1
-		add		data, KSIZE					; data++
-		sub		count, KSIZE				; count--
-		jnz		.sloop						; do while (count != 0)
-;---[End of scalar loop]-------------------
-.exit:	ret
-
-;******************************************************************************;
-;       Replace element in the left node                                       ;
-;******************************************************************************;
-ReplaceLeftCore:
-;---[Parameters]---------------------------
-data	equ		rdi							; pointer to data array
-size	equ		rsi							; count of keys to move
-value	equ		xmm0						; value to insert
-;---[Internal variables]-------------------
-count	equ		rax							; count of iterations
-temp1	equ		xmm1						; temporary register #1
-temp2	equ		xmm2						; temporary register #2
-temp3	equ		xmm3						; temporary register #3
-temp4	equ		xmm4						; temporary register #4
-smask	= 1 shl (KSCALE + 2) - 1			; mask for scalar loop count
-vmask	= not smask							; mask for vector loop count
-;------------------------------------------
-		test	size, size					; if (size == 0)
-		jz		.exit						;     then go to exit
-		mov		count, vmask				; load vmask
-		and		count, size					; apply mask to size variable
-		jz		.skip						; if (count == 0), then skip the loop
-;---[Vector loop]--------------------------
-.vloop:	movdqa	temp1, [data - 1 * KSIZE]	; temp1 = data[-1]
-		movdqa	temp2, [data - 2 * KSIZE]	; temp2 = data[-2]
-		movdqa	temp3, [data - 3 * KSIZE]	; temp3 = data[-3]
-		movdqa	temp4, [data - 4 * KSIZE]	; temp4 = data[-4]
-		movdqa	[data - 0 * KSIZE], temp1	; data[-0] = temp1
-		movdqa	[data - 1 * KSIZE], temp2	; data[-1] = temp2
-		movdqa	[data - 2 * KSIZE], temp3	; data[-2] = temp3
-		movdqa	[data - 3 * KSIZE], temp4	; data[-3] = temp4
-		sub		data, 4 * KSIZE				; data -= 4
-		sub		count, 4 * KSIZE			; count -= 4
-		jnz		.vloop						; do while (count != 0)
-;---[End of vector loop]-------------------
-.skip:	mov		count, smask				; load smask
-		and		count, size					; apply mask to size variable
-		jz		.exit						; if (count == 0), then go to exit
-;---[Scalar loop]--------------------------
-.sloop:	movdqa	temp1, [data - 1 * KSIZE]	; temp1 = data[-1]
-		movdqa	[data - 0 * KSIZE], temp1	; data[-0] = temp1
-		sub		data, KSIZE					; data--
-		sub		count, KSIZE				; count--
-		jnz		.sloop						; do while (count != 0)
-;---[End of scalar loop]-------------------
-.exit:	movdqa	[data], value				; data[0] = value
-		ret
-
-;******************************************************************************;
-;       Replace element in the right node                                      ;
-;******************************************************************************;
-ReplaceRightCore:
-;---[Parameters]---------------------------
-data	equ		rdi							; pointer to data array
-size	equ		rsi							; count of keys to move
-value	equ		xmm0						; value to insert
-;---[Internal variables]-------------------
-count	equ		rax							; count of iterations
-temp1	equ		xmm1						; temporary register #1
-temp2	equ		xmm2						; temporary register #2
-temp3	equ		xmm3						; temporary register #3
-temp4	equ		xmm4						; temporary register #4
-smask	= 1 shl (KSCALE + 2) - 1			; mask for scalar loop count
-vmask	= not smask							; mask for vector loop count
-;------------------------------------------
-		test	size, size					; if (size == 0)
-		jz		.exit						;     then go to exit
-		mov		count, vmask				; load vmask
-		and		count, size					; apply mask to size variable
-		jz		.skip						; if (count == 0), then skip the loop
-;---[Vector loop]--------------------------
-.vloop:	movdqa	temp1, [data + 1 * KSIZE]	; temp1 = data[+1]
-		movdqa	temp2, [data + 2 * KSIZE]	; temp2 = data[+2]
-		movdqa	temp3, [data + 3 * KSIZE]	; temp3 = data[+3]
-		movdqa	temp4, [data + 4 * KSIZE]	; temp4 = data[+4]
-		movdqa	[data + 0 * KSIZE], temp1	; data[+0] = temp1
-		movdqa	[data + 1 * KSIZE], temp2	; data[+1] = temp2
-		movdqa	[data + 2 * KSIZE], temp3	; data[+2] = temp3
-		movdqa	[data + 3 * KSIZE], temp4	; data[+3] = temp4
-		add		data, 4 * KSIZE				; data += 4
-		sub		count, 4 * KSIZE			; count -= 4
-		jnz		.vloop						; do while (count != 0)
-;---[End of vector loop]-------------------
-.skip:	mov		count, smask				; load smask
-		and		count, size					; apply mask to size variable
-		jz		.exit						; if (count == 0), then go to exit
-;---[Scalar loop]--------------------------
-.sloop:	movdqa	temp1, [data + 1 * KSIZE]	; temp1 = data[+1]
-		movdqa	[data + 0 * KSIZE], temp1	; data[+0] = temp1
-		add		data, KSIZE					; data++
-		sub		count, KSIZE				; count--
-		jnz		.sloop						; do while (count != 0)
-;---[End of scalar loop]-------------------
-.exit:	movdqa	[data], value				; data[0] = value
-		ret
-
-;******************************************************************************;
 ;       Join two nodes                                                         ;
 ;******************************************************************************;
 JoinCore:
@@ -1102,16 +967,23 @@ SplitCore:
 ;---[Parameters]---------------------------
 tdata	equ		rdi							; pointer to target array of keys
 sdata	equ		rsi							; pointer to source array of keys
+size	equ		rdx							; count of keys to move
 ;---[Internal variables]-------------------
 count	equ		rax							; count of iterations
 temp0	equ		xmm0						; temporary register #1
 temp1	equ		xmm1						; temporary register #2
 temp2	equ		xmm2						; temporary register #3
 temp3	equ		xmm3						; temporary register #4
+smask	= 1 shl (KSCALE + 2) - 1			; mask for scalar loop count
+vmask	= not smask							; mask for vector loop count
 ;------------------------------------------
-		mov		count, NMIN / 4
-;---[Splitting loop]-----------------------
-.loop:	movdqa	temp0, [sdata + 0 * KSIZE]	; temp0 = sdata[0]
+		test	size, size					; if (size == 0)
+		jz		.exit						;     then go to exit
+		mov		count, vmask				; load vmask
+		and		count, size					; apply mask to size variable
+		jz		.skip						; if (count == 0), then skip the loop
+;---[Vector loop]--------------------------
+.vloop:	movdqa	temp0, [sdata + 0 * KSIZE]	; temp0 = sdata[0]
 		movdqa	temp1, [sdata + 1 * KSIZE]	; temp1 = sdata[1]
 		movdqa	temp2, [sdata + 2 * KSIZE]	; temp2 = sdata[2]
 		movdqa	temp3, [sdata + 3 * KSIZE]	; temp3 = sdata[3]
@@ -1121,10 +993,21 @@ temp3	equ		xmm3						; temporary register #4
 		movdqa	[tdata + 2 * KSIZE], temp2	; tdata[2] = temp2
 		movdqa	[tdata + 3 * KSIZE], temp3	; tdata[3] = temp3
 		add		tdata, 4 * KSIZE			; tdata += 4
+		sub		count, 4 * KSIZE			; count -= 4
+		jnz		.vloop						; do while (count != 0)
+;---[End of vector loop]-------------------
+.skip:	mov		count, smask				; load smask
+		and		count, size					; apply mask to size variable
+		jz		.exit						; if (count == 0), then go to exit
+;---[Scalar loop]--------------------------
+.sloop:	movdqa	temp0, [sdata + 0 * KSIZE]	; temp0 = sdata[0]
+		add		sdata, KSIZE				; sdata++
+		movdqa	[tdata + 0 * KSIZE], temp0	; tdata[0] = temp0
+		add		tdata, KSIZE				; tdata++
 		sub		count, KSIZE				; count--
-		jnz		.loop						; do while (count != 0)
-;---[End of splitting loop]----------------
-		ret
+		jnz		.sloop						; do while (count != 0)
+;---[End of scalar loop]-------------------
+.exit:	ret
 
 ;******************************************************************************;
 ;       Constructor                                                            ;
@@ -1207,8 +1090,8 @@ this	equ		rdi							; pointer to target list/ring object
 source	equ		rsi							; pointer to source list/ring object
 ;---[Internal variables]-------------------
 array	equ		rax							; pointer to array of nodes
-temp	equ		rcx							; temporary register
 fptr	equ		rax							; pointer to call external function
+temp	equ		rcx							; temporary register
 stack	equ		rsp							; stack pointer
 s_this	equ		stack + 0 * 8				; stack position of "this" variable
 s_src	equ		stack + 1 * 8				; stack position of "source" variable
@@ -1543,17 +1426,17 @@ macro	INSERT	ring
 ;---[Parameters]---------------------------
 this	equ		rdi							; pointer to list/ring object
 node	equ		rsi							; node index
-size	equ		rdx							; node size
-pos		equ		rcx							; insert position
+pos		equ		rdx							; insert position
 value	equ		xmm0						; value to insert
 ;---[Internal variables]-------------------
 result	equ		rax							; result register
+fptr	equ		rax							; pointer to call external function
+size	equ		rcx							; node size
 array	equ		r9							; pointer to array of nodes
 iter	equ		r10							; iterator value
 iter1	equ		r11							; new iterator value
 nval	equ		result						; iterator node value
 ival	equ		result						; iterator index value
-nsize	equ		result						; new node size
 stack	equ		rsp							; stack pointer
 s_this	equ		stack + 0 * 8				; stack position of "this" variable
 s_node	equ		stack + 1 * 8				; stack position of "node" variable
@@ -1566,12 +1449,16 @@ space	= 3 * 8								; stack size required by the procedure
 		mov		[s_node], node				; save "node" variable into the stack
 		mov		[s_pos], pos				; save "pos" variable into the stack
 ;---[Insert data into the node]------------
-		add		qword [array + node + FDIR], KSIZE
+		mov		size, [array + node + FDIR]	; get node size
+		add		size, KSIZE					; size++
+		mov		[array + node + FDIR], size	; update node size
+		and		size, IMASK					; extract node size
 		neg		pos							; pos = -pos
 		add		node, size					; node += size
-		lea		param1, [array + node + NDATA]
-		lea		param2, [pos + size]
-		call	ReplaceLeftCore				; call ReplaceLeftCore (array[node].data + size, size - pos, value)
+		lea		param1, [array + node + NDATA - KSIZE]
+		lea		param2, [size + pos - KSIZE]
+		mov		fptr, ReplaceLeftCore
+		call	fptr						; call ReplaceLeftCore (array[node].data + size - 1, size - pos - 1, value)
 		mov		this, [s_this]				; get "this" variable from the stack
 		mov		node, [s_node]				; get "node" variable from the stack
 		mov		pos, [s_pos]				; get "pos" variable from the stack
@@ -1581,20 +1468,20 @@ if ~ring
 		mov		nval, NMASK					; load node mask
 		and		nval, iter					; nval = iter & NMASK
 		cmp		nval, node					; if (nval == node)
-		je		.tail						;     then check iterator position
+		je		.tail						;     then correct iterator position
 end if
 ;---[Correct forward iterator]-------------
 .back1:	mov		iter, [this + FWD]			; iter = this.fwd
 		mov		nval, NMASK					; load node mask
 		and		nval, iter					; nval = iter & NMASK
 		cmp		nval, node					; if (nval == node)
-		je		.fwd						;     then check iterator position
+		je		.fwd						;     then correct iterator position
 ;---[Correct backward iterator]------------
 .back2:	mov		iter, [this + BWD]			; iter = this.bwd
 		mov		nval, NMASK					; load node mask
 		and		nval, iter					; nval = iter & NMASK
 		cmp		nval, node					; if (nval == node)
-		je		.bwd						;     then check iterator position
+		je		.bwd						;     then correct iterator position
 ;---[Normal exit]--------------------------
 .back3:	mov		result, 1					; return true
 		add		stack, space				; restoring back the stack pointer
@@ -1636,6 +1523,7 @@ pos		equ		rdx							; insert position
 value	equ		xmm0						; value to insert
 ;---[Internal variables]-------------------
 result	equ		rax							; result register
+fptr	equ		rax							; pointer to call external function
 array	equ		r9							; pointer to array of nodes
 iter	equ		r10							; iterator value
 iter1	equ		r11							; new iterator value
@@ -1657,7 +1545,8 @@ space	= 3 * 8								; stack size required by the procedure
 		add		node, NMIN - KSIZE			; node += NMIN - KSIZE
 		lea		param1, [array + node + NDATA]
 		lea		param2, [pos + NMIN - KSIZE]
-		call	ReplaceLeftCore				; call ReplaceLeftCore (array[node].data + NMIN - KSIZE, NMIN - KSIZE - pos, value)
+		mov		fptr, ReplaceLeftCore
+		call	fptr						; call ReplaceLeftCore (array[node].data + NMIN - KSIZE, NMIN - KSIZE - pos, value)
 		mov		this, [s_this]				; get "this" variable from the stack
 		mov		node, [s_node]				; get "node" variable from the stack
 		mov		pos, [s_pos]				; get "pos" variable from the stack
@@ -1666,13 +1555,13 @@ space	= 3 * 8								; stack size required by the procedure
 		mov		nval, NMASK					; load node mask
 		and		nval, iter					; nval = iter & NMASK
 		cmp		nval, node					; if (nval == node)
-		je		.fwd						;     then check iterator position
+		je		.fwd						;     then correct iterator position
 ;---[Correct backward iterator]------------
 .back1:	mov		iter, [this + BWD]			; iter = this.bwd
 		mov		nval, NMASK					; load node mask
 		and		nval, iter					; nval = iter & NMASK
 		cmp		nval, node					; if (nval == node)
-		je		.bwd						;     then check iterator position
+		je		.bwd						;     then correct iterator position
 ;---[Normal exit]--------------------------
 .back2:	mov		result, 1					; return true
 		add		stack, space				; restoring back the stack pointer
@@ -1705,6 +1594,7 @@ pos		equ		rdx							; insert position
 value	equ		xmm0						; value to insert
 ;---[Internal variables]-------------------
 result	equ		rax							; result register
+fptr	equ		rax							; pointer to call external function
 array	equ		r9							; pointer to array of nodes
 iter	equ		r10							; iterator value
 iter1	equ		r11							; new iterator value
@@ -1724,7 +1614,8 @@ space	= 3 * 8								; stack size required by the procedure
 ;---[Insert data into the node]------------
 		lea		param1, [array + node + NDATA]
 		mov		param2, pos
-		call	ReplaceRightCore			; call ReplaceRightCore (array[node].data, pos, value)
+		mov		fptr, ReplaceRightCore
+		call	fptr						; call ReplaceRightCore (array[node].data, pos, value)
 		mov		this, [s_this]				; get "this" variable from the stack
 		mov		node, [s_node]				; get "node" variable from the stack
 		mov		pos, [s_pos]				; get "pos" variable from the stack
@@ -1733,13 +1624,13 @@ space	= 3 * 8								; stack size required by the procedure
 		mov		nval, NMASK					; load node mask
 		and		nval, iter					; nval = iter & NMASK
 		cmp		nval, node					; if (nval == node)
-		je		.fwd						;     then check iterator position
+		je		.fwd						;     then correct iterator position
 ;---[Correct backward iterator]------------
 .back1:	mov		iter, [this + BWD]			; iter = this.bwd
 		mov		nval, NMASK					; load node mask
 		and		nval, iter					; nval = iter & NMASK
 		cmp		nval, node					; if (nval == node)
-		je		.bwd						;     then check iterator position
+		je		.bwd						;     then correct iterator position
 ;---[Normal exit]--------------------------
 .back2:	mov		result, 1					; return true
 		add		stack, space				; restoring back the stack pointer
@@ -1809,9 +1700,10 @@ space	= 7 * 8								; stack size required by the procedure
 		lea		result, [nnode + NMIN]
 		mov		[array + node + FDIR], result
 		mov		[array + next + BDIR], nnode
+		mov		param3, NMIN
 		lea		param2, [array + node + NMIN - KSIZE + NDATA]
 		lea		param1, [array + nnode + NDATA]
-		call	SplitCore					; call SplitCore (array[nnode].data, array[node].data + NMIN + KSIZE)
+		call	SplitCore					; call SplitCore (array[nnode].data, array[node].data + NMIN + KSIZE, NMIN)
 		mov		this, [s_this]				; get "this" variable from the stack
 		mov		node, [s_node]				; get "node" variable from the stack
 		mov		nnode, [s_nnode]			; get "nnode" variable from the stack
@@ -1823,20 +1715,20 @@ if ~ring
 		mov		nval, NMASK					; load node mask
 		and		nval, iter					; nval = iter & NMASK
 		cmp		nval, node					; if (nval == node)
-		je		.tail						;     then check iterator position
+		je		.tail						;     then correct iterator position
 end if
 ;---[Correct forward iterator]-------------
 .back1:	mov		iter, [this + FWD]			; iter = this.fwd
 		mov		nval, NMASK					; load node mask
 		and		nval, iter					; nval = iter & NMASK
 		cmp		nval, node					; if (nval == node)
-		je		.fwd						;     then check iterator position
+		je		.fwd						;     then correct iterator position
 ;---[Correct backward iterator]------------
 .back2:	mov		iter, [this + BWD]			; iter = this.bwd
 		mov		nval, NMASK					; load node mask
 		and		nval, iter					; nval = iter & NMASK
 		cmp		nval, node					; if (nval == node)
-		je		.bwd						;     then check iterator position
+		je		.bwd						;     then correct iterator position
 .back3:	cmp		pos, NMIN - KSIZE			; if (pos > NMIN - KSIZE)
 		ja		.else						;     then go to else branch
 ;---[if pos <= NMIN - KSIZE]---------------
@@ -1913,10 +1805,10 @@ nsize	equ		result						; node size
 		je		.init						;     then init list
 		cmp		nsize, NMAX					; if (nsize == NMAX)
 		je		.split						;     then split the node
-		mov		param4, index
-		mov		param3, nsize
+;---[Insert into node branch]--------------
+		mov		param3, index
 		mov		param2, node
-		jmp		InsFunc						; return this.InsFunc (node, nsize, index, value)
+		jmp		InsFunc						; return this.InsFunc (node, index, value)
 ;---[Split node branch]--------------------
 .split:	mov		param3, index
 		mov		param2, node
@@ -1939,7 +1831,10 @@ end if
 }
 InsertCoreList:	INSERT_CORE	InsertList, SplitList, EMPTY, 0
 InsertCoreRing:	INSERT_CORE	InsertRing, SplitRing, nnode, 1
-;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+;==============================================================================;
+;       Insertion of element                                                   ;
+;==============================================================================;
 macro	INSERT1		InsertCore, offst, shift
 {
 ;---[Parameters]---------------------------
@@ -1967,13 +1862,10 @@ space	= 3 * 8								; stack size required by the procedure
 		mov		[s_data], data				; save "data" variable into the stack
 		mov		param2, [this + CAPACITY]
 		shl		param2, 1
-		cmp		param2, [this + CAPACITY]	; if (newcapacity <= capacity)
-		setnbe	status						;     then return false
-		jbe		.exit
 		call	Extend						; status = this.Extend (capacity * 2)
 		mov		this, [s_this]				; get "this" variable from the stack
 		mov		data, [s_data]				; get "data" variable from the stack
-.exit:	add		stack, space				; restoring back the stack pointer
+		add		stack, space				; restoring back the stack pointer
 		test	status, status
 		jnz		.back						; if (status), then go back
 		ret									;              else return false
@@ -2009,13 +1901,10 @@ space	= 3 * 8								; stack size required by the procedure
 		mov		[s_data], data				; save "data" variable into the stack
 		mov		param2, [this + CAPACITY]
 		shl		param2, 1
-		cmp		param2, [this + CAPACITY]	; if (newcapacity <= capacity)
-		setnbe	status						;     then return false
-		jbe		.exit
 		call	Extend						; status = this.Extend (capacity * 2)
 		mov		this, [s_this]				; get "this" variable from the stack
 		mov		data, [s_data]				; get "data" variable from the stack
-.exit:	add		stack, space				; restoring back the stack pointer
+		add		stack, space				; restoring back the stack pointer
 		test	status, status
 		jnz		.back						; if (status), then go back
 		ret									;              else return false
@@ -2056,11 +1945,12 @@ macro	DELETE	ring
 ;---[Parameters]---------------------------
 this	equ		rdi							; pointer to list/ring object
 node	equ		rsi							; node index
-size	equ		rdx							; node size
-pos		equ		rcx							; delete position
+pos		equ		rdx							; delete position
 ;---[Internal variables]-------------------
 result	equ		rax							; result register
-array	equ		r9							; pointer to array of nodes
+fptr	equ		rax							; pointer to call external function
+array	equ		r8							; pointer to array of nodes
+size	equ		r9							; node size
 iter	equ		r10							; iterator value
 iter1	equ		r11							; new iterator value
 nval	equ		result						; iterator node value
@@ -2069,8 +1959,8 @@ stack	equ		rsp							; stack pointer
 s_this	equ		stack + 0 * 8				; stack position of "this" variable
 s_array	equ		stack + 1 * 8				; stack position of "array" variable
 s_node	equ		stack + 2 * 8				; stack position of "node" variable
-s_size	equ		stack + 3 * 8				; stack position of "size" variable
-s_pos	equ		stack + 4 * 8				; stack position of "pos" variable
+s_pos	equ		stack + 3 * 8				; stack position of "pos" variable
+s_size	equ		stack + 4 * 8				; stack position of "size" variable
 space	= 5 * 8								; stack size required by the procedure
 ;------------------------------------------
 		sub		stack, space				; reserving stack size for local vars
@@ -2078,40 +1968,44 @@ space	= 5 * 8								; stack size required by the procedure
 		mov		[s_this], this				; save "this" variable into the stack
 		mov		[s_array], array			; save "array" variable into the stack
 		mov		[s_node], node				; save "node" variable into the stack
-		mov		[s_size], size				; save "size" variable into the stack
 		mov		[s_pos], pos				; save "pos" variable into the stack
 ;---[Remove element from the node]---------
-		sub		qword [array + node + FDIR], KSIZE
+		mov		size, [array + node + FDIR]	; get node size
+		sub		size, KSIZE					; size--
+		mov		[array + node + FDIR], size	; update node size
+		and		size, IMASK					; extract node size
+		mov		[s_size], size				; save "size" variable into the stack
 		add		node, pos					; node += pos
 		neg		pos							; pos = -pos
 		lea		param1, [array + node + NDATA]
 		lea		param2, [pos + size]
-		call	DeleteCore					; call DeleteCore (array[node].data + pos, size - pos)
+		mov		fptr, DeleteCore
+		call	fptr						; call DeleteCore (array[node].data + pos, size - pos)
 		mov		this, [s_this]				; get "this" variable from the stack
 		mov		array, [s_array]			; get "array" variable from the stack
 		mov		node, [s_node]				; get "node" variable from the stack
-		cmp		qword [s_size], 0			; if (size == 0)
-		jz		.free						;     then free the node
+		cmp		qword [this + SIZE], 0		; if (this.size == 0)
+		jz		.reset						;     then reset list/ring properties
 ;---[Correct tail iterator]----------------
 if ~ring
 		mov		iter, [this + TAIL]			; iter = this.tail
 		mov		nval, NMASK					; load node mask
 		and		nval, iter					; nval = iter & NMASK
 		cmp		nval, node					; if (nval == node)
-		je		.tail						;     then check iterator position
+		je		.tail						;     then correct iterator position
 end if
 ;---[Correct forward iterator]-------------
 .back1:	mov		iter, [this + FWD]			; iter = this.fwd
 		mov		nval, NMASK					; load node mask
 		and		nval, iter					; nval = iter & NMASK
 		cmp		nval, node					; if (nval == node)
-		je		.fwd						;     then check iterator position
+		je		.fwd						;     then correct iterator position
 ;---[Correct backward iterator]------------
 .back2:	mov		iter, [this + BWD]			; iter = this.bwd
 		mov		nval, NMASK					; load node mask
 		and		nval, iter					; nval = iter & NMASK
 		cmp		nval, node					; if (nval == node)
-		je		.bwd						;     then check iterator position
+		je		.bwd						;     then correct iterator position
 ;---[Normal exit]--------------------------
 .back3:	mov		result, 1					; return true
 		add		stack, space				; restoring back the stack pointer
@@ -2136,10 +2030,9 @@ end if
 		jmp		.back2						; go back
 @@:		mov		param3, KSIZE
 		lea		param2, [iter - KSIZE]
-		mov		param1, array
+		mov		param1, [s_array]
 		call	GoNext						; fwd = GoNext (array, iter - KSIZE, KSIZE)
 		mov		this, [s_this]				; get "this" variable from the stack
-		mov		array, [s_array]			; get "array" variable from the stack
 		mov		node, [s_node]				; get "node" variable from the stack
 		mov		[this + FWD], result		; update iterator position
 		jmp		.back2						; go back
@@ -2157,15 +2050,14 @@ end if
 		jmp		.back3						; go back
 @@:		mov		param3, KSIZE
 		lea		param2, [iter + KSIZE]
-		mov		param1, array
+		mov		param1, [s_array]
 		call	GoPrev						; bwd = GoPrev (array, iter + KSIZE, KSIZE)
 		mov		this, [s_this]				; get "this" variable from the stack
-		mov		array, [s_array]			; get "array" variable from the stack
 		mov		node, [s_node]				; get "node" variable from the stack
 		mov		[this + BWD], result		; update iterator position
 		jmp		.back3						; go back
-;---[Set list/ring properties]-------------
-.free:	mov		qword [this + FWD], EMPTY	; this.fwd = EMPTY
+;---[Reset list/ring properties]-----------
+.reset:	mov		qword [this + FWD], EMPTY	; this.fwd = EMPTY
 		mov		qword [this + BWD], EMPTY	; this.bwd = EMPTY
 if ~ring
 		mov		qword [this + HEAD], EMPTY	; this.head = EMPTY
@@ -2191,11 +2083,12 @@ macro	REPLACE_LEFT
 this	equ		rdi							; pointer to list/ring object
 lnode	equ		rsi							; left node index
 rnode	equ		rdx							; right node index
-size	equ		rcx							; node size
-pos		equ		r8							; delete position
+pos		equ		rcx							; delete position
 ;---[Internal variables]-------------------
 result	equ		rax							; result register
-array	equ		r9							; pointer to array of nodes
+fptr	equ		rax							; pointer to call external function
+array	equ		r8							; pointer to array of nodes
+size	equ		r9							; node size
 iter	equ		r10							; iterator value
 iter1	equ		r11							; new iterator value
 nval	equ		result						; iterator node value
@@ -2206,8 +2099,8 @@ s_this	equ		stack + 0 * 8				; stack position of "this" variable
 s_array	equ		stack + 1 * 8				; stack position of "array" variable
 s_lnode	equ		stack + 2 * 8				; stack position of "lnode" variable
 s_rnode	equ		stack + 3 * 8				; stack position of "rnode" variable
-s_size	equ		stack + 4 * 8				; stack position of "size" variable
-s_pos	equ		stack + 5 * 8				; stack position of "pos" variable
+s_pos	equ		stack + 4 * 8				; stack position of "pos" variable
+s_size	equ		stack + 5 * 8				; stack position of "size" variable
 space	= 7 * 8								; stack size required by the procedure
 ;------------------------------------------
 		sub		stack, space				; reserving stack size for local vars
@@ -2216,9 +2109,13 @@ space	= 7 * 8								; stack size required by the procedure
 		mov		[s_array], array			; save "array" variable into the stack
 		mov		[s_lnode], lnode			; save "lnode" variable into the stack
 		mov		[s_rnode], rnode			; save "rnode" variable into the stack
-		mov		[s_size], size				; save "size" variable into the stack
 		mov		[s_pos], pos				; save "pos" variable into the stack
 ;---[Get value]----------------------------
+		mov		size, [array + lnode + FDIR]; get node size
+		sub		size, KSIZE					; size--
+		mov		[array + lnode + FDIR], size; update node size
+		and		size, IMASK					; extract node size
+		mov		[s_size], size				; save "size" variable into the stack
 		add		lnode, array
 		add		lnode, size
 		movdqa	value, [lnode + NDATA]		; value = array[lnode].data[size]
@@ -2226,10 +2123,10 @@ space	= 7 * 8								; stack size required by the procedure
 		add		rnode, pos					; rnode += pos
 		lea		param1, [array + rnode + NDATA]
 		mov		param2, pos
-		call	ReplaceLeftCore				; call ReplaceLeftCore (array[rnode].data + pos, pos, value)
+		mov		fptr, ReplaceLeftCore
+		call	fptr						; call ReplaceLeftCore (array[rnode].data + pos, pos, value)
 		mov		array, [s_array]			; get "array" variable from the stack
 		mov		lnode, [s_lnode]			; get "lnode" variable from the stack
-		sub		qword [array + lnode + FDIR], KSIZE
 		mov		this, [s_this]				; get "this" variable from the stack
 		mov		lnode, [s_lnode]			; get "lnode" variable from the stack
 		mov		rnode, [s_rnode]			; get "rnode" variable from the stack
@@ -2238,17 +2135,17 @@ space	= 7 * 8								; stack size required by the procedure
 		mov		nval, NMASK					; load node mask
 		and		nval, iter					; nval = iter & NMASK
 		cmp		nval, lnode					; if (nval == lnode)
-		je		.bleft						;     then check iterator position
+		je		.bleft						;     then correct iterator position
 		cmp		nval, rnode					; if (nval == rnode)
-		je		.brght						;     then check iterator position
+		je		.brght						;     then correct iterator position
 ;---[Correct forward iterator]-------------
 .back2:	mov		iter, [this + FWD]			; iter = this.fwd
 		mov		nval, NMASK					; load node mask
 		and		nval, iter					; nval = iter & NMASK
 		cmp		nval, lnode					; if (nval == lnode)
-		je		.fleft						;     then check iterator position
+		je		.fleft						;     then correct iterator position
 		cmp		nval, rnode					; if (nval == rnode)
-		je		.frght						;     then check iterator position
+		je		.frght						;     then correct iterator position
 ;---[Normal exit]--------------------------
 .back3:	mov		result, 1					; return true
 		add		stack, space				; restoring back the stack pointer
@@ -2307,11 +2204,12 @@ macro	REPLACE_RIGHT	ring
 this	equ		rdi							; pointer to list/ring object
 lnode	equ		rsi							; left node index
 rnode	equ		rdx							; right node index
-size	equ		rcx							; node size
-pos		equ		r8							; delete position
+pos		equ		rcx							; delete position
 ;---[Internal variables]-------------------
 result	equ		rax							; result register
-array	equ		r9							; pointer to array of nodes
+fptr	equ		rax							; pointer to call external function
+array	equ		r8							; pointer to array of nodes
+size	equ		r9							; node size
 iter	equ		r10							; iterator value
 iter1	equ		r11							; new iterator value
 nval	equ		result						; iterator node value
@@ -2322,8 +2220,8 @@ s_this	equ		stack + 0 * 8				; stack position of "this" variable
 s_array	equ		stack + 1 * 8				; stack position of "array" variable
 s_lnode	equ		stack + 2 * 8				; stack position of "lnode" variable
 s_rnode	equ		stack + 3 * 8				; stack position of "rnode" variable
-s_size	equ		stack + 4 * 8				; stack position of "size" variable
-s_pos	equ		stack + 5 * 8				; stack position of "pos" variable
+s_pos	equ		stack + 4 * 8				; stack position of "pos" variable
+s_size	equ		stack + 5 * 8				; stack position of "size" variable
 space	= 7 * 8								; stack size required by the procedure
 ;------------------------------------------
 		sub		stack, space				; reserving stack size for local vars
@@ -2332,9 +2230,13 @@ space	= 7 * 8								; stack size required by the procedure
 		mov		[s_array], array			; save "array" variable into the stack
 		mov		[s_lnode], lnode			; save "lnode" variable into the stack
 		mov		[s_rnode], rnode			; save "rnode" variable into the stack
-		mov		[s_size], size				; save "size" variable into the stack
 		mov		[s_pos], pos				; save "pos" variable into the stack
 ;---[Get value]----------------------------
+		mov		size, [array + rnode + FDIR]; get node size
+		sub		size, KSIZE					; size--
+		mov		[array + rnode + FDIR], size; update node size
+		and		size, IMASK					; extract node size
+		mov		[s_size], size				; save "size" variable into the stack
 		add		rnode, array
 		movdqa	value, [rnode + NDATA]		; value = array[rnode].data[0]
 ;---[Replace element in the node]----------
@@ -2342,14 +2244,14 @@ space	= 7 * 8								; stack size required by the procedure
 		neg		pos							; pos = -pos
 		lea		param1, [array + lnode + NDATA]
 		lea		param2, [pos + NMIN - KSIZE]
-		call	ReplaceRightCore			; call ReplaceRightCore (array[lnode].data + pos, NMIN - KSIZE - pos, value)
+		mov		fptr, ReplaceRightCore
+		call	fptr						; call ReplaceRightCore (array[lnode].data + pos, NMIN - KSIZE - pos, value)
 		mov		array, [s_array]			; get "array" variable from the stack
 		mov		rnode, [s_rnode]			; get "rnode" variable from the stack
-		mov		size, [s_size]				; get "size" variable from the stack
-		sub		qword [array + rnode + FDIR], KSIZE
 		lea		param1, [array + rnode + NDATA]
-		mov		param2, size
-		call	DeleteCore					; call DeleteCore (array[rnode].data, size)
+		mov		param2, [s_size]
+		mov		fptr, DeleteCore
+		call	fptr						; call DeleteCore (array[rnode].data, size)
 		mov		this, [s_this]				; get "this" variable from the stack
 		mov		lnode, [s_lnode]			; get "lnode" variable from the stack
 		mov		rnode, [s_rnode]			; get "rnode" variable from the stack
@@ -2359,24 +2261,24 @@ if ~ring
 		mov		nval, NMASK					; load node mask
 		and		nval, iter					; nval = iter & NMASK
 		cmp		nval, rnode					; if (nval == node)
-		je		.tail						;     then check iterator position
+		je		.tail						;     then correct iterator position
 end if
 ;---[Correct forward iterator]-------------
 .back1:	mov		iter, [this + FWD]			; iter = this.fwd
 		mov		nval, NMASK					; load node mask
 		and		nval, iter					; nval = iter & NMASK
 		cmp		nval, rnode					; if (nval == rnode)
-		je		.frght						;     then check iterator position
+		je		.frght						;     then correct iterator position
 		cmp		nval, lnode					; if (nval == lnode)
-		je		.fleft						;     then check iterator position
+		je		.fleft						;     then correct iterator position
 ;---[Correct backward iterator]------------
 .back2:	mov		iter, [this + BWD]			; iter = this.bwd
 		mov		nval, NMASK					; load node mask
 		and		nval, iter					; nval = iter & NMASK
 		cmp		nval, rnode					; if (nval == rnode)
-		je		.brght						;     then check iterator position
+		je		.brght						;     then correct iterator position
 		cmp		nval, lnode					; if (nval == lnode)
-		je		.bleft						;     then check iterator position
+		je		.bleft						;     then correct iterator position
 ;---[Normal exit]--------------------------
 .back3:	mov		result, 1					; return true
 		add		stack, space				; restoring back the stack pointer
@@ -2447,6 +2349,7 @@ node	equ		rcx							; node index
 pos		equ		r8							; delete position
 ;---[Internal variables]-------------------
 result	equ		rax							; result register
+fptr	equ		rax							; pointer to call external function
 array	equ		r9							; pointer to array of nodes
 iter	equ		r10							; iterator value
 iter1	equ		r11							; new iterator value
@@ -2480,7 +2383,8 @@ space	= 5 * 8								; stack size required by the procedure
 		neg		pos							; pos = -pos
 		lea		param1, [array + node + NDATA]
 		lea		param2, [pos + NMIN - KSIZE]
-		call	DeleteCore					; call DeleteCore (array[node].data + pos, NMIN - KSIZE - pos)
+		mov		fptr, DeleteCore
+		call	fptr						; call DeleteCore (array[node].data + pos, NMIN - KSIZE - pos)
 		mov		array, [s_array]			; get "array" variable from the stack
 		mov		lnode, [s_lnode]			; get "lnode" variable from the stack
 		mov		rnode, [s_rnode]			; get "rnode" variable from the stack
@@ -2507,24 +2411,24 @@ if ~ring
 		mov		nval, NMASK					; load node mask
 		and		nval, iter					; nval = iter & NMASK
 		cmp		nval, rnode					; if (nval == node)
-		je		.tail						;     then check iterator position
+		je		.tail						;     then correct iterator position
 end if
 ;---[Correct forward iterator]-------------
 .back1:	mov		iter, [this + FWD]			; iter = this.fwd
 		mov		nval, NMASK					; load node mask
 		and		nval, iter					; nval = iter & NMASK
 		cmp		nval, rnode					; if (nval == rnode)
-		je		.frght						;     then check iterator position
+		je		.frght						;     then correct iterator position
 		cmp		nval, lnode					; if (nval == lnode)
-		je		.fleft						;     then check iterator position
+		je		.fleft						;     then correct iterator position
 ;---[Correct backward iterator]------------
 .back2:	mov		iter, [this + BWD]			; iter = this.bwd
 		mov		nval, NMASK					; load node mask
 		and		nval, iter					; nval = iter & NMASK
 		cmp		nval, rnode					; if (nval == rnode)
-		je		.brght						;     then check iterator position
+		je		.brght						;     then correct iterator position
 		cmp		nval, lnode					; if (nval == lnode)
-		je		.bleft						;     then check iterator position
+		je		.bleft						;     then correct iterator position
 ;---[Free node]----------------------------
 .back3:	mov		result, [this + POOL]		; array[rnode].fdir = this.pool
 		mov		[array + rnode + FDIR], result
@@ -2557,7 +2461,7 @@ end if
 		and		rsize, [array + rnode + FDIR]
 		mov		param3, KSIZE
 		lea		param2, [rnode + rsize - KSIZE]
-		mov		param1, array
+		mov		param1, [s_array]
 		call	GoNext						; fwd = GoNext (array, rnode + rsize - KSIZE, KSIZE)
 		mov		this, [s_this]				; get "this" variable from the stack
 		mov		array, [s_array]			; get "array" variable from the stack
@@ -2582,7 +2486,7 @@ end if
 		jmp		.back3						; go back
 @@:		mov		param3, KSIZE
 		mov		param2, lnode
-		mov		param1, array
+		mov		param1, [s_array]
 		call	GoPrev						; bwd = GoPrev (array, lnode, KSIZE)
 		mov		this, [s_this]				; get "this" variable from the stack
 		mov		array, [s_array]			; get "array" variable from the stack
@@ -2612,17 +2516,8 @@ lsize	equ		r10							; left node size
 rsize	equ		r11							; right node size
 nsize	equ		lsize						; node size
 size	equ		rsize						; object size
-stack	equ		rsp							; stack pointer
-s_this	equ		stack + 0 * 8				; stack position of "this" variable
-s_array	equ		stack + 1 * 8				; stack position of "array" variable
-s_iter	equ		stack + 2 * 8				; stack position of "iter" variable
-space	= 3 * 8								; stack size required by the procedure
 ;------------------------------------------
-		sub		stack, space				; reserving stack size for local vars
 		mov		array, [this + ARRAY]		; get pointer to array of nodes
-		mov		[s_this], this				; save "this" variable into the stack
-		mov		[s_array], array			; save "array" variable into the stack
-		mov		[s_iter], iter				; save "iter" variable into the stack
 ;---[Get node pointer]---------------------
 		mov		size, [this + SIZE]			; get object size
 		sub		size, KSIZE					; this.size--
@@ -2643,7 +2538,7 @@ space	= 3 * 8								; stack size required by the procedure
 		mov		lnode, [array + node + BDIR]; lnode = array[node].bdir
 		cmp		lnode, EMPTY				; if (lnode == EMPTY)
 		je		.else						;     then go to else branch
-;---[if tindex >= KSIZE]-------------------
+;---[if lnode != EMPTY]--------------------
 		mov		lsize, IMASK				; load index mask
 		and		lsize, [array + lnode + FDIR]
 		sub		lsize, KSIZE				; lsize = (array[lnode].fdir & IMASK) - KSIZE
@@ -2653,7 +2548,6 @@ space	= 3 * 8								; stack size required by the procedure
 		mov		param5, index
 		mov		param4, node
 		mov		param3, node
-		add		stack, space				; restoring back the stack pointer
 		jmp		JoinFunc					; call this.JoinFunc (lnode, node, node, index)
 ;---[else]---------------------------------
 .else:	mov		rsize, IMASK				; load index mask
@@ -2665,32 +2559,28 @@ space	= 3 * 8								; stack size required by the procedure
 		mov		param4, node
 		mov		param2, node
 		mov		param3, rnode
-		add		stack, space				; restoring back the stack pointer
 		jmp		JoinFunc					; call this.JoinFunc (node, rnode, node, index)
 ;---[Delete element from the node]---------
-.del:	mov		param4, index
-		mov		param2, node
-		mov		param3, nsize
-		add		stack, space				; restoring back the stack pointer
-		jmp		DelFunc						; call this.DelFunc (node, nsize, index)
+.del:	mov		param2, node
+		mov		param3, index
+		jmp		DelFunc						; call this.DelFunc (node, index)
 ;---[Replace element in the left node]-----
 .left:	mov		param2, lnode
-		mov		param5, index
 		mov		param3, node
-		mov		param4, lsize
-		add		stack, space				; restoring back the stack pointer
-		jmp		RepLeftFunc					; call this.RepLeftFunc (lnode, node, lsize, index)
+		mov		param4, index
+		jmp		RepLeftFunc					; call this.RepLeftFunc (lnode, node, index)
 ;---[Replace element in the right node]----
-.right:	mov		param5, index
-		mov		param2, node
-		mov		param4, rsize
+.right:	mov		param2, node
 		mov		param3, rnode
-		add		stack, space				; restoring back the stack pointer
-		jmp		RepRightFunc				; call this.RepRightFunc (node, rnode, rsize, index)
+		mov		param4, index
+		jmp		RepRightFunc				; call this.RepRightFunc (node, rnode, index)
 }
 RemoveCoreList:	REMOVE_CORE	DeleteList, ReplaceLeftList, ReplaceRightList, JoinList
 RemoveCoreRing:	REMOVE_CORE	DeleteRing, ReplaceLeftRing, ReplaceRightRing, JoinRing
-;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+;==============================================================================;
+;       Removing of element                                                    ;
+;==============================================================================;
 macro	REMOVE	RemoveCore, offst
 {
 ;---[Parameters]---------------------------
@@ -3048,13 +2938,12 @@ node	equ		r8							; pointer to bnode
 index	equ		r9							; element index
 nsize	equ		rcx							; node size
 ;------------------------------------------
-		mov		result, iter				; result = iter
 		mov		node, NMASK					; load node mask
 		mov		index, IMASK				; load index mask
 		and		node, iter					; node = iter & NMASK
 		and		index, iter					; index = iter & IMASK
 ;---[Iteration loop]-----------------------
-.loop:	add		result, pos					; result += pos
+.loop:	add		iter, pos					; iter += pos
 		mov		nsize, [array + node + FDIR]
 		and		nsize, IMASK
 		sub		nsize, index				; nsize = array[node].fdir & IMASK - index
@@ -3063,13 +2952,14 @@ nsize	equ		rcx							; node size
 		mov		node, [array + node + FDIR]
 		and		node, NMASK					; node = array[node].fdir & NMASK
 		xor		index, index				; index = 0
-		lea		result, [node + index]
+		lea		iter, [node + index]
 		cmp		node, EMPTY					; if (node == EMPTY)
 		je		.error						;     return EMPTY
 		test	pos, pos
 		jnz		.loop						; do while (pos != 0)
 ;---[End of iteration loop]----------------
-.exit:	ret									; return iter
+.exit:	mov		result, iter				; return node + index
+		ret
 ;---[Error branch]-------------------------
 .error:	mov		result, EMPTY				; return EMPTY
 		ret
@@ -3084,13 +2974,12 @@ result	equ		rax							; result register
 node	equ		r8							; pointer to bnode
 index	equ		r9							; element index
 ;------------------------------------------
-		mov		result, iter				; result = iter
 		mov		node, NMASK					; load node mask
 		mov		index, IMASK				; load index mask
 		and		node, iter					; node = iter & NMASK
 		and		index, iter					; index = iter & IMASK
 ;---[Iteration loop]-----------------------
-.loop:	sub		result, pos					; result -= pos
+.loop:	sub		iter, pos					; iter -= pos
 		add		index, KSIZE				; index++
 		sub		pos, index					; if (pos < index)
 		jb		.exit						;     then go to exit
@@ -3098,13 +2987,14 @@ index	equ		r9							; element index
 		mov		index, [array + node + FDIR]
 		and		index, IMASK
 		sub		index, KSIZE				; index = (array[node].fdir & NMASK) - KSIZE
-		lea		result, [node + index]
+		lea		iter, [node + index]
 		cmp		node, EMPTY					; if (node == EMPTY)
 		je		.error						;     return EMPTY
 		test	pos, pos
 		jnz		.loop						; do while (pos != 0)
 ;---[End of iteration loop]----------------
-.exit:	ret									; return iter
+.exit:	mov		result, iter				; return node + index
+		ret
 ;---[Error branch]-------------------------
 .error:	mov		result, EMPTY				; return EMPTY
 		ret
@@ -3135,7 +3025,7 @@ temp	equ		rdx							; temporary register
 		and		nsize, temp					; nsize = array[node].fdir & IMASK
 		sub		index, nsize				; if (index < nsize)
 		jb		.exit						;     then go to exit
-;---[Searching loop]-----------------------
+;---[Search loop]--------------------------
 .loop:	mov		node, next					; node = next
 		mov		temp, [array + next + FDIR]	; temp = array[next].fdir
 		mov		next, NMASK					; load node mask
@@ -3144,7 +3034,7 @@ temp	equ		rdx							; temporary register
 		and		nsize, temp					; nsize = array[node].fdir & IMASK
 		sub		index, nsize
 		jae		.loop						; do while (index >= nsize)
-;---[End of searching loop]----------------
+;---[End of search loop]-------------------
 .exit:	add		index, nsize
 		add		node, index					; iter = node + index
 if ~ext
@@ -4483,6 +4373,7 @@ size	equ		rsi							; count of keys to sort
 func	equ		rdx							; compare function
 ;---[Internal variables]-------------------
 result	equ		rax							; result register
+fptr	equ		rax							; pointer to call external function
 ptr		equ		rcx							; temporary pointer
 left	equ		r12							; left index
 right	equ		r13							; right index
@@ -4534,7 +4425,8 @@ space	= 9 * 8								; stack size required by the procedure
 		mov		param2, ptr
 		sub		param2, left
 		lea		param1, [data + ptr]
-		call	ReplaceLeftCore				; call ReplaceLeftCore (data + ptr, ptr - left, value)
+		mov		fptr, ReplaceLeftCore
+		call	fptr						; call ReplaceLeftCore (data + ptr, ptr - left, value)
 		mov		data, [s_data]				; get "data" variable from the stack
 		mov		ptr, [s_ptr]				; get "ptr" variable from the stack
 		add		ptr, KSIZE					; ptr++
@@ -4914,8 +4806,6 @@ end if
 ;---[Extend object capacity]---------------
 .ext:	mov		param2, [this + CAPACITY]
 		shl		param2, 1
-		cmp		param2, [this + CAPACITY]	; if (newcapacity <= capacity)
-		jbe		.error						;     then go to error branch
 		call	Extend						; status = this.Extend (capacity * 2)
 		mov		this, [s_this]				; get "this" variable from the stack
 		mov		func, [s_func]				; get "func" variable from the stack
@@ -5421,6 +5311,9 @@ s_func	equ		stack + 2 * 8				; stack position of "func" variable
 space	= 3 * 8								; stack size required by the procedure
 ;------------------------------------------
 		sub		stack, space				; reserving stack size for local vars
+		mov		[s_this], this				; save "this" variable into the stack
+		mov		[s_src], source				; save "source" variable into the stack
+		mov		[s_func], func				; save "func" variable into the stack
 ;---[Check target object size]-------------
 		cmp		qword [this + SIZE], 0		; if (size)
 		jnz		.error						;     then go to error branch
@@ -5429,9 +5322,6 @@ space	= 3 * 8								; stack size required by the procedure
 		test	size, size					; if (size == 0)
 		jz		.exit						;     then go to exit
 ;---[Check object capacity]----------------
-		mov		[s_this], this				; save "this" variable into the stack
-		mov		[s_src], source				; save "source" variable into the stack
-		mov		[s_func], func				; save "func" variable into the stack
 		lea		size, [size * 2 + NSIZE - KSIZE]
 		and		size, -NSIZE				; size = size * 2 + NSIZE - KSIZE & (-NSIZE)
 	Capacity	size, func, MINCAP			; compute new capacity of target object

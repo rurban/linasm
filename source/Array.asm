@@ -6973,7 +6973,7 @@ end if
 		movdqa	data, [array + index]		; data = array[index]
 	pblendvb	data, replace
 		movdqa	[array + index], data		; array[index] = replace (data, pattern, value)
-		jmp		back						; go back into the searching loop
+		jmp		back						; go back into the search loop
 @@:		shl		size, VSCALE				; compute shift in mask array
 		lea		table, [maskS2]				; set pointer to blending table
 		pand	flags, [table + size]

@@ -180,9 +180,7 @@ section	'.text'		executable align 16
 ;******************************************************************************;
 ;       Consts                                                                 ;
 ;******************************************************************************;
-KSCALE		= 4								; Key scale factor
 NSCALE		= 2								; Node scale factor
-KSIZE		= 1 shl KSCALE					; Size of key (bytes)
 NSIZE		= 1 shl NSCALE					; Size of node (elements)
 MINCAP		= 1 shl	PSCALE					; Min capacity of heap object
 
@@ -609,14 +607,11 @@ space	= 3 * 8								; stack size required by the procedure
 		mov		[s_size], size				; save "size" variable into the stack
 		mov		param2, [this + CAPACITY]
 		shl		param2, 1
-		cmp		param2, [this + CAPACITY]	; if (newcapacity <= capacity)
-		setnbe	status						;     then return false
-		jbe		.exit
 		call	Extend						; status = this.Extend (cap * 2)
 		mov		this, [s_this]				; get "this" variable from the stack
 		mov		data, [s_data]				; get "data" variable from the stack
 		mov		size, [s_size]				; get "size" variable from the stack
-.exit:	add		stack, space				; restoring back the stack pointer
+		add		stack, space				; restoring back the stack pointer
 		test	status, status
 		jnz		.back						; if (status), then go back
 		ret									;              else return false
@@ -668,7 +663,7 @@ PopMax:	POP_DATA	SiftMaxDown
 ;******************************************************************************;
 ;       Extraction of element                                                  ;
 ;******************************************************************************;
-macro	EXTRACT	SiftUp, SiftDown, cond
+macro	EXTRACT	SiftUp, SiftDown, cond1, cond2
 {
 ;---[Parameters]---------------------------
 this	equ		rdi							; pointer to heap object
@@ -714,26 +709,11 @@ space	= 5 * 8								; stack size required by the procedure
 		mov		array, [s_array]			; get "array" variable from the stack
 		mov		size, [s_size]				; get "size" variable from the stack
 		movdqa	temp, [array + size]		; temp = array[size]
-		cmp		result, 0					; if (result == 0)
-		je		.skip						;     then go to skip branch
-		j#cond	.else						;     else sift the element
-;---[if result cond 0]---------------------
-		mov		param5, [this + IFUNC]
-		mov		param4, [this + KFUNC]
-		mov		param3, pos
-		mov		param2, size
-		mov		param1, array
-		add		stack, space				; restoring back the stack pointer
-		jmp		SiftDown					; return SiftDown (array, size, pos, kfunc, ifunc, temp)
-;---[else]---------------------------------
-.else:	mov		param2, pos
-		mov		param4, [this + IFUNC]
-		mov		param3, [this + KFUNC]
-		mov		param1, array
-		add		stack, space				; restoring back the stack pointer
-		jmp		SiftUp						; return SiftUp (array, pos, kfunc, ifunc, temp)
-;---[Skip branch]--------------------------
-.skip:	mov		func, [this + IFUNC]
+		cmp		result, 0
+		j#cond1	.down						; if (result cond1 0), then sift down the element
+		j#cond2	.up							; if (result cond2 0), then sift up the element
+;---[Change element]-----------------------
+		mov		func, [this + IFUNC]
 		movdqa	[array + pos], temp			; array[pos].data = data[0]
 		lea		param1, [array + pos]
 		mov		param2, pos
@@ -742,18 +722,33 @@ space	= 5 * 8								; stack size required by the procedure
 		mov		status, 1					; return true
 		add		stack, space				; restoring back the stack pointer
 		ret
+;---[Sift down branch]---------------------
+.down:	mov		param5, [this + IFUNC]
+		mov		param4, [this + KFUNC]
+		mov		param3, pos
+		mov		param2, size
+		mov		param1, array
+		add		stack, space				; restoring back the stack pointer
+		jmp		SiftDown					; return SiftDown (array, size, pos, kfunc, ifunc, temp)
+;---[Sift up branch]-----------------------
+.up:	mov		param2, pos
+		mov		param4, [this + IFUNC]
+		mov		param3, [this + KFUNC]
+		mov		param1, array
+		add		stack, space				; restoring back the stack pointer
+		jmp		SiftUp						; return SiftUp (array, pos, kfunc, ifunc, temp)
 ;---[Error branch]-------------------------
 .error:	xor		status, status				; return false
 		add		stack, space				; restoring back the stack pointer
 		ret
 }
-ExtractMin:	EXTRACT	SiftMinUp, SiftMinDown, l
-ExtractMax:	EXTRACT	SiftMaxUp, SiftMaxDown, g
+ExtractMin:	EXTRACT	SiftMinUp, SiftMinDown, g, l
+ExtractMax:	EXTRACT	SiftMaxUp, SiftMaxDown, l, g
 
 ;******************************************************************************;
 ;       Setting element value                                                  ;
 ;******************************************************************************;
-macro	SET		SiftUp, SiftDown, cond
+macro	SET		SiftUp, SiftDown, cond1, cond2
 {
 ;---[Parameters]---------------------------
 this	equ		rdi							; pointer to heap object
@@ -798,26 +793,11 @@ space	= 5 * 8								; stack size required by the procedure
 		mov		array, [s_array]			; get "array" variable from the stack
 		mov		size, [s_size]				; get "size" variable from the stack
 		movdqu	temp, [data]				; temp = data[0]
-		cmp		result, 0					; if (result == 0)
-		je		.skip						;     then go to skip branch
-		j#cond	.else						;     else sift the element
-;---[if result cond 0]---------------------
-		mov		param5, [this + IFUNC]
-		mov		param4, [this + KFUNC]
-		mov		param3, pos
-		mov		param2, size
-		mov		param1, array
-		add		stack, space				; restoring back the stack pointer
-		jmp		SiftDown					; return SiftDown (array, size, pos, kfunc, ifunc, temp)
-;---[else]---------------------------------
-.else:	mov		param2, pos
-		mov		param4, [this + IFUNC]
-		mov		param3, [this + KFUNC]
-		mov		param1, array
-		add		stack, space				; restoring back the stack pointer
-		jmp		SiftUp						; return SiftUp (array, pos, kfunc, ifunc, temp)
-;---[Skip branch]--------------------------
-.skip:	mov		func, [this + IFUNC]
+		cmp		result, 0
+		j#cond1	.down						; if (result cond1 0), then sift down the element
+		j#cond2	.up							; if (result cond2 0), then sift up the element
+;---[Change element]-----------------------
+		mov		func, [this + IFUNC]
 		movdqa	[array + pos], temp			; array[pos].data = data[0]
 		lea		param1, [array + pos]
 		mov		param2, pos
@@ -826,13 +806,28 @@ space	= 5 * 8								; stack size required by the procedure
 		mov		status, 1					; return true
 		add		stack, space				; restoring back the stack pointer
 		ret
+;---[Sift down branch]---------------------
+.down:	mov		param5, [this + IFUNC]
+		mov		param4, [this + KFUNC]
+		mov		param3, pos
+		mov		param2, size
+		mov		param1, array
+		add		stack, space				; restoring back the stack pointer
+		jmp		SiftDown					; return SiftDown (array, size, pos, kfunc, ifunc, temp)
+;---[Sift up branch]-----------------------
+.up:	mov		param2, pos
+		mov		param4, [this + IFUNC]
+		mov		param3, [this + KFUNC]
+		mov		param1, array
+		add		stack, space				; restoring back the stack pointer
+		jmp		SiftUp						; return SiftUp (array, pos, kfunc, ifunc, temp)
 ;---[Error branch]-------------------------
 .error:	xor		status, status				; return false
 		add		stack, space				; restoring back the stack pointer
 		ret
 }
-SetMin:	SET	SiftMinUp, SiftMinDown, l
-SetMax:	SET	SiftMaxUp, SiftMaxDown, g
+SetMin:	SET	SiftMinUp, SiftMinDown, g, l
+SetMax:	SET	SiftMaxUp, SiftMaxDown, l, g
 
 ;******************************************************************************;
 ;       Getting element value                                                  ;
@@ -863,7 +858,7 @@ temp	equ		xmm0						; temporary register
 ;******************************************************************************;
 ;       Replacing element value                                                ;
 ;******************************************************************************;
-macro	REPLACE		SiftUp, SiftDown, cond
+macro	REPLACE		SiftUp, SiftDown, cond1, cond2
 {
 ;---[Parameters]---------------------------
 this	equ		rdi							; pointer to heap object
@@ -911,26 +906,11 @@ space	= 5 * 8								; stack size required by the procedure
 		mov		array, [s_array]			; get "array" variable from the stack
 		mov		size, [s_size]				; get "size" variable from the stack
 		movdqu	temp, [ndata]				; temp = ndata[0]
-		cmp		result, 0					; if (result == 0)
-		je		.skip						;     then go to skip branch
-		j#cond	.else						;     else sift the element
-;---[if result cond 0]---------------------
-		mov		param5, [this + IFUNC]
-		mov		param4, [this + KFUNC]
-		mov		param3, pos
-		mov		param2, size
-		mov		param1, array
-		add		stack, space				; restoring back the stack pointer
-		jmp		SiftDown					; return SiftDown (array, size, pos, kfunc, ifunc, temp)
-;---[else]---------------------------------
-.else:	mov		param2, pos
-		mov		param4, [this + IFUNC]
-		mov		param3, [this + KFUNC]
-		mov		param1, array
-		add		stack, space				; restoring back the stack pointer
-		jmp		SiftUp						; return SiftUp (array, pos, kfunc, ifunc, temp)
-;---[Skip branch]--------------------------
-.skip:	mov		func, [this + IFUNC]
+		cmp		result, 0
+		j#cond1	.down						; if (result cond1 0), then sift down the element
+		j#cond2	.up							; if (result cond2 0), then sift up the element
+;---[Change element]-----------------------
+		mov		func, [this + IFUNC]
 		movdqa	[array + pos], temp			; array[pos].data = ndata[0]
 		lea		param1, [array + pos]
 		mov		param2, pos
@@ -939,13 +919,28 @@ space	= 5 * 8								; stack size required by the procedure
 		mov		status, 1					; return true
 		add		stack, space				; restoring back the stack pointer
 		ret
+;---[Sift down branch]---------------------
+.down:	mov		param5, [this + IFUNC]
+		mov		param4, [this + KFUNC]
+		mov		param3, pos
+		mov		param2, size
+		mov		param1, array
+		add		stack, space				; restoring back the stack pointer
+		jmp		SiftDown					; return SiftDown (array, size, pos, kfunc, ifunc, temp)
+;---[Sift up branch]-----------------------
+.up:	mov		param2, pos
+		mov		param4, [this + IFUNC]
+		mov		param3, [this + KFUNC]
+		mov		param1, array
+		add		stack, space				; restoring back the stack pointer
+		jmp		SiftUp						; return SiftUp (array, pos, kfunc, ifunc, temp)
 ;---[Error branch]-------------------------
 .error:	xor		status, status				; return false
 		add		stack, space				; restoring back the stack pointer
 		ret
 }
-ReplaceMin:	REPLACE	SiftMinUp, SiftMinDown, l
-ReplaceMax:	REPLACE	SiftMaxUp, SiftMaxDown, g
+ReplaceMin:	REPLACE	SiftMinUp, SiftMinDown, g, l
+ReplaceMax:	REPLACE	SiftMaxUp, SiftMaxDown, l, g
 
 ;******************************************************************************;
 ;       Key searching                                                          ;

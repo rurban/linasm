@@ -435,8 +435,6 @@ section	'.text'		executable align 16
 ;******************************************************************************;
 ;       Consts                                                                 ;
 ;******************************************************************************;
-KSCALE		= 4								; Key scale factor
-KSIZE		= 1 shl KSCALE					; Size of key (bytes)
 MINCAP		= 1 shl	PSCALE					; Min capacity of vector object
 
 ;==============================================================================;
@@ -826,15 +824,12 @@ space	= 3 * 8								; stack size required by the procedure
 		mov		[s_data], data				; save "data" variable into the stack
 		mov		param2, [this + CAPACITY]
 		shl		param2, 1
-		cmp		param2, [this + CAPACITY]	; if (newcapacity <= capacity)
-		setnbe	status						;     then return false
-		jbe		.exit
 		call	Extend						; status = this.Extend (cap * 2)
 		mov		this, [s_this]				; get "this" variable from the stack
 		mov		data, [s_data]				; get "data" variable from the stack
 		mov		array, [this + ARRAY]		; get pointer to array of nodes
 		mov		size, [this + SIZE]			; get object sizes
-.exit:	add		stack, space				; restoring back the stack pointer
+		add		stack, space				; restoring back the stack pointer
 		test	status, status
 		jnz		.back						; if (status), then go back
 		ret									;              else return false
@@ -923,8 +918,6 @@ end if
 ;---[Extend object capacity]---------------
 .ext:	mov		param2, [this + CAPACITY]
 		shl		param2, 1
-		cmp		param2, [this + CAPACITY]	; if (newcapacity <= capacity)
-		jbe		.error						;     then go to error branch
 		call	Extend						; status = this.Extend (cap * 2)
 		mov		this, [s_this]				; get "this" variable from the stack
 		mov		data, [s_data]				; get "data" variable from the stack
@@ -2717,6 +2710,9 @@ s_total	equ		stack + 8 * 8				; stack position of "total" variable
 space	= 9 * 8								; stack size required by the procedure
 ;------------------------------------------
 		sub		stack, space				; reserving stack size for local vars
+		mov		[s_this], this				; save "this" variable into the stack
+		mov		[s_src], source				; save "source" variable into the stack
+		mov		[s_func], func				; save "func" variable into the stack
 ;---[Check target object size]-------------
 		cmp		qword [this + SIZE], 0		; if (size)
 		jnz		.error						;     then go to error branch
@@ -2725,9 +2721,6 @@ space	= 9 * 8								; stack size required by the procedure
 		test	size, size					; if (size == 0)
 		jz		.exit						;     then go to exit
 ;---[Check object capacity]----------------
-		mov		[s_this], this				; save "this" variable into the stack
-		mov		[s_src], source				; save "source" variable into the stack
-		mov		[s_func], func				; save "func" variable into the stack
 		mov		[s_size], size				; save "size" variable into the stack
 	Capacity	size, result, MINCAP		; compute new capacity of target object
 		cmp		size, [this + CAPACITY]		; if (size > capacity)

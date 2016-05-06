@@ -258,8 +258,6 @@ section	'.text'		executable align 16
 ;******************************************************************************;
 ;       Consts                                                                 ;
 ;******************************************************************************;
-KSCALE		= 4								; Key scale factor
-KSIZE		= 1 shl KSCALE					; Size of key (bytes)
 MINCAP		= 1 shl	PSCALE					; Min capacity of deque object
 
 ;==============================================================================;
@@ -789,15 +787,12 @@ space	= 3 * 8								; stack size required by the procedure
 		mov		[s_data], data				; save "data" variable into the stack
 		mov		param2, cap
 		shl		param2, 1
-		cmp		param2, cap					; if (newcapacity <= capacity)
-		setnbe	status						;     then return false
-		jbe		.exit
 		call	Extend						; status = this.Extend (cap * 2)
 		mov		this, [s_this]				; get "this" variable from the stack
 		mov		data, [s_data]				; get "data" variable from the stack
 		mov		array, [this + ARRAY]		; get pointer to array of nodes
 		mov		cap, [this + CAPACITY]		; get object capacity
-.exit:	add		stack, space				; restoring back the stack pointer
+		add		stack, space				; restoring back the stack pointer
 		test	status, status
 		jnz		.back						; if (status), then go back
 		ret									;              else return false
@@ -925,8 +920,6 @@ space	= 5 * 8								; stack size required by the procedure
 ;---[Extend object capacity]---------------
 .ext:	mov		param2, cap
 		shl		param2, 1
-		cmp		param2, cap					; if (newcapacity <= cap)
-		jbe		.error						;     then go to error branch
 		call	Extend						; status = this.Extend (cap * 2)
 		mov		this, [s_this]				; get "this" variable from the stack
 		mov		data, [s_data]				; get "data" variable from the stack

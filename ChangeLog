@@ -38,7 +38,7 @@ Changes in behavior:
 	* Math.asm: Changed barier value into inverse hyperbolic functions
 
 +==============================================================================+
-|   2014-09-05  Release 1.1 (stable)                                           |
+|   2014-09-05  Release 1.10 (stable)                                          |
 +==============================================================================+
 
 Bug fixes:
