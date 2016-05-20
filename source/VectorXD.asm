@@ -1470,7 +1470,7 @@ if dim = 3
 		movs#x	zval, [this + ZPOS*bytes]	; load z value of vector
 end if
 		mov		fptr, Hypot
-		jmp		fptr						; call Hypot (this->x, this->y, this->z)
+		jmp		fptr						; return Hypot (this->x, this->y, this->z)
 }
 Abs3D_flt32:	ABS		Hypot3D_flt32, 3, s
 Abs3D_flt64:	ABS		Hypot3D_flt64, 3, d
@@ -1498,7 +1498,7 @@ bytes	= 1 shl scale						; size of vector element (bytes)
 		movs#x	sin, [this + YPOS*bytes]	; load y value of vector
 		movs#x	cos, [this + XPOS*bytes]	; load x value of vector
 		mov		fptr, ArcTan2
-		jmp		fptr						; call ArcTan2 (sin, cos)
+		jmp		fptr						; return ArcTan2 (sin, cos)
 }
 Angle_flt32:	ANGLE	ArcTan2_flt32, s
 Angle_flt64:	ANGLE	ArcTan2_flt64, d

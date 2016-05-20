@@ -181,7 +181,7 @@ section	'.text'		executable align 16
 ;       Consts                                                                 ;
 ;******************************************************************************;
 NSCALE		= 2								; Node scale factor
-NSIZE		= 1 shl NSCALE					; Size of node (elements)
+NSIZE		= 1 shl NSCALE					; Size of node (count of elements)
 MINCAP		= 1 shl	PSCALE					; Min capacity of heap object
 
 ;==============================================================================;
@@ -244,8 +244,8 @@ space	= 7 * 8								; stack size required by the procedure
 		jnz		.corr1						;     then call index call back function
 .back1:	mov		size, root					; size = root
 		mov		[s_size], root				; save "size" variable into the stack
-		test	root, root
-		ja		.loop						; do while (size != 0)
+		test	size, size
+		jnz		.loop						; do while (size != 0)
 ;---[End of sifting loop]------------------
 .break:	mov		ifunc, [s_ifunc]			; get "ifunc" variable from the stack
 		movdqa	data, [s_data]				; get "data" variable from the stack
@@ -319,30 +319,29 @@ space	= 11 * 8							; stack size required by the procedure
 ;---[Sifting loop]-------------------------
 .loop:	mov		value, [array + leaf]		; value = array[leaf].key
 		lea		ptr, [leaf + KSIZE]			; ptr = leaf + KSIZE
-		mov		result, (NSIZE - 1) * KSIZE	; result = (NSIZE - 1) * KSIZE
 		sub		size, KSIZE					; if (size == 1)
 		je		.skip						;     then skip following code
+		mov		result, (NSIZE - 1) * KSIZE	; result = (NSIZE - 1) * KSIZE
 		cmp		size, result				; if (count > result)
 		cmova	size, result				;     count = result
 		mov		[s_count], size				; save "count" variable into the stack
-;---[Interanal loop]-----------------------
+;---[Internal loop]------------------------
 .iloop:	mov		param2, [array + ptr]
 		mov		param1, value
 		call	qword [s_kfunc]				; result = Compare (value.key, array[ptr].key)
 		mov		array, [s_array]			; get "array" variable from the stack
 		cmp		result, 0					; if (result !cond 0)
 		j#cond	@f							; {
-		mov		value, [array + ptr]		;     value = array[ptr]
+		mov		value, [array + ptr]		;     value = array[ptr].key
 		mov		leaf, ptr					;     leaf = ptr }
 @@:		add		ptr, KSIZE					; ptr++
 		sub		qword [s_count], KSIZE		; count--
 		jnz		.iloop						; do while (count != 0)
-;---[End of interanal loop]----------------
+;---[End of internal loop]-----------------
 .skip:	mov		param2, value
 		mov		param1, [s_data]
 		call	qword [s_kfunc]				; result = Compare (data.key, value.key)
 		mov		array, [s_array]			; get "array" variable from the stack
-		mov		size, [s_size]				; get "size" variable from the stack
 		mov		root, [s_root]				; get "root" variable from the stack
 		cmp		result, 0					; if (result cond 0)
 		j#cond	.break						;     then break the loop
@@ -354,6 +353,7 @@ space	= 11 * 8							; stack size required by the procedure
 .back1:	mov		root, leaf					; root = leaf
 		mov		[s_root], leaf				; save "root" variable into the stack
 		lea		leaf, [leaf * NSIZE + KSIZE]; leaf = root * NSIZE + 1
+		mov		size, [s_size]				; get "size" variable from the stack
 		sub		size, leaf
 		ja		.loop						; do while (size > leaf)
 ;---[End of sifting loop]------------------
@@ -374,7 +374,6 @@ space	= 11 * 8							; stack size required by the procedure
 		shr		param2, KSCALE
 		call	ifunc						; call ifunc (array + root, root)
 		mov		array, [s_array]			; get "array" variable from the stack
-		mov		size, [s_size]				; get "size" variable from the stack
 		jmp		.back1						; go back
 ;---[Invoke call back function branch]-----
 .corr2:	lea		param1, [array + root]
@@ -698,7 +697,7 @@ space	= 5 * 8								; stack size required by the procedure
 		mov		[s_array], array			; save "array" variable into the stac
 		mov		[s_size], size				; save "size" variable into the stack
 		movdqa	temp, [array + pos]
-		movdqu	[data], temp				; odata[0] = array[pos].data
+		movdqu	[data], temp				; odata[0] = array[pos]
 		mov		[this + SIZE], size			; update object size
 ;---[Compare keys]-------------------------
 		mov		param1, [array + size]
@@ -713,13 +712,15 @@ space	= 5 * 8								; stack size required by the procedure
 		j#cond1	.down						; if (result cond1 0), then sift down the element
 		j#cond2	.up							; if (result cond2 0), then sift up the element
 ;---[Change element]-----------------------
+		movdqa	[array + pos], temp			; array[pos] = data[0]
 		mov		func, [this + IFUNC]
-		movdqa	[array + pos], temp			; array[pos].data = data[0]
+		test	func, func					; if (func == NULL)
+		jz		.skip						;     then skip following code
 		lea		param1, [array + pos]
 		mov		param2, pos
 		shr		param2, KSCALE
 		call	func						; call ifunc (array + pos, pos)
-		mov		status, 1					; return true
+.skip:	mov		status, 1					; return true
 		add		stack, space				; restoring back the stack pointer
 		ret
 ;---[Sift down branch]---------------------
@@ -797,13 +798,15 @@ space	= 5 * 8								; stack size required by the procedure
 		j#cond1	.down						; if (result cond1 0), then sift down the element
 		j#cond2	.up							; if (result cond2 0), then sift up the element
 ;---[Change element]-----------------------
+		movdqa	[array + pos], temp			; array[pos] = data[0]
 		mov		func, [this + IFUNC]
-		movdqa	[array + pos], temp			; array[pos].data = data[0]
+		test	func, func					; if (func == NULL)
+		jz		.skip						;     then skip following code
 		lea		param1, [array + pos]
 		mov		param2, pos
 		shr		param2, KSCALE
 		call	func						; call ifunc (array + pos, pos)
-		mov		status, 1					; return true
+.skip:	mov		status, 1					; return true
 		add		stack, space				; restoring back the stack pointer
 		ret
 ;---[Sift down branch]---------------------
@@ -895,7 +898,7 @@ space	= 5 * 8								; stack size required by the procedure
 		mov		[s_array], array			; save "array" variable into the stack
 		mov		[s_size], size				; save "size" variable into the stack
 		movdqa	temp, [array + pos]
-		movdqu	[odata], temp				; odata[0] = array[pos].data
+		movdqu	[odata], temp				; odata[0] = array[pos]
 ;---[Compare keys]-------------------------
 		mov		param1, [ndata]
 		mov		param2, [array + pos]
@@ -910,13 +913,15 @@ space	= 5 * 8								; stack size required by the procedure
 		j#cond1	.down						; if (result cond1 0), then sift down the element
 		j#cond2	.up							; if (result cond2 0), then sift up the element
 ;---[Change element]-----------------------
+		movdqa	[array + pos], temp			; array[pos] = ndata[0]
 		mov		func, [this + IFUNC]
-		movdqa	[array + pos], temp			; array[pos].data = ndata[0]
+		test	func, func					; if (func == NULL)
+		jz		.skip						;     then skip following code
 		lea		param1, [array + pos]
 		mov		param2, pos
 		shr		param2, KSCALE
 		call	func						; call ifunc (array + pos, pos)
-		mov		status, 1					; return true
+.skip:	mov		status, 1					; return true
 		add		stack, space				; restoring back the stack pointer
 		ret
 ;---[Sift down branch]---------------------
@@ -1309,7 +1314,7 @@ space	= 13 * 8							; stack size required by the procedure
 		cmp		size, result				; if (count > result)
 		cmova	size, result				;     count = result
 		mov		[s_count], size				; save "count" variable into the stack
-;---[Interanal loop]-----------------------
+;---[Internal loop]------------------------
 .iloop:	mov		param2, [array + ptr]
 		mov		param1, value
 		call	qword [s_kfunc]				; result = Compare (value.key, array[ptr].key)
@@ -1321,7 +1326,7 @@ space	= 13 * 8							; stack size required by the procedure
 @@:		add		ptr, KSIZE					; ptr++
 		sub		qword [s_count], KSIZE		; count--
 		jnz		.iloop						; do while (count != 0)
-;---[End of interanal loop]----------------
+;---[End of internal loop]-----------------
 .skip:	mov		param2, value
 		mov		param1, [s_data]
 		call	qword [s_kfunc]				; result = Compare (data.key, value.key)

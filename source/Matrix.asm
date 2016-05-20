@@ -969,7 +969,7 @@ end if
 ;---[Call init functon]--------------------
 		mov		rows, size
 		mov		size, Init
-		jmp		size						; call Init (matrix, rows * cols, value)
+		jmp		size						; return Init (matrix, rows * cols, value)
 ;---[Normal exit]--------------------------
 .exit:	ret
 }
@@ -1157,7 +1157,7 @@ end if
 		shl		result, scale
 		mov		rows, result
 		mov		result, Copy
-		jmp		result						; call Copy (target, source, rows * cols)
+		jmp		result						; return Copy (target, source, rows * cols)
 }
 
 ; Real number matrix
@@ -1200,7 +1200,7 @@ if cmplx
 end if
 		mov		rows, result
 		mov		result, Invert
-		jmp		result						; call Invert (matrix, rows * cols)
+		jmp		result						; return Invert (matrix, rows * cols)
 }
 
 ; Real number matrix
@@ -1229,7 +1229,7 @@ temp	equ		xmm1						; temporary register
 		imul	result, cols				; result = rows * cols
 		mov		rows, result
 		mov		result, Func
-		jmp		result						; call Func (matrix, rows * cols, value)
+		jmp		result						; return Func (matrix, rows * cols, value)
 }
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 macro	VECTOR	Func, cmplx
@@ -1249,7 +1249,7 @@ if cmplx
 end if
 		mov		rows, result
 		mov		result, Func
-		jmp		result						; call Func (target, source, rows * cols)
+		jmp		result						; return Func (target, source, rows * cols)
 }
 
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
@@ -2634,7 +2634,7 @@ end if
 		mov		param5, [s_step1]
 		mov		param6, [s_step2]
 		add		stack, space				; restoring back the stack pointer
-		jmp		Scale						; Scale (inverse, matrix, order, step0, step1, step2)
+		jmp		Scale						; return Scale (inverse, matrix, order, step0, step1, step2)
 ;---[Error branch]-------------------------
 .error:	add		stack, space				; restoring back the stack pointer
 .exit:	xor		status, status				; return false
@@ -2782,7 +2782,7 @@ end if
 		mov		param5, [s_step1]
 		mov		param6, [s_step2]
 		add		stack, space				; restoring back the stack pointer
-		jmp		Scale						; Scale (inverse, matrix, order, step0, step1, step2)
+		jmp		Scale						; return Scale (inverse, matrix, order, step0, step1, step2)
 ;---[Error branch]-------------------------
 .error:	add		stack, space				; restoring back the stack pointer
 .exit:	xor		status, status				; return false
@@ -3411,7 +3411,7 @@ if low
 		neg		param4
 		mov		param5, bytes
 		neg		param5
-		jmp		Core						; call Core (matrix + order * order - 1, order, -(order + 1) * bytes, -order * bytes, -bytes)
+		jmp		Core						; return Core (matrix + order * order - 1, order, -(order + 1) * bytes, -order * bytes, -bytes)
 else
 		mov		param3, order
 		shl		param3, scale
@@ -3419,7 +3419,7 @@ else
 		mov		param4, order
 		shl		param4, scale
 		mov		param5, bytes
-		jmp		Core						; call Core (matrix, order, (order + 1) * bytes, order * bytes, bytes)
+		jmp		Core						; return Core (matrix, order, (order + 1) * bytes, order * bytes, bytes)
 end if
 ;---[Error branch]-------------------------
 .error:	initreg	result, status, nanval		; return NaN
@@ -3476,7 +3476,7 @@ if low
 		neg		param4
 		mov		param5, bytes
 		neg		param5
-		jmp		Core						; call Core (matrix + order * order - 1, order, -(order + 1) * bytes, -order * bytes, -bytes)
+		jmp		Core						; return Core (matrix + order * order - 1, order, -(order + 1) * bytes, -order * bytes, -bytes)
 else
 		mov		param3, order
 		shl		param3, scale
@@ -3484,7 +3484,7 @@ else
 		mov		param4, order
 		shl		param4, scale
 		mov		param5, bytes
-		jmp		Core						; call Core (matrix, order, (order + 1) * bytes, order * bytes, bytes)
+		jmp		Core						; return Core (matrix, order, (order + 1) * bytes, order * bytes, bytes)
 end if
 ;---[Error branch]-------------------------
 .error:	initreg	real, status, nanval		; real = NaN
@@ -4681,7 +4681,7 @@ if low
 		mov		param5, [s_step1]
 		mov		param6, [s_step2]
 		add		stack, space				; restoring back the stack pointer
-		jmp		Solve						; Solve (coeff, matrix, order, step0, step1, step2)
+		jmp		Solve						; return Solve (coeff, matrix, order, step0, step1, step2)
 else
 		mov		param1, [s_cptr]
 		mov		param2, [s_mptr]
@@ -4693,7 +4693,7 @@ else
 		mov		param6, [s_step2]
 		neg		param6
 		add		stack, space				; restoring back the stack pointer
-		jmp		Solve						; Solve (cptr, mptr, order, -step0, -step1, -step2)
+		jmp		Solve						; return Solve (cptr, mptr, order, -step0, -step1, -step2)
 end if
 ;---[Error branch]-------------------------
 .error:	add		stack, space				; restoring back the stack pointer
@@ -4806,7 +4806,7 @@ if low
 		mov		param5, [s_step1]
 		mov		param6, [s_step2]
 		add		stack, space				; restoring back the stack pointer
-		jmp		Solve						; Solve (coeff, matrix, order, step0, step1, step2)
+		jmp		Solve						; return Solve (coeff, matrix, order, step0, step1, step2)
 else
 		mov		param1, [s_cptr]
 		mov		param2, [s_mptr]
@@ -4818,7 +4818,7 @@ else
 		mov		param6, [s_step2]
 		neg		param6
 		add		stack, space				; restoring back the stack pointer
-		jmp		Solve						; Solve (cptr, mptr, order, -step0, -step1, -step2)
+		jmp		Solve						; return Solve (cptr, mptr, order, -step0, -step1, -step2)
 end if
 ;---[Error branch]-------------------------
 .error:	add		stack, space				; restoring back the stack pointer
@@ -5171,7 +5171,7 @@ if low
 		mov		param5, [s_step1]
 		mov		param6, [s_step2]
 		add		stack, space				; restoring back the stack pointer
-		jmp		Solve						; Solve (coeff, matrix, order, step0, step1, step2)
+		jmp		Solve						; return Solve (coeff, matrix, order, step0, step1, step2)
 else
 		mov		param1, [s_cptr]
 		mov		param2, [s_mptr]
@@ -5183,7 +5183,7 @@ else
 		mov		param6, [s_step2]
 		neg		param6
 		add		stack, space				; restoring back the stack pointer
-		jmp		Solve						; Solve (cptr, mptr, order, -step0, -step1, -step2)
+		jmp		Solve						; return Solve (cptr, mptr, order, -step0, -step1, -step2)
 end if
 ;---[Error branch]-------------------------
 .error:	add		stack, space				; restoring back the stack pointer

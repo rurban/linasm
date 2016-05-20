@@ -307,7 +307,7 @@ space	= 1 * 8								; stack size required by the procedure
 		mov		fptr, Sum
 		call	fptr						; call Sum (array, size)
 ;---[Compute mean value]-------------------
-	cvtsi2s#x	temp, [s_size]				; get "size" variable from the stack
+	cvtsi2s#x	temp, qword [s_size]		; get "size" variable from the stack
 		divs#x	result, temp
 		add		stack, space				; restoring back the stack pointer
 ;------------------------------------------
@@ -2314,7 +2314,7 @@ space	= 7 * 8								; stack size required by the procedure
 		mov		fptr, Diff
 		call	fptr						; result = Diff (array1, array2, size)
 ;---[Compute result]-----------------------
-	cvtsi2s#x	size, [s_size]				; get "size" variable from the stack
+	cvtsi2s#x	size, qword [s_size]		; get "size" variable from the stack
 		initreg	const, trank, oneval		; const = 1.0
 		movap#x	temp, size
 		muls#x	temp, temp

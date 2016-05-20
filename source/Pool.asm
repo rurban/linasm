@@ -337,7 +337,7 @@ array	equ		rax							; pointer to array of nodes
 		mov		param3, [this + BSIZE]
 		mov		param2, [this + CAPACITY]
 		mov		param1, array
-		jmp		InitFree					; call InitFree (array, capacity, bsize)
+		jmp		InitFree					; return InitFree (array, capacity, bsize)
 
 ;******************************************************************************;
 ;       Pool properties                                                        ;

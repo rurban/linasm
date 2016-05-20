@@ -628,7 +628,7 @@ bytes	= 1 shl scale						; size of array element (bytes)
 		mov		array, [s_array]			; get "array" variable from the stack
 		mov		size, [s_size]				; get "size" variable from the stack
 		add		stack, space				; restoring back the stack pointer
-		jmp		Merge						; call Merge (array + size, size)
+		jmp		Merge						; return Merge (array + size, size)
 }
 Core_flt32:	CORE	s
 Core_flt64:	CORE	d
@@ -747,7 +747,7 @@ space	= 3 * 8								; stack size required by the procedure
 		mov		param1, [s_array]
 		mov		param2, [s_size]
 		add		stack, space				; restoring back the stack pointer
-		jmp		Core						; call Core (array, size)
+		jmp		Core						; return Core (array, size)
 }
 FHT_flt32:	FHT	s
 FHT_flt64:	FHT	d
@@ -848,7 +848,7 @@ space	= 3 * 8								; stack size required by the procedure
 	cvtsi2s#x	nsize, size
 		divs#x	value, nsize				; value = 1.0 / size
 		add		stack, space				; restoring back the stack pointer
-		jmp		Norm						; call Norm (array, size, 1.0 / size)
+		jmp		Norm						; return Norm (array, size, 1.0 / size)
 ;---[Normal exit]--------------------------
 .exit:	ret
 }
@@ -878,7 +878,7 @@ end if
 		mov		shift, exp
 		mov		size, 1
 		shl		size, shift					; size = 1 << exp
-		jmp		Fht							; call FHT (array, size, exp)
+		jmp		Fht							; return FHT (array, size, exp)
 ;---[Normal exit]--------------------------
 .exit:	ret
 }

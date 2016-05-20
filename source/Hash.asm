@@ -840,7 +840,7 @@ space	= 5 * 8								; stack size required by the procedure
 		mov		param2, [s_ocap]
 		mov		param1, [s_this]
 		add		stack, space				; restoring back the stack pointer
-		jmp		CorrectTable				; call this.CorrectTable (oldcap / 2)
+		jmp		CorrectTable				; return this.CorrectTable (oldcap / 2)
 ;---[Empty hash table branch]--------------
 .empty:	mov		param3, newcap
 		shr		param3, 1
@@ -854,7 +854,7 @@ space	= 5 * 8								; stack size required by the procedure
 		mov		param2, [s_ocap]
 		mov		param1, [this + ARRAY]
 		add		stack, space				; restoring back the stack pointer
-		jmp		InitFree					; call InitFree (array, oldcap / 2, newcap / 2, oldpool)
+		jmp		InitFree					; return InitFree (array, oldcap / 2, newcap / 2, oldpool)
 ;---[Error branch]-------------------------
 .error:	xor		status, status				; return false
 		add		stack, space				; restoring back the stack pointer
@@ -1523,7 +1523,7 @@ space	= 3 * 8								; stack size required by the procedure
 		je		.ext						;     then try to extend object capacity
 ;---[Normal execution branch]--------------
 .back:	movdqu	value, [data]				; value = data[0]
-		jmp		InsertCore					; call InsertCore (value)
+		jmp		InsertCore					; return InsertCore (value)
 ;---[Extend object capacity]---------------
 .ext:	sub		stack, space				; reserving stack size for local vars
 		mov		[s_this], this				; save "this" variable into the stack
@@ -2113,7 +2113,7 @@ space	= 3 * 8								; stack size required by the procedure
 		mov		param4, node
 		mov		param3, node
 		add		stack, space				; restoring back the stack pointer
-		jmp		JoinNode					; call this.JoinNode (lnode, node, node, index)
+		jmp		JoinNode					; return this.JoinNode (lnode, node, node, index)
 ;---[else]---------------------------------
 .else:	mov		rsize, IMASK				; load index mask
 		and		rsize, [array + rnode + FDIR]
@@ -2125,7 +2125,7 @@ space	= 3 * 8								; stack size required by the procedure
 		mov		param2, node
 		mov		param3, rnode
 		add		stack, space				; restoring back the stack pointer
-		jmp		JoinNode					; call this.JoinNode (node, rnode, node, index)
+		jmp		JoinNode					; return this.JoinNode (node, rnode, node, index)
 ;---[Clear the chain]----------------------
 .clear:	sub		qword [array + node + FDIR], KSIZE
 ;---[Correct forward iterator]-------------
@@ -2142,19 +2142,19 @@ space	= 3 * 8								; stack size required by the procedure
 .del:	mov		param2, node
 		mov		param3, index
 		add		stack, space				; restoring back the stack pointer
-		jmp		DeleteNode					; call this.DeleteNode (node, index)
+		jmp		DeleteNode					; return this.DeleteNode (node, index)
 ;---[Replace element in the left node]-----
 .left:	mov		param2, lnode
 		mov		param3, node
 		mov		param4, index
 		add		stack, space				; restoring back the stack pointer
-		jmp		ReplaceLeft					; call this.ReplaceLeft (lnode, node, index)
+		jmp		ReplaceLeft					; return this.ReplaceLeft (lnode, node, index)
 ;---[Replace element in the right node]----
 .right:	mov		param2, node
 		mov		param3, rnode
 		mov		param4, index
 		add		stack, space				; restoring back the stack pointer
-		jmp		ReplaceRight				; call this.ReplaceRight (node, rnode, index)
+		jmp		ReplaceRight				; return this.ReplaceRight (node, rnode, index)
 ;---[Correct forward iterator branch]------
 .fwd:	mov		param4, 0
 		mov		param3, iter
@@ -2200,7 +2200,7 @@ temp	equ		xmm0						; temporary register
 		movdqa	temp, [array + iter + NDATA]
 		movdqu	[data], temp				; data[0] = array[iter].data
 		mov		param2, iter
-		jmp		RemoveCore					; call this.RemoveCore (iter)
+		jmp		RemoveCore					; return this.RemoveCore (iter)
 ;---[Error branch]-------------------------
 .error:	xor		status, status				; return false
 		ret

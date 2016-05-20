@@ -31,6 +31,10 @@ union adt_t
 	flt32_t		flt32;
 	flt64_t		flt64;
 
+	// Other types
+	size_t		size;
+	time_t		time;
+
 	// Pointer type
 	void		*ptr;
 };
@@ -78,6 +82,10 @@ sint64_t CmpSint64 (union adt_t key1, union adt_t key2);
 // Floating-point types
 sint64_t CmpFlt32 (union adt_t key1, union adt_t key2);
 sint64_t CmpFlt64 (union adt_t key1, union adt_t key2);
+
+// Other types
+sint64_t CmpSize (union adt_t key1, union adt_t key2);
+sint64_t CmpTime (union adt_t key1, union adt_t key2);
 /*
 ################################################################################
 #                                 END OF FILE                                  #

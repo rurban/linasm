@@ -2364,7 +2364,7 @@ minsize	= 16 * KSIZE						; min array size is aceptable for Quick sort
 		mov		data1, [s_data1]			; restore old value of "data1" variable
 		mov		data2, [s_data2]			; restore old value of "data2" variable
 		add		stack, space				; restoring back the stack pointer
-		jmp		InsertSort					; call InsertSort (array, size, func)
+		jmp		InsertSort					; return InsertSort (array, size, func)
 }
 QuickSortCoreAsc:	QUICKSORT_CORE	InsertSortCoreAsc, l, g
 QuickSortCoreDsc:	QUICKSORT_CORE	InsertSortCoreDsc, g, l
@@ -2439,12 +2439,12 @@ minsize	= 16 * KSIZE						; min array size is aceptable for Merge sort
 		mov		param2, temp
 		mov		param1, array
 		add		stack, space				; restoring back the stack pointer
-		jmp		MergeFunc					; call MergeFunc (array, temp, size / 2, array + size / 2, size - size / 2, func)
+		jmp		MergeFunc					; return MergeFunc (array, temp, size / 2, array + size / 2, size - size / 2, func)
 ;---[Insert sort branch]-------------------
 .ins:	mov		param1, array
 		mov		param2, size
 		mov		param3, func
-		jmp		InsertSort					; call InsertSort (array, size, func)
+		jmp		InsertSort					; return InsertSort (array, size, func)
 }
 MergeSortCoreAsc:	MERGESORT_CORE	InsertSortCoreAsc, MergeCoreAsc, Copy
 MergeSortCoreDsc:	MERGESORT_CORE	InsertSortCoreDsc, MergeCoreDsc, Copy
@@ -2590,13 +2590,13 @@ space	= 11 * 8							; stack size required by the procedure
 		mov		param3, [s_size2]
 		mov		fptr, Copy
 		add		stack, space				; restoring back the stack pointe
-		jmp		fptr						; call Copy (target, src2, size2)
+		jmp		fptr						; return Copy (target, src2, size2)
 .copy2:	mov		param1, [s_tgt]
 		mov		param2, [s_src1]
 		mov		param3, [s_size1]
 		mov		fptr, Copy
 		add		stack, space				; restoring back the stack pointe
-		jmp		fptr						; call Copy (target, src1, size1)
+		jmp		fptr						; return Copy (target, src1, size1)
 }
 MergeCoreAsc:	MERGE_CORE	le
 MergeCoreDsc:	MERGE_CORE	ge

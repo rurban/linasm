@@ -2577,7 +2577,7 @@ minsize	= 32								; min array size is aceptable for Quick sort
 		mov		key1, [s_key1]				; restore old value of "key1" variable
 		mov		key2, [s_key2]				; restore old value of "key2" variable
 		add		stack, space				; restoring back the stack pointer
-		jmp		InsertSort					; call InsertSort (array, ptr, size, func)
+		jmp		InsertSort					; return InsertSort (array, ptr, size, func)
 .exit:	ret
 }
 QuickSortKeyAsc:	QUICKSORT	InsertSortKeyAsc, l, g
@@ -2670,13 +2670,13 @@ minsize	= 32								; min array size is aceptable for Merge sort
 		mov		param2, [s_ptr]
 		mov		param1, array
 		add		stack, space				; restoring back the stack pointer
-		jmp		MergeFunc					; call MergeFunc (array, ptr, temp, tptr, size / 2, array + size / 2, ptr + size / 2, size - size / 2, func)
+		jmp		MergeFunc					; return MergeFunc (array, ptr, temp, tptr, size / 2, array + size / 2, ptr + size / 2, size - size / 2, func)
 ;---[Insert sort branch]-------------------
 .ins:	mov		param1, array
 		mov		param2, ptr
 		mov		param3, size
 		mov		param4, func
-		jmp		InsertSort					; call InsertSort (array, ptr, size, func)
+		jmp		InsertSort					; return InsertSort (array, ptr, size, func)
 .exit:	ret
 }
 MergeSortKeyAsc:	MERGESORT	InsertSortKeyAsc, MergeKeyCoreAsc
@@ -2803,12 +2803,12 @@ space	= 17 * 8							; stack size required by the procedure
 		mov		ptr, [s_ptr]				; restore old value of "ptr" variable
 		mov		fptr, Copy_size
 		add		stack, space				; restoring back the stack pointe
-		jmp		fptr						; call Copy (tptr, sptr2, size2)
+		jmp		fptr						; return Copy (tptr, sptr2, size2)
 .copy2:	mov		param1, [s_tkey]
 		mov		param2, [s_skey1]
 		mov		param3, [s_size1]
 		mov		fptr, Copy_size
-		call	fptr						; call Copy (tkey, skey1, size1)
+		call	fptr						; return Copy (tkey, skey1, size1)
 		mov		param1, [s_tptr]
 		mov		param2, [s_sptr1]
 		mov		param3, [s_size1]
@@ -2816,7 +2816,7 @@ space	= 17 * 8							; stack size required by the procedure
 		mov		ptr, [s_ptr]				; restore old value of "ptr" variable
 		mov		fptr, Copy_size
 		add		stack, space				; restoring back the stack pointe
-		jmp		fptr						; call Copy (tptr, sptr1, size1)
+		jmp		fptr						; return Copy (tptr, sptr1, size1)
 }
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 macro	MERGE_KEY	MergeFunc
@@ -2834,7 +2834,7 @@ s_func	equ		stack + 3 * 8				; stack position of "func" variable
 		mov		sptr2, [s_sptr2]			; get "sptr2" variable from the stack
 		mov		size2, [s_size2]			; get "size2" variable from the stack
 		mov		func, [s_func]				; get "func" variable from the stack
-		jmp		MergeFunc					; call MergeFunc (tkey, tptr, skey1, sptr1, size1, skey2, sptr2, size2)
+		jmp		MergeFunc					; return MergeFunc (tkey, tptr, skey1, sptr1, size1, skey2, sptr2, size2)
 }
 
 ; Ascending sort order

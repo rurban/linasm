@@ -2408,7 +2408,7 @@ end if
 		mov		data, [s_data]				; restore old value of "data" variable
 		mov		bptr, [s_bptr]				; restore old value of "bptr" variable
 		add		stack, space				; restoring back the stack pointer
-		jmp		LeafInsert					; call this.LeafInsert (node, left, value)
+		jmp		LeafInsert					; return this.LeafInsert (node, left, value)
 ;---[Init b-tree]--------------------------
 .init:	mov		root, [this + POOL]			; this.root = this.pool
 		add		height, 1					; this.height++
@@ -2466,7 +2466,7 @@ if type = 1
 		mov		data, [s_data]				; restore old value of "data" variable
 		mov		bptr, [s_bptr]				; restore old value of "bptr" variable
 		add		stack, space				; restoring back the stack pointer
-		jmp		CorrectSize					; call this.CorrectSize (tnode, tindex, false)
+		jmp		CorrectSize					; return this.CorrectSize (tnode, tindex, false)
 else if type = 2
 .undo:	mov		odata, [s_odata]			; get "odata" variable from the stack
 		movdqa	value, [data + median]
@@ -2486,7 +2486,7 @@ else if type = 2
 		mov		data, [s_data]				; restore old value of "data" variable
 		mov		bptr, [s_bptr]				; restore old value of "bptr" variable
 		add		stack, space				; restoring back the stack pointer
-		jmp		CorrectSize					; call this.CorrectSize (tnode, tindex, true)
+		jmp		CorrectSize					; return this.CorrectSize (tnode, tindex, true)
 end if
 ;---[Split branch node]--------------------
 .bsplt:	mov		param4, [s_hght]
@@ -2513,7 +2513,7 @@ end if
 		mov		data, [s_data]				; restore old value of "data" variable
 		mov		bptr, [s_bptr]				; restore old value of "bptr" variable
 		add		stack, space				; restoring back the stack pointer
-		jmp		LeafInsert					; call this.LeafInsert (res1, res2, value)
+		jmp		LeafInsert					; return this.LeafInsert (res1, res2, value)
 }
 InsertCoreMulti:	INSERT_CORE	0
 InsertCoreUnique:	INSERT_CORE	1
@@ -2536,7 +2536,7 @@ space	= 3 * 8								; stack size required by the procedure
 		je		.ext						;     then try to extend object capacity
 ;---[Normal execution branch]--------------
 .back:	movdqu	value, [data]				; value = data[0]
-		jmp		InsertCore					; call InsertCore (value)
+		jmp		InsertCore					; return InsertCore (value)
 ;---[Extend object capacity]---------------
 .ext:	sub		stack, space				; reserving stack size for local vars
 		mov		[s_this], this				; save "this" variable into the stack
@@ -3127,7 +3127,7 @@ space	= 9 * 8								; stack size required by the procedure
 		mov		[this + POOL], rnode		; this.pool = rnode
 ;---[Delete median from top node]----------
 		add		stack, space				; restoring back the stack pointer
-		jmp		MergeUp						; call this.MergeUp (tnode, tindex)
+		jmp		MergeUp						; return this.MergeUp (tnode, tindex)
 ;---[Correct forward iterator branch]------
 .ftop:	mov		ival, IMASK					; load index mask
 		and		ival, iter					; ival = iter & IMASK
@@ -3893,21 +3893,21 @@ space	= 5 * 8								; stack size required by the procedure
 .del:	mov		param3, index
 		mov		param2, node
 		add		stack, space				; restoring back the stack pointer
-		jmp		BranchDelete				; call this.BranchDelete (node, index)
+		jmp		BranchDelete				; return this.BranchDelete (node, index)
 ;---[Replace element in the left node]-----
 .left:	mov		param6, index
 		mov		param5, node
 		mov		param3, [s_tind]
 		mov		param2, [s_tnode]
 		add		stack, space				; restoring back the stack pointer
-		jmp		BranchReplaceLeft			; call this.BranchReplaceLeft (tnode, tindex, lnode, node, index)
+		jmp		BranchReplaceLeft			; return this.BranchReplaceLeft (tnode, tindex, lnode, node, index)
 ;---[Replace element in the right node]----
 .right:	mov		param6, index
 		mov		param4, node
 		mov		param3, [s_tind]
 		mov		param2, [s_tnode]
 		add		stack, space				; restoring back the stack pointer
-		jmp		BranchReplaceRight			; call this.BranchReplaceRight (tnode, tindex, node, rnode, index)
+		jmp		BranchReplaceRight			; return this.BranchReplaceRight (tnode, tindex, node, rnode, index)
 
 ;==============================================================================;
 ;       Remove element from b-tree                                             ;
@@ -3982,7 +3982,7 @@ space	= 5 * 8								; stack size required by the procedure
 		mov		param3, [s_tind]
 		mov		param2, [s_tnode]
 		add		stack, space				; restoring back the stack pointer
-		jmp		LeafJoin					; call this.LeafJoin (tnode, tindex, lnode, node, node, index)
+		jmp		LeafJoin					; return this.LeafJoin (tnode, tindex, lnode, node, node, index)
 ;---[else]---------------------------------
 .else:	mov		rnode, [array + tnode + KSIZE + BPTR + TROOT]
 		mov		rsize, [array + rnode + BSIZE]
@@ -3995,25 +3995,25 @@ space	= 5 * 8								; stack size required by the procedure
 		mov		param3, [s_tind]
 		mov		param2, [s_tnode]
 		add		stack, space				; restoring back the stack pointer
-		jmp		LeafJoin					; call this.LeafJoin (tnode, tindex, node, rnode, node, index)
+		jmp		LeafJoin					; return this.LeafJoin (tnode, tindex, node, rnode, node, index)
 ;---[Delete element from the node]---------
 .del:	xchg	node, index
 		add		stack, space				; restoring back the stack pointer
-		jmp		LeafDelete					; call this.LeafDelete (node, index)
+		jmp		LeafDelete					; return this.LeafDelete (node, index)
 ;---[Replace element in the left node]-----
 .left:	mov		param6, index
 		mov		param5, node
 		mov		param3, [s_tind]
 		mov		param2, [s_tnode]
 		add		stack, space				; restoring back the stack pointer
-		jmp		LeafReplaceLeft				; call this.LeafReplaceLeft (tnode, tindex, lnode, node, index)
+		jmp		LeafReplaceLeft				; return this.LeafReplaceLeft (tnode, tindex, lnode, node, index)
 ;---[Replace element in the right node]----
 .right:	mov		param6, index
 		mov		param4, node
 		mov		param3, [s_tind]
 		mov		param2, [s_tnode]
 		add		stack, space				; restoring back the stack pointer
-		jmp		LeafReplaceRight			; call this.LeafReplaceRight (tnode, tindex, node, rnode, index)
+		jmp		LeafReplaceRight			; return this.LeafReplaceRight (tnode, tindex, node, rnode, index)
 ;---[Swap element in the node]-------------
 .swap:	mov		iter, [s_iter]
 		cmp		iter, [this + FWD]			; if (fwd == iter)
@@ -4098,7 +4098,7 @@ space	= 3 * 8								; stack size required by the procedure
 		movdqu	[data], temp				; data[0] = array[node].data[index]
 		mov		param2, result
 		add		stack, space				; restoring back the stack pointer
-		jmp		RemoveCore					; call this.RemoveCore (result)
+		jmp		RemoveCore					; return this.RemoveCore (result)
 ;---[Error branch]-------------------------
 .error:	xor		status, status				; return false
 		add		stack, space				; restoring back the stack pointer
@@ -4126,7 +4126,7 @@ temp	equ		xmm0						; temporary register
 		movdqa	temp, [array + ptr + BDATA]
 		movdqu	[data], temp				; data[0] = array[node].data[index]
 		mov		param2, iter
-		jmp		RemoveCore					; call this.RemoveCore (iter)
+		jmp		RemoveCore					; return this.RemoveCore (iter)
 ;---[Error branch]-------------------------
 .error:	xor		status, status				; return false
 		ret

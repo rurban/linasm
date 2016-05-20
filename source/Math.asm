@@ -411,6 +411,12 @@ public	Compare_raw64			as	'CmpFlt64'
 public	Compare_raw32			as	'_Z8CmpFlt325adt_tS_'
 public	Compare_raw64			as	'_Z8CmpFlt645adt_tS_'
 
+; Other types
+public	Compare_uint64			as	'CmpSize'
+public	Compare_sint64			as	'CmpTime'
+public	Compare_uint64			as	'_Z7CmpSize5adt_tS_'
+public	Compare_sint64			as	'_Z7CmpTime5adt_tS_'
+
 ;==============================================================================;
 ;       Minimum and maximum absolute value                                     ;
 ;==============================================================================;
@@ -2899,7 +2905,7 @@ end if
 ;---[Log branch]---------------------------
 .log:	initreg	mscale, treg, oneval
 		adds#x	value, mscale
-		jmp		LogFunc						; call LogFunc (value + 1.0)
+		jmp		LogFunc						; return LogFunc (value + 1.0)
 }
 
 ;==============================================================================;
@@ -3253,7 +3259,7 @@ end if
 ;---[Log branch]---------------------------
 .log:	initreg	mscale, treg, oneval
 		adds#x	value, mscale
-		jmp		LogFunc2					; call LogFunc2 (base, value + 1.0)
+		jmp		LogFunc2					; return LogFunc2 (base, value + 1.0)
 ;---[Error branch]-------------------------
 .error:	initreg	result, treg, nanval		; return NaN
 		ret
@@ -3405,10 +3411,10 @@ space	= 19 * 8							; stack size required by the procedure
 ;---[Call function]------------------------
 		lea		param1, [ipart]
 		add		stack, space				; restoring back the stack pointer
-		jmp		CoreFunc					; call CoreFunc (value1 + value2, ipart)
+		jmp		CoreFunc					; return CoreFunc (value1 + value2, ipart)
 ;---[Skip branch]--------------------------
 .skip:	xor		param1, param1
-		jmp		CoreFunc					; call CoreFunc (value, 0)
+		jmp		CoreFunc					; return CoreFunc (value, 0)
 ;---[Overflow branch]----------------------
 .ovrfl:	initreg	value, treg, nanval			; return NaN
 		ret
@@ -3561,10 +3567,10 @@ space	= 21 * 8							; stack size required by the procedure
 		mov		sin, [s_sin]				; get "sin" variable from the stack
 		mov		cos, [s_cos]				; get "cos" variable from the stack
 		add		stack, space				; restoring back the stack pointer
-		jmp		CoreFunc					; call CoreFunc (&sin, &cos, value1 + value2, ipart)
+		jmp		CoreFunc					; return CoreFunc (&sin, &cos, value1 + value2, ipart)
 ;---[Skip branch]--------------------------
 .skip:	xor		param3, param3
-		jmp		CoreFunc					; call CoreFunc (&sin, &cos, value, 0)
+		jmp		CoreFunc					; return CoreFunc (&sin, &cos, value, 0)
 ;---[Overflow branch]----------------------
 .ovrfl:	mov		mant, nanval
 		mov		[sin], mant					; sin[0] = NaN

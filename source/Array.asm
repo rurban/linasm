@@ -3264,7 +3264,7 @@ Init	= Init_int64						; function to call
 end if
 ;------------------------------------------
 		movq	reg, value					; load mask
-		jmp		Init						; call Init (array, size, value)
+		jmp		Init						; return Init (array, size, value)
 }
 
 ; Integer types
@@ -4173,7 +4173,7 @@ bmask	= 0xFFFFFFFFFFFFFFFF				; mask to apply to all elements
 end if
 ;------------------------------------------
 		mov		reg, bmask					; load mask
-		jmp		XorFunc						; call XorFunc (array, size)
+		jmp		XorFunc						; return XorFunc (array, size)
 }
 Not8:	NOT		dl, b
 Not16:	NOT		dx, w
@@ -4242,7 +4242,7 @@ array	equ		rdi							; pointer to array
 size	equ		rsi							; array size (count of elements)
 ;------------------------------------------
 		mov		reg, mask					; load mask
-		jmp		Func						; call Func (array, size)
+		jmp		Func						; return Func (array, size)
 }
 
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
@@ -7861,7 +7861,7 @@ bytes	= 1 shl scale						; size of array element (bytes)
 .end:	cmp		size, minsize
 		ja		.loop						; do while (size > minsize)
 ;---[Insert sort]--------------------------
-		jmp		InsertSort					; call InsertSort (array, size)
+		jmp		InsertSort					; return InsertSort (array, size)
 .exit:	ret
 }
 
@@ -8009,7 +8009,7 @@ bytes	= 1 shl scale						; size of array element (bytes)
 .end:	cmp		size, minsize
 		ja		.loop						; do while (size > minsize)
 ;---[Insert sort]--------------------------
-		jmp		InsertSort					; call InsertSort (array, ptr, size)
+		jmp		InsertSort					; return InsertSort (array, ptr, size)
 .exit:	ret
 }
 
@@ -8177,7 +8177,7 @@ minsize	= 32								; min array size is aceptable for Quick sort
 		mov		key1, [s_key1]				; restore old value of "key1" variable
 		mov		key2, [s_key2]				; restore old value of "key2" variable
 		add		stack, space				; restoring back the stack pointer
-		jmp		InsertSort					; call InsertSort (array, size, func)
+		jmp		InsertSort					; return InsertSort (array, size, func)
 .exit:	ret
 }
 
@@ -8263,11 +8263,11 @@ bytes	= 1 shl scale						; size of array element (bytes)
 		mov		param2, temp
 		mov		param1, array
 		add		stack, space				; restoring back the stack pointer
-		jmp		MergeFunc					; call MergeFunc (array, temp, size / 2, array + size / 2, size - size / 2)
+		jmp		MergeFunc					; return MergeFunc (array, temp, size / 2, array + size / 2, size - size / 2)
 ;---[Insert sort branch]-------------------
 .ins:	mov		param1, array
 		mov		param2, size
-		jmp		InsertSort					; call InsertSort (array, size)
+		jmp		InsertSort					; return InsertSort (array, size)
 .exit:	ret
 }
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -8438,12 +8438,12 @@ bytes	= 1 shl scale						; size of array element (bytes)
 		mov		param2, [s_ptr]
 		mov		param1, array
 		add		stack, space				; restoring back the stack pointer
-		jmp		MergeFunc					; call MergeFunc (array, ptr, temp, tptr, size / 2, array + size / 2, ptr + size / 2, size - size / 2)
+		jmp		MergeFunc					; return MergeFunc (array, ptr, temp, tptr, size / 2, array + size / 2, ptr + size / 2, size - size / 2)
 ;---[Insert sort branch]-------------------
 .ins:	mov		param1, array
 		mov		param2, ptr
 		mov		param3, size
-		jmp		InsertSort					; call InsertSort (array, ptr, size)
+		jmp		InsertSort					; return InsertSort (array, ptr, size)
 .exit:	ret
 }
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -8598,12 +8598,12 @@ minsize	= 32								; min array size is aceptable for Merge sort
 		mov		param2, temp
 		mov		param1, array
 		add		stack, space				; restoring back the stack pointer
-		jmp		MergeFunc					; call MergeFunc (array, temp, size / 2, array + size / 2, size - size / 2, func)
+		jmp		MergeFunc					; return MergeFunc (array, temp, size / 2, array + size / 2, size - size / 2, func)
 ;---[Insert sort branch]-------------------
 .ins:	mov		param1, array
 		mov		param2, size
 		mov		param3, func
-		jmp		InsertSort					; call InsertSort (array, size, func)
+		jmp		InsertSort					; return InsertSort (array, size, func)
 .exit:	ret
 }
 
@@ -8894,7 +8894,7 @@ size	equ		rdx							; size of array
 		cmp		size, 1						; if (size <= 1)
 		jbe		.exit						;     then go to exit from the procedure
 ;---[Call sort function]-------------------
-		jmp		SortFunc					; call SortFunc (array, temp, size)
+		jmp		SortFunc					; return SortFunc (array, temp, size)
 .exit:	ret
 }
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -9146,7 +9146,7 @@ size	equ		r8							; size of array
 		cmp		size, 1						; if (size <= 1)
 		jbe		.exit						; then go to exit from the procedure
 ;---[Call sort function]-------------------
-		jmp		SortFunc					; call SortFunc (key, tkey, ptr, tptr, size)
+		jmp		SortFunc					; return SortFunc (key, tkey, ptr, tptr, size)
 .exit:	ret
 }
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -9324,11 +9324,11 @@ bytes	= 1 shl scale						; size of array element (bytes)
 .copy1:	mov		param1, target
 		mov		param2, src2
 		mov		param3, size2
-		jmp		Copy						; call Copy (target, src2, size2)
+		jmp		Copy						; return Copy (target, src2, size2)
 .copy2:	mov		param1, target
 		mov		param2, src1
 		mov		param3, size1
-		jmp		Copy						; call Copy (target, src1, size1)
+		jmp		Copy						; return Copy (target, src1, size1)
 }
 
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
@@ -9471,7 +9471,7 @@ bytes	= 1 shl scale						; size of array element (bytes)
 		mov		value2, [s_val2]			; restore old value of "value2" variable
 		mov		ptr, [s_ptr]				; restore old value of "ptr" variable
 		add		stack, space				; restoring back the stack pointe
-		jmp		CopyFwd64					; call Copy (tptr, sptr2, size2)
+		jmp		CopyFwd64					; return Copy (tptr, sptr2, size2)
 .copy2:	mov		[s_tptr], tptr				; save "tptr" variable into the stack
 		mov		[s_sptr1], sptr1			; save "sptr1" variable into the stack
 		mov		[s_size1], size1			; save "size1" variable into the stack
@@ -9487,7 +9487,7 @@ bytes	= 1 shl scale						; size of array element (bytes)
 		mov		value2, [s_val2]			; restore old value of "value2" variable
 		mov		ptr, [s_ptr]				; restore old value of "ptr" variable
 		add		stack, space				; restoring back the stack pointe
-		jmp		CopyFwd64					; call Copy (tptr, sptr1, size1)
+		jmp		CopyFwd64					; return Copy (tptr, sptr1, size1)
 }
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 macro	MERGE_KEY	MergeFunc
@@ -9502,7 +9502,7 @@ s_size2	equ		stack + 2 * 8				; stack position of "size2" variable
 ;------------------------------------------
 		mov		sptr2, [s_sptr2]			; get "sptr2" variable from the stack
 		mov		size2, [s_size2]			; get "size2" variable from the stack
-		jmp		MergeFunc					; call MergeFunc (tkey, tptr, skey1, sptr1, size1, skey2, sptr2, size2)
+		jmp		MergeFunc					; return MergeFunc (tkey, tptr, skey1, sptr1, size1, skey2, sptr2, size2)
 }
 
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
@@ -9633,12 +9633,12 @@ space	= 11 * 8							; stack size required by the procedure
 		mov		param2, [s_src2]
 		mov		param3, [s_size2]
 		add		stack, space				; restoring back the stack pointe
-		jmp		CopyFwd64					; call Copy (target, src2, size2)
+		jmp		CopyFwd64					; return Copy (target, src2, size2)
 .copy2:	mov		param1, [s_tgt]
 		mov		param2, [s_src1]
 		mov		param3, [s_size1]
 		add		stack, space				; restoring back the stack pointe
-		jmp		CopyFwd64					; call Copy (target, src1, size1)
+		jmp		CopyFwd64					; return Copy (target, src1, size1)
 }
 
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;

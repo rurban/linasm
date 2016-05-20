@@ -1855,7 +1855,7 @@ space	= 3 * 8								; stack size required by the procedure
 .back:	mov		iter, [this + offst]		; get iterator value
 		movdqu	value, [data]				; value = data[0]
 		lea		param2, [iter + shift]
-		jmp		InsertCore					; call InsertCore (iter, value)
+		jmp		InsertCore					; return InsertCore (iter, value)
 ;---[Extend object capacity]---------------
 .ext:	sub		stack, space				; reserving stack size for local vars
 		mov		[s_this], this				; save "this" variable into the stack
@@ -1894,7 +1894,7 @@ space	= 3 * 8								; stack size required by the procedure
 ;---[Normal execution branch]--------------
 		movdqu	value, [data]				; value = data[0]
 		lea		param2, [iter + shift]
-		jmp		InsertCore					; call InsertCore (iter, value)
+		jmp		InsertCore					; return InsertCore (iter, value)
 ;---[Extend object capacity]---------------
 .ext:	sub		stack, space				; reserving stack size for local vars
 		mov		[s_this], this				; save "this" variable into the stack
@@ -2548,7 +2548,7 @@ size	equ		rsize						; object size
 		mov		param5, index
 		mov		param4, node
 		mov		param3, node
-		jmp		JoinFunc					; call this.JoinFunc (lnode, node, node, index)
+		jmp		JoinFunc					; return this.JoinFunc (lnode, node, node, index)
 ;---[else]---------------------------------
 .else:	mov		rsize, IMASK				; load index mask
 		and		rsize, [array + rnode + FDIR]
@@ -2559,21 +2559,21 @@ size	equ		rsize						; object size
 		mov		param4, node
 		mov		param2, node
 		mov		param3, rnode
-		jmp		JoinFunc					; call this.JoinFunc (node, rnode, node, index)
+		jmp		JoinFunc					; return this.JoinFunc (node, rnode, node, index)
 ;---[Delete element from the node]---------
 .del:	mov		param2, node
 		mov		param3, index
-		jmp		DelFunc						; call this.DelFunc (node, index)
+		jmp		DelFunc						; return this.DelFunc (node, index)
 ;---[Replace element in the left node]-----
 .left:	mov		param2, lnode
 		mov		param3, node
 		mov		param4, index
-		jmp		RepLeftFunc					; call this.RepLeftFunc (lnode, node, index)
+		jmp		RepLeftFunc					; return this.RepLeftFunc (lnode, node, index)
 ;---[Replace element in the right node]----
 .right:	mov		param2, node
 		mov		param3, rnode
 		mov		param4, index
-		jmp		RepRightFunc				; call this.RepRightFunc (node, rnode, index)
+		jmp		RepRightFunc				; return this.RepRightFunc (node, rnode, index)
 }
 RemoveCoreList:	REMOVE_CORE	DeleteList, ReplaceLeftList, ReplaceRightList, JoinList
 RemoveCoreRing:	REMOVE_CORE	DeleteRing, ReplaceLeftRing, ReplaceRightRing, JoinRing
@@ -2600,7 +2600,7 @@ temp	equ		xmm0						; temporary register
 		movdqa	temp, [array + iter + NDATA]
 		movdqu	[data], temp				; data[0] = array[iter].data
 		mov		param2, iter
-		jmp		RemoveCore					; call this.RemoveCore (iter)
+		jmp		RemoveCore					; return this.RemoveCore (iter)
 ;---[Error branch]-------------------------
 .error:	xor		status, status				; return false
 		ret

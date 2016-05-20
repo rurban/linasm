@@ -215,9 +215,9 @@ shift	equ		rcx							; position of the most significant bit
 shiftl	equ		cl							; low part of shift register
 ;------------------------------------------
 		sub		value, 1
-		bsr		shift, value
+		bsr		shift, value				; shift = nearest upper power of 2
 		mov		value, 1
-		add		shift, 1					; shift = nearest upper power of 2
+		add		shift, 1
 		shl		value, shiftl				; value = 1 << shift + 1
 		mov		temp, min
 		cmp		value, temp					; if (value < min)
