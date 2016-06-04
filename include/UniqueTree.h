@@ -27,9 +27,10 @@ private:
 	size_t	size;		// Current b-tree size
 	size_t	height;		// Current b-tree height
 	size_t	pool;		// Index of first free node in the pool
+	size_t	root;		// Index of b-tree root node
 	size_t	fwd;		// Current position of forward iterator
 	size_t	bwd;		// Current position of backward iterator
-	size_t	root;		// Index of b-tree root node
+	size_t	futex;		// Container's futex
 	KeyCmp	func;		// Key compare function
 
 public:
@@ -48,6 +49,18 @@ UniqueTree (const UniqueTree &source);
 //      Destructor                                                            //
 //****************************************************************************//
 ~UniqueTree (void);
+
+//****************************************************************************//
+//      Access predicates                                                     //
+//****************************************************************************//
+
+// Lock operations
+bool LockReadings (bool wait);
+bool LockWritings (bool wait);
+
+// Release operations
+void AllowReadings (void);
+void AllowWritings (void);
 
 //****************************************************************************//
 //      Copying elements                                                      //
@@ -273,9 +286,10 @@ struct UniqueTree
 	size_t	size;		// Current b-tree size
 	size_t	height;		// Current b-tree height
 	size_t	pool;		// Index of first free node in the pool
+	size_t	root;		// Index of b-tree root node
 	size_t	fwd;		// Current position of forward iterator
 	size_t	bwd;		// Current position of backward iterator
-	size_t	root;		// Index of b-tree root node
+	size_t	futex;		// Container's futex
 	KeyCmp	func;		// Key compare function
 };
 
@@ -293,6 +307,18 @@ UniqueTree_CopyUniqueTree (struct UniqueTree *tree, const UniqueTree *source);
 //      Free tree structure                                                   //
 //****************************************************************************//
 UniqueTree_FreeUniqueTree (struct UniqueTree *tree);
+
+//****************************************************************************//
+//      Access predicates                                                     //
+//****************************************************************************//
+
+// Lock operations
+bool UniqueTree_LockReadings (struct UniqueTree *tree, bool wait);
+bool UniqueTree_LockWritings (struct UniqueTree *tree, bool wait);
+
+// Release operations
+void UniqueTree_AllowReadings (struct UniqueTree *tree);
+void UniqueTree_AllowWritings (struct UniqueTree *tree);
 
 //****************************************************************************//
 //      Copying elements                                                      //

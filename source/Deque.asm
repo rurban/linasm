@@ -39,6 +39,22 @@ public	Destructor			as	'Deque_FreeDeque'
 public	Destructor			as	'_ZN5DequeD1Ev'
 
 ;******************************************************************************;
+;       Access predicates                                                      ;
+;******************************************************************************;
+
+; Lock operations
+public	LockReadings		as	'Deque_LockReadings'
+public	LockWritings		as	'Deque_LockWritings'
+public	LockReadings		as	'_ZN5Deque12LockReadingsEb'
+public	LockWritings		as	'_ZN5Deque12LockWritingsEb'
+
+; Release operations
+public	AllowReadings		as	'Deque_AllowReadings'
+public	AllowWritings		as	'Deque_AllowWritings'
+public	AllowReadings		as	'_ZN5Deque13AllowReadingsEv'
+public	AllowWritings		as	'_ZN5Deque13AllowWritingsEv'
+
+;******************************************************************************;
 ;       Copying elements                                                       ;
 ;******************************************************************************;
 
@@ -268,6 +284,7 @@ CAPACITY	= 1 * 8							; Offset of object capacity field
 SIZE		= 2 * 8							; Offset of object size field
 HEAD		= 3 * 8							; Offset of head pointer field
 TAIL		= 4 * 8							; Offset of tail pointer field
+FUTEX		= 5 * 8							; Offset of futex field
 
 ;******************************************************************************;
 ;       Extending deque capacity                                               ;
@@ -450,6 +467,7 @@ space	= 3 * 8								; stack size required by the procedure
 		mov		qword [this + SIZE], 0		; this.size = 0
 		mov		qword [this + HEAD], 0		; this.head = 0
 		mov		qword [this + TAIL], cap	; this.tail = cap - KSIZE
+		mov		qword [this + FUTEX], 0		; this.futex = 0
 		add		stack, space				; restoring back the stack pointer
 		ret
 ;---[Error branch]-------------------------
@@ -458,6 +476,7 @@ space	= 3 * 8								; stack size required by the procedure
 		mov		qword [this + SIZE], 0		; this.size = 0
 		mov		qword [this + HEAD], 0		; this.head = 0
 		mov		qword [this + TAIL], -KSIZE	; this.tail = -KSIZE
+		mov		qword [this + FUTEX], 0		; this.futex = 0
 		add		stack, space				; restoring back the stack pointer
 		ret
 
@@ -505,6 +524,7 @@ space	= 3 * 8								; stack size required by the procedure
 		mov		[this + HEAD], temp			; this.head = source.head
 		mov		temp, [source + TAIL]
 		mov		[this + TAIL], temp			; this.tail = source.tail
+		mov		qword [this + FUTEX], 0		; this.futex = 0
 ;---[Copy content of nodes]----------------
 		mov		param3, [source + CAPACITY]
 		mov		param2, [source + ARRAY]
@@ -518,6 +538,7 @@ space	= 3 * 8								; stack size required by the procedure
 		mov		qword [this + SIZE], 0		; this.size = 0
 		mov		qword [this + HEAD], 0		; this.head = 0
 		mov		qword [this + TAIL], -KSIZE	; this.tail = -1
+		mov		qword [this + FUTEX], 0		; this.futex = 0
 .exit:	add		stack, space				; restoring back the stack pointer
 		ret
 
@@ -537,15 +558,28 @@ space	= 1 * 8								; stack size required by the procedure
 		mov		sc_prm2, [this + CAPACITY]
 		mov		sc_prm1, [this + ARRAY]
 		mov		sc_num, SYSCALL_MUNMAP
-		syscall								; munmap (array, capacity)
+		syscall								; syscall munmap (array, capacity)
 		mov		this, [s_this]				; get "this" variable from the stack
 		mov		qword [this + ARRAY], 0		; this.array = NULL
 		mov		qword [this + CAPACITY], 0	; this.capacity = 0
 		mov		qword [this + SIZE], 0		; this.size = 0
 		mov		qword [this + HEAD], 0		; this.head = 0
 		mov		qword [this + TAIL], -KSIZE	; this.tail = -1
+		mov		qword [this + FUTEX], 0		; this.futex = 0
 		add		stack, space				; restoring back the stack pointer
 		ret
+
+;******************************************************************************;
+;       Access predicates                                                      ;
+;******************************************************************************;
+
+; Lock operations
+LockReadings:	WRITE_LOCK
+LockWritings:	READ_LOCK
+
+; Release operations
+AllowReadings:	WRITE_RELEASE
+AllowWritings:	READ_RELEASE
 
 ;******************************************************************************;
 ;       Copying elements                                                       ;
@@ -576,6 +610,10 @@ s_ssize	equ		stack + 6 * 8				; stack position of "ssize" variable
 space	= 7 * 8								; stack size required by the procedure
 ;------------------------------------------
 		sub		stack, space				; reserving stack size for local vars
+;---[Check access mode]--------------------
+		cmp		dword [this + FUTEX], 0		; if read only code section called this
+		jg		.error						; function, then go to error branch
+;---[Prevent copying to itself]------------
 		cmp		this, source				; if (this == source)
 		je		.error						;     then go to error branch
 ;---[Check target position]----------------
@@ -764,10 +802,12 @@ stack	equ		rsp							; stack pointer
 s_this	equ		stack + 0 * 8				; stack position of "this" variable
 s_data	equ		stack + 1 * 8				; stack position of "data" variable
 space	= 3 * 8								; stack size required by the procedure
-;------------------------------------------
+;---[Check access mode]--------------------
+		cmp		dword [this + FUTEX], 0		; if read only code section called this
+		jg		.error						; function, then go to error branch
+;---[Check capacity]-----------------------
 		mov		array, [this + ARRAY]		; get pointer to array of nodes
 		mov		cap, [this + CAPACITY]		; get object capacity
-;---[Check capacity]-----------------------
 		cmp		[this + SIZE], cap			; if (size == cap)
 		je		.ext						;     then try to extend object capacity
 ;---[Normal execution branch]--------------
@@ -793,9 +833,11 @@ space	= 3 * 8								; stack size required by the procedure
 		mov		array, [this + ARRAY]		; get pointer to array of nodes
 		mov		cap, [this + CAPACITY]		; get object capacity
 		add		stack, space				; restoring back the stack pointer
-		test	status, status
-		jnz		.back						; if (status), then go back
-		ret									;              else return false
+		test	status, status				; if (status)
+		jnz		.back						;     then go back
+;---[Error branch]-------------------------
+.error:	xor		status, status				; return false
+		ret
 }
 PushIntoHead:	PUSH_DATA	sub, HEAD
 PushIntoTail:	PUSH_DATA	add, TAIL
@@ -814,7 +856,10 @@ array	equ		rdx							; pointer to array of nodes
 iter	equ		rcx							; iterator value
 cap		equ		rax							; object capacity
 temp	equ		xmm0						; temporary register
-;------------------------------------------
+;---[Check access mode]--------------------
+		cmp		dword [this + FUTEX], 0		; if read only code section called this
+		jg		.error						; function, then go to error branch
+;---[Check size]---------------------------
 		cmp		qword [this + SIZE], 0		; if (size == 0)
 		jz		.error						;     then go to error branch
 ;---[Normal execution branch]--------------
@@ -867,13 +912,16 @@ s_iter	equ		stack + 3 * 8				; stack position of "iter" variable
 space	= 5 * 8								; stack size required by the procedure
 ;------------------------------------------
 		sub		stack, space				; reserving stack size for local vars
+;---[Check access mode]--------------------
+		cmp		dword [this + FUTEX], 0		; if read only code section called this
+		jg		.error						; function, then go to error branch
+;---[Check capacity]-----------------------
 		shl		pos, KSCALE
 		mov		cap, [this + CAPACITY]		; get object capacity
 		mov		size, [this + SIZE]			; get object size
 		mov		[s_this], this				; save "this" variable into the stack
 		mov		[s_data], data				; save "data" variable into the stack
 		mov		[s_pos], pos				; save "pos" variable into the stack
-;---[Check capacity]-----------------------
 		cmp		size, cap					; if (size == cap)
 		je		.ext						;     then try to extend object capacity
 ;---[Check position]-----------------------
@@ -926,8 +974,8 @@ space	= 5 * 8								; stack size required by the procedure
 		mov		pos, [s_pos]				; get "pos" variable from the stack
 		mov		cap, [this + CAPACITY]		; get object capacity
 		mov		size, [this + SIZE]			; get object size
-		test	status, status
-		jnz		.back						; if (status), then go back
+		test	status, status				; if (status)
+		jnz		.back						;     then go back
 ;---[Error branch]-------------------------
 .error:	xor		status, status				; return false
 		add		stack, space				; restoring back the stack pointer
@@ -980,6 +1028,9 @@ cap		equ		r10							; object capacity
 size	equ		r11							; object size
 ptr		equ		rax							; temporary pointer
 temp	equ		xmm0						; temporary register
+;---[Check access mode]--------------------
+		cmp		dword [this + FUTEX], 0		; if read only code section called this
+		jg		.error						; function, then go to error branch
 ;---[Check position]-----------------------
 		shl		pos, KSCALE
 		mov		cap, [this + CAPACITY]		; get object capacity
@@ -1067,6 +1118,9 @@ status	equ		al							; operation status
 iter	equ		rcx							; iterator value
 cap		equ		rax							; object capacity
 temp	equ		xmm0						; temporary register
+;---[Check access mode]--------------------
+		cmp		dword [this + FUTEX], 0		; if read only code section called this
+		jg		.error						; function, then go to error branch
 ;---[Check position]-----------------------
 		shl		pos, KSCALE
 		mov		cap, [this + CAPACITY]		; get object capacity
@@ -1140,6 +1194,9 @@ status	equ		al							; operation status
 iter	equ		r8							; iterator value
 cap		equ		rax							; object capacity
 temp	equ		xmm0						; temporary register
+;---[Check access mode]--------------------
+		cmp		dword [this + FUTEX], 0		; if read only code section called this
+		jg		.error						; function, then go to error branch
 ;---[Check position]-----------------------
 		shl		pos, KSCALE
 		mov		cap, [this + CAPACITY]		; get object capacity
@@ -1186,6 +1243,9 @@ cap		equ		rcx							; object capacity
 size	equ		result						; object size
 temp1	equ		xmm0						; temporary register #1
 temp2	equ		xmm1						; temporary register #2
+;---[Check access mode]--------------------
+		cmp		dword [this + FUTEX], 0		; if read only code section called this
+		jg		.error						; function, then go to error branch
 ;---[Check position]-----------------------
 		shl		pos, KSCALE
 		mov		array, [this + ARRAY]		; get pointer to array of nodes
@@ -1248,7 +1308,9 @@ cap		equ		rcx							; object capacity
 size	equ		result						; object size
 temp1	equ		xmm0						; temporary register #1
 temp2	equ		xmm1						; temporary register #2
-;------------------------------------------
+;---[Check access mode]--------------------
+		cmp		dword [this + FUTEX], 0		; if read only code section called this
+		jg		.error						; function, then go to error branch
 		shl		pos1, KSCALE
 		shl		pos2, KSCALE
 		mov		array, [this + ARRAY]		; get pointer to array of nodes

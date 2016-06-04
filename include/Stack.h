@@ -25,6 +25,7 @@ private:
 	void	*array;		// Pointer to array which holds stack data
 	size_t	capacity;	// Capacity of the stack (auto extended if required)
 	size_t	size;		// Current stack size
+	size_t	futex;		// Container's futex
 
 public:
 
@@ -42,6 +43,18 @@ Stack (const Stack &source);
 //      Destructor                                                            //
 //****************************************************************************//
 ~Stack (void);
+
+//****************************************************************************//
+//      Access predicates                                                     //
+//****************************************************************************//
+
+// Lock operations
+bool LockReadings (bool wait);
+bool LockWritings (bool wait);
+
+// Release operations
+void AllowReadings (void);
+void AllowWritings (void);
 
 //****************************************************************************//
 //      Copying elements                                                      //
@@ -172,6 +185,7 @@ struct Stack
 	void	*array;		// Pointer to array which holds stack data
 	size_t	capacity;	// Capacity of the stack (auto extended if required)
 	size_t	size;		// Current stack size
+	size_t	futex;		// Container's futex
 };
 
 //****************************************************************************//
@@ -188,6 +202,18 @@ void Stack_CopyStack (struct Stack *stack, const struct Stack *source);
 //      Free stack structure                                                  //
 //****************************************************************************//
 void Stack_FreeStack (struct Stack *stack);
+
+//****************************************************************************//
+//      Access predicates                                                     //
+//****************************************************************************//
+
+// Lock operations
+bool Stack_LockReadings (struct Stack *stack, bool wait);
+bool Stack_LockWritings (struct Stack *stack, bool wait);
+
+// Release operations
+void Stack_AllowReadings (struct Stack *stack);
+void Stack_AllowWritings (struct Stack *stack);
 
 //****************************************************************************//
 //      Copying elements                                                      //

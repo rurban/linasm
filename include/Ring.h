@@ -26,9 +26,11 @@ private:
 	size_t	capacity;	// Capacity of the ring (auto extended if required)
 	size_t	size;		// Current ring size
 	size_t	pool;		// Index of first free node in the pool
+	size_t	link;		// Current position of ring link
+	size_t	padding;	// Padding to keep align
 	size_t	fwd;		// Current position of forward iterator
 	size_t	bwd;		// Current position of backward iterator
-	size_t	link;		// Current position of ring link
+	size_t	futex;		// Container's futex
 
 public:
 
@@ -46,6 +48,18 @@ Ring (const Ring &source);
 //      Destructor                                                            //
 //****************************************************************************//
 ~Ring (void);
+
+//****************************************************************************//
+//      Access predicates                                                     //
+//****************************************************************************//
+
+// Lock operations
+bool LockReadings (bool wait);
+bool LockWritings (bool wait);
+
+// Release operations
+void AllowReadings (void);
+void AllowWritings (void);
 
 //****************************************************************************//
 //      Copying elements                                                      //
@@ -98,14 +112,8 @@ bool InsertBeforeBwd (const data_t *data);
 //****************************************************************************//
 //      Removing of element                                                   //
 //****************************************************************************//
-
-// Using ring link
 bool RemoveLink (data_t *data);
-
-// Using forward iterator
 bool RemoveFwd (data_t *data);
-
-// Using backward iterator
 bool RemoveBwd (data_t *data);
 
 //****************************************************************************//
@@ -335,9 +343,11 @@ struct Ring
 	size_t	capacity;	// Capacity of the ring (auto extended if required)
 	size_t	size;		// Current ring size
 	size_t	pool;		// Index of first free node in the pool
+	size_t	link;		// Current position of ring link
+	size_t	padding;	// Padding to keep align
 	size_t	fwd;		// Current position of forward iterator
 	size_t	bwd;		// Current position of backward iterator
-	size_t	link;		// Current position of ring link
+	size_t	futex;		// Container's futex
 };
 
 //****************************************************************************//
@@ -354,6 +364,18 @@ void Ring_CopyRing (struct Ring *ring, const struct Ring *source);
 //      Free ring structure                                                   //
 //****************************************************************************//
 void Ring_FreeRing (struct Ring *ring);
+
+//****************************************************************************//
+//      Access predicates                                                     //
+//****************************************************************************//
+
+// Lock operations
+bool Ring_LockReadings (struct Ring *ring, bool wait);
+bool Ring_LockWritings (struct Ring *ring, bool wait);
+
+// Release operations
+void Ring_AllowReadings (struct Ring *ring);
+void Ring_AllowWritings (struct Ring *ring);
 
 //****************************************************************************//
 //      Copying elements                                                      //
@@ -406,14 +428,8 @@ bool Ring_InsertBeforeBwd (struct Ring *ring, const struct data_t *data);
 //****************************************************************************//
 //      Removing of element                                                   //
 //****************************************************************************//
-
-// Using ring link
 bool Ring_RemoveLink (struct Ring *ring, struct data_t *data);
-
-// Using forward iterator
 bool Ring_RemoveFwd (struct Ring *ring, struct data_t *data);
-
-// Using backward iterator
 bool Ring_RemoveBwd (struct Ring *ring, struct data_t *data);
 
 //****************************************************************************//

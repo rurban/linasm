@@ -26,10 +26,11 @@ private:
 	size_t	capacity;	// Capacity of the list (auto extended if required)
 	size_t	size;		// Current list size
 	size_t	pool;		// Index of first free node in the pool
-	size_t	fwd;		// Current position of forward iterator
-	size_t	bwd;		// Current position of backward iterator
 	size_t	head;		// Current position of list head
 	size_t	tail;		// Current position of list tail
+	size_t	fwd;		// Current position of forward iterator
+	size_t	bwd;		// Current position of backward iterator
+	size_t	futex;		// Container's futex
 
 public:
 
@@ -47,6 +48,18 @@ List (const List &source);
 //      Destructor                                                            //
 //****************************************************************************//
 ~List (void);
+
+//****************************************************************************//
+//      Access predicates                                                     //
+//****************************************************************************//
+
+// Lock operations
+bool LockReadings (bool wait);
+bool LockWritings (bool wait);
+
+// Release operations
+void AllowReadings (void);
+void AllowWritings (void);
 
 //****************************************************************************//
 //      Copying elements                                                      //
@@ -99,15 +112,9 @@ bool InsertBeforeBwd (const data_t *data);
 //****************************************************************************//
 //      Removing of element                                                   //
 //****************************************************************************//
-
-// From list head/tail
 bool RemoveHead (data_t *data);
 bool RemoveTail (data_t *data);
-
-// Using forward iterator
 bool RemoveFwd (data_t *data);
-
-// Using backward iterator
 bool RemoveBwd (data_t *data);
 
 //****************************************************************************//
@@ -344,10 +351,11 @@ struct List
 	size_t	capacity;	// Capacity of the list (auto extended if required)
 	size_t	size;		// Current list size
 	size_t	pool;		// Index of first free node in the pool
-	size_t	fwd;		// Current position of forward iterator
-	size_t	bwd;		// Current position of backward iterator
 	size_t	head;		// Current position of list head
 	size_t	tail;		// Current position of list tail
+	size_t	fwd;		// Current position of forward iterator
+	size_t	bwd;		// Current position of backward iterator
+	size_t	futex;		// Container's futex
 };
 
 //****************************************************************************//
@@ -364,6 +372,18 @@ void List_CopyList (struct List *list, const struct List *source);
 //      Free list structure                                                   //
 //****************************************************************************//
 void List_FreeList (struct List *list);
+
+//****************************************************************************//
+//      Access predicates                                                     //
+//****************************************************************************//
+
+// Lock operations
+bool List_LockReadings (struct List *list, bool wait);
+bool List_LockWritings (struct List *list, bool wait);
+
+// Release operations
+void List_AllowReadings (struct List *list);
+void List_AllowWritings (struct List *list);
 
 //****************************************************************************//
 //      Copying elements                                                      //
@@ -416,15 +436,9 @@ bool List_InsertBeforeBwd (struct List *list, const struct data_t *data);
 //****************************************************************************//
 //      Removing of element                                                   //
 //****************************************************************************//
-
-// From list head/tail
 bool List_RemoveHead (struct List *list, struct data_t *data);
 bool List_RemoveTail (struct List *list, struct data_t *data);
-
-// Using forward iterator
 bool List_RemoveFwd (struct List *list, struct data_t *data);
-
-// Using backward iterator
 bool List_RemoveBwd (struct List *list, struct data_t *data);
 
 //****************************************************************************//

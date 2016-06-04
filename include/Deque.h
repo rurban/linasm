@@ -27,6 +27,7 @@ private:
 	size_t	size;		// Current deque size
 	size_t	head;		// Index of deque head
 	size_t	tail;		// Index of deque tail
+	size_t	futex;		// Container's futex
 
 public:
 
@@ -44,6 +45,18 @@ Deque (const Deque &source);
 //      Destructor                                                            //
 //****************************************************************************//
 ~Deque (void);
+
+//****************************************************************************//
+//      Access predicates                                                     //
+//****************************************************************************//
+
+// Lock operations
+bool LockReadings (bool wait);
+bool LockWritings (bool wait);
+
+// Release operations
+void AllowReadings (void);
+void AllowWritings (void);
 
 //****************************************************************************//
 //      Copying elements                                                      //
@@ -187,6 +200,7 @@ struct Deque
 	size_t	size;		// Current deque size
 	size_t	head;		// Index of deque head
 	size_t	tail;		// Index of deque tail
+	size_t	futex;		// Container's futex
 };
 
 //****************************************************************************//
@@ -203,6 +217,18 @@ void Deque_CopyDeque (struct Deque *deque, const struct Deque *source);
 //      Free deque structure                                                  //
 //****************************************************************************//
 void Deque_FreeDeque (struct Deque *deque);
+
+//****************************************************************************//
+//      Access predicates                                                     //
+//****************************************************************************//
+
+// Lock operations
+bool Deque_LockReadings (struct Deque *deque, bool wait);
+bool Deque_LockWritings (struct Deque *deque, bool wait);
+
+// Release operations
+void Deque_AllowReadings (struct Deque *deque);
+void Deque_AllowWritings (struct Deque *deque);
 
 //****************************************************************************//
 //      Copying elements                                                      //

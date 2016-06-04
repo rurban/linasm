@@ -25,6 +25,7 @@ private:
 	void		*array;		// Pointer to array which holds heap data
 	size_t		capacity;	// Capacity of the heap (auto extended if required)
 	size_t		size;		// Current heap size
+	size_t		futex;		// Container's futex
 	KeyCmp		kfunc;		// Key compare function
 	HeapIndex	ifunc;		// Heap index call back function
 
@@ -44,6 +45,18 @@ MinHeap (const MinHeap &source);
 //      Destructor                                                            //
 //****************************************************************************//
 ~MinHeap (void);
+
+//****************************************************************************//
+//      Access predicates                                                     //
+//****************************************************************************//
+
+// Lock operations
+bool LockReadings (bool wait);
+bool LockWritings (bool wait);
+
+// Release operations
+void AllowReadings (void);
+void AllowWritings (void);
 
 //****************************************************************************//
 //      Addition of element                                                   //
@@ -116,6 +129,7 @@ struct MinHeap
 	void		*array;		// Pointer to array which holds heap data
 	size_t		capacity;	// Capacity of the heap (auto extended if required)
 	size_t		size;		// Current heap size
+	size_t		futex;		// Container's futex
 	KeyCmp		kfunc;		// Key compare function
 	HeapIndex	ifunc;		// Heap index call back function
 };
@@ -134,6 +148,18 @@ void MinHeap_CopyMinHeap (struct MinHeap *heap, const struct MinHeap *source);
 //      Free heap structure                                                   //
 //****************************************************************************//
 void MinHeap_FreeMinHeap (struct MinHeap *heap);
+
+//****************************************************************************//
+//      Access predicates                                                     //
+//****************************************************************************//
+
+// Lock operations
+bool MinHeap_LockReadings (struct MinHeap *heap, bool wait);
+bool MinHeap_LockWritings (struct MinHeap *heap, bool wait);
+
+// Release operations
+void MinHeap_AllowReadings (struct MinHeap *heap);
+void MinHeap_AllowWritings (struct MinHeap *heap);
 
 //****************************************************************************//
 //      Addition of element                                                   //

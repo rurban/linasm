@@ -25,6 +25,7 @@ private:
 	void	*array;		// Pointer to array which holds vector data
 	size_t	capacity;	// Capacity of the vector (auto extended if required)
 	size_t	size;		// Current vector size
+	size_t	futex;		// Container's futex
 
 public:
 
@@ -42,6 +43,18 @@ Vector (const Vector &source);
 //      Destructor                                                            //
 //****************************************************************************//
 ~Vector (void);
+
+//****************************************************************************//
+//      Access predicates                                                     //
+//****************************************************************************//
+
+// Lock operations
+bool LockReadings (bool wait);
+bool LockWritings (bool wait);
+
+// Release operations
+void AllowReadings (void);
+void AllowWritings (void);
 
 //****************************************************************************//
 //      Copying elements                                                      //
@@ -286,6 +299,7 @@ struct Vector
 	void	*array;		// Pointer to array which holds vector data
 	size_t	capacity;	// Capacity of the vector (auto extended if required)
 	size_t	size;		// Current vector size
+	size_t	futex;		// Container's futex
 };
 
 //****************************************************************************//
@@ -302,6 +316,18 @@ void Vector_CopyVector (struct Vector *vector, const struct Vector *source);
 //      Free vector structure                                                 //
 //****************************************************************************//
 void Vector_FreeVector (struct Vector *vector);
+
+//****************************************************************************//
+//      Access predicates                                                     //
+//****************************************************************************//
+
+// Lock operations
+bool Vector_LockReadings (struct Vector *vector, bool wait);
+bool Vector_LockWritings (struct Vector *vector, bool wait);
+
+// Release operations
+void Vector_AllowReadings (struct Vector *vector);
+void Vector_AllowWritings (struct Vector *vector);
 
 //****************************************************************************//
 //      Copying elements                                                      //

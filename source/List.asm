@@ -32,26 +32,50 @@ public	SplitCore				as	'NodeSplitCore'
 ;******************************************************************************;
 ;       Constructor                                                            ;
 ;******************************************************************************;
-public	ConstructorList			as	'List_InitList'
-public	ConstructorRing			as	'Ring_InitRing'
-public	ConstructorList			as	'_ZN4ListC1Em'
-public	ConstructorRing			as	'_ZN4RingC1Em'
+public	Constructor				as	'List_InitList'
+public	Constructor				as	'Ring_InitRing'
+public	Constructor				as	'_ZN4ListC1Em'
+public	Constructor				as	'_ZN4RingC1Em'
 
 ;******************************************************************************;
 ;       Copy constructor                                                       ;
 ;******************************************************************************;
-public	CopyConstructorList		as	'List_CopyList'
-public	CopyConstructorRing		as	'Ring_CopyRing'
-public	CopyConstructorList		as	'_ZN4ListC1ERKS_'
-public	CopyConstructorRing		as	'_ZN4RingC1ERKS_'
+public	CopyConstructor			as	'List_CopyList'
+public	CopyConstructor			as	'Ring_CopyRing'
+public	CopyConstructor			as	'_ZN4ListC1ERKS_'
+public	CopyConstructor			as	'_ZN4RingC1ERKS_'
 
 ;******************************************************************************;
 ;       Destructor                                                             ;
 ;******************************************************************************;
-public	DestructorList			as	'List_FreeList'
-public	DestructorRing			as	'Ring_FreeRing'
-public	DestructorList			as	'_ZN4ListD1Ev'
-public	DestructorRing			as	'_ZN4RingD1Ev'
+public	Destructor				as	'List_FreeList'
+public	Destructor				as	'Ring_FreeRing'
+public	Destructor				as	'_ZN4ListD1Ev'
+public	Destructor				as	'_ZN4RingD1Ev'
+
+;******************************************************************************;
+;       Access predicates                                                      ;
+;******************************************************************************;
+
+; Lock operations
+public	LockReadings			as	'List_LockReadings'
+public	LockReadings			as	'Ring_LockReadings'
+public	LockWritings			as	'List_LockWritings'
+public	LockWritings			as	'Ring_LockWritings'
+public	LockReadings			as	'_ZN4List12LockReadingsEb'
+public	LockReadings			as	'_ZN4Ring12LockReadingsEb'
+public	LockWritings			as	'_ZN4List12LockWritingsEb'
+public	LockWritings			as	'_ZN4Ring12LockWritingsEb'
+
+; Release operations
+public	AllowReadings			as	'List_AllowReadings'
+public	AllowReadings			as	'Ring_AllowReadings'
+public	AllowWritings			as	'List_AllowWritings'
+public	AllowWritings			as	'Ring_AllowWritings'
+public	AllowReadings			as	'_ZN4List13AllowReadingsEv'
+public	AllowReadings			as	'_ZN4Ring13AllowReadingsEv'
+public	AllowWritings			as	'_ZN4List13AllowWritingsEv'
+public	AllowWritings			as	'_ZN4Ring13AllowWritingsEv'
 
 ;******************************************************************************;
 ;       Copying elements                                                       ;
@@ -821,10 +845,11 @@ ARRAY		= 0 * 8							; Offset of array pointer
 CAPACITY	= 1 * 8							; Offset of object capacity field
 SIZE		= 2 * 8							; Offset of object size field
 POOL		= 3 * 8							; Offset of pool free node field
-FWD			= 4 * 8							; Offset of forward iterator field
-BWD			= 5 * 8							; Offset of backward iterator field
-HEAD		= 6 * 8							; Offset of head pointer field
-TAIL		= 7 * 8							; Offset of tail pointer field
+HEAD		= 4 * 8							; Offset of head pointer field
+TAIL		= 5 * 8							; Offset of tail pointer field
+FWD			= 6 * 8							; Offset of forward iterator field
+BWD			= 7 * 8							; Offset of backward iterator field
+FUTEX		= 8 * 8							; Offset of futex field
 
 ;==============================================================================;
 ;       Offsets inside node                                                    ;
@@ -1012,8 +1037,7 @@ vmask	= not smask							; mask for vector loop count
 ;******************************************************************************;
 ;       Constructor                                                            ;
 ;******************************************************************************;
-macro	CONSTRUCTOR		ring
-{
+Constructor:
 ;---[Parameters]---------------------------
 this	equ		rdi							; pointer to list/ring object
 cap		equ		rsi							; object capacity
@@ -1050,12 +1074,11 @@ space	= 3 * 8								; stack size required by the procedure
 		mov		[this + CAPACITY], cap		; this.capacity = cap
 		mov		qword [this + SIZE], 0		; this.size = 0
 		mov		qword [this + POOL], 0		; this.pool = 0
+		mov		qword [this + HEAD], EMPTY	; this.head = EMPTY
+		mov		qword [this + TAIL], EMPTY	; this.tail = EMPTY
 		mov		qword [this + FWD], EMPTY	; this.fwd = EMPTY
 		mov		qword [this + BWD], EMPTY	; this.bwd = EMPTY
-		mov		qword [this + HEAD], EMPTY	; this.head = EMPTY
-if ~ring
-		mov		qword [this + TAIL], EMPTY	; this.tail = EMPTY
-end if
+		mov		qword [this + FUTEX], 0		; this.futex = 0
 		mov		param4, EMPTY
 		mov		param3, cap
 		sub		param3, NSIZE
@@ -1068,23 +1091,18 @@ end if
 		mov		qword [this + CAPACITY], 0	; this.capacity = 0
 		mov		qword [this + SIZE], 0		; this.size = 0
 		mov		qword [this + POOL], EMPTY	; this.pool = EMPTY
+		mov		qword [this + HEAD], EMPTY	; this.head = EMPTY
+		mov		qword [this + TAIL], EMPTY	; this.tail = EMPTY
 		mov		qword [this + FWD], EMPTY	; this.fwd = EMPTY
 		mov		qword [this + BWD], EMPTY	; this.bwd = EMPTY
-		mov		qword [this + HEAD], EMPTY	; this.head = EMPTY
-if ~ring
-		mov		qword [this + TAIL], EMPTY	; this.tail = EMPTY
-end if
+		mov		qword [this + FUTEX], 0		; this.futex = 0
 		add		stack, space				; restoring back the stack pointer
 		ret
-}
-ConstructorList:	CONSTRUCTOR	0
-ConstructorRing:	CONSTRUCTOR	1
 
 ;******************************************************************************;
 ;       Copy constructor                                                       ;
 ;******************************************************************************;
-macro	COPY_CONSTRUCTOR	ring
-{
+CopyConstructor:
 ;---[Parameters]---------------------------
 this	equ		rdi							; pointer to target list/ring object
 source	equ		rsi							; pointer to source list/ring object
@@ -1124,16 +1142,15 @@ space	= 3 * 8								; stack size required by the procedure
 		mov		[this + SIZE], temp			; this.size = source.size
 		mov		temp, [source + POOL]
 		mov		[this + POOL], temp			; this.pool = source.pool
+		mov		temp, [source + HEAD]
+		mov		[this + HEAD], temp			; this.head = source.head
+		mov		temp, [source + TAIL]
+		mov		[this + TAIL], temp			; this.tail = source.tail
 		mov		temp, [source + FWD]
 		mov		[this + FWD], temp			; this.fwd = source.fwd
 		mov		temp, [source + BWD]
 		mov		[this + BWD], temp			; this.bwd = source.bwd
-		mov		temp, [source + HEAD]
-		mov		[this + HEAD], temp			; this.head = source.head
-if ~ring
-		mov		temp, [source + TAIL]
-		mov		[this + TAIL], temp			; this.tail = source.tail
-end if
+		mov		qword [this + FUTEX], 0		; this.futex = 0
 ;---[Copy content of nodes]----------------
 		mov		param3, [source + CAPACITY]
 		mov		param2, [source + ARRAY]
@@ -1148,23 +1165,18 @@ end if
 		mov		qword [this + CAPACITY], 0	; this.capacity = 0
 		mov		qword [this + SIZE], 0		; this.size = 0
 		mov		qword [this + POOL], EMPTY	; this.pool = EMPTY
+		mov		qword [this + HEAD], EMPTY	; this.head = EMPTY
+		mov		qword [this + TAIL], EMPTY	; this.tail = EMPTY
 		mov		qword [this + FWD], EMPTY	; this.fwd = EMPTY
 		mov		qword [this + BWD], EMPTY	; this.bwd = EMPTY
-		mov		qword [this + HEAD], EMPTY	; this.head = EMPTY
-if ~ring
-		mov		qword [this + TAIL], EMPTY	; this.tail = EMPTY
-end if
+		mov		qword [this + FUTEX], 0		; this.futex = 0
 .exit:	add		stack, space				; restoring back the stack pointer
 		ret
-}
-CopyConstructorList:	COPY_CONSTRUCTOR	0
-CopyConstructorRing:	COPY_CONSTRUCTOR	1
 
 ;******************************************************************************;
 ;       Destructor                                                             ;
 ;******************************************************************************;
-macro	DESTRUCTOR	ring
-{
+Destructor:
 ;---[Parameters]---------------------------
 this	equ		rdi							; pointer to list/ring object
 ;---[Internal variables]-------------------
@@ -1178,23 +1190,31 @@ space	= 1 * 8								; stack size required by the procedure
 		mov		sc_prm1, [this + ARRAY]
 		sub		sc_prm1, NSIZE
 		mov		sc_num, SYSCALL_MUNMAP
-		syscall								; munmap (array - 1, capacity)
+		syscall								; syscall munmap (array - 1, capacity)
 		mov		this, [s_this]				; get "this" variable from the stack
 		mov		qword [this + ARRAY], 0		; this.array = NULL
 		mov		qword [this + CAPACITY], 0	; this.capacity = 0
 		mov		qword [this + SIZE], 0		; this.size = 0
 		mov		qword [this + POOL], EMPTY	; this.pool = EMPTY
+		mov		qword [this + HEAD], EMPTY	; this.head = EMPTY
+		mov		qword [this + TAIL], EMPTY	; this.tail = EMPTY
 		mov		qword [this + FWD], EMPTY	; this.fwd = EMPTY
 		mov		qword [this + BWD], EMPTY	; this.bwd = EMPTY
-		mov		qword [this + HEAD], EMPTY	; this.head = EMPTY
-if ~ring
-		mov		qword [this + TAIL], EMPTY	; this.tail = EMPTY
-end if
+		mov		qword [this + FUTEX], 0		; this.futex = 0
 		add		stack, space				; restoring back the stack pointer
 		ret
-}
-DestructorList:	DESTRUCTOR	0
-DestructorRing:	DESTRUCTOR	1
+
+;******************************************************************************;
+;       Access predicates                                                      ;
+;******************************************************************************;
+
+; Lock operations
+LockReadings:	WRITE_LOCK
+LockWritings:	READ_LOCK
+
+; Release operations
+AllowReadings:	WRITE_RELEASE
+AllowWritings:	READ_RELEASE
 
 ;******************************************************************************;
 ;       Copying elements                                                       ;
@@ -1238,19 +1258,23 @@ dir		= FDIR								; direction of iteration
 end if
 ;------------------------------------------
 		sub		stack, space				; reserving stack size for local vars
+;---[Check access mode]--------------------
+		cmp		dword [this + FUTEX], 0		; if read only code section called this
+		jg		.error						; function, then go to error branch
+;---[Prevent copying to itself]------------
 		cmp		this, source				; if (this == source)
 		je		.error						;     then go to error branch
 ;---[Check target iterator]----------------
 if check
-		cmp		qword [this + offst1], EMPTY; if (iter == EMPTY)
-		je		.error						;     then go to error branch
+		cmp		qword [this + offst1], EMPTY; if (iter <= EMPTY)
+		jle		.error						;     then go to error branch
 end if
 ;---[Check source iterator]----------------
 		mov		array, [source + ARRAY]		; get pointer to array of nodes
 		mov		size, [source + SIZE]		; get source object size
 		mov		iter, [source + offst1]		; get source iterator value
-		cmp		iter, EMPTY					; if (iter == EMPTY)
-		je		.error						;     then go to error branch
+		cmp		iter, EMPTY					; if (iter <= EMPTY)
+		jle		.error						;     then go to error branch
 ;---[Correct count]------------------------
 		shl		count, KSCALE
 		cmp		count, size					; if (count > size)
@@ -1273,8 +1297,8 @@ if ~ring | rev
 		mov		source, [s_src]				; get "source" variable from the stack
 		mov		array, [s_array]			; get "array" variable from the stack
 		mov		iter, [s_iter]				; get "iter" variable from the stack
-		cmp		result, EMPTY				; if (result == EMPTY)
-		je		.corr						;     then correct the iterator
+		cmp		result, EMPTY				; if (result <= EMPTY)
+		jle		.corr						;     then correct the iterator
 .cback:	mov		count, [s_count]			; get "count" variable from the stack
 end if
 if rev
@@ -1778,7 +1802,7 @@ SplitRing:	SPLIT	1
 ;==============================================================================;
 ;       Insert element into list                                               ;
 ;==============================================================================;
-macro	INSERT_CORE	InsFunc, SplitFunc, val, ring
+macro	INSERT_CORE	InsFunc, SplitFunc, val
 {
 ;---[Parameters]---------------------------
 this	equ		rdi							; pointer to list/ring object
@@ -1801,8 +1825,8 @@ nsize	equ		result						; node size
 		and		index, iter					; index = iter & IMASK
 		and		nsize, [array + node + FDIR]; nsize = array[node].fdir & IMASK
 ;---[Check list properties]----------------
-		cmp		node, EMPTY					; if (node == EMPTY)
-		je		.init						;     then init list
+		cmp		node, EMPTY					; if (node <= EMPTY)
+		jle		.init						;     then init list
 		cmp		nsize, NMAX					; if (nsize == NMAX)
 		je		.split						;     then split the node
 ;---[Insert into node branch]--------------
@@ -1818,9 +1842,7 @@ nsize	equ		result						; node size
 		mov		result, [array + nnode + FDIR]
 		mov		[this + POOL], result		; this.pool = array[nnode].fdir
 		mov		[this + HEAD], nnode		; update head iterator
-if ~ring
 		mov		[this + TAIL], nnode		; update tail iterator
-end if
 		mov		result, val
 		add		result, KSIZE
 		mov		qword [array + nnode + FDIR], result
@@ -1829,8 +1851,8 @@ end if
 		mov		status, 1					; return true
 		ret
 }
-InsertCoreList:	INSERT_CORE	InsertList, SplitList, EMPTY, 0
-InsertCoreRing:	INSERT_CORE	InsertRing, SplitRing, nnode, 1
+InsertCoreList:	INSERT_CORE	InsertList, SplitList, EMPTY
+InsertCoreRing:	INSERT_CORE	InsertRing, SplitRing, nnode
 
 ;==============================================================================;
 ;       Insertion of element                                                   ;
@@ -1848,9 +1870,12 @@ stack	equ		rsp							; stack pointer
 s_this	equ		stack + 0 * 8				; stack position of "this" variable
 s_data	equ		stack + 1 * 8				; stack position of "data" variable
 space	= 3 * 8								; stack size required by the procedure
-;------------------------------------------
-		cmp		qword [this + POOL], EMPTY	; if (this.pool == EMPTY)
-		je		.ext						;     then try to extend object capacity
+;---[Check access mode]--------------------
+		cmp		dword [this + FUTEX], 0		; if read only code section called this
+		jg		.error						; function, then go to error branch
+;---[Check pool for free nodes]------------
+		cmp		qword [this + POOL], EMPTY	; if (this.pool <= EMPTY)
+		jle		.ext						;     then try to extend object capacity
 ;---[Normal execution branch]--------------
 .back:	mov		iter, [this + offst]		; get iterator value
 		movdqu	value, [data]				; value = data[0]
@@ -1866,9 +1891,11 @@ space	= 3 * 8								; stack size required by the procedure
 		mov		this, [s_this]				; get "this" variable from the stack
 		mov		data, [s_data]				; get "data" variable from the stack
 		add		stack, space				; restoring back the stack pointer
-		test	status, status
-		jnz		.back						; if (status), then go back
-		ret									;              else return false
+		test	status, status				; if (status)
+		jnz		.back						;     then go back
+;---[Error branch]-------------------------
+.error:	xor		status, status				; return false
+		ret
 }
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 macro	INSERT2		InsertCore, offst, shift
@@ -1884,13 +1911,16 @@ stack	equ		rsp							; stack pointer
 s_this	equ		stack + 0 * 8				; stack position of "this" variable
 s_data	equ		stack + 1 * 8				; stack position of "data" variable
 space	= 3 * 8								; stack size required by the procedure
-;------------------------------------------
-		cmp		qword [this + POOL], EMPTY	; if (this.pool == EMPTY)
-		je		.ext						;     then try to extend object capacity
+;---[Check access mode]--------------------
+		cmp		dword [this + FUTEX], 0		; if read only code section called this
+		jg		.error						; function, then go to error branch
+;---[Check pool for free nodes]------------
+		cmp		qword [this + POOL], EMPTY	; if (this.pool <= EMPTY)
+		jle		.ext						;     then try to extend object capacity
 ;---[Check iterator position]--------------
 .back:	mov		iter, [this + offst]		; get iterator value
-		cmp		iter, EMPTY					; if (iter == EMPTY)
-		je		.error						;     then go to error branch
+		cmp		iter, EMPTY					; if (iter <= EMPTY)
+		jle		.error						;     then go to error branch
 ;---[Normal execution branch]--------------
 		movdqu	value, [data]				; value = data[0]
 		lea		param2, [iter + shift]
@@ -1905,9 +1935,8 @@ space	= 3 * 8								; stack size required by the procedure
 		mov		this, [s_this]				; get "this" variable from the stack
 		mov		data, [s_data]				; get "data" variable from the stack
 		add		stack, space				; restoring back the stack pointer
-		test	status, status
-		jnz		.back						; if (status), then go back
-		ret									;              else return false
+		test	status, status				; if (status)
+		jnz		.back						;     then go back
 ;---[Error branch]-------------------------
 .error:	xor		status, status				; return false
 		ret
@@ -2394,8 +2423,9 @@ space	= 5 * 8								; stack size required by the procedure
 		and		lsize, [array + lnode + FDIR]
 		and		rsize, [array + rnode + FDIR]
 		and		next, [array + rnode + FDIR]
+		mov		[array + next + BDIR], lnode
 		add		next, NMAX
-		mov		qword [array + lnode + FDIR], next
+		mov		[array + lnode + FDIR], next
 		add		lnode, lsize
 		lea		param1, [array + lnode + NDATA]
 		lea		param2, [array + rnode + NDATA]
@@ -2536,9 +2566,9 @@ size	equ		rsize						; object size
 		mov		rnode, NMASK				; load node mask
 		and		rnode, [array + node + FDIR]; rnode = array[node].fdir & NMASK
 		mov		lnode, [array + node + BDIR]; lnode = array[node].bdir
-		cmp		lnode, EMPTY				; if (lnode == EMPTY)
-		je		.else						;     then go to else branch
-;---[if lnode != EMPTY]--------------------
+		cmp		lnode, EMPTY				; if (lnode <= EMPTY)
+		jle		.else						;     then go to else branch
+;---[if lnode > EMPTY]---------------------
 		mov		lsize, IMASK				; load index mask
 		and		lsize, [array + lnode + FDIR]
 		sub		lsize, KSIZE				; lsize = (array[lnode].fdir & IMASK) - KSIZE
@@ -2591,10 +2621,13 @@ status	equ		al							; operation status
 array	equ		rdx							; pointer to array of nodes
 iter	equ		rcx							; iterator value
 temp	equ		xmm0						; temporary register
+;---[Check access mode]--------------------
+		cmp		dword [this + FUTEX], 0		; if read only code section called this
+		jg		.error						; function, then go to error branch
 ;---[Check iterator]-----------------------
 		mov		iter, [this + offst]		; get iterator value
-		cmp		iter, EMPTY					; if (iter == EMPTY)
-		je		.error						;     then go to error branch
+		cmp		iter, EMPTY					; if (iter <= EMPTY)
+		jle		.error						;     then go to error branch
 ;---[Normal execution branch]--------------
 		mov		array, [this + ARRAY]		; get pointer to array of nodes
 		movdqa	temp, [array + iter + NDATA]
@@ -2634,16 +2667,22 @@ status	equ		al							; operation status
 array	equ		r8							; pointer to array of nodes
 iter	equ		r9							; iterator value
 temp	equ		xmm0						; temporary register
+;---[Check access mode]--------------------
+		cmp		dword [this + FUTEX], 0		; if read only code section called this
+		jg		.error						; function, then go to error branch
 ;---[Check iterator]-----------------------
 		mov		array, [this + ARRAY]		; get pointer to array of nodes
 		mov		iter, [this + offst]		; get iterator value
-		cmp		iter, EMPTY					; if (iter == EMPTY)
-		setne	status						;     return false
-		je		.exit
+		cmp		iter, EMPTY					; if (iter <= EMPTY)
+		jle		.error						;     then go to error branch
 ;---[Normal execution branch]--------------
 		movdqu	temp, [data]
 		movdqa	[array + iter + NDATA], temp; array[iter].data = data[0]
-.exit:	ret									; return true
+		mov		result, 1					; return true
+		ret
+;---[Error branch]-------------------------
+.error:	xor		status, status				; return false
+		ret
 }
 SetHead:	SET_ELEMENT		HEAD
 SetTail:	SET_ELEMENT		TAIL
@@ -2668,9 +2707,9 @@ temp	equ		xmm0						; temporary register
 if ~ext
 		mov		iter, [this + offst]		; get iterator value
 end if
-		cmp		iter, EMPTY					; if (iter == EMPTY)
-		setne	status						;     return false
-		je		.exit
+		cmp		iter, EMPTY					; if (iter <= EMPTY)
+		setg	status						;     return false
+		jle		.exit
 ;---[Normal execution branch]--------------
 		movdqa	temp, [array + iter + NDATA]
 		movdqu	[data], temp				; data[0] = array[iter].data
@@ -2696,18 +2735,24 @@ status	equ		al							; operation status
 array	equ		r8							; pointer to array of nodes
 iter	equ		r9							; iterator value
 temp	equ		xmm0						; temporary register
+;---[Check access mode]--------------------
+		cmp		dword [this + FUTEX], 0		; if read only code section called this
+		jg		.error						; function, then go to error branch
 ;---[Check iterator]-----------------------
 		mov		array, [this + ARRAY]		; get pointer to array of nodes
 		mov		iter, [this + offst]		; get iterator value
-		cmp		iter, EMPTY					; if (iter == EMPTY)
-		setne	status						;     return false
-		je		.exit
+		cmp		iter, EMPTY					; if (iter <= EMPTY)
+		jle		.error						;     then go to error branch
 ;---[Normal execution branch]--------------
 		movdqa	temp, [array + iter + NDATA]
 		movdqu	[odata], temp				; odata[0] = array[iter].data
 		movdqu	temp, [ndata]
 		movdqa	[array + iter + NDATA], temp; array[iter].data = ndata[0]
-.exit:	ret									; return true
+		mov		result, 1					; return true
+		ret
+;---[Error branch]-------------------------
+.error:	xor		status, status				; return false
+		ret
 }
 ReplaceHead:	REPLACE_ELEMENT		HEAD
 ReplaceTail:	REPLACE_ELEMENT		TAIL
@@ -2755,10 +2800,13 @@ end if
 ;------------------------------------------
 		sub		stack, space				; reserving stack size for local vars
 		mov		array, [this + ARRAY]		; get pointer to array of nodes
+;---[Check access mode]--------------------
+		cmp		dword [this + FUTEX], 0		; if read only code section called this
+		jg		.error						; function, then go to error branch
 ;---[Check iterator]-----------------------
 		mov		iter1, [this + offst1]		; get iterator value
-		cmp		iter1, EMPTY				; if (iter1 == EMPTY)
-		je		.error						;     then go to error branch
+		cmp		iter1, EMPTY				; if (iter1 <= EMPTY)
+		jle		.error						;     then go to error branch
 ;---[Correct count]------------------------
 		shl		count, KSCALE
 		mov		size, [this + SIZE]			; get object size
@@ -2781,8 +2829,8 @@ end if
 		mov		array, [s_array]			; get "array" variable from the stack
 		mov		iter1, [s_iter]				; get "iter1" variable from the stack
 if ~ring
-		cmp		result, EMPTY				; if (result == EMPTY)
-		je		.corr						;     then correct the iterator
+		cmp		result, EMPTY				; if (result <= EMPTY)
+		jle		.corr						;     then correct the iterator
 end if
 .back:	mov		iter2, result				; iter2 = result
 		shr		count, KSCALE + 1			; count >>= 1
@@ -2906,15 +2954,17 @@ fwd		equ		rcx							; forward iterator
 bwd		equ		rdx							; forward iterator
 temp0	equ		xmm0						; temporary register #1
 temp1	equ		xmm1						; temporary register #2
-;------------------------------------------
+;---[Check access mode]--------------------
+		cmp		dword [this + FUTEX], 0		; if read only code section called this
+		jg		.error						; function, then go to error branch
+;---[Check forward iterator]---------------
 		mov		fwd, [this + FWD]			; get fwd iterator value
-		cmp		fwd, EMPTY					; if (fwd == EMPTY)
-		setne	status						;     then return false
-		je		.exit
+		cmp		fwd, EMPTY					; if (fwd <= EMPTY)
+		jle		.error						;     then go to error branch
+;---[Check backward iterator]--------------
 		mov		bwd, [this + BWD]			; get bwd iterator value
-		cmp		bwd, EMPTY					; if (bwd == EMPTY)
-		setne	status						;     then return false
-		je		.exit
+		cmp		bwd, EMPTY					; if (bwd <= EMPTY)
+		jle		.error						;     then go to error branch
 ;---[Normal execution branch]--------------
 		add		fwd, [this + ARRAY]			; fwd += array
 		add		bwd, [this + ARRAY]			; bwd += array
@@ -2922,7 +2972,11 @@ temp1	equ		xmm1						; temporary register #2
 		movdqa	temp1, [bwd + NDATA]		; temp1 = array[bwd].data
 		movdqa	[fwd + NDATA], temp1		; array[fwd].data = temp1
 		movdqa	[bwd + NDATA], temp0		; array[bwd].data = temp0
-.exit:	ret
+		mov		result, 1					; return true
+		ret
+;---[Error branch]-------------------------
+.error:	xor		status, status				; return false
+		ret
 
 ;******************************************************************************;
 ;       Manipulation with forward iterator                                     ;
@@ -2953,8 +3007,8 @@ nsize	equ		rcx							; node size
 		and		node, NMASK					; node = array[node].fdir & NMASK
 		xor		index, index				; index = 0
 		lea		iter, [node + index]
-		cmp		node, EMPTY					; if (node == EMPTY)
-		je		.error						;     return EMPTY
+		cmp		node, EMPTY					; if (node <= EMPTY)
+		jle		.error						;     return EMPTY
 		test	pos, pos
 		jnz		.loop						; do while (pos != 0)
 ;---[End of iteration loop]----------------
@@ -2988,8 +3042,8 @@ index	equ		r9							; element index
 		and		index, IMASK
 		sub		index, KSIZE				; index = (array[node].fdir & NMASK) - KSIZE
 		lea		iter, [node + index]
-		cmp		node, EMPTY					; if (node == EMPTY)
-		je		.error						;     return EMPTY
+		cmp		node, EMPTY					; if (node <= EMPTY)
+		jle		.error						;     return EMPTY
 		test	pos, pos
 		jnz		.loop						; do while (pos != 0)
 ;---[End of iteration loop]----------------
@@ -3010,6 +3064,11 @@ array	equ		r8							; pointer to array of nodes
 next	equ		r9							; next node
 nsize	equ		r10							; node size
 temp	equ		rdx							; temporary register
+;---[Check access mode]--------------------
+if ~ext
+		cmp		dword [this + FUTEX], 0		; if read only code section called this
+		jg		.exit						; function, then go to exit
+end if
 ;---[Check index]--------------------------
 		shl		index, KSCALE
 		cmp		[this + SIZE], index		; if (size <= index)
@@ -3024,7 +3083,7 @@ temp	equ		rdx							; temporary register
 		and		next, temp					; next = array[node].fdir & NMASK
 		and		nsize, temp					; nsize = array[node].fdir & IMASK
 		sub		index, nsize				; if (index < nsize)
-		jb		.exit						;     then go to exit
+		jb		.skip						;     then skip the loop
 ;---[Search loop]--------------------------
 .loop:	mov		node, next					; node = next
 		mov		temp, [array + next + FDIR]	; temp = array[next].fdir
@@ -3035,12 +3094,12 @@ temp	equ		rdx							; temporary register
 		sub		index, nsize
 		jae		.loop						; do while (index >= nsize)
 ;---[End of search loop]-------------------
-.exit:	add		index, nsize
+.skip:	add		index, nsize
 		add		node, index					; iter = node + index
 if ~ext
 		mov		[this + offst], node		; update iterator position
 end if
-		ret
+.exit:	ret
 ;---[Error branch]-------------------------
 .error:	mov		node, EMPTY					; return EMPTY
 if ~ext
@@ -3058,9 +3117,11 @@ result	equ		rax							; result register
 ;------------------------------------------
 		mov		result, [this + source]
 if ~ext
+		cmp		dword [this + FUTEX], 0		; if read only code section called this
+		jg		.exit						; function, then go to exit
 		mov		[this + target], result		; set target iterator by source value
 end if
-		ret
+.exit:	ret
 }
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 macro	GET_POS		offst, ext
@@ -3078,8 +3139,8 @@ temp	equ		rdx							; temporary register
 if ~ext
 		mov		iter, [this + offst]		; get iterator value
 end if
-		cmp		iter, EMPTY					; if (iter == EMPTY)
-		je		.error						;     then go to error branch
+		cmp		iter, EMPTY					; if (iter <= EMPTY)
+		jle		.error						;     then go to error branch
 ;---[Normal execution branch]--------------
 		mov		array, [this + ARRAY]		; get pointer to array of nodes
 		mov		node, NMASK					; load node mask
@@ -3087,8 +3148,8 @@ end if
 		and		node, iter					; node = iter & NMASK
 		and		index, iter					; index = iter & IMASK
 		mov		prev, [array + node + BDIR]	; prev = array[node].bdir
-		cmp		prev, EMPTY					; if (prev == EMPTY)
-		je		.exit						;     then go to exit
+		cmp		prev, EMPTY					; if (prev <= EMPTY)
+		jle		.exit						;     then go to exit
 ;---[Position calculation loop]------------
 .loop:	mov		node, prev					; node = prev
 		mov		temp, [array + prev + FDIR]
@@ -3096,7 +3157,7 @@ end if
 		add		index, temp					; index += array[prev].fdir & IMASK
 		mov		prev, [array + prev + BDIR]	; prev = array[prev].bdir
 		cmp		prev, EMPTY
-		jne		.loop						; do while (prev != EMPTY)
+		jg		.loop						; do while (prev > EMPTY)
 ;---[End of position calculation loop]-----
 .exit:	shr		index, KSCALE				; return index
 		ret
@@ -3120,14 +3181,19 @@ s_ptr	equ		stack + 1 * 8				; stack position of "ptr" variable
 space	= 3 * 8								; stack size required by the procedure
 ;------------------------------------------
 		sub		stack, space				; reserving stack size for local vars
+;---[Check access mode]--------------------
+if ~ext
+		cmp		dword [this + FUTEX], 0		; if read only code section called this
+		jg		.error						; function, then go to error branch
+end if
 ;---[Check iterator]-----------------------
 if ~ext
 		mov		iter, [this + offst]		; get iterator value
 else
 		mov		iter, [ptr]					; get iterator value
 end if
-		cmp		iter, EMPTY					; if (iter == EMPTY)
-		je		.error						;     then go to error branch
+		cmp		iter, EMPTY					; if (iter <= EMPTY)
+		jle		.error						;     then go to error branch
 ;---[Check position]-----------------------
 		shl		pos, KSCALE					; if (pos == 0)
 		jz		.exit						;     then go to exit
@@ -3145,8 +3211,8 @@ if ~ext
 else
 		mov		[ptr], iter					; update iterator position
 end if
-		cmp		iter, EMPTY					; if (iter == EMPTY)
-		je		.error						;     then go to error branch
+		cmp		iter, EMPTY					; if (iter <= EMPTY)
+		jle		.error						;     then go to error branch
 ;---[Normal exit branch]-------------------
 .exit:	mov		status, 1					; return true
 		add		stack, space				; restoring back the stack pointer
@@ -3232,12 +3298,15 @@ this	equ		rdi							; pointer to list/ring object
 ;---[Internal variables]-------------------
 fwd		equ		rax							; forward iterator
 bwd		equ		rdx							; forward iterator
-;------------------------------------------
+;---[Check access mode]--------------------
+		cmp		dword [this + FUTEX], 0		; if read only code section called this
+		jg		.exit						; function, then go to exit
+;---[Swap iterators]-----------------------
 		mov		fwd, [this + FWD]			; get forward iterator value
 		mov		bwd, [this + BWD]			; get backward iterator value
 		mov		[this + FWD], bwd			; set forward iterator value
 		mov		[this + BWD], fwd			; set backward iterator value
-		ret
+.exit:	ret
 
 ;******************************************************************************;
 ;       Minimum and maximum value                                              ;
@@ -3282,14 +3351,19 @@ dir		= FDIR								; direction of iteration
 end if
 ;------------------------------------------
 		sub		stack, space				; reserving stack size for local vars
+;---[Check access mode]--------------------
+if ~ext
+		cmp		dword [this + FUTEX], 0		; if read only code section called this
+		jg		.ntfnd						; function, then return false
+end if
 ;---[Check iterator]-----------------------
 if ~ext
 		mov		iter, [this + offst]		; get iterator value
 else
 		mov		iter, [ptr]					; get iterator value
 end if
-		cmp		iter, EMPTY					; if (iter == EMPTY)
-		je		.ntfnd						;     return false
+		cmp		iter, EMPTY					; if (iter <= EMPTY)
+		jle		.ntfnd						;     return false
 ;---[Correct count]------------------------
 		shl		count, KSCALE
 		mov		size, [this + SIZE]			; get object size
@@ -3367,8 +3441,8 @@ end if
 ;---[Go to another node branch]------------
 .next:	mov		next, NMASK					; load node mask
 		and		next, [array + node + dir]	; next = array[node].dir & NMASK
-		cmp		next, EMPTY					; if (next == EMPTY)
-		je		.exit						;     then go to exit
+		cmp		next, EMPTY					; if (next <= EMPTY)
+		jle		.exit						;     then go to exit
 		mov		size, IMASK					; load index mask
 		and		size, [array + next + FDIR]
 		lea		size, [size + next - KSIZE]	; size = next + (array[next].fdir & IMASK) - KSIZE
@@ -3439,14 +3513,19 @@ dir		= FDIR								; direction of iteration
 end if
 ;------------------------------------------
 		sub		stack, space				; reserving stack size for local vars
+;---[Check access mode]--------------------
+if ~ext
+		cmp		dword [this + FUTEX], 0		; if read only code section called this
+		jg		.ntfnd						; function, then return false
+end if
 ;---[Check iterator]-----------------------
 if ~ext
 		mov		iter, [this + offst]		; get iterator value
 else
 		mov		iter, [ptr]					; get iterator value
 end if
-		cmp		iter, EMPTY					; if (iter == EMPTY)
-		je		.ntfnd						;     return false
+		cmp		iter, EMPTY					; if (iter <= EMPTY)
+		jle		.ntfnd						;     return false
 ;---[Correct count]------------------------
 		shl		count, KSCALE
 		mov		size, [this + SIZE]			; get object size
@@ -3516,8 +3595,8 @@ end if
 ;---[Go to another node branch]------------
 .next:	mov		next, NMASK					; load node mask
 		and		next, [array + node + dir]	; next = array[node].dir & NMASK
-		cmp		next, EMPTY					; if (next == EMPTY)
-		je		.ntfnd						;     return false
+		cmp		next, EMPTY					; if (next <= EMPTY)
+		jle		.ntfnd						;     return false
 		mov		size, IMASK					; load index mask
 		and		size, [array + next + FDIR]
 		lea		size, [size + next - KSIZE]	; size = next + (array[next].fdir & IMASK) - KSIZE
@@ -3579,6 +3658,11 @@ dir		= FDIR								; direction of iteration
 end if
 ;------------------------------------------
 		sub		stack, space				; reserving stack size for local vars
+;---[Check access mode]--------------------
+if ~ext
+		cmp		dword [this + FUTEX], 0		; if read only code section called this
+		jg		.ntfnd						; function, then return false
+end if
 ;---[Check iterator]-----------------------
 if ~ext
 		mov		iter, [this + offst]		; get iterator value
@@ -3586,8 +3670,8 @@ else
 		mov		iter, [s_ptr]
 		mov		iter, [iter]				; get iterator value
 end if
-		cmp		iter, EMPTY					; if (iter == EMPTY)
-		je		.ntfnd						;     return false
+		cmp		iter, EMPTY					; if (iter <= EMPTY)
+		jle		.ntfnd						;     return false
 ;---[Correct count]------------------------
 		shl		count, KSCALE
 		mov		size, [this + SIZE]			; get object size
@@ -3660,8 +3744,8 @@ end if
 ;---[Go to another node branch]------------
 .next:	mov		next, NMASK					; load node mask
 		and		next, [array + node + dir]	; next = array[node].dir & NMASK
-		cmp		next, EMPTY					; if (next == EMPTY)
-		je		.ntfnd						;     return false
+		cmp		next, EMPTY					; if (next <= EMPTY)
+		jle		.ntfnd						;     return false
 		mov		size, IMASK					; load index mask
 		and		size, [array + next + FDIR]
 		lea		size, [size + next - KSIZE]	; size = next + (array[next].fdir & IMASK) - KSIZE
@@ -3769,8 +3853,8 @@ end if
 ;---[Go to another node branch #1]---------
 .next1:	mov		next, NMASK					; load node mask
 		and		next, [array + node + dir]	; next = array[node].dir & NMASK
-		cmp		next, EMPTY					; if (next == EMPTY)
-		je		.ntfnd						;     return false
+		cmp		next, EMPTY					; if (next <= EMPTY)
+		jle		.ntfnd						;     return false
 		mov		size, IMASK					; load index mask
 		and		size, [array + next + FDIR]
 		lea		size, [size + next - KSIZE]	; size = next + (array[next].fdir & IMASK) - KSIZE
@@ -3785,8 +3869,8 @@ end if
 ;---[Go to another node branch #2]---------
 .next2:	mov		next, NMASK					; load node mask
 		and		next, [array + node + dir]	; next = array[node].dir & NMASK
-		cmp		next, EMPTY					; if (next == EMPTY)
-		je		.ntfnd						;     return false
+		cmp		next, EMPTY					; if (next <= EMPTY)
+		jle		.ntfnd						;     return false
 		mov		size, IMASK					; load index mask
 		and		size, [array + next + FDIR]
 		lea		size, [size + next - KSIZE]	; size = next + (array[next].fdir & IMASK) - KSIZE
@@ -3826,15 +3910,20 @@ s_ptr	equ		stack + 2 * 8				; stack position of "ptr" variable
 space	= 3 * 8								; stack size required by the procedure
 ;------------------------------------------
 		sub		stack, space				; reserving stack size for local vars
+;---[Check access mode]--------------------
+if ~ext
+		cmp		dword [this + FUTEX], 0		; if read only code section called this
+		jg		.ntfnd						; function, then return false
+end if
 ;---[Check iterator]-----------------------
 if ~ext
 		mov		iter, [this + offst]		; get iterator value
 else
 		mov		iter, [ptr]					; get iterator value
 end if
-		cmp		iter, EMPTY					; if (iter == EMPTY)
-		je		.ntfnd						;     return false
-;---[Check object size]--------------------
+		cmp		iter, EMPTY					; if (iter <= EMPTY)
+		jle		.ntfnd						;     return false
+;---[Check size]---------------------------
 		mov		size, [this + SIZE]			; get object size
 		sub		size, KSIZE					; if (size <= 1)
 		jbe		.ntfnd						;     return false
@@ -3848,8 +3937,8 @@ end if
 		mov		param2, iter
 		mov		param1, [this + ARRAY]
 		call	CheckFunc					; result = CheckFunc (array, iter, size - 1, func)
-		cmp		result, EMPTY				; if (result == EMPTY)
-		je		.ntfnd						;     return false
+		cmp		result, EMPTY				; if (result <= EMPTY)
+		jle		.ntfnd						;     return false
 ;---[Update iterator value]----------------
 		mov		this, [s_this]				; get "this" variable from the stack
 		mov		data, [s_data]				; get "data" variable from the stack
@@ -3998,8 +4087,8 @@ end if
 ;---[Go to another node branch #1]---------
 .next1:	mov		next, NMASK					; load node mask
 		and		next, [sarray + node + dir]	; next = sarray[node].dir & NMASK
-		cmp		next, EMPTY					; if (next == EMPTY)
-		je		.break						;     return {EMPTY, 0}
+		cmp		next, EMPTY					; if (next <= EMPTY)
+		jle		.break						;     return {EMPTY, 0}
 		mov		size, IMASK					; load index mask
 		and		size, [sarray + next + FDIR]
 		lea		size, [size + next - KSIZE]	; ssize = next + (sarray[next].fdir & IMASK) - KSIZE
@@ -4014,8 +4103,8 @@ end if
 ;---[Go to another node branch #2]---------
 .next2:	mov		next, NMASK					; load node mask
 		and		next, [tarray + node + dir]	; next = tarray[node].dir & NMASK
-		cmp		next, EMPTY					; if (next == EMPTY)
-		je		.break						;     return {EMPTY, 0}
+		cmp		next, EMPTY					; if (next <= EMPTY)
+		jle		.break						;     return {EMPTY, 0}
 		mov		size, IMASK					; load index mask
 		and		size, [tarray + next + FDIR]
 		lea		size, [size + next - KSIZE]	; tsize = next + (tarray[next].fdir & IMASK) - KSIZE
@@ -4055,6 +4144,12 @@ s_siter	equ		stack + 4 * 8				; stack position of "siter" variable
 space	= 3 * 8								; stack size required by the procedure
 ;------------------------------------------
 		sub		stack, space				; reserving stack size for local vars
+;---[Check access mode]--------------------
+if ~ext
+		cmp		dword [this + FUTEX], 0		; if read only code section called this
+		jg		.ntfnd						; function, then return false
+end if
+;---[Prevent comparing with itself]--------
 		cmp		this, source				; if (this == source)
 		je		.ntfnd						;     then return false
 ;---[Check target iterator]----------------
@@ -4063,16 +4158,16 @@ if ~ext
 else
 		mov		titer, [ptr]				; load target iterator value
 end if
-		cmp		titer, EMPTY
-		je		.ntfnd						; if (this.iter == EMPTY), then return false
+		cmp		titer, EMPTY				; if (this.iter <= EMPTY)
+		jle		.ntfnd						;     then return false
 ;---[Check source iterator]----------------
 if ~ext
 		mov		siter, [source + offst]		; load source iterator value
 else
 		mov		siter, [s_siter]			; get "siter" variable from the stack
 end if
-		cmp		siter, EMPTY
-		je		.ntfnd						; if (source.iter == EMPTY), then return false
+		cmp		siter, EMPTY				; if (source.iter <= EMPTY)
+		jle		.ntfnd						;     then return false
 ;---[Correct count]------------------------
 		shl		count, KSCALE
 		mov		size, [source + SIZE]		; get source object size
@@ -4095,8 +4190,8 @@ end if
 		mov		param3, titer
 		mov		param1, [this + ARRAY]
 		call	DiffFunc					; result = DiffFunc (this.array, source.array, titer, siter, count, func)
-		cmp		result, EMPTY				; if (result == EMPTY)
-		je		.ntfnd						;     return false
+		cmp		result, EMPTY				; if (result <= EMPTY)
+		jle		.ntfnd						;     return false
 ;---[Update iterator value]----------------
 		mov		this, [s_this]				; get "this" variable from the stack
 		mov		data, [s_data]				; get "data" variable from the stack
@@ -4167,8 +4262,8 @@ end if
 if ~ext
 		mov		iter, [this + offst]		; get iterator value
 end if
-		cmp		iter, EMPTY					; if (iter == EMPTY)
-		je		.exit						;     then go to exit
+		cmp		iter, EMPTY					; if (iter <= EMPTY)
+		jle		.exit						;     then go to exit
 ;---[Correct count]------------------------
 		shl		count, KSCALE
 		mov		size, [this + SIZE]			; get object size
@@ -4223,8 +4318,8 @@ end if
 ;---[Go to another node branch]------------
 .next:	mov		next, NMASK					; load node mask
 		and		next, [array + node + dir]	; next = array[node].dir & NMASK
-		cmp		next, EMPTY					; if (next == EMPTY)
-		je		.exit						;     then go to exit
+		cmp		next, EMPTY					; if (next <= EMPTY)
+		jle		.exit						;     then go to exit
 		mov		size, IMASK					; load index mask
 		and		size, [array + next + FDIR]
 		lea		size, [size + next - KSIZE]	; size = next + (array[next].fdir & IMASK) - KSIZE
@@ -4286,8 +4381,8 @@ end if
 if ~ext
 		mov		iter, [this + offst]		; get iterator value
 end if
-		cmp		iter, EMPTY					; if (iter == EMPTY)
-		je		.exit						;     then go to exit
+		cmp		iter, EMPTY					; if (iter <= EMPTY)
+		jle		.exit						;     then go to exit
 ;---[Correct count]------------------------
 		shl		count, KSCALE
 		mov		size, [this + SIZE]			; get object size
@@ -4343,8 +4438,8 @@ end if
 ;---[Go to another node branch]------------
 .next:	mov		next, NMASK					; load node mask
 		and		next, [array + node + dir]	; next = array[node].dir & NMASK
-		cmp		next, EMPTY					; if (next == EMPTY)
-		je		.exit						;     then go to exit
+		cmp		next, EMPTY					; if (next <= EMPTY)
+		jle		.exit						;     then go to exit
 		mov		size, IMASK					; load index mask
 		and		size, [array + next + FDIR]
 		lea		size, [size + next - KSIZE]	; size = next + (array[next].fdir & IMASK) - KSIZE
@@ -4760,6 +4855,10 @@ s_size	equ		stack + 2 * 8				; stack position of "size" variable
 space	= 3 * 8								; stack size required by the procedure
 ;------------------------------------------
 		sub		stack, space				; reserving stack size for local vars
+;---[Check access mode]--------------------
+		cmp		dword [this + FUTEX], 0		; if read only code section called this
+		jg		.error						; function, then go to error branch
+;---[Size check]---------------------------
 		mov		array, [this + ARRAY]		; get pointer to array of nodes
 		mov		size, [this + SIZE]			; get object size
 		mov		pool, [this + POOL]			; get pool pointer
@@ -4769,10 +4868,10 @@ space	= 3 * 8								; stack size required by the procedure
 		cmp		size, KSIZE					; if (size <= KSIZE)
 		jbe		.exit						;     then go to exit
 ;---[Check free nodes for sorting]---------
-		cmp		pool, EMPTY					; if (pool == EMPTY)
-		je		.ext						;     then try to extend object capacity
+		cmp		pool, EMPTY					; if (pool <= EMPTY)
+		jle		.ext						;     then try to extend object capacity
 		cmp		qword [array + pool + FDIR], EMPTY
-		je		.ext
+		jle		.ext
 ;---[Normal execution branch]--------------
 .back:	mov		param5, func
 		mov		param4, size
@@ -4783,9 +4882,10 @@ space	= 3 * 8								; stack size required by the procedure
 		mov		this, [s_this]				; get "this" variable from the stack
 		mov		array, [this + ARRAY]		; get pointer to array of nodes
 		mov		[this + HEAD], rhead		; this.head = rhead
-if ring
+		mov		[this + TAIL], rtail		; this.tail = rtail
 		mov		qword [this + FWD], EMPTY	; this.fwd = EMPTY
 		mov		qword [this + BWD], EMPTY	; this.bwd = EMPTY
+if ring
 		and		rhead, NMASK				; resul1 &= NMASK
 		and		rtail, NMASK				; resul2 &= NMASK
 		mov		size, IMASK					; load index mask
@@ -4793,10 +4893,6 @@ if ring
 		add		size, rhead
 		mov		[array + rhead + BDIR], rtail
 		mov		[array + rtail + FDIR], size
-else
-		mov		[this + TAIL], rtail		; this.tail = rtail
-		mov		qword [this + FWD], EMPTY	; this.fwd = EMPTY
-		mov		qword [this + BWD], EMPTY	; this.bwd = EMPTY
 end if
 ;---[Normal exit branch]-------------------
 .exit:	mov		result, [s_size]			; get "size" variable from the stack
@@ -4810,8 +4906,8 @@ end if
 		mov		this, [s_this]				; get "this" variable from the stack
 		mov		func, [s_func]				; get "func" variable from the stack
 		mov		size, [s_size]				; get "size" variable from the stack
-		test	status, status
-		jnz		.back						; if (status), then go back
+		test	status, status				; if (status)
+		jnz		.back						;     then go back
 ;---[Error branch]-------------------------
 .error:	mov		result, ERROR				; return ERROR
 		add		stack, space				; restoring back the stack pointer
@@ -5061,6 +5157,10 @@ s_size	equ		stack + 4 * 8				; stack position of "size" variable
 space	= 5 * 8								; stack size required by the procedure
 ;------------------------------------------
 		sub		stack, space				; reserving stack size for local vars
+;---[Check access mode]--------------------
+		cmp		dword [this + FUTEX], 0		; if read only code section called this
+		jg		.error						; function, then go to error branch
+;---[Prevent merging with itself]----------
 		cmp		this, source				; if (this == source)
 		je		.error						;     then go to error branch
 ;---[Check source object size]-------------
@@ -5094,9 +5194,10 @@ space	= 5 * 8								; stack size required by the procedure
 		mov		array, [this + ARRAY]		; get pointer to array of nodes
 		add		[this + SIZE], size			; this.size += source.size
 		mov		[this + HEAD], rhead		; this.head = rhead
-if ring
+		mov		[this + TAIL], rtail		; this.tail = rtail
 		mov		qword [this + FWD], EMPTY	; this.fwd = EMPTY
 		mov		qword [this + BWD], EMPTY	; this.bwd = EMPTY
+if ring
 		and		rhead, NMASK				; resul1 &= NMASK
 		and		rtail, NMASK				; resul2 &= NMASK
 		mov		size, IMASK					; load index mask
@@ -5104,10 +5205,6 @@ if ring
 		add		size, rhead
 		mov		[array + rhead + BDIR], rtail
 		mov		[array + rtail + FDIR], size
-else
-		mov		[this + TAIL], rtail		; this.tail = rtail
-		mov		qword [this + FWD], EMPTY	; this.fwd = EMPTY
-		mov		qword [this + BWD], EMPTY	; this.bwd = EMPTY
 end if
 ;---[Normal exit branch]-------------------
 .exit:	mov		result, [s_size]			; get "size" variable from the stack
@@ -5314,6 +5411,9 @@ space	= 3 * 8								; stack size required by the procedure
 		mov		[s_this], this				; save "this" variable into the stack
 		mov		[s_src], source				; save "source" variable into the stack
 		mov		[s_func], func				; save "func" variable into the stack
+;---[Check access mode]--------------------
+		cmp		dword [this + FUTEX], 0		; if read only code section called this
+		jg		.error						; function, then go to error branch
 ;---[Check target object size]-------------
 		cmp		qword [this + SIZE], 0		; if (size)
 		jnz		.error						;     then go to error branch
@@ -5337,6 +5437,7 @@ space	= 3 * 8								; stack size required by the procedure
 		mov		this, [s_this]				; get "this" variable from the stack
 		mov		array, [this + ARRAY]		; get pointer to array of nodes
 		mov		[this + HEAD], rhead		; this.head = rhead
+		mov		[this + TAIL], rtail		; this.tail = rtail
 if ring
 		and		rhead, NMASK				; resul1 &= NMASK
 		and		rtail, NMASK				; resul2 &= NMASK
@@ -5345,8 +5446,6 @@ if ring
 		add		size, rhead
 		mov		[array + rhead + BDIR], rtail
 		mov		[array + rtail + FDIR], size
-else
-		mov		[this + TAIL], rtail		; this.tail = rtail
 end if
 ;---[Normal exit branch]-------------------
 .exit:	mov		result, [this + SIZE]
@@ -5405,8 +5504,8 @@ space	= 3 * 8								; stack size required by the procedure
 		mov		param2, [source + ARRAY]
 		mov		param1, [this + ARRAY]
 		call	DiffFwd						; result = DiffFwd (this.array, source.array, this.iter, source.iter, this.size, this.func)
-		cmp		result, EMPTY				; if (result != EMPTY)
-		jne		.exit						;     return status
+		cmp		result, EMPTY				; if (result > EMPTY)
+		jg		.exit						;     return status
 ;---[Compare object size]------------------
 		mov		this, [s_this]				; get "this" variable from the stack
 		mov		source, [s_src]				; get "source" variable from the stack
@@ -5459,13 +5558,13 @@ size	equ		r8							; object size
 		set#c2	status						; and return correct status
 .exit:	ret
 }
-CheckSortAsc:	CHECK	CheckSortAscFwd, be, e
-CheckSortDsc:	CHECK	CheckSortDscFwd, be, e
+CheckSortAsc:	CHECK	CheckSortAscFwd, be, le
+CheckSortDsc:	CHECK	CheckSortDscFwd, be, le
 
 ;==============================================================================;
 ;       Check for duplicate values                                             ;
 ;==============================================================================;
-CheckDup:		CHECK	CheckDupFwd, nbe, ne
+CheckDup:		CHECK	CheckDupFwd, a, g
 
 ;==============================================================================;
 ;       Check for equality                                                     ;
@@ -5495,8 +5594,8 @@ size	equ		rcx							; object size
 		mov		param2, [source + ARRAY]
 		mov		param1, [this + ARRAY]
 		call	DiffFwd						; result = DiffFwd (this.array, source.array, this.iter, source.iter, this.size, func)
-		cmp		result, EMPTY				; if (result == EMPTY)
-.exit:	sete	status						;     return true
+		cmp		result, EMPTY				; if (result <= EMPTY)
+.exit:	setle	status						;     return true
 		ret
 ;---[Not equal branch]---------------------
 .nteql:	xor		status, status				; return false

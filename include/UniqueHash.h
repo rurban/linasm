@@ -28,6 +28,7 @@ private:
 	size_t	pool;		// Index of first free node in the pool
 	size_t	fwd;		// Current position of forward iterator
 	size_t	bwd;		// Current position of backward iterator
+	size_t	futex;		// Container's futex
 	KeyCmp	kfunc;		// Key compare function
 	Hash	hfunc;		// Hash function
 
@@ -47,6 +48,18 @@ UniqueHash (const UniqueHash &source);
 //      Destructor                                                            //
 //****************************************************************************//
 ~UniqueHash (void);
+
+//****************************************************************************//
+//      Access predicates                                                     //
+//****************************************************************************//
+
+// Lock operations
+bool LockReadings (bool wait);
+bool LockWritings (bool wait);
+
+// Release operations
+void AllowReadings (void);
+void AllowWritings (void);
 
 //****************************************************************************//
 //      Insertion of element                                                  //
@@ -193,6 +206,7 @@ struct UniqueHash
 	size_t	pool;		// Index of first free node in the pool
 	size_t	fwd;		// Current position of forward iterator
 	size_t	bwd;		// Current position of backward iterator
+	size_t	futex;		// Container's futex
 	KeyCmp	kfunc;		// Key compare function
 	Hash	hfunc;		// Hash function
 };
@@ -211,6 +225,18 @@ void UniqueHash_CopyUniqueHash (struct UniqueHash *hash, const UniqueHash *sourc
 //      Free hash table structure                                             //
 //****************************************************************************//
 void UniqueHash_FreeUniqueHash (struct UniqueHash *hash);
+
+//****************************************************************************//
+//      Access predicates                                                     //
+//****************************************************************************//
+
+// Lock operations
+bool UniqueHash_LockReadings (struct UniqueHash *hash, bool wait);
+bool UniqueHash_LockWritings (struct UniqueHash *hash, bool wait);
+
+// Release operations
+void UniqueHash_AllowReadings (struct UniqueHash *hash);
+void UniqueHash_AllowWritings (struct UniqueHash *hash);
 
 //****************************************************************************//
 //      Insertion of element                                                  //

@@ -25,6 +25,7 @@ private:
 	void		*array;		// Pointer to array which holds heap data
 	size_t		capacity;	// Capacity of the heap (auto extended if required)
 	size_t		size;		// Current heap size
+	size_t		futex;		// Container's futex
 	KeyCmp		kfunc;		// Key compare function
 	HeapIndex	ifunc;		// Heap index call back function
 
@@ -44,6 +45,18 @@ MaxHeap (const MaxHeap &source);
 //      Destructor                                                            //
 //****************************************************************************//
 ~MaxHeap (void);
+
+//****************************************************************************//
+//      Access predicates                                                     //
+//****************************************************************************//
+
+// Lock operations
+bool LockReadings (bool wait);
+bool LockWritings (bool wait);
+
+// Release operations
+void AllowReadings (void);
+void AllowWritings (void);
 
 //****************************************************************************//
 //      Addition of element                                                   //
@@ -113,6 +126,7 @@ struct MaxHeap
 	void		*array;		// Pointer to array which holds heap data
 	size_t		capacity;	// Capacity of the heap (auto extended if required)
 	size_t		size;		// Current heap size
+	size_t		futex;		// Container's futex
 	KeyCmp		kfunc;		// Key compare function
 	HeapIndex	ifunc;		// Heap index call back function
 };
@@ -131,6 +145,18 @@ void MaxHeap_CopyMaxHeap (struct MaxHeap *heap, const struct MaxHeap *source);
 //      Free heap structure                                                   //
 //****************************************************************************//
 void MaxHeap_FreeMaxHeap (struct MaxHeap *heap);
+
+//****************************************************************************//
+//      Access predicates                                                     //
+//****************************************************************************//
+
+// Lock operations
+bool MaxHeap_LockReadings (struct MaxHeap *heap, bool wait);
+bool MaxHeap_LockWritings (struct MaxHeap *heap, bool wait);
+
+// Release operations
+void MaxHeap_AllowReadings (struct MaxHeap *heap);
+void MaxHeap_AllowWritings (struct MaxHeap *heap);
 
 //****************************************************************************//
 //      Addition of element                                                   //

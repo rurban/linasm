@@ -25,8 +25,10 @@ ERROR			= -1						; Error value
 ;==============================================================================;
 ;       ADT consts                                                             ;
 ;==============================================================================;
-KSCALE		= 4								; Key scale factor
-KSIZE		= 1 shl KSCALE					; Size of key (bytes)
+KSCALE			= 4							; Key scale factor
+KSIZE			= 1 shl KSCALE				; Size of key (bytes)
+FLOCK			= 0x80000000				; Futex exclusive lock value
+SPINS			= 1024						; Count of spinlock iterations
 
 ;==============================================================================;
 ;       flt32_t consts                                                         ;
@@ -222,6 +224,184 @@ shiftl	equ		cl							; low part of shift register
 		mov		temp, min
 		cmp		value, temp					; if (value < min)
 		cmovb	value, temp					;     value = min
+}
+
+;******************************************************************************;
+;       Lock operations                                                        ;
+;******************************************************************************;
+
+;==============================================================================;
+;       Write lock                                                             ;
+;==============================================================================;
+macro	WRITE_LOCK
+{
+;---[Parameters]---------------------------
+this	equ		rdi							; pointer to ADT object
+wait	equ		sil							; wait flag
+;---[Internal variables]-------------------
+status	equ		al							; operation status
+result	equ		eax							; old futex state
+lval	equ		edx							; futex locked state
+count	equ		ecx							; spinlock iterations
+stack	equ		rsp							; stack pointer
+s_this	equ		stack + 0 * 8				; stack position of "this" variable
+space	= 1 * 8								; stack size required by the procedure
+;------------------------------------------
+		sub		stack, space				; reserving stack size for local vars
+		mov		[s_this], this				; save "this" variable into the stack
+		mov		count, SPINS				; count = SPINS
+;---[Spinlock loop]------------------------
+.sloop:	pause								; wait a little bit
+		sub		count, 1					; if (--count == 0)
+		jz		.wait						;     then go to wait branch
+		mov		result, [this + FUTEX]		; result = this.futex
+		test	result, result
+		jnz		.sloop						; do while (this.futex != 0)
+		xor		result, result				; result = 0
+		mov		lval, FLOCK					; lval = FLOCK
+lock	cmpxchg	[this + FUTEX], lval
+		jnz		.sloop						; do while (this.futex != 0)
+;---[End of spinlock loop]-----------------
+		mov		status, 1					; return true
+		add		stack, space				; restoring back the stack pointer
+		ret
+.wait:	test	wait, wait					; if (wait != 0)
+		jnz		.futex						;     then wait on futex
+		xor		status, status				; return false
+		add		stack, space				; restoring back the stack pointer
+		ret
+.futex:
+lock	add		dword [this + FUTEX + 4], 1	; waiters++
+;---[Futex lock up loop]-------------------
+.floop:	mov		sc_prm4, 0
+		movsxd	sc_prm3, result
+		mov		sc_prm2, 0x80
+		lea		sc_prm1, [this + FUTEX]
+		mov		sc_num, SYSCALL_FUTEX
+		syscall								; syscall futex (&this.futex, FUTEX_WAIT_PRIVATE, result, NULL)
+		mov		this, [s_this]				; get "this" variable from the stack
+		mov		result, [this + FUTEX]		; result = this.futex
+		test	result, result
+		jnz		.floop						; do while (this.futex != 0)
+		xor		result, result				; result = 0
+		mov		lval, FLOCK					; lval = FLOCK
+lock	cmpxchg	[this + FUTEX], lval
+		jnz		.floop						; do while (this.futex != 0)
+;---[End of futex lock up loop]------------
+lock	sub		dword [this + FUTEX + 4], 1	; waiters--
+		mov		status, 1					; return true
+		add		stack, space				; restoring back the stack pointer
+		ret
+}
+
+;==============================================================================;
+;       Read lock                                                              ;
+;==============================================================================;
+macro	READ_LOCK
+{
+;---[Parameters]---------------------------
+this	equ		rdi							; pointer to ADT object
+wait	equ		sil							; wait flag
+;---[Internal variables]-------------------
+status	equ		al							; operation status
+result	equ		eax							; old futex state
+count	equ		ecx							; spinlock iterations
+stack	equ		rsp							; stack pointer
+s_this	equ		stack + 0 * 8				; stack position of "this" variable
+space	= 1 * 8								; stack size required by the procedure
+;------------------------------------------
+		sub		stack, space				; reserving stack size for local vars
+		mov		[s_this], this				; save "this" variable into the stack
+		mov		result, 1					; result = 1
+lock	xadd	[this + FUTEX], result		; this.futex++
+		jns		.exit						; if futex is free, then go to exit
+		mov		count, SPINS				; count = SPINS
+;---[Spinlock loop]------------------------
+.sloop:	pause								; wait a little bit
+		sub		count, 1					; if (--count == 0)
+		jz		.wait						;     then go to wait branch
+		mov		result, [this + FUTEX]		; result = this.futex
+		cmp		result, FLOCK
+		jae		.sloop						; do while (this.futex >= FLOCK)
+;---[End of spinlock loop]-----------------
+.exit:	mov		status, 1					; return true
+		add		stack, space				; restoring back the stack pointer
+		ret
+.wait:	test	wait, wait					; if (wait != 0)
+		jnz		.futex						;     then wait on futex
+lock	sub		dword [this + FUTEX], 1		; this.futex--
+		xor		status, status				; return false
+		add		stack, space				; restoring back the stack pointer
+		ret
+.futex:
+lock	add		dword [this + FUTEX + 4], 1	; waiters++
+;---[Futex lock up loop]-------------------
+.floop:	mov		sc_prm4, 0
+		movsxd	sc_prm3, result
+		mov		sc_prm2, 0x80
+		lea		sc_prm1, [this + FUTEX]
+		mov		sc_num, SYSCALL_FUTEX
+		syscall								; syscall futex (&this.futex, FUTEX_WAIT_PRIVATE, result, NULL)
+		mov		this, [s_this]				; get "this" variable from the stack
+		mov		result, [this + FUTEX]		; result = this.futex
+		cmp		result, FLOCK
+		jae		.floop						; do while (this.futex >= FLOCK)
+;---[End of futex lock up loop]------------
+lock	sub		dword [this + FUTEX + 4], 1	; waiters--
+		mov		status, 1					; return true
+		add		stack, space				; restoring back the stack pointer
+		ret
+}
+
+;******************************************************************************;
+;       Release operations                                                     ;
+;******************************************************************************;
+
+;==============================================================================;
+;       Release write lock                                                     ;
+;==============================================================================;
+macro	WRITE_RELEASE
+{
+;---[Parameters]---------------------------
+this	equ		rdi							; pointer to ADT object
+;------------------------------------------
+		test	dword [this + FUTEX], FLOCK	; if ((this.futex & FLOCK) == 0)
+		jz		.exit						;     then go to exit
+;---[Normal execution branch]--------------
+lock	and		dword [this + FUTEX], not FLOCK
+		cmp		dword [this + FUTEX + 4], 0	; if (waiters == 0)
+		jz		.exit						;     then go to exit
+;---[Wake all waiters]---------------------
+		mov		sc_prm3, 0x7FFFFFFF
+		mov		sc_prm2, 0x81
+		lea		sc_prm1, [this + FUTEX]
+		mov		sc_num, SYSCALL_FUTEX
+		syscall								; syscall futex (&this.futex, FUTEX_WAKE_PRIVATE, ALL)
+.exit:	ret
+}
+
+;==============================================================================;
+;       Release read lock                                                      ;
+;==============================================================================;
+macro	READ_RELEASE
+{
+;---[Parameters]---------------------------
+this	equ		rdi							; pointer to ADT object
+;------------------------------------------
+		test	dword [this + FUTEX], FLOCK	; if ((this.futex & FLOCK) != 0)
+		jnz		.exit						;     then go to exit
+;---[Normal execution branch]--------------
+lock	sub		dword [this + FUTEX], 1		; this.futex--
+		jnz		.exit						; if futex is still in read lock, then go to exit
+		cmp		dword [this + FUTEX + 4], 0	; if (waiters == 0)
+		jz		.exit						;     then go to exit
+;---[Wake all waiters]---------------------
+		mov		sc_prm3, 1
+		mov		sc_prm2, 0x81
+		lea		sc_prm1, [this + FUTEX]
+		mov		sc_num, SYSCALL_FUTEX
+		syscall								; syscall futex (&this.futex, FUTEX_WAKE_PRIVATE, 1)
+.exit:	ret
 }
 
 ;******************************************************************************;

@@ -28,6 +28,7 @@ private:
 	size_t	pool;		// Index of first free node in the pool
 	size_t	fwd;		// Current position of forward iterator
 	size_t	bwd;		// Current position of backward iterator
+	size_t	futex;		// Container's futex
 	KeyCmp	kfunc;		// Key compare function
 	Hash	hfunc;		// Hash function
 
@@ -47,6 +48,18 @@ MultiHash (const MultiHash &source);
 //      Destructor                                                            //
 //****************************************************************************//
 ~MultiHash (void);
+
+//****************************************************************************//
+//      Access predicates                                                     //
+//****************************************************************************//
+
+// Lock operations
+bool LockReadings (bool wait);
+bool LockWritings (bool wait);
+
+// Release operations
+void AllowReadings (void);
+void AllowWritings (void);
 
 //****************************************************************************//
 //      Insertion of element                                                  //
@@ -212,6 +225,7 @@ struct MultiHash
 	size_t	pool;		// Index of first free node in the pool
 	size_t	fwd;		// Current position of forward iterator
 	size_t	bwd;		// Current position of backward iterator
+	size_t	futex;		// Container's futex
 	KeyCmp	kfunc;		// Key compare function
 	Hash	hfunc;		// Hash function
 };
@@ -230,6 +244,18 @@ void MultiHash_CopyMultiHash (struct MultiHash *hash, const MultiHash *source);
 //      Free hash table structure                                             //
 //****************************************************************************//
 void MultiHash_FreeMultiHash (struct MultiHash *hash);
+
+//****************************************************************************//
+//      Access predicates                                                     //
+//****************************************************************************//
+
+// Lock operations
+bool MultiHash_LockReadings (struct MultiHash *hash, bool wait);
+bool MultiHash_LockWritings (struct MultiHash *hash, bool wait);
+
+// Release operations
+void MultiHash_AllowReadings (struct MultiHash *hash);
+void MultiHash_AllowWritings (struct MultiHash *hash);
 
 //****************************************************************************//
 //      Insertion of element                                                  //
