@@ -213,7 +213,7 @@ space	= 1 * 8								; stack size required by the procedure
 		and		sc_prm2, -MINCAP
 		mov		sc_prm1, [this + ARRAY]
 		mov		sc_num, SYSCALL_MUNMAP
-		syscall								; munmap (array, capacity + MINCAP - 1 & (-MINCAP))
+		syscall								; syscall munmap (array, capacity + MINCAP - 1 & (-MINCAP))
 		mov		this, [s_this]				; get "this" variable from the stack
 		mov		qword [this + ARRAY], 0		; this.array = NULL
 		mov		qword [this + CAPACITY], 0	; this.capacity = 0

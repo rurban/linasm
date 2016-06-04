@@ -247,7 +247,7 @@ space	= 1 * 8								; stack size required by the procedure
 		mov		sc_prm2, [this + CAPACITY]
 		mov		sc_prm1, [this + BUFFER]
 		mov		sc_num, SYSCALL_MUNMAP
-		syscall								; munmap (buffer, capacity)
+		syscall								; syscall munmap (buffer, capacity)
 		mov		this, [s_this]				; get "this" variable from the stack
 		mov		qword [this + BUFFER], 0	; this.buffer = NULL
 		mov		qword [this + CAPACITY], 0	; this.capacity = 0

@@ -233,7 +233,7 @@ section	'.text'		executable align 16
 ;******************************************************************************;
 ;       Consts                                                                 ;
 ;******************************************************************************;
-NSCALE		= 2								; Node scale factor
+NSCALE		= 1								; Node scale factor
 NSIZE		= 1 shl NSCALE					; Size of node (count of elements)
 IMASK		= 1 shl 62 - 1					; Mask to extract element index
 MAX_WIN		= 4								; Max window index
