@@ -160,40 +160,40 @@ public	Clone8						as	'_ZN5Array5CloneEPvmm'
 ;******************************************************************************;
 
 ; Conversion between floating-point types
-public	ConvertFlt32ToFlt64			as	'Array_ConvertFlt32ToFlt64'
-public	ConvertFlt64ToFlt32			as	'Array_ConvertFlt64ToFlt32'
-public	ConvertFlt32ToFlt64			as	'_ZN5Array7ConvertEPdPKfm'
-public	ConvertFlt64ToFlt32			as	'_ZN5Array7ConvertEPfPKdm'
+public	ConvertToFlt32_flt64		as	'Array_ConvertToFlt32'
+public	ConvertToFlt64_flt32		as	'Array_ConvertToFlt64'
+public	ConvertToFlt32_flt64		as	'_ZN5Array14ConvertToFlt32EPfPKdm'
+public	ConvertToFlt64_flt32		as	'_ZN5Array14ConvertToFlt64EPdPKfm'
 
 ; Conversion from signed integer types to floating-point types
-public	ConvertSint32ToFlt32		as	'Array_ConvertSint32ToFlt32'
-public	ConvertSint32ToFlt64		as	'Array_ConvertSint32ToFlt64'
-public	ConvertSint64ToFlt32		as	'Array_ConvertSint64ToFlt32'
-public	ConvertSint64ToFlt64		as	'Array_ConvertSint64ToFlt64'
-public	ConvertSint32ToFlt32		as	'_ZN5Array7ConvertEPfPKim'
-public	ConvertSint32ToFlt64		as	'_ZN5Array7ConvertEPdPKim'
-public	ConvertSint64ToFlt32		as	'_ZN5Array7ConvertEPfPKxm'
-public	ConvertSint64ToFlt64		as	'_ZN5Array7ConvertEPdPKxm'
+public	ConvertToFlt32_sint32		as	'Array_ConvertSint32ToFlt32_sint32'
+public	ConvertToFlt32_sint64		as	'Array_ConvertSint64ToFlt32_sint64'
+public	ConvertToFlt64_sint32		as	'Array_ConvertSint32ToFlt64_sint32'
+public	ConvertToFlt64_sint64		as	'Array_ConvertSint64ToFlt64_sint64'
+public	ConvertToFlt32_sint32		as	'_ZN5Array14ConvertToFlt32EPfPKim'
+public	ConvertToFlt32_sint64		as	'_ZN5Array14ConvertToFlt32EPfPKxm'
+public	ConvertToFlt64_sint32		as	'_ZN5Array14ConvertToFlt64EPdPKim'
+public	ConvertToFlt64_sint64		as	'_ZN5Array14ConvertToFlt64EPdPKxm'
 
 ; Conversion from floating-point types to signed integer types
-public	ConvertFlt32ToSint32		as	'Array_ConvertFlt32ToSint32'
-public	ConvertFlt32ToSint64		as	'Array_ConvertFlt32ToSint64'
-public	ConvertFlt64ToSint32		as	'Array_ConvertFlt64ToSint32'
-public	ConvertFlt64ToSint64		as	'Array_ConvertFlt64ToSint64'
-public	ConvertFlt32ToSint32		as	'_ZN5Array7ConvertEPiPKfm'
-public	ConvertFlt32ToSint64		as	'_ZN5Array7ConvertEPxPKfm'
-public	ConvertFlt64ToSint32		as	'_ZN5Array7ConvertEPiPKdm'
-public	ConvertFlt64ToSint64		as	'_ZN5Array7ConvertEPxPKdm'
+public	ConvertToSint32_flt32		as	'Array_ConvertToSint32_flt32'
+public	ConvertToSint32_flt64		as	'Array_ConvertToSint32_flt64'
+public	ConvertToSint64_flt32		as	'Array_ConvertToSint64_flt32'
+public	ConvertToSint64_flt64		as	'Array_ConvertToSint64_flt64'
+public	ConvertToSint32_flt32		as	'_ZN5Array15ConvertToSint32EPiPKfm'
+public	ConvertToSint32_flt64		as	'_ZN5Array15ConvertToSint32EPiPKdm'
+public	ConvertToSint64_flt32		as	'_ZN5Array15ConvertToSint64EPxPKfm'
+public	ConvertToSint64_flt64		as	'_ZN5Array15ConvertToSint64EPxPKdm'
 
 ; Truncating from floating-point types to signed integer types
-public	TruncateFlt32ToSint32		as	'Array_TruncateFlt32ToSint32'
-public	TruncateFlt32ToSint64		as	'Array_TruncateFlt32ToSint64'
-public	TruncateFlt64ToSint32		as	'Array_TruncateFlt64ToSint32'
-public	TruncateFlt64ToSint64		as	'Array_TruncateFlt64ToSint64'
-public	TruncateFlt32ToSint32		as	'_ZN5Array8TruncateEPiPKfm'
-public	TruncateFlt32ToSint64		as	'_ZN5Array8TruncateEPxPKfm'
-public	TruncateFlt64ToSint32		as	'_ZN5Array8TruncateEPiPKdm'
-public	TruncateFlt64ToSint64		as	'_ZN5Array8TruncateEPxPKdm'
+public	TruncateToSint32_flt32		as	'Array_TruncateToSint32_Flt32'
+public	TruncateToSint32_flt64		as	'Array_TruncateToSint32_Flt64'
+public	TruncateToSint64_flt32		as	'Array_TruncateToSint64_Flt32'
+public	TruncateToSint64_flt64		as	'Array_TruncateToSint64_Flt64'
+public	TruncateToSint32_flt32		as	'_ZN5Array16TruncateToSint32EPiPKfm'
+public	TruncateToSint32_flt64		as	'_ZN5Array16TruncateToSint32EPiPKdm'
+public	TruncateToSint64_flt32		as	'_ZN5Array16TruncateToSint64EPxPKfm'
+public	TruncateToSint64_flt64		as	'_ZN5Array16TruncateToSint64EPxPKdm'
 
 ;******************************************************************************;
 ;       Bit field operations                                                   ;
@@ -926,18 +926,18 @@ public	Max_flt64					as	'_ZN5Array3MaxEPKdm'
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 ;       Minimum value                                                          ;
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
-public	MinFwd						as	'MinFwd'
-public	MinBwd						as	'MinBwd'
-public	MinFwd						as	'_ZN5Array6MinFwdEPPKvmPFxS1_S1_E'
-public	MinBwd						as	'_ZN5Array6MinBwdEPPKvmPFxS1_S1_E'
+public	MinFwd						as	'Array_MinObjFwd'
+public	MinBwd						as	'Array_MinObjBwd'
+public	MinFwd						as	'_ZN5Array9MinObjFwdEPPKvmPFxS1_S1_E'
+public	MinBwd						as	'_ZN5Array9MinObjBwdEPPKvmPFxS1_S1_E'
 
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 ;       Maximum value                                                          ;
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
-public	MaxFwd						as	'MaxFwd'
-public	MaxBwd						as	'MaxBwd'
-public	MaxFwd						as	'_ZN5Array6MaxFwdEPPKvmPFxS1_S1_E'
-public	MaxBwd						as	'_ZN5Array6MaxBwdEPPKvmPFxS1_S1_E'
+public	MaxFwd						as	'Array_MaxObjFwd'
+public	MaxBwd						as	'Array_MaxObjBwd'
+public	MaxFwd						as	'_ZN5Array9MaxObjFwdEPPKvmPFxS1_S1_E'
+public	MaxBwd						as	'_ZN5Array9MaxObjBwdEPPKvmPFxS1_S1_E'
 
 ;******************************************************************************;
 ;       Linear search                                                          ;
@@ -1142,11 +1142,11 @@ public	FindBwd64					as	'_ZN5Array7FindBwdEPKmmm'
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 ;       Forward direction search                                               ;
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
-public	FindFwd						as	'Array_FindFwd'
+public	FindFwd						as	'Array_FindObjFwd'
 public	FindFwd						as	'String_FindFwd_char8'
 public	FindFwd						as	'String_FindFwd_char16'
 public	FindFwd						as	'String_FindFwd_char32'
-public	FindFwd						as	'_ZN5Array7FindFwdEPPKvmS1_PFxS1_S1_E'
+public	FindFwd						as	'_ZN5Array10FindObjFwdEPPKvmS1_PFxS1_S1_E'
 public	FindFwd						as	'_ZN6String7FindFwdEPPKcmS1_PFxS1_S1_E'
 public	FindFwd						as	'_ZN6String7FindFwdEPPKsmS1_PFxS1_S1_E'
 public	FindFwd						as	'_ZN6String7FindFwdEPPKimS1_PFxS1_S1_E'
@@ -1154,11 +1154,11 @@ public	FindFwd						as	'_ZN6String7FindFwdEPPKimS1_PFxS1_S1_E'
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 ;       Backward direction search                                              ;
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
-public	FindBwd						as	'Array_FindBwd'
+public	FindBwd						as	'Array_FindObjBwd'
 public	FindBwd						as	'String_FindBwd_char8'
 public	FindBwd						as	'String_FindBwd_char16'
 public	FindBwd						as	'String_FindBwd_char32'
-public	FindBwd						as	'_ZN5Array7FindBwdEPPKvmS1_PFxS1_S1_E'
+public	FindBwd						as	'_ZN5Array10FindObjBwdEPPKvmS1_PFxS1_S1_E'
 public	FindBwd						as	'_ZN6String7FindBwdEPPKcmS1_PFxS1_S1_E'
 public	FindBwd						as	'_ZN6String7FindBwdEPPKsmS1_PFxS1_S1_E'
 public	FindBwd						as	'_ZN6String7FindBwdEPPKimS1_PFxS1_S1_E'
@@ -1176,7 +1176,7 @@ public	FindBwd						as	'_ZN6String7FindBwdEPPKimS1_PFxS1_S1_E'
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 
 ;------------------------------------------------------------------------------;
-;       Searching for equal element                                            ;
+;       Searching for first equal element                                      ;
 ;------------------------------------------------------------------------------;
 
 ; Unsigned integer types
@@ -1184,41 +1184,51 @@ public	FindFirstEqualAsc_uint8		as	'Array_FindFirstEqualAsc_uint8'
 public	FindFirstEqualAsc_uint16	as	'Array_FindFirstEqualAsc_uint16'
 public	FindFirstEqualAsc_uint32	as	'Array_FindFirstEqualAsc_uint32'
 public	FindFirstEqualAsc_uint64	as	'Array_FindFirstEqualAsc_uint64'
-public	FindLastEqualAsc_uint8		as	'Array_FindLastEqualAsc_uint8'
-public	FindLastEqualAsc_uint16		as	'Array_FindLastEqualAsc_uint16'
-public	FindLastEqualAsc_uint32		as	'Array_FindLastEqualAsc_uint32'
-public	FindLastEqualAsc_uint64		as	'Array_FindLastEqualAsc_uint64'
 public	FindFirstEqualAsc_uint8		as	'_ZN5Array17FindFirstEqualAscEPKhmh'
 public	FindFirstEqualAsc_uint16	as	'_ZN5Array17FindFirstEqualAscEPKtmt'
 public	FindFirstEqualAsc_uint32	as	'_ZN5Array17FindFirstEqualAscEPKjmj'
 public	FindFirstEqualAsc_uint64	as	'_ZN5Array17FindFirstEqualAscEPKymy'
-public	FindLastEqualAsc_uint8		as	'_ZN5Array16FindLastEqualAscEPKhmh'
-public	FindLastEqualAsc_uint16		as	'_ZN5Array16FindLastEqualAscEPKtmt'
-public	FindLastEqualAsc_uint32		as	'_ZN5Array16FindLastEqualAscEPKjmj'
-public	FindLastEqualAsc_uint64		as	'_ZN5Array16FindLastEqualAscEPKymy'
 
 ; Signed integer types
 public	FindFirstEqualAsc_sint8		as	'Array_FindFirstEqualAsc_sint8'
 public	FindFirstEqualAsc_sint16	as	'Array_FindFirstEqualAsc_sint16'
 public	FindFirstEqualAsc_sint32	as	'Array_FindFirstEqualAsc_sint32'
 public	FindFirstEqualAsc_sint64	as	'Array_FindFirstEqualAsc_sint64'
-public	FindLastEqualAsc_sint8		as	'Array_FindLastEqualAsc_sint8'
-public	FindLastEqualAsc_sint16		as	'Array_FindLastEqualAsc_sint16'
-public	FindLastEqualAsc_sint32		as	'Array_FindLastEqualAsc_sint32'
-public	FindLastEqualAsc_sint64		as	'Array_FindLastEqualAsc_sint64'
 public	FindFirstEqualAsc_sint8		as	'_ZN5Array17FindFirstEqualAscEPKama'
 public	FindFirstEqualAsc_sint16	as	'_ZN5Array17FindFirstEqualAscEPKsms'
 public	FindFirstEqualAsc_sint32	as	'_ZN5Array17FindFirstEqualAscEPKimi'
 public	FindFirstEqualAsc_sint64	as	'_ZN5Array17FindFirstEqualAscEPKxmx'
+
+; Other types
+public	FindFirstEqualAsc_uint64	as	'Array_FindFirstEqualAsc_size'
+public	FindFirstEqualAsc_uint64	as	'_ZN5Array17FindFirstEqualAscEPKmmm'
+
+;------------------------------------------------------------------------------;
+;       Searching for last equal element                                       ;
+;------------------------------------------------------------------------------;
+
+; Unsigned integer types
+public	FindLastEqualAsc_uint8		as	'Array_FindLastEqualAsc_uint8'
+public	FindLastEqualAsc_uint16		as	'Array_FindLastEqualAsc_uint16'
+public	FindLastEqualAsc_uint32		as	'Array_FindLastEqualAsc_uint32'
+public	FindLastEqualAsc_uint64		as	'Array_FindLastEqualAsc_uint64'
+public	FindLastEqualAsc_uint8		as	'_ZN5Array16FindLastEqualAscEPKhmh'
+public	FindLastEqualAsc_uint16		as	'_ZN5Array16FindLastEqualAscEPKtmt'
+public	FindLastEqualAsc_uint32		as	'_ZN5Array16FindLastEqualAscEPKjmj'
+public	FindLastEqualAsc_uint64		as	'_ZN5Array16FindLastEqualAscEPKymy'
+
+; Signed integer types
+public	FindLastEqualAsc_sint8		as	'Array_FindLastEqualAsc_sint8'
+public	FindLastEqualAsc_sint16		as	'Array_FindLastEqualAsc_sint16'
+public	FindLastEqualAsc_sint32		as	'Array_FindLastEqualAsc_sint32'
+public	FindLastEqualAsc_sint64		as	'Array_FindLastEqualAsc_sint64'
 public	FindLastEqualAsc_sint8		as	'_ZN5Array16FindLastEqualAscEPKama'
 public	FindLastEqualAsc_sint16		as	'_ZN5Array16FindLastEqualAscEPKsms'
 public	FindLastEqualAsc_sint32		as	'_ZN5Array16FindLastEqualAscEPKimi'
 public	FindLastEqualAsc_sint64		as	'_ZN5Array16FindLastEqualAscEPKxmx'
 
 ; Other types
-public	FindFirstEqualAsc_uint64	as	'Array_FindFirstEqualAsc_size'
 public	FindLastEqualAsc_uint64		as	'Array_FindLastEqualAsc_size'
-public	FindFirstEqualAsc_uint64	as	'_ZN5Array17FindFirstEqualAscEPKmmm'
 public	FindLastEqualAsc_uint64		as	'_ZN5Array16FindLastEqualAscEPKmmm'
 
 ;------------------------------------------------------------------------------;
@@ -1338,7 +1348,7 @@ public	FindLessEqualAsc_uint64		as	'_ZN5Array18FindLessOrEqualAscEPKmmm'
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 
 ;------------------------------------------------------------------------------;
-;       Searching for equal element                                            ;
+;       Searching for first equal element                                      ;
 ;------------------------------------------------------------------------------;
 
 ; Unsigned integer types
@@ -1346,41 +1356,51 @@ public	FindFirstEqualDsc_uint8		as	'Array_FindFirstEqualDsc_uint8'
 public	FindFirstEqualDsc_uint16	as	'Array_FindFirstEqualDsc_uint16'
 public	FindFirstEqualDsc_uint32	as	'Array_FindFirstEqualDsc_uint32'
 public	FindFirstEqualDsc_uint64	as	'Array_FindFirstEqualDsc_uint64'
-public	FindLastEqualDsc_uint8		as	'Array_FindLastEqualDsc_uint8'
-public	FindLastEqualDsc_uint16		as	'Array_FindLastEqualDsc_uint16'
-public	FindLastEqualDsc_uint32		as	'Array_FindLastEqualDsc_uint32'
-public	FindLastEqualDsc_uint64		as	'Array_FindLastEqualDsc_uint64'
 public	FindFirstEqualDsc_uint8		as	'_ZN5Array17FindFirstEqualDscEPKhmh'
 public	FindFirstEqualDsc_uint16	as	'_ZN5Array17FindFirstEqualDscEPKtmt'
 public	FindFirstEqualDsc_uint32	as	'_ZN5Array17FindFirstEqualDscEPKjmj'
 public	FindFirstEqualDsc_uint64	as	'_ZN5Array17FindFirstEqualDscEPKymy'
-public	FindLastEqualDsc_uint8		as	'_ZN5Array16FindLastEqualDscEPKhmh'
-public	FindLastEqualDsc_uint16		as	'_ZN5Array16FindLastEqualDscEPKtmt'
-public	FindLastEqualDsc_uint32		as	'_ZN5Array16FindLastEqualDscEPKjmj'
-public	FindLastEqualDsc_uint64		as	'_ZN5Array16FindLastEqualDscEPKymy'
 
 ; Signed integer types
 public	FindFirstEqualDsc_sint8		as	'Array_FindFirstEqualDsc_sint8'
 public	FindFirstEqualDsc_sint16	as	'Array_FindFirstEqualDsc_sint16'
 public	FindFirstEqualDsc_sint32	as	'Array_FindFirstEqualDsc_sint32'
 public	FindFirstEqualDsc_sint64	as	'Array_FindFirstEqualDsc_sint64'
-public	FindLastEqualDsc_sint8		as	'Array_FindLastEqualDsc_sint8'
-public	FindLastEqualDsc_sint16		as	'Array_FindLastEqualDsc_sint16'
-public	FindLastEqualDsc_sint32		as	'Array_FindLastEqualDsc_sint32'
-public	FindLastEqualDsc_sint64		as	'Array_FindLastEqualDsc_sint64'
 public	FindFirstEqualDsc_sint8		as	'_ZN5Array17FindFirstEqualDscEPKama'
 public	FindFirstEqualDsc_sint16	as	'_ZN5Array17FindFirstEqualDscEPKsms'
 public	FindFirstEqualDsc_sint32	as	'_ZN5Array17FindFirstEqualDscEPKimi'
 public	FindFirstEqualDsc_sint64	as	'_ZN5Array17FindFirstEqualDscEPKxmx'
+
+; Other types
+public	FindFirstEqualDsc_uint64	as	'Array_FindFirstEqualDsc_size'
+public	FindFirstEqualDsc_uint64	as	'_ZN5Array17FindFirstEqualDscEPKmmm'
+
+;------------------------------------------------------------------------------;
+;       Searching for last equal element                                       ;
+;------------------------------------------------------------------------------;
+
+; Unsigned integer types
+public	FindLastEqualDsc_uint8		as	'Array_FindLastEqualDsc_uint8'
+public	FindLastEqualDsc_uint16		as	'Array_FindLastEqualDsc_uint16'
+public	FindLastEqualDsc_uint32		as	'Array_FindLastEqualDsc_uint32'
+public	FindLastEqualDsc_uint64		as	'Array_FindLastEqualDsc_uint64'
+public	FindLastEqualDsc_uint8		as	'_ZN5Array16FindLastEqualDscEPKhmh'
+public	FindLastEqualDsc_uint16		as	'_ZN5Array16FindLastEqualDscEPKtmt'
+public	FindLastEqualDsc_uint32		as	'_ZN5Array16FindLastEqualDscEPKjmj'
+public	FindLastEqualDsc_uint64		as	'_ZN5Array16FindLastEqualDscEPKymy'
+
+; Signed integer types
+public	FindLastEqualDsc_sint8		as	'Array_FindLastEqualDsc_sint8'
+public	FindLastEqualDsc_sint16		as	'Array_FindLastEqualDsc_sint16'
+public	FindLastEqualDsc_sint32		as	'Array_FindLastEqualDsc_sint32'
+public	FindLastEqualDsc_sint64		as	'Array_FindLastEqualDsc_sint64'
 public	FindLastEqualDsc_sint8		as	'_ZN5Array16FindLastEqualDscEPKama'
 public	FindLastEqualDsc_sint16		as	'_ZN5Array16FindLastEqualDscEPKsms'
 public	FindLastEqualDsc_sint32		as	'_ZN5Array16FindLastEqualDscEPKimi'
 public	FindLastEqualDsc_sint64		as	'_ZN5Array16FindLastEqualDscEPKxmx'
 
 ; Other types
-public	FindFirstEqualDsc_uint64	as	'Array_FindFirstEqualDsc_size'
 public	FindLastEqualDsc_uint64		as	'Array_FindLastEqualDsc_size'
-public	FindFirstEqualDsc_uint64	as	'_ZN5Array17FindFirstEqualDscEPKmmm'
 public	FindLastEqualDsc_uint64		as	'_ZN5Array16FindLastEqualDscEPKmmm'
 
 ;------------------------------------------------------------------------------;
@@ -1504,21 +1524,25 @@ public	FindGreatEqualDsc_uint64	as	'_ZN5Array19FindGreatOrEqualDscEPKmmm'
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 
 ;------------------------------------------------------------------------------;
-;       Searching for equal element                                            ;
+;       Searching for first equal element                                      ;
 ;------------------------------------------------------------------------------;
-public	FindFirstEqualAsc			as	'Array_FindFirstEqualAsc'
+public	FindFirstEqualAsc			as	'Array_FindFirstEqualObjAsc'
 public	FindFirstEqualAsc			as	'String_FindFirstEqualAsc_char8'
 public	FindFirstEqualAsc			as	'String_FindFirstEqualAsc_char16'
 public	FindFirstEqualAsc			as	'String_FindFirstEqualAsc_char32'
-public	FindLastEqualAsc			as	'Array_FindLastEqualAsc'
-public	FindLastEqualAsc			as	'String_FindLastEqualAsc_char8'
-public	FindLastEqualAsc			as	'String_FindLastEqualAsc_char16'
-public	FindLastEqualAsc			as	'String_FindLastEqualAsc_char32'
-public	FindFirstEqualAsc			as	'_ZN5Array17FindFirstEqualAscEPPKvmS1_PFxS1_S1_E'
+public	FindFirstEqualAsc			as	'_ZN5Array20FindFirstEqualObjAscEPPKvmS1_PFxS1_S1_E'
 public	FindFirstEqualAsc			as	'_ZN6String17FindFirstEqualAscEPPKcmS1_PFxS1_S1_E'
 public	FindFirstEqualAsc			as	'_ZN6String17FindFirstEqualAscEPPKsmS1_PFxS1_S1_E'
 public	FindFirstEqualAsc			as	'_ZN6String17FindFirstEqualAscEPPKimS1_PFxS1_S1_E'
-public	FindLastEqualAsc			as	'_ZN5Array16FindLastEqualAscEPPKvmS1_PFxS1_S1_E'
+
+;------------------------------------------------------------------------------;
+;       Searching for last equal element                                       ;
+;------------------------------------------------------------------------------;
+public	FindLastEqualAsc			as	'Array_FindLastEqualObjAsc'
+public	FindLastEqualAsc			as	'String_FindLastEqualAsc_char8'
+public	FindLastEqualAsc			as	'String_FindLastEqualAsc_char16'
+public	FindLastEqualAsc			as	'String_FindLastEqualAsc_char32'
+public	FindLastEqualAsc			as	'_ZN5Array19FindLastEqualObjAscEPPKvmS1_PFxS1_S1_E'
 public	FindLastEqualAsc			as	'_ZN6String16FindLastEqualAscEPPKcmS1_PFxS1_S1_E'
 public	FindLastEqualAsc			as	'_ZN6String16FindLastEqualAscEPPKsmS1_PFxS1_S1_E'
 public	FindLastEqualAsc			as	'_ZN6String16FindLastEqualAscEPPKimS1_PFxS1_S1_E'
@@ -1526,11 +1550,11 @@ public	FindLastEqualAsc			as	'_ZN6String16FindLastEqualAscEPPKimS1_PFxS1_S1_E'
 ;------------------------------------------------------------------------------;
 ;       Searching for greater element                                          ;
 ;------------------------------------------------------------------------------;
-public	FindGreatAsc				as	'Array_FindGreatAsc'
+public	FindGreatAsc				as	'Array_FindGreatObjAsc'
 public	FindGreatAsc				as	'String_FindGreatAsc_char8'
 public	FindGreatAsc				as	'String_FindGreatAsc_char16'
 public	FindGreatAsc				as	'String_FindGreatAsc_char32'
-public	FindGreatAsc				as	'_ZN5Array12FindGreatAscEPPKvmS1_PFxS1_S1_E'
+public	FindGreatAsc				as	'_ZN5Array15FindGreatObjAscEPPKvmS1_PFxS1_S1_E'
 public	FindGreatAsc				as	'_ZN6String12FindGreatAscEPPKcmS1_PFxS1_S1_E'
 public	FindGreatAsc				as	'_ZN6String12FindGreatAscEPPKsmS1_PFxS1_S1_E'
 public	FindGreatAsc				as	'_ZN6String12FindGreatAscEPPKimS1_PFxS1_S1_E'
@@ -1538,11 +1562,11 @@ public	FindGreatAsc				as	'_ZN6String12FindGreatAscEPPKimS1_PFxS1_S1_E'
 ;------------------------------------------------------------------------------;
 ;       Searching for greater or equal element                                 ;
 ;------------------------------------------------------------------------------;
-public	FindGreatOrEqualAsc			as	'Array_FindGreatOrEqualAsc'
+public	FindGreatOrEqualAsc			as	'Array_FindGreatOrEqualObjAsc'
 public	FindGreatOrEqualAsc			as	'String_FindGreatOrEqualAsc_char8'
 public	FindGreatOrEqualAsc			as	'String_FindGreatOrEqualAsc_char16'
 public	FindGreatOrEqualAsc			as	'String_FindGreatOrEqualAsc_char32'
-public	FindGreatOrEqualAsc			as	'_ZN5Array19FindGreatOrEqualAscEPPKvmS1_PFxS1_S1_E'
+public	FindGreatOrEqualAsc			as	'_ZN5Array22FindGreatOrEqualObjAscEPPKvmS1_PFxS1_S1_E'
 public	FindGreatOrEqualAsc			as	'_ZN6String19FindGreatOrEqualAscEPPKcmS1_PFxS1_S1_E'
 public	FindGreatOrEqualAsc			as	'_ZN6String19FindGreatOrEqualAscEPPKsmS1_PFxS1_S1_E'
 public	FindGreatOrEqualAsc			as	'_ZN6String19FindGreatOrEqualAscEPPKimS1_PFxS1_S1_E'
@@ -1550,11 +1574,11 @@ public	FindGreatOrEqualAsc			as	'_ZN6String19FindGreatOrEqualAscEPPKimS1_PFxS1_S
 ;------------------------------------------------------------------------------;
 ;       Searching for less element                                             ;
 ;------------------------------------------------------------------------------;
-public	FindLessAsc					as	'Array_FindLessAsc'
+public	FindLessAsc					as	'Array_FindLessObjAsc'
 public	FindLessAsc					as	'String_FindLessAsc_char8'
 public	FindLessAsc					as	'String_FindLessAsc_char16'
 public	FindLessAsc					as	'String_FindLessAsc_char32'
-public	FindLessAsc					as	'_ZN5Array11FindLessAscEPPKvmS1_PFxS1_S1_E'
+public	FindLessAsc					as	'_ZN5Array14FindLessObjAscEPPKvmS1_PFxS1_S1_E'
 public	FindLessAsc					as	'_ZN6String11FindLessAscEPPKcmS1_PFxS1_S1_E'
 public	FindLessAsc					as	'_ZN6String11FindLessAscEPPKsmS1_PFxS1_S1_E'
 public	FindLessAsc					as	'_ZN6String11FindLessAscEPPKimS1_PFxS1_S1_E'
@@ -1562,11 +1586,11 @@ public	FindLessAsc					as	'_ZN6String11FindLessAscEPPKimS1_PFxS1_S1_E'
 ;------------------------------------------------------------------------------;
 ;       Searching for less or equal element                                    ;
 ;------------------------------------------------------------------------------;
-public	FindLessOrEqualAsc			as	'Array_FindLessOrEqualAsc'
+public	FindLessOrEqualAsc			as	'Array_FindLessOrEqualObjAsc'
 public	FindLessOrEqualAsc			as	'String_FindLessOrEqualAsc_char8'
 public	FindLessOrEqualAsc			as	'String_FindLessOrEqualAsc_char16'
 public	FindLessOrEqualAsc			as	'String_FindLessOrEqualAsc_char32'
-public	FindLessOrEqualAsc			as	'_ZN5Array18FindLessOrEqualAscEPPKvmS1_PFxS1_S1_E'
+public	FindLessOrEqualAsc			as	'_ZN5Array21FindLessOrEqualObjAscEPPKvmS1_PFxS1_S1_E'
 public	FindLessOrEqualAsc			as	'_ZN6String18FindLessOrEqualAscEPPKcmS1_PFxS1_S1_E'
 public	FindLessOrEqualAsc			as	'_ZN6String18FindLessOrEqualAscEPPKsmS1_PFxS1_S1_E'
 public	FindLessOrEqualAsc			as	'_ZN6String18FindLessOrEqualAscEPPKimS1_PFxS1_S1_E'
@@ -1576,21 +1600,25 @@ public	FindLessOrEqualAsc			as	'_ZN6String18FindLessOrEqualAscEPPKimS1_PFxS1_S1_
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 
 ;------------------------------------------------------------------------------;
-;       Searching for equal element                                            ;
+;       Searching for first equal element                                      ;
 ;------------------------------------------------------------------------------;
-public	FindFirstEqualDsc			as	'Array_FindFirstEqualDsc'
+public	FindFirstEqualDsc			as	'Array_FindFirstEqualObjDsc'
 public	FindFirstEqualDsc			as	'String_FindFirstEqualDsc_char8'
 public	FindFirstEqualDsc			as	'String_FindFirstEqualDsc_char16'
 public	FindFirstEqualDsc			as	'String_FindFirstEqualDsc_char32'
-public	FindLastEqualDsc			as	'Array_FindLastEqualDsc'
-public	FindLastEqualDsc			as	'String_FindLastEqualDsc_char8'
-public	FindLastEqualDsc			as	'String_FindLastEqualDsc_char16'
-public	FindLastEqualDsc			as	'String_FindLastEqualDsc_char32'
-public	FindFirstEqualDsc			as	'_ZN5Array17FindFirstEqualDscEPPKvmS1_PFxS1_S1_E'
+public	FindFirstEqualDsc			as	'_ZN5Array20FindFirstEqualObjDscEPPKvmS1_PFxS1_S1_E'
 public	FindFirstEqualDsc			as	'_ZN6String17FindFirstEqualDscEPPKcmS1_PFxS1_S1_E'
 public	FindFirstEqualDsc			as	'_ZN6String17FindFirstEqualDscEPPKsmS1_PFxS1_S1_E'
 public	FindFirstEqualDsc			as	'_ZN6String17FindFirstEqualDscEPPKimS1_PFxS1_S1_E'
-public	FindLastEqualDsc			as	'_ZN5Array16FindLastEqualDscEPPKvmS1_PFxS1_S1_E'
+
+;------------------------------------------------------------------------------;
+;       Searching for last equal element                                       ;
+;------------------------------------------------------------------------------;
+public	FindLastEqualDsc			as	'Array_FindLastEqualObjDsc'
+public	FindLastEqualDsc			as	'String_FindLastEqualDsc_char8'
+public	FindLastEqualDsc			as	'String_FindLastEqualDsc_char16'
+public	FindLastEqualDsc			as	'String_FindLastEqualDsc_char32'
+public	FindLastEqualDsc			as	'_ZN5Array19FindLastEqualObjDscEPPKvmS1_PFxS1_S1_E'
 public	FindLastEqualDsc			as	'_ZN6String16FindLastEqualDscEPPKcmS1_PFxS1_S1_E'
 public	FindLastEqualDsc			as	'_ZN6String16FindLastEqualDscEPPKsmS1_PFxS1_S1_E'
 public	FindLastEqualDsc			as	'_ZN6String16FindLastEqualDscEPPKimS1_PFxS1_S1_E'
@@ -1598,11 +1626,11 @@ public	FindLastEqualDsc			as	'_ZN6String16FindLastEqualDscEPPKimS1_PFxS1_S1_E'
 ;------------------------------------------------------------------------------;
 ;       Searching for less element                                             ;
 ;------------------------------------------------------------------------------;
-public	FindLessDsc					as	'Array_FindLessDsc'
+public	FindLessDsc					as	'Array_FindLessObjDsc'
 public	FindLessDsc					as	'String_FindLessDsc_char8'
 public	FindLessDsc					as	'String_FindLessDsc_char16'
 public	FindLessDsc					as	'String_FindLessDsc_char32'
-public	FindLessDsc					as	'_ZN5Array11FindLessDscEPPKvmS1_PFxS1_S1_E'
+public	FindLessDsc					as	'_ZN5Array14FindLessObjDscEPPKvmS1_PFxS1_S1_E'
 public	FindLessDsc					as	'_ZN6String11FindLessDscEPPKcmS1_PFxS1_S1_E'
 public	FindLessDsc					as	'_ZN6String11FindLessDscEPPKsmS1_PFxS1_S1_E'
 public	FindLessDsc					as	'_ZN6String11FindLessDscEPPKimS1_PFxS1_S1_E'
@@ -1610,11 +1638,11 @@ public	FindLessDsc					as	'_ZN6String11FindLessDscEPPKimS1_PFxS1_S1_E'
 ;------------------------------------------------------------------------------;
 ;       Searching for less or equal element                                    ;
 ;------------------------------------------------------------------------------;
-public	FindLessOrEqualDsc			as	'Array_FindLessOrEqualDsc'
+public	FindLessOrEqualDsc			as	'Array_FindLessOrEqualObjDsc'
 public	FindLessOrEqualDsc			as	'String_FindLessOrEqualDsc_char8'
 public	FindLessOrEqualDsc			as	'String_FindLessOrEqualDsc_char16'
 public	FindLessOrEqualDsc			as	'String_FindLessOrEqualDsc_char32'
-public	FindLessOrEqualDsc			as	'_ZN5Array18FindLessOrEqualDscEPPKvmS1_PFxS1_S1_E'
+public	FindLessOrEqualDsc			as	'_ZN5Array21FindLessOrEqualObjDscEPPKvmS1_PFxS1_S1_E'
 public	FindLessOrEqualDsc			as	'_ZN6String18FindLessOrEqualDscEPPKcmS1_PFxS1_S1_E'
 public	FindLessOrEqualDsc			as	'_ZN6String18FindLessOrEqualDscEPPKsmS1_PFxS1_S1_E'
 public	FindLessOrEqualDsc			as	'_ZN6String18FindLessOrEqualDscEPPKimS1_PFxS1_S1_E'
@@ -1622,11 +1650,11 @@ public	FindLessOrEqualDsc			as	'_ZN6String18FindLessOrEqualDscEPPKimS1_PFxS1_S1_
 ;------------------------------------------------------------------------------;
 ;       Searching for greater element                                          ;
 ;------------------------------------------------------------------------------;
-public	FindGreatDsc				as	'Array_FindGreatDsc'
+public	FindGreatDsc				as	'Array_FindGreatObjDsc'
 public	FindGreatDsc				as	'String_FindGreatDsc_char8'
 public	FindGreatDsc				as	'String_FindGreatDsc_char16'
 public	FindGreatDsc				as	'String_FindGreatDsc_char32'
-public	FindGreatDsc				as	'_ZN5Array12FindGreatDscEPPKvmS1_PFxS1_S1_E'
+public	FindGreatDsc				as	'_ZN5Array15FindGreatObjDscEPPKvmS1_PFxS1_S1_E'
 public	FindGreatDsc				as	'_ZN6String12FindGreatDscEPPKcmS1_PFxS1_S1_E'
 public	FindGreatDsc				as	'_ZN6String12FindGreatDscEPPKsmS1_PFxS1_S1_E'
 public	FindGreatDsc				as	'_ZN6String12FindGreatDscEPPKimS1_PFxS1_S1_E'
@@ -1634,11 +1662,11 @@ public	FindGreatDsc				as	'_ZN6String12FindGreatDscEPPKimS1_PFxS1_S1_E'
 ;------------------------------------------------------------------------------;
 ;       Searching for greater or equal element                                 ;
 ;------------------------------------------------------------------------------;
-public	FindGreatOrEqualDsc			as	'Array_FindGreatOrEqualDsc'
+public	FindGreatOrEqualDsc			as	'Array_FindGreatOrEqualObjDsc'
 public	FindGreatOrEqualDsc			as	'String_FindGreatOrEqualDsc_char8'
 public	FindGreatOrEqualDsc			as	'String_FindGreatOrEqualDsc_char16'
 public	FindGreatOrEqualDsc			as	'String_FindGreatOrEqualDsc_char32'
-public	FindGreatOrEqualDsc			as	'_ZN5Array19FindGreatOrEqualDscEPPKvmS1_PFxS1_S1_E'
+public	FindGreatOrEqualDsc			as	'_ZN5Array22FindGreatOrEqualObjDscEPPKvmS1_PFxS1_S1_E'
 public	FindGreatOrEqualDsc			as	'_ZN6String19FindGreatOrEqualDscEPPKcmS1_PFxS1_S1_E'
 public	FindGreatOrEqualDsc			as	'_ZN6String19FindGreatOrEqualDscEPPKsmS1_PFxS1_S1_E'
 public	FindGreatOrEqualDsc			as	'_ZN6String19FindGreatOrEqualDscEPPKimS1_PFxS1_S1_E'
@@ -1708,11 +1736,11 @@ public	Count64						as	'_ZN5Array5CountEPKmmm'
 ;==============================================================================;
 ;       Object counting                                                        ;
 ;==============================================================================;
-public	Count						as	'Array_Count'
+public	Count						as	'Array_CountObj'
 public	Count						as	'String_CountString_char8'
 public	Count						as	'String_CountString_char16'
 public	Count						as	'String_CountString_char32'
-public	Count						as	'_ZN5Array5CountEPPKvmS1_PFxS1_S1_E'
+public	Count						as	'_ZN5Array8CountObjEPPKvmS1_PFxS1_S1_E'
 public	Count						as	'_ZN6String11CountStringEPPKcmS1_PFxS1_S1_E'
 public	Count						as	'_ZN6String11CountStringEPPKsmS1_PFxS1_S1_E'
 public	Count						as	'_ZN6String11CountStringEPPKimS1_PFxS1_S1_E'
@@ -1788,11 +1816,11 @@ public	CountDsc_uint64				as	'_ZN5Array8CountDscEPKmmm'
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 ;       Ascending sort order                                                   ;
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
-public	CountAsc					as	'Array_CountAsc'
+public	CountAsc					as	'Array_CountObjAsc'
 public	CountAsc					as	'String_CountStringAsc_char8'
 public	CountAsc					as	'String_CountStringAsc_char16'
 public	CountAsc					as	'String_CountStringAsc_char32'
-public	CountAsc					as	'_ZN5Array8CountAscEPPKvmS1_PFxS1_S1_E'
+public	CountAsc					as	'_ZN5Array11CountObjAscEPPKvmS1_PFxS1_S1_E'
 public	CountAsc					as	'_ZN6String14CountStringAscEPPKcmS1_PFxS1_S1_E'
 public	CountAsc					as	'_ZN6String14CountStringAscEPPKsmS1_PFxS1_S1_E'
 public	CountAsc					as	'_ZN6String14CountStringAscEPPKimS1_PFxS1_S1_E'
@@ -1800,11 +1828,11 @@ public	CountAsc					as	'_ZN6String14CountStringAscEPPKimS1_PFxS1_S1_E'
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 ;       Descending sort order                                                  ;
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
-public	CountDsc					as	'Array_CountDsc'
+public	CountDsc					as	'Array_CountObjDsc'
 public	CountDsc					as	'String_CountStringDsc_char8'
 public	CountDsc					as	'String_CountStringDsc_char16'
 public	CountDsc					as	'String_CountStringDsc_char32'
-public	CountDsc					as	'_ZN5Array8CountDscEPPKvmS1_PFxS1_S1_E'
+public	CountDsc					as	'_ZN5Array11CountObjDscEPPKvmS1_PFxS1_S1_E'
 public	CountDsc					as	'_ZN6String14CountStringDscEPPKcmS1_PFxS1_S1_E'
 public	CountDsc					as	'_ZN6String14CountStringDscEPPKsmS1_PFxS1_S1_E'
 public	CountDsc					as	'_ZN6String14CountStringDscEPPKimS1_PFxS1_S1_E'
@@ -1844,11 +1872,11 @@ public	Replace64					as	'_ZN5Array7ReplaceEPmmmm'
 ;==============================================================================;
 ;       Object replacing                                                       ;
 ;==============================================================================;
-public	Replace						as	'Array_Replace'
+public	Replace						as	'Array_ReplaceObj'
 public	Replace						as	'String_ReplaceString_char8'
 public	Replace						as	'String_ReplaceString_char16'
 public	Replace						as	'String_ReplaceString_char32'
-public	Replace						as	'_ZN5Array7ReplaceEPPKvmS1_S1_PFxS1_S1_E'
+public	Replace						as	'_ZN5Array10ReplaceObjEPPKvmS1_S1_PFxS1_S1_E'
 public	Replace						as	'_ZN6String13ReplaceStringEPPKcmS1_S1_PFxS1_S1_E'
 public	Replace						as	'_ZN6String13ReplaceStringEPPKsmS1_S1_PFxS1_S1_E'
 public	Replace						as	'_ZN6String13ReplaceStringEPPKimS1_S1_PFxS1_S1_E'
@@ -1894,11 +1922,11 @@ public	Reverse64					as	'_ZN5Array7ReverseEPmm'
 ;==============================================================================;
 ;       Object array reversing                                                 ;
 ;==============================================================================;
-public	Reverse						as	'Array_Reverse'
+public	Reverse						as	'Array_ReverseObj'
 public	Reverse						as	'String_Reverse_char8'
 public	Reverse						as	'String_Reverse_char16'
 public	Reverse						as	'String_Reverse_char32'
-public	Reverse						as	'_ZN5Array7ReverseEPPKvm'
+public	Reverse						as	'_ZN5Array10ReverseObjEPPKvm'
 public	Reverse						as	'_ZN6String7ReverseEPPKcm'
 public	Reverse						as	'_ZN6String7ReverseEPPKsm'
 public	Reverse						as	'_ZN6String7ReverseEPPKim'
@@ -1938,11 +1966,11 @@ public	Unique64					as	'_ZN5Array6UniqueEPmPKmm'
 ;==============================================================================;
 ;       Unique objects                                                         ;
 ;==============================================================================;
-public	Unique						as	'Array_Unique'
+public	Unique						as	'Array_UniqueObj'
 public	Unique						as	'String_Unique_char8'
 public	Unique						as	'String_Unique_char16'
 public	Unique						as	'String_Unique_char32'
-public	Unique						as	'_ZN5Array6UniqueEPPKvS2_mPFxS1_S1_E'
+public	Unique						as	'_ZN5Array9UniqueObjEPPKvS2_mPFxS1_S1_E'
 public	Unique						as	'_ZN6String6UniqueEPPKcPPKcmPFxS3_S3_E'
 public	Unique						as	'_ZN6String6UniqueEPPKsPPKsmPFxS3_S3_E'
 public	Unique						as	'_ZN6String6UniqueEPPKiPPKimPFxS3_S3_E'
@@ -1982,11 +2010,11 @@ public	Duplicates64				as	'_ZN5Array10DuplicatesEPmPmPKmm'
 ;==============================================================================;
 ;       Duplicate objects                                                      ;
 ;==============================================================================;
-public	Duplicates					as	'Array_Duplicates'
+public	Duplicates					as	'Array_DuplicatesObj'
 public	Duplicates					as	'String_Duplicates_char8'
 public	Duplicates					as	'String_Duplicates_char16'
 public	Duplicates					as	'String_Duplicates_char32'
-public	Duplicates					as	'_ZN5Array10DuplicatesEPPKvPmS2_mPFxS1_S1_E'
+public	Duplicates					as	'_ZN5Array13DuplicatesObjEPPKvPmS2_mPFxS1_S1_E'
 public	Duplicates					as	'_ZN6String10DuplicatesEPPKcPmPPKcmPFxS4_S4_E'
 public	Duplicates					as	'_ZN6String10DuplicatesEPPKsPmPPKsmPFxS4_S4_E'
 public	Duplicates					as	'_ZN6String10DuplicatesEPPKiPmPPKimPFxS4_S4_E'
@@ -2152,11 +2180,11 @@ public	InsertSortKeyDsc_uint64		as	'_ZN5Array16InsertSortKeyDscEPmPPKvm'
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 ;       Ascending sort order                                                   ;
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
-public	InsertSortAsc				as	'Array_InsertSortAsc'
+public	InsertSortAsc				as	'Array_InsertSortObjAsc'
 public	InsertSortAsc				as	'String_InsertSortAsc_char8'
 public	InsertSortAsc				as	'String_InsertSortAsc_char16'
 public	InsertSortAsc				as	'String_InsertSortAsc_char32'
-public	InsertSortAsc				as	'_ZN5Array13InsertSortAscEPPKvmPFxS1_S1_E'
+public	InsertSortAsc				as	'_ZN5Array16InsertSortObjAscEPPKvmPFxS1_S1_E'
 public	InsertSortAsc				as	'_ZN6String13InsertSortAscEPPKcmPFxS1_S1_E'
 public	InsertSortAsc				as	'_ZN6String13InsertSortAscEPPKsmPFxS1_S1_E'
 public	InsertSortAsc				as	'_ZN6String13InsertSortAscEPPKimPFxS1_S1_E'
@@ -2164,11 +2192,11 @@ public	InsertSortAsc				as	'_ZN6String13InsertSortAscEPPKimPFxS1_S1_E'
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 ;       Descending sort order                                                  ;
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
-public	InsertSortDsc				as	'Array_InsertSortDsc'
+public	InsertSortDsc				as	'Array_InsertSortObjDsc'
 public	InsertSortDsc				as	'String_InsertSortDsc_char8'
 public	InsertSortDsc				as	'String_InsertSortDsc_char16'
 public	InsertSortDsc				as	'String_InsertSortDsc_char32'
-public	InsertSortDsc				as	'_ZN5Array13InsertSortDscEPPKvmPFxS1_S1_E'
+public	InsertSortDsc				as	'_ZN5Array16InsertSortObjDscEPPKvmPFxS1_S1_E'
 public	InsertSortDsc				as	'_ZN6String13InsertSortDscEPPKcmPFxS1_S1_E'
 public	InsertSortDsc				as	'_ZN6String13InsertSortDscEPPKsmPFxS1_S1_E'
 public	InsertSortDsc				as	'_ZN6String13InsertSortDscEPPKimPFxS1_S1_E'
@@ -2328,11 +2356,11 @@ public	QuickSortKeyDsc_uint64		as	'_ZN5Array15QuickSortKeyDscEPmPPKvm'
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 ;       Ascending sort order                                                   ;
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
-public	QuickSortAsc				as	'Array_QuickSortAsc'
+public	QuickSortAsc				as	'Array_QuickSortObjAsc'
 public	QuickSortAsc				as	'String_QuickSortAsc_char8'
 public	QuickSortAsc				as	'String_QuickSortAsc_char16'
 public	QuickSortAsc				as	'String_QuickSortAsc_char32'
-public	QuickSortAsc				as	'_ZN5Array12QuickSortAscEPPKvmPFxS1_S1_E'
+public	QuickSortAsc				as	'_ZN5Array15QuickSortObjAscEPPKvmPFxS1_S1_E'
 public	QuickSortAsc				as	'_ZN6String12QuickSortAscEPPKcmPFxS1_S1_E'
 public	QuickSortAsc				as	'_ZN6String12QuickSortAscEPPKsmPFxS1_S1_E'
 public	QuickSortAsc				as	'_ZN6String12QuickSortAscEPPKimPFxS1_S1_E'
@@ -2340,11 +2368,11 @@ public	QuickSortAsc				as	'_ZN6String12QuickSortAscEPPKimPFxS1_S1_E'
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 ;       Descending sort order                                                  ;
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
-public	QuickSortDsc				as	'Array_QuickSortDsc'
+public	QuickSortDsc				as	'Array_QuickSortObjDsc'
 public	QuickSortDsc				as	'String_QuickSortDsc_char8'
 public	QuickSortDsc				as	'String_QuickSortDsc_char16'
 public	QuickSortDsc				as	'String_QuickSortDsc_char32'
-public	QuickSortDsc				as	'_ZN5Array12QuickSortDscEPPKvmPFxS1_S1_E'
+public	QuickSortDsc				as	'_ZN5Array15QuickSortObjDscEPPKvmPFxS1_S1_E'
 public	QuickSortDsc				as	'_ZN6String12QuickSortDscEPPKcmPFxS1_S1_E'
 public	QuickSortDsc				as	'_ZN6String12QuickSortDscEPPKsmPFxS1_S1_E'
 public	QuickSortDsc				as	'_ZN6String12QuickSortDscEPPKimPFxS1_S1_E'
@@ -2504,11 +2532,11 @@ public	MergeSortKeyDsc_uint64		as	'_ZN5Array15MergeSortKeyDscEPmS0_PPKvS3_m'
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 ;       Ascending sort order                                                   ;
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
-public	MergeSortAsc				as	'Array_MergeSortAsc'
+public	MergeSortAsc				as	'Array_MergeSortObjAsc'
 public	MergeSortAsc				as	'String_MergeSortAsc_char8'
 public	MergeSortAsc				as	'String_MergeSortAsc_char16'
 public	MergeSortAsc				as	'String_MergeSortAsc_char32'
-public	MergeSortAsc				as	'_ZN5Array12MergeSortAscEPPKvS2_mPFxS1_S1_E'
+public	MergeSortAsc				as	'_ZN5Array15MergeSortObjAscEPPKvS2_mPFxS1_S1_E'
 public	MergeSortAsc				as	'_ZN6String12MergeSortAscEPPKcS2_mPFxS1_S1_E'
 public	MergeSortAsc				as	'_ZN6String12MergeSortAscEPPKsS2_mPFxS1_S1_E'
 public	MergeSortAsc				as	'_ZN6String12MergeSortAscEPPKiS2_mPFxS1_S1_E'
@@ -2516,11 +2544,11 @@ public	MergeSortAsc				as	'_ZN6String12MergeSortAscEPPKiS2_mPFxS1_S1_E'
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 ;       Descending sort order                                                  ;
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
-public	MergeSortDsc				as	'Array_MergeSortDsc'
+public	MergeSortDsc				as	'Array_MergeSortObjDsc'
 public	MergeSortDsc				as	'String_MergeSortDsc_char8'
 public	MergeSortDsc				as	'String_MergeSortDsc_char16'
 public	MergeSortDsc				as	'String_MergeSortDsc_char32'
-public	MergeSortDsc				as	'_ZN5Array12MergeSortDscEPPKvS2_mPFxS1_S1_E'
+public	MergeSortDsc				as	'_ZN5Array15MergeSortObjDscEPPKvS2_mPFxS1_S1_E'
 public	MergeSortDsc				as	'_ZN6String12MergeSortDscEPPKcS2_mPFxS1_S1_E'
 public	MergeSortDsc				as	'_ZN6String12MergeSortDscEPPKsS2_mPFxS1_S1_E'
 public	MergeSortDsc				as	'_ZN6String12MergeSortDscEPPKiS2_mPFxS1_S1_E'
@@ -2804,11 +2832,11 @@ public	MergeKeyDsc_uint64			as	'_ZN5Array11MergeKeyDscEPmPPvPKmPPKvmS4_S7_m'
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 ;       Ascending sort order                                                   ;
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
-public	MergeAsc					as	'Array_MergeAsc'
+public	MergeAsc					as	'Array_MergeObjAsc'
 public	MergeAsc					as	'String_MergeAsc_char8'
 public	MergeAsc					as	'String_MergeAsc_char16'
 public	MergeAsc					as	'String_MergeAsc_char32'
-public	MergeAsc					as	'_ZN5Array8MergeAscEPPKvS2_mS2_mPFxS1_S1_E'
+public	MergeAsc					as	'_ZN5Array11MergeObjAscEPPKvS2_mS2_mPFxS1_S1_E'
 public	MergeAsc					as	'_ZN6String8MergeAscEPPKcS2_mS2_mPFxS1_S1_E'
 public	MergeAsc					as	'_ZN6String8MergeAscEPPKsS2_mS2_mPFxS1_S1_E'
 public	MergeAsc					as	'_ZN6String8MergeAscEPPKiS2_mS2_mPFxS1_S1_E'
@@ -2816,11 +2844,11 @@ public	MergeAsc					as	'_ZN6String8MergeAscEPPKiS2_mS2_mPFxS1_S1_E'
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 ;       Descending sort order                                                  ;
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
-public	MergeDsc					as	'Array_MergeDsc'
+public	MergeDsc					as	'Array_MergeObjDsc'
 public	MergeDsc					as	'String_MergeDsc_char8'
 public	MergeDsc					as	'String_MergeDsc_char16'
 public	MergeDsc					as	'String_MergeDsc_char32'
-public	MergeDsc					as	'_ZN5Array8MergeDscEPPKvS2_mS2_mPFxS1_S1_E'
+public	MergeDsc					as	'_ZN5Array11MergeObjDscEPPKvS2_mS2_mPFxS1_S1_E'
 public	MergeDsc					as	'_ZN6String8MergeDscEPPKcS2_mS2_mPFxS1_S1_E'
 public	MergeDsc					as	'_ZN6String8MergeDscEPPKsS2_mS2_mPFxS1_S1_E'
 public	MergeDsc					as	'_ZN6String8MergeDscEPPKiS2_mS2_mPFxS1_S1_E'
@@ -2936,11 +2964,11 @@ public	CheckSortDsc_sint64			as	'_ZN5Array12CheckSortDscEPKmm'
 ;------------------------------------------------------------------------------;
 ;       Check for ascending sort order                                         ;
 ;------------------------------------------------------------------------------;
-public	CheckSortAsc				as	'Array_CheckSortAsc'
+public	CheckSortAsc				as	'Array_CheckSortObjAsc'
 public	CheckSortAsc				as	'String_CheckSortAsc_char8'
 public	CheckSortAsc				as	'String_CheckSortAsc_char16'
 public	CheckSortAsc				as	'String_CheckSortAsc_char32'
-public	CheckSortAsc				as	'_ZN5Array12CheckSortAscEPPKvmPFxS1_S1_E'
+public	CheckSortAsc				as	'_ZN5Array15CheckSortObjAscEPPKvmPFxS1_S1_E'
 public	CheckSortAsc				as	'_ZN6String12CheckSortAscEPPKcmPFxS1_S1_E'
 public	CheckSortAsc				as	'_ZN6String12CheckSortAscEPPKsmPFxS1_S1_E'
 public	CheckSortAsc				as	'_ZN6String12CheckSortAscEPPKimPFxS1_S1_E'
@@ -2948,11 +2976,11 @@ public	CheckSortAsc				as	'_ZN6String12CheckSortAscEPPKimPFxS1_S1_E'
 ;------------------------------------------------------------------------------;
 ;       Check for descending sort order                                        ;
 ;------------------------------------------------------------------------------;
-public	CheckSortDsc				as	'Array_CheckSortDsc'
+public	CheckSortDsc				as	'Array_CheckSortObjDsc'
 public	CheckSortDsc				as	'String_CheckSortDsc_char8'
 public	CheckSortDsc				as	'String_CheckSortDsc_char16'
 public	CheckSortDsc				as	'String_CheckSortDsc_char32'
-public	CheckSortDsc				as	'_ZN5Array12CheckSortDscEPPKvmPFxS1_S1_E'
+public	CheckSortDsc				as	'_ZN5Array15CheckSortObjDscEPPKvmPFxS1_S1_E'
 public	CheckSortDsc				as	'_ZN6String12CheckSortDscEPPKcmPFxS1_S1_E'
 public	CheckSortDsc				as	'_ZN6String12CheckSortDscEPPKsmPFxS1_S1_E'
 public	CheckSortDsc				as	'_ZN6String12CheckSortDscEPPKimPFxS1_S1_E'
@@ -2992,11 +3020,11 @@ public	CheckDup64					as	'_ZN5Array8CheckDupEPKmm'
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 ;       Object array check                                                     ;
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
-public	CheckDup					as	'Array_CheckDup'
+public	CheckDup					as	'Array_CheckDupObj'
 public	CheckDup					as	'String_CheckDup_char8'
 public	CheckDup					as	'String_CheckDup_char16'
 public	CheckDup					as	'String_CheckDup_char32'
-public	CheckDup					as	'_ZN5Array8CheckDupEPPKvmPFxS1_S1_E'
+public	CheckDup					as	'_ZN5Array11CheckDupObjEPPKvmPFxS1_S1_E'
 public	CheckDup					as	'_ZN6String8CheckDupEPPKcmPFxS1_S1_E'
 public	CheckDup					as	'_ZN6String8CheckDupEPPKsmPFxS1_S1_E'
 public	CheckDup					as	'_ZN6String8CheckDupEPPKimPFxS1_S1_E'
@@ -3043,7 +3071,7 @@ public	CheckDiff64					as	'_ZN5Array9CheckDiffEPKxS1_m'
 
 ; Other types
 public	CheckDiff64					as	'Array_CheckDiff_size'
-public	CheckDiff8					as	'Array_CheckDiff_void'
+public	CheckDiff8					as	'Array_CheckDiff'
 public	CheckDiff64					as	'_ZN5Array9CheckDiffEPKmS1_m'
 public	CheckDiff8					as	'_ZN5Array9CheckDiffEPKvmS1_m'
 
@@ -3079,7 +3107,7 @@ public	Overlap64					as	'_ZN5Array7OverlapEPKdmS1_m'
 
 ; Other types
 public	Overlap64					as	'Array_Overlap_size'
-public	Overlap8					as	'Array_Overlap_void'
+public	Overlap8					as	'Array_Overlap'
 public	Overlap64					as	'_ZN5Array7OverlapEPKmS1_m'
 public	Overlap8					as	'_ZN5Array7OverlapEPKvmS1_m'
 
@@ -3119,7 +3147,7 @@ public	Hash32_bit64				as	'_ZN5Array6Hash32EPKdm'
 
 ; Other types
 public	Hash32_bit64				as	'Array_Hash32_size'
-public	Hash32_bit8					as	'Array_Hash32_void'
+public	Hash32_bit8					as	'Array_Hash32'
 public	Hash32_bit64				as	'_ZN5Array6Hash32EPKmm'
 public	Hash32_bit8					as	'_ZN5Array6Hash32EPKvm'
 
@@ -3155,7 +3183,7 @@ public	Hash64_bit64				as	'_ZN5Array6Hash64EPKdm'
 
 ; Other types
 public	Hash64_bit64				as	'Array_Hash64_size'
-public	Hash64_bit8					as	'Array_Hash64_void'
+public	Hash64_bit8					as	'Array_Hash64'
 public	Hash64_bit64				as	'_ZN5Array6Hash64EPKmm'
 public	Hash64_bit8					as	'_ZN5Array6Hash64EPKvm'
 
@@ -3629,22 +3657,6 @@ end if
 ;==============================================================================;
 
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
-;       Convert flt32 to flt64                                                 ;
-;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
-macro	CONVERT_FLT32_TO_FLT64_VECTOR	reg, move, iter1, iter2, toffst, soffst
-{
-		movlps	temp, [iter2 + soffst]
-	cvtps2pd	temp, temp
-		move	[iter1 + toffst], temp
-}
-macro	CONVERT_FLT32_TO_FLT64_SCALAR	reg
-{
-	cvtss2sd	temp, [source]
-		movsd	[target], temp
-}
-ConvertFlt32ToFlt64:	CONVERT	rax, movupd, movapd, CONVERT_FLT32_TO_FLT64_VECTOR, CONVERT_FLT32_TO_FLT64_SCALAR, 3, 2, 16, 8
-
-;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 ;       Convert flt64 to flt32                                                 ;
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 macro	CONVERT_FLT64_TO_FLT32_VECTOR	reg, move, iter1, iter2, toffst, soffst
@@ -3658,7 +3670,23 @@ macro	CONVERT_FLT64_TO_FLT32_SCALAR	reg
 	cvtsd2ss	temp, [source]
 		movss	[target], temp
 }
-ConvertFlt64ToFlt32:	CONVERT	eax, movlps, movlps, CONVERT_FLT64_TO_FLT32_VECTOR, CONVERT_FLT64_TO_FLT32_SCALAR, 2, 3, 8, 16
+ConvertToFlt32_flt64:	CONVERT	eax, movlps, movlps, CONVERT_FLT64_TO_FLT32_VECTOR, CONVERT_FLT64_TO_FLT32_SCALAR, 2, 3, 8, 16
+
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+;       Convert flt32 to flt64                                                 ;
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+macro	CONVERT_FLT32_TO_FLT64_VECTOR	reg, move, iter1, iter2, toffst, soffst
+{
+		movlps	temp, [iter2 + soffst]
+	cvtps2pd	temp, temp
+		move	[iter1 + toffst], temp
+}
+macro	CONVERT_FLT32_TO_FLT64_SCALAR	reg
+{
+	cvtss2sd	temp, [source]
+		movsd	[target], temp
+}
+ConvertToFlt64_flt32:	CONVERT	rax, movupd, movapd, CONVERT_FLT32_TO_FLT64_VECTOR, CONVERT_FLT32_TO_FLT64_SCALAR, 3, 2, 16, 8
 
 ;==============================================================================;
 ;       Conversion from signed integer types to floating-point types           ;
@@ -3678,23 +3706,7 @@ macro	CONVERT_SINT32_TO_FLT32_SCALAR	reg
 	cvtsi2ss 	temp, dword [source]
 		movss	[target], temp
 }
-ConvertSint32ToFlt32:	CONVERT	eax, movups, movaps, CONVERT_SINT32_TO_FLT32_VECTOR, CONVERT_SINT32_TO_FLT32_SCALAR, 2, 2, 16, 16
-
-;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
-;       Convert sint32 to flt64                                                ;
-;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
-macro	CONVERT_SINT32_TO_FLT64_VECTOR	reg, move, iter1, iter2, toffst, soffst
-{
-		movq	temp, [iter2 + soffst]
-	cvtdq2pd	temp, temp
-		move	[iter1 + toffst], temp
-}
-macro	CONVERT_SINT32_TO_FLT64_SCALAR	reg
-{
-	cvtsi2sd 	temp, dword [source]
-		movsd	[target], temp
-}
-ConvertSint32ToFlt64:	CONVERT	rax, movupd, movapd, CONVERT_SINT32_TO_FLT64_VECTOR, CONVERT_SINT32_TO_FLT64_SCALAR, 3, 2, 16, 8
+ConvertToFlt32_sint32:	CONVERT	eax, movups, movaps, CONVERT_SINT32_TO_FLT32_VECTOR, CONVERT_SINT32_TO_FLT32_SCALAR, 2, 2, 16, 16
 
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 ;       Convert sint64 to flt32                                                ;
@@ -3711,7 +3723,23 @@ macro	CONVERT_SINT64_TO_FLT32_SCALAR	reg
 	cvtsi2ss 	temp, qword [source]
 		movss	[target], temp
 }
-ConvertSint64ToFlt32:	CONVERT	eax, movss, movss, CONVERT_SINT64_TO_FLT32_VECTOR, CONVERT_SINT64_TO_FLT32_SCALAR, 2, 3, 8, 16
+ConvertToFlt32_sint64:	CONVERT	eax, movss, movss, CONVERT_SINT64_TO_FLT32_VECTOR, CONVERT_SINT64_TO_FLT32_SCALAR, 2, 3, 8, 16
+
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+;       Convert sint32 to flt64                                                ;
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+macro	CONVERT_SINT32_TO_FLT64_VECTOR	reg, move, iter1, iter2, toffst, soffst
+{
+		movq	temp, [iter2 + soffst]
+	cvtdq2pd	temp, temp
+		move	[iter1 + toffst], temp
+}
+macro	CONVERT_SINT32_TO_FLT64_SCALAR	reg
+{
+	cvtsi2sd 	temp, dword [source]
+		movsd	[target], temp
+}
+ConvertToFlt64_sint32:	CONVERT	rax, movupd, movapd, CONVERT_SINT32_TO_FLT64_VECTOR, CONVERT_SINT32_TO_FLT64_SCALAR, 3, 2, 16, 8
 
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 ;       Convert sint64 to flt64                                                ;
@@ -3728,7 +3756,7 @@ macro	CONVERT_SINT64_TO_FLT64_SCALAR	reg
 	cvtsi2sd 	temp, qword [source]
 		movsd	[target], temp
 }
-ConvertSint64ToFlt64:	CONVERT	rax, movsd, movsd, CONVERT_SINT64_TO_FLT64_VECTOR, CONVERT_SINT64_TO_FLT64_SCALAR, 3, 3, 16, 16
+ConvertToFlt64_sint64:	CONVERT	rax, movsd, movsd, CONVERT_SINT64_TO_FLT64_VECTOR, CONVERT_SINT64_TO_FLT64_SCALAR, 3, 3, 16, 16
 
 ;==============================================================================;
 ;       Conversion from floating-point types to signed integer types           ;
@@ -3748,7 +3776,23 @@ macro	CONVERT_FLT32_TO_SINT32_SCALAR	reg
 	cvtss2si 	reg, [source]
 		mov		[target], reg
 }
-ConvertFlt32ToSint32:	CONVERT	eax, movdqu, movdqa, CONVERT_FLT32_TO_SINT32_VECTOR, CONVERT_FLT32_TO_SINT32_SCALAR, 2, 2, 16, 16
+ConvertToSint32_flt32:	CONVERT	eax, movdqu, movdqa, CONVERT_FLT32_TO_SINT32_VECTOR, CONVERT_FLT32_TO_SINT32_SCALAR, 2, 2, 16, 16
+
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+;       Convert flt64 to sint32                                                ;
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+macro	CONVERT_FLT64_TO_SINT32_VECTOR	reg, move, iter1, iter2, toffst, soffst
+{
+		movupd	temp, [iter2 + soffst]
+	cvtpd2dq	temp, temp
+		move	[iter1 + toffst], temp
+}
+macro	CONVERT_FLT64_TO_SINT32_SCALAR	reg
+{
+	cvtsd2si 	reg, [source]
+		mov		[target], reg
+}
+ConvertToSint32_flt64:	CONVERT	eax, movq, movq, CONVERT_FLT64_TO_SINT32_VECTOR, CONVERT_FLT64_TO_SINT32_SCALAR, 2, 3, 8, 16
 
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 ;       Convert flt32 to sint64                                                ;
@@ -3765,23 +3809,7 @@ macro	CONVERT_FLT32_TO_SINT64_SCALAR	reg
 	cvtss2si 	reg, [source]
 		mov		[target], reg
 }
-ConvertFlt32ToSint64:	CONVERT	rax, mov, mov, CONVERT_FLT32_TO_SINT64_VECTOR, CONVERT_FLT32_TO_SINT64_SCALAR, 3, 2, 16, 8
-
-;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
-;       Convert flt64 to sint32                                                ;
-;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
-macro	CONVERT_FLT64_TO_SINT32_VECTOR	reg, move, iter1, iter2, toffst, soffst
-{
-		movupd	temp, [iter2 + soffst]
-	cvtpd2dq	temp, temp
-		move	[iter1 + toffst], temp
-}
-macro	CONVERT_FLT64_TO_SINT32_SCALAR	reg
-{
-	cvtsd2si 	reg, [source]
-		mov		[target], reg
-}
-ConvertFlt64ToSint32:	CONVERT	eax, movq, movq, CONVERT_FLT64_TO_SINT32_VECTOR, CONVERT_FLT64_TO_SINT32_SCALAR, 2, 3, 8, 16
+ConvertToSint64_flt32:	CONVERT	rax, mov, mov, CONVERT_FLT32_TO_SINT64_VECTOR, CONVERT_FLT32_TO_SINT64_SCALAR, 3, 2, 16, 8
 
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 ;       Convert flt64 to sint64                                                ;
@@ -3798,7 +3826,7 @@ macro	CONVERT_FLT64_TO_SINT64_SCALAR	reg
 	cvtsd2si 	reg, [source]
 		mov		[target], reg
 }
-ConvertFlt64ToSint64:	CONVERT	rax, mov, mov, CONVERT_FLT64_TO_SINT64_VECTOR, CONVERT_FLT64_TO_SINT64_SCALAR, 3, 3, 16, 16
+ConvertToSint64_flt64:	CONVERT	rax, mov, mov, CONVERT_FLT64_TO_SINT64_VECTOR, CONVERT_FLT64_TO_SINT64_SCALAR, 3, 3, 16, 16
 
 ;==============================================================================;
 ;       Truncating from floating-point types to signed integer types           ;
@@ -3818,7 +3846,23 @@ macro	TRUNCATE_FLT32_TO_SINT32_SCALAR	reg
 	cvttss2si 	reg, [source]
 		mov		[target], reg
 }
-TruncateFlt32ToSint32:	CONVERT	eax, movdqu, movdqa, TRUNCATE_FLT32_TO_SINT32_VECTOR, TRUNCATE_FLT32_TO_SINT32_SCALAR, 2, 2, 16, 16
+TruncateToSint32_flt32:	CONVERT	eax, movdqu, movdqa, TRUNCATE_FLT32_TO_SINT32_VECTOR, TRUNCATE_FLT32_TO_SINT32_SCALAR, 2, 2, 16, 16
+
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+;       Truncate flt64 to sint32                                               ;
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
+macro	TRUNCATE_FLT64_TO_SINT32_VECTOR	reg, move, iter1, iter2, toffst, soffst
+{
+		movupd	temp, [iter2 + soffst]
+	cvttpd2dq	temp, temp
+		move	[iter1 + toffst], temp
+}
+macro	TRUNCATE_FLT64_TO_SINT32_SCALAR	reg
+{
+	cvttsd2si 	reg, [source]
+		mov		[target], reg
+}
+TruncateToSint32_flt64:	CONVERT	eax, movq, movq, TRUNCATE_FLT64_TO_SINT32_VECTOR, TRUNCATE_FLT64_TO_SINT32_SCALAR, 2, 3, 8, 16
 
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 ;       Truncate flt32 to sint64                                               ;
@@ -3835,23 +3879,7 @@ macro	TRUNCATE_FLT32_TO_SINT64_SCALAR	reg
 	cvttss2si 	reg, [source]
 		mov		[target], reg
 }
-TruncateFlt32ToSint64:	CONVERT	rax, mov, mov, TRUNCATE_FLT32_TO_SINT64_VECTOR, TRUNCATE_FLT32_TO_SINT64_SCALAR, 3, 2, 16, 8
-
-;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
-;       Truncate flt64 to sint32                                               ;
-;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
-macro	TRUNCATE_FLT64_TO_SINT32_VECTOR	reg, move, iter1, iter2, toffst, soffst
-{
-		movupd	temp, [iter2 + soffst]
-	cvttpd2dq	temp, temp
-		move	[iter1 + toffst], temp
-}
-macro	TRUNCATE_FLT64_TO_SINT32_SCALAR	reg
-{
-	cvttsd2si 	reg, [source]
-		mov		[target], reg
-}
-TruncateFlt64ToSint32:	CONVERT	eax, movq, movq, TRUNCATE_FLT64_TO_SINT32_VECTOR, TRUNCATE_FLT64_TO_SINT32_SCALAR, 2, 3, 8, 16
+TruncateToSint64_flt32:	CONVERT	rax, mov, mov, TRUNCATE_FLT32_TO_SINT64_VECTOR, TRUNCATE_FLT32_TO_SINT64_SCALAR, 3, 2, 16, 8
 
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 ;       Truncate flt64 to sint64                                               ;
@@ -3868,7 +3896,7 @@ macro	TRUNCATE_FLT64_TO_SINT64_SCALAR	reg
 	cvttsd2si 	reg, [source]
 		mov		[target], reg
 }
-TruncateFlt64ToSint64:	CONVERT	rax, mov, mov, TRUNCATE_FLT64_TO_SINT64_VECTOR, TRUNCATE_FLT64_TO_SINT64_SCALAR, 3, 3, 16, 16
+TruncateToSint64_flt64:	CONVERT	rax, mov, mov, TRUNCATE_FLT64_TO_SINT64_VECTOR, TRUNCATE_FLT64_TO_SINT64_SCALAR, 3, 3, 16, 16
 
 ;******************************************************************************;
 ;       Bit field operations                                                   ;
@@ -6229,7 +6257,7 @@ bytes	= 1 shl scale						; size of array element (bytes)
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 
 ;------------------------------------------------------------------------------;
-;       Searching for equal element                                            ;
+;       Searching for first equal element                                      ;
 ;------------------------------------------------------------------------------;
 
 ; Unsigned integer types
@@ -6237,16 +6265,24 @@ FindFirstEqualAsc_uint8:	FINDBIN		dl, e, a, 0
 FindFirstEqualAsc_uint16:	FINDBIN		dx, e, a, 1
 FindFirstEqualAsc_uint32:	FINDBIN		edx, e, a, 2
 FindFirstEqualAsc_uint64:	FINDBIN		rdx, e, a, 3
-FindLastEqualAsc_uint8:		FINDBIN		dl, e, ae, 0
-FindLastEqualAsc_uint16:	FINDBIN		dx, e, ae, 1
-FindLastEqualAsc_uint32:	FINDBIN		edx, e, ae, 2
-FindLastEqualAsc_uint64:	FINDBIN		rdx, e, ae, 3
 
 ; Signed integer types
 FindFirstEqualAsc_sint8:	FINDBIN		dl, e, g, 0
 FindFirstEqualAsc_sint16:	FINDBIN		dx, e, g, 1
 FindFirstEqualAsc_sint32:	FINDBIN		edx, e, g, 2
 FindFirstEqualAsc_sint64:	FINDBIN		rdx, e, g, 3
+
+;------------------------------------------------------------------------------;
+;       Searching for last equal element                                       ;
+;------------------------------------------------------------------------------;
+
+; Unsigned integer types
+FindLastEqualAsc_uint8:		FINDBIN		dl, e, ae, 0
+FindLastEqualAsc_uint16:	FINDBIN		dx, e, ae, 1
+FindLastEqualAsc_uint32:	FINDBIN		edx, e, ae, 2
+FindLastEqualAsc_uint64:	FINDBIN		rdx, e, ae, 3
+
+; Signed integer types
 FindLastEqualAsc_sint8:		FINDBIN		dl, e, ge, 0
 FindLastEqualAsc_sint16:	FINDBIN		dx, e, ge, 1
 FindLastEqualAsc_sint32:	FINDBIN		edx, e, ge, 2
@@ -6321,7 +6357,7 @@ FindLessEqualAsc_sint64:	FINDBIN		rdx, ge, ge, 3
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 
 ;------------------------------------------------------------------------------;
-;       Searching for equal element                                            ;
+;       Searching for first equal element                                      ;
 ;------------------------------------------------------------------------------;
 
 ; Unsigned integer types
@@ -6329,16 +6365,24 @@ FindFirstEqualDsc_uint8:	FINDBIN		dl, e, b, 0
 FindFirstEqualDsc_uint16:	FINDBIN		dx, e, b, 1
 FindFirstEqualDsc_uint32:	FINDBIN		edx, e, b, 2
 FindFirstEqualDsc_uint64:	FINDBIN		rdx, e, b, 3
-FindLastEqualDsc_uint8:		FINDBIN		dl, e, be, 0
-FindLastEqualDsc_uint16:	FINDBIN		dx, e, be, 1
-FindLastEqualDsc_uint32:	FINDBIN		edx, e, be, 2
-FindLastEqualDsc_uint64:	FINDBIN		rdx, e, be, 3
 
 ; Signed integer types
 FindFirstEqualDsc_sint8:	FINDBIN		dl, e, l, 0
 FindFirstEqualDsc_sint16:	FINDBIN		dx, e, l, 1
 FindFirstEqualDsc_sint32:	FINDBIN		edx, e, l, 2
 FindFirstEqualDsc_sint64:	FINDBIN		rdx, e, l, 3
+
+;------------------------------------------------------------------------------;
+;       Searching for last equal element                                       ;
+;------------------------------------------------------------------------------;
+
+; Unsigned integer types
+FindLastEqualDsc_uint8:		FINDBIN		dl, e, be, 0
+FindLastEqualDsc_uint16:	FINDBIN		dx, e, be, 1
+FindLastEqualDsc_uint32:	FINDBIN		edx, e, be, 2
+FindLastEqualDsc_uint64:	FINDBIN		rdx, e, be, 3
+
+; Signed integer types
 FindLastEqualDsc_sint8:		FINDBIN		dl, e, le, 0
 FindLastEqualDsc_sint16:	FINDBIN		dx, e, le, 1
 FindLastEqualDsc_sint32:	FINDBIN		edx, e, le, 2
@@ -6482,8 +6526,10 @@ space	= 7 * 8								; stack size required by the procedure
 ;       Ascending sort order                                                   ;
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 
-; Searching for equal element
+; Searching for first equal element
 FindFirstEqualAsc:		FINDBIN_OBJ		e, g
+
+; Searching for last equal element
 FindLastEqualAsc:		FINDBIN_OBJ		e, ge
 
 ; Searching for greater element
@@ -6502,8 +6548,10 @@ FindLessOrEqualAsc:		FINDBIN_OBJ		ge, ge
 ;       Descending sort order                                                  ;
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 
-; Searching for equal element
+; Searching for first equal element
 FindFirstEqualDsc:		FINDBIN_OBJ		e, l
+
+; Searching for last equal element
 FindLastEqualDsc:		FINDBIN_OBJ		e, le
 
 ; Searching for less element
