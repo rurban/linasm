@@ -56,9 +56,9 @@ public	CopyStr_char32			as	'_ZN6String4CopyEPimPKi'
 public	CopySeq_char8			as	'String_CopyN_char8'
 public	CopySeq_char16			as	'String_CopyN_char16'
 public	CopySeq_char32			as	'String_CopyN_char32'
-public	CopySeq_char8			as	'_ZN6String4CopyEPcmPKcm'
-public	CopySeq_char16			as	'_ZN6String4CopyEPsmPKsm'
-public	CopySeq_char32			as	'_ZN6String4CopyEPimPKim'
+public	CopySeq_char8			as	'_ZN6String5CopyNEPcmPKcm'
+public	CopySeq_char16			as	'_ZN6String5CopyNEPsmPKsm'
+public	CopySeq_char32			as	'_ZN6String5CopyNEPimPKim'
 
 ;******************************************************************************;
 ;       Concatenating                                                          ;
@@ -76,9 +76,9 @@ public	CatStr_char32			as	'_ZN6String3CatEPimPKi'
 public	CatSeq_char8			as	'String_CatN_char8'
 public	CatSeq_char16			as	'String_CatN_char16'
 public	CatSeq_char32			as	'String_CatN_char32'
-public	CatSeq_char8			as	'_ZN6String3CatEPcmPKcm'
-public	CatSeq_char16			as	'_ZN6String3CatEPsmPKsm'
-public	CatSeq_char32			as	'_ZN6String3CatEPimPKim'
+public	CatSeq_char8			as	'_ZN6String4CatNEPcmPKcm'
+public	CatSeq_char16			as	'_ZN6String4CatNEPsmPKsm'
+public	CatSeq_char32			as	'_ZN6String4CatNEPimPKim'
 
 ;******************************************************************************;
 ;       String comparison                                                      ;
@@ -96,9 +96,9 @@ public	CompareStr_char32		as	'_ZN6String7CompareEPKiS1_'
 public	CompareSeq_char8		as	'String_CompareN_char8'
 public	CompareSeq_char16		as	'String_CompareN_char16'
 public	CompareSeq_char32		as	'String_CompareN_char32'
-public	CompareSeq_char8		as	'_ZN6String7CompareEPKcS1_m'
-public	CompareSeq_char16		as	'_ZN6String7CompareEPKsS1_m'
-public	CompareSeq_char32		as	'_ZN6String7CompareEPKiS1_m'
+public	CompareSeq_char8		as	'_ZN6String8CompareNEPKcS1_m'
+public	CompareSeq_char16		as	'_ZN6String8CompareNEPKsS1_m'
+public	CompareSeq_char32		as	'_ZN6String8CompareNEPKiS1_m'
 
 ;******************************************************************************;
 ;       Symbol search                                                          ;
@@ -176,17 +176,17 @@ public	FindStrStrBwd_char32	as	'_ZN6String16FindSubStringBwdEPKiS1_'
 public	FindSeqStrFwd_char8		as	'String_FindSubStringNFwd_char8'
 public	FindSeqStrFwd_char16	as	'String_FindSubStringNFwd_char16'
 public	FindSeqStrFwd_char32	as	'String_FindSubStringNFwd_char32'
-public	FindSeqStrFwd_char8		as	'_ZN6String16FindSubStringFwdEPKcmS1_'
-public	FindSeqStrFwd_char16	as	'_ZN6String16FindSubStringFwdEPKsmS1_'
-public	FindSeqStrFwd_char32	as	'_ZN6String16FindSubStringFwdEPKimS1_'
+public	FindSeqStrFwd_char8		as	'_ZN6String17FindSubStringNFwdEPKcmS1_'
+public	FindSeqStrFwd_char16	as	'_ZN6String17FindSubStringNFwdEPKsmS1_'
+public	FindSeqStrFwd_char32	as	'_ZN6String17FindSubStringNFwdEPKimS1_'
 
 ; Backward direction search
 public	FindSeqStrBwd_char8		as	'String_FindSubStringNBwd_char8'
 public	FindSeqStrBwd_char16	as	'String_FindSubStringNBwd_char16'
 public	FindSeqStrBwd_char32	as	'String_FindSubStringNBwd_char32'
-public	FindSeqStrBwd_char8		as	'_ZN6String16FindSubStringBwdEPKcmS1_'
-public	FindSeqStrBwd_char16	as	'_ZN6String16FindSubStringBwdEPKsmS1_'
-public	FindSeqStrBwd_char32	as	'_ZN6String16FindSubStringBwdEPKimS1_'
+public	FindSeqStrBwd_char8		as	'_ZN6String17FindSubStringNBwdEPKcmS1_'
+public	FindSeqStrBwd_char16	as	'_ZN6String17FindSubStringNBwdEPKsmS1_'
+public	FindSeqStrBwd_char32	as	'_ZN6String17FindSubStringNBwdEPKimS1_'
 
 ;******************************************************************************;
 ;       Counting                                                               ;

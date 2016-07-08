@@ -186,7 +186,7 @@ this	equ		rdi							; pointer to target accumulator object
 source	equ		rsi							; pointer to source accumulator object
 ;---[Internal variables]-------------------
 buffer	equ		rax							; pointer to memory buffer
-temp	equ		rcx							; temporary register
+temp	equ		rdx							; temporary register
 fptr	equ		rax							; pointer to call external function
 stack	equ		rsp							; stack pointer
 s_this	equ		stack + 0 * 8				; stack position of "this" variable
@@ -217,7 +217,7 @@ space	= 3 * 8								; stack size required by the procedure
 		mov		[this + CAPACITY], temp		; this.capacity = source.capacity
 		mov		temp, [source + SIZE]
 		mov		[this + SIZE], temp			; this.size = source.size
-;---[Copy content of nodes]----------------
+;---[Copy elements]------------------------
 		mov		param3, [source + SIZE]
 		mov		param2, [source + BUFFER]
 		mov		param1, buffer

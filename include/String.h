@@ -44,9 +44,9 @@ static size_t Copy (char16_t target[], size_t maxlen, const char16_t source[]);
 static size_t Copy (char32_t target[], size_t maxlen, const char32_t source[]);
 
 // Copying of characters sequence to string
-static size_t Copy (char8_t target[], size_t maxlen, const char8_t source[], size_t size);
-static size_t Copy (char16_t target[], size_t maxlen, const char16_t source[], size_t size);
-static size_t Copy (char32_t target[], size_t maxlen, const char32_t source[], size_t size);
+static size_t CopyN (char8_t target[], size_t maxlen, const char8_t source[], size_t size);
+static size_t CopyN (char16_t target[], size_t maxlen, const char16_t source[], size_t size);
+static size_t CopyN (char32_t target[], size_t maxlen, const char32_t source[], size_t size);
 
 //****************************************************************************//
 //      Concatenating                                                         //
@@ -58,9 +58,9 @@ static size_t Cat (char16_t target[], size_t maxlen, const char16_t source[]);
 static size_t Cat (char32_t target[], size_t maxlen, const char32_t source[]);
 
 // Concatenating of characters sequence to string
-static size_t Cat (char8_t target[], size_t maxlen, const char8_t source[], size_t size);
-static size_t Cat (char16_t target[], size_t maxlen, const char16_t source[], size_t size);
-static size_t Cat (char32_t target[], size_t maxlen, const char32_t source[], size_t size);
+static size_t CatN (char8_t target[], size_t maxlen, const char8_t source[], size_t size);
+static size_t CatN (char16_t target[], size_t maxlen, const char16_t source[], size_t size);
+static size_t CatN (char32_t target[], size_t maxlen, const char32_t source[], size_t size);
 
 //****************************************************************************//
 //      String comparison                                                     //
@@ -72,9 +72,9 @@ static sint64_t Compare (const char16_t string1[], const char16_t string2[]);
 static sint64_t Compare (const char32_t string1[], const char32_t string2[]);
 
 // Comparison of characters sequences
-static sint64_t Compare (const char8_t string1[], const char8_t string2[], size_t size);
-static sint64_t Compare (const char16_t string1[], const char16_t string2[], size_t size);
-static sint64_t Compare (const char32_t string1[], const char32_t string2[], size_t size);
+static sint64_t CompareN (const char8_t string1[], const char8_t string2[], size_t size);
+static sint64_t CompareN (const char16_t string1[], const char16_t string2[], size_t size);
+static sint64_t CompareN (const char32_t string1[], const char32_t string2[], size_t size);
 
 //****************************************************************************//
 //      Symbol search                                                         //
@@ -131,14 +131,14 @@ static size_t FindSubStringBwd (const char32_t string[], const char32_t pattern[
 //============================================================================//
 
 // Forward direction search
-static size_t FindSubStringFwd (const char8_t string[], size_t size, const char8_t pattern[]);
-static size_t FindSubStringFwd (const char16_t string[], size_t size, const char16_t pattern[]);
-static size_t FindSubStringFwd (const char32_t string[], size_t size, const char32_t pattern[]);
+static size_t FindSubStringNFwd (const char8_t string[], size_t size, const char8_t pattern[]);
+static size_t FindSubStringNFwd (const char16_t string[], size_t size, const char16_t pattern[]);
+static size_t FindSubStringNFwd (const char32_t string[], size_t size, const char32_t pattern[]);
 
 // Backward direction search
-static size_t FindSubStringBwd (const char8_t string[], size_t size, const char8_t pattern[]);
-static size_t FindSubStringBwd (const char16_t string[], size_t size, const char16_t pattern[]);
-static size_t FindSubStringBwd (const char32_t string[], size_t size, const char32_t pattern[]);
+static size_t FindSubStringNBwd (const char8_t string[], size_t size, const char8_t pattern[]);
+static size_t FindSubStringNBwd (const char16_t string[], size_t size, const char16_t pattern[]);
+static size_t FindSubStringNBwd (const char32_t string[], size_t size, const char32_t pattern[]);
 
 //****************************************************************************//
 //      String search                                                         //
@@ -166,10 +166,12 @@ static size_t FindBwd (const char32_t* array[], size_t size, const char32_t stri
 //      Ascending sort order                                                  //
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
-// Searching for equal string
+// Searching for first equal string
 static size_t FindFirstEqualAsc (const char8_t* array[], size_t size, const char8_t string[], CmpChar8 func);
 static size_t FindFirstEqualAsc (const char16_t* array[], size_t size, const char16_t string[], CmpChar16 func);
 static size_t FindFirstEqualAsc (const char32_t* array[], size_t size, const char32_t string[], CmpChar32 func);
+
+// Searching for last equal string
 static size_t FindLastEqualAsc (const char8_t* array[], size_t size, const char8_t string[], CmpChar8 func);
 static size_t FindLastEqualAsc (const char16_t* array[], size_t size, const char16_t string[], CmpChar16 func);
 static size_t FindLastEqualAsc (const char32_t* array[], size_t size, const char32_t string[], CmpChar32 func);
@@ -198,10 +200,12 @@ static size_t FindLessOrEqualAsc (const char32_t* array[], size_t size, const ch
 //      Descending sort order                                                 //
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
-// Searching for equal string
+// Searching for first equal string
 static size_t FindFirstEqualDsc (const char8_t* array[], size_t size, const char8_t string[], CmpChar8 func);
 static size_t FindFirstEqualDsc (const char16_t* array[], size_t size, const char16_t string[], CmpChar16 func);
 static size_t FindFirstEqualDsc (const char32_t* array[], size_t size, const char32_t string[], CmpChar32 func);
+
+// Searching for last equal string
 static size_t FindLastEqualDsc (const char8_t* array[], size_t size, const char8_t string[], CmpChar8 func);
 static size_t FindLastEqualDsc (const char16_t* array[], size_t size, const char16_t string[], CmpChar16 func);
 static size_t FindLastEqualDsc (const char32_t* array[], size_t size, const char32_t string[], CmpChar32 func);
@@ -632,10 +636,12 @@ size_t String_FindBwd_char32 (const char32_t* array[], size_t size, const char32
 //      Ascending sort order                                                  //
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
-// Searching for equal string
+// Searching for first equal string
 size_t String_FindFirstEqualAsc_char8 (const char8_t* array[], size_t size, const char8_t string[], CmpChar8 func);
 size_t String_FindFirstEqualAsc_char16 (const char16_t* array[], size_t size, const char16_t string[], CmpChar16 func);
 size_t String_FindFirstEqualAsc_char32 (const char32_t* array[], size_t size, const char32_t string[], CmpChar32 func);
+
+// Searching for last equal string
 size_t String_FindLastEqualAsc_char8 (const char8_t* array[], size_t size, const char8_t string[], CmpChar8 func);
 size_t String_FindLastEqualAsc_char16 (const char16_t* array[], size_t size, const char16_t string[], CmpChar16 func);
 size_t String_FindLastEqualAsc_char32 (const char32_t* array[], size_t size, const char32_t string[], CmpChar32 func);
@@ -664,10 +670,12 @@ size_t String_FindLessOrEqualAsc_char32 (const char32_t* array[], size_t size, c
 //      Descending sort order                                                 //
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
-// Searching for equal string
+// Searching for first equal string
 size_t String_FindFirstEqualDsc_char8 (const char8_t* array[], size_t size, const char8_t string[], CmpChar8 func);
 size_t String_FindFirstEqualDsc_char16 (const char16_t* array[], size_t size, const char16_t string[], CmpChar16 func);
 size_t String_FindFirstEqualDsc_char32 (const char32_t* array[], size_t size, const char32_t string[], CmpChar32 func);
+
+// Searching for last equal string
 size_t String_FindLastEqualDsc_char8 (const char8_t* array[], size_t size, const char8_t string[], CmpChar8 func);
 size_t String_FindLastEqualDsc_char16 (const char16_t* array[], size_t size, const char16_t string[], CmpChar16 func);
 size_t String_FindLastEqualDsc_char32 (const char32_t* array[], size_t size, const char32_t string[], CmpChar32 func);
