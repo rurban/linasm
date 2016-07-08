@@ -7,6 +7,34 @@
 ################################################################################
 
 #******************************************************************************#
+#       Release 1.13 (stable) [2016-07-08]                                     #
+#******************************************************************************#
+
+ADT's functions may change container elements or manipulate with built in
+iterators. This can result to data inconsistency among different threads.
+To solve this possible issue, a programmer have to separate read and write
+operations to containers. Write operation can not be invoked in the same time
+with other write or read operations, and should get exclusive access to
+the container. Read operations can be processed simultaneously with each other,
+but not with write operation (because of possible dirty reads).
+
+Access predicates solve these problems and support lock methods for exclusive
+writes and concurrent reads from different threads. Lock functions return
+TRUE state only when you get appropriate access to the container. They support
+wait and no wait behaviors. If wait flag is set, then lock functions wait until
+the lock is taken. In no wait mode they try to get lock for some short period
+of time (spinlock cycle). And if no success, then return FALSE. Your code may
+check the return status and do something else instead of just waiting.
+
+Also in this release:
+    * Was added prefetch code to MultiTree and UniqueTree, which improved binary
+      search algorithms in these containers.
+    * Added non linear filters to Filter library, which do Min, Max and Median
+      filtering of integer and floating-point arrays.
+    * MinMeap and MaxHeap were refactored to have correct cache friendly
+      alignment of internal data.
+
+#******************************************************************************#
 #       Release 1.12 (stable) [2016-04-16]                                     #
 #******************************************************************************#
 

@@ -78,7 +78,7 @@ INSTALL_PROGRAM := $(INSTALL)
 INSTALL_DATA	:= $(INSTALL) -m 644
 
 lib				:= liblinasm.so
-ver				:= 1.12
+ver				:= 1.13
 vlib			:= $(lib).$(ver)
 includes		:= $(notdir $(wildcard $(incdir)/*.h))
 objects			:= $(notdir $(patsubst %.asm, %.o, $(wildcard $(srcdir)/*.asm)))

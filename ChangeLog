@@ -1,4 +1,14 @@
 +==============================================================================+
+|   2016-07-08  Release 1.13 (stable)                                          |
++==============================================================================+
+
+New features:
+	* Btree.asm, Deque.asm, Hash.asm, Heap.asm, List.asm, Vector.asm: Add access predicates
+	* Filter.asm: Added non linear filters: Median, Min, Max
+	* Heap.asm: Refactored heap algorithms to correspond with cache line alignment
+	* Improved algorithm of hash table (works faster in case of duplicate values)
+
++==============================================================================+
 |   2016-04-16  Release 1.12 (stable)                                          |
 +==============================================================================+
 
