@@ -22,22 +22,25 @@
 class UniqueHash
 {
 private:
-	void	*array;		// Pointer to array which holds hash table data
-	size_t	capacity;	// Capacity of the hash table (auto extended if required)
-	size_t	size;		// Current hash table size
-	size_t	pool;		// Index of first free node in the pool
-	size_t	fwd;		// Current position of forward iterator
-	size_t	bwd;		// Current position of backward iterator
-	size_t	futex;		// Container's futex
-	KeyCmp	kfunc;		// Key compare function
-	Hash	hfunc;		// Hash function
+	void		*array;		// Pointer to array which holds hash table data
+	size_t		capacity;	// Capacity of the hash table (auto extended if required)
+	size_t		size;		// Current hash table size
+	size_t		pool;		// Index of first free node in the pool
+	size_t		fwd;		// Current position of forward iterator
+	size_t		bwd;		// Current position of backward iterator
+	size_t		futex;		// Container's futex
+	KeyCmp		kfunc;		// Key compare function
+	HashFunc	hfunc;		// Hash function
+	CopyFunc	cfunc;		// Copy function for element fields: key and data
+	DelFunc		dfunc;		// Delete function to call for removing elements
+	void		*ptr;		// Pointer to user's data
 
 public:
 
 //****************************************************************************//
 //      Constructor                                                           //
 //****************************************************************************//
-UniqueHash (size_t capacity, KeyCmp kfunc, Hash hfunc);
+UniqueHash (size_t capacity, KeyCmp kfunc, HashFunc hfunc, CopyFunc cfunc, DelFunc dfunc, void *ptr);
 
 //****************************************************************************//
 //      Copy constructor                                                      //
@@ -64,37 +67,31 @@ void AllowWritings (void);
 //****************************************************************************//
 //      Insertion of element                                                  //
 //****************************************************************************//
-bool Insert (const data_t *data);
+bool Insert (const pair_t *data);
 
 //****************************************************************************//
 //      Removing of element                                                   //
 //****************************************************************************//
-bool RemoveFwd (data_t *data);
-bool RemoveBwd (data_t *data);
+bool RemoveFwd (void);
+bool RemoveBwd (void);
 
 //****************************************************************************//
 //      Setting element value                                                 //
 //****************************************************************************//
-bool SetFwd (const data_t *data);
-bool SetBwd (const data_t *data);
+bool SetFwd (const pair_t *data);
+bool SetBwd (const pair_t *data);
 
 //****************************************************************************//
 //      Getting element value                                                 //
 //****************************************************************************//
-bool GetFwd (data_t *data) const;
-bool GetBwd (data_t *data) const;
-bool GetIter (data_t *data, ptr_t iter) const;
-
-//****************************************************************************//
-//      Replacing element value                                               //
-//****************************************************************************//
-bool ReplaceFwd (data_t *odata, const data_t *ndata);
-bool ReplaceBwd (data_t *odata, const data_t *ndata);
+bool GetFwd (pair_t *data) const;
+bool GetBwd (pair_t *data) const;
+bool GetIter (pair_t *data, ptr_t iter) const;
 
 //****************************************************************************//
 //      Overriding element value                                              //
 //****************************************************************************//
-bool Override (data_t *odata, const data_t *ndata);
+bool Override (const pair_t *data);
 
 //****************************************************************************//
 //      Manipulation with forward iterator                                    //
@@ -146,32 +143,32 @@ void SwapFwdBwd (void);
 //****************************************************************************//
 
 // Minimum value
-bool MinFwd (data_t *data);
-bool MinBwd (data_t *data);
-bool MinIterFwd (data_t *data, ptr_t *iter) const;
-bool MinIterBwd (data_t *data, ptr_t *iter) const;
+bool MinFwd (pair_t *data);
+bool MinBwd (pair_t *data);
+bool MinIterFwd (pair_t *data, ptr_t *iter) const;
+bool MinIterBwd (pair_t *data, ptr_t *iter) const;
 
 // Maximum value
-bool MaxFwd (data_t *data);
-bool MaxBwd (data_t *data);
-bool MaxIterFwd (data_t *data, ptr_t *iter) const;
-bool MaxIterBwd (data_t *data, ptr_t *iter) const;
+bool MaxFwd (pair_t *data);
+bool MaxBwd (pair_t *data);
+bool MaxIterFwd (pair_t *data, ptr_t *iter) const;
+bool MaxIterBwd (pair_t *data, ptr_t *iter) const;
 
 //****************************************************************************//
 //      Key searching                                                         //
 //****************************************************************************//
 
 // Single key searching
-bool FindKeyFwd (data_t *data, adt_t key);
-bool FindKeyBwd (data_t *data, adt_t key);
-bool FindKeyIterFwd (data_t *data, adt_t key, ptr_t *iter) const;
-bool FindKeyIterBwd (data_t *data, adt_t key, ptr_t *iter) const;
+bool FindKeyFwd (pair_t *data, adt_t key);
+bool FindKeyBwd (pair_t *data, adt_t key);
+bool FindKeyIterFwd (pair_t *data, adt_t key, ptr_t *iter) const;
+bool FindKeyIterBwd (pair_t *data, adt_t key, ptr_t *iter) const;
 
 // Keys set searching
-bool FindKeysFwd (data_t *data, const adt_t keys[], size_t size);
-bool FindKeysBwd (data_t *data, const adt_t keys[], size_t size);
-bool FindKeysIterFwd (data_t *data, const adt_t keys[], size_t size, ptr_t *iter) const;
-bool FindKeysIterBwd (data_t *data, const adt_t keys[], size_t size, ptr_t *iter) const;
+bool FindKeysFwd (pair_t *data, const adt_t keys[], size_t size);
+bool FindKeysBwd (pair_t *data, const adt_t keys[], size_t size);
+bool FindKeysIterFwd (pair_t *data, const adt_t keys[], size_t size, ptr_t *iter) const;
+bool FindKeysIterBwd (pair_t *data, const adt_t keys[], size_t size, ptr_t *iter) const;
 
 //****************************************************************************//
 //      Key counting                                                          //
@@ -183,7 +180,10 @@ size_t CountKeys (const adt_t keys[], size_t size) const;
 //      Hash table properties                                                 //
 //****************************************************************************//
 KeyCmp CompareFunction (void) const;
-Hash HashFunction (void) const;
+HashFunc HashFunction (void) const;
+CopyFunc CopyFunction (void) const;
+DelFunc DeleteFunction (void) const;
+void* UserData (void) const;
 size_t Capacity (void) const;
 size_t Size (void) const;
 bool IsEmpty (void) const;
@@ -200,21 +200,24 @@ bool IsInit (void) const;
 //****************************************************************************//
 struct UniqueHash
 {
-	void	*array;		// Pointer to array which holds hash table data
-	size_t	capacity;	// Capacity of the hash table (auto extended if required)
-	size_t	size;		// Current hash table size
-	size_t	pool;		// Index of first free node in the pool
-	size_t	fwd;		// Current position of forward iterator
-	size_t	bwd;		// Current position of backward iterator
-	size_t	futex;		// Container's futex
-	KeyCmp	kfunc;		// Key compare function
-	Hash	hfunc;		// Hash function
+	void		*array;		// Pointer to array which holds hash table data
+	size_t		capacity;	// Capacity of the hash table (auto extended if required)
+	size_t		size;		// Current hash table size
+	size_t		pool;		// Index of first free node in the pool
+	size_t		fwd;		// Current position of forward iterator
+	size_t		bwd;		// Current position of backward iterator
+	size_t		futex;		// Container's futex
+	KeyCmp		kfunc;		// Key compare function
+	HashFunc	hfunc;		// Hash function
+	CopyFunc	cfunc;		// Copy function for element fields: key and data
+	DelFunc		dfunc;		// Delete function to call for removing elements
+	void		*ptr;		// Pointer to user's data
 };
 
 //****************************************************************************//
 //      Init hash table structure                                             //
 //****************************************************************************//
-void UniqueHash_InitUniqueHash (struct UniqueHash *hash, size_t capacity, KeyCmp kfunc, Hash hfunc);
+void UniqueHash_InitUniqueHash (struct UniqueHash *hash, size_t capacity, KeyCmp kfunc, HashFunc hfunc, CopyFunc cfunc, DelFunc dfunc, void *ptr);
 
 //****************************************************************************//
 //      Copy hash table structure                                             //
@@ -241,37 +244,31 @@ void UniqueHash_AllowWritings (struct UniqueHash *hash);
 //****************************************************************************//
 //      Insertion of element                                                  //
 //****************************************************************************//
-bool UniqueHash_Insert (struct UniqueHash *hash, const struct data_t *data);
+bool UniqueHash_Insert (struct UniqueHash *hash, const struct pair_t *data);
 
 //****************************************************************************//
 //      Removing of element                                                   //
 //****************************************************************************//
-bool UniqueHash_RemoveFwd (struct UniqueHash *hash, struct data_t *data);
-bool UniqueHash_RemoveBwd (struct UniqueHash *hash, struct data_t *data);
+bool UniqueHash_RemoveFwd (struct UniqueHash *hash);
+bool UniqueHash_RemoveBwd (struct UniqueHash *hash);
 
 //****************************************************************************//
 //      Setting element value                                                 //
 //****************************************************************************//
-bool UniqueHash_SetFwd (struct UniqueHash *hash, const struct data_t *data);
-bool UniqueHash_SetBwd (struct UniqueHash *hash, const struct data_t *data);
+bool UniqueHash_SetFwd (struct UniqueHash *hash, const struct pair_t *data);
+bool UniqueHash_SetBwd (struct UniqueHash *hash, const struct pair_t *data);
 
 //****************************************************************************//
 //      Getting element value                                                 //
 //****************************************************************************//
-bool UniqueHash_GetFwd (const struct UniqueHash *hash, struct data_t *data);
-bool UniqueHash_GetBwd (const struct UniqueHash *hash, struct data_t *data);
-bool UniqueHash_GetIter (const struct UniqueHash *hash, struct data_t *data, ptr_t iter);
-
-//****************************************************************************//
-//      Replacing element value                                               //
-//****************************************************************************//
-bool UniqueHash_ReplaceFwd (struct UniqueHash *hash, struct data_t *odata, const struct data_t *ndata);
-bool UniqueHash_ReplaceBwd (struct UniqueHash *hash, struct data_t *odata, const struct data_t *ndata);
+bool UniqueHash_GetFwd (const struct UniqueHash *hash, struct pair_t *data);
+bool UniqueHash_GetBwd (const struct UniqueHash *hash, struct pair_t *data);
+bool UniqueHash_GetIter (const struct UniqueHash *hash, struct pair_t *data, ptr_t iter);
 
 //****************************************************************************//
 //      Overriding element value                                              //
 //****************************************************************************//
-bool UniqueHash_Override (struct UniqueHash *hash, struct data_t *odata, const struct data_t *ndata);
+bool UniqueHash_Override (struct UniqueHash *hash, const struct pair_t *data);
 
 //****************************************************************************//
 //      Manipulation with forward iterator                                    //
@@ -286,7 +283,7 @@ void UniqueHash_FwdToBwd (struct UniqueHash *hash);
 bool UniqueHash_FwdGoNext (struct UniqueHash *hash, size_t pos);
 bool UniqueHash_FwdGoPrev (struct UniqueHash *hash, size_t pos);
 
-//***************************************************************************//
+//****************************************************************************//
 //      Manipulation with backward iterator                                   //
 //****************************************************************************//
 
@@ -323,32 +320,32 @@ void UniqueHash_SwapFwdBwd (struct UniqueHash *hash);
 //****************************************************************************//
 
 // Minimum value
-bool UniqueHash_MinFwd (struct UniqueHash *hash, struct data_t *data);
-bool UniqueHash_MinBwd (struct UniqueHash *hash, struct data_t *data);
-bool UniqueHash_MinIterFwd (const struct UniqueHash *hash, struct data_t *data, ptr_t *iter);
-bool UniqueHash_MinIterBwd (const struct UniqueHash *hash, struct data_t *data, ptr_t *iter);
+bool UniqueHash_MinFwd (struct UniqueHash *hash, struct pair_t *data);
+bool UniqueHash_MinBwd (struct UniqueHash *hash, struct pair_t *data);
+bool UniqueHash_MinIterFwd (const struct UniqueHash *hash, struct pair_t *data, ptr_t *iter);
+bool UniqueHash_MinIterBwd (const struct UniqueHash *hash, struct pair_t *data, ptr_t *iter);
 
 // Maximum value
-bool UniqueHash_MaxFwd (struct UniqueHash *hash, struct data_t *data);
-bool UniqueHash_MaxBwd (struct UniqueHash *hash, struct data_t *data);
-bool UniqueHash_MaxIterFwd (const struct UniqueHash *hash, struct data_t *data, ptr_t *iter);
-bool UniqueHash_MaxIterBwd (const struct UniqueHash *hash, struct data_t *data, ptr_t *iter);
+bool UniqueHash_MaxFwd (struct UniqueHash *hash, struct pair_t *data);
+bool UniqueHash_MaxBwd (struct UniqueHash *hash, struct pair_t *data);
+bool UniqueHash_MaxIterFwd (const struct UniqueHash *hash, struct pair_t *data, ptr_t *iter);
+bool UniqueHash_MaxIterBwd (const struct UniqueHash *hash, struct pair_t *data, ptr_t *iter);
 
 //****************************************************************************//
 //      Key searching                                                         //
 //****************************************************************************//
 
 // Single key searching
-bool UniqueHash_FindKeyFwd (struct UniqueHash *hash, struct data_t *data, union adt_t key);
-bool UniqueHash_FindKeyBwd (struct UniqueHash *hash, struct data_t *data, union adt_t key);
-bool UniqueHash_FindKeyIterFwd (const struct UniqueHash *hash, struct data_t *data, union adt_t key, ptr_t *iter);
-bool UniqueHash_FindKeyIterBwd (const struct UniqueHash *hash, struct data_t *data, union adt_t key, ptr_t *iter);
+bool UniqueHash_FindKeyFwd (struct UniqueHash *hash, struct pair_t *data, union adt_t key);
+bool UniqueHash_FindKeyBwd (struct UniqueHash *hash, struct pair_t *data, union adt_t key);
+bool UniqueHash_FindKeyIterFwd (const struct UniqueHash *hash, struct pair_t *data, union adt_t key, ptr_t *iter);
+bool UniqueHash_FindKeyIterBwd (const struct UniqueHash *hash, struct pair_t *data, union adt_t key, ptr_t *iter);
 
 // Keys set searching
-bool UniqueHash_FindKeysFwd (struct UniqueHash *hash, struct data_t *data, const union adt_t keys[], size_t size);
-bool UniqueHash_FindKeysBwd (struct UniqueHash *hash, struct data_t *data, const union adt_t keys[], size_t size);
-bool UniqueHash_FindKeysIterFwd (const struct UniqueHash *hash, struct data_t *data, const union adt_t keys[], size_t size, ptr_t *iter);
-bool UniqueHash_FindKeysIterBwd (const struct UniqueHash *hash, struct data_t *data, const union adt_t keys[], size_t size, ptr_t *iter);
+bool UniqueHash_FindKeysFwd (struct UniqueHash *hash, struct pair_t *data, const union adt_t keys[], size_t size);
+bool UniqueHash_FindKeysBwd (struct UniqueHash *hash, struct pair_t *data, const union adt_t keys[], size_t size);
+bool UniqueHash_FindKeysIterFwd (const struct UniqueHash *hash, struct pair_t *data, const union adt_t keys[], size_t size, ptr_t *iter);
+bool UniqueHash_FindKeysIterBwd (const struct UniqueHash *hash, struct pair_t *data, const union adt_t keys[], size_t size, ptr_t *iter);
 
 //****************************************************************************//
 //      Key counting                                                          //
@@ -360,7 +357,10 @@ size_t UniqueHash_CountKeys (const struct UniqueHash *hash, const union adt_t ke
 //      Hash table properties                                                 //
 //****************************************************************************//
 KeyCmp UniqueHash_CompareFunction (const struct UniqueHash *hash);
-Hash UniqueHash_HashFunction (const struct UniqueHash *hash);
+HashFunc UniqueHash_HashFunction (const struct UniqueHash *hash);
+CopyFunc UniqueHash_CopyFunction (const struct UniqueHash *hash);
+DelFunc UniqueHash_DeleteFunction (const struct UniqueHash *hash);
+void* UniqueHash_UserData (const struct UniqueHash *hash);
 size_t UniqueHash_Capacity (const struct UniqueHash *hash);
 size_t UniqueHash_Size (const struct UniqueHash *hash);
 bool UniqueHash_IsEmpty (const struct UniqueHash *hash);

@@ -14,25 +14,21 @@ include	'Syscall.inc'
 ;#      Import section                                                         #
 ;###############################################################################
 extrn	'Array_Copy'			as	Copy
+extrn	'NodeDeleteCore'		as	LeafDeleteCore
+extrn	'NodeReplaceLeftCore'	as	LeafReplaceLeftCore
+extrn	'NodeReplaceRightCore'	as	LeafReplaceRightCore
 
 ;###############################################################################
 ;#      Export section                                                         #
 ;###############################################################################
 
 ;******************************************************************************;
-;       ADT internal functions                                                 ;
-;******************************************************************************;
-public	LeafDeleteCore			as	'NodeDeleteCore'
-public	LeafReplaceLeftCore		as	'NodeReplaceLeftCore'
-public	LeafReplaceRightCore	as	'NodeReplaceRightCore'
-
-;******************************************************************************;
 ;       Constructor                                                            ;
 ;******************************************************************************;
 public	Constructor				as	'MultiTree_InitMultiTree'
 public	Constructor				as	'UniqueTree_InitUniqueTree'
-public	Constructor				as	'_ZN9MultiTreeC1EmPFx5adt_tS0_E'
-public	Constructor				as	'_ZN10UniqueTreeC1EmPFx5adt_tS0_E'
+public	Constructor				as	'_ZN9MultiTreeC1EmPFx5adt_tS0_EPFbP6pair_tPKS3_PvEPFvS4_S7_ES7_'
+public	Constructor				as	'_ZN10UniqueTreeC1EmPFx5adt_tS0_EPFbP6pair_tPKS3_PvEPFvS4_S7_ES7_'
 
 ;******************************************************************************;
 ;       Copy constructor                                                       ;
@@ -111,8 +107,8 @@ public	MoveBwdUnique			as	'_ZN10UniqueTree7MoveBwdEPS_m'
 ;******************************************************************************;
 public	InsertMulti				as	'MultiTree_Insert'
 public	InsertUnique			as	'UniqueTree_Insert'
-public	InsertMulti				as	'_ZN9MultiTree6InsertEPK6data_t'
-public	InsertUnique			as	'_ZN10UniqueTree6InsertEPK6data_t'
+public	InsertMulti				as	'_ZN9MultiTree6InsertEPK6pair_t'
+public	InsertUnique			as	'_ZN10UniqueTree6InsertEPK6pair_t'
 
 ;******************************************************************************;
 ;       Removing of element                                                    ;
@@ -121,18 +117,18 @@ public	InsertUnique			as	'_ZN10UniqueTree6InsertEPK6data_t'
 ; By element index
 public	RemoveIndex				as	'MultiTree_RemoveIndex'
 public	RemoveIndex				as	'UniqueTree_RemoveIndex'
-public	RemoveIndex				as	'_ZN9MultiTree11RemoveIndexEP6data_tm'
-public	RemoveIndex				as	'_ZN10UniqueTree11RemoveIndexEP6data_tm'
+public	RemoveIndex				as	'_ZN9MultiTree11RemoveIndexEm'
+public	RemoveIndex				as	'_ZN10UniqueTree11RemoveIndexEm'
 
 ; Using iterators
 public	RemoveFwd				as	'MultiTree_RemoveFwd'
 public	RemoveFwd				as	'UniqueTree_RemoveFwd'
 public	RemoveBwd				as	'MultiTree_RemoveBwd'
 public	RemoveBwd				as	'UniqueTree_RemoveBwd'
-public	RemoveFwd				as	'_ZN9MultiTree9RemoveFwdEP6data_t'
-public	RemoveFwd				as	'_ZN10UniqueTree9RemoveFwdEP6data_t'
-public	RemoveBwd				as	'_ZN9MultiTree9RemoveBwdEP6data_t'
-public	RemoveBwd				as	'_ZN10UniqueTree9RemoveBwdEP6data_t'
+public	RemoveFwd				as	'_ZN9MultiTree9RemoveFwdEv'
+public	RemoveFwd				as	'_ZN10UniqueTree9RemoveFwdEv'
+public	RemoveBwd				as	'_ZN9MultiTree9RemoveBwdEv'
+public	RemoveBwd				as	'_ZN10UniqueTree9RemoveBwdEv'
 
 ;******************************************************************************;
 ;       Setting element value                                                  ;
@@ -141,18 +137,18 @@ public	RemoveBwd				as	'_ZN10UniqueTree9RemoveBwdEP6data_t'
 ; By element index
 public	SetIndexMulti			as	'MultiTree_SetIndex'
 public	SetIndexUnique			as	'UniqueTree_SetIndex'
-public	SetIndexMulti			as	'_ZN9MultiTree8SetIndexEPK6data_tm'
-public	SetIndexUnique			as	'_ZN10UniqueTree8SetIndexEPK6data_tm'
+public	SetIndexMulti			as	'_ZN9MultiTree8SetIndexEPK6pair_tm'
+public	SetIndexUnique			as	'_ZN10UniqueTree8SetIndexEPK6pair_tm'
 
 ; Using iterators
 public	SetFwdMulti				as	'MultiTree_SetFwd'
 public	SetFwdUnique			as	'UniqueTree_SetFwd'
 public	SetBwdMulti				as	'MultiTree_SetBwd'
 public	SetBwdUnique			as	'UniqueTree_SetBwd'
-public	SetFwdMulti				as	'_ZN9MultiTree6SetFwdEPK6data_t'
-public	SetFwdUnique			as	'_ZN10UniqueTree6SetFwdEPK6data_t'
-public	SetBwdMulti				as	'_ZN9MultiTree6SetBwdEPK6data_t'
-public	SetBwdUnique			as	'_ZN10UniqueTree6SetBwdEPK6data_t'
+public	SetFwdMulti				as	'_ZN9MultiTree6SetFwdEPK6pair_t'
+public	SetFwdUnique			as	'_ZN10UniqueTree6SetFwdEPK6pair_t'
+public	SetBwdMulti				as	'_ZN9MultiTree6SetBwdEPK6pair_t'
+public	SetBwdUnique			as	'_ZN10UniqueTree6SetBwdEPK6pair_t'
 
 ;******************************************************************************;
 ;       Getting element value                                                  ;
@@ -161,8 +157,8 @@ public	SetBwdUnique			as	'_ZN10UniqueTree6SetBwdEPK6data_t'
 ; By element index
 public	GetIndex				as	'MultiTree_GetIndex'
 public	GetIndex				as	'UniqueTree_GetIndex'
-public	GetIndex				as	'_ZNK9MultiTree8GetIndexEP6data_tm'
-public	GetIndex				as	'_ZNK10UniqueTree8GetIndexEP6data_tm'
+public	GetIndex				as	'_ZNK9MultiTree8GetIndexEP6pair_tm'
+public	GetIndex				as	'_ZNK10UniqueTree8GetIndexEP6pair_tm'
 
 ; Using iterators
 public	GetFwd					as	'MultiTree_GetFwd'
@@ -171,38 +167,18 @@ public	GetBwd					as	'MultiTree_GetBwd'
 public	GetBwd					as	'UniqueTree_GetBwd'
 public	GetIter					as	'MultiTree_GetIter'
 public	GetIter					as	'UniqueTree_GetIter'
-public	GetFwd					as	'_ZNK9MultiTree6GetFwdEP6data_t'
-public	GetFwd					as	'_ZNK10UniqueTree6GetFwdEP6data_t'
-public	GetBwd					as	'_ZNK9MultiTree6GetBwdEP6data_t'
-public	GetBwd					as	'_ZNK10UniqueTree6GetBwdEP6data_t'
-public	GetIter					as	'_ZNK9MultiTree7GetIterEP6data_tl'
-public	GetIter					as	'_ZNK10UniqueTree7GetIterEP6data_tl'
-
-;******************************************************************************;
-;       Replacing element value                                                ;
-;******************************************************************************;
-
-; By element index
-public	ReplaceIndexMulti		as	'MultiTree_ReplaceIndex'
-public	ReplaceIndexUnique		as	'UniqueTree_ReplaceIndex'
-public	ReplaceIndexMulti		as	'_ZN9MultiTree12ReplaceIndexEP6data_tPKS0_m'
-public	ReplaceIndexUnique		as	'_ZN10UniqueTree12ReplaceIndexEP6data_tPKS0_m'
-
-; Using iterators
-public	ReplaceFwdMulti			as	'MultiTree_ReplaceFwd'
-public	ReplaceFwdUnique		as	'UniqueTree_ReplaceFwd'
-public	ReplaceBwdMulti			as	'MultiTree_ReplaceBwd'
-public	ReplaceBwdUnique		as	'UniqueTree_ReplaceBwd'
-public	ReplaceFwdMulti			as	'_ZN9MultiTree10ReplaceFwdEP6data_tPKS0_'
-public	ReplaceFwdUnique		as	'_ZN10UniqueTree10ReplaceFwdEP6data_tPKS0_'
-public	ReplaceBwdMulti			as	'_ZN9MultiTree10ReplaceBwdEP6data_tPKS0_'
-public	ReplaceBwdUnique		as	'_ZN10UniqueTree10ReplaceBwdEP6data_tPKS0_'
+public	GetFwd					as	'_ZNK9MultiTree6GetFwdEP6pair_t'
+public	GetFwd					as	'_ZNK10UniqueTree6GetFwdEP6pair_t'
+public	GetBwd					as	'_ZNK9MultiTree6GetBwdEP6pair_t'
+public	GetBwd					as	'_ZNK10UniqueTree6GetBwdEP6pair_t'
+public	GetIter					as	'_ZNK9MultiTree7GetIterEP6pair_tl'
+public	GetIter					as	'_ZNK10UniqueTree7GetIterEP6pair_tl'
 
 ;******************************************************************************;
 ;       Overriding element value                                               ;
 ;******************************************************************************;
 public	Override				as	'UniqueTree_Override'
-public	Override				as	'_ZN10UniqueTree8OverrideEP6data_tPKS0_'
+public	Override				as	'_ZN10UniqueTree8OverrideEPK6pair_t'
 
 ;******************************************************************************;
 ;       Manipulation with forward iterator                                     ;
@@ -399,14 +375,14 @@ public	MinIterFwd				as	'MultiTree_MinIterFwd'
 public	MinIterFwd				as	'UniqueTree_MinIterFwd'
 public	MinIterBwd				as	'MultiTree_MinIterBwd'
 public	MinIterBwd				as	'UniqueTree_MinIterBwd'
-public	MinFwd					as	'_ZN9MultiTree6MinFwdEP6data_t'
-public	MinFwd					as	'_ZN10UniqueTree6MinFwdEP6data_t'
-public	MinBwd					as	'_ZN9MultiTree6MinBwdEP6data_t'
-public	MinBwd					as	'_ZN10UniqueTree6MinBwdEP6data_t'
-public	MinIterFwd				as	'_ZNK9MultiTree10MinIterFwdEP6data_tPl'
-public	MinIterFwd				as	'_ZNK10UniqueTree10MinIterFwdEP6data_tPl'
-public	MinIterBwd				as	'_ZNK9MultiTree10MinIterBwdEP6data_tPl'
-public	MinIterBwd				as	'_ZNK10UniqueTree10MinIterBwdEP6data_tPl'
+public	MinFwd					as	'_ZN9MultiTree6MinFwdEP6pair_t'
+public	MinFwd					as	'_ZN10UniqueTree6MinFwdEP6pair_t'
+public	MinBwd					as	'_ZN9MultiTree6MinBwdEP6pair_t'
+public	MinBwd					as	'_ZN10UniqueTree6MinBwdEP6pair_t'
+public	MinIterFwd				as	'_ZNK9MultiTree10MinIterFwdEP6pair_tPl'
+public	MinIterFwd				as	'_ZNK10UniqueTree10MinIterFwdEP6pair_tPl'
+public	MinIterBwd				as	'_ZNK9MultiTree10MinIterBwdEP6pair_tPl'
+public	MinIterBwd				as	'_ZNK10UniqueTree10MinIterBwdEP6pair_tPl'
 
 ; Maximum value
 public	MaxFwd					as	'MultiTree_MaxFwd'
@@ -417,14 +393,14 @@ public	MaxIterFwd				as	'MultiTree_MaxIterFwd'
 public	MaxIterFwd				as	'UniqueTree_MaxIterFwd'
 public	MaxIterBwd				as	'MultiTree_MaxIterBwd'
 public	MaxIterBwd				as	'UniqueTree_MaxIterBwd'
-public	MaxFwd					as	'_ZN9MultiTree6MaxFwdEP6data_t'
-public	MaxFwd					as	'_ZN10UniqueTree6MaxFwdEP6data_t'
-public	MaxBwd					as	'_ZN9MultiTree6MaxBwdEP6data_t'
-public	MaxBwd					as	'_ZN10UniqueTree6MaxBwdEP6data_t'
-public	MaxIterFwd				as	'_ZNK9MultiTree10MaxIterFwdEP6data_tPl'
-public	MaxIterFwd				as	'_ZNK10UniqueTree10MaxIterFwdEP6data_tPl'
-public	MaxIterBwd				as	'_ZNK9MultiTree10MaxIterBwdEP6data_tPl'
-public	MaxIterBwd				as	'_ZNK10UniqueTree10MaxIterBwdEP6data_tPl'
+public	MaxFwd					as	'_ZN9MultiTree6MaxFwdEP6pair_t'
+public	MaxFwd					as	'_ZN10UniqueTree6MaxFwdEP6pair_t'
+public	MaxBwd					as	'_ZN9MultiTree6MaxBwdEP6pair_t'
+public	MaxBwd					as	'_ZN10UniqueTree6MaxBwdEP6pair_t'
+public	MaxIterFwd				as	'_ZNK9MultiTree10MaxIterFwdEP6pair_tPl'
+public	MaxIterFwd				as	'_ZNK10UniqueTree10MaxIterFwdEP6pair_tPl'
+public	MaxIterBwd				as	'_ZNK9MultiTree10MaxIterBwdEP6pair_tPl'
+public	MaxIterBwd				as	'_ZNK10UniqueTree10MaxIterBwdEP6pair_tPl'
 
 ;******************************************************************************;
 ;       Key searching                                                          ;
@@ -443,14 +419,14 @@ public	FindEqualIterFwd		as	'MultiTree_FindEqualIterFwd'
 public	FindEqualIterFwd		as	'UniqueTree_FindEqualIterFwd'
 public	FindEqualIterBwd		as	'MultiTree_FindEqualIterBwd'
 public	FindEqualIterBwd		as	'UniqueTree_FindEqualIterBwd'
-public	FindEqualFwd			as	'_ZN9MultiTree12FindEqualFwdEP6data_t5adt_t'
-public	FindEqualFwd			as	'_ZN10UniqueTree12FindEqualFwdEP6data_t5adt_t'
-public	FindEqualBwd			as	'_ZN9MultiTree12FindEqualBwdEP6data_t5adt_t'
-public	FindEqualBwd			as	'_ZN10UniqueTree12FindEqualBwdEP6data_t5adt_t'
-public	FindEqualIterFwd		as	'_ZNK9MultiTree16FindEqualIterFwdEP6data_t5adt_tPl'
-public	FindEqualIterFwd		as	'_ZNK10UniqueTree16FindEqualIterFwdEP6data_t5adt_tPl'
-public	FindEqualIterBwd		as	'_ZNK9MultiTree16FindEqualIterBwdEP6data_t5adt_tPl'
-public	FindEqualIterBwd		as	'_ZNK10UniqueTree16FindEqualIterBwdEP6data_t5adt_tPl'
+public	FindEqualFwd			as	'_ZN9MultiTree12FindEqualFwdEP6pair_t5adt_t'
+public	FindEqualFwd			as	'_ZN10UniqueTree12FindEqualFwdEP6pair_t5adt_t'
+public	FindEqualBwd			as	'_ZN9MultiTree12FindEqualBwdEP6pair_t5adt_t'
+public	FindEqualBwd			as	'_ZN10UniqueTree12FindEqualBwdEP6pair_t5adt_t'
+public	FindEqualIterFwd		as	'_ZNK9MultiTree16FindEqualIterFwdEP6pair_t5adt_tPl'
+public	FindEqualIterFwd		as	'_ZNK10UniqueTree16FindEqualIterFwdEP6pair_t5adt_tPl'
+public	FindEqualIterBwd		as	'_ZNK9MultiTree16FindEqualIterBwdEP6pair_t5adt_tPl'
+public	FindEqualIterBwd		as	'_ZNK10UniqueTree16FindEqualIterBwdEP6pair_t5adt_tPl'
 
 ; Searching for greater key
 public	FindGreatFwd			as	'MultiTree_FindGreatFwd'
@@ -459,12 +435,12 @@ public	FindGreatBwd			as	'MultiTree_FindGreatBwd'
 public	FindGreatBwd			as	'UniqueTree_FindGreatBwd'
 public	FindGreatIter			as	'MultiTree_FindGreatIter'
 public	FindGreatIter			as	'UniqueTree_FindGreatIter'
-public	FindGreatFwd			as	'_ZN9MultiTree12FindGreatFwdEP6data_t5adt_t'
-public	FindGreatFwd			as	'_ZN10UniqueTree12FindGreatFwdEP6data_t5adt_t'
-public	FindGreatBwd			as	'_ZN9MultiTree12FindGreatBwdEP6data_t5adt_t'
-public	FindGreatBwd			as	'_ZN10UniqueTree12FindGreatBwdEP6data_t5adt_t'
-public	FindGreatIter			as	'_ZNK9MultiTree13FindGreatIterEP6data_t5adt_tPl'
-public	FindGreatIter			as	'_ZNK10UniqueTree13FindGreatIterEP6data_t5adt_tPl'
+public	FindGreatFwd			as	'_ZN9MultiTree12FindGreatFwdEP6pair_t5adt_t'
+public	FindGreatFwd			as	'_ZN10UniqueTree12FindGreatFwdEP6pair_t5adt_t'
+public	FindGreatBwd			as	'_ZN9MultiTree12FindGreatBwdEP6pair_t5adt_t'
+public	FindGreatBwd			as	'_ZN10UniqueTree12FindGreatBwdEP6pair_t5adt_t'
+public	FindGreatIter			as	'_ZNK9MultiTree13FindGreatIterEP6pair_t5adt_tPl'
+public	FindGreatIter			as	'_ZNK10UniqueTree13FindGreatIterEP6pair_t5adt_tPl'
 
 ; Searching for greater or equal key
 public	FindGreatOrEqualFwd		as	'MultiTree_FindGreatOrEqualFwd'
@@ -473,12 +449,12 @@ public	FindGreatOrEqualBwd		as	'MultiTree_FindGreatOrEqualBwd'
 public	FindGreatOrEqualBwd		as	'UniqueTree_FindGreatOrEqualBwd'
 public	FindGreatOrEqualIter	as	'MultiTree_FindGreatOrEqualIter'
 public	FindGreatOrEqualIter	as	'UniqueTree_FindGreatOrEqualIter'
-public	FindGreatOrEqualFwd		as	'_ZN9MultiTree19FindGreatOrEqualFwdEP6data_t5adt_t'
-public	FindGreatOrEqualFwd		as	'_ZN10UniqueTree19FindGreatOrEqualFwdEP6data_t5adt_t'
-public	FindGreatOrEqualBwd		as	'_ZN9MultiTree19FindGreatOrEqualBwdEP6data_t5adt_t'
-public	FindGreatOrEqualBwd		as	'_ZN10UniqueTree19FindGreatOrEqualBwdEP6data_t5adt_t'
-public	FindGreatOrEqualIter	as	'_ZNK9MultiTree20FindGreatOrEqualIterEP6data_t5adt_tPl'
-public	FindGreatOrEqualIter	as	'_ZNK10UniqueTree20FindGreatOrEqualIterEP6data_t5adt_tPl'
+public	FindGreatOrEqualFwd		as	'_ZN9MultiTree19FindGreatOrEqualFwdEP6pair_t5adt_t'
+public	FindGreatOrEqualFwd		as	'_ZN10UniqueTree19FindGreatOrEqualFwdEP6pair_t5adt_t'
+public	FindGreatOrEqualBwd		as	'_ZN9MultiTree19FindGreatOrEqualBwdEP6pair_t5adt_t'
+public	FindGreatOrEqualBwd		as	'_ZN10UniqueTree19FindGreatOrEqualBwdEP6pair_t5adt_t'
+public	FindGreatOrEqualIter	as	'_ZNK9MultiTree20FindGreatOrEqualIterEP6pair_t5adt_tPl'
+public	FindGreatOrEqualIter	as	'_ZNK10UniqueTree20FindGreatOrEqualIterEP6pair_t5adt_tPl'
 
 ; Searching for less key
 public	FindLessFwd				as	'MultiTree_FindLessFwd'
@@ -487,12 +463,12 @@ public	FindLessBwd				as	'MultiTree_FindLessBwd'
 public	FindLessBwd				as	'UniqueTree_FindLessBwd'
 public	FindLessIter			as	'MultiTree_FindLessIter'
 public	FindLessIter			as	'UniqueTree_FindLessIter'
-public	FindLessFwd				as	'_ZN9MultiTree11FindLessFwdEP6data_t5adt_t'
-public	FindLessFwd				as	'_ZN10UniqueTree11FindLessFwdEP6data_t5adt_t'
-public	FindLessBwd				as	'_ZN9MultiTree11FindLessBwdEP6data_t5adt_t'
-public	FindLessBwd				as	'_ZN10UniqueTree11FindLessBwdEP6data_t5adt_t'
-public	FindLessIter			as	'_ZNK9MultiTree12FindLessIterEP6data_t5adt_tPl'
-public	FindLessIter			as	'_ZNK10UniqueTree12FindLessIterEP6data_t5adt_tPl'
+public	FindLessFwd				as	'_ZN9MultiTree11FindLessFwdEP6pair_t5adt_t'
+public	FindLessFwd				as	'_ZN10UniqueTree11FindLessFwdEP6pair_t5adt_t'
+public	FindLessBwd				as	'_ZN9MultiTree11FindLessBwdEP6pair_t5adt_t'
+public	FindLessBwd				as	'_ZN10UniqueTree11FindLessBwdEP6pair_t5adt_t'
+public	FindLessIter			as	'_ZNK9MultiTree12FindLessIterEP6pair_t5adt_tPl'
+public	FindLessIter			as	'_ZNK10UniqueTree12FindLessIterEP6pair_t5adt_tPl'
 
 ; Searching for less or equal key
 public	FindLessOrEqualFwd		as	'MultiTree_FindLessOrEqualFwd'
@@ -501,12 +477,12 @@ public	FindLessOrEqualBwd		as	'MultiTree_FindLessOrEqualBwd'
 public	FindLessOrEqualBwd		as	'UniqueTree_FindLessOrEqualBwd'
 public	FindLessOrEqualIter		as	'MultiTree_FindLessOrEqualIter'
 public	FindLessOrEqualIter		as	'UniqueTree_FindLessOrEqualIter'
-public	FindLessOrEqualFwd		as	'_ZN9MultiTree18FindLessOrEqualFwdEP6data_t5adt_t'
-public	FindLessOrEqualFwd		as	'_ZN10UniqueTree18FindLessOrEqualFwdEP6data_t5adt_t'
-public	FindLessOrEqualBwd		as	'_ZN9MultiTree18FindLessOrEqualBwdEP6data_t5adt_t'
-public	FindLessOrEqualBwd		as	'_ZN10UniqueTree18FindLessOrEqualBwdEP6data_t5adt_t'
-public	FindLessOrEqualIter		as	'_ZNK9MultiTree19FindLessOrEqualIterEP6data_t5adt_tPl'
-public	FindLessOrEqualIter		as	'_ZNK10UniqueTree19FindLessOrEqualIterEP6data_t5adt_tPl'
+public	FindLessOrEqualFwd		as	'_ZN9MultiTree18FindLessOrEqualFwdEP6pair_t5adt_t'
+public	FindLessOrEqualFwd		as	'_ZN10UniqueTree18FindLessOrEqualFwdEP6pair_t5adt_t'
+public	FindLessOrEqualBwd		as	'_ZN9MultiTree18FindLessOrEqualBwdEP6pair_t5adt_t'
+public	FindLessOrEqualBwd		as	'_ZN10UniqueTree18FindLessOrEqualBwdEP6pair_t5adt_t'
+public	FindLessOrEqualIter		as	'_ZNK9MultiTree19FindLessOrEqualIterEP6pair_t5adt_tPl'
+public	FindLessOrEqualIter		as	'_ZNK10UniqueTree19FindLessOrEqualIterEP6pair_t5adt_tPl'
 
 ;==============================================================================;
 ;       Sequence searching                                                     ;
@@ -515,10 +491,10 @@ public	FindSequenceFwd			as	'MultiTree_FindSequenceFwd'
 public	FindSequenceBwd			as	'MultiTree_FindSequenceBwd'
 public	FindSequenceIterFwd		as	'MultiTree_FindSequenceIterFwd'
 public	FindSequenceIterBwd		as	'MultiTree_FindSequenceIterBwd'
-public	FindSequenceFwd			as	'_ZN9MultiTree15FindSequenceFwdEP6data_t5adt_t'
-public	FindSequenceBwd			as	'_ZN9MultiTree15FindSequenceBwdEP6data_t5adt_t'
-public	FindSequenceIterFwd		as	'_ZNK9MultiTree19FindSequenceIterFwdEP6data_t5adt_tPl'
-public	FindSequenceIterBwd		as	'_ZNK9MultiTree19FindSequenceIterBwdEP6data_t5adt_tPl'
+public	FindSequenceFwd			as	'_ZN9MultiTree15FindSequenceFwdEP6pair_t5adt_t'
+public	FindSequenceBwd			as	'_ZN9MultiTree15FindSequenceBwdEP6pair_t5adt_t'
+public	FindSequenceIterFwd		as	'_ZNK9MultiTree19FindSequenceIterFwdEP6pair_t5adt_tPl'
+public	FindSequenceIterBwd		as	'_ZNK9MultiTree19FindSequenceIterBwdEP6pair_t5adt_tPl'
 
 ;******************************************************************************;
 ;       Duplicates searching                                                   ;
@@ -527,10 +503,10 @@ public	FindDupFwd				as	'MultiTree_FindDupFwd'
 public	FindDupBwd				as	'MultiTree_FindDupBwd'
 public	FindDupIterFwd			as	'MultiTree_FindDupIterFwd'
 public	FindDupIterBwd			as	'MultiTree_FindDupIterBwd'
-public	FindDupFwd				as	'_ZN9MultiTree10FindDupFwdEP6data_t'
-public	FindDupBwd				as	'_ZN9MultiTree10FindDupBwdEP6data_t'
-public	FindDupIterFwd			as	'_ZNK9MultiTree14FindDupIterFwdEP6data_tPl'
-public	FindDupIterBwd			as	'_ZNK9MultiTree14FindDupIterBwdEP6data_tPl'
+public	FindDupFwd				as	'_ZN9MultiTree10FindDupFwdEP6pair_t'
+public	FindDupBwd				as	'_ZN9MultiTree10FindDupBwdEP6pair_t'
+public	FindDupIterFwd			as	'_ZNK9MultiTree14FindDupIterFwdEP6pair_tPl'
+public	FindDupIterBwd			as	'_ZNK9MultiTree14FindDupIterBwdEP6pair_tPl'
 
 ;******************************************************************************;
 ;       Searching for differences                                              ;
@@ -543,14 +519,14 @@ public	FindDiffIterFwd			as	'MultiTree_FindDiffIterFwd'
 public	FindDiffIterFwd			as	'UniqueTree_FindDiffIterFwd'
 public	FindDiffIterBwd			as	'MultiTree_FindDiffIterBwd'
 public	FindDiffIterBwd			as	'UniqueTree_FindDiffIterBwd'
-public	FindDiffFwd				as	'_ZN9MultiTree11FindDiffFwdEP6data_tPKS_m'
-public	FindDiffFwd				as	'_ZN10UniqueTree11FindDiffFwdEP6data_tPKS_m'
-public	FindDiffBwd				as	'_ZN9MultiTree11FindDiffBwdEP6data_tPKS_m'
-public	FindDiffBwd				as	'_ZN10UniqueTree11FindDiffBwdEP6data_tPKS_m'
-public	FindDiffIterFwd			as	'_ZNK9MultiTree15FindDiffIterFwdEP6data_tPKS_mPll'
-public	FindDiffIterFwd			as	'_ZNK10UniqueTree15FindDiffIterFwdEP6data_tPKS_mPll'
-public	FindDiffIterBwd			as	'_ZNK9MultiTree15FindDiffIterBwdEP6data_tPKS_mPll'
-public	FindDiffIterBwd			as	'_ZNK10UniqueTree15FindDiffIterBwdEP6data_tPKS_mPll'
+public	FindDiffFwd				as	'_ZN9MultiTree11FindDiffFwdEP6pair_tPKS_m'
+public	FindDiffFwd				as	'_ZN10UniqueTree11FindDiffFwdEP6pair_tPKS_m'
+public	FindDiffBwd				as	'_ZN9MultiTree11FindDiffBwdEP6pair_tPKS_m'
+public	FindDiffBwd				as	'_ZN10UniqueTree11FindDiffBwdEP6pair_tPKS_m'
+public	FindDiffIterFwd			as	'_ZNK9MultiTree15FindDiffIterFwdEP6pair_tPKS_mPll'
+public	FindDiffIterFwd			as	'_ZNK10UniqueTree15FindDiffIterFwdEP6pair_tPKS_mPll'
+public	FindDiffIterBwd			as	'_ZNK9MultiTree15FindDiffIterBwdEP6pair_tPKS_mPll'
+public	FindDiffIterBwd			as	'_ZNK10UniqueTree15FindDiffIterBwdEP6pair_tPKS_mPll'
 
 ;******************************************************************************;
 ;       Key counting                                                           ;
@@ -605,6 +581,24 @@ public	GetCompareFunction		as	'MultiTree_CompareFunction'
 public	GetCompareFunction		as	'UniqueTree_CompareFunction'
 public	GetCompareFunction		as	'_ZNK9MultiTree15CompareFunctionEv'
 public	GetCompareFunction		as	'_ZNK10UniqueTree15CompareFunctionEv'
+
+; B-tree pair copy function
+public	GetCopyFunction			as	'MultiTree_CopyFunction'
+public	GetCopyFunction			as	'UniqueTree_CopyFunction'
+public	GetCopyFunction			as	'_ZNK9MultiTree12CopyFunctionEv'
+public	GetCopyFunction			as	'_ZNK10UniqueTree12CopyFunctionEv'
+
+; B-tree pair delete function
+public	GetDeleteFunction		as	'MultiTree_DeleteFunction'
+public	GetDeleteFunction		as	'UniqueTree_DeleteFunction'
+public	GetDeleteFunction		as	'_ZNK9MultiTree14DeleteFunctionEv'
+public	GetDeleteFunction		as	'_ZNK10UniqueTree14DeleteFunctionEv'
+
+; B-tree user's data
+public	GetUserData				as	'MultiTree_UserData'
+public	GetUserData				as	'UniqueTree_UserData'
+public	GetUserData				as	'_ZNK9MultiTree8UserDataEv'
+public	GetUserData				as	'_ZNK10UniqueTree8UserDataEv'
 
 ; B-tree capacity
 public	GetCapacity				as	'MultiTree_Capacity'
@@ -673,7 +667,10 @@ ROOT		= 5 * 8							; Offset of object root field
 FWD			= 6 * 8							; Offset of forward iterator field
 BWD			= 7 * 8							; Offset of backward iterator field
 FUTEX		= 8 * 8							; Offset of futex field
-FUNC		= 9 * 8							; Offset of pointer to key compare function
+KFUNC		= 9 * 8							; Offset of pointer to key compare function
+CFUNC		= 10 * 8						; Offset of pointer to copy function
+DFUNC		= 11 * 8						; Offset of pointer to delete function
+DPTR		= 12 * 8						; Offset of pointer to user's data
 
 ;==============================================================================;
 ;       Offsets inside node                                                    ;
@@ -690,6 +687,217 @@ TROOT		= 0 * 8							; Offset of subtree root field
 TSIZE		= 1 * 8							; Offset of subtree size field
 
 ;******************************************************************************;
+;       Move elements into tree                                                ;
+;******************************************************************************;
+macro	MOVE_ELEMENTS	InsertCore, offst
+{
+;---[Parameters]---------------------------
+this	equ		rdi							; pointer to target b-tree object
+source	equ		rsi							; pointer to source b-tree object
+size	equ		rdx							; count of elements to move
+;---[Internal variables]-------------------
+status	equ		al							; operation status
+result	equ		rax							; result register
+array	equ		r8							; pointer to array of nodes
+iter	equ		r9							; iterator value
+value	equ		xmm0						; temporary register
+stack	equ		rsp							; stack pointer
+s_this	equ		stack + 0 * 8				; stack position of "this" variable
+s_src	equ		stack + 1 * 8				; stack position of "source" variable
+s_size	equ		stack + 2 * 8				; stack position of "size" variable
+s_array	equ		stack + 3 * 8				; stack position of "array" variable
+s_iter	equ		stack + 4 * 8				; stack position of "iter" variable
+s_total	equ		stack + 5 * 8				; stack position of "total" variable
+space	= 7 * 8								; stack size required by the procedure
+;------------------------------------------
+		sub		stack, space				; reserving stack size for local vars
+		mov		qword [s_total], 0			; total = 0
+;---[Check size]---------------------------
+		test	size, size					; if (size == 0)
+		jz		.exit						;     then go to exit
+;---[Normal execution branch]--------------
+		mov		array, [source + ARRAY]		; get pointer to source array of nodes
+		mov		iter, [source + offst]		; get source iterator value
+		mov		[s_this], this				; save "this" variable into the stack
+		mov		[s_src], source				; save "source" variable into the stack
+		mov		[s_size], size				; save "size" variable into the stack
+		mov		[s_array], array			; save "array" variable into the stack
+		mov		[s_iter], iter				; save "iter" variable into the stack
+;---[Move loop]----------------------------
+.loop:	and		iter, PMASK
+		lea		array, [array + iter + BDATA]
+		movdqa	value, [array]
+;---[Insert new element]-------------------
+		call	InsertCore					; call this.InsertCore (value)
+		test	status, status				; if (status == 0)
+		jz		.exit						;     then go to exit
+		add		qword [s_total], KSIZE		; total++
+;---[Go to another source element]---------
+		mov		param2, [s_iter]
+		mov		param1, [s_src]
+		call	RemoveCore					; call source.RemoveCore (iter)
+		mov		this, [s_this]				; get "this" variable from the stack
+		mov		source, [s_src]				; get "source" variable from the stack
+		mov		array, [s_array]			; get "array" variable from the stack
+		mov		iter, [source + offst]		; iter = source.iter
+		cmp		iter, EMPTY					; if (iter <= EMPTY)
+		jle		.exit						;     then go to exit
+		mov		[s_iter], iter				; save "iter" variable into the stack
+		sub		qword [s_size], KSIZE		; size--
+		jnz		.loop						; do while (size != 0)
+;---[End of move loop]---------------------
+.exit:	mov		result, [s_total]			; return total
+		add		stack, space				; restoring back the stack pointer
+		ret
+}
+MoveElementsFwdMulti:	MOVE_ELEMENTS	InsertCoreMulti, FWD
+MoveElementsFwdUnique:	MOVE_ELEMENTS	InsertCoreUnique, FWD
+MoveElementsBwdMulti:	MOVE_ELEMENTS	InsertCoreMulti, BWD
+MoveElementsBwdUnique:	MOVE_ELEMENTS	InsertCoreUnique, BWD
+
+;******************************************************************************;
+;       Copy elements into tree                                                ;
+;******************************************************************************;
+macro	COPY_ELEMENTS	InsertCore, IterFunc
+{
+;---[Parameters]---------------------------
+this	equ		rdi							; pointer to b-tree object
+array	equ		rsi							; pointer to array of nodes
+iter	equ		rdx							; iterator value
+size	equ		rcx							; count of elements to copy
+func	equ		r8							; pointer to copy function
+ptr		equ		r9							; pointer to user's data
+;---[Internal variables]-------------------
+status	equ		al							; operation status
+result	equ		rax							; result register
+value	equ		xmm0						; temporary register
+stack	equ		rsp							; stack pointer
+s_this	equ		stack + 0 * 8				; stack position of "this" variable
+s_array	equ		stack + 1 * 8				; stack position of "array" variable
+s_iter	equ		stack + 2 * 8				; stack position of "iter" variable
+s_size	equ		stack + 3 * 8				; stack position of "size" variable
+s_func	equ		stack + 4 * 8				; stack position of "func" variable
+s_ptr	equ		stack + 5 * 8				; stack position of "ptr" variable
+s_value	equ		stack + 6 * 8				; stack position of "value" variable
+s_total	equ		stack + 8 * 8				; stack position of "total" variable
+space	= 9 * 8								; stack size required by the procedure
+;------------------------------------------
+		sub		stack, space				; reserving stack size for local vars
+		mov		qword [s_total], 0			; total = 0
+;---[Check size]---------------------------
+		test	size, size					; if (size == 0)
+		jz		.exit						;     then go to exit
+;---[Normal execution branch]--------------
+		mov		[s_this], this				; save "this" variable into the stack
+		mov		[s_array], array			; save "array" variable into the stack
+		mov		[s_iter], iter				; save "iter" variable into the stack
+		mov		[s_size], size				; save "size" variable into the stack
+		mov		[s_func], func				; save "func" variable into the stack
+		mov		[s_ptr], ptr				; save "ptr" variable into the stack
+;---[Copy loop]----------------------------
+.loop:	and		iter, PMASK
+		lea		array, [array + iter + BDATA]
+		movdqa	value, [array]
+;---[Call copy function if set]------------
+		mov		func, [s_func]				; get pointer to copy function
+		test	func, func					; if (func != NULL)
+		jnz		.copy						;     then call copy function
+;---[Insert new element]-------------------
+.back:	call	InsertCore					; call this.InsertCore (value)
+		test	status, status				; if (status == 0)
+		jz		.exit						;     then go to exit
+		add		qword [s_total], KSIZE		; total++
+;---[Go to another source element]---------
+		mov		param3, KSIZE
+		mov		param2, [s_iter]
+		mov		param1, [s_array]
+		call	IterFunc					; result = IterFunc (array, iter, KSIZE)
+		mov		this, [s_this]				; get "this" variable from the stack
+		mov		array, [s_array]			; get "array" variable from the stack
+		mov		iter, result				; iter = result
+		cmp		iter, EMPTY					; if (iter <= EMPTY)
+		jle		.exit						;     then go to exit
+		mov		[s_iter], iter				; save "iter" variable into the stack
+		sub		qword [s_size], KSIZE		; size--
+		jnz		.loop						; do while (size != 0)
+;---[End of copy loop]---------------------
+.exit:	mov		result, [s_total]			; return total
+		add		stack, space				; restoring back the stack pointer
+		ret
+;---[Copy element branch]------------------
+.copy:	mov		param3, [s_ptr]
+		mov		param2, array
+		lea		param1, [s_value]
+		call	func						; call func (&value, array, ptr)
+		mov		this, [s_this]				; get "this" variable from the stack
+		movdqa	value, [s_value]			; get "value" variable from the stack
+		test	status, status				; if (status)
+		jnz		.back						;     then go back
+		mov		result, [s_total]			; return total
+		add		stack, space				; restoring back the stack pointer
+		ret
+}
+CopyElementsFwdMulti:	COPY_ELEMENTS	InsertCoreMulti, GoNext
+CopyElementsFwdUnique:	COPY_ELEMENTS	InsertCoreUnique, GoNext
+CopyElementsBwdMulti:	COPY_ELEMENTS	InsertCoreMulti, GoPrev
+CopyElementsBwdUnique:	COPY_ELEMENTS	InsertCoreUnique, GoPrev
+
+;******************************************************************************;
+;       Delete elements from tree                                              ;
+;******************************************************************************;
+DeleteElements:
+;---[Parameters]---------------------------
+array	equ		rdi							; pointer to array of nodes
+root	equ		rsi							; b-tree root
+height	equ		rdx							; b-tree height
+size	equ		rcx							; count of elements to delete
+func	equ		r8							; pointer to delete function
+ptr		equ		r9							; pointer to user's data
+;---[Internal variables]-------------------
+iter	equ		rax							; iterator value
+stack	equ		rsp							; stack pointer
+s_array	equ		stack + 0 * 8				; stack position of "array" variable
+s_size	equ		stack + 1 * 8				; stack position of "size" variable
+s_func	equ		stack + 2 * 8				; stack position of "func" variable
+s_ptr	equ		stack + 3 * 8				; stack position of "ptr" variable
+s_iter	equ		stack + 4 * 8				; stack position of "iter" variable
+space	= 5 * 8								; stack size required by the procedure
+;------------------------------------------
+		sub		stack, space				; reserving stack size for local vars
+;---[Check size]---------------------------
+		test	size, size					; if (size == 0)
+		jz		.exit						;     then go to exit
+;---[Check delete function]----------------
+		test	func, func					; if (func == NULL)
+		jz		.exit						;     then go to exit
+;---[Normal execution branch]--------------
+		mov		[s_array], array			; save "array" variable into the stack
+		mov		[s_size], size				; save "size" variable into the stack
+		mov		[s_func], func				; save "func" variable into the stack
+		mov		[s_ptr], ptr				; save "ptr" variable into the stack
+;---[Find first tree element]--------------
+		xor		param4, param4
+		call	GetNode						; iter = FindHead (array, root, height, 0)
+		mov		array, [s_array]			; get "array" variable from the stack
+		mov		[s_iter], iter				; save "iter" variable into the stack
+;---[Delete loop]--------------------------
+.loop:	and		iter, PMASK
+		lea		array, [array + iter + BDATA]
+		mov		param2, [s_ptr]
+		call	qword [s_func]				; call func (array, ptr)
+		mov		param3, KSIZE
+		mov		param2, [s_iter]
+		mov		param1, [s_array]
+		call	GoNext						; iter = GoNext (array, iter, KSIZE)
+		mov		array, [s_array]			; get "array" variable from the stack
+		mov		[s_iter], iter				; save "iter" variable into the stack
+		sub		qword [s_size], KSIZE		; size--
+		jnz		.loop						; do while (size != 0)
+;---[End of delete loop]-------------------
+.exit:	add		stack, space				; restoring back the stack pointer
+		ret
+
+;******************************************************************************;
 ;       Initialization of free nodes                                           ;
 ;******************************************************************************;
 InitFree:
@@ -699,7 +907,7 @@ oldcap	equ		rsi							; old capacity of array
 newcap	equ		rdx							; new capacity of array
 pool	equ		rcx							; pointer to pool free node
 ;---[Internal variables]-------------------
-status	equ		rax							; operation status
+status	equ		al							; operation status
 ;------------------------------------------
 		add		array, oldcap				; array += oldcap
 		add		oldcap, NSIZE				; oldcap++
@@ -747,8 +955,8 @@ space	= 3 * 8								; stack size required by the procedure
 ;---[Update object properties]-------------
 		mov		this, [s_this]				; get "this" variable from the stack
 		mov		newcap, [s_ncap]			; get "newcap" variable from the stack
-		mov		oldcap, [this + CAPACITY]	; get old capacity of the b-tree
-		mov		oldpool, [this + POOL]		; get old index of pool free node
+		mov		oldcap, [this + CAPACITY]	; get old object capacity
+		mov		oldpool, [this + POOL]		; get old pool pointer
 		mov		[this + ARRAY], array		; this.array = array
 		mov		[this + CAPACITY], newcap	; this.capacity = newcap
 		mov		[this + POOL], oldcap		; this.pool = oldcap
@@ -764,156 +972,14 @@ space	= 3 * 8								; stack size required by the procedure
 		ret
 
 ;******************************************************************************;
-;       Delete element from the leaf node                                      ;
-;******************************************************************************;
-LeafDeleteCore:
-;---[Parameters]---------------------------
-data	equ		rdi							; pointer to leaf data array
-size	equ		rsi							; count of keys to move
-;---[Internal variables]-------------------
-count	equ		rax							; count of iterations
-temp1	equ		xmm1						; temporary register #1
-temp2	equ		xmm2						; temporary register #2
-temp3	equ		xmm3						; temporary register #3
-temp4	equ		xmm4						; temporary register #4
-smask	= 1 shl (KSCALE + 2) - 1			; mask for scalar loop count
-vmask	= not smask							; mask for vector loop count
-;------------------------------------------
-		test	size, size					; if (size == 0)
-		jz		.exit						;     then go to exit
-		mov		count, vmask				; load vmask
-		and		count, size					; apply mask to size variable
-		jz		.skip						; if (count == 0), then skip the loop
-;---[Vector loop]--------------------------
-.vloop:	movdqa	temp1, [data + 1 * KSIZE]	; temp1 = data[+1]
-		movdqa	temp2, [data + 2 * KSIZE]	; temp2 = data[+2]
-		movdqa	temp3, [data + 3 * KSIZE]	; temp3 = data[+3]
-		movdqa	temp4, [data + 4 * KSIZE]	; temp4 = data[+4]
-		movdqa	[data + 0 * KSIZE], temp1	; data[+0] = temp1
-		movdqa	[data + 1 * KSIZE], temp2	; data[+1] = temp2
-		movdqa	[data + 2 * KSIZE], temp3	; data[+2] = temp3
-		movdqa	[data + 3 * KSIZE], temp4	; data[+3] = temp4
-		add		data, 4 * KSIZE				; data += 4
-		sub		count, 4 * KSIZE			; count -= 4
-		jnz		.vloop						; do while (count != 0)
-;---[End of vector loop]-------------------
-.skip:	mov		count, smask				; load smask
-		and		count, size					; apply mask to size variable
-		jz		.exit						; if (count == 0), then go to exit
-;---[Scalar loop]--------------------------
-.sloop:	movdqa	temp1, [data + 1 * KSIZE]	; temp1 = data[+1]
-		movdqa	[data + 0 * KSIZE], temp1	; data[+0] = temp1
-		add		data, KSIZE					; data++
-		sub		count, KSIZE				; count--
-		jnz		.sloop						; do while (count != 0)
-;---[End of scalar loop]-------------------
-.exit:	ret
-
-;******************************************************************************;
-;       Replace element in the left leaf node                                  ;
-;******************************************************************************;
-LeafReplaceLeftCore:
-;---[Parameters]---------------------------
-data	equ		rdi							; pointer to leaf data array
-size	equ		rsi							; count of keys to move
-value	equ		xmm0						; value to insert
-;---[Internal variables]-------------------
-count	equ		rax							; count of iterations
-temp1	equ		xmm1						; temporary register #1
-temp2	equ		xmm2						; temporary register #2
-temp3	equ		xmm3						; temporary register #3
-temp4	equ		xmm4						; temporary register #4
-smask	= 1 shl (KSCALE + 2) - 1			; mask for scalar loop count
-vmask	= not smask							; mask for vector loop count
-;------------------------------------------
-		test	size, size					; if (size == 0)
-		jz		.exit						;     then go to exit
-		mov		count, vmask				; load vmask
-		and		count, size					; apply mask to size variable
-		jz		.skip						; if (count == 0), then skip the loop
-;---[Vector loop]--------------------------
-.vloop:	movdqa	temp1, [data - 1 * KSIZE]	; temp1 = data[-1]
-		movdqa	temp2, [data - 2 * KSIZE]	; temp2 = data[-2]
-		movdqa	temp3, [data - 3 * KSIZE]	; temp3 = data[-3]
-		movdqa	temp4, [data - 4 * KSIZE]	; temp4 = data[-4]
-		movdqa	[data - 0 * KSIZE], temp1	; data[-0] = temp1
-		movdqa	[data - 1 * KSIZE], temp2	; data[-1] = temp2
-		movdqa	[data - 2 * KSIZE], temp3	; data[-2] = temp3
-		movdqa	[data - 3 * KSIZE], temp4	; data[-3] = temp4
-		sub		data, 4 * KSIZE				; data -= 4
-		sub		count, 4 * KSIZE			; count -= 4
-		jnz		.vloop						; do while (count != 0)
-;---[End of vector loop]-------------------
-.skip:	mov		count, smask				; load smask
-		and		count, size					; apply mask to size variable
-		jz		.exit						; if (count == 0), then go to exit
-;---[Scalar loop]--------------------------
-.sloop:	movdqa	temp1, [data - 1 * KSIZE]	; temp1 = data[-1]
-		movdqa	[data - 0 * KSIZE], temp1	; data[-0] = temp1
-		sub		data, KSIZE					; data--
-		sub		count, KSIZE				; count--
-		jnz		.sloop						; do while (count != 0)
-;---[End of scalar loop]-------------------
-.exit:	movdqa	[data], value				; data[0] = value
-		ret
-
-;******************************************************************************;
-;       Replace element in the right leaf node                                 ;
-;******************************************************************************;
-LeafReplaceRightCore:
-;---[Parameters]---------------------------
-data	equ		rdi							; pointer to leaf data array
-size	equ		rsi							; count of keys to move
-value	equ		xmm0						; value to insert
-;---[Internal variables]-------------------
-count	equ		rax							; count of iterations
-temp1	equ		xmm1						; temporary register #1
-temp2	equ		xmm2						; temporary register #2
-temp3	equ		xmm3						; temporary register #3
-temp4	equ		xmm4						; temporary register #4
-smask	= 1 shl (KSCALE + 2) - 1			; mask for scalar loop count
-vmask	= not smask							; mask for vector loop count
-;------------------------------------------
-		test	size, size					; if (size == 0)
-		jz		.exit						;     then go to exit
-		mov		count, vmask				; load vmask
-		and		count, size					; apply mask to size variable
-		jz		.skip						; if (count == 0), then skip the loop
-;---[Vector loop]--------------------------
-.vloop:	movdqa	temp1, [data + 1 * KSIZE]	; temp1 = data[+1]
-		movdqa	temp2, [data + 2 * KSIZE]	; temp2 = data[+2]
-		movdqa	temp3, [data + 3 * KSIZE]	; temp3 = data[+3]
-		movdqa	temp4, [data + 4 * KSIZE]	; temp4 = data[+4]
-		movdqa	[data + 0 * KSIZE], temp1	; data[+0] = temp1
-		movdqa	[data + 1 * KSIZE], temp2	; data[+1] = temp2
-		movdqa	[data + 2 * KSIZE], temp3	; data[+2] = temp3
-		movdqa	[data + 3 * KSIZE], temp4	; data[+3] = temp4
-		add		data, 4 * KSIZE				; data += 4
-		sub		count, 4 * KSIZE			; count -= 4
-		jnz		.vloop						; do while (count != 0)
-;---[End of vector loop]-------------------
-.skip:	mov		count, smask				; load smask
-		and		count, size					; apply mask to size variable
-		jz		.exit						; if (count == 0), then go to exit
-;---[Scalar loop]--------------------------
-.sloop:	movdqa	temp1, [data + 1 * KSIZE]	; temp1 = data[+1]
-		movdqa	[data + 0 * KSIZE], temp1	; data[+0] = temp1
-		add		data, KSIZE					; data++
-		sub		count, KSIZE				; count--
-		jnz		.sloop						; do while (count != 0)
-;---[End of scalar loop]-------------------
-.exit:	movdqa	[data], value				; data[0] = value
-		ret
-
-;******************************************************************************;
 ;       Join two leaf nodes                                                    ;
 ;******************************************************************************;
 LeafJoinCore:
 ;---[Parameters]---------------------------
-tdata	equ		rdi							; pointer to target array of keys
-sdata	equ		rsi							; pointer to source array of keys
+tdata	equ		rdi							; pointer to target data array
+sdata	equ		rsi							; pointer to source data array
 size	equ		rdx							; size of right node
-value	equ		xmm0						; key to insert
+value	equ		xmm0						; element to insert
 ;---[Internal variables]-------------------
 count	equ		rax							; count of iterations
 temp0	equ		xmm1						; temporary register #1
@@ -960,8 +1026,8 @@ vmask	= not smask							; mask for vector loop count
 ;******************************************************************************;
 LeafSplitCore:
 ;---[Parameters]---------------------------
-tdata	equ		rdi							; pointer to target array of keys
-sdata	equ		rsi							; pointer to source array of keys
+tdata	equ		rdi							; pointer to target data array
+sdata	equ		rsi							; pointer to source data array
 ;---[Internal variables]-------------------
 count	equ		rax							; count of iterations
 temp0	equ		xmm0						; temporary register #1
@@ -999,8 +1065,8 @@ end if
 ;******************************************************************************;
 BranchDeleteCore:
 ;---[Parameters]---------------------------
-data	equ		rdi							; pointer to source array of keys
-bptr	equ		rsi							; pointer to source array of subtrees
+data	equ		rdi							; pointer to data array
+bptr	equ		rsi							; pointer to array of subtrees
 array	equ		rdx							; pointer to array of nodes
 node	equ		rcx							; index of branch node to process
 size	equ		r8							; count of elements to move
@@ -1080,14 +1146,14 @@ vmask	= not smask							; mask for vector loop count
 ;******************************************************************************;
 BranchReplaceLeftCore:
 ;---[Parameters]---------------------------
-data	equ		rdi							; pointer to source array of keys
-bptr	equ		rsi							; pointer to source array of subtrees
+data	equ		rdi							; pointer to data array
+bptr	equ		rsi							; pointer to array of subtrees
 array	equ		rdx							; pointer to array of nodes
 node	equ		rcx							; index of branch node to process
 size	equ		r8							; count of elements to move
 proot	equ		r9							; pointer to subtree tree root
 psize	equ		r10							; size of subtree
-value	equ		xmm0						; key to insert
+value	equ		xmm0						; element to insert
 ;---[Internal variables]-------------------
 count	equ		rax							; count of iterations
 root	equ		r11							; index of subtree root node
@@ -1174,14 +1240,14 @@ vmask	= not smask							; mask for vector loop count
 ;******************************************************************************;
 BranchReplaceRightCore:
 ;---[Parameters]---------------------------
-data	equ		rdi							; pointer to source array of keys
-bptr	equ		rsi							; pointer to source array of subtrees
+data	equ		rdi							; pointer to data array
+bptr	equ		rsi							; pointer to array of subtrees
 array	equ		rdx							; pointer to array of nodes
 node	equ		rcx							; index of branch node to process
 size	equ		r8							; count of elements to move
 proot	equ		r9							; pointer to subtree tree root
 psize	equ		r10							; size of subtree
-value	equ		xmm0						; key to insert
+value	equ		xmm0						; element to insert
 ;---[Internal variables]-------------------
 count	equ		rax							; count of iterations
 root	equ		r11							; index of subtree root node
@@ -1262,14 +1328,14 @@ vmask	= not smask							; mask for vector loop count
 ;******************************************************************************;
 BranchJoinCore:
 ;---[Parameters]---------------------------
-tdata	equ		rdi							; pointer to target array of keys
+tdata	equ		rdi							; pointer to target data array
 tbptr	equ		rsi							; pointer to target array of subtrees
-sdata	equ		rdx							; pointer to source array of keys
+sdata	equ		rdx							; pointer to source data array
 sbptr	equ		rcx							; pointer to source array of subtrees
 array	equ		r8							; pointer to array of nodes
 node	equ		r9							; index of old branch node
 size	equ		r10							; size of right node
-value	equ		xmm0						; key to insert
+value	equ		xmm0						; element to insert
 ;---[Internal variables]-------------------
 count	equ		rax							; count of iterations
 root	equ		r11							; index of subtree root node
@@ -1356,9 +1422,9 @@ vmask	= not smask							; mask for vector loop count
 ;******************************************************************************;
 BranchSplitCore:
 ;---[Parameters]---------------------------
-tdata	equ		rdi							; pointer to target array of keys
+tdata	equ		rdi							; pointer to target data array
 tbptr	equ		rsi							; pointer to target array of subtrees
-sdata	equ		rdx							; pointer to source array of keys
+sdata	equ		rdx							; pointer to source data array
 sbptr	equ		rcx							; pointer to source array of subtrees
 array	equ		r8							; pointer to array of nodes
 node	equ		r9							; index of new branch node
@@ -1460,27 +1526,37 @@ Constructor:
 ;---[Parameters]---------------------------
 this	equ		rdi							; pointer to b-tree object
 cap		equ		rsi							; object capacity
-func	equ		rdx							; compare function
+kfunc	equ		rdx							; key compare function
+cfunc	equ		rcx							; copy function
+dfunc	equ		r8							; delete function
+ptr		equ		r9							; pointer to user's data
 ;---[Internal variables]-------------------
+status	equ		al							; operation status
 array	equ		rax							; pointer to array of nodes
 low		equ		rax							; low part of value for div operation
 high	equ		rdx							; high part of value for div operation
 stack	equ		rsp							; stack pointer
 s_this	equ		stack + 0 * 8				; stack position of "this" variable
 s_cap	equ		stack + 1 * 8				; stack position of "cap" variable
-s_func	equ		stack + 2 * 8				; stack position of "func" variable
-space	= 3 * 8								; stack size required by the procedure
+s_kfunc	equ		stack + 2 * 8				; stack position of "kfunc" variable
+s_cfunc	equ		stack + 3 * 8				; stack position of "cfunc" variable
+s_dfunc	equ		stack + 4 * 8				; stack position of "dfunc" variable
+s_ptr	equ		stack + 5 * 8				; stack position of "ptr" variable
+space	= 7 * 8								; stack size required by the procedure
 ;------------------------------------------
 		sub		stack, space				; reserving stack size for local vars
 		mov		[s_this], this				; save "this" variable into the stack
-		mov		[s_func], func				; save "func" variable into the stack
+		mov		[s_kfunc], kfunc			; save "kfunc" variable into the stack
+		mov		[s_cfunc], cfunc			; save "cfunc" variable into the stack
+		mov		[s_dfunc], dfunc			; save "dfunc" variable into the stack
+		mov		[s_ptr], ptr				; save "ptr" variable into the stack
 		shl		cap, KSCALE
 		xor		high, high					; high = 0
 		lea		low, [cap + BMAX - 2 * KSIZE]
 		mov		cap, BMAX - KSIZE
 		div		cap							; low = (cap + BMAX - 2 * KSIZE) / (BMAX - KSIZE)
 		shl		low, NSCALE
-	Capacity	low, func, MINCAP			; compute capacity of the object
+	Capacity	low, kfunc, MINCAP			; compute capacity of the object
 		mov		[s_cap], low				; save "cap" variable into the stack
 ;---[Allocate memory for the object]-------
 		mov		sc_prm6, 0
@@ -1493,7 +1569,10 @@ space	= 3 * 8								; stack size required by the procedure
 		syscall								; array = mmap (NULL, cap, PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANONYMOUS, -1, 0)
 		mov		this, [s_this]				; get "this" variable from the stack
 		mov		cap, [s_cap]				; get "cap" variable from the stack
-		mov		func, [s_func]				; get "func" variable from the stack
+		mov		kfunc, [s_kfunc]			; get "kfunc" variable from the stack
+		mov		cfunc, [s_cfunc]			; get "cfunc" variable from the stack
+		mov		dfunc, [s_dfunc]			; get "dfunc" variable from the stack
+		mov		ptr, [s_ptr]				; get "ptr" variable from the stack
 		test	array, array				; if (array < 0)
 		js		.error						;     then go to error branch
 ;---[Normal execution branch]--------------
@@ -1506,7 +1585,10 @@ space	= 3 * 8								; stack size required by the procedure
 		mov		qword [this + FWD], EMPTY	; this.fwd = EMPTY
 		mov		qword [this + BWD], EMPTY	; this.bwd = EMPTY
 		mov		qword [this + FUTEX], 0		; this.futex = 0
-		mov		[this + FUNC], func			; this.func = func
+		mov		[this + KFUNC], kfunc		; this.kfunc = kfunc
+		mov		[this + CFUNC], cfunc		; this.cfunc = cfunc
+		mov		[this + DFUNC], dfunc		; this.dfunc = dfunc
+		mov		[this + DPTR], ptr			; this.ptr = ptr
 		mov		param4, EMPTY
 		mov		param3, cap
 		mov		param2, 0
@@ -1523,7 +1605,11 @@ space	= 3 * 8								; stack size required by the procedure
 		mov		qword [this + FWD], EMPTY	; this.fwd = EMPTY
 		mov		qword [this + BWD], EMPTY	; this.bwd = EMPTY
 		mov		qword [this + FUTEX], 0		; this.futex = 0
-		mov		[this + FUNC], func			; this.func = func
+		mov		[this + KFUNC], kfunc		; this.kfunc = kfunc
+		mov		[this + CFUNC], cfunc		; this.cfunc = cfunc
+		mov		[this + DFUNC], dfunc		; this.dfunc = dfunc
+		mov		[this + DPTR], ptr			; this.ptr = ptr
+		xor		status, status				; return false
 		add		stack, space				; restoring back the stack pointer
 		ret
 
@@ -1535,70 +1621,47 @@ CopyConstructor:
 this	equ		rdi							; pointer to target b-tree object
 source	equ		rsi							; pointer to source b-tree object
 ;---[Internal variables]-------------------
-array	equ		rax							; pointer to array of nodes
-temp	equ		rcx							; temporary register
-fptr	equ		rax							; pointer to call external function
+status	equ		al							; operation status
+iter	equ		rax							; iterator value
 stack	equ		rsp							; stack pointer
 s_this	equ		stack + 0 * 8				; stack position of "this" variable
 s_src	equ		stack + 1 * 8				; stack position of "source" variable
 space	= 3 * 8								; stack size required by the procedure
 ;------------------------------------------
 		sub		stack, space				; reserving stack size for local vars
+;---[Prevent initialization by itself]-----
 		cmp		this, source				; if (this == source)
 		je		.exit						;     then go to exit
+;---[Call object constructor]--------------
 		mov		[s_this], this				; save "this" variable into the stack
 		mov		[s_src], source				; save "source" variable into the stack
-;---[Allocate memory for the object]-------
-		mov		sc_prm6, 0
-		mov		sc_prm5, -1
-		mov		sc_prm4, 0x22
-		mov		sc_prm3, 0x3
-		mov		sc_prm2, [source + CAPACITY]
-		mov		sc_prm1, 0
-		mov		sc_num, SYSCALL_MMAP
-		syscall								; array = mmap (NULL, source.capacity, PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANONYMOUS, -1, 0)
+		mov		param6, [source + DPTR]
+		mov		param5, [source + DFUNC]
+		mov		param4, [source + CFUNC]
+		mov		param3, [source + KFUNC]
+		mov		param2, [source + SIZE]
+		shr		param2, KSCALE
+		call	Constructor					; status = this.Counstructor (source.size, source.kfunc, source.cfunc, source.dfunc, source.ptr)
 		mov		this, [s_this]				; get "this" variable from the stack
 		mov		source, [s_src]				; get "source" variable from the stack
-		test	array, array				; if (array < 0)
-		js		.error						;     then go to error branch
-;---[Normal execution branch]--------------
-		mov		[this + ARRAY], array		; this.array = array
-		mov		temp, [source + CAPACITY]
-		mov		[this + CAPACITY], temp		; this.capacity = source.capacity
-		mov		temp, [source + SIZE]
-		mov		[this + SIZE], temp			; this.size = source.size
-		mov		temp, [source + HEIGHT]
-		mov		[this + HEIGHT], temp		; this.height = source.height
-		mov		temp, [source + POOL]
-		mov		[this + POOL], temp			; this.pool = source.pool
-		mov		temp, [source + ROOT]
-		mov		[this + ROOT], temp			; this.root = source.root
-		mov		temp, [source + FWD]
-		mov		[this + FWD], temp			; this.fwd = source.fwd
-		mov		temp, [source + BWD]
-		mov		[this + BWD], temp			; this.bwd = source.bwd
-		mov		temp, [source + FUNC]
-		mov		[this + FUNC], temp			; this.func = source.func
-		mov		qword [this + FUTEX], 0		; this.futex = 0
-;---[Copy content of nodes]----------------
-		mov		param3, [source + CAPACITY]
+		test	status, status				; if (!status)
+		jz		.exit						;     then go to exit
+;---[Copy elements from source object]-----
+		xor		param4, param4
+		mov		param3, [source + HEIGHT]
+		mov		param1, [source + ARRAY]
+		mov		param2, [source + ROOT]
+		call	GetNode						; iter = GetNode (source.array, source.root, source.height, 0)
+		mov		this, [s_this]				; get "this" variable from the stack
+		mov		source, [s_src]				; get "source" variable from the stack
+		mov		param6, [this + DPTR]
+		mov		param5, [this + CFUNC]
+		mov		param4, [source + SIZE]
+		mov		param3, iter
 		mov		param2, [source + ARRAY]
-		mov		param1, array
-		mov		fptr, Copy
 		add		stack, space				; restoring back the stack pointer
-		jmp		fptr						; return Array::Copy (this.array, source.array, source.capacity)
-;---[Error branch]-------------------------
-.error:	mov		qword [this + ARRAY], 0		; this.array = NULL
-		mov		qword [this + CAPACITY], 0	; this.capacity = 0
-		mov		qword [this + SIZE], 0		; this.size = 0
-		mov		qword [this + HEIGHT], ERROR; this.height = ERROR
-		mov		qword [this + POOL], EMPTY	; this.pool = EMPTY
-		mov		qword [this + ROOT], EMPTY	; this.root = EMPTY
-		mov		qword [this + FWD], EMPTY	; this.fwd = EMPTY
-		mov		qword [this + BWD], EMPTY	; this.bwd = EMPTY
-		mov		qword [this + FUTEX], 0		; this.futex = 0
-		mov		temp, [source + FUNC]
-		mov		[this + FUNC], temp			; this.func = source.func
+		jmp		CopyElementsFwdMulti		; return this.CopyElementsFwdMulti (source.array, iter, source.size, this.cfunc, this.ptr)
+;---[Normal exit branch]-------------------
 .exit:	add		stack, space				; restoring back the stack pointer
 		ret
 
@@ -1615,6 +1678,16 @@ space	= 1 * 8								; stack size required by the procedure
 ;------------------------------------------
 		sub		stack, space				; reserving stack size for local vars
 		mov		[s_this], this				; save "this" variable into the stack
+;---[Delete elements]----------------------
+		mov		param6, [this + DPTR]
+		mov		param5, [this + DFUNC]
+		mov		param4, [this + SIZE]
+		mov		param3, [this + HEIGHT]
+		mov		param2, [this + ROOT]
+		mov		param1, [this + ARRAY]
+		call	DeleteElements				; call DeleteElements (this.array, this.root, this.height, this.size, this.dfunc, this.ptr)
+		mov		this, [s_this]				; get "this" variable from the stack
+;---[Release memory]-----------------------
 		mov		sc_prm2, [this + CAPACITY]
 		mov		sc_prm1, [this + ARRAY]
 		mov		sc_num, SYSCALL_MUNMAP
@@ -1629,7 +1702,10 @@ space	= 1 * 8								; stack size required by the procedure
 		mov		qword [this + FWD], EMPTY	; this.fwd = EMPTY
 		mov		qword [this + BWD], EMPTY	; this.bwd = EMPTY
 		mov		qword [this + FUTEX], 0		; this.futex = 0
-		mov		qword [this + FUNC], 0		; this.func = NULL
+		mov		qword [this + KFUNC], 0		; this.kfunc = NULL
+		mov		qword [this + CFUNC], 0		; this.cfunc = NULL
+		mov		qword [this + DFUNC], 0		; this.dfunc = NULL
+		mov		qword [this + DPTR], 0		; this.ptr = NULL
 		add		stack, space				; restoring back the stack pointer
 		ret
 
@@ -1648,7 +1724,7 @@ AllowWritings:	READ_RELEASE
 ;******************************************************************************;
 ;       Copying elements                                                       ;
 ;******************************************************************************;
-macro	COPY_MOVE	InsFunc, IterFunc, offst, bwd, move
+macro	COPY_MOVE	CopyFunc, MoveFunc, offst, bwd, move
 {
 ;---[Parameters]---------------------------
 this	equ		rdi							; pointer to target b-tree object
@@ -1661,26 +1737,30 @@ low		equ		rax							; low part of value for div operation
 high	equ		rdx							; high part of value for div operation
 array	equ		r8							; pointer to array of nodes
 iter	equ		r9							; iterator value
-size	equ		r10							; object size
-value	equ		xmm0						; value to insert
+size	equ		result						; object size
 stack	equ		rsp							; stack pointer
 s_this	equ		stack + 0 * 8				; stack position of "this" variable
 s_src	equ		stack + 1 * 8				; stack position of "source" variable
 s_count	equ		stack + 2 * 8				; stack position of "count" variable
 s_array	equ		stack + 3 * 8				; stack position of "array" variable
 s_iter	equ		stack + 4 * 8				; stack position of "iter" variable
-s_cnt	equ		stack + 5 * 8				; stack position of "counter" variable
-space	= 7 * 8								; stack size required by the procedure
+space	= 5 * 8								; stack size required by the procedure
 ;------------------------------------------
 		sub		stack, space				; reserving stack size for local vars
-;---[Check access mode]--------------------
+		shl		count, KSCALE				; count *= KSIZE
+;---[Check target tree access mode]--------
 		cmp		dword [this + FUTEX], 0		; if read only code section called this
 		jg		.error						; function, then go to error branch
+if move
+;---[Check source tree access mode]--------
+		cmp		dword [source + FUTEX], 0	; if read only code section called this
+		jg		.error						; function, then go to error branch
+end if
 ;---[Prevent copying to itself]------------
 		cmp		this, source				; if (this == source)
 		je		.error						;     then go to error branch
 ;---[Check source iterator]----------------
-		mov		array, [source + ARRAY]		; get pointer to array of nodes
+		mov		array, [source + ARRAY]		; get pointer to source array of nodes
 		mov		iter, [source + offst]		; get source iterator value
 		cmp		iter, EMPTY					; if (iter <= EMPTY)
 		jle		.error						;     then go to error branch
@@ -1692,12 +1772,10 @@ space	= 7 * 8								; stack size required by the procedure
 		mov		[s_iter], iter				; save "iter" variable into the stack
 		mov		param2, iter
 		mov		param1, array
-		call	GetPos						; result = GetPos (source.array, iter)
+		call	GetPos						; size = GetPos (source.array, iter)
 		mov		this, [s_this]				; get "this" variable from the stack
 		mov		source, [s_src]				; get "source" variable from the stack
 		mov		count, [s_count]			; get "count" variable from the stack
-		mov		array, [s_array]			; get "array" variable from the stack
-		mov		iter, [s_iter]				; get "iter" variable from the stack
 if bwd
 		add		size, KSIZE					; size = result + KSIZE
 else
@@ -1705,7 +1783,6 @@ else
 		add		size, [source + SIZE]		; size = source.size - result
 end if
 ;---[Correct count]------------------------
-		shl		count, KSCALE
 		cmp		count, size					; if (count > size)
 		cmova	count, size					;     count = size
 		mov		[s_count], count			; save "count" variable into the stack
@@ -1713,7 +1790,7 @@ end if
 		test	count, count				; if (count == 0)
 		jz		.exit						;     then go to exit
 ;---[Check object capacity]----------------
-		mov		low, [this + SIZE]
+		mov		low, [this + SIZE]			; get object size
 		lea		low, [low + count + BMAX - 2 * KSIZE]
 		xor		high, high					; high = 0
 		mov		size, BMAX - KSIZE
@@ -1722,75 +1799,37 @@ end if
 	Capacity	low, count, MINCAP			; compute new capacity of target object
 		cmp		low, [this + CAPACITY]		; if (low > capacity)
 		ja		.ext						;     then try to extend object capacity
-.eback:	mov		count, [s_count]			; get "count" variable from the stack
-		mov		[s_cnt], count				; counter = count
-;---[Copying/moving loop]------------------
-.loop:	and		iter, PMASK
-		movdqa	value, [array + iter + BDATA]
-		call	InsFunc						; call this.InsFunc (value)
-		mov		source, [s_src]				; get "source" variable from the stack
-		test	status, status				; if (!status)
-		jz		.skip						;     then go to skip branch
 if move
-		mov		this, [s_src]				; get "source" variable from the stack
-		mov		param2, [source + offst]
-		call	RemoveCore					; call source.RemoveCore (iter)
-else
-		mov		param1, [s_array]
-		mov		param2, [s_iter]
-		mov		param3, KSIZE
-		call	IterFunc					; result = IterFunc (source.array, source.iter, KSIZE)
-end if
-		mov		this, [s_this]				; get "this" variable from the stack
-		mov		array, [s_array]			; get "array" variable from the stack
-if move
-		mov		source, [s_src]				; get "source" variable from the stack
-		mov		iter, [source + offst]		; iter = source.iter
-else
-		mov		iter, result				; iter = result
-		mov		[s_iter], result			; save "iter" variable into the stack
-end if
-		sub		qword [s_cnt], KSIZE		; counter--
-		jnz		.loop						; do while (counter != 0)
-;---[Normal exit branch]-------------------
-.exit:	mov		result, [s_count]			; get "count" variable from the stack
+;---[Move elements from source tree]-------
+.back:	mov		this, [s_this]				; get "this" variable from the stack
+		mov		param3, [s_count]
+		mov		param2, [s_src]
+		call	MoveFunc					; call this.MoveFunc (source, count)
 		shr		result, KSCALE				; return count
 		add		stack, space				; restoring back the stack pointer
 		ret
-;---[Skip element branch]------------------
-.skip:	sub		qword [s_count], KSIZE		; count--
-		mov		param1, [s_array]
-if move
-		mov		param2, [source + offst]
 else
-		mov		param2, [s_iter]
-end if
-		mov		param3, KSIZE
-		call	IterFunc					; result = IterFunc (source.array, source.iter, KSIZE)
-		mov		this, [s_this]				; get "this" variable from the stack
-		mov		array, [s_array]			; get "array" variable from the stack
-if move
-		mov		source, [s_src]				; get "source" variable from the stack
-		mov		iter, [source + offst]		; iter = source.iter
-else
-		mov		iter, result				; iter = result
-		mov		[s_iter], result			; save "iter" variable into the stack
-end if
-		sub		qword [s_cnt], KSIZE		; counter--
-		jnz		.loop						; do while (counter != 0)
-		mov		result, [s_count]			; get "count" variable from the stack
+;---[Copy elements from source tree]-------
+.back:	mov		this, [s_this]				; get "this" variable from the stack
+		mov		param6, [this + DPTR]
+		mov		param5, [this + CFUNC]
+		mov		param4, [s_count]
+		mov		param3, [s_iter]
+		mov		param2, [s_array]
+		call	CopyFunc					; result = this.CopyFunc (source.array, source.iter, count, this.cfunc, this.ptr)
 		shr		result, KSCALE				; return count
+		add		stack, space				; restoring back the stack pointer
+		ret
+end if
+;---[Normal exit branch]-------------------
+.exit:	xor		result, result				; return 0
 		add		stack, space				; restoring back the stack pointer
 		ret
 ;---[Extend object capacity]---------------
 .ext:	mov		param2, low
 		call	Extend						; status = this.Extend (low)
-		mov		this, [s_this]				; get "this" variable from the stack
-		mov		source, [s_src]				; get "source" variable from the stack
-		mov		array, [s_array]			; get "array" variable from the stack
-		mov		iter, [s_iter]				; get "iter" variable from the stack
 		test	status, status				; if (status)
-		jnz		.eback						;     then go back
+		jnz		.back						;     then go back
 ;---[Error branch]-------------------------
 .error:	mov		result, ERROR				; return ERROR
 		add		stack, space				; restoring back the stack pointer
@@ -1798,24 +1837,24 @@ end if
 }
 
 ; Using forward iterator
-CopyFwdMulti:	COPY_MOVE	InsertCoreMulti, GoNext, FWD, 0, 0
-CopyFwdUnique:	COPY_MOVE	InsertCoreUnique, GoNext, FWD, 0, 0
+CopyFwdMulti:	COPY_MOVE	CopyElementsFwdMulti, MoveElementsFwdMulti, FWD, 0, 0
+CopyFwdUnique:	COPY_MOVE	CopyElementsFwdUnique, MoveElementsFwdUnique, FWD, 0, 0
 
 ; Using backward iterator
-CopyBwdMulti:	COPY_MOVE	InsertCoreMulti, GoPrev, BWD, 0, 0
-CopyBwdUnique:	COPY_MOVE	InsertCoreUnique, GoPrev, BWD, 0, 0
+CopyBwdMulti:	COPY_MOVE	CopyElementsBwdMulti, MoveElementsBwdMulti, BWD, 1, 0
+CopyBwdUnique:	COPY_MOVE	CopyElementsBwdUnique, MoveElementsBwdUnique, BWD, 1, 0
 
 ;******************************************************************************;
 ;       Moving elements                                                        ;
 ;******************************************************************************;
 
 ; Using forward iterator
-MoveFwdMulti:	COPY_MOVE	InsertCoreMulti, GoNext, FWD, 0, 1
-MoveFwdUnique:	COPY_MOVE	InsertCoreUnique, GoNext, FWD, 0, 1
+MoveFwdMulti:	COPY_MOVE	CopyElementsFwdMulti, MoveElementsFwdMulti, FWD, 0, 1
+MoveFwdUnique:	COPY_MOVE	CopyElementsFwdUnique, MoveElementsFwdUnique, FWD, 0, 1
 
 ; Using backward iterator
-MoveBwdMulti:	COPY_MOVE	InsertCoreMulti, GoPrev, BWD, 0, 1
-MoveBwdUnique:	COPY_MOVE	InsertCoreUnique, GoPrev, BWD, 0, 1
+MoveBwdMulti:	COPY_MOVE	CopyElementsBwdMulti, MoveElementsBwdMulti, BWD, 1, 1
+MoveBwdUnique:	COPY_MOVE	CopyElementsBwdUnique, MoveElementsBwdUnique, BWD, 1, 1
 
 ;******************************************************************************;
 ;       Insertion of element                                                   ;
@@ -1836,7 +1875,7 @@ array	equ		r8							; pointer to array of nodes
 iter	equ		result						; iterator value
 ;------------------------------------------
 		mov		array, [this + ARRAY]		; get pointer to array of nodes
-		sub		qword [this + SIZE], KSIZE	; this.size--
+		sub		qword [this + SIZE], KSIZE	; update object size
 		cmp		node, EMPTY					; if (node <= EMPTY)
 		jle		.exit						;     then go to exit
 ;---[Correcting loop]----------------------
@@ -1868,6 +1907,7 @@ pos		equ		rdx							; insert position
 value	equ		xmm0						; value to insert
 ;---[Internal variables]-------------------
 result	equ		rax							; result register
+fptr	equ		rax							; pointer to call external function
 array	equ		r11							; pointer to array of nodes
 iter	equ		r8							; iterator value
 iter1	equ		r9							; new iterator value
@@ -1893,7 +1933,8 @@ space	= 3 * 8								; stack size required by the procedure
 		add		node, size					; node += size
 		lea		param1, [array + node + BDATA - KSIZE]
 		lea		param2, [size + pos - KSIZE]
-		call	LeafReplaceLeftCore			; call LeafReplaceLeftCore (array[node].data + size - 1, size - pos - 1, value)
+		mov		fptr, LeafReplaceLeftCore
+		call	fptr						; call LeafReplaceLeftCore (array[node].data + size - 1, size - pos - 1, value)
 		mov		this, [s_this]				; get "this" variable from the stack
 		mov		node, [s_node]				; get "node" variable from the stack
 		mov		pos, [s_pos]				; get "pos" variable from the stack
@@ -2304,7 +2345,6 @@ macro	INSERT_CORE	type
 {
 ;---[Parameters]---------------------------
 this	equ		rdi							; pointer to b-tree object
-odata	equ		rsi							; pointer to old data structure
 value	equ		xmm0						; value to insert
 ;---[Internal variables]-------------------
 result	equ		rax							; result register
@@ -2322,44 +2362,43 @@ right	equ		r13							; right index
 data	equ		r14							; pointer to array of keys
 bptr	equ		r15							; pointer to array of subtrees
 median	equ		this						; median value
+func	equ		height						; pointer to function
 temp	equ		xmm1						; temporary register
 stack	equ		rsp							; stack pointer
 s_this	equ		stack + 0 * 8				; stack position of "this" variable
-s_odata	equ		stack + 1 * 8				; stack position of "odata" variable
-s_value	equ		stack + 2 * 8				; stack position of "value" variable
-s_array	equ		stack + 4 * 8				; stack position of "array" variable
-s_node	equ		stack + 5 * 8				; stack position of "node" variable
-s_nsize	equ		stack + 6 * 8				; stack position of "nsize" variable
-s_hght	equ		stack + 7 * 8				; stack position of "height" variable
-s_func	equ		stack + 8 * 8				; stack position of "func" variable
-s_next	equ		stack + 9 * 8				; stack position of "next" variable
-s_left	equ		stack + 10 * 8				; stack position of "left" variable
-s_right	equ		stack + 11 * 8				; stack position of "right" variable
-s_data	equ		stack + 12 * 8				; stack position of "data" variable
-s_bptr	equ		stack + 13 * 8				; stack position of "bptr" variable
-s_med	equ		stack + 14 * 8				; stack position of "median" variable
+s_array	equ		stack + 1 * 8				; stack position of "array" variable
+s_node	equ		stack + 2 * 8				; stack position of "node" variable
+s_nsize	equ		stack + 3 * 8				; stack position of "nsize" variable
+s_hght	equ		stack + 4 * 8				; stack position of "height" variable
+s_func	equ		stack + 5 * 8				; stack position of "func" variable
+s_next	equ		stack + 6 * 8				; stack position of "next" variable
+s_left	equ		stack + 7 * 8				; stack position of "left" variable
+s_right	equ		stack + 8 * 8				; stack position of "right" variable
+s_data	equ		stack + 9 * 8				; stack position of "data" variable
+s_bptr	equ		stack + 10 * 8				; stack position of "bptr" variable
+s_med	equ		stack + 11 * 8				; stack position of "median" variable
+s_value	equ		stack + 12 * 8				; stack position of "value" variable
 space	= 15 * 8							; stack size required by the procedure
 ;------------------------------------------
 		sub		stack, space				; reserving stack size for local vars
-		mov		array, [this + ARRAY]
-		mov		size, [this + SIZE]
-		mov		height, [this + HEIGHT]
-		mov		root, [this + ROOT]
-		mov		result, [this + FUNC]
+		mov		array, [this + ARRAY]		; get pointer to array of nodes
+		mov		size, [this + SIZE]			; get object size
+		mov		height, [this + HEIGHT]		; get tree height
+		mov		root, [this + ROOT]			; get root node
+		mov		result, [this + KFUNC]		; get pointer to key compare function
 		mov		[s_next], next				; save old value of "next" variable
 		mov		[s_left], left				; save old value of "left" variable
 		mov		[s_right], right			; save old value of "right" variable
 		mov		[s_data], data				; save old value of "data" variable
 		mov		[s_bptr], bptr				; save old value of "bptr" variable
 		mov		[s_this], this				; save "this" variable into the stack
-		mov		[s_odata], odata			; save "odata" variable into the stack
-		movdqa	[s_value], value			; save "value" variable into the stack
 		mov		[s_array], array			; save "array" variable into the stack
 		mov		[s_hght], height			; save "height" variable into the stack
 		mov		[s_func], result			; save "func" variable into the stack
+		movdqa	[s_value], value			; save "value" variable into the stack
 ;---[Check tree properties]----------------
 		add		size, KSIZE					; this.size += KSIZE
-		mov		[this + SIZE], size			; update tree size
+		mov		[this + SIZE], size			; update object size
 		cmp		root, EMPTY					; if (this.root <= EMPTY)
 		jle		.init						;     then init b-tree
 .back1:	mov		node, root					; node = root
@@ -2453,7 +2492,7 @@ end if
 ;---[End of binary search loop]------------
 		cmp		nsize, LMAX					; if (nsize == LMAX)
 		je		.lsplt						;     then split leaf node
-.back3:	movdqa	value, [s_value]
+.back3:	movdqa	value, [s_value]			; get "value" variable from the stack
 		mov		param3, left
 		mov		param2, node
 		mov		param1, [s_this]
@@ -2468,7 +2507,7 @@ end if
 .init:	mov		root, [this + POOL]			; this.root = this.pool
 		add		height, 1					; this.height++
 		mov		result, [array + root + BROOT]
-		mov		[this + HEIGHT], height		; update root height
+		mov		[this + HEIGHT], height		; update tree height
 		mov		[this + POOL], result		; this.pool = array[root].root
 		mov		[this + ROOT], root			; update root node
 		mov		qword [array + root + BROOT], EMPTY
@@ -2484,7 +2523,7 @@ end if
 		mov		root, [this + POOL]			; this.root = this.pool
 		add		height, 1					; this.height++
 		mov		result, [array + root + BROOT]
-		mov		[this + HEIGHT], height		; update root height
+		mov		[this + HEIGHT], height		; update tree height
 		mov		[this + POOL], result		; this.pool = array[root].root
 		mov		[this + ROOT], root			; update root node
 		mov		qword [array + root + BROOT], EMPTY
@@ -2493,11 +2532,11 @@ end if
 		mov		[array + root + BPTR + TSIZE], size
 		mov		[array + node + BROOT], root
 		jmp		.leaf						; go back
-;---[Create new root node]-----------------
+;---[Create new root node branch]----------
 .nroot:	mov		root, [this + POOL]			; this.root = this.pool
 		add		height, 1					; this.height++
 		mov		result, [array + root + BROOT]
-		mov		[this + HEIGHT], height		; update root height
+		mov		[this + HEIGHT], height		; update tree height
 		mov		[this + POOL], result		; this.pool = array[root].root
 		mov		[this + ROOT], root			; update root node
 		mov		qword [array + root + BROOT], EMPTY
@@ -2506,9 +2545,14 @@ end if
 		mov		[array + root + BPTR + TSIZE], size
 		mov		[array + node + BROOT], root
 		jmp		.bloop						; go back
-;---[Correct tree size]--------------------
 if type = 1
-.undo:	mov		result, [array + node + BROOT]
+;---[Call delete function if set]----------
+.undo:	mov		this, [s_this]				; get "this" variable from the stack
+		mov		func, [this + DFUNC]		; get pointer to delete function
+		test	func, func					; if (func != NULL)
+		jnz		.del						;     then call delete function
+;---[Correct tree size]--------------------
+.back4:	mov		result, [array + node + BROOT]
 		xor		param4, param4
 		mov		param3, IMASK				; load index mask
 		and		param3, result				; tindex = array[node].root & IMASK
@@ -2522,12 +2566,23 @@ if type = 1
 		mov		bptr, [s_bptr]				; restore old value of "bptr" variable
 		add		stack, space				; restoring back the stack pointer
 		jmp		CorrectSize					; return this.CorrectSize (tnode, tindex, false)
+;---[Delete element branch]----------------
+.del:	mov		param2, [this + DPTR]
+		lea		param1, [s_value]
+		call	func						; call func (&value, this.ptr)
+		mov		array, [s_array]			; get "array" variable from the stack
+		mov		node, [s_node]				; get "node" variable from the stack
+		jmp		.back4						; go back
 else if type = 2
-.undo:	mov		odata, [s_odata]			; get "odata" variable from the stack
-		movdqa	value, [data + median]
-		movdqu	[odata], value				; odata[0] = data[median]
-		movdqa	value, [s_value]
-		movdqa	[data + median], value		; data[median] = pdata[0]
+;---[Call delete function if set]----------
+.undo:	add		data, median				; data += median
+		mov		this, [s_this]				; get "this" variable from the stack
+		mov		func, [this + DFUNC]		; get pointer to delete function
+		test	func, func					; if (func != NULL)
+		jnz		.del						;     then call delete function
+;---[Correct tree size]--------------------
+.back4:	movdqa	value, [s_value]			; get "value" variable from the stack
+		movdqa	[data], value				; data[0] = value
 		mov		result, [array + node + BROOT]
 		mov		param4, 1
 		mov		param3, IMASK				; load index mask
@@ -2542,6 +2597,13 @@ else if type = 2
 		mov		bptr, [s_bptr]				; restore old value of "bptr" variable
 		add		stack, space				; restoring back the stack pointer
 		jmp		CorrectSize					; return this.CorrectSize (tnode, tindex, true)
+;---[Delete element branch]----------------
+.del:	mov		param2, [this + DPTR]
+		mov		param1, data
+		call	func						; call func (data + median, this.ptr)
+		mov		array, [s_array]			; get "array" variable from the stack
+		mov		node, [s_node]				; get "node" variable from the stack
+		jmp		.back4						; go back
 end if
 ;---[Split branch node]--------------------
 .bsplt:	mov		param4, [s_hght]
@@ -2572,7 +2634,11 @@ end if
 }
 InsertCoreMulti:	INSERT_CORE	0
 InsertCoreUnique:	INSERT_CORE	1
-;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+OverrideCore:		INSERT_CORE	2
+
+;==============================================================================;
+;       Insertion of element                                                   ;
+;==============================================================================;
 macro	INSERT_ELEMENT	InsertCore
 {
 ;---[Parameters]---------------------------
@@ -2580,40 +2646,58 @@ this	equ		rdi							; pointer to b-tree object
 data	equ		rsi							; pointer to data structure
 ;---[Internal variables]-------------------
 status	equ		al							; operation status
-temp	equ		rdx							; temporary register
+func	equ		rcx							; pointer to function
 value	equ		xmm0						; value to insert
 stack	equ		rsp							; stack pointer
 s_this	equ		stack + 0 * 8				; stack position of "this" variable
 s_data	equ		stack + 1 * 8				; stack position of "data" variable
-space	= 3 * 8								; stack size required by the procedure
+s_value	equ		stack + 2 * 8				; stack position of "value" variable
+space	= 5 * 8								; stack size required by the procedure
+;------------------------------------------
+		sub		stack, space				; reserving stack size for local vars
 ;---[Check access mode]--------------------
 		cmp		dword [this + FUTEX], 0		; if read only code section called this
 		jg		.error						; function, then go to error branch
 ;---[Check pool for free nodes]------------
-		cmp		qword [this + POOL], EMPTY	; if (this.pool <= EMPTY)
-		jle		.ext						;     then try to extend object capacity
-;---[Normal execution branch]--------------
-.back:	movdqu	value, [data]				; value = data[0]
-		jmp		InsertCore					; return InsertCore (value)
-;---[Extend object capacity]---------------
-.ext:	sub		stack, space				; reserving stack size for local vars
+		movdqu	value, [data]				; value = data[0]
 		mov		[s_this], this				; save "this" variable into the stack
 		mov		[s_data], data				; save "data" variable into the stack
-		mov		param2, [this + CAPACITY]
+		movdqa	[s_value], value			; save "value" variable into the stack
+		cmp		qword [this + POOL], EMPTY	; if (this.pool <= EMPTY)
+		jle		.ext						;     then try to extend object capacity
+;---[Call copy function if set]------------
+.back1:	mov		func, [this + CFUNC]		; get pointer to copy function
+		test	func, func					; if (func != NULL)
+		jnz		.copy						;     then call copy function
+;---[Insert new element]-------------------
+.back2:	movdqa	value, [s_value]			; get "value" variable from the stack
+		add		stack, space				; restoring back the stack pointer
+		jmp		InsertCore					; return this.InsertCore (value)
+;---[Extend object capacity]---------------
+.ext:	mov		param2, [this + CAPACITY]
 		shl		param2, 1
 		call	Extend						; status = this.Extend (capacity * 2)
 		mov		this, [s_this]				; get "this" variable from the stack
-		mov		data, [s_data]				; get "data" variable from the stack
-		add		stack, space				; restoring back the stack pointer
 		test	status, status				; if (status)
-		jnz		.back						;     then go back
+		jnz		.back1						;     then go back
+		add		stack, space				; restoring back the stack pointer
+		ret
+;---[Copy element branch]------------------
+.copy:	mov		param3, [this + DPTR]
+		mov		param2, [s_data]
+		lea		param1, [s_value]
+		call	func						; call func (&value, data, ptr)
+		mov		this, [s_this]				; get "this" variable from the stack
+		test	status, status				; if (status)
+		jnz		.back2						;     then go back
 ;---[Error branch]-------------------------
-.error:	mov		result, ERROR				; return ERROR
+.error:	xor		status, status				; return false
 		add		stack, space				; restoring back the stack pointer
 		ret
 }
 InsertMulti:	INSERT_ELEMENT	InsertCoreMulti
 InsertUnique:	INSERT_ELEMENT	InsertCoreUnique
+Override:		INSERT_ELEMENT	OverrideCore
 
 ;******************************************************************************;
 ;       Removing of element                                                    ;
@@ -2633,6 +2717,7 @@ node	equ		rsi							; node index
 pos		equ		rdx							; delete position
 ;---[Internal variables]-------------------
 result	equ		rax							; result register
+fptr	equ		rax							; pointer to call external function
 tnode	equ		r8							; index of the top node
 tindex	equ		r9							; subtree position in the top node
 size	equ		r10							; node size
@@ -2665,7 +2750,8 @@ space	= 5 * 8								; stack size required by the procedure
 		neg		pos							; pos = -pos
 		lea		param1, [array + node + BDATA]
 		lea		param2, [pos + size]
-		call	LeafDeleteCore				; call LeafDeleteCore (array[node].data + pos, size - pos)
+		mov		fptr, LeafDeleteCore
+		call	fptr						; call LeafDeleteCore (array[node].data + pos, size - pos)
 ;---[Correct tree size]--------------------
 		mov		this, [s_this]				; get "this" variable from the stack
 		mov		array, [s_array]			; get "array" variable from the stack
@@ -2755,9 +2841,9 @@ space	= 5 * 8								; stack size required by the procedure
 		ret
 
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
-;       Replace element in the left leaf node                                  ;
+;       Take element from the left leaf node                                   ;
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
-LeafReplaceLeft:
+LeafTakeFromLeftNode:
 ;---[Parameters]---------------------------
 this	equ		rdi							; pointer to b-tree object
 tnode	equ		rsi							; index of the top node
@@ -2767,6 +2853,7 @@ rnode	equ		r8							; right node index
 pos		equ		r9							; delete position
 ;---[Internal variables]-------------------
 result	equ		rax							; result register
+fptr	equ		rax							; pointer to call external function
 size	equ		r10							; node size
 array	equ		r11							; pointer to array of nodes
 iter	equ		size						; iterator value
@@ -2775,7 +2862,7 @@ nval	equ		result						; iterator node value
 ival	equ		result						; iterator index value
 lval	equ		array						; iterator level value
 median	equ		xmm0						; median value
-temp	equ		xmm1						; temporary register
+value	equ		xmm1						; temporary register
 stack	equ		rsp							; stack pointer
 s_this	equ		stack + 0 * 8				; stack position of "this" variable
 s_array	equ		stack + 1 * 8				; stack position of "array" variable
@@ -2797,22 +2884,23 @@ space	= 9 * 8								; stack size required by the procedure
 		mov		[s_rnode], rnode			; save "rnode" variable into the stack
 		mov		[s_pos], pos				; save "pos" variable into the stack
 ;---[Get median element]-------------------
-		mov		size, [array + lnode + BSIZE]; get node size
+		add		lnode, array				; lnode += array
+		mov		size, [lnode + BSIZE]		; get node size
 		sub		size, KSIZE					; size--
-		mov		[array + lnode + BSIZE], size; update node size
+		mov		[lnode + BSIZE], size		; update node size
 		mov		[s_size], size				; save "size" variable into the stack
 		add		tnode, array
 		movdqa	median, [tnode + tindex + BDATA]
 ;---[Correct root node]--------------------
-		add		lnode, array
-		add		lnode, size
-		movdqa	temp, [lnode + BDATA]
-		movdqa	[tnode + BDATA], temp		; array[tnode].data[tindex] = array[lnode].data[size]
+		add		lnode, size					; lnode += size
+		movdqa	value, [lnode + BDATA]
+		movdqa	[tnode + tindex + BDATA], value
 ;---[Replace element in the node]----------
 		add		rnode, pos					; rnode += pos
 		mov		param2, pos
 		lea		param1, [array + rnode + BDATA]
-		call	LeafReplaceLeftCore			; call LeafReplaceLeftCore (array[rnode].data + pos, pos, median)
+		mov		fptr, LeafReplaceLeftCore
+		call	fptr						; call LeafReplaceLeftCore (array[rnode].data + pos, pos, median)
 		mov		array, [s_array]			; get "array" variable from the stack
 		mov		lnode, [s_lnode]			; get "lnode" variable from the stack
 ;---[Correct tree size]--------------------
@@ -2852,8 +2940,8 @@ space	= 9 * 8								; stack size required by the procedure
 ;---[Correct backward iterator branch]-----
 .btop:	mov		ival, IMASK					; load index mask
 		and		ival, iter					; ival = iter & IMASK
-		mov		lval, IMASK					; load index mask
-		and		lval, iter					; lval = iter & IMASK
+		mov		lval, LMASK					; load level mask
+		and		lval, iter					; lval = iter & LMASK
 		lea		iter1, [rnode + lval - 1]
 		cmp		ival, tindex				; if (ival == tindex)
 		cmove	iter, iter1					;     iter = rnode + lval - 1
@@ -2861,8 +2949,8 @@ space	= 9 * 8								; stack size required by the procedure
 		jmp		.back1						; go back
 .bleft:	mov		ival, IMASK					; load index mask
 		and		ival, iter					; ival = iter & IMASK
-		mov		lval, IMASK					; load index mask
-		and		lval, iter					; lval = iter & IMASK
+		mov		lval, LMASK					; load level mask
+		and		lval, iter					; lval = iter & LMASK
 		lea		iter1, [tnode + tindex + 1]
 		add		iter1, lval
 		cmp		ival, [s_size]				; if (ival == size)
@@ -2879,8 +2967,8 @@ space	= 9 * 8								; stack size required by the procedure
 ;---[Correct forward iterator branch]------
 .ftop:	mov		ival, IMASK					; load index mask
 		and		ival, iter					; ival = iter & IMASK
-		mov		lval, IMASK					; load index mask
-		and		lval, iter					; lval = iter & IMASK
+		mov		lval, LMASK					; load level mask
+		and		lval, iter					; lval = iter & LMASK
 		lea		iter1, [rnode + lval - 1]
 		cmp		ival, tindex				; if (ival == tindex)
 		cmove	iter, iter1					;     iter = rnode + lval - 1
@@ -2888,8 +2976,8 @@ space	= 9 * 8								; stack size required by the procedure
 		jmp		.back2						; go back
 .fleft:	mov		ival, IMASK					; load index mask
 		and		ival, iter					; ival = iter & IMASK
-		mov		lval, IMASK					; load index mask
-		and		lval, iter					; lval = iter & IMASK
+		mov		lval, LMASK					; load level mask
+		and		lval, iter					; lval = iter & LMASK
 		lea		iter1, [tnode + tindex + 1]
 		add		iter1, lval
 		cmp		ival, [s_size]				; if (ival == size)
@@ -2916,9 +3004,9 @@ space	= 9 * 8								; stack size required by the procedure
 		jmp		.back2						; go back
 
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
-;       Replace element in the right leaf node                                 ;
+;       Take element from the right leaf node                                  ;
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
-LeafReplaceRight:
+LeafTakeFromRightNode:
 ;---[Parameters]---------------------------
 this	equ		rdi							; pointer to b-tree object
 tnode	equ		rsi							; index of the top node
@@ -2928,6 +3016,7 @@ rnode	equ		r8							; right node index
 pos		equ		r9							; delete position
 ;---[Internal variables]-------------------
 result	equ		rax							; result register
+fptr	equ		rax							; pointer to call external function
 size	equ		r10							; node size
 array	equ		r11							; pointer to array of nodes
 iter	equ		size						; iterator value
@@ -2936,7 +3025,7 @@ nval	equ		result						; iterator node value
 ival	equ		result						; iterator index value
 lval	equ		array						; iterator level value
 median	equ		xmm0						; median value
-temp	equ		xmm1						; temporary register
+value	equ		xmm1						; temporary register
 stack	equ		rsp							; stack pointer
 s_this	equ		stack + 0 * 8				; stack position of "this" variable
 s_array	equ		stack + 1 * 8				; stack position of "array" variable
@@ -2958,27 +3047,29 @@ space	= 9 * 8								; stack size required by the procedure
 		mov		[s_rnode], rnode			; save "rnode" variable into the stack
 		mov		[s_pos], pos				; save "pos" variable into the stack
 ;---[Get median element]-------------------
-		mov		size, [array + rnode + BSIZE]; get node size
+		add		rnode, array				; rnode += array
+		mov		size, [rnode + BSIZE]		; get node size
 		sub		size, KSIZE					; size--
-		mov		[array + rnode + BSIZE], size; update node size
+		mov		[rnode + BSIZE], size		; update node size
 		mov		[s_size], size				; save "size" variable into the stack
 		add		tnode, array
 		movdqa	median, [tnode + tindex + BDATA]
 ;---[Correct root node]--------------------
-		add		rnode, array
-		movdqa	temp, [rnode + BDATA]
-		movdqa	[tnode + BDATA], temp		; array[tnode].data[tindex] = array[rnode].data[0]
+		movdqa	value, [rnode + BDATA]
+		movdqa	[tnode + tindex + BDATA], value
 ;---[Replace element in the node]----------
 		add		lnode, pos					; lnode += pos
 		neg		pos							; pos = -pos
 		lea		param2, [pos + LMIN - KSIZE]
 		lea		param1, [array + lnode + BDATA]
-		call	LeafReplaceRightCore		; call LeafReplaceRightCore (array[lnode].data + pos, LMIN - KSIZE - pos, median)
+		mov		fptr, LeafReplaceRightCore
+		call	fptr						; call LeafReplaceRightCore (array[lnode].data + pos, LMIN - KSIZE - pos, median)
 		mov		array, [s_array]			; get "array" variable from the stack
 		mov		rnode, [s_rnode]			; get "rnode" variable from the stack
 		mov		param2, [s_size]
 		lea		param1, [array + rnode + BDATA]
-		call	LeafDeleteCore				; call LeafDeleteCore (array[rnode].data, size)
+		mov		fptr, LeafDeleteCore
+		call	fptr						; call LeafDeleteCore (array[rnode].data, size)
 ;---[Correct tree size]--------------------
 		mov		param3, [s_tind]
 		add		param3, KSIZE
@@ -3018,7 +3109,7 @@ space	= 9 * 8								; stack size required by the procedure
 .ftop:	mov		ival, IMASK					; load index mask
 		and		ival, iter					; ival = iter & IMASK
 		mov		lval, LMASK					; load level mask
-		and		lval, iter					; lval = iter & IMASK
+		and		lval, iter					; lval = iter & LMASK
 		lea		iter1, [lnode + lval + LMIN - KSIZE - 1]
 		cmp		ival, tindex				; if (ival == tindex)
 		cmove	iter, iter1					;     iter = lnode + lval + LMIN - KSIZE - 1
@@ -3028,7 +3119,7 @@ space	= 9 * 8								; stack size required by the procedure
 		mov		ival, IMASK					; load index mask
 		and		ival, iter					; ival = iter & IMASK
 		mov		lval, LMASK					; load level mask
-		and		lval, iter					; lval = iter & IMASK
+		and		lval, iter					; lval = iter & LMASK
 		lea		iter1, [tnode + tindex + 1]
 		add		iter1, lval
 		cmp		ival, [s_size]				; if (ival > size)
@@ -3046,7 +3137,7 @@ space	= 9 * 8								; stack size required by the procedure
 .btop:	mov		ival, IMASK					; load index mask
 		and		ival, iter					; ival = iter & IMASK
 		mov		lval, LMASK					; load level mask
-		and		lval, iter					; lval = iter & IMASK
+		and		lval, iter					; lval = iter & LMASK
 		lea		iter1, [lnode + lval + LMIN - KSIZE - 1]
 		cmp		ival, tindex				; if (ival == tindex)
 		cmove	iter, iter1					;     iter = lnode + lval + LMIN - KSIZE - 1
@@ -3056,7 +3147,7 @@ space	= 9 * 8								; stack size required by the procedure
 		mov		ival, IMASK					; load index mask
 		and		ival, iter					; ival = iter & IMASK
 		mov		lval, LMASK					; load level mask
-		and		lval, iter					; lval = iter & IMASK
+		and		lval, iter					; lval = iter & LMASK
 		lea		iter1, [tnode + tindex + 1]
 		add		iter1, lval
 		cmp		ival, [s_size]				; if (ival > size)
@@ -3071,7 +3162,7 @@ space	= 9 * 8								; stack size required by the procedure
 		mov		ival, IMASK					; load index mask
 		and		ival, iter					; ival = iter & IMASK
 		cmp		ival, LMIN - KSIZE			; if (ival > LMIN - KSIZE)
-		ja		@f							;     then go to next element
+		ja		@f							;     then go to prev element
 		mov		[this + BWD], iter			; update iterator position
 		jmp		.back2						; go back
 @@:		mov		param3, KSIZE
@@ -3096,6 +3187,7 @@ node	equ		r9							; node index
 pos		equ		r10							; delete position
 ;---[Internal variables]-------------------
 result	equ		rax							; result register
+fptr	equ		rax							; pointer to call external function
 array	equ		r11							; pointer to array of nodes
 bsize	equ		result						; size of subtree branch
 lsize	equ		result						; size of left node
@@ -3143,7 +3235,8 @@ space	= 9 * 8								; stack size required by the procedure
 		neg		pos							; pos = -pos
 		lea		param2, [pos + LMIN - KSIZE]
 		lea		param1, [array + node + BDATA]
-		call	LeafDeleteCore				; call LeafDeleteCore (array[node].data + pos, LMIN - KSIZE - pos)
+		mov		fptr, LeafDeleteCore
+		call	fptr						; call LeafDeleteCore (array[node].data + pos, LMIN - KSIZE - pos)
 		mov		array, [s_array]			; get "array" variable from the stack
 		mov		lnode, [s_lnode]			; get "lnode" variable from the stack
 		mov		rnode, [s_rnode]			; get "rnode" variable from the stack
@@ -3250,8 +3343,8 @@ space	= 9 * 8								; stack size required by the procedure
 		cmovae	iter, iter1					;     iter = iter - KSIZE
 		mov		ival, IMASK					; load index mask
 		and		ival, iter					; ival = iter & IMASK
-		cmp		ival, LMAX - KSIZE			; if (ival > LMAX - KSIZE)
-		ja		@f							;     then go to next element
+		cmp		ival, LMAX - KSIZE			; if (ival >= LMAX - KSIZE)
+		jae		@f							;     then go to prev element
 		mov		[this + BWD], iter			; update iterator position
 		jmp		.back2						; go back
 @@:		mov		param3, KSIZE
@@ -3380,9 +3473,9 @@ space	= 5 * 8								; stack size required by the procedure
 		ret
 
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
-;       Replace element in the left branch node                                ;
+;       Take element from the left branch node                                 ;
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
-BranchReplaceLeft:
+BranchTakeFromLeftNode:
 ;---[Parameters]---------------------------
 this	equ		rdi							; pointer to b-tree object
 tnode	equ		rsi							; index of the top node
@@ -3402,7 +3495,7 @@ nval	equ		result						; iterator node value
 ival	equ		result						; iterator index value
 lval	equ		array						; iterator level value
 median	equ		xmm0						; median value
-temp	equ		xmm1						; temporary register
+value	equ		xmm1						; temporary register
 stack	equ		rsp							; stack pointer
 s_this	equ		stack + 0 * 8				; stack position of "this" variable
 s_array	equ		stack + 1 * 8				; stack position of "array" variable
@@ -3424,19 +3517,19 @@ space	= 9 * 8								; stack size required by the procedure
 		mov		[s_rnode], rnode			; save "rnode" variable into the stack
 		mov		[s_pos], pos				; save "pos" variable into the stack
 ;---[Get median element]-------------------
-		mov		size, [array + lnode + BSIZE]; get node size
+		add		lnode, array				; lnode += array
+		mov		size, [lnode + BSIZE]		; get node size
 		sub		size, KSIZE					; size--
-		mov		[array + lnode + BSIZE], size; update node size
+		mov		[lnode + BSIZE], size		; update node size
 		mov		[s_size], size				; save "size" variable into the stack
 		add		tnode, array
 		movdqa	median, [tnode + tindex + BDATA]
 ;---[Correct root node]--------------------
-		add		lnode, array
-		add		lnode, size
-		movdqa	temp, [lnode + BDATA]
+		add		lnode, size					; lnode += size
+		movdqa	value, [lnode + BDATA]
 		mov		broot, [lnode + KSIZE + BPTR + TROOT]
 		mov		bsize, [lnode + KSIZE + BPTR + TSIZE]
-		movdqa	[tnode + tindex + BDATA], temp
+		movdqa	[tnode + tindex + BDATA], value
 		sub		[tnode + tindex + BPTR + TSIZE], bsize
 		add		[tnode + tindex + KSIZE + BPTR + TSIZE], bsize
 ;---[Replace element in the node]----------
@@ -3488,8 +3581,8 @@ space	= 9 * 8								; stack size required by the procedure
 ;---[Correct backward iterator branch]-----
 .btop:	mov		ival, IMASK					; load index mask
 		and		ival, iter					; ival = iter & IMASK
-		mov		lval, IMASK					; load index mask
-		and		lval, iter					; lval = iter & IMASK
+		mov		lval, LMASK					; load level mask
+		and		lval, iter					; lval = iter & LMASK
 		lea		iter1, [rnode + lval - 1]
 		cmp		ival, tindex				; if (ival == tindex)
 		cmove	iter, iter1					;     iter = rnode + lval - 1
@@ -3497,8 +3590,8 @@ space	= 9 * 8								; stack size required by the procedure
 		jmp		.back1						; go back
 .bleft:	mov		ival, IMASK					; load index mask
 		and		ival, iter					; ival = iter & IMASK
-		mov		lval, IMASK					; load index mask
-		and		lval, iter					; lval = iter & IMASK
+		mov		lval, LMASK					; load level mask
+		and		lval, iter					; lval = iter & LMASK
 		lea		iter1, [tnode + tindex + 1]
 		add		iter1, lval
 		cmp		ival, [s_size]				; if (ival == size)
@@ -3515,8 +3608,8 @@ space	= 9 * 8								; stack size required by the procedure
 ;---[Correct forward iterator branch]------
 .ftop:	mov		ival, IMASK					; load index mask
 		and		ival, iter					; ival = iter & IMASK
-		mov		lval, IMASK					; load index mask
-		and		lval, iter					; lval = iter & IMASK
+		mov		lval, LMASK					; load level mask
+		and		lval, iter					; lval = iter & LMASK
 		lea		iter1, [rnode + lval - 1]
 		cmp		ival, tindex				; if (ival == tindex)
 		cmove	iter, iter1					;     iter = rnode + lval - 1
@@ -3524,8 +3617,8 @@ space	= 9 * 8								; stack size required by the procedure
 		jmp		.back2						; go back
 .fleft:	mov		ival, IMASK					; load index mask
 		and		ival, iter					; ival = iter & IMASK
-		mov		lval, IMASK					; load index mask
-		and		lval, iter					; lval = iter & IMASK
+		mov		lval, LMASK					; load level mask
+		and		lval, iter					; lval = iter & LMASK
 		lea		iter1, [tnode + tindex + 1]
 		add		iter1, lval
 		cmp		ival, [s_size]				; if (ival == size)
@@ -3541,9 +3634,9 @@ space	= 9 * 8								; stack size required by the procedure
 		jmp		.back2						; go back
 
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
-;       Replace element in the right branch node                               ;
+;       Take element from the right branch node                                ;
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
-BranchReplaceRight:
+BranchTakeFromRightNode:
 ;---[Parameters]---------------------------
 this	equ		rdi							; pointer to b-tree object
 tnode	equ		rsi							; index of the top node
@@ -3563,7 +3656,7 @@ nval	equ		result						; iterator node value
 ival	equ		result						; iterator index value
 lval	equ		array						; iterator level value
 median	equ		xmm0						; median value
-temp	equ		xmm1						; temporary register
+value	equ		xmm1						; temporary register
 stack	equ		rsp							; stack pointer
 s_this	equ		stack + 0 * 8				; stack position of "this" variable
 s_array	equ		stack + 1 * 8				; stack position of "array" variable
@@ -3585,18 +3678,18 @@ space	= 9 * 8								; stack size required by the procedure
 		mov		[s_rnode], rnode			; save "rnode" variable into the stack
 		mov		[s_pos], pos				; save "pos" variable into the stack
 ;---[Get median element]-------------------
-		mov		size, [array + rnode + BSIZE]; get node size
+		add		rnode, array				; rnode += array
+		mov		size, [rnode + BSIZE]		; get node size
 		sub		size, KSIZE					; size--
-		mov		[array + rnode + BSIZE], size; update node size
+		mov		[rnode + BSIZE], size		; update node size
 		mov		[s_size], size				; save "size" variable into the stack
 		add		tnode, array
 		movdqa	median, [tnode + tindex + BDATA]
 ;---[Correct root node]--------------------
-		add		rnode, array
-		movdqa	temp, [rnode + BDATA]
+		movdqa	value, [rnode + BDATA]
 		mov		broot, [rnode + BPTR + TROOT]
 		mov		bsize, [rnode + BPTR + TSIZE]
-		movdqa	[tnode + tindex + BDATA], temp
+		movdqa	[tnode + tindex + BDATA], value
 		add		[tnode + tindex + BPTR + TSIZE], bsize
 		sub		[tnode + tindex + KSIZE + BPTR + TSIZE], bsize
 ;---[Replace element in the node]----------
@@ -3658,7 +3751,7 @@ space	= 9 * 8								; stack size required by the procedure
 .ftop:	mov		ival, IMASK					; load index mask
 		and		ival, iter					; ival = iter & IMASK
 		mov		lval, LMASK					; load level mask
-		and		lval, iter					; lval = iter & IMASK
+		and		lval, iter					; lval = iter & LMASK
 		lea		iter1, [lnode + lval + BMIN - KSIZE - 1]
 		cmp		ival, tindex				; if (ival == tindex)
 		cmove	iter, iter1					;     iter = lnode + lval + BMIN - KSIZE - 1
@@ -3668,7 +3761,7 @@ space	= 9 * 8								; stack size required by the procedure
 		mov		ival, IMASK					; load index mask
 		and		ival, iter					; ival = iter & IMASK
 		mov		lval, LMASK					; load level mask
-		and		lval, iter					; lval = iter & IMASK
+		and		lval, iter					; lval = iter & LMASK
 		lea		iter1, [tnode + tindex + 1]
 		add		iter1, lval
 		cmp		ival, [s_size]				; if (ival > size)
@@ -3686,7 +3779,7 @@ space	= 9 * 8								; stack size required by the procedure
 .btop:	mov		ival, IMASK					; load index mask
 		and		ival, iter					; ival = iter & IMASK
 		mov		lval, LMASK					; load level mask
-		and		lval, iter					; lval = iter & IMASK
+		and		lval, iter					; lval = iter & LMASK
 		lea		iter1, [lnode + lval + BMIN - KSIZE - 1]
 		cmp		ival, tindex				; if (ival == tindex)
 		cmove	iter, iter1					;     iter = lnode + lval + BMIN - KSIZE - 1
@@ -3696,7 +3789,7 @@ space	= 9 * 8								; stack size required by the procedure
 		mov		ival, IMASK					; load index mask
 		and		ival, iter					; ival = iter & IMASK
 		mov		lval, LMASK					; load level mask
-		and		lval, iter					; lval = iter & IMASK
+		and		lval, iter					; lval = iter & LMASK
 		lea		iter1, [tnode + tindex + 1]
 		add		iter1, lval
 		cmp		ival, [s_size]				; if (ival > size)
@@ -3921,7 +4014,7 @@ space	= 5 * 8								; stack size required by the procedure
 		mov		lsize, [array + lnode + BSIZE]
 		sub		lsize, KSIZE				; lsize = array[lnode].size - KSIZE
 		cmp		lsize, BMIN					; if (lsize >= BMIN)
-		jae		.left						;     then replace element in the left node
+		jae		.left						;     then take element from the left node
 		mov		param7, index
 		mov		param6, node
 		mov		param5, node
@@ -3938,7 +4031,7 @@ space	= 5 * 8								; stack size required by the procedure
 		mov		rsize, [array + rnode + BSIZE]
 		sub		rsize, KSIZE				; rsize = array[rnode].size - KSIZE
 		cmp		rsize, BMIN					; if (rsize >= BMIN)
-		jae		.right						;     then replace element in the right node
+		jae		.right						;     then take element from the right node
 		mov		param7, index
 		mov		param6, node
 		mov		param4, node
@@ -3955,20 +4048,20 @@ space	= 5 * 8								; stack size required by the procedure
 		mov		param2, node
 		add		stack, space				; restoring back the stack pointer
 		jmp		BranchDelete				; return this.BranchDelete (node, index)
-;---[Replace element in the left node]-----
+;---[Take element from the left node]------
 .left:	mov		param6, index
 		mov		param5, node
 		mov		param3, [s_tind]
 		mov		param2, [s_tnode]
 		add		stack, space				; restoring back the stack pointer
-		jmp		BranchReplaceLeft			; return this.BranchReplaceLeft (tnode, tindex, lnode, node, index)
-;---[Replace element in the right node]----
+		jmp		BranchTakeFromLeftNode		; return this.BranchTakeFromLeftNode (tnode, tindex, lnode, node, index)
+;---[Take element from the right node]-----
 .right:	mov		param6, index
 		mov		param4, node
 		mov		param3, [s_tind]
 		mov		param2, [s_tnode]
 		add		stack, space				; restoring back the stack pointer
-		jmp		BranchReplaceRight			; return this.BranchReplaceRight (tnode, tindex, node, rnode, index)
+		jmp		BranchTakeFromRightNode		; return this.BranchTakeFromRightNode (tnode, tindex, node, rnode, index)
 
 ;==============================================================================;
 ;       Remove element from b-tree                                             ;
@@ -3991,7 +4084,7 @@ rnode	equ		nsize						; right node index
 lsize	equ		array						; left node size
 rsize	equ		array						; right node size
 index	equ		iter						; index of element in the node
-temp	equ		xmm0						; temporary register
+value	equ		xmm0						; temporary register
 stack	equ		rsp							; stack pointer
 s_this	equ		stack + 0 * 8				; stack position of "this" variable
 s_array	equ		stack + 1 * 8				; stack position of "array" variable
@@ -4036,7 +4129,7 @@ space	= 5 * 8								; stack size required by the procedure
 		mov		lsize, [array + lnode + BSIZE]
 		sub		lsize, KSIZE				; lsize = array[lnode].size - KSIZE
 		cmp		lsize, LMIN					; if (lsize >= LMIN)
-		jae		.left						;     then replace element in the left node
+		jae		.left						;     then take element from the left node
 		mov		param7, index
 		mov		param6, node
 		mov		param5, node
@@ -4049,7 +4142,7 @@ space	= 5 * 8								; stack size required by the procedure
 		mov		rsize, [array + rnode + BSIZE]
 		sub		rsize, KSIZE				; rsize = array[rnode].size - KSIZE
 		cmp		rsize, LMIN					; if (rsize >= LMIN)
-		jae		.right						;     then replace element in the right node
+		jae		.right						;     then take element from the right node
 		mov		param7, index
 		mov		param6, node
 		mov		param4, node
@@ -4061,20 +4154,20 @@ space	= 5 * 8								; stack size required by the procedure
 .del:	xchg	node, index
 		add		stack, space				; restoring back the stack pointer
 		jmp		LeafDelete					; return this.LeafDelete (node, index)
-;---[Replace element in the left node]-----
+;---[Take element from the left node]------
 .left:	mov		param6, index
 		mov		param5, node
 		mov		param3, [s_tind]
 		mov		param2, [s_tnode]
 		add		stack, space				; restoring back the stack pointer
-		jmp		LeafReplaceLeft				; return this.LeafReplaceLeft (tnode, tindex, lnode, node, index)
-;---[Replace element in the right node]----
+		jmp		LeafTakeFromLeftNode		; return this.TakeFromLeftNode (tnode, tindex, lnode, node, index)
+;---[Take element from the right node]-----
 .right:	mov		param6, index
 		mov		param4, node
 		mov		param3, [s_tind]
 		mov		param2, [s_tnode]
 		add		stack, space				; restoring back the stack pointer
-		jmp		LeafReplaceRight			; return this.LeafReplaceRight (tnode, tindex, node, rnode, index)
+		jmp		LeafTakeFromRightNode		; return this.TakeFromRightNode (tnode, tindex, node, rnode, index)
 ;---[Swap element in the node]-------------
 .swap:	mov		iter, [s_iter]
 		cmp		iter, [this + FWD]			; if (fwd == iter)
@@ -4089,8 +4182,8 @@ space	= 5 * 8								; stack size required by the procedure
 ;---[Extract element value]----------------
 		and		result, PMASK
 		and		iter, PMASK
-		movdqa	temp, [array + result + BDATA]
-		movdqa	[array + iter + BDATA], temp; ptr[0] = array[node].data[index]
+		movdqa	value, [array + result + BDATA]
+		movdqa	[array + iter + BDATA], value
 ;---[Get node pointer]---------------------
 		mov		node, NMASK					; load node mask
 		and		node, result				; node = iter & NMASK
@@ -4117,86 +4210,112 @@ space	= 5 * 8								; stack size required by the procedure
 		mov		iter, [s_iter]				; get "iter" variable from the stack
 		mov		[this + FWD], result		; update iterator position
 		jmp		.back2						; go back
-;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+;==============================================================================;
+;       By element index                                                       ;
+;==============================================================================;
 RemoveIndex:
 ;---[Parameters]---------------------------
 this	equ		rdi							; pointer to b-tree object
-data	equ		rsi							; pointer to data structure
-index	equ		rdx							; element index
+index	equ		rsi							; element index
 ;---[Internal variables]-------------------
 status	equ		al							; operation status
 result	equ		rax							; result register
-array	equ		rcx							; pointer to array of nodes
-ptr		equ		r8							; pointer to element value
-temp	equ		xmm0						; temporary register
+array	equ		r8							; pointer to array of nodes
+func	equ		r9							; pointer to function
 stack	equ		rsp							; stack pointer
 s_this	equ		stack + 0 * 8				; stack position of "this" variable
-s_data	equ		stack + 1 * 8				; stack position of "data" variable
-s_array	equ		stack + 2 * 8				; stack position of "array" variable
+s_iter	equ		stack + 1 * 8				; stack position of "iter" variable
 space	= 3 * 8								; stack size required by the procedure
 ;------------------------------------------
 		sub		stack, space				; reserving stack size for local vars
+		shl		index, KSCALE				; index *= KSIZE
 ;---[Check access mode]--------------------
 		cmp		dword [this + FUTEX], 0		; if read only code section called this
 		jg		.error						; function, then go to error branch
 ;---[Check index]--------------------------
-		shl		index, KSCALE
 		cmp		[this + SIZE], index		; if (size <= index)
 		jbe		.error						;     then go to error branch
-;---[Normal execution branch]--------------
-		mov		array, [this + ARRAY]		; get pointer to array of nodes
+;---[Get element position  by index]-------
 		mov		[s_this], this				; save "this" variable into the stack
-		mov		[s_data], data				; save "data" variable into the stack
-		mov		[s_array], array			; save "array" variable into the stack
 		mov		param4, index
 		mov		param3, [this + HEIGHT]
 		mov		param2, [this + ROOT]
 		mov		param1, [this + ARRAY]
 		call	GetNode						; result = GetNode (array, root, height, index)
 		mov		this, [s_this]				; get "this" variable from the stack
-		mov		data, [s_data]				; get "data" variable from the stack
-		mov		array, [s_array]			; get "array" variable from the stack
-		mov		ptr, PMASK
-		and		ptr, result
-		movdqa	temp, [array + ptr + BDATA]
-		movdqu	[data], temp				; data[0] = array[node].data[index]
-		mov		param2, result
+		mov		array, [this + ARRAY]		; get pointer to array of nodes
+		mov		[s_iter], result			; save "iter" variable into the stack
+		and		result, PMASK
+		lea		array, [array + result + BDATA]
+;---[Call delete function if set]----------
+		mov		func, [this + DFUNC]		; get pointer to delete function
+		test	func, func					; if (func != NULL)
+		jnz		.del						;     then call delete function
+;---[Remove element]-----------------------
+.back:	mov		param2, [s_iter]
 		add		stack, space				; restoring back the stack pointer
-		jmp		RemoveCore					; return this.RemoveCore (result)
+		jmp		RemoveCore					; return this.RemoveCore (iter)
 ;---[Error branch]-------------------------
 .error:	xor		status, status				; return false
 		add		stack, space				; restoring back the stack pointer
 		ret
-;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+;---[Delete element branch]----------------
+.del:	mov		param2, [this + DPTR]
+		mov		param1, array
+		call	func						; call func (array, this.ptr)
+		mov		this, [s_this]				; get "this" variable from the stack
+		jmp		.back						; go back
+
+;==============================================================================;
+;       Using iterators                                                        ;
+;==============================================================================;
 macro	REMOVE_ELEMENT	offst
 {
 ;---[Parameters]---------------------------
 this	equ		rdi							; pointer to b-tree object
-data	equ		rsi							; pointer to data structure
 ;---[Internal variables]-------------------
 status	equ		al							; operation status
-iter	equ		rdx							; iterator value
-array	equ		rcx							; pointer to array of nodes
-ptr		equ		r8							; pointer to element value
-temp	equ		xmm0						; temporary register
+array	equ		r8							; pointer to array of nodes
+iter	equ		r9							; iterator value
+func	equ		r10							; pointer to function
+stack	equ		rsp							; stack pointer
+s_this	equ		stack + 0 * 8				; stack position of "this" variable
+s_iter	equ		stack + 1 * 8				; stack position of "iter" variable
+space	= 3 * 8								; stack size required by the procedure
+;------------------------------------------
+		sub		stack, space				; reserving stack size for local vars
 ;---[Check access mode]--------------------
 		cmp		dword [this + FUTEX], 0		; if read only code section called this
 		jg		.error						; function, then go to error branch
 ;---[Check iterator]-----------------------
+		mov		array, [this + ARRAY]		; get pointer to array of nodes
 		mov		iter, [this + offst]		; get iterator value
 		cmp		iter, EMPTY					; if (iter <= EMPTY)
 		jle		.error						;     then go to error branch
 ;---[Normal execution branch]--------------
-		mov		array, [this + ARRAY]		; get pointer to array of nodes
-		mov		ptr, PMASK
-		and		ptr, iter
-		movdqa	temp, [array + ptr + BDATA]
-		movdqu	[data], temp				; data[0] = array[node].data[index]
-		mov		param2, iter
+		mov		[s_this], this				; save "this" variable into the stack
+		mov		[s_iter], iter				; save "iter" variable into the stack
+		and		iter, PMASK
+		lea		array, [array + iter + BDATA]
+;---[Call delete function if set]----------
+		mov		func, [this + DFUNC]		; get pointer to delete function
+		test	func, func					; if (func != NULL)
+		jnz		.del						;     then call delete function
+;---[Remove element]-----------------------
+.back:	mov		param2, [s_iter]
+		add		stack, space				; restoring back the stack pointer
 		jmp		RemoveCore					; return this.RemoveCore (iter)
 ;---[Error branch]-------------------------
 .error:	xor		status, status				; return false
+		add		stack, space				; restoring back the stack pointer
 		ret
+;---[Delete element branch]----------------
+.del:	mov		param2, [this + DPTR]
+		mov		param1, array
+		call	func						; call func (array, this.ptr)
+		mov		this, [s_this]				; get "this" variable from the stack
+		jmp		.back						; go back
 }
 RemoveFwd:	REMOVE_ELEMENT	FWD
 RemoveBwd:	REMOVE_ELEMENT	BWD
@@ -4217,75 +4336,132 @@ index	equ		rdx							; element index
 ;---[Internal variables]-------------------
 status	equ		al							; operation status
 result	equ		rax							; result register
-func	equ		r8							; compare function
-temp	equ		xmm0						; temporary register
+array	equ		r8							; pointer to array of nodes
+func	equ		r9							; pointer to function
+value	equ		xmm0						; temporary register
 stack	equ		rsp							; stack pointer
 s_this	equ		stack + 0 * 8				; stack position of "this" variable
 s_data	equ		stack + 1 * 8				; stack position of "data" variable
-s_iter	equ		stack + 2 * 8				; stack position of "iter" variable
-s_ptr	equ		stack + 3 * 8				; stack position of "ptr" variable
-space	= 5 * 8								; stack size required by the procedure
+s_index	equ		stack + 2 * 8				; stack position of "index" variable
+s_array	equ		stack + 3 * 8				; stack position of "array" variable
+s_value	equ		stack + 4 * 8				; stack position of "value" variable
+s_iter	equ		stack + 6 * 8				; stack position of "iter" variable
+space	= 7 * 8								; stack size required by the procedure
 ;------------------------------------------
 		sub		stack, space				; reserving stack size for local vars
+		shl		index, KSCALE				; index *= KSIZE
 ;---[Check access mode]--------------------
 		cmp		dword [this + FUTEX], 0		; if read only code section called this
 		jg		.error						; function, then go to error branch
-;---[Check index]--------------------------
-		shl		index, KSCALE
-		cmp		[this + SIZE], index		; if (size <= index)
-		jbe		.error						;     then go to error branch
-;---[Normal execution branch]--------------
+;---[Check pool for free nodes]------------
+		movdqu	value, [data]				; value = data[0]
 		mov		[s_this], this				; save "this" variable into the stack
 		mov		[s_data], data				; save "data" variable into the stack
+		mov		[s_index], index			; save "index" variable into the stack
+		movdqa	[s_value], value			; save "value" variable into the stack
+		cmp		qword [this + POOL], EMPTY	; if (this.pool <= EMPTY)
+		jle		.ext						;     then try to extend object capacity
+;---[Check index]--------------------------
+.back1:	cmp		[this + SIZE], index		; if (size <= index)
+		jbe		.error						;     then go to error branch
+;---[Get element position  by index]-------
 		mov		param4, index
 		mov		param3, [this + HEIGHT]
 		mov		param2, [this + ROOT]
 		mov		param1, [this + ARRAY]
 		call	GetNode						; result = GetNode (array, root, height, index)
 		mov		this, [s_this]				; get "this" variable from the stack
-		mov		data, [s_data]				; get "data" variable from the stack
-		mov		func, [this + FUNC]			; get pointer to key compare function
-		mov		[s_iter], result			; save "iter" variable into the stack
+		mov		array, [this + ARRAY]		; get pointer to array of nodes
 		and		result, PMASK
-		add		result, [this + ARRAY]		; result += array
-		mov		[s_ptr], result				; save "ptr" variable into the stack
+		lea		array, [array + result + BDATA]
+		mov		[s_array], array			; save "array" variable into the stack
+;---[Call copy function if set]------------
+		mov		func, [this + CFUNC]		; get pointer to copy function
+		test	func, func					; if (func != NULL)
+		jnz		.copy						;     then call copy function
 ;---[Compare keys]-------------------------
-		mov		param1, [data]
-		mov		param2, [result + BDATA]
-		call	func						; result = Compare (data[0].key, array[index].key)
+.back2:	mov		func, [this + KFUNC]		; get pointer to key compare function
+		mov		param1, [s_value]
+		mov		param2, [array]
+		call	func						; result = Compare (value.key, array[iter].data.key)
+		mov		this, [s_this]				; get "this" variable from the stack
+		mov		array, [s_array]			; get "array" variable from the stack
+		mov		index, [s_index]			; get "index" variable from the stack
+		lea		func, [index + KSIZE]
+		cmp		result, 0					; if (result < 0)
+		cmovl	index, func					;     then index++
+		mov		[s_index], index			; save "index" variable into the stack
 		test	result, result				; if (result != 0)
-		jnz		.rem						;     then go to remove branch
-;---[Change element]-----------------------
-		mov		data, [s_data]				; get "data" variable from the stack
-		mov		iter, [s_ptr]				; get "ptr" variable from the stack
-		movdqu	temp, [data]				; get "data" variable from the stack
-		movdqa	[iter + BDATA], temp		; array[index].data = data[0]
+		jnz		.ins						;     then go to insert branch
+;---[Call delete function if set]----------
+		mov		func, [this + DFUNC]		; get pointer to delete function
+		test	func, func					; if (func != NULL)
+		jnz		.del1						;     then call delete function
+;---[Set new value]------------------------
+.back3:	movdqa	value, [s_value]			; get "value" variable from the stack
+		movdqa	[array], value				; array[0] = value
 		mov		status, 1					; return true
 		add		stack, space				; restoring back the stack pointer
 		ret
-;---[Remove old key]-----------------------
-.rem:	mov		param2, [s_iter]
-		mov		param1, [s_this]
-		call	RemoveCore					; call RemoveCore (iter)
-;---[Insert new key]-----------------------
+;---[Insert new element]-------------------
+.ins:	movdqa	value, [s_value]			; get "value" variable from the stack
+		call	InsertCore					; status = this.InsertCore (value)
+		test	status, status				; if (status == 0)
+		jz		.error						;     then go to error branch
 		mov		this, [s_this]				; get "this" variable from the stack
-		cmp		qword [this + POOL], EMPTY	; if (this.pool <= EMPTY)
-		jle		.ext						;     then try to extend object capacity
-.back:	mov		this, [s_this]				; get "this" variable from the stack
-		mov		data, [s_data]				; get "data" variable from the stack
-		movdqu	temp, [data]
+		mov		param4, [s_index]
+		mov		param3, [this + HEIGHT]
+		mov		param2, [this + ROOT]
+		mov		param1, [this + ARRAY]
+		call	GetNode						; result = GetNode (array, root, height, index)
+		mov		this, [s_this]				; get "this" variable from the stack
+		mov		array, [this + ARRAY]		; get pointer to array of nodes
+		mov		[s_iter], result			; save "iter" variable into the stack
+		and		result, PMASK
+		lea		array, [array + result + BDATA]
+;---[Call delete function if set]----------
+		mov		func, [this + DFUNC]		; get pointer to delete function
+		test	func, func					; if (func != NULL)
+		jnz		.del2						;     then call delete function
+;---[Remove old element]-------------------
+.back4:	mov		param2, [s_iter]
 		add		stack, space				; restoring back the stack pointer
-		jmp		InsertCore					; return this.InsertCore (data[0])
+		jmp		RemoveCore					; return this.RemoveCore (iter)
 ;---[Extend object capacity]---------------
 .ext:	mov		param2, [this + CAPACITY]
 		shl		param2, 1
 		call	Extend						; status = this.Extend (capacity * 2)
+		mov		this, [s_this]				; get "this" variable from the stack
+		mov		index, [s_index]			; get "index" variable from the stack
 		test	status, status				; if (status)
-		jnz		.back						;     then go back
+		jnz		.back1						;     then go back
+		add		stack, space				; restoring back the stack pointer
+		ret
+;---[Copy element branch]------------------
+.copy:	mov		param3, [this + DPTR]
+		mov		param2, [s_data]
+		lea		param1, [s_value]
+		call	func						; call func (&value, data, this.ptr)
+		mov		this, [s_this]				; get "this" variable from the stack
+		mov		array, [s_array]			; get "array" variable from the stack
+		test	status, status				; if (status)
+		jnz		.back2						;     then go back
 ;---[Error branch]-------------------------
 .error:	xor		status, status				; return false
 		add		stack, space				; restoring back the stack pointer
 		ret
+;---[Delete element branch #1]-------------
+.del1:	mov		param2, [this + DPTR]
+		mov		param1, array
+		call	func						; call func (array, this.ptr)
+		mov		array, [s_array]			; get "array" variable from the stack
+		jmp		.back3						; go back
+;---[Delete element branch #2]-------------
+.del2:	mov		param2, [this + DPTR]
+		mov		param1, array
+		call	func						; call func (array, this.ptr)
+		mov		this, [s_this]				; get "this" variable from the stack
+		jmp		.back4						; go back
 }
 SetIndexMulti:	SET_INDEX	InsertCoreMulti
 SetIndexUnique:	SET_INDEX	InsertCoreUnique
@@ -4301,69 +4477,114 @@ data	equ		rsi							; pointer to data structure
 ;---[Internal variables]-------------------
 status	equ		al							; operation status
 result	equ		rax							; result register
-iter	equ		rcx							; iterator value
-func	equ		r8							; compare function
-temp	equ		xmm0						; temporary register
+array	equ		r8							; pointer to array of nodes
+iter	equ		r9							; iterator value
+func	equ		r10							; pointer to function
+value	equ		xmm0						; temporary register
 stack	equ		rsp							; stack pointer
 s_this	equ		stack + 0 * 8				; stack position of "this" variable
 s_data	equ		stack + 1 * 8				; stack position of "data" variable
-s_iter	equ		stack + 2 * 8				; stack position of "iter" variable
-s_ptr	equ		stack + 3 * 8				; stack position of "ptr" variable
-space	= 5 * 8								; stack size required by the procedure
+s_array	equ		stack + 2 * 8				; stack position of "array" variable
+s_iter	equ		stack + 3 * 8				; stack position of "iter" variable
+s_value	equ		stack + 4 * 8				; stack position of "value" variable
+space	= 7 * 8								; stack size required by the procedure
 ;------------------------------------------
 		sub		stack, space				; reserving stack size for local vars
 ;---[Check access mode]--------------------
 		cmp		dword [this + FUTEX], 0		; if read only code section called this
 		jg		.error						; function, then go to error branch
+;---[Check pool for free nodes]------------
+		movdqu	value, [data]				; value = data[0]
+		mov		[s_this], this				; save "this" variable into the stack
+		mov		[s_data], data				; save "data" variable into the stack
+		movdqa	[s_value], value			; save "value" variable into the stack
+		cmp		qword [this + POOL], EMPTY	; if (this.pool <= EMPTY)
+		jle		.ext						;     then try to extend object capacity
 ;---[Check iterator]-----------------------
+.back1:	mov		array, [this + ARRAY]		; get pointer to array of nodes
 		mov		iter, [this + offst]		; get iterator value
 		cmp		iter, EMPTY					; if (iter <= EMPTY)
 		jle		.error						;     then go to error branch
 ;---[Normal execution branch]--------------
-		mov		[s_this], this				; save "this" variable into the stack
-		mov		[s_data], data				; save "data" variable into the stack
-		mov		[s_iter], iter				; save "iter" variable into the stack
-		mov		func, [this + FUNC]			; get pointer to key compare function
 		and		iter, PMASK
-		add		iter, [this + ARRAY]		; iter += array
-		mov		[s_ptr], iter				; save "ptr" variable into the stack
+		lea		array, [array + iter + BDATA]
+		mov		[s_array], array			; save "array" variable into the stack
+;---[Call copy function if set]------------
+		mov		func, [this + CFUNC]		; get pointer to copy function
+		test	func, func					; if (func != NULL)
+		jnz		.copy						;     then call copy function
 ;---[Compare keys]-------------------------
-		mov		param1, [data]
-		mov		param2, [iter + BDATA]
-		call	func						; result = Compare (data[0].key, array[iter].key)
+.back2:	mov		func, [this + KFUNC]		; get pointer to key compare function
+		mov		param1, [s_value]
+		mov		param2, [array]
+		call	func						; result = Compare (value.key, array[iter].data.key)
+		mov		this, [s_this]				; get "this" variable from the stack
+		mov		array, [s_array]			; get "array" variable from the stack
 		test	result, result				; if (result != 0)
-		jnz		.rem						;     then go to remove branch
-;---[Change element]-----------------------
-		mov		data, [s_data]				; get "data" variable from the stack
-		mov		iter, [s_ptr]				; get "ptr" variable from the stack
-		movdqa	temp, [data]				; get "data" variable from the stack
-		movdqa	[iter + BDATA], temp		; array[iter].data = data[0]
+		jnz		.ins						;     then go to insert branch
+;---[Call delete function if set]----------
+		mov		func, [this + DFUNC]		; get pointer to delete function
+		test	func, func					; if (func != NULL)
+		jnz		.del1						;     then call delete function
+;---[Set new value]------------------------
+.back3:	movdqa	value, [s_value]			; get "value" variable from the stack
+		movdqa	[array], value				; array[0] = value
 		mov		status, 1					; return true
 		add		stack, space				; restoring back the stack pointer
 		ret
-;---[Remove old key]-----------------------
-.rem:	mov		param2, [s_iter]
-		mov		param1, [s_this]
-		call	RemoveCore					; call RemoveCore (iter)
-;---[Insert new key]-----------------------
+;---[Insert new element]-------------------
+.ins:	movdqa	value, [s_value]			; get "value" variable from the stack
+		call	InsertCore					; status = this.InsertCore (value)
+		test	status, status				; if (status == 0)
+		jz		.error						;     then go to error branch
 		mov		this, [s_this]				; get "this" variable from the stack
-		cmp		qword [this + POOL], EMPTY	; if (this.pool <= EMPTY)
-		jle		.ext						;     then try to extend object capacity
-.back:	mov		this, [s_this]				; get "this" variable from the stack
-		mov		data, [s_data]				; get "data" variable from the stack
-		movdqu	temp, [data]
+		mov		array, [this + ARRAY]		; get pointer to array of nodes
+		mov		iter, [this + offst]		; get iterator value
+		mov		[s_iter], iter				; save "iter" variable into the stack
+		and		iter, PMASK
+		lea		array, [array + iter + BDATA]
+;---[Call delete function if set]----------
+		mov		func, [this + DFUNC]		; get pointer to delete function
+		test	func, func					; if (func != NULL)
+		jnz		.del2						;     then call delete function
+;---[Remove old element]-------------------
+.back4:	mov		param2, [s_iter]
 		add		stack, space				; restoring back the stack pointer
-		jmp		InsertCore					; return this.InsertCore (data[0])
+		jmp		RemoveCore					; return this.RemoveCore (iter)
 ;---[Extend object capacity]---------------
 .ext:	mov		param2, [this + CAPACITY]
 		shl		param2, 1
 		call	Extend						; status = this.Extend (capacity * 2)
+		mov		this, [s_this]				; get "this" variable from the stack
 		test	status, status				; if (status)
-		jnz		.back						;     then go back
+		jnz		.back1						;     then go back
+		add		stack, space				; restoring back the stack pointer
+		ret
+;---[Copy element branch]------------------
+.copy:	mov		param3, [this + DPTR]
+		mov		param2, [s_data]
+		lea		param1, [s_value]
+		call	func						; call func (&value, data, this.ptr)
+		mov		this, [s_this]				; get "this" variable from the stack
+		mov		array, [s_array]			; get "array" variable from the stack
+		test	status, status				; if (status)
+		jnz		.back2						;     then go back
 ;---[Error branch]-------------------------
 .error:	xor		status, status				; return false
 		add		stack, space				; restoring back the stack pointer
 		ret
+;---[Delete element branch #1]-------------
+.del1:	mov		param2, [this + DPTR]
+		mov		param1, array
+		call	func						; call func (array, this.ptr)
+		mov		array, [s_array]			; get "array" variable from the stack
+		jmp		.back3						; go back
+;---[Delete element branch #2]-------------
+.del2:	mov		param2, [this + DPTR]
+		mov		param1, array
+		call	func						; call func (array, this.ptr)
+		mov		this, [s_this]				; get "this" variable from the stack
+		jmp		.back4						; go back
 }
 SetFwdMulti:	SET_ITER	InsertCoreMulti, FWD
 SetBwdMulti:	SET_ITER	InsertCoreMulti, BWD
@@ -4385,15 +4606,15 @@ index	equ		rdx							; element index
 ;---[Internal variables]-------------------
 status	equ		al							; operation status
 result	equ		rax							; result register
-temp	equ		xmm0						; temporary register
+value	equ		xmm0						; temporary register
 stack	equ		rsp							; stack pointer
 s_this	equ		stack + 0 * 8				; stack position of "this" variable
 s_data	equ		stack + 1 * 8				; stack position of "data" variable
 space	= 3 * 8								; stack size required by the procedure
 ;------------------------------------------
 		sub		stack, space				; reserving stack size for local vars
+		shl		index, KSCALE				; index *= KSIZE
 ;---[Check index]--------------------------
-		shl		index, KSCALE
 		cmp		[this + SIZE], index		; if (size <= index)
 		setnbe	status						;     return false
 		jbe		.exit
@@ -4408,9 +4629,9 @@ space	= 3 * 8								; stack size required by the procedure
 		mov		this, [s_this]				; get "this" variable from the stack
 		mov		data, [s_data]				; get "data" variable from the stack
 		and		result, PMASK
-		add		result, [this + ARRAY]
-		movdqa	temp, [result + BDATA]
-		movdqu	[data], temp				; data[0] = array[iter].data
+		add		result, [this + ARRAY]		; result += array
+		movdqa	value, [result + BDATA]
+		movdqu	[data], value				; data[0] = array[iter].data
 		mov		status, 1					; return true
 .exit:	add		stack, space				; restoring back the stack pointer
 		ret
@@ -4426,7 +4647,7 @@ data	equ		rsi							; pointer to data structure
 iter	equ		rdx							; iterator value
 ;---[Internal variables]-------------------
 status	equ		al							; operation status
-temp	equ		xmm0						; temporary register
+value	equ		xmm0						; temporary register
 ;---[Check iterator]-----------------------
 if ~ext
 		mov		iter, [this + offst]		; get iterator value
@@ -4436,238 +4657,14 @@ end if
 		jle		.exit
 ;---[Normal execution branch]--------------
 		and		iter, PMASK
-		add		iter, [this + ARRAY]
-		movdqa	temp, [iter + BDATA]
-		movdqu	[data], temp				; data[0] = array[iter].data
+		add		iter, [this + ARRAY]		; iter += array
+		movdqa	value, [iter + BDATA]
+		movdqu	[data], value				; data[0] = array[iter].data
 .exit:	ret									; return true
 }
 GetFwd:		GET_ITER	FWD, 0
 GetBwd:		GET_ITER	BWD, 0
 GetIter:	GET_ITER	EMPTY, 1
-
-;******************************************************************************;
-;       Replacing element value                                                ;
-;******************************************************************************;
-
-;==============================================================================;
-;       By element index                                                       ;
-;==============================================================================;
-macro	REPLACE_INDEX	InsertCore
-{
-;---[Parameters]---------------------------
-this	equ		rdi							; pointer to b-tree object
-odata	equ		rsi							; pointer to old data structure
-ndata	equ		rdx							; pointer to new data structure
-index	equ		rcx							; element index
-;---[Internal variables]-------------------
-status	equ		al							; operation status
-result	equ		rax							; result register
-func	equ		r8							; compare function
-temp	equ		xmm0						; temporary register
-stack	equ		rsp							; stack pointer
-s_this	equ		stack + 0 * 8				; stack position of "this" variable
-s_odata	equ		stack + 1 * 8				; stack position of "odata" variable
-s_ndata	equ		stack + 2 * 8				; stack position of "ndata" variable
-s_iter	equ		stack + 3 * 8				; stack position of "iter" variable
-s_ptr	equ		stack + 4 * 8				; stack position of "ptr" variable
-space	= 5 * 8								; stack size required by the procedure
-;------------------------------------------
-		sub		stack, space				; reserving stack size for local vars
-;---[Check access mode]--------------------
-		cmp		dword [this + FUTEX], 0		; if read only code section called this
-		jg		.error						; function, then go to error branch
-;---[Check index]--------------------------
-		shl		index, KSCALE
-		cmp		[this + SIZE], index		; if (size <= index)
-		jbe		.error						;     then go to error branch
-;---[Normal execution branch]--------------
-		mov		[s_this], this				; save "this" variable into the stack
-		mov		[s_odata], odata			; save "odata" variable into the stack
-		mov		[s_ndata], ndata			; save "ndata" variable into the stack
-		mov		param4, index
-		mov		param3, [this + HEIGHT]
-		mov		param2, [this + ROOT]
-		mov		param1, [this + ARRAY]
-		call	GetNode						; result = GetNode (array, root, height, index)
-		mov		this, [s_this]				; get "this" variable from the stack
-		mov		odata, [s_odata]			; get "odata" variable from the stack
-		mov		ndata, [s_ndata]			; get "ndata" variable from the stack
-		mov		func, [this + FUNC]			; get pointer to key compare function
-		mov		[s_iter], result			; save "iter" variable into the stack
-		and		result, PMASK
-		add		result, [this + ARRAY]		; result += array
-		mov		[s_ptr], result				; save "ptr" variable into the stack
-		movdqa	temp, [result + BDATA]
-		movdqu	[odata], temp				; odata[0] = array[index].data
-;---[Compare keys]-------------------------
-		mov		param1, [ndata]
-		mov		param2, [result + BDATA]
-		call	func						; result = Compare (ndata[0].key, array[index].key)
-		test	result, result				; if (result != 0)
-		jnz		.rem						;     then go to remove branch
-;---[Change element]-----------------------
-		mov		ndata, [s_ndata]			; get "ndata" variable from the stack
-		mov		iter, [s_ptr]				; get "ptr" variable from the stack
-		movdqu	temp, [ndata]				; get "ndata" variable from the stack
-		movdqa	[iter + BDATA], temp		; array[index].data = ndata[0]
-		mov		status, 1					; return true
-		add		stack, space				; restoring back the stack pointer
-		ret
-;---[Remove old key]-----------------------
-.rem:	mov		param2, [s_iter]
-		mov		param1, [s_this]
-		call	RemoveCore					; call RemoveCore (iter)
-;---[Insert new key]-----------------------
-		mov		this, [s_this]				; get "this" variable from the stack
-		cmp		qword [this + POOL], EMPTY	; if (this.pool <= EMPTY)
-		jle		.ext						;     then try to extend object capacity
-.back:	mov		this, [s_this]				; get "this" variable from the stack
-		mov		ndata, [s_ndata]			; get "ndata" variable from the stack
-		movdqu	temp, [ndata]
-		add		stack, space				; restoring back the stack pointer
-		jmp		InsertCore					; return this.InsertCore (ndata[0])
-;---[Extend object capacity]---------------
-.ext:	mov		param2, [this + CAPACITY]
-		shl		param2, 1
-		call	Extend						; status = this.Extend (capacity * 2)
-		test	status, status				; if (status)
-		jnz		.back						;     then go back
-;---[Error branch]-------------------------
-.error:	xor		status, status				; return false
-		add		stack, space				; restoring back the stack pointer
-		ret
-}
-ReplaceIndexMulti:	REPLACE_INDEX	InsertCoreMulti
-ReplaceIndexUnique:	REPLACE_INDEX	InsertCoreUnique
-
-;==============================================================================;
-;       Using iterators                                                        ;
-;==============================================================================;
-macro	REPLACE_ITER	InsertCore, offst
-{
-;---[Parameters]---------------------------
-this	equ		rdi							; pointer to b-tree object
-odata	equ		rsi							; pointer to old data structure
-ndata	equ		rdx							; pointer to new data structure
-;---[Internal variables]-------------------
-status	equ		al							; operation status
-result	equ		rax							; result register
-iter	equ		rcx							; iterator value
-func	equ		r8							; compare function
-temp	equ		xmm0						; temporary register
-stack	equ		rsp							; stack pointer
-s_this	equ		stack + 0 * 8				; stack position of "this" variable
-s_ndata	equ		stack + 1 * 8				; stack position of "ndata" variable
-s_iter	equ		stack + 2 * 8				; stack position of "iter" variable
-s_ptr	equ		stack + 3 * 8				; stack position of "ptr" variable
-space	= 5 * 8								; stack size required by the procedure
-;------------------------------------------
-		sub		stack, space				; reserving stack size for local vars
-;---[Check access mode]--------------------
-		cmp		dword [this + FUTEX], 0		; if read only code section called this
-		jg		.error						; function, then go to error branch
-;---[Check iterator]-----------------------
-		mov		iter, [this + offst]		; get iterator value
-		cmp		iter, EMPTY					; if (iter <= EMPTY)
-		jle		.error						;     then go to error branch
-;---[Normal execution branch]--------------
-		mov		[s_this], this				; save "this" variable into the stack
-		mov		[s_ndata], ndata			; save "ndata" variable into the stack
-		mov		[s_iter], iter				; save "iter" variable into the stack
-		mov		func, [this + FUNC]			; get pointer to key compare function
-		and		iter, PMASK
-		add		iter, [this + ARRAY]		; iter += array
-		mov		[s_ptr], iter				; save "ptr" variable into the stack
-		movdqa	temp, [iter + BDATA]
-		movdqu	[odata], temp				; odata[0] = array[iter].data
-;---[Compare keys]-------------------------
-		mov		param1, [ndata]
-		mov		param2, [iter + BDATA]
-		call	func						; result = Compare (ndata[0].key, array[iter].key)
-		test	result, result				; if (result != 0)
-		jnz		.rem						;     then go to remove branch
-;---[Change element]-----------------------
-		mov		ndata, [s_ndata]			; get "ndata" variable from the stack
-		mov		iter, [s_ptr]				; get "ptr" variable from the stack
-		movdqu	temp, [ndata]				; get "ndata" variable from the stack
-		movdqa	[iter + BDATA], temp		; array[iter].data = ndata[0]
-		mov		status, 1					; return true
-		add		stack, space				; restoring back the stack pointer
-		ret
-;---[Remove old key]-----------------------
-.rem:	mov		param2, [s_iter]
-		mov		param1, [s_this]
-		call	RemoveCore					; call RemoveCore (iter)
-;---[Insert new key]-----------------------
-		mov		this, [s_this]				; get "this" variable from the stack
-		cmp		qword [this + POOL], EMPTY	; if (this.pool <= EMPTY)
-		jle		.ext						;     then try to extend object capacity
-.back:	mov		this, [s_this]				; get "this" variable from the stack
-		mov		ndata, [s_ndata]			; get "ndata" variable from the stack
-		movdqu	temp, [ndata]
-		add		stack, space				; restoring back the stack pointer
-		jmp		InsertCore					; return this.InsertCore (ndata[0])
-;---[Extend object capacity]---------------
-.ext:	mov		param2, [this + CAPACITY]
-		shl		param2, 1
-		call	Extend						; status = this.Extend (capacity * 2)
-		test	status, status				; if (status)
-		jnz		.back						;     then go back
-;---[Error branch]-------------------------
-.error:	xor		status, status				; return false
-		add		stack, space				; restoring back the stack pointer
-		ret
-}
-ReplaceFwdMulti:	REPLACE_ITER	InsertCoreMulti, FWD
-ReplaceBwdMulti:	REPLACE_ITER	InsertCoreMulti, BWD
-ReplaceFwdUnique:	REPLACE_ITER	InsertCoreUnique, FWD
-ReplaceBwdUnique:	REPLACE_ITER	InsertCoreUnique, BWD
-
-;******************************************************************************;
-;       Overriding element value                                               ;
-;******************************************************************************;
-Override:
-;---[Parameters]---------------------------
-this	equ		rdi							; pointer to b-tree object
-odata	equ		rsi							; pointer to old data structure
-ndata	equ		rdx							; pointer to new data structure
-;---[Internal variables]-------------------
-status	equ		al							; operation status
-temp	equ		rdx							; temporary register
-value	equ		xmm0						; value to insert
-stack	equ		rsp							; stack pointer
-s_this	equ		stack + 0 * 8				; stack position of "this" variable
-s_odata	equ		stack + 1 * 8				; stack position of "odata" variable
-s_ndata	equ		stack + 2 * 8				; stack position of "ndata" variable
-space	= 3 * 8								; stack size required by the procedure
-;---[Check access mode]--------------------
-		cmp		dword [this + FUTEX], 0		; if read only code section called this
-		jg		.error						; function, then go to error branch
-;---[Check pool for free nodes]------------
-		cmp		qword [this + POOL], EMPTY	; if (this.pool <= EMPTY)
-		jle		.ext						;     then try to extend object capacity
-;---[Normal execution branch]--------------
-.back:	pxor	value, value
-		movdqu	[odata], value				; odata[0] = 0
-		movdqu	value, [ndata]				; value = ndata[0]
-	INSERT_CORE	2
-;---[Extend object capacity]---------------
-.ext:	sub		stack, space				; reserving stack size for local vars
-		mov		[s_this], this				; save "this" variable into the stack
-		mov		[s_odata], odata			; save "odata" variable into the stack
-		mov		[s_ndata], ndata			; save "ndata" variable into the stack
-		mov		param2, [this + CAPACITY]
-		shl		param2, 1
-		call	Extend						; status = this.Extend (cap * 2)
-		mov		this, [s_this]				; get "this" variable from the stack
-		mov		odata, [s_odata]			; get "odata" variable from the stack
-		mov		ndata, [s_ndata]			; get "ndata" variable from the stack
-		add		stack, space				; restoring back the stack pointer
-		test	status, status				; if (status)
-		jnz		.back						;     then go back
-;---[Error branch]-------------------------
-.error:	xor		status, status				; return false
-		ret
 
 ;******************************************************************************;
 ;       Manipulation with forward iterator                                     ;
@@ -4903,13 +4900,13 @@ s_this	equ		stack + 0 * 8				; stack position of "this" variable
 space	= 1 * 8								; stack size required by the procedure
 ;------------------------------------------
 		sub		stack, space				; reserving stack size for local vars
+		shl		index, KSCALE				; index *= KSIZE
 ;---[Check access mode]--------------------
 if ~ext
 		cmp		dword [this + FUTEX], 0		; if read only code section called this
 		jg		.exit						; function, then go to exit
 end if
 ;---[Check index]--------------------------
-		shl		index, KSCALE
 		cmp		[this + SIZE], index		; if (size <= index)
 		jbe		.error						;     then go to error branch
 ;---[Normal execution branch]--------------
@@ -5176,7 +5173,7 @@ ptr		equ		rdx							; pointer to iterator
 status	equ		al							; operation status
 result	equ		rax							; result register
 size	equ		rcx							; object size
-temp	equ		xmm0						; temporary register
+value	equ		xmm0						; temporary register
 stack	equ		rsp							; stack pointer
 s_this	equ		stack + 0 * 8				; stack position of "this" variable
 s_data	equ		stack + 1 * 8				; stack position of "data" variable
@@ -5216,9 +5213,9 @@ else
 		mov		[ptr], result				; update iterator position
 end if
 		and		result, PMASK
-		add		result, [this + ARRAY]
-		movdqa	temp, [result + BDATA]
-		movdqu	[data], temp				; data[0] = array[iter].data
+		add		result, [this + ARRAY]		; result += array
+		movdqa	value, [result + BDATA]
+		movdqu	[data], value				; data[0] = array[iter].data
 		mov		status, 1					; return true
 		add		stack, space				; restoring back the stack pointer
 		ret
@@ -5238,7 +5235,7 @@ ptr		equ		rdx							; pointer to iterator
 status	equ		al							; operation status
 result	equ		rax							; result register
 size	equ		rcx							; object size
-temp	equ		xmm0						; temporary register
+value	equ		xmm0						; temporary register
 stack	equ		rsp							; stack pointer
 s_this	equ		stack + 0 * 8				; stack position of "this" variable
 s_data	equ		stack + 1 * 8				; stack position of "data" variable
@@ -5271,13 +5268,13 @@ end if
 ;---[Call search function]-----------------
 		mov		this, [s_this]				; get "this" variable from the stack
 		and		result, PMASK
-		add		result, [this + ARRAY]
+		add		result, [this + ARRAY]		; result += array
 		mov		param5, [result + BDATA]
-		mov		param4, [this + FUNC]
+		mov		param4, [this + KFUNC]
 		mov		param3, [this + HEIGHT]
 		mov		param2, [this + ROOT]
 		mov		param1, [this + ARRAY]
-		call	CmpFunc						; result = CmpFunc (array, root, height, func, array[iter].data.key)
+		call	CmpFunc						; result = CmpFunc (array, root, height, kfunc, array[iter].data.key)
 ;---[Update iterator value]----------------
 		mov		this, [s_this]				; get "this" variable from the stack
 		mov		data, [s_data]				; get "data" variable from the stack
@@ -5288,9 +5285,9 @@ else
 		mov		[ptr], result				; update iterator position
 end if
 		and		result, PMASK
-		add		result, [this + ARRAY]
-		movdqa	temp, [result + BDATA]
-		movdqu	[data], temp				; data[0] = array[iter].data
+		add		result, [this + ARRAY]		; result += array
+		movdqa	value, [result + BDATA]
+		movdqu	[data], value				; data[0] = array[iter].data
 		mov		status, 1					; return true
 		add		stack, space				; restoring back the stack pointer
 		ret
@@ -5325,7 +5322,7 @@ macro	FIND_CORE	cond1, cond2
 array	equ		rdi							; pointer to array of nodes
 root	equ		rsi							; begining node to start from
 height	equ		rdx							; b-tree height
-func	equ		rcx							; compare function
+func	equ		rcx							; key compare function
 key		equ		r8							; key for searching
 ;---[Internal variables]-------------------
 result	equ		rax							; result register
@@ -5339,7 +5336,7 @@ node	equ		r12							; node, where the key was found
 index	equ		r13							; index, where the key was found
 left	equ		r14							; left index
 right	equ		r15							; right index
-temp	equ		xmm1						; temporary register
+value	equ		xmm0						; temporary register
 stack	equ		rsp							; stack pointer
 s_array	equ		stack + 0 * 8				; stack position of "array" variable
 s_root	equ		stack + 1 * 8				; stack position of "root" variable
@@ -5377,7 +5374,7 @@ space	= 15 * 8							; stack size required by the procedure
 ;---[Branch search loop]-------------------
 .bloop:	lea		data, [array + root]
 repeat	NSIZE / CLINE
-		movdqa	temp, [data + (% - 1) * CLINE]
+		movdqa	value, [data + (% - 1) * CLINE]
 end repeat
 		mov		right, [array + root + BSIZE]
 		lea		data, [array + root + BDATA]
@@ -5424,7 +5421,7 @@ end repeat
 ;---[End of branch search loop]------------
 .leaf:	lea		data, [array + root]
 repeat	NSIZE / CLINE
-		movdqa	temp, [data + (% - 1) * CLINE]
+		movdqa	value, [data + (% - 1) * CLINE]
 end repeat
 		mov		right, [array + root + BSIZE]
 		lea		data, [array + root + BDATA]
@@ -5481,7 +5478,7 @@ ptr		equ		rcx							; pointer to iterator
 ;---[Internal variables]-------------------
 status	equ		al							; operation status
 result	equ		rax							; result register
-temp	equ		xmm0						; temporary register
+value	equ		xmm0						; temporary register
 stack	equ		rsp							; stack pointer
 s_this	equ		stack + 0 * 8				; stack position of "this" variable
 s_data	equ		stack + 1 * 8				; stack position of "data" variable
@@ -5503,11 +5500,11 @@ end if
 		mov		[s_ptr], ptr				; save "ptr" variable into the stack
 ;---[Call search function]-----------------
 		mov		param5, key
-		mov		param4, [this + FUNC]
+		mov		param4, [this + KFUNC]
 		mov		param3, [this + HEIGHT]
 		mov		param2, [this + ROOT]
 		mov		param1, [this + ARRAY]
-		call	CmpFunc						; result = CmpFunc (array, root, height, func, key)
+		call	CmpFunc						; result = CmpFunc (array, root, height, kfunc, key)
 		cmp		result, EMPTY				; if (result <= EMPTY)
 		jle		.ntfnd						;     return false
 ;---[Update iterator value]----------------
@@ -5520,9 +5517,9 @@ else
 		mov		[ptr], result				; update iterator position
 end if
 		and		result, PMASK
-		add		result, [this + ARRAY]
-		movdqa	temp, [result + BDATA]
-		movdqu	[data], temp				; data[0] = array[iter].data
+		add		result, [this + ARRAY]		; result += array
+		movdqa	value, [result + BDATA]
+		movdqu	[data], value				; data[0] = array[iter].data
 		mov		status, 1					; return true
 		add		stack, space				; restoring back the stack pointer
 		ret
@@ -5567,7 +5564,7 @@ macro	FIND_INDEX	cond1, cond2
 array	equ		rdi							; pointer to array of nodes
 root	equ		rsi							; begining node to start from
 height	equ		rdx							; b-tree height
-func	equ		rcx							; compare function
+func	equ		rcx							; key compare function
 key		equ		r8							; key for searching
 ;---[Internal variables]-------------------
 result	equ		rax							; result register
@@ -5582,7 +5579,7 @@ index	equ		r13							; index, where the key was found
 left	equ		r14							; left index
 right	equ		r15							; right index
 size	equ		func						; index, where the key was found
-temp	equ		xmm1						; temporary register
+value	equ		xmm0						; temporary register
 stack	equ		rsp							; stack pointer
 s_array	equ		stack + 0 * 8				; stack position of "array" variable
 s_root	equ		stack + 1 * 8				; stack position of "root" variable
@@ -5622,7 +5619,7 @@ space	= 15 * 8							; stack size required by the procedure
 ;---[Branch search loop]-------------------
 .bloop:	lea		data, [array + root]
 repeat	NSIZE / CLINE
-		movdqa	temp, [data + (% - 1) * CLINE]
+		movdqa	value, [data + (% - 1) * CLINE]
 end repeat
 		mov		right, [array + root + BSIZE]
 		lea		data, [array + root + BDATA]
@@ -5680,7 +5677,7 @@ end repeat
 ;---[End of branch search loop]------------
 .leaf:	lea		data, [array + root]
 repeat	NSIZE / CLINE
-		movdqa	temp, [data + (% - 1) * CLINE]
+		movdqa	value, [data + (% - 1) * CLINE]
 end repeat
 		mov		right, [array + root + BSIZE]
 		lea		data, [array + root + BDATA]
@@ -5735,7 +5732,7 @@ ptr		equ		rcx							; pointer to iterator
 ;---[Internal variables]-------------------
 result	equ		rax							; result register
 index	equ		rcx							; element index
-temp	equ		xmm0						; temporary register
+value	equ		xmm0						; temporary register
 stack	equ		rsp							; stack pointer
 s_this	equ		stack + 0 * 8				; stack position of "this" variable
 s_data	equ		stack + 1 * 8				; stack position of "data" variable
@@ -5760,22 +5757,22 @@ end if
 		mov		[s_ptr], ptr				; save "ptr" variable into the stack
 ;---[Call search function #1]--------------
 		mov		param5, key
-		mov		param4, [this + FUNC]
+		mov		param4, [this + KFUNC]
 		mov		param3, [this + HEIGHT]
 		mov		param2, [this + ROOT]
 		mov		param1, [this + ARRAY]
-		call	Func1						; result = Func1 (array, root, height, func, key)
+		call	Func1						; result = Func1 (array, root, height, kfunc, key)
 		cmp		result, EMPTY				; if (result <= EMPTY)
 		jle		.ntfnd						;     then return 0
 		mov		[s_index], index			; save "index" variable into the stack
 ;---[Call search function #2]--------------
 		mov		this, [s_this]				; get "this" variable from the stack
 		mov		param5, [s_key]
-		mov		param4, [this + FUNC]
+		mov		param4, [this + KFUNC]
 		mov		param3, [this + HEIGHT]
 		mov		param2, [this + ROOT]
 		mov		param1, [this + ARRAY]
-		call	Func2						; result = Func2 (array, root, height, func, key)
+		call	Func2						; result = Func2 (array, root, height, kfunc, key)
 ;---[Compute total key count]--------------
 if bwd
 		sub		index, [s_index]
@@ -5795,9 +5792,9 @@ else
 		mov		[ptr], result				; update iterator position
 end if
 		and		result, PMASK
-		add		result, [this + ARRAY]
-		movdqa	temp, [result + BDATA]
-		movdqu	[data], temp				; data[0] = array[iter].data
+		add		result, [this + ARRAY]		; result += array
+		movdqa	value, [result + BDATA]
+		movdqu	[data], value				; data[0] = array[iter].data
 		mov		result, key					; return count
 		add		stack, space				; restoring back the stack pointer
 		ret
@@ -5819,7 +5816,7 @@ macro	FIND_DUP_CORE	IterFunc
 ;---[Parameters]---------------------------
 array	equ		rdi							; pointer to array of nodes
 iter	equ		rsi							; iterator value
-func	equ		rdx							; compare function
+func	equ		rdx							; key compare function
 ;---[Internal variables]-------------------
 result	equ		rax							; result register
 prev	equ		rcx							; previous iterator value
@@ -5884,7 +5881,7 @@ status	equ		al							; operation status
 result	equ		rax							; result register
 iter	equ		rcx							; iterator value
 size	equ		result						; object size
-temp	equ		xmm0						; temporary register
+value	equ		xmm0						; temporary register
 stack	equ		rsp							; stack pointer
 s_this	equ		stack + 0 * 8				; stack position of "this" variable
 s_data	equ		stack + 1 * 8				; stack position of "data" variable
@@ -5914,10 +5911,10 @@ end if
 		mov		[s_data], data				; save "data" variable into the stack
 		mov		[s_ptr], ptr				; save "ptr" variable into the stack
 ;---[Call search function]-----------------
-		mov		param3, [this + FUNC]
+		mov		param3, [this + KFUNC]
 		mov		param2, iter
 		mov		param1, [this + ARRAY]
-		call	CheckFunc					; result = CheckFunc (array, iter, func)
+		call	CheckFunc					; result = CheckFunc (array, iter, kfunc)
 		cmp		result, EMPTY				; if (result <= EMPTY)
 		jle		.ntfnd						;     return false
 ;---[Update iterator value]----------------
@@ -5930,9 +5927,9 @@ else
 		mov		[ptr], result				; update iterator position
 end if
 		and		result, PMASK
-		add		result, [this + ARRAY]
-		movdqa	temp, [result + BDATA]
-		movdqu	[data], temp				; data[0] = array[iter].data
+		add		result, [this + ARRAY]		; result += array
+		movdqa	value, [result + BDATA]
+		movdqu	[data], value				; data[0] = array[iter].data
 		mov		status, 1					; return true
 		add		stack, space				; restoring back the stack pointe
 		ret
@@ -5957,7 +5954,7 @@ sarray	equ		rsi							; pointer to source array of nodes
 titer	equ		rdx							; target iterator
 siter	equ		rcx							; source iterator
 size	equ		r8							; count of elements to compare
-func	equ		r9							; compare function
+func	equ		r9							; key compare function
 ;---[Internal variables]-------------------
 result	equ		rax							; result register
 status	equ		rdx							; compare status
@@ -6033,7 +6030,7 @@ status	equ		al							; operation status
 result	equ		rax							; result register
 titer	equ		r10							; target iterator
 size	equ		result						; object size
-temp	equ		xmm0						; temporary register
+value	equ		xmm0						; temporary register
 stack	equ		rsp							; stack pointer
 s_this	equ		stack + 0 * 8				; stack position of "this" variable
 s_data	equ		stack + 1 * 8				; stack position of "data" variable
@@ -6041,6 +6038,7 @@ s_ptr	equ		stack + 2 * 8				; stack position of "ptr" variable
 space	= 3 * 8								; stack size required by the procedure
 ;------------------------------------------
 		sub		stack, space				; reserving stack size for local vars
+		shl		count, KSCALE				; count *= KSIZE
 ;---[Check access mode]--------------------
 if ~ext
 		cmp		dword [this + FUTEX], 0		; if read only code section called this
@@ -6064,7 +6062,6 @@ end if
 		cmp		siter, EMPTY
 		jle		.ntfnd						; if (source.iter <= EMPTY), then return false
 ;---[Correct count]------------------------
-		shl		count, KSCALE
 		mov		size, [source + SIZE]		; get source object size
 		cmp		count, size					; if (count > size)
 		cmova	count, size					;     count = size
@@ -6082,9 +6079,9 @@ end if
 		mov		param4, siter
 		mov		param2, [source + ARRAY]
 		mov		param3, titer
-		mov		param6, [this + FUNC]
+		mov		param6, [this + KFUNC]
 		mov		param1, [this + ARRAY]
-		call	CheckFunc					; result = CheckFunc (this.array, source.array, titer, siter, count, this.func)
+		call	CheckFunc					; result = CheckFunc (this.array, source.array, titer, siter, count, this.kfunc)
 		cmp		result, EMPTY				; if (result <= EMPTY)
 		jle		.ntfnd						;     return false
 ;---[Update iterator value]----------------
@@ -6097,9 +6094,9 @@ else
 		mov		[ptr], result				; update iterator position
 end if
 		and		result, PMASK
-		add		result, [this + ARRAY]
-		movdqa	temp, [result + BDATA]
-		movdqu	[data], temp				; data[0] = array[iter].data
+		add		result, [this + ARRAY]		; result += array
+		movdqa	value, [result + BDATA]
+		movdqu	[data], value				; data[0] = array[iter].data
 		mov		status, 1					; return true
 		add		stack, space				; restoring back the stack pointer
 		ret
@@ -6122,7 +6119,7 @@ macro	COUNT_CORE	uniq
 array	equ		rdi							; pointer to array of nodes
 root	equ		rsi							; begining node to start from
 height	equ		rdx							; b-tree height
-func	equ		rcx							; compare function
+func	equ		rcx							; key compare function
 key		equ		r8							; key for searching
 ;---[Internal variables]-------------------
 result	equ		rax							; result register
@@ -6187,11 +6184,11 @@ result	equ		rax							; result register
 		jz		.exit						;     then go to exit
 ;---[Normal execution branch]--------------
 		mov		param5, key
-		mov		param4, [this + FUNC]
+		mov		param4, [this + KFUNC]
 		mov		param3, [this + HEIGHT]
 		mov		param2, [this + ROOT]
 		mov		param1, [this + ARRAY]
-		jmp		CountFunc					; return CountFunc (array, root, height, func, key)
+		jmp		CountFunc					; return CountFunc (array, root, height, kfunc, key)
 ;---[Normal exit]--------------------------
 .exit:	xor		result, result				; return 0
 		ret
@@ -6231,11 +6228,11 @@ space	= 5 * 8								; stack size required by the procedure
 		mov		[s_ksize], ksize			; save "ksize" variable into the stack
 ;---[Search loop]--------------------------
 .loop:	mov		param5, [keys]
-		mov		param4, [this + FUNC]
+		mov		param4, [this + KFUNC]
 		mov		param3, [this + HEIGHT]
 		mov		param2, [this + ROOT]
 		mov		param1, [this + ARRAY]
-		call	CountCore					; result = CountCore (array, root, height, func, keys[0])
+		call	CountCore					; result = CountCore (array, root, height, kfunc, keys[0])
 		mov		this, [s_this]				; get "this" variable from the stack
 		mov		keys, [s_keys]				; get "keys" variable from the stack
 		add		[s_total], result			; if (result), then total++
@@ -6244,9 +6241,9 @@ space	= 5 * 8								; stack size required by the procedure
 		sub		qword [s_ksize], 1			; ksize--
 		jnz		.loop						; do while (ksize != 0)
 ;---[End of search loop]-------------------
-.exit:	mov		result, [s_total]
+.exit:	mov		result, [s_total]			; return total
 		add		stack, space				; restoring back the stack pointer
-		ret									; return total
+		ret
 }
 CountKeysMulti:		COUNT_KEYS	CountCoreMulti
 CountKeysUnique:	COUNT_KEYS	CountCoreUnique
@@ -6269,7 +6266,7 @@ size	equ		r9							; b-tree size
 value	equ		r10							; key value
 total	equ		r11							; count of duplicates
 key		equ		xmm0						; key value
-data	equ		xmm1						; temporary register
+data	equ		xmm1						; data value
 stack	equ		rsp							; stack pointer
 s_this	equ		stack + 0 * 8				; stack position of "this" variable
 s_src	equ		stack + 1 * 8				; stack position of "source" variable
@@ -6290,7 +6287,7 @@ space	= 7 * 8								; stack size required by the procedure
 		cmp		qword [this + SIZE], 0		; if (size)
 		jnz		.error						;     then go to error branch
 ;---[Check source object size]-------------
-		mov		size, [source + SIZE]		; get size of source b-tree object
+		mov		size, [source + SIZE]		; get source object size
 		test	size, size					; if (size == 0)
 		jz		.exit						;     then go to exit
 ;---[Check object capacity]----------------
@@ -6304,7 +6301,7 @@ space	= 7 * 8								; stack size required by the procedure
 		ja		.ext						;     then try to extend object capacity
 ;---[Normal execution branch]--------------
 .back:	mov		array, [source + ARRAY]		; get pointer to source array of nodes
-		mov		result, [source + FUNC]		; get pointer to key compare function
+		mov		result, [source + KFUNC]	; get pointer to key compare function
 		mov		[s_array], array			; save "array" variable into the stack
 		mov		[s_func], result			; save "func" variable into the stack
 		xor		param4, param4
@@ -6365,7 +6362,7 @@ space	= 7 * 8								; stack size required by the procedure
 		call	InsertCoreMulti				; call this.InsertCoreMulti ({key, total})
 		mov		this, [s_this]				; get "this" variable from the stack
 ;---[Normal exit branch]-------------------
-.exit:	mov		result, [this + SIZE]
+.exit:	mov		result, [this + SIZE]		; get object size
 		shr		result, KSCALE				; return this.size
 		add		stack, space				; restoring back the stack pointer
 		ret
@@ -6427,13 +6424,13 @@ space	= 5 * 8								; stack size required by the procedure
 ;---[Call check function]------------------
 		mov		this, [s_this]				; get "this" variable from the stack
 		mov		source, [s_src]				; get "source" variable from the stack
-		mov		param6, [this + FUNC]
+		mov		param6, [this + KFUNC]
 		mov		param5, [this + SIZE]
 		mov		param4, [s_siter]
 		mov		param3, [s_titer]
 		mov		param2, [source + ARRAY]
 		mov		param1, [this + ARRAY]
-		call	DiffFwd						; result = DiffFwd (this.array, source.array, titer, siter, this.size, this.func)
+		call	DiffFwd						; result = DiffFwd (this.array, source.array, titer, siter, this.size, this.kfunc)
 		cmp		result, EMPTY				; if (result > EMPTY)
 		jg		.exit						;     return status
 ;---[Compare object size]------------------
@@ -6443,8 +6440,8 @@ space	= 5 * 8								; stack size required by the procedure
 		xor		result, result				; result = 0
 		mov		great, +1					; great = +1
 		mov		less, -1					; less = -1
-		mov		size, [this + SIZE]
-		cmp		size, [source + SIZE]
+		mov		size, [this + SIZE]			; get target object size
+		cmp		size, [source + SIZE]		; get source object size
 		cmovg	result, great				; if (this.size > source.size), return great
 		cmovl	result, less				; if (this.size < source.size), return less
 		ret									; if (this.size == source.size), return equal
@@ -6483,10 +6480,10 @@ space	= 1 * 8								; stack size required by the procedure
 		call	GetNode						; result = GetNode (array, root, height, 0)
 ;---[Call check function]------------------
 		mov		this, [s_this]				; get "this" variable from the stack
-		mov		param3, [this + FUNC]
+		mov		param3, [this + KFUNC]
 		mov		param2, result
 		mov		param1, [this + ARRAY]
-		call	DupFwd						; result = DupFwd (array, iter, func)
+		call	DupFwd						; result = DupFwd (array, iter, kfunc)
 		cmp		result, EMPTY				; if (result <= EMPTY)
 		setg	status						;     return false
 .exit:	add		stack, space				; restoring back the stack pointer
@@ -6537,13 +6534,13 @@ space	= 5 * 8								; stack size required by the procedure
 ;---[Call check function]------------------
 		mov		this, [s_this]				; get "this" variable from the stack
 		mov		source, [s_src]				; get "source" variable from the stack
-		mov		param6, [this + FUNC]
+		mov		param6, [this + KFUNC]
 		mov		param5, [this + SIZE]
 		mov		param4, [s_siter]
 		mov		param3, [s_titer]
 		mov		param2, [source + ARRAY]
 		mov		param1, [this + ARRAY]
-		call	DiffFwd						; result = DiffFwd (this.array, source.array, titer, siter, this.size, this.func)
+		call	DiffFwd						; result = DiffFwd (this.array, source.array, titer, siter, this.size, this.kfunc)
 		cmp		result, EMPTY				; if (result <= EMPTY)
 .exit:	setle	status						;     return true
 		add		stack, space				; restoring back the stack pointer
@@ -6558,7 +6555,34 @@ this	equ		rdi							; pointer to b-tree object
 ;---[Internal variables]-------------------
 result	equ		rax							; result register
 ;------------------------------------------
-		mov		result, [this + FUNC]		; get pointer to key compare function
+		mov		result, [this + KFUNC]		; get pointer to key compare function
+		ret
+;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+GetCopyFunction:
+;---[Parameters]---------------------------
+this	equ		rdi							; pointer to b-tree object
+;---[Internal variables]-------------------
+result	equ		rax							; result register
+;------------------------------------------
+		mov		result, [this + CFUNC]		; get pointer to copy function
+		ret
+;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+GetDeleteFunction:
+;---[Parameters]---------------------------
+this	equ		rdi							; pointer to b-tree object
+;---[Internal variables]-------------------
+result	equ		rax							; result register
+;------------------------------------------
+		mov		result, [this + DFUNC]		; get pointer to delete function
+		ret
+;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+GetUserData:
+;---[Parameters]---------------------------
+this	equ		rdi							; pointer to b-tree object
+;---[Internal variables]-------------------
+result	equ		rax							; result register
+;------------------------------------------
+		mov		result, [this + DPTR]		; get pointer to user's data
 		ret
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 GetCapacity:
@@ -6590,7 +6614,7 @@ this	equ		rdi							; pointer to b-tree object
 ;---[Internal variables]-------------------
 result	equ		rax							; result register
 ;------------------------------------------
-		mov		result, [this + HEIGHT]		; get object height
+		mov		result, [this + HEIGHT]		; get tree height
 		add		result, 1					; return this.height + 1
 		ret
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::

@@ -24,7 +24,7 @@ extrn	'FindSet'			as	FindSet
 ;       Constructor                                                            ;
 ;******************************************************************************;
 public	Constructor			as	'Deque_InitDeque'
-public	Constructor			as	'_ZN5DequeC1Em'
+public	Constructor			as	'_ZN5DequeC1EmPFbP6pair_tPKS0_PvEPFvS1_S4_ES4_'
 
 ;******************************************************************************;
 ;       Copy constructor                                                       ;
@@ -83,24 +83,24 @@ public	MoveTail			as	'_ZN5Deque8MoveTailEmPS_mm'
 ;******************************************************************************;
 
 ; Into deque head
-public	PushIntoHead		as	'Deque_PushIntoHead'
-public	PushIntoHead		as	'_ZN5Deque12PushIntoHeadEPK6data_t'
+public	PushHead			as	'Deque_PushHead'
+public	PushHead			as	'_ZN5Deque8PushHeadEPK6pair_t'
 
 ; Into deque tail
-public	PushIntoTail		as	'Deque_PushIntoTail'
-public	PushIntoTail		as	'_ZN5Deque12PushIntoTailEPK6data_t'
+public	PushTail			as	'Deque_PushTail'
+public	PushTail			as	'_ZN5Deque8PushTailEPK6pair_t'
 
 ;******************************************************************************;
-;       Removal of element                                                  ;
+;       Removal of element                                                     ;
 ;******************************************************************************;
 
 ; From deque head
-public	PopFromHead			as	'Deque_PopFromHead'
-public	PopFromHead			as	'_ZN5Deque11PopFromHeadEP6data_t'
+public	PopHead				as	'Deque_PopHead'
+public	PopHead				as	'_ZN5Deque7PopHeadEv'
 
 ; From deque tail
-public	PopFromTail			as	'Deque_PopFromTail'
-public	PopFromTail			as	'_ZN5Deque11PopFromTailEP6data_t'
+public	PopTail				as	'Deque_PopTail'
+public	PopTail				as	'_ZN5Deque7PopTailEv'
 
 ;******************************************************************************;
 ;       Insertion of element                                                   ;
@@ -108,11 +108,11 @@ public	PopFromTail			as	'_ZN5Deque11PopFromTailEP6data_t'
 
 ; Into deque head
 public	InsertHead			as	'Deque_InsertHead'
-public	InsertHead			as	'_ZN5Deque10InsertHeadEPK6data_tm'
+public	InsertHead			as	'_ZN5Deque10InsertHeadEPK6pair_tm'
 
 ; Into deque tail
 public	InsertTail			as	'Deque_InsertTail'
-public	InsertTail			as	'_ZN5Deque10InsertTailEPK6data_tm'
+public	InsertTail			as	'_ZN5Deque10InsertTailEPK6pair_tm'
 
 ;******************************************************************************;
 ;       Extraction of element                                                  ;
@@ -120,11 +120,11 @@ public	InsertTail			as	'_ZN5Deque10InsertTailEPK6data_tm'
 
 ; From deque head
 public	ExtractHead			as	'Deque_ExtractHead'
-public	ExtractHead			as	'_ZN5Deque11ExtractHeadEP6data_tm'
+public	ExtractHead			as	'_ZN5Deque11ExtractHeadEm'
 
 ; From deque tail
 public	ExtractTail			as	'Deque_ExtractTail'
-public	ExtractTail			as	'_ZN5Deque11ExtractTailEP6data_tm'
+public	ExtractTail			as	'_ZN5Deque11ExtractTailEm'
 
 ;******************************************************************************;
 ;       Setting element value                                                  ;
@@ -132,11 +132,11 @@ public	ExtractTail			as	'_ZN5Deque11ExtractTailEP6data_tm'
 
 ; Set head element
 public	SetHead				as	'Deque_SetHead'
-public	SetHead				as	'_ZN5Deque7SetHeadEPK6data_tm'
+public	SetHead				as	'_ZN5Deque7SetHeadEPK6pair_tm'
 
 ; Set tail element
 public	SetTail				as	'Deque_SetTail'
-public	SetTail				as	'_ZN5Deque7SetTailEPK6data_tm'
+public	SetTail				as	'_ZN5Deque7SetTailEPK6pair_tm'
 
 ;******************************************************************************;
 ;       Getting element value                                                  ;
@@ -144,23 +144,11 @@ public	SetTail				as	'_ZN5Deque7SetTailEPK6data_tm'
 
 ; Get head element
 public	GetHead				as	'Deque_GetHead'
-public	GetHead				as	'_ZNK5Deque7GetHeadEP6data_tm'
+public	GetHead				as	'_ZNK5Deque7GetHeadEP6pair_tm'
 
 ; Get tail element
 public	GetTail				as	'Deque_GetTail'
-public	GetTail				as	'_ZNK5Deque7GetTailEP6data_tm'
-
-;******************************************************************************;
-;       Replacing element value                                                ;
-;******************************************************************************;
-
-; Replace head element
-public	ReplaceHead			as	'Deque_ReplaceHead'
-public	ReplaceHead			as	'_ZN5Deque11ReplaceHeadEP6data_tPKS0_m'
-
-; Replace tail element
-public	ReplaceTail			as	'Deque_ReplaceTail'
-public	ReplaceTail			as	'_ZN5Deque11ReplaceTailEP6data_tPKS0_m'
+public	GetTail				as	'_ZNK5Deque7GetTailEP6pair_tm'
 
 ;******************************************************************************;
 ;       Changing elements order                                                ;
@@ -185,14 +173,14 @@ public	SwapTail			as	'_ZN5Deque8SwapTailEm'
 ; Minimum value
 public	MinHead				as	'Deque_MinHead'
 public	MinTail				as	'Deque_MinTail'
-public	MinHead				as	'_ZNK5Deque7MinHeadEP6data_tmmPFx5adt_tS2_E'
-public	MinTail				as	'_ZNK5Deque7MinTailEP6data_tmmPFx5adt_tS2_E'
+public	MinHead				as	'_ZNK5Deque7MinHeadEP6pair_tmmPFx5adt_tS2_E'
+public	MinTail				as	'_ZNK5Deque7MinTailEP6pair_tmmPFx5adt_tS2_E'
 
 ; Maximum value
 public	MaxHead				as	'Deque_MaxHead'
 public	MaxTail				as	'Deque_MaxTail'
-public	MaxHead				as	'_ZNK5Deque7MaxHeadEP6data_tmmPFx5adt_tS2_E'
-public	MaxTail				as	'_ZNK5Deque7MaxTailEP6data_tmmPFx5adt_tS2_E'
+public	MaxHead				as	'_ZNK5Deque7MaxHeadEP6pair_tmmPFx5adt_tS2_E'
+public	MaxTail				as	'_ZNK5Deque7MaxTailEP6pair_tmmPFx5adt_tS2_E'
 
 ;******************************************************************************;
 ;       Key searching                                                          ;
@@ -201,22 +189,22 @@ public	MaxTail				as	'_ZNK5Deque7MaxTailEP6data_tmmPFx5adt_tS2_E'
 ; Single key searching
 public	FindKeyHead			as	'Deque_FindKeyHead'
 public	FindKeyTail			as	'Deque_FindKeyTail'
-public	FindKeyHead			as	'_ZNK5Deque11FindKeyHeadEP6data_t5adt_tmmPFxS2_S2_E'
-public	FindKeyTail			as	'_ZNK5Deque11FindKeyTailEP6data_t5adt_tmmPFxS2_S2_E'
+public	FindKeyHead			as	'_ZNK5Deque11FindKeyHeadEP6pair_t5adt_tmmPFxS2_S2_E'
+public	FindKeyTail			as	'_ZNK5Deque11FindKeyTailEP6pair_t5adt_tmmPFxS2_S2_E'
 
 ; Keys set searching
 public	FindKeysHead		as	'Deque_FindKeysHead'
 public	FindKeysTail		as	'Deque_FindKeysTail'
-public	FindKeysHead		as	'_ZNK5Deque12FindKeysHeadEP6data_tPK5adt_tmmmPFxS2_S2_E'
-public	FindKeysTail		as	'_ZNK5Deque12FindKeysTailEP6data_tPK5adt_tmmmPFxS2_S2_E'
+public	FindKeysHead		as	'_ZNK5Deque12FindKeysHeadEP6pair_tPK5adt_tmmmPFxS2_S2_E'
+public	FindKeysTail		as	'_ZNK5Deque12FindKeysTailEP6pair_tPK5adt_tmmmPFxS2_S2_E'
 
 ;******************************************************************************;
 ;       Searching for differences                                              ;
 ;******************************************************************************;
 public	FindDiffHead		as	'Deque_FindDiffHead'
 public	FindDiffTail		as	'Deque_FindDiffTail'
-public	FindDiffHead		as	'_ZNK5Deque12FindDiffHeadEP6data_tmPKS_mmPFx5adt_tS4_E'
-public	FindDiffTail		as	'_ZNK5Deque12FindDiffTailEP6data_tmPKS_mmPFx5adt_tS4_E'
+public	FindDiffHead		as	'_ZNK5Deque12FindDiffHeadEP6pair_tmPKS_mmPFx5adt_tS4_E'
+public	FindDiffTail		as	'_ZNK5Deque12FindDiffTailEP6pair_tmPKS_mmPFx5adt_tS4_E'
 
 ;******************************************************************************;
 ;       Key counting                                                           ;
@@ -249,6 +237,18 @@ public	IsEqual				as	'_ZNK5Deque7IsEqualEPKS_PFx5adt_tS2_E'
 ;******************************************************************************;
 ;       Deque properties                                                       ;
 ;******************************************************************************;
+
+; Deque pair copy function
+public	GetCopyFunction		as	'Deque_CopyFunction'
+public	GetCopyFunction		as	'_ZNK5Deque12CopyFunctionEv'
+
+; Deque pair delete function
+public	GetDeleteFunction	as	'Deque_DeleteFunction'
+public	GetDeleteFunction	as	'_ZNK5Deque14DeleteFunctionEv'
+
+; Deque user's data
+public	GetUserData			as	'Deque_UserData'
+public	GetUserData			as	'_ZNK5Deque8UserDataEv'
 
 ; Deque capacity
 public	GetCapacity			as	'Deque_Capacity'
@@ -285,6 +285,183 @@ SIZE		= 2 * 8							; Offset of object size field
 HEAD		= 3 * 8							; Offset of head pointer field
 TAIL		= 4 * 8							; Offset of tail pointer field
 FUTEX		= 5 * 8							; Offset of futex field
+CFUNC		= 6 * 8							; Offset of pointer to copy function
+DFUNC		= 7 * 8							; Offset of pointer to delete function
+DPTR		= 8 * 8							; Offset of pointer to user's data
+
+;******************************************************************************;
+;       Move elements into deque                                               ;
+;******************************************************************************;
+macro	MOVE_ELEMENTS	cmd
+{
+;---[Parameters]---------------------------
+array	equ		rdi							; pointer to array of nodes
+target	equ		rsi							; target iterator
+source	equ		rdx							; source iterator
+mask	equ		rcx							; mask is applied to iterators
+size	equ		r8							; count of elements to move
+;---[Internal variables]-------------------
+value	equ		xmm0						; temporary register
+;---[Check size]---------------------------
+		test	size, size					; if (size == 0)
+		jz		.exit						;     then skip the loop
+;---[Move loop]----------------------------
+.loop:	and		source, mask				; source &= mask
+		and		target, mask				; target &= mask
+		movdqa	value, [array + source]
+		movdqa	[array + target], value		; array[target] = array[source]
+		cmd		source, KSIZE				; change source iterator
+		cmd		target, KSIZE				; change target iterator
+		sub		size, KSIZE					; size -= KSIZE
+		jnz		.loop						; do while (size != 0)
+;---[End of move loop]---------------------
+.exit:	ret
+}
+MoveElemenstFwd:	MOVE_ELEMENTS	add
+MoveElemenstBwd:	MOVE_ELEMENTS	sub
+
+;******************************************************************************;
+;       Copy elements into deque                                               ;
+;******************************************************************************;
+macro	COPY_ELEMENTS	cmd
+{
+;---[Parameters]---------------------------
+tarray	equ		rdi							; pointer to target array of nodes
+sarray	equ		rsi							; pointer to source array of nodes
+target	equ		rdx							; target iterator
+source	equ		rcx							; source iterator
+tmask	equ		r8							; mask is applied to target iterator
+smask	equ		r9							; mask is applied to source iterator
+size	equ		r10							; count of elements to copy
+func	equ		r11							; pointer to copy function
+ptr		equ		rax							; pointer to user's data
+;---[Internal variables]-------------------
+status	equ		al							; operation status
+result	equ		rax							; result register
+value	equ		xmm0						; temporary register
+stack	equ		rsp							; stack pointer
+s_tarr	equ		stack + 0 * 8				; stack position of "tarray" variable
+s_sarr	equ		stack + 1 * 8				; stack position of "sarray" variable
+s_tgt	equ		stack + 2 * 8				; stack position of "target" variable
+s_src	equ		stack + 3 * 8				; stack position of "source" variable
+s_tmask	equ		stack + 4 * 8				; stack position of "tmask" variable
+s_smask	equ		stack + 5 * 8				; stack position of "smask" variable
+s_size	equ		stack + 6 * 8				; stack position of "size" variable
+s_func	equ		stack + 7 * 8				; stack position of "func" variable
+s_ptr	equ		stack + 8 * 8				; stack position of "ptr" variable
+s_total	equ		stack + 9 * 8				; stack position of "total" variable
+space	= 11 * 8							; stack size required by the procedure
+;------------------------------------------
+		sub		stack, space				; reserving stack size for local vars
+		mov		qword [s_total], 0			; total = 0
+;---[Check size]---------------------------
+		test	size, size					; if (size == 0)
+		jz		.exit						;     then go to exit
+;---[Check copy function]------------------
+		test	func, func					; if (func == NULL)
+		jz		.bit						;     then do bitmap copy
+;---[Normal execution branch]--------------
+		mov		[s_tarr], tarray			; save "tarray" variable into the stack
+		mov		[s_sarr], sarray			; save "sarray" variable into the stack
+		mov		[s_tgt], target				; save "target" variable into the stack
+		mov		[s_src], source				; save "source" variable into the stack
+		mov		[s_tmask], tmask			; save "tmask" variable into the stack
+		mov		[s_smask], smask			; save "smask" variable into the stack
+		mov		[s_size], size				; save "size" variable into the stack
+		mov		[s_func], func				; save "func" variable into the stack
+		mov		[s_ptr], ptr				; save "ptr" variable into the stack
+;---[Copy loop]----------------------------
+.loop:	and		source, [s_smask]			; source &= smask
+		and		target, [s_tmask]			; target &= tmask
+		mov		param1, [s_tarr]
+		add		param1, target
+		mov		param2, [s_sarr]
+		add		param2, source
+		mov		param3, [s_ptr]
+		call	qword [s_func]				; status = func (tarray + target, sarray + source, ptr)
+		test	status, status				; if (status == 0)
+		jz		.exit						;     then go to exit
+		mov		source, [s_src]				; get "source" variable from the stack
+		mov		target, [s_tgt]				; get "target" variable from the stack
+		cmd		source, KSIZE				; change source iterator
+		cmd		target, KSIZE				; change target iterator
+		mov		[s_src], source				; save "source" variable into the stack
+		mov		[s_tgt], target				; save "target" variable into the stack
+		add		qword [s_total], KSIZE		; total++
+		sub		qword [s_size], KSIZE		; size--
+		jnz		.loop						; do while (size != 0)
+;---[End of copy loop]---------------------
+.exit:	mov		result, [s_total]			; return total
+		add		stack, space				; restoring back the stack pointer
+		ret
+;---[Bitmap copy branch]-------------------
+.bit:	mov		[s_total], size				; total = size
+;---[Bitmap copy loop]---------------------
+.bloop:	and		source, smask				; source &= smask
+		and		target, tmask				; target &= tmask
+		movdqa	value, [sarray + source]
+		movdqa	[tarray + target], value	; tarray[target] = sarray[source]
+		cmd		source, KSIZE				; change source iterator
+		cmd		target, KSIZE				; change target iterator
+		sub		size, KSIZE					; size -= KSIZE
+		jnz		.bloop						; do while (size != 0)
+;---[End of bitmap copy loop]--------------
+		mov		result, [s_total]			; return total
+		add		stack, space				; restoring back the stack pointer
+		ret
+}
+CopyElementsFwd:	COPY_ELEMENTS	add
+CopyElementsBwd:	COPY_ELEMENTS	sub
+
+;******************************************************************************;
+;       Delete elements from deque                                             ;
+;******************************************************************************;
+DeleteElements:
+;---[Parameters]---------------------------
+array	equ		rdi							; pointer to array of nodes
+iter	equ		rsi							; iterator value
+mask	equ		rdx							; mask is applied to iterators
+size	equ		rcx							; count of elements to delete
+func	equ		r8							; pointer to delete function
+ptr		equ		r9							; pointer to user's data
+;---[Internal variables]-------------------
+stack	equ		rsp							; stack pointer
+s_array	equ		stack + 0 * 8				; stack position of "array" variable
+s_iter	equ		stack + 1 * 8				; stack position of "iter" variable
+s_mask	equ		stack + 2 * 8				; stack position of "mask" variable
+s_size	equ		stack + 3 * 8				; stack position of "size" variable
+s_func	equ		stack + 4 * 8				; stack position of "func" variable
+s_ptr	equ		stack + 5 * 8				; stack position of "ptr" variable
+space	= 7 * 8								; stack size required by the procedure
+;------------------------------------------
+		sub		stack, space				; reserving stack size for local vars
+;---[Check size]---------------------------
+		test	size, size					; if (size == 0)
+		jz		.exit						;     then go to exit
+;---[Check delete function]----------------
+		test	func, func					; if (func == NULL)
+		jz		.exit						;     then go to exit
+;---[Normal execution branch]--------------
+		mov		[s_array], array			; save "array" variable into the stack
+		mov		[s_iter], iter				; save "iter" variable into the stack
+		mov		[s_mask], mask				; save "mask" variable into the stack
+		mov		[s_size], size				; save "size" variable into the stack
+		mov		[s_func], func				; save "func" variable into the stack
+		mov		[s_ptr], ptr				; save "ptr" variable into the stack
+;---[Delete loop]--------------------------
+.loop:	and		iter, [s_mask]				; iter &= mask
+		lea		array, [array + iter]
+		mov		param2, [s_ptr]
+		call	qword [s_func]				; call func (array, ptr)
+		mov		array, [s_array]			; get "array" variable from the stack
+		mov		iter, [s_iter]				; get "iter" variable from the stack
+		add		iter, KSIZE					; iter++
+		mov		[s_iter], iter				; save "iter" variable into the stack
+		sub		qword [s_size], KSIZE		; size--
+		jnz		.loop						; do while (size != 0)
+;---[End of delete loop]-------------------
+.exit:	add		stack, space				; restoring back the stack pointer
+		ret
 
 ;******************************************************************************;
 ;       Extending deque capacity                                               ;
@@ -322,13 +499,13 @@ space	= 3 * 8								; stack size required by the procedure
 ;---[Update object properties]-------------
 		mov		this, [s_this]				; get "this" variable from the stack
 		mov		newcap, [s_ncap]			; get "newcap" variable from the stack
-		mov		oldcap, [this + CAPACITY]	; get old capacity of the deque
+		mov		oldcap, [this + CAPACITY]	; get old object capacity
 		mov		[this + ARRAY], array		; this.array = array
 		mov		[this + CAPACITY], newcap	; this.capacity = newcap
 		cmp		qword [this + SIZE], 0		; if (size == 0)
 		je		.empty						;     then set empty values
 		mov		head, [this + HEAD]			; get pointer to deque head
-		mov		tail, [this + TAIL]			; get pointer to deque head
+		mov		tail, [this + TAIL]			; get pointer to deque tail
 		cmp		head, tail					; if (head <= tail)
 		jbe		.exit						;     then go to exit
 ;---[Move deque content]-------------------
@@ -372,79 +549,31 @@ space	= 3 * 8								; stack size required by the procedure
 		ret
 
 ;******************************************************************************;
-;       Move elements                                                          ;
-;******************************************************************************;
-macro	MOVE	cmd
-{
-;---[Parameters]---------------------------
-array	equ		rdi							; pointer to array of nodes
-target	equ		rsi							; target iterator
-source	equ		rdx							; source iterator
-mask	equ		rcx							; mask is applied to iterators
-size	equ		r8							; count of elements to move
-;---[Internal variables]-------------------
-temp	equ		xmm0						; temporary register
-;---[Moving loop]--------------------------
-.loop:	movdqa	temp, [array + source]
-		movdqa	[array + target], temp		; array[target] = array[source]
-		cmd		source, KSIZE				; change source iterator
-		cmd		target, KSIZE				; change target iterator
-		and		source, mask				; source &= mask
-		and		target, mask				; target &= mask
-		sub		size, KSIZE					; size -= KSIZE
-		jnz		.loop						; do while (size != 0)
-;---[End of moving loop]-------------------
-		ret
-}
-MoveFwd:	MOVE	add
-MoveBwd:	MOVE	sub
-
-;******************************************************************************;
-;       Copy elements                                                          ;
-;******************************************************************************;
-macro	COPY	cmd
-{
-;---[Parameters]---------------------------
-tarray	equ		rdi							; pointer to target array of nodes
-sarray	equ		rsi							; pointer to source array of nodes
-target	equ		rdx							; target iterator
-source	equ		rcx							; source iterator
-tmask	equ		r8							; mask is applied to target iterator
-smask	equ		r9							; mask is applied to source iterator
-size	equ		r10							; count of elements to copy
-;---[Internal variables]-------------------
-temp	equ		xmm0						; temporary register
-;---[Moving loop]--------------------------
-.loop:	movdqa	temp, [sarray + source]
-		movdqa	[tarray + target], temp		; tarray[target] = sarray[source]
-		cmd		source, KSIZE				; change source iterator
-		cmd		target, KSIZE				; change target iterator
-		and		source, tmask				; source &= tmask
-		and		target, smask				; target &= smask
-		sub		size, KSIZE					; size -= KSIZE
-		jnz		.loop						; do while (size != 0)
-;---[End of moving loop]-------------------
-		ret
-}
-CopyFwd:	COPY	add
-CopyBwd:	COPY	sub
-
-;******************************************************************************;
 ;       Constructor                                                            ;
 ;******************************************************************************;
 Constructor:
 ;---[Parameters]---------------------------
 this	equ		rdi							; pointer to deque object
 cap		equ		rsi							; object capacity
+cfunc	equ		rdx							; copy function
+dfunc	equ		rcx							; delete function
+ptr		equ		r8							; pointer to user's data
 ;---[Internal variables]-------------------
+status	equ		al							; operation status
 array	equ		rax							; pointer to array of nodes
 stack	equ		rsp							; stack pointer
 s_this	equ		stack + 0 * 8				; stack position of "this" variable
 s_cap	equ		stack + 1 * 8				; stack position of "cap" variable
-space	= 3 * 8								; stack size required by the procedure
+s_cfunc	equ		stack + 2 * 8				; stack position of "cfunc" variable
+s_dfunc	equ		stack + 3 * 8				; stack position of "dfunc" variable
+s_ptr	equ		stack + 4 * 8				; stack position of "ptr" variable
+space	= 5 * 8								; stack size required by the procedure
 ;------------------------------------------
 		sub		stack, space				; reserving stack size for local vars
 		mov		[s_this], this				; save "this" variable into the stack
+		mov		[s_cfunc], cfunc			; save "cfunc" variable into the stack
+		mov		[s_dfunc], dfunc			; save "dfunc" variable into the stack
+		mov		[s_ptr], ptr				; save "ptr" variable into the stack
 		shl		cap, KSCALE
 	Capacity	cap, array, MINCAP			; compute capacity of the object
 		mov		[s_cap], cap				; save "cap" variable into the stack
@@ -458,16 +587,22 @@ space	= 3 * 8								; stack size required by the procedure
 		syscall								; array = mmap (NULL, cap, PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANONYMOUS, -1, 0)
 		mov		this, [s_this]				; get "this" variable from the stack
 		mov		cap, [s_cap]				; get "cap" variable from the stack
+		mov		cfunc, [s_cfunc]			; get "cfunc" variable from the stack
+		mov		dfunc, [s_dfunc]			; get "dfunc" variable from the stack
+		mov		ptr, [s_ptr]				; get "ptr" variable from the stack
 		test	array, array				; if (array < 0)
 		js		.error						;     then go to error branch
 ;---[Normal execution branch]--------------
 		mov		[this + ARRAY], array		; this.array = array
 		mov		[this + CAPACITY], cap		; this.capacity = cap
-		sub		cap, KSIZE
 		mov		qword [this + SIZE], 0		; this.size = 0
 		mov		qword [this + HEAD], 0		; this.head = 0
-		mov		qword [this + TAIL], cap	; this.tail = cap - KSIZE
+		mov		qword [this + TAIL], -KSIZE	; this.tail = -1
 		mov		qword [this + FUTEX], 0		; this.futex = 0
+		mov		[this + CFUNC], cfunc		; this.cfunc = cfunc
+		mov		[this + DFUNC], dfunc		; this.dfunc = dfunc
+		mov		[this + DPTR], ptr			; this.ptr = ptr
+		mov		status, 1					; return true
 		add		stack, space				; restoring back the stack pointer
 		ret
 ;---[Error branch]-------------------------
@@ -475,8 +610,12 @@ space	= 3 * 8								; stack size required by the procedure
 		mov		qword [this + CAPACITY], 0	; this.capacity = 0
 		mov		qword [this + SIZE], 0		; this.size = 0
 		mov		qword [this + HEAD], 0		; this.head = 0
-		mov		qword [this + TAIL], -KSIZE	; this.tail = -KSIZE
+		mov		qword [this + TAIL], -KSIZE	; this.tail = -1
 		mov		qword [this + FUTEX], 0		; this.futex = 0
+		mov		[this + CFUNC], cfunc		; this.cfunc = cfunc
+		mov		[this + DFUNC], dfunc		; this.dfunc = dfunc
+		mov		[this + DPTR], ptr			; this.ptr = ptr
+		xor		status, status				; return false
 		add		stack, space				; restoring back the stack pointer
 		ret
 
@@ -488,57 +627,49 @@ CopyConstructor:
 this	equ		rdi							; pointer to target deque object
 source	equ		rsi							; pointer to source deque object
 ;---[Internal variables]-------------------
-array	equ		rax							; pointer to array of nodes
-temp	equ		rcx							; temporary register
-fptr	equ		rax							; pointer to call external function
+status	equ		al							; operation status
+result	equ		rax							; result register
 stack	equ		rsp							; stack pointer
 s_this	equ		stack + 0 * 8				; stack position of "this" variable
 s_src	equ		stack + 1 * 8				; stack position of "source" variable
 space	= 3 * 8								; stack size required by the procedure
 ;------------------------------------------
 		sub		stack, space				; reserving stack size for local vars
+;---[Prevent initialization by itself]-----
 		cmp		this, source				; if (this == source)
 		je		.exit						;     then go to exit
+;---[Call object constructor]--------------
 		mov		[s_this], this				; save "this" variable into the stack
 		mov		[s_src], source				; save "source" variable into the stack
-;---[Allocate memory for the object]-------
-		mov		sc_prm6, 0
-		mov		sc_prm5, -1
-		mov		sc_prm4, 0x22
-		mov		sc_prm3, 0x3
-		mov		sc_prm2, [source + CAPACITY]
-		mov		sc_prm1, 0
-		mov		sc_num, SYSCALL_MMAP
-		syscall								; array = mmap (NULL, source.capacity, PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANONYMOUS, -1, 0)
+		mov		param5, [source + DPTR]
+		mov		param4, [source + DFUNC]
+		mov		param3, [source + CFUNC]
+		mov		param2, [source + SIZE]
+		shr		param2, KSCALE
+		call	Constructor					; status = this.Counstructor (source.size, source.cfunc, source.dfunc, source.ptr)
 		mov		this, [s_this]				; get "this" variable from the stack
 		mov		source, [s_src]				; get "source" variable from the stack
-		test	array, array				; if (array < 0)
-		js		.error						;     then go to error branch
-;---[Normal execution branch]--------------
-		mov		[this + ARRAY], array		; this.array = array
-		mov		temp, [source + CAPACITY]
-		mov		[this + CAPACITY], temp		; this.capacity = source.capacity
-		mov		temp, [source + SIZE]
-		mov		[this + SIZE], temp			; this.size = source.size
-		mov		temp, [source + HEAD]
-		mov		[this + HEAD], temp			; this.head = source.head
-		mov		temp, [source + TAIL]
-		mov		[this + TAIL], temp			; this.tail = source.tail
-		mov		qword [this + FUTEX], 0		; this.futex = 0
-;---[Copy content of nodes]----------------
-		mov		param3, [source + CAPACITY]
+		test	status, status				; if (!status)
+		jz		.exit						;     then go to exit
+;---[Copy elements from source object]-----
+		mov		param9, [this + DPTR]
+		mov		param8, [this + CFUNC]
+		mov		param7, [source + SIZE]
+		mov		param6, [source + CAPACITY]
+		sub		param6, 1
+		mov		param5, [this + CAPACITY]
+		sub		param5, 1
+		mov		param4, [source + HEAD]
+		mov		param3, [this + HEAD]
 		mov		param2, [source + ARRAY]
-		mov		param1, array
-		mov		fptr, Copy
-		add		stack, space				; restoring back the stack pointer
-		jmp		fptr						; return Array::Copy (this.array, source.array, source.capacity)
-;---[Error branch]-------------------------
-.error:	mov		qword [this + ARRAY], 0		; this.array = NULL
-		mov		qword [this + CAPACITY], 0	; this.capacity = 0
-		mov		qword [this + SIZE], 0		; this.size = 0
-		mov		qword [this + HEAD], 0		; this.head = 0
-		mov		qword [this + TAIL], -KSIZE	; this.tail = -1
-		mov		qword [this + FUTEX], 0		; this.futex = 0
+		mov		param1, [this + ARRAY]
+		call	CopyElementsFwd				; result = CopyElementsFwd (this.array, source.array, this.head, source.head, this.capacity, source.capacity, source.size, this.cfunc, this.ptr)
+		mov		this, [s_this]				; get "this" variable from the stack
+		test	result, result				; if (result) {
+		jz		.exit						;     this.size = result
+		mov		[this + SIZE], result		;     this.tail = result
+		mov		[this + TAIL], result		; }
+;---[Normal exit branch]-------------------
 .exit:	add		stack, space				; restoring back the stack pointer
 		ret
 
@@ -555,6 +686,17 @@ space	= 1 * 8								; stack size required by the procedure
 ;------------------------------------------
 		sub		stack, space				; reserving stack size for local vars
 		mov		[s_this], this				; save "this" variable into the stack
+;---[Delete elements]----------------------
+		mov		param6, [this + DPTR]
+		mov		param5, [this + DFUNC]
+		mov		param4, [this + SIZE]
+		mov		param3, [this + CAPACITY]
+		sub		param3, 1
+		mov		param2, [this + HEAD]
+		mov		param1, [this + ARRAY]
+		call	DeleteElements				; call DeleteElements (this.array, this.head, this.capacity - 1, this.size, this.dfunc, this.ptr)
+		mov		this, [s_this]				; get "this" variable from the stack
+;---[Release memory]-----------------------
 		mov		sc_prm2, [this + CAPACITY]
 		mov		sc_prm1, [this + ARRAY]
 		mov		sc_num, SYSCALL_MUNMAP
@@ -566,6 +708,9 @@ space	= 1 * 8								; stack size required by the procedure
 		mov		qword [this + HEAD], 0		; this.head = 0
 		mov		qword [this + TAIL], -KSIZE	; this.tail = -1
 		mov		qword [this + FUTEX], 0		; this.futex = 0
+		mov		qword [this + CFUNC], 0		; this.cfunc = NULL
+		mov		qword [this + DFUNC], 0		; this.dfunc = NULL
+		mov		qword [this + DPTR], 0		; this.ptr = NULL
 		add		stack, space				; restoring back the stack pointer
 		ret
 
@@ -610,28 +755,34 @@ s_ssize	equ		stack + 6 * 8				; stack position of "ssize" variable
 space	= 7 * 8								; stack size required by the procedure
 ;------------------------------------------
 		sub		stack, space				; reserving stack size for local vars
-;---[Check access mode]--------------------
+		shl		tpos, KSCALE				; tpos *= KSIZE
+		shl		spos, KSCALE				; spos *= KSIZE
+		shl		count, KSCALE				; count *= KSIZE
+;---[Check target deque access mode]-------
 		cmp		dword [this + FUTEX], 0		; if read only code section called this
 		jg		.error						; function, then go to error branch
+if move
+;---[Check source deque access mode]-------
+		cmp		dword [source + FUTEX], 0	; if read only code section called this
+		jg		.error						; function, then go to error branch
+end if
 ;---[Prevent copying to itself]------------
 		cmp		this, source				; if (this == source)
 		je		.error						;     then go to error branch
 ;---[Check target position]----------------
-		shl		tpos, KSCALE
 		mov		size, [this + SIZE]			; get target object size
 		sub		size, tpos					; if (size < tpos)
 		jb		.error						;     then go to error branch
 		mov		[s_tsize], size				; tsize = size - tpos
 ;---[Check source position]----------------
-		shl		spos, KSCALE
 		mov		size, [source + SIZE]		; get source object size
 		sub		size, spos					; if (size <= spos)
 		jbe		.error						;     then go to error branch
-		mov		[s_ssize], size				; ssize = size - spos
 ;---[Correct count]------------------------
-		shl		count, KSCALE
 		cmp		count, size					; if (count > size)
 		cmova	count, size					;     count = size
+		sub		size, count
+		mov		[s_ssize], size				; ssize = size - spos - count
 		mov		[s_this], this				; save "this" variable into the stack
 		mov		[s_tpos], tpos				; save "tpos" variable into the stack
 		mov		[s_src], source				; save "source" variable into the stack
@@ -646,11 +797,9 @@ space	= 7 * 8								; stack size required by the procedure
 		cmp		count, [this + CAPACITY]	; if (count > capacity)
 		ja		.ext						;     then try to extend object capacity
 ;---[Move elements in target deque]--------
-.back:	mov		this, [s_this]				; get "this" variable from the stack
-		mov		tpos, [s_tpos]				; get "tpos" variable from the stack
-		mov		count, [s_count]			; get "count" variable from the stack
+.back:	mov		count, [s_count]			; get "count" variable from the stack
 		mov		size, [s_tsize]				; get "tsize" variable from the stack
-		mov		cap, [this + CAPACITY]
+		mov		cap, [this + CAPACITY]		; get object capacity
 		sub		cap, 1						; cap = this.capacity - 1
 		cmp		size, tpos					; if (size < tpos)
 		jb		.else1						;     then go to else branch
@@ -660,59 +809,54 @@ space	= 7 * 8								; stack size required by the procedure
 		cmd1	iter, count
 		and		iter, cap					; iter = (iter cmd1 count) & cap
 		mov		[this + offst1], iter		; update iterator value
-		add		[this + SIZE], count		; this.size += count
-		test	tpos, tpos					; if (tpos == 0)
-		jz		.copy						;     then skip following code
 		mov		param5, tpos
 		mov		param4, cap
 		mov		param3, ptr
 		mov		param2, iter
 		mov		param1, [this + ARRAY]
 		call	MoveFunc1					; call MoveFunc1 (array, iter cmd1 count, iter, cap, tpos)
-		jmp		.copy
+		jmp		.skip
 ;---[else]---------------------------------
 .else1:	mov		iter, [this + offst2]		; get iterator value
 		mov		ptr, iter					; ptr = iter
 		cmd2	iter, count
 		and		iter, cap					; iter = (iter cmd2 count) & cap
 		mov		[this + offst2], iter		; update iterator value
-		add		[this + SIZE], count		; this.size += count
-		test	size, size					; if (size == 0)
-		jz		.copy						;     then skip following code
 		mov		param5, size
 		mov		param4, cap
 		mov		param3, ptr
 		mov		param2, iter
 		mov		param1, [this + ARRAY]
 		call	MoveFunc2					; call MoveFunc2 (array, iter cmd2 count, iter, cap, size)
-;---[Insert elements into target deque]----
-.copy:	mov		this, [s_this]				; get "this" variable from the stack
+if move
+;---[Move elements from source deque]------
+.skip:	mov		this, [s_this]				; get "this" variable from the stack
 		mov		source, [s_src]				; get "source" variable from the stack
+		xor		param9, param9
+		xor		param8, param8
+		mov		param7, [s_count]
 		mov		param6, [source + CAPACITY]
 		sub		param6, 1
-		mov		param4, [source + offst1]
-		cmd2	param4, [s_spos]
-		and		param4, param6
-		mov		param2, [source + ARRAY]
 		mov		param5, [this + CAPACITY]
 		sub		param5, 1
+		mov		param4, [source + offst1]
+		cmd2	param4, [s_spos]
+		mov		param2, [source + ARRAY]
 		mov		param3, [this + offst1]
 		cmd2	param3, [s_tpos]
-		and		param3, param5
 		mov		param1, [this + ARRAY]
-		mov		param7, [s_count]
-		call	CopyFunc					; call CopyFunc (this.array, source.array, this.iter cmd2 tpos, source.iter cmd2 spos, this.capacity - 1, source.capacity - 1, count)
-;---[Remove elements from source deque]----
-if move
+		call	CopyFunc					; result = CopyFunc (this.array, source.array, this.offst1 cmd2 tpos, source.offst1 cmd2 spos, this.capacity, source.capacity, count, NULL, NULL)
+		mov		this, [s_this]				; get "this" variable from the stack
 		mov		source, [s_src]				; get "source" variable from the stack
 		mov		spos, [s_spos]				; get "spos" variable from the stack
 		mov		count, [s_count]			; get "count" variable from the stack
 		mov		size, [s_ssize]				; get "ssize" variable from the stack
-		mov		cap, [source + CAPACITY]
-		sub		cap, 1						; cap = source.capacity - 1
-		sub		size, count					; size -= count
-		sub		[source + SIZE], count		; source.size -= count
+		mov		[s_count], result			; save "count" variable into the stack
+		add		[this + SIZE], result		; update target object size
+		sub		[source + SIZE], result		; source.size -= result
 		jz		.empty						; if (source.size == 0), then go to empty branch
+		mov		cap, [source + CAPACITY]	; get source object capacity
+		sub		cap, 1						; cap = source.capacity - 1
 		mov		iter, [source + offst1]
 		cmd2	iter, spos					; iter = (iter cmd2 spos)
 		cmp		size, spos					; if (size < spos)
@@ -724,33 +868,80 @@ if move
 		cmd2	ptr, count
 		and		ptr, cap					; ptr = (ptr cmd2 count) & cap
 		mov		[source + offst1], ptr		; update iterator value
-		test	spos, spos					; if (spos == 0)
-		jz		.exit						;     then skip following code
+		mov		ptr, iter
+		cmd2	ptr, count
+		and		ptr, cap
+		mov		param1, [source + ARRAY]
 		mov		param5, spos
 		mov		param4, cap
 		mov		param3, iter
-		mov		param2, iter
-		cmd2	param2, count
-		and		param2, cap
-		mov		param1, [source + ARRAY]
+		mov		param2, ptr
 		call	MoveFunc2					; MoveFunc2 (source.array, iter cmd2 count, iter, cap, spos)
-		jmp		.exit
+		mov		result, [s_count]			; get "count" variable from the stack
+		shr		result, KSCALE				; return count
+		add		stack, space				; restoring back the stack pointer
+		ret
 ;---[else]---------------------------------
 .else2:	and		iter, cap					; iter = iter & cap
 		mov		ptr, [source + offst2]
 		cmd1	ptr, count
 		and		ptr, cap					; ptr = (ptr cmd1 count) & cap
 		mov		[source + offst2], ptr		; update iterator value
-		test	size, size					; if (size == 0)
-		jz		.exit						;     then skip following code
+		mov		ptr, iter
+		cmd2	ptr, count
+		and		ptr, cap
+		mov		param1, [source + ARRAY]
 		mov		param5, size
 		mov		param4, cap
-		mov		param3, iter
-		cmd2	param3, count
-		and		param3, cap
+		mov		param3, ptr
 		mov		param2, iter
-		mov		param1, [source + ARRAY]
 		call	MoveFunc1					; MoveFunc1 (source.array, iter, iter cmd2 count, cap, size)
+else
+;---[Copy elements into target deque]------
+.skip:	mov		this, [s_this]				; get "this" variable from the stack
+		mov		source, [s_src]				; get "source" variable from the stack
+		mov		param9, [this + DPTR]
+		mov		param8, [this + CFUNC]
+		mov		param7, [s_count]
+		mov		param6, [source + CAPACITY]
+		sub		param6, 1
+		mov		param5, [this + CAPACITY]
+		sub		param5, 1
+		mov		param4, [source + offst1]
+		cmd2	param4, [s_spos]
+		mov		param2, [source + ARRAY]
+		mov		param3, [this + offst1]
+		cmd2	param3, [s_tpos]
+		mov		param1, [this + ARRAY]
+		call	CopyFunc					; result = CopyFunc (this.array, source.array, this.offst1 cmd2 tpos, source.offst1 cmd2 spos, this.capacity, source.capacity, count, this.cfunc, this.ptr)
+		mov		this, [s_this]				; get "this" variable from the stack
+		mov		tpos, [s_tpos]				; get "tpos" variable from the stack
+		mov		count, [s_count]			; get "count" variable from the stack
+		mov		size, [s_tsize]				; get "tsize" variable from the stack
+		mov		[s_count], result			; save "count" variable into the stack
+		add		[this + SIZE], result		; update target object size
+;---[Correct target deque if error]--------
+		sub		count, result				; if (count == result)
+		je		.exit						;     then go to exit
+		mov		cap, [this + CAPACITY]		; get target object capacity
+		sub		cap, 1						; cap = this.capacity - 1
+		mov		iter, [this + offst1]
+		cmd2	iter, tpos					; iter = (iter cmd2 tpos)
+		cmd2	iter, result				; iter = (iter cmd2 result)
+		and		iter, cap					; iter = iter & cap
+		mov		ptr, [this + offst2]
+		cmd1	ptr, count
+		and		ptr, cap					; ptr = (ptr cmd1 count) & cap
+		mov		[this + offst2], ptr		; update iterator value
+		mov		ptr, iter
+		cmd2	ptr, count
+		and		ptr, cap
+		mov		param5, size
+		mov		param4, cap
+		mov		param3, ptr
+		mov		param2, iter
+		mov		param1, [this + ARRAY]
+		call	MoveFunc1					; MoveFunc1 (this.array, iter, iter cmd2 count, cap, size)
 end if
 ;---[Normal exit branch]-------------------
 .exit:	mov		result, [s_count]			; get "count" variable from the stack
@@ -760,29 +951,31 @@ end if
 ;---[Extend object capacity]---------------
 .ext:	mov		param2, count
 		call	Extend						; status = this.Extend (size)
+		mov		this, [s_this]				; get "this" variable from the stack
+		mov		tpos, [s_tpos]				; get "tpos" variable from the stack
 		test	status, status				; if (status)
 		jnz		.back						;     then go back
 ;---[Error branch]-------------------------
 .error:	mov		result, ERROR				; return ERROR
 		add		stack, space				; restoring back the stack pointer
 		ret
+if move
 ;---[Clear the deque if empty]-------------
-.empty:	sub		cap, KSIZE - 1
-		mov		qword [source + HEAD], 0	; source.head = 0
-		mov		qword [source + TAIL], cap	; source.tail = cap - KSIZE
-		mov		result, [s_count]			; get "count" variable from the stack
-		shr		result, KSCALE				; return count
+.empty:	mov		qword [source+HEAD], 0		; source.head = 0
+		mov		qword [source+TAIL], -KSIZE	; source.tail = -1
+		shr		result, KSCALE				; return result
 		add		stack, space				; restoring back the stack pointer
 		ret
+end if
 }
-CopyHead:	COPY_MOVE	sub, add, MoveFwd, MoveBwd, CopyFwd, HEAD, TAIL, 0
-CopyTail:	COPY_MOVE	add, sub, MoveBwd, MoveFwd, CopyBwd, TAIL, HEAD, 0
+CopyHead:	COPY_MOVE	sub, add, MoveElemenstFwd, MoveElemenstBwd, CopyElementsFwd, HEAD, TAIL, 0
+CopyTail:	COPY_MOVE	add, sub, MoveElemenstBwd, MoveElemenstFwd, CopyElementsBwd, TAIL, HEAD, 0
 
 ;******************************************************************************;
 ;       Moving elements                                                        ;
 ;******************************************************************************;
-MoveHead:	COPY_MOVE	sub, add, MoveFwd, MoveBwd, CopyFwd, HEAD, TAIL, 1
-MoveTail:	COPY_MOVE	add, sub, MoveBwd, MoveFwd, CopyBwd, TAIL, HEAD, 1
+MoveHead:	COPY_MOVE	sub, add, MoveElemenstFwd, MoveElemenstBwd, CopyElementsFwd, HEAD, TAIL, 1
+MoveTail:	COPY_MOVE	add, sub, MoveElemenstBwd, MoveElemenstFwd, CopyElementsBwd, TAIL, HEAD, 1
 
 ;******************************************************************************;
 ;       Addition of element                                                    ;
@@ -794,53 +987,78 @@ this	equ		rdi							; pointer to deque object
 data	equ		rsi							; pointer to data structure
 ;---[Internal variables]-------------------
 status	equ		al							; operation status
-array	equ		rdx							; pointer to array of nodes
-iter	equ		rcx							; iterator value
-cap		equ		rax							; object capacity
-temp	equ		xmm0						; temporary register
+array	equ		rcx							; pointer to array of nodes
+size	equ		r8							; object size
+func	equ		r9							; pointer to function
+iter	equ		r10							; iterator value
+cap		equ		r11							; object capacity
+value	equ		xmm0						; temporary register
 stack	equ		rsp							; stack pointer
 s_this	equ		stack + 0 * 8				; stack position of "this" variable
 s_data	equ		stack + 1 * 8				; stack position of "data" variable
-space	= 3 * 8								; stack size required by the procedure
+s_value	equ		stack + 2 * 8				; stack position of "value" variable
+s_size	equ		stack + 4 * 8				; stack position of "size" variable
+space	= 5 * 8								; stack size required by the procedure
+;------------------------------------------
+		sub		stack, space				; reserving stack size for local vars
 ;---[Check access mode]--------------------
 		cmp		dword [this + FUTEX], 0		; if read only code section called this
 		jg		.error						; function, then go to error branch
 ;---[Check capacity]-----------------------
-		mov		array, [this + ARRAY]		; get pointer to array of nodes
-		mov		cap, [this + CAPACITY]		; get object capacity
-		cmp		[this + SIZE], cap			; if (size == cap)
-		je		.ext						;     then try to extend object capacity
-;---[Normal execution branch]--------------
-.back:	sub		cap, 1						; cap -= 1
-		mov		iter, [this + offst]		; get iterator value
-		cmd		iter, KSIZE					; change iterator value
-		and		iter, cap					; iter &= cap
-		movdqu	temp, [data]
-		movdqa	[array + iter], temp		; array[iter] = data[0]
-		add		qword [this + SIZE], KSIZE	; size++
-		mov		[this + offst], iter		; update iterator value
-		mov		status, 1					; return true
-		ret
-;---[Extend object capacity]---------------
-.ext:	sub		stack, space				; reserving stack size for local vars
+		mov		size, [this + SIZE]			; get object size
+		movdqu	value, [data]				; value = data[0]
 		mov		[s_this], this				; save "this" variable into the stack
 		mov		[s_data], data				; save "data" variable into the stack
-		mov		param2, cap
+		mov		[s_size], size				; save "size" variable into the stack
+		movdqa	[s_value], value			; save "value" variable into the stack
+		cmp		size, [this + CAPACITY]		; if (size == cap)
+		je		.ext						;     then try to extend object capacity
+;---[Call copy function if set]------------
+.back1:	mov		func, [this + CFUNC]		; get pointer to copy function
+		test	func, func					; if (func != NULL)
+		jnz		.copy						;     then call copy function
+;---[Push new element]---------------------
+.back2:	mov		array, [this + ARRAY]		; get pointer to array of nodes
+		mov		cap, [this + CAPACITY]		; get object capacity
+		mov		iter, [this + offst]		; get iterator value
+		sub		cap, 1						; cap -= 1
+		cmd		iter, KSIZE					; change iterator value
+		and		iter, cap					; iter &= cap
+		add		array, iter					; array += iter
+		add		size, KSIZE					; size++
+		mov		[this + SIZE], size			; update object size
+		mov		[this + offst], iter		; update iterator value
+		movdqa	value, [s_value]			; get "value" variable from the stack
+		movdqa	[array], value				; array[0] = value
+		mov		status, 1					; return true
+		add		stack, space				; restoring back the stack pointer
+		ret
+;---[Extend object capacity]---------------
+.ext:	mov		param2, [this + CAPACITY]
 		shl		param2, 1
 		call	Extend						; status = this.Extend (cap * 2)
 		mov		this, [s_this]				; get "this" variable from the stack
-		mov		data, [s_data]				; get "data" variable from the stack
-		mov		array, [this + ARRAY]		; get pointer to array of nodes
-		mov		cap, [this + CAPACITY]		; get object capacity
-		add		stack, space				; restoring back the stack pointer
+		mov		size, [s_size]				; get "size" variable from the stack
 		test	status, status				; if (status)
-		jnz		.back						;     then go back
+		jnz		.back1						;     then go back
+		add		stack, space				; restoring back the stack pointer
+		ret
+;---[Copy element branch]------------------
+.copy:	mov		param3, [this + DPTR]
+		mov		param2, [s_data]
+		lea		param1, [s_value]
+		call	func						; call func (&value, data, this.ptr)
+		mov		this, [s_this]				; get "this" variable from the stack
+		mov		size, [s_size]				; get "size" variable from the stack
+		test	status, status				; if (status)
+		jnz		.back2						;     then go back
 ;---[Error branch]-------------------------
 .error:	xor		status, status				; return false
+		add		stack, space				; restoring back the stack pointer
 		ret
 }
-PushIntoHead:	PUSH_DATA	sub, HEAD
-PushIntoTail:	PUSH_DATA	add, TAIL
+PushHead:	PUSH_DATA	sub, HEAD
+PushTail:	PUSH_DATA	add, TAIL
 
 ;******************************************************************************;
 ;       Removal of element                                                     ;
@@ -849,45 +1067,65 @@ macro	POP_DATA	cmd, offst
 {
 ;---[Parameters]---------------------------
 this	equ		rdi							; pointer to deque object
-data	equ		rsi							; pointer to data structure
 ;---[Internal variables]-------------------
 status	equ		al							; operation status
-array	equ		rdx							; pointer to array of nodes
-iter	equ		rcx							; iterator value
-cap		equ		rax							; object capacity
-temp	equ		xmm0						; temporary register
+array	equ		rcx							; pointer to array of nodes
+size	equ		r8							; object size
+func	equ		r9							; pointer to function
+iter	equ		r10							; iterator value
+cap		equ		r11							; object capacity
+stack	equ		rsp							; stack pointer
+s_this	equ		stack + 0 * 8				; stack position of "this" variable
+space	= 1 * 8								; stack size required by the procedure
+;------------------------------------------
+		sub		stack, space				; reserving stack size for local vars
 ;---[Check access mode]--------------------
 		cmp		dword [this + FUTEX], 0		; if read only code section called this
 		jg		.error						; function, then go to error branch
 ;---[Check size]---------------------------
-		cmp		qword [this + SIZE], 0		; if (size == 0)
-		jz		.error						;     then go to error branch
-;---[Normal execution branch]--------------
 		mov		array, [this + ARRAY]		; get pointer to array of nodes
 		mov		cap, [this + CAPACITY]		; get object capacity
+		mov		size, [this + SIZE]			; get object size
 		mov		iter, [this + offst]		; get iterator value
+		sub		size, KSIZE					; if (size < KSIZE)
+		jb		.error						;     then go to error branch
+;---[Normal execution branch]--------------
+		add		array, iter					; array += iter
 		sub		cap, 1						; cap -= 1
-		movdqa	temp, [array + iter]
-		movdqu	[data], temp				; data[0] = array[iter]
-		sub		qword [this + SIZE], KSIZE	; if (size == 0)
-		jz		.empty						;     then set empty values
 		cmd		iter, KSIZE					; change iterator value
 		and		iter, cap					; iter &= cap
+		mov		[s_this], this				; save "this" variable into the stack
+		mov		[this + SIZE], size			; update object size
 		mov		[this + offst], iter		; update iterator value
+;---[Call delete function if set]----------
+		mov		func, [this + DFUNC]		; get pointer to delete function
+		test	func, func					; if (func != NULL)
+		jnz		.del						;     then call delete function
+;---[Pop existing element]-----------------
+.back:	cmp		qword [this + SIZE], 0		; if (size == 0)
+		jz		.empty						;     then go to empty branch
 		mov		status, 1					; return true
+		add		stack, space				; restoring back the stack pointer
 		ret
 ;---[Clear the deque if empty]-------------
-.empty:	sub		cap, KSIZE - 1
-		mov		qword [this + HEAD], 0		; this.head = 0
-		mov		qword [this + TAIL], cap	; this.tail = cap - KSIZE
+.empty:	mov		qword [this + HEAD], 0		; this.head = 0
+		mov		qword [this + TAIL], -KSIZE	; this.tail = -1
 		mov		status, 1					; return true
+		add		stack, space				; restoring back the stack pointer
 		ret
 ;---[Error branch]-------------------------
 .error:	xor		status, status				; return false
+		add		stack, space				; restoring back the stack pointer
 		ret
+;---[Delete element branch]----------------
+.del:	mov		param2, [this + DPTR]
+		lea		param1, [array]
+		call	func						; call func (array, this.ptr)
+		mov		this, [s_this]				; get "this" variable from the stack
+		jmp		.back						; go back
 }
-PopFromHead:	POP_DATA	add, HEAD
-PopFromTail:	POP_DATA	sub, TAIL
+PopHead:	POP_DATA	add, HEAD
+PopTail:	POP_DATA	sub, TAIL
 
 ;******************************************************************************;
 ;       Insertion of element                                                   ;
@@ -900,117 +1138,130 @@ data	equ		rsi							; pointer to data structure
 pos		equ		rdx							; position where to insert element
 ;---[Internal variables]-------------------
 status	equ		al							; operation status
-iter	equ		r9							; iterator value
-cap		equ		r10							; object capacity
-size	equ		r11							; object size
-temp	equ		xmm0						; temporary register
+array	equ		rcx							; pointer to array of nodes
+size	equ		r8							; object size
+func	equ		r9							; pointer to function
+iter	equ		r10							; iterator value
+cap		equ		r11							; object capacity
+value	equ		xmm0						; temporary register
 stack	equ		rsp							; stack pointer
 s_this	equ		stack + 0 * 8				; stack position of "this" variable
 s_data	equ		stack + 1 * 8				; stack position of "data" variable
 s_pos	equ		stack + 2 * 8				; stack position of "pos" variable
-s_iter	equ		stack + 3 * 8				; stack position of "iter" variable
-space	= 5 * 8								; stack size required by the procedure
+s_array	equ		stack + 3 * 8				; stack position of "array" variable
+s_cap	equ		stack + 4 * 8				; stack position of "cap" variable
+s_size	equ		stack + 5 * 8				; stack position of "size" variable
+s_value	equ		stack + 6 * 8				; stack position of "value" variable
+s_iter	equ		stack + 8 * 8				; stack position of "iter" variable
+space	= 9 * 8								; stack size required by the procedure
 ;------------------------------------------
 		sub		stack, space				; reserving stack size for local vars
+		shl		pos, KSCALE					; pos *= KSIZE
 ;---[Check access mode]--------------------
 		cmp		dword [this + FUTEX], 0		; if read only code section called this
 		jg		.error						; function, then go to error branch
 ;---[Check capacity]-----------------------
-		shl		pos, KSCALE
-		mov		cap, [this + CAPACITY]		; get object capacity
 		mov		size, [this + SIZE]			; get object size
+		movdqu	value, [data]				; value = data[0]
 		mov		[s_this], this				; save "this" variable into the stack
 		mov		[s_data], data				; save "data" variable into the stack
 		mov		[s_pos], pos				; save "pos" variable into the stack
-		cmp		size, cap					; if (size == cap)
+		mov		[s_size], size				; save "size" variable into the stack
+		movdqa	[s_value], value			; save "value" variable into the stack
+		cmp		size, [this + CAPACITY]		; if (size == cap)
 		je		.ext						;     then try to extend object capacity
 ;---[Check position]-----------------------
-.back:	sub		size, pos					; if (size < pos)
+.back1:	mov		array, [this + ARRAY]		; get pointer to array of nodes
+		mov		cap, [this + CAPACITY]		; get object capacity
+		mov		iter, [this + offst1]		; get iterator value
+		sub		size, pos					; if (size < pos)
 		jb		.error						;     then go to error branch
 ;---[Normal execution branch]--------------
-		sub		cap, 1						; cap--
+		mov		func, array					; func = array
+		sub		cap, 1						; cap -= 1
+		cmd1	iter, pos					; change iterator value
+		and		iter, cap					; iter &= cap
+		add		array, iter					; array += iter
+		cmd2	iter, KSIZE					; change iterator value
+		and		iter, cap					; iter &= cap
+		add		iter, func					; iter += func
+		mov		[s_array], array			; save "array" variable into the stac
+		mov		[s_cap], cap				; save "cap" variable into the stac
+		mov		[s_size], size				; save "size" variable into the stack
+		mov		[s_iter], iter				; save "iter" variable into the stack
+;---[Call copy function if set]------------
+		mov		func, [this + CFUNC]		; get pointer to copy function
+		test	func, func					; if (func != NULL)
+		jnz		.copy						;     then call copy function
+;---[Move deque elements]------------------
+.back2:	add		qword [this + SIZE], KSIZE	; update object size
 		cmp		size, pos					; if (size < pos)
 		jb		.else						;     then go to else branch
 ;---[if size >= pos]-----------------------
 		mov		iter, [this + offst1]		; get iterator value
-		cmd1	iter, KSIZE
-		and		iter, cap					; iter = (iter cmd1 KSIZE) & cap
-		mov		[this + offst1], iter		; update iterator value
-		cmd2	iter, pos
-		and		iter, cap					; (iter cmd2 pos) & cap
-		add		iter, [this + ARRAY]		; iter += array
-		mov		[s_iter], iter				; save "iter" variable into the stack
-		test	pos, pos					; if (pos != 0)
-		jnz		.move1						;     then move elements
-.back1:	movdqu	temp, [data]
-		movdqa	[iter], temp				; iter[0] = data[0]
-		add		qword [this + SIZE], KSIZE	; this.size++
-		mov		status, 1					; return true
-		add		stack, space				; restoring back the stack pointer
-		ret
-;---[else]---------------------------------
-.else:	mov		iter, [this + offst2]		; get iterator value
 		cmd2	iter, KSIZE
 		and		iter, cap					; iter = (iter cmd2 KSIZE) & cap
-		mov		[this + offst2], iter		; update iterator value
-		cmd1	iter, size
-		and		iter, cap					; (iter cmd1 size) & cap
-		add		iter, [this + ARRAY]		; iter += array
-		mov		[s_iter], iter				; save "iter" variable into the stack
-		test	size, size					; if (size != 0)
-		jnz		.move2						;     then move elements
-.back2:	movdqu	temp, [data]
-		movdqa	[iter], temp				; iter[0] = data[0]
-		add		qword [this + SIZE], KSIZE	; this.size++
-		mov		status, 1					; return true
-		add		stack, space				; restoring back the stack pointer
-		ret
-;---[Extend object capacity]---------------
-.ext:	mov		param2, cap
-		shl		param2, 1
-		call	Extend						; status = this.Extend (cap * 2)
-		mov		this, [s_this]				; get "this" variable from the stack
-		mov		data, [s_data]				; get "data" variable from the stack
-		mov		pos, [s_pos]				; get "pos" variable from the stack
-		mov		cap, [this + CAPACITY]		; get object capacity
-		mov		size, [this + SIZE]			; get object size
-		test	status, status				; if (status)
-		jnz		.back						;     then go back
-;---[Error branch]-------------------------
-.error:	xor		status, status				; return false
-		add		stack, space				; restoring back the stack pointer
-		ret
-;---[Move elements branch #1]--------------
-.move1:	mov		iter, [this + offst1]		; get iterator value
+		mov		[this + offst1], iter		; update iterator value
 		mov		param5, pos
-		mov		param4, cap
-		mov		param3, iter
-		cmd2	param3, KSIZE
-		and		param3, cap
-		mov		param2, iter
-		mov		param1, [this + ARRAY]
-		call	MoveFunc1					; call MoveFunc1 (array, iter, iter cmd2 KSIZE, cap, pos)
-		mov		this, [s_this]				; get "this" variable from the stack
-		mov		data, [s_data]				; get "data" variable from the stack
-		mov		iter, [s_iter]				; get "iter" variable from the stack
-		jmp		.back1						; go back
-;---[Move elements branch #2]--------------
-.move2:	mov		iter, [this + offst2]		; get iterator value
-		mov		param5, size
 		mov		param4, cap
 		mov		param3, iter
 		cmd1	param3, KSIZE
 		and		param3, cap
 		mov		param2, iter
 		mov		param1, [this + ARRAY]
-		call	MoveFunc2					; call MoveFunc2 (array, iter, iter cmd1 KSIZE, cap, size)
+		call	MoveFunc1					; call MoveFunc1 (array, iter, iter cmd1 KSIZE, cap, pos)
+		mov		array, [s_iter]				; get "array" variable from the stack
+		movdqa	value, [s_value]			; get "value" variable from the stack
+		movdqa	[array], value				; array[0] = value
+		mov		status, 1					; return true
+		add		stack, space				; restoring back the stack pointer
+		ret
+;---[else]---------------------------------
+.else:	mov		iter, [this + offst2]		; get iterator value
+		cmd1	iter, KSIZE
+		and		iter, cap					; iter = (iter cmd1 KSIZE) & cap
+		mov		[this + offst2], iter		; update iterator value
+		mov		param5, size
+		mov		param4, cap
+		mov		param3, iter
+		cmd2	param3, KSIZE
+		and		param3, cap
+		mov		param2, iter
+		mov		param1, [this + ARRAY]
+		call	MoveFunc2					; call MoveFunc2 (array, iter, iter cmd2 KSIZE, cap, size)
+		mov		array, [s_array]			; get "array" variable from the stack
+		movdqa	value, [s_value]			; get "value" variable from the stack
+		movdqa	[array], value				; array[0] = value
+		mov		status, 1					; return true
+		add		stack, space				; restoring back the stack pointer
+		ret
+;---[Extend object capacity]---------------
+.ext:	mov		param2, [this + CAPACITY]
+		shl		param2, 1
+		call	Extend						; status = this.Extend (cap * 2)
 		mov		this, [s_this]				; get "this" variable from the stack
-		mov		data, [s_data]				; get "data" variable from the stack
-		mov		iter, [s_iter]				; get "iter" variable from the stack
-		jmp		.back2						; go back
+		mov		pos, [s_pos]				; get "pos" variable from the stack
+		mov		size, [s_size]				; get "size" variable from the stack
+		test	status, status				; if (status)
+		jnz		.back1						;     then go back
+;---[Copy element branch]------------------
+.copy:	mov		param3, [this + DPTR]
+		mov		param2, [s_data]
+		lea		param1, [s_value]
+		call	func						; call func (&value, data, this.ptr)
+		mov		this, [s_this]				; get "this" variable from the stack
+		mov		pos, [s_pos]				; get "pos" variable from the stack
+		mov		cap, [s_cap]				; get "cap" variable from the stack
+		mov		size, [s_size]				; get "size" variable from the stack
+		test	status, status				; if (status)
+		jnz		.back2						;     then go back
+;---[Error branch]-------------------------
+.error:	xor		status, status				; return false
+		add		stack, space				; restoring back the stack pointer
+		ret
 }
-InsertHead:	INSERT	sub, add, MoveFwd, MoveBwd, HEAD, TAIL
-InsertTail:	INSERT	add, sub, MoveBwd, MoveFwd, TAIL, HEAD
+InsertHead:		INSERT	add, sub, MoveElemenstFwd, MoveElemenstBwd, HEAD, TAIL
+InsertTail:		INSERT	sub, add, MoveElemenstBwd, MoveElemenstFwd, TAIL, HEAD
 
 ;******************************************************************************;
 ;       Extraction of element                                                  ;
@@ -1019,90 +1270,110 @@ macro	EXTRACT	cmd1, cmd2, MoveFunc1, MoveFunc2, offst1, offst2
 {
 ;---[Parameters]---------------------------
 this	equ		rdi							; pointer to deque object
-data	equ		rsi							; pointer to data structure
-pos		equ		rdx							; position of element to extract
+pos		equ		rsi							; position of element to extract
 ;---[Internal variables]-------------------
 status	equ		al							; operation status
-iter	equ		r9							; iterator value
-cap		equ		r10							; object capacity
-size	equ		r11							; object size
-ptr		equ		rax							; temporary pointer
-temp	equ		xmm0						; temporary register
+array	equ		rcx							; pointer to array of nodes
+size	equ		r8							; object size
+func	equ		r9							; pointer to function
+iter	equ		r10							; iterator value
+cap		equ		r11							; object capacity
+stack	equ		rsp							; stack pointer
+s_this	equ		stack + 0 * 8				; stack position of "this" variable
+s_pos	equ		stack + 1 * 8				; stack position of "pos" variable
+s_cap	equ		stack + 2 * 8				; stack position of "cap" variable
+s_size	equ		stack + 3 * 8				; stack position of "size" variable
+s_iter	equ		stack + 4 * 8				; stack position of "iter" variable
+space	= 5 * 8								; stack size required by the procedure
+;------------------------------------------
+		sub		stack, space				; reserving stack size for local vars
+		shl		pos, KSCALE					; pos *= KSIZE
 ;---[Check access mode]--------------------
 		cmp		dword [this + FUTEX], 0		; if read only code section called this
 		jg		.error						; function, then go to error branch
 ;---[Check position]-----------------------
-		shl		pos, KSCALE
+		mov		array, [this + ARRAY]		; get pointer to array of nodes
 		mov		cap, [this + CAPACITY]		; get object capacity
 		mov		size, [this + SIZE]			; get object size
+		mov		iter, [this + offst1]		; get iterator value
 		sub		size, KSIZE					; size--
 		sub		size, pos					; if (size < pos)
 		jl		.error						;     then go to error branch
 ;---[Normal execution branch]--------------
 		sub		cap, 1						; cap -= 1
-		mov		iter, [this + offst1]		; get iterator value
-		cmd1	iter, pos
-		and		iter, cap					; iter = (iter cmd1 pos) & cap
-		mov		ptr, iter					; ptr = iter
-		add		iter, [this + ARRAY]		; iter += array
-		movdqa	temp, [iter]
-		movdqu	[data], temp				; data[0] = iter[0]
-		sub		qword [this + SIZE], KSIZE	; this.size--
-		jz		.empty						; if (this.size == 0), then go to empty branch
+		cmd1	iter, pos					; change iterator value
+		and		iter, cap					; iter &= cap
+		add		array, iter					; array += iter
+		mov		[s_this], this				; save "this" variable into the stack
+		mov		[s_pos], pos				; save "pos" variable into the stack
+		mov		[s_cap], cap				; save "cap" variable into the stac
+		mov		[s_size], size				; save "size" variable into the stack
+		mov		[s_iter], iter				; save "iter" variable into the stack
+		sub		qword [this + SIZE], KSIZE	; update object size
+;---[Call delete function if set]----------
+		mov		func, [this + DFUNC]		; get pointer to delete function
+		test	func, func					; if (func != NULL)
+		jnz		.del						;     then call delete function
+;---[Move deque elements]------------------
+.back:	cmp		qword [this + SIZE], 0		; if (size == 0)
+		jz		.empty						;     then go to empty branch
 		cmp		size, pos					; if (size < pos)
 		jb		.else						;     then go to else branch
 ;---[if size >= pos]-----------------------
-		mov		iter, [this + offst1]		; get iterator value
-		cmd1	iter, KSIZE
-		and		iter, cap					; iter = (iter cmd1 KSIZE) & cap
-		mov		[this + offst1], iter		; update iterator value
-		test	pos, pos					; if (pos != 0)
-		jnz		.move1						;     then move elements
+		mov		func, [this + offst1]		; get iterator value
+		cmd1	func, KSIZE
+		and		func, cap					; func = (func cmd1 KSIZE) & cap
+		mov		[this + offst1], func		; update iterator value
+		mov		param5, pos
+		mov		param4, cap
+		mov		param3, iter
+		cmd2	param3, KSIZE
+		and		param3, cap
+		mov		param2, iter
+		mov		param1, [this + ARRAY]
+		call	MoveFunc1					; call MoveFunc1 (array, iter, iter cmd2 KSIZE, cap, pos)
 		mov		status, 1					; return true
+		add		stack, space				; restoring back the stack pointer
 		ret
 ;---[else]---------------------------------
-.else:	mov		iter, [this + offst2]		; get iterator value
-		cmd2	iter, KSIZE
-		and		iter, cap					; iter = (iter cmd2 KSIZE) & cap
-		mov		[this + offst2], iter		; update iterator value
-		test	size, size					; if (size != 0)
-		jnz		.move2						;     then move elements
+.else:	mov		func, [this + offst2]		; get iterator value
+		cmd2	func, KSIZE
+		and		func, cap					; func = (func cmd2 KSIZE) & cap
+		mov		[this + offst2], func		; update iterator value
+		mov		param5, size
+		mov		param4, cap
+		mov		param3, iter
+		cmd1	param3, KSIZE
+		and		param3, cap
+		mov		param2, iter
+		mov		param1, [this + ARRAY]
+		call	MoveFunc2					; call MoveFunc2 (array, iter, iter cmd1 KSIZE, cap, size)
 		mov		status, 1					; return true
+		add		stack, space				; restoring back the stack pointer
 		ret
 ;---[Clear the deque if empty]-------------
-.empty:	sub		cap, KSIZE - 1
-		mov		qword [this + HEAD], 0		; this.head = 0
-		mov		qword [this + TAIL], cap	; this.tail = cap - KSIZE
+.empty:	mov		qword [this + HEAD], 0		; this.head = 0
+		mov		qword [this + TAIL], -KSIZE	; this.tail = -1
 		mov		status, 1					; return true
+		add		stack, space				; restoring back the stack pointer
 		ret
 ;---[Error branch]-------------------------
 .error:	xor		status, status				; return false
+		add		stack, space				; restoring back the stack pointer
 		ret
-;---[Move elements branch #1]--------------
-.move1:	mov		param5, pos
-		mov		param4, cap
-		mov		param3, ptr
-		cmd2	param3, KSIZE
-		and		param3, cap
-		mov		param2, ptr
-		mov		param1, [this + ARRAY]
-		call	MoveFunc1					; call MoveFunc1 (array, ptr, ptr cmd2 KSIZE, cap, pos)
-		mov		status, 1					; return true
-		ret
-;---[Move elements branch #2]--------------
-.move2:	mov		param5, size
-		mov		param4, cap
-		mov		param3, ptr
-		cmd1	param3, KSIZE
-		and		param3, cap
-		mov		param2, ptr
-		mov		param1, [this + ARRAY]
-		call	MoveFunc2					; call MoveFunc2 (array, ptr, ptr cmd1 KSIZE, cap, size)
-		mov		status, 1					; return true
-		ret
+;---[Delete element branch]----------------
+.del:	mov		param2, [this + DPTR]
+		mov		param1, array
+		call	func						; call func (array, this.ptr)
+		mov		this, [s_this]				; get "this" variable from the stack
+		mov		pos, [s_pos]				; get "pos" variable from the stack
+		mov		cap, [s_cap]				; get "cap" variable from the stack
+		mov		size, [s_size]				; get "size" variable from the stack
+		mov		iter, [s_iter]				; get "iter" variable from the stack
+		jmp		.back						; go back
 }
-ExtractHead:	EXTRACT	add, sub, MoveBwd, MoveFwd, HEAD, TAIL
-ExtractTail:	EXTRACT	sub, add, MoveFwd, MoveBwd, TAIL, HEAD
+ExtractHead:	EXTRACT	add, sub, MoveElemenstBwd, MoveElemenstFwd, HEAD, TAIL
+ExtractTail:	EXTRACT	sub, add, MoveElemenstFwd, MoveElemenstBwd, TAIL, HEAD
 
 ;******************************************************************************;
 ;       Setting element value                                                  ;
@@ -1115,30 +1386,72 @@ data	equ		rsi							; pointer to data structure
 pos		equ		rdx							; position of element to set
 ;---[Internal variables]-------------------
 status	equ		al							; operation status
-iter	equ		rcx							; iterator value
-cap		equ		rax							; object capacity
-temp	equ		xmm0						; temporary register
+array	equ		rcx							; pointer to array of nodes
+size	equ		r8							; object size
+func	equ		r9							; pointer to function
+iter	equ		r10							; iterator value
+cap		equ		r11							; object capacity
+value	equ		xmm0						; temporary register
+stack	equ		rsp							; stack pointer
+s_this	equ		stack + 0 * 8				; stack position of "this" variable
+s_array	equ		stack + 1 * 8				; stack position of "array" variable
+s_value	equ		stack + 2 * 8				; stack position of "value" variable
+space	= 5 * 8								; stack size required by the procedure
+;------------------------------------------
+		sub		stack, space				; reserving stack size for local vars
+		shl		pos, KSCALE					; pos *= KSIZE
 ;---[Check access mode]--------------------
 		cmp		dword [this + FUTEX], 0		; if read only code section called this
 		jg		.error						; function, then go to error branch
 ;---[Check position]-----------------------
-		shl		pos, KSCALE
+		mov		array, [this + ARRAY]		; get pointer to array of nodes
 		mov		cap, [this + CAPACITY]		; get object capacity
-		cmp		[this + SIZE], pos			; if (size <= pos)
+		mov		size, [this + SIZE]			; get object size
+		mov		iter, [this + offst]		; get iterator value
+		cmp		size, pos					; if (size <= pos)
 		jbe		.error						;     then go to error branch
 ;---[Normal execution branch]--------------
-		mov		iter, [this + offst]		; get iterator value
 		sub		cap, 1						; cap -= 1
 		cmd		iter, pos					; change iterator value
 		and		iter, cap					; iter &= cap
-		add		iter, [this + ARRAY]		; iter += array
-		movdqu	temp, [data]
-		movdqa	[iter], temp				; array[iter] = data[0]
+		add		array, iter					; array += iter
+		movdqu	value, [data]				; value = data[0]
+		mov		[s_this], this				; save "this" variable into the stack
+		mov		[s_array], array			; save "array" variable into the stac
+		movdqa	[s_value], value			; save "value" variable into the stack
+;---[Call copy function if set]------------
+		mov		func, [this + CFUNC]		; get pointer to copy function
+		test	func, func					; if (func != NULL)
+		jnz		.copy						;     then call copy function
+;---[Call delete function if set]----------
+.back1:	mov		func, [this + DFUNC]		; get pointer to delete function
+		test	func, func					; if (func != NULL)
+		jnz		.del						;     then call delete function
+;---[Set new value]------------------------
+.back2:	movdqa	value, [s_value]			; get "value" variable from the stack
+		movdqa	[array], value				; array[0] = value
 		mov		status, 1					; return true
+		add		stack, space				; restoring back the stack pointer
 		ret
+;---[Copy element branch]------------------
+.copy:	mov		param3, [this + DPTR]
+		mov		param2, data
+		lea		param1, [s_value]
+		call	func						; call func (&value, data, this.ptr)
+		mov		this, [s_this]				; get "this" variable from the stack
+		mov		array, [s_array]			; get "array" variable from the stack
+		test	status, status				; if (status)
+		jnz		.back1						;     then go back
 ;---[Error branch]-------------------------
 .error:	xor		status, status				; return false
+		add		stack, space				; restoring back the stack pointer
 		ret
+;---[Delete element branch]----------------
+.del:	mov		param2, [this + DPTR]
+		mov		param1, array
+		call	func						; call func (array, this.ptr)
+		mov		array, [s_array]			; get "array" variable from the stack
+		jmp		.back2						; go back
 }
 SetHead:	SET_ELEMENT		add, HEAD
 SetTail:	SET_ELEMENT		sub, TAIL
@@ -1156,9 +1469,10 @@ pos		equ		rdx							; position of element to get
 status	equ		al							; operation status
 iter	equ		rcx							; iterator value
 cap		equ		rax							; object capacity
-temp	equ		xmm0						; temporary register
+value	equ		xmm0						; temporary register
+;------------------------------------------
+		shl		pos, KSCALE					; pos *= KSIZE
 ;---[Check position]-----------------------
-		shl		pos, KSCALE
 		mov		cap, [this + CAPACITY]		; get object capacity
 		cmp		[this + SIZE], pos			; if (size <= pos)
 		jbe		.error						;     then go to error branch
@@ -1168,8 +1482,8 @@ temp	equ		xmm0						; temporary register
 		cmd		iter, pos					; change iterator value
 		and		iter, cap					; iter &= cap
 		add		iter, [this + ARRAY]		; iter += array
-		movdqa	temp, [iter]
-		movdqu	[data], temp				; data[0] = array[uter]
+		movdqa	value, [iter]
+		movdqu	[data], value				; data[0] = array[uter]
 		mov		status, 1					; return true
 		ret
 ;---[Error branch]-------------------------
@@ -1178,48 +1492,6 @@ temp	equ		xmm0						; temporary register
 }
 GetHead:	GET_ELEMENT		add, HEAD
 GetTail:	GET_ELEMENT		sub, TAIL
-
-;******************************************************************************;
-;       Replacing element value                                                ;
-;******************************************************************************;
-macro	REPLACE_ELEMENT		cmd, offst
-{
-;---[Parameters]---------------------------
-this	equ		rdi							; pointer to deque object
-odata	equ		rsi							; pointer to old data structure
-ndata	equ		rdx							; pointer to new data structure
-pos		equ		rcx							; position of element to replace
-;---[Internal variables]-------------------
-status	equ		al							; operation status
-iter	equ		r8							; iterator value
-cap		equ		rax							; object capacity
-temp	equ		xmm0						; temporary register
-;---[Check access mode]--------------------
-		cmp		dword [this + FUTEX], 0		; if read only code section called this
-		jg		.error						; function, then go to error branch
-;---[Check position]-----------------------
-		shl		pos, KSCALE
-		mov		cap, [this + CAPACITY]		; get object capacity
-		cmp		[this + SIZE], pos			; if (size <= pos)
-		jbe		.error						;     then go to error branch
-;---[Normal execution branch]--------------
-		mov		iter, [this + offst]		; get iterator value
-		sub		cap, 1						; cap -= 1
-		cmd		iter, pos					; change iterator value
-		and		iter, cap					; iter &= cap
-		add		iter, [this + ARRAY]		; iter += array
-		movdqa	temp, [iter]
-		movdqu	[odata], temp				; odata[0] = array[uter]
-		movdqu	temp, [ndata]
-		movdqa	[iter], temp				; array[iter] = ndata[0]
-		mov		status, 1					; return true
-		ret
-;---[Error branch]-------------------------
-.error:	xor		status, status				; return false
-		ret
-}
-ReplaceHead:	REPLACE_ELEMENT		add, HEAD
-ReplaceTail:	REPLACE_ELEMENT		sub, TAIL
 
 ;******************************************************************************;
 ;       Changing elements order                                                ;
@@ -1241,20 +1513,21 @@ iter1	equ		r9							; first iterator value
 iter2	equ		r10							; second iterator value
 cap		equ		rcx							; object capacity
 size	equ		result						; object size
-temp1	equ		xmm0						; temporary register #1
-temp2	equ		xmm1						; temporary register #2
+value1	equ		xmm0						; temporary register #1
+value2	equ		xmm1						; temporary register #2
+;------------------------------------------
+		shl		pos, KSCALE					; pos *= KSIZE
+		shl		count, KSCALE				; count *= KSIZE
 ;---[Check access mode]--------------------
 		cmp		dword [this + FUTEX], 0		; if read only code section called this
 		jg		.error						; function, then go to error branch
 ;---[Check position]-----------------------
-		shl		pos, KSCALE
 		mov		array, [this + ARRAY]		; get pointer to array of nodes
 		mov		cap, [this + CAPACITY]		; get object capacity
 		mov		size, [this + SIZE]			; get object size
 		sub		size, pos					; if (size <= pos)
 		jbe		.error						;     then go to error branch
 ;---[Correct count]------------------------
-		shl		count, KSCALE
 		cmp		count, size					; if (count > size)
 		cmova	count, size					;     count = size
 		mov		result, count				; result = count
@@ -1272,10 +1545,10 @@ temp2	equ		xmm1						; temporary register #2
 ;---[Order reversing loop]-----------------
 .loop:	dir2	iter2, KSIZE				; change second iterator value
 		and		iter2, cap					; iter2 &= cap
-		movdqa	temp1, [array + iter1]		; temp1 = array[iter1]
-		movdqa	temp2, [array + iter2]		; temp2 = array[iter2]
-		movdqa	[array + iter1], temp2		; array[iter1] = temp2
-		movdqa	[array + iter2], temp1		; array[iter2] = temp1
+		movdqa	value1, [array + iter1]		; value1 = array[iter1]
+		movdqa	value2, [array + iter2]		; value2 = array[iter2]
+		movdqa	[array + iter1], value2		; array[iter1] = value2
+		movdqa	[array + iter2], value1		; array[iter2] = value1
 		dir1	iter1, KSIZE				; change first iterator value
 		and		iter1, cap					; iter1 &= cap
 		sub		count, 1					; count--
@@ -1306,13 +1579,14 @@ iter1	equ		r9							; first iterator value
 iter2	equ		r10							; second iterator value
 cap		equ		rcx							; object capacity
 size	equ		result						; object size
-temp1	equ		xmm0						; temporary register #1
-temp2	equ		xmm1						; temporary register #2
+value1	equ		xmm0						; temporary register #1
+value2	equ		xmm1						; temporary register #2
+;------------------------------------------
+		shl		pos1, KSCALE				; pos1 *= KSIZE
+		shl		pos2, KSCALE				; pos2 *= KSIZE
 ;---[Check access mode]--------------------
 		cmp		dword [this + FUTEX], 0		; if read only code section called this
 		jg		.error						; function, then go to error branch
-		shl		pos1, KSCALE
-		shl		pos2, KSCALE
 		mov		array, [this + ARRAY]		; get pointer to array of nodes
 		mov		cap, [this + CAPACITY]		; get object capacity
 		mov		size, [this + SIZE]			; get object size
@@ -1332,10 +1606,10 @@ temp2	equ		xmm1						; temporary register #2
 		and		iter2, cap					; iter2 &= cap
 		add		iter1, array				; iter1 += array
 		add		iter2, array				; iter2 += array
-		movdqa	temp1, [iter1]				; temp1 = iter1[0]
-		movdqa	temp2, [iter2]				; temp2 = iter2[0]
-		movdqa	[iter1], temp2				; iter1[0] = temp2
-		movdqa	[iter2], temp1				; iter2[0] = temp1
+		movdqa	value1, [iter1]				; value1 = iter1[0]
+		movdqa	value2, [iter2]				; value2 = iter2[0]
+		movdqa	[iter1], value2				; iter1[0] = value2
+		movdqa	[iter2], value1				; iter2[0] = value1
 		mov		status, 1					; return true
 		ret
 ;---[Error branch]-------------------------
@@ -1355,18 +1629,18 @@ this	equ		rdi							; pointer to deque object
 data	equ		rsi							; pointer to data structure
 pos		equ		rdx							; beginning position
 count	equ		rcx							; count of nodes to check
-func	equ		r8							; compare function
+func	equ		r8							; key compare function
 ;---[Internal variables]-------------------
 result	equ		rax							; result register
 array	equ		r10							; pointer to array of nodes
 iter	equ		r11							; iterator value
 size	equ		result						; object size
 cap		equ		this						; object capacity
-value	equ		r12							; min or max max value
+mvalue	equ		r12							; min or max max value
 vptr	equ		r13							; position of min or max value
-temp	equ		xmm0						; temporary register
+value	equ		xmm0						; temporary register
 stack	equ		rsp							; stack pointer
-s_value	equ		stack + 0 * 8				; stack position of "value" variable
+s_value	equ		stack + 0 * 8				; stack position of "mvalue" variable
 s_vptr	equ		stack + 1 * 8				; stack position of "vptr" variable
 s_array	equ		stack + 2 * 8				; stack position of "array" variable
 s_base	equ		stack + 3 * 8				; stack position of "base" variable
@@ -1378,13 +1652,13 @@ s_func	equ		stack + 8 * 8				; stack position of "func" variable
 space	= 9 * 8								; stack size required by the procedure
 ;------------------------------------------
 		sub		stack, space				; reserving stack size for local vars
+		shl		pos, KSCALE					; pos *= KSIZE
+		shl		count, KSCALE				; count *= KSIZE
 ;---[Check position]-----------------------
-		shl		pos, KSCALE
 		mov		size, [this + SIZE]			; get object size
 		sub		size, pos					; if (size <= pos)
 		jbe		.ntfnd						;     return NOT_FOUND
 ;---[Correct count]------------------------
-		shl		count, KSCALE
 		cmp		count, size					; if (count > size)
 		cmova	count, size					;     count = size
 ;---[Check count]--------------------------
@@ -1398,7 +1672,7 @@ space	= 9 * 8								; stack size required by the procedure
 		sub		cap, 1						; cap -= 1
 		cmd		iter, pos					; change iterator value
 		and		iter, cap					; iter &= cap
-		mov		[s_value], value			; save old value of "value" variable
+		mov		[s_value], mvalue			; save old value of "mvalue" variable
 		mov		[s_vptr], vptr				; save old value of "vptr" variable
 		mov		[s_array], array			; save "array" variable into the stack
 		mov		[s_iter], iter				; save "iter" variable into the stack
@@ -1406,18 +1680,18 @@ space	= 9 * 8								; stack size required by the procedure
 		mov		[s_data], data				; save "data" variable into the stack
 		mov		[s_count], count			; save "count" variable into the stack
 		mov		[s_func], func				; save "func" variable into the stack
-		mov		value, [array + iter]		; value = array[iter].key
+		mov		mvalue, [array + iter]		; mvalue = array[iter].key
 		mov		vptr, iter					; vptr = iter
 		jmp		.skip
 ;---[Search loop]--------------------------
 .loop:	mov		param2, [array + iter]
-		mov		param1, value
-		call	qword [s_func]				; result = Compare (value, array[iter].key)
+		mov		param1, mvalue
+		call	qword [s_func]				; result = Compare (mvalue, array[iter].key)
 		mov		array, [s_array]			; get "array" variable from the stack
 		mov		iter, [s_iter]				; get "iter" variable from the stack
 		mov		cap, [s_cap]				; get "cap" variable from the stack
 		cmp		result, 0					; if (result cond 0)
-		cmov#c	value, [array + iter]		;     value = array[iter].key
+		cmov#c	mvalue, [array + iter]		;     mvalue = array[iter].key
 		cmov#c	vptr, iter					;     vptr = iter
 .skip:	cmd		iter, KSIZE					; change iterator value
 		and		iter, cap					; iter &= cap
@@ -1426,15 +1700,15 @@ space	= 9 * 8								; stack size required by the procedure
 		jnz		.loop						; do while (count != 0)
 ;---[Normal exit branch]-------------------
 		mov		data, [s_data]				; get "data" variable from the stack
-		movdqa	temp, [array + vptr]
-		movdqu	[data], temp				; data[0] = array[vptr]
+		movdqa	value, [array + vptr]
+		movdqu	[data], value				; data[0] = array[vptr]
 		sub		vptr, [s_base]				; vptr = vptr - base
 if bwd
 		neg		vptr						; vptr = base - vptr
 end if
 		and		vptr, cap					; vptr &= cap
 		mov		result, vptr				; result = vptr
-		mov		value, [s_value]			; restore old value of "value" variable
+		mov		mvalue, [s_value]			; restore old value of "mvalue" variable
 		mov		vptr, [s_vptr]				; restore old value of "vptr" variable
 		shr		result, KSCALE				; return result
 		add		stack, space				; restoring back the stack pointer
@@ -1468,14 +1742,14 @@ data	equ		rsi							; pointer to data structure
 key		equ		rdx							; key to find
 pos		equ		rcx							; beginning position
 count	equ		r8							; count of nodes to check
-func	equ		r9							; compare function
+func	equ		r9							; key compare function
 ;---[Internal variables]-------------------
 result	equ		rax							; result register
 array	equ		r10							; pointer to array of nodes
 iter	equ		r11							; iterator value
 size	equ		result						; object size
 cap		equ		this						; object capacity
-temp	equ		xmm0						; temporary register
+value	equ		xmm0						; temporary register
 stack	equ		rsp							; stack pointer
 s_array	equ		stack + 0 * 8				; stack position of "array" variable
 s_base	equ		stack + 1 * 8				; stack position of "base" variable
@@ -1488,13 +1762,13 @@ s_func	equ		stack + 7 * 8				; stack position of "func" variable
 space	= 9 * 8								; stack size required by the procedure
 ;------------------------------------------
 		sub		stack, space				; reserving stack size for local vars
+		shl		pos, KSCALE					; pos *= KSIZE
+		shl		count, KSCALE				; count *= KSIZE
 ;---[Check position]-----------------------
-		shl		pos, KSCALE
 		mov		size, [this + SIZE]			; get object size
 		sub		size, pos					; if (size <= pos)
 		jbe		.ntfnd						;     return NOT_FOUND
 ;---[Correct count]------------------------
-		shl		count, KSCALE
 		cmp		count, size					; if (count > size)
 		cmova	count, size					;     count = size
 ;---[Check count]--------------------------
@@ -1535,8 +1809,8 @@ space	= 9 * 8								; stack size required by the procedure
 		ret
 ;---[Found branch]-------------------------
 .found:	mov		data, [s_data]				; get "data" variable from the stack
-		movdqa	temp, [array + iter]
-		movdqu	[data], temp				; data[0] = array[iter]
+		movdqa	value, [array + iter]
+		movdqu	[data], value				; data[0] = array[iter]
 		sub		iter, [s_base]				; iter = iter - base
 if bwd
 		neg		iter						; iter = base - iter
@@ -1569,7 +1843,7 @@ array	equ		r10							; pointer to array of nodes
 iter	equ		r11							; iterator value
 size	equ		result						; object size
 cap		equ		this						; object capacity
-temp	equ		xmm0						; temporary register
+value	equ		xmm0						; temporary register
 stack	equ		rsp							; stack pointer
 s_array	equ		stack + 0 * 8				; stack position of "array" variable
 s_base	equ		stack + 1 * 8				; stack position of "base" variable
@@ -1583,13 +1857,13 @@ s_func	equ		stack + 10 * 8				; stack position of "func" variable
 space	= 9 * 8								; stack size required by the procedure
 ;------------------------------------------
 		sub		stack, space				; reserving stack size for local vars
+		shl		pos, KSCALE					; pos *= KSIZE
+		shl		count, KSCALE				; count *= KSIZE
 ;---[Check position]-----------------------
-		shl		pos, KSCALE
 		mov		size, [this + SIZE]			; get object size
 		sub		size, pos					; if (size <= pos)
 		jbe		.ntfnd						;     return NOT_FOUND
 ;---[Correct count]------------------------
-		shl		count, KSCALE
 		cmp		count, size					; if (count > size)
 		cmova	count, size					;     count = size
 ;---[Check count]--------------------------
@@ -1636,8 +1910,8 @@ space	= 9 * 8								; stack size required by the procedure
 		ret
 ;---[Found branch]-------------------------
 .found:	mov		data, [s_data]				; get "data" variable from the stack
-		movdqa	temp, [array + iter]
-		movdqu	[data], temp				; data[0] = array[iter]
+		movdqa	value, [array + iter]
+		movdqu	[data], value				; data[0] = array[iter]
 		sub		iter, [s_base]				; iter = iter - base
 if bwd
 		neg		iter						; iter = base - iter
@@ -1664,7 +1938,7 @@ siter	equ		rcx							; source iterator
 tmask	equ		r8							; mask for target object iterator
 smask	equ		r9							; mask for source object iterator
 size	equ		r10							; count of elements to compare
-func	equ		r11							; compare function
+func	equ		r11							; key compare function
 ;---[Internal variables]-------------------
 result	equ		rax							; result register
 status	equ		rdx							; compare status
@@ -1731,7 +2005,6 @@ tpos	equ		rdx							; beginning position into target deque
 source	equ		rcx							; pointer to source deque object
 spos	equ		r8							; beginning position into source deque
 count	equ		r9							; count of nodes to check
-func	equ		XXXX						; compare function
 ;---[Internal variables]-------------------
 result	equ		rax							; result register
 array	equ		rax							; pointer to array of nodes
@@ -1740,7 +2013,7 @@ siter	equ		r11							; source iterator value
 size	equ		result						; object size
 cap		equ		data						; object capacity
 ptr		equ		this						; temporary pointer
-temp	equ		xmm0						; temporary register
+value	equ		xmm0						; temporary register
 stack	equ		rsp							; stack pointer
 s_data	equ		stack + 0 * 8				; stack position of "data" variable
 s_base	equ		stack + 1 * 8				; stack position of "base" variable
@@ -1752,9 +2025,10 @@ s_func	equ		stack + 8 * 8				; stack position of "func" variable
 space	= 7 * 8								; stack size required by the procedure
 ;------------------------------------------
 		sub		stack, space				; reserving stack size for local vars
-		shl		count, KSCALE
+		shl		tpos, KSCALE				; tpos *= KSIZE
+		shl		spos, KSCALE				; spos *= KSIZE
+		shl		count, KSCALE				; count *= KSIZE
 ;---[Check target position]----------------
-		shl		tpos, KSCALE
 		mov		size, [this + SIZE]			; get target object size
 		sub		size, tpos					; if (size <= tpos)
 		jbe		.ntfnd						;     return NOT_FOUND
@@ -1762,7 +2036,6 @@ space	= 7 * 8								; stack size required by the procedure
 		cmp		count, size					; if (count > size)
 		cmova	count, size					;     count = size
 ;---[Check source position]----------------
-		shl		spos, KSCALE
 		mov		size, [source + SIZE]		; get source object size
 		sub		size, spos					; if (size <= spos)
 		jbe		.ntfnd						;     return NOT_FOUND
@@ -1809,8 +2082,8 @@ space	= 7 * 8								; stack size required by the procedure
 ;---[Found branch]-------------------------
 .found:	mov		ptr, [s_tarr]				; get "array" variable from the stack
 		mov		data, [s_data]				; get "data" variable from the stack
-		movdqa	temp, [ptr + result]
-		movdqu	[data], temp				; data[0] = array[result]
+		movdqa	value, [ptr + result]
+		movdqu	[data], value				; data[0] = array[result]
 		sub		result, [s_base]			; result = result - base
 if bwd
 		neg		result						; result = base - result
@@ -1837,7 +2110,7 @@ this	equ		rdi							; pointer to deque object
 key		equ		rsi							; key to find
 pos		equ		rdx							; beginning position
 count	equ		rcx							; count of nodes to check
-func	equ		r8							; compare function
+func	equ		r8							; key compare function
 ;---[Internal variables]-------------------
 status	equ		al							; operation status
 result	equ		rax							; result register
@@ -1856,14 +2129,14 @@ s_total	equ		stack + 6 * 8				; stack position of "total" variable
 space	= 7 * 8								; stack size required by the procedure
 ;------------------------------------------
 		sub		stack, space				; reserving stack size for local vars
+		shl		pos, KSCALE					; pos *= KSIZE
+		shl		count, KSCALE				; count *= KSIZE
 		mov		qword [s_total], 0			; total = 0
 ;---[Check position]-----------------------
-		shl		pos, KSCALE
 		mov		size, [this + SIZE]			; get object size
 		sub		size, pos					; if (size <= pos)
 		jbe		.exit						;     then go to exit
 ;---[Correct count]------------------------
-		shl		count, KSCALE
 		cmp		count, size					; if (count > size)
 		cmova	count, size					;     count = size
 ;---[Check count]--------------------------
@@ -1899,9 +2172,9 @@ space	= 7 * 8								; stack size required by the procedure
 		sub		qword [s_count], KSIZE		; count--
 		jnz		.loop						; do while (count != 0)
 ;---[End of search loop]-------------------
-.exit:	mov		result, [s_total]
+.exit:	mov		result, [s_total]			; return total
 		add		stack, space				; restoring back the stack pointer
-		ret									; return total
+		ret
 }
 CountKeyHead:	COUNT_KEY	add, HEAD
 CountKeyTail:	COUNT_KEY	sub, TAIL
@@ -1917,7 +2190,7 @@ keys	equ		rsi							; pointer to array of keys
 ksize	equ		rdx							; size of array of keys
 pos		equ		rcx							; beginning position
 count	equ		r8							; count of nodes to check
-func	equ		r9							; compare function
+func	equ		r9							; key compare function
 ;---[Internal variables]-------------------
 result	equ		rax							; result register
 fptr	equ		rax							; pointer to call external function
@@ -1937,14 +2210,14 @@ s_total	equ		stack + 7 * 8				; stack position of "total" variable
 space	= 9 * 8								; stack size required by the procedure
 ;------------------------------------------
 		sub		stack, space				; reserving stack size for local vars
+		shl		pos, KSCALE					; pos *= KSIZE
+		shl		count, KSCALE				; count *= KSIZE
 		mov		qword [s_total], 0			; total = 0
 ;---[Check position]-----------------------
-		shl		pos, KSCALE
 		mov		size, [this + SIZE]			; get object size
 		sub		size, pos					; if (size <= pos)
 		jbe		.exit						;     then go to exit
 ;---[Correct count]------------------------
-		shl		count, KSCALE
 		cmp		count, size					; if (count > size)
 		cmova	count, size					;     count = size
 ;---[Check count]--------------------------
@@ -1984,9 +2257,9 @@ space	= 9 * 8								; stack size required by the procedure
 		sub		qword [s_count], KSIZE		; count--
 		jnz		.loop						; do while (count != 0)
 ;---[End of search loop]-------------------
-.exit:	mov		result, [s_total]
+.exit:	mov		result, [s_total]			; return total
 		add		stack, space				; restoring back the stack pointer
-		ret									; return total
+		ret
 }
 CountKeysHead:	COUNT_KEYS	add, HEAD
 CountKeysTail:	COUNT_KEYS	sub, TAIL
@@ -1998,7 +2271,7 @@ Compare:
 ;---[Parameters]---------------------------
 this	equ		rdi							; pointer to target deque object
 source	equ		rsi							; pointer to source deque object
-func	equ		rdx							; compare function
+func	equ		rdx							; key compare function
 ;---[Internal variables]-------------------
 result	equ		rax							; result register
 status	equ		rdx							; compare status
@@ -2040,8 +2313,8 @@ space	= 3 * 8								; stack size required by the procedure
 		xor		result, result				; result = 0
 		mov		great, +1					; great = +1
 		mov		less, -1					; less = -1
-		mov		size, [this + SIZE]
-		cmp		size, [source + SIZE]
+		mov		size, [this + SIZE]			; get target object size
+		cmp		size, [source + SIZE]		; compare target object size with source object size
 		cmovg	result, great				; if (this.size > source.size), return great
 		cmovl	result, less				; if (this.size < source.size), return less
 		ret									; if (this.size == source.size), return equal
@@ -2061,7 +2334,7 @@ IsEqual:
 ;---[Parameters]---------------------------
 this	equ		rdi							; pointer to target deque object
 source	equ		rsi							; pointer to source deque object
-func	equ		rdx							; compare function
+func	equ		rdx							; key compare function
 ;---[Internal variables]-------------------
 status	equ		al							; operation status
 result	equ		rax							; result register
@@ -2070,7 +2343,7 @@ size	equ		rcx							; object size
 		sub		stack, space				; reserving stack size for local vars
 		cmp		this, source				; if (this == source)
 		je		.exit						;     return true
-		mov		size, [this + SIZE]
+		mov		size, [this + SIZE]			; get target object size
 		cmp		size, [source + SIZE]		; if (this.size != source.size)
 		jne		.exit						;     return false
 		test	size, size					; if (size == 0)
@@ -2095,6 +2368,33 @@ size	equ		rcx							; object size
 ;******************************************************************************;
 ;       Deque properties                                                       ;
 ;******************************************************************************;
+GetCopyFunction:
+;---[Parameters]---------------------------
+this	equ		rdi							; pointer to deque object
+;---[Internal variables]-------------------
+result	equ		rax							; result register
+;------------------------------------------
+		mov		result, [this + CFUNC]		; get pointer to copy function
+		ret
+;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+GetDeleteFunction:
+;---[Parameters]---------------------------
+this	equ		rdi							; pointer to deque object
+;---[Internal variables]-------------------
+result	equ		rax							; result register
+;------------------------------------------
+		mov		result, [this + DFUNC]		; get pointer to delete function
+		ret
+;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+GetUserData:
+;---[Parameters]---------------------------
+this	equ		rdi							; pointer to deque object
+;---[Internal variables]-------------------
+result	equ		rax							; result register
+;------------------------------------------
+		mov		result, [this + DPTR]		; get pointer to user's data
+		ret
+;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 GetCapacity:
 ;---[Parameters]---------------------------
 this	equ		rdi							; pointer to deque object

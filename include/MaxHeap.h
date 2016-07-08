@@ -28,13 +28,16 @@ private:
 	size_t		futex;		// Container's futex
 	KeyCmp		kfunc;		// Key compare function
 	HeapIndex	ifunc;		// Heap index call back function
+	CopyFunc	cfunc;		// Copy function for element fields: key and data
+	DelFunc		dfunc;		// Delete function to call for removing elements
+	void		*ptr;		// Pointer to user's data
 
 public:
 
 //****************************************************************************//
 //      Constructor                                                           //
 //****************************************************************************//
-MaxHeap (size_t capacity, KeyCmp kfunc, HeapIndex ifunc);
+MaxHeap (size_t capacity, KeyCmp kfunc, HeapIndex ifunc, CopyFunc cfunc, DelFunc dfunc, void *ptr);
 
 //****************************************************************************//
 //      Copy constructor                                                      //
@@ -61,38 +64,33 @@ void AllowWritings (void);
 //****************************************************************************//
 //      Addition of element                                                   //
 //****************************************************************************//
-bool Push (const data_t *data);
+bool Push (const pair_t *data);
 
 //****************************************************************************//
 //      Removal of element                                                    //
 //****************************************************************************//
-bool Pop (data_t *data);
+bool Pop (void);
 
 //****************************************************************************//
 //      Extraction of element                                                 //
 //****************************************************************************//
-bool Extract (data_t *data, size_t pos);
+bool Extract (size_t pos);
 
 //****************************************************************************//
 //      Setting element value                                                 //
 //****************************************************************************//
-bool Set (const data_t *data, size_t pos);
+bool Set (const pair_t *data, size_t pos);
 
 //****************************************************************************//
 //      Getting element value                                                 //
 //****************************************************************************//
-bool Get (data_t *data, size_t pos) const;
-
-//****************************************************************************//
-//      Replacing element value                                               //
-//****************************************************************************//
-bool Replace (data_t *odata, const data_t *ndata, size_t pos);
+bool Get (pair_t *data, size_t pos) const;
 
 //****************************************************************************//
 //      Key searching                                                         //
 //****************************************************************************//
-size_t FindKey (data_t *data, adt_t key, size_t pos, size_t count) const;
-size_t FindKeys (data_t *data, const adt_t keys[], size_t size, size_t pos, size_t count) const;
+size_t FindKey (pair_t *data, adt_t key, size_t pos, size_t count) const;
+size_t FindKeys (pair_t *data, const adt_t keys[], size_t size, size_t pos, size_t count) const;
 
 //****************************************************************************//
 //      Key counting                                                          //
@@ -103,13 +101,16 @@ size_t CountKeys (const adt_t keys[], size_t size, size_t pos, size_t count) con
 //****************************************************************************//
 //      Merging of heaps                                                      //
 //****************************************************************************//
-size_t Merge (const MaxHeap *source);
+size_t Merge (MaxHeap *source);
 
 //****************************************************************************//
 //      Heap properties                                                       //
 //****************************************************************************//
 KeyCmp CompareFunction (void) const;
 HeapIndex IndexFunction (void) const;
+CopyFunc CopyFunction (void) const;
+DelFunc DeleteFunction (void) const;
+void* UserData (void) const;
 size_t Capacity (void) const;
 size_t Size (void) const;
 bool IsEmpty (void) const;
@@ -129,12 +130,15 @@ struct MaxHeap
 	size_t		futex;		// Container's futex
 	KeyCmp		kfunc;		// Key compare function
 	HeapIndex	ifunc;		// Heap index call back function
+	CopyFunc	cfunc;		// Copy function for element fields: key and data
+	DelFunc		dfunc;		// Delete function to call for removing elements
+	void		*ptr;		// Pointer to user's data
 };
 
 //****************************************************************************//
 //      Init heap structure                                                   //
 //****************************************************************************//
-void MaxHeap_InitMaxHeap (struct MaxHeap *heap, size_t capacity, KeyCmp kfunc, HeapIndex ifunc);
+void MaxHeap_InitMaxHeap (struct MaxHeap *heap, size_t capacity, KeyCmp kfunc, HeapIndex ifunc, CopyFunc cfunc, DelFunc dfunc, void *ptr);
 
 //****************************************************************************//
 //      Copy heap structure                                                   //
@@ -161,38 +165,33 @@ void MaxHeap_AllowWritings (struct MaxHeap *heap);
 //****************************************************************************//
 //      Addition of element                                                   //
 //****************************************************************************//
-bool MaxHeap_Push (struct MaxHeap *heap, const struct data_t *data);
+bool MaxHeap_Push (struct MaxHeap *heap, const struct pair_t *data);
 
 //****************************************************************************//
 //      Removal of element                                                    //
 //****************************************************************************//
-bool MaxHeap_Pop (struct MaxHeap *heap, struct data_t *data);
+bool MaxHeap_Pop (struct MaxHeap *heap);
 
 //****************************************************************************//
 //      Extraction of element                                                 //
 //****************************************************************************//
-bool MaxHeap_Extract (struct MaxHeap *heap, struct data_t *data, size_t pos);
+bool MaxHeap_Extract (struct MaxHeap *heap, size_t pos);
 
 //****************************************************************************//
 //      Setting element value                                                 //
 //****************************************************************************//
-bool MaxHeap_Set (struct MaxHeap *heap, const struct data_t *data, size_t pos);
+bool MaxHeap_Set (struct MaxHeap *heap, const struct pair_t *data, size_t pos);
 
 //****************************************************************************//
 //      Getting element value                                                 //
 //****************************************************************************//
-bool MaxHeap_Get (const struct MaxHeap *heap, struct data_t *data, size_t pos);
-
-//****************************************************************************//
-//      Replacing element value                                               //
-//****************************************************************************//
-bool MaxHeap_Replace (struct MaxHeap *heap, struct data_t *odata, const struct data_t *ndata, size_t pos);
+bool MaxHeap_Get (const struct MaxHeap *heap, struct pair_t *data, size_t pos);
 
 //****************************************************************************//
 //      Key searching                                                         //
 //****************************************************************************//
-size_t MaxHeap_FindKey (const struct MaxHeap *heap, struct data_t *data, union adt_t key, size_t pos, size_t count);
-size_t MaxHeap_FindKeys (const struct MaxHeap *heap, struct data_t *data, const union adt_t keys[], size_t size, size_t pos, size_t count);
+size_t MaxHeap_FindKey (const struct MaxHeap *heap, struct pair_t *data, union adt_t key, size_t pos, size_t count);
+size_t MaxHeap_FindKeys (const struct MaxHeap *heap, struct pair_t *data, const union adt_t keys[], size_t size, size_t pos, size_t count);
 
 //****************************************************************************//
 //      Key counting                                                          //
@@ -203,13 +202,16 @@ size_t MaxHeap_CountKeys (const struct MaxHeap *heap, const union adt_t keys[], 
 //****************************************************************************//
 //      Merging of heaps                                                      //
 //****************************************************************************//
-size_t MaxHeap_Merge (struct MaxHeap *heap, const struct MaxHeap *source);
+size_t MaxHeap_Merge (struct MaxHeap *heap, struct MaxHeap *source);
 
 //****************************************************************************//
 //      Heap properties                                                       //
 //****************************************************************************//
 KeyCmp MaxHeap_CompareFunction (const struct MaxHeap *heap);
 HeapIndex MaxHeap_IndexFunction (const struct MaxHeap *heap);
+CopyFunc MaxHeap_CopyFunction (const struct MaxHeap *heap);
+DelFunc MaxHeap_DeleteFunction (const struct MaxHeap *heap);
+void* MaxHeap_UserData (const struct MaxHeap *heap);
 size_t MaxHeap_Capacity (const struct MaxHeap *heap);
 size_t MaxHeap_Size (const struct MaxHeap *heap);
 bool MaxHeap_IsEmpty (const struct MaxHeap *heap);

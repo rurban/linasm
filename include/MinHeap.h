@@ -28,13 +28,16 @@ private:
 	size_t		futex;		// Container's futex
 	KeyCmp		kfunc;		// Key compare function
 	HeapIndex	ifunc;		// Heap index call back function
+	CopyFunc	cfunc;		// Copy function for element fields: key and data
+	DelFunc		dfunc;		// Delete function to call for removing elements
+	void		*ptr;		// Pointer to user's data
 
 public:
 
 //****************************************************************************//
 //      Constructor                                                           //
 //****************************************************************************//
-MinHeap (size_t capacity, KeyCmp kfunc, HeapIndex ifunc);
+MinHeap (size_t capacity, KeyCmp kfunc, HeapIndex ifunc, CopyFunc cfunc, DelFunc dfunc, void *ptr);
 
 //****************************************************************************//
 //      Copy constructor                                                      //
@@ -61,38 +64,33 @@ void AllowWritings (void);
 //****************************************************************************//
 //      Addition of element                                                   //
 //****************************************************************************//
-bool Push (const data_t *data);
+bool Push (const pair_t *data);
 
 //****************************************************************************//
 //      Removal of element                                                    //
 //****************************************************************************//
-bool Pop (data_t *data);
+bool Pop (void);
 
 //****************************************************************************//
 //      Extraction of element                                                 //
 //****************************************************************************//
-bool Extract (data_t *data, size_t pos);
+bool Extract (size_t pos);
 
 //****************************************************************************//
 //      Setting element value                                                 //
 //****************************************************************************//
-bool Set (const data_t *data, size_t pos);
+bool Set (const pair_t *data, size_t pos);
 
 //****************************************************************************//
 //      Getting element value                                                 //
 //****************************************************************************//
-bool Get (data_t *data, size_t pos) const;
-
-//****************************************************************************//
-//      Replacing element value                                               //
-//****************************************************************************//
-bool Replace (data_t *odata, const data_t *ndata, size_t pos);
+bool Get (pair_t *data, size_t pos) const;
 
 //****************************************************************************//
 //      Key searching                                                         //
 //****************************************************************************//
-size_t FindKey (data_t *data, adt_t key, size_t pos, size_t count) const;
-size_t FindKeys (data_t *data, const adt_t keys[], size_t size, size_t pos, size_t count) const;
+size_t FindKey (pair_t *data, adt_t key, size_t pos, size_t count) const;
+size_t FindKeys (pair_t *data, const adt_t keys[], size_t size, size_t pos, size_t count) const;
 
 //****************************************************************************//
 //      Key counting                                                          //
@@ -103,13 +101,16 @@ size_t CountKeys (const adt_t keys[], size_t size, size_t pos, size_t count) con
 //****************************************************************************//
 //      Merging of heaps                                                      //
 //****************************************************************************//
-size_t Merge (const MinHeap *source);
+size_t Merge (MinHeap *source);
 
 //****************************************************************************//
 //      Heap properties                                                       //
 //****************************************************************************//
 KeyCmp CompareFunction (void) const;
 HeapIndex IndexFunction (void) const;
+CopyFunc CopyFunction (void) const;
+DelFunc DeleteFunction (void) const;
+void* UserData (void) const;
 size_t Capacity (void) const;
 size_t Size (void) const;
 bool IsEmpty (void) const;
@@ -132,12 +133,15 @@ struct MinHeap
 	size_t		futex;		// Container's futex
 	KeyCmp		kfunc;		// Key compare function
 	HeapIndex	ifunc;		// Heap index call back function
+	CopyFunc	cfunc;		// Copy function for element fields: key and data
+	DelFunc		dfunc;		// Delete function to call for removing elements
+	void		*ptr;		// Pointer to user's data
 };
 
 //****************************************************************************//
 //      Init heap structure                                                   //
 //****************************************************************************//
-void MinHeap_InitMaxHeap (struct MaxHeap *heap, size_t capacity, KeyCmp kfunc, HeapIndex ifunc);
+void MinHeap_InitMaxHeap (struct MaxHeap *heap, size_t capacity, KeyCmp kfunc, HeapIndex ifunc, CopyFunc cfunc, DelFunc dfunc, void *ptr);
 
 //****************************************************************************//
 //      Copy heap structure                                                   //
@@ -164,38 +168,33 @@ void MinHeap_AllowWritings (struct MinHeap *heap);
 //****************************************************************************//
 //      Addition of element                                                   //
 //****************************************************************************//
-bool MinHeap_Push (struct MinHeap *heap, const struct data_t *data);
+bool MinHeap_Push (struct MinHeap *heap, const struct pair_t *data);
 
 //****************************************************************************//
 //      Removal of element                                                    //
 //****************************************************************************//
-bool MinHeap_Pop (struct MinHeap *heap, struct data_t *data);
+bool MinHeap_Pop (struct MinHeap *heap);
 
 //****************************************************************************//
 //      Extraction of element                                                 //
 //****************************************************************************//
-bool MinHeap_Extract (struct MinHeap *heap, struct data_t *data, size_t pos);
+bool MinHeap_Extract (struct MinHeap *heap, size_t pos);
 
 //****************************************************************************//
 //      Setting element value                                                 //
 //****************************************************************************//
-bool MinHeap_Set (struct MinHeap *heap, const struct data_t *data, size_t pos);
+bool MinHeap_Set (struct MinHeap *heap, const struct pair_t *data, size_t pos);
 
 //****************************************************************************//
 //      Getting element value                                                 //
 //****************************************************************************//
-bool MinHeap_Get (const struct MinHeap *heap, struct data_t *data, size_t pos);
-
-//****************************************************************************//
-//      Replacing element value                                               //
-//****************************************************************************//
-bool MinHeap_Replace (struct MinHeap *heap, struct data_t *odata, const struct data_t *ndata, size_t pos);
+bool MinHeap_Get (const struct MinHeap *heap, struct pair_t *data, size_t pos);
 
 //****************************************************************************//
 //      Key searching                                                         //
 //****************************************************************************//
-size_t MinHeap_FindKey (const struct MinHeap *heap, struct data_t *data, union adt_t key, size_t pos, size_t count);
-size_t MinHeap_FindKeys (const struct MinHeap *heap, struct data_t *data, const union adt_t keys[], size_t size, size_t pos, size_t count);
+size_t MinHeap_FindKey (const struct MinHeap *heap, struct pair_t *data, union adt_t key, size_t pos, size_t count);
+size_t MinHeap_FindKeys (const struct MinHeap *heap, struct pair_t *data, const union adt_t keys[], size_t size, size_t pos, size_t count);
 
 //****************************************************************************//
 //      Key counting                                                          //
@@ -206,13 +205,16 @@ size_t MinHeap_CountKeys (const struct MinHeap *heap, const union adt_t keys[], 
 //****************************************************************************//
 //      Merging of heaps                                                      //
 //****************************************************************************//
-size_t MinHeap_Merge (struct MinHeap *heap, const struct MinHeap *source);
+size_t MinHeap_Merge (struct MinHeap *heap, struct MinHeap *source);
 
 //****************************************************************************//
 //      Heap properties                                                       //
 //****************************************************************************//
 KeyCmp MinHeap_CompareFunction (const struct MinHeap *heap);
 HeapIndex MinHeap_IndexFunction (const struct MinHeap *heap);
+CopyFunc MinHeap_CopyFunction (const struct MinHeap *heap);
+DelFunc MinHeap_DeleteFunction (const struct MinHeap *heap);
+void* MinHeap_UserData (const struct MinHeap *heap);
 size_t MinHeap_Capacity (const struct MinHeap *heap);
 size_t MinHeap_Size (const struct MinHeap *heap);
 bool MinHeap_IsEmpty (const struct MinHeap *heap);

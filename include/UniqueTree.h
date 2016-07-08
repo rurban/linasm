@@ -22,23 +22,26 @@
 class UniqueTree
 {
 private:
-	void	*array;		// Pointer to array which holds b-tree nodes
-	size_t	capacity;	// Capacity of the b-tree (auto extended if required)
-	size_t	size;		// Current b-tree size
-	size_t	height;		// Current b-tree height
-	size_t	pool;		// Index of first free node in the pool
-	size_t	root;		// Index of b-tree root node
-	size_t	fwd;		// Current position of forward iterator
-	size_t	bwd;		// Current position of backward iterator
-	size_t	futex;		// Container's futex
-	KeyCmp	func;		// Key compare function
+	void		*array;		// Pointer to array which holds b-tree nodes
+	size_t		capacity;	// Capacity of the b-tree (auto extended if required)
+	size_t		size;		// Current b-tree size
+	size_t		height;		// Current b-tree height
+	size_t		pool;		// Index of first free node in the pool
+	size_t		root;		// Index of b-tree root node
+	size_t		fwd;		// Current position of forward iterator
+	size_t		bwd;		// Current position of backward iterator
+	size_t		futex;		// Container's futex
+	KeyCmp		kfunc;		// Key compare function
+	CopyFunc	cfunc;		// Copy function for element fields: key and data
+	DelFunc		dfunc;		// Delete function to call for removing elements
+	void		*ptr;		// Pointer to user's data
 
 public:
 
 //****************************************************************************//
 //      Constructor                                                           //
 //****************************************************************************//
-UniqueTree (size_t capacity, KeyCmp func);
+UniqueTree (size_t capacity, KeyCmp kfunc, CopyFunc cfunc, DelFunc dfunc, void *ptr);
 
 //****************************************************************************//
 //      Copy constructor                                                      //
@@ -77,57 +80,46 @@ size_t MoveBwd (UniqueTree *source, size_t count);
 //****************************************************************************//
 //      Insertion of element                                                  //
 //****************************************************************************//
-bool Insert (const data_t *data);
+bool Insert (const pair_t *data);
 
 //****************************************************************************//
 //      Removing of element                                                   //
 //****************************************************************************//
 
 // By element index
-bool RemoveIndex (data_t *data, size_t index);
+bool RemoveIndex (size_t index);
 
 // Using iterators
-bool RemoveFwd (data_t *data);
-bool RemoveBwd (data_t *data);
+bool RemoveFwd (void);
+bool RemoveBwd (void);
 
 //****************************************************************************//
 //      Setting element value                                                 //
 //****************************************************************************//
 
 // By element index
-bool SetIndex (const data_t *data, size_t index);
+bool SetIndex (const pair_t *data, size_t index);
 
 // Using iterators
-bool SetFwd (const data_t *data);
-bool SetBwd (const data_t *data);
+bool SetFwd (const pair_t *data);
+bool SetBwd (const pair_t *data);
 
 //****************************************************************************//
 //      Getting element value                                                 //
 //****************************************************************************//
 
 // By element index
-bool GetIndex (data_t *data, size_t index) const;
+bool GetIndex (pair_t *data, size_t index) const;
 
 // Using iterators
-bool GetFwd (data_t *data) const;
-bool GetBwd (data_t *data) const;
-bool GetIter (data_t *data, ptr_t iter) const;
-
-//****************************************************************************//
-//      Replacing element value                                               //
-//****************************************************************************//
-
-// By element index
-bool ReplaceIndex (data_t *odata, const data_t *ndata, size_t index);
-
-// Using iterators
-bool ReplaceFwd (data_t *odata, const data_t *ndata);
-bool ReplaceBwd (data_t *odata, const data_t *ndata);
+bool GetFwd (pair_t *data) const;
+bool GetBwd (pair_t *data) const;
+bool GetIter (pair_t *data, ptr_t iter) const;
 
 //****************************************************************************//
 //      Overriding element value                                              //
 //****************************************************************************//
-bool Override (data_t *odata, const data_t *ndata);
+bool Override (const pair_t *data);
 
 //****************************************************************************//
 //      Manipulation with forward iterator                                    //
@@ -191,16 +183,16 @@ void SwapFwdBwd (void);
 //****************************************************************************//
 
 // Minimum value
-bool MinFwd (data_t *data);
-bool MinBwd (data_t *data);
-bool MinIterFwd (data_t *data, ptr_t *iter) const;
-bool MinIterBwd (data_t *data, ptr_t *iter) const;
+bool MinFwd (pair_t *data);
+bool MinBwd (pair_t *data);
+bool MinIterFwd (pair_t *data, ptr_t *iter) const;
+bool MinIterBwd (pair_t *data, ptr_t *iter) const;
 
 // Maximum value
-bool MaxFwd (data_t *data);
-bool MaxBwd (data_t *data);
-bool MaxIterFwd (data_t *data, ptr_t *iter) const;
-bool MaxIterBwd (data_t *data, ptr_t *iter) const;
+bool MaxFwd (pair_t *data);
+bool MaxBwd (pair_t *data);
+bool MaxIterFwd (pair_t *data, ptr_t *iter) const;
+bool MaxIterBwd (pair_t *data, ptr_t *iter) const;
 
 //****************************************************************************//
 //      Key searching                                                         //
@@ -211,38 +203,38 @@ bool MaxIterBwd (data_t *data, ptr_t *iter) const;
 //============================================================================//
 
 // Searching for equal key
-bool FindEqualFwd (data_t *data, adt_t key);
-bool FindEqualBwd (data_t *data, adt_t key);
-bool FindEqualIterFwd (data_t *data, adt_t key, ptr_t *iter) const;
-bool FindEqualIterBwd (data_t *data, adt_t key, ptr_t *iter) const;
+bool FindEqualFwd (pair_t *data, adt_t key);
+bool FindEqualBwd (pair_t *data, adt_t key);
+bool FindEqualIterFwd (pair_t *data, adt_t key, ptr_t *iter) const;
+bool FindEqualIterBwd (pair_t *data, adt_t key, ptr_t *iter) const;
 
 // Searching for greater key
-bool FindGreatFwd (data_t *data, adt_t key);
-bool FindGreatBwd (data_t *data, adt_t key);
-bool FindGreatIter (data_t *data, adt_t key, ptr_t *iter) const;
+bool FindGreatFwd (pair_t *data, adt_t key);
+bool FindGreatBwd (pair_t *data, adt_t key);
+bool FindGreatIter (pair_t *data, adt_t key, ptr_t *iter) const;
 
 // Searching for greater or equal key
-bool FindGreatOrEqualFwd (data_t *data, adt_t key);
-bool FindGreatOrEqualBwd (data_t *data, adt_t key);
-bool FindGreatOrEqualIter (data_t *data, adt_t key, ptr_t *iter) const;
+bool FindGreatOrEqualFwd (pair_t *data, adt_t key);
+bool FindGreatOrEqualBwd (pair_t *data, adt_t key);
+bool FindGreatOrEqualIter (pair_t *data, adt_t key, ptr_t *iter) const;
 
 // Searching for less key
-bool FindLessFwd (data_t *data, adt_t key);
-bool FindLessBwd (data_t *data, adt_t key);
-bool FindLessIter (data_t *data, adt_t key, ptr_t *iter) const;
+bool FindLessFwd (pair_t *data, adt_t key);
+bool FindLessBwd (pair_t *data, adt_t key);
+bool FindLessIter (pair_t *data, adt_t key, ptr_t *iter) const;
 
 // Searching for less or equal key
-bool FindLessOrEqualFwd (data_t *data, adt_t key);
-bool FindLessOrEqualBwd (data_t *data, adt_t key);
-bool FindLessOrEqualIter (data_t *data, adt_t key, ptr_t *iter) const;
+bool FindLessOrEqualFwd (pair_t *data, adt_t key);
+bool FindLessOrEqualBwd (pair_t *data, adt_t key);
+bool FindLessOrEqualIter (pair_t *data, adt_t key, ptr_t *iter) const;
 
 //****************************************************************************//
 //      Searching for differences                                             //
 //****************************************************************************//
-bool FindDiffFwd (data_t *data, const UniqueTree *source, size_t count);
-bool FindDiffBwd (data_t *data, const UniqueTree *source, size_t count);
-bool FindDiffIterFwd (data_t *data, const UniqueTree *source, size_t count, ptr_t *titer, ptr_t siter) const;
-bool FindDiffIterBwd (data_t *data, const UniqueTree *source, size_t count, ptr_t *titer, ptr_t siter) const;
+bool FindDiffFwd (pair_t *data, const UniqueTree *source, size_t count);
+bool FindDiffBwd (pair_t *data, const UniqueTree *source, size_t count);
+bool FindDiffIterFwd (pair_t *data, const UniqueTree *source, size_t count, ptr_t *titer, ptr_t siter) const;
+bool FindDiffIterBwd (pair_t *data, const UniqueTree *source, size_t count, ptr_t *titer, ptr_t siter) const;
 
 //****************************************************************************//
 //      Key counting                                                          //
@@ -264,6 +256,9 @@ bool IsEqual (const UniqueTree *source) const;
 //      Tree properties                                                       //
 //****************************************************************************//
 KeyCmp CompareFunction (void) const;
+CopyFunc CopyFunction (void) const;
+DelFunc DeleteFunction (void) const;
+void* UserData (void) const;
 size_t Capacity (void) const;
 size_t Size (void) const;
 size_t Height (void) const;
@@ -281,32 +276,35 @@ bool IsInit (void) const;
 //****************************************************************************//
 struct UniqueTree
 {
-	void	*array;		// Pointer to array which holds b-tree nodes
-	size_t	capacity;	// Capacity of the b-tree (auto extended if required)
-	size_t	size;		// Current b-tree size
-	size_t	height;		// Current b-tree height
-	size_t	pool;		// Index of first free node in the pool
-	size_t	root;		// Index of b-tree root node
-	size_t	fwd;		// Current position of forward iterator
-	size_t	bwd;		// Current position of backward iterator
-	size_t	futex;		// Container's futex
-	KeyCmp	func;		// Key compare function
+	void		*array;		// Pointer to array which holds b-tree nodes
+	size_t		capacity;	// Capacity of the b-tree (auto extended if required)
+	size_t		size;		// Current b-tree size
+	size_t		height;		// Current b-tree height
+	size_t		pool;		// Index of first free node in the pool
+	size_t		root;		// Index of b-tree root node
+	size_t		fwd;		// Current position of forward iterator
+	size_t		bwd;		// Current position of backward iterator
+	size_t		futex;		// Container's futex
+	KeyCmp		kfunc;		// Key compare function
+	CopyFunc	cfunc;		// Copy function for element fields: key and data
+	DelFunc		dfunc;		// Delete function to call for removing elements
+	void		*ptr;		// Pointer to user's data
 };
 
 //****************************************************************************//
 //      Init tree structure                                                   //
 //****************************************************************************//
-UniqueTree_InitUniqueTree (struct UniqueTree *tree, size_t capacity, KeyCmp func);
+void UniqueTree_InitUniqueTree (struct UniqueTree *tree, size_t capacity, KeyCmp kfunc, CopyFunc cfunc, DelFunc dfunc, void *ptr);
 
 //****************************************************************************//
 //      Copy tree structure                                                   //
 //****************************************************************************//
-UniqueTree_CopyUniqueTree (struct UniqueTree *tree, const UniqueTree *source);
+void UniqueTree_CopyUniqueTree (struct UniqueTree *tree, const UniqueTree *source);
 
 //****************************************************************************//
 //      Free tree structure                                                   //
 //****************************************************************************//
-UniqueTree_FreeUniqueTree (struct UniqueTree *tree);
+void UniqueTree_FreeUniqueTree (struct UniqueTree *tree);
 
 //****************************************************************************//
 //      Access predicates                                                     //
@@ -335,57 +333,46 @@ size_t UniqueTree_MoveBwd (struct UniqueTree *tree, struct UniqueTree *source, s
 //****************************************************************************//
 //      Insertion of element                                                  //
 //****************************************************************************//
-bool UniqueTree_Insert (struct UniqueTree *tree, const struct data_t *data);
+bool UniqueTree_Insert (struct UniqueTree *tree, const struct pair_t *data);
 
 //****************************************************************************//
 //      Removing of element                                                   //
 //****************************************************************************//
 
 // By element index
-bool UniqueTree_RemoveIndex (struct UniqueTree *tree, struct data_t *data, size_t index);
+bool UniqueTree_RemoveIndex (struct UniqueTree *tree, size_t index);
 
 // Using iterators
-bool UniqueTree_RemoveFwd (struct UniqueTree *tree, struct data_t *data);
-bool UniqueTree_RemoveBwd (struct UniqueTree *tree, struct data_t *data);
+bool UniqueTree_RemoveFwd (struct UniqueTree *tree);
+bool UniqueTree_RemoveBwd (struct UniqueTree *tree);
 
 //****************************************************************************//
 //      Setting element value                                                 //
 //****************************************************************************//
 
 // By element index
-bool UniqueTree_SetIndex (struct UniqueTree *tree, const struct data_t *data, size_t index);
+bool UniqueTree_SetIndex (struct UniqueTree *tree, const struct pair_t *data, size_t index);
 
 // Using iterators
-bool UniqueTree_SetFwd (struct UniqueTree *tree, const struct data_t *data);
-bool UniqueTree_SetBwd (struct UniqueTree *tree, const struct data_t *data);
+bool UniqueTree_SetFwd (struct UniqueTree *tree, const struct pair_t *data);
+bool UniqueTree_SetBwd (struct UniqueTree *tree, const struct pair_t *data);
 
 //****************************************************************************//
 //      Getting element value                                                 //
 //****************************************************************************//
 
 // By element index
-bool UniqueTree_GetIndex (const struct UniqueTree *tree, struct data_t *data, size_t index);
+bool UniqueTree_GetIndex (const struct UniqueTree *tree, struct pair_t *data, size_t index);
 
 // Using iterators
-bool UniqueTree_GetFwd (const struct UniqueTree *tree, struct data_t *data);
-bool UniqueTree_GetBwd (const struct UniqueTree *tree, struct data_t *data);
-bool UniqueTree_GetIter (const struct UniqueTree *tree, struct data_t *data, ptr_t iter);
-
-//****************************************************************************//
-//      Replacing element value                                               //
-//****************************************************************************//
-
-// By element index
-bool UniqueTree_ReplaceIndex (struct UniqueTree *tree, struct data_t *odata, const struct data_t *ndata, size_t index);
-
-// Using iterators
-bool UniqueTree_ReplaceFwd (struct UniqueTree *tree, struct data_t *odata, const struct data_t *ndata);
-bool UniqueTree_ReplaceBwd (struct UniqueTree *tree, struct data_t *odata, const struct data_t *ndata);
+bool UniqueTree_GetFwd (const struct UniqueTree *tree, struct pair_t *data);
+bool UniqueTree_GetBwd (const struct UniqueTree *tree, struct pair_t *data);
+bool UniqueTree_GetIter (const struct UniqueTree *tree, struct pair_t *data, ptr_t iter);
 
 //****************************************************************************//
 //      Overriding element value                                              //
 //****************************************************************************//
-bool UniqueTree_Override (struct UniqueTree *tree, struct data_t *odata, const struct data_t *ndata);
+bool UniqueTree_Override (struct UniqueTree *tree, const struct pair_t *data);
 
 //****************************************************************************//
 //      Manipulation with forward iterator                                    //
@@ -449,16 +436,16 @@ void UniqueTree_SwapFwdBwd (struct UniqueTree *tree);
 //****************************************************************************//
 
 // Minimum value
-bool UniqueTree_MinFwd (struct UniqueTree *tree, struct data_t *data);
-bool UniqueTree_MinBwd (struct UniqueTree *tree, struct data_t *data);
-bool UniqueTree_MinIterFwd (const struct UniqueTree *tree, struct data_t *data, ptr_t *iter);
-bool UniqueTree_MinIterBwd (const struct UniqueTree *tree, struct data_t *data, ptr_t *iter);
+bool UniqueTree_MinFwd (struct UniqueTree *tree, struct pair_t *data);
+bool UniqueTree_MinBwd (struct UniqueTree *tree, struct pair_t *data);
+bool UniqueTree_MinIterFwd (const struct UniqueTree *tree, struct pair_t *data, ptr_t *iter);
+bool UniqueTree_MinIterBwd (const struct UniqueTree *tree, struct pair_t *data, ptr_t *iter);
 
 // Maximum value
-bool UniqueTree_MaxFwd (struct UniqueTree *tree, struct data_t *data);
-bool UniqueTree_MaxBwd (struct UniqueTree *tree, struct data_t *data);
-bool UniqueTree_MaxIterFwd (const struct UniqueTree *tree, struct data_t *data, ptr_t *iter);
-bool UniqueTree_MaxIterBwd (const struct UniqueTree *tree, struct data_t *data, ptr_t *iter);
+bool UniqueTree_MaxFwd (struct UniqueTree *tree, struct pair_t *data);
+bool UniqueTree_MaxBwd (struct UniqueTree *tree, struct pair_t *data);
+bool UniqueTree_MaxIterFwd (const struct UniqueTree *tree, struct pair_t *data, ptr_t *iter);
+bool UniqueTree_MaxIterBwd (const struct UniqueTree *tree, struct pair_t *data, ptr_t *iter);
 
 //****************************************************************************//
 //      Key searching                                                         //
@@ -469,38 +456,38 @@ bool UniqueTree_MaxIterBwd (const struct UniqueTree *tree, struct data_t *data, 
 //============================================================================//
 
 // Searching for equal key
-bool UniqueTree_FindEqualFwd (struct UniqueTree *tree, struct data_t *data, union adt_t key);
-bool UniqueTree_FindEqualBwd (struct UniqueTree *tree, struct data_t *data, union adt_t key);
-bool UniqueTree_FindEqualIterFwd (const struct UniqueTree *tree, struct data_t *data, union adt_t key, ptr_t *iter);
-bool UniqueTree_FindEqualIterBwd (const struct UniqueTree *tree, struct data_t *data, union adt_t key, ptr_t *iter);
+bool UniqueTree_FindEqualFwd (struct UniqueTree *tree, struct pair_t *data, union adt_t key);
+bool UniqueTree_FindEqualBwd (struct UniqueTree *tree, struct pair_t *data, union adt_t key);
+bool UniqueTree_FindEqualIterFwd (const struct UniqueTree *tree, struct pair_t *data, union adt_t key, ptr_t *iter);
+bool UniqueTree_FindEqualIterBwd (const struct UniqueTree *tree, struct pair_t *data, union adt_t key, ptr_t *iter);
 
 // Searching for greater key
-bool UniqueTree_FindGreatFwd (struct UniqueTree *tree, struct data_t *data, union adt_t key);
-bool UniqueTree_FindGreatBwd (struct UniqueTree *tree, struct data_t *data, union adt_t key);
-bool UniqueTree_FindGreatIter (const struct UniqueTree *tree, struct data_t *data, union adt_t key, ptr_t *iter);
+bool UniqueTree_FindGreatFwd (struct UniqueTree *tree, struct pair_t *data, union adt_t key);
+bool UniqueTree_FindGreatBwd (struct UniqueTree *tree, struct pair_t *data, union adt_t key);
+bool UniqueTree_FindGreatIter (const struct UniqueTree *tree, struct pair_t *data, union adt_t key, ptr_t *iter);
 
 // Searching for greater or equal key
-bool UniqueTree_FindGreatOrEqualFwd (struct UniqueTree *tree, struct data_t *data, union adt_t key);
-bool UniqueTree_FindGreatOrEqualBwd (struct UniqueTree *tree, struct data_t *data, union adt_t key);
-bool UniqueTree_FindGreatOrEqualIter (const struct UniqueTree *tree, struct data_t *data, union adt_t key, ptr_t *iter);
+bool UniqueTree_FindGreatOrEqualFwd (struct UniqueTree *tree, struct pair_t *data, union adt_t key);
+bool UniqueTree_FindGreatOrEqualBwd (struct UniqueTree *tree, struct pair_t *data, union adt_t key);
+bool UniqueTree_FindGreatOrEqualIter (const struct UniqueTree *tree, struct pair_t *data, union adt_t key, ptr_t *iter);
 
 // Searching for less key
-bool UniqueTree_FindLessFwd (struct UniqueTree *tree, struct data_t *data, union adt_t key);
-bool UniqueTree_FindLessBwd (struct UniqueTree *tree, struct data_t *data, union adt_t key);
-bool UniqueTree_FindLessIter (const struct UniqueTree *tree, struct data_t *data, union adt_t key, ptr_t *iter);
+bool UniqueTree_FindLessFwd (struct UniqueTree *tree, struct pair_t *data, union adt_t key);
+bool UniqueTree_FindLessBwd (struct UniqueTree *tree, struct pair_t *data, union adt_t key);
+bool UniqueTree_FindLessIter (const struct UniqueTree *tree, struct pair_t *data, union adt_t key, ptr_t *iter);
 
 // Searching for less or equal key
-bool UniqueTree_FindLessOrEqualFwd (struct UniqueTree *tree, struct data_t *data, union adt_t key);
-bool UniqueTree_FindLessOrEqualBwd (struct UniqueTree *tree, struct data_t *data, union adt_t key);
-bool UniqueTree_FindLessOrEqualIter (const struct UniqueTree *tree, struct data_t *data, union adt_t key, ptr_t *iter);
+bool UniqueTree_FindLessOrEqualFwd (struct UniqueTree *tree, struct pair_t *data, union adt_t key);
+bool UniqueTree_FindLessOrEqualBwd (struct UniqueTree *tree, struct pair_t *data, union adt_t key);
+bool UniqueTree_FindLessOrEqualIter (const struct UniqueTree *tree, struct pair_t *data, union adt_t key, ptr_t *iter);
 
 //****************************************************************************//
 //      Searching for differences                                             //
 //****************************************************************************//
-bool UniqueTree_FindDiffFwd (struct UniqueTree *tree, struct data_t *data, const struct UniqueTree *source, size_t count);
-bool UniqueTree_FindDiffBwd (struct UniqueTree *tree, struct data_t *data, const struct UniqueTree *source, size_t count);
-bool UniqueTree_FindDiffIterFwd (const struct UniqueTree *tree, struct data_t *data, const struct UniqueTree *source, size_t count, ptr_t *titer, ptr_t siter);
-bool UniqueTree_FindDiffIterBwd (const struct UniqueTree *tree, struct data_t *data, const struct UniqueTree *source, size_t count, ptr_t *titer, ptr_t siter);
+bool UniqueTree_FindDiffFwd (struct UniqueTree *tree, struct pair_t *data, const struct UniqueTree *source, size_t count);
+bool UniqueTree_FindDiffBwd (struct UniqueTree *tree, struct pair_t *data, const struct UniqueTree *source, size_t count);
+bool UniqueTree_FindDiffIterFwd (const struct UniqueTree *tree, struct pair_t *data, const struct UniqueTree *source, size_t count, ptr_t *titer, ptr_t siter);
+bool UniqueTree_FindDiffIterBwd (const struct UniqueTree *tree, struct pair_t *data, const struct UniqueTree *source, size_t count, ptr_t *titer, ptr_t siter);
 
 //****************************************************************************//
 //      Key counting                                                          //
@@ -522,6 +509,9 @@ bool UniqueTree_IsEqual (const struct UniqueTree *tree, const struct UniqueTree 
 //      Tree properties                                                       //
 //****************************************************************************//
 KeyCmp UniqueTree_CompareFunction (const struct UniqueTree *tree);
+CopyFunc UniqueTree_CopyFunction (const struct UniqueTree *tree);
+DelFunc UniqueTree_DeleteFunction (const struct UniqueTree *tree);
+void* UniqueTree_UserData (const struct UniqueTree *tree);
 size_t UniqueTree_Capacity (const struct UniqueTree *tree);
 size_t UniqueTree_Size (const struct UniqueTree *tree);
 size_t UniqueTree_Height (const struct UniqueTree *tree);
