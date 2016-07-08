@@ -40,23 +40,33 @@ union adt_t
 };
 
 //****************************************************************************//
-//      Data structure                                                        //
+//      Pair structure                                                        //
 //****************************************************************************//
-struct data_t
+struct pair_t
 {
 	union adt_t	key;	// Key field
 	union adt_t	data;	// Data field
 };
 
 //****************************************************************************//
+//      Pair copy function prototype                                          //
+//****************************************************************************//
+typedef	bool (*CopyFunc) (struct pair_t *target, const struct pair_t *source, void *ptr);
+
+//****************************************************************************//
+//      Pair delete function prototype                                        //
+//****************************************************************************//
+typedef	void (*DelFunc) (struct pair_t *data, void *ptr);
+
+//****************************************************************************//
 //      Heap index call back function prototype                               //
 //****************************************************************************//
-typedef	void (*HeapIndex) (const struct data_t *data, size_t index);
+typedef	void (*HeapIndex) (const struct pair_t *data, size_t index);
 
 //****************************************************************************//
 //      Hash function prototype                                               //
 //****************************************************************************//
-typedef	size_t (*Hash) (union adt_t key);
+typedef	size_t (*HashFunc) (union adt_t key);
 
 //****************************************************************************//
 //      Key compare function prototype                                        //
