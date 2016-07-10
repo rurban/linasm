@@ -1430,8 +1430,7 @@ space	= 5 * 8								; stack size required by the procedure
 		mov		[s_dfunc], dfunc			; save "dfunc" variable into the stack
 		mov		[s_ptr], ptr				; save "ptr" variable into the stack
 		shl		cap, KSCALE + 1
-		add		cap, NSIZE - KSIZE
-		and		cap, -NSIZE					; cap = cap * 2 * KSIZE + NSIZE - KSIZE & (-NSIZE)
+		add		cap, NSIZE					; cap = cap * 2 * KSIZE + NSIZE
 	Capacity	cap, array, MINCAP			; compute capacity of the object
 		mov		[s_cap], cap				; save "cap" variable into the stack
 ;---[Allocate memory for the object]-------
