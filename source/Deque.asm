@@ -666,8 +666,9 @@ space	= 3 * 8								; stack size required by the procedure
 		call	CopyElementsFwd				; result = CopyElementsFwd (this.array, source.array, this.head, source.head, this.capacity, source.capacity, source.size, this.cfunc, this.ptr)
 		mov		this, [s_this]				; get "this" variable from the stack
 		test	result, result				; if (result) {
-		jz		.exit						;     this.size = result
-		mov		[this + SIZE], result		;     this.tail = result
+		jz		.exit						; {
+		mov		[this + SIZE], result		;     this.size = result
+		sub		result, KSIZE				;     this.tail = result - 1
 		mov		[this + TAIL], result		; }
 ;---[Normal exit branch]-------------------
 .exit:	add		stack, space				; restoring back the stack pointer
