@@ -9,15 +9,22 @@
 INTRODUCTION
 ============
 
-    Linux assembly libraries project called "LinAsm" is the collection of very
-    fast and optimized assembly written libraries for x86-64 Linux.
+    LinAsm is collection of very fast and SIMD optimized assembly written
+    libraries for x86-64 Linux.
 
-    It implements many common and widely used algorithms, mostly developed for
-    acceleration of data analysis and time series processing. Later they were
-    extended with more mathematical and general algorithms that are used inside
-    C and C++ programs and make them very fast on that platform.
+    It implements many common and widely used algorithms for array
+    manipulations: searching, sorting, arithmetic and vector operations,
+    unit conversions; fast mathematical and statistic functions; numbers and
+    time converting algorithms; finite impulse response (FIR) digital filters;
+    spectrum analysis algorithms, Fast Hartley transformation; CPU cache
+    friendly functions and extremely fast abstract data types (ADT) such as
+    hash tables b-trees, and much more.
 
-    To get more information about this software, please visit the official
+    LinAsm libraries are written on FASM assembly language. They are stable
+    and have appropriate benchmarks for many units. All libraries are
+    well documented and grouped by their functionality.
+
+    To get more information about this library, please visit the official
     web site: http://linasm.sourceforge.net
 
 LICENSING
@@ -32,23 +39,53 @@ LICENSING
 PACKAGE STRUCTURE
 =================
 
-    The source code of LinAsm library is placed into separate directories
-    are called "include" and "source".
+    LinAsm source code package has very simple directory structure. I prefer
+    to follow KISS principle in software developing process and recommend you
+    to keep in mind this style in your programs. It works fine for big and
+    very complex projects, allows to keep source code clear, stable and
+    human readable for future code maintainers.
 
-    The "include" directory holds C and C++ header files that define functions
-    prototypes, structures and data types. They should be copied as is into your
+    Source code is placed into separate directories are called "include" and
+    "source". "Build" directory holds FASM compiler for assembly source code.
+
+include:
+~~~~~~~~
+
+    The "include" directory holds C and C++ header files that define function
+    prototypes, structures and data types. They should be copied as is into
     local include directory such as /usr/include or /usr/local/include.
-    Installation procedure will do it for you automatically, according to the
-    settings you provide.
+    Installation procedure will do it for you automatically, according to
+    the settings you provide.
 
-    The "source" directory includes assembly source code, which is written on
-    Flat Assembler programming language, developed by Tomasz Grysztar. Its
-    official web site is http://flatassembler.net
+    To call LinAsm functions you should include these header files as you do
+    this for all other headers. LinAsm headers should not conflict with other
+    system headers you already have in Linux.
 
-    The source code should be compiled by "fasm" executable file, which
-    is placed into "build" directory of LinAsm release. To allow this file
+source:
+~~~~~~~
+
+    The "source" directory includes assembly source code files, are written
+    on Flat Assembler programming language, developed by Tomasz Grysztar.
+    Its official web site is http://flatassembler.net.
+
+    I used a lot of FASM macros to generate assembly code and replaced
+    registers with variable names using "equ" directive of assembly language.
+    Source code looks now as high level language instructions. But it is
+    assembler in fact. You should not modify predefined constants are used
+    in these files except you well know what you are doing.
+
+build:
+~~~~~~
+
+    LinAsm source code should be compiled by "fasm" executable file, which
+    is placed into "build" directory of each LinAsm release. To allow this file
     to be launched, please check that a file system has mount option "exec"
     and the file "build/fasm" has appropriate execution permission.
+
+    The fasm file has no backdoors, viruses or rootkits. It is vanilla FASM
+    compiler, extracted from official FASM installation kit and placed into
+    build directory. This is required only for compilation stage and doesn't
+    use for any other purposes.
 
 INSTALLATION
 ============

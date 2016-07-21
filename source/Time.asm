@@ -701,7 +701,7 @@ s_time	equ		stack - 8					; stack position of "time" variable
 		mov		const, 4294967296
 		sub		year, -2147483648
 		cmp		year, const					; if year doesn't fit into sint32_t
-		jae		.error						; then go to error branch
+		jae		.error						;     then go to error branch
 ;---[Check for leap year]------------------
 		mov		const, 1					; const = 1
 		lea		result1, [days1 + 12 * 8]	; result1 = days1 + 12
@@ -784,13 +784,32 @@ const	equ		rsi							; temporary register to hold constants
 SystemTime:
 ;---[Internal variables]-------------------
 result	equ		rax							; result register
+hpart	equ		rdx							; high part of cpu tick counter
+lpart	equ		rax							; low part of cpu tick counter
+index	equ		rcx							; cpu index
+ptr		equ		rdi							; pointer to vector of cpu tick counters
 ;------------------------------------------
+		rdtscp								; get value of cpu tick counter
+		shl		hpart, 32					; shift high part of cpu tick counter
+		add		hpart, lpart				; assemble cpu tick counter from its parts
+		mov		lpart, hpart				; duplicate assembled value
+		lea		ptr, [ticks]
+		lea		ptr, [ptr + index * 8]		; get position of cpu tick counter
+		sub		hpart, [ptr]				; compute elapsed time from last call
+		mov		[ptr], lpart				; save cpu tick counter to global vector
+		cmp		hpart, 500000000			; if elapsed time is less than barier
+		jb		.last						;     then return previous time stamp
+;---[Ask kernel for system time]-----------
 		xor		sc_prm1, sc_prm1
 		mov		sc_num, SYSCALL_TIME
 		syscall								; syscall time (NULL)
 		test	result, result				; is (result < 0)
-		js		.error						; then go to error branch
+		js		.error						;     then go to error branch
+		mov		[last], result				; update last time stamp
 		ret
+;---[Last time stamp branch]---------------
+.last:	mov		result, [last]
+		ret									; return last time stamp
 ;---[Error branch]-------------------------
 .error:	mov		result, TIME_ERROR			; return TIME_ERROR
 		ret
@@ -869,6 +888,14 @@ days2		dq	0,31,60,91,121,152,182,213,244,274,305,335	; leap year
 align 16
 max1		dq	31,28,31,30,31,30,31,31,30,31,30,31			; regular year
 max2		dq	31,29,31,30,31,30,31,31,30,31,30,31			; leap year
+
+;###############################################################################
+;#      Read-write data section                                                #
+;###############################################################################
+section	'.data'	align 16
+
+ticks		dq	32 dup (0)					; vector of all cpu tick counters
+last		rq	1							; last known time stamp
 
 ;###############################################################################
 ;#                                 END OF FILE                                 #

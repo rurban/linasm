@@ -9,9 +9,12 @@
 INTRODUCTION
 ============
 
-    LinAsm doesn't use autotools for configuration process at all, because its
-    Makefile is too simple and almost has no options. This makes installation
-    process very simple.
+    LinAsm doesn't use autotools or config files for installations process
+    at all, because its Makefile is too simple and almost has no options. This
+    makes installation process very simple and fast. Below I described how
+    to pass through common steps: to assembly binary file from source code;
+    install shared library into Linux system; and to uninstall or clear
+    the system from LinAsm files, if you wish not to use it for your projects.
 
 COMPILATION
 ===========
@@ -57,13 +60,13 @@ UNINSTALLATION
     directory from project's header files and removes shared library file
     "liblinasm.so" from local "lib" directory.
 
-    By default it assumes that the package was previously installed into the
-    directory "/usr/local", which is default prefix value. Uninstall script
+    By default it assumes that the package was previously installed into
+    the directory "/usr/local", which is default prefix value. Uninstall script
     tries to check and clear "include" and "lib" directories from projects files
     without touching any other system files. If you installed the package into
-    another directory (for example you specified "prefix=/usr"), then you should
-    call uninstall command with the same prefix value which was set for
-    installation.
+    another directory (for example you specified "prefix=/usr"), then you
+    should call uninstall command with the same prefix value which was set
+    for installation.
 
     Example: "make uninstall prefix=/usr". This command will do uninstallation
     procedure in the same way, like the default command, but checking "/usr"
