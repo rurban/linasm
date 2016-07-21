@@ -48,7 +48,7 @@ public	Init_int64					as	'Array_Init_size'
 public	Init_int64					as	'_ZN5Array4InitEPmmm'
 
 ;******************************************************************************;
-;       Copying                                                                ;
+;       Copying arrays                                                         ;
 ;******************************************************************************;
 
 ; Unsigned integer types
@@ -84,7 +84,7 @@ public	CopyFwd64					as	'_ZN5Array4CopyEPmPKmm'
 public	CopyFwd8					as	'_ZN5Array4CopyEPvPKvm'
 
 ;******************************************************************************;
-;       Moving                                                                 ;
+;       Moving arrays                                                          ;
 ;******************************************************************************;
 
 ; Unsigned integer types
@@ -792,10 +792,10 @@ public	RoundRound_flt32			as	'_ZN5Array5RoundEPfm'
 public	RoundRound_flt64			as	'_ZN5Array5RoundEPdm'
 
 ; Round to nearest integer, toward zero (truncation)
-public	RoundTrunc_flt32			as	'Array_Trunc_flt32'
-public	RoundTrunc_flt64			as	'Array_Trunc_flt64'
-public	RoundTrunc_flt32			as	'_ZN5Array5TruncEPfm'
-public	RoundTrunc_flt64			as	'_ZN5Array5TruncEPdm'
+public	RoundTruncate_flt32			as	'Array_Truncate_flt32'
+public	RoundTruncate_flt64			as	'Array_Truncate_flt64'
+public	RoundTruncate_flt32			as	'_ZN5Array8TruncateEPfm'
+public	RoundTruncate_flt64			as	'_ZN5Array8TruncateEPdm'
 
 ; Fractional part
 public	RoundFrac_flt32				as	'Array_Frac_flt32'
@@ -3306,7 +3306,7 @@ Init_flt32:	INIT_FLT	s
 Init_flt64:	INIT_FLT	d
 
 ;******************************************************************************;
-;       Copying                                                                ;
+;       Copying arrays                                                         ;
 ;******************************************************************************;
 macro	COPY_FWD	reg, x
 {
@@ -3477,7 +3477,7 @@ CopyBwd32:	COPY_BWD	eax, d
 CopyBwd64:	COPY_BWD	rax, q
 
 ;******************************************************************************;
-;       Moving                                                                 ;
+;       Moving arrays                                                          ;
 ;******************************************************************************;
 macro	MOVE	x
 {
@@ -4939,28 +4939,28 @@ end if
 }
 
 ; Round down (floor)
-RoundDown_flt32:	ROUND	0, 0x1, s
-RoundDown_flt64:	ROUND	0, 0x1, d
+RoundDown_flt32:		ROUND	0, 0x1, s
+RoundDown_flt64:		ROUND	0, 0x1, d
 
 ; Round up (ceil)
-RoundUp_flt32:		ROUND	0, 0x2, s
-RoundUp_flt64:		ROUND	0, 0x2, d
+RoundUp_flt32:			ROUND	0, 0x2, s
+RoundUp_flt64:			ROUND	0, 0x2, d
 
 ; Round to nearest even integer
-RoundInt_flt32:		ROUND	0, 0x0, s
-RoundInt_flt64:		ROUND	0, 0x0, d
+RoundInt_flt32:			ROUND	0, 0x0, s
+RoundInt_flt64:			ROUND	0, 0x0, d
 
 ; Round to nearest integer, away from zero
-RoundRound_flt32:	ROUND	1, 0x3, s
-RoundRound_flt64:	ROUND	1, 0x3, d
+RoundRound_flt32:		ROUND	1, 0x3, s
+RoundRound_flt64:		ROUND	1, 0x3, d
 
 ; Round to nearest integer, toward zero (truncation)
-RoundTrunc_flt32:	ROUND	0, 0x3, s
-RoundTrunc_flt64:	ROUND	0, 0x3, d
+RoundTruncate_flt32:	ROUND	0, 0x3, s
+RoundTruncate_flt64:	ROUND	0, 0x3, d
 
 ; Fractional part
-RoundFrac_flt32:	ROUND	2, 0x3, s
-RoundFrac_flt64:	ROUND	2, 0x3, d
+RoundFrac_flt32:		ROUND	2, 0x3, s
+RoundFrac_flt64:		ROUND	2, 0x3, d
 
 ;******************************************************************************;
 ;       Numerical integration                                                  ;

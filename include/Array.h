@@ -49,7 +49,7 @@ static void Init (flt64_t array[], size_t size, flt64_t value);
 static void Init (size_t array[], size_t size, size_t value);
 
 //****************************************************************************//
-//      Copying                                                               //
+//      Copying arrays                                                        //
 //****************************************************************************//
 
 // Unsigned integer types
@@ -73,7 +73,7 @@ static void Copy (size_t target[], const size_t source[], size_t size);
 static void Copy (void *target, const void *source, size_t size);
 
 //****************************************************************************//
-//      Moving                                                                //
+//      Moving arrays                                                         //
 //****************************************************************************//
 
 // Unsigned integer types
@@ -568,8 +568,8 @@ static void Round (flt32_t array[], size_t size);
 static void Round (flt64_t array[], size_t size);
 
 // Round to nearest integer, toward zero (truncation)
-static void Trunc (flt32_t array[], size_t size);
-static void Trunc (flt64_t array[], size_t size);
+static void Truncate (flt32_t array[], size_t size);
+static void Truncate (flt64_t array[], size_t size);
 
 // Fractional part
 static void Frac (flt32_t array[], size_t size);
@@ -2189,7 +2189,7 @@ void Array_Init_flt64 (flt64_t array[], size_t size, flt64_t value);
 void Array_Init_size (size_t array[], size_t size, size_t value);
 
 //****************************************************************************//
-//      Copying                                                               //
+//      Copying arrays                                                        //
 //****************************************************************************//
 
 // Unsigned integer types
@@ -2213,7 +2213,7 @@ void Array_Copy_size (size_t target[], const size_t source[], size_t size);
 void Array_Copy (void *target, const void *source, size_t size);
 
 //****************************************************************************//
-//      Moving                                                                //
+//      Moving arrays                                                         //
 //****************************************************************************//
 
 // Unsigned integer types
@@ -2708,8 +2708,8 @@ void Array_Round_flt32 (flt32_t array[], size_t size);
 void Array_Round_flt64 (flt64_t array[], size_t size);
 
 // Round to nearest integer, toward zero (truncation)
-void Array_Trunc_flt32 (flt32_t array[], size_t size);
-void Array_Trunc_flt64 (flt64_t array[], size_t size);
+void Array_Truncate_flt32 (flt32_t array[], size_t size);
+void Array_Truncate_flt64 (flt64_t array[], size_t size);
 
 // Fractional part
 void Array_Frac_flt32 (flt32_t array[], size_t size);
