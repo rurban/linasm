@@ -2971,7 +2971,7 @@ space	= 5 * 8								; stack size required by the procedure
 		ret
 ;---[Extend object capacity]---------------
 .ext:	mov		param2, size
-		call	Extend						; status = this.Extend (count)
+		call	Extend						; status = this.Extend (size)
 		mov		this, [s_this]				; get "this" variable from the stack
 		mov		source, [s_src]				; get "source" variable from the stack
 		test	status, status				; if (status)

@@ -81,10 +81,12 @@ public	AllowWritings			as	'_ZN4Ring13AllowWritingsEv'
 ;       Copying elements                                                       ;
 ;******************************************************************************;
 
-; Into list head/tail
+; Into list head
 public	CopyIntoHead			as	'List_CopyIntoHead'
-public	CopyIntoTail			as	'List_CopyIntoTail'
 public	CopyIntoHead			as	'_ZN4List12CopyIntoHeadEPKS_m'
+
+; Into list tail
+public	CopyIntoTail			as	'List_CopyIntoTail'
 public	CopyIntoTail			as	'_ZN4List12CopyIntoTailEPKS_m'
 
 ; Using ring link
@@ -117,10 +119,12 @@ public	CopyBeforeBwdRing		as	'_ZN4Ring13CopyBeforeBwdEPKS_m'
 ;       Moving elements                                                        ;
 ;******************************************************************************;
 
-; Into list head/tail
+; Into list head
 public	MoveIntoHead			as	'List_MoveIntoHead'
-public	MoveIntoTail			as	'List_MoveIntoTail'
 public	MoveIntoHead			as	'_ZN4List12MoveIntoHeadEPS_m'
+
+; Into list tail
+public	MoveIntoTail			as	'List_MoveIntoTail'
 public	MoveIntoTail			as	'_ZN4List12MoveIntoTailEPS_m'
 
 ; Using ring link
@@ -153,10 +157,12 @@ public	MoveBeforeBwdRing		as	'_ZN4Ring13MoveBeforeBwdEPS_m'
 ;       Insertion of element                                                   ;
 ;******************************************************************************;
 
-; Into list head/tail
+; Into list head
 public	InsertIntoHead			as	'List_InsertIntoHead'
-public	InsertIntoTail			as	'List_InsertIntoTail'
 public	InsertIntoHead			as	'_ZN4List14InsertIntoHeadEPK6pair_t'
+
+; Into list tail
+public	InsertIntoTail			as	'List_InsertIntoTail'
 public	InsertIntoTail			as	'_ZN4List14InsertIntoTailEPK6pair_t'
 
 ; Using ring link
@@ -189,10 +195,12 @@ public	InsertBeforeBwdRing		as	'_ZN4Ring15InsertBeforeBwdEPK6pair_t'
 ;       Removing of element                                                    ;
 ;******************************************************************************;
 
-; From list head/tail
+; From list head
 public	RemoveHead				as	'List_RemoveHead'
-public	RemoveTail				as	'List_RemoveTail'
 public	RemoveHead				as	'_ZN4List10RemoveHeadEv'
+
+; From list tail
+public	RemoveTail				as	'List_RemoveTail'
 public	RemoveTail				as	'_ZN4List10RemoveTailEv'
 
 ; Using ring link
@@ -215,10 +223,12 @@ public	RemoveBwdRing			as	'_ZN4Ring9RemoveBwdEv'
 ;       Setting element value                                                  ;
 ;******************************************************************************;
 
-; Set head/tail element
+; Set head element
 public	SetHead					as	'List_SetHead'
-public	SetTail					as	'List_SetTail'
 public	SetHead					as	'_ZN4List7SetHeadEPK6pair_t'
+
+; Set tail element
+public	SetTail					as	'List_SetTail'
 public	SetTail					as	'_ZN4List7SetTailEPK6pair_t'
 
 ; Set link element
@@ -241,10 +251,12 @@ public	SetBwd					as	'_ZN4Ring6SetBwdEPK6pair_t'
 ;       Getting element value                                                  ;
 ;******************************************************************************;
 
-; Get head/tail element
+; Get head element
 public	GetHead					as	'List_GetHead'
-public	GetTail					as	'List_GetTail'
 public	GetHead					as	'_ZNK4List7GetHeadEP6pair_t'
+
+; Get tail element
+public	GetTail					as	'List_GetTail'
 public	GetTail					as	'_ZNK4List7GetTailEP6pair_t'
 
 ; Get link element
@@ -277,10 +289,12 @@ public	GetIter					as	'_ZNK4Ring7GetIterEP6pair_tl'
 ;       Reversing elements order                                               ;
 ;==============================================================================;
 
-; Using list head/tail
+; Using list head
 public	ReverseHead				as	'List_ReverseHead'
-public	ReverseTail				as	'List_ReverseTail'
 public	ReverseHead				as	'_ZN4List11ReverseHeadEm'
+
+; Using list tail
+public	ReverseTail				as	'List_ReverseTail'
 public	ReverseTail				as	'_ZN4List11ReverseTailEm'
 
 ; Using ring link
@@ -920,8 +934,10 @@ space	= 7 * 8								; stack size required by the procedure
 		ret
 }
 
-; Into list head/tail
+; Into list head
 MoveElementsHead:		MOVE_ELEMENTS	InsertCoreList, RemoveCoreList, HEAD, BWD, 0
+
+; Into list tail
 MoveElementsTail:		MOVE_ELEMENTS	InsertCoreList, RemoveCoreList, TAIL, FWD, KSIZE
 
 ; Using ring link
@@ -1021,8 +1037,10 @@ space	= 9 * 8								; stack size required by the procedure
 		ret
 }
 
-; Into list head/tail
+; Into list head
 CopyElementsHead:		COPY_ELEMENTS	InsertCoreList, GoPrev, HEAD, 0
+
+; Into list tail
 CopyElementsTail:		COPY_ELEMENTS	InsertCoreList, GoNext, TAIL, KSIZE
 
 ; Using ring link
@@ -1765,8 +1783,10 @@ end if
 		ret
 }
 
-; Into list head/tail
+; Into list head
 CopyIntoHead:		COPY_MOVE	CopyElementsHead, CopyElementsHead, MoveElementsHead, MoveElementsHead, GoPrev, GoNext, HEAD, BWD, 0, 0, 0
+
+; Into list tail
 CopyIntoTail:		COPY_MOVE	CopyElementsTail, CopyElementsTail, MoveElementsTail, MoveElementsTail, GoNext, GoPrev, TAIL, FWD, 0, 0, 0
 
 ; Using ring link
@@ -1789,8 +1809,10 @@ CopyBeforeBwdRing:	COPY_MOVE	CopyElementsBwdRing, CopyElementsBwdRing, MoveEleme
 ;       Moving elements                                                        ;
 ;******************************************************************************;
 
-; Into list head/tail
+; Into list head
 MoveIntoHead:		COPY_MOVE	CopyElementsHead, CopyElementsHead, MoveElementsHead, MoveElementsHead, GoPrev, GoNext, HEAD, BWD, 0, 0, 1
+
+; Into list tail
 MoveIntoTail:		COPY_MOVE	CopyElementsTail, CopyElementsTail, MoveElementsTail, MoveElementsTail, GoNext, GoPrev, TAIL, FWD, 0, 0, 1
 
 ; Using ring link
@@ -2351,8 +2373,10 @@ space	= 5 * 8								; stack size required by the procedure
 		ret
 }
 
-; Into list head/tail
+; Into list head
 InsertIntoHead:			INSERT1	InsertCoreList, HEAD, 0
+
+; Into list tail
 InsertIntoTail:			INSERT1	InsertCoreList, TAIL, KSIZE
 
 ; Using ring link
@@ -3056,8 +3080,10 @@ space	= 3 * 8								; stack size required by the procedure
 		jmp		.back						; go back
 }
 
-; From list head/tail
+; From list head
 RemoveHead:		REMOVE	RemoveCoreList, HEAD
+
+; From list tail
 RemoveTail:		REMOVE	RemoveCoreList, TAIL
 
 ; Using ring link
@@ -3345,8 +3371,10 @@ end if
 		jmp		.back2						; go back
 }
 
-; Using list head/tail
+; Using list head
 ReverseHead:	REVERSE		GoNext, add, sub, HEAD, TAIL, 0, 0
+
+; Using list tail
 ReverseTail:	REVERSE		GoPrev, sub, add, TAIL, HEAD, 1, 0
 
 ; Using ring link
@@ -5648,7 +5676,7 @@ end if
 		ret
 ;---[Extend object capacity]---------------
 .ext:	mov		param2, size
-		call	Extend						; status = this.Extend (low)
+		call	Extend						; status = this.Extend (size)
 		mov		this, [s_this]				; get "this" variable from the stack
 		mov		source, [s_src]				; get "source" variable from the stack
 		mov		array, [s_array]			; get "array" variable from the stack

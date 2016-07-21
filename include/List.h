@@ -68,8 +68,10 @@ void AllowWritings (void);
 //      Copying elements                                                      //
 //****************************************************************************//
 
-// Into list head/tail
+// Into list head
 size_t CopyIntoHead (const List *source, size_t count);
+
+// Into list tail
 size_t CopyIntoTail (const List *source, size_t count);
 
 // Using forward iterator
@@ -84,8 +86,10 @@ size_t CopyBeforeBwd (const List *source, size_t count);
 //      Moving elements                                                       //
 //****************************************************************************//
 
-// Into list head/tail
+// Into list head
 size_t MoveIntoHead (List *source, size_t count);
+
+// Into list tail
 size_t MoveIntoTail (List *source, size_t count);
 
 // Using forward iterator
@@ -100,8 +104,10 @@ size_t MoveBeforeBwd (List *source, size_t count);
 //      Insertion of element                                                  //
 //****************************************************************************//
 
-// Into list head/tail
+// Into list head
 bool InsertIntoHead (const pair_t *data);
+
+// Into list tail
 bool InsertIntoTail (const pair_t *data);
 
 // Using forward iterator
@@ -390,8 +396,10 @@ void List_AllowWritings (struct List *list);
 //      Copying elements                                                      //
 //****************************************************************************//
 
-// Into list head/tail
+// Into list head
 size_t List_CopyIntoHead (struct List *list, const struct List *source, size_t count);
+
+// Into list tail
 size_t List_CopyIntoTail (struct List *list, const struct List *source, size_t count);
 
 // Using forward iterator
@@ -406,8 +414,10 @@ size_t List_CopyBeforeBwd (struct List *list, const struct List *source, size_t 
 //      Moving elements                                                       //
 //****************************************************************************//
 
-// Into list head/tail
+// Into list head
 size_t List_MoveIntoHead (struct List *list, struct List *source, size_t count);
+
+// Into list tail
 size_t List_MoveIntoTail (struct List *list, struct List *source, size_t count);
 
 // Using forward iterator
@@ -422,8 +432,10 @@ size_t List_MoveBeforeBwd (struct List *list, struct List *source, size_t count)
 //      Insertion of element                                                  //
 //****************************************************************************//
 
-// Into list head/tail
+// Into list head
 bool List_InsertIntoHead (struct List *list, const struct pair_t *data);
+
+// Into list tail
 bool List_InsertIntoTail (struct List *list, const struct pair_t *data);
 
 // Using forward iterator

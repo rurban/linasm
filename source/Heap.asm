@@ -1462,8 +1462,7 @@ source	equ		rsi							; pointer to source heap object
 status	equ		al							; operation status
 result	equ		rax							; result register
 fptr	equ		rax							; pointer to call external function
-cap		equ		r8							; object capacity
-size	equ		r9							; object size
+size	equ		r8							; object size
 stack	equ		rsp							; stack pointer
 s_this	equ		stack + 0 * 8				; stack position of "this" variable
 s_src	equ		stack + 1 * 8				; stack position of "source" variable
@@ -1488,11 +1487,10 @@ space	= 3 * 8								; stack size required by the procedure
 		test	size, size					; if (source.size == 0)
 		jz		.exit						;     then go to exit
 ;---[Check object capacity]----------------
-		mov		cap, [this + CAPACITY]		; get target object capacity
-		sub		cap, CLINE - KSIZE			; cap -= CLINE - KSIZE
 		add		size, [this + SIZE]			; size = this.size + source.size
+		add		size, CLINE - KSIZE			; size += CLINE - KSIZE
 	Capacity	size, result, MINCAP		; compute new capacity of target object
-		cmp		size, cap					; if (size > capacity)
+		cmp		size, [this + CAPACITY]		; if (size > capacity)
 		ja		.ext						;     then try to extend object capacity
 ;---[Copy elements]------------------------
 .back:	mov		result, [this + ARRAY]		; get pointer to target array of nodes
@@ -1520,7 +1518,7 @@ space	= 3 * 8								; stack size required by the procedure
 		ret
 ;---[Extend object capacity]---------------
 .ext:	mov		param2, size
-		call	Extend						; status = this.Extend (count)
+		call	Extend						; status = this.Extend (size)
 		mov		this, [s_this]				; get "this" variable from the stack
 		mov		source, [s_src]				; get "source" variable from the stack
 		test	status, status				; if (status)
