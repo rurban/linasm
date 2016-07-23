@@ -162,12 +162,12 @@ space	= 3 * 8								; stack size required by the procedure
 ;---[Allocate memory for the object]-------
 		mov		sc_prm6, 0
 		mov		sc_prm5, -1
-		mov		sc_prm4, 0x22
+		mov		sc_prm4, 0x8022
 		mov		sc_prm3, 0x3
 		mov		sc_prm2, array
 		mov		sc_prm1, 0
 		mov		sc_num, SYSCALL_MMAP
-		syscall								; array = mmap (NULL, cap, PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANONYMOUS, -1, 0)
+		syscall								; array = mmap (NULL, cap, PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANONYMOUS | MAP_POPULATE, -1, 0)
 		mov		this, [s_this]				; get "this" variable from the stack
 		mov		cap, [s_cap]				; get "cap" variable from the stack
 		test	array, array				; if (array < 0)
