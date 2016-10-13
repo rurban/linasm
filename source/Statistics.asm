@@ -442,7 +442,7 @@ end if
 		ret
 }
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-macro	QUARTILE_INT	Quart, result
+macro	QUARTILE_INT	result, Quart, sign
 {
 ;---[Parameters]---------------------------
 array	equ		rdi							; pointer to array
@@ -453,11 +453,16 @@ ptr2	equ		rdx							; pointer to second target element
 ;------------------------------------------
 		test	size, size					; if (size == 0)
 		jz		.error						;     then go to error branch
-		call	Quart						; call Quartile (array, size)
 ;---[Compute quartile]---------------------
+		call	Quart						; call Quartile (array, size)
 		mov		result, [ptr1]
 		add		result, [ptr2]
-		rcr		result, 1					; return 0.5 * (ptr1[0] + ptr2[0])
+if sign
+		jo		@f							; in case of overflow skip the code
+		sar		result, 1					; return 0.5 * (ptr1[0] + ptr2[0])
+		ret
+end if
+@@:		rcr		result, 1					; return 0.5 * (ptr1[0] + ptr2[0])
 		ret
 ;---[Error branch]-------------------------
 .error:	xor		result, result				; return 0
@@ -470,9 +475,9 @@ macro	QUARTILE_FLT	Quart, x
 array	equ		rdi							; pointer to array
 size	equ		rsi							; array size (count of elements)
 ;---[Internal variables]-------------------
+fptr	equ		rax							; pointer to call external function
 ptr1	equ		rax							; pointer to first target element
 ptr2	equ		rdx							; pointer to second target element
-fptr	equ		rax							; pointer to call external function
 result	equ		xmm0						; result register
 half	equ		xmm1						; 0.5
 stack	equ		rsp							; stack pointer
@@ -491,9 +496,9 @@ nanval	= PNAN_FLT64						; +NaN
 end if
 space	= 5 * 8								; stack size required by the procedure
 ;------------------------------------------
+		sub		stack, space				; reserving stack size for local vars
 		test	size, size					; if (size == 0)
 		jz		.error						;     then go to error branch
-		sub		stack, space				; reserving stack size for local vars
 ;---[Call convert function]----------------
 		mov		[s_array], array			; save "array" variable into the stack
 		mov		[s_size], size				; save "size" variable into the stack
@@ -511,16 +516,17 @@ space	= 5 * 8								; stack size required by the procedure
 		mov		fptr, Map
 		call	fptr						; Call Map (array, size)
 ;---[Compute quartile]---------------------
+		initreg	half, size, halfval			; half = 0.5
 		mov		ptr1, [s_ptr1]				; get "ptr1" variable from the stack
 		mov		ptr2, [s_ptr2]				; get "ptr2" variable from the stack
-		initreg	half, size, halfval			; half = 0.5
 		movs#x	result, [ptr1]
 		adds#x	result, [ptr2]
-		muls#x	result, half				; return 0.5 * (ptr1[0] + ptr2[0])
+		muls#x	result, half 				; return 0.5 * (ptr1[0] + ptr2[0])
 		add		stack, space				; restoring back the stack pointer
 		ret
 ;---[Error branch]-------------------------
 .error:	initreg	result, size, nanval		; return NaN
+		add		stack, space				; restoring back the stack pointer
 		ret
 }
 
@@ -577,16 +583,16 @@ Quartile3_sint64:	QUARTILE_CORE	Quantile_sint64, 3, 3
 ;==============================================================================;
 
 ; Unsigned integer types
-Median_uint8:		QUARTILE_INT	Quartile2_uint8, al
-Median_uint16:		QUARTILE_INT	Quartile2_uint16, ax
-Median_uint32:		QUARTILE_INT	Quartile2_uint32, eax
-Median_uint64:		QUARTILE_INT	Quartile2_uint64, rax
+Median_uint8:		QUARTILE_INT	al, Quartile2_uint8, 0
+Median_uint16:		QUARTILE_INT	ax, Quartile2_uint16, 0
+Median_uint32:		QUARTILE_INT	eax, Quartile2_uint32, 0
+Median_uint64:		QUARTILE_INT	rax, Quartile2_uint64, 0
 
 ; Signed integer types
-Median_sint8:		QUARTILE_INT	Quartile2_sint8, al
-Median_sint16:		QUARTILE_INT	Quartile2_sint16, ax
-Median_sint32:		QUARTILE_INT	Quartile2_sint32, eax
-Median_sint64:		QUARTILE_INT	Quartile2_sint64, rax
+Median_sint8:		QUARTILE_INT	al, Quartile2_sint8, 1
+Median_sint16:		QUARTILE_INT	ax, Quartile2_sint16, 1
+Median_sint32:		QUARTILE_INT	eax, Quartile2_sint32, 1
+Median_sint64:		QUARTILE_INT	rax, Quartile2_sint64, 1
 
 ; Floating-point types
 Median_flt32:		QUARTILE_FLT	Quartile2_sint32, s
@@ -597,16 +603,16 @@ Median_flt64:		QUARTILE_FLT	Quartile2_sint64, d
 ;==============================================================================;
 
 ; Unsigned integer types
-LowerQuart_uint8:	QUARTILE_INT	Quartile1_uint8, al
-LowerQuart_uint16:	QUARTILE_INT	Quartile1_uint16, ax
-LowerQuart_uint32:	QUARTILE_INT	Quartile1_uint32, eax
-LowerQuart_uint64:	QUARTILE_INT	Quartile1_uint64, rax
+LowerQuart_uint8:	QUARTILE_INT	al, Quartile1_uint8, 0
+LowerQuart_uint16:	QUARTILE_INT	ax, Quartile1_uint16, 0
+LowerQuart_uint32:	QUARTILE_INT	eax, Quartile1_uint32, 0
+LowerQuart_uint64:	QUARTILE_INT	rax, Quartile1_uint64, 0
 
 ; Signed integer types
-LowerQuart_sint8:	QUARTILE_INT	Quartile1_sint8, al
-LowerQuart_sint16:	QUARTILE_INT	Quartile1_sint16, ax
-LowerQuart_sint32:	QUARTILE_INT	Quartile1_sint32, eax
-LowerQuart_sint64:	QUARTILE_INT	Quartile1_sint64, rax
+LowerQuart_sint8:	QUARTILE_INT	al, Quartile1_sint8, 1
+LowerQuart_sint16:	QUARTILE_INT	ax, Quartile1_sint16, 1
+LowerQuart_sint32:	QUARTILE_INT	eax, Quartile1_sint32, 1
+LowerQuart_sint64:	QUARTILE_INT	rax, Quartile1_sint64, 1
 
 ; Floating-point types
 LowerQuart_flt32:	QUARTILE_FLT	Quartile1_sint32, s
@@ -617,16 +623,16 @@ LowerQuart_flt64:	QUARTILE_FLT	Quartile1_sint64, d
 ;==============================================================================;
 
 ; Unsigned integer types
-UpperQuart_uint8:	QUARTILE_INT	Quartile3_uint8, al
-UpperQuart_uint16:	QUARTILE_INT	Quartile3_uint16, ax
-UpperQuart_uint32:	QUARTILE_INT	Quartile3_uint32, eax
-UpperQuart_uint64:	QUARTILE_INT	Quartile3_uint64, rax
+UpperQuart_uint8:	QUARTILE_INT	al, Quartile3_uint8, 0
+UpperQuart_uint16:	QUARTILE_INT	ax, Quartile3_uint16, 0
+UpperQuart_uint32:	QUARTILE_INT	eax, Quartile3_uint32, 0
+UpperQuart_uint64:	QUARTILE_INT	rax, Quartile3_uint64, 0
 
 ; Signed integer types
-UpperQuart_sint8:	QUARTILE_INT	Quartile3_sint8, al
-UpperQuart_sint16:	QUARTILE_INT	Quartile3_sint16, ax
-UpperQuart_sint32:	QUARTILE_INT	Quartile3_sint32, eax
-UpperQuart_sint64:	QUARTILE_INT	Quartile3_sint64, rax
+UpperQuart_sint8:	QUARTILE_INT	al, Quartile3_sint8, 1
+UpperQuart_sint16:	QUARTILE_INT	ax, Quartile3_sint16, 1
+UpperQuart_sint32:	QUARTILE_INT	eax, Quartile3_sint32, 1
+UpperQuart_sint64:	QUARTILE_INT	rax, Quartile3_sint64, 1
 
 ; Floating-point types
 UpperQuart_flt32:	QUARTILE_FLT	Quartile3_sint32, s
@@ -847,7 +853,7 @@ Midrange_flt64:	MIDRANGE	d
 ;==============================================================================;
 ;       Variance                                                               ;
 ;==============================================================================;
-macro	VAR		type, x
+macro	VAR		abs, x
 {
 ;---[Parameters]---------------------------
 array	equ		rdi							; pointer to array
@@ -888,7 +894,7 @@ bmask	= bytes - 1							; elements aligning mask
 		jbe		.error						;     then go to error branch
 	cvtsi2s#x	nsize, count				; nsize = size - 1
 		movap#x	vector, mean				; vector = mean
-if type = 2
+if abs
 		initreg	mask, index, dmask			; mask = dmask
 end if
 		xorp#x	result, result				; index = 0
@@ -897,7 +903,7 @@ end if
 		shl		size, scale					; convert size to bytes
 ;---[Normal execution branch]--------------
 		shufp#x	vector, vector, 0x0			; duplicate value through the entire register
-if type = 2
+if abs
 		shufp#x	mask, mask, 0x0				; duplicate value through the entire register
 end if
 		mov		index, array
@@ -921,10 +927,10 @@ end if
 		movap#x	temp, [array]				; temp = array[0]
 		subp#x	temp, vector				; temp -= vector
 	blendvp#x	temp, zero					; blend temp with zero values
-if type = 1
-		mulp#x	temp, temp					; temp = temp ^ 2
-else if type = 2
+if abs
 		andp#x	temp, mask					; temp = Abs (temp)
+else
+		mulp#x	temp, temp					; temp = temp ^ 2
 end if
 		addp#x	sum0, temp					; sum0 += temp
 		xorp#x	blend, blend				; blend = 0
@@ -934,10 +940,10 @@ end if
 		jbe		.tail						;     then process array tail
 		movap#x	temp, [ptr + 1 * VSIZE]		; temp = ptr[1]
 		subp#x	temp, vector				; temp -= vector
-if type = 1
-		mulp#x	temp, temp					; temp = temp ^ 2
-else if type = 2
+if abs
 		andp#x	temp, mask					; temp = Abs (temp)
+else
+		mulp#x	temp, temp					; temp = temp ^ 2
 end if
 		addp#x	sum1, temp					; sum1 += temp
 		add		index, VSIZE				; index += VSIZE
@@ -945,10 +951,10 @@ end if
 		jbe		.tail						;     then process array tail
 		movap#x	temp, [ptr + 2 * VSIZE]		; temp = ptr[2]
 		subp#x	temp, vector				; temp -= vector
-if type = 1
-		mulp#x	temp, temp					; temp = temp ^ 2
-else if type = 2
+if abs
 		andp#x	temp, mask					; temp = Abs (temp)
+else
+		mulp#x	temp, temp					; temp = temp ^ 2
 end if
 		addp#x	sum2, temp					; sum2 += temp
 		add		index, VSIZE				; index += VSIZE
@@ -956,10 +962,10 @@ end if
 		jbe		.tail						;     then process array tail
 		movap#x	temp, [ptr + 3 * VSIZE]		; temp = ptr[3]
 		subp#x	temp, vector				; temp -= vector
-if type = 1
-		mulp#x	temp, temp					; temp = temp ^ 2
-else if type = 2
+if abs
 		andp#x	temp, mask					; temp = Abs (temp)
+else
+		mulp#x	temp, temp					; temp = temp ^ 2
 end if
 		addp#x	sum3, temp					; sum3 += temp
 		add		index, VSIZE				; index += VSIZE
@@ -967,10 +973,10 @@ end if
 		jbe		.tail						;     then process array tail
 		movap#x	temp, [ptr + 4 * VSIZE]		; temp = ptr[4]
 		subp#x	temp, vector				; temp -= vector
-if type = 1
-		mulp#x	temp, temp					; temp = temp ^ 2
-else if type = 2
+if abs
 		andp#x	temp, mask					; temp = Abs (temp)
+else
+		mulp#x	temp, temp					; temp = temp ^ 2
 end if
 		addp#x	sum4, temp					; sum4 += temp
 	prefetchnta	[ptr + PSTEP]				; prefetch next portion of data
@@ -982,12 +988,12 @@ end if
 		andnp#x	blend, [table + size]
 		movap#x	temp, [array + index]		; temp = array[index]
 		subp#x	temp, vector				; temp -= vector
-	blendvp#x	zero, temp					; blend temp with zero values
-if type = 1
-		mulp#x	temp, temp					; temp = temp ^ 2
-else if type = 2
+if abs
 		andp#x	temp, mask					; temp = Abs (temp)
+else
+		mulp#x	temp, temp					; temp = temp ^ 2
 end if
+	blendvp#x	zero, temp					; blend temp with zero values
 		addp#x	sum0, zero					; sum0 += temp
 		addp#x	sum1, sum2
 		addp#x	sum3, sum4
@@ -1000,10 +1006,10 @@ end if
 ;---[Scalar loop]--------------------------
 .sloop:	movs#x	temp, [array]				; temp = array[0]
 		subs#x	temp, vector				; temp -= vector
-if type = 1
-		muls#x	temp, temp					; temp = temp ^ 2
-else if type = 2
+if abs
 		andp#x	temp, mask					; temp = Abs (temp)
+else
+		muls#x	temp, temp					; temp = temp ^ 2
 end if
 		adds#x	result, temp				; result += temp
 		add		array, bytes				; array++
@@ -1016,8 +1022,8 @@ end if
 .error:	initreg	result, index, nanval		; return NaN
 		ret
 }
-Variance_flt32:	VAR		1, s
-Variance_flt64:	VAR		1, d
+Variance_flt32:		VAR		0, s
+Variance_flt64:		VAR		0, d
 
 ;==============================================================================;
 ;       Standard deviation                                                     ;
@@ -1046,52 +1052,43 @@ StdDeviation_flt64:	STD_DEV	d
 ;==============================================================================;
 ;       Absolute deviation                                                     ;
 ;==============================================================================;
-AbsDeviation_flt32:	VAR		2, s
-AbsDeviation_flt64:	VAR		2, d
+AbsDeviation_flt32:	VAR		1, s
+AbsDeviation_flt64:	VAR		1, d
 
 ;==============================================================================;
 ;       Interquartile range                                                    ;
 ;==============================================================================;
-macro	QUART_RANGE_INT	Quart1, Quart3, result
+macro	QUART_RANGE_INT	result, LowerQuart, UpperQuart
 {
 ;---[Parameters]---------------------------
 array	equ		rdi							; pointer to array
 size	equ		rsi							; array size (count of elements)
 ;---[Internal variables]-------------------
-ptr1	equ		rax							; pointer to first target element
-ptr2	equ		rdx							; pointer to second target element
 stack	equ		rsp							; stack pointer
 s_array	equ		stack + 0 * 8				; stack position of "array" variable
 s_size	equ		stack + 1 * 8				; stack position of "size" variable
 s_res	equ		stack + 2 * 8				; stack position of "result" variable
 space	= 3 * 8								; stack size required by the procedure
 ;------------------------------------------
+		sub		stack, space				; reserving stack size for local vars
 		test	size, size					; if (size == 0)
 		jz		.error						;     then go to error branch
-		sub		stack, space				; reserving stack size for local vars
-;---[Call quartile function]---------------
+;---[Compute lower quartile]---------------
 		mov		[s_array], array			; save "array" variable into the stack
 		mov		[s_size], size				; save "size" variable into the stack
-		call	Quart1						; call Quartile1 (array, size)
-;---[Compute 1-st quartile]----------------
-		mov		result, [ptr1]
-		add		result, [ptr2]
-		rcr		result, 1					; result = 0.5 * (ptr1[0] + ptr2[0])
+		call	LowerQuart					; call LowerQuart (array, size)
 		mov		[s_res], result				; save "result" variable into the stack
-;---[Call quartile function]---------------
+;---[Compute upper quartile]---------------
 		mov		array, [s_array]			; get "array" variable from the stack
 		mov		size, [s_size]				; get "size" variable from the stack
-		call	Quart3						; call Quartile3 (array, size)
-;---[Compute 3-st quartile]----------------
-		mov		result, [ptr1]
-		add		result, [ptr2]
-		rcr		result, 1					; result = 0.5 * (ptr1[0] + ptr2[0])
+		call	UpperQuart					; call UpperQuart (array, size)
 ;---[Compute interquartile range]----------
 		sub		result, [s_res]				; return quart3 - quart1
 		add		stack, space				; restoring back the stack pointer
 		ret
 ;---[Error branch]-------------------------
 .error:	xor		result, result				; return 0
+		add		stack, space				; restoring back the stack pointer
 		ret
 }
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -1101,11 +1098,12 @@ macro	QUART_RANGE_FLT	Quart1, Quart3, x
 array	equ		rdi							; pointer to array
 size	equ		rsi							; array size (count of elements)
 ;---[Internal variables]-------------------
+fptr	equ		rax							; pointer to call external function
 ptr1	equ		rax							; pointer to first target element
 ptr2	equ		rdx							; pointer to second target element
-fptr	equ		rax							; pointer to call external function
-result	equ		xmm0						; result register
-half	equ		xmm1						; 0.5
+result1	equ		xmm0						; result register #1
+result2	equ		xmm1						; result register #2
+half	equ		xmm2						; 0.5
 stack	equ		rsp							; stack pointer
 s_array	equ		stack + 0 * 8				; stack position of "array" variable
 s_size	equ		stack + 1 * 8				; stack position of "size" variable
@@ -1124,9 +1122,9 @@ nanval	= PNAN_FLT64						; +NaN
 end if
 space	= 7 * 8								; stack size required by the procedure
 ;------------------------------------------
+		sub		stack, space				; reserving stack size for local vars
 		test	size, size					; if (size == 0)
 		jz		.error						;     then go to error branch
-		sub		stack, space				; reserving stack size for local vars
 ;---[Call convert function]----------------
 		mov		[s_array], array			; save "array" variable into the stack
 		mov		[s_size], size				; save "size" variable into the stack
@@ -1150,34 +1148,36 @@ space	= 7 * 8								; stack size required by the procedure
 		mov		fptr, Map
 		call	fptr						; Call Map (array, size)
 ;---[Compute interquartile range]----------
-		mov		ptr1, [s_ptr3]				; get "ptr3" variable from the stack
-		mov		ptr2, [s_ptr4]				; get "ptr4" variable from the stack
-		movs#x	result, [ptr1]
-		adds#x	result, [ptr2]
-		mov		ptr1, [s_ptr1]				; get "ptr1" variable from the stack
-		mov		ptr2, [s_ptr2]				; get "ptr2" variable from the stack
 		initreg	half, size, halfval			; half = 0.5
-		subs#x	result, [ptr1]
-		subs#x	result, [ptr2]
-		muls#x	result, half				; return 0.5 * (ptr3[0] + ptr4[0] - ptr1[0] - ptr2[0])
+		mov		ptr1, [s_ptr3]				; get "ptr3" variable from the stack
+		mov		ptr2, [s_ptr1]				; get "ptr1" variable from the stack
+		movs#x	result1, [ptr1]
+		subs#x	result1, [ptr2]				; result1 = ptr3[0] - ptr1[0]
+		mov		ptr1, [s_ptr4]				; get "ptr4" variable from the stack
+		mov		ptr2, [s_ptr2]				; get "ptr2" variable from the stack
+		movs#x	result2, [ptr1]
+		subs#x	result2, [ptr2]				; result1 = ptr4[0] - ptr2[0]
+		adds#x	result1, result2
+		muls#x	result1, half 				; return 0.5 * (ptr3[0] - ptr1[0] + ptr4[0] - ptr2[0])
 		add		stack, space				; restoring back the stack pointer
 		ret
 ;---[Error branch]-------------------------
-.error:	initreg	result, size, nanval		; return NaN
+.error:	initreg	result1, size, nanval		; return NaN
+		add		stack, space				; restoring back the stack pointer
 		ret
 }
 
 ; Unsigned integer types
-QuartRange_uint8:	QUART_RANGE_INT	Quartile1_uint8, Quartile3_uint8, al
-QuartRange_uint16:	QUART_RANGE_INT	Quartile1_uint16, Quartile3_uint16, ax
-QuartRange_uint32:	QUART_RANGE_INT	Quartile1_uint32, Quartile3_uint32, eax
-QuartRange_uint64:	QUART_RANGE_INT	Quartile1_uint64, Quartile3_uint64, rax
+QuartRange_uint8:	QUART_RANGE_INT	al, LowerQuart_uint8, UpperQuart_uint8
+QuartRange_uint16:	QUART_RANGE_INT	ax, LowerQuart_uint16, UpperQuart_uint16
+QuartRange_uint32:	QUART_RANGE_INT	eax, LowerQuart_uint32, UpperQuart_uint32
+QuartRange_uint64:	QUART_RANGE_INT	rax, LowerQuart_uint64, UpperQuart_uint64
 
 ; Signed integer types
-QuartRange_sint8:	QUART_RANGE_INT	Quartile1_sint8, Quartile3_sint8, al
-QuartRange_sint16:	QUART_RANGE_INT	Quartile1_sint16, Quartile3_sint16, ax
-QuartRange_sint32:	QUART_RANGE_INT	Quartile1_sint32, Quartile3_sint32, eax
-QuartRange_sint64:	QUART_RANGE_INT	Quartile1_sint64, Quartile3_sint64, rax
+QuartRange_sint8:	QUART_RANGE_INT	al, LowerQuart_sint8, UpperQuart_sint8
+QuartRange_sint16:	QUART_RANGE_INT	ax, LowerQuart_sint16, UpperQuart_sint16
+QuartRange_sint32:	QUART_RANGE_INT	eax, LowerQuart_sint32, UpperQuart_sint32
+QuartRange_sint64:	QUART_RANGE_INT	rax, LowerQuart_sint64, UpperQuart_sint64
 
 ; Floating-point types
 QuartRange_flt32:	QUART_RANGE_FLT	Quartile1_sint32, Quartile3_sint32, s
@@ -1897,8 +1897,9 @@ end repeat
 		summa	sum0, x						; get all parallel sums
 		summa	sum2, x						; get all parallel sums
 		summa	sum1, x						; get all parallel sums
-		muls#x	sum1, sum2
 		sqrts#x	sum1, sum1
+		sqrts#x	sum2, sum2
+		muls#x	sum1, sum2
 		divs#x	sum0, sum1
 		movap#x	result, sum0				; return sum0 / Sqrt (sum1 * sum2)
 		ret
@@ -1919,8 +1920,9 @@ end repeat
 		sub		size, 1						; size--
 		jnz		.sloop						; do while (size != 0)
 ;---[End of scalar loop]-------------------
-		muls#x	sum1, sum2
 		sqrts#x	sum1, sum1
+		sqrts#x	sum2, sum2
+		muls#x	sum1, sum2
 		divs#x	sum0, sum1
 		movap#x	result, sum0				; return sum0 / Sqrt (sum1 * sum2)
 		ret
@@ -1983,10 +1985,10 @@ bmask	= bytes - 1							; elements aligning mask
 		test	size, size					; if (size == 0)
 		jz		.error						;     then go to error branch
 	cvtsi2s#x	nsize, size					; nsize = size
+		initreg	one, index, oneval			; one = +1
 		movap#x	vector2, mean2				; vector = mean2
 		movap#x	vector1, mean1				; vector = mean1
-		initreg	one, index, oneval			; one = +1
-		xorp#x	result, result				; index = 0
+		xorp#x	sum, sum					; sum = 0
 		test	array2, bmask				; if elements have wrong alignment
 		jnz		.sloop						;     then skip vector code
 		test	array1, bmask				; if elements have wrong alignment
@@ -2004,7 +2006,6 @@ bmask	= bytes - 1							; elements aligning mask
 		and		index, VMASK				; get array offset from vector boundary
 		sub		ptr2, index					; ptr2 = array2 - index
 		sub		ptr1, index					; ptr1 = array1 - index
-		xorp#x	sum, sum					; sum = 0
 		xorp#x	zero, zero					; zero = 0
 		xorp#x	flags, flags				; flags = 0
 ;---[Unaligned operation]------------------
@@ -2287,19 +2288,19 @@ space	= 7 * 8								; stack size required by the procedure
 ;---[Sort first array]---------------------
 		mov		param5, [s_size]
 		mov		param4, [s_trank]
-		mov		param3, [s_rank1]
-		mov		param2, [s_tarr]
+		mov		param3, [s_tarr]
+		mov		param2, [s_rank1]
 		mov		param1, [s_arr1]
 		mov		fptr, Sort
-		call	fptr						; call Sort (array1, tarray, rank1, trank, size)
+		call	fptr						; call Sort (array1, rank1, tarray, trank, size)
 ;---[Sort second array]--------------------
 		mov		param5, [s_size]
 		mov		param4, [s_trank]
-		mov		param3, [s_rank2]
-		mov		param2, [s_tarr]
+		mov		param3, [s_tarr]
+		mov		param2, [s_rank2]
 		mov		param1, [s_arr2]
 		mov		fptr, Sort
-		call	fptr						; call Sort (array2, tarray, rank2, trank, size)
+		call	fptr						; call Sort (array2, rank2, tarray, trank, size)
 ;---[Set ranks]----------------------------
 		mov		param5, [s_size]
 		mov		param4, [s_rank2]

@@ -68,8 +68,8 @@ private:
 	time_t		change [TIME_CHANGE_SIZE];	// Array of time changes
 	uint8_t		index [TIME_CHANGE_SIZE];	// Array of time zone indexes
 	sint32_t	zone [TIME_ZONE_SIZE];		// Array of time zones
-	uint32_t	change_size;				// Count of time change records
-	uint32_t	zone_size;					// Count of time zone records
+	uint32_t	csize;						// Count of time change records
+	uint32_t	zsize;						// Count of time zone records
 
 public:
 
@@ -114,8 +114,8 @@ struct Time
 	time_t		change [TIME_CHANGE_SIZE];	// Array of time changes
 	uint8_t		index [TIME_CHANGE_SIZE];	// Array of time zone indexes
 	sint32_t	zone [TIME_ZONE_SIZE];		// Array of time zones
-	uint32_t	change_size;				// Count of time change records
-	uint32_t	zone_size;					// Count of time zone records
+	uint32_t	csize;						// Count of time change records
+	uint32_t	zsize;						// Count of time zone records
 };
 
 // Init time zone structure

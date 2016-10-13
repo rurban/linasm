@@ -142,6 +142,7 @@ Constructor:
 this	equ		rdi							; pointer to accumulator object
 cap		equ		rsi							; object capacity
 ;---[Internal variables]-------------------
+status	equ		al							; operation status
 buffer	equ		rax							; pointer to memory buffer
 stack	equ		rsp							; stack pointer
 s_this	equ		stack + 0 * 8				; stack position of "this" variable
@@ -168,12 +169,14 @@ space	= 3 * 8								; stack size required by the procedure
 		mov		[this + BUFFER], buffer		; this.buffer = buffer
 		mov		[this + CAPACITY], cap		; this.capacity = cap
 		mov		qword [this + SIZE], 0		; this.size = 0
+		mov		status, 1					; return true
 		add		stack, space				; restoring back the stack pointer
 		ret
 ;---[Error branch]-------------------------
 .error:	mov		qword [this + BUFFER], 0		; this.buffer = NULL
 		mov		qword [this + CAPACITY], 0	; this.capacity = 0
 		mov		qword [this + SIZE], 0		; this.size = 0
+		xor		status, status				; return false
 		add		stack, space				; restoring back the stack pointer
 		ret
 
@@ -185,49 +188,37 @@ CopyConstructor:
 this	equ		rdi							; pointer to target accumulator object
 source	equ		rsi							; pointer to source accumulator object
 ;---[Internal variables]-------------------
-buffer	equ		rax							; pointer to memory buffer
-temp	equ		rdx							; temporary register
+status	equ		al							; operation status
 fptr	equ		rax							; pointer to call external function
+size	equ		rdx							; object size (bytes)
 stack	equ		rsp							; stack pointer
 s_this	equ		stack + 0 * 8				; stack position of "this" variable
 s_src	equ		stack + 1 * 8				; stack position of "source" variable
 space	= 3 * 8								; stack size required by the procedure
 ;------------------------------------------
 		sub		stack, space				; reserving stack size for local vars
+;---[Prevent initialization by itself]-----
 		cmp		this, source				; if (this == source)
 		je		.exit						;     then go to exit
+;---[Call object constructor]--------------
 		mov		[s_this], this				; save "this" variable into the stack
 		mov		[s_src], source				; save "source" variable into the stack
-;---[Allocate memory for the object]-------
-		mov		sc_prm6, 0
-		mov		sc_prm5, -1
-		mov		sc_prm4, 0x8022
-		mov		sc_prm3, 0x3
-		mov		sc_prm2, [source + CAPACITY]
-		mov		sc_prm1, 0
-		mov		sc_num, SYSCALL_MMAP
-		syscall								; buffer = mmap (NULL, source.capacity, PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANONYMOUS | MAP_POPULATE, -1, 0)
+		mov		param2, [source + SIZE]
+		call	Constructor					; status = this.Counstructor (source.size)
 		mov		this, [s_this]				; get "this" variable from the stack
 		mov		source, [s_src]				; get "source" variable from the stack
-		test	buffer, buffer				; if (buffer < 0)
-		js		.error						;     then go to error branch
-;---[Normal execution branch]--------------
-		mov		[this + BUFFER], buffer		; this.buffer = buffer
-		mov		temp, [source + CAPACITY]
-		mov		[this + CAPACITY], temp		; this.capacity = source.capacity
-		mov		temp, [source + SIZE]
-		mov		[this + SIZE], temp			; this.size = source.size
-;---[Copy elements]------------------------
-		mov		param3, [source + SIZE]
+		test	status, status				; if (!status)
+		jz		.exit						;     then go to exit
+;---[Copy elements from source object]-----
+		mov		size, [source + SIZE]
+		mov		[this + SIZE], size			; this.size = source.size
+		mov		param3, size
 		mov		param2, [source + BUFFER]
-		mov		param1, buffer
+		mov		param1, [this + BUFFER]
 		mov		fptr, Copy
 		add		stack, space				; restoring back the stack pointer
-		jmp		fptr						; return Array::Copy (this.buffer, source.buffer, source.size)
-;---[Error branch]-------------------------
-.error:	mov		qword [this + BUFFER], 0	; this.buffer = NULL
-		mov		qword [this + CAPACITY], 0	; this.capacity = 0
-		mov		qword [this + SIZE], 0		; this.size = 0
+		jmp		fptr						; return Copy (this.buffer, source.buffer, source.size)
+;---[Normal exit branch]-------------------
 .exit:	add		stack, space				; restoring back the stack pointer
 		ret
 
@@ -267,6 +258,7 @@ Reserve:
 this	equ		rdi							; pointer to accumulator object
 size	equ		rsi							; space to reserve into the buffer
 ;---[Internal variables]-------------------
+status	equ		al							; operation status
 result	equ		rax							; result register
 stack	equ		rsp							; stack pointer
 s_this	equ		stack + 0 * 8				; stack position of "this" variable
@@ -283,7 +275,7 @@ space	= 1 * 8								; stack size required by the procedure
 ;---[Extend object capacity]---------------
 .ext:	sub		stack, space				; reserving stack size for local vars
 		mov		[s_this], this				; save "this" variable into the stack
-		call	Extend						; status = this.Extend (cap)
+		call	Extend						; status = this.Extend (size)
 		mov		this, [s_this]				; get "this" variable from the stack
 		add		stack, space				; restoring back the stack pointer
 		test	status, status				; if (status)
@@ -353,7 +345,7 @@ this	equ		rdi							; pointer to accumulator object
 ;---[Internal variables]-------------------
 result	equ		rax							; result register
 ;------------------------------------------
-		mov		result, [this + SIZE]		; get object capacity
+		mov		result, [this + SIZE]		; get object size
 		ret
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 IsEmpty:

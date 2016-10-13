@@ -20,41 +20,55 @@
 //      Scalar types                                                          //
 //****************************************************************************//
 
-// Unsigned integer types
+//============================================================================//
+//      Unsigned integer types                                                //
+//============================================================================//
 # define	uint8_t			unsigned char
 # define	uint16_t		unsigned short
 # define	uint32_t		unsigned int
 # define	uint64_t		unsigned long long
 
-// Signed integer types
+//============================================================================//
+//      Signed integer types                                                  //
+//============================================================================//
 # define	sint8_t			signed char
 # define	sint16_t		signed short
 # define	sint32_t		signed int
 # define	sint64_t		signed long long
 
-// Bit field types
+//============================================================================//
+//      Bit field types                                                       //
+//============================================================================//
 # define	bit8_t			unsigned char
 # define	bit16_t			unsigned short
 # define	bit32_t			unsigned int
 # define	bit64_t			unsigned long long
 
-// Character types
+//============================================================================//
+//      Character types                                                       //
+//============================================================================//
 # define	char8_t			char
 # define	char16_t		short
 # define	char32_t		int
 
-// Floating-point types
+//============================================================================//
+//      Floating-point types                                                  //
+//============================================================================//
 # define	flt32_t			float
 # define	flt64_t			double
 
-// Other types
+//============================================================================//
+//      Other types                                                           //
+//============================================================================//
 # define	size_t			unsigned long int
 # define	ptr_t			signed long int
 # define	time_t			signed long long
 # define	error_t			unsigned int
 # define	enum_t			unsigned int
 
-// Boolean type
+//============================================================================//
+//      Boolean type                                                          //
+//============================================================================//
 # ifndef	__cplusplus
 # define	bool			_Bool
 # endif
@@ -63,35 +77,47 @@
 //      Vector types                                                          //
 //****************************************************************************//
 
-// Unsigned integer types
+//============================================================================//
+//      Unsigned integer types                                                //
+//============================================================================//
 typedef		uint8_t			uint8v16_t		__attribute__ ((vector_size (16)));
 typedef		uint16_t		uint16v8_t		__attribute__ ((vector_size (16)));
 typedef		uint32_t		uint32v4_t		__attribute__ ((vector_size (16)));
 typedef		uint64_t		uint64v2_t		__attribute__ ((vector_size (16)));
 
-// Signed integer types
+//============================================================================//
+//      Signed integer types                                                  //
+//============================================================================//
 typedef		sint8_t			sint8v16_t		__attribute__ ((vector_size (16)));
 typedef		sint16_t		sint16v8_t		__attribute__ ((vector_size (16)));
 typedef		sint32_t		sint32v4_t		__attribute__ ((vector_size (16)));
 typedef		sint64_t		sint64v2_t		__attribute__ ((vector_size (16)));
 
-// Bit field types
+//============================================================================//
+//      Bit field types                                                       //
+//============================================================================//
 typedef		bit8_t			bit8v16_t		__attribute__ ((vector_size (16)));
 typedef		bit16_t			bit16v8_t		__attribute__ ((vector_size (16)));
 typedef		bit32_t			bit32v4_t		__attribute__ ((vector_size (16)));
 typedef		bit64_t			bit64v2_t		__attribute__ ((vector_size (16)));
 
-// Character types
+//============================================================================//
+//      Character types                                                       //
+//============================================================================//
 typedef		char8_t			char8v16_t		__attribute__ ((vector_size (16)));
 typedef		char16_t		char16v8_t		__attribute__ ((vector_size (16)));
 typedef		char32_t		char32v4_t		__attribute__ ((vector_size (16)));
 
-// Floating-point types
+//============================================================================//
+//      Floating-point types                                                  //
+//============================================================================//
 typedef		flt32_t			flt32v2_t		__attribute__ ((vector_size (8)));
 typedef		flt32_t			flt32v4_t		__attribute__ ((vector_size (16)));
 typedef		flt64_t			flt64v2_t		__attribute__ ((vector_size (16)));
 
-// Other types
+//============================================================================//
+//      Other types                                                           //
+//============================================================================//
 typedef		size_t			sizev2_t		__attribute__ ((vector_size (16)));
 typedef		ptr_t			ptrv2_t			__attribute__ ((vector_size (16)));
 typedef		time_t			timev2_t		__attribute__ ((vector_size (16)));
@@ -100,7 +126,9 @@ typedef		time_t			timev2_t		__attribute__ ((vector_size (16)));
 //      Union types                                                           //
 //****************************************************************************//
 
-// Unsigned integer types
+//============================================================================//
+//      Unsigned integer types                                                //
+//============================================================================//
 union uint8v16_union
 {
 	uint8_t		array[16];
@@ -122,7 +150,9 @@ union uint64v2_union
 	uint64v2_t	vector;
 };
 
-// Signed integer types
+//============================================================================//
+//      Signed integer types                                                  //
+//============================================================================//
 union sint8v16_union
 {
 	sint8_t		array[16];
@@ -144,7 +174,9 @@ union sint64v2_union
 	sint64v2_t	vector;
 };
 
-// Bit field types
+//============================================================================//
+//      Bit field types                                                       //
+//============================================================================//
 union bit8v16_union
 {
 	bit8_t		array[16];
@@ -166,7 +198,9 @@ union bit64v2_union
 	bit64v2_t	vector;
 };
 
-// Character types
+//============================================================================//
+//      Character types                                                       //
+//============================================================================//
 union char8v16_union
 {
 	char8_t		array[16];
@@ -183,7 +217,9 @@ union char32v4_union
 	char32v4_t	vector;
 };
 
-// Floating-point types
+//============================================================================//
+//      Floating-point types                                                  //
+//============================================================================//
 union flt32v2_union
 {
 	flt32_t		array[2];
@@ -200,7 +236,9 @@ union flt64v2_union
 	flt64v2_t	vector;
 };
 
-// Other types
+//============================================================================//
+//      Other types                                                           //
+//============================================================================//
 union sizev2_union
 {
 	size_t		array[2];

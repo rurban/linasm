@@ -138,10 +138,10 @@ static uint32_t InterquartileRange (uint32_t array[], size_t size);
 static uint64_t InterquartileRange (uint64_t array[], size_t size);
 
 // Signed integer types
-static sint8_t InterquartileRange (sint8_t array[], size_t size);
-static sint16_t InterquartileRange (sint16_t array[], size_t size);
-static sint32_t InterquartileRange (sint32_t array[], size_t size);
-static sint64_t InterquartileRange (sint64_t array[], size_t size);
+static uint8_t InterquartileRange (sint8_t array[], size_t size);
+static uint16_t InterquartileRange (sint16_t array[], size_t size);
+static uint32_t InterquartileRange (sint32_t array[], size_t size);
+static uint64_t InterquartileRange (sint64_t array[], size_t size);
 
 // Floating-point types
 static flt32_t InterquartileRange (flt32_t array[], size_t size);
@@ -314,10 +314,10 @@ uint32_t Statistics_InterquartileRange_uint32 (uint32_t array[], size_t size);
 uint64_t Statistics_InterquartileRange_uint64 (uint64_t array[], size_t size);
 
 // Signed integer types
-sint8_t Statistics_InterquartileRange_sint8 (sint8_t array[], size_t size);
-sint16_t Statistics_InterquartileRange_sint16 (sint16_t array[], size_t size);
-sint32_t Statistics_InterquartileRange_sint32 (sint32_t array[], size_t size);
-sint64_t Statistics_InterquartileRange_sint64 (sint64_t array[], size_t size);
+uint8_t Statistics_InterquartileRange_sint8 (sint8_t array[], size_t size);
+uint16_t Statistics_InterquartileRange_sint16 (sint16_t array[], size_t size);
+uint32_t Statistics_InterquartileRange_sint32 (sint32_t array[], size_t size);
+uint64_t Statistics_InterquartileRange_sint64 (sint64_t array[], size_t size);
 
 // Floating-point types
 flt32_t Statistics_InterquartileRange_flt32 (flt32_t array[], size_t size);

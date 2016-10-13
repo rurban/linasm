@@ -7,6 +7,7 @@
 ;# License: LGPLv3+                              Copyleft (Ɔ) 2016, Jack Black #
 ;###############################################################################
 format	ELF64
+include	'Macro.inc'
 include	'Syscall.inc'
 include	'Errno.inc'
 
@@ -63,6 +64,15 @@ ZONE_SIZE	= 256							; Size of time zone array
 TIME_DAY	= 86400							; Seconds per day
 TIME_ERROR	= 0x8000000000000000			; Wrong time value
 BUF_SIZE	= 16384							; Buffer size
+
+;==============================================================================;
+;       Offsets inside time object                                             ;
+;==============================================================================;
+CHANGE		= 0 * 8							; Offset of array of time changes
+INDEX		= CHANGE + CHNG_SIZE * 8 		; Offset of array of time zone indexes
+ZONE		= INDEX + CHNG_SIZE				; Offset of array of time zones
+CSIZE		= ZONE + ZONE_SIZE * 4			; Offset of time changes counter
+ZSIZE		= CSIZE + 4						; Offset of time zones counter
 
 ;******************************************************************************;
 ;       Multiply value by 25                                                   ;
@@ -204,11 +214,6 @@ max		equ		r9b							; max index value
 target	equ		r10							; pointer to target buffer
 prev	equ		rcx							; previous value of time change
 temp	equ		ecx							; temporary register
-change_of	= 0								; offset of Time::change
-index_of	= change_of + CHNG_SIZE * 8		; offset of Time::index
-zone_of		= index_of + CHNG_SIZE			; offset of Time::zone
-csize_of	= zone_of + ZONE_SIZE * 4		; offset of Time::change_size
-zsize_of	= csize_of + 4					; offset of Time::zone_size
 ;---[Skipping 1 header and content]--------
 		sub		size, 44					; if (size <= 44)
 		jbe		.error						;     return ERRNO_NODATA
@@ -274,12 +279,12 @@ zsize_of	= csize_of + 4					; offset of Time::zone_size
 		lea		result, [zsize - 1]
 		cmp		result, ZONE_SIZE			; if ((zsize - 1) >= ZONE_SIZE)
 		jae		.error						;     return ERRNO_NODATA
-		mov		[this + csize_of], csizel	; this -> change_size = csize
-		mov		[this + zsize_of], zsizel	; this -> zone_size = zsize
+		mov		[this + CSIZE], csizel		; this.csize = csize
+		mov		[this + ZSIZE], zsizel		; this.zsize = zsize
 ;---[Loading time changes and indexes]-----
 		test	csize, csize				; if (csize == 0)
 		jz		.skip						;     then skip this block
-		lea		target, [this + change_of]	; target = this -> change
+		lea		target, [this + CHANGE]		; target = this.change
 		mov		size, csize					; size = csize
 		mov		prev, 1 shl 63				; prev = smallest time value
 ;---[Time changes loop]--------------------
@@ -294,7 +299,7 @@ zsize_of	= csize_of + 4					; offset of Time::zone_size
 		sub		size, 1						; size--
 		jnz		@b							; do while (size != 0)
 ;------------------------------------------
-		lea		target, [this + index_of]	; target = this -> index
+		lea		target, [this + INDEX]		; target = this.index
 		mov		size, csize					; size = csize
 ;---[Indexes loop]-------------------------
 @@:		mov		index, [buffer]				; index = buffer[0]
@@ -306,7 +311,7 @@ zsize_of	= csize_of + 4					; offset of Time::zone_size
 		sub		size, 1						; size--
 		jnz		@b							; do while (size != 0)
 ;------------------------------------------
-.skip:	lea		target, [this + zone_of]	; target = this -> zone
+.skip:	lea		target, [this + ZONE]		; target = this.zone
 		mov		size, zsize					; size = zsize
 ;---[Time offsets loop]--------------------
 @@:		mov		resultl, [buffer]			; result = buffer[0]
@@ -332,12 +337,9 @@ zsize_of	= csize_of + 4					; offset of Time::zone_size
 Constructor:
 ;---[Parameters]---------------------------
 this	equ		rdi							; pointer to time zone object
-;---[Internal variables]-------------------
-csize_of	= CHNG_SIZE * 9 + ZONE_SIZE * 4	; offset of change_size variable inside time_zone
-zsize_of	= csize_of + 4					; offset of zone_size variable inside time_zone
 ;------------------------------------------
-		mov		dword [this + csize_of], 0	; this -> change_size = 0
-		mov		dword [this + zsize_of], 0	; this -> zone_size = 0
+		mov		dword [this + CSIZE], 0		; this.csize = 0
+		mov		dword [this + ZSIZE], 0		; this.zsize = 0
 		ret
 
 ;******************************************************************************;
@@ -349,10 +351,6 @@ this	equ		rdi							; pointer to time zone object
 tzfile	equ		rsi							; time zone file name
 ;---[Internal variables]-------------------
 result	equ		rax							; result register
-prm1	equ		rdi							; 1-st function parameter
-prm2	equ		rsi							; 2-rd function parameter
-prm3	equ		rdx							; 3-rd function parameter
-buffer	equ		rsp							; buffer which holds content of tzfile
 stack	equ		rsp							; stack pointer
 s_this	equ		stack + BUF_SIZE			; stack position of pointer to time object
 space	= BUF_SIZE + 8						; stack size required by the procedure
@@ -360,15 +358,15 @@ space	= BUF_SIZE + 8						; stack size required by the procedure
 		sub		stack, space				; reserving stack size for local vars
 		mov		[s_this], this				; save this pointer into the stack
 ;---[Reading file content]-----------------
-		mov		prm1, buffer
-		call	ReadFile					; call Readfile (buffer, tzfile)
+		mov		param1, stack
+		call	ReadFile					; call Readfile (stack, tzfile)
 		test	result, result				; is (result < 0)
 		js		.error						;     then go to error branch
 ;---[Analysing file content]---------------
-		mov		prm1, [s_this]
-		mov		prm2, buffer
-		mov		prm3, result
-		call	AnalyseFile					; call AnalyseFile (this, buffer, size)
+		mov		param1, [s_this]
+		mov		param2, stack
+		mov		param3, result
+		call	AnalyseFile					; call AnalyseFile (this, stack, size)
 		test	result, result				; is (result < 0)
 		js		.error						;     then go to error branch
 ;---[Normal exit]--------------------------
@@ -376,9 +374,9 @@ space	= BUF_SIZE + 8						; stack size required by the procedure
 		ret
 ;---[Error branch]-------------------------
 .error:	mov		this, [s_this]				; restore "this" pointer from the stack
-		neg		result						; correct sign of errno
-		mov		dword [this + csize_of], 0	; this -> change_size = 0
-		mov		dword [this + zsize_of], 0	; this -> zone_size = 0
+		mov		dword [this + CSIZE], 0		; this.csize = 0
+		mov		dword [this + ZSIZE], 0		; this.zsize = 0
+		neg		result						; return errno
 		add		stack, space				; restoring back the stack pointer
 		ret
 
@@ -387,17 +385,17 @@ space	= BUF_SIZE + 8						; stack size required by the procedure
 ;******************************************************************************;
 ConvertTime:
 ;---[Parameters]---------------------------
-hour_p	equ		dil							; hours
-min_p	equ		sil							; minutes
-sec_p	equ		dl							; seconds
+hourp	equ		dil							; hours
+minp	equ		sil							; minutes
+secp	equ		dl							; seconds
 ;---[Internal variables]-------------------
 hour	equ		rax							; hours (uint64_t)
 min		equ		rsi							; minutes (uint64_t)
 sec		equ		rdx							; seconds (uint64_t)
 ;------------------------------------------
-		movzx	hour, hour_p				; converting hours to uint64_t
-		movzx	min, min_p					; converting minutes to uint64_t
-		movzx	sec, sec_p					; converting seconds to uint64_t
+		movzx	hour, hourp					; converting hours to uint64_t
+		movzx	min, minp					; converting minutes to uint64_t
+		movzx	sec, secp					; converting seconds to uint64_t
 		cmp		hour, 24
 		jae		.error
 		cmp		min, 60
@@ -419,12 +417,12 @@ sec		equ		rdx							; seconds (uint64_t)
 ;******************************************************************************;
 ConvertDate:
 ;---[Parameters]---------------------------
-day_p	equ		dil							; day
-month_p	equ		sil							; month
-year_p	equ		edx							; year
-hour_p	equ		cl							; hours
-min_p	equ		r8b							; minutes
-sec_p	equ		r9b							; seconds
+dayp	equ		dil							; day
+monthp	equ		sil							; month
+yearp	equ		edx							; year
+hourp	equ		cl							; hours
+minp	equ		r8b							; minutes
+secp	equ		r9b							; seconds
 ;---[Internal variables]-------------------
 result	equ		rax							; result register
 day		equ		rdi							; day (uint64_t)
@@ -454,12 +452,12 @@ space	= 5 * 8								; stack size required by the procedure
 		mov		[s_dptr2], dptr2			; save old value of "dptr2" variable
 		mov		[s_mptr1], mptr1			; save old value of "mptr1" variable
 		mov		[s_mptr2], mptr2			; save old value of "mptr2" variable
-		movsxd	year, year_p				; converting year to uint64_t
-		movzx	month, month_p				; converting month to uint64_t
-		movzx	day, day_p					; converting day to uint64_t
-		movzx	hour, hour_p				; converting hour to uint64_t
-		movzx	min, min_p					; converting min to uint64_t
-		movzx	sec, sec_p					; converting sec to uint64_t
+		movsxd	year, yearp					; converting year to uint64_t
+		movzx	month, monthp				; converting month to uint64_t
+		movzx	day, dayp					; converting day to uint64_t
+		movzx	hour, hourp					; converting hour to uint64_t
+		movzx	min, minp					; converting min to uint64_t
+		movzx	sec, secp					; converting sec to uint64_t
 		mov		result, 2147484000
 		add		year, result				; year += 2147484000
 		lea		days, [year + year * 4]
@@ -832,16 +830,12 @@ left	equ		rcx							; pointer to start of the time changes array
 right	equ		csize						; pointer to end of the time changes array
 median	equ		result						; pointer to median element of the time changes array
 index	equ		left						; index value
-index_of	= CHNG_SIZE * 8					; offset of index array inside time_zone
-zone_of		= index_of + CHNG_SIZE			; offset of zone array inside time_zone
-csize_of	= zone_of + ZONE_SIZE * 4		; offset of change_size variable inside time_zone
-zsize_of	= csize_of + 4					; offset of zone_size variable inside time_zone
 ;------------------------------------------
 		mov		temp, TIME_ERROR
 		cmp		time, temp					; if (time == TIME_ERROR)
 		je		.error						;     then go to error branch
-		mov		zsizel, [this + zsize_of]	; zsize = this -> zone_size
-		mov		csizel, [this + csize_of]	; csize = this -> change_size
+		mov		zsizel, [this + ZSIZE]		; zsize = this.zsize
+		mov		csizel, [this + CSIZE]		; csize = this.csize
 		test	zsize, zsize				; if (zsize = 0)
 		jz		.error						;     then go to error branch
 ;---[Normal execution branch]--------------
@@ -862,15 +856,15 @@ zsize_of	= csize_of + 4					; offset of zone_size variable inside time_zone
 		cmp		right, temp
 		ja		.loop						; do while (right > left + 1)
 ;---[End of loop]--------------------------
-@@:		movzx	index, byte [this + index_of + left]
+@@:		movzx	index, byte [this + INDEX + left]
 		cmp		index, zsize				; if (index >= zsize)
 		jae		.error						;     then go to error branch
-		movsxd	result, dword [this + zone_of + index * 4]
-		add		result, time				; return time + this -> zone[index];
+		movsxd	result, dword [this + ZONE + index * 4]
+		add		result, time				; return time + this.zone[index];
 		ret
 ;---[Skip branch]--------------------------
-.skip:	movsxd	result, dword [this + zone_of]
-		add		result, time				; return time + this -> zone[0];
+.skip:	movsxd	result, dword [this + ZONE]
+		add		result, time				; return time + this.zone[0];
 		ret
 ;---[Error branch]-------------------------
 .error:	mov		result, TIME_ERROR			; return TIME_ERROR
@@ -894,6 +888,7 @@ max2		dq	31,29,31,30,31,30,31,31,30,31,30,31			; leap year
 ;###############################################################################
 section	'.data'	align 16
 
+align 16
 ticks		dq	32 dup (0)					; vector of all cpu tick counters
 last		rq	1							; last known time stamp
 

@@ -399,14 +399,14 @@ static void MergeSortDsc (const char32_t* array[], const char32_t* temp[], size_
 //============================================================================//
 
 // Ascending sort order
-static void MergeSortKeyAsc (const char8_t* key[], const char8_t* tkey[], const void* ptr[], const void* tptr[], size_t size, CmpChar8 func);
-static void MergeSortKeyAsc (const char16_t* key[], const char16_t* tkey[], const void* ptr[], const void* tptr[], size_t size, CmpChar16 func);
-static void MergeSortKeyAsc (const char32_t* key[], const char32_t* tkey[], const void* ptr[], const void* tptr[], size_t size, CmpChar32 func);
+static void MergeSortKeyAsc (const char8_t* key[], const void* ptr[], const char8_t* tkey[], const void* tptr[], size_t size, CmpChar8 func);
+static void MergeSortKeyAsc (const char16_t* key[], const void* ptr[], const char16_t* tkey[], const void* tptr[], size_t size, CmpChar16 func);
+static void MergeSortKeyAsc (const char32_t* key[], const void* ptr[], const char32_t* tkey[], const void* tptr[], size_t size, CmpChar32 func);
 
 // Descending sort order
-static void MergeSortKeyDsc (const char8_t* key[], const char8_t* tkey[], const void* ptr[], const void* tptr[], size_t size, CmpChar8 func);
-static void MergeSortKeyDsc (const char16_t* key[], const char16_t* tkey[], const void* ptr[], const void* tptr[], size_t size, CmpChar16 func);
-static void MergeSortKeyDsc (const char32_t* key[], const char32_t* tkey[], const void* ptr[], const void* tptr[], size_t size, CmpChar32 func);
+static void MergeSortKeyDsc (const char8_t* key[], const void* ptr[], const char8_t* tkey[], const void* tptr[], size_t size, CmpChar8 func);
+static void MergeSortKeyDsc (const char16_t* key[], const void* ptr[], const char16_t* tkey[], const void* tptr[], size_t size, CmpChar16 func);
+static void MergeSortKeyDsc (const char32_t* key[], const void* ptr[], const char32_t* tkey[], const void* tptr[], size_t size, CmpChar32 func);
 
 //****************************************************************************//
 //      Merging of sorted strings                                             //
@@ -453,6 +453,13 @@ static void MergeKeyDsc (const char32_t* tkey[], const void* tptr[], const char3
 //****************************************************************************//
 
 //============================================================================//
+//      Check for duplicate values                                            //
+//============================================================================//
+static size_t CheckDup (const char8_t* array[], size_t size, CmpChar8 func);
+static size_t CheckDup (const char16_t* array[], size_t size, CmpChar16 func);
+static size_t CheckDup (const char32_t* array[], size_t size, CmpChar32 func);
+
+//============================================================================//
 //      Check for sort order                                                  //
 //============================================================================//
 
@@ -465,13 +472,6 @@ static size_t CheckSortAsc (const char32_t* array[], size_t size, CmpChar32 func
 static size_t CheckSortDsc (const char8_t* array[], size_t size, CmpChar8 func);
 static size_t CheckSortDsc (const char16_t* array[], size_t size, CmpChar16 func);
 static size_t CheckSortDsc (const char32_t* array[], size_t size, CmpChar32 func);
-
-//============================================================================//
-//      Check for duplicate values                                            //
-//============================================================================//
-static size_t CheckDup (const char8_t* array[], size_t size, CmpChar8 func);
-static size_t CheckDup (const char16_t* array[], size_t size, CmpChar16 func);
-static size_t CheckDup (const char32_t* array[], size_t size, CmpChar32 func);
 
 //****************************************************************************//
 //      String hashing                                                        //
@@ -869,14 +869,14 @@ void String_MergeSortDsc_char32 (const char32_t* array[], const char32_t* temp[]
 //============================================================================//
 
 // Ascending sort order
-void String_MergeSortKeyAsc_char8 (const char8_t* key[], const char8_t* tkey[], const void* ptr[], const void* tptr[], size_t size, CmpChar8 func);
-void String_MergeSortKeyAsc_char16 (const char16_t* key[], const char16_t* tkey[], const void* ptr[], const void* tptr[], size_t size, CmpChar16 func);
-void String_MergeSortKeyAsc_char32 (const char32_t* key[], const char32_t* tkey[], const void* ptr[], const void* tptr[], size_t size, CmpChar32 func);
+void String_MergeSortKeyAsc_char8 (const char8_t* key[], const void* ptr[], const char8_t* tkey[], const void* tptr[], size_t size, CmpChar8 func);
+void String_MergeSortKeyAsc_char16 (const char16_t* key[], const void* ptr[], const char16_t* tkey[], const void* tptr[], size_t size, CmpChar16 func);
+void String_MergeSortKeyAsc_char32 (const char32_t* key[], const void* ptr[], const char32_t* tkey[], const void* tptr[], size_t size, CmpChar32 func);
 
 // Descending sort order
-void String_MergeSortKeyDsc_char8 (const char8_t* key[], const char8_t* tkey[], const void* ptr[], const void* tptr[], size_t size, CmpChar8 func);
-void String_MergeSortKeyDsc_char16 (const char16_t* key[], const char16_t* tkey[], const void* ptr[], const void* tptr[], size_t size, CmpChar16 func);
-void String_MergeSortKeyDsc_char32 (const char32_t* key[], const char32_t* tkey[], const void* ptr[], const void* tptr[], size_t size, CmpChar32 func);
+void String_MergeSortKeyDsc_char8 (const char8_t* key[], const void* ptr[], const char8_t* tkey[], const void* tptr[], size_t size, CmpChar8 func);
+void String_MergeSortKeyDsc_char16 (const char16_t* key[], const void* ptr[], const char16_t* tkey[], const void* tptr[], size_t size, CmpChar16 func);
+void String_MergeSortKeyDsc_char32 (const char32_t* key[], const void* ptr[], const char32_t* tkey[], const void* tptr[], size_t size, CmpChar32 func);
 
 //****************************************************************************//
 //      Merging of sorted strings                                             //
@@ -923,6 +923,13 @@ void String_MergeKeyDsc_char32 (const char32_t* tkey[], const void* tptr[], cons
 //****************************************************************************//
 
 //============================================================================//
+//      Check for duplicate values                                            //
+//============================================================================//
+size_t String_CheckDup_char8 (const char8_t* array[], size_t size, CmpChar8 func);
+size_t String_CheckDup_char16 (const char16_t* array[], size_t size, CmpChar16 func);
+size_t String_CheckDup_char32 (const char32_t* array[], size_t size, CmpChar32 func);
+
+//============================================================================//
 //      Check for sort order                                                  //
 //============================================================================//
 
@@ -935,13 +942,6 @@ size_t String_CheckSortAsc_char32 (const char32_t* array[], size_t size, CmpChar
 size_t String_CheckSortDsc_char8 (const char8_t* array[], size_t size, CmpChar8 func);
 size_t String_CheckSortDsc_char16 (const char16_t* array[], size_t size, CmpChar16 func);
 size_t String_CheckSortDsc_char32 (const char32_t* array[], size_t size, CmpChar32 func);
-
-//============================================================================//
-//      Check for duplicate values                                            //
-//============================================================================//
-size_t String_CheckDup_char8 (const char8_t* array[], size_t size, CmpChar8 func);
-size_t String_CheckDup_char16 (const char16_t* array[], size_t size, CmpChar16 func);
-size_t String_CheckDup_char32 (const char32_t* array[], size_t size, CmpChar32 func);
 
 //****************************************************************************//
 //      String hashing                                                        //

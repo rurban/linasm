@@ -566,7 +566,7 @@ string	equ		rsi							; source string
 ;---[Internal variables]-------------------
 fptr	equ		rax							; pointer to call external function
 ptr		equ		rax							; temporary pointer to string
-str		equ		ecx
+str		equ		ecx							; string buffer for special values
 temp	equ		rcx							; temporary value
 value	equ		rdx							; value of the number
 digits	equ		r8							; count of digits that number has

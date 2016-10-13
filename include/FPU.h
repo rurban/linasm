@@ -131,7 +131,7 @@ inline bool GetStackFaultFlag (fpu_stat_t sword)
 	return (sword & (0x1 << 6)) >> 6;
 }
 
-// FPU top of the stack index
+// FPU stack top index
 inline int GetStackTop (fpu_stat_t sword)
 {
 	return (sword & (0x3 << 11)) >> 11;

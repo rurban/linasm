@@ -348,11 +348,15 @@ this	equ		rdi							; pointer to pool object
 ;---[Internal variables]-------------------
 result	equ		rax							; result register
 high	equ		rdx							; high part of value for div operation
+bsize	equ		rcx							; block size
 ;------------------------------------------
 		xor		high, high					; high = 0
 		mov		result, [this + CAPACITY]	; get object capacity
-		div		qword [this + BSIZE]		; return param / bsize
-		ret
+		mov		bsize, [this + BSIZE]		; get block size
+		test	bsize, bsize				; if (bsize == 0)
+		jz		.exit						;     then return 0
+		div		bsize						; return capacity / bsize
+.exit:	ret
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 GetSize:
 ;---[Parameters]---------------------------
@@ -360,11 +364,15 @@ this	equ		rdi							; pointer to pool object
 ;---[Internal variables]-------------------
 result	equ		rax							; result register
 high	equ		rdx							; high part of value for div operation
+bsize	equ		rcx							; block size
 ;------------------------------------------
 		xor		high, high					; high = 0
 		mov		result, [this + SIZE]		; get object size
-		div		qword [this + BSIZE]		; return param / bsize
-		ret
+		mov		bsize, [this + BSIZE]		; get block size
+		test	bsize, bsize				; if (bsize == 0)
+		jz		.exit						;     then return 0
+		div		bsize						; return size / bsize
+.exit:	ret
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 IsFull:
 ;---[Parameters]---------------------------

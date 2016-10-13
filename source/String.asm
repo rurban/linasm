@@ -272,17 +272,17 @@ public	QuickSortKeyDsc			as	'_ZN6String15QuickSortKeyDscEPPKiPPKvmPFxS1_S1_E'
 public	MergeSortKeyAsc			as	'String_MergeSortKeyAsc_char8'
 public	MergeSortKeyAsc			as	'String_MergeSortKeyAsc_char16'
 public	MergeSortKeyAsc			as	'String_MergeSortKeyAsc_char32'
-public	MergeSortKeyAsc			as	'_ZN6String15MergeSortKeyAscEPPKcS2_PPKvS5_mPFxS1_S1_E'
-public	MergeSortKeyAsc			as	'_ZN6String15MergeSortKeyAscEPPKsS2_PPKvS5_mPFxS1_S1_E'
-public	MergeSortKeyAsc			as	'_ZN6String15MergeSortKeyAscEPPKiS2_PPKvS5_mPFxS1_S1_E'
+public	MergeSortKeyAsc			as	'_ZN6String15MergeSortKeyAscEPPKcPPKvS2_S5_mPFxS1_S1_E'
+public	MergeSortKeyAsc			as	'_ZN6String15MergeSortKeyAscEPPKsPPKvS2_S5_mPFxS1_S1_E'
+public	MergeSortKeyAsc			as	'_ZN6String15MergeSortKeyAscEPPKiPPKvS2_S5_mPFxS1_S1_E'
 
 ; Descending sort order
 public	MergeSortKeyDsc			as	'String_MergeSortKeyDsc_char8'
 public	MergeSortKeyDsc			as	'String_MergeSortKeyDsc_char16'
 public	MergeSortKeyDsc			as	'String_MergeSortKeyDsc_char32'
-public	MergeSortKeyDsc			as	'_ZN6String15MergeSortKeyDscEPPKcS2_PPKvS5_mPFxS1_S1_E'
-public	MergeSortKeyDsc			as	'_ZN6String15MergeSortKeyDscEPPKsS2_PPKvS5_mPFxS1_S1_E'
-public	MergeSortKeyDsc			as	'_ZN6String15MergeSortKeyDscEPPKiS2_PPKvS5_mPFxS1_S1_E'
+public	MergeSortKeyDsc			as	'_ZN6String15MergeSortKeyDscEPPKcPPKvS2_S5_mPFxS1_S1_E'
+public	MergeSortKeyDsc			as	'_ZN6String15MergeSortKeyDscEPPKsPPKvS2_S5_mPFxS1_S1_E'
+public	MergeSortKeyDsc			as	'_ZN6String15MergeSortKeyDscEPPKiPPKvS2_S5_mPFxS1_S1_E'
 
 ;******************************************************************************;
 ;       Merging of sorted strings                                              ;
@@ -292,17 +292,17 @@ public	MergeSortKeyDsc			as	'_ZN6String15MergeSortKeyDscEPPKiS2_PPKvS5_mPFxS1_S1
 public	MergeKeyAsc				as	'String_MergeKeyAsc_char8'
 public	MergeKeyAsc				as	'String_MergeKeyAsc_char16'
 public	MergeKeyAsc				as	'String_MergeKeyAsc_char32'
-public	MergeKeyAsc				as	'_ZN6String11MergeKeyAscEPPKcPPKvPPKcPPKvmS6_S9_mPFxS5_S5_E'
-public	MergeKeyAsc				as	'_ZN6String11MergeKeyAscEPPKsPPKvPPKsPPKvmS6_S9_mPFxS5_S5_E'
-public	MergeKeyAsc				as	'_ZN6String11MergeKeyAscEPPKiPPKvPPKiPPKvmS6_S9_mPFxS5_S5_E'
+public	MergeKeyAsc				as	'_ZN6String11MergeKeyAscEPPKcPPKvS2_S5_mS2_S5_mPFxS1_S1_E'
+public	MergeKeyAsc				as	'_ZN6String11MergeKeyAscEPPKsPPKvS2_S5_mS2_S5_mPFxS1_S1_E'
+public	MergeKeyAsc				as	'_ZN6String11MergeKeyAscEPPKiPPKvS2_S5_mS2_S5_mPFxS1_S1_E'
 
 ; Descending sort order
 public	MergeKeyDsc				as	'String_MergeKeyDsc_char8'
 public	MergeKeyDsc				as	'String_MergeKeyDsc_char16'
 public	MergeKeyDsc				as	'String_MergeKeyDsc_char32'
-public	MergeKeyDsc				as	'_ZN6String11MergeKeyDscEPPKcPPKvPPKcPPKvmS6_S9_mPFxS5_S5_E'
-public	MergeKeyDsc				as	'_ZN6String11MergeKeyDscEPPKsPPKvPPKsPPKvmS6_S9_mPFxS5_S5_E'
-public	MergeKeyDsc				as	'_ZN6String11MergeKeyDscEPPKiPPKvPPKiPPKvmS6_S9_mPFxS5_S5_E'
+public	MergeKeyDsc				as	'_ZN6String11MergeKeyDscEPPKcPPKvS2_S5_mS2_S5_mPFxS1_S1_E'
+public	MergeKeyDsc				as	'_ZN6String11MergeKeyDscEPPKsPPKvS2_S5_mS2_S5_mPFxS1_S1_E'
+public	MergeKeyDsc				as	'_ZN6String11MergeKeyDscEPPKiPPKvS2_S5_mS2_S5_mPFxS1_S1_E'
 
 ;******************************************************************************;
 ;       String hashing                                                         ;
@@ -367,6 +367,7 @@ end if
 bytes	= 1 shl scale						; size of array element (bytes)
 bmask	= bytes - 1							; elements aligning mask
 ;------------------------------------------
+	prefetchnta	[string]					; prefetch data
 		xor		index, index				; index = 0
 if scale
 		test	string, bmask				; if elements have wrong alignment
@@ -396,13 +397,14 @@ repeat	CLINE / VSIZE
 		jnz		.brk						;     then break the loop
 		add		index, VSIZE				; index += VSIZE
 end repeat
+	prefetchnta	[string + PSTEP]			; prefetch next portion of data
 		add		string, CLINE				; string += CLINE
 		jmp		.vloop						; do while (true)
 ;---[End of vector loop]-------------------
 .brk:	bsf		emask, emask				; find index of first occurence of eol
 		add		index, emask				; index += emask
 		shftr	index, scale				; return index
-		ret
+.exit:	ret
 if scale
 ;---[Scalar loop]--------------------------
 .sloop:	mov		char, [string]				; char = string[0]
@@ -412,7 +414,6 @@ if scale
 		add		string, bytes				; string++
 		jmp		.sloop						; do while (true)
 ;---[End of scalar loop]-------------------
-.exit:	ret
 end if
 }
 Len_char8:	LEN	cl, b
@@ -440,11 +441,13 @@ cmask	equ		r8							; mask to clear unrequired results
 emask	equ		r9							; result of eol search
 ptr1	equ		r10							; temporary pointer to target string
 ptr2	equ		r11							; temporary pointer to source string
-size	equ		cmask						; string size (bytes)
+ssize	equ		cmask						; string size (bytes)
 echeck0	equ		xmm0						; eol check mask #1
 echeck1	equ		xmm1						; eol check mask #2
 sdata0	equ		xmm2						; string data #1
 sdata1	equ		xmm3						; string data #2
+stack	equ		rsp							; stack pointer
+s_mlen	equ		stack - 1 * 8				; stack position of "maxlen" variable
 if x eq b
 scale	= 0									; scale value
 else if x eq w
@@ -455,6 +458,8 @@ end if
 bytes	= 1 shl scale						; size of array element (bytes)
 bmask	= bytes - 1							; elements aligning mask
 ;------------------------------------------
+	prefetchnta	[source]					; prefetch data
+	prefetchnta	[target]					; prefetch data
 		mov		ptr2, source				; ptr2 = source
 		mov		ptr1, target				; ptr1 = target
 		xor		index, index				; index = 0
@@ -462,40 +467,40 @@ if scale
 		test	source, bmask				; if elements have wrong alignment
 		jnz		.sloop						;     then skip vector code
 end if
+		shftl	maxlen, scale				; convert maxlen to bytes
 ;---[Normal execution branch]--------------
+		mov		[s_mlen], maxlen			; save "maxlen" variable into the stack
 		mov		shft, source
 		and		shft, VMASK					; get string offset from vector boundary
 		sub		ptr2, shft					; ptr2 = source - shft
 		sub		ptr1, shft					; ptr1 = target - shft
-		shftl	maxlen, scale				; convert maxlen to bytes
 ;---[Unaligned copy]-----------------------
-		add		maxlen, shft				; maxlen += shft
 		sub		index, shft					; index -= shft
 		mov		cmask, VBITS
 		shl		cmask, low					; adjust cmask for unaligned search
 		pxor	echeck0, echeck0			; echeck0 = 0
-	pcmpeq#x	echeck0, [ptr2]				; check ptr2[0] for end of line
+	pcmpeq#x	echeck0, [ptr2 + 0 * VSIZE]	; check ptr2[0] for end of line
 	pmovmskb	emask, echeck0				; save check results to emask
 		and		emask, cmask				; if eof is found
 		jnz		.brk0						;     then break the loop
 		add		index, VSIZE				; index += VSIZE
-		sub		maxlen, VSIZE				; if (maxlen < VSIZE)
+		cmp		[s_mlen], index				; if (maxlen < index)
 		jb		.nospc						;     then go to no space branch
-		movdqa	sdata1, [ptr2 + 1 * VSIZE]	; sdata1 = ptr2[1]
+		movdqa	sdata0, [ptr2 + 1 * VSIZE]	; sdata0 = ptr2[1]
 		pxor	echeck1, echeck1			; echeck1 = 0
-	pcmpeq#x	echeck1, sdata1				; check ptr2[1] for end of line
+	pcmpeq#x	echeck1, sdata0				; check ptr2[1] for end of line
 	pmovmskb	emask, echeck1				; save check results to emask
 		and		emask, emask				; if eof is found
 		jnz		.brk0						;     then break the loop
 		add		index, VSIZE				; index += VSIZE
-		sub		maxlen, VSIZE				; if (maxlen < VSIZE)
+		cmp		[s_mlen], index				; if (maxlen < index)
 		jb		.nospc						;     then go to no space branch
-		movdqu	sdata0, [source]
-		movdqu	[target], sdata0			; target[0] = source[0]
+		movdqu	sdata1, [source]
+		movdqu	[target], sdata1			; target[0] = source[0]
 ;---[Vector loop]--------------------------
 .vloop:
 repeat	CLINE / VSIZE
-		movdqu	[ptr1 + % * VSIZE], sdata1	; ptr1[i] = ptr2[i]
+		movdqu	[ptr1 + % * VSIZE], sdata0	; ptr1[i] = ptr2[i]
 		movdqa	sdata0, [ptr2 + (%+1)*VSIZE]; sdata0 = ptr2[i+1]
 		pxor	echeck0, echeck0			; echeck0 = 0
 	pcmpeq#x	echeck0, sdata0				; check ptr2[i+1] for end of line
@@ -503,38 +508,41 @@ repeat	CLINE / VSIZE
 		and		emask, emask				; if eof is found
 		jnz		.brk1						;     then break the loop
 		add		index, VSIZE				; index += VSIZE
-		sub		maxlen, VSIZE				; if (maxlen < VSIZE)
+		cmp		[s_mlen], index				; if (maxlen < index)
 		jb		.nospc						;     then go to no space branch
 end repeat
+	prefetchnta	[ptr2 + PSTEP]				; prefetch next portion of data
+	prefetchnta	[ptr1 + PSTEP]				; prefetch next portion of data
 		add		ptr2, CLINE					; ptr2 += CLINE
 		add		ptr1, CLINE					; ptr1 += CLINE
 		jmp		.vloop						; do while (true)
 ;---[End of vector loop]-------------------
 .brk0:	bsf		emask, emask				; find index of first occurence of eol
-		cmp		maxlen, emask				; if (maxlen < emask)
-		jb		.nospc						;     then go to no space branch
 		add		index, emask				; index += emask
-		mov		size, index					; size = index
-		seteol	(target + index), x			; put eol symbol into target string
+		jz		.skip						; if (index = 0), then skip following code
+		cmp		[s_mlen], index				; if (maxlen < index)
+		jb		.nospc						;     then go to no space branch
+		mov		ssize, index				; ssize = index
 ;---[Scalar loop]--------------------------
 .sclr:	mov		char, [source]				; reg = source[0]
 		mov		[target], char				; target[0] = reg
 		add		source, bytes				; source++
 		add		target, bytes				; target++
-		sub		size, bytes					; size--
-		jnz		.sclr						; do while (size != 0)
+		sub		ssize, bytes				; ssize--
+		jnz		.sclr						; do while (ssize != 0)
 ;---[End of scalar loop]-------------------
+.skip:	seteol	target, x					; target[0] = 0
 		shftr	index, scale				; return index
 		ret
 ;---[Loop break branch]--------------------
 .brk1:	bsf		emask, emask				; find index of first occurence of eol
-		cmp		maxlen, emask				; if (maxlen < emask)
-		jb		.nospc						;     then go to no space branch
 		add		index, emask				; index += emask
-		movdqu	sdata0, [source + index - VSIZE + 1]
-		movdqu	[target + index - VSIZE + 1], sdata0
+		cmp		[s_mlen], index				; if (maxlen < index)
+		jb		.nospc						;     then go to no space branch
+		movdqu	sdata0, [source + index - VSIZE + bytes]
+		movdqu	[target + index - VSIZE + bytes], sdata0
 		shftr	index, scale				; return index
-		ret
+.exit:	ret
 if scale
 ;---[Scalar loop]--------------------------
 .sloop:	mov		char, [ptr2]
@@ -547,16 +555,15 @@ if scale
 		sub		maxlen, 1					; maxlen--
 		jae		.sloop						; do while (maxlen >= 0)
 ;---[End of scalar loop]-------------------
-.exit:	ret
 end if
 ;---[No space exit branch]-----------------
 .nospc:	seteol	target, x					; clear target string
 		mov		index, ERROR				; return ERROR
 		ret
 }
-CopyStr_char8:	COPY1	cl, b
-CopyStr_char16:	COPY1	cx, w
-CopyStr_char32:	COPY1	ecx, d
+CopyStr_char8:	COPY1	r9b, b
+CopyStr_char16:	COPY1	r9w, w
+CopyStr_char32:	COPY1	r9d, d
 
 ;==============================================================================;
 ;       Copying of characters sequence to string                               ;
@@ -576,11 +583,14 @@ cmask	equ		r8							; mask to clear unrequired results
 emask	equ		r9							; result of eol search
 ptr1	equ		r10							; temporary pointer to target string
 ptr2	equ		r11							; temporary pointer to source string
-size	equ		cmask						; string size (bytes)
+ssize	equ		cmask						; string size (bytes)
+count	equ		maxlen						; count of characters to copy
 echeck0	equ		xmm0						; eol check mask #1
 echeck1	equ		xmm1						; eol check mask #2
 sdata0	equ		xmm2						; string data #1
 sdata1	equ		xmm3						; string data #2
+stack	equ		rsp							; stack pointer
+s_mlen	equ		stack - 1 * 8				; stack position of "maxlen" variable
 if x eq b
 scale	= 0									; scale value
 else if x eq w
@@ -591,9 +601,8 @@ end if
 bytes	= 1 shl scale						; size of array element (bytes)
 bmask	= bytes - 1							; elements aligning mask
 ;------------------------------------------
-		cmp		maxlen, size				; if (maxlen < size)
-		jb		.nospc						;     then go to no space branch
-		mov		maxlen, size				;     else maxlen = size
+	prefetchnta	[source]					; prefetch data
+	prefetchnta	[target]					; prefetch data
 		mov		ptr2, source				; ptr2 = source
 		mov		ptr1, target				; ptr1 = target
 		xor		index, index				; index = 0
@@ -601,40 +610,47 @@ if scale
 		test	source, bmask				; if elements have wrong alignment
 		jnz		.sloop						;     then skip vector code
 end if
+		shftl	maxlen, scale				; convert maxlen to bytes
+		shftl	size, scale					; convert size to bytes
 ;---[Normal execution branch]--------------
+		mov		[s_mlen], maxlen			; save "maxlen" variable into the stack
+		mov		count, size					; count = size
 		mov		shft, source
 		and		shft, VMASK					; get string offset from vector boundary
 		sub		ptr2, shft					; ptr2 = source - shft
 		sub		ptr1, shft					; ptr1 = target - shft
-		shftl	maxlen, scale				; convert maxlen to bytes
 ;---[Unaligned copy]-----------------------
-		add		maxlen, shft				; maxlen += shft
+		add		count, shft					; count += shft
 		sub		index, shft					; index -= shft
 		mov		cmask, VBITS
 		shl		cmask, low					; adjust cmask for unaligned search
 		pxor	echeck0, echeck0			; echeck0 = 0
-	pcmpeq#x	echeck0, [ptr2]				; check ptr2[0] for end of line
+	pcmpeq#x	echeck0, [ptr2 + 0 * VSIZE]	; check ptr2[0] for end of line
 	pmovmskb	emask, echeck0				; save check results to emask
 		and		emask, cmask				; if eof is found
 		jnz		.brk0						;     then break the loop
 		add		index, VSIZE				; index += VSIZE
-		sub		maxlen, VSIZE				; if (maxlen <= VSIZE)
-		jbe		.tail0						;     then copy maxlen elements from source
-		movdqa	sdata1, [ptr2 + 1 * VSIZE]	; sdata1 = ptr2[1]
+		sub		count, VSIZE				; if (count <= VSIZE)
+		jbe		.tail0						;     then copy count elements from source
+		cmp		[s_mlen], index				; if (maxlen < index)
+		jb		.nospc						;     then go to no space branch
+		movdqa	sdata0, [ptr2 + 1 * VSIZE]	; sdata0 = ptr2[1]
 		pxor	echeck1, echeck1			; echeck1 = 0
-	pcmpeq#x	echeck1, sdata1				; check ptr2[1] for end of line
+	pcmpeq#x	echeck1, sdata0				; check ptr2[1] for end of line
 	pmovmskb	emask, echeck1				; save check results to emask
 		and		emask, emask				; if eof is found
 		jnz		.brk0						;     then break the loop
 		add		index, VSIZE				; index += VSIZE
-		sub		maxlen, VSIZE				; if (maxlen <= VSIZE)
-		jbe		.tail0						;     then copy maxlen elements from source
-		movdqu	sdata0, [source]
-		movdqu	[target], sdata0			; target[0] = source[0]
+		sub		count, VSIZE				; if (count <= VSIZE)
+		jbe		.tail0						;     then copy count elements from source
+		cmp		[s_mlen], index				; if (maxlen < index)
+		jb		.nospc						;     then go to no space branch
+		movdqu	sdata1, [source]
+		movdqu	[target], sdata1			; target[0] = source[0]
 ;---[Vector loop]--------------------------
 .vloop:
 repeat	CLINE / VSIZE
-		movdqu	[ptr1 + % * VSIZE], sdata1	; ptr1[i] = ptr2[i]
+		movdqu	[ptr1 + % * VSIZE], sdata0	; ptr1[i] = ptr2[i]
 		movdqa	sdata0, [ptr2 + (%+1)*VSIZE]; sdata0 = ptr2[i+1]
 		pxor	echeck0, echeck0			; echeck0 = 0
 	pcmpeq#x	echeck0, sdata0				; check ptr2[i+1] for end of line
@@ -642,63 +658,74 @@ repeat	CLINE / VSIZE
 		and		emask, emask				; if eof is found
 		jnz		.brk1						;     then break the loop
 		add		index, VSIZE				; index += VSIZE
-		sub		maxlen, VSIZE				; if (maxlen <= VSIZE)
-		jbe		.tail1						;     then copy maxlen elements from source
+		sub		count, VSIZE				; if (count <= VSIZE)
+		jbe		.tail1						;     then copy count elements from source
+		cmp		[s_mlen], index				; if (maxlen < index)
+		jb		.nospc						;     then go to no space branch
 end repeat
+	prefetchnta	[ptr2 + PSTEP]				; prefetch next portion of data
+	prefetchnta	[ptr1 + PSTEP]				; prefetch next portion of data
 		add		ptr2, CLINE					; ptr2 += CLINE
 		add		ptr1, CLINE					; ptr1 += CLINE
 		jmp		.vloop						; do while (true)
 ;---[End of vector loop]-------------------
 .brk0:	bsf		emask, emask				; find index of first occurence of eol
-		cmp		maxlen, emask				; if (maxlen > emask)
-		cmova	maxlen, emask				;     maxlen = emask
-.tail0:	add		index, maxlen				; index += maxlen
-		mov		size, index					; size = index
-		seteol	(target + index), x			; put eol symbol into target string
+		cmp		count, emask				; if (count > emask)
+		cmova	count, emask				;     count = emask
+.tail0:	add		index, count				; index += count
+		jz		.skip						; if (index = 0), then skip following code
+		cmp		[s_mlen], index				; if (maxlen < index)
+		jb		.nospc						;     then go to no space branch
+		mov		ssize, index				; ssize = index
 ;---[Scalar loop]--------------------------
 .sclr:	mov		char, [source]				; reg = source[0]
 		mov		[target], char				; target[0] = reg
 		add		source, bytes				; source++
 		add		target, bytes				; target++
-		sub		size, bytes					; size--
-		jnz		.sclr						; do while (size != 0)
+		sub		ssize, bytes				; ssize--
+		jnz		.sclr						; do while (ssize != 0)
 ;---[End of scalar loop]-------------------
+.skip:	seteol	target, x					; target[0] = 0
 		shftr	index, scale				; return index
 		ret
 ;---[Loop break branch]--------------------
 .brk1:	bsf		emask, emask				; find index of first occurence of eol
-		cmp		maxlen, emask				; if (maxlen > emask)
-		cmova	maxlen, emask				;     maxlen = emask
-.tail1:	add		index, maxlen				; index += maxlen
-		seteol	(target + index), x			; put eol symbol into target string
+		cmp		count, emask				; if (count > emask)
+		cmova	count, emask				;     count = emask
+.tail1:	add		index, count				; index += count
+		cmp		[s_mlen], index				; if (maxlen < index)
+		jb		.nospc						;     then go to no space branch
 		movdqu	sdata0, [source + index - VSIZE]
 		movdqu	[target + index - VSIZE], sdata0
+		seteol	(target + index), x			; put eol symbol into target string
 		shftr	index, scale				; return index
-		ret
+.exit:	ret
 if scale
 ;---[Scalar loop]--------------------------
 .sloop:	mov		char, [ptr2]
 		mov		[ptr1], char				; ptr1[0] = ptr2[0]
 		test	char, char					; if (ptr2[0] == 0)
 		jz		.exit						;     then go to exit
+		sub		size, 1						; size--
+		jb		.fin						; if (size < 0), then finalize copied sequence
 		add		ptr2, bytes					; ptr2++
 		add		ptr1, bytes					; ptr1++
 		add		index, 1					; index++
 		sub		maxlen, 1					; maxlen--
 		jae		.sloop						; do while (maxlen >= 0)
 ;---[End of scalar loop]-------------------
-		seteol	(ptr1 - bytes), x			; put eol symbol into target string
-		sub		index, 1					; return index - 1
-.exit:	ret
 end if
 ;---[No space exit branch]-----------------
 .nospc:	seteol	target, x					; clear target string
 		mov		index, ERROR				; return ERROR
 		ret
+;---[Finalize copied sequence branch]------
+.fin:	seteol	ptr1, x						; put eol symbol into target string
+		ret
 }
-CopySeq_char8:	COPY2	cl, b
-CopySeq_char16:	COPY2	cx, w
-CopySeq_char32:	COPY2	ecx, d
+CopySeq_char8:	COPY2	r9b, b
+CopySeq_char16:	COPY2	r9w, w
+CopySeq_char32:	COPY2	r9d, d
 
 ;******************************************************************************;
 ;       Concatenating                                                          ;
@@ -736,16 +763,19 @@ space	= 3 * 8								; stack size required by the procedure
 bytes	= 1 shl scale						; size of element (bytes)
 ;------------------------------------------
 		sub		stack, space				; reserving stack size for local vars
+;---[Get length of target string]----------
 		mov		[s_trgt], target			; save "target" variable into the stack
 		mov		[s_mlen], maxlen			; save "maxlen" variable into the stack
 		mov		[s_src], source				; save "source" variable into the stack
 		call	Length						; len = Len (target)
+;---[Check string for free space]----------
+		mov		target, [s_trgt]			; get "target" variable from the stack
 		mov		maxlen, [s_mlen]			; get "maxlen" variable from the stack
+		mov		source, [s_src]				; get "source" variable from the stack
 		sub		maxlen, result				; if (maxlen - len < 0)
 		jb		.nospc						;     then go to no space branch
-		mov		target, [s_trgt]
+;---[Concatenate source string]------------
 		lea		target, [target + result * bytes]
-		mov		source, [s_src]
 		add		stack, space				; restoring back the stack pointer
 		jmp		CopyStr						; return CopyStr (target + len, maxlen - len, source)
 ;---[No space branch]----------------------
@@ -791,18 +821,21 @@ space	= 5 * 8								; stack size required by the procedure
 bytes	= 1 shl scale						; size of element (bytes)
 ;------------------------------------------
 		sub		stack, space				; reserving stack size for local vars
+;---[Get length of target string]----------
 		mov		[s_trgt], target			; save "target" variable into the stack
 		mov		[s_mlen], maxlen			; save "maxlen" variable into the stack
 		mov		[s_src], source				; save "source" variable into the stack
 		mov		[s_size], size				; save "size" variable into the stack
 		call	Length						; len = Len (target)
+;---[Check string for free space]----------
+		mov		target, [s_trgt]			; get "target" variable from the stack
 		mov		maxlen, [s_mlen]			; get "maxlen" variable from the stack
+		mov		source, [s_src]				; get "source" variable from the stack
+		mov		size, [s_size]				; get "size" variable from the stack
 		sub		maxlen, result				; if (maxlen - len < 0)
 		jb		.nospc						;     then go to no space branch
-		mov		target, [s_trgt]
+;---[Concatenate source string]------------
 		lea		target, [target + result * bytes]
-		mov		source, [s_src]
-		mov		size, [s_size]
 		add		stack, space				; restoring back the stack pointer
 		jmp		CopyStr						; return CopyStr (target + len, maxlen - len, source, size)
 ;---[No space branch]----------------------
@@ -849,6 +882,8 @@ end if
 bytes	= 1 shl scale						; size of array element (bytes)
 bmask	= bytes - 1							; elements aligning mask
 ;------------------------------------------
+	prefetchnta	[string1]					; prefetch data
+	prefetchnta	[string2]					; prefetch data
 		cmp		string1, string2			; if (string1 == string2)
 		je		.equal						;     then go to equal branch
 if scale
@@ -857,14 +892,12 @@ if scale
 		test	string2, bmask				; if elements have wrong alignment
 		jnz		.sloop						;     then skip vector code
 end if
-.start:	mov		size1, PMASK
-		mov		size2, PMASK
-		and		size1, string1
-		and		size2, string2
+.start:	mov		size1, string1
 		neg		size1
+		and		size1, PMASK				; size1 = -string1 & PMASK
+		mov		size2, string2
 		neg		size2
-		add		size1, PSIZE				; size1 = PSIZE - (string1 & PMASK)
-		add		size2, PSIZE				; size2 = PSIZE - (string2 & PMASK)
+		and		size2, PMASK				; size2 = -string2 & PMASK
 		cmp		size1, size2				; if (size1 <= size2)
 		cmovbe	size, size1					;     then size = size1
 		cmova	size, size2					;     then size = size2
@@ -906,6 +939,8 @@ repeat	CLINE / VSIZE
 		xor		fmask, VBITS				; if ptr1[i] != ptr2[i] or eol is found
 		jnz		.brk1						;     then break the loop
 end repeat
+	prefetchnta	[ptr1 + PSTEP]				; prefetch next portion of data
+	prefetchnta	[ptr2 + PSTEP]				; prefetch next portion of data
 		add		ptr1, CLINE					; ptr1 += CLINE
 		add		ptr2, CLINE					; ptr2 += CLINE
 		jmp		.vloop						; do while (true)
@@ -936,7 +971,7 @@ end repeat
 		add		index, fmask				; index += fmask
 		mov		char, [string1 + index]
 		cmp		char, [string2 + index]
-@@:		seta	res1						; if (string1[index] > string2[index]), then res1 = 1
+.exit:	seta	res1						; if (string1[index] > string2[index]), then res1 = 1
 		setb	res2						; if (string1[index] < string2[index]), then res2 = 1
 		sub		res1, res2					; return res1 - res2
 		movsx	index, res1
@@ -944,9 +979,9 @@ end repeat
 ;---[Tail loop]----------------------------
 .tloop:	mov		char, [string1]
 		cmp		char, [string2]				; if (string1[0] != string2[0])
-		jne		@b							;     then go to exit
+		jne		.exit						;     then go to exit
 		test	char, char					; if (char == 0)
-		jz		@b							;     then go to exit
+		jz		.exit							;     then go to exit
 		add		string1, bytes				; string1++
 		add		string2, bytes				; string2++
 		sub		size, bytes					; size--
@@ -963,11 +998,6 @@ if scale
 		test	char, char
 		jnz		.sloop						; do while (char != 0)
 ;---[End of scalar loop]-------------------
-.exit:	seta	res1						; if (string1[0] > string2[0]), then res1 = 1
-		setb	res2						; if (string1[0] < string2[0]), then res2 = 1
-		sub		res1, res2					; return res1 - res2
-		movsx	index, res1
-		ret
 end if
 ;---[Equal branch]-------------------------
 .equal:	xor		index, index				; return 0
@@ -1008,10 +1038,12 @@ end if
 bytes	= 1 shl scale						; size of array element (bytes)
 bmask	= bytes - 1							; elements aligning mask
 ;------------------------------------------
+	prefetchnta	[string1]					; prefetch data
+	prefetchnta	[string2]					; prefetch data
 		cmp		string1, string2			; if (string1 == string2)
 		je		.equal						;     then go to equal branch
 		test	size, size					; if (size == 0)
-		jz		.skip						;     then skip following code
+		jz		.equal						;     then go to equal branch
 if scale
 		test	string1, bmask				; if elements have wrong alignment
 		jnz		.sloop						;     then skip vector code
@@ -1057,6 +1089,8 @@ repeat	CLINE / VSIZE
 		xor		fmask, VBITS				; if ptr1[i] != ptr2[i] or eol is found
 		jnz		.brk1						;     then break the loop
 end repeat
+	prefetchnta	[ptr1 + PSTEP]				; prefetch next portion of data
+	prefetchnta	[ptr2 + PSTEP]				; prefetch next portion of data
 		add		ptr1, CLINE					; ptr1 += CLINE
 		add		ptr2, CLINE					; ptr2 += CLINE
 		jmp		.vloop						; do while (true)
@@ -1078,12 +1112,12 @@ end repeat
 	pandn		s2temp, s1temp
 	pmovmskb	fmask, s2temp				; save check results to fmask
 		xor		fmask, VBITS				; if string1[index] == string2[index] and eol is not found
-		jz		@f							;     then exit
+		jz		.exit						;     then go to exit
 .brk1:	bsf		fmask, fmask				; find index of first different symbol
 		add		index, fmask				; index += fmask
 		mov		char, [string1 + index]
 		cmp		char, [string2 + index]
-@@:		seta	res1						; if (string1[index] > string2[index]), then res1 = 1
+.exit:	seta	res1						; if (string1[index] > string2[index]), then res1 = 1
 		setb	res2						; if (string1[index] < string2[index]), then res2 = 1
 		sub		res1, res2					; return res1 - res2
 		movsx	index, res1
@@ -1098,20 +1132,6 @@ end repeat
 		add		string2, bytes				; string2++
 		sub		size, 1						; size--
 		jnz		.sloop						; do while (size != 0)
-;---[End of scalar loop]-------------------
-.exit:	seta	res1						; if (string1[0] > string2[0]), then res1 = 1
-		setb	res2						; if (string1[0] < string2[0]), then res2 = 1
-		sub		res1, res2					; return res1 - res2
-		movsx	index, res1
-		ret
-;---[Skip branch]--------------------------
-.skip:	xor		char, char					; char = 0
-		cmp		[string1], char
-		seta	res1						; if (string1[0] > 0), then res1 = 1
-		setb	res2						; if (string1[0] < 0), then res2 = 1
-		sub		res1, res2					; return res1 - res2
-		movsx	index, res1
-		ret
 ;---[Equal branch]-------------------------
 .equal:	xor		index, index				; return 0
 		ret
@@ -1158,13 +1178,14 @@ end if
 bytes	= 1 shl scale						; size of array element (bytes)
 bmask	= bytes - 1							; elements aligning mask
 ;------------------------------------------
+	prefetchnta	[string]					; prefetch data
 		mov		result, NOT_FOUND			; result = NOT_FOUND
 		test	symbol, symbol				; if (symbol == eol)
 		jz		.exit						;     then go to exit
 		xor		index, index				; index = 0
 if scale
 		test	string, bmask				; if elements have wrong alignment
-		jnz		.skip						;     then skip vector code
+		jnz		.sloop						;     then skip vector code
 end if
 ;---[Normal execution branch]--------------
 		movq	pattern, psymbol			; pattern = symbol
@@ -1202,6 +1223,7 @@ repeat	CLINE / VSIZE
 		jnz		.brk						;     then break the loop
 		add		index, VSIZE				; index += VSIZE
 end repeat
+	prefetchnta	[string + PSTEP]			; prefetch next portion of data
 		add		string, CLINE				; string += CLINE
 		jmp		.vloop						; do while (true)
 ;---[End of vector loop]-------------------
@@ -1211,31 +1233,28 @@ end repeat
 		sub		emask, 1					; emask--
 		and		fmask, emask				; clear non required bits in fmask
 		bsf		fmask, fmask				; find index of first occurence of pattern
-		jz		@f							; if pattern is not found, then go to exit
-		add		index, fmask				; index += fmask
-		shftr	index, scale
-		mov		result, index				; result = index
-@@:		ret									; return result
+		jz		.exit						; if pattern is not found, then go to exit
+		lea		result, [index + fmask]
+		shftr	result, scale				; result = index + fmask
+.exit:	ret									; return result
 ;---[Pattern found branch]-----------------
 .patt:	bsf		fmask, fmask				; find index of first occurence of pattern
-		add		index, fmask				; index += fmask
-		shftr	index, scale
-		mov		result, index				; result = index
+		lea		result, [index + fmask]
+		shftr	result, scale				; result = index + fmask
 		ret									; return result
 if scale
 ;---[Scalar loop]--------------------------
-.sloop:	cmp		char, symbol				; if (char == symbol)
+.sloop:	mov		char, [string]				; char = string[0]
+		cmp		char, symbol				; if (char == symbol)
 		cmove	result, index				;     result = index
 		je		.exit						;     then go to exit
-		add		index, 1					; index++
 		add		string, bytes				; string++
-.skip:	mov		char, [string]				; char = string[0]
+		add		index, 1					; index++
 		test	char, char
 		jnz		.sloop						; do while (char != 0)
 ;---[End of scalar loop]-------------------
+		ret
 end if
-;---[Not found branch]---------------------
-.exit:	ret									; return result
 }
 FindSymbolFwd_char8:	FIND_SYMBOL_FWD	sil, cl, b
 FindSymbolFwd_char16:	FIND_SYMBOL_FWD	si, cx, w
@@ -1256,7 +1275,7 @@ table	equ		r8							; pointer to blending table
 index	equ		r9							; index of first occurence of pattern
 emask	equ		r10							; result of eol search
 fmask	equ		r11							; result of pattern search
-back	equ		table						; back address
+back	equ		shft						; back address
 pcheck	equ		xmm0						; pattern check mask
 echeck	equ		xmm1						; eol check mask
 eol		equ		xmm2						; end of line
@@ -1272,13 +1291,14 @@ end if
 bytes	= 1 shl scale						; size of array element (bytes)
 bmask	= bytes - 1							; elements aligning mask
 ;------------------------------------------
+	prefetchnta	[string]					; prefetch data
 		mov		result, NOT_FOUND			; result = NOT_FOUND
 		test	symbol, symbol				; if (symbol == eol)
 		jz		.exit						;     then go to exit
 		xor		index, index				; index = 0
 if scale
 		test	string, bmask				; if elements have wrong alignment
-		jnz		.skip						;     then skip vector code
+		jnz		.sloop						;     then skip vector code
 end if
 ;---[Normal execution branch]--------------
 		movq	pattern, psymbol			; pattern = symbol
@@ -1345,6 +1365,7 @@ end if
 		and		emask, emask				; if eol or pattern is found
 		jnz		.brk						;     then break the loop
 .back4:	add		index, VSIZE				; index += VSIZE
+	prefetchnta	[string + PSTEP]			; prefetch next portion of data
 		add		string, CLINE				; string += CLINE
 		jmp		.vloop						; do while (true)
 ;---[End of vector loop]-------------------
@@ -1354,30 +1375,27 @@ end if
 		sub		emask, 1					; emask--
 		and		fmask, emask				; clear non required bits in fmask
 		bsr		fmask, fmask				; find index of first occurence of pattern
-		jz		@f							; if pattern is not found, then go to exit
-		add		index, fmask				; index += fmask
-		shftr	index, scale
-		mov		result, index				; result = index
-@@:		ret									; return result
+		jz		.exit						; if pattern is not found, then go to exit
+		lea		result, [index + fmask]
+		shftr	result, scale				; result = index + fmask
+.exit:	ret									; return result
 ;---[Pattern found branch]-----------------
-.patt:	bsr		fmask, fmask				; find index of first occurence of pattern
-		add		index, fmask				; index += fmask
-		shftr	index, scale
-		mov		result, index				; result = index
+.patt:	bsr		fmask, fmask				; find index of last occurence of pattern
+		lea		result, [index + fmask]
+		shftr	result, scale				; result = index + fmask
 		jmp		back						; go back into the search loop
 if scale
 ;---[Scalar loop]--------------------------
-.sloop:	cmp		char, symbol				; if (char == symbol)
+.sloop:	mov		char, [string]				; char = string[0]
+		cmp		char, symbol				; if (char == symbol)
 		cmove	result, index				;     result = index
-		add		index, 1					; index++
 		add		string, bytes				; string++
-.skip:	mov		char, [string]				; char = string[0]
+		add		index, 1					; index++
 		test	char, char
 		jnz		.sloop						; do while (char != 0)
 ;---[End of scalar loop]-------------------
+		ret
 end if
-;---[Not found branch]---------------------
-.exit:	ret									; return result
 }
 FindSymbolBwd_char8:	FIND_SYMBOL_BWD	sil, cl, b
 FindSymbolBwd_char16:	FIND_SYMBOL_BWD	si, cx, w
@@ -1430,6 +1448,7 @@ space	= 3 * 8								; stack size required by the procedure
 bytes	= 1 shl scale						; size of array element (bytes)
 bmask	= bytes - 1							; elements aligning mask
 ;------------------------------------------
+	prefetchnta	[string]					; prefetch data
 		mov		result, NOT_FOUND			; result = NOT_FOUND
 		mov		symbol, [symbols]			; symbol = symbols[0]
 		test	symbol, symbol				; if (symbol == eol)
@@ -1437,7 +1456,7 @@ bmask	= bytes - 1							; elements aligning mask
 		xor		index, index				; index = 0
 if scale
 		test	string, bmask				; if elements have wrong alignment
-		jnz		.skip						;     then skip vector code
+		jnz		.sloop						;     then skip vector code
 end if
 ;---[Creating pattern table]---------------
 		sub		stack, space				; reserving stack size for local vars
@@ -1511,6 +1530,7 @@ end if
 		and		emask, emask				; if eol or pattern is found
 		jnz		.brk						;     then break the loop
 		add		index, VSIZE				; index += VSIZE
+	prefetchnta	[string + PSTEP]			; prefetch next portion of data
 		add		string, VSIZE				; string += VSIZE
 		jmp		.vloop						; do while (true)
 ;---[End of vector loop]-------------------
@@ -1521,23 +1541,22 @@ end if
 		and		fmask, emask				; clear non required bits in fmask
 		bsf		fmask, fmask				; find index of first occurence of pattern
 		jz		@f							; if pattern is not found, then go to exit
-		add		index, fmask				; index += fmask
-		shftr	index, scale
-		mov		result, index				; result = index
+		lea		result, [index + fmask]
+		shftr	result, scale				; result = index + fmask
 @@:		add		size, space					; size += space
 		add		stack, size					; restoring back the stack pointer
-		ret
+.exit:	ret
 ;---[Pattern found branch]-----------------
 .patt:	bsf		fmask, fmask				; find index of first occurence of pattern
-		add		index, fmask				; index += fmask
-		shftr	index, scale
-		mov		result, index				; result = index
+		lea		result, [index + fmask]
+		shftr	result, scale				; result = index + fmask
 		add		size, space					; size += space
 		add		stack, size					; restoring back the stack pointer
 		ret									; return result
 if scale
 ;---[Scalar loop]--------------------------
 .sloop:	mov		ptr, symbols				; ptr = symbols
+		mov		char, [string]				; char = string[0]
 		mov		symbol, [ptr]				; symbol = ptr[0]
 ;---[Search loop]--------------------------
 .iloop:	cmp		char, symbol				; if (char == symbol)
@@ -1548,15 +1567,13 @@ if scale
 		test	symbol, symbol
 		jnz		.iloop						; do while (symbol)
 ;---[End of search loop]-------------------
-		add		index, 1					; index++
 		add		string, bytes				; string++
-.skip:	mov		char, [string]				; char = string[0]
+		add		index, 1					; index++
 		test	char, char
 		jnz		.sloop						; do while (char != 0)
 ;---[End of scalar loop]-------------------
+		ret
 end if
-;---[Not found branch]---------------------
-.exit:	ret
 }
 FindSymbolsFwd_char8:	FIND_SYMBOLS_FWD	dl, cl, b
 FindSymbolsFwd_char16:	FIND_SYMBOLS_FWD	dx, cx, w
@@ -1579,6 +1596,7 @@ index	equ		r8							; index of first occurence of pattern
 emask	equ		r9							; result of eol search
 fmask	equ		r10							; result of pattern search
 size	equ		r11							; size of pattern table
+back	equ		shft						; back address
 ptr		equ		size						; temporary pointer
 tsize	equ		symbols						; count of patterns to check
 table	equ		symbols						; pointer to blending table
@@ -1605,6 +1623,7 @@ space	= 3 * 8								; stack size required by the procedure
 bytes	= 1 shl scale						; size of array element (bytes)
 bmask	= bytes - 1							; elements aligning mask
 ;------------------------------------------
+	prefetchnta	[string]					; prefetch data
 		mov		result, NOT_FOUND			; result = NOT_FOUND
 		mov		symbol, [symbols]			; symbol = symbols[0]
 		test	symbol, symbol				; if (symbol == eol)
@@ -1612,7 +1631,7 @@ bmask	= bytes - 1							; elements aligning mask
 		xor		index, index				; index = 0
 if scale
 		test	string, bmask				; if elements have wrong alignment
-		jnz		.skip						;     then skip vector code
+		jnz		.sloop						;     then skip vector code
 end if
 ;---[Creating pattern table]---------------
 		sub		stack, space				; reserving stack size for local vars
@@ -1664,8 +1683,9 @@ end if
 		pand	pcheck, cmask				; apply cmask to pattern search results
 		por		echeck, pcheck				; echeck |= pcheck
 	pmovmskb	emask, echeck				; save check results to emask
+		lea		back, [.back0]				; save return address
 		and		emask, emask				; if eol or pattern is found
-		jnz		.brk0						;     then break the loop
+		jnz		.brk						;     then break the loop
 .back0:	add		index, VSIZE				; index += VSIZE
 ;---[Vector loop]--------------------------
 .vloop:	movdqa	echeck, [string + 1 * VSIZE]; echeck = string[1]
@@ -1683,54 +1703,35 @@ end if
 	pcmpeq#x	echeck, eol					; check string[1] for end of line
 		por		echeck, pcheck				; echeck |= pcheck
 	pmovmskb	emask, echeck				; save check results to emask
+		lea		back, [.back1]				; save return address
 		and		emask, emask				; if eol or pattern is found
-		jnz		.brk1						;     then break the loop
+		jnz		.brk						;     then break the loop
 .back1:	add		index, VSIZE				; index += VSIZE
+	prefetchnta	[string + PSTEP]			; prefetch next portion of data
 		add		string, VSIZE				; string += VSIZE
 		jmp		.vloop						; do while (true)
 ;---[End of vector loop]-------------------
-.brk0:pmovmskb	fmask, pcheck				; save check results to fmask
+.brk:pmovmskb	fmask, pcheck				; save check results to fmask
 		xor		emask, fmask				; if ((emask ^ fmask) == 0)
-		jz		.patt0						;     then go to pattern found branch
+		jz		.patt						;     then go to pattern found branch
 		sub		emask, 1					; emask--
 		and		fmask, emask				; clear non required bits in fmask
 		bsr		fmask, fmask				; find index of first occurence of pattern
 		jz		@f							; if pattern is not found, then go to exit
-		add		index, fmask				; index += fmask
-		shftr	index, scale
-		mov		result, index				; result = index
+		lea		result, [index + fmask]
+		shftr	result, scale				; result = index + fmask
 @@:		add		size, space					; size += space
 		add		stack, size					; restoring back the stack pointer
-		ret
-;---[Pattern found branch #1]--------------
-.patt0:	bsr		fmask, fmask				; find index of first occurence of pattern
-		add		index, fmask				; index += fmask
-		shftr	index, scale
-		mov		result, index				; result = index
-		jmp		.back0						; go back into the search loop
-;---[Break loop branch #2]-----------------
-.brk1:pmovmskb	fmask, pcheck				; save check results to fmask
-		xor		emask, fmask				; if ((emask ^ fmask) == 0)
-		jz		.patt1						;     then go to pattern found branch
-		sub		emask, 1					; emask--
-		and		fmask, emask				; clear non required bits in fmask
-		bsr		fmask, fmask				; find index of first occurence of pattern
-		jz		@f							; if pattern is not found, then go to exit
-		add		index, fmask				; index += fmask
-		shftr	index, scale
-		mov		result, index				; result = index
-@@:		add		size, space					; size += space
-		add		stack, size					; restoring back the stack pointer
-		ret
-;---[Pattern found branch #2]--------------
-.patt1:	bsr		fmask, fmask				; find index of first occurence of pattern
-		add		index, fmask				; index += fmask
-		shftr	index, scale
-		mov		result, index				; result = index
-		jmp		.back1						; go back into the search loop
+.exit:	ret
+;---[Pattern found branch]-----------------
+.patt:	bsr		fmask, fmask				; find index of first occurence of pattern
+		lea		result, [index + fmask]
+		shftr	result, scale				; result = index + fmask
+		jmp		back						; go back into the search loop
 if scale
 ;---[Scalar loop]--------------------------
 .sloop:	mov		ptr, symbols				; ptr = symbols
+		mov		char, [string]				; char = string[0]
 		mov		symbol, [ptr]				; symbol = ptr[0]
 ;---[Search loop]--------------------------
 .iloop:	cmp		char, symbol				; if (char == symbol)
@@ -1740,15 +1741,13 @@ if scale
 		test	symbol, symbol
 		jnz		.iloop						; do while (symbol)
 ;---[End of search loop]-------------------
-		add		index, 1					; index++
 		add		string, bytes				; string++
-.skip:	mov		char, [string]				; char = string[0]
+		add		index, 1					; index++
 		test	char, char
 		jnz		.sloop						; do while (char != 0)
 ;---[End of scalar loop]-------------------
+		ret
 end if
-;---[Not found branch]---------------------
-.exit:	ret
 }
 FindSymbolsBwd_char8:	FIND_SYMBOLS_BWD	dl, cl, b
 FindSymbolsBwd_char16:	FIND_SYMBOLS_BWD	dx, cx, w
@@ -1796,12 +1795,14 @@ space	= 265 * 8							; stack size required by the procedure
 ;---[Get pattern length]-------------------
 		mov		param1, pattern
 		call	Length						; result = Len (pattern)
+;---[Check pattern length]-----------------
 		mov		[s_psize], result			; save pattern size into the stack
 		test	result, result				; if (len == 0)
 		jz		.ntfnd						;     then go to not found branch
 ;---[Get string length]--------------------
 		mov		param1, [s_str]
 		call	Length						; result = Len (string)
+;---[Check string and pattern length]------
 		mov		[s_ssize], result			; save string size into the stack
 		cmp		result, [s_psize]			; if (Len (string) < Len (pattern))
 		jb		.ntfnd						;     then go to not found branch
@@ -1822,7 +1823,7 @@ end if
 		mov		param1, [s_str]				; pass source string to BMH search algorithm
 		mov		fptr, Find
 		call	fptr						; call BMH search algorithm
-		add		stack, space				; restoring back the stack pointer
+		add		stack, space				; restoring back the stack pointe
 		ret
 ;---[Error branch]-------------------------
 .ntfnd:	mov		result, NOT_FOUND			; return NOT_FOUND
@@ -1880,9 +1881,11 @@ space	= 265 * 8							; stack size required by the procedure
 ;---[Get pattern length]-------------------
 		mov		param1, pattern
 		call	Length						; result = Len (pattern)
+;---[Check pattern length]-----------------
 		mov		[s_psize], result			; save pattern size into the stack
 		test	result, result				; if (len == 0)
 		jz		.ntfnd						;     then go to not found branch
+;---[Check string and pattern length]------
 		mov		result, [s_ssize]			; result = Len (string)
 		cmp		result, [s_psize]			; if (Len (string) < Len (pattern))
 		jb		.ntfnd						;     then go to not found branch
@@ -1903,7 +1906,7 @@ end if
 		mov		param1, [s_str]				; pass source string to BMH search algorithm
 		mov		fptr, Find
 		call	fptr						; call BMH search algorithm
-		add		stack, space				; restoring back the stack pointer
+		add		stack, space				; restoring back the stack pointe
 		ret
 ;---[Error branch]-------------------------
 .ntfnd:	mov		result, NOT_FOUND			; return NOT_FOUND
@@ -1958,13 +1961,15 @@ end if
 bytes	= 1 shl scale						; size of array element (bytes)
 bmask	= bytes - 1							; elements aligning mask
 ;------------------------------------------
+	prefetchnta	[string]					; prefetch data
+		mov		count, ERROR				; count = ERROR
 		test	symbol, symbol				; if (symbol == eol)
-		jz		.error						;     then go to error branch
+		jz		.exit						;     then go to exit
 		xor		count, count				; count = 0
 		mov		cmask, 1					; cmask = 1
 if scale
 		test	string, bmask				; if elements have wrong alignment
-		jnz		.skip						;     then skip vector code
+		jnz		.sloop						;     then skip vector code
 end if
 ;---[Normal execution branch]--------------
 		movq	pattern, psymbol			; pattern = symbol
@@ -2001,6 +2006,7 @@ repeat	CLINE / VSIZE
 		popcnt	fmask, fmask				; get count of pattern matches
 		add		count, fmask				; count += mathes
 end repeat
+	prefetchnta	[string + PSTEP]			; prefetch next portion of data
 		add		string, CLINE				; string += CLINE
 		jmp		.vloop						; do while (true)
 ;---[End of vector loop]-------------------
@@ -2013,23 +2019,20 @@ end repeat
 		popcnt	fmask, fmask				; get count of pattern matches
 		add		count, fmask				; count += mathes
 		shftr	count, scale				; return count
-		ret
+.exit:	ret
 if scale
 ;---[Scalar loop]--------------------------
-.sloop:	xor		fmask, fmask				; fmask = 0
+.sloop:	mov		char, [string]				; char = string[0]
+		xor		fmask, fmask				; fmask = 0
 		cmp		char, symbol				; if (char == symbol) {
 		cmove	fmask, cmask				;     count++
 		add		count, fmask				; }
 		add		string, bytes				; string++
-.skip:	mov		char, [string]				; char = string[0]
 		test	char, char
 		jnz		.sloop						; do while (char != 0)
 ;---[End of scalar loop]-------------------
 		ret
 end if
-;---[Error branch]-------------------------
-.error:	mov		count, ERROR				; return ERROR
-		ret
 }
 CountSymbol_char8:	COUNT_SYMBOL	sil, cl, b
 CountSymbol_char16:	COUNT_SYMBOL	si, cx, w
@@ -2077,14 +2080,16 @@ space	= 3 * 8								; stack size required by the procedure
 bytes	= 1 shl scale						; size of array element (bytes)
 bmask	= bytes - 1							; elements aligning mask
 ;------------------------------------------
+	prefetchnta	[string]					; prefetch data
+		mov		count, ERROR				; count = ERROR
 		mov		symbol, [symbols]			; symbol = symbols[0]
 		test	symbol, symbol				; if (symbol == eol)
-		jz		.error						;     then go to error branch
+		jz		.exit						;     then go to exit
 		xor		count, count				; count = 0
 		mov		cmask, 1					; cmask = 1
 if scale
 		test	string, bmask				; if elements have wrong alignment
-		jnz		.skip						;     then skip vector code
+		jnz		.sloop						;     then skip vector code
 end if
 ;---[Creating pattern table]---------------
 		sub		stack, space				; reserving stack size for local vars
@@ -2155,6 +2160,7 @@ end if
 		jnz		.brk						;     then break the loop
 		popcnt	fmask, fmask				; get count of pattern matches
 		add		count, fmask				; count += mathes
+	prefetchnta	[string + PSTEP]			; prefetch next portion of data
 		add		string, VSIZE				; string += VSIZE
 		jmp		.vloop						; do while (true)
 ;---[End of vector loop]-------------------
@@ -2168,10 +2174,11 @@ end if
 		popcnt	fmask, fmask				; get count of pattern matches
 		add		count, fmask				; count += mathes
 		shftr	count, scale				; return count
-		ret
+.exit:	ret
 if scale
 ;---[Scalar loop]--------------------------
 .sloop:	mov		ptr, symbols				; ptr = symbols
+		mov		char, [string]				; char = string[0]
 		mov		symbol, [ptr]				; symbol = ptr[0]
 ;---[Search loop]--------------------------
 .iloop:	xor		fmask, fmask				; fmask = 0
@@ -2185,15 +2192,11 @@ if scale
 ;---[End of search loop]-------------------
 @@:		add		count, fmask
 		add		string, bytes				; string++
-.skip:	mov		char, [string]				; char = string[0]
 		test	char, char
 		jnz		.sloop						; do while (char != 0)
 ;---[End of scalar loop]-------------------
 		ret
 end if
-;---[Error branch]-------------------------
-.error:	mov		count, ERROR				; return ERROR
-		ret
 }
 CountSymbols_char8:		COUNT_SYMBOLS	dl, cl, b
 CountSymbols_char16:	COUNT_SYMBOLS	dx, cx, w
@@ -2235,6 +2238,7 @@ end if
 bytes	= 1 shl scale						; size of array element (bytes)
 bmask	= bytes - 1							; elements aligning mask
 ;------------------------------------------
+	prefetchnta	[string]					; prefetch data
 		test	patt, patt					; if (patt == eol)
 		jz		.exit						;     then go to exit
 if scale
@@ -2309,6 +2313,7 @@ end if
 		and		emask, emask				; if eol or pattern is found
 		jnz		.brk						;     then break the loop
 .back4:	add		index, VSIZE				; index += VSIZE
+	prefetchnta	[ptr + PSTEP]				; prefetch next portion of data
 		add		ptr, CLINE					; ptr += CLINE
 		jmp		.vloop						; do while (true)
 ;---[End of vector loop]-------------------
@@ -2332,7 +2337,7 @@ end if
 		movdqa	echeck, [string + index]	; echeck = string[index]
 	pblendvb	echeck, replace
 		movdqa	[string + index], echeck	; string[index] = replace (echeck, pattern, value)
-		ret
+.exit:	ret
 if scale
 ;---[Scalar loop]--------------------------
 .sloop:	mov		char, [string]				; char = string[0]
@@ -2343,8 +2348,8 @@ if scale
 		test	char, char
 		jnz		.sloop						; do while (char != 0)
 ;---[End of scalar loop]-------------------
+		ret
 end if
-.exit:	ret
 }
 Replace_char8:		REPLACE_SYMBOL	sil, dl, cl, b
 Replace_char16:		REPLACE_SYMBOL	si, dx, cx, w
@@ -2495,14 +2500,12 @@ minsize	= 32								; min array size is aceptable for Quick sort
 		mov		[s_right], right			; save "right" variable into the stack
 		jmp		.loop1
 ;---[Swap loop]----------------------------
-.swap:	xchg	key1, key2					; exchange key1 and key2
-		mov		[array + left * 8], key1	; array[left] = key1
-		mov		[array + right * 8], key2	; array[right] = key2
+.swap:	mov		[array + left * 8], key2	; array[left] = key2
+		mov		[array + right * 8], key1	; array[right] = key1
 		mov		ptr1, [ptr + left * 8]		; ptr1 = ptr[left]
 		mov		ptr2, [ptr + right * 8]		; ptr1 = ptr[left]
-		xchg	ptr1, ptr2					; exchange ptr1 and ptr2
-		mov		[ptr + left * 8], ptr1		; ptr[left] = ptr1
-		mov		[ptr + right * 8], ptr2		; ptr[right] = ptr2
+		mov		[ptr + left * 8], ptr2		; ptr[left] = ptr2
+		mov		[ptr + right * 8], ptr1		; ptr[right] = ptr1
 ;---[Internal loop 1]----------------------
 .loop1:	mov		left, [s_left]				; get "left" variable from the stack
 		add		left, 1						; left++
@@ -2590,8 +2593,8 @@ macro	MERGESORT	InsertSort, MergeFunc
 {
 ;---[Parameters]---------------------------
 array	equ		rdi							; pointer to array of strings
-temp	equ		rsi							; pointer to temporary array of strings
-ptr		equ		rdx							; pointer to array of pointers to data
+ptr		equ		rsi							; pointer to array of pointers to data
+temp	equ		rdx							; pointer to temporary array of strings
 tptr	equ		rcx							; pointer to temporary array of pointers to data
 size	equ		r8							; array size (count of elements)
 func	equ		r9							; pointer to string compare function
@@ -2599,8 +2602,8 @@ func	equ		r9							; pointer to string compare function
 fptr	equ		rax							; pointer to call external function
 stack	equ		rsp							; stack pointer
 s_array	equ		stack + 0 * 8				; stack position of "array" variable
-s_temp	equ		stack + 1 * 8				; stack position of "temp" variable
-s_ptr	equ		stack + 2 * 8				; stack position of "ptr" variable
+s_ptr	equ		stack + 1 * 8				; stack position of "ptr" variable
+s_temp	equ		stack + 2 * 8				; stack position of "temp" variable
 s_tptr	equ		stack + 3 * 8				; stack position of "tptr" variable
 s_size	equ		stack + 4 * 8				; stack position of "size" variable
 s_func	equ		stack + 5 * 8				; stack position of "func" variable
@@ -2615,8 +2618,8 @@ minsize	= 32								; min array size is aceptable for Merge sort
 		sub		stack, space				; reserving stack size for local vars
 ;---[Sort first subarray]------------------
 		mov		[s_array], array			; save "array" variable into the stack
-		mov		[s_temp], temp				; save "temp" variable into the stack
 		mov		[s_ptr], ptr				; save "ptr" variable into the stack
+		mov		[s_temp], temp				; save "temp" variable into the stack
 		mov		[s_tptr], tptr				; save "tptr" variable into the stack
 		mov		[s_size], size				; save "size" variable into the stack
 		mov		[s_func], func				; save "func" variable into the stack
@@ -2624,8 +2627,8 @@ minsize	= 32								; min array size is aceptable for Merge sort
 		call	.start						; call Sort (array, temp, ptr, tptr, size / 2, func)
 ;---[Sort second subarray]-----------------
 		mov		array, [s_array]			; get "array" variable from the stack
-		mov		temp, [s_temp]				; get "temp" variable from the stack
 		mov		ptr, [s_ptr]				; get "ptr" variable from the stack
+		mov		temp, [s_temp]				; get "temp" variable from the stack
 		mov		tptr, [s_tptr]				; get "tptr" variable from the stack
 		mov		size, [s_size]				; get "size" variable from the stack
 		mov		func, [s_func]				; get "func" variable from the stack
@@ -2652,8 +2655,8 @@ minsize	= 32								; min array size is aceptable for Merge sort
 		call	fptr						; call Copy (temp, array, size / 2)
 ;---[Merge sorted arrays]------------------
 		mov		array, [s_array]			; get "array" variable from the stack
-		mov		temp, [s_temp]				; get "temp" variable from the stack
 		mov		ptr, [s_ptr]				; get "ptr" variable from the stack
+		mov		temp, [s_temp]				; get "temp" variable from the stack
 		mov		tptr, [s_tptr]				; get "tptr" variable from the stack
 		mov		size, [s_size]				; get "size" variable from the stack
 		mov		func, [s_func]				; get "func" variable from the stack
@@ -2863,12 +2866,11 @@ bytes	= 1 shl scale						; size of string element (bytes)
 ;---[Hashing loop]-------------------------
 .loop:
 i = 0
-while i < bytes
-		movzx	temp, byte [string + i]		; temp = string[i]
+repeat	bytes
+		movzx	temp, byte [string + (%-1)]	; temp = string[i]
 		add		result, temp				; result += temp
 		imul	result, value				; result *= value
-	i = i + 1
-end while
+end repeat
 		add		string, bytes				; string++
 		mov		char, [string]				; char = string[0]
 		test	char, char

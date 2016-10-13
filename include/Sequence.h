@@ -23,8 +23,8 @@ class BMH
 {
 private:
 	const size_t	hash [256];		// BMH hash
-	const size_t	size;			// Size of pattern
 	const void		*pattern;		// Pattern
+	const size_t	size;			// Size of pattern
 	const bool		backward;		// Flag to search in backward direction
 
 public:
@@ -40,6 +40,10 @@ BMH (const sint8_t pattern[], size_t size, bool backward);
 BMH (const sint16_t pattern[], size_t size, bool backward);
 BMH (const sint32_t pattern[], size_t size, bool backward);
 BMH (const sint64_t pattern[], size_t size, bool backward);
+
+// Other types
+BMH (const size_t pattern[], size_t size, bool backward);
+BMH (const void *pattern, size_t size, bool backward);
 };
 
 //****************************************************************************//
@@ -60,6 +64,10 @@ static size_t Find (const sint8_t source[], size_t size, const BMH *pattern);
 static size_t Find (const sint16_t source[], size_t size, const BMH *pattern);
 static size_t Find (const sint32_t source[], size_t size, const BMH *pattern);
 static size_t Find (const sint64_t source[], size_t size, const BMH *pattern);
+
+// Other types
+static size_t Find (const size_t source[], size_t size, const BMH *pattern);
+static size_t Find (const void *source, size_t size, const BMH *pattern);
 };
 # else
 /*
@@ -73,8 +81,8 @@ static size_t Find (const sint64_t source[], size_t size, const BMH *pattern);
 struct BMH
 {
 	const size_t	hash [256];		// BMH hash
-	const size_t	size;			// Size of pattern
 	const void		*pattern;		// Pattern
+	const size_t	size;			// Size of pattern
 	const bool		backward;		// Flag to search in backward direction
 };
 
@@ -89,6 +97,10 @@ void BMH_sint8 (struct BMH *hash, const sint8_t pattern[], size_t size, bool bac
 void BMH_sint16 (struct BMH *hash, const sint16_t pattern[], size_t size, bool backward);
 void BMH_sint32 (struct BMH *hash, const sint32_t pattern[], size_t size, bool backward);
 void BMH_sint64 (struct BMH *hash, const sint64_t pattern[], size_t size, bool backward);
+
+// Other types
+void BMH_size (struct BMH *hash, const size_t pattern[], size_t size, bool backward);
+void BMH (struct BMH *hash, const void *pattern, size_t size, bool backward);
 
 //****************************************************************************//
 //      Boyer-Moore-Horspool subsequence searching algorithm                  //
@@ -105,6 +117,10 @@ size_t Sequence_Find_sint8 (const sint8_t source[], size_t size, const struct BM
 size_t Sequence_Find_sint16 (const sint16_t source[], size_t size, const struct BMH *pattern);
 size_t Sequence_Find_sint32 (const sint32_t source[], size_t size, const struct BMH *pattern);
 size_t Sequence_Find_sint64 (const sint64_t source[], size_t size, const struct BMH *pattern);
+
+// Other types
+size_t Sequence_Find_size (const size_t source[], size_t size, const struct BMH *pattern);
+size_t Sequence_Find (const void *source, size_t size, const struct BMH *pattern);
 
 # endif
 /*
