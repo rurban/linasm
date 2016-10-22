@@ -59,12 +59,20 @@ static uint8_t ByteSwap (uint8_t value);
 static uint16_t ByteSwap (uint16_t value);
 static uint32_t ByteSwap (uint32_t value);
 static uint64_t ByteSwap (uint64_t value);
+static uint8v16_t ByteSwap (uint8v16_t value);
+static uint16v8_t ByteSwap (uint16v8_t value);
+static uint32v4_t ByteSwap (uint32v4_t value);
+static uint64v2_t ByteSwap (uint64v2_t value);
 
 // Signed integer types
 static sint8_t ByteSwap (sint8_t value);
 static sint16_t ByteSwap (sint16_t value);
 static sint32_t ByteSwap (sint32_t value);
 static sint64_t ByteSwap (sint64_t value);
+static sint8v16_t ByteSwap (sint8v16_t value);
+static sint16v8_t ByteSwap (sint16v8_t value);
+static sint32v4_t ByteSwap (sint32v4_t value);
+static sint64v2_t ByteSwap (sint64v2_t value);
 
 //============================================================================//
 //      Bit reversal permutation                                              //
@@ -75,12 +83,20 @@ static uint8_t BitReverse (uint8_t value);
 static uint16_t BitReverse (uint16_t value);
 static uint32_t BitReverse (uint32_t value);
 static uint64_t BitReverse (uint64_t value);
+static uint8v16_t BitReverse (uint8v16_t value);
+static uint16v8_t BitReverse (uint16v8_t value);
+static uint32v4_t BitReverse (uint32v4_t value);
+static uint64v2_t BitReverse (uint64v2_t value);
 
 // Signed integer types
 static sint8_t BitReverse (sint8_t value);
 static sint16_t BitReverse (sint16_t value);
 static sint32_t BitReverse (sint32_t value);
 static sint64_t BitReverse (sint64_t value);
+static sint8v16_t BitReverse (sint8v16_t value);
+static sint16v8_t BitReverse (sint16v8_t value);
+static sint32v4_t BitReverse (sint32v4_t value);
+static sint64v2_t BitReverse (sint64v2_t value);
 
 //============================================================================//
 //      Bit scan                                                              //
@@ -163,12 +179,20 @@ static uint8_t PopCount (uint8_t value);
 static uint16_t PopCount (uint16_t value);
 static uint32_t PopCount (uint32_t value);
 static uint64_t PopCount (uint64_t value);
+static uint8v16_t PopCount (uint8v16_t value);
+static uint16v8_t PopCount (uint16v8_t value);
+static uint32v4_t PopCount (uint32v4_t value);
+static uint64v2_t PopCount (uint64v2_t value);
 
 // Signed integer types
 static sint8_t PopCount (sint8_t value);
 static sint16_t PopCount (sint16_t value);
 static sint32_t PopCount (sint32_t value);
 static sint64_t PopCount (sint64_t value);
+static sint8v16_t PopCount (sint8v16_t value);
+static sint16v8_t PopCount (sint16v8_t value);
+static sint32v4_t PopCount (sint32v4_t value);
+static sint64v2_t PopCount (sint64v2_t value);
 
 //****************************************************************************//
 //      Arithmetic operations                                                 //
@@ -183,24 +207,36 @@ static uint8_t Abs (sint8_t value);
 static uint16_t Abs (sint16_t value);
 static uint32_t Abs (sint32_t value);
 static uint64_t Abs (sint64_t value);
+static uint8v16_t Abs (sint8v16_t value);
+static uint16v8_t Abs (sint16v8_t value);
+static uint32v4_t Abs (sint32v4_t value);
+static uint64v2_t Abs (sint64v2_t value);
 
 // Floating-point types
 static flt32_t Abs (flt32_t value);
 static flt64_t Abs (flt64_t value);
+static flt32v4_t Abs (flt32v4_t value);
+static flt64v2_t Abs (flt64v2_t value);
 
 //============================================================================//
 //      Negative absolute value                                               //
 //============================================================================//
 
 // Signed integer types
-static uint8_t NegAbs (sint8_t value);
-static uint16_t NegAbs (sint16_t value);
-static uint32_t NegAbs (sint32_t value);
-static uint64_t NegAbs (sint64_t value);
+static sint8_t NegAbs (sint8_t value);
+static sint16_t NegAbs (sint16_t value);
+static sint32_t NegAbs (sint32_t value);
+static sint64_t NegAbs (sint64_t value);
+static sint8v16_t NegAbs (sint8v16_t value);
+static sint16v8_t NegAbs (sint16v8_t value);
+static sint32v4_t NegAbs (sint32v4_t value);
+static sint64v2_t NegAbs (sint64v2_t value);
 
 // Floating-point types
 static flt32_t NegAbs (flt32_t value);
 static flt64_t NegAbs (flt64_t value);
+static flt32v4_t NegAbs (flt32v4_t value);
+static flt64v2_t NegAbs (flt64v2_t value);
 
 //============================================================================//
 //      Number sign                                                           //
@@ -211,10 +247,16 @@ static sint8_t Sign (sint8_t value);
 static sint16_t Sign (sint16_t value);
 static sint32_t Sign (sint32_t value);
 static sint64_t Sign (sint64_t value);
+static sint8v16_t Sign (sint8v16_t value);
+static sint16v8_t Sign (sint16v8_t value);
+static sint32v4_t Sign (sint32v4_t value);
+static sint64v2_t Sign (sint64v2_t value);
 
 // Floating-point types
 static flt32_t Sign (flt32_t value);
 static flt64_t Sign (flt64_t value);
+static flt32v4_t Sign (flt32v4_t value);
+static flt64v2_t Sign (flt64v2_t value);
 
 //============================================================================//
 //      Square root                                                           //
@@ -229,6 +271,8 @@ static uint64_t Sqrt (uint64_t value);
 // Floating-point types
 static flt32_t Sqrt (flt32_t value);
 static flt64_t Sqrt (flt64_t value);
+static flt32v4_t Sqrt (flt32v4_t value);
+static flt64v2_t Sqrt (flt64v2_t value);
 
 //============================================================================//
 //      Square value                                                          //
@@ -249,6 +293,8 @@ static sint64_t Sqr (sint64_t value);
 // Floating-point types
 static flt32_t Sqr (flt32_t value);
 static flt64_t Sqr (flt64_t value);
+static flt32v4_t Sqr (flt32v4_t value);
+static flt64v2_t Sqr (flt64v2_t value);
 
 //============================================================================//
 //      Cube value                                                            //
@@ -269,24 +315,32 @@ static sint64_t Cube (sint64_t value);
 // Floating-point types
 static flt32_t Cube (flt32_t value);
 static flt64_t Cube (flt64_t value);
+static flt32v4_t Cube (flt32v4_t value);
+static flt64v2_t Cube (flt64v2_t value);
 
 //============================================================================//
 //      Inverse value                                                         //
 //============================================================================//
 static flt32_t InverseValue (flt32_t value);
 static flt64_t InverseValue (flt64_t value);
+static flt32v4_t InverseValue (flt32v4_t value);
+static flt64v2_t InverseValue (flt64v2_t value);
 
 //============================================================================//
 //      Inverse square value                                                  //
 //============================================================================//
 static flt32_t InverseSquare (flt32_t value);
 static flt64_t InverseSquare (flt64_t value);
+static flt32v4_t InverseSquare (flt32v4_t value);
+static flt64v2_t InverseSquare (flt64v2_t value);
 
 //============================================================================//
 //      Inverse cube value                                                    //
 //============================================================================//
 static flt32_t InverseCube (flt32_t value);
 static flt64_t InverseCube (flt64_t value);
+static flt32v4_t InverseCube (flt32v4_t value);
+static flt64v2_t InverseCube (flt64v2_t value);
 
 //============================================================================//
 //      Three-state comparison                                                //
@@ -297,16 +351,26 @@ static sint8_t Compare (uint8_t value1, uint8_t value2);
 static sint16_t Compare (uint16_t value1, uint16_t value2);
 static sint32_t Compare (uint32_t value1, uint32_t value2);
 static sint64_t Compare (uint64_t value1, uint64_t value2);
+static sint8v16_t Compare (uint8v16_t value1, uint8v16_t value2);
+static sint16v8_t Compare (uint16v8_t value1, uint16v8_t value2);
+static sint32v4_t Compare (uint32v4_t value1, uint32v4_t value2);
+static sint64v2_t Compare (uint64v2_t value1, uint64v2_t value2);
 
 // Signed integer types
 static sint8_t Compare (sint8_t value1, sint8_t value2);
 static sint16_t Compare (sint16_t value1, sint16_t value2);
 static sint32_t Compare (sint32_t value1, sint32_t value2);
 static sint64_t Compare (sint64_t value1, sint64_t value2);
+static sint8v16_t Compare (sint8v16_t value1, sint8v16_t value2);
+static sint16v8_t Compare (sint16v8_t value1, sint16v8_t value2);
+static sint32v4_t Compare (sint32v4_t value1, sint32v4_t value2);
+static sint64v2_t Compare (sint64v2_t value1, sint64v2_t value2);
 
 // Floating-point types
 static flt32_t Compare (flt32_t value1, flt32_t value2);
 static flt64_t Compare (flt64_t value1, flt64_t value2);
+static flt32v4_t Compare (flt32v4_t value1, flt32v4_t value2);
+static flt64v2_t Compare (flt64v2_t value1, flt64v2_t value2);
 
 //============================================================================//
 //      Minimum and maximum absolute value                                    //
@@ -321,10 +385,15 @@ static uint8_t MinAbs (sint8_t value1, sint8_t value2);
 static uint16_t MinAbs (sint16_t value1, sint16_t value2);
 static uint32_t MinAbs (sint32_t value1, sint32_t value2);
 static uint64_t MinAbs (sint64_t value1, sint64_t value2);
+static uint8v16_t MinAbs (sint8v16_t value1, sint8v16_t value2);
+static uint16v8_t MinAbs (sint16v8_t value1, sint16v8_t value2);
+static uint32v4_t MinAbs (sint32v4_t value1, sint32v4_t value2);
 
 // Floating-point types
 static flt32_t MinAbs (flt32_t value1, flt32_t value2);
 static flt64_t MinAbs (flt64_t value1, flt64_t value2);
+static flt32v4_t MinAbs (flt32v4_t value1, flt32v4_t value2);
+static flt64v2_t MinAbs (flt64v2_t value1, flt64v2_t value2);
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 //      Maximum absolute value                                                //
@@ -335,11 +404,15 @@ static uint8_t MaxAbs (sint8_t value1, sint8_t value2);
 static uint16_t MaxAbs (sint16_t value1, sint16_t value2);
 static uint32_t MaxAbs (sint32_t value1, sint32_t value2);
 static uint64_t MaxAbs (sint64_t value1, sint64_t value2);
+static uint8v16_t MaxAbs (sint8v16_t value1, sint8v16_t value2);
+static uint16v8_t MaxAbs (sint16v8_t value1, sint16v8_t value2);
+static uint32v4_t MaxAbs (sint32v4_t value1, sint32v4_t value2);
 
 // Floating-point types
 static flt32_t MaxAbs (flt32_t value1, flt32_t value2);
 static flt64_t MaxAbs (flt64_t value1, flt64_t value2);
-
+static flt32v4_t MaxAbs (flt32v4_t value1, flt32v4_t value2);
+static flt64v2_t MaxAbs (flt64v2_t value1, flt64v2_t value2);
 
 //============================================================================//
 //      Minimum and maximum value                                             //
@@ -354,16 +427,24 @@ static uint8_t Min (uint8_t value1, uint8_t value2);
 static uint16_t Min (uint16_t value1, uint16_t value2);
 static uint32_t Min (uint32_t value1, uint32_t value2);
 static uint64_t Min (uint64_t value1, uint64_t value2);
+static uint8v16_t Min (uint8v16_t value1, uint8v16_t value2);
+static uint16v8_t Min (uint16v8_t value1, uint16v8_t value2);
+static uint32v4_t Min (uint32v4_t value1, uint32v4_t value2);
 
 // Signed integer types
 static sint8_t Min (sint8_t value1, sint8_t value2);
 static sint16_t Min (sint16_t value1, sint16_t value2);
 static sint32_t Min (sint32_t value1, sint32_t value2);
 static sint64_t Min (sint64_t value1, sint64_t value2);
+static sint8v16_t Min (sint8v16_t value1, sint8v16_t value2);
+static sint16v8_t Min (sint16v8_t value1, sint16v8_t value2);
+static sint32v4_t Min (sint32v4_t value1, sint32v4_t value2);
 
 // Floating-point types
 static flt32_t Min (flt32_t value1, flt32_t value2);
 static flt64_t Min (flt64_t value1, flt64_t value2);
+static flt32v4_t Min (flt32v4_t value1, flt32v4_t value2);
+static flt64v2_t Min (flt64v2_t value1, flt64v2_t value2);
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 //      Maximum value                                                         //
@@ -374,16 +455,24 @@ static uint8_t Max (uint8_t value1, uint8_t value2);
 static uint16_t Max (uint16_t value1, uint16_t value2);
 static uint32_t Max (uint32_t value1, uint32_t value2);
 static uint64_t Max (uint64_t value1, uint64_t value2);
+static uint8v16_t Max (uint8v16_t value1, uint8v16_t value2);
+static uint16v8_t Max (uint16v8_t value1, uint16v8_t value2);
+static uint32v4_t Max (uint32v4_t value1, uint32v4_t value2);
 
 // Signed integer types
 static sint8_t Max (sint8_t value1, sint8_t value2);
 static sint16_t Max (sint16_t value1, sint16_t value2);
 static sint32_t Max (sint32_t value1, sint32_t value2);
 static sint64_t Max (sint64_t value1, sint64_t value2);
+static sint8v16_t Max (sint8v16_t value1, sint8v16_t value2);
+static sint16v8_t Max (sint16v8_t value1, sint16v8_t value2);
+static sint32v4_t Max (sint32v4_t value1, sint32v4_t value2);
 
 // Floating-point types
 static flt32_t Max (flt32_t value1, flt32_t value2);
 static flt64_t Max (flt64_t value1, flt64_t value2);
+static flt32v4_t Max (flt32v4_t value1, flt32v4_t value2);
+static flt64v2_t Max (flt64v2_t value1, flt64v2_t value2);
 
 //============================================================================//
 //      Greatest common divisor                                               //
@@ -396,10 +485,10 @@ static uint32_t GCD (uint32_t value1, uint32_t value2);
 static uint64_t GCD (uint64_t value1, uint64_t value2);
 
 // Signed integer types
-static sint8_t GCD (sint8_t value1, sint8_t value2);
-static sint16_t GCD (sint16_t value1, sint16_t value2);
-static sint32_t GCD (sint32_t value1, sint32_t value2);
-static sint64_t GCD (sint64_t value1, sint64_t value2);
+static uint8_t GCD (sint8_t value1, sint8_t value2);
+static uint16_t GCD (sint16_t value1, sint16_t value2);
+static uint32_t GCD (sint32_t value1, sint32_t value2);
+static uint64_t GCD (sint64_t value1, sint64_t value2);
 
 //============================================================================//
 //      Least common multiple                                                 //
@@ -412,10 +501,10 @@ static uint32_t LCM (uint32_t value1, uint32_t value2);
 static uint64_t LCM (uint64_t value1, uint64_t value2);
 
 // Signed integer types
-static sint8_t LCM (sint8_t value1, sint8_t value2);
-static sint16_t LCM (sint16_t value1, sint16_t value2);
-static sint32_t LCM (sint32_t value1, sint32_t value2);
-static sint64_t LCM (sint64_t value1, sint64_t value2);
+static uint8_t LCM (sint8_t value1, sint8_t value2);
+static uint16_t LCM (sint16_t value1, sint16_t value2);
+static uint32_t LCM (sint32_t value1, sint32_t value2);
+static uint64_t LCM (sint64_t value1, sint64_t value2);
 
 //============================================================================//
 //      Cancellation                                                          //
@@ -442,12 +531,16 @@ static void Cancel (sint64_t *value1, sint64_t *value2);
 //============================================================================//
 static flt32_t AbsError (flt32_t approximate, flt32_t accurate);
 static flt64_t AbsError (flt64_t approximate, flt64_t accurate);
+static flt32v4_t AbsError (flt32v4_t approximate, flt32v4_t accurate);
+static flt64v2_t AbsError (flt64v2_t approximate, flt64v2_t accurate);
 
 //============================================================================//
 //      Relative error                                                        //
 //============================================================================//
 static flt32_t RelError (flt32_t approximate, flt32_t accurate);
 static flt64_t RelError (flt64_t approximate, flt64_t accurate);
+static flt32v4_t RelError (flt32v4_t approximate, flt32v4_t accurate);
+static flt64v2_t RelError (flt64v2_t approximate, flt64v2_t accurate);
 
 //****************************************************************************//
 //      Scale functions                                                       //
@@ -483,6 +576,10 @@ static flt32_t Exp2 (flt32_t exp);
 static flt64_t Exp2 (flt64_t exp);
 static flt32_t Exp2m1 (flt32_t exp);
 static flt64_t Exp2m1 (flt64_t exp);
+static flt32v4_t Exp2 (flt32v4_t exp);
+static flt64v2_t Exp2 (flt64v2_t exp);
+static flt32v4_t Exp2m1 (flt32v4_t exp);
+static flt64v2_t Exp2m1 (flt64v2_t exp);
 
 //============================================================================//
 //      Exponentiation by base 10                                             //
@@ -502,6 +599,10 @@ static flt32_t Exp10 (flt32_t exp);
 static flt64_t Exp10 (flt64_t exp);
 static flt32_t Exp10m1 (flt32_t exp);
 static flt64_t Exp10m1 (flt64_t exp);
+static flt32v4_t Exp10 (flt32v4_t exp);
+static flt64v2_t Exp10 (flt64v2_t exp);
+static flt32v4_t Exp10m1 (flt32v4_t exp);
+static flt64v2_t Exp10m1 (flt64v2_t exp);
 
 //============================================================================//
 //      Exponentiation by base E (natural logarithm)                          //
@@ -510,6 +611,10 @@ static flt32_t Exp (flt32_t exp);
 static flt64_t Exp (flt64_t exp);
 static flt32_t Expm1 (flt32_t exp);
 static flt64_t Expm1 (flt64_t exp);
+static flt32v4_t Exp (flt32v4_t exp);
+static flt64v2_t Exp (flt64v2_t exp);
+static flt32v4_t Expm1 (flt32v4_t exp);
+static flt64v2_t Expm1 (flt64v2_t exp);
 
 //============================================================================//
 //      Exponentiation by custom base                                         //
@@ -531,10 +636,6 @@ static sint16_t ExpBi (sint16_t base, uint8_t exp);
 static sint32_t ExpBi (sint32_t base, uint8_t exp);
 static sint64_t ExpBi (sint64_t base, uint8_t exp);
 
-// Floating-point types
-static flt32_t ExpBi (flt32_t base, sint8_t exp);
-static flt64_t ExpBi (flt64_t base, sint16_t exp);
-
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 //      Real exponentiation by custom base                                    //
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
@@ -542,6 +643,10 @@ static flt32_t ExpB (flt32_t base, flt32_t exp);
 static flt64_t ExpB (flt64_t base, flt64_t exp);
 static flt32_t ExpBm1 (flt32_t base, flt32_t exp);
 static flt64_t ExpBm1 (flt64_t base, flt64_t exp);
+static flt32v4_t ExpB (flt32v4_t base, flt32v4_t exp);
+static flt64v2_t ExpB (flt64v2_t base, flt64v2_t exp);
+static flt32v4_t ExpBm1 (flt32v4_t base, flt32v4_t exp);
+static flt64v2_t ExpBm1 (flt64v2_t base, flt64v2_t exp);
 
 //****************************************************************************//
 //      Logarithmic functions                                                 //
@@ -554,10 +659,10 @@ static flt64_t ExpBm1 (flt64_t base, flt64_t exp);
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 //      Integer logarithm to base 2                                           //
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
-static sint8_t Log2i (uint8_t value);
-static sint8_t Log2i (uint16_t value);
-static sint8_t Log2i (uint32_t value);
-static sint8_t Log2i (uint64_t value);
+static uint8_t Log2i (uint8_t value);
+static uint8_t Log2i (uint16_t value);
+static uint8_t Log2i (uint32_t value);
+static uint8_t Log2i (uint64_t value);
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 //      Real logarithm to base 2                                              //
@@ -566,6 +671,10 @@ static flt32_t Log2 (flt32_t value);
 static flt64_t Log2 (flt64_t value);
 static flt32_t Log2p1 (flt32_t value);
 static flt64_t Log2p1 (flt64_t value);
+static flt32v4_t Log2 (flt32v4_t value);
+static flt64v2_t Log2 (flt64v2_t value);
+static flt32v4_t Log2p1 (flt32v4_t value);
+static flt64v2_t Log2p1 (flt64v2_t value);
 
 //============================================================================//
 //      Logarithm to base 10                                                  //
@@ -574,10 +683,10 @@ static flt64_t Log2p1 (flt64_t value);
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 //      Integer logarithm to base 10                                          //
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
-static sint8_t Log10i (uint8_t value);
-static sint8_t Log10i (uint16_t value);
-static sint8_t Log10i (uint32_t value);
-static sint8_t Log10i (uint64_t value);
+static uint8_t Log10i (uint8_t value);
+static uint8_t Log10i (uint16_t value);
+static uint8_t Log10i (uint32_t value);
+static uint8_t Log10i (uint64_t value);
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 //      Real logarithm to base 10                                             //
@@ -586,6 +695,10 @@ static flt32_t Log10 (flt32_t value);
 static flt64_t Log10 (flt64_t value);
 static flt32_t Log10p1 (flt32_t value);
 static flt64_t Log10p1 (flt64_t value);
+static flt32v4_t Log10 (flt32v4_t value);
+static flt64v2_t Log10 (flt64v2_t value);
+static flt32v4_t Log10p1 (flt32v4_t value);
+static flt64v2_t Log10p1 (flt64v2_t value);
 
 //============================================================================//
 //      Logarithm to base E (natural logarithm)                               //
@@ -594,14 +707,10 @@ static flt32_t Log (flt32_t value);
 static flt64_t Log (flt64_t value);
 static flt32_t Logp1 (flt32_t value);
 static flt64_t Logp1 (flt64_t value);
-
-//============================================================================//
-//      Logarithm to custom base                                              //
-//============================================================================//
-static flt32_t LogB (flt32_t base, flt32_t value);
-static flt64_t LogB (flt64_t base, flt64_t value);
-static flt32_t LogBp1 (flt32_t base, flt32_t value);
-static flt64_t LogBp1 (flt64_t base, flt64_t value);
+static flt32v4_t Log (flt32v4_t value);
+static flt64v2_t Log (flt64v2_t value);
+static flt32v4_t Logp1 (flt32v4_t value);
+static flt64v2_t Logp1 (flt64v2_t value);
 
 //****************************************************************************//
 //      Trigonometric functions                                               //
@@ -616,114 +725,144 @@ static flt64_t LogBp1 (flt64_t base, flt64_t value);
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 static flt32_t Hypot2D (flt32_t cath1, flt32_t cath2);
 static flt64_t Hypot2D (flt64_t cath1, flt64_t cath2);
+static flt32v4_t Hypot2D (flt32v4_t cath1, flt32v4_t cath2);
+static flt64v2_t Hypot2D (flt64v2_t cath1, flt64v2_t cath2);
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 //      3 dimensional hypotenuse                                              //
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 static flt32_t Hypot3D (flt32_t cath1, flt32_t cath2, flt32_t cath3);
 static flt64_t Hypot3D (flt64_t cath1, flt64_t cath2, flt64_t cath3);
+static flt32v4_t Hypot3D (flt32v4_t cath1, flt32v4_t cath2, flt32v4_t cath3);
+static flt64v2_t Hypot3D (flt64v2_t cath1, flt64v2_t cath2, flt64v2_t cath3);
 
 //============================================================================//
 //      Cathetus                                                              //
 //============================================================================//
 static flt32_t Cath (flt32_t hypot, flt32_t cath);
 static flt64_t Cath (flt64_t hypot, flt64_t cath);
+static flt32v4_t Cath (flt32v4_t hypot, flt32v4_t cath);
+static flt64v2_t Cath (flt64v2_t hypot, flt64v2_t cath);
 
 //============================================================================//
-//      Sine                                                                  //
+//      Trigonometric sine                                                    //
 //============================================================================//
 static flt32_t Sin (flt32_t value);
 static flt64_t Sin (flt64_t value);
+static flt32v4_t Sin (flt32v4_t value);
+static flt64v2_t Sin (flt64v2_t value);
 
 //============================================================================//
-//      Cosine                                                                //
+//      Trigonometric cosine                                                  //
 //============================================================================//
 static flt32_t Cos (flt32_t value);
 static flt64_t Cos (flt64_t value);
+static flt32v4_t Cos (flt32v4_t value);
+static flt64v2_t Cos (flt64v2_t value);
 
 //============================================================================//
-//      Sine and cosine                                                       //
+//      Trigonometric sine and cosine                                         //
 //============================================================================//
 static void SinCos (flt32_t *sin, flt32_t *cos, flt32_t value);
 static void SinCos (flt64_t *sin, flt64_t *cos, flt64_t value);
+static void SinCos (flt32v4_t *sin, flt32v4_t *cos, flt32v4_t value);
+static void SinCos (flt64v2_t *sin, flt64v2_t *cos, flt64v2_t value);
 
 //============================================================================//
-//      Tangent                                                               //
+//      Trigonometric tangent                                                 //
 //============================================================================//
 static flt32_t Tan (flt32_t value);
 static flt64_t Tan (flt64_t value);
+static flt32v4_t Tan (flt32v4_t value);
+static flt64v2_t Tan (flt64v2_t value);
 
 //****************************************************************************//
 //      Inverse trigonometric functions                                       //
 //****************************************************************************//
 
 //============================================================================//
-//      Inverse sine                                                          //
+//      Inverse trigonometric sine                                            //
 //============================================================================//
 static flt32_t ArcSin (flt32_t value);
 static flt64_t ArcSin (flt64_t value);
+static flt32v4_t ArcSin (flt32v4_t value);
+static flt64v2_t ArcSin (flt64v2_t value);
 
 //============================================================================//
-//      Inverse cosine                                                        //
+//      Inverse trigonometric cosine                                          //
 //============================================================================//
 static flt32_t ArcCos (flt32_t value);
 static flt64_t ArcCos (flt64_t value);
+static flt32v4_t ArcCos (flt32v4_t value);
+static flt64v2_t ArcCos (flt64v2_t value);
 
 //============================================================================//
-//      Inverse tangent                                                       //
+//      Inverse trigonometric tangent                                         //
 //============================================================================//
 static flt32_t ArcTan (flt32_t value);
 static flt64_t ArcTan (flt64_t value);
 static flt32_t ArcTan2 (flt32_t sin, flt32_t cos);
 static flt64_t ArcTan2 (flt64_t sin, flt64_t cos);
+static flt32v4_t ArcTan (flt32v4_t value);
+static flt64v2_t ArcTan (flt64v2_t value);
+static flt32v4_t ArcTan2 (flt32v4_t sin, flt32v4_t cos);
+static flt64v2_t ArcTan2 (flt64v2_t sin, flt64v2_t cos);
 
 //****************************************************************************//
 //      Hyperbolic functions                                                  //
 //****************************************************************************//
 
 //============================================================================//
-//      Sine                                                                  //
+//      Hyperbolic sine                                                       //
 //============================================================================//
 static flt32_t SinH (flt32_t value);
 static flt64_t SinH (flt64_t value);
+static flt32v4_t SinH (flt32v4_t value);
+static flt64v2_t SinH (flt64v2_t value);
 
 //============================================================================//
-//      Cosine                                                                //
+//      Hyperbolic cosine                                                     //
 //============================================================================//
 static flt32_t CosH (flt32_t value);
 static flt64_t CosH (flt64_t value);
-static flt32_t CosHm1 (flt32_t value);
-static flt64_t CosHm1 (flt64_t value);
+static flt32v4_t CosH (flt32v4_t value);
+static flt64v2_t CosH (flt64v2_t value);
 
 //============================================================================//
-//      Tangent                                                               //
+//      Hyperbolic tangent                                                    //
 //============================================================================//
 static flt32_t TanH (flt32_t value);
 static flt64_t TanH (flt64_t value);
+static flt32v4_t TanH (flt32v4_t value);
+static flt64v2_t TanH (flt64v2_t value);
 
 //****************************************************************************//
 //      Inverse hyperbolic functions                                          //
 //****************************************************************************//
 
 //============================================================================//
-//      Inverse sine                                                          //
+//      Inverse hyperbolic sine                                               //
 //============================================================================//
 static flt32_t ArcSinH (flt32_t value);
 static flt64_t ArcSinH (flt64_t value);
+static flt32v4_t ArcSinH (flt32v4_t value);
+static flt64v2_t ArcSinH (flt64v2_t value);
 
 //============================================================================//
-//      Inverse cosine                                                        //
+//      Inverse hyperbolic cosine                                             //
 //============================================================================//
 static flt32_t ArcCosH (flt32_t value);
 static flt64_t ArcCosH (flt64_t value);
-static flt32_t ArcCosHp1 (flt32_t value);
-static flt64_t ArcCosHp1 (flt64_t value);
+static flt32v4_t ArcCosH (flt32v4_t value);
+static flt64v2_t ArcCosH (flt64v2_t value);
 
 //============================================================================//
-//      Inverse tangent                                                       //
+//      Inverse hyperbolic tangent                                            //
 //============================================================================//
 static flt32_t ArcTanH (flt32_t value);
 static flt64_t ArcTanH (flt64_t value);
+static flt32v4_t ArcTanH (flt32v4_t value);
+static flt64v2_t ArcTanH (flt64v2_t value);
 
 //****************************************************************************//
 //      Rounding                                                              //
@@ -732,26 +871,38 @@ static flt64_t ArcTanH (flt64_t value);
 // Round down (floor)
 static flt32_t RoundDown (flt32_t value);
 static flt64_t RoundDown (flt64_t value);
+static flt32v4_t RoundDown (flt32v4_t value);
+static flt64v2_t RoundDown (flt64v2_t value);
 
 // Round up (ceil)
 static flt32_t RoundUp (flt32_t value);
 static flt64_t RoundUp (flt64_t value);
+static flt32v4_t RoundUp (flt32v4_t value);
+static flt64v2_t RoundUp (flt64v2_t value);
 
 // Round to nearest even integer
 static flt32_t RoundInt (flt32_t value);
 static flt64_t RoundInt (flt64_t value);
+static flt32v4_t RoundInt (flt32v4_t value);
+static flt64v2_t RoundInt (flt64v2_t value);
 
 // Round to nearest integer, away from zero
 static flt32_t Round (flt32_t value);
 static flt64_t Round (flt64_t value);
+static flt32v4_t Round (flt32v4_t value);
+static flt64v2_t Round (flt64v2_t value);
 
 // Round to nearest integer, toward zero (truncation)
 static flt32_t Truncate (flt32_t value);
 static flt64_t Truncate (flt64_t value);
+static flt32v4_t Truncate (flt32v4_t value);
+static flt64v2_t Truncate (flt64v2_t value);
 
 // Fractional part
 static flt32_t Frac (flt32_t value);
 static flt64_t Frac (flt64_t value);
+static flt32v4_t Frac (flt32v4_t value);
+static flt64v2_t Frac (flt64v2_t value);
 
 //****************************************************************************//
 //      Checks                                                                //
@@ -796,12 +947,20 @@ uint8_t Math_ByteSwap_uint8 (uint8_t value);
 uint16_t Math_ByteSwap_uint16 (uint16_t value);
 uint32_t Math_ByteSwap_uint32 (uint32_t value);
 uint64_t Math_ByteSwap_uint64 (uint64_t value);
+uint8v16_t Math_ByteSwap_uint8v16 (uint8v16_t value);
+uint16v8_t Math_ByteSwap_uint16v8 (uint16v8_t value);
+uint32v4_t Math_ByteSwap_uint32v4 (uint32v4_t value);
+uint64v2_t Math_ByteSwap_uint64v2 (uint64v2_t value);
 
 // Signed integer types
 sint8_t Math_ByteSwap_sint8 (sint8_t value);
 sint16_t Math_ByteSwap_sint16 (sint16_t value);
 sint32_t Math_ByteSwap_sint32 (sint32_t value);
 sint64_t Math_ByteSwap_sint64 (sint64_t value);
+sint8v16_t Math_ByteSwap_sint8v16 (sint8v16_t value);
+sint16v8_t Math_ByteSwap_sint16v8 (sint16v8_t value);
+sint32v4_t Math_ByteSwap_sint32v4 (sint32v4_t value);
+sint64v2_t Math_ByteSwap_sint64v2 (sint64v2_t value);
 
 //============================================================================//
 //      Bit reversal permutation                                              //
@@ -812,12 +971,20 @@ uint8_t Math_BitReverse_uint8 (uint8_t value);
 uint16_t Math_BitReverse_uint16 (uint16_t value);
 uint32_t Math_BitReverse_uint32 (uint32_t value);
 uint64_t Math_BitReverse_uint64 (uint64_t value);
+uint8v16_t Math_BitReverse_uint8v16 (uint8v16_t value);
+uint16v8_t Math_BitReverse_uint16v8 (uint16v8_t value);
+uint32v4_t Math_BitReverse_uint32v4 (uint32v4_t value);
+uint64v2_t Math_BitReverse_uint64v2 (uint64v2_t value);
 
 // Signed integer types
 sint8_t Math_BitReverse_sint8 (sint8_t value);
 sint16_t Math_BitReverse_sint16 (sint16_t value);
 sint32_t Math_BitReverse_sint32 (sint32_t value);
 sint64_t Math_BitReverse_sint64 (sint64_t value);
+sint8v16_t Math_BitReverse_sint8v16 (sint8v16_t value);
+sint16v8_t Math_BitReverse_sint16v8 (sint16v8_t value);
+sint32v4_t Math_BitReverse_sint32v4 (sint32v4_t value);
+sint64v2_t Math_BitReverse_sint64v2 (sint64v2_t value);
 
 //============================================================================//
 //      Bit scan                                                              //
@@ -900,12 +1067,20 @@ uint8_t Math_PopCount_uint8 (uint8_t value);
 uint16_t Math_PopCount_uint16 (uint16_t value);
 uint32_t Math_PopCount_uint32 (uint32_t value);
 uint64_t Math_PopCount_uint64 (uint64_t value);
+uint8v16_t Math_PopCount_uint8v16 (uint8v16_t value);
+uint16v8_t Math_PopCount_uint16v8 (uint16v8_t value);
+uint32v4_t Math_PopCount_uint32v4 (uint32v4_t value);
+uint64v2_t Math_PopCount_uint64v2 (uint64v2_t value);
 
 // Signed integer types
 sint8_t Math_PopCount_sint8 (sint8_t value);
 sint16_t Math_PopCount_sint16 (sint16_t value);
 sint32_t Math_PopCount_sint32 (sint32_t value);
 sint64_t Math_PopCount_sint64 (sint64_t value);
+sint8v16_t Math_PopCount_sint8v16 (sint8v16_t value);
+sint16v8_t Math_PopCount_sint16v8 (sint16v8_t value);
+sint32v4_t Math_PopCount_sint32v4 (sint32v4_t value);
+sint64v2_t Math_PopCount_sint64v2 (sint64v2_t value);
 
 //****************************************************************************//
 //      Arithmetic operations                                                 //
@@ -920,24 +1095,36 @@ uint8_t Math_Abs_sint8 (sint8_t value);
 uint16_t Math_Abs_sint16 (sint16_t value);
 uint32_t Math_Abs_sint32 (sint32_t value);
 uint64_t Math_Abs_sint64 (sint64_t value);
+uint8v16_t Math_Abs_sint8v16 (sint8v16_t value);
+uint16v8_t Math_Abs_sint16v8 (sint16v8_t value);
+uint32v4_t Math_Abs_sint32v4 (sint32v4_t value);
+uint64v2_t Math_Abs_sint64v2 (sint64v2_t value);
 
 // Floating-point types
 flt32_t Math_Abs_flt32 (flt32_t value);
 flt64_t Math_Abs_flt64 (flt64_t value);
+flt32v4_t Math_Abs_flt32v4 (flt32v4_t value);
+flt64v2_t Math_Abs_flt64v2 (flt64v2_t value);
 
 //============================================================================//
 //      Negative absolute value                                               //
 //============================================================================//
 
 // Signed integer types
-uint8_t Math_NegAbs_sint8 (sint8_t value);
-uint16_t Math_NegAbs_sint16 (sint16_t value);
-uint32_t Math_NegAbs_sint32 (sint32_t value);
-uint64_t Math_NegAbs_sint64 (sint64_t value);
+sint8_t Math_NegAbs_sint8 (sint8_t value);
+sint16_t Math_NegAbs_sint16 (sint16_t value);
+sint32_t Math_NegAbs_sint32 (sint32_t value);
+sint64_t Math_NegAbs_sint64 (sint64_t value);
+sint8v16_t Math_NegAbs_sint8v16 (sint8v16_t value);
+sint16v8_t Math_NegAbs_sint16v8 (sint16v8_t value);
+sint32v4_t Math_NegAbs_sint32v4 (sint32v4_t value);
+sint64v2_t Math_NegAbs_sint64v2 (sint64v2_t value);
 
 // Floating-point types
 flt32_t Math_NegAbs_flt32 (flt32_t value);
 flt64_t Math_NegAbs_flt64 (flt64_t value);
+flt32v4_t Math_NegAbs_flt32v4 (flt32v4_t value);
+flt64v2_t Math_NegAbs_flt64v2 (flt64v2_t value);
 
 //============================================================================//
 //      Number sign                                                           //
@@ -948,10 +1135,16 @@ sint8_t Math_Sign_sint8 (sint8_t value);
 sint16_t Math_Sign_sint16 (sint16_t value);
 sint32_t Math_Sign_sint32 (sint32_t value);
 sint64_t Math_Sign_sint64 (sint64_t value);
+sint8v16_t Math_Sign_sint8v16 (sint8v16_t value);
+sint16v8_t Math_Sign_sint16v8 (sint16v8_t value);
+sint32v4_t Math_Sign_sint32v4 (sint32v4_t value);
+sint64v2_t Math_Sign_sint64v2 (sint64v2_t value);
 
 // Floating-point types
 flt32_t Math_Sign_flt32 (flt32_t value);
 flt64_t Math_Sign_flt64 (flt64_t value);
+flt32v4_t Math_Sign_flt32v4 (flt32v4_t value);
+flt64v2_t Math_Sign_flt64v2 (flt64v2_t value);
 
 //============================================================================//
 //      Square root                                                           //
@@ -966,6 +1159,8 @@ uint64_t Math_Sqrt_uint64 (uint64_t value);
 // Floating-point types
 flt32_t Math_Sqrt_flt32 (flt32_t value);
 flt64_t Math_Sqrt_flt64 (flt64_t value);
+flt32v4_t Math_Sqrt_flt32v4 (flt32v4_t value);
+flt64v2_t Math_Sqrt_flt64v2 (flt64v2_t value);
 
 //============================================================================//
 //      Square value                                                          //
@@ -986,6 +1181,8 @@ sint64_t Math_Sqr_sint64 (sint64_t value);
 // Floating-point types
 flt32_t Math_Sqr_flt32 (flt32_t value);
 flt64_t Math_Sqr_flt64 (flt64_t value);
+flt32v4_t Math_Sqr_flt32v4 (flt32v4_t value);
+flt64v2_t Math_Sqr_flt64v2 (flt64v2_t value);
 
 //============================================================================//
 //      Cube value                                                            //
@@ -1006,24 +1203,32 @@ sint64_t Math_Cube_sint64 (sint64_t value);
 // Floating-point types
 flt32_t Math_Cube_flt32 (flt32_t value);
 flt64_t Math_Cube_flt64 (flt64_t value);
+flt32v4_t Math_Cube_flt32v4 (flt32v4_t value);
+flt64v2_t Math_Cube_flt64v4 (flt64v2_t value);
 
 //============================================================================//
 //      Inverse value                                                         //
 //============================================================================//
 flt32_t Math_InverseValue_flt32 (flt32_t value);
 flt64_t Math_InverseValue_flt64 (flt64_t value);
+flt32v4_t Math_InverseValue_flt32v4 (flt32v4_t value);
+flt64v2_t Math_InverseValue_flt64v2 (flt64v2_t value);
 
 //============================================================================//
 //      Inverse square value                                                  //
 //============================================================================//
 flt32_t Math_InverseSquare_flt32 (flt32_t value);
 flt64_t Math_InverseSquare_flt64 (flt64_t value);
+flt32v4_t Math_InverseSquare_flt32v4 (flt32v4_t value);
+flt64v2_t Math_InverseSquare_flt64v2 (flt64v2_t value);
 
 //============================================================================//
 //      Inverse cube value                                                    //
 //============================================================================//
 flt32_t Math_InverseCube_flt32 (flt32_t value);
 flt64_t Math_InverseCube_flt64 (flt64_t value);
+flt32v4_t Math_InverseCube_flt32v4 (flt32v4_t value);
+flt64v2_t Math_InverseCube_flt64v2 (flt64v2_t value);
 
 //============================================================================//
 //      Three-state comparison                                                //
@@ -1034,16 +1239,26 @@ sint8_t Math_Compare_uint8 (uint8_t value1, uint8_t value2);
 sint16_t Math_Compare_uint16 (uint16_t value1, uint16_t value2);
 sint32_t Math_Compare_uint32 (uint32_t value1, uint32_t value2);
 sint64_t Math_Compare_uint64 (uint64_t value1, uint64_t value2);
+sint8v16_t Math_Compare_uint8v16 (uint8v16_t value1, uint8v16_t value2);
+sint16v8_t Math_Compare_uint16v8 (uint16v8_t value1, uint16v8_t value2);
+sint32v4_t Math_Compare_uint32v4 (uint32v4_t value1, uint32v4_t value2);
+sint64v2_t Math_Compare_uint64v2 (uint64v2_t value1, uint64v2_t value2);
 
 // Signed integer types
 sint8_t Math_Compare_sint8 (sint8_t value1, sint8_t value2);
 sint16_t Math_Compare_sint16 (sint16_t value1, sint16_t value2);
 sint32_t Math_Compare_sint32 (sint32_t value1, sint32_t value2);
 sint64_t Math_Compare_sint64 (sint64_t value1, sint64_t value2);
+sint8v16_t Math_Compare_sint8v16 (sint8v16_t value1, sint8v16_t value2);
+sint16v8_t Math_Compare_sint16v8 (sint16v8_t value1, sint16v8_t value2);
+sint32v4_t Math_Compare_sint32v4 (sint32v4_t value1, sint32v4_t value2);
+sint64v2_t Math_Compare_sint64v2 (sint64v2_t value1, sint64v2_t value2);
 
 // Floating-point types
 flt32_t Math_Compare_flt32 (flt32_t value1, flt32_t value2);
 flt64_t Math_Compare_flt64 (flt64_t value1, flt64_t value2);
+flt32v4_t Math_Compare_flt32v4 (flt32v4_t value1, flt32v4_t value2);
+flt64v2_t Math_Compare_flt64v2 (flt64v2_t value1, flt64v2_t value2);
 
 //============================================================================//
 //      Minimum and maximum absolute value                                    //
@@ -1058,10 +1273,15 @@ uint8_t Math_MinAbs_sint8 (sint8_t value1, sint8_t value2);
 uint16_t Math_MinAbs_sint16 (sint16_t value1, sint16_t value2);
 uint32_t Math_MinAbs_sint32 (sint32_t value1, sint32_t value2);
 uint64_t Math_MinAbs_sint64 (sint64_t value1, sint64_t value2);
+uint8v16_t Math_MinAbs_sint8v16 (sint8v16_t value1, sint8v16_t value2);
+uint16v8_t Math_MinAbs_sint16v8 (sint16v8_t value1, sint16v8_t value2);
+uint32v4_t Math_MinAbs_sint32v4 (sint32v4_t value1, sint32v4_t value2);
 
 // Floating-point types
 flt32_t Math_MinAbs_flt32 (flt32_t value1, flt32_t value2);
 flt64_t Math_MinAbs_flt64 (flt64_t value1, flt64_t value2);
+flt32v4_t Math_MinAbs_flt32v4 (flt32v4_t value1, flt32v4_t value2);
+flt64v2_t Math_MinAbs_flt64v2 (flt64v2_t value1, flt64v2_t value2);
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 //      Maximum absolute value                                                //
@@ -1072,10 +1292,15 @@ uint8_t Math_MaxAbs_sint8 (sint8_t value1, sint8_t value2);
 uint16_t Math_MaxAbs_sint16 (sint16_t value1, sint16_t value2);
 uint32_t Math_MaxAbs_sint32 (sint32_t value1, sint32_t value2);
 uint64_t Math_MaxAbs_sint64 (sint64_t value1, sint64_t value2);
+uint8v16_t Math_MaxAbs_sint8v16 (sint8v16_t value1, sint8v16_t value2);
+uint16v8_t Math_MaxAbs_sint16v8 (sint16v8_t value1, sint16v8_t value2);
+uint32v4_t Math_MaxAbs_sint32v4 (sint32v4_t value1, sint32v4_t value2);
 
 // Floating-point types
 flt32_t Math_MaxAbs_flt32 (flt32_t value1, flt32_t value2);
 flt64_t Math_MaxAbs_flt64 (flt64_t value1, flt64_t value2);
+flt32v4_t Math_MaxAbs_flt32v4 (flt32v4_t value1, flt32v4_t value2);
+flt64v2_t Math_MaxAbs_flt64v2 (flt64v2_t value1, flt64v2_t value2);
 
 //============================================================================//
 //      Minimum and maximum value                                             //
@@ -1090,16 +1315,24 @@ uint8_t Math_Min_uint8 (uint8_t value1, uint8_t value2);
 uint16_t Math_Min_uint16 (uint16_t value1, uint16_t value2);
 uint32_t Math_Min_uint32 (uint32_t value1, uint32_t value2);
 uint64_t Math_Min_uint64 (uint64_t value1, uint64_t value2);
+uint8v16_t Math_Min_uint8v16 (uint8v16_t value1, uint8v16_t value2);
+uint16v8_t Math_Min_uint16v8 (uint16v8_t value1, uint16v8_t value2);
+uint32v4_t Math_Min_uint32v4 (uint32v4_t value1, uint32v4_t value2);
 
 // Signed integer types
 sint8_t Math_Min_sint8 (sint8_t value1, sint8_t value2);
 sint16_t Math_Min_sint16 (sint16_t value1, sint16_t value2);
 sint32_t Math_Min_sint32 (sint32_t value1, sint32_t value2);
 sint64_t Math_Min_sint64 (sint64_t value1, sint64_t value2);
+sint8v16_t Math_Min_sint8v16 (sint8v16_t value1, sint8v16_t value2);
+sint16v8_t Math_Min_sint16v8 (sint16v8_t value1, sint16v8_t value2);
+sint32v4_t Math_Min_sint32v4 (sint32v4_t value1, sint32v4_t value2);
 
 // Floating-point types
 flt32_t Math_Min_flt32 (flt32_t value1, flt32_t value2);
 flt64_t Math_Min_flt64 (flt64_t value1, flt64_t value2);
+flt32v4_t Math_Min_flt32v4 (flt32v4_t value1, flt32v4_t value2);
+flt64v2_t Math_Min_flt64v2 (flt64v2_t value1, flt64v2_t value2);
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 //      Maximum value                                                         //
@@ -1110,16 +1343,24 @@ uint8_t Math_Max_uint8 (uint8_t value1, uint8_t value2);
 uint16_t Math_Max_uint16 (uint16_t value1, uint16_t value2);
 uint32_t Math_Max_uint32 (uint32_t value1, uint32_t value2);
 uint64_t Math_Max_uint64 (uint64_t value1, uint64_t value2);
+uint8v16_t Math_Max_uint8v16 (uint8v16_t value1, uint8v16_t value2);
+uint16v8_t Math_Max_uint16v8 (uint16v8_t value1, uint16v8_t value2);
+uint32v4_t Math_Max_uint32v4 (uint32v4_t value1, uint32v4_t value2);
 
 // Signed integer types
 sint8_t Math_Max_sint8 (sint8_t value1, sint8_t value2);
 sint16_t Math_Max_sint16 (sint16_t value1, sint16_t value2);
 sint32_t Math_Max_sint32 (sint32_t value1, sint32_t value2);
 sint64_t Math_Max_sint64 (sint64_t value1, sint64_t value2);
+sint8v16_t Math_Max_sint8v16 (sint8v16_t value1, sint8v16_t value2);
+sint16v8_t Math_Max_sint16v8 (sint16v8_t value1, sint16v8_t value2);
+sint32v4_t Math_Max_sint32v4 (sint32v4_t value1, sint32v4_t value2);
 
 // Floating-point types
-flt32_t Math_Max_flt32 (flt32_t value1, flt32_t y);
-flt64_t Math_Max_flt64 (flt64_t value1, flt64_t y);
+flt32_t Math_Max_flt32 (flt32_t value1, flt32_t value2);
+flt64_t Math_Max_flt64 (flt64_t value1, flt64_t value2);
+flt32v4_t Math_Max_flt32v4 (flt32v4_t value1, flt32v4_t value2);
+flt64v2_t Math_Max_flt64v2 (flt64v2_t value1, flt64v2_t value2);
 
 //============================================================================//
 //      Greatest common divisor                                               //
@@ -1132,10 +1373,10 @@ uint32_t Math_GCD_uint32 (uint32_t value1, uint32_t value2);
 uint64_t Math_GCD_uint64 (uint64_t value1, uint64_t value2);
 
 // Signed integer types
-sint8_t Math_GCD_sint8 (sint8_t value1, sint8_t value2);
-sint16_t Math_GCD_sint16 (sint16_t value1, sint16_t value2);
-sint32_t Math_GCD_sint32 (sint32_t value1, sint32_t value2);
-sint64_t Math_GCD_sint64 (sint64_t value1, sint64_t value2);
+uint8_t Math_GCD_sint8 (sint8_t value1, sint8_t value2);
+uint16_t Math_GCD_sint16 (sint16_t value1, sint16_t value2);
+uint32_t Math_GCD_sint32 (sint32_t value1, sint32_t value2);
+uint64_t Math_GCD_sint64 (sint64_t value1, sint64_t value2);
 
 //============================================================================//
 //      Least common multiple                                                 //
@@ -1148,10 +1389,10 @@ uint32_t Math_LCM_uint32 (uint32_t value1, uint32_t value2);
 uint64_t Math_LCM_uint64 (uint64_t value1, uint64_t value2);
 
 // Signed integer types
-sint8_t Math_LCM_sint8 (sint8_t value1, sint8_t value2);
-sint16_t Math_LCM_sint16 (sint16_t value1, sint16_t value2);
-sint32_t Math_LCM_sint32 (sint32_t value1, sint32_t value2);
-sint64_t Math_LCM_sint64 (sint64_t value1, sint64_t value2);
+uint8_t Math_LCM_sint8 (sint8_t value1, sint8_t value2);
+uint16_t Math_LCM_sint16 (sint16_t value1, sint16_t value2);
+uint32_t Math_LCM_sint32 (sint32_t value1, sint32_t value2);
+uint64_t Math_LCM_sint64 (sint64_t value1, sint64_t value2);
 
 //============================================================================//
 //      Cancellation                                                          //
@@ -1178,12 +1419,16 @@ void Math_Cancel_sint64 (sint64_t *value1, sint64_t *value2);
 //============================================================================//
 flt32_t Math_AbsError_flt32 (flt32_t approximate, flt32_t accurate);
 flt64_t Math_AbsError_flt64 (flt64_t approximate, flt64_t accurate);
+flt32v4_t Math_AbsError_flt32v4 (flt32v4_t approximate, flt32v4_t accurate);
+flt64v2_t Math_AbsError_flt64v2 (flt64v2_t approximate, flt64v2_t accurate);
 
 //============================================================================//
 //      Relative error                                                        //
 //============================================================================//
 flt32_t Math_RelError_flt32 (flt32_t approximate, flt32_t accurate);
 flt64_t Math_RelError_flt64 (flt64_t approximate, flt64_t accurate);
+flt32v4_t Math_RelError_flt32v4 (flt32v4_t approximate, flt32v4_t accurate);
+flt64v2_t Math_RelError_flt64v2 (flt64v2_t approximate, flt64v2_t accurate);
 
 //****************************************************************************//
 //      Scale functions                                                       //
@@ -1219,6 +1464,10 @@ flt32_t Math_Exp2_flt32 (flt32_t exp);
 flt64_t Math_Exp2_flt64 (flt64_t exp);
 flt32_t Math_Exp2m1_flt32 (flt32_t exp);
 flt64_t Math_Exp2m1_flt64 (flt64_t exp);
+flt32v4_t Math_Exp2_flt32v4 (flt32v4_t exp);
+flt64v2_t Math_Exp2_flt64v2 (flt64v2_t exp);
+flt32v4_t Math_Exp2m1_flt32v4 (flt32v4_t exp);
+flt64v2_t Math_Exp2m1_flt64v2 (flt64v2_t exp);
 
 //============================================================================//
 //      Exponentiation by base 10                                             //
@@ -1238,6 +1487,10 @@ flt32_t Math_Exp10_flt32 (flt32_t exp);
 flt64_t Math_Exp10_flt64 (flt64_t exp);
 flt32_t Math_Exp10m1_flt32 (flt32_t exp);
 flt64_t Math_Exp10m1_flt64 (flt64_t exp);
+flt32v4_t Math_Exp10_flt32v4 (flt32v4_t exp);
+flt64v2_t Math_Exp10_flt64v2 (flt64v2_t exp);
+flt32v4_t Math_Exp10m1_flt32v4 (flt32v4_t exp);
+flt64v2_t Math_Exp10m1_flt64v2 (flt64v2_t exp);
 
 //============================================================================//
 //      Exponentiation by base E (natural logarithm)                          //
@@ -1246,6 +1499,10 @@ flt32_t Math_Exp_flt32 (flt32_t exp);
 flt64_t Math_Exp_flt64 (flt64_t exp);
 flt32_t Math_Expm1_flt32 (flt32_t exp);
 flt64_t Math_Expm1_flt64 (flt64_t exp);
+flt32v4_t Math_Exp_flt32v4 (flt32v4_t exp);
+flt64v2_t Math_Exp_flt64v2 (flt64v2_t exp);
+flt32v4_t Math_Expm1_flt32v4 (flt32v4_t exp);
+flt64v2_t Math_Expm1_flt64v2 (flt64v2_t exp);
 
 //============================================================================//
 //      Exponentiation by custom base                                         //
@@ -1267,10 +1524,6 @@ sint16_t Math_ExpBi_sint16 (sint16_t base, uint8_t exp);
 sint32_t Math_ExpBi_sint32 (sint32_t base, uint8_t exp);
 sint64_t Math_ExpBi_sint64 (sint64_t base, uint8_t exp);
 
-// Floating-point types
-flt32_t Math_ExpBi_flt32 (flt32_t base, sint8_t exp);
-flt64_t Math_ExpBi_flt64 (flt64_t base, sint16_t exp);
-
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 //      Real exponentiation by custom base                                    //
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
@@ -1278,18 +1531,26 @@ flt32_t Math_ExpB_flt32 (flt32_t base, flt32_t exp);
 flt64_t Math_ExpB_flt64 (flt64_t base, flt64_t exp);
 flt32_t Math_ExpBm1_flt32 (flt32_t base, flt32_t exp);
 flt64_t Math_ExpBm1_flt64 (flt64_t base, flt64_t exp);
+flt32v4_t Math_ExpB_flt32v4 (flt32v4_t base, flt32v4_t exp);
+flt64v2_t Math_ExpB_flt64v2 (flt64v2_t base, flt64v2_t exp);
+flt32v4_t Math_ExpBm1_flt32v4 (flt32v4_t base, flt32v4_t exp);
+flt64v2_t Math_ExpBm1_flt64v2 (flt64v2_t base, flt64v2_t exp);
 
 //****************************************************************************//
 //      Logarithmic functions                                                 //
 //****************************************************************************//
 
+//============================================================================//
+//      Logarithm to base 2                                                   //
+//============================================================================//
+
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 //      Integer logarithm to base 2                                           //
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
-sint8_t Math_Log2i_uint8 (uint8_t value);
-sint8_t Math_Log2i_uint16 (uint16_t value);
-sint8_t Math_Log2i_uint32 (uint32_t value);
-sint8_t Math_Log2i_uint64 (uint64_t value);
+uint8_t Math_Log2i_uint8 (uint8_t value);
+uint8_t Math_Log2i_uint16 (uint16_t value);
+uint8_t Math_Log2i_uint32 (uint32_t value);
+uint8_t Math_Log2i_uint64 (uint64_t value);
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 //      Real logarithm to base 2                                              //
@@ -1298,6 +1559,10 @@ flt32_t Math_Log2_flt32 (flt32_t value);
 flt64_t Math_Log2_flt64 (flt64_t value);
 flt32_t Math_Log2p1_flt32 (flt32_t value);
 flt64_t Math_Log2p1_flt64 (flt64_t value);
+flt32v4_t Math_Log2_flt32v4 (flt32v4_t value);
+flt64v2_t Math_Log2_flt64v2 (flt64v2_t value);
+flt32v4_t Math_Log2p1_flt32v4 (flt32v4_t value);
+flt64v2_t Math_Log2p1_flt64v2 (flt64v2_t value);
 
 //============================================================================//
 //      Logarithm to base 10                                                  //
@@ -1306,10 +1571,10 @@ flt64_t Math_Log2p1_flt64 (flt64_t value);
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 //      Integer logarithm to base 10                                          //
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
-sint8_t Math_Log10i_uint8 (uint8_t value);
-sint8_t Math_Log10i_uint16 (uint16_t value);
-sint8_t Math_Log10i_uint32 (uint32_t value);
-sint8_t Math_Log10i_uint64 (uint64_t value);
+uint8_t Math_Log10i_uint8 (uint8_t value);
+uint8_t Math_Log10i_uint16 (uint16_t value);
+uint8_t Math_Log10i_uint32 (uint32_t value);
+uint8_t Math_Log10i_uint64 (uint64_t value);
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 //      Real logarithm to base 10                                             //
@@ -1318,6 +1583,10 @@ flt32_t Math_Log10_flt32 (flt32_t value);
 flt64_t Math_Log10_flt64 (flt64_t value);
 flt32_t Math_Log10p1_flt32 (flt32_t value);
 flt64_t Math_Log10p1_flt64 (flt64_t value);
+flt32v4_t Math_Log10_flt32v4 (flt32v4_t value);
+flt64v2_t Math_Log10_flt64v2 (flt64v2_t value);
+flt32v4_t Math_Log10p1_flt32v4 (flt32v4_t value);
+flt64v2_t Math_Log10p1_flt64v2 (flt64v2_t value);
 
 //============================================================================//
 //      Logarithm to base E (natural logarithm)                               //
@@ -1326,14 +1595,10 @@ flt32_t Math_Log_flt32 (flt32_t value);
 flt64_t Math_Log_flt64 (flt64_t value);
 flt32_t Math_Logp1_flt32 (flt32_t value);
 flt64_t Math_Logp1_flt64 (flt64_t value);
-
-//============================================================================//
-//      Logarithm to custom base                                              //
-//============================================================================//
-flt32_t Math_LogB_flt32 (flt32_t base, flt32_t value);
-flt64_t Math_LogB_flt64 (flt64_t base, flt64_t value);
-flt32_t Math_LogBp1_flt32 (flt32_t base, flt32_t value);
-flt64_t Math_LogBp1_flt64 (flt64_t base, flt64_t value);
+flt32v4_t Math_Log_flt32v4 (flt32v4_t value);
+flt64v2_t Math_Log_flt64v2 (flt64v2_t value);
+flt32v4_t Math_Logp1_flt32v4 (flt32v4_t value);
+flt64v2_t Math_Logp1_flt64v2 (flt64v2_t value);
 
 //****************************************************************************//
 //      Trigonometric functions                                               //
@@ -1348,114 +1613,144 @@ flt64_t Math_LogBp1_flt64 (flt64_t base, flt64_t value);
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 flt32_t Math_Hypot2D_flt32 (flt32_t cath1, flt32_t cath2);
 flt64_t Math_Hypot2D_flt64 (flt64_t cath1, flt64_t cath2);
+flt32v4_t Math_Hypot2D_flt32v4 (flt32v4_t cath1, flt32v4_t cath2);
+flt64v2_t Math_Hypot2D_flt64v2 (flt64v2_t cath1, flt64v2_t cath2);
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 //      3 dimensional hypotenuse                                              //
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 flt32_t Math_Hypot3D_flt32 (flt32_t cath1, flt32_t cath2, flt32_t cath3);
 flt64_t Math_Hypot3D_flt64 (flt64_t cath1, flt64_t cath2, flt64_t cath3);
+flt32v4_t Math_Hypot3D_flt32v4 (flt32v4_t cath1, flt32v4_t cath2, flt32v4_t cath3);
+flt64v2_t Math_Hypot3D_flt64v2 (flt64v2_t cath1, flt64v2_t cath2, flt64v2_t cath3);
 
 //============================================================================//
 //      Cathetus                                                              //
 //============================================================================//
 flt32_t Math_Cath_flt32 (flt32_t hypot, flt32_t cath);
 flt64_t Math_Cath_flt64 (flt64_t hypot, flt64_t cath);
+flt32v4_t Math_Cath_flt32v4 (flt32v4_t hypot, flt32v4_t cath);
+flt64v2_t Math_Cath_flt64v2 (flt64v2_t hypot, flt64v2_t cath);
 
 //============================================================================//
-//      Sine                                                                  //
+//      Trigonometric sine                                                    //
 //============================================================================//
 flt32_t Math_Sin_flt32 (flt32_t value);
 flt64_t Math_Sin_flt64 (flt64_t value);
+flt32v4_t Math_Sin_flt32v4 (flt32v4_t value);
+flt64v2_t Math_Sin_flt64v2 (flt64v2_t value);
 
 //============================================================================//
-//      Cosine                                                                //
+//      Trigonometric cosine                                                  //
 //============================================================================//
 flt32_t Math_Cos_flt32 (flt32_t value);
 flt64_t Math_Cos_flt64 (flt64_t value);
+flt32v4_t Math_Cos_flt32v4 (flt32v4_t value);
+flt64v2_t Math_Cos_flt64v2 (flt64v2_t value);
 
 //============================================================================//
-//      Sine and cosine                                                       //
+//      Trigonometric sine and cosine                                         //
 //============================================================================//
 void Math_SinCos_flt32 (flt32_t *sin, flt32_t *cos, flt32_t value);
 void Math_SinCos_flt64 (flt64_t *sin, flt64_t *cos, flt64_t value);
+void Math_SinCos_flt32v4 (flt32v4_t *sin, flt32v4_t *cos, flt32v4_t value);
+void Math_SinCos_flt64v2 (flt64v2_t *sin, flt64v2_t *cos, flt64v2_t value);
 
 //============================================================================//
-//      Tangent                                                               //
+//      Trigonometric tangent                                                 //
 //============================================================================//
 flt32_t Math_Tan_flt32 (flt32_t value);
 flt64_t Math_Tan_flt64 (flt64_t value);
+flt32v4_t Math_Tan_flt32v4 (flt32v4_t value);
+flt64v2_t Math_Tan_flt64v2 (flt64v2_t value);
 
 //****************************************************************************//
 //      Inverse trigonometric functions                                       //
 //****************************************************************************//
 
 //============================================================================//
-//      Inverse sine                                                          //
+//      Inverse trigonometric sine                                            //
 //============================================================================//
 flt32_t Math_ArcSin_flt32 (flt32_t value);
 flt64_t Math_ArcSin_flt64 (flt64_t value);
+flt32v4_t Math_ArcSin_flt32v4 (flt32v4_t value);
+flt64v2_t Math_ArcSin_flt64v2 (flt64v2_t value);
 
 //============================================================================//
-//      Inverse cosine                                                        //
+//      Inverse trigonometric cosine                                          //
 //============================================================================//
 flt32_t Math_ArcCos_flt32 (flt32_t value);
 flt64_t Math_ArcCos_flt64 (flt64_t value);
+flt32v4_t Math_ArcCos_flt32v4 (flt32v4_t value);
+flt64v2_t Math_ArcCos_flt64v2 (flt64v2_t value);
 
 //============================================================================//
-//      Inverse tangent                                                       //
+//      Inverse trigonometric tangent                                         //
 //============================================================================//
 flt32_t Math_ArcTan_flt32 (flt32_t value);
 flt64_t Math_ArcTan_flt64 (flt64_t value);
 flt32_t Math_ArcTan2_flt32 (flt32_t sin, flt32_t cos);
 flt64_t Math_ArcTan2_flt64 (flt64_t sin, flt64_t cos);
+flt32v4_t Math_ArcTan_flt32v4 (flt32v4_t value);
+flt64v2_t Math_ArcTan_flt64v2 (flt64v2_t value);
+flt32v4_t Math_ArcTan2_flt32v4 (flt32v4_t sin, flt32v4_t cos);
+flt64v2_t Math_ArcTan2_flt64v2 (flt64v2_t sin, flt64v2_t cos);
 
 //****************************************************************************//
 //      Hyperbolic functions                                                  //
 //****************************************************************************//
 
 //============================================================================//
-//      Sine                                                                  //
+//      Hyperbolic sine                                                       //
 //============================================================================//
 flt32_t Math_SinH_flt32 (flt32_t value);
 flt64_t Math_SinH_flt64 (flt64_t value);
+flt32v4_t Math_SinH_flt32v4 (flt32v4_t value);
+flt64v2_t Math_SinH_flt64v2 (flt64v2_t value);
 
 //============================================================================//
-//      Cosine                                                                //
+//      Hyperbolic cosine                                                     //
 //============================================================================//
 flt32_t Math_CosH_flt32 (flt32_t value);
 flt64_t Math_CosH_flt64 (flt64_t value);
-flt32_t Math_CosHm1_flt32 (flt32_t value);
-flt64_t Math_CosHm1_flt64 (flt64_t value);
+flt32v4_t Math_CosH_flt32v4 (flt32v4_t value);
+flt64v2_t Math_CosH_flt64v2 (flt64v2_t value);
 
 //============================================================================//
-//      Tangent                                                               //
+//      Hyperbolic tangent                                                    //
 //============================================================================//
 flt32_t Math_TanH_flt32 (flt32_t value);
 flt64_t Math_TanH_flt64 (flt64_t value);
+flt32v4_t Math_TanH_flt32v4 (flt32v4_t value);
+flt64v2_t Math_TanH_flt64v2 (flt64v2_t value);
 
 //****************************************************************************//
 //      Inverse hyperbolic functions                                          //
 //****************************************************************************//
 
 //============================================================================//
-//      Inverse sine                                                          //
+//      Inverse hyperbolic sine                                               //
 //============================================================================//
 flt32_t Math_ArcSinH_flt32 (flt32_t value);
 flt64_t Math_ArcSinH_flt64 (flt64_t value);
+flt32v4_t Math_ArcSinH_flt32v4 (flt32v4_t value);
+flt64v2_t Math_ArcSinH_flt64v2 (flt64v2_t value);
 
 //============================================================================//
-//      Inverse cosine                                                        //
+//      Inverse hyperbolic cosine                                             //
 //============================================================================//
 flt32_t Math_ArcCosH_flt32 (flt32_t value);
 flt64_t Math_ArcCosH_flt64 (flt64_t value);
-flt32_t Math_ArcCosHp1_flt32 (flt32_t value);
-flt64_t Math_ArcCosHp1_flt64 (flt64_t value);
+flt32v4_t Math_ArcCosH_flt32v4 (flt32v4_t value);
+flt64v2_t Math_ArcCosH_flt64v2 (flt64v2_t value);
 
 //============================================================================//
-//      Inverse tangent                                                       //
+//      Inverse hyperbolic tangent                                            //
 //============================================================================//
 flt32_t Math_ArcTanH_flt32 (flt32_t value);
 flt64_t Math_ArcTanH_flt64 (flt64_t value);
+flt32v4_t Math_ArcTanH_flt32v4 (flt32v4_t value);
+flt64v2_t Math_ArcTanH_flt64v2 (flt64v2_t value);
 
 //****************************************************************************//
 //      Rounding                                                              //
@@ -1464,26 +1759,38 @@ flt64_t Math_ArcTanH_flt64 (flt64_t value);
 // Round down (floor)
 flt32_t Math_RoundDown_flt32 (flt32_t value);
 flt64_t Math_RoundDown_flt64 (flt64_t value);
+flt32v4_t Math_RoundDown_flt32v4 (flt32v4_t value);
+flt64v2_t Math_RoundDown_flt64v2 (flt64v2_t value);
 
 // Round up (ceil)
 flt32_t Math_RoundUp_flt32 (flt32_t value);
 flt64_t Math_RoundUp_flt64 (flt64_t value);
+flt32v4_t Math_RoundUp_flt32v4 (flt32v4_t value);
+flt64v2_t Math_RoundUp_flt64v2 (flt64v2_t value);
 
 // Round to nearest even integer
 flt32_t Math_RoundInt_flt32 (flt32_t value);
 flt64_t Math_RoundInt_flt64 (flt64_t value);
+flt32v4_t Math_RoundInt_flt32v4 (flt32v4_t value);
+flt64v2_t Math_RoundInt_flt64v2 (flt64v2_t value);
 
 // Round to nearest integer, away from zero
 flt32_t Math_Round_flt32 (flt32_t value);
 flt64_t Math_Round_flt64 (flt64_t value);
+flt32v4_t Math_Round_flt32v4 (flt32v4_t value);
+flt64v2_t Math_Round_flt64v2 (flt64v2_t value);
 
 // Round to nearest integer, toward zero (truncation)
 flt32_t Math_Truncate_flt32 (flt32_t value);
 flt64_t Math_Truncate_flt64 (flt64_t value);
+flt32v4_t Math_Truncate_flt32v4 (flt32v4_t value);
+flt64v2_t Math_Truncate_flt64v2 (flt64v2_t value);
 
 // Fractional part
 flt32_t Math_Frac_flt32 (flt32_t value);
 flt64_t Math_Frac_flt64 (flt64_t value);
+flt32v4_t Math_Frac_flt32v4 (flt32v4_t value);
+flt64v2_t Math_Frac_flt64v2 (flt64v2_t value);
 
 //****************************************************************************//
 //      Checks                                                                //

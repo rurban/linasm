@@ -9268,9 +9268,10 @@ s_left	equ		stack + 5 * 8				; stack position of "left" variable
 s_right	equ		stack + 6 * 8				; stack position of "right" variable
 space	= 7 * 8								; stack size required by the procedure
 ;------------------------------------------
-		cmp		size, 1						; if (size <= 1)
+		shftl	size, scale					; convert size to bytes
+		cmp		size, 8						; if (size <= 1)
 		jbe		.exit						;     then go to exit
-		mov		left, 1						; left = 1
+		mov		left, 8						; left = 1
 		sub		stack, space				; reserving stack size for local vars
 		mov		[s_key1], key1				; save old value of "key1" variable
 		mov		[s_key2], key2				; save old value of "key2" variable
@@ -9281,9 +9282,9 @@ space	= 7 * 8								; stack size required by the procedure
 ;---[Sorting loop]-------------------------
 .loop:	mov		right, left					; right = left
 		mov		[s_right], right			; save "right" variable into the stack
-		mov		key1, [array + right * 8]	; key1 = array[right]
+		mov		key1, [array + right]		; key1 = array[right]
 ;---[Internal loop]------------------------
-.iloop:	mov		key2, [array + right * 8 - 8]
+.iloop:	mov		key2, [array + right - 8]
 		mov		param2, key2
 		mov		param1, key1
 		call	qword [s_func]				; result = Compare (key1, key2)
@@ -9292,13 +9293,13 @@ space	= 7 * 8								; stack size required by the procedure
 		mov		right, [s_right]			; get "right" variable from the stack
 		cmp		result, 0					; if (result op 0)
 		jn#op	.break						; {
-		mov		[array + right * 8], key2	;     array[right] = key2
-		sub		right, 1					;     right-- }
+		mov		[array + right], key2		;     array[right] = key2
+		sub		right, 8					;     right-- }
 		mov		[s_right], right			; save "right" variable into the stack
 		jnz		.iloop						; do while (right != 0)
 ;---[End of internal loop]-----------------
-.break:	mov		[array + right * 8], key1	; array[right] = key1
-		add		left, 1						; left++
+.break:	mov		[array + right], key1		; array[right] = key1
+		add		left, 8						; left++
 		mov		[s_left], left				; save "left" variable into the stack
 		cmp		left, [s_size]
 		jb		.loop						; do while (left < size)

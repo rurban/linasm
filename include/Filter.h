@@ -72,12 +72,6 @@ static bool Diff (flt32_t filter[], size_t size, flt32_t lowfreq, flt32_t highfr
 static bool Diff (flt64_t filter[], size_t size, flt64_t lowfreq, flt64_t highfreq, window_t window);
 
 //============================================================================//
-//      Filter response                                                       //
-//============================================================================//
-static bool Response (flt32_t response[], const flt32_t data[], size_t dsize, const flt32_t filter[], size_t fsize);
-static bool Response (flt64_t response[], const flt64_t data[], size_t dsize, const flt64_t filter[], size_t fsize);
-
-//============================================================================//
 //      Moving average filter                                                 //
 //============================================================================//
 static bool Average (flt32_t response[], const flt32_t data[], size_t size, size_t order);
@@ -180,12 +174,6 @@ bool Filter_Hilbert_flt64 (flt64_t filter[], size_t size, flt64_t lowfreq, flt64
 //============================================================================//
 bool Filter_Diff_flt32 (flt32_t filter[], size_t size, flt32_t lowfreq, flt32_t highfreq, enum window_t window);
 bool Filter_Diff_flt64 (flt64_t filter[], size_t size, flt64_t lowfreq, flt64_t highfreq, enum window_t window);
-
-//============================================================================//
-//      Filter response                                                       //
-//============================================================================//
-bool Filter_Response_flt32 (flt32_t response[], const flt32_t data[], size_t dsize, const flt32_t filter[], size_t fsize);
-bool Filter_Response_flt64 (flt64_t response[], const flt64_t data[], size_t dsize, const flt64_t filter[], size_t fsize);
 
 //============================================================================//
 //      Moving average filter                                                 //

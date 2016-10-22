@@ -111,9 +111,10 @@ Math.o:				Macro.inc
 Matrix.o:			Macro.inc
 Numbers.o:			Macro.inc
 Pool.o:				Macro.inc Syscall.inc
+Sequence.o:			Macro.inc
 Statistics.o:		Macro.inc
 String.o:			Macro.inc
-Time.o:				Errno.inc Syscall.inc
+Time.o:				Macro.inc Syscall.inc Errno.inc
 Vector.o:			Macro.inc Syscall.inc
 VectorXD.o:			Macro.inc
 Window.o:			Macro.inc
