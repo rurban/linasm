@@ -496,6 +496,26 @@ public	FindSequenceBwd			as	'_ZN9MultiTree15FindSequenceBwdEP6pair_t5adt_t'
 public	FindSequenceIterFwd		as	'_ZNK9MultiTree19FindSequenceIterFwdEP6pair_t5adt_tPl'
 public	FindSequenceIterBwd		as	'_ZNK9MultiTree19FindSequenceIterBwdEP6pair_t5adt_tPl'
 
+;==============================================================================;
+;       Vectorized searching                                                   ;
+;==============================================================================;
+public	FindVectorFwdMulti		as	'MultiTree_FindVectorFwd'
+public	FindVectorFwdUnique		as	'UniqueTree_FindVectorFwd'
+public	FindVectorBwdMulti		as	'MultiTree_FindVectorBwd'
+public	FindVectorBwdUnique		as	'UniqueTree_FindVectorBwd'
+public	FindVectorIterFwdMulti	as	'MultiTree_FindVectorIterFwd'
+public	FindVectorIterFwdUnique	as	'UniqueTree_FindVectorIterFwd'
+public	FindVectorIterBwdMulti	as	'MultiTree_FindVectorIterBwd'
+public	FindVectorIterBwdUnique	as	'UniqueTree_FindVectorIterBwd'
+public	FindVectorFwdMulti		as	'_ZN9MultiTree13FindVectorFwdEP6pair_tmS1_Pm'
+public	FindVectorFwdUnique		as	'_ZN10UniqueTree13FindVectorFwdEP6pair_tmS1_Pm'
+public	FindVectorBwdMulti		as	'_ZN9MultiTree13FindVectorBwdEP6pair_tmS1_Pm'
+public	FindVectorBwdUnique		as	'_ZN10UniqueTree13FindVectorBwdEP6pair_tmS1_Pm'
+public	FindVectorIterFwdMulti	as	'_ZNK9MultiTree17FindVectorIterFwdEP6pair_tmS1_PmPl'
+public	FindVectorIterFwdUnique	as	'_ZNK10UniqueTree17FindVectorIterFwdEP6pair_tmS1_PmPl'
+public	FindVectorIterBwdMulti	as	'_ZNK9MultiTree17FindVectorIterBwdEP6pair_tmS1_PmPl'
+public	FindVectorIterBwdUnique	as	'_ZNK10UniqueTree17FindVectorIterBwdEP6pair_tmS1_PmPl'
+
 ;******************************************************************************;
 ;       Duplicates searching                                                   ;
 ;******************************************************************************;
@@ -1733,6 +1753,7 @@ count	equ		rdx							; count of nodes to copy
 ;---[Internal variables]-------------------
 status	equ		al							; operation status
 result	equ		rax							; result register
+temp	equ		rcx							; temporary register
 low		equ		rax							; low part of value for div operation
 high	equ		rdx							; high part of value for div operation
 array	equ		r8							; pointer to array of nodes
@@ -1777,10 +1798,10 @@ end if
 		mov		source, [s_src]				; get "source" variable from the stack
 		mov		count, [s_count]			; get "count" variable from the stack
 if bwd
-		add		size, KSIZE					; size = result + KSIZE
+		add		size, KSIZE					; size += KSIZE
 else
 		neg		size
-		add		size, [source + SIZE]		; size = source.size - result
+		add		size, [source + SIZE]		; size = source.size - size
 end if
 ;---[Correct count]------------------------
 		cmp		count, size					; if (count > size)
@@ -1793,8 +1814,8 @@ end if
 		mov		low, [this + SIZE]			; get object size
 		lea		low, [low + count + BMAX - 2 * KSIZE]
 		xor		high, high					; high = 0
-		mov		size, BMAX - KSIZE
-		div		size
+		mov		temp, BMAX - KSIZE
+		div		temp
 		shl		low, NSCALE					; low = (size + count + BMAX - 2 * KSIZE) / (BMAX - KSIZE) * NSIZE
 	Capacity	low, count, MINCAP			; compute new capacity of target object
 		cmp		low, [this + CAPACITY]		; if (low > capacity)
@@ -4681,6 +4702,9 @@ bptr	equ		r8							; pointer to array of subtrees
 index	equ		r9							; element index into bnode
 size	equ		result						; sutree size
 ;------------------------------------------
+		cmp		height, ERROR				; if (height == ERROR)
+		je		.error						;     then return EMPTY
+;---[Check tree height]--------------------
 		test	height, height				; if (height == 0)
 		jz		.exit						;     then go to exit
 ;---[Search loop]--------------------------
@@ -4711,6 +4735,9 @@ size	equ		result						; sutree size
 .break:	add		node, index
 		add		node, height
 		mov		result, node				; return node + index + height
+		ret
+;---[Error branch]-------------------------
+.error:	mov		result, EMPTY				; return EMPTY
 		ret
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 GetPos:
@@ -5807,6 +5834,311 @@ FindSequenceFwd:		FIND_SEQUENCE	LastIndex, FirstIndex, FWD, 0, 0
 FindSequenceBwd:		FIND_SEQUENCE	FirstIndex, LastIndex, BWD, 1, 0
 FindSequenceIterFwd:	FIND_SEQUENCE	LastIndex, FirstIndex, EMPTY, 0, 1
 FindSequenceIterBwd:	FIND_SEQUENCE	FirstIndex, LastIndex, EMPTY, 1, 1
+
+;==============================================================================;
+;       Vectorized searching                                                   ;
+;==============================================================================;
+macro	INSERTSORT	op
+{
+;---[Parameters]---------------------------
+array	equ		rdi							; pointer to array
+size	equ		rsi							; array size (count of elements)
+;---[Internal variables]-------------------
+left	equ		rdx							; left index
+right	equ		rcx							; right index
+key1	equ		r8							; temporary key #1
+key2	equ		r9							; temporary key #2
+data1	equ		r10							; temporary data #1
+data2	equ		r11							; temporary data #2
+;------------------------------------------
+		mov		left, KSIZE					; left = 1
+;---[Sorting loop]-------------------------
+.loop:	mov		right, left					; right = left
+		mov		key1, [array + right]		; key1 = array[right].key
+		mov		data1, [array + right + 8]	; data1 = array[right].data
+;---[Internal loop]------------------------
+.iloop:	mov		key2, [array + right - KSIZE]
+		mov		data2, [array + right - KSIZE + 8]
+		cmp		key1, key2					; if (key1 op array[right-1])
+		jn#op	.break						; {
+		mov		[array + right], key2		;     array[right].key = key2
+		mov		[array + right + 8], data2	;     array[right].data = data2
+		sub		right, KSIZE				;     right-- }
+		jnz		.iloop						; do while (right != 0)
+;---[End of internal loop]-----------------
+.break:	mov		[array + right], key1		; array[right].key = key1
+		mov		[array + right + 8], data1	; array[right].data = data1
+		add		left, KSIZE					; left++
+		cmp		left, size
+		jb		.loop						; do while (left < size)
+;---[End of sorting loop]------------------
+		ret
+}
+InsertSortAsc:	INSERTSORT	b
+InsertSortDsc:	INSERTSORT	a
+;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+macro	QUICKSORT	InsertSort, op1, op2
+{
+;---[Parameters]---------------------------
+array	equ		rdi							; pointer to array
+size	equ		rsi							; array size (count of elements)
+;---[Internal variables]-------------------
+median	equ		rax							; median value
+half	equ		rax							; half of array size
+left	equ		rdx							; left index
+right	equ		rcx							; right index
+key1	equ		r8							; temporary key #1
+key2	equ		r9							; temporary key #2
+data1	equ		r10							; temporary data #1
+data2	equ		r11							; temporary data #2
+lsize	equ		left						; size of left part of array
+rsize	equ		size						; size of right part of array
+larray	equ		array						; pointer to left part of array
+rarray	equ		right						; pointer to right part of array
+stack	equ		rsp							; stack pointer
+s_array	equ		stack + 0 * 8				; stack position of "array" variable
+s_size	equ		stack + 1 * 8				; stack position of "size" variable
+space	= 3 * 8								; stack size required by the procedure
+minsize	= 16 * KSIZE						; min array size is aceptable for Quick sort
+;------------------------------------------
+.start:	cmp		size, minsize				; if (size <= minsize)
+		jbe		InsertSort					;     call InsertSort (array, size)
+;---[Sorting loop]-------------------------
+.loop:	mov		half, size
+		shr		half, 1
+		and		half, -KSIZE				; half = size / 2
+		mov		left, -KSIZE				; left = -1
+		mov		right, size					; right = size
+		mov		median, [array + half]		; median = array[half].key
+		jmp		.loop1
+;---[Swap loop]----------------------------
+.swap:	mov		[array + left], key2		; array[left].key = key2
+		mov		[array + right], key1		; array[right].key = key1
+		mov		[array + left + 8], data2	; array[left].data = data2
+		mov		[array + right + 8], data1	; array[right].data = data1
+;---[Internal loop 1]----------------------
+.loop1:	add		left, KSIZE					; left++
+		mov		key1, [array + left]		; key1 = array[left].key
+		mov		data1, [array + left + 8]	; data1 = array[left].data
+		cmp		key1, median
+		j#op1	.loop1						; do while (key1 op1 median)
+;---[Internal loop 2]----------------------
+.loop2:	sub		right, KSIZE				; right--
+		mov		key2, [array + right]		; key2 = array[right].key
+		mov		data2, [array + right + 8]	; data2 = array[right].data
+		cmp		key2, median
+		j#op2	.loop2						; do while (key2 op2 median)
+;------------------------------------------
+		cmp		left, right
+		jb		.swap						; do while (left < right)
+;---[End of swap loop]---------------------
+		add		right, KSIZE
+		sub		rsize, right				; rsize = size - (right + 1)
+		lea		rarray, [array + right]		; rarray = array + (right + 1)
+		cmp		lsize, rsize				; if (lsize <= rsize)
+		ja		.else						; {
+;---[if lsize <= rsize]--------------------
+		cmp		lsize, KSIZE				; if (lsize > 1)
+		jbe		@f							; {
+		sub		stack, space				; reserving stack size for local vars
+		mov		[s_array], rarray			; save "rarray" variable into the stack
+		mov		[s_size], rsize				; save "rsize" variable into the stack
+		mov		size, lsize
+		call	.start						; call QuickSort (larray, lsize)
+		mov		rarray, [s_array]			; get "rarray" variable from the stack
+		mov		rsize, [s_size]				; get "rsize" variable from the stack
+		add		stack, space				; restoring back the stack pointer
+@@:		mov		array, rarray				; }
+		jmp		.end
+;---[else]---------------------------------
+.else:	cmp		rsize, KSIZE				; if (rsize > 1)
+		jbe		@f							; {
+		sub		stack, space				; reserving stack size for local vars
+		mov		[s_array], larray			; save "larray" variable into the stack
+		mov		[s_size], lsize				; save "lsize" variable into the stack
+		mov		array, rarray
+		call	.start						; call QuickSort (rarray, rsize)
+		mov		larray, [s_array]			; get "larray" variable from the stack
+		mov		lsize, [s_size]				; get "lsize" variable from the stack
+		add		stack, space				; restoring back the stack pointer
+@@:		mov		size, lsize					; }
+;---[end if]-------------------------------
+.end:	cmp		size, minsize
+		ja		.loop						; do while (size > minsize)
+;---[Insert sort]--------------------------
+		jmp		InsertSort					; return InsertSort (array, size)
+}
+QuickSortAsc:	QUICKSORT	InsertSortAsc, b, a
+QuickSortDsc:	QUICKSORT	InsertSortDsc, a, b
+;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+macro	FIND_VECTOR	QuickSort, CmpFunc, IterFunc, offst, ext, type
+{
+;---[Parameters]---------------------------
+this	equ		rdi							; pointer to b-tree object
+data	equ		rsi							; pointer to result vector
+dsize	equ		rdx							; capacity of result vector
+keys	equ		rcx							; pointer to array of keys
+ksize	equ		r8							; pointer to size of array of keys
+ptr		equ		r9							; pointer to iterator
+;---[Internal variables]-------------------
+result	equ		rax							; result register
+fptr	equ		rax							; pointer to call external function
+count	equ		r12							; count of elements to find
+array	equ		r13							; pointer to array of nodes
+height	equ		r10							; b-tree height
+root	equ		r11							; begining node to start from
+value	equ		xmm0						; temporary register
+iter	equ		height						; iterator value
+kfunc	equ		result						; key compare function
+stack	equ		rsp							; stack pointer
+s_count	equ		stack + 0 * 8				; stack position of "count" variable
+s_array	equ		stack + 1 * 8				; stack position of "array" variable
+s_this	equ		stack + 2 * 8				; stack position of "this" variable
+s_data	equ		stack + 3 * 8				; stack position of "data" variable
+s_dsize	equ		stack + 4 * 8				; stack position of "dsize" variable
+s_keys	equ		stack + 5 * 8				; stack position of "keys" variable
+s_ksize	equ		stack + 6 * 8				; stack position of "ksize" variable
+s_ptr	equ		stack + 7 * 8				; stack position of "ptr" variable
+s_hght	equ		stack + 8 * 8				; stack position of "height" variable
+s_root	equ		stack + 9 * 8				; stack position of "root" variable
+s_kfunc	equ		stack + 10 * 8				; stack position of "kfunc" variable
+s_iter	equ		stack + 11 * 8				; stack position of "iter" variable
+s_total	equ		stack + 12 * 8				; stack position of "total" variable
+space	= 13 * 8							; stack size required by the procedure
+;------------------------------------------
+		sub		stack, space				; reserving stack size for local vars
+		mov		qword [s_total], 0			; total = 0
+		mov		[s_count], count			; save old value of "count" variable
+		mov		[s_array], array			; save old value of "array" variable
+;---[Check access mode]--------------------
+if ~ext
+		cmp		dword [this + FUTEX], 0		; if read only code section called this
+		jg		.exit						; function, then go to exit
+end if
+;---[Check size]---------------------------
+		cmp		qword [this + SIZE], 0		; if (size == 0)
+		jz		.exit						;     then go to exit
+;---[Check ksize]--------------------------
+		mov		count, CONTINUE - 1			; count = CONTINUE - 1
+		and		count, [ksize]				; if (count & ksize[0] == 0)
+		jz		.exit						;     then go to exit
+;---[Check dsize]--------------------------
+		test	dsize, dsize				; if (dsize == 0)
+		jz		.exit						;     then go to exit
+;---[Normal execution branch]--------------
+		mov		array, [this + ARRAY]		; get pointer to array of nodes
+		mov		height, [this + HEIGHT]		; get tree height
+		mov		root, [this + ROOT]			; get root node
+		mov		kfunc, [this + KFUNC]		; get pointer to key compare function
+		shl		count, KSCALE				; convert count to bytes
+		mov		[s_this], this				; save "this" variable into the stack
+		mov		[s_data], data				; save "data" variable into the stack
+		mov		[s_dsize], dsize			; save "dsize" variable into the stack
+		mov		[s_keys], keys				; save "keys" variable into the stack
+		mov		[s_ksize], ksize			; save "ksize" variable into the stack
+		mov		[s_ptr], ptr				; save "ptr" variable into the stack
+		mov		[s_hght], height			; save "height" variable into the stack
+		mov		[s_root], root				; save "root" variable into the stack
+		mov		[s_kfunc], kfunc			; save "kfunc" variable into the stack
+;---[Check continue flag]------------------
+if ~ext
+		mov		iter, [this + offst]		; get iterator value
+else
+		mov		iter, [ptr]					; get iterator value
+end if
+		mov		[s_iter], iter				; save "iter" variable into the stack
+		mov		result, CONTINUE			; result = CONTINUE
+		test	result, [ksize]				; if (result & ksize[0])
+if type
+		jnz		.break						;     then continue from last position
+else
+		jnz		.sloop						;     then continue from last position
+end if
+;---[Prepare vector to search]-------------
+		mov		param1, keys
+		mov		param2, count
+		call	QuickSort					; QuickSort (keys, count)
+		mov		keys, [s_keys]				; get "keys" variable from the stack
+;---[Keys search loop]---------------------
+.loop:	mov		param5, [keys + count - KSIZE]
+		mov		param4, [s_kfunc]
+		mov		param3, [s_hght]
+		mov		param2, [s_root]
+		mov		param1, array
+		call	CmpFunc						; result = CmpFunc (array, root, height, kfunc, keys[count-1])
+		mov		keys, [s_keys]				; get "keys" variable from the stack
+		cmp		result, EMPTY				; if (result <= EMPTY)
+		jle		.break						;     then skip the loop
+		mov		[s_iter], result			; save "iter" variable into the stack
+		jmp		.found						; go to found branch
+;---[Search loop]--------------------------
+.sloop:	mov		param3, KSIZE
+		mov		param2, [s_iter]
+		mov		param1, array
+		call	IterFunc					; result = IterFunc (array, iter, KSIZE)
+		mov		keys, [s_keys]				; get "keys" variable from the stack
+		cmp		result, EMPTY				; if (result <= EMPTY)
+		jle		.break						;     then break the loop
+		mov		[s_iter], result			; save "iter" variable into the stack
+		and		result, PMASK
+		mov		param1, [keys + count - KSIZE]
+		mov		param2, [array + result + BDATA]
+		call	qword [s_kfunc]				; result = Compare (keys[count-1], array[iter].data.key)
+		mov		keys, [s_keys]				; get "keys" variable from the stack
+		test	result, result				; if (result)
+		jnz		.break						;     then break the loop
+		mov		result, [s_iter]			; get "iter" variable from the stack
+.found:	mov		this, [s_this]				; get "this" variable from the stack
+		mov		data, [s_data]				; get "data" variable from the stack
+		mov		ksize, [s_ksize]			; get "ksize" variable from the stack
+		mov		ptr, [s_ptr]				; get "ptr" variable from the stack
+if ~ext
+		mov		[this + offst], result		; update iterator position
+else
+		mov		[ptr], result				; update iterator position
+end if
+		and		result, PMASK
+		movdqa	value, [array + result + BDATA]
+		movdqu	[data], value				; data[0] = array[iter].data
+		add		data, KSIZE					; data++
+		mov		[s_data], data				; save "data" variable into the stack
+		add		qword [s_total], 1			; total++
+		sub		qword [s_dsize], 1			; dsize--
+if type
+		jnz		.break						; if (dsize != 0), then break search loop
+else
+		jnz		.sloop						; if (dsize != 0), then go back
+end if
+;---[End of search loop]-------------------
+		mov		result, CONTINUE
+		shr		count, KSCALE
+		or		count, result				; set continue flag
+		mov		[ksize], count				; ksize[0] = count
+		mov		count, [s_count]			; restore old value of "count" variable
+		mov		array, [s_array]			; restore old value of "array" variable
+		mov		result, [s_total]			; return total
+		add		stack, space				; restoring back the stack pointer
+		ret
+.break:	sub		count, KSIZE				; count--
+		jnz		.loop						; do while (count != 0)
+;---[End of keys search loop]--------------
+		mov		ksize, [s_ksize]			; get "ksize" variable from the stack
+		mov		[ksize], count				; ksize[0] = count
+;---[Normal exit branch]-------------------
+.exit:	mov		count, [s_count]			; restore old value of "count" variable
+		mov		array, [s_array]			; restore old value of "array" variable
+		mov		result, [s_total]			; return total
+		add		stack, space				; restoring back the stack pointer
+		ret
+}
+FindVectorFwdMulti:			FIND_VECTOR	QuickSortDsc, EqualFwd, GoNext, FWD, 0, 0
+FindVectorFwdUnique:		FIND_VECTOR	QuickSortDsc, EqualFwd, GoNext, FWD, 0, 1
+FindVectorBwdMulti:			FIND_VECTOR	QuickSortAsc, EqualBwd, GoPrev, BWD, 0, 0
+FindVectorBwdUnique:		FIND_VECTOR	QuickSortAsc, EqualBwd, GoPrev, BWD, 0, 1
+FindVectorIterFwdMulti:		FIND_VECTOR	QuickSortDsc, EqualFwd, GoNext, EMPTY, 1, 0
+FindVectorIterFwdUnique:	FIND_VECTOR	QuickSortDsc, EqualFwd, GoNext, EMPTY, 1, 1
+FindVectorIterBwdMulti:		FIND_VECTOR	QuickSortAsc, EqualBwd, GoPrev, EMPTY, 1, 0
+FindVectorIterBwdUnique:	FIND_VECTOR	QuickSortAsc, EqualBwd, GoPrev, EMPTY, 1, 1
 
 ;******************************************************************************;
 ;       Duplicates searching                                                   ;

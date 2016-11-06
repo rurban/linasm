@@ -231,6 +231,14 @@ size_t FindSequenceBwd (pair_t *data, adt_t key);
 size_t FindSequenceIterFwd (pair_t *data, adt_t key, ptr_t *iter) const;
 size_t FindSequenceIterBwd (pair_t *data, adt_t key, ptr_t *iter) const;
 
+//============================================================================//
+//      Vectorized searching                                                  //
+//============================================================================//
+size_t FindVectorFwd (pair_t data[], size_t size, pair_t vector[], size_t *vsize);
+size_t FindVectorBwd (pair_t data[], size_t size, pair_t vector[], size_t *vsize);
+size_t FindVectorIterFwd (pair_t data[], size_t size, pair_t vector[], size_t *vsize, ptr_t *iter) const;
+size_t FindVectorIterBwd (pair_t data[], size_t size, pair_t vector[], size_t *vsize, ptr_t *iter) const;
+
 //****************************************************************************//
 //      Duplicates searching                                                  //
 //****************************************************************************//
@@ -504,6 +512,14 @@ size_t MultiTree_FindSequenceFwd (struct MultiTree *tree, struct pair_t *data, u
 size_t MultiTree_FindSequenceBwd (struct MultiTree *tree, struct pair_t *data, union adt_t key);
 size_t MultiTree_FindSequenceIterFwd (const struct MultiTree *tree, struct pair_t *data, union adt_t key, ptr_t *iter);
 size_t MultiTree_FindSequenceIterBwd (const struct MultiTree *tree, struct pair_t *data, union adt_t key, ptr_t *iter);
+
+//============================================================================//
+//      Vectorized searching                                                  //
+//============================================================================//
+size_t MultiTree_FindVectorFwd (struct MultiTree *tree, struct pair_t data[], size_t size, struct pair_t vector[], size_t *vsize);
+size_t MultiTree_FindVectorBwd (struct MultiTree *tree, struct pair_t data[], size_t size, struct pair_t vector[], size_t *vsize);
+size_t MultiTree_FindVectorIterFwd (const struct MultiTree *tree, struct pair_t data[], size_t size, struct pair_t vector[], size_t *vsize, ptr_t *iter);
+size_t MultiTree_FindVectorIterBwd (const struct MultiTree *tree, struct pair_t data[], size_t size, struct pair_t vector[], size_t *vsize, ptr_t *iter);
 
 //****************************************************************************//
 //      Duplicates searching                                                  //

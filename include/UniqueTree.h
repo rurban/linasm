@@ -228,6 +228,14 @@ bool FindLessOrEqualFwd (pair_t *data, adt_t key);
 bool FindLessOrEqualBwd (pair_t *data, adt_t key);
 bool FindLessOrEqualIter (pair_t *data, adt_t key, ptr_t *iter) const;
 
+//============================================================================//
+//      Vectorized searching                                                  //
+//============================================================================//
+size_t FindVectorFwd (pair_t data[], size_t size, pair_t vector[], size_t *vsize);
+size_t FindVectorBwd (pair_t data[], size_t size, pair_t vector[], size_t *vsize);
+size_t FindVectorIterFwd (pair_t data[], size_t size, pair_t vector[], size_t *vsize, ptr_t *iter) const;
+size_t FindVectorIterBwd (pair_t data[], size_t size, pair_t vector[], size_t *vsize, ptr_t *iter) const;
+
 //****************************************************************************//
 //      Searching for differences                                             //
 //****************************************************************************//
@@ -480,6 +488,14 @@ bool UniqueTree_FindLessIter (const struct UniqueTree *tree, struct pair_t *data
 bool UniqueTree_FindLessOrEqualFwd (struct UniqueTree *tree, struct pair_t *data, union adt_t key);
 bool UniqueTree_FindLessOrEqualBwd (struct UniqueTree *tree, struct pair_t *data, union adt_t key);
 bool UniqueTree_FindLessOrEqualIter (const struct UniqueTree *tree, struct pair_t *data, union adt_t key, ptr_t *iter);
+
+//============================================================================//
+//      Vectorized searching                                                  //
+//============================================================================//
+size_t UniqueTree_FindVectorFwd (struct UniqueTree *tree, struct pair_t data[], size_t size, struct pair_t vector[], size_t *vsize);
+size_t UniqueTree_FindVectorBwd (struct UniqueTree *tree, struct pair_t data[], size_t size, struct pair_t vector[], size_t *vsize);
+size_t UniqueTree_FindVectorIterFwd (const struct UniqueTree *tree, struct pair_t data[], size_t size, struct pair_t vector[], size_t *vsize, ptr_t *iter);
+size_t UniqueTree_FindVectorIterBwd (const struct UniqueTree *tree, struct pair_t data[], size_t size, struct pair_t vector[], size_t *vsize, ptr_t *iter);
 
 //****************************************************************************//
 //      Searching for differences                                             //

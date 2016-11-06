@@ -4823,7 +4823,7 @@ end if
 		movdqa	svalue2, quadr
 		padd#i	svalue2, temp1				; svalue2 = quadr + 0x1
 ;---[Clear non required bits]--------------
-		pand	quadr, temp1				; quadr1 &= 0x1
+		pand	quadr, temp1				; quadr &= 0x1
 		pand	svalue1, temp2				; svalue1 &= 0x3
 		pand	svalue2, temp2				; svalue2 &= 0x3
 ;---[Set correct signs]--------------------
