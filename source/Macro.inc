@@ -27,6 +27,7 @@ ERROR			= -1						; Error value
 ;==============================================================================;
 KSCALE			= 4							; Key scale factor
 KSIZE			= 1 shl KSCALE				; Size of key (bytes)
+CONTINUE		= 1 shl	63					; Continue flag for vectorized search
 FLOCK			= 0x80000000				; Futex exclusive lock value
 SPINS			= 1024						; Count of spinlock iterations
 

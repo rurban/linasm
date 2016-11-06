@@ -171,6 +171,12 @@ size_t FindSequenceBwd (pair_t *data, adt_t key);
 size_t FindSequenceIterFwd (pair_t *data, adt_t key, ptr_t *iter) const;
 size_t FindSequenceIterBwd (pair_t *data, adt_t key, ptr_t *iter) const;
 
+// Vectorized searching
+size_t FindVectorFwd (pair_t data[], size_t size, pair_t vector[], size_t *vsize);
+size_t FindVectorBwd (pair_t data[], size_t size, pair_t vector[], size_t *vsize);
+size_t FindVectorIterFwd (pair_t data[], size_t size, pair_t vector[], size_t *vsize, ptr_t *iter) const;
+size_t FindVectorIterBwd (pair_t data[], size_t size, pair_t vector[], size_t *vsize, ptr_t *iter) const;
+
 //****************************************************************************//
 //      Duplicates searching                                                  //
 //****************************************************************************//
@@ -366,6 +372,12 @@ size_t MultiHash_FindSequenceFwd (struct MultiHash *hash, struct pair_t *data, u
 size_t MultiHash_FindSequenceBwd (struct MultiHash *hash, struct pair_t *data, union adt_t key);
 size_t MultiHash_FindSequenceIterFwd (const struct MultiHash *hash, struct pair_t *data, union adt_t key, ptr_t *iter);
 size_t MultiHash_FindSequenceIterBwd (const struct MultiHash *hash, struct pair_t *data, union adt_t key, ptr_t *iter);
+
+// Vectorized searching
+size_t MultiHash_FindVectorFwd (struct MultiHash *hash, struct pair_t data[], size_t size, struct pair_t vector[], size_t *vsize);
+size_t MultiHash_FindVectorBwd (struct MultiHash *hash, struct pair_t data[], size_t size, struct pair_t vector[], size_t *vsize);
+size_t MultiHash_FindVectorIterFwd (const struct MultiHash *hash, struct pair_t data[], size_t size, struct pair_t vector[], size_t *vsize, ptr_t *iter);
+size_t MultiHash_FindVectorIterBwd (const struct MultiHash *hash, struct pair_t data[], size_t size, struct pair_t vector[], size_t *vsize, ptr_t *iter);
 
 //****************************************************************************//
 //      Duplicates searching                                                  //

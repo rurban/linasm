@@ -170,6 +170,12 @@ bool FindKeysBwd (pair_t *data, const adt_t keys[], size_t size);
 bool FindKeysIterFwd (pair_t *data, const adt_t keys[], size_t size, ptr_t *iter) const;
 bool FindKeysIterBwd (pair_t *data, const adt_t keys[], size_t size, ptr_t *iter) const;
 
+// Vectorized searching
+size_t FindVectorFwd (pair_t data[], size_t size, pair_t vector[], size_t *vsize);
+size_t FindVectorBwd (pair_t data[], size_t size, pair_t vector[], size_t *vsize);
+size_t FindVectorIterFwd (pair_t data[], size_t size, pair_t vector[], size_t *vsize, ptr_t *iter) const;
+size_t FindVectorIterBwd (pair_t data[], size_t size, pair_t vector[], size_t *vsize, ptr_t *iter) const;
+
 //****************************************************************************//
 //      Key counting                                                          //
 //****************************************************************************//
@@ -346,6 +352,12 @@ bool UniqueHash_FindKeysFwd (struct UniqueHash *hash, struct pair_t *data, const
 bool UniqueHash_FindKeysBwd (struct UniqueHash *hash, struct pair_t *data, const union adt_t keys[], size_t size);
 bool UniqueHash_FindKeysIterFwd (const struct UniqueHash *hash, struct pair_t *data, const union adt_t keys[], size_t size, ptr_t *iter);
 bool UniqueHash_FindKeysIterBwd (const struct UniqueHash *hash, struct pair_t *data, const union adt_t keys[], size_t size, ptr_t *iter);
+
+// Vectorized searching
+size_t UniqueHash_FindVectorFwd (struct UniqueHash *hash, struct pair_t data[], size_t size, struct pair_t vector[], size_t *vsize);
+size_t UniqueHash_FindVectorBwd (struct UniqueHash *hash, struct pair_t data[], size_t size, struct pair_t vector[], size_t *vsize);
+size_t UniqueHash_FindVectorIterFwd (const struct UniqueHash *hash, struct pair_t data[], size_t size, struct pair_t vector[], size_t *vsize, ptr_t *iter);
+size_t UniqueHash_FindVectorIterBwd (const struct UniqueHash *hash, struct pair_t data[], size_t size, struct pair_t vector[], size_t *vsize, ptr_t *iter);
 
 //****************************************************************************//
 //      Key counting                                                          //
