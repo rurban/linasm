@@ -13,167 +13,323 @@ include	'Syscall.inc'
 ;###############################################################################
 ;#      Import section                                                         #
 ;###############################################################################
-extrn	'Array_Copy'		as	Copy
-extrn	'Array_Move'		as	Move
+extrn	'Array_Copy'			as	Copy
+extrn	'Array_Move'			as	Move
 
 ;###############################################################################
 ;#      Export section                                                         #
 ;###############################################################################
-public	FindSet				as	'FindSet'
-public	CopyElements		as	'CopyElements'
-public	DeleteElements		as	'DeleteElements'
+public	FindSet					as	'FindSet'
+public	CopyElements			as	'CopyElements'
+public	DeleteElements			as	'DeleteElements'
+
+;******************************************************************************;
+;       Pair array sort functions                                              ;
+;******************************************************************************;
+
+;==============================================================================;
+;       Key sorting functions                                                  ;
+;==============================================================================;
+
+; Ascending sort order
+public	KeyQuickSortAsc			as	'KeySortAsc'
+public	KeyQuickSortAsc			as	'_Z10KeySortAscP6pair_tmPFx5adt_tS1_E'
+
+; Descending sort order
+public	KeyQuickSortDsc			as	'KeySortDsc'
+public	KeyQuickSortDsc			as	'_Z10KeySortDscP6pair_tmPFx5adt_tS1_E'
+
+;==============================================================================;
+;       Pair sorting functions                                                 ;
+;==============================================================================;
+
+; Ascending sort order
+public	PairQuickSortAsc		as	'PairSortAsc'
+public	PairQuickSortAsc		as	'_Z11PairSortAscP6pair_tmPFxS_S_E'
+
+; Descending sort order
+public	PairQuickSortDsc		as	'PairSortDsc'
+public	PairQuickSortDsc		as	'_Z11PairSortDscP6pair_tmPFxS_S_E'
+
+;******************************************************************************;
+;       Pair array unique functions                                            ;
+;******************************************************************************;
+
+;==============================================================================;
+;       Unique keys                                                           ;
+;==============================================================================;
+public	UniqueKeys				as	'UniqueKeys'
+public	UniqueKeys				as	'_Z10UniqueKeysP6pair_tmPFx5adt_tS1_E'
+
+;==============================================================================;
+;       Unique pairs                                                           ;
+;==============================================================================;
+public	UniquePairs				as	'UniquePairs'
+public	UniquePairs				as	'_Z11UniquePairsP6pair_tmPFxS_S_E'
+
+;******************************************************************************;
+;       Special sort functions                                                 ;
+;******************************************************************************;
+
+;==============================================================================;
+;       Ascending sort order                                                   ;
+;==============================================================================;
+
+; Unsigned integer keys
+public	KeyQuickSortAsc_uint8	as	'KeySortAscUint8'
+public	KeyQuickSortAsc_uint16	as	'KeySortAscUint16'
+public	KeyQuickSortAsc_uint32	as	'KeySortAscUint32'
+public	KeyQuickSortAsc_uint64	as	'KeySortAscUint64'
+public	KeyQuickSortAsc_uint8	as	'_Z15KeySortAscUint8P6pair_tm'
+public	KeyQuickSortAsc_uint16	as	'_Z16KeySortAscUint16P6pair_tm'
+public	KeyQuickSortAsc_uint32	as	'_Z16KeySortAscUint32P6pair_tm'
+public	KeyQuickSortAsc_uint64	as	'_Z16KeySortAscUint64P6pair_tm'
+
+; Signed integer keys
+public	KeyQuickSortAsc_sint8	as	'KeySortAscSint8'
+public	KeyQuickSortAsc_sint16	as	'KeySortAscSint16'
+public	KeyQuickSortAsc_sint32	as	'KeySortAscSint32'
+public	KeyQuickSortAsc_sint64	as	'KeySortAscSint64'
+public	KeyQuickSortAsc_sint8	as	'_Z15KeySortAscSint8P6pair_tm'
+public	KeyQuickSortAsc_sint16	as	'_Z16KeySortAscSint16P6pair_tm'
+public	KeyQuickSortAsc_sint32	as	'_Z16KeySortAscSint32P6pair_tm'
+public	KeyQuickSortAsc_sint64	as	'_Z16KeySortAscSint64P6pair_tm'
+
+; Floating-point keys
+public	KeyQuickSortAsc_flt32	as	'KeySortAscFlt32'
+public	KeyQuickSortAsc_flt64	as	'KeySortAscFlt64'
+public	KeyQuickSortAsc_flt32	as	'_Z15KeySortAscFlt32P6pair_tm'
+public	KeyQuickSortAsc_flt64	as	'_Z15KeySortAscFlt64P6pair_tm'
+
+; Other keys
+public	KeyQuickSortAsc_uint64	as	'KeySortAscSize'
+public	KeyQuickSortAsc_sint64	as	'KeySortAscTime'
+public	KeyQuickSortAsc_uint64	as	'_Z14KeySortAscSizeP6pair_tm'
+public	KeyQuickSortAsc_sint64	as	'_Z14KeySortAscTimeP6pair_tm'
+
+;==============================================================================;
+;       Descending sort order                                                  ;
+;==============================================================================;
+
+; Unsigned integer keys
+public	KeyQuickSortDsc_uint8	as	'KeySortDscUint8'
+public	KeyQuickSortDsc_uint16	as	'KeySortDscUint16'
+public	KeyQuickSortDsc_uint32	as	'KeySortDscUint32'
+public	KeyQuickSortDsc_uint64	as	'KeySortDscUint64'
+public	KeyQuickSortDsc_uint8	as	'_Z15KeySortDscUint8P6pair_tm'
+public	KeyQuickSortDsc_uint16	as	'_Z16KeySortDscUint16P6pair_tm'
+public	KeyQuickSortDsc_uint32	as	'_Z16KeySortDscUint32P6pair_tm'
+public	KeyQuickSortDsc_uint64	as	'_Z16KeySortDscUint64P6pair_tm'
+
+; Signed integer keys
+public	KeyQuickSortDsc_sint8	as	'KeySortDscSint8'
+public	KeyQuickSortDsc_sint16	as	'KeySortDscSint16'
+public	KeyQuickSortDsc_sint32	as	'KeySortDscSint32'
+public	KeyQuickSortDsc_sint64	as	'KeySortDscSint64'
+public	KeyQuickSortDsc_sint8	as	'_Z15KeySortDscSint8P6pair_tm'
+public	KeyQuickSortDsc_sint16	as	'_Z16KeySortDscSint16P6pair_tm'
+public	KeyQuickSortDsc_sint32	as	'_Z16KeySortDscSint32P6pair_tm'
+public	KeyQuickSortDsc_sint64	as	'_Z16KeySortDscSint64P6pair_tm'
+
+; Floating-point keys
+public	KeyQuickSortDsc_flt32	as	'KeySortDscFlt32'
+public	KeyQuickSortDsc_flt64	as	'KeySortDscFlt64'
+public	KeyQuickSortDsc_flt32	as	'_Z15KeySortDscFlt32P6pair_tm'
+public	KeyQuickSortDsc_flt64	as	'_Z15KeySortDscFlt64P6pair_tm'
+
+; Other keys
+public	KeyQuickSortDsc_uint64	as	'KeySortDscSize'
+public	KeyQuickSortDsc_sint64	as	'KeySortDscTime'
+public	KeyQuickSortDsc_uint64	as	'_Z14KeySortDscSizeP6pair_tm'
+public	KeyQuickSortDsc_sint64	as	'_Z14KeySortDscTimeP6pair_tm'
+
+;******************************************************************************;
+;       Special unique functions                                               ;
+;******************************************************************************;
+
+; Unsigned integer keys
+public	UniqueKeys8				as	'UniqueKeysUint8'
+public	UniqueKeys16			as	'UniqueKeysUint16'
+public	UniqueKeys32			as	'UniqueKeysUint32'
+public	UniqueKeys64			as	'UniqueKeysUint64'
+public	UniqueKeys8				as	'_Z15UniqueKeysUint8P6pair_tm'
+public	UniqueKeys16			as	'_Z16UniqueKeysUint16P6pair_tm'
+public	UniqueKeys32			as	'_Z16UniqueKeysUint32P6pair_tm'
+public	UniqueKeys64			as	'_Z16UniqueKeysUint64P6pair_tm'
+
+; Signed integer keys
+public	UniqueKeys8				as	'UniqueKeysSint8'
+public	UniqueKeys16			as	'UniqueKeysSint16'
+public	UniqueKeys32			as	'UniqueKeysSint32'
+public	UniqueKeys64			as	'UniqueKeysSint64'
+public	UniqueKeys8				as	'_Z15UniqueKeysSint8P6pair_tm'
+public	UniqueKeys16			as	'_Z16UniqueKeysSint16P6pair_tm'
+public	UniqueKeys32			as	'_Z16UniqueKeysSint32P6pair_tm'
+public	UniqueKeys64			as	'_Z16UniqueKeysSint64P6pair_tm'
+
+; Floating-point keys
+public	UniqueKeys32			as	'UniqueKeysFlt32'
+public	UniqueKeys64			as	'UniqueKeysFlt64'
+public	UniqueKeys32			as	'_Z15UniqueKeysFlt32P6pair_tm'
+public	UniqueKeys64			as	'_Z15UniqueKeysFlt64P6pair_tm'
+
+; Other keys
+public	UniqueKeys64			as	'UniqueKeysSize'
+public	UniqueKeys64			as	'UniqueKeysTime'
+public	UniqueKeys64			as	'_Z14UniqueKeysSizeP6pair_tm'
+public	UniqueKeys64			as	'_Z14UniqueKeysTimeP6pair_tm'
 
 ;******************************************************************************;
 ;       Constructor                                                            ;
 ;******************************************************************************;
-public	Constructor			as	'Vector_InitVector'
-public	Constructor			as	'Stack_InitStack'
-public	Constructor			as	'_ZN6VectorC1EmPFbP6pair_tPKS0_PvEPFvS1_S4_ES4_'
-public	Constructor			as	'_ZN5StackC1EmPFbP6pair_tPKS0_PvEPFvS1_S4_ES4_'
+public	Constructor				as	'Vector_InitVector'
+public	Constructor				as	'Stack_InitStack'
+public	Constructor				as	'_ZN6VectorC1EmPFbP6pair_tPKS0_PvEPFvS1_S4_ES4_'
+public	Constructor				as	'_ZN5StackC1EmPFbP6pair_tPKS0_PvEPFvS1_S4_ES4_'
 
 ;******************************************************************************;
 ;       Copy constructor                                                       ;
 ;******************************************************************************;
-public	CopyConstructor		as	'Vector_CopyVector'
-public	CopyConstructor		as	'Stack_CopyStack'
-public	CopyConstructor		as	'_ZN6VectorC1ERKS_'
-public	CopyConstructor		as	'_ZN5StackC1ERKS_'
+public	CopyConstructor			as	'Vector_CopyVector'
+public	CopyConstructor			as	'Stack_CopyStack'
+public	CopyConstructor			as	'_ZN6VectorC1ERKS_'
+public	CopyConstructor			as	'_ZN5StackC1ERKS_'
 
 ;******************************************************************************;
 ;       Destructor                                                             ;
 ;******************************************************************************;
-public	Destructor			as	'Vector_FreeVector'
-public	Destructor			as	'Stack_FreeStack'
-public	Destructor			as	'_ZN6VectorD1Ev'
-public	Destructor			as	'_ZN5StackD1Ev'
+public	Destructor				as	'Vector_FreeVector'
+public	Destructor				as	'Stack_FreeStack'
+public	Destructor				as	'_ZN6VectorD1Ev'
+public	Destructor				as	'_ZN5StackD1Ev'
 
 ;******************************************************************************;
 ;       Access predicates                                                      ;
 ;******************************************************************************;
 
 ; Lock operations
-public	LockReadings		as	'Vector_LockReadings'
-public	LockReadings		as	'Stack_LockReadings'
-public	LockWritings		as	'Vector_LockWritings'
-public	LockWritings		as	'Stack_LockWritings'
-public	LockReadings		as	'_ZN6Vector12LockReadingsEb'
-public	LockReadings		as	'_ZN5Stack12LockReadingsEb'
-public	LockWritings		as	'_ZN6Vector12LockWritingsEb'
-public	LockWritings		as	'_ZN5Stack12LockWritingsEb'
+public	LockReadings			as	'Vector_LockReadings'
+public	LockReadings			as	'Stack_LockReadings'
+public	LockWritings			as	'Vector_LockWritings'
+public	LockWritings			as	'Stack_LockWritings'
+public	LockReadings			as	'_ZN6Vector12LockReadingsEb'
+public	LockReadings			as	'_ZN5Stack12LockReadingsEb'
+public	LockWritings			as	'_ZN6Vector12LockWritingsEb'
+public	LockWritings			as	'_ZN5Stack12LockWritingsEb'
 
 ; Release operations
-public	AllowReadings		as	'Vector_AllowReadings'
-public	AllowReadings		as	'Stack_AllowReadings'
-public	AllowWritings		as	'Vector_AllowWritings'
-public	AllowWritings		as	'Stack_AllowWritings'
-public	AllowReadings		as	'_ZN6Vector13AllowReadingsEv'
-public	AllowReadings		as	'_ZN5Stack13AllowReadingsEv'
-public	AllowWritings		as	'_ZN6Vector13AllowWritingsEv'
-public	AllowWritings		as	'_ZN5Stack13AllowWritingsEv'
+public	AllowReadings			as	'Vector_AllowReadings'
+public	AllowReadings			as	'Stack_AllowReadings'
+public	AllowWritings			as	'Vector_AllowWritings'
+public	AllowWritings			as	'Stack_AllowWritings'
+public	AllowReadings			as	'_ZN6Vector13AllowReadingsEv'
+public	AllowReadings			as	'_ZN5Stack13AllowReadingsEv'
+public	AllowWritings			as	'_ZN6Vector13AllowWritingsEv'
+public	AllowWritings			as	'_ZN5Stack13AllowWritingsEv'
 
 ;******************************************************************************;
 ;       Copying elements                                                       ;
 ;******************************************************************************;
-public	CopyVector			as	'Vector_Copy'
-public	CopyStack			as	'Stack_Copy'
-public	CopyVector			as	'_ZN6Vector4CopyEmPKS_mm'
-public	CopyStack			as	'_ZN5Stack4CopyEmPKS_mm'
+public	CopyVector				as	'Vector_Copy'
+public	CopyStack				as	'Stack_Copy'
+public	CopyVector				as	'_ZN6Vector4CopyEmPKS_mm'
+public	CopyStack				as	'_ZN5Stack4CopyEmPKS_mm'
 
 ;******************************************************************************;
 ;       Moving elements                                                        ;
 ;******************************************************************************;
-public	MoveVector			as	'Vector_Move'
-public	MoveStack			as	'Stack_Move'
-public	MoveVector			as	'_ZN6Vector4MoveEmPS_mm'
-public	MoveStack			as	'_ZN5Stack4MoveEmPS_mm'
+public	MoveVector				as	'Vector_Move'
+public	MoveStack				as	'Stack_Move'
+public	MoveVector				as	'_ZN6Vector4MoveEmPS_mm'
+public	MoveStack				as	'_ZN5Stack4MoveEmPS_mm'
 
 ;******************************************************************************;
 ;       Addition of element                                                    ;
 ;******************************************************************************;
-public	PushData			as	'Vector_Push'
-public	PushData			as	'Stack_Push'
-public	PushData			as	'_ZN6Vector4PushEPK6pair_t'
-public	PushData			as	'_ZN5Stack4PushEPK6pair_t'
+public	PushData				as	'Vector_Push'
+public	PushData				as	'Stack_Push'
+public	PushData				as	'_ZN6Vector4PushEPK6pair_t'
+public	PushData				as	'_ZN5Stack4PushEPK6pair_t'
 
 ;******************************************************************************;
 ;       Removal of element                                                     ;
 ;******************************************************************************;
-public	PopData				as	'Vector_Pop'
-public	PopData				as	'Stack_Pop'
-public	PopData				as	'_ZN6Vector3PopEv'
-public	PopData				as	'_ZN5Stack3PopEv'
+public	PopData					as	'Vector_Pop'
+public	PopData					as	'Stack_Pop'
+public	PopData					as	'_ZN6Vector3PopEv'
+public	PopData					as	'_ZN5Stack3PopEv'
 
 ;******************************************************************************;
 ;       Insertion of element                                                   ;
 ;******************************************************************************;
-public	InsertVector		as	'Vector_Insert'
-public	InsertStack			as	'Stack_Insert'
-public	InsertVector		as	'_ZN6Vector6InsertEPK6pair_tm'
-public	InsertStack			as	'_ZN5Stack6InsertEPK6pair_tm'
+public	InsertVector			as	'Vector_Insert'
+public	InsertStack				as	'Stack_Insert'
+public	InsertVector			as	'_ZN6Vector6InsertEPK6pair_tm'
+public	InsertStack				as	'_ZN5Stack6InsertEPK6pair_tm'
 
 ;******************************************************************************;
 ;       Extraction of element                                                  ;
 ;******************************************************************************;
-public	ExtractVector		as	'Vector_Extract'
-public	ExtractStack		as	'Stack_Extract'
-public	ExtractVector		as	'_ZN6Vector7ExtractEm'
-public	ExtractStack		as	'_ZN5Stack7ExtractEm'
+public	ExtractVector			as	'Vector_Extract'
+public	ExtractStack			as	'Stack_Extract'
+public	ExtractVector			as	'_ZN6Vector7ExtractEm'
+public	ExtractStack			as	'_ZN5Stack7ExtractEm'
 
 ;******************************************************************************;
 ;       Setting element value                                                  ;
 ;******************************************************************************;
-public	SetVector			as	'Vector_Set'
-public	SetStack			as	'Stack_Set'
-public	SetVector			as	'_ZN6Vector3SetEPK6pair_tm'
-public	SetStack			as	'_ZN5Stack3SetEPK6pair_tm'
+public	SetVector				as	'Vector_Set'
+public	SetStack				as	'Stack_Set'
+public	SetVector				as	'_ZN6Vector3SetEPK6pair_tm'
+public	SetStack				as	'_ZN5Stack3SetEPK6pair_tm'
 
 ;******************************************************************************;
 ;       Getting element value                                                  ;
 ;******************************************************************************;
-public	GetVector			as	'Vector_Get'
-public	GetStack			as	'Stack_Get'
-public	GetVector			as	'_ZNK6Vector3GetEP6pair_tm'
-public	GetStack			as	'_ZNK5Stack3GetEP6pair_tm'
+public	GetVector				as	'Vector_Get'
+public	GetStack				as	'Stack_Get'
+public	GetVector				as	'_ZNK6Vector3GetEP6pair_tm'
+public	GetStack				as	'_ZNK5Stack3GetEP6pair_tm'
 
 ;******************************************************************************;
 ;       Changing elements order                                                ;
 ;******************************************************************************;
 
 ; Reversing elements order
-public	ReverseVector		as	'Vector_Reverse'
-public	ReverseStack		as	'Stack_Reverse'
-public	ReverseVector		as	'_ZN6Vector7ReverseEmm'
-public	ReverseStack		as	'_ZN5Stack7ReverseEmm'
+public	ReverseVector			as	'Vector_Reverse'
+public	ReverseStack			as	'Stack_Reverse'
+public	ReverseVector			as	'_ZN6Vector7ReverseEmm'
+public	ReverseStack			as	'_ZN5Stack7ReverseEmm'
 
 ; Swapping elements
-public	SwapVector			as	'Vector_Swap'
-public	SwapStack			as	'Stack_Swap'
-public	SwapVector			as	'_ZN6Vector4SwapEmm'
-public	SwapStack			as	'_ZN5Stack4SwapEmm'
+public	SwapVector				as	'Vector_Swap'
+public	SwapStack				as	'Stack_Swap'
+public	SwapVector				as	'_ZN6Vector4SwapEmm'
+public	SwapStack				as	'_ZN5Stack4SwapEmm'
 
 ;******************************************************************************;
 ;       Minimum and maximum value                                              ;
 ;******************************************************************************;
 
 ; Minimum value
-public	MinFwdVector		as	'Vector_MinFwd'
-public	MinFwdStack			as	'Stack_MinFwd'
-public	MinBwdVector		as	'Vector_MinBwd'
-public	MinBwdStack			as	'Stack_MinBwd'
-public	MinFwdVector		as	'_ZNK6Vector6MinFwdEP6pair_tmmPFx5adt_tS2_E'
-public	MinFwdStack			as	'_ZNK5Stack6MinFwdEP6pair_tmmPFx5adt_tS2_E'
-public	MinBwdVector		as	'_ZNK6Vector6MinBwdEP6pair_tmmPFx5adt_tS2_E'
-public	MinBwdStack			as	'_ZNK5Stack6MinBwdEP6pair_tmmPFx5adt_tS2_E'
+public	MinFwdVector			as	'Vector_MinFwd'
+public	MinFwdStack				as	'Stack_MinFwd'
+public	MinBwdVector			as	'Vector_MinBwd'
+public	MinBwdStack				as	'Stack_MinBwd'
+public	MinFwdVector			as	'_ZNK6Vector6MinFwdEP6pair_tmmPFx5adt_tS2_E'
+public	MinFwdStack				as	'_ZNK5Stack6MinFwdEP6pair_tmmPFx5adt_tS2_E'
+public	MinBwdVector			as	'_ZNK6Vector6MinBwdEP6pair_tmmPFx5adt_tS2_E'
+public	MinBwdStack				as	'_ZNK5Stack6MinBwdEP6pair_tmmPFx5adt_tS2_E'
 
 ; Maximum value
-public	MaxFwdVector		as	'Vector_MaxFwd'
-public	MaxFwdStack			as	'Stack_MaxFwd'
-public	MaxBwdVector		as	'Vector_MaxBwd'
-public	MaxBwdStack			as	'Stack_MaxBwd'
-public	MaxFwdVector		as	'_ZNK6Vector6MaxFwdEP6pair_tmmPFx5adt_tS2_E'
-public	MaxFwdStack			as	'_ZNK5Stack6MaxFwdEP6pair_tmmPFx5adt_tS2_E'
-public	MaxBwdVector		as	'_ZNK6Vector6MaxBwdEP6pair_tmmPFx5adt_tS2_E'
-public	MaxBwdStack			as	'_ZNK5Stack6MaxBwdEP6pair_tmmPFx5adt_tS2_E'
+public	MaxFwdVector			as	'Vector_MaxFwd'
+public	MaxFwdStack				as	'Stack_MaxFwd'
+public	MaxBwdVector			as	'Vector_MaxBwd'
+public	MaxBwdStack				as	'Stack_MaxBwd'
+public	MaxFwdVector			as	'_ZNK6Vector6MaxFwdEP6pair_tmmPFx5adt_tS2_E'
+public	MaxFwdStack				as	'_ZNK5Stack6MaxFwdEP6pair_tmmPFx5adt_tS2_E'
+public	MaxBwdVector			as	'_ZNK6Vector6MaxBwdEP6pair_tmmPFx5adt_tS2_E'
+public	MaxBwdStack				as	'_ZNK5Stack6MaxBwdEP6pair_tmmPFx5adt_tS2_E'
 
 ;******************************************************************************;
 ;       Key searching                                                          ;
@@ -184,24 +340,24 @@ public	MaxBwdStack			as	'_ZNK5Stack6MaxBwdEP6pair_tmmPFx5adt_tS2_E'
 ;==============================================================================;
 
 ; Single key searching
-public	FindKeyFwdVector	as	'Vector_FindKeyFwd'
-public	FindKeyFwdStack		as	'Stack_FindKeyFwd'
-public	FindKeyBwdVector	as	'Vector_FindKeyBwd'
-public	FindKeyBwdStack		as	'Stack_FindKeyBwd'
-public	FindKeyFwdVector	as	'_ZNK6Vector10FindKeyFwdEP6pair_t5adt_tmmPFxS2_S2_E'
-public	FindKeyFwdStack		as	'_ZNK5Stack10FindKeyFwdEP6pair_t5adt_tmmPFxS2_S2_E'
-public	FindKeyBwdVector	as	'_ZNK6Vector10FindKeyBwdEP6pair_t5adt_tmmPFxS2_S2_E'
-public	FindKeyBwdStack		as	'_ZNK5Stack10FindKeyBwdEP6pair_t5adt_tmmPFxS2_S2_E'
+public	FindKeyFwdVector		as	'Vector_FindKeyFwd'
+public	FindKeyFwdStack			as	'Stack_FindKeyFwd'
+public	FindKeyBwdVector		as	'Vector_FindKeyBwd'
+public	FindKeyBwdStack			as	'Stack_FindKeyBwd'
+public	FindKeyFwdVector		as	'_ZNK6Vector10FindKeyFwdEP6pair_t5adt_tmmPFxS2_S2_E'
+public	FindKeyFwdStack			as	'_ZNK5Stack10FindKeyFwdEP6pair_t5adt_tmmPFxS2_S2_E'
+public	FindKeyBwdVector		as	'_ZNK6Vector10FindKeyBwdEP6pair_t5adt_tmmPFxS2_S2_E'
+public	FindKeyBwdStack			as	'_ZNK5Stack10FindKeyBwdEP6pair_t5adt_tmmPFxS2_S2_E'
 
 ; Keys set searching
-public	FindKeysFwdVector	as	'Vector_FindKeysFwd'
-public	FindKeysFwdStack	as	'Stack_FindKeysFwd'
-public	FindKeysBwdVector	as	'Vector_FindKeysBwd'
-public	FindKeysBwdStack	as	'Stack_FindKeysBwd'
-public	FindKeysFwdVector	as	'_ZNK6Vector11FindKeysFwdEP6pair_tPK5adt_tmmmPFxS2_S2_E'
-public	FindKeysFwdStack	as	'_ZNK5Stack11FindKeysFwdEP6pair_tPK5adt_tmmmPFxS2_S2_E'
-public	FindKeysBwdVector	as	'_ZNK6Vector11FindKeysBwdEP6pair_tPK5adt_tmmmPFxS2_S2_E'
-public	FindKeysBwdStack	as	'_ZNK5Stack11FindKeysBwdEP6pair_tPK5adt_tmmmPFxS2_S2_E'
+public	FindKeysFwdVector		as	'Vector_FindKeysFwd'
+public	FindKeysFwdStack		as	'Stack_FindKeysFwd'
+public	FindKeysBwdVector		as	'Vector_FindKeysBwd'
+public	FindKeysBwdStack		as	'Stack_FindKeysBwd'
+public	FindKeysFwdVector		as	'_ZNK6Vector11FindKeysFwdEP6pair_tPK5adt_tmmmPFxS2_S2_E'
+public	FindKeysFwdStack		as	'_ZNK5Stack11FindKeysFwdEP6pair_tPK5adt_tmmmPFxS2_S2_E'
+public	FindKeysBwdVector		as	'_ZNK6Vector11FindKeysBwdEP6pair_tPK5adt_tmmmPFxS2_S2_E'
+public	FindKeysBwdStack		as	'_ZNK5Stack11FindKeysBwdEP6pair_tPK5adt_tmmmPFxS2_S2_E'
 
 ;==============================================================================;
 ;       Binary search                                                          ;
@@ -212,92 +368,92 @@ public	FindKeysBwdStack	as	'_ZNK5Stack11FindKeysBwdEP6pair_tPK5adt_tmmmPFxS2_S2_
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 
 ; Searching for first equal element
-public	FindFirstEqualAsc	as	'Vector_FindFirstEqualAsc'
-public	FindFirstEqualAsc	as	'_ZNK6Vector17FindFirstEqualAscEP6pair_t5adt_tPFxS2_S2_E'
+public	FindFirstEqualAsc		as	'Vector_FindFirstEqualAsc'
+public	FindFirstEqualAsc		as	'_ZNK6Vector17FindFirstEqualAscEP6pair_t5adt_tPFxS2_S2_E'
 
 ; Searching for last equal element
-public	FindLastEqualAsc	as	'Vector_FindLastEqualAsc'
-public	FindLastEqualAsc	as	'_ZNK6Vector16FindLastEqualAscEP6pair_t5adt_tPFxS2_S2_E'
+public	FindLastEqualAsc		as	'Vector_FindLastEqualAsc'
+public	FindLastEqualAsc		as	'_ZNK6Vector16FindLastEqualAscEP6pair_t5adt_tPFxS2_S2_E'
 
 ; Searching for greater element
-public	FindGreatAsc		as	'Vector_FindGreatAsc'
-public	FindGreatAsc		as	'_ZNK6Vector12FindGreatAscEP6pair_t5adt_tPFxS2_S2_E'
+public	FindGreatAsc			as	'Vector_FindGreatAsc'
+public	FindGreatAsc			as	'_ZNK6Vector12FindGreatAscEP6pair_t5adt_tPFxS2_S2_E'
 
 ; Searching for greater or equal element
-public	FindGreatOrEqualAsc	as	'Vector_FindGreatOrEqualAsc'
-public	FindGreatOrEqualAsc	as	'_ZNK6Vector19FindGreatOrEqualAscEP6pair_t5adt_tPFxS2_S2_E'
+public	FindGreatOrEqualAsc		as	'Vector_FindGreatOrEqualAsc'
+public	FindGreatOrEqualAsc		as	'_ZNK6Vector19FindGreatOrEqualAscEP6pair_t5adt_tPFxS2_S2_E'
 
 ; Searching for less element
-public	FindLessAsc			as	'Vector_FindLessAsc'
-public	FindLessAsc			as	'_ZNK6Vector11FindLessAscEP6pair_t5adt_tPFxS2_S2_E'
+public	FindLessAsc				as	'Vector_FindLessAsc'
+public	FindLessAsc				as	'_ZNK6Vector11FindLessAscEP6pair_t5adt_tPFxS2_S2_E'
 
 ; Searching for less or equal element
-public	FindLessOrEqualAsc	as	'Vector_FindLessOrEqualAsc'
-public	FindLessOrEqualAsc	as	'_ZNK6Vector18FindLessOrEqualAscEP6pair_t5adt_tPFxS2_S2_E'
+public	FindLessOrEqualAsc		as	'Vector_FindLessOrEqualAsc'
+public	FindLessOrEqualAsc		as	'_ZNK6Vector18FindLessOrEqualAscEP6pair_t5adt_tPFxS2_S2_E'
 
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 ;       Descending sort order                                                  ;
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 
 ; Searching for first equal element
-public	FindFirstEqualDsc	as	'Vector_FindFirstEqualDsc'
-public	FindFirstEqualDsc	as	'_ZNK6Vector17FindFirstEqualDscEP6pair_t5adt_tPFxS2_S2_E'
+public	FindFirstEqualDsc		as	'Vector_FindFirstEqualDsc'
+public	FindFirstEqualDsc		as	'_ZNK6Vector17FindFirstEqualDscEP6pair_t5adt_tPFxS2_S2_E'
 
 ; Searching for last equal element
-public	FindLastEqualDsc	as	'Vector_FindLastEqualDsc'
-public	FindLastEqualDsc	as	'_ZNK6Vector16FindLastEqualDscEP6pair_t5adt_tPFxS2_S2_E'
+public	FindLastEqualDsc		as	'Vector_FindLastEqualDsc'
+public	FindLastEqualDsc		as	'_ZNK6Vector16FindLastEqualDscEP6pair_t5adt_tPFxS2_S2_E'
 
 ; Searching for less element
-public	FindLessDsc			as	'Vector_FindLessDsc'
-public	FindLessDsc			as	'_ZNK6Vector11FindLessDscEP6pair_t5adt_tPFxS2_S2_E'
+public	FindLessDsc				as	'Vector_FindLessDsc'
+public	FindLessDsc				as	'_ZNK6Vector11FindLessDscEP6pair_t5adt_tPFxS2_S2_E'
 
 ; Searching for less or equal element
-public	FindLessOrEqualDsc	as	'Vector_FindLessOrEqualDsc'
-public	FindLessOrEqualDsc	as	'_ZNK6Vector18FindLessOrEqualDscEP6pair_t5adt_tPFxS2_S2_E'
+public	FindLessOrEqualDsc		as	'Vector_FindLessOrEqualDsc'
+public	FindLessOrEqualDsc		as	'_ZNK6Vector18FindLessOrEqualDscEP6pair_t5adt_tPFxS2_S2_E'
 
 ; Searching for greater element
-public	FindGreatDsc		as	'Vector_FindGreatDsc'
-public	FindGreatDsc		as	'_ZNK6Vector12FindGreatDscEP6pair_t5adt_tPFxS2_S2_E'
+public	FindGreatDsc			as	'Vector_FindGreatDsc'
+public	FindGreatDsc			as	'_ZNK6Vector12FindGreatDscEP6pair_t5adt_tPFxS2_S2_E'
 
 ; Searching for greater or equal element
-public	FindGreatOrEqualDsc	as	'Vector_FindGreatOrEqualDsc'
-public	FindGreatOrEqualDsc	as	'_ZNK6Vector19FindGreatOrEqualDscEP6pair_t5adt_tPFxS2_S2_E'
+public	FindGreatOrEqualDsc		as	'Vector_FindGreatOrEqualDsc'
+public	FindGreatOrEqualDsc		as	'_ZNK6Vector19FindGreatOrEqualDscEP6pair_t5adt_tPFxS2_S2_E'
 
 ;******************************************************************************;
 ;       Duplicates searching                                                   ;
 ;******************************************************************************;
-public	FindDupFwd			as	'Vector_FindDupFwd'
-public	FindDupBwd			as	'Vector_FindDupBwd'
-public	FindDupFwd			as	'_ZNK6Vector10FindDupFwdEP6pair_tmmPFx5adt_tS2_E'
-public	FindDupBwd			as	'_ZNK6Vector10FindDupBwdEP6pair_tmmPFx5adt_tS2_E'
+public	FindDupFwd				as	'Vector_FindDupFwd'
+public	FindDupBwd				as	'Vector_FindDupBwd'
+public	FindDupFwd				as	'_ZNK6Vector10FindDupFwdEP6pair_tmmPFx5adt_tS2_E'
+public	FindDupBwd				as	'_ZNK6Vector10FindDupBwdEP6pair_tmmPFx5adt_tS2_E'
 
 ;******************************************************************************;
 ;       Unordered elements searching                                           ;
 ;******************************************************************************;
 
 ; Ascending sort order
-public	FindNonAscFwd		as	'Vector_FindNonAscFwd'
-public	FindNonAscBwd		as	'Vector_FindNonAscBwd'
-public	FindNonAscFwd		as	'_ZNK6Vector13FindNonAscFwdEP6pair_tmmPFx5adt_tS2_E'
-public	FindNonAscBwd		as	'_ZNK6Vector13FindNonAscBwdEP6pair_tmmPFx5adt_tS2_E'
+public	FindNonAscFwd			as	'Vector_FindNonAscFwd'
+public	FindNonAscBwd			as	'Vector_FindNonAscBwd'
+public	FindNonAscFwd			as	'_ZNK6Vector13FindNonAscFwdEP6pair_tmmPFx5adt_tS2_E'
+public	FindNonAscBwd			as	'_ZNK6Vector13FindNonAscBwdEP6pair_tmmPFx5adt_tS2_E'
 
 ; Descending sort order
-public	FindNonDscFwd		as	'Vector_FindNonDscFwd'
-public	FindNonDscBwd		as	'Vector_FindNonDscBwd'
-public	FindNonDscFwd		as	'_ZNK6Vector13FindNonDscFwdEP6pair_tmmPFx5adt_tS2_E'
-public	FindNonDscBwd		as	'_ZNK6Vector13FindNonDscBwdEP6pair_tmmPFx5adt_tS2_E'
+public	FindNonDscFwd			as	'Vector_FindNonDscFwd'
+public	FindNonDscBwd			as	'Vector_FindNonDscBwd'
+public	FindNonDscFwd			as	'_ZNK6Vector13FindNonDscFwdEP6pair_tmmPFx5adt_tS2_E'
+public	FindNonDscBwd			as	'_ZNK6Vector13FindNonDscBwdEP6pair_tmmPFx5adt_tS2_E'
 
 ;******************************************************************************;
 ;       Searching for differences                                              ;
 ;******************************************************************************;
-public	FindDiffFwdVector	as	'Vector_FindDiffFwd'
-public	FindDiffFwdStack	as	'Stack_FindDiffFwd'
-public	FindDiffBwdVector	as	'Vector_FindDiffBwd'
-public	FindDiffBwdStack	as	'Stack_FindDiffBwd'
-public	FindDiffFwdVector	as	'_ZNK6Vector11FindDiffFwdEP6pair_tmPKS_mmPFx5adt_tS4_E'
-public	FindDiffFwdStack	as	'_ZNK5Stack11FindDiffFwdEP6pair_tmPKS_mmPFx5adt_tS4_E'
-public	FindDiffBwdVector	as	'_ZNK6Vector11FindDiffBwdEP6pair_tmPKS_mmPFx5adt_tS4_E'
-public	FindDiffBwdStack	as	'_ZNK5Stack11FindDiffBwdEP6pair_tmPKS_mmPFx5adt_tS4_E'
+public	FindDiffFwdVector		as	'Vector_FindDiffFwd'
+public	FindDiffFwdStack		as	'Stack_FindDiffFwd'
+public	FindDiffBwdVector		as	'Vector_FindDiffBwd'
+public	FindDiffBwdStack		as	'Stack_FindDiffBwd'
+public	FindDiffFwdVector		as	'_ZNK6Vector11FindDiffFwdEP6pair_tmPKS_mmPFx5adt_tS4_E'
+public	FindDiffFwdStack		as	'_ZNK5Stack11FindDiffFwdEP6pair_tmPKS_mmPFx5adt_tS4_E'
+public	FindDiffBwdVector		as	'_ZNK6Vector11FindDiffBwdEP6pair_tmPKS_mmPFx5adt_tS4_E'
+public	FindDiffBwdStack		as	'_ZNK5Stack11FindDiffBwdEP6pair_tmPKS_mmPFx5adt_tS4_E'
 
 ;******************************************************************************;
 ;       Key counting                                                           ;
@@ -308,164 +464,164 @@ public	FindDiffBwdStack	as	'_ZNK5Stack11FindDiffBwdEP6pair_tmPKS_mmPFx5adt_tS4_E
 ;==============================================================================;
 
 ; Single key counting
-public	CountKeyFwdVector	as	'Vector_CountKeyFwd'
-public	CountKeyFwdStack	as	'Stack_CountKeyFwd'
-public	CountKeysFwdVector	as	'Vector_CountKeysFwd'
-public	CountKeysFwdStack	as	'Stack_CountKeysFwd'
-public	CountKeyFwdVector	as	'_ZNK6Vector11CountKeyFwdE5adt_tmmPFxS0_S0_E'
-public	CountKeyFwdStack	as	'_ZNK5Stack11CountKeyFwdE5adt_tmmPFxS0_S0_E'
-public	CountKeysFwdVector	as	'_ZNK6Vector12CountKeysFwdEPK5adt_tmmmPFxS0_S0_E'
-public	CountKeysFwdStack	as	'_ZNK5Stack12CountKeysFwdEPK5adt_tmmmPFxS0_S0_E'
+public	CountKeyFwdVector		as	'Vector_CountKeyFwd'
+public	CountKeyFwdStack		as	'Stack_CountKeyFwd'
+public	CountKeysFwdVector		as	'Vector_CountKeysFwd'
+public	CountKeysFwdStack		as	'Stack_CountKeysFwd'
+public	CountKeyFwdVector		as	'_ZNK6Vector11CountKeyFwdE5adt_tmmPFxS0_S0_E'
+public	CountKeyFwdStack		as	'_ZNK5Stack11CountKeyFwdE5adt_tmmPFxS0_S0_E'
+public	CountKeysFwdVector		as	'_ZNK6Vector12CountKeysFwdEPK5adt_tmmmPFxS0_S0_E'
+public	CountKeysFwdStack		as	'_ZNK5Stack12CountKeysFwdEPK5adt_tmmmPFxS0_S0_E'
 
 ; Keys set counting
-public	CountKeyBwdVector	as	'Vector_CountKeyBwd'
-public	CountKeyBwdStack	as	'Stack_CountKeyBwd'
-public	CountKeysBwdVector	as	'Vector_CountKeysBwd'
-public	CountKeysBwdStack	as	'Stack_CountKeysBwd'
-public	CountKeyBwdVector	as	'_ZNK6Vector11CountKeyBwdE5adt_tmmPFxS0_S0_E'
-public	CountKeyBwdStack	as	'_ZNK5Stack11CountKeyBwdE5adt_tmmPFxS0_S0_E'
-public	CountKeysBwdVector	as	'_ZNK6Vector12CountKeysBwdEPK5adt_tmmmPFxS0_S0_E'
-public	CountKeysBwdStack	as	'_ZNK5Stack12CountKeysBwdEPK5adt_tmmmPFxS0_S0_E'
+public	CountKeyBwdVector		as	'Vector_CountKeyBwd'
+public	CountKeyBwdStack		as	'Stack_CountKeyBwd'
+public	CountKeysBwdVector		as	'Vector_CountKeysBwd'
+public	CountKeysBwdStack		as	'Stack_CountKeysBwd'
+public	CountKeyBwdVector		as	'_ZNK6Vector11CountKeyBwdE5adt_tmmPFxS0_S0_E'
+public	CountKeyBwdStack		as	'_ZNK5Stack11CountKeyBwdE5adt_tmmPFxS0_S0_E'
+public	CountKeysBwdVector		as	'_ZNK6Vector12CountKeysBwdEPK5adt_tmmmPFxS0_S0_E'
+public	CountKeysBwdStack		as	'_ZNK5Stack12CountKeysBwdEPK5adt_tmmmPFxS0_S0_E'
 
 ;==============================================================================;
 ;       Binary counting                                                        ;
 ;==============================================================================;
 
 ; Ascending sort order
-public	CountAsc			as	'Vector_CountAsc'
-public	CountAsc			as	'_ZNK6Vector8CountAscE5adt_tPFxS0_S0_E'
+public	CountAsc				as	'Vector_CountAsc'
+public	CountAsc				as	'_ZNK6Vector8CountAscE5adt_tPFxS0_S0_E'
 
 ; Descending sort order
-public	CountDsc			as	'Vector_CountDsc'
-public	CountDsc			as	'_ZNK6Vector8CountDscE5adt_tPFxS0_S0_E'
+public	CountDsc				as	'Vector_CountDsc'
+public	CountDsc				as	'_ZNK6Vector8CountDscE5adt_tPFxS0_S0_E'
 
 ;******************************************************************************;
 ;       Insertion sort                                                         ;
 ;******************************************************************************;
 
 ; Ascending sort order
-public	InsertSortAsc		as	'Vector_InsertSortAsc'
-public	InsertSortAsc		as	'_ZN6Vector13InsertSortAscEPFx5adt_tS0_E'
+public	InsertSortAsc			as	'Vector_InsertSortAsc'
+public	InsertSortAsc			as	'_ZN6Vector13InsertSortAscEPFx5adt_tS0_E'
 
 ; Descending sort order
-public	InsertSortDsc		as	'Vector_InsertSortDsc'
-public	InsertSortDsc		as	'_ZN6Vector13InsertSortDscEPFx5adt_tS0_E'
+public	InsertSortDsc			as	'Vector_InsertSortDsc'
+public	InsertSortDsc			as	'_ZN6Vector13InsertSortDscEPFx5adt_tS0_E'
 
 ;******************************************************************************;
 ;       Quick sort                                                             ;
 ;******************************************************************************;
 
 ; Ascending sort order
-public	QuickSortAsc		as	'Vector_QuickSortAsc'
-public	QuickSortAsc		as	'_ZN6Vector12QuickSortAscEPFx5adt_tS0_E'
+public	QuickSortAsc			as	'Vector_QuickSortAsc'
+public	QuickSortAsc			as	'_ZN6Vector12QuickSortAscEPFx5adt_tS0_E'
 
 ; Descending sort order
-public	QuickSortDsc		as	'Vector_QuickSortDsc'
-public	QuickSortDsc		as	'_ZN6Vector12QuickSortDscEPFx5adt_tS0_E'
+public	QuickSortDsc			as	'Vector_QuickSortDsc'
+public	QuickSortDsc			as	'_ZN6Vector12QuickSortDscEPFx5adt_tS0_E'
 
 ;******************************************************************************;
 ;       Merge sort                                                             ;
 ;******************************************************************************;
 
 ; Ascending sort order
-public	MergeSortAsc		as	'Vector_MergeSortAsc'
-public	MergeSortAsc		as	'_ZN6Vector12MergeSortAscEPFx5adt_tS0_E'
+public	MergeSortAsc			as	'Vector_MergeSortAsc'
+public	MergeSortAsc			as	'_ZN6Vector12MergeSortAscEPFx5adt_tS0_E'
 
 ; Descending sort order
-public	MergeSortDsc		as	'Vector_MergeSortDsc'
-public	MergeSortDsc		as	'_ZN6Vector12MergeSortDscEPFx5adt_tS0_E'
+public	MergeSortDsc			as	'Vector_MergeSortDsc'
+public	MergeSortDsc			as	'_ZN6Vector12MergeSortDscEPFx5adt_tS0_E'
 
 ;******************************************************************************;
 ;       Merging of sorted vectors                                              ;
 ;******************************************************************************;
 
 ; Ascending sort order
-public	MergeAsc			as	'Vector_MergeAsc'
-public	MergeAsc			as	'_ZN6Vector8MergeAscEPS_PFx5adt_tS1_E'
+public	MergeAsc				as	'Vector_MergeAsc'
+public	MergeAsc				as	'_ZN6Vector8MergeAscEPS_PFx5adt_tS1_E'
 
 ; Descending sort order
-public	MergeDsc			as	'Vector_MergeDsc'
-public	MergeDsc			as	'_ZN6Vector8MergeDscEPS_PFx5adt_tS1_E'
+public	MergeDsc				as	'Vector_MergeDsc'
+public	MergeDsc				as	'_ZN6Vector8MergeDscEPS_PFx5adt_tS1_E'
 
 ;******************************************************************************;
 ;       Unique values                                                          ;
 ;******************************************************************************;
-public	Unique				as	'Vector_Unique'
-public	Unique				as	'_ZN6Vector6UniqueEPKS_PFx5adt_tS2_E'
+public	Unique					as	'Vector_Unique'
+public	Unique					as	'_ZN6Vector6UniqueEPKS_PFx5adt_tS2_E'
 
 ;******************************************************************************;
 ;       Comparison of vectors                                                  ;
 ;******************************************************************************;
-public	CompareVector		as	'Vector_Compare'
-public	CompareStack		as	'Stack_Compare'
-public	CompareVector		as	'_ZNK6Vector7CompareEPKS_PFx5adt_tS2_E'
-public	CompareStack		as	'_ZNK5Stack7CompareEPKS_PFx5adt_tS2_E'
+public	CompareVector			as	'Vector_Compare'
+public	CompareStack			as	'Stack_Compare'
+public	CompareVector			as	'_ZNK6Vector7CompareEPKS_PFx5adt_tS2_E'
+public	CompareStack			as	'_ZNK5Stack7CompareEPKS_PFx5adt_tS2_E'
 
 ;******************************************************************************;
 ;       Checks                                                                 ;
 ;******************************************************************************;
 
 ; Check for sort order
-public	CheckSortAsc		as	'Vector_CheckSortAsc'
-public	CheckSortDsc		as	'Vector_CheckSortDsc'
-public	CheckSortAsc		as	'_ZNK6Vector12CheckSortAscEPFx5adt_tS0_E'
-public	CheckSortDsc		as	'_ZNK6Vector12CheckSortDscEPFx5adt_tS0_E'
+public	CheckSortAsc			as	'Vector_CheckSortAsc'
+public	CheckSortDsc			as	'Vector_CheckSortDsc'
+public	CheckSortAsc			as	'_ZNK6Vector12CheckSortAscEPFx5adt_tS0_E'
+public	CheckSortDsc			as	'_ZNK6Vector12CheckSortDscEPFx5adt_tS0_E'
 
 ; Check for duplicate values
-public	CheckDup			as	'Vector_CheckDup'
-public	CheckDup			as	'_ZNK6Vector8CheckDupEPFx5adt_tS0_E'
+public	CheckDup				as	'Vector_CheckDup'
+public	CheckDup				as	'_ZNK6Vector8CheckDupEPFx5adt_tS0_E'
 
 ; Check for equality
-public	IsEqualVector		as	'Vector_IsEqual'
-public	IsEqualStack		as	'Stack_IsEqual'
-public	IsEqualVector		as	'_ZNK6Vector7IsEqualEPKS_PFx5adt_tS2_E'
-public	IsEqualStack		as	'_ZNK5Stack7IsEqualEPKS_PFx5adt_tS2_E'
+public	IsEqualVector			as	'Vector_IsEqual'
+public	IsEqualStack			as	'Stack_IsEqual'
+public	IsEqualVector			as	'_ZNK6Vector7IsEqualEPKS_PFx5adt_tS2_E'
+public	IsEqualStack			as	'_ZNK5Stack7IsEqualEPKS_PFx5adt_tS2_E'
 
 ;******************************************************************************;
 ;       Vector properties                                                      ;
 ;******************************************************************************;
 
 ; Vector pair copy function
-public	GetCopyFunction		as	'Vector_CopyFunction'
-public	GetCopyFunction		as	'Stack_CopyFunction'
-public	GetCopyFunction		as	'_ZNK6Vector12CopyFunctionEv'
-public	GetCopyFunction		as	'_ZNK5Stack12CopyFunctionEv'
+public	GetCopyFunction			as	'Vector_CopyFunction'
+public	GetCopyFunction			as	'Stack_CopyFunction'
+public	GetCopyFunction			as	'_ZNK6Vector12CopyFunctionEv'
+public	GetCopyFunction			as	'_ZNK5Stack12CopyFunctionEv'
 
 ; Vector pair delete function
-public	GetDeleteFunction	as	'Vector_DeleteFunction'
-public	GetDeleteFunction	as	'Stack_DeleteFunction'
-public	GetDeleteFunction	as	'_ZNK6Vector14DeleteFunctionEv'
-public	GetDeleteFunction	as	'_ZNK5Stack14DeleteFunctionEv'
+public	GetDeleteFunction		as	'Vector_DeleteFunction'
+public	GetDeleteFunction		as	'Stack_DeleteFunction'
+public	GetDeleteFunction		as	'_ZNK6Vector14DeleteFunctionEv'
+public	GetDeleteFunction		as	'_ZNK5Stack14DeleteFunctionEv'
 
 ; Vector user's data
-public	GetUserData			as	'Vector_UserData'
-public	GetUserData			as	'Stack_UserData'
-public	GetUserData			as	'_ZNK6Vector8UserDataEv'
-public	GetUserData			as	'_ZNK5Stack8UserDataEv'
+public	GetUserData				as	'Vector_UserData'
+public	GetUserData				as	'Stack_UserData'
+public	GetUserData				as	'_ZNK6Vector8UserDataEv'
+public	GetUserData				as	'_ZNK5Stack8UserDataEv'
 
 ; Vector capacity
-public	GetCapacity			as	'Vector_Capacity'
-public	GetCapacity			as	'Stack_Capacity'
-public	GetCapacity			as	'_ZNK6Vector8CapacityEv'
-public	GetCapacity			as	'_ZNK5Stack8CapacityEv'
+public	GetCapacity				as	'Vector_Capacity'
+public	GetCapacity				as	'Stack_Capacity'
+public	GetCapacity				as	'_ZNK6Vector8CapacityEv'
+public	GetCapacity				as	'_ZNK5Stack8CapacityEv'
 
 ; Vector size
-public	GetSize				as	'Vector_Size'
-public	GetSize				as	'Stack_Size'
-public	GetSize				as	'_ZNK6Vector4SizeEv'
-public	GetSize				as	'_ZNK5Stack4SizeEv'
+public	GetSize					as	'Vector_Size'
+public	GetSize					as	'Stack_Size'
+public	GetSize					as	'_ZNK6Vector4SizeEv'
+public	GetSize					as	'_ZNK5Stack4SizeEv'
 
 ; Check if vector is empty
-public	IsEmpty				as	'Vector_IsEmpty'
-public	IsEmpty				as	'Stack_IsEmpty'
-public	IsEmpty				as	'_ZNK6Vector7IsEmptyEv'
-public	IsEmpty				as	'_ZNK5Stack7IsEmptyEv'
+public	IsEmpty					as	'Vector_IsEmpty'
+public	IsEmpty					as	'Stack_IsEmpty'
+public	IsEmpty					as	'_ZNK6Vector7IsEmptyEv'
+public	IsEmpty					as	'_ZNK5Stack7IsEmptyEv'
 
 ; Check if vector is initialized
-public	IsInit				as	'Vector_IsInit'
-public	IsInit				as	'Stack_IsInit'
-public	IsInit				as	'_ZNK6Vector6IsInitEv'
-public	IsInit				as	'_ZNK5Stack6IsInitEv'
+public	IsInit					as	'Vector_IsInit'
+public	IsInit					as	'Stack_IsInit'
+public	IsInit					as	'_ZNK6Vector6IsInitEv'
+public	IsInit					as	'_ZNK5Stack6IsInitEv'
 
 ;###############################################################################
 ;#      Code section                                                           #
@@ -2408,12 +2564,103 @@ CountDsc:	COUNTBIN	FindFirstEqualDsc, FindLastEqualDsc
 ;******************************************************************************;
 ;       Insertion sort                                                         ;
 ;******************************************************************************;
-macro	INSERTSORT_CORE	op
+
+;==============================================================================;
+;       Mapping function                                                       ;
+;==============================================================================;
+macro	MAP		value, mask, x
 {
 ;---[Parameters]---------------------------
-array	equ		rdi							; pointer to array of nodes
-size	equ		rsi							; object size
-func	equ		rdx							; key compare function
+array	equ		rdi							; pointer to array
+size	equ		rsi							; array size (count of elements)
+;---[Internal variables]-------------------
+if x eq s
+dmask	= DMASK_FLT32						; data mask
+else if x eq d
+dmask	= DMASK_FLT64						; data mask
+end if
+;---[Mapping loop]-------------------------
+.loop:	mov		value, [array]				; value = array[0]
+		mov		mask, dmask					; mask = value ^ dmask
+		xor		mask, value					; if (value < 0)
+		cmovs	value, mask					;     value = mask
+		mov		[array], value				; array[0] = value
+		add		array, KSIZE				; array++
+		sub		size, KSIZE					; size--
+		jnz		.loop						; do while (size != 0)
+;---[End of Mapping loop]------------------
+		ret
+}
+Map_flt32:	MAP	eax, edx, s
+Map_flt64:	MAP	rax, rdx, d
+
+;==============================================================================;
+;       Insertion sort for numerical keys                                      ;
+;==============================================================================;
+macro	INSERTSORT_NUM	key1, key2, op
+{
+;---[Parameters]---------------------------
+array	equ		rdi							; pointer to array
+size	equ		rsi							; array size (count of elements)
+;---[Internal variables]-------------------
+left	equ		r8							; left index
+right	equ		r9							; right index
+data1	equ		r10							; temporary data #1
+data2	equ		r11							; temporary data #2
+;------------------------------------------
+		mov		left, KSIZE					; left = 1
+;---[Sorting loop]-------------------------
+.loop:	mov		right, left					; right = left
+		mov		key1, [array + right]		; key1 = array[right].key
+		mov		data1, [array + right + 8]	; data1 = array[right].data
+;---[Internal loop]------------------------
+.iloop:	mov		key2, [array + right - KSIZE]
+		mov		data2, [array + right - KSIZE + 8]
+		cmp		key1, key2					; if (key1 op array[right-1])
+		jn#op	.break						; {
+		mov		[array + right], key2		;     array[right].key = key2
+		mov		[array + right + 8], data2	;     array[right].data = data2
+		sub		right, KSIZE				;     right-- }
+		jnz		.iloop						; do while (right != 0)
+;---[End of internal loop]-----------------
+.break:	mov		[array + right], key1		; array[right].key = key1
+		mov		[array + right + 8], data1	; array[right].data = data1
+		add		left, KSIZE					; left++
+		cmp		left, size
+		jb		.loop						; do while (left < size)
+;---[End of sorting loop]------------------
+		ret
+}
+
+; Ascending sort order
+KeyInsertSortCoreAsc_uint8:		INSERTSORT_NUM	al, cl, b
+KeyInsertSortCoreAsc_uint16:	INSERTSORT_NUM	ax, cx, b
+KeyInsertSortCoreAsc_uint32:	INSERTSORT_NUM	eax, ecx, b
+KeyInsertSortCoreAsc_uint64:	INSERTSORT_NUM	rax, rcx, b
+KeyInsertSortCoreAsc_sint8:		INSERTSORT_NUM	al, cl, l
+KeyInsertSortCoreAsc_sint16:	INSERTSORT_NUM	ax, cx, l
+KeyInsertSortCoreAsc_sint32:	INSERTSORT_NUM	eax, ecx, l
+KeyInsertSortCoreAsc_sint64:	INSERTSORT_NUM	rax, rcx, l
+
+; Descending sort order
+KeyInsertSortCoreDsc_uint8:		INSERTSORT_NUM	al, cl, a
+KeyInsertSortCoreDsc_uint16:	INSERTSORT_NUM	ax, cx, a
+KeyInsertSortCoreDsc_uint32:	INSERTSORT_NUM	eax, ecx, a
+KeyInsertSortCoreDsc_uint64:	INSERTSORT_NUM	rax, rcx, a
+KeyInsertSortCoreDsc_sint8:		INSERTSORT_NUM	al, cl, g
+KeyInsertSortCoreDsc_sint16:	INSERTSORT_NUM	ax, cx, g
+KeyInsertSortCoreDsc_sint32:	INSERTSORT_NUM	eax, ecx, g
+KeyInsertSortCoreDsc_sint64:	INSERTSORT_NUM	rax, rcx, g
+
+;==============================================================================;
+;       Insertion sort for custom keys                                         ;
+;==============================================================================;
+macro	INSERTSORT_CORE	op, pair
+{
+;---[Parameters]---------------------------
+array	equ		rdi							; pointer to array
+size	equ		rsi							; array size (count of elements)
+func	equ		rdx							; pointer to compare function
 ;---[Internal variables]-------------------
 left	equ		r8							; left index
 right	equ		r9							; right index
@@ -2434,6 +2681,7 @@ s_right	equ		stack + 8 * 8				; stack position of "right" variable
 space	= 9 * 8								; stack size required by the procedure
 ;------------------------------------------
 		sub		stack, space				; reserving stack size for local vars
+		mov		left, KSIZE					; left = 1
 		mov		[s_key1], key1				; save old value of "key1" variable
 		mov		[s_key2], key2				; save old value of "key2" variable
 		mov		[s_data1], data1			; save old value of "data1" variable
@@ -2441,7 +2689,6 @@ space	= 9 * 8								; stack size required by the procedure
 		mov		[s_array], array			; save "array" variable into the stack
 		mov		[s_size], size				; save "size" variable into the stack
 		mov		[s_func], func				; save "func" variable into the stack
-		mov		left, KSIZE					; left = 1
 		mov		[s_left], left				; save "left" variable into the stack
 ;---[Sorting loop]-------------------------
 .loop:	mov		right, left					; right = left
@@ -2451,9 +2698,16 @@ space	= 9 * 8								; stack size required by the procedure
 ;---[Internal loop]------------------------
 .iloop:	mov		key2, [array + right - KSIZE]
 		mov		data2, [array + right - KSIZE + 8]
+if pair
+		mov		param4, data2
+		mov		param3, key2
+		mov		param2, data1
+		mov		param1, key1
+else
 		mov		param2, key2
 		mov		param1, key1
-		call	qword [s_func]				; result = Compare (key1, key2)
+end if
+		call	qword [s_func]				; result = Compare (pair1, pair2)
 		mov		array, [s_array]			; get "array" variable from the stack
 		mov		left, [s_left]				; get "left" variable from the stack
 		mov		right, [s_right]			; get "right" variable from the stack
@@ -2479,9 +2733,14 @@ space	= 9 * 8								; stack size required by the procedure
 		add		stack, space				; restoring back the stack pointer
 		ret
 }
-InsertSortCoreAsc:	INSERTSORT_CORE	l
-InsertSortCoreDsc:	INSERTSORT_CORE	g
-;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+KeyInsertSortCoreAsc:	INSERTSORT_CORE	l, 0
+KeyInsertSortCoreDsc:	INSERTSORT_CORE	g, 0
+PairInsertSortCoreAsc:	INSERTSORT_CORE	l, 1
+PairInsertSortCoreDsc:	INSERTSORT_CORE	g, 1
+
+;==============================================================================;
+;       Insertion sort                                                         ;
+;==============================================================================;
 macro	SORT	SortCore
 {
 ;---[Parameters]---------------------------
@@ -2518,21 +2777,138 @@ space	= 1 * 8								; stack size required by the procedure
 		add		stack, space				; restoring back the stack pointer
 		ret
 }
-InsertSortAsc:	SORT	InsertSortCoreAsc
-InsertSortDsc:	SORT	InsertSortCoreDsc
+InsertSortAsc:	SORT	KeyInsertSortCoreAsc
+InsertSortDsc:	SORT	KeyInsertSortCoreDsc
 
 ;******************************************************************************;
 ;       Quick sort                                                             ;
 ;******************************************************************************;
-macro	QUICKSORT_CORE	InsertSort, op1, op2
+
+;==============================================================================;
+;       Quick sort for numerical keys                                          ;
+;==============================================================================;
+macro	QUICKSORT_NUM	InsertSort, median, key1, key2, op1, op2
 {
 ;---[Parameters]---------------------------
-array	equ		rdi							; pointer to array of nodes
-size	equ		rsi							; object size
-func	equ		rdx							; key compare function
+array	equ		rdi							; pointer to array
+size	equ		rsi							; array size (count of elements)
+;---[Internal variables]-------------------
+half	equ		rax							; half of array size
+left	equ		r8							; left index
+right	equ		r9							; right index
+data1	equ		r10							; temporary data #1
+data2	equ		r11							; temporary data #2
+lsize	equ		left						; size of left part of array
+rsize	equ		size						; size of right part of array
+larray	equ		array						; pointer to left part of array
+rarray	equ		right						; pointer to right part of array
+stack	equ		rsp							; stack pointer
+s_array	equ		stack + 0 * 8				; stack position of "array" variable
+s_size	equ		stack + 1 * 8				; stack position of "size" variable
+space	= 3 * 8								; stack size required by the procedure
+minsize	= 16 * KSIZE						; min array size is aceptable for Quick sort
+;------------------------------------------
+.start:	cmp		size, minsize				; if (size <= minsize)
+		jbe		InsertSort					;     call InsertSort (array, size)
+;---[Sorting loop]-------------------------
+.loop:	mov		half, size
+		shr		half, 1
+		and		half, -KSIZE				; half = size / 2
+		mov		left, -KSIZE				; left = -1
+		mov		right, size					; right = size
+		mov		median, [array + half]		; median = array[half].key
+		jmp		.loop1
+;---[Swap loop]----------------------------
+.swap:	mov		[array + left], key2		; array[left].key = key2
+		mov		[array + right], key1		; array[right].key = key1
+		mov		[array + left + 8], data2	; array[left].data = data2
+		mov		[array + right + 8], data1	; array[right].data = data1
+;---[Internal loop 1]----------------------
+.loop1:	add		left, KSIZE					; left++
+		mov		key1, [array + left]		; key1 = array[left].key
+		mov		data1, [array + left + 8]	; data1 = array[left].data
+		cmp		key1, median
+		j#op1	.loop1						; do while (key1 op1 median)
+;---[Internal loop 2]----------------------
+.loop2:	sub		right, KSIZE				; right--
+		mov		key2, [array + right]		; key2 = array[right].key
+		mov		data2, [array + right + 8]	; data2 = array[right].data
+		cmp		key2, median
+		j#op2	.loop2						; do while (key2 op2 median)
+;------------------------------------------
+		cmp		left, right
+		jb		.swap						; do while (left < right)
+;---[End of swap loop]---------------------
+		add		right, KSIZE
+		sub		rsize, right				; rsize = size - (right + 1)
+		lea		rarray, [array + right]		; rarray = array + (right + 1)
+		cmp		lsize, rsize				; if (lsize <= rsize)
+		ja		.else						; {
+;---[if lsize <= rsize]--------------------
+		cmp		lsize, KSIZE				; if (lsize > 1)
+		jbe		@f							; {
+		sub		stack, space				; reserving stack size for local vars
+		mov		[s_array], rarray			; save "rarray" variable into the stack
+		mov		[s_size], rsize				; save "rsize" variable into the stack
+		mov		size, lsize
+		call	.start						; call QuickSort (larray, lsize)
+		mov		rarray, [s_array]			; get "rarray" variable from the stack
+		mov		rsize, [s_size]				; get "rsize" variable from the stack
+		add		stack, space				; restoring back the stack pointer
+@@:		mov		array, rarray				; }
+		jmp		.end
+;---[else]---------------------------------
+.else:	cmp		rsize, KSIZE				; if (rsize > 1)
+		jbe		@f							; {
+		sub		stack, space				; reserving stack size for local vars
+		mov		[s_array], larray			; save "larray" variable into the stack
+		mov		[s_size], lsize				; save "lsize" variable into the stack
+		mov		array, rarray
+		call	.start						; call QuickSort (rarray, rsize)
+		mov		larray, [s_array]			; get "larray" variable from the stack
+		mov		lsize, [s_size]				; get "lsize" variable from the stack
+		add		stack, space				; restoring back the stack pointer
+@@:		mov		size, lsize					; }
+;---[end if]-------------------------------
+.end:	cmp		size, minsize
+		ja		.loop						; do while (size > minsize)
+;---[Insert sort]--------------------------
+		jmp		InsertSort					; return InsertSort (array, size)
+}
+
+; Ascending sort order
+KeyQuickSortCoreAsc_uint8:	QUICKSORT_NUM	KeyInsertSortCoreAsc_uint8, al, dl, cl, b, a
+KeyQuickSortCoreAsc_uint16:	QUICKSORT_NUM	KeyInsertSortCoreAsc_uint16, ax, dx, cx, b, a
+KeyQuickSortCoreAsc_uint32:	QUICKSORT_NUM	KeyInsertSortCoreAsc_uint32, eax, edx, ecx, b, a
+KeyQuickSortCoreAsc_uint64:	QUICKSORT_NUM	KeyInsertSortCoreAsc_uint64, rax, rdx, rcx, b, a
+KeyQuickSortCoreAsc_sint8:	QUICKSORT_NUM	KeyInsertSortCoreAsc_sint8, al, dl, cl, l, g
+KeyQuickSortCoreAsc_sint16:	QUICKSORT_NUM	KeyInsertSortCoreAsc_sint16, ax, dx, cx, l, g
+KeyQuickSortCoreAsc_sint32:	QUICKSORT_NUM	KeyInsertSortCoreAsc_sint32, eax, edx, ecx, l, g
+KeyQuickSortCoreAsc_sint64:	QUICKSORT_NUM	KeyInsertSortCoreAsc_sint64, rax, rdx, rcx, l, g
+
+; Descending sort order
+KeyQuickSortCoreDsc_uint8:	QUICKSORT_NUM	KeyInsertSortCoreDsc_uint8, al, dl, cl, a, b
+KeyQuickSortCoreDsc_uint16:	QUICKSORT_NUM	KeyInsertSortCoreDsc_uint16, ax, dx, cx, a, b
+KeyQuickSortCoreDsc_uint32:	QUICKSORT_NUM	KeyInsertSortCoreDsc_uint32, eax, edx, ecx, a, b
+KeyQuickSortCoreDsc_uint64:	QUICKSORT_NUM	KeyInsertSortCoreDsc_uint64, rax, rdx, rcx, a, b
+KeyQuickSortCoreDsc_sint8:	QUICKSORT_NUM	KeyInsertSortCoreDsc_sint8, al, dl, cl, g, l
+KeyQuickSortCoreDsc_sint16:	QUICKSORT_NUM	KeyInsertSortCoreDsc_sint16, ax, dx, cx, g, l
+KeyQuickSortCoreDsc_sint32:	QUICKSORT_NUM	KeyInsertSortCoreDsc_sint32, eax, edx, ecx, g, l
+KeyQuickSortCoreDsc_sint64:	QUICKSORT_NUM	KeyInsertSortCoreDsc_sint64, rax, rdx, rcx, g, l
+
+;==============================================================================;
+;       Quick sort for custom keys                                             ;
+;==============================================================================;
+macro	QUICKSORT_CORE	InsertSort, op1, op2, pair
+{
+;---[Parameters]---------------------------
+array	equ		rdi							; pointer to array
+size	equ		rsi							; array size (count of elements)
+func	equ		rdx							; pointer to compare function
 ;---[Internal variables]-------------------
 result	equ		rax							; result register
-median	equ		rax							; median value
+mkey	equ		rax							; mkey value
+mdata	equ		rcx							; mdata value
 half	equ		rax							; half of array size
 left	equ		r8							; left index
 right	equ		r9							; right index
@@ -2552,9 +2928,10 @@ s_data2	equ		stack + 3 * 8				; stack position of "data2" variable
 s_array	equ		stack + 4 * 8				; stack position of "array" variable
 s_size	equ		stack + 5 * 8				; stack position of "size" variable
 s_func	equ		stack + 6 * 8				; stack position of "func" variable
-s_med	equ		stack + 7 * 8				; stack position of "median" variable
-s_left	equ		stack + 8 * 8				; stack position of "left" variable
-s_right	equ		stack + 9 * 8				; stack position of "right" variable
+s_mkey	equ		stack + 7 * 8				; stack position of "mkey" variable
+s_mdata	equ		stack + 8 * 8				; stack position of "mdata" variable
+s_left	equ		stack + 9 * 8				; stack position of "left" variable
+s_right	equ		stack + 10 * 8				; stack position of "right" variable
 space	= 11 * 8							; stack size required by the procedure
 minsize	= 16 * KSIZE						; min array size is aceptable for Quick sort
 ;------------------------------------------
@@ -2572,29 +2949,36 @@ minsize	= 16 * KSIZE						; min array size is aceptable for Quick sort
 		and		half, -KSIZE				; half = size / 2
 		mov		left, -KSIZE				; left = -1
 		mov		right, size					; right = size
-		mov		median, [array + half]		; median = array[half]
+		mov		mdata, [array + half + 8]	; mdata = array[half].data
+		mov		mkey, [array + half]		; mkey = array[half].key
 		mov		[s_array], array			; save "array" variable into the stack
 		mov		[s_size], size				; save "size" variable into the stack
 		mov		[s_func], func				; save "func" variable into the stack
-		mov		[s_med], median				; save "median" variable into the stack
+		mov		[s_mkey], mkey				; save "mkey" variable into the stack
+		mov		[s_mdata], mdata			; save "mdata" variable into the stack
 		mov		[s_left], left				; save "left" variable into the stack
 		mov		[s_right], right			; save "right" variable into the stack
 		jmp		.loop1
 ;---[Swap loop]----------------------------
-.swap:	xchg	key1, key2					; exchange key1 and key2
-		mov		[array + left], key1		; array[left].key = key1
-		mov		[array + right], key2		; array[right].key = key2
-		xchg	data1, data2				; exchange data1 and data2
-		mov		[array + left + 8], data1	; array[left].data = data1
-		mov		[array + right + 8], data2	; array[right].data = data2
+.swap:	mov		[array + left], key2		; array[left].key = key2
+		mov		[array + right], key1		; array[right].key = key1
+		mov		[array + left + 8], data2	; array[left].data = data2
+		mov		[array + right + 8], data1	; array[right].data = data1
 ;---[Internal loop 1]----------------------
 .loop1:	mov		left, [s_left]				; get "left" variable from the stack
 		add		left, KSIZE					; left++
 		mov		[s_left], left				; save "left" variable into the stack
 		mov		key1, [array + left]		; key1 = array[left].key
 		mov		data1, [array + left + 8]	; data1 = array[left].data
-		mov		param2, [s_med]
+if pair
+		mov		param4, [s_mdata]
+		mov		param3, [s_mkey]
+		mov		param2, data1
 		mov		param1, key1
+else
+		mov		param2, [s_mkey]
+		mov		param1, key1
+end if
 		call	qword [s_func]				; result = Compare (array[left], median)
 		mov		array, [s_array]			; get "array" variable from the stack
 		cmp		result, 0					; check compare result
@@ -2605,8 +2989,15 @@ minsize	= 16 * KSIZE						; min array size is aceptable for Quick sort
 		mov		[s_right], right			; save "right" variable into the stack
 		mov		key2, [array + right]		; key2 = array[right].key
 		mov		data2, [array + right + 8]	; data2 = array[right].data
-		mov		param2, [s_med]
+if pair
+		mov		param4, [s_mdata]
+		mov		param3, [s_mkey]
+		mov		param2, data2
 		mov		param1, key2
+else
+		mov		param2, [s_mkey]
+		mov		param1, key2
+end if
 		call	qword [s_func]				; result = Compare (array[right], median)
 		mov		array, [s_array]			; get "array" variable from the stack
 		cmp		result, 0					; check compare result
@@ -2625,7 +3016,7 @@ minsize	= 16 * KSIZE						; min array size is aceptable for Quick sort
 		cmp		lsize, rsize				; if (lsize <= rsize)
 		ja		.else						; {
 ;---[if lsize <= rsize]--------------------
-		cmp		lsize, KSIZE				; if (lsize > KSIZE)
+		cmp		lsize, KSIZE				; if (lsize > 1)
 		jbe		@f							; {
 		mov		[s_array], rarray			; save "rarray" variable into the stack
 		mov		[s_size], rsize				; save "rsize" variable into the stack
@@ -2637,7 +3028,7 @@ minsize	= 16 * KSIZE						; min array size is aceptable for Quick sort
 @@:		mov		array, rarray				; }
 		jmp		.end
 ;---[else]---------------------------------
-.else:	cmp		rsize, KSIZE				; if (rsize > KSIZE)
+.else:	cmp		rsize, KSIZE				; if (rsize > 1)
 		jbe		@f							; {
 		mov		[s_array], larray			; save "larray" variable into the stack
 		mov		[s_size], lsize				; save "lsize" variable into the stack
@@ -2659,10 +3050,94 @@ minsize	= 16 * KSIZE						; min array size is aceptable for Quick sort
 		add		stack, space				; restoring back the stack pointer
 		jmp		InsertSort					; return InsertSort (array, size, func)
 }
-QuickSortCoreAsc:	QUICKSORT_CORE	InsertSortCoreAsc, l, g
-QuickSortCoreDsc:	QUICKSORT_CORE	InsertSortCoreDsc, g, l
-QuickSortAsc:		SORT	QuickSortCoreAsc
-QuickSortDsc:		SORT	QuickSortCoreDsc
+KeyQuickSortCoreAsc:	QUICKSORT_CORE	KeyInsertSortCoreAsc, l, g, 0
+KeyQuickSortCoreDsc:	QUICKSORT_CORE	KeyInsertSortCoreDsc, g, l, 0
+PairQuickSortCoreAsc:	QUICKSORT_CORE	PairInsertSortCoreAsc, l, g, 1
+PairQuickSortCoreDsc:	QUICKSORT_CORE	PairInsertSortCoreDsc, g, l, 1
+
+;==============================================================================;
+;       Quick sort                                                             ;
+;==============================================================================;
+macro	QUICKSORT_INT	SortFunc
+{
+;---[Parameters]---------------------------
+array	equ		rdi							; pointer to array
+size	equ		rsi							; array size (count of elements)
+func	equ		rdx							; compare function
+;------------------------------------------
+		shl		size, KSCALE				; convert size to bytes
+		jz		.exit						; if (size == 0), then go to exit
+		jmp		SortFunc					; return SortFunc (array, size, func)
+.exit:	ret
+}
+;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+macro	QUICKSORT_FLT	SortFunc, x
+{
+;---[Parameters]---------------------------
+array	equ		rdi							; pointer to array
+size	equ		rsi							; array size (count of elements)
+;---[Internal variables]-------------------
+stack	equ		rsp							; stack pointer
+s_array	equ		stack + 0 * 8				; stack position of "array" variable
+s_size	equ		stack + 1 * 8				; stack position of "size" variable
+if x eq s
+Map		= Map_flt32							; map function
+else if x eq d
+Map		= Map_flt64							; map function
+end if
+space	= 3 * 8								; stack size required by the procedure
+;------------------------------------------
+		shl		size, KSCALE				; convert size to bytes
+		jz		.exit						; if (size == 0), then go to exit
+		sub		stack, space				; reserving stack size for local vars
+		mov		[s_array], array			; save "array" variable into the stack
+		mov		[s_size], size				; save "size" variable into the stack
+;---[Convert array]------------------------
+		mov		param2, size
+		mov		param1, array
+		call	Map							; call Map (array, size)
+;---[Sort array]---------------------------
+		mov		param2, [s_size]
+		mov		param1, [s_array]
+		call	SortFunc					; call SortFunc (array, size)
+;---[Convert array]------------------------
+		mov		param2, [s_size]
+		mov		param1, [s_array]
+		call	Map							; call Map (array, size)
+;---[Normal exit]--------------------------
+		add		stack, space				; restoring back the stack pointer
+.exit:	ret
+}
+QuickSortAsc:			SORT		KeyQuickSortCoreAsc
+QuickSortDsc:			SORT		KeyQuickSortCoreDsc
+
+; Ascending sort order
+KeyQuickSortAsc_uint8:	QUICKSORT_INT	KeyQuickSortCoreAsc_uint8
+KeyQuickSortAsc_uint16:	QUICKSORT_INT	KeyQuickSortCoreAsc_uint16
+KeyQuickSortAsc_uint32:	QUICKSORT_INT	KeyQuickSortCoreAsc_uint32
+KeyQuickSortAsc_uint64:	QUICKSORT_INT	KeyQuickSortCoreAsc_uint64
+KeyQuickSortAsc_sint8:	QUICKSORT_INT	KeyQuickSortCoreAsc_sint8
+KeyQuickSortAsc_sint16:	QUICKSORT_INT	KeyQuickSortCoreAsc_sint16
+KeyQuickSortAsc_sint32:	QUICKSORT_INT	KeyQuickSortCoreAsc_sint32
+KeyQuickSortAsc_sint64:	QUICKSORT_INT	KeyQuickSortCoreAsc_sint64
+KeyQuickSortAsc_flt32:	QUICKSORT_FLT	KeyQuickSortCoreAsc_sint32, s
+KeyQuickSortAsc_flt64:	QUICKSORT_FLT	KeyQuickSortCoreAsc_sint64, d
+KeyQuickSortAsc:		QUICKSORT_INT	KeyQuickSortCoreAsc
+PairQuickSortAsc:		QUICKSORT_INT	PairQuickSortCoreAsc
+
+; Descending sort order
+KeyQuickSortDsc_uint8:	QUICKSORT_INT	KeyQuickSortCoreDsc_uint8
+KeyQuickSortDsc_uint16:	QUICKSORT_INT	KeyQuickSortCoreDsc_uint16
+KeyQuickSortDsc_uint32:	QUICKSORT_INT	KeyQuickSortCoreDsc_uint32
+KeyQuickSortDsc_uint64:	QUICKSORT_INT	KeyQuickSortCoreDsc_uint64
+KeyQuickSortDsc_sint8:	QUICKSORT_INT	KeyQuickSortCoreDsc_sint8
+KeyQuickSortDsc_sint16:	QUICKSORT_INT	KeyQuickSortCoreDsc_sint16
+KeyQuickSortDsc_sint32:	QUICKSORT_INT	KeyQuickSortCoreDsc_sint32
+KeyQuickSortDsc_sint64:	QUICKSORT_INT	KeyQuickSortCoreDsc_sint64
+KeyQuickSortDsc_flt32:	QUICKSORT_FLT	KeyQuickSortCoreDsc_sint32, s
+KeyQuickSortDsc_flt64:	QUICKSORT_FLT	KeyQuickSortCoreDsc_sint64, d
+KeyQuickSortDsc:		QUICKSORT_INT	KeyQuickSortCoreDsc
+PairQuickSortDsc:		QUICKSORT_INT	PairQuickSortCoreDsc
 
 ;******************************************************************************;
 ;       Merge sort                                                             ;
@@ -2739,8 +3214,8 @@ minsize	= 16 * KSIZE						; min array size is aceptable for Merge sort
 		mov		param3, func
 		jmp		InsertSort					; return InsertSort (array, size, func)
 }
-MergeSortCoreAsc:	MERGESORT_CORE	InsertSortCoreAsc, MergeCoreAsc, Copy
-MergeSortCoreDsc:	MERGESORT_CORE	InsertSortCoreDsc, MergeCoreDsc, Copy
+KeyMergeSortCoreAsc:	MERGESORT_CORE	KeyInsertSortCoreAsc, MergeCoreAsc, Copy
+KeyMergeSortCoreDsc:	MERGESORT_CORE	KeyInsertSortCoreDsc, MergeCoreDsc, Copy
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 macro	MERGESORT	SortFunc
 {
@@ -2798,8 +3273,8 @@ space	= 3 * 8								; stack size required by the procedure
 		add		stack, space				; restoring back the stack pointer
 		ret
 }
-MergeSortAsc:	MERGESORT	MergeSortCoreAsc
-MergeSortDsc:	MERGESORT	MergeSortCoreDsc
+MergeSortAsc:	MERGESORT	KeyMergeSortCoreAsc
+MergeSortDsc:	MERGESORT	KeyMergeSortCoreDsc
 
 ;******************************************************************************;
 ;       Merging of sorted vectors                                              ;
@@ -2987,6 +3462,136 @@ MergeDsc:	MERGE	MergeCoreDsc
 ;******************************************************************************;
 ;       Unique values                                                          ;
 ;******************************************************************************;
+
+;==============================================================================;
+;       Unique values for numerical keys                                       ;
+;==============================================================================;
+macro	UNIQUE_NUM	key
+{
+;---[Parameters]---------------------------
+array	equ		rdi							; pointer to array
+size	equ		rsi							; array size (count of elements)
+;---[Internal variables]-------------------
+result	equ		rax							; result register
+target	equ		r8							; pointer to target place
+source	equ		r9							; pointer to source place
+data	equ		r10							; temporary data
+;------------------------------------------
+		mov		target, array				; target = array
+		lea		source, [array + KSIZE]		; source = array + 1
+		shl		size, KSCALE				; convert size to bytes
+		jz		.exit						; if (size == 0), then go to exit
+		mov		key, [source - KSIZE]		; key = source[-1].key
+		mov		data, [source - KSIZE + 8]	; data = source[-1].data
+		sub		size, KSIZE					; size--
+		jz		.skip						; if (size == 0), then skip the loop
+;---[Unique loop]--------------------------
+.loop:	cmp		key, [source]
+		jz		@f							; if (key != source[0].key)
+		mov		[target], key				;     target[0].key = key
+		mov		[target + 8], data			;     target[0].data = data
+		add		target, KSIZE				;     target++
+		mov		key, [source]				;     key = source[0].key
+		mov		data, [source + 8]			;     data = source[0].data
+@@:		add		source, KSIZE				; source++
+		sub		size, KSIZE					; size--
+		jnz		.loop						; do while (size != 0)
+;---[End of unique loop]-------------------
+.skip:	mov		[target], key				; target[0].key = key
+		mov		[target + 8], data			; target[0].data = data
+		add		target, KSIZE				; target++
+.exit:	sub		target, array
+		shr		target, KSCALE
+		mov		result, target				; return target - array
+		ret
+}
+UniqueKeys8:	UNIQUE_NUM	al
+UniqueKeys16:	UNIQUE_NUM	ax
+UniqueKeys32:	UNIQUE_NUM	eax
+UniqueKeys64:	UNIQUE_NUM	rax
+
+;==============================================================================;
+;       Unique values for custom keys                                          ;
+;==============================================================================;
+macro	UNIQUE_CORE		pair
+{
+;---[Parameters]---------------------------
+array	equ		rdi							; pointer to array
+size	equ		rsi							; array size (count of elements)
+func	equ		rdx							; pointer to compare function
+;---[Internal variables]-------------------
+result	equ		rax							; result register
+target	equ		r8							; pointer to target place
+source	equ		r9							; pointer to source place
+key		equ		r12							; temporary key
+data	equ		r13							; temporary data
+stack	equ		rsp							; stack pointer
+s_key	equ		stack + 0 * 8				; stack position of "key" variable
+s_data	equ		stack + 1 * 8				; stack position of "data" variable
+s_array	equ		stack + 2 * 8				; stack position of "array" variable
+s_size	equ		stack + 3 * 8				; stack position of "size" variable
+s_func	equ		stack + 4 * 8				; stack position of "func" variable
+s_tgt	equ		stack + 5 * 8				; stack position of "target" variable
+s_src	equ		stack + 6 * 8				; stack position of "source" variable
+space	= 7 * 8								; stack size required by the procedure
+;------------------------------------------
+		sub		stack, space				; reserving stack size for local vars
+		mov		target, array				; target = array
+		lea		source, [array + KSIZE]		; source = array + 1
+		shl		size, KSCALE				; convert size to bytes
+		jz		.exit						; if (size == 0), then go to exit
+		mov		[s_key], key				; save old value of "key1" variable
+		mov		[s_data], data				; save old value of "data1" variable
+		mov		[s_array], array			; save "array" variable into the stack
+		mov		[s_size], size				; save "size" variable into the stack
+		mov		[s_func], func				; save "func" variable into the stack
+		mov		[s_tgt], target				; save "target" variable into the stack
+		mov		[s_src], source				; save "source" variable into the stack
+		mov		key, [source - KSIZE]		; key = source[-1].key
+		mov		data, [source - KSIZE + 8]	; data = source[-1].data
+		sub		qword [s_size], KSIZE		; size--
+		jz		.skip						; if (size == 0), then skip the loop
+;---[Unique loop]--------------------------
+if pair
+.loop:	mov		param4, [source + 8]
+		mov		param3, [source]
+		mov		param2, data
+		mov		param1, key
+else
+.loop:	mov		param2, [source]
+		mov		param1, key
+end if
+		call	qword [s_func]				; result = Compare (pair, source[0])
+		mov		array, [s_array]			; get "array" variable from the stack
+		mov		target, [s_tgt]				; get "target" variable from the stack
+		mov		source, [s_src]				; get "source" variable from the stack
+		cmp		result, 0					; check compare result
+		jz		@f							; if (pair != source[0])
+		mov		[target], key				;     target[0].key = key
+		mov		[target + 8], data			;     target[0].data = data
+		add		target, KSIZE				;     target++
+		mov		key, [source]				;     key = source[0].key
+		mov		data, [source + 8]			;     data = source[0].data
+@@:		add		source, KSIZE				; source++
+		mov		[s_tgt], target				; save "target" variable into the stack
+		mov		[s_src], source				; save "source" variable into the stack
+		sub		qword [s_size], KSIZE		; size--
+		jnz		.loop						; do while (size != 0)
+;---[End of unique loop]-------------------
+.skip:	mov		[target], key				; target[0].key = key
+		mov		[target + 8], data			; target[0].data = data
+		add		target, KSIZE				; target++
+		mov		key, [s_key]				; restore old value of "key" variable
+		mov		data, [s_data]				; restore old value of "data" variable
+.exit:	sub		target, array
+		shr		target, KSCALE
+		mov		result, target				; return target - array
+		add		stack, space				; restoring back the stack pointer
+		ret
+}
+UniqueKeys:		UNIQUE_CORE	0
+UniquePairs:	UNIQUE_CORE	1
+;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 Unique:
 ;---[Parameters]---------------------------
 this	equ		rdi							; pointer to target vector object
