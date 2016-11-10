@@ -1665,9 +1665,8 @@ end if
 		test	count, count				; if (count == 0)
 		jz		.exit						;     then go to exit
 ;---[Check object capacity]----------------
-		add		count, [this + SIZE]		; count = count + size
-		lea		count, [count * 2 + NSIZE - KSIZE]
-		and		count, -NSIZE				; count = count * 2 + NSIZE - KSIZE & (-NSIZE)
+		add		count, [this + SIZE]		; count = count + this.size
+		lea		count, [count * 2 + NSIZE]	; count = count * 2 + NSIZE
 	Capacity	count, result, MINCAP		; compute new capacity of target object
 		cmp		count, [this + CAPACITY]	; if (count > capacity)
 		ja		.ext						;     then try to extend object capacity
@@ -2113,7 +2112,7 @@ space	= 7 * 8								; stack size required by the procedure
 		mov		param3, NMIN
 		lea		param2, [array + node + NMIN - KSIZE + NDATA]
 		lea		param1, [array + nnode + NDATA]
-		call	SplitCore					; call SplitCore (array[nnode].data, array[node].data + NMIN + KSIZE, NMIN)
+		call	SplitCore					; call SplitCore (array[nnode].data, array[node].data + NMIN - KSIZE, NMIN)
 		mov		this, [s_this]				; get "this" variable from the stack
 		mov		node, [s_node]				; get "node" variable from the stack
 		mov		nnode, [s_nnode]			; get "nnode" variable from the stack
@@ -2737,7 +2736,7 @@ end if
 		ret
 ;---[Correct tail iterator branch]---------
 if ~ring
-.tail:	lea		iter, [lnode + NMAX - KSIZE]; iter = lnode + NMAX - KSIZE
+.tail:	sub		iter, KSIZE					; iter = iter - KSIZE
 		mov		[this + TAIL], iter			; update iterator position
 		jmp		.back1						; go back
 end if
@@ -2910,9 +2909,9 @@ end if
 		jmp		.back2						; go back
 @@:		mov		rsize, IMASK				; load index mask
 		and		rsize, [array + rnode + FDIR]
-		mov		param3, KSIZE
-		lea		param2, [rnode + rsize - KSIZE]
 		mov		param1, [s_array]
+		lea		param2, [rnode + rsize - KSIZE]
+		mov		param3, KSIZE
 		call	GoNext						; fwd = GoNext (array, rnode + rsize - KSIZE, KSIZE)
 		mov		this, [s_this]				; get "this" variable from the stack
 		mov		array, [s_array]			; get "array" variable from the stack
@@ -2935,9 +2934,9 @@ end if
 		jae		@f							;     then go to prev element
 		mov		[this + BWD], iter			; update iterator position
 		jmp		.back3						; go back
-@@:		mov		param3, KSIZE
+@@:		mov		param1, [s_array]
 		mov		param2, lnode
-		mov		param1, [s_array]
+		mov		param3, KSIZE
 		call	GoPrev						; bwd = GoPrev (array, lnode, KSIZE)
 		mov		this, [s_this]				; get "this" variable from the stack
 		mov		array, [s_array]			; get "array" variable from the stack
@@ -4992,6 +4991,7 @@ size1	equ		rcx							; size of source list #1
 size2	equ		r8							; size of source list #2
 func	equ		r9							; key compare function
 ;---[Internal variables]-------------------
+result	equ		rax							; result register
 rhead	equ		rax							; chain head
 rtail	equ		rdx							; chain tail
 node	equ		r11							; node index
@@ -5001,7 +5001,6 @@ titer	equ		r14							; target iterator
 value1	equ		xmm0						; value to insert #1
 value2	equ		xmm1						; value to insert #2
 size	equ		rhead						; node size
-prev	equ		node						; previous node
 index	equ		func						; element index
 back	equ		func						; back address
 stack	equ		rsp							; stack pointer
@@ -5015,12 +5014,10 @@ s_slim1	equ		stack + 6 * 8				; stack position of "slimit1" variable
 s_slim2	equ		stack + 7 * 8				; stack position of "slimit2" variable
 s_tlim	equ		stack + 8 * 8				; stack position of "tlimit" variable
 s_head	equ		stack + 9 * 8				; stack position of "head" variable
-s_val1	equ		stack + 10 * 8				; stack position of "value1" variable
-s_val2	equ		stack + 12 * 8				; stack position of "value2" variable
-s_array	equ		stack + 14 * 8				; stack position of "array" variable
-s_pool	equ		stack + 15 * 8				; stack position of "pool" variable
-s_titer	equ		stack + 16 * 8				; stack position of "titer" variable
-space	= 17 * 8							; stack size required by the procedure
+s_array	equ		stack + 10 * 8				; stack position of "array" variable
+s_pool	equ		stack + 11 * 8				; stack position of "pool" variable
+s_titer	equ		stack + 12 * 8				; stack position of "titer" variable
+space	= 13 * 8							; stack size required by the procedure
 ;------------------------------------------
 		sub		stack, space				; reserving stack size for local vars
 		mov		[s_array], array			; save old value of "array" variable
@@ -5034,7 +5031,10 @@ space	= 17 * 8							; stack size required by the procedure
 		mov		[s_func], func				; save "func" variable into the stack
 		mov		array, [this + ARRAY]		; get pointer to array of nodes
 		mov		pool, [this + POOL]			; get pool pointer
-		mov		titer, EMPTY				; titer = EMPTY
+		mov		titer, pool					; titer = pool
+		lea		index, [pool + NMAX - KSIZE]
+		mov		qword [array + pool + BDIR], EMPTY
+		mov		pool, [array + pool + FDIR]	; pool = array[pool].fdir
 		mov		size, IMASK					; load index mask
 		and		size, [array + siter1 + FDIR]
 		lea		size, [size + siter1 - KSIZE]
@@ -5043,25 +5043,20 @@ space	= 17 * 8							; stack size required by the procedure
 		and		size, [array + siter2 + FDIR]
 		lea		size, [size + siter2 - KSIZE]
 		mov		[s_slim2], size				; save "slimit2" variable into the stack
-		mov		[s_tlim], titer				; tlimit = EMPTY
-		mov		[s_head], pool				; save "head" variable into the stack
+		mov		[s_tlim], index				; save "tlim" variable into the stack
+		mov		[s_head], titer				; save "head" variable into the stack
+		sub		titer, KSIZE				; titer--
 ;---[Merging loop]-------------------------
-.loop:	movdqa	value1, [array + siter1 + NDATA]
-		movdqa	value2, [array + siter2 + NDATA]
-		movdqa	[s_val1], value1			; value1 = array[siter1].data
-		movdqa	[s_val2], value2			; value2 = array[siter2].data
-		mov		param1, [array + siter1 + NDATA]
+.loop:	mov		param1, [array + siter1 + NDATA]
 		mov		param2, [array + siter2 + NDATA]
-		call	qword [s_func]				; rhead = func (array[siter1].data.key, array[siter2].data.key)
+		call	qword [s_func]				; result = func (array[siter1].data.key, array[siter2].data.key)
 		mov		siter1, [s_iter1]			; get "siter1" variable from the stack
 		mov		siter2, [s_iter2]			; get "siter2" variable from the stack
-		movdqa	value1, [s_val1]			; get "value1" variable from the stack
-		movdqa	value2, [s_val2]			; get "value2" variable from the stack
-		cmp		rhead, 0					; if (rhead cond 0)
+		movdqa	value1, [array + siter1 + NDATA]
+		movdqa	value2, [array + siter2 + NDATA]
+		cmp		result, 0					; if (result cond 0)
 		j#cond	.else						;     then go to else branch
-;---[if rhead cond 0]---------------------
-		mov		node, NMASK					; load node mask
-		and		node, siter1				; node = siter1 & NMASK
+;---[if result cond 0]---------------------
 		add		siter1, KSIZE				; siter1++
 		lea		back, [.back1]
 		cmp		siter1, [s_slim1]			; if (siter1 cond slimit1)
@@ -5076,8 +5071,6 @@ space	= 17 * 8							; stack size required by the procedure
 		jnz		.loop						; do while (size1 != 0)
 ;---[Coping loop]--------------------------
 .loop1:	movdqa	value2, [array + siter2 + NDATA]
-		mov		node, NMASK					; load node mask
-		and		node, siter2				; node = siter2 & NMASK
 		add		siter2, KSIZE				; siter2++
 		lea		back, [.back3]
 		cmp		siter2, [s_slim2]			; if (siter2 cond slimit2)
@@ -5107,9 +5100,7 @@ space	= 17 * 8							; stack size required by the procedure
 		add		stack, space				; restoring back the stack pointer
 		ret									; return {head, titer}
 ;---[else]---------------------------------
-.else:	mov		node, NMASK					; load node mask
-		and		node, siter2				; node = siter2 & NMASK
-		add		siter2, KSIZE				; siter2++
+.else:	add		siter2, KSIZE				; siter2++
 		lea		back, [.back5]
 		cmp		siter2, [s_slim2]			; if (siter2 cond slimit2)
 		jg		.snxt2						;     then go to next node
@@ -5123,8 +5114,6 @@ space	= 17 * 8							; stack size required by the procedure
 		jnz		.loop						; do while (size2 != 0)
 ;---[Coping loop]--------------------------
 .loop2:	movdqa	value1, [array + siter1 + NDATA]
-		mov		node, NMASK					; load node mask
-		and		node, siter1				; node = siter1 & NMASK
 		add		siter1, KSIZE				; siter1++
 		lea		back, [.back7]
 		cmp		siter1, [s_slim1]			; if (siter1 cond slimit1)
@@ -5154,7 +5143,9 @@ space	= 17 * 8							; stack size required by the procedure
 		add		stack, space				; restoring back the stack pointer
 		ret									; return {head, titer}
 ;---[Go to another source node branch #1]--
-.snxt1:	mov		siter1, NMASK				; load node mask
+.snxt1:	mov		node, NMASK					; load node mask
+		and		node, siter1				; node = siter1 & NMASK
+		mov		siter1, NMASK				; load node mask
 		and		siter1, [array + node + FDIR]
 		mov		size, IMASK					; load index mask
 		and		size, [array + siter1 + FDIR]
@@ -5164,7 +5155,9 @@ space	= 17 * 8							; stack size required by the procedure
 		mov		pool, node					; pool = node
 		jmp		back						; go back
 ;---[Go to another source node branch #2]--
-.snxt2:	mov		siter2, NMASK				; load node mask
+.snxt2:	mov		node, NMASK					; load node mask
+		and		node, siter2				; node = siter2 & NMASK
+		mov		siter2, NMASK				; load node mask
 		and		siter2, [array + node + FDIR]
 		mov		size, IMASK					; load index mask
 		and		size, [array + siter2 + FDIR]
@@ -5174,12 +5167,12 @@ space	= 17 * 8							; stack size required by the procedure
 		mov		pool, node					; pool = node
 		jmp		back						; go back
 ;---[Go to another target node branch]-----
-.tnext:	mov		prev, NMASK					; load node mask
-		and		prev, titer					; prev = titer & NMASk
+.tnext:	mov		node, NMASK					; load node mask
+		and		node, titer					; node = titer & NMASk
 		mov		titer, pool					; titer = pool
 		lea		size, [pool + NMAX]
-		mov		[array + pool + BDIR], prev	; array[pool].bdir = prev
-		mov		[array + prev + FDIR], size	; array[prev].fdir = titer + NMAX
+		mov		[array + pool + BDIR], node	; array[pool].bdir = node
+		mov		[array + node + FDIR], size	; array[node].fdir = titer + NMAX
 		mov		pool, [array + pool + FDIR]	; pool = array[pool].fdir
 		sub		size, KSIZE
 		mov		[s_tlim], size				; save "tlimit" variable into the stack
@@ -5292,11 +5285,17 @@ rtail	equ		rdx							; chain tail
 array	equ		r9							; pointer to array of nodes
 size	equ		r10							; object size
 pool	equ		r11							; pointer to pool free node
+lnode	equ		func						; left node index
+rnode	equ		pool						; right node index
 stack	equ		rsp							; stack pointer
 s_this	equ		stack + 0 * 8				; stack position of "this" variable
 s_func	equ		stack + 1 * 8				; stack position of "func" variable
 s_size	equ		stack + 2 * 8				; stack position of "size" variable
-space	= 3 * 8								; stack size required by the procedure
+s_lnode	equ		stack + 3 * 8				; stack position of "lnode" variable
+s_rnode	equ		stack + 4 * 8				; stack position of "rnode" variable
+s_rhead	equ		stack + 5 * 8				; stack position of "rhead" variable
+s_rtail	equ		stack + 6 * 8				; stack position of "rtail" variable
+space	= 7 * 8								; stack size required by the procedure
 ;------------------------------------------
 		sub		stack, space				; reserving stack size for local vars
 ;---[Check access mode]--------------------
@@ -5322,10 +5321,43 @@ space	= 3 * 8								; stack size required by the procedure
 		mov		param3, [this + HEAD]
 		mov		param2, [this + ARRAY]
 		call	SortFunc					; result = this.SortFunc (array, head, size, func)
-;---[Set list properties]------------------
 		mov		this, [s_this]				; get "this" variable from the stack
 		mov		array, [this + ARRAY]		; get pointer to array of nodes
-		mov		[this + HEAD], rhead		; this.head = rhead
+;---[Correct list tail if required]--------
+		mov		size, [s_size]				; get "size" variable from the stack
+		cmp		size, NMAX					; if (size <= NMAX)
+		jbe		.skip						;     then skip following code
+		mov		size, IMASK					; load index mask
+		and		size, rtail
+		add		size, KSIZE					; size = rtail & IMASK + KSIZE
+		cmp		size, NMIN					; if (size >= NMIN)
+		jae		.skip						;     then skip following code
+		mov		rnode, NMASK				; load node mask
+		and		rnode, rtail				; rnode = rtail & NMASK
+		mov		lnode, [array + rnode + BDIR]
+		add		qword [array + rnode + FDIR], NMIN - KSIZE
+		sub		qword [array + lnode + FDIR], NMIN - KSIZE
+		add		rtail, NMIN - KSIZE			; rtail += NMIN - KSIZE
+		mov		[s_lnode], lnode			; save "lnode" variable into the stack
+		mov		[s_rnode], rnode			; save "rnode" variable into the stack
+		mov		[s_rhead], rhead			; save "rhead" variable into the stack
+		mov		[s_rtail], rtail			; save "rtail" variable into the stack
+		mov		param3, size
+		lea		param2, [array + rnode + NDATA]
+		lea		param1, [array + rnode + NMIN - KSIZE + NDATA]
+		call	SplitCore					; call SplitCore (array[rnode].data + NMIN - KSIZE, array[rnode].data, size)
+		mov		lnode, [s_lnode]			; get "lnode" variable from the stack
+		mov		rnode, [s_rnode]			; get "rnode" variable from the stack
+		mov		param3, NMIN - KSIZE
+		lea		param2, [array + lnode + NMIN + NDATA]
+		lea		param1, [array + rnode + NDATA]
+		call	SplitCore					; call SplitCore (array[rnode].data, array[lnode].data + NMIN, NMIN - KSIZE)
+		mov		this, [s_this]				; get "this" variable from the stack
+		mov		array, [this + ARRAY]		; get pointer to array of nodes
+		mov		rhead, [s_rhead]			; get "rhead" variable from the stack
+		mov		rtail, [s_rtail]			; get "rtail" variable from the stack
+;---[Set list properties]------------------
+.skip:	mov		[this + HEAD], rhead		; this.head = rhead
 		mov		[this + TAIL], rtail		; this.tail = rtail
 		mov		qword [this + FWD], EMPTY	; this.fwd = EMPTY
 		mov		qword [this + BWD], EMPTY	; this.bwd = EMPTY
@@ -5380,6 +5412,7 @@ size1	equ		r8							; size of source list #1
 size2	equ		r9							; size of source list #2
 func	equ		r10							; key compare function
 ;---[Internal variables]-------------------
+result	equ		rax							; result register
 rhead	equ		rax							; chain head
 rtail	equ		rdx							; chain tail
 node	equ		r11							; node index
@@ -5389,7 +5422,6 @@ titer	equ		r14							; target iterator
 value1	equ		xmm0						; value to insert #1
 value2	equ		xmm1						; value to insert #2
 size	equ		rhead						; node size
-prev	equ		node						; previous node
 index	equ		func						; element index
 back	equ		func						; back address
 stack	equ		rsp							; stack pointer
@@ -5407,9 +5439,7 @@ s_head	equ		stack + 10 * 8				; stack position of "head" variable
 s_tarr	equ		stack + 11 * 8				; stack position of "array" variable
 s_pool	equ		stack + 12 * 8				; stack position of "pool" variable
 s_titer	equ		stack + 13 * 8				; stack position of "titer" variable
-s_val1	equ		stack + 14 * 8				; stack position of "value1" variable
-s_val2	equ		stack + 16 * 8				; stack position of "value2" variable
-space	= 19 * 8							; stack size required by the procedure
+space	= 15 * 8							; stack size required by the procedure
 ;------------------------------------------
 		sub		stack, space				; reserving stack size for local vars
 		mov		[s_tarr], tarray			; save old value of "tarray" variable
@@ -5424,7 +5454,10 @@ space	= 19 * 8							; stack size required by the procedure
 		mov		[s_func], func				; save "func" variable into the stack
 		mov		tarray, [this + ARRAY]		; get pointer to array of nodes
 		mov		pool, [this + POOL]			; get pool pointer
-		mov		titer, EMPTY				; titer = EMPTY
+		mov		titer, pool					; titer = pool
+		lea		index, [pool + NMAX - KSIZE]
+		mov		qword [tarray + pool + BDIR], EMPTY
+		mov		pool, [tarray + pool + FDIR]; pool = tarray[pool].fdir
 		mov		size, IMASK					; load index mask
 		and		size, [tarray + siter1 + FDIR]
 		lea		size, [size + siter1 - KSIZE]
@@ -5433,28 +5466,23 @@ space	= 19 * 8							; stack size required by the procedure
 		and		size, [sarray + siter2 + FDIR]
 		lea		size, [size + siter2 - KSIZE]
 		mov		[s_slim2], size				; save "slimit2" variable into the stack
-		mov		[s_tlim], titer				; tlimit = EMPTY
-		mov		[s_head], pool				; save "head" variable into the stack
+		mov		[s_tlim], index				; save "tlim" variable into the stack
+		mov		[s_head], titer				; save "head" variable into the stack
+		sub		titer, KSIZE				; titer--
 		test	size1, size1				; if (size1 == 0)
 		jz		.loop1						;     then copy source list into target list
 ;---[Merging loop]-------------------------
-.loop:	movdqa	value1, [tarray + siter1 + NDATA]
-		movdqa	value2, [sarray + siter2 + NDATA]
-		movdqa	[s_val1], value1			; value1 = tarray[siter1].data
-		movdqa	[s_val2], value2			; value2 = sarray[siter2].data
-		mov		param1, [tarray + siter1 + NDATA]
+.loop:	mov		param1, [tarray + siter1 + NDATA]
 		mov		param2, [sarray + siter2 + NDATA]
-		call	qword [s_func]				; rhead = func (tarray[siter1].data.key, sarray[siter2].data.key)
+		call	qword [s_func]				; result = func (tarray[siter1].data.key, sarray[siter2].data.key)
 		mov		sarray, [s_sarr]			; get "sarray" variable from the stack
 		mov		siter1, [s_iter1]			; get "siter1" variable from the stack
 		mov		siter2, [s_iter2]			; get "siter2" variable from the stack
-		movdqa	value1, [s_val1]			; get "value1" variable from the stack
-		movdqa	value2, [s_val2]			; get "value2" variable from the stack
-		cmp		rhead, 0					; if (rhead cond 0)
+		movdqa	value1, [tarray + siter1 + NDATA]
+		movdqa	value2, [sarray + siter2 + NDATA]
+		cmp		result, 0					; if (result cond 0)
 		j#cond	.else						;     then go to else branch
-;---[if rhead cond 0]---------------------
-		mov		node, NMASK					; load node mask
-		and		node, siter1				; node = siter1 & NMASK
+;---[if result cond 0]---------------------
 		add		siter1, KSIZE				; siter1++
 		lea		back, [.back1]
 		cmp		siter1, [s_slim1]			; if (siter1 cond slimit1)
@@ -5469,8 +5497,6 @@ space	= 19 * 8							; stack size required by the procedure
 		jnz		.loop						; do while (size1 != 0)
 ;---[Coping loop]--------------------------
 .loop1:	movdqa	value2, [sarray + siter2 + NDATA]
-		mov		node, NMASK					; load node mask
-		and		node, siter2				; node = siter2 & NMASK
 		add		siter2, KSIZE				; siter2++
 		lea		back, [.back3]
 		cmp		siter2, [s_slim2]			; if (siter2 cond slimit2)
@@ -5500,9 +5526,7 @@ space	= 19 * 8							; stack size required by the procedure
 		add		stack, space				; restoring back the stack pointer
 		ret									; return {head, titer}
 ;---[else]---------------------------------
-.else:	mov		node, NMASK					; load node mask
-		and		node, siter2				; node = siter2 & NMASK
-		add		siter2, KSIZE				; siter2++
+.else:	add		siter2, KSIZE				; siter2++
 		lea		back, [.back5]
 		cmp		siter2, [s_slim2]			; if (siter2 cond slimit2)
 		jg		.snxt2						;     then go to next node
@@ -5516,8 +5540,6 @@ space	= 19 * 8							; stack size required by the procedure
 		jnz		.loop						; do while (size2 != 0)
 ;---[Coping loop]--------------------------
 .loop2:	movdqa	value1, [tarray + siter1 + NDATA]
-		mov		node, NMASK					; load node mask
-		and		node, siter1				; node = siter1 & NMASK
 		add		siter1, KSIZE				; siter1++
 		lea		back, [.back7]
 		cmp		siter1, [s_slim1]			; if (siter1 cond slimit1)
@@ -5547,7 +5569,9 @@ space	= 19 * 8							; stack size required by the procedure
 		add		stack, space				; restoring back the stack pointer
 		ret									; return {head, titer}
 ;---[Go to another source node branch #1]--
-.snxt1:	mov		siter1, NMASK				; load node mask
+.snxt1:	mov		node, NMASK					; load node mask
+		and		node, siter1				; node = siter1 & NMASK
+		mov		siter1, NMASK				; load node mask
 		and		siter1, [tarray + node + FDIR]
 		mov		size, IMASK					; load index mask
 		and		size, [tarray + siter1 + FDIR]
@@ -5557,7 +5581,9 @@ space	= 19 * 8							; stack size required by the procedure
 		mov		pool, node					; pool = node
 		jmp		back						; go back
 ;---[Go to another source node branch #2]--
-.snxt2:	mov		siter2, NMASK				; load node mask
+.snxt2:	mov		node, NMASK					; load node mask
+		and		node, siter2				; node = siter2 & NMASK
+		mov		siter2, NMASK				; load node mask
 		and		siter2, [sarray + node + FDIR]
 		mov		size, IMASK					; load index mask
 		and		size, [sarray + siter2 + FDIR]
@@ -5565,12 +5591,12 @@ space	= 19 * 8							; stack size required by the procedure
 		mov		[s_slim2], size				; save "slimit2" variable into the stack
 		jmp		back						; go back
 ;---[Go to another target node branch]-----
-.tnext:	mov		prev, NMASK					; load node mask
-		and		prev, titer					; prev = titer & NMASk
+.tnext:	mov		node, NMASK					; load node mask
+		and		node, titer					; node = titer & NMASk
 		mov		titer, pool					; titer = pool
 		lea		size, [pool + NMAX]
-		mov		[tarray + pool + BDIR], prev; tarray[pool].bdir = prev
-		mov		[tarray + prev + FDIR], size; tarray[prev].fdir = titer + NMAX
+		mov		[tarray + pool + BDIR], node; tarray[pool].bdir = node
+		mov		[tarray + node + FDIR], size; tarray[node].fdir = titer + NMAX
 		mov		pool, [tarray + pool + FDIR]; pool = tarray[pool].fdir
 		sub		size, KSIZE
 		mov		[s_tlim], size				; save "tlimit" variable into the stack
@@ -5592,6 +5618,8 @@ rhead	equ		rax							; chain head
 rtail	equ		rdx							; chain tail
 array	equ		r11							; pointer to array of nodes
 size	equ		r10							; object size
+lnode	equ		r8							; left node index
+rnode	equ		r9							; right node index
 iter	equ		source						; iterator value
 stack	equ		rsp							; stack pointer
 s_this	equ		stack + 0 * 8				; stack position of "this" variable
@@ -5599,9 +5627,11 @@ s_src	equ		stack + 1 * 8				; stack position of "source" variable
 s_func	equ		stack + 2 * 8				; stack position of "func" variable
 s_array	equ		stack + 3 * 8				; stack position of "array" variable
 s_size	equ		stack + 4 * 8				; stack position of "size" variable
-s_rhead	equ		stack + 5 * 8				; stack position of "rhead" variable
-s_rtail	equ		stack + 6 * 8				; stack position of "rtail" variable
-space	= 7 * 8								; stack size required by the procedure
+s_lnode	equ		stack + 5 * 8				; stack position of "lnode" variable
+s_rnode	equ		stack + 6 * 8				; stack position of "rnode" variable
+s_rhead	equ		stack + 7 * 8				; stack position of "rhead" variable
+s_rtail	equ		stack + 8 * 8				; stack position of "rtail" variable
+space	= 9 * 8								; stack size required by the procedure
 ;------------------------------------------
 		sub		stack, space				; reserving stack size for local vars
 ;---[Check target list access mode]--------
@@ -5625,8 +5655,7 @@ space	= 7 * 8								; stack size required by the procedure
 		jz		.exit						;     then go to exit
 ;---[Check object capacity]----------------
 		add		size, [this + SIZE]			; size = size + this.size
-		lea		size, [size * 2 + NSIZE - KSIZE]
-		and		size, -NSIZE				; size = size * 2 + NSIZE - KSIZE & (-NSIZE)
+		lea		size, [size * 2 + NSIZE]	; size = size * 2 + NSIZE
 	Capacity	size, func, MINCAP			; compute new capacity of target object
 		cmp		size, [this + CAPACITY]		; if (size > capacity)
 		ja		.ext						;     then try to extend object capacity
@@ -5640,8 +5669,40 @@ space	= 7 * 8								; stack size required by the procedure
 		call	MergeFunc					; call this.MergeFunc (array, this.head, source.head, this.size, source.size, func)
 		mov		[s_rhead], rhead			; save "rhead" variable into the stack
 		mov		[s_rtail], rtail			; save "rtail" variable into the stack
+;---[Correct list tail if required]--------
+		mov		this, [s_this]				; get "this" variable from the stack
+		mov		size, [s_size]				; get "size" variable from the stack
+		mov		array, [this + ARRAY]		; get pointer to source array of nodes
+		add		size, [this + SIZE]			; size += this.size
+		cmp		size, NMAX					; if (size <= NMAX)
+		jbe		.skip						;     then skip following code
+		mov		size, IMASK					; load index mask
+		and		size, rtail
+		add		size, KSIZE					; size = rtail & IMASK + KSIZE
+		cmp		size, NMIN					; if (size >= NMIN)
+		jae		.skip						;     then skip following code
+		mov		rnode, NMASK				; load node mask
+		and		rnode, rtail				; rnode = rtail & NMASK
+		mov		lnode, [array + rnode + BDIR]
+		add		qword [array + rnode + FDIR], NMIN - KSIZE
+		sub		qword [array + lnode + FDIR], NMIN - KSIZE
+		add		rtail, NMIN - KSIZE			; rtail += NMIN - KSIZE
+		mov		[s_lnode], lnode			; save "lnode" variable into the stack
+		mov		[s_rnode], rnode			; save "rnode" variable into the stack
+		mov		[s_rhead], rhead			; save "rhead" variable into the stack
+		mov		[s_rtail], rtail			; save "rtail" variable into the stack
+		mov		param3, size
+		lea		param2, [array + rnode + NDATA]
+		lea		param1, [array + rnode + NMIN - KSIZE + NDATA]
+		call	SplitCore					; call SplitCore (array[rnode].data + NMIN - KSIZE, array[rnode].data, size)
+		mov		lnode, [s_lnode]			; get "lnode" variable from the stack
+		mov		rnode, [s_rnode]			; get "rnode" variable from the stack
+		mov		param3, NMIN - KSIZE
+		lea		param2, [array + lnode + NMIN + NDATA]
+		lea		param1, [array + rnode + NDATA]
+		call	SplitCore					; call SplitCore (array[rnode].data, array[lnode].data + NMIN, NMIN - KSIZE)
 ;---[Delete elements from source list]-----
-		mov		this, [s_src]				; get "source" variable from the stack
+.skip:	mov		this, [s_src]				; get "source" variable from the stack
 		mov		iter, [this + HEAD]			; iter = source.head
 .loop:	call	RemoveFunc					; call source.RemoveFunc (iter)
 		mov		this, [s_src]				; get "source" variable from the stack
@@ -5706,6 +5767,7 @@ siter	equ		rdx							; source iterator
 size	equ		rcx							; size of source list
 func	equ		r8							; key compare function
 ;---[Internal variables]-------------------
+result	equ		rax							; result register
 rhead	equ		rax							; chain head
 rtail	equ		rdx							; chain tail
 value	equ		r9							; key value
@@ -5717,7 +5779,6 @@ titer	equ		r14							; target iterator
 count	equ		r15							; count of unique elements
 key		equ		xmm0						; key value
 data	equ		xmm1						; data value
-prev	equ		node						; previous node
 index	equ		func						; element index
 back	equ		func						; back address
 stack	equ		rsp							; stack pointer
@@ -5749,19 +5810,21 @@ space	= 15 * 8							; stack size required by the procedure
 		mov		[s_func], func				; save "func" variable into the stack
 		mov		tarray, [this + ARRAY]		; get pointer to array of nodes
 		mov		pool, [this + POOL]			; get pool pointer
-		mov		titer, EMPTY				; titer = EMPTY
+		mov		titer, pool					; titer = pool
+		lea		index, [pool + NMAX - KSIZE]
+		mov		qword [tarray + pool + BDIR], EMPTY
+		mov		pool, [tarray + pool + FDIR]; pool = tarray[pool].fdir
 		xor		count, count				; count = 0
 		mov		size, IMASK					; load index mask
 		and		size, [sarray + siter + FDIR]
 		lea		size, [size + siter - KSIZE]
 		mov		[s_slim], size				; save "limit" variable into the stack
-		mov		[s_tlim], titer				; tlimit = EMPTY
-		mov		[s_head], pool				; save "head" variable into the stack
+		mov		[s_tlim], index				; save "tlim" variable into the stack
+		mov		[s_head], titer				; save "head" variable into the stack
+		sub		titer, KSIZE				; titer--
 		mov		value, [sarray + siter + NDATA]
 		mov		[s_value], value			; save "value" variable into the stack
 		mov		qword [s_total], 1			; total = 1
-		mov		node, NMASK					; load node mask
-		and		node, siter					; node = siter & NMASK
 		add		siter, KSIZE				; siter++
 		lea		back, [.back1]
 		cmp		siter, [s_slim]				; if (siter cond slimit)
@@ -5794,8 +5857,6 @@ space	= 15 * 8							; stack size required by the procedure
 		mov		[s_value], value			; save "value" variable into the stack
 @@:		add		total, 1					; total++
 		mov		[s_total], total			; save "total" variable into the stack
-		mov		node, NMASK					; load node mask
-		and		node, siter					; node = siter & NMASK
 		add		siter, KSIZE				; siter++
 		lea		back, [.back3]
 		cmp		siter, [s_slim]				; if (siter cond slimit)
@@ -5812,7 +5873,7 @@ space	= 15 * 8							; stack size required by the procedure
 		movq	data, [s_total]
 	punpcklqdq	key, data
 		movdqa	[tarray + titer + NDATA], key
-		add		count, KSIZE				;     count++
+		add		count, KSIZE				; count++
 		mov		this, [s_this]				; get "this" variable from the stack
 		mov		node, NMASK					; load node mask
 		mov		index, IMASK				; load index mask
@@ -5831,7 +5892,9 @@ space	= 15 * 8							; stack size required by the procedure
 		add		stack, space				; restoring back the stack pointer
 		ret
 ;---[Go to another source node branch]-----
-.snext:	mov		siter, NMASK				; load node mask
+.snext:	mov		node, NMASK					; load node mask
+		and		node, siter					; node = siter & NMASK
+		mov		siter, NMASK				; load node mask
 		and		siter, [sarray + node + FDIR]
 		mov		size, IMASK					; load index mask
 		and		size, [sarray + siter + FDIR]
@@ -5839,12 +5902,12 @@ space	= 15 * 8							; stack size required by the procedure
 		mov		[s_slim], size				; save "slimit" variable into the stack
 		jmp		back						; go back
 ;---[Go to another target node branch]-----
-.tnext:	mov		prev, NMASK					; load node mask
-		and		prev, titer					; prev = titer & NMASk
+.tnext:	mov		node, NMASK					; load node mask
+		and		node, titer					; node = titer & NMASk
 		mov		titer, pool					; titer = pool
 		lea		size, [pool + NMAX]
-		mov		[tarray + pool + BDIR], prev; tarray[pool].bdir = prev
-		mov		[tarray + prev + FDIR], size; tarray[prev].fdir = titer + NMAX
+		mov		[tarray + pool + BDIR], node; tarray[pool].bdir = node
+		mov		[tarray + node + FDIR], size; tarray[node].fdir = titer + NMAX
 		mov		pool, [tarray + pool + FDIR]; pool = tarray[pool].fdir
 		sub		size, KSIZE
 		mov		[s_tlim], size				; save "tlimit" variable into the stack
@@ -5863,11 +5926,17 @@ rhead	equ		rax							; chain head
 rtail	equ		rdx							; chain tail
 array	equ		r11							; pointer to array of nodes
 size	equ		r10							; object size
+lnode	equ		r8							; left node index
+rnode	equ		r9							; right node index
 stack	equ		rsp							; stack pointer
 s_this	equ		stack + 0 * 8				; stack position of "this" variable
 s_src	equ		stack + 1 * 8				; stack position of "source" variable
 s_func	equ		stack + 2 * 8				; stack position of "func" variable
-space	= 3 * 8								; stack size required by the procedure
+s_lnode	equ		stack + 3 * 8				; stack position of "lnode" variable
+s_rnode	equ		stack + 4 * 8				; stack position of "rnode" variable
+s_rhead	equ		stack + 5 * 8				; stack position of "rhead" variable
+s_rtail	equ		stack + 6 * 8				; stack position of "rtail" variable
+space	= 7 * 8								; stack size required by the procedure
 ;------------------------------------------
 		sub		stack, space				; reserving stack size for local vars
 		mov		[s_this], this				; save "this" variable into the stack
@@ -5884,8 +5953,7 @@ space	= 3 * 8								; stack size required by the procedure
 		test	size, size					; if (size == 0)
 		jz		.exit						;     then go to exit
 ;---[Check object capacity]----------------
-		lea		size, [size * 2 + NSIZE - KSIZE]
-		and		size, -NSIZE				; size = size * 2 + NSIZE - KSIZE & (-NSIZE)
+		lea		size, [size * 2 + NSIZE]	; size = size * 2 + NSIZE
 	Capacity	size, func, MINCAP			; compute new capacity of target object
 		cmp		size, [this + CAPACITY]		; if (size > capacity)
 		ja		.ext						;     then try to extend object capacity
@@ -5895,10 +5963,43 @@ space	= 3 * 8								; stack size required by the procedure
 		mov		param3, [source + HEAD]
 		mov		param2, [source + ARRAY]
 		call	UniqueCore					; result = this.UniqueCore (source.array, source.head, source.size, func)
-;---[Set list properties]------------------
 		mov		this, [s_this]				; get "this" variable from the stack
 		mov		array, [this + ARRAY]		; get pointer to array of nodes
-		mov		[this + HEAD], rhead		; this.head = rhead
+;---[Correct list tail if required]--------
+		mov		size, [this + SIZE]			; get target object size
+		cmp		size, NMAX					; if (size <= NMAX)
+		jbe		.skip						;     then skip following code
+		mov		size, IMASK					; load index mask
+		and		size, rtail
+		add		size, KSIZE					; size = rtail & IMASK + KSIZE
+		cmp		size, NMIN					; if (size >= NMIN)
+		jae		.skip						;     then skip following code
+		mov		rnode, NMASK				; load node mask
+		and		rnode, rtail				; rnode = rtail & NMASK
+		mov		lnode, [array + rnode + BDIR]
+		add		qword [array + rnode + FDIR], NMIN - KSIZE
+		sub		qword [array + lnode + FDIR], NMIN - KSIZE
+		add		rtail, NMIN - KSIZE			; rtail += NMIN - KSIZE
+		mov		[s_lnode], lnode			; save "lnode" variable into the stack
+		mov		[s_rnode], rnode			; save "rnode" variable into the stack
+		mov		[s_rhead], rhead			; save "rhead" variable into the stack
+		mov		[s_rtail], rtail			; save "rtail" variable into the stack
+		mov		param3, size
+		lea		param2, [array + rnode + NDATA]
+		lea		param1, [array + rnode + NMIN - KSIZE + NDATA]
+		call	SplitCore					; call SplitCore (array[rnode].data + NMIN - KSIZE, array[rnode].data, size)
+		mov		lnode, [s_lnode]			; get "lnode" variable from the stack
+		mov		rnode, [s_rnode]			; get "rnode" variable from the stack
+		mov		param3, NMIN - KSIZE
+		lea		param2, [array + lnode + NMIN + NDATA]
+		lea		param1, [array + rnode + NDATA]
+		call	SplitCore					; call SplitCore (array[rnode].data, array[lnode].data + NMIN, NMIN - KSIZE)
+		mov		this, [s_this]				; get "this" variable from the stack
+		mov		array, [this + ARRAY]		; get pointer to array of nodes
+		mov		rhead, [s_rhead]			; get "rhead" variable from the stack
+		mov		rtail, [s_rtail]			; get "rtail" variable from the stack
+;---[Set list properties]------------------
+.skip:	mov		[this + HEAD], rhead		; this.head = rhead
 		mov		[this + TAIL], rtail		; this.tail = rtail
 if ring
 		and		rhead, NMASK				; resul1 &= NMASK
@@ -6104,9 +6205,11 @@ temp	equ		rdx							; temporary register
 		mov		temp, result
 		shr		result, KSCALE
 		shr		temp, NSCALE
-		sub		result, NMAX / KSIZE
-		sub		result, temp				; return this.capacity / KSIZE - this.capacity / NSIZE - NMAX / KSIZE
-		ret
+		sub		result, temp
+		xor		temp, temp					; temp = 0
+		sub		result, NMAX / KSIZE		; result = this.capacity / KSIZE - this.capacity / NSIZE - NMAX / KSIZE
+		cmovb	result, temp				; if (result < 0), result = 0
+		ret									; return result
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 GetSize:
 ;---[Parameters]---------------------------

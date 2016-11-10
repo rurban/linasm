@@ -1538,7 +1538,7 @@ space	= 7 * 8								; stack size required by the procedure
 		lea		param2, [array + node + NMIN - KSIZE + NDATA]
 		lea		param1, [array + nnode + NDATA]
 		mov		fptr, SplitCore
-		call	fptr						; call SplitCore (array[nnode].data, array[node].data + NMIN + KSIZE, NMIN)
+		call	fptr						; call SplitCore (array[nnode].data, array[node].data + NMIN - KSIZE, NMIN)
 		mov		this, [s_this]				; get "this" variable from the stack
 		mov		node, [s_node]				; get "node" variable from the stack
 		mov		nnode, [s_nnode]			; get "nnode" variable from the stack

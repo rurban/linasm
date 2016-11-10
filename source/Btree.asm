@@ -3330,9 +3330,9 @@ space	= 9 * 8								; stack size required by the procedure
 		mov		[this + FWD], iter			; update iterator position
 		jmp		.back1						; go back
 @@:		mov		rsize, [array + rnode + BSIZE]
-		mov		param3, KSIZE
-		lea		param2, [rnode + rsize - KSIZE]
 		mov		param1, array
+		lea		param2, [rnode + rsize - KSIZE]
+		mov		param3, KSIZE
 		call	GoNext						; fwd = GoNext (array, rnode + rsize - KSIZE, KSIZE)
 		mov		this, [s_this]				; get "this" variable from the stack
 		mov		array, [s_array]			; get "array" variable from the stack
@@ -3368,9 +3368,9 @@ space	= 9 * 8								; stack size required by the procedure
 		jae		@f							;     then go to prev element
 		mov		[this + BWD], iter			; update iterator position
 		jmp		.back2						; go back
-@@:		mov		param3, KSIZE
+@@:		mov		param1, array
 		mov		param2, lnode
-		mov		param1, array
+		mov		param3, KSIZE
 		call	GoPrev						; bwd = GoPrev (array, lnode, KSIZE)
 		mov		this, [s_this]				; get "this" variable from the stack
 		mov		array, [s_array]			; get "array" variable from the stack
