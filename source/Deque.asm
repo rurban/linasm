@@ -163,8 +163,8 @@ public	ReverseTail			as	'_ZN5Deque11ReverseTailEmm'
 ; Swapping elements
 public	SwapHead			as	'Deque_SwapHead'
 public	SwapTail			as	'Deque_SwapTail'
-public	SwapHead			as	'_ZN5Deque8SwapHeadEm'
-public	SwapTail			as	'_ZN5Deque8SwapTailEm'
+public	SwapHead			as	'_ZN5Deque8SwapHeadEmm'
+public	SwapTail			as	'_ZN5Deque8SwapTailEmm'
 
 ;******************************************************************************;
 ;       Minimum and maximum value                                              ;

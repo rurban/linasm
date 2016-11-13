@@ -367,27 +367,27 @@ public	FindKeysBwdStack		as	'_ZNK5Stack11FindKeysBwdEP6pair_tPK5adt_tmmmPFxS2_S2
 ;       Ascending sort order                                                   ;
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 
-; Searching for first equal element
+; Searching for first equal key
 public	FindFirstEqualAsc		as	'Vector_FindFirstEqualAsc'
 public	FindFirstEqualAsc		as	'_ZNK6Vector17FindFirstEqualAscEP6pair_t5adt_tPFxS2_S2_E'
 
-; Searching for last equal element
+; Searching for last equal key
 public	FindLastEqualAsc		as	'Vector_FindLastEqualAsc'
 public	FindLastEqualAsc		as	'_ZNK6Vector16FindLastEqualAscEP6pair_t5adt_tPFxS2_S2_E'
 
-; Searching for greater element
+; Searching for greater key
 public	FindGreatAsc			as	'Vector_FindGreatAsc'
 public	FindGreatAsc			as	'_ZNK6Vector12FindGreatAscEP6pair_t5adt_tPFxS2_S2_E'
 
-; Searching for greater or equal element
+; Searching for greater or equal key
 public	FindGreatOrEqualAsc		as	'Vector_FindGreatOrEqualAsc'
 public	FindGreatOrEqualAsc		as	'_ZNK6Vector19FindGreatOrEqualAscEP6pair_t5adt_tPFxS2_S2_E'
 
-; Searching for less element
+; Searching for less key
 public	FindLessAsc				as	'Vector_FindLessAsc'
 public	FindLessAsc				as	'_ZNK6Vector11FindLessAscEP6pair_t5adt_tPFxS2_S2_E'
 
-; Searching for less or equal element
+; Searching for less or equal key
 public	FindLessOrEqualAsc		as	'Vector_FindLessOrEqualAsc'
 public	FindLessOrEqualAsc		as	'_ZNK6Vector18FindLessOrEqualAscEP6pair_t5adt_tPFxS2_S2_E'
 
@@ -395,27 +395,27 @@ public	FindLessOrEqualAsc		as	'_ZNK6Vector18FindLessOrEqualAscEP6pair_t5adt_tPFx
 ;       Descending sort order                                                  ;
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 
-; Searching for first equal element
+; Searching for first equal key
 public	FindFirstEqualDsc		as	'Vector_FindFirstEqualDsc'
 public	FindFirstEqualDsc		as	'_ZNK6Vector17FindFirstEqualDscEP6pair_t5adt_tPFxS2_S2_E'
 
-; Searching for last equal element
+; Searching for last equal key
 public	FindLastEqualDsc		as	'Vector_FindLastEqualDsc'
 public	FindLastEqualDsc		as	'_ZNK6Vector16FindLastEqualDscEP6pair_t5adt_tPFxS2_S2_E'
 
-; Searching for less element
+; Searching for less key
 public	FindLessDsc				as	'Vector_FindLessDsc'
 public	FindLessDsc				as	'_ZNK6Vector11FindLessDscEP6pair_t5adt_tPFxS2_S2_E'
 
-; Searching for less or equal element
+; Searching for less or equal key
 public	FindLessOrEqualDsc		as	'Vector_FindLessOrEqualDsc'
 public	FindLessOrEqualDsc		as	'_ZNK6Vector18FindLessOrEqualDscEP6pair_t5adt_tPFxS2_S2_E'
 
-; Searching for greater element
+; Searching for greater key
 public	FindGreatDsc			as	'Vector_FindGreatDsc'
 public	FindGreatDsc			as	'_ZNK6Vector12FindGreatDscEP6pair_t5adt_tPFxS2_S2_E'
 
-; Searching for greater or equal element
+; Searching for greater or equal key
 public	FindGreatOrEqualDsc		as	'Vector_FindGreatOrEqualDsc'
 public	FindGreatOrEqualDsc		as	'_ZNK6Vector19FindGreatOrEqualDscEP6pair_t5adt_tPFxS2_S2_E'
 
@@ -1441,7 +1441,7 @@ this	equ		rdi							; pointer to vector object
 data	equ		rsi							; pointer to data structure
 pos		equ		rdx							; position of element to set
 ;---[Internal variables]-------------------
-status	equ		al							; operation status
+;status	equ		al							; operation status
 array	equ		r8							; pointer to array of nodes
 size	equ		r9							; object size
 func	equ		r10							; pointer to function
@@ -2042,44 +2042,44 @@ space	= 9 * 8								; stack size required by the procedure
 ;       Ascending sort order                                                   ;
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 
-; Searching for first equal element
+; Searching for first equal key
 FindFirstEqualAsc:		FINDBIN		e, g
 
-; Searching for last equal element
+; Searching for last equal key
 FindLastEqualAsc:		FINDBIN		e, ge
 
-; Searching for greater element
+; Searching for greater key
 FindGreatAsc:			FINDBIN		l, ge
 
-; Searching for greater or equal element
+; Searching for greater or equal key
 FindGreatOrEqualAsc:	FINDBIN		le, g
 
-; Searching for less element
+; Searching for less key
 FindLessAsc:			FINDBIN		g, g
 
-; Searching for less or equal element
+; Searching for less or equal key
 FindLessOrEqualAsc:		FINDBIN		ge, ge
 
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 ;       Descending sort order                                                  ;
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~;
 
-; Searching for first equal element
+; Searching for first equal key
 FindFirstEqualDsc:		FINDBIN		e, l
 
-; Searching for last equal element
+; Searching for last equal key
 FindLastEqualDsc:		FINDBIN		e, le
 
-; Searching for less element
+; Searching for less key
 FindLessDsc:			FINDBIN		g, le
 
-; Searching for less or equal element
+; Searching for less or equal key
 FindLessOrEqualDsc:		FINDBIN		ge, l
 
-; Searching for greater element
+; Searching for greater key
 FindGreatDsc:			FINDBIN		l, l
 
-; Searching for greater or equal element
+; Searching for greater or equal key
 FindGreatOrEqualDsc:	FINDBIN		le, le
 
 ;******************************************************************************;

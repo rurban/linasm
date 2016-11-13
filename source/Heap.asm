@@ -1584,9 +1584,12 @@ GetCapacity:
 this	equ		rdi							; pointer to heap object
 ;---[Internal variables]-------------------
 result	equ		rax							; result register
+temp	equ		rdx							; temporary register
 ;------------------------------------------
 		mov		result, [this + CAPACITY]	; get object capacity
+		xor		temp, temp					; temp = 0
 		sub		result, CLINE - KSIZE
+		cmovb	result, temp				; if (result < 0), result = 0
 		shr		result, KSCALE				; return this.capacity - (CLINE - KSIZE) / KSIZE
 		ret
 ;:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::

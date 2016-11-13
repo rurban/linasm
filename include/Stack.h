@@ -87,7 +87,7 @@ bool Insert (const pair_t *data, size_t pos);
 //****************************************************************************//
 //      Extraction of element                                                 //
 //****************************************************************************//
-bool Extract (pair_t *data, size_t pos);
+bool Extract (size_t pos);
 
 //****************************************************************************//
 //      Setting element value                                                 //
@@ -247,7 +247,7 @@ bool Stack_Insert (struct Stack *stack, const struct pair_t *data, size_t pos);
 //****************************************************************************//
 //      Extraction of element                                                 //
 //****************************************************************************//
-bool Stack_Extract (struct Stack *stack, struct pair_t *data, size_t pos);
+bool Stack_Extract (struct Stack *stack, size_t pos);
 
 //****************************************************************************//
 //      Setting element value                                                 //

@@ -145,44 +145,44 @@ size_t FindKeysBwd (pair_t *data, const adt_t keys[], size_t size, size_t pos, s
 //      Ascending sort order                                                  //
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
-// Searching for first equal element
+// Searching for first equal key
 size_t FindFirstEqualAsc (pair_t *data, adt_t key, KeyCmp kfunc) const;
 
-// Searching for last equal element
+// Searching for last equal key
 size_t FindLastEqualAsc (pair_t *data, adt_t key, KeyCmp kfunc) const;
 
-// Searching for greater element
+// Searching for greater key
 size_t FindGreatAsc (pair_t *data, adt_t key, KeyCmp kfunc) const;
 
-// Searching for greater or equal element
+// Searching for greater or equal key
 size_t FindGreatOrEqualAsc (pair_t *data, adt_t key, KeyCmp kfunc) const;
 
-// Searching for less element
+// Searching for less key
 size_t FindLessAsc (pair_t *data, adt_t key, KeyCmp kfunc) const;
 
-// Searching for less or equal element
+// Searching for less or equal key
 size_t FindLessOrEqualAsc (pair_t *data, adt_t key, KeyCmp kfunc) const;
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 //      Descending sort order                                                 //
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
-// Searching for first equal element
+// Searching for first equal key
 size_t FindFirstEqualDsc (pair_t *data, adt_t key, KeyCmp kfunc) const;
 
-// Searching for last equal element
+// Searching for last equal key
 size_t FindLastEqualDsc (pair_t *data, adt_t key, KeyCmp kfunc) const;
 
-// Searching for less element
+// Searching for less key
 size_t FindLessDsc (pair_t *data, adt_t key, KeyCmp kfunc) const;
 
-// Searching for less or equal element
+// Searching for less or equal key
 size_t FindLessOrEqualDsc (pair_t *data, adt_t key, KeyCmp kfunc) const;
 
-// Searching for greater element
+// Searching for greater key
 size_t FindGreatDsc (pair_t *data, adt_t key, KeyCmp kfunc) const;
 
-// Searching for greater or equal element
+// Searching for greater or equal key
 size_t FindGreatOrEqualDsc (pair_t *data, adt_t key, KeyCmp kfunc) const;
 
 //****************************************************************************//
@@ -423,44 +423,44 @@ size_t Vector_FindKeysBwd (const struct Vector *vector, struct pair_t *data, con
 //      Ascending sort order                                                  //
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
-// Searching for first equal element
+// Searching for first equal key
 size_t Vector_FindFirstEqualAsc (const struct Vector *vector, struct pair_t *data, union adt_t key, KeyCmp kfunc);
 
-// Searching for last equal element
+// Searching for last equal key
 size_t Vector_FindLastEqualAsc (const struct Vector *vector, struct pair_t *data, union adt_t key, KeyCmp kfunc);
 
-// Searching for greater element
+// Searching for greater key
 size_t Vector_FindGreatAsc (const struct Vector *vector, struct pair_t *data, union adt_t key, KeyCmp kfunc);
 
-// Searching for greater or equal element
+// Searching for greater or equal key
 size_t Vector_FindGreatOrEqualAsc (const struct Vector *vector, struct pair_t *data, union adt_t key, KeyCmp kfunc);
 
-// Searching for less element
+// Searching for less key
 size_t Vector_FindLessAsc (const struct Vector *vector, struct pair_t *data, union adt_t key, KeyCmp kfunc);
 
-// Searching for less or equal element
+// Searching for less or equal key
 size_t Vector_FindLessOrEqualAsc (const struct Vector *vector, struct pair_t *data, union adt_t key, KeyCmp kfunc);
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 //      Descending sort order                                                 //
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
-// Searching for first equal element
+// Searching for first equal key
 size_t Vector_FindFirstEqualDsc (const struct Vector *vector, struct pair_t *data, union adt_t key, KeyCmp kfunc);
 
-// Searching for last equal element
+// Searching for last equal key
 size_t Vector_FindLastEqualDsc (const struct Vector *vector, struct pair_t *data, union adt_t key, KeyCmp kfunc);
 
-// Searching for less element
+// Searching for less key
 size_t Vector_FindLessDsc (const struct Vector *vector, struct pair_t *data, union adt_t key, KeyCmp kfunc);
 
-// Searching for less or equal element
+// Searching for less or equal key
 size_t Vector_FindLessOrEqualDsc (const struct Vector *vector, struct pair_t *data, union adt_t key, KeyCmp kfunc);
 
-// Searching for greater element
+// Searching for greater key
 size_t Vector_FindGreatDsc (const struct Vector *vector, struct pair_t *data, union adt_t key, KeyCmp kfunc);
 
-// Searching for greater or equal element
+// Searching for greater or equal key
 size_t Vector_FindGreatOrEqualDsc (const struct Vector *vector, struct pair_t *data, union adt_t key, KeyCmp kfunc);
 
 //****************************************************************************//
