@@ -3123,7 +3123,7 @@ flt64_t Array_SumSqr_flt64 (const flt64_t array[], size_t size);
 
 // Sum of absolute values
 flt32_t Array_SumAbs_flt32 (const flt32_t array[], size_t size);
-flt64_t Array_SumAbs_flt32 (const flt64_t array[], size_t size);
+flt64_t Array_SumAbs_flt64 (const flt64_t array[], size_t size);
 
 // Sum of multiplied values
 flt32_t Array_SumMul_flt32 (const flt32_t array1[], const flt32_t array2[], size_t size);
